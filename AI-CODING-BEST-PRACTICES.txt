@@ -1,0 +1,1868 @@
+PRD AGENT - CODING WORKFLOW BEST PRACTICES
+
+Production guide for AI-assisted development across Claude Code, Codex CLI, and Custom GPT platforms.
+Based on verified real-world usage and official documentation.
+
+LAST UPDATED: 2025-11-03
+VERSION: 3.2
+STATUS: PORTABLE - This guide works for ANY repository
+
+Copy this file to any project for instant AI-assisted development best practices.
+
+═══════════════════════════════════════════════════════════════════════════════
+TABLE OF CONTENTS
+═══════════════════════════════════════════════════════════════════════════════
+
+0. USING THIS GUIDE & REPOSITORY PATTERN
+1. CORE PHILOSOPHY & PRINCIPLES
+2. PLATFORM DETECTION & ADAPTATION
+3. UNIVERSAL WORKFLOW (FOUR-PHASE CYCLE)
+4. PLANNING METHODOLOGY
+5. IMPLEMENTATION PATTERNS
+6. VALIDATION & QUALITY ASSURANCE
+7. PLATFORM-SPECIFIC OPTIMIZATIONS
+   - Claude Code (Skills, Hooks, Agents, PM2)
+   - Codex CLI (Sandbox, Tools, Commands)
+   - Custom GPT (Character Limits, Format Selection)
+8. ADVANCED PATTERNS
+9. COMMON PITFALLS & SOLUTIONS
+10. TEMPLATES & CHECKLISTS
+
+═══════════════════════════════════════════════════════════════════════════════
+0. USING THIS GUIDE & REPOSITORY PATTERN
+═══════════════════════════════════════════════════════════════════════════════
+
+PORTABILITY:
+
+  This guide is REPOSITORY-AGNOSTIC and can be copied to any project:
+
+    Option 1: Copy to your repository
+      cp 04_PRD_Agent_Best_Practices.txt /path/to/your-repo/docs/
+      # OR
+      cp 04_PRD_Agent_Best_Practices.txt /path/to/your-repo/.claude/
+
+    Option 2: Reference from project docs
+      Add link in README.md or CLAUDE.md pointing to this file
+
+    Option 3: Adapt for specific tools
+      Extract relevant sections for Claude Code, Codex CLI, or Custom GPT
+
+UNIVERSAL THREE-LAYER ARCHITECTURE:
+
+  This guide works best when your repository follows the universal pattern:
+
+    Layer 1: AI-SPECIFIC INSTRUCTIONS (Root .md files)
+      README.md    - Universal repository overview
+      CLAUDE.md    - Claude Code-specific instructions
+      GEMINI.md    - Gemini-specific instructions
+      CODEX.md     - Codex CLI-specific instructions
+      AGENTS.md    - Repository standards and guidelines
+
+    Layer 2: TOOL-SPECIFIC WORKSPACES (Operational)
+      .claude/     - Claude Code workspace (hooks, skills, commands)
+      .cursor/     - Cursor AI workspace
+      .codex/      - Codex CLI workspace
+
+    Layer 3: SHARED DOCUMENTATION (Portable)
+      docs/
+      ├── agents/         - AI agent development guides (THIS FILE)
+      ├── formatting/     - Formatting and file format standards
+      ├── reference/      - Catalogs and quick-reference
+      └── testing/        - QA checklists and test harnesses
+
+NOTE ON USAGE:
+
+  This guide is designed as a STANDALONE document for AI agents.
+  All essential information is contained within this file.
+
+  Content includes:
+    • Cross-platform workflow patterns (Claude Code, Codex CLI, Custom GPT)
+    • Universal principles applicable to all AI coding assistants
+    • Complete setup instructions and troubleshooting
+    • Templates, checklists, and cheat sheets
+    • Comprehensive tool references and best practices
+
+═══════════════════════════════════════════════════════════════════════════════
+1. CORE PHILOSOPHY & PRINCIPLES
+═══════════════════════════════════════════════════════════════════════════════
+
+WORKING WITH AI, NOT AGAINST IT:
+
+  Claude Code characteristics:
+    STRENGTH: Pattern recognition, code generation, architectural understanding
+    WEAKNESS: Context retention across sessions, autonomous decision-making
+    BEHAVIOR: "Extremely confident junior dev with extreme amnesia"
+
+  BEST PRACTICE: Treat as skilled collaborator requiring:
+    • Clear direction and explicit scope
+    • Frequent checkpoints and validation
+    • Systematic documentation and context preservation
+    • Multi-layer review processes
+
+QUALITY OVER SPEED:
+
+  Never compromise on planning and review cycles.
+  Fast, low-quality outputs waste more time in debugging than thorough upfront work.
+
+  Key success metrics:
+    → Plan before implement (planning mode for non-trivial tasks)
+    → Review code between implementation phases
+    → Self-review using agents before finalizing
+    → Validate assumptions early and often
+
+SYSTEMATIC BEATS RANDOM:
+
+  Effectiveness depends on consistent processes:
+    • Invest in workflow setup (skills, hooks, dev docs)
+    • Document decisions and patterns
+    • Use checklists and templates
+    • Iterate and refine based on results
+
+CONTEXT MANAGEMENT:
+
+  AI loses focus during:
+    • Long implementation sessions
+    • Context compaction events
+    • Multi-file refactoring across repositories
+    • Feature creep and scope changes
+
+  SOLUTION: Dev docs workflow (plan, context, tasks)
+
+WHEN TO STEP IN MANUALLY:
+
+  • AI struggles for 30+ minutes on something you can fix in 2 minutes
+  • Logic puzzles requiring common sense
+  • Problems needing real-world domain knowledge
+  • Debugging circular logic traps
+
+  NO SHAME IN HELPING: Like steadying handlebars before letting go of a bike.
+
+═══════════════════════════════════════════════════════════════════════════════
+2. PLATFORM DETECTION & ADAPTATION
+═══════════════════════════════════════════════════════════════════════════════
+
+Identify your environment and adapt workflow accordingly:
+
+CLAUDE CODE (claude.ai/code)
+  • Web-based interface with 200k token context window
+  • Full toolkit: skills, hooks, agents, browser automation, MCP integrations
+  • Persistent sessions with context compaction
+  • Permissions system with approval policies
+  • Headless mode for CI/CD integration
+  • Automation tools: /setup-hooks, /create-skill commands (NEW)
+  • Visual diagrams: 7+ Mermaid workflow diagrams (NEW)
+  • Metrics tracking: Token savings, velocity, ROI (NEW)
+  • Ideal for: Large refactors, multi-file changes, backend debugging
+
+CODEX CLI (Terminal/Shell)
+  • Terminal-based autonomous agent (OpenAI Codex 2025)
+  • Multiple modes: Interactive, Direct, Exec, Image input
+  • Approval modes: Auto (default), Read Only, Full Access
+  • Model selection: GPT-5, GPT-5-Codex (recommended for coding)
+  • Tools: shell, apply_patch, read_file, list_dir, grep_files, plan
+  • MCP integration: Experimental support via config
+  • Workspace safety: Network off by default, writes restricted
+  • Installation: npm/Homebrew (macOS/Linux), WSL2 (Windows)
+  • Ideal for: Focused edits, script execution, CI/CD automation
+
+CUSTOM GPT (OpenAI Platform)
+  • 8000 character hard limit on instruction files
+  • Knowledge files support supplementary context
+  • Conversation-based, stateless between sessions
+  • Web search and browsing capabilities
+  • Ideal for: Structured workflows, templated outputs, consultative tasks
+
+ADAPTATION STRATEGY:
+  → Claude Code: Leverage advanced systems (skills, hooks, dev docs, PM2, automation)
+  → Codex CLI: Use approval modes appropriately, plan tool for multi-step work, apply_patch for edits
+  → Custom GPT: Keep instructions under 8000 chars, use knowledge files for data
+
+QUICK SETUP (5-MINUTE START):
+  Claude Code:
+    1. Run /setup-hooks (generates 4 essential hooks automatically)
+    2. Activate claude-code-workflow skill (auto-loads best practices)
+    3. Create CLAUDE.md with project specifics
+
+  Codex CLI:
+    1. Install: npm install -g @openai/codex (or brew install codex)
+    2. Authenticate with ChatGPT account or API key
+    3. Set approval mode: /approvals auto (default, recommended)
+    4. Configure model: /model gpt-5-codex (for agentic coding)
+
+═══════════════════════════════════════════════════════════════════════════════
+3. UNIVERSAL WORKFLOW (FOUR-PHASE CYCLE)
+═══════════════════════════════════════════════════════════════════════════════
+
+FOUR-PHASE CYCLE applies across all platforms:
+
+PHASE 1: PLANNING
+  • Enter planning mode for non-trivial features (>3 files or >2 unknowns)
+  • Create comprehensive plan with phases, tasks, risks, metrics
+  • Review thoroughly before implementation (catch mistakes early)
+  • Document in dev docs format for large features
+  • Use strategic planning agents for complex work
+
+PHASE 2: IMPLEMENTATION
+  • Work in small increments (1-2 sections at a time, not entire plan)
+  • Review code between phases
+  • Update context with discoveries and decisions
+  • Mark tasks complete immediately (not batched)
+  • Request validation before moving to next phase
+
+PHASE 3: VALIDATION
+  • Run tests when available (unit, integration, e2e)
+  • Check builds and linters (TypeScript, ESLint, Prettier)
+  • Verify against acceptance criteria
+  • Self-review using checklists or specialized agents
+  • Use multi-layer review system (hooks, agent, human)
+
+PHASE 4: HANDOFF
+  • Summarize changes with file:line references
+  • Document outstanding risks and TODOs
+  • Suggest next steps or follow-up work
+  • Update documentation if architectural changes made
+  • Create PR with comprehensive description
+
+CHECKPOINT RHYTHM:
+  → After each phase: Review and validate
+  → Before context compaction: Update dev docs
+  → After major milestones: Full quality review
+  → Before handoff: Complete QA checklist
+
+═══════════════════════════════════════════════════════════════════════════════
+4. PLANNING METHODOLOGY
+═══════════════════════════════════════════════════════════════════════════════
+
+WHEN TO PLAN:
+  ✓ Multi-file changes affecting >3 files
+  ✓ New features with unclear requirements
+  ✓ Complex refactors or architectural changes
+  ✓ Work spanning multiple days or sessions
+  ✗ Typo fixes, metadata updates, documentation tweaks
+
+PLANNING WORKFLOW:
+
+  1. ENTER PLANNING MODE
+     Even if documenting later, planning mode gets better research results
+
+  2. USE STRATEGIC PLANNING AGENT (OPTIONAL)
+     Specialized subagent or slash command that:
+       • Gathers context efficiently
+       • Analyzes project structure
+       • Creates comprehensive structured plans
+       • Includes: executive summary, phases, tasks, risks, metrics, timelines
+
+  3. REVIEW PLAN THOROUGHLY
+     CRITICAL: Take time to understand the plan
+     • Catch mistakes early (Claude often misunderstands requirements)
+     • Validate assumptions and approach
+     • Check for missing dependencies
+
+  4. BRANCH IF NEEDED
+     • Use double-ESC to bring up previous prompts
+     • Re-prompt with knowledge of what you DON'T want
+     • Compare different approaches
+
+PLANNING STRUCTURE:
+
+━━━ EXECUTIVE SUMMARY (2-3 sentences)
+  What, why, impact
+
+━━━ CURRENT STATE ANALYSIS
+  What exists today, what's lacking, why change is needed
+
+━━━ PROPOSED SOLUTION
+  High-level approach, key technical decisions, trade-offs considered
+
+━━━ IMPLEMENTATION PHASES
+  Phase 1: [Name]
+    - Task 1.1: [Specific action]
+      Files affected: [paths]
+      Dependencies: [what must be done first]
+    - Task 1.2: [Specific action]
+  Phase 2: [Name]
+    ...
+
+━━━ RISKS & MITIGATIONS
+  - Risk: [What could go wrong]
+    Mitigation: [How to prevent/handle]
+    Severity: [Low/Medium/High]
+
+━━━ SUCCESS METRICS
+  How to validate it works (tests, performance, user feedback)
+
+━━━ TIMELINE ESTIMATE
+  Realistic breakdown by phase
+
+PLANNING BEST PRACTICES:
+  • Be specific, not vague: "Migrate from JWT in localStorage to httpOnly cookies"
+    NOT "Update authentication system"
+  • Include file paths for all affected files
+  • Flag potential breaking changes
+  • Note testing requirements explicitly
+  • Surface assumptions and validate early
+  • Use XML tags for structure (<context>, <instructions>, <requirements>)
+
+DEV DOCS WORKFLOW (for large features):
+
+  Create THREE files in dev/active/[feature-name]/:
+
+  1. [feature-name]-plan.md
+     → Approved plan from planning session (never changes)
+     → Historical record and reference point
+
+  2. [feature-name]-context.md
+     → Living document updated during implementation
+     → Key files and their purposes
+     → Important decisions and discoveries
+     → Gotchas and integration points
+     → Next steps (critical before compaction)
+     → Last updated timestamp
+
+  3. [feature-name]-tasks.md
+     → Concrete actionable checklist
+     → Mark complete immediately
+     → Add new tasks as discovered
+     → Include acceptance criteria
+
+  USAGE PATTERN:
+    1. Plan → Create dev docs
+    2. Implement with checkpoints → Update context.md
+    3. Before compaction → Update next steps
+    4. New session → Say "continue" (Claude reads dev docs automatically)
+
+  BENEFIT: Eliminates context loss across compactions, maintains focus
+  IMPACT: "Most impact on results" (verified by 300k LOC rewrite)
+
+═══════════════════════════════════════════════════════════════════════════════
+5. IMPLEMENTATION PATTERNS
+═══════════════════════════════════════════════════════════════════════════════
+
+INCREMENTAL DEVELOPMENT:
+  • Implement in phases, not all at once
+  • Request reviews between phases
+  • Update task lists explicitly after each section
+  • Periodic context updates (document discoveries)
+
+SAFE EDITING:
+  • Preview before editing (rg, cat, grep searches)
+  • Use exact string matching for replacements
+  • Preserve indentation and whitespace conventions
+  • Review diffs before finalizing
+  • Use apply_patch for manual diffs (Codex)
+
+PROGRESSIVE COMPLEXITY:
+  Phase 1: Simple implementation (in-memory, mock data)
+  Phase 2: Add persistence (database, file system)
+  Phase 3: Add business logic (validation, permissions)
+  Phase 4: Production features (error handling, logging, monitoring)
+
+  → Each phase validates assumptions before adding complexity
+
+CODE ORGANIZATION:
+  • Follow repository patterns consistently
+  • Keep functions small and focused
+  • Extract reusable utilities
+  • Document non-obvious logic with brief comments
+  • Use ASCII only, avoid decorative characters
+
+ERROR HANDLING:
+  • All errors should be captured (Sentry, logging)
+  • Controllers should extend base classes with error handling
+  • Wrap async operations in try-catch
+  • Provide meaningful error messages
+  • Never silent failures
+
+TESTING STRATEGY:
+  • Write tests as you implement (not after)
+  • Unit tests: Pure functions, business logic
+  • Integration tests: Component interactions
+  • E2E tests: Critical user paths
+  • Target: 70-80% coverage (focus on critical paths)
+
+PROMPT ENGINEERING FOR IMPLEMENTATION:
+
+  1. IMPLEMENT IN PHASES
+     Don't say: "Implement the entire plan"
+     Do say: "Implement only Phase 1: Database schema and repository layer"
+
+  2. REQUEST REVIEWS BETWEEN PHASES
+     "Before moving to Phase 2, review Phase 1 code for best practices"
+
+  3. UPDATE TASKS EXPLICITLY
+     "Mark tasks 1.1, 1.2, and 1.3 as complete in tasks.md"
+
+  4. PERIODIC CONTEXT UPDATES
+     "Update context.md with any important discoveries from this implementation"
+
+═══════════════════════════════════════════════════════════════════════════════
+6. VALIDATION & QUALITY ASSURANCE
+═══════════════════════════════════════════════════════════════════════════════
+
+MULTI-LAYER REVIEW SYSTEM:
+
+LAYER 1: AUTOMATIC (Hooks - Claude Code only)
+  • Build checker catches TypeScript errors immediately
+  • Error handling reminder promotes self-check
+  • File edit tracking ensures nothing missed
+
+LAYER 2: SELF-REVIEW (Prompted)
+  Between implementation phases:
+    "Review the code you just wrote for:
+     - Best practices adherence
+     - Error handling completeness
+     - Potential edge cases
+     - Performance implications"
+
+LAYER 3: AGENT REVIEW (Specialized - Claude Code)
+  Launch code-architecture-reviewer agent:
+    • Deeper analysis than self-review
+    • Checks against project patterns
+    • Security vulnerability scan
+    • Consistency across codebase
+
+LAYER 4: HUMAN REVIEW (Final)
+  You review the code:
+    • Business logic correctness
+    • UX considerations
+    • Strategic alignment
+    • Final approval
+
+QA CHECKLIST (Universal):
+  □ All instructions satisfied
+  □ Tests pass (or test plan documented)
+  □ Builds complete without errors
+  □ Character limits respected (Custom GPT: 8000 chars)
+  □ Template variables resolved (no {{placeholders}})
+  □ YAML and Markdown commands aligned
+  □ File references use path:line format
+  □ No hallucinated URLs or placeholders
+  □ Security checks: No secrets, PII handled properly
+  □ Documentation updated if architectural changes made
+  □ Diff hygiene: No accidental whitespace changes
+  □ Commit messages follow repository style
+
+ERROR PREVENTION:
+  • Validate early: Check assumptions before large implementations
+  • Incremental implementation: Small changes → verify → next change
+  • Frequent builds: Catch type errors immediately
+  • Documentation validation: Confirm API signatures before implementing
+
+TESTING PATTERNS:
+  • Run tests when they de-risk changes
+  • If blocked, state why and offer manual verification
+  • Remove temporary scripts before handoff
+  • Create tests as you implement features (not after)
+
+═══════════════════════════════════════════════════════════════════════════════
+7. PLATFORM-SPECIFIC OPTIMIZATIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CLAUDE CODE OPTIMIZATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SKILLS SYSTEM:
+
+  Purpose: Reusable patterns and best practices loaded automatically
+
+  Structure:
+    .claude/skills/[skill-name]/
+    ├── SKILL.md              (main file, <500 lines)
+    ├── resources/            (progressive disclosure)
+    │   ├── pattern1.md
+    │   └── pattern2.md
+    └── scripts/              (utility scripts)
+
+  Best Practices:
+    • Keep SKILL.md under 500 lines (entry point only)
+    • Use progressive disclosure with resource files
+    • Write specific descriptions (max 1024 chars)
+    • Include WHAT it does and WHEN to use it
+    • One skill = one capability (focused scope)
+
+  Frontmatter:
+    ---
+    name: backend-dev-guidelines
+    description: Backend development patterns for Node.js/TypeScript APIs. Use when
+    creating routes, controllers, services, or database operations. Covers error
+    handling, authentication, and testing.
+    allowed-tools: [Read, Edit, Write, Bash]
+    version: 1.0.0
+    visibility: team
+    tags: [backend, nodejs, best-practices]
+    related-skills: [frontend-dev-guidelines, database-verification]
+    activationHints: [backend, API, controller]
+    ---
+
+  Auto-Activation System (CRITICAL):
+    PROBLEM: Skills don't activate reliably without triggers
+    SOLUTION: UserPromptSubmit hook injects skill reminders
+
+    Create .claude/hooks/user-prompt-submit.sh:
+      • Analyze prompt for keywords and intent patterns
+      • Check skill-rules.json for matches
+      • Inject formatted reminder into Claude's context
+
+    skill-rules.json configuration:
+      {
+        "backend-dev-guidelines": {
+          "type": "domain",
+          "enforcement": "suggest",
+          "priority": "high",
+          "promptTriggers": {
+            "keywords": ["backend", "controller", "service", "API"],
+            "intentPatterns": ["(create|add).*?(route|endpoint)"]
+          },
+          "fileTriggers": {
+            "pathPatterns": ["backend/src/**/*.ts"],
+            "contentPatterns": ["router\\.", "export.*Controller"]
+          }
+        }
+      }
+
+  Recommended Skills:
+    • backend-dev-guidelines (routes, controllers, services, repositories)
+    • frontend-dev-guidelines (React patterns, component architecture)
+    • database-verification (prevent schema errors)
+    • testing-guidelines (unit, integration, e2e patterns)
+    • skill-developer (meta-skill for creating more skills)
+
+  Token Efficiency: 40-60% savings with progressive disclosure
+
+  Quick Setup (NEW):
+    • Run /setup-hooks command - Generates all 4 essential hooks automatically
+    • Run /create-skill [name] [description] - Scaffolds new skill with best practices
+    • See docs/agents/06_claude_code_best_practices.md for automation tools guide
+
+HOOKS ARCHITECTURE:
+
+  Complete Hook Pipeline:
+    User submits prompt
+      ↓
+    [UserPromptSubmit] - Inject skill reminders, context
+      ↓
+    Claude processes and responds
+      ↓
+    [PostToolUse] - Track edited files (after Edit/Write)
+      ↓
+    Claude finishes response
+      ↓
+    [Stop Hook #1] - Run build checker on affected repos
+      ↓
+    [Stop Hook #2] - Show error handling reminder for risky code
+      ↓
+    Result: Clean, validated, context-aware code
+
+  Hook #1: UserPromptSubmit (Context Injection)
+    Purpose: Ensure Claude loads relevant skills and context BEFORE work
+
+    Implementation: .claude/hooks/user-prompt-submit.sh
+      • Analyze prompt for skill matches
+      • Inject skill activation reminders
+      • Add project-specific context (time, git branch)
+      • Block prompts containing potential secrets
+
+    Exit codes:
+      0 = Success, continue
+      2 = Block with feedback shown to Claude
+      Other = Non-blocking error
+
+  Hook #2: PostToolUse (File Edit Tracker)
+    Purpose: Track which files edited and in which repositories
+
+    Implementation: .claude/hooks/post-tool-use.sh
+      if [[ "$TOOL_NAME" =~ ^(Edit|Write|MultiEdit)$ ]]; then
+        REPO=$(detect_repo_from_path "$FILE_PATH")
+        echo "$(date)|$REPO|$FILE_PATH" >> /tmp/claude-edits.log
+      fi
+
+    DO NOT run builds here (inefficient, Claude makes breaking edits)
+
+  Hook #3: Stop Event (Build Checker)
+    Purpose: Catch TypeScript/compilation errors when Claude finishes
+
+    Implementation: .claude/hooks/stop-build-check.sh
+      • Read /tmp/claude-edits.log
+      • Identify affected repositories
+      • Run builds on each repo
+      • Show errors to Claude if <5 errors
+      • Suggest auto-error-resolver agent if many errors
+      • Clear edit log
+
+    Result: Zero errors accumulate, immediate feedback
+
+  Hook #4: Stop Event (Error Handling Reminder)
+    Purpose: Gentle awareness for error handling patterns
+
+    Implementation: .claude/hooks/stop-error-reminder.sh
+      • Analyze edited files for risky patterns:
+        - try/catch blocks
+        - async/await
+        - database operations (Prisma, etc.)
+      • Show non-blocking reminder if patterns detected
+      • Prompt self-assessment without workflow interruption
+
+  Hook #5: PreCompact (Context Preservation)
+    Purpose: Summarize current state before compaction
+
+    Implementation:
+      • Update context.md with latest discoveries
+      • Document next steps explicitly
+      • Mark completed tasks
+
+  Modern Hook Events (2025 Update):
+    - PreCompact
+    - SessionStart
+    - SessionEnd
+    - Notification
+    - SubagentStop
+
+    Use structured JSON for decisions:
+      {
+        "decision": "allow|deny|ask",
+        "reason": "Explain briefly",
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "updatedInput": {},
+          "additionalContext": "..."
+        }
+      }
+
+  Hook Best Practices:
+    • Use exit codes correctly (0=allow, 2=block, other=log)
+    • Quote variables properly: "$VAR" not $VAR
+    • Test thoroughly before production
+    • Security first: validate inputs, avoid exposing secrets
+    • Implement timeouts (60-second default)
+    • Leverage JSON output for structured decisions
+
+  Hook Security & Compliance:
+    • Review and version-control all hooks
+    • Use deny-by-default logic for sensitive paths
+    • Require code reviews for new hooks
+    • Block prompts with secrets in UserPromptSubmit
+    • Rotate logs and store securely
+
+PM2 PROCESS MANAGEMENT (Backend Debugging):
+
+  Purpose: Professional process management for multi-service architectures
+
+  Benefits:
+    • Each service runs as managed process with dedicated log
+    • Claude reads individual service logs in real-time
+    • Automatic restarts on crashes
+    • Memory and CPU tracking
+    • Easy service management (restart, stop, reload)
+
+  Configuration: ecosystem.config.js
+    module.exports = {
+      apps: [
+        {
+          name: 'auth-service',
+          script: 'npm',
+          args: 'start',
+          cwd: './backend/auth',
+          error_file: './backend/auth/logs/error.log',
+          out_file: './backend/auth/logs/out.log',
+          max_restarts: 10,
+          min_uptime: '10s',
+          max_size: '10M',
+          retain: 5,
+          compress: true
+        }
+      ]
+    };
+
+  Common Commands:
+    Start all: pnpm pm2:start
+    Stop all: pnpm pm2:stop
+    Restart specific: pm2 restart [service-name]
+    View logs: pm2 logs [service-name] --lines 200
+    Monitor resources: pm2 monit
+    List processes: pm2 list
+
+  Autonomous Debugging Workflow:
+    User: "The email service is throwing errors"
+    Claude: [Runs] pm2 logs email --lines 200
+    Claude: [Reads logs] "Database connection timeout at EmailService.ts:45"
+    Claude: [Fixes code]
+    Claude: [Runs] pm2 restart email
+    Claude: "Service restarted. Monitoring for errors..."
+
+  Caveats:
+    • Hot reload doesn't work with PM2-managed processes
+    • Run frontend separately with pnpm dev for hot reload
+    • Use PM2 for backend services without frequent hot reload
+
+SPECIALIZED AGENTS:
+
+  Quality Control:
+    • code-architecture-reviewer - Reviews for best practices
+    • build-error-resolver - Systematically fixes TypeScript errors
+    • refactor-planner - Creates comprehensive refactoring plans
+
+  Testing & Debugging:
+    • auth-route-tester - Tests backend routes with authentication
+    • auth-route-debugger - Debugs 401/403 errors
+    • frontend-error-fixer - Diagnoses frontend errors
+
+  Planning & Strategy:
+    • strategic-plan-architect - Creates detailed implementation plans
+    • plan-reviewer - Reviews plans before implementation
+    • documentation-architect - Creates/updates documentation
+
+  Domain-Specific:
+    • frontend-ux-designer - Fixes styling and UX issues
+    • web-research-specialist - Researches issues and best practices
+
+  Agent Best Practices:
+    • Very specific roles (one clear purpose)
+    • Clear return instructions (exactly what to return)
+    • Bounded scope (max files, directories, constraints)
+    • Use for reviews (catches errors before human review)
+
+SLASH COMMANDS:
+
+  Essential Commands:
+    /dev-docs - Create comprehensive strategic plan
+    /dev-docs-update - Update dev docs before compaction
+    /create-dev-docs - Convert approved plan to dev doc files
+    /code-review - Architectural code review
+    /build-and-fix - Run builds and fix all errors
+    /test-route [url] - Test specific authenticated route
+
+  Structure: .claude/commands/[command-name].md
+    <task>
+    Research the codebase thoroughly and create implementation plan.
+    </task>
+
+    <plan_structure>
+    1. Executive Summary
+    2. Current State Analysis
+    3. Proposed Solution
+    4. Implementation Phases (detailed tasks)
+    5. Risks and Mitigations
+    6. Success Metrics
+    7. Timeline Estimate
+    </plan_structure>
+
+    <constraints>
+    - Be specific: no vague tasks
+    - Include file paths
+    - Flag breaking changes
+    - Note testing requirements
+    </constraints>
+
+DOCUMENTATION LAYERS:
+
+  Universal Three-Layer Architecture (Recommended):
+    See docs/agents/00_repository_pattern_universal.md for full pattern
+
+    Layer 1: AI-Specific Instructions (Root .md files)
+      README.md, CLAUDE.md, GEMINI.md, CODEX.md, AGENTS.md
+
+    Layer 2: Tool-Specific Workspaces (.claude/, .cursor/, etc.)
+      Operational files: hooks, skills, commands, prompts
+
+    Layer 3: Shared Documentation (docs/ - PORTABLE)
+      docs/agents/         - AI development guides (portable to any repo)
+      docs/formatting/     - Formatting standards (portable)
+      docs/reference/      - Catalogs and quick-reference
+      docs/testing/        - QA checklists
+
+  Project-Specific Documentation (Additional):
+    docs/architecture/
+    ├── system-overview.md
+    ├── backend-architecture.md
+    └── frontend-architecture.md
+
+    docs/services/[service-name]/
+    ├── overview.md
+    ├── api-reference.md
+    └── data-flow.md
+
+    [service]/src/[module]/README.md
+
+  Key Distinction:
+    SKILLS: Reusable patterns ("how to create a controller")
+    PORTABLE DOCS: Universal best practices (work in any repo)
+    PROJECT DOCS: System architecture ("how our workflow engine works")
+
+  CLAUDE.md Best Practices:
+    • Place at repo root, subtree, or ~/.claude/
+    • Use # to append incremental updates
+    • Keep concise and actively maintained
+
+PERMISSIONS WORKFLOW:
+
+  • Use /permissions to define allowlist per project
+  • Commit .claude/settings.json with approved tools
+  • Default: allow safe tools (Edit, typecheck); ask for risky commands (Bash)
+  • Pass --allowedTools for CI/headless mode
+
+HEADLESS MODE & CI INTEGRATION:
+
+  Use headless Claude for automation:
+    claude -p "Run typecheck" --output-format stream-json
+
+  Typical use cases:
+    • Pre-commit validation
+    • Issue triage in GitHub Actions
+    • Code review pipelines
+
+  Capture JSON logs for metrics and disable verbose output in CI
+
+MCP INTEGRATION:
+
+  Integrate MCP connectors for Slack, GitHub, Drive, etc.
+    • Store .mcp.json in project root
+    • Use --mcp-debug for testing
+    • Document connector setup and authentication
+
+COST & ANALYTICS:
+
+  • Monitor spend using Anthropic's Usage & Cost API
+  • Connect Code Analytics API to tag sessions by repo, team, or feature
+  • Set daily and monthly alert thresholds to prevent overuse
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CODEX CLI OPTIMIZATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INSTALLATION & AUTHENTICATION:
+
+  Install Codex:
+    npm install -g @openai/codex
+    # OR
+    brew install codex
+
+  Verify installation:
+    codex --version
+
+  Authenticate:
+    • ChatGPT account (Plus/Pro/Team/Business/Edu/Enterprise)
+    • Or API key authentication
+    • Config stored in ~/.codex/config.toml
+
+  Minimal config (~/.codex/config.toml):
+    [core]
+    model = "gpt-5-codex"
+    approvals = "auto"
+    experimental_use_rmcp_client = true  # Enable MCP
+
+APPROVAL MODES & SECURITY:
+
+  Three Safety Levels:
+    • Auto (default): Workspace writes auto-approved, requires confirmation for:
+      - Operations outside working directory
+      - Network access (disabled by default)
+      - Potentially destructive commands
+    • Read Only: Chat and planning only, no modifications
+    • Full Access: All permissions (use cautiously, trusted environments only)
+
+  Switch modes in interactive session:
+    /approvals auto
+    /approvals read-only
+    /approvals full-access
+
+  Security defaults:
+    • No network access by default
+    • Workspace-only writes
+    • Out-of-directory writes require approval
+
+  Best practices:
+    • Use Auto mode for most development
+    • Use Read Only for code exploration and planning
+    • Use Full Access only in CI/CD or trusted sandboxes
+
+MODELS & REASONING:
+
+  Model Selection:
+    • GPT-5 (default): Medium reasoning, general tasks
+    • GPT-5-Codex (recommended): Optimized for agentic coding
+      - Better at multi-file edits, refactoring, project context
+      - Uses Codex-class reasoning (o3 family derivative)
+
+  Switch models:
+    /model gpt-5
+    /model gpt-5-codex
+
+  CLI usage:
+    codex --model gpt-5 "scan repo health"
+    codex --model gpt-5-codex "refactor module and add tests"
+
+  Best practices:
+    • Use GPT-5-Codex for complex refactoring and architectural changes
+    • Standard GPT-5 sufficient for simple edits and exploration
+    • Consider cost vs. capability tradeoffs
+
+USAGE MODES:
+
+  Interactive Terminal UI:
+    codex
+    # Full terminal interface with chat, file browsing, interactive approvals
+
+  Direct Prompting:
+    codex "explain this codebase"
+    codex "add error handling to user login"
+    # Single-shot tasks with inline prompts
+
+  Non-Interactive Execution (Exec Mode):
+    codex exec "fix the CI failure"
+    codex exec "refactor utils to use TypeScript"
+    # Autonomous execution for automation, CI/CD, batch processing
+
+  Image Input Mode:
+    codex -i screenshot.png "explain this error"
+    codex -i diagram.jpg "implement this architecture"
+    # Process screenshots, diagrams, UI mockups
+    # Supported: PNG, JPG
+
+PREAMBLES & EXECUTION RHYTHM:
+
+  Preambles:
+    • 1-2 sentence description before grouped tool calls
+    • Skip for trivial single-file reads
+    • Example: "I've explored the repo; now checking the API routes."
+
+  Execution Rhythm:
+    1. Inspect context (files, instructions, diffs)
+    2. Plan for non-trivial tasks (use plan tool)
+    3. Edit in small increments (use apply_patch for precision)
+    4. Validate (tests, linters, char counts)
+    5. Summarize with file references and next steps
+
+PLANNING WITH plan TOOL:
+
+  When to plan:
+    • Multiple files involved
+    • Ambiguous scope or requirements
+    • Phased work over multiple steps
+
+  Planning best practices:
+    • Keep steps short (5-7 words each)
+    • Maintain exactly one in_progress step at a time
+    • Update statuses as you progress
+    • Mark all complete at the end
+    • Don't pad simple tasks with unnecessary plans
+
+  High-quality plan example:
+    1. Add CLI entry with args
+    2. Parse Markdown via library
+    3. Apply semantic HTML template
+    4. Handle code blocks/images/links
+    5. Add error handling paths
+
+  Available in both interactive sessions and codex exec mode
+
+TOOL SELECTION MATRIX:
+
+  Core Tools:
+    • shell - Run commands via ["bash", "-lc", "..."] or PowerShell (Windows)
+      - Use for: tests, linters, counts, git, searches
+      - Avoid for: editing files (use apply_patch)
+      - Set workdir explicitly, avoid chaining cd
+
+    • apply_patch - File-oriented diffs for precise edits
+      - Use for: surgical updates, multi-file patches
+      - Avoid: massive rewrites (split into smaller patches)
+      - Keep context lines small for success
+
+    • read_file - Read file contents with optional indentation
+      - Use for: inspecting code structure, reviewing contents
+      - Supports chunked reading to avoid truncation
+      - Access restricted to workspace by default
+
+    • list_dir - Directory listing for exploration
+      - Use for: discovering files, understanding project layout
+
+    • grep_files - Search files for patterns
+      - Use for: finding code patterns, debugging
+      - Prefer rg in shell for advanced searches
+
+    • plan - Track multi-step work strategically
+      - Keep exactly one in_progress step at a time
+      - Available in interactive and exec modes
+
+    • todo-list - Task management for work items
+      - Use for: organizing subtasks, progress visibility
+
+    • view_image - Visual inspections via -i flag
+      - Use for: diagrams, screenshots, UI assets, errors
+      - Example: codex -i screenshot.png "explain this error"
+
+  MCP Tools (Model Context Protocol):
+    When MCP servers configured:
+      • list_mcp_resources - Discover available context
+      • read_mcp_resource - Load resource by URI
+      • list_mcp_resource_templates - Discover templates
+      • All MCP tools prefixed with mcp__
+      • Enable in ~/.codex/config.toml:
+        [core]
+        experimental_use_rmcp_client = true
+      • Supports OAuth for streamable HTTP servers
+
+EXECUTION RHYTHM:
+
+  1. Inspect context (files, instructions, diffs)
+  2. Plan intentionally when complexity warrants
+  3. Edit in small, reviewable increments
+  4. Validate outputs (tests, linters, char count)
+  5. Summarize with references and next steps
+
+COMMAND DISCIPLINE:
+
+  Guardrails:
+    • Never run destructive commands without explicit direction
+    • Respect sandbox boundaries
+    • Log failures with command, error, proposed next step
+
+  Repository Helpers:
+    rg                         # Code search
+    rg --files                 # File discovery
+    wc -c [file.md]            # Character count
+    rg "{{[^}]+}}"             # Find unresolved template variables
+    rg "^---$" -g "*.md"       # Confirm no horizontal rules
+
+  Testing Mindset:
+    • Run tests when they de-risk changes
+    • If blocked, state why and offer manual verification
+    • Remove temporary scripts before handoff
+
+PARALLELISM AND WORKLOAD DESIGN:
+
+  • Decompose large tasks into small, concurrent jobs
+  • Cap concurrency to protect system stability
+  • Deduplicate tasks by file or feature key before dispatch
+  • Merge parallel results using structured validation step
+  • Prefer read-only operations for wide scans or analyses
+
+RATE LIMITS AND RETRIES:
+
+  • Implement randomized exponential backoff on 429 or 5xx responses
+  • Use per-route request budgets to avoid hitting caps
+  • Example backoff: sleep = random(200-800ms) × 2^attempt, max 5 attempts
+  • Track x-ratelimit-* headers to monitor capacity
+  • Make all write operations idempotent to prevent duplication
+  • Log retry attempts and outcomes for audit and diagnostics
+
+CONTEXT HYGIENE:
+
+  Minimal Context:
+    • Load only files required for task
+    • Summarize relevant context in your own words
+    • Keep todo lists short, revisit after milestones
+
+  Avoid Drift:
+    • Re-sync with key instructions after long sessions
+    • Re-run searches when pivoting to new areas
+    • Log decisions in Markdown/YAML for future sessions
+
+  Memory Field Usage:
+    • Populate only when policies permit
+    • Store stable facts (aliases, conventions)
+    • Keep entries terse and bullet-based
+
+COST CONTROL AND TOKEN HYGIENE:
+
+  • Cap max_output_tokens for all Codex tasks
+  • Compress long instructions and strip boilerplate
+  • Retrieve context dynamically rather than loading entire files
+  • Cache shared or repeated context to reduce cost
+  • Maintain a cost-per-task budget and log token usage metrics
+
+FAILURE TRIAGE AND FALLBACKS:
+
+  • Shrink context and retry once if a task fails
+  • On repeated failure, downgrade model or output size
+  • If blocked, switch to read-only analysis and log the issue
+  • Escalate persistent failures with full diagnostics for human review
+  • Maintain a fallback plan for each Codex workflow
+
+INTEGRATION WORKFLOWS:
+
+  CLI Usage Patterns:
+    • Interactive sessions: codex for exploratory work, debugging
+    • Direct commands: codex "task" for quick focused tasks
+    • Batch automation: codex exec "task" for CI/CD pipelines
+    • Visual debugging: codex -i screenshot.png "analyze"
+
+  IDE Integrations:
+    • VS Code: Official extension available
+    • Cursor: Full Codex CLI support
+    • Windsurf: Integrated Codex capabilities
+
+  Configuration Management:
+    • Location: ~/.codex/config.toml (user) or .codex/config.toml (project)
+    • Settings: Model preferences, MCP servers, approval modes
+    • Secrets: Never hardcode, use environment variables
+    • Version control: Add .codex/ to .gitignore (except templates)
+
+  Git Workflow Integration:
+    • Work in small branches and PRs
+    • Use codex exec in GitHub Actions for automated fixes
+    • Follow repository commit style
+    • Review all Codex changes before committing
+
+  CI/CD Integration:
+    # Example GitHub Actions workflow
+    - name: Fix CI failures with Codex
+      run: codex exec "analyze test failures and fix"
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+  Local vs Cloud:
+    • Local: Fast iterations, small refactors, quick tests
+    • Cloud: Large repos, long jobs, heavy dependencies
+
+COMMAND DISCIPLINE & SAFETY:
+
+  Best Practices:
+    • Prefer rg for search and rg --files for discovery
+    • Read files in chunks (≤250 lines) to avoid truncation
+    • Never run destructive commands without explicit user direction
+    • Respect sandbox boundaries; suggest alternatives when blocked
+    • Log failures with command, error, and proposed next step
+
+  Repository Helpers:
+    • rg "{{[^}]+}}" - Find unresolved template variables
+    • rg "^---$" -g "*.md" - Find horizontal rules
+    • wc -c path/to/file.md - Verify character counts
+    • rg <pattern> -g '!**/archive/**' -g '!**/Archive/**' - Skip archives
+
+  Token & Context Discipline:
+    • Monitor token usage per call
+    • Reuse stable context instead of resending
+    • Prefer targeted excerpts over entire files
+    • Summarize when possible
+
+TROUBLESHOOTING & RECOVERY:
+
+  Common Failure Modes:
+    • Sandbox denial: Permission errors outside workspace
+      Fix: Verify paths, copy files to workspace, adjust settings
+
+    • Command typos: bash: command not found
+      Fix: Correct syntax, break into smaller steps
+
+    • Large diffs rejected: Context mismatch
+      Fix: Re-read file, regenerate smaller patch, split patches
+
+    • Rate limits: 429 or 5xx responses
+      Fix: Backoff, reduce concurrency, queue requests
+
+    • Unresolved variables: {{var}} left in outputs
+      Fix: Ensure YAML has values, check interpolation
+
+    • Character limit exceeded: >8000 chars
+      Fix: Compress and split files, move data to JSON
+
+  Success Signals:
+    • apply_patch success: "Patch applied" message
+    • Mismatch/failure: Codex prints failing hunk context
+
+CODEX CHEAT SHEET:
+
+  Quick Commands:
+    codex "run tests and summarize failures"
+    codex "list failing tests and fix top 1"
+    codex exec "inspect build errors and propose fix"
+    codex -i screenshot.png "explain this error"
+
+  Switch Settings Fast:
+    /model gpt-5-codex
+    /approvals auto
+    /approvals read-only
+
+  Minimal GitHub Action:
+    - name: Codex exec check
+      run: codex exec "inspect build errors and propose fix"
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+  Makefile Target:
+    codex-check:
+        codex exec "inspect build errors and propose fix"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CUSTOM GPT OPTIMIZATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CHARACTER BUDGET DISCIPLINE:
+
+  Hard Limit: 8000 characters for instruction files
+  Target: 7500-7900 characters (safety margin)
+
+  Validation: wc -c [file.md]
+
+  Token Optimization Techniques:
+    • No --- horizontal dividers (use blank lines)
+    • No emojis or special Unicode symbols
+    • Use plain text labels: REQUIRED, CONDITIONAL, AVOID
+    • Clean bullet points without decorative characters
+    • Consolidate inline comments into defaults line
+    • Inline multi-line checklists where appropriate
+    • Tighten verbose phrases
+
+  Multi-File Splitting (when >8000 chars):
+    agent/
+    ├── 01_agent-name.md           (main prompt, <8000 chars)
+    ├── 02_supplemental.md         (additional guidance)
+    ├── 03_data.json               (structured data, NO limit)
+    └── agent-name.yaml            (configuration)
+
+    CRITICAL: Only .md instruction files have 8000 char limit
+              Supporting files (.json, .txt) have NO limits
+
+CONTENT ORGANIZATION:
+
+  Bullet Points vs Prose:
+    USE BULLETS FOR:
+      • Lists of rules/constraints
+      • Multiple independent directives
+      • Checklists and validation criteria
+      • Command definitions
+      • Workflow steps
+
+    USE PROSE FOR:
+      • Conceptual explanations requiring logical flow
+      • Complex reasoning where sentences build
+      • Narrative context or background
+
+    WHY BULLETS BETTER:
+      • Better parseability for LLMs
+      • Easier to audit and modify
+      • Clearer precedence and grouping
+      • More maintainable across versions
+
+FILE FORMAT SELECTION:
+
+  .md (Markdown):
+    • Reasoning, tone, workflows
+    • Conceptual explanations
+    • Complex multi-step instructions
+    • Subject to 8000 char limit for Custom GPT
+
+  .json (JSON):
+    • Compact lookups and mappings
+    • Mode definitions
+    • Structured data
+    • NO character limits
+
+  .txt (Plain Text):
+    • Raw label lists
+    • Keywords and triggers
+    • Simple enumerations
+    • NO character limits
+
+  .yaml (YAML):
+    • Role definitions
+    • Configuration parameters
+    • Command structures
+    • NO character limits
+
+KNOWLEDGE FILES:
+
+  Use for supplementary context:
+    • Extensive examples and exemplars
+    • Reference documentation
+    • Large datasets and mappings
+    • Domain-specific terminology
+
+  Integration:
+    • Reference from main instruction file
+    • Custom GPT loads automatically during conversation
+    • No character limit on knowledge files
+
+THREE-FILE DELIVERABLE PATTERN:
+
+  When creating new Custom GPT or AI Agent, produce THREE files:
+
+  1. 01_agent-name.md - Main prompt file (<8000 chars)
+  2. agent-name.yaml - Configuration with role parameters, commands, constraints
+  3. 02_sources-agent-name.json - Comprehensive web resources for domain
+
+  JSON Sources Structure:
+    {
+      "metadata": {
+        "title": "Agent Name - Sources",
+        "description": "Brief description of curated resources",
+        "last_updated": "YYYY-MM-DD"
+      },
+      "category_name": [
+        {
+          "name": "Resource Name",
+          "url": "https://example.com/docs",
+          "description": "What this resource covers",
+          "add_as_web_search": true|false
+        }
+      ]
+    }
+
+  Sources Selection Criteria:
+    • Official documentation for core technologies
+    • Industry standards and best practices
+    • Community resources and learning materials
+    • Research papers and benchmarks (for technical agents)
+    • Flag add_as_web_search: true for frequently updated sources
+
+═══════════════════════════════════════════════════════════════════════════════
+8. ADVANCED PATTERNS
+═══════════════════════════════════════════════════════════════════════════════
+
+MULTI-REPO WORKFLOWS:
+
+  Challenge: Large projects span multiple repositories
+
+  Solution: Root-level CLAUDE.md that points to repo-specific docs
+
+    project/
+    ├── CLAUDE.md                           # Universal rules + pointers
+    ├── frontend/
+    │   ├── claude.md                       # Frontend-specific
+    │   ├── PROJECT_KNOWLEDGE.md            # Architecture details
+    │   └── TROUBLESHOOTING.md
+    ├── backend-auth/
+    │   ├── claude.md                       # Auth service specifics
+    │   └── API_DOCUMENTATION.md
+    └── backend-email/
+        ├── claude.md
+        └── SERVICE_OVERVIEW.md
+
+AUTO-GENERATED DOCUMENTATION:
+
+  Keep docs in sync with code using generation scripts:
+
+  API Documentation:
+    npm run generate-api-docs
+
+  Component Documentation:
+    npm run generate-component-docs
+
+  Database Schema Documentation:
+    npx prisma-docs-generator
+
+  Reference in CLAUDE.md:
+    See auto-generated API documentation:
+    /docs/api/generated/api-reference.md
+    Updated on every build. Do not edit manually.
+
+SCHEMA VALIDATION BEFORE MIGRATIONS:
+
+  Prevent expensive mistakes: Validate database changes before migration
+
+  Script Pattern:
+    #!/bin/bash
+    npx prisma migrate diff \
+      --from-schema-datasource prisma/schema.prisma \
+      --to-schema-datamodel \
+      --script > /tmp/migration-preview.sql
+    cat /tmp/migration-preview.sql
+    echo "Review this SQL before proceeding. Destructive changes?"
+
+  Workflow:
+    1. Make Prisma schema changes
+    2. Run schema diff script
+    3. Review SQL with Claude
+    4. Approve or revise
+    5. Run actual migration
+
+PROGRESSIVE COMPLEXITY MANAGEMENT:
+
+  Strategy: Don't overwhelm AI with full complexity upfront
+
+  Phase 1: Simple implementation
+    "Create basic user CRUD endpoints with in-memory storage"
+
+  Phase 2: Add persistence
+    "Replace in-memory storage with Prisma and PostgreSQL"
+
+  Phase 3: Add business logic
+    "Add user role validation and permissions"
+
+  Phase 4: Production features
+    "Add error handling, logging, rate limiting"
+
+  Benefit: Each phase validates assumptions before adding complexity
+
+SCRIPTS ATTACHED TO SKILLS:
+
+  Powerful pattern: Reference utility scripts within skill documentation
+
+  Instead of:
+    "You need to get token, sign with JWT, create cookie header, make request..."
+
+  Do this:
+    "Use the provided test-auth-route.js script:
+     node scripts/test-auth-route.js http://localhost:3002/api/endpoint
+     The script handles authentication flow automatically."
+
+  Benefit: Claude uses existing tools instead of regenerating each session
+
+  Script Dependency Metadata:
+    # dependencies: [axios, jsonwebtoken]
+    # usage: "node scripts/test-auth-route.js [url]"
+
+PROMPT ENGINEERING TECHNIQUES:
+
+  1. BE SPECIFIC
+     BAD: "Update the authentication system"
+     GOOD: "Add password reset: create /api/auth/reset-password endpoint, send
+           email via SendGrid, store reset token in Redis with 1-hour expiration"
+
+  2. PROVIDE CONTEXT
+     "Ask not what Claude can do for you, ask what context you can give to Claude"
+
+  3. DON'T LEAD IF YOU WANT HONEST FEEDBACK
+     BAD: "Is this implementation good or bad?"
+     GOOD: "Review this implementation and suggest improvements"
+
+  4. USE XML TAGS FOR STRUCTURE
+     <context>
+     [Background information, existing code, constraints]
+     </context>
+
+     <instructions>
+     [What you want Claude to do]
+     </instructions>
+
+     <requirements>
+     - Must maintain backward compatibility
+     - Must include error handling
+     - Must follow repository pattern
+     </requirements>
+
+  5. REFERENCE FILES EXPLICITLY
+     Use @ symbol to reference specific files
+     Better: Claude loads exact context instead of searching
+
+RE-PROMPTING STRATEGY:
+
+  Use double-ESC to access prompt history and branch from previous prompts
+
+  Powerful technique: Re-prompt with knowledge of what you DON'T want
+
+  Example:
+    First attempt: "Create a user dashboard component"
+    [Claude creates something too complex]
+
+    Second attempt: "Create a user dashboard component. Keep it simple - just
+    username, email, and avatar. No charts or complex widgets. Use MUI Card."
+
+  Armed with knowledge from first attempt, second prompt yields better results
+
+STOCHASTIC NATURE PROBLEM:
+
+  AI models are stochastic (probabilistic outputs from same input)
+
+  Implication: Sometimes poor quality through no fault of your own
+
+  Solution:
+    • Re-prompt if output is suboptimal
+    • Try different wording (Claude takes things literally)
+    • Provide examples of desired output
+    • Use temperature control if available (lower = more consistent)
+
+TOOLING AND UTILITIES:
+
+  Voice Input (SuperWhisper for Mac):
+    Best for: High-level planning, explaining context, brainstorming
+    Not ideal for: Precise specs, code snippets, file paths
+
+  Memory MCP:
+    Still useful for:
+      • "Why did we choose technology X over Y?"
+      • Historical decision context
+      • Team knowledge sharing
+    Not for: Code patterns (use skills), API docs (use docs)
+
+  BetterTouchTool (Mac Automation):
+    Killer features:
+      • Relative URL copy from Cursor (double-tap CAPS-LOCK)
+      • Double-tap app switching (CMD+CMD, OPT+OPT, CTRL+CTRL)
+      • Custom gestures for common actions
+    Time savings: Seconds per action × hundreds per day = hours saved
+
+  Browser Tools Configuration:
+    Enable browser automation in Claude Code settings:
+      • Click through workflows
+      • Screenshot capture and analysis
+      • E2E testing validation
+      • Visual regression detection
+
+═══════════════════════════════════════════════════════════════════════════════
+9. COMMON PITFALLS & SOLUTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+PITFALL #1: Vibe-Coding Without Planning
+  SYMPTOM: AI keeps building the wrong thing
+  ROOT CAUSE: No clear plan or validation
+  SOLUTION:
+    • Always use planning mode for non-trivial features
+    • Review plans before implementation
+    • Break into phases with checkpoints
+
+PITFALL #2: Context Loss After Compaction
+  SYMPTOM: AI forgets what we were doing after compaction
+  ROOT CAUSE: No systematic context preservation
+  SOLUTION:
+    • Implement dev docs workflow (plan/context/tasks)
+    • Update context.md before compaction
+    • Document next steps explicitly
+
+PITFALL #3: Skills Sitting Unused
+  SYMPTOM: Skills never activate despite matching task
+  ROOT CAUSE: Relying on automatic activation
+  SOLUTION:
+    • Implement UserPromptSubmit hook for skill reminders
+    • Use explicit keywords from skill descriptions
+    • Create skill-rules.json configuration
+
+PITFALL #4: Error Accumulation
+  SYMPTOM: Discover 20+ errors hours later
+  ROOT CAUSE: No automatic build validation
+  SOLUTION:
+    • Implement Stop hook with build checker
+    • Run builds on affected repos immediately
+    • Show errors to AI before continuing
+
+PITFALL #5: Inconsistent Code Patterns
+  SYMPTOM: AI uses old patterns despite documentation
+  ROOT CAUSE: Documentation not loaded consistently
+  SOLUTION:
+    • Move patterns to skills with auto-activation
+    • Use hooks to enforce guidelines
+    • Create guardrail skills that block incorrect patterns
+
+PITFALL #6: Leading Questions Bias
+  SYMPTOM: AI always agrees with you
+  ROOT CAUSE: Leading questions ("Is this good?")
+  SOLUTION:
+    • Ask neutral questions ("Review this approach")
+    • Request alternatives ("What are other ways?")
+    • Explicitly request criticism ("What could go wrong?")
+
+PITFALL #7: Over-Reliance on AI
+  SYMPTOM: Wasting 30+ minutes on trivial issues
+  ROOT CAUSE: Stubborn insistence AI should do everything
+  SOLUTION:
+    • Step in manually for quick fixes
+    • Use human intuition for logic puzzles
+    • Recognize when AI is struggling and help
+
+PITFALL #8: Character Limit Violations
+  SYMPTOM: Custom GPT instructions rejected or truncated
+  ROOT CAUSE: Exceeding 8000 character limit
+  SOLUTION:
+    • Run wc -c before finalizing
+    • Target 7500-7900 chars (safety margin)
+    • Split into multiple files if needed
+    • Move data to .json/.txt files (no limits)
+
+═══════════════════════════════════════════════════════════════════════════════
+10. TEMPLATES & CHECKLISTS
+═══════════════════════════════════════════════════════════════════════════════
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3-STEP PLAN SKELETON
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# DESIGN
+Goal: [What we're building and why]
+Constraints: [Technical, business, time limitations]
+Public API: [Function signatures, CLI commands, or routes]
+Data & Dependencies: [Databases, external services, libraries]
+
+# FILES
+- path/to/file1.ext: [Purpose and key functions]
+- path/to/file2.ext: [Purpose and key functions]
+
+# TESTS
+- Case 1: [input] -> [expected output]
+- Case 2: [edge case] -> [expected behavior]
+- Case 3: [error case] -> [error handling]
+
+Blocking Questions: [List anything unclear before proceeding]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REVIEWER CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CODE QUALITY:
+  □ Public API documented and stable
+  □ Functions are small and focused
+  □ Code follows repository patterns
+  □ No magic numbers or hardcoded values
+  □ Clear variable and function names
+
+ERROR HANDLING:
+  □ All errors captured (Sentry, logging)
+  □ No silent failures
+  □ Async operations wrapped in try-catch
+  □ Meaningful error messages provided
+
+SECURITY:
+  □ No secrets or keys in code
+  □ Environment variables used (.env)
+  □ Input validation present
+  □ Injection vulnerabilities checked
+  □ PII handled properly
+
+TESTING:
+  □ Unit tests written for business logic
+  □ Integration tests for component interactions
+  □ Edge cases covered
+  □ Error paths tested
+
+PERFORMANCE:
+  □ No obvious performance bottlenecks
+  □ Database queries optimized
+  □ Appropriate caching strategies
+  □ Concurrency and timeouts handled
+
+DEPENDENCIES:
+  □ License compliance verified
+  □ Versions pinned appropriately
+  □ No unnecessary dependencies
+  □ Security vulnerabilities checked
+
+DOCUMENTATION:
+  □ README updated if needed
+  □ API documentation current
+  □ Complex logic commented
+  □ Migration guides provided for breaking changes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+QA BLOCK (Test Execution Template)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Setup
+[Commands to prepare environment]
+npm install
+npm run build
+docker-compose up -d
+
+# Tests (Happy Path)
+[Expected successful scenarios]
+npm test -- --grep "user authentication"
+curl http://localhost:3000/api/health && expect "OK"
+
+# Edge Cases
+[Boundary conditions and unusual inputs]
+curl -X POST http://localhost:3000/api/users -d '{}' && expect "400"
+npm test -- --grep "handles missing parameters"
+
+# Error Scenarios
+[Expected failure modes]
+curl http://localhost:3000/api/protected && expect "401"
+npm test -- --grep "authentication failures"
+
+# Performance Smoke
+[Basic performance validation]
+time npm run build && assert < 30sec
+ab -n 1000 -c 10 http://localhost:3000/api/health
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MINI-CONTRACT FOR COLLABORATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ROLES & HANDOFFS:
+
+Spec Writer:
+  Delivers: 1-page spec (problem, API, data, constraints)
+  Handoff: Approved spec document
+
+Developer:
+  Receives: Approved spec
+  Delivers: Patch plan + implementation
+  Handoff: Code with diffs and test results
+
+Reviewer:
+  Receives: Implemented code
+  Delivers: Comments + policy/security flags (PII, secrets, licenses)
+  Handoff: Approval or revision requests
+
+QA:
+  Receives: Reviewed code
+  Delivers: Test commands and expected outputs (happy path + edges)
+  Handoff: Test results and quality sign-off
+
+RULE: Only artifacts move forward. Each role has clear deliverables.
+
+WORKFLOW:
+  1. You drop a ticket: goal, constraints, deadline, repo path
+  2. I reply with 3-step plan → wait for your OK
+  3. I implement, self-check, return diffs + test results + risks
+  4. You approve or request deltas; we loop
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PROMPTING QUALITY CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BEFORE SUBMITTING PROMPT:
+  □ Specific goal stated clearly
+  □ Relevant files referenced (@file syntax)
+  □ Constraints mentioned (performance, compatibility, patterns)
+  □ Success criteria defined
+  □ Example or desired outcome shown
+  □ Not a leading question (allows for honest feedback)
+
+SIGNS OF POOR PROMPTING:
+  ✗ Vague goals ("make it better")
+  ✗ Missing context (files, constraints, criteria)
+  ✗ End-of-day laziness (rushed, incomplete)
+  ✗ Leading questions ("Is this good?")
+  ✗ No validation criteria
+
+GOOD PROMPT EXAMPLE:
+  "Add password reset functionality to the authentication system:
+   - Create /api/auth/reset-password endpoint
+   - Send email via SendGrid
+   - Store reset token in Redis with 1-hour expiration
+   - Update frontend PasswordReset component
+   - Follow existing error handling patterns
+   - Include unit tests for token validation
+   Success: User receives email and can reset password"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHARACTER COUNT OPTIMIZATION (Custom GPT)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REMOVE:
+  ✗ --- horizontal dividers
+  ✗ Emojis and Unicode symbols (✅ 🟡 ❌ 📋 ⚙️ 💡)
+  ✗ Decorative bullet styles (→ ⟶ •)
+  ✗ Verbose phrases
+  ✗ Redundant examples
+
+KEEP:
+  ✓ Plain ASCII bullet points (-)
+  ✓ Clear section headings
+  ✓ Concise directives
+  ✓ Essential examples only
+  ✓ Inline defaults and checklists
+
+VALIDATION COMMANDS:
+  wc -c file.md                    # Character count
+  rg "{{[^}]+}}" file.md           # Find unresolved variables
+  rg "^---$" -g "*.md"             # Find horizontal rules
+  rg "[^\x00-\x7F]" file.md        # Find non-ASCII characters
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PRE-SUBMISSION CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  □ All instructions re-read and satisfied
+  □ Tests pass (or test plan documented)
+  □ Builds complete without errors
+  □ Character limits respected (Custom GPT: 8000 chars)
+  □ Template variables resolved (no {{placeholders}})
+  □ YAML and Markdown commands aligned
+  □ File references use path:line format
+  □ No hallucinated URLs or placeholders
+  □ Security checks: No secrets, PII handled properly
+  □ Documentation updated if architectural changes made
+  □ Diff hygiene: No accidental whitespace changes
+  □ Commit messages follow repository style
+  □ Summary references file paths with line numbers
+  □ Next steps suggested when relevant
+  □ Outstanding risks documented clearly
+
+═══════════════════════════════════════════════════════════════════════════════
+FINAL NOTES
+═══════════════════════════════════════════════════════════════════════════════
+
+PHILOSOPHY:
+  • AI is a tool: Effectiveness depends on how you use it
+  • Invest in workflow: Setup takes days but pays for itself
+  • Systematic beats random: Consistent processes → consistent results
+  • Plan, review, iterate: Three practices that separate success from frustration
+
+METRICS AND EXPECTATIONS:
+  Real-world verified: 300k LOC rewrite in 6 months (solo)
+  Required: Systematic workflow, extra hours, constant refinement
+  Not: Pure vibe-coding without planning
+
+CONTEXT BUDGETING:
+  • Claude Code: 200k tokens, use dev docs workflow
+  • Codex CLI: Load only necessary files, summarize context
+  • Custom GPT: Stateless sessions, use knowledge files
+
+RE-PROMPTING STRATEGY:
+  • Use double-ESC to access prompt history and branch
+  • Re-prompt with knowledge of what you DON'T want
+  • Example: "Keep it simple - no charts or complex widgets"
+  • Sometimes poor quality is stochastic variance, not your fault
+
+SHARE AND LEARN:
+  AI-assisted development is evolving rapidly. Take what's useful, adapt to
+  your context, and build something great.
+
+═══════════════════════════════════════════════════════════════════════════════
+REFERENCES
+═══════════════════════════════════════════════════════════════════════════════
+
+ANTHROPIC OFFICIAL DOCS:
+  • Claude Code Skills: https://docs.claude.com/en/docs/claude-code/skills
+  • Claude Code Hooks: https://docs.claude.com/en/docs/claude-code/hooks
+  • Hooks Get Started: https://docs.claude.com/en/docs/claude-code/hooks-get-started
+  • Best Practices for Agentic Coding: https://docs.claude.com/en/docs/claude-code/best-practices
+  • Building Agents with Claude Agent SDK: https://docs.anthropic.com/en/docs/agents/agent-sdk
+  • Prompt Engineering: https://docs.claude.com/en/docs/build-with-claude/prompt-engineering
+
+GITHUB EXAMPLES:
+  • Anthropic Skill Examples: https://github.com/anthropics/claude-code-skills
+
+OPENAI DOCS - CODEX 2025:
+  • Codex Homepage: https://openai.com/codex/
+  • Codex CLI Official Repository: https://github.com/openai/codex
+  • Codex CLI Documentation: https://developers.openai.com/codex/cli
+  • Codex Changelog: https://developers.openai.com/codex/changelog/
+  • Codex CLI Getting Started: https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started
+  • Codex Internet Access Controls: https://developers.openai.com/codex/cli#internet-access
+
+OPENAI DOCS - GENERAL:
+  • Prompt Engineering Guide: https://platform.openai.com/docs/guides/prompt-engineering
+  • API Reference: https://platform.openai.com/docs/api-reference
+  • Handling Rate Limits: https://cookbook.openai.com/examples/handling_rate_limits
+  • Function Calling Guide: https://platform.openai.com/docs/guides/function-calling
+  • Streaming Responses: https://platform.openai.com/docs/guides/streaming
+  • Managing Rate Limits: https://help.openai.com/en/articles/6891839
+
+COMMUNITY:
+  • Reddit r/ClaudeAI
+  • Original Claude Code post: https://www.reddit.com/r/ClaudeAI/comments/1oivjvm/claude_code_is_a_beast_tips_from_6_months_of/
+  • GitHub showcase repo: https://github.com/diet103/claude-code-infrastructure-showcase
+  • GitHub Copilot Blog: https://github.blog/copilot
+  • TechCrunch Codex Launch: https://techcrunch.com/2025/05/16/openai-launches-codex-an-ai-coding-agent-in-chatgpt/
+
+REPOSITORY ORGANIZATION PATTERN:
+
+  Universal Three-Layer Architecture (for multi-AI repositories):
+
+    Layer 1: AI-SPECIFIC INSTRUCTIONS (Root .md files)
+      README.md    - Universal overview
+      CLAUDE.md    - Claude Code instructions
+      GEMINI.md    - Gemini instructions
+      CODEX.md     - Codex CLI instructions
+      AGENTS.md    - Repository standards
+
+    Layer 2: TOOL-SPECIFIC WORKSPACES (Operational)
+      .claude/     - Claude Code workspace (hooks, skills, commands)
+      .cursor/     - Cursor AI workspace
+      .codex/      - Codex CLI workspace
+
+    Layer 3: SHARED DOCUMENTATION (Portable)
+      docs/
+      ├── agents/      - AI agent development guides
+      ├── formatting/  - Formatting standards
+      ├── reference/   - Catalogs and quick-reference
+      └── testing/     - QA checklists
+
+  This pattern allows one repository to support multiple AI coding assistants
+  while maintaining clear separation and portability of documentation.
+
+═══════════════════════════════════════════════════════════════════════════════
+END OF GUIDE
+═══════════════════════════════════════════════════════════════════════════════
