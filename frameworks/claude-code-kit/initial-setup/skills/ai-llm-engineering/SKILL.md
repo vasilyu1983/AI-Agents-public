@@ -35,6 +35,7 @@ This skill provides quick reference, decision frameworks, and navigation to deta
 
 ## Decision Tree: LLM System Architecture
 
+```text
 Building LLM application: [Architecture Selection]
     ├─ Need current knowledge?
     │   ├─ Simple Q&A? → Basic RAG (page-level chunking + hybrid retrieval)
@@ -50,6 +51,7 @@ Building LLM application: [Architecture Selection]
     │
     └─ Best results?
         └─ Hybrid (RAG + Fine-tuning + Agents) → Comprehensive solution
+```
 
 **See [Decision Matrices](resources/decision-matrices.md) for detailed selection criteria.**
 

@@ -44,7 +44,7 @@ Claude should invoke this skill when a user requests:
 
 ## Decision Tree: Platform Selection
 
-```
+```text
 Need to build mobile app for: [Target Audience]
     ├─ iOS only?
     │   └─ Use Swift + SwiftUI (templates/swift/)

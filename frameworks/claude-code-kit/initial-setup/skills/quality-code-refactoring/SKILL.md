@@ -28,6 +28,7 @@ This skill provides execution-ready patterns for improving code quality, refacto
 
 ## Decision Tree: Refactoring Strategy
 
+```text
 Code issue: [Refactoring Scenario]
     ├─ Code Smells Detected?
     │   ├─ Duplicated code? → Extract method/function
@@ -53,6 +54,7 @@ Code issue: [Refactoring Scenario]
         ├─ .NET codebase? → ReSharper AI
         ├─ Java/Kotlin? → IntelliJ IDEA AI Assistant
         └─ General purpose? → GitHub Copilot, Cursor AI
+```
 
 ---
 
@@ -82,6 +84,7 @@ See [resources/operational-patterns.md](resources/operational-patterns.md) for d
 # Templates
 
 See [templates/](templates/) for copy-paste ready examples organized by domain:
+```
 
 ## Refactoring Process
 

@@ -57,6 +57,7 @@ Claude should activate this skill whenever the user asks for:
 
 ## Decision Tree: Choosing Agent Architecture
 
+```text
 What does the agent need to do?
     ├─ Answer questions from knowledge base?
     │   ├─ Simple lookup? → RAG Agent (LangChain/LlamaIndex + vector DB)
@@ -79,6 +80,7 @@ What does the agent need to do?
             - Tool-using for actions (MCP)
             - RAG for knowledge (MCP)
             - Multi-agent for delegation (A2A)
+```
 
 **Protocol Selection**:
 

@@ -47,6 +47,7 @@ Claude (or other agents) should invoke this skill when a user asks about:
 
 ## Decision Tree: Choosing Development Workflow
 
+```text
 User needs: [Development Task Type]
     ├─ AI-Assisted Coding?
     │   ├─ Non-trivial feature (>3 files)? → Use planning checklist + agentic session template
@@ -71,6 +72,7 @@ User needs: [Development Task Type]
         ├─ Implementation → Structured prompts + self-review QA
         ├─ Validation → Testing + acceptance criteria
         └─ Handoff → Update docs + summarize changes
+```
 
 ---
 

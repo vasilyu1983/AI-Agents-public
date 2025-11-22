@@ -33,6 +33,7 @@ Invoke when working on:
 
 ## Decision Tree: Choosing Architecture Pattern
 
+```text
 Project needs: [New System or Major Refactor]
     ├─ Single team, evolving domain?
     │   ├─ Start simple → Modular Monolith (clear module boundaries)
@@ -53,6 +54,7 @@ Project needs: [New System or Major Refactor]
     └─ High consistency requirements?
         ├─ Strong ACID guarantees → Monolith or Modular Monolith
         └─ Distributed data → CQRS + Event Sourcing
+```
 
 **Decision Factors:**
 

@@ -47,6 +47,7 @@ Claude should invoke this skill when a user requests:
 
 ## Decision Tree: Frontend Framework Selection
 
+```text
 Project needs: [Framework Choice]
     ├─ React ecosystem?
     │   ├─ Full-stack + SEO → Next.js 15 (App Router, Server Components, Turbopack)
@@ -83,6 +84,7 @@ Project needs: [Framework Choice]
         ├─ Unit/Component → Vitest + Testing Library (fast, modern)
         ├─ E2E → Playwright (cross-browser, reliable)
         └─ Visual regression → Chromatic or Percy
+```
 
 **Framework Selection Factors:**
 

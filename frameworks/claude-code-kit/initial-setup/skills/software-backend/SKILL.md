@@ -44,6 +44,7 @@ Claude should invoke this skill when a user requests:
 
 ## Decision Tree: Backend Technology Selection
 
+```text
 Backend project needs: [API Type]
     ├─ REST API?
     │   ├─ Simple CRUD → Express + Prisma
@@ -72,6 +73,7 @@ Backend project needs: [API Type]
     └─ Background Jobs?
         ├─ Complex workflows → BullMQ (Redis-backed, retries)
         └─ Simple scheduling → node-cron or Agenda
+```
 
 **Language Alternatives:**
 

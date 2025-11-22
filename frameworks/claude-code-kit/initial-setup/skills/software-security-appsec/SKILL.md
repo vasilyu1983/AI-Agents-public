@@ -40,7 +40,7 @@ Activate this skill when:
 
 ## Decision Tree: Security Implementation
 
-```
+```text
 Security requirement: [Feature Type]
     ├─ User Authentication?
     │   ├─ Session-based? → Cookie sessions + CSRF tokens

@@ -54,6 +54,7 @@ All content is **operational**, not theoretical. Focus on patterns, checklists, 
 
 ## Decision Tree: Choosing the Right Pattern
 
+```text
 User needs: [Prompt Type]
     ├─ Output must be machine-readable?
     │   ├─ Extract specific fields only? → **Deterministic Extractor Pattern**
@@ -73,6 +74,7 @@ User needs: [Prompt Type]
     │
     └─ Classify or route to categories?
         └─ Mutually exclusive rules? → **Decision Tree Pattern**
+```
 
 ---
 

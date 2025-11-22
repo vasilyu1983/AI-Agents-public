@@ -53,6 +53,7 @@ Invoke this skill when the user asks to:
 
 ## Decision Tree: Selecting Review Mode
 
+```text
 Code review task: [What to Focus On?]
     ├─ Security-critical changes?
     │   ├─ Auth/access control → Security Review (OWASP, auth patterns)
@@ -85,6 +86,7 @@ Code review task: [What to Focus On?]
         ├─ Mobile → [mobile-review.md](templates/mobile/mobile-review.md)
         ├─ Infrastructure → [infrastructure-review.md](templates/infrastructure/infrastructure-review.md)
         └─ Blockchain → [crypto-review.md](templates/blockchain/crypto-review.md)
+```
 
 **Multi-Mode Reviews:**
 

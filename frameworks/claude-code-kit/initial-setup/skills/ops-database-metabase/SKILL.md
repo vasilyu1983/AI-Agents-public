@@ -38,6 +38,7 @@ Use this skill to stand up and operate Metabase: connect data sources, model dat
 
 ## Decision Tree: Dashboard/Question is Slow
 
+```text
 Dashboard/question slow?
     ├─ Native SQL? → Run `EXPLAIN ANALYZE`; add index or simplify query
     ├─ GUI question? → Check joined tables count; reduce columns; add filters
@@ -45,6 +46,7 @@ Dashboard/question slow?
     ├─ Sync/metadata stale? → Run manual sync + analyze; rebuild Field Values
     ├─ Source DB overloaded? → Check DB metrics; add read replica or limit concurrency
     └─ Network/region mismatch? → Align Metabase region with database region
+```
 
 ---
 

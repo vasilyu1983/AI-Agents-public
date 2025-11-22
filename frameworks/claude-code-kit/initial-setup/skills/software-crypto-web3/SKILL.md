@@ -52,6 +52,7 @@ Claude should invoke this skill when a user requests:
 
 ## Decision Tree: Blockchain Platform Selection
 
+```text
 Project needs: [Use Case]
     ├─ EVM-compatible smart contracts?
     │   ├─ Complex testing needs → Foundry (Solidity tests, fuzzing, gas snapshots)
@@ -87,6 +88,7 @@ Project needs: [Use Case]
         ├─ .NET/C# → Multi-provider architecture (see Backend Integration Patterns)
         ├─ Node.js → Ethers.js/Web3.js + Prisma
         └─ Python → Web3.py + FastAPI
+```
 
 **Chain-Specific Considerations:**
 

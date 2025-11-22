@@ -70,6 +70,7 @@ Use this skill when the user asks for:
 
 ## Decision Trees (Quick Use)
 
+```text
 ### Paid Social Troubleshooting
 CTR low (<0.8%) → Refresh hook/creative  
 CTR ok, CVR low (<1.5%) → Fix landing page/offer clarity  
@@ -97,6 +98,7 @@ Indexed but not ranking → Improve internal links, on-page intent match, freshn
 Traffic, low conversions → Align CTA to intent; tighten offer on page  
 
 For detailed trees (TikTok scaling, offer creation, outreach triage), see `resources/operational-patterns.md`, `resources/lead-systems-and-pipelines.md`, `resources/virality-word-of-mouth.md`, and `resources/product-led-seo-strategy.md`.
+```
 
 ---
 
