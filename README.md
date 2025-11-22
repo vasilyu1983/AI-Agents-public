@@ -191,8 +191,8 @@ Copy the entire `.claude/skills/` directory to your Claude Code workspace:
 
 ```bash
 # Clone the repository
-git clone https://github.com/vasilyu1983/ai-agents-library
-cd ai-agents-library
+git clone https://github.com/vasilyu1983/AI-Agents-public
+cd AI-Agents-public
 
 # Copy skills to Claude Code
 cp -r frameworks/claude-code-kit/initial-setup/skills ~/.config/claude-code/skills/
@@ -235,7 +235,7 @@ Gemini-optimized router system with platform-specific adaptations.
 
 ```bash
 # Clone repository
-git clone https://github.com/vasilyu1983/ai-agents-library
+git clone https://github.com/vasilyu1983/AI-Agents-public
 
 # Install all skills
 cp -r frameworks/claude-code-kit/initial-setup/skills ~/.config/claude-code/skills/
@@ -388,8 +388,8 @@ All prompts and configurations are provided as-is for educational and commercial
 
 ### Community
 
-- **Issues**: Report bugs or request features via [GitHub Issues](https://github.com/vasilyu1983/ai-agents-library/issues)
-- **Discussions**: Join conversations in [GitHub Discussions](https://github.com/vasilyu1983/ai-agents-library/discussions)
+- **Issues**: Report bugs or request features via [GitHub Issues](https://github.com/vasilyu1983/AI-Agents-public/issues)
+- **Discussions**: Join conversations in [GitHub Discussions](https://github.com/vasilyu1983/AI-Agents-public/discussions)
 - **Twitter**: Follow for updates [@vasilyu](https://twitter.com/vasilyu)
 
 ---
