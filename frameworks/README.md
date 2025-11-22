@@ -42,8 +42,8 @@ graph TB
 
 ```bash
 # Clone repository
-git clone https://github.com/vasilyu1983/ai-agents-library
-cd ai-agents-library
+git clone https://github.com/vasilyu1983/AI-Agents-public
+cd AI-Agents-public
 
 # Copy skills to Claude Code workspace
 cp -r frameworks/claude-code-kit/initial-setup/skills ~/.config/claude-code/skills/
@@ -468,8 +468,8 @@ tail -f ~/.config/claude-code/logs/skills.log
 
 ### Community
 
-- **Issues**: [GitHub Issues](https://github.com/vasilyu1983/ai-agents-library/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/vasilyu1983/ai-agents-library/discussions)
+- **Issues**: [GitHub Issues](https://github.com/vasilyu1983/AI-Agents-public/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/vasilyu1983/AI-Agents-public/discussions)
 
 ---
 

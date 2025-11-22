@@ -19,14 +19,14 @@ This project follows a professional code of conduct. Please be respectful, const
 
 ### Reporting Bugs
 
-- Use the [GitHub Issues](https://github.com/vasilyu1983/ai-agents-library/issues) tracker
+- Use the [GitHub Issues](https://github.com/vasilyu1983/AI-Agents-public/issues) tracker
 - Check if the issue already exists before creating a new one
 - Provide clear reproduction steps
 - Include relevant agent name, platform (ChatGPT/Claude/etc.), and error messages
 
 ### Suggesting Enhancements
 
-- Use [GitHub Discussions](https://github.com/vasilyu1983/ai-agents-library/discussions) for feature ideas
+- Use [GitHub Discussions](https://github.com/vasilyu1983/AI-Agents-public/discussions) for feature ideas
 - Explain the use case and value proposition
 - Consider if the enhancement aligns with the repository's focus
 
@@ -180,8 +180,8 @@ Choose the appropriate category:
 ### 1. Fork the Repository
 
 ```bash
-git clone https://github.com/vasilyu1983/ai-agents-library
-cd ai-agents-library
+git clone https://github.com/vasilyu1983/AI-Agents-public
+cd AI-Agents-public
 git checkout -b feature/your-agent-name
 ```
 
@@ -305,8 +305,8 @@ Recommended tools for development:
 
 ## Questions?
 
-- **General questions**: [GitHub Discussions](https://github.com/vasilyu1983/ai-agents-library/discussions)
-- **Bug reports**: [GitHub Issues](https://github.com/vasilyu1983/ai-agents-library/issues)
+- **General questions**: [GitHub Discussions](https://github.com/vasilyu1983/AI-Agents-public/discussions)
+- **Bug reports**: [GitHub Issues](https://github.com/vasilyu1983/AI-Agents-public/issues)
 - **Twitter**: [@vasilyu](https://twitter.com/vasilyu)
 
 ## Recognition
