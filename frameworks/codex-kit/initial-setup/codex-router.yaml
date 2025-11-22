@@ -1,0 +1,451 @@
+version: "1.2"
+last_updated: "2025-11-22"
+description: "Codex router for Claude Code Kit skills and agents"
+
+source_dirs:
+  - ".claude/skills/"
+  - ".claude/agents/"
+  - ".claude/commands/"
+
+deployment:
+  copy_from: "frameworks/codex-kit/"
+  copy_to: ".codex/"
+  files:
+    - "codex-router.md"
+    - "codex-mega-prompt.txt"
+    - "codex-router.yaml"
+    - "router-tests.md"
+
+compatibility:
+  codex_version: ">=1.0"
+  claude_code_kit_version: ">=1.0"
+
+agents_count: 17
+skills_count: 36
+routing_rules_count: 28
+
+agents:
+  - id: ai-agents-builder
+    description: AI agent architecture, implementation, testing, optimization for production systems
+    preferred_skills:
+      - ai-agents-development
+      - ai-llm-rag-engineering
+      - ai-prompt-engineering
+    domain: ai-systems
+
+  - id: backend-engineer
+    description: Production backend APIs, database design, auth, security, testing, deployment
+    preferred_skills:
+      - software-backend
+      - ai-llm-search-retrieval
+      - ops-database-sql
+    domain: backend
+
+  - id: code-reviewer
+    description: Code quality, security, readability, performance, and maintainability review
+    preferred_skills:
+      - software-code-review
+    domain: quality
+
+  - id: crypto-engineer
+    description: Blockchain and Web3 development with smart contracts, DeFi, NFTs, and security audits
+    preferred_skills:
+      - software-crypto-web3
+    domain: web3
+
+  - id: data-scientist
+    description: Exploratory analysis, feature engineering, modeling, deployment, monitoring
+    preferred_skills:
+      - ai-ml-data-science
+      - ai-ml-timeseries
+      - ai-ml-ops-production
+    domain: data-science
+
+  - id: devops-engineer
+    description: Infrastructure as code, CI/CD, Kubernetes, observability, deployment, incident response
+    preferred_skills:
+      - ops-devops-platform
+    domain: infrastructure
+
+  - id: frontend-engineer
+    description: Next.js/React/TypeScript frontend development, accessibility, performance
+    preferred_skills:
+      - software-frontend
+      - software-ui-ux-design
+    domain: frontend
+
+  - id: llm-engineer
+    description: LLM lifecycle management - data curation, fine-tuning, evaluation, optimization, deployment
+    preferred_skills:
+      - ai-llm-development
+      - ai-llm-engineering
+      - ai-llm-ops-inference
+      - ai-llm-rag-engineering
+      - ai-llm-search-retrieval
+      - ai-ml-ops-security
+    domain: llm
+
+  - id: mobile-engineer
+    description: iOS/Android/React Native app development, architecture, testing, deployment
+    preferred_skills:
+      - software-mobile
+    domain: mobile
+
+  - id: prd-architect
+    description: PRD creation, validation, technical specification for software projects
+    preferred_skills:
+      - product-prd-development
+      - foundation-documentation
+    domain: product
+
+  - id: product-manager
+    description: Product strategy, roadmaps, user research, and metrics analysis
+    preferred_skills:
+      - product-management
+      - foundation-documentation
+    domain: product
+
+  - id: prompt-engineer
+    description: Operational prompt engineering for LLMs - design, optimize, validate
+    preferred_skills:
+      - ai-prompt-engineering
+      - ai-llm-development
+    domain: prompting
+
+  - id: security-specialist
+    description: Application security specialist covering OWASP Top 10 2025, zero trust, supply chain security, and secure design
+    preferred_skills:
+      - software-security-appsec
+      - ai-ml-ops-security
+    domain: security
+
+  - id: smm-strategist
+    description: Social media marketing strategy, content creation, and campaign execution
+    preferred_skills:
+      - marketing-social-media
+    domain: marketing
+
+  - id: sql-engineer
+    description: SQL optimization, query tuning, database design, schema migrations, indexing
+    preferred_skills:
+      - ops-database-sql
+    domain: database
+
+  - id: system-architect
+    description: System design, architecture review, and technical strategy
+    preferred_skills:
+      - software-architecture-design
+      - quality-resilience-patterns
+      - quality-observability-performance
+    domain: architecture
+
+  - id: test-architect
+    description: Test strategy, planning, coverage analysis, and QA leadership
+    preferred_skills:
+      - software-testing-automation
+      - quality-code-refactoring
+      - quality-debugging-troubleshooting
+    domain: quality
+
+skills:
+  - id: ai-agents-development
+    triggers:
+      - "design agent"
+      - "build agent"
+      - "RAG pipeline"
+      - "tool integration"
+      - "multi-agent"
+
+  - id: ai-llm-development
+    triggers:
+      - "fine-tune"
+      - "LLM training"
+      - "instruction tuning"
+      - "dataset preparation"
+      - "LLM evaluation"
+
+  - id: ai-llm-engineering
+    triggers:
+      - "LLM architecture"
+      - "LLMOps"
+      - "RAG system"
+      - "agentic workflow"
+      - "production LLM"
+
+  - id: ai-llm-ops-inference
+    triggers:
+      - "quantization"
+      - "vLLM"
+      - "inference optimization"
+      - "serving"
+      - "TensorRT"
+
+  - id: ai-llm-rag-engineering
+    triggers:
+      - "RAG"
+      - "retrieval"
+      - "chunking"
+      - "reranking"
+      - "vector search"
+
+  - id: ai-llm-search-retrieval
+    triggers:
+      - "search"
+      - "BM25"
+      - "hybrid search"
+      - "ANN"
+      - "ranking"
+
+  - id: ai-ml-data-science
+    triggers:
+      - "data science"
+      - "feature engineering"
+      - "model training"
+      - "EDA"
+      - "SQLMesh"
+
+  - id: ai-ml-ops-production
+    triggers:
+      - "ML deployment"
+      - "model serving"
+      - "monitoring"
+      - "drift detection"
+      - "pipeline"
+
+  - id: ai-ml-ops-security
+    triggers:
+      - "prompt injection"
+      - "jailbreak"
+      - "ML security"
+      - "privacy"
+      - "PII"
+
+  - id: ai-ml-timeseries
+    triggers:
+      - "time series"
+      - "forecast"
+      - "ARIMA"
+      - "Prophet"
+      - "seasonal"
+
+  - id: ai-prompt-engineering
+    triggers:
+      - "prompt design"
+      - "prompt optimization"
+      - "structured output"
+      - "JSON mode"
+      - "extractor"
+
+  - id: codebase-documentation-audit
+    triggers:
+      - "documentation audit"
+      - "codebase documentation"
+      - "documentation coverage"
+      - "documentation gaps"
+      - "audit docs"
+
+  - id: foundation-api-design
+    triggers:
+      - "API design"
+      - "OpenAPI"
+      - "Swagger"
+      - "REST"
+      - "GraphQL"
+
+  - id: foundation-dependency-management
+    triggers:
+      - "dependency"
+      - "package.json"
+      - "requirements.txt"
+      - "lockfile"
+      - "versioning"
+
+  - id: foundation-documentation
+    triggers:
+      - "README"
+      - "documentation"
+      - "ADR"
+      - "changelog"
+      - "docs"
+
+  - id: foundation-git-workflow
+    triggers:
+      - "git workflow"
+      - "branching"
+      - "pull request"
+      - "merge"
+      - "commit message"
+
+  - id: marketing-social-media
+    triggers:
+      - "social media"
+      - "TikTok"
+      - "Instagram"
+      - "LinkedIn"
+      - "campaign"
+
+  - id: ops-database-sql
+    triggers:
+      - "SQL"
+      - "query optimization"
+      - "indexing"
+      - "EXPLAIN"
+      - "database design"
+
+  - id: ops-devops-platform
+    triggers:
+      - "Terraform"
+      - "Kubernetes"
+      - "CI/CD"
+      - "infrastructure"
+      - "deploy"
+
+  - id: product-management
+    triggers:
+      - "product strategy"
+      - "roadmap"
+      - "OKR"
+      - "user research"
+      - "metrics"
+
+  - id: product-prd-development
+    triggers:
+      - "PRD"
+      - "requirements"
+      - "technical spec"
+      - "user story"
+      - "acceptance criteria"
+
+  - id: quality-code-refactoring
+    triggers:
+      - "refactor"
+      - "code smell"
+      - "technical debt"
+      - "legacy code"
+      - "clean code"
+
+  - id: quality-debugging-troubleshooting
+    triggers:
+      - "debugging"
+      - "stack trace"
+      - "log analysis"
+      - "incident"
+      - "root cause"
+
+  - id: quality-observability-performance
+    triggers:
+      - "observability"
+      - "metrics"
+      - "tracing"
+      - "performance"
+      - "SLO"
+
+  - id: quality-resilience-patterns
+    triggers:
+      - "circuit breaker"
+      - "retry"
+      - "timeout"
+      - "graceful degradation"
+      - "resilience"
+
+  - id: software-architecture-design
+    triggers:
+      - "system design"
+      - "architecture"
+      - "microservices"
+      - "event-driven"
+      - "scalability"
+
+  - id: software-backend
+    triggers:
+      - "REST API"
+      - "GraphQL"
+      - "backend"
+      - "Prisma"
+      - "PostgreSQL"
+
+  - id: software-code-review
+    triggers:
+      - "code review"
+      - "pull request review"
+      - "lint"
+      - "static analysis"
+      - "style guide"
+
+  - id: software-crypto-web3
+    triggers:
+      - "smart contract"
+      - "Solidity"
+      - "Web3"
+      - "DeFi"
+      - "blockchain"
+
+  - id: software-frontend
+    triggers:
+      - "Next.js"
+      - "React"
+      - "frontend"
+      - "Tailwind"
+      - "shadcn"
+
+  - id: software-mobile
+    triggers:
+      - "iOS"
+      - "Android"
+      - "Swift"
+      - "Kotlin"
+      - "React Native"
+
+  - id: software-security-appsec
+    triggers:
+      - "authentication"
+      - "authorization"
+      - "OWASP"
+      - "XSS"
+      - "CSRF"
+
+  - id: software-testing-automation
+    triggers:
+      - "unit test"
+      - "integration test"
+      - "E2E"
+      - "test automation"
+      - "coverage"
+
+  - id: software-ui-ux-design
+    triggers:
+      - "UX"
+      - "UI design"
+      - "wireframe"
+      - "accessibility"
+      - "design system"
+
+routing_priority:
+  - level: 1
+    name: "Explicit user override"
+    description: "User specifies agent: X or skill: Y"
+
+  - level: 2
+    name: "Task-specific routing"
+    description: "Match request type to specialized agent+skill"
+
+  - level: 3
+    name: "Domain-specific routing"
+    description: "Match technology stack to domain agent"
+
+  - level: 4
+    name: "Default fallback"
+    description: "Use general-purpose agent when no specific match"
+
+conflict_resolution:
+  - scenario: "Multiple agents could apply"
+    resolution: "Choose most specialized for primary task"
+
+  - scenario: "Skill missing"
+    resolution: "Route to agent only, let agent handle without skill"
+
+  - scenario: "Agent missing"
+    resolution: "Use skill directly if self-contained"
+
+  - scenario: "Both missing"
+    resolution: "Report 'No matching route found' with suggested alternative"
