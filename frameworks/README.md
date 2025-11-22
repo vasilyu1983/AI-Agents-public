@@ -470,6 +470,7 @@ tail -f ~/.config/claude-code/logs/skills.log
 
 - **Issues**: [GitHub Issues](https://github.com/vasilyu1983/AI-Agents-public/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/vasilyu1983/AI-Agents-public/discussions)
+- **Twitter**: Follow [@vasilyu](https://twitter.com/vasilyu) for updates
 
 ---
 
