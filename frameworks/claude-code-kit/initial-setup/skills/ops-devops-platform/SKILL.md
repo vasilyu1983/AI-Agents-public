@@ -28,6 +28,7 @@ This skill equips Claude with actionable templates, checklists, and patterns for
 
 ## Decision Tree: Choosing DevOps Approach
 
+```text
 What do you need to accomplish?
     ├─ Infrastructure provisioning?
     │   ├─ Cloud-agnostic → Terraform (multi-cloud support)
@@ -73,6 +74,7 @@ What do you need to accomplish?
         ├─ Runtime security → Falco or Sysdig
         ├─ Secrets management → HashiCorp Vault or cloud-native KMS
         └─ Compliance → CIS Benchmarks, template-security-hardening.md
+```
 
 ---
 

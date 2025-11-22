@@ -55,6 +55,7 @@ Claude should NOT use this skill for:
 
 ## Decision Tree: Choosing the Right Workflow
 
+```text
 User needs: [Product Work Type]
     ├─ Discovery / Validation?
     │   ├─ Customer insights? → Customer interview template
@@ -82,6 +83,7 @@ User needs: [Product Work Type]
         ├─ Giving feedback? → Feedback template (SBI model)
         ├─ Post-incident? → A3 debrief
         └─ Negotiation? → Negotiation one-sheet (Voss)
+```
 
 ---
 

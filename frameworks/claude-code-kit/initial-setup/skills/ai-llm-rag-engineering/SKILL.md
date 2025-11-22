@@ -47,6 +47,7 @@ It focuses on **doing**, not explaining theory.
 
 ## Decision Tree: RAG Architecture Selection
 
+```text
 Building RAG system: [Architecture Path]
     ├─ Document type?
     │   ├─ Page-structured? → Page-level chunking (0.648 accuracy, lowest variance)
@@ -65,6 +66,7 @@ Building RAG system: [Architecture Path]
     │
     └─ Production quality?
         └─ Full pipeline: Page-level + Contextual + Hybrid + Reranking → Optimal accuracy
+```
 
 ---
 

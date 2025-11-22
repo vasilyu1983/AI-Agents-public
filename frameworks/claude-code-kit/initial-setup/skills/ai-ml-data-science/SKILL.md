@@ -68,6 +68,7 @@ For adjacent topics, reference:
 
 ## Decision Tree: Choosing Data Science Approach
 
+```text
 User needs ML for: [Problem Type]
     ├─ Tabular Data?
     │   ├─ Small-Medium (<1M rows)? → **LightGBM** (fast, efficient)
@@ -83,6 +84,7 @@ User needs ML for: [Problem Type]
     │
     └─ SQL Transformations?
         └─ SQLMesh (staging/intermediate/marts layers)
+```
 
 **Key Finding:** Tree-based methods (LightGBM) deliver best performance with significant computational efficiency advantage.
 

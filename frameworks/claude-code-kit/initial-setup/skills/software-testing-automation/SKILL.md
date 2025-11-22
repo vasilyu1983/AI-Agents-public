@@ -42,7 +42,7 @@ Invoke when users ask for:
 
 ## Decision Tree: Test Strategy
 
-```
+```text
 Need to test: [Feature Type]
     ├─ Pure business logic?
     │   └─ Unit tests (Jest/Vitest) — Fast, isolated, AAA pattern

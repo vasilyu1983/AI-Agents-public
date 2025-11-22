@@ -51,7 +51,7 @@ This skill covers **general retrieval**, separate from RAG-specific workflows.
 
 ## Decision Tree: Search Architecture Selection
 
-```
+```text
 Building search system: [Search Strategy]
     ├─ Query type?
     │   ├─ Keyword-based? → BM25 (fast, interpretable baseline)

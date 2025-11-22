@@ -69,6 +69,7 @@ If the user is asking about **LLM/RAG/search**, prefer:
 
 ## Decision Tree: Choosing Time Series Approach
 
+```text
 User needs time series forecasting for: [Data Type]
     ├─ Strong Seasonality?
     │   ├─ Simple patterns? → LightGBM with seasonal features
@@ -93,6 +94,7 @@ User needs time series forecasting for: [Data Type]
     └─ Explainability Required (healthcare, finance)?
         ├─ LightGBM → SHAP values, feature importance
         └─ Linear models → Most interpretable
+```
 
 ---
 

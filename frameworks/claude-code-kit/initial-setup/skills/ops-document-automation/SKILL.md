@@ -35,12 +35,14 @@ Use this multi-format skill when a task involves Office files: drafting/redlinin
 
 ## Decision Tree: Picking a Workflow
 
+```text
 Need to read only? → Use format-specific extraction (pandoc for DOCX, markitdown/html2pptx preview for PPTX, pdfplumber for PDF, pandas for XLSX).  
 Need tracked edits? → DOCX redlining workflow (unpack, minimal `<w:ins>/<w:del>`, pack).  
 Need new doc/deck? → Use docx-js for DOCX creation; html2pptx pipeline for PPTX.  
 Need tables from PDF? → pdfplumber with page iteration; export to CSV/XLSX.  
 Need formulas preserved? → Write Excel formulas, avoid hardcoding; run recalc script.  
 Unsure? → Start with Quick Reference, then open the matching resource below.
+```
 
 ---
 

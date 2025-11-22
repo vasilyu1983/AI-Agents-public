@@ -49,6 +49,7 @@ Claude should invoke this skill when a user requests:
 
 ## Decision Tree: Choosing API Style
 
+```text
 User needs: [API Type]
     ├─ Public API for third parties?
     │   └─ REST with OpenAPI docs (broad compatibility)
@@ -67,6 +68,7 @@ User needs: [API Type]
     │
     └─ Streaming or bidirectional?
         └─ **gRPC** (HTTP/2 streaming) or **WebSockets**
+```
 
 ---
 

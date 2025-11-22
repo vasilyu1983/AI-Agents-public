@@ -44,6 +44,7 @@ Claude should invoke this skill when a user requests:
 
 ## Decision Tree: Choosing Documentation Type
 
+```text
 User needs: [Documentation Task]
     ├─ New project or repository?
     │   └─ **README.md** (project overview, installation, quick start)
@@ -78,6 +79,7 @@ User needs: [Documentation Task]
     │
     └─ Troubleshooting guide?
         └─ Common issues → Solutions → Diagnostic commands → Logs location
+```
 
 ---
 

@@ -28,6 +28,7 @@ This skill provides execution-ready debugging strategies, troubleshooting workfl
 
 ## Decision Tree: Debugging Strategy
 
+```text
 Issue type: [Problem Scenario]
     ├─ Application Behavior?
     │   ├─ Crashes immediately? → Check stack trace, error logs
@@ -59,6 +60,7 @@ Issue type: [Problem Scenario]
         ├─ Network timeout? → Check external service health, retry logic
         ├─ Database error? → Check connection pool, query syntax
         └─ Unknown error? → Systematic debugging workflow (observe, hypothesize, test)
+```
 
 ---
 

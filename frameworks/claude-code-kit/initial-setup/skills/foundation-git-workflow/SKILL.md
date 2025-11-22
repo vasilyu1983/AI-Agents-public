@@ -47,9 +47,9 @@ Invoke this skill when the user asks to:
 
 ## Decision Tree: Choosing Branching Strategy
 
+```text
 Use this decision tree to select the optimal branching strategy for your team based on team size, release cadence, and CI/CD maturity.
 
-```text
 Team characteristics → What's your situation?
     ├─ Small team (1-5 devs) + Continuous deployment + High CI/CD maturity?
     │   └─ GitHub Flow (main + feature branches)

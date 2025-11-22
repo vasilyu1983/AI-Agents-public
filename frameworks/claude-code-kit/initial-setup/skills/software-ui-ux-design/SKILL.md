@@ -39,7 +39,7 @@ Invoke when users ask for:
 
 ## Decision Tree: UI/UX Design Approach
 
-```
+```text
 Design challenge: [Feature Type]
     ├─ Building from scratch?
     │   ├─ Need full control? → shadcn/ui (copy-paste, Tailwind)

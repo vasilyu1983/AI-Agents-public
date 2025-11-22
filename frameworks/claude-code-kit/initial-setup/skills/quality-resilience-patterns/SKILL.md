@@ -44,6 +44,7 @@ Claude should invoke this skill when a user requests:
 
 ## Decision Tree: Resilience Pattern Selection
 
+```text
 Failure scenario: [System Dependency Type]
     ├─ External API/Service?
     │   ├─ Transient errors? → Retry with exponential backoff + jitter
@@ -74,6 +75,7 @@ Failure scenario: [System Dependency Type]
         ├─ Production (low risk)? → Feature flags + canary deployments
         ├─ Scheduled testing? → Game days (quarterly)
         └─ Continuous chaos? → Netflix Chaos Monkey (1% failure injection)
+```
 
 ---
 

@@ -48,6 +48,7 @@ Claude should invoke this skill when a user requests:
 
 ## Decision Tree: Observability Strategy
 
+```text
 User needs: [Observability Task Type]
     ├─ Starting New Service?
     │   ├─ Microservices? → OpenTelemetry auto-instrumentation + Jaeger
@@ -78,6 +79,7 @@ User needs: [Observability Task Type]
         ├─ Load testing? → Test at 2x expected peak
         ├─ Forecasting? → Time series analysis (Prophet, ARIMA)
         └─ Cost optimization? → Right-size instances, spot instances
+```
 
 ---
 

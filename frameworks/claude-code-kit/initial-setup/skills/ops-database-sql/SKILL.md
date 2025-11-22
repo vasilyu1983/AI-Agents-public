@@ -28,6 +28,7 @@ This skill equips Claude with actionable checklists, patterns, and templates for
 
 ## Decision Tree: Choosing the Right Approach
 
+```text
 Query performance issue?
     ├─ Identify slow queries first?
     │   ├─ PostgreSQL → pg_stat_statements (top queries by total_exec_time)
@@ -58,6 +59,7 @@ Query performance issue?
     │
     └─ Analytics on large datasets?
         └─ DuckDB → Parquet/columnar format, vectorized execution
+```
 
 ---
 

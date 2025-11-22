@@ -54,7 +54,7 @@ Claude should invoke this skill when the user asks for **LLM development**, incl
 
 ## Decision Tree: LLM Development Strategy
 
-```
+```text
 Need LLM-powered feature: [Strategy Selection]
     ├─ MVP/Prototype?
     │   └─ Prompt Engineering → Fast deployment, minimal setup
