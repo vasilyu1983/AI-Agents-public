@@ -24,6 +24,7 @@ Available skills from `.claude/skills/` (names match skill directories):
 - **foundation-dependency-management**: Dependency management and update strategies across ecosystems (npm, pip, cargo, maven, and others).
 - **foundation-documentation**: Technical documentation patterns for READMEs, ADRs, API docs, changelogs, and docs-as-code workflows.
 - **foundation-git-workflow**: Collaborative Git workflows, branching strategies, PR conventions, and code review best practices.
+- **marketing-ai-search-optimization**: AI search engine optimization (AEO/GEO/LLMO) for ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews with technical setup, content strategies, and measurement frameworks.
 - **marketing-social-media**: Social media marketing strategy, content planning, and campaign execution patterns.
 - **ops-database-metabase**: Metabase BI platform configuration, dashboard design, SQL queries, data visualization, and analytics workflows.
 - **ops-database-sql**: Production SQL optimization, indexing, schema design, migrations, and operational best practices.

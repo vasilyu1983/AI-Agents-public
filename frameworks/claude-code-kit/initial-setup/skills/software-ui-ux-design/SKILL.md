@@ -28,6 +28,7 @@ Invoke when users ask for:
 
 | UX Task | Pattern/Tool | Implementation | When to Use |
 |---------|--------------|----------------|-------------|
+| **Distinctive Aesthetics** | **Creative typography, bold color** | **Avoid Inter/Roboto, commit to theme** | **Prevent generic AI aesthetics** |
 | Loading States | Skeleton screens | Shimmer placeholders | All async data (preferred over spinners) |
 | User Feedback | Toast notifications | 3-5 sec auto-dismiss | Non-blocking confirmations |
 | Form Validation | Inline validation | Validate on blur | Real-time feedback without annoyance |
@@ -72,6 +73,7 @@ Design challenge: [Feature Type]
 
 ### Resources (Best Practices & Guides)
 
+- [resources/frontend-aesthetics-2024.md](resources/frontend-aesthetics-2024.md) — **NEW** Distinctive design principles to avoid generic AI aesthetics (typography, color, motion, backgrounds)
 - [resources/design-systems.md](resources/design-systems.md) — Comprehensive design system implementation guide (foundations, components, patterns)
 - [resources/component-library-comparison.md](resources/component-library-comparison.md) — 2024-2025 UI library comparison (MUI, shadcn/ui, Ant Design, Chakra UI, Radix UI, Mantine, Headless UI)
 - [resources/modern-ux-patterns-2024.md](resources/modern-ux-patterns-2024.md) — Modern UX patterns (skeleton screens, optimistic UI, progressive disclosure, micro-interactions)

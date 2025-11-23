@@ -294,3 +294,19 @@ This skill integrates with complementary Claude Code skills:
 - Model-centric → Context engineering-centric
 
 ---
+
+## AI-Native SDLC Pattern (Delegate → Review → Own)
+
+- **Plan**: Have the agent draft `PLAN.md` or use a planning tool; require code-path trace, dependency map, and risk/edge-case list before build starts.
+- **Design**: Convert mocks to components; enforce design tokens/style guides; surface accessibility gaps; keep MCP-linked component libraries in context.
+- **Build**: Let the agent scaffold end-to-end (models/APIs/UI/tests/docs); enforce long-run guardrails (time cap, allowed commands/tools, commit/PR gating, kill switch).
+- **Test**: Demand failing test first; agent generates and runs suites; require coverage deltas and flaky-test notes; human reviews assertions and fixtures.
+- **Review**: Agent runs first-pass review tuned for P0/P1; human focuses on architecture, performance, safety, and migration risk; always own final merge.
+- **Document**: Agent drafts PR summaries, module/file notes, and mermaid diagrams; require doc updates in the same run; human adds “why” and approvals.
+- **Deploy & Maintain**: Agent links logs/metrics via MCP for triage; propose hotfixes with rollback plans; human approves rollouts; track drift/regressions with evals.
+
+## Executive Briefing (Optional)
+
+- **Value**: Coding agents compress SDLC time; delegate mechanical work, keep humans on intent/architecture; measurable gains come from tight guardrails plus eval loops.
+- **Cost & Risk**: Training vs inference economics; long runs need caps/kill switches; data/secret handling and supply-chain policies stay human-owned.
+- **Governance**: Multi-layer guardrails (policy prompt, tool allowlist, auth scopes, eval gates, audit logs); require human sign-off for deploys and safety-sensitive changes.
