@@ -11,6 +11,17 @@ This skill provides **operational guidance** for building production-ready promp
 
 All content is **operational**, not theoretical. Focus on patterns, checklists, and copy-paste templates.
 
+**Claude 4+ Updates**: This skill includes Claude 4.x and 4.5-specific optimizations:
+
+- **Action directives**: Frame for implementation, not suggestions
+- **Parallel tool execution**: Independent tool calls can run simultaneously
+- **Long-horizon task management**: State tracking, incremental progress, context compaction resilience
+- **Positive framing**: Describe desired behavior rather than prohibitions
+- **Style matching**: Prompt formatting influences output style
+- **Domain-specific patterns**: Specialized guidance for frontend, research, and agentic coding
+
+**Claude 4.5 Communication**: Claude 4.5 is more concise by default. Request explicit summaries when needed for visibility into reasoning or work completed.
+
 ---
 
 ## When to Use This Skill
@@ -88,18 +99,25 @@ User needs: [Prompt Type]
 ## Navigation: Best Practices
 
 - **[Best Practices (Core)](resources/best-practices-core.md)** - Foundation rules for production-grade prompts
-  - System instruction design, output contract specification
-  - Context handling, error recovery, anti-patterns
+  - System instruction design, output contract specification, action directives
+  - Context handling, error recovery, positive framing, style matching
+  - Anti-patterns, Claude 4+ specific optimizations
 
 - **[Production Guidelines](resources/production-guidelines.md)** - Deployment and operational guidance
   - Evaluation & testing (Prompt CI/CD), model parameters, few-shot selection
-  - Safety & guardrails, conversation memory, answer engineering
-  - Decomposition, multilingual/multimodal, benchmarking
+  - Safety & guardrails, conversation memory, context compaction resilience
+  - Answer engineering, decomposition, multilingual/multimodal, benchmarking
 
 - **[Quality Checklists](resources/quality-checklists.md)** - Validation checklists before deployment
   - Prompt QA, JSON validation, agent workflow checks
   - RAG workflow, safety & security, performance optimization
   - Testing coverage, anti-patterns, quality score rubric
+
+- **[Domain-Specific Patterns](resources/domain-specific-patterns.md)** - Claude 4+ optimized patterns for specialized domains
+  - Frontend/visual code: Creativity encouragement, design variations, micro-interactions
+  - Research tasks: Success criteria, verification, hypothesis tracking
+  - Agentic coding: No speculation rule, principled implementation, investigation patterns
+  - Cross-domain best practices and quality modifiers
 
 ## Navigation: Specialized Patterns
 

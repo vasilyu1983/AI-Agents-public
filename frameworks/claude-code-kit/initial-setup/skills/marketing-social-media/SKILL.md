@@ -189,6 +189,7 @@ For detailed trees (TikTok scaling, offer creation, outreach triage), see `resou
 - [../ai-prompt-engineering/SKILL.md](../ai-prompt-engineering/SKILL.md) — LLM prompts for content generation, hooks, CTA variants, and creative testing
 - [../ai-llm-engineering/SKILL.md](../ai-llm-engineering/SKILL.md) — RAG systems, embeddings, and AI-powered content libraries
 - [../ai-agents-development/SKILL.md](../ai-agents-development/SKILL.md) — Multi-agent systems for marketing automation and campaign orchestration
+- [../marketing-ai-search-optimization/SKILL.md](../marketing-ai-search-optimization/SKILL.md) — AI search engine optimization (AEO/GEO) for ChatGPT, Perplexity, Claude, and Gemini citations
 
 **Frontend & Design**
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Landing page implementation, web performance, and conversion optimization
