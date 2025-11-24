@@ -2,7 +2,7 @@
 
 **Copy-paste ready files for instant Claude Code productivity**
 
-34 specialized skills + 17 production agents + 15 workflow commands + 7 automation hooks
+35 specialized skills + 17 production agents + 15 workflow commands + 7 automation hooks
 
 ---
 
@@ -30,7 +30,7 @@ cp /path/to/initial-setup/hooks/settings-template.json .claude/settings.json
 ```bash
 # Check counts
 ls .claude/agents/ | wc -l      # Should show 17
-ls .claude/skills/ | wc -l      # Should show 34
+ls .claude/skills/ | wc -l      # Should show 35
 ls .claude/commands/ | wc -l    # Should show 15
 ls -l .claude/hooks/*.sh        # Should show 7 executable files
 
@@ -181,11 +181,11 @@ chmod +x .claude/verify-installation.sh
 | Component | Count | Purpose |
 |-----------|-------|---------|
 | **Agents** | 17 | Specialized roles (backend, frontend, mobile, LLM, DevOps, PM, crypto, security, etc.) |
-| **Skills** | 34 | Domain knowledge bases with templates and resources (includes ai-llm-development for fine-tuning, prompts, datasets) |
+| **Skills** | 35 | Domain knowledge bases with templates and resources (includes ai-llm-development for fine-tuning, prompts, datasets) |
 | **Commands** | 20 | Quick workflow access (code review, testing, architecture, product management) |
 | **Hooks** | 7 | Automated guardrails (formatting, security, testing, logging, notifications, cost tracking) |
 
-**Total**: 78 production-ready files
+**Total**: 79 production-ready files
 
 ---
 

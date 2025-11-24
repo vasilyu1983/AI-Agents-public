@@ -1,10 +1,10 @@
 # Claude Code Kit - Complete Guide
 
-**Last Updated**: 2025-11-20
+**Last Updated**: 2025-11-23
 **Official Documentation**: [Claude Code Overview](https://docs.claude.com/en/docs/claude-code/overview)
 **Status**: PORTABLE - Works for any repository
 
-Production-ready Claude Code setup with 17 agents + 34 skills + 20 commands + 7 hooks.
+Production-ready Claude Code setup with 17 agents + 36 skills + 20 commands + 7 hooks.
 
 ---
 
@@ -94,7 +94,7 @@ cp /path/to/initial-setup/hooks/settings-template.json .claude/settings.json
 | Component | Count | Purpose |
 |-----------|-------|---------|
 | **Agents** | 17 | Specialized AI roles (backend, frontend, mobile, LLM, DevOps, PM, crypto, security, etc.) |
-| **Skills** | 34 | Domain knowledge bases with templates and curated web resources |
+| **Skills** | 36 | Domain knowledge bases with templates and curated web resources |
 | **Commands** | 20 | Quick workflow access (code review, testing, architecture, deployment, product management) |
 | **Hooks** | 7 | Automated guardrails (formatting, security, testing, cost tracking, notifications) |
 
@@ -127,7 +127,7 @@ cp /path/to/initial-setup/hooks/settings-template.json .claude/settings.json
 - [**prompt-engineer**](initial-setup/agents/prompt-engineer.md) - Prompt design & optimization
 - [**smm-strategist**](initial-setup/agents/smm-strategist.md) - Social media marketing
 
-**New in v3.0** (2025-11-20): Expanded to 17 agents + 34 skills + 7 automation hooks with complete four-layer architecture (hooks → commands → agents → skills).
+**New in v3.0** (2025-11-20): Expanded to 17 agents + 36 skills + 7 automation hooks with complete four-layer architecture (hooks → commands → agents → skills).
 
 See [initial-setup/README.md](initial-setup/README.md) for complete documentation, usage examples, and [ARCHITECTURE-DIAGRAM.md](initial-setup/ARCHITECTURE-DIAGRAM.md) for visual architecture overview.
 

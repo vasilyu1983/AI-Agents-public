@@ -29,6 +29,8 @@ Invoke when users ask for:
 | UX Task | Pattern/Tool | Implementation | When to Use |
 |---------|--------------|----------------|-------------|
 | **Distinctive Aesthetics** | **Creative typography, bold color** | **Avoid Inter/Roboto, commit to theme** | **Prevent generic AI aesthetics** |
+| Cognitive Load & Cues | Gestalt grouping, preattentive cues | Chunk info, align, use contrast/weight/icons | Dense data, complex flows; reduce working-memory load |
+| Signifiers & Mappings | Visible affordances, natural layouts | Show clickable states, map controls to outputs | Any interactive element; prevent slips/mistakes |
 | Loading States | Skeleton screens | Shimmer placeholders | All async data (preferred over spinners) |
 | User Feedback | Toast notifications | 3-5 sec auto-dismiss | Non-blocking confirmations |
 | Form Validation | Inline validation | Validate on blur | Real-time feedback without annoyance |
@@ -61,6 +63,10 @@ Design challenge: [Feature Type]
     │   ├─ Multi-step? → Progress bar + save drafts
     │   ├─ Many fields? → Group related fields + progressive disclosure
     │   └─ Validation? → Inline on blur (not on every keystroke)
+    │
+    ├─ First 5 seconds clear?
+    │   ├─ First-click test? → Primary action obvious, trunk nav clear
+    │   └─ Scannable copy? → Plain-language labels, front-loaded headings
     │
     └─ Mobile vs Desktop?
         ├─ Mobile-first design → Start 320px, scale up

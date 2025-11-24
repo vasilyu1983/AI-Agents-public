@@ -24,7 +24,9 @@ Available skills from `.claude/skills/` (names match skill directories):
 - **foundation-dependency-management**: Dependency management and update strategies across ecosystems (npm, pip, cargo, maven, and others).
 - **foundation-documentation**: Technical documentation patterns for READMEs, ADRs, API docs, changelogs, and docs-as-code workflows.
 - **foundation-git-workflow**: Collaborative Git workflows, branching strategies, PR conventions, and code review best practices.
+- **git-commit-message**: Auto-generates conventional commit messages from git diffs with tiered format enforcement (feat/fix/perf = detailed, refactor/test = standard, docs/chore = minimal).
 - **marketing-ai-search-optimization**: AI search engine optimization (AEO/GEO/LLMO) for ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews with technical setup, content strategies, and measurement frameworks.
+- **marketing-leads-generation**: Operational lead generation systems for ICP/offers, outbound cadences, LinkedIn/social selling, landing fixes, lead scoring, analytics, and experiment cadence with compliance hygiene.
 - **marketing-social-media**: Social media marketing strategy, content planning, and campaign execution patterns.
 - **ops-database-metabase**: Metabase BI platform configuration, dashboard design, SQL queries, data visualization, and analytics workflows.
 - **ops-database-sql**: Production SQL optimization, indexing, schema design, migrations, and operational best practices.
@@ -65,6 +67,7 @@ Available agents from `.claude/agents/` (names match agent files):
 - **product-manager**: Product strategy, roadmaps, user research, and metrics analysis (uses `product-management`, `foundation-documentation`).
 - **prompt-engineer**: Prompt design, optimization, and validation for LLM-powered systems (uses `ai-prompt-engineering`, `ai-llm-development`).
 - **security-specialist**: Application security specialist covering OWASP Top 10 2025, zero trust architecture, supply chain security, threat modeling, and secure design patterns (uses `software-security-appsec`, `ai-ml-ops-security`).
+- **leads-strategist**: Lead generation specialist for ICP/offer clarity, outbound cadences, LinkedIn/social selling, landing optimization, lead scoring, and experiment cadence (uses `marketing-leads-generation`, `marketing-social-media`).
 - **smm-strategist**: Social media marketing strategist for content, campaigns, and growth across major platforms (uses `marketing-social-media`).
 - **sql-engineer**: SQL optimization, query tuning, database design, schema migrations, and indexing (uses `ops-database-sql`).
 - **system-architect**: System design, architecture review, and technical strategy for complex software systems (uses `software-architecture-design`, `quality-resilience-patterns`, `quality-observability-performance`).

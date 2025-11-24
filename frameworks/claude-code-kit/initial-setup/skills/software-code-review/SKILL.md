@@ -99,6 +99,15 @@ For complex PRs, apply multiple review modes sequentially:
 
 ---
 
+## Simplicity and Complexity Control
+
+- Prefer existing, battle-tested libraries over bespoke implementations when behavior is identical.
+- Flag avoidable complexity early: remove dead/commented-out code, collapse duplication, and extract single-responsibility helpers.
+- Call out premature optimization; favor clarity and measured, evidence-based tuning.
+- Encourage incremental refactors alongside reviews to keep modules small, predictable, and aligned to standards.
+
+---
+
 ## Operational Playbooks
 - [resources/operational-playbook.md](resources/operational-playbook.md) — Review scope rules, severity ratings, checklists, modes, and workflow patterns
 

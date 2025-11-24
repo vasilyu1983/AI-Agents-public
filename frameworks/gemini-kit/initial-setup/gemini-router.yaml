@@ -20,9 +20,9 @@ compatibility:
   gemini_cli_version: ">=1.0"
   claude_code_kit_version: ">=1.0"
 
-agents_count: 17
-skills_count: 36
-routing_rules_count: 28
+agents_count: 18
+skills_count: 38
+routing_rules_count: 30
 
 agents:
   - id: ai-agents-builder
@@ -118,6 +118,13 @@ agents:
       - software-security-appsec
       - ai-ml-ops-security
     domain: security
+
+  - id: leads-strategist
+    description: Lead generation, ICP/offer clarity, outbound cadences, LinkedIn/social selling, landing optimization, and lead scoring
+    preferred_skills:
+      - marketing-leads-generation
+      - marketing-social-media
+    domain: marketing
 
   - id: smm-strategist
     description: Social media marketing strategy, content creation, and campaign execution
@@ -275,6 +282,32 @@ skills:
       - "pull request"
       - "merge"
       - "commit message"
+
+  - id: git-commit-message
+    triggers:
+      - "commit message"
+      - "conventional commit"
+      - "generate commit"
+      - "git diff"
+      - "/commit-msg"
+
+  - id: marketing-ai-search-optimization
+    triggers:
+      - "AI search"
+      - "AEO"
+      - "GEO"
+      - "LLMO"
+      - "AI Overviews"
+
+  - id: marketing-leads-generation
+    triggers:
+      - "lead generation"
+      - "ICP"
+      - "outbound"
+      - "cold email"
+      - "lead scoring"
+      - "SDR"
+      - "landing page"
 
   - id: marketing-social-media
     triggers:
