@@ -75,14 +75,15 @@ Codex: Agent: llm-engineer | Skill: rag-engineering
 - product-manager, prompt-engineer, security-specialist, smm-strategist, sql-engineer
 - system-architect, test-architect
 
-**34 Skills Available**:
+**36 Skills Available**:
 
 - ai-agents-development, ai-llm-development, ai-llm-engineering, ai-llm-ops-inference
 - ai-llm-rag-engineering, ai-llm-search-retrieval, ai-ml-data-science, ai-ml-ops-production
 - ai-ml-ops-security, ai-ml-timeseries, ai-prompt-engineering, codebase-documentation-audit
 - foundation-api-design, foundation-dependency-management, foundation-documentation, foundation-git-workflow
-- marketing-social-media, ops-database-metabase, ops-database-sql, ops-devops-platform
-- ops-document-automation, product-management, product-prd-development, quality-code-refactoring
+- marketing-ai-search-optimization, marketing-leads-generation, marketing-social-media
+- ops-database-metabase, ops-database-sql, ops-devops-platform, ops-document-automation
+- product-management, product-prd-development, quality-code-refactoring
 - quality-debugging-troubleshooting, quality-observability-performance, quality-resilience-patterns
 - software-architecture-design, software-backend, software-code-review, software-crypto-web3
 - software-frontend, software-mobile, software-security-appsec, software-testing-automation
