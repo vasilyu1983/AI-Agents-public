@@ -10,7 +10,7 @@ The Gemini Kit enables **Gemini CLI users to leverage Claude Code skills and age
 
 **Same-Repo Cross-Platform Usage**:
 - User sets up `.claude/` with skills and agents (from Claude Code Kit)
-- User copies router files from `frameworks/gemini-kit/initial-setup/` into `.gemini/`
+- User copies router files from `frameworks/gemini-kit/framework/` into `.gemini/`
 - Gemini CLI loads `GEMINI.md` (project memory) and the `/claude-router` command
 - Router command chooses the best Claude agent and skill for each request
 - Result: Gemini users get Claude Code capabilities without switching tools
@@ -20,7 +20,7 @@ The Gemini Kit enables **Gemini CLI users to leverage Claude Code skills and age
 ```
 frameworks/gemini-kit/
 ├── README.md                         # This file
-└── initial-setup/                    # Copy these files to your repo's .gemini/ folder
+└── framework/                        # Copy these files to your repo's .gemini/ folder
     ├── README.md                     # 1-minute setup guide
     ├── gemini-router.toml            # /claude-router command definition
     ├── gemini-router.md              # Structured routing reference
@@ -42,10 +42,10 @@ frameworks/gemini-kit/
 mkdir -p .gemini/commands
 
 # Copy router command and docs
-cp frameworks/gemini-kit/initial-setup/gemini-router.toml .gemini/commands/claude-router.toml
-cp frameworks/gemini-kit/initial-setup/gemini-router.md .gemini/
-cp frameworks/gemini-kit/initial-setup/gemini-router.yaml .gemini/
-cp frameworks/gemini-kit/initial-setup/router-tests.md .gemini/
+cp frameworks/gemini-kit/framework/gemini-router.toml .gemini/commands/claude-router.toml
+cp frameworks/gemini-kit/framework/gemini-router.md .gemini/
+cp frameworks/gemini-kit/framework/gemini-router.yaml .gemini/
+cp frameworks/gemini-kit/framework/router-tests.md .gemini/
 ```
 
 ### Step 2: Ensure Claude Code Kit Is Installed
@@ -55,9 +55,9 @@ Your repository should already include the Claude Code Kit agents and skills:
 ```bash
 mkdir -p .claude/{agents,skills,commands}
 
-cp frameworks/claude-code-kit/initial-setup/agents/*.md .claude/agents/
-cp -r frameworks/claude-code-kit/initial-setup/skills/* .claude/skills/
-cp frameworks/claude-code-kit/initial-setup/commands/*.md .claude/commands/
+cp frameworks/claude-code-kit/framework/agents/*.md .claude/agents/
+cp -r frameworks/claude-code-kit/framework/skills/* .claude/skills/
+cp frameworks/claude-code-kit/framework/commands/*.md .claude/commands/
 ```
 
 Gemini will not read `.claude/` automatically, but the router command is written to assume that these files exist and can be passed as context when needed.
@@ -121,9 +121,9 @@ On each call, the router:
 
 ## Related Documentation
 
-**Claude Code Kit**: `frameworks/claude-code-kit/`  
-- Source of all skills, agents, and commands  
-- Copy from `initial-setup/` to `.claude/` in your repository
+**Claude Code Kit**: `frameworks/claude-code-kit/`
+- Source of all skills, agents, and commands
+- Copy from `framework/` to `.claude/` in your repository
 
 **Gemini Project Memory**: `GEMINI.md`  
 - Repository overview and global rules for Gemini  

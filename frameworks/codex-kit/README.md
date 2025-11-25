@@ -19,9 +19,10 @@ The Codex Kit enables **Codex CLI users to leverage Claude Code skills in the sa
 ```
 frameworks/codex-kit/
 ├── README.md                          # This file
-├── claude-skill-to-codex/
-│   └── prompt.md                      # Router builder prompt (regenerate router from Claude setup)
-└── initial-setup/                     # Copy these files to your repo's .codex/ folder
+├── tools/
+│   └── claude-skill-to-codex/
+│       └── prompt.md                  # Router builder prompt (regenerate router from Claude setup)
+└── framework/                         # Copy these files to your repo's .codex/ folder
     ├── codex-router.md                # Structured routing reference (8.4KB)
     ├── codex-mega-prompt.txt          # Paste-ready session starter (8.5KB)
     ├── codex-router.yaml              # Configuration metadata (5.7KB)
@@ -37,9 +38,9 @@ frameworks/codex-kit/
 ### Step 1: Copy Router to `.codex/`
 ```bash
 mkdir -p .codex
-cp frameworks/codex-kit/initial-setup/codex-router.md .codex/
-cp frameworks/codex-kit/initial-setup/codex-mega-prompt.txt .codex/
-cp frameworks/codex-kit/initial-setup/codex-router.yaml .codex/
+cp frameworks/codex-kit/framework/codex-router.md .codex/
+cp frameworks/codex-kit/framework/codex-mega-prompt.txt .codex/
+cp frameworks/codex-kit/framework/codex-router.yaml .codex/
 ```
 
 ### Step 2: Paste Mega-Prompt into Codex Session
@@ -136,7 +137,7 @@ If you update Claude Code Kit skills/agents and need to regenerate the router:
 
 ```bash
 # Read the router builder prompt
-cat frameworks/codex-kit/claude-skill-to-codex/prompt.md
+cat frameworks/codex-kit/tools/claude-skill-to-codex/prompt.md
 
 # Follow the 8-step process to regenerate all 4 files:
 # 1. Parse Claude setup (skills, agents, commands)
@@ -177,7 +178,7 @@ Codex CLI → .codex/router → .claude/agents/ → .claude/skills/
 
 **Claude Code Kit**: `frameworks/claude-code-kit/`
 - Source of all skills, agents, and commands
-- Copy from `initial-setup/` to `.claude/` in your repository
+- Copy from `framework/` to `.claude/` in your repository
 
 **Shared Foundations**: `frameworks/shared-foundations/`
 - MCP (Model Context Protocol) for tool integration
