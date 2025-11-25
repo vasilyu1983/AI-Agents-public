@@ -19,6 +19,7 @@ All content is **operational**, not theoretical. Focus on patterns, checklists, 
 - **Positive framing**: Describe desired behavior rather than prohibitions
 - **Style matching**: Prompt formatting influences output style
 - **Domain-specific patterns**: Specialized guidance for frontend, research, and agentic coding
+- **Style-adversarial resilience**: Stress-test refusals with poetic/role-play rewrites; normalize or decline stylized harmful asks before tool use
 
 **Claude 4.5 Communication**: Claude 4.5 is more concise by default. Request explicit summaries when needed for visibility into reasoning or work completed.
 
@@ -100,7 +101,7 @@ User needs: [Prompt Type]
 
 - **[Best Practices (Core)](resources/best-practices-core.md)** - Foundation rules for production-grade prompts
   - System instruction design, output contract specification, action directives
-  - Context handling, error recovery, positive framing, style matching
+  - Context handling, error recovery, positive framing, style matching, style-adversarial red teaming
   - Anti-patterns, Claude 4+ specific optimizations
 
 - **[Production Guidelines](resources/production-guidelines.md)** - Deployment and operational guidance
@@ -125,7 +126,7 @@ User needs: [Prompt Type]
   - Context grounding, chunk citation, missing information handling
 
 - **[Agent and Tool Patterns](resources/agent-patterns.md)** - Tool use and agent orchestration
-  - Plan-then-act workflows, tool calling, multi-step reasoning
+  - Plan-then-act workflows, tool calling, multi-step reasoning, generate–verify–revise chains with role-play + few-shot + targeted CoT per sub-agent
 
 - **[Extraction Patterns](resources/extraction-patterns.md)** - Deterministic field extraction
   - Schema-based extraction, null handling, no hallucinations

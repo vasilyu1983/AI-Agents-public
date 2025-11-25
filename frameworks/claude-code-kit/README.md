@@ -12,12 +12,13 @@ Production-ready Claude Code setup with 17 agents + 36 skills + 20 commands + 7 
 
 Claude Code is Anthropic's official CLI tool for AI-assisted software development. It provides six powerful features:
 
-1. **[Agents](reference/agents.md)** - Specialized AI subagents for specific tasks
-2. **[Skills](reference/skills.md)** - Knowledge bases with progressive disclosure
-3. **[Commands](reference/commands.md)** - Slash-triggered prompt templates
-4. **[Hooks](reference/hooks.md)** - Event-driven bash automation
-5. **[CLAUDE.md](reference/claudemd.md)** - Project memory and instructions
-6. **[MCP](reference/mcp.md)** - External data source integration
+1. **[Agents](docs/agents.md)** - Specialized AI subagents for specific tasks
+2. **[Skills](docs/skills.md)** - Knowledge bases with progressive disclosure
+3. **[Commands](docs/commands.md)** - Slash-triggered prompt templates
+4. **[Hooks](docs/hooks.md)** - Event-driven bash automation
+5. **[CLAUDE.md](docs/claudemd.md)** - Project memory and instructions
+6. **[MCP](docs/mcp.md)** - External data source integration
+7. **[Workflows](docs/workflows.md)** - End-to-end development workflows
 
 ---
 
@@ -30,9 +31,9 @@ Claude Code is Anthropic's official CLI tool for AI-assisted software developmen
    ```bash
    mkdir -p .claude/{agents,skills,commands,hooks}
    ```
-3. **Create your first agent** - [Agents Guide](reference/agents.md)
-4. **Create your first skill** - [Skills Guide](reference/skills.md)
-5. **Create a command** - [Commands Guide](reference/commands.md)
+3. **Create your first agent** - [Agents Guide](docs/agents.md)
+4. **Create your first skill** - [Skills Guide](docs/skills.md)
+5. **Create a command** - [Commands Guide](docs/commands.md)
 
 ### First Agent Example
 
@@ -70,7 +71,7 @@ Claude: [Automatically invokes code-reviewer agent]
 
 ## Production-Ready Framework
 
-**NEW**: This repository includes a **complete Claude Code framework** in [initial-setup/](initial-setup/) with 72 production-ready files that you can copy directly to your `.claude/` directory and use immediately.
+**NEW**: This repository includes a **complete Claude Code framework** in [framework/](framework/) with 72 production-ready files that you can copy directly to your `.claude/` directory and use immediately.
 
 ### Quick Install (1 minute)
 
@@ -81,12 +82,12 @@ cd your-project/
 mkdir -p .claude/{agents,skills,commands,hooks}
 
 # Copy ALL framework files
-cp /path/to/initial-setup/agents/*.md .claude/agents/
-cp -r /path/to/initial-setup/skills/* .claude/skills/
-cp /path/to/initial-setup/commands/*.md .claude/commands/
-cp /path/to/initial-setup/hooks/*.sh .claude/hooks/
+cp /path/to/framework/agents/*.md .claude/agents/
+cp -r /path/to/framework/skills/* .claude/skills/
+cp /path/to/framework/commands/*.md .claude/commands/
+cp /path/to/framework/hooks/*.sh .claude/hooks/
 chmod +x .claude/hooks/*.sh
-cp /path/to/initial-setup/hooks/settings-template.json .claude/settings.json
+cp /path/to/framework/hooks/settings-template.json .claude/settings.json
 ```
 
 ### What's Included
@@ -103,33 +104,33 @@ cp /path/to/initial-setup/hooks/settings-template.json .claude/settings.json
 ### Key Agents
 
 **AI/ML Specialists (3)**:
-- [**ai-agents-builder**](initial-setup/agents/ai-agents-builder.md) - AI agent architecture & patterns
-- [**data-scientist**](initial-setup/agents/data-scientist.md) - ML workflows, EDA, modeling, deployment
-- [**llm-engineer**](initial-setup/agents/llm-engineer.md) - LLM development, RAG, fine-tuning
+- [**ai-agents-builder**](framework/agents/ai-agents-builder.md) - AI agent architecture & patterns
+- [**data-scientist**](framework/agents/data-scientist.md) - ML workflows, EDA, modeling, deployment
+- [**llm-engineer**](framework/agents/llm-engineer.md) - LLM development, RAG, fine-tuning
 
 **Software Engineers (7)**:
-- [**backend-engineer**](initial-setup/agents/backend-engineer.md) - REST/GraphQL APIs, databases, auth
-- [**frontend-engineer**](initial-setup/agents/frontend-engineer.md) - Multi-framework (Next.js, Vue/Nuxt, Angular, Svelte, Remix, Vite+React)
-- [**mobile-engineer**](initial-setup/agents/mobile-engineer.md) - iOS, Android, React Native
-- [**crypto-engineer**](initial-setup/agents/crypto-engineer.md) - Web3, blockchain, smart contracts
-- [**devops-engineer**](initial-setup/agents/devops-engineer.md) - IaC, CI/CD, Kubernetes
-- [**sql-engineer**](initial-setup/agents/sql-engineer.md) - SQL optimization, query tuning
-- [**security-specialist**](initial-setup/agents/security-specialist.md) - AppSec, OWASP, threat modeling
+- [**backend-engineer**](framework/agents/backend-engineer.md) - REST/GraphQL APIs, databases, auth
+- [**frontend-engineer**](framework/agents/frontend-engineer.md) - Multi-framework (Next.js, Vue/Nuxt, Angular, Svelte, Remix, Vite+React)
+- [**mobile-engineer**](framework/agents/mobile-engineer.md) - iOS, Android, React Native
+- [**crypto-engineer**](framework/agents/crypto-engineer.md) - Web3, blockchain, smart contracts
+- [**devops-engineer**](framework/agents/devops-engineer.md) - IaC, CI/CD, Kubernetes
+- [**sql-engineer**](framework/agents/sql-engineer.md) - SQL optimization, query tuning
+- [**security-specialist**](framework/agents/security-specialist.md) - AppSec, OWASP, threat modeling
 
 **Quality & Architecture (5)**:
-- [**code-reviewer**](initial-setup/agents/code-reviewer.md) - Code quality & security review
-- [**test-architect**](initial-setup/agents/test-architect.md) - Test strategy & QA planning
-- [**system-architect**](initial-setup/agents/system-architect.md) - System design & architecture
-- [**product-manager**](initial-setup/agents/product-manager.md) - Product strategy & roadmaps
-- [**prd-architect**](initial-setup/agents/prd-architect.md) - Product requirements & specs
+- [**code-reviewer**](framework/agents/code-reviewer.md) - Code quality & security review
+- [**test-architect**](framework/agents/test-architect.md) - Test strategy & QA planning
+- [**system-architect**](framework/agents/system-architect.md) - System design & architecture
+- [**product-manager**](framework/agents/product-manager.md) - Product strategy & roadmaps
+- [**prd-architect**](framework/agents/prd-architect.md) - Product requirements & specs
 
 **Specialized (3)**:
-- [**prompt-engineer**](initial-setup/agents/prompt-engineer.md) - Prompt design & optimization
-- [**smm-strategist**](initial-setup/agents/smm-strategist.md) - Social media marketing
+- [**prompt-engineer**](framework/agents/prompt-engineer.md) - Prompt design & optimization
+- [**smm-strategist**](framework/agents/smm-strategist.md) - Social media marketing
 
 **New in v3.0** (2025-11-20): Expanded to 17 agents + 36 skills + 7 automation hooks with complete four-layer architecture (hooks → commands → agents → skills).
 
-See [initial-setup/README.md](initial-setup/README.md) for complete documentation, usage examples, and [ARCHITECTURE-DIAGRAM.md](initial-setup/ARCHITECTURE-DIAGRAM.md) for visual architecture overview.
+See [framework/README.md](framework/README.md) for complete documentation, usage examples, and [ARCHITECTURE-DIAGRAM.md](framework/ARCHITECTURE-DIAGRAM.md) for visual architecture overview.
 
 ### Product Management Suite ⭐
 
@@ -143,7 +144,7 @@ See [initial-setup/README.md](initial-setup/README.md) for complete documentatio
 /pm-positioning [product] # Create strategic positioning (Dunford framework)
 ```
 
-**Powered by [product-management skill](initial-setup/skills/product-management/SKILL.md)**:
+**Powered by [product-management skill](framework/skills/product-management/SKILL.md)**:
 
 - 120 curated sources (Teresa Torres, April Dunford, SVPG, OpenAI Evals, Anthropic)
 - 10 resource guides (discovery, strategy, roadmaps, AI/LLM products, data products)
@@ -196,17 +197,18 @@ Claude: [Implements mobile feature for iOS/Android with offline support]
 
 ### Guides (Learn by Doing)
 
-- **[Architecture](guides/claude-architecture.md)** - How components work together
-- **[Examples](guides/claude-examples.md)** - Complete working examples
+- **[Architecture](docs/claude-architecture.md)** - How components work together
+- **[Examples](docs/claude-examples.md)** - Complete working examples
 
 ### Reference (Look Up Details)
 
-- **[Agents Reference](reference/agents.md)** - Agent YAML frontmatter, tools, models
-- **[Skills Reference](reference/skills.md)** - Progressive disclosure, resources/
-- **[Commands Reference](reference/commands.md)** - $ARGUMENTS, best practices
-- **[Hooks Reference](reference/hooks.md)** - Events, environment variables, exit codes
-- **[CLAUDE.md Reference](reference/claudemd.md)** - Project vs user, precedence
-- **[MCP Reference](reference/mcp.md)** - Database, filesystem, git integration
+- **[Agents Reference](docs/agents.md)** - Agent YAML frontmatter, tools, models
+- **[Skills Reference](docs/skills.md)** - Progressive disclosure, resources/
+- **[Commands Reference](docs/commands.md)** - $ARGUMENTS, best practices
+- **[Hooks Reference](docs/hooks.md)** - Events, environment variables, exit codes
+- **[CLAUDE.md Reference](docs/claudemd.md)** - Project vs user, precedence
+- **[MCP Reference](docs/mcp.md)** - Database, filesystem, git integration
+- **[Workflows Reference](docs/workflows.md)** - Development workflows
 
 ---
 
@@ -275,7 +277,7 @@ Claude: [Queries PostgreSQL via MCP]
 
 ### Create an Agent
 
-See [Agents Reference](reference/agents.md)
+See [Agents Reference](docs/agents.md)
 
 ```markdown
 ---
@@ -292,7 +294,7 @@ Agent instructions...
 
 ### Create a Skill
 
-See [Skills Reference](reference/skills.md)
+See [Skills Reference](docs/skills.md)
 
 ```
 .claude/skills/
@@ -316,7 +318,7 @@ See `resources/` for details.
 
 ### Create a Command
 
-See [Commands Reference](reference/commands.md)
+See [Commands Reference](docs/commands.md)
 
 `.claude/commands/command-name.md`:
 ```markdown
@@ -331,7 +333,7 @@ Use `agent-name` agent to...
 
 ### Create a Hook
 
-See [Hooks Reference](reference/hooks.md)
+See [Hooks Reference](docs/hooks.md)
 
 `.claude/hooks/post-tool-use.sh`:
 ```bash
@@ -364,7 +366,7 @@ fi
 
 ### Create CLAUDE.md
 
-See [CLAUDE.md Reference](reference/claudemd.md)
+See [CLAUDE.md Reference](docs/claudemd.md)
 
 `.claude/CLAUDE.md`:
 ```markdown
@@ -387,7 +389,7 @@ System design...
 
 ### Configure MCP
 
-See [MCP Reference](reference/mcp.md)
+See [MCP Reference](docs/mcp.md)
 
 `.claude/.mcp.json`:
 ```json
@@ -416,7 +418,7 @@ See [MCP Reference](reference/mcp.md)
 - Stop hook → Run tests
 - `/review` command → Invoke code-reviewer
 
-See [Examples Guide](guides/claude-examples.md#pattern-1-automated-code-quality-pipeline)
+See [Examples Guide](docs/claude-examples.md#pattern-1-automated-code-quality-pipeline)
 
 ### Pattern 2: Security-First Development
 
@@ -425,7 +427,7 @@ See [Examples Guide](guides/claude-examples.md#pattern-1-automated-code-quality-
 - `security-auditor` agent → Vulnerability scanning
 - `/security-audit` command → Easy invocation
 
-See [Examples Guide](guides/claude-examples.md#pattern-2-secure-feature-development)
+See [Examples Guide](docs/claude-examples.md#pattern-2-secure-feature-development)
 
 ### Pattern 3: Test-Driven Development
 
@@ -435,7 +437,7 @@ See [Examples Guide](guides/claude-examples.md#pattern-2-secure-feature-developm
 - `/test` command → Quick test creation
 - Stop hook → Auto-run tests
 
-See [Examples Guide](guides/claude-examples.md#pattern-3-api-development-workflow)
+See [Examples Guide](docs/claude-examples.md#pattern-3-api-development-workflow)
 
 ---
 
@@ -454,7 +456,7 @@ See [Examples Guide](guides/claude-examples.md#pattern-3-api-development-workflo
 - Grant all tools to every agent
 - Use opus for simple tasks (expensive)
 
-See [Agents Reference](reference/agents.md#best-practices)
+See [Agents Reference](docs/agents.md#best-practices)
 
 ### Skill Creation
 
@@ -469,7 +471,7 @@ See [Agents Reference](reference/agents.md#best-practices)
 - Create overlapping skills
 - Write generic content without examples
 
-See [Skills Reference](reference/skills.md#best-practices)
+See [Skills Reference](docs/skills.md#best-practices)
 
 ### Command Design
 
@@ -484,7 +486,7 @@ See [Skills Reference](reference/skills.md#best-practices)
 - Duplicate agent logic in commands
 - Ignore user input
 
-See [Commands Reference](reference/commands.md#best-practices)
+See [Commands Reference](docs/commands.md#best-practices)
 
 ### Hook Development
 
@@ -501,7 +503,7 @@ See [Commands Reference](reference/commands.md#best-practices)
 - Run slow operations synchronously
 - Skip security validation
 
-See [Hooks Reference](reference/hooks.md#best-practices)
+See [Hooks Reference](docs/hooks.md#best-practices)
 
 ---
 
@@ -515,7 +517,7 @@ See [Hooks Reference](reference/hooks.md#best-practices)
 4. **Limit MCP permissions** - Minimal necessary access
 5. **Review third-party code** - Understand what runs
 
-See [Hooks Reference - Security](reference/hooks.md#security)
+See [Hooks Reference - Security](docs/hooks.md#security)
 
 ### Hook Security Example
 
@@ -555,7 +557,7 @@ See detailed troubleshooting in each reference guide.
 
 ## Examples
 
-Complete working examples available in [Examples Guide](guides/claude-examples.md):
+Complete working examples available in [Examples Guide](docs/claude-examples.md):
 
 1. **Security Audit Agent** - Full security scanning setup
 2. **API Design Skill** - RESTful API knowledge base
@@ -588,8 +590,8 @@ Complete working examples available in [Examples Guide](guides/claude-examples.m
 ## Next Steps
 
 1. **Start with Quick Start above** - 5-minute setup with first agent
-2. **Review [Architecture](guides/claude-architecture.md)** - Understand how it all works
-3. **Explore [Examples](guides/claude-examples.md)** - See real implementations
+2. **Review [Architecture](docs/claude-architecture.md)** - Understand how it all works
+3. **Explore [Examples](docs/claude-examples.md)** - See real implementations
 4. **Reference docs as needed** - Detailed specifications for each feature
 
 ---
@@ -597,14 +599,17 @@ Complete working examples available in [Examples Guide](guides/claude-examples.m
 ## Quick Links
 
 **Learn**:
-- [Architecture](guides/claude-architecture.md)
-- [Examples](guides/claude-examples.md)
+
+- [Architecture](docs/claude-architecture.md)
+- [Examples](docs/claude-examples.md)
 
 **Reference**:
-- [Agents](reference/agents.md) | [Skills](reference/skills.md) | [Commands](reference/commands.md)
-- [Hooks](reference/hooks.md) | [CLAUDE.md](reference/claudemd.md) | [MCP](reference/mcp.md)
+
+- [Agents](docs/agents.md) | [Skills](docs/skills.md) | [Commands](docs/commands.md)
+- [Hooks](docs/hooks.md) | [CLAUDE.md](docs/claudemd.md) | [MCP](docs/mcp.md) | [Workflows](docs/workflows.md)
 
 **Official**:
+
 - [Claude Code Docs](https://docs.claude.com/en/docs/claude-code/overview)
 - [Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
 
