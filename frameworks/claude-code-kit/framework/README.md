@@ -20,7 +20,7 @@ cp -r /path/to/initial-setup/skills/* .claude/skills/
 cp /path/to/initial-setup/commands/*.md .claude/commands/
 cp /path/to/initial-setup/hooks/*.sh .claude/hooks/
 chmod +x .claude/hooks/*.sh
-cp /path/to/initial-setup/hooks/settings-template.json .claude/settings.json
+cp /path/to/initial-setup/settings/settings-template.json .claude/settings.json
 ```
 
 ---

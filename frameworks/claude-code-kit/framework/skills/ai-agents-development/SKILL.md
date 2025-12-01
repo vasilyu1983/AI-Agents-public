@@ -52,6 +52,7 @@ Claude should activate this skill whenever the user asks for:
 | **OS Agent** | Computer/browser control | Anthropic Computer Use | MCP for system | Desktop automation, web browsing |
 | **Agentic RAG** | Dynamic multi-step retrieval | Custom (ReAct + RAG) | MCP for data | Complex queries requiring iterative search |
 | **Planning Agent** | Strategic decomposition | LangGraph (ReAct/Plan-Execute) | A2A for delegation | Multi-step problems, long-horizon tasks |
+| **Code/SWE Agent** | Autonomous coding, PR creation | HyperAgent, Devin, Claude Code | MCP for git/fs | Issue resolution, feature implementation |
 
 ---
 
@@ -67,6 +68,10 @@ What does the agent need to do?
     │   ├─ 1-3 tools, linear flow? → Tool-Using Agent (LangGraph + MCP)
     │   └─ Complex workflows, branching? → Planning Agent (ReAct/Plan-Execute)
     │
+    ├─ Write/modify code autonomously?
+    │   ├─ Single file edits? → Tool-Using Agent with code tools
+    │   └─ Multi-file, issue resolution? → Code/SWE Agent (HyperAgent pattern)
+    │
     ├─ Delegate tasks to specialists?
     │   ├─ Fixed workflow? → Multi-Agent Sequential (A → B → C)
     │   ├─ Manager-Worker? → Multi-Agent Hierarchical (Manager + Workers)
@@ -80,6 +85,7 @@ What does the agent need to do?
             - Tool-using for actions (MCP)
             - RAG for knowledge (MCP)
             - Multi-agent for delegation (A2A)
+            - Code agents for implementation
 ```
 
 **Protocol Selection**:
@@ -178,6 +184,9 @@ What does the agent need to do?
 - **OS Agent Capabilities** - [`resources/os-agent-capabilities.md`](resources/os-agent-capabilities.md)
   Desktop automation, UI grounding, and computer use patterns
 
+- **Code/SWE Agents** - [`resources/code-swe-agents.md`](resources/code-swe-agents.md)
+  SE 3.0 paradigm, autonomous coding patterns, SWE-Bench, HyperAgent architecture
+
 ---
 
 ## Navigation: Production Operations
@@ -240,7 +249,7 @@ What does the agent need to do?
 ## External Sources Metadata
 
 - **Curated References** - [`data/sources.json`](data/sources.json)
-  75 authoritative sources across 11 categories (OpenAI, Anthropic, LangChain, Azure, AWS)
+  95 authoritative sources across 13 categories including arXiv research papers and Code/SWE agents
 
 ---
 

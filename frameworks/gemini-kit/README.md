@@ -1,8 +1,8 @@
 # Gemini Kit — Claude Code Skills Router
 
-**Status**: PRODUCTION-READY  
-**Version**: 1.0  
-**Last Updated**: 2025-11-19
+**Status**: PRODUCTION-READY
+**Version**: 1.1
+**Last Updated**: 2025-11-25
 
 ## Overview
 
