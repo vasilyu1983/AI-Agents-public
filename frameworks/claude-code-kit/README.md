@@ -1,10 +1,10 @@
 # Claude Code Kit - Complete Guide
 
-**Last Updated**: 2025-11-23
+**Last Updated**: 2025-11-25
 **Official Documentation**: [Claude Code Overview](https://docs.claude.com/en/docs/claude-code/overview)
 **Status**: PORTABLE - Works for any repository
 
-Production-ready Claude Code setup with 17 agents + 36 skills + 20 commands + 7 hooks.
+Production-ready Claude Code setup with 17 agents + 36 skills + 21 commands + 7 hooks.
 
 ---
 
@@ -71,7 +71,7 @@ Claude: [Automatically invokes code-reviewer agent]
 
 ## Production-Ready Framework
 
-**NEW**: This repository includes a **complete Claude Code framework** in [framework/](framework/) with 72 production-ready files that you can copy directly to your `.claude/` directory and use immediately.
+**NEW**: This repository includes a **complete Claude Code framework** in [framework/](framework/) with 80+ production-ready files that you can copy directly to your `.claude/` directory and use immediately.
 
 ### Quick Install (1 minute)
 
@@ -87,7 +87,7 @@ cp -r /path/to/framework/skills/* .claude/skills/
 cp /path/to/framework/commands/*.md .claude/commands/
 cp /path/to/framework/hooks/*.sh .claude/hooks/
 chmod +x .claude/hooks/*.sh
-cp /path/to/framework/hooks/settings-template.json .claude/settings.json
+cp /path/to/framework/settings/settings-template.json .claude/settings.json
 ```
 
 ### What's Included
@@ -96,10 +96,10 @@ cp /path/to/framework/hooks/settings-template.json .claude/settings.json
 |-----------|-------|---------|
 | **Agents** | 17 | Specialized AI roles (backend, frontend, mobile, LLM, DevOps, PM, crypto, security, etc.) |
 | **Skills** | 36 | Domain knowledge bases with templates and curated web resources |
-| **Commands** | 20 | Quick workflow access (code review, testing, architecture, deployment, product management) |
+| **Commands** | 21 | Quick workflow access (code review, testing, architecture, deployment, product management) |
 | **Hooks** | 7 | Automated guardrails (formatting, security, testing, cost tracking, notifications) |
 
-**Total**: 78 production-ready files
+**Total**: 80+ production-ready files
 
 ### Key Agents
 
@@ -128,7 +128,7 @@ cp /path/to/framework/hooks/settings-template.json .claude/settings.json
 - [**prompt-engineer**](framework/agents/prompt-engineer.md) - Prompt design & optimization
 - [**smm-strategist**](framework/agents/smm-strategist.md) - Social media marketing
 
-**New in v3.0** (2025-11-20): Expanded to 17 agents + 36 skills + 7 automation hooks with complete four-layer architecture (hooks → commands → agents → skills).
+**New in v3.0** (2025-11-20): Expanded to 17 agents + 36 skills + 21 commands + 7 automation hooks with complete four-layer architecture (hooks → commands → agents → skills).
 
 See [framework/README.md](framework/README.md) for complete documentation, usage examples, and [ARCHITECTURE-DIAGRAM.md](framework/ARCHITECTURE-DIAGRAM.md) for visual architecture overview.
 

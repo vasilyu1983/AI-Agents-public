@@ -175,7 +175,8 @@ ANALYSIS:
 - If forced to combine, use broader scope or omit scope
 
 **Breaking changes**:
-- Append `!` after type/scope: `feat(api)!: change auth flow`
+
+- Append exclamation mark after type/scope (example: feat(api)!: change auth flow)
 - Include BREAKING CHANGE in body (handled by user)
 
 **WIP or experimental**:

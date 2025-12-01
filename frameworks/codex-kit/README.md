@@ -1,8 +1,8 @@
 # Codex Kit — Claude Code Skills Router
 
 **Status**: PRODUCTION-READY
-**Version**: 1.0
-**Last Updated**: 2025-11-18
+**Version**: 1.2
+**Last Updated**: 2025-11-25
 
 ## Overview
 
