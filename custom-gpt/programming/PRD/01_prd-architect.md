@@ -110,4 +110,4 @@ Use 1-3 few-shot pairs aligned with answer_shape; keep lean and order by relevan
 
 ## REFERENCES
 
-See [03_vibe-coding-references.json](03_vibe-coding-references.json) for comprehensive documentation resources including AI coding platform docs (Cursor, Codex, Claude Code, Copilot), product frameworks, AI models, technical specs, safety standards, UX research, metrics, tools, and learning materials.
+See [02_sources-prd.json](02_sources-prd.json) for comprehensive documentation resources including AI coding platform docs (Cursor, Codex, Claude Code, Copilot), product frameworks, AI models, technical specs, safety standards, UX research, metrics, tools, and learning materials.
