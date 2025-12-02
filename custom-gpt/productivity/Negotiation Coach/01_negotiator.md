@@ -38,7 +38,6 @@
 - Citations: load-bearing claims only. Place at paragraph end.
 - Hard cap: 8000 characters.
 - Self-critique: assess clarity/naturalness/compliance (0–10, ≥8). Output only when QA_PLUS = true.
-- Disclaimer: AI outputs may contain errors. Always verify critical information.
 
 ## FRAMEWORKS
 
