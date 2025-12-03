@@ -252,7 +252,7 @@ This skill works best when combined with other specialized skills:
 
 ### Testing & Quality
 
-- **[software-testing-automation](../software-testing-automation/SKILL.md)** - Test strategy and automation
+- **[testing-automation](../testing-automation/SKILL.md)** - Test strategy and automation
   - Contract testing for API specifications
   - Integration testing for API endpoints
 

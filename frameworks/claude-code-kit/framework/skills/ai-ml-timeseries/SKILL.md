@@ -41,14 +41,14 @@ Claude should invoke this skill when the user asks for **hands-on time series fo
 If the user is asking about **general ML modelling, deployment, or infrastructure**, prefer:
 
 - [ai-ml-data-science](../ai-ml-data-science/SKILL.md) - General data science workflows, EDA, feature engineering, evaluation
-- [ai-ml-ops-production](../ai-ml-ops-production/SKILL.md) - Model deployment, monitoring, drift detection, retraining automation
-- [ai-ml-ops-security](../ai-ml-ops-security/SKILL.md) - Security, privacy, governance for ML systems
+- [ai-mlops](../ai-mlops/SKILL.md) - Model deployment, monitoring, drift detection, retraining automation
+- [ai-mlops](../ai-mlops/SKILL.md) - Security, privacy, governance for ML systems
 
 If the user is asking about **LLM/RAG/search**, prefer:
 
-- [ai-llm-development](../ai-llm-development/SKILL.md) - LLM fine-tuning, prompting, evaluation
-- [ai-llm-rag-engineering](../ai-llm-rag-engineering/SKILL.md) - RAG pipeline design and optimization
-- [ai-llm-search-retrieval](../ai-llm-search-retrieval/SKILL.md) - Search and retrieval systems
+- [ai-llm](../ai-llm/SKILL.md) - LLM fine-tuning, prompting, evaluation
+- [ai-rag](../ai-rag/SKILL.md) - RAG pipeline design and optimization
+- [ai-rag](../ai-rag/SKILL.md) - Search and retrieval systems
 
 ---
 
@@ -195,9 +195,9 @@ User needs time series forecasting for: [Data Type]
 For adjacent topics, reference these skills:
 
 - **[ai-ml-data-science](../ai-ml-data-science/SKILL.md)** - EDA workflows, feature engineering patterns, model evaluation, SQLMesh transformations
-- **[ai-ml-ops-production](../ai-ml-ops-production/SKILL.md)** - Production deployment, automated monitoring (18-second drift detection), retraining pipelines
-- **[ai-llm-development](../ai-llm-development/SKILL.md)** - Fine-tuning approaches applicable to time series LLMs (Chronos, TimesFM)
-- **[ai-prompt-engineering](../ai-prompt-engineering/SKILL.md)** - Prompt design patterns for time series LLMs
+- **[ai-mlops](../ai-mlops/SKILL.md)** - Production deployment, automated monitoring (18-second drift detection), retraining pipelines
+- **[ai-llm](../ai-llm/SKILL.md)** - Fine-tuning approaches applicable to time series LLMs (Chronos, TimesFM)
+- **[ai-prompts](../ai-prompts/SKILL.md)** - Prompt design patterns for time series LLMs
 - **[ops-database-sql](../ops-database-sql/SKILL.md)** - SQL optimization for time series data storage and retrieval
 
 ---

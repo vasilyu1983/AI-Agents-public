@@ -80,13 +80,11 @@ If HMRC finds a contractor inside IR35, PAYE and NICs apply.
 
 Disclaimer: General guidance only.
 
----
-
 **Input**: /thresholds VAT
 
 **Output**:
 
-| Threshold | Value (2024/25) |
+| Threshold | Value (2025/26) |
 |-----------|-----------------|
 | VAT registration | £90,000 turnover |
 | Deregistration | £88,000 turnover |

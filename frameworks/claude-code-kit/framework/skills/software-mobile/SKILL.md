@@ -310,6 +310,6 @@ Android (FCM):
 
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Web-facing UI patterns and Next.js integration
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — API design, auth, and backend contracts for mobile clients
-- [../software-testing-automation/SKILL.md](../software-testing-automation/SKILL.md) — Mobile CI, test strategy, and reliability gates
+- [../testing-automation/SKILL.md](../testing-automation/SKILL.md) — Mobile CI, test strategy, and reliability gates
 - [../quality-resilience-patterns/SKILL.md](../quality-resilience-patterns/SKILL.md) — Resilience patterns for networked mobile apps
 - [../software-ui-ux-design/SKILL.md](../software-ui-ux-design/SKILL.md) — Mobile UI/UX design patterns and accessibility

@@ -183,8 +183,8 @@ This skill works with other skills in the framework:
 
 **AI/ML Operations**:
 
-- [ai-ml-ops-production](../ai-ml-ops-production/SKILL.md) - ML model debugging, drift detection, API monitoring, batch pipeline troubleshooting
-- [ai-ml-ops-security](../ai-ml-ops-security/SKILL.md) - Security debugging, jailbreak detection, privacy issues, threat modeling
+- [ai-mlops](../ai-mlops/SKILL.md) - ML model debugging, drift detection, API monitoring, batch pipeline troubleshooting
+- [ai-mlops](../ai-mlops/SKILL.md) - Security debugging, jailbreak detection, privacy issues, threat modeling
 
 ---
 

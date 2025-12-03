@@ -178,11 +178,11 @@ Templates are organized by database technology for precision and clarity:
 **Quality & Security:**
 - [../quality-resilience-patterns/SKILL.md](../quality-resilience-patterns/SKILL.md) — Resilience, circuit breakers, and failure handling
 - [../software-security-appsec/SKILL.md](../software-security-appsec/SKILL.md) — Database security, auth, SQL injection prevention
-- [../software-testing-automation/SKILL.md](../software-testing-automation/SKILL.md) — Database testing strategies
+- [../testing-automation/SKILL.md](../testing-automation/SKILL.md) — Database testing strategies
 
 **Data Engineering & AI:**
 - [../ai-ml-data-science/SKILL.md](../ai-ml-data-science/SKILL.md) — SQLMesh, dbt, data transformations
-- [../ai-ml-ops-production/SKILL.md](../ai-ml-ops-production/SKILL.md) — Data pipelines, ETL, and warehouse loading (dlt)
+- [../ai-mlops/SKILL.md](../ai-mlops/SKILL.md) — Data pipelines, ETL, and warehouse loading (dlt)
 - [../ai-ml-timeseries/SKILL.md](../ai-ml-timeseries/SKILL.md) — Time-series databases and forecasting
 
 ---

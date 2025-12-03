@@ -287,12 +287,12 @@ See [data/sources.json](data/sources.json) for:
 
 ## Related Skills
 
-- **Documentation Audit**: [../codebase-documentation-audit/SKILL.md](../codebase-documentation-audit/SKILL.md) - Audit codebases for documentation gaps, generate coverage reports, identify what needs documenting
+- **Documentation Audit**: [../quality-documentation-audit/SKILL.md](../quality-documentation-audit/SKILL.md) - Audit codebases for documentation gaps, generate coverage reports, identify what needs documenting
 - **API Design**: [../foundation-api-design/SKILL.md](../foundation-api-design/SKILL.md) - REST API patterns, endpoint design, versioning strategies
 - **Code Review**: [../software-code-review/SKILL.md](../software-code-review/SKILL.md) - Code review checklists including documentation standards
-- **Testing**: [../software-testing-automation/SKILL.md](../software-testing-automation/SKILL.md) - Test documentation patterns, test plan templates
+- **Testing**: [../testing-automation/SKILL.md](../testing-automation/SKILL.md) - Test documentation patterns, test plan templates
 - **Git Workflow**: [../foundation-git-workflow/SKILL.md](../foundation-git-workflow/SKILL.md) - Commit message standards (Conventional Commits), changelog automation
-- **PRD Development**: [../product-prd-development/SKILL.md](../product-prd-development/SKILL.md) - PRD templates, tech specs, story mapping for new features
+- **PRD Development**: [../product-prd-for-agents/SKILL.md](../product-prd-for-agents/SKILL.md) - PRD templates, tech specs, story mapping for new features
 
 ---
 

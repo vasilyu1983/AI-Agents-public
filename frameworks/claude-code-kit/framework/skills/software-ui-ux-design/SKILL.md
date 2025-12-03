@@ -108,7 +108,7 @@ Design challenge: [Feature Type]
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Frontend implementation (Next.js 15, React, TypeScript, Tailwind CSS, shadcn/ui)
 - [../software-mobile/SKILL.md](../software-mobile/SKILL.md) — Mobile UX patterns (iOS Swift, Android Kotlin, platform conventions)
 - [../product-management/SKILL.md](../product-management/SKILL.md) — Product strategy, user research, positioning
-- [../software-testing-automation/SKILL.md](../software-testing-automation/SKILL.md) — UI/E2E testing, visual regression, accessibility automation
+- [../testing-automation/SKILL.md](../testing-automation/SKILL.md) — UI/E2E testing, visual regression, accessibility automation
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System design patterns and architecture principles
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — API design for optimal UX (REST, GraphQL, real-time)
 

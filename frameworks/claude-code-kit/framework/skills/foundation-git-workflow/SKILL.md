@@ -218,7 +218,7 @@ Team characteristics → What's your situation?
 - [Software Code Review](../software-code-review/SKILL.md) - Code review standards and techniques
 - [Quality Debugging & Troubleshooting](../quality-debugging-troubleshooting/SKILL.md) - Git bisect, debugging workflows
 - [DevOps Platform Engineering](../ops-devops-platform/SKILL.md) - CI/CD pipelines, automation
-- [Software Testing & Automation](../software-testing-automation/SKILL.md) - Test-driven development, coverage gates
+- [Software Testing & Automation](../testing-automation/SKILL.md) - Test-driven development, coverage gates
 - [Documentation Standards](../foundation-documentation/SKILL.md) - Changelog formats, documentation workflows
 
 ---

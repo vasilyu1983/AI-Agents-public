@@ -124,7 +124,7 @@ See [resources/](resources/) for framework-specific best practices.
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — Backend API development, Node.js, Prisma, authentication
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System design, scalability, microservices patterns
 - [../software-code-review/SKILL.md](../software-code-review/SKILL.md) — Code review best practices, PR workflow
-- [../ai-llm-engineering/SKILL.md](../ai-llm-engineering/SKILL.md) — AI-powered features, LLM integration patterns
+- [../ai-llm/SKILL.md](../ai-llm/SKILL.md) — AI-powered features, LLM integration patterns
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — Deployment, CI/CD, containerization, Kubernetes
 - [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) — Database design, SQL optimization, Prisma/Drizzle
 

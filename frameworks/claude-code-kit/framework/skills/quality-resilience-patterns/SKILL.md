@@ -174,7 +174,7 @@ Failure scenario: [System Dependency Type]
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — Incident response, SLOs, and platform runbooks
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — API error handling, retries, and database reliability patterns
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System decomposition and dependency design for reliability
-- [../software-testing-automation/SKILL.md](../software-testing-automation/SKILL.md) — Regression, load, and fault-injection testing strategies
+- [../testing-automation/SKILL.md](../testing-automation/SKILL.md) — Regression, load, and fault-injection testing strategies
 - [../software-security-appsec/SKILL.md](../software-security-appsec/SKILL.md) — Security failure modes and guardrails
 - [../quality-observability-performance/SKILL.md](../quality-observability-performance/SKILL.md) — Metrics, tracing, logging, and performance monitoring
 - [../quality-debugging-troubleshooting/SKILL.md](../quality-debugging-troubleshooting/SKILL.md) — Production debugging and incident investigation

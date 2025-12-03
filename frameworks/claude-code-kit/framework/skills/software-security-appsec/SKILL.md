@@ -136,12 +136,12 @@ For C#/.NET crypto/fintech services using Entity Framework Core, see:
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — Secure system decomposition and dependency design
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — DevSecOps pipelines, secrets management, infrastructure hardening
 - [../software-crypto-web3/SKILL.md](../software-crypto-web3/SKILL.md) — Smart contract security, blockchain vulnerabilities, DeFi patterns
-- [../software-testing-automation/SKILL.md](../software-testing-automation/SKILL.md) — Security testing, SAST/DAST integration, penetration testing
+- [../testing-automation/SKILL.md](../testing-automation/SKILL.md) — Security testing, SAST/DAST integration, penetration testing
 
 #### AI/LLM Security
 
-- [../ai-llm-engineering/SKILL.md](../ai-llm-engineering/SKILL.md) — LLM security patterns including prompt injection prevention
-- [../ai-ml-ops-security/SKILL.md](../ai-ml-ops-security/SKILL.md) — ML model security, adversarial attacks, privacy-preserving ML
+- [../ai-llm/SKILL.md](../ai-llm/SKILL.md) — LLM security patterns including prompt injection prevention
+- [../ai-mlops/SKILL.md](../ai-mlops/SKILL.md) — ML model security, adversarial attacks, privacy-preserving ML
 
 #### Quality & Resilience
 

@@ -55,13 +55,13 @@ Claude should invoke this skill when the user asks for **hands-on DS/ML workflow
 
 For adjacent topics, reference:
 
-- **[ai-ml-ops-production](../ai-ml-ops-production/SKILL.md)** - APIs, batch jobs, monitoring, drift, data ingestion (dlt)
-- **[ai-ml-ops-security](../ai-ml-ops-security/SKILL.md)** - ML security, privacy, governance, threat models
-- **[ai-llm-development](../ai-llm-development/SKILL.md)** - LLM prompting, fine-tuning, evaluation
-- **[ai-llm-rag-engineering](../ai-llm-rag-engineering/SKILL.md)** - RAG pipelines, chunking, retrieval
-- **[ai-llm-ops-inference](../ai-llm-ops-inference/SKILL.md)** - LLM inference optimization, quantization
+- **[ai-mlops](../ai-mlops/SKILL.md)** - APIs, batch jobs, monitoring, drift, data ingestion (dlt)
+- **[ai-mlops](../ai-mlops/SKILL.md)** - ML security, privacy, governance, threat models
+- **[ai-llm](../ai-llm/SKILL.md)** - LLM prompting, fine-tuning, evaluation
+- **[ai-rag](../ai-rag/SKILL.md)** - RAG pipelines, chunking, retrieval
+- **[ai-llm-inference](../ai-llm-inference/SKILL.md)** - LLM inference optimization, quantization
 - **[ai-ml-timeseries](../ai-ml-timeseries/SKILL.md)** - Time series forecasting, backtesting
-- **[software-testing-automation](../software-testing-automation/SKILL.md)** - Test-driven development, coverage
+- **[testing-automation](../testing-automation/SKILL.md)** - Test-driven development, coverage
 - **[ops-database-sql](../ops-database-sql/SKILL.md)** - SQL optimization, index patterns (complements SQLMesh)
 
 ---
@@ -80,7 +80,7 @@ User needs ML for: [Problem Type]
     │   └─ Long-term dependencies? → Transformers (ai-ml-timeseries)
     │
     ├─ Text or Mixed Modalities?
-    │   └─ LLMs/Transformers → See ai-llm-development
+    │   └─ LLMs/Transformers → See ai-llm
     │
     └─ SQL Transformations?
         └─ SQLMesh (staging/intermediate/marts layers)
@@ -277,7 +277,7 @@ For SQL-based data transformation and feature engineering:
 - Testing SQL logic with unit tests and audits
 
 **For data ingestion (loading raw data), use:**
-- [ai-ml-ops-production](../ai-ml-ops-production/SKILL.md) skill (dlt templates for REST APIs, databases, warehouses)
+- [ai-mlops](../ai-mlops/SKILL.md) skill (dlt templates for REST APIs, databases, warehouses)
 
 ## Navigation
 

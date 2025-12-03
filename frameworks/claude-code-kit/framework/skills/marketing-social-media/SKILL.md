@@ -32,8 +32,8 @@ Use this skill when the user asks for:
 | YouTube Ads | Video Brief | `templates/ads/youtube-video-brief.md` | Long-form video campaigns |
 | Influencer/UGC Program | Influencer Ops | `resources/influencer-ops-and-partnerships.md` | Sourcing, rights, Spark/whitelisting |
 | **Organic Content** | | | |
-| LinkedIn Posts | Viral Post Templates | `templates/social/linkedin/viral-post-templates.md` | B2B thought leadership, 2025 mechanics |
-| LinkedIn Carousel | Carousel Template | `templates/social/linkedin/carousel-template.md` | Educational content, frameworks |
+| LinkedIn Posts | Viral Post Templates | `templates/social/viral-post-templates.md` | B2B thought leadership, 2025 mechanics |
+| LinkedIn Carousel | Carousel Template | `templates/social/carousel-template.md` | Educational content, frameworks |
 | Virality / WOM | STEPPS & Seeding | `resources/virality-word-of-mouth.md` | Word-of-mouth loops, share triggers |
 | TikTok/Reels/Shorts | Organic Script | `templates/social/tiktok-organic-script.md` | Short-form video content |
 | Instagram Carousel | IG Carousel Template | `templates/social/instagram-carousel-template.md` | Multi-slide educational posts |
@@ -149,8 +149,8 @@ For detailed trees (TikTok scaling, offer creation, outreach triage), see `resou
 - [templates/social/instagram-reels-template.md](templates/social/instagram-reels-template.md)
 - [templates/social/multi-platform-content-template.md](templates/social/multi-platform-content-template.md)
 - [templates/social/ugc-brief-template.md](templates/social/ugc-brief-template.md)
-- [templates/social/linkedin/viral-post-templates.md](templates/social/linkedin/viral-post-templates.md)
-- [templates/social/linkedin/carousel-template.md](templates/social/linkedin/carousel-template.md)
+- [templates/social/viral-post-templates.md](templates/social/viral-post-templates.md)
+- [templates/social/carousel-template.md](templates/social/carousel-template.md)
 
 #### SEO & Content Hubs
 - [templates/seo/seo-brief-template.md](templates/seo/seo-brief-template.md)
@@ -183,12 +183,12 @@ For detailed trees (TikTok scaling, offer creation, outreach triage), see `resou
 
 **Product & Strategy**
 - [../product-management/SKILL.md](../product-management/SKILL.md) — Product positioning, messaging frameworks, discovery, and go-to-market strategy
-- [../product-prd-development/SKILL.md](../product-prd-development/SKILL.md) — PRDs, technical specs, and requirements for marketing campaigns
+- [../product-prd-for-agents/SKILL.md](../product-prd-for-agents/SKILL.md) — PRDs, technical specs, and requirements for marketing campaigns
 
 **AI & Content Intelligence**
-- [../ai-prompt-engineering/SKILL.md](../ai-prompt-engineering/SKILL.md) — LLM prompts for content generation, hooks, CTA variants, and creative testing
-- [../ai-llm-engineering/SKILL.md](../ai-llm-engineering/SKILL.md) — RAG systems, embeddings, and AI-powered content libraries
-- [../ai-agents-development/SKILL.md](../ai-agents-development/SKILL.md) — Multi-agent systems for marketing automation and campaign orchestration
+- [../ai-prompts/SKILL.md](../ai-prompts/SKILL.md) — LLM prompts for content generation, hooks, CTA variants, and creative testing
+- [../ai-llm/SKILL.md](../ai-llm/SKILL.md) — RAG systems, embeddings, and AI-powered content libraries
+- [../ai-agents/SKILL.md](../ai-agents/SKILL.md) — Multi-agent systems for marketing automation and campaign orchestration
 - [../marketing-ai-search-optimization/SKILL.md](../marketing-ai-search-optimization/SKILL.md) — AI search engine optimization (AEO/GEO) for ChatGPT, Perplexity, Claude, and Gemini citations
 
 **Frontend & Design**

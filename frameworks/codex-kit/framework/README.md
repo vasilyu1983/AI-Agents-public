@@ -59,7 +59,7 @@ Codex: Agent: sql-engineer | Skill: ops-database-sql
        [provides SQL optimization using expertise from both]
 
 User: "Design a RAG pipeline for document retrieval"
-Codex: Agent: llm-engineer | Skill: ai-llm-rag-engineering
+Codex: Agent: llm-engineer | Skill: ai-rag
        [provides RAG architecture using combined knowledge]
 ```
 
@@ -69,10 +69,10 @@ Codex: Agent: llm-engineer | Skill: ai-llm-rag-engineering
 **Purpose**: Paste-ready session starter
 **Usage**: Paste into Codex at the start of each session
 **Contains**:
-- Full skills catalog (34 skills)
-- Full agents catalog (17 agents)
+- Full skills catalog (50 skills)
+- Full agents catalog (18 agents)
 - Routing rules with priority order
-- 12 diverse examples covering all domains
+- 12+ diverse examples covering all domains
 - Output format specification (`Agent: X | Skill: Y`)
 
 **This is the ONLY file you need to paste.** The other files are for reference.
@@ -96,11 +96,11 @@ Codex: Agent: llm-engineer | Skill: ai-llm-rag-engineering
 **Purpose**: Configuration and deployment metadata
 **Usage**: Reference for system information
 **Contains**:
-- Version: 1.0
-- Last updated: 2025-11-18
-- Source directories (`.claude/skills/`, `.claude/agents/`)
+- Version: 1.2
+- Last updated: 2025-12-03
+- Source directories (`.claude/skills/`, `.claude/agents/`, `.claude/commands/`)
 - Deployment paths
-- Counts: 17 agents, 34 skills, 28 routing rules
+- Counts: 18 agents, 50 skills, 30 routing rules
 - Compatibility requirements
 
 **Use this when**:
@@ -112,7 +112,7 @@ Codex: Agent: llm-engineer | Skill: ai-llm-rag-engineering
 **Purpose**: Test cases for routing correctness
 **Usage**: Verify routing logic works as expected
 **Contains**:
-- 15 standard test cases (all agent types, all priority rules)
+- 18 standard test cases (all agent types, new skills, all priority rules)
 - 8 edge cases (overrides, conflicts, ambiguity, missing components)
 - Expected routes with rationale and priority rule applied
 
@@ -130,8 +130,8 @@ The router creates a bridge between two frameworks in the **same repository**:
 ```
 Your Repository
 ├── .claude/                    # Claude Code Kit (source of truth)
-│   ├── skills/                 # 33 operational skills
-│   ├── agents/                 # 17 specialized agents
+│   ├── skills/                 # 50 operational skills
+│   ├── agents/                 # 18 specialized agents
 │   └── commands/               # 15 slash commands
 └── .codex/                     # Codex Kit (routing layer)
     ├── codex-router.md         # Reference documentation
@@ -162,7 +162,7 @@ User explicitly specified the agent, so override all other rules.
 **2. Task-Specific Routing**
 ```
 User: "Design a RAG pipeline with reranking"
-Codex: Agent: llm-engineer | Skill: ai-llm-rag-engineering
+Codex: Agent: llm-engineer | Skill: ai-rag
 ```
 Task type ("RAG pipeline") matches specific routing rule.
 
@@ -188,7 +188,7 @@ When multiple routes could apply:
 ```
 User: "Review backend API security"
 Options: backend-engineer, security-specialist
-Codex: Agent: backend-engineer | Skill: ai-ml-ops-security
+Codex: Agent: backend-engineer | Skill: ai-mlops
 (backend-engineer is more specialized for API review)
 ```
 

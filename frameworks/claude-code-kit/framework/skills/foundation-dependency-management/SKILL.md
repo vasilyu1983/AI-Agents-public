@@ -290,7 +290,7 @@ For complementary workflows and deeper dives:
 
 - [`foundation-api-design`](../foundation-api-design/SKILL.md) - API versioning strategies, dependency injection patterns
 - [`foundation-git-workflow`](../foundation-git-workflow/SKILL.md) - Git workflows for managing lockfile conflicts, branching strategies
-- [`software-testing-automation`](../software-testing-automation/SKILL.md) - Testing strategies for dependency updates, integration testing
+- [`testing-automation`](../testing-automation/SKILL.md) - Testing strategies for dependency updates, integration testing
 - [`software-security-appsec`](../software-security-appsec/SKILL.md) - OWASP Top 10, cryptography standards, authentication patterns
 - [`ops-devops-platform`](../ops-devops-platform/SKILL.md) - CI/CD pipelines, Docker containerization, DevSecOps, deployment automation
 - [`foundation-documentation`](../foundation-documentation/SKILL.md) - Documenting dependency choices, ADRs, changelogs

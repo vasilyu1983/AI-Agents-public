@@ -302,7 +302,7 @@ Excel task?
 
 - [../foundation-documentation/SKILL.md](../foundation-documentation/SKILL.md) — Docs strategy, templates, writing patterns
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — HTML/CSS/React sources for slide or PDF generation
-- [../software-testing-automation/SKILL.md](../software-testing-automation/SKILL.md) — Automated QA and regression checks for outputs
+- [../testing-automation/SKILL.md](../testing-automation/SKILL.md) — Automated QA and regression checks for outputs
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — CI pipelines for document generation and validation
 
 ---
