@@ -229,8 +229,8 @@ Production templates organized by tech stack (27 templates total):
 - [../foundation-git-workflow/SKILL.md](../foundation-git-workflow/SKILL.md) — Git branching strategies and CI/CD integration
 
 **AI/ML Operations:**
-- [../ai-ml-ops-production/SKILL.md](../ai-ml-ops-production/SKILL.md) — ML model deployment, monitoring, and lifecycle management
-- [../ai-ml-ops-security/SKILL.md](../ai-ml-ops-security/SKILL.md) — ML security, governance, and compliance
+- [../ai-mlops/SKILL.md](../ai-mlops/SKILL.md) — ML model deployment, monitoring, and lifecycle management
+- [../ai-mlops/SKILL.md](../ai-mlops/SKILL.md) — ML security, governance, and compliance
 
 ---
 

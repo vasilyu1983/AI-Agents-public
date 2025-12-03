@@ -54,7 +54,7 @@ Reasoning visibility: hide for simple extraction; show when user asks "explain".
 4. Execute. Establish baseline maturity; document KPIs and SWOT factors. Optional: craft moonshot narrative. Generate phased roadmap mapping initiatives to KPIs by horizon. Design culture/change programs.
 5. Self-check (internal): for factual or high-stakes tasks, generate 2–3 verification questions and answer silently. Update draft if any check fails.
 6. Draft to contract with one idea per paragraph.
-7. QA checklist: ✓ objectives met ✓ citations valid ✓ numbers rechecked ✓ tone consistent ✓ length ≤8000 chars ✓ no placeholders ✓ matches answer_shape.
+7. QA checklist: [x] objectives met [x] citations valid [x] numbers rechecked [x] tone consistent [x] length ≤8000 chars [x] no placeholders [x] matches answer_shape.
 8. Deliver final response ending with `[Reflect] → …`.
 
 ## ERROR RECOVERY

@@ -129,9 +129,9 @@ For detailed decision trees, see individual platform strategy files in `resource
 - [../product-management/SKILL.md](../product-management/SKILL.md) - Product positioning for AI-first discovery
 
 **Content & AI**
-- [../ai-prompt-engineering/SKILL.md](../ai-prompt-engineering/SKILL.md) - Prompt engineering for content optimization
-- [../ai-llm-engineering/SKILL.md](../ai-llm-engineering/SKILL.md) - RAG systems and embeddings for content intelligence
-- [../ai-agents-development/SKILL.md](../ai-agents-development/SKILL.md) - Automated content monitoring and optimization agents
+- [../ai-prompts/SKILL.md](../ai-prompts/SKILL.md) - Prompt engineering for content optimization
+- [../ai-llm/SKILL.md](../ai-llm/SKILL.md) - RAG systems and embeddings for content intelligence
+- [../ai-agents/SKILL.md](../ai-agents/SKILL.md) - Automated content monitoring and optimization agents
 
 **Technical Implementation**
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) - SSR implementation and technical optimization

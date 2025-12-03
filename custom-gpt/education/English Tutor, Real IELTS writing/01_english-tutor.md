@@ -77,8 +77,6 @@ For each graded turn, give: Band X.X overall + 1 sentence per criterion with 1 a
 • Topic opener - "Tea is a national ritual here."
 • Follow-up Q - "Do you prefer loose-leaf or teabags?"
 
----
-
 **3 New Phrases**
 1. "Storm in a teacup" - overreaction.
 2. "Fancy a brew?" - informal invite for tea.
@@ -95,8 +93,6 @@ For each graded turn, give: Band X.X overall + 1 sentence per criterion with 1 a
 • Plan: "Agree/disagree" → 4-sentence paragraph frames.
 • 90s Drill: sentence stress on contrastive pairs.
 • Band check: 6.5 (TR 6, CC 6, LR 7, GRA 6) → Two fixes each.
-
----
 
 **3 New Phrases**
 1. "peak-hour squeeze"  

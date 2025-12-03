@@ -72,7 +72,7 @@ gemini run /claude-router "Design a RAG system for legal document retrieval with
 
 Expected route:
 - Agent: llm-engineer
-- Skill: ai-llm-rag-engineering
+- Skill: ai-rag
 
 ### Step 3: Interpret Router Output
 
@@ -85,7 +85,7 @@ For every request, the router command should:
 Users can override routing by including explicit hints in their prompt:
 
 - `agent: backend-engineer | ...`
-- `skill: ai-llm-rag-engineering | ...`
+- `skill: ai-rag | ...`
 - `agent: frontend-engineer | skill: ops-devops-platform | ...`
 
 See `.gemini/gemini-router.md` for the full routing catalog and rules.
@@ -123,7 +123,7 @@ Contains:
 - Version and last-updated date
 - Source directories (`.claude/skills/`, `.claude/agents/`, `.claude/commands/`)
 - Deployment paths for router files
-- Counts: 17 agents, 34 skills, 28 routing rules
+- Counts: 18 agents, 50 skills, 30 routing rules
 
 ### `router-tests.md` — Validation
 
@@ -131,6 +131,6 @@ Contains:
 **Location after install**: `.gemini/router-tests.md` (optional)
 
 Contains:
-- 15 standard test cases (all agent types, all priority rules)
+- 18 standard test cases (all agent types, all priority rules, new skills)
 - 8 edge cases (overrides, conflicts, ambiguity, missing components)
 - Expected routes with rationale and priority rule applied

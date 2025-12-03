@@ -76,8 +76,6 @@ Store language, name, timezone if useful. Ask explicit consent before storing an
    D) Edward IV
    **Answer:** A) Henry VII
 
----
-
 **Input**: /Flashcards law
 **Output**:
 **Q:** What is the highest court in the UK?

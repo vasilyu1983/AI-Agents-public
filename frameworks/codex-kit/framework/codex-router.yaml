@@ -1,5 +1,5 @@
 version: "1.2"
-last_updated: "2025-11-22"
+last_updated: "2025-12-03"
 description: "Codex router for Claude Code Kit skills and agents"
 
 source_dirs:
@@ -21,23 +21,24 @@ compatibility:
   claude_code_kit_version: ">=1.0"
 
 agents_count: 18
-skills_count: 38
+skills_count: 50
 routing_rules_count: 30
 
 agents:
   - id: ai-agents-builder
     description: AI agent architecture, implementation, testing, optimization for production systems
     preferred_skills:
-      - ai-agents-development
-      - ai-llm-rag-engineering
-      - ai-prompt-engineering
+      - ai-agents
+      - ai-rag
+      - ai-prompts
+      - ops-document-automation
     domain: ai-systems
 
   - id: backend-engineer
     description: Production backend APIs, database design, auth, security, testing, deployment
     preferred_skills:
       - software-backend
-      - ai-llm-search-retrieval
+      - ai-rag
       - ops-database-sql
     domain: backend
 
@@ -58,7 +59,7 @@ agents:
     preferred_skills:
       - ai-ml-data-science
       - ai-ml-timeseries
-      - ai-ml-ops-production
+      - ai-mlops
     domain: data-science
 
   - id: devops-engineer
@@ -77,12 +78,11 @@ agents:
   - id: llm-engineer
     description: LLM lifecycle management - data curation, fine-tuning, evaluation, optimization, deployment
     preferred_skills:
-      - ai-llm-development
-      - ai-llm-engineering
-      - ai-llm-ops-inference
-      - ai-llm-rag-engineering
-      - ai-llm-search-retrieval
-      - ai-ml-ops-security
+      - ai-llm
+      - ai-llm-inference
+      - ai-rag
+      - ai-prompts
+      - ai-mlops
     domain: llm
 
   - id: mobile-engineer
@@ -94,7 +94,7 @@ agents:
   - id: prd-architect
     description: PRD creation, validation, technical specification for software projects
     preferred_skills:
-      - product-prd-development
+      - product-prd-for-agents
       - foundation-documentation
     domain: product
 
@@ -108,15 +108,15 @@ agents:
   - id: prompt-engineer
     description: Operational prompt engineering for LLMs - design, optimize, validate
     preferred_skills:
-      - ai-prompt-engineering
-      - ai-llm-development
+      - ai-prompts
+      - ai-llm
     domain: prompting
 
   - id: security-specialist
     description: Application security specialist covering OWASP Top 10 2025, zero trust, supply chain security, and secure design
     preferred_skills:
       - software-security-appsec
-      - ai-ml-ops-security
+      - ai-mlops
     domain: security
 
   - id: leads-strategist
@@ -124,6 +124,7 @@ agents:
     preferred_skills:
       - marketing-leads-generation
       - marketing-social-media
+      - marketing-seo-technical
     domain: marketing
 
   - id: smm-strategist
@@ -149,13 +150,15 @@ agents:
   - id: test-architect
     description: Test strategy, planning, coverage analysis, and QA leadership
     preferred_skills:
-      - software-testing-automation
+      - testing-automation
+      - testing-webapp-playwright
+      - testing-ios-simulator
       - quality-code-refactoring
       - quality-debugging-troubleshooting
     domain: quality
 
 skills:
-  - id: ai-agents-development
+  - id: ai-agents
     triggers:
       - "design agent"
       - "build agent"
@@ -163,7 +166,7 @@ skills:
       - "tool integration"
       - "multi-agent"
 
-  - id: ai-llm-development
+  - id: ai-llm
     triggers:
       - "fine-tune"
       - "LLM training"
@@ -171,37 +174,13 @@ skills:
       - "dataset preparation"
       - "LLM evaluation"
 
-  - id: ai-llm-engineering
-    triggers:
-      - "LLM architecture"
-      - "LLMOps"
-      - "RAG system"
-      - "agentic workflow"
-      - "production LLM"
-
-  - id: ai-llm-ops-inference
+  - id: ai-llm-inference
     triggers:
       - "quantization"
       - "vLLM"
       - "inference optimization"
       - "serving"
       - "TensorRT"
-
-  - id: ai-llm-rag-engineering
-    triggers:
-      - "RAG"
-      - "retrieval"
-      - "chunking"
-      - "reranking"
-      - "vector search"
-
-  - id: ai-llm-search-retrieval
-    triggers:
-      - "search"
-      - "BM25"
-      - "hybrid search"
-      - "ANN"
-      - "ranking"
 
   - id: ai-ml-data-science
     triggers:
@@ -211,22 +190,6 @@ skills:
       - "EDA"
       - "SQLMesh"
 
-  - id: ai-ml-ops-production
-    triggers:
-      - "ML deployment"
-      - "model serving"
-      - "monitoring"
-      - "drift detection"
-      - "pipeline"
-
-  - id: ai-ml-ops-security
-    triggers:
-      - "prompt injection"
-      - "jailbreak"
-      - "ML security"
-      - "privacy"
-      - "PII"
-
   - id: ai-ml-timeseries
     triggers:
       - "time series"
@@ -235,7 +198,15 @@ skills:
       - "Prophet"
       - "seasonal"
 
-  - id: ai-prompt-engineering
+  - id: ai-mlops
+    triggers:
+      - "ML deployment"
+      - "model serving"
+      - "monitoring"
+      - "drift detection"
+      - "pipeline"
+
+  - id: ai-prompts
     triggers:
       - "prompt design"
       - "prompt optimization"
@@ -243,13 +214,93 @@ skills:
       - "JSON mode"
       - "extractor"
 
-  - id: codebase-documentation-audit
+  - id: ai-rag
     triggers:
-      - "documentation audit"
-      - "codebase documentation"
-      - "documentation coverage"
-      - "documentation gaps"
-      - "audit docs"
+      - "RAG"
+      - "retrieval"
+      - "chunking"
+      - "reranking"
+      - "vector search"
+
+  - id: claude-code-agents
+    triggers:
+      - "Claude Code agent"
+      - "agent frontmatter"
+      - "agent.yaml"
+      - "tool config"
+      - "model routing"
+
+  - id: claude-code-commands
+    triggers:
+      - "slash command"
+      - "command YAML"
+      - "codex command"
+      - "tool invocation"
+      - "command scaffolding"
+
+  - id: claude-code-hooks
+    triggers:
+      - "pre-run hook"
+      - "post-run hook"
+      - "setup hooks"
+      - "shell hook"
+      - "automation hook"
+
+  - id: claude-code-mcp
+    triggers:
+      - "MCP server"
+      - "Model Context Protocol"
+      - "tool bridge"
+      - "mcp config"
+      - "context server"
+
+  - id: claude-code-project-memory
+    triggers:
+      - "project memory"
+      - "CLAUDE.md"
+      - "workspace memory"
+      - "persistent context"
+      - "memory hierarchy"
+
+  - id: claude-code-skills
+    triggers:
+      - "skill bundle"
+      - "skill.yaml"
+      - "Claude Code skill"
+      - "skill packaging"
+      - "skill scaffold"
+
+  - id: document-docx
+    triggers:
+      - "docx"
+      - "Word document"
+      - "Microsoft Word"
+      - "convert docx"
+      - "edit doc"
+
+  - id: document-pdf
+    triggers:
+      - "pdf"
+      - "parse pdf"
+      - "summarize pdf"
+      - "extract pdf"
+      - "PDF analysis"
+
+  - id: document-pptx
+    triggers:
+      - "PowerPoint"
+      - "pptx"
+      - "slides"
+      - "presentation deck"
+      - "slide outline"
+
+  - id: document-xlsx
+    triggers:
+      - "Excel"
+      - "xlsx"
+      - "spreadsheet"
+      - "workbook"
+      - "sheet formulas"
 
   - id: foundation-api-design
     triggers:
@@ -275,6 +326,14 @@ skills:
       - "changelog"
       - "docs"
 
+  - id: foundation-git-commit-message
+    triggers:
+      - "commit message"
+      - "conventional commit"
+      - "generate commit"
+      - "git diff"
+      - "/commit-msg"
+
   - id: foundation-git-workflow
     triggers:
       - "git workflow"
@@ -282,14 +341,6 @@ skills:
       - "pull request"
       - "merge"
       - "commit message"
-
-  - id: git-commit-message
-    triggers:
-      - "commit message"
-      - "conventional commit"
-      - "generate commit"
-      - "git diff"
-      - "/commit-msg"
 
   - id: marketing-ai-search-optimization
     triggers:
@@ -309,6 +360,14 @@ skills:
       - "SDR"
       - "landing page"
 
+  - id: marketing-seo-technical
+    triggers:
+      - "technical SEO"
+      - "schema markup"
+      - "crawl budget"
+      - "page speed"
+      - "sitemaps"
+
   - id: marketing-social-media
     triggers:
       - "social media"
@@ -316,6 +375,14 @@ skills:
       - "Instagram"
       - "LinkedIn"
       - "campaign"
+
+  - id: ops-database-metabase
+    triggers:
+      - "Metabase"
+      - "BI dashboard"
+      - "Metabase SQL"
+      - "Metabase modeling"
+      - "analytics"
 
   - id: ops-database-sql
     triggers:
@@ -333,6 +400,14 @@ skills:
       - "infrastructure"
       - "deploy"
 
+  - id: ops-document-automation
+    triggers:
+      - "document automation"
+      - "OCR pipeline"
+      - "template fill"
+      - "forms processing"
+      - "doc workflow"
+
   - id: product-management
     triggers:
       - "product strategy"
@@ -341,7 +416,7 @@ skills:
       - "user research"
       - "metrics"
 
-  - id: product-prd-development
+  - id: product-prd-for-agents
     triggers:
       - "PRD"
       - "requirements"
@@ -364,6 +439,14 @@ skills:
       - "log analysis"
       - "incident"
       - "root cause"
+
+  - id: quality-documentation-audit
+    triggers:
+      - "documentation audit"
+      - "codebase documentation"
+      - "documentation coverage"
+      - "documentation gaps"
+      - "audit docs"
 
   - id: quality-observability-performance
     triggers:
@@ -437,14 +520,6 @@ skills:
       - "XSS"
       - "CSRF"
 
-  - id: software-testing-automation
-    triggers:
-      - "unit test"
-      - "integration test"
-      - "E2E"
-      - "test automation"
-      - "coverage"
-
   - id: software-ui-ux-design
     triggers:
       - "UX"
@@ -452,6 +527,38 @@ skills:
       - "wireframe"
       - "accessibility"
       - "design system"
+
+  - id: testing-automation
+    triggers:
+      - "unit test"
+      - "integration test"
+      - "E2E"
+      - "test automation"
+      - "coverage"
+
+  - id: testing-ios-simulator
+    triggers:
+      - "iOS simulator"
+      - "Xcode sim"
+      - "simctl"
+      - "iOS testing"
+      - "mobile simulator"
+
+  - id: testing-webapp-playwright
+    triggers:
+      - "Playwright"
+      - "browser automation"
+      - "web E2E"
+      - "page object"
+      - "headless"
+
+  - id: workflow-planning
+    triggers:
+      - "workflow plan"
+      - "process mapping"
+      - "SOP"
+      - "task decomposition"
+      - "playbook"
 
 routing_priority:
   - level: 1

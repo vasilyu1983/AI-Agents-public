@@ -1,4 +1,4 @@
-# Codex Router Test Cases
+# Gemini Router Test Cases
 
 This document contains validation test cases to verify routing logic correctness.
 
@@ -6,7 +6,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 1: AI Agent Architecture Design
 **User Input**: "Design a production-ready AI agent for customer support with RAG and tool calling"
-**Expected Route**: Agent: ai-agents-builder | Skill: ai-agents-development
+**Expected Route**: Agent: ai-agents-builder | Skill: ai-agents
 **Rationale**: Task is agent architecture design, requires agent patterns and RAG integration
 **Priority Rule**: 2 (Task-specific routing)
 
@@ -38,7 +38,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 5: LLM Fine-Tuning
 **User Input**: "Fine-tune LLaMA 2 7B for medical question answering with LoRA"
-**Expected Route**: Agent: llm-engineer | Skill: ai-llm-development
+**Expected Route**: Agent: llm-engineer | Skill: ai-llm
 **Rationale**: LLM fine-tuning with dataset preparation and evaluation
 **Priority Rule**: 2 (Task-specific routing for LLM fine-tuning)
 
@@ -46,7 +46,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 6: RAG Pipeline Design
 **User Input**: "Design a RAG system for legal document retrieval with reranking"
-**Expected Route**: Agent: llm-engineer | Skill: ai-llm-rag-engineering
+**Expected Route**: Agent: llm-engineer | Skill: ai-rag
 **Rationale**: RAG pipeline architecture (LLM-focused use case)
 **Priority Rule**: 2 (Task-specific routing for RAG)
 
@@ -78,7 +78,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 10: Prompt Engineering
 **User Input**: "Optimize this prompt for structured JSON extraction with validation"
-**Expected Route**: Agent: prompt-engineer | Skill: ai-prompt-engineering
+**Expected Route**: Agent: prompt-engineer | Skill: ai-prompts
 **Rationale**: Prompt optimization for structured outputs
 **Priority Rule**: 2 (Task-specific routing for prompt engineering)
 
@@ -86,7 +86,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 11: PRD Validation
 **User Input**: "Review this PRD for completeness and suggest improvements"
-**Expected Route**: Agent: prd-architect | Skill: product-prd-development
+**Expected Route**: Agent: prd-architect | Skill: product-prd-for-agents
 **Rationale**: PRD validation and quality checking
 **Priority Rule**: 2 (Task-specific routing for PRD work)
 
@@ -102,7 +102,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 13: LLM Inference Optimization
 **User Input**: "Optimize vLLM inference for Mistral 7B with quantization and batching"
-**Expected Route**: Agent: llm-engineer | Skill: ai-llm-ops-inference
+**Expected Route**: Agent: llm-engineer | Skill: ai-llm-inference
 **Rationale**: LLM serving and inference optimization
 **Priority Rule**: 2 (Task-specific routing for LLM inference)
 
@@ -110,7 +110,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 14: ML Model Deployment
 **User Input**: "Deploy this scikit-learn model as a FastAPI endpoint with monitoring"
-**Expected Route**: Agent: data-scientist | Skill: ai-ml-ops-production
+**Expected Route**: Agent: data-scientist | Skill: ai-mlops
 **Rationale**: ML model deployment with API serving
 **Priority Rule**: 2 (Task-specific routing for ML deployment)
 
@@ -118,9 +118,33 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 15: Security Review (ML System)
 **User Input**: "Audit this LLM chatbot for prompt injection vulnerabilities"
-**Expected Route**: Agent: llm-engineer | Skill: ai-ml-ops-security
+**Expected Route**: Agent: llm-engineer | Skill: ai-mlops
 **Rationale**: ML/LLM security audit for safety threats
 **Priority Rule**: 2 (Task-specific routing for ML security)
+
+---
+
+## Test Case 16: Technical SEO Audit
+**User Input**: "Audit our SaaS marketing site for schema markup, crawl budget, and page speed issues"
+**Expected Route**: Agent: leads-strategist | Skill: marketing-seo-technical
+**Rationale**: Technical SEO request; marketing domain with SEO skill
+**Priority Rule**: 2 (Task-specific routing for SEO)
+
+---
+
+## Test Case 17: Web E2E Automation
+**User Input**: "Create Playwright tests for checkout flow with fixtures and visual comparisons"
+**Expected Route**: Agent: test-architect | Skill: testing-webapp-playwright
+**Rationale**: Browser E2E automation task mapped to testing skill
+**Priority Rule**: 2 (Task-specific routing for testing)
+
+---
+
+## Test Case 18: Document Automation
+**User Input**: "Build an OCR pipeline to extract tables from PDFs and export to XLSX"
+**Expected Route**: Agent: ai-agents-builder | Skill: ops-document-automation
+**Rationale**: Document automation workflow requiring orchestration and OCR
+**Priority Rule**: 2 (Task-specific routing for document automation)
 
 ---
 
@@ -135,9 +159,9 @@ This document contains validation test cases to verify routing logic correctness
 ---
 
 ### Edge Case 2: Explicit Skill Override
-**User Input**: "skill: ai-llm-rag-engineering | Optimize document chunking strategy"  
-**Expected Route**: Agent: llm-engineer | Skill: ai-llm-rag-engineering  
-**Rationale**: User specified skill, router selects matching agent (llm-engineer uses ai-llm-rag-engineering)  
+**User Input**: "skill: ai-rag | Optimize document chunking strategy"  
+**Expected Route**: Agent: llm-engineer | Skill: ai-rag  
+**Rationale**: User specified skill, router selects matching agent (llm-engineer uses ai-rag)  
 **Priority Rule**: 1 (Explicit user override)
 
 ---
@@ -197,7 +221,7 @@ This document contains validation test cases to verify routing logic correctness
 ## Priority Rule Coverage
 
 **Priority 1 (Explicit Override)**: Test Cases - Edge Cases 1, 2, 3
-**Priority 2 (Task-Specific)**: Test Cases 1, 4, 5, 6, 9, 10, 11, 12, 13, 14, 15
+**Priority 2 (Task-Specific)**: Test Cases 1, 4, 5, 6, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
 **Priority 3 (Domain-Specific)**: Test Cases 2, 3, 7, 8, Edge Case 4
 **Priority 4 (Fallback)**: Edge Cases 5, 7
 
@@ -205,77 +229,20 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Domain Coverage
 
-- **AI Systems**: Test Cases 1, 6
+- **AI Systems**: Test Cases 1, 6, 18
 - **Backend**: Test Cases 2, Edge Cases 4, 5, 7
-- **Frontend**: Test Cases 3, Edge Case 6
-- **Database**: Test Cases 4, Edge Case 8
+- **Frontend**: Test Case 3, Edge Case 6
+- **Database**: Test Case 4, Edge Case 8
 - **LLM**: Test Cases 5, 6, 13, 15
 - **Mobile**: Test Case 7
 - **Infrastructure**: Test Case 8
 - **Data Science**: Test Cases 9, 12, 14
 - **Product**: Test Case 11
 - **Prompting**: Test Case 10
+- **Marketing/SEO**: Test Case 16
+- **Testing/E2E**: Test Case 17
+- **Documents/OCR**: Test Case 18
 
----
-
-## Test Case 16: Documentation Audit
-**User Input**: "Audit this codebase for documentation gaps and generate a coverage report"
-**Expected Route**: Agent: backend-engineer | Skill: codebase-documentation-audit
-**Rationale**: Documentation audit task for codebase analysis
-**Priority Rule**: 2 (Task-specific routing for documentation audit)
-
----
-
-## Skill Coverage
-
-All 34 skills covered:
-- ai-agents-development: Test 1
-- software-backend: Tests 2, Edge Cases 4, 5, 7  
-- ops-devops-platform: Test 8, Edge Case 3  
-- ai-ml-data-science: Test 9  
-- ai-ml-timeseries: Test 12  
-- software-frontend: Test 3, Edge Case 6  
-- ai-llm-development: Test 5  
-- ai-llm-ops-inference: Test 13  
-- ai-ml-ops-production: Test 14  
-- ai-ml-ops-security: Test 15  
-- software-mobile: Test 7  
-- product-prd-development: Test 11  
-- ai-prompt-engineering: Test 10  
-- ai-llm-rag-engineering: Test 6, Edge Case 2  
-- ai-llm-search-retrieval: (implicitly covered in backend/RAG)  
-- ops-database-sql: Test 4, Edge Case 8  
-
----
-
-## Agent Coverage
-
-All 10 agents covered:
-- ai-agents-builder: Test 1
-- backend-engineer: Tests 2, Edge Cases 1, 4, 5, 7
-- data-scientist: Tests 9, 12, 14
-- devops-engineer: Test 8, Edge Case 3
-- frontend-engineer: Tests 3, Edge Case 3, 6
-- llm-engineer: Tests 5, 6, 13, 15, Edge Case 2
-- mobile-engineer: Test 7
-- prd-architect: Test 11
-- prompt-engineer: Test 10
-- sql-engineer: Tests 4, Edge Case 8
-
----
-
-## Validation Checklist
-
-- [x] All 4 priority rules tested
-- [x] All 10 agents covered
-- [x] All 16 skills covered
-- [x] Explicit overrides tested (agent, skill, both)
-- [x] Multi-domain conflicts tested
-- [x] Missing skill/agent scenarios tested
-- [x] Security-focused routing tested
-- [x] Cross-domain tasks tested
-- [x] Ambiguous input handling tested
-- [x] Default fallback scenarios tested
 
 ---
 

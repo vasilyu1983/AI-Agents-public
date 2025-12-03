@@ -257,12 +257,12 @@ See [data/sources.json](data/sources.json) for curated sources:
 
 - [../quality-resilience-patterns/SKILL.md](../quality-resilience-patterns/SKILL.md) - Circuit breakers, retries, graceful degradation
 - [../quality-debugging-troubleshooting/SKILL.md](../quality-debugging-troubleshooting/SKILL.md) - Production debugging techniques
-- [../software-testing-automation/SKILL.md](../software-testing-automation/SKILL.md) - Testing strategies and automation
+- [../testing-automation/SKILL.md](../testing-automation/SKILL.md) - Testing strategies and automation
 
 **AI/ML Operations:**
 
-- [../ai-ml-ops-production/SKILL.md](../ai-ml-ops-production/SKILL.md) - ML model monitoring and deployment
-- [../ai-ml-ops-security/SKILL.md](../ai-ml-ops-security/SKILL.md) - ML security and governance
+- [../ai-mlops/SKILL.md](../ai-mlops/SKILL.md) - ML model monitoring and deployment
+- [../ai-mlops/SKILL.md](../ai-mlops/SKILL.md) - ML security and governance
 
 ---
 

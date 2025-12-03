@@ -107,7 +107,7 @@ See [templates/](templates/) for language-specific starter templates.
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — CI/CD, infrastructure, and deployment safety
 - [../quality-resilience-patterns/SKILL.md](../quality-resilience-patterns/SKILL.md) — Resilience, retries, and failure playbooks
 - [../software-code-review/SKILL.md](../software-code-review/SKILL.md) — Review checklists and standards for backend changes
-- [../software-testing-automation/SKILL.md](../software-testing-automation/SKILL.md) — Testing strategies, test pyramids, and coverage goals
+- [../testing-automation/SKILL.md](../testing-automation/SKILL.md) — Testing strategies, test pyramids, and coverage goals
 - [../foundation-api-design/SKILL.md](../foundation-api-design/SKILL.md) — RESTful design, GraphQL, and API versioning patterns
 - [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) — SQL optimization, indexing, and query tuning patterns
 

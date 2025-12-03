@@ -154,7 +154,7 @@ Traffic ok, CVR low?
 - [../marketing-social-media/SKILL.md](../marketing-social-media/SKILL.md) — Paid/organic social and content systems
 - [../product-management/SKILL.md](../product-management/SKILL.md) — Positioning and messaging alignment
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Landing implementation and performance
-- [../ai-prompt-engineering/SKILL.md](../ai-prompt-engineering/SKILL.md) — Rapid variant generation for copy/hooks
+- [../ai-prompts/SKILL.md](../ai-prompts/SKILL.md) — Rapid variant generation for copy/hooks
 - [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) — Funnel analytics and attribution queries
 
 ---

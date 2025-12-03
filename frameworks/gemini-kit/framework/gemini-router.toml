@@ -10,41 +10,42 @@ Repository context:
 - This command file lives in .gemini/commands/claude-router.toml.
 
 Available agents (from .claude/agents/):
-- ai-agents-builder: AI agent architecture, implementation, testing, and optimization for production systems (prefers skills ai-agents-development, ai-llm-rag-engineering, ai-prompt-engineering)
-- backend-engineer: Production backend APIs, database design, auth, security, testing, deployment (prefers software-backend, ai-llm-search-retrieval, ops-database-sql)
+- ai-agents-builder: AI agent architecture, implementation, testing, and optimization for production systems (prefers ai-agents, ai-rag, ai-prompts, ops-document-automation)
+- backend-engineer: Production backend APIs, database design, auth, security, testing, deployment (prefers software-backend, ai-rag, ops-database-sql)
 - code-reviewer: Code quality, security, readability, performance, and maintainability review (prefers software-code-review)
 - crypto-engineer: Blockchain and Web3 development with smart contracts, DeFi, NFTs, and security audits (prefers software-crypto-web3)
-- data-scientist: Exploratory analysis, feature engineering, modeling, deployment, and monitoring (prefers ai-ml-data-science, ai-ml-timeseries, ai-ml-ops-production)
+- data-scientist: Exploratory analysis, feature engineering, modeling, deployment, and monitoring (prefers ai-ml-data-science, ai-ml-timeseries, ai-mlops)
 - devops-engineer: Infrastructure as code, CI/CD pipelines, Kubernetes operations, observability, deployment, incident response (prefers ops-devops-platform)
 - frontend-engineer: Next.js/React/TypeScript frontend development, accessibility, performance (prefers software-frontend, software-ui-ux-design)
-- llm-engineer: LLM lifecycle management – data curation, fine-tuning, evaluation, optimization, deployment, safety (prefers ai-llm-development, ai-llm-engineering, ai-llm-ops-inference, ai-llm-rag-engineering, ai-llm-search-retrieval, ai-ml-ops-security)
+- llm-engineer: LLM lifecycle management – data curation, fine-tuning, evaluation, optimization, deployment, safety (prefers ai-llm, ai-llm-inference, ai-rag, ai-prompts, ai-mlops)
 - mobile-engineer: iOS/Android/React Native app development, architecture, testing, deployment (prefers software-mobile)
-- prd-architect: PRD creation, validation, and technical specifications (prefers product-prd-development, foundation-documentation)
+- prd-architect: PRD creation, validation, technical specifications (prefers product-prd-for-agents, foundation-documentation)
 - product-manager: Product strategy, roadmaps, user research, and metrics analysis (prefers product-management, foundation-documentation)
-- prompt-engineer: Prompt design, optimization, and validation (prefers ai-prompt-engineering, ai-llm-development)
-- security-specialist: Application security specialist covering OWASP Top 10 2025, zero trust, supply chain security, and secure design patterns (prefers software-security-appsec, ai-ml-ops-security)
+- prompt-engineer: Prompt design, optimization, and validation (prefers ai-prompts, ai-llm)
+- security-specialist: Application security specialist covering OWASP Top 10 2025, zero trust, supply chain security, and secure design patterns (prefers software-security-appsec, ai-mlops)
+- leads-strategist: Lead generation/marketing strategist (prefers marketing-leads-generation, marketing-social-media, marketing-seo-technical)
 - smm-strategist: Social media marketing strategist for content, campaigns, and growth (prefers marketing-social-media)
 - sql-engineer: SQL optimization, query tuning, database design, schema migrations, indexing (prefers ops-database-sql)
 - system-architect: System design, architecture review, and technical strategy (prefers software-architecture-design, quality-resilience-patterns, quality-observability-performance)
-- test-architect: Test strategy, planning, coverage analysis, and QA leadership (prefers software-testing-automation, quality-code-refactoring, quality-debugging-troubleshooting)
-
+- test-architect: Test strategy, planning, coverage analysis, and QA leadership (prefers testing-automation, testing-webapp-playwright, testing-ios-simulator, quality-code-refactoring, quality-debugging-troubleshooting)
 Available skills (from .claude/skills/):
-- ai-agents-development, ai-llm-development, ai-llm-engineering, ai-llm-ops-inference, ai-llm-rag-engineering,
-  ai-llm-search-retrieval, ai-ml-data-science, ai-ml-ops-production, ai-ml-ops-security, ai-ml-timeseries,
-  ai-prompt-engineering, codebase-documentation-audit, foundation-api-design, foundation-dependency-management,
-  foundation-documentation, foundation-git-workflow, marketing-social-media, ops-database-sql, ops-devops-platform,
-  product-management, product-prd-development, quality-code-refactoring, quality-debugging-troubleshooting,
-  quality-observability-performance, quality-resilience-patterns, software-architecture-design, software-backend,
-  software-code-review, software-crypto-web3, software-frontend, software-mobile, software-security-appsec,
-  software-testing-automation, software-ui-ux-design.
-
+- ai-agents, ai-llm, ai-llm-inference, ai-ml-data-science, ai-ml-timeseries, ai-mlops, ai-prompts, ai-rag,
+  claude-code-agents, claude-code-commands, claude-code-hooks, claude-code-mcp, claude-code-project-memory, claude-code-skills,
+  document-docx, document-pdf, document-pptx, document-xlsx,
+  foundation-api-design, foundation-dependency-management, foundation-documentation, foundation-git-commit-message, foundation-git-workflow,
+  marketing-ai-search-optimization, marketing-leads-generation, marketing-seo-technical, marketing-social-media,
+  ops-database-metabase, ops-database-sql, ops-devops-platform, ops-document-automation,
+  product-management, product-prd-for-agents,
+  quality-code-refactoring, quality-debugging-troubleshooting, quality-documentation-audit, quality-observability-performance, quality-resilience-patterns,
+  software-architecture-design, software-backend, software-code-review, software-crypto-web3, software-frontend, software-mobile, software-security-appsec, software-ui-ux-design,
+  testing-automation, testing-ios-simulator, testing-webapp-playwright, workflow-planning.
 Routing priority (4 levels):
 1) Explicit user override
    - If the user includes "agent: X" and/or "skill: Y" in the request, use that choice even if another route might look better.
    - If they specify both agent and skill, use exactly that combination.
 2) Task-specific routing
    - Map common task types to dedicated agent+skill pairs:
-     - AI agent architecture and RAG design → ai-agents-builder + ai-agents-development
+     - AI agent architecture and RAG design → ai-agents-builder + ai-agents
      - Backend API development (REST/GraphQL, auth, PostgreSQL) → backend-engineer + software-backend
      - Frontend (Next.js, React, TypeScript, Tailwind, shadcn/ui) → frontend-engineer + software-frontend
      - Mobile (iOS/Swift, Android/Kotlin, React Native) → mobile-engineer + software-mobile
@@ -52,12 +53,16 @@ Routing priority (4 levels):
      - General data science workflows (EDA, modeling, feature engineering) → data-scientist + ai-ml-data-science
      - Time series forecasting → data-scientist + ai-ml-timeseries
      - SQL optimization and database design → sql-engineer + ops-database-sql
-     - ML deployment/monitoring/data pipelines → data-scientist or llm-engineer + ai-ml-ops-production
-     - RAG pipeline design and retrieval strategy → llm-engineer + ai-llm-rag-engineering
-     - Prompt design and structured outputs → prompt-engineer + ai-prompt-engineering
-     - PRD creation and validation → prd-architect + product-prd-development
-     - LLM inference optimization (vLLM, quantization, batching) → llm-engineer + ai-llm-ops-inference
-     - ML/LLM security, prompt injection defense, privacy → llm-engineer + ai-ml-ops-security
+     - ML/LLM deployment/monitoring/data pipelines → data-scientist or llm-engineer + ai-mlops
+     - RAG pipeline design and retrieval strategy → llm-engineer + ai-rag
+     - Prompt design and structured outputs → prompt-engineer + ai-prompts
+     - PRD creation and validation → prd-architect + product-prd-for-agents
+     - LLM inference optimization (vLLM, quantization, batching) → llm-engineer + ai-llm-inference
+     - ML/LLM security, prompt injection defense, privacy → llm-engineer + ai-mlops
+     - Technical SEO and AEO/LLMO → leads-strategist + marketing-seo-technical
+     - Claude Code configuration (agents/commands/hooks/MCP/memory/skills) → ai-agents-builder + relevant claude-code-* skill
+     - Document workflows (docx/pdf/pptx/xlsx) or automation → ai-agents-builder + document-* skill or ops-document-automation
+     - Playwright/browser E2E automation → test-architect + testing-webapp-playwright
 3) Domain-specific routing
    - When task type is broad but stack is clear, pick agent by stack:
      - Backend stack keywords (REST, GraphQL, Node.js, Prisma, PostgreSQL) → backend-engineer
@@ -81,7 +86,7 @@ Input and output contract:
 1) Read the user request and any attached files or paths.
 2) Detect explicit overrides in the text:
    - agent override: patterns like "agent: backend-engineer"
-   - skill override: patterns like "skill: ai-llm-rag-engineering"
+   - skill override: patterns like "skill: ai-rag"
 3) Choose the best agent and skill using the 4-level priority system above.
 4) On the FIRST line of every response, output the routing decision in this exact format:
    Route: Agent: <agent-id or none> | Skill: <skill-id or none> | Priority: <1-4>
