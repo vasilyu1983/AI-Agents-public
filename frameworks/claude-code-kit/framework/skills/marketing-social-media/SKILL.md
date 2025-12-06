@@ -183,10 +183,10 @@ For detailed trees (TikTok scaling, offer creation, outreach triage), see `resou
 
 **Product & Strategy**
 - [../product-management/SKILL.md](../product-management/SKILL.md) — Product positioning, messaging frameworks, discovery, and go-to-market strategy
-- [../product-prd-for-agents/SKILL.md](../product-prd-for-agents/SKILL.md) — PRDs, technical specs, and requirements for marketing campaigns
+- [../docs-ai-prd/SKILL.md](../docs-ai-prd/SKILL.md) — PRDs, technical specs, and requirements for marketing campaigns
 
 **AI & Content Intelligence**
-- [../ai-prompts/SKILL.md](../ai-prompts/SKILL.md) — LLM prompts for content generation, hooks, CTA variants, and creative testing
+- [../ai-prompt-engineering/SKILL.md](../ai-prompt-engineering/SKILL.md) — LLM prompts for content generation, hooks, CTA variants, and creative testing
 - [../ai-llm/SKILL.md](../ai-llm/SKILL.md) — RAG systems, embeddings, and AI-powered content libraries
 - [../ai-agents/SKILL.md](../ai-agents/SKILL.md) — Multi-agent systems for marketing automation and campaign orchestration
 - [../marketing-ai-search-optimization/SKILL.md](../marketing-ai-search-optimization/SKILL.md) — AI search engine optimization (AEO/GEO) for ChatGPT, Perplexity, Claude, and Gemini citations
@@ -197,11 +197,11 @@ For detailed trees (TikTok scaling, offer creation, outreach triage), see `resou
 
 **Data & Analytics**
 - [../ai-ml-data-science/SKILL.md](../ai-ml-data-science/SKILL.md) — Predictive modeling for CTR/CVR, customer segmentation, and churn analysis
-- [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) — SQL for marketing analytics, attribution queries, and customer data warehousing
+- [../data-sql-optimization/SKILL.md](../data-sql-optimization/SKILL.md) — SQL for marketing analytics, attribution queries, and customer data warehousing
 
 **Infrastructure & Deployment**
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — CI/CD for landing pages, A/B testing infrastructure, and campaign automation
-- [../foundation-api-design/SKILL.md](../foundation-api-design/SKILL.md) — REST APIs for CRM integrations, webhooks, and marketing tool connections
+- [../dev-api-design/SKILL.md](../dev-api-design/SKILL.md) — REST APIs for CRM integrations, webhooks, and marketing tool connections
 
 ### Operational Deep Dives
 - [resources/operational-patterns.md](resources/operational-patterns.md) — Core growth engines, testing frameworks, anti-patterns, landing page checklist, and AI tooling recommendations

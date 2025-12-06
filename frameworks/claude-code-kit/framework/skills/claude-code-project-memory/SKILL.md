@@ -90,7 +90,7 @@ Brief description of the project.
 ## Architecture
 
 ### Tech Stack
-- **Frontend**: Next.js 14, React 18, TypeScript, Tailwind CSS
+- **Frontend**: Next.js 16, React 19, TypeScript, Tailwind CSS
 - **Backend**: Node.js, Express, Prisma, PostgreSQL
 - **Infrastructure**: Docker, Kubernetes, AWS
 
@@ -372,4 +372,4 @@ CLAUDE.md VALIDATION
 **Related Skills**
 - [../claude-code-skills/SKILL.md](../claude-code-skills/SKILL.md) — Skill creation
 - [../claude-code-agents/SKILL.md](../claude-code-agents/SKILL.md) — Agent creation
-- [../foundation-documentation/SKILL.md](../foundation-documentation/SKILL.md) — Documentation patterns
+- [../docs-codebase/SKILL.md](../docs-codebase/SKILL.md) — Documentation patterns

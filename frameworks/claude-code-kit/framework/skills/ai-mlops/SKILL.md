@@ -328,17 +328,32 @@ See `data/sources.json` for curated references on:
 
 ---
 
+## Data Lake & Lakehouse
+
+For comprehensive data lake/lakehouse patterns (beyond dlt ingestion), see **[data-lake-platform](../data-lake-platform/SKILL.md)**:
+
+- **Table formats:** Apache Iceberg, Delta Lake, Apache Hudi
+- **Query engines:** ClickHouse, DuckDB, Apache Doris, StarRocks
+- **Alternative ingestion:** Airbyte (GUI-based connectors)
+- **Transformation:** dbt (alternative to SQLMesh)
+- **Streaming:** Apache Kafka patterns
+- **Orchestration:** Dagster, Airflow
+
+This skill focuses on **ML-specific deployment, monitoring, and security**. Use data-lake-platform for general-purpose data infrastructure.
+
+---
+
 ## Related Skills
 
 For adjacent topics, reference these skills:
 
 - **[ai-ml-data-science](../ai-ml-data-science/SKILL.md)** - EDA, feature engineering, modelling, evaluation, SQLMesh transformations
 - **[ai-llm](../ai-llm/SKILL.md)** - Prompting, fine-tuning, evaluation for LLMs
-- **[ai-llm](../ai-llm/SKILL.md)** - Agentic workflows, multi-agent systems, LLMOps
+- **[ai-agents](../ai-agents/SKILL.md)** - Agentic workflows, multi-agent systems, LLMOps
 - **[ai-rag](../ai-rag/SKILL.md)** - RAG pipeline design, chunking, retrieval, evaluation
 - **[ai-llm-inference](../ai-llm-inference/SKILL.md)** - Model serving optimization, quantization, batching
-- **[ai-mlops](../ai-mlops/SKILL.md)** - Security, privacy, governance, compliance
-- **[ai-prompts](../ai-prompts/SKILL.md)** - Prompt design patterns and best practices
+- **[ai-prompt-engineering](../ai-prompt-engineering/SKILL.md)** - Prompt design patterns and best practices
+- **[data-lake-platform](../data-lake-platform/SKILL.md)** - Data lake/lakehouse infrastructure (ClickHouse, Iceberg, Kafka)
 
 ---
 

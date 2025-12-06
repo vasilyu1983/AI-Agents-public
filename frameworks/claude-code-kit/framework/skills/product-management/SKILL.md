@@ -112,7 +112,7 @@ User needs: [Product Work Type]
 - Ops/Leadership: [templates/ops/1-1-template.md](templates/ops/1-1-template.md), [templates/ops/feedback-template.md](templates/ops/feedback-template.md), [templates/ops/a3-debrief.md](templates/ops/a3-debrief.md), [templates/ops/negotiation-one-sheet.md](templates/ops/negotiation-one-sheet.md)
 
 **Related Skills**
-- [../product-prd-for-agents/SKILL.md](../product-prd-for-agents/SKILL.md) — PRD, stories, and prompt/playbook templates
+- [../docs-ai-prd/SKILL.md](../docs-ai-prd/SKILL.md) — PRD, stories, and prompt/playbook templates
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System design guidance for specs and PRDs
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — UI implementation considerations for product specs
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — Backend/API implications of product decisions

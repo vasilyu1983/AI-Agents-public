@@ -73,7 +73,7 @@ Claude should invoke this skill when the user asks about:
 
 ## Scope Boundaries (Use These Skills for Depth)
 
-- **Prompt design & CI/CD** → [ai-prompts](../ai-prompts/SKILL.md)
+- **Prompt design & CI/CD** → [ai-prompt-engineering](../ai-prompt-engineering/SKILL.md)
 - **RAG pipelines & chunking** → [ai-rag](../ai-rag/SKILL.md)
 - **Search tuning (BM25, HNSW, hybrid)** → [ai-rag](../ai-rag/SKILL.md)
 - **Agent architectures & tools** → [ai-agents](../ai-agents/SKILL.md)
@@ -126,7 +126,7 @@ Comprehensive operational guides with checklists, patterns, and decision framewo
 
 - **[LLMOps Best Practices](resources/llmops-best-practices.md)** - Operational lifecycle and deployment patterns
 - **[Evaluation Patterns](resources/eval-patterns.md)** - Testing, metrics, and quality validation
-- **[Prompt Engineering Patterns](resources/prompt-engineering-patterns.md)** - Quick reference (canonical skill: [ai-prompts](../ai-prompts/SKILL.md))
+- **[Prompt Engineering Patterns](resources/prompt-engineering-patterns.md)** - Quick reference (canonical skill: [ai-prompt-engineering](../ai-prompt-engineering/SKILL.md))
 - **[Agentic Patterns](resources/agentic-patterns.md)** - Quick reference (canonical skill: [ai-agents](../ai-agents/SKILL.md))
 - **[RAG Best Practices](resources/rag-best-practices.md)** - Quick reference (canonical skill: [ai-rag](../ai-rag/SKILL.md))
 
@@ -175,7 +175,7 @@ This skill integrates with complementary Claude Code skills:
 
 - **[ai-rag](../ai-rag/SKILL.md)** - Advanced RAG patterns, chunking strategies, hybrid retrieval, reranking
 - **[ai-rag](../ai-rag/SKILL.md)** - Search optimization, BM25 tuning, vector search, ranking pipelines
-- **[ai-prompts](../ai-prompts/SKILL.md)** - Systematic prompt design, evaluation, testing, and optimization
+- **[ai-prompt-engineering](../ai-prompt-engineering/SKILL.md)** - Systematic prompt design, evaluation, testing, and optimization
 - **[ai-agents](../ai-agents/SKILL.md)** - Agent architectures, tool use, multi-agent systems, autonomous workflows
 
 ### Production & Operations

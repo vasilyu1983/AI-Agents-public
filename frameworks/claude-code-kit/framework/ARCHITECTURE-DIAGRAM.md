@@ -162,7 +162,7 @@ graph TB
         skill_rag["ai-rag<br/>Retrieval, Embeddings, VectorDB"]
     end
 
-    subgraph "Core Software Skills (7)"
+    subgraph "Core Software Skills (8)"
         skill_backend["software-backend<br/>APIs, Auth, Database"]
         skill_frontend["software-frontend<br/>Next.js, Vue, Angular, Svelte, Remix, Vite (Multi-framework)"]
         skill_mobile["software-mobile<br/>iOS, Android, React Native"]
@@ -170,43 +170,43 @@ graph TB
         skill_code_review["software-code-review<br/>Quality, Best Practices"]
         skill_sw_arch["software-architecture-design<br/>System Design, Patterns"]
         skill_security["software-security-appsec<br/>AppSec, Threat Modeling"]
+        skill_ux_research["software-ux-research<br/>JTBD, Journey Mapping, Usability"]
     end
 
     subgraph "Testing Skills (3)"
-        skill_testing["testing-automation<br/>Test Strategies, Jest, Pytest"]
-        skill_playwright["testing-webapp-playwright<br/>E2E Web Testing"]
-        skill_ios_sim["testing-ios-simulator<br/>iOS Simulator, XCTest"]
+        skill_testing["qa-testing-strategy<br/>Test Strategies, Jest, Pytest"]
+        skill_playwright["qa-testing-playwright<br/>E2E Web Testing"]
+        skill_ios_sim["qa-testing-ios<br/>iOS Simulator, XCTest"]
     end
 
-    subgraph "Operations Skills (4)"
+    subgraph "Operations & Data Skills (3)"
         skill_devops["ops-devops-platform<br/>IaC, CI/CD, K8s, Cloud"]
-        skill_sql["ops-database-sql<br/>Query Optimization, Schema"]
-        skill_metabase["ops-database-metabase<br/>BI, Dashboards, Analytics"]
-        skill_doc_automation["ops-document-automation<br/>Document Processing"]
+        skill_sql["data-sql-optimization<br/>Query Optimization, Schema"]
+        skill_datalake["data-lake-platform<br/>Data Lake/Lakehouse, dlt, SQLMesh"]
     end
 
     subgraph "Product & Marketing Skills (5)"
-        skill_prd["product-prd-for-agents<br/>PRD, Discovery, Specs"]
+        skill_prd["docs-ai-prd<br/>PRD, Discovery, Specs"]
         skill_product_mgmt["product-management<br/>Product Strategy, Roadmaps"]
         skill_ai_search["marketing-ai-search-optimization<br/>AEO/GEO for AI Search"]
         skill_smm["marketing-social-media<br/>Content, Campaigns, Analytics"]
         skill_seo["marketing-seo-technical<br/>Technical SEO, Schema"]
     end
 
-    subgraph "Foundation Skills (5)"
-        skill_api["foundation-api-design<br/>REST, GraphQL, gRPC"]
-        skill_docs["foundation-documentation<br/>Technical Writing, Guides"]
-        skill_git["foundation-git-workflow<br/>Version Control, Branching"]
-        skill_git_commit["foundation-git-commit-message<br/>Conventional Commits"]
-        skill_deps["foundation-dependency-management<br/>Package Management"]
+    subgraph "Developer Tools Skills (5)"
+        skill_api["dev-api-design<br/>REST, GraphQL, gRPC"]
+        skill_docs["docs-codebase<br/>Technical Writing, Guides"]
+        skill_git["git-workflow<br/>Version Control, Branching"]
+        skill_git_commit["git-commit-message<br/>Conventional Commits"]
+        skill_deps["dev-dependency-management<br/>Package Management"]
     end
 
-    subgraph "Quality & Observability Skills (5)"
-        skill_debug["quality-debugging-troubleshooting<br/>Root Cause Analysis"]
-        skill_refactor["quality-code-refactoring<br/>Code Improvement"]
-        skill_resilience["quality-resilience-patterns<br/>Error Handling, Retry"]
-        skill_observability["quality-observability-performance<br/>Monitoring, Metrics"]
-        skill_doc_audit["quality-documentation-audit<br/>Coverage, Audit"]
+    subgraph "Quality Skills (5)"
+        skill_debug["qa-debugging<br/>Root Cause Analysis"]
+        skill_refactor["qa-refactoring<br/>Code Improvement"]
+        skill_resilience["qa-resilience<br/>Error Handling, Retry"]
+        skill_observability["qa-observability<br/>Monitoring, Metrics"]
+        skill_doc_audit["qa-docs-coverage<br/>Coverage, Audit"]
     end
 
     subgraph "Document Skills (4)"
@@ -216,9 +216,9 @@ graph TB
         skill_pptx["document-pptx<br/>PowerPoint Presentations"]
     end
 
-    subgraph "Workflow & Prompts Skills (3)"
-        skill_prompts["ai-prompts<br/>Prompt Design, Optimization"]
-        skill_workflow["workflow-planning<br/>Brainstorm, Plan, Execute"]
+    subgraph "Workflow & Design Skills (3)"
+        skill_prompts["ai-prompt-engineering<br/>Prompt Design, Optimization"]
+        skill_workflow["dev-workflow-planning<br/>Brainstorm, Plan, Execute"]
         skill_ui_ux["software-ui-ux-design<br/>Design Systems, Accessibility"]
     end
 
@@ -367,7 +367,7 @@ graph LR
 
 ## Skills Taxonomy (50 Total)
 
-### AI/ML Skills (7)
+### AI/ML Skills (8)
 
 **Agent & LLM Development**:
 
@@ -375,7 +375,7 @@ graph LR
 - `ai-llm` - RAG pipelines, fine-tuning, agentic workflows, LLMOps
 - `ai-llm-inference` - Serving optimization, quantization, vLLM, cost reduction
 - `ai-rag` - Retrieval, embeddings, vector databases, reranking
-- `ai-prompts` - Prompt design, optimization, systematic testing
+- `ai-prompt-engineering` - Prompt design, optimization, systematic testing
 
 **Data Science & ML**:
 
@@ -383,7 +383,7 @@ graph LR
 - `ai-ml-timeseries` - Time series forecasting, seasonality, trend analysis
 - `ai-mlops` - ML deployment, monitoring, drift detection, governance
 
-### Software Development Skills (7)
+### Software Development Skills (9)
 
 **Core Development**:
 
@@ -392,42 +392,42 @@ graph LR
 - `software-mobile` - iOS (Swift/SwiftUI), Android (Kotlin/Compose), React Native
 - `software-crypto-web3` - Solidity, Rust, smart contracts, DeFi, NFTs
 - `software-ui-ux-design` - Design systems, accessibility, WCAG compliance
+- `software-ux-research` - UX research: JTBD, Kano Model, journey mapping, usability testing
 - `software-code-review` - Code quality, best practices, security patterns
 - `software-architecture-design` - System design, microservices, event-driven
 - `software-security-appsec` - AppSec, OWASP Top 10, threat modeling, secure SDLC
 
 ### Testing Skills (3)
 
-- `testing-automation` - Test strategies, Jest, Pytest, E2E testing
-- `testing-webapp-playwright` - E2E web testing with Playwright
-- `testing-ios-simulator` - iOS simulator automation, XCTest, screenshot capture
+- `qa-testing-strategy` - Test strategies, Jest, Pytest, E2E testing
+- `qa-testing-playwright` - E2E web testing with Playwright
+- `qa-testing-ios` - iOS simulator automation, XCTest, screenshot capture
 
-### Operations Skills (4)
+### Operations & Data Skills (3)
 
 - `ops-devops-platform` - IaC, CI/CD, Kubernetes, Docker, cloud platforms
-- `ops-database-sql` - Query optimization, indexing, schema design, PostgreSQL
-- `ops-database-metabase` - BI dashboards, analytics, data visualization
-- `ops-document-automation` - Document processing, automation workflows
+- `data-sql-optimization` - Query optimization, indexing, schema design, PostgreSQL
+- `data-lake-platform` - Data lake/lakehouse, dlt, SQLMesh, Iceberg, DuckDB
 
-### Foundation Skills (5)
+### Developer Tools Skills (5)
 
-- `foundation-api-design` - REST, GraphQL, gRPC, OpenAPI, API versioning
-- `foundation-documentation` - Technical writing, API docs, user guides
-- `foundation-git-workflow` - Git workflows, branching strategies, PR reviews
-- `foundation-git-commit-message` - Conventional commits, commit message standards
-- `foundation-dependency-management` - Package management, lockfiles, vulnerability scanning
+- `dev-api-design` - REST, GraphQL, gRPC, OpenAPI, API versioning
+- `docs-codebase` - Technical writing, API docs, user guides
+- `git-workflow` - Git workflows, branching strategies, PR reviews
+- `git-commit-message` - Conventional commits, commit message standards
+- `dev-dependency-management` - Package management, lockfiles, vulnerability scanning
 
-### Quality & Observability Skills (5)
+### Quality Skills (5)
 
-- `quality-debugging-troubleshooting` - Root cause analysis, systematic debugging
-- `quality-code-refactoring` - Code improvement, tech debt reduction
-- `quality-resilience-patterns` - Error handling, circuit breakers, retry logic
-- `quality-observability-performance` - Monitoring, metrics, APM, profiling
-- `quality-documentation-audit` - Documentation coverage, audit workflows
+- `qa-debugging` - Root cause analysis, systematic debugging
+- `qa-refactoring` - Code improvement, tech debt reduction
+- `qa-resilience` - Error handling, circuit breakers, retry logic
+- `qa-observability` - Monitoring, metrics, APM, profiling
+- `qa-docs-coverage` - Documentation coverage, audit workflows
 
-### Product & Marketing Skills (6)
+### Product & Marketing Skills (5)
 
-- `product-prd-for-agents` - PRD templates, user stories, technical specs for AI agents
+- `docs-ai-prd` - PRD templates, user stories, technical specs for AI agents
 - `product-management` - Product strategy, roadmaps, stakeholder management
 - `marketing-ai-search-optimization` - AI search optimization (AEO/GEO/LLMO) for ChatGPT, Perplexity, Claude, Gemini
 - `marketing-social-media` - Content creation, campaigns, social media analytics
@@ -441,9 +441,10 @@ graph LR
 - `document-xlsx` - Excel spreadsheets, formulas, charts, data analysis
 - `document-pptx` - PowerPoint presentations, layouts, charts, automation
 
-### Workflow Skills (2)
+### Workflow & Design Skills (3)
 
-- `workflow-planning` - Structured development with /brainstorm, /write-plan, /execute-plan
+- `ai-prompt-engineering` - Prompt design, optimization, systematic testing
+- `dev-workflow-planning` - Structured development with /brainstorm, /write-plan, /execute-plan
 - `software-ui-ux-design` - Design systems, accessibility, WCAG compliance
 
 ### Claude Code Meta-Skills (6)
@@ -467,28 +468,28 @@ graph LR
 
 **Development Agents (7)**:
 
-4. **backend-engineer** → software-backend, foundation-api-design, ops-database-sql
+4. **backend-engineer** → software-backend, dev-api-design, data-sql-optimization
 5. **frontend-engineer** → software-frontend, software-ui-ux-design
 6. **mobile-engineer** → software-mobile, software-ui-ux-design
 7. **crypto-engineer** → software-crypto-web3, software-backend, software-security-appsec
-8. **devops-engineer** → ops-devops-platform, foundation-dependency-management
-9. **sql-engineer** → ops-database-sql, ops-database-metabase
+8. **devops-engineer** → ops-devops-platform, dev-dependency-management
+9. **sql-engineer** → data-sql-optimization, data-lake-platform
 10. **security-specialist** → software-security-appsec, software-code-review
 
 **Quality Agents (2)**:
 
-11. **code-reviewer** → software-code-review, quality-code-refactoring, quality-debugging-troubleshooting
-12. **test-architect** → testing-automation, testing-webapp-playwright, quality-resilience-patterns
+11. **code-reviewer** → software-code-review, qa-refactoring, qa-debugging
+12. **test-architect** → qa-testing-strategy, qa-testing-playwright, qa-resilience
 
 **Architecture & Strategy Agents (3)**:
 
 13. **system-architect** → software-architecture-design, ops-devops-platform
-14. **product-manager** → product-management, product-prd-for-agents
-15. **prd-architect** → product-prd-for-agents, foundation-documentation
+14. **product-manager** → product-management, docs-ai-prd
+15. **prd-architect** → docs-ai-prd, docs-codebase
 
 **Specialized Agents (3)**:
 
-16. **prompt-engineer** → ai-prompts, ai-llm
+16. **prompt-engineer** → ai-prompt-engineering, ai-llm
 17. **smm-strategist** → marketing-social-media, marketing-seo-technical
 
 ---
@@ -510,8 +511,8 @@ graph LR
 
 - `/review` → code-reviewer → software-code-review
 - `/security-scan` → security-specialist → software-security-appsec
-- `/test-plan` → test-architect → testing-automation
-- `/coverage-check` → test-architect → testing-automation
+- `/test-plan` → test-architect → qa-testing-strategy
+- `/coverage-check` → test-architect → qa-testing-strategy
 
 **Architecture Commands (2)**:
 
@@ -520,8 +521,8 @@ graph LR
 
 **Validation Commands (2)**:
 
-- `/prd-validate` → prd-architect → product-prd-for-agents
-- `/prompt-validate` → prompt-engineer → ai-prompts
+- `/prd-validate` → prd-architect → docs-ai-prd
+- `/prompt-validate` → prompt-engineer → ai-prompt-engineering
 
 **Product Management Commands (5)**:
 
@@ -533,7 +534,7 @@ graph LR
 
 **Marketing & Specification Commands (2)**:
 
-- `/tech-spec` → prd-architect → product-prd-for-agents
+- `/tech-spec` → prd-architect → docs-ai-prd
 - `/smm-plan` → smm-strategist → marketing-social-media
 
 ---
@@ -550,7 +551,7 @@ graph TB
         llm["ai-llm"]
         llm_inference["ai-llm-inference"]
         rag["ai-rag"]
-        prompts["ai-prompts"]
+        prompts["ai-prompt-engineering"]
     end
 
     subgraph "Software Stack"
@@ -561,17 +562,17 @@ graph TB
         security["software-security-appsec"]
     end
 
-    subgraph "Operations Stack"
+    subgraph "Operations & Data Stack"
         devops["ops-devops-platform"]
-        sql["ops-database-sql"]
-        metabase["ops-database-metabase"]
+        sql["data-sql-optimization"]
+        datalake["data-lake-platform"]
     end
 
     subgraph "Quality Stack"
         code_review["software-code-review"]
-        testing["testing-automation"]
-        debug["quality-debugging-troubleshooting"]
-        observability["quality-observability-performance"]
+        testing["qa-testing-strategy"]
+        debug["qa-debugging"]
+        observability["qa-observability"]
     end
 
     %% Dependencies
@@ -764,7 +765,7 @@ Comprehensive coverage across:
 **Granular expertise** organized into:
 
 - AI/ML (7 skills) - Agents, LLM, RAG, prompts, MLOps
-- Software (7 skills) - Backend, frontend, mobile, Web3, security
+- Software (9 skills) - Backend, frontend, mobile, Web3, security, UX research
 - Testing (3 skills) - Automation, Playwright, iOS simulator
 - Operations (4 skills) - DevOps, databases, BI, document automation
 - Foundation (5 skills) - API design, docs, git, commits, dependencies
@@ -838,21 +839,25 @@ Comprehensive coverage across:
 
 ## Recent Updates
 
+**(2025-12-05)**: Simplified Skill IDs
+
+- **Renamed foundation skills**: `foundation-api-design` → `dev-api-design`; `foundation-dependency-management` → `dev-dependency-management`; `foundation-git-commit-message` → `git-commit-message`; `foundation-git-workflow` → `git-workflow`; `workflow-planning` → `dev-workflow-planning`
+- **Renamed testing skills**: `testing-automation` → `qa-testing-strategy`; `testing-webapp-playwright` → `qa-testing-playwright`; `testing-ios-simulator` → `qa-testing-ios`
+- **Renamed quality skills**: `quality-code-refactoring` → `qa-refactoring`; `quality-debugging-troubleshooting` → `qa-debugging`; `quality-documentation-audit` → `qa-docs-coverage`; `quality-observability-performance` → `qa-observability`; `quality-resilience-patterns` → `qa-resilience`
+- **Renamed data skills**: `ops-database-sql` → `data-sql-optimization`; Added `data-lake-platform`
+- **Renamed docs skills**: `product-prd-for-agents` → `docs-ai-prd`; `docs-technical-writing` → `docs-codebase`; `ai-prompts` → `ai-prompt-engineering`
+- **Removed**: `ops-database-metabase`, `ops-document-automation` (consolidated elsewhere)
+- Total skills: 50
+- Updated all diagrams, mappings, and cross-kit routers
+
 **(2025-12-03)**: Skills Consolidation & Expansion
 
-- **Consolidated AI/LLM skills**: Merged `ai-llm-engineering`, `ai-llm-development` → `ai-llm`; Renamed `ai-agents-development` → `ai-agents`; Renamed `ai-llm-ops-inference` → `ai-llm-inference`; Renamed `ai-llm-rag-engineering` → `ai-rag`; Renamed `ai-prompt-engineering` → `ai-prompts`
+- **Consolidated AI/LLM skills**: Merged `ai-llm-engineering`, `ai-llm-development` → `ai-llm`; Renamed `ai-agents-development` → `ai-agents`; Renamed `ai-llm-ops-inference` → `ai-llm-inference`; Renamed `ai-llm-rag-engineering` → `ai-rag`
 - **Consolidated ML skills**: Merged `ai-ml-ops-production`, `ai-ml-ops-security` → `ai-mlops`
-- **Reorganized testing skills**: Renamed `software-testing-automation` → `testing-automation`; Added `testing-webapp-playwright`, `testing-ios-simulator`
 - **Added Document Suite** (4 skills): `document-docx`, `document-pdf`, `document-xlsx`, `document-pptx`
 - **Added Claude Code Meta-Skills** (6 skills): `claude-code-skills`, `claude-code-agents`, `claude-code-commands`, `claude-code-hooks`, `claude-code-mcp`, `claude-code-project-memory`
 - **Added Marketing**: `marketing-seo-technical` for technical SEO
-- **Added Foundation**: `foundation-git-commit-message` for conventional commits
-- **Renamed PRD skill**: `product-prd-development` → `product-prd-for-agents`
-- **Renamed audit skill**: `codebase-documentation-audit` → `quality-documentation-audit`
-- **Added Workflow**: `workflow-planning` for structured development
-- Total skills: 50 (consolidated from 53, with new additions)
-- Updated all diagrams, mappings, and documentation references
-- Added links to root files: CLAUDE.md, AGENTS.md, GEMINI.md, WARP.md
+- **Added Foundation**: `git-commit-message` for conventional commits
 
 **(2025-11-21)**: Product Management Commands Suite
 

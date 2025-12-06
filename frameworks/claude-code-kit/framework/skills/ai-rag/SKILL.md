@@ -96,7 +96,7 @@ For adjacent topics, reference these skills:
 - **[ai-llm-inference](../ai-llm-inference/SKILL.md)** - Serving performance, quantization, batching
 - **[ai-mlops](../ai-mlops/SKILL.md)** - Security, privacy, PII handling
 - **[ai-mlops](../ai-mlops/SKILL.md)** - Deployment, monitoring, data pipelines
-- **[ai-prompts](../ai-prompts/SKILL.md)** - Prompt patterns for RAG generation phase
+- **[ai-prompt-engineering](../ai-prompt-engineering/SKILL.md)** - Prompt patterns for RAG generation phase
 
 ---
 

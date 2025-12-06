@@ -166,7 +166,7 @@ SSL/TLS issues
 - [../software-security-appsec/SKILL.md](../software-security-appsec/SKILL.md) - Security hardening, HTTPS implementation
 
 **Quality & Performance**
-- [../quality-observability-performance/SKILL.md](../quality-observability-performance/SKILL.md) - Performance monitoring, observability
+- [../qa-observability/SKILL.md](../qa-observability/SKILL.md) - Performance monitoring, observability
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) - CDN setup, infrastructure optimization
 
 ---

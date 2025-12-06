@@ -100,9 +100,9 @@ On each call, the router:
 - ai-agents-development, ai-llm-development, ai-llm-engineering, ai-llm-ops-inference
 - ai-llm-rag-engineering, ai-llm-search-retrieval, ai-ml-data-science, ai-ml-ops-production
 - ai-ml-ops-security, ai-ml-timeseries, ai-prompt-engineering, codebase-documentation-audit
-- foundation-api-design, foundation-dependency-management, foundation-documentation, foundation-git-workflow
+- dev-api-design, dev-dependency-management, docs-technical-writing, git-workflow
 - marketing-ai-search-optimization, marketing-leads-generation, marketing-social-media
-- ops-database-metabase, ops-database-sql, ops-devops-platform, ops-document-automation
+- data-lake-platform, data-sql-optimization, ops-devops-platform
 - product-management, product-prd-development, quality-code-refactoring
 - quality-debugging-troubleshooting, quality-observability-performance, quality-resilience-patterns
 - software-architecture-design, software-backend, software-code-review, software-crypto-web3
@@ -145,7 +145,7 @@ On each call, the router:
 - Updated to 17 agents, 36 skills (full parity with Claude Code Kit v3.0)
 - Added agents: crypto-engineer, security-specialist
 - Added 10 new skills across quality, foundation, and operations categories
-- Router files updated with complete catalog including ops-database-metabase, ops-document-automation
+- Router files updated with complete catalog aligned to Claude Code skills (data-lake-platform, data-sql-optimization)
 - Full alignment with Codex Kit v1.2 routing
 
 **v1.0 (2025-11-19)**:
@@ -154,4 +154,3 @@ On each call, the router:
 - 15 agents, 24 skills, 28 routing rules
 - 4-tier priority system with conflict resolution
 - Integration with Claude Code Kit via router command
-

@@ -1,13 +1,13 @@
 ---
 name: software-frontend
-description: Production-grade frontend development with Next.js 15 App Router, TypeScript strict mode, Tailwind CSS, shadcn/ui, React Server Components, state management (Zustand/Recoil), performance optimization (Turbopack, ISR/SSR/SSG), and accessibility best practices. Includes TanStack Query for server-state, Vitest for testing, and modern React patterns.
+description: Production-grade frontend development with Next.js 16 App Router, TypeScript strict mode, Tailwind CSS, shadcn/ui, React 19 Server Components, state management (Zustand/Recoil), performance optimization (Turbopack stable, ISR/SSR/SSG), and accessibility best practices. Includes TanStack Query for server-state, Vitest for testing, and modern React patterns.
 ---
 
 # Frontend Engineering Skill — Quick Reference
 
-This skill equips frontend engineers with execution-ready patterns for building modern web applications with Next.js 15, React, TypeScript, and Tailwind CSS. Claude should apply these patterns when users ask for component design, state management, routing, forms, data fetching, animations, accessibility, or production-grade UI architectures.
+This skill equips frontend engineers with execution-ready patterns for building modern web applications with Next.js 16, React 19, TypeScript, and Tailwind CSS. Claude should apply these patterns when users ask for component design, state management, routing, forms, data fetching, animations, accessibility, or production-grade UI architectures.
 
-**Modern Best Practices**: Next.js 15 with Turbopack (default bundler), enhanced ISR/SSR/SSG, React Server Components (RSC) production-ready, Zustand/Recoil as Redux alternatives, TanStack Query (React Query) for server-state, TypeScript strict mode enforcement, `satisfies` operator, Vitest for testing, and progressive enhancement patterns.
+**Modern Best Practices (2025)**: Next.js 16 with Turbopack (stable, default bundler), React 19 with Server Components and Actions, enhanced ISR/SSR/SSG, partial prerendering (PPR), Zustand/Recoil as Redux alternatives, TanStack Query (React Query) for server-state, TypeScript strict mode enforcement, `satisfies` operator, Vitest for testing, and progressive enhancement patterns.
 
 ---
 
@@ -15,7 +15,7 @@ This skill equips frontend engineers with execution-ready patterns for building 
 
 | Task | Tool/Framework | Command | When to Use |
 |------|----------------|---------|-------------|
-| Next.js App | Next.js 15 + Turbopack | `npx create-next-app@latest` | Full-stack React apps, SEO, SSR/SSG |
+| Next.js App | Next.js 16 + Turbopack | `npx create-next-app@latest` | Full-stack React apps, SEO, SSR/SSG |
 | Vue App | Nuxt 3 | `npx nuxi@latest init` | Vue ecosystem, auto-imports, Nitro server |
 | Angular App | Angular 18 | `ng new` | Enterprise apps, TypeScript-first, RxJS |
 | Svelte App | SvelteKit | `npm create svelte@latest` | Performance-first, minimal JS, runes |
@@ -30,7 +30,7 @@ This skill equips frontend engineers with execution-ready patterns for building 
 
 Claude should invoke this skill when a user requests:
 
-- Next.js 15 application architecture and setup (Turbopack default, App Router)
+- Next.js 16 application architecture and setup (Turbopack stable, App Router, React 19)
 - React component design and patterns (functional components, hooks, Server Components)
 - TypeScript type definitions for UI (strict mode, `satisfies` operator, discriminated unions)
 - Tailwind CSS styling and responsive design (utility-first, dark mode variants)
@@ -50,7 +50,7 @@ Claude should invoke this skill when a user requests:
 ```text
 Project needs: [Framework Choice]
     ├─ React ecosystem?
-    │   ├─ Full-stack + SEO → Next.js 15 (App Router, Server Components, Turbopack)
+    │   ├─ Full-stack + SEO → Next.js 16 (App Router, React 19, Turbopack stable)
     │   ├─ Progressive enhancement → Remix (loaders, actions, nested routes)
     │   └─ Client-side SPA → Vite + React (fast dev, minimal config)
     │
@@ -119,14 +119,14 @@ See [resources/](resources/) for framework-specific best practices.
 - **Vite + React**: [templates/vite-react/template-vite-react-ts.md](templates/vite-react/template-vite-react-ts.md)
 
 **Related Skills**
-- [../foundation-api-design/SKILL.md](../foundation-api-design/SKILL.md) — REST/GraphQL API patterns, OpenAPI, versioning
-- [../foundation-git-workflow/SKILL.md](../foundation-git-workflow/SKILL.md) — Git branching, PR workflow, commit conventions
+- [../dev-api-design/SKILL.md](../dev-api-design/SKILL.md) — REST/GraphQL API patterns, OpenAPI, versioning
+- [../git-workflow/SKILL.md](../git-workflow/SKILL.md) — Git branching, PR workflow, commit conventions
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — Backend API development, Node.js, Prisma, authentication
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System design, scalability, microservices patterns
 - [../software-code-review/SKILL.md](../software-code-review/SKILL.md) — Code review best practices, PR workflow
 - [../ai-llm/SKILL.md](../ai-llm/SKILL.md) — AI-powered features, LLM integration patterns
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — Deployment, CI/CD, containerization, Kubernetes
-- [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) — Database design, SQL optimization, Prisma/Drizzle
+- [../data-sql-optimization/SKILL.md](../data-sql-optimization/SKILL.md) — Database design, SQL optimization, Prisma/Drizzle
 
 ---
 

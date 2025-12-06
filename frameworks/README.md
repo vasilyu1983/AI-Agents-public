@@ -9,7 +9,7 @@ This directory contains three complete development kits designed for different A
 ```mermaid
 graph TB
     subgraph "Framework Architecture"
-        A[Frameworks] --> B[Claude Code Kit<br/>36+ Skills]
+        A[Frameworks] --> B[Claude Code Kit<br/>50 Skills]
         A --> C[Codex Kit<br/>Router System]
         A --> D[Gemini Kit<br/>Router System]
 
@@ -36,7 +36,7 @@ graph TB
 
 ## Claude Code Kit
 
-**Complete `.claude/` workspace with 36+ production-ready skills.**
+**Complete `.claude/` workspace with 50 production-ready skills.**
 
 ### Quick Install
 
@@ -297,7 +297,7 @@ graph LR
 
 | Feature | Claude Code Kit | Codex Kit | Gemini Kit |
 |---------|----------------|-----------|------------|
-| **Skills** | 36+ specialized skills | Router-based dispatch | Router-based dispatch |
+| **Skills** | 50 specialized skills | Router-based dispatch | Router-based dispatch |
 | **Installation** | Copy skills directory | Copy router config | Copy router config |
 | **Context Management** | Auto-activation | Rule-based injection | Multimodal context |
 | **Platform** | Claude Code | Codex CLI | Gemini |

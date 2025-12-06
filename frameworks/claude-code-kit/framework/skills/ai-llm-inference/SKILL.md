@@ -217,7 +217,7 @@ This skill focuses on **inference-time performance**. For related workflows:
 - **[ai-rag](../ai-rag/SKILL.md)** - RAG pipeline construction and optimization
 - **[ai-mlops](../ai-mlops/SKILL.md)** - Deployment, APIs, monitoring
 - **[ai-mlops](../ai-mlops/SKILL.md)** - Safety, governance, security
-- **[quality-observability-performance](../quality-observability-performance/SKILL.md)** - Performance monitoring and optimization
+- **[qa-observability](../qa-observability/SKILL.md)** - Performance monitoring and optimization
 - **[ops-devops-platform](../ops-devops-platform/SKILL.md)** - Infrastructure and platform operations
 
 ---

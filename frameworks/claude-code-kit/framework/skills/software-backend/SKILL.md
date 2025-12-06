@@ -1,6 +1,6 @@
 ---
 name: software-backend
-description: Production-grade backend API development patterns, database design, authentication, error handling, testing, performance optimization, and deployment workflows for Node.js/Express/Fastify/NestJS with Prisma ORM and PostgreSQL. Includes GraphQL, TypeScript strict mode, modern logging (Pino/Winston), secret managers, PM2 process management, and Prisma Accelerate for serverless/edge deployments.
+description: Production-grade backend API development with Node.js 22 LTS (Express/Fastify/NestJS), Python 3.12+ (FastAPI), Go 1.23+, Rust (Axum), Prisma ORM, PostgreSQL 17. Includes GraphQL, TypeScript strict mode, modern logging (Pino/Winston), secret managers, PM2 process management, and Prisma Accelerate for serverless/edge deployments.
 ---
 
 # Backend Engineering Skill — Quick Reference
@@ -77,9 +77,10 @@ Backend project needs: [API Type]
 
 **Language Alternatives:**
 
-- **Go** (Fiber + GORM): High concurrency, native performance
+- **Node.js 22 LTS** (Express/Fastify/NestJS + Prisma): TypeScript-first, async/await
+- **Python 3.12+** (FastAPI + SQLAlchemy): ML/DS backends, async support
+- **Go 1.23+** (Fiber + GORM): High concurrency, native performance
 - **Rust** (Axum + SeaORM): Memory safety, zero-cost abstractions
-- **Python** (FastAPI + SQLAlchemy): ML/DS backends, async support
 
 See [templates/](templates/) for language-specific starter templates.
 
@@ -105,11 +106,11 @@ See [templates/](templates/) for language-specific starter templates.
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System decomposition, SLAs, and data flows
 - [../software-security-appsec/SKILL.md](../software-security-appsec/SKILL.md) — Authentication/authorization and secure API design
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — CI/CD, infrastructure, and deployment safety
-- [../quality-resilience-patterns/SKILL.md](../quality-resilience-patterns/SKILL.md) — Resilience, retries, and failure playbooks
+- [../qa-resilience/SKILL.md](../qa-resilience/SKILL.md) — Resilience, retries, and failure playbooks
 - [../software-code-review/SKILL.md](../software-code-review/SKILL.md) — Review checklists and standards for backend changes
-- [../testing-automation/SKILL.md](../testing-automation/SKILL.md) — Testing strategies, test pyramids, and coverage goals
-- [../foundation-api-design/SKILL.md](../foundation-api-design/SKILL.md) — RESTful design, GraphQL, and API versioning patterns
-- [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) — SQL optimization, indexing, and query tuning patterns
+- [../qa-testing-strategy/SKILL.md](../qa-testing-strategy/SKILL.md) — Testing strategies, test pyramids, and coverage goals
+- [../dev-api-design/SKILL.md](../dev-api-design/SKILL.md) — RESTful design, GraphQL, and API versioning patterns
+- [../data-sql-optimization/SKILL.md](../data-sql-optimization/SKILL.md) — SQL optimization, indexing, and query tuning patterns
 
 ---
 

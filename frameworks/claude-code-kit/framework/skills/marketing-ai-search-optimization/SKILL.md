@@ -7,6 +7,31 @@ description: Operational AI search engine optimization (AEO/GEO/LLMO) for rankin
 
 This skill contains **actionable, production-ready systems** for optimizing content visibility in **AI-powered search engines** including ChatGPT, Perplexity, Claude, Gemini, SearchGPT, and Google AI Overviews.
 
+---
+
+## 2025 Market Reality
+
+### The Shift is Happening Now
+
+| Metric | Value | Source |
+|--------|-------|--------|
+| ChatGPT Weekly Active Users | **800 million** (June 2025) | Doubled from 400M in Feb 2025 |
+| Google Market Share | **Below 90%** | First time since 2015 |
+| Zero-Click Searches | **40%+** | Searches ending without website click |
+
+### Why This Changes Everything
+
+- Being cited in AI responses often matters more than page-one Google rankings
+- Most ChatGPT citations come from URLs ranking **beyond position 21+** on Google
+- Domain-level authority matters more than specific page rankings for AI visibility
+- You can win AI citations even if you're not ranking on page 1 of Google
+
+### Critical Technical Issue (Check Now)
+
+In an audit of 50 enterprise SaaS websites, **68% were inadvertently blocking at least one major AI crawler**. Run `curl -I https://yoursite.com/robots.txt` and verify GPTBot, ClaudeBot, and PerplexityBot are not blocked.
+
+---
+
 Use this skill when the user asks for:
 - AI crawler optimization (GPTBot, ClaudeBot, PerplexityBot)
 - AEO (Answer Engine Optimization) strategies
@@ -129,7 +154,7 @@ For detailed decision trees, see individual platform strategy files in `resource
 - [../product-management/SKILL.md](../product-management/SKILL.md) - Product positioning for AI-first discovery
 
 **Content & AI**
-- [../ai-prompts/SKILL.md](../ai-prompts/SKILL.md) - Prompt engineering for content optimization
+- [../ai-prompt-engineering/SKILL.md](../ai-prompt-engineering/SKILL.md) - Prompt engineering for content optimization
 - [../ai-llm/SKILL.md](../ai-llm/SKILL.md) - RAG systems and embeddings for content intelligence
 - [../ai-agents/SKILL.md](../ai-agents/SKILL.md) - Automated content monitoring and optimization agents
 
@@ -140,7 +165,7 @@ For detailed decision trees, see individual platform strategy files in `resource
 
 **Data & Analytics**
 - [../ai-ml-data-science/SKILL.md](../ai-ml-data-science/SKILL.md) - Citation prediction models, content scoring
-- [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) - Analytics warehousing for AI search metrics
+- [../data-sql-optimization/SKILL.md](../data-sql-optimization/SKILL.md) - Analytics warehousing for AI search metrics
 
 ### Key Differentiators
 

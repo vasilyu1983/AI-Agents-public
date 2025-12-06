@@ -201,5 +201,5 @@ CONTRACT STRUCTURE
 
 **Related Skills**
 - [../document-pdf/SKILL.md](../document-pdf/SKILL.md) — PDF generation and conversion
-- [../ops-document-automation/SKILL.md](../ops-document-automation/SKILL.md) — Document workflow automation
-- [../foundation-documentation/SKILL.md](../foundation-documentation/SKILL.md) — Technical writing patterns
+- [../document-docx/SKILL.md](../document-docx/SKILL.md) — Document workflow automation
+- [../docs-codebase/SKILL.md](../docs-codebase/SKILL.md) — Technical writing patterns
