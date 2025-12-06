@@ -4,7 +4,7 @@
 **Official Documentation**: [Claude Code Overview](https://docs.claude.com/en/docs/claude-code/overview)
 **Status**: PORTABLE - Works for any repository
 
-Production-ready Claude Code setup with 17 agents + 36 skills + 21 commands + 7 hooks.
+Production-ready Claude Code setup with 17 agents + 50 skills + 21 commands + 7 hooks.
 
 ---
 
@@ -71,7 +71,7 @@ Claude: [Automatically invokes code-reviewer agent]
 
 ## Production-Ready Framework
 
-**NEW**: This repository includes a **complete Claude Code framework** in [framework/](framework/) with 80+ production-ready files that you can copy directly to your `.claude/` directory and use immediately.
+**NEW**: This repository includes a **complete Claude Code framework** in [framework/](framework/) with 90+ production-ready files that you can copy directly to your `.claude/` directory and use immediately.
 
 ### Quick Install (1 minute)
 
@@ -95,11 +95,11 @@ cp /path/to/framework/settings/settings-template.json .claude/settings.json
 | Component | Count | Purpose |
 |-----------|-------|---------|
 | **Agents** | 17 | Specialized AI roles (backend, frontend, mobile, LLM, DevOps, PM, crypto, security, etc.) |
-| **Skills** | 36 | Domain knowledge bases with templates and curated web resources |
+| **Skills** | 50 | Domain knowledge bases with templates and curated web resources |
 | **Commands** | 21 | Quick workflow access (code review, testing, architecture, deployment, product management) |
 | **Hooks** | 7 | Automated guardrails (formatting, security, testing, cost tracking, notifications) |
 
-**Total**: 80+ production-ready files
+**Total**: 90+ production-ready files
 
 ### Key Agents
 

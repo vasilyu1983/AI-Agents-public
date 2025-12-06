@@ -4,11 +4,11 @@
 
 <div align="center">
 
-A curated collection of **40+ Custom GPT agents** and **36+ Claude Code skills** optimized for ChatGPT, Claude Projects, Codex, and Gemini platforms.
+A curated collection of **40+ Custom GPT agents** and **50 Claude Code skills** optimized for ChatGPT, Claude Projects, Codex, and Gemini platforms.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Custom GPTs](https://img.shields.io/badge/Custom%20GPTs-40+-blue)](./custom-gpt)
-[![Claude Skills](https://img.shields.io/badge/Claude%20Skills-36+-purple)](./frameworks/claude-code-kit)
+[![Claude Skills](https://img.shields.io/badge/Claude%20Skills-50-purple)](./frameworks/claude-code-kit)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Twitter Follow](https://img.shields.io/twitter/follow/vasilyu?style=social)](https://twitter.com/vasilyu)
 
@@ -33,7 +33,7 @@ A curated collection of **40+ Custom GPT agents** and **36+ Claude Code skills**
 
 ## What's Inside
 
-This repository contains **40+ specialized AI agents** and **36+ Claude Code skills** organized by domain, each optimized for specific tasks and workflows. All agents follow a consistent template structure with platform-specific optimizations.
+This repository contains **40+ specialized AI agents** and **50 Claude Code skills** organized by domain, each optimized for specific tasks and workflows. All agents follow a consistent template structure with platform-specific optimizations.
 
 ```mermaid
 graph TB
@@ -45,7 +45,7 @@ graph TB
         A --> A5[Research & Analysis]
         A --> A6[Writing]
 
-        B[Claude Code Skills<br/>36+ Development Skills] --> B1[Software Development]
+        B[Claude Code Skills<br/>50 Development Skills] --> B1[Software Development]
         B --> B2[AI/ML Engineering]
         B --> B3[DevOps & Platform]
         B --> B4[Quality & Testing]
@@ -87,7 +87,7 @@ graph LR
         A --> A5[research-n-analysis/]
         A --> A6[writing/]
 
-        B[frameworks/] --> B1[claude-code-kit/<br/>36 Skills]
+        B[frameworks/] --> B1[claude-code-kit/<br/>50 Skills]
         B --> B2[codex-kit/<br/>Router System]
         B --> B3[gemini-kit/<br/>Router System]
 
@@ -166,11 +166,11 @@ AgentName/
 
 ## Claude Code Skills
 
-**36+ production-ready skills** for Claude Code, organized into domain-specific categories.
+**50 production-ready skills** for Claude Code, organized into domain-specific categories.
 
 ```mermaid
 graph LR
-    subgraph "Claude Code Skills (36+)"
+    subgraph "Claude Code Skills (50)"
         A[Software Development] --> A1[Frontend<br/>Backend<br/>Architecture]
         B[AI/ML Engineering] --> B1[LLM Engineering<br/>Agents<br/>Data Science]
         C[DevOps & Platform] --> C1[Database<br/>Platform<br/>Document Automation]
@@ -206,7 +206,7 @@ Three complete development kits for different AI platforms:
 
 ### Claude Code Kit
 
-Complete `.claude/` workspace with 36+ skills covering software development, AI/ML, DevOps, and quality engineering.
+Complete `.claude/` workspace with 50 skills covering software development, AI/ML, DevOps, and quality engineering.
 
 **Copy-paste ready**: Drop the `initial-setup/` directory into your Claude Code workspace.
 
@@ -306,7 +306,7 @@ graph LR
 
     B --> B1[Custom GPTs<br/>8000 char limit]
     C --> C1[Claude Projects<br/>200k tokens]
-    C --> C2[Claude Code<br/>36+ skills]
+    C --> C2[Claude Code<br/>50 skills]
     D --> D1[Codex CLI<br/>Router system]
     E --> E1[Gemini<br/>Router system]
 
@@ -332,7 +332,7 @@ graph LR
 - Artifacts for long outputs
 - `<thinking>` tags for transparency
 - Multi-file knowledge base
-- 36+ specialized skills
+- 50 specialized skills
 
 #### Codex & Gemini
 

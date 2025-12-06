@@ -34,7 +34,7 @@ Claude should activate this skill whenever the user asks for:
 
 ## Scope Boundaries (Use These Skills for Depth)
 
-- **Prompt scaffolds & structured outputs** → [ai-prompts](../ai-prompts/SKILL.md)
+- **Prompt scaffolds & structured outputs** → [ai-prompt-engineering](../ai-prompt-engineering/SKILL.md)
 - **RAG retrieval & chunking** → [ai-rag](../ai-rag/SKILL.md)
 - **Search tuning (BM25/HNSW/hybrid)** → [ai-rag](../ai-rag/SKILL.md)
 - **Security/guardrails** → [ai-mlops](../ai-mlops/SKILL.md)
@@ -241,7 +241,7 @@ What does the agent need to do?
 
 ### Service Layer Templates
 
-- **FastAPI Agent Service** - [`../foundation-api-design/templates/fastapi/fastapi-complete-api.md`](../foundation-api-design/templates/fastapi/fastapi-complete-api.md)
+- **FastAPI Agent Service** - [`../dev-api-design/templates/fastapi/fastapi-complete-api.md`](../dev-api-design/templates/fastapi/fastapi-complete-api.md)
   Auth, pagination, validation, error handling; extend with model lifespan loads, SSE, background tasks
 
 ---
@@ -261,19 +261,19 @@ This skill integrates with complementary Claude Code skills:
 
 - [`../ai-llm/`](../ai-llm/SKILL.md) - LLM patterns, prompt engineering, and model selection for agents
 - [`../ai-rag/`](../ai-rag/SKILL.md) - Deep RAG implementation: chunking, embedding, reranking
-- [`../ai-prompts/`](../ai-prompts/SKILL.md) - System prompt design, few-shot patterns, reasoning strategies
+- [`../ai-prompt-engineering/`](../ai-prompt-engineering/SKILL.md) - System prompt design, few-shot patterns, reasoning strategies
 
 ### Production & Operations
 
-- [`../quality-observability-performance/`](../quality-observability-performance/SKILL.md) - OpenTelemetry, metrics, distributed tracing
+- [`../qa-observability/`](../qa-observability/SKILL.md) - OpenTelemetry, metrics, distributed tracing
 - [`../software-security-appsec/`](../software-security-appsec/SKILL.md) - OWASP Top 10, input validation, secure tool design
 - [`../ops-devops-platform/`](../ops-devops-platform/SKILL.md) - CI/CD pipelines, deployment strategies, infrastructure
 
 ### Supporting Patterns
 
-- [`../foundation-api-design/`](../foundation-api-design/SKILL.md) - REST/GraphQL design for agent APIs and tool interfaces
+- [`../dev-api-design/`](../dev-api-design/SKILL.md) - REST/GraphQL design for agent APIs and tool interfaces
 - [`../ai-mlops/`](../ai-mlops/SKILL.md) - Model deployment, monitoring, drift detection
-- [`../quality-debugging-troubleshooting/`](../quality-debugging-troubleshooting/SKILL.md) - Agent debugging, error analysis, root cause investigation
+- [`../qa-debugging/`](../qa-debugging/SKILL.md) - Agent debugging, error analysis, root cause investigation
 
 **Usage pattern**: Start here for agent architecture, then reference specialized skills for deep implementation details.
 

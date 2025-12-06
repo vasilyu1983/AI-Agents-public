@@ -128,9 +128,9 @@ See [resources/](resources/) for chain-specific best practices.
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System decomposition, modularity, dependency design
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — Infrastructure, CI/CD, observability for blockchain nodes
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — API integration with smart contracts, RPC nodes, indexers
-- [../quality-resilience-patterns/SKILL.md](../quality-resilience-patterns/SKILL.md) — Resilience, circuit breakers, retry logic for chains
+- [../qa-resilience/SKILL.md](../qa-resilience/SKILL.md) — Resilience, circuit breakers, retry logic for chains
 - [../software-code-review/SKILL.md](../software-code-review/SKILL.md) — Code review patterns and quality gates
-- [../foundation-api-design/SKILL.md](../foundation-api-design/SKILL.md) — RESTful design for Web3 APIs and dApp backends
+- [../dev-api-design/SKILL.md](../dev-api-design/SKILL.md) — RESTful design for Web3 APIs and dApp backends
 
 ---
 

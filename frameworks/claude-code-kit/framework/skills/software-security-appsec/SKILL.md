@@ -136,7 +136,7 @@ For C#/.NET crypto/fintech services using Entity Framework Core, see:
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — Secure system decomposition and dependency design
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — DevSecOps pipelines, secrets management, infrastructure hardening
 - [../software-crypto-web3/SKILL.md](../software-crypto-web3/SKILL.md) — Smart contract security, blockchain vulnerabilities, DeFi patterns
-- [../testing-automation/SKILL.md](../testing-automation/SKILL.md) — Security testing, SAST/DAST integration, penetration testing
+- [../qa-testing-strategy/SKILL.md](../qa-testing-strategy/SKILL.md) — Security testing, SAST/DAST integration, penetration testing
 
 #### AI/LLM Security
 
@@ -145,8 +145,8 @@ For C#/.NET crypto/fintech services using Entity Framework Core, see:
 
 #### Quality & Resilience
 
-- [../quality-resilience-patterns/SKILL.md](../quality-resilience-patterns/SKILL.md) — Resilience, safeguards, failure handling, chaos engineering
-- [../quality-code-refactoring/SKILL.md](../quality-code-refactoring/SKILL.md) — Security-focused refactoring patterns
+- [../qa-resilience/SKILL.md](../qa-resilience/SKILL.md) — Resilience, safeguards, failure handling, chaos engineering
+- [../qa-refactoring/SKILL.md](../qa-refactoring/SKILL.md) — Security-focused refactoring patterns
 
 ## Operational Playbooks
 - [resources/operational-playbook.md](resources/operational-playbook.md) — Core security principles, OWASP summaries, authentication patterns, and detailed code examples

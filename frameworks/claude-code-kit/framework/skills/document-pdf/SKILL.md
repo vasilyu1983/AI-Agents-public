@@ -256,4 +256,4 @@ PDF Task: [What do you need?]
 **Related Skills**
 - [../document-docx/SKILL.md](../document-docx/SKILL.md) — Word document generation
 - [../document-xlsx/SKILL.md](../document-xlsx/SKILL.md) — Excel/spreadsheet workflows
-- [../ops-document-automation/SKILL.md](../ops-document-automation/SKILL.md) — Document workflow automation
+- [../document-docx/SKILL.md](../document-docx/SKILL.md) — Document workflow automation

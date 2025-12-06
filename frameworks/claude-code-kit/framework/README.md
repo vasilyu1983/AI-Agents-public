@@ -2,7 +2,7 @@
 
 **Copy-paste ready files for instant Claude Code productivity**
 
-35 specialized skills + 17 production agents + 15 workflow commands + 7 automation hooks
+50 specialized skills + 17 production agents + 15 workflow commands + 7 automation hooks
 
 ---
 
@@ -30,7 +30,7 @@ cp /path/to/initial-setup/settings/settings-template.json .claude/settings.json
 ```bash
 # Check counts
 ls .claude/agents/ | wc -l      # Should show 17
-ls .claude/skills/ | wc -l      # Should show 35
+ls .claude/skills/ | wc -l      # Should show 50
 ls .claude/commands/ | wc -l    # Should show 15
 ls -l .claude/hooks/*.sh        # Should show 7 executable files
 
@@ -139,7 +139,7 @@ done
 
 echo "=== Checking File Counts ==="
 echo "Agents: $(ls .claude/agents/*.md 2>/dev/null | wc -l) (expected: 17)"
-echo "Skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l) (expected: 33)"
+echo "Skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l) (expected: 50)"
 echo "Commands: $(ls .claude/commands/*.md 2>/dev/null | wc -l) (expected: 15)"
 echo "Hooks: $(ls .claude/hooks/*.sh 2>/dev/null | wc -l) (expected: 7)"
 
@@ -181,11 +181,11 @@ chmod +x .claude/verify-installation.sh
 | Component | Count | Purpose |
 |-----------|-------|---------|
 | **Agents** | 17 | Specialized roles (backend, frontend, mobile, LLM, DevOps, PM, crypto, security, etc.) |
-| **Skills** | 35 | Domain knowledge bases with templates and resources (includes ai-llm-development for fine-tuning, prompts, datasets) |
+| **Skills** | 50 | Domain knowledge bases with templates and resources |
 | **Commands** | 20 | Quick workflow access (code review, testing, architecture, product management) |
 | **Hooks** | 7 | Automated guardrails (formatting, security, testing, logging, notifications, cost tracking) |
 
-**Total**: 79 production-ready files
+**Total**: 94 production-ready files
 
 ---
 
@@ -286,7 +286,7 @@ initial-setup/
 │   ├── system-architect.md
 │   └── test-architect.md
 │
-├── skills/                      # 33 skill knowledge bases
+├── skills/                      # 49 skill knowledge bases
 │   ├── [skill-name]/
 │   │   ├── SKILL.md            # Main skill file
 │   │   ├── data/sources.json   # Web resources

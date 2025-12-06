@@ -1,6 +1,6 @@
 ---
 name: ops-devops-platform
-description: Production-grade DevOps patterns with platform engineering, GitOps, Kubernetes, SRE, eBPF-based observability, AI-driven monitoring, CI/CD security, and cloud-native operations (AWS, GCP, Azure, Terraform, Docker, Kafka).
+description: Production-grade DevOps patterns with Kubernetes 1.31+, Terraform 1.9+, Docker 25+, ArgoCD/FluxCD GitOps, SRE, eBPF-based observability, AI-driven monitoring, CI/CD security, and cloud-native operations (AWS, GCP, Azure, Kafka).
 ---
 
 # DevOps Engineering — Quick Reference
@@ -13,10 +13,10 @@ This skill equips Claude with actionable templates, checklists, and patterns for
 
 | Task | Tool/Framework | Command | When to Use |
 |------|----------------|---------|-------------|
-| Infrastructure as Code | Terraform | `terraform plan && terraform apply` | Provision cloud resources declaratively |
+| Infrastructure as Code | Terraform 1.9+ | `terraform plan && terraform apply` | Provision cloud resources declaratively |
 | GitOps Deployment | ArgoCD / FluxCD | `argocd app sync myapp` | Continuous reconciliation, declarative deployments |
-| Container Build | Docker | `docker build -t app:v1 .` | Package applications with dependencies |
-| Kubernetes Deployment | kubectl / Helm | `kubectl apply -f deploy.yaml` / `helm upgrade app ./chart` | Deploy to K8s cluster, manage releases |
+| Container Build | Docker 25+ | `docker build -t app:v1 .` | Package applications with dependencies |
+| Kubernetes Deployment | kubectl / Helm (K8s 1.31+) | `kubectl apply -f deploy.yaml` / `helm upgrade app ./chart` | Deploy to K8s cluster, manage releases |
 | CI/CD Pipeline | GitHub Actions | Define workflow in `.github/workflows/ci.yml` | Automated testing, building, deploying |
 | Security Scanning | Trivy / Falco | `trivy image myapp:latest` | Vulnerability scanning, runtime security |
 | Monitoring & Alerts | Prometheus + Grafana | Configure ServiceMonitor and AlertManager | Observability, SLO tracking, incident alerts |
@@ -214,10 +214,10 @@ Production templates organized by tech stack (27 templates total):
 ## Related Skills
 
 **Operations & Infrastructure:**
-- [../quality-resilience-patterns/SKILL.md](../quality-resilience-patterns/SKILL.md) — Resilience, chaos engineering, and failure handling patterns
-- [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) — Database tuning, high availability, and migrations
-- [../quality-observability-performance/SKILL.md](../quality-observability-performance/SKILL.md) — Monitoring, tracing, profiling, and performance optimization
-- [../quality-debugging-troubleshooting/SKILL.md](../quality-debugging-troubleshooting/SKILL.md) — Production debugging, log analysis, and root cause investigation
+- [../qa-resilience/SKILL.md](../qa-resilience/SKILL.md) — Resilience, chaos engineering, and failure handling patterns
+- [../data-sql-optimization/SKILL.md](../data-sql-optimization/SKILL.md) — Database tuning, high availability, and migrations
+- [../qa-observability/SKILL.md](../qa-observability/SKILL.md) — Monitoring, tracing, profiling, and performance optimization
+- [../qa-debugging/SKILL.md](../qa-debugging/SKILL.md) — Production debugging, log analysis, and root cause investigation
 
 **Security & Compliance:**
 - [../software-security-appsec/SKILL.md](../software-security-appsec/SKILL.md) — Application-layer security patterns and OWASP best practices
@@ -225,8 +225,8 @@ Production templates organized by tech stack (27 templates total):
 **Software Development:**
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — Service-level design and integration patterns
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System design, scalability, and architectural patterns
-- [../foundation-api-design/SKILL.md](../foundation-api-design/SKILL.md) — RESTful API design and versioning
-- [../foundation-git-workflow/SKILL.md](../foundation-git-workflow/SKILL.md) — Git branching strategies and CI/CD integration
+- [../dev-api-design/SKILL.md](../dev-api-design/SKILL.md) — RESTful API design and versioning
+- [../git-workflow/SKILL.md](../git-workflow/SKILL.md) — Git branching strategies and CI/CD integration
 
 **AI/ML Operations:**
 - [../ai-mlops/SKILL.md](../ai-mlops/SKILL.md) — ML model deployment, monitoring, and lifecycle management

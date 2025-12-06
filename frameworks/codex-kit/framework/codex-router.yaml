@@ -30,8 +30,7 @@ agents:
     preferred_skills:
       - ai-agents
       - ai-rag
-      - ai-prompts
-      - ops-document-automation
+      - ai-prompt-engineering
     domain: ai-systems
 
   - id: backend-engineer
@@ -39,7 +38,7 @@ agents:
     preferred_skills:
       - software-backend
       - ai-rag
-      - ops-database-sql
+      - data-sql-optimization
     domain: backend
 
   - id: code-reviewer
@@ -81,7 +80,7 @@ agents:
       - ai-llm
       - ai-llm-inference
       - ai-rag
-      - ai-prompts
+      - ai-prompt-engineering
       - ai-mlops
     domain: llm
 
@@ -94,21 +93,21 @@ agents:
   - id: prd-architect
     description: PRD creation, validation, technical specification for software projects
     preferred_skills:
-      - product-prd-for-agents
-      - foundation-documentation
+      - docs-ai-prd
+      - docs-codebase
     domain: product
 
   - id: product-manager
     description: Product strategy, roadmaps, user research, and metrics analysis
     preferred_skills:
       - product-management
-      - foundation-documentation
+      - docs-codebase
     domain: product
 
   - id: prompt-engineer
     description: Operational prompt engineering for LLMs - design, optimize, validate
     preferred_skills:
-      - ai-prompts
+      - ai-prompt-engineering
       - ai-llm
     domain: prompting
 
@@ -136,25 +135,25 @@ agents:
   - id: sql-engineer
     description: SQL optimization, query tuning, database design, schema migrations, indexing
     preferred_skills:
-      - ops-database-sql
+      - data-sql-optimization
     domain: database
 
   - id: system-architect
     description: System design, architecture review, and technical strategy
     preferred_skills:
       - software-architecture-design
-      - quality-resilience-patterns
-      - quality-observability-performance
+      - qa-resilience
+      - qa-observability
     domain: architecture
 
   - id: test-architect
     description: Test strategy, planning, coverage analysis, and QA leadership
     preferred_skills:
-      - testing-automation
-      - testing-webapp-playwright
-      - testing-ios-simulator
-      - quality-code-refactoring
-      - quality-debugging-troubleshooting
+      - qa-testing-strategy
+      - qa-testing-playwright
+      - qa-testing-ios
+      - qa-refactoring
+      - qa-debugging
     domain: quality
 
 skills:
@@ -206,7 +205,7 @@ skills:
       - "drift detection"
       - "pipeline"
 
-  - id: ai-prompts
+  - id: ai-prompt-engineering
     triggers:
       - "prompt design"
       - "prompt optimization"
@@ -302,7 +301,7 @@ skills:
       - "workbook"
       - "sheet formulas"
 
-  - id: foundation-api-design
+  - id: dev-api-design
     triggers:
       - "API design"
       - "OpenAPI"
@@ -310,7 +309,7 @@ skills:
       - "REST"
       - "GraphQL"
 
-  - id: foundation-dependency-management
+  - id: dev-dependency-management
     triggers:
       - "dependency"
       - "package.json"
@@ -318,7 +317,7 @@ skills:
       - "lockfile"
       - "versioning"
 
-  - id: foundation-documentation
+  - id: docs-codebase
     triggers:
       - "README"
       - "documentation"
@@ -326,7 +325,7 @@ skills:
       - "changelog"
       - "docs"
 
-  - id: foundation-git-commit-message
+  - id: git-commit-message
     triggers:
       - "commit message"
       - "conventional commit"
@@ -334,7 +333,7 @@ skills:
       - "git diff"
       - "/commit-msg"
 
-  - id: foundation-git-workflow
+  - id: git-workflow
     triggers:
       - "git workflow"
       - "branching"
@@ -376,15 +375,15 @@ skills:
       - "LinkedIn"
       - "campaign"
 
-  - id: ops-database-metabase
+  - id: data-lake-platform
     triggers:
-      - "Metabase"
-      - "BI dashboard"
-      - "Metabase SQL"
-      - "Metabase modeling"
-      - "analytics"
+      - "data lake"
+      - "lakehouse"
+      - "SQLMesh"
+      - "Iceberg"
+      - "DuckDB"
 
-  - id: ops-database-sql
+  - id: data-sql-optimization
     triggers:
       - "SQL"
       - "query optimization"
@@ -400,14 +399,6 @@ skills:
       - "infrastructure"
       - "deploy"
 
-  - id: ops-document-automation
-    triggers:
-      - "document automation"
-      - "OCR pipeline"
-      - "template fill"
-      - "forms processing"
-      - "doc workflow"
-
   - id: product-management
     triggers:
       - "product strategy"
@@ -416,7 +407,7 @@ skills:
       - "user research"
       - "metrics"
 
-  - id: product-prd-for-agents
+  - id: docs-ai-prd
     triggers:
       - "PRD"
       - "requirements"
@@ -424,7 +415,7 @@ skills:
       - "user story"
       - "acceptance criteria"
 
-  - id: quality-code-refactoring
+  - id: qa-refactoring
     triggers:
       - "refactor"
       - "code smell"
@@ -432,7 +423,7 @@ skills:
       - "legacy code"
       - "clean code"
 
-  - id: quality-debugging-troubleshooting
+  - id: qa-debugging
     triggers:
       - "debugging"
       - "stack trace"
@@ -440,7 +431,7 @@ skills:
       - "incident"
       - "root cause"
 
-  - id: quality-documentation-audit
+  - id: qa-docs-coverage
     triggers:
       - "documentation audit"
       - "codebase documentation"
@@ -448,7 +439,7 @@ skills:
       - "documentation gaps"
       - "audit docs"
 
-  - id: quality-observability-performance
+  - id: qa-observability
     triggers:
       - "observability"
       - "metrics"
@@ -456,7 +447,7 @@ skills:
       - "performance"
       - "SLO"
 
-  - id: quality-resilience-patterns
+  - id: qa-resilience
     triggers:
       - "circuit breaker"
       - "retry"
@@ -528,7 +519,15 @@ skills:
       - "accessibility"
       - "design system"
 
-  - id: testing-automation
+  - id: software-ux-research
+    triggers:
+      - "user research"
+      - "interview guide"
+      - "usability test"
+      - "JTBD"
+      - "research plan"
+
+  - id: qa-testing-strategy
     triggers:
       - "unit test"
       - "integration test"
@@ -536,7 +535,7 @@ skills:
       - "test automation"
       - "coverage"
 
-  - id: testing-ios-simulator
+  - id: qa-testing-ios
     triggers:
       - "iOS simulator"
       - "Xcode sim"
@@ -544,7 +543,7 @@ skills:
       - "iOS testing"
       - "mobile simulator"
 
-  - id: testing-webapp-playwright
+  - id: qa-testing-playwright
     triggers:
       - "Playwright"
       - "browser automation"
@@ -552,7 +551,7 @@ skills:
       - "page object"
       - "headless"
 
-  - id: workflow-planning
+  - id: dev-workflow-planning
     triggers:
       - "workflow plan"
       - "process mapping"

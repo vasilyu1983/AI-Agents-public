@@ -114,14 +114,57 @@ Traffic ok, CVR low?
 - Stop if under 70% of target after agreed sample; scale if ≥120% for 2 consecutive checks.
 - Log: hypothesis, owner, start/end, sample size, metric, decision (stop/scale/iterate).
 
-### Compliance & Deliverability (2025 Requirements)
-- **Auth**: SPF + DKIM + DMARC (p=quarantine minimum) required. Warm new domains 2-4 weeks. Monitor via Google Postmaster Tools.
-- **One-click unsubscribe**: RFC 8058 list-unsubscribe header required for bulk (>5k/day). Process opt-outs within 48 hours.
-- **Spam rate limits**: Maintain <0.3% spam complaint rate (target 0.1%). Gmail/Yahoo enforce May 5, 2025; non-compliance = permanent rejection.
-- **Lists**: Consent required (GDPR/CASL). Never buy lists. Honor opt-outs. Include postal address/footer (CAN-SPAM).
-- **Content**: Avoid spam triggers; limit links; include plain-text version; test via seed list before send.
-- **Volume**: Bulk senders (>5k/day) face stricter requirements. Microsoft Outlook routing non-compliant to Junk from May 2025.
-- **LinkedIn limits**: Max 10-20 connection requests/day, 50-100 messages/day, 40-80 profile views/day, <150 total actions/day. Use random delays (30-120s) to avoid detection/bans.
+### Compliance & Deliverability (2025 Requirements — UPDATED)
+
+**⚠️ November 2025: Gmail Stricter Enforcement Active**
+
+Gmail implemented stricter enforcement in November 2025. Non-compliant bulk senders now face:
+- Immediate rejection (not just spam folder routing)
+- Permanent blocks requiring domain reputation rebuild
+- Extended warmup periods for recovery (4-8 weeks vs. previous 2-4 weeks)
+
+**Key 2025 Deadlines:**
+
+| Date | Platform | Enforcement |
+|------|----------|-------------|
+| May 5, 2025 | Gmail/Yahoo | Bulk rejection for non-compliant senders |
+| April 29, 2025 | Microsoft Outlook | Non-compliant routed to Junk |
+| November 2025 | Gmail | Stricter enforcement wave active |
+
+**Authentication (Non-Negotiable):**
+- **SPF + DKIM + DMARC** (p=quarantine minimum, p=reject recommended for established domains)
+- Warm new domains 4-8 weeks (longer than previous guidance due to stricter filters)
+- Monitor daily via Google Postmaster Tools — react within 24h to reputation dips
+- Align "From" domain with DKIM signing domain (strict alignment now checked)
+
+**One-Click Unsubscribe (Mandatory for Bulk):**
+- RFC 8058 list-unsubscribe header required for >5k/day senders
+- Process opt-outs within 48 hours (some ESPs now do instant)
+- Both mailto: and https: methods recommended for maximum compatibility
+
+**Spam Rate Limits (Critical):**
+- Maintain **<0.1%** spam complaint rate (0.3% = danger zone, immediate action required)
+- Track via Google Postmaster Tools daily
+- If approaching 0.2%, pause campaigns and audit lists immediately
+
+**Display Name Requirements (New 2025):**
+- Consistent display name across campaigns
+- No misleading names (e.g., "Google Support" when not Google)
+- Match display name to brand/sender identity
+
+**Lists & Consent:**
+- Consent required (GDPR/CASL). Never buy lists.
+- Honor opt-outs. Include postal address/footer (CAN-SPAM).
+- Double opt-in recommended for new lists to maintain quality.
+
+**Content Best Practices:**
+- Avoid spam triggers; limit links to 2-3 max
+- Include plain-text version; test via seed list before send
+- Maintain text-to-image ratio (avoid image-only emails)
+
+**LinkedIn Limits:**
+- Max 10-20 connection requests/day, 50-100 messages/day, 40-80 profile views/day, <150 total actions/day
+- Use random delays (30-120s) to avoid detection/bans
 
 ### Metrics & QA
 - Primary: reply rate, book rate, show rate, SQLs, opps, win rate, CAC, payback.
@@ -154,8 +197,8 @@ Traffic ok, CVR low?
 - [../marketing-social-media/SKILL.md](../marketing-social-media/SKILL.md) — Paid/organic social and content systems
 - [../product-management/SKILL.md](../product-management/SKILL.md) — Positioning and messaging alignment
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Landing implementation and performance
-- [../ai-prompts/SKILL.md](../ai-prompts/SKILL.md) — Rapid variant generation for copy/hooks
-- [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) — Funnel analytics and attribution queries
+- [../ai-prompt-engineering/SKILL.md](../ai-prompt-engineering/SKILL.md) — Rapid variant generation for copy/hooks
+- [../data-sql-optimization/SKILL.md](../data-sql-optimization/SKILL.md) — Funnel analytics and attribution queries
 
 ---
 

@@ -197,8 +197,8 @@ For adjacent topics, reference these skills:
 - **[ai-ml-data-science](../ai-ml-data-science/SKILL.md)** - EDA workflows, feature engineering patterns, model evaluation, SQLMesh transformations
 - **[ai-mlops](../ai-mlops/SKILL.md)** - Production deployment, automated monitoring (18-second drift detection), retraining pipelines
 - **[ai-llm](../ai-llm/SKILL.md)** - Fine-tuning approaches applicable to time series LLMs (Chronos, TimesFM)
-- **[ai-prompts](../ai-prompts/SKILL.md)** - Prompt design patterns for time series LLMs
-- **[ops-database-sql](../ops-database-sql/SKILL.md)** - SQL optimization for time series data storage and retrieval
+- **[ai-prompt-engineering](../ai-prompt-engineering/SKILL.md)** - Prompt design patterns for time series LLMs
+- **[data-sql-optimization](../data-sql-optimization/SKILL.md)** - SQL optimization for time series data storage and retrieval
 
 ---
 

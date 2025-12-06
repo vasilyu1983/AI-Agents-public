@@ -97,13 +97,13 @@ See [resources/modern-patterns.md](resources/modern-patterns.md) for detailed pa
 
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — Backend engineering, API implementation, data layer
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Frontend architecture, micro-frontends, state management
-- [../foundation-api-design/SKILL.md](../foundation-api-design/SKILL.md) — REST, GraphQL, gRPC design patterns
+- [../dev-api-design/SKILL.md](../dev-api-design/SKILL.md) — REST, GraphQL, gRPC design patterns
 
 **Reliability & Operations:**
 
 <!-- TODO: Add when skills are created
-- [../quality-resilience-patterns/SKILL.md](../quality-resilience-patterns/SKILL.md) — Resilience patterns, backpressure, failure handling
-- [../quality-observability-performance/SKILL.md](../quality-observability-performance/SKILL.md) — Monitoring, tracing, performance optimization
+- [../qa-resilience/SKILL.md](../qa-resilience/SKILL.md) — Resilience patterns, backpressure, failure handling
+- [../qa-observability/SKILL.md](../qa-observability/SKILL.md) — Monitoring, tracing, performance optimization
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — Platform engineering, SRE, IaC, deployment strategies
 -->
 
@@ -111,19 +111,19 @@ See [resources/modern-patterns.md](resources/modern-patterns.md) for detailed pa
 
 - [../software-security-appsec/SKILL.md](../software-security-appsec/SKILL.md) — Threat modeling, authentication, authorization, secure design
 <!-- TODO: Add when skill is created
-- [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) — Database design, optimization, indexing strategies
+- [../data-sql-optimization/SKILL.md](../data-sql-optimization/SKILL.md) — Database design, optimization, indexing strategies
 -->
 
 **Quality & Code:**
 
 - [../software-code-review/SKILL.md](../software-code-review/SKILL.md) — Code review practices, architectural review
 <!-- TODO: Add when skill is created
-- [../quality-code-refactoring/SKILL.md](../quality-code-refactoring/SKILL.md) — Refactoring patterns, technical debt management
+- [../qa-refactoring/SKILL.md](../qa-refactoring/SKILL.md) — Refactoring patterns, technical debt management
 -->
 
 **Documentation:**
 
-- [../foundation-documentation/SKILL.md](../foundation-documentation/SKILL.md) — Architecture documentation, C4 diagrams, ADRs
+- [../docs-codebase/SKILL.md](../docs-codebase/SKILL.md) — Architecture documentation, C4 diagrams, ADRs
 
 ---
 

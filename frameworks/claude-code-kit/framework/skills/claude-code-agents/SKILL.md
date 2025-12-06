@@ -233,8 +233,8 @@ Return PASS or FAIL with details.
 ```text
 Agent: backend-engineer
   ├── Uses skill: software-backend (API patterns)
-  ├── Uses skill: foundation-api-design (REST/GraphQL)
-  └── Uses skill: ops-database-sql (query optimization)
+  ├── Uses skill: dev-api-design (REST/GraphQL)
+  └── Uses skill: data-sql-optimization (query optimization)
 ```
 
 Agents reference skills implicitly—Claude loads relevant skill content based on context.

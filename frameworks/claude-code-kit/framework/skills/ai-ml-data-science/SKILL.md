@@ -51,18 +51,33 @@ Claude should invoke this skill when the user asks for **hands-on DS/ML workflow
 - "Create staging/intermediate/marts layers."
 - "Set up MLOps: CI/CD, continuous training, monitoring."
 
+## Data Lake & Lakehouse
+
+For comprehensive data lake/lakehouse patterns (beyond SQLMesh transformation), see **[data-lake-platform](../data-lake-platform/SKILL.md)**:
+
+- **Table formats:** Apache Iceberg, Delta Lake, Apache Hudi
+- **Query engines:** ClickHouse, DuckDB, Apache Doris, StarRocks
+- **Alternative transformation:** dbt (alternative to SQLMesh)
+- **Ingestion:** dlt, Airbyte (connectors)
+- **Streaming:** Apache Kafka patterns
+- **Orchestration:** Dagster, Airflow
+
+This skill focuses on **ML feature engineering and modeling**. Use data-lake-platform for general-purpose data infrastructure.
+
+---
+
 ## Related Skills
 
 For adjacent topics, reference:
 
 - **[ai-mlops](../ai-mlops/SKILL.md)** - APIs, batch jobs, monitoring, drift, data ingestion (dlt)
-- **[ai-mlops](../ai-mlops/SKILL.md)** - ML security, privacy, governance, threat models
 - **[ai-llm](../ai-llm/SKILL.md)** - LLM prompting, fine-tuning, evaluation
 - **[ai-rag](../ai-rag/SKILL.md)** - RAG pipelines, chunking, retrieval
 - **[ai-llm-inference](../ai-llm-inference/SKILL.md)** - LLM inference optimization, quantization
 - **[ai-ml-timeseries](../ai-ml-timeseries/SKILL.md)** - Time series forecasting, backtesting
-- **[testing-automation](../testing-automation/SKILL.md)** - Test-driven development, coverage
-- **[ops-database-sql](../ops-database-sql/SKILL.md)** - SQL optimization, index patterns (complements SQLMesh)
+- **[qa-testing-strategy](../qa-testing-strategy/SKILL.md)** - Test-driven development, coverage
+- **[data-sql-optimization](../data-sql-optimization/SKILL.md)** - SQL optimization, index patterns (complements SQLMesh)
+- **[data-lake-platform](../data-lake-platform/SKILL.md)** - Data lake/lakehouse infrastructure (ClickHouse, Iceberg, Kafka)
 
 ---
 

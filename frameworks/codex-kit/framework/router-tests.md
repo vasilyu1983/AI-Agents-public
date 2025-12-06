@@ -78,7 +78,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 10: Prompt Engineering
 **User Input**: "Optimize this prompt for structured JSON extraction with validation"
-**Expected Route**: Agent: prompt-engineer | Skill: ai-prompts
+**Expected Route**: Agent: prompt-engineer | Skill: ai-prompt-engineering
 **Rationale**: Prompt optimization for structured outputs
 **Priority Rule**: 2 (Task-specific routing for prompt engineering)
 
@@ -86,8 +86,8 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 11: PRD Validation
 **User Input**: "Review this PRD for completeness and suggest improvements"
-**Expected Route**: Agent: prd-architect | Skill: product-prd-for-agents
-**Rationale**: PRD validation and quality checking
+**Expected Route**: Agent: prd-architect | Skill: docs-ai-prd
+**Rationale**: PRD validation and quality checking using PRD skill
 **Priority Rule**: 2 (Task-specific routing for PRD work)
 
 ---
@@ -134,7 +134,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 17: Web E2E Automation
 **User Input**: "Create Playwright tests for checkout flow with fixtures and visual comparisons"
-**Expected Route**: Agent: test-architect | Skill: testing-webapp-playwright
+**Expected Route**: Agent: test-architect | Skill: qa-testing-playwright
 **Rationale**: Browser E2E automation task mapped to testing skill
 **Priority Rule**: 2 (Task-specific routing for testing)
 
@@ -142,8 +142,8 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 18: Document Automation
 **User Input**: "Build an OCR pipeline to extract tables from PDFs and export to XLSX"
-**Expected Route**: Agent: ai-agents-builder | Skill: ops-document-automation
-**Rationale**: Document automation workflow requiring orchestration and OCR
+**Expected Route**: Agent: ai-agents-builder | Skill: document-pdf
+**Rationale**: PDF-focused document workflow requiring OCR and extraction
 **Priority Rule**: 2 (Task-specific routing for document automation)
 
 ---

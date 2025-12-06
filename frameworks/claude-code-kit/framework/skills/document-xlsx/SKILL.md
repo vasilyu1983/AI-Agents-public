@@ -261,4 +261,4 @@ Excel Task: [What do you need?]
 **Related Skills**
 - [../document-pdf/SKILL.md](../document-pdf/SKILL.md) — PDF generation from data
 - [../ai-ml-data-science/SKILL.md](../ai-ml-data-science/SKILL.md) — Data analysis patterns
-- [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) — Database to Excel workflows
+- [../data-sql-optimization/SKILL.md](../data-sql-optimization/SKILL.md) — Database to Excel workflows

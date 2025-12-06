@@ -143,13 +143,13 @@ description: string   # Required: One line, explains when Claude should use it
 |----------|--------|----------|
 | AI/ML | `ai-` | `ai-llm`, `ai-ml-data-science` |
 | Software | `software-` | `software-backend`, `software-frontend` |
-| Operations | `ops-` | `ops-devops-platform`, `ops-database-sql` |
-| Quality | `quality-` | `quality-debugging`, `quality-documentation-audit` |
-| Foundation | `foundation-` | `foundation-api-design`, `foundation-git-commit-message` |
-| Product | `product-` | `product-management`, `product-prd-for-agents` |
+| Operations | `ops-` | `ops-devops-platform` |
+| Data | `data-` | `data-lake-platform`, `data-sql-optimization` |
+| Quality | `quality-` | `quality-debugging`, `qa-docs-coverage` |
+| Developer Tools | `dev-`, `git-` | `dev-api-design`, `git-commit-message`, `dev-workflow-planning` |
+| Product | `product-` | `product-management`, `docs-ai-prd` |
 | Document | `document-` | `document-pdf`, `document-xlsx` |
-| Testing | `testing-` | `testing-webapp-playwright`, `testing-automation` |
-| Workflow | `workflow-` | `workflow-planning` |
+| Testing | `testing-`, `qa-testing-` | `qa-testing-playwright`, `qa-testing-strategy` |
 | Marketing | `marketing-` | `marketing-social-media`, `marketing-seo-technical` |
 | Claude Code | `claude-code-` | `claude-code-agents`, `claude-code-skills` |
 

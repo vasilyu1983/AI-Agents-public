@@ -403,6 +403,6 @@ CLAUDE_MCP_DEBUG=1 claude
 
 **Related Skills**
 
-- [../ops-database-sql/SKILL.md](../ops-database-sql/SKILL.md) — Database patterns
+- [../data-sql-optimization/SKILL.md](../data-sql-optimization/SKILL.md) — Database patterns
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — API integration
 - [../software-security-appsec/SKILL.md](../software-security-appsec/SKILL.md) — Security patterns
