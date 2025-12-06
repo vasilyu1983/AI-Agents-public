@@ -255,7 +255,9 @@ Android (FCM):
 
 - [ ] App icons (all required sizes)
 - [ ] Launch screen configured
-- [ ] Privacy manifest (iOS 18+)
+- [ ] Privacy manifest per target and embedded frameworks (iOS 18+)
+- [ ] Required-reason APIs declared with justifications
+- [ ] Third-party SDK privacy manifests attached; SDK signature attestation (iOS 19+)
 - [ ] Info.plist permissions explanations
 - [ ] App Store screenshots (all device sizes)
 - [ ] App Store description and keywords
@@ -312,4 +314,5 @@ Android (FCM):
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — API design, auth, and backend contracts for mobile clients
 - [../qa-testing-strategy/SKILL.md](../qa-testing-strategy/SKILL.md) — Mobile CI, test strategy, and reliability gates
 - [../qa-resilience/SKILL.md](../qa-resilience/SKILL.md) — Resilience patterns for networked mobile apps
+- [../qa-testing-ios/SKILL.md](../qa-testing-ios/SKILL.md) — iOS-focused test planning, XCTest/Swift Testing patterns, device matrix, and app health checks
 - [../software-ui-ux-design/SKILL.md](../software-ui-ux-design/SKILL.md) — Mobile UI/UX design patterns and accessibility

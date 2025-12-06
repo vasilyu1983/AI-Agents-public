@@ -19,7 +19,7 @@ This skill turns **raw data and questions** into **validated, documented models*
 - **MLOps**: CI/CD, CT (continuous training), CM (continuous monitoring)
 - **Production patterns**: Data contracts, lineage, feedback loops, streaming features
 
-**Modern emphasis (December 2025):** Feature stores, automated retraining, drift monitoring, and train-serve parity. Tools: LightGBM 4.6, scikit-learn 1.7, PyTorch 2.9, Polars 1.x.
+**Modern emphasis (December 2025):** Feature stores, automated retraining, drift monitoring, and train-serve parity. Tools: LightGBM 4.6, scikit-learn 1.7, PyTorch 2.9.1, Polars 1.x.
 
 ---
 

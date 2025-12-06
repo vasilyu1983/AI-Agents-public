@@ -1,11 +1,13 @@
 ---
 name: ops-devops-platform
-description: Production-grade DevOps patterns with Kubernetes 1.31+, Terraform 1.9+, Docker 25+, ArgoCD/FluxCD GitOps, SRE, eBPF-based observability, AI-driven monitoring, CI/CD security, and cloud-native operations (AWS, GCP, Azure, Kafka).
+description: Production-grade DevOps patterns with Kubernetes 1.34+, Terraform 1.9+, Docker 27+, ArgoCD/FluxCD GitOps, SRE, eBPF-based observability, AI-driven monitoring, CI/CD security, and cloud-native operations (AWS, GCP, Azure, Kafka).
 ---
 
 # DevOps Engineering — Quick Reference
 
 This skill equips Claude with actionable templates, checklists, and patterns for building self-service platforms, automating infrastructure with GitOps, deploying securely with DevSecOps, scaling with Kubernetes, ensuring reliability through SRE practices, and operating production systems with AI-driven observability.
+
+**Modern Best Practices (December 2025)**: Kubernetes 1.34 (in-place Pod resource updates GA, 1.35 releasing Dec 17), Docker 27 with BuildKit optimizations, Terraform 1.9+ with improved provider ecosystem, ArgoCD 2.14/FluxCD 2.5 GitOps patterns, eBPF-based observability (Cilium, Hubble), and AI-driven AIOps for incident correlation.
 
 ---
 
@@ -15,8 +17,8 @@ This skill equips Claude with actionable templates, checklists, and patterns for
 |------|----------------|---------|-------------|
 | Infrastructure as Code | Terraform 1.9+ | `terraform plan && terraform apply` | Provision cloud resources declaratively |
 | GitOps Deployment | ArgoCD / FluxCD | `argocd app sync myapp` | Continuous reconciliation, declarative deployments |
-| Container Build | Docker 25+ | `docker build -t app:v1 .` | Package applications with dependencies |
-| Kubernetes Deployment | kubectl / Helm (K8s 1.31+) | `kubectl apply -f deploy.yaml` / `helm upgrade app ./chart` | Deploy to K8s cluster, manage releases |
+| Container Build | Docker 27+ | `docker build -t app:v1 .` | Package applications with dependencies |
+| Kubernetes Deployment | kubectl / Helm (K8s 1.34+) | `kubectl apply -f deploy.yaml` / `helm upgrade app ./chart` | Deploy to K8s cluster, manage releases |
 | CI/CD Pipeline | GitHub Actions | Define workflow in `.github/workflows/ci.yml` | Automated testing, building, deploying |
 | Security Scanning | Trivy / Falco | `trivy image myapp:latest` | Vulnerability scanning, runtime security |
 | Monitoring & Alerts | Prometheus + Grafana | Configure ServiceMonitor and AlertManager | Observability, SLO tracking, incident alerts |

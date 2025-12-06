@@ -1,11 +1,13 @@
 ---
 name: qa-testing-playwright
-description: End-to-end web application testing with Playwright. Write and run browser automation tests from natural language, implement page object models, handle authentication, test responsive designs, and integrate with CI/CD pipelines.
+description: End-to-end web application testing with Playwright 1.57. Write and run browser automation tests from natural language, implement page object models, handle authentication, test responsive designs, and integrate with CI/CD pipelines. Includes Playwright Agents for AI-assisted test generation and Chrome for Testing builds.
 ---
 
 # Webapp Testing (Playwright) Skill — Quick Reference
 
 This skill enables comprehensive E2E testing of web applications using Playwright. Claude should apply these patterns when users need to test web UIs, automate browser interactions, verify user flows, or set up E2E testing infrastructure.
+
+**Modern Best Practices (December 2025)**: Playwright 1.57 with Chrome for Testing builds (replaces Chromium), Playwright Agents for AI-assisted test generation (planner, generator, healer), Service Worker request routing, role-based locators as primary approach, and webServer wait patterns.
 
 ---
 
@@ -67,6 +69,16 @@ project/
 ---
 
 ## Core Testing Patterns
+
+### What's New in Playwright 1.57
+
+- **Chrome for Testing**: Default browser (replaces Chromium builds)
+- **Playwright Agents**: AI-assisted test generation with 3 agents:
+  - **Planner**: Explores app, produces Markdown test plan
+  - **Generator**: Transforms plan into Playwright Test files
+  - **Healer**: Executes tests and auto-repairs failures
+- **webServer.wait**: Wait for regex pattern match in server logs before tests
+- **Service Worker routing**: Network requests from Service Workers now routable
 
 ### Locator Priority (2025 Best Practice)
 
@@ -372,7 +384,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
