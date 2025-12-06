@@ -19,7 +19,7 @@ This skill turns **raw data and questions** into **validated, documented models*
 - **MLOps**: CI/CD, CT (continuous training), CM (continuous monitoring)
 - **Production patterns**: Data contracts, lineage, feedback loops, streaming features
 
-**Modern emphasis:** Feature stores, automated retraining, drift monitoring, and train-serve parity.
+**Modern emphasis (December 2025):** Feature stores, automated retraining, drift monitoring, and train-serve parity. Tools: LightGBM 4.6, scikit-learn 1.7, PyTorch 2.9, Polars 1.x.
 
 ---
 
@@ -29,7 +29,7 @@ This skill turns **raw data and questions** into **validated, documented models*
 |------|----------------|---------|-------------|
 | EDA & Profiling | Pandas, Great Expectations | `df.describe()`, `ge.validate()` | Initial data exploration and quality checks |
 | Feature Engineering | Pandas, Polars, Feature Stores | `df.transform()`, Feast materialization | Creating lag, rolling, categorical features |
-| Model Training | **LightGBM**, XGBoost, scikit-learn | `lgb.train()`, `xgb.train()`, `model.fit()` | Tabular ML with structured data |
+| Model Training | **LightGBM 4.6**, XGBoost, scikit-learn 1.7 | `lgb.train()`, `xgb.train()`, `model.fit()` | Tabular ML with structured data |
 | Hyperparameter Tuning | Optuna, Ray Tune | `optuna.create_study()`, `tune.run()` | Optimizing model parameters |
 | SQL Transformation | SQLMesh | `sqlmesh plan`, `sqlmesh run` | Building staging/intermediate/marts layers |
 | Experiment Tracking | MLflow, W&B | `mlflow.log_metric()`, `wandb.log()` | Versioning experiments and models |

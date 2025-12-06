@@ -91,7 +91,7 @@ Claude should invoke this skill when users ask for:
 - Index health monitoring (unused index detection, index bloat analysis)
 - Vacuum strategy and autovacuum tuning (PostgreSQL)
 - InnoDB buffer pool optimization (MySQL)
-- Partition pruning improvements (PostgreSQL 17+)
+- Partition pruning improvements (PostgreSQL 18+)
 
 ---
 
@@ -281,9 +281,9 @@ See [data/sources.json](data/sources.json) for 62+ curated resources including:
 - **Query Optimization**: Use The Index, Luke, SQL Performance Explained, vendor optimization guides
 - **Schema Design**: Database Refactoring (Fowler), normalization guides, data type selection
 
-**Modern Optimization (2024-2025):**
-- **PostgreSQL 17**: B-tree optimizations, CTE improvements, skip scan, partition pruning, incremental sorting
-- **MySQL 8.4/8.5**: Thread pool management, parallel processing, AI integration, workload analysis
+**Modern Optimization (December 2025):**
+- **PostgreSQL 18**: 3x I/O performance improvements, uuidv7(), virtual generated columns, protocol 3.2, faster major upgrades
+- **MySQL 8.4/9.0**: Thread pool management, parallel processing, AI integration, workload analysis
 - **DuckDB**: Columnar optimization, zone maps, vectorized execution, query optimizer insights (100x improvements)
 
 **Operations & Infrastructure:**

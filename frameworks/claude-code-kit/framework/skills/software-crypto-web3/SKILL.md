@@ -7,7 +7,7 @@ description: Production-grade blockchain and Web3 development with Solidity (Eth
 
 This skill equips blockchain developers with execution-ready patterns for building secure, gas-optimized smart contracts and decentralized applications. Claude should apply these patterns when users ask for smart contract development, DeFi protocols, NFT implementations, security audits, or Web3 architecture.
 
-**Modern Best Practices**: Security-first development, formal verification, comprehensive testing (unit, integration, fork, invariant), gas optimization, upgradeable contracts, multi-chain deployment, and battle-tested DeFi patterns.
+**Modern Best Practices (December 2025)**: Security-first development, formal verification, comprehensive testing (unit, integration, fork, invariant), gas optimization, upgradeable contracts, multi-chain deployment, and battle-tested DeFi patterns. Tools: Foundry 1.5 (npm packages, improved fuzzer), Hardhat 3 (Solidity tests, Rust performance, multichain), Solidity 0.8.31 (Fusaka upgrade, ARM Linux builds).
 
 ---
 

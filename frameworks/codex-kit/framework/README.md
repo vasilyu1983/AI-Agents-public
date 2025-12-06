@@ -9,9 +9,9 @@ Before deploying the router, ensure:
 1. **`.claude/` folder is set up** in your repository:
    ```bash
    # Copy Claude Code Kit to your repo (if not already done)
-   cp -r frameworks/claude-code-kit/initial-setup/skills/ .claude/skills/
-   cp -r frameworks/claude-code-kit/initial-setup/agents/ .claude/agents/
-   cp -r frameworks/claude-code-kit/initial-setup/commands/ .claude/commands/
+   cp -r frameworks/claude-code-kit/framework/skills/ .claude/skills/
+   cp -r frameworks/claude-code-kit/framework/agents/ .claude/agents/
+   cp -r frameworks/claude-code-kit/framework/commands/ .claude/commands/
    ```
 
 2. **Codex CLI is installed** and configured for your repository
@@ -25,12 +25,12 @@ Before deploying the router, ensure:
 mkdir -p .codex
 
 # Copy all 4 router files
-cp frameworks/codex-kit/initial-setup/codex-router.md .codex/
-cp frameworks/codex-kit/initial-setup/codex-mega-prompt.txt .codex/
-cp frameworks/codex-kit/initial-setup/codex-router.yaml .codex/
+cp frameworks/codex-kit/framework/codex-router.md .codex/
+cp frameworks/codex-kit/framework/codex-mega-prompt.txt .codex/
+cp frameworks/codex-kit/framework/codex-router.yaml .codex/
 
 # Optional: Copy test cases for reference
-cp frameworks/codex-kit/initial-setup/router-tests.md .codex/
+cp frameworks/codex-kit/framework/router-tests.md .codex/
 ```
 
 ### Step 2: Paste Mega-Prompt into Codex Session
@@ -55,7 +55,7 @@ Codex: Agent: frontend-engineer | Skill: software-frontend
        [provides security review using both frameworks]
 
 User: "Optimize this PostgreSQL query"
-Codex: Agent: sql-engineer | Skill: ops-database-sql
+Codex: Agent: sql-engineer | Skill: data-sql-optimization
        [provides SQL optimization using expertise from both]
 
 User: "Design a RAG pipeline for document retrieval"
@@ -70,7 +70,7 @@ Codex: Agent: llm-engineer | Skill: ai-rag
 **Usage**: Paste into Codex at the start of each session
 **Contains**:
 - Full skills catalog (50 skills)
-- Full agents catalog (18 agents)
+- Full agents catalog (17 agents)
 - Routing rules with priority order
 - 12+ diverse examples covering all domains
 - Output format specification (`Agent: X | Skill: Y`)
@@ -100,7 +100,7 @@ Codex: Agent: llm-engineer | Skill: ai-rag
 - Last updated: 2025-12-03
 - Source directories (`.claude/skills/`, `.claude/agents/`, `.claude/commands/`)
 - Deployment paths
-- Counts: 18 agents, 50 skills, 30 routing rules
+- Counts: 17 agents, 50 skills, 28 routing rules
 - Compatibility requirements
 
 **Use this when**:
@@ -131,8 +131,8 @@ The router creates a bridge between two frameworks in the **same repository**:
 Your Repository
 ├── .claude/                    # Claude Code Kit (source of truth)
 │   ├── skills/                 # 50 operational skills
-│   ├── agents/                 # 18 specialized agents
-│   └── commands/               # 15 slash commands
+│   ├── agents/                 # 17 specialized agents
+│   └── commands/               # 22 slash commands
 └── .codex/                     # Codex Kit (routing layer)
     ├── codex-router.md         # Reference documentation
     ├── codex-mega-prompt.txt   # Session starter (PASTE THIS)
@@ -202,7 +202,7 @@ Codex: Agent: backend-engineer | Skill: none
 **Agent Missing**: Use skill directly (if self-contained)
 ```
 User: "Show me SQL optimization patterns"
-Codex: Skill: ops-database-sql
+Codex: Skill: data-sql-optimization
 (Skill has standalone patterns)
 ```
 
@@ -274,7 +274,7 @@ cat frameworks/codex-kit/claude-skill-to-codex/prompt.md
 **Fixes**:
 1. Verify `.claude/skills/` directory structure
 2. Check skill names match router catalog (in mega-prompt)
-3. Ensure skills were copied from Claude Code Kit `initial-setup/`
+3. Ensure skills were copied from Claude Code Kit `framework/`
 
 ### Version Mismatch
 
