@@ -1,6 +1,6 @@
 ---
 name: software-backend
-description: Production-grade backend API development with Node.js 24 LTS/25 Current (Express/Fastify/NestJS), Python 3.14+ (FastAPI), Go 1.25+, Rust 1.91+ (Axum), Prisma ORM, PostgreSQL 18. Includes GraphQL, TypeScript 5.9+ strict mode, modern logging (Pino/Winston), secret managers, PM2 process management, and Prisma Accelerate for serverless/edge deployments.
+description: Production-grade backend API development with Node.js 24 LTS/25 Current (Express 5.x/Fastify 5.2/NestJS 11.x), Python 3.14+ (FastAPI 0.115+), Go 1.25+, Rust 1.91+ (Axum 0.8+), Prisma 6.x ORM, PostgreSQL 18. Includes GraphQL, TypeScript 5.9+ strict mode, modern logging (Pino/Winston), secret managers, PM2 process management, and Prisma Accelerate for serverless/edge deployments.
 ---
 
 # Backend Engineering Skill — Quick Reference
@@ -15,9 +15,9 @@ This skill equips backend engineers with execution-ready patterns for modern API
 
 | Task | Tool/Framework | Command | When to Use |
 |------|----------------|---------|-------------|
-| REST API | Express/Fastify/NestJS | `npm create express-app` | Traditional CRUD APIs, public APIs |
+| REST API | Express 5.x / Fastify 5.2 / NestJS 11.x | `npm create express-app` | Traditional CRUD APIs, public APIs |
 | GraphQL API | Apollo Server/Pothos | `npm install @apollo/server` | Flexible data fetching, avoiding over-fetching |
-| Database ORM | Prisma/Drizzle | `npx prisma init` | Type-safe database access, migrations |
+| Database ORM | Prisma 6.x / Drizzle | `npx prisma init` | Type-safe database access, migrations |
 | Authentication | JWT/NextAuth.js/Passport | `npm install jsonwebtoken` | User sessions, API authentication |
 | Validation | Zod/Joi | `npm install zod` | Runtime type validation at API boundaries |
 | Caching | Redis/Upstash | `npm install ioredis` | Read-heavy operations, session storage |
@@ -47,9 +47,9 @@ Claude should invoke this skill when a user requests:
 ```text
 Backend project needs: [API Type]
     ├─ REST API?
-    │   ├─ Simple CRUD → Express + Prisma
-    │   ├─ Enterprise features → NestJS (built-in DI, modules)
-    │   └─ High performance → Fastify (faster than Express)
+    │   ├─ Simple CRUD → Express 5.x + Prisma 6.x
+    │   ├─ Enterprise features → NestJS 11.x (built-in DI, modules)
+    │   └─ High performance → Fastify 5.2 (faster than Express)
     │
     ├─ GraphQL API?
     │   ├─ Code-first → Pothos GraphQL (TypeScript)
@@ -61,9 +61,9 @@ Backend project needs: [API Type]
     │   └─ Magic links → Custom implementation + email service
     │
     ├─ Database Layer?
-    │   ├─ Type-safe ORM → Prisma (best for TypeScript)
+    │   ├─ Type-safe ORM → Prisma 6.x (best for TypeScript)
     │   ├─ SQL-first → Drizzle ORM or Kysely
-    │   └─ Raw SQL → pg (PostgreSQL driver)
+    │   └─ Raw SQL → pg (PostgreSQL 18 driver)
     │
     ├─ Caching Strategy?
     │   ├─ Distributed cache → Redis (multi-server)
@@ -77,10 +77,10 @@ Backend project needs: [API Type]
 
 **Language Alternatives:**
 
-- **Node.js 24 LTS / 25 Current** (Express/Fastify/NestJS + Prisma): TypeScript-first, async/await, Web Storage API
-- **Python 3.14+** (FastAPI + SQLAlchemy): ML/DS backends, async support, free-threaded Python, t-strings
-- **Go 1.25+** (Fiber + GORM): High concurrency, native performance, experimental encoding/json/v2
-- **Rust 1.91+** (Axum + SeaORM): Memory safety, zero-cost abstractions, Rust 2024 edition
+- **Node.js 24 LTS / 25 Current** (Express 5.x / Fastify 5.2 / NestJS 11.x + Prisma 6.x): TypeScript-first, async/await, Web Storage API
+- **Python 3.14+** (FastAPI 0.115+ + SQLAlchemy 2.0+): ML/DS backends, async support, free-threaded Python, t-strings
+- **Go 1.25+** (Fiber 2.x + GORM 1.25+): High concurrency, native performance, experimental encoding/json/v2
+- **Rust 1.91+** (Axum 0.8+ + SeaORM 1.1+): Memory safety, zero-cost abstractions, Rust 2024 edition
 
 See [templates/](templates/) for language-specific starter templates.
 
