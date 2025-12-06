@@ -30,7 +30,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 4: SQL Query Optimization
 **User Input**: "Optimize this slow PostgreSQL query and suggest indexes"
-**Expected Route**: Agent: sql-engineer | Skill: ops-database-sql
+**Expected Route**: Agent: sql-engineer | Skill: data-sql-optimization
 **Rationale**: SQL performance tuning and indexing task
 **Priority Rule**: 2 (Task-specific routing for SQL optimization)
 
@@ -211,7 +211,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ### Edge Case 8: Conflicting Signals
 **User Input**: "Optimize SQL query performance in a Python ML pipeline"
-**Expected Route**: Agent: sql-engineer | Skill: ops-database-sql  
+**Expected Route**: Agent: sql-engineer | Skill: data-sql-optimization  
 **Rationale**: Primary task is SQL optimization (more specialized than general ML pipeline work)
 **Priority Rule**: 2 (Task-specific routing) + Conflict resolution: choose most specialized
 **Notes**: SQL optimization is the bottleneck, takes precedence over ML context

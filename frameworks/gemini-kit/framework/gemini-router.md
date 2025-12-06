@@ -203,7 +203,7 @@ When no explicit override is provided, apply task-specific, then domain-specific
 
 **When multiple agents could apply:**
 - Choose the most specialized agent for the primary task.
-- Example: "Optimize SQL query performance in a Python ML pipeline" → `sql-engineer` + `ops-database-sql` (SQL is the bottleneck).
+- Example: "Optimize SQL query performance in a Python ML pipeline" → `sql-engineer` + `data-sql-optimization` (SQL is the bottleneck).
 
 **When a skill is missing:**
 - Route to the agent only and let it operate without a dedicated skill.
@@ -220,7 +220,7 @@ When no explicit override is provided, apply task-specific, then domain-specific
 ## Reference Paths and Usage
 
 Router deployment:
-- Template storage (this repository): `frameworks/gemini-kit/initial-setup/`
+- Template storage (this repository): `frameworks/gemini-kit/framework/`
 - User deployment: `.gemini/` and `.gemini/commands/`
 
 Referenced resources:

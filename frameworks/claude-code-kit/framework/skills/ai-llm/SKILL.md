@@ -11,7 +11,7 @@ This skill covers the full LLM lifecycle:
 
 - **Development**: Strategy selection, dataset design, instruction tuning, PEFT/LoRA fine-tuning
 - **Evaluation**: Automated testing, LLM-as-judge, metrics, rollout gates
-- **Deployment**: vLLM (24x throughput), FP8/FP4 quantization
+- **Deployment**: vLLM 0.12 (V1 architecture, 24x throughput), FP8/FP4 quantization
 - **Operations**: Drift detection, retraining triggers, monitoring
 - **Safety**: Multi-layered defenses, AI-powered guardrails
 
@@ -27,7 +27,7 @@ This skill covers the full LLM lifecycle:
 | Agentic Workflow | LangGraph, AutoGen, CrewAI | ReAct, multi-agent orchestration | Complex tasks, tool use required |
 | Prompt Design | Anthropic, OpenAI guides | CoT, few-shot, structured | Task-specific behavior control |
 | Evaluation | LangSmith, W&B, RAGAS | Multi-metric (hallucination, bias, cost) | Quality validation, A/B testing |
-| Production Deploy | vLLM, TensorRT-LLM | FP8/FP4 quantization, 24x throughput | High-throughput serving, cost optimization |
+| Production Deploy | vLLM 0.12, TensorRT-LLM | FP8/FP4 quantization, PagedAttention v2 | High-throughput serving, cost optimization |
 | Monitoring | Arize Phoenix, LangFuse | Drift detection, 18-second response | Production LLM systems |
 
 ---
@@ -192,8 +192,8 @@ This skill integrates with complementary Claude Code skills:
 See **[data/sources.json](data/sources.json)** for 50+ curated authoritative sources:
 
 - **Official LLM platform docs** - OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI, AWS Bedrock
-- **Open-source models and frameworks** - HuggingFace Transformers, LLaMA, vLLM, PEFT/LoRA, DeepSpeed
-- **RAG frameworks and vector DBs** - LlamaIndex, LangChain, LangGraph, Haystack, Pinecone, Qdrant, Chroma
+- **Open-source models and frameworks** - HuggingFace Transformers, LLaMA, vLLM 0.12 (V1 architecture, PyTorch 2.9), PEFT/LoRA, DeepSpeed
+- **RAG frameworks and vector DBs** - LlamaIndex, LangChain 1.1+, LangGraph, LangGraph Studio v2, Haystack, Pinecone, Qdrant, Chroma
 - **2025 Agentic frameworks** - Anthropic Agent SDK, AutoGen, CrewAI, LangGraph Multi-Agent, Semantic Kernel
 - **2025 RAG innovations** - Microsoft GraphRAG (knowledge graphs), Pathway (real-time), hybrid retrieval
 - **Prompt engineering** - Anthropic Prompt Library, Prompt Engineering Guide, CoT/ReAct patterns

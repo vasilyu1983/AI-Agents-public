@@ -2,26 +2,51 @@
 
 **Copy-paste ready files for instant Claude Code productivity**
 
-50 specialized skills + 17 production agents + 15 workflow commands + 7 automation hooks
+50 specialized skills + 17 production agents + 22 workflow commands + 7 automation hooks
 
 ---
 
-## Quick Install (1 minute)
+## Quick Install (30 seconds)
+
+### Option 1: One-Command Install (Recommended)
+
+```bash
+cd your-project/
+/path/to/frameworks/claude-code-kit/framework/install.sh
+```
+
+The install script:
+
+- Creates `.claude/` directory structure
+- Copies all agents, skills, commands, hooks
+- Makes hooks executable
+- Copies `settings.json` ready to use
+
+### Option 2: Manual Copy
 
 ```bash
 cd your-project/
 
 # Create .claude directories
-mkdir -p .claude/{agents,skills,commands,hooks}
+mkdir -p .claude/{agents,skills,commands,hooks,logs}
 
 # Copy all files
-cp /path/to/initial-setup/agents/*.md .claude/agents/
-cp -r /path/to/initial-setup/skills/* .claude/skills/
-cp /path/to/initial-setup/commands/*.md .claude/commands/
-cp /path/to/initial-setup/hooks/*.sh .claude/hooks/
+cp frameworks/claude-code-kit/framework/agents/*.md .claude/agents/
+cp -r frameworks/claude-code-kit/framework/skills/* .claude/skills/
+cp frameworks/claude-code-kit/framework/commands/*.md .claude/commands/
+cp frameworks/claude-code-kit/framework/hooks/*.sh .claude/hooks/
 chmod +x .claude/hooks/*.sh
-cp /path/to/initial-setup/settings/settings-template.json .claude/settings.json
+
+# Copy settings (use clean version, not template)
+cp frameworks/claude-code-kit/framework/settings/settings.json .claude/settings.json
 ```
+
+### Settings Files
+
+| File | Purpose |
+|------|---------|
+| `settings.json` | Clean, production-ready. Copy-paste and use immediately. |
+| `settings-template.json` | Documented version with comments and optional sections. |
 
 ---
 
@@ -31,7 +56,7 @@ cp /path/to/initial-setup/settings/settings-template.json .claude/settings.json
 # Check counts
 ls .claude/agents/ | wc -l      # Should show 17
 ls .claude/skills/ | wc -l      # Should show 50
-ls .claude/commands/ | wc -l    # Should show 15
+ls .claude/commands/ | wc -l    # Should show 22
 ls -l .claude/hooks/*.sh        # Should show 7 executable files
 
 # Verify settings
@@ -46,13 +71,13 @@ After copying files to `.claude/`, verify that all internal references are corre
 
 ### Check for Broken Links
 
-**Why this matters**: Files in `initial-setup/` may contain relative paths that break when moved to `.claude/`. This step ensures all cross-references work correctly in your project.
+**Why this matters**: Files in `framework/` may contain relative paths that break when moved to `.claude/`. This step ensures all cross-references work correctly in your project.
 
 ```bash
-# Search for references to initial-setup paths (should return nothing)
-grep -r "initial-setup/" .claude/agents/
-grep -r "initial-setup/" .claude/commands/
-grep -r "initial-setup/" .claude/skills/
+# Search for references to framework paths (should return nothing)
+grep -r "frameworks/claude-code-kit/framework/" .claude/agents/
+grep -r "frameworks/claude-code-kit/framework/" .claude/commands/
+grep -r "frameworks/claude-code-kit/framework/" .claude/skills/
 
 # Search for references to ../reference/ paths (may need updating)
 grep -r "\.\./reference/" .claude/agents/
@@ -68,10 +93,10 @@ grep -r "skills/" .claude/commands/
 
 If you find broken references, update them:
 
-**Before (in initial-setup/)**:
+**Before (in framework/)**:
 ```markdown
-See [Skills Guide](../reference/skills.md) for details.
-Reference: initial-setup/skills/software-backend/
+See [Skills Guide](../docs/skills.md) for details.
+Reference: frameworks/claude-code-kit/framework/skills/software-backend/
 ```
 
 **After (in .claude/)**:
@@ -140,12 +165,12 @@ done
 echo "=== Checking File Counts ==="
 echo "Agents: $(ls .claude/agents/*.md 2>/dev/null | wc -l) (expected: 17)"
 echo "Skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l) (expected: 50)"
-echo "Commands: $(ls .claude/commands/*.md 2>/dev/null | wc -l) (expected: 15)"
+echo "Commands: $(ls .claude/commands/*.md 2>/dev/null | wc -l) (expected: 22)"
 echo "Hooks: $(ls .claude/hooks/*.sh 2>/dev/null | wc -l) (expected: 7)"
 
 echo -e "\n=== Checking for Broken Paths ==="
-broken=$(grep -r "initial-setup/" .claude/ 2>/dev/null | wc -l)
-echo "References to initial-setup/: $broken (expected: 0)"
+broken=$(grep -r "frameworks/claude-code-kit/framework/" .claude/ 2>/dev/null | wc -l)
+echo "References to framework path: $broken (expected: 0)"
 
 echo -e "\n=== Checking Hook Permissions ==="
 for hook in .claude/hooks/*.sh; do
@@ -182,10 +207,10 @@ chmod +x .claude/verify-installation.sh
 |-----------|-------|---------|
 | **Agents** | 17 | Specialized roles (backend, frontend, mobile, LLM, DevOps, PM, crypto, security, etc.) |
 | **Skills** | 50 | Domain knowledge bases with templates and resources |
-| **Commands** | 20 | Quick workflow access (code review, testing, architecture, product management) |
+| **Commands** | 22 | Quick workflow access (code review, testing, architecture, product management) |
 | **Hooks** | 7 | Automated guardrails (formatting, security, testing, logging, notifications, cost tracking) |
 
-**Total**: 94 production-ready files
+**Total**: 96 production-ready files
 
 ---
 
@@ -263,7 +288,7 @@ Skills automatically activate when agents are invoked:
 ## File Structure
 
 ```
-initial-setup/
+framework/
 ├── README.md                    # This file
 ├── ARCHITECTURE-DIAGRAM.md      # Complete system architecture with Mermaid diagrams
 │
@@ -286,22 +311,29 @@ initial-setup/
 │   ├── system-architect.md
 │   └── test-architect.md
 │
-├── skills/                      # 49 skill knowledge bases
+├── skills/                      # 50 skill knowledge bases
 │   ├── [skill-name]/
 │   │   ├── SKILL.md            # Main skill file
 │   │   ├── data/sources.json   # Web resources
 │   │   ├── resources/          # Deep-dive guides
 │   │   └── templates/          # Code templates
 │
-├── commands/                    # 15 workflow commands
+├── commands/                    # 22 workflow commands
 │   ├── agent-arch.md
 │   ├── agent-eval.md
 │   ├── agent-plan.md
 │   ├── architecture-review.md
+│   ├── commit-msg.md
 │   ├── coverage-check.md
 │   ├── design-system.md
 │   ├── ds-deploy.md
 │   ├── fullstack-dev.md
+│   ├── leadgen.md
+│   ├── pm-discovery.md
+│   ├── pm-okrs.md
+│   ├── pm-positioning.md
+│   ├── pm-roadmap.md
+│   ├── pm-strategy.md
 │   ├── prd-validate.md
 │   ├── prompt-validate.md
 │   ├── review.md
@@ -310,16 +342,16 @@ initial-setup/
 │   ├── tech-spec.md
 │   └── test-plan.md
 │
-└── hooks/                       # 7 automation hooks + config
+└── hooks/                       # 7 automation hooks + docs
     ├── pre-tool-validate.sh     # Security validation
     ├── post-tool-format.sh      # Auto-formatting
     ├── post-tool-audit.sh       # Audit logging
-    ├── post-tool-notify.sh      # Slack/Discord notifications (optional)
-    ├── post-tool-cost-tracker.sh # AI cost tracking with budgets (optional)
+    ├── post-tool-notify.sh      # Notifications (optional)
+    ├── post-tool-cost-tracker.sh # AI cost tracking (optional)
     ├── stop-run-tests.sh        # Test automation
     ├── session-start-init.sh    # Context loading
-    ├── settings-template.json   # Hook configuration
-    ├── .env.example             # Environment variables template
+    ├── commit-msg.md            # Commit message guidance
+    ├── pre-commit.md            # Pre-commit guidance
     ├── HOOKS-GUIDE.md           # Complete hook setup guide
     ├── README.md                # Hook documentation
     └── QUICK-START.md           # Hook quick start

@@ -1,13 +1,13 @@
 ---
 name: software-frontend
-description: Production-grade frontend development with Next.js 16 App Router, TypeScript strict mode, Tailwind CSS, shadcn/ui, React 19 Server Components, state management (Zustand/Recoil), performance optimization (Turbopack stable, ISR/SSR/SSG), and accessibility best practices. Includes TanStack Query for server-state, Vitest for testing, and modern React patterns.
+description: Production-grade frontend development with Next.js 16 App Router, TypeScript 5.9+ strict mode, Tailwind CSS v4, shadcn/ui, React 19.2 Server Components, state management (Zustand/Recoil), performance optimization (Turbopack stable, ISR/SSR/SSG), and accessibility best practices. Includes TanStack Query for server-state, Vitest for testing, and modern React patterns.
 ---
 
 # Frontend Engineering Skill — Quick Reference
 
 This skill equips frontend engineers with execution-ready patterns for building modern web applications with Next.js 16, React 19, TypeScript, and Tailwind CSS. Claude should apply these patterns when users ask for component design, state management, routing, forms, data fetching, animations, accessibility, or production-grade UI architectures.
 
-**Modern Best Practices (2025)**: Next.js 16 with Turbopack (stable, default bundler), React 19 with Server Components and Actions, enhanced ISR/SSR/SSG, partial prerendering (PPR), Zustand/Recoil as Redux alternatives, TanStack Query (React Query) for server-state, TypeScript strict mode enforcement, `satisfies` operator, Vitest for testing, and progressive enhancement patterns.
+**Modern Best Practices (December 2025)**: Next.js 16 with Turbopack (stable, default bundler), React 19.2 with Server Components, Actions, Activity component, and useEffectEvent hook, enhanced ISR/SSR/SSG, partial prerendering (PPR), Zustand/Recoil as Redux alternatives, TanStack Query (React Query) for server-state, TypeScript 5.9+ strict mode enforcement (TypeScript 7 "Corsa" Go-based compiler in preview), `satisfies` operator, Tailwind CSS v4 (CSS-first config, 5x faster builds), Vitest for testing, and progressive enhancement patterns.
 
 ---
 
@@ -16,11 +16,11 @@ This skill equips frontend engineers with execution-ready patterns for building 
 | Task | Tool/Framework | Command | When to Use |
 |------|----------------|---------|-------------|
 | Next.js App | Next.js 16 + Turbopack | `npx create-next-app@latest` | Full-stack React apps, SEO, SSR/SSG |
-| Vue App | Nuxt 3 | `npx nuxi@latest init` | Vue ecosystem, auto-imports, Nitro server |
-| Angular App | Angular 18 | `ng new` | Enterprise apps, TypeScript-first, RxJS |
-| Svelte App | SvelteKit | `npm create svelte@latest` | Performance-first, minimal JS, runes |
+| Vue App | Nuxt 4 | `npx nuxi@latest init` | Vue ecosystem, auto-imports, Nitro server |
+| Angular App | Angular 21 | `ng new` | Enterprise apps, zoneless change detection, esbuild |
+| Svelte App | SvelteKit 2.49+ | `npm create svelte@latest` | Performance-first, minimal JS, Svelte 5 runes |
 | React SPA | Vite + React | `npm create vite@latest` | Client-side apps, fast dev server |
-| UI Components | shadcn/ui + Radix UI | `npx shadcn@latest init` | Accessible components, Tailwind styling |
+| UI Components | shadcn/ui + Radix UI | `npx shadcn@latest init` | Accessible components, Tailwind v4 styling |
 | Forms | React Hook Form + Zod | `npm install react-hook-form zod` | Type-safe validation, performance |
 | State Management | Zustand/Recoil | `npm install zustand` | Lightweight global state |
 | Server State | TanStack Query | `npm install @tanstack/react-query` | API caching, server-state sync |
@@ -50,19 +50,19 @@ Claude should invoke this skill when a user requests:
 ```text
 Project needs: [Framework Choice]
     ├─ React ecosystem?
-    │   ├─ Full-stack + SEO → Next.js 16 (App Router, React 19, Turbopack stable)
+    │   ├─ Full-stack + SEO → Next.js 16 (App Router, React 19.2, Turbopack stable)
     │   ├─ Progressive enhancement → Remix (loaders, actions, nested routes)
     │   └─ Client-side SPA → Vite + React (fast dev, minimal config)
     │
     ├─ Vue ecosystem?
-    │   ├─ Full-stack + SSR → Nuxt 3 (auto-imports, Nitro server, file-based routing)
-    │   └─ Client-side SPA → Vite + Vue 3 (Composition API, script setup)
+    │   ├─ Full-stack + SSR → Nuxt 4 (auto-imports, Nitro server, file-based routing)
+    │   └─ Client-side SPA → Vite + Vue 3.5+ (Composition API, script setup)
     │
     ├─ Angular preferred?
-    │   └─ Enterprise app → Angular 18 (standalone components, signals, RxJS)
+    │   └─ Enterprise app → Angular 21 (zoneless change detection, esbuild, signals)
     │
     ├─ Performance-first?
-    │   └─ Minimal JS bundle → SvelteKit (Svelte 5 runes, compiler magic)
+    │   └─ Minimal JS bundle → SvelteKit 2.49+ (Svelte 5.45 runes, compiler magic)
     │
     ├─ Component library?
     │   ├─ Headless + customizable → shadcn/ui + Radix UI + Tailwind
@@ -76,7 +76,7 @@ Project needs: [Framework Choice]
     │   └─ URL-based state → useSearchParams (shareable filters)
     │
     ├─ Styling approach?
-    │   ├─ Utility-first → Tailwind CSS (rapid development)
+    │   ├─ Utility-first → Tailwind CSS v4 (CSS-first config, 5x faster builds)
     │   ├─ CSS-in-JS → Styled Components or Emotion
     │   └─ CSS Modules → Built-in CSS Modules
     │

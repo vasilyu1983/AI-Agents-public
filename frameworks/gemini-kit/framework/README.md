@@ -12,9 +12,9 @@ Before deploying the router, ensure:
    # Copy Claude Code Kit to your repo (if not already done)
    mkdir -p .claude/{agents,skills,commands}
 
-   cp frameworks/claude-code-kit/initial-setup/agents/*.md .claude/agents/
-   cp -r frameworks/claude-code-kit/initial-setup/skills/* .claude/skills/
-   cp frameworks/claude-code-kit/initial-setup/commands/*.md .claude/commands/
+   cp frameworks/claude-code-kit/framework/agents/*.md .claude/agents/
+   cp -r frameworks/claude-code-kit/framework/skills/* .claude/skills/
+   cp frameworks/claude-code-kit/framework/commands/*.md .claude/commands/
    ```
 
 2. **`GEMINI.md` exists at the repository root** and describes your project context.
@@ -30,12 +30,12 @@ Before deploying the router, ensure:
 mkdir -p .gemini/commands
 
 # Copy router command and docs
-cp frameworks/gemini-kit/initial-setup/gemini-router.toml .gemini/commands/claude-router.toml
-cp frameworks/gemini-kit/initial-setup/gemini-router.md .gemini/
-cp frameworks/gemini-kit/initial-setup/gemini-router.yaml .gemini/
+cp frameworks/gemini-kit/framework/gemini-router.toml .gemini/commands/claude-router.toml
+cp frameworks/gemini-kit/framework/gemini-router.md .gemini/
+cp frameworks/gemini-kit/framework/gemini-router.yaml .gemini/
 
 # Optional: Copy test cases for reference
-cp frameworks/gemini-kit/initial-setup/router-tests.md .gemini/
+cp frameworks/gemini-kit/framework/router-tests.md .gemini/
 ```
 
 ### Step 2: Use the `/claude-router` Command
@@ -57,12 +57,12 @@ Expected route:
 ```bash
 gemini run /claude-router "Optimize this slow PostgreSQL query and suggest indexes" \
   src/db/slow-query.sql \
-  .claude/skills/ops-database-sql/SKILL.md
+  .claude/skills/data-sql-optimization/SKILL.md
 ```
 
 Expected route:
 - Agent: sql-engineer
-- Skill: ops-database-sql
+- Skill: data-sql-optimization
 
 #### Example 3: RAG Pipeline Design
 
@@ -123,7 +123,7 @@ Contains:
 - Version and last-updated date
 - Source directories (`.claude/skills/`, `.claude/agents/`, `.claude/commands/`)
 - Deployment paths for router files
-- Counts: 18 agents, 50 skills, 30 routing rules
+- Counts: 17 agents, 50 skills, 28 routing rules
 
 ### `router-tests.md` — Validation
 

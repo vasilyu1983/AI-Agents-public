@@ -76,19 +76,16 @@ Codex: Agent: llm-engineer | Skill: rag-engineering
 - product-manager, prompt-engineer, security-specialist, smm-strategist, sql-engineer
 - system-architect, test-architect
 
-**36 Skills Available**:
+**50 Skills Available**:
 
-- ai-agents-development, ai-llm-development, ai-llm-engineering, ai-llm-ops-inference
-- ai-llm-rag-engineering, ai-llm-search-retrieval, ai-ml-data-science, ai-ml-ops-production
-- ai-ml-ops-security, ai-ml-timeseries, ai-prompt-engineering, codebase-documentation-audit
-- dev-api-design, dev-dependency-management, docs-technical-writing, git-workflow
-- marketing-ai-search-optimization, marketing-leads-generation, marketing-social-media
-- data-lake-platform, data-sql-optimization, ops-devops-platform
-- product-management, product-prd-development, quality-code-refactoring
-- quality-debugging-troubleshooting, quality-observability-performance, quality-resilience-patterns
-- software-architecture-design, software-backend, software-code-review, software-crypto-web3
-- software-frontend, software-mobile, software-security-appsec, software-testing-automation
-- software-ui-ux-design
+- ai-agents, ai-llm, ai-llm-inference, ai-ml-data-science, ai-ml-timeseries, ai-mlops, ai-prompt-engineering, ai-rag
+- claude-code-agents, claude-code-commands, claude-code-hooks, claude-code-mcp, claude-code-project-memory, claude-code-skills
+- data-lake-platform, data-sql-optimization, dev-api-design, dev-dependency-management, dev-workflow-planning
+- docs-ai-prd, docs-codebase, document-docx, document-pdf, document-pptx, document-xlsx
+- git-commit-message, git-workflow, marketing-ai-search-optimization, marketing-leads-generation, marketing-seo-technical, marketing-social-media
+- ops-devops-platform, product-management, qa-debugging, qa-docs-coverage, qa-observability, qa-refactoring, qa-resilience
+- qa-testing-ios, qa-testing-playwright, qa-testing-strategy
+- software-architecture-design, software-backend, software-code-review, software-crypto-web3, software-frontend, software-mobile, software-security-appsec, software-ui-ux-design, software-ux-research
 
 **28 Routing Rules**:
 - 4-tier priority system (explicit override → task-specific → domain-specific → fallback)
@@ -123,7 +120,7 @@ Metadata and deployment info:
 - Version, last updated date
 - Source directories (`.claude/skills/`, `.claude/agents/`)
 - Deployment paths (copy from `frameworks/codex-kit/` to `.codex/`)
-- Counts: 17 agents, 36 skills, 28 routing rules
+- Counts: 17 agents, 50 skills, 28 routing rules
 
 ### router-tests.md (Validation)
 Test cases to verify routing correctness:
@@ -156,9 +153,9 @@ cat frameworks/codex-kit/tools/claude-skill-to-codex/prompt.md
 ```
 User's Repository
 ├── .claude/                    # Claude Code Kit (source of truth)
-│   ├── skills/                 # 24 operational skills
-│   ├── agents/                 # 15 specialized agents
-│   └── commands/               # 14 slash commands
+│   ├── skills/                 # 50 operational skills
+│   ├── agents/                 # 17 specialized agents
+│   └── commands/               # 22 slash commands
 └── .codex/                     # Codex Kit (routing layer)
     ├── codex-router.md         # Reference documentation
     ├── codex-mega-prompt.txt   # Session starter
@@ -206,7 +203,7 @@ Codex CLI → .codex/router → .claude/agents/ → .claude/skills/
 
 **v1.2 (2025-11-22)**:
 
-- Updated to 17 agents, 36 skills (full parity with Claude Code Kit v3.0)
+- Updated to 17 agents, 50 skills (full parity with Claude Code Kit v3.0)
 - Added agents: crypto-engineer, security-specialist
 - Added 10 new skills across quality, foundation, and operations categories
 - Router files updated with complete catalog aligned to Claude Code skills (data-lake-platform, data-sql-optimization)

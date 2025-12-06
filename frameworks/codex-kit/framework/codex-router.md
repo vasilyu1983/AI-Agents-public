@@ -78,8 +78,7 @@ Available agents from `.claude/agents/` (names match agent files):
 - **product-manager**: Product strategy, roadmaps, user research, and metrics analysis (uses `product-management`, `docs-codebase`).
 - **prompt-engineer**: Operational prompt engineering for LLMs – design, optimize, and validate prompts for structured outputs, RAG, agents, and extractors (uses `ai-prompt-engineering`, `ai-llm`).
 - **security-specialist**: Application security specialist covering OWASP Top 10 2025, zero trust, supply chain security, threat modeling, and secure design patterns (uses `software-security-appsec`, `ai-mlops`).
-- **leads-strategist**: Lead generation specialist for ICP/offer clarity, outbound cadences, LinkedIn/social selling, landing optimization, lead scoring, and experiment cadence (uses `marketing-leads-generation`, `marketing-social-media`).
-- **smm-strategist**: Social media marketing strategist for content, campaigns, and growth across major platforms (uses `marketing-social-media`).
+- **smm-strategist**: Marketing strategist for social/content programs, lead generation, and campaign growth across major platforms (uses `marketing-social-media`, `marketing-leads-generation`, `marketing-ai-search-optimization`).
 - **sql-engineer**: SQL optimization, query tuning, database design, schema migrations, indexing strategies, and performance analysis (uses `data-sql-optimization`).
 - **system-architect**: System design, architecture review, and technical strategy for complex software systems (uses `software-architecture-design`, `qa-resilience`, `qa-observability`).
 - **test-architect**: Test strategy, planning, and coverage analysis across testing levels (uses `qa-testing-strategy`, `qa-refactoring`, `qa-debugging`).
@@ -152,7 +151,7 @@ Available agents from `.claude/agents/` (names match agent files):
 - **Skill**: qa-testing-strategy
 
 **If the task is about technical SEO or AEO/LLMO:**
-- **Agent**: leads-strategist
+- **Agent**: smm-strategist
 - **Skill**: marketing-seo-technical
 
 **If the task is about document workflows (docx/pdf/pptx/xlsx) or automation:**

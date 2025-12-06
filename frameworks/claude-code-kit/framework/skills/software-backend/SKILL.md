@@ -1,13 +1,13 @@
 ---
 name: software-backend
-description: Production-grade backend API development with Node.js 22 LTS (Express/Fastify/NestJS), Python 3.12+ (FastAPI), Go 1.23+, Rust (Axum), Prisma ORM, PostgreSQL 17. Includes GraphQL, TypeScript strict mode, modern logging (Pino/Winston), secret managers, PM2 process management, and Prisma Accelerate for serverless/edge deployments.
+description: Production-grade backend API development with Node.js 24 LTS/25 Current (Express/Fastify/NestJS), Python 3.14+ (FastAPI), Go 1.25+, Rust 1.91+ (Axum), Prisma ORM, PostgreSQL 18. Includes GraphQL, TypeScript 5.9+ strict mode, modern logging (Pino/Winston), secret managers, PM2 process management, and Prisma Accelerate for serverless/edge deployments.
 ---
 
 # Backend Engineering Skill — Quick Reference
 
 This skill equips backend engineers with execution-ready patterns for modern API development, database design, authentication, caching, observability, error handling, testing, and deployment. Claude should apply these patterns when users ask for REST/GraphQL API design, database schema modeling, authentication flows, performance optimization, or production-grade backend architectures.
 
-**Modern Best Practices**: GraphQL adoption, TypeScript strict mode enforcement, `unknown` over `any`, Prisma Accelerate for serverless, PM2 process management, structured logging (Pino/Winston), secret managers (AWS Secrets Manager, HashiCorp Vault), and enhanced security with Helmet.js.
+**Modern Best Practices (December 2025)**: GraphQL adoption, TypeScript 5.9+ strict mode enforcement (TypeScript 7 "Corsa" Go-based compiler in preview with 10x speedup), `unknown` over `any`, Prisma Accelerate for serverless, PM2 process management, structured logging (Pino/Winston), secret managers (AWS Secrets Manager, HashiCorp Vault), and enhanced security with Helmet.js.
 
 ---
 
@@ -77,10 +77,10 @@ Backend project needs: [API Type]
 
 **Language Alternatives:**
 
-- **Node.js 22 LTS** (Express/Fastify/NestJS + Prisma): TypeScript-first, async/await
-- **Python 3.12+** (FastAPI + SQLAlchemy): ML/DS backends, async support
-- **Go 1.23+** (Fiber + GORM): High concurrency, native performance
-- **Rust** (Axum + SeaORM): Memory safety, zero-cost abstractions
+- **Node.js 24 LTS / 25 Current** (Express/Fastify/NestJS + Prisma): TypeScript-first, async/await, Web Storage API
+- **Python 3.14+** (FastAPI + SQLAlchemy): ML/DS backends, async support, free-threaded Python, t-strings
+- **Go 1.25+** (Fiber + GORM): High concurrency, native performance, experimental encoding/json/v2
+- **Rust 1.91+** (Axum + SeaORM): Memory safety, zero-cost abstractions, Rust 2024 edition
 
 See [templates/](templates/) for language-specific starter templates.
 
