@@ -167,6 +167,19 @@ Production templates by use case and technology:
 
 ---
 
+## Shared Utilities (Centralized patterns — extract, don't duplicate)
+
+- [../_shared/utilities/llm-utilities.md](../_shared/utilities/llm-utilities.md) — Token counting, streaming, cost estimation
+- [../_shared/utilities/error-handling.md](../_shared/utilities/error-handling.md) — Effect Result types, correlation IDs
+- [../_shared/utilities/resilience-utilities.md](../_shared/utilities/resilience-utilities.md) — p-retry v6, circuit breaker for LLM API calls
+- [../_shared/utilities/logging-utilities.md](../_shared/utilities/logging-utilities.md) — pino v9 + OpenTelemetry integration
+- [../_shared/utilities/observability-utilities.md](../_shared/utilities/observability-utilities.md) — OpenTelemetry SDK, tracing, metrics
+- [../_shared/utilities/config-validation.md](../_shared/utilities/config-validation.md) — Zod 3.24+, secrets management for API keys
+- [../_shared/utilities/testing-utilities.md](../_shared/utilities/testing-utilities.md) — Test factories, fixtures, mocks
+- [../_shared/resources/code-quality-operational-playbook.md](../_shared/resources/code-quality-operational-playbook.md) — Canonical coding rules & LLM code review
+
+---
+
 ## Related Skills
 
 This skill integrates with complementary Claude Code skills:

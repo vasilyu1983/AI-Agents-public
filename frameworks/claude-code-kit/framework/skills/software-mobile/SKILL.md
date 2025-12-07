@@ -162,6 +162,8 @@ Need to make API calls?
 - **Concurrency**: async/await, Combine, GCD
 - **Storage**: Core Data, SwiftData, Keychain
 - **Networking**: URLSession, async/await patterns
+- **iOS 26+**: Glass effects with solid fallback for older versions
+- **Defensive Decoding**: Handle missing fields, array/dict formats, snake_case/camelCase
 
 ### Android Development
 
@@ -280,11 +282,20 @@ Android (FCM):
 
 ### Resources
 
-- [resources/ios-best-practices.md](resources/ios-best-practices.md) — iOS architecture, concurrency, testing, and performance
+- [resources/ios-best-practices.md](resources/ios-best-practices.md) — iOS architecture, concurrency, testing, performance, defensive decoding, @Bindable patterns, iOS 26 glass effects
 - [resources/android-best-practices.md](resources/android-best-practices.md) — Android/Kotlin architecture, coroutines, Compose, testing, performance
 - [resources/operational-playbook.md](resources/operational-playbook.md) — Mobile architecture patterns, platform-specific guides, security notes, and decision tables
 - [README.md](README.md) — Folder overview and usage notes
 - [data/sources.json](data/sources.json) — Curated external references by platform
+
+### Shared Utilities (Centralized patterns — extract, don't duplicate)
+
+- [../_shared/utilities/auth-utilities.md](../_shared/utilities/auth-utilities.md) — Argon2id, jose JWT, OAuth 2.1/PKCE (backend auth for mobile clients)
+- [../_shared/utilities/error-handling.md](../_shared/utilities/error-handling.md) — Error patterns, Result types
+- [../_shared/utilities/resilience-utilities.md](../_shared/utilities/resilience-utilities.md) — Retry, circuit breaker for network calls
+- [../_shared/utilities/logging-utilities.md](../_shared/utilities/logging-utilities.md) — Structured logging patterns
+- [../_shared/utilities/testing-utilities.md](../_shared/utilities/testing-utilities.md) — Test factories, fixtures, mocks
+- [../_shared/resources/code-quality-operational-playbook.md](../_shared/resources/code-quality-operational-playbook.md) — Canonical coding rules & review protocols
 
 ### Templates
 
@@ -305,6 +316,9 @@ Android (FCM):
 | Ignoring lifecycle | Memory leaks, crashes | Respect activity/view lifecycle |
 | No offline handling | Poor UX without network | Cache data, queue operations |
 | Storing secrets in code | Security vulnerability | Use Keychain/Keystore |
+| Using `decode()` without fallback | Crashes on missing/malformed API data | Use `decodeIfPresent()` with defaults |
+| iOS 26 glass effects without check | Visual artifacts on older iOS | Use `#available(iOS 26, *)` with fallback |
+| Missing @Bindable for @Observable | NavigationStack bindings don't work | Add `@Bindable var vm = vm` in body |
 
 ---
 
