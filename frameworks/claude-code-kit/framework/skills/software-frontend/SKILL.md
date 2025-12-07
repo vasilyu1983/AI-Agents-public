@@ -110,6 +110,14 @@ See [resources/](resources/) for framework-specific best practices.
 - [README.md](README.md) — Folder overview and usage notes
 - [data/sources.json](data/sources.json) — 106 curated resources for all frameworks (Next.js, Vue/Nuxt, Angular, Svelte, Remix, Vite)
 
+**Shared Utilities** (Centralized patterns — extract, don't duplicate)
+- [../_shared/utilities/error-handling.md](../_shared/utilities/error-handling.md) — Effect Result types, correlation IDs
+- [../_shared/utilities/config-validation.md](../_shared/utilities/config-validation.md) — Zod 3.24+, Valibot for client validation
+- [../_shared/utilities/logging-utilities.md](../_shared/utilities/logging-utilities.md) — Structured logging patterns
+- [../_shared/utilities/testing-utilities.md](../_shared/utilities/testing-utilities.md) — Vitest, MSW v2, factories, fixtures
+- [../_shared/utilities/observability-utilities.md](../_shared/utilities/observability-utilities.md) — OpenTelemetry SDK, tracing, metrics
+- [../_shared/resources/code-quality-operational-playbook.md](../_shared/resources/code-quality-operational-playbook.md) — Canonical coding rules & review protocols
+
 **Templates** (Production-ready starters by framework)
 - **Next.js**: [templates/nextjs/template-nextjs-tailwind-shadcn.md](templates/nextjs/template-nextjs-tailwind-shadcn.md)
 - **Vue/Nuxt**: [templates/vue-nuxt/template-nuxt3-tailwind.md](templates/vue-nuxt/template-nuxt3-tailwind.md)

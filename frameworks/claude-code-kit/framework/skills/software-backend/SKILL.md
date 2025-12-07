@@ -96,6 +96,16 @@ See [templates/](templates/) for language-specific starter templates.
 - [README.md](README.md) — Folder overview and usage notes
 - [data/sources.json](data/sources.json) — External references per language/runtime
 
+**Shared Utilities** (Centralized patterns — extract, don't duplicate)
+- [../_shared/utilities/auth-utilities.md](../_shared/utilities/auth-utilities.md) — Argon2id, jose JWT, OAuth 2.1/PKCE
+- [../_shared/utilities/error-handling.md](../_shared/utilities/error-handling.md) — Effect Result types, correlation IDs
+- [../_shared/utilities/config-validation.md](../_shared/utilities/config-validation.md) — Zod 3.24+, Valibot, secrets management
+- [../_shared/utilities/resilience-utilities.md](../_shared/utilities/resilience-utilities.md) — p-retry v6, opossum v8, OTel spans
+- [../_shared/utilities/logging-utilities.md](../_shared/utilities/logging-utilities.md) — pino v9 + OpenTelemetry integration
+- [../_shared/utilities/testing-utilities.md](../_shared/utilities/testing-utilities.md) — Vitest, MSW v2, factories, fixtures
+- [../_shared/utilities/observability-utilities.md](../_shared/utilities/observability-utilities.md) — OpenTelemetry SDK, tracing, metrics
+- [../_shared/resources/code-quality-operational-playbook.md](../_shared/resources/code-quality-operational-playbook.md) — Canonical coding rules & review protocols
+
 **Templates**
 - [templates/nodejs/template-nodejs-prisma-postgres.md](templates/nodejs/template-nodejs-prisma-postgres.md) — Node.js + Prisma + PostgreSQL
 - [templates/go/template-go-fiber-gorm.md](templates/go/template-go-fiber-gorm.md) — Go + Fiber + GORM + PostgreSQL

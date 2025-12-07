@@ -179,6 +179,14 @@ Production templates organized by tech stack (27 templates total):
 - [resources/platform-engineering-patterns.md](resources/platform-engineering-patterns.md)
 - [resources/gitops-workflows.md](resources/gitops-workflows.md)
 
+**Shared Utilities** (Centralized patterns — extract, don't duplicate)
+- [../_shared/utilities/config-validation.md](../_shared/utilities/config-validation.md) — Zod 3.24+, secrets management (Vault, 1Password, Doppler)
+- [../_shared/utilities/resilience-utilities.md](../_shared/utilities/resilience-utilities.md) — p-retry v6, circuit breaker, OTel spans
+- [../_shared/utilities/logging-utilities.md](../_shared/utilities/logging-utilities.md) — pino v9 + OpenTelemetry integration
+- [../_shared/utilities/observability-utilities.md](../_shared/utilities/observability-utilities.md) — OpenTelemetry SDK, tracing, metrics
+- [../_shared/utilities/testing-utilities.md](../_shared/utilities/testing-utilities.md) — Test factories, fixtures, mocks
+- [../_shared/resources/code-quality-operational-playbook.md](../_shared/resources/code-quality-operational-playbook.md) — Canonical coding rules & review protocols
+
 **Templates**
 - [templates/incident-response/template-postmortem.md](templates/incident-response/template-postmortem.md)
 - [templates/incident-response/template-incident-comm.md](templates/incident-response/template-incident-comm.md)
