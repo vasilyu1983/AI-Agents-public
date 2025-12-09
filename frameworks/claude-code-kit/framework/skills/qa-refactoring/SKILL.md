@@ -77,6 +77,14 @@ Claude should invoke this skill when a user requests:
 
 # Operational Deep Dives
 
+**Shared Foundation**
+
+- [../../_shared/resources/code-quality-operational-playbook.md](../../_shared/resources/code-quality-operational-playbook.md) — Canonical coding rules (RULE-01 to RULE-13), refactoring decision trees, anti-patterns & correction routines
+- [../../_shared/resources/refactoring-operational-checklist.md](../../_shared/resources/refactoring-operational-checklist.md) — Refactoring smell-to-action mapping, safe refactoring guardrails
+- [../../_shared/resources/working-effectively-with-legacy-code-operational-checklist.md](../../_shared/resources/working-effectively-with-legacy-code-operational-checklist.md) — Seams, characterization tests, incremental migration patterns
+
+**Skill-Specific**
+
 See [resources/operational-patterns.md](resources/operational-patterns.md) for detailed refactoring catalogs, automated quality gates, technical debt playbooks, legacy modernization steps, and modern AI tooling guidance.
 
 ---

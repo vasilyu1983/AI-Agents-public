@@ -109,7 +109,14 @@ For complex PRs, apply multiple review modes sequentially:
 ---
 
 ## Operational Playbooks
-- [resources/operational-playbook.md](resources/operational-playbook.md) — Review scope rules, severity ratings, checklists, modes, and workflow patterns
+
+**Shared Foundation**
+
+- [../../_shared/resources/code-quality-operational-playbook.md](../../_shared/resources/code-quality-operational-playbook.md) — Canonical coding rules (RULE-01 to RULE-13), refactoring decision trees, design patterns, and LLM-generated code review protocol
+
+**Code Review Specific**
+
+- [resources/operational-playbook.md](resources/operational-playbook.md) — Review scope rules, severity ratings (P0-P3), checklists, modes, and PR workflow patterns
 
 ## Navigation
 

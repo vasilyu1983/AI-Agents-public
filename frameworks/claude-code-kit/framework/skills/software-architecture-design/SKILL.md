@@ -128,4 +128,12 @@ See [resources/modern-patterns.md](resources/modern-patterns.md) for detailed pa
 ---
 
 ## Operational Playbooks
+
+**Shared Foundation**
+
+- [../../_shared/resources/code-quality-operational-playbook.md](../../_shared/resources/code-quality-operational-playbook.md) — Canonical coding rules (RULE-01 to RULE-13), Section 6: Design Patterns & Application Rules (Strategy, Adapter, Repository, Observer, CQRS)
+- [../../_shared/resources/design-patterns-operational-checklist.md](../../_shared/resources/design-patterns-operational-checklist.md) — GoF pattern triggers and guardrails, when to apply vs avoid patterns
+
+**Architecture-Specific**
+
 - [resources/operational-playbook.md](resources/operational-playbook.md) — Detailed architecture questions, decomposition patterns, security layers, and external references

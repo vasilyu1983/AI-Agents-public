@@ -1,5 +1,5 @@
-version: "1.1"
-last_updated: "2025-12-03"
+version: "1.3"
+last_updated: "2025-12-09"
 description: "Gemini router for Claude Code Kit skills and agents"
 
 source_dirs:
@@ -21,8 +21,8 @@ compatibility:
   claude_code_kit_version: ">=1.0"
 
 agents_count: 18
-skills_count: 50
-routing_rules_count: 30
+skills_count: 61
+routing_rules_count: 40
 
 agents:
   - id: ai-agents-builder
@@ -31,6 +31,7 @@ agents:
       - ai-agents
       - ai-rag
       - ai-prompt-engineering
+      - agent-fleet-operations
     domain: ai-systems
 
   - id: backend-engineer
@@ -98,10 +99,17 @@ agents:
     domain: product
 
   - id: product-manager
-    description: Product strategy, roadmaps, user research, and metrics analysis
+    description: Product strategy, roadmaps, user research, metrics analysis, and startup advisory
     preferred_skills:
       - product-management
       - docs-codebase
+      - startup-idea-validation
+      - startup-review-mining
+      - startup-trend-prediction
+      - startup-competitive-analysis
+      - startup-business-models
+      - startup-fundraising
+      - startup-mega-router
     domain: product
 
   - id: prompt-engineer
@@ -119,11 +127,12 @@ agents:
     domain: security
 
   - id: leads-strategist
-    description: Lead generation, ICP/offer clarity, outbound cadences, LinkedIn/social selling, landing optimization, and lead scoring
+    description: Lead generation, ICP/offer clarity, outbound cadences, LinkedIn/social selling, landing optimization, lead scoring, GTM
     preferred_skills:
       - marketing-leads-generation
       - marketing-social-media
       - marketing-seo-technical
+      - startup-go-to-market
     domain: marketing
 
   - id: smm-strategist
@@ -147,11 +156,12 @@ agents:
     domain: architecture
 
   - id: test-architect
-    description: Test strategy, planning, coverage analysis, and QA leadership
+    description: Test strategy, planning, coverage analysis, QA leadership, agent testing
     preferred_skills:
       - qa-testing-strategy
       - qa-testing-playwright
       - qa-testing-ios
+      - qa-agent-testing
       - qa-refactoring
       - qa-debugging
     domain: quality
@@ -455,6 +465,15 @@ skills:
       - "graceful degradation"
       - "resilience"
 
+  - id: qa-agent-testing
+    triggers:
+      - "agent testing"
+      - "persona QA"
+      - "LLM testing"
+      - "agent harness"
+      - "regression test agents"
+      - "agent evaluation"
+
   - id: software-architecture-design
     triggers:
       - "system design"
@@ -559,6 +578,83 @@ skills:
       - "task decomposition"
       - "playbook"
 
+  - id: startup-mega-router
+    triggers:
+      - "startup help"
+      - "startup question"
+      - "startup advice"
+      - "entrepreneur"
+      - "founder"
+
+  - id: startup-idea-validation
+    triggers:
+      - "validate idea"
+      - "idea validation"
+      - "should I build"
+      - "is this worth"
+      - "GO/NO-GO"
+
+  - id: startup-review-mining
+    triggers:
+      - "pain points"
+      - "review mining"
+      - "customer complaints"
+      - "G2 reviews"
+      - "Capterra"
+      - "feature gaps"
+
+  - id: startup-trend-prediction
+    triggers:
+      - "market trends"
+      - "trend prediction"
+      - "timing analysis"
+      - "adoption curve"
+      - "what's next"
+
+  - id: startup-competitive-analysis
+    triggers:
+      - "competitive analysis"
+      - "competitor research"
+      - "market positioning"
+      - "competitive landscape"
+      - "competitor weakness"
+
+  - id: startup-business-models
+    triggers:
+      - "business model"
+      - "unit economics"
+      - "pricing strategy"
+      - "revenue model"
+      - "LTV CAC"
+      - "monetization"
+
+  - id: startup-go-to-market
+    triggers:
+      - "GTM strategy"
+      - "go-to-market"
+      - "launch plan"
+      - "market entry"
+      - "channel strategy"
+
+  - id: startup-fundraising
+    triggers:
+      - "fundraising"
+      - "pitch deck"
+      - "investor"
+      - "term sheet"
+      - "Series A"
+      - "seed round"
+      - "valuation"
+
+  - id: agent-fleet-operations
+    triggers:
+      - "agent fleet"
+      - "manage agents"
+      - "agent services"
+      - "fleet orchestration"
+      - "agent monitoring"
+      - "scale agents"
+
 routing_priority:
   - level: 1
     name: "Explicit user override"
@@ -569,10 +665,14 @@ routing_priority:
     description: "Match request type to specialized agent+skill"
 
   - level: 3
+    name: "Startup-specific routing"
+    description: "Match startup requests to product-manager or leads-strategist with startup skills"
+
+  - level: 4
     name: "Domain-specific routing"
     description: "Match technology stack to domain agent"
 
-  - level: 4
+  - level: 5
     name: "Default fallback"
     description: "Use general-purpose agent when no specific match"
 

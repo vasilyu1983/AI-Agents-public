@@ -2,7 +2,7 @@
 
 **Copy-paste ready files for instant Claude Code productivity**
 
-50 specialized skills + 17 production agents + 22 workflow commands + 7 automation hooks
+60 specialized skills + 17 production agents + 22 workflow commands + 7 automation hooks
 
 ---
 
@@ -55,7 +55,7 @@ cp frameworks/claude-code-kit/framework/settings/settings.json .claude/settings.
 ```bash
 # Check counts
 ls .claude/agents/ | wc -l      # Should show 17
-ls .claude/skills/ | wc -l      # Should show 50
+ls .claude/skills/ | wc -l      # Should show 60
 ls .claude/commands/ | wc -l    # Should show 22
 ls -l .claude/hooks/*.sh        # Should show 7 executable files
 
@@ -164,7 +164,7 @@ done
 
 echo "=== Checking File Counts ==="
 echo "Agents: $(ls .claude/agents/*.md 2>/dev/null | wc -l) (expected: 17)"
-echo "Skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l) (expected: 50)"
+echo "Skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l) (expected: 60)"
 echo "Commands: $(ls .claude/commands/*.md 2>/dev/null | wc -l) (expected: 22)"
 echo "Hooks: $(ls .claude/hooks/*.sh 2>/dev/null | wc -l) (expected: 7)"
 
@@ -206,11 +206,11 @@ chmod +x .claude/verify-installation.sh
 | Component | Count | Purpose |
 |-----------|-------|---------|
 | **Agents** | 17 | Specialized roles (backend, frontend, mobile, LLM, DevOps, PM, crypto, security, etc.) |
-| **Skills** | 50 | Domain knowledge bases with templates and resources |
+| **Skills** | 60 | Domain knowledge bases with templates and resources |
 | **Commands** | 22 | Quick workflow access (code review, testing, architecture, product management) |
 | **Hooks** | 7 | Automated guardrails (formatting, security, testing, logging, notifications, cost tracking) |
 
-**Total**: 96 production-ready files
+**Total**: 106 production-ready files
 
 ---
 
@@ -311,7 +311,7 @@ framework/
 │   ├── system-architect.md
 │   └── test-architect.md
 │
-├── skills/                      # 50 skill knowledge bases
+├── skills/                      # 60 skill knowledge bases
 │   ├── [skill-name]/
 │   │   ├── SKILL.md            # Main skill file
 │   │   ├── data/sources.json   # Web resources
@@ -431,6 +431,33 @@ chmod +x .claude/hooks/*.sh  # Fix permissions
 
 ---
 
-**Ready to build production software with Claude Code!** 🚀
+---
+
+## Recent Updates
+
+**(2025-12-09)**: Startup Validation Machine - Complete Suite
+
+- **NEW: `startup-mega-router`** - Master orchestration for routing through 60+ skills
+- **NEW: `startup-idea-validation`** - 9-dimension scoring with Go/No-Go decisions
+- **NEW: `startup-competitive-analysis`** - Deep competitive intelligence, market mapping, positioning
+- **NEW: `startup-business-models`** - Revenue model design, unit economics, pricing strategy
+- **NEW: `startup-fundraising`** - Fundraising strategy, pitch prep, investor targeting, term sheets
+- **NEW: `startup-go-to-market`** - GTM strategy, PLG/sales-led motion, channel selection, growth loops
+- **NEW: `startup-review-mining`** - Pain extraction from ALL review sources (G2, Capterra, App Store, Reddit, HN)
+- **NEW: `startup-trend-prediction`** - 2-3yr lookback → 1-2yr forward trend analysis
+- **NEW: `agent-fleet-operations`** - Managing 50+ AI agents as revenue services: orchestration, monitoring, scaling
+- **NEW: `qa-agent-testing`** - LLM agent/persona testing: 10-task suites, refusal edge cases, 6-dimension scoring
+- Updated skill-dependencies.json with startup domain and cross-links
+- Total skills: 54 → 60
+
+**(2025-12-08)**: UX Skills December Updates
+
+- **software-ui-ux-design**: WCAG 3.0 preview, React Aria, AI design tools, shadcn/ui 2025 components
+- **software-ux-research**: 3 arXiv papers on LLM-assisted UX evaluation, 2025 benchmarks
+- Updated component-library-comparison.md and frontend-aesthetics-2025.md
+
+---
+
+**Ready to build production software with Claude Code!**
 
 For complete usage examples and workflows, see **[../reference/workflows.md](../reference/workflows.md)**

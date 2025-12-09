@@ -148,6 +148,86 @@ This document contains validation test cases to verify routing logic correctness
 
 ---
 
+## Test Case 19: Startup Idea Validation
+**User Input**: "Should I build a SaaS tool for automated code reviews? Validate this idea."
+**Expected Route**: Agent: product-manager | Skill: startup-idea-validation
+**Rationale**: GO/NO-GO decision framework for startup idea validation
+**Priority Rule**: 3 (Startup-specific routing)
+
+---
+
+## Test Case 20: Pain Point Mining from Reviews
+**User Input**: "Extract pain points from G2 and Capterra reviews for project management tools"
+**Expected Route**: Agent: product-manager | Skill: startup-review-mining
+**Rationale**: Systematic extraction of customer pain points from review sources
+**Priority Rule**: 3 (Startup-specific routing)
+
+---
+
+## Test Case 21: Market Trend Prediction
+**User Input**: "What's the market timing for AI-powered developer tools? Analyze the adoption curve."
+**Expected Route**: Agent: product-manager | Skill: startup-trend-prediction
+**Rationale**: Trend analysis with 2-3 year lookback for market timing decisions
+**Priority Rule**: 3 (Startup-specific routing)
+
+---
+
+## Test Case 22: Competitive Analysis
+**User Input**: "Analyze competitors in the observability space and identify positioning gaps"
+**Expected Route**: Agent: product-manager | Skill: startup-competitive-analysis
+**Rationale**: Competitive intelligence and market positioning analysis
+**Priority Rule**: 3 (Startup-specific routing)
+
+---
+
+## Test Case 23: Business Model Design
+**User Input**: "Design pricing tiers and unit economics for a developer API product"
+**Expected Route**: Agent: product-manager | Skill: startup-business-models
+**Rationale**: Revenue model design with LTV:CAC analysis and pricing strategy
+**Priority Rule**: 3 (Startup-specific routing)
+
+---
+
+## Test Case 24: Go-to-Market Strategy
+**User Input**: "Create a GTM strategy for launching a B2B SaaS product to enterprise customers"
+**Expected Route**: Agent: leads-strategist | Skill: startup-go-to-market
+**Rationale**: GTM strategy with channel selection and launch planning
+**Priority Rule**: 3 (Startup-specific routing)
+
+---
+
+## Test Case 25: Fundraising Strategy
+**User Input**: "Prepare for a Series A raise - what should be in my pitch deck and data room?"
+**Expected Route**: Agent: product-manager | Skill: startup-fundraising
+**Rationale**: Fundraising preparation with pitch deck structure and investor targeting
+**Priority Rule**: 3 (Startup-specific routing)
+
+---
+
+## Test Case 26: Agent Fleet Operations
+**User Input**: "How do I manage and monitor 50+ AI agents running as services in production?"
+**Expected Route**: Agent: ai-agents-builder | Skill: agent-fleet-operations
+**Rationale**: Fleet orchestration, monitoring, and scaling for production agent services
+**Priority Rule**: 3 (Startup-specific routing)
+
+---
+
+## Test Case 27: LLM Agent QA Testing
+**User Input**: "Create a test harness for evaluating our customer support chatbot personas"
+**Expected Route**: Agent: test-architect | Skill: qa-agent-testing
+**Rationale**: QA harness for LLM agents with test suites, scoring rubrics, and regression protocols
+**Priority Rule**: 2 (Task-specific routing for agent testing)
+
+---
+
+## Test Case 28: General Startup Question
+**User Input**: "I'm a first-time founder - help me think through my startup idea holistically"
+**Expected Route**: Agent: product-manager | Skill: startup-mega-router
+**Rationale**: Multi-area startup question requiring orchestration across skills
+**Priority Rule**: 3 (Startup-specific routing)
+
+---
+
 ## Edge Cases
 
 ### Edge Case 1: Explicit Agent Override
@@ -221,15 +301,16 @@ This document contains validation test cases to verify routing logic correctness
 ## Priority Rule Coverage
 
 **Priority 1 (Explicit Override)**: Test Cases - Edge Cases 1, 2, 3
-**Priority 2 (Task-Specific)**: Test Cases 1, 4, 5, 6, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
-**Priority 3 (Domain-Specific)**: Test Cases 2, 3, 7, 8, Edge Case 4
-**Priority 4 (Fallback)**: Edge Cases 5, 7
+**Priority 2 (Task-Specific)**: Test Cases 1, 4, 5, 6, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 27
+**Priority 3 (Startup-Specific)**: Test Cases 19, 20, 21, 22, 23, 24, 25, 26, 28
+**Priority 4 (Domain-Specific)**: Test Cases 2, 3, 7, 8, Edge Case 4
+**Priority 5 (Fallback)**: Edge Cases 5, 7
 
 ---
 
 ## Domain Coverage
 
-- **AI Systems**: Test Cases 1, 6, 18
+- **AI Systems**: Test Cases 1, 6, 18, 26
 - **Backend**: Test Cases 2, Edge Cases 4, 5, 7
 - **Frontend**: Test Case 3, Edge Case 6
 - **Database**: Test Case 4, Edge Case 8
@@ -240,8 +321,9 @@ This document contains validation test cases to verify routing logic correctness
 - **Product**: Test Case 11
 - **Prompting**: Test Case 10
 - **Marketing/SEO**: Test Case 16
-- **Testing/E2E**: Test Case 17
+- **Testing/E2E**: Test Cases 17, 27
 - **Documents/OCR**: Test Case 18
+- **Startup Ecosystem**: Test Cases 19, 20, 21, 22, 23, 24, 25, 26, 28
 
 
 ---
