@@ -1,8 +1,8 @@
 # Codex Kit — Claude Code Skills Router
 
 **Status**: PRODUCTION-READY
-**Version**: 1.2
-**Last Updated**: 2025-11-25
+**Version**: 1.3
+**Last Updated**: 2025-12-09
 
 ## Overview
 
@@ -76,16 +76,20 @@ Codex: Agent: llm-engineer | Skill: rag-engineering
 - product-manager, prompt-engineer, security-specialist, smm-strategist, sql-engineer
 - system-architect, test-architect
 
-**50 Skills Available**:
+**62 Skills Available** (including 4 routers):
 
-- ai-agents, ai-llm, ai-llm-inference, ai-ml-data-science, ai-ml-timeseries, ai-mlops, ai-prompt-engineering, ai-rag
-- claude-code-agents, claude-code-commands, claude-code-hooks, claude-code-mcp, claude-code-project-memory, claude-code-skills
-- data-lake-platform, data-sql-optimization, dev-api-design, dev-dependency-management, dev-workflow-planning
-- docs-ai-prd, docs-codebase, document-docx, document-pdf, document-pptx, document-xlsx
-- git-commit-message, git-workflow, marketing-ai-search-optimization, marketing-leads-generation, marketing-seo-technical, marketing-social-media
-- ops-devops-platform, product-management, qa-debugging, qa-docs-coverage, qa-observability, qa-refactoring, qa-resilience
-- qa-testing-ios, qa-testing-playwright, qa-testing-strategy
-- software-architecture-design, software-backend, software-code-review, software-crypto-web3, software-frontend, software-mobile, software-security-appsec, software-ui-ux-design, software-ux-research
+- **Routers**: router-main, router-startup, router-engineering, router-operations
+- **AI/ML**: ai-agents, ai-llm, ai-llm-inference, ai-ml-data-science, ai-ml-timeseries, ai-mlops, ai-prompt-engineering, ai-rag
+- **Claude Code**: claude-code-agents, claude-code-commands, claude-code-hooks, claude-code-mcp, claude-code-project-memory, claude-code-skills
+- **Data**: data-lake-platform, data-sql-optimization
+- **Dev Tools**: dev-api-design, dev-dependency-management, dev-workflow-planning, git-commit-message, git-workflow
+- **Docs**: docs-ai-prd, docs-codebase, document-docx, document-pdf, document-pptx, document-xlsx
+- **Marketing**: marketing-ai-search-optimization, marketing-leads-generation, marketing-seo-technical, marketing-social-media
+- **Ops**: ops-devops-platform
+- **Product**: product-management
+- **QA**: qa-agent-testing, qa-debugging, qa-docs-coverage, qa-observability, qa-refactoring, qa-resilience, qa-testing-ios, qa-testing-playwright, qa-testing-strategy
+- **Software**: software-architecture-design, software-backend, software-code-review, software-crypto-web3, software-frontend, software-mobile, software-security-appsec, software-ui-ux-design, software-ux-research
+- **Startup**: startup-idea-validation, startup-competitive-analysis, startup-business-models, startup-fundraising, startup-go-to-market, startup-review-mining, startup-trend-prediction
 
 **28 Routing Rules**:
 - 4-tier priority system (explicit override → task-specific → domain-specific → fallback)
@@ -120,7 +124,7 @@ Metadata and deployment info:
 - Version, last updated date
 - Source directories (`.claude/skills/`, `.claude/agents/`)
 - Deployment paths (copy from `frameworks/codex-kit/` to `.codex/`)
-- Counts: 17 agents, 50 skills, 28 routing rules
+- Counts: 17 agents, 62 skills, 28 routing rules
 
 ### router-tests.md (Validation)
 Test cases to verify routing correctness:
@@ -200,6 +204,14 @@ Codex CLI → .codex/router → .claude/agents/ → .claude/skills/
 - When skills missing: Verify `.claude/skills/` contains all skill directories
 
 ## Version History
+
+**v1.3 (2025-12-09)**:
+
+- Updated to 17 agents, 62 skills (full parity with Claude Code Kit v3.4)
+- **NEW**: Four-router architecture (router-main, router-startup, router-engineering, router-operations)
+- Added 7 startup validation skills (idea-validation, competitive-analysis, business-models, fundraising, go-to-market, review-mining, trend-prediction)
+- Added qa-agent-testing skill for LLM agent testing
+- Router skills provide intelligent cross-domain orchestration
 
 **v1.2 (2025-11-22)**:
 

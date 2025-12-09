@@ -4,7 +4,9 @@
 **Official Documentation**: [Claude Code Overview](https://docs.claude.com/en/docs/claude-code/overview)
 **Status**: PORTABLE - Works for any repository
 
-Production-ready Claude Code setup with 21 agents + 60 skills + 28 commands + 7 hooks.
+Production-ready Claude Code setup with 21 agents + 62 skills + 28 commands + 7 hooks.
+
+**NEW in v3.4**: Three-router architecture with `router-startup`, `router-engineering`, and `router-operations` for intelligent skill orchestration across 60+ skills.
 
 ---
 
@@ -95,11 +97,12 @@ cp /path/to/framework/settings/settings-template.json .claude/settings.json
 | Component | Count | Purpose |
 |-----------|-------|---------|
 | **Agents** | 21 | Specialized AI roles (backend, frontend, mobile, LLM, DevOps, PM, startup, UX, data, QA, etc.) |
-| **Skills** | 60 | Domain knowledge bases with templates and curated web resources |
+| **Skills** | 62 | Domain knowledge bases with templates and curated web resources |
+| **Routers** | 3 | Meta-orchestration for intelligent skill routing |
 | **Commands** | 28 | Quick workflow access (code review, testing, architecture, startup validation, UX research, data pipelines) |
 | **Hooks** | 7 | Automated guardrails (formatting, security, testing, cost tracking, notifications) |
 
-**Total**: 116 production-ready files
+**Total**: 122 production-ready files
 
 ### Key Agents
 
@@ -128,14 +131,20 @@ cp /path/to/framework/settings/settings-template.json .claude/settings.json
 - [**prompt-engineer**](framework/agents/prompt-engineer.md) - Prompt design & optimization
 - [**smm-strategist**](framework/agents/smm-strategist.md) - Social media marketing
 
-**New in v3.3** (2025-12-09):
+**New in v3.4** (2025-12-09): **Three-Router Architecture**
+
+- [**router-engineering**](framework/skills/router-engineering/SKILL.md) - Routes technical questions through 29 engineering + AI/ML skills
+- [**router-operations**](framework/skills/router-operations/SKILL.md) - Routes QA, DevOps, testing through 15 operations skills
+- Enhanced [**router-startup**](framework/skills/router-startup/SKILL.md) - Now includes marketing (4 skills), document creation (4 skills), and cross-router orchestration patterns
+
+**v3.3** (2025-12-09):
 
 - [**startup-validator**](framework/agents/startup-validator.md) - Startup idea validation, competitive analysis, GTM strategy
 - [**ux-researcher**](framework/agents/ux-researcher.md) - UX research, usability testing, accessibility auditing
 - [**data-engineer**](framework/agents/data-engineer.md) - Data pipelines, lakehouse architecture, SQL optimization
 - [**qa-engineer**](framework/agents/qa-engineer.md) - Quality assurance, debugging, observability, LLM agent testing
 
-**v3.2** (2025-12-09): **Startup Validation Machine** - Complete startup skill suite with 8 new skills for idea validation, competitive analysis, business models, fundraising, GTM, trend prediction, review mining, plus `agent-fleet-operations` for managing AI agent fleets at scale and `qa-agent-testing` for LLM agent testing protocols.
+**v3.2** (2025-12-09): **Startup Validation Machine** - Complete startup skill suite with 8 new skills for idea validation, competitive analysis, business models, fundraising, GTM, trend prediction, review mining, plus `qa-agent-testing` for LLM agent testing protocols.
 
 **v3.1** (2025-12-08): UX skills updated with WCAG 3.0 preview, React Aria recommendations, AI design tools (Figma AI, Visily), LLM-assisted UX evaluation research, shadcn/ui 2025 components.
 
@@ -143,13 +152,38 @@ cp /path/to/framework/settings/settings-template.json .claude/settings.json
 
 See [framework/README.md](framework/README.md) for complete documentation, usage examples, and [ARCHITECTURE-DIAGRAM.md](framework/ARCHITECTURE-DIAGRAM.md) for visual architecture overview.
 
-### Startup Validation Suite ⭐ NEW
+### Three-Router Architecture ⭐ NEW (v3.4)
+
+Intelligent skill orchestration across 60+ skills through three domain-specific routers:
+
+```text
+┌───────────────────────┐  ┌───────────────────────┐  ┌───────────────────────┐
+│    router-startup     │  │  router-engineering   │  │  router-operations    │
+│  Business & Startup   │  │  Technical & AI/ML    │  │   QA & DevOps         │
+│  17 skills            │  │  29 skills            │  │   15 skills           │
+└───────────────────────┘  └───────────────────────┘  └───────────────────────┘
+```
+
+| Router | Skills | Domain |
+|--------|--------|--------|
+| [**router-startup**](framework/skills/router-startup/SKILL.md) | 17 | Business validation, marketing, documents, product |
+| [**router-engineering**](framework/skills/router-engineering/SKILL.md) | 29 | AI/ML, software, data, Claude Code framework |
+| [**router-operations**](framework/skills/router-operations/SKILL.md) | 15 | QA, testing, DevOps, git, observability |
+
+**Cross-router handoffs**: Routers automatically hand off to each other based on query domain:
+
+- "Build an API" → `router-engineering`
+- "Price my product" → `router-startup`
+- "Deploy and test" → `router-operations`
+
+See [router-startup](framework/skills/router-startup/SKILL.md) for cross-router workflow patterns.
+
+### Startup Validation Suite
 
 Complete startup validation workflow with 8 specialized skills:
 
 | Skill | Description |
 |-------|-------------|
-| [**startup-mega-router**](framework/skills/startup-mega-router/SKILL.md) | Master orchestration for routing startup problems through 60 specialized skills |
 | [**startup-idea-validation**](framework/skills/startup-idea-validation/SKILL.md) | 9-dimension scoring with Go/No-Go decisions |
 | [**startup-competitive-analysis**](framework/skills/startup-competitive-analysis/SKILL.md) | Deep competitive intelligence, market mapping, positioning |
 | [**startup-business-models**](framework/skills/startup-business-models/SKILL.md) | Revenue model design, unit economics, pricing strategy |
@@ -158,11 +192,10 @@ Complete startup validation workflow with 8 specialized skills:
 | [**startup-review-mining**](framework/skills/startup-review-mining/SKILL.md) | Pain extraction from G2, Capterra, App Store, Reddit, HN |
 | [**startup-trend-prediction**](framework/skills/startup-trend-prediction/SKILL.md) | 2-3yr lookback → 1-2yr forward trend analysis |
 
-### Agent Operations ⭐ NEW
+### Agent Testing
 
 | Skill | Description |
 |-------|-------------|
-| [**agent-fleet-operations**](framework/skills/agent-fleet-operations/SKILL.md) | Managing 50+ AI agents as revenue services: orchestration, monitoring, scaling, agent economics, SLA management |
 | [**qa-agent-testing**](framework/skills/qa-agent-testing/SKILL.md) | LLM agent/persona testing: 10-task test suites, refusal edge cases, 6-dimension scoring rubric |
 
 ### Product Management Suite ⭐

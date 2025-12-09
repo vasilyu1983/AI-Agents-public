@@ -2,7 +2,9 @@
 
 **Copy-paste ready files for instant Claude Code productivity**
 
-60 specialized skills + 17 production agents + 22 workflow commands + 7 automation hooks
+62 specialized skills + 17 production agents + 22 workflow commands + 7 automation hooks
+
+**Entry Point**: Start with `router-main` → routes to `router-startup`, `router-engineering`, or `router-operations`
 
 ---
 
@@ -55,7 +57,7 @@ cp frameworks/claude-code-kit/framework/settings/settings.json .claude/settings.
 ```bash
 # Check counts
 ls .claude/agents/ | wc -l      # Should show 17
-ls .claude/skills/ | wc -l      # Should show 60
+ls .claude/skills/ | wc -l      # Should show 62
 ls .claude/commands/ | wc -l    # Should show 22
 ls -l .claude/hooks/*.sh        # Should show 7 executable files
 
@@ -164,7 +166,7 @@ done
 
 echo "=== Checking File Counts ==="
 echo "Agents: $(ls .claude/agents/*.md 2>/dev/null | wc -l) (expected: 17)"
-echo "Skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l) (expected: 60)"
+echo "Skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l) (expected: 62)"
 echo "Commands: $(ls .claude/commands/*.md 2>/dev/null | wc -l) (expected: 22)"
 echo "Hooks: $(ls .claude/hooks/*.sh 2>/dev/null | wc -l) (expected: 7)"
 
@@ -206,11 +208,11 @@ chmod +x .claude/verify-installation.sh
 | Component | Count | Purpose |
 |-----------|-------|---------|
 | **Agents** | 17 | Specialized roles (backend, frontend, mobile, LLM, DevOps, PM, crypto, security, etc.) |
-| **Skills** | 60 | Domain knowledge bases with templates and resources |
+| **Skills** | 62 | Domain knowledge bases with templates and resources |
 | **Commands** | 22 | Quick workflow access (code review, testing, architecture, product management) |
 | **Hooks** | 7 | Automated guardrails (formatting, security, testing, logging, notifications, cost tracking) |
 
-**Total**: 106 production-ready files
+**Total**: 108 production-ready files
 
 ---
 
@@ -311,7 +313,7 @@ framework/
 │   ├── system-architect.md
 │   └── test-architect.md
 │
-├── skills/                      # 60 skill knowledge bases
+├── skills/                      # 62 skill knowledge bases
 │   ├── [skill-name]/
 │   │   ├── SKILL.md            # Main skill file
 │   │   ├── data/sources.json   # Web resources
@@ -435,9 +437,17 @@ chmod +x .claude/hooks/*.sh  # Fix permissions
 
 ## Recent Updates
 
+**(2025-12-09)**: Four-Router Architecture
+
+- **NEW: `router-main`** - Universal entry point that routes to domain-specific routers
+- **NEW: `router-engineering`** - Routes 29 technical skills (AI/ML, software, data, Claude Code)
+- **NEW: `router-operations`** - Routes 15 operations skills (QA, testing, DevOps, git)
+- **RENAMED: `startup-mega-router` → `router-startup`** - Routes 17 business skills (startup, marketing, documents, product)
+- **REMOVED: `agent-fleet-operations`** - Content merged into router-startup
+- Total skills: 60 → 62 (3 new routers, 1 removed)
+
 **(2025-12-09)**: Startup Validation Machine - Complete Suite
 
-- **NEW: `startup-mega-router`** - Master orchestration for routing through 60+ skills
 - **NEW: `startup-idea-validation`** - 9-dimension scoring with Go/No-Go decisions
 - **NEW: `startup-competitive-analysis`** - Deep competitive intelligence, market mapping, positioning
 - **NEW: `startup-business-models`** - Revenue model design, unit economics, pricing strategy
@@ -445,7 +455,6 @@ chmod +x .claude/hooks/*.sh  # Fix permissions
 - **NEW: `startup-go-to-market`** - GTM strategy, PLG/sales-led motion, channel selection, growth loops
 - **NEW: `startup-review-mining`** - Pain extraction from ALL review sources (G2, Capterra, App Store, Reddit, HN)
 - **NEW: `startup-trend-prediction`** - 2-3yr lookback → 1-2yr forward trend analysis
-- **NEW: `agent-fleet-operations`** - Managing 50+ AI agents as revenue services: orchestration, monitoring, scaling
 - **NEW: `qa-agent-testing`** - LLM agent/persona testing: 10-task suites, refusal edge cases, 6-dimension scoring
 - Updated skill-dependencies.json with startup domain and cross-links
 - Total skills: 54 → 60
