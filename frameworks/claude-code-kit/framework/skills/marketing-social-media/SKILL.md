@@ -109,6 +109,7 @@ For detailed trees (TikTok scaling, offer creation, outreach triage), see `resou
 - [resources/lead-systems-and-pipelines.md](resources/lead-systems-and-pipelines.md)
 - [resources/virality-word-of-mouth.md](resources/virality-word-of-mouth.md)
 - [resources/linkedin-viral-content.md](resources/linkedin-viral-content.md)
+- [resources/linkedin-engagement-patterns.md](resources/linkedin-engagement-patterns.md)
 - [resources/storybrand-best-practices.md](resources/storybrand-best-practices.md)
 - [resources/cold-outreach-patterns.md](resources/cold-outreach-patterns.md)
 - [resources/paid-social-patterns.md](resources/paid-social-patterns.md)
@@ -151,6 +152,10 @@ For detailed trees (TikTok scaling, offer creation, outreach triage), see `resou
 - [templates/social/ugc-brief-template.md](templates/social/ugc-brief-template.md)
 - [templates/social/viral-post-templates.md](templates/social/viral-post-templates.md)
 - [templates/social/carousel-template.md](templates/social/carousel-template.md)
+
+#### LinkedIn
+
+- [templates/linkedin/profile-rewrite-template.md](templates/linkedin/profile-rewrite-template.md)
 
 #### SEO & Content Hubs
 - [templates/seo/seo-brief-template.md](templates/seo/seo-brief-template.md)

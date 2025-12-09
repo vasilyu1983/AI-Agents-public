@@ -1,10 +1,10 @@
 # Claude Code Kit - Complete Guide
 
-**Last Updated**: 2025-11-25
+**Last Updated**: 2025-12-09
 **Official Documentation**: [Claude Code Overview](https://docs.claude.com/en/docs/claude-code/overview)
 **Status**: PORTABLE - Works for any repository
 
-Production-ready Claude Code setup with 17 agents + 50 skills + 22 commands + 7 hooks.
+Production-ready Claude Code setup with 21 agents + 60 skills + 28 commands + 7 hooks.
 
 ---
 
@@ -94,12 +94,12 @@ cp /path/to/framework/settings/settings-template.json .claude/settings.json
 
 | Component | Count | Purpose |
 |-----------|-------|---------|
-| **Agents** | 17 | Specialized AI roles (backend, frontend, mobile, LLM, DevOps, PM, crypto, security, etc.) |
-| **Skills** | 50 | Domain knowledge bases with templates and curated web resources |
-| **Commands** | 22 | Quick workflow access (code review, testing, architecture, deployment, product management) |
+| **Agents** | 21 | Specialized AI roles (backend, frontend, mobile, LLM, DevOps, PM, startup, UX, data, QA, etc.) |
+| **Skills** | 60 | Domain knowledge bases with templates and curated web resources |
+| **Commands** | 28 | Quick workflow access (code review, testing, architecture, startup validation, UX research, data pipelines) |
 | **Hooks** | 7 | Automated guardrails (formatting, security, testing, cost tracking, notifications) |
 
-**Total**: 96 production-ready files
+**Total**: 116 production-ready files
 
 ### Key Agents
 
@@ -124,13 +124,46 @@ cp /path/to/framework/settings/settings-template.json .claude/settings.json
 - [**product-manager**](framework/agents/product-manager.md) - Product strategy & roadmaps
 - [**prd-architect**](framework/agents/prd-architect.md) - Product requirements & specs
 
-**Specialized (3)**:
+**Specialized (2)**:
 - [**prompt-engineer**](framework/agents/prompt-engineer.md) - Prompt design & optimization
 - [**smm-strategist**](framework/agents/smm-strategist.md) - Social media marketing
 
-**New in v3.0** (2025-11-20): Expanded to 17 agents + 50 skills + 22 commands + 7 automation hooks with complete four-layer architecture (hooks → commands → agents → skills).
+**New in v3.3** (2025-12-09):
+
+- [**startup-validator**](framework/agents/startup-validator.md) - Startup idea validation, competitive analysis, GTM strategy
+- [**ux-researcher**](framework/agents/ux-researcher.md) - UX research, usability testing, accessibility auditing
+- [**data-engineer**](framework/agents/data-engineer.md) - Data pipelines, lakehouse architecture, SQL optimization
+- [**qa-engineer**](framework/agents/qa-engineer.md) - Quality assurance, debugging, observability, LLM agent testing
+
+**v3.2** (2025-12-09): **Startup Validation Machine** - Complete startup skill suite with 8 new skills for idea validation, competitive analysis, business models, fundraising, GTM, trend prediction, review mining, plus `agent-fleet-operations` for managing AI agent fleets at scale and `qa-agent-testing` for LLM agent testing protocols.
+
+**v3.1** (2025-12-08): UX skills updated with WCAG 3.0 preview, React Aria recommendations, AI design tools (Figma AI, Visily), LLM-assisted UX evaluation research, shadcn/ui 2025 components.
+
+**v3.0** (2025-11-20): Expanded to 17 agents + 50 skills + 22 commands + 7 automation hooks with complete four-layer architecture (hooks → commands → agents → skills).
 
 See [framework/README.md](framework/README.md) for complete documentation, usage examples, and [ARCHITECTURE-DIAGRAM.md](framework/ARCHITECTURE-DIAGRAM.md) for visual architecture overview.
+
+### Startup Validation Suite ⭐ NEW
+
+Complete startup validation workflow with 8 specialized skills:
+
+| Skill | Description |
+|-------|-------------|
+| [**startup-mega-router**](framework/skills/startup-mega-router/SKILL.md) | Master orchestration for routing startup problems through 60 specialized skills |
+| [**startup-idea-validation**](framework/skills/startup-idea-validation/SKILL.md) | 9-dimension scoring with Go/No-Go decisions |
+| [**startup-competitive-analysis**](framework/skills/startup-competitive-analysis/SKILL.md) | Deep competitive intelligence, market mapping, positioning |
+| [**startup-business-models**](framework/skills/startup-business-models/SKILL.md) | Revenue model design, unit economics, pricing strategy |
+| [**startup-fundraising**](framework/skills/startup-fundraising/SKILL.md) | Fundraising strategy, pitch prep, investor targeting |
+| [**startup-go-to-market**](framework/skills/startup-go-to-market/SKILL.md) | GTM strategy, PLG/sales-led motion, growth loops |
+| [**startup-review-mining**](framework/skills/startup-review-mining/SKILL.md) | Pain extraction from G2, Capterra, App Store, Reddit, HN |
+| [**startup-trend-prediction**](framework/skills/startup-trend-prediction/SKILL.md) | 2-3yr lookback → 1-2yr forward trend analysis |
+
+### Agent Operations ⭐ NEW
+
+| Skill | Description |
+|-------|-------------|
+| [**agent-fleet-operations**](framework/skills/agent-fleet-operations/SKILL.md) | Managing 50+ AI agents as revenue services: orchestration, monitoring, scaling, agent economics, SLA management |
+| [**qa-agent-testing**](framework/skills/qa-agent-testing/SKILL.md) | LLM agent/persona testing: 10-task test suites, refusal edge cases, 6-dimension scoring rubric |
 
 ### Product Management Suite ⭐
 
@@ -189,6 +222,24 @@ Claude: [Creates Next.js components with TypeScript, Tailwind, accessibility]
 
 You: "/mobile-design user profile with image upload"
 Claude: [Implements mobile feature for iOS/Android with offline support]
+
+You: "/startup-validate AI writing assistant for sales teams"
+Claude: [Runs 9-dimension validation with GO/NO-GO recommendation]
+
+You: "/startup-compete CRM market for SMBs"
+Claude: [Generates competitive analysis with battlecards and positioning]
+
+You: "/startup-gtm developer documentation platform"
+Claude: [Creates GTM strategy with ICP, channels, launch plan]
+
+You: "/ux-research onboarding flow optimization"
+Claude: [Creates research plan with interview guide, usability test protocol]
+
+You: "/agent-test customer-support-bot"
+Claude: [Runs 10-task test suite with 6-dimension scoring]
+
+You: "/data-pipeline customer analytics from Stripe and product events"
+Claude: [Designs data pipeline with ingestion, transformation, serving layers]
 ```
 
 ---
@@ -209,6 +260,7 @@ Claude: [Implements mobile feature for iOS/Android with offline support]
 - **[CLAUDE.md Reference](docs/claudemd.md)** - Project vs user, precedence
 - **[MCP Reference](docs/mcp.md)** - Database, filesystem, git integration
 - **[Workflows Reference](docs/workflows.md)** - Development workflows
+- **[Shared Skill Resources](framework/skills/_shared/resources/)** - Code-quality playbook + operational checklists (Clean Code, Code Complete, Design Patterns, Refactoring, Legacy Code, Pragmatic Programmer, Practice of Programming, Clean Coder, Looks Good To Me, Implementing Effective Code Reviews, Art of Clean Code)
 
 ---
 

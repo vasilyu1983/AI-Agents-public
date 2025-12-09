@@ -26,6 +26,9 @@ Invoke when users ask for:
 - Service blueprint creation
 - Pain point identification and prioritization
 - User research methodology guidance
+- **User feedback analysis** (App Store, Play Store, G2, Capterra, TrustRadius reviews)
+- **Review mining** for competitive intelligence and pain point extraction
+- **Feedback loop patterns** from BigTech and unicorns (Linear, Figma, Airbnb)
 
 ---
 
@@ -41,6 +44,8 @@ Invoke when users ask for:
 | **Usability Testing** | Think-aloud + Task Analysis | [usability-test-plan.md](templates/testing/usability-test-plan.md) | Findings report |
 | **UX Measurement** | SUS + HEART + Task Metrics | [ux-metrics-dashboard.md](templates/metrics/ux-metrics-dashboard.md) | Metrics dashboard |
 | **Process Planning** | Double Diamond | [research-frameworks.md](resources/research-frameworks.md#double-diamond) | Research roadmap |
+| **Pain Point Extraction** | Review Mining + Sentiment Analysis | [pain-point-report-template.md](templates/feedback/pain-point-report-template.md) | Prioritized pain points |
+| **Competitor Reviews** | B2B/B2C Review Mining | [competitor-review-matrix-template.md](templates/feedback/competitor-review-matrix-template.md) | Competitive gaps |
 
 ---
 
@@ -70,9 +75,16 @@ UX Research Need: [What do you want to learn?]
     |   +-- Service design? --> Service Blueprint (resources/customer-journey-mapping.md#service-blueprints)
     |
     +-- Prioritizing improvements?
-        +-- Severity-based? --> Gap Analysis (resources/ux-audit-framework.md#prioritization)
-        +-- Impact-based? --> Effort/Impact Matrix (resources/ux-audit-framework.md#prioritization)
-        +-- Feature delight? --> Kano Classification (resources/research-frameworks.md#kano-model)
+    |   +-- Severity-based? --> Gap Analysis (resources/ux-audit-framework.md#prioritization)
+    |   +-- Impact-based? --> Effort/Impact Matrix (resources/ux-audit-framework.md#prioritization)
+    |   +-- Feature delight? --> Kano Classification (resources/research-frameworks.md#kano-model)
+    |
+    +-- Analyzing user feedback?
+        +-- App Store/Play Store reviews? --> Review Mining (resources/review-mining-playbook.md#b2c)
+        +-- B2B reviews (G2/Capterra/TrustRadius)? --> Review Mining (resources/review-mining-playbook.md#b2b)
+        +-- Support tickets/NPS? --> Pain Point Extraction (resources/pain-point-extraction.md)
+        +-- Which tools to use? --> Feedback Tools Guide (resources/feedback-tools-guide.md)
+        +-- How do BigTech companies do it? --> BigTech Patterns (resources/bigtech-feedback-patterns.md)
 ```
 
 ---
@@ -96,6 +108,13 @@ UX Research Need: [What do you want to learn?]
 
 ### UX Metrics
 - [resources/ux-metrics-framework.md](resources/ux-metrics-framework.md) - Task metrics (success rate, time-on-task), SUS scale, HEART framework, NPS/CSAT/CES, behavioral metrics, North Star identification
+
+### User Feedback Analysis (NEW)
+
+- [resources/pain-point-extraction.md](resources/pain-point-extraction.md) - Extract actionable pain points from any feedback source (App Store, Play Store, G2, support tickets, NPS) with prioritization scoring
+- [resources/review-mining-playbook.md](resources/review-mining-playbook.md) - Practical guide to mining B2B (G2, Capterra, TrustRadius) and B2C (App Store, Play Store) reviews for competitive intelligence
+- [resources/feedback-tools-guide.md](resources/feedback-tools-guide.md) - Tool setup tutorials for AppFollow, Appbot, G2 Seller, Linear Customer Requests, Dovetail, Hotjar, and GPT analysis prompts
+- [resources/bigtech-feedback-patterns.md](resources/bigtech-feedback-patterns.md) - How Linear, Figma, Airbnb, OpenAI, Stripe, and unicorns handle user feedback (modular reference by problem type)
 
 ### AI-Assisted Research (2025)
 
@@ -137,7 +156,13 @@ See [data/sources.json](data/sources.json) `ai_assisted_research` category for t
 - [templates/testing/think-aloud-protocol.md](templates/testing/think-aloud-protocol.md) - Facilitator guide and probing questions
 
 ### Metrics Templates
+
 - [templates/metrics/ux-metrics-dashboard.md](templates/metrics/ux-metrics-dashboard.md) - UX health score dashboard with SUS, task metrics, and trends
+
+### Feedback Templates (NEW)
+
+- [templates/feedback/pain-point-report-template.md](templates/feedback/pain-point-report-template.md) - Structured pain point report with priority tiers, action items, and UI pattern mapping
+- [templates/feedback/competitor-review-matrix-template.md](templates/feedback/competitor-review-matrix-template.md) - Competitive review analysis with switching triggers, feature gaps, and opportunity summary
 
 ---
 
@@ -159,26 +184,43 @@ See [data/sources.json](data/sources.json) `ai_assisted_research` category for t
    +-- Stakeholder interviews
    +-- Competitive analysis
    +-- User research (JTBD)
+   +-- Feedback analysis (reviews, support tickets)
 
 2. EVALUATE (this skill)
    +-- UX audit (heuristics)
    +-- Usability testing
    +-- Journey mapping
+   +-- Pain point extraction
 
 3. PRIORITIZE (this skill)
    +-- Severity rating
    +-- Kano classification
    +-- Effort/Impact matrix
+   +-- Frequency × Severity × Business Impact scoring
 
 4. IMPLEMENT (software-ui-ux-design skill)
    +-- Design system updates
    +-- Component improvements
    +-- Accessibility fixes
+   +-- Pain Point → UI Pattern mapping
 
 5. MEASURE (this skill)
    +-- SUS scores
    +-- Task metrics
    +-- NPS/CSAT tracking
+   +-- Review sentiment trends
+```
+
+### Feedback-Driven Development Flow
+
+```text
+USER ASKS                          SKILL FLOW
+─────────────────────────────────────────────────────────────────
+"Find pain points in reviews"   → pain-point-extraction.md → Pain Point Report
+                                     ↓
+"Find UI patterns for issues"   → Pain Points → software-ui-ux-design → Pattern Recommendations
+                                     ↓
+"How do BigTech handle this?"   → bigtech-feedback-patterns.md → Company Pattern Reference
 ```
 
 ---
@@ -190,11 +232,20 @@ See [data/sources.json](data/sources.json) `ai_assisted_research` category for t
 2. Generate recommendations with severity ratings
 3. Then switch to `software-ui-ux-design` for implementation
 
+**For Claude**: When user asks to "analyze reviews" or "find pain points":
+
+1. Use `pain-point-extraction.md` for methodology
+2. Use `review-mining-playbook.md` for platform-specific extraction
+3. Output using `pain-point-report-template.md` format
+4. Feed results to `software-ui-ux-design` for pattern selection
+
 **Output Formats**:
 - Audit findings: Severity-rated issue lists
 - Journey maps: Visual canvas with touchpoints
 - Competitive analysis: Feature/UX comparison tables
 - Test results: Findings with video timestamps
 - Metrics: Dashboard with benchmarks
+- Pain point reports: Priority-tiered issues with UI pattern mapping
+- Competitor reviews: Gap analysis with switching triggers
 
 **Key Principle**: Research first, implement second. Never skip the analysis phase.

@@ -21,6 +21,8 @@ Invoke when users ask for:
 - Information architecture and navigation design
 - Mobile-first and responsive design patterns
 - Form design and input validation UX
+- **Pattern selection based on user pain points** (from `software-ux-research` analysis)
+- **UI fixes for feedback-identified issues** (navigation, onboarding, performance, forms)
 
 ---
 
@@ -29,6 +31,7 @@ Invoke when users ask for:
 | UX Task | Pattern/Tool | Implementation | When to Use |
 |---------|--------------|----------------|-------------|
 | **Distinctive Aesthetics** | **Creative typography, bold color** | **Avoid Inter/Roboto, commit to theme** | **Prevent generic AI aesthetics** |
+| **Pain Point → Pattern** | **Feedback-driven design** | **Use `software-ux-research` first** | **When you have user feedback to act on** |
 | Cognitive Load & Cues | Gestalt grouping, preattentive cues | Chunk info, align, use contrast/weight/icons | Dense data, complex flows; reduce working-memory load |
 | Signifiers & Mappings | Visible affordances, natural layouts | Show clickable states, map controls to outputs | Any interactive element; prevent slips/mistakes |
 | Loading States | Skeleton screens | Shimmer placeholders | All async data (preferred over spinners) |
@@ -68,9 +71,16 @@ Design challenge: [Feature Type]
     │   ├─ First-click test? → Primary action obvious, trunk nav clear
     │   └─ Scannable copy? → Plain-language labels, front-loaded headings
     │
-    └─ Mobile vs Desktop?
-        ├─ Mobile-first design → Start 320px, scale up
-        └─ Touch targets 44x44px minimum
+    ├─ Mobile vs Desktop?
+    │   ├─ Mobile-first design → Start 320px, scale up
+    │   └─ Touch targets 44x44px minimum
+    │
+    └─ Have user pain points from feedback?
+        ├─ Navigation issues? → Breadcrumbs, tabs, simplified IA
+        ├─ Onboarding confusion? → Progressive disclosure, guided tours
+        ├─ Performance complaints? → Skeleton screens, optimistic UI
+        ├─ Form frustration? → Inline validation, autosave, chunking
+        └─ Need pain points first? → Use software-ux-research skill
 ```
 
 ---
@@ -79,9 +89,9 @@ Design challenge: [Feature Type]
 
 ### Resources (Best Practices & Guides)
 
-- [resources/frontend-aesthetics-2024.md](resources/frontend-aesthetics-2024.md) — **NEW** Distinctive design principles to avoid generic AI aesthetics (typography, color, motion, backgrounds)
+- [resources/frontend-aesthetics-2025.md](resources/frontend-aesthetics-2025.md) — Distinctive design principles to avoid generic AI aesthetics (typography, color, motion, backgrounds, AI design tools)
 - [resources/design-systems.md](resources/design-systems.md) — Comprehensive design system implementation guide (foundations, components, patterns)
-- [resources/component-library-comparison.md](resources/component-library-comparison.md) — 2024-2025 UI library comparison (MUI, shadcn/ui, Ant Design, Chakra UI, Radix UI, Mantine, Headless UI)
+- [resources/component-library-comparison.md](resources/component-library-comparison.md) — 2025 UI library comparison (MUI, shadcn/ui, Ant Design, Chakra UI, Radix UI, React Aria, Mantine, Headless UI)
 - [resources/modern-ux-patterns-2024.md](resources/modern-ux-patterns-2024.md) — Modern UX patterns (skeleton screens, optimistic UI, progressive disclosure, micro-interactions)
 - [resources/nielsen-heuristics.md](resources/nielsen-heuristics.md) — Heuristic evaluation guide with practical examples
 - [resources/wcag-accessibility.md](resources/wcag-accessibility.md) — WCAG 2.2 success criteria and implementation guide
@@ -105,6 +115,7 @@ Design challenge: [Feature Type]
 
 ### Related Skills (Cross-Functional)
 
+- [../software-ux-research/SKILL.md](../software-ux-research/SKILL.md) — **Research sibling**: Use FIRST for feedback analysis, pain point extraction, competitive analysis → feeds pattern selection here
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Frontend implementation (Next.js 16, React, TypeScript, Tailwind CSS, shadcn/ui)
 - [../software-mobile/SKILL.md](../software-mobile/SKILL.md) — Mobile UX patterns (iOS Swift, Android Kotlin, platform conventions)
 - [../product-management/SKILL.md](../product-management/SKILL.md) — Product strategy, user research, positioning
