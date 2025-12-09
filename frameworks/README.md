@@ -9,7 +9,7 @@ This directory contains three complete development kits designed for different A
 ```mermaid
 graph TB
     subgraph "Framework Architecture"
-        A[Frameworks] --> B[Claude Code Kit<br/>50 Skills]
+        A[Frameworks] --> B[Claude Code Kit<br/>60 Skills + 21 Agents]
         A --> C[Codex Kit<br/>Router System]
         A --> D[Gemini Kit<br/>Router System]
 
@@ -17,7 +17,8 @@ graph TB
         B --> B2[AI/ML Engineering<br/>8 skills]
         B --> B3[DevOps & Platform<br/>6 skills]
         B --> B4[Quality & Testing<br/>6 skills]
-        B --> B5[Documentation<br/>3 skills]
+        B --> B5[Startup & Product<br/>13 skills]
+        B --> B6[UX & Data<br/>6 skills]
 
         C --> C1[Intelligent Routing]
         C --> C2[Agent Dispatch]
@@ -36,7 +37,7 @@ graph TB
 
 ## Claude Code Kit
 
-**Complete `.claude/` workspace with 50 production-ready skills.**
+**Complete `.claude/` workspace with 60 production-ready skills, 21 agents, 28 commands, and 7 hooks.**
 
 ### Quick Install
 
@@ -54,6 +55,15 @@ ls ~/.config/claude-code/skills/
 
 ### What's Included
 
+| Component | Count | Purpose |
+|-----------|-------|---------|
+| **Agents** | 21 | Specialized AI roles (backend, frontend, mobile, LLM, DevOps, PM, startup, UX, data, QA, etc.) |
+| **Skills** | 60 | Domain knowledge bases with templates and curated web resources |
+| **Commands** | 28 | Quick workflow access (code review, testing, architecture, startup validation, UX research, data pipelines) |
+| **Hooks** | 7 | Automated guardrails (formatting, security, testing, cost tracking, notifications) |
+
+**Total**: 116 production-ready files
+
 ```mermaid
 graph LR
     A[Claude Code Kit] --> B[Skills Directory]
@@ -62,16 +72,87 @@ graph LR
     B --> C2[AI/ML Engineering]
     B --> C3[DevOps & Platform]
     B --> C4[Quality & Testing]
-    B --> C5[Documentation]
+    B --> C5[Startup & Product]
+    B --> C6[UX & Data]
 
-    C1 --> D1[Frontend<br/>Backend<br/>Architecture<br/>Mobile<br/>UI/UX]
-    C2 --> D2[LLM Engineering<br/>Agents<br/>Data Science<br/>ML Ops]
+    C1 --> D1[Frontend<br/>Backend<br/>Architecture<br/>Mobile<br/>Security]
+    C2 --> D2[LLM Engineering<br/>Agents<br/>Data Science<br/>ML Ops<br/>RAG]
     C3 --> D3[DevOps<br/>Database<br/>Document Automation]
     C4 --> D4[Code Review<br/>Testing<br/>Debugging<br/>Refactoring]
-    C5 --> D5[API Design<br/>Documentation<br/>Codebase Audit]
+    C5 --> D5[Idea Validation<br/>Competitive Analysis<br/>GTM Strategy<br/>Fundraising]
+    C6 --> D6[UX Research<br/>Data Pipelines<br/>Agent Testing]
 
     style A fill:#9B59B6,color:#fff
     style B fill:#3498DB,color:#fff
+```
+
+### Key Agents (21 Total)
+
+**AI/ML Specialists (3)**:
+
+- `ai-agents-builder` - AI agent architecture & patterns
+- `data-scientist` - ML workflows, EDA, modeling, deployment
+- `llm-engineer` - LLM development, RAG, fine-tuning
+
+**Software Engineers (7)**:
+
+- `backend-engineer` - REST/GraphQL APIs, databases, auth
+- `frontend-engineer` - Multi-framework (Next.js, Vue/Nuxt, Angular, Svelte, Remix, Vite+React)
+- `mobile-engineer` - iOS, Android, React Native
+- `crypto-engineer` - Web3, blockchain, smart contracts
+- `devops-engineer` - IaC, CI/CD, Kubernetes
+- `sql-engineer` - SQL optimization, query tuning
+- `security-specialist` - AppSec, OWASP, threat modeling
+
+**Quality & Architecture (5)**:
+
+- `code-reviewer` - Code quality & security review
+- `test-architect` - Test strategy & QA planning
+- `system-architect` - System design & architecture
+- `product-manager` - Product strategy & roadmaps
+- `prd-architect` - Product requirements & specs
+
+**Specialized (6)**:
+
+- `prompt-engineer` - Prompt design & optimization
+- `smm-strategist` - Social media marketing
+- `startup-validator` - Startup idea validation, competitive analysis, GTM strategy
+- `ux-researcher` - UX research, usability testing, accessibility auditing
+- `data-engineer` - Data pipelines, lakehouse architecture, SQL optimization
+- `qa-engineer` - Quality assurance, debugging, observability, LLM agent testing
+
+### Startup Validation Suite (NEW)
+
+Complete startup validation workflow with 8 specialized skills:
+
+| Skill | Description |
+|-------|-------------|
+| `startup-mega-router` | Master orchestration for routing startup problems through 60 specialized skills |
+| `startup-idea-validation` | 9-dimension scoring with Go/No-Go decisions |
+| `startup-competitive-analysis` | Deep competitive intelligence, market mapping, positioning |
+| `startup-business-models` | Revenue model design, unit economics, pricing strategy |
+| `startup-fundraising` | Fundraising strategy, pitch prep, investor targeting |
+| `startup-go-to-market` | GTM strategy, PLG/sales-led motion, growth loops |
+| `startup-review-mining` | Pain extraction from G2, Capterra, App Store, Reddit, HN |
+| `startup-trend-prediction` | 2-3yr lookback to 1-2yr forward trend analysis |
+
+### Agent Operations Suite (NEW)
+
+| Skill | Description |
+|-------|-------------|
+| `agent-fleet-operations` | Managing 50+ AI agents as revenue services: orchestration, monitoring, scaling, agent economics, SLA management |
+| `qa-agent-testing` | LLM agent/persona testing: 10-task test suites, refusal edge cases, 6-dimension scoring rubric |
+
+### Product Management Suite
+
+Complete product management workflow with 5 dedicated commands + 120 curated sources:
+
+```bash
+/pm-strategy [product]    # Generate product strategy (vision, diagnosis, bets, OKRs)
+/pm-roadmap [timeframe]   # Create outcome-based roadmap (Now/Next/Later)
+/pm-discovery [problem]   # Plan discovery sprint (interviews, experiments, OST)
+/pm-okrs [quarter]        # Define OKRs and metric trees
+/pm-positioning [product] # Create strategic positioning (Dunford framework)
 ```
 
 ### Skills Catalog
@@ -146,6 +227,34 @@ skill-name/
 │   └── template-2.md
 └── data/                 # Structured data and sources
     └── sources.json
+```
+
+### Example Usage
+
+```
+You: "/pm-strategy SalesMate CRM"
+Claude: [Generates strategy with vision, competitive analysis, strategic bets, OKRs]
+
+You: "/startup-validate AI writing assistant for sales teams"
+Claude: [Runs 9-dimension validation with GO/NO-GO recommendation]
+
+You: "/startup-compete CRM market for SMBs"
+Claude: [Generates competitive analysis with battlecards and positioning]
+
+You: "/ux-research onboarding flow optimization"
+Claude: [Creates research plan with interview guide, usability test protocol]
+
+You: "/agent-test customer-support-bot"
+Claude: [Runs 10-task test suite with 6-dimension scoring]
+
+You: "/data-pipeline customer analytics from Stripe and product events"
+Claude: [Designs data pipeline with ingestion, transformation, serving layers]
+
+You: "/backend-design REST API for task management"
+Claude: [Generates backend with Prisma schema, auth, tests, deployment]
+
+You: "/frontend-design dashboard with data table"
+Claude: [Creates Next.js components with TypeScript, Tailwind, accessibility]
 ```
 
 ### Usage in Claude Code
@@ -297,7 +406,10 @@ graph LR
 
 | Feature | Claude Code Kit | Codex Kit | Gemini Kit |
 |---------|----------------|-----------|------------|
-| **Skills** | 50 specialized skills | Router-based dispatch | Router-based dispatch |
+| **Skills** | 60 specialized skills | Router-based dispatch | Router-based dispatch |
+| **Agents** | 21 specialized agents | Task routing | Task routing |
+| **Commands** | 28 workflow commands | N/A | N/A |
+| **Hooks** | 7 automation hooks | N/A | N/A |
 | **Installation** | Copy skills directory | Copy router config | Copy router config |
 | **Context Management** | Auto-activation | Rule-based injection | Multimodal context |
 | **Platform** | Claude Code | Codex CLI | Gemini |
@@ -459,6 +571,16 @@ tail -f ~/.config/claude-code/logs/skills.log
 - Check context availability
 - Review injection rules
 
+## Version History
+
+**v3.3** (2025-12-09): Added startup-validator, ux-researcher, data-engineer, qa-engineer agents
+
+**v3.2** (2025-12-09): Startup Validation Machine - 8 new skills for idea validation, competitive analysis, business models, fundraising, GTM, trend prediction, review mining, plus agent-fleet-operations and qa-agent-testing
+
+**v3.1** (2025-12-08): UX skills updated with WCAG 3.0 preview, React Aria, AI design tools, shadcn/ui 2025
+
+**v3.0** (2025-11-20): Expanded to 17 agents + 50 skills + 22 commands + 7 hooks
+
 ## Resources
 
 ### Official Documentation
@@ -474,4 +596,4 @@ tail -f ~/.config/claude-code/logs/skills.log
 
 ---
 
-**[← Back to Main README](../README.md)** | **[View Custom GPTs →](../custom-gpt/README.md)**
+**[Back to Main README](../README.md)** | **[View Custom GPTs](../custom-gpt/README.md)**
