@@ -12,9 +12,12 @@ Before deploying the router, ensure:
    # Copy Claude Code Kit to your repo (if not already done)
    mkdir -p .claude/{agents,skills,commands}
 
+   # Copy agents and commands from claude-code-kit
    cp frameworks/claude-code-kit/framework/agents/*.md .claude/agents/
-   cp -r frameworks/claude-code-kit/framework/skills/* .claude/skills/
    cp frameworks/claude-code-kit/framework/commands/*.md .claude/commands/
+
+   # Copy skills from shared-skills
+   cp -r frameworks/shared-skills/skills/* .claude/skills/
    ```
 
 2. **`GEMINI.md` exists at the repository root** and describes your project context.

@@ -1,12 +1,19 @@
 # Claude Code Kit - Complete Guide
 
-**Last Updated**: 2025-12-09
+**Last Updated**: 2025-12-20
 **Official Documentation**: [Claude Code Overview](https://docs.claude.com/en/docs/claude-code/overview)
+**Skills Format**: [Agent Skills Specification](https://agentskills.io/specification) - Open format maintained by Anthropic
 **Status**: PORTABLE - Works for any repository
 
-Production-ready Claude Code setup with 21 agents + 62 skills + 28 commands + 7 hooks.
+Production-ready Claude Code setup with 21 agents + 28 commands + 7 hooks.
 
-**NEW in v3.4**: Three-router architecture with `router-startup`, `router-engineering`, and `router-operations` for intelligent skill orchestration across 60+ skills.
+**Skills**: 76 skills in `frameworks/shared-skills/` (shared with Codex Kit)
+
+**NEW in v3.7**: Skills moved to shared source. Framework now contains agents, commands, hooks only.
+
+**v3.6**: Skills aligned with [agentskills.io](https://agentskills.io) open format specification. Directory structure follows official standard (`scripts/`, `references/`, `assets/`). Progressive disclosure model with <5000 token SKILL.md bodies.
+
+**v3.5**: December 2025 skill refresh with explicit modern best practices headers, authoritative external references (OWASP, OpenTelemetry, Google eng practices), and operational focus ("No theory. No narrative. Only what Claude can execute.").
 
 ---
 
@@ -73,7 +80,7 @@ Claude: [Automatically invokes code-reviewer agent]
 
 ## Production-Ready Framework
 
-**NEW**: This repository includes a **complete Claude Code framework** in [framework/](framework/) with 90+ production-ready files that you can copy directly to your `.claude/` directory and use immediately.
+**NEW**: This repository includes a **complete Claude Code framework** in [framework/](framework/) with production-ready files that you can copy directly to your `.claude/` directory and use immediately.
 
 ### Quick Install (1 minute)
 
@@ -83,26 +90,27 @@ cd your-project/
 # Create .claude directories
 mkdir -p .claude/{agents,skills,commands,hooks}
 
-# Copy ALL framework files
+# Copy framework files (agents, commands, hooks)
 cp /path/to/framework/agents/*.md .claude/agents/
-cp -r /path/to/framework/skills/* .claude/skills/
 cp /path/to/framework/commands/*.md .claude/commands/
 cp /path/to/framework/hooks/*.sh .claude/hooks/
 chmod +x .claude/hooks/*.sh
 cp /path/to/framework/settings/settings-template.json .claude/settings.json
+
+# Copy skills from shared source
+cp -r /path/to/frameworks/shared-skills/skills/* .claude/skills/
 ```
 
 ### What's Included
 
-| Component | Count | Purpose |
-|-----------|-------|---------|
-| **Agents** | 21 | Specialized AI roles (backend, frontend, mobile, LLM, DevOps, PM, startup, UX, data, QA, etc.) |
-| **Skills** | 62 | Domain knowledge bases with templates and curated web resources |
-| **Routers** | 3 | Meta-orchestration for intelligent skill routing |
-| **Commands** | 28 | Quick workflow access (code review, testing, architecture, startup validation, UX research, data pipelines) |
-| **Hooks** | 7 | Automated guardrails (formatting, security, testing, cost tracking, notifications) |
+| Component | Count | Source |
+| --------- | ----- | ------ |
+| **Agents** | 21 | `framework/agents/` |
+| **Commands** | 28 | `framework/commands/` |
+| **Hooks** | 7 | `framework/hooks/` |
+| **Skills** | 76 | `shared-skills/skills/` (separate) |
 
-**Total**: 122 production-ready files
+Skills are maintained in a shared source (`frameworks/shared-skills/`) used by both Claude Code Kit and Codex Kit.
 
 ### Key Agents
 
@@ -131,11 +139,20 @@ cp /path/to/framework/settings/settings-template.json .claude/settings.json
 - [**prompt-engineer**](framework/agents/prompt-engineer.md) - Prompt design & optimization
 - [**smm-strategist**](framework/agents/smm-strategist.md) - Social media marketing
 
-**New in v3.4** (2025-12-09): **Three-Router Architecture**
+**New in v3.5** (2025-12-18): **December 2025 Skill Refresh**
 
-- [**router-engineering**](framework/skills/router-engineering/SKILL.md) - Routes technical questions through 29 engineering + AI/ML skills
-- [**router-operations**](framework/skills/router-operations/SKILL.md) - Routes QA, DevOps, testing through 15 operations skills
-- Enhanced [**router-startup**](framework/skills/router-startup/SKILL.md) - Now includes marketing (4 skills), document creation (4 skills), and cross-router orchestration patterns
+All 76 skills updated with:
+
+- Explicit "Modern Best Practices (December 2025)" headers with authoritative URLs
+- Operational focus: "No theory. No narrative. Only what Claude can execute."
+- Cross-skill linking with relative paths
+- Progressive disclosure (SKILL.md as navigation hub, resources/ for depth)
+
+**v3.4** (2025-12-09): **Three-Router Architecture**
+
+- [**router-engineering**](../shared-skills/skills/router-engineering/SKILL.md) - Routes technical questions through 29 engineering + AI/ML skills
+- [**router-operations**](../shared-skills/skills/router-operations/SKILL.md) - Routes QA, DevOps, testing through 15 operations skills
+- Enhanced [**router-startup**](../shared-skills/skills/router-startup/SKILL.md) - Now includes marketing (4 skills), document creation (4 skills), and cross-router orchestration patterns
 
 **v3.3** (2025-12-09):
 
@@ -152,9 +169,9 @@ cp /path/to/framework/settings/settings-template.json .claude/settings.json
 
 See [framework/README.md](framework/README.md) for complete documentation, usage examples, and [ARCHITECTURE-DIAGRAM.md](framework/ARCHITECTURE-DIAGRAM.md) for visual architecture overview.
 
-### Three-Router Architecture ⭐ NEW (v3.4)
+### Three-Router Architecture
 
-Intelligent skill orchestration across 60+ skills through three domain-specific routers:
+Intelligent skill orchestration across 76 skills through three domain-specific routers:
 
 ```text
 ┌───────────────────────┐  ┌───────────────────────┐  ┌───────────────────────┐
@@ -165,10 +182,10 @@ Intelligent skill orchestration across 60+ skills through three domain-specific 
 ```
 
 | Router | Skills | Domain |
-|--------|--------|--------|
-| [**router-startup**](framework/skills/router-startup/SKILL.md) | 17 | Business validation, marketing, documents, product |
-| [**router-engineering**](framework/skills/router-engineering/SKILL.md) | 29 | AI/ML, software, data, Claude Code framework |
-| [**router-operations**](framework/skills/router-operations/SKILL.md) | 15 | QA, testing, DevOps, git, observability |
+| ------ | ------ | ------ |
+| [**router-startup**](../shared-skills/skills/router-startup/SKILL.md) | 17 | Business validation, marketing, documents, product |
+| [**router-engineering**](../shared-skills/skills/router-engineering/SKILL.md) | 29 | AI/ML, software, data, Claude Code framework |
+| [**router-operations**](../shared-skills/skills/router-operations/SKILL.md) | 15 | QA, testing, DevOps, git, observability |
 
 **Cross-router handoffs**: Routers automatically hand off to each other based on query domain:
 
@@ -176,27 +193,27 @@ Intelligent skill orchestration across 60+ skills through three domain-specific 
 - "Price my product" → `router-startup`
 - "Deploy and test" → `router-operations`
 
-See [router-startup](framework/skills/router-startup/SKILL.md) for cross-router workflow patterns.
+See [router-startup](../shared-skills/skills/router-startup/SKILL.md) for cross-router workflow patterns.
 
 ### Startup Validation Suite
 
 Complete startup validation workflow with 8 specialized skills:
 
 | Skill | Description |
-|-------|-------------|
-| [**startup-idea-validation**](framework/skills/startup-idea-validation/SKILL.md) | 9-dimension scoring with Go/No-Go decisions |
-| [**startup-competitive-analysis**](framework/skills/startup-competitive-analysis/SKILL.md) | Deep competitive intelligence, market mapping, positioning |
-| [**startup-business-models**](framework/skills/startup-business-models/SKILL.md) | Revenue model design, unit economics, pricing strategy |
-| [**startup-fundraising**](framework/skills/startup-fundraising/SKILL.md) | Fundraising strategy, pitch prep, investor targeting |
-| [**startup-go-to-market**](framework/skills/startup-go-to-market/SKILL.md) | GTM strategy, PLG/sales-led motion, growth loops |
-| [**startup-review-mining**](framework/skills/startup-review-mining/SKILL.md) | Pain extraction from G2, Capterra, App Store, Reddit, HN |
-| [**startup-trend-prediction**](framework/skills/startup-trend-prediction/SKILL.md) | 2-3yr lookback → 1-2yr forward trend analysis |
+| ----- | ----------- |
+| [**startup-idea-validation**](../shared-skills/skills/startup-idea-validation/SKILL.md) | 9-dimension scoring with Go/No-Go decisions |
+| [**startup-competitive-analysis**](../shared-skills/skills/startup-competitive-analysis/SKILL.md) | Deep competitive intelligence, market mapping, positioning |
+| [**startup-business-models**](../shared-skills/skills/startup-business-models/SKILL.md) | Revenue model design, unit economics, pricing strategy |
+| [**startup-fundraising**](../shared-skills/skills/startup-fundraising/SKILL.md) | Fundraising strategy, pitch prep, investor targeting |
+| [**startup-go-to-market**](../shared-skills/skills/startup-go-to-market/SKILL.md) | GTM strategy, PLG/sales-led motion, growth loops |
+| [**startup-review-mining**](../shared-skills/skills/startup-review-mining/SKILL.md) | Pain extraction from G2, Capterra, App Store, Reddit, HN |
+| [**startup-trend-prediction**](../shared-skills/skills/startup-trend-prediction/SKILL.md) | 2-3yr lookback → 1-2yr forward trend analysis |
 
 ### Agent Testing
 
 | Skill | Description |
-|-------|-------------|
-| [**qa-agent-testing**](framework/skills/qa-agent-testing/SKILL.md) | LLM agent/persona testing: 10-task test suites, refusal edge cases, 6-dimension scoring rubric |
+| ----- | ----------- |
+| [**qa-agent-testing**](../shared-skills/skills/qa-agent-testing/SKILL.md) | LLM agent/persona testing: 10-task test suites, refusal edge cases, 6-dimension scoring rubric |
 
 ### Product Management Suite ⭐
 
@@ -210,7 +227,7 @@ Complete startup validation workflow with 8 specialized skills:
 /pm-positioning [product] # Create strategic positioning (Dunford framework)
 ```
 
-**Powered by [product-management skill](framework/skills/product-management/SKILL.md)**:
+**Powered by [product-management skill](../shared-skills/skills/product-management/SKILL.md)**:
 
 - 120 curated sources (Teresa Torres, April Dunford, SVPG, OpenAI Evals, Anthropic)
 - 10 resource guides (discovery, strategy, roadmaps, AI/LLM products, data products)
@@ -293,7 +310,8 @@ Claude: [Designs data pipeline with ingestion, transformation, serving layers]
 - **[CLAUDE.md Reference](docs/claudemd.md)** - Project vs user, precedence
 - **[MCP Reference](docs/mcp.md)** - Database, filesystem, git integration
 - **[Workflows Reference](docs/workflows.md)** - Development workflows
-- **[Shared Skill Resources](framework/skills/_shared/resources/)** - Code-quality playbook + operational checklists (Clean Code, Code Complete, Design Patterns, Refactoring, Legacy Code, Pragmatic Programmer, Practice of Programming, Clean Coder, Looks Good To Me, Implementing Effective Code Reviews, Art of Clean Code)
+- **[Clean Code Standard](../shared-skills/skills/software-clean-code-standard/)** - Canonical clean code rules (`CC-*`) and operational checklists
+- **[Code Review Resources](../shared-skills/skills/software-code-review/resources/)** - Review workflow resources and practice checklists
 
 ---
 
@@ -545,16 +563,21 @@ See [Agents Reference](docs/agents.md#best-practices)
 
 ### Skill Creation
 
+Per [agentskills.io/specification](https://agentskills.io/specification):
+
 ✅ **DO**:
-- Keep SKILL.md concise (overview only)
-- Use `resources/` for detailed content (progressive disclosure)
-- Focus each skill on single domain
+
+- Keep SKILL.md under 500 lines (<5000 tokens)
+- Use `references/` for detailed content (progressive disclosure)
+- Use `scripts/` for executable code, `assets/` for static files
 - Include practical code examples
+- Write action-oriented descriptions with keywords
 
 ❌ **DON'T**:
 - Put everything in SKILL.md (thousands of lines)
 - Create overlapping skills
 - Write generic content without examples
+- Use nested file reference chains
 
 See [Skills Reference](docs/skills.md#best-practices)
 
@@ -655,11 +678,18 @@ Complete working examples available in [Examples Guide](docs/claude-examples.md)
 
 ## Official Resources
 
-### Anthropic Documentation
+### Agent Skills Open Format
+
+- **[Agent Skills Specification](https://agentskills.io/specification)** - Complete format specification for SKILL.md
+- **[What Are Skills?](https://agentskills.io/what-are-skills)** - Conceptual overview and progressive disclosure
+- **[Integrate Skills](https://agentskills.io/integrate-skills)** - Implementation patterns for agents
+- **[Anthropic Skills Repository](https://github.com/anthropics/skills)** - Official example skills
+- **[Agent Skills Library](https://github.com/agentskills/agentskills)** - Reference library for validation
+
+### Claude Code Documentation
 
 - **[Claude Code Overview](https://docs.claude.com/en/docs/claude-code/overview)** - Official overview
 - **[Subagents](https://docs.claude.com/en/docs/claude-code/sub-agents)** - Agents documentation
-- **[Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)** - Skills blog post
 - **[Hooks](https://docs.claude.com/en/docs/claude-code/hooks)** - Hooks documentation
 - **[Commands](https://docs.claude.com/en/docs/claude-code/commands)** - Commands documentation
 - **[CLAUDE.md](https://docs.claude.com/en/docs/claude-code/claudemd)** - Project memory
@@ -695,9 +725,10 @@ Complete working examples available in [Examples Guide](docs/claude-examples.md)
 
 **Official**:
 
+- [Agent Skills Specification](https://agentskills.io/specification)
 - [Claude Code Docs](https://docs.claude.com/en/docs/claude-code/overview)
 - [Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
 
 ---
 
-**This documentation covers official Claude Code features only** and is based entirely on Anthropic's official documentation.
+**This documentation covers official Claude Code features** and skills aligned with the [Agent Skills open format](https://agentskills.io) maintained by Anthropic.

@@ -1,8 +1,8 @@
 # Gemini Kit — Claude Code Skills Router
 
 **Status**: PRODUCTION-READY
-**Version**: 1.2
-**Last Updated**: 2025-12-09
+**Version**: 1.3
+**Last Updated**: 2025-12-18
 
 ## Overview
 
@@ -55,9 +55,12 @@ Your repository should already include the Claude Code Kit agents and skills:
 ```bash
 mkdir -p .claude/{agents,skills,commands}
 
+# Copy agents and commands from claude-code-kit
 cp frameworks/claude-code-kit/framework/agents/*.md .claude/agents/
-cp -r frameworks/claude-code-kit/framework/skills/* .claude/skills/
 cp frameworks/claude-code-kit/framework/commands/*.md .claude/commands/
+
+# Copy skills from shared-skills (shared with Codex Kit)
+cp -r frameworks/shared-skills/skills/* .claude/skills/
 ```
 
 Gemini will not read `.claude/` automatically, but the router command is written to assume that these files exist and can be passed as context when needed.
@@ -88,14 +91,15 @@ On each call, the router:
 
 ## Routing System Features
 
-**17 Agents Available** (from Claude Code Kit):
+**21 Agents Available** (from Claude Code Kit):
 
-- ai-agents-builder, backend-engineer, code-reviewer, crypto-engineer, data-scientist
-- devops-engineer, frontend-engineer, llm-engineer, mobile-engineer, prd-architect
-- product-manager, prompt-engineer, security-specialist, smm-strategist, sql-engineer
-- system-architect, test-architect
+- ai-agents-builder, backend-engineer, code-reviewer, crypto-engineer, data-engineer
+- data-scientist, devops-engineer, frontend-engineer, llm-engineer, mobile-engineer
+- prd-architect, product-manager, prompt-engineer, qa-engineer, security-specialist
+- smm-strategist, sql-engineer, startup-validator, system-architect, test-architect
+- ux-researcher
 
-**62 Skills Available** (including 4 routers):
+**76 Skills Available** (including 4 routers):
 
 - **Routers**: router-main, router-startup, router-engineering, router-operations
 - **AI/ML**: ai-agents, ai-llm, ai-llm-inference, ai-ml-data-science, ai-ml-timeseries, ai-mlops, ai-prompt-engineering, ai-rag
@@ -103,12 +107,13 @@ On each call, the router:
 - **Data**: data-lake-platform, data-sql-optimization
 - **Dev Tools**: dev-api-design, dev-dependency-management, dev-workflow-planning, git-commit-message, git-workflow
 - **Docs**: docs-ai-prd, docs-codebase, document-docx, document-pdf, document-pptx, document-xlsx
-- **Marketing**: marketing-ai-search-optimization, marketing-leads-generation, marketing-seo-technical, marketing-social-media
+- **Marketing**: marketing-ai-search-optimization, marketing-leads-generation, marketing-seo-technical, marketing-social-media, marketing-paid-advertising, marketing-email-automation, marketing-cro, marketing-content-strategy
 - **Ops**: ops-devops-platform
 - **Product**: product-management
 - **QA**: qa-agent-testing, qa-debugging, qa-docs-coverage, qa-observability, qa-refactoring, qa-resilience, qa-testing-ios, qa-testing-playwright, qa-testing-strategy
-- **Software**: software-architecture-design, software-backend, software-code-review, software-crypto-web3, software-frontend, software-mobile, software-security-appsec, software-ui-ux-design, software-ux-research
+- **Software**: software-architecture-design, software-backend, software-code-review, software-crypto-web3, software-frontend, software-mobile, software-security-appsec, software-ui-ux-design, software-ux-research, software-localisation, software-clean-code-standard
 - **Startup**: startup-idea-validation, startup-competitive-analysis, startup-business-models, startup-fundraising, startup-go-to-market, startup-review-mining, startup-trend-prediction
+- **Project-only**: project-astrology-numerology, project-astrology-chinese, project-astrology-vedic, project-astrology-tarot-divination
 
 **28 Routing Rules**:
 - 4-tier priority system (explicit override → task-specific → domain-specific → fallback)
@@ -123,8 +128,14 @@ On each call, the router:
 ## Related Documentation
 
 **Claude Code Kit**: `frameworks/claude-code-kit/`
-- Source of all skills, agents, and commands
-- Copy from `framework/` to `.claude/` in your repository
+
+- Source of agents and commands
+- Copy from `framework/agents/` and `framework/commands/` to `.claude/`
+
+**Shared Skills**: `frameworks/shared-skills/`
+
+- Source of all 76 skills (shared with Codex Kit)
+- Copy from `skills/` to `.claude/skills/`
 
 **Gemini Project Memory**: `GEMINI.md`  
 - Repository overview and global rules for Gemini  
@@ -140,6 +151,13 @@ On each call, the router:
 - If routing seems incorrect, compare behavior against `router-tests.md` and `gemini-router.md`
 
 ## Version History
+
+**v1.3 (2025-12-18)**:
+
+- Updated to 17 agents, 64 skills (full parity with Claude Code Kit v3.5)
+- All skills refreshed with December 2025 best practices and authoritative URLs
+- Skills now have explicit "Modern Best Practices (December 2025)" headers
+- Operational focus: "No theory. No narrative. Only what Claude can execute."
 
 **v1.2 (2025-12-09)**:
 
