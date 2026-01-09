@@ -1,315 +1,155 @@
-# Codex Router — Initial Setup
+# Codex Skills Kit
 
-**Copy these 4 files to your repository's `.codex/` folder to enable Codex CLI to use Claude Code skills.**
+This folder is a Codex-native skills kit. It contains a guide for creating, installing, and managing Agent Skills in Codex CLI plus a sync helper for the shared skills source.
 
-## Prerequisites
+Source of truth: `frameworks/shared-skills/skills/`. Copy or sync those skills into `.codex/skills/` (and `.claude/skills/` if you use Claude Code in the same repo).
 
-Before deploying the router, ensure:
+Codex supports skills natively. You do not need router prompts or Claude-specific bridging to use skills.
 
-1. **`.claude/` folder is set up** in your repository:
-   ```bash
-   # Copy Claude Code Kit to your repo (if not already done)
-   cp -r frameworks/claude-code-kit/framework/skills/ .claude/skills/
-   cp -r frameworks/claude-code-kit/framework/agents/ .claude/agents/
-   cp -r frameworks/claude-code-kit/framework/commands/ .claude/commands/
-   ```
+## What Are Agent Skills
 
-2. **Codex CLI is installed** and configured for your repository
+A skill captures a capability expressed through markdown instructions inside a `SKILL.md` file, plus optional scripts, resources/references, templates/assets, and data. Codex uses skills to perform specific tasks.
 
-## Deployment Steps
-
-### Step 1: Copy Router Files to `.codex/`
-
-```bash
-# From your repository root
-mkdir -p .codex
-
-# Copy all 4 router files
-cp frameworks/codex-kit/framework/codex-router.md .codex/
-cp frameworks/codex-kit/framework/codex-mega-prompt.txt .codex/
-cp frameworks/codex-kit/framework/codex-router.yaml .codex/
-
-# Optional: Copy test cases for reference
-cp frameworks/codex-kit/framework/router-tests.md .codex/
-```
-
-### Step 2: Paste Mega-Prompt into Codex Session
-
-```bash
-# Start Codex in your repository
-codex
-
-# Then paste the entire contents of .codex/codex-mega-prompt.txt
-# This tells Codex how to route requests to Claude skills
-```
-
-**Important**: The mega-prompt must be pasted at the **start of each Codex session**. This is a one-time setup per session that configures the routing behavior.
-
-### Step 3: Use Claude Skills from Codex
-
-Once the mega-prompt is loaded, Codex will automatically route requests:
+A skill folder looks like this:
 
 ```
-User: "Review this React component for security issues"
-Codex: Agent: frontend-engineer | Skill: software-frontend
-       [provides security review using both frameworks]
-
-User: "Optimize this PostgreSQL query"
-Codex: Agent: sql-engineer | Skill: data-sql-optimization
-       [provides SQL optimization using expertise from both]
-
-User: "Design a RAG pipeline for document retrieval"
-Codex: Agent: llm-engineer | Skill: ai-rag
-       [provides RAG architecture using combined knowledge]
+my-skill/
+  SKILL.md         # Required: instructions + metadata
+  scripts/         # Optional: executable code
+  resources/       # Optional: documentation (references)
+  templates/       # Optional: templates, resources (assets)
+  data/            # Optional: structured sources (JSON)
 ```
 
-## Files Explained
+Agent Skills are an open standard. Codex skills follow the Agent Skills specification.
 
-### codex-mega-prompt.txt (8.5KB) — **ESSENTIAL**
-**Purpose**: Paste-ready session starter
-**Usage**: Paste into Codex at the start of each session
-**Contains**:
-- Full skills catalog (50 skills)
-- Full agents catalog (17 agents)
-- Routing rules with priority order
-- 12+ diverse examples covering all domains
-- Output format specification (`Agent: X | Skill: Y`)
+## Where To Save Skills (Precedence)
 
-**This is the ONLY file you need to paste.** The other files are for reference.
+Codex loads skills from the locations below. If two skills share the same name, the higher-precedence location wins. The list is ordered high to low precedence.
 
-### codex-router.md (8.4KB) — Reference
-**Purpose**: Structured routing documentation
-**Usage**: Lookup reference for understanding routing decisions
-**Contains**:
-- Detailed skill descriptions
-- Agent responsibilities and preferred skills
-- Complete routing logic (task-specific + domain-specific + code review)
-- Priority order explanation
-- Conflict resolution rules
+| Skill Scope | Location | Suggested Use |
+| --- | --- | --- |
+| REPO | `$CWD/.codex/skills` (current working directory) | Skills scoped to a specific folder (for example a microservice or module). |
+| REPO | `$CWD/../.codex/skills` (parent of the working directory) | Skills for a shared area in a nested repo. |
+| REPO | `$REPO_ROOT/.codex/skills` (top-level repo root) | Skills shared by everyone in the repo. |
+| USER | `$CODEX_HOME/skills` (default: `~/.codex/skills`) | Personal skills you want available in any repo. |
+| ADMIN | `/etc/codex/skills` | Machine-wide skills for shared environments. |
+| SYSTEM | Bundled with Codex | Built-in skills like `$skill-creator` and `$plan`. |
 
-**Use this when**:
-- Debugging unexpected routing decisions
-- Understanding which agent+skill will be chosen for a task
-- Extending routing rules for custom skills
+## Quick Start (Use This Kit)
 
-### codex-router.yaml (5.7KB) — Metadata
-**Purpose**: Configuration and deployment metadata
-**Usage**: Reference for system information
-**Contains**:
-- Version: 1.2
-- Last updated: 2025-12-03
-- Source directories (`.claude/skills/`, `.claude/agents/`, `.claude/commands/`)
-- Deployment paths
-- Counts: 17 agents, 50 skills, 28 routing rules
-- Compatibility requirements
-
-**Use this when**:
-- Checking version compatibility
-- Understanding deployment structure
-- Verifying skill/agent counts match your setup
-
-### router-tests.md (11KB) — Validation
-**Purpose**: Test cases for routing correctness
-**Usage**: Verify routing logic works as expected
-**Contains**:
-- 18 standard test cases (all agent types, new skills, all priority rules)
-- 8 edge cases (overrides, conflicts, ambiguity, missing components)
-- Expected routes with rationale and priority rule applied
-
-**Use this when**:
-- Validating router behavior after deployment
-- Testing routing for specific scenarios
-- Debugging incorrect routing decisions
-
-## Setup Nuances
-
-### Same-Repo Architecture
-
-The router creates a bridge between two frameworks in the **same repository**:
+Copy the skills to the location you want Codex to load:
 
 ```
-Your Repository
-├── .claude/                    # Claude Code Kit (source of truth)
-│   ├── skills/                 # 50 operational skills
-│   ├── agents/                 # 17 specialized agents
-│   └── commands/               # 22 slash commands
-└── .codex/                     # Codex Kit (routing layer)
-    ├── codex-router.md         # Reference documentation
-    ├── codex-mega-prompt.txt   # Session starter (PASTE THIS)
-    ├── codex-router.yaml       # Configuration
-    └── router-tests.md         # Validation tests
+# Repo-local (recommended)
+mkdir -p .codex/skills
+cp -R frameworks/shared-skills/skills/* .codex/skills/
 
-Routing Chain:
-Codex CLI → .codex/mega-prompt → .claude/agents/ → .claude/skills/
+# Or user-level
+mkdir -p ~/.codex/skills
+cp -R frameworks/shared-skills/skills/* ~/.codex/skills/
 ```
 
-**Key Point**: The router **references** `.claude/` paths, it doesn't duplicate them. This means:
-- Update skills once in `.claude/skills/` → both Claude Code and Codex benefit
-- No version conflicts or synchronization issues
-- Single source of truth for all agent capabilities
+Codex will discover the skills automatically. No additional prompts or routers are required.
 
-### Routing Priority System (4 Tiers)
+## Using Codex and Claude Code Together
 
-The router uses a hierarchical priority system to resolve routing decisions:
+If you use both Codex CLI and Claude Code in the same repo, install skills in both locations. Keep one source of truth (the shared skills folder) and copy into both folders:
 
-**1. Explicit User Override** (Highest Priority)
 ```
-User: "agent: backend-engineer | Review this code"
-Codex: Agent: backend-engineer | Skill: software-code-review
-```
-User explicitly specified the agent, so override all other rules.
-
-**2. Task-Specific Routing**
-```
-User: "Design a RAG pipeline with reranking"
-Codex: Agent: llm-engineer | Skill: ai-rag
-```
-Task type ("RAG pipeline") matches specific routing rule.
-
-**3. Domain-Specific Routing**
-```
-User: "Build a Next.js dashboard with shadcn/ui"
-Codex: Agent: frontend-engineer | Skill: software-frontend
-```
-Technology stack (Next.js, shadcn/ui) identifies the domain.
-
-**4. Default Fallback** (Lowest Priority)
-```
-User: "Help me understand this codebase"
-Codex: Agent: backend-engineer | Skill: none
-```
-Ambiguous request falls back to general-purpose agent.
-
-### Conflict Resolution
-
-When multiple routes could apply:
-
-**Multiple Agents Match**: Choose most specialized
-```
-User: "Review backend API security"
-Options: backend-engineer, security-specialist
-Codex: Agent: backend-engineer | Skill: ai-mlops
-(backend-engineer is more specialized for API review)
+mkdir -p .claude/skills .codex/skills
+cp -R frameworks/shared-skills/skills/* .claude/skills/
+cp -R frameworks/shared-skills/skills/* .codex/skills/
 ```
 
-**Skill Missing**: Route to agent only
-```
-User: "Explain this algorithm"
-Codex: Agent: backend-engineer | Skill: none
-(No specific skill needed, agent handles it)
-```
+Helper: `frameworks/sync-skills.sh` syncs from `frameworks/shared-skills/skills/` into both `.claude/skills/` and `.codex/skills/`.
 
-**Agent Missing**: Use skill directly (if self-contained)
+## Create A Skill
+
+Codex provides a built-in skill creator:
+
 ```
-User: "Show me SQL optimization patterns"
-Codex: Skill: data-sql-optimization
-(Skill has standalone patterns)
+$skill-creator
 ```
 
-**Both Missing**: Report "no route found"
+You can also create a skill manually by adding a new folder in a valid skills location with a `SKILL.md` file.
+
+Minimal `SKILL.md` example:
+
 ```
-User: "Design a quantum computing algorithm"
-Codex: No clear route - this domain not covered by available agents/skills
-(Falls back to general-purpose or asks for clarification)
-```
+---
+name: skill-name
+description: Description that helps Codex select the skill
+metadata:
+  short-description: Optional user-facing description
+---
 
-## Updating Router
-
-### When Claude Code Kit Changes
-
-If you update Claude Code Kit (add/remove skills or agents), regenerate the router:
-
-```bash
-# Use the router builder prompt
-cat frameworks/codex-kit/claude-skill-to-codex/prompt.md
-
-# Follow the 8-step process to regenerate all 4 files
-# Then redeploy to .codex/
+Skill instructions for Codex to follow when using this skill.
 ```
 
-### When Routing Seems Incorrect
+## SKILL.md Frontmatter Requirements
 
-1. **Check expected behavior** in `router-tests.md`
-   - Find similar test case
-   - Compare expected vs actual routing
+`SKILL.md` must start with YAML frontmatter. Required fields:
 
-2. **Verify `.claude/` structure**
-   - Ensure all skill directories exist
-   - Ensure all agent files exist
-   - Check file names match router expectations
+- `name` (1 to 64 chars): lowercase letters, numbers, hyphens only; no leading/trailing hyphen; no consecutive hyphens. Must match the folder name.
+- `description` (1 to 1024 chars): non-empty; describe what the skill does and when to use it. Include matching keywords.
 
-3. **Verify mega-prompt was pasted correctly**
-   - Paste it again at session start
-   - Ensure no truncation occurred
+Optional fields:
 
-4. **Check priority rules**
-   - Review `codex-router.md` routing logic
-   - Verify which priority tier should apply
-   - Check for explicit overrides in user request
+- `license`: license name or bundled license file.
+- `compatibility`: environment requirements (system packages, network access, etc.).
+- `metadata`: string key/value map for extra properties.
+- `allowed-tools`: space-delimited pre-approved tools (experimental).
 
-## Troubleshooting
+## Optional Directories
 
-### Router Not Working
+- `scripts/`: executable code used by the skill.
+- `resources/`: detailed documentation, loaded on demand (references).
+- `templates/`: templates, schemas, or static resources (assets).
+- `data/`: structured sources (for example JSON).
 
-**Symptoms**: Codex doesn't show `Agent: X | Skill: Y` format
+## Progressive Disclosure
 
-**Fixes**:
-1. Paste `codex-mega-prompt.txt` again at session start
-2. Verify Codex CLI is using the correct session
-3. Check for paste truncation (file is 8.5KB, ensure all content loaded)
+Codex uses progressive disclosure to manage context:
 
-### Wrong Agent/Skill Selected
+1. At startup, Codex loads only `name` and `description` from each skill.
+2. When a skill is invoked, Codex reads the full `SKILL.md` body.
+3. Extra files in `scripts/`, `resources/` (references), `templates/` (assets), and `data/` are loaded only if needed.
 
-**Symptoms**: Routing doesn't match expectations
+Keep `SKILL.md` under 500 lines when possible and move deep references into separate files. Keep file references one level deep from `SKILL.md`.
 
-**Fixes**:
-1. Check `router-tests.md` for similar scenario
-2. Review priority rules in `codex-router.md`
-3. Add explicit override: `agent: <desired-agent> | <your request>`
+## How Skills Are Invoked
 
-### Skills Not Found
+Codex can use skills in two ways:
 
-**Symptoms**: Codex says skill doesn't exist
+- Explicit invocation: use `/skills` or type `$` to select a skill. (Codex web and iOS do not support explicit invocation yet.)
+- Implicit invocation: Codex selects a skill when the user request matches a skill description.
 
-**Fixes**:
-1. Verify `.claude/skills/` directory structure
-2. Check skill names match router catalog (in mega-prompt)
-3. Ensure skills were copied from Claude Code Kit `framework/`
+## Install New Skills
 
-### Version Mismatch
+Codex can download skills from a curated GitHub set using the built-in installer:
 
-**Symptoms**: Router references skills/agents that don't exist
+```
+$skill-installer linear
+```
 
-**Fixes**:
-1. Check `codex-router.yaml` version and date
-2. Compare with Claude Code Kit version
-3. Regenerate router if versions don't match
+You can also prompt the installer to download skills from other repositories.
 
-## Support
+## Validation
 
-**Documentation**:
-- Main README: `frameworks/codex-kit/README.md`
-- Router builder: `frameworks/codex-kit/claude-skill-to-codex/prompt.md`
-- Claude Code Kit: `frameworks/claude-code-kit/README.md`
+The Agent Skills reference library provides validation tools:
 
-**Validation**:
-- Test cases: `router-tests.md` (23 test scenarios)
-- Expected routing: `codex-router.md` (complete routing logic)
-- Configuration: `codex-router.yaml` (metadata and counts)
+```
+skills-ref validate ./my-skill
+```
 
-**Common Questions**:
+## Security Considerations
 
-Q: Do I need to paste the mega-prompt every time?
-A: Yes, paste at the start of each new Codex session.
+- Review skills before running scripts.
+- Prefer trusted skill sources.
+- Treat script execution as privileged and confirm with users when risk is non-trivial.
 
-Q: Can I modify routing rules?
-A: Yes, edit `codex-mega-prompt.txt` and paste the modified version. For permanent changes, update the router builder prompt and regenerate.
+## Included Skills
 
-Q: How do I add a new skill?
-A: Add skill to `.claude/skills/`, then regenerate router using `claude-skill-to-codex/prompt.md`.
-
-Q: Can I use this without Claude Code?
-A: No, the router references `.claude/` paths. You need both Claude Code Kit (source) and Codex Kit (router).
-
-Q: Does this work with other tools besides Codex?
-A: The router is designed for Codex CLI, but the pattern can be adapted for other AI coding tools that support prompt-based configuration.
+This kit uses the shared skills catalog in `frameworks/shared-skills/skills/`.
+See `frameworks/shared-skills/skills/INDEX.md` for the list.

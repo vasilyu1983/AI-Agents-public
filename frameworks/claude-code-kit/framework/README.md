@@ -2,45 +2,29 @@
 
 **Copy-paste ready files for instant Claude Code productivity**
 
-62 specialized skills + 17 production agents + 22 workflow commands + 7 automation hooks
+21 production agents + 28 workflow commands + 7 automation hooks
 
-**Entry Point**: Start with `router-main` → routes to `router-startup`, `router-engineering`, or `router-operations`
+**Skills**: Copy separately from `frameworks/shared-skills/` (shared with Codex Kit)
 
 ---
 
 ## Quick Install (30 seconds)
 
-### Option 1: One-Command Install (Recommended)
-
-```bash
-cd your-project/
-/path/to/frameworks/claude-code-kit/framework/install.sh
-```
-
-The install script:
-
-- Creates `.claude/` directory structure
-- Copies all agents, skills, commands, hooks
-- Makes hooks executable
-- Copies `settings.json` ready to use
-
-### Option 2: Manual Copy
-
 ```bash
 cd your-project/
 
 # Create .claude directories
-mkdir -p .claude/{agents,skills,commands,hooks,logs}
+mkdir -p .claude/{agents,skills,commands,hooks}
 
-# Copy all files
+# Copy framework files
 cp frameworks/claude-code-kit/framework/agents/*.md .claude/agents/
-cp -r frameworks/claude-code-kit/framework/skills/* .claude/skills/
 cp frameworks/claude-code-kit/framework/commands/*.md .claude/commands/
 cp frameworks/claude-code-kit/framework/hooks/*.sh .claude/hooks/
 chmod +x .claude/hooks/*.sh
-
-# Copy settings (use clean version, not template)
 cp frameworks/claude-code-kit/framework/settings/settings.json .claude/settings.json
+
+# Copy skills from shared source
+cp -r frameworks/shared-skills/skills/* .claude/skills/
 ```
 
 ### Settings Files
@@ -56,9 +40,9 @@ cp frameworks/claude-code-kit/framework/settings/settings.json .claude/settings.
 
 ```bash
 # Check counts
-ls .claude/agents/ | wc -l      # Should show 17
-ls .claude/skills/ | wc -l      # Should show 62
-ls .claude/commands/ | wc -l    # Should show 22
+ls .claude/agents/ | wc -l      # Should show 21
+ls .claude/skills/ | wc -l      # Should show 76
+ls .claude/commands/ | wc -l    # Should show 28
 ls -l .claude/hooks/*.sh        # Should show 7 executable files
 
 # Verify settings
@@ -95,10 +79,10 @@ grep -r "skills/" .claude/commands/
 
 If you find broken references, update them:
 
-**Before (in framework/)**:
+**Before (in shared-skills/)**:
 ```markdown
 See [Skills Guide](../docs/skills.md) for details.
-Reference: frameworks/claude-code-kit/framework/skills/software-backend/
+Reference: frameworks/shared-skills/skills/software-backend/
 ```
 
 **After (in .claude/)**:
@@ -165,9 +149,9 @@ done
 # verify-installation.sh - Run all verification checks
 
 echo "=== Checking File Counts ==="
-echo "Agents: $(ls .claude/agents/*.md 2>/dev/null | wc -l) (expected: 17)"
-echo "Skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l) (expected: 62)"
-echo "Commands: $(ls .claude/commands/*.md 2>/dev/null | wc -l) (expected: 22)"
+echo "Agents: $(ls .claude/agents/*.md 2>/dev/null | wc -l) (expected: 21)"
+echo "Skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l) (expected: 76)"
+echo "Commands: $(ls .claude/commands/*.md 2>/dev/null | wc -l) (expected: 28)"
 echo "Hooks: $(ls .claude/hooks/*.sh 2>/dev/null | wc -l) (expected: 7)"
 
 echo -e "\n=== Checking for Broken Paths ==="
@@ -205,14 +189,12 @@ chmod +x .claude/verify-installation.sh
 
 ## What You Get
 
-| Component | Count | Purpose |
-|-----------|-------|---------|
-| **Agents** | 17 | Specialized roles (backend, frontend, mobile, LLM, DevOps, PM, crypto, security, etc.) |
-| **Skills** | 62 | Domain knowledge bases with templates and resources |
-| **Commands** | 22 | Quick workflow access (code review, testing, architecture, product management) |
-| **Hooks** | 7 | Automated guardrails (formatting, security, testing, logging, notifications, cost tracking) |
-
-**Total**: 108 production-ready files
+| Component | Count | Source |
+| --------- | ----- | ------ |
+| **Agents** | 21 | `framework/agents/` |
+| **Commands** | 28 | `framework/commands/` |
+| **Hooks** | 7 | `framework/hooks/` |
+| **Skills** | 76 | `shared-skills/skills/` (separate) |
 
 ---
 
@@ -221,17 +203,20 @@ chmod +x .claude/verify-installation.sh
 This directory contains **copy-paste files only**. For complete usage guides and references:
 
 ### Core References
-- **[../reference/agents.md](../reference/agents.md)** - Complete agent catalog and capabilities
-- **[../reference/skills.md](../reference/skills.md)** - Skill structure, patterns, and examples
-- **[../reference/commands.md](../reference/commands.md)** - Command usage and workflows
-- **[../reference/hooks.md](../reference/hooks.md)** - Hook configuration and customization
+
+- **[../docs/agents.md](../docs/agents.md)** - Complete agent catalog and capabilities
+- **[../docs/skills.md](../docs/skills.md)** - Skill structure, patterns, and examples
+- **[../docs/commands.md](../docs/commands.md)** - Command usage and workflows
+- **[../docs/hooks.md](../docs/hooks.md)** - Hook configuration and customization
 
 ### Workflow Guide
-- **[../reference/workflows.md](../reference/workflows.md)** - Real-world examples showing how all components work together
+
+- **[../docs/workflows.md](../docs/workflows.md)** - Real-world examples showing how all components work together
 
 ### Other Resources
-- **[../reference/claudemd.md](../reference/claudemd.md)** - CLAUDE.md best practices
-- **[../reference/mcp.md](../reference/mcp.md)** - Model Context Protocol integration
+
+- **[../docs/claudemd.md](../docs/claudemd.md)** - CLAUDE.md best practices
+- **[../docs/mcp.md](../docs/mcp.md)** - Model Context Protocol integration
 
 ---
 
@@ -290,73 +275,19 @@ Skills automatically activate when agents are invoked:
 ## File Structure
 
 ```
-framework/
-├── README.md                    # This file
-├── ARCHITECTURE-DIAGRAM.md      # Complete system architecture with Mermaid diagrams
-│
-├── agents/                      # 17 agent definitions
-│   ├── ai-agents-builder.md
-│   ├── backend-engineer.md
-│   ├── code-reviewer.md
-│   ├── crypto-engineer.md
-│   ├── data-scientist.md
-│   ├── devops-engineer.md
-│   ├── frontend-engineer.md
-│   ├── llm-engineer.md
-│   ├── mobile-engineer.md
-│   ├── prd-architect.md
-│   ├── product-manager.md
-│   ├── prompt-engineer.md
-│   ├── security-specialist.md
-│   ├── smm-strategist.md
-│   ├── sql-engineer.md
-│   ├── system-architect.md
-│   └── test-architect.md
-│
-├── skills/                      # 62 skill knowledge bases
-│   ├── [skill-name]/
-│   │   ├── SKILL.md            # Main skill file
-│   │   ├── data/sources.json   # Web resources
-│   │   ├── resources/          # Deep-dive guides
-│   │   └── templates/          # Code templates
-│
-├── commands/                    # 22 workflow commands
-│   ├── agent-arch.md
-│   ├── agent-eval.md
-│   ├── agent-plan.md
-│   ├── architecture-review.md
-│   ├── commit-msg.md
-│   ├── coverage-check.md
-│   ├── design-system.md
-│   ├── ds-deploy.md
-│   ├── fullstack-dev.md
-│   ├── leadgen.md
-│   ├── pm-discovery.md
-│   ├── pm-okrs.md
-│   ├── pm-positioning.md
-│   ├── pm-roadmap.md
-│   ├── pm-strategy.md
-│   ├── prd-validate.md
-│   ├── prompt-validate.md
-│   ├── review.md
-│   ├── security-scan.md
-│   ├── smm-plan.md
-│   ├── tech-spec.md
-│   └── test-plan.md
-│
-└── hooks/                       # 7 automation hooks + docs
-    ├── pre-tool-validate.sh     # Security validation
-    ├── post-tool-format.sh      # Auto-formatting
-    ├── post-tool-audit.sh       # Audit logging
-    ├── post-tool-notify.sh      # Notifications (optional)
-    ├── post-tool-cost-tracker.sh # AI cost tracking (optional)
-    ├── stop-run-tests.sh        # Test automation
-    ├── session-start-init.sh    # Context loading
-    ├── commit-msg.md            # Commit message guidance
-    ├── pre-commit.md            # Pre-commit guidance
-    ├── HOOKS-GUIDE.md           # Complete hook setup guide
-    ├── README.md                # Hook documentation
-    └── QUICK-START.md           # Hook quick start
+framework/                       # Copy to .claude/
+├── agents/                      # 21 agent definitions
+├── commands/                    # 28 workflow commands
+├── hooks/                       # 7 automation hooks
+└── settings/                    # Configuration files
+
+shared-skills/                   # Copy to .claude/skills/
+└── skills/                      # 76 skill knowledge bases
+    └── [skill-name]/
+        ├── SKILL.md             # Main skill file
+        ├── data/sources.json    # Web resources
+        ├── resources/           # Deep-dive guides
+        └── templates/           # Code templates
 ```
 
 ---
@@ -426,47 +357,43 @@ chmod +x .claude/hooks/*.sh  # Fix permissions
 
 ## Official Documentation
 
+**Agent Skills Open Format**:
+
+- **[Agent Skills Specification](https://agentskills.io/specification)** - Complete format specification
+- **[What Are Skills?](https://agentskills.io/what-are-skills)** - Conceptual overview
+- **[Anthropic Skills Repository](https://github.com/anthropics/skills)** - Official examples
+
+**Claude Code**:
+
 - **[Agents](https://docs.claude.com/en/docs/claude-code/sub-agents)** - Creating subagents
-- **[Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)** - Knowledge bases
 - **[Commands](https://docs.claude.com/en/docs/claude-code/commands)** - Slash commands
 - **[Hooks](https://docs.claude.com/en/docs/claude-code/hooks)** - Event automation
 
 ---
 
----
-
 ## Recent Updates
+
+**(2025-12-20)**: Shared Skills Source
+
+- Skills now maintained in `frameworks/shared-skills/`
+- Run `./frameworks/sync-skills.sh` to sync from shared source
+- Both Claude Code Kit and Codex Kit use same skills
+
+**(2025-12-19)**: Agent Skills Alignment (v3.6)
+
+- Skills aligned with [agentskills.io](https://agentskills.io) specification
+- Progressive disclosure model with <5000 token SKILL.md bodies
+- Directory structure: `references/`, `scripts/`, `assets/`
 
 **(2025-12-09)**: Four-Router Architecture
 
-- **NEW: `router-main`** - Universal entry point that routes to domain-specific routers
-- **NEW: `router-engineering`** - Routes 29 technical skills (AI/ML, software, data, Claude Code)
-- **NEW: `router-operations`** - Routes 15 operations skills (QA, testing, DevOps, git)
-- **RENAMED: `startup-mega-router` → `router-startup`** - Routes 17 business skills (startup, marketing, documents, product)
-- **REMOVED: `agent-fleet-operations`** - Content merged into router-startup
-- Total skills: 60 → 62 (3 new routers, 1 removed)
-
-**(2025-12-09)**: Startup Validation Machine - Complete Suite
-
-- **NEW: `startup-idea-validation`** - 9-dimension scoring with Go/No-Go decisions
-- **NEW: `startup-competitive-analysis`** - Deep competitive intelligence, market mapping, positioning
-- **NEW: `startup-business-models`** - Revenue model design, unit economics, pricing strategy
-- **NEW: `startup-fundraising`** - Fundraising strategy, pitch prep, investor targeting, term sheets
-- **NEW: `startup-go-to-market`** - GTM strategy, PLG/sales-led motion, channel selection, growth loops
-- **NEW: `startup-review-mining`** - Pain extraction from ALL review sources (G2, Capterra, App Store, Reddit, HN)
-- **NEW: `startup-trend-prediction`** - 2-3yr lookback → 1-2yr forward trend analysis
-- **NEW: `qa-agent-testing`** - LLM agent/persona testing: 10-task suites, refusal edge cases, 6-dimension scoring
-- Updated skill-dependencies.json with startup domain and cross-links
-- Total skills: 54 → 60
-
-**(2025-12-08)**: UX Skills December Updates
-
-- **software-ui-ux-design**: WCAG 3.0 preview, React Aria, AI design tools, shadcn/ui 2025 components
-- **software-ux-research**: 3 arXiv papers on LLM-assisted UX evaluation, 2025 benchmarks
-- Updated component-library-comparison.md and frontend-aesthetics-2025.md
+- `router-main` - Universal entry point routing to domain-specific routers
+- `router-engineering` - 29 technical skills (AI/ML, software, data)
+- `router-operations` - 15 operations skills (QA, testing, DevOps)
+- `router-startup` - 17 business skills (startup, marketing, product)
 
 ---
 
 **Ready to build production software with Claude Code!**
 
-For complete usage examples and workflows, see **[../reference/workflows.md](../reference/workflows.md)**
+For complete usage examples and workflows, see **[../docs/workflows.md](../docs/workflows.md)**

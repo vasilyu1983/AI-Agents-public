@@ -22,6 +22,7 @@ echo "=================================="
 
 # Determine script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SHARED_SKILLS_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)/shared-skills/skills"
 
 # Target is current directory
 TARGET_DIR="$(pwd)"
@@ -46,13 +47,13 @@ mkdir -p "$TARGET_DIR/.claude/skills"
 mkdir -p "$TARGET_DIR/.claude/logs"
 
 # Copy agents
-echo -e "${GREEN}Copying agents (17 files)...${NC}"
+echo -e "${GREEN}Copying agents (21 files)...${NC}"
 cp "$SCRIPT_DIR/agents/"*.md "$TARGET_DIR/.claude/agents/" 2>/dev/null || true
 AGENT_COUNT=$(ls "$TARGET_DIR/.claude/agents/"*.md 2>/dev/null | wc -l | tr -d ' ')
 echo "  Copied $AGENT_COUNT agents"
 
 # Copy commands
-echo -e "${GREEN}Copying commands (22 files)...${NC}"
+echo -e "${GREEN}Copying commands (28 files)...${NC}"
 cp "$SCRIPT_DIR/commands/"*.md "$TARGET_DIR/.claude/commands/" 2>/dev/null || true
 COMMAND_COUNT=$(ls "$TARGET_DIR/.claude/commands/"*.md 2>/dev/null | wc -l | tr -d ' ')
 echo "  Copied $COMMAND_COUNT commands"
@@ -65,11 +66,17 @@ chmod +x "$TARGET_DIR/.claude/hooks/"*.sh
 HOOK_COUNT=$(ls "$TARGET_DIR/.claude/hooks/"*.sh 2>/dev/null | wc -l | tr -d ' ')
 echo "  Copied $HOOK_COUNT hook scripts (made executable)"
 
-# Copy skills
-echo -e "${GREEN}Copying skills (50 directories)...${NC}"
-cp -r "$SCRIPT_DIR/skills/"* "$TARGET_DIR/.claude/skills/" 2>/dev/null || true
-SKILL_COUNT=$(ls -d "$TARGET_DIR/.claude/skills/"*/ 2>/dev/null | wc -l | tr -d ' ')
-echo "  Copied $SKILL_COUNT skills"
+# Copy skills from shared-skills
+echo -e "${GREEN}Copying skills from shared-skills (76 directories)...${NC}"
+if [ -d "$SHARED_SKILLS_DIR" ]; then
+    cp -r "$SHARED_SKILLS_DIR/"* "$TARGET_DIR/.claude/skills/" 2>/dev/null || true
+    SKILL_COUNT=$(ls -d "$TARGET_DIR/.claude/skills/"*/ 2>/dev/null | wc -l | tr -d ' ')
+    echo "  Copied $SKILL_COUNT skills"
+else
+    echo -e "  ${YELLOW}Warning: shared-skills not found at $SHARED_SKILLS_DIR${NC}"
+    echo -e "  ${YELLOW}Copy skills manually: cp -r frameworks/shared-skills/skills/* .claude/skills/${NC}"
+    SKILL_COUNT=0
+fi
 
 # Copy settings
 echo -e "${GREEN}Copying settings...${NC}"
