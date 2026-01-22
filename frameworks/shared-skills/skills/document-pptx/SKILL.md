@@ -7,11 +7,12 @@ description: Create, edit, and analyze PowerPoint presentations with slides, lay
 
 This skill enables creation and editing of PowerPoint presentations programmatically. Claude should apply these patterns when users need to generate pitch decks, reports, training materials, or automate presentation workflows.
 
-**Modern Best Practices (Dec 2025)**:
+**Modern Best Practices (Jan 2026)**:
 - One slide = one takeaway; design the deck around a decision or audience goal.
 - Cite numbers (definition + timeframe + source) and keep a single source of truth for charts.
-- Accessibility basics: reading order, contrast, and not color-only meaning.
-- Version decks and enforce review loops (avoid “final_final_v7.pptx”).
+- **Accessibility (WCAG 2.1 AA by April 2026)**: reading order, contrast, alt text. ADA compliance deadline.
+- **EU Distribution**: EAA (June 2025) requires EN 301 549 compliance for presentations distributed in EU.
+- Version decks and enforce review loops (avoid "final_final_v7.pptx").
 
 ---
 
@@ -20,7 +21,8 @@ This skill enables creation and editing of PowerPoint presentations programmatic
 | Task | Tool/Library | Language | When to Use |
 |------|--------------|----------|-------------|
 | Create PPTX | python-pptx | Python | Presentations, slide decks |
-| Create PPTX | pptxgenjs | Node.js | Server-side generation |
+| Create PPTX | PptxGenJS | Node.js | Server-side generation |
+| Template-driven | PPTX-Automizer | Node.js | Corporate branding, template injection |
 | Templates | python-pptx | Python | Master slides, themes |
 | Charts | python-pptx | Python | Data visualizations |
 | Extract content | python-pptx | Python | Parse existing decks |
@@ -287,14 +289,14 @@ Use only when explicitly requested and policy-compliant.
 ## Navigation
 
 **Resources**
-- [resources/pptx-layouts.md](resources/pptx-layouts.md) — Master slides, themes, templates
-- [resources/pptx-charts.md](resources/pptx-charts.md) — Chart types, data visualization
+- [references/pptx-layouts.md](references/pptx-layouts.md) — Master slides, themes, templates
+- [references/pptx-charts.md](references/pptx-charts.md) — Chart types, data visualization
 - [data/sources.json](data/sources.json) — Library documentation links
 
 **Templates**
-- [templates/pitch-deck.md](templates/pitch-deck.md) — Startup pitch structure
-- [templates/quarterly-review.md](templates/quarterly-review.md) — Business review template
-- [templates/slide-narrative-template.md](templates/slide-narrative-template.md) — 1-sentence takeaway per slide
+- [assets/pitch-deck.md](assets/pitch-deck.md) — Startup pitch structure
+- [assets/quarterly-review.md](assets/quarterly-review.md) — Business review template
+- [assets/slide-narrative-template.md](assets/slide-narrative-template.md) — 1-sentence takeaway per slide
 
 **Related Skills**
 - [../document-pdf/SKILL.md](../document-pdf/SKILL.md) — Export presentations to PDF

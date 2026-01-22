@@ -28,14 +28,15 @@ Build production data lakes and lakehouses: ingest from any source, transform wi
 
 | Layer | Tools | Templates | When to Use |
 |-------|-------|-----------|-------------|
-| **Ingestion** | dlt, Airbyte | `templates/ingestion/` | Extract from APIs, databases, files |
-| **Transformation** | SQLMesh, dbt | `templates/transformation/` | SQL-based data modeling |
-| **Storage** | Iceberg, Delta, Hudi | `templates/storage/` | Open table formats with ACID |
-| **Query Engines** | ClickHouse, DuckDB, Doris | `templates/query-engines/` | Fast analytical queries |
-| **Streaming** | Kafka, Flink, Spark | `templates/streaming/` | Real-time data pipelines |
-| **Orchestration** | Dagster, Airflow, Prefect | `templates/orchestration/` | Pipeline scheduling |
-| **Cloud** | Snowflake, BigQuery, Redshift | `templates/cloud/` | Managed warehouses |
-| **Visualization** | Metabase, Superset, Grafana | `templates/visualization/` | Dashboards, BI, monitoring |
+| **Ingestion** | dlt, Airbyte | `assets/ingestion/` | Extract from APIs, databases, files |
+| **Transformation** | SQLMesh, dbt | `assets/transformation/` | SQL-based data modeling |
+| **Storage** | Iceberg, Delta, Hudi | `assets/storage/` | Open table formats with ACID |
+| **Query Engines** | ClickHouse, DuckDB, Doris | `assets/query-engines/` | Fast analytical queries |
+| **Streaming** | Kafka, Flink, Spark | `assets/streaming/` | Real-time data pipelines |
+| **Orchestration** | Dagster, Airflow, Prefect | `assets/orchestration/` | Pipeline scheduling |
+| **Cloud** | Snowflake, BigQuery, Redshift | `assets/cloud/` | Managed warehouses |
+| **Visualization** | Metabase, Superset, Grafana | `assets/visualization/` | Dashboards, BI, monitoring |
+| **Observability** | Monte Carlo, Datafold, Great Expectations | `references/operational-playbook.md` | Data quality monitoring, anomaly detection |
 
 ---
 
@@ -44,7 +45,7 @@ Build production data lakes and lakehouses: ingest from any source, transform wi
 ```text
 Data Lake Architecture?
     ├─ Self-hosted priority?
-    │   ├─ OLAP queries? → ClickHouse (Yandex origin, Russian-friendly)
+    │   ├─ OLAP queries? → ClickHouse (vector search, lazy materialization in 2025)
     │   ├─ Embedded analytics? → DuckDB (in-process, no server)
     │   ├─ Complex joins + updates? → Apache Doris or StarRocks
     │   └─ Data lakehouse? → Iceberg + Trino/Spark
@@ -52,24 +53,26 @@ Data Lake Architecture?
     ├─ Cloud-native?
     │   ├─ AWS? → Redshift, Athena + Iceberg
     │   ├─ GCP? → BigQuery
-    │   └─ Multi-cloud? → Snowflake
+    │   ├─ Multi-cloud? → Snowflake
+    │   └─ Federated queries? → Lakehouse Federation (query BigQuery, Oracle without copying)
     │
     ├─ Ingestion tool?
-    │   ├─ Python-first, simple? → dlt (recommended)
+    │   ├─ Python-first, simple? → dlt (5,000+ sources, AI-assisted creation)
     │   ├─ GUI, many connectors? → Airbyte
     │   └─ Enterprise, CDC? → Debezium, Fivetran
     │
     ├─ Transformation tool?
-    │   ├─ SQL-first, CI/CD? → SQLMesh (recommended)
-    │   ├─ Large community? → dbt
+    │   ├─ SQL-first, CI/CD? → SQLMesh (9× faster, plan/apply workflow)
+    │   ├─ Large community? → dbt (Fusion engine: 30× faster parsing)
     │   └─ Python transformations? → Pandas + Great Expectations
     │
     ├─ Table format?
-    │   ├─ Multi-engine reads? → Apache Iceberg (industry standard)
+    │   ├─ Multi-engine reads? → Apache Iceberg (de facto standard)
     │   ├─ Databricks ecosystem? → Delta Lake
-    │   └─ CDC, real-time updates? → Apache Hudi
+    │   ├─ CDC, real-time updates? → Apache Hudi (now supports Iceberg output)
+    │   └─ Cross-format interop? → Apache XTable (Iceberg ↔ Delta ↔ Hudi)
     │
-    ├─ Streaming?
+    ├─ Streaming? (45%+ of new workloads are real-time)
     │   ├─ Event streaming? → Apache Kafka
     │   ├─ Stream processing? → Apache Flink
     │   └─ Batch + streaming? → Spark Streaming
@@ -97,7 +100,7 @@ Sources → Bronze (raw) → Silver (cleaned) → Gold (business-ready)
 
 **Tools:** dlt → SQLMesh → ClickHouse/DuckDB → Metabase
 
-See `templates/cross-platform/template-medallion-architecture.md`
+See `assets/cross-platform/template-medallion-architecture.md`
 
 ### Pattern 2: Data Mesh (Domain-Oriented)
 
@@ -113,7 +116,7 @@ Domain C ──→ Domain C Lake ──→ Data Products
 
 **Tools:** dlt (per domain) → SQLMesh → Iceberg → DataHub
 
-See `resources/architecture-patterns.md`
+See `references/architecture-patterns.md`
 
 ### Pattern 3: Lambda/Kappa (Streaming + Batch)
 
@@ -129,136 +132,201 @@ Kappa:  Kafka → Flink → Iceberg → Serving (single path)
 
 **Tools:** Kafka → Flink → Iceberg → ClickHouse
 
-See `resources/streaming-patterns.md`
+See `references/streaming-patterns.md`
 
 ---
 
 ## Core Capabilities
 
+### Quick Selection Guide
+
+| Need | Recommended Tool | Alternative |
+|------|------------------|-------------|
+| **Ingest from APIs** | dlt | Airbyte |
+| **Ingest with CDC** | Debezium | Airbyte CDC |
+| **Transform SQL** | SQLMesh | dbt |
+| **Store data** | Apache Iceberg | Delta Lake |
+| **Query PB-scale** | ClickHouse | Doris/StarRocks |
+| **Query local** | DuckDB | Polars |
+| **Stream events** | Kafka | Redpanda |
+| **Process streams** | Flink | Spark Streaming |
+| **Orchestrate** | Dagster | Airflow |
+| **Visualize (business)** | Metabase | Superset |
+| **Observe data** | Monte Carlo | Elementary |
+
 ### 1. Data Ingestion (dlt, Airbyte)
 
 Extract data from any source: REST APIs, databases, files, SaaS platforms.
 
+| Tool | Sources | Setup | Best For |
+|------|---------|-------|----------|
+| **dlt** | 5,000+ | `pip install dlt` | Python teams, AI-assisted development |
+| **Airbyte** | 300+ | Docker/K8s | GUI preference, enterprise CDC |
+
 **dlt (Python-native, recommended):**
-- Simple pip install, Python scripts
-- 100+ verified sources
-- Incremental loading, schema evolution
+
+- 5,000+ sources (growing via AI-assisted creation)
+- Incremental loading, schema evolution, data contracts
+- AI-assisted: works with Cursor, Claude, Codex
 - Destinations: ClickHouse, DuckDB, Snowflake, BigQuery, Postgres
 
 **Airbyte (GUI, connectors):**
-- 300+ pre-built connectors
-- Self-hosted or cloud
-- CDC replication
+
+- 300+ pre-built connectors with low-code CDK
+- Self-hosted or cloud, CDC replication
 - Declarative YAML configuration
 
-See `templates/ingestion/dlt/` and `templates/ingestion/airbyte/`
+See `assets/ingestion/dlt/` and `assets/ingestion/airbyte/`
 
 ### 2. SQL Transformation (SQLMesh, dbt)
 
 Build data models with SQL, manage dependencies, test data quality.
 
-**SQLMesh (recommended):**
-- Virtual data environments
-- Automatic change detection
-- Plan/apply workflow (like Terraform)
-- Built-in unit testing
+| Tool | Speed | Workflow | Best For |
+|------|-------|----------|----------|
+| **SQLMesh** | 9× faster | Plan/apply (Terraform-like) | New projects, CI/CD-heavy |
+| **dbt** | Fusion: 30× faster parsing | Direct run | Existing ecosystems, semantic layer |
 
-**dbt (popular alternative):**
-- Large community
-- Many packages
-- Cloud offering
-- Jinja templating
+**SQLMesh (recommended for new projects):**
 
-See `templates/transformation/sqlmesh/` and `templates/transformation/dbt/`
+- Virtual data environments (no clones needed)
+- Automatic change detection, plan/apply workflow
+- Built-in unit testing, SQLGlot parsing
+- 9× faster execution, 136× faster rollbacks (Databricks benchmark)
+
+**dbt (for existing ecosystems):**
+
+- Large community, extensive packages
+- Semantic layer for LLM-based querying
+- Fusion engine: 30× faster parsing (Rust rewrite)
+- dbt Cloud for managed experience
+
+See `assets/transformation/sqlmesh/` and `assets/transformation/dbt/`
 
 ### 3. Open Table Formats (Iceberg, Delta, Hudi)
 
 Store data in open formats with ACID transactions, time travel, schema evolution.
 
-**Apache Iceberg (recommended):**
-- Multi-engine support (Spark, Trino, Flink, ClickHouse)
-- Hidden partitioning
-- Snapshot isolation
-- Industry momentum (Snowflake, Databricks, AWS)
+| Format | Best For | Multi-Engine | 2025 Status |
+|--------|----------|--------------|-------------|
+| **Iceberg** | General use | Excellent | De facto standard |
+| **Delta** | Databricks | Good (improving) | Z-ordering, change feed |
+| **Hudi** | CDC/upserts | Good | Now outputs Iceberg format |
+| **XTable** | Interop | N/A | Cross-format metadata sync |
+
+**Apache Iceberg (de facto standard):**
+
+- Multi-engine: Spark, Trino, Flink, ClickHouse, Snowflake
+- Hidden partitioning, snapshot isolation
+- Industry momentum (Snowflake, Databricks, AWS adopt)
 
 **Delta Lake:**
-- Databricks native
-- Z-ordering optimization
-- Change data feed
+
+- Databricks native, Z-ordering optimization
+- Change data feed, improving multi-engine support
 
 **Apache Hudi:**
-- Optimized for CDC/updates
-- Record-level indexing
-- Near real-time ingestion
 
-See `templates/storage/`
+- Optimized for CDC/updates, record-level indexing
+- **2025:** Now supports native Iceberg format output
+
+**Apache XTable (interoperability):**
+
+- Write once, read in any format
+- Metadata sync: Iceberg ↔ Delta ↔ Hudi
+
+See `assets/storage/`
 
 ### 4. Query Engines (ClickHouse, DuckDB, Doris, StarRocks)
 
 Fast analytical queries on large datasets.
 
-**ClickHouse (self-hosted priority):**
-- 100+ GB/s scan speed
-- Columnar storage + compression
-- Russian origin (Yandex), fully open source
-- MergeTree engine family
+| Engine | Scale | Deployment | 2025 Highlights |
+|--------|-------|------------|-----------------|
+| **ClickHouse** | PB+ | Server/Cloud | Vector search, lazy materialization, join reordering |
+| **DuckDB** | GB-TB | In-process | Iceberg support, Python-native |
+| **Doris/StarRocks** | PB+ | Distributed | Complex joins, real-time updates |
+
+**ClickHouse (2025 features):**
+
+- Vector search (25.8), full-text search (25.9+)
+- Join reordering: 1,450× faster multi-table queries
+- Lazy materialization: deferred column reads
+- Native Iceberg/Delta Lake integration
 
 **DuckDB (embedded):**
-- In-process, no server
-- Parquet/CSV native
-- Python/R integration
-- Laptop-scale analytics
+
+- In-process, no server required
+- Parquet/CSV/Iceberg native reads
+- Python/R integration, laptop-scale analytics
 
 **Apache Doris / StarRocks:**
-- MPP architecture
-- Complex joins
-- Real-time updates
-- MySQL protocol compatible
 
-See `templates/query-engines/`
+- MPP architecture, MySQL protocol
+- Complex joins, real-time updates
+- Iceberg/Hudi/Delta catalog integration
+
+See `assets/query-engines/`
 
 ### 5. Streaming (Kafka, Flink, Spark)
 
-Real-time data pipelines and stream processing.
+Real-time data pipelines and stream processing. **45%+ of new data engineering workloads are now real-time.**
+
+| Tool | Processing | Latency | Best For |
+|------|------------|---------|----------|
+| **Kafka** | Event streaming | ms | Event backbone, CDC |
+| **Flink** | True streaming | ms | Complex event processing |
+| **Spark Streaming** | Micro-batch | seconds | Batch + stream unified |
 
 **Apache Kafka:**
-- Event streaming platform
-- Durable log storage
-- Connect ecosystem
+
+- Event streaming platform, durable log storage
+- Connect ecosystem for CDC and integrations
+- Foundation for event-driven architectures
 
 **Apache Flink:**
-- True stream processing
-- Exactly-once semantics
-- Stateful computations
+
+- True stream processing, exactly-once semantics
+- Stateful computations, complex event processing
+- Low-latency for fraud detection, real-time analytics
 
 **Spark Streaming:**
-- Micro-batch processing
-- Unified batch + stream API
-- ML integration
 
-See `templates/streaming/`
+- Micro-batch processing (seconds latency)
+- Unified batch + stream API
+- ML integration, familiar Spark ecosystem
+
+See `assets/streaming/`
 
 ### 6. Orchestration (Dagster, Airflow, Prefect)
 
 Schedule and monitor data pipelines.
 
-**Dagster (recommended):**
-- Software-defined assets
-- Data-aware scheduling
-- Built-in observability
-- Type system
+| Tool | Paradigm | Best For | Learning Curve |
+|------|----------|----------|----------------|
+| **Dagster** | Software-defined assets | New projects, data-aware | Medium |
+| **Airflow** | Task-based DAGs | Enterprise, many integrations | High |
+| **Prefect** | Python-native | Simple deployments | Low |
+
+**Dagster (recommended for new projects):**
+
+- Software-defined assets, data-aware scheduling
+- Built-in observability and type system
+- Modern developer experience
 
 **Airflow:**
-- Mature, battle-tested
-- Many operators
-- Large community
+
+- Mature, battle-tested, large community
+- Many operators and integrations
+- De facto standard in enterprise
 
 **Prefect:**
-- Python-native
-- Hybrid execution
-- Simple deployment
 
-See `templates/orchestration/`
+- Python-native, minimal boilerplate
+- Hybrid execution model
+- Simple deployment and debugging
+
+See `assets/orchestration/`
 
 ### 7. Visualization (Metabase, Superset, Grafana)
 
@@ -285,7 +353,37 @@ Business intelligence dashboards and operational monitoring.
 - Prometheus/InfluxDB native
 - Data pipeline monitoring
 
-See `templates/visualization/` and `resources/bi-visualization-patterns.md`
+See `assets/visualization/` and `references/bi-visualization-patterns.md`
+
+### 8. Data Observability (Monte Carlo, Datafold, Great Expectations)
+
+Monitor data health, detect anomalies, and ensure pipeline reliability.
+
+**Why Observability Matters (2026):**
+
+- 60% of data management tasks will be automated by 2027 (Gartner)
+- Traditional monitoring only alerts on known issues
+- Modern observability uses AI/ML to detect anomalies and predict failures
+
+**Key Capabilities:**
+
+- **Freshness monitoring** — Detect late-arriving or stale data
+- **Volume monitoring** — Track row counts and data growth patterns
+- **Schema change detection** — Alert on unexpected column changes
+- **Distribution monitoring** — Detect data drift and outliers
+- **Lineage-aware alerting** — Understand downstream impact of issues
+
+**Tool Landscape:**
+
+| Tool | Type | Best For |
+|------|------|----------|
+| Monte Carlo | Commercial | Full-stack observability, enterprise |
+| Datafold | Commercial | Data diffing, CI/CD integration |
+| Great Expectations | Open source | Data validation, testing |
+| Elementary | Open source | dbt-native observability |
+| Soda | Open/Commercial | Data quality checks, contracts |
+
+See `references/operational-playbook.md`
 
 ---
 
@@ -295,17 +393,17 @@ See `templates/visualization/` and `resources/bi-visualization-patterns.md`
 
 | Resource | Description |
 |----------|-------------|
-| [architecture-patterns.md](resources/architecture-patterns.md) | Medallion, data mesh, lakehouse design |
-| [ingestion-patterns.md](resources/ingestion-patterns.md) | dlt vs Airbyte, CDC, incremental loading |
-| [transformation-patterns.md](resources/transformation-patterns.md) | SQLMesh vs dbt, testing, CI/CD |
-| [storage-formats.md](resources/storage-formats.md) | Iceberg vs Delta vs Hudi comparison |
-| [query-engine-patterns.md](resources/query-engine-patterns.md) | ClickHouse, DuckDB, Doris optimization |
-| [streaming-patterns.md](resources/streaming-patterns.md) | Kafka, Flink, Spark Streaming |
-| [orchestration-patterns.md](resources/orchestration-patterns.md) | Dagster, Airflow, Prefect comparison |
-| [governance-catalog.md](resources/governance-catalog.md) | DataHub, OpenMetadata, lineage |
-| [cost-optimization.md](resources/cost-optimization.md) | Storage, compute, query optimization |
-| [operational-playbook.md](resources/operational-playbook.md) | Monitoring, incidents, migrations |
-| [bi-visualization-patterns.md](resources/bi-visualization-patterns.md) | Metabase, Superset, Grafana operations |
+| [architecture-patterns.md](references/architecture-patterns.md) | Medallion, data mesh, lakehouse design |
+| [ingestion-patterns.md](references/ingestion-patterns.md) | dlt vs Airbyte, CDC, incremental loading |
+| [transformation-patterns.md](references/transformation-patterns.md) | SQLMesh vs dbt, testing, CI/CD |
+| [storage-formats.md](references/storage-formats.md) | Iceberg vs Delta vs Hudi comparison |
+| [query-engine-patterns.md](references/query-engine-patterns.md) | ClickHouse, DuckDB, Doris optimization |
+| [streaming-patterns.md](references/streaming-patterns.md) | Kafka, Flink, Spark Streaming |
+| [orchestration-patterns.md](references/orchestration-patterns.md) | Dagster, Airflow, Prefect comparison |
+| [governance-catalog.md](references/governance-catalog.md) | DataHub, OpenMetadata, lineage |
+| [cost-optimization.md](references/cost-optimization.md) | Storage, compute, query optimization |
+| [operational-playbook.md](references/operational-playbook.md) | Monitoring, incidents, migrations |
+| [bi-visualization-patterns.md](references/bi-visualization-patterns.md) | Metabase, Superset, Grafana operations |
 
 ### Templates (Copy-Paste Ready)
 
@@ -327,11 +425,11 @@ See `templates/visualization/` and `resources/bi-visualization-patterns.md`
 
 ## Data Quality & Governance
 
-**[templates/cross-platform/template-ingestion-governance-checklist.md](templates/cross-platform/template-ingestion-governance-checklist.md)** — Intake checklist for new datasets (contracts, access control, operability, cost).
+**[assets/cross-platform/template-ingestion-governance-checklist.md](assets/cross-platform/template-ingestion-governance-checklist.md)** — Intake checklist for new datasets (contracts, access control, operability, cost).
 
-**[templates/cross-platform/template-data-quality-backfill-runbook.md](templates/cross-platform/template-data-quality-backfill-runbook.md)** — Runbook for data incidents, backfills, and safe reprocessing.
+**[assets/cross-platform/template-data-quality-backfill-runbook.md](assets/cross-platform/template-data-quality-backfill-runbook.md)** — Runbook for data incidents, backfills, and safe reprocessing.
 
-**[templates/cross-platform/template-data-quality-governance.md](templates/cross-platform/template-data-quality-governance.md)** — Comprehensive checklist for production data platforms.
+**[assets/cross-platform/template-data-quality-governance.md](assets/cross-platform/template-data-quality-governance.md)** — Comprehensive checklist for production data platforms.
 
 ### Key Sections
 
@@ -450,3 +548,45 @@ See [data/sources.json](data/sources.json) for 100+ curated sources covering:
 - Comparison articles (2024-2025 benchmarks)
 - Community resources (Discord, Stack Overflow)
 - Russian ecosystem (Yandex DataLens, Arenadata, Altinity)
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about data lakes, lakehouses, or data platforms, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best tool for [data lake/lakehouse/data platform]?"
+- "What should I use for [ingestion/transformation/query engine]?"
+- "What's the latest in data engineering?"
+- "Current best practices for [Iceberg/dbt/ClickHouse]?"
+- "Is [tool/approach] still relevant in 2026?"
+- "[Iceberg] vs [Delta Lake] vs [Hudi]?"
+- "Best orchestration tool for [data pipelines]?"
+
+### Required Searches
+
+1. Search: `"data lakehouse best practices 2026"`
+2. Search: `"[Iceberg/ClickHouse/dbt] vs alternatives 2026"`
+3. Search: `"data engineering trends January 2026"`
+4. Search: `"[specific tool] new releases 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What data tools/patterns are popular NOW
+- **Emerging trends**: New tools, formats, or patterns gaining traction
+- **Deprecated/declining**: Tools/approaches losing relevance or support
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- Table formats (Iceberg, Delta Lake, Hudi, Paimon)
+- Query engines (ClickHouse, DuckDB, Doris, StarRocks)
+- Transformation tools (dbt, SQLMesh, SQLGlot)
+- Ingestion tools (dlt, Airbyte, Fivetran)
+- Orchestration (Dagster, Airflow, Prefect)
+- Streaming (Kafka, Flink, Spark Streaming)
+- Data governance and catalogs (DataHub, OpenMetadata)

@@ -1,17 +1,26 @@
 ---
 name: qa-docs-coverage
-description: "Docs as QA: audit doc coverage and freshness, validate runbooks, and maintain documentation quality gates for APIs, services, events, and operational workflows."
+description: "Docs as QA: audit doc coverage and freshness, validate runbooks, and maintain documentation quality gates for APIs, services, events, and operational workflows. Includes AI-assisted audits, observability patterns, and automated coverage tracking."
 ---
 
-# QA Docs Coverage (Dec 2025) — Discovery, Freshness, and Runbook Quality
+# QA Docs Coverage (Jan 2026) — Discovery, Freshness, and Runbook Quality
 
-**Modern Best Practices**: Phase-based audits, priority-driven documentation, automated coverage tracking
+## Modern Best Practices (January 2026)
+
+- **AI-assisted audits**: Use [Mintlify](https://mintlify.com/), [DocuWriter.ai](https://www.docuwriter.ai/), or [Documentation.AI](https://documentation.ai/) for automated doc generation; require human review before publish
+- **Documentation observability**: Track freshness, coverage %, and staleness via CI dashboards—treat docs like production data
+- **Contract-first coverage**: Validate OpenAPI/AsyncAPI specs against actual code; use [Swagger Coverage](https://github.com/viclovsky/swagger-coverage) for gap detection
+- **Spectral linting**: Enforce API doc standards with [Spectral](https://stoplight.io/spectral) rulesets in CI
+- **MCP server integration**: Connect AI agents to live documentation context via [MCP servers](https://modelcontextprotocol.io/)
+- **Runbook testability**: Every runbook must be executable in staging; use synthetic tests for validation
+- **Cross-platform documentation**: Use AGENTS.md standard with symlinks to CLAUDE.md for multi-tool compatibility ([AGENTS.md Standard](https://ainativedev.io/news/the-rise-of-agents-md))
+- **Context extraction tools**: Use [gitingest](https://gitingest.com/) or [repo2txt](https://github.com/kirill-markin/repo2txt) for large codebase analysis before documentation audits
 
 This skill provides operational workflows for auditing existing codebases, identifying documentation gaps, and systematically generating missing documentation. It complements [docs-codebase](../docs-codebase/SKILL.md) by providing the **discovery and analysis** layer.
 
 **Key Principle**: Templates exist in docs-codebase. This skill tells you **what** to document and **how to find** undocumented components.
 
-Core references: Diataxis documentation framework (https://diataxis.fr/) and OpenAPI (https://spec.openapis.org/oas/latest.html).
+Core references: [Diataxis](https://diataxis.fr/) (doc structure), [OpenAPI](https://spec.openapis.org/oas/latest.html) (REST), [AsyncAPI](https://www.asyncapi.com/) (events).
 
 ---
 
@@ -26,6 +35,87 @@ Invoke this skill when:
 - Onboarding to a new codebase and need to understand what's documented vs not
 - Preparing for compliance audits requiring documentation
 - Setting up documentation maintenance processes
+- **Working with large codebases (100K-1M LOC)** — see Large Codebase Audit section
+
+---
+
+## Large Codebase Audit (100K-1M LOC)
+
+For large codebases, the key principle is: **LLMs don't need the entire codebase—they need the right context for the current task**.
+
+### Phase 0: Context Extraction
+
+Before starting an audit, extract codebase context using tools:
+
+| Tool | Command/URL | Use Case |
+|------|-------------|----------|
+| **gitingest** | Replace "github.com" with "gitingest.com" | Quick full-repo dump |
+| **repo2txt** | https://github.com/kirill-markin/repo2txt | Selective file extraction |
+| **tree** | `tree -L 3 --dirsfirst -I 'node_modules\|.git\|dist'` | Structure overview |
+
+### Hierarchical Audit Strategy
+
+For monorepos and large projects, audit hierarchically:
+
+```text
+1. Root Level (Week 1)
+   ├── AGENTS.md / CLAUDE.md exists?
+   ├── README.md quality
+   ├── ARCHITECTURE.md exists?
+   └── docs/ directory structure
+
+2. Module Level (Week 2-3)
+   ├── Each major directory has AGENTS.md?
+   ├── API documentation complete?
+   └── Service boundaries documented?
+
+3. Component Level (Week 4+)
+   ├── Individual component READMEs
+   ├── Code comments quality
+   └── Test documentation
+```
+
+### Cross-Platform Documentation Audit
+
+Check for multi-tool compatibility:
+
+```text
+[ ] AGENTS.md exists (cross-platform standard)
+[ ] CLAUDE.md exists or symlinked to AGENTS.md
+[ ] GEMINI.md symlinked (if using Gemini)
+[ ] File size under 300 lines (use @references for depth)
+[ ] Subdirectory docs for each major module
+```
+
+### Large Codebase Coverage Checklist
+
+```text
+LARGE CODEBASE AUDIT CHECKLIST
+
+Context Extraction:
+[ ] Generated codebase dump (gitingest/repo2txt)
+[ ] Created directory structure overview
+[ ] Identified major modules/services
+
+Root Documentation:
+[ ] AGENTS.md / CLAUDE.md present and <300 lines
+[ ] README.md with quick start
+[ ] ARCHITECTURE.md with system overview
+[ ] Symlinks configured for cross-platform
+
+Module Documentation:
+[ ] Each major directory has AGENTS.md
+[ ] API endpoints documented
+[ ] Database schemas documented
+[ ] Event/message contracts documented
+
+Maintenance:
+[ ] Documentation ownership assigned
+[ ] Freshness tracking enabled
+[ ] CI/CD checks configured
+```
+
+**Sources**: [Anthropic Claude Code Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices), [OpenAI AGENTS.md Guide](https://developers.openai.com/codex/guides/agents-md)
 
 ---
 
@@ -62,23 +152,29 @@ Invoke this skill when:
 
 ### Do / Avoid
 
-Do:
+**Do**:
+
 - Keep docs close to code (same repo) and version them with changes.
 - Use contracts and examples as the source of truth for integrations.
 
-Avoid:
-- Large “doc-only” projects with no owners and no CI gates.
+**Avoid**:
+
+- Large "doc-only" projects with no owners and no CI gates.
 - Writing runbooks that cannot be executed in a sandbox/staging environment.
+
+---
 
 ## Quick Reference
 
-| Audit Task | Tool/Pattern | Output | Priority |
-|------------|--------------|--------|----------|
-| **Discover APIs** | `**/*Controller.cs`, `**/routes/**/*.ts` | Component inventory | Use [discovery-patterns.md](resources/discovery-patterns.md) |
-| **Calculate Coverage** | Compare inventory vs docs | Coverage report | Use [coverage-report-template.md](templates/coverage-report-template.md) |
-| **Prioritize Gaps** | External-facing → P1, Internal → P2, Config → P3 | Documentation backlog | Use [priority-framework.md](resources/priority-framework.md) |
-| **Generate Docs** | docs-codebase templates | Documentation files | Use [audit-workflows.md](resources/audit-workflows.md) Phase 3 |
-| **Automate Checks** | CI/CD gates, PR templates | Continuous coverage | Use [cicd-integration.md](resources/cicd-integration.md) |
+| Audit Task | Tool/Pattern | Output | Reference |
+| ---------- | ------------ | ------ | --------- |
+| **Discover APIs** | `**/*Controller.cs`, `**/routes/**/*.ts` | Component inventory | [discovery-patterns.md](references/discovery-patterns.md) |
+| **Calculate Coverage** | Swagger Coverage, manual diff | Coverage report | [coverage-report-template.md](assets/coverage-report-template.md) |
+| **Prioritize Gaps** | External → P1, Internal → P2, Config → P3 | Documentation backlog | [priority-framework.md](references/priority-framework.md) |
+| **Generate Docs** | AI-assisted + docs-codebase templates | Documentation files | [audit-workflows.md](references/audit-workflows.md) Phase 3 |
+| **Validate Contracts** | Spectral, AsyncAPI CLI, OpenAPI diff | Lint report | [cicd-integration.md](references/cicd-integration.md) |
+| **Track Freshness** | Git blame, last-modified metadata | Staleness report | [freshness-tracking.md](references/freshness-tracking.md) |
+| **Automate Checks** | GitHub Actions, GitLab CI, PR templates | Continuous coverage | [cicd-integration.md](references/cicd-integration.md) |
 
 ---
 
@@ -118,7 +214,7 @@ User needs: [Audit Type]
 
 ### Component Discovery
 
-**Resource**: [resources/discovery-patterns.md](resources/discovery-patterns.md)
+**Resource**: [references/discovery-patterns.md](references/discovery-patterns.md)
 
 Language-specific patterns for discovering documentable components:
 
@@ -131,7 +227,7 @@ Language-specific patterns for discovering documentable components:
 
 ### Priority Framework
 
-**Resource**: [resources/priority-framework.md](resources/priority-framework.md)
+**Resource**: [references/priority-framework.md](references/priority-framework.md)
 
 Framework for prioritizing documentation efforts:
 
@@ -144,7 +240,7 @@ Framework for prioritizing documentation efforts:
 
 ### Audit Workflows
 
-**Resource**: [resources/audit-workflows.md](resources/audit-workflows.md)
+**Resource**: [references/audit-workflows.md](references/audit-workflows.md)
 
 Systematic workflows for conducting audits:
 
@@ -158,7 +254,7 @@ Systematic workflows for conducting audits:
 
 ### CI/CD Integration
 
-**Resource**: [resources/cicd-integration.md](resources/cicd-integration.md)
+**Resource**: [references/cicd-integration.md](references/cicd-integration.md)
 
 Automated documentation checks and enforcement:
 
@@ -166,8 +262,23 @@ Automated documentation checks and enforcement:
 - CI/CD coverage gates (GitHub Actions, GitLab CI, Jenkins)
 - Pre-commit hooks (Git, Husky)
 - Documentation linters (markdownlint, Vale, link checkers)
+- API contract validation (Spectral, AsyncAPI CLI)
+- Coverage tools (Swagger Coverage, OpenAPI Coverage)
 - Automated coverage reports
 - Best practices and anti-patterns
+
+### Freshness Tracking
+
+**Resource**: [references/freshness-tracking.md](references/freshness-tracking.md)
+
+Track documentation staleness and drift from code:
+
+- Freshness metadata standards (last_verified, owner, review_cadence)
+- Git-based freshness analysis scripts
+- Staleness thresholds by priority (P1: 30 days, P2: 60 days, P3: 90 days)
+- CI/CD freshness gates (GitHub Actions, GitLab CI)
+- Observability dashboards and metrics
+- Automated doc reminder bots
 
 ---
 
@@ -175,7 +286,7 @@ Automated documentation checks and enforcement:
 
 ### Coverage Report Template
 
-**Template**: [templates/coverage-report-template.md](templates/coverage-report-template.md)
+**Template**: [assets/coverage-report-template.md](assets/coverage-report-template.md)
 
 Structured coverage report with:
 
@@ -188,7 +299,7 @@ Structured coverage report with:
 
 ### Documentation Backlog Template
 
-**Template**: [templates/documentation-backlog-template.md](templates/documentation-backlog-template.md)
+**Template**: [assets/documentation-backlog-template.md](assets/documentation-backlog-template.md)
 
 Backlog tracking with:
 
@@ -230,10 +341,10 @@ This skill works closely with:
 
 **[docs-codebase](../docs-codebase/SKILL.md)** - Provides templates for:
 
-- [api-docs-template.md](../docs-codebase/templates/api-reference/api-docs-template.md) - REST API documentation
-- [adr-template.md](../docs-codebase/templates/architecture/adr-template.md) - Architecture decisions
-- [readme-template.md](../docs-codebase/templates/project-management/readme-template.md) - Project overviews
-- [changelog-template.md](../docs-codebase/templates/project-management/changelog-template.md) - Release history
+- [api-docs-template.md](../docs-codebase/assets/api-reference/api-docs-template.md) - REST API documentation
+- [adr-template.md](../docs-codebase/assets/architecture/adr-template.md) - Architecture decisions
+- [readme-template.md](../docs-codebase/assets/project-management/readme-template.md) - Project overviews
+- [changelog-template.md](../docs-codebase/assets/project-management/changelog-template.md) - Release history
 
 **Workflow**:
 
@@ -256,11 +367,13 @@ This skill works closely with:
 
 ## Optional: AI / Automation
 
-Do:
-- Use AI to draft docs from code and tickets, then require human review and link/command verification.
-- Use AI to propose “freshness diffs” and missing doc sections; validate by running the runbook steps.
+**Do**:
 
-Avoid:
+- Use AI to draft docs from code and tickets, then require human review and link/command verification.
+- Use AI to propose "freshness diffs" and missing doc sections; validate by running the runbook steps.
+
+**Avoid**:
+
 - Publishing unverified drafts that include incorrect commands, unsafe advice, or hallucinated endpoints.
 
 ---
@@ -300,11 +413,11 @@ Avoid:
 
 **For Claude**: When auditing a codebase:
 
-1. **Start with discovery** - Use [resources/discovery-patterns.md](resources/discovery-patterns.md) to find components
+1. **Start with discovery** - Use [references/discovery-patterns.md](references/discovery-patterns.md) to find components
 2. **Calculate coverage** - Compare discovered components vs existing docs
-3. **Prioritize gaps** - Use [resources/priority-framework.md](resources/priority-framework.md) to assign P1/P2/P3
-4. **Follow workflows** - Use [resources/audit-workflows.md](resources/audit-workflows.md) for systematic approach
+3. **Prioritize gaps** - Use [references/priority-framework.md](references/priority-framework.md) to assign P1/P2/P3
+4. **Follow workflows** - Use [references/audit-workflows.md](references/audit-workflows.md) for systematic approach
 5. **Use templates** - Reference docs-codebase for documentation structure
-6. **Set up automation** - Use [resources/cicd-integration.md](resources/cicd-integration.md) for ongoing maintenance
+6. **Set up automation** - Use [references/cicd-integration.md](references/cicd-integration.md) for ongoing maintenance
 
 **Remember**: The goal is not 100% coverage, but **useful coverage** for the target audience. Document what developers, operators, and integrators actually need.

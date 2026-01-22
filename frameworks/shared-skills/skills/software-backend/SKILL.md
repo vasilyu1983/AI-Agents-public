@@ -1,13 +1,13 @@
 ---
 name: software-backend
-description: Production-grade backend API development with Node.js 24 LTS/25 Current (Express 5.x/Fastify 5.2/NestJS 11.x), Python 3.14+ (FastAPI 0.115+), Go 1.25+, Rust 1.92+ (Axum 0.8+), Prisma 6.x ORM, PostgreSQL 18. Includes GraphQL, TypeScript 5.9+ strict mode, modern logging (Pino/Winston), secret managers, PM2 process management, and Prisma Accelerate for serverless/edge deployments.
+description: Production-grade backend API development with Node.js 24 LTS/25 Current (Express 5.x/Fastify 5.2/NestJS 11.x/Hono 4.x), Bun 1.2+, Python 3.14+ (FastAPI 0.115+), Go 1.25+, Rust 1.92+ (Axum 0.8+), Prisma 6.x/Drizzle ORM, PostgreSQL 18. Includes tRPC for end-to-end type safety, edge computing (Cloudflare Workers/Vercel Edge), GraphQL, TypeScript 5.9+ strict mode, modern logging (Pino/Winston), secret managers, PM2 process management, and zero-trust security patterns.
 ---
 
 # Backend Engineering Skill — Quick Reference
 
-This skill equips backend engineers with execution-ready patterns for modern API development, database design, authentication, caching, observability, error handling, testing, and deployment. Apply these patterns when you need REST/GraphQL API design, database schema modeling, authentication flows, performance optimization, or production-grade backend architectures.
+This skill equips backend engineers with execution-ready patterns for modern API development, database design, authentication, caching, observability, error handling, testing, and deployment. Apply these patterns when you need REST/GraphQL/tRPC API design, database schema modeling, authentication flows, performance optimization, edge deployment, or production-grade backend architectures.
 
-**Modern Best Practices (December 2025)**: GraphQL adoption, TypeScript 5.9+ strict mode, TypeScript 7 native preview (Project Corsa) for faster tooling https://devblogs.microsoft.com/typescript/progress-on-typescript-7-december-2025/, `unknown` over `any`, structured logging, secret managers, and secure defaults (rate limiting, headers, input validation).
+**Modern Best Practices (January 2026)**: tRPC for end-to-end type safety, Hono/Elysia for edge-first APIs, Bun runtime for performance-critical workloads, zero-trust security (every request adversarial), OpenTelemetry as observability standard, TypeScript 5.9+ strict mode, [TypeScript 7 native preview (Project Corsa)](https://devblogs.microsoft.com/typescript/progress-on-typescript-7-december-2025/), vector databases for AI backends (Pinecone, Weaviate), and secure defaults (rate limiting, headers, input validation).
 
 ---
 
@@ -16,6 +16,8 @@ This skill equips backend engineers with execution-ready patterns for modern API
 | Task | Tool/Framework | Command | When to Use |
 |------|----------------|---------|-------------|
 | REST API | Express 5.x / Fastify 5.2 / NestJS 11.x | `npm create express-app` | Traditional CRUD APIs, public APIs |
+| Edge API | Hono 4.x / Elysia | `bun create hono` | Cloudflare Workers, Vercel Edge, serverless |
+| Type-Safe API | tRPC 11.x | `npm install @trpc/server` | Full-stack TypeScript monorepos, no schema |
 | GraphQL API | Apollo Server/Pothos | `npm install @apollo/server` | Flexible data fetching, avoiding over-fetching |
 | Database ORM | Prisma 6.x / Drizzle | `npx prisma init` | Type-safe database access, migrations |
 | Authentication | JWT/NextAuth.js/Passport | `npm install jsonwebtoken` | User sessions, API authentication |
@@ -25,6 +27,7 @@ This skill equips backend engineers with execution-ready patterns for modern API
 | Testing | Vitest/Jest/Supertest | `vitest run` | Unit, integration, E2E testing |
 | Logging | Pino/Winston | `npm install pino` | Structured logging, observability |
 | API Documentation | Swagger/OpenAPI | `@nestjs/swagger` | Auto-generated API docs |
+| Vector Database | Pinecone/Weaviate | `npm install @pinecone-database/pinecone` | AI/ML backends, semantic search |
 
 # When to Use This Skill
 
@@ -49,11 +52,22 @@ Backend project needs: [API Type]
     ├─ REST API?
     │   ├─ Simple CRUD → Express 5.x + Prisma 6.x
     │   ├─ Enterprise features → NestJS 11.x (built-in DI, modules)
-    │   └─ High performance → Fastify 5.2 (faster than Express)
+    │   ├─ High performance → Fastify 5.2 (faster than Express)
+    │   └─ Edge/Serverless → Hono 4.x (Cloudflare Workers, Vercel Edge)
+    │
+    ├─ Type-Safe API? (NEW - 2026)
+    │   ├─ Full-stack TypeScript monorepo → tRPC 11.x (no schema, no codegen)
+    │   ├─ Public API with docs → REST + OpenAPI/Swagger
+    │   └─ Flexible data fetching → GraphQL + Pothos/Apollo
     │
     ├─ GraphQL API?
     │   ├─ Code-first → Pothos GraphQL (TypeScript)
     │   └─ Schema-first → Apollo Server + GraphQL Codegen
+    │
+    ├─ Runtime Selection? (NEW - 2026)
+    │   ├─ Enterprise stable → Node.js 24 LTS (battle-tested, largest ecosystem)
+    │   ├─ Performance-critical → Bun 1.2+ (2-3x faster, native TypeScript)
+    │   └─ Security-focused → Deno 2.x (secure by default, native TS)
     │
     ├─ Authentication Strategy?
     │   ├─ JWT tokens → jsonwebtoken + httpOnly cookies
@@ -61,28 +75,36 @@ Backend project needs: [API Type]
     │   └─ Magic links → Custom implementation + email service
     │
     ├─ Database Layer?
-    │   ├─ Type-safe ORM → Prisma 6.x (best for TypeScript)
-    │   ├─ SQL-first → Drizzle ORM or Kysely
-    │   └─ Raw SQL → pg (PostgreSQL 18 driver)
+    │   ├─ Type-safe ORM → Prisma 6.x (DX-focused, migrations, studio)
+    │   ├─ SQL-first/Performance → Drizzle ORM (lightweight, SQL-like API)
+    │   ├─ Raw SQL → pg (PostgreSQL 18 driver)
+    │   └─ Edge-compatible → Drizzle + D1/Turso/Neon
     │
     ├─ Caching Strategy?
     │   ├─ Distributed cache → Redis (multi-server)
     │   ├─ Serverless cache → Upstash Redis
     │   └─ In-memory cache → Node.js Map (single server)
     │
+    ├─ Edge Deployment? (NEW - 2026)
+    │   ├─ Global low-latency → Cloudflare Workers (<1ms cold start)
+    │   ├─ Next.js integration → Vercel Edge Functions
+    │   └─ AWS ecosystem → Lambda@Edge
+    │
     └─ Background Jobs?
         ├─ Complex workflows → BullMQ (Redis-backed, retries)
+        ├─ Serverless workflows → AWS Step Functions
         └─ Simple scheduling → node-cron or Agenda
 ```
 
-**Language Alternatives:**
+**Runtime & Language Alternatives:**
 
-- **Node.js 24 LTS / 25 Current** (Express 5.x / Fastify 5.2 / NestJS 11.x + Prisma 6.x): TypeScript-first, async/await, Web Storage API
+- **Node.js 24 LTS / 25 Current** (Express 5.x / Fastify 5.2 / NestJS 11.x + Prisma 6.x): TypeScript-first, async/await, largest ecosystem, battle-tested
+- **Bun 1.2+** (Hono / Elysia + Drizzle): 2-3.5x faster than Node.js, native TypeScript, built-in bundler/test runner, enterprise-ready (Anthropic acquisition)
 - **Python 3.14+** (FastAPI 0.115+ + SQLAlchemy 2.0+): Data-heavy services, async support, evolving concurrency model, modern typing
 - **Go 1.25+** (Fiber 2.x + GORM 1.25+): High concurrency, native performance, experimental encoding/json/v2
 - **Rust 1.92+** (Axum 0.8+ + SeaORM 1.1+): Memory safety, zero-cost abstractions, Rust 2024 edition
 
-See [templates/](templates/) for language-specific starter templates.
+See [assets/](assets/) for language-specific starter templates and [references/edge-deployment-guide.md](references/edge-deployment-guide.md) for edge computing patterns.
 
 ---
 
@@ -186,16 +208,105 @@ app.get('/health/ready', async (req, res) => {
 
 ---
 
+## Infrastructure Economics & Business Impact
+
+**Why this matters**: Backend decisions directly impact revenue. A 100ms latency increase can reduce conversions by 7%. A poorly chosen architecture can cost 10x more in cloud spend. Performance SLAs are revenue commitments.
+
+### Cost Modeling Quick Reference
+
+| Decision | Cost Impact | Revenue Impact |
+|----------|-------------|----------------|
+| Edge vs. Origin | 60-80% latency reduction | +2-5% conversion rate |
+| Serverless vs. Containers | Variable cost, scales to zero | Better unit economics at low scale |
+| Reserved vs. On-Demand | 30-60% cost savings | Predictable COGS |
+| Connection pooling | 50-70% fewer DB connections | Lower database costs |
+| Caching layer | 80-95% fewer origin requests | Reduced compute costs |
+
+### Performance SLA → Revenue Mapping
+
+```text
+SLA Target → Business Metric
+
+P50 latency < 100ms → Baseline user experience
+P95 latency < 500ms → 95% users satisfied
+P99 latency < 1000ms → Enterprise SLA compliance
+Uptime 99.9% (43.8m downtime/month) → Standard SLA tier
+Uptime 99.99% (4.4m downtime/month) → Enterprise tier ($$$)
+```
+
+### Infrastructure Cost Calculator (Quick Estimate)
+
+```typescript
+// Monthly cost estimation formula
+const estimateMonthlyInfraCost = ({
+  avgRPS,           // Average requests per second
+  avgLatencyMs,     // Average response time
+  dataTransferGB,   // Monthly data transfer
+  storageGB,        // Database + file storage
+  environment,      // 'serverless' | 'container' | 'vm'
+}: InfraParams): CostEstimate => {
+  const computeHours = (avgRPS * 3600 * 24 * 30 * avgLatencyMs) / 1000 / 3600;
+
+  const rates = {
+    serverless: { compute: 0.00001667, transfer: 0.09, storage: 0.023 },
+    container: { compute: 0.0464, transfer: 0.09, storage: 0.10 },
+    vm: { compute: 0.0416, transfer: 0.09, storage: 0.08 },
+  };
+
+  const r = rates[environment];
+  return {
+    compute: computeHours * r.compute,
+    transfer: dataTransferGB * r.transfer,
+    storage: storageGB * r.storage,
+    total: computeHours * r.compute + dataTransferGB * r.transfer + storageGB * r.storage,
+  };
+};
+```
+
+### Unit Economics Checklist
+
+Before deploying any backend service, calculate:
+
+- [ ] **Cost per request**: Total infra cost / monthly requests
+- [ ] **Cost per user**: Total infra cost / MAU
+- [ ] **Gross margin impact**: How does infra cost affect product margin?
+- [ ] **Scale economics**: At 10x traffic, does cost scale linearly or worse?
+- [ ] **Break-even point**: At what traffic level does this architecture pay for itself?
+
+### Architecture Decision → Business Impact
+
+| Architecture Choice | Technical Benefit | Business Impact |
+|---------------------|-------------------|-----------------|
+| CDN + Edge caching | Lower latency | Higher conversion, better SEO |
+| Read replicas | Scale reads | Handle traffic spikes without degradation |
+| Queue-based processing | Decouple services | Smoother UX during high load |
+| Multi-region deployment | Fault tolerance | Enterprise SLA compliance |
+| Auto-scaling | Right-sized infra | Lower COGS, better margins |
+
+### FinOps Practices for Backend Teams
+
+1. **Tag all resources** - Every resource tagged with `team`, `service`, `environment`
+2. **Set billing alerts** - Alert at 50%, 80%, 100% of budget
+3. **Review weekly** - 15-minute weekly cost review meeting
+4. **Right-size monthly** - Check CPU/memory utilization, downsize overprovisioned
+5. **Spot/Preemptible for non-prod** - 60-90% savings on dev/staging
+
+See [references/infrastructure-economics.md](references/infrastructure-economics.md) for detailed cost modeling, cloud provider comparisons, and ROI calculators.
+
+---
+
 ## Navigation
 
 **Resources**
-- [resources/backend-best-practices.md](resources/backend-best-practices.md) — Node.js patterns for auth, error handling, database, performance, testing, observability
-- [resources/go-best-practices.md](resources/go-best-practices.md) — Go idioms, concurrency, error handling, GORM usage, testing, profiling
-- [resources/rust-best-practices.md](resources/rust-best-practices.md) — Ownership, async, Axum, SeaORM, error handling, testing
-- [resources/python-best-practices.md](resources/python-best-practices.md) — FastAPI, SQLAlchemy, async patterns, validation, testing, performance
+- [references/backend-best-practices.md](references/backend-best-practices.md) — Node.js patterns for auth, error handling, database, performance, testing, observability
+- [references/edge-deployment-guide.md](references/edge-deployment-guide.md) — Edge computing patterns, Cloudflare Workers vs Vercel Edge, tRPC, Hono, Bun
+- [references/infrastructure-economics.md](references/infrastructure-economics.md) — Cost modeling, performance SLAs → revenue, FinOps practices, cloud optimization
+- [references/go-best-practices.md](references/go-best-practices.md) — Go idioms, concurrency, error handling, GORM usage, testing, profiling
+- [references/rust-best-practices.md](references/rust-best-practices.md) — Ownership, async, Axum, SeaORM, error handling, testing
+- [references/python-best-practices.md](references/python-best-practices.md) — FastAPI, SQLAlchemy, async patterns, validation, testing, performance
 - [README.md](README.md) — Folder overview and usage notes
 - [data/sources.json](data/sources.json) — External references per language/runtime
-- Shared checklists: [../software-clean-code-standard/templates/checklists/backend-api-review-checklist.md](../software-clean-code-standard/templates/checklists/backend-api-review-checklist.md), [../software-clean-code-standard/templates/checklists/secure-code-review-checklist.md](../software-clean-code-standard/templates/checklists/secure-code-review-checklist.md)
+- Shared checklists: [../software-clean-code-standard/assets/checklists/backend-api-review-checklist.md](../software-clean-code-standard/assets/checklists/backend-api-review-checklist.md), [../software-clean-code-standard/assets/checklists/secure-code-review-checklist.md](../software-clean-code-standard/assets/checklists/secure-code-review-checklist.md)
 
 **Shared Utilities** (Centralized patterns — extract, don't duplicate)
 - [../software-clean-code-standard/utilities/auth-utilities.md](../software-clean-code-standard/utilities/auth-utilities.md) — Argon2id, jose JWT, OAuth 2.1/PKCE
@@ -205,13 +316,13 @@ app.get('/health/ready', async (req, res) => {
 - [../software-clean-code-standard/utilities/logging-utilities.md](../software-clean-code-standard/utilities/logging-utilities.md) — pino v9 + OpenTelemetry integration
 - [../software-clean-code-standard/utilities/testing-utilities.md](../software-clean-code-standard/utilities/testing-utilities.md) — Vitest, MSW v2, factories, fixtures
 - [../software-clean-code-standard/utilities/observability-utilities.md](../software-clean-code-standard/utilities/observability-utilities.md) — OpenTelemetry SDK, tracing, metrics
-- [../software-clean-code-standard/resources/clean-code-standard.md](../software-clean-code-standard/resources/clean-code-standard.md) — Canonical clean code rules (`CC-*`) for citation
+- [../software-clean-code-standard/references/clean-code-standard.md](../software-clean-code-standard/references/clean-code-standard.md) — Canonical clean code rules (`CC-*`) for citation
 
 **Templates**
-- [templates/nodejs/template-nodejs-prisma-postgres.md](templates/nodejs/template-nodejs-prisma-postgres.md) — Node.js + Prisma + PostgreSQL
-- [templates/go/template-go-fiber-gorm.md](templates/go/template-go-fiber-gorm.md) — Go + Fiber + GORM + PostgreSQL
-- [templates/rust/template-rust-axum-seaorm.md](templates/rust/template-rust-axum-seaorm.md) — Rust + Axum + SeaORM + PostgreSQL
-- [templates/python/template-python-fastapi-sqlalchemy.md](templates/python/template-python-fastapi-sqlalchemy.md) — Python + FastAPI + SQLAlchemy + PostgreSQL
+- [assets/nodejs/template-nodejs-prisma-postgres.md](assets/nodejs/template-nodejs-prisma-postgres.md) — Node.js + Prisma + PostgreSQL
+- [assets/go/template-go-fiber-gorm.md](assets/go/template-go-fiber-gorm.md) — Go + Fiber + GORM + PostgreSQL
+- [assets/rust/template-rust-axum-seaorm.md](assets/rust/template-rust-axum-seaorm.md) — Rust + Axum + SeaORM + PostgreSQL
+- [assets/python/template-python-fastapi-sqlalchemy.md](assets/python/template-python-fastapi-sqlalchemy.md) — Python + FastAPI + SQLAlchemy + PostgreSQL
 
 **Related Skills**
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System decomposition, SLAs, and data flows
@@ -225,5 +336,46 @@ app.get('/health/ready', async (req, res) => {
 
 ---
 
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about backend development, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best backend framework for [use case]?"
+- "What should I use for [API design/auth/database]?"
+- "What's the latest in Node.js/Go/Rust?"
+- "Current best practices for [REST/GraphQL/tRPC]?"
+- "Is [framework/runtime] still relevant in 2026?"
+- "[Express] vs [Fastify] vs [Hono]?"
+- "Best ORM for [database/use case]?"
+
+### Required Searches
+
+1. Search: `"backend development best practices 2026"`
+2. Search: `"[Node.js/Go/Rust] frameworks 2026"`
+3. Search: `"backend framework comparison 2026"`
+4. Search: `"[specific framework/ORM] vs alternatives 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What frameworks/runtimes are popular NOW
+- **Emerging trends**: New patterns or tools gaining traction
+- **Deprecated/declining**: Approaches that are losing relevance
+- **Recommendation**: Based on fresh data and recent releases
+
+### Example Topics (verify with fresh search)
+
+- Node.js 24 LTS features
+- Bun vs Deno vs Node.js
+- Hono, Elysia, and edge-first frameworks
+- Drizzle vs Prisma for TypeScript
+- tRPC and end-to-end type safety
+- Edge computing and serverless patterns
+
+---
+
 ## Operational Playbooks
-- [resources/operational-playbook.md](resources/operational-playbook.md) — Full backend architecture patterns, checklists, TypeScript notes, and decision tables
+- [references/operational-playbook.md](references/operational-playbook.md) — Full backend architecture patterns, checklists, TypeScript notes, and decision tables

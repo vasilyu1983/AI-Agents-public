@@ -131,7 +131,7 @@ agents:
     preferred_skills:
       - marketing-leads-generation
       - marketing-social-media
-      - marketing-seo-technical
+      - marketing-seo-complete
       - startup-go-to-market
     domain: marketing
 
@@ -369,7 +369,7 @@ skills:
       - "SDR"
       - "landing page"
 
-  - id: marketing-seo-technical
+  - id: marketing-seo-complete
     triggers:
       - "technical SEO"
       - "schema markup"

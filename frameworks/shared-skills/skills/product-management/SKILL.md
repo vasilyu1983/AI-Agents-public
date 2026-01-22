@@ -14,11 +14,14 @@ Everything here is:
 
 ---
 
-**Modern Best Practices (Dec 2025)**:
+**Modern Best Practices (Jan 2026)**:
 - Evidence quality beats confidence: label signals strong/medium/weak; write what would change your mind.
 - Outcomes > output: roadmaps are bets with measurable impact and guardrails, not feature inventories.
 - Metrics must be defined (formula + timeframe + data source) to be actionable.
 - Privacy, security, and accessibility are requirements, not afterthoughts.
+- Hybrid decision loops: AI surfaces anomalies, patterns, and forecasts; humans apply context, ethics, and long-term strategy.
+- Revenue ownership: Product now owns business outcomes (92% of PM leaders per 2025 State of PM Report).
+- Portfolio diversification: 70% core products, 20% adjacent opportunities, 10% transformational bets.
 - Optional: AI / Automation is allowed only when explicitly requested and policy-compliant.
 
 ## When to Use This Skill
@@ -109,33 +112,33 @@ User needs: [Product Work Type]
 
 Use only when explicitly requested and policy-compliant.
 
-- PRD templates: [../docs-ai-prd/templates/prd/prd-template.md](../docs-ai-prd/templates/prd/prd-template.md) and [../docs-ai-prd/templates/prd/ai-prd-template.md](../docs-ai-prd/templates/prd/ai-prd-template.md)
-- AI system lifecycle: [templates/ai/ai-lifecycle-template.md](templates/ai/ai-lifecycle-template.md)
-- Agentic workflow docs: [templates/ai/agentic-ai-orchestration.md](templates/ai/agentic-ai-orchestration.md)
-- AI product patterns: [resources/ai-product-patterns.md](resources/ai-product-patterns.md)
+- PRD templates: [../docs-ai-prd/assets/prd/prd-template.md](../docs-ai-prd/assets/prd/prd-template.md) and [../docs-ai-prd/assets/prd/ai-prd-template.md](../docs-ai-prd/assets/prd/ai-prd-template.md)
+- AI system lifecycle: [assets/ai/ai-lifecycle-template.md](assets/ai/ai-lifecycle-template.md)
+- Agentic workflow docs: [assets/ai/agentic-ai-orchestration.md](assets/ai/agentic-ai-orchestration.md)
+- AI product patterns: [references/ai-product-patterns.md](references/ai-product-patterns.md)
 
 ## Navigation
 
 **Resources**
-- [resources/discovery-best-practices.md](resources/discovery-best-practices.md)
-- [resources/roadmap-patterns.md](resources/roadmap-patterns.md)
-- [resources/delivery-best-practices.md](resources/delivery-best-practices.md)
-- [resources/strategy-patterns.md](resources/strategy-patterns.md)
-- [resources/positioning-patterns.md](resources/positioning-patterns.md)
-- [resources/data-product-best-practices.md](resources/data-product-best-practices.md)
-- [resources/interviewing-patterns.md](resources/interviewing-patterns.md)
-- [resources/metrics-best-practices.md](resources/metrics-best-practices.md)
-- [resources/leadership-decision-frameworks.md](resources/leadership-decision-frameworks.md)
-- [resources/operational-guide.md](resources/operational-guide.md)
+- [references/discovery-best-practices.md](references/discovery-best-practices.md)
+- [references/roadmap-patterns.md](references/roadmap-patterns.md)
+- [references/delivery-best-practices.md](references/delivery-best-practices.md)
+- [references/strategy-patterns.md](references/strategy-patterns.md)
+- [references/positioning-patterns.md](references/positioning-patterns.md)
+- [references/data-product-best-practices.md](references/data-product-best-practices.md)
+- [references/interviewing-patterns.md](references/interviewing-patterns.md)
+- [references/metrics-best-practices.md](references/metrics-best-practices.md)
+- [references/leadership-decision-frameworks.md](references/leadership-decision-frameworks.md)
+- [references/operational-guide.md](references/operational-guide.md)
 - [data/sources.json](data/sources.json)
 
 **Templates**
-- Discovery: [templates/discovery/customer-interview-template.md](templates/discovery/customer-interview-template.md), [templates/discovery/assumption-test-template.md](templates/discovery/assumption-test-template.md), [templates/discovery/opportunity-solution-tree.md](templates/discovery/opportunity-solution-tree.md)
-- Strategy/Vision: [templates/strategy/product-vision-template.md](templates/strategy/product-vision-template.md), [templates/strategy/opportunity-assessment.md](templates/strategy/opportunity-assessment.md), [templates/strategy/positioning-template.md](templates/strategy/positioning-template.md), [templates/strategy/PRFAQ-template.md](templates/strategy/PRFAQ-template.md)
-- Data: [templates/data/data-product-canvas.md](templates/data/data-product-canvas.md)
-- Roadmaps: [templates/roadmap/outcome-roadmap.md](templates/roadmap/outcome-roadmap.md), [templates/roadmap/theme-roadmap.md](templates/roadmap/theme-roadmap.md)
-- Metrics: [templates/metrics/metric-tree.md](templates/metrics/metric-tree.md), [templates/metrics/okr-template.md](templates/metrics/okr-template.md)
-- Ops/Leadership: [templates/ops/1-1-template.md](templates/ops/1-1-template.md), [templates/ops/feedback-template.md](templates/ops/feedback-template.md), [templates/ops/a3-debrief.md](templates/ops/a3-debrief.md), [templates/ops/negotiation-one-sheet.md](templates/ops/negotiation-one-sheet.md)
+- Discovery: [assets/discovery/customer-interview-template.md](assets/discovery/customer-interview-template.md), [assets/discovery/assumption-test-template.md](assets/discovery/assumption-test-template.md), [assets/discovery/opportunity-solution-tree.md](assets/discovery/opportunity-solution-tree.md)
+- Strategy/Vision: [assets/strategy/product-vision-template.md](assets/strategy/product-vision-template.md), [assets/strategy/opportunity-assessment.md](assets/strategy/opportunity-assessment.md), [assets/strategy/positioning-template.md](assets/strategy/positioning-template.md), [assets/strategy/PRFAQ-template.md](assets/strategy/PRFAQ-template.md)
+- Data: [assets/data/data-product-canvas.md](assets/data/data-product-canvas.md)
+- Roadmaps: [assets/roadmap/outcome-roadmap.md](assets/roadmap/outcome-roadmap.md), [assets/roadmap/theme-roadmap.md](assets/roadmap/theme-roadmap.md)
+- Metrics: [assets/metrics/metric-tree.md](assets/metrics/metric-tree.md), [assets/metrics/okr-template.md](assets/metrics/okr-template.md)
+- Ops/Leadership: [assets/ops/1-1-template.md](assets/ops/1-1-template.md), [assets/ops/feedback-template.md](assets/ops/feedback-template.md), [assets/ops/a3-debrief.md](assets/ops/a3-debrief.md), [assets/ops/negotiation-one-sheet.md](assets/ops/negotiation-one-sheet.md)
 
 **Related Skills**
 - [../docs-ai-prd/SKILL.md](../docs-ai-prd/SKILL.md) — PRD, stories, and prompt/playbook templates
@@ -147,7 +150,7 @@ Use only when explicitly requested and policy-compliant.
 
 ## Operational Guide
 
-See [resources/operational-guide.md](resources/operational-guide.md) for detailed patterns, template walkthroughs, example flows, and execution checklists. Keep SKILL.md as the navigation hub; use templates/ when producing artifacts.
+See [references/operational-guide.md](references/operational-guide.md) for detailed patterns, template walkthroughs, example flows, and execution checklists. Keep SKILL.md as the navigation hub; use assets/ when producing artifacts.
 
 ---
 
@@ -158,3 +161,45 @@ See [data/sources.json](data/sources.json) for official frameworks (Lean Startup
 ---
 
 Use the quick reference and decision tree above to choose a template, then follow the operational guide for depth.
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about product management tools, frameworks, or practices, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best tool for [roadmapping/product analytics/discovery]?"
+- "What should I use for [OKRs/metrics/customer feedback]?"
+- "What's the latest in product management?"
+- "Current best practices for [discovery/roadmaps/prioritization]?"
+- "Is [framework/tool] still relevant in 2026?"
+- "[Linear] vs [Jira] vs [other]?" or "[Amplitude] vs [Mixpanel]?"
+- "Best approach for [AI product management/agentic products]?"
+
+### Required Searches
+
+1. Search: `"product management best practices 2026"`
+2. Search: `"[specific tool] vs alternatives 2026"`
+3. Search: `"product management trends January 2026"`
+4. Search: `"[discovery/roadmap/OKR] frameworks 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What PM tools/frameworks are popular NOW
+- **Emerging trends**: New tools, methods, or patterns gaining traction
+- **Deprecated/declining**: Frameworks/tools losing relevance
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- Product management tools (Linear, Productboard, Notion, Coda)
+- Analytics platforms (Amplitude, Mixpanel, PostHog)
+- Discovery and research tools (Maze, UserTesting, Dovetail)
+- Roadmapping approaches (outcome-based, theme-based, now/next/later)
+- AI product management patterns
+- Prioritization frameworks (RICE, ICE, opportunity scoring)
+- OKR and metrics tools

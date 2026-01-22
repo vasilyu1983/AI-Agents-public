@@ -99,13 +99,13 @@ Claude should invoke this skill when users ask for:
 
 Find detailed operational patterns and quick references in:
 
-- **SQL Best Practices**: [resources/sql-best-practices.md](resources/sql-best-practices.md)
-- **Query Tuning Patterns**: [resources/query-tuning-patterns.md](resources/query-tuning-patterns.md)
-- **Indexing Strategies**: [resources/index-patterns.md](resources/index-patterns.md)
-- **EXPLAIN/Analysis**: [resources/explain-analysis.md](resources/explain-analysis.md)
-- **SQL Anti-Patterns**: [resources/sql-antipatterns.md](resources/sql-antipatterns.md)
+- **SQL Best Practices**: [references/sql-best-practices.md](references/sql-best-practices.md)
+- **Query Tuning Patterns**: [references/query-tuning-patterns.md](references/query-tuning-patterns.md)
+- **Indexing Strategies**: [references/index-patterns.md](references/index-patterns.md)
+- **EXPLAIN/Analysis**: [references/explain-analysis.md](references/explain-analysis.md)
+- **SQL Anti-Patterns**: [references/sql-antipatterns.md](references/sql-antipatterns.md)
 - **External Sources**: [data/sources.json](data/sources.json) — vendor docs and reference links
-- **Operational Standards**: [resources/operational-patterns.md](resources/operational-patterns.md) — Deep operational checklists, database-specific guidance, and template selection trees
+- **Operational Standards**: [references/operational-patterns.md](references/operational-patterns.md) — Deep operational checklists, database-specific guidance, and template selection trees
 
 Each file includes:
 - Copy-paste ready checklists (e.g., "query review", "index design", "explain review")
@@ -120,37 +120,37 @@ Each file includes:
 Templates are organized by database technology for precision and clarity:
 
 ### Cross-Platform Templates (All Databases)
-- [templates/cross-platform/template-query-tuning.md](templates/cross-platform/template-query-tuning.md) - Universal query optimization
-- [templates/cross-platform/template-explain-analysis.md](templates/cross-platform/template-explain-analysis.md) - Execution plan analysis
-- [templates/cross-platform/template-performance-tuning-worksheet.md](templates/cross-platform/template-performance-tuning-worksheet.md) - **NEW** 4-step tuning workflow (Measure → Explain → Change → Verify)
-- [templates/cross-platform/template-index.md](templates/cross-platform/template-index.md) - Index design patterns
-- [templates/cross-platform/template-slow-query.md](templates/cross-platform/template-slow-query.md) - Slow query triage
-- [templates/cross-platform/template-schema-design.md](templates/cross-platform/template-schema-design.md) - Schema modeling
-- [templates/cross-platform/template-migration.md](templates/cross-platform/template-migration.md) - Database migrations
-- [templates/cross-platform/template-backup-restore.md](templates/cross-platform/template-backup-restore.md) - Backup/DR planning
-- [templates/cross-platform/template-security-audit.md](templates/cross-platform/template-security-audit.md) - Security review
-- [templates/cross-platform/template-diagnostics.md](templates/cross-platform/template-diagnostics.md) - Performance diagnostics
-- [templates/cross-platform/template-lock-analysis.md](templates/cross-platform/template-lock-analysis.md) - Lock troubleshooting
+- [assets/cross-platform/template-query-tuning.md](assets/cross-platform/template-query-tuning.md) - Universal query optimization
+- [assets/cross-platform/template-explain-analysis.md](assets/cross-platform/template-explain-analysis.md) - Execution plan analysis
+- [assets/cross-platform/template-performance-tuning-worksheet.md](assets/cross-platform/template-performance-tuning-worksheet.md) - **NEW** 4-step tuning workflow (Measure → Explain → Change → Verify)
+- [assets/cross-platform/template-index.md](assets/cross-platform/template-index.md) - Index design patterns
+- [assets/cross-platform/template-slow-query.md](assets/cross-platform/template-slow-query.md) - Slow query triage
+- [assets/cross-platform/template-schema-design.md](assets/cross-platform/template-schema-design.md) - Schema modeling
+- [assets/cross-platform/template-migration.md](assets/cross-platform/template-migration.md) - Database migrations
+- [assets/cross-platform/template-backup-restore.md](assets/cross-platform/template-backup-restore.md) - Backup/DR planning
+- [assets/cross-platform/template-security-audit.md](assets/cross-platform/template-security-audit.md) - Security review
+- [assets/cross-platform/template-diagnostics.md](assets/cross-platform/template-diagnostics.md) - Performance diagnostics
+- [assets/cross-platform/template-lock-analysis.md](assets/cross-platform/template-lock-analysis.md) - Lock troubleshooting
 
 ### PostgreSQL Templates
-- [templates/postgres/template-pg-explain.md](templates/postgres/template-pg-explain.md) - PostgreSQL EXPLAIN analysis
-- [templates/postgres/template-pg-index.md](templates/postgres/template-pg-index.md) - PostgreSQL indexing (B-tree, GIN, GiST)
-- [templates/postgres/template-replication-ha.md](templates/postgres/template-replication-ha.md) - Streaming replication & HA
+- [assets/postgres/template-pg-explain.md](assets/postgres/template-pg-explain.md) - PostgreSQL EXPLAIN analysis
+- [assets/postgres/template-pg-index.md](assets/postgres/template-pg-index.md) - PostgreSQL indexing (B-tree, GIN, GiST)
+- [assets/postgres/template-replication-ha.md](assets/postgres/template-replication-ha.md) - Streaming replication & HA
 
 ### MySQL Templates
-- [templates/mysql/template-mysql-explain.md](templates/mysql/template-mysql-explain.md) - MySQL EXPLAIN analysis
-- [templates/mysql/template-mysql-index.md](templates/mysql/template-mysql-index.md) - MySQL/InnoDB indexing
-- [templates/mysql/template-replication-ha.md](templates/mysql/template-replication-ha.md) - MySQL replication & HA
+- [assets/mysql/template-mysql-explain.md](assets/mysql/template-mysql-explain.md) - MySQL EXPLAIN analysis
+- [assets/mysql/template-mysql-index.md](assets/mysql/template-mysql-index.md) - MySQL/InnoDB indexing
+- [assets/mysql/template-replication-ha.md](assets/mysql/template-replication-ha.md) - MySQL replication & HA
 
 ### Microsoft SQL Server Templates
-- [templates/mssql/template-mssql-explain.md](templates/mssql/template-mssql-explain.md) - SQL Server EXPLAIN/SHOWPLAN analysis
-- [templates/mssql/template-mssql-index.md](templates/mssql/template-mssql-index.md) - SQL Server indexing and tuning
+- [assets/mssql/template-mssql-explain.md](assets/mssql/template-mssql-explain.md) - SQL Server EXPLAIN/SHOWPLAN analysis
+- [assets/mssql/template-mssql-index.md](assets/mssql/template-mssql-index.md) - SQL Server indexing and tuning
 
 ### Oracle Templates
-- [templates/oracle/template-oracle-explain.md](templates/oracle/template-oracle-explain.md) - Oracle EXPLAIN plan review and tuning
+- [assets/oracle/template-oracle-explain.md](assets/oracle/template-oracle-explain.md) - Oracle EXPLAIN plan review and tuning
 
 ### SQLite Templates
-- [templates/sqlite/template-sqlite-optimization.md](templates/sqlite/template-sqlite-optimization.md) - SQLite optimization and pragma guidance
+- [assets/sqlite/template-sqlite-optimization.md](assets/sqlite/template-sqlite-optimization.md) - SQLite optimization and pragma guidance
 
 ---
 
@@ -181,35 +181,35 @@ Templates are organized by database technology for precision and clarity:
 ## Navigation
 
 **Resources**
-- [resources/explain-analysis.md](resources/explain-analysis.md)
-- [resources/query-tuning-patterns.md](resources/query-tuning-patterns.md)
-- [resources/operational-patterns.md](resources/operational-patterns.md)
-- [resources/sql-antipatterns.md](resources/sql-antipatterns.md)
-- [resources/index-patterns.md](resources/index-patterns.md)
-- [resources/sql-best-practices.md](resources/sql-best-practices.md)
+- [references/explain-analysis.md](references/explain-analysis.md)
+- [references/query-tuning-patterns.md](references/query-tuning-patterns.md)
+- [references/operational-patterns.md](references/operational-patterns.md)
+- [references/sql-antipatterns.md](references/sql-antipatterns.md)
+- [references/index-patterns.md](references/index-patterns.md)
+- [references/sql-best-practices.md](references/sql-best-practices.md)
 
 **Templates**
-- [templates/cross-platform/template-slow-query.md](templates/cross-platform/template-slow-query.md)
-- [templates/cross-platform/template-backup-restore.md](templates/cross-platform/template-backup-restore.md)
-- [templates/cross-platform/template-schema-design.md](templates/cross-platform/template-schema-design.md)
-- [templates/cross-platform/template-explain-analysis.md](templates/cross-platform/template-explain-analysis.md)
-- [templates/cross-platform/template-performance-tuning-worksheet.md](templates/cross-platform/template-performance-tuning-worksheet.md)
-- [templates/cross-platform/template-security-audit.md](templates/cross-platform/template-security-audit.md)
-- [templates/cross-platform/template-diagnostics.md](templates/cross-platform/template-diagnostics.md)
-- [templates/cross-platform/template-index.md](templates/cross-platform/template-index.md)
-- [templates/cross-platform/template-migration.md](templates/cross-platform/template-migration.md)
-- [templates/cross-platform/template-lock-analysis.md](templates/cross-platform/template-lock-analysis.md)
-- [templates/cross-platform/template-query-tuning.md](templates/cross-platform/template-query-tuning.md)
-- [templates/oracle/template-oracle-explain.md](templates/oracle/template-oracle-explain.md)
-- [templates/sqlite/template-sqlite-optimization.md](templates/sqlite/template-sqlite-optimization.md)
-- [templates/postgres/template-pg-index.md](templates/postgres/template-pg-index.md)
-- [templates/postgres/template-replication-ha.md](templates/postgres/template-replication-ha.md)
-- [templates/postgres/template-pg-explain.md](templates/postgres/template-pg-explain.md)
-- [templates/mysql/template-mysql-explain.md](templates/mysql/template-mysql-explain.md)
-- [templates/mysql/template-mysql-index.md](templates/mysql/template-mysql-index.md)
-- [templates/mysql/template-replication-ha.md](templates/mysql/template-replication-ha.md)
-- [templates/mssql/template-mssql-index.md](templates/mssql/template-mssql-index.md)
-- [templates/mssql/template-mssql-explain.md](templates/mssql/template-mssql-explain.md)
+- [assets/cross-platform/template-slow-query.md](assets/cross-platform/template-slow-query.md)
+- [assets/cross-platform/template-backup-restore.md](assets/cross-platform/template-backup-restore.md)
+- [assets/cross-platform/template-schema-design.md](assets/cross-platform/template-schema-design.md)
+- [assets/cross-platform/template-explain-analysis.md](assets/cross-platform/template-explain-analysis.md)
+- [assets/cross-platform/template-performance-tuning-worksheet.md](assets/cross-platform/template-performance-tuning-worksheet.md)
+- [assets/cross-platform/template-security-audit.md](assets/cross-platform/template-security-audit.md)
+- [assets/cross-platform/template-diagnostics.md](assets/cross-platform/template-diagnostics.md)
+- [assets/cross-platform/template-index.md](assets/cross-platform/template-index.md)
+- [assets/cross-platform/template-migration.md](assets/cross-platform/template-migration.md)
+- [assets/cross-platform/template-lock-analysis.md](assets/cross-platform/template-lock-analysis.md)
+- [assets/cross-platform/template-query-tuning.md](assets/cross-platform/template-query-tuning.md)
+- [assets/oracle/template-oracle-explain.md](assets/oracle/template-oracle-explain.md)
+- [assets/sqlite/template-sqlite-optimization.md](assets/sqlite/template-sqlite-optimization.md)
+- [assets/postgres/template-pg-index.md](assets/postgres/template-pg-index.md)
+- [assets/postgres/template-replication-ha.md](assets/postgres/template-replication-ha.md)
+- [assets/postgres/template-pg-explain.md](assets/postgres/template-pg-explain.md)
+- [assets/mysql/template-mysql-explain.md](assets/mysql/template-mysql-explain.md)
+- [assets/mysql/template-mysql-index.md](assets/mysql/template-mysql-index.md)
+- [assets/mysql/template-replication-ha.md](assets/mysql/template-replication-ha.md)
+- [assets/mssql/template-mssql-index.md](assets/mssql/template-mssql-index.md)
+- [assets/mssql/template-mssql-explain.md](assets/mssql/template-mssql-explain.md)
 
 **Data**
 - [data/sources.json](data/sources.json) — Curated external references
@@ -218,7 +218,7 @@ Templates are organized by database technology for precision and clarity:
 
 ## Operational Deep Dives
 
-See [resources/operational-patterns.md](resources/operational-patterns.md) for:
+See [references/operational-patterns.md](references/operational-patterns.md) for:
 - End-to-end optimization checklists and anti-pattern fixes
 - Database-specific quick references (PostgreSQL, MySQL, SQL Server, Oracle, SQLite)
 - Slow query troubleshooting workflow and reliability drills
@@ -263,7 +263,7 @@ See [resources/operational-patterns.md](resources/operational-patterns.md) for:
 | **Unbounded result set** | Memory explosion | Add LIMIT/pagination |
 | **OR conditions** | Index may not be used | UNION or rewrite |
 
-See [resources/sql-antipatterns.md](resources/sql-antipatterns.md) for detailed fixes.
+See [references/sql-antipatterns.md](references/sql-antipatterns.md) for detailed fixes.
 
 ---
 
@@ -386,4 +386,4 @@ See [data/sources.json](data/sources.json) for 62+ curated resources including:
 
 ---
 
-Use [resources/operational-patterns.md](resources/operational-patterns.md) and the templates directory for detailed workflows, migration notes, and ready-to-run commands.
+Use [references/operational-patterns.md](references/operational-patterns.md) and the templates directory for detailed workflows, migration notes, and ready-to-run commands.

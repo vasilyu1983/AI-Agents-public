@@ -7,7 +7,7 @@ description: "Production-grade DevOps and platform engineering patterns: Kuberne
 
 This skill equips teams with actionable templates, checklists, and patterns for building self-service platforms, automating infrastructure with GitOps, deploying securely with DevSecOps, scaling with Kubernetes, ensuring reliability through SRE practices, and operating production systems with strong observability.
 
-**Modern Best Practices (Jan 2026)**: Kubernetes 1.33+ (supported releases + version skew policy), Docker Engine v27, Terraform 1.x (current stable in 1.14.x), GitOps with Argo CD v3 and Flux v2, OpenTelemetry for traces/metrics/logs, and eBPF-based observability where it meaningfully reduces operational overhead.
+**Modern Best Practices (Jan 2026)**: Kubernetes 1.33-1.35 (1.35 "Timbernetes" released Dec 2025 with in-place pod restart GA, OCI image volumes alpha), Docker Engine v27, Terraform 1.x / OpenTofu 1.9+ (OSS fork with state encryption), GitOps with Argo CD v3 and Flux v2, OpenTelemetry for traces/metrics/logs, eBPF-based observability (Cilium + Tetragon for security), and AIOps for self-healing systems (60%+ enterprise adoption projected).
 
 ---
 
@@ -15,12 +15,12 @@ This skill equips teams with actionable templates, checklists, and patterns for 
 
 | Task | Tool/Framework | Command | When to Use |
 |------|----------------|---------|-------------|
-| Infrastructure as Code | Terraform 1.x | `terraform plan && terraform apply` | Provision cloud resources declaratively |
+| Infrastructure as Code | Terraform / OpenTofu | `terraform plan && terraform apply` | Provision cloud resources declaratively |
 | GitOps Deployment | Argo CD / Flux | `argocd app sync myapp` | Continuous reconciliation, declarative deployments |
 | Container Build | Docker Engine v27 | `docker build -t app:v1 .` | Package applications with dependencies |
 | Kubernetes Deployment | kubectl / Helm (Kubernetes) | `kubectl apply -f deploy.yaml` / `helm upgrade app ./chart` | Deploy to K8s cluster, manage releases |
 | CI/CD Pipeline | GitHub Actions | Define workflow in `.github/workflows/ci.yml` | Automated testing, building, deploying |
-| Security Scanning | Trivy / Falco | `trivy image myapp:latest` | Vulnerability scanning, runtime security |
+| Security Scanning | Trivy / Falco / Tetragon | `trivy image myapp:latest` | Vulnerability scanning, runtime security, eBPF enforcement |
 | Monitoring & Alerts | Prometheus + Grafana | Configure ServiceMonitor and AlertManager | Observability, SLO tracking, incident alerts |
 | Load Testing | k6 / Locust | `k6 run load-test.js` | Performance validation, capacity planning |
 | Incident Response | PagerDuty / Opsgenie | Configure escalation policies | On-call management, automated escalation |
@@ -33,10 +33,11 @@ This skill equips teams with actionable templates, checklists, and patterns for 
 ```text
 What do you need to accomplish?
     ├─ Infrastructure provisioning?
-    │   ├─ Cloud-agnostic → Terraform (multi-cloud support)
-    │   ├─ AWS-specific → CloudFormation or Terraform
-    │   ├─ GCP-specific → Deployment Manager or Terraform
-    │   └─ Azure-specific → ARM templates or Terraform
+    │   ├─ Cloud-agnostic → Terraform OR OpenTofu (OSS fork, state encryption)
+    │   ├─ Programming-first → Pulumi (TypeScript/Python/Go)
+    │   ├─ AWS-specific → CloudFormation or Terraform/OpenTofu
+    │   ├─ GCP-specific → Deployment Manager or Terraform/OpenTofu
+    │   └─ Azure-specific → ARM/Bicep or Terraform/OpenTofu
     │
     ├─ Application deployment?
     │   ├─ Kubernetes cluster?
@@ -100,11 +101,11 @@ Claude should invoke this skill when users request:
 
 Operational best practices by domain:
 
-- **DevOps/SRE Operations**: [resources/devops-best-practices.md](resources/devops-best-practices.md) - Core patterns for safe infrastructure changes, deployments, and incident response
-- **Platform Engineering**: [resources/platform-engineering-patterns.md](resources/platform-engineering-patterns.md) - Self-service platforms, golden paths, internal developer portals, policy as code
-- **GitOps Workflows**: [resources/gitops-workflows.md](resources/gitops-workflows.md) - Continuous reconciliation, multi-environment promotion, ArgoCD/FluxCD patterns, progressive delivery
-- **SRE Incident Management**: [resources/sre-incident-management.md](resources/sre-incident-management.md) - Severity classification, escalation procedures, blameless postmortems, alert correlation, and runbooks
-- **Operational Standards**: [resources/operational-patterns.md](resources/operational-patterns.md) - Platform engineering blueprints, CI/CD safety, SLOs, and reliability drills
+- **DevOps/SRE Operations**: [references/devops-best-practices.md](references/devops-best-practices.md) - Core patterns for safe infrastructure changes, deployments, and incident response
+- **Platform Engineering**: [references/platform-engineering-patterns.md](references/platform-engineering-patterns.md) - Self-service platforms, golden paths, internal developer portals, policy as code
+- **GitOps Workflows**: [references/gitops-workflows.md](references/gitops-workflows.md) - Continuous reconciliation, multi-environment promotion, ArgoCD/FluxCD patterns, progressive delivery
+- **SRE Incident Management**: [references/sre-incident-management.md](references/sre-incident-management.md) - Severity classification, escalation procedures, blameless postmortems, alert correlation, and runbooks
+- **Operational Standards**: [references/operational-patterns.md](references/operational-patterns.md) - Platform engineering blueprints, CI/CD safety, SLOs, and reliability drills
 
 Each guide includes:
 - Checklists for completeness and safety
@@ -120,65 +121,65 @@ Each guide includes:
 Production templates organized by tech stack (27 templates total):
 
 ### AWS Cloud
-- [templates/aws/template-aws-ops.md](templates/aws/template-aws-ops.md) - AWS service operations and best practices
-- [templates/aws/template-aws-terraform.md](templates/aws/template-aws-terraform.md) - Terraform modules for AWS infrastructure
-- [templates/aws/template-cost-optimization.md](templates/aws/template-cost-optimization.md) - AWS cost optimization strategies
+- [assets/aws/template-aws-ops.md](assets/aws/template-aws-ops.md) - AWS service operations and best practices
+- [assets/aws/template-aws-terraform.md](assets/aws/template-aws-terraform.md) - Terraform modules for AWS infrastructure
+- [assets/aws/template-cost-optimization.md](assets/aws/template-cost-optimization.md) - AWS cost optimization strategies
 
 ### GCP Cloud
-- [templates/gcp/template-gcp-ops.md](templates/gcp/template-gcp-ops.md) - GCP service operations
-- [templates/gcp/template-gcp-terraform.md](templates/gcp/template-gcp-terraform.md) - Terraform modules for GCP
+- [assets/gcp/template-gcp-ops.md](assets/gcp/template-gcp-ops.md) - GCP service operations
+- [assets/gcp/template-gcp-terraform.md](assets/gcp/template-gcp-terraform.md) - Terraform modules for GCP
 
 ### Azure Cloud
-- [templates/azure/template-azure-ops.md](templates/azure/template-azure-ops.md) - Azure service operations
+- [assets/azure/template-azure-ops.md](assets/azure/template-azure-ops.md) - Azure service operations
 
 ### Kubernetes
-- [templates/kubernetes/template-kubernetes-ops.md](templates/kubernetes/template-kubernetes-ops.md) - Day-to-day K8s operations
-- [templates/kubernetes/template-ha-dr.md](templates/kubernetes/template-ha-dr.md) - High availability and disaster recovery
-- [templates/kubernetes/template-platform-api.md](templates/kubernetes/template-platform-api.md) - Platform API patterns
-- [templates/kubernetes/template-k8s-deploy.yaml](templates/kubernetes/template-k8s-deploy.yaml) - Deployment manifests
+- [assets/kubernetes/template-kubernetes-ops.md](assets/kubernetes/template-kubernetes-ops.md) - Day-to-day K8s operations
+- [assets/kubernetes/template-ha-dr.md](assets/kubernetes/template-ha-dr.md) - High availability and disaster recovery
+- [assets/kubernetes/template-platform-api.md](assets/kubernetes/template-platform-api.md) - Platform API patterns
+- [assets/kubernetes/template-k8s-deploy.yaml](assets/kubernetes/template-k8s-deploy.yaml) - Deployment manifests
 
 ### Docker
-- [templates/docker/template-docker-ops.md](templates/docker/template-docker-ops.md) - Container build, security, and operations
+- [assets/docker/template-docker-ops.md](assets/docker/template-docker-ops.md) - Container build, security, and operations
 
 ### Kafka
-- [templates/kafka/template-kafka-ops.md](templates/kafka/template-kafka-ops.md) - Kafka cluster operations and streaming
+- [assets/kafka/template-kafka-ops.md](assets/kafka/template-kafka-ops.md) - Kafka cluster operations and streaming
 
 ### Terraform & IaC
-- [templates/terraform-iac/template-iac-terraform.md](templates/terraform-iac/template-iac-terraform.md) - Infrastructure as Code patterns
-- [templates/terraform-iac/template-module.md](templates/terraform-iac/template-module.md) - Reusable Terraform modules
-- [templates/terraform-iac/template-env-promotion.md](templates/terraform-iac/template-env-promotion.md) - Environment promotion strategies
+- [assets/terraform-iac/template-iac-terraform.md](assets/terraform-iac/template-iac-terraform.md) - Infrastructure as Code patterns
+- [assets/terraform-iac/template-module.md](assets/terraform-iac/template-module.md) - Reusable Terraform modules
+- [assets/terraform-iac/template-env-promotion.md](assets/terraform-iac/template-env-promotion.md) - Environment promotion strategies
 
 ### CI/CD Pipelines
-- [templates/cicd-pipelines/template-ci-cd.md](templates/cicd-pipelines/template-ci-cd.md) - General CI/CD patterns
-- [templates/cicd-pipelines/template-github-actions.md](templates/cicd-pipelines/template-github-actions.md) - GitHub Actions workflows
-- [templates/cicd-pipelines/template-gitops.md](templates/cicd-pipelines/template-gitops.md) - GitOps deployment patterns
-- [templates/cicd-pipelines/template-release-safety.md](templates/cicd-pipelines/template-release-safety.md) - Safe release practices
+- [assets/cicd-pipelines/template-ci-cd.md](assets/cicd-pipelines/template-ci-cd.md) - General CI/CD patterns
+- [assets/cicd-pipelines/template-github-actions.md](assets/cicd-pipelines/template-github-actions.md) - GitHub Actions workflows
+- [assets/cicd-pipelines/template-gitops.md](assets/cicd-pipelines/template-gitops.md) - GitOps deployment patterns
+- [assets/cicd-pipelines/template-release-safety.md](assets/cicd-pipelines/template-release-safety.md) - Safe release practices
 
 ### Monitoring & Observability
-- [templates/monitoring-observability/template-slo.md](templates/monitoring-observability/template-slo.md) - Service level objectives
-- [templates/monitoring-observability/template-alert-rules.md](templates/monitoring-observability/template-alert-rules.md) - Alert configuration
-- [templates/monitoring-observability/template-observability-slo.md](templates/monitoring-observability/template-observability-slo.md) - Observability patterns
-- [templates/monitoring-observability/template-loadtest-perf.md](templates/monitoring-observability/template-loadtest-perf.md) - Load testing and performance
+- [assets/monitoring-observability/template-slo.md](assets/monitoring-observability/template-slo.md) - Service level objectives
+- [assets/monitoring-observability/template-alert-rules.md](assets/monitoring-observability/template-alert-rules.md) - Alert configuration
+- [assets/monitoring-observability/template-observability-slo.md](assets/monitoring-observability/template-observability-slo.md) - Observability patterns
+- [assets/monitoring-observability/template-loadtest-perf.md](assets/monitoring-observability/template-loadtest-perf.md) - Load testing and performance
 
 ### Incident Response
-- [templates/incident-response/template-postmortem.md](templates/incident-response/template-postmortem.md) - Incident postmortems
-- [templates/incident-response/template-runbook-starter.md](templates/incident-response/template-runbook-starter.md) - Runbook starter template
-- [templates/incident-response/template-incident-comm.md](templates/incident-response/template-incident-comm.md) - Incident communication
-- [templates/incident-response/template-incident-response.md](templates/incident-response/template-incident-response.md) - Incident response procedures
+- [assets/incident-response/template-postmortem.md](assets/incident-response/template-postmortem.md) - Incident postmortems
+- [assets/incident-response/template-runbook-starter.md](assets/incident-response/template-runbook-starter.md) - Runbook starter template
+- [assets/incident-response/template-incident-comm.md](assets/incident-response/template-incident-comm.md) - Incident communication
+- [assets/incident-response/template-incident-response.md](assets/incident-response/template-incident-response.md) - Incident response procedures
 
 ### Security
-- [templates/security/template-security-hardening.md](templates/security/template-security-hardening.md) - Security hardening checklists
+- [assets/security/template-security-hardening.md](assets/security/template-security-hardening.md) - Security hardening checklists
 
 ---
 
 ## Navigation
 
 **Resources**
-- [resources/operational-patterns.md](resources/operational-patterns.md)
-- [resources/sre-incident-management.md](resources/sre-incident-management.md)
-- [resources/devops-best-practices.md](resources/devops-best-practices.md)
-- [resources/platform-engineering-patterns.md](resources/platform-engineering-patterns.md)
-- [resources/gitops-workflows.md](resources/gitops-workflows.md)
+- [references/operational-patterns.md](references/operational-patterns.md)
+- [references/sre-incident-management.md](references/sre-incident-management.md)
+- [references/devops-best-practices.md](references/devops-best-practices.md)
+- [references/platform-engineering-patterns.md](references/platform-engineering-patterns.md)
+- [references/gitops-workflows.md](references/gitops-workflows.md)
 
 **Shared Utilities** (Centralized patterns — extract, don't duplicate)
 - [../software-clean-code-standard/utilities/config-validation.md](../software-clean-code-standard/utilities/config-validation.md) — Zod 3.24+, secrets management (Vault, 1Password, Doppler)
@@ -186,37 +187,37 @@ Production templates organized by tech stack (27 templates total):
 - [../software-clean-code-standard/utilities/logging-utilities.md](../software-clean-code-standard/utilities/logging-utilities.md) — pino v9 + OpenTelemetry integration
 - [../software-clean-code-standard/utilities/observability-utilities.md](../software-clean-code-standard/utilities/observability-utilities.md) — OpenTelemetry SDK, tracing, metrics
 - [../software-clean-code-standard/utilities/testing-utilities.md](../software-clean-code-standard/utilities/testing-utilities.md) — Test factories, fixtures, mocks
-- [../software-clean-code-standard/resources/clean-code-standard.md](../software-clean-code-standard/resources/clean-code-standard.md) — Canonical clean code rules (`CC-*`) for citation
+- [../software-clean-code-standard/references/clean-code-standard.md](../software-clean-code-standard/references/clean-code-standard.md) — Canonical clean code rules (`CC-*`) for citation
 
 **Templates**
-- [templates/incident-response/template-postmortem.md](templates/incident-response/template-postmortem.md)
-- [templates/incident-response/template-runbook-starter.md](templates/incident-response/template-runbook-starter.md)
-- [templates/incident-response/template-incident-comm.md](templates/incident-response/template-incident-comm.md)
-- [templates/incident-response/template-incident-response.md](templates/incident-response/template-incident-response.md)
-- [templates/docker/template-docker-ops.md](templates/docker/template-docker-ops.md)
-- [templates/security/template-security-hardening.md](templates/security/template-security-hardening.md)
-- [templates/azure/template-azure-ops.md](templates/azure/template-azure-ops.md)
-- [templates/gcp/template-gcp-terraform.md](templates/gcp/template-gcp-terraform.md)
-- [templates/gcp/template-gcp-ops.md](templates/gcp/template-gcp-ops.md)
-- [templates/cicd-pipelines/template-release-safety.md](templates/cicd-pipelines/template-release-safety.md)
-- [templates/cicd-pipelines/template-gitops.md](templates/cicd-pipelines/template-gitops.md)
-- [templates/cicd-pipelines/template-ci-cd.md](templates/cicd-pipelines/template-ci-cd.md)
-- [templates/cicd-pipelines/template-github-actions.md](templates/cicd-pipelines/template-github-actions.md)
-- [templates/kafka/template-kafka-ops.md](templates/kafka/template-kafka-ops.md)
-- [templates/aws/template-aws-terraform.md](templates/aws/template-aws-terraform.md)
-- [templates/aws/template-aws-ops.md](templates/aws/template-aws-ops.md)
-- [templates/aws/template-cost-optimization.md](templates/aws/template-cost-optimization.md)
-- [templates/monitoring-observability/template-slo.md](templates/monitoring-observability/template-slo.md)
-- [templates/monitoring-observability/template-loadtest-perf.md](templates/monitoring-observability/template-loadtest-perf.md)
-- [templates/monitoring-observability/template-alert-rules.md](templates/monitoring-observability/template-alert-rules.md)
-- [templates/monitoring-observability/template-observability-slo.md](templates/monitoring-observability/template-observability-slo.md)
-- [templates/kubernetes/template-k8s-deploy.yaml](templates/kubernetes/template-k8s-deploy.yaml)
-- [templates/kubernetes/template-platform-api.md](templates/kubernetes/template-platform-api.md)
-- [templates/kubernetes/template-kubernetes-ops.md](templates/kubernetes/template-kubernetes-ops.md)
-- [templates/kubernetes/template-ha-dr.md](templates/kubernetes/template-ha-dr.md)
-- [templates/terraform-iac/template-env-promotion.md](templates/terraform-iac/template-env-promotion.md)
-- [templates/terraform-iac/template-iac-terraform.md](templates/terraform-iac/template-iac-terraform.md)
-- [templates/terraform-iac/template-module.md](templates/terraform-iac/template-module.md)
+- [assets/incident-response/template-postmortem.md](assets/incident-response/template-postmortem.md)
+- [assets/incident-response/template-runbook-starter.md](assets/incident-response/template-runbook-starter.md)
+- [assets/incident-response/template-incident-comm.md](assets/incident-response/template-incident-comm.md)
+- [assets/incident-response/template-incident-response.md](assets/incident-response/template-incident-response.md)
+- [assets/docker/template-docker-ops.md](assets/docker/template-docker-ops.md)
+- [assets/security/template-security-hardening.md](assets/security/template-security-hardening.md)
+- [assets/azure/template-azure-ops.md](assets/azure/template-azure-ops.md)
+- [assets/gcp/template-gcp-terraform.md](assets/gcp/template-gcp-terraform.md)
+- [assets/gcp/template-gcp-ops.md](assets/gcp/template-gcp-ops.md)
+- [assets/cicd-pipelines/template-release-safety.md](assets/cicd-pipelines/template-release-safety.md)
+- [assets/cicd-pipelines/template-gitops.md](assets/cicd-pipelines/template-gitops.md)
+- [assets/cicd-pipelines/template-ci-cd.md](assets/cicd-pipelines/template-ci-cd.md)
+- [assets/cicd-pipelines/template-github-actions.md](assets/cicd-pipelines/template-github-actions.md)
+- [assets/kafka/template-kafka-ops.md](assets/kafka/template-kafka-ops.md)
+- [assets/aws/template-aws-terraform.md](assets/aws/template-aws-terraform.md)
+- [assets/aws/template-aws-ops.md](assets/aws/template-aws-ops.md)
+- [assets/aws/template-cost-optimization.md](assets/aws/template-cost-optimization.md)
+- [assets/monitoring-observability/template-slo.md](assets/monitoring-observability/template-slo.md)
+- [assets/monitoring-observability/template-loadtest-perf.md](assets/monitoring-observability/template-loadtest-perf.md)
+- [assets/monitoring-observability/template-alert-rules.md](assets/monitoring-observability/template-alert-rules.md)
+- [assets/monitoring-observability/template-observability-slo.md](assets/monitoring-observability/template-observability-slo.md)
+- [assets/kubernetes/template-k8s-deploy.yaml](assets/kubernetes/template-k8s-deploy.yaml)
+- [assets/kubernetes/template-platform-api.md](assets/kubernetes/template-platform-api.md)
+- [assets/kubernetes/template-kubernetes-ops.md](assets/kubernetes/template-kubernetes-ops.md)
+- [assets/kubernetes/template-ha-dr.md](assets/kubernetes/template-ha-dr.md)
+- [assets/terraform-iac/template-env-promotion.md](assets/terraform-iac/template-env-promotion.md)
+- [assets/terraform-iac/template-iac-terraform.md](assets/terraform-iac/template-iac-terraform.md)
+- [assets/terraform-iac/template-module.md](assets/terraform-iac/template-module.md)
 
 **Data**
 - [data/sources.json](data/sources.json) — Curated external references
@@ -247,7 +248,7 @@ Production templates organized by tech stack (27 templates total):
 
 ## Cost Governance & Capacity Planning
 
-**[templates/cost-governance/template-cost-governance.md](templates/cost-governance/template-cost-governance.md)** — Production cost control for cloud infrastructure.
+**[assets/cost-governance/template-cost-governance.md](assets/cost-governance/template-cost-governance.md)** — Production cost control for cloud infrastructure.
 
 ### Key Sections
 
@@ -299,22 +300,38 @@ Production templates organized by tech stack (27 templates total):
 
 ---
 
-## Optional: AI/Automation
+## Optional: AI/Automation (AIOps)
 
 > **Note**: AI assists with analysis but cost/incident decisions need human approval.
+> **2026 Trend**: Gartner projects 60%+ of large enterprises will adopt AIOps-powered self-healing systems by 2026.
 
-### Automated Operations
+### AIOps Capabilities (2026)
 
+**Self-Healing Systems:**
+- AI-powered anomaly detection to predict failures before they happen
+- Automated remediation flows that trigger rollbacks or config changes
+- Intelligent test selection and risk-based change scoring in CI/CD
+- Causal graph analysis for instant root cause identification
+
+**Automated Operations:**
 - Unused resource detection and notification
 - Right-sizing recommendation generation
-- Alert summarization and correlation
-- Runbook step suggestions
+- Alert summarization and correlation (reduce noise by 90%+)
+- Runbook step suggestions and automated execution
 
 ### AI-Assisted Analysis
 
-- Cost trend prediction
-- Incident pattern identification
+- Cost trend prediction and anomaly detection
+- Incident pattern identification across services
 - Post-mortem theme extraction
+- Capacity planning predictions
+
+### Platform Engineering + AI
+
+**"Shift Down" Paradigm (2026)**: Instead of "shifting left" (pushing toil to developers), platform teams now embed AI capabilities directly into the platform:
+- AI-ready Internal Developer Platforms (94% view AI as critical)
+- Multi-agent orchestration for code generation, security validation, deployment
+- Intelligent defaults and guardrails that scale across teams
 
 ### Bounded Claims
 
@@ -322,12 +339,13 @@ Production templates organized by tech stack (27 templates total):
 - Automated deletions require approval workflow
 - Cost predictions are estimates, not guarantees
 - Runbook suggestions need SRE verification
+- Self-healing actions should have human-defined policies and audit trails
 
 ---
 
 ## Operational Deep Dives
 
-See [resources/operational-patterns.md](resources/operational-patterns.md) for:
+See [references/operational-patterns.md](references/operational-patterns.md) for:
 - Platform engineering blueprints and GitOps reconciliation checklists
 - DevSecOps CI/CD gates, SLO/SLI playbooks, and rollout verification steps
 - Observability patterns (eBPF), incident noise reduction, and reliability drills
@@ -336,13 +354,13 @@ See [resources/operational-patterns.md](resources/operational-patterns.md) for:
 
 ## External Resources
 
-See [data/sources.json](data/sources.json) for 45+ curated sources organized by tech stack:
+See [data/sources.json](data/sources.json) for 55+ curated sources organized by tech stack:
 - **Cloud Platforms**: AWS, GCP, Azure documentation and best practices
 - **Container Orchestration**: Kubernetes, Helm, Kustomize, Docker
-- **Infrastructure as Code**: Terraform, CloudFormation, ARM templates
+- **Infrastructure as Code**: Terraform, OpenTofu, Pulumi, CloudFormation, ARM templates
 - **CI/CD & GitOps**: GitHub Actions, GitLab CI, Jenkins, ArgoCD, FluxCD
 - **Streaming**: Apache Kafka, Confluent, Strimzi
-- **Monitoring**: Prometheus, Grafana, Datadog, OpenTelemetry, Jaeger
+- **Monitoring**: Prometheus, Grafana, Datadog, OpenTelemetry, Jaeger, Cilium/Hubble, Tetragon
 - **SRE**: Google SRE books, incident response patterns
 - **Security**: OWASP DevSecOps, CIS Benchmarks, Trivy, Falco
 - **Tools**: kubectl, k9s, stern, Cosign, Syft, Terragrunt
@@ -350,3 +368,46 @@ See [data/sources.json](data/sources.json) for 45+ curated sources organized by 
 ---
 
 *Use this skill as a hub for safe, modern, and production-grade DevOps patterns. All templates and patterns are operational—no theory or book summaries.*
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about DevOps, platform engineering, or cloud infrastructure, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best tool for [Kubernetes/IaC/CI-CD/monitoring]?"
+- "What should I use for [container orchestration/GitOps/observability]?"
+- "What's the latest in DevOps/platform engineering?"
+- "Current best practices for [Terraform/ArgoCD/Prometheus]?"
+- "Is [tool/approach] still relevant in 2026?"
+- "[Kubernetes] vs [alternative]?" or "[ArgoCD] vs [FluxCD]?"
+- "Best cloud provider for [use case]?"
+- "What orchestration/monitoring tool should I use?"
+
+### Required Searches
+
+1. Search: `"DevOps best practices 2026"`
+2. Search: `"[Kubernetes/Terraform/ArgoCD] vs alternatives 2026"`
+3. Search: `"platform engineering trends January 2026"`
+4. Search: `"[specific tool] new releases 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What tools/approaches are popular NOW (not 6 months ago)
+- **Emerging trends**: New tools, patterns, or practices gaining traction
+- **Deprecated/declining**: Tools/approaches losing relevance or support
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- Kubernetes versions and ecosystem tools (1.33+, Cilium, Gateway API)
+- Infrastructure as Code (Terraform, OpenTofu, Pulumi, CDK)
+- GitOps platforms (ArgoCD, FluxCD, Codefresh)
+- Observability stacks (OpenTelemetry, Grafana stack, Datadog)
+- Platform engineering tools (Backstage, Port, Kratix)
+- CI/CD platforms (GitHub Actions, GitLab CI, Dagger)
+- Cloud-native security (Falco, Trivy, policy engines)

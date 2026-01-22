@@ -1,6 +1,6 @@
 ---
 name: software-ui-ux-design
-description: UI/UX design principles, accessibility standards, resilient state patterns, platform constraints, and design system practices for modern software interfaces.
+description: Use when designing UI interfaces, conducting accessibility audits (WCAG 2.2), building design systems, or improving user flows. Covers platform guidelines (iOS/Android/Web/Desktop), state patterns, CRO, demographic-inclusive design, and AI design tools.
 ---
 
 # Software UI/UX Design Skill — Quick Reference
@@ -9,11 +9,13 @@ Use this skill when the primary focus is designing intuitive, accessible, and us
 
 ---
 
-## Dec 2025 Baselines (Core)
+## Jan 2026 Baselines (Core)
 
 - **Accessibility baseline**: WCAG 2.2 Level AA (W3C Recommendation, 12 Dec 2024) https://www.w3.org/TR/WCAG22/
+- **US regulatory note**: ADA Title II requires WCAG 2.1 AA for state/local government sites by 24 April 2026 https://www.ada.gov/resources/web-guidance/
 - **EU shipping note**: European Accessibility Act applies to covered products/services after 28 Jun 2025 (Directive (EU) 2019/882) https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019L0882
 - **Web performance UX baseline**: Core Web Vitals stable set is `LCP` (≤2.5s), `INP` (≤200ms), `CLS` (≤0.1) https://web.dev/vitals/
+- **Sustainable design baseline**: W3C Web Sustainability Guidelines (WSG) 1.0 — 93 guidelines for sustainable digital design (W3C Note, April 2026) https://www.w3.org/TR/web-sustainability-guidelines/
 - **Design system interoperability**: Prefer token-first foundations aligned to Design Tokens Community Group Technical Reports 2025.10 https://tr.designtokens.org/
 - **Platform constraints**: Use Apple HIG and Material 3 as primary sources: https://developer.apple.com/design/human-interface-guidelines/ and https://m3.material.io/
 
@@ -25,12 +27,23 @@ Invoke when users ask for:
 - Usability evaluation and improvement recommendations
 - Accessibility compliance (WCAG, ARIA)
 - Design system setup and component patterns
-- User-centered design methodologies
 - Information architecture and navigation design
 - Mobile-first and responsive design patterns
 - Form design and input validation UX
 - **Pattern selection based on user pain points** (from `software-ux-research` analysis)
 - **UI fixes for feedback-identified issues** (navigation, onboarding, performance, forms)
+- **Demographic-specific design** (seniors, children, cultural, neurodiversity)
+- **UI generation from scratch** (wireframes to handoff)
+- **Conversion rate optimization** (CRO audits, A/B testing)
+- **AI-assisted design workflows** (Figma AI, v0, Midjourney)
+
+## When NOT to Use This Skill
+
+- **User research planning/synthesis** → Use [software-ux-research](../software-ux-research/SKILL.md) first
+- **Frontend code implementation** → Use [software-frontend](../software-frontend/SKILL.md)
+- **Mobile platform-specific development** → Use [software-mobile](../software-mobile/SKILL.md)
+- **Product strategy/roadmap decisions** → Use [product-management](../product-management/SKILL.md)
+- **Visual/graphic design** → This skill focuses on interaction design, not brand identity
 
 ---
 
@@ -42,6 +55,20 @@ Default outputs (pick what the user asked for):
 - UX review checklist → prioritized issues → recommendations + acceptance criteria
 - Flow + state spec (happy path + edge/error/empty/loading/offline/degraded) with acceptance criteria
 - Design system delta spec (tokens + components + states) with governance-ready contribution plan
+
+## UX Impact Metrics
+
+| Activity | Proxy Metric | Value Calculation |
+|----------|--------------|-------------------|
+| Usability finding | Prevented dev rework | Hours saved × $150/hr |
+| Heuristic evaluation | Early defect detection | Defects × Cost-to-fix-later |
+| A/B test result | Improved conversion | ΔConversion × Traffic × LTV |
+| Accessibility fix | Compliance + reach | Avoided lawsuit + 15% audience |
+
+**Quick ROI benchmarks**:
+- 1 usability fix preventing 40hr rework = **$6,000**
+- 0.5% conversion lift on 100k visitors × $50 LTV = **$25,000/mo**
+- Task success rate = (Completed / Attempted) × 100
 
 ## Core Interaction Design
 
@@ -63,13 +90,22 @@ Default outputs (pick what the user asked for):
 Design challenge: [Feature Type]
     ├─ Need to decide what to build? → Use software-ux-research first
     ├─ Improving an existing UI?
-    │   ├─ Usability issues? → Heuristic review (resources/nielsen-heuristics.md)
-    │   ├─ Accessibility gaps? → WCAG 2.2 audit (resources/wcag-accessibility.md)
-    │   └─ Inconsistency? → Design system alignment (resources/design-systems.md)
+    │   ├─ Usability issues? → Heuristic review (references/nielsen-heuristics.md)
+    │   ├─ Accessibility gaps? → WCAG 2.2 audit (references/wcag-accessibility.md)
+    │   ├─ Inconsistency? → Design system alignment (references/design-systems.md)
+    │   └─ Conversion issues? → CRO audit (references/cro-framework.md)
+    ├─ Building a new UI from scratch?
+    │   ├─ Full workflow → references/ui-generation-workflows.md
+    │   ├─ Use AI tools? → references/ai-design-tools-2025.md
+    │   └─ Spec template → assets/ui-generation/full-ui-spec.md
     ├─ Building a new flow?
     │   ├─ Define states → loading/empty/error/offline/degraded
     │   ├─ Define recovery → retry/cancel/undo/support
     │   └─ Define telemetry → success, error, time, abandonment
+    ├─ Designing for specific demographics?
+    │   ├─ Age groups (seniors, children, teens) → references/demographic-inclusive-design.md
+    │   ├─ Cultural/regional (RTL, Asia, MENA) → references/cultural-design-patterns.md
+    │   └─ Neurodiversity (ADHD, autism, dyslexia) → references/neurodiversity-design.md
     └─ Platform constraints?
         ├─ Web → semantics + focus + reflow
         ├─ iOS → system navigation + Dynamic Type
@@ -104,60 +140,52 @@ Design challenge: [Feature Type]
 
 | Do | Avoid | Rationale |
 |----|-------|-----------|
-| Use semantic HTML first | “div soup” interaction | A11y and reliability (WAI-ARIA APG) https://www.w3.org/WAI/ARIA/apg/ |
-| ARIA only when needed | ARIA overrides for native controls | “No ARIA is better than bad ARIA” (WAI-ARIA APG) https://www.w3.org/WAI/ARIA/apg/ |
-| Manage focus on SPA navigation | Focus resets to `<body>` | Preserves context (WCAG 2.4.3/2.4.7) https://www.w3.org/TR/WCAG22/ |
-| Visible focus + non-obscured focus | Focus hidden by sticky UI | WCAG 2.4.7 + 2.4.11 https://www.w3.org/TR/WCAG22/#focus-not-obscured-minimum |
-| Reflow at 320 CSS px | Fixed-width layouts | WCAG 1.4.10 Reflow https://www.w3.org/TR/WCAG22/#reflow |
-| Provide non-drag alternatives | Drag-only interactions | WCAG 2.5.7 https://www.w3.org/TR/WCAG22/#dragging-movements |
-| Minimum target size | Tiny hit targets | WCAG 2.5.8 https://www.w3.org/TR/WCAG22/#target-size-minimum |
+| Semantic HTML first | "div soup" | A11y + reliability (WAI-ARIA APG) |
+| ARIA only when needed | ARIA on native controls | "No ARIA > bad ARIA" |
+| Manage focus on SPA nav | Focus resets to body | WCAG 2.4.3/2.4.7 |
+| Visible focus, non-obscured | Focus hidden by sticky UI | WCAG 2.4.7 + 2.4.11 |
+| Reflow at 320 CSS px | Fixed-width layouts | WCAG 1.4.10 |
+| Non-drag alternatives | Drag-only | WCAG 2.5.7 |
+| ≥24px target size | Tiny hit targets | WCAG 2.5.8 |
 
-**Browser-Specific Gotchas:**
-
-- Safari: `datetime-local` input limited; custom date picker needed
-- Firefox: `:focus-visible` support differs; test across browsers
-- Chrome: `autocomplete` behavior inconsistent with custom forms
+Browser gotchas: Safari datetime-local limited; Firefox :focus-visible differs; Chrome autocomplete inconsistent.
 
 ### iOS / iPadOS (Apple HIG)
 
-| Do | Avoid | Rationale |
-|----|-------|-----------|
-| Use system navigation patterns (tab bar, navigation bar) | Custom navigation paradigms | User muscle memory |
-| Support Dynamic Type (accessibility text scaling) | Fixed font sizes | iOS accessibility requirement |
-| Implement pull-to-refresh for list views | Custom refresh gestures | iOS convention since 2011 |
-| Use SF Symbols for icons | Custom icon sets for standard actions | System consistency |
-| Support dark mode and system materials | Light-only designs | Platform coherence |
-| Handle Safe Areas (notch, Dynamic Island) | Assume full-screen content | Content occlusion |
-| Prefer system controls for text entry, pickers, permissions | Custom re-implementations | Better a11y and IME behavior |
+| Do | Avoid |
+|----|-------|
+| System nav (tab bar, nav bar) | Custom nav paradigms |
+| Dynamic Type support | Fixed font sizes |
+| Pull-to-refresh for lists | Custom refresh gestures |
+| SF Symbols for icons | Custom icons for standard actions |
+| Dark mode + system materials | Light-only |
+| Handle Safe Areas | Assume full-screen |
+| System controls for input | Custom re-implementations |
 
 ### Android (Material Design 3)
 
-| Do | Avoid | Rationale |
-|----|-------|-----------|
-| Use Material 3 components (FAB, bottom sheets, chips) | iOS-style patterns (tab bar at bottom for primary nav) | Platform identity |
-| Support Dynamic Color (Material You) | Hardcoded brand colors only | Android 12+ personalization |
-| Implement edge-to-edge content | System bar padding hacks | Modern Android aesthetic |
-| Use navigation rail on tablets | Phone UI stretched to tablet | Large screen guidance https://developer.android.com/large-screens |
-| Handle back gesture (predictive back) | Block system back navigation | Predictive back gesture https://developer.android.com/guide/navigation/predictive-back-gesture |
-| Support split-screen/foldables | Assume single-window only | Samsung Fold, Pixel Fold |
+| Do | Avoid |
+|----|-------|
+| Material 3 components | iOS-style patterns |
+| Dynamic Color (Material You) | Hardcoded brand colors |
+| Edge-to-edge content | System bar padding hacks |
+| Navigation rail on tablets | Phone UI stretched |
+| Handle predictive back | Block system back |
+| Support split-screen/foldables | Single-window only |
 
-**Android-Specific:**
-
-- Test on Samsung One UI (modified Material)
-- Handle varying display densities (mdpi to xxxhdpi)
-- Support both gesture and 3-button navigation
+Android notes: Test Samsung One UI, handle mdpi-xxxhdpi, support gesture + 3-button nav.
 
 ### Desktop (Windows/macOS/Linux)
 
-| Do | Avoid | Rationale |
-|----|-------|-----------|
-| Support keyboard shortcuts with discoverability | Mouse-only interactions | Power user efficiency |
-| Implement proper window resize behavior | Fixed-size windows | Desktop user expectation |
-| Support multi-window/multi-monitor | Assume single viewport | Desktop workflow |
-| Provide hover states for all interactive elements | Touch-first design without hover | Desktop has hover capability |
-| Support right-click context menus | Hamburger menus for all actions | Desktop convention |
-| Handle high-DPI displays (Retina, 4K) | 1x assets only | Blurry icons/images |
-| Implement selection models (click, shift-click, cmd/ctrl-click) | Single-select only in lists | Desktop productivity patterns |
+| Do | Avoid |
+|----|-------|
+| Keyboard shortcuts + discoverability | Mouse-only |
+| Proper window resize | Fixed-size windows |
+| Multi-window/monitor support | Single viewport |
+| Hover states for interactives | Touch-first without hover |
+| Right-click context menus | Hamburger for all actions |
+| High-DPI support (Retina, 4K) | 1x assets only |
+| Selection models (click, shift, ctrl) | Single-select only |
 
 ---
 
@@ -185,13 +213,7 @@ Data fetch initiated
     └─ Long-running → progress + cancel + background option
 ```
 
-### Empty State Checklist
-
-- [ ] Illustration/icon relevant to context (not generic)
-- [ ] Clear headline explaining the state
-- [ ] Supporting text with next steps
-- [ ] Primary CTA to resolve empty state
-- [ ] Avoid "No data found" without guidance
+**Empty states**: Context-relevant illustration + headline + next steps + CTA. Never "No data found" without guidance.
 
 ### Error State Severity Levels
 
@@ -436,97 +458,69 @@ window.matchMedia('(pointer: coarse)').addEventListener('change', (e) => {
 
 ---
 
-## Optional: AI/Automation UX
+## AI/Automation UX (Optional)
 
-> **Scope Note**: This section applies ONLY to products with AI/ML features (chatbots, recommendations, generative AI, automation). Skip if building traditional software.
-
-### Transparency Principles
-
-| Principle | Implementation | Anti-Pattern |
-|-----------|----------------|--------------|
-| **System status** | Show when AI is processing, queuing, or generating | Hidden inference without feedback |
-| **Source attribution** | Cite sources for AI-generated content | Presenting AI output as absolute truth |
-| **Confidence cues** | Visual distinction for uncertain/confident outputs | Equal styling for all confidence levels |
-| **Model limitations** | Disclose known limitations | Implying omniscience |
-
-### User Control Patterns
-
-| Control | Implementation |
-|---------|----------------|
-| **Stop/Cancel** | Interrupt generation mid-stream |
-| **Regenerate** | Request alternative output |
-| **Edit** | Modify AI output before accepting |
-| **Undo** | Reverse AI-applied changes |
-| **Override** | Human decision supersedes AI suggestion |
-| **Disable** | Turn off AI features entirely |
-
-### Trust Calibration
-
-- Show confidence scores where meaningful (not arbitrary percentages)
-- Use appropriate hedging language ("likely", "suggests", "might")
-- Distinguish facts from inferences
-- Provide "Why this recommendation?" explanations
-- Allow feedback on AI quality (thumbs up/down, ratings)
-
-### Anti-Patterns to Avoid
-
-| Pattern | Problem | Alternative |
-|---------|---------|-------------|
-| Anthropomorphizing | False expectations of understanding | Describe capabilities accurately |
-| "AI says so" | Removes human accountability | Human reviews AI recommendations |
-| False certainty | Overconfidence in uncertain outputs | Communicate uncertainty appropriately |
-| Hidden AI | User unaware AI is involved | Disclose AI involvement |
+For products with AI/ML features (chatbots, recommendations, generative AI), see [references/ai-automation-ux.md](references/ai-automation-ux.md) — covers transparency, user control patterns, trust calibration, and anti-patterns.
 
 ---
 
 ## Navigation
 
-### Resources (Best Practices & Guides)
+### References
 
-- [resources/frontend-aesthetics-2025.md](resources/frontend-aesthetics-2025.md) — Distinctive visual systems (typography, color, spacing, motion) with implementation notes
-- [resources/design-systems.md](resources/design-systems.md) — Comprehensive design system implementation guide (foundations, components, patterns)
-- [resources/component-library-comparison.md](resources/component-library-comparison.md) — 2025 UI library comparison (MUI, shadcn/ui, Ant Design, Chakra UI, Radix UI, React Aria, Mantine, Headless UI)
-- [resources/modern-ux-patterns-2024.md](resources/modern-ux-patterns-2024.md) — Modern UX patterns (skeleton screens, optimistic UI, progressive disclosure, micro-interactions)
-- [resources/nielsen-heuristics.md](resources/nielsen-heuristics.md) — Heuristic evaluation guide with practical examples
-- [resources/wcag-accessibility.md](resources/wcag-accessibility.md) — WCAG 2.2 success criteria and implementation guide
-- [data/sources.json](data/sources.json) — Curated external references (accessibility, platform guidelines, tokens, performance, design systems)
+| Category | File |
+|----------|------|
+| Visual design | [frontend-aesthetics-2025.md](references/frontend-aesthetics-2025.md) |
+| Design systems | [design-systems.md](references/design-systems.md) |
+| Component libraries | [component-library-comparison.md](references/component-library-comparison.md) |
+| UX patterns | [modern-ux-patterns-2024.md](references/modern-ux-patterns-2024.md) |
+| Heuristics | [nielsen-heuristics.md](references/nielsen-heuristics.md) |
+| Accessibility | [wcag-accessibility.md](references/wcag-accessibility.md) |
+| Age-specific UX | [demographic-inclusive-design.md](references/demographic-inclusive-design.md) |
+| Neurodiversity | [neurodiversity-design.md](references/neurodiversity-design.md) |
+| Cultural patterns | [cultural-design-patterns.md](references/cultural-design-patterns.md) |
+| UI generation | [ui-generation-workflows.md](references/ui-generation-workflows.md) |
+| AI design tools | [ai-design-tools-2025.md](references/ai-design-tools-2025.md) |
+| CRO | [cro-framework.md](references/cro-framework.md) |
 
-### UI Pattern Inspiration (External)
+### Templates
 
-For real-world UI patterns and competitive research:
+| Template | File |
+|----------|------|
+| shadcn/ui setup | [template-shadcn-ui.md](assets/component-libraries/template-shadcn-ui.md) |
+| MUI setup | [template-mui-material-ui.md](assets/component-libraries/template-mui-material-ui.md) |
+| Micro-interactions | [template-micro-interactions.md](assets/interaction-patterns/template-micro-interactions.md) |
+| Design brief | [design-brief.md](assets/design-brief.md) |
+| UX review | [ux-review-checklist.md](assets/ux-review-checklist.md) |
+| UI spec | [full-ui-spec.md](assets/ui-generation/full-ui-spec.md) |
+| CRO audit | [cro-audit-template.md](assets/audits/cro-audit-template.md) |
 
-- **[Mobbin](https://mobbin.com/)** — 300k+ mobile/web screenshots, searchable by flow type, screen type, UI element (recommended for pattern research)
-- **[Page Flows](https://pageflows.com/)** — User flow recordings from top apps
-- **[Refero Design](https://refero.design/)** — Web design references by page type
+### UI Pattern Inspiration
 
-### Templates by Category
+- [Mobbin](https://mobbin.com/) — 300k+ mobile/web screenshots
+- [Page Flows](https://pageflows.com/) — User flow recordings
+- [Refero Design](https://refero.design/) — Web design references
 
-**Component Libraries (Implementation Guides):**
+### Related Skills
 
-- [templates/component-libraries/template-shadcn-ui.md](templates/component-libraries/template-shadcn-ui.md) — shadcn/ui with Radix UI + Tailwind CSS (copy-paste components, full ownership)
-- [templates/component-libraries/template-mui-material-ui.md](templates/component-libraries/template-mui-material-ui.md) — Material-UI (Google Material Design, enterprise-grade, 95k+ stars)
+- [software-ux-research](../software-ux-research/SKILL.md) — Research (use FIRST)
+- [software-frontend](../software-frontend/SKILL.md) — Implementation
+- [software-mobile](../software-mobile/SKILL.md) — Mobile patterns
+- [product-management](../product-management/SKILL.md) — Strategy
+- [qa-testing-strategy](../qa-testing-strategy/SKILL.md) — Testing
 
-**Interaction Patterns (Micro-interactions & Animations):**
+---
 
-- [templates/interaction-patterns/template-micro-interactions.md](templates/interaction-patterns/template-micro-interactions.md) — 2024 micro-interaction patterns (buttons, forms, loading states, toasts, drag-and-drop)
+## Trend Awareness Protocol
 
-**Design & Planning:**
+**WebSearch required** for: "best design system for...", "what component library...", "latest UI/UX trends", "current best practices for..."
 
-- [templates/design-brief.md](templates/design-brief.md) — Single-source design brief (goals, IA, accessibility, experimentation)
-- [templates/ux-review-checklist.md](templates/ux-review-checklist.md) — Heuristic + accessibility review checklist
-- Shared checklist: [../software-clean-code-standard/templates/checklists/ux-design-review-checklist.md](../software-clean-code-standard/templates/checklists/ux-design-review-checklist.md) — Product-agnostic UX design review checklist (core + optional AI)
+Search: `"UI UX design trends 2026"`, `"design system best practices 2026"`, `"WCAG updates 2026"`
 
-### Related Skills (Cross-Functional)
-
-- [../software-ux-research/SKILL.md](../software-ux-research/SKILL.md) — **Research sibling**: Use FIRST for feedback analysis, pain point extraction, competitive analysis → feeds pattern selection here
-- [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Frontend implementation (Next.js 16, React, TypeScript, Tailwind CSS, shadcn/ui)
-- [../software-mobile/SKILL.md](../software-mobile/SKILL.md) — Mobile UX patterns (iOS Swift, Android Kotlin, platform conventions)
-- [../product-management/SKILL.md](../product-management/SKILL.md) — Product strategy, user research, positioning
-- [../qa-testing-strategy/SKILL.md](../qa-testing-strategy/SKILL.md) — UI/E2E testing, visual regression, accessibility automation
-- [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System design patterns and architecture principles
-- [../software-backend/SKILL.md](../software-backend/SKILL.md) — API design for optimal UX (REST, GraphQL, real-time)
+Report: Current landscape → Emerging trends → Deprecated patterns → Recommendation
 
 ---
 
 ## Operational Playbooks
-- [resources/operational-playbook.md](resources/operational-playbook.md) — Design themes, accessibility heuristics, mobile-first guidance, and decision frameworks
+
+- [references/operational-playbook.md](references/operational-playbook.md) — Design themes, accessibility heuristics, mobile-first guidance, decision frameworks

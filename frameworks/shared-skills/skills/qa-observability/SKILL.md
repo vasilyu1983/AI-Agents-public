@@ -130,7 +130,7 @@ User needs: [Observability Task Type]
 
 ## Navigation: Core Implementation Patterns
 
-See [resources/core-observability-patterns.md](resources/core-observability-patterns.md) for detailed implementation guides:
+See [references/core-observability-patterns.md](references/core-observability-patterns.md) for detailed implementation guides:
 
 - **OpenTelemetry End-to-End Setup** - Complete instrumentation with Node.js/Python examples
   - Three pillars of observability (logs, metrics, traces)
@@ -172,7 +172,7 @@ See [resources/core-observability-patterns.md](resources/core-observability-patt
 
 ## Navigation: Observability Maturity
 
-See [resources/observability-maturity-model.md](resources/observability-maturity-model.md) for maturity assessment:
+See [references/observability-maturity-model.md](references/observability-maturity-model.md) for maturity assessment:
 
 - **Level 1: Reactive (Firefighting)** - Manual log grepping, hours to resolve
   - Basic logging to files
@@ -206,7 +206,7 @@ See [resources/observability-maturity-model.md](resources/observability-maturity
 
 ## Navigation: Anti-Patterns & Best Practices
 
-See [resources/anti-patterns-best-practices.md](resources/anti-patterns-best-practices.md) for common mistakes:
+See [references/anti-patterns-best-practices.md](references/anti-patterns-best-practices.md) for common mistakes:
 
 **Critical Anti-Patterns:**
 
@@ -233,47 +233,47 @@ See [resources/anti-patterns-best-practices.md](resources/anti-patterns-best-pra
 
 ## Templates
 
-See [templates/](templates/) for copy-paste ready examples organized by domain and tech stack:
+See [assets/](assets/) for copy-paste ready examples organized by domain and tech stack:
 
 **QA Checklists:**
 
-- [Observability Readiness Checklist](templates/checklists/template-observability-readiness-checklist.md) - Logs/metrics/traces readiness for QA and fast debugging
+- [Observability Readiness Checklist](assets/checklists/template-observability-readiness-checklist.md) - Logs/metrics/traces readiness for QA and fast debugging
 
 **OpenTelemetry Instrumentation:**
 
-- [Node.js/Express Setup](templates/opentelemetry/nodejs/opentelemetry-nodejs-setup.md) - Auto-instrumentation, manual spans, Docker, K8s
-- [Python/Flask Setup](templates/opentelemetry/python/opentelemetry-python-setup.md) - Flask instrumentation, SQLAlchemy, deployment
+- [Node.js/Express Setup](assets/opentelemetry/nodejs/opentelemetry-nodejs-setup.md) - Auto-instrumentation, manual spans, Docker, K8s
+- [Python/Flask Setup](assets/opentelemetry/python/opentelemetry-python-setup.md) - Flask instrumentation, SQLAlchemy, deployment
 
 **Monitoring & SLO:**
 
-- [SLO YAML Template](templates/monitoring/slo/slo-definition.yaml) - Complete SLO definitions with error budgets
-- [Prometheus Alert Rules](templates/monitoring/slo/prometheus-alert-rules.yaml) - Burn rate alerts, multi-window monitoring
-- [SLO Dashboard](templates/monitoring/grafana/grafana-dashboard-slo.json) - SLI tracking, error budget visualization
-- [Unified Observability Dashboard](templates/monitoring/grafana/template-grafana-dashboard-observability.json) - Logs, metrics, traces in one view
+- [SLO YAML Template](assets/monitoring/slo/slo-definition.yaml) - Complete SLO definitions with error budgets
+- [Prometheus Alert Rules](assets/monitoring/slo/prometheus-alert-rules.yaml) - Burn rate alerts, multi-window monitoring
+- [SLO Dashboard](assets/monitoring/grafana/grafana-dashboard-slo.json) - SLI tracking, error budget visualization
+- [Unified Observability Dashboard](assets/monitoring/grafana/template-grafana-dashboard-observability.json) - Logs, metrics, traces in one view
 
 **Load Testing:**
 
-- [k6 Load Test Template](templates/load-testing/load-testing-k6.js) - Ramp-up, spike, soak test scenarios
-- [Artillery Load Test](templates/load-testing/template-load-test-artillery.yaml) - YAML configuration, multiple scenarios
+- [k6 Load Test Template](assets/load-testing/load-testing-k6.js) - Ramp-up, spike, soak test scenarios
+- [Artillery Load Test](assets/load-testing/template-load-test-artillery.yaml) - YAML configuration, multiple scenarios
 
 **Performance Optimization:**
 
-- [Lighthouse CI Configuration](templates/performance/frontend/template-lighthouse-ci.json) - Performance budgets, CI/CD integration
-- [Node.js Profiling Config](templates/performance/backend/template-nodejs-profiling-config.js) - CPU/memory profiling, leak detection
+- [Lighthouse CI Configuration](assets/performance/frontend/template-lighthouse-ci.json) - Performance budgets, CI/CD integration
+- [Node.js Profiling Config](assets/performance/backend/template-nodejs-profiling-config.js) - CPU/memory profiling, leak detection
 
 ---
 
 ## Resources
 
-See [resources/](resources/) for deep-dive operational guides:
+See [references/](references/) for deep-dive operational guides:
 
-- [Core Observability Patterns](resources/core-observability-patterns.md) - 6 implementation patterns with code examples
-- [Observability Maturity Model](resources/observability-maturity-model.md) - 4-level maturity framework with assessment
-- [Anti-Patterns & Best Practices](resources/anti-patterns-best-practices.md) - 8 critical anti-patterns with solutions
-- [OpenTelemetry Best Practices](resources/opentelemetry-best-practices.md) - Setup, sampling, attributes, context propagation
-- [Distributed Tracing Patterns](resources/distributed-tracing-patterns.md) - Trace propagation, span design, debugging workflows
-- [SLO Design Guide](resources/slo-design-guide.md) - SLI/SLO/SLA, error budgets, burn rate alerts
-- [Performance Profiling Guide](resources/performance-profiling-guide.md) - CPU/memory profiling, database optimization, frontend performance
+- [Core Observability Patterns](references/core-observability-patterns.md) - 6 implementation patterns with code examples
+- [Observability Maturity Model](references/observability-maturity-model.md) - 4-level maturity framework with assessment
+- [Anti-Patterns & Best Practices](references/anti-patterns-best-practices.md) - 8 critical anti-patterns with solutions
+- [OpenTelemetry Best Practices](references/opentelemetry-best-practices.md) - Setup, sampling, attributes, context propagation
+- [Distributed Tracing Patterns](references/distributed-tracing-patterns.md) - Trace propagation, span design, debugging workflows
+- [SLO Design Guide](references/slo-design-guide.md) - SLI/SLO/SLA, error budgets, burn rate alerts
+- [Performance Profiling Guide](references/performance-profiling-guide.md) - CPU/memory profiling, database optimization, frontend performance
 
 ---
 
@@ -366,3 +366,45 @@ See [data/sources.json](data/sources.json) for curated sources:
 ---
 
 > **Success Criteria:** Systems are fully observable with unified telemetry (logs+metrics+traces), SLOs drive alerting and feature velocity, performance is proactively optimized, and capacity is planned ahead of demand.
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about observability, monitoring, or performance engineering, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best tool for [observability/monitoring/tracing]?"
+- "What should I use for [APM/metrics/logging]?"
+- "What's the latest in observability?"
+- "Current best practices for [OpenTelemetry/Prometheus/Grafana]?"
+- "Is [tool/approach] still relevant in 2026?"
+- "[Datadog] vs [New Relic] vs [Grafana stack]?"
+- "Best approach for [distributed tracing/SLO monitoring]?"
+
+### Required Searches
+
+1. Search: `"observability best practices 2026"`
+2. Search: `"OpenTelemetry vs alternatives 2026"`
+3. Search: `"observability trends January 2026"`
+4. Search: `"[specific tool] new releases 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What observability tools/patterns are popular NOW
+- **Emerging trends**: New tools, patterns, or standards gaining traction
+- **Deprecated/declining**: Tools/approaches losing relevance or support
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- OpenTelemetry adoption and ecosystem maturity
+- Observability platforms (Grafana stack, Datadog, Honeycomb)
+- eBPF-based observability (Cilium, Pixie, Coroot)
+- SLO/SLI tooling and error budget management
+- Continuous profiling (Pyroscope, Parca)
+- Log aggregation (Loki, OpenSearch, Datadog)
+- Cost optimization in observability

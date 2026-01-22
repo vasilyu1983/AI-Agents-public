@@ -3,7 +3,7 @@ name: qa-testing-playwright
 description: "End-to-end web application testing with Playwright: scope control, stable selectors, parallelization/sharding, flake control, network mocking vs real services, visual testing tradeoffs, and CI/CD integration."
 ---
 
-# QA Testing (Playwright, Dec 2025) — Quick Reference
+# QA Testing (Playwright, Jan 2026) — Quick Reference
 
 This skill enables high-signal, cost-aware E2E testing of web applications using Playwright.
 
@@ -467,29 +467,109 @@ npx playwright show-trace trace.zip
 
 ---
 
-## Optional: AI / Automation
+## Playwright MCP & AI Testing (2026)
+
+Playwright MCP (Model Context Protocol) enables AI-driven browser automation through accessibility tree snapshots rather than screenshots.
+
+### Key Capabilities
+
+- **Playwright Agents**: Three agent types for LLM-driven workflows
+  - `planner`: Explores app, produces Markdown test plan
+  - `generator`: Transforms plans into Playwright test files
+  - `healer`: Executes tests and auto-repairs failures
+
+- **Self-healing locators**: AI updates broken selectors automatically
+- **Natural language test creation**: Describe tests in plain English
+- **Integration**: Claude Desktop, VS Code Copilot, Cursor IDE
+
+### Quick Setup (Claude Desktop)
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-playwright"]
+    }
+  }
+}
+```
+
+See [references/playwright-mcp.md](references/playwright-mcp.md) for full configuration and patterns.
+
+### MCP Best Practices
 
 Do:
-- Use AI to scaffold tests and page objects, then enforce selector rules, remove sleeps, and add explicit oracles.
-- Use AI to summarize failing traces/logs, but base fixes on evidence and stable assertions.
+
+- Use MCP for test scaffolding, then review and harden
+- Leverage accessibility tree for stable locators
+- Combine with human review for critical tests
 
 Avoid:
-- Auto-healing by weakening assertions or switching to brittle selectors.
-- Generating tests that lock onto CSS structure instead of user-facing roles/labels.
+
+- Auto-healing that weakens assertions
+- Skipping code review of AI-generated tests
+- Blind trust in healer agent fixes
 
 ---
 
 ## Navigation
 
-**Resources**
-- [resources/playwright-patterns.md](resources/playwright-patterns.md) — Advanced testing patterns
-- [resources/playwright-ci.md](resources/playwright-ci.md) — CI/CD configurations
+### Resources
+
+- [references/playwright-mcp.md](references/playwright-mcp.md) — Playwright MCP & AI-powered testing (2026)
+- [references/playwright-patterns.md](references/playwright-patterns.md) — Advanced testing patterns, visual testing, WebSocket mocking
+- [references/playwright-ci.md](references/playwright-ci.md) — CI/CD configurations, real device testing, v1.57+ features
 - [data/sources.json](data/sources.json) — Playwright documentation links
 
-**Templates**
-- [templates/template-playwright-e2e-review-checklist.md](templates/template-playwright-e2e-review-checklist.md) — E2E review checklist (selectors, parallelization, flake rules)
+### Templates
 
-**Related Skills**
+- [assets/template-playwright-e2e-review-checklist.md](assets/template-playwright-e2e-review-checklist.md) — E2E review checklist (selectors, parallelization, flake rules)
+
+### Related Skills
+
 - [../qa-testing-strategy/SKILL.md](../qa-testing-strategy/SKILL.md) — General testing strategies
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Frontend development
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — CI/CD integration
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about E2E testing or Playwright, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best E2E testing framework?"
+- "What should I use for [browser automation/visual testing]?"
+- "What's the latest in Playwright?"
+- "Current best practices for [E2E testing/test automation]?"
+- "Is [Playwright/Cypress/Selenium] still relevant in 2026?"
+- "[Playwright] vs [Cypress] vs [other]?"
+- "Best approach for [visual regression/component testing]?"
+
+### Required Searches
+
+1. Search: `"Playwright best practices 2026"`
+2. Search: `"Playwright vs Cypress vs alternatives 2026"`
+3. Search: `"E2E testing trends January 2026"`
+4. Search: `"Playwright new features 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What testing tools/patterns are popular NOW
+- **Emerging trends**: New Playwright features, testing patterns gaining traction
+- **Deprecated/declining**: Approaches or tools losing relevance
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- Playwright version updates and new features
+- Component testing vs E2E testing boundaries
+- Visual regression testing tools (Playwright, Percy, Chromatic)
+- AI-assisted test generation and maintenance
+- Cross-browser testing strategies
+- Mobile testing with Playwright
+- Playwright vs Cypress vs WebdriverIO comparison

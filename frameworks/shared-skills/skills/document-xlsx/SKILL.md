@@ -7,11 +7,12 @@ description: Create, edit, and analyze Excel spreadsheets with formulas, formatt
 
 This skill enables creation, editing, and analysis of Excel spreadsheets programmatically. Claude should apply these patterns when users need to generate data reports, financial models, automate Excel workflows, or process spreadsheet data.
 
-**Modern Best Practices (Dec 2025)**:
+**Modern Best Practices (Jan 2026)**:
 - Treat spreadsheets as software: clear inputs/outputs, auditability, and versioning.
 - Protect data integrity: control totals, validation, and traceability to sources.
-- Accessibility and readability matter (labels, contrast, not color-only meaning).
-- Ship with a review loop and an owner (avoid “mystery models”).
+- **Accessibility (WCAG 2.1 AA by April 2026)**: labels, contrast, structure. ADA compliance deadline.
+- **EU Distribution**: EAA (June 2025) requires EN 301 549 compliance for spreadsheets distributed in EU.
+- Ship with a review loop and an owner (avoid "mystery models").
 
 ---
 
@@ -19,12 +20,14 @@ This skill enables creation, editing, and analysis of Excel spreadsheets program
 
 | Task | Tool/Library | Language | When to Use |
 |------|--------------|----------|-------------|
-| Create XLSX | exceljs | Node.js | Reports, data exports |
-| Create XLSX | openpyxl | Python | Formatted workbooks |
-| Data analysis | pandas | Python | DataFrame to Excel |
+| Create XLSX | ExcelJS | Node.js | Reports, data exports |
+| Create XLSX | openpyxl | Python | Read/write, modify existing files |
+| Create XLSX | XlsxWriter | Python | Write-only, rich formatting, charts |
+| Data analysis | pandas + openpyxl | Python | DataFrame to Excel with formatting |
 | Read XLSX | xlsx (SheetJS) | Node.js | Parse spreadsheets |
-| Charts | openpyxl | Python | Embedded visualizations |
-| Styling | exceljs/openpyxl | Both | Conditional formatting |
+| Charts | openpyxl/XlsxWriter | Python | Embedded visualizations |
+| Styling | ExcelJS/openpyxl | Both | Conditional formatting |
+| Automation | xlwings | Python | Excel installed, interactive workflows |
 
 ## When to Use This Skill
 
@@ -272,7 +275,7 @@ Excel Task: [What do you need?]
 - Integrity: no `#REF!`, broken named ranges, or hardcoded constants hidden in formulas.
 - Traceability: every key output ties back to labeled inputs (units + source + date).
 - Checks: control totals, reconciliations, and error flags that fail loudly.
-- Review: independent review pass using `templates/spreadsheet-model-review-checklist.md`.
+- Review: independent review pass using `assets/spreadsheet-model-review-checklist.md`.
 
 ## Optional: AI / Automation
 
@@ -284,15 +287,15 @@ Use only when explicitly requested and policy-compliant.
 ## Navigation
 
 **Resources**
-- [resources/excel-formulas.md](resources/excel-formulas.md) — Formula reference and patterns
-- [resources/excel-formatting.md](resources/excel-formatting.md) — Styling, conditional formatting
-- [resources/excel-charts.md](resources/excel-charts.md) — Chart types and customization
+- [references/excel-formulas.md](references/excel-formulas.md) — Formula reference and patterns
+- [references/excel-formatting.md](references/excel-formatting.md) — Styling, conditional formatting
+- [references/excel-charts.md](references/excel-charts.md) — Chart types and customization
 - [data/sources.json](data/sources.json) — Library documentation links
 
 **Templates**
-- [templates/financial-report.md](templates/financial-report.md) — Financial statement template
-- [templates/data-dashboard.md](templates/data-dashboard.md) — Dashboard with charts
-- [templates/spreadsheet-model-review-checklist.md](templates/spreadsheet-model-review-checklist.md) — Model QA checklist (assumptions, formulas, traceability)
+- [assets/financial-report.md](assets/financial-report.md) — Financial statement template
+- [assets/data-dashboard.md](assets/data-dashboard.md) — Dashboard with charts
+- [assets/spreadsheet-model-review-checklist.md](assets/spreadsheet-model-review-checklist.md) — Model QA checklist (assumptions, formulas, traceability)
 
 **Related Skills**
 - [../document-pdf/SKILL.md](../document-pdf/SKILL.md) — PDF generation from data

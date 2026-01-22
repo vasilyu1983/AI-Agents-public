@@ -59,13 +59,26 @@ Use this skill when you need to:
 
 ## Templates
 
-- `templates/api-test-plan.md` for coverage planning.
-- `templates/contract-change-checklist.md` for breaking change review.
-- `templates/schema-validation-matrix.md` for schema tooling and CI stages.
+- `assets/api-test-plan.md` for coverage planning.
+- `assets/contract-change-checklist.md` for breaking change review.
+- `assets/schema-validation-matrix.md` for schema tooling and CI stages.
+
+## AI-Powered Contract Testing (2026)
+
+Modern tools automate contract test generation and maintenance:
+
+- **PactFlow AI Code Review**: Inspects Pact tests and suggests improvements across 7+ languages.
+- **Keploy**: Generates tests from live API traffic with zero code.
+- **Postman Postbot**: AI assistant for test generation from request/response analysis.
+- **Specmatic**: Converts OpenAPI/GraphQL specs into executable contracts instantly.
+- **Bi-Directional Contract Testing**: Combines provider OpenAPI specs with consumer contracts for simplified workflows.
+
+See `references/ai-contract-testing.md` for setup and decision matrix.
 
 ## Resources
 
-- `resources/contract-testing-patterns.md` for change safety guidance.
+- `references/contract-testing-patterns.md` for change safety and CDC patterns.
+- `references/ai-contract-testing.md` for AI-powered testing tools and workflows.
 
 ## Related Skills
 

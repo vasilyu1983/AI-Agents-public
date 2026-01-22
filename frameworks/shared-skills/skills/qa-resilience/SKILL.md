@@ -124,32 +124,32 @@ Failure scenario: [System Dependency Type]
 
 ## Navigation: Core Resilience Patterns
 
-- **[Circuit Breaker Patterns](resources/circuit-breaker-patterns.md)** - Prevent cascading failures
+- **[Circuit Breaker Patterns](references/circuit-breaker-patterns.md)** - Prevent cascading failures
   - Classic circuit breaker implementation (Node.js, Python)
   - Adaptive circuit breakers with ML-based thresholds (2024-2025)
   - Fallback strategies and event monitoring
 
-- **[Retry Patterns](resources/retry-patterns.md)** - Handle transient failures
+- **[Retry Patterns](references/retry-patterns.md)** - Handle transient failures
   - Exponential backoff with jitter
   - Retry decision table (which errors to retry)
   - Idempotency patterns and Retry-After headers
 
-- **[Bulkhead Isolation](resources/bulkhead-isolation.md)** - Resource compartmentalization
+- **[Bulkhead Isolation](references/bulkhead-isolation.md)** - Resource compartmentalization
   - Semaphore pattern for thread/connection pools
   - Database connection pooling strategies
   - Queue-based bulkheads with load shedding
 
-- **[Timeout Policies](resources/timeout-policies.md)** - Prevent resource exhaustion
+- **[Timeout Policies](references/timeout-policies.md)** - Prevent resource exhaustion
   - Connection, request, and idle timeouts
   - Database query timeouts (PostgreSQL, MySQL)
   - Nested timeout budgets for chained operations
 
-- **[Graceful Degradation](resources/graceful-degradation.md)** - Maintain partial functionality
+- **[Graceful Degradation](references/graceful-degradation.md)** - Maintain partial functionality
   - Cached fallback strategies
   - Default values and feature toggles
   - Partial responses with Promise.allSettled
 
-- **[Health Check Patterns](resources/health-check-patterns.md)** - Service availability monitoring
+- **[Health Check Patterns](references/health-check-patterns.md)** - Service availability monitoring
   - Liveness, readiness, and startup probes
   - Kubernetes probe configuration
   - Shallow vs deep health checks
@@ -158,13 +158,13 @@ Failure scenario: [System Dependency Type]
 
 ## Navigation: Operational Resources
 
-- **[Resilience Checklists](resources/resilience-checklists.md)** - Production hardening checklists
+- **[Resilience Checklists](references/resilience-checklists.md)** - Production hardening checklists
   - Dependency resilience
   - Health and readiness probes
   - Observability for resilience
   - Failure testing
 
-- **[Chaos Engineering Guide](resources/chaos-engineering-guide.md)** - Safe reliability experiments
+- **[Chaos Engineering Guide](references/chaos-engineering-guide.md)** - Safe reliability experiments
   - Planning chaos experiments
   - Common failure injection scenarios
   - Execution steps and debrief checklist
@@ -173,17 +173,17 @@ Failure scenario: [System Dependency Type]
 
 ## Navigation: Templates
 
-- **[Resilience Runbook Template](templates/runbooks/resilience-runbook-template.md)** - Service hardening profile
+- **[Resilience Runbook Template](assets/runbooks/resilience-runbook-template.md)** - Service hardening profile
   - Dependencies and SLOs
   - Fallback strategies
   - Rollback procedures
 
-- **[Fault Injection Playbook](templates/testing/fault-injection-playbook.md)** - Chaos testing script
+- **[Fault Injection Playbook](assets/testing/fault-injection-playbook.md)** - Chaos testing script
   - Success signals
   - Rollback criteria
   - Post-experiment debrief
 
-- **[Resilience Test Plan Template](templates/testing/template-resilience-test-plan.md)** - Failure mode test plan (timeouts/retries/degraded mode)
+- **[Resilience Test Plan Template](assets/testing/template-resilience-test-plan.md)** - Failure mode test plan (timeouts/retries/degraded mode)
   - Scope and dependencies
   - Fault matrix and expected behavior
   - Observability signals and pass/fail criteria

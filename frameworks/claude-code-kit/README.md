@@ -7,7 +7,7 @@
 
 Production-ready Claude Code setup with 21 agents + 28 commands + 7 hooks.
 
-**Skills**: 76 skills in `frameworks/shared-skills/` (shared with Codex Kit)
+**Skills**: 79 skills in `frameworks/shared-skills/` (shared with Codex Kit)
 
 **NEW in v3.7**: Skills moved to shared source. Framework now contains agents, commands, hooks only.
 
@@ -141,17 +141,17 @@ Skills are maintained in a shared source (`frameworks/shared-skills/`) used by b
 
 **New in v3.5** (2025-12-18): **December 2025 Skill Refresh**
 
-All 76 skills updated with:
+All 79 skills updated with:
 
 - Explicit "Modern Best Practices (December 2025)" headers with authoritative URLs
 - Operational focus: "No theory. No narrative. Only what Claude can execute."
 - Cross-skill linking with relative paths
-- Progressive disclosure (SKILL.md as navigation hub, resources/ for depth)
+- Progressive disclosure (SKILL.md as navigation hub, references/ for depth)
 
 **v3.4** (2025-12-09): **Three-Router Architecture**
 
-- [**router-engineering**](../shared-skills/skills/router-engineering/SKILL.md) - Routes technical questions through 29 engineering + AI/ML skills
-- [**router-operations**](../shared-skills/skills/router-operations/SKILL.md) - Routes QA, DevOps, testing through 15 operations skills
+- [**router-engineering**](../shared-skills/skills/router-engineering/SKILL.md) - Routes technical questions through 33 engineering + AI/ML skills
+- [**router-operations**](../shared-skills/skills/router-operations/SKILL.md) - Routes QA, DevOps, testing through 19 operations skills
 - Enhanced [**router-startup**](../shared-skills/skills/router-startup/SKILL.md) - Now includes marketing (4 skills), document creation (4 skills), and cross-router orchestration patterns
 
 **v3.3** (2025-12-09):
@@ -171,21 +171,21 @@ See [framework/README.md](framework/README.md) for complete documentation, usage
 
 ### Three-Router Architecture
 
-Intelligent skill orchestration across 76 skills through three domain-specific routers:
+Intelligent skill orchestration across 79 skills through three domain-specific routers:
 
 ```text
 ┌───────────────────────┐  ┌───────────────────────┐  ┌───────────────────────┐
 │    router-startup     │  │  router-engineering   │  │  router-operations    │
 │  Business & Startup   │  │  Technical & AI/ML    │  │   QA & DevOps         │
-│  17 skills            │  │  29 skills            │  │   15 skills           │
+│  23 skills            │  │  33 skills            │  │   19 skills           │
 └───────────────────────┘  └───────────────────────┘  └───────────────────────┘
 ```
 
 | Router | Skills | Domain |
 | ------ | ------ | ------ |
-| [**router-startup**](../shared-skills/skills/router-startup/SKILL.md) | 17 | Business validation, marketing, documents, product |
-| [**router-engineering**](../shared-skills/skills/router-engineering/SKILL.md) | 29 | AI/ML, software, data, Claude Code framework |
-| [**router-operations**](../shared-skills/skills/router-operations/SKILL.md) | 15 | QA, testing, DevOps, git, observability |
+| [**router-startup**](../shared-skills/skills/router-startup/SKILL.md) | 23 | Business validation, marketing, documents, product |
+| [**router-engineering**](../shared-skills/skills/router-engineering/SKILL.md) | 33 | AI/ML, software, data, Claude Code framework |
+| [**router-operations**](../shared-skills/skills/router-operations/SKILL.md) | 19 | QA, testing, DevOps, git, observability |
 
 **Cross-router handoffs**: Routers automatically hand off to each other based on query domain:
 
@@ -304,14 +304,14 @@ Claude: [Designs data pipeline with ingestion, transformation, serving layers]
 ### Reference (Look Up Details)
 
 - **[Agents Reference](docs/agents.md)** - Agent YAML frontmatter, tools, models
-- **[Skills Reference](docs/skills.md)** - Progressive disclosure, resources/
+- **[Skills Reference](docs/skills.md)** - Progressive disclosure, references/
 - **[Commands Reference](docs/commands.md)** - $ARGUMENTS, best practices
 - **[Hooks Reference](docs/hooks.md)** - Events, environment variables, exit codes
 - **[CLAUDE.md Reference](docs/claudemd.md)** - Project vs user, precedence
 - **[MCP Reference](docs/mcp.md)** - Database, filesystem, git integration
 - **[Workflows Reference](docs/workflows.md)** - Development workflows
 - **[Clean Code Standard](../shared-skills/skills/software-clean-code-standard/)** - Canonical clean code rules (`CC-*`) and operational checklists
-- **[Code Review Resources](../shared-skills/skills/software-code-review/resources/)** - Review workflow resources and practice checklists
+- **[Code Review Resources](../shared-skills/skills/software-code-review/references/)** - Review workflow resources and practice checklists
 
 ---
 
@@ -403,7 +403,7 @@ See [Skills Reference](docs/skills.md)
 .claude/skills/
 └── skill-name/
     ├── SKILL.md           # Main reference
-    └── resources/         # Detailed docs
+    └── references/         # Detailed docs
 ```
 
 ```markdown
@@ -416,7 +416,7 @@ description: What this provides
 
 High-level concepts...
 
-See `resources/` for details.
+See `references/` for details.
 ```
 
 ### Create a Command

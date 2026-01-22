@@ -8,7 +8,7 @@ Codex supports skills natively. You do not need router prompts or Claude-specifi
 
 ## What Are Agent Skills
 
-A skill captures a capability expressed through markdown instructions inside a `SKILL.md` file, plus optional scripts, resources/references, templates/assets, and data. Codex uses skills to perform specific tasks.
+A skill captures a capability expressed through markdown instructions inside a `SKILL.md` file, plus optional scripts, references/references, assets/assets, and data. Codex uses skills to perform specific tasks.
 
 A skill folder looks like this:
 
@@ -16,8 +16,8 @@ A skill folder looks like this:
 my-skill/
   SKILL.md         # Required: instructions + metadata
   scripts/         # Optional: executable code
-  resources/       # Optional: documentation (references)
-  templates/       # Optional: templates, resources (assets)
+  references/       # Optional: documentation (references)
+  assets/       # Optional: templates, resources (assets)
   data/            # Optional: structured sources (JSON)
 ```
 
@@ -104,8 +104,8 @@ Optional fields:
 ## Optional Directories
 
 - `scripts/`: executable code used by the skill.
-- `resources/`: detailed documentation, loaded on demand (references).
-- `templates/`: templates, schemas, or static resources (assets).
+- `references/`: detailed documentation, loaded on demand (references).
+- `assets/`: templates, schemas, or static resources (assets).
 - `data/`: structured sources (for example JSON).
 
 ## Progressive Disclosure
@@ -114,7 +114,7 @@ Codex uses progressive disclosure to manage context:
 
 1. At startup, Codex loads only `name` and `description` from each skill.
 2. When a skill is invoked, Codex reads the full `SKILL.md` body.
-3. Extra files in `scripts/`, `resources/` (references), `templates/` (assets), and `data/` are loaded only if needed.
+3. Extra files in `scripts/`, `references/` (references), `assets/` (assets), and `data/` are loaded only if needed.
 
 Keep `SKILL.md` under 500 lines when possible and move deep references into separate files. Keep file references one level deep from `SKILL.md`.
 

@@ -173,6 +173,36 @@ Blockers: None
 Next: Complete form validation
 ```
 
+### Work in Progress (WIP) Limits
+
+```text
+PATTERN: Limit concurrent work to improve flow
+
+WIP limits restrict maximum items in each workflow stage.
+Benefits: Makes blockers visible, reduces context switching,
+can increase throughput by 40%.
+
+RECOMMENDED LIMITS:
+| Level | Limit | Rationale |
+|-------|-------|-----------|
+| Individual | 2-3 tasks | Minimize context switching |
+| Team (stories) | Team size + 1 | Allow pairing without blocking |
+| In Progress column | 3-5 items | Force completion before starting |
+| Code Review | 2-3 PRs | Prevent review bottleneck |
+
+SETTING WIP LIMITS:
+1. Start with team size + 1
+2. Monitor for 2-4 weeks
+3. If limits never reached → lower them
+4. If constantly blocked → investigate bottleneck, don't raise limit
+5. Adjust based on actual flow data
+
+WHEN TO VIOLATE (thoughtfully):
+- Emergency production fix
+- Unblocking another team
+- Document the exception and review in retro
+```
+
 ---
 
 ## Session Management
@@ -278,9 +308,9 @@ Step 5: Add edge case tests
 
 ## Definition of Ready / Done (DoR/DoD)
 
-**[templates/template-dor-dod.md](templates/template-dor-dod.md)** — Checklists for work readiness and completion.
+**[assets/template-dor-dod.md](assets/template-dor-dod.md)** — Checklists for work readiness and completion.
 
-**[templates/template-work-item-ticket.md](templates/template-work-item-ticket.md)** — Ticket template with DoR/DoD and testable acceptance criteria.
+**[assets/template-work-item-ticket.md](assets/template-work-item-ticket.md)** — Ticket template with DoR/DoD and testable acceptance criteria.
 
 ### Key Sections
 
@@ -337,25 +367,48 @@ Step 5: Add edge case tests
 - **Generate acceptance criteria** — Draft from story description (needs review)
 - **Suggest story slicing** — Based on complexity analysis
 - **Dependency mapping** — Identify blocking relationships
+- **AI-augmented planning** — Use LLMs to draft plans, but validate assumptions
+
+### AI-Assisted Planning Best Practices (2025)
+
+Based on [Addy Osmani's LLM Coding Workflow](https://addyosmani.com/blog/ai-coding-workflow/):
+
+1. **Planning first** — Create robust spec/plan before coding with AI
+2. **Scope management** — Feed AI manageable tasks, not the whole codebase
+3. **Iterative steps** — Break into tickets, tackle one by one
+4. **Human oversight** — AI-augmented, not AI-automated engineering
+
+### DORA 2025 Findings on AI
+
+Per [DORA 2025 Report](https://www.oobeya.io/blog/dora-metrics-2025-best-practices):
+
+- AI adoption improves throughput but may reduce delivery stability
+- Teams using AI report +7.5% documentation quality, +3.4% code quality
+- However: -7.2% delivery stability when AI adoption increases
+- **Recommendation**: Monitor DORA metrics when increasing AI tool usage
 
 ### Bounded Claims
 
 - AI-generated acceptance criteria need human review
 - Story point estimates require team calibration
 - Dependency mapping suggestions need validation
+- AI impact on delivery stability requires monitoring
 
 ---
 
 ## Navigation
 
-**Resources**
-- [resources/planning-templates.md](resources/planning-templates.md) — Plan templates for common scenarios
-- [resources/session-patterns.md](resources/session-patterns.md) — Multi-session project management
-- [templates/template-dor-dod.md](templates/template-dor-dod.md) — **NEW** DoR/DoD checklists, estimation, cross-functional coordination
-- [templates/template-work-item-ticket.md](templates/template-work-item-ticket.md) — Work item ticket template (DoR/DoD + acceptance criteria)
+### Resources
+
+- [references/planning-templates.md](references/planning-templates.md) — Plan templates for common scenarios
+- [references/session-patterns.md](references/session-patterns.md) — Multi-session project management
+- [references/flow-metrics.md](references/flow-metrics.md) — DORA metrics, WIP limits, flow optimization
+- [assets/template-dor-dod.md](assets/template-dor-dod.md) — DoR/DoD checklists, estimation, cross-functional coordination
+- [assets/template-work-item-ticket.md](assets/template-work-item-ticket.md) — Work item ticket template (DoR/DoD + acceptance criteria)
 - [data/sources.json](data/sources.json) — Workflow methodology references
 
-**Related Skills**
+### Related Skills
+
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System design planning
 - [../docs-ai-prd/SKILL.md](../docs-ai-prd/SKILL.md) — Requirements to plan conversion
 - [../qa-testing-strategy/SKILL.md](../qa-testing-strategy/SKILL.md) — TDD workflow integration

@@ -7,7 +7,7 @@ description: Production-grade i18n/l10n patterns for React, Vue, Angular, and No
 
 Production patterns for internationalisation (i18n) and localisation (l10n) in modern web applications. Covers library selection, translation management, ICU message format, RTL support, and CI/CD workflows.
 
-**Modern Best Practices (Dec 2025)**: react-i18next 15.x (2.1M weekly downloads), react-intl 7.x (FormatJS), vue-i18n 10.x (Vue 3 Composition API), @angular/localize 19.x, LinguiJS 5.x (smallest bundle). ICU MessageFormat 2.0 draft, CLDR 46. TMS leaders: Phrase, Lokalise, Crowdin.
+**Modern Best Practices (Jan 2026)**: react-i18next 15.x (2.1M weekly downloads), react-intl 7.x (FormatJS), vue-i18n 10.x (Vue 3 Composition API), @angular/localize 19.x, LinguiJS 5.x (smallest bundle), next-intl 3.x (Next.js App Router). ICU MessageFormat 2.0 finalized (tech preview in ICU 78), CLDR 48. AI-powered translation workflows emerging. TMS leaders: Phrase, Lokalise, Crowdin.
 
 **Authoritative References**:
 - [i18next Documentation](https://www.i18next.com/)
@@ -155,17 +155,17 @@ Priority order:
 
 ### Resources (Deep Dives)
 
-- [resources/framework-guides.md](resources/framework-guides.md) — React, Vue, Angular, Next.js implementation
-- [resources/icu-message-format.md](resources/icu-message-format.md) — Pluralisation, select, formatting
-- [resources/translation-workflows.md](resources/translation-workflows.md) — TMS, CI/CD, string extraction
-- [resources/rtl-support.md](resources/rtl-support.md) — Right-to-left language support
-- [resources/locale-handling.md](resources/locale-handling.md) — Dates, numbers, currencies
+- [references/framework-guides.md](references/framework-guides.md) — React, Vue, Angular, Next.js implementation
+- [references/icu-message-format.md](references/icu-message-format.md) — Pluralisation, select, formatting
+- [references/translation-workflows.md](references/translation-workflows.md) — TMS, CI/CD, string extraction
+- [references/rtl-support.md](references/rtl-support.md) — Right-to-left language support
+- [references/locale-handling.md](references/locale-handling.md) — Dates, numbers, currencies
 
 ### Templates (Production Starters)
 
-- [templates/react-i18next-setup.md](templates/react-i18next-setup.md) — React + i18next complete setup
-- [templates/vue-i18n-setup.md](templates/vue-i18n-setup.md) — Vue 3 + vue-i18n setup
-- [templates/nextjs-i18n-setup.md](templates/nextjs-i18n-setup.md) — Next.js App Router i18n
+- [assets/react-i18next-setup.md](assets/react-i18next-setup.md) — React + i18next complete setup
+- [assets/vue-i18n-setup.md](assets/vue-i18n-setup.md) — Vue 3 + vue-i18n setup
+- [assets/nextjs-i18n-setup.md](assets/nextjs-i18n-setup.md) — Next.js App Router i18n
 
 ### Data
 
@@ -174,7 +174,7 @@ Priority order:
 ### Related Skills
 
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Frontend architecture patterns (React, Vue, Angular, Next.js)
-- [../marketing-seo-technical/SKILL.md](../marketing-seo-technical/SKILL.md) — Hreflang, international SEO
+- [../marketing-seo-complete/SKILL.md](../marketing-seo-complete/SKILL.md) — Hreflang, international SEO
 
 ---
 
@@ -377,3 +377,44 @@ declare module 'i18next' {
 - [ ] Test RTL layout in all components
 - [ ] Test missing translation key handling
 - [ ] Test locale switching without page reload
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about i18n libraries, translation tools, or localisation practices, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best i18n library for [React/Vue/Angular]?"
+- "What should I use for [translation/localisation]?"
+- "What's the latest in i18n/l10n?"
+- "Current best practices for [i18next/react-intl]?"
+- "Is [library] still relevant in 2026?"
+- "[i18next] vs [react-intl] vs [LinguiJS]?"
+- "Best translation management system?"
+
+### Required Searches
+
+1. Search: `"i18n best practices 2026"`
+2. Search: `"[specific library] vs alternatives 2026"`
+3. Search: `"localisation trends January 2026"`
+4. Search: `"translation management systems 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What i18n tools/libraries are popular NOW
+- **Emerging trends**: New libraries, patterns, or TMS platforms gaining traction
+- **Deprecated/declining**: Libraries/approaches losing relevance or support
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- i18n libraries (react-i18next, react-intl, LinguiJS, next-intl)
+- Translation management (Phrase, Lokalise, Crowdin)
+- ICU MessageFormat 2.0 adoption
+- AI-assisted translation and review
+- RTL support patterns and tools
+- TypeScript i18n integration

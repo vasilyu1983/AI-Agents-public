@@ -105,54 +105,54 @@ Use this skill when a user requests:
 
 **Shared Foundation**
 
-- [../software-clean-code-standard/resources/clean-code-standard.md](../software-clean-code-standard/resources/clean-code-standard.md) - Canonical clean code rules (`CC-*`) for citation
-- Legacy playbook: [../software-clean-code-standard/resources/code-quality-operational-playbook.md](../software-clean-code-standard/resources/code-quality-operational-playbook.md) - `RULE-01`–`RULE-13`, decision trees, and operational procedures
-- [../software-clean-code-standard/resources/refactoring-operational-checklist.md](../software-clean-code-standard/resources/refactoring-operational-checklist.md) - Refactoring smell-to-action mapping, safe refactoring guardrails
-- [../software-clean-code-standard/resources/working-effectively-with-legacy-code-operational-checklist.md](../software-clean-code-standard/resources/working-effectively-with-legacy-code-operational-checklist.md) - Seams, characterization tests, incremental migration patterns
+- [../software-clean-code-standard/references/clean-code-standard.md](../software-clean-code-standard/references/clean-code-standard.md) - Canonical clean code rules (`CC-*`) for citation
+- Legacy playbook: [../software-clean-code-standard/references/code-quality-operational-playbook.md](../software-clean-code-standard/references/code-quality-operational-playbook.md) - `RULE-01`–`RULE-13`, decision trees, and operational procedures
+- [../software-clean-code-standard/references/refactoring-operational-checklist.md](../software-clean-code-standard/references/refactoring-operational-checklist.md) - Refactoring smell-to-action mapping, safe refactoring guardrails
+- [../software-clean-code-standard/references/working-effectively-with-legacy-code-operational-checklist.md](../software-clean-code-standard/references/working-effectively-with-legacy-code-operational-checklist.md) - Seams, characterization tests, incremental migration patterns
 
 **Skill-Specific**
 
-See [resources/operational-patterns.md](resources/operational-patterns.md) for detailed refactoring catalogs, automated quality gates, technical debt playbooks, and legacy modernization steps.
+See [references/operational-patterns.md](references/operational-patterns.md) for detailed refactoring catalogs, automated quality gates, technical debt playbooks, and legacy modernization steps.
 
 ---
 
 ## Templates
 
-See [templates/](templates/) for copy-paste ready examples organized by domain:
+See [assets/](assets/) for copy-paste ready examples organized by domain:
 
 ## Refactoring Process
 
 Checklists and workflows for systematic code improvement:
 
-- [Refactoring Checklist](templates/process/refactoring-checklist.md) - Refactor safety checklist (characterization tests + incremental steps)
-- [Code Review Quality Checklist](templates/process/code-review-quality.md) - Quality-focused code review guide with SOLID principles
+- [Refactoring Checklist](assets/process/refactoring-checklist.md) - Refactor safety checklist (characterization tests + incremental steps)
+- [Code Review Quality Checklist](assets/process/code-review-quality.md) - Quality-focused code review guide with SOLID principles
 
 ## Technical Debt Tracking
 
 Tools for managing and prioritizing technical debt:
 
-- [Technical Debt Register](templates/tracking/tech-debt-register.md) - Track and prioritize technical debt with impact/effort matrix
+- [Technical Debt Register](assets/tracking/tech-debt-register.md) - Track and prioritize technical debt with impact/effort matrix
 
 ## Quality Gates Configuration
 
 Automated quality enforcement by tech stack:
 
 ### JavaScript/TypeScript
-- [ESLint Configuration](templates/quality-gates/javascript/eslint-config.js) - Comprehensive linting setup with complexity rules, code smell prevention
+- [ESLint Configuration](assets/quality-gates/javascript/eslint-config.js) - Comprehensive linting setup with complexity rules, code smell prevention
 
 ### Platform-Agnostic
-- [SonarQube Setup](templates/quality-gates/platform-agnostic/sonarqube-setup.md) - Static analysis and quality gates for 20+ languages (Docker, Cloud, Server)
+- [SonarQube Setup](assets/quality-gates/platform-agnostic/sonarqube-setup.md) - Static analysis and quality gates for 20+ languages (Docker, Cloud, Server)
 
 ---
 
 ## Resources
 
-See [resources/](resources/) for deep-dive guides:
-- **Operational Patterns**: [resources/operational-patterns.md](resources/operational-patterns.md) - Core refactoring catalogs, quality gates, and legacy modernization
-- **Refactoring Catalog**: [resources/refactoring-catalog.md](resources/refactoring-catalog.md)
-- **Code Smells Guide**: [resources/code-smells-guide.md](resources/code-smells-guide.md)
-- **Technical Debt Management**: [resources/tech-debt-management.md](resources/tech-debt-management.md)
-- **Legacy Code Modernization**: [resources/legacy-code-strategies.md](resources/legacy-code-strategies.md)
+See [references/](references/) for deep-dive guides:
+- **Operational Patterns**: [references/operational-patterns.md](references/operational-patterns.md) - Core refactoring catalogs, quality gates, and legacy modernization
+- **Refactoring Catalog**: [references/refactoring-catalog.md](references/refactoring-catalog.md)
+- **Code Smells Guide**: [references/code-smells-guide.md](references/code-smells-guide.md)
+- **Technical Debt Management**: [references/tech-debt-management.md](references/tech-debt-management.md)
+- **Legacy Code Modernization**: [references/legacy-code-strategies.md](references/legacy-code-strategies.md)
 
 ---
 
@@ -171,22 +171,22 @@ Avoid:
 ## Navigation
 
 **Resources**
-- [resources/operational-patterns.md](resources/operational-patterns.md)
-- [resources/refactoring-catalog.md](resources/refactoring-catalog.md)
-- [resources/code-smells-guide.md](resources/code-smells-guide.md)
-- [resources/tech-debt-management.md](resources/tech-debt-management.md)
-- [resources/legacy-code-strategies.md](resources/legacy-code-strategies.md)
+- [references/operational-patterns.md](references/operational-patterns.md)
+- [references/refactoring-catalog.md](references/refactoring-catalog.md)
+- [references/code-smells-guide.md](references/code-smells-guide.md)
+- [references/tech-debt-management.md](references/tech-debt-management.md)
+- [references/legacy-code-strategies.md](references/legacy-code-strategies.md)
 
 **Templates**
-- [templates/README.md](templates/README.md)
-- [templates/process/refactoring-checklist.md](templates/process/refactoring-checklist.md)
-- [templates/process/code-review-quality.md](templates/process/code-review-quality.md)
-- [templates/process/README.md](templates/process/README.md)
-- [templates/tracking/tech-debt-register.md](templates/tracking/tech-debt-register.md)
-- [templates/tracking/README.md](templates/tracking/README.md)
-- [templates/quality-gates/README.md](templates/quality-gates/README.md)
-- [templates/quality-gates/javascript/eslint-config.js](templates/quality-gates/javascript/eslint-config.js)
-- [templates/quality-gates/platform-agnostic/sonarqube-setup.md](templates/quality-gates/platform-agnostic/sonarqube-setup.md)
+- [assets/README.md](assets/README.md)
+- [assets/process/refactoring-checklist.md](assets/process/refactoring-checklist.md)
+- [assets/process/code-review-quality.md](assets/process/code-review-quality.md)
+- [assets/process/README.md](assets/process/README.md)
+- [assets/tracking/tech-debt-register.md](assets/tracking/tech-debt-register.md)
+- [assets/tracking/README.md](assets/tracking/README.md)
+- [assets/quality-gates/README.md](assets/quality-gates/README.md)
+- [assets/quality-gates/javascript/eslint-config.js](assets/quality-gates/javascript/eslint-config.js)
+- [assets/quality-gates/platform-agnostic/sonarqube-setup.md](assets/quality-gates/platform-agnostic/sonarqube-setup.md)
 
 **Data**
 - [data/sources.json](data/sources.json) — Curated external references
