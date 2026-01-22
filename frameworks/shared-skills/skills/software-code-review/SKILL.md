@@ -18,9 +18,9 @@ This skill provides operational checklists and prompts for structured code revie
 | Correctness Review | Logic, edge cases, error handling, tests | Boundary conditions, null checks, retries | Business logic, data transformations |
 | Maintainability Review | Naming, complexity, duplication, readability | Function length, naming clarity, DRY | Complex modules, shared code |
 | Test Review | Coverage, edge cases, flakiness, assertions | Test quality, missing scenarios | New features, refactors |
-| Frontend Review | Accessibility, responsive design, performance | [frontend-review.md](templates/web-frontend/frontend-review.md) | UI/UX changes |
-| Backend Review | API design, error handling, database patterns | [api-review.md](templates/backend-api/api-review.md) | API endpoints, services |
-| Blockchain Review | Reentrancy, access control, gas optimization | [crypto-review.md](templates/blockchain/crypto-review.md) | Smart contracts, DeFi protocols |
+| Frontend Review | Accessibility, responsive design, performance | [frontend-review.md](assets/web-frontend/frontend-review.md) | UI/UX changes |
+| Backend Review | API design, error handling, database patterns | [api-review.md](assets/backend-api/api-review.md) | API endpoints, services |
+| Blockchain Review | Reentrancy, access control, gas optimization | [crypto-review.md](assets/blockchain/crypto-review.md) | Smart contracts, DeFi protocols |
 
 ---
 
@@ -30,7 +30,7 @@ Skip unless reviewing C#/.NET crypto/fintech services using Entity Framework Cor
 
 For C#/.NET crypto/fintech services using Entity Framework Core, see:
 
-- [resources/dotnet-efcore-crypto-rules.md](resources/dotnet-efcore-crypto-rules.md) — Complete review rules (correctness, security, async, EF Core, tests, MRs)
+- [references/dotnet-efcore-crypto-rules.md](references/dotnet-efcore-crypto-rules.md) — Complete review rules (correctness, security, async, EF Core, tests, MRs)
 
 **Key rules summary:**
 
@@ -83,11 +83,11 @@ Code review task: [What to Focus On?]
     │   └─ Bug fixes → Reproduction tests
     │
     └─ Stack-specific review?
-        ├─ Frontend → [frontend-review.md](templates/web-frontend/frontend-review.md)
-        ├─ Backend → [api-review.md](templates/backend-api/api-review.md)
-        ├─ Mobile → [mobile-review.md](templates/mobile/mobile-review.md)
-        ├─ Infrastructure → [infrastructure-review.md](templates/infrastructure/infrastructure-review.md)
-        └─ Blockchain → [crypto-review.md](templates/blockchain/crypto-review.md)
+        ├─ Frontend → [frontend-review.md](assets/web-frontend/frontend-review.md)
+        ├─ Backend → [api-review.md](assets/backend-api/api-review.md)
+        ├─ Mobile → [mobile-review.md](assets/mobile/mobile-review.md)
+        ├─ Infrastructure → [infrastructure-review.md](assets/infrastructure/infrastructure-review.md)
+        └─ Blockchain → [crypto-review.md](assets/blockchain/crypto-review.md)
 ```
 
 **Multi-Mode Reviews:**
@@ -148,8 +148,12 @@ PR Submitted -> Auto-checks (CI) -> Async Review -> Merge
 | Tool | Use Case | Limitation |
 |------|----------|------------|
 | GitHub Copilot PR | Summary, suggestions | May miss context |
-| CodeRabbit | Automated comments | Requires human validation |
-| Graphite | PR stacking, review flow | Process, not content |
+| CodeRabbit | Automated comments, 46% bug accuracy | Requires human validation |
+| Qodo | Test generation + review, 15+ workflows | Enterprise pricing |
+| OpenAI Codex | System-level context (Datadog use case) | API integration required |
+| AWS Security Agent | OWASP Top 10, policy violations | Preview only (2026) |
+| Endor Labs AI SAST | Business logic, 95% FP reduction | Security-focused |
+| Graphite | PR stacking, stack-aware merge queue | Process, not content |
 
 **AI assistant rules:**
 
@@ -180,38 +184,79 @@ PR Submitted -> Auto-checks (CI) -> Async Review -> Merge
 
 **Shared Foundation**
 
-- [../software-clean-code-standard/resources/clean-code-standard.md](../software-clean-code-standard/resources/clean-code-standard.md) - Canonical clean code rules (`CC-*`) for citation in reviews
-- Legacy playbook: [../software-clean-code-standard/resources/code-quality-operational-playbook.md](../software-clean-code-standard/resources/code-quality-operational-playbook.md) - `RULE-01`–`RULE-13`, refactoring decision trees, and design patterns
+- [../software-clean-code-standard/references/clean-code-standard.md](../software-clean-code-standard/references/clean-code-standard.md) - Canonical clean code rules (`CC-*`) for citation in reviews
+- Legacy playbook: [../software-clean-code-standard/references/code-quality-operational-playbook.md](../software-clean-code-standard/references/code-quality-operational-playbook.md) - `RULE-01`–`RULE-13`, refactoring decision trees, and design patterns
 
 **Code Review Specific**
 
-- [resources/operational-playbook.md](resources/operational-playbook.md) — Review scope rules, severity ratings (P0-P3), checklists, modes, and PR workflow patterns
+- [references/operational-playbook.md](references/operational-playbook.md) — Review scope rules, severity ratings (P0-P3), checklists, modes, and PR workflow patterns
 
 ## Navigation
 
 **Resources**
-- [resources/operational-playbook.md](resources/operational-playbook.md)
-- [resources/review-checklist-comprehensive.md](resources/review-checklist-comprehensive.md)
-- [resources/implementing-effective-code-reviews-checklist.md](resources/implementing-effective-code-reviews-checklist.md)
-- [resources/looks-good-to-me-checklist.md](resources/looks-good-to-me-checklist.md)
-- [resources/automation-tools.md](resources/automation-tools.md)
-- [resources/dotnet-efcore-crypto-rules.md](resources/dotnet-efcore-crypto-rules.md)
-- [resources/psychological-safety-guide.md](resources/psychological-safety-guide.md)
+- [references/operational-playbook.md](references/operational-playbook.md)
+- [references/review-checklist-comprehensive.md](references/review-checklist-comprehensive.md)
+- [references/implementing-effective-code-reviews-checklist.md](references/implementing-effective-code-reviews-checklist.md)
+- [references/looks-good-to-me-checklist.md](references/looks-good-to-me-checklist.md)
+- [references/automation-tools.md](references/automation-tools.md)
+- [references/dotnet-efcore-crypto-rules.md](references/dotnet-efcore-crypto-rules.md)
+- [references/psychological-safety-guide.md](references/psychological-safety-guide.md)
 
 **Templates**
-- [templates/core/pull-request-description-template.md](templates/core/pull-request-description-template.md)
-- [templates/core/review-checklist-judgment.md](templates/core/review-checklist-judgment.md)
-- [templates/core/review-comment-guidelines.md](templates/core/review-comment-guidelines.md)
-- [templates/backend-api/api-review.md](templates/backend-api/api-review.md)
-- [templates/web-frontend/frontend-review.md](templates/web-frontend/frontend-review.md)
-- [templates/mobile/mobile-review.md](templates/mobile/mobile-review.md)
-- [templates/infrastructure/infrastructure-review.md](templates/infrastructure/infrastructure-review.md)
-- [templates/blockchain/crypto-review.md](templates/blockchain/crypto-review.md)
-- [templates/data-ml/data-pipeline-review.md](templates/data-ml/data-pipeline-review.md)
-- [templates/data-ml/experiment-tracking-review.md](templates/data-ml/experiment-tracking-review.md)
-- [templates/data-ml/ml-model-review.md](templates/data-ml/ml-model-review.md)
-- [templates/data-ml/ml-deployment-review.md](templates/data-ml/ml-deployment-review.md)
+- [assets/core/pull-request-description-template.md](assets/core/pull-request-description-template.md)
+- [assets/core/review-checklist-judgment.md](assets/core/review-checklist-judgment.md)
+- [assets/core/review-comment-guidelines.md](assets/core/review-comment-guidelines.md)
+- [assets/backend-api/api-review.md](assets/backend-api/api-review.md)
+- [assets/web-frontend/frontend-review.md](assets/web-frontend/frontend-review.md)
+- [assets/mobile/mobile-review.md](assets/mobile/mobile-review.md)
+- [assets/infrastructure/infrastructure-review.md](assets/infrastructure/infrastructure-review.md)
+- [assets/blockchain/crypto-review.md](assets/blockchain/crypto-review.md)
+- [assets/data-ml/data-pipeline-review.md](assets/data-ml/data-pipeline-review.md)
+- [assets/data-ml/experiment-tracking-review.md](assets/data-ml/experiment-tracking-review.md)
+- [assets/data-ml/ml-model-review.md](assets/data-ml/ml-model-review.md)
+- [assets/data-ml/ml-deployment-review.md](assets/data-ml/ml-deployment-review.md)
 
 **Data**
 - [data/sources.json](data/sources.json) — Curated external references
-- Shared checklists: [../software-clean-code-standard/templates/checklists/secure-code-review-checklist.md](../software-clean-code-standard/templates/checklists/secure-code-review-checklist.md), [../software-clean-code-standard/templates/checklists/backend-api-review-checklist.md](../software-clean-code-standard/templates/checklists/backend-api-review-checklist.md)
+- Shared checklists: [../software-clean-code-standard/assets/checklists/secure-code-review-checklist.md](../software-clean-code-standard/assets/checklists/secure-code-review-checklist.md), [../software-clean-code-standard/assets/checklists/backend-api-review-checklist.md](../software-clean-code-standard/assets/checklists/backend-api-review-checklist.md)
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about code review tools, practices, or automation, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best code review tool?"
+- "What should I use for [automated code review/PR automation]?"
+- "What's the latest in code review practices?"
+- "Current best practices for [code review/PR workflow]?"
+- "Is [GitHub Copilot PR/CodeRabbit] still relevant in 2026?"
+- "[CodeRabbit] vs [Graphite] vs [other]?"
+- "Best AI code review assistant?"
+
+### Required Searches
+
+1. Search: `"code review best practices 2026"`
+2. Search: `"[specific tool] vs alternatives 2026"`
+3. Search: `"AI code review tools January 2026"`
+4. Search: `"PR automation trends 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What code review tools/practices are popular NOW
+- **Emerging trends**: New AI assistants, PR tools, or review patterns gaining traction
+- **Deprecated/declining**: Tools/approaches losing relevance or support
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- AI code review (GitHub Copilot PR, CodeRabbit, Cursor)
+- PR automation (Graphite, Stacked PRs, merge queues)
+- Code review platforms (GitHub, GitLab, Bitbucket)
+- Review bots and automation
+- Async review practices for distributed teams
+- Review metrics and analytics tools

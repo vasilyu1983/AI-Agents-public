@@ -14,6 +14,7 @@ Use this skill to identify problems/opportunities and de-risk decisions. Use `so
 - **Human-centred design**: Iterative design + evaluation grounded in evidence (ISO 9241-210:2019) https://www.iso.org/standard/77520.html
 - **Usability definition**: Effectiveness, efficiency, satisfaction in context (ISO 9241-11:2018) https://www.iso.org/standard/63500.html
 - **Accessibility baseline**: WCAG 2.2 is a W3C Recommendation (12 Dec 2024) https://www.w3.org/TR/WCAG22/
+- **WCAG 3.0 preview**: Working Draft published Sep 2025; introduces Bronze/Silver/Gold conformance tiers and enhanced cognitive accessibility; not expected before 2028-2030 https://www.w3.org/WAI/standards-guidelines/wcag/wcag3-intro/
 - **EU shipping note**: European Accessibility Act applies to covered products/services after 28 Jun 2025 (Directive (EU) 2019/882) https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019L0882
 
 ## When to Use This Skill
@@ -23,6 +24,16 @@ Use this skill to identify problems/opportunities and de-risk decisions. Use `so
 - Evaluative: usability tests, heuristic evaluation, cognitive walkthroughs.
 - Quant/behavioral: funnels, cohorts, instrumentation gaps, guardrails.
 - Research Ops: intake, prioritization, repository/taxonomy, consent/PII handling.
+- **Demographic research**: Age-diverse, cultural, accessibility participant recruitment.
+- **A/B testing**: Experiment design, sample size, analysis, pitfalls.
+
+## When NOT to Use This Skill
+
+- **UI implementation** → Use `software-ui-ux-design` for components, patterns, code
+- **Analytics instrumentation** → Use `software-observability` for event tracking setup
+- **Accessibility compliance audit** → Use accessibility-specific checklists (WCAG conformance)
+- **Marketing research** → Use `marketing-*` skills for market sizing, customer acquisition
+- **A/B test platform setup** → Use experimentation platforms (Statsig, GrowthBook, LaunchDarkly)
 
 ---
 
@@ -38,7 +49,7 @@ If inputs are missing, ask for:
 
 Default outputs (pick what the user asked for):
 
-- Research plan + output contract (prefer [../software-clean-code-standard/templates/checklists/ux-research-plan-template.md](../software-clean-code-standard/templates/checklists/ux-research-plan-template.md); use [templates/research-plan-template.md](templates/research-plan-template.md) for skill-specific detail)
+- Research plan + output contract (prefer [../software-clean-code-standard/assets/checklists/ux-research-plan-template.md](../software-clean-code-standard/assets/checklists/ux-research-plan-template.md); use [assets/research-plan-template.md](assets/research-plan-template.md) for skill-specific detail)
 - Study protocol (tasks/script + success metrics + recruitment plan)
 - Findings report (issues + severity + evidence + recommendations + confidence)
 - Decision brief (options + tradeoffs + recommendation + measurement plan)
@@ -172,6 +183,20 @@ PII handling checklist:
 
 ## Measurement & Decision Quality (Core)
 
+### Research ROI Quick Reference
+
+| Research Activity | Proxy Metric | Calculation |
+|-------------------|--------------|-------------|
+| Usability testing finding | Prevented dev rework | Hours saved × $150/hr |
+| Discovery interview | Prevented build-wrong-thing | Sprint cost × risk reduction % |
+| A/B test conclusive result | Improved conversion | (ΔConversion × Traffic × LTV) - Test cost |
+| Heuristic evaluation | Early defect detection | Defects found × Cost-to-fix-later |
+
+**Rules of thumb**:
+- 1 usability finding that prevents 40 hours of rework = **$6,000 value**
+- 1 discovery insight that prevents 1 wasted sprint = **$50,000-100,000 value**
+- Research that improves conversion 0.5% on 100k visitors × $50 LTV = **$25,000/month**
+
 ### Triangulation Rubric
 
 | Confidence | Evidence requirement | Use for |
@@ -209,6 +234,8 @@ PII handling checklist:
 ## Optional: AI/Automation Research Considerations
 
 > Use only when researching automation/AI-powered features. Skip for traditional software UX.
+>
+> **2026 benchmark**: 88% of UX researchers identify AI-assisted analysis as the top trend (UXStudioTeam survey). Use AI for efficiency while maintaining human judgment on strategy and interpretation.
 
 ### Key Questions
 
@@ -232,7 +259,22 @@ PII handling checklist:
 
 - Use automation for transcription/tagging only after PII redaction.
 - Maintain an audit trail: every theme links back to raw quotes/clips.
-- Prohibit fabricated quotes and “synthetic users” as evidence for real decisions.
+
+### Synthetic Users: When Appropriate (2026)
+
+48% of researchers see synthetic/AI participants as impactful. Use with clear boundaries:
+
+| Use Case | Appropriate? | Why |
+|----------|--------------|-----|
+| Early concept brainstorming | ⚠️ Supplement only | Generate edge cases, not validation |
+| Scenario/edge case expansion | ✅ Yes | Broaden coverage before real testing |
+| Moderator training/practice | ✅ Yes | Practice without participant burden |
+| Hypothesis generation | ✅ Yes | Explore directions to test with real users |
+| Validation/go-no-go decisions | ❌ Never | Cannot substitute lived experience |
+| Usability findings as evidence | ❌ Never | Real behavior required |
+| Quotes in reports | ❌ Never | Fabricated quotes damage credibility |
+
+**Critical rule**: Synthetic outputs are **hypotheses**, not evidence. Always validate with real users before shipping.
 
 ---
 
@@ -240,20 +282,73 @@ PII handling checklist:
 
 ### Resources
 
-- [resources/research-frameworks.md](resources/research-frameworks.md) — JTBD, Kano, Double Diamond, Service Blueprint, opportunity mapping
-- [resources/ux-audit-framework.md](resources/ux-audit-framework.md) — Heuristic evaluation, cognitive walkthrough, severity rating
-- [resources/usability-testing-guide.md](resources/usability-testing-guide.md) — Task design, facilitation, analysis
-- [resources/ux-metrics-framework.md](resources/ux-metrics-framework.md) — Task metrics, SUS/HEART, measurement guidance
-- [resources/customer-journey-mapping.md](resources/customer-journey-mapping.md) — Journey mapping and service blueprints
-- [resources/pain-point-extraction.md](resources/pain-point-extraction.md) — Feedback-to-themes method
-- [resources/review-mining-playbook.md](resources/review-mining-playbook.md) — B2B/B2C review mining
+**Core Research Methods:**
+
+- [references/research-frameworks.md](references/research-frameworks.md) — JTBD, Kano, Double Diamond, Service Blueprint, opportunity mapping
+- [references/ux-audit-framework.md](references/ux-audit-framework.md) — Heuristic evaluation, cognitive walkthrough, severity rating
+- [references/usability-testing-guide.md](references/usability-testing-guide.md) — Task design, facilitation, analysis
+- [references/ux-metrics-framework.md](references/ux-metrics-framework.md) — Task metrics, SUS/HEART, measurement guidance
+- [references/customer-journey-mapping.md](references/customer-journey-mapping.md) — Journey mapping and service blueprints
+- [references/pain-point-extraction.md](references/pain-point-extraction.md) — Feedback-to-themes method
+- [references/review-mining-playbook.md](references/review-mining-playbook.md) — B2B/B2C review mining
+
+**Demographic & Quantitative Research (NEW):**
+
+- [references/demographic-research-methods.md](references/demographic-research-methods.md) — Inclusive research for seniors, children, cultures, disabilities
+- [references/ab-testing-implementation.md](references/ab-testing-implementation.md) — A/B testing deep-dive (sample size, analysis, pitfalls)
+
+**Data & Sources:**
+
 - [data/sources.json](data/sources.json) — Curated external references
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about UX research, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best UX research tool for [use case]?"
+- "What should I use for [usability testing/surveys/analytics]?"
+- "What's the latest in UX research?"
+- "Current best practices for [user interviews/A/B testing/accessibility]?"
+- "Is [research method] still relevant in 2026?"
+- "What research tools should I use?"
+- "Best approach for [remote research/unmoderated testing]?"
+
+### Required Searches
+
+1. Search: `"UX research trends 2026"`
+2. Search: `"UX research tools best practices 2026"`
+3. Search: `"[Maze/Hotjar/UserTesting] comparison 2026"`
+4. Search: `"AI in UX research 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What research methods/tools are popular NOW
+- **Emerging trends**: New techniques or tools gaining traction
+- **Deprecated/declining**: Methods that are losing effectiveness
+- **Recommendation**: Based on fresh data and current practices
+
+### Example Topics (verify with fresh search)
+
+- AI-powered research tools (Maze AI, Looppanel)
+- Unmoderated testing platforms evolution
+- Voice of Customer (VoC) platforms
+- Analytics and behavioral tools (Hotjar, FullStory)
+- Accessibility testing tools and standards
+- Research repository and insight management
+
+---
 
 ### Templates
 
-- Shared plan template: [../software-clean-code-standard/templates/checklists/ux-research-plan-template.md](../software-clean-code-standard/templates/checklists/ux-research-plan-template.md) — Product-agnostic research plan template (core + optional AI)
-- [templates/research-plan-template.md](templates/research-plan-template.md) — UX research plan template
-- [templates/testing/usability-test-plan.md](templates/testing/usability-test-plan.md) — Usability test plan
-- [templates/testing/usability-testing-checklist.md](templates/testing/usability-testing-checklist.md) — Usability testing checklist
-- [templates/audits/heuristic-evaluation-template.md](templates/audits/heuristic-evaluation-template.md) — Heuristic evaluation
-- [templates/audits/ux-audit-report-template.md](templates/audits/ux-audit-report-template.md) — Audit report
+- Shared plan template: [../software-clean-code-standard/assets/checklists/ux-research-plan-template.md](../software-clean-code-standard/assets/checklists/ux-research-plan-template.md) — Product-agnostic research plan template (core + optional AI)
+- [assets/research-plan-template.md](assets/research-plan-template.md) — UX research plan template
+- [assets/testing/usability-test-plan.md](assets/testing/usability-test-plan.md) — Usability test plan
+- [assets/testing/usability-testing-checklist.md](assets/testing/usability-testing-checklist.md) — Usability testing checklist
+- [assets/audits/heuristic-evaluation-template.md](assets/audits/heuristic-evaluation-template.md) — Heuristic evaluation
+- [assets/audits/ux-audit-report-template.md](assets/audits/ux-audit-report-template.md) — Audit report

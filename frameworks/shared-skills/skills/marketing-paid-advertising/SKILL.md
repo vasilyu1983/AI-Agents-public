@@ -1,6 +1,6 @@
 ---
 name: marketing-paid-advertising
-description: Paid advertising strategy for Google, Meta, TikTok, LinkedIn - campaign structure, bidding, audiences, creative, measurement, and budget allocation.
+description: Paid advertising strategy for Google, Meta, TikTok, LinkedIn - campaign structure, bidding, audiences, creative, measurement, budget allocation, unit economics (CAC/LTV), revenue attribution, payback period, and sales alignment.
 ---
 
 # PAID ADVERTISING — CAMPAIGN OS (OPERATIONAL)
@@ -18,6 +18,11 @@ Built as a **no-fluff execution skill** for paid acquisition across Google, Meta
 - TikTok Ads Manager: https://ads.tiktok.com/help/
 - LinkedIn Campaign Manager: https://business.linkedin.com/marketing-solutions
 
+### Local Reference PDFs (Internal)
+
+- [Google: Responsive Search Ads - A guide to writing ads that perform (2023)](<../../../../custom-gpt/productivity/SMM Assistant/sources/15. Google responsive_search_ads_a_guide_to_writing_ads_that_perform_2023.pdf>)
+- [Google: Search Creative Best Practices Guide (Responsive Search Ads)](<../../../../custom-gpt/productivity/SMM Assistant/sources/12. Google creative best practices guide.pdf>)
+
 ---
 
 ## When to Use This Skill
@@ -27,6 +32,20 @@ Built as a **no-fluff execution skill** for paid acquisition across Google, Meta
 - **Platform selection**: Which channels for which goals
 - **Creative strategy**: Ad formats, hooks, testing frameworks
 - **Measurement**: Attribution, incrementality, cross-platform tracking
+- **Unit economics**: CAC/LTV modeling, payback period, max allowable spend
+- **Revenue attribution**: Multi-touch attribution, incrementality testing
+- **Sales alignment**: Lead quality, MQL/SQL handoffs, shared KPIs
+
+---
+
+## When NOT to Use This Skill
+
+- **Organic social strategy** → Use [marketing-social-media](../marketing-social-media/SKILL.md)
+- **SEO/content marketing** → Use [marketing-seo](../marketing-seo/SKILL.md)
+- **Email automation** → Use [marketing-email-automation](../marketing-email-automation/SKILL.md)
+- **Landing page optimization** → Use [marketing-cro](../marketing-cro/SKILL.md)
+- **Affiliate/influencer marketing** → Different attribution and partnership models
+- **Programmatic display (DSP)** → Requires specialized DSP knowledge beyond self-serve platforms
 
 ---
 
@@ -143,46 +162,57 @@ BUDGET CONSTRAINED?
 
 ## Core: Audience Strategy
 
-### Google Audiences
+### By Funnel Stage
 
-| Audience Type | Description | Use Case |
-|---------------|-------------|----------|
-| **In-Market** | Actively researching/buying | Prospecting |
-| **Affinity** | Long-term interests | Awareness |
-| **Custom Intent** | Your keywords, competitor URLs | Prospecting |
-| **Remarketing** | Your site visitors | Retargeting |
-| **Customer Match** | Email list upload | Lookalikes, exclusion |
-| **Similar** | Lookalikes of your lists | Prospecting |
+| Stage | Google | Meta | TikTok |
+|-------|--------|------|--------|
+| **Top** (Awareness) | In-Market, Affinity | Broad, Lookalike 1-5% | Interest, Hashtag |
+| **Middle** (Consideration) | Custom Intent, Search | Lookalike 1-2%, Engaged | Custom, Retargeting |
+| **Bottom** (Decision) | Brand Search, RLSA | Retargeting 7-14d | Email retargeting |
 
-### Meta Audiences
+### Key Audiences
 
-| Audience Type | Description | Best Practice |
-|---------------|-------------|---------------|
-| **Lookalike 1%** | Most similar to source | Highest quality |
-| **Lookalike 1-3%** | Moderate similarity | Volume + quality |
-| **Interest** | Based on behavior/pages | Test broadly |
-| **Custom** | Site visitors, engagers | Retargeting |
-| **Advantage+** | AI-optimized broad | Let Meta find |
+- **Google:** In-Market (actively buying), Custom Intent (your keywords/competitor URLs), Remarketing
+- **Meta:** Lookalike 1% (highest quality), Advantage+ (AI-optimized), Custom audiences
+- **LinkedIn:** Job title, company size, industry targeting
 
-### Audience Strategy Framework
+---
 
-```text
-FUNNEL STAGE
-├─ Top (Awareness)
-│   ├─ Google: In-Market, Affinity, Display
-│   ├─ Meta: Broad, Interest, Lookalike 1-5%
-│   └─ TikTok: Interest, Hashtag
-│
-├─ Middle (Consideration)
-│   ├─ Google: Custom Intent, Search
-│   ├─ Meta: Lookalike 1-2%, Engaged visitors
-│   └─ TikTok: Custom audiences, Retargeting
-│
-└─ Bottom (Decision)
-    ├─ Google: Brand Search, RLSA
-    ├─ Meta: Retargeting 7-14d, Cart abandoners
-    └─ All: Email list retargeting
-```
+## Core: First-Party Data Strategy (2026 Critical)
+
+With third-party cookie deprecation complete, first-party and zero-party data are essential for targeting.
+
+### Data Types
+
+| Type | Definition | Collection Method |
+|------|------------|-------------------|
+| **First-party** | Data you collect directly | Website behavior, email, purchases |
+| **Zero-party** | Data customers intentionally share | Surveys, preferences, quiz results |
+
+### Implementation Checklist
+
+- [ ] Customer Match lists uploaded (Google, Meta, LinkedIn)
+- [ ] Enhanced Conversions enabled (Google)
+- [ ] Conversions API (CAPI) implemented (Meta)
+- [ ] Events API configured (TikTok, LinkedIn)
+- [ ] Email/phone collection optimized on landing pages
+- [ ] Lead enrichment workflow configured
+
+### Platform-Specific Setup
+
+| Platform | First-Party Feature | Priority |
+|----------|---------------------|----------|
+| **Google** | Customer Match, Enhanced Conversions | Critical |
+| **Meta** | Conversions API (CAPI), Custom Audiences | Critical |
+| **LinkedIn** | Matched Audiences, Insight Tag | High |
+| **TikTok** | Events API, Custom Audiences | High |
+
+### Why This Matters in 2026
+
+- **Targeting precision**: Algorithms now rely on first-party signals, not third-party cookies
+- **Signal quality**: Offline conversions and CRM data improve bidding accuracy
+- **Audience building**: Lookalikes based on your data outperform interest targeting
+- **Attribution recovery**: Server-side tracking recovers 10-20% of lost conversions
 
 ---
 
@@ -190,61 +220,25 @@ FUNNEL STAGE
 
 ### Ad Format Selection
 
-| Format | Platform | Best For | CPM Range |
-|--------|----------|----------|-----------|
-| **Responsive Search** | Google | High intent | $1-5 |
-| **Image (static)** | Meta, Display | Simple message | $3-10 |
-| **Carousel** | Meta, LinkedIn | Multiple products/features | $5-12 |
-| **Video (15-30s)** | All | Engagement, brand | $8-20 |
-| **UGC-style** | Meta, TikTok | Authenticity | $5-15 |
-| **Document** | LinkedIn | B2B thought leadership | $10-25 |
+| Format | Platform | Best For |
+|--------|----------|----------|
+| Responsive Search | Google | High intent |
+| Image/Carousel | Meta, LinkedIn | Products, features |
+| Video (15-30s) | All | Engagement, brand |
+| UGC-style | Meta, TikTok | Authenticity |
 
 ### Creative Testing Framework
 
-**Test ONE variable at a time:**
+Test ONE variable at a time: Hook (Week 1-2) → Format (Week 3-4) → CTA (Week 5-6).
 
-```text
-Week 1-2: Hook Test
-├─ Creative A: Pain hook ("Tired of...")
-├─ Creative B: Result hook ("Get X in Y days")
-└─ Creative C: Social proof hook ("Join 10,000+")
+### Platform Best Practices
 
-Week 3-4: Format Test (winner hook)
-├─ Creative A: Static image
-├─ Creative B: Video (15s)
-└─ Creative C: Carousel
+- **Google Search:** Keywords in headlines, use all 15 headlines/4 descriptions. See [references/google-ads-guide.md](references/google-ads-guide.md)
+- **Meta:** Hook in first 3 seconds, UGC outperforms polished, 1:1 feed / 9:16 stories
+- **TikTok:** Native aesthetic, hook in 1 second, trending sounds
+- **LinkedIn:** Professional tone, document ads for thought leadership
 
-Week 5-6: CTA Test (winner format)
-├─ Creative A: "Start Free Trial"
-├─ Creative B: "Book a Demo"
-└─ Creative C: "See Pricing"
-```
-
-### Creative Best Practices by Platform
-
-**Google Search:**
-- Include keywords in headlines
-- Use all 15 headlines, 4 descriptions
-- Pin important messages to positions 1-2
-- Include numbers, urgency, benefits
-
-**Meta:**
-- First 3 seconds = hook (video)
-- Native/UGC style outperforms polished
-- 1:1 for feed, 9:16 for stories/reels
-- Text: <125 chars primary, 40 headline
-
-**TikTok:**
-- Native TikTok aesthetic (not ads)
-- Hook in first 1 second
-- Creator/UGC content performs best
-- Trending sounds can boost reach
-
-**LinkedIn:**
-- Professional tone, specific value
-- Document ads for thought leadership
-- Video: talking head with captions
-- Longer copy acceptable (pain + solution)
+**Templates:** [assets/creative-brief.md](assets/creative-brief.md), [assets/google-rsa-asset-pack.md](assets/google-rsa-asset-pack.md)
 
 ---
 
@@ -300,11 +294,13 @@ Testing: 10%
 
 | Task | Template | Location |
 |------|----------|----------|
-| Campaign setup | Campaign structure template | `templates/campaign-structure.md` |
-| Budget planning | Budget allocation worksheet | `templates/budget-allocation.md` |
-| Creative brief | Ad creative brief | `templates/creative-brief.md` |
-| A/B testing | Creative test plan | `templates/creative-test-plan.md` |
-| Performance review | Weekly/monthly review | `templates/performance-review.md` |
+| Campaign setup | Campaign structure template | `assets/campaign-structure.md` |
+| Budget planning | Budget allocation worksheet | `assets/budget-allocation.md` |
+| Unit economics | CAC/LTV/Payback calculator | `assets/unit-economics-calculator.md` |
+| Google RSA copy pack | RSA headlines + descriptions pack | `assets/google-rsa-asset-pack.md` |
+| Creative brief | Ad creative brief | `assets/creative-brief.md` |
+| A/B testing | Creative test plan | `assets/creative-test-plan.md` |
+| Performance review | Weekly/monthly review | `assets/performance-review.md` |
 
 ---
 
@@ -334,67 +330,58 @@ Volume too low?
 
 ## Operational SOPs
 
-### Campaign Launch SOP
+**Campaign Launch:** Pre-launch (define KPIs, build audiences, upload 3-5 creatives) → Launch (conservative bids, daily caps) → Learning phase (14 days, no major changes) → Optimization (pause losers, scale winners +20%).
 
-1. **Pre-launch (Day -7 to -1)**
-   - Define KPIs: CPL target, ROAS target, volume goals
-   - Build audiences: custom, lookalike, remarketing
-   - Create campaign structure per framework
-   - Upload creative assets (3-5 variants minimum)
-   - Set up conversion tracking and verify
-   - Configure UTM parameters
+**Weekly Review:** Monday (30 min): metrics, targets, top 3 actions. Thursday (15 min): pacing, pause disasters.
 
-2. **Launch (Day 0)**
-   - Start with conservative bids (20% below target CPA)
-   - Enable all ad sets/ad groups
-   - Set daily budget caps
-   - Document baseline metrics
+**Monthly Review:** Performance summary, audience insights, creative insights, budget reallocation.
 
-3. **Learning Phase (Day 1-14)**
-   - DO NOT make major changes
-   - Monitor for errors only (disapprovals, tracking issues)
-   - Document performance daily
+**Full SOPs:** [references/operational-sops.md](references/operational-sops.md)
 
-4. **Optimization (Day 14+)**
-   - Pause underperformers (>2x CPA target)
-   - Increase budget on winners (+20% increments)
-   - Launch creative tests
-   - Expand audiences gradually
+---
 
-### Weekly Review SOP
+## Privacy & Compliance (2026)
 
-**Monday (30 minutes):**
-- Pull weekly metrics: spend, CPL, ROAS, conversions
-- Compare to targets and previous week
-- Identify top 3 actions for the week
+CCPA 2.0 and EU AI Act are in full effect. Non-compliance risks account suspension and fines.
 
-**Thursday (15 minutes):**
-- Mid-week check on pacing
-- Pause any disasters (>3x CPA)
-- Note creative fatigue signals
+### Compliance Checklist
 
-### Monthly Review SOP
+- [ ] Explicit consent obtained for personalized targeting
+- [ ] Clear opt-out options available on all properties
+- [ ] Third-party tracking tools audited for compliance
+- [ ] Cookie consent banner with granular controls
+- [ ] Data retention policies documented and enforced
 
-1. **Performance Summary**
-   - Spend vs budget
-   - CPL/CPA by campaign, platform
-   - ROAS by campaign, platform
-   - Conversion volume and quality
+### Platform Privacy Features
 
-2. **Audience Insights**
-   - Best performing audiences
-   - Audiences to exclude
-   - New audience opportunities
+| Platform | Feature | Status |
+|----------|---------|--------|
+| **Google** | Consent Mode v2 | Required (EU/EEA) |
+| **Meta** | Limited Data Use (LDU) | Required (California) |
+| **All** | Server-side tracking | Recommended |
+| **All** | Privacy-safe attribution | Recommended |
 
-3. **Creative Insights**
-   - Top performing creatives
-   - Fatigue indicators
-   - Next month's test plan
+### Regional Requirements
 
-4. **Budget Reallocation**
-   - Shift budget from losers to winners
-   - Adjust platform mix based on results
-   - Plan next month's tests
+| Region | Law | Key Requirement |
+|--------|-----|-----------------|
+| **EU/EEA** | GDPR + AI Act | Consent before tracking, AI transparency |
+| **California** | CCPA 2.0 | Opt-out rights, data deletion |
+| **UK** | UK GDPR | Similar to EU, separate enforcement |
+
+### Do (Privacy)
+
+- Implement Consent Mode v2 for Google Ads in EU
+- Enable Limited Data Use for Meta in California
+- Use server-side tracking for privacy-compliant attribution
+- Document data flows and retention policies
+
+### Avoid (Privacy)
+
+- Tracking without consent in regulated regions
+- Storing raw PII in ad platforms
+- Using non-compliant third-party pixels
+- Ignoring platform policy updates
 
 ---
 
@@ -421,23 +408,107 @@ Volume too low?
 
 ---
 
+## Core: Unit Economics & CAC/LTV Framework
+
+Connect ad spend to business outcomes. Campaigns optimized for CPL without understanding downstream economics often acquire unprofitable customers.
+
+**Key Metrics:**
+
+| Ratio | Status | Action |
+|-------|--------|--------|
+| < 1:1 | Losing money | Stop spending |
+| 3:1 | Healthy (target) | Maintain/scale |
+| > 5:1 | Under-investing | Scale aggressively |
+
+**Payback Benchmarks:**
+
+| Business Model | Target | Max |
+|----------------|--------|-----|
+| B2C SaaS | < 6 mo | 12 mo |
+| B2B SaaS (SMB) | < 12 mo | 18 mo |
+| E-commerce | < 3 mo | 6 mo |
+
+**Decision Tree:**
+- LTV:CAC > 3:1 AND Payback < Target → Scale spend
+- LTV:CAC 1-3:1 → Optimize efficiency
+- LTV:CAC < 1:1 → Stop paid ads, fix unit economics
+
+**Full guide:** [references/unit-economics-guide.md](references/unit-economics-guide.md)
+
+**Calculator template:** [assets/unit-economics-calculator.md](assets/unit-economics-calculator.md)
+
+---
+
+## Core: Revenue Attribution Framework
+
+Measure the true business impact of paid advertising through attribution modeling and incrementality testing.
+
+**Attribution Models:**
+
+| Model | Best For |
+|-------|----------|
+| Last Click | Short cycles (<7 days), simple tracking |
+| Position-Based | B2B, multi-touch journeys |
+| Data-Driven | High volume (>1000 conv/mo) |
+
+**Incrementality Testing:**
+- **Geo-lift**: Compare test markets (ads on) vs control (ads off)
+- **Holdout**: Exclude 10-20% of audience, measure conversion lift
+
+**Tracking Setup:**
+- Google: Enhanced conversions + GA4
+- Meta: Conversions API (CAPI)
+- LinkedIn/TikTok: Events API + UTM → CRM backup
+
+**Full guide:** [references/revenue-attribution-guide.md](references/revenue-attribution-guide.md)
+
+---
+
+## Core: Sales Alignment Protocol
+
+Align paid advertising with sales teams to maximize revenue impact and accurate CAC measurement.
+
+**Lead Pipeline:**
+
+| Stage | Marketing KPI | Sales KPI |
+|-------|---------------|-----------|
+| Lead | Volume, CPL | Response time |
+| MQL | MQL rate, Cost/MQL | Qualification rate |
+| SQL | SQL rate, Cost/SQL | Demo rate |
+| Customer | CAC, LTV:CAC | Revenue, ACV |
+
+**Lead Scoring Thresholds:**
+- 12-15: Hot → Immediate outreach
+- 8-11: Warm → Sales within 24h
+- <8: Nurture sequence
+
+**Weekly Sync Agenda (30 min):**
+1. Lead quality review (5 min)
+2. Pipeline impact (10 min)
+3. Targeting feedback (10 min)
+4. Upcoming campaigns (5 min)
+
+**Full guide:** [references/sales-alignment-guide.md](references/sales-alignment-guide.md)
+
+---
+
 ## Platform-Specific Guides
 
 ### Google Ads Specifics
 
-See [resources/google-ads-guide.md](resources/google-ads-guide.md)
+See [references/google-ads-guide.md](references/google-ads-guide.md)
 
 ### Meta Ads Specifics
 
-See [resources/meta-ads-guide.md](resources/meta-ads-guide.md)
+See [references/meta-ads-guide.md](references/meta-ads-guide.md)
 
 ### TikTok Ads Specifics
 
-See [resources/tiktok-ads-guide.md](resources/tiktok-ads-guide.md)
+See [references/tiktok-ads-guide.md](references/tiktok-ads-guide.md)
 
 ### LinkedIn Ads Specifics
 
-See [resources/linkedin-ads-guide.md](resources/linkedin-ads-guide.md)
+See [references/linkedin-ads-guide.md](references/linkedin-ads-guide.md)
 
 ---
 
@@ -445,52 +516,46 @@ See [resources/linkedin-ads-guide.md](resources/linkedin-ads-guide.md)
 
 | Template | Purpose |
 |----------|---------|
-| [campaign-structure.md](templates/campaign-structure.md) | Campaign hierarchy template |
-| [budget-allocation.md](templates/budget-allocation.md) | Budget planning worksheet |
-| [creative-brief.md](templates/creative-brief.md) | Ad creative specification |
-| [creative-test-plan.md](templates/creative-test-plan.md) | A/B testing framework |
-| [performance-review.md](templates/performance-review.md) | Weekly/monthly review template |
+| [campaign-structure.md](assets/campaign-structure.md) | Campaign hierarchy template |
+| [budget-allocation.md](assets/budget-allocation.md) | Budget planning + unit economics worksheet |
+| [unit-economics-calculator.md](assets/unit-economics-calculator.md) | CAC/LTV/Payback period calculator |
+| [google-rsa-asset-pack.md](assets/google-rsa-asset-pack.md) | Google RSA headline/description asset pack |
+| [creative-brief.md](assets/creative-brief.md) | Ad creative specification |
+| [creative-test-plan.md](assets/creative-test-plan.md) | A/B testing framework |
+| [performance-review.md](assets/performance-review.md) | Weekly/monthly review template |
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: Use WebSearch to check current trends before answering recommendation questions.
+
+**Triggers:** "Best strategy for 2026?", "What's new in [platform]?", "Is [feature] still effective?"
+
+**Required Searches:**
+1. `"paid advertising trends 2026"`
+2. `"[platform] updates January 2026"`
+3. `"[platform] best practices 2026"`
+
+**Report:** Current landscape, emerging trends, deprecated features, recommendation based on fresh data.
 
 ---
 
 ## Anti-Patterns
 
-| Anti-Pattern | Why It Fails | Instead |
-|--------------|--------------|---------|
-| **Changing bids daily** | Resets algorithm learning | Wait 2-4 weeks |
-| **Too many audiences** | Splits budget, no learnings | 3-5 audiences max |
-| **Single creative** | No testing, quick fatigue | 3-5 variants minimum |
-| **No negative keywords** | Wasted spend on irrelevant | Build negatives weekly |
-| **Ignoring Quality Score** | Higher CPCs, lower reach | Improve relevance |
-| **Platform FOMO** | Spreading too thin | Master 1-2 platforms first |
-| **No exclusions** | Showing to existing customers | Exclude converters |
+- **Changing bids daily** → Resets learning. Wait 2-4 weeks.
+- **Too many audiences** → Splits budget. Use 3-5 max.
+- **Single creative** → Quick fatigue. Use 3-5 variants.
+- **No negative keywords** → Wasted spend. Build weekly.
+- **Platform FOMO** → Spreading thin. Master 1-2 first.
 
 ---
 
 ## Optional: AI / Automation
 
-> **Note**: Core paid advertising fundamentals above work without AI. This section covers optional automation capabilities.
+**AI Features:** Performance Max (Google), Advantage+ (Meta), Value-Based Bidding (all platforms).
 
-### AI-Powered Features
-
-| Feature | Platform | Use Case |
-|---------|----------|----------|
-| **Performance Max** | Google | Full-funnel automation |
-| **Advantage+** | Meta | Automated targeting |
-| **Smart Campaigns** | TikTok | Automated optimization |
-| **Value-Based Bidding** | All | Bid on predicted LTV |
-
-### When to Use AI Features
-
-```text
-HAVE 100+ conversions/month?
-├─ YES → Consider Performance Max, Advantage+
-└─ NO → Stick to manual campaigns for control
-
-CLEAR CONVERSION VALUES?
-├─ YES → Value-based bidding can optimize for revenue
-└─ NO → Use CPA bidding instead
-```
+**When to use:** 100+ conversions/month AND clear conversion values. Otherwise, stick to manual campaigns.
 
 ---
 

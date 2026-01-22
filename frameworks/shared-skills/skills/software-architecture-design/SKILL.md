@@ -11,13 +11,13 @@ Use this skill for **system-level design decisions** rather than implementation 
 
 | Task | Pattern/Tool | Key Resources | When to Use |
 |------|-------------|---------------|-------------|
-| Choose architecture style | Layered, Microservices, Event-driven, Serverless | [modern-patterns.md](resources/modern-patterns.md) | Greenfield projects, major refactors |
-| Design for scale | Load balancing, Caching, Sharding, Read replicas | [scalability-reliability-guide.md](resources/scalability-reliability-guide.md) | High-traffic systems, performance goals |
-| Ensure resilience | Circuit breakers, Retries, Bulkheads, Graceful degradation | [modern-patterns.md](resources/modern-patterns.md) | Distributed systems, external dependencies |
-| Document decisions | Architecture Decision Record (ADR) | [adr-template.md](templates/planning/adr-template.md) | Major technical decisions, tradeoff analysis |
-| Define service boundaries | Domain-Driven Design (DDD), Bounded contexts | [microservices-template.md](templates/patterns/microservices-template.md) | Microservices decomposition |
-| Model data consistency | ACID vs BASE, Event sourcing, CQRS, Saga patterns | [event-driven-template.md](templates/patterns/event-driven-template.md) | Multi-service transactions |
-| Plan observability | SLIs/SLOs/SLAs, Distributed tracing, Metrics, Logs | [architecture-blueprint.md](templates/planning/architecture-blueprint.md) | Production readiness |
+| Choose architecture style | Layered, Microservices, Event-driven, Serverless | [modern-patterns.md](references/modern-patterns.md) | Greenfield projects, major refactors |
+| Design for scale | Load balancing, Caching, Sharding, Read replicas | [scalability-reliability-guide.md](references/scalability-reliability-guide.md) | High-traffic systems, performance goals |
+| Ensure resilience | Circuit breakers, Retries, Bulkheads, Graceful degradation | [modern-patterns.md](references/modern-patterns.md) | Distributed systems, external dependencies |
+| Document decisions | Architecture Decision Record (ADR) | [adr-template.md](assets/planning/adr-template.md) | Major technical decisions, tradeoff analysis |
+| Define service boundaries | Domain-Driven Design (DDD), Bounded contexts | [microservices-template.md](assets/patterns/microservices-template.md) | Microservices decomposition |
+| Model data consistency | ACID vs BASE, Event sourcing, CQRS, Saga patterns | [event-driven-template.md](assets/patterns/event-driven-template.md) | Multi-service transactions |
+| Plan observability | SLIs/SLOs/SLAs, Distributed tracing, Metrics, Logs | [architecture-blueprint.md](assets/planning/architecture-blueprint.md) | Production readiness |
 
 ## When to Use This Skill
 
@@ -58,16 +58,19 @@ Project needs: [New System or Major Refactor]
 
 **Decision Factors:**
 
-- Team size and structure (Conway's Law)
+- **Team size threshold**: <10 developers → modular monolith typically outperforms microservices (operational overhead)
+- Team structure (Conway's Law) — architecture mirrors org structure
 - Deployment independence needs
 - Consistency vs availability tradeoffs (CAP theorem)
 - Operational maturity (monitoring, orchestration)
 
-See [resources/modern-patterns.md](resources/modern-patterns.md) for detailed pattern descriptions.
+**Industry Data (CNCF 2025):** 42% of organizations that adopted microservices have consolidated at least some services back into larger deployable units. Primary drivers: debugging complexity, operational overhead, network latency.
+
+See [references/modern-patterns.md](references/modern-patterns.md) for detailed pattern descriptions.
 
 ---
 
-## Modern Architecture Patterns (Dec 2025)
+## Modern Architecture Patterns (Jan 2026)
 
 ### Data Mesh Architecture
 
@@ -124,16 +127,22 @@ Use when latency or bandwidth constraints require local processing.
 | Edge compute workloads | Validation, transforms, local control loops |
 | Edge-cloud hybrid | Local processing, cloud aggregation |
 
-### Platform Engineering
+### Platform Engineering (2026)
 
-Internal developer platforms (IDPs) for self-service infrastructure.
+Internal developer platforms (IDPs) for self-service infrastructure. By 2026, 80% of large software engineering organizations will have platform teams (Gartner).
 
-**Components:**
+**IDP Stack:**
 
-- Service catalog (Backstage, Port)
-- Golden paths (templates, scaffolding)
-- Developer portals (documentation, APIs)
-- Self-service infrastructure (Terraform, Crossplane)
+| Component | Tools | Purpose |
+| --------- | ----- | ------- |
+| Portal | Backstage (89% market share), Port | Service catalog, tech docs |
+| Golden paths | Scaffolder templates | Standardized project creation |
+| Infrastructure | Terraform, Crossplane | Self-service provisioning |
+| AI agents | First-class citizens with RBAC | Automated workflows |
+
+**FinOps Integration:** Platforms now implement pre-deployment cost gates that block services exceeding unit-economic thresholds.
+
+**Unified Delivery:** Single pipeline for app developers, ML engineers, and data scientists.
 
 ---
 
@@ -146,28 +155,46 @@ Internal developer platforms (IDPs) for self-service infrastructure.
 Retrieval-Augmented Generation for enterprise AI.
 
 | Component | Purpose |
-|-----------|---------|
+| --------- | ------- |
 | Vector store | Embedding storage (Pinecone, Weaviate, pgvector) |
 | Retriever | Semantic search over documents |
 | Generator | LLM produces responses with context |
 | Orchestrator | Chains retrieval and generation |
 
-#### Agentic AI Architecture
+#### Google's 8 Multi-Agent Design Patterns (Jan 2026)
 
-Multi-agent systems for autonomous workflows.
+The agentic AI field is experiencing its "microservices revolution" — single all-purpose agents are being replaced by orchestrated teams of specialized agents.
 
-| Pattern | Description |
-|---------|-------------|
-| Single agent | One LLM with tools |
-| Multi-agent | Specialized agents with coordination |
-| Hierarchical | Manager agent delegates to workers |
-| Decentralized | Peer agents negotiate tasks |
+**Three foundational execution patterns:** Sequential, Loop, Parallel
+
+| Pattern | Description | Use Case |
+| ------- | ----------- | -------- |
+| Sequential Pipeline | Agents in assembly line, output → next input | Document processing, ETL |
+| Parallel Fan-out | Concurrent agent execution, results merged | Multi-source research |
+| Loop/Iterative | Agent refines until condition met | Code review, optimization |
+| Hierarchical | Manager delegates to worker agents | Complex task decomposition |
+| Bidding/Auction | Agents compete for task assignment | Resource allocation |
+| Human-in-the-loop | Approval gates for critical decisions | High-stakes workflows |
+| Reflection | Agent critiques and improves own output | Quality assurance |
+| Tool Use | Agent selects and invokes external tools | API integration |
 
 **Anti-patterns:**
 
-- Unbounded agent loops without termination
+- Unbounded agent loops without termination conditions
 - Missing human-in-the-loop for critical decisions
-- No observability into agent actions
+- No observability into agent actions and reasoning
+- Single monolithic agent trying to do everything
+
+#### Agent Communication Protocols
+
+| Protocol | Purpose | Standard |
+| -------- | ------- | -------- |
+| MCP (Model Context Protocol) | LLM-to-data source connection | Anthropic open standard |
+| A2A (Agent-to-Agent) | Inter-agent communication at scale | Google Cloud Agent Engine |
+
+**MCP enables:** Agents access external data (databases, APIs, file systems) through standardized interfaces.
+
+**A2A enables:** Cross-system agent orchestration, discovery, and collaboration between agents from different platforms.
 
 ---
 
@@ -175,25 +202,25 @@ Multi-agent systems for autonomous workflows.
 
 ### Core Resources
 
-- [resources/modern-patterns.md](resources/modern-patterns.md) — 10 contemporary architecture patterns with decision trees (microservices, event-driven, serverless, CQRS, modular monolith, service mesh, edge computing)
-- [resources/scalability-reliability-guide.md](resources/scalability-reliability-guide.md) — CAP theorem, database scaling, caching strategies, circuit breakers, SRE patterns, observability
-- [data/sources.json](data/sources.json) — 42 curated external resources (AWS, Azure, Google Cloud, Martin Fowler, microservices.io, SRE books, 2024-2025 best practices)
+- [references/modern-patterns.md](references/modern-patterns.md) — 10 contemporary architecture patterns with decision trees (microservices, event-driven, serverless, CQRS, modular monolith, service mesh, edge computing)
+- [references/scalability-reliability-guide.md](references/scalability-reliability-guide.md) — CAP theorem, database scaling, caching strategies, circuit breakers, SRE patterns, observability
+- [data/sources.json](data/sources.json) — 60 curated external resources (AWS, Azure, Google Cloud, Martin Fowler, microservices.io, SRE books, multi-agent patterns, MCP/A2A protocols, platform engineering 2026)
 
 ### Templates
 
-**Planning & Documentation** ([templates/planning/](templates/planning/)):
+**Planning & Documentation** ([assets/planning/](assets/planning/)):
 
-- [templates/planning/architecture-blueprint.md](templates/planning/architecture-blueprint.md) — Service blueprint template (dependencies, SLAs, data flows, resilience, security, observability)
-- [templates/planning/adr-template.md](templates/planning/adr-template.md) — Architecture Decision Record (ADR) for documenting design decisions with tradeoff analysis
+- [assets/planning/architecture-blueprint.md](assets/planning/architecture-blueprint.md) — Service blueprint template (dependencies, SLAs, data flows, resilience, security, observability)
+- [assets/planning/adr-template.md](assets/planning/adr-template.md) — Architecture Decision Record (ADR) for documenting design decisions with tradeoff analysis
 
-**Architecture Patterns** ([templates/patterns/](templates/patterns/)):
+**Architecture Patterns** ([assets/patterns/](assets/patterns/)):
 
-- [templates/patterns/microservices-template.md](templates/patterns/microservices-template.md) — Complete microservices design template (API contracts, resilience, deployment, testing, cost optimization)
-- [templates/patterns/event-driven-template.md](templates/patterns/event-driven-template.md) — Event-driven architecture template (event schemas, saga patterns, event sourcing, schema evolution)
+- [assets/patterns/microservices-template.md](assets/patterns/microservices-template.md) — Complete microservices design template (API contracts, resilience, deployment, testing, cost optimization)
+- [assets/patterns/event-driven-template.md](assets/patterns/event-driven-template.md) — Event-driven architecture template (event schemas, saga patterns, event sourcing, schema evolution)
 
-**Operations & Scalability** ([templates/operations/](templates/operations/)):
+**Operations & Scalability** ([assets/operations/](assets/operations/)):
 
-- [templates/operations/scalability-checklist.md](templates/operations/scalability-checklist.md) — Comprehensive scalability checklist (database scaling, caching, load testing, auto-scaling, DR)
+- [assets/operations/scalability-checklist.md](assets/operations/scalability-checklist.md) — Comprehensive scalability checklist (database scaling, caching, load testing, auto-scaling, DR)
 
 ### Related Skills
 
@@ -231,14 +258,55 @@ Multi-agent systems for autonomous workflows.
 
 ---
 
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about software architecture, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best architecture for [use case]?"
+- "What should I use for [microservices/serverless/event-driven]?"
+- "What's the latest in system design?"
+- "Current best practices for [scalability/resilience/observability]?"
+- "Is [architecture pattern] still relevant in 2026?"
+- "[Monolith] vs [microservices] vs [modular monolith]?"
+- "Best approach for [distributed systems/data consistency]?"
+
+### Required Searches
+
+1. Search: `"software architecture best practices 2026"`
+2. Search: `"[microservices/serverless/event-driven] architecture 2026"`
+3. Search: `"system design patterns 2026"`
+4. Search: `"[specific pattern] vs alternatives 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What architecture patterns are popular NOW
+- **Emerging trends**: New patterns gaining traction (AI-native, edge)
+- **Deprecated/declining**: Approaches that are losing relevance
+- **Recommendation**: Based on fresh data and real-world case studies
+
+### Example Topics (verify with fresh search)
+
+- Modular monolith renaissance
+- AI-native architecture patterns
+- Edge computing and CDN-first design
+- Event-driven microservices evolution
+- Platform engineering and internal developer platforms
+- Observability-driven development
+
+---
+
 ## Operational Playbooks
 
 **Shared Foundation**
 
-- [../software-clean-code-standard/resources/clean-code-standard.md](../software-clean-code-standard/resources/clean-code-standard.md) - Canonical clean code rules (`CC-*`) for citation
-- Legacy playbook: [../software-clean-code-standard/resources/code-quality-operational-playbook.md](../software-clean-code-standard/resources/code-quality-operational-playbook.md) - `RULE-01`–`RULE-13`, operational procedures, and design patterns
-- [../software-clean-code-standard/resources/design-patterns-operational-checklist.md](../software-clean-code-standard/resources/design-patterns-operational-checklist.md) - GoF pattern triggers and guardrails, when to apply vs avoid patterns
+- [../software-clean-code-standard/references/clean-code-standard.md](../software-clean-code-standard/references/clean-code-standard.md) - Canonical clean code rules (`CC-*`) for citation
+- Legacy playbook: [../software-clean-code-standard/references/code-quality-operational-playbook.md](../software-clean-code-standard/references/code-quality-operational-playbook.md) - `RULE-01`–`RULE-13`, operational procedures, and design patterns
+- [../software-clean-code-standard/references/design-patterns-operational-checklist.md](../software-clean-code-standard/references/design-patterns-operational-checklist.md) - GoF pattern triggers and guardrails, when to apply vs avoid patterns
 
 **Architecture-Specific**
 
-- [resources/operational-playbook.md](resources/operational-playbook.md) — Detailed architecture questions, decomposition patterns, security layers, and external references
+- [references/operational-playbook.md](references/operational-playbook.md) — Detailed architecture questions, decomposition patterns, security layers, and external references

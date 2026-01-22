@@ -47,13 +47,15 @@ Design AI-first help centers, knowledge bases, FAQs, and learning materials.
 | Maintenance | Manual curation | AI-driven freshness detection |
 | Navigation | Category browsing | Conversational + contextual |
 
-### Critical Statistics
+### Critical Statistics (2026 Data)
 
-- **85%** of interactions handled without human agent (2025 target)
+- **80%** autonomous resolution predicted by **2029** (Gartner, March 2025)
+- **56%** of customer interactions will involve agentic AI by **mid-2026** (Cisco CX Survey)
+- **68%** of interactions handled end-to-end by agentic AI by **2028** (Cisco)
 - **67%** of customers prefer self-service for simple inquiries
+- **$80B** reduction in contact center labor costs by 2026 (Gartner)
 - **$13** average cost per live support interaction vs **pennies** for self-service
-- **35%** reduction in support tickets with AI-powered knowledge bases
-- **81%** of users want self-serve options (only 15% satisfied with current)
+- **81%** of consumers believe AI is essential to modern customer service (Zendesk 2026 CX Trends)
 
 ### AI-First Principles
 
@@ -62,6 +64,17 @@ Design AI-first help centers, knowledge bases, FAQs, and learning materials.
 3. **Proactive Assistance** — Surface help before users ask
 4. **Content Freshness** — Auto-detect stale content, suggest updates
 5. **Multi-Source Synthesis** — Pull from docs, tickets, Slack, release notes
+6. **Memory-Rich AI** — Retain context across sessions for personalized support
+
+### Emerging Trends (2026)
+
+| Trend | Description | Impact |
+|-------|-------------|--------|
+| **Voice Search** | Users speak instead of type to find information | Requires natural language KB content |
+| **Proactive AI** | AI detects/resolves issues before users report | Reduces inbound support volume |
+| **Embedded Help** | Help surfaces in-context, not separate portal | Higher engagement, lower friction |
+| **AI Operations Lead** | New role supervising AI agent behavior | Shift from execution to oversight |
+| **Hallucination Mitigation** | RAG grounding to reduce AI fabrication | Requires citation/source linking |
 
 ## Help Center Architecture
 
@@ -176,7 +189,7 @@ BEST PRACTICES
 - Expandable/collapsible format
 ```
 
-See [resources/article-templates.md](resources/article-templates.md) for complete templates.
+See [references/article-templates.md](references/article-templates.md) for complete templates.
 
 ## AI Integration Patterns
 
@@ -235,7 +248,7 @@ DON'T:
 - Duplicate content across articles
 ```
 
-See [resources/ai-integration.md](resources/ai-integration.md) for RAG setup and platform guides.
+See [references/ai-integration.md](references/ai-integration.md) for RAG setup and platform guides.
 
 ## Platform Comparison
 
@@ -258,7 +271,7 @@ PRICING: $55+/agent/month for AI features
 
 ### Intercom (Growth SaaS)
 
-```
+```text
 STRENGTHS
 - Conversational-first design
 - Sales + support integration
@@ -271,6 +284,11 @@ BEST FOR
 - In-app engagement
 
 PRICING: $29/seat + $0.99/resolution (Fin AI)
+
+⚠️ COST WARNING
+Intercom's $0.99/resolution pricing can scale to $5,000+/month
+for high-volume support. Costs are less predictable than Zendesk.
+Calculate: (monthly_resolutions × $0.99) + ($29 × seats)
 ```
 
 ### Freshdesk (SMB)
@@ -290,7 +308,7 @@ BEST FOR
 PRICING: $29/month (Growth), $69/agent (Pro)
 ```
 
-See [resources/platform-guides.md](resources/platform-guides.md) for detailed setup guides.
+See [references/platform-guides.md](references/platform-guides.md) for detailed setup guides.
 
 ## Metrics & KPIs
 
@@ -334,7 +352,7 @@ Example:
 - ROI = ($13,000 - $500) = $12,500/month
 ```
 
-See [resources/metrics-optimization.md](resources/metrics-optimization.md) for analytics setup.
+See [references/metrics-optimization.md](references/metrics-optimization.md) for analytics setup.
 
 ## Learning & Onboarding
 
@@ -364,7 +382,7 @@ INTERACTIVE GUIDES
 - Skip option for experienced users
 ```
 
-See [resources/learning-paths.md](resources/learning-paths.md) for course design.
+See [references/learning-paths.md](references/learning-paths.md) for course design.
 
 ## Implementation Checklist
 
@@ -404,12 +422,12 @@ See [resources/learning-paths.md](resources/learning-paths.md) for course design
 
 | Resource | Content |
 |----------|---------|
-| [article-templates.md](resources/article-templates.md) | Complete templates for all 5 article types |
-| [taxonomy-patterns.md](resources/taxonomy-patterns.md) | Category structures, tagging, search optimization |
-| [ai-integration.md](resources/ai-integration.md) | RAG setup, chatbot config, platform integrations |
-| [platform-guides.md](resources/platform-guides.md) | Zendesk, Intercom, Freshdesk, GitBook setup |
-| [learning-paths.md](resources/learning-paths.md) | Onboarding sequences, tutorial design, courses |
-| [metrics-optimization.md](resources/metrics-optimization.md) | KPI tracking, analytics, A/B testing |
+| [article-templates.md](references/article-templates.md) | Complete templates for all 5 article types |
+| [taxonomy-patterns.md](references/taxonomy-patterns.md) | Category structures, tagging, search optimization |
+| [ai-integration.md](references/ai-integration.md) | RAG setup, chatbot config, platform integrations |
+| [platform-guides.md](references/platform-guides.md) | Zendesk, Intercom, Freshdesk, GitBook setup |
+| [learning-paths.md](references/learning-paths.md) | Onboarding sequences, tutorial design, courses |
+| [metrics-optimization.md](references/metrics-optimization.md) | KPI tracking, analytics, A/B testing |
 
 ## External References
 
@@ -429,3 +447,44 @@ See [resources/learning-paths.md](resources/learning-paths.md) for course design
 - [Whatfix](https://whatfix.com/) — Digital adoption
 - [Ada](https://www.ada.cx/) — AI customer service
 - [Fin AI](https://fin.ai/) — Intercom AI agent
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about help centers, knowledge bases, or support platforms, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best help center platform?"
+- "What should I use for [knowledge base/FAQ/support]?"
+- "What's the latest in customer self-service?"
+- "Current best practices for [AI support/chatbots]?"
+- "Is [Zendesk/Intercom/Freshdesk] still relevant in 2026?"
+- "[Zendesk] vs [Intercom] vs [other]?"
+- "Best AI chatbot for customer support?"
+
+### Required Searches
+
+1. Search: `"help center best practices 2026"`
+2. Search: `"[specific platform] vs alternatives 2026"`
+3. Search: `"AI customer support trends January 2026"`
+4. Search: `"knowledge base platforms 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What support platforms/tools are popular NOW
+- **Emerging trends**: New AI capabilities, patterns, or platforms gaining traction
+- **Deprecated/declining**: Approaches or tools losing relevance
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- Help center platforms (Zendesk, Intercom, Freshdesk)
+- AI support agents (Fin AI, Ada, Forethought)
+- Knowledge base tools (Document360, GitBook, Notion)
+- In-app guidance (UserPilot, Pendo, Chameleon)
+- Self-service AI capabilities and resolution rates
+- Semantic search and RAG for support

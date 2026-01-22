@@ -1,8 +1,8 @@
 ---
 name: router-startup
-description: Master orchestration for routing startup problems through 23 skills for comprehensive analysis and validation (orchestrates 73+ skills total across all routers)
+description: Master orchestration for routing startup problems through 24 skills for comprehensive analysis and validation (orchestrates 76+ skills total across all routers)
 metadata:
-  version: "1.5"
+  version: "1.7"
 ---
 
 # Router: Startup
@@ -67,7 +67,7 @@ USER INPUT
     ├─► "Lead generation" ──────────────► marketing-leads-generation
     │                                      └─► ICP, outbound, landing pages
     │
-    ├─► "SEO / organic traffic" ────────► marketing-seo-technical
+    ├─► "SEO / organic traffic" ────────► marketing-seo-complete
     │                                      └─► Core Web Vitals, crawlability
     │
     ├─► "AI search optimization" ───────► marketing-ai-search-optimization
@@ -81,6 +81,12 @@ USER INPUT
     │
     ├─► "Conversion optimization" ─────► marketing-cro
     │                                      └─► A/B testing, landing pages
+    │
+    ├─► "Product analytics / tracking" ─► marketing-product-analytics
+    │                                      └─► PostHog, events, attribution, LLM analytics
+    │
+    ├─► "Ad creatives / social graphics" ► marketing-visual-design
+    │                                      └─► Ads, social, email visuals, decks
     │
     │   ═══════════════════════════════════════════════════════════
     │   DOCUMENTS & PRESENTATIONS (NEW - Explicit Routing)
@@ -263,11 +269,12 @@ Platform Selection --> Taxonomy Design --> Content Creation --> AI Integration -
 | `marketing-content-strategy` | Positioning, pillars, editorial calendar, briefs |
 | `marketing-social-media` | Social strategy, content calendar, paid social, LinkedIn |
 | `marketing-leads-generation` | ICP definition, outbound cadences, landing pages, lead scoring |
-| `marketing-seo-technical` | Core Web Vitals, crawlability, structured data |
+| `marketing-seo-complete` | Core Web Vitals, crawlability, structured data |
 | `marketing-ai-search-optimization` | ChatGPT/Perplexity/Claude SEO, AEO/GEO/LLMO |
 | `marketing-paid-advertising` | Google, Meta, TikTok, LinkedIn campaign strategy, bidding |
 | `marketing-email-automation` | Nurture sequences, HubSpot/Klaviyo setup, deliverability |
 | `marketing-cro` | A/B testing, landing page optimization, conversion funnels |
+| `marketing-visual-design` | Ad creatives, social graphics, email visuals, presentation design |
 
 **Skill Chain**:
 ```
@@ -324,7 +331,7 @@ This framework uses three domain-specific routers for intelligent skill orchestr
 │                       │  │                       │  │                       │
 │  Business & Startup   │  │  Technical & AI/ML    │  │   QA & DevOps         │
 │  8 startup skills     │  │  32 engineering skills│  │   15 operations skills│
-│  8 marketing skills   │  │  6 claude-code skills │  │                       │
+│  10 marketing skills  │  │  6 claude-code skills │  │                       │
 │  4 document skills    │  │                       │  │                       │
 │  + product mgmt + UX  │  │                       │  │                       │
 └───────────────────────┘  └───────────────────────┘  └───────────────────────┘
@@ -334,17 +341,17 @@ This framework uses three domain-specific routers for intelligent skill orchestr
 
 | Router | Skills | Domain |
 |--------|--------|--------|
-| `router-startup` | 23 | Business, validation, marketing (8), documents, UX, help center |
-| `router-engineering` | 32 | Software, AI/ML, data, Claude Code framework |
-| `router-operations` | 15 | QA, testing, DevOps, git, docs |
-| **Total** | **73+** | Full coverage |
+| `router-startup` | 24 | Business, validation, marketing (10), documents, UX, help center |
+| `router-engineering` | 33 | Software, AI/ML, data, Claude Code framework |
+| `router-operations` | 19 | QA, testing, DevOps, git, docs |
+| **Total** | **75** | Full coverage (+ 4 routers = 79 total) |
 
 ### Cross-Router Handoff Rules
 
 | From Router | To Router | Trigger Keywords |
 |-------------|-----------|------------------|
 | `router-startup` | `router-engineering` | "build", "implement", "code", "API", "frontend" |
-| `router-startup` | `router-operations` | "test", "deploy", "CI/CD", "monitor" |
+| `router-startup` | `router-operations` | "test", "deploy", "CI/CD", "monitor", "CLAUDE.md", "large codebase" |
 | `router-engineering` | `router-startup` | "pricing", "market", "competitors", "GTM" |
 | `router-engineering` | `router-operations` | "test", "deploy", "debug", "monitor" |
 | `router-operations` | `router-startup` | "launch", "pricing", "business model" |
@@ -517,18 +524,19 @@ For full opportunity analysis, invoke skills in parallel:
 | `ai-prompt-engineering` | Prompt design |
 | `ai-fine-tuning` | Model customization |
 
-### Marketing & Growth (8 skills)
+### Marketing & Growth (10 skills)
 
 | Skill | Purpose | Key Outputs |
 |-------|---------|-------------|
 | `marketing-content-strategy` | Content planning | Positioning, pillars, editorial calendars |
 | `marketing-social-media` | Social strategy | Content calendars, paid social, LinkedIn |
 | `marketing-leads-generation` | Lead acquisition | ICP, outbound cadences, landing pages |
-| `marketing-seo-technical` | Technical SEO | Core Web Vitals, crawlability, structured data |
+| `marketing-seo-complete` | Technical SEO | Core Web Vitals, crawlability, structured data |
 | `marketing-ai-search-optimization` | AI search (AEO/GEO) | ChatGPT, Perplexity, Claude optimization |
 | `marketing-paid-advertising` | Paid ads strategy | Google, Meta, TikTok, LinkedIn campaigns |
 | `marketing-email-automation` | Email workflows | Nurture sequences, HubSpot, Klaviyo setup |
 | `marketing-cro` | Conversion optimization | A/B testing, landing pages, funnels |
+| `marketing-visual-design` | Marketing visuals | Ad creatives, social graphics, email visuals, decks |
 
 ### Document Creation (4 skills)
 
@@ -574,11 +582,12 @@ KEYWORDS -> SKILL MAPPING
 "content strategy", "editorial calendar", "content pillars", "blog strategy" -> marketing-content-strategy
 "social media", "LinkedIn", "content calendar", "paid social" -> marketing-social-media
 "leads", "lead generation", "outbound", "ICP", "landing page" -> marketing-leads-generation
-"SEO", "Core Web Vitals", "crawlability", "structured data" -> marketing-seo-technical
+"SEO", "Core Web Vitals", "crawlability", "structured data" -> marketing-seo-complete
 "AI search", "AEO", "GEO", "LLMO", "ChatGPT SEO", "Perplexity" -> marketing-ai-search-optimization
 "paid ads", "Google Ads", "Meta ads", "TikTok ads", "LinkedIn ads", "PPC", "ROAS" -> marketing-paid-advertising
 "email automation", "nurture sequence", "HubSpot", "Klaviyo", "drip campaign", "welcome series" -> marketing-email-automation
 "CRO", "conversion rate", "A/B test", "landing page optimization", "funnel optimization" -> marketing-cro
+"ad creative", "social graphic", "marketing visual", "banner", "carousel design", "pitch deck design", "email visual", "Midjourney", "DALL-E", "Canva" -> marketing-visual-design
 
 # Document Skills (Explicit Routing)
 "pitch deck", "slides", "presentation", "PowerPoint" -> document-pptx
@@ -752,7 +761,7 @@ AGENT SERVICE LIVE
 
 ### Comprehensive Analysis Output
 
-See `templates/comprehensive-analysis-report.md`
+See `assets/comprehensive-analysis-report.md`
 
 ---
 
@@ -760,17 +769,17 @@ See `templates/comprehensive-analysis-report.md`
 
 | Resource | Purpose |
 |----------|---------|
-| [routing-logic.md](resources/routing-logic.md) | Detailed decision trees |
-| [skill-chain-patterns.md](resources/skill-chain-patterns.md) | Sequential/parallel patterns |
-| [opportunity-detection-rules.md](resources/opportunity-detection-rules.md) | Opportunity scoring |
+| [routing-logic.md](references/routing-logic.md) | Detailed decision trees |
+| [skill-chain-patterns.md](references/skill-chain-patterns.md) | Sequential/parallel patterns |
+| [opportunity-detection-rules.md](references/opportunity-detection-rules.md) | Opportunity scoring |
 
 ## Templates
 
 | Template | Purpose |
 |----------|---------|
-| [comprehensive-analysis-report.md](templates/comprehensive-analysis-report.md) | Full analysis |
-| [skill-routing-decision.md](templates/skill-routing-decision.md) | Routing documentation |
-| [hypothesis-test-plan.md](templates/hypothesis-test-plan.md) | Experiment planning |
+| [comprehensive-analysis-report.md](assets/comprehensive-analysis-report.md) | Full analysis |
+| [skill-routing-decision.md](assets/skill-routing-decision.md) | Routing documentation |
+| [hypothesis-test-plan.md](assets/hypothesis-test-plan.md) | Experiment planning |
 
 ## Data
 

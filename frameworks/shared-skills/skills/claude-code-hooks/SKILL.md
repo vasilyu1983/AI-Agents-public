@@ -26,11 +26,14 @@ This skill provides the definitive reference for creating Claude Code hooks. Use
 |-------|---------|----------|
 | `PreToolUse` | Before tool execution | Validate, block dangerous commands |
 | `PostToolUse` | After tool execution | Format, audit, notify |
+| `PermissionRequest` | Permission dialog shown | Auto-allow/deny permissions |
 | `Stop` | When Claude finishes | Run tests, summarize |
+| `SubagentStop` | Subagent finishes | Verify subagent completion |
 | `Notification` | On notifications | Alert integrations |
 | `SessionStart` | Session begins | Initialize environment |
 | `SessionEnd` | Session ends | Cleanup, save state |
 | `UserPromptSubmit` | User sends message | Preprocessing |
+| `PreCompact` | Before context compaction | Preserve critical context |
 
 ## Hook Structure
 
@@ -110,7 +113,133 @@ This skill provides the definitive reference for creating Claude Code hooks. Use
 |------|---------|--------|
 | `0` | Success | Continue execution |
 | `1` | Error | Report error, continue |
-| `2` | Block | Block tool execution (PreToolUse only) |
+| `2` | Block | Block tool execution (PreToolUse/SubagentStop) |
+
+---
+
+## Input Modification (v2.0.10+)
+
+PreToolUse hooks can modify tool inputs instead of blocking. This enables transparent corrections without error messages or retries.
+
+### Hook Output Schema
+
+```json
+{
+  "decision": "approve",
+  "updatedInput": { "command": "echo 'modified'" },
+  "additionalContext": "Hook added safety check"
+}
+```
+
+| Field | Description |
+|-------|-------------|
+| `decision` | "approve", "block", or "ask" |
+| `updatedInput` | Modified tool input JSON |
+| `additionalContext` | Context returned to model (Jan 2026) |
+
+### Example: Redirect Sensitive File Edits
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+INPUT=$(cat)
+FILE=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
+
+# Redirect package-lock.json edits to /dev/null
+if [[ "$FILE" == *"package-lock.json" ]]; then
+  MODIFIED=$(echo "$INPUT" | jq '.tool_input.file_path = "/dev/null"')
+  echo "{\"decision\": \"approve\", \"updatedInput\": $MODIFIED}"
+  exit 0
+fi
+
+echo '{"decision": "approve"}'
+```
+
+### Example: Strip Sensitive Files from Git Add
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+INPUT=$(cat)
+TOOL=$(echo "$INPUT" | jq -r '.tool_name')
+CMD=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
+
+if [[ "$TOOL" == "Bash" && "$CMD" =~ ^git\ add ]]; then
+  # Remove .env files from staging
+  SAFE_CMD=$(echo "$CMD" | sed 's/\.env[^ ]*//g')
+  if [[ "$SAFE_CMD" != "$CMD" ]]; then
+    MODIFIED=$(echo "$INPUT" | jq --arg cmd "$SAFE_CMD" '.tool_input.command = $cmd')
+    echo "{\"decision\": \"approve\", \"updatedInput\": $MODIFIED}"
+    exit 0
+  fi
+fi
+
+echo '{"decision": "approve"}'
+```
+
+---
+
+## Prompt-Based Hooks
+
+For complex decisions, use LLM-evaluated hooks (`type: "prompt"`) instead of bash scripts.
+
+### Supported Events
+
+| Event | Prompt Hooks | Use Case |
+|-------|--------------|----------|
+| `Stop` | ✅ | Verify task completion |
+| `SubagentStop` | ✅ | Validate subagent work |
+| `PreToolUse` | ❌ | Use command hooks |
+| `PostToolUse` | ❌ | Use command hooks |
+
+### Configuration
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Check if all user tasks are complete. Return approve if done, block if work remains.",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Response Fields
+
+| Field | Description |
+|-------|-------------|
+| `decision` | "approve" or "block" |
+| `reason` | Explanation for decision |
+| `stopReason` | Custom stop message |
+| `systemMessage` | Warning shown to user |
+| `continue` | Set false to stop Claude entirely |
+
+### Combining Command and Prompt Hooks
+
+Use command hooks for fast, deterministic checks. Use prompt hooks for nuanced decisions:
+
+```json
+{
+  "Stop": [
+    {
+      "hooks": [
+        { "type": "command", "command": ".claude/hooks/quick-check.sh" },
+        { "type": "prompt", "prompt": "Verify code quality meets standards" }
+      ]
+    }
+  ]
+}
+```
 
 ---
 
@@ -332,8 +461,8 @@ echo $?
 
 ### Resources
 
-- [resources/hook-patterns.md](resources/hook-patterns.md) — Common patterns
-- [resources/hook-security.md](resources/hook-security.md) — Security guide
+- [references/hook-patterns.md](references/hook-patterns.md) — Common patterns
+- [references/hook-security.md](references/hook-security.md) — Security guide
 - [data/sources.json](data/sources.json) — Documentation links
 
 ### Related Skills

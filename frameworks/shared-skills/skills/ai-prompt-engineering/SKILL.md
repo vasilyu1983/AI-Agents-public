@@ -90,11 +90,42 @@ User needs: [Prompt Type]
 
 ---
 
+## Context Engineering (2026)
+
+True expertise in prompting extends beyond writing instructions to shaping the entire context in which the model operates. Context engineering encompasses:
+
+- **Conversation history**: What prior turns inform the current response
+- **Retrieved context (RAG)**: External knowledge injected into the prompt
+- **Structured inputs**: JSON schemas, system/user message separation
+- **Tool outputs**: Results from previous tool calls that shape next steps
+
+### Context Engineering vs Prompt Engineering
+
+| Aspect | Prompt Engineering | Context Engineering |
+|--------|-------------------|---------------------|
+| Focus | Instruction text | Full input pipeline |
+| Scope | Single prompt | RAG + history + tools |
+| Optimization | Word choice, structure | Information architecture |
+| Goal | Clear instructions | Optimal context window |
+
+### Key Context Engineering Patterns
+
+**1. Context Prioritization**: Place most relevant information first; models attend more strongly to early context.
+
+**2. Context Compression**: Summarize history, truncate tool outputs, select most relevant RAG chunks.
+
+**3. Context Separation**: Use clear delimiters (`<system>`, `<user>`, `<context>`) to separate instruction types.
+
+**4. Dynamic Context**: Adjust context based on task complexity—simple tasks need less context, complex tasks need more.
+
+---
+
 ## Core Concepts vs Implementation Practices
 
 ### Core Concepts (Vendor-Agnostic)
 
 - **Prompt contract**: inputs, allowed tools, output schema, max tokens, and refusal rules.
+- **Context engineering**: conversation history, RAG context, tool outputs, and structured inputs shape model behavior.
 - **Determinism controls**: temperature/top_p, constrained decoding/structured outputs, and strict formatting.
 - **Cost & latency budgets**: prompt length and max output drive tokens and tail latency; enforce hard limits and measure p95/p99.
 - **Evaluation**: golden sets + regression gates + A/B + post-deploy monitoring.
@@ -119,29 +150,31 @@ User needs: [Prompt Type]
 
 ## Navigation: Core Patterns
 
-- **[Core Patterns](resources/core-patterns.md)** - 7 production-grade prompt patterns
+- **[Core Patterns](references/core-patterns.md)** - 7 production-grade prompt patterns
   - Structured Output (JSON), Deterministic Extractor, RAG Workflow
   - Hidden Chain-of-Thought, Tool/Agent Planner, Rewrite + Constrain, Decision Tree
   - Each pattern includes structure template and validation checklist
 
 ## Navigation: Best Practices
 
-- **[Best Practices (Core)](resources/best-practices-core.md)** - Foundation rules for production-grade prompts
+- **[Best Practices (Core)](references/best-practices-core.md)** - Foundation rules for production-grade prompts
   - System instruction design, output contract specification, action directives
   - Context handling, error recovery, positive framing, style matching, style-adversarial red teaming
   - Anti-patterns, Claude 4+ specific optimizations
 
-- **[Production Guidelines](resources/production-guidelines.md)** - Deployment and operational guidance
+- **[Production Guidelines](references/production-guidelines.md)** - Deployment and operational guidance
   - Evaluation & testing (Prompt CI/CD), model parameters, few-shot selection
   - Safety & guardrails, conversation memory, context compaction resilience
   - Answer engineering, decomposition, multilingual/multimodal, benchmarking
+  - **CI/CD Tools** (2026): Promptfoo, DeepEval integration patterns
+  - **Security** (2026): PromptGuard 4-layer defense, Microsoft Prompt Shields, taint tracking
 
-- **[Quality Checklists](resources/quality-checklists.md)** - Validation checklists before deployment
+- **[Quality Checklists](references/quality-checklists.md)** - Validation checklists before deployment
   - Prompt QA, JSON validation, agent workflow checks
   - RAG workflow, safety & security, performance optimization
   - Testing coverage, anti-patterns, quality score rubric
 
-- **[Domain-Specific Patterns](resources/domain-specific-patterns.md)** - Claude 4+ optimized patterns for specialized domains
+- **[Domain-Specific Patterns](references/domain-specific-patterns.md)** - Claude 4+ optimized patterns for specialized domains
   - Frontend/visual code: Creativity encouragement, design variations, micro-interactions
   - Research tasks: Success criteria, verification, hypothesis tracking
   - Agentic coding: No speculation rule, principled implementation, investigation patterns
@@ -149,19 +182,21 @@ User needs: [Prompt Type]
 
 ## Navigation: Specialized Patterns
 
-- **[RAG Patterns](resources/rag-patterns.md)** - Retrieval-augmented generation workflows
+- **[RAG Patterns](references/rag-patterns.md)** - Retrieval-augmented generation workflows
   - Context grounding, chunk citation, missing information handling
 
-- **[Agent and Tool Patterns](resources/agent-patterns.md)** - Tool use and agent orchestration
-  - Plan-then-act workflows, tool calling, multi-step reasoning, generate–verify–revise chains with role-play + few-shot + targeted CoT per sub-agent
+- **[Agent and Tool Patterns](references/agent-patterns.md)** - Tool use and agent orchestration
+  - Plan-then-act workflows, tool calling, multi-step reasoning, generate–verify–revise chains
+  - **Multi-Agent Orchestration** (2026): centralized, handoff, federated patterns; plan-and-execute (90% cost reduction)
 
-- **[Extraction Patterns](resources/extraction-patterns.md)** - Deterministic field extraction
+- **[Extraction Patterns](references/extraction-patterns.md)** - Deterministic field extraction
   - Schema-based extraction, null handling, no hallucinations
 
-- **[Reasoning Patterns (Hidden CoT)](resources/reasoning-patterns.md)** - Internal reasoning without visible output
+- **[Reasoning Patterns (Hidden CoT)](references/reasoning-patterns.md)** - Internal reasoning without visible output
   - Hidden reasoning, final answer only, classification workflows
+  - **Extended Thinking API** (Claude 4+): budget management, think tool, multishot patterns
 
-- **[Additional Patterns](resources/additional-patterns.md)** - Extended prompt engineering techniques
+- **[Additional Patterns](references/additional-patterns.md)** - Extended prompt engineering techniques
   - Advanced patterns, edge cases, optimization strategies
 
 ---
@@ -172,16 +207,16 @@ Templates are copy-paste ready and organized by complexity:
 
 ### Quick Templates
 
-- **[Quick Template](templates/quick/template-quick.md)** - Fast, minimal prompt structure
+- **[Quick Template](assets/quick/template-quick.md)** - Fast, minimal prompt structure
 
 ### Standard Templates
 
-- **[Standard Template](templates/standard/template-standard.md)** - Production-grade operational prompt
-- **[Agent Template](templates/standard/template-agent.md)** - Tool-using agent with planning
-- **[RAG Template](templates/standard/template-rag.md)** - Retrieval-augmented generation
-- **[Chain-of-Thought Template](templates/standard/template-cot.md)** - Hidden reasoning pattern
-- **[JSON Extractor Template](templates/standard/template-json-extractor.md)** - Deterministic field extraction
-- **[Prompt Evaluation Template](templates/eval/prompt-eval-template.md)** - Regression tests, A/B testing, rollout gates
+- **[Standard Template](assets/standard/template-standard.md)** - Production-grade operational prompt
+- **[Agent Template](assets/standard/template-agent.md)** - Tool-using agent with planning
+- **[RAG Template](assets/standard/template-rag.md)** - Retrieval-augmented generation
+- **[Chain-of-Thought Template](assets/standard/template-cot.md)** - Hidden reasoning pattern
+- **[JSON Extractor Template](assets/standard/template-json-extractor.md)** - Deterministic field extraction
+- **[Prompt Evaluation Template](assets/eval/prompt-eval-template.md)** - Regression tests, A/B testing, rollout gates
 
 ---
 
@@ -195,6 +230,47 @@ External references are listed in [data/sources.json](data/sources.json):
 - Evaluation tools (OpenAI Evals, HELM)
 - Safety guides and standards
 - RAG and retrieval resources
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about prompt engineering, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best prompting technique for [use case]?"
+- "What should I use for [structured output/reasoning/agents]?"
+- "What's the latest in prompt engineering?"
+- "Current best practices for [chain-of-thought/few-shot/system prompts]?"
+- "Is [prompting technique] still effective in 2026?"
+- "How do I prompt [Claude 4/GPT-4.5/Gemini 2]?"
+- "Best way to get reliable [JSON/structured output]?"
+
+### Required Searches
+
+1. Search: `"prompt engineering best practices 2026"`
+2. Search: `"[Claude/GPT/Gemini] prompting techniques 2026"`
+3. Search: `"prompt engineering trends January 2026"`
+4. Search: `"[reasoning/structured output/agents] prompting 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What prompting techniques work best NOW (model-specific)
+- **Emerging trends**: New techniques gaining traction (thinking tokens, etc.)
+- **Deprecated/declining**: Techniques that no longer work well on new models
+- **Recommendation**: Based on fresh data and model-specific documentation
+
+### Example Topics (verify with fresh search)
+
+- Model-specific prompting (Claude 4.x, GPT-4.5, Gemini 2.x)
+- Reasoning techniques (extended thinking, chain-of-thought variants)
+- Structured output (JSON mode, function calling, tool use)
+- Agent prompting patterns (ReAct, plan-and-execute)
+- Safety and guardrails in prompts
+- Evaluation and testing of prompts
 
 ---
 

@@ -3,7 +3,7 @@ name: qa-debugging
 description: Systematic debugging methodologies, troubleshooting workflows, logging strategies, error tracking, performance profiling, stack trace analysis, and debugging tools across languages and environments. Covers local debugging, distributed systems, production issues, and root cause analysis.
 ---
 
-# Debugging & Troubleshooting (Dec 2025) — Quick Reference
+# Debugging & Troubleshooting (Jan 2026) — Quick Reference
 
 This skill provides execution-ready debugging strategies, troubleshooting workflows, and root cause analysis techniques.
 
@@ -52,17 +52,43 @@ Regress:
   - Data: shared state, ordering dependency, non-deterministic fixtures.
 - Use controlled repetition: run the test N times with tracing enabled; correlate failures via request/trace IDs.
 
+### Debugging Checklist (Universal)
+
+```text
+Before debugging:
+[ ] Can you reproduce it consistently?
+[ ] Do you have logs/error messages?
+[ ] Do you have a minimal test case?
+[ ] Do you know when it started?
+
+During debugging:
+[ ] Form hypothesis before making changes
+[ ] Test one variable at a time
+[ ] Document what you've tried
+[ ] Use version control (commit working states)
+
+After debugging:
+[ ] Fix verified in all environments?
+[ ] Regression test added?
+[ ] Root cause documented?
+[ ] Team notified of findings?
+```
+
 ### Do / Avoid
 
 Do:
-- Start with the smallest reliable reproducer.
-- Use evidence to support hypotheses (logs, traces, metrics, stack traces).
-- Add guardrails and regression tests as part of the fix.
+
+- Start with the smallest reliable reproducer
+- Use evidence to support hypotheses (logs, traces, metrics, stack traces)
+- Add guardrails and regression tests as part of the fix
+- Document the fix for future reference
 
 Avoid:
-- Adding sleeps to “stabilize” tests without proving the underlying race.
-- Disabling tests or lowering assertions to make CI green.
-- Debugging directly in production without a safe, scoped plan (feature flags, sampling, read-only probes).
+
+- Adding sleeps to "stabilize" tests without proving the underlying race
+- Disabling tests or lowering assertions to make CI green
+- Debugging directly in production without a safe, scoped plan (feature flags, sampling, read-only probes)
+- Making random changes without a hypothesis
 
 ## Quick Reference
 
@@ -139,7 +165,7 @@ Use this skill when a user reports:
 
 ## Operational Deep Dives
 
-See [resources/operational-patterns.md](resources/operational-patterns.md) for systematic debugging workflows, logging strategy details, stack trace and performance profiling guides, and language-specific tooling checklists.
+See [references/operational-patterns.md](references/operational-patterns.md) for systematic debugging workflows, logging strategy details, stack trace and performance profiling guides, and language-specific tooling checklists.
 
 ---
 
@@ -147,10 +173,10 @@ See [resources/operational-patterns.md](resources/operational-patterns.md) for s
 
 Production templates organized by workflow type:
 
-- **Debugging Workflow**: [templates/debugging/template-debugging-checklist.md](templates/debugging/template-debugging-checklist.md) - Universal debugging checklist with specialized checklists for performance, memory leaks, distributed systems, and production incidents
-- **Debugging Worksheet**: [templates/debugging/template-debugging-worksheet.md](templates/debugging/template-debugging-worksheet.md) - One-page worksheet (repro → isolate → instrument → verify) for fast, consistent triage
-- **Incident Response**: [templates/incidents/template-incident-response.md](templates/incidents/template-incident-response.md) - Complete incident response playbook with severity levels, communication templates, and postmortem format
-- **Logging Setup**: [templates/observability/template-logging-setup.md](templates/observability/template-logging-setup.md) - Production logging configurations for Node.js (Pino), Python (structlog), Go (zap), with Docker and CloudWatch integration
+- **Debugging Workflow**: [assets/debugging/template-debugging-checklist.md](assets/debugging/template-debugging-checklist.md) - Universal debugging checklist with specialized checklists for performance, memory leaks, distributed systems, and production incidents
+- **Debugging Worksheet**: [assets/debugging/template-debugging-worksheet.md](assets/debugging/template-debugging-worksheet.md) - One-page worksheet (repro → isolate → instrument → verify) for fast, consistent triage
+- **Incident Response**: [assets/incidents/template-incident-response.md](assets/incidents/template-incident-response.md) - Complete incident response playbook with severity levels, communication templates, and postmortem format
+- **Logging Setup**: [assets/observability/template-logging-setup.md](assets/observability/template-logging-setup.md) - Production logging configurations for Node.js (Pino), Python (structlog), Go (zap), with Docker and CloudWatch integration
 
 ---
 
@@ -158,43 +184,86 @@ Production templates organized by workflow type:
 
 Operational best practices by domain:
 
-- **Operational Patterns**: [resources/operational-patterns.md](resources/operational-patterns.md) - Core debugging workflows, stack trace triage, profiling guides, and tool selection
-- **Debugging Methodologies**: [resources/debugging-methodologies.md](resources/debugging-methodologies.md) - Scientific method, binary search, delta debugging, rubber duck, time-travel debugging, observability-first approaches
-- **Logging Best Practices**: [resources/logging-best-practices.md](resources/logging-best-practices.md) - Structured logging, log levels, what to log/not log, implementations by language, request ID propagation, performance optimization
-- **Production Debugging**: [resources/production-debugging-patterns.md](resources/production-debugging-patterns.md) - Safe production debugging techniques, log analysis, metrics, distributed tracing, feature flags, incident response workflow
+- **Operational Patterns**: [references/operational-patterns.md](references/operational-patterns.md) - Core debugging workflows, stack trace triage, profiling guides, tool selection, tail sampling strategies, async trace propagation
+- **Debugging Methodologies**: [references/debugging-methodologies.md](references/debugging-methodologies.md) - Scientific method, binary search, delta debugging, rubber duck, time-travel debugging, observability-first approaches, debugging retrospectives (team practice)
+- **Logging Best Practices**: [references/logging-best-practices.md](references/logging-best-practices.md) - Structured logging, log levels, what to log/not log, implementations by language, request ID propagation, performance optimization
+- **Production Debugging**: [references/production-debugging-patterns.md](references/production-debugging-patterns.md) - Safe production debugging techniques, log analysis, metrics, distributed tracing, feature flags, incident response workflow
 
 ---
 
 ## Navigation
 
 **Resources**
-- [resources/operational-patterns.md](resources/operational-patterns.md)
-- [resources/debugging-methodologies.md](resources/debugging-methodologies.md)
-- [resources/logging-best-practices.md](resources/logging-best-practices.md)
-- [resources/production-debugging-patterns.md](resources/production-debugging-patterns.md)
+- [references/operational-patterns.md](references/operational-patterns.md)
+- [references/debugging-methodologies.md](references/debugging-methodologies.md)
+- [references/logging-best-practices.md](references/logging-best-practices.md)
+- [references/production-debugging-patterns.md](references/production-debugging-patterns.md)
 
 **Templates**
-- [templates/debugging/template-debugging-checklist.md](templates/debugging/template-debugging-checklist.md)
-- [templates/debugging/template-debugging-worksheet.md](templates/debugging/template-debugging-worksheet.md)
-- [templates/incidents/template-incident-response.md](templates/incidents/template-incident-response.md)
-- [templates/observability/template-logging-setup.md](templates/observability/template-logging-setup.md)
+- [assets/debugging/template-debugging-checklist.md](assets/debugging/template-debugging-checklist.md)
+- [assets/debugging/template-debugging-worksheet.md](assets/debugging/template-debugging-worksheet.md)
+- [assets/incidents/template-incident-response.md](assets/incidents/template-incident-response.md)
+- [assets/observability/template-logging-setup.md](assets/observability/template-logging-setup.md)
 
 **Data**
 - [data/sources.json](data/sources.json) — Curated external references
 
 ---
 
-## Optional: AI / Automation
+## AI-Assisted Debugging (2026 Standard)
 
-Use AI assistance to accelerate triage, not to replace evidence-based debugging.
+AI-powered debugging is now core practice, not optional. Use AI to accelerate triage while maintaining evidence-based rigor.
+
+### IDE-Integrated AI Debugging
+
+| Tool | Use Case | Command |
+|------|----------|---------|
+| VS Code Copilot | Automated breakpoint analysis | "Debug with Copilot" on failing test |
+| Cursor | Multi-file RCA with codebase context | ⌘K + describe the error |
+| JetBrains AI | Exception analysis and fix suggestions | Alt+Enter on error |
+
+**Workflow:**
+```text
+1. Test fails → Right-click → "Debug with Copilot"
+2. AI analyzes test, code, and recent changes
+3. Forms hypothesis, applies fix, re-runs test
+4. Iterates until pass or hands back to developer
+```
+
+### LLM Application Debugging
+
+For AI/LLM applications, use specialized observability:
+
+| Tool | Purpose | Key Features |
+|------|---------|--------------|
+| Langfuse | LLM observability | Traces, prompt management, evals, cost tracking |
+| Langsmith | LangChain debugging | Chain visualization, playground, datasets |
+| Weights & Biases | ML experiment tracking | Prompts, completions, metrics |
+| OpenTelemetry GenAI | Standardized tracing | Semantic conventions for AI agents |
+
+**LLM Debugging Checklist:**
+```
+[ ] Trace full prompt chain (system + user + context)
+[ ] Log token counts and latencies per call
+[ ] Capture model responses with timestamps
+[ ] Track cost per request
+[ ] Version prompts separately from code
+[ ] Use evals to catch regressions
+```
+
+### AI-Assisted RCA Best Practices
 
 Do:
-- Summarize logs/traces and cluster failures; always include “evidence snippets” (IDs, timestamps, top errors) that can be independently verified.
-- Generate hypotheses, then test them with targeted instrumentation.
+- Use reasoning models (o1, Claude) for complex RCA — they step through codebase layers systematically
+- Summarize logs/traces and cluster failures; include "evidence snippets" (IDs, timestamps, top errors)
+- Generate hypotheses, then test them with targeted instrumentation
+- Let AI suggest fixes, but verify with evidence before applying
 
 Avoid:
-- Letting AI decide root cause without corroborating evidence.
-- Copying suggested fixes without adding regression tests.
+- Accepting AI root cause without corroborating evidence (logs, traces, metrics)
+- Copying suggested fixes without adding regression tests
+- Using AI for production changes without human review
+- Trusting AI-generated code that accesses external systems without validation
 
 ---
 

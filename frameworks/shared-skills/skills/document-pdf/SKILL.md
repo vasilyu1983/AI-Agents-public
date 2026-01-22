@@ -7,9 +7,11 @@ description: Extract text and tables from PDFs, create formatted PDFs, merge/spl
 
 This skill enables PDF creation, extraction, manipulation, and analysis. Claude should apply these patterns when users need to generate invoices, reports, extract data from PDFs, merge documents, or work with PDF forms.
 
-**Modern Best Practices (Dec 2025)**:
+**Modern Best Practices (Jan 2026)**:
 - PDF is a release artifact, not the editable source of truth.
 - Validate export fidelity (fonts, images, links) and accessibility baseline where applicable.
+- **Accessibility (WCAG 2.1 AA by April 2026)**: tags, reading order, alt text. ADA compliance deadline.
+- **EU Distribution**: EAA (June 2025) requires EN 301 549 compliance for PDFs distributed in EU.
 - Treat PDFs as sensitive: scrub metadata, ensure real redaction, and control distribution.
 
 ---
@@ -20,12 +22,16 @@ This skill enables PDF creation, extraction, manipulation, and analysis. Claude 
 |------|--------------|----------|-------------|
 | Create PDF | pdfkit | Node.js | Reports, invoices, certificates |
 | Create PDF | ReportLab | Python | Complex layouts, tables |
+| Create PDF | FPDF2 | Python | Simple PDFs with Unicode support |
+| Create PDF | Borb | Python | Interactive elements, pure Python |
 | Edit PDF | pdf-lib | Node.js | Modify existing PDFs, add pages |
 | Extract text | pdfplumber | Python | OCR-free text extraction |
-| Extract tables | pdfplumber/camelot | Python | Structured data extraction |
+| Extract tables | Camelot | Python | Tables with borders (Lattice mode) |
+| Extract tables | Camelot/Tabula | Python | Tables without borders (Stream mode) |
 | Parse PDF | pypdf | Python | Merge, split, rotate pages |
 | Fill forms | pdf-lib | Node.js | Form automation |
-| HTML to PDF | puppeteer | Node.js | Web page snapshots |
+| HTML to PDF | Puppeteer/Playwright | Node.js | High-fidelity web page rendering |
+| HTML to PDF | WeasyPrint | Python | CSS3-based, no browser needed |
 
 ## When to Use This Skill
 
@@ -267,7 +273,7 @@ PDF Task: [What do you need?]
 - Accessibility: tags/reading order are correct; links work; scanned docs are OCRed when appropriate.
 - Release hygiene: file naming includes version/date; metadata is clean; no “PDF as source of truth”.
 - Security: redaction is verified (copy/paste test) and sensitive data is minimized.
-- QA: release checklist completed using `templates/pdf-release-checklist.md`.
+- QA: release checklist completed using `assets/pdf-release-checklist.md`.
 
 ## Optional: AI / Automation
 
@@ -278,14 +284,14 @@ Use only when explicitly requested and policy-compliant.
 ## Navigation
 
 **Resources**
-- [resources/pdf-generation-patterns.md](resources/pdf-generation-patterns.md) — Complex layouts, multi-page docs
-- [resources/pdf-extraction-patterns.md](resources/pdf-extraction-patterns.md) — Text, table, image extraction
+- [references/pdf-generation-patterns.md](references/pdf-generation-patterns.md) — Complex layouts, multi-page docs
+- [references/pdf-extraction-patterns.md](references/pdf-extraction-patterns.md) — Text, table, image extraction
 - [data/sources.json](data/sources.json) — Library documentation links
 
 **Templates**
-- [templates/invoice-template.md](templates/invoice-template.md) — Invoice PDF generation
-- [templates/report-template.md](templates/report-template.md) — Multi-page report structure
-- [templates/pdf-release-checklist.md](templates/pdf-release-checklist.md) — Links, accessibility, export fidelity
+- [assets/invoice-template.md](assets/invoice-template.md) — Invoice PDF generation
+- [assets/report-template.md](assets/report-template.md) — Multi-page report structure
+- [assets/pdf-release-checklist.md](assets/pdf-release-checklist.md) — Links, accessibility, export fidelity
 
 **Related Skills**
 - [../document-docx/SKILL.md](../document-docx/SKILL.md) — Word document generation

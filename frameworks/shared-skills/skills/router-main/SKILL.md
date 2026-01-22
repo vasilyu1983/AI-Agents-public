@@ -1,8 +1,8 @@
 ---
 name: router-main
-description: Universal entry point that routes any query to the appropriate domain router (startup, engineering, operations) - orchestrates 72+ skills
+description: Universal entry point that routes any query to the appropriate domain router (startup, engineering, operations) - orchestrates 80 skills
 metadata:
-  version: "1.3"
+  version: "1.4"
 ---
 
 # Router: Main
@@ -27,10 +27,10 @@ YOUR QUERY
             ▼                     ▼                     ▼
 ┌───────────────────┐  ┌───────────────────┐  ┌───────────────────┐
 │  router-startup   │  │ router-engineering│  │ router-operations │
-│  22 skills        │  │  32 skills        │  │   15 skills       │
+│  23 skills        │  │  33 skills        │  │   20 skills       │
 │                   │  │                   │  │                   │
 │  Business         │  │  Technical        │  │  QA & DevOps      │
-│  Marketing        │  │  AI/ML            │  │  Testing          │
+│  Marketing (9)    │  │  AI/ML            │  │  Testing          │
 │  Documents        │  │  Software         │  │  Deployment       │
 │  Startup          │  │  Data             │  │  Git              │
 └───────────────────┘  └───────────────────┘  └───────────────────┘
@@ -75,6 +75,7 @@ QUERY ANALYSIS
     │   • "monitor", "observability", "metrics", "logs"
     │   • "debug", "error", "fix", "troubleshoot"
     │   • "git", "commit", "PR", "branch", "merge"
+    │   • "CLAUDE.md", "AGENTS.md", "large codebase", "documentation setup"
     │   └─► router-operations
     │
     └─► Ambiguous or multi-domain?
@@ -85,27 +86,25 @@ QUERY ANALYSIS
 
 ## Domain Routers
 
-### router-startup (22 skills)
+### router-startup (23 skills)
 
 **Focus**: Business validation, marketing, documents, product management
 
 | Category | Skills |
 |----------|--------|
 | Startup Validation | idea-validation, review-mining, trend-prediction, competitive-analysis, business-models, go-to-market, fundraising |
-| Marketing (8) | social-media, leads-generation, seo-technical, ai-search-optimization, content-strategy, **paid-advertising**, **email-automation**, **cro** |
+| Marketing (9) | social-media, leads-generation, seo-technical, ai-search-optimization, content-strategy, paid-advertising, email-automation, cro, **product-analytics** |
 | Documents | pptx, docx, xlsx, pdf |
 | Product | product-management |
 | UX | ux-research, ui-ux-design |
 
-**NEW Marketing Skills (January 2026):**
+**NEW in January 2026:**
 
-- `marketing-paid-advertising` - Google, Meta, TikTok, LinkedIn campaign strategy
-- `marketing-email-automation` - Workflow design, HubSpot/Klaviyo setup, nurture sequences
-- `marketing-cro` - A/B testing, landing page optimization, conversion funnels
+- `marketing-product-analytics` - PostHog/Pendo/Amplitude instrumentation, event taxonomy, LLM analytics, attribution
 
-**Use when**: You have a business idea, need market validation, want to create business documents, plan your GTM strategy, or need traffic/leads.
+**Use when**: You have a business idea, need market validation, want to create business documents, plan your GTM strategy, need traffic/leads, or want to track product metrics.
 
-### router-engineering (32 skills)
+### router-engineering (33 skills)
 
 **Focus**: Technical implementation, AI/ML, software development, Claude Code
 
@@ -119,19 +118,19 @@ QUERY ANALYSIS
 
 **Use when**: You need to build something technical, implement an AI agent, design an API, or work with code.
 
-### router-operations (15 skills)
+### router-operations (20 skills)
 
-**Focus**: QA, testing, DevOps, deployment, git workflows
+**Focus**: QA, testing, DevOps, deployment, git workflows, documentation
 
 | Category | Skills |
 |----------|--------|
-| Testing | testing-strategy, testing-playwright, testing-ios, testing-mobile, api-testing-contracts, agent-testing |
+| Testing | testing-strategy, testing-playwright, testing-ios, testing-android, testing-mobile, api-testing-contracts, agent-testing |
 | Quality | debugging, observability, resilience, refactoring, docs-coverage |
 | DevOps | devops-platform |
 | Git | commit-message, workflow |
-| Docs | codebase, ai-prd |
+| Docs | codebase, ai-prd, **claude-code-project-memory** |
 
-**Use when**: You need to test code, deploy to production, set up CI/CD, debug issues, or manage git workflows.
+**Use when**: You need to test code, deploy to production, set up CI/CD, debug issues, manage git workflows, or **set up documentation for large codebases (100K-1M LOC)**.
 
 ---
 
@@ -190,6 +189,58 @@ router-operations (test & deploy)
 | "Analyze competitors in the CRM space" | `router-startup` | Market analysis |
 | "Add authentication to my frontend" | `router-engineering` | Software dev |
 | "Monitor my production app" | `router-operations` | Observability |
+| "Set up CLAUDE.md for large codebase" | `router-operations` | Documentation setup |
+| "Create AGENTS.md for cross-platform" | `router-operations` | Cross-platform docs |
+
+---
+
+## Error Handling & Fallbacks
+
+```text
+ROUTING FAILURE HANDLING
+    │
+    ├─► No route matched?
+    │   └─► Ask clarifying question
+    │   └─► "Could you clarify: is this a business, technical, or operations question?"
+    │
+    ├─► Multiple routes matched equally?
+    │   └─► Invoke multiple routers in parallel
+    │   └─► Synthesize combined results
+    │
+    ├─► Sub-router failed?
+    │   └─► Retry with exponential backoff
+    │   └─► Fallback to broader skill if specialized fails
+    │
+    └─► Critical failure?
+        └─► Human escalation path
+        └─► Log for observability
+```
+
+**Best Practices:**
+
+- Implement retry logic with exponential backoff for transient failures
+- Use circuit breakers to prevent cascading failures across routers
+- Always have fallback paths for critical workflows
+
+---
+
+## Observability
+
+For production deployments, trace routing decisions:
+
+| Tool           | Use Case       | Integration                         |
+| -------------- | -------------- | ----------------------------------- |
+| LangSmith      | LangChain apps | Near-zero overhead                  |
+| Arize Phoenix  | Open source    | OpenTelemetry-based                 |
+| Custom logging | Any framework  | Log `query → router → skill` path   |
+
+**Key metrics to track:**
+
+- Routing latency (target: <100ms)
+- Route distribution (detect drift)
+- Fallback rate (should be <5%)
+
+See `qa-observability` skill for full instrumentation guide.
 
 ---
 
@@ -205,4 +256,4 @@ Just describe what you need. This router will figure out where to send you.
 - "Create a financial model"
 - "Implement an AI agent"
 
-The framework has **72+ specialized skills** ready to help across all domains.
+The framework has **80 specialized skills** ready to help across all domains.

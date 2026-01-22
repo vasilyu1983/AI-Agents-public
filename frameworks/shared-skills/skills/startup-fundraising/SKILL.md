@@ -2,50 +2,39 @@
 name: startup-fundraising
 description: Fundraising strategy, pitch preparation, investor relations, and capital raising execution
 metadata:
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Startup Fundraising
 
 Systematic framework for raising capital from pre-seed through growth stages.
 
-**Modern Best Practices (Dec 2025)**:
-- Fundraising readiness is milestone-based; keep metrics definitions consistent and source-backed.
-- Treat the data room as a product: clean structure, owners, and “one source of truth”.
-- Prefer believable narratives over inflated TAM; be explicit about assumptions and constraints.
-- Optional: AI / Automation can help with formatting and drafts; never fabricate metrics.
+**Modern Best Practices (Jan 2026)**:
+
+- **Burn Multiple is king**: Investors screen on Net Burn / Net New ARR before anything else.
+- **Post-money SAFEs dominate**: 85-90% of pre-seed deals use post-money SAFEs (not pre-money).
+- **Data room = product**: Clean structure, version control, index document, 409A current.
+- **7 due diligence areas**: Beyond the deck—financial hygiene, unit economics, founder-market fit, digital reputation, customer validation, technical scalability, cap table hygiene.
+- **Milestone-based raises**: Map every round to specific milestones and runway (best/base/worst).
 
 ---
 
 ## Decision Tree: What Fundraising Help?
 
-```
+```text
 FUNDRAISING QUESTION
     │
     ├─► "Should I raise?" ─────────────► Raise vs Bootstrap Analysis
-    │                                     └─► Decision framework
-    │
     ├─► "How much to raise?" ──────────► Round Sizing
-    │                                     └─► Runway, milestones, dilution
-    │
     ├─► "What's my valuation?" ────────► Valuation Framework
-    │                                     └─► Benchmarks, negotiation
-    │
     ├─► "How do I find investors?" ────► Investor Targeting
-    │                                     └─► Research, outreach, warm intros
-    │
     ├─► "How do I pitch?" ─────────────► Pitch Preparation
-    │                                     └─► Deck, narrative, data room
-    │
     └─► "Full fundraising plan" ───────► COMPREHENSIVE STRATEGY
-                                          └─► All dimensions
 ```
 
 ---
 
 ## Fundraising Stage Overview
-
-### Stage Definitions
 
 | Stage | Typical Raise | Valuation | Milestones to Raise |
 |-------|---------------|-----------|---------------------|
@@ -85,33 +74,33 @@ FUNDRAISING QUESTION
 | Type | Description | Best For |
 |------|-------------|----------|
 | **Equity** | Sell ownership | High-growth, VC-backable |
-| **SAFE/Convertible** | Convert later | Pre-priced rounds |
+| **Post-money SAFE** | Equity at fixed cap, post-investment | 85-90% of pre-seed (2026 standard) |
+| **Convertible Note** | Debt that converts to equity | Bridge rounds |
 | **Debt (Venture)** | Loan with warrants | Post-revenue, bridge |
 | **Revenue-Based** | % of revenue | Predictable revenue |
 | **Grants** | Non-dilutive | R&D, specific industries |
-| **Bootstrap** | Customer revenue | Profitable path possible |
+
+### SAFE vs Convertible Note (2026)
+
+| Feature | Post-money SAFE | Convertible Note |
+|---------|-----------------|------------------|
+| **Market share** | 85-90% of pre-seed | 10-15% of pre-seed |
+| **Interest** | None | 2-8% annually |
+| **Maturity date** | None | 12-24 months typical |
+| **Complexity** | Simple (1-5 pages) | More complex (10+ pages) |
+
+**Why post-money SAFEs dominate**: Cleaner cap table modeling, predictable dilution, no debt on balance sheet, faster closing (1-2 weeks vs 2-4 weeks).
 
 ---
 
 ## Round Sizing
 
-### How Much to Raise
-
-```
+```text
 Round Size = Monthly Burn × Runway Months + Buffer
 
 Where:
 - Runway: 18-24 months typical
 - Buffer: 20-30% for unknowns
-```
-
-**Example**:
-```
-Monthly burn: $100K
-Target runway: 24 months
-Buffer: 20%
-
-Round = $100K × 24 × 1.2 = $2.88M → Raise $3M
 ```
 
 ### Milestone-Based Sizing
@@ -148,7 +137,7 @@ Round = $100K × 24 × 1.2 = $2.88M → Raise $3M
 | Series A | ARR multiple | ARR × 15-50x |
 | Series B+ | ARR multiple | ARR × 10-30x |
 
-### ARR Multiple Benchmarks (2024)
+### ARR Multiple Benchmarks (2025-2026)
 
 | Growth Rate | Multiple Range |
 |-------------|----------------|
@@ -157,16 +146,19 @@ Round = $100K × 24 × 1.2 = $2.88M → Raise $3M
 | 100-200% YoY | 20-40x |
 | >200% YoY | 40-100x |
 
-### Valuation Negotiation
+### Burn Multiple (2026 Key Metric)
 
-| Factor | Higher Valuation | Lower Valuation |
-|--------|------------------|-----------------|
-| Growth rate | Fast | Slow |
-| Market size | Large | Small |
-| Competition | Little/winning | Intense/losing |
-| Team | Repeat founders | First-time |
-| Unit economics | Strong | Weak |
-| Investor demand | Multiple term sheets | Single offer |
+The **Burn Multiple** is now the #1 investor screening metric.
+
+**Formula**: `Burn Multiple = Net Burn / Net New ARR`
+
+| Burn Multiple | Interpretation | Investor View |
+|---------------|----------------|---------------|
+| <1.0x | Highly efficient | Strong signal, rare |
+| 1.0-1.5x | Efficient growth | Attractive |
+| 1.5-2.0x | Moderate efficiency | Acceptable with justification |
+| 2.0-3.0x | Inefficient | Yellow flag |
+| >3.0x | Burning cash | Red flag, likely pass |
 
 ---
 
@@ -205,7 +197,6 @@ Round = $100K × 24 × 1.2 = $2.88M → Raise $3M
 | LinkedIn | Partner research, warm intros |
 | AngelList | Angel and syndicate research |
 | Signal NFX | Investor database |
-| Twitter/X | Investor engagement |
 | Portfolio founders | References and intros |
 
 ---
@@ -228,11 +219,10 @@ Round = $100K × 24 × 1.2 = $2.88M → Raise $3M
 | 10. **Team** | Founders, key hires | Prove capability |
 | 11. **Financials** | Projections, unit economics | Show understanding |
 | 12. **Ask** | Amount, use of funds, timeline | Clear ask |
-| 13. **Appendix** | Extra slides for Q&A | Preparedness |
 
 ### Pitch Narrative Arc
 
-```
+```text
 SETUP (Slides 1-3)
 ├─► Hook with the problem
 ├─► Make it personal/urgent
@@ -241,17 +231,15 @@ SETUP (Slides 1-3)
 BUILD (Slides 4-7)
 ├─► Show the product
 ├─► Prove the market
-├─► Demonstrate traction
-└─► Build credibility
+└─► Demonstrate traction
 
 CLOSE (Slides 8-12)
 ├─► Address competition
 ├─► Show the path forward
-├─► Introduce the team
 └─► Make the ask
 ```
 
-### Traction Metrics to Include
+### Traction Metrics by Stage
 
 | Stage | Metrics to Highlight |
 |-------|----------------------|
@@ -262,215 +250,52 @@ CLOSE (Slides 8-12)
 
 ---
 
-## Data Room
+## References
 
-### Essential Documents
-
-| Category | Documents |
-|----------|-----------|
-| **Corporate** | Articles, cap table, board consents |
-| **Financial** | P&L, balance sheet, projections, bank statements |
-| **Metrics** | Dashboard, cohorts, unit economics |
-| **Legal** | Material contracts, IP assignments, employment |
-| **Customers** | Case studies, references, logos |
-| **Product** | Roadmap, technical architecture |
-
-### Data Room Organization
-
-```
-[FILE] Company Overview
-├── Pitch Deck (latest)
-├── Executive Summary
-└── Company Fact Sheet
-
-[FILE] Financials
-├── Financial Model
-├── Historical Statements
-├── Monthly Reports
-└── Bank Statements
-
-[FILE] Metrics
-├── Metrics Dashboard
-├── Cohort Analysis
-├── Unit Economics
-└── Customer List
-
-[FILE] Corporate
-├── Cap Table
-├── Articles of Incorporation
-├── Board Consents
-└── Stock Option Plan
-
-[FILE] Legal
-├── Material Contracts
-├── IP Assignments
-├── Employment Agreements
-└── Pending Litigation (if any)
-
-[FILE] Product
-├── Product Roadmap
-├── Technical Architecture
-└── Competitive Analysis
-```
-
----
-
-## Fundraising Process
-
-### Timeline (Typical Seed/Series A)
-
-| Week | Activities |
-|------|------------|
-| -4 to -2 | Prep (deck, materials, list) |
-| -1 | Soft launch (test pitch with friendlies) |
-| 1-2 | First meetings (25-30 investors) |
-| 3-4 | Follow-up meetings, partner meetings |
-| 5-6 | Diligence, term sheet negotiation |
-| 7-8 | Close, legal, wire |
-
-### Meeting Flow
-
-**First Meeting (30-45 min)**:
-- 5 min: Rapport
-- 15 min: Pitch
-- 15 min: Q&A
-- 5 min: Next steps
-
-**Partner Meeting (60 min)**:
-- 5 min: Intros
-- 20 min: Deep dive pitch
-- 30 min: Grilling Q&A
-- 5 min: Process discussion
-
-### Common Questions to Prepare
-
-| Category | Questions |
-|----------|-----------|
-| **Problem** | Why is this a big problem? Why now? |
-| **Solution** | Why this approach? What's defensible? |
-| **Market** | How big is the market really? |
-| **Competition** | Why will you win vs X? |
-| **Team** | Why are you the right team? |
-| **Traction** | What's driving growth? What's not working? |
-| **Business Model** | Why this pricing? Can you 10x prices? |
-| **Go-to-Market** | How do you acquire customers? What's CAC? |
-| **Use of Funds** | How will you spend this? |
-| **Vision** | What does this look like in 10 years? |
-
----
-
-## Term Sheet Essentials
-
-### Key Terms
-
-| Term | What It Means | Founder-Friendly |
-|------|---------------|------------------|
-| **Pre-money valuation** | Company value before investment | Higher is better |
-| **Option pool** | Shares reserved for employees | Smaller is better |
-| **Liquidation preference** | Who gets paid first | 1x non-participating |
-| **Anti-dilution** | Protection from down rounds | Broad-based weighted average |
-| **Board composition** | Who controls board | Founder majority |
-| **Protective provisions** | Investor veto rights | Fewer is better |
-| **Drag-along** | Force sale participation | Standard |
-| **Pro-rata rights** | Right to invest in future | Standard |
-
-### Red Flags in Term Sheets
-
-| Term | Why It's Bad |
-|------|--------------|
-| >1x liquidation preference | Misaligned incentives |
-| Full ratchet anti-dilution | Punitive in down rounds |
-| Participating preferred | Double-dipping on exit |
-| Board control | Investor override founder |
-| Extensive protective provisions | Operational friction |
-| Pay-to-play | Aggressive investor protection |
-
----
-
-## Investor Updates
-
-### Monthly Update Template
-
-```markdown
-## {{COMPANY}} - {{MONTH}} Update
-
-### Highlights
-- [CELEBRATE] {{WIN_1}}
-- [CELEBRATE] {{WIN_2}}
-
-### Key Metrics
-| Metric | This Month | Last Month | MoM |
-|--------|------------|------------|-----|
-| MRR | ${{X}} | ${{X}} | {{%}} |
-| Customers | {{N}} | {{N}} | {{%}} |
-| Burn | ${{X}} | ${{X}} | {{%}} |
-| Runway | {{N}} mo | {{N}} mo | |
-
-### Challenges
-- {{CHALLENGE_1}}
-- {{CHALLENGE_2}}
-
-### Asks
-- {{ASK_1}}
-- {{ASK_2}}
-
-### Looking Ahead
-- {{PRIORITY_1}}
-- {{PRIORITY_2}}
-```
-
-### Update Cadence
-
-| Relationship | Frequency | Depth |
-|--------------|-----------|-------|
-| Board members | Monthly | Detailed |
-| Major investors | Monthly | Summary |
-| Other investors | Quarterly | Highlights |
-| Angels | Quarterly | Brief |
-
----
+| Reference | Purpose |
+|-----------|---------|
+| [cap-table-management.md](references/cap-table-management.md) | Cap table best practices, investor red flags, modeling |
+| [post-investment-operations.md](references/post-investment-operations.md) | Post-funding checklist, governance, investor relations |
+| [term-sheets-and-diligence.md](references/term-sheets-and-diligence.md) | Term sheet terms, data room, due diligence, investor updates |
 
 ## Templates
 
 | Template | Purpose |
 |----------|---------|
-| [fundraising-plan.md](templates/fundraising-plan.md) | Full fundraising strategy |
-| [fundraising-deck-outline.md](templates/fundraising-deck-outline.md) | Deck outline and slide takeaways |
-| [data-room-checklist.md](templates/data-room-checklist.md) | Diligence-ready data room checklist |
+| [fundraising-plan.md](assets/fundraising-plan.md) | Full fundraising strategy |
+| [fundraising-deck-outline.md](assets/fundraising-deck-outline.md) | Deck outline and slide takeaways |
+| [data-room-checklist.md](assets/data-room-checklist.md) | Diligence-ready data room checklist |
 
 ## Data
 
 | File | Purpose |
 |------|---------|
-| [sources.json](data/sources.json) | Fundraising resources |
+| [sources.json](data/sources.json) | Fundraising resources (22 sources) |
 
 ---
 
-## Do / Avoid (Dec 2025)
+## Do / Avoid (Jan 2026)
 
 ### Do
 
-- Keep a metrics glossary with formulas and source links.
-- Prepare cohorts and retention views early (avoid “we’ll pull it later”).
-- Align the raise to milestones and a realistic runway plan.
+- **Track burn multiple weekly**: Net Burn / Net New ARR is the #1 investor screening metric.
+- **Use post-money SAFEs**: They're 85-90% of the market and simplify cap table modeling.
+- **Get 409A before options**: Required for compliance, red flag if outdated.
+- **Build data room early**: Start 3-4 months before fundraising, use version control.
+- **Headline every slide**: Say the takeaway ("We reduce fraud 90%"), not labels ("Product Overview").
 
 ### Avoid
 
+- **Vanity metrics without unit economics**: GMV/signups mean nothing if you're burning $3 to make $1.
+- **Outdated 409A valuation**: Creates tax liability and diligence red flags.
+- **Missing IP assignments**: Every contractor, intern, employee must have signed.
 - Inflated TAM without bottom-up assumptions.
 - Inconsistent metrics across deck, model, and data room.
-- Hiding churn or cohort issues (diligence will surface it).
 
 ## What Good Looks Like
 
-- Narrative: one consistent story across deck, memo, and demo (problem → why now → wedge → proof).
+- Narrative: one consistent story across deck, memo, and demo.
 - Metrics: every KPI has a definition (formula + timeframe + source) and matches across artifacts.
 - Data room: diligence-ready folder with cohorts, pipeline, contracts/terms, and key policies.
 - Milestones: the raise maps to a milestone plan and runway model (best/base/worst case).
 - Process: a tracked pipeline with weekly cadence (outreach, meetings, follow-ups, learnings).
-
-## Optional: AI / Automation
-
-Use only when explicitly requested and policy-compliant.
-
-- Draft deck narratives and Q&A; humans verify every number and claim.
-- Format and restructure documents; do not invent customers, revenue, or pipeline.

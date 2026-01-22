@@ -13,7 +13,7 @@ metadata:
 
 Systematic framework for analyzing historical trends to predict future opportunities. Look back 2-3 years to predict 1-2 years ahead.
 
-**Modern Best Practices (Dec 2025)**:
+**Modern Best Practices (Jan 2026)**:
 - Triangulate: require 3+ independent signals, including at least 1 primary source (standards, regulators, platform docs).
 - Separate leading vs lagging indicators; don’t overfit to social/media noise.
 - Add hype-cycle defenses: falsification, base rates, and adoption constraints (distribution, budgets, compliance).
@@ -85,6 +85,31 @@ Systematic framework for analyzing historical trends to predict future opportuni
     └─────────────────────────────────────────▶
                      TIME
 ```
+
+### Bass Diffusion Model (Quantitative)
+
+Mathematical model for predicting adoption timing:
+
+```
+F(t) = [1 - e^(-(p+q)*t)] / [1 + (q/p) * e^(-(p+q)*t)]
+
+Where:
+  F(t) = Fraction of market adopted by time t
+  p    = Coefficient of innovation (external influence)
+  q    = Coefficient of imitation (internal/word-of-mouth)
+  t    = Time since introduction
+
+Typical values:
+  Consumer products: p=0.03, q=0.38
+  B2B software:      p=0.01, q=0.25
+  Enterprise tech:   p=0.005, q=0.15
+```
+
+| Scenario | p | q | Time to 50% | Interpretation |
+|----------|---|---|-------------|----------------|
+| Viral consumer | 0.05 | 0.5 | ~3 years | Fast, word-of-mouth driven |
+| B2B SaaS | 0.02 | 0.3 | ~5 years | Moderate, reference-driven |
+| Enterprise | 0.01 | 0.15 | ~8 years | Slow, committee decisions |
 
 ### Position Identification
 
@@ -250,22 +275,22 @@ Industry: [Horizontal / Specific vertical]
 
 | Resource | Purpose |
 |----------|---------|
-| [technology-cycle-patterns.md](resources/technology-cycle-patterns.md) | Technology adoption curves and cycles |
-| [market-cycle-patterns.md](resources/market-cycle-patterns.md) | Market evolution and consolidation patterns |
-| [business-model-evolution.md](resources/business-model-evolution.md) | Revenue model cycles and transitions |
-| [signal-vs-noise-filtering.md](resources/signal-vs-noise-filtering.md) | Separating hype from substance |
-| [prediction-accuracy-tracking.md](resources/prediction-accuracy-tracking.md) | Validating predictions over time |
+| [technology-cycle-patterns.md](references/technology-cycle-patterns.md) | Technology adoption curves and cycles |
+| [market-cycle-patterns.md](references/market-cycle-patterns.md) | Market evolution and consolidation patterns |
+| [business-model-evolution.md](references/business-model-evolution.md) | Revenue model cycles and transitions |
+| [signal-vs-noise-filtering.md](references/signal-vs-noise-filtering.md) | Separating hype from substance |
+| [prediction-accuracy-tracking.md](references/prediction-accuracy-tracking.md) | Validating predictions over time |
 
 ### Templates (Outputs)
 
 | Template | Use For |
 |----------|---------|
-| [trend-analysis-report.md](templates/trend-analysis-report.md) | Full trend prediction report |
-| [technology-adoption-curve.md](templates/technology-adoption-curve.md) | Adoption stage mapping |
-| [market-timing-assessment.md](templates/market-timing-assessment.md) | When to enter decision |
-| [cyclical-pattern-map.md](templates/cyclical-pattern-map.md) | Historical pattern matching |
-| [prediction-hypothesis.md](templates/prediction-hypothesis.md) | Prediction with evidence |
-| [trend-opportunity-matrix.md](templates/trend-opportunity-matrix.md) | Trends → Opportunities |
+| [trend-analysis-report.md](assets/trend-analysis-report.md) | Full trend prediction report |
+| [technology-adoption-curve.md](assets/technology-adoption-curve.md) | Adoption stage mapping |
+| [market-timing-assessment.md](assets/market-timing-assessment.md) | When to enter decision |
+| [cyclical-pattern-map.md](assets/cyclical-pattern-map.md) | Historical pattern matching |
+| [prediction-hypothesis.md](assets/prediction-hypothesis.md) | Prediction with evidence |
+| [trend-opportunity-matrix.md](assets/trend-opportunity-matrix.md) | Trends → Opportunities |
 
 ### Data
 
@@ -328,14 +353,71 @@ Predictions are living documents:
 - Evidence: 3+ independent signal types (not just media) and explicit confidence (strong/medium/weak).
 - Assumptions: TAM/SAM/SOM with assumptions + sensitivity ranges; falsification criteria documented.
 - Constraints: adoption blockers listed (distribution, budget, switching, compliance, implementation) with mitigations.
-- Cadence: quarterly refresh with “what changed” and accuracy notes.
+- Pragmatic scalability: capital efficiency and break-even path documented (2026 investor priority).
+- TAM validation: both bottom-up and top-down calculations cross-checked.
+- Cadence: quarterly refresh with "what changed" and accuracy notes.
 
 ## Optional: AI / Automation
 
 Use only when explicitly requested and policy-compliant.
 
+### AI Trend Forecasting Tools (2026)
+
+| Tool | Use Case | Strength |
+|------|----------|----------|
+| **AlphaSense** | Document intelligence, earnings calls | Premium financial signals |
+| **Crayon** | Competitive tracking, market moves | Automated competitor monitoring |
+| **Glimpse** | Consumer trend detection | Early demand signals |
+| **Perplexity AI** | Real-time research synthesis | Fast signal aggregation |
+| **Semrush** | Digital competitive analysis | Search/content trends |
+
+### Automation Guidelines
+
 - Topic modeling/clustering for large corpora; validate with primary sources and spot-checks.
 - Summarization of reports; keep links and dates to avoid stale claims.
+- Use AI for signal aggregation, not signal interpretation — human judgment required for decisions.
+- 73% of researchers report AI hallucination concerns; always verify critical insights.
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask about market trends or timing, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's trending in [market/technology]?"
+- "Is [technology/market] growing or declining?"
+- "When should I enter [market]?"
+- "What's the adoption curve for [technology]?"
+- "Is [trend] real or hype?"
+- "What comes after [current trend]?"
+- "Market timing for [startup idea]?"
+
+### Required Searches
+
+1. Search: `"[technology/market] trends 2026"`
+2. Search: `"[technology] adoption curve 2026"`
+3. Search: `"[market] market size forecast 2026"`
+4. Search: `"[technology] vs alternatives 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current state**: Where is the technology/market NOW on adoption curve
+- **Trajectory**: Growing, peaking, or declining based on data
+- **Timing window**: Is now early, optimal, or late to enter
+- **Evidence quality**: Distinguish hype from real adoption signals
+
+### Example Topics (verify with fresh search)
+
+- AI/ML adoption across industries
+- Climate tech and sustainability markets
+- Vertical SaaS opportunities
+- Developer tools ecosystem
+- Consumer app categories
+- Emerging technology cycles
 
 ---
 

@@ -126,7 +126,7 @@ This document contains validation test cases to verify routing logic correctness
 
 ## Test Case 16: Technical SEO Audit
 **User Input**: "Audit our SaaS marketing site for schema markup, crawl budget, and page speed issues"
-**Expected Route**: Agent: leads-strategist | Skill: marketing-seo-technical
+**Expected Route**: Agent: leads-strategist | Skill: marketing-seo-complete
 **Rationale**: Technical SEO request; marketing domain with SEO skill
 **Priority Rule**: 2 (Task-specific routing for SEO)
 

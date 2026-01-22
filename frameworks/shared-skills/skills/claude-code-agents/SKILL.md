@@ -16,7 +16,11 @@ This skill provides the definitive reference for creating Claude Code agents. Us
 | `name` | Agent identifier (kebab-case) | Yes |
 | `description` | When to invoke this agent | Yes |
 | `tools` | Allowed tool list | No (defaults: all) |
-| `model` | Claude model variant | No (default: sonnet) |
+| `disallowedTools` | Tools to explicitly deny | No |
+| `model` | Claude model variant | No (default: inherit) |
+| `permissionMode` | Permission handling mode | No (default: default) |
+| `skills` | Skills to preload into context | No |
+| `hooks` | Lifecycle hooks (PreToolUse, PostToolUse, Stop) | No |
 
 ## Agent Structure
 
@@ -27,6 +31,23 @@ This skill provides the definitive reference for creating Claude Code agents. Us
 ├── test-architect.md
 └── system-architect.md
 ```
+
+---
+
+## Built-in Subagents
+
+Claude Code includes built-in subagents that Claude automatically uses when appropriate:
+
+| Subagent | Model | Tools | Purpose |
+|----------|-------|-------|---------|
+| **Explore** | haiku | Read-only | Fast codebase search, file discovery, code analysis |
+| **Plan** | inherit | Read-only | Research and gather context during plan mode |
+| **general-purpose** | inherit | All | Complex multi-step tasks requiring exploration and action |
+| **Bash** | inherit | Bash | Terminal commands in separate context |
+| **statusline-setup** | sonnet | - | `/statusline` configuration |
+| **Claude Code Guide** | haiku | - | Answer feature questions |
+
+Built-in subagents inherit parent conversation permissions with additional tool restrictions. They cannot spawn other subagents (prevents infinite nesting).
 
 ---
 
@@ -111,14 +132,56 @@ tools: Read, Grep, Glob, Bash, Edit, Write
 ### model (optional)
 
 ```yaml
-model: sonnet  # or opus, haiku
+model: sonnet  # or opus, haiku, inherit
 ```
 
 | Model | Use For | Cost |
 |-------|---------|------|
 | `haiku` | Simple, fast tasks | Low |
-| `sonnet` | Most tasks (default) | Medium |
+| `sonnet` | Most tasks | Medium |
 | `opus` | Complex reasoning | High |
+| `inherit` | Same as parent (default) | Varies |
+
+### permissionMode (optional)
+
+```yaml
+permissionMode: dontAsk
+```
+
+| Mode | Behavior |
+|------|----------|
+| `default` | Standard permission checking with prompts |
+| `acceptEdits` | Auto-accept file edits |
+| `dontAsk` | Auto-deny permission prompts |
+| `bypassPermissions` | Skip all checks (use cautiously) |
+| `plan` | Read-only exploration mode |
+
+### skills (optional)
+
+Preload skills into subagent context at startup:
+
+```yaml
+skills:
+  - api-conventions
+  - error-handling-patterns
+```
+
+Full skill content is injected into the subagent's context.
+
+### hooks (optional)
+
+Add lifecycle hooks directly to agent frontmatter:
+
+```yaml
+hooks:
+  PreToolUse:
+    - matcher: "Bash"
+      hooks:
+        - type: command
+          command: "./scripts/validate-query.sh"
+```
+
+Hook receives JSON via stdin with `tool_input`. Exit code 2 blocks the operation.
 
 ---
 
@@ -301,6 +364,43 @@ Integration:
 
 ---
 
+## When to Use Subagents
+
+### Use Subagents When
+
+- Tasks produce verbose output you don't need in main context
+- You want to enforce specific tool restrictions
+- Work is self-contained with a clear summary
+- Tasks are parallelizable (run multiple agents concurrently)
+- You need isolated context to preserve main conversation quality
+
+### Use Main Conversation When
+
+- Task needs frequent back-and-forth iteration
+- Multiple phases share significant context
+- Latency matters (subagents start fresh)
+- You need real-time feedback during execution
+
+### Execution Modes
+
+**Foreground** (default): Blocks main conversation, passes permission prompts through.
+
+**Background** (Ctrl+B): Concurrent execution, auto-denies unpre-approved permissions, MCP tools unavailable.
+
+### Session Resumption
+
+Continue previous subagent work without restarting:
+
+```text
+User: Use the code-reviewer subagent to review the authentication module
+[Agent completes]
+
+User: Continue that code review and analyze authorization logic
+[Resumes previous subagent context]
+```
+
+---
+
 ## Security Best Practices
 
 ### Deny-All Default
@@ -333,11 +433,55 @@ Require explicit confirmation for:
 
 ---
 
+## Advanced Features (2.1.0+)
+
+### Wildcard Tool Permissions
+
+Define broader permission patterns with fewer rules:
+
+```yaml
+tools: Bash(npm *), Bash(*-h*), Read, Grep
+```
+
+Examples:
+- `Bash(npm *)` — Allow all npm commands
+- `Bash(*-h*)` — Allow help flags
+- `Bash(git status)` — Allow specific command
+
+### Agent Creation Methods
+
+**1. Interactive CLI** (recommended):
+
+```bash
+/agents
+```
+
+**2. Manual file creation** in `.claude/agents/` (project) or `~/.claude/agents/` (user)
+
+**3. CLI flag** (session-only):
+
+```bash
+claude --agents '{
+  "code-reviewer": {
+    "description": "Expert code reviewer",
+    "prompt": "You are a senior code reviewer...",
+    "tools": ["Read", "Grep", "Glob"],
+    "model": "sonnet"
+  }
+}'
+```
+
+### Agents Continue After Permission Denial
+
+Subagents now try alternative approaches rather than stopping when permissions are denied, making autonomous workflows more resilient.
+
+---
+
 ## Navigation
 
 **Resources**
-- [resources/agent-patterns.md](resources/agent-patterns.md) — Common agent patterns
-- [resources/agent-tools.md](resources/agent-tools.md) — Tool capabilities reference
+- [references/agent-patterns.md](references/agent-patterns.md) — Common agent patterns
+- [references/agent-tools.md](references/agent-tools.md) — Tool capabilities reference
 - [data/sources.json](data/sources.json) — Official documentation links
 
 **Related Skills**

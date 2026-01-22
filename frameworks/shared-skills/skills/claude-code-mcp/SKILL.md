@@ -5,11 +5,13 @@ description: Configure and build Model Context Protocol (MCP) servers for Claude
 
 # Claude Code MCP — Complete Reference
 
+**Specification**: [MCP 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25) (November 2025)
+
 This skill provides the definitive reference for configuring and building MCP servers in Claude Code. Use this when:
 
 - Connecting Claude to databases, filesystems, APIs, or other external data sources
 - Building custom MCP servers for proprietary integrations
-- Deploying MCP servers to production
+- Deploying MCP servers to production (OAuth 2.1 + CIMD required for HTTP)
 
 ---
 
@@ -267,6 +269,23 @@ claude mcp remove notion
 
 # Test server connection
 claude mcp get notion
+
+# Enable/disable servers (inside Claude Code session)
+/mcp enable 1    # Enable server at index 1
+/mcp disable 2   # Disable server at index 2
+```
+
+### Permission Management
+
+```bash
+# Allow all tools from a specific server (wildcard)
+claude mcp add --allow "mcp__postgres__*" postgres -- npx -y @modelcontextprotocol/server-postgres
+
+# Allow specific tools only
+claude mcp add --allow "mcp__postgres__query,mcp__postgres__list_tables" postgres -- ...
+
+# Deny specific tools
+claude mcp add --deny "mcp__filesystem__write_file" filesystem -- ...
 ```
 
 ---
@@ -341,24 +360,38 @@ MAX_MCP_OUTPUT_TOKENS=50000 claude
 
 ## Security Considerations
 
-```text
-MCP SECURITY CHECKLIST
+See [references/mcp-security.md](references/mcp-security.md) for the complete security hardening guide.
 
-[ ] Use environment variables for secrets (never hardcode)
-[ ] Limit filesystem paths to necessary directories
-[ ] Use read-only database credentials when possible
-[ ] Validate all inputs in custom servers
-[ ] Log access for auditing
-[ ] Rotate API keys regularly
+```text
+MCP SECURITY CHECKLIST (November 2025)
+
+Authentication (HTTP transports)
+[ ] OAuth 2.1 mandatory for HTTP
+[ ] Client ID Metadata Documents (CIMD) for registration
+[ ] Resource Indicators (RFC 8707) for token scoping
+
+Secrets Management
+[ ] Use MCP Secret Wrapper or vault integration
+[ ] No static secrets in config files
+[ ] Environment variable injection at runtime
+
+Access Control
+[ ] Zero-trust model - validate every request
+[ ] Minimal permissions (incremental scopes)
+[ ] Scoped filesystem access
+[ ] Read-only database by default
 ```
 
 ### Credential Management
 
 ```bash
-# Use secret managers
+# RECOMMENDED: Use MCP Secret Wrapper (no secrets in config)
+mcp-secret-wrapper --vault aws-secrets-manager --secret-id mcp/db-url --server @modelcontextprotocol/server-postgres
+
+# Alternative: Use secret managers
 export DATABASE_URL="$(aws secretsmanager get-secret-value --secret-id db-url | jq -r .SecretString)"
 
-# Or use .env files (gitignored)
+# Development only: .env files (gitignored)
 source .env
 ```
 
@@ -389,17 +422,17 @@ CLAUDE_MCP_DEBUG=1 claude
 
 **Resources**
 
-- [resources/mcp-servers.md](resources/mcp-servers.md) — Complete server list
-- [resources/mcp-custom.md](resources/mcp-custom.md) — Building custom servers
-- [resources/mcp-patterns.md](resources/mcp-patterns.md) — Common integration patterns
-- [resources/mcp-security.md](resources/mcp-security.md) — Security hardening guide
+- [references/mcp-servers.md](references/mcp-servers.md) — Complete server list
+- [references/mcp-custom.md](references/mcp-custom.md) — Building custom servers
+- [references/mcp-patterns.md](references/mcp-patterns.md) — Common integration patterns
+- [references/mcp-security.md](references/mcp-security.md) — Security hardening guide
 
 **Templates (Copy-Paste Ready)**
 
-- [templates/database/template-mcp-database.md](templates/database/template-mcp-database.md) — PostgreSQL/MySQL MCP server
-- [templates/api/template-mcp-api.md](templates/api/template-mcp-api.md) — REST/GraphQL API integration
-- [templates/filesystem/template-mcp-filesystem.md](templates/filesystem/template-mcp-filesystem.md) — Scoped file access
-- [templates/deployment/template-mcp-docker.md](templates/deployment/template-mcp-docker.md) — Docker + Kubernetes deployment
+- [assets/database/template-mcp-database.md](assets/database/template-mcp-database.md) — PostgreSQL/MySQL MCP server
+- [assets/api/template-mcp-api.md](assets/api/template-mcp-api.md) — REST/GraphQL API integration
+- [assets/filesystem/template-mcp-filesystem.md](assets/filesystem/template-mcp-filesystem.md) — Scoped file access
+- [assets/deployment/template-mcp-docker.md](assets/deployment/template-mcp-docker.md) — Docker + Kubernetes deployment
 
 **Related Skills**
 

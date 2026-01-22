@@ -1,6 +1,6 @@
 ---
 name: router-engineering
-description: Master orchestration for routing technical problems through 32 engineering skills - AI/ML, software development, data, APIs, and Claude Code framework
+description: Master orchestration for routing technical problems through 33 engineering skills - AI/ML, software development, data, APIs, and Claude Code framework
 metadata:
   version: "1.3"
 ---
@@ -98,7 +98,7 @@ TECHNICAL QUESTION
     │                                      └─► Project context, standards
     │
     ├─► "Create skill" ─────────────────► claude-code-skills
-    │                                      └─► Progressive disclosure, resources/
+    │                                      └─► Progressive disclosure, references/
     │
     └─► "Full technical design" ────────► COMPREHENSIVE ANALYSIS
                                            └─► Architecture + implementation plan
@@ -352,9 +352,6 @@ ai-prompt-engineering ──────► Prompt Templates
 ai-mlops ───────────────────► Deployment Config
   │
   ▼
-agent-fleet-operations ─────► Service Design
-  │
-  ▼
 PRODUCTION AGENT
 ```
 
@@ -514,21 +511,21 @@ When router-startup detects technical needs:
 
 | Resource | Purpose |
 |----------|---------|
-| `resources/routing-logic.md` | Detailed routing rules |
-| `resources/skill-chain-patterns.md` | Implementation patterns |
-| `resources/technology-selection.md` | Stack recommendations |
+| `references/orchestration-patterns.md` | Multi-agent orchestration patterns (Sequential, Parallel, Coordinator, Loop) |
+| `references/handoff-patterns.md` | Reliable handoff patterns with JSON Schema, error recovery |
+| `references/routing-evaluation.md` | Testing and evaluating routing decisions |
 
 ## Templates
 
 | Template | Purpose |
 |----------|---------|
-| `templates/technical-analysis-report.md` | Full analysis |
-| `templates/architecture-decision.md` | ADR template |
-| `templates/implementation-plan.md` | Implementation planning |
+| `assets/technical-analysis-report.md` | Full technical analysis template |
+| `assets/architecture-decision.md` | Architecture Decision Record (ADR) template |
+| `assets/implementation-plan.md` | Implementation planning template |
 
 ## Data
 
 | File | Purpose |
 |------|---------|
-| `data/skill-registry.json` | Engineering skills index |
-| `data/sources.json` | Reference sources |
+| `data/skill-registry.json` | Engineering skills index with triggers |
+| `data/sources.json` | Curated orchestration and routing sources |

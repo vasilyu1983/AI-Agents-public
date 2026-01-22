@@ -7,7 +7,7 @@ description: Technical writing patterns for README files, API documentation, arc
 
 This skill provides execution-ready patterns for writing clear, maintainable technical documentation. Claude should apply these patterns when users need README files, API docs, ADRs, changelogs, or any technical writing.
 
-**Modern Best Practices (2025)**: Docs-as-code workflows, Markdown standardization, automated changelog generation, ADRs, interactive API docs (OpenAPI 3.2+), documentation testing, accessibility standards (WCAG 2.2), and docs in version control with CI/CD.
+**Modern Best Practices (January 2026)**: Docs-as-code with AI tooling (Mintlify, DocuWriter.ai), MCP servers for AI-native docs (75% developer adoption by 2026), OpenAPI 3.2.0 streaming support (SSE, JSON Lines), GEO (Generated Engine Optimization) for AI search, ADR after-action reviews, automated changelog generation, WCAG 3.0 outcome-based scoring preview, documentation testing with AI linting, docs in version control with CI/CD, **cross-platform AGENTS.md standard** (Codex, Cursor, Copilot, Gemini) with symlinks to CLAUDE.md, and hierarchical documentation for large codebases (100K-1M LOC).
 
 ---
 
@@ -32,11 +32,11 @@ Claude should invoke this skill when a user requests:
 
 | Documentation Type | Template | Key Sections | When to Use |
 |-------------------|----------|--------------|-------------|
-| **Project README** | [readme-template.md](templates/project-management/readme-template.md) | Name, Features, Installation, Usage, Config | New project, open source, onboarding |
-| **Architecture Decision** | [adr-template.md](templates/architecture/adr-template.md) | Status, Context, Decision, Consequences | Technical decisions, trade-offs |
-| **API Reference** | [api-docs-template.md](templates/api-reference/api-docs-template.md) | Auth, Endpoints, Schemas, Errors, Rate Limits | REST/GraphQL APIs, webhooks |
-| **Changelog** | [changelog-template.md](templates/project-management/changelog-template.md) | Added, Changed, Deprecated, Removed, Fixed, Security | Releases, version history |
-| **Contributing Guide** | [contributing-template.md](templates/project-management/contributing-template.md) | Setup, Commit Guidelines, PR Process, Code Style | Open source, team projects |
+| **Project README** | [readme-template.md](assets/project-management/readme-template.md) | Name, Features, Installation, Usage, Config | New project, open source, onboarding |
+| **Architecture Decision** | [adr-template.md](assets/architecture/adr-template.md) | Status, Context, Decision, Consequences | Technical decisions, trade-offs |
+| **API Reference** | [api-docs-template.md](assets/api-reference/api-docs-template.md) | Auth, Endpoints, Schemas, Errors, Rate Limits | REST/GraphQL APIs, webhooks |
+| **Changelog** | [changelog-template.md](assets/project-management/changelog-template.md) | Added, Changed, Deprecated, Removed, Fixed, Security | Releases, version history |
+| **Contributing Guide** | [contributing-template.md](assets/project-management/contributing-template.md) | Setup, Commit Guidelines, PR Process, Code Style | Open source, team projects |
 | **Code Comments** | JSDoc, Python docstrings | Params, Returns, Raises, Examples | Public APIs, complex functions |
 | **User Guide** | MkDocs/Docusaurus | Getting Started, Tutorials, Troubleshooting | End-user documentation |
 
@@ -85,7 +85,7 @@ User needs: [Documentation Task]
 
 ## Navigation: README Documentation
 
-**README Best Practices** - [`resources/readme-best-practices.md`](resources/readme-best-practices.md)
+**README Best Practices** - [`references/readme-best-practices.md`](references/readme-best-practices.md)
 
 Comprehensive guide for creating effective README files with:
 
@@ -103,7 +103,7 @@ Comprehensive guide for creating effective README files with:
 
 ## Navigation: Architecture Documentation
 
-**ADR Writing Guide** - [`resources/adr-writing-guide.md`](resources/adr-writing-guide.md)
+**ADR Writing Guide** - [`references/adr-writing-guide.md`](references/adr-writing-guide.md)
 
 Complete guide for documenting architectural decisions with:
 
@@ -116,13 +116,13 @@ Complete guide for documenting architectural decisions with:
 
 **When to use**: Documenting technical decisions like database choice, framework selection, or architecture patterns.
 
-**Template**: [templates/architecture/adr-template.md](templates/architecture/adr-template.md)
+**Template**: [assets/architecture/adr-template.md](assets/architecture/adr-template.md)
 
 ---
 
 ## Navigation: Changelog Documentation
 
-**Changelog Best Practices** - [`resources/changelog-best-practices.md`](resources/changelog-best-practices.md)
+**Changelog Best Practices** - [`references/changelog-best-practices.md`](references/changelog-best-practices.md)
 
 Guide for maintaining changelogs using Keep a Changelog format with:
 
@@ -136,13 +136,13 @@ Guide for maintaining changelogs using Keep a Changelog format with:
 
 **When to use**: Creating release notes, maintaining version history, documenting breaking changes.
 
-**Template**: [templates/project-management/changelog-template.md](templates/project-management/changelog-template.md)
+**Template**: [assets/project-management/changelog-template.md](assets/project-management/changelog-template.md)
 
 ---
 
 ## Navigation: API Documentation
 
-**API Documentation Standards** - [`resources/api-documentation-standards.md`](resources/api-documentation-standards.md)
+**API Documentation Standards** - [`references/api-documentation-standards.md`](references/api-documentation-standards.md)
 
 Modern API documentation standards covering:
 
@@ -156,13 +156,13 @@ Modern API documentation standards covering:
 
 **When to use**: Documenting REST, GraphQL, or gRPC APIs for developers.
 
-**Template**: [templates/api-reference/api-docs-template.md](templates/api-reference/api-docs-template.md)
+**Template**: [assets/api-reference/api-docs-template.md](assets/api-reference/api-docs-template.md)
 
 ---
 
 ## Navigation: Code Comments & Docstrings
 
-**Code Commenting Guide** - [`resources/code-commenting-guide.md`](resources/code-commenting-guide.md)
+**Code Commenting Guide** - [`references/code-commenting-guide.md`](references/code-commenting-guide.md)
 
 Comprehensive guide for effective code documentation with:
 
@@ -180,7 +180,7 @@ Comprehensive guide for effective code documentation with:
 
 ## Navigation: Contributing Guidelines
 
-**Contributing Guide Standards** - [`resources/contributing-guide-standards.md`](resources/contributing-guide-standards.md)
+**Contributing Guide Standards** - [`references/contributing-guide-standards.md`](references/contributing-guide-standards.md)
 
 Guide for creating CONTRIBUTING.md files with:
 
@@ -195,13 +195,13 @@ Guide for creating CONTRIBUTING.md files with:
 
 **When to use**: Setting up contribution process for open-source or team projects.
 
-**Template**: [templates/project-management/contributing-template.md](templates/project-management/contributing-template.md)
+**Template**: [assets/project-management/contributing-template.md](assets/project-management/contributing-template.md)
 
 ---
 
 ## Navigation: Docs-as-Code Workflows
 
-**Docs-as-Code Setup** - [`resources/docs-as-code-setup.md`](resources/docs-as-code-setup.md)
+**Docs-as-Code Setup** - [`references/docs-as-code-setup.md`](references/docs-as-code-setup.md)
 
 Setting up documentation with version control and CI/CD:
 
@@ -218,7 +218,7 @@ Setting up documentation with version control and CI/CD:
 
 ## Navigation: Writing & Testing
 
-**Technical Writing Best Practices** - [`resources/writing-best-practices.md`](resources/writing-best-practices.md)
+**Technical Writing Best Practices** - [`references/writing-best-practices.md`](references/writing-best-practices.md)
 
 Clear communication principles:
 
@@ -228,7 +228,7 @@ Clear communication principles:
 - Structure and formatting
 - Writing style consistency
 
-**Markdown Style Guide** - [`resources/markdown-style-guide.md`](resources/markdown-style-guide.md)
+**Markdown Style Guide** - [`references/markdown-style-guide.md`](references/markdown-style-guide.md)
 
 Markdown formatting standards:
 
@@ -238,7 +238,7 @@ Markdown formatting standards:
 - Code block language tags
 - Table formatting
 
-**Documentation Testing** - [`resources/documentation-testing.md`](resources/documentation-testing.md)
+**Documentation Testing** - [`references/documentation-testing.md`](references/documentation-testing.md)
 
 Automated documentation quality checks:
 
@@ -258,26 +258,122 @@ Complete copy-paste ready templates organized by domain:
 
 ### Architecture Documentation
 
-- **ADR Template**: [templates/architecture/adr-template.md](templates/architecture/adr-template.md) - Architecture Decision Records for technical decisions
+- **ADR Template**: [assets/architecture/adr-template.md](assets/architecture/adr-template.md) - Architecture Decision Records for technical decisions
 
 ### API Reference
 
-- **API Docs Template**: [templates/api-reference/api-docs-template.md](templates/api-reference/api-docs-template.md) - REST/GraphQL API documentation with authentication, endpoints, webhooks
+- **API Docs Template**: [assets/api-reference/api-docs-template.md](assets/api-reference/api-docs-template.md) - REST/GraphQL API documentation with authentication, endpoints, webhooks
 
 ### Project Management
 
-- **README Template**: [templates/project-management/readme-template.md](templates/project-management/readme-template.md) - Project overview, installation, usage
-- **Changelog Template**: [templates/project-management/changelog-template.md](templates/project-management/changelog-template.md) - Keep a Changelog format with semantic versioning
-- **Contributing Guide**: [templates/project-management/contributing-template.md](templates/project-management/contributing-template.md) - Contribution workflow, code standards, commit guidelines
+- **README Template**: [assets/project-management/readme-template.md](assets/project-management/readme-template.md) - Project overview, installation, usage
+- **Changelog Template**: [assets/project-management/changelog-template.md](assets/project-management/changelog-template.md) - Keep a Changelog format with semantic versioning
+- **Contributing Guide**: [assets/project-management/contributing-template.md](assets/project-management/contributing-template.md) - Contribution workflow, code standards, commit guidelines
 
 ### Docs-as-Code
 
-- **Docs Structure Template**: [templates/docs-as-code/docs-structure-template.md](templates/docs-as-code/docs-structure-template.md) - IA, folder structure, freshness metadata
-- **Docs Ownership Model**: [templates/docs-as-code/ownership-model.md](templates/docs-as-code/ownership-model.md) - Owners, review cadence, enforcement
+- **Docs Structure Template**: [assets/docs-as-code/docs-structure-template.md](assets/docs-as-code/docs-structure-template.md) - IA, folder structure, freshness metadata
+- **Docs Ownership Model**: [assets/docs-as-code/ownership-model.md](assets/docs-as-code/ownership-model.md) - Owners, review cadence, enforcement
 
 ---
 
-## Do / Avoid (Dec 2025)
+## Navigation: Cross-Platform AI Documentation (January 2026)
+
+### AGENTS.md Standard
+
+AGENTS.md is the emerging cross-platform standard for AI coding assistants, supported by OpenAI Codex, GitHub Copilot, Cursor, and Google Gemini. Claude Code still requires CLAUDE.md, so use symlinks for single-source-of-truth.
+
+**Setup for Cross-Platform Compatibility:**
+
+```bash
+# Create AGENTS.md as single source of truth
+mv CLAUDE.md AGENTS.md
+ln -s AGENTS.md CLAUDE.md
+ln -s AGENTS.md GEMINI.md
+```
+
+### AGENTS.md Template (Keep Under 300 Lines)
+
+```markdown
+# Project Name
+
+Brief description (1-2 sentences).
+
+## Quick Start
+
+- Build: `npm run build`
+- Test: `npm test`
+- Lint: `npm run lint`
+
+## Architecture Overview
+
+[3-5 sentences max]
+
+See @ARCHITECTURE.md for detailed diagrams and patterns.
+
+## Key Conventions
+
+- [Convention 1]
+- [Convention 2]
+- [Convention 3]
+
+## Directory Structure
+
+- `/api` - REST endpoints, see api/AGENTS.md
+- `/frontend` - React app, see frontend/AGENTS.md
+- `/services` - Business logic
+
+## Domain Terms
+
+- **Term1**: Definition
+- **Term2**: Definition
+
+## When Working on This Project
+
+- [Guideline 1]
+- [Guideline 2]
+
+@ARCHITECTURE.md
+@docs/coding-standards.md
+```
+
+### Platform Comparison
+
+| Platform | Config File | Max Size | Loading Pattern |
+| -------- | ----------- | -------- | --------------- |
+| Claude Code | CLAUDE.md | ~300 lines | Recursive up from cwd |
+| Codex CLI | AGENTS.md | 32 KiB | Walk down from root |
+| Cursor | AGENTS.md | Tool-dependent | Project-wide |
+| Copilot | AGENTS.md | Tool-dependent | Project-wide |
+
+### Hierarchical Documentation for Large Codebases
+
+For monorepos and large projects (100K-1M LOC):
+
+```text
+project-root/
+├── AGENTS.md              # Main entry point (~300 lines)
+├── CLAUDE.md → AGENTS.md  # Symlink for Claude Code
+├── ARCHITECTURE.md        # System design, data flow
+│
+├── api/
+│   └── AGENTS.md          # API-specific conventions
+├── frontend/
+│   └── AGENTS.md          # Frontend patterns
+├── services/
+│   └── AGENTS.md          # Service boundaries
+└── docs/
+    ├── adr/               # Architecture Decision Records
+    └── runbooks/          # Operational procedures
+```
+
+**Key Principle**: Keep root file under 300 lines. Use `@references` (Claude) or subdirectory AGENTS.md files for depth.
+
+**Sources**: [OpenAI AGENTS.md Guide](https://developers.openai.com/codex/guides/agents-md), [Anthropic Claude Code Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
+
+---
+
+## Do / Avoid (Jan 2026)
 
 ### Do
 
@@ -299,12 +395,30 @@ Complete copy-paste ready templates organized by domain:
 - Decision capture: ADRs exist for major choices and are referenced from code and runbooks.
 - Onboarding: a new engineer can get to a first PR within a defined target time (tracked and improved).
 
-## Optional: AI / Automation
+## Navigation: AI Documentation Tools
 
-Use only when explicitly requested and policy-compliant.
+**AI Documentation Tools Guide** - [`references/ai-documentation-tools.md`](references/ai-documentation-tools.md)
 
-- Draft and summarize docs changes; humans review before publishing.
-- Generate doc diffs in PRs; do not auto-merge.
+Comprehensive guide for AI-powered documentation tools (January 2026):
+
+- AI documentation platforms (Mintlify, DocuWriter.ai, Apidog)
+- MCP servers for AI-native documentation workflows
+- GEO (Generated Engine Optimization) for AI search visibility
+- AI-assisted review and maintenance workflows
+- Tool comparisons and getting started guides
+
+**When to use**: Setting up AI-assisted documentation workflows, choosing documentation tools, optimizing docs for AI search.
+
+---
+
+## AI / Automation Best Practices
+
+Use AI tools when explicitly requested and policy-compliant.
+
+- Draft and summarize docs changes; humans review before publishing
+- Generate doc diffs in PRs; do not auto-merge
+- Use MCP servers for real-time documentation sync
+- Combine traditional linting (Vale) with AI-powered audits
 
 ## External Resources
 
@@ -427,7 +541,7 @@ See [data/sources.json](data/sources.json) for:
 **For Claude**: When a user requests documentation:
 
 1. **Identify documentation type** using the Decision Tree
-2. **Reference appropriate template** from templates/ directory
+2. **Reference appropriate template** from assets/ directory
 3. **Follow best practices** from relevant resource file
 4. **Provide copy-paste ready content** with user's specific context
 5. **Include examples** from templates or resources

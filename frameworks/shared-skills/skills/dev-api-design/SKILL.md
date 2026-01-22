@@ -44,6 +44,8 @@ Claude should invoke this skill when a user requests:
 | **Document API** | OpenAPI 3.1 | Swagger UI, Redoc, code samples | Interactive docs, client SDKs |
 | **Flexible queries** | GraphQL | Schema-first, resolvers, DataLoader | Client-driven data fetching |
 | **High-performance** | gRPC + Protobuf | Binary protocol, streaming | Internal microservices |
+| **TypeScript-first** | tRPC | End-to-end type safety, no codegen | Monorepos, internal tools |
+| **AI agent APIs** | REST + MCP | Agent experience, machine-readable | LLM/agent consumption |
 
 ---
 
@@ -58,6 +60,9 @@ User needs: [API Type]
     │   ├─ High throughput required? → **gRPC** (binary, fast)
     │   └─ Simple CRUD? → **REST** (easy to debug)
     │
+    ├─ TypeScript monorepo (frontend + backend)?
+    │   └─ **tRPC** (end-to-end type safety, no codegen)
+    │
     ├─ Client needs flexible queries?
     │   ├─ Real-time updates? → **GraphQL Subscriptions** or **WebSockets**
     │   └─ Complex data fetching? → **GraphQL** (avoid over-fetching)
@@ -65,6 +70,9 @@ User needs: [API Type]
     ├─ Mobile/web clients?
     │   ├─ Many entity types? → **GraphQL** (single endpoint)
     │   └─ Simple resources? → **REST** (cacheable)
+    │
+    ├─ AI agents consuming API?
+    │   └─ REST + **MCP** wrapper (agent experience)
     │
     └─ Streaming or bidirectional?
         └─ **gRPC** (HTTP/2 streaming) or **WebSockets**
@@ -76,7 +84,7 @@ User needs: [API Type]
 
 ### RESTful API Design
 
-**Resource:** [resources/restful-design-patterns.md](resources/restful-design-patterns.md)
+**Resource:** [references/restful-design-patterns.md](references/restful-design-patterns.md)
 
 - Resource-based URLs with proper HTTP methods (GET, POST, PUT, PATCH, DELETE)
 - HTTP status code semantics (200, 201, 404, 422, 500)
@@ -89,7 +97,7 @@ User needs: [API Type]
 
 ### Pagination, Filtering & Sorting
 
-**Resource:** [resources/pagination-filtering.md](resources/pagination-filtering.md)
+**Resource:** [references/pagination-filtering.md](references/pagination-filtering.md)
 
 - Offset-based pagination (simple, static datasets)
 - Cursor-based pagination (real-time feeds, recommended)
@@ -102,7 +110,7 @@ User needs: [API Type]
 
 ### Error Handling
 
-**Resource:** [resources/error-handling-patterns.md](resources/error-handling-patterns.md)
+**Resource:** [references/error-handling-patterns.md](references/error-handling-patterns.md)
 
 - RFC 9457 Problem Details standard
 - HTTP status code reference (4xx client errors, 5xx server errors)
@@ -115,7 +123,7 @@ User needs: [API Type]
 
 ### Authentication & Authorization
 
-**Resource:** [resources/authentication-patterns.md](resources/authentication-patterns.md)
+**Resource:** [references/authentication-patterns.md](references/authentication-patterns.md)
 
 - JWT (JSON Web Tokens) with refresh token rotation
 - OAuth2 Authorization Code Flow for third-party auth
@@ -128,7 +136,7 @@ User needs: [API Type]
 
 ### Rate Limiting & Throttling
 
-**Resource:** [resources/rate-limiting-patterns.md](resources/rate-limiting-patterns.md)
+**Resource:** [references/rate-limiting-patterns.md](references/rate-limiting-patterns.md)
 
 - Token Bucket algorithm (recommended, allows bursts)
 - Fixed Window vs Sliding Window
@@ -143,23 +151,30 @@ User needs: [API Type]
 
 ### API Design & Best Practices
 
-- **[api-design-best-practices.md](resources/api-design-best-practices.md)** - Comprehensive API design principles
-- **[versioning-strategies.md](resources/versioning-strategies.md)** - URL, header, and query parameter versioning
-- **[api-security-checklist.md](resources/api-security-checklist.md)** - OWASP API Security Top 10
+- **[api-design-best-practices.md](references/api-design-best-practices.md)** - Comprehensive API design principles
+- **[versioning-strategies.md](references/versioning-strategies.md)** - URL, header, and query parameter versioning
+- **[api-security-checklist.md](references/api-security-checklist.md)** - OWASP API Security Top 10
 
 ### GraphQL & gRPC
 
-- **[graphql-patterns.md](resources/graphql-patterns.md)** - Schema design, resolvers, N+1 queries, DataLoader
+- **[graphql-patterns.md](references/graphql-patterns.md)** - Schema design, resolvers, N+1 queries, DataLoader
 - **gRPC patterns** - See [software-backend](../software-backend/SKILL.md) for Protocol Buffers and service definitions
+
+### tRPC (TypeScript-First)
+
+- **[trpc-patterns.md](references/trpc-patterns.md)** - End-to-end type safety, procedures, React Query integration
+  - When to use tRPC vs GraphQL vs REST
+  - Auth middleware patterns
+  - Server-side rendering with Next.js
 
 ### OpenAPI & Documentation
 
-- **[openapi-guide.md](resources/openapi-guide.md)** - OpenAPI 3.1 specifications, Swagger UI, Redoc
-- **Templates:** [templates/openapi-template.yaml](templates/openapi-template.yaml) - Complete OpenAPI spec example
+- **[openapi-guide.md](references/openapi-guide.md)** - OpenAPI 3.1 specifications, Swagger UI, Redoc
+- **Templates:** [assets/openapi-template.yaml](assets/openapi-template.yaml) - Complete OpenAPI spec example
 
 ### Optional: AI/Automation (LLM/Agent APIs)
 
-- **[llm-agent-api-contracts.md](resources/llm-agent-api-contracts.md)** - Streaming, long-running jobs, safety guardrails, observability
+- **[llm-agent-api-contracts.md](references/llm-agent-api-contracts.md)** - Streaming, long-running jobs, safety guardrails, observability
 
 ---
 
@@ -169,26 +184,26 @@ Production-ready, copy-paste API implementations with authentication, database, 
 
 ### Framework-Specific Templates
 
-- **FastAPI (Python)**: [templates/fastapi/fastapi-complete-api.md](templates/fastapi/fastapi-complete-api.md)
+- **FastAPI (Python)**: [assets/fastapi/fastapi-complete-api.md](assets/fastapi/fastapi-complete-api.md)
   - Async/await, Pydantic v2, JWT auth, SQLAlchemy 2.0, pagination, OpenAPI docs
 
-- **Express.js (Node/TypeScript)**: [templates/express-nodejs/express-complete-api.md](templates/express-nodejs/express-complete-api.md)
+- **Express.js (Node/TypeScript)**: [assets/express-nodejs/express-complete-api.md](assets/express-nodejs/express-complete-api.md)
   - TypeScript, Zod validation, Prisma ORM, JWT refresh tokens, rate limiting
 
-- **Django REST Framework**: [templates/django-rest/django-rest-complete-api.md](templates/django-rest/django-rest-complete-api.md)
+- **Django REST Framework**: [assets/django-rest/django-rest-complete-api.md](assets/django-rest/django-rest-complete-api.md)
   - ViewSets, serializers, Simple JWT, permissions, DRF filtering/pagination
 
-- **Spring Boot (Java)**: [templates/spring-boot/spring-boot-complete-api.md](templates/spring-boot/spring-boot-complete-api.md)
+- **Spring Boot (Java)**: [assets/spring-boot/spring-boot-complete-api.md](assets/spring-boot/spring-boot-complete-api.md)
   - Spring Security JWT, Spring Data JPA, Bean Validation, Springdoc OpenAPI
 
 ### Cross-Platform Patterns
 
-- **[api-patterns-universal.md](templates/cross-platform/api-patterns-universal.md)** - Universal patterns for all frameworks
+- **[api-patterns-universal.md](assets/cross-platform/api-patterns-universal.md)** - Universal patterns for all frameworks
   - Authentication strategies, pagination, caching, versioning, validation
-- **[template-api-governance.md](templates/cross-platform/template-api-governance.md)** - **NEW** API governance, deprecation, multi-tenancy
+- **[template-api-governance.md](assets/cross-platform/template-api-governance.md)** - **NEW** API governance, deprecation, multi-tenancy
   - Deprecation policy (90-day timeline), backward compatibility rules, error model templates
-- **[template-api-design-review-checklist.md](templates/cross-platform/template-api-design-review-checklist.md)** - Production API review checklist (security, reliability, operability)
-- **[template-api-error-model.md](templates/cross-platform/template-api-error-model.md)** - RFC 9457 Problem Details + stable error code registry
+- **[template-api-design-review-checklist.md](assets/cross-platform/template-api-design-review-checklist.md)** - Production API review checklist (security, reliability, operability)
+- **[template-api-error-model.md](assets/cross-platform/template-api-error-model.md)** - RFC 9457 Problem Details + stable error code registry
 
 ---
 
@@ -265,12 +280,14 @@ See [data/sources.json](data/sources.json) for:
 |----------|----------------|
 | Public API for third parties | REST with OpenAPI docs |
 | Internal microservices | gRPC for performance, REST for simplicity |
+| TypeScript monorepo (same team) | tRPC for end-to-end type safety |
 | Client needs flexible queries | GraphQL |
 | Real-time updates | GraphQL Subscriptions or WebSockets |
 | Simple CRUD operations | REST |
 | Complex data fetching | GraphQL |
 | High throughput required | gRPC |
 | Mobile/web clients | REST or GraphQL |
+| AI agents consuming API | REST + MCP wrapper |
 
 ---
 
@@ -353,3 +370,45 @@ This skill works best when combined with other specialized skills:
 - Link to relevant resources for deep-dive guidance
 
 **Success Criteria:** APIs are discoverable, consistent, well-documented, secure, and follow HTTP/GraphQL semantics correctly.
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about API design, frameworks, or documentation, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best API framework for [language/use case]?"
+- "What should I use for [REST/GraphQL/gRPC]?"
+- "What's the latest in API design?"
+- "Current best practices for [OpenAPI/API versioning]?"
+- "Is [approach/tool] still relevant in 2026?"
+- "[REST] vs [GraphQL] vs [gRPC]?"
+- "Best API documentation tool?"
+
+### Required Searches
+
+1. Search: `"API design best practices 2026"`
+2. Search: `"[specific framework] vs alternatives 2026"`
+3. Search: `"API trends January 2026"`
+4. Search: `"[REST/GraphQL/gRPC] comparison 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What API patterns/tools are popular NOW
+- **Emerging trends**: New frameworks, patterns, or standards gaining traction
+- **Deprecated/declining**: Approaches or tools losing relevance
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- API frameworks (FastAPI, Express, Spring Boot, tRPC)
+- API specification (OpenAPI 3.1, AsyncAPI)
+- GraphQL ecosystem (Apollo, Relay, urql)
+- API documentation (Swagger UI, Redoc, Stoplight)
+- API gateways and management
+- API security standards and OWASP
+- Contract testing tools (Pact, Specmatic)

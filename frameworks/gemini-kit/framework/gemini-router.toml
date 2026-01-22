@@ -23,7 +23,7 @@ Available agents (from .claude/agents/):
 - product-manager: Product strategy, roadmaps, user research, metrics analysis, and startup advisory (prefers product-management, docs-codebase, startup-idea-validation, startup-review-mining, startup-trend-prediction, startup-competitive-analysis, startup-business-models, startup-fundraising, startup-mega-router)
 - prompt-engineer: Prompt design, optimization, and validation (prefers ai-prompt-engineering, ai-llm)
 - security-specialist: Application security specialist covering OWASP Top 10 2025, zero trust, supply chain security, and secure design patterns (prefers software-security-appsec, ai-mlops)
-- leads-strategist: Lead generation/marketing strategist (prefers marketing-leads-generation, marketing-social-media, marketing-seo-technical, startup-go-to-market)
+- leads-strategist: Lead generation/marketing strategist (prefers marketing-leads-generation, marketing-social-media, marketing-seo-complete, startup-go-to-market)
 - smm-strategist: Social media marketing strategist for content, campaigns, and growth (prefers marketing-social-media)
 - sql-engineer: SQL optimization, query tuning, database design, schema migrations, indexing (prefers data-sql-optimization)
 - system-architect: System design, architecture review, and technical strategy (prefers software-architecture-design, qa-resilience, qa-observability)
@@ -59,7 +59,7 @@ Document Processing Skills (4):
 - document-pdf, document-docx, document-xlsx, document-pptx
 
 Marketing Skills (4):
-- marketing-ai-search-optimization, marketing-leads-generation, marketing-seo-technical, marketing-social-media
+- marketing-ai-search-optimization, marketing-leads-generation, marketing-seo-complete, marketing-social-media
 
 Product Management Skills (1):
 - product-management
@@ -87,7 +87,7 @@ Routing priority (4 levels):
      - PRD creation and validation → prd-architect + docs-ai-prd
      - LLM inference optimization (vLLM, quantization, batching) → llm-engineer + ai-llm-inference
      - ML/LLM security, prompt injection defense, privacy → llm-engineer + ai-mlops
-     - Technical SEO and AEO/LLMO → leads-strategist + marketing-seo-technical
+     - Technical SEO and AEO/LLMO → leads-strategist + marketing-seo-complete
      - Claude Code configuration (agents/commands/hooks/MCP/memory/skills) → ai-agents-builder + relevant claude-code-* skill
      - Document workflows (docx/pdf/pptx/xlsx) → ai-agents-builder + document-* skill
      - Playwright/browser E2E automation → test-architect + qa-testing-playwright

@@ -29,15 +29,20 @@ Use this skill when you need to:
 | Content | Prompt template | Instructions for Claude |
 | `$ARGUMENTS` | User input | `/review auth.js` → `$ARGUMENTS = "auth.js"` |
 | `$1`, `$2` | Positional args | `/compare a.js b.js` → `$1 = "a.js"` |
+| `${CLAUDE_SESSION_ID}` | Session tracking | `logs/${CLAUDE_SESSION_ID}.log` |
 | `@file` | Include file | `@CLAUDE.md` includes file contents |
-| `!command` | Bash output | `!git status` includes command output |
+| `!command` | Bash output (preprocessing) | `!git status` includes command output |
 
 ## Command Locations
 
-| Location | Scope | Use For |
-|----------|-------|---------|
-| `.claude/commands/` | Project | Team-shared commands (version control) |
-| `~/.claude/commands/` | Personal | Cross-project commands (not shared) |
+| Location | Scope | Syntax | Use For |
+|----------|-------|--------|---------|
+| `.claude/commands/` | Project | `/cmd` or `/project:cmd` | Team-shared (version control) |
+| `~/.claude/commands/` | Personal | `/cmd` | Cross-project (not shared) |
+| `<plugin>/commands/` | Plugin | `/plugin:cmd` | Plugin-bundled commands |
+| `packages/*/.claude/commands/` | Nested | Auto-discovered | Monorepo subdirectories |
+
+**Nested discovery**: Claude automatically discovers `.claude/commands/` in subdirectories when editing files in those paths (useful for monorepos).
 
 ## Command Structure
 
@@ -55,7 +60,11 @@ Use this skill when you need to:
 
 ```markdown
 ---
-description: Brief description for SlashCommand tool integration
+description: Brief description for autocomplete and invocation
+argument-hint: [filename] [options]
+allowed-tools: Read, Grep, Bash(git:*)
+disable-model-invocation: false
+model: claude-sonnet-4-20250514
 ---
 
 # Command Title
@@ -75,7 +84,31 @@ User request: $ARGUMENTS
 [Specify expected output structure]
 ```
 
-The `description:` frontmatter is required for the SlashCommand tool to reference the command.
+### Frontmatter Fields
+
+| Field | Required | Purpose |
+|-------|----------|---------|
+| `description` | Yes | Shown in autocomplete, helps Claude decide when to invoke |
+| `argument-hint` | No | Autocomplete hint for expected arguments |
+| `allowed-tools` | No | Tools command can use without permission prompts |
+| `disable-model-invocation` | No | If `true`, only user can invoke via `/command` |
+| `user-invocable` | No | If `false`, only Claude can invoke (hidden from menu) |
+| `model` | No | Override default model for this command |
+| `context` | No | Set to `fork` for isolated subagent execution |
+| `agent` | No | Subagent type: `Explore`, `Plan`, `general-purpose` |
+
+### allowed-tools Syntax
+
+```yaml
+allowed-tools: Read, Grep, Bash(git:*)
+```
+
+| Pattern | Meaning |
+|---------|---------|
+| `Tool` | Allow any invocation of that tool |
+| `Tool(prefix:*)` | Allow with specific prefix only |
+| `Bash(git:*)` | Only git commands |
+| `Bash(npm test:*)` | Only npm test commands |
 
 ---
 
@@ -173,7 +206,7 @@ $ARGUMENTS
 
 ## Bash Execution (! Prefix)
 
-Include bash command output with `!`:
+Execute bash commands and include output with `!`:
 
 ```markdown
 # Smart Commit
@@ -191,6 +224,17 @@ Generate a commit message for the staged changes.
 ```
 
 **Usage**: `/smart-commit` runs git commands and includes their output.
+
+**Important**: The `!command` syntax is **preprocessing** — commands execute BEFORE the content is sent to Claude. Claude only sees the final rendered output with actual data, not the command itself.
+
+### Backtick Syntax
+
+For inline execution, use backticks:
+
+```markdown
+PR diff: !`gh pr diff`
+Changed files: !`gh pr diff --name-only`
+```
 
 ---
 
@@ -316,6 +360,48 @@ Return READY or BLOCKED with details.
 
 ---
 
+## Invocation Control
+
+Control who can invoke commands using frontmatter:
+
+| Frontmatter | User Invokes | Claude Invokes | Use Case |
+|-------------|--------------|----------------|----------|
+| (default) | ✓ `/name` | ✓ Auto | General commands |
+| `disable-model-invocation: true` | ✓ `/name` | ✗ Never | Deploy, commit, dangerous ops |
+| `user-invocable: false` | ✗ Hidden | ✓ Auto | Background knowledge only |
+
+### Example: User-Only Command
+
+```yaml
+---
+description: Deploy to production
+disable-model-invocation: true
+allowed-tools: Bash(kubectl:*), Bash(docker:*)
+---
+
+# Deploy
+
+Deploy $ARGUMENTS to production cluster.
+```
+
+Claude cannot auto-invoke this — user must explicitly type `/deploy`.
+
+---
+
+## Context Budget
+
+Default skill/command description budget: **15,000 characters**.
+
+If many commands are excluded from context:
+
+```bash
+export SLASH_COMMAND_TOOL_CHAR_BUDGET=20000
+```
+
+Check with `/context` command for warnings about excluded skills.
+
+---
+
 ## Best Practices
 
 ### DO
@@ -389,8 +475,8 @@ Default: Generate both unit and E2E tests.
 
 ### Resources
 
-- [resources/command-patterns.md](resources/command-patterns.md) — Common patterns
-- [resources/command-examples.md](resources/command-examples.md) — Full examples
+- [references/command-patterns.md](references/command-patterns.md) — Common patterns
+- [references/command-examples.md](references/command-examples.md) — Full examples
 - [data/sources.json](data/sources.json) — Documentation links
 
 ### Related Skills

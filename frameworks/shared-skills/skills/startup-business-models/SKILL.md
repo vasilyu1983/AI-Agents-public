@@ -9,11 +9,13 @@ metadata:
 
 Systematic framework for designing, analyzing, and optimizing revenue models and unit economics.
 
-**Modern Best Practices (Dec 2025)**:
+**Modern Best Practices (Jan 2026)**:
 - Use consistent metric definitions (CAC, LTV, payback, NRR) and keep a glossary.
 - Model unit economics by segment/cohort; blended averages can hide failures.
 - Treat pricing & packaging as a product: value metric, discount policy, upgrade triggers, enforcement.
 - For usage-based models, explicitly budget variable costs (infra, third-party) and add guardrails.
+- Credit-based pricing is the 2025-2026 trend for AI features (126% YoY adoption growth).
+- Target 4:1 LTV:CAC ratio (updated from 3:1) for investor-ready unit economics.
 
 ---
 
@@ -78,6 +80,7 @@ BUSINESS MODEL QUESTION
 | **Advertising** | Monetize attention | Scale audiences | Google, Meta, TikTok |
 | **Hardware + Service** | Device + recurring service | IoT, connected products | Peloton, Nest |
 | **Outcome-Based** | Pay for results | High-value, measurable outcomes | Performance marketing |
+| **Credit-Based** | Pre-purchased credits consumed per use | AI features, variable compute costs | OpenAI, Figma, HubSpot |
 
 ### Model Selection Framework
 
@@ -112,6 +115,24 @@ TRANSACTION-ENABLING
 | Subscription + Transaction | Platform fee + take-rate | Shopify |
 | Outcome + Subscription | Base + success fee | Performance agencies |
 
+### AI & Agentic Pricing Models (2026)
+
+Emerging pricing patterns for AI-powered products and agentic software:
+
+| Model | Description | Best For | Examples |
+|-------|-------------|----------|----------|
+| **Credit-Based** | Pre-purchased credits consumed per action | Variable compute, API calls | OpenAI, Anthropic, Figma AI |
+| **Outcome-Based** | Pay per result achieved | Measurable KPI delivery | Per qualified lead, per resolved ticket |
+| **Per-Agent** | Price per AI "employee" deployed | Agentic automation | Workflow agents, sales copilots |
+| **Workflow-Based** | Pay per completed task/workflow | Multi-step automation | Document processing, outreach |
+
+**Key considerations for AI pricing:**
+
+- Variable compute costs require usage-based or credit components
+- Outcome-based pricing requires robust attribution and measurement
+- Credits provide predictability for customers while protecting margins
+- Hybrid models (base subscription + credits) are emerging as the standard
+
 ---
 
 ## Unit Economics Framework
@@ -120,9 +141,9 @@ TRANSACTION-ENABLING
 
 | Metric | Formula | Target | Notes |
 |--------|---------|--------|-------|
-| **LTV** | ARPU × Gross Margin × (1 / Churn Rate) | 3x+ CAC | Lifetime customer value |
-| **CAC** | Sales & Marketing Spend / New Customers | LTV/3 | Customer acquisition cost |
-| **LTV:CAC** | LTV / CAC | >3:1 | Efficiency ratio |
+| **LTV** | ARPU × Gross Margin × (1 / Churn Rate) | 4x+ CAC | Lifetime customer value |
+| **CAC** | Sales & Marketing Spend / New Customers | LTV/4 | Customer acquisition cost |
+| **LTV:CAC** | LTV / CAC | >4:1 | Efficiency ratio (2026 benchmark) |
 | **Payback** | CAC / (ARPU × Gross Margin) | <12 months | Months to recover CAC |
 | **Gross Margin** | (Revenue - COGS) / Revenue | >70% (SaaS) | Profitability per unit |
 | **Net Revenue Retention** | (Starting MRR + Expansion - Churn) / Starting MRR | >100% | Growth from existing |
@@ -397,17 +418,17 @@ STRATEGIC (Enterprise Deal)
 
 | Resource | Purpose |
 |----------|---------|
-| [unit-economics-calculator.md](resources/unit-economics-calculator.md) | LTV, CAC, payback calculations |
-| [pricing-research-guide.md](resources/pricing-research-guide.md) | WTP research methodology |
-| [saas-metrics-playbook.md](resources/saas-metrics-playbook.md) | SaaS-specific metrics deep dive |
+| [unit-economics-calculator.md](references/unit-economics-calculator.md) | LTV, CAC, payback calculations |
+| [pricing-research-guide.md](references/pricing-research-guide.md) | WTP research methodology |
+| [saas-metrics-playbook.md](references/saas-metrics-playbook.md) | SaaS-specific metrics deep dive |
 
 ## Templates
 
 | Template | Purpose |
 |----------|---------|
-| [business-model-canvas.md](templates/business-model-canvas.md) | Full model design |
-| [unit-economics-worksheet.md](templates/unit-economics-worksheet.md) | Calculate and track metrics |
-| [pricing-tier-design.md](templates/pricing-tier-design.md) | Pricing & packaging worksheet |
+| [business-model-canvas.md](assets/business-model-canvas.md) | Full model design |
+| [unit-economics-worksheet.md](assets/unit-economics-worksheet.md) | Calculate and track metrics |
+| [pricing-tier-design.md](assets/pricing-tier-design.md) | Pricing & packaging worksheet |
 
 ## Data
 

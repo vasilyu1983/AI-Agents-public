@@ -26,6 +26,7 @@ description: Expert astrological advisor (30+ years experience) for Cosmic Copil
 |--------|-------|------------|-------------|
 | **D026** | Ascendant off by ~180° | Used `atan(y/x)` which loses quadrant info | Changed to `atan2(y, x)` |
 | **D027** | Ascendant off by ~11-16° | `new Date(y,m,d,h)` used local timezone, not birth timezone | Use `Date.UTC()` then adjust by birth timezone offset |
+| **D028** | Birth date displays as day before | `new Date("YYYY-MM-DD")` parses as UTC midnight, shifts day in eastern timezones | Append `T12:00:00` to date-only strings before parsing |
 | **Minsk Bug** | Chart positions wrong for Eastern European births | Timezone offset calculation inverted | Fixed `getTimezoneOffset()` to handle Etc/GMT sign inversion |
 | **Koch H11/H12** | Houses 11/12 order swapped | Fraction assignments (1/3 vs 2/3) reversed | Swapped fractions: H11 uses 2/3, H12 uses 1/3 |
 | **Regiomontanus Quadrant** | H11 cusp outside MC-ASC range | `atan()` loses quadrant info for house cusp formula | Added quadrant validation: if cusp outside MC-ASC, add 180° |
@@ -38,6 +39,39 @@ description: Expert astrological advisor (30+ years experience) for Cosmic Copil
 - [ ] Are angles normalized to 0-360° using `((angle % 360) + 360) % 360`?
 - [ ] For quadrant house systems: Do H11/H12 fall between MC and ASC?
 - [ ] For house systems: Are opposite houses exactly 180° apart?
+- [ ] When parsing date-only strings, append `T12:00:00` to avoid timezone shift?
+
+---
+
+## Handling User Feedback: "My Sign is Wrong"
+
+When users report their sign doesn't match what they expected:
+
+### 1. Cusp Placements (Most Common)
+If a planet is within **3° of a sign boundary**, it's on the cusp:
+- Moon moves ~12°/day — a few hours difference can change the sign
+- Users born near cusps often resonate with **both** signs
+- **UI Feature**: Added cusp indicator badge showing adjacent sign (e.g., "♌ cusp" for Moon at 2° Virgo)
+- **Code**: `getCuspInfo()` in `types.ts` detects cusp placements
+
+### 2. Ascendant vs Descendant Confusion
+Users often confuse their **Descendant (7th house)** with their **Ascendant (1st house)**:
+- If user says "my Rising is Virgo" but chart shows Pisces Rising, check if Descendant is Virgo
+- Descendant = opposite sign of Ascendant, always 180° apart
+- **UI Feature**: BigThreeSection now shows Descendant below Rising sign
+- **FAQ**: Added "What's the difference between Ascendant and Descendant?" to help page
+
+### 3. House System Differences
+Different house systems place planets in different houses:
+- Placidus vs Whole Sign can shift planets by one house
+- At extreme latitudes, Placidus has intercepted signs
+- Direct users to Settings → Birth Data → House System to experiment
+
+### 4. Actual Calculation Bugs
+If none of the above apply, investigate:
+1. Check timezone handling (especially `Etc/GMT` format — signs are inverted!)
+2. Verify against astro.com Extended Chart Selection
+3. Look for D026/D027/D028 patterns in the calculation path
 
 ---
 
@@ -93,31 +127,31 @@ description: Expert astrological advisor (30+ years experience) for Cosmic Copil
 User Request
     │
     ├─ Code/Development related?
-    │   ├─ Add new calculation? → [resources/codebase-patterns.md]
-    │   ├─ Debug accuracy issue? → [resources/calculation-reference.md]
-    │   │   └─ Compare against astro.com → [resources/operational-playbook.md]
-    │   ├─ Write tests? → [resources/testing-patterns.md]
-    │   ├─ Understand formulas? → [resources/calculation-reference.md]
+    │   ├─ Add new calculation? → [references/codebase-patterns.md]
+    │   ├─ Debug accuracy issue? → [references/calculation-reference.md]
+    │   │   └─ Compare against astro.com → [references/operational-playbook.md]
+    │   ├─ Write tests? → [references/testing-patterns.md]
+    │   ├─ Understand formulas? → [references/calculation-reference.md]
     │   └─ Understand existing module? → Quick Reference tables above
     │
     ├─ Predictive Astrology?
-    │   ├─ Lunar Nodes / Karmic path? → [resources/lunar-nodes-guide.md]
-    │   ├─ Progressions / Solar Arc? → [resources/predictive-progressions.md]
-    │   ├─ Solar/Lunar Returns? → [resources/predictive-returns.md]
-    │   └─ Transit timing / Event prediction? → [resources/predictive-timing.md]
+    │   ├─ Lunar Nodes / Karmic path? → [references/lunar-nodes-guide.md]
+    │   ├─ Progressions / Solar Arc? → [references/predictive-progressions.md]
+    │   ├─ Solar/Lunar Returns? → [references/predictive-returns.md]
+    │   └─ Transit timing / Event prediction? → [references/predictive-timing.md]
     │
     ├─ Advanced Astrology?
-    │   ├─ Fixed Stars? → [resources/fixed-stars-guide.md]
-    │   ├─ Asteroids (Chiron, etc.)? → [resources/asteroids-guide.md]
-    │   └─ Horary / Electional? → [resources/horary-electional-guide.md]
+    │   ├─ Fixed Stars? → [references/fixed-stars-guide.md]
+    │   ├─ Asteroids (Chiron, etc.)? → [references/asteroids-guide.md]
+    │   └─ Horary / Electional? → [references/horary-electional-guide.md]
     │
     └─ Interpretation/Reading related?
-        ├─ Natal chart analysis? → [templates/template-chart-analysis.md]
-        ├─ Transit/timing guidance? → [templates/template-transit-reading.md]
-        ├─ Numerology reading? → [templates/template-numerology-reading.md]
-        ├─ Life area guidance? → [resources/interpretation-guide.md]
-        ├─ Compatibility/synastry? → [templates/template-synastry-analysis.md]
-        └─ Explain astrology concept? → glossary.ts + [resources/interpretation-guide.md]
+        ├─ Natal chart analysis? → [assets/template-chart-analysis.md]
+        ├─ Transit/timing guidance? → [assets/template-transit-reading.md]
+        ├─ Numerology reading? → [assets/template-numerology-reading.md]
+        ├─ Life area guidance? → [references/interpretation-guide.md]
+        ├─ Compatibility/synastry? → [assets/template-synastry-analysis.md]
+        └─ Explain astrology concept? → glossary.ts + [references/interpretation-guide.md]
 ```
 
 ---
@@ -149,7 +183,7 @@ Claude should invoke this skill when:
 
 **Verification Tasks:**
 
-- Running full formula audit → [templates/template-formula-verification.md](templates/template-formula-verification.md)
+- Running full formula audit → [assets/template-formula-verification.md](assets/template-formula-verification.md)
 - Verifying against authoritative sources (USNO, JPL Horizons, Meeus)
 - Cross-checking calculations with astro.com Swiss Ephemeris
 - Quarterly accuracy audits (recommended)
@@ -231,11 +265,13 @@ WHAT'S HAPPENING → WHY IT MATTERS → WHAT TO DO
 5. **Use accessible language** - No jargon without explanation
 6. **Psychology, not prediction** - "You may feel..." not "You will..."
 
-See [resources/interpretation-guide.md](resources/interpretation-guide.md) for full methodology.
+See [references/interpretation-guide.md](references/interpretation-guide.md) for full methodology.
 
 ---
 
 ## Numerology Quick Reference
+
+### Core Numbers
 
 | Number | Theme | Energy |
 |--------|-------|--------|
@@ -252,7 +288,26 @@ See [resources/interpretation-guide.md](resources/interpretation-guide.md) for f
 | 22 | Master Builder | Practical idealism (master) |
 | 33 | Master Teacher | Selfless service (master) |
 
-See [resources/numerology-guide.md](resources/numerology-guide.md) for full meanings.
+See [references/numerology-guide.md](references/numerology-guide.md) for full meanings.
+
+### Name Numbers Quick Reference
+
+Three numbers derived from the full birth name:
+
+| Number Type | Calculated From | Reveals |
+|-------------|-----------------|---------|
+| **Expression** | All letters | Natural talents, how you express yourself |
+| **Soul Urge** | Vowels only | Inner desires, heart's motivation |
+| **Personality** | Consonants only | How others perceive you |
+
+**Pythagorean Letter Values**:
+```
+A=1  B=2  C=3  D=4  E=5  F=6  G=7  H=8  I=9
+J=1  K=2  L=3  M=4  N=5  O=6  P=7  Q=8  R=9
+S=1  T=2  U=3  V=4  W=5  X=6  Y=7  Z=8
+```
+
+See [references/name-numerology.md](references/name-numerology.md) for complete name number interpretation.
 
 ---
 
@@ -277,39 +332,40 @@ npm run test:astro:formulas  # Formula tests only
 ./tests/run-e2e.sh --unit=astro  # Via runner script
 ```
 
-See [resources/testing-patterns.md](resources/testing-patterns.md) for test writing guide.
+See [references/testing-patterns.md](references/testing-patterns.md) for test writing guide.
 
 ---
 
 ## Navigation
 
 **Resources**
-- [resources/operational-playbook.md](resources/operational-playbook.md) — Verification checklists, debugging flows
-- [resources/calculation-reference.md](resources/calculation-reference.md) — All formulas with derivations
-- [resources/interpretation-guide.md](resources/interpretation-guide.md) — Psychology-first methodology
-- [resources/numerology-guide.md](resources/numerology-guide.md) — Life Path meanings
-- [resources/codebase-patterns.md](resources/codebase-patterns.md) — Extension patterns
-- [resources/testing-patterns.md](resources/testing-patterns.md) — Test writing guide
+- [references/operational-playbook.md](references/operational-playbook.md) — Verification checklists, debugging flows
+- [references/calculation-reference.md](references/calculation-reference.md) — All formulas with derivations
+- [references/interpretation-guide.md](references/interpretation-guide.md) — Psychology-first methodology
+- [references/numerology-guide.md](references/numerology-guide.md) — Life Path meanings
+- [references/name-numerology.md](references/name-numerology.md) — **Expression, Soul Urge, Personality numbers**
+- [references/codebase-patterns.md](references/codebase-patterns.md) — Extension patterns
+- [references/testing-patterns.md](references/testing-patterns.md) — Test writing guide
 
 **Predictive Astrology Resources**
-- [resources/lunar-nodes-guide.md](resources/lunar-nodes-guide.md) — North/South Node interpretation, karmic life path
-- [resources/predictive-progressions.md](resources/predictive-progressions.md) — Secondary progressions, solar arc directions
-- [resources/predictive-returns.md](resources/predictive-returns.md) — Solar/Lunar return calculations
-- [resources/predictive-timing.md](resources/predictive-timing.md) — Transit duration, intensity scoring, timing windows
+- [references/lunar-nodes-guide.md](references/lunar-nodes-guide.md) — North/South Node interpretation, karmic life path
+- [references/predictive-progressions.md](references/predictive-progressions.md) — Secondary progressions, solar arc directions
+- [references/predictive-returns.md](references/predictive-returns.md) — Solar/Lunar return calculations
+- [references/predictive-timing.md](references/predictive-timing.md) — Transit duration, intensity scoring, timing windows
 
 **Advanced Astrology Resources**
-- [resources/fixed-stars-guide.md](resources/fixed-stars-guide.md) — Behenian stars, Royal Stars, parans
-- [resources/asteroids-guide.md](resources/asteroids-guide.md) — Chiron, Ceres, Pallas, Juno, Vesta
-- [resources/horary-electional-guide.md](resources/horary-electional-guide.md) — Question astrology and timing selection
+- [references/fixed-stars-guide.md](references/fixed-stars-guide.md) — Behenian stars, Royal Stars, parans
+- [references/asteroids-guide.md](references/asteroids-guide.md) — Chiron, Ceres, Pallas, Juno, Vesta
+- [references/horary-electional-guide.md](references/horary-electional-guide.md) — Question astrology and timing selection
 
 **Templates**
 
-- [templates/template-chart-analysis.md](templates/template-chart-analysis.md) — Natal chart reading
-- [templates/template-transit-reading.md](templates/template-transit-reading.md) — Transit interpretation
-- [templates/template-numerology-reading.md](templates/template-numerology-reading.md) — Numerology profile
-- [templates/template-synastry-analysis.md](templates/template-synastry-analysis.md) — Compatibility reading
-- [templates/template-new-calculation.md](templates/template-new-calculation.md) — Adding new calculations
-- [templates/template-formula-verification.md](templates/template-formula-verification.md) — Agent verification checklist
+- [assets/template-chart-analysis.md](assets/template-chart-analysis.md) — Natal chart reading
+- [assets/template-transit-reading.md](assets/template-transit-reading.md) — Transit interpretation
+- [assets/template-numerology-reading.md](assets/template-numerology-reading.md) — Numerology profile
+- [assets/template-synastry-analysis.md](assets/template-synastry-analysis.md) — Compatibility reading
+- [assets/template-new-calculation.md](assets/template-new-calculation.md) — Adding new calculations
+- [assets/template-formula-verification.md](assets/template-formula-verification.md) — Agent verification checklist
 
 **Agent Prompts**
 
@@ -334,4 +390,36 @@ See [resources/testing-patterns.md](resources/testing-patterns.md) for test writ
 - House cusps: ±0.5°
 - Ascendant/MC: ±0.1°
 
-See [resources/operational-playbook.md](resources/operational-playbook.md) for verification checklist.
+See [references/operational-playbook.md](references/operational-playbook.md) for verification checklist.
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask about missing features, what to add, or gaps in coverage, you MUST use WebSearch to check current trends before answering.
+
+### Required Searches
+
+1. Search: `"numerology trends 2026 TikTok viral"`
+2. Search: `"angel numbers popular features 2026"`
+3. Search: `"numerology app features trending"`
+4. Search: `"astrology numerology social media popular"`
+
+### What to Report
+
+After searching, provide:
+
+- **What's trending** and WHY it's popular (viral potential, user demand)
+- **Top app features** that are driving downloads
+- **Comparison** against current skill/app implementation
+- **Priority recommendations** ranked by impact vs. effort
+
+### Example Trending Topics (verify with fresh search)
+
+- Universal Year content (what year cycle we're in)
+- TikTok angel number filters and calculators
+- Birthday Number (simpler than Life Path)
+- Karmic Debt Numbers (13, 14, 16, 19)
+- Pinnacle/Life Cycle calculations
+- Name Numerology (Expression, Soul Urge, Personality)
+- Compatibility number matching

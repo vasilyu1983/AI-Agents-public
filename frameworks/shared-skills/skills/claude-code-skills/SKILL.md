@@ -1,6 +1,6 @@
 ---
 name: claude-code-skills
-description: Comprehensive reference for creating Claude Code skills with progressive disclosure, SKILL.md structure, resources/ organization, frontmatter specification, and best practices for modular capability development.
+description: Comprehensive reference for creating Claude Code skills with progressive disclosure, SKILL.md structure, references/ organization, frontmatter specification, and best practices for modular capability development.
 ---
 
 # Claude Code Skills — Meta Reference
@@ -14,9 +14,12 @@ This skill provides the definitive reference for creating, organizing, and maint
 | Component | Purpose | Required |
 |-----------|---------|----------|
 | `SKILL.md` | Main reference file with frontmatter | Yes |
-| `resources/` | Detailed documentation | Recommended |
-| `templates/` | Reusable code templates | Optional |
+| `scripts/` | Executable code (runs, not loaded) | Optional |
+| `references/` | Documentation (loaded on-demand) | Recommended |
+| `assets/` | Output files (templates, icons) | Optional |
 | `data/sources.json` | Curated external links | Recommended |
+
+**Cross-Platform**: Agent Skills standard adopted by Claude Code, Codex CLI, Gemini CLI, and VS Code Copilot. Skills are portable across platforms.
 
 ## Skill Structure
 
@@ -24,15 +27,22 @@ This skill provides the definitive reference for creating, organizing, and maint
 skills/
 └── skill-name/
     ├── SKILL.md           # Main reference (required)
-    ├── README.md          # Usage notes (optional)
-    ├── resources/         # Detailed docs
+    ├── scripts/           # Executable code (Python/Bash) - runs, not loaded
+    │   └── validate.py
+    ├── references/        # Documentation loaded into context on-demand
     │   ├── patterns.md
     │   └── examples.md
-    ├── templates/         # Code templates
-    │   └── starter.md
+    ├── assets/            # Files for OUTPUT (templates, icons, fonts)
+    │   └── template.html
     └── data/
         └── sources.json   # External references
 ```
+
+**Directory purposes**:
+
+- `scripts/` — Executable code; output consumed, code never loads into context
+- `references/` — Documentation loaded into context when Claude needs it
+- `assets/` — Files used in generated output (not loaded into context)
 
 ---
 
@@ -85,8 +95,8 @@ Additional patterns...
 ## Navigation
 
 **Resources**
-- [resources/skill-patterns.md](resources/skill-patterns.md) — Common patterns
-- [resources/skill-validation.md](resources/skill-validation.md) — Validation criteria
+- [references/skill-patterns.md](references/skill-patterns.md) — Common patterns
+- [references/skill-validation.md](references/skill-validation.md) — Validation criteria
 
 **Related Skills**
 - [../claude-code-agents/SKILL.md](../claude-code-agents/SKILL.md) — Agent creation
@@ -100,15 +110,17 @@ Skills use **progressive disclosure** to optimize token usage:
 
 | Layer | Content | Token Cost |
 |-------|---------|------------|
-| **Metadata** | Name + description only | ~100 tokens |
-| **SKILL.md** | Quick reference, patterns | <5K tokens |
-| **resources/** | Deep dives, full examples | On-demand |
+| **Discovery** | Name + description only | ~50 tokens |
+| **Activation** | Full SKILL.md body | 2K-5K tokens |
+| **Execution** | scripts/, references/, assets/ | On-demand |
 
-**Pattern**: SKILL.md provides overview → Resources provide depth
+**Pattern**: SKILL.md provides overview → Resources load only when needed
+
+**Limits**: Keep SKILL.md under **500 lines** (<5K tokens)
 
 ### When to Split Content
 
-| Keep in SKILL.md | Move to resources/ |
+| Keep in SKILL.md | Move to references/ |
 |------------------|-------------------|
 | Decision trees | Full API references |
 | Quick commands | Step-by-step tutorials |
@@ -121,8 +133,10 @@ Skills use **progressive disclosure** to optimize token usage:
 
 ```yaml
 ---
-name: string          # Required: lowercase-kebab-case, matches folder name
-description: string   # Required: One line, explains when Claude should use it
+name: string                        # Required: lowercase-kebab-case, matches folder name
+description: string                 # Required: PRIMARY trigger mechanism (50-200 chars)
+disable-model-invocation: boolean   # Optional: Only user can invoke (for /deploy, /commit)
+user-invocable: boolean             # Optional: false = background knowledge only
 ---
 ```
 
@@ -131,10 +145,15 @@ description: string   # Required: One line, explains when Claude should use it
 - Match folder name exactly
 - Be specific: `software-backend` not `backend`
 
-**Description rules**:
-- Single line, under 200 characters
-- Include key technologies/concepts
-- End with context of when to use
+**Description rules** (PRIMARY TRIGGER):
+- Description is THE primary triggering mechanism - Claude uses it to decide when to invoke
+- Include "when to use" context HERE, not in the body
+- Single line, 50-200 characters
+- Include key technologies/concepts as trigger keywords
+
+**Optional frontmatter**:
+- `disable-model-invocation: true` — Only user can invoke (for workflows with side effects: `/commit`, `/deploy`, `/send-slack`)
+- `user-invocable: false` — Only Claude can invoke (for background knowledge, not actionable commands)
 
 ---
 
@@ -151,7 +170,7 @@ description: string   # Required: One line, explains when Claude should use it
 | Product | `product-` | `product-management`, `docs-ai-prd` |
 | Document | `document-` | `document-pdf`, `document-xlsx` |
 | Testing | `testing-`, `qa-testing-` | `qa-testing-playwright`, `qa-testing-strategy` |
-| Marketing | `marketing-` | `marketing-social-media`, `marketing-seo-technical` |
+| Marketing | `marketing-` | `marketing-social-media`, `marketing-seo-complete` |
 | Claude Code | `claude-code-` | `claude-code-agents`, `claude-code-skills` |
 
 ---
@@ -196,7 +215,7 @@ Frontmatter:
 
 Structure:
 [ ] SKILL.md under 5K characters (progressive disclosure)
-[ ] resources/ for detailed content
+[ ] references/ for detailed content
 [ ] data/sources.json with curated links
 
 Content:
@@ -221,7 +240,7 @@ Quality:
 ```text
 software-backend/
 ├── SKILL.md              # Node.js focus
-└── resources/
+└── references/
     └── nodejs-patterns.md
 ```
 
@@ -230,12 +249,12 @@ software-backend/
 ```text
 software-backend/
 ├── SKILL.md              # Overview + decision tree
-├── resources/
+├── references/
 │   ├── nodejs-patterns.md
 │   ├── go-patterns.md
 │   ├── rust-patterns.md
 │   └── python-patterns.md
-└── templates/
+└── assets/
     ├── nodejs/
     ├── go/
     ├── rust/
@@ -247,8 +266,8 @@ software-backend/
 ## Navigation
 
 **Resources**
-- [resources/skill-patterns.md](resources/skill-patterns.md) — Common skill patterns
-- [resources/skill-validation.md](resources/skill-validation.md) — Validation criteria
+- [references/skill-patterns.md](references/skill-patterns.md) — Common skill patterns
+- [references/skill-validation.md](references/skill-validation.md) — Validation criteria
 - [data/sources.json](data/sources.json) — Official documentation links
 
 **Related Skills**

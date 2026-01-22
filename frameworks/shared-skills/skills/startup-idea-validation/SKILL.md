@@ -32,6 +32,8 @@ Systematic validation machine for testing ideas BEFORE building. Validate hypoth
 | "Market size for X" | Run market sizing |
 | "Should I build X or Y?" | Run comparative validation |
 | "What's the riskiest assumption?" | Run RAT analysis |
+| "What's my runway?" | Run financial modeling calculator |
+| "Will this be profitable?" | Run unit economics + cash analysis |
 
 ---
 
@@ -44,7 +46,7 @@ Systematic validation machine for testing ideas BEFORE building. Validate hypoth
 | Concierge / Wizard-of-Oz | Validate workflow value | Users complete job and return | One-off curiosity | Learning report |
 | Paid pilot | Validate willingness-to-pay | Paid, renewed, or expanded | “Will pay later” | Pilot results + pricing |
 
-Use `templates/validation-experiment-planner.md` for experiment design and decision thresholds.
+Use `assets/validation-experiment-planner.md` for experiment design and decision thresholds.
 
 ## 9-Dimension Validation Framework
 
@@ -147,11 +149,11 @@ Use `templates/validation-experiment-planner.md` for experiment design and decis
 
 **Question**: Can this be a profitable business?
 
-**Key Metrics**:
+**Key Metrics (2026 Benchmarks)**:
 
 | Metric | Target | Red Flag |
 |--------|--------|----------|
-| LTV:CAC | >3:1 | <2:1 |
+| LTV:CAC | >4:1 | <2:1 |
 | Payback Period | <12 months | >24 months |
 | Gross Margin | >70% (SaaS) | <50% |
 | NRR | >100% | <80% |
@@ -160,7 +162,10 @@ Use `templates/validation-experiment-planner.md` for experiment design and decis
 ```
 LTV = (ARPU × Gross Margin) / Monthly Churn
 CAC = Total Sales & Marketing / New Customers
+Runway = Current Cash / Net Monthly Burn
 ```
+
+**Deep Analysis**: Use [financial-modeling-calculator.md](assets/financial-modeling-calculator.md) for cash runway, scenario analysis, and investor-ready projections.
 
 ### 6. Founder-Market Fit (8%)
 
@@ -221,6 +226,40 @@ CAC = Total Sales & Marketing / New Customers
 
 ---
 
+## Financial Viability Analysis
+
+### Cash Runway Requirements
+
+| Stage | Minimum Runway | Raise Trigger |
+|-------|---------------|---------------|
+| Pre-seed | 12 months | <6 months remaining |
+| Seed | 18 months | <9 months remaining |
+| Series A | 24 months | <12 months remaining |
+
+### Three-Scenario Modeling (Required for Investors)
+
+Startups with **3+ financial scenarios** secure **1.8x more funding** (Abacum 2025).
+
+| Scenario | Probability | Purpose |
+|----------|-------------|---------|
+| Pessimistic | 25% | Stress-test runway, identify survival path |
+| Base Case | 50% | Primary planning scenario |
+| Optimistic | 25% | Upside potential, expansion triggers |
+
+### Financial Red Flags (Automatic NO-GO)
+
+| Flag | Description |
+|------|-------------|
+| LTV:CAC < 2:1 | Unit economics fundamentally broken |
+| Payback > 24 months | Too long to recover customer acquisition cost |
+| Gross margin < 50% | Insufficient margin to build sustainable business |
+| Runway < 6 months | Desperation fundraising position |
+| No break-even path | Cannot demonstrate profitability trajectory |
+
+**Full Calculator**: Use [financial-modeling-calculator.md](assets/financial-modeling-calculator.md) for complete analysis.
+
+---
+
 ## Validation Workflow
 
 ```
@@ -278,21 +317,22 @@ GO / CONDITIONAL GO / PIVOT / NO-GO
 
 | Resource | Purpose |
 |----------|---------|
-| [validation-methodology.md](resources/validation-methodology.md) | 9-dimension scoring system details |
-| [hypothesis-testing-guide.md](resources/hypothesis-testing-guide.md) | How to run validation experiments |
-| [market-sizing-patterns.md](resources/market-sizing-patterns.md) | TAM/SAM/SOM calculation methods |
-| [moat-assessment-framework.md](resources/moat-assessment-framework.md) | Competitive barrier analysis |
+| [validation-methodology.md](references/validation-methodology.md) | 9-dimension scoring system details |
+| [hypothesis-testing-guide.md](references/hypothesis-testing-guide.md) | How to run validation experiments |
+| [market-sizing-patterns.md](references/market-sizing-patterns.md) | TAM/SAM/SOM calculation methods |
+| [moat-assessment-framework.md](references/moat-assessment-framework.md) | Competitive barrier analysis |
 
 ### Templates (Outputs)
 
 | Template | Use For |
 |----------|---------|
-| [validation-scorecard.md](templates/validation-scorecard.md) | Full 9-dimension scoring |
-| [hypothesis-canvas.md](templates/hypothesis-canvas.md) | Hypothesis testing template |
-| [validation-experiment-planner.md](templates/validation-experiment-planner.md) | Hypothesis → method → metric → decision |
-| [riskiest-assumption-test.md](templates/riskiest-assumption-test.md) | RAT experiment design |
-| [market-sizing-worksheet.md](templates/market-sizing-worksheet.md) | TAM/SAM/SOM calculation |
-| [go-no-go-decision.md](templates/go-no-go-decision.md) | Final decision template |
+| [validation-scorecard.md](assets/validation-scorecard.md) | Full 9-dimension scoring |
+| [hypothesis-canvas.md](assets/hypothesis-canvas.md) | Hypothesis testing template |
+| [validation-experiment-planner.md](assets/validation-experiment-planner.md) | Hypothesis → method → metric → decision |
+| [riskiest-assumption-test.md](assets/riskiest-assumption-test.md) | RAT experiment design |
+| [market-sizing-worksheet.md](assets/market-sizing-worksheet.md) | TAM/SAM/SOM calculation |
+| [financial-modeling-calculator.md](assets/financial-modeling-calculator.md) | Burn rate, runway, scenario analysis |
+| [go-no-go-decision.md](assets/go-no-go-decision.md) | Final decision template |
 
 ### Data
 

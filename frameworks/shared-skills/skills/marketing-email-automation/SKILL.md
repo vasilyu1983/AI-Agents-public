@@ -1,22 +1,54 @@
 ---
 name: marketing-email-automation
-description: Email marketing automation - workflow design, platform setup (HubSpot, Klaviyo, Mailchimp), nurture sequences, lifecycle emails, and deliverability.
+description: Email marketing automation - workflow design, platform setup (HubSpot, Klaviyo, Mailchimp), nurture sequences, lifecycle emails, deliverability, revenue attribution, and retention economics.
 ---
 
 # EMAIL AUTOMATION — WORKFLOW OS (OPERATIONAL)
 
 Built as a **no-fluff execution skill** for email marketing automation across B2B and B2C.
 
-**Structure**: Core email automation fundamentals first. Platform-specific setup in dedicated sections. AI personalization in clearly labeled "Optional: AI / Automation" sections.
+**Structure**: Core workflows and segmentation in SKILL.md. Platform setup in `references/`. Revenue economics in `references/email-economics.md`. Templates in `assets/`.
 
 ---
 
 ## Modern Best Practices (January 2026)
 
-- HubSpot Email: https://knowledge.hubspot.com/email/
+### 2026 Email Landscape
+
+| Trend | Impact | Action |
+|-------|--------|--------|
+| **SPF/DKIM/DMARC mandatory** | Non-authenticated mail blocked | Audit quarterly, not just at setup |
+| **BIMI adoption** | 38% higher opens, 120% brand recall | Implement verified logo display |
+| **Intelligent inboxes** | Engagement signals (scroll, reply, delete) determine placement | Focus on quality over quantity |
+| **Complaint threshold <0.3%** | Google/Yahoo enforce strictly | Monitor FBL, clean aggressively |
+| **One-click unsubscribe required** | Bulk senders must comply | List-Unsubscribe-Post header mandatory |
+| **Domain/IP warm-up critical** | ISPs monitor sending consistency | Gradual ramp for new infrastructure |
+| **Inactive subscribers harm reputation** | Disengagement = strong negative signal | Sunset flows, re-engagement campaigns |
+
+**Authentication & Deliverability (Critical)**
+- Google Sender Guidelines: https://support.google.com/a/answer/81126?hl=en
+- Yahoo Sender Hub: https://senders.yahooinc.com/best-practices/
+- Microsoft Outlook Requirements: https://learn.microsoft.com/en-us/defender-office-365/email-authentication-dmarc-configure
+- BIMI Group (Brand Indicators): https://bimigroup.org/
+- Google BIMI Setup: https://support.google.com/a/answer/10911320?hl=en
+- Mailtrap Deliverability Guide: https://mailtrap.io/blog/email-deliverability/
+- ExpertSender 2026 Deliverability: https://expertsender.com/blog/email-deliverability-in-2026-key-observations-trends-challenges-for-marketers/
+- ExactVerify Compliance Guide: https://www.exactverify.com/blog/email-deliverability-compliance-guide
+- Amplemarket 2026 Guide: https://www.amplemarket.com/blog/email-deliverability-guide-2026
+
+**Platforms**
+- HubSpot Email: https://knowledge.hubspot.com/marketing-email/create-and-send-marketing-emails
 - Klaviyo Help: https://help.klaviyo.com/
+- Klaviyo Platform Comparison: https://www.klaviyo.com/blog/best-email-marketing-platforms
 - Mailchimp Resources: https://mailchimp.com/resources/
-- Google Sender Guidelines: https://support.google.com/mail/answer/81126
+- Brevo Platform Guide: https://www.brevo.com/blog/best-email-marketing-services/
+- Knak Email Creation: https://knak.com/blog/2026-email-marketing-trends/
+
+**Industry Insights**
+- Litmus Blog: https://www.litmus.com/blog/
+- Mailjet 2026 Trends: https://www.mailjet.com/blog/email-best-practices/email-marketing-trends-2026/
+- Email Vendor Selection Guide: https://www.emailvendorselection.com/email-deliverability-guide/
+- Vertical Response 2026 Strategies: https://verticalresponse.com/blog/email-marketing-in-2026-trends-tactics-and-what-to-do-now/
 
 ---
 
@@ -26,7 +58,20 @@ Built as a **no-fluff execution skill** for email marketing automation across B2
 - **Platform setup**: HubSpot, Klaviyo, Mailchimp, Braze configuration
 - **Segmentation**: List management, behavioral segments, RFM models
 - **Deliverability**: Authentication, warm-up, reputation management
-- **Personalization**: Dynamic content, merge tags, conditional logic
+- **Revenue attribution**: RPE calculation, attribution models, email-attributed revenue
+- **Retention economics**: Churn reduction ROI, segment LTV, cohort analysis
+- **Channel mix**: Email vs. paid comparison, budget allocation, investment justification
+- **AI optimization**: Send-time optimization, predictive content, personalization at scale
+
+---
+
+## When NOT to Use This Skill
+
+- **Cold email outreach** → Sales prospecting, not marketing automation
+- **Transactional email infrastructure** → Developer/DevOps email delivery setup
+- **Email HTML/CSS coding** → Template development, not strategy
+- **SMS-only campaigns** → Different compliance and workflow patterns
+- **One-off announcements** → This skill focuses on automated sequences
 
 ---
 
@@ -46,214 +91,47 @@ Built as a **no-fluff execution skill** for email marketing automation across B2
 
 ## Core: Workflow Design Framework
 
-### Workflow Blueprint Template
-
 ```text
 WORKFLOW: [Name]
 TRIGGER: [Event that starts flow]
 GOAL: [Primary conversion action]
 DURATION: [Total time span]
 
-┌─────────────────────────────────────────────────────────────┐
-│                      ENTRY CRITERIA                          │
-│  Trigger: [Event]                                           │
-│  Filters: [Conditions to enter]                             │
-│  Exclusions: [Who NOT to include]                           │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  EMAIL 1: [Name]                                            │
-│  Delay: Immediate / [X hours/days]                          │
-│  Subject: [Subject line]                                    │
-│  Goal: [Micro-conversion]                                   │
-│  CTA: [Primary action]                                      │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  WAIT: [X days] or UNTIL [condition]                        │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  BRANCH: IF [condition]                                     │
-│  ├─ YES → [Next step for engaged]                          │
-│  └─ NO → [Next step for non-engaged]                       │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  EXIT CRITERIA                                              │
-│  Goal met: [Conversion action]                              │
-│  Unsubscribe: Remove from flow                              │
-│  Time limit: [Max days in flow]                             │
-└─────────────────────────────────────────────────────────────┘
+ENTRY → EMAIL 1 → WAIT → BRANCH (engaged/not) → EMAIL 2 → ... → EXIT
+
+Exit when: Goal met | Unsubscribe | Time limit reached
 ```
+
+See [assets/workflow-blueprint.md](assets/workflow-blueprint.md) for full template.
 
 ---
 
 ## Core: Standard Workflow Templates
 
-### 1. Welcome Sequence (4 emails, 7 days)
+### Welcome Sequence (4 emails, 7 days)
 
-```text
-TRIGGER: New subscriber
-GOAL: First purchase / demo booking
+| Day | Email | Subject Pattern | CTA |
+|-----|-------|-----------------|-----|
+| 0 | Welcome + Value | "Welcome to [Brand]" | Primary action |
+| 2 | Problem Agitation | "The [problem] most face" | Read guide |
+| 4 | Social Proof | "How [Customer] achieved [Result]" | See stories |
+| 7 | Soft Sell | "Ready to [achieve outcome]?" | Start trial / Buy |
 
-Email 1 (Immediate): Welcome + Value Prop
-├─ Subject: "Welcome to [Brand] - here's what's next"
-├─ Content: Brand story, what to expect, quick win
-└─ CTA: [Primary action based on business]
+### Abandoned Cart (3 emails, 72 hours)
 
-WAIT: 2 days
+| Time | Email | Focus | CTA |
+|------|-------|-------|-----|
+| 1hr | Reminder | Cart contents + images | Complete order |
+| 24hr | Urgency + Support | FAQ, support link | Complete + Chat |
+| 72hr | Incentive (optional) | Discount code | Use code |
 
-Email 2 (Day 2): Problem Agitation
-├─ Subject: "The [problem] most [audience] face"
-├─ Content: Pain point, consequences, hint at solution
-└─ CTA: Read guide / Watch video
+### Lead Nurture (6 emails, 4 weeks)
 
-WAIT: 2 days
+Day 0 → Day 3 → Day 7 → Day 12 → Day 17 → Day 24
 
-Email 3 (Day 4): Social Proof
-├─ Subject: "How [Customer] achieved [Result]"
-├─ Content: Case study, testimonial, results
-└─ CTA: See more stories / Book demo
+Deliver value → Educate → Case study → Handle objections → Compare → Soft close
 
-WAIT: 3 days
-
-Email 4 (Day 7): Soft Sell
-├─ Subject: "Ready to [achieve outcome]?"
-├─ Content: Offer summary, urgency, risk reversal
-└─ CTA: Start trial / Book demo / Buy now
-```
-
-### 2. Abandoned Cart (3 emails, 72 hours)
-
-```text
-TRIGGER: Cart created, no purchase in 1 hour
-GOAL: Complete purchase
-
-Email 1 (1 hour): Reminder
-├─ Subject: "You left something behind"
-├─ Content: Cart contents, product images
-└─ CTA: Complete order (direct to cart)
-
-WAIT: 24 hours
-IF: Still not purchased
-
-Email 2 (Day 1): Urgency + Support
-├─ Subject: "Your cart is waiting (questions?)"
-├─ Content: Cart contents, FAQ, support link
-└─ CTA: Complete order + Chat with us
-
-WAIT: 48 hours
-IF: Still not purchased
-
-Email 3 (Day 3): Incentive (optional)
-├─ Subject: "10% off to complete your order"
-├─ Content: Discount code, expiration
-└─ CTA: Use code [CODE] - Shop now
-
-EXIT: Purchase complete or Day 7
-```
-
-### 3. Lead Nurture (6 emails, 4 weeks)
-
-```text
-TRIGGER: Lead captured (gated content, webinar, etc.)
-GOAL: SQL / Demo booking
-
-Email 1 (Immediate): Deliver value
-├─ Subject: "Your [resource] is ready"
-├─ Content: Download link, quick intro
-└─ CTA: Download now
-
-WAIT: 3 days
-
-Email 2 (Day 3): Educational content
-├─ Subject: "3 ways to [solve problem]"
-├─ Content: Tips, how-to, best practices
-└─ CTA: Read full guide
-
-WAIT: 4 days
-
-Email 3 (Day 7): Case study
-├─ Subject: "How [Company] achieved [Result]"
-├─ Content: Customer story, metrics
-└─ CTA: Read case study
-
-WAIT: 5 days
-
-Email 4 (Day 12): Objection handling
-├─ Subject: "Worried about [common objection]?"
-├─ Content: Address concerns, proof points
-└─ CTA: See how we handle [objection]
-
-WAIT: 5 days
-
-Email 5 (Day 17): Comparison/evaluation
-├─ Subject: "How we compare to [alternative]"
-├─ Content: Comparison, differentiators
-└─ CTA: See comparison
-
-WAIT: 7 days
-
-Email 6 (Day 24): Soft close
-├─ Subject: "Ready to talk?"
-├─ Content: Recap value, offer conversation
-└─ CTA: Book a call
-
-BRANCH after each email:
-├─ Engaged (opened/clicked) → Continue sequence
-├─ Converted (booked demo) → Exit to sales
-└─ Unengaged (no opens 3+ emails) → Move to re-engagement
-```
-
-### 4. Onboarding (5 emails, 14 days)
-
-```text
-TRIGGER: New customer / trial start
-GOAL: Activation (key feature used)
-
-Email 1 (Immediate): Getting started
-├─ Subject: "Welcome! Let's get you set up"
-├─ Content: Quick start steps, first action
-└─ CTA: Complete setup
-
-WAIT: 1 day
-IF: Setup not complete
-
-Email 2 (Day 1): Setup reminder
-├─ Subject: "Need help getting started?"
-├─ Content: Setup guide, support resources
-└─ CTA: Complete setup / Chat with us
-
-WAIT: 2 days
-
-Email 3 (Day 3): Key feature intro
-├─ Subject: "Unlock [key feature]"
-├─ Content: Feature benefit, how-to
-└─ CTA: Try [feature] now
-
-WAIT: 4 days
-
-Email 4 (Day 7): Progress check
-├─ Subject: "You're making progress!"
-├─ Content: What they've done, next steps
-└─ CTA: [Next milestone action]
-
-WAIT: 7 days
-
-Email 5 (Day 14): Value realization
-├─ Subject: "[Name], here's what you've achieved"
-├─ Content: Usage stats, value delivered
-└─ CTA: Upgrade / Continue / Share feedback
-
-BRANCH by activation:
-├─ Activated → Success path (upsell)
-└─ Not activated → Risk path (support outreach)
-```
+See full templates: [assets/welcome-sequence.md](assets/welcome-sequence.md), [assets/nurture-sequence.md](assets/nurture-sequence.md), [assets/cart-abandonment.md](assets/cart-abandonment.md)
 
 ---
 
@@ -279,52 +157,23 @@ BRANCH by activation:
 | **At Risk** | Old | Often | High | Win back |
 | **Hibernating** | Old | Rare | Low | Re-engage or remove |
 
-### Lifecycle Segments
-
-| Stage | Definition | Primary Workflow |
-|-------|------------|------------------|
-| **Subscriber** | Email only | Welcome, nurture |
-| **Lead** | Engaged, not converted | Nurture, sales |
-| **Trial** | Active trial | Onboarding |
-| **Customer** | Paying | Onboarding, upsell |
-| **Churned** | Cancelled | Win-back |
-
 ---
 
 ## Core: Email Best Practices
 
 ### Subject Lines
 
-**Do:**
-- Keep under 50 characters
-- Personalize when relevant (name, company)
-- Use numbers and specifics
-- Create curiosity or urgency
-- A/B test consistently
+**Do**: Under 50 chars, personalize, use numbers, A/B test
+**Avoid**: ALL CAPS, !!! excessive punctuation, spam words, misleading
 
-**Avoid:**
-- ALL CAPS
-- Excessive punctuation!!!
-- Spam trigger words (FREE, ACT NOW)
-- Misleading subjects
-- Generic subjects ("Newsletter #47")
+### Email Copy Structure
 
-### Email Copy
-
-**Structure:**
 ```text
 1. Hook (first line): Grab attention, reference pain/benefit
 2. Body (2-3 short paragraphs): Value, proof, bridge to CTA
 3. CTA (clear, single action): Button or linked text
 4. P.S. (optional): Reinforce urgency or secondary offer
 ```
-
-**Formatting:**
-- Short paragraphs (2-3 sentences max)
-- Plenty of white space
-- Mobile-first design (single column)
-- One primary CTA per email
-- Plain text alternative
 
 ### Timing
 
@@ -333,125 +182,207 @@ BRANCH by activation:
 | B2B | Tue-Thu | 9-11am, 1-3pm |
 | B2C | Tue-Thu, Sat | 10am, 8pm |
 | Transactional | Immediate | N/A |
-| Newsletter | Consistent day | Your data |
+
+**Better approach**: Use AI send-time optimization (STO) for per-subscriber timing. See section below.
+
+---
+
+## AI-Powered Optimization (2026)
+
+### Send Time Optimization (STO)
+
+AI analyzes individual subscriber behavior to deliver emails at optimal times per recipient—replacing fixed send times.
+
+| Platform | STO Feature | Tier |
+|----------|-------------|------|
+| **Klaviyo** | Smart Send Time | All plans |
+| **HubSpot** | Send Time Optimization | Enterprise |
+| **Braze** | Intelligent Timing | All plans |
+| **ActiveCampaign** | Predictive Sending | Plus+ |
+| **Mailchimp** | Send Time Optimization | Premium |
+
+### Predictive Content
+
+| Capability | What AI Does | Impact |
+|------------|--------------|--------|
+| Subject lines | A/B tests + predicts winners | +15-25% open rate |
+| Product recs | Behavioral modeling | +20-40% click rate |
+| Content blocks | Dynamic selection per recipient | +10-20% conversion |
+| Next-best action | Determines optimal follow-up | Higher LTV |
+
+### AI Performance Benchmarks (2026)
+
+| Metric | Without AI | With AI | Lift |
+|--------|------------|---------|------|
+| Open rate | 20% | 27% | +35% |
+| Click rate | 2% | 3% | +50% |
+| Conversion | 1% | 1.5% | +50% |
+
+### Quick Wins (Start Here)
+
+1. **Enable STO** — Most platforms have this; immediate lift with no setup
+2. **Dynamic subject lines** — Let AI pick from 3-5 variants per recipient
+3. **Product recommendations** — Enable behavioral recs in cart/browse abandonment
+
+❌ **Don't over-automate**: Complex 25-email flows without monitoring damage deliverability. Review automation performance monthly.
 
 ---
 
 ## Core: Deliverability Checklist
 
-### Authentication (Required)
+### 2025-2026 Compliance (Critical)
 
-- [ ] **SPF** configured (RFC 7208)
-- [ ] **DKIM** configured (RFC 6376)
-- [ ] **DMARC** configured (RFC 7489)
+**Google, Yahoo, Microsoft** now enforce identical requirements for bulk senders (5000+/day):
+
+- [ ] **SPF + DKIM + DMARC** all configured and aligned
+- [ ] **One-click unsubscribe** (RFC 8058) header required
+- [ ] **Spam rate** below 0.3% (target <0.1%)
 - [ ] Custom sending domain (not @gmail.com)
+- [ ] Valid PTR records for sending IPs
+- [ ] **BIMI** configured (recommended for brand trust)
+
+### BIMI (Brand Indicators for Message Identification)
+
+BIMI displays your logo next to emails in Gmail, Yahoo, and Apple Mail—increasing brand recognition by up to 44%.
+
+| Requirement | Details |
+|-------------|---------|
+| **DMARC** | Policy must be `p=quarantine` or `p=reject` with `pct=100` |
+| **Logo** | SVG Tiny PS format, square |
+| **Certificate** | VMC (trademark required) or CMC (no trademark, 1yr logo use) |
+| **DNS** | BIMI TXT record at `default._bimi.yourdomain.com` |
+
+**2026 Update**: Google now accepts CMC (Common Mark Certificates) without trademark registration—lowering the barrier for smaller brands.
+
+### Enforcement Status (January 2026)
+
+| Provider | Status | Non-Compliance Result |
+|----------|--------|----------------------|
+| **Google** | Enforcing since Nov 2025 | Emails **rejected** (not delayed) |
+| **Yahoo** | Enforcing since Feb 2024 | Emails rejected |
+| **Microsoft** | Enforcing since May 2025 | Bounced with `550 5.7.515` |
+
+❌ **No grace period**: All three providers now reject unauthenticated bulk email outright.
 
 ### List Hygiene
 
-- [ ] Double opt-in enabled (or single with clear consent)
-- [ ] Unsubscribe link in every email
+- [ ] Double opt-in or clear consent
 - [ ] Hard bounces removed immediately
-- [ ] Soft bounces removed after 3 attempts
-- [ ] Inactive subscribers suppressed (90 days no engagement)
-- [ ] Spam complaints monitored (<0.1% rate)
+- [ ] Inactive suppressed (90 days no engagement)
+- [ ] Spam complaints monitored (<0.1%)
 
-### Sending Practices
-
-- [ ] Consistent sending frequency
-- [ ] Gradual volume increases (warm-up)
-- [ ] No purchased lists (ever)
-- [ ] Engagement-based sending (engaged first)
-- [ ] Sunset policy for unengaged
-
-### Monitoring
+### Monitoring Targets
 
 | Metric | Target | Action if Below |
 |--------|--------|-----------------|
-| Open rate | >20% | Check subject lines, sender reputation |
+| Open rate | >20% | Check subject lines, reputation |
 | Click rate | >2% | Check content, CTA, relevance |
-| Bounce rate | <2% | Clean list, verify addresses |
-| Spam rate | <0.1% | Review content, frequency, consent |
-| Unsubscribe | <0.5% | Check frequency, relevance |
+| Bounce rate | <2% | Clean list |
+| Spam rate | <0.1% | Review content, frequency |
 
 ---
 
-## Platform Setup Guides
+## Email Revenue Economics (Summary)
 
-### HubSpot
+Full details: [references/email-economics.md](references/email-economics.md)
 
-See [resources/hubspot-setup.md](resources/hubspot-setup.md)
+### Attribution Models
 
-### Klaviyo
+| Model | Best For |
+|-------|----------|
+| **Last-click** | Simple reporting |
+| **Position-based** | Balanced (40/40/20) |
+| **Data-driven** | High volume, accuracy |
 
-See [resources/klaviyo-setup.md](resources/klaviyo-setup.md)
+### Revenue Per Email Benchmarks
 
-### Mailchimp
+| Campaign Type | Typical RPE | Benchmark |
+|---------------|-------------|-----------|
+| Welcome series | $0.50 - $2.00 | $1.00 |
+| Abandoned cart | $2.00 - $8.00 | $5.00 |
+| Newsletter | $0.05 - $0.30 | $0.15 |
 
-See [resources/mailchimp-setup.md](resources/mailchimp-setup.md)
-
----
-
-## Quick Reference
-
-| Task | Template | Location |
-|------|----------|----------|
-| Workflow design | Workflow blueprint | `templates/workflow-blueprint.md` |
-| Welcome sequence | Welcome flow | `templates/welcome-sequence.md` |
-| Nurture sequence | Nurture flow | `templates/nurture-sequence.md` |
-| Cart abandonment | Cart recovery | `templates/cart-abandonment.md` |
-| Email audit | Health check | `templates/email-audit.md` |
-
----
-
-## Decision Tree (Email Triage)
+### Key ROI Formula
 
 ```text
-Open rates low (<15%)?
-├─ Check sender reputation (Google Postmaster, MXToolbox)
-├─ Check subject lines (A/B test)
-├─ Check send time (test different times)
-└─ Check list quality (remove inactive)
-
-Click rates low (<1%)?
-├─ Check content relevance (segmentation)
-├─ Check CTA clarity (single, prominent)
-├─ Check mobile rendering (responsive design)
-└─ Check email length (shorter often better)
-
-High unsubscribes (>0.5%)?
-├─ Check frequency (too often?)
-├─ Check relevance (right content to right segment?)
-├─ Check expectations (did they know what they signed up for?)
-└─ Add preference center (let them choose frequency/topics)
-
-Deliverability issues?
-├─ Check authentication (SPF, DKIM, DMARC)
-├─ Check blacklists (MXToolbox)
-├─ Check content (spam words, link ratio)
-└─ Check sending patterns (consistent volume)
+ROI = (Revenue - Costs) / Costs × 100
+Example: ($8,000 - $500) / $500 = 1,500%
 ```
+
+---
+
+## Retention & Churn Economics (Summary)
+
+Full details: [references/email-economics.md](references/email-economics.md)
+
+### Email's Impact on Retention
+
+| Workflow | Churn Impact |
+|----------|--------------|
+| Onboarding | -20-40% early churn |
+| Re-engagement | 5-15% reactivation |
+| Renewal reminder | -5-10% involuntary churn |
+
+### Churn Reduction Value
+
+```text
+Value = Customers Saved × Remaining LTV × Gross Margin
+
+Example: 50 saved × $1,200 LTV × 80% margin = $48,000/month
+```
+
+---
+
+## Channel Mix Economics (Summary)
+
+Full details: [references/email-economics.md](references/email-economics.md)
+
+### Email vs. Other Channels
+
+| Channel | ROAS | Efficiency |
+|---------|------|------------|
+| **Email (owned)** | 36:1 | Highest |
+| **SMS** | 15:1 | High |
+| **Paid social** | 3:1 | Medium |
+| **Paid search** | 4:1 | Medium |
+
+**Email efficiency**: 20-30% revenue on 1-3% spend = 10-20x efficiency vs. paid
+
+### Email Program ROI
+
+- Annual cost: $64,000 - $150,000
+- Annual revenue (100k list): $650,000 - $1,300,000
+- **Typical ROI: 500-700%**
 
 ---
 
 ## Metrics & KPIs
 
+### Metric Reliability (2026)
+
+| Metric | Reliability | Use |
+|--------|-------------|-----|
+| **Open rate** | Low (MPP) | Trends only |
+| **Click rate** | High | Primary engagement |
+| **Revenue per email** | High | Primary ROI metric |
+| **Conversion rate** | High | Ultimate success |
+
 ### Primary Metrics
 
 | Metric | Definition | Target |
 |--------|------------|--------|
-| **Open rate** | Opens / Delivered | >20% |
-| **Click rate** | Clicks / Delivered | >2% |
-| **Conversion rate** | Conversions / Clicks | Varies |
-| **Revenue per email** | Revenue / Emails sent | Track trend |
+| Click rate | Clicks / Delivered | >2% |
+| Conversion rate | Conversions / Clicks | Varies |
+| Revenue per email | Revenue / Emails sent | Track trend |
+| Email % of revenue | Email revenue / Total | 20-30% |
 
-### Workflow Metrics
+---
 
-| Metric | Definition | Purpose |
-|--------|------------|---------|
-| **Flow conversion** | Goal completions / Flow entries | Workflow effectiveness |
-| **Drop-off rate** | Exits at each step | Find weak points |
-| **Time to convert** | Days from entry to goal | Optimize timing |
-| **Re-entry rate** | Multiple entries | Check exclusions |
+## Platform Setup Guides
+
+- [references/hubspot-setup.md](references/hubspot-setup.md)
+- [references/klaviyo-setup.md](references/klaviyo-setup.md)
+- [references/mailchimp-setup.md](references/mailchimp-setup.md)
 
 ---
 
@@ -459,53 +390,53 @@ Deliverability issues?
 
 | Template | Purpose |
 |----------|---------|
-| [workflow-blueprint.md](templates/workflow-blueprint.md) | Design any workflow |
-| [welcome-sequence.md](templates/welcome-sequence.md) | New subscriber welcome |
-| [nurture-sequence.md](templates/nurture-sequence.md) | Lead nurturing |
-| [cart-abandonment.md](templates/cart-abandonment.md) | E-commerce recovery |
-| [email-audit.md](templates/email-audit.md) | Health check template |
+| [workflow-blueprint.md](assets/workflow-blueprint.md) | Design any workflow |
+| [welcome-sequence.md](assets/welcome-sequence.md) | New subscriber welcome |
+| [nurture-sequence.md](assets/nurture-sequence.md) | Lead nurturing |
+| [cart-abandonment.md](assets/cart-abandonment.md) | E-commerce recovery |
+| [email-audit.md](assets/email-audit.md) | Health check template |
+| [email-roi-calculator.md](assets/email-roi-calculator.md) | ROI calculation |
+
+---
+
+## Decision Tree (Email Triage)
+
+```text
+Open rates low (<15%)?
+├─ Check sender reputation
+├─ A/B test subject lines
+└─ Remove inactive subscribers
+
+Click rates low (<1%)?
+├─ Check content relevance
+├─ Simplify CTA
+└─ Test mobile rendering
+
+High unsubscribes (>0.5%)?
+├─ Reduce frequency
+├─ Improve segmentation
+└─ Add preference center
+```
 
 ---
 
 ## Anti-Patterns
 
-| Anti-Pattern | Why It Fails | Instead |
-|--------------|--------------|---------|
-| **Batch-and-blast** | Low relevance, high unsubscribes | Segment and trigger |
-| **No segmentation** | One size fits none | Behavioral segments |
-| **Too many CTAs** | Decision paralysis | One CTA per email |
-| **Ignoring mobile** | 60%+ read on mobile | Mobile-first design |
-| **No testing** | Assumptions vs data | A/B test everything |
-| **Buying lists** | Spam complaints, reputation damage | Build organically |
-| **No sunset policy** | Sending to dead addresses | Remove unengaged |
-
----
-
-## Optional: AI / Automation
-
-> **Note**: Core email automation fundamentals above work without AI. This section covers optional AI capabilities.
-
-### AI Personalization
-
-| Feature | Use Case | Tools |
-|---------|----------|-------|
-| **Subject line generation** | A/B test variants | Claude, GPT, platform built-in |
-| **Dynamic content** | Personalized blocks | Klaviyo, HubSpot, Braze |
-| **Send time optimization** | Per-recipient timing | Seventh Sense, platform AI |
-| **Predictive segments** | Churn risk, purchase propensity | Klaviyo, HubSpot predictive |
-
-### AI Best Practices
-
-- Always A/B test AI-generated vs human-written
-- Review AI content for brand voice consistency
-- Use AI for variants, not strategy
-- Monitor performance vs control
+| Anti-Pattern | Instead |
+|--------------|---------|
+| Batch-and-blast | Segment and trigger |
+| No segmentation | Behavioral segments |
+| Too many CTAs | One CTA per email |
+| Ignoring mobile | Mobile-first design (60%+ opens) |
+| Buying lists | Build organically |
+| Set-and-forget automations | Monthly performance reviews |
+| Relying on open rates | Use click rate, conversions, revenue |
 
 ---
 
 ## Related Skills
 
-- [marketing-leads-generation](../marketing-leads-generation/SKILL.md) — Lead capture and sequences
+- [marketing-leads-generation](../marketing-leads-generation/SKILL.md) — Lead capture
 - [marketing-content-strategy](../marketing-content-strategy/SKILL.md) — Content for emails
 - [marketing-cro](../marketing-cro/SKILL.md) — Landing page optimization
 - [startup-go-to-market](../startup-go-to-market/SKILL.md) — Channel strategy
@@ -515,7 +446,6 @@ Deliverability issues?
 ## Usage Notes (Claude)
 
 - Stay operational: return workflow diagrams, email copy templates, setup steps
-- Include timing recommendations and branching logic
+- For revenue/ROI questions, reference `references/email-economics.md`
 - Always include deliverability requirements (authentication, hygiene)
-- Reference platform-specific features when applicable
 - Do not invent benchmark data; use ranges or state "varies by industry"

@@ -1,11 +1,11 @@
 ---
 name: ai-agents
-description: Production-grade AI agent patterns with MCP integration, agentic RAG, handoff orchestration, multi-layer guardrails, and observability (modern best practices)
+description: Production-grade AI agent patterns with MCP integration, agentic RAG, handoff orchestration, multi-layer guardrails, observability, token economics, ROI frameworks, and build-vs-not decision guidance (modern best practices)
 ---
 
 # AI Agents Development — Production Skill Hub
 
-**Modern Best Practices (December 2025)**: deterministic control flow, bounded tools, auditable state, MCP-based tool integration, handoff-first orchestration, multi-layer guardrails, OpenTelemetry tracing, and human-in-the-loop controls (OWASP LLM Top 10: https://owasp.org/www-project-top-10-for-large-language-model-applications/).
+**Modern Best Practices (January 2026)**: deterministic control flow, bounded tools, auditable state, MCP-based tool integration (now under Linux Foundation/AAIF governance), handoff-first orchestration, multi-layer guardrails, OpenTelemetry tracing, and human-in-the-loop controls (OWASP LLM Top 10: https://owasp.org/www-project-top-10-for-large-language-model-applications/).
 
 This skill provides **production-ready operational patterns** for designing, building, evaluating, and deploying AI agents.
 It centralizes **procedures**, **checklists**, **decision rules**, and **templates** used across RAG agents, tool-using agents, OS agents, and multi-agent systems.
@@ -26,10 +26,14 @@ Claude should activate this skill whenever the user asks for:
 - Building memory systems (session, long-term, episodic, task).
 - Creating evaluation harnesses, observability plans, or safety gates.
 - Preparing CI/CD, rollout, deployment, or production operational specs.
-- Producing any template in `/resources/` or `/templates/`.
+- Producing any template in `/references/` or `/assets/`.
 - Implementing MCP servers or integrating Model Context Protocol.
 - Setting up agent handoffs and orchestration patterns.
 - Configuring multi-layer guardrails and safety controls.
+- **Evaluating whether to build an agent** (build vs not decision).
+- **Calculating agent ROI**, token costs, or cost/benefit analysis.
+- **Assessing hallucination risk** and mitigation strategies.
+- **Deciding when to kill** an agent project (kill triggers).
 - For prompt scaffolds, retrieval tuning, or security depth, see Scope Boundaries below.
 
 ## Scope Boundaries (Use These Skills for Depth)
@@ -53,6 +57,20 @@ Claude should activate this skill whenever the user asks for:
 | **Multi-Agent (Orchestrated)** | Delegate → merge → validate | Handoff contracts, eval gates | A2A | Specialization with explicit handoffs |
 | **OS Agent** | Observe UI → act → verify | Sandbox, UI grounding | MCP | Desktop/browser control under strict guardrails |
 | **Code/SWE Agent** | Branch → edit → test → PR | Repo access, CI gates | MCP | Coding tasks with review/merge controls |
+
+### Framework Selection (2026)
+
+| Framework | Architecture | Best For | Ease |
+|-----------|--------------|----------|------|
+| **LangGraph** | Graph-based, stateful | Enterprise, compliance, auditability | Medium |
+| **OpenAI Agents SDK** | Tool-centric, lightweight | Fast prototyping, OpenAI ecosystem | Easy |
+| **Google ADK** | Code-first, multi-language | Gemini/Vertex AI, polyglot teams | Medium |
+| **Pydantic AI** | Type-safe, graph FSM | Production Python, type safety | Medium |
+| **CrewAI** | Role-based crews | Team workflows, content generation | Easiest |
+| **AutoGen** | Conversational | Code generation, research | Medium |
+| **AWS Bedrock Agents** | Managed infrastructure | Enterprise AWS, knowledge bases | Easy |
+
+See [`references/modern-best-practices.md`](references/modern-best-practices.md) for detailed framework comparison and selection guide.
 
 ---
 
@@ -128,11 +146,35 @@ What does the agent need to do?
 - Avoid hidden state (implicit memory that cannot be audited).
 - Avoid untrusted tool outputs without validation/sanitization.
 
+## Navigation: Economics & Decision Framework
+
+### Should You Build an Agent?
+
+- **Build vs Not Decision Framework** - [`references/build-vs-not-decision.md`](references/build-vs-not-decision.md)
+  - 10-second test (volume, cost, error tolerance)
+  - Red flags and immediate disqualifiers
+  - Alternatives to agents (usually better)
+  - Full decision tree with stage gates
+  - Kill triggers during development and post-launch
+  - Pre-build validation checklist
+
+### Agent ROI & Token Economics
+
+- **Agent Economics** - [`references/agent-economics.md`](references/agent-economics.md)
+  - Token pricing by model (January 2026)
+  - Cost per task by agent type
+  - ROI calculation formula and tiers
+  - Hallucination cost framework and mitigation ROI
+  - Investment decision matrix
+  - Monthly tracking dashboard
+
+---
+
 ## Navigation: Core Concepts & Patterns
 
 ### Governance & Maturity
 
-- **Agent Maturity & Governance** - [`resources/agent-maturity-governance.md`](resources/agent-maturity-governance.md)
+- **Agent Maturity & Governance** - [`references/agent-maturity-governance.md`](references/agent-maturity-governance.md)
   - Capability maturity levels (L0-L4)
   - Identity & policy enforcement
   - Fleet control and registry management
@@ -140,7 +182,7 @@ What does the agent need to do?
 
 ### Modern Best Practices
 
-- **Modern Best Practices** - [`resources/modern-best-practices.md`](resources/modern-best-practices.md)
+- **Modern Best Practices** - [`references/modern-best-practices.md`](references/modern-best-practices.md)
   - Model Context Protocol (MCP)
   - Agent-to-Agent Protocol (A2A)
   - Agentic RAG (Dynamic Retrieval)
@@ -150,7 +192,7 @@ What does the agent need to do?
 
 ### Context Management
 
-- **Context Engineering** - [`resources/context-engineering.md`](resources/context-engineering.md)
+- **Context Engineering** - [`references/context-engineering.md`](references/context-engineering.md)
   - Progressive disclosure
   - Session management
   - Memory provenance
@@ -159,7 +201,7 @@ What does the agent need to do?
 
 ### Core Operational Patterns
 
-- **Operational Patterns** - [`resources/operational-patterns.md`](resources/operational-patterns.md)
+- **Operational Patterns** - [`references/operational-patterns.md`](references/operational-patterns.md)
   - Agent loop pattern (PLAN → ACT → OBSERVE → UPDATE)
   - OS agent action loop
   - RAG pipeline pattern
@@ -175,59 +217,59 @@ What does the agent need to do?
 
 ## Navigation: Protocol Implementation
 
-- **MCP Practical Guide** - [`resources/mcp-practical-guide.md`](resources/mcp-practical-guide.md)
+- **MCP Practical Guide** - [`references/mcp-practical-guide.md`](references/mcp-practical-guide.md)
   Building MCP servers, tool integration, and standardized data access
 
-- **MCP Server Builder** - [`resources/mcp-server-builder.md`](resources/mcp-server-builder.md)
+- **MCP Server Builder** - [`references/mcp-server-builder.md`](references/mcp-server-builder.md)
   End-to-end checklist for workflow-focused MCP servers (design → build → test)
 
-- **A2A Handoff Patterns** - [`resources/a2a-handoff-patterns.md`](resources/a2a-handoff-patterns.md)
+- **A2A Handoff Patterns** - [`references/a2a-handoff-patterns.md`](references/a2a-handoff-patterns.md)
   Agent-to-agent communication, task delegation, and coordination protocols
 
-- **Protocol Decision Tree** - [`resources/protocol-decision-tree.md`](resources/protocol-decision-tree.md)
+- **Protocol Decision Tree** - [`references/protocol-decision-tree.md`](references/protocol-decision-tree.md)
   When to use MCP vs A2A, decision framework, and selection criteria
 
 ---
 
 ## Navigation: Agent Capabilities
 
-- **Agent Operations** - [`resources/agent-operations-best-practices.md`](resources/agent-operations-best-practices.md)
+- **Agent Operations** - [`references/agent-operations-best-practices.md`](references/agent-operations-best-practices.md)
   Action loops, planning, observation, and execution patterns
 
-- **RAG Patterns** - [`resources/rag-patterns.md`](resources/rag-patterns.md)
+- **RAG Patterns** - [`references/rag-patterns.md`](references/rag-patterns.md)
   Contextual retrieval, agentic RAG, and hybrid search strategies
 
-- **Memory Systems** - [`resources/memory-systems.md`](resources/memory-systems.md)
+- **Memory Systems** - [`references/memory-systems.md`](references/memory-systems.md)
   Session, long-term, episodic, and task memory architectures
 
-- **Tool Design & Validation** - [`resources/tool-design-specs.md`](resources/tool-design-specs.md)
+- **Tool Design & Validation** - [`references/tool-design-specs.md`](references/tool-design-specs.md)
   Tool schemas, validation, error handling, and MCP integration
 
 ### Skill Packaging & Sharing
 
-- **Skill Lifecycle** - [`resources/skill-lifecycle.md`](resources/skill-lifecycle.md)
+- **Skill Lifecycle** - [`references/skill-lifecycle.md`](references/skill-lifecycle.md)
   Scaffold, validate, package, and share Claude skills with teams (Slack-ready)
 
-- **API Contracts for Agents** - [`resources/api-contracts-for-agents.md`](resources/api-contracts-for-agents.md)
+- **API Contracts for Agents** - [`references/api-contracts-for-agents.md`](references/api-contracts-for-agents.md)
   Request/response envelopes, safety gates, streaming/async patterns, error taxonomy
 
-- **Multi-Agent Patterns** - [`resources/multi-agent-patterns.md`](resources/multi-agent-patterns.md)
+- **Multi-Agent Patterns** - [`references/multi-agent-patterns.md`](references/multi-agent-patterns.md)
   Manager-worker, sequential, handoff, and group chat orchestration
 
-- **OS Agent Capabilities** - [`resources/os-agent-capabilities.md`](resources/os-agent-capabilities.md)
+- **OS Agent Capabilities** - [`references/os-agent-capabilities.md`](references/os-agent-capabilities.md)
   Desktop automation, UI grounding, and computer use patterns
 
-- **Code/SWE Agents** - [`resources/code-swe-agents.md`](resources/code-swe-agents.md)
+- **Code/SWE Agents** - [`references/code-swe-agents.md`](references/code-swe-agents.md)
   SE 3.0 paradigm, autonomous coding patterns, SWE-Bench, HyperAgent architecture
 
 ---
 
 ## Navigation: Production Operations
 
-- **Evaluation & Observability** - [`resources/evaluation-and-observability.md`](resources/evaluation-and-observability.md)
+- **Evaluation & Observability** - [`references/evaluation-and-observability.md`](references/evaluation-and-observability.md)
   OpenTelemetry GenAI, metrics, LLM-as-judge, and monitoring
 
-- **Deployment, CI/CD & Safety** - [`resources/deployment-ci-cd-and-safety.md`](resources/deployment-ci-cd-and-safety.md)
+- **Deployment, CI/CD & Safety** - [`references/deployment-ci-cd-and-safety.md`](references/deployment-ci-cd-and-safety.md)
   Multi-layer guardrails, HITL controls, NIST AI RMF, production checklists
 
 ---
@@ -236,50 +278,50 @@ What does the agent need to do?
 
 ### Checklists
 
-- **Agent Design & Safety Checklist** - [`templates/checklists/agent-safety-checklist.md`](templates/checklists/agent-safety-checklist.md)
+- **Agent Design & Safety Checklist** - [`assets/checklists/agent-safety-checklist.md`](assets/checklists/agent-safety-checklist.md)
   Go/No-Go safety gate: permissions, HITL triggers, eval gates, observability, rollback
 
 ### Core Agent Templates
 
-- **Standard Agent Template** - [`templates/core/agent-template-standard.md`](templates/core/agent-template-standard.md)
+- **Standard Agent Template** - [`assets/core/agent-template-standard.md`](assets/core/agent-template-standard.md)
   Full production spec: memory, tools, RAG, evaluation, observability, safety
 
-- **Specialized Agent Template** - [`templates/core/agent-template-specialized.md`](templates/core/agent-template-specialized.md)
+- **Specialized Agent Template** - [`assets/core/agent-template-specialized.md`](assets/core/agent-template-specialized.md)
   Domain-specific agents with custom capabilities and constraints
 
-- **Quick Agent Template** - [`templates/core/agent-template-quick.md`](templates/core/agent-template-quick.md)
+- **Quick Agent Template** - [`assets/core/agent-template-quick.md`](assets/core/agent-template-quick.md)
   Minimal viable agent for rapid prototyping
 
 ### RAG Templates
 
-- **Basic RAG** - [`templates/rag/rag-basic.md`](templates/rag/rag-basic.md)
+- **Basic RAG** - [`assets/rag/rag-basic.md`](assets/rag/rag-basic.md)
   Simple retrieval-augmented generation pipeline
 
-- **Advanced RAG** - [`templates/rag/rag-advanced.md`](templates/rag/rag-advanced.md)
+- **Advanced RAG** - [`assets/rag/rag-advanced.md`](assets/rag/rag-advanced.md)
   Contextual retrieval, reranking, and agentic RAG patterns
 
-- **Hybrid Retrieval** - [`templates/rag/hybrid-retrieval.md`](templates/rag/hybrid-retrieval.md)
+- **Hybrid Retrieval** - [`assets/rag/hybrid-retrieval.md`](assets/rag/hybrid-retrieval.md)
   Semantic + keyword search with BM25 fusion
 
 ### Tool Templates
 
-- **Tool Definition** - [`templates/tools/tool-definition.md`](templates/tools/tool-definition.md)
+- **Tool Definition** - [`assets/tools/tool-definition.md`](assets/tools/tool-definition.md)
   MCP-compatible tool schemas with validation and error handling
 
-- **Tool Validation Checklist** - [`templates/tools/tool-validation-checklist.md`](templates/tools/tool-validation-checklist.md)
+- **Tool Validation Checklist** - [`assets/tools/tool-validation-checklist.md`](assets/tools/tool-validation-checklist.md)
   Testing, security, and production readiness checks
 
 ### Multi-Agent Templates
 
-- **Manager-Worker Template** - [`templates/multi-agent/manager-worker-template.md`](templates/multi-agent/manager-worker-template.md)
+- **Manager-Worker Template** - [`assets/multi-agent/manager-worker-template.md`](assets/multi-agent/manager-worker-template.md)
   Orchestration pattern with task delegation and result aggregation
 
-- **Evaluator-Router Template** - [`templates/multi-agent/evaluator-router-template.md`](templates/multi-agent/evaluator-router-template.md)
+- **Evaluator-Router Template** - [`assets/multi-agent/evaluator-router-template.md`](assets/multi-agent/evaluator-router-template.md)
   Dynamic routing with quality assessment and domain classification
 
 ### Service Layer Templates
 
-- **FastAPI Agent Service** - [`../dev-api-design/templates/fastapi/fastapi-complete-api.md`](../dev-api-design/templates/fastapi/fastapi-complete-api.md)
+- **FastAPI Agent Service** - [`../dev-api-design/assets/fastapi/fastapi-complete-api.md`](../dev-api-design/assets/fastapi/fastapi-complete-api.md)
   Auth, pagination, validation, error handling; extend with model lifespan loads, SSE, background tasks
 
 ---
@@ -299,7 +341,50 @@ What does the agent need to do?
 - [../software-clean-code-standard/utilities/logging-utilities.md](../software-clean-code-standard/utilities/logging-utilities.md) — pino v9 + OpenTelemetry integration
 - [../software-clean-code-standard/utilities/observability-utilities.md](../software-clean-code-standard/utilities/observability-utilities.md) — OpenTelemetry SDK, tracing, metrics
 - [../software-clean-code-standard/utilities/testing-utilities.md](../software-clean-code-standard/utilities/testing-utilities.md) — Test factories, fixtures, mocks
-- [../software-clean-code-standard/resources/clean-code-standard.md](../software-clean-code-standard/resources/clean-code-standard.md) — Canonical clean code rules (`CC-*`) for citation
+- [../software-clean-code-standard/references/clean-code-standard.md](../software-clean-code-standard/references/clean-code-standard.md) — Canonical clean code rules (`CC-*`) for citation
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about AI agents, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best agent framework for [use case]?"
+- "What should I use for [multi-agent/tool use/orchestration]?"
+- "What's the latest in AI agents?"
+- "Current best practices for [agent architecture/MCP/A2A]?"
+- "Is [LangGraph/CrewAI/AutoGen] still relevant in 2026?"
+- "[Agent framework A] vs [Agent framework B]?"
+- "Best way to build [coding agent/RAG agent/OS agent]?"
+- "What MCP servers are available?"
+
+### Required Searches
+
+1. Search: `"AI agent frameworks best practices 2026"`
+2. Search: `"[LangGraph/CrewAI/AutoGen/Semantic Kernel] comparison 2026"`
+3. Search: `"AI agent trends January 2026"`
+4. Search: `"MCP servers available 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What agent frameworks are popular NOW
+- **Emerging trends**: New patterns gaining traction (MCP, A2A, agentic coding)
+- **Deprecated/declining**: Frameworks or patterns losing relevance
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- Agent frameworks (LangGraph, CrewAI, AutoGen, Semantic Kernel, Pydantic AI)
+- MCP ecosystem (available servers, new integrations)
+- Agentic coding (Claude Code, Cursor, Windsurf, Cline)
+- Multi-agent patterns (hierarchical, collaborative, competitive)
+- Tool use protocols (MCP, function calling)
+- Agent evaluation (SWE-Bench, AgentBench, GAIA)
+- OS/computer use agents (Claude Computer Use, browser automation)
 
 ---
 

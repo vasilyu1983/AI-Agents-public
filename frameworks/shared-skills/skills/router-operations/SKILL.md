@@ -1,8 +1,8 @@
 ---
 name: router-operations
-description: Master orchestration for routing QA, testing, DevOps, observability, and git workflow questions through 15 operational skills
+description: Master orchestration for routing QA, testing, DevOps, observability, and git workflow questions through 18 operational skills
 metadata:
-  version: "1.2"
+  version: "1.3"
 ---
 
 # Router: Operations
@@ -13,7 +13,7 @@ Master orchestrator that routes quality assurance, testing, deployment, observab
 
 ## Decision Tree: Where to Start?
 
-```
+```text
 OPERATIONS QUESTION
     │
     ├─► "How to test this?" ────────────► qa-testing-strategy
@@ -27,6 +27,9 @@ OPERATIONS QUESTION
     │
     ├─► "Test mobile app" ──────────────► qa-testing-mobile
     │                                      └─► iOS + Android, device matrix
+    │
+    ├─► "Test Android app" ────────────► qa-testing-android
+    │                                      └─► Espresso, UIAutomator, Compose
     │
     ├─► "API contract testing" ─────────► qa-api-testing-contracts
     │                                      └─► OpenAPI, GraphQL, gRPC
@@ -83,6 +86,7 @@ OPERATIONS QUESTION
 | `qa-testing-strategy` | Overall test strategy, frameworks |
 | `qa-testing-playwright` | E2E web testing, browser automation |
 | `qa-testing-ios` | iOS simulator testing, XCTest |
+| `qa-testing-android` | Android testing, Espresso, Compose |
 | `qa-testing-mobile` | Cross platform mobile testing |
 | `qa-api-testing-contracts` | API schema and contract testing |
 | `qa-agent-testing` | LLM agent/persona testing |
@@ -90,8 +94,9 @@ OPERATIONS QUESTION
 **Skill Chain - Complete Test Setup**:
 ```
 qa-testing-strategy (strategy) → qa-testing-playwright (E2E)
-    → qa-testing-ios (iOS) → qa-testing-mobile (cross platform)
-    → qa-api-testing-contracts (API) → qa-agent-testing (AI agents)
+    → qa-testing-ios (iOS) → qa-testing-android (Android)
+    → qa-testing-mobile (cross platform) → qa-api-testing-contracts (API)
+    → qa-agent-testing (AI agents)
 ```
 
 ### Domain 2: DEBUGGING & RESILIENCE
@@ -165,7 +170,7 @@ git-workflow (strategy) → git-commit-message (commits)
 
 ### Domain 6: DOCUMENTATION
 
-**Triggers**: "documentation", "README", "API docs", "ADR", "PRD", "changelog", "docs"
+**Triggers**: "documentation", "README", "API docs", "ADR", "PRD", "changelog", "docs", "CLAUDE.md", "AGENTS.md", "large codebase", "project memory"
 
 **Primary Skills**:
 
@@ -174,24 +179,34 @@ git-workflow (strategy) → git-commit-message (commits)
 | `docs-codebase` | Technical documentation |
 | `docs-ai-prd` | PRDs for AI agents |
 | `qa-docs-coverage` | Documentation gaps |
+| `claude-code-project-memory` | CLAUDE.md/AGENTS.md for large codebases (100K-1M LOC) |
 
 **Skill Chain - Documentation**:
 ```
 qa-docs-coverage (audit) → docs-codebase (write docs)
     → docs-ai-prd (if AI project)
+    → claude-code-project-memory (if large codebase)
+```
+
+**Skill Chain - Large Codebase Setup (100K-1M LOC)**:
+```
+claude-code-project-memory (hierarchical CLAUDE.md)
+    → qa-docs-coverage (documentation audit)
+    → docs-codebase (fill gaps)
 ```
 
 ---
 
 ## Skill Registry
 
-### Testing & QA (7)
+### Testing & QA (8)
 
 | Skill | Purpose | Key Outputs |
 |-------|---------|-------------|
 | `qa-testing-strategy` | Test strategy | Test pyramid, frameworks, coverage |
 | `qa-testing-playwright` | E2E web testing | Page objects, auth flows, CI |
 | `qa-testing-ios` | iOS testing | XCTest, simulator, UI tests |
+| `qa-testing-android` | Android testing | Espresso, Compose, UIAutomator |
 | `qa-testing-mobile` | Cross-platform mobile | iOS + Android, device matrix |
 | `qa-api-testing-contracts` | API contract testing | OpenAPI, GraphQL, gRPC |
 | `qa-agent-testing` | LLM agent testing | Test suites, scoring rubrics |
@@ -224,13 +239,14 @@ qa-docs-coverage (audit) → docs-codebase (write docs)
 | `git-commit-message` | Commits | Conventional commit messages |
 | `git-workflow` | Workflows | Branching, PRs, reviews |
 
-### Documentation (3)
+### Documentation (4)
 
 | Skill | Purpose | Key Outputs |
 |-------|---------|-------------|
 | `docs-codebase` | Tech docs | README, API docs, ADRs |
 | `docs-ai-prd` | AI PRDs | Agent specs, CLAUDE.md |
 | `qa-docs-coverage` | Docs gaps | Coverage audit |
+| `claude-code-project-memory` | Large codebase docs | CLAUDE.md, AGENTS.md, hierarchical setup |
 
 ---
 
@@ -238,16 +254,19 @@ qa-docs-coverage (audit) → docs-codebase (write docs)
 
 ### Keyword-Based Routing
 
-```
+```text
 KEYWORDS -> SKILL MAPPING
 
 "test strategy", "test pyramid", "coverage" -> qa-testing-strategy
 "Playwright", "E2E", "browser test", "page object" -> qa-testing-playwright
 "iOS test", "XCTest", "simulator", "xcrun" -> qa-testing-ios
-"mobile test", "Android test", "device matrix", "Appium" -> qa-testing-mobile
+"Android test", "Espresso", "UIAutomator", "Compose test" -> qa-testing-android
+"mobile test", "cross-platform test", "device matrix", "Appium" -> qa-testing-mobile
 "API test", "contract test", "OpenAPI", "schema validation" -> qa-api-testing-contracts
+"Pact", "consumer driven contract", "CDC" -> qa-api-testing-contracts
 "agent test", "LLM test", "persona test", "refusal" -> qa-agent-testing
 "docs coverage", "undocumented", "gap analysis" -> qa-docs-coverage
+"QAOps", "quality ops", "predictive quality" -> qa-testing-strategy
 
 "debug", "troubleshoot", "stack trace", "profiling" -> qa-debugging
 "resilience", "circuit breaker", "retry", "chaos" -> qa-resilience
@@ -255,31 +274,38 @@ KEYWORDS -> SKILL MAPPING
 
 "observability", "tracing", "metrics", "SLO", "SLI" -> qa-observability
 "OpenTelemetry", "APM", "distributed tracing" -> qa-observability
+"DORA metrics", "deployment frequency", "lead time" -> qa-observability
+"change failure rate", "MTTR", "mean time to recovery" -> qa-observability
+"AIOps", "AI operations", "anomaly detection" -> qa-observability
 
 "deploy", "Kubernetes", "K8s", "Terraform" -> ops-devops-platform
 "Docker", "container", "GitOps", "ArgoCD" -> ops-devops-platform
 "CI/CD", "pipeline", "GitHub Actions" -> ops-devops-platform
 "SRE", "reliability", "incident" -> ops-devops-platform
+"platform engineering", "IDP", "developer platform" -> ops-devops-platform
+"FinOps", "cloud cost", "cost optimization" -> ops-devops-platform
 
 "commit message", "conventional commit" -> git-commit-message
 "git workflow", "branching", "PR", "code review" -> git-workflow
 "merge", "rebase", "trunk-based" -> git-workflow
 
 "README", "API docs", "ADR", "changelog" -> docs-codebase
-"PRD", "CLAUDE.md", "AI agent spec" -> docs-ai-prd
+"PRD", "AI agent spec" -> docs-ai-prd
+"CLAUDE.md", "AGENTS.md", "large codebase", "project memory", "100K LOC", "documentation setup" -> claude-code-project-memory
 ```
 
 ### Context-Based Routing
 
 | User Context | Primary Skill | Supporting Skills |
 |--------------|---------------|-------------------|
-| Starting testing | `qa-testing-strategy` | `qa-testing-playwright`, `qa-testing-ios` |
+| Starting testing | `qa-testing-strategy` | `qa-testing-playwright`, `qa-testing-ios`, `qa-testing-android` |
 | Production bug | `qa-debugging` | `qa-resilience`, `qa-observability` |
 | Deploying app | `ops-devops-platform` | `git-workflow`, `qa-observability` |
 | Code quality | `qa-refactoring` | `qa-debugging`, `software-code-review` |
 | Git setup | `git-workflow` | `git-commit-message` |
 | Writing docs | `docs-codebase` | `qa-docs-coverage` |
 | Testing AI agent | `qa-agent-testing` | `ai-agents`, `ai-prompt-engineering` |
+| Large codebase setup | `claude-code-project-memory` | `qa-docs-coverage`, `docs-codebase` |
 
 ---
 
@@ -392,6 +418,35 @@ git-workflow ───────────────► PR with docs
   ▼
 DOCS COMPLETE
 ```
+
+### Pattern 6: Large Codebase Documentation (100K-1M LOC)
+
+```
+START
+  │
+  ▼
+claude-code-project-memory ─► Hierarchical CLAUDE.md structure
+  │                           (root + subdirectory docs)
+  ├─► Root CLAUDE.md ─────────► Architecture, conventions, entry points
+  ├─► Subdirectory docs ──────► Module-specific context (loaded on-demand)
+  ├─► AGENTS.md symlink ──────► Cross-platform compatibility
+  │
+  ▼
+qa-docs-coverage ───────────► Audit existing documentation
+  │
+  ▼
+docs-codebase ──────────────► Fill critical gaps
+  │
+  ▼
+LARGE CODEBASE READY FOR LLM ASSISTANCE
+```
+
+**Key Guidelines (Jan 2026)**:
+
+- Keep root CLAUDE.md under ~300 lines
+- Use hierarchical structure: subdirectory docs auto-load when needed
+- Symlink strategy: `ln -s AGENTS.md CLAUDE.md` for cross-platform
+- Official sources: [Anthropic Claude Code Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices), [OpenAI AGENTS.md Guide](https://developers.openai.com/codex/guides/agents-md)
 
 ---
 
@@ -536,25 +591,12 @@ When router-engineering detects ops needs:
 
 ---
 
-## Resources
+## Related Skills
 
-| Resource | Purpose |
-|----------|---------|
-| `resources/routing-logic.md` | Detailed routing rules |
-| `resources/quality-gates.md` | Deployment checklists |
-| `resources/incident-response.md` | Incident playbook |
+| Skill | Purpose |
+| ----- | ------- |
+| `router-qa` | Specialized QA routing for testing, debugging, resilience, observability |
+| `router-engineering` | Routes to software development and AI/ML skills |
+| `router-startup` | Routes to business, marketing, and product skills |
 
-## Templates
-
-| Template | Purpose |
-|----------|---------|
-| `templates/operations-audit.md` | Full audit report |
-| `templates/test-strategy.md` | Test planning |
-| `templates/incident-postmortem.md` | Post-mortem doc |
-
-## Data
-
-| File | Purpose |
-|------|---------|
-| `data/skill-registry.json` | Operations skills index |
-| `data/sources.json` | Reference sources |
+**Note**: For deep QA-specific questions (test strategy, debugging workflows, resilience patterns), consider routing through `router-qa` for more specialized decision trees and workflow patterns.

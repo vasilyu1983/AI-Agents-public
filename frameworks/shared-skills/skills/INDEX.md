@@ -1,9 +1,9 @@
 # Codex Skills Index
 
-This directory contains 76 production-grade skills for Codex, organized by domain.
+This directory contains 81 production-grade skills organized by domain.
 
-**Total Skills:** 76
-**Last Updated:** 2026-01-09
+**Total Skills:** 81 (77 domain skills + 4 routers)
+**Last Updated:** 2026-01-21
 
 ---
 
@@ -25,16 +25,16 @@ YOUR QUERY
             ▼                     ▼                     ▼
 ┌───────────────────┐  ┌───────────────────┐  ┌───────────────────┐
 │  router-startup   │  │ router-engineering│  │ router-operations │
-│  22 skills        │  │  32 skills        │  │   15 skills       │
+│  23 skills        │  │  33 skills        │  │   19 skills       │
 └───────────────────┘  └───────────────────┘  └───────────────────┘
 ```
 
 | Router | Skills | Domain |
 |--------|--------|--------|
 | [router-main](router-main/SKILL.md) | — | Universal entry point, routes to domain routers |
-| [router-startup](router-startup/SKILL.md) | 22 | Business, marketing (8), documents, product, UX |
-| [router-engineering](router-engineering/SKILL.md) | 32 | AI/ML, software, data, Claude Code framework |
-| [router-operations](router-operations/SKILL.md) | 15 | QA, testing, DevOps, git, observability |
+| [router-startup](router-startup/SKILL.md) | 23 | Business, marketing (9), documents, product, UX |
+| [router-engineering](router-engineering/SKILL.md) | 33 | AI/ML, software, data (3), Claude Code framework |
+| [router-operations](router-operations/SKILL.md) | 20 | QA (8), testing (5), DevOps, git, documentation, large codebase setup |
 
 ---
 
@@ -46,17 +46,17 @@ YOUR QUERY
 | [Startup](#startup-7-skills) | 7 | Idea validation, competitive analysis, business models, fundraising, GTM |
 | [AI/ML](#aiml-8-skills) | 8 | LLMs, agents, RAG, MLOps, data science |
 | [Claude Code](#claude-code-6-skills) | 6 | Agents, commands, hooks, MCP, skills, memory |
-| [Data](#data-2-skills) | 2 | Data lake/lakehouse, SQL optimization |
+| [Data](#data-3-skills) | 3 | Data lake/lakehouse, SQL optimization, analytics engineering |
 | [Documentation](#documentation-2-skills) | 2 | AI-friendly PRDs, codebase docs |
 | [Document Formats](#document-formats-4-skills) | 4 | PDF, DOCX, XLSX, PPTX file processing |
 | [Developer Tools](#developer-tools-5-skills) | 5 | API design, dependencies, git, workflows |
-| [Marketing](#marketing-8-skills) | 8 | SEO, AI search, social media, lead gen, content, paid ads, email, CRO |
-| [Operations](#operations-1-skill) | 1 | DevOps platform |
+| [Marketing](#marketing-9-skills) | 9 | SEO, AI search, social media, lead gen, content, paid ads, email, CRO, product analytics |
+| [Operations](#operations-2-skills) | 2 | DevOps platform, help center design |
 | [Product](#product-1-skill) | 1 | Product management |
-| [Quality](#quality-6-skills) | 6 | Debugging, refactoring, observability, resilience, docs coverage, agent testing |
+| [Quality](#quality-8-skills) | 8 | Debugging, refactoring, observability, resilience, docs coverage, agent testing, API contracts |
 | [Software](#software-11-skills) | 11 | Frontend, backend, mobile, architecture, security, UX research, clean code |
-| [Testing](#testing-3-skills) | 3 | Automation, Playwright, iOS simulator |
-| [Project-only](#project-only-4-skills) | 4 | Project-specific domain expertise (astrology suite) |
+| [Testing](#testing-5-skills) | 5 | Automation, Playwright, iOS simulator, mobile testing, Android |
+| [Project-only](#project-only-6-skills) | 6 | Project-specific domain expertise (astrology suite, real estate, QTax) |
 
 ---
 
@@ -108,8 +108,8 @@ YOUR QUERY
 | [claude-code-commands](claude-code-commands/SKILL.md) | Create slash commands with $ARGUMENTS handling, agent invocation patterns |
 | [claude-code-hooks](claude-code-hooks/SKILL.md) | Event-driven hooks for automation: PreToolUse, PostToolUse, Stop events |
 | [claude-code-mcp](claude-code-mcp/SKILL.md) | Build Model Context Protocol (MCP) servers for database, filesystem, API connections |
-| [claude-code-project-memory](claude-code-project-memory/SKILL.md) | Configure CLAUDE.md for persistent context, coding standards, team conventions |
-| [claude-code-skills](claude-code-skills/SKILL.md) | Reference for creating skills with SKILL.md structure, resources/, progressive disclosure |
+| [claude-code-project-memory](claude-code-project-memory/SKILL.md) | Configure CLAUDE.md/AGENTS.md for large codebases (100K-1M LOC), hierarchical docs, cross-platform support |
+| [claude-code-skills](claude-code-skills/SKILL.md) | Reference for creating skills with SKILL.md structure, references/, progressive disclosure |
 
 ---
 
@@ -147,7 +147,7 @@ YOUR QUERY
 
 ---
 
-## Marketing (8 skills)
+## Marketing (10 skills)
 
 | Skill | Description |
 |-------|-------------|
@@ -157,24 +157,28 @@ YOUR QUERY
 | [marketing-email-automation](marketing-email-automation/SKILL.md) | Email marketing automation: workflows, sequences, deliverability, segmentation |
 | [marketing-leads-generation](marketing-leads-generation/SKILL.md) | Lead generation: ICP/offers, outbound cadences, LinkedIn, lead scoring |
 | [marketing-paid-advertising](marketing-paid-advertising/SKILL.md) | Paid advertising: Meta Ads, Google Ads, campaign structure, bidding strategies |
-| [marketing-seo-technical](marketing-seo-technical/SKILL.md) | Technical SEO: Core Web Vitals, crawlability, structured data, mobile |
+| [marketing-product-analytics](marketing-product-analytics/SKILL.md) | Product analytics: event taxonomy, tracking plans, PostHog/Pendo/Amplitude, activation metrics, attribution |
+| [marketing-seo-complete](marketing-seo-complete/SKILL.md) | Technical SEO: Core Web Vitals, crawlability, structured data, mobile |
 | [marketing-social-media](marketing-social-media/SKILL.md) | Social media marketing: SMMA, paid social, content creation, offers |
+| [marketing-visual-design](marketing-visual-design/SKILL.md) | Marketing visual design: ad creatives, social graphics, email visuals, presentations, AI tools |
 
 ---
 
-## Data (2 skills)
+## Data (3 skills)
 
 | Skill | Description |
 |-------|-------------|
+| [data-analytics-engineering](data-analytics-engineering/SKILL.md) | Analytics engineering: dbt, metrics layer, semantic modeling, data quality |
 | [data-lake-platform](data-lake-platform/SKILL.md) | Universal data lake/lakehouse: ingestion (dlt, Airbyte), transformation (SQLMesh, dbt), storage (Iceberg, Delta), query engines (ClickHouse, DuckDB, Doris), streaming (Kafka), orchestration, visualization (Metabase, Superset) |
 | [data-sql-optimization](data-sql-optimization/SKILL.md) | OLTP SQL optimization: EXPLAIN ANALYZE, indexing, performance across PostgreSQL/MySQL/Oracle/SQL Server |
 
 ---
 
-## Operations (1 skill)
+## Operations (2 skills)
 
 | Skill | Description |
 |-------|-------------|
+| [help-center-design](help-center-design/SKILL.md) | Help center & knowledge base: AI-first support, taxonomy, self-service optimization |
 | [ops-devops-platform](ops-devops-platform/SKILL.md) | DevOps: Kubernetes, GitOps, SRE, CI/CD security, AWS/GCP/Azure, Terraform |
 
 ---
@@ -187,15 +191,16 @@ YOUR QUERY
 
 ---
 
-## Quality (6 skills)
+## Quality (8 skills)
 
 | Skill | Description |
 |-------|-------------|
 | [qa-agent-testing](qa-agent-testing/SKILL.md) | LLM agent/persona testing: 10-task test suites, 5 refusal edge cases, 6-dimension scoring rubric, regression protocols |
-| [qa-refactoring](qa-refactoring/SKILL.md) | Refactoring: code smells, technical debt, automated quality gates |
+| [qa-api-testing-contracts](qa-api-testing-contracts/SKILL.md) | API contract testing: OpenAPI validation, consumer-driven contracts, schema evolution |
 | [qa-debugging](qa-debugging/SKILL.md) | Debugging: logging, error tracking, profiling, root cause analysis |
 | [qa-docs-coverage](qa-docs-coverage/SKILL.md) | Audit codebases for documentation gaps, generate coverage reports |
 | [qa-observability](qa-observability/SKILL.md) | Observability: OpenTelemetry, tracing, metrics, SLO/SLI, APM |
+| [qa-refactoring](qa-refactoring/SKILL.md) | Refactoring: code smells, technical debt, automated quality gates |
 | [qa-resilience](qa-resilience/SKILL.md) | Resilience: circuit breakers, retries, bulkheads, chaos engineering |
 
 ---
@@ -218,24 +223,28 @@ YOUR QUERY
 
 ---
 
-## Testing (3 skills)
+## Testing (5 skills)
 
 | Skill | Description |
 |-------|-------------|
 | [qa-testing-strategy](qa-testing-strategy/SKILL.md) | Test strategy: unit, integration, E2E, BDD, performance with Jest/Vitest/Playwright |
-| [qa-testing-ios](qa-testing-ios/SKILL.md) | iOS testing: Xcode simulator, XCTest, UI automation |
+| [qa-testing-android](qa-testing-android/SKILL.md) | Android testing: Espresso, UIAutomator, Compose Testing, ADB automation, CI/CD |
+| [qa-testing-ios](qa-testing-ios/SKILL.md) | iOS testing: Xcode simulator, XCTest, Swift Testing, UI automation |
+| [qa-testing-mobile](qa-testing-mobile/SKILL.md) | Mobile testing: iOS + Android, device matrix, Appium, Detox |
 | [qa-testing-playwright](qa-testing-playwright/SKILL.md) | E2E web testing: Playwright, page objects, authentication, CI/CD |
 
 ---
 
-## Project-only (4 skills)
+## Project-only (6 skills)
 
 | Skill | Description |
 |-------|-------------|
-| [project-astrology-numerology](project-astrology-numerology/SKILL.md) | Expert Western astrological advisor with natal charts, transits, synastry, and numerology (project) |
 | [project-astrology-chinese](project-astrology-chinese/SKILL.md) | Expert Chinese astrology advisor for 12 Animal Zodiac, Five Elements, BaZi (project) |
-| [project-astrology-vedic](project-astrology-vedic/SKILL.md) | Expert Vedic/Jyotish astrology advisor with dashas, nakshatras, doshas (project) |
+| [project-astrology-numerology](project-astrology-numerology/SKILL.md) | Expert Western astrological advisor with natal charts, transits, synastry, and numerology (project) |
 | [project-astrology-tarot-divination](project-astrology-tarot-divination/SKILL.md) | Expert tarot and divination advisor with spreads, card meanings, I Ching (project) |
+| [project-astrology-vedic](project-astrology-vedic/SKILL.md) | Expert Vedic/Jyotish astrology advisor with dashas, nakshatras, doshas (project) |
+| [project-qtax](project-qtax/SKILL.md) | QTax domain expertise (project-specific) |
+| [project-real-estate-agent](project-real-estate-agent/SKILL.md) | Real estate agent assistant with property analysis and market insights (project) |
 
 ---
 
@@ -248,9 +257,9 @@ skill-name/
 ├── SKILL.md           # Main skill definition (required)
 ├── data/
 │   └── sources.json   # Curated external references
-├── resources/
+├── references/
 │   └── *.md           # Operational guides and patterns
-└── templates/
+└── assets/
     └── *.md, *.json   # Copy-paste ready templates
 ```
 
@@ -273,7 +282,7 @@ description: One-line description for Claude Code UI
 [Tables of tools, frameworks, patterns]
 
 ## Navigation
-[Links to resources/, templates/]
+[Links to references/, assets/]
 ```
 
 ---
@@ -308,5 +317,5 @@ See [claude-code-skills](claude-code-skills/SKILL.md) for the complete guide to 
 1. Follow the standard skill structure
 2. Include SKILL.md with proper frontmatter
 3. Add data/sources.json with curated references
-4. Create resources/ with operational guides
-5. Add templates/ with reusable starting points
+4. Create references/ with operational guides
+5. Add assets/ with reusable starting points

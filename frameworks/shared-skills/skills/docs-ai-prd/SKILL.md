@@ -13,12 +13,14 @@ Create product requirements and project context that humans and coding assistant
 
 ---
 
-**Modern Best Practices (Dec 2025)**:
+**Modern Best Practices (Jan 2026)**:
+- **Context engineering**: Provide right information in right format at right time—supersedes "prompt engineering" for AI coding workflows.
 - Decision-first: document the decision, owner, and due date (not just background).
 - Testability: every requirement has acceptance criteria and explicit non-goals.
 - Metrics: define formula + timeframe + data source; add guardrails for side effects.
 - Change control: version docs and keep updates diff-friendly (small deltas, dated changes).
-- Safety: privacy, security, and accessibility are requirements, not “later”.
+- Safety: privacy, security, and accessibility are requirements, not "later".
+- Cross-tool portability: context files should work across Claude Code, Cursor, Copilot, Windsurf.
 
 ## Do / Avoid (Dec 2025)
 
@@ -60,11 +62,11 @@ Use this skill when a user requests:
 
 | Task | Template | When to Use |
 |------|----------|-------------|
-| PRD creation | `templates/prd/prd-template.md` | Writing product requirements |
-| Tech spec | `templates/spec/tech-spec-template.md` | Engineering design doc |
-| Planning checklist | `templates/planning/planning-checklist.md` | Before complex feature |
-| Story mapping | `templates/stories/story-mapping-template.md` | User journey visualization |
-| Gherkin/BDD | `templates/stories/gherkin-example-template.md` | Acceptance criteria |
+| PRD creation | `assets/prd/prd-template.md` | Writing product requirements |
+| Tech spec | `assets/spec/tech-spec-template.md` | Engineering design doc |
+| Planning checklist | `assets/planning/planning-checklist.md` | Before complex feature |
+| Story mapping | `assets/stories/story-mapping-template.md` | User journey visualization |
+| Gherkin/BDD | `assets/stories/gherkin-example-template.md` | Acceptance criteria |
 
 ---
 
@@ -76,24 +78,38 @@ Use only when explicitly requested and policy-compliant.
 
 | Task | Template | When to Use |
 |------|----------|-------------|
-| AI PRD | `templates/prd/ai-prd-template.md` | AI feature/system (eval + risk + monitoring) |
-| Agentic session | `templates/planning/agentic-session-template.md` | AI coding session (>3 files) |
-| Prompt playbook | `templates/prompting/prompt-playbook.md` | Repeatable prompts for complex work |
-| Metrics tracking | `templates/metrics/agentic-coding-metrics-template.md` | AI coding effectiveness and ROI |
+| AI PRD | `assets/prd/ai-prd-template.md` | AI feature/system (eval + risk + monitoring) |
+| Agentic session | `assets/planning/agentic-session-template.md` | AI coding session (>3 files) |
+| Prompt playbook | `assets/prompting/prompt-playbook.md` | Repeatable prompts for complex work |
+| Metrics tracking | `assets/metrics/agentic-coding-metrics-template.md` | AI coding effectiveness and ROI |
 
 ### Project Context (CLAUDE.md)
 
 | Context Type | Template | Priority |
 |--------------|----------|----------|
-| **Architecture** | `templates/architecture-context.md` | Critical |
-| **Conventions** | `templates/conventions-context.md` | High |
-| **Tribal Knowledge** | `templates/tribal-knowledge-context.md` | High |
-| **Key Files** | `templates/key-files-context.md` | Critical |
-| **Dependencies** | `templates/dependencies-context.md` | Medium |
-| **Web App** | `templates/web-app-context.md` | By project type |
-| **CLI Tool** | `templates/cli-context.md` | By project type |
-| **Library** | `templates/library-context.md` | By project type |
-| **Minimal Quick Start** | `templates/minimal-claudemd.md` | 5-minute start |
+| **Architecture** | `assets/architecture-context.md` | Critical |
+| **Conventions** | `assets/conventions-context.md` | High |
+| **Tribal Knowledge** | `assets/tribal-knowledge-context.md` | High |
+| **Key Files** | `assets/key-files-context.md` | Critical |
+| **Dependencies** | `assets/dependencies-context.md` | Medium |
+| **Web App** | `assets/web-app-context.md` | By project type |
+| **CLI Tool** | `assets/cli-context.md` | By project type |
+| **Library** | `assets/library-context.md` | By project type |
+| **Minimal Quick Start** | `assets/minimal-claudemd.md` | 5-minute start |
+| **Cross-Tool Context** | `assets/cross-tool-context.md` | Multi-tool projects |
+
+### Cross-Tool Context Files (Jan 2026)
+
+| Tool | Location | Format | Notes |
+|------|----------|--------|-------|
+| Claude Code | `CLAUDE.md`, `.claude/` | Markdown | Auto-loaded at session start |
+| Cursor | `.cursor/rules/`, `.cursorrules` | Markdown | Project-specific rules |
+| Windsurf | `.windsurf/rules/` | Markdown | Cascade context |
+| Copilot | `.github/copilot-instructions.md` | Markdown | Workspace context |
+| Cline | `.cline/`, `.clinerules` | Markdown | Project rules |
+| Generic | `AGENTS.md` | Markdown | Tool-agnostic fallback |
+
+See [assets/cross-tool-context.md](assets/cross-tool-context.md) for unified template.
 
 ### AI PRD Essentials (Dec 2025)
 
@@ -166,6 +182,136 @@ User needs: [CLAUDE.md for project]
          Verify accuracy
          Add usage guidance
 ```
+
+---
+
+## Docs Audit & LLM Optimization
+
+When project docs grow messy, audit and trim to reduce token waste. LLMs have limited context—generic theory wastes tokens that should be used for project-specific context.
+
+### Core Principle
+
+```text
+Skills = Domain knowledge (reusable frameworks, best practices, patterns)
+Docs   = Project data (YOUR prices, endpoints, keywords, decisions)
+```
+
+**Why this matters**: Skills provide generic knowledge; docs provide YOUR specific data. Don't duplicate what's already in skills.
+
+### When to Audit
+
+- Project docs folder has grown large (>20 files or >5,000 lines)
+- Docs feel repetitive or contain "explainer" content
+- Multiple docs cover similar topics
+- New project setup—establishing doc structure
+- Periodic cleanup (quarterly recommended)
+
+### Audit Checklist
+
+#### Step 1: Identify Generic Theory (Remove → Point to Skill)
+
+| Signal | Example | Action |
+| ------ | ------- | ------ |
+| Explains "why" of a practice | "Backlinks matter because..." | Remove → point to skill |
+| Has no project-specific data | "How to write good headlines" | Remove → point to skill |
+| Could apply to any project | "SEO best practices for 2026" | Remove → point to skill |
+| Contains templates/patterns | "Email template for outreach" | Move to skill assets/ |
+
+#### Step 2: Identify Project Data (Keep)
+
+| Signal | Example | Keep? |
+| ------ | ------- | ----- |
+| Has YOUR numbers | "Our CAC is $15, target is $10" | Yes |
+| Has YOUR endpoints | "/api/v1/charts endpoint returns..." | Yes |
+| Has YOUR decisions | "We chose Placidus over Whole Sign because..." | Yes |
+| Has YOUR targets | "Keywords: 'birth chart' 201K, 'zodiac' 90K" | Yes |
+| References YOUR code | "See `app/src/lib/astro/houses.ts`" | Yes |
+
+#### Step 3: Identify Redundancy
+
+- Multiple files covering the same topic → Merge
+- Files with >80% overlap → Consolidate
+- Outdated files (superseded by newer ones) → Archive/Delete
+- Empty or stub files → Delete
+
+### Audit Workflow
+
+```text
+1. LIST all docs files with line counts
+   find docs/ -name "*.md" -exec wc -l {} \; | sort -rn
+
+2. READ top 10 largest files
+   - Flag generic theory sections
+   - Note project-specific data sections
+
+3. CATEGORIZE each file:
+   [KEEP]   - Mostly project data, minimal theory
+   [TRIM]   - Has project data but needs theory removed
+   [MERGE]  - Overlaps with another file
+   [DELETE] - Generic theory only, or outdated
+
+4. EXECUTE changes:
+   - Add skill pointers: "> **For generic X patterns**: Use `/skill-name` skill."
+   - Remove generic sections, keep data tables
+   - Merge related files
+   - Delete redundant files
+
+5. VERIFY structure:
+   - Flat 2-level max: docs/category/file.md
+   - Each file has clear purpose in header
+   - No orphan files (referenced from somewhere)
+```
+
+### Skill Pointer Format
+
+When removing generic theory, add a pointer:
+
+```markdown
+# SEO Content Strategy
+
+> **Purpose**: Project-specific keyword targets and content calendar.
+>
+> **For generic SEO patterns**: Use `/marketing-seo-complete` skill.
+```
+
+### Docs Optimization Metrics
+
+| Metric | Target |
+| ------ | ------ |
+| Docs folder total lines | <3,000 lines |
+| Files per category | 2-5 files |
+| Generic theory % | <10% of content |
+| Skill pointers | 1 per file (if relevant) |
+| Orphan files | 0 |
+
+### Audit Report Template
+
+After auditing, produce:
+
+```markdown
+## Docs Audit Report
+
+### Summary
+- Total files: X → Y
+- Total lines: X → Y
+- Files kept: X
+- Files trimmed: X
+- Files merged: X
+- Files deleted: X
+
+### Actions Taken
+| File | Action | Result |
+|------|--------|--------|
+| seo-keyword-strategy.md | Merged | → seo-content-strategy.md |
+| backlink-basics.md | Deleted | Generic theory |
+| growth-strategy.md | Trimmed | 400→150 lines |
+
+### Skill Pointers Added
+- seo-content-strategy.md → `/marketing-seo-complete`
+- growth-strategy.md → `/startup-go-to-market`
+```
+
+See [references/docs-audit-commands.md](references/docs-audit-commands.md) for quick audit shell commands.
 
 ---
 
@@ -263,50 +409,50 @@ Chose PostgreSQL for ACID requirements. Decision date: 2024-03.
 
 ### Resources - PRDs & Agentic Coding
 
-- [resources/agentic-coding-best-practices.md](resources/agentic-coding-best-practices.md)
-- [resources/vibe-coding-patterns.md](resources/vibe-coding-patterns.md)
-- [resources/prompt-engineering-patterns.md](resources/prompt-engineering-patterns.md)
-- [resources/requirements-checklists.md](resources/requirements-checklists.md)
-- [resources/traditional-prd-writing.md](resources/traditional-prd-writing.md)
-- [resources/pm-team-collaboration.md](resources/pm-team-collaboration.md)
-- [resources/security-review-checklist.md](resources/security-review-checklist.md)
-- [resources/tool-comparison-matrix.md](resources/tool-comparison-matrix.md)
-- [resources/operational-guide.md](resources/operational-guide.md)
+- [references/agentic-coding-best-practices.md](references/agentic-coding-best-practices.md)
+- [references/vibe-coding-patterns.md](references/vibe-coding-patterns.md)
+- [references/prompt-engineering-patterns.md](references/prompt-engineering-patterns.md)
+- [references/requirements-checklists.md](references/requirements-checklists.md)
+- [references/traditional-prd-writing.md](references/traditional-prd-writing.md)
+- [references/pm-team-collaboration.md](references/pm-team-collaboration.md)
+- [references/security-review-checklist.md](references/security-review-checklist.md)
+- [references/tool-comparison-matrix.md](references/tool-comparison-matrix.md)
+- [references/operational-guide.md](references/operational-guide.md)
 
 ### Resources - Context Extraction
 
-- [resources/architecture-extraction.md](resources/architecture-extraction.md)
-- [resources/convention-mining.md](resources/convention-mining.md)
-- [resources/tribal-knowledge-recovery.md](resources/tribal-knowledge-recovery.md)
+- [references/architecture-extraction.md](references/architecture-extraction.md)
+- [references/convention-mining.md](references/convention-mining.md)
+- [references/tribal-knowledge-recovery.md](references/tribal-knowledge-recovery.md)
 
 ### Templates - PRDs & Planning
 
-- [templates/prd/prd-template.md](templates/prd/prd-template.md)
-- [templates/prd/ai-prd-template.md](templates/prd/ai-prd-template.md)
-- [templates/spec/tech-spec-template.md](templates/spec/tech-spec-template.md)
-- [templates/planning/planning-checklist.md](templates/planning/planning-checklist.md)
-- [templates/planning/agentic-session-template.md](templates/planning/agentic-session-template.md)
-- [templates/prompting/prompt-playbook.md](templates/prompting/prompt-playbook.md)
-- [templates/stories/story-mapping-template.md](templates/stories/story-mapping-template.md)
-- [templates/stories/gherkin-example-template.md](templates/stories/gherkin-example-template.md)
-- [templates/metrics/agentic-coding-metrics-template.md](templates/metrics/agentic-coding-metrics-template.md)
+- [assets/prd/prd-template.md](assets/prd/prd-template.md)
+- [assets/prd/ai-prd-template.md](assets/prd/ai-prd-template.md)
+- [assets/spec/tech-spec-template.md](assets/spec/tech-spec-template.md)
+- [assets/planning/planning-checklist.md](assets/planning/planning-checklist.md)
+- [assets/planning/agentic-session-template.md](assets/planning/agentic-session-template.md)
+- [assets/prompting/prompt-playbook.md](assets/prompting/prompt-playbook.md)
+- [assets/stories/story-mapping-template.md](assets/stories/story-mapping-template.md)
+- [assets/stories/gherkin-example-template.md](assets/stories/gherkin-example-template.md)
+- [assets/metrics/agentic-coding-metrics-template.md](assets/metrics/agentic-coding-metrics-template.md)
 
 ### Templates - Project Context
 
-- [templates/architecture-context.md](templates/architecture-context.md)
-- [templates/conventions-context.md](templates/conventions-context.md)
-- [templates/tribal-knowledge-context.md](templates/tribal-knowledge-context.md)
-- [templates/key-files-context.md](templates/key-files-context.md)
-- [templates/dependencies-context.md](templates/dependencies-context.md)
-- [templates/web-app-context.md](templates/web-app-context.md)
-- [templates/cli-context.md](templates/cli-context.md)
-- [templates/library-context.md](templates/library-context.md)
-- [templates/minimal-claudemd.md](templates/minimal-claudemd.md)
-- [templates/nodejs-context.md](templates/nodejs-context.md)
-- [templates/python-context.md](templates/python-context.md)
-- [templates/react-context.md](templates/react-context.md)
-- [templates/go-context.md](templates/go-context.md)
-- [templates/api-service-context.md](templates/api-service-context.md)
+- [assets/architecture-context.md](assets/architecture-context.md)
+- [assets/conventions-context.md](assets/conventions-context.md)
+- [assets/tribal-knowledge-context.md](assets/tribal-knowledge-context.md)
+- [assets/key-files-context.md](assets/key-files-context.md)
+- [assets/dependencies-context.md](assets/dependencies-context.md)
+- [assets/web-app-context.md](assets/web-app-context.md)
+- [assets/cli-context.md](assets/cli-context.md)
+- [assets/library-context.md](assets/library-context.md)
+- [assets/minimal-claudemd.md](assets/minimal-claudemd.md)
+- [assets/nodejs-context.md](assets/nodejs-context.md)
+- [assets/python-context.md](assets/python-context.md)
+- [assets/react-context.md](assets/react-context.md)
+- [assets/go-context.md](assets/go-context.md)
+- [assets/api-service-context.md](assets/api-service-context.md)
 
 ---
 
@@ -378,7 +524,7 @@ See [data/sources.json](data/sources.json) for curated links.
 **For Claude**: When user needs AI-friendly documentation:
 
 1. **Identify need** - PRD/spec or project context (CLAUDE.md)?
-2. **Reference template** - Use appropriate template from templates/
+2. **Reference template** - Use appropriate template from assets/
 3. **Follow extraction** - For CLAUDE.md, run extraction commands
 4. **Verify accuracy** - Check files exist, commands work
 5. **Provide actionable output** - AI should execute without clarification

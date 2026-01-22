@@ -66,7 +66,7 @@ Core references: SLO/error budgets and troubleshooting patterns from the Google 
 - SLO examples [Inference]:
   - Suite flake rate <= 1% weekly.
   - Time-to-deflake: p50 <= 2 business days, p95 <= 7 business days.
-- REQUIRED: quarantine policy and deflake playbook: `templates/runbooks/template-flaky-test-triage-deflake-runbook.md`.
+- REQUIRED: quarantine policy and deflake playbook: `assets/runbooks/template-flaky-test-triage-deflake-runbook.md`.
 - For rate-limited endpoints, run serially, reuse tokens, and add backoff for 429s; isolate 429 tests to avoid poisoning other suites.
 
 ### Debugging Ergonomics (Make Failures Cheap)
@@ -419,6 +419,31 @@ jobs:
 
 Use AI assistance only as an accelerator for low-risk work; validate outputs with objective checks and evidence.
 
+### AI-Assisted Test Generation (2026 Patterns)
+
+| Use Case | AI Role | Human Role | Tools |
+|----------|---------|------------|-------|
+| Test scaffolding | Generate file structure, boilerplate | Review, customize assertions | Copilot, Cursor, Claude |
+| Edge case discovery | Propose boundary conditions | Validate relevance, add oracles | promptfoo, DeepEval |
+| Test data creation | Generate realistic fixtures | Verify data constraints | Faker + AI |
+| Flake analysis | Cluster similar failures | Determine root cause | Observability + AI |
+| Coverage gap analysis | Identify untested paths | Prioritize by risk model | Coverage tools + AI |
+
+**Guardrails for AI-Generated Tests:**
+
+1. **Never trust assertions blindly** - AI may generate confident but incorrect oracles
+2. **Require human review for security tests** - AI may miss subtle vulnerabilities
+3. **Version control AI prompts** - Reproducibility requires prompt versioning
+4. **Track AI vs human test ratio** - Monitor over-reliance on generated tests
+5. **Validate against ground truth** - Use golden datasets for regression
+
+**Emerging Tools (verify with web search):**
+
+- **Codium AI** - AI test generation with coverage analysis
+- **Diffblue Cover** - Java unit test generation
+- **Meticulous** - Automated E2E test recording
+- **Octomind** - AI-driven E2E test maintenance
+
 Do:
 - Generate scaffolding (test file skeletons, fixtures) and then harden manually.
 - Use AI to propose edge cases, then select based on your risk model and add explicit oracles.
@@ -426,7 +451,7 @@ Do:
 
 Avoid:
 - Accepting generated assertions without validating the oracle (risk: confident nonsense).
-- Letting AI “heal” tests by weakening assertions (risk: silent regressions).
+- Letting AI "heal" tests by weakening assertions (risk: silent regressions).
 
 Safety references (optional):
 - OWASP Top 10 for LLM Applications: https://owasp.org/www-project-top-10-for-large-language-model-applications/
@@ -434,28 +459,217 @@ Safety references (optional):
 
 ---
 
+## Chaos Engineering & Resilience Testing (2026)
+
+Proactive reliability validation through controlled failure injection. See [references/chaos-resilience-testing.md](references/chaos-resilience-testing.md) for full guide.
+
+### When to Use Chaos Engineering
+
+- Before major releases (validate failover, auto-scaling)
+- Compliance audits (DORA, SOC 2 resilience requirements)
+- After infrastructure changes (new regions, database migrations)
+- Quarterly game days (scheduled resilience exercises)
+
+### Core Experiments
+
+| Category | Experiment | Validates |
+|----------|------------|-----------|
+| Infrastructure | Instance termination | Auto-scaling, failover |
+| Infrastructure | Zone failure | Multi-AZ deployment |
+| Network | Latency injection | Timeout handling, SLOs |
+| Network | Packet loss | Retry logic, circuit breakers |
+| Application | Dependency failure | Fallbacks, graceful degradation |
+| Application | Resource exhaustion | Connection pooling, limits |
+
+### Tools (2026)
+
+| Tool | Best For | Open Source |
+|------|----------|-------------|
+| **LitmusChaos** | Kubernetes-native | Yes |
+| **Gremlin** | Enterprise, multi-cloud | No (SaaS) |
+| **AWS FIS** | AWS workloads | No (AWS) |
+| **Steadybit** | SRE workflows | No (SaaS) |
+| **Chaos Toolkit** | Extensible, CI/CD | Yes |
+
+### Blast Radius Control
+
+```text
+Development → Full chaos (no approval)
+Staging     → Targeted (team lead approval)
+Production  → 1-5% canary (SRE + eng lead approval)
+```
+
+---
+
+## Observability-Driven Testing (2026)
+
+Use production telemetry (traces, metrics, logs) as the foundation for test design. OpenTelemetry is the 2026 de facto standard. See [references/observability-driven-testing.md](references/observability-driven-testing.md) for full guide.
+
+### Core Workflow
+
+```text
+1. Instrument code with OpenTelemetry spans
+2. Ship with traces, metrics, structured logs
+3. Observe production behavior
+4. Convert production traces to test cases
+5. Assert on trace attributes, not just responses
+```
+
+### Trace-Based Testing (Tracetest)
+
+```yaml
+# Assert on distributed trace, not just HTTP response
+specs:
+  - selector: span[name="payment.process"]
+    assertions:
+      - attr:payment.status = "success"
+      - attr:tracetest.span.duration < 500ms
+
+  - selector: span[name="db.orders.insert"]
+    assertions:
+      - attr:db.operation = "INSERT"
+```
+
+### Benefits
+
+- **Debug flaky tests** with trace context (not just logs)
+- **Convert incidents to tests** automatically
+- **Validate distributed behavior** across services
+- **Coverage = behaviors observed** (not just lines executed)
+
+---
+
+## Synthetic Test Data (2026)
+
+Ephemeral, privacy-safe test data is replacing static datasets. 60% of AI/analytics data is now synthetic.
+
+### Why Synthetic Data
+
+| Static Data | Synthetic Data |
+|-------------|----------------|
+| Privacy risks (PII) | GDPR-compliant |
+| Stale, outdated | Generated on demand |
+| Storage costs | Ephemeral, disposable |
+| Limited edge cases | Unlimited variations |
+
+### Synthetic Data Tools (2026)
+
+| Tool | Best For | Features |
+|------|----------|----------|
+| **K2view** | Enterprise TDM | Subsetting, masking, synthetic |
+| **MOSTLY AI** | Privacy-first synthetic | GDPR compliance, ML-based |
+| **Synthesized** | CI/CD integration | API-first, ephemeral |
+| **YData** | Data science teams | Profiling, quality scoring |
+| **Faker.js** | Simple fixtures | Deterministic, lightweight |
+
+### CI/CD Integration Pattern
+
+```yaml
+# Generate fresh synthetic data per test run
+jobs:
+  test:
+    steps:
+      - name: Generate Test Data
+        run: |
+          synthesized generate \
+            --schema ./schemas/users.json \
+            --count 1000 \
+            --output ./fixtures/users.json
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Cleanup
+        run: rm -rf ./fixtures  # Ephemeral, no storage
+```
+
+### Best Practices
+
+- Generate data per test run (not shared datasets)
+- Use seeded random for reproducibility
+- Match production distributions (realistic edge cases)
+- Dispose after test completion (ephemeral)
+
+---
+
+## Contract Testing (2026 Expanded)
+
+### Approaches Comparison
+
+| Approach | Tool | When to Use |
+|----------|------|-------------|
+| **Consumer-Driven (CDC)** | Pact | Consumer knows what it needs |
+| **Contract-Driven (CDD)** | Specmatic | OpenAPI as single source of truth |
+| **Bi-Directional (BDCT)** | Pactflow | Both sides define expectations |
+| **Unified API Testing** | Karate | API, contract, and performance in one |
+
+### Specmatic (Contract-Driven)
+
+OpenAPI spec becomes the executable contract—no separate contract files.
+
+```bash
+# Validate API implementation against OpenAPI spec
+specmatic test --contract openapi.yaml --host localhost:8080
+
+# Generate stubs from OpenAPI for consumer testing
+specmatic stub --contract openapi.yaml --port 9000
+```
+
+### Pact vs Specmatic Decision
+
+```text
+Use Pact when:
+├── Consumer team owns contract definition
+├── Multiple consumers with different needs
+└── Gradual migration from no contracts
+
+Use Specmatic when:
+├── OpenAPI is already the source of truth
+├── Strict contract-first development
+└── Both provider and consumer use same spec
+```
+
+### Karate (Unified)
+
+Single DSL for API, contract, and performance testing.
+
+```gherkin
+Feature: Order API
+
+Scenario: Create order
+  Given url 'http://localhost:8080/orders'
+  And request { userId: 'user-1', productId: 'prod-1' }
+  When method POST
+  Then status 201
+  And match response contains { orderId: '#string' }
+```
+
+---
+
 ## Navigation
 
 ### Resources
 
-- [resources/operational-playbook.md](resources/operational-playbook.md) — Testing pyramid guidance, BDD/test data patterns, CI gates, and anti-patterns
-- [resources/playwright-webapp-testing.md](resources/playwright-webapp-testing.md) — Playwright decision tree, server lifecycle helper, and recon-first scripting pattern
-- [resources/comprehensive-testing-guide.md](resources/comprehensive-testing-guide.md) — Full testing methodology reference
-- [resources/test-automation-patterns.md](resources/test-automation-patterns.md) — Automation patterns and best practices
-- [resources/shift-left-testing.md](resources/shift-left-testing.md) — Early testing strategies
+- [references/operational-playbook.md](references/operational-playbook.md) — Testing pyramid guidance, BDD/test data patterns, CI gates, and anti-patterns
+- [references/playwright-webapp-testing.md](references/playwright-webapp-testing.md) — Playwright decision tree, server lifecycle helper, and recon-first scripting pattern
+- [references/comprehensive-testing-guide.md](references/comprehensive-testing-guide.md) — Full testing methodology reference
+- [references/test-automation-patterns.md](references/test-automation-patterns.md) — Automation patterns and best practices
+- [references/shift-left-testing.md](references/shift-left-testing.md) — Early testing strategies
+- [references/chaos-resilience-testing.md](references/chaos-resilience-testing.md) — Chaos engineering, resilience testing, DORA compliance
+- [references/observability-driven-testing.md](references/observability-driven-testing.md) — OpenTelemetry, trace-based testing, ODD patterns
 
 ### Templates
 
-- [templates/test-strategy-template.md](templates/test-strategy-template.md) — Risk-based test strategy one-pager
-- [templates/template-test-case-design.md](templates/template-test-case-design.md) — Test case design (Given/When/Then + oracles)
-- [templates/runbooks/template-flaky-test-triage-deflake-runbook.md](templates/runbooks/template-flaky-test-triage-deflake-runbook.md) — Flake triage + deflake runbook
-- [templates/automation-pipeline-template.md](templates/automation-pipeline-template.md) — CI/CD automation pattern
-- [templates/unit/template-jest-vitest.md](templates/unit/template-jest-vitest.md) — Unit testing
-- [templates/integration/template-api-integration.md](templates/integration/template-api-integration.md) — Integration/API testing
-- [templates/e2e/template-playwright.md](templates/e2e/template-playwright.md) — Playwright E2E
-- [templates/bdd/template-cucumber-gherkin.md](templates/bdd/template-cucumber-gherkin.md) — BDD/Gherkin
-- [templates/performance/template-k6-load-testing.md](templates/performance/template-k6-load-testing.md) — k6 performance
-- [templates/visual-regression/template-visual-testing.md](templates/visual-regression/template-visual-testing.md) — Visual regression
+- [assets/test-strategy-template.md](assets/test-strategy-template.md) — Risk-based test strategy one-pager
+- [assets/template-test-case-design.md](assets/template-test-case-design.md) — Test case design (Given/When/Then + oracles)
+- [assets/runbooks/template-flaky-test-triage-deflake-runbook.md](assets/runbooks/template-flaky-test-triage-deflake-runbook.md) — Flake triage + deflake runbook
+- [assets/automation-pipeline-template.md](assets/automation-pipeline-template.md) — CI/CD automation pattern
+- [assets/unit/template-jest-vitest.md](assets/unit/template-jest-vitest.md) — Unit testing
+- [assets/integration/template-api-integration.md](assets/integration/template-api-integration.md) — Integration/API testing
+- [assets/e2e/template-playwright.md](assets/e2e/template-playwright.md) — Playwright E2E
+- [assets/bdd/template-cucumber-gherkin.md](assets/bdd/template-cucumber-gherkin.md) — BDD/Gherkin
+- [assets/performance/template-k6-load-testing.md](assets/performance/template-k6-load-testing.md) — k6 performance
+- [assets/visual-regression/template-visual-testing.md](assets/visual-regression/template-visual-testing.md) — Visual regression
 
 ### Data
 
@@ -470,3 +684,45 @@ Safety references (optional):
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — CI/CD pipelines and infrastructure
 - [../qa-debugging/SKILL.md](../qa-debugging/SKILL.md) — Debugging failing tests
 - [../software-security-appsec/SKILL.md](../software-security-appsec/SKILL.md) — Security testing patterns
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about testing frameworks, strategies, or tools, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best testing framework for [language/use case]?"
+- "What should I use for [unit/integration/E2E testing]?"
+- "What's the latest in testing strategies?"
+- "Current best practices for [test automation/CI testing]?"
+- "Is [Playwright/Cypress/Jest] still relevant in 2026?"
+- "[Vitest] vs [Jest]?" or "[Playwright] vs [Cypress]?"
+- "Best E2E testing framework?"
+
+### Required Searches
+
+1. Search: `"testing best practices 2026"`
+2. Search: `"[specific framework] vs alternatives 2026"`
+3. Search: `"testing trends January 2026"`
+4. Search: `"[E2E/unit/integration] testing frameworks 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What testing tools/frameworks are popular NOW
+- **Emerging trends**: New frameworks, patterns, or approaches gaining traction
+- **Deprecated/declining**: Tools/approaches losing relevance or support
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- E2E frameworks (Playwright, Cypress, WebdriverIO)
+- Unit testing (Vitest, Jest, pytest)
+- API testing (Supertest, Postman/Newman, k6)
+- Contract testing (Pact, Specmatic)
+- Visual regression (Percy, Chromatic, Playwright)
+- Test runners and CI integration
+- AI-assisted test generation

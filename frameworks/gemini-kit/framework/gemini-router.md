@@ -85,7 +85,7 @@ Available skills from `.claude/skills/` (61 skills organized by domain):
 
 - **marketing-ai-search-optimization**: AEO/GEO/LLMO optimization for AI overviews and search surfaces.
 - **marketing-leads-generation**: Lead gen systems for ICP/offers, outbound, landing fixes, and scoring.
-- **marketing-seo-technical**: Technical SEO (schema, crawl budget, speed, sitemaps, indexing).
+- **marketing-seo-complete**: Technical SEO (schema, crawl budget, speed, sitemaps, indexing).
 - **marketing-social-media**: Social media strategy, planning, and campaign execution.
 
 ### Product Management Skills (1)
@@ -123,7 +123,7 @@ Available agents from `.claude/agents/` (18 agents):
 - **product-manager**: Product strategy, roadmaps, user research, metrics analysis, and startup advisory (uses `product-management`, `docs-codebase`, startup skills).
 - **prompt-engineer**: Operational prompt engineering for LLMs – design, optimize, and validate prompts for structured outputs, RAG, agents, and extractors (uses `ai-prompt-engineering`, `ai-llm`).
 - **security-specialist**: Application security specialist covering OWASP Top 10 2025, zero trust, supply chain security, threat modeling, and secure design patterns (uses `software-security-appsec`, `ai-mlops`).
-- **leads-strategist**: Lead generation specialist for ICP/offer clarity, outbound cadences, LinkedIn/social selling, landing optimization, lead scoring, and GTM execution (uses `marketing-leads-generation`, `marketing-social-media`, `marketing-seo-technical`, `startup-go-to-market`).
+- **leads-strategist**: Lead generation specialist for ICP/offer clarity, outbound cadences, LinkedIn/social selling, landing optimization, lead scoring, and GTM execution (uses `marketing-leads-generation`, `marketing-social-media`, `marketing-seo-complete`, `startup-go-to-market`).
 - **smm-strategist**: Social media marketing strategist for content, campaigns, and growth across major platforms (uses `marketing-social-media`).
 - **sql-engineer**: SQL optimization, query tuning, database design, schema migrations, indexing strategies, and performance analysis (uses `data-sql-optimization`).
 - **system-architect**: System design, architecture review, and technical strategy for complex software systems (uses `software-architecture-design`, `qa-resilience`, `qa-observability`).
@@ -219,7 +219,7 @@ These examples mirror the test cases in `router-tests.md`.
 
 **Technical SEO and AI search optimization:**
 - Agent: `leads-strategist`
-- Skill: `marketing-seo-technical`
+- Skill: `marketing-seo-complete`
 
 **Claude Code configuration (agents/commands/hooks/MCP/memory/skills):**
 - Agent: `ai-agents-builder`

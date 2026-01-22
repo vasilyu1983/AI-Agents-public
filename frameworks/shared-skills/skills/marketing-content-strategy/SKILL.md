@@ -15,6 +15,17 @@ Built as a **no-fluff execution skill** for content strategy, positioning, and t
 - Build trust signals before scaling traffic. Low trust + high traffic = wasted spend.
 - Use brand architecture intentionally: endorsed brands inherit credibility; standalone brands don't.
 - Instrument content to funnel stage; measure content-attributed pipeline, not just traffic.
+- Optimize for GEO (Generative Engine Optimization); your content becomes a source cited by AI, not just a destination users visit.
+
+---
+
+## GEO: Generative Engine Optimization (2026)
+
+Content discoverability shifting from websites to AI chat interfaces. Optimize for LLM retrieval, not just Google SERP.
+
+**Key shift**: Success = citations + brand mentions in AI responses, not just traffic.
+
+For full GEO implementation, see [references/geo-optimization.md](references/geo-optimization.md).
 
 ---
 
@@ -40,6 +51,10 @@ CONTENT STRATEGY QUESTION
     |
     +-> "Fintech/regulated industry?" --------> COMPLIANCE MESSAGING
     |                                          --> fintech-compliance-messaging.md
+    |
+    +-> "How do I prove content ROI?" --------> ROI ATTRIBUTION
+    |                                          --> content-roi-attribution.md
+    |                                          --> content-roi-calculator.md
     |
     +-> "Full content strategy" --------------> COMPREHENSIVE
                                                --> Use all resources
@@ -91,7 +106,7 @@ We have certified accountants review every return (backed by QAccountants with 4
 - [ ] Does your positioning hold against likely objections?
 - [ ] Is it honest and defensible long-term?
 
-For full positioning framework, see [resources/positioning-framework.md](resources/positioning-framework.md).
+For full positioning framework, see [references/positioning-framework.md](references/positioning-framework.md).
 
 ---
 
@@ -108,6 +123,8 @@ Trust is the #1 conversion blocker for new products, startups, and sensitive-dat
 | **Transparency** | Team photos, office address, phone number, pricing | High for startups |
 | **Security** | GDPR badge, encryption, data protection policy | Critical for sensitive data |
 | **Parent Brand** | "Powered by X", "A Y company", endorsement | High for sub-brands |
+| **Micro-Community** | Niche community endorsements, Reddit mentions, Discord activity | High for technical/niche products |
+| **Employee Voices** | Employee-led content, internal influencers, team expertise | High for B2B, authenticity |
 
 ### Trust Signals by Funnel Stage
 
@@ -140,7 +157,7 @@ For fintech, health, legal, or any service handling sensitive data:
 | **Parent brand** | If new product, connect to established entity |
 | **Track record** | Years in business, customer count, success metrics |
 
-For full trust-building playbook, see [resources/trust-building-playbook.md](resources/trust-building-playbook.md).
+For full trust-building playbook, see [references/trust-building-playbook.md](references/trust-building-playbook.md).
 
 ---
 
@@ -183,7 +200,7 @@ How does your product relate to your company brand?
 - About page: Team from QAccountants, office photos
 - Trust strip: QAccountants Trustpilot rating, years in business
 
-For full brand architecture guide, see [resources/brand-architecture-guide.md](resources/brand-architecture-guide.md).
+For full brand architecture guide, see [references/brand-architecture-guide.md](references/brand-architecture-guide.md).
 
 ---
 
@@ -217,7 +234,20 @@ Messages cascade from brand to product to feature to channel.
 | Switching from DIY | "Worried about errors" | "Professional review, DIY price" | "Accountant checks every return" | "Get peace of mind" |
 | Switching from accountant | "Too expensive" | "Same accuracy, 80% less cost" | "From 39.99, vs 250+ average" | "Calculate savings" |
 
-For full message hierarchy guide, see [resources/message-hierarchy.md](resources/message-hierarchy.md).
+For full message hierarchy guide, see [references/message-hierarchy.md](references/message-hierarchy.md).
+
+---
+
+## Core: Content ROI Attribution
+
+Prove content's business impact through pipeline contribution and revenue tracking.
+
+| Resource | What It Covers |
+|----------|----------------|
+| [content-roi-attribution.md](references/content-roi-attribution.md) | Attribution models, pipeline contribution, dark funnel, tracking setup |
+| [content-roi-calculator.md](assets/content-roi-calculator.md) | ROI calculation, investment analysis, break-even |
+
+**Key metrics**: Content-attributed leads → pipeline → revenue → CAC → ROI (>200% target for mature programs).
 
 ---
 
@@ -234,6 +264,22 @@ Content pillars define what topics you consistently publish around.
 | **Education** | Help audience | How-tos, tutorials, FAQs |
 | **Product** | Drive conversion | Features, comparisons, use cases |
 | **Community** | Foster connection | User stories, events, Q&A |
+| **Video** | Build attention & reach | Short-form (TikTok, Reels, Shorts), behind-scenes, testimonials |
+
+### Short-Form Video Strategy (2026)
+
+Short-form video is the #1 driver of attention across TikTok, Reels, Spotlight, and Shorts.
+
+| Format | Length | Best For |
+|--------|--------|----------|
+| **Hook + Value** | 15-30s | Educational tips, quick wins |
+| **Behind-Scenes** | 30-60s | Trust building, humanizing brand |
+| **Testimonial Clips** | 15-45s | Social proof, conversion |
+| **Product Demo** | 30-90s | Feature awareness |
+
+**Lo-Fi vs. High-Production**: In 2026, unpolished "authentic" content often outperforms high-production assets. Lo-fi creative with real employees, quick takes, and genuine moments builds trust faster than polished corporate content.
+
+**Repurposing Pattern**: Create one long-form piece → extract 5-10 short-form clips → adapt each clip native to platform culture.
 
 ### Content Pillar Template
 
@@ -263,7 +309,7 @@ Content pillars define what topics you consistently publish around.
 **Success Metric**: Form completion rate, support call volume reduction
 ```
 
-For full content pillar planning, see [templates/content-pillar-plan.md](templates/content-pillar-plan.md).
+For full content pillar planning, see [assets/content-pillar-plan.md](assets/content-pillar-plan.md).
 
 ---
 
@@ -305,7 +351,39 @@ For regulated industries (financial services, health, legal) or any product hand
 | "Is my data safe?" | "GDPR compliant, encrypted, never shared. [Link to security page]" |
 | "What if something goes wrong?" | "Our [professional team] reviews every [deliverable]. Contact us at [phone]." |
 
-For full fintech compliance messaging, see [resources/fintech-compliance-messaging.md](resources/fintech-compliance-messaging.md).
+For full fintech compliance messaging, see [references/fintech-compliance-messaging.md](references/fintech-compliance-messaging.md).
+
+---
+
+## Content Orchestration (2026 Evolution)
+
+Content operations got you here. Content orchestration gets you further.
+
+| Aspect | Content Operations | Content Orchestration |
+|--------|-------------------|-----------------------|
+| **Focus** | Individual piece efficiency | Ecosystem coordination |
+| **Model** | Assembly line | Symphony |
+| **Decision** | Per-piece basis | Systematic framework |
+| **Adaptation** | Reactive | Proactive (algorithm changes, platform pivots) |
+| **Measurement** | Per-asset metrics | Cross-channel attribution |
+
+### Orchestration Checklist
+
+- [ ] Single source of truth for content calendar
+- [ ] Cross-team visibility on pipeline (marketing, sales, product)
+- [ ] Unified measurement framework across channels
+- [ ] Automated handoffs between creation → approval → publish
+- [ ] Platform-agnostic content modules (repurpose without recreate)
+- [ ] Documented escalation path when platforms pivot
+
+### When to Upgrade from Operations to Orchestration
+
+| Signal | Action |
+|--------|--------|
+| >20 pieces/month across >3 channels | Orchestration needed |
+| Content team >3 people | Orchestration needed |
+| Cross-functional content requests | Orchestration needed |
+| Algorithm changes break your pipeline | Orchestration urgent |
 
 ---
 
@@ -349,65 +427,47 @@ For full fintech compliance messaging, see [resources/fintech-compliance-messagi
 - Use endorsed brand pattern for new products from established companies.
 - Show human faces and contact info for sensitive data products.
 - Map content to funnel stages with clear CTAs.
+- **Internal linking**: Homepage → 5-10 priority pages; each page → 3-5 related pages. Google crawls links, not sitemaps.
+- **Descriptive anchor text**: Use keywords, not "click here" (e.g., "personalized daily horoscope").
+- **Content pillar interconnection**: Link related pieces within pillars; reduces crawl depth, signals topical authority.
 
 ### Avoid
 
+- **No positioning first**: Random acts of content. Run positioning sprint before content planning.
+- **Volume over value**: High output, low engagement. Fewer pieces, greater depth.
+- **Algorithm-first writing**: Content reads robotic. Write for humans, optimize for discovery.
+- **Vanity metrics**: Track likes, not pipeline. Measure content-attributed revenue.
+- **Set-and-forget**: Stale rankings. Do quarterly content audits.
 - Generic "About Us" pages. Be specific about team, credentials, track record.
 - Hiding parent brand connection. If you have credibility, use it.
 - Security claims without proof. "Bank-grade security" needs visible evidence.
-- Content without measurement. If you can't measure contribution, you can't improve.
-- Separate brand voice per channel to the point of inconsistency.
+- **Orphan pages**: Content with no internal links = invisible to search engines.
+- **Fake freshness**: Updating `lastmod` without real content changes. Google detects this.
+- **Mechanical repurposing**: Same content across all channels. Adapt to platform norms.
 
 ---
 
-## Quick Reference
+## Resources & Templates
 
-| Task | Resource | Location |
-|------|----------|----------|
-| Define positioning | Positioning Canvas | [templates/positioning-canvas.md](templates/positioning-canvas.md) |
-| Audit trust signals | Trust Checklist | [templates/trust-signals-checklist.md](templates/trust-signals-checklist.md) |
-| Connect sub-brand to parent | Brand Connection | [templates/brand-connection-template.md](templates/brand-connection-template.md) |
-| Build message matrix | Messaging Matrix | [templates/messaging-matrix.md](templates/messaging-matrix.md) |
-| Plan content pillars | Content Pillar Plan | [templates/content-pillar-plan.md](templates/content-pillar-plan.md) |
-| Content brief | Content Brief | [templates/content-brief.md](templates/content-brief.md) |
-| Editorial calendar | Editorial Calendar | [templates/editorial-calendar.md](templates/editorial-calendar.md) |
-| Strategy document | Strategy Brief | [templates/content-strategy-brief.md](templates/content-strategy-brief.md) |
+**References** (deep-dive guides):
+[positioning-framework.md](references/positioning-framework.md) | [trust-building-playbook.md](references/trust-building-playbook.md) | [brand-architecture-guide.md](references/brand-architecture-guide.md) | [message-hierarchy.md](references/message-hierarchy.md) | [fintech-compliance-messaging.md](references/fintech-compliance-messaging.md) | [content-ops-checklist.md](references/content-ops-checklist.md) | [geo-optimization.md](references/geo-optimization.md) | [content-roi-attribution.md](references/content-roi-attribution.md) | [ai-content-automation.md](references/ai-content-automation.md) | [trend-awareness-protocol.md](references/trend-awareness-protocol.md)
+
+**Templates** (copy-paste assets):
+[positioning-canvas.md](assets/positioning-canvas.md) | [trust-signals-checklist.md](assets/trust-signals-checklist.md) | [brand-connection-template.md](assets/brand-connection-template.md) | [messaging-matrix.md](assets/messaging-matrix.md) | [content-pillar-plan.md](assets/content-pillar-plan.md) | [content-brief.md](assets/content-brief.md) | [editorial-calendar.md](assets/editorial-calendar.md) | [content-strategy-brief.md](assets/content-strategy-brief.md) | [trust-brief.md](assets/trust-brief.md) | [content-roi-calculator.md](assets/content-roi-calculator.md)
+
+**Data**: [sources.json](data/sources.json)
 
 ---
 
-## Resources
+## When NOT to Use This Skill
 
-| Resource | Purpose |
-|----------|---------|
-| [positioning-framework.md](resources/positioning-framework.md) | Full positioning methodology with alternatives |
-| [trust-building-playbook.md](resources/trust-building-playbook.md) | Trust signals, social proof, credibility inheritance |
-| [brand-architecture-guide.md](resources/brand-architecture-guide.md) | Sub-brand patterns, naming, visual hierarchy |
-| [message-hierarchy.md](resources/message-hierarchy.md) | Brand to feature messaging cascade |
-| [fintech-compliance-messaging.md](resources/fintech-compliance-messaging.md) | GDPR, FCA, security, regulated industry patterns |
-| [content-ops-checklist.md](resources/content-ops-checklist.md) | Content operations hygiene |
-
----
-
-## Templates
-
-| Template | Purpose |
-|----------|---------|
-| [positioning-canvas.md](templates/positioning-canvas.md) | Define positioning (5-step framework) |
-| [trust-signals-checklist.md](templates/trust-signals-checklist.md) | Audit and implement trust elements |
-| [brand-connection-template.md](templates/brand-connection-template.md) | Document sub-brand to parent relationship |
-| [messaging-matrix.md](templates/messaging-matrix.md) | Map messages to segments and stages |
-| [content-pillar-plan.md](templates/content-pillar-plan.md) | Define content pillars and topics |
-| [content-brief.md](templates/content-brief.md) | Single asset brief |
-| [editorial-calendar.md](templates/editorial-calendar.md) | Publishing schedule |
-| [content-strategy-brief.md](templates/content-strategy-brief.md) | Full strategy document |
-
----
-
-## Data
-
-| File | Purpose |
-|------|---------|
-| [sources.json](data/sources.json) | Curated content strategy resources |
+| Need | Use Instead |
+|------|-------------|
+| Channel-specific tactics (posting, engagement) | [marketing-social-media](../marketing-social-media/SKILL.md) |
+| SEO/technical optimization | [marketing-seo-complete](../marketing-seo-complete/SKILL.md) |
+| Landing page conversion | [marketing-leads-generation](../marketing-leads-generation/SKILL.md) |
+| AI search optimization (GEO deep-dive) | [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md) |
+| Product roadmap communication | [product-management](../product-management/SKILL.md) |
 
 ---
 
@@ -415,7 +475,7 @@ For full fintech compliance messaging, see [resources/fintech-compliance-messagi
 
 - [marketing-leads-generation](../marketing-leads-generation/SKILL.md) - Funnel design, landing page optimization, conversion
 - [marketing-social-media](../marketing-social-media/SKILL.md) - Channel-specific content tactics
-- [marketing-seo-technical](../marketing-seo-technical/SKILL.md) - Search visibility for content
+- [marketing-seo-complete](../marketing-seo-complete/SKILL.md) - Search visibility for content
 - [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md) - AI search surface optimization
 - [startup-go-to-market](../startup-go-to-market/SKILL.md) - GTM strategy, ICP, channel selection
 - [product-management](../product-management/SKILL.md) - Product positioning, roadmap communication
@@ -434,32 +494,4 @@ For full fintech compliance messaging, see [resources/fintech-compliance-messagi
 
 ## Optional: AI / Automation
 
-> **Note**: Core positioning and trust frameworks work without AI. This section covers optional automation.
-
-### AI Content Generation
-
-| Use Case | Approach | Consideration |
-|----------|----------|---------------|
-| **Message variants** | LLM-generated alternatives | Maintain brand voice; test against control |
-| **Persona content** | Adapt content for segments | Validate with real user feedback |
-| **Localization** | Translate and adapt | Requires human review for nuance |
-
-### AI Trust Analysis
-
-| Use Case | Tools | Benefit |
-|----------|-------|---------|
-| **Trust signal detection** | LLM page analysis | Quick audit of competitor pages |
-| **Sentiment monitoring** | Brand mention analysis | Track trust perception over time |
-| **Review summarization** | Extract pain points | Content topic discovery |
-
-### Do (AI Content)
-
-- Use AI for drafts and variants; human review for final
-- Test AI-generated content against control
-- Maintain consistent brand voice with style guides
-
-### Avoid (AI Content)
-
-- Publishing AI content without human review
-- Trusting AI for compliance/legal statements
-- Removing human judgment from trust-building content
+Core positioning and trust frameworks work without AI. For AI content automation, agentic workflows, C2PA provenance, and 2026 disclosure requirements, see [references/ai-content-automation.md](references/ai-content-automation.md).

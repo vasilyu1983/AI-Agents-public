@@ -1,18 +1,20 @@
 ---
 name: startup-go-to-market
-description: GTM strategy, channel selection, launch planning, and market entry execution
+description: GTM strategy, channel selection, launch planning, AI-powered automation, and market entry execution
 metadata:
-  version: "1.0"
+  version: "2.0"
 ---
 
 # Startup Go-to-Market
 
 Systematic framework for designing and executing market entry strategies.
 
-**Modern Best Practices (Dec 2025)**:
-- Start from ICP + positioning, then pick 1–2 channels to sequence (avoid “all channels”).
+**Modern Best Practices (Jan 2026)**:
+- Start from ICP + positioning, then pick 1–2 channels to sequence (avoid "all channels").
 - Instrument the funnel end-to-end (activation and retention defined, not assumed).
 - Use tight feedback loops (weekly learning reviews) and write stop/pivot thresholds.
+- Leverage AI-powered GTM tools for lead enrichment, personalized outreach, and pipeline intelligence.
+- Align RevOps across sales, marketing, and CS—75% of fastest-growing companies have RevOps by 2026.
 - Treat customer data with purpose limitation, retention, and access controls.
 
 ---
@@ -72,7 +74,7 @@ ACV < $5K + Self-serve possible?
                                    └─► Inbound + Outbound
 ```
 
-### Hybrid Motions (2024-2025 Reality)
+### Hybrid Motions (2025-2026 Reality)
 
 | Hybrid | Components | Examples |
 |--------|------------|----------|
@@ -80,6 +82,17 @@ ACV < $5K + Self-serve possible?
 | Community + PLG | OSS → Hosted → Enterprise | MongoDB, Elastic |
 | Marketing + Sales | Inbound MQLs → Sales conversion | HubSpot |
 | Partner + Sales | Partner referrals → Direct sales | AWS Partners |
+| **AI-Augmented** | AI SDRs + Human closers | Emerging 2026 |
+
+### Vertical vs. Horizontal Strategy (2026)
+
+| Strategy | When to Use | Examples |
+|----------|-------------|----------|
+| **Vertical** | Deep industry workflows, compliance needs | Veeva (pharma), Toast (restaurants) |
+| **Horizontal** | Broad applicability, platform play | Slack, Notion |
+| **Vertical-first** | Start narrow, expand | Rippling (HR → IT → Finance) |
+
+2026 trend: Horizontal platforms face increasing competition from specialized vertical solutions. Successful strategies either dominate specific verticals or create platform ecosystems.
 
 ---
 
@@ -139,6 +152,23 @@ ACV < $5K + Self-serve possible?
 | Champion identified | 15% | |
 | Expansion potential | 10% | |
 | **ICP Score** | 100% | |
+
+### ICP Tiering (2026 Best Practice)
+
+Don't treat ICP as a static persona—tier it based on fit and intent signals.
+
+| Tier | Definition | Action | Resources |
+|------|------------|--------|-----------|
+| **Tier 1** | Perfect fit + active buying signals | Priority outbound, personalized | High-touch, exec involvement |
+| **Tier 2** | Good fit, lower/no intent signals | Nurture sequences, monitor | Marketing-led, SDR follow-up |
+| **Tier 3** | Partial fit, no current signals | Marketing only, monitor | Automated, low-touch |
+
+**Intent Signals to Monitor**:
+- Hiring patterns (roles that use your product)
+- Technology adoption (complementary tools)
+- Funding events (Series A+ for growth stage)
+- Buying committee activity (multiple visitors from same company)
+- Content engagement (pricing page, case studies)
 
 ---
 
@@ -234,6 +264,42 @@ REFERRAL (Viral spread)
 | Upgrade triggers | Hit limits, need feature |
 | Pricing page | Transparent, self-serve |
 | Enterprise | "Contact sales" option |
+
+### PLG Evolution (2026)
+
+**Key Shift: "Aha Moment" → "Oh Wow Moment"**
+
+Getting users to value once isn't enough. The real metric is when they keep coming back: "Wait, it does this too?"
+
+| Old PLG (2020-2024) | Modern PLG (2025-2026) |
+|---------------------|------------------------|
+| Single activation moment | Repeatable value discovery |
+| MQL-driven qualification | PQL-driven (Engagement + Fit + Intent) |
+| 14-30 day trials | Instant value, progressive commitment |
+| Manual onboarding flows | AI-powered personalization |
+| Time-based conversion | Value-based conversion |
+
+**PQL (Product Qualified Lead) Scoring**:
+
+```text
+PQL Score = (Engagement × 0.4) + (Fit × 0.3) + (Intent × 0.3)
+
+Engagement: Feature usage depth, session frequency, collaboration
+Fit: Company size, industry, tech stack match
+Intent: Pricing page visits, integration setup, team invites
+```
+
+| Qualification | Conversion Rate | Action |
+|---------------|-----------------|--------|
+| MQL (Marketing) | 5-10% | Nurture |
+| PQL (Product) | 25-30% | Sales-assist |
+| PQL + Sales signal | 40-50% | Priority outbound |
+
+**2026 Buyer Expectations**:
+- Value within minutes, not days
+- Try first, account later
+- AI-personalized onboarding
+- Self-serve to enterprise upgrade path
 
 ---
 
@@ -412,6 +478,98 @@ CONTENT → SEO TRAFFIC → SIGNUPS → PRODUCT USAGE
 
 ---
 
+## AI-Powered GTM (2026)
+
+AI has fundamentally changed GTM execution. Teams using AI report 12+ hours saved per week, shorter deal cycles, and higher win rates.
+
+### AI GTM Capabilities
+
+| Capability | Description | Tools |
+|------------|-------------|-------|
+| **Intent detection** | Real-time buyer intent signals | Demandbase, 6sense, Bombora |
+| **Lead enrichment** | Automated data enrichment at scale | ZoomInfo, Clearbit, Apollo |
+| **Outreach automation** | AI-personalized sequences | Reply.io, Outreach, Salesloft |
+| **Content generation** | Automated GTM content | Copy.ai, Jasper, Writer |
+| **Pipeline intelligence** | AI forecasting and deal insights | Clari, Gong, Chorus |
+| **Conversation intelligence** | Call analysis and coaching | Gong, Chorus, Fireflies |
+
+### GTM Engineer Role (Emerging 2026)
+
+New hybrid role combining RevOps + engineering capabilities:
+
+| Responsibility | Output |
+|----------------|--------|
+| Build AI-driven automations | Lead routing, scoring, enrichment pipelines |
+| Integrate GTM tech stack | Unified data across CRM, marketing, product |
+| Deploy AI SDRs | Automated qualification and initial outreach |
+| Create custom dashboards | Real-time GTM intelligence |
+
+**Key Trend**: Small teams generating enterprise-level outreach volume without hiring 20 SDRs—enabled by AI automation with human oversight.
+
+### AI GTM Metrics Impact
+
+| Metric | Pre-AI Baseline | AI-Enhanced |
+|--------|-----------------|-------------|
+| Lead processing time | Hours | Minutes |
+| Personalization level | Segment-level | Individual |
+| Deal cycle length | Standard | 20-30% shorter |
+| Win rate | Baseline | 10-20% higher |
+| SDR productivity | 50 touches/day | 200+ touches/day |
+
+### AI GTM Implementation
+
+**Phase 1: Foundation**
+- Unified data layer (CRM + enrichment + intent)
+- Basic automation (lead routing, task creation)
+
+**Phase 2: Intelligence**
+- AI-powered lead scoring
+- Conversation intelligence
+- Automated content personalization
+
+**Phase 3: Autonomy**
+- AI SDRs for initial qualification
+- Predictive pipeline management
+- Automated expansion signals
+
+**Caution**: AI augments human judgment—don't automate strategy, only execution. Humans own positioning, messaging, and deal negotiation.
+
+---
+
+## RevOps Alignment (2026)
+
+By 2026, 75% of fastest-growing companies will have RevOps. RevOps creates unified operational language across sales, marketing, and CS.
+
+### RevOps Team Structure
+
+| Function | Focus | Deliverables |
+|----------|-------|--------------|
+| **Business Partners** | Pipeline, forecasting | Revenue forecasts, deal support |
+| **Business Process** | Workflow design | Process documentation, SLAs |
+| **Revenue Technology** | GTM tech stack | System administration, integrations |
+| **Process Innovation** | AI use cases | Automation, efficiency gains |
+
+### Key RevOps Metrics (Board-Level 2026)
+
+| Metric | Target | Why It Matters |
+|--------|--------|----------------|
+| **NRR (Net Revenue Retention)** | 120%+ | Expansion > churn |
+| **CAC Payback** | <12 months | Capital efficiency |
+| **Pipeline Velocity** | Increasing QoQ | Sales efficiency |
+| **GTM Cost Ratio** | Decreasing | Operational leverage |
+| **Win Rate** | Stable or increasing | Sales effectiveness |
+
+### RevOps + GTM Alignment Checklist
+
+- [ ] Single source of truth for customer data
+- [ ] Unified definitions (MQL, SQL, PQL, opportunity stages)
+- [ ] Shared dashboards across sales, marketing, CS
+- [ ] Regular GTM reviews (weekly pipeline, monthly strategy)
+- [ ] Clear handoff SLAs between teams
+- [ ] Attribution model agreed across functions
+
+---
+
 ## Expansion Strategy
 
 ### Land and Expand
@@ -454,17 +612,17 @@ STRATEGIC (Transform)
 
 | Resource | Purpose |
 |----------|---------|
-| [channel-playbooks.md](resources/channel-playbooks.md) | Detailed channel execution guides |
-| [sales-motion-design.md](resources/sales-motion-design.md) | Sales process design |
-| [plg-implementation.md](resources/plg-implementation.md) | PLG execution guide |
+| [channel-playbooks.md](references/channel-playbooks.md) | Detailed channel execution guides |
+| [sales-motion-design.md](references/sales-motion-design.md) | Sales process design + RevOps alignment |
+| [plg-implementation.md](references/plg-implementation.md) | PLG execution guide + PQL frameworks |
 
 ## Templates
 
 | Template | Purpose |
 |----------|---------|
-| [gtm-strategy.md](templates/gtm-strategy.md) | Full GTM strategy document |
-| [launch-playbook.md](templates/launch-playbook.md) | Launch planning template |
-| [icp-definition.md](templates/icp-definition.md) | ICP documentation |
+| [gtm-strategy.md](assets/gtm-strategy.md) | Full GTM strategy document |
+| [launch-playbook.md](assets/launch-playbook.md) | Launch planning template |
+| [icp-definition.md](assets/icp-definition.md) | ICP documentation |
 
 ## Data
 
@@ -474,19 +632,24 @@ STRATEGIC (Transform)
 
 ---
 
-## Do / Avoid (Dec 2025)
+## Do / Avoid (Jan 2026)
 
 ### Do
 
-- Define activation as a concrete “first value moment”.
-- Track leading indicators (activation, retention) alongside revenue.
+- Define activation as a concrete "first value moment" (and track "Oh wow moments" for retention).
+- Track leading indicators (activation, PQL conversion, retention) alongside revenue.
 - Run structured experiments with decision thresholds.
+- Use AI for execution (outreach, enrichment, personalization) while humans own strategy.
+- Align RevOps across sales, marketing, and CS with unified data and definitions.
+- Tier your ICP and prioritize based on fit + intent signals.
 
 ### Avoid
 
 - Content spam without measurement.
-- “Do all channels” in parallel without learning loops.
+- "Do all channels" in parallel without learning loops.
 - Vanity metrics without retention and payback context.
+- Over-automating without human oversight (AI augments, doesn't replace judgment).
+- Treating ICP as static—revisit quarterly based on win/loss data.
 
 ## What Good Looks Like
 

@@ -157,20 +157,61 @@ The 27 lunar mansions, each spanning 13°20':
 User Request
     │
     ├─ Calculation related?
-    │   ├─ Sidereal position? → [resources/sidereal-calculations.md]
-    │   ├─ Ayanamsa conversion? → [resources/sidereal-calculations.md]
-    │   ├─ Dasha calculation? → [resources/dasha-systems.md]
-    │   └─ Nakshatra position? → [resources/nakshatras-guide.md]
+    │   ├─ Sidereal position? → [references/sidereal-calculations.md]
+    │   ├─ Ayanamsa conversion? → [references/sidereal-calculations.md]
+    │   ├─ Dasha calculation? → [references/dasha-systems.md]
+    │   ├─ Nakshatra position? → [references/nakshatras-guide.md]
+    │   └─ Ashtakavarga points? → [references/ashtakavarga-system.md]
     │
     ├─ Interpretation related?
-    │   ├─ Birth chart (Kundali)? → [templates/template-kundali-reading.md]
-    │   ├─ Dasha periods? → [resources/dasha-systems.md]
-    │   ├─ Yogas? → [resources/yogas-guide.md]
-    │   ├─ Compatibility (Kundali Milan)? → [templates/template-compatibility.md]
-    │   └─ Nakshatra meanings? → [resources/nakshatras-guide.md]
+    │   ├─ Birth chart (Kundali)? → [assets/template-kundali-reading.md]
+    │   ├─ Dasha periods? → [references/dasha-systems.md]
+    │   ├─ Yogas? → [references/yogas-guide.md]
+    │   ├─ Compatibility (Kundali Milan)? → [assets/template-compatibility.md]
+    │   ├─ Nakshatra meanings? → [references/nakshatras-guide.md]
+    │   ├─ Marriage/Spouse analysis? → [references/divisional-charts.md] (D-9 Navamsa)
+    │   ├─ Career/Profession analysis? → [references/divisional-charts.md] (D-10 Dasamsa)
+    │   └─ Planetary strength (bindus)? → [references/ashtakavarga-system.md]
+    │
+    ├─ Prashna (Horary/Question Astrology)?
+    │   ├─ Answer a specific question? → [references/prashna-jyotish.md]
+    │   ├─ Lost object? → [references/prashna-jyotish.md]
+    │   ├─ Yes/No question? → [references/prashna-jyotish.md]
+    │   ├─ Tajika yogas? → [references/prashna-jyotish.md]
+    │   └─ Prashna reading template? → [assets/template-prashna.md]
+    │
+    ├─ Ashtakavarga (Point-Based Analysis)?
+    │   ├─ Transit strength? → [references/ashtakavarga-system.md]
+    │   ├─ BAV/SAV scores? → [references/ashtakavarga-system.md]
+    │   ├─ Kaksha analysis? → [references/ashtakavarga-system.md]
+    │   └─ When is transit favorable? → [references/ashtakavarga-system.md]
+    │
+    ├─ Divisional Charts (Vargas)?
+    │   ├─ D-9 Navamsa (Marriage)? → [references/divisional-charts.md]
+    │   ├─ D-10 Dasamsa (Career)? → [references/divisional-charts.md]
+    │   └─ Other Vargas (D-2, D-7, etc.)? → [references/divisional-charts.md]
+    │
+    ├─ Saturn Transits?
+    │   ├─ Sade Sati (7.5 year cycle)? → [references/sade-sati.md]
+    │   ├─ Which phase am I in? → [references/sade-sati.md]
+    │   └─ Sade Sati remedies? → [references/sade-sati.md]
+    │
+    ├─ Timing & Predictions?
+    │   ├─ When will X happen? → [references/transit-dasha-integration.md]
+    │   ├─ Dasha + Transit combined? → [references/transit-dasha-integration.md]
+    │   ├─ Double transit rule? → [references/transit-dasha-integration.md]
+    │   ├─ Marriage/Career/Children timing? → [references/transit-dasha-integration.md]
+    │   └─ 2026 major transits? → [references/transit-dasha-integration.md]
+    │
+    ├─ Daily Almanac / Auspicious Timing?
+    │   ├─ Today's Panchang? → [references/panchang-muhurta.md]
+    │   ├─ Muhurta selection? → [references/panchang-muhurta.md]
+    │   ├─ Best time for marriage/business/travel? → [references/panchang-muhurta.md]
+    │   ├─ Rahukala/Yamaghantaka? → [references/panchang-muhurta.md]
+    │   └─ Period-specific remedies? → [references/panchang-muhurta.md] + [references/remedies-guide.md]
     │
     └─ Remedial measures?
-        └─ Gems, mantras, rituals → [resources/remedies-guide.md]
+        └─ Gems, mantras, rituals → [references/remedies-guide.md]
 ```
 
 ---
@@ -229,15 +270,22 @@ Vedic aspects are different:
 ## Navigation
 
 **Resources**
-- [resources/sidereal-calculations.md](resources/sidereal-calculations.md) — Ayanamsa, coordinate conversion
-- [resources/nakshatras-guide.md](resources/nakshatras-guide.md) — Complete Nakshatra meanings
-- [resources/dasha-systems.md](resources/dasha-systems.md) — Vimshottari and other Dashas
-- [resources/yogas-guide.md](resources/yogas-guide.md) — Planetary combinations
-- [resources/remedies-guide.md](resources/remedies-guide.md) — Traditional remedial measures
+- [references/sidereal-calculations.md](references/sidereal-calculations.md) — Ayanamsa, coordinate conversion
+- [references/nakshatras-guide.md](references/nakshatras-guide.md) — Complete Nakshatra meanings
+- [references/dasha-systems.md](references/dasha-systems.md) — Vimshottari and other Dashas
+- [references/yogas-guide.md](references/yogas-guide.md) — Planetary combinations
+- [references/remedies-guide.md](references/remedies-guide.md) — Traditional remedial measures
+- [references/divisional-charts.md](references/divisional-charts.md) — **D-9 Navamsa, D-10 Dasamsa, all 16 Vargas**
+- [references/sade-sati.md](references/sade-sati.md) — **Saturn's 7.5 year transit, phases, remedies**
+- [references/transit-dasha-integration.md](references/transit-dasha-integration.md) — **Timing predictions with Dasha + Transit + 2026 Calendar**
+- [references/panchang-muhurta.md](references/panchang-muhurta.md) — **Daily almanac, auspicious timing, Muhurta selection**
+- [references/ashtakavarga-system.md](references/ashtakavarga-system.md) — **Point-based planetary strength (BAV/SAV)**
+- [references/prashna-jyotish.md](references/prashna-jyotish.md) — **Horary astrology, Tajika yogas, question answering**
 
 **Templates**
-- [templates/template-kundali-reading.md](templates/template-kundali-reading.md) — Birth chart analysis
-- [templates/template-compatibility.md](templates/template-compatibility.md) — Kundali Milan / matching
+- [assets/template-kundali-reading.md](assets/template-kundali-reading.md) — Birth chart analysis
+- [assets/template-compatibility.md](assets/template-compatibility.md) — Kundali Milan / matching
+- [assets/template-prashna.md](assets/template-prashna.md) — **Prashna (horary) reading format**
 
 ---
 
@@ -248,3 +296,35 @@ Vedic aspects are different:
 - **Jataka Parijata** - Birth chart analysis
 - [Astrosage](https://www.astrosage.com/) - Online calculation verification
 - [Jagannatha Hora](https://www.vedicastrologer.org/jh/) - Software reference
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask about missing features, what to add, or gaps in coverage, you MUST use WebSearch to check current trends before answering.
+
+### Required Searches
+
+1. Search: `"Vedic astrology Jyotish apps 2026 features"`
+2. Search: `"Vedic astrology trends 2026"`
+3. Search: `"Jyotish AI astrology popular"`
+4. Search: `"Indian astrology app features trending"`
+
+### What to Report
+
+After searching, provide:
+
+- **What's trending** and WHY it's popular (viral potential, user demand)
+- **Top app features** that are driving downloads
+- **Comparison** against current skill/app implementation
+- **Priority recommendations** ranked by impact vs. effort
+
+### Example Trending Topics (verify with fresh search)
+
+- AI-enabled Vedic astrologers (conversational)
+- Major transit content (Jupiter exaltation, Rahu-Ketu shifts)
+- Prashna Jyotish (horary/question astrology)
+- Real-time transit alerts and notifications
+- Ashtakoota compatibility matching UI
+- Voice-based horoscope interpretation
+- Panchang/Muhurta daily features

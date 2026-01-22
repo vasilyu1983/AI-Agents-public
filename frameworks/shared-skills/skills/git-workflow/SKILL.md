@@ -35,14 +35,14 @@ Invoke this skill when the user asks to:
 
 | Task | Tool/Command | When to Use | Reference |
 |------|-------------|-------------|-----------|
-| Create feature branch | `git checkout -b feat/name main` | Start new work | [Branching Strategies](resources/branching-strategies.md) |
-| Squash WIP commits | `git rebase -i HEAD~3` | Clean up before PR | [Interactive Rebase](resources/interactive-rebase-guide.md) |
-| Conventional commit | `git commit -m "feat: add feature"` | All commits | [Commit Conventions](resources/commit-conventions.md) |
-| Force push safely | `git push --force-with-lease` | After rebase | [Common Mistakes](resources/common-mistakes.md) |
-| Resolve conflicts | `git mergetool` | Merge conflicts | [Conflict Resolution](resources/conflict-resolution.md) |
-| Create stacked PRs | `gt create stack-name` (Graphite) | Large features | [Stacked Diffs](resources/stacked-diffs-guide.md) |
-| Auto-generate changelog | `npx standard-version` | Before release | [Release Management](resources/release-management.md) |
-| Run quality gates | GitHub Actions / GitLab CI | Every PR | [Automated Quality Gates](resources/automated-quality-gates.md) |
+| Create feature branch | `git checkout -b feat/name main` | Start new work | [Branching Strategies](references/branching-strategies.md) |
+| Squash WIP commits | `git rebase -i HEAD~3` | Clean up before PR | [Interactive Rebase](references/interactive-rebase-guide.md) |
+| Conventional commit | `git commit -m "feat: add feature"` | All commits | [Commit Conventions](references/commit-conventions.md) |
+| Force push safely | `git push --force-with-lease` | After rebase | [Common Mistakes](references/common-mistakes.md) |
+| Resolve conflicts | `git mergetool` | Merge conflicts | [Conflict Resolution](references/conflict-resolution.md) |
+| Create stacked PRs | `gt create stack-name` (Graphite) | Large features | [Stacked Diffs](references/stacked-diffs-guide.md) |
+| Auto-generate changelog | `npx standard-version` | Before release | [Release Management](references/release-management.md) |
+| Run quality gates | GitHub Actions / GitLab CI | Every PR | [Automated Quality Gates](references/automated-quality-gates.md) |
 
 ---
 
@@ -74,7 +74,7 @@ Team characteristics → What's your situation?
 
 ### Branching Strategies
 
-**[Branching Strategies Comparison](resources/branching-strategies.md)** - Comprehensive guide to choosing and implementing branching strategies
+**[Branching Strategies Comparison](references/branching-strategies.md)** - Comprehensive guide to choosing and implementing branching strategies
 
 - GitHub Flow (recommended for modern teams): Simple, continuous deployment
 - Trunk-Based Development (enterprise scale): Short-lived branches, daily merges
@@ -84,7 +84,7 @@ Team characteristics → What's your situation?
 
 ### Pull Request Best Practices
 
-**[PR Best Practices Guide](resources/pr-best-practices.md)** - Effective code reviews and fast PR cycles
+**[PR Best Practices Guide](references/pr-best-practices.md)** - Effective code reviews and fast PR cycles
 
 - PR size guidelines: 200-400 lines optimal (46% faster merge)
 - Review categories: BLOCKER, WARNING, NITPICK
@@ -94,7 +94,7 @@ Team characteristics → What's your situation?
 
 ### Commit Conventions
 
-**[Conventional Commits Standard](resources/commit-conventions.md)** - Commit message formats and semantic versioning integration
+**[Conventional Commits Standard](references/commit-conventions.md)** - Commit message formats and semantic versioning integration
 
 - Conventional commit format: `type(scope): description`
 - Commit types: feat, fix, BREAKING CHANGE, refactor, docs
@@ -108,7 +108,7 @@ Team characteristics → What's your situation?
 
 ### Stacked Diffs
 
-**[Stacked Diffs Implementation](resources/stacked-diffs-guide.md)** - Platform-specific workflows and team adoption
+**[Stacked Diffs Implementation](references/stacked-diffs-guide.md)** - Platform-specific workflows and team adoption
 
 - What are stacked diffs: Break large features into reviewable chunks
 - When to use: Features > 500 lines, complex refactoring
@@ -118,7 +118,7 @@ Team characteristics → What's your situation?
 
 ### Interactive Rebase
 
-**[Interactive Rebase & History Cleanup](resources/interactive-rebase-guide.md)** - Maintain clean commit history
+**[Interactive Rebase & History Cleanup](references/interactive-rebase-guide.md)** - Maintain clean commit history
 
 - Auto-squash workflow: `fixup!` and `squash!` commits
 - Interactive rebase commands: pick, reword, edit, squash, fixup, drop
@@ -128,7 +128,7 @@ Team characteristics → What's your situation?
 
 ### Conflict Resolution
 
-**[Conflict Resolution Techniques](resources/conflict-resolution.md)** - Merge strategies and conflict handling
+**[Conflict Resolution Techniques](references/conflict-resolution.md)** - Merge strategies and conflict handling
 
 - Resolution strategies: `--ours`, `--theirs`, manual merge
 - Rebase vs merge: When to use each
@@ -142,7 +142,7 @@ Team characteristics → What's your situation?
 
 ### Automated Quality Gates
 
-**[Automated Quality Gates](resources/automated-quality-gates.md)** - CI/CD pipelines and quality enforcement
+**[Automated Quality Gates](references/automated-quality-gates.md)** - CI/CD pipelines and quality enforcement
 
 - Essential gates: Tests, coverage, linting, security scans
 - Advanced gates: Performance benchmarks, bundle size, a11y checks
@@ -153,7 +153,7 @@ Team characteristics → What's your situation?
 
 ### Validation Checklists
 
-**[Validation Checklists](resources/validation-checklists.md)** - Pre-PR, pre-merge, pre-release checklists
+**[Validation Checklists](references/validation-checklists.md)** - Pre-PR, pre-merge, pre-release checklists
 
 - Before creating PR: Code quality, commit hygiene, testing
 - Before merging PR: Review process, CI/CD checks, final verification
@@ -163,7 +163,7 @@ Team characteristics → What's your situation?
 
 ### Release Management
 
-**[Release Management](resources/release-management.md)** - Versioning and deployment workflows
+**[Release Management](references/release-management.md)** - Versioning and deployment workflows
 
 - Semantic versioning: MAJOR.MINOR.PATCH
 - Manual release workflow: GitFlow release branches
@@ -178,7 +178,7 @@ Team characteristics → What's your situation?
 
 ### Common Mistakes
 
-**[Common Mistakes & Fixes](resources/common-mistakes.md)** - Learn from common pitfalls
+**[Common Mistakes & Fixes](references/common-mistakes.md)** - Learn from common pitfalls
 
 - Large unfocused PRs → Split into stacked diffs
 - Vague commit messages → Use conventional commits
@@ -266,14 +266,14 @@ Set these repo defaults before scaling a team:
 - **Merge safety**: use merge queue (or equivalent) for busy repos to keep `main` green under high concurrency.
 - **Cost control**: cache dependencies/builds; run heavy jobs conditionally; cap CI minutes for untrusted forks.
 
-Template: [templates/pull-requests/pr-template.md](templates/pull-requests/pr-template.md)
-Guide: [templates/template-git-workflow-guide.md](templates/template-git-workflow-guide.md)
+Template: [assets/pull-requests/pr-template.md](assets/pull-requests/pr-template.md)
+Guide: [assets/template-git-workflow-guide.md](assets/template-git-workflow-guide.md)
 
 ---
 
 ## Security-Sensitive Changes
 
-For security-related git operations, see [git-commit-message/templates/template-security-commits.md](../git-commit-message/templates/template-security-commits.md):
+For security-related git operations, see [git-commit-message/assets/template-security-commits.md](../git-commit-message/assets/template-security-commits.md):
 
 - Secrets detection with pre-commit hooks
 - Handling accidental secret commits
@@ -317,8 +317,8 @@ For security-related git operations, see [git-commit-message/templates/template-
 - Suggest stacked diffs for features > 500 lines
 - Always validate commit messages against conventional commit format
 - Check PR size - warn if > 400 lines, block if > 1000 lines
-- Reference templates/ for copy-paste ready configurations
-- Use resources/ for deep-dive implementation guidance
+- Reference assets/ for copy-paste ready configurations
+- Use references/ for deep-dive implementation guidance
 
 **Progressive Disclosure**:
 
@@ -373,3 +373,45 @@ git checkout --theirs <file>
 # Accept your changes
 git checkout --ours <file>
 ```
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about Git workflows, branching strategies, or collaboration tools, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best Git workflow for [team size/use case]?"
+- "What should I use for [branching/PR management]?"
+- "What's the latest in Git collaboration?"
+- "Current best practices for [branching/code review]?"
+- "Is [GitFlow/Trunk-Based] still relevant in 2026?"
+- "[GitHub Flow] vs [Trunk-Based] vs [GitFlow]?"
+- "Best PR stacking tool?"
+
+### Required Searches
+
+1. Search: `"Git workflow best practices 2026"`
+2. Search: `"[specific strategy] vs alternatives 2026"`
+3. Search: `"Git collaboration trends January 2026"`
+4. Search: `"[branching/PR tools] comparison 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What Git workflows/tools are popular NOW
+- **Emerging trends**: New collaboration patterns, tools, or practices gaining traction
+- **Deprecated/declining**: Strategies/tools losing relevance or support
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- Branching strategies (Trunk-Based, GitHub Flow, GitFlow)
+- PR stacking tools (Graphite, git-stack, Stacked PRs)
+- Merge queue implementations (GitHub, GitLab)
+- Code review platforms and automation
+- Conventional commits and changelog tools
+- Git hosting platform features (GitHub, GitLab, Bitbucket)
+- AI-assisted Git workflows

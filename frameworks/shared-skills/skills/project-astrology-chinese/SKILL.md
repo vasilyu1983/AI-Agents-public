@@ -9,6 +9,7 @@ description: Expert Chinese astrology advisor for the 12 Animal Zodiac, Five Ele
 - **12 Animal Zodiac**: The 12-year cycle of animal signs
 - **Five Elements**: Wu Xing (Wood, Fire, Earth, Metal, Water)
 - **BaZi (Four Pillars)**: Birth chart based on Year, Month, Day, Hour
+- **Zi Wei Dou Shu**: Purple Star Astrology with 12 palaces and 14 major stars
 - **Chinese Calendar**: Lunar calendar and stem-branch system
 - **Feng Shui Integration**: Spatial and temporal energy
 
@@ -287,19 +288,91 @@ LUCKY: Numbers 2, 5, 8; Colors yellow, gray, brown
 User Request
     │
     ├─ Calculation related?
-    │   ├─ Chinese zodiac sign? → [resources/zodiac-calculations.md]
-    │   ├─ BaZi (Four Pillars)? → [resources/bazi-guide.md]
-    │   └─ Lunar calendar? → [resources/chinese-calendar.md]
+    │   ├─ Chinese zodiac sign? → [references/zodiac-calculations.md]
+    │   ├─ BaZi (Four Pillars)? → [references/bazi-guide.md]
+    │   ├─ Zi Wei Dou Shu chart? → [references/zi-wei-dou-shu.md]
+    │   └─ Lunar calendar? → [references/chinese-calendar.md]
     │
     ├─ Interpretation related?
-    │   ├─ Personality? → Animal profiles above
-    │   ├─ Compatibility? → [resources/compatibility-guide.md]
-    │   ├─ Year forecast? → [resources/annual-forecast.md]
-    │   └─ Elements? → [resources/five-elements-guide.md]
+    │   ├─ Personality? → Animal profiles above OR Zi Wei Life Palace
+    │   ├─ Compatibility? → [references/compatibility-guide.md]
+    │   ├─ Year forecast? → [references/annual-forecast.md]
+    │   ├─ Life domains (career/wealth/marriage)? → [references/zi-wei-dou-shu.md]
+    │   └─ Elements? → [references/five-elements-guide.md]
     │
-    └─ Timing/Feng Shui?
-        └─ → [resources/timing-fengshui.md]
+    ├─ BaZi Day Master Analysis?
+    │   ├─ Day Master strength scoring? → [references/bazi-day-master-analysis.md]
+    │   ├─ Career recommendations? → [references/bazi-day-master-analysis.md]
+    │   ├─ Relationship guidance? → [references/bazi-day-master-analysis.md]
+    │   └─ Personal year forecast? → [references/bazi-day-master-analysis.md]
+    │
+    ├─ Feng Shui / Flying Stars?
+    │   ├─ Annual Flying Stars? → [references/flying-stars-feng-shui.md]
+    │   ├─ Monthly Flying Stars? → [references/flying-stars-feng-shui.md]
+    │   ├─ Home sector recommendations? → [references/flying-stars-feng-shui.md]
+    │   ├─ Three Killings / Tai Sui? → [references/flying-stars-feng-shui.md]
+    │   └─ Personal Kua Number? → [references/flying-stars-feng-shui.md]
+    │
+    └─ Strategic Timing / Qi Men Dun Jia?
+        ├─ Best time for decision? → [references/qi-men-dun-jia.md]
+        ├─ Direction selection? → [references/qi-men-dun-jia.md]
+        ├─ Eight Gates analysis? → [references/qi-men-dun-jia.md]
+        └─ Business/travel timing? → [references/qi-men-dun-jia.md]
 ```
+
+---
+
+## Zi Wei Dou Shu (Purple Star Astrology) — Quick Reference
+
+紫微斗數 — A sophisticated system using 12 palaces and 14 major stars for detailed life analysis.
+
+### The 12 Palaces
+
+| Palace | Chinese | Governs |
+|--------|---------|---------|
+| Life (Ming) | 命宫 | Core personality, self |
+| Siblings | 兄弟宫 | Brothers/sisters, peers |
+| Spouse | 夫妻宫 | Marriage, partnerships |
+| Children | 子女宫 | Offspring, creativity |
+| Wealth | 财帛宫 | Money, finances |
+| Health | 疾厄宫 | Illness, vulnerabilities |
+| Travel | 迁移宫 | Movement, relocation |
+| Friends | 交友宫 | Social circle |
+| Career | 官禄宫 | Work, achievements |
+| Property | 田宅宫 | Real estate, home |
+| Fortune | 福德宫 | Happiness, spirit |
+| Parents | 父母宫 | Parental relationships |
+
+### The 14 Major Stars
+
+**North Group (Authority)**:
+- **Zi Wei** (紫微) — Emperor: Leadership, dignity
+- **Tian Ji** (天机) — Strategist: Intelligence, planning
+- **Tai Yang** (太阳) — Sun: Generosity, public life
+- **Wu Qu** (武曲) — General: Finance, determination
+- **Tian Tong** (天同) — Blessing: Comfort, ease
+- **Lian Zhen** (廉贞) — Judge: Justice, complexity
+
+**South Group (Nurturing)**:
+- **Tian Fu** (天府) — Treasury: Wealth protection
+- **Tai Yin** (太阴) — Moon: Intuition, sensitivity
+- **Tan Lang** (贪狼) — Desire: Ambition, transformation
+- **Ju Men** (巨门) — Gate: Communication, disputes
+- **Tian Xiang** (天相) — Minister: Service, helpfulness
+- **Tian Liang** (天梁) — Beam: Wisdom, problem-solving
+- **Qi Sha** (七杀) — Warrior: Combat, adventure
+- **Po Jun** (破军) — Pioneer: Change, rule-breaking
+
+### The Four Transformations (四化)
+
+| Hua | Chinese | Effect |
+|-----|---------|--------|
+| **Hua Lu** | 化禄 | Wealth/opportunity activation |
+| **Hua Quan** | 化权 | Power/authority activation |
+| **Hua Ke** | 化科 | Fame/recognition activation |
+| **Hua Ji** | 化忌 | Obstruction/caution area |
+
+See [references/zi-wei-dou-shu.md](references/zi-wei-dou-shu.md) for complete system details.
 
 ---
 
@@ -325,7 +398,7 @@ DAY:    丁亥 (Dīng Hài) - Yin Fire Pig
 HOUR:   壬寅 (Rén Yín) - Yang Water Tiger
 ```
 
-See [resources/bazi-guide.md](resources/bazi-guide.md) for full BaZi system.
+See [references/bazi-guide.md](references/bazi-guide.md) for full BaZi system.
 
 ---
 
@@ -349,16 +422,20 @@ Each year's animal affects all signs differently:
 ## Navigation
 
 **Resources**
-- [resources/zodiac-calculations.md](resources/zodiac-calculations.md) — Finding animal signs
-- [resources/five-elements-guide.md](resources/five-elements-guide.md) — Wu Xing deep dive
-- [resources/bazi-guide.md](resources/bazi-guide.md) — Four Pillars system
-- [resources/compatibility-guide.md](resources/compatibility-guide.md) — Relationship analysis
-- [resources/annual-forecast.md](resources/annual-forecast.md) — Yearly predictions
-- [resources/chinese-calendar.md](resources/chinese-calendar.md) — Lunar calendar system
+- [references/zodiac-calculations.md](references/zodiac-calculations.md) — Finding animal signs
+- [references/five-elements-guide.md](references/five-elements-guide.md) — Wu Xing deep dive
+- [references/bazi-guide.md](references/bazi-guide.md) — Four Pillars system
+- [references/zi-wei-dou-shu.md](references/zi-wei-dou-shu.md) — Purple Star Astrology (12 palaces, 14 stars)
+- [references/compatibility-guide.md](references/compatibility-guide.md) — Relationship analysis
+- [references/annual-forecast.md](references/annual-forecast.md) — Yearly predictions
+- [references/chinese-calendar.md](references/chinese-calendar.md) — Lunar calendar system
+- [references/bazi-day-master-analysis.md](references/bazi-day-master-analysis.md) — **Day Master strength, career/relationship guidance**
+- [references/flying-stars-feng-shui.md](references/flying-stars-feng-shui.md) — **Flying Stars, annual charts, Feng Shui sectors**
+- [references/qi-men-dun-jia.md](references/qi-men-dun-jia.md) — **Strategic timing, Eight Gates, direction selection**
 
 **Templates**
-- [templates/template-chinese-reading.md](templates/template-chinese-reading.md) — Full reading format
-- [templates/template-compatibility.md](templates/template-compatibility.md) — Compatibility report
+- [assets/template-chinese-reading.md](assets/template-chinese-reading.md) — Full reading format
+- [assets/template-compatibility.md](assets/template-compatibility.md) — Compatibility report
 
 ---
 
@@ -369,3 +446,33 @@ Each year's animal affects all signs differently:
 - [Chinese Fortune Calendar](https://www.chinesefortunecalendar.com/)
 - [YourChineseAstrology](https://www.yourchineseastrology.com/)
 - Traditional Chinese almanac (Tung Shing / 通書)
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask about missing features, what to add, or gaps in coverage, you MUST use WebSearch to check current trends before answering.
+
+### Required Searches
+
+1. Search: `"Chinese astrology BaZi apps 2026 features"`
+2. Search: `"Chinese astrology TikTok viral 2026"`
+3. Search: `"BaZi AI features trending"`
+4. Search: `"Feng Shui app popular features"`
+
+### What to Report
+
+After searching, provide:
+
+- **What's trending** and WHY it's popular (viral potential, user demand)
+- **Top app features** that are driving downloads
+- **Comparison** against current skill/app implementation
+- **Priority recommendations** ranked by impact vs. effort
+
+### Example Trending Topics (verify with fresh search)
+
+- AI BaZi integration (ChatGPT + BaZi charts)
+- Daily luck scores (career/wealth/health/relationship)
+- Year-specific content (current Chinese zodiac year)
+- Lucky directions calculator by birth chart
+- Flying Stars annual updates

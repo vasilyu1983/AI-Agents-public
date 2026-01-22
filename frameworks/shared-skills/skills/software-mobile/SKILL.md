@@ -69,9 +69,14 @@ Need to build mobile app for: [Target Audience]
     │   │   └─ Build separate native apps (Swift + Kotlin)
     │   │
     │   ├─ Need faster development + code sharing (70%+)?
-    │   │   ├─ JavaScript team? → React Native
-    │   │   ├─ Dart team? → Flutter
-    │   │   └─ Kotlin team? → Kotlin Multiplatform
+    │   │   ├─ JavaScript team? → React Native (Expo SDK 54, New Architecture)
+    │   │   ├─ Dart team? → Flutter (46% developer adoption, 102K GitHub stars)
+    │   │   └─ Kotlin team? → Kotlin Multiplatform (KMP) ⭐ RECOMMENDED
+    │   │
+    │   ├─ Kotlin Multiplatform (KMP)? [Production-ready, 23% market share]
+    │   │   ├─ Share business logic only? → KMP shared module + native UI
+    │   │   ├─ Share UI too? → Compose Multiplatform (iOS stable 2025)
+    │   │   └─ Enterprise backing? → Google Docs iOS uses KMP in production
     │   │
     │   └─ Wrapping existing web app?
     │       ├─ Simple wrapper? → WebView (iOS WKWebView / Android WebView)
@@ -87,7 +92,8 @@ Need to build mobile app for: [Target Audience]
 Choosing architecture pattern?
     │
     ├─ iOS (Swift)?
-    │   ├─ SwiftUI app? → MVVM with @Observable
+    │   ├─ SwiftUI app? → MVVM with @Observable (Swift 6.2 defaults)
+    │   ├─ Complex SwiftUI? → TCA (Composable Architecture) for testability
     │   ├─ UIKit app? → MVVM-C (Coordinator pattern)
     │   ├─ Large team? → Clean Architecture + MVVM
     │   └─ Simple app? → MVC (Apple default)
@@ -158,8 +164,8 @@ Need to make API calls?
 ### iOS Development
 
 - **UI Frameworks**: SwiftUI (declarative), UIKit (imperative)
-- **Architecture**: MVVM, Clean Architecture, Coordinator
-- **Concurrency**: async/await, Combine, GCD
+- **Architecture**: MVVM, Clean Architecture, Coordinator, TCA (Composable Architecture)
+- **Concurrency**: Swift 6.2 "Approachable Concurrency" — `@MainActor` defaults, `@concurrent` for parallelism, async/await, Combine
 - **Storage**: Core Data, SwiftData, Keychain
 - **Networking**: URLSession, async/await patterns
 - **Platform compliance**: Privacy manifests + required-reason APIs, background execution limits, and accessibility settings (Dynamic Type, VoiceOver)
@@ -175,31 +181,36 @@ Need to make API calls?
 
 ### Cross-Platform Development
 
-- **React Native**: JavaScript/TypeScript, native modules
-- **Flutter**: Dart, widget tree, platform channels
+- **Kotlin Multiplatform (KMP)**: Share Kotlin business logic; Compose Multiplatform for shared UI (iOS stable 2025). Used by Google Docs, McDonald's, Duolingo.
+- **React Native**: JavaScript/TypeScript, Expo SDK 54, New Architecture (bridgeless) default, Hermes required
+- **Flutter**: Dart, widget tree, platform channels, Impeller rendering engine (46% developer adoption)
 - **WebView**: WKWebView (iOS), WebView (Android), JavaScript bridge
 
 ---
 
-## Platform Baselines (Dec 2025)
+## Platform Baselines (January 2026)
 
 ### iOS/iPadOS (Core)
 
-- Privacy manifest files (app + embedded SDKs) are maintained and reviewed https://developer.apple.com/documentation/bundleresources/privacy_manifest_files
-- Required-reason APIs are declared with valid reasons https://developer.apple.com/documentation/bundleresources/privacy_manifest_files
+- Privacy manifest files (app + embedded SDKs) are maintained and reviewed https://developer.apple.com/documentation/bundlereferences/privacy_manifest_files
+- Required-reason APIs are declared with valid reasons https://developer.apple.com/documentation/bundlereferences/privacy_manifest_files
 - Background work uses supported primitives (avoid fragile timers) https://developer.apple.com/documentation/backgroundtasks
-- App Transport Security is configured; exceptions are justified and documented https://developer.apple.com/documentation/bundleresources/information_property_list/nsapptransportsecurity
+- App Transport Security is configured; exceptions are justified and documented https://developer.apple.com/documentation/bundlereferences/information_property_list/nsapptransportsecurity
+- **Swift 6.2**: Use "Approachable Concurrency" — `@MainActor` defaults, `@concurrent` for explicit parallelism https://www.swift.org/documentation/concurrency/
 
 ### Android (Core)
 
 - Background work uses WorkManager for deferrable, guaranteed work https://developer.android.com/topic/libraries/architecture/workmanager
 - Network calls and auth state survive process death (no hidden singleton assumptions) [Inference]
-- Target SDK meets Google Play requirements (plan upgrades early) https://support.google.com/googleplay/android-developer/answer/11926878
+- Target SDK meets Google Play requirements (Android 16 / API 36) https://support.google.com/googleplay/android-developer/answer/11926878
+- **Play Integrity API required** — SafetyNet Attestation fully deprecated January 2025 https://developer.android.com/google/play/integrity
 
 ### Cross-Platform (Core)
 
 - Feature parity is explicit (document what is native-only vs shared) [Inference]
 - Bridges are treated as public APIs (versioned, tested, and observable) [Inference]
+- **Expo SDK 54** (current): New Architecture enabled by default, `expo-av` deprecated — migrate to `expo-audio`/`expo-video` https://expo.dev/changelog/sdk-54
+- **React Native 0.81**: JSC removed, Hermes required; bridgeless architecture default
 
 ### Optional: AI/Automation Extensions
 
@@ -312,15 +323,15 @@ Android (FCM):
 
 ### Resources
 
-- [resources/ios-best-practices.md](resources/ios-best-practices.md) — iOS architecture, concurrency, testing, performance, defensive decoding, and accessibility
-- [resources/android-best-practices.md](resources/android-best-practices.md) — Android/Kotlin architecture, coroutines, Compose, testing, performance
-- [resources/operational-playbook.md](resources/operational-playbook.md) — Mobile architecture patterns, platform-specific guides, security notes, and decision tables
+- [references/ios-best-practices.md](references/ios-best-practices.md) — iOS architecture, concurrency, testing, performance, defensive decoding, and accessibility
+- [references/android-best-practices.md](references/android-best-practices.md) — Android/Kotlin architecture, coroutines, Compose, testing, performance
+- [references/operational-playbook.md](references/operational-playbook.md) — Mobile architecture patterns, platform-specific guides, security notes, and decision tables
 - [README.md](README.md) — Folder overview and usage notes
 - [data/sources.json](data/sources.json) — Curated external references by platform
 
 ### Shared Checklists
 
-- [../software-clean-code-standard/templates/checklists/mobile-release-checklist.md](../software-clean-code-standard/templates/checklists/mobile-release-checklist.md) — Product-agnostic mobile release readiness checklist (core + optional AI)
+- [../software-clean-code-standard/assets/checklists/mobile-release-checklist.md](../software-clean-code-standard/assets/checklists/mobile-release-checklist.md) — Product-agnostic mobile release readiness checklist (core + optional AI)
 
 ### Shared Utilities (Centralized patterns — extract, don't duplicate)
 
@@ -329,14 +340,14 @@ Android (FCM):
 - [../software-clean-code-standard/utilities/resilience-utilities.md](../software-clean-code-standard/utilities/resilience-utilities.md) — Retry, circuit breaker for network calls
 - [../software-clean-code-standard/utilities/logging-utilities.md](../software-clean-code-standard/utilities/logging-utilities.md) — Structured logging patterns
 - [../software-clean-code-standard/utilities/testing-utilities.md](../software-clean-code-standard/utilities/testing-utilities.md) — Test factories, fixtures, mocks
-- [../software-clean-code-standard/resources/clean-code-standard.md](../software-clean-code-standard/resources/clean-code-standard.md) — Canonical clean code rules (`CC-*`) for citation
+- [../software-clean-code-standard/references/clean-code-standard.md](../software-clean-code-standard/references/clean-code-standard.md) — Canonical clean code rules (`CC-*`) for citation
 
 ### Templates
 
-- **Swift**: [templates/swift/template-swift.md](templates/swift/template-swift.md), [templates/swift/template-swift-concurrency.md](templates/swift/template-swift-concurrency.md), [templates/swift/template-swift-combine.md](templates/swift/template-swift-combine.md), [templates/swift/template-swift-performance.md](templates/swift/template-swift-performance.md), [templates/swift/template-swift-testing.md](templates/swift/template-swift-testing.md)
-- **SwiftUI**: [templates/swiftui/template-swiftui-advanced.md](templates/swiftui/template-swiftui-advanced.md)
-- **Kotlin/Android**: [templates/kotlin/template-kotlin.md](templates/kotlin/template-kotlin.md), [templates/kotlin/template-kotlin-coroutines.md](templates/kotlin/template-kotlin-coroutines.md), [templates/kotlin/template-kotlin-compose-advanced.md](templates/kotlin/template-kotlin-compose-advanced.md), [templates/kotlin/template-kotlin-testing.md](templates/kotlin/template-kotlin-testing.md)
-- **Cross-platform**: [templates/cross-platform/template-platform-patterns.md](templates/cross-platform/template-platform-patterns.md), [templates/cross-platform/template-webview.md](templates/cross-platform/template-webview.md)
+- **Swift**: [assets/swift/template-swift.md](assets/swift/template-swift.md), [assets/swift/template-swift-concurrency.md](assets/swift/template-swift-concurrency.md), [assets/swift/template-swift-combine.md](assets/swift/template-swift-combine.md), [assets/swift/template-swift-performance.md](assets/swift/template-swift-performance.md), [assets/swift/template-swift-testing.md](assets/swift/template-swift-testing.md)
+- **SwiftUI**: [assets/swiftui/template-swiftui-advanced.md](assets/swiftui/template-swiftui-advanced.md)
+- **Kotlin/Android**: [assets/kotlin/template-kotlin.md](assets/kotlin/template-kotlin.md), [assets/kotlin/template-kotlin-coroutines.md](assets/kotlin/template-kotlin-coroutines.md), [assets/kotlin/template-kotlin-compose-advanced.md](assets/kotlin/template-kotlin-compose-advanced.md), [assets/kotlin/template-kotlin-testing.md](assets/kotlin/template-kotlin-testing.md)
+- **Cross-platform**: [assets/cross-platform/template-platform-patterns.md](assets/cross-platform/template-platform-patterns.md), [assets/cross-platform/template-webview.md](assets/cross-platform/template-webview.md)
 
 ---
 
@@ -352,6 +363,47 @@ Android (FCM):
 | Storing secrets in code | Security vulnerability | Use Keychain/Keystore |
 | Using `decode()` without fallback | Crashes on missing/malformed API data | Use `decodeIfPresent()` with defaults |
 | Missing @Bindable for @Observable | NavigationStack bindings don't work | Add `@Bindable var vm = vm` in body |
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about mobile development, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best mobile framework for [use case]?"
+- "What should I use for [cross-platform/native/hybrid]?"
+- "What's the latest in iOS/Android development?"
+- "Current best practices for [Swift/Kotlin/React Native]?"
+- "Is [React Native/Flutter/Expo] still relevant in 2026?"
+- "[React Native] vs [Flutter] vs [native]?"
+- "Best approach for [offline/push/deep linking]?"
+
+### Required Searches
+
+1. Search: `"mobile development best practices 2026"`
+2. Search: `"[iOS/Android/React Native/Flutter] updates 2026"`
+3. Search: `"mobile framework comparison 2026"`
+4. Search: `"[Expo/Swift/Kotlin] new features 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What frameworks/approaches are popular NOW
+- **Emerging trends**: New patterns or tools gaining traction
+- **Deprecated/declining**: Approaches that are losing relevance
+- **Recommendation**: Based on fresh data and recent releases
+
+### Example Topics (verify with fresh search)
+
+- iOS 18/19 and Swift 6.2 "Approachable Concurrency"
+- Android 16 (API 36) and Kotlin Multiplatform (KMP)
+- React Native 0.81 New Architecture (bridgeless default)
+- Expo SDK 54 and expo-av deprecation
+- Flutter vs React Native vs KMP ecosystem (2026)
+- Compose Multiplatform for iOS (stable 2025)
 
 ---
 

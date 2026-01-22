@@ -1,6 +1,6 @@
 ---
 name: marketing-leads-generation
-description: Revenue-aligned demand generation with lead types, funnel design, conversion paths, scoring/routing, attribution, and compliance for B2B pipeline building.
+description: Use when building or fixing B2B pipeline. Revenue-aligned demand generation with lead types, funnel design, conversion paths, scoring/routing, attribution, ABS motions, and compliance.
 ---
 
 # LEAD GENERATION — PIPELINE OS (OPERATIONAL)
@@ -50,7 +50,7 @@ Set targets from your own baseline, then improve stage-by-stage:
 3. Are leads skipping stages? (May indicate misalignment)
 4. What percentage of MQLs get accepted by Sales? (Low = quality issue)
 
-For full funnel setup including MQL/SQL criteria and SLAs, use [lead-funnel-definition.md](templates/lead-funnel-definition.md).
+For full funnel setup including MQL/SQL criteria and SLAs, use [lead-funnel-definition.md](assets/lead-funnel-definition.md).
 
 ---
 
@@ -144,6 +144,46 @@ The 2025 reality: **precision > volume**. Longer sales cycles and larger buying 
 
 ---
 
+## Core: Account-Based Sales (ABS)
+
+Nine out of 10 B2B companies report ABS as effective. Use when targeting high-value accounts with complex buying committees.
+
+### When to Use ABS
+
+| Criteria | Threshold | Why |
+| -------- | --------- | --- |
+| ACV | >$25K | Worth the research investment |
+| TAM | <5,000 accounts | Finite, targetable market |
+| Buying committee | 3+ stakeholders | Multi-threaded approach needed |
+| Sales cycle | >60 days | Time to nurture relationships |
+
+### ABS Execution Framework
+
+| Element | Execution | Resource |
+| ------- | --------- | -------- |
+| **Target list** | 50-200 named accounts, tiered (Tier 1: 20, Tier 2: 50, Tier 3: 130) | `assets/channel-plan-30-60-90.md` |
+| **Account research** | Pain points, tech stack, recent news, org chart | 30 min per Tier 1 account |
+| **Multi-threading** | 3-5 contacts per account across roles | Champion + economic buyer + user |
+| **Custom content** | Pain-specific messaging per tier | Tier 1: fully custom; Tier 2: semi-custom |
+| **Orchestration** | Coordinated email + LinkedIn + ads + events | Sequence all channels |
+| **Measurement** | Account engagement score, pipeline per account | Add to `assets/lead-scoring-model.md` |
+
+### Do (ABS)
+
+- Start with Tier 1 (highest value) to prove the motion
+- Coordinate Sales + Marketing on account selection and messaging
+- Use intent data to prioritize accounts showing buying signals
+- Track account-level metrics, not just lead-level
+
+### Avoid (ABS)
+
+- Running ABS on >200 accounts (becomes spray-and-pray)
+- Treating ABS as "just personalized email" (it's full orchestration)
+- Skipping account research (generic outreach defeats the purpose)
+- Single-threading accounts (champion leaves = deal dies)
+
+---
+
 ## When to Use This Skill
 
 - Pipeline build/rehab: net-new SQL targets, revive stalled funnels, rebalance channel mix
@@ -152,6 +192,17 @@ The 2025 reality: **precision > volume**. Longer sales cycles and larger buying 
 - Lead scoring/routing: MQL/SQL thresholds, SDR/AE handoff, SLA design
 - Experiment cadence: 30/60/90 test plans, ICE/PIE scoring, stop/scale rules
 - Compliance/deliverability: CAN-SPAM/GDPR hygiene, domain warmup, opt-out, DKIM/SPF/DMARC
+- Account-based sales (ABS): named account targeting, multi-threaded outreach, account scoring
+
+## When NOT to Use This Skill
+
+Use related skills instead for:
+
+- **Organic content strategy** → [marketing-social-media](../marketing-social-media/SKILL.md)
+- **SEO for landing pages** → [marketing-seo-complete](../marketing-seo-complete/SKILL.md)
+- **AI search optimization** → [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md)
+- **Product-led growth ownership** → [product-management](../product-management/SKILL.md)
+- **Paid media buying/optimization** → [marketing-paid-media](../marketing-paid-media/SKILL.md) (if available)
 
 ---
 
@@ -168,8 +219,8 @@ The 2025 reality: **precision > volume**. Longer sales cycles and larger buying 
 | Speed-to-Lead OS | Response + reminders | See **Operational SOPs** → Speed-to-Lead | Reply/no-show issues, inbox speed |
 | Experiment Matrix | ICE/PIE + stop/scale | See **Operational SOPs** → Experiment Matrix | Weekly prioritization |
 | Compliance/Deliverability | Authentication + opt-out | See **Operational SOPs** → Compliance & Deliverability | Cold email/domain health |
-| Email Deliverability 2025 | Bulk sender requirements | `templates/email-deliverability-2025.md` | Bulk sending (5,000+/day to Gmail), new domains |
-| LinkedIn Outreach Safety | Terms-compliant outreach guardrails | `templates/linkedin-automation-safety-2025.md` | LinkedIn outreach risk reduction |
+| Email Deliverability 2025 | Bulk sender requirements | `assets/email-deliverability-2025.md` | Bulk sending (5,000+/day to Gmail), new domains |
+| LinkedIn Outreach Safety | Terms-compliant outreach guardrails | `assets/linkedin-automation-safety-2025.md` | LinkedIn outreach risk reduction |
 
 ---
 
@@ -247,6 +298,14 @@ Traffic ok, CVR low?
 
 **Goal**: Sustain deliverability and protect brand trust while running outbound and nurture.
 
+**Spam Rate Thresholds (Critical — 2025 Enforcement)**
+- Gmail/Yahoo/Microsoft hard ceiling: **0.3%** complaint rate
+- Recommended target: **<0.1%** for reliable inbox placement
+- Gmail (Nov 2025): Non-compliant senders receive **permanent 5xx rejections**
+- Microsoft (May 2025): Bulk senders without auth are **rejected outright** on consumer mailboxes
+
+See [`assets/email-deliverability-2025.md`](assets/email-deliverability-2025.md) for full enforcement details.
+
 **Authentication (Required)**
 - SPF (RFC 7208): https://datatracker.ietf.org/doc/html/rfc7208
 - DKIM (RFC 6376): https://datatracker.ietf.org/doc/html/rfc6376
@@ -257,7 +316,7 @@ Traffic ok, CVR low?
 - One-click unsubscribe via List-Unsubscribe-Post (RFC 8058): https://datatracker.ietf.org/doc/html/rfc8058
 
 **Compliance Basics**
-- Follow CAN-SPAM requirements for commercial email (https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business).
+- Follow CAN-SPAM requirements for commercial email (https://www.ftc.gov/business-guidance/references/can-spam-act-compliance-guide-business).
 - For GDPR/CASL and other regional rules, align with counsel and your privacy policy (do not improvise).
 
 **List Hygiene (Execution)**
@@ -279,10 +338,10 @@ Traffic ok, CVR low?
 
 ## Navigation: Sources & Assets
 
-- Operational patterns: [`resources/operational-patterns.md`](resources/operational-patterns.md)
-- **Core templates**: email (`templates/email-sequence.md`), LinkedIn (`templates/linkedin-sequence.md`), cold call (`templates/cold-call-script.md`), landing audit (`templates/landing-audit-checklist.md`), lead scoring (`templates/lead-scoring-model.md`), channel plan (`templates/channel-plan-30-60-90.md`), speed-to-lead (`templates/speed-to-lead-playbook.md`), experiment log (`templates/experiment-matrix.md`), lead funnel definition ([templates/lead-funnel-definition.md](templates/lead-funnel-definition.md))
-- **Additional templates**: email deliverability (`templates/email-deliverability-2025.md`), LinkedIn outreach safety (`templates/linkedin-automation-safety-2025.md`)
-- **Optional: AI / Automation**: AI personalization (`templates/ai-personalization-playbook.md`)
+- Operational patterns: [`references/operational-patterns.md`](references/operational-patterns.md)
+- **Core templates**: email (`assets/email-sequence.md`), LinkedIn (`assets/linkedin-sequence.md`), cold call (`assets/cold-call-script.md`), landing audit (`assets/landing-audit-checklist.md`), lead scoring (`assets/lead-scoring-model.md`), channel plan (`assets/channel-plan-30-60-90.md`), speed-to-lead (`assets/speed-to-lead-playbook.md`), experiment log (`assets/experiment-matrix.md`), lead funnel definition ([assets/lead-funnel-definition.md](assets/lead-funnel-definition.md))
+- **Additional templates**: email deliverability (`assets/email-deliverability-2025.md`), LinkedIn outreach safety (`assets/linkedin-automation-safety-2025.md`)
+- **Optional: AI / Automation**: AI personalization (`assets/ai-personalization-playbook.md`)
 - Web sources: [`data/sources.json`](data/sources.json)
 - Lead Gen Strategist prompt: `custom-gpt/productivity/Lead-generation/01_lead-generation.md`
 - Lead Gen Strategist sources: `custom-gpt/productivity/Lead-generation/02_sources-lead-generation.json`
@@ -357,7 +416,7 @@ Traffic ok, CVR low?
 | **Chatbot qualification** | Drift, Intercom, Qualified | 24/7 qualification |
 | **Sequence automation** | Outreach, SalesLoft, Apollo | Scale outbound |
 
-See [`templates/ai-personalization-playbook.md`](templates/ai-personalization-playbook.md) for detailed implementation guidance.
+See [`assets/ai-personalization-playbook.md`](assets/ai-personalization-playbook.md) for detailed implementation guidance.
 
 ---
 

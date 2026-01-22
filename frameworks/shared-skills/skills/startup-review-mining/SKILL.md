@@ -40,14 +40,14 @@ Invoke when users ask for:
 
 | Mining Task | Source Category | Template | Output |
 |-------------|-----------------|----------|--------|
-| **Full Review Mining** | All sources | [review-mining-report.md](templates/review-mining-report.md) | Comprehensive pain analysis |
-| **B2B Software** | G2, Capterra, TrustRadius | [b2b-review-extraction.md](templates/b2b-review-extraction.md) | Enterprise pain points |
-| **B2C Apps** | App Store, Play Store | [b2c-review-extraction.md](templates/b2c-review-extraction.md) | Consumer pain points |
-| **Tech Communities** | Reddit, HN, ProductHunt | [community-sentiment.md](templates/community-sentiment.md) | Technical sentiment |
-| **Competitor Weakness** | Cross-platform | [competitor-weakness-matrix.md](templates/competitor-weakness-matrix.md) | Competitive gaps |
-| **Switching Triggers** | All sources | [switching-trigger-analysis.md](templates/switching-trigger-analysis.md) | Why customers leave |
-| **Feature Requests** | All sources | [feature-request-aggregator.md](templates/feature-request-aggregator.md) | Unmet needs |
-| **Opportunity Mapping** | All sources | [opportunity-from-reviews.md](templates/opportunity-from-reviews.md) | Actionable opportunities |
+| **Full Review Mining** | All sources | [review-mining-report.md](assets/review-mining-report.md) | Comprehensive pain analysis |
+| **B2B Software** | G2, Capterra, TrustRadius | [b2b-review-extraction.md](assets/b2b-review-extraction.md) | Enterprise pain points |
+| **B2C Apps** | App Store, Play Store | [b2c-review-extraction.md](assets/b2c-review-extraction.md) | Consumer pain points |
+| **Tech Communities** | Reddit, HN, ProductHunt | [community-sentiment.md](assets/community-sentiment.md) | Technical sentiment |
+| **Competitor Weakness** | Cross-platform | [competitor-weakness-matrix.md](assets/competitor-weakness-matrix.md) | Competitive gaps |
+| **Switching Triggers** | All sources | [switching-trigger-analysis.md](assets/switching-trigger-analysis.md) | Why customers leave |
+| **Feature Requests** | All sources | [feature-request-aggregator.md](assets/feature-request-aggregator.md) | Unmet needs |
+| **Opportunity Mapping** | All sources | [opportunity-from-reviews.md](assets/opportunity-from-reviews.md) | Actionable opportunities |
 
 ---
 
@@ -63,10 +63,26 @@ Invoke when users ask for:
 ### Fake Review and Manipulation Defenses
 
 - Look for repeated phrasing, unnatural timing bursts, and identical complaints/praise across accounts.
-- Prefer “verified” signals when available; still spot-check.
+- Prefer "verified" signals when available; still spot-check.
 - Treat suspicious clusters as weak evidence until corroborated elsewhere.
 
-Compliance note: if you use reviews for marketing claims or comparisons, be aware of the FTC’s consumer reviews/testimonials rule (16 CFR Part 465). Source: https://www.ftc.gov/legal-library/browse/federal-register-notices/16-cfr-part-465-trade-regulation-rule-use-consumer-reviews-testimonials-final-rule
+**Advanced Detection (2025-2026)**:
+
+| Method | Accuracy | What It Detects |
+|--------|----------|-----------------|
+| **DeBERTa-based ML** | 98% | AI-generated reviews, opinion spam |
+| **Behavioral Analysis** | 90%+ | Reviewer patterns, timing anomalies |
+| **Multimodal Fusion** | 97% F1 | Text + reviewer profile + timing |
+
+Key detection signals:
+- **Timing bursts**: 10+ reviews in 24 hours = suspicious
+- **Profile sparsity**: Single-review accounts posting detailed praise
+- **Cross-platform patterns**: Identical text across G2/Capterra/TrustRadius
+- **GenAI markers**: Overly formal language, generic praise without specifics
+
+**GenAI Challenge (2025)**: ChatGPT-generated reviews are harder to detect because they mimic natural language patterns. Require multimodal detection (text + behavioral signals) for 90%+ accuracy.
+
+Compliance note: if you use reviews for marketing claims or comparisons, be aware of the FTC's consumer reviews/testimonials rule (16 CFR Part 465). Source: https://www.ftc.gov/legal-library/browse/federal-register-notices/16-cfr-part-465-trade-regulation-rule-use-consumer-reviews-testimonials-final-rule
 
 ## The 7 Pain Dimensions
 
@@ -90,27 +106,27 @@ Reviews reveal pain across **7 dimensions** - not just UI/UX:
 Review Mining Need: [What do you want to learn?]
     |
     +-- Finding pain points in a market?
-    |   +-- B2B software? → G2 + Capterra + TrustRadius (resources/source-by-source-extraction.md#b2b)
-    |   +-- Consumer app? → App Store + Play Store (resources/source-by-source-extraction.md#b2c)
-    |   +-- Developer tool? → GitHub Issues + Stack Overflow + HN (resources/source-by-source-extraction.md#tech)
+    |   +-- B2B software? → G2 + Capterra + TrustRadius (references/source-by-source-extraction.md#b2b)
+    |   +-- Consumer app? → App Store + Play Store (references/source-by-source-extraction.md#b2c)
+    |   +-- Developer tool? → GitHub Issues + Stack Overflow + HN (references/source-by-source-extraction.md#tech)
     |
     +-- Analyzing specific competitors?
-    |   +-- Direct comparison? → Competitor Weakness Matrix (templates/competitor-weakness-matrix.md)
-    |   +-- Why customers switch? → Switching Trigger Analysis (templates/switching-trigger-analysis.md)
-    |   +-- Feature gaps? → Feature Request Aggregator (templates/feature-request-aggregator.md)
+    |   +-- Direct comparison? → Competitor Weakness Matrix (assets/competitor-weakness-matrix.md)
+    |   +-- Why customers switch? → Switching Trigger Analysis (assets/switching-trigger-analysis.md)
+    |   +-- Feature gaps? → Feature Request Aggregator (assets/feature-request-aggregator.md)
     |
     +-- Finding opportunities?
-    |   +-- Quick wins (<2 weeks)? → Opportunity Template (templates/opportunity-from-reviews.md#quick-wins)
-    |   +-- Medium bets (2-8 weeks)? → Opportunity Template (templates/opportunity-from-reviews.md#medium)
-    |   +-- Big differentiation? → Opportunity Template (templates/opportunity-from-reviews.md#big-bets)
+    |   +-- Quick wins (<2 weeks)? → Opportunity Template (assets/opportunity-from-reviews.md#quick-wins)
+    |   +-- Medium bets (2-8 weeks)? → Opportunity Template (assets/opportunity-from-reviews.md#medium)
+    |   +-- Big differentiation? → Opportunity Template (assets/opportunity-from-reviews.md#big-bets)
     |
     +-- Understanding sentiment?
-    |   +-- Real-time complaints? → Twitter/X monitoring (resources/source-by-source-extraction.md#social)
-    |   +-- Community opinion? → Reddit + HN (resources/source-by-source-extraction.md#community)
-    |   +-- Launch feedback? → ProductHunt (resources/source-by-source-extraction.md#producthunt)
+    |   +-- Real-time complaints? → Twitter/X monitoring (references/source-by-source-extraction.md#social)
+    |   +-- Community opinion? → Reddit + HN (references/source-by-source-extraction.md#community)
+    |   +-- Launch feedback? → ProductHunt (references/source-by-source-extraction.md#producthunt)
     |
     +-- Comprehensive analysis?
-        +-- Full market research? → Review Mining Report (templates/review-mining-report.md)
+        +-- Full market research? → Review Mining Report (assets/review-mining-report.md)
 ```
 
 ---
@@ -154,17 +170,17 @@ Review Mining Need: [What do you want to learn?]
 ## Navigation: Resources
 
 ### Extraction Methodology
-- [resources/source-by-source-extraction.md](resources/source-by-source-extraction.md) - Platform-specific extraction guides for each source with search queries, filters, and export methods
+- [references/source-by-source-extraction.md](references/source-by-source-extraction.md) - Platform-specific extraction guides for each source with search queries, filters, and export methods
 
 ### Analysis Frameworks
-- [resources/pain-categorization-framework.md](resources/pain-categorization-framework.md) - 7-dimension pain taxonomy with severity scoring and prioritization
-- [resources/sentiment-analysis-patterns.md](resources/sentiment-analysis-patterns.md) - Identifying pain vs praise, detecting intensity, and spotting trends
+- [references/pain-categorization-framework.md](references/pain-categorization-framework.md) - 7-dimension pain taxonomy with severity scoring and prioritization
+- [references/sentiment-analysis-patterns.md](references/sentiment-analysis-patterns.md) - Identifying pain vs praise, detecting intensity, and spotting trends
 
 ### Competitive Intelligence
-- [resources/competitor-review-comparison.md](resources/competitor-review-comparison.md) - Cross-competitor analysis methodology with switching trigger identification
+- [references/competitor-review-comparison.md](references/competitor-review-comparison.md) - Cross-competitor analysis methodology with switching trigger identification
 
 ### Opportunity Mapping
-- [resources/review-to-opportunity-mapping.md](resources/review-to-opportunity-mapping.md) - Converting pain points to actionable product opportunities with ROI estimation
+- [references/review-to-opportunity-mapping.md](references/review-to-opportunity-mapping.md) - Converting pain points to actionable product opportunities with ROI estimation
 
 ### External References
 - [data/sources.json](data/sources.json) - Review platform URLs, API endpoints, and tool recommendations
@@ -174,23 +190,63 @@ Review Mining Need: [What do you want to learn?]
 ## Navigation: Templates
 
 ### Full Reports
-- [templates/review-mining-report.md](templates/review-mining-report.md) - Comprehensive mining report with all dimensions
+- [assets/review-mining-report.md](assets/review-mining-report.md) - Comprehensive mining report with all dimensions
 
 ### Source-Specific Extraction
-- [templates/b2b-review-extraction.md](templates/b2b-review-extraction.md) - B2B software review extraction (G2, Capterra, TrustRadius)
-- [templates/b2c-review-extraction.md](templates/b2c-review-extraction.md) - Consumer app review extraction (App Store, Play Store)
-- [templates/community-sentiment.md](templates/community-sentiment.md) - Community sentiment analysis (Reddit, HN, ProductHunt)
+- [assets/b2b-review-extraction.md](assets/b2b-review-extraction.md) - B2B software review extraction (G2, Capterra, TrustRadius)
+- [assets/b2c-review-extraction.md](assets/b2c-review-extraction.md) - Consumer app review extraction (App Store, Play Store)
+- [assets/community-sentiment.md](assets/community-sentiment.md) - Community sentiment analysis (Reddit, HN, ProductHunt)
 
 ### Competitive Analysis
-- [templates/competitor-weakness-matrix.md](templates/competitor-weakness-matrix.md) - Cross-competitor weakness comparison
-- [templates/switching-trigger-analysis.md](templates/switching-trigger-analysis.md) - Why customers leave competitors
-- [templates/feature-request-aggregator.md](templates/feature-request-aggregator.md) - Unmet needs collection
+- [assets/competitor-weakness-matrix.md](assets/competitor-weakness-matrix.md) - Cross-competitor weakness comparison
+- [assets/switching-trigger-analysis.md](assets/switching-trigger-analysis.md) - Why customers leave competitors
+- [assets/feature-request-aggregator.md](assets/feature-request-aggregator.md) - Unmet needs collection
 
 ### Pain Analysis
-- [templates/pain-point-extraction-worksheet.md](templates/pain-point-extraction-worksheet.md) - Structured worksheet for 7-dimension pain extraction
+- [assets/pain-point-extraction-worksheet.md](assets/pain-point-extraction-worksheet.md) - Structured worksheet for 7-dimension pain extraction
 
 ### Opportunity Output
-- [templates/opportunity-from-reviews.md](templates/opportunity-from-reviews.md) - Pain → Opportunity conversion
+- [assets/opportunity-from-reviews.md](assets/opportunity-from-reviews.md) - Pain → Opportunity conversion
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask about customer pain points or reviews, you MUST use WebSearch to check current information before answering.
+
+### Trigger Conditions
+
+- "What are users saying about [product/competitor]?"
+- "What are the pain points in [market]?"
+- "Recent reviews for [product]?"
+- "What are customers complaining about?"
+- "What features are users requesting?"
+- "Sentiment analysis for [product/market]?"
+
+### Required Searches
+
+1. Search: `"[product] reviews 2026"`
+2. Search: `"[product] complaints Reddit 2026"`
+3. Search: `"[market] user pain points 2026"`
+4. Search: `"[competitor] G2 reviews"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current sentiment**: What users are saying NOW
+- **Trending complaints**: Most common recent issues
+- **Feature requests**: What users are asking for
+- **Competitive gaps**: Problems competitors aren't solving
+
+### Example Topics (verify with fresh search)
+
+- G2, Capterra, TrustRadius reviews
+- Reddit discussions and complaints
+- App Store and Play Store reviews
+- Twitter/X sentiment
+- Product Hunt feedback
+- HackerNews discussions
 
 ---
 
@@ -263,10 +319,10 @@ USER ASKS                              SKILL FLOW
 
 ## Turning Insights Into Bets
 
-- Convert pains → opportunities using [templates/opportunity-from-reviews.md](templates/opportunity-from-reviews.md).
+- Convert pains → opportunities using [assets/opportunity-from-reviews.md](assets/opportunity-from-reviews.md).
 - Turn opportunities into decisions using:
-  - [../product-management/templates/strategy/opportunity-assessment.md](../product-management/templates/strategy/opportunity-assessment.md)
-  - [../startup-idea-validation/templates/validation-experiment-planner.md](../startup-idea-validation/templates/validation-experiment-planner.md)
+  - [../product-management/assets/strategy/opportunity-assessment.md](../product-management/assets/strategy/opportunity-assessment.md)
+  - [../startup-idea-validation/assets/validation-experiment-planner.md](../startup-idea-validation/assets/validation-experiment-planner.md)
 
 ## Do / Avoid (Dec 2025)
 

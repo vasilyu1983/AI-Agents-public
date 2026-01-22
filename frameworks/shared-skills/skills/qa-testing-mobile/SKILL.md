@@ -58,17 +58,18 @@ Use this skill when you need to:
 
 ## Templates
 
-- `templates/device-matrix.md` for OS and device coverage.
-- `templates/mobile-test-plan.md` for test scope and automation.
-- `templates/release-readiness-checklist.md` for release gates.
+- `assets/device-matrix.md` for OS and device coverage.
+- `assets/mobile-test-plan.md` for test scope and automation.
+- `assets/release-readiness-checklist.md` for release gates.
 
 ## Resources
 
-- `resources/framework-comparison.md` for choosing between XCUITest, Espresso, Appium, and Detox.
-- `resources/flake-management.md` for flake control guidance.
+- `references/framework-comparison.md` for choosing between XCUITest, Espresso, Appium, and Detox.
+- `references/flake-management.md` for flake control guidance.
 
 ## Related Skills
 
-- Use [qa-testing-ios](../qa-testing-ios/SKILL.md) for iOS specific depth.
+- Use [qa-testing-ios](../qa-testing-ios/SKILL.md) for iOS specific depth (XCTest, Swift Testing, simctl).
+- Use [qa-testing-android](../qa-testing-android/SKILL.md) for Android specific depth (Espresso, Compose Testing, UIAutomator).
 - Use [qa-testing-playwright](../qa-testing-playwright/SKILL.md) for web and webview testing.
 - Use [software-mobile](../software-mobile/SKILL.md) for mobile architecture guidance.

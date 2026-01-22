@@ -31,7 +31,7 @@ It is execution-focused:
 - **Automated monitoring** with real-time drift detection
 - **Automated retraining** pipelines (monitor → detect → trigger → validate → deploy)
 - Incident handling with validated rollback and postmortems
-- Links to copy-paste templates in `templates/`
+- Links to copy-paste templates in `assets/`
 
 ---
 
@@ -42,9 +42,11 @@ It is execution-focused:
 | Data Ingestion | dlt (data load tool) | `dlt pipeline run`, `dlt init` | Loading from APIs, databases to warehouses |
 | Batch Deployment | Airflow, Dagster, Prefect | `airflow dags trigger`, `dagster job launch` | Scheduled predictions on large datasets |
 | API Deployment | FastAPI, Flask, TorchServe | `uvicorn app:app`, `torchserve --start` | Real-time inference (<500ms latency) |
-| Model Registry | MLflow, W&B | `mlflow.register_model()`, `wandb.log_model()` | Versioning and promoting models |
-| Drift Detection | Statistical tests + monitors | PSI/KS, feature drift, prediction drift | Detect data/process changes and trigger review |
+| LLM Serving | vLLM, TGI, BentoML | `vllm serve model`, `bentoml serve` | High-throughput LLM inference |
+| Model Registry | MLflow, W&B, ZenML | `mlflow.register_model()`, `zenml model register` | Versioning and promoting models |
+| Drift Detection | Statistical tests + monitors | PSI/KS, embedding drift, prediction drift | Detect data/process changes and trigger review |
 | Monitoring | Prometheus, Grafana | `prometheus.yml`, Grafana dashboards | Metrics, alerts, SLO tracking |
+| AgentOps | AgentOps, Langfuse, LangSmith | `agentops.init()`, trace visualization | AI agent observability, session replay |
 | Incident Response | Runbooks, PagerDuty | Documented playbooks, alert routing | Handling failures and degradation |
 
 ---
@@ -123,12 +125,12 @@ User needs to deploy: [ML System]
 
 ## Core Patterns Overview
 
-This skill provides 13 production-ready patterns organized into comprehensive guides:
+This skill provides 15 production-ready patterns organized into comprehensive guides:
 
 ### Data & Infrastructure Patterns
 
 **Pattern 0: Data Contracts, Ingestion & Lineage**
-→ See [Data Ingestion Patterns](resources/data-ingestion-patterns.md)
+→ See [Data Ingestion Patterns](references/data-ingestion-patterns.md)
 
 - Data contracts with SLAs and versioning
 - Ingestion modes (CDC, batch, streaming)
@@ -136,21 +138,21 @@ This skill provides 13 production-ready patterns organized into comprehensive gu
 - Replay and backfill procedures
 
 **Pattern 1: Choose Deployment Mode**
-→ See [Deployment Patterns](resources/deployment-patterns.md)
+→ See [Deployment Patterns](references/deployment-patterns.md)
 
 - Decision table (batch, online, hybrid, streaming)
 - When to use each mode
 - Deployment mode selection checklist
 
 **Pattern 2: Standard Deployment Lifecycle**
-→ See [Deployment Lifecycle](resources/deployment-lifecycle.md)
+→ See [Deployment Lifecycle](references/deployment-lifecycle.md)
 
 - Pre-deploy, deploy, observe, operate, evolve phases
 - Environment promotion (dev → staging → prod)
 - Gradual rollout strategies (canary, blue-green)
 
 **Pattern 3: Packaging & Model Registry**
-→ See [Model Registry Patterns](resources/model-registry-patterns.md)
+→ See [Model Registry Patterns](references/model-registry-patterns.md)
 
 - Model registry structure and metadata
 - Packaging strategies (Docker, ONNX, MLflow)
@@ -160,21 +162,21 @@ This skill provides 13 production-ready patterns organized into comprehensive gu
 ### Serving Patterns
 
 **Pattern 4: Batch Scoring Pipeline**
-→ See [Deployment Patterns](resources/deployment-patterns.md)
+→ See [Deployment Patterns](references/deployment-patterns.md)
 
 - Orchestration with Airflow/Dagster
 - Idempotent scoring jobs
 - Validation and backfill procedures
 
 **Pattern 5: Real-Time API Scoring**
-→ See [API Design Patterns](resources/api-design-patterns.md)
+→ See [API Design Patterns](references/api-design-patterns.md)
 
 - Service design (HTTP/JSON, gRPC)
 - Input/output schemas
 - Rate limiting, timeouts, circuit breakers
 
 **Pattern 6: Hybrid & Feature Store Integration**
-→ See [Feature Store Patterns](resources/feature-store-patterns.md)
+→ See [Feature Store Patterns](references/feature-store-patterns.md)
 
 - Batch vs online features
 - Feature store architecture
@@ -184,27 +186,27 @@ This skill provides 13 production-ready patterns organized into comprehensive gu
 ### Operations Patterns
 
 **Pattern 7: Monitoring & Alerting**
-→ See [Monitoring Best Practices](resources/monitoring-best-practices.md)
+→ See [Monitoring Best Practices](references/monitoring-best-practices.md)
 
 - Data, performance, and technical metrics
 - SLO definition and tracking
 - Dashboard design and alerting strategies
 
 **Pattern 8: Drift Detection & Automated Retraining**
-→ See [Drift Detection Guide](resources/drift-detection-guide.md)
+→ See [Drift Detection Guide](references/drift-detection-guide.md)
 
 - Automated retraining triggers
 - Event-driven retraining pipelines
 
 **Pattern 9: Incidents & Runbooks**
-→ See [Incident Response Playbooks](resources/incident-response-playbooks.md)
+→ See [Incident Response Playbooks](references/incident-response-playbooks.md)
 
 - Common failure modes
 - Detection, diagnosis, resolution
 - Post-mortem procedures
 
 **Pattern 10: LLM / RAG in Production**
-→ See [LLM & RAG Production Patterns](resources/llm-rag-production-patterns.md)
+→ See [LLM & RAG Production Patterns](references/llm-rag-production-patterns.md)
 
 - Prompt and configuration management
 - Safety and compliance (PII, jailbreaks)
@@ -212,7 +214,7 @@ This skill provides 13 production-ready patterns organized into comprehensive gu
 - Monitoring and fallbacks
 
 **Pattern 11: Cross-Region, Residency & Rollback**
-→ See [Multi-Region Patterns](resources/multi-region-patterns.md)
+→ See [Multi-Region Patterns](references/multi-region-patterns.md)
 
 - Multi-region deployment architectures
 - Data residency and tenant isolation
@@ -220,13 +222,31 @@ This skill provides 13 production-ready patterns organized into comprehensive gu
 - Regional rollback procedures
 
 **Pattern 12: Online Evaluation & Feedback Loops**
-→ See [Online Evaluation Patterns](resources/online-evaluation-patterns.md)
+→ See [Online Evaluation Patterns](references/online-evaluation-patterns.md)
 
 - Feedback signal collection (implicit, explicit)
 - Shadow and canary deployments
 - A/B testing with statistical significance
 - Human-in-the-loop labeling
 - Automated retraining cadence
+
+**Pattern 13: AgentOps (AI Agent Operations)**
+→ See [AgentOps Patterns](references/agentops-patterns.md)
+
+- Session tracing and replay for AI agents
+- Cost and latency tracking across agent runs
+- Multi-agent visualization and debugging
+- Tool invocation monitoring
+- Integration with CrewAI, LangGraph, OpenAI Agents SDK
+
+**Pattern 14: Edge MLOps & TinyML**
+→ See [Edge MLOps Patterns](references/edge-mlops-patterns.md)
+
+- Device-aware CI/CD pipelines
+- OTA model updates with rollback
+- Federated learning operations
+- Edge drift detection
+- Intermittent connectivity handling
 
 ---
 
@@ -236,27 +256,29 @@ For comprehensive operational guides, see:
 
 **Core Infrastructure:**
 
-- **[Data Ingestion Patterns](resources/data-ingestion-patterns.md)** - Data contracts, CDC, batch/streaming ingestion, lineage, schema evolution
-- **[Deployment Lifecycle](resources/deployment-lifecycle.md)** - Pre-deploy validation, environment promotion, gradual rollout, rollback
-- **[Model Registry Patterns](resources/model-registry-patterns.md)** - Versioning, packaging, promotion workflows, governance
-- **[Feature Store Patterns](resources/feature-store-patterns.md)** - Batch/online features, hybrid architectures, consistency, latency optimization
+- **[Data Ingestion Patterns](references/data-ingestion-patterns.md)** - Data contracts, CDC, batch/streaming ingestion, lineage, schema evolution
+- **[Deployment Lifecycle](references/deployment-lifecycle.md)** - Pre-deploy validation, environment promotion, gradual rollout, rollback
+- **[Model Registry Patterns](references/model-registry-patterns.md)** - Versioning, packaging, promotion workflows, governance
+- **[Feature Store Patterns](references/feature-store-patterns.md)** - Batch/online features, hybrid architectures, consistency, latency optimization
 
 **Serving & APIs:**
 
-- **[Deployment Patterns](resources/deployment-patterns.md)** - Batch, online, hybrid, streaming deployment strategies and architectures
-- **[API Design Patterns](resources/api-design-patterns.md)** - ML/LLM/RAG API patterns, input/output schemas, reliability patterns, versioning
+- **[Deployment Patterns](references/deployment-patterns.md)** - Batch, online, hybrid, streaming deployment strategies and architectures
+- **[API Design Patterns](references/api-design-patterns.md)** - ML/LLM/RAG API patterns, input/output schemas, reliability patterns, versioning
 
 **Operations & Reliability:**
 
-- **[Monitoring Best Practices](resources/monitoring-best-practices.md)** - Metrics collection, alerting strategies, SLO definition, dashboard design
-- **[Drift Detection Guide](resources/drift-detection-guide.md)** - Statistical tests, automated detection, retraining triggers, recovery strategies
-- **[Incident Response Playbooks](resources/incident-response-playbooks.md)** - Runbooks for common failure modes, diagnostics, resolution steps
+- **[Monitoring Best Practices](references/monitoring-best-practices.md)** - Metrics collection, alerting strategies, SLO definition, dashboard design
+- **[Drift Detection Guide](references/drift-detection-guide.md)** - Statistical tests, automated detection, retraining triggers, recovery strategies
+- **[Incident Response Playbooks](references/incident-response-playbooks.md)** - Runbooks for common failure modes, diagnostics, resolution steps
 
 **Advanced Patterns:**
 
-- **[LLM & RAG Production Patterns](resources/llm-rag-production-patterns.md)** - Prompt management, safety, cost optimization, caching, monitoring
-- **[Multi-Region Patterns](resources/multi-region-patterns.md)** - Multi-region deployment, data residency, disaster recovery, rollback
-- **[Online Evaluation Patterns](resources/online-evaluation-patterns.md)** - A/B testing, shadow deployments, feedback loops, automated retraining
+- **[LLM & RAG Production Patterns](references/llm-rag-production-patterns.md)** - Prompt management, safety, cost optimization, caching, monitoring
+- **[Multi-Region Patterns](references/multi-region-patterns.md)** - Multi-region deployment, data residency, disaster recovery, rollback
+- **[Online Evaluation Patterns](references/online-evaluation-patterns.md)** - A/B testing, shadow deployments, feedback loops, automated retraining
+- **[AgentOps Patterns](references/agentops-patterns.md)** - AI agent observability, session replay, cost tracking, multi-agent debugging
+- **[Edge MLOps Patterns](references/edge-mlops-patterns.md)** - TinyML, federated learning, OTA updates, device-aware CI/CD
 
 ---
 
@@ -268,11 +290,11 @@ Use these as copy-paste starting points for production artifacts:
 
 For loading data into warehouses and pipelines:
 
-- **[dlt basic pipeline setup](../data-lake-platform/templates/ingestion/dlt/template-dlt-pipeline.md)** - Install, configure, run basic extraction and loading
-- **[dlt REST API sources](../data-lake-platform/templates/ingestion/dlt/template-dlt-rest-api.md)** - Extract from REST APIs with pagination, authentication, rate limiting
-- **[dlt database sources](../data-lake-platform/templates/ingestion/dlt/template-dlt-database-source.md)** - Replicate from PostgreSQL, MySQL, MongoDB, SQL Server
-- **[dlt incremental loading](../data-lake-platform/templates/ingestion/dlt/template-dlt-incremental.md)** - Timestamp-based, ID-based, merge/upsert patterns, lookback windows
-- **[dlt warehouse loading](../data-lake-platform/templates/ingestion/dlt/template-dlt-warehouse-loading.md)** - Load to Snowflake, BigQuery, Redshift, Postgres, DuckDB
+- **[dlt basic pipeline setup](../data-lake-platform/assets/ingestion/dlt/template-dlt-pipeline.md)** - Install, configure, run basic extraction and loading
+- **[dlt REST API sources](../data-lake-platform/assets/ingestion/dlt/template-dlt-rest-api.md)** - Extract from REST APIs with pagination, authentication, rate limiting
+- **[dlt database sources](../data-lake-platform/assets/ingestion/dlt/template-dlt-database-source.md)** - Replicate from PostgreSQL, MySQL, MongoDB, SQL Server
+- **[dlt incremental loading](../data-lake-platform/assets/ingestion/dlt/template-dlt-incremental.md)** - Timestamp-based, ID-based, merge/upsert patterns, lookback windows
+- **[dlt warehouse loading](../data-lake-platform/assets/ingestion/dlt/template-dlt-warehouse-loading.md)** - Load to Snowflake, BigQuery, Redshift, Postgres, DuckDB
 
 **Use dlt when:**
 
@@ -287,46 +309,48 @@ For loading data into warehouses and pipelines:
 
 ### Deployment & Packaging
 
-- **[Deployment & MLOps template](templates/deployment/template-deployment-mlops.md)** - Complete MLOps lifecycle, model registry, promotion workflows
-- **[Deployment readiness checklist](templates/deployment/deployment-readiness-checklist.md)** - Go/No-Go gate, monitoring, and rollback plan
-- **[API service template](templates/deployment/template-api-service.md)** - Real-time REST/gRPC API with FastAPI, input validation, rate limiting
-- **[Batch scoring pipeline template](templates/deployment/template-batch-pipeline.md)** - Orchestrated batch inference with Airflow/Dagster, validation, backfill
+- **[Deployment & MLOps template](assets/deployment/template-deployment-mlops.md)** - Complete MLOps lifecycle, model registry, promotion workflows
+- **[Deployment readiness checklist](assets/deployment/deployment-readiness-checklist.md)** - Go/No-Go gate, monitoring, and rollback plan
+- **[API service template](assets/deployment/template-api-service.md)** - Real-time REST/gRPC API with FastAPI, input validation, rate limiting
+- **[Batch scoring pipeline template](assets/deployment/template-batch-pipeline.md)** - Orchestrated batch inference with Airflow/Dagster, validation, backfill
 
 ### Monitoring & Operations
 
-- **[Monitoring & alerting template](templates/monitoring/template-monitoring-plan.md)** - Data/performance/technical metrics, dashboards, SLO definition
-- **[Drift detection & retraining template](templates/monitoring/template-drift-retraining.md)** - Automated drift detection, retraining triggers, promotion pipelines
-- **[Incident runbook template](templates/ops/template-incident-runbook.md)** - Failure mode playbooks, diagnosis steps, resolution procedures
+- **[Monitoring & alerting template](assets/monitoring/template-monitoring-plan.md)** - Data/performance/technical metrics, dashboards, SLO definition
+- **[Drift detection & retraining template](assets/monitoring/template-drift-retraining.md)** - Automated drift detection, retraining triggers, promotion pipelines
+- **[Incident runbook template](assets/ops/template-incident-runbook.md)** - Failure mode playbooks, diagnosis steps, resolution procedures
 
 ## Navigation
 
 **Resources**
-- [resources/drift-detection-guide.md](resources/drift-detection-guide.md)
-- [resources/model-registry-patterns.md](resources/model-registry-patterns.md)
-- [resources/online-evaluation-patterns.md](resources/online-evaluation-patterns.md)
-- [resources/monitoring-best-practices.md](resources/monitoring-best-practices.md)
-- [resources/llm-rag-production-patterns.md](resources/llm-rag-production-patterns.md)
-- [resources/api-design-patterns.md](resources/api-design-patterns.md)
-- [resources/incident-response-playbooks.md](resources/incident-response-playbooks.md)
-- [resources/deployment-patterns.md](resources/deployment-patterns.md)
-- [resources/data-ingestion-patterns.md](resources/data-ingestion-patterns.md)
-- [resources/deployment-lifecycle.md](resources/deployment-lifecycle.md)
-- [resources/feature-store-patterns.md](resources/feature-store-patterns.md)
-- [resources/multi-region-patterns.md](resources/multi-region-patterns.md)
+- [references/drift-detection-guide.md](references/drift-detection-guide.md)
+- [references/model-registry-patterns.md](references/model-registry-patterns.md)
+- [references/online-evaluation-patterns.md](references/online-evaluation-patterns.md)
+- [references/monitoring-best-practices.md](references/monitoring-best-practices.md)
+- [references/llm-rag-production-patterns.md](references/llm-rag-production-patterns.md)
+- [references/api-design-patterns.md](references/api-design-patterns.md)
+- [references/incident-response-playbooks.md](references/incident-response-playbooks.md)
+- [references/deployment-patterns.md](references/deployment-patterns.md)
+- [references/data-ingestion-patterns.md](references/data-ingestion-patterns.md)
+- [references/deployment-lifecycle.md](references/deployment-lifecycle.md)
+- [references/feature-store-patterns.md](references/feature-store-patterns.md)
+- [references/multi-region-patterns.md](references/multi-region-patterns.md)
+- [references/agentops-patterns.md](references/agentops-patterns.md)
+- [references/edge-mlops-patterns.md](references/edge-mlops-patterns.md)
 
 **Templates**
-- [template-dlt-pipeline.md](../data-lake-platform/templates/ingestion/dlt/template-dlt-pipeline.md)
-- [template-dlt-rest-api.md](../data-lake-platform/templates/ingestion/dlt/template-dlt-rest-api.md)
-- [template-dlt-database-source.md](../data-lake-platform/templates/ingestion/dlt/template-dlt-database-source.md)
-- [template-dlt-incremental.md](../data-lake-platform/templates/ingestion/dlt/template-dlt-incremental.md)
-- [template-dlt-warehouse-loading.md](../data-lake-platform/templates/ingestion/dlt/template-dlt-warehouse-loading.md)
-- [templates/deployment/template-deployment-mlops.md](templates/deployment/template-deployment-mlops.md)
-- [templates/deployment/deployment-readiness-checklist.md](templates/deployment/deployment-readiness-checklist.md)
-- [templates/deployment/template-api-service.md](templates/deployment/template-api-service.md)
-- [templates/deployment/template-batch-pipeline.md](templates/deployment/template-batch-pipeline.md)
-- [templates/ops/template-incident-runbook.md](templates/ops/template-incident-runbook.md)
-- [templates/monitoring/template-drift-retraining.md](templates/monitoring/template-drift-retraining.md)
-- [templates/monitoring/template-monitoring-plan.md](templates/monitoring/template-monitoring-plan.md)
+- [template-dlt-pipeline.md](../data-lake-platform/assets/ingestion/dlt/template-dlt-pipeline.md)
+- [template-dlt-rest-api.md](../data-lake-platform/assets/ingestion/dlt/template-dlt-rest-api.md)
+- [template-dlt-database-source.md](../data-lake-platform/assets/ingestion/dlt/template-dlt-database-source.md)
+- [template-dlt-incremental.md](../data-lake-platform/assets/ingestion/dlt/template-dlt-incremental.md)
+- [template-dlt-warehouse-loading.md](../data-lake-platform/assets/ingestion/dlt/template-dlt-warehouse-loading.md)
+- [assets/deployment/template-deployment-mlops.md](assets/deployment/template-deployment-mlops.md)
+- [assets/deployment/deployment-readiness-checklist.md](assets/deployment/deployment-readiness-checklist.md)
+- [assets/deployment/template-api-service.md](assets/deployment/template-api-service.md)
+- [assets/deployment/template-batch-pipeline.md](assets/deployment/template-batch-pipeline.md)
+- [assets/ops/template-incident-runbook.md](assets/ops/template-incident-runbook.md)
+- [assets/monitoring/template-drift-retraining.md](assets/monitoring/template-drift-retraining.md)
+- [assets/monitoring/template-monitoring-plan.md](assets/monitoring/template-monitoring-plan.md)
 
 **Data**
 - [data/sources.json](data/sources.json) — Curated external references
@@ -359,6 +383,51 @@ For comprehensive data lake/lakehouse patterns (beyond dlt ingestion), see **[da
 - **Orchestration:** Dagster, Airflow
 
 This skill focuses on **ML-specific deployment, monitoring, and security**. Use data-lake-platform for general-purpose data infrastructure.
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about MLOps, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best MLOps platform for [use case]?"
+- "What should I use for [deployment/monitoring/drift detection]?"
+- "What's the latest in MLOps?"
+- "Current best practices for [model registry/feature store/observability]?"
+- "Is [MLflow/Kubeflow/Vertex AI] still relevant in 2026?"
+- "[MLOps tool A] vs [MLOps tool B]?"
+- "Best way to deploy [LLM/ML model] to production?"
+- "What feature store should I use?"
+
+### Required Searches
+
+1. Search: `"MLOps best practices 2026"`
+2. Search: `"[specific tool/platform] vs alternatives 2026"`
+3. Search: `"MLOps trends January 2026"`
+4. Search: `"LLMOps new tools 2026"`
+5. Search: `"AgentOps AI agent observability 2026"`
+6. Search: `"Edge MLOps TinyML 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What MLOps tools/platforms are popular NOW
+- **Emerging trends**: New approaches gaining traction (LLMOps, GenAI ops)
+- **Deprecated/declining**: Tools or approaches losing relevance
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- Model registries (MLflow, W&B, Comet, Neptune)
+- Feature stores (Feast, Tecton, Databricks Feature Store)
+- Experiment tracking (W&B, MLflow, Comet, Neptune)
+- Model serving (KServe, Seldon, Ray Serve, BentoML)
+- Monitoring (Evidently, Arize, WhyLabs, Fiddler)
+- LLMOps tools (LangSmith, Braintrust, Humanloop, Portkey)
+- Orchestration (Airflow, Dagster, Prefect, Flyte)
 
 ---
 

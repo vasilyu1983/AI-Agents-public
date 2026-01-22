@@ -267,17 +267,17 @@ final class LoginUITests: XCTestCase {
         // Navigate to login
         app.buttons["Login"].tap()
 
-        // Enter credentials
-        let emailField = app.textFields["email"]
+        // Enter credentials (use accessibilityIdentifier, not labels)
+        let emailField = app.textFields["emailField"]
         emailField.tap()
         emailField.typeText("user@example.com")
 
-        let passwordField = app.secureTextFields["password"]
+        let passwordField = app.secureTextFields["passwordField"]
         passwordField.tap()
         passwordField.typeText("password123")
 
         // Submit
-        app.buttons["Submit"].tap()
+        app.buttons["submitButton"].tap()
 
         // Verify navigation to dashboard
         XCTAssertTrue(app.navigationBars["Dashboard"].waitForExistence(timeout: 5))
@@ -285,13 +285,43 @@ final class LoginUITests: XCTestCase {
 
     func testLoginValidation() {
         app.buttons["Login"].tap()
-        app.buttons["Submit"].tap()
+        app.buttons["submitButton"].tap()
 
         // Verify error message
-        XCTAssertTrue(app.staticTexts["Email is required"].exists)
+        XCTAssertTrue(app.staticTexts["errorLabel"].waitForExistence(timeout: 2))
     }
 }
 ```
+
+### Swift Testing (Xcode 16+)
+
+For new unit and integration tests, prefer Swift Testing over XCTest. See [references/swift-testing.md](references/swift-testing.md) for full guide.
+
+```swift
+import Testing
+
+@Test func userLoginSucceeds() async throws {
+    let auth = AuthService()
+    let result = try await auth.login(email: "user@example.com", password: "pass123")
+    #expect(result.isSuccess)
+    #expect(result.user?.email == "user@example.com")
+}
+
+// Parameterized test for multiple inputs
+@Test(arguments: [
+    ("user@example.com", true),
+    ("invalid", false),
+    ("", false)
+])
+func emailValidation(email: String, isValid: Bool) {
+    #expect(EmailValidator.isValid(email) == isValid)
+}
+```
+
+**When to use which:**
+
+- Swift Testing: Unit tests, integration tests (Xcode 16+)
+- XCTest/XCUITest: UI tests, performance tests (still required)
 
 ---
 
@@ -482,12 +512,13 @@ Avoid:
 ## Navigation
 
 **Resources**
-- [resources/simulator-commands.md](resources/simulator-commands.md) — Complete simctl reference
-- [resources/xctest-patterns.md](resources/xctest-patterns.md) — Testing patterns and fixtures
+- [references/swift-testing.md](references/swift-testing.md) — Swift Testing framework (Xcode 16+, recommended for new tests)
+- [references/simulator-commands.md](references/simulator-commands.md) — Complete simctl reference
+- [references/xctest-patterns.md](references/xctest-patterns.md) — XCTest/XCUITest patterns and fixtures
 - [data/sources.json](data/sources.json) — Apple documentation links
 
 **Templates**
-- [templates/template-ios-ui-test-stability-checklist.md](templates/template-ios-ui-test-stability-checklist.md) — iOS UI test stability checklist (isolation/determinism/device matrix)
+- [assets/template-ios-ui-test-stability-checklist.md](assets/template-ios-ui-test-stability-checklist.md) — iOS UI test stability checklist (isolation/determinism/device matrix)
 
 **Related Skills**
 - [../software-mobile/SKILL.md](../software-mobile/SKILL.md) — iOS/Swift development

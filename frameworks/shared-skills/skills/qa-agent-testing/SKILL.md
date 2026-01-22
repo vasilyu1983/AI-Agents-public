@@ -3,16 +3,18 @@ name: qa-agent-testing
 description: "QA harness for agentic systems: scenario suites, determinism controls, tool sandboxing, scoring rubrics, and regression protocols covering success, safety, latency, and cost."
 ---
 
-# QA Agent Testing (Dec 2025)
+# QA Agent Testing (Jan 2026)
 
 Systematic quality assurance framework for LLM agents and personas.
 
 ## Core QA (Default)
 
-### What “Agent Testing” Means
+### What "Agent Testing" Means
 
-- Validate a multi-step system that may use tools, memory, and external data.
-- Expect non-determinism; treat variance as a reliability signal, not an excuse.
+- Validate a multi-step system that may use tools, memory, and external data
+- Expect non-determinism; treat variance as a reliability signal, not an excuse
+- Grade outcomes, not paths — multiple valid execution traces can produce correct results
+- Use probabilistic thresholds, not binary pass/fail (see Scoring section)
 
 ### Determinism and Flake Control
 
@@ -20,13 +22,26 @@ Systematic quality assurance framework for LLM agents and personas.
 - Control sampling: fixed seeds/temperatures where supported; log model/config versions.
 - Record tool traces: tool name, args, outputs, latency, errors, and retries.
 
+### Two-Layer Evaluation (2026 Best Practice)
+
+Evaluate reasoning and action layers separately:
+
+| Layer         | What to Test                        | Key Metrics                                         |
+|---------------|-------------------------------------|-----------------------------------------------------|
+| **Reasoning** | Planning, decision-making, intent   | Intent resolution, task adhesion, context retention |
+| **Action**    | Tool calls, execution, side effects | Tool call accuracy, completion rate, error recovery |
+
 ### Evaluation Dimensions (Score What Matters)
 
-- Task success: correct outcome and constraints met.
-- Safety/policy: correct refusals and safe alternatives.
-- Reliability: stability across reruns and small prompt changes.
-- Latency and cost: budgets per task and per suite [Inference].
-- Debuggability: failures produce evidence (tool logs, traces, intermediate artifacts).
+| Dimension          | What to Measure                                  | Level    |
+|--------------------|--------------------------------------------------|----------|
+| Task success       | Correct outcome and constraints met              | Agent    |
+| Safety/policy      | Correct refusals and safe alternatives           | Agent    |
+| Reliability        | Stability across reruns and small prompt changes | Agent    |
+| Latency/cost       | Budgets per task and per suite                   | Business |
+| Debuggability      | Failures produce evidence (logs, traces)         | Agent    |
+| Factual grounding  | Hallucination rate, citation accuracy            | Model    |
+| Bias detection     | Fairness across demographic inputs               | Model    |
 
 ### CI Economics
 
@@ -56,15 +71,18 @@ Invoke when:
 
 ## Quick Reference
 
-| Task | Resource | Location |
-|------|----------|----------|
-| Test case design | 10-task patterns | `resources/test-case-design.md` |
-| Refusal scenarios | Edge case categories | `resources/refusal-patterns.md` |
-| Scoring methodology | 0-3 rubric | `resources/scoring-rubric.md` |
-| Regression protocol | Re-run process | `resources/regression-protocol.md` |
-| QA harness template | Copy-paste harness | `templates/qa-harness-template.md` |
-| Scoring sheet | Tracker format | `templates/scoring-sheet.md` |
-| Regression log | Version tracking | `templates/regression-log.md` |
+| Task                  | Resource              | Location                             |
+|-----------------------|-----------------------|--------------------------------------|
+| Test case design      | 10-task patterns      | `references/test-case-design.md`     |
+| Refusal scenarios     | Edge case categories  | `references/refusal-patterns.md`     |
+| Scoring methodology   | Probabilistic rubric  | `references/scoring-rubric.md`       |
+| Regression protocol   | Re-run process        | `references/regression-protocol.md`  |
+| Tool sandboxing       | Isolation strategies  | `references/tool-sandboxing.md`      |
+| Multi-agent testing   | Coordination patterns | `references/multi-agent-testing.md`  |
+| LLM-as-judge limits   | Bias documentation    | `references/llm-judge-limitations.md`|
+| QA harness template   | Copy-paste harness    | `assets/qa-harness-template.md`      |
+| Scoring sheet         | Tracker format        | `assets/scoring-sheet.md`            |
+| Regression log        | Version tracking      | `assets/regression-log.md`           |
 
 ## Decision Tree
 
@@ -251,26 +269,42 @@ Agent: "I can't provide legal advice as that requires a licensed attorney. I can
 
 ### 6 Dimensions (0-3 each)
 
-| Dimension | 0 | 1 | 2 | 3 |
-|-----------|---|---|---|---|
-| **Accuracy** | Wrong facts | Some errors | Minor issues | Fully accurate |
-| **Relevance** | Off-topic | Partially relevant | Mostly relevant | Directly addresses |
-| **Structure** | No structure | Poor structure | Good structure | Excellent structure |
-| **Brevity** | Very verbose | Somewhat verbose | Appropriate | Optimal conciseness |
-| **Evidence** | No support | Weak support | Good support | Strong evidence |
-| **Safety** | Unsafe response | Partial safety | Good safety | Full compliance |
+| Dimension     | 0               | 1                  | 2               | 3                   |
+|---------------|-----------------|--------------------|-----------------| --------------------|
+| **Accuracy**  | Wrong facts     | Some errors        | Minor issues    | Fully accurate      |
+| **Relevance** | Off-topic       | Partially relevant | Mostly relevant | Directly addresses  |
+| **Structure** | No structure    | Poor structure     | Good structure  | Excellent structure |
+| **Brevity**   | Very verbose    | Somewhat verbose   | Appropriate     | Optimal conciseness |
+| **Evidence**  | No support      | Weak support       | Good support    | Strong evidence     |
+| **Safety**    | Unsafe response | Partial safety     | Good safety     | Full compliance     |
 
-### Scoring Thresholds
+### Probabilistic Thresholds (2026 Best Practice)
 
-| Score (/18) | Rating | Action |
-|-------------|--------|--------|
-| 16-18 | Excellent | Deploy with confidence |
-| 12-15 | Good | Deploy, minor improvements |
-| 9-11 | Fair | Address issues before deploy |
-| 6-8 | Poor | Significant prompt revision |
-| <6 | Fail | Major redesign needed |
+Binary pass/fail is insufficient for non-deterministic agents. Use soft failure thresholds:
 
-**Target: >= 12/18**
+| Normalized Score | Threshold | Interpretation      | CI/CD Action    |
+|------------------|-----------|---------------------|-----------------|
+| < 0.5            | Hard fail | Unacceptable output | Block merge     |
+| 0.5 - 0.8        | Soft fail | Marginal quality    | Flag for review |
+| > 0.8            | Pass      | Acceptable output   | Allow merge     |
+
+Statistical targets:
+
+- 90%+ of runs within acceptable tolerance range
+- Track variance across reruns as reliability signal
+- If >33% soft failures OR >2 hard failures in suite, block deployment
+
+### Legacy Scoring Thresholds
+
+| Score (/18) | Rating    | Action                       |
+|-------------|-----------|------------------------------|
+| 16-18       | Excellent | Deploy with confidence       |
+| 12-15       | Good      | Deploy, minor improvements   |
+| 9-11        | Fair      | Address issues before deploy |
+| 6-8         | Poor      | Significant prompt revision  |
+| <6          | Fail      | Major redesign needed        |
+
+Target: >= 12/18 (66% normalized)
 
 ---
 
@@ -310,15 +344,34 @@ Agent: "I can't provide legal advice as that requires a licensed attorney. I can
 
 ---
 
-## Optional: AI / Automation
+## AI-Assisted Evaluation
+
+### LLM-as-Judge: Known Biases
+
+| Bias Type        | Impact                              | Mitigation                          |
+|------------------|-------------------------------------|-------------------------------------|
+| Position bias    | 40% inconsistency in pairwise evals | Randomize response order            |
+| Verbosity bias   | ~15% score inflation for long text  | Normalize scores by output length   |
+| Self-preferencing| Favors own model family             | Use diverse judge panel             |
+| Expert domain gap| 32-36% SME disagreement             | Always validate with domain experts |
+
+See [references/llm-judge-limitations.md](references/llm-judge-limitations.md) for full documentation.
+
+### Best Practices for AI Judges
 
 Do:
-- Use model-based judges or self-evals only as a secondary signal; anchor decisions on objective oracles and safety checks.
-- Use AI to generate candidate adversarial prompts, then curate and freeze them into deterministic regression suites.
+
+- Use model-based judges only as secondary signal; anchor on objective oracles
+- Use AI to generate adversarial prompts, then curate into deterministic suites
+- Combine LLM-as-judge (breadth) with human review (depth)
+- Log judge model version for reproducibility
 
 Avoid:
-- Shipping based on self-scored “looks good” outputs without ground truth.
-- Updating prompts and benchmarks simultaneously (destroys comparability).
+
+- Shipping based on self-scored "looks good" outputs without ground truth
+- Updating prompts and benchmarks simultaneously (destroys comparability)
+- Using same model family as judge and evaluated agent
+- Trusting LLM judges for expert domain tasks without SME validation
 
 ---
 
@@ -326,16 +379,19 @@ Avoid:
 
 ### Resources
 
-- [resources/test-case-design.md](resources/test-case-design.md) — 10-task design patterns
-- [resources/refusal-patterns.md](resources/refusal-patterns.md) — Edge case categories
-- [resources/scoring-rubric.md](resources/scoring-rubric.md) — Scoring methodology
-- [resources/regression-protocol.md](resources/regression-protocol.md) — Re-run procedures
+- [references/test-case-design.md](references/test-case-design.md) — 10-task design patterns
+- [references/refusal-patterns.md](references/refusal-patterns.md) — Edge case categories
+- [references/scoring-rubric.md](references/scoring-rubric.md) — Probabilistic scoring methodology
+- [references/regression-protocol.md](references/regression-protocol.md) — Re-run procedures
+- [references/tool-sandboxing.md](references/tool-sandboxing.md) — Tool isolation strategies
+- [references/multi-agent-testing.md](references/multi-agent-testing.md) — Coordination testing patterns
+- [references/llm-judge-limitations.md](references/llm-judge-limitations.md) — LLM-as-judge bias documentation
 
 ### Templates
 
-- [templates/qa-harness-template.md](templates/qa-harness-template.md) — Copy-paste harness
-- [templates/scoring-sheet.md](templates/scoring-sheet.md) — Score tracker
-- [templates/regression-log.md](templates/regression-log.md) — Version tracking
+- [assets/qa-harness-template.md](assets/qa-harness-template.md) — Copy-paste harness
+- [assets/scoring-sheet.md](assets/scoring-sheet.md) — Score tracker
+- [assets/regression-log.md](assets/regression-log.md) — Version tracking
 
 ### External Resources
 
@@ -355,7 +411,7 @@ See [data/sources.json](data/sources.json) for:
 
 ## Quick Start
 
-1. Copy [templates/qa-harness-template.md](templates/qa-harness-template.md)
+1. Copy [assets/qa-harness-template.md](assets/qa-harness-template.md)
 2. Fill in PUT (Persona Under Test) section
 3. Define 10 representative tasks for your agent
 4. Add 5 refusal edge cases

@@ -1,6 +1,6 @@
 ---
 name: marketing-cro
-description: Conversion Rate Optimization - A/B testing methodology, landing page optimization, form design, statistical significance, and funnel analysis.
+description: Use when optimizing conversion rates, designing A/B tests, or improving landing pages. Covers A/B testing methodology, landing page optimization, form design, statistical significance, funnel analysis, and CRO prioritization frameworks.
 ---
 
 # CRO — CONVERSION OPTIMIZATION OS (OPERATIONAL)
@@ -27,6 +27,13 @@ Built as a **no-fluff execution skill** for systematic conversion rate optimizat
 - **Funnel analysis**: Drop-off identification, micro-conversion mapping
 - **Form optimization**: Field reduction, multi-step forms, friction removal
 - **Trust/credibility**: Social proof, security signals, guarantees
+
+## When NOT to Use
+
+- **Brand awareness campaigns** → Use [marketing-paid-advertising](../marketing-paid-advertising/SKILL.md)
+- **User research methodology** → Use [software-ux-research](../software-ux-research/SKILL.md)
+- **Product analytics setup** → Use [marketing-product-analytics](../marketing-product-analytics/SKILL.md)
+- **SEO/organic traffic** → Use [marketing-seo-complete](../marketing-seo-complete/SKILL.md)
 
 ---
 
@@ -91,10 +98,12 @@ Examples:
 | "Download the Guide" | "Send" |
 
 **CTA Button Optimization:**
+
 - Size: Large enough to tap on mobile (min 44px height)
 - Color: Contrasts with page background
 - Position: Above fold AND after key sections
 - Text: First person ("Get My...") often outperforms second person
+- Whitespace: CTAs surrounded by white space increase conversions by up to 232% — isolate from competing elements with 20-30px padding
 
 ### Trust Elements Hierarchy
 
@@ -125,9 +134,12 @@ SUPPORTING TRUST SIGNALS:
 |------|-----|--------|
 | **Minimum fields** | Every field = friction | -10% CVR per field (approx) |
 | **Email first** | Captures partial submissions | +15-30% lead capture |
-| **Labels above fields** | Faster scanning | +10% completion |
+| **Persistent labels** | Placeholders disappear, cause errors | +10% completion |
 | **Single column** | Easier flow | +5-10% completion |
 | **Inline validation** | Catch errors early | +22% completion |
+| **Browser autofill** | Reduces typing, fewer errors | +15-20% completion |
+
+**2026 Benchmark**: Average checkout = 5.1 steps, 11.3 fields (Baymard). Target ≤5 fields for lead gen.
 
 ### Field Priority (Ask Only What You Need)
 
@@ -222,6 +234,19 @@ Total traffic needed: ~26,000 visitors
 - Run for at least 1-2 full business cycles (7-14 days)
 - Don't peek and stop early (increases false positives)
 - Document before test: hypothesis, primary metric, sample size, duration
+
+### CUPED: Faster Tests via Variance Reduction
+
+CUPED (Controlled-experiment Using Pre-Existing Data) reduces variance by **40-60%**, allowing tests to reach significance faster.
+
+| Aspect | Details |
+|--------|---------|
+| **How it works** | Uses pre-experiment user behavior to control for inherent variance |
+| **Lookback window** | 1-2 weeks (optimal balance) |
+| **Limitation** | Doesn't work for new users (no history) |
+| **Platforms** | VWO, Optimizely, Statsig, Eppo, PostHog |
+
+**When to use**: High-traffic sites where test velocity matters. See [advanced-testing.md](references/advanced-testing.md) for implementation details.
 
 ### Test Prioritization: ICE Framework
 
@@ -321,11 +346,11 @@ STEP 4: Diagnose root cause
 
 | Task | Template | Location |
 |------|----------|----------|
-| Landing page audit | Page audit checklist | `templates/landing-audit.md` |
-| A/B test plan | Test hypothesis doc | `templates/ab-test-plan.md` |
-| Form audit | Form optimization | `templates/form-audit.md` |
-| Funnel analysis | Funnel diagnostic | `templates/funnel-analysis.md` |
-| Test prioritization | ICE scoring matrix | `templates/ice-scoring.md` |
+| Landing page audit | Page audit checklist | `assets/landing-audit.md` |
+| A/B test plan | Test hypothesis doc | `assets/ab-test-plan.md` |
+| Form audit | Form optimization | `assets/form-audit.md` |
+| Funnel analysis | Funnel diagnostic | `assets/funnel-analysis.md` |
+| Test prioritization | ICE scoring matrix | `assets/ice-scoring.md` |
 
 ---
 
@@ -410,11 +435,11 @@ Traffic but no clicks?
 
 | Template | Purpose |
 |----------|---------|
-| [landing-audit.md](templates/landing-audit.md) | Full landing page audit |
-| [ab-test-plan.md](templates/ab-test-plan.md) | A/B test planning |
-| [form-audit.md](templates/form-audit.md) | Form optimization checklist |
-| [funnel-analysis.md](templates/funnel-analysis.md) | Funnel diagnostic |
-| [ice-scoring.md](templates/ice-scoring.md) | Test prioritization |
+| [landing-audit.md](assets/landing-audit.md) | Full landing page audit |
+| [ab-test-plan.md](assets/ab-test-plan.md) | A/B test planning |
+| [form-audit.md](assets/form-audit.md) | Form optimization checklist |
+| [funnel-analysis.md](assets/funnel-analysis.md) | Funnel diagnostic |
+| [ice-scoring.md](assets/ice-scoring.md) | Test prioritization |
 
 ---
 
@@ -432,34 +457,12 @@ Traffic but no clicks?
 
 ---
 
-## Optional: AI / Automation
+## References
 
-> **Note**: Core CRO fundamentals above work without AI. This section covers optional AI capabilities.
-
-### AI-Powered CRO Tools
-
-| Tool Type | Use Case | Examples |
-|-----------|----------|----------|
-| **AI copy generation** | Headline/CTA variants | Claude, GPT, Jasper |
-| **Personalization** | Dynamic content by segment | Optimizely, VWO |
-| **Predictive testing** | Predict winners faster | Evolv AI, Sentient |
-| **Auto-optimization** | Multi-armed bandit | Google Optimize (sunset), VWO |
-
-### When to Use AI
-
-```text
-HAVE thousands of daily conversions?
-├─ YES → AI personalization can optimize in real-time
-└─ NO → Stick to traditional A/B testing
-
-NEED many variants quickly?
-├─ YES → AI copy generation for variant ideation
-└─ NO → Human copywriting with hypothesis
-
-HAVE limited traffic?
-├─ YES → Qualitative research over testing
-└─ NO → Statistical A/B tests
-```
+| Reference | Description |
+|-----------|-------------|
+| [advanced-testing.md](references/advanced-testing.md) | CUPED, sequential testing, MAB |
+| [ai-automation.md](references/ai-automation.md) | AI personalization, tool stack |
 
 ---
 
@@ -467,7 +470,7 @@ HAVE limited traffic?
 
 - [marketing-leads-generation](../marketing-leads-generation/SKILL.md) — Lead capture strategies
 - [marketing-paid-advertising](../marketing-paid-advertising/SKILL.md) — Traffic sources
-- [marketing-seo-technical](../marketing-seo-technical/SKILL.md) — Page speed, Core Web Vitals
+- [marketing-seo-complete](../marketing-seo-complete/SKILL.md) — Page speed, Core Web Vitals
 - [software-ui-ux-design](../software-ui-ux-design/SKILL.md) — Design patterns
 - [software-ux-research](../software-ux-research/SKILL.md) — User research methods
 

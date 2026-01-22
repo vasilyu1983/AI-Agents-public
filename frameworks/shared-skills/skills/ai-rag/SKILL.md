@@ -106,6 +106,48 @@ Claude should invoke this skill when the user asks:
 
 ---
 
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about RAG or search, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best vector database for [use case]?"
+- "What should I use for [chunking/embedding/reranking]?"
+- "What's the latest in RAG development?"
+- "Current best practices for [retrieval/grounding/evaluation]?"
+- "Is [Pinecone/Qdrant/Chroma] still relevant in 2026?"
+- "[Vector DB A] vs [Vector DB B]?"
+- "Best embedding model for [use case]?"
+- "What RAG framework should I use?"
+
+### Required Searches
+
+1. Search: `"RAG best practices 2026"`
+2. Search: `"[specific vector DB/embedding model] vs alternatives 2026"`
+3. Search: `"RAG trends January 2026"`
+4. Search: `"vector database new releases 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What vector DBs/embeddings are popular NOW (not 6 months ago)
+- **Emerging trends**: New RAG techniques gaining traction (graph RAG, agentic RAG)
+- **Deprecated/declining**: Approaches or tools losing relevance
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- Vector databases (Pinecone, Qdrant, Weaviate, Milvus, pgvector, LanceDB)
+- Embedding models (OpenAI, Cohere, Voyage AI, Jina, Sentence Transformers)
+- Reranking (Cohere Rerank, Jina Reranker, FlashRank, RankGPT)
+- RAG frameworks (LlamaIndex, LangChain, Haystack, txtai)
+- Advanced RAG (contextual retrieval, agentic RAG, graph RAG, CRAG)
+- Evaluation (RAGAS, TruLens, DeepEval, BEIR)
+
+---
+
 ## Related Skills
 
 For adjacent topics, reference these skills:
@@ -122,26 +164,30 @@ For adjacent topics, reference these skills:
 
 ### Core RAG Architecture
 
-- **[Pipeline Architecture](resources/pipeline-architecture.md)** - End-to-end RAG pipeline structure, ingestion, freshness, index hygiene, embedding selection
-- **[Chunking Strategies](resources/chunking-strategies.md)** - Chunking tradeoffs, evaluation approach, and production pitfalls
-- **[Index Selection Guide](resources/index-selection-guide.md)** - Vector database configuration, HNSW/IVF/Flat selection, parameter tuning
+- **[Pipeline Architecture](references/pipeline-architecture.md)** - End-to-end RAG pipeline structure, ingestion, freshness, index hygiene, embedding selection
+- **[Chunking Strategies](references/chunking-strategies.md)** - Chunking tradeoffs, semantic/late chunking (2026), evaluation approach, and production pitfalls
+- **[Index Selection Guide](references/index-selection-guide.md)** - Vector database configuration, HNSW/IVF/Flat selection, pgvectorscale benchmarks
 
 ### Advanced Retrieval Techniques
 
-- **[Retrieval Patterns](resources/retrieval-patterns.md)** - Dense retrieval, hybrid search, query preprocessing, reranking workflow, metadata filtering
-- **[Contextual Retrieval Guide](resources/contextual-retrieval-guide.md)** - Chunk context augmentation technique; validate impact on your corpus
-- **[Grounding Checklists](resources/grounding-checklists.md)** - Context compression, hallucination control, citation patterns, answerability validation
+- **[Retrieval Patterns](references/retrieval-patterns.md)** - Dense retrieval, hybrid search, ColBERT/late interaction, query preprocessing, reranking workflow
+- **[Contextual Retrieval Guide](references/contextual-retrieval-guide.md)** - Chunk context augmentation technique; validate impact on your corpus
+- **[Grounding Checklists](references/grounding-checklists.md)** - Context compression, hallucination control, citation patterns, answerability validation
+
+### Agentic & Advanced RAG (2026)
+
+- **[Agentic RAG Patterns](references/agentic-rag-patterns.md)** - Loop-based RAG with self-correction, multi-hop reasoning, adaptive retrieval, GEAR architecture
+- **[Advanced RAG Patterns](references/advanced-rag-patterns.md)** - Graph/multimodal RAG, GEAR, contextual memory, online evaluation, telemetry
 
 ### Production & Evaluation
 
-- **[RAG Evaluation Guide](resources/rag-evaluation-guide.md)** - Recall@K, nDCG, groundedness, RAGAS/TruLens, A/B testing, sliced evaluation
-- **[Advanced RAG Patterns](resources/advanced-rag-patterns.md)** - Graph/multimodal RAG, online evaluation, telemetry, shadow/canary testing, adaptive retrieval
-- **[RAG Troubleshooting](resources/rag-troubleshooting.md)** - Failure mode triage, debugging irrelevant results, hallucination fixes
+- **[RAG Evaluation Guide](references/rag-evaluation-guide.md)** - Recall@K, nDCG, RAGAS/DeepEval/TruLens/Lynx, A/B testing, sliced evaluation
+- **[RAG Troubleshooting](references/rag-troubleshooting.md)** - Failure mode triage, debugging irrelevant results, hallucination fixes
 
-### Existing Detailed Patterns
+### Implementation Patterns
 
-- **[Chunking Patterns](resources/chunking-patterns.md)** - Technical implementation details for all chunking approaches
-- **[Retrieval Patterns](resources/retrieval-patterns.md)** - Low-level retrieval implementation patterns
+- **[Chunking Patterns](references/chunking-patterns.md)** - Technical implementation details for all chunking approaches
+- **[Retrieval Patterns](references/retrieval-patterns.md)** - Low-level retrieval implementation patterns including ColBERT
 
 ---
 
@@ -149,63 +195,65 @@ For adjacent topics, reference these skills:
 
 ### System Design (Start Here)
 
-- [RAG System Design](templates/design/rag-system-design.md)
+- [RAG System Design](assets/design/rag-system-design.md)
 
 ### Chunking & Ingestion
 
-- [Basic Chunking](templates/chunking/template-basic-chunking.md)
-- [Code Chunking](templates/chunking/template-code-chunking.md)
-- [Long Document Chunking](templates/chunking/template-long-doc-chunking.md)
+- [Basic Chunking](assets/chunking/template-basic-chunking.md)
+- [Code Chunking](assets/chunking/template-code-chunking.md)
+- [Long Document Chunking](assets/chunking/template-long-doc-chunking.md)
 
 ### Embedding & Indexing
 
-- [Index Configuration](templates/indexing/template-index-config.md)
-- [Metadata Schema](templates/indexing/template-metadata-schema.md)
+- [Index Configuration](assets/indexing/template-index-config.md)
+- [Metadata Schema](assets/indexing/template-metadata-schema.md)
 
 ### Retrieval & Reranking
 
-- [Retrieval Pipeline](templates/retrieval/template-retrieval-pipeline.md)
-- [Hybrid Search](templates/retrieval/template-hybrid-search.md)
-- [Reranking](templates/retrieval/template-reranking.md)
+- [Retrieval Pipeline](assets/retrieval/template-retrieval-pipeline.md)
+- [Hybrid Search](assets/retrieval/template-hybrid-search.md)
+- [Reranking](assets/retrieval/template-reranking.md)
 
 ### Context Packaging & Grounding
 
-- [Context Packing](templates/context/template-context-packing.md)
-- [Grounding](templates/context/template-grounding.md)
+- [Context Packing](assets/context/template-context-packing.md)
+- [Grounding](assets/context/template-grounding.md)
 
 ### Evaluation
 
-- [RAG Evaluation](templates/eval/template-rag-eval.md)
-- [RAG Test Set](templates/eval/template-rag-testset.jsonl)
+- [RAG Evaluation](assets/eval/template-rag-eval.md)
+- [RAG Test Set](assets/eval/template-rag-testset.jsonl)
 
 ## Navigation
 
 **Resources**
-- [resources/rag-evaluation-guide.md](resources/rag-evaluation-guide.md)
-- [resources/rag-troubleshooting.md](resources/rag-troubleshooting.md)
-- [resources/contextual-retrieval-guide.md](resources/contextual-retrieval-guide.md)
-- [resources/pipeline-architecture.md](resources/pipeline-architecture.md)
-- [resources/advanced-rag-patterns.md](resources/advanced-rag-patterns.md)
-- [resources/chunking-strategies.md](resources/chunking-strategies.md)
-- [resources/grounding-checklists.md](resources/grounding-checklists.md)
-- [resources/index-selection-guide.md](resources/index-selection-guide.md)
-- [resources/retrieval-patterns.md](resources/retrieval-patterns.md)
-- [resources/chunking-patterns.md](resources/chunking-patterns.md)
+
+- [references/agentic-rag-patterns.md](references/agentic-rag-patterns.md)
+- [references/rag-evaluation-guide.md](references/rag-evaluation-guide.md)
+- [references/rag-troubleshooting.md](references/rag-troubleshooting.md)
+- [references/contextual-retrieval-guide.md](references/contextual-retrieval-guide.md)
+- [references/pipeline-architecture.md](references/pipeline-architecture.md)
+- [references/advanced-rag-patterns.md](references/advanced-rag-patterns.md)
+- [references/chunking-strategies.md](references/chunking-strategies.md)
+- [references/grounding-checklists.md](references/grounding-checklists.md)
+- [references/index-selection-guide.md](references/index-selection-guide.md)
+- [references/retrieval-patterns.md](references/retrieval-patterns.md)
+- [references/chunking-patterns.md](references/chunking-patterns.md)
 
 **Templates**
-- [templates/context/template-context-packing.md](templates/context/template-context-packing.md)
-- [templates/context/template-grounding.md](templates/context/template-grounding.md)
-- [templates/design/rag-system-design.md](templates/design/rag-system-design.md)
-- [templates/chunking/template-basic-chunking.md](templates/chunking/template-basic-chunking.md)
-- [templates/chunking/template-code-chunking.md](templates/chunking/template-code-chunking.md)
-- [templates/chunking/template-long-doc-chunking.md](templates/chunking/template-long-doc-chunking.md)
-- [templates/retrieval/template-retrieval-pipeline.md](templates/retrieval/template-retrieval-pipeline.md)
-- [templates/retrieval/template-hybrid-search.md](templates/retrieval/template-hybrid-search.md)
-- [templates/retrieval/template-reranking.md](templates/retrieval/template-reranking.md)
-- [templates/eval/template-rag-eval.md](templates/eval/template-rag-eval.md)
-- [templates/eval/template-rag-testset.jsonl](templates/eval/template-rag-testset.jsonl)
-- [templates/indexing/template-index-config.md](templates/indexing/template-index-config.md)
-- [templates/indexing/template-metadata-schema.md](templates/indexing/template-metadata-schema.md)
+- [assets/context/template-context-packing.md](assets/context/template-context-packing.md)
+- [assets/context/template-grounding.md](assets/context/template-grounding.md)
+- [assets/design/rag-system-design.md](assets/design/rag-system-design.md)
+- [assets/chunking/template-basic-chunking.md](assets/chunking/template-basic-chunking.md)
+- [assets/chunking/template-code-chunking.md](assets/chunking/template-code-chunking.md)
+- [assets/chunking/template-long-doc-chunking.md](assets/chunking/template-long-doc-chunking.md)
+- [assets/retrieval/template-retrieval-pipeline.md](assets/retrieval/template-retrieval-pipeline.md)
+- [assets/retrieval/template-hybrid-search.md](assets/retrieval/template-hybrid-search.md)
+- [assets/retrieval/template-reranking.md](assets/retrieval/template-reranking.md)
+- [assets/eval/template-rag-eval.md](assets/eval/template-rag-eval.md)
+- [assets/eval/template-rag-testset.jsonl](assets/eval/template-rag-testset.jsonl)
+- [assets/indexing/template-index-config.md](assets/indexing/template-index-config.md)
+- [assets/indexing/template-metadata-schema.md](assets/indexing/template-metadata-schema.md)
 
 **Data**
 - [data/sources.json](data/sources.json) — Curated external references

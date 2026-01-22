@@ -243,7 +243,7 @@ The skill uses pattern matching to intelligently detect commit types from diffs:
 - **New files created** (especially in src/, components/, api/)
 - **New functions/classes exported** (`export function`, `export class`)
 - **New API routes** (`app.get`, `router.post`, etc.)
-- **New templates/skills** (in .claude/, custom-gpt/, etc.)
+- **New assets/skills** (in .claude/, custom-gpt/, etc.)
 - **Threshold**: 20+ lines added typically indicates feature
 
 ### fix Detection
@@ -346,7 +346,7 @@ This skill integrates with the AI-Agents repository standards:
 
 ## Commit Message Template
 
-**[templates/template-commit-message.md](templates/template-commit-message.md)** — Copy-paste template and good/bad examples.
+**[assets/template-commit-message.md](assets/template-commit-message.md)** — Copy-paste template and good/bad examples.
 
 Use it to standardize `type(scope): summary` messages and keep history automation-friendly.
 
@@ -354,7 +354,7 @@ Use it to standardize `type(scope): summary` messages and keep history automatio
 
 ## Security-Sensitive Commits
 
-**[templates/template-security-commits.md](templates/template-security-commits.md)** — Guide for handling security-sensitive changes.
+**[assets/template-security-commits.md](assets/template-security-commits.md)** — Guide for handling security-sensitive changes.
 
 ### Key Sections
 

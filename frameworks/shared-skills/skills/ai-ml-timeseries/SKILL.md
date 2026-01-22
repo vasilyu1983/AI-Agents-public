@@ -126,59 +126,59 @@ User needs time series forecasting for: [Data Type]
 
 ### Time Series EDA & Data Preparation
 
-- **[TS EDA Best Practices](resources/ts-eda-best-practices.md)**
+- **[TS EDA Best Practices](references/ts-eda-best-practices.md)**
   - Frequency detection, missing timestamps, decomposition
   - Outlier detection, level shifts, seasonality analysis
   - Granularity selection and stability checks
 
 ### Feature Engineering
 
-- **[Lag & Rolling Patterns](resources/lag-rolling-patterns.md)**
+- **[Lag & Rolling Patterns](references/lag-rolling-patterns.md)**
   - Lag features (lag_1, lag_7, lag_28 for daily data)
   - Rolling windows (mean, std, min, max, EWM)
   - Avoiding leakage, seasonal lags, datetime features
 
 ### Model Selection
 
-- **[Model Selection Guide](resources/model-selection-guide.md)**
+- **[Model Selection Guide](references/model-selection-guide.md)**
   - Decision rules: Strong seasonality → LightGBM, Long-term → Transformers
   - Benchmark comparison: LightGBM vs Prophet vs Transformers vs RNNs
   - Explainability considerations for mission-critical domains
 
-- **[LightGBM TS Patterns](resources/lightgbm-ts-patterns.md)** *(2024-2025 best practices)*
+- **[LightGBM TS Patterns](references/lightgbm-ts-patterns.md)** *(2024-2025 best practices)*
   - Why LightGBM excels: performance + efficiency + explainability
   - Feature engineering for tree-based models
   - Hyperparameter tuning for time series
 
 ### Forecasting Strategies
 
-- **[Multi-Step Forecasting Patterns](resources/multistep-forecasting-patterns.md)**
+- **[Multi-Step Forecasting Patterns](references/multistep-forecasting-patterns.md)**
   - Direct strategy (separate models per horizon)
   - Recursive strategy (feed predictions back)
   - Seq2Seq strategy (Transformers, RNNs for long horizons)
 
-- **[Intermittent Demand Patterns](resources/intermittent-demand-patterns.md)**
+- **[Intermittent Demand Patterns](references/intermittent-demand-patterns.md)**
   - Croston, SBA, ADIDA for sparse data
   - LightGBM with zero-inflation features (modern approach)
   - Two-stage hurdle models, hierarchical Bayesian
 
 ### Validation & Evaluation
 
-- **[Backtesting Patterns](resources/backtesting-patterns.md)**
+- **[Backtesting Patterns](references/backtesting-patterns.md)**
   - Rolling window backtest, expanding window
   - Temporal train/validation split (no IID splits!)
   - Horizon-wise metrics, segment-level evaluation
 
 ### Generative & Advanced Models
 
-- **[TS-LLM Patterns](resources/ts-llm-patterns.md)**
+- **[TS-LLM Patterns](references/ts-llm-patterns.md)**
   - Chronos, TimesFM, Lag-Llama (Transformer models)
   - Event forecasting patterns (temporal classification, survival modelling)
   - Tokenization, discretization, trajectory sampling
 
 ### Production Deployment
 
-- **[Production Deployment Patterns](resources/production-deployment-patterns.md)**
+- **[Production Deployment Patterns](references/production-deployment-patterns.md)**
   - Feature pipelines (same code for train/serve)
   - Retraining strategies (time-based, drift-triggered)
   - Monitoring (error drift, feature drift, volume drift)
@@ -190,27 +190,27 @@ User needs time series forecasting for: [Data Type]
 
 ### Data Preparation
 
-- **[TS EDA Template](templates/timeseries/template-ts-eda.md)** - Reproducible structure for time series analysis
-- **[Resample & Fill Template](templates/timeseries/template-resample-fill.md)** - Handle missing timestamps and resampling
+- **[TS EDA Template](assets/timeseries/template-ts-eda.md)** - Reproducible structure for time series analysis
+- **[Resample & Fill Template](assets/timeseries/template-resample-fill.md)** - Handle missing timestamps and resampling
 
 ### Feature Templates
 
-- **[Lag & Rolling Features](templates/timeseries/template-lag-rolling.md)** - Create temporal features for ML models
-- **[Calendar Features](templates/timeseries/template-calendar-features.md)** - Business calendars, holidays, events
+- **[Lag & Rolling Features](assets/timeseries/template-lag-rolling.md)** - Create temporal features for ML models
+- **[Calendar Features](assets/timeseries/template-calendar-features.md)** - Business calendars, holidays, events
 
 ### Model Templates
 
-- **[Forecast Model Template](templates/timeseries/template-forecast-model.md)** - End-to-end forecasting pipeline (LightGBM, transformers, RNNs)
-- **[Multi-Step Strategy](templates/timeseries/template-multistep-strategy.md)** - Direct, recursive, and seq2seq approaches
+- **[Forecast Model Template](assets/timeseries/template-forecast-model.md)** - End-to-end forecasting pipeline (LightGBM, transformers, RNNs)
+- **[Multi-Step Strategy](assets/timeseries/template-multistep-strategy.md)** - Direct, recursive, and seq2seq approaches
 
 ### Evaluation Templates
 
-- **[Backtest Template](templates/timeseries/template-backtest.md)** - Rolling window validation setup
-- **[TS Metrics Template](templates/timeseries/template-ts-metrics.md)** - MAPE, MAE, RMSE, MASE, pinball loss
+- **[Backtest Template](assets/timeseries/template-backtest.md)** - Rolling window validation setup
+- **[TS Metrics Template](assets/timeseries/template-ts-metrics.md)** - MAPE, MAE, RMSE, MASE, pinball loss
 
 ### Advanced Templates
 
-- **[TS-LLM Template](templates/timeseries/template-ts-llm.md)** - Time series foundation model patterns and experimental approaches
+- **[TS-LLM Template](assets/timeseries/template-ts-llm.md)** - Time series foundation model patterns and experimental approaches
 
 ---
 
@@ -246,8 +246,8 @@ See [data/sources.json](data/sources.json) for curated web resources including:
 
 - Activate this skill for hands-on forecasting tasks, feature engineering, backtesting, or production setup
 - Start with [Quick Reference](#quick-reference) and [Decision Tree](#decision-tree-choosing-time-series-approach) for fast guidance
-- Drill into resources/ for detailed implementation patterns
-- Use templates/ for copy-paste ready code
+- Drill into references/ for detailed implementation patterns
+- Use assets/ for copy-paste ready code
 - Always check for temporal leakage (future data in training)
 - Start with strong baselines; choose model family based on horizon, covariates, and latency/cost constraints
 - Emphasize explainability for healthcare/finance domains

@@ -107,7 +107,7 @@ On each call, the router:
 - **Data**: data-lake-platform, data-sql-optimization
 - **Dev Tools**: dev-api-design, dev-dependency-management, dev-workflow-planning, git-commit-message, git-workflow
 - **Docs**: docs-ai-prd, docs-codebase, document-docx, document-pdf, document-pptx, document-xlsx
-- **Marketing**: marketing-ai-search-optimization, marketing-leads-generation, marketing-seo-technical, marketing-social-media, marketing-paid-advertising, marketing-email-automation, marketing-cro, marketing-content-strategy
+- **Marketing**: marketing-ai-search-optimization, marketing-leads-generation, marketing-seo-complete, marketing-social-media, marketing-paid-advertising, marketing-email-automation, marketing-cro, marketing-content-strategy
 - **Ops**: ops-devops-platform
 - **Product**: product-management
 - **QA**: qa-agent-testing, qa-debugging, qa-docs-coverage, qa-observability, qa-refactoring, qa-resilience, qa-testing-ios, qa-testing-playwright, qa-testing-strategy
@@ -134,7 +134,7 @@ On each call, the router:
 
 **Shared Skills**: `frameworks/shared-skills/`
 
-- Source of all 76 skills (shared with Codex Kit)
+- Source of all 79 skills (shared with Codex Kit)
 - Copy from `skills/` to `.claude/skills/`
 
 **Gemini Project Memory**: `GEMINI.md`  

@@ -9,7 +9,7 @@ This skill contains **actionable, non-theoretical operational systems** for sust
 
 **Structure**: Core social media principles first. AI-specific automation in clearly labeled "Optional: AI / Automation" sections.
 
-**Scope note**: For email outreach and lead generation, see [marketing-leads-generation](../marketing-leads-generation/SKILL.md). For SEO, see [marketing-seo-technical](../marketing-seo-technical/SKILL.md).
+**Scope note**: For email outreach and lead generation, see [marketing-leads-generation](../marketing-leads-generation/SKILL.md). For SEO, see [marketing-seo-complete](../marketing-seo-complete/SKILL.md).
 
 ---
 
@@ -121,6 +121,37 @@ Every post should map to one of these types. Mix types across your content calen
 
 ---
 
+## Core: Revenue Attribution & ROI
+
+Transform social from cost center to revenue driver by measuring business impact.
+
+| Metric Category | Key Metrics | See Reference |
+|-----------------|-------------|---------------|
+| **Social-to-Revenue** | Social CAC, LTV:CAC, pipeline influence | [revenue-attribution-framework.md](references/revenue-attribution-framework.md) |
+| **Influencer ROI** | CPA, ROAS, EMV, content asset value | [revenue-attribution-framework.md](references/revenue-attribution-framework.md) |
+| **Community ROI** | Member LTV premium, support deflection, retention delta | [revenue-attribution-framework.md](references/revenue-attribution-framework.md) |
+| **Brand Lift** | Unaided/aided awareness, consideration, preference | [revenue-attribution-framework.md](references/revenue-attribution-framework.md) |
+
+### Quick Implementation
+
+1. **UTM discipline**: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` on all links
+2. **CRM integration**: Pass UTM data on conversion, tag closed deals with source
+3. **Cohort analysis**: Compare LTV by acquisition source
+4. **Attribution model**: Choose first-touch (awareness) or position-based (balanced)
+
+### Key Benchmarks
+
+| Metric | Target |
+|--------|--------|
+| Social LTV:CAC | >3:1 |
+| Influencer ROAS | >2x (direct), >4x (with EMV) |
+| Community member LTV | 1.2-2x non-member |
+| Support deflection | 20-40% |
+
+For detailed frameworks, scorecards, and reporting templates, see [references/revenue-attribution-framework.md](references/revenue-attribution-framework.md).
+
+---
+
 ## Core: Social → Site → Conversion Flows
 
 Social media is rarely the conversion point. Design the flow:
@@ -144,10 +175,10 @@ Social Post → Lead Magnet → Email Nurture → Conversion
 | **Post** | Does it provide standalone value? | Rewrite—no one clicks without value |
 | **CTA** | Is there one clear next action? | Simplify to single CTA |
 | **Link/Bio** | Does it match post promise? | Align messaging |
-| **Landing** | Does it load fast, mobile-first? | Optimize (see [marketing-seo-technical](../marketing-seo-technical/SKILL.md)) |
+| **Landing** | Does it load fast, mobile-first? | Optimize (see [marketing-seo-complete](../marketing-seo-complete/SKILL.md)) |
 | **Conversion** | Is friction minimized? | Reduce form fields, add trust signals |
 
-Use [content-distribution-plan.md](templates/content-distribution-plan.md) to plan search + social distribution for each piece of content.
+Use [content-distribution-plan.md](assets/content-distribution-plan.md) to plan search + social distribution for each piece of content.
 
 ### Do (Conversion Flows)
 
@@ -202,21 +233,25 @@ Use [content-distribution-plan.md](templates/content-distribution-plan.md) to pl
 
 ---
 
-## Platform-Specific Constraints (Dec 2025)
+## Platform-Specific Constraints (January 2026)
 
 | Platform | Best For | Primary Formats | Key Constraints |
 |----------|----------|-----------------|----------------|
-| **LinkedIn** | B2B, thought leadership | Text posts, carousels, native video | Professional context, credibility signals |
+| **LinkedIn** | B2B, thought leadership | Text posts, carousels, native video | Depth Score (dwell time), employee reshares 561% further reach |
 | **X (Twitter)** | News, opinions, real-time | Short posts, threads, quotes | Fast feed, context collapse, short half-life |
-| **TikTok** | Discovery | Vertical video | Creative production cadence, format-native editing |
-| **Instagram** | Visual storytelling | Reels, carousels, stories | Visual consistency, mobile-first creative |
-| **YouTube** | Evergreen + search | Long-form + Shorts | Production effort, retention focus |
+| **TikTok** | Discovery, social commerce | Vertical video, TikTok Shop | 70%+ completion for virality, 60-180s optimal |
+| **Instagram** | Visual storytelling | Reels, carousels, stories | "Your Algorithm" user controls, Trial Reels testing |
+| **YouTube** | Evergreen + search | Long-form + Shorts + Shopping | Production effort, retention focus |
+| **Reddit** | B2B, tech, authentic discussion | Text posts, AMAs, community participation | 6th most visited site, AI search visibility, authentic voice required |
+| **Threads** | Real-time conversation | Short posts, threads | 400M MAU trajectory, Meta integration with IG |
 
 For detailed platform-specific guidance, see:
-- [resources/linkedin-engagement-patterns.md](resources/linkedin-engagement-patterns.md)
-- [resources/tiktok-best-practices.md](resources/tiktok-best-practices.md)
-- [resources/instagram-best-practices.md](resources/instagram-best-practices.md)
-- [resources/youtube-best-practices.md](resources/youtube-best-practices.md)
+- [references/linkedin-engagement-patterns.md](references/linkedin-engagement-patterns.md)
+- [references/tiktok-best-practices.md](references/tiktok-best-practices.md)
+- [references/instagram-best-practices.md](references/instagram-best-practices.md)
+- [references/youtube-best-practices.md](references/youtube-best-practices.md)
+- [references/reddit-marketing-strategy.md](references/reddit-marketing-strategy.md)
+- [references/social-commerce-2026.md](references/social-commerce-2026.md)
 
 ---
 
@@ -229,196 +264,52 @@ Use this skill when the user asks for:
 - copywriting requests
 - community management
 - performance audits
+- revenue attribution and ROI measurement
+- influencer program ROI
+- community value calculation
+- brand lift studies
 
 ---
 
-## Quick Reference
-
-| Task | Template/Resource | Location | When to Use |
-|------|------------------|----------|-------------|
-| **Paid Ads** | | | |
-| Google Search Ads | RSA Template | `templates/ads/google-rsa-template.md` | Search campaigns, high-intent keywords |
-| Meta Ads (FB/IG) | Meta Ad Script | `templates/ads/meta-ad-script.md` | Social campaigns, audience targeting |
-| TikTok Ads | TikTok Ad Script | `templates/ads/tiktok-ad-script.md` | Short-form video ads, Gen Z/Millennial |
-| YouTube Ads | Video Brief | `templates/ads/youtube-video-brief.md` | Long-form video campaigns |
-| Influencer/UGC Program | Influencer Ops | `resources/influencer-ops-and-partnerships.md` | Sourcing, rights, Spark/whitelisting |
-| **Organic Content** | | | |
-| LinkedIn Posts | Multi-Platform Template | `templates/social/multi-platform-content-template.md` | Platform-adapted posts with consistent message |
-| LinkedIn Carousel | Carousel Template | `templates/social/carousel-template.md` | Educational content, frameworks |
-| Community Engagement | Engagement Calendar | `templates/community/community-engagement-calendar.md` | Plan recurring engagement and rituals |
-| TikTok/Reels/Shorts | Organic Script | `templates/social/tiktok-organic-script.md` | Short-form video content |
-| Instagram Carousel | IG Carousel Template | `templates/social/instagram-carousel-template.md` | Multi-slide educational posts |
-| Instagram Reels | Reels Template | `templates/social/instagram-reels-template.md` | Short-form vertical video |
-| Content Calendar | 30-Day Calendar | `templates/social/30-day-content-calendar.md` | Monthly content planning |
-| Content Distribution | Distribution Plan | [templates/content-distribution-plan.md](templates/content-distribution-plan.md) | Search + Social distribution |
-| Hook Library | Social Hook Library | `templates/social/social-hook-library.md` | Clear openers that match value + audience |
-| **Outreach & Email** | | | |
-| Cold Email | Cold Email Template | `templates/email/cold-email-template.md` | B2B prospecting, initial outreach |
-| Lead Nurture | Nurture Sequence | `templates/email/lead-nurture-sequence.md` | Email drip campaigns |
-| High-Ticket Outreach | Outreach Sequence | `templates/email/high-ticket-outreach-sequence.md` | Premium service sales |
-| Sales Email | Sales Template | `templates/email/sales-email-template.md` | Direct sales pitches |
-| Newsletter | Newsletter Template | `templates/email/newsletter-template.md` | Regular audience communication |
-| **Offers & Conversion** | | | |
-| Offer Builder | Offer Builder | `templates/offers/grand-slam-offer-builder.md` | Clarify value, proof, and risk reduction |
-| Value Stack | Value Stack Template | `templates/offers/value-stack-template.md` | Offer positioning, bonuses |
-| Offer Messaging | Messaging Template | `templates/offers/offer-messaging-template.md` | Copywriting, value communication |
-| Pricing Calculator | Pricing Calculator | `templates/offers/offer-pricing-calculator.md` | Price optimization |
-| Guarantee | Guarantee Templates | `templates/offers/guarantee-templates.md` | Risk reversal strategies |
-| Lead System | Pipeline OS | `resources/lead-systems-and-pipelines.md` | Daily/weekly volume math, cadences |
-| **SEO & Content** | | | |
-| SEO Brief | SEO Brief Template | `templates/seo/seo-brief-template.md` | Content optimization, keyword targeting |
-| Content Outline | Outline Template | `templates/seo/seo-content-outline-template.md` | Structured long-form content |
-| Keyword Research | Research SOP | `templates/seo/keyword-research-sop.md` | SEO keyword discovery |
-| Product-Led SEO | PL SEO Strategy | `resources/product-led-seo-strategy.md` | Programmatic templates, index control |
-| **Strategy Resources** | | | |
-| LinkedIn Engagement | Engagement Patterns Guide | `resources/linkedin-engagement-patterns.md` | Practical engagement and formatting patterns |
-| Paid Social Patterns | Paid Social Guide | `resources/paid-social-patterns.md` | Scaling, optimization, testing |
-| Persuasion Patterns | Persuasion Guide | `resources/persuasion-patterns.md` | Copywriting psychology |
-| Community Building | Community Guide | `resources/community-building-patterns.md` | Audience growth, engagement |
-| Influencer Ops | Creator Program Guide | `resources/influencer-ops-and-partnerships.md` | Contracts, rights, reporting |
-
----
-
-## Decision Trees (Quick Use)
+## Decision Trees
 
 ```text
-### Paid Social Troubleshooting
-Low CTR → Refresh hook/creative; re-check audience/placement fit
-Clicks ok, conversions low → Fix landing page message match + friction; verify tracking
-Costs rising → Refresh creative; adjust targeting; check budget pacing
-
-### Organic Growth Triage
-Inconsistent output → Set a sustainable cadence and reuse templates
-Reach ok, low engagement → Improve clarity/value density; tighten format
-Engagement ok, low clicks/leads → Strengthen CTA and link path; reduce landing friction
-
-### Community Triage
-Spam/noise rising → Enforce guidelines + moderation SOP
-Healthy engagement but low retention → Add recurring rituals and onboarding
-Negative sentiment → Acknowledge, resolve publicly where appropriate, document themes
-
-### SEO / Content Triage
-Search impressions, low clicks → Rewrite titles/snippets to match intent
-Indexed but flat → Improve internal links, update content for proof/freshness
-Traffic, low conversions → Align CTA to intent; tighten offer and trust on page
-
-For deeper playbooks, see `resources/operational-patterns.md`, `resources/paid-social-patterns.md`, and the community templates in `templates/community/`.
+Paid Social: Low CTR → Refresh hook/creative | Clicks ok, CVR low → Fix landing page | Costs rising → Refresh creative
+Organic: Inconsistent → Set sustainable cadence | Low engagement → Improve value density | Low clicks → Strengthen CTA
+Community: Spam rising → Enforce guidelines | Low retention → Add rituals | Negative sentiment → Acknowledge publicly
 ```
 
 ---
 
 ## Navigation
 
-### Resources
-- [resources/operational-patterns.md](resources/operational-patterns.md)
-- [resources/lead-systems-and-pipelines.md](resources/lead-systems-and-pipelines.md)
-- [resources/virality-word-of-mouth.md](resources/virality-word-of-mouth.md)
-- [resources/linkedin-viral-content.md](resources/linkedin-viral-content.md)
-- [resources/linkedin-engagement-patterns.md](resources/linkedin-engagement-patterns.md)
-- [resources/storybrand-best-practices.md](resources/storybrand-best-practices.md)
-- [resources/cold-outreach-patterns.md](resources/cold-outreach-patterns.md)
-- [resources/paid-social-patterns.md](resources/paid-social-patterns.md)
-- [resources/tiktok-best-practices.md](resources/tiktok-best-practices.md)
-- [resources/instagram-best-practices.md](resources/instagram-best-practices.md)
-- [resources/youtube-best-practices.md](resources/youtube-best-practices.md)
-- [resources/persuasion-patterns.md](resources/persuasion-patterns.md)
-- [resources/community-building-patterns.md](resources/community-building-patterns.md)
-- [resources/influencer-ops-and-partnerships.md](resources/influencer-ops-and-partnerships.md)
-- [resources/competitive-ads-and-leads.md](resources/competitive-ads-and-leads.md)
-- [resources/content-research-and-comms.md](resources/content-research-and-comms.md)
-- [resources/product-led-seo-strategy.md](resources/product-led-seo-strategy.md)
-- [data/sources.json](data/sources.json)
+### References (Deep Dives)
 
-**Optional: AI / Automation**
-- [resources/ai-marketing-patterns.md](resources/ai-marketing-patterns.md)
-- [resources/ai-marketing-governance.md](resources/ai-marketing-governance.md)
+| Category | Key Resources |
+|----------|---------------|
+| **Revenue & ROI** | [revenue-attribution-framework.md](references/revenue-attribution-framework.md) — Attribution, influencer/community ROI, brand lift |
+| **Platform Strategy** | [linkedin-engagement-patterns.md](references/linkedin-engagement-patterns.md), [tiktok-best-practices.md](references/tiktok-best-practices.md), [instagram-best-practices.md](references/instagram-best-practices.md), [youtube-best-practices.md](references/youtube-best-practices.md), [reddit-marketing-strategy.md](references/reddit-marketing-strategy.md) |
+| **Paid Social** | [paid-social-patterns.md](references/paid-social-patterns.md), [influencer-ops-and-partnerships.md](references/influencer-ops-and-partnerships.md) |
+| **Community** | [community-building-patterns.md](references/community-building-patterns.md) |
+| **Operations** | [operational-patterns.md](references/operational-patterns.md), [lead-systems-and-pipelines.md](references/lead-systems-and-pipelines.md) |
+| **AI (Optional)** | [ai-marketing-patterns.md](references/ai-marketing-patterns.md), [ai-marketing-governance.md](references/ai-marketing-governance.md) |
 
 ### Templates
-#### Ads
-- [templates/ads/google-rsa-template.md](templates/ads/google-rsa-template.md)
-- [templates/ads/meta-ad-script.md](templates/ads/meta-ad-script.md)
-- [templates/ads/tiktok-ad-script.md](templates/ads/tiktok-ad-script.md)
-- [templates/ads/youtube-video-brief.md](templates/ads/youtube-video-brief.md)
 
-#### Email & Outreach
-- [templates/email/cold-email-template.md](templates/email/cold-email-template.md)
-- [templates/email/lead-nurture-sequence.md](templates/email/lead-nurture-sequence.md)
-- [templates/email/high-ticket-outreach-sequence.md](templates/email/high-ticket-outreach-sequence.md)
-- [templates/email/appointment-setting-email.md](templates/email/appointment-setting-email.md)
-- [templates/email/newsletter-template.md](templates/email/newsletter-template.md)
-- [templates/email/sales-email-template.md](templates/email/sales-email-template.md)
-- [templates/email/abandoned-cart-email.md](templates/email/abandoned-cart-email.md)
-
-#### Social Content
-- [templates/social/30-day-content-calendar.md](templates/social/30-day-content-calendar.md)
-- [templates/social/social-hook-library.md](templates/social/social-hook-library.md)
-- [templates/social/tiktok-organic-script.md](templates/social/tiktok-organic-script.md)
-- [templates/social/instagram-carousel-template.md](templates/social/instagram-carousel-template.md)
-- [templates/social/instagram-reels-template.md](templates/social/instagram-reels-template.md)
-- [templates/social/multi-platform-content-template.md](templates/social/multi-platform-content-template.md)
-- [templates/social/ugc-brief-template.md](templates/social/ugc-brief-template.md)
-- [templates/social/viral-post-templates.md](templates/social/viral-post-templates.md)
-- [templates/social/carousel-template.md](templates/social/carousel-template.md)
-
-#### LinkedIn
-
-- [templates/linkedin/profile-rewrite-template.md](templates/linkedin/profile-rewrite-template.md)
-
-#### SEO & Content Hubs
-- [templates/seo/seo-brief-template.md](templates/seo/seo-brief-template.md)
-- [templates/seo/seo-content-outline-template.md](templates/seo/seo-content-outline-template.md)
-- [templates/seo/content-hub-template.md](templates/seo/content-hub-template.md)
-- [templates/seo/keyword-research-sop.md](templates/seo/keyword-research-sop.md)
-- [templates/seo/local-seo-template.md](templates/seo/local-seo-template.md)
-- [templates/seo/seo-audit-template.md](templates/seo/seo-audit-template.md)
-- [templates/seo/on-page-seo-checklist.md](templates/seo/on-page-seo-checklist.md)
-
-#### Offers
-- [templates/offers/grand-slam-offer-builder.md](templates/offers/grand-slam-offer-builder.md)
-- [templates/offers/value-stack-template.md](templates/offers/value-stack-template.md)
-- [templates/offers/offer-messaging-template.md](templates/offers/offer-messaging-template.md)
-- [templates/offers/offer-naming-template.md](templates/offers/offer-naming-template.md)
-- [templates/offers/offer-pricing-calculator.md](templates/offers/offer-pricing-calculator.md)
-- [templates/offers/offer-funnel-template.md](templates/offers/offer-funnel-template.md)
-- [templates/offers/guarantee-templates.md](templates/offers/guarantee-templates.md)
-- [templates/offers/offer-delivery-onboarding-template.md](templates/offers/offer-delivery-onboarding-template.md)
-
-#### Community
-- [templates/community/community-strategy-template.md](templates/community/community-strategy-template.md)
-- [templates/community/community-guidelines-template.md](templates/community/community-guidelines-template.md)
-- [templates/community/community-engagement-calendar.md](templates/community/community-engagement-calendar.md)
-- [templates/community/community-event-template.md](templates/community/community-event-template.md)
-- [templates/community/community-moderation-sop.md](templates/community/community-moderation-sop.md)
-- [templates/community/community-onboarding-sequence.md](templates/community/community-onboarding-sequence.md)
+| Category | Location |
+|----------|----------|
+| **Ads** | `assets/ads/` — Google RSA, Meta, TikTok, YouTube |
+| **Email** | `assets/email/` — Cold, nurture, newsletter, sales |
+| **Social** | `assets/social/` — Calendars, hooks, carousels, scripts |
+| **Offers** | `assets/offers/` — Offer builder, value stack, guarantees |
+| **Community** | `assets/community/` — Strategy, guidelines, events, moderation |
+| **SEO** | `assets/seo/` — Briefs, outlines, keyword research |
 
 ### Related Skills
 
-**Product & Strategy**
-- [../product-management/SKILL.md](../product-management/SKILL.md) — Product positioning, messaging frameworks, discovery, and go-to-market strategy
-- [../docs-ai-prd/SKILL.md](../docs-ai-prd/SKILL.md) — PRDs, technical specs, and requirements for marketing campaigns
-
-**Optional: AI / Automation**
-- [../ai-prompt-engineering/SKILL.md](../ai-prompt-engineering/SKILL.md) — Content ideation variants (use with human review)
-- [../ai-agents/SKILL.md](../ai-agents/SKILL.md) — Automation patterns (monitoring, routing, reporting)
-- [../marketing-ai-search-optimization/SKILL.md](../marketing-ai-search-optimization/SKILL.md) — Optional assistant/answer-engine visibility work
-
-**Frontend & Design**
-- [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Landing page implementation, web performance, and conversion optimization
-- [../software-ui-ux-design/SKILL.md](../software-ui-ux-design/SKILL.md) — Design systems, accessibility (WCAG), and user experience for campaigns
-
-**Data & Analytics**
-- [../ai-ml-data-science/SKILL.md](../ai-ml-data-science/SKILL.md) — Predictive modeling for CTR/CVR, customer segmentation, and churn analysis
-- [../data-sql-optimization/SKILL.md](../data-sql-optimization/SKILL.md) — SQL for marketing analytics, attribution queries, and customer data warehousing
-
-**Infrastructure & Deployment**
-- [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — CI/CD for landing pages, A/B testing infrastructure, and campaign automation
-- [../dev-api-design/SKILL.md](../dev-api-design/SKILL.md) — REST APIs for CRM integrations, webhooks, and marketing tool connections
-
-### Operational Deep Dives
-- [resources/operational-patterns.md](resources/operational-patterns.md) — Core operating patterns, testing frameworks, and anti-patterns
-- [resources/lead-systems-and-pipelines.md](resources/lead-systems-and-pipelines.md) — Pipeline math, follow-up cadences, lead magnets, retargeting map
-- [resources/virality-word-of-mouth.md](resources/virality-word-of-mouth.md) — [Inference] Word-of-mouth mechanics (use cautiously; do not plan around virality)
-- [resources/product-led-seo-strategy.md](resources/product-led-seo-strategy.md) — Programmatic SEO, crawl/index control, zero-demand plays
+- [../product-management/SKILL.md](../product-management/SKILL.md) — Product positioning, GTM
+- [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Landing pages, conversion optimization
+- [../ai-ml-data-science/SKILL.md](../ai-ml-data-science/SKILL.md) — CTR/CVR modeling, segmentation
 
 ---
 
@@ -474,7 +365,7 @@ See [data/sources.json](data/sources.json) for official documentation across Goo
 - Over-relying on AI ideation (becomes generic)
 - Ignoring platform policies on AI content disclosure
 
-See [resources/ai-marketing-governance.md](resources/ai-marketing-governance.md) for AI governance framework.
+See [references/ai-marketing-governance.md](references/ai-marketing-governance.md) for AI governance framework.
 
 ---
 
@@ -507,6 +398,47 @@ See [resources/ai-marketing-governance.md](resources/ai-marketing-governance.md)
 - **Video production**: Reels, TikToks, YouTube Shorts
 - **Carousel design**: LinkedIn, Instagram carousel templates
 - **UGC guidelines**: Brand guidelines for community content
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about social media marketing, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best social media strategy for 2026?"
+- "What should I focus on for [LinkedIn/TikTok/Instagram]?"
+- "What's trending on [platform]?"
+- "Current best practices for [Reels/Shorts/Stories]?"
+- "Is [platform/format] still relevant in 2026?"
+- "How has the [LinkedIn/TikTok/Instagram] algorithm changed?"
+- "What content format works best on [platform]?"
+
+### Required Searches
+
+1. Search: `"social media marketing trends 2026"`
+2. Search: `"[LinkedIn/TikTok/Instagram] algorithm 2026"`
+3. Search: `"[platform] best practices January 2026"`
+4. Search: `"social media engagement trends 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What platforms/formats work NOW
+- **Emerging trends**: New features or platforms gaining traction
+- **Deprecated/declining**: Strategies or formats losing effectiveness
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- Platform algorithm changes (LinkedIn, TikTok, Instagram, X)
+- New content formats (Threads, Notes, Shorts features)
+- Creator economy trends and monetization
+- AI content creation tools for social
+- Community features and engagement patterns
+- Cross-platform posting best practices
 
 ---
 

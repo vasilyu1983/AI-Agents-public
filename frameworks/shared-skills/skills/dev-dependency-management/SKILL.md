@@ -5,7 +5,7 @@ description: Package and dependency management patterns across ecosystems (npm, 
 
 # Dependency Management — Production Patterns
 
-**Modern Best Practices (2025)**: Lockfile-first workflows, automated security scanning (Dependabot, Snyk), semantic versioning, minimal dependencies principle, monorepo workspaces (pnpm, Nx), supply chain security (SBOM, signatures), and reproducible builds.
+**Modern Best Practices (January 2026)**: Lockfile-first workflows, automated security scanning (Dependabot, Snyk, Socket.dev), semantic versioning, minimal dependencies principle, monorepo workspaces (pnpm, Nx, Turborepo), supply chain security (SBOM, AI BOM, Sigstore), reproducible builds, and AI-generated code validation.
 
 ---
 
@@ -77,10 +77,12 @@ User needs: [Dependency Task]
     │   └─ Use Nx or Turborepo for task caching
     │
     └─ Choosing package manager?
-        ├─ New project → **pnpm** (3x faster, 1/3 disk space)
-        ├─ Existing npm project → Migrate or stay (check team preference)
-        ├─ Python → **Poetry** (apps), pip+venv (simple)
-        └─ Data science → **conda** (environment management)
+        ├─ New JS project → **pnpm** (fastest, best disk efficiency) or **Bun** (7× faster than npm)
+        ├─ Enterprise monorepo → **pnpm** (most stable workspace support)
+        ├─ Speed-focused experimentation → **Bun** (bleeding edge, production-ready Jan 2026)
+        ├─ Existing npm project → Migrate to pnpm or stay (check team preference)
+        ├─ Python → **uv** (10-100× faster), Poetry (mature), pip+venv (simple)
+        └─ Data science → **conda** or **uv** (faster environment setup)
 ```
 
 ---
@@ -89,7 +91,7 @@ User needs: [Dependency Task]
 
 ### Lockfile Management
 
-**[`resources/lockfile-management.md`](resources/lockfile-management.md)**
+**[`references/lockfile-management.md`](references/lockfile-management.md)**
 
 Lockfiles ensure reproducible builds by recording exact versions of all dependencies (direct + transitive). Essential for preventing "works on my machine" issues.
 
@@ -100,7 +102,7 @@ Lockfiles ensure reproducible builds by recording exact versions of all dependen
 
 ### Semantic Versioning (SemVer)
 
-**[`resources/semver-guide.md`](resources/semver-guide.md)**
+**[`references/semver-guide.md`](references/semver-guide.md)**
 
 Understanding version constraints (`^`, `~`, exact) and how to specify dependency ranges safely.
 
@@ -111,7 +113,7 @@ Understanding version constraints (`^`, `~`, exact) and how to specify dependenc
 
 ### Dependency Security Auditing
 
-**[`resources/security-scanning.md`](resources/security-scanning.md)**
+**[`references/security-scanning.md`](references/security-scanning.md)**
 
 Automated security scanning, vulnerability management, and supply chain security best practices.
 
@@ -122,7 +124,7 @@ Automated security scanning, vulnerability management, and supply chain security
 
 ### Dependency Selection
 
-**[`resources/dependency-selection-guide.md`](resources/dependency-selection-guide.md)**
+**[`references/dependency-selection-guide.md`](references/dependency-selection-guide.md)**
 
 Deciding whether to add a new dependency and choosing between similar packages.
 
@@ -133,7 +135,7 @@ Deciding whether to add a new dependency and choosing between similar packages.
 
 ### Update Strategies
 
-**[`resources/update-strategies.md`](resources/update-strategies.md)**
+**[`references/update-strategies.md`](references/update-strategies.md)**
 
 Keeping dependencies up to date safely while minimizing breaking changes and security risks.
 
@@ -144,7 +146,7 @@ Keeping dependencies up to date safely while minimizing breaking changes and sec
 
 ### Monorepo Management
 
-**[`resources/monorepo-patterns.md`](resources/monorepo-patterns.md)**
+**[`references/monorepo-patterns.md`](references/monorepo-patterns.md)**
 
 Managing multiple related packages in a single repository with shared dependencies.
 
@@ -155,7 +157,7 @@ Managing multiple related packages in a single repository with shared dependenci
 
 ### Transitive Dependencies
 
-**[`resources/transitive-dependencies.md`](resources/transitive-dependencies.md)**
+**[`references/transitive-dependencies.md`](references/transitive-dependencies.md)**
 
 Dealing with dependencies of your dependencies (indirect dependencies).
 
@@ -166,7 +168,7 @@ Dealing with dependencies of your dependencies (indirect dependencies).
 
 ### Ecosystem-Specific Guides
 
-**[`resources/ecosystem-guides.md`](resources/ecosystem-guides.md)**
+**[`references/ecosystem-guides.md`](references/ecosystem-guides.md)**
 
 Language and package-manager-specific best practices.
 
@@ -177,7 +179,7 @@ Language and package-manager-specific best practices.
 
 ### Anti-Patterns
 
-**[`resources/anti-patterns.md`](resources/anti-patterns.md)**
+**[`references/anti-patterns.md`](references/anti-patterns.md)**
 
 Common mistakes to avoid when managing dependencies.
 
@@ -191,46 +193,48 @@ Common mistakes to avoid when managing dependencies.
 
 ### Node.js
 
-**[`templates/nodejs/`](templates/nodejs/)**
+**[`assets/nodejs/`](assets/nodejs/)**
 
-- [`package-json-template.json`](templates/nodejs/package-json-template.json) - Production-ready package.json with best practices
+- [`package-json-template.json`](assets/nodejs/package-json-template.json) - Production-ready package.json with best practices
 - `npmrc-template.txt` - Team configuration for npm
-- [`pnpm-workspace-template.yaml`](templates/nodejs/pnpm-workspace-template.yaml) - Monorepo workspace setup
+- [`pnpm-workspace-template.yaml`](assets/nodejs/pnpm-workspace-template.yaml) - Monorepo workspace setup
 
 ### Python
 
-**[`templates/python/`](templates/python/)**
+**[`assets/python/`](assets/python/)**
 
-- [`pyproject-toml-template.toml`](templates/python/pyproject-toml-template.toml) - Poetry configuration with best practices
+- [`pyproject-toml-template.toml`](assets/python/pyproject-toml-template.toml) - Poetry configuration with best practices
 
 ### Automation
 
-**[`templates/automation/`](templates/automation/)**
+**[`assets/automation/`](assets/automation/)**
 
-- [`dependabot-config.yml`](templates/automation/dependabot-config.yml) - GitHub Dependabot configuration
-- [`renovate-config.json`](templates/automation/renovate-config.json) - Renovate Bot configuration
-- [`audit-checklist.md`](templates/automation/audit-checklist.md) - Security audit workflow
-- **[`template-supply-chain-security.md`](templates/automation/template-supply-chain-security.md)** - **NEW** SBOM, provenance, vulnerability management
-- [`template-dependency-upgrade-playbook.md`](templates/automation/template-dependency-upgrade-playbook.md) - Upgrade batching, rollout, rollback
-- [`template-sbom-vuln-triage-checklist.md`](templates/automation/template-sbom-vuln-triage-checklist.md) - SBOM mapping + vulnerability triage
+- [`dependabot-config.yml`](assets/automation/dependabot-config.yml) - GitHub Dependabot configuration
+- [`renovate-config.json`](assets/automation/renovate-config.json) - Renovate Bot configuration
+- [`audit-checklist.md`](assets/automation/audit-checklist.md) - Security audit workflow
+- **[`template-supply-chain-security.md`](assets/automation/template-supply-chain-security.md)** - **NEW** SBOM, provenance, vulnerability management
+- [`template-dependency-upgrade-playbook.md`](assets/automation/template-dependency-upgrade-playbook.md) - Upgrade batching, rollout, rollback
+- [`template-sbom-vuln-triage-checklist.md`](assets/automation/template-sbom-vuln-triage-checklist.md) - SBOM mapping + vulnerability triage
 
 ---
 
 ## Supply Chain Security
 
-**[templates/automation/template-supply-chain-security.md](templates/automation/template-supply-chain-security.md)** — Production-grade dependency security.
+**[assets/automation/template-supply-chain-security.md](assets/automation/template-supply-chain-security.md)** — Production-grade dependency security.
 
 Related templates:
-- [templates/automation/template-dependency-upgrade-playbook.md](templates/automation/template-dependency-upgrade-playbook.md)
-- [templates/automation/template-sbom-vuln-triage-checklist.md](templates/automation/template-sbom-vuln-triage-checklist.md)
+- [assets/automation/template-dependency-upgrade-playbook.md](assets/automation/template-dependency-upgrade-playbook.md)
+- [assets/automation/template-sbom-vuln-triage-checklist.md](assets/automation/template-sbom-vuln-triage-checklist.md)
 
 ### Key Sections
 
 - **SBOM Generation** — CycloneDX, SPDX formats; CI/CD integration
+- **AI BOM (Emerging)** — Extended SBOM for AI-native systems (models, datasets, training artifacts)
 - **Provenance & Attestation** — SLSA levels, Sigstore signing, npm provenance
 - **Vulnerability Management** — Triage workflow, severity SLAs, scanning tools
 - **Upgrade Playbooks** — Batching strategy, rollback procedures
 - **Pinning & Reproducibility** — Lockfiles, hash pinning, version constraints
+- **EU Cyber Resilience Act** — SBOM requirements effective Dec 2027
 
 ### Do / Avoid
 
@@ -267,6 +271,41 @@ Related templates:
 
 ---
 
+## AI-Generated Dependency Risks
+
+> **WARNING**: AI coding agents can introduce vulnerable or non-existent packages at scale (Endor Labs, 2025).
+
+### The Problem
+
+AI tools accelerate coding but introduce supply chain risks:
+
+- **Hallucinated packages** — AI suggests packages that don't exist (typosquatting vectors)
+- **Vulnerable dependencies** — AI recommends outdated or CVE-affected versions
+- **Unnecessary dependencies** — AI over-relies on packages for simple tasks
+
+### Best Practices
+
+| Do | Don't |
+| --- | --- |
+| Treat AI-generated code as untrusted third-party input | Blindly accept AI dependency suggestions |
+| Enforce same SAST/SCA scanning for AI-generated code | Skip security review for "AI-written" code |
+| Verify all AI-suggested packages actually exist | Trust AI to know current package versions |
+| Integrate security tools into AI workflows (MCP) | Allow AI to add dependencies without review |
+| Vet MCP servers as part of supply chain | Use unvetted AI integrations |
+
+### Validation Checklist
+
+Before accepting AI-suggested dependencies:
+
+- [ ] Package exists on registry (npm, PyPI, crates.io)
+- [ ] Package name is spelled correctly (no typosquatting)
+- [ ] Version is current and maintained
+- [ ] `npm audit` / `pip-audit` shows no vulnerabilities
+- [ ] Weekly downloads >1000 (established package)
+- [ ] Last commit <6 months (actively maintained)
+
+---
+
 ## Optional: AI/Automation
 
 > **Note**: AI assists with triage but security decisions need human judgment.
@@ -292,8 +331,8 @@ Related templates:
 | Security vulnerability found | Use `npm audit fix`, review CHANGELOG, test, deploy immediately |
 | Monorepo setup | Use **pnpm workspaces** or Nx/Turborepo for build caching |
 | Transitive conflict | Use `overrides` sparingly, document why, test thoroughly |
-| Choosing package manager | **pnpm** (fastest), npm (most compatible), yarn (good middle) |
-| Python environment | **Poetry** (apps), pip+venv (simple), conda (data science) |
+| Choosing JS package manager | **pnpm** (fastest, disk-efficient), **Bun** (7× faster), npm (most compatible) |
+| Python environment | **uv** (10-100× faster), Poetry (mature), pip+venv (simple), conda (data science) |
 
 ---
 
@@ -407,3 +446,44 @@ See [`data/sources.json`](data/sources.json) for 82 curated resources:
 ---
 
 > **Success Criteria:** Dependencies are minimal, well-maintained, secure, reproducible across environments, and regularly audited for vulnerabilities.
+
+---
+
+## Trend Awareness Protocol
+
+**IMPORTANT**: When users ask recommendation questions about package managers, dependency tools, or supply chain security, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "What's the best package manager for [ecosystem]?"
+- "What should I use for [dependency management/security]?"
+- "What's the latest in dependency management?"
+- "Current best practices for [npm/pnpm/Poetry]?"
+- "Is [tool/approach] still relevant in 2026?"
+- "[pnpm] vs [npm] vs [yarn]?"
+- "Best dependency security scanner?"
+
+### Required Searches
+
+1. Search: `"dependency management best practices 2026"`
+2. Search: `"[specific tool] vs alternatives 2026"`
+3. Search: `"supply chain security trends January 2026"`
+4. Search: `"[package manager] features 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What dependency tools are popular NOW
+- **Emerging trends**: New package managers, security tools, or patterns gaining traction
+- **Deprecated/declining**: Tools/approaches losing relevance or support
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Example Topics (verify with fresh search)
+
+- Package managers (pnpm, npm, yarn, Poetry, uv for Python)
+- Security scanning (Snyk, Dependabot, Socket.dev)
+- Supply chain security (SBOM, Sigstore, SLSA)
+- Monorepo tools (Nx, Turborepo, Bazel)
+- Lockfile and reproducibility patterns
+- Automated dependency updates (Renovate, Dependabot)

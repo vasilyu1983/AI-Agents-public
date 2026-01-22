@@ -35,7 +35,114 @@ Every piece of content must map to user intent. Misaligned intent = wasted effor
 
 ---
 
-## Core: SERP Surface Evolution (2025)
+## Modern Best Practices (January 2026)
+
+**Sources**: [Seer Interactive GEO Guide](https://www.seerinteractive.com/insights/generative-engine-optimization), [Search Engine Land AI SEO](https://searchengineland.com/), [Ahrefs AI Overviews Study](https://ahrefs.com/blog/)
+
+### The GEO Reality (Generative Engine Optimization)
+
+| Metric | January 2026 Value | Impact |
+|--------|-------------------|--------|
+| **AI Overviews presence** | 15-16% of all queries | Growing steadily |
+| **CTR drop from AI Overviews** | 61% average | Significant traffic loss |
+| **AI Overview citations from top 10** | 76% | Traditional SEO still matters |
+| **Zero-click searches** | 65%+ of all searches | Visibility ≠ clicks |
+| **AI Overview conversion rate** | 14.2% (vs 2.8% organic) | 5x quality premium |
+
+### What Changed: Traditional SEO vs GEO
+
+| Factor | Traditional SEO | GEO (2026) |
+|--------|----------------|------------|
+| **Primary goal** | Rank in blue links | Get cited in AI responses |
+| **Content format** | Long-form, comprehensive | Concise, quotable statements |
+| **Authority signals** | Backlinks, domain age | Citations, original data, E-E-A-T |
+| **Optimization target** | Keywords | Questions + entities |
+| **Success metric** | Rankings, clicks | Citations, brand mentions |
+
+### AI Overviews Optimization Checklist
+
+✅ **Structure content for citation extraction:**
+- First paragraph: Direct, quotable answer (40-60 words optimal for AI extraction)
+- AI Overview responses average 157 words; 99% stay under 328 words
+- Use "According to..." or "Research shows..." patterns
+- Include specific numbers, percentages, dates
+- Attribute claims to sources
+
+✅ **Question-answer architecture:**
+```markdown
+## How long does [X] take?
+[Direct answer in first sentence]. [Supporting context]. [Specific numbers].
+```
+
+✅ **Entity optimization:**
+- Define terms clearly before using them
+- Link to Wikipedia/authoritative entities
+- Use consistent naming conventions
+- Add structured data (Organization, Person, Product)
+
+✅ **Freshness signals:**
+- Update cornerstone content every 60-90 days (content <90 days old receives 2.7x higher citation rates)
+- Add "Last updated: [date]" visibly
+- Reference current year in content
+- Update statistics and data points
+
+### GEO Content Formula
+
+**Citable content pattern:**
+```
+[Definitive statement]. [Specific data point]. [Source attribution].
+```
+
+**Example:**
+> "The average enterprise SaaS contract is worth $118,000 annually. According to KeyBanc's 2025 SaaS Survey, this represents a 23% increase from 2024."
+
+### AI Overview Citation Triggers
+
+| Content Type | Citation Likelihood | Why |
+|--------------|--------------------|----|
+| **Original research/data** | Very High | Unique, authoritative, verifiable |
+| **Step-by-step guides** | High | Actionable, structured, complete |
+| **Definitions/explanations** | High | Clear, quotable, educational |
+| **Listicles/comparisons** | High (25% of citations) | Structured, scannable, decision-useful |
+| **Comparisons with specifics** | Medium-High | Decision-useful, balanced |
+| **Opinion/commentary** | Low | Not authoritative enough |
+| **Thin aggregation** | Very Low | No unique value |
+
+### Platform-Specific Optimization (January 2026)
+
+| Platform | Market Share | Optimization Priority |
+|----------|-------------|----------------------|
+| **Google AI Overviews** | 90%+ of AI search | Critical |
+| **ChatGPT Browse/Search** | Growing | High |
+| **Perplexity** | ~5M daily users | Medium-High |
+| **Bing Copilot** | Limited | Medium |
+| **Claude** | Research use | Low-Medium |
+
+**Platform Citation Patterns (2026 Benchmarks)**
+
+Each AI platform has distinct citation preferences. Only 11% of domains are cited by both ChatGPT and Perplexity—platform-specific strategies are essential.
+
+| Platform | Top Citation Source | % of Citations | Optimization Focus |
+|----------|--------------------|--------------:|-------------------|
+| **ChatGPT** | Wikipedia, encyclopedic content | 47.9% | Authoritative, comprehensive definitions |
+| **Perplexity** | Reddit, forums | 46.7% | Community validation, real user experiences |
+| **Google AI Overviews** | YouTube, multimodal | 23.3% | Video content, visual explanations |
+
+Source: [Averi.ai B2B SaaS Citation Benchmarks Report 2026](https://www.averi.ai/how-to/chatgpt-vs.-perplexity-vs.-google-ai-mode-the-b2b-saas-citation-benchmarks-report-(2026))
+
+### What NOT to Do (GEO Anti-Patterns)
+
+| ❌ Mistake | Why It Fails | ✅ Instead |
+|-----------|--------------|-----------|
+| Create "AI-optimized" pages | Weakens intent match | Optimize existing high-value pages |
+| Stuff content with questions | Feels spammy, ignores intent | Use questions that match real queries |
+| Block AI crawlers entirely | Reduces visibility everywhere | Use selective controls, monitor impact |
+| Ignore traditional SEO | 76% of citations come from top 10 | GEO is additive, not replacement |
+| Chase every AI platform | Spreads effort too thin | Focus on Google AI Overviews first |
+
+---
+
+## Core: SERP Surface Evolution (January 2026)
 
 Search results are no longer 10 blue links. Modern SERP surfaces:
 
@@ -103,7 +210,7 @@ Use before publishing any content:
 
 | Check | Requirement | Pass/Fail |
 |-------|-------------|-----------|
-| Intent mapped | Clear primary intent identified | |
+| Intent mapped | Clear primary intent identified (one page = one intent) | |
 | H1 + meta title | Include target query, <60 chars | |
 | Meta description | Clear value prop, <155 chars | |
 | URL structure | 5-7 words, semantic, no parameters | |
@@ -114,7 +221,30 @@ Use before publishing any content:
 | Mobile usability | Mobile-first layout and QA (see Google guidance on Page Experience and retired Mobile Usability report: https://developers.google.com/search/blog/2023/04/page-experience-in-search) | |
 | Performance | Core Web Vitals monitored (LCP/INP/CLS: https://web.dev/articles/vitals) | |
 
-For a comprehensive audit covering both traditional and AI search visibility, use [search-visibility-audit.md](templates/audits/search-visibility-audit.md).
+### Heading Structure Requirements
+
+| Element | Requirement |
+|---------|-------------|
+| H1 | 1 per page, contains primary keyword |
+| H2 | 2–5 per page, covers subtopics |
+| H3 | Only if nested under H2 |
+
+**Anti-patterns:** Multiple H1s, random heading order, skipping levels (H1 → H3)
+
+### E-E-A-T Requirements (Critical for YMYL Topics)
+
+For content in health, finance, legal, or sensitive topics:
+
+**Required trust pages:**
+- About page (with credentials)
+- Methodology page (how data/predictions are calculated)
+- Disclaimer page
+- Contact page (real phone/email)
+- Privacy Policy + Terms of Service
+
+**Without E-E-A-T signals → Pages drop from index (especially YMYL).**
+
+For a comprehensive audit covering both traditional and AI search visibility, use [search-visibility-audit.md](assets/audits/search-visibility-audit.md).
 
 ---
 
@@ -157,11 +287,11 @@ Use this skill when the user asks for:
 
 | Task | Resource/Template | Location | When to Use |
 |------|------------------|----------|-------------|
-| Search visibility audit | Search Visibility Audit Checklist | `templates/audits/search-visibility-audit.md` | Baseline and prioritize improvements |
-| Technical SEO audit | SEO Technical Audit Checklist | `../marketing-seo-technical/templates/audits/full-technical-audit.md` | Crawl/index/render/performance issues |
-| Content distribution | Distribution Plan (Search + Social) | `../marketing-social-media/templates/content-distribution-plan.md` | Ship content with a plan for demand capture |
-| Landing conversion | Landing Page Conversion Checklist | `../marketing-leads-generation/templates/landing-audit-checklist.md` | Improve CVR from search traffic |
-| Optional: AI visibility | AI Search Content Audit | `templates/audits/ai-search-content-audit.md` | Validate assistant/answer engine visibility |
+| Search visibility audit | Search Visibility Audit Checklist | `assets/audits/search-visibility-audit.md` | Baseline and prioritize improvements |
+| Technical SEO audit | SEO Technical Audit Checklist | `../marketing-seo-complete/assets/audits/full-technical-audit.md` | Crawl/index/render/performance issues |
+| Content distribution | Distribution Plan (Search + Social) | `../marketing-social-media/assets/content-distribution-plan.md` | Ship content with a plan for demand capture |
+| Landing conversion | Landing Page Conversion Checklist | `../marketing-leads-generation/assets/landing-audit-checklist.md` | Improve CVR from search traffic |
+| Optional: AI visibility | AI Search Content Audit | `assets/audits/ai-search-content-audit.md` | Validate assistant/answer engine visibility |
 
 ---
 
@@ -195,37 +325,40 @@ For optional AI/assistant decision trees, see the "Optional: AI / Automation" se
 ## Navigation
 
 ### Core Resources
-- [templates/audits/search-visibility-audit.md](templates/audits/search-visibility-audit.md) - Baseline audit checklist
-- [resources/measurement-analytics.md](resources/measurement-analytics.md) - Measurement and analytics setup notes
-- [../marketing-seo-technical/SKILL.md](../marketing-seo-technical/SKILL.md) - Deep technical SEO playbooks
+- [assets/audits/search-visibility-audit.md](assets/audits/search-visibility-audit.md) - Baseline audit checklist
+- [references/measurement-analytics.md](references/measurement-analytics.md) - Measurement and analytics setup notes
+- [references/llm-tracking-tools.md](references/llm-tracking-tools.md) - LLM visibility tracking tools comparison (January 2026)
+- [../marketing-seo-complete/SKILL.md](../marketing-seo-complete/SKILL.md) - Deep technical SEO playbooks
 
 ### Optional: AI / Automation Guides
-- [resources/platform-chatgpt.md](resources/platform-chatgpt.md) - ChatGPT/SearchGPT optimization
-- [resources/platform-perplexity.md](resources/platform-perplexity.md) - Perplexity ranking strategies
-- [resources/platform-claude.md](resources/platform-claude.md) - Claude AI search optimization
-- [resources/platform-gemini.md](resources/platform-gemini.md) - Google Gemini strategies
-- [resources/platform-google-ai-overviews.md](resources/platform-google-ai-overviews.md) - SGE/AIO optimization
+- [references/ai-indexing-complete-guide.md](references/ai-indexing-complete-guide.md) - **Complete DO & DON'T guide** (January 2026)
+- [references/platform-chatgpt.md](references/platform-chatgpt.md) - ChatGPT/SearchGPT optimization
+- [references/platform-perplexity.md](references/platform-perplexity.md) - Perplexity ranking strategies
+- [references/platform-claude.md](references/platform-claude.md) - Claude AI search optimization
+- [references/platform-gemini.md](references/platform-gemini.md) - Google Gemini strategies
+- [references/platform-google-ai-overviews.md](references/platform-google-ai-overviews.md) - SGE/AIO optimization
 
 ### Templates
 #### Technical
-- [templates/technical/robots-txt-ai-crawlers.md](templates/technical/robots-txt-ai-crawlers.md)
-- [templates/technical/ai-search-schema-templates.md](templates/technical/ai-search-schema-templates.md)
-- [templates/technical/server-side-rendering-guide.md](templates/technical/server-side-rendering-guide.md)
+- [assets/technical/robots-txt-ai-crawlers.md](assets/technical/robots-txt-ai-crawlers.md)
+- [assets/technical/ai-search-schema-templates.md](assets/technical/ai-search-schema-templates.md)
+- [assets/technical/server-side-rendering-guide.md](assets/technical/server-side-rendering-guide.md)
+- [assets/technical/llms-txt-template.md](assets/technical/llms-txt-template.md) - **Optional**: Proposed standard for AI crawler navigation (780+ adopters including Cloudflare, Vercel; [spec v1.0.0](https://llmstxt.org/))
 
 #### Content
-- [templates/content/ai-search-content-brief.md](templates/content/ai-search-content-brief.md)
-- [templates/content/answer-focused-article-template.md](templates/content/answer-focused-article-template.md)
-- [templates/content/entity-rich-content-template.md](templates/content/entity-rich-content-template.md)
+- [assets/content/ai-search-content-brief.md](assets/content/ai-search-content-brief.md)
+- [assets/content/answer-focused-article-template.md](assets/content/answer-focused-article-template.md)
+- [assets/content/entity-rich-content-template.md](assets/content/entity-rich-content-template.md)
 
 #### Audits & Testing
-- [templates/audits/search-visibility-audit.md](templates/audits/search-visibility-audit.md) - **NEW** Full search visibility audit (traditional + AI)
-- [templates/audits/ai-search-content-audit.md](templates/audits/ai-search-content-audit.md)
-- [templates/audits/crawler-access-audit.md](templates/audits/crawler-access-audit.md)
-- [templates/testing/ai-search-testing-protocol.md](templates/testing/ai-search-testing-protocol.md)
+- [assets/audits/search-visibility-audit.md](assets/audits/search-visibility-audit.md) - **NEW** Full search visibility audit (traditional + AI)
+- [assets/audits/ai-search-content-audit.md](assets/audits/ai-search-content-audit.md)
+- [assets/audits/crawler-access-audit.md](assets/audits/crawler-access-audit.md)
+- [assets/testing/ai-search-testing-protocol.md](assets/testing/ai-search-testing-protocol.md)
 
 #### Tracking
-- [templates/tracking/ai-search-analytics-setup.md](templates/tracking/ai-search-analytics-setup.md)
-- [templates/tracking/citation-tracking-dashboard.md](templates/tracking/citation-tracking-dashboard.md)
+- [assets/tracking/ai-search-analytics-setup.md](assets/tracking/ai-search-analytics-setup.md)
+- [assets/tracking/citation-tracking-dashboard.md](assets/tracking/citation-tracking-dashboard.md)
 
 ### Related Skills
 
@@ -264,8 +397,8 @@ See [data/sources.json](data/sources.json) for 28 primary documentation sources 
 ## Getting Started
 
 **First-time setup (30–60 minutes):**
-1. Run [templates/audits/search-visibility-audit.md](templates/audits/search-visibility-audit.md) on the top 10–20 pages.
-2. Fix obvious indexability issues (robots/noindex/canonicals/sitemaps) using [../marketing-seo-technical/SKILL.md](../marketing-seo-technical/SKILL.md).
+1. Run [assets/audits/search-visibility-audit.md](assets/audits/search-visibility-audit.md) on the top 10–20 pages.
+2. Fix obvious indexability issues (robots/noindex/canonicals/sitemaps) using [../marketing-seo-complete/SKILL.md](../marketing-seo-complete/SKILL.md).
 3. Pick 5–10 queries per ICP segment; map each to a single intent and page.
 4. Add measurement: GSC dashboards + conversion events (define what "conversion" means).
 
@@ -282,7 +415,7 @@ See [data/sources.json](data/sources.json) for 28 primary documentation sources 
 
 ### What to Do First (AI Visibility)
 
-1. Run `templates/audits/ai-search-content-audit.md` on 5–10 key pages.
+1. Run `assets/audits/ai-search-content-audit.md` on 5–10 key pages.
 2. Validate that key pages are indexable and canonical (assistants often cite canonical URLs first).
 3. Ensure content has citation-grade proof: original data, reproducible steps, and clear definitions.
 
@@ -338,6 +471,125 @@ See [data/sources.json](data/sources.json) for 28 primary documentation sources 
 
 ---
 
+## Trend Awareness Protocol (January 2026)
+
+**IMPORTANT**: When users ask recommendation questions about AI search or modern discovery, you MUST use WebSearch to check current trends before answering.
+
+### Trigger Conditions
+
+- "How do I optimize for AI search?"
+- "What's the latest with ChatGPT/Perplexity/Google AI Overviews?"
+- "How should I think about AI search in 2026?"
+- "Current best practices for [AEO/GEO/AI citations/answer engines]?"
+- "Is [AI search platform] worth optimizing for?"
+- "How has AI changed search behavior?"
+- "What's the impact of AI Overviews on traffic?"
+- "How do I get cited in AI responses?"
+
+### Required Searches
+
+1. Search: `"AI search optimization best practices January 2026"`
+2. Search: `"Google AI Overviews impact CTR 2026"`
+3. Search: `"GEO generative engine optimization 2026"`
+4. Search: `"ChatGPT Perplexity citation patterns 2026"`
+
+### What to Report
+
+After searching, provide:
+
+- **Current landscape**: What AI search platforms matter NOW (Google AI Overviews = critical)
+- **GEO vs SEO**: How generative engine optimization differs from traditional SEO
+- **Citation patterns**: What content types get cited in AI responses
+- **Emerging trends**: New AI search features or platforms
+- **Deprecated/declining**: Approaches that don't work with AI search
+- **Recommendation**: Based on fresh data, not just static knowledge
+
+### Key 2026 Metrics to Track
+
+| Metric | Current Value (Jan 2026) | Trend |
+|--------|-------------------------|-------|
+| AI Overviews query coverage | 15-16% | Growing |
+| CTR impact from AI Overviews | -61% average | Significant |
+| Citations from top 10 results | 76% | Stable |
+| Zero-click rate | 65%+ | Growing |
+| Perplexity daily users | ~5M | Growing fast |
+
+### Example Topics (verify with fresh search)
+
+- Google AI Overviews citation triggers and optimization
+- GEO (Generative Engine Optimization) strategies
+- ChatGPT Browse and citation patterns
+- Perplexity Pro search and sources
+- Answer Engine Optimization (AEO) techniques
+- Zero-click search adaptation strategies
+- Structured data for AI consumption
+- Content freshness signals for AI systems
+
+---
+
+## 2026 Ranking Factors for AI Search Visibility
+
+**Sources**: [Backlinko Ranking Study](https://backlinko.com/google-ranking-factors), [Search Engine Land AI SEO](https://searchengineland.com/), [Princeton GEO Study](https://arxiv.org/abs/2311.09735)
+
+### AI Citation Ranking Factors
+
+AI systems (Google AI Overviews, ChatGPT, Perplexity) pull citations differently than traditional search. Key factors:
+
+| Factor | Weight | Why It Matters |
+|--------|--------|----------------|
+| **Topical authority** | Critical | AI systems prefer sources that cover topics comprehensively |
+| **Content freshness** | High | AI Overviews favor updated content; 3-month recency ideal |
+| **Quotability** | High | Concise, definitive statements get cited more often |
+| **Original data/research** | High | Unique statistics, studies, surveys are citation magnets |
+| **E-E-A-T signals** | High | Author credentials, methodology pages, clear sourcing |
+| **Traditional rankings** | High | 76% of AI Overview citations come from top 10 results |
+| **Structured data** | Medium | Helps AI understand entities, relationships, facts |
+| **Site speed** | Medium | Fast sites get crawled more, indexed fresher |
+
+### Content Attributes That Get Cited
+
+| Attribute | Citation Rate | Example |
+|-----------|--------------|---------|
+| **Specific numbers** | Very High | "72% of users prefer..." vs "most users prefer..." |
+| **Step-by-step processes** | High | Numbered, actionable instructions |
+| **Definitions** | High | "X is defined as..." or "[Term] refers to..." |
+| **Comparisons** | Medium-High | "X vs Y: [specific differences]" |
+| **Expert quotes** | Medium | Named sources with credentials |
+| **General opinions** | Low | Vague statements without backing |
+
+### Algorithm Update Impact (December 2025)
+
+| Update | Impact on AI Visibility |
+|--------|------------------------|
+| **Helpful Content integration** | Low-value AI content filtered aggressively |
+| **E-E-A-T elevation** | Experience signals now required, not optional |
+| **Brand authority boost** | Known brands appear more in AI Overviews |
+| **Freshness weighting** | Stale content drops faster in AI citations |
+
+### GEO Ranking Checklist
+
+**Technical foundation (same as traditional SEO):**
+- [ ] Core Web Vitals passing (LCP <2.5s, INP <200ms, CLS <0.1)
+- [ ] Mobile-first optimized
+- [ ] Fast TTFB (<600ms)
+- [ ] Clean crawlability (no blocks, proper canonicals)
+
+**AI citation optimization:**
+- [ ] First paragraph contains quotable, definitive answer
+- [ ] Specific numbers, dates, statistics included
+- [ ] Claims attributed to sources
+- [ ] Author bio with credentials (for YMYL)
+- [ ] "Last updated" date visible and accurate
+- [ ] Structured data for key entities
+
+**Content structure:**
+- [ ] One clear intent per page
+- [ ] Question-based H2s matching real queries
+- [ ] Direct answers before elaboration
+- [ ] Original data or unique insights
+
+---
+
 ## Anti-Patterns
 
 ### Core
@@ -357,3 +609,27 @@ See [data/sources.json](data/sources.json) for 28 primary documentation sources 
 | Publishing "AI-first" pages | Weakens intent match and conversion clarity | Treat assistant visibility as additive to SEO |
 | Blocking all crawlers "for protection" | Can reduce visibility in multiple systems | Use explicit controls and rate limiting where needed |
 | Chasing every assistant platform | Spreads effort too thin | Validate one channel with measurable pipeline impact first |
+
+---
+
+## Complete AI Indexing Guide (January 2026)
+
+For the full DO & DON'T guide with implementation priorities, see:
+→ **[ai-indexing-complete-guide.md](references/ai-indexing-complete-guide.md)**
+
+### Quick Reference
+
+| Metric | Value | Impact |
+|--------|-------|--------|
+| Traffic shift to AI | 25% by 2026 | Gartner |
+| Visibility boost from GEO | +40% | Princeton study |
+| Citations from top 10 | 76% | Traditional SEO still critical |
+
+**Top 3 Actions**:
+1. Allow AI crawlers in robots.txt (OAI-SearchBot, PerplexityBot)
+2. Add statistics to top pages (+35-40% visibility)
+3. Update content every 60-90 days (freshness signal)
+
+**December 2025 Change**: ChatGPT-User no longer respects robots.txt—block at firewall if needed.
+
+For crawler setup: [ai-crawler-technical-setup.md](references/ai-crawler-technical-setup.md)
