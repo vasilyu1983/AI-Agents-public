@@ -1,11 +1,11 @@
 ---
 name: product-management
-description: "A Claude Code skill for executing high-quality product management work end-to-end: discovery, strategy, roadmaps, metrics, and leadership - using only operational templates, checklists, and patterns (no theory)."
+description: "Operational product management skill: discovery, strategy, roadmaps, metrics, and leadership - using templates, checklists, and patterns (no theory)."
 ---
 
-# Product Operations Skill – Quick Reference
+# Product Management (Jan 2026)
 
-This skill turns Claude into an **operator**, not a lecturer.
+This skill turns the assistant into an operator, not a lecturer.
 
 Everything here is:
 - **Executable**: templates, checklists, decision flows
@@ -20,13 +20,12 @@ Everything here is:
 - Metrics must be defined (formula + timeframe + data source) to be actionable.
 - Privacy, security, and accessibility are requirements, not afterthoughts.
 - Hybrid decision loops: AI surfaces anomalies, patterns, and forecasts; humans apply context, ethics, and long-term strategy.
-- Revenue ownership: Product now owns business outcomes (92% of PM leaders per 2025 State of PM Report).
-- Portfolio diversification: 70% core products, 20% adjacent opportunities, 10% transformational bets.
-- Optional: AI / Automation is allowed only when explicitly requested and policy-compliant.
+- Accountability: product is often held responsible for business outcomes; confirm the operating model in your org and validate benchmarks with current sources.
+- Portfolio diversification: a common heuristic is 70% core, 20% adjacent, 10% transformational; adapt to strategy and constraints.
 
 ## When to Use This Skill
 
-Claude should invoke this skill when the user asks to **do real product work**, such as:
+Use this skill when the user asks to do real product work, such as:
 
 - “Create / refine a PRD / spec / business case / 1-pager”
 - “Turn this idea into a roadmap” / “Outcome roadmap for X”
@@ -36,7 +35,7 @@ Claude should invoke this skill when the user asks to **do real product work**, 
 - “Run a difficult conversation / feedback / 1:1 / negotiation”
 - “Plan a product strategy / vision / opportunity assessment”
 
-Claude should NOT use this skill for:
+Do not use this skill for:
 - Book summaries, philosophy, or general education
 - Long case studies or storytelling
 
@@ -50,7 +49,7 @@ Claude should NOT use this skill for:
 | Opportunity mapping | `opportunity-solution-tree.md` | Discovery | OST with outcomes, problems, solutions |
 | Outcome roadmap | `outcome-roadmap.md` | Roadmap | Now/Next/Later with outcomes and themes |
 | OKR definition | `okr-template.md` | Metrics | 1-3 objectives with 2-4 key results each |
-| Product positioning | `positioning-template.md` | Strategy | Competitive alternatives → value → segment |
+| Product positioning | `positioning-template.md` | Strategy | Competitive alternatives -> value -> segment |
 | Product vision | `product-vision-template.md` | Strategy | From→To narrative with 3-5 year horizon |
 | 1:1 meeting | `1-1-template.md` | Leadership | Check-in, progress, blockers, growth |
 | Post-incident debrief | `a3-debrief.md` | Leadership | Intent vs actual, root cause, action items |
@@ -86,7 +85,7 @@ User needs: [Product Work Type]
 
 ---
 
-## Do / Avoid (Dec 2025)
+## Do / Avoid (Jan 2026)
 
 ### Do
 
@@ -108,11 +107,16 @@ User needs: [Product Work Type]
 - Scope: clear non-goals and acceptance criteria that can be tested.
 - Learning: post-launch review with metric deltas, guardrail impact, and next decision.
 
+## PRDs and Specs
+
+For PRDs/specs and writing-quality requirements, use the templates in `../docs-ai-prd/`:
+
+- PRD templates: [../docs-ai-prd/assets/prd/prd-template.md](../docs-ai-prd/assets/prd/prd-template.md) and [../docs-ai-prd/assets/prd/ai-prd-template.md](../docs-ai-prd/assets/prd/ai-prd-template.md)
+
 ## Optional: AI / Automation
 
 Use only when explicitly requested and policy-compliant.
 
-- PRD templates: [../docs-ai-prd/assets/prd/prd-template.md](../docs-ai-prd/assets/prd/prd-template.md) and [../docs-ai-prd/assets/prd/ai-prd-template.md](../docs-ai-prd/assets/prd/ai-prd-template.md)
 - AI system lifecycle: [assets/ai/ai-lifecycle-template.md](assets/ai/ai-lifecycle-template.md)
 - Agentic workflow docs: [assets/ai/agentic-ai-orchestration.md](assets/ai/agentic-ai-orchestration.md)
 - AI product patterns: [references/ai-product-patterns.md](references/ai-product-patterns.md)
@@ -166,7 +170,7 @@ Use the quick reference and decision tree above to choose a template, then follo
 
 ## Trend Awareness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about product management tools, frameworks, or practices, you MUST use WebSearch to check current trends before answering.
+**IMPORTANT**: When users ask recommendation questions about product management tools, frameworks, or practices, use a web search tool to check current trends before answering. If web search is unavailable, use `data/sources.json` and state clearly what you verified vs assumed.
 
 ### Trigger Conditions
 

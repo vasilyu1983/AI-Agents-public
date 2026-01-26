@@ -3,11 +3,11 @@ name: claude-code-commands
 description: Create slash commands for Claude Code with $ARGUMENTS handling, agent invocation patterns, and template best practices. Reference for building user-triggered workflow shortcuts.
 ---
 
-# Claude Code Commands — Meta Reference
+# Claude Code Commands - Meta Reference
 
 This skill provides the definitive reference for creating Claude Code slash commands. Use this when building new commands or improving existing command patterns.
 
----
+2026 note: Custom slash commands have been merged into skills. Prefer `.claude/skills/<name>/SKILL.md` for new work; `.claude/commands/<name>.md` remains supported for legacy single-file commands.
 
 ## When to Use This Skill
 
@@ -19,52 +19,61 @@ Use this skill when you need to:
 - Include file context or bash output in commands
 - Organize commands for team sharing
 
----
-
 ## Quick Reference
 
 | Component | Purpose | Example |
 |-----------|---------|---------|
-| Filename | Command name | `review.md` → `/review` |
+| Filename | Command name | `review.md` -> `/review` |
 | Content | Prompt template | Instructions for Claude |
-| `$ARGUMENTS` | User input | `/review auth.js` → `$ARGUMENTS = "auth.js"` |
-| `$1`, `$2` | Positional args | `/compare a.js b.js` → `$1 = "a.js"` |
+| `$ARGUMENTS` | User input | `/review auth.js` -> `$ARGUMENTS = "auth.js"` |
+| `$1`, `$2` | Positional args | `/compare a.js b.js` -> `$1 = "a.js"` |
 | `${CLAUDE_SESSION_ID}` | Session tracking | `logs/${CLAUDE_SESSION_ID}.log` |
 | `@file` | Include file | `@CLAUDE.md` includes file contents |
 | `!command` | Bash output (preprocessing) | `!git status` includes command output |
 
 ## Command Locations
 
-| Location | Scope | Syntax | Use For |
-|----------|-------|--------|---------|
-| `.claude/commands/` | Project | `/cmd` or `/project:cmd` | Team-shared (version control) |
-| `~/.claude/commands/` | Personal | `/cmd` | Cross-project (not shared) |
-| `<plugin>/commands/` | Plugin | `/plugin:cmd` | Plugin-bundled commands |
-| `packages/*/.claude/commands/` | Nested | Auto-discovered | Monorepo subdirectories |
+Claude Code supports both legacy command files and skill-based commands. Skills are the recommended format because they support frontmatter controls and bundled supporting files.
 
-**Nested discovery**: Claude automatically discovers `.claude/commands/` in subdirectories when editing files in those paths (useful for monorepos).
+| Location | Scope | Creates | Use For |
+|----------|-------|---------|---------|
+| `.claude/skills/<name>/SKILL.md` | Project | `/name` | Recommended: team-shared commands with supporting files |
+| `~/.claude/skills/<name>/SKILL.md` | Personal | `/name` | Personal cross-project commands |
+| `.claude/commands/<name>.md` | Project | `/name` | Legacy single-file commands (still supported) |
+| `~/.claude/commands/<name>.md` | Personal | `/name` | Legacy personal commands |
+| `packages/*/.claude/skills/<name>/SKILL.md` | Nested | `/name` | Monorepo subdirectories |
+
+Nested discovery: Claude automatically discovers `.claude/skills/` and `.claude/commands/` in subdirectories when working inside those paths.
 
 ## Command Structure
 
+Skill-based (recommended):
+
 ```text
-.claude/commands/
-├── review.md           # /review
-├── test.md             # /test
-├── security-scan.md    # /security-scan
-└── deploy.md           # /deploy
+.claude/skills/
+|-- review/SKILL.md           # /review
+|-- test/SKILL.md             # /test
+`-- deploy/SKILL.md           # /deploy
 ```
 
----
+Legacy commands:
 
-## Command Template
+```text
+.claude/commands/
+|-- review.md                 # /review
+|-- test.md                   # /test
+`-- deploy.md                 # /deploy
+```
+
+## Command Template (Skill-Based)
 
 ```markdown
 ---
-description: Brief description for autocomplete and invocation
-argument-hint: [filename] [options]
+name: command-name
+description: Brief description for invocation and auto-loading
+argument-hint: [path|#pr] [options]
 allowed-tools: Read, Grep, Bash(git:*)
 disable-model-invocation: false
-model: claude-sonnet-4-20250514
 ---
 
 # Command Title
@@ -84,18 +93,22 @@ User request: $ARGUMENTS
 [Specify expected output structure]
 ```
 
-### Frontmatter Fields
+### Frontmatter Fields (Skills)
 
-| Field | Required | Purpose |
-|-------|----------|---------|
-| `description` | Yes | Shown in autocomplete, helps Claude decide when to invoke |
-| `argument-hint` | No | Autocomplete hint for expected arguments |
-| `allowed-tools` | No | Tools command can use without permission prompts |
-| `disable-model-invocation` | No | If `true`, only user can invoke via `/command` |
-| `user-invocable` | No | If `false`, only Claude can invoke (hidden from menu) |
-| `model` | No | Override default model for this command |
-| `context` | No | Set to `fork` for isolated subagent execution |
-| `agent` | No | Subagent type: `Explore`, `Plan`, `general-purpose` |
+| Field | Purpose |
+|-------|---------|
+| `name` | Slash command name (kebab-case) |
+| `description` | When to use this skill/command |
+| `argument-hint` | Hint shown during autocomplete for expected arguments |
+| `allowed-tools` | Tools this skill can run without extra prompts |
+| `disable-model-invocation` | If `true`, Claude will not auto-invoke |
+| `user-invocable` | If `false`, hidden from the `/` menu |
+| `model` | Override the model for this skill |
+| `context` | Use `fork` for isolated execution |
+| `agent` | Subagent used to execute this skill |
+| `hooks` | Optional lifecycle hooks for the skill |
+
+Legacy `.claude/commands/*.md` works for single-file commands; prefer skills if you need frontmatter controls or bundled resources.
 
 ### allowed-tools Syntax
 
@@ -109,8 +122,6 @@ allowed-tools: Read, Grep, Bash(git:*)
 | `Tool(prefix:*)` | Allow with specific prefix only |
 | `Bash(git:*)` | Only git commands |
 | `Bash(npm test:*)` | Only npm test commands |
-
----
 
 ## $ARGUMENTS Usage
 
@@ -180,7 +191,7 @@ Show:
 - Which version is preferred
 ```
 
-**Usage**: `/compare old.js new.js` → `$1 = "old.js"`, `$2 = "new.js"`
+**Usage**: `/compare old.js new.js` -> `$1 = "old.js"`, `$2 = "new.js"`
 
 ---
 
@@ -225,7 +236,7 @@ Generate a commit message for the staged changes.
 
 **Usage**: `/smart-commit` runs git commands and includes their output.
 
-**Important**: The `!command` syntax is **preprocessing** — commands execute BEFORE the content is sent to Claude. Claude only sees the final rendered output with actual data, not the command itself.
+**Important**: The `!command` syntax is preprocessing - commands execute before the content is sent to Claude. Claude only sees the rendered output with actual data, not the command itself.
 
 ### Backtick Syntax
 
@@ -356,7 +367,7 @@ Return READY or BLOCKED with details.
 | **Statefulness** | Stateless | Maintains context | Reference only |
 | **Length** | Short prompt | Full instructions | Detailed docs |
 
-**Flow**: User → Command → Agent → Skill
+**Flow**: User -> Command -> Agent -> Skill
 
 ---
 
@@ -366,9 +377,9 @@ Control who can invoke commands using frontmatter:
 
 | Frontmatter | User Invokes | Claude Invokes | Use Case |
 |-------------|--------------|----------------|----------|
-| (default) | ✓ `/name` | ✓ Auto | General commands |
-| `disable-model-invocation: true` | ✓ `/name` | ✗ Never | Deploy, commit, dangerous ops |
-| `user-invocable: false` | ✗ Hidden | ✓ Auto | Background knowledge only |
+| (default) | Yes (`/name`) | Yes (auto) | General commands |
+| `disable-model-invocation: true` | Yes (`/name`) | No (never) | Deploy, commit, dangerous ops |
+| `user-invocable: false` | No (hidden) | Yes (auto) | Background knowledge only |
 
 ### Example: User-Only Command
 
@@ -384,7 +395,7 @@ allowed-tools: Bash(kubectl:*), Bash(docker:*)
 Deploy $ARGUMENTS to production cluster.
 ```
 
-Claude cannot auto-invoke this — user must explicitly type `/deploy`.
+Claude cannot auto-invoke this - user must explicitly type `/deploy`.
 
 ---
 
@@ -475,12 +486,12 @@ Default: Generate both unit and E2E tests.
 
 ### Resources
 
-- [references/command-patterns.md](references/command-patterns.md) — Common patterns
-- [references/command-examples.md](references/command-examples.md) — Full examples
-- [data/sources.json](data/sources.json) — Documentation links
+- [references/command-patterns.md](references/command-patterns.md) - Common patterns
+- [references/command-examples.md](references/command-examples.md) - Full examples
+- [data/sources.json](data/sources.json) - Documentation links
 
 ### Related Skills
 
-- [../claude-code-agents/SKILL.md](../claude-code-agents/SKILL.md) — Agent creation
-- [../claude-code-skills/SKILL.md](../claude-code-skills/SKILL.md) — Skill creation
-- [../claude-code-hooks/SKILL.md](../claude-code-hooks/SKILL.md) — Hook automation
+- [../claude-code-agents/SKILL.md](../claude-code-agents/SKILL.md) - Agent creation
+- [../claude-code-skills/SKILL.md](../claude-code-skills/SKILL.md) - Skill creation
+- [../claude-code-hooks/SKILL.md](../claude-code-hooks/SKILL.md) - Hook automation

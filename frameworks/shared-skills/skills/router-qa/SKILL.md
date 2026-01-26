@@ -1,14 +1,11 @@
 ---
 name: router-qa
-description: "QA skill orchestrator: routes quality engineering questions through 12 specialized skills covering testing, observability, resilience, refactoring, debugging, and documentation quality."
-metadata:
-  version: "1.1"
-  skills_count: 12
+description: QA skill orchestrator for test strategy, Playwright/E2E, mobile testing, API contracts, LLM agent testing, debugging, observability, resilience, refactoring, and docs coverage; routes to 12 specialized QA skills.
 ---
 
 # Router: Quality Assurance
 
-Master orchestrator for quality engineering that routes testing, observability, resilience, debugging, and documentation quality questions through 12 specialized QA skills.
+Master orchestrator for quality engineering that routes testing, observability, resilience, debugging, and documentation quality questions through 12 specialized QA skills, with explicit handoffs when the request is outside QA scope (implementation, docs authoring, deployment).
 
 ---
 
@@ -57,7 +54,7 @@ QA QUESTION
 
 ---
 
-## Skill Registry (12 Skills)
+## Skill Registry (12 QA Skills)
 
 ### Testing Skills (7)
 
@@ -80,13 +77,20 @@ QA QUESTION
 | `qa-resilience` | Circuit breakers, retries, chaos | "circuit breaker", "retry", "chaos", "timeout" |
 | `qa-refactoring` | Safe refactoring, tech debt | "refactor", "code smell", "tech debt" |
 | `qa-docs-coverage` | Documentation quality gates | "docs coverage", "undocumented", "runbook" |
-| `claude-code-project-memory` | Large codebase documentation | "CLAUDE.md", "AGENTS.md", "large codebase", "100K LOC" |
+
+---
+
+## Canonical Registry (Source of Truth)
+
+Use `frameworks/shared-skills/skills/router-qa/data/skill-registry.json` as the canonical list of QA skills, triggers, expected outputs, and routing rules.
+
+Use `frameworks/shared-skills/skills/router-qa/data/sources.json` for optional web-search references (each specialized skill maintains its own sources as needed).
 
 ---
 
 ## Domain Detection
 
-### Domain 1: TEST PLANNING
+### Domain 1: Test Planning
 
 **Triggers**: "what tests", "test strategy", "coverage", "test pyramid", "shift-left", "risk-based"
 
@@ -97,7 +101,7 @@ QA QUESTION
 - "How do I prioritize testing?"
 - "What's the right test coverage target?"
 
-### Domain 2: E2E & UI TESTING
+### Domain 2: E2E & UI Testing
 
 **Triggers**: "E2E", "end-to-end", "Playwright", "browser test", "UI test", "page object", "visual test"
 
@@ -108,7 +112,7 @@ QA QUESTION
 - "How to handle flaky E2E tests?"
 - "Best practices for page objects?"
 
-### Domain 3: MOBILE TESTING
+### Domain 3: Mobile Testing
 
 **Triggers**: "iOS", "Android", "mobile", "XCTest", "XCUITest", "Espresso", "UIAutomator", "Appium", "simulator", "emulator", "device"
 
@@ -125,7 +129,7 @@ QA QUESTION
 - "Device matrix for Android testing"
 - "Cross-platform mobile test strategy"
 
-### Domain 4: API & CONTRACT TESTING
+### Domain 4: API & Contract Testing
 
 **Triggers**: "API test", "contract test", "OpenAPI", "GraphQL test", "gRPC", "Pact", "schema validation"
 
@@ -136,7 +140,7 @@ QA QUESTION
 - "Validate OpenAPI schema"
 - "Consumer-driven contract testing"
 
-### Domain 5: AGENT TESTING
+### Domain 5: Agent Testing
 
 **Triggers**: "agent test", "LLM test", "persona", "refusal", "AI safety", "scoring rubric", "test harness"
 
@@ -147,7 +151,7 @@ QA QUESTION
 - "Test LLM refusal boundaries"
 - "Score agent responses"
 
-### Domain 6: DEBUGGING
+### Domain 6: Debugging
 
 **Triggers**: "debug", "error", "bug", "crash", "stack trace", "logging", "profiling", "troubleshoot"
 
@@ -158,7 +162,7 @@ QA QUESTION
 - "Analyze this stack trace"
 - "Setup structured logging"
 
-### Domain 7: OBSERVABILITY
+### Domain 7: Observability
 
 **Triggers**: "monitor", "metrics", "tracing", "logging", "SLO", "SLI", "OpenTelemetry", "APM", "alert"
 
@@ -169,7 +173,7 @@ QA QUESTION
 - "Define SLOs for API"
 - "Distributed tracing strategy"
 
-### Domain 8: RESILIENCE
+### Domain 8: Resilience
 
 **Triggers**: "circuit breaker", "retry", "timeout", "backoff", "chaos", "fault injection", "degradation", "health check"
 
@@ -180,7 +184,7 @@ QA QUESTION
 - "Retry strategy for external APIs"
 - "Setup chaos engineering"
 
-### Domain 9: REFACTORING
+### Domain 9: Refactoring
 
 **Triggers**: "refactor", "code smell", "tech debt", "legacy code", "characterization test", "strangler fig"
 
@@ -191,11 +195,13 @@ QA QUESTION
 - "Add tests before refactoring"
 - "Manage technical debt"
 
-### Domain 10: DOCUMENTATION QUALITY
+### Domain 10: Documentation Quality
 
-**Triggers**: "docs coverage", "undocumented", "runbook", "API docs audit", "stale docs", "CLAUDE.md", "AGENTS.md", "large codebase", "project memory"
+**Triggers**: "docs coverage", "undocumented", "runbook", "API docs audit", "stale docs"
 
-**Route to**: `qa-docs-coverage` (audit) → `claude-code-project-memory` (large codebase setup)
+**Route to**: `qa-docs-coverage`
+
+**If the user asks about CLAUDE.md/AGENTS.md/project memory/large codebase setup**: route to `claude-code-project-memory` (supporting: `qa-docs-coverage`, `docs-codebase`)
 
 **Example questions**:
 
@@ -292,6 +298,25 @@ qa-docs-coverage ──────────► Document updated code
 MODERNIZED
 ```
 
+### Pattern 5: LLM Agent Quality
+
+```text
+AGENT DEVELOPMENT
+  │
+  ▼
+qa-agent-testing ──────────► Define test scenarios
+  │
+  ├─► Must-ace tasks ──────► Core functionality
+  ├─► Refusal tests ───────► Safety boundaries
+  └─► Scoring rubric ──────► Quality metrics
+  │
+  ▼
+qa-observability ──────────► Token usage, latency metrics
+  │
+  ▼
+VALIDATED AGENT
+```
+
 ### Pattern 6: Large Codebase Documentation (100K-1M LOC)
 
 ```text
@@ -312,25 +337,6 @@ docs-codebase ─────────────► Fill critical gaps
   │
   ▼
 LLM-READY CODEBASE
-```
-
-### Pattern 5: LLM Agent Quality
-
-```text
-AGENT DEVELOPMENT
-  │
-  ▼
-qa-agent-testing ──────────► Define test scenarios
-  │
-  ├─► Must-ace tasks ──────► Core functionality
-  ├─► Refusal tests ───────► Safety boundaries
-  └─► Scoring rubric ──────► Quality metrics
-  │
-  ▼
-qa-observability ──────────► Token usage, latency metrics
-  │
-  ▼
-VALIDATED AGENT
 ```
 
 ---
@@ -367,7 +373,7 @@ qa-testing-strategy → qa-testing-mobile → qa-testing-ios (if iOS) → qa-tes
 
 | Gate | Skill | Criteria |
 |------|-------|----------|
-| Test coverage | `qa-testing-strategy` | >80% unit, >60% integration |
+| Test coverage | `qa-testing-strategy` | Coverage targets aligned to risk and critical paths |
 | E2E passing | `qa-testing-playwright` | Critical paths green |
 | API contracts | `qa-api-testing-contracts` | Schema validation passing |
 | Error handling | `qa-resilience` | Circuit breakers configured |
@@ -398,7 +404,7 @@ qa-testing-strategy → qa-testing-mobile → qa-testing-ios (if iOS) → qa-tes
 | Setup monitoring | `qa-observability` | `qa-debugging` |
 | Add resilience | `qa-resilience` | `qa-observability` |
 | Refactor code | `qa-refactoring` | `qa-testing-strategy` |
-| Audit docs | `qa-docs-coverage` | `claude-code-project-memory` |
+| Audit docs | `qa-docs-coverage` | `docs-codebase` |
 | Large codebase setup | `claude-code-project-memory` | `qa-docs-coverage`, `docs-codebase` |
 
 ---

@@ -1,41 +1,27 @@
 ---
 name: git-workflow
-description: Modern Git collaboration patterns for team development - branching strategies, PR workflows, commit conventions, and code review best practices
-metadata:
-  version: "2.0.0"
-  tags: "git, collaboration, code-review, workflow, version-control"
+description: Modern Git collaboration patterns for team development - branching strategies, PR workflows, commit conventions, code review practice, repo hardening, CI merge queues, releases/hotfixes, and merge/rebase conflict resolution
 ---
 
-# Git Collaboration Workflow — Modern Team Development
+# Git Workflow (Modern Team Collaboration)
 
-**Modern Best Practices**: GitHub Flow for continuous deployment, Trunk-Based for scale, conventional commits for automation, stacked diffs for large features
+Use modern Git collaboration patterns: GitHub Flow for continuous deploy, trunk-based for scale, Conventional Commits for automation, stacked diffs for large features.
 
-This skill provides modern Git collaboration patterns for high-performing engineering teams, covering branching strategies, pull request workflows, commit conventions, code review best practices, and release automation.
+Use this skill to choose a branching model, standardize PR discipline, enforce commit conventions, and harden repository settings for safe collaboration.
 
----
+## Quick Start
 
-## When to Use This Skill
-
-Invoke this skill when the user asks to:
-
-- Design branching strategies for teams (GitHub Flow, Trunk-Based, GitFlow)
-- Create pull request or merge request workflows
-- Implement commit conventions (Conventional Commits, semantic versioning)
-- Set up code review processes and quality gates
-- Resolve merge conflicts or rebase issues
-- Configure Git automation (GitHub Actions, GitLab CI PR checks)
-- Implement stacked diffs workflows
-- Design release management strategies
-- Set up automated quality gates in CI/CD
-- Create validation checklists for PRs and releases
-
----
+1. Identify constraints (team size, release cadence, CI maturity, compliance).
+2. Choose a branching strategy using the decision tree.
+3. Apply the baseline repo settings (branch protection, approvals, checks, merge strategy).
+4. Use the relevant reference doc for implementation details.
+5. If asked "best practice in 2026", verify via web search using `data/sources.json` as a starting source list.
 
 ## Quick Reference
 
 | Task | Tool/Command | When to Use | Reference |
 |------|-------------|-------------|-----------|
-| Create feature branch | `git checkout -b feat/name main` | Start new work | [Branching Strategies](references/branching-strategies.md) |
+| Create feature branch | `git switch -c feat/name main` | Start new work | [Branching Strategies](references/branching-strategies.md) |
 | Squash WIP commits | `git rebase -i HEAD~3` | Clean up before PR | [Interactive Rebase](references/interactive-rebase-guide.md) |
 | Conventional commit | `git commit -m "feat: add feature"` | All commits | [Commit Conventions](references/commit-conventions.md) |
 | Force push safely | `git push --force-with-lease` | After rebase | [Common Mistakes](references/common-mistakes.md) |
@@ -44,14 +30,12 @@ Invoke this skill when the user asks to:
 | Auto-generate changelog | `npx standard-version` | Before release | [Release Management](references/release-management.md) |
 | Run quality gates | GitHub Actions / GitLab CI | Every PR | [Automated Quality Gates](references/automated-quality-gates.md) |
 
----
-
 ## Decision Tree: Choosing Branching Strategy
 
 ```text
 Use this decision tree to select the optimal branching strategy for your team based on team size, release cadence, and CI/CD maturity.
 
-Team characteristics → What's your situation?
+Team characteristics -> What's your situation?
     ├─ Small team (1-5 devs) + Continuous deployment + High CI/CD maturity?
     │   └─ GitHub Flow (main + feature branches)
     │
@@ -67,8 +51,6 @@ Team characteristics → What's your situation?
     └─ Multiple versions + Low-Medium CI/CD maturity?
         └─ GitFlow (long-lived release branches)
 ```
-
----
 
 ## Navigation: Core Workflows
 
@@ -86,7 +68,7 @@ Team characteristics → What's your situation?
 
 **[PR Best Practices Guide](references/pr-best-practices.md)** - Effective code reviews and fast PR cycles
 
-- PR size guidelines: 200-400 lines optimal (46% faster merge)
+- PR size guidelines: keep PRs reviewable (often 200-400 LOC works well; split larger changes)
 - Review categories: BLOCKER, WARNING, NITPICK
 - Review etiquette: Collaborative feedback, code examples
 - PR description templates: What, Why, How, Testing
@@ -180,14 +162,12 @@ Team characteristics → What's your situation?
 
 **[Common Mistakes & Fixes](references/common-mistakes.md)** - Learn from common pitfalls
 
-- Large unfocused PRs → Split into stacked diffs
-- Vague commit messages → Use conventional commits
-- Rewriting public history → Never rebase main
-- Ignoring review comments → Address all feedback
-- Committing secrets → Use environment variables
-- Force push dangers → Use `--force-with-lease`
-
----
+- Large unfocused PRs -> Split into stacked diffs
+- Vague commit messages -> Use conventional commits
+- Rewriting public history -> Never rebase main
+- Ignoring review comments -> Address all feedback
+- Committing secrets -> Use environment variables
+- Force push dangers -> Use `--force-with-lease`
 
 ## Decision Tables
 
@@ -211,8 +191,6 @@ Team characteristics → What's your situation?
 | 200-400 | 30-60 min | Medium-High | [OK] Acceptable |
 | 400-1000 | 1-2 hours | Medium | [WARNING] Consider splitting |
 | > 1000 | > 2 hours | Low | [FAIL] Always split |
-
----
 
 ## Do / Avoid
 
@@ -238,8 +216,6 @@ Team characteristics → What's your situation?
 - Vague commit messages ("fix", "update")
 - Skipping CI to merge faster
 
----
-
 ## Anti-Patterns
 
 | Anti-Pattern | Problem | Fix |
@@ -251,8 +227,6 @@ Team characteristics → What's your situation?
 | **"fix" commits** | Unclear history | Conventional commits |
 | **No CI gates** | Broken main | Required status checks |
 | **Secrets in history** | Security breach | Pre-commit hooks, gitleaks |
-
----
 
 ## Repository Baseline (Security + Reliability)
 
@@ -269,8 +243,6 @@ Set these repo defaults before scaling a team:
 Template: [assets/pull-requests/pr-template.md](assets/pull-requests/pr-template.md)
 Guide: [assets/template-git-workflow-guide.md](assets/template-git-workflow-guide.md)
 
----
-
 ## Security-Sensitive Changes
 
 For security-related git operations, see [git-commit-message/assets/template-security-commits.md](../git-commit-message/assets/template-security-commits.md):
@@ -280,15 +252,13 @@ For security-related git operations, see [git-commit-message/assets/template-sec
 - Security commit metadata (CVE, CVSS)
 - Branch protection for security-sensitive code
 
----
-
 ## Optional: AI/Automation
 
 > **Note**: AI tools assist but cannot replace human judgment for merge decisions.
 
-- **PR summarization** — Generate description from commits
-- **Change risk labeling** — Flag high-risk files (auth, payments)
-- **Review suggestions** — Identify potential reviewers
+- **PR summarization** - Generate description from commits
+- **Change risk labeling** - Flag high-risk files (auth, payments)
+- **Review suggestions** - Identify potential reviewers
 
 ### Bounded Claims
 
@@ -306,8 +276,6 @@ For security-related git operations, see [git-commit-message/assets/template-sec
 - [Software Testing & Automation](../qa-testing-strategy/SKILL.md) - Test-driven development, coverage gates
 - [Documentation Standards](../docs-codebase/SKILL.md) - Changelog formats, documentation workflows
 - [Git Commit Message](../git-commit-message/SKILL.md) - Commit message conventions, security commits
-
----
 
 ## Usage Notes
 
@@ -354,7 +322,7 @@ git reset --soft HEAD~1
 git cherry-pick abc123
 
 # Stash changes
-git stash save "WIP: implementing feature X"
+git stash push -m "WIP: implementing feature X"
 git stash pop
 ```
 
@@ -374,11 +342,9 @@ git checkout --theirs <file>
 git checkout --ours <file>
 ```
 
----
-
 ## Trend Awareness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about Git workflows, branching strategies, or collaboration tools, you MUST use WebSearch to check current trends before answering.
+IMPORTANT: When users ask recommendation questions about Git workflows, branching strategies, or collaboration tools, verify current trends via web search (and/or the links in `data/sources.json`) before answering.
 
 ### Trigger Conditions
 

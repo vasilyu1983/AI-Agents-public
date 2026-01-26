@@ -1,20 +1,16 @@
 ---
 name: document-docx
-description: Create, edit, and analyze Microsoft Word documents with tracked changes, formatting, styles, tables, headers/footers, and template-based generation. Supports .docx format using python-docx, mammoth.js, and docx libraries for Node.js and Python workflows.
+description: Create, edit, and analyze Microsoft Word .docx files (reports, contracts, proposals) with styles, tables, headers/footers, template filling, content extraction, and conversion to HTML; support review workflows (comments/highlights) and inspect tracked changes via OOXML when needed using Python/Node.js (python-docx, docxtpl, mammoth.js, docx).
 ---
 
-# Document DOCX Skill — Quick Reference
+# Document DOCX Skill - Quick Reference
 
-This skill enables creation, editing, and analysis of Word documents programmatically. Claude should apply these patterns when users need to generate reports, contracts, proposals, documentation, or any structured Word documents from data or templates.
+This skill enables creation, editing, and analysis of `.docx` files for reports, contracts, proposals, documentation, and template-driven outputs.
 
-**Modern Best Practices (Jan 2026)**:
-- Use styles (Headings, lists, tables) for structure and maintainability.
-- Keep versioning and owners explicit (review cadence, last-updated).
-- **Accessibility (WCAG 2.1 AA by April 2026)**: headings hierarchy, readable tables, alt text. ADA/EAA compliance required.
-- **EU Distribution**: EAA (June 2025) requires EN 301 549 compliance for documents distributed in EU.
-- Prefer a source doc + PDF release artifact workflow for distribution.
-
----
+Modern best practices (2026):
+- Prefer templates + styles over manual formatting.
+- Treat `.docx` as the editable source; treat PDF as a release artifact.
+- If distributing externally, include basic accessibility hygiene (headings, table headers, alt text).
 
 ## Quick Reference
 
@@ -25,25 +21,25 @@ This skill enables creation, editing, and analysis of Word documents programmati
 | Convert to HTML | mammoth.js | Node.js | Web display, content extraction |
 | Parse DOCX | python-docx | Python | Extract text, tables, metadata |
 | Template fill | docxtpl | Python | Mail merge, template-based generation |
-| Track changes | python-docx | Python | Review workflows, redlining |
+| Review workflow | Word compare, comments/highlights | Any | Human review without OOXML surgery |
+| Tracked changes | OOXML inspection, docx4j/OpenXML SDK/Aspose | Any | True redlines or parsing tracked changes |
 
-## When to Use This Skill
+## Tool Selection
 
-Claude should invoke this skill when a user requests:
+- Prefer `docxtpl` when non-developers must edit layout/design in Word.
+- Prefer `python-docx` for structural edits (paragraphs/tables/headers/footers) when formatting complexity is moderate.
+- Prefer `docx` (Node.js) for server-side generation in TypeScript-heavy stacks.
+- Prefer `mammoth` for text-first extraction or DOCX-to-HTML (best effort; may drop some layout fidelity).
 
-- Generate Word documents from data or templates
-- Create formatted reports with tables, headers, styles
-- Extract content from existing DOCX files
-- Convert DOCX to HTML or other formats
-- Implement mail merge or template filling
-- Add tracked changes or comments
-- Create document automation workflows
+## Known Limits (Plan Around These)
 
----
+- `.doc` (legacy) is not supported by these libraries; convert to `.docx` first (e.g., LibreOffice).
+- `python-docx` cannot reliably create true tracked changes; use Word compare or specialized OOXML tooling.
+- Tables of Contents and many fields are placeholders until opened/updated in Word.
 
 ## Core Operations
 
-### Create Document (Python)
+### Create Document (Python - python-docx)
 
 ```python
 from docx import Document
@@ -77,7 +73,7 @@ doc.add_picture('image.png', width=Inches(4))
 doc.save('output.docx')
 ```
 
-### Create Document (Node.js)
+### Create Document (Node.js - docx)
 
 ```typescript
 import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell } from 'docx';
@@ -112,7 +108,7 @@ Packer.toBuffer(doc).then((buffer) => {
 });
 ```
 
-### Template-Based Generation (Python)
+### Template-Based Generation (Python - docxtpl)
 
 ```python
 from docxtpl import DocxTemplate
@@ -130,7 +126,7 @@ doc.render(context)
 doc.save('filled_template.docx')
 ```
 
-### Extract Content
+### Extract Content (Python - python-docx)
 
 ```python
 from docx import Document
@@ -149,39 +145,6 @@ for table in doc.tables:
         print(row_data)
 ```
 
----
-
-## Document Structure Patterns
-
-### Report Template
-
-```text
-REPORT STRUCTURE
-├── Title Page (heading level 0, centered)
-├── Table of Contents (auto-generated)
-├── Executive Summary (heading level 1)
-├── Body Sections (heading levels 1-3)
-│   ├── Introduction
-│   ├── Findings (with tables, charts)
-│   └── Recommendations
-├── Appendices
-└── Footer (page numbers, date)
-```
-
-### Contract Template
-
-```text
-CONTRACT STRUCTURE
-├── Header (parties, date)
-├── Recitals (WHEREAS clauses)
-├── Definitions
-├── Terms and Conditions (numbered sections)
-├── Signatures Block
-└── Exhibits/Schedules
-```
-
----
-
 ## Styling Reference
 
 | Element | Python Method | Node.js Class |
@@ -192,8 +155,6 @@ CONTRACT STRUCTURE
 | Font size | `run.font.size = Pt(12)` | `TextRun({ size: 24 })` (half-points) |
 | Alignment | `WD_ALIGN_PARAGRAPH.CENTER` | `AlignmentType.CENTER` |
 | Page break | `doc.add_page_break()` | `new PageBreak()` |
-
----
 
 ## Do / Avoid (Dec 2025)
 
@@ -209,12 +170,12 @@ CONTRACT STRUCTURE
 - Docs with no owner or review cadence (stale quickly).
 - Copy/pasting without updating definitions and links.
 
-## What Good Looks Like
+## Output Quality Checklist
 
 - Structure: consistent heading hierarchy, styles, and (when needed) an auto-generated table of contents.
 - Decisions: decisions/actions captured with owner + due date (not buried in prose).
 - Versioning: doc ID + version + change summary; review cadence defined.
-- Accessibility: headings/reading order are correct; alt text for non-decorative images.
+- Accessibility hygiene: headings/reading order are correct; table headers are marked; alt text for non-decorative images.
 - Reuse: use `assets/doc-template-pack.md` for decision logs and recurring doc types.
 
 ## Optional: AI / Automation
@@ -227,16 +188,22 @@ Use only when explicitly requested and policy-compliant.
 ## Navigation
 
 **Resources**
-- [references/docx-patterns.md](references/docx-patterns.md) — Advanced formatting, styles, headers/footers
-- [references/template-workflows.md](references/template-workflows.md) — Mail merge, batch generation
-- [data/sources.json](data/sources.json) — Library documentation links
+- [references/docx-patterns.md](references/docx-patterns.md) - Advanced formatting, styles, headers/footers
+- [references/template-workflows.md](references/template-workflows.md) - Mail merge, batch generation
+- [references/tracked-changes.md](references/tracked-changes.md) - Tracked changes: what is feasible, and what is not
+- [data/sources.json](data/sources.json) - Library documentation links
+
+**Scripts**
+- `scripts/docx_inspect_ooxml.py` - Dependency-free OOXML inspection (including tracked changes signals)
+- `scripts/docx_extract.py` - Extract text/tables to JSON (requires `python-docx`)
+- `scripts/docx_render_template.py` - Render a `docxtpl` template (requires `docxtpl`)
+- `scripts/docx_to_html.mjs` - Convert `.docx` to HTML (requires `mammoth`)
 
 **Templates**
-- [assets/report-template.md](assets/report-template.md) — Standard report structure
-- [assets/contract-template.md](assets/contract-template.md) — Legal document structure
-- [assets/doc-template-pack.md](assets/doc-template-pack.md) — Decision log, meeting notes, changelog templates
+- [assets/report-template.md](assets/report-template.md) - Standard report structure
+- [assets/contract-template.md](assets/contract-template.md) - Legal document structure
+- [assets/doc-template-pack.md](assets/doc-template-pack.md) - Decision log, meeting notes, changelog templates
 
 **Related Skills**
-- [../document-pdf/SKILL.md](../document-pdf/SKILL.md) — PDF generation and conversion
-- [../document-docx/SKILL.md](../document-docx/SKILL.md) — Document workflow automation
-- [../docs-codebase/SKILL.md](../docs-codebase/SKILL.md) — Technical writing patterns
+- [../document-pdf/SKILL.md](../document-pdf/SKILL.md) - PDF generation and conversion
+- [../docs-codebase/SKILL.md](../docs-codebase/SKILL.md) - Technical writing patterns

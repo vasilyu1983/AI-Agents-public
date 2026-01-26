@@ -23,7 +23,7 @@ This skill provides actionable checklists, patterns, and templates for **transac
 | Schema Migration | Flyway / Liquibase | `flyway migrate` / `liquibase update` | Version-controlled database changes |
 | Backup & Recovery | pg_dump / mysqldump | `pg_dump -Fc dbname > backup.dump` | Point-in-time recovery, disaster recovery |
 | Replication Setup | Streaming / GTID | Configure postgresql.conf / my.cnf | High availability, read scaling |
-| Safe Tuning Loop | Measure → Explain → Change → Verify | Use tuning worksheet template | Reduce latency/cost without regressions |
+| Safe Tuning Loop | Measure -> Explain -> Change -> Verify | Use tuning worksheet template | Reduce latency/cost without regressions |
 
 ---
 
@@ -32,27 +32,27 @@ This skill provides actionable checklists, patterns, and templates for **transac
 ```text
 Query performance issue?
     ├─ Identify slow queries first?
-    │   ├─ PostgreSQL → pg_stat_statements (top queries by total_exec_time)
-    │   └─ MySQL → Performance Schema / slow query log
+    │   ├─ PostgreSQL -> pg_stat_statements (top queries by total_exec_time)
+    │   └─ MySQL -> Performance Schema / slow query log
     │
     ├─ Analyze execution plan?
-    │   ├─ PostgreSQL → EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
-    │   ├─ MySQL → EXPLAIN FORMAT=JSON or EXPLAIN ANALYZE
-    │   └─ SQL Server → SET STATISTICS IO ON; SET STATISTICS TIME ON;
+    │   ├─ PostgreSQL -> EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
+    │   ├─ MySQL -> EXPLAIN FORMAT=JSON or EXPLAIN ANALYZE
+    │   └─ SQL Server -> SET STATISTICS IO ON; SET STATISTICS TIME ON;
     │
     ├─ Need indexing strategy?
-    │   ├─ PostgreSQL → B-tree (default), GIN (JSONB), GiST (spatial), partial indexes
-    │   ├─ MySQL → BTREE (default), FULLTEXT (text search), SPATIAL
+    │   ├─ PostgreSQL -> B-tree (default), GIN (JSONB), GiST (spatial), partial indexes
+    │   ├─ MySQL -> BTREE (default), FULLTEXT (text search), SPATIAL
     │   └─ Check: Table >10k rows AND selectivity <10% AND 10x+ speedup verified
     │
     ├─ Schema changes needed?
-    │   ├─ New database → template-schema-design.md
-    │   ├─ Modify schema → template-migration.md (Flyway/Liquibase)
-    │   └─ Large tables (MySQL) → gh-ost / pt-online-schema-change (avoid locks)
+    │   ├─ New database -> template-schema-design.md
+    │   ├─ Modify schema -> template-migration.md (Flyway/Liquibase)
+    │   └─ Large tables (MySQL) -> gh-ost / pt-online-schema-change (avoid locks)
     │
     ├─ High availability setup?
-    │   ├─ PostgreSQL → Streaming replication (template-replication-ha.md)
-    │   └─ MySQL → GTID-based replication (template-replication-ha.md)
+    │   ├─ PostgreSQL -> Streaming replication (template-replication-ha.md)
+    │   └─ MySQL -> GTID-based replication (template-replication-ha.md)
     │
     ├─ Backup/disaster recovery?
     │   └─ template-backup-restore.md (pg_dump, mysqldump, PITR)
@@ -65,7 +65,7 @@ Query performance issue?
 
 ## When to Use This Skill
 
-Claude should invoke this skill when users ask for:
+Codex should invoke this skill when users ask for:
 
 ### Query Optimization (Modern Approaches)
 - SQL query performance review and tuning
@@ -122,7 +122,7 @@ Templates are organized by database technology for precision and clarity:
 ### Cross-Platform Templates (All Databases)
 - [assets/cross-platform/template-query-tuning.md](assets/cross-platform/template-query-tuning.md) - Universal query optimization
 - [assets/cross-platform/template-explain-analysis.md](assets/cross-platform/template-explain-analysis.md) - Execution plan analysis
-- [assets/cross-platform/template-performance-tuning-worksheet.md](assets/cross-platform/template-performance-tuning-worksheet.md) - **NEW** 4-step tuning workflow (Measure → Explain → Change → Verify)
+- [assets/cross-platform/template-performance-tuning-worksheet.md](assets/cross-platform/template-performance-tuning-worksheet.md) - **NEW** 4-step tuning workflow (Measure -> Explain -> Change -> Verify)
 - [assets/cross-platform/template-index.md](assets/cross-platform/template-index.md) - Index design patterns
 - [assets/cross-platform/template-slow-query.md](assets/cross-platform/template-slow-query.md) - Slow query triage
 - [assets/cross-platform/template-schema-design.md](assets/cross-platform/template-schema-design.md) - Schema modeling
@@ -333,21 +333,21 @@ This skill focuses on **transactional database optimization** (PostgreSQL, MySQL
 This skill focuses on **query optimization** within a single database. For related workflows:
 
 **SQL Transformation & Analytics Engineering:**
-→ **[ai-ml-data-science](../ai-ml-data-science/SKILL.md)** skill
+-> **[ai-ml-data-science](../ai-ml-data-science/SKILL.md)** skill
 - SQLMesh templates for building staging/intermediate/marts layers
 - Incremental models (FULL, INCREMENTAL_BY_TIME_RANGE, INCREMENTAL_BY_UNIQUE_KEY)
 - DAG management and model dependencies
 - Unit tests and audits for SQL transformations
 
 **Data Ingestion (Loading into Warehouses):**
-→ **[ai-mlops](../ai-mlops/SKILL.md)** skill
+-> **[ai-mlops](../ai-mlops/SKILL.md)** skill
 - dlt templates for extracting from REST APIs, databases
 - Loading to Snowflake, BigQuery, Redshift, Postgres, DuckDB
 - Incremental loading patterns (timestamp, ID-based, merge/upsert)
-- Database replication (Postgres, MySQL, MongoDB → warehouse)
+- Database replication (Postgres, MySQL, MongoDB -> warehouse)
 
 **Data Lake Infrastructure:**
-→ **[data-lake-platform](../data-lake-platform/SKILL.md)** skill
+-> **[data-lake-platform](../data-lake-platform/SKILL.md)** skill
 
 - ClickHouse, DuckDB, Doris, StarRocks query engines
 - Iceberg, Delta Lake, Hudi table formats
@@ -355,10 +355,10 @@ This skill focuses on **query optimization** within a single database. For relat
 
 **Use Case Decision:**
 
-- **Query is slow in production** → Use this skill (data-sql-optimization)
-- **Building feature pipelines in SQL** → Use ai-ml-data-science (SQLMesh)
-- **Loading data from APIs/DBs to warehouse** → Use ai-mlops (dlt)
-- **Analytics on large datasets (OLAP)** → Use data-lake-platform
+- **Query is slow in production** -> Use this skill (data-sql-optimization)
+- **Building feature pipelines in SQL** -> Use ai-ml-data-science (SQLMesh)
+- **Loading data from APIs/DBs to warehouse** -> Use ai-mlops (dlt)
+- **Analytics on large datasets (OLAP)** -> Use data-lake-platform
 
 ---
 
@@ -371,7 +371,7 @@ See [data/sources.json](data/sources.json) for 62+ curated resources including:
 - **Query Optimization**: Use The Index, Luke, SQL Performance Explained, vendor optimization guides
 - **Schema Design**: Database Refactoring (Fowler), normalization guides, data type selection
 
-**Modern Optimization (December 2025):**
+**Modern Optimization (Current):**
 - **PostgreSQL**: official release notes and "current" docs for planner/optimizer changes
 - **MySQL**: official reference manual sections for EXPLAIN, optimizer, and Performance Schema
 - **SQL Server / Oracle**: official docs for execution plans, indexing, and concurrency controls

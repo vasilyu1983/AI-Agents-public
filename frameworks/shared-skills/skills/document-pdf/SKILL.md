@@ -1,6 +1,6 @@
 ---
 name: document-pdf
-description: Extract text and tables from PDFs, create formatted PDFs, merge/split documents, handle forms and annotations. Supports pdf-lib, pdfkit, PyPDF2, pdfplumber, and ReportLab for comprehensive PDF workflows in Node.js and Python.
+description: Extract text/tables from PDFs, create formatted PDFs, merge/split/rotate, handle forms and metadata. Supports pdf-lib/pdfkit (Node.js) and pypdf/pdfplumber/ReportLab (Python).
 ---
 
 # Document PDF Skill — Quick Reference
@@ -9,10 +9,17 @@ This skill enables PDF creation, extraction, manipulation, and analysis. Claude 
 
 **Modern Best Practices (Jan 2026)**:
 - PDF is a release artifact, not the editable source of truth.
-- Validate export fidelity (fonts, images, links) and accessibility baseline where applicable.
-- **Accessibility (WCAG 2.1 AA by April 2026)**: tags, reading order, alt text. ADA compliance deadline.
-- **EU Distribution**: EAA (June 2025) requires EN 301 549 compliance for PDFs distributed in EU.
+- Validate export fidelity (fonts, images, links) and accessibility where required.
+- Accessibility: if compliance matters, target a tagged/structured PDF workflow (often PDF/UA-aligned) and validate with tooling.
+- EU distribution: EAA (June 2025) typically implies EN 301 549 expectations for customer-facing PDFs.
 - Treat PDFs as sensitive: scrub metadata, ensure real redaction, and control distribution.
+
+## Core Decision Rules (2026)
+
+- First decide: born-digital PDF (selectable text) vs scanned PDF (images). Scanned PDFs usually require OCR; see `references/pdf-extraction-patterns.md`.
+- If the user needs accessibility/compliance, prefer generating from a source format that supports structure (DOCX/HTML + proper export) rather than “post-fixing” an untagged PDF.
+- For deterministic ops (merge/split/rotate/scrub), prefer `scripts/` helpers over re-implementing ad hoc.
+- Never treat black rectangles or overlays as redaction; use real redaction and verify by copy/paste + search.
 
 ---
 
@@ -26,9 +33,10 @@ This skill enables PDF creation, extraction, manipulation, and analysis. Claude 
 | Create PDF | Borb | Python | Interactive elements, pure Python |
 | Edit PDF | pdf-lib | Node.js | Modify existing PDFs, add pages |
 | Extract text | pdfplumber | Python | OCR-free text extraction |
+| OCR scanned PDF | PyMuPDF + Tesseract | Python | Scanned PDFs (no selectable text) |
 | Extract tables | Camelot | Python | Tables with borders (Lattice mode) |
 | Extract tables | Camelot/Tabula | Python | Tables without borders (Stream mode) |
-| Parse PDF | pypdf | Python | Merge, split, rotate pages |
+| Parse/merge/split/rotate | pypdf | Python | Deterministic PDF manipulation |
 | Fill forms | pdf-lib | Node.js | Form automation |
 | HTML to PDF | Puppeteer/Playwright | Node.js | High-fidelity web page rendering |
 | HTML to PDF | WeasyPrint | Python | CSS3-based, no browser needed |
@@ -47,157 +55,20 @@ Claude should invoke this skill when a user requests:
 
 ---
 
-## Core Operations
+## Default Workflow
 
-### Create PDF (Node.js - pdfkit)
+- Create: pick `pdfkit` (Node) or `ReportLab` (Python) and start from `assets/invoice-template.md` or `assets/report-template.md`; for advanced layouts use `references/pdf-generation-patterns.md`.
+- Extract: use `references/pdf-extraction-patterns.md` (text/tables/images/metadata + OCR fallback).
+- Ship: run `assets/pdf-release-checklist.md` (fidelity, links, accessibility baseline, privacy).
 
-```typescript
-import PDFDocument from 'pdfkit';
-import fs from 'fs';
+## Scripts (Deterministic Operations)
 
-const doc = new PDFDocument();
-doc.pipe(fs.createWriteStream('output.pdf'));
+Scripts are optional helpers; they assume Python 3 plus the listed dependencies in each file.
 
-// Title
-doc.fontSize(25).text('Invoice', { align: 'center' });
-doc.moveDown();
-
-// Content
-doc.fontSize(12).text('Bill To: Acme Corp');
-doc.text('Date: 2025-01-15');
-doc.moveDown();
-
-// Table-like structure
-doc.text('Item                  Qty    Price');
-doc.text('Widget A               10    $100');
-doc.text('Widget B                5    $250');
-doc.moveDown();
-doc.text('Total: $350', { align: 'right' });
-
-// Image
-doc.image('logo.png', { width: 100 });
-
-doc.end();
-```
-
-### Create PDF (Python - ReportLab)
-
-```python
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
-from reportlab.lib import colors
-
-# Simple canvas approach
-c = canvas.Canvas('output.pdf', pagesize=letter)
-c.setFont('Helvetica-Bold', 24)
-c.drawString(100, 750, 'Invoice')
-c.setFont('Helvetica', 12)
-c.drawString(100, 700, 'Bill To: Acme Corp')
-c.save()
-
-# Table with platypus
-doc = SimpleDocTemplate('table.pdf', pagesize=letter)
-data = [
-    ['Item', 'Qty', 'Price'],
-    ['Widget A', '10', '$100'],
-    ['Widget B', '5', '$250'],
-]
-table = Table(data)
-table.setStyle(TableStyle([
-    ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-    ('GRID', (0, 0), (-1, -1), 1, colors.black),
-]))
-doc.build([table])
-```
-
-### Extract Text (Python - pdfplumber)
-
-```python
-import pdfplumber
-
-with pdfplumber.open('document.pdf') as pdf:
-    for page in pdf.pages:
-        text = page.extract_text()
-        print(text)
-
-        # Extract tables
-        tables = page.extract_tables()
-        for table in tables:
-            for row in table:
-                print(row)
-```
-
-### Modify PDF (Node.js - pdf-lib)
-
-```typescript
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
-import fs from 'fs';
-
-// Load existing PDF
-const existingPdfBytes = fs.readFileSync('input.pdf');
-const pdfDoc = await PDFDocument.load(existingPdfBytes);
-
-// Add watermark to all pages
-const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
-const pages = pdfDoc.getPages();
-
-for (const page of pages) {
-  const { width, height } = page.getSize();
-  page.drawText('CONFIDENTIAL', {
-    x: width / 2 - 50,
-    y: height / 2,
-    size: 50,
-    font: helveticaFont,
-    color: rgb(0.9, 0.9, 0.9),
-    rotate: { angle: 45, type: 'degrees' },
-  });
-}
-
-// Save
-const pdfBytes = await pdfDoc.save();
-fs.writeFileSync('output.pdf', pdfBytes);
-```
-
-### Merge PDFs (Python - pypdf)
-
-```python
-from pypdf import PdfMerger
-
-merger = PdfMerger()
-merger.append('doc1.pdf')
-merger.append('doc2.pdf')
-merger.append('doc3.pdf', pages=(0, 5))  # First 5 pages only
-merger.write('merged.pdf')
-merger.close()
-```
-
-### HTML to PDF (Node.js - Puppeteer)
-
-```typescript
-import puppeteer from 'puppeteer';
-
-const browser = await puppeteer.launch();
-const page = await browser.newPage();
-
-// From URL
-await page.goto('https://example.com');
-await page.pdf({ path: 'page.pdf', format: 'A4' });
-
-// From HTML string
-await page.setContent('<h1>Hello World</h1><p>Generated PDF</p>');
-await page.pdf({
-  path: 'generated.pdf',
-  format: 'A4',
-  printBackground: true,
-  margin: { top: '1in', bottom: '1in' }
-});
-
-await browser.close();
-```
-
----
+- Merge: `python3 scripts/merge_pdfs.py merged.pdf a.pdf b.pdf`
+- Split: `python3 scripts/split_pdf.py in.pdf out_dir --each-page`
+- Rotate: `python3 scripts/rotate_pdf.py in.pdf out.pdf --degrees 90`
+- Scrub metadata: `python3 scripts/scrub_metadata.py in.pdf out.pdf`
 
 ## PDF Structure Patterns
 
@@ -253,7 +124,7 @@ PDF Task: [What do you need?]
 
 ---
 
-## Do / Avoid (Dec 2025)
+## Do / Avoid (Jan 2026)
 
 ### Do
 
@@ -296,4 +167,4 @@ Use only when explicitly requested and policy-compliant.
 **Related Skills**
 - [../document-docx/SKILL.md](../document-docx/SKILL.md) — Word document generation
 - [../document-xlsx/SKILL.md](../document-xlsx/SKILL.md) — Excel/spreadsheet workflows
-- [../document-docx/SKILL.md](../document-docx/SKILL.md) — Document workflow automation
+- [../document-pptx/SKILL.md](../document-pptx/SKILL.md) — PowerPoint presentations

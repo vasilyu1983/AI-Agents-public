@@ -24,13 +24,21 @@ Activate this skill when:
 - Implementing zero trust architecture or modern cloud-native security patterns
 - Establishing or improving secure SDLC gates (threat modeling, SAST/DAST, dependency scanning)
 
+### When NOT to Use This Skill
+
+- **General backend development** without security focus → use [software-backend](../software-backend/SKILL.md)
+- **Infrastructure/cloud security** (IAM, network security, container hardening) → use [ops-devops-platform](../ops-devops-platform/SKILL.md)
+- **Smart contract auditing** as primary focus → use [software-crypto-web3](../software-crypto-web3/SKILL.md)
+- **ML model security** (adversarial attacks, data poisoning) → use [ai-mlops](../ai-mlops/SKILL.md)
+- **Compliance-only questions** without implementation → consult compliance team directly
+
 ---
 
 ## Quick Reference Table
 
 | Security Task | Tool/Pattern | Implementation | When to Use |
 |---------------|--------------|----------------|-------------|
-| **Primary Auth** | Passkeys/WebAuthn | `navigator.credentials.create()` | New apps (2026+), phishing-resistant, 70% adoption |
+| **Primary Auth** | Passkeys/WebAuthn | `navigator.credentials.create()` | New apps (2026+), phishing-resistant, broad platform support |
 | Password Storage | bcrypt/Argon2 | `bcrypt.hash(password, 12)` | Legacy auth fallback (never store plaintext) |
 | Input Validation | Allowlist regex | `/^[a-zA-Z0-9_]{3,20}$/` | All user input (SQL, XSS, command injection prevention) |
 | SQL Queries | Parameterized queries | `db.execute(query, [userId])` | All database operations (prevent SQL injection) |
@@ -40,21 +48,19 @@ Activate this skill when:
 | HTTPS/TLS | TLS 1.3 | Force HTTPS redirects | All production traffic (data in transit) |
 | Access Control | RBAC/ABAC | `requireRole('admin', 'moderator')` | Resource authorization (APIs, admin panels) |
 | Rate Limiting | express-rate-limit | `limiter({ windowMs: 15min, max: 100 })` | Public APIs, auth endpoints (DoS prevention) |
+| Security Requirements | OWASP ASVS | Choose L1/L2/L3 | Security requirements baseline + test scope |
 
 ## Authentication Decision Matrix (Jan 2026)
 
 | Method | Use Case | Token Lifetime | Security Level | Notes |
 |--------|----------|----------------|----------------|-------|
-| **Passkeys/WebAuthn** | Primary auth (2026+) | N/A (cryptographic) | Highest | Phishing-resistant, 70% user adoption |
+| **Passkeys/WebAuthn** | Primary auth (2026+) | N/A (cryptographic) | Highest | Phishing-resistant, broad platform support |
 | OAuth 2.1 + PKCE | Third-party auth | 5-15 min access | High | Replaces implicit flow, mandatory PKCE |
 | Session cookies | Traditional web apps | 30 min - 4 hrs | Medium-High | HttpOnly, Secure, SameSite=Strict |
 | JWT stateless | APIs, microservices | 15-30 min | Medium | Always validate signature, short expiry |
 | API keys | Machine-to-machine | Long-lived | Low-Medium | Rotate regularly, scope permissions |
 
-**2026 Regulatory Mandates for Passwordless:**
-- UAE: March 31, 2026 (SMS OTP deprecated)
-- India: April 1, 2026 (SMS OTP deprecated)
-- EU: Digital Identity Wallet by end of 2026
+**Jurisdiction notes (verify):** Authentication assurance requirements vary by country, industry, and buyer. Prefer passkeys/FIDO2; treat SMS OTP as recovery-only/low assurance unless you can justify it.
 
 ## OWASP Top 10:2025 Quick Checklist
 
@@ -111,6 +117,8 @@ Security investment justification and compliance-driven revenue. Full framework:
 
 ### Quick Breach Cost Reference
 
+Indicative figures (source: IBM Cost of a Data Breach 2024; refresh for current year): https://www.ibm.com/reports/data-breach
+
 | Metric | Global Avg | US Avg | Impact |
 |--------|------------|--------|--------|
 | Avg breach cost | $4.88M | $9.36M | Budget justification baseline |
@@ -123,7 +131,7 @@ Security investment justification and compliance-driven revenue. Full framework:
 
 | Certification | Deals Unlocked | Sales Impact |
 |---------------|----------------|--------------|
-| SOC 2 Type II | $100K+ enterprise | 65% faster security review |
+| SOC 2 Type II | $100K+ enterprise | Typically reduces security questionnaire friction |
 | ISO 27001 | $250K+ EU enterprise | Preferred vendor status |
 | HIPAA | Healthcare vertical | Market access |
 | FedRAMP | $1M+ government | US gov market entry |
@@ -139,7 +147,7 @@ Example: 15% × $4.88M × 46% = $337K/year risk reduction
 
 ---
 
-## Incident Response Patterns (Dec 2025)
+## Incident Response Patterns (Jan 2026)
 
 ### Security Incident Playbook
 
@@ -172,6 +180,19 @@ Example: 15% × $4.88M × 46% = $337K/year risk reduction
 - Logging passwords, tokens, or keys
 - Unstructured log formats
 - Missing timestamps or context
+
+### Common Security Mistakes
+
+| FAIL Bad Practice | PASS Correct Approach | Risk |
+| --------------- | ------------------- | ---- |
+| `query = "SELECT * FROM users WHERE id=" + userId` | `db.execute("SELECT * FROM users WHERE id=?", [userId])` | SQL injection |
+| Storing passwords in plaintext or MD5 | `bcrypt.hash(password, 12)` or Argon2 | Credential theft |
+| `res.send(userInput)` without encoding | `res.send(DOMPurify.sanitize(userInput))` | XSS |
+| Hardcoded API keys in source code | Environment variables + secrets manager | Secret exposure |
+| `Access-Control-Allow-Origin: *` | Explicit origin allowlist | CORS bypass |
+| JWT with no expiration | `expiresIn: '15m'` + refresh tokens | Token hijacking |
+| Generic error messages to logs | Structured JSON with correlation IDs | Debugging blind spots |
+| SMS OTP as primary factor | Passkeys/WebAuthn or TOTP (keep SMS for recovery-only) | Credential phishing |
 
 ---
 
@@ -224,7 +245,7 @@ For C#/.NET crypto/fintech services using Entity Framework Core, see:
 
 - [references/supply-chain-security.md](references/supply-chain-security.md) — Dependency, build, and artifact integrity (SLSA, provenance, signing)
 - [references/zero-trust-architecture.md](references/zero-trust-architecture.md) — NIST SP 800-207, service identity, policy-based access
-- [references/owasp-top-10.md](references/owasp-top-10.md) — OWASP Top 10 mapping (2021 stable + 2025 RC preview)
+- [references/owasp-top-10.md](references/owasp-top-10.md) — OWASP Top 10:2025 (final) guide + 2021→2025 diffs
 - [references/advanced-xss-techniques.md](references/advanced-xss-techniques.md) — 2024-2025 XSS: mutation XSS, polyglots, SVG attacks, context-aware encoding
 
 #### Foundation Security Patterns
@@ -283,7 +304,7 @@ For C#/.NET crypto/fintech services using Entity Framework Core, see:
 
 ## Trend Awareness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about application security, you MUST use WebSearch to check current trends before answering.
+**IMPORTANT**: When users ask recommendation questions about application security, you MUST use WebSearch to check current trends before answering. If WebSearch is unavailable, use `data/sources.json` + web browsing and state what you verified vs assumed.
 
 ### Trigger Conditions
 

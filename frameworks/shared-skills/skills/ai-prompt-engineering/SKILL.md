@@ -1,17 +1,27 @@
 ---
 name: ai-prompt-engineering
-description: Operational prompt engineering patterns, templates, and validation flows for Claude Code.
+description: "Operational prompt engineering for production LLM apps: structured outputs (JSON/schema), deterministic extractors, RAG grounding/citations, tool/agent workflows, prompt safety (injection/exfiltration), and prompt evaluation/regression testing. Use when designing, debugging, or standardizing prompts for Codex CLI, Claude Code, and OpenAI/Anthropic/Gemini APIs."
 ---
 
 # Prompt Engineering — Operational Skill
 
-**Modern Best Practices (December 2025)**: versioned prompts, explicit output contracts, regression tests, and safety threat modeling for tool/RAG prompts (OWASP LLM Top 10: https://owasp.org/www-project-top-10-for-large-language-model-applications/).
+**Modern Best Practices (January 2026)**: versioned prompts, explicit output contracts, regression tests, and safety threat modeling for tool/RAG prompts (OWASP LLM Top 10: https://owasp.org/www-project-top-10-for-large-language-model-applications/).
 
 This skill provides **operational guidance** for building production-ready prompts across standard tasks, RAG workflows, agent orchestration, structured outputs, hidden reasoning, and multi-step planning.
 
 All content is **operational**, not theoretical. Focus on patterns, checklists, and copy-paste templates.
 
-**Claude 4+ Updates**: This skill includes Claude 4.x and 4.5-specific optimizations:
+## Quick Start (60 seconds)
+
+1. Pick a pattern from the decision tree (structured output, extractor, RAG, tools/agent, rewrite, classification).
+2. Start from a template in `assets/` and fill in `TASK`, `INPUT`, `RULES`, and `OUTPUT FORMAT`.
+3. Add guardrails: instruction/data separation, “no invented details”, missing → `null`/explicit missing.
+4. Add validation: JSON parse check, schema check, citations check, post-tool checks.
+5. Add evals: 10–20 cases while iterating, 50–200 before release, plus adversarial injection cases.
+
+## Model Notes (2026)
+
+This skill includes Claude Code + Codex CLI optimizations:
 
 - **Action directives**: Frame for implementation, not suggestions
 - **Parallel tool execution**: Independent tool calls can run simultaneously
@@ -21,41 +31,14 @@ All content is **operational**, not theoretical. Focus on patterns, checklists, 
 - **Domain-specific patterns**: Specialized guidance for frontend, research, and agentic coding
 - **Style-adversarial resilience**: Stress-test refusals with poetic/role-play rewrites; normalize or decline stylized harmful asks before tool use
 
-**Claude 4.5 Communication**: Claude 4.5 is more concise by default. Request explicit summaries when needed for visibility into reasoning or work completed.
-
----
-
-## When to Use This Skill
-
-**Activate this skill when the user asks to**:
-
-- Write or improve a production-ready prompt
-- Debug prompt failures or inconsistent outputs
-- Create structured outputs (JSON, tables, schemas)
-- Build deterministic extractors
-- Design RAG pipelines with context grounding
-- Implement agent workflows with tool calling
-- Add hidden reasoning (CoT) without visible output
-- Convert user tasks into reusable templates
-- Validate prompt quality against operational checklists
-- Standardize output formats across systems
-
-**Do NOT use this skill for**:
-
-- LLM theory or model architecture explanations
-- General educational content about AI
-- Historical background on prompt engineering
-
-**See Also**: For specialized AI/LLM implementations, see "Related Skills" section at the end of this document.
-
----
+Prefer “brief justification” over requesting chain-of-thought. When using private reasoning patterns, instruct: think internally; output only the final answer.
 
 ## Quick Reference
 
 | Task | Pattern to Use | Key Components | When to Use |
 |------|----------------|----------------|-------------|
 | **Machine-parseable output** | Structured Output | JSON schema, "JSON-only" directive, no prose | API integrations, data extraction |
-| **Field extraction** | Deterministic Extractor | Exact schema, missing→null, no transformations | Form data, invoice parsing |
+| **Field extraction** | Deterministic Extractor | Exact schema, missing->null, no transformations | Form data, invoice parsing |
 | **Use retrieved context** | RAG Workflow | Context relevance check, chunk citations, explicit missing info | Knowledge bases, documentation search |
 | **Internal reasoning** | Hidden Chain-of-Thought | Internal reasoning, final answer only | Classification, complex decisions |
 | **Tool-using agent** | Tool/Agent Planner | Plan-then-act, one tool per turn | Multi-step workflows, API calls |
@@ -68,27 +51,83 @@ All content is **operational**, not theoretical. Focus on patterns, checklists, 
 
 ```text
 User needs: [Prompt Type]
-    ├─ Output must be machine-readable?
-    │   ├─ Extract specific fields only? → **Deterministic Extractor Pattern**
-    │   └─ Generate structured data? → **Structured Output Pattern (JSON)**
-    │
-    ├─ Use external knowledge?
-    │   └─ Retrieved context must be cited? → **RAG Workflow Pattern**
-    │
-    ├─ Requires reasoning but hide process?
-    │   └─ Classification or decision task? → **Hidden Chain-of-Thought Pattern**
-    │
-    ├─ Needs to call external tools/APIs?
-    │   └─ Multi-step workflow? → **Tool/Agent Planner Pattern**
-    │
-    ├─ Transform existing text?
-    │   └─ Style/format constraints? → **Rewrite + Constrain Pattern**
-    │
-    └─ Classify or route to categories?
-        └─ Mutually exclusive rules? → **Decision Tree Pattern**
+  |-- Output must be machine-readable?
+  |     |-- Extract specific fields only? -> **Deterministic Extractor Pattern**
+  |     `-- Generate structured data? -> **Structured Output Pattern (JSON)**
+  |
+  |-- Use external knowledge?
+  |     `-- Retrieved context must be cited? -> **RAG Workflow Pattern**
+  |
+  |-- Requires reasoning but hide process?
+  |     `-- Classification or decision task? -> **Hidden Chain-of-Thought Pattern**
+  |
+  |-- Needs to call external tools/APIs?
+  |     `-- Multi-step workflow? -> **Tool/Agent Planner Pattern**
+  |
+  |-- Transform existing text?
+  |     `-- Style/format constraints? -> **Rewrite + Constrain Pattern**
+  |
+  `-- Classify or route to categories?
+        `-- Mutually exclusive rules? -> **Decision Tree Pattern**
 ```
 
 ---
+
+## Copy/Paste: Minimal Prompt Skeletons
+
+### 1) Generic "output contract" skeleton
+
+```text
+TASK:
+{{one_sentence_task}}
+
+INPUT:
+{{input_data}}
+
+RULES:
+- Follow TASK exactly.
+- Use only INPUT (and tool outputs if tools are allowed).
+- No invented details. Missing required info -> say what is missing.
+- Keep reasoning hidden.
+- Follow OUTPUT FORMAT exactly.
+
+OUTPUT FORMAT:
+{{schema_or_format_spec}}
+```
+
+### 2) Tool/agent skeleton (deterministic)
+
+```text
+AVAILABLE TOOLS:
+{{tool_signatures_or_names}}
+
+WORKFLOW:
+- Make a short plan.
+- Call tools only when required to complete the task.
+- Validate tool outputs before using them.
+- If the environment supports parallel tool calls, run independent calls in parallel.
+```
+
+### 3) RAG skeleton (grounded)
+
+```text
+RETRIEVED CONTEXT:
+{{chunks_with_ids}}
+
+RULES:
+- Use only retrieved context for factual claims.
+- Cite chunk ids for each claim.
+- If evidence is missing, say what is missing.
+```
+
+---
+
+## Operational Checklists
+
+Use these references when validating or debugging prompts:
+
+- `frameworks/shared-skills/skills/ai-prompt-engineering/references/quality-checklists.md`
+- `frameworks/shared-skills/skills/ai-prompt-engineering/references/production-guidelines.md`
 
 ## Context Engineering (2026)
 
@@ -116,7 +155,7 @@ True expertise in prompting extends beyond writing instructions to shaping the e
 
 **3. Context Separation**: Use clear delimiters (`<system>`, `<user>`, `<context>`) to separate instruction types.
 
-**4. Dynamic Context**: Adjust context based on task complexity—simple tasks need less context, complex tasks need more.
+**4. Dynamic Context**: Adjust context based on task complexity - simple tasks need less context, complex tasks need more.
 
 ---
 
@@ -141,7 +180,7 @@ True expertise in prompting extends beyond writing instructions to shaping the e
 **Do**
 - Do keep prompts small and modular; centralize shared fragments (policies, schemas, style).
 - Do add a prompt eval harness and block merges on regressions.
-- Do prefer “brief justification” over requesting chain-of-thought; treat hidden reasoning as model-internal.
+- Do prefer "brief justification" over requesting chain-of-thought; treat hidden reasoning as model-internal.
 
 **Avoid**
 - Avoid prompt sprawl (many near-duplicates with no owner or tests).
@@ -186,7 +225,7 @@ True expertise in prompting extends beyond writing instructions to shaping the e
   - Context grounding, chunk citation, missing information handling
 
 - **[Agent and Tool Patterns](references/agent-patterns.md)** - Tool use and agent orchestration
-  - Plan-then-act workflows, tool calling, multi-step reasoning, generate–verify–revise chains
+  - Plan-then-act workflows, tool calling, multi-step reasoning, generate-verify-revise chains
   - **Multi-Agent Orchestration** (2026): centralized, handoff, federated patterns; plan-and-execute (90% cost reduction)
 
 - **[Extraction Patterns](references/extraction-patterns.md)** - Deterministic field extraction
@@ -233,44 +272,9 @@ External references are listed in [data/sources.json](data/sources.json):
 
 ---
 
-## Trend Awareness Protocol
+## Freshness Rule (2026)
 
-**IMPORTANT**: When users ask recommendation questions about prompt engineering, you MUST use WebSearch to check current trends before answering.
-
-### Trigger Conditions
-
-- "What's the best prompting technique for [use case]?"
-- "What should I use for [structured output/reasoning/agents]?"
-- "What's the latest in prompt engineering?"
-- "Current best practices for [chain-of-thought/few-shot/system prompts]?"
-- "Is [prompting technique] still effective in 2026?"
-- "How do I prompt [Claude 4/GPT-4.5/Gemini 2]?"
-- "Best way to get reliable [JSON/structured output]?"
-
-### Required Searches
-
-1. Search: `"prompt engineering best practices 2026"`
-2. Search: `"[Claude/GPT/Gemini] prompting techniques 2026"`
-3. Search: `"prompt engineering trends January 2026"`
-4. Search: `"[reasoning/structured output/agents] prompting 2026"`
-
-### What to Report
-
-After searching, provide:
-
-- **Current landscape**: What prompting techniques work best NOW (model-specific)
-- **Emerging trends**: New techniques gaining traction (thinking tokens, etc.)
-- **Deprecated/declining**: Techniques that no longer work well on new models
-- **Recommendation**: Based on fresh data and model-specific documentation
-
-### Example Topics (verify with fresh search)
-
-- Model-specific prompting (Claude 4.x, GPT-4.5, Gemini 2.x)
-- Reasoning techniques (extended thinking, chain-of-thought variants)
-- Structured output (JSON mode, function calling, tool use)
-- Agent prompting patterns (ReAct, plan-and-execute)
-- Safety and guardrails in prompts
-- Evaluation and testing of prompts
+When asked for “latest” prompting recommendations, prefer provider docs and standards from `data/sources.json`. If web search is unavailable, state the constraint and avoid overconfident “current best” claims.
 
 ---
 
@@ -303,3 +307,11 @@ This skill provides foundational prompt engineering patterns. For specialized im
 - Follow Decision Tree to select appropriate pattern
 - Validate outputs with Quality Checklists before deployment
 - Use templates as starting points, customize for specific use cases
+
+**For Codex CLI**:
+
+- Use the same patterns and templates; adapt tool-use wording to the local tool interface
+- For long-horizon tasks, track progress explicitly (a step list/plan) and update it as work completes
+- Run independent reads/searches in parallel when the environment supports it; keep writes/edits serialized
+- **AGENTS.md Integration**: Place project-specific prompt guidance in AGENTS.md files at global (~/.codex/AGENTS.md), project-level (./AGENTS.md), or subdirectory scope for layered instructions
+- **Reasoning Effort**: Use `medium` for interactive coding (default), `high`/`xhigh` for complex autonomous multi-hour tasks

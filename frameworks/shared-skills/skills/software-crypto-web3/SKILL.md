@@ -1,13 +1,13 @@
 ---
 name: software-crypto-web3
-description: Production-grade blockchain and Web3 development with Solidity (Ethereum/EVM), Rust (Solana), CosmWasm (Cosmos), including smart contract architecture, security patterns, gas optimization, testing strategies, DeFi protocols, and deployment workflows.
+description: Use when building blockchain applications or smart contracts across EVM (Solidity), Solana (Anchor/Rust), Cosmos (CosmWasm), and TON, including security/audit workflows, fuzz/invariant testing, upgrades, custody/signing, and backend integration (RPC, indexers, webhooks).
 ---
 
-# Blockchain & Web3 Development Skill — Quick Reference
+# Software Crypto/Web3 Engineering
 
-This skill equips blockchain developers with execution-ready patterns for building secure, gas-optimized smart contracts and decentralized applications. Apply these patterns when you need smart contract development, DeFi protocols, NFT implementations, security audits, or Web3 architecture.
+Use this skill to design, implement, and review secure blockchain systems: smart contracts, on-chain/off-chain integration, custody and signing, testing, audits, and production operations.
 
-**Modern Best Practices (Jan 2026)**: Solidity 0.8.33+, security-first development, explicit threat models, comprehensive testing (unit, integration, fork, invariant), audits/formal methods where warranted, upgrade safety (timelocks, governance, rollback plans), and defense-in-depth for key custody and signing.
+Defaults to: security-first development, explicit threat models, comprehensive testing (unit + integration + fork + fuzz/invariants), formal methods when high-value, upgrade safety (timelocks, governance, rollback plans), and defense-in-depth for key custody and signing.
 
 ---
 
@@ -21,15 +21,15 @@ This skill equips blockchain developers with execution-ready patterns for buildi
 | TON Contracts | Tact/FunC + Blueprint | `npm create ton@latest` | TON blockchain development |
 | Testing (Solidity) | Foundry/Hardhat | `forge test` or `npx hardhat test` | Unit, fork, invariant tests |
 | Security Audit | Slither/Aderyn/Echidna | `slither .` or `aderyn .` | Static analysis, fuzzing |
-| AI-Assisted Audit | Sherlock AI/Olympix | Integrated platforms | Pre-audit, CI/CD security |
+| AI-Assisted Review | AI scanners (optional) | N/A | Pre-audit preparation (verify findings manually) |
 | Fuzzing | Echidna/Medusa | `echidna .` or `medusa fuzz` | Property-based fuzzing |
 | Gas Optimization | Foundry Gas Snapshots | `forge snapshot` | Benchmark and optimize gas |
 | Deployment | Hardhat Deploy/Forge Script | `npx hardhat deploy` | Mainnet/testnet deployment |
 | Verification | Etherscan API | `npx hardhat verify` | Source code verification |
 | Upgradeable Contracts | OpenZeppelin Upgrades | `@openzeppelin/hardhat-upgrades` | Proxy-based upgrades |
-| Smart Wallets | ERC-4337 + EIP-7702 | Account abstraction SDKs | Gasless UX, batch txns |
+| Smart Wallets | ERC-4337, EIP-7702 | Account abstraction SDKs | Smart accounts and sponsored gas (verify network support) |
 
-# When to Use This Skill
+## Scope
 
 Use this skill when you need:
 
@@ -58,40 +58,40 @@ Use this skill when you need:
 
 ```text
 Project needs: [Use Case]
-    ├─ EVM-compatible smart contracts?
-    │   ├─ Complex testing needs → Foundry (Solidity tests, fuzzing, gas snapshots)
-    │   ├─ TypeScript ecosystem → Hardhat (plugins, TypeScript, Ethers.js)
-    │   └─ Enterprise features → NestJS + Hardhat
-    │
-    ├─ High throughput/low fees?
-    │   ├─ Rust-based → Solana (Anchor framework)
-    │   ├─ EVM L2 → Arbitrum/Optimism (Ethereum security, lower gas)
-    │   └─ Telegram integration → TON (Tact/FunC contracts)
-    │
-    ├─ Interoperability across chains?
-    │   ├─ Cosmos ecosystem → CosmWasm (IBC protocol)
-    │   ├─ Multi-chain DeFi → LayerZero or Wormhole
-    │   └─ Bridge development → Custom bridge contracts
-    │
-    ├─ Token standard implementation?
-    │   ├─ Fungible tokens → ERC20 (OpenZeppelin), SPL Token (Solana)
-    │   ├─ NFTs → ERC721/ERC1155 (OpenZeppelin), Metaplex (Solana)
-    │   └─ Semi-fungible → ERC1155 (gaming, fractionalized NFTs)
-    │
-    ├─ DeFi protocol development?
-    │   ├─ AMM/DEX → Uniswap V3 fork or custom (x*y=k, concentrated liquidity)
-    │   ├─ Lending → Compound/Aave fork (collateralized borrowing)
-    │   └─ Staking/Yield → Custom reward distribution contracts
-    │
-    ├─ Upgradeable contracts required?
-    │   ├─ Transparent Proxy → OpenZeppelin (admin/user separation)
-    │   ├─ UUPS → Gas-efficient (upgrade logic in implementation)
-    │   └─ Diamond Standard → Modular functionality (EIP-2535)
-    │
-    └─ Backend integration?
-        ├─ .NET/C# → Multi-provider architecture (see Backend Integration Patterns)
-        ├─ Node.js → Ethers.js/Web3.js + Prisma
-        └─ Python → Web3.py + FastAPI
+  - EVM-compatible smart contracts?
+    - Complex testing needs -> Foundry (fuzzing, invariants, gas snapshots)
+    - TypeScript ecosystem -> Hardhat (plugins, TS, Ethers.js/Viem)
+    - Enterprise features -> NestJS + Hardhat
+
+  - High throughput / low fees?
+    - Rust-based -> Solana (Anchor)
+    - EVM L2 -> Arbitrum/Optimism/Base (Ethereum security, lower gas)
+    - Telegram distribution -> TON (Tact/FunC)
+
+  - Interoperability across chains?
+    - Cosmos ecosystem -> CosmWasm (IBC)
+    - Multi-chain apps -> LayerZero or Wormhole (verify trust assumptions)
+    - Bridge development -> custom (high risk; threat model required)
+
+  - Token standard implementation?
+    - Fungible tokens -> ERC20 (OpenZeppelin), SPL Token (Solana)
+    - NFTs -> ERC721/ERC1155 (OpenZeppelin), Metaplex (Solana)
+    - Semi-fungible -> ERC1155 (gaming, fractionalized NFTs)
+
+  - DeFi protocol development?
+    - AMM/DEX -> Uniswap V3 fork or custom (concentrated liquidity)
+    - Lending -> Compound/Aave fork (collateralized borrowing)
+    - Staking/yield -> custom reward distribution contracts
+
+  - Upgradeable contracts required?
+    - Transparent proxy -> OpenZeppelin (admin/user separation)
+    - UUPS -> upgrade logic in implementation
+    - Diamond -> modular functionality (EIP-2535)
+
+  - Backend integration?
+    - .NET/C# -> multi-provider architecture (see backend integration references)
+    - Node.js -> Ethers.js/Viem + durable queues
+    - Python -> Web3.py + FastAPI
 ```
 
 **Chain-Specific Considerations:**
@@ -111,7 +111,7 @@ See [references/](references/) for chain-specific best practices.
 
 ### Custody, Keys, and Signing (Core)
 
-Key management is the dominant risk driver in production crypto systems. Use general key management guidance as a baseline (NIST SP 800-57) https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final
+Key management is a dominant risk driver in production crypto systems. Use a real key management standard as baseline (for example, [NIST SP 800-57](https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final)).
 
 | Model | Who holds keys | Typical use | Primary risks | Default controls |
 |------|-----------------|------------|---------------|------------------|
@@ -119,12 +119,12 @@ Key management is the dominant risk driver in production crypto systems. Use gen
 | Custodial | Your service (HSM/MPC) | Exchanges, payments, B2B | Key theft, insider threat, ops mistakes | HSM/MPC, separation of duties, limits/approvals, audit logs |
 | Hybrid | Split responsibility | Enterprises | Complex failure modes | Explicit recovery/override paths, runbooks |
 
-Do:
+BEST:
 - Separate hot/warm/cold signing paths with limits and approvals [Inference]
 - Require dual control for high-value transfers (policy engine + human approval) [Inference]
 - Keep an immutable audit trail for signing requests (who/what/when/why) [Inference]
 
-Avoid:
+AVOID:
 - Storing private keys in databases or application config
 - Reusing signing keys across environments (dev/staging/prod)
 - Hot-wallet automation without rate limits and circuit breakers [Inference]
@@ -182,7 +182,7 @@ rule balanceNeverNegative(address user) {
 }
 ```
 
-> **AI Auditor Landscape (2026)**: AI auditing tools have cut average audit time by 30%+. Sherlock AI (released Sept 2025) combines rule-based scanning with supervised learning. Use AI tools for pre-audit preparation; they complement, not replace, human auditors.
+> **AI-assisted review**: Use AI tooling for pre-audit preparation and coverage, not for final security decisions. Treat outputs as untrusted and reproduce findings with deterministic tools, tests, and manual review.
 
 ### MEV Protection
 
@@ -214,7 +214,7 @@ function reveal(uint256 value, bytes32 salt) external {
 
 ## Account Abstraction (Jan 2026)
 
-> **Adoption**: 40M+ smart accounts deployed, 100M+ UserOperations processed. EIP-7702 live since Pectra upgrade (May 2025).
+> **Note**: Adoption numbers and upgrade timelines change quickly. Verify current ERC-4337 ecosystem state and any EIP-7702 activation details with WebSearch before making recommendations.
 
 ### ERC-4337 vs EIP-7702
 
@@ -226,8 +226,9 @@ function reveal(uint256 value, bytes32 salt) external {
 
 **ERC-4337 Architecture:**
 ```text
-User → UserOperation → Bundler → EntryPoint → Smart Account → Target Contract
-                          ↓
+User -> UserOperation -> Bundler -> EntryPoint -> Smart Account -> Target Contract
+                          |
+                          v
                       Paymaster (gas sponsorship)
 ```
 
@@ -273,7 +274,7 @@ contract SimpleAccount is BaseAccount {
 
 ## Layer 2 Development (Jan 2026)
 
-> **Market Share**: Base (46.58%) + Arbitrum (30.86%) = 75%+ of L2 DeFi TVL. All major optimistic rollups now Stage 1 with live fraud proofs.
+> **Note**: L2 market share and risk stages change quickly. Use current data (for example, L2Beat and ecosystem dashboards) before stating rankings, TVL, or stage classifications.
 
 ### L2 Selection Guide
 
@@ -297,11 +298,42 @@ Major institutions launching L2s on OP Stack:
 
 Since March 2024, rollups use blob-based data posting:
 ```text
-Before: calldata posting → expensive
-After:  blob posting → 50%+ DA cost reduction
+Before: calldata posting -> expensive
+After:  blob posting -> lower data availability cost
 ```
 
 Optimism, zkSync optimized batching for blobs in 2025.
+
+---
+
+## Common Mistakes (2025-2026)
+
+> **Reality check**: Exploits regularly cause large losses. Access control, signing/custody, and integration bugs remain top incident drivers.
+
+| Mistake | Impact | Prevention |
+|---------|--------|------------|
+| **Missing access control** | Unauthorized admin actions | Use OpenZeppelin `Ownable2Step`, `AccessControl` |
+| **Reentrancy** | Drain funds via callback | CEI pattern, `ReentrancyGuard`, Slither checks |
+| **Unchecked external calls** | Silent failures | Always check return values, use `SafeERC20` |
+| **Integer overflow (pre-0.8)** | Arbitrary value manipulation | Use Solidity 0.8.x+ (built-in checks) |
+| **Frontrunning** | MEV extraction, sandwich attacks | Commit-reveal, Flashbots Protect, private mempool |
+| **Oracle manipulation** | Price feed attacks | TWAP, multiple oracles, sanity bounds |
+| **Improper initialization** | Proxy takeover | Use `initializer` modifier, `_disableInitializers()` |
+| **Storage collision (proxies)** | Data corruption | Follow EIP-1967 slots, use OpenZeppelin upgrades |
+
+### Anti-Patterns to Avoid
+
+AVOID:
+- Using `tx.origin` for authorization (phishing risk)
+- Storing secrets on-chain (all data is public)
+- Using `block.timestamp` for randomness (miner/validator influence)
+- Ignoring return values from `transfer`/`send`
+- Using deprecated tooling (Truffle/Ganache/Brownie)
+
+BEST:
+- Run static analysis on every change (for example, Slither and Aderyn)
+- Add fuzz/invariant tests before any audit
+- Use formal methods for high-value DeFi (for example, Certora and symbolic testing)
 
 ---
 
@@ -321,19 +353,27 @@ Optimism, zkSync optimized batching for blobs in 2025.
 
 ---
 
+## When NOT to Use This Skill
+
+- **Traditional backend without blockchain** -> Use [software-backend](../software-backend/SKILL.md)
+- **Pure API design without Web3** -> Use [dev-api-design](../dev-api-design/SKILL.md)
+- **General security without smart contracts** -> Use [software-security-appsec](../software-security-appsec/SKILL.md)
+- **Frontend-only dApp UI** -> Use [software-frontend](../software-frontend/SKILL.md) + Web3 libraries
+
+---
+
 ## Navigation
 
 **Resources**
 
-- [references/blockchain-best-practices.md](references/blockchain-best-practices.md) — Universal blockchain patterns and security
-- [references/backend-integration-best-practices.md](references/backend-integration-best-practices.md) — .NET/C# crypto integration patterns (CQRS, Kafka, multi-provider)
-- [references/solidity-best-practices.md](references/solidity-best-practices.md) — Solidity/EVM-specific guidance
-- [references/rust-solana-best-practices.md](references/rust-solana-best-practices.md) — Solana + Anchor patterns
-- [references/cosmwasm-best-practices.md](references/cosmwasm-best-practices.md) — Cosmos/CosmWasm guidance
-- [references/ton-best-practices.md](references/ton-best-practices.md) — TON contracts (Tact/Fift/FunC) and deployment
-- [../software-security-appsec/references/smart-contract-security-auditing.md](../software-security-appsec/references/smart-contract-security-auditing.md) — Smart contract audit workflows and tools (see software-security-appsec skill)
-- [README.md](README.md) — Folder overview and usage notes
-- [data/sources.json](data/sources.json) — Curated external references per chain
+- [references/blockchain-best-practices.md](references/blockchain-best-practices.md) - Universal blockchain patterns and security
+- [references/backend-integration-best-practices.md](references/backend-integration-best-practices.md) - .NET/C# crypto integration patterns (CQRS, Kafka, multi-provider)
+- [references/solidity-best-practices.md](references/solidity-best-practices.md) - Solidity/EVM-specific guidance
+- [references/rust-solana-best-practices.md](references/rust-solana-best-practices.md) - Solana + Anchor patterns
+- [references/cosmwasm-best-practices.md](references/cosmwasm-best-practices.md) - Cosmos/CosmWasm guidance
+- [references/ton-best-practices.md](references/ton-best-practices.md) - TON contracts (Tact/Fift/FunC) and deployment
+- [../software-security-appsec/references/smart-contract-security-auditing.md](../software-security-appsec/references/smart-contract-security-auditing.md) - Smart contract audit workflows and tools (see software-security-appsec skill)
+- [data/sources.json](data/sources.json) - Curated external references per chain
 - Shared secure review checklist: [../software-clean-code-standard/assets/checklists/secure-code-review-checklist.md](../software-clean-code-standard/assets/checklists/secure-code-review-checklist.md)
 
 **Templates**
@@ -345,13 +385,13 @@ Optimism, zkSync optimized batching for blobs in 2025.
 
 **Related Skills**
 
-- [../software-security-appsec/SKILL.md](../software-security-appsec/SKILL.md) — Security hardening, threat modeling, OWASP vulnerabilities
-- [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System decomposition, modularity, dependency design
-- [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — Infrastructure, CI/CD, observability for blockchain nodes
-- [../software-backend/SKILL.md](../software-backend/SKILL.md) — API integration with smart contracts, RPC nodes, indexers
-- [../qa-resilience/SKILL.md](../qa-resilience/SKILL.md) — Resilience, circuit breakers, retry logic for chains
-- [../software-code-review/SKILL.md](../software-code-review/SKILL.md) — Code review patterns and quality gates
-- [../dev-api-design/SKILL.md](../dev-api-design/SKILL.md) — RESTful design for Web3 APIs and dApp backends
+- [../software-security-appsec/SKILL.md](../software-security-appsec/SKILL.md) - Security hardening, threat modeling, OWASP vulnerabilities
+- [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) - System decomposition, modularity, dependency design
+- [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) - Infrastructure, CI/CD, observability for blockchain nodes
+- [../software-backend/SKILL.md](../software-backend/SKILL.md) - API integration with smart contracts, RPC nodes, indexers
+- [../qa-resilience/SKILL.md](../qa-resilience/SKILL.md) - Resilience, circuit breakers, retry logic for chains
+- [../software-code-review/SKILL.md](../software-code-review/SKILL.md) - Code review patterns and quality gates
+- [../dev-api-design/SKILL.md](../dev-api-design/SKILL.md) - RESTful design for Web3 APIs and dApp backends
 
 ---
 
@@ -397,4 +437,4 @@ After searching, provide:
 ---
 
 ## Operational Playbooks
-- [references/operational-playbook.md](references/operational-playbook.md) — Smart contract architecture, security-first workflows, and platform-specific patterns
+- [references/operational-playbook.md](references/operational-playbook.md) - Smart contract architecture, security-first workflows, and platform-specific patterns

@@ -1,13 +1,13 @@
 # Claude Code Kit - Complete Guide
 
-**Last Updated**: 2025-12-20
-**Official Documentation**: [Claude Code Overview](https://docs.claude.com/en/docs/claude-code/overview)
+**Last Updated**: 2026-01-24
+**Official Documentation**: [Claude Code Overview](https://code.claude.com/docs/en/overview)
 **Skills Format**: [Agent Skills Specification](https://agentskills.io/specification) - Open format maintained by Anthropic
 **Status**: PORTABLE - Works for any repository
 
 Production-ready Claude Code setup with 21 agents + 28 commands + 7 hooks.
 
-**Skills**: 79 skills in `frameworks/shared-skills/` (shared with Codex Kit)
+**Skills**: 83 skills in `frameworks/shared-skills/` (shared with Codex Kit)
 
 **NEW in v3.7**: Skills moved to shared source. Framework now contains agents, commands, hooks only.
 
@@ -108,7 +108,7 @@ cp -r /path/to/frameworks/shared-skills/skills/* .claude/skills/
 | **Agents** | 21 | `framework/agents/` |
 | **Commands** | 28 | `framework/commands/` |
 | **Hooks** | 7 | `framework/hooks/` |
-| **Skills** | 76 | `shared-skills/skills/` (separate) |
+| **Skills** | 83 | `shared-skills/skills/` (separate) |
 
 Skills are maintained in a shared source (`frameworks/shared-skills/`) used by both Claude Code Kit and Codex Kit.
 
@@ -141,7 +141,7 @@ Skills are maintained in a shared source (`frameworks/shared-skills/`) used by b
 
 **New in v3.5** (2025-12-18): **December 2025 Skill Refresh**
 
-All 79 skills updated with:
+All 83 skills updated with:
 
 - Explicit "Modern Best Practices (December 2025)" headers with authoritative URLs
 - Operational focus: "No theory. No narrative. Only what Claude can execute."
@@ -171,7 +171,7 @@ See [framework/README.md](framework/README.md) for complete documentation, usage
 
 ### Three-Router Architecture
 
-Intelligent skill orchestration across 79 skills through three domain-specific routers:
+Intelligent skill orchestration across 83 skills through three domain-specific routers:
 
 ```text
 ┌───────────────────────┐  ┌───────────────────────┐  ┌───────────────────────┐

@@ -16,7 +16,7 @@ Analyze staged git changes and generate concise, meaningful commit messages foll
 ## When This Skill Activates
 
 - When `/commit-msg` command is invoked
-- When pre-commit hook is triggered (before git commit)
+- When invoked from a `commit-msg`/`prepare-commit-msg` hook (if installed)
 - When user requests commit message suggestions
 - When analyzing changes before creating a commit
 
@@ -32,6 +32,7 @@ Analyze staged git changes and generate concise, meaningful commit messages foll
 - Determine commit type from changes:
   - `feat`: New features or functionality
   - `fix`: Bug fixes
+  - `security`: Security fixes or hardening
   - `refactor`: Code restructuring without behavior change
   - `docs`: Documentation changes
   - `style`: Formatting, whitespace, code style
@@ -39,6 +40,7 @@ Analyze staged git changes and generate concise, meaningful commit messages foll
   - `chore`: Build process, dependencies, tooling
   - `perf`: Performance improvements
   - `ci`: CI/CD configuration changes
+  - `build`: Build system changes
   - `revert`: Reverting previous commits
 
 **3. Scope Detection**
@@ -49,7 +51,7 @@ Analyze staged git changes and generate concise, meaningful commit messages foll
 
 **4. Message Generation**
 - Format: `type(scope): description`
-- Keep description under 50 characters (ideal) or 72 characters (max)
+- Enforce tier limits: Tier 1 summary max 50 chars; Tier 2/3 summary max 72 chars (ideal 50)
 - Use imperative mood ("add" not "added")
 - Focus on "what" and "why", not "how"
 - Provide 2-3 alternative suggestions
@@ -110,24 +112,34 @@ type(scope): summary line (max 72 chars)
 ## Workflow
 
 ```text
-1. Get staged changes → git diff --staged
-2. Analyze changes:
+1. Get staged changes (staged only, not working tree):
+   - git diff --staged --name-status
+   - git diff --staged --stat
+   - git diff --staged
+2. Load config → frameworks/shared-skills/skills/git-commit-message/config.yaml
+3. Analyze changes:
    - Count files modified/added/deleted
    - Identify primary change type using analysis patterns
    - Detect scope from project structure (config.yaml)
    - Determine tier (1/2/3) based on commit type
    - Extract key modifications
-3. Generate commit messages:
+4. Generate commit messages:
    - Apply tier-appropriate format
    - Primary suggestion (best match)
    - Alternative 1 (different scope/angle)
    - Alternative 2 (broader/narrower focus)
-4. Validate against rules:
+5. Validate against rules:
    - Check forbidden patterns
    - Verify required elements present
    - Ensure length limits
-5. Present to user with explanation and tier info
+6. Present to user with explanation and tier info
 ```
+
+## Optional Modes (If Supported By The Caller)
+
+- `--validate "<message>"`: Validate a commit message without generating suggestions (format/type/scope/length/forbidden patterns; then report required Tier 1/2/3 elements if missing).
+- `--tier <1|2|3>`: Force the tier format (overrides auto-detection).
+- `--interactive` or `-i`: Ask for confirmation of type, scope, and summary before final output.
 
 ## Output Format
 
@@ -193,7 +205,7 @@ ANALYSIS:
 
 ## Integration Points
 
-**Pre-commit hook**: Automatically triggered before commit
+**Pre-commit hook**: Triggered before commit (if installed/configured)
 **Slash command**: Manual invocation via `/commit-msg`
 **Direct skill call**: From other skills or tools
 
@@ -290,13 +302,6 @@ The skill uses pattern matching to intelligently detect commit types from diffs:
 - **Forbidden patterns**: Blocks commits with generic messages or assistant/tool attribution
 - **Analysis patterns**: Customizes type detection logic for your codebase
 - **Validation mode**: `strict` (block), `warning` (warn), or `disabled`
-
-**Legacy options** (git config or .commit-template):
-
-- `commit.type.prefer`: Preferred type for ambiguous changes
-- `commit.scope.detect`: Enable/disable automatic scope detection
-- `commit.length.max`: Maximum description length (default: 72)
-- `commit.alternatives.count`: Number of alternatives (default: 2)
 
 ## Forbidden Patterns (Validation)
 
@@ -412,7 +417,7 @@ Use it to standardize `type(scope): summary` messages and keep history automatio
 
 ---
 
-**Version**: 2.1.0
-**Last Updated**: 2025-12-17
+**Version**: 2.1.1
+**Last Updated**: 2026-01-26
 **Repository**: AI-Agents (documentation repository)
 **Conventional Commits Spec**: <https://www.conventionalcommits.org/>

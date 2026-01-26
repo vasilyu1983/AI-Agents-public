@@ -3,7 +3,7 @@ name: ai-llm-inference
 description: "Operational patterns for LLM inference: latency budgeting, tail-latency control, caching, batching/scheduling, quantization/compression, parallelism, and reliable serving at scale. Emphasizes production-grade performance, cost control, and observability."
 ---
 
-# LLMOps – Inference & Optimization – Production Skill Hub
+# LLMOps - Inference & Optimization - Production Skill Hub
 
 **Modern Best Practices (January 2026)**:
 
@@ -15,13 +15,13 @@ description: "Operational patterns for LLM inference: latency budgeting, tail-la
 
 This skill provides **production-ready operational patterns** for optimizing LLM inference performance, cost, and reliability. It centralizes **decision rules**, **optimization strategies**, **configuration templates**, and **operational checklists** for inference workloads.
 
-No theory. No narrative. Only what Claude can execute.
+No theory. No narrative. Only what Codex can execute.
 
 ---
 
 ## When to Use This Skill
 
-Claude should activate this skill whenever the user asks for:
+Codex should activate this skill whenever the user asks for:
 
 - Optimizing LLM inference latency or throughput
 - Choosing quantization strategies (FP8/FP4/INT8/INT4)
@@ -38,10 +38,12 @@ Claude should activate this skill whenever the user asks for:
 
 ## Scope Boundaries (Use These Skills for Depth)
 
-- **Prompting, tuning, datasets** → [ai-llm](../ai-llm/SKILL.md)
-- **RAG pipeline construction** → [ai-rag](../ai-rag/SKILL.md)
-- **Deployment, APIs, monitoring** → [ai-mlops](../ai-mlops/SKILL.md)
-- **Safety, governance** → [ai-mlops](../ai-mlops/SKILL.md)
+- **Prompting, tuning, datasets** -> [ai-llm](../ai-llm/SKILL.md)
+- **RAG pipeline construction** -> [ai-rag](../ai-rag/SKILL.md)
+- **Deployment, APIs, monitoring** -> [ai-mlops](../ai-mlops/SKILL.md)
+- **Safety, governance** -> [ai-mlops](../ai-mlops/SKILL.md)
+- **Performance monitoring** -> [qa-observability](../qa-observability/SKILL.md)
+- **Infrastructure operations** -> [ops-devops-platform](../ops-devops-platform/SKILL.md)
 
 ---
 
@@ -65,36 +67,50 @@ Claude should activate this skill whenever the user asks for:
 Need to optimize LLM inference: [Optimization Path]
     │
     ├─ High throughput (>10k tok/s) OR P99 variance > 3x P50?
-    │   └─ YES → Disaggregated inference (prefill/decode separation)
+    │   └─ YES -> Disaggregated inference (prefill/decode separation)
     │            See references/disaggregated-inference.md
     │
     ├─ Primary constraint: Throughput?
-    │   ├─ Many concurrent users? → batching + KV-cache aware serving + admission control
-    │   ├─ Chat/agents with KV reuse? → SGLang (RadixAttention)
-    │   └─ Mostly batch/offline? → batch inference jobs + large batches + spot capacity
+    │   ├─ Many concurrent users? -> batching + KV-cache aware serving + admission control
+    │   ├─ Chat/agents with KV reuse? -> SGLang (RadixAttention)
+    │   └─ Mostly batch/offline? -> batch inference jobs + large batches + spot capacity
     │
     ├─ Primary constraint: Cost?
-    │   ├─ Can accept lower quality tier? → model tiering (small/medium/large router)
-    │   └─ Must keep quality? → caching + prompt/context reduction before quantization
+    │   ├─ Can accept lower quality tier? -> model tiering (small/medium/large router)
+    │   └─ Must keep quality? -> caching + prompt/context reduction before quantization
     │
     ├─ Primary constraint: Latency?
-    │   ├─ Draft model acceptable? → speculative decoding
-    │   └─ Long context? → prefill optimizations + FlashAttention-3 + context budgets
+    │   ├─ Draft model acceptable? -> speculative decoding
+    │   └─ Long context? -> prefill optimizations + FlashAttention-3 + context budgets
     │
     ├─ Large model (>70B)?
-    │   ├─ Multiple GPUs? → Tensor parallelism (NVLink required)
-    │   └─ Deep model? → Pipeline parallelism (minimize bubbles)
+    │   ├─ Multiple GPUs? -> Tensor parallelism (NVLink required)
+    │   └─ Deep model? -> Pipeline parallelism (minimize bubbles)
     │
-    ├─ GPU Selection?
-    │   ├─ Data center scale? → GB200 NVL72 + NVIDIA Dynamo
-    │   ├─ Maximum performance? → B200 (FP8 required, no INT8)
-    │   └─ Production standard? → H200 (mature ecosystem)
+    ├─ Hardware selection?
+    │   ├─ Memory-bound? -> more HBM, higher bandwidth
+    │   ├─ Latency-bound? -> faster clocks + kernel support
+    │   └─ Multi-node? -> prioritize interconnect (NVLink/RDMA) and topology
+    │
+    │   Notes: treat GPU/SKU advice as time-sensitive; verify with vendor docs and your own benchmarks.
+    │   See references/gpu-optimization-checklists.md and references/infrastructure-tuning.md
     │
     └─ Edge deployment?
-        └─ CPU + quantization → llama.cpp/GGUF for constrained resources
+        └─ CPU + quantization -> llama.cpp/GGUF for constrained resources
 ```
 
 ---
+
+## Intake Checklist (REQUIRED)
+
+Before recommending changes, collect (or infer) these inputs:
+
+- Model + variant (size, context length, precision/quantization, tokenizer)
+- Traffic shape (prompt/output length distributions, concurrency, QPS, streaming vs non-streaming)
+- SLOs and budgets (TTFT/ITL/total latency targets, error budget, cost per request)
+- Serving stack (engine/version, batching/scheduling settings, caching, parallelism, autoscaling)
+- Hardware and topology (GPU type/count, VRAM, NVLink/RDMA, CPU/RAM, storage, cluster/runtime)
+- Constraints (quality floor, safety requirements, rollout/rollback constraints)
 
 ## Core Concepts & Practices
 
@@ -123,6 +139,14 @@ Need to optimize LLM inference: [Optimization Path]
 - Avoid unbounded retries (amplifies outages).
 - Avoid unbounded context windows (OOM + latency spikes).
 - Avoid benchmarking on single requests; always test with realistic concurrency.
+
+---
+
+## Accuracy Protocol (REQUIRED)
+
+- Treat performance ratios (for example, "2x faster") as hypotheses unless a source is cited and the workload is comparable.
+- Do not recommend hardware/SKU changes without stating assumptions (model size, context length, concurrency, interconnect).
+- Prefer a measured baseline + checklist-driven rollout over "best practice" claims.
 
 ---
 
@@ -229,7 +253,7 @@ Performance measurement and validation:
 - [assets/checklists/inference-review-checklist.md](assets/checklists/inference-review-checklist.md)
 
 **Data**
-- [data/sources.json](data/sources.json) — Curated external references
+- [data/sources.json](data/sources.json) - Curated external references
 
 ---
 
@@ -279,11 +303,7 @@ After searching, provide:
 
 This skill focuses on **inference-time performance**. For related workflows:
 
-- **[ai-llm](../ai-llm/SKILL.md)** - Prompting, fine-tuning, application architecture
-- **[ai-rag](../ai-rag/SKILL.md)** - RAG pipeline construction and optimization
-- **[ai-mlops](../ai-mlops/SKILL.md)** - Deployment, monitoring, safety, and governance
-- **[qa-observability](../qa-observability/SKILL.md)** - Performance monitoring and optimization
-- **[ops-devops-platform](../ops-devops-platform/SKILL.md)** - Infrastructure and platform operations
+- See "Scope Boundaries" above.
 
 ---
 

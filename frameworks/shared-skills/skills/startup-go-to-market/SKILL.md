@@ -1,610 +1,217 @@
 ---
 name: startup-go-to-market
-description: GTM strategy, channel selection, launch planning, AI-powered automation, and market entry execution
-metadata:
-  version: "2.0"
+description: Use when designing go-to-market strategy, selecting GTM motion (PLG/sales-led), defining ICP, planning product launches, or implementing AI-powered GTM automation. Covers channel selection, growth loops, RevOps alignment, and market entry execution.
 ---
 
 # Startup Go-to-Market
 
-Systematic framework for designing and executing market entry strategies.
+Systematic workflow for designing and executing market entry, launch, and growth.
 
-**Modern Best Practices (Jan 2026)**:
-- Start from ICP + positioning, then pick 1–2 channels to sequence (avoid "all channels").
-- Instrument the funnel end-to-end (activation and retention defined, not assumed).
-- Use tight feedback loops (weekly learning reviews) and write stop/pivot thresholds.
-- Leverage AI-powered GTM tools for lead enrichment, personalized outreach, and pipeline intelligence.
-- Align RevOps across sales, marketing, and CS—75% of fastest-growing companies have RevOps by 2026.
-- Treat customer data with purpose limitation, retention, and access controls.
+**Modern Best Practices (Jan 2026)**: Start from ICP + positioning, pick 1-2 channels to sequence, instrument the funnel end-to-end, use AI for execution (not strategy), align RevOps across sales/marketing/CS.
 
 ---
 
-## Decision Tree: What GTM Analysis?
+## When to Use
+
+- Designing go-to-market strategy for new product
+- Choosing between PLG and sales-led motion
+- Planning product launches (soft, beta, ProductHunt, full)
+- Defining ICP and channel strategy
+- Implementing AI-powered GTM automation
+
+## When NOT to Use
+
+- Positioning and messaging deep dive -> [marketing-content-strategy](../marketing-content-strategy/) (use [startup-competitive-analysis](../startup-competitive-analysis/) for differentiation inputs)
+- Competitive intelligence -> [startup-competitive-analysis](../startup-competitive-analysis/)
+- Fundraising strategy -> [startup-fundraising](../startup-fundraising/)
+- Pricing and revenue models -> [startup-business-models](../startup-business-models/)
+
+---
+
+## Quick Start (Inputs)
+
+Ask for the smallest set of inputs that makes decisions meaningful:
+
+- Stage: pre-PMF, early PMF, growth, scale
+- Product and category: what it is, who uses it, and what "first value" looks like
+- ICP and buyer: firmographics, pains, procurement constraints, economic buyer vs champion
+- Pricing and economics: current/target ACV/ARPA, COGS drivers (include variable compute), payback constraints
+- Motion constraints: self-serve possible, sales cycle expectations, implementation/onboarding complexity
+- Channel constraints: budget, time, audience access (communities, lists, partnerships), geo, compliance limits
+- Baseline metrics: traffic, signup/demo rate, activation, retention, win rate, sales cycle length, pipeline
+- Team and tooling: who executes (founder/marketing/sales/CS), CRM + analytics stack
+
+If numbers are missing, proceed with ranges + explicit assumptions and list what to measure next.
+
+## Workflow
+
+1) Define ICP and the buying path
+- Primary/secondary ICP, anti-ICP, trigger events, and an "activation" definition.
+- Use `assets/icp-definition.md` to draft.
+
+2) Align on positioning and proof
+- If positioning is unclear, use [startup-competitive-analysis](../startup-competitive-analysis/) to map alternatives + differentiation, then [marketing-content-strategy](../marketing-content-strategy/) to express it as messaging.
+
+3) Choose the motion (PLG / sales-led / hybrid)
+- Use the decision tree below for a fast cut.
+- For details: `references/plg-implementation.md` and `references/sales-motion-design.md`.
+
+4) Pick 1-2 channels to sequence (not parallelize)
+- Use a bullseye-style test plan: quick tests, measure, double down.
+- For execution details: `references/channel-playbooks.md`.
+
+5) Define measurement and RevOps alignment
+- Define shared lifecycle stages and the "one source of truth" for metrics (product + CRM).
+- Ensure handoffs are measurable (e.g., PQL -> SQL routing rules and SLAs for hybrid).
+
+6) Produce deliverables + operating cadence
+- Draft GTM plan (`assets/gtm-strategy.md`) and launch plan (`assets/launch-playbook.md`).
+- Run a weekly GTM review: 30 minutes on pipeline + funnel, 30 minutes on experiments, 30 minutes on decisions.
+
+---
+
+## Decision Tree
 
 ```
 GTM QUESTION
-    │
-    ├─► "How do I reach customers?" ───► Channel Strategy
-    │                                     └─► Channel selection, sequencing
-    │
-    ├─► "PLG or Sales-led?" ───────────► Motion Selection
-    │                                     └─► GTM motion design
-    │
-    ├─► "How do I launch?" ────────────► Launch Planning
-    │                                     └─► Launch playbook
-    │
-    ├─► "Who is my ICP?" ──────────────► Segmentation
-    │                                     └─► ICP definition, targeting
-    │
-    ├─► "How do I scale?" ─────────────► Scaling Strategy
-    │                                     └─► Growth loops, expansion
-    │
-    └─► "Full GTM strategy" ───────────► COMPREHENSIVE ANALYSIS
-                                          └─► All dimensions
+  |-- "How do I reach customers?" -> Channel Strategy
+  |-- "PLG or Sales-led?" -> Motion Selection
+  |-- "How do I launch?" -> Launch Planning
+  |-- "Who is my ICP?" -> Segmentation
+  `-- "How do I scale?" -> Growth Loops
 ```
 
 ---
 
 ## GTM Motion Types
 
-### Motion Taxonomy
-
 | Motion | Description | Best For | Examples |
 |--------|-------------|----------|----------|
-| **Product-Led Growth (PLG)** | Product drives acquisition, conversion, expansion | SMB, developers, horizontal | Slack, Figma, Notion |
-| **Sales-Led** | Reps drive deals through outbound and inbound | Enterprise, complex sales | Salesforce, Workday |
-| **Community-Led** | Community drives awareness and adoption | Developer tools, open source | Hashicorp, MongoDB |
-| **Channel/Partner-Led** | Partners drive distribution | Enterprise, geographic expansion | Microsoft, Cisco |
-| **Marketing-Led** | Marketing drives demand generation | B2C, SMB | HubSpot, Mailchimp |
+| **PLG** | Product drives acquisition, conversion, expansion | SMB, developers | Slack, Figma |
+| **Hybrid (PLG + Sales-Assist)** | Product drives acquisition; sales assists conversion/expansion | Mid-market, higher ACV PLG | Atlassian, Notion |
+| **Sales-Led** | Reps drive deals through outbound/inbound | Enterprise, complex sales | Salesforce |
+| **Community-Led** | Community drives awareness and adoption | Developer tools, OSS | MongoDB |
+| **Partner-Led** | Partners drive distribution | Enterprise, geographic expansion | Microsoft |
 
 ### Motion Selection Framework
 
 ```
-ACV < $5K + Self-serve possible?
-    │
-    ├─► YES ──► PLG (primary)
-    │              └─► Add Sales-assist for expansion
-    │
-    └─► NO ───► Is buyer technical?
-                    │
-                    ├─► YES ──► Developer/Community-Led
-                    │              └─► Bottom-up adoption
-                    │
-                    └─► NO ───► Sales-Led
-                                   └─► Inbound + Outbound
+ACV < $5K and self-serve possible?
+  - yes: PLG (add sales-assist for expansion)
+  - no: is buyer technical?
+      - yes: developer/community-led (bottom-up)
+      - no: sales-led
 ```
-
-### Hybrid Motions (2025-2026 Reality)
-
-| Hybrid | Components | Examples |
-|--------|------------|----------|
-| PLG + Sales | Self-serve → Sales-assist for enterprise | Slack, Zoom, Figma |
-| Community + PLG | OSS → Hosted → Enterprise | MongoDB, Elastic |
-| Marketing + Sales | Inbound MQLs → Sales conversion | HubSpot |
-| Partner + Sales | Partner referrals → Direct sales | AWS Partners |
-| **AI-Augmented** | AI SDRs + Human closers | Emerging 2026 |
-
-### Vertical vs. Horizontal Strategy (2026)
-
-| Strategy | When to Use | Examples |
-|----------|-------------|----------|
-| **Vertical** | Deep industry workflows, compliance needs | Veeva (pharma), Toast (restaurants) |
-| **Horizontal** | Broad applicability, platform play | Slack, Notion |
-| **Vertical-first** | Start narrow, expand | Rippling (HR → IT → Finance) |
-
-2026 trend: Horizontal platforms face increasing competition from specialized vertical solutions. Successful strategies either dominate specific verticals or create platform ecosystems.
 
 ---
 
-## Ideal Customer Profile (ICP)
-
-### ICP Components
+## ICP Components
 
 | Component | Questions | Example |
 |-----------|-----------|---------|
 | **Firmographics** | Size, industry, geography | 50-500 employees, B2B SaaS, US |
-| **Technographics** | Tech stack, tools | Uses Salesforce, Modern data stack |
-| **Behavioral** | Buying behavior, adoption patterns | Self-serve evaluation, fast decisions |
-| **Pain indicators** | Symptoms of the problem | Growing support tickets, churn issues |
+| **Technographics** | Tech stack, tools | Uses Salesforce, modern data stack |
+| **Pain indicators** | Symptoms of problem | Growing support tickets |
 | **Success indicators** | Signs of good fit | Strong product-market alignment |
-
-### ICP Template
-
-```markdown
-## Ideal Customer Profile: {{PRODUCT}}
-
-### Company Profile
-- **Industry**: {{INDUSTRY}}
-- **Size**: {{EMPLOYEE_RANGE}} employees
-- **Revenue**: ${{REVENUE_RANGE}}
-- **Geography**: {{REGIONS}}
-- **Growth Stage**: {{STAGE}}
-
-### Technology Profile
-- **Must have**: {{REQUIRED_TECH}}
-- **Nice to have**: {{PREFERRED_TECH}}
-- **Red flags**: {{AVOID_TECH}}
-
-### Buyer Profile
-- **Primary Buyer**: {{TITLE}}
-- **Champions**: {{TITLES}}
-- **Economic Buyer**: {{TITLE}}
-- **Influencers**: {{TITLES}}
-
-### Pain Indicators
-- {{PAIN_1}}
-- {{PAIN_2}}
-- {{PAIN_3}}
-
-### Success Indicators
-- {{SUCCESS_1}}
-- {{SUCCESS_2}}
-```
 
 ### ICP Scoring
 
-| Factor | Weight | Score (1-10) |
-|--------|--------|--------------|
-| Budget available | 20% | |
-| Problem severity | 25% | |
-| Technical fit | 15% | |
-| Decision timeline | 15% | |
-| Champion identified | 15% | |
-| Expansion potential | 10% | |
-| **ICP Score** | 100% | |
-
-### ICP Tiering (2026 Best Practice)
-
-Don't treat ICP as a static persona—tier it based on fit and intent signals.
-
-| Tier | Definition | Action | Resources |
-|------|------------|--------|-----------|
-| **Tier 1** | Perfect fit + active buying signals | Priority outbound, personalized | High-touch, exec involvement |
-| **Tier 2** | Good fit, lower/no intent signals | Nurture sequences, monitor | Marketing-led, SDR follow-up |
-| **Tier 3** | Partial fit, no current signals | Marketing only, monitor | Automated, low-touch |
-
-**Intent Signals to Monitor**:
-- Hiring patterns (roles that use your product)
-- Technology adoption (complementary tools)
-- Funding events (Series A+ for growth stage)
-- Buying committee activity (multiple visitors from same company)
-- Content engagement (pricing page, case studies)
+| Factor | Weight |
+|--------|--------|
+| Budget available | 20% |
+| Problem severity | 25% |
+| Technical fit | 15% |
+| Decision timeline | 15% |
+| Champion identified | 15% |
+| Expansion potential | 10% |
 
 ---
 
 ## Channel Strategy
 
-### Channel Categories
-
 | Category | Channels | Best For |
 |----------|----------|----------|
-| **Organic** | SEO, content, social, community | Long-term, sustainable |
-| **Paid** | SEM, paid social, display | Fast, scalable, expensive |
+| **Organic** | SEO, content, social, community | Long-term |
+| **Paid** | SEM, paid social, display | Fast, scalable |
 | **Outbound** | Email, cold calls, LinkedIn | Enterprise, high ACV |
-| **Partnerships** | Referrals, integrations, resellers | Leverage, distribution |
-| **Product** | Viral, freemium, PLG | Self-serve, network effects |
-| **Events** | Conferences, webinars, meetups | Enterprise, brand |
-
-### Channel Selection Matrix
-
-| Channel | CAC | Volume | Time to Impact | Control |
-|---------|-----|--------|----------------|---------|
-| SEO/Content | Low | High | 6-12 months | High |
-| Paid Search | Medium | Medium | Immediate | High |
-| Paid Social | Medium | High | Immediate | Medium |
-| Outbound Email | Medium | Medium | 1-3 months | High |
-| LinkedIn Outbound | High | Low | 1-3 months | High |
-| Conferences | High | Low | 3-6 months | Medium |
-| Partnerships | Medium | Medium | 6-12 months | Low |
-| Product/Viral | Low | High | 3-6 months | Medium |
-| Community | Low | Medium | 6-12 months | Medium |
+| **Product** | Viral, freemium, PLG | Self-serve |
 
 ### Channel Sequencing by Stage
 
-| Stage | Primary Channels | Why |
-|-------|------------------|-----|
-| Pre-PMF | Founder sales, communities, early users | Direct feedback |
-| Early | Content, outbound, founder network | Capital efficient |
-| Growth | Paid, SEO, partnerships | Scale |
-| Scale | All channels optimized | Efficiency |
+| Stage | Primary Channels |
+|-------|------------------|
+| Pre-PMF | Founder sales, communities |
+| Early | Content, outbound, founder network |
+| Growth | Paid, SEO, partnerships |
+| Scale | All channels optimized |
 
 ---
 
-## PLG Playbook
+## Measurement (Minimum Viable GTM Analytics)
 
-### PLG Funnel
+- Prefer lifecycle + cohorts over vanity metrics. Always break down by ICP/segment + channel.
+- Define a single funnel per motion (PLG vs sales-led) with clear stage definitions and owners.
+- Track leading indicators (activation/retention, PQL, win rate) before "scale" decisions.
 
+**PQL (Product Qualified Lead) Score**:
 ```
-AWARENESS
-    │
-    ▼
-ACQUISITION (Sign up)
-    │
-    ▼
-ACTIVATION (First value moment)
-    │
-    ▼
-RETENTION (Continued usage)
-    │
-    ▼
-REVENUE (Convert to paid)
-    │
-    ▼
-REFERRAL (Viral spread)
+PQL = (Engagement * 0.4) + (Fit * 0.3) + (Intent * 0.3)
 ```
 
-### Key PLG Metrics
+### Product-Led Sales (Sales-Assist) Basics
 
-| Stage | Metric | Benchmark |
-|-------|--------|-----------|
-| Acquisition | Visitor → Signup | 2-10% |
-| Activation | Signup → Activated | 30-60% |
-| Retention | Day 1 / Day 7 / Day 30 | 40% / 20% / 10% |
-| Revenue | Activated → Paid | 10-30% |
-| Referral | % users who invite | 20-30% |
+Use when PLG brings users in, but conversion/expansion benefits from a human touch.
 
-### Activation Definition
-
-**"Activation" = When user experiences core value**
-
-| Product Type | Activation Moment |
-|--------------|-------------------|
-| Slack | Sent 2,000 messages |
-| Dropbox | Installed + synced file |
-| Zoom | Completed first meeting |
-| Notion | Created and shared doc |
-| Your product | {{ACTIVATION_MOMENT}} |
-
-### PLG Pricing Considerations
-
-| Element | Recommendation |
-|---------|----------------|
-| Free tier | Yes, with usage limits |
-| Trial length | 14 days (card optional) |
-| Upgrade triggers | Hit limits, need feature |
-| Pricing page | Transparent, self-serve |
-| Enterprise | "Contact sales" option |
-
-### PLG Evolution (2026)
-
-**Key Shift: "Aha Moment" → "Oh Wow Moment"**
-
-Getting users to value once isn't enough. The real metric is when they keep coming back: "Wait, it does this too?"
-
-| Old PLG (2020-2024) | Modern PLG (2025-2026) |
-|---------------------|------------------------|
-| Single activation moment | Repeatable value discovery |
-| MQL-driven qualification | PQL-driven (Engagement + Fit + Intent) |
-| 14-30 day trials | Instant value, progressive commitment |
-| Manual onboarding flows | AI-powered personalization |
-| Time-based conversion | Value-based conversion |
-
-**PQL (Product Qualified Lead) Scoring**:
-
-```text
-PQL Score = (Engagement × 0.4) + (Fit × 0.3) + (Intent × 0.3)
-
-Engagement: Feature usage depth, session frequency, collaboration
-Fit: Company size, industry, tech stack match
-Intent: Pricing page visits, integration setup, team invites
-```
-
-| Qualification | Conversion Rate | Action |
-|---------------|-----------------|--------|
-| MQL (Marketing) | 5-10% | Nurture |
-| PQL (Product) | 25-30% | Sales-assist |
-| PQL + Sales signal | 40-50% | Priority outbound |
-
-**2026 Buyer Expectations**:
-- Value within minutes, not days
-- Try first, account later
-- AI-personalized onboarding
-- Self-serve to enterprise upgrade path
+**PQL -> SQL routing checklist**:
+- [ ] Define PQL triggers (events) and thresholds (e.g., 3 key actions in 7 days)
+- [ ] Define disqualifiers (students, competitors, tiny companies, unsupported geo)
+- [ ] Set an SLA for first touch (e.g., <24 hours for high-intent PQLs)
+- [ ] Define handoff criteria to AE (PQL -> meeting booked, security/procurement requested)
+- [ ] Instrument outcomes (PQL->meeting->pipeline->won) and review weekly
 
 ---
 
-## Sales-Led Playbook
-
-### Sales Motion Design
-
-| Element | SMB | Mid-Market | Enterprise |
-|---------|-----|------------|------------|
-| **ACV** | $1-10K | $10-50K | $50K+ |
-| **Sales cycle** | <30 days | 30-90 days | 90-270 days |
-| **Touch model** | Low-touch/inside | Inside/field | Field/strategic |
-| **Demo** | Self-serve or 15 min | 30-60 min | Custom POC |
-| **Stakeholders** | 1-2 | 3-5 | 5-10+ |
-| **Procurement** | Credit card | Simple | Complex |
-
-### Outbound Playbook
-
-**Sequence Structure**:
-```
-Day 1: Email 1 (Pain-focused)
-Day 3: LinkedIn connection
-Day 5: Email 2 (Value-focused)
-Day 8: LinkedIn message
-Day 12: Email 3 (Social proof)
-Day 16: Email 4 (Break-up)
-```
-
-**Targeting**:
-| Element | Specification |
-|---------|---------------|
-| Company size | {{RANGE}} |
-| Titles | {{LIST}} |
-| Industries | {{LIST}} |
-| Signals | {{TRIGGERS}} |
-
-### Sales Stages
-
-| Stage | Definition | Exit Criteria |
-|-------|------------|---------------|
-| **Prospecting** | Identifying targets | Meeting booked |
-| **Discovery** | Understanding needs | Qualified (BANT/MEDDIC) |
-| **Demo** | Showing solution | Interest confirmed |
-| **Evaluation** | POC, trial, references | Success criteria met |
-| **Proposal** | Pricing, terms | Proposal sent |
-| **Negotiation** | Contract discussion | Agreement on terms |
-| **Closed Won** | Signed | Revenue booked |
-
----
-
-## Launch Planning
-
-### Launch Types
+## Launch Types
 
 | Type | Goal | Timeline |
 |------|------|----------|
 | **Soft launch** | Test, iterate | 2-4 weeks |
-| **Beta launch** | Build waitlist, get feedback | 4-8 weeks |
-| **ProductHunt launch** | Awareness, early adopters | 1 day + prep |
+| **Beta launch** | Build waitlist, feedback | 4-8 weeks |
+| **ProductHunt** | Awareness, early adopters | 1 day + prep |
 | **Full launch** | Maximum awareness | 1-2 weeks |
-| **Feature launch** | Existing customer expansion | Ongoing |
-
-### Launch Playbook Template
-
-```markdown
-## Launch: {{PRODUCT/FEATURE}}
-
-### Objectives
-- Primary: {{GOAL}}
-- Secondary: {{GOAL}}
-- Metrics: {{TARGETS}}
-
-### Timeline
-| Week | Activities |
-|------|------------|
-| -4 | {{PREP}} |
-| -2 | {{PREP}} |
-| -1 | {{FINAL}} |
-| Launch | {{ACTIVITIES}} |
-| +1 | {{FOLLOW_UP}} |
-
-### Channels
-| Channel | Asset | Owner | Date |
-|---------|-------|-------|------|
-| ProductHunt | Listing | | |
-| Blog | Announcement | | |
-| Email | Customer comms | | |
-| Social | Posts | | |
-| PR | Press release | | |
-| Community | Posts | | |
-
-### Assets Needed
-- [ ] Landing page
-- [ ] Demo video
-- [ ] Blog post
-- [ ] Social graphics
-- [ ] Email templates
-- [ ] Press kit
-- [ ] Customer quotes
-
-### Success Metrics
-| Metric | Target | Actual |
-|--------|--------|--------|
-| Signups | {{N}} | |
-| Traffic | {{N}} | |
-| Mentions | {{N}} | |
-| Trials | {{N}} | |
-```
-
-### ProductHunt Launch Playbook
-
-**Before (4 weeks)**:
-- [ ] Build hunter network
-- [ ] Create assets (logo, screenshots, video)
-- [ ] Write compelling tagline and description
-- [ ] Prepare maker comment
-- [ ] Coordinate with team for day-of support
-- [ ] Schedule for Tuesday-Thursday
-
-**Launch Day**:
-- [ ] Launch at 12:01 AM PT
-- [ ] Post maker comment immediately
-- [ ] Share on social, email, communities
-- [ ] Respond to ALL comments within hours
-- [ ] Coordinate team upvotes (ethically)
-- [ ] Update throughout the day
-
-**After**:
-- [ ] Thank supporters
-- [ ] Follow up with interested users
-- [ ] Publish retrospective
-- [ ] Update based on feedback
 
 ---
 
 ## Growth Loops
 
-### Loop Types
-
 | Loop | Mechanism | Example |
 |------|-----------|---------|
 | **Viral** | User invites users | Dropbox referrals |
-| **Content** | Content → SEO → Users → Content | HubSpot |
-| **UGC** | Users create content | YouTube, TikTok |
-| **Paid** | Revenue → Paid ads → Users | Performance marketing |
-| **Sales** | Revenue → Sales team → Users | Enterprise sales |
-| **Partner** | Partners drive users → Revenue share | App stores |
-
-### Viral Loop Design
-
-```
-USER → CREATES/SHARES → CONTENT/INVITE
-                             │
-                             ▼
-                        NEW USER → CREATES/SHARES → ...
-```
-
-**Viral Coefficient (K)**:
-```
-K = Invites per user × Conversion rate
-
-Example:
-Average invites: 5
-Conversion rate: 20%
-K = 5 × 0.20 = 1.0 (viral threshold)
-```
-
-### Content Loop Design
-
-```
-CONTENT → SEO TRAFFIC → SIGNUPS → PRODUCT USAGE
-    ↑                                    │
-    │                                    │
-    └────── USER-GENERATED DATA ─────────┘
-```
+| **Content** | Content -> SEO -> Users | HubSpot |
+| **UGC** | Users create content | YouTube |
+| **Paid** | Revenue -> Ads -> Users | Performance marketing |
+| **Sales** | Pipeline -> close -> revenue -> hiring -> more pipeline | Sales-led SaaS |
+| **Partner** | Enable partners -> referrals -> deals -> partner revenue -> more partners | Cloud marketplaces |
 
 ---
 
-## AI-Powered GTM (2026)
+## Do / Avoid
 
-AI has fundamentally changed GTM execution. Teams using AI report 12+ hours saved per week, shorter deal cycles, and higher win rates.
+### Do
 
-### AI GTM Capabilities
+- Define activation as concrete "first value moment"
+- Track leading indicators (activation, PQL, retention)
+- Use AI for execution while humans own strategy
+- Tier ICP based on fit + intent signals
 
-| Capability | Description | Tools |
-|------------|-------------|-------|
-| **Intent detection** | Real-time buyer intent signals | Demandbase, 6sense, Bombora |
-| **Lead enrichment** | Automated data enrichment at scale | ZoomInfo, Clearbit, Apollo |
-| **Outreach automation** | AI-personalized sequences | Reply.io, Outreach, Salesloft |
-| **Content generation** | Automated GTM content | Copy.ai, Jasper, Writer |
-| **Pipeline intelligence** | AI forecasting and deal insights | Clari, Gong, Chorus |
-| **Conversation intelligence** | Call analysis and coaching | Gong, Chorus, Fireflies |
+### Avoid
 
-### GTM Engineer Role (Emerging 2026)
-
-New hybrid role combining RevOps + engineering capabilities:
-
-| Responsibility | Output |
-|----------------|--------|
-| Build AI-driven automations | Lead routing, scoring, enrichment pipelines |
-| Integrate GTM tech stack | Unified data across CRM, marketing, product |
-| Deploy AI SDRs | Automated qualification and initial outreach |
-| Create custom dashboards | Real-time GTM intelligence |
-
-**Key Trend**: Small teams generating enterprise-level outreach volume without hiring 20 SDRs—enabled by AI automation with human oversight.
-
-### AI GTM Metrics Impact
-
-| Metric | Pre-AI Baseline | AI-Enhanced |
-|--------|-----------------|-------------|
-| Lead processing time | Hours | Minutes |
-| Personalization level | Segment-level | Individual |
-| Deal cycle length | Standard | 20-30% shorter |
-| Win rate | Baseline | 10-20% higher |
-| SDR productivity | 50 touches/day | 200+ touches/day |
-
-### AI GTM Implementation
-
-**Phase 1: Foundation**
-- Unified data layer (CRM + enrichment + intent)
-- Basic automation (lead routing, task creation)
-
-**Phase 2: Intelligence**
-- AI-powered lead scoring
-- Conversation intelligence
-- Automated content personalization
-
-**Phase 3: Autonomy**
-- AI SDRs for initial qualification
-- Predictive pipeline management
-- Automated expansion signals
-
-**Caution**: AI augments human judgment—don't automate strategy, only execution. Humans own positioning, messaging, and deal negotiation.
-
----
-
-## RevOps Alignment (2026)
-
-By 2026, 75% of fastest-growing companies will have RevOps. RevOps creates unified operational language across sales, marketing, and CS.
-
-### RevOps Team Structure
-
-| Function | Focus | Deliverables |
-|----------|-------|--------------|
-| **Business Partners** | Pipeline, forecasting | Revenue forecasts, deal support |
-| **Business Process** | Workflow design | Process documentation, SLAs |
-| **Revenue Technology** | GTM tech stack | System administration, integrations |
-| **Process Innovation** | AI use cases | Automation, efficiency gains |
-
-### Key RevOps Metrics (Board-Level 2026)
-
-| Metric | Target | Why It Matters |
-|--------|--------|----------------|
-| **NRR (Net Revenue Retention)** | 120%+ | Expansion > churn |
-| **CAC Payback** | <12 months | Capital efficiency |
-| **Pipeline Velocity** | Increasing QoQ | Sales efficiency |
-| **GTM Cost Ratio** | Decreasing | Operational leverage |
-| **Win Rate** | Stable or increasing | Sales effectiveness |
-
-### RevOps + GTM Alignment Checklist
-
-- [ ] Single source of truth for customer data
-- [ ] Unified definitions (MQL, SQL, PQL, opportunity stages)
-- [ ] Shared dashboards across sales, marketing, CS
-- [ ] Regular GTM reviews (weekly pipeline, monthly strategy)
-- [ ] Clear handoff SLAs between teams
-- [ ] Attribution model agreed across functions
-
----
-
-## Expansion Strategy
-
-### Land and Expand
-
-```
-LAND (Initial)
-└─► Single team, single use case, low ACV
-
-ADOPT (Prove)
-└─► Usage growth, success metrics, champions
-
-EXPAND (Grow)
-└─► More teams, departments, use cases
-
-STRATEGIC (Transform)
-└─► Company-wide, multi-year, executive sponsor
-```
-
-### Expansion Signals
-
-| Signal | Action |
-|--------|--------|
-| High usage | Proactive expansion conversation |
-| New use case request | Cross-sell motion |
-| Team growth | Seat expansion |
-| Hitting limits | Upgrade conversation |
-| Success metrics achieved | Case study + referral ask |
-
-### Geographic Expansion
-
-| Phase | Markets | Approach |
-|-------|---------|----------|
-| 1 | Home market | Direct |
-| 2 | Adjacent (language/culture) | Localization |
-| 3 | New regions | Local presence or partners |
+- Content spam without measurement
+- "Do all channels" in parallel
+- Vanity metrics without retention context
+- Over-automating without human oversight
+- Scaling paid before activation/retention is stable
+- Treating benchmarks as targets without segmenting by ICP/channel
 
 ---
 
@@ -612,56 +219,43 @@ STRATEGIC (Transform)
 
 | Resource | Purpose |
 |----------|---------|
-| [channel-playbooks.md](references/channel-playbooks.md) | Detailed channel execution guides |
-| [sales-motion-design.md](references/sales-motion-design.md) | Sales process design + RevOps alignment |
-| [plg-implementation.md](references/plg-implementation.md) | PLG execution guide + PQL frameworks |
+| [channel-playbooks.md](references/channel-playbooks.md) | Detailed channel execution |
+| [sales-motion-design.md](references/sales-motion-design.md) | Sales process + RevOps |
+| [plg-implementation.md](references/plg-implementation.md) | PLG execution + PQL frameworks |
+| [ai-gtm-automation.md](references/ai-gtm-automation.md) | AI-powered GTM tools |
 
 ## Templates
 
 | Template | Purpose |
 |----------|---------|
 | [gtm-strategy.md](assets/gtm-strategy.md) | Full GTM strategy document |
-| [launch-playbook.md](assets/launch-playbook.md) | Launch planning template |
+| [launch-playbook.md](assets/launch-playbook.md) | Launch planning |
 | [icp-definition.md](assets/icp-definition.md) | ICP documentation |
 
 ## Data
 
 | File | Purpose |
 |------|---------|
-| [sources.json](data/sources.json) | GTM resources and guides |
+| [sources.json](data/sources.json) | GTM resources |
 
 ---
 
-## Do / Avoid (Jan 2026)
+## Related Skills
 
-### Do
+| Skill | Use For |
+|-------|---------|
+| [startup-competitive-analysis](../startup-competitive-analysis/) | Market mapping, battlecards |
+| [startup-business-models](../startup-business-models/) | Pricing, unit economics |
+| [marketing-ai-search-optimization](../marketing-ai-search-optimization/) | GEO/AI search visibility for content-led GTM |
+| [marketing-social-media](../marketing-social-media/) | Social channel execution |
+| [marketing-leads-generation](../marketing-leads-generation/) | Lead acquisition |
 
-- Define activation as a concrete "first value moment" (and track "Oh wow moments" for retention).
-- Track leading indicators (activation, PQL conversion, retention) alongside revenue.
-- Run structured experiments with decision thresholds.
-- Use AI for execution (outreach, enrichment, personalization) while humans own strategy.
-- Align RevOps across sales, marketing, and CS with unified data and definitions.
-- Tier your ICP and prioritize based on fit + intent signals.
-
-### Avoid
-
-- Content spam without measurement.
-- "Do all channels" in parallel without learning loops.
-- Vanity metrics without retention and payback context.
-- Over-automating without human oversight (AI augments, doesn't replace judgment).
-- Treating ICP as static—revisit quarterly based on win/loss data.
+---
 
 ## What Good Looks Like
 
-- ICP + positioning: one primary segment, explicit alternatives, and proof points (quotes, numbers, cases).
-- Channel focus: 1 primary channel with a 4-week experiment plan and decision thresholds.
-- Instrumentation: activation (“first value moment”) defined, tracked, and reviewed weekly.
-- Launch plan: messaging, assets, owners, and a post-launch learning review scheduled.
-- Feedback loop: win/loss + retention cohorts drive the next backlog decisions.
-
-## Optional: AI / Automation
-
-Use only when explicitly requested and policy-compliant.
-
-- Draft assets and experiment variants; humans verify claims, brand voice, and compliance.
-- Summarize call notes and objections; keep source links and spot-check.
+- One primary ICP with clear anti-ICP and measurable triggers (signals) for targeting.
+- A motion decision with explicit economics (ACV, payback, touch model) and defined handoffs.
+- One primary channel with a test plan, success metrics, and stop/pivot triggers.
+- Instrumented funnel from source -> activation/value -> revenue/expansion (by segment + channel).
+- A weekly operating cadence with a backlog of experiments and a written decision log.

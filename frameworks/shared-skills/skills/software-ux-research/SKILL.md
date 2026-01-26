@@ -1,6 +1,6 @@
 ---
 name: software-ux-research
-description: UX research and analysis for discovering, validating, and evaluating software experiences, including research ops, governance, and measurement.
+description: Use when conducting user research (interviews, usability tests, surveys, A/B tests) or designing research studies. Covers discovery, validation, evaluative methods, research ops, governance, and measurement for software experiences.
 ---
 
 # Software UX Research Skill — Quick Reference
@@ -29,10 +29,10 @@ Use this skill to identify problems/opportunities and de-risk decisions. Use `so
 
 ## When NOT to Use This Skill
 
-- **UI implementation** → Use `software-ui-ux-design` for components, patterns, code
-- **Analytics instrumentation** → Use `software-observability` for event tracking setup
+- **UI implementation** → Use [software-ui-ux-design](../software-ui-ux-design/SKILL.md) for components, patterns, code
+- **Analytics instrumentation** → Use [marketing-product-analytics](../marketing-product-analytics/SKILL.md) for tracking plans and [qa-observability](../qa-observability/SKILL.md) for implementation patterns
 - **Accessibility compliance audit** → Use accessibility-specific checklists (WCAG conformance)
-- **Marketing research** → Use `marketing-*` skills for market sizing, customer acquisition
+- **Marketing research** → Use [marketing-social-media](../marketing-social-media/SKILL.md) or related marketing skills
 - **A/B test platform setup** → Use experimentation platforms (Statsig, GrowthBook, LaunchDarkly)
 
 ---
@@ -179,6 +179,25 @@ PII handling checklist:
 - [ ] Restrict raw recordings to need-to-know access.
 - [ ] Document consent, purpose, retention, and opt-out path.
 
+### Research Democratization (2026 Trend)
+
+Research democratization is a recurring 2026 trend: non-researchers increasingly conduct research. Enable carefully with guardrails.
+
+| Approach | Guardrails | Risk Level |
+|----------|------------|------------|
+| Templated usability tests | Script + task templates provided | Low |
+| Customer interviews by PMs | Training + review required | Medium |
+| Survey design by anyone | Central review + standard questions | Medium |
+| Unsupervised research | Not recommended | High |
+
+**Guardrails for non-researchers:**
+
+- [ ] Pre-approved research templates only
+- [ ] Central review of findings before action
+- [ ] No direct participant recruitment without ops approval
+- [ ] Mandatory bias awareness training
+- [ ] Clear escalation path for unexpected findings
+
 ---
 
 ## Measurement & Decision Quality (Core)
@@ -235,7 +254,7 @@ PII handling checklist:
 
 > Use only when researching automation/AI-powered features. Skip for traditional software UX.
 >
-> **2026 benchmark**: 88% of UX researchers identify AI-assisted analysis as the top trend (UXStudioTeam survey). Use AI for efficiency while maintaining human judgment on strategy and interpretation.
+> **2026 benchmark**: Trend reports consistently highlight AI-assisted analysis. Use AI for speed while keeping humans responsible for strategy and interpretation. Example reference: https://www.lyssna.com/blog/ux-research-trends/
 
 ### Key Questions
 
@@ -262,17 +281,17 @@ PII handling checklist:
 
 ### Synthetic Users: When Appropriate (2026)
 
-48% of researchers see synthetic/AI participants as impactful. Use with clear boundaries:
+Trend reports frequently mention synthetic/AI participants. Use with clear boundaries. Example reference: https://www.lyssna.com/blog/ux-research-trends/
 
 | Use Case | Appropriate? | Why |
 |----------|--------------|-----|
-| Early concept brainstorming | ⚠️ Supplement only | Generate edge cases, not validation |
-| Scenario/edge case expansion | ✅ Yes | Broaden coverage before real testing |
-| Moderator training/practice | ✅ Yes | Practice without participant burden |
-| Hypothesis generation | ✅ Yes | Explore directions to test with real users |
-| Validation/go-no-go decisions | ❌ Never | Cannot substitute lived experience |
-| Usability findings as evidence | ❌ Never | Real behavior required |
-| Quotes in reports | ❌ Never | Fabricated quotes damage credibility |
+| Early concept brainstorming | WARNING: Supplement only | Generate edge cases, not validation |
+| Scenario/edge case expansion | PASS Yes | Broaden coverage before real testing |
+| Moderator training/practice | PASS Yes | Practice without participant burden |
+| Hypothesis generation | PASS Yes | Explore directions to test with real users |
+| Validation/go-no-go decisions | FAIL Never | Cannot substitute lived experience |
+| Usability findings as evidence | FAIL Never | Real behavior required |
+| Quotes in reports | FAIL Never | Fabricated quotes damage credibility |
 
 **Critical rule**: Synthetic outputs are **hypotheses**, not evidence. Always validate with real users before shipping.
 
@@ -297,9 +316,83 @@ PII handling checklist:
 - [references/demographic-research-methods.md](references/demographic-research-methods.md) — Inclusive research for seniors, children, cultures, disabilities
 - [references/ab-testing-implementation.md](references/ab-testing-implementation.md) — A/B testing deep-dive (sample size, analysis, pitfalls)
 
+**Competitive UX Analysis & Flow Patterns:**
+
+- [references/competitive-ux-analysis.md](references/competitive-ux-analysis.md) — **Step-by-step flow patterns** from industry leaders (Wise, Revolut, Shopify, Notion, Linear, Stripe) + benchmarking methodology
+
 **Data & Sources:**
 
 - [data/sources.json](data/sources.json) — Curated external references
+
+---
+
+## Domain-Specific UX Benchmarking
+
+**IMPORTANT**: When designing UX flows for a specific domain, you MUST use WebSearch to find and suggest best-practice patterns from industry leaders.
+
+### Trigger Conditions
+
+- "We're designing [flow type] for [domain]"
+- "What's the best UX for [feature] in [industry]?"
+- "How do [Company A, Company B] handle [flow]?"
+- "Benchmark our [feature] against competitors"
+- Any UX design task with identifiable domain context
+
+### Domain → Leader Lookup Table
+
+| Domain | Industry Leaders to Check | Key Flows |
+|--------|---------------------------|-----------|
+| **Fintech/Banking** | Wise, Revolut, Monzo, N26, Chime, Mercury | Onboarding/KYC, money transfer, card management, spend analytics |
+| **E-commerce** | Shopify, Amazon, Stripe Checkout | Checkout, cart, product pages, returns |
+| **SaaS/B2B** | Linear, Notion, Figma, Slack, Airtable | Onboarding, settings, collaboration, permissions |
+| **Developer Tools** | Stripe, Vercel, GitHub, Supabase | Docs, API explorer, dashboard, CLI |
+| **Consumer Apps** | Spotify, Airbnb, Uber, Instagram | Discovery, booking, feed, social |
+| **Healthcare** | Oscar, One Medical, Calm, Headspace | Appointment booking, records, compliance flows |
+| **EdTech** | Duolingo, Coursera, Khan Academy | Onboarding, progress, gamification |
+
+### Required Searches
+
+When user specifies a domain, execute:
+
+1. Search: `"[domain] UX best practices 2026"`
+2. Search: `"[leader company] [flow type] UX"`
+3. Search: `"[leader company] app review UX" site:mobbin.com OR site:pageflows.com`
+4. Search: `"[domain] onboarding flow examples"`
+
+### What to Report
+
+After searching, provide:
+
+- **Pattern examples**: Screenshots/flows from 2-3 industry leaders
+- **Key patterns identified**: What they do well (with specifics)
+- **Applicable to your flow**: How to adapt patterns
+- **Differentiation opportunity**: Where you could improve on leaders
+
+### Example Output Format
+
+```text
+DOMAIN: Fintech (Money Transfer)
+BENCHMARKED: Wise, Revolut
+
+WISE PATTERNS:
+- Upfront fee transparency (shows exact fee before recipient input)
+- Mid-transfer rate lock (shows countdown timer)
+- Delivery time estimate per payment method
+- Recipient validation (bank account check before send)
+
+REVOLUT PATTERNS:
+- Instant send to Revolut users (P2P first)
+- Currency conversion preview with rate comparison
+- Scheduled/recurring transfers prominent
+
+APPLY TO YOUR FLOW:
+1. Add fee transparency at step 1 (not step 3)
+2. Show delivery estimate per payment rail
+3. Consider rate lock feature for FX transfers
+
+DIFFERENTIATION OPPORTUNITY:
+- Neither shows historical rate chart—add "is now a good time?" context
+```
 
 ---
 
@@ -307,7 +400,7 @@ PII handling checklist:
 
 **IMPORTANT**: When users ask recommendation questions about UX research, you MUST use WebSearch to check current trends before answering.
 
-### Trigger Conditions
+### Tool/Trend Triggers
 
 - "What's the best UX research tool for [use case]?"
 - "What should I use for [usability testing/surveys/analytics]?"
@@ -317,14 +410,14 @@ PII handling checklist:
 - "What research tools should I use?"
 - "Best approach for [remote research/unmoderated testing]?"
 
-### Required Searches
+### Tool/Trend Searches
 
 1. Search: `"UX research trends 2026"`
 2. Search: `"UX research tools best practices 2026"`
 3. Search: `"[Maze/Hotjar/UserTesting] comparison 2026"`
 4. Search: `"AI in UX research 2026"`
 
-### What to Report
+### Tool/Trend Report Format
 
 After searching, provide:
 

@@ -1,0 +1,5 @@
+# Sync scripts
+sync-repo-into-public.sh
+
+# macOS
+.DS_Store

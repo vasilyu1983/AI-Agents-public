@@ -1,17 +1,16 @@
 ---
 name: document-pptx
-description: Create, edit, and analyze PowerPoint presentations with slides, layouts, charts, images, animations, and speaker notes. Supports python-pptx and pptxgenjs for automated presentation generation in Python and Node.js.
+description: Create, edit, and analyze PowerPoint (.pptx) presentations: generate decks (pitch/QBR/training), apply templates/masters, add charts/images/tables, manage speaker notes, and extract slide content. Use when users mention PowerPoint/PPTX, slides, pitch deck, QBR/board deck, or presentation automation. Supports python-pptx, PptxGenJS, and PPTX-Automizer.
 ---
 
-# Document PPTX Skill — Quick Reference
+# Document PPTX Skill - Quick Reference
 
 This skill enables creation and editing of PowerPoint presentations programmatically. Claude should apply these patterns when users need to generate pitch decks, reports, training materials, or automate presentation workflows.
 
 **Modern Best Practices (Jan 2026)**:
 - One slide = one takeaway; design the deck around a decision or audience goal.
 - Cite numbers (definition + timeframe + source) and keep a single source of truth for charts.
-- **Accessibility (WCAG 2.1 AA by April 2026)**: reading order, contrast, alt text. ADA compliance deadline.
-- **EU Distribution**: EAA (June 2025) requires EN 301 549 compliance for presentations distributed in EU.
+- Accessibility: slide titles, reading order, contrast, and meaningful alt text; follow your org's standard (often WCAG 2.2 AA / EN 301 549).
 - Version decks and enforce review loops (avoid "final_final_v7.pptx").
 
 ---
@@ -27,17 +26,10 @@ This skill enables creation and editing of PowerPoint presentations programmatic
 | Charts | python-pptx | Python | Data visualizations |
 | Extract content | python-pptx | Python | Parse existing decks |
 
-## When to Use This Skill
-
-Claude should invoke this skill when a user requests:
-
-- Generate PowerPoint presentations from data
-- Create slide decks with charts and images
-- Automate report generation as slides
-- Extract content from existing presentations
-- Apply consistent branding/templates
-- Generate speaker notes
-- Create training or educational materials
+**Selection guide**
+- Prefer PPTX-Automizer when you have a branded .pptx template and need to "inject data into slides".
+- Prefer python-pptx in Python-heavy pipelines (reporting, notebooks, ETL).
+- Prefer PptxGenJS in Node.js pipelines (server-side generation, web apps).
 
 ---
 
@@ -47,9 +39,6 @@ Claude should invoke this skill when a user requests:
 
 ```python
 from pptx import Presentation
-from pptx.util import Inches, Pt
-from pptx.enum.text import PP_ALIGN
-from pptx.dml.color import RgbColor
 
 prs = Presentation()
 
@@ -89,56 +78,58 @@ prs.save('presentation.pptx')
 ```typescript
 import pptxgen from 'pptxgenjs';
 
-const pptx = new pptxgen();
-pptx.author = 'Product Team';
-pptx.title = 'Q4 Business Review';
+async function main() {
+  const pptx = new pptxgen();
+  pptx.author = 'Product Team';
+  pptx.title = 'Q4 Business Review';
 
-// Title slide
-let slide = pptx.addSlide();
-slide.addText('Q4 2025 Business Review', {
-  x: 1, y: 2, w: '80%',
-  fontSize: 36, bold: true, color: '363636',
-  align: 'center'
-});
-slide.addText('Presented by Product Team', {
-  x: 1, y: 3.5, w: '80%',
-  fontSize: 18, color: '666666',
-  align: 'center'
-});
+  // Title slide
+  let slide = pptx.addSlide();
+  slide.addText('Q4 2025 Business Review', {
+    x: 1, y: 2, w: '80%',
+    fontSize: 36, bold: true, color: '363636',
+    align: 'center',
+  });
+  slide.addText('Presented by Product Team', {
+    x: 1, y: 3.5, w: '80%',
+    fontSize: 18, color: '666666',
+    align: 'center',
+  });
 
-// Content slide with bullets
-slide = pptx.addSlide();
-slide.addText('Key Highlights', {
-  x: 0.5, y: 0.5, w: '90%',
-  fontSize: 28, bold: true
-});
-slide.addText([
-  { text: 'Revenue grew 25% YoY', options: { bullet: true } },
-  { text: 'Customer base expanded to 10,000+', options: { bullet: true } },
-  { text: 'New enterprise tier launched', options: { bullet: true, indentLevel: 1 } },
-], { x: 0.5, y: 1.5, w: '90%', fontSize: 18 });
+  // Content slide with bullets
+  slide = pptx.addSlide();
+  slide.addText('Key Highlights', {
+    x: 0.5, y: 0.5, w: '90%',
+    fontSize: 28, bold: true,
+  });
+  slide.addText([
+    { text: 'Revenue grew 25% YoY', options: { bullet: true } },
+    { text: 'Customer base expanded to 10,000+', options: { bullet: true } },
+    { text: 'New enterprise tier launched', options: { bullet: true, indentLevel: 1 } },
+  ], { x: 0.5, y: 1.5, w: '90%', fontSize: 18 });
 
-// Add chart
-slide = pptx.addSlide();
-slide.addChart(pptx.ChartType.bar, [
-  { name: 'Q1', labels: ['Sales'], values: [100] },
-  { name: 'Q2', labels: ['Sales'], values: [150] },
-  { name: 'Q3', labels: ['Sales'], values: [180] },
-  { name: 'Q4', labels: ['Sales'], values: [225] },
-], { x: 1, y: 1.5, w: 8, h: 4 });
+  // Add chart
+  slide = pptx.addSlide();
+  slide.addChart(pptx.ChartType.bar, [
+    { name: 'Sales', labels: ['Q1', 'Q2', 'Q3', 'Q4'], values: [100, 150, 180, 225] },
+  ], { x: 1, y: 1.5, w: 8, h: 4 });
 
-await pptx.writeFile({ fileName: 'presentation.pptx' });
+  await pptx.writeFile({ fileName: 'presentation.pptx' });
+}
+
+main();
 ```
 
 ### Add Charts (Python)
 
 ```python
+from pptx import Presentation
+from pptx.util import Inches
 from pptx.chart.data import CategoryChartData
 from pptx.enum.chart import XL_CHART_TYPE
 
-# Add slide with chart
-chart_layout = prs.slide_layouts[5]  # Blank
-slide = prs.slides.add_slide(chart_layout)
+prs = Presentation()
+slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
 
 # Chart data
 chart_data = CategoryChartData()
@@ -156,13 +147,20 @@ chart = slide.shapes.add_chart(
 
 chart.has_legend = True
 chart.legend.include_in_layout = False
+
+prs.save('charts.pptx')
 ```
 
 ### Add Images and Tables
 
 ```python
+from pptx import Presentation
+from pptx.util import Inches
+
+prs = Presentation()
+slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
+
 # Add image
-slide = prs.slides.add_slide(prs.slide_layouts[5])
 slide.shapes.add_picture('logo.png', Inches(0.5), Inches(0.5), width=Inches(2))
 
 # Add table
@@ -184,6 +182,8 @@ for row_idx, (product, sales, growth) in enumerate(data, 1):
     table.cell(row_idx, 0).text = product
     table.cell(row_idx, 1).text = sales
     table.cell(row_idx, 2).text = growth
+
+prs.save('images_and_tables.pptx')
 ```
 
 ### Extract Content
@@ -274,9 +274,9 @@ QUARTERLY REVIEW STRUCTURE
 ## What Good Looks Like
 
 - Narrative: each slide has a 1-sentence takeaway and supports a single decision or insight.
-- Structure: opening executive summary + clear arc (problem → insight → recommendation → next steps).
+- Structure: opening executive summary + clear arc (problem -> insight -> recommendation -> next steps).
 - Data hygiene: charts show units, timeframes, sources, and consistent axes.
-- Design: consistent typography, spacing, and contrast; no “wall of text” slides.
+- Design: consistent typography, spacing, and contrast; no "wall of text" slides.
 - Accessibility: reading order set and meaningful alt text where needed.
 
 ## Optional: AI / Automation
@@ -289,16 +289,16 @@ Use only when explicitly requested and policy-compliant.
 ## Navigation
 
 **Resources**
-- [references/pptx-layouts.md](references/pptx-layouts.md) — Master slides, themes, templates
-- [references/pptx-charts.md](references/pptx-charts.md) — Chart types, data visualization
-- [data/sources.json](data/sources.json) — Library documentation links
+- [references/pptx-layouts.md](references/pptx-layouts.md) - Master slides, themes, templates
+- [references/pptx-charts.md](references/pptx-charts.md) - Chart types, data visualization
+- [data/sources.json](data/sources.json) - Library documentation links
 
 **Templates**
-- [assets/pitch-deck.md](assets/pitch-deck.md) — Startup pitch structure
-- [assets/quarterly-review.md](assets/quarterly-review.md) — Business review template
-- [assets/slide-narrative-template.md](assets/slide-narrative-template.md) — 1-sentence takeaway per slide
+- [assets/pitch-deck.md](assets/pitch-deck.md) - Startup pitch structure
+- [assets/quarterly-review.md](assets/quarterly-review.md) - Business review template
+- [assets/slide-narrative-template.md](assets/slide-narrative-template.md) - 1-sentence takeaway per slide
 
 **Related Skills**
-- [../document-pdf/SKILL.md](../document-pdf/SKILL.md) — Export presentations to PDF
-- [../document-xlsx/SKILL.md](../document-xlsx/SKILL.md) — Data source for charts
-- [../product-management/SKILL.md](../product-management/SKILL.md) — Product strategy decks
+- [../document-pdf/SKILL.md](../document-pdf/SKILL.md) - Export presentations to PDF
+- [../document-xlsx/SKILL.md](../document-xlsx/SKILL.md) - Data source for charts
+- [../product-management/SKILL.md](../product-management/SKILL.md) - Product strategy decks

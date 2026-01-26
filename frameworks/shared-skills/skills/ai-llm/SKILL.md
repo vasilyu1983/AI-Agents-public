@@ -15,12 +15,13 @@ This skill covers the full LLM lifecycle:
 - **Operations**: Quality monitoring, change management, incident response (see `ai-mlops`)
 - **Safety**: Threat modeling, data governance, layered mitigations (NIST AI RMF: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 
-**Modern Best Practices (January 2026)**:
+**Modern Best Practices (2026)**:
 
 - Treat the model as a **component** with contracts, budgets, and rollback plans (not "magic").
 - Separate **core concepts** (tokenization, context, training vs adaptation) from **implementation choices** (providers, SDKs).
 - Gate upgrades with repeatable evals and staged rollout; avoid blind model swaps.
-- **Cost-aware engineering**: Measure cost per successful outcome, not just cost per token. Model selection is a cost-quality tradeoff decision.
+- **Cost-aware engineering**: Measure cost per successful outcome, not just cost per token; design tiering/caching early.
+- **Security-by-design**: Threat model prompt injection, data leakage, and tool abuse; treat guardrails as production code.
 
 **For detailed patterns:** See [Resources](#resources-best-practices--operational-patterns) and [Templates](#templates-copy-paste-ready) sections below.
 
@@ -67,26 +68,26 @@ Building LLM application: [Architecture Selection]
 
 ## Cost-Quality Decision Framework
 
-LLM costs are dominated by token costs (60-80% of TCO). Model selection is fundamentally a **cost-quality tradeoff**.
+LLM spend is driven by usage-based inference (tokens/requests) plus supporting infra and engineering. Model selection is a **cost-quality-latency-risk tradeoff**.
 
 ### Model Tier Strategy
 
-| Tier | Models | Cost | Use For |
+| Tier | Typical profile | Use For |
 |------|--------|------|---------|
-| **Value** | Haiku, GPT-4o-mini, Gemini Flash | <$1/1M tokens | High-volume, simple tasks |
-| **Balanced** | Sonnet, GPT-4o | $3-15/1M tokens | Production workloads |
-| **Premium** | Opus 4.5 | $15-75/1M tokens | Maximum quality, complex reasoning |
+| **Value** | Small/fast models | High-volume, simple tasks |
+| **Balanced** | General-purpose models | Most production workloads |
+| **Premium** | Frontier/large models | Hardest tasks, low volume |
 
 ### Cost Optimization Levers
 
-1. **Model tiering**: Route simple requests to cheaper models (40-60% savings)
-2. **Prompt caching**: Reuse static context (90% input cost reduction with Anthropic)
-3. **Prompt optimization**: Compress examples and instructions (20-40% token reduction)
+1. **Model tiering**: Route simple requests to cheaper models (often large savings at scale)
+2. **Prompt caching**: Reuse stable prefixes/context (provider-specific discounts and constraints)
+3. **Prompt optimization**: Compress examples and instructions (typically meaningful token reduction)
 4. **Output limits**: Set appropriate max_tokens (prevents runaway costs)
 
 ### When to Fine-Tune (ROI-Based)
 
-Fine-tuning investment ($15k-100k typical) pays off when:
+Fine-tuning pays off when:
 - **Volume justifies it**: >10k requests/month provides meaningful cost savings
 - **Domain is stable**: Requirements unchanged for >6 months
 - **Data exists**: >1,000 quality training examples available
@@ -156,7 +157,7 @@ Comprehensive operational guides with checklists, patterns, and decision framewo
 ### Core Operational Patterns
 
 - **[Cost Economics & Decision Frameworks](references/cost-economics.md)** - Cost modeling, unit economics, TCO analysis
-  - Token cost quick reference (January 2026 pricing)
+  - Pricing/discount assumptions (verify against current provider docs)
   - Cost-quality tradeoff framework and decision matrix
   - Total Cost of Ownership (TCO) calculation
   - Fine-tuning ROI framework and break-even analysis
@@ -186,7 +187,7 @@ Comprehensive operational guides with checklists, patterns, and decision framewo
 - **[Decision Matrices](references/decision-matrices.md)** - Quick reference tables for selection
   - RAG type decision matrix (naive → advanced → modular)
   - Production evaluation table with targets and actions
-  - Model selection matrix (GPT-4, Claude, Gemini, self-hosted)
+  - Model selection matrix (tier-based, vendor-agnostic)
   - Vector database, embedding model, framework selection
   - Deployment strategy matrix
 
@@ -261,7 +262,7 @@ Production templates by use case and technology:
 
 ## Trend Awareness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about LLM development, you MUST use WebSearch to check current trends before answering.
+**IMPORTANT**: For “best/latest” recommendations, verify recency using current sources (official docs/release notes/benchmarks). If you can’t browse, state assumptions and ask for timeframe + constraints.
 
 ### Trigger Conditions
 
@@ -274,12 +275,11 @@ Production templates by use case and technology:
 - "Best vector database for [use case]?"
 - "What agent framework should I use?"
 
-### Required Searches
+### Minimal Verification Checklist
 
-1. Search: `"LLM best practices 2026"`
-2. Search: `"[specific model/framework] vs alternatives 2026"`
-3. Search: `"LLM development trends January 2026"`
-4. Search: `"[RAG/agents/fine-tuning] new releases 2026"`
+1. Confirm user constraints: latency, cost, privacy/compliance, deployment target, and toolchain.
+2. Check at least 2 authoritative sources from `data/sources.json` (provider docs, release notes, pricing/quotas, deprecations).
+3. Prefer stable guidance (tradeoffs + decision criteria) over “one best model/framework”.
 
 ### What to Report
 
@@ -290,7 +290,7 @@ After searching, provide:
 - **Deprecated/declining**: Models/frameworks losing relevance or support
 - **Recommendation**: Based on fresh data, not just static knowledge
 
-### Example Topics (verify with fresh search)
+### Example Topics (verify with fresh sources)
 
 - Latest frontier models (GPT-4.5, Claude 4, Gemini 2.x, Llama 4)
 - Agent frameworks (LangGraph, CrewAI, AutoGen, Semantic Kernel)

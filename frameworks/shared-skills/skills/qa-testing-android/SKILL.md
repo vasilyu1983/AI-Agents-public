@@ -1,588 +1,196 @@
 ---
 name: qa-testing-android
-description: "Android testing with Espresso, UIAutomator, and Compose Testing: layered strategy, flake control, device matrix, CI integration, and ADB automation."
+description: Android testing with Espresso, UIAutomator, and Compose Testing; layered strategy, flake control, device matrix, CI integration, and ADB automation.
 ---
 
-# QA Testing (Android, Jan 2026) — Quick Reference
+# QA Testing (Android)
 
-This skill enables Android testing automation via Espresso, UIAutomator, and Compose Testing, with focus on reliable UI tests and layered coverage.
+Android testing automation with Espresso, UIAutomator, and Compose Testing.
 
-**Note**: Requires Android SDK with build-tools and emulator installed.
-
-Core references: [Android Testing Docs](https://developer.android.com/training/testing), [Espresso](https://developer.android.com/training/testing/espresso), [UIAutomator](https://developer.android.com/training/testing/other-components/ui-automator), [Compose Testing](https://developer.android.com/develop/ui/compose/testing).
-
----
-
-## Core QA (Default)
-
-### Testing Layers (Use the Smallest Effective Layer)
-
-- Unit tests: business logic, ViewModels, data transformations (fast, JVM-based).
-- Integration tests: Room databases, repositories, networking with MockWebServer.
-- UI tests (Espresso/Compose): in-app UI interactions, single activity.
-- System tests (UIAutomator): cross-app flows, permissions, notifications.
-
-### Framework Selection
-
-| Framework | Use For | Scope |
-|-----------|---------|-------|
-| JUnit + Mockito | Unit tests | JVM, no Android |
-| Robolectric | Unit tests with Android APIs | JVM, simulated |
-| Espresso | UI tests (View-based) | Instrumented |
-| Compose Testing | UI tests (Compose) | Instrumented |
-| UIAutomator | System/cross-app tests | Instrumented |
-| Appium | Cross-platform | External |
-
-### Device Matrix
-
-- Default: emulators for PR gates; real devices for nightly/release.
-- Keep matrix small and risk-based:
-  - One small phone (API 26-28), one flagship (API 34+), one tablet if supported.
-  - Cover min/target SDK versions.
-
-### UI Test Flake Control (Determinism)
-
-- Disable animations via ADB or test rule.
-- Use IdlingResources for async operations.
-- Mock network with MockWebServer or Hilt test modules.
-- Reset app state between tests (clear SharedPreferences, databases).
-- Avoid test ordering dependencies.
-
-### CI Economics
-
-- PR gate: unit tests + smoke UI suite; full UI on schedule.
-- Collect artifacts on failure: screenshots, logcat, video.
-- Use Android Test Orchestrator for isolation.
-
-### Do / Avoid
-
-Do:
-
-- Use IdlingResources for async waits.
-- Use Robot Pattern or Page Objects.
-- Test on multiple API levels.
-
-Avoid:
-
-- `Thread.sleep()` for synchronization.
-- Tests depending on network or specific time.
-- Flaky selectors (text that changes with locale).
-
----
+**Core References**: [Android Testing Docs](https://developer.android.com/training/testing), [Espresso](https://developer.android.com/training/testing/espresso), [Compose Testing](https://developer.android.com/develop/ui/compose/testing)
 
 ## Quick Reference
 
-| Task | Command | When to Use |
-|------|---------|-------------|
-| List emulators | `emulator -list-avds` | Check available AVDs |
-| Start emulator | `emulator @Pixel_6_API_34` | Launch emulator |
-| List devices | `adb devices` | Check connected devices |
-| Install APK | `adb install app.apk` | Deploy to device |
-| Run tests | `./gradlew connectedAndroidTest` | Execute instrumented tests |
-| Run unit tests | `./gradlew test` | Execute JVM tests |
-| Take screenshot | `adb exec-out screencap -p > screen.png` | Capture screen |
-| Record video | `adb shell screenrecord /sdcard/demo.mp4` | Record session |
-| Clear app data | `adb shell pm clear com.example.app` | Reset app state |
+| Task | Command |
+|------|---------|
+| List emulators | `emulator -list-avds` |
+| Start emulator | `emulator @<avd_name>` |
+| List devices | `adb devices` |
+| Install APK | `adb install -r <path-to-apk>` |
+| Run unit tests | `./gradlew test` |
+| Run instrumented tests (connected) | `./gradlew connectedAndroidTest` |
+| Run instrumented tests (GMD) | `./gradlew <device><variant>AndroidTest` |
+| List GMD tasks | `./gradlew tasks --all | rg -n \"AndroidTest|managedDevice|ManagedDevices\"` |
+| Clear app data | `adb shell pm clear <applicationId>` |
 
----
+## Quick Start (2026 Defaults)
 
-## When to Use This Skill
+- Prefer Gradle Managed Devices (GMD) + ATD images for CI; use `connectedAndroidTest` for local ad-hoc runs.
+- Enable test isolation via AndroidX Test Orchestrator for instrumented tests.
+- Disable animations via Gradle `testOptions` (preferred) instead of per-runner ADB steps.
+- Keep selectors stable: `withId()` (Views), `testTag` (Compose), resource-id/content-desc (UIAutomator).
 
-Claude should invoke this skill when a user requests:
-
-- Build and run Android app in emulator
-- Test Android app functionality
-- Write Espresso or UIAutomator tests
-- Test Jetpack Compose UI
-- Debug Android app behavior
-- Set up Android CI/CD pipeline
-
----
-
-## Espresso Testing
-
-### Basic Espresso Test
+Recommended Gradle defaults for stable instrumented tests (version catalog names vary by project):
 
 ```kotlin
-// app/src/androidTest/java/com/example/LoginTest.kt
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-
-@RunWith(AndroidJUnit4::class)
-class LoginTest {
-
-    @get:Rule
-    val activityRule = ActivityScenarioRule(LoginActivity::class.java)
-
-    @Test
-    fun loginWithValidCredentials_showsDashboard() {
-        // Enter email
-        onView(withId(R.id.emailField))
-            .perform(typeText("user@example.com"), closeSoftKeyboard())
-
-        // Enter password
-        onView(withId(R.id.passwordField))
-            .perform(typeText("password123"), closeSoftKeyboard())
-
-        // Click login
-        onView(withId(R.id.loginButton))
-            .perform(click())
-
-        // Verify dashboard is shown
-        onView(withId(R.id.dashboardTitle))
-            .check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun loginWithEmptyEmail_showsError() {
-        onView(withId(R.id.loginButton))
-            .perform(click())
-
-        onView(withId(R.id.emailError))
-            .check(matches(withText("Email is required")))
-    }
-}
-```
-
-### IdlingResource for Async Operations
-
-```kotlin
-class NetworkIdlingResource : IdlingResource {
-    private var callback: IdlingResource.ResourceCallback? = null
-    @Volatile private var isIdle = true
-
-    override fun getName() = "NetworkIdlingResource"
-
-    override fun isIdleNow(): Boolean = isIdle
-
-    override fun registerIdleTransitionCallback(callback: ResourceCallback) {
-        this.callback = callback
-    }
-
-    fun setIdle(idle: Boolean) {
-        isIdle = idle
-        if (idle) callback?.onTransitionToIdle()
-    }
-}
-
-// In test setup
-@Before
-fun setUp() {
-    IdlingRegistry.getInstance().register(networkIdlingResource)
-}
-
-@After
-fun tearDown() {
-    IdlingRegistry.getInstance().unregister(networkIdlingResource)
-}
-```
-
-### Robot Pattern
-
-```kotlin
-// LoginRobot.kt
-class LoginRobot {
-    fun enterEmail(email: String) = apply {
-        onView(withId(R.id.emailField))
-            .perform(typeText(email), closeSoftKeyboard())
-    }
-
-    fun enterPassword(password: String) = apply {
-        onView(withId(R.id.passwordField))
-            .perform(typeText(password), closeSoftKeyboard())
-    }
-
-    fun clickLogin() = apply {
-        onView(withId(R.id.loginButton)).perform(click())
-    }
-
-    fun verifyDashboardDisplayed() {
-        onView(withId(R.id.dashboardTitle))
-            .check(matches(isDisplayed()))
-    }
-
-    fun verifyError(message: String) {
-        onView(withText(message))
-            .check(matches(isDisplayed()))
-    }
-}
-
-// Usage in test
-@Test
-fun loginFlow() {
-    LoginRobot()
-        .enterEmail("user@example.com")
-        .enterPassword("password123")
-        .clickLogin()
-        .verifyDashboardDisplayed()
-}
-```
-
----
-
-## Compose Testing
-
-### Basic Compose Test
-
-```kotlin
-import androidx.compose.ui.test.*
-import androidx.compose.ui.test.junit4.createComposeRule
-import org.junit.Rule
-import org.junit.Test
-
-class LoginScreenTest {
-
-    @get:Rule
-    val composeTestRule = createComposeRule()
-
-    @Test
-    fun loginButton_isDisplayed() {
-        composeTestRule.setContent {
-            LoginScreen(onLogin = {})
-        }
-
-        composeTestRule.onNodeWithText("Login")
-            .assertIsDisplayed()
-    }
-
-    @Test
-    fun enterCredentials_enablesLoginButton() {
-        composeTestRule.setContent {
-            LoginScreen(onLogin = {})
-        }
-
-        // Enter email
-        composeTestRule.onNodeWithTag("emailField")
-            .performTextInput("user@example.com")
-
-        // Enter password
-        composeTestRule.onNodeWithTag("passwordField")
-            .performTextInput("password123")
-
-        // Verify login button is enabled
-        composeTestRule.onNodeWithTag("loginButton")
-            .assertIsEnabled()
-    }
-
-    @Test
-    fun clickLogin_callsCallback() {
-        var loginClicked = false
-
-        composeTestRule.setContent {
-            LoginScreen(onLogin = { loginClicked = true })
-        }
-
-        composeTestRule.onNodeWithTag("emailField")
-            .performTextInput("user@example.com")
-        composeTestRule.onNodeWithTag("passwordField")
-            .performTextInput("password123")
-        composeTestRule.onNodeWithTag("loginButton")
-            .performClick()
-
-        assert(loginClicked)
-    }
-}
-```
-
-### Setting TestTags in Composables
-
-```kotlin
-@Composable
-fun LoginScreen(onLogin: () -> Unit) {
-    Column {
-        TextField(
-            value = email,
-            onValueChange = { email = it },
-            modifier = Modifier.testTag("emailField")
-        )
-        TextField(
-            value = password,
-            onValueChange = { password = it },
-            modifier = Modifier.testTag("passwordField")
-        )
-        Button(
-            onClick = onLogin,
-            modifier = Modifier.testTag("loginButton")
-        ) {
-            Text("Login")
-        }
-    }
-}
-```
-
-### Waiting for Async Updates
-
-```kotlin
-@Test
-fun loadData_showsList() {
-    composeTestRule.setContent {
-        DataListScreen(viewModel = testViewModel)
-    }
-
-    // Wait for idle state
-    composeTestRule.waitForIdle()
-
-    // Or wait for specific condition
-    composeTestRule.waitUntil(timeoutMillis = 5000) {
-        composeTestRule.onAllNodesWithTag("listItem")
-            .fetchSemanticsNodes().isNotEmpty()
-    }
-
-    composeTestRule.onNodeWithTag("listItem")
-        .assertIsDisplayed()
-}
-```
-
----
-
-## UIAutomator
-
-### Cross-App and System Tests
-
-```kotlin
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiSelector
-import androidx.test.uiautomator.By
-import androidx.test.uiautomator.Until
-import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.Before
-import org.junit.Test
-
-class SystemTest {
-    private lateinit var device: UiDevice
-
-    @Before
-    fun setUp() {
-        device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-    }
-
-    @Test
-    fun grantPermission_allowsAccess() {
-        // Start app
-        device.pressHome()
-        val launcher = device.launcherPackageName
-        device.wait(Until.hasObject(By.pkg(launcher)), 5000)
-
-        // Launch app
-        val context = InstrumentationRegistry.getInstrumentation().context
-        val intent = context.packageManager.getLaunchIntentForPackage("com.example.app")
-        context.startActivity(intent)
-        device.wait(Until.hasObject(By.pkg("com.example.app")), 5000)
-
-        // Handle permission dialog
-        val allowButton = device.findObject(
-            UiSelector().text("Allow")
-        )
-        if (allowButton.exists()) {
-            allowButton.click()
-        }
-
-        // Continue with test
-        device.findObject(By.res("com.example.app:id/mainContent"))
-            .click()
-    }
-
-    @Test
-    fun openNotification_navigatesToApp() {
-        // Open notification shade
-        device.openNotification()
-        device.wait(Until.hasObject(By.text("New Message")), 5000)
-
-        // Click notification
-        device.findObject(By.text("New Message")).click()
-
-        // Verify app opened to correct screen
-        device.wait(Until.hasObject(By.res("com.example.app:id/messageDetail")), 5000)
-    }
-}
-```
-
----
-
-## ADB Commands
-
-### Emulator Management
-
-```bash
-# List available AVDs
-emulator -list-avds
-
-# Start emulator (headless for CI)
-emulator @Pixel_6_API_34 -no-window -no-audio -no-boot-anim
-
-# Start with specific options
-emulator @Pixel_6_API_34 -gpu swiftshader_indirect -no-snapshot
-
-# Wait for device to be ready
-adb wait-for-device
-adb shell getprop sys.boot_completed | grep -q 1
-```
-
-### App Management
-
-```bash
-# Install APK
-adb install -r app-debug.apk
-
-# Install test APK
-adb install -r app-debug-androidTest.apk
-
-# Uninstall
-adb uninstall com.example.app
-
-# Clear app data
-adb shell pm clear com.example.app
-
-# Force stop
-adb shell am force-stop com.example.app
-
-# Launch activity
-adb shell am start -n com.example.app/.MainActivity
-```
-
-### Disable Animations (Required for UI Tests)
-
-```bash
-adb shell settings put global window_animation_scale 0
-adb shell settings put global transition_animation_scale 0
-adb shell settings put global animator_duration_scale 0
-```
-
-### Screenshots and Recording
-
-```bash
-# Screenshot
-adb exec-out screencap -p > screenshot.png
-
-# Screen recording (max 180 seconds)
-adb shell screenrecord /sdcard/demo.mp4
-# Ctrl+C to stop, then pull:
-adb pull /sdcard/demo.mp4
-
-# Logcat
-adb logcat -d > logcat.txt
-adb logcat *:E  # Errors only
-```
-
----
-
-## CI/CD Integration
-
-### GitHub Actions
-
-```yaml
-# .github/workflows/android.yml
-name: Android CI
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Run unit tests
-        run: ./gradlew test
-
-      - name: Enable KVM
-        run: |
-          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-          sudo udevadm control --reload-rules
-          sudo udevadm trigger --name-match=kvm
-
-      - name: Run instrumented tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 34
-          arch: x86_64
-          script: ./gradlew connectedAndroidTest
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: test-results
-          path: |
-            **/build/reports/
-            **/build/outputs/androidTest-results/
-```
-
-### Gradle Test Configuration
-
-```kotlin
-// app/build.gradle.kts
 android {
     testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
-            isReturnDefaultValues = true
-        }
         animationsDisabled = true
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
 }
 
 dependencies {
-    // Unit testing
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
-    testImplementation("org.robolectric:robolectric:4.11.1")
-
-    // Instrumented testing
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
-    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
-
-    // Compose testing
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.0")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.0")
-
-    // Test orchestrator
-    androidTestUtil("androidx.test:orchestrator:1.4.2")
+    androidTestUtil(libs.androidx.test.orchestrator)
 }
 ```
 
----
+## When to Use
 
-## Navigation
+- Debug or stabilize flaky Android UI tests
+- Add Espresso tests for View-based UIs
+- Add Compose UI tests for composables
+- Add UIAutomator tests for system UI or cross-app flows
+- Set up an Android test gate in CI
 
-**Resources**
+## Inputs to Gather
 
-- [references/espresso-patterns.md](references/espresso-patterns.md) — Espresso matchers, actions, and advanced patterns
-- [references/compose-testing.md](references/compose-testing.md) — Jetpack Compose testing guide
-- [references/gradle-managed-devices.md](references/gradle-managed-devices.md) — Gradle Managed Devices for CI/CD
-- [data/sources.json](data/sources.json) — Android documentation links
+- UI stack: Views, Compose, or mixed
+- Test layer: unit, Robolectric, instrumented UI, UIAutomator/system
+- CI target: PR gate vs nightly vs release; emulator vs device farm
+- Device matrix: min/target API, form factors, locales (if relevant)
+- Flake symptoms: timeouts, missing nodes, idling/sync, device-only issues
+- App seams: DI hooks for fakes, feature flags, test accounts/test data
 
-**Templates**
+## Testing Layers
 
-- [assets/template-android-test-checklist.md](assets/template-android-test-checklist.md) — Android UI test stability checklist
+| Layer | Framework | Scope |
+|-------|-----------|-------|
+| Unit | JUnit + Mockito | JVM, no Android |
+| Unit (Android) | Robolectric | JVM, simulated |
+| UI (Views) | Espresso | Instrumented |
+| UI (Compose) | Compose Testing | Instrumented |
+| System | UIAutomator | Cross-app |
 
-**Related Skills**
+## Core Principles (Stability)
 
-- [../software-mobile/SKILL.md](../software-mobile/SKILL.md) — Android/Kotlin development
-- [../qa-testing-strategy/SKILL.md](../qa-testing-strategy/SKILL.md) — General testing strategies
-- [../qa-testing-mobile/SKILL.md](../qa-testing-mobile/SKILL.md) — Cross-platform mobile testing strategy
-- [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — CI/CD pipelines
+### Device Matrix
+
+- Default: emulators for PR gates; real devices for release
+- Cover: min supported API level, target API level, plus tablet/foldable if supported
+
+### Flake Control
+
+- Prefer Gradle `testOptions { animationsDisabled = true }` for instrumented tests
+- Use AndroidX Test Orchestrator to isolate state and recover from crashes
+- Use IdlingResources / Compose idling + `waitUntil` instead of sleeps
+- Mock network with `MockWebServer` (or your DI fake) and avoid live backends
+- Reset app state per test (test account/data, storage, feature flags)
+
+## Writing Tests
+
+- Espresso (Views): open `references/espresso-patterns.md`
+- Compose: open `references/compose-testing.md`
+- UIAutomator (system/cross-app): open `references/uiautomator.md`
+
+## Workflows
+
+### Add a New UI Test (Instrumented)
+
+- Pick framework: Espresso (Views) vs Compose Testing vs UIAutomator boundary.
+- Add stable selectors: View `id`, Compose `Modifier.testTag`, system `resource-id`/`content-desc`.
+- Control externals: fake/mock network + deterministic test data.
+- Add waits: IdlingResources / Compose idling + `waitUntil` (avoid sleeps).
+- Run locally: `./gradlew connectedAndroidTest` (or a single test via runner args).
+
+### Diagnose a Flaky Instrumented Test
+
+- Confirm reproduces: run the test 10x; isolate to one device/API if needed.
+- Remove nondeterminism: network, clock/timezone, locale, feature flags, animations.
+- Replace sleeps with idling/explicit waits; validate your IdlingResource actually idles.
+- Capture artifacts: logcat + screenshot + screen recording for failures.
+- If still flaky, isolate app state (orchestrator + clear data) and bisect the interaction steps.
+
+### Add a CI Gate (Preferred: GMD)
+
+- Configure GMD + ATD images (see `references/gradle-managed-devices.md`).
+- Run PR gate on a small matrix; expand via groups for nightly/release.
+- Ensure artifacts upload on failure: `**/build/reports/androidTests/`, screenshots/logcat.
+
+## ADB Commands (Triage)
+
+```bash
+# Screenshot
+adb exec-out screencap -p > screenshot.png
+
+# Screen recording
+adb shell screenrecord /sdcard/demo.mp4
+```
+
+## CI Integration
+
+Preferred: Gradle Managed Devices (GMD). See `references/gradle-managed-devices.md`.
+
+```yaml
+# .github/workflows/android.yml
+name: Android CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - uses: gradle/actions/setup-gradle@v3
+      - run: ./gradlew test pixel6api34DebugAndroidTest
+```
+
+## Navigating References
+
+The reference guides are intentionally large; search within them instead of loading everything:
+
+- `rg -n \"^## \" frameworks/shared-skills/skills/qa-testing-android/references/compose-testing.md`
+- `rg -n \"Idling|waitUntil|Synchronization\" frameworks/shared-skills/skills/qa-testing-android/references/compose-testing.md`
+- `rg -n \"RecyclerView|Intents\" frameworks/shared-skills/skills/qa-testing-android/references/espresso-patterns.md`
+
+## Do / Avoid
+
+### Do
+
+- Prefer orchestrator + per-test isolation for instrumented tests
+- Use IdlingResources / `waitUntil` for async waits
+- Use Robot/Page Object patterns for readability and reuse
+- Run a small device matrix on PRs; expand on nightly/release
+
+### Avoid
+
+- `Thread.sleep()` for synchronization
+- Tests depending on live network/backends
+- Flaky selectors (localized text, position-only selectors)
+
+## Resources
+
+| Resource | Purpose |
+|----------|---------|
+| [references/espresso-patterns.md](references/espresso-patterns.md) | Espresso matchers, actions |
+| [references/compose-testing.md](references/compose-testing.md) | Compose testing guide |
+| [references/uiautomator.md](references/uiautomator.md) | UIAutomator patterns (system UI) |
+| [references/gradle-managed-devices.md](references/gradle-managed-devices.md) | Managed Devices for CI |
+| [data/sources.json](data/sources.json) | Documentation links |
+
+## Templates
+
+| Template | Purpose |
+|----------|---------|
+| [assets/template-android-test-checklist.md](assets/template-android-test-checklist.md) | Stability checklist |
+
+## Related Skills
+
+| Skill | Purpose |
+|-------|---------|
+| [software-mobile](../software-mobile/SKILL.md) | Android development |
+| [qa-testing-strategy](../qa-testing-strategy/SKILL.md) | Test strategy |
+| [qa-testing-mobile](../qa-testing-mobile/SKILL.md) | Cross-platform mobile |

@@ -3,11 +3,9 @@ name: claude-code-skills
 description: Comprehensive reference for creating Claude Code skills with progressive disclosure, SKILL.md structure, references/ organization, frontmatter specification, and best practices for modular capability development.
 ---
 
-# Claude Code Skills — Meta Reference
+# Claude Code Skills - Meta Reference
 
 This skill provides the definitive reference for creating, organizing, and maintaining Claude Code skills. Use this when building new skills or improving existing skill architecture.
-
----
 
 ## Quick Reference
 
@@ -40,11 +38,9 @@ skills/
 
 **Directory purposes**:
 
-- `scripts/` — Executable code; output consumed, code never loads into context
-- `references/` — Documentation loaded into context when Claude needs it
-- `assets/` — Files used in generated output (not loaded into context)
-
----
+- `scripts/` - Executable code; output consumed, code never loads into context
+- `references/` - Documentation loaded into context when the agent needs it
+- `assets/` - Files used in generated output (not loaded into context)
 
 ## SKILL.md Template
 
@@ -54,11 +50,9 @@ name: skill-name
 description: One-line description of what this skill provides and when to use it
 ---
 
-# Skill Name — Quick Reference
+# Skill Name - Quick Reference
 
 Brief overview of the skill's purpose and value.
-
----
 
 ## Quick Reference
 
@@ -68,13 +62,11 @@ Brief overview of the skill's purpose and value.
 
 ## When to Use This Skill
 
-Claude should invoke this skill when a user requests:
+The assistant should invoke this skill when a user requests:
 
 - Use case 1
 - Use case 2
 - Use case 3
-
----
 
 ## Core Concepts
 
@@ -90,19 +82,15 @@ code example
 
 Additional patterns...
 
----
-
 ## Navigation
 
 **Resources**
-- [references/skill-patterns.md](references/skill-patterns.md) — Common patterns
-- [references/skill-validation.md](references/skill-validation.md) — Validation criteria
+- [references/skill-patterns.md](references/skill-patterns.md) - Common patterns
+- [references/skill-validation.md](references/skill-validation.md) - Validation criteria
 
 **Related Skills**
-- [../claude-code-agents/SKILL.md](../claude-code-agents/SKILL.md) — Agent creation
+- [../claude-code-agents/SKILL.md](../claude-code-agents/SKILL.md) - Agent creation
 ```
-
----
 
 ## Progressive Disclosure
 
@@ -114,7 +102,7 @@ Skills use **progressive disclosure** to optimize token usage:
 | **Activation** | Full SKILL.md body | 2K-5K tokens |
 | **Execution** | scripts/, references/, assets/ | On-demand |
 
-**Pattern**: SKILL.md provides overview → Resources load only when needed
+**Pattern**: SKILL.md provides overview -> Resources load only when needed
 
 **Limits**: Keep SKILL.md under **500 lines** (<5K tokens)
 
@@ -127,14 +115,12 @@ Skills use **progressive disclosure** to optimize token usage:
 | Common patterns | Edge case handling |
 | 1-2 code examples | Complete implementations |
 
----
-
 ## Frontmatter Specification
 
 ```yaml
 ---
 name: string                        # Required: lowercase-kebab-case, matches folder name
-description: string                 # Required: PRIMARY trigger mechanism (50-200 chars)
+description: string                 # Required: PRIMARY trigger mechanism (50-300 chars)
 disable-model-invocation: boolean   # Optional: Only user can invoke (for /deploy, /commit)
 user-invocable: boolean             # Optional: false = background knowledge only
 ---
@@ -146,16 +132,14 @@ user-invocable: boolean             # Optional: false = background knowledge onl
 - Be specific: `software-backend` not `backend`
 
 **Description rules** (PRIMARY TRIGGER):
-- Description is THE primary triggering mechanism - Claude uses it to decide when to invoke
+- Description is the primary triggering mechanism - the runtime uses it to decide when to invoke
 - Include "when to use" context HERE, not in the body
-- Single line, 50-200 characters
+- Single line, 50-300 characters
 - Include key technologies/concepts as trigger keywords
 
 **Optional frontmatter**:
-- `disable-model-invocation: true` — Only user can invoke (for workflows with side effects: `/commit`, `/deploy`, `/send-slack`)
-- `user-invocable: false` — Only Claude can invoke (for background knowledge, not actionable commands)
-
----
+- `disable-model-invocation: true` - Only user can invoke (for workflows with side effects: `/commit`, `/deploy`, `/send-slack`)
+- `user-invocable: false` - Not user-invocable (background knowledge only; runtime-dependent)
 
 ## Skill Categories
 
@@ -165,15 +149,13 @@ user-invocable: boolean             # Optional: false = background knowledge onl
 | Software | `software-` | `software-backend`, `software-frontend` |
 | Operations | `ops-` | `ops-devops-platform` |
 | Data | `data-` | `data-lake-platform`, `data-sql-optimization` |
-| Quality | `quality-` | `quality-debugging`, `qa-docs-coverage` |
+| Quality | `qa-` | `qa-debugging`, `qa-docs-coverage` |
 | Developer Tools | `dev-`, `git-` | `dev-api-design`, `git-commit-message`, `dev-workflow-planning` |
 | Product | `product-` | `product-management`, `docs-ai-prd` |
 | Document | `document-` | `document-pdf`, `document-xlsx` |
 | Testing | `testing-`, `qa-testing-` | `qa-testing-playwright`, `qa-testing-strategy` |
 | Marketing | `marketing-` | `marketing-social-media`, `marketing-seo-complete` |
 | Claude Code | `claude-code-` | `claude-code-agents`, `claude-code-skills` |
-
----
 
 ## sources.json Schema
 
@@ -202,8 +184,6 @@ user-invocable: boolean             # Optional: false = background knowledge onl
 - `community_resources`
 - `tools_and_libraries`
 
----
-
 ## Quality Checklist
 
 ```text
@@ -214,7 +194,7 @@ Frontmatter:
 [ ] description is concise and actionable
 
 Structure:
-[ ] SKILL.md under 5K characters (progressive disclosure)
+[ ] SKILL.md under 500 lines (split into references/ if needed)
 [ ] references/ for detailed content
 [ ] data/sources.json with curated links
 
@@ -230,8 +210,6 @@ Quality:
 [ ] All URLs are live (no 404s)
 [ ] Sources updated within 6 months
 ```
-
----
 
 ## Multi-Tech vs Single-Tech Skills
 
@@ -261,16 +239,14 @@ software-backend/
     └── python/
 ```
 
----
-
 ## Navigation
 
 **Resources**
-- [references/skill-patterns.md](references/skill-patterns.md) — Common skill patterns
-- [references/skill-validation.md](references/skill-validation.md) — Validation criteria
-- [data/sources.json](data/sources.json) — Official documentation links
+- [references/skill-patterns.md](references/skill-patterns.md) - Common skill patterns
+- [references/skill-validation.md](references/skill-validation.md) - Validation criteria
+- [data/sources.json](data/sources.json) - Official documentation links
 
 **Related Skills**
-- [../claude-code-agents/SKILL.md](../claude-code-agents/SKILL.md) — Agent creation
-- [../claude-code-commands/SKILL.md](../claude-code-commands/SKILL.md) — Command creation
-- [../claude-code-hooks/SKILL.md](../claude-code-hooks/SKILL.md) — Hook automation
+- [../claude-code-agents/SKILL.md](../claude-code-agents/SKILL.md) - Agent creation
+- [../claude-code-commands/SKILL.md](../claude-code-commands/SKILL.md) - Command creation
+- [../claude-code-hooks/SKILL.md](../claude-code-hooks/SKILL.md) - Hook automation

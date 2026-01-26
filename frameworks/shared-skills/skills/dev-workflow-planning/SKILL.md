@@ -3,11 +3,11 @@ name: dev-workflow-planning
 description: Structured development workflows using /brainstorm, /write-plan, and /execute-plan patterns. Transform ad-hoc conversations into systematic project execution with hypothesis-driven planning, incremental implementation, and progress tracking.
 ---
 
-# Workflow Planning Skill — Quick Reference
+# Workflow Planning Skill - Quick Reference
 
-This skill enables structured, systematic development workflows. Claude should apply these patterns when users need to break down complex projects, create implementation plans, or execute multi-step development tasks with clear checkpoints.
+This skill enables structured, systematic development workflows. The assistant should apply these patterns when users need to break down complex projects, create implementation plans, or execute multi-step development tasks with clear checkpoints.
 
-**Inspired by**: Obra Superpowers patterns for structured Claude Code workflows.
+**Inspired by**: Obra Superpowers patterns for structured agent workflows.
 
 ---
 
@@ -23,7 +23,7 @@ This skill enables structured, systematic development workflows. Claude should a
 
 ## When to Use This Skill
 
-Claude should invoke this skill when a user requests:
+The assistant should invoke this skill when a user requests:
 
 - Break down a complex feature into steps
 - Create an implementation plan
@@ -164,7 +164,7 @@ PATTERN: Maintain visible progress
 After each action:
 [X] Step 1: Create database schema
 [X] Step 2: Implement API endpoints
-[→] Step 3: Add frontend form (IN PROGRESS)
+[IN PROGRESS] Step 3: Add frontend form
 [ ] Step 4: Write tests
 [ ] Step 5: Deploy to staging
 
@@ -180,7 +180,7 @@ PATTERN: Limit concurrent work to improve flow
 
 WIP limits restrict maximum items in each workflow stage.
 Benefits: Makes blockers visible, reduces context switching,
-can increase throughput by 40%.
+often increases throughput.
 
 RECOMMENDED LIMITS:
 | Level | Limit | Rationale |
@@ -193,8 +193,8 @@ RECOMMENDED LIMITS:
 SETTING WIP LIMITS:
 1. Start with team size + 1
 2. Monitor for 2-4 weeks
-3. If limits never reached → lower them
-4. If constantly blocked → investigate bottleneck, don't raise limit
+3. If limits never reached -> lower them
+4. If constantly blocked -> investigate bottleneck, don't raise limit
 5. Adjust based on actual flow data
 
 WHEN TO VIOLATE (thoughtfully):
@@ -210,9 +210,6 @@ WHEN TO VIOLATE (thoughtfully):
 ### Starting a Session
 
 ```text
-/session-start [project context]
-
-OUTPUT:
 Session initialized.
 - Project: [name]
 - Goal: [today's objective]
@@ -308,18 +305,18 @@ Step 5: Add edge case tests
 
 ## Definition of Ready / Done (DoR/DoD)
 
-**[assets/template-dor-dod.md](assets/template-dor-dod.md)** — Checklists for work readiness and completion.
+**[assets/template-dor-dod.md](assets/template-dor-dod.md)** - Checklists for work readiness and completion.
 
-**[assets/template-work-item-ticket.md](assets/template-work-item-ticket.md)** — Ticket template with DoR/DoD and testable acceptance criteria.
+**[assets/template-work-item-ticket.md](assets/template-work-item-ticket.md)** - Ticket template with DoR/DoD and testable acceptance criteria.
 
 ### Key Sections
 
-- **Definition of Ready** — User story, bug, technical task checklists
-- **Definition of Done** — Feature, bug fix, spike completion criteria
-- **Acceptance Criteria Templates** — Gherkin (Given/When/Then), bullet list, rule-based
-- **Estimation Guidelines** — Story point reference scale (1-21+), slicing strategies
-- **Planning Levels** — Roadmap → Milestone → Sprint → Task hierarchy
-- **Cross-Functional Coordination** — RACI matrix, handoff checklists
+- **Definition of Ready** - User story, bug, technical task checklists
+- **Definition of Done** - Feature, bug fix, spike completion criteria
+- **Acceptance Criteria Templates** - Gherkin (Given/When/Then), bullet list, rule-based
+- **Estimation Guidelines** - Story point reference scale (1-21+), slicing strategies
+- **Planning Levels** - Roadmap -> Milestone -> Sprint -> Task hierarchy
+- **Cross-Functional Coordination** - RACI matrix, handoff checklists
 
 ---
 
@@ -364,28 +361,17 @@ Step 5: Add edge case tests
 
 > **Note**: AI can assist but should not replace human judgment on priorities and acceptance.
 
-- **Generate acceptance criteria** — Draft from story description (needs review)
-- **Suggest story slicing** — Based on complexity analysis
-- **Dependency mapping** — Identify blocking relationships
-- **AI-augmented planning** — Use LLMs to draft plans, but validate assumptions
+- **Generate acceptance criteria** - Draft from story description (needs review)
+- **Suggest story slicing** - Based on complexity analysis
+- **Dependency mapping** - Identify blocking relationships
+- **AI-augmented planning** - Use LLMs to draft plans, but validate assumptions
 
-### AI-Assisted Planning Best Practices (2025)
+### AI-Assisted Planning Best Practices
 
-Based on [Addy Osmani's LLM Coding Workflow](https://addyosmani.com/blog/ai-coding-workflow/):
-
-1. **Planning first** — Create robust spec/plan before coding with AI
-2. **Scope management** — Feed AI manageable tasks, not the whole codebase
-3. **Iterative steps** — Break into tickets, tackle one by one
-4. **Human oversight** — AI-augmented, not AI-automated engineering
-
-### DORA 2025 Findings on AI
-
-Per [DORA 2025 Report](https://www.oobeya.io/blog/dora-metrics-2025-best-practices):
-
-- AI adoption improves throughput but may reduce delivery stability
-- Teams using AI report +7.5% documentation quality, +3.4% code quality
-- However: -7.2% delivery stability when AI adoption increases
-- **Recommendation**: Monitor DORA metrics when increasing AI tool usage
+1. Planning first - Create a plan before coding
+2. Scope management - Keep tasks small and verifiable
+3. Iterative steps - Ship in increments with checkpoints
+4. Human oversight - Validate assumptions and outputs (tests, logs, metrics)
 
 ### Bounded Claims
 
@@ -400,16 +386,16 @@ Per [DORA 2025 Report](https://www.oobeya.io/blog/dora-metrics-2025-best-practic
 
 ### Resources
 
-- [references/planning-templates.md](references/planning-templates.md) — Plan templates for common scenarios
-- [references/session-patterns.md](references/session-patterns.md) — Multi-session project management
-- [references/flow-metrics.md](references/flow-metrics.md) — DORA metrics, WIP limits, flow optimization
-- [assets/template-dor-dod.md](assets/template-dor-dod.md) — DoR/DoD checklists, estimation, cross-functional coordination
-- [assets/template-work-item-ticket.md](assets/template-work-item-ticket.md) — Work item ticket template (DoR/DoD + acceptance criteria)
-- [data/sources.json](data/sources.json) — Workflow methodology references
+- [references/planning-templates.md](references/planning-templates.md) - Plan templates for common scenarios
+- [references/session-patterns.md](references/session-patterns.md) - Multi-session project management
+- [references/flow-metrics.md](references/flow-metrics.md) - DORA metrics, WIP limits, flow optimization
+- [assets/template-dor-dod.md](assets/template-dor-dod.md) - DoR/DoD checklists, estimation, cross-functional coordination
+- [assets/template-work-item-ticket.md](assets/template-work-item-ticket.md) - Work item ticket template (DoR/DoD + acceptance criteria)
+- [data/sources.json](data/sources.json) - Workflow methodology references
 
 ### Related Skills
 
-- [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System design planning
-- [../docs-ai-prd/SKILL.md](../docs-ai-prd/SKILL.md) — Requirements to plan conversion
-- [../qa-testing-strategy/SKILL.md](../qa-testing-strategy/SKILL.md) — TDD workflow integration
-- [../qa-debugging/SKILL.md](../qa-debugging/SKILL.md) — Systematic debugging plans
+- [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) - System design planning
+- [../docs-ai-prd/SKILL.md](../docs-ai-prd/SKILL.md) - Requirements to plan conversion
+- [../qa-testing-strategy/SKILL.md](../qa-testing-strategy/SKILL.md) - TDD workflow integration
+- [../qa-debugging/SKILL.md](../qa-debugging/SKILL.md) - Systematic debugging plans

@@ -1,38 +1,61 @@
 ---
 name: startup-fundraising
-description: Fundraising strategy, pitch preparation, investor relations, and capital raising execution
-metadata:
-  version: "1.1"
+description: Use when raising startup capital (pre-seed through Series C+): decide raise vs bootstrap, size a round, build a deck + data room, run investor targeting/outreach, negotiate SAFEs/term sheets, manage diligence, and set investor reporting cadence post-close.
 ---
 
 # Startup Fundraising
 
 Systematic framework for raising capital from pre-seed through growth stages.
 
-**Modern Best Practices (Jan 2026)**:
+## Quick Start (Inputs)
 
-- **Burn Multiple is king**: Investors screen on Net Burn / Net New ARR before anything else.
-- **Post-money SAFEs dominate**: 85-90% of pre-seed deals use post-money SAFEs (not pre-money).
+Collect these inputs first (ask concise follow-ups if missing):
+
+- Company basics: product, ICP, geo, stage
+- Traction: revenue (MRR/ARR), growth, retention/NRR, pipeline
+- Financials: runway, burn, gross margin, CAC/payback (if applicable)
+- Raise: target amount, instrument (SAFE/note/equity), timeline, use of funds
+- Constraints: legal counsel availability, current cap table + SAFEs/notes + option pool
+
+## Default Workflow
+
+Use this sequence unless the user request is narrowly scoped:
+
+1. Decide raise vs bootstrap (objectives, timing, capital intensity).
+2. Size the round (18-24 months runway + milestone plan + buffer).
+3. Prepare materials (deck, model, data room, narrative, metrics definitions).
+4. Build investor list (stage/sector/check size/partner fit) and outreach cadence.
+5. Manage diligence (data room hygiene, references, compliance, QA on metrics).
+6. Negotiate/close (term sheet priorities, cap table + option pool modeling).
+7. Post-close ops (cap table updates, 409A, governance, investor updates).
+
+Jump to these files when needed:
+- Strategy: `assets/fundraising-plan.md`
+- Deck: `assets/fundraising-deck-outline.md`
+- Data room: `assets/data-room-checklist.md`
+- Term sheet + diligence: `references/term-sheets-and-diligence.md`
+- Cap table hygiene: `references/cap-table-management.md`
+- Post-investment ops: `references/post-investment-operations.md`
+
+## Modern Best Practices (Jan 2026)
+
+- **Burn multiple matters**: Investors often screen efficiency via Net Burn / Net New ARR.
+- **Post-money SAFEs are common**: Many pre-seed deals use post-money SAFEs (vs notes, pre-money SAFEs).
 - **Data room = product**: Clean structure, version control, index document, 409A current.
-- **7 due diligence areas**: Beyond the deck—financial hygiene, unit economics, founder-market fit, digital reputation, customer validation, technical scalability, cap table hygiene.
+- **8 due diligence areas**: Beyond the deck - financial hygiene, unit economics, brand consistency, founder-market fit, digital reputation, customer validation, technical scalability, cap table hygiene.
 - **Milestone-based raises**: Map every round to specific milestones and runway (best/base/worst).
-
----
 
 ## Decision Tree: What Fundraising Help?
 
 ```text
 FUNDRAISING QUESTION
-    │
-    ├─► "Should I raise?" ─────────────► Raise vs Bootstrap Analysis
-    ├─► "How much to raise?" ──────────► Round Sizing
-    ├─► "What's my valuation?" ────────► Valuation Framework
-    ├─► "How do I find investors?" ────► Investor Targeting
-    ├─► "How do I pitch?" ─────────────► Pitch Preparation
-    └─► "Full fundraising plan" ───────► COMPREHENSIVE STRATEGY
+  |-- "Should I raise?" -> Raise vs Bootstrap Analysis
+  |-- "How much to raise?" -> Round Sizing
+  |-- "What's my valuation?" -> Valuation Framework
+  |-- "How do I find investors?" -> Investor Targeting
+  |-- "How do I pitch?" -> Pitch Preparation
+  `-- "Full fundraising plan" -> COMPREHENSIVE STRATEGY
 ```
-
----
 
 ## Fundraising Stage Overview
 
@@ -54,8 +77,6 @@ FUNDRAISING QUESTION
 | Series B | Growth efficiency, unit economics | Market expansion |
 | Series C+ | Path to profitability, scale | Market leadership |
 
----
-
 ## Should You Raise?
 
 ### Raise vs Bootstrap Decision Matrix
@@ -74,7 +95,7 @@ FUNDRAISING QUESTION
 | Type | Description | Best For |
 |------|-------------|----------|
 | **Equity** | Sell ownership | High-growth, VC-backable |
-| **Post-money SAFE** | Equity at fixed cap, post-investment | 85-90% of pre-seed (2026 standard) |
+| **Post-money SAFE** | Equity at fixed cap, post-investment | Common at pre-seed |
 | **Convertible Note** | Debt that converts to equity | Bridge rounds |
 | **Debt (Venture)** | Loan with warrants | Post-revenue, bridge |
 | **Revenue-Based** | % of revenue | Predictable revenue |
@@ -84,19 +105,17 @@ FUNDRAISING QUESTION
 
 | Feature | Post-money SAFE | Convertible Note |
 |---------|-----------------|------------------|
-| **Market share** | 85-90% of pre-seed | 10-15% of pre-seed |
+| **Pre-seed usage** | Common | Less common |
 | **Interest** | None | 2-8% annually |
 | **Maturity date** | None | 12-24 months typical |
 | **Complexity** | Simple (1-5 pages) | More complex (10+ pages) |
 
-**Why post-money SAFEs dominate**: Cleaner cap table modeling, predictable dilution, no debt on balance sheet, faster closing (1-2 weeks vs 2-4 weeks).
-
----
+**Why post-money SAFEs are common**: Cleaner cap table modeling, predictable dilution, no debt features, and often faster to close than notes.
 
 ## Round Sizing
 
 ```text
-Round Size = Monthly Burn × Runway Months + Buffer
+Round Size = Monthly Burn x Runway Months + Buffer
 
 Where:
 - Runway: 18-24 months typical
@@ -124,18 +143,16 @@ Where:
 
 **Rule of thumb**: Keep 15-20% for option pool, founders retain >10% at exit.
 
----
-
 ## Valuation Framework
 
 ### Valuation Methods by Stage
 
 | Stage | Method | Formula |
 |-------|--------|---------|
-| Pre-Seed | Comp-based | Market × stage adjustment |
-| Seed | Forward multiple | Projected ARR × 10-20x |
-| Series A | ARR multiple | ARR × 15-50x |
-| Series B+ | ARR multiple | ARR × 10-30x |
+| Pre-Seed | Comp-based | Market x stage adjustment |
+| Seed | Forward multiple | Projected ARR x 10-20x |
+| Series A | ARR multiple | ARR x 15-50x |
+| Series B+ | ARR multiple | ARR x 10-30x |
 
 ### ARR Multiple Benchmarks (2025-2026)
 
@@ -148,7 +165,7 @@ Where:
 
 ### Burn Multiple (2026 Key Metric)
 
-The **Burn Multiple** is now the #1 investor screening metric.
+The **Burn Multiple** is a common investor screening metric for efficiency.
 
 **Formula**: `Burn Multiple = Net Burn / Net New ARR`
 
@@ -159,8 +176,6 @@ The **Burn Multiple** is now the #1 investor screening metric.
 | 1.5-2.0x | Moderate efficiency | Acceptable with justification |
 | 2.0-3.0x | Inefficient | Yellow flag |
 | >3.0x | Burning cash | Red flag, likely pass |
-
----
 
 ## Investor Targeting
 
@@ -199,8 +214,6 @@ The **Burn Multiple** is now the #1 investor screening metric.
 | Signal NFX | Investor database |
 | Portfolio founders | References and intros |
 
----
-
 ## Pitch Preparation
 
 ### Pitch Deck Structure (12-15 slides)
@@ -224,19 +237,19 @@ The **Burn Multiple** is now the #1 investor screening metric.
 
 ```text
 SETUP (Slides 1-3)
-├─► Hook with the problem
-├─► Make it personal/urgent
-└─► Introduce solution
+  - Hook with the problem
+  - Make it personal/urgent
+  - Introduce solution
 
 BUILD (Slides 4-7)
-├─► Show the product
-├─► Prove the market
-└─► Demonstrate traction
+  - Show the product
+  - Prove the market
+  - Demonstrate traction
 
 CLOSE (Slides 8-12)
-├─► Address competition
-├─► Show the path forward
-└─► Make the ask
+  - Address competition
+  - Show the path forward
+  - Make the ask
 ```
 
 ### Traction Metrics by Stage
@@ -247,8 +260,6 @@ CLOSE (Slides 8-12)
 | Seed | Revenue, customers, growth rate, retention |
 | Series A | ARR, MRR growth, NRR, LTV:CAC, payback |
 | Series B+ | Rule of 40, magic number, NRR, cohorts |
-
----
 
 ## References
 
@@ -270,16 +281,14 @@ CLOSE (Slides 8-12)
 
 | File | Purpose |
 |------|---------|
-| [sources.json](data/sources.json) | Fundraising resources (22 sources) |
-
----
+| [sources.json](data/sources.json) | Fundraising resources (25 sources) |
 
 ## Do / Avoid (Jan 2026)
 
 ### Do
 
-- **Track burn multiple weekly**: Net Burn / Net New ARR is the #1 investor screening metric.
-- **Use post-money SAFEs**: They're 85-90% of the market and simplify cap table modeling.
+- **Track burn multiple**: Net Burn / Net New ARR is a common investor screening metric.
+- **Use post-money SAFEs when appropriate**: Common at pre-seed and simplify cap table modeling.
 - **Get 409A before options**: Required for compliance, red flag if outdated.
 - **Build data room early**: Start 3-4 months before fundraising, use version control.
 - **Headline every slide**: Say the takeaway ("We reduce fraud 90%"), not labels ("Product Overview").

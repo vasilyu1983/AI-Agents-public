@@ -1,54 +1,34 @@
 ---
 name: marketing-seo-complete
-description: Complete SEO skill covering technical auditing (Core Web Vitals, crawlability, structured data), SEO marketing strategy (keyword research, content planning, competitive analysis), operational workflows (cross-team collaboration, OKRs), and Total Search Optimization (Google, YouTube, Reddit, social). Updated for January 2026.
+description: Complete SEO skill for technical audits (Core Web Vitals, site speed, crawlability/indexation, robots/sitemaps/canonicals, structured data, mobile, security, internal linking), SEO marketing strategy (keyword research, content planning, competitive analysis, E-E-A-T), operational workflows (cross-team collaboration, OKRs), link building, local SEO, international SEO (hreflang), and multi-platform SEO (Google, YouTube, Reddit, social). Updated for January 2026.
 ---
 
-# SEO TECHNICAL & MARKETING — OPERATIONAL SKILL
+# SEO Technical and Marketing - Operational Skill
 
-This skill contains **actionable, production-ready systems** for:
+This skill contains **actionable, production-ready systems** for **traditional search engine optimization**:
 
 - **Technical SEO auditing** (Core Web Vitals, crawlability, structured data, mobile optimization)
 - **SEO marketing strategy** (keyword research, content planning, competitive analysis, brand building)
 - **Operational workflows** (cross-team collaboration, stakeholder alignment, SEO OKRs)
 - **Total Search Optimization** (Google, YouTube, Reddit, TikTok, forums, social SEO)
 
-**Structure**: Technical fundamentals first → Marketing strategy → Operational execution → Total Search Optimization.
+**Structure**: Technical fundamentals first -> Marketing strategy -> Operational execution -> Total Search Optimization.
+
+**For AI search optimization** (ChatGPT, Perplexity, Gemini, AI Overviews, GEO): Use [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md) instead.
 
 ---
 
-## Modern Best Practices (January 2026)
+## 2026 Operating Assumptions (Evergreen)
 
-**Sources**: [Google Search Central](https://developers.google.com/search/updates), [Backlinko Ranking Factors](https://backlinko.com/google-ranking-factors), [Search Engine Land](https://searchengineland.com/guide/google-core-updates)
+- Prioritize usefulness and intent satisfaction; technical SEO cannot compensate for weak content.
+- E-E-A-T matters most when claims can impact money, health, safety, or major decisions; for all niches, show real experience and verifiable proof where possible.
+- Mobile-first is the default: performance, UX, and rendering on mobile are the primary gate.
+- Crawl/indexation wins come from discoverability (internal links, sitemaps) and removing low-value crawl traps.
+- Core Web Vitals are a weak signal but a strong tiebreaker; fix regressions and obvious failures.
+- Structured data is for eligibility and rich results, not a ranking boost; use it to improve extraction and display.
+- SERPs are multi-surface (web, video, local, forums, social); measure channel-by-channel, not only rankings.
 
-### December 2025 Core Update Impact
-
-Google's December 2025 Core Update continues the "Helpful Content" integration into core ranking:
-- **Content quality over length**: Clarity, usefulness, and perspective win over word count
-- **E-E-A-T is mandatory**: Experience, Expertise, Authoritativeness, Trust—no longer optional for any niche
-- **AI content scrutiny**: Scaled/low-value AI content faces aggressive filtering
-- **Brand authority rising**: Trusted brands appear more often in AI Overviews and traditional results
-
-### 2026 Ranking Factor Hierarchy
-
-| Priority | Factor | 2026 Status |
-|----------|--------|-------------|
-| **Critical** | Content Quality & E-E-A-T | Primary factor — no amount of technical SEO compensates for poor content |
-| **Critical** | Mobile-first performance | Google indexes mobile version; desktop is secondary |
-| **High** | Core Web Vitals (LCP, INP, CLS) | Tiebreaker between similar-quality pages; 54.6% of sites still fail |
-| **High** | Internal linking & site architecture | #1 indexation accelerator; crawl depth ≤3 clicks |
-| **High** | Backlink quality (contextual relevance) | Quality > quantity; Google evaluates relevance more than ever |
-| **Medium** | Schema markup | Increases AI Overview citation probability; helps rich snippets |
-| **Medium** | Content freshness | AI-driven SERPs favor updated content; stale pages drop faster |
-| **Medium** | Brand signals & mentions | Brand mentions now matter more than traditional backlinks for AI visibility |
-
-### What Changed in January 2026
-
-- **AI Mode traffic counting**: GSC Performance report now includes AI Mode searches in totals
-- **New GSC features**: AI-powered report configurator (natural language queries), weekly/monthly views, branded queries filter
-- **Search Console updates**: Social channels in Insights report, smoothed reporting
-- **Practice problems & Dataset markup**: Removed from Search Console rich result reporting and Rich Results Test
-- **Video ranking**: Sites blocking Googlebot from fetching video files face significant drops
-- **AI Overviews expansion**: Now affecting 30%+ of US queries (475% YoY mobile increase); CTR for featured queries down 61%; zero-click searches now 69% of all queries
+Primary sources live in `data/sources.json`. For time-sensitive changes (core updates, reporting changes), use official sources first (Google Search Central / Search Status Dashboard); if your environment supports web search, refresh against current updates before giving definitive advice.
 
 ### Key Thresholds (2026)
 
@@ -57,38 +37,18 @@ Google's December 2025 Core Update continues the "Helpful Content" integration i
 | LCP | < 2.5s | Mobile-first indexing threshold |
 | INP | < 200ms | Replaced FID; user engagement signal |
 | CLS | < 0.1 | Layout stability; ranking factor |
-| TTFB | < 600ms | **Crawl rate** — slow servers = fewer pages crawled/day |
+| TTFB | < 600ms | Crawl rate: slow servers often reduce pages crawled/day |
 | Mobile score | > 90 | Required for competitive rankings |
-
----
-
-Use this skill when the user asks for:
-- Technical SEO audits (full or targeted)
-- Core Web Vitals optimization (LCP, INP, CLS)
-- Crawlability and indexation issues
-- Structured data/Schema.org implementation
-- Mobile-first optimization
-- Site speed and performance fixes
-- Internal linking architecture
-- Duplicate content and canonical handling
-- International SEO (hreflang)
-- Security and HTTPS configuration
-- Keyword research and content planning
-- Competitive SEO analysis
-- Link building and backlink strategies
-- Local SEO and Google Business Profile optimization
-- Multi-platform SEO (YouTube, Reddit, TikTok, LinkedIn)
-- SEO team workflows and OKRs
 
 ---
 
 ## When NOT to Use
 
-- **Pure AI platform optimization** (ChatGPT, Perplexity, Gemini visibility) → Use [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md)
-- **Paid search campaigns** (Google Ads, Bing Ads) → Use [marketing-paid-advertising](../marketing-paid-advertising/SKILL.md)
-- **Social media strategy** (non-SEO focused) → Use [marketing-social-media](../marketing-social-media/SKILL.md)
-- **Content creation process** (writing, editing, publishing) → Use [marketing-content-strategy](../marketing-content-strategy/SKILL.md)
-- **Email marketing** → Use [marketing-email-automation](../marketing-email-automation/SKILL.md)
+- **Pure AI platform optimization** (ChatGPT, Perplexity, Gemini visibility) -> Use [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md)
+- **Paid search campaigns** (Google Ads, Bing Ads) -> Use [marketing-paid-advertising](../marketing-paid-advertising/SKILL.md)
+- **Social media strategy** (non-SEO focused) -> Use [marketing-social-media](../marketing-social-media/SKILL.md)
+- **Content creation process** (writing, editing, publishing) -> Use [marketing-content-strategy](../marketing-content-strategy/SKILL.md)
+- **Email marketing** -> Use [marketing-email-automation](../marketing-email-automation/SKILL.md)
 
 ---
 
@@ -150,81 +110,100 @@ Every technical SEO audit follows this systematic checklist:
 ```text
 ### Audit Type Selection
 Full site audit needed
-  └─ Use assets/audits/full-technical-audit.md
+  -> Use assets/audits/full-technical-audit.md
 Quick issue check
-  └─ Use assets/audits/quick-audit-checklist.md
+  -> Use assets/audits/quick-audit-checklist.md
 CWV-only deep dive
-  └─ Use assets/cwv/core-web-vitals-report.md
+  -> Use assets/cwv/core-web-vitals-report.md
 Schema validation only
-  └─ Use assets/schema/schema-validation-report.md
+  -> Use assets/schema/schema-validation-report.md
 
 ### Core Web Vitals Failing
 LCP >2.5s
-  └─ Preload LCP element, optimize images, add CDN
-  └─ See references/core-web-vitals-guide.md
+  -> Preload LCP element, optimize images, add CDN
+  -> See references/core-web-vitals-guide.md
 INP >200ms
-  └─ Reduce JavaScript, optimize event handlers
-  └─ See references/core-web-vitals-guide.md
+  -> Reduce JavaScript, optimize event handlers
+  -> See references/core-web-vitals-guide.md
 CLS >0.1
-  └─ Add dimensions to images/ads, avoid layout shifts
-  └─ See references/core-web-vitals-guide.md
+  -> Add dimensions to images/ads, avoid layout shifts
+  -> See references/core-web-vitals-guide.md
 
 ### Indexation Issues
 Pages not indexed
-  └─ Check robots.txt blocking
-  └─ Verify sitemap inclusion
-  └─ Check canonical tags
-  └─ See references/crawlability-indexing.md
+  -> Check robots.txt blocking
+  -> Verify sitemap inclusion
+  -> Check canonical tags
+  -> See references/crawlability-indexing.md
 Crawl budget problems
-  └─ Remove low-value pages from crawl
-  └─ Fix redirect chains
-  └─ Optimize pagination
-  └─ See references/crawlability-indexing.md
+  -> Remove low-value pages from crawl
+  -> Fix redirect chains
+  -> Optimize pagination
+  -> See references/crawlability-indexing.md
 New/large site needs fast indexation
-  └─ Internal linking (#1 accelerator)
-  └─ Manual GSC submission (10-20 priority pages)
-  └─ Real content updates (not fake lastmod)
-  └─ Brand mentions > backlinks (early stage)
-  └─ See references/crawlability-indexing.md#indexation-acceleration
+  -> Internal linking (#1 accelerator)
+  -> Manual GSC submission (10-20 priority pages)
+  -> Real content updates (not fake lastmod)
+  -> Brand mentions > backlinks (early stage)
+  -> See references/crawlability-indexing.md#indexation-acceleration
 
 ### Mobile Issues
 Mobile-unfriendly
-  └─ Check viewport meta tag
-  └─ Verify responsive CSS
-  └─ Test touch target sizes
-  └─ See references/mobile-seo-guide.md
+  -> Check viewport meta tag
+  -> Verify responsive CSS
+  -> Test touch target sizes
+  -> See references/mobile-seo-guide.md
 
 ### Link Building Issues
 Need more backlinks
-  └─ Create linkable assets (research, tools)
-  └─ Set up HARO/Featured.com
-  └─ Broken link building outreach
-  └─ See references/link-building-strategy.md
+  -> Create linkable assets (research, tools)
+  -> Set up HARO/Featured.com
+  -> Broken link building outreach
+  -> See references/link-building-strategy.md
 Low domain authority
-  └─ Focus on DA 50+ targets
-  └─ Digital PR campaigns
-  └─ Competitor backlink analysis
-  └─ See references/link-building-strategy.md
+  -> Focus on DA 50+ targets
+  -> Digital PR campaigns
+  -> Competitor backlink analysis
+  -> See references/link-building-strategy.md
 
 ### Local SEO Issues
 Not showing in local pack
-  └─ Optimize Google Business Profile
-  └─ Build local citations (NAP consistency)
-  └─ Generate more reviews
-  └─ See references/local-seo-guide.md
+  -> Optimize Google Business Profile
+  -> Build local citations (NAP consistency)
+  -> Generate more reviews
+  -> See references/local-seo-guide.md
 GBP not verified
-  └─ Complete verification process
-  └─ Ensure NAP matches website
-  └─ See references/local-seo-guide.md
+  -> Complete verification process
+  -> Ensure NAP matches website
+  -> See references/local-seo-guide.md
 
 ### Security Issues
 Mixed content warnings
-  └─ Update all HTTP resources to HTTPS
-  └─ See references/security-https-guide.md
+  -> Update all HTTP resources to HTTPS
+  -> See references/security-https-guide.md
 SSL/TLS issues
-  └─ Run SSL Labs test
-  └─ See references/security-https-guide.md
+  -> Run SSL Labs test
+  -> See references/security-https-guide.md
 ```
+
+---
+
+## GSC Issue Triage (Strict Output)
+
+Use this format when diagnosing Google Search Console indexation and canonicalization statuses.
+
+If missing context blocks a safe recommendation, ask only the minimum clarifying questions (example: "Should these URLs be indexed?").
+
+For each issue:
+
+- **Issue:**
+- **Severity:** Critical / Moderate / Informational
+- **What Google Is Detecting:**
+- **Why This Happens:**
+- **Is This Against Google Rules? (Yes/No + Explanation):**
+- **Safe Fix (Step-by-Step):**
+- **Expected SEO Benefit:**
+- **What NOT to Do (Important):**
 
 ---
 
@@ -272,7 +251,7 @@ SSL/TLS issues
 
 ## Trend Awareness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about SEO, you MUST use WebSearch to check current trends before answering.
+IMPORTANT: When users ask recommendation questions about SEO, refresh against current updates before giving definitive guidance. If your environment supports web search, use it. If not, rely on official sources in `data/sources.json` and ask the minimum clarifying question about timeframe/market (example: "Is this for the US market, and do you care about changes in the last 30/90 days?").
 
 ### Trigger Conditions
 
@@ -286,10 +265,10 @@ SSL/TLS issues
 
 ### Required Searches
 
-1. Search: `"technical SEO best practices 2026"`
-2. Search: `"Google algorithm updates January 2026"`
-3. Search: `"Core Web Vitals thresholds 2026"`
-4. Search: `"Google Search Console new features 2026"`
+1. Search: `site:developers.google.com search updates`
+2. Search: `Google Search Status Dashboard`
+3. Search: `Core Web Vitals thresholds INP`
+4. Search: `Search Console new features`
 
 ### What to Report
 
@@ -319,7 +298,7 @@ Keyword research, content planning, competitive analysis, and brand building.
 - Keyword research framework (seed discovery, expansion, intent classification, prioritization)
 - Content planning by intent (informational, commercial, transactional, navigational)
 - Competitive analysis workflow (monthly audits, intelligence signals)
-- Brand building tactics (2026 critical—Google elevated brand authority)
+- Brand building tactics (brand and entity signals often correlate with durable performance; validate with current updates)
 - E-E-A-T content strategy (Experience, Expertise, Authoritativeness, Trust)
 
 **See full guide**: [references/seo-marketing-strategy.md](references/seo-marketing-strategy.md)
@@ -347,9 +326,9 @@ Multi-platform visibility beyond Google.
 
 **Platforms covered:**
 - YouTube SEO (video optimization, ranking factors)
-- Reddit SEO (97% of "best [X]" queries include Reddit)
+- Reddit SEO (forum results increasingly appear for "best", "vs", and review-intent queries)
 - Social SEO (LinkedIn B2B, TikTok B2C, X/Twitter)
-- AI platforms (ChatGPT, Perplexity, Gemini)
+- AI platforms (ChatGPT, Perplexity, Gemini) - for deep coverage, use `marketing-ai-search-optimization`
 - Unified content distribution strategy
 
 **See full guide**: [references/total-search-optimization.md](references/total-search-optimization.md)
@@ -393,7 +372,7 @@ Multi-platform visibility beyond Google.
 
 ## External Resources
 
-See [data/sources.json](data/sources.json) for 73 primary sources across:
+See [data/sources.json](data/sources.json) for primary sources across:
 
 - Google Search Central, web.dev, and Chrome developer docs (CWV, Lighthouse, CrUX)
 - Bing Webmaster Guidelines and diagnostic tooling
@@ -455,11 +434,11 @@ See [data/sources.json](data/sources.json) for 73 primary sources across:
 
 | Metric | Formula | Benchmark |
 |--------|---------|-----------|
-| **SEO ROI** | (Organic Revenue - SEO Cost) / SEO Cost × 100 | >300% |
+| **SEO ROI** | (Organic Revenue - SEO Cost) / SEO Cost * 100 | >300% |
 | **Organic CAC** | Total SEO Cost / Organic Conversions | B2B: <$100, B2C: <$30 |
 | **Pipeline Influence** | Organic-Sourced Pipeline / Total Pipeline | >30% |
 
-**See full guide**: [references/seo-business-metrics.md](references/seo-business-metrics.md) — Attribution models, OKRs, stakeholder reporting
+**See full guide**: [references/seo-business-metrics.md](references/seo-business-metrics.md) - Attribution models, OKRs, stakeholder reporting
 
 ---
 
@@ -467,31 +446,46 @@ See [data/sources.json](data/sources.json) for 73 primary sources across:
 
 **Crawl tools**: Screaming Frog, Sitebulb, Semrush, Ahrefs, ContentKing, Lumar
 
-**Cross-team**: Product (early planning, redirects) · Engineering (Lighthouse CI, CWV) · Design (images, CLS)
+**Cross-team**: Product (early planning, redirects), Engineering (Lighthouse CI, CWV), Design (images, CLS)
 
 ---
 
 ## Anti-Patterns
 
-| ❌ Anti-Pattern | ✅ Instead |
+| Anti-Pattern (AVOID) | Better Practice (DO) |
 |-----------------|-----------|
-| ❌ Audit without action | ✅ Assign owners, set deadlines |
-| ❌ Fix everything at once | ✅ Batch by priority, deploy incrementally |
-| ❌ Ignore mobile | ✅ Test mobile-first (60%+ traffic) |
-| ❌ Trust lab data only | ✅ Use CrUX (field data) as truth |
-| ❌ One-time audit | ✅ Continuous monitoring, quarterly deep audits |
-| ❌ Chase vanity metrics (rankings) | ✅ Track revenue, conversions, pipeline |
-| ❌ Optimize pages in isolation | ✅ Build topical authority clusters |
-| ❌ Ignore AI Overviews | ✅ Optimize for citation in AI results |
+| Audit without action | Assign owners, set deadlines |
+| Fix everything at once | Batch by priority, deploy incrementally |
+| Ignore mobile | Test mobile-first (often the majority of traffic) |
+| Trust lab data only | Use CrUX (field data) as truth |
+| One-time audit | Continuous monitoring, quarterly deep audits |
+| Chase vanity metrics (rankings) | Track revenue, conversions, pipeline |
+| Optimize pages in isolation | Build topical authority clusters |
+| Ignore AI Overviews | Optimize for citation in AI results |
 
 ---
 
-## SEO Mistakes (2026 Penalties)
+## International Markets
 
-**Critical (immediate penalty):** Keyword stuffing, toxic backlinks, duplicate content, hidden text/cloaking, doorway pages, scaled AI content
+This skill uses Google-centric defaults. For international SEO:
 
-**High-impact (ranking suppression):** Ignoring E-E-A-T, poor internal linking, failing CWV, mobile-unfriendly, stale content, wrong canonicals
+| Need | See Skill |
+|------|-----------|
+| Non-Google search (Baidu, Yandex, Naver) | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| Hreflang and multi-region strategy | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| Regional SERP features | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| CJK/RTL language optimization | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
 
-**Technical (crawl/index):** Accidental noindex, redirect chains >2 hops, broken links, missing sitemap, blocking JS/CSS
+If you're using a router-based setup, mention country/region/search engine explicitly so the router can bring in [marketing-geo-localization](../marketing-geo-localization/SKILL.md) when needed.
 
-**Recovery**: GSC Manual Actions → Coverage report → Traffic analysis → Site audit → Fix by severity → Reconsideration (manual only) → Wait 3-6 months
+---
+
+## SEO Mistakes (High Risk)
+
+High risk (can cause ranking loss or manual actions): keyword stuffing, link spam/toxic backlink patterns, hidden text/cloaking, doorway pages, deceptive structured data, scaled low-value content
+
+Common suppressors: weak E-E-A-T signals, poor internal linking, failing CWV, mobile-unfriendly UX, stale content, wrong canonicals
+
+Technical crawl/index blockers: accidental noindex, redirect chains >2 hops, broken links, missing sitemap, blocking critical JS/CSS for rendering
+
+Recovery: GSC Manual Actions -> Coverage report -> Traffic analysis -> Site audit -> Fix by severity -> Reconsideration (manual only) -> Expect weeks to months

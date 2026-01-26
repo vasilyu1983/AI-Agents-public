@@ -146,7 +146,7 @@ The 2025 reality: **precision > volume**. Longer sales cycles and larger buying 
 
 ## Core: Account-Based Sales (ABS)
 
-Nine out of 10 B2B companies report ABS as effective. Use when targeting high-value accounts with complex buying committees.
+ABS is often effective in B2B when targeting high-value accounts with complex buying committees.
 
 ### When to Use ABS
 
@@ -202,7 +202,7 @@ Use related skills instead for:
 - **SEO for landing pages** → [marketing-seo-complete](../marketing-seo-complete/SKILL.md)
 - **AI search optimization** → [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md)
 - **Product-led growth ownership** → [product-management](../product-management/SKILL.md)
-- **Paid media buying/optimization** → [marketing-paid-media](../marketing-paid-media/SKILL.md) (if available)
+- **Paid media buying/optimization** → [marketing-paid-advertising](../marketing-paid-advertising/SKILL.md)
 
 ---
 
@@ -252,6 +252,23 @@ Traffic ok, CVR low?
 - Pull top 10 wins/losses; extract firmographic + trigger + objection patterns.
 - Draft 3 offers: **pain-killer**, **speed/automation**, **risk reversal**. Each with 1 quantified proof + 1 urgency lever.
 - Ship 3 hooks for LI/email: **pain**, **risk/cost of inaction**, **better future**. Keep CTA singular (fit check/demo/audit).
+
+### Pipeline Health Checklist (Weekly)
+- [ ] Confirm stage definitions (MQL/SQL/SAL) are unchanged (no silent drift).
+- [ ] Check SQL → SAL acceptance rate vs baseline; investigate top rejection reasons if down.
+- [ ] Check speed-to-lead median and p90 vs SLA; fix routing/alerts if breached.
+- [ ] Review bounce/complaint/unsubscribe trends; pause sends if complaints spike.
+- [ ] Verify list hygiene: suppress bounces/unsubs/complaints; remove role accounts where required.
+- [ ] Validate 2 outbound sequences against a control (reply rate and meeting rate), not opens/clicks.
+- [ ] Review landing page CVR vs baseline by top traffic sources; flag message mismatch.
+- [ ] Confirm forms capture only fields in use; remove any unused “nice-to-have” fields.
+- [ ] Audit routing: highest-intent leads go to humans first; bots/automation only assist.
+- [ ] Confirm attribution model is consistent this week (no reporting changes mid-period).
+- [ ] Inspect pipeline created per channel (not leads) and reallocate effort to top 2 plays.
+- [ ] Review show rate and no-show reasons; add reminders or friction fixes if slipping.
+- [ ] Pull 5 recent wins and 5 losses; update ICP triggers/objections accordingly.
+- [ ] Align with Sales on next-week target accounts (ABS) and the primary CTA per segment.
+- [ ] Document one change per channel (email/LI/landing) with a hypothesis and stop/scale rule.
 
 ### Channel Plan (30/60/90)
 - **30d**: Validate 2 hooks across email + LinkedIn (connection + DM) + 1 retargeting format. Targets: reply rate + CPL guardrails set from your baseline; protect lead quality (Sales acceptance, SQL rate).
@@ -441,6 +458,21 @@ See [`assets/ai-personalization-playbook.md`](assets/ai-personalization-playbook
 - **Analytics tracking**: Ensure proper UTM handling, event tracking, conversion attribution
 - **Integration maintenance**: CRM/MAP sync, webhook reliability, data hygiene
 - **Page performance**: Landing page load speed directly impacts conversion
+
+---
+
+## International Markets
+
+This skill uses US/UK market defaults. For international lead generation:
+
+| Need | See Skill |
+|------|-----------|
+| Regional buying committee dynamics | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| Regional channel preferences | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| Compliance (GDPR, CASL, LGPD) | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| Cultural outreach adaptation | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+
+If your query involves international compliance or regional outreach norms, also use [marketing-geo-localization](../marketing-geo-localization/SKILL.md) for region-specific constraints and adaptations.
 
 ---
 

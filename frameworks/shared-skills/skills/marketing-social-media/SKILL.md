@@ -1,9 +1,9 @@
 ---
 name: marketing-social-media
-description: Sustainable social media marketing with platform-agnostic principles, content typology, engagement quality metrics, and distribution workflows for brand building and audience growth.
+description: Sustainable social media marketing and paid social: content systems, community management, influencer ops, social commerce, and attribution (2026).
 ---
 
-# SOCIAL MEDIA MARKETING — OPERATIONAL SKILL
+# Social Media Marketing (Operational Skill)
 
 This skill contains **actionable, non-theoretical operational systems** for sustainable social media marketing across LinkedIn, TikTok, Meta (FB/IG), YouTube, and X.
 
@@ -11,7 +11,11 @@ This skill contains **actionable, non-theoretical operational systems** for sust
 
 **Scope note**: For email outreach and lead generation, see [marketing-leads-generation](../marketing-leads-generation/SKILL.md). For SEO, see [marketing-seo-complete](../marketing-seo-complete/SKILL.md).
 
----
+## How to use this skill
+
+- Default workflow: pick goal -> pick 1-2 platforms -> set a sustainable cadence -> publish -> engage daily -> review weekly -> iterate monthly.
+- Use `assets/` for ready-to-run templates; use `references/` for deep dives (platform, paid, community, AI governance).
+- For time-sensitive platform changes, use the Trend Awareness Protocol.
 
 ## Core: Platform-Agnostic Principles
 
@@ -45,15 +49,13 @@ These principles apply regardless of platform. Master them before platform-speci
 
 ### Cadence Guidelines
 
-Start with a cadence you can sustain for 8–12 weeks without sacrificing quality.
+Start with a cadence you can sustain for 8-12 weeks without sacrificing quality.
 
 | Cadence Tier | Typical Output | Best For | Notes |
 |-------------|----------------|----------|-------|
-| **Light** | 2–3 posts/week | Small teams, early consistency | Use templates + repurposing |
-| **Standard** | 4–7 posts/week | Most product teams | Mix educational + proof + community |
+| **Light** | 2-3 posts/week | Small teams, early consistency | Use templates + repurposing |
+| **Standard** | 4-7 posts/week | Most product teams | Mix educational + proof + community |
 | **Heavy** | Daily + community touchpoints | Media-led teams | Requires strong production pipeline |
-
----
 
 ## Core: Content Typology
 
@@ -72,7 +74,7 @@ Every post should map to one of these types. Mix types across your content calen
 - Plan content mix monthly, not post-by-post
 - Lead with educational; end week with proof or community
 - Test different type ratios for your audience
-- Repurpose across types (educational → narrative)
+- Repurpose across types (educational -> narrative)
 
 ### Avoid (Content Mix)
 
@@ -80,8 +82,6 @@ Every post should map to one of these types. Mix types across your content calen
 - All educational (no personality, no engagement)
 - Random posting without type intention
 - Copying competitor content 1:1
-
----
 
 ## Core: Engagement Quality vs Vanity Metrics
 
@@ -101,9 +101,9 @@ Every post should map to one of these types. Mix types across your content calen
 | Metric | Why It's Misleading |
 |--------|---------------------|
 | **Follower count alone** | Bots, inactive, wrong audience |
-| **Impressions without engagement** | Seen ≠ valued |
+| **Impressions without engagement** | Seen != valued |
 | **Likes without context** | Easy to give, low signal |
-| **Viral posts without conversion** | Fame ≠ revenue |
+| **Viral posts without conversion** | Fame != revenue |
 
 ### Do (Metrics)
 
@@ -118,8 +118,6 @@ Every post should map to one of these types. Mix types across your content calen
 - Chasing viral at expense of relevance
 - Ignoring negative engagement signals (unfollows, hides)
 - Reporting vanity metrics to stakeholders
-
----
 
 ## Core: Revenue Attribution & ROI
 
@@ -150,29 +148,27 @@ Transform social from cost center to revenue driver by measuring business impact
 
 For detailed frameworks, scorecards, and reporting templates, see [references/revenue-attribution-framework.md](references/revenue-attribution-framework.md).
 
----
-
-## Core: Social → Site → Conversion Flows
+## Core: Social -> Site -> Conversion Flows
 
 Social media is rarely the conversion point. Design the flow:
 
 ```text
-Social Post → Link/Bio → Landing Page → Conversion
+Social Post -> Link/Bio -> Landing Page -> Conversion
 
 OR
 
-Social Post → DM/Comment → Conversation → Conversion
+Social Post -> DM/Comment -> Conversation -> Conversion
 
 OR
 
-Social Post → Lead Magnet → Email Nurture → Conversion
+Social Post -> Lead Magnet -> Email Nurture -> Conversion
 ```
 
 ### Flow Design Checklist
 
 | Step | Question | If No |
 |------|----------|-------|
-| **Post** | Does it provide standalone value? | Rewrite—no one clicks without value |
+| **Post** | Does it provide standalone value? | Rewrite - no one clicks without value |
 | **CTA** | Is there one clear next action? | Simplify to single CTA |
 | **Link/Bio** | Does it match post promise? | Align messaging |
 | **Landing** | Does it load fast, mobile-first? | Optimize (see [marketing-seo-complete](../marketing-seo-complete/SKILL.md)) |
@@ -183,7 +179,7 @@ Use [content-distribution-plan.md](assets/content-distribution-plan.md) to plan 
 ### Do (Conversion Flows)
 
 - Test bio link vs in-post link
-- Use UTM parameters to track social → site
+- Use UTM parameters to track social -> site
 - Optimize landing page for mobile-first reading and fast load
 - Retarget engaged users who didn't convert
 
@@ -193,8 +189,6 @@ Use [content-distribution-plan.md](assets/content-distribution-plan.md) to plan 
 - No tracking on social traffic
 - Desktop-first landing pages
 - Sending cold traffic straight to purchase
-
----
 
 ## Core: Community Management Basics
 
@@ -231,19 +225,18 @@ Use [content-distribution-plan.md](assets/content-distribution-plan.md) to plan 
 - Generic copy-paste responses
 - Letting trolls derail conversations
 
----
+## Platform Fit Notes (2026)
 
-## Platform-Specific Constraints (January 2026)
-
-| Platform | Best For | Primary Formats | Key Constraints |
-|----------|----------|-----------------|----------------|
-| **LinkedIn** | B2B, thought leadership | Text posts, carousels, native video | Depth Score (dwell time), employee reshares 561% further reach |
-| **X (Twitter)** | News, opinions, real-time | Short posts, threads, quotes | Fast feed, context collapse, short half-life |
-| **TikTok** | Discovery, social commerce | Vertical video, TikTok Shop | 70%+ completion for virality, 60-180s optimal |
-| **Instagram** | Visual storytelling | Reels, carousels, stories | "Your Algorithm" user controls, Trial Reels testing |
-| **YouTube** | Evergreen + search | Long-form + Shorts + Shopping | Production effort, retention focus |
-| **Reddit** | B2B, tech, authentic discussion | Text posts, AMAs, community participation | 6th most visited site, AI search visibility, authentic voice required |
-| **Threads** | Real-time conversation | Short posts, threads | 400M MAU trajectory, Meta integration with IG |
+| Platform | Best For | Primary Formats | Key notes |
+|----------|----------|-----------------|----------|
+| **LinkedIn** | B2B, authority | Text posts, carousels, native video | Dwell time and meaningful comments matter; employee amplification can materially help |
+| **X** | News, opinions, real-time | Short posts, threads, quotes | Fast half-life; write for context collapse (assume zero prior context) |
+| **TikTok** | Discovery, social commerce | Vertical video, live, TikTok Shop | Retention is the core signal; test multiple lengths and hooks |
+| **Instagram** | Visual storytelling, creators | Reels, carousels, stories | Reels/carousels drive reach; make the first 2 seconds and cover/frame clear |
+| **YouTube** | Evergreen + search | Long-form + Shorts + Shopping | Retention + session time matter; titles/thumbnails are part of the product |
+| **Reddit** | High-trust communities | Text posts, AMAs, participation | Authentic voice required; follow subreddit norms; avoid drive-by promotion |
+| **Threads** | Conversation (Meta ecosystem) | Short posts, threads | Strong tie-in with IG; treat as community/engagement channel, not a link farm |
+| **Pinterest** | Discovery, shopping intent | Pins, idea pins | Strong for evergreen product/content and visual search categories |
 
 For detailed platform-specific guidance, see:
 - [references/linkedin-engagement-patterns.md](references/linkedin-engagement-patterns.md)
@@ -252,8 +245,6 @@ For detailed platform-specific guidance, see:
 - [references/youtube-best-practices.md](references/youtube-best-practices.md)
 - [references/reddit-marketing-strategy.md](references/reddit-marketing-strategy.md)
 - [references/social-commerce-2026.md](references/social-commerce-2026.md)
-
----
 
 Use this skill when the user asks for:
 - content ideas, calendars, scripts, hooks
@@ -269,17 +260,13 @@ Use this skill when the user asks for:
 - community value calculation
 - brand lift studies
 
----
-
 ## Decision Trees
 
 ```text
-Paid Social: Low CTR → Refresh hook/creative | Clicks ok, CVR low → Fix landing page | Costs rising → Refresh creative
-Organic: Inconsistent → Set sustainable cadence | Low engagement → Improve value density | Low clicks → Strengthen CTA
-Community: Spam rising → Enforce guidelines | Low retention → Add rituals | Negative sentiment → Acknowledge publicly
+Paid Social: Low CTR -> Refresh hook/creative | Clicks ok, CVR low -> Fix landing page | Costs rising -> Refresh creative
+Organic: Inconsistent -> Set sustainable cadence | Low engagement -> Improve value density | Low clicks -> Strengthen CTA
+Community: Spam rising -> Enforce guidelines | Low retention -> Add rituals | Negative sentiment -> Acknowledge publicly
 ```
-
----
 
 ## Navigation
 
@@ -287,7 +274,7 @@ Community: Spam rising → Enforce guidelines | Low retention → Add rituals | 
 
 | Category | Key Resources |
 |----------|---------------|
-| **Revenue & ROI** | [revenue-attribution-framework.md](references/revenue-attribution-framework.md) — Attribution, influencer/community ROI, brand lift |
+| **Revenue & ROI** | [revenue-attribution-framework.md](references/revenue-attribution-framework.md) - Attribution, influencer/community ROI, brand lift |
 | **Platform Strategy** | [linkedin-engagement-patterns.md](references/linkedin-engagement-patterns.md), [tiktok-best-practices.md](references/tiktok-best-practices.md), [instagram-best-practices.md](references/instagram-best-practices.md), [youtube-best-practices.md](references/youtube-best-practices.md), [reddit-marketing-strategy.md](references/reddit-marketing-strategy.md) |
 | **Paid Social** | [paid-social-patterns.md](references/paid-social-patterns.md), [influencer-ops-and-partnerships.md](references/influencer-ops-and-partnerships.md) |
 | **Community** | [community-building-patterns.md](references/community-building-patterns.md) |
@@ -298,26 +285,28 @@ Community: Spam rising → Enforce guidelines | Low retention → Add rituals | 
 
 | Category | Location |
 |----------|----------|
-| **Ads** | `assets/ads/` — Google RSA, Meta, TikTok, YouTube |
-| **Email** | `assets/email/` — Cold, nurture, newsletter, sales |
-| **Social** | `assets/social/` — Calendars, hooks, carousels, scripts |
-| **Offers** | `assets/offers/` — Offer builder, value stack, guarantees |
-| **Community** | `assets/community/` — Strategy, guidelines, events, moderation |
-| **SEO** | `assets/seo/` — Briefs, outlines, keyword research |
+| **Ads** | `assets/ads/` - Google RSA, Meta, TikTok, YouTube |
+| **Email** | `assets/email/` - Cold, nurture, newsletter, sales |
+| **Social** | `assets/social/` - Calendars, hooks, carousels, scripts |
+| **Offers** | `assets/offers/` - Offer builder, value stack, guarantees |
+| **Community** | `assets/community/` - Strategy, guidelines, events, moderation |
+| **SEO** | `assets/seo/` - Briefs, outlines, keyword research |
 
 ### Related Skills
 
-- [../product-management/SKILL.md](../product-management/SKILL.md) — Product positioning, GTM
-- [../software-frontend/SKILL.md](../software-frontend/SKILL.md) — Landing pages, conversion optimization
-- [../ai-ml-data-science/SKILL.md](../ai-ml-data-science/SKILL.md) — CTR/CVR modeling, segmentation
-
----
+- [../product-management/SKILL.md](../product-management/SKILL.md) - Product positioning, GTM
+- [../software-frontend/SKILL.md](../software-frontend/SKILL.md) - Landing pages, conversion optimization
+- [../ai-ml-data-science/SKILL.md](../ai-ml-data-science/SKILL.md) - CTR/CVR modeling, segmentation
 
 ## External Resources
 
 See [data/sources.json](data/sources.json) for official documentation across Google Ads, Meta, TikTok, YouTube, and platform analytics (automation sources are tagged optional).
 
----
+## Safety and compliance (required)
+
+- Follow each platform's policies and ad standards; verify disclosure requirements for sponsored/branded content in your market.
+- Do not recommend buying followers/engagement, deceptive tactics, or automation that impersonates humans.
+- Avoid storing or sharing personal data; use aggregated metrics and consent-based tracking.
 
 ## Optional: AI / Automation
 
@@ -337,9 +326,9 @@ See [data/sources.json](data/sources.json) for official documentation across Goo
 
 | Use Case | Tools | Consideration |
 |----------|-------|---------------|
-| **Ideation** | ChatGPT, Claude | Starting point only—add human insight |
+| **Ideation** | ChatGPT, Claude | Starting point only - add human insight |
 | **Hook generation** | LLM prompts | A/B test AI vs human hooks |
-| **Repurposing** | Opus Clip, Descript | Video → clips, long → short |
+| **Repurposing** | Opus Clip, Descript | Video -> clips, long -> short |
 | **Image generation** | Midjourney, DALL-E | Check platform policies on AI content |
 | **Caption writing** | LLM prompts | Always edit for brand voice |
 
@@ -367,8 +356,6 @@ See [data/sources.json](data/sources.json) for official documentation across Goo
 
 See [references/ai-marketing-governance.md](references/ai-marketing-governance.md) for AI governance framework.
 
----
-
 ## Collaboration Notes
 
 ### With Product
@@ -381,8 +368,8 @@ See [references/ai-marketing-governance.md](references/ai-marketing-governance.m
 ### With Sales
 
 - **Social selling support**: Content for sales team to share
-- **Lead alerts**: DMs and comments with buying signals → Sales
-- **Case studies**: Sales wins → Social proof content
+- **Lead alerts**: DMs and comments with buying signals -> Sales
+- **Case studies**: Sales wins -> Social proof content
 - **Event promotion**: Webinars, demos, conferences
 
 ### With Engineering
@@ -399,11 +386,13 @@ See [references/ai-marketing-governance.md](references/ai-marketing-governance.m
 - **Carousel design**: LinkedIn, Instagram carousel templates
 - **UGC guidelines**: Brand guidelines for community content
 
----
-
 ## Trend Awareness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about social media marketing, you MUST use WebSearch to check current trends before answering.
+**IMPORTANT**: When users ask time-sensitive recommendation questions about social media marketing, verify current platform changes before answering.
+
+- If a WebSearch tool is available, use it.
+- Prefer official docs and policy pages listed in [data/sources.json](data/sources.json), then validate with up-to-date reporting.
+- If you cannot use WebSearch, state that you are using stable principles and propose an experiment plan to validate assumptions.
 
 ### Trigger Conditions
 
@@ -440,7 +429,18 @@ After searching, provide:
 - Community features and engagement patterns
 - Cross-platform posting best practices
 
----
+## International Markets
+
+This skill covers global platforms (Meta, LinkedIn, TikTok). For regional platforms:
+
+| Need | See Skill |
+|------|-----------|
+| China platforms (WeChat, Douyin, Weibo, RED) | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| Japan/Korea (LINE, Naver, Kakao) | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| Russia/CIS (VK, Telegram, Yandex) | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| Cultural content adaptation | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+
+If your query mentions regional platforms or specific countries, also use [marketing-geo-localization](../marketing-geo-localization/SKILL.md).
 
 ## Anti-Patterns
 

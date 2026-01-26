@@ -17,6 +17,7 @@ Built as a **no-fluff execution skill** for systematic conversion rate optimizat
 - Statistical significance: https://www.evanmiller.org/ab-testing/
 - CXL Institute: https://cxl.com/
 - Baymard Institute UX: https://baymard.com/
+- Cookie deprecation + stricter privacy defaults: prefer first-party measurement, validate assignment/tracking, and treat lifts as uncertain without clean instrumentation
 
 ---
 
@@ -34,6 +35,19 @@ Built as a **no-fluff execution skill** for systematic conversion rate optimizat
 - **User research methodology** → Use [software-ux-research](../software-ux-research/SKILL.md)
 - **Product analytics setup** → Use [marketing-product-analytics](../marketing-product-analytics/SKILL.md)
 - **SEO/organic traffic** → Use [marketing-seo-complete](../marketing-seo-complete/SKILL.md)
+
+---
+
+## Expert: CRO Mental Model (Quick Calibration)
+
+Use this to avoid local wins / global losses.
+
+- **CRO**: Increase the rate of valuable commitments (purchase, qualified lead, activation) while protecting business outcomes (revenue, margin, LTV, support load).
+- **UX optimization**: Reduce friction/errors so users can do what they already intend; good UX does not guarantee better conversions.
+- **Funnel optimization**: Optimize the system across steps and handoffs (traffic quality → intent match → page → form/checkout → sales/onboarding → retention).
+- **Experimentation**: A causal learning method; not every decision belongs in a test.
+
+Do not delegate these to A/B tests (even with infinite traffic): legal/compliance/ethics, dark patterns, misleading claims, and irreversible brand trust decisions.
 
 ---
 
@@ -103,7 +117,7 @@ Examples:
 - Color: Contrasts with page background
 - Position: Above fold AND after key sections
 - Text: First person ("Get My...") often outperforms second person
-- Whitespace: CTAs surrounded by white space increase conversions by up to 232% — isolate from competing elements with 20-30px padding
+- Whitespace: Use spacing to isolate the primary CTA from competing elements; treat big lift claims as case-dependent and verify in your context
 
 ### Trust Elements Hierarchy
 
@@ -124,6 +138,19 @@ SUPPORTING TRUST SIGNALS:
 └─ Physical address (for services)
 ```
 
+### User-Generated Content (UGC)
+
+UGC often increases conversions in SaaS and e-commerce, but lift magnitude varies widely by category, placement, and traffic intent.
+
+| UGC Type | Placement | Impact |
+|----------|-----------|--------|
+| **Customer videos** | Hero or below fold | High trust, high engagement |
+| **Review excerpts** | Near CTA | Reduces uncertainty |
+| **Case study quotes** | Consideration section | Builds credibility |
+| **Community mentions** | Footer or social proof bar | Volume signal |
+
+**Implementation**: Pull from G2, Capterra, or in-app feedback. Verify permissions before use.
+
 ---
 
 ## Core: Form Optimization
@@ -132,7 +159,7 @@ SUPPORTING TRUST SIGNALS:
 
 | Rule | Why | Impact |
 |------|-----|--------|
-| **Minimum fields** | Every field = friction | -10% CVR per field (approx) |
+| **Minimum fields** | Every field adds friction | Often lowers completion (magnitude varies) |
 | **Email first** | Captures partial submissions | +15-30% lead capture |
 | **Persistent labels** | Placeholders disappear, cause errors | +10% completion |
 | **Single column** | Easier flow | +5-10% completion |
@@ -231,13 +258,27 @@ Total traffic needed: ~26,000 visitors
 
 **Requirements for valid test:**
 - 95% confidence level (minimum)
+- 80% power (default) unless you have a reason to change it
 - Run for at least 1-2 full business cycles (7-14 days)
 - Don't peek and stop early (increases false positives)
-- Document before test: hypothesis, primary metric, sample size, duration
+- Document before test: hypothesis, primary metric, guardrails, sample size, duration
+- Avoid post-hoc slicing; pre-register segments or adjust for multiple comparisons
+
+**Reality check (expert defaults):**
+- Statistical significance does not mean the change is worth shipping (check practical impact + guardrails)
+- Ignore "significant" results when experiment integrity is in doubt (tracking issues, traffic mix shifts, SRM, broken randomization)
+- Stop early only for clear harm (guardrail breaches) or invalidity (instrumentation/assignment problems), not for "early wins"
+
+### Experiment Integrity (2026 Default Checks)
+
+- **Assignment sanity**: A/A test periodically; check SRM on day 1 and day 3
+- **Tracking sanity**: confirm event definitions, dedupe, cross-domain, and consent-mode behavior before interpreting results
+- **Contamination**: avoid showing multiple variants to the same user across devices/sessions; prefer stable IDs when possible
+- **Change control**: freeze other major changes to the same flow during the test window
 
 ### CUPED: Faster Tests via Variance Reduction
 
-CUPED (Controlled-experiment Using Pre-Existing Data) reduces variance by **40-60%**, allowing tests to reach significance faster.
+CUPED (Controlled-experiment Using Pre-Existing Data) can reduce variance by **~40-60%**, allowing tests to reach significance faster.
 
 | Aspect | Details |
 |--------|---------|
@@ -288,6 +329,8 @@ STEP 4: Diagnose root cause
 └─ Checkout drop? → Pricing, shipping, trust
 ```
 
+**Expert note**: The "biggest drop-off" is not always the best target. Confirm it's a defect (not intentional filtering), not a measurement artifact, and not caused upstream (traffic quality / offer mismatch).
+
 ### Micro-Conversion Mapping
 
 | Funnel Stage | Micro-Conversions to Track |
@@ -308,126 +351,9 @@ STEP 4: Diagnose root cause
 
 ---
 
-## Core: Page Speed Optimization
+## Reference: Triage, Speed, SOPs
 
-### Speed Impact on Conversion
-
-| Load Time | Impact |
-|-----------|--------|
-| 0-2 seconds | Baseline (optimal) |
-| 3 seconds | -7% conversion |
-| 5 seconds | -22% conversion |
-| 10 seconds | -50%+ conversion |
-
-*Source: Google/Akamai research, directional only*
-
-### Core Web Vitals Targets
-
-| Metric | Good | Needs Improvement | Poor |
-|--------|------|-------------------|------|
-| **LCP** (Largest Contentful Paint) | <2.5s | 2.5-4s | >4s |
-| **INP** (Interaction to Next Paint) | <200ms | 200-500ms | >500ms |
-| **CLS** (Cumulative Layout Shift) | <0.1 | 0.1-0.25 | >0.25 |
-
-### Quick Speed Wins
-
-| Action | Impact | Effort |
-|--------|--------|--------|
-| Compress images | High | Low |
-| Enable caching | High | Low |
-| Remove unused scripts | Medium | Medium |
-| Lazy load below-fold content | Medium | Low |
-| Use CDN | High | Medium |
-| Optimize fonts | Medium | Low |
-
----
-
-## Quick Reference
-
-| Task | Template | Location |
-|------|----------|----------|
-| Landing page audit | Page audit checklist | `assets/landing-audit.md` |
-| A/B test plan | Test hypothesis doc | `assets/ab-test-plan.md` |
-| Form audit | Form optimization | `assets/form-audit.md` |
-| Funnel analysis | Funnel diagnostic | `assets/funnel-analysis.md` |
-| Test prioritization | ICE scoring matrix | `assets/ice-scoring.md` |
-
----
-
-## Decision Tree (CRO Triage)
-
-```text
-Low conversion rate?
-├─ Check page speed first (if >3s, fix that)
-├─ Check bounce rate
-│   ├─ High bounce (>70%) → Message/audience mismatch
-│   └─ Normal bounce → Continue diagnosis
-├─ Check scroll depth
-│   ├─ Low scroll → Above-fold problem
-│   └─ Good scroll → Below-fold CTA/proof issue
-├─ Check form analytics
-│   ├─ Low form starts → CTA/offer problem
-│   └─ High abandonment → Form friction
-└─ Check mobile vs desktop
-    ├─ Mobile worse → Mobile UX issues
-    └─ Same → Universal issue
-
-Form abandonment?
-├─ Check which field causes drop-off
-├─ Reduce fields to minimum
-├─ Add progress indicator
-├─ Add inline validation
-└─ Test multi-step
-
-Traffic but no clicks?
-├─ CTA not visible → Move above fold
-├─ CTA not compelling → Test copy
-├─ Too many options → Simplify, single CTA
-└─ Page too long → Add sticky CTA
-```
-
----
-
-## Operational SOPs
-
-### Weekly CRO Review (30 minutes)
-
-1. **Check conversion metrics**
-   - Landing page CVR vs last week
-   - Form completion rate
-   - Funnel stage conversion rates
-
-2. **Review active tests**
-   - Current test status
-   - Statistical significance check
-   - Call winner if significant
-
-3. **Prioritize next tests**
-   - Score new ideas (ICE)
-   - Plan next week's tests
-   - Document learnings
-
-### Monthly CRO Audit (2 hours)
-
-1. **Full funnel analysis**
-   - Map all conversion points
-   - Identify top 3 drop-off points
-   - Quantify opportunity (traffic × CVR gap)
-
-2. **Heatmap/recording review**
-   - Review 10-20 session recordings
-   - Analyze click and scroll heatmaps
-   - Document friction points
-
-3. **Test performance review**
-   - Win/loss ratio
-   - Cumulative lift from tests
-   - Update testing roadmap
-
-4. **Competitive analysis**
-   - Review competitor landing pages
-   - Note new patterns/trends
-   - Identify test ideas
+For page speed targets, CRO triage decision tree, operating cadence, and anti-patterns, see `references/triage-and-ops.md`.
 
 ---
 
@@ -443,17 +369,22 @@ Traffic but no clicks?
 
 ---
 
-## Anti-Patterns
+## Expert: Hypothesis Quality (Silent Failure Checklist)
 
-| Anti-Pattern | Why It Fails | Instead |
-|--------------|--------------|---------|
-| **Testing too small changes** | Undetectable effect, wasted time | Test big, obvious changes first |
-| **Stopping tests early** | False positives, bad decisions | Run to calculated sample size |
-| **No hypothesis** | Random changes, no learnings | Document hypothesis before test |
-| **Testing everything at once** | Can't isolate what worked | One variable at a time |
-| **Ignoring mobile** | 60%+ traffic is mobile | Mobile-first optimization |
-| **Copying competitors** | Different audience, context | Use for ideas, test your own |
-| **Only A/B testing** | Misses qualitative insights | Combine with user research |
+A good CRO hypothesis is not "change X to raise CVR." It must specify mechanism and risk.
+
+**Strong hypothesis includes:**
+- Which constraint it targets: clarity, trust, motivation, friction
+- Who it's for: segment/intent/channel/device (at least one)
+- What moves: primary metric + guardrails (value, quality, downstream)
+- Why it should work: evidence + mechanism (not vibes)
+
+**How CRO fails silently (common):**
+- Conversions go up but value goes down (lower-quality leads, higher refunds/chargebacks, worse retention)
+- Overall looks flat but a high-value segment is harmed (mix effects hide damage)
+- "Win" is novelty or seasonality; it doesn't repeat
+
+Use `assets/ab-test-plan.md` to pre-register guardrails and invalidation criteria.
 
 ---
 
@@ -463,11 +394,28 @@ Traffic but no clicks?
 |-----------|-------------|
 | [advanced-testing.md](references/advanced-testing.md) | CUPED, sequential testing, MAB |
 | [ai-automation.md](references/ai-automation.md) | AI personalization, tool stack |
+| [triage-and-ops.md](references/triage-and-ops.md) | Page speed, triage, SOPs, anti-patterns |
+
+---
+
+## International Markets
+
+This skill uses US/UK defaults. For international CRO:
+
+| Need | See Skill |
+|------|-----------|
+| Regional payment methods | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| Cultural trust signals | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| Regional CTA adaptation | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+| RTL/localized design | [marketing-geo-localization](../marketing-geo-localization/SKILL.md) |
+
+**Auto-triggers**: When your query mentions regional markets or cultural adaptation, both skills load automatically.
 
 ---
 
 ## Related Skills
 
+- [marketing-geo-localization](../marketing-geo-localization/SKILL.md) — International markets, cultural CRO
 - [marketing-leads-generation](../marketing-leads-generation/SKILL.md) — Lead capture strategies
 - [marketing-paid-advertising](../marketing-paid-advertising/SKILL.md) — Traffic sources
 - [marketing-seo-complete](../marketing-seo-complete/SKILL.md) — Page speed, Core Web Vitals

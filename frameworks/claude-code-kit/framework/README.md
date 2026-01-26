@@ -41,7 +41,7 @@ cp -r frameworks/shared-skills/skills/* .claude/skills/
 ```bash
 # Check counts
 ls .claude/agents/ | wc -l      # Should show 21
-ls .claude/skills/ | wc -l      # Should show 79
+ls .claude/skills/ | wc -l      # Should show 83
 ls .claude/commands/ | wc -l    # Should show 28
 ls -l .claude/hooks/*.sh        # Should show 7 executable files
 
@@ -150,7 +150,7 @@ done
 
 echo "=== Checking File Counts ==="
 echo "Agents: $(ls .claude/agents/*.md 2>/dev/null | wc -l) (expected: 21)"
-echo "Skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l) (expected: 79)"
+echo "Skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l) (expected: 83)"
 echo "Commands: $(ls .claude/commands/*.md 2>/dev/null | wc -l) (expected: 28)"
 echo "Hooks: $(ls .claude/hooks/*.sh 2>/dev/null | wc -l) (expected: 7)"
 
@@ -194,7 +194,7 @@ chmod +x .claude/verify-installation.sh
 | **Agents** | 21 | `framework/agents/` |
 | **Commands** | 28 | `framework/commands/` |
 | **Hooks** | 7 | `framework/hooks/` |
-| **Skills** | 79 | `shared-skills/skills/` (separate) |
+| **Skills** | 83 | `shared-skills/skills/` (separate) |
 
 ---
 

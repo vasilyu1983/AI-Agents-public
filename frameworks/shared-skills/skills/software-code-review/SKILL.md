@@ -1,19 +1,18 @@
 ---
 name: software-code-review
-description: Patterns, checklists, and templates for systematic code review with a focus on correctness, security, readability, performance, and maintainability.
+description: Use when reviewing code, pull requests, or diffs. Provides patterns, checklists, and templates for systematic code review with a focus on correctness, security, readability, performance, and maintainability.
 ---
 
 # Code Reviewing Skill — Quick Reference
 
 This skill provides operational checklists and prompts for structured code review across languages and stacks. Use it when the primary task is reviewing existing code rather than designing new systems.
 
----
-
 ## Quick Reference
 
 | Review Type | Focus Areas | Key Checklist | When to Use |
 |-------------|-------------|---------------|-------------|
 | Security Review | Auth, input validation, secrets, OWASP Top 10 | [software-security-appsec](../software-security-appsec/SKILL.md) | Security-critical code, API endpoints |
+| Supply Chain Review | Dependencies, lockfiles, licenses, SBOM, CI policies | [dev-dependency-management](../dev-dependency-management/SKILL.md) | Dependency bumps, build/CI changes |
 | Performance Review | N+1 queries, algorithms, caching, hot paths | DB queries, loops, memory allocation | High-traffic features, bottlenecks |
 | Correctness Review | Logic, edge cases, error handling, tests | Boundary conditions, null checks, retries | Business logic, data transformations |
 | Maintainability Review | Naming, complexity, duplication, readability | Function length, naming clarity, DRY | Complex modules, shared code |
@@ -52,6 +51,13 @@ Invoke this skill when the user asks to:
 - Improve readability, structure, and maintainability
 - Suggest targeted refactors without changing behavior
 - Validate tests and edge-case coverage
+
+## When NOT to Use This Skill
+
+- **System design or architecture**: Use [software-architecture-design](../software-architecture-design/SKILL.md) for greenfield architecture decisions
+- **Writing new code from scratch**: This skill reviews existing code, not authoring new features
+- **Deep security audits**: For penetration testing or comprehensive security assessments, use [software-security-appsec](../software-security-appsec/SKILL.md)
+- **Deep performance investigations**: For profiling/observability, use [qa-observability](../qa-observability/SKILL.md) and for SQL/query tuning use [data-sql-optimization](../data-sql-optimization/SKILL.md)
 
 ## Decision Tree: Selecting Review Mode
 
@@ -101,7 +107,7 @@ For complex PRs, apply multiple review modes sequentially:
 
 ---
 
-## Async Review Workflows (Dec 2025)
+## Async Review Workflows (2026)
 
 ### Timezone-Friendly Reviews
 
@@ -148,11 +154,11 @@ PR Submitted -> Auto-checks (CI) -> Async Review -> Merge
 | Tool | Use Case | Limitation |
 |------|----------|------------|
 | GitHub Copilot PR | Summary, suggestions | May miss context |
-| CodeRabbit | Automated comments, 46% bug accuracy | Requires human validation |
+| CodeRabbit | Automated PR review comments | Requires human validation |
 | Qodo | Test generation + review, 15+ workflows | Enterprise pricing |
-| OpenAI Codex | System-level context (Datadog use case) | API integration required |
+| OpenAI Codex | System-level codebase context | API integration required |
 | AWS Security Agent | OWASP Top 10, policy violations | Preview only (2026) |
-| Endor Labs AI SAST | Business logic, 95% FP reduction | Security-focused |
+| Endor Labs AI SAST | AI-assisted SAST | Security-focused |
 | Graphite | PR stacking, stack-aware merge queue | Process, not content |
 
 **AI assistant rules:**
@@ -190,6 +196,17 @@ PR Submitted -> Auto-checks (CI) -> Async Review -> Merge
 **Code Review Specific**
 
 - [references/operational-playbook.md](references/operational-playbook.md) — Review scope rules, severity ratings (P0-P3), checklists, modes, and PR workflow patterns
+
+## Default Review Output (Agent-Facing)
+
+When producing a review, default to:
+
+- Short summary of intent + risk
+- Findings grouped by `P0`/`P1`/`P2`/`P3` (mark REQUIRED vs OPTIONAL)
+- Concrete suggestions (minimal diffs or test cases)
+- Follow-up questions when requirements or constraints are unclear
+
+Use [assets/core/review-comment-guidelines.md](assets/core/review-comment-guidelines.md) for comment style and labeling.
 
 ## Navigation
 

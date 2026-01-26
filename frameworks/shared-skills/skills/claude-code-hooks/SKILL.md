@@ -1,6 +1,6 @@
 ---
 name: claude-code-hooks
-description: Create event-driven hooks for Claude Code automation. Configure PreToolUse, PostToolUse, Stop, and other hook events with bash scripts, environment variables, matchers, and exit codes.
+description: Create event-driven hooks for Claude Code automation. Configure hook events in settings or frontmatter, parse stdin JSON inputs, return decision-control JSON, and implement secure hook scripts.
 ---
 
 # Claude Code Hooks — Meta Reference
@@ -24,17 +24,19 @@ This skill provides the definitive reference for creating Claude Code hooks. Use
 
 | Event | Trigger | Use Case |
 |-------|---------|----------|
+| `SessionStart` | Session begins/resumes | Initialize environment |
+| `UserPromptSubmit` | User submits prompt | Preprocess/validate input |
 | `PreToolUse` | Before tool execution | Validate, block dangerous commands |
-| `PostToolUse` | After tool execution | Format, audit, notify |
 | `PermissionRequest` | Permission dialog shown | Auto-allow/deny permissions |
+| `PostToolUse` | After tool succeeds | Format, audit, notify |
+| `PostToolUseFailure` | After tool fails | Capture failures, add guidance |
+| `SubagentStart` | Subagent spawns | Inspect subagent metadata |
 | `Stop` | When Claude finishes | Run tests, summarize |
 | `SubagentStop` | Subagent finishes | Verify subagent completion |
 | `Notification` | On notifications | Alert integrations |
-| `SessionStart` | Session begins | Initialize environment |
-| `SessionEnd` | Session ends | Cleanup, save state |
-| `UserPromptSubmit` | User sends message | Preprocessing |
 | `PreCompact` | Before context compaction | Preserve critical context |
-
+| `Setup` | `--init`/`--maintenance` | Initialize repo/env |
+| `SessionEnd` | Session ends | Cleanup, save state |
 ## Hook Structure
 
 ```text
@@ -45,7 +47,6 @@ This skill provides the definitive reference for creating Claude Code hooks. Use
 ├── stop-run-tests.sh
 └── session-start-init.sh
 ```
-
 ---
 
 ## Configuration
@@ -79,7 +80,6 @@ This skill provides the definitive reference for creating Claude Code hooks. Use
     ],
     "Stop": [
       {
-        "matcher": "",
         "hooks": [
           {
             "type": "command",
@@ -94,48 +94,65 @@ This skill provides the definitive reference for creating Claude Code hooks. Use
 
 ---
 
-## Environment Variables
+## Execution Model (Jan 2026)
 
-| Variable | Description | Available In |
-|----------|-------------|--------------|
-| `CLAUDE_PROJECT_DIR` | Project root path | All hooks |
-| `CLAUDE_TOOL_NAME` | Current tool name | Pre/PostToolUse |
-| `CLAUDE_TOOL_INPUT` | Tool input (JSON) | PreToolUse |
-| `CLAUDE_TOOL_OUTPUT` | Tool output | PostToolUse |
-| `CLAUDE_FILE_PATHS` | Affected files | PostToolUse |
-| `CLAUDE_SESSION_ID` | Session identifier | All hooks |
+- Hooks receive a JSON payload via stdin (treat it as untrusted input) and run with your user permissions (outside the Bash tool sandbox).
+- Default timeout is 60s per hook command; all matching hooks run in parallel; identical commands are deduplicated.
+
+### Hook Input (stdin)
+
+```json
+{
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Bash",
+  "tool_input": {
+    "command": "ls -la"
+  }
+}
+```
+
+### Environment Variables (shell)
+
+| Variable | Description |
+|----------|-------------|
+| `CLAUDE_PROJECT_DIR` | Absolute project root where Claude Code started |
+| `CLAUDE_PLUGIN_ROOT` | Plugin root (plugin hooks only) |
+| `CLAUDE_CODE_REMOTE` | `"true"` in remote/web environments; empty/local otherwise |
+| `CLAUDE_ENV_FILE` | File path to persist `export ...` lines (available in SessionStart; check docs for Setup support) |
 
 ---
 
 ## Exit Codes
 
-| Code | Meaning | Effect |
-|------|---------|--------|
-| `0` | Success | Continue execution |
-| `1` | Error | Report error, continue |
-| `2` | Block | Block tool execution (PreToolUse/SubagentStop) |
+| Code | Meaning | Notes |
+|------|---------|------|
+| `0` | Success | JSON written to stdout is parsed for structured control |
+| `2` | Blocking error | `stderr` becomes the message; JSON in stdout is ignored |
+| Other | Non-blocking error | Execution continues; `stderr` is visible in verbose mode |
+
+Stdout injection note: for `UserPromptSubmit`, `SessionStart`, and `Setup`, non-JSON stdout (exit 0) is injected into Claude’s context; most other events show stdout only in verbose mode.
 
 ---
 
-## Input Modification (v2.0.10+)
+## Decision Control + Input Modification (v2.0.10+)
 
-PreToolUse hooks can modify tool inputs instead of blocking. This enables transparent corrections without error messages or retries.
+PreToolUse hooks can allow/deny/ask and optionally modify the tool input via `updatedInput`.
 
 ### Hook Output Schema
 
 ```json
 {
-  "decision": "approve",
-  "updatedInput": { "command": "echo 'modified'" },
-  "additionalContext": "Hook added safety check"
+  "hookSpecificOutput": {
+    "hookEventName": "PreToolUse",
+    "permissionDecision": "allow",
+    "permissionDecisionReason": "Reason shown to user (and to Claude on deny)",
+    "updatedInput": { "command": "echo 'modified'" },
+    "additionalContext": "Extra context added before tool runs"
+  }
 }
 ```
 
-| Field | Description |
-|-------|-------------|
-| `decision` | "approve", "block", or "ask" |
-| `updatedInput` | Modified tool input JSON |
-| `additionalContext` | Context returned to model (Jan 2026) |
+Note: older `decision`/`reason` fields are deprecated; prefer the `hookSpecificOutput.*` fields.
 
 ### Example: Redirect Sensitive File Edits
 
@@ -143,17 +160,24 @@ PreToolUse hooks can modify tool inputs instead of blocking. This enables transp
 #!/bin/bash
 set -euo pipefail
 
-INPUT=$(cat)
-FILE=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
+INPUT="$(cat)"
+FILE_PATH="$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')"
 
 # Redirect package-lock.json edits to /dev/null
-if [[ "$FILE" == *"package-lock.json" ]]; then
-  MODIFIED=$(echo "$INPUT" | jq '.tool_input.file_path = "/dev/null"')
-  echo "{\"decision\": \"approve\", \"updatedInput\": $MODIFIED}"
+if [[ "$FILE_PATH" == *"package-lock.json" ]]; then
+  UPDATED_INPUT="$(echo "$INPUT" | jq -c '.tool_input | .file_path = "/dev/null"')"
+  jq -cn --argjson updatedInput "$UPDATED_INPUT" '{
+    hookSpecificOutput: {
+      hookEventName: "PreToolUse",
+      permissionDecision: "allow",
+      permissionDecisionReason: "Redirected write to /dev/null",
+      updatedInput: $updatedInput
+    }
+  }'
   exit 0
 fi
 
-echo '{"decision": "approve"}'
+echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"allow"}}'
 ```
 
 ### Example: Strip Sensitive Files from Git Add
@@ -162,37 +186,34 @@ echo '{"decision": "approve"}'
 #!/bin/bash
 set -euo pipefail
 
-INPUT=$(cat)
-TOOL=$(echo "$INPUT" | jq -r '.tool_name')
-CMD=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
+INPUT="$(cat)"
+TOOL_NAME="$(echo "$INPUT" | jq -r '.tool_name')"
+CMD="$(echo "$INPUT" | jq -r '.tool_input.command // empty')"
 
-if [[ "$TOOL" == "Bash" && "$CMD" =~ ^git\ add ]]; then
+if [[ "$TOOL_NAME" == "Bash" && "$CMD" =~ ^git[[:space:]]+add ]]; then
   # Remove .env files from staging
-  SAFE_CMD=$(echo "$CMD" | sed 's/\.env[^ ]*//g')
+  SAFE_CMD="$(echo "$CMD" | sed 's/\.env[^ ]*//g')"
   if [[ "$SAFE_CMD" != "$CMD" ]]; then
-    MODIFIED=$(echo "$INPUT" | jq --arg cmd "$SAFE_CMD" '.tool_input.command = $cmd')
-    echo "{\"decision\": \"approve\", \"updatedInput\": $MODIFIED}"
+    echo '{}' | jq -cn --arg cmd "$SAFE_CMD" '{
+      hookSpecificOutput: {
+        hookEventName: "PreToolUse",
+        permissionDecision: "allow",
+        permissionDecisionReason: "Removed .env from git add",
+        updatedInput: { command: $cmd }
+      }
+    }'
     exit 0
   fi
 fi
 
-echo '{"decision": "approve"}'
+echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"allow"}}'
 ```
 
 ---
 
 ## Prompt-Based Hooks
 
-For complex decisions, use LLM-evaluated hooks (`type: "prompt"`) instead of bash scripts.
-
-### Supported Events
-
-| Event | Prompt Hooks | Use Case |
-|-------|--------------|----------|
-| `Stop` | ✅ | Verify task completion |
-| `SubagentStop` | ✅ | Validate subagent work |
-| `PreToolUse` | ❌ | Use command hooks |
-| `PostToolUse` | ❌ | Use command hooks |
+For complex decisions, use LLM-evaluated hooks (`type: "prompt"`) instead of bash scripts. They are most useful for `Stop` and `SubagentStop` decisions.
 
 ### Configuration
 
@@ -204,7 +225,7 @@ For complex decisions, use LLM-evaluated hooks (`type: "prompt"`) instead of bas
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Check if all user tasks are complete. Return approve if done, block if work remains.",
+            "prompt": "Evaluate whether Claude should stop. Context JSON: $ARGUMENTS. Return {\"ok\": true} if all tasks are complete, otherwise {\"ok\": false, \"reason\": \"what remains\"}.",
             "timeout": 30
           }
         ]
@@ -214,15 +235,10 @@ For complex decisions, use LLM-evaluated hooks (`type: "prompt"`) instead of bas
 }
 ```
 
-### Response Fields
+### Response Schema
 
-| Field | Description |
-|-------|-------------|
-| `decision` | "approve" or "block" |
-| `reason` | Explanation for decision |
-| `stopReason` | Custom stop message |
-| `systemMessage` | Warning shown to user |
-| `continue` | Set false to stop Claude entirely |
+- Allow: `{"ok": true}`
+- Block: `{"ok": false, "reason": "Explanation shown to Claude"}`
 
 ### Combining Command and Prompt Hooks
 
@@ -251,25 +267,46 @@ Use command hooks for fast, deterministic checks. Use prompt hooks for nuanced d
 #!/bin/bash
 set -euo pipefail
 
-# Block dangerous commands
-if [[ "$CLAUDE_TOOL_NAME" == "Bash" ]]; then
-  INPUT="$CLAUDE_TOOL_INPUT"
+INPUT="$(cat)"
+TOOL_NAME="$(echo "$INPUT" | jq -r '.tool_name')"
+CMD="$(echo "$INPUT" | jq -r '.tool_input.command // empty')"
 
+if [[ "$TOOL_NAME" == "Bash" ]]; then
   # Block rm -rf /
-  if echo "$INPUT" | grep -qE 'rm\s+-rf\s+/'; then
-    echo "BLOCKED: Dangerous rm command detected"
-    exit 2
+  if echo "$CMD" | grep -qE 'rm\s+-rf\s+/'; then
+    echo '{}' | jq -cn '{
+      hookSpecificOutput: {
+        hookEventName: "PreToolUse",
+        permissionDecision: "deny",
+        permissionDecisionReason: "Dangerous rm command detected"
+      }
+    }'
+    exit 0
   fi
 
   # Block force push to main
-  if echo "$INPUT" | grep -qE 'git\s+push.*--force.*(main|master)'; then
-    echo "BLOCKED: Force push to main/master not allowed"
-    exit 2
+  if echo "$CMD" | grep -qE 'git\s+push.*--force.*(main|master)'; then
+    echo '{}' | jq -cn '{
+      hookSpecificOutput: {
+        hookEventName: "PreToolUse",
+        permissionDecision: "deny",
+        permissionDecisionReason: "Force push to main/master not allowed"
+      }
+    }'
+    exit 0
   fi
 
-  # Block credential exposure
-  if echo "$INPUT" | grep -qE '(password|secret|api_key)\s*='; then
-    echo "WARNING: Possible credential exposure"
+  # Soft-warning: possible credential exposure
+  if echo "$CMD" | grep -qE '(password|secret|api_key)\s*='; then
+    echo '{}' | jq -cn '{
+      hookSpecificOutput: {
+        hookEventName: "PreToolUse",
+        permissionDecision: "ask",
+        permissionDecisionReason: "Possible credential exposure in command",
+        additionalContext: "Command may include a secret. Confirm intent and avoid committing secrets."
+      }
+    }'
+    exit 0
   fi
 fi
 
@@ -282,28 +319,25 @@ exit 0
 #!/bin/bash
 set -euo pipefail
 
-# Auto-format modified files
-if [[ "$CLAUDE_TOOL_NAME" =~ ^(Edit|Write)$ ]]; then
-  FILES="$CLAUDE_FILE_PATHS"
+INPUT="$(cat)"
+TOOL_NAME="$(echo "$INPUT" | jq -r '.tool_name')"
+FILE_PATH="$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')"
 
-  for file in $FILES; do
-    if [[ -f "$file" ]]; then
-      case "$file" in
-        *.js|*.ts|*.jsx|*.tsx|*.json|*.md)
-          npx prettier --write "$file" 2>/dev/null || true
-          ;;
-        *.py)
-          ruff format "$file" 2>/dev/null || true
-          ;;
-        *.go)
-          gofmt -w "$file" 2>/dev/null || true
-          ;;
-        *.rs)
-          rustfmt "$file" 2>/dev/null || true
-          ;;
-      esac
-    fi
-  done
+if [[ "$TOOL_NAME" =~ ^(Edit|Write)$ && -n "$FILE_PATH" && -f "$FILE_PATH" ]]; then
+  case "$FILE_PATH" in
+    *.js|*.ts|*.jsx|*.tsx|*.json|*.md)
+      npx prettier --write "$FILE_PATH" 2>/dev/null || true
+      ;;
+    *.py)
+      ruff format "$FILE_PATH" 2>/dev/null || true
+      ;;
+    *.go)
+      gofmt -w "$FILE_PATH" 2>/dev/null || true
+      ;;
+    *.rs)
+      rustfmt "$FILE_PATH" 2>/dev/null || true
+      ;;
+  esac
 fi
 
 exit 0
@@ -315,23 +349,20 @@ exit 0
 #!/bin/bash
 set -euo pipefail
 
-# Audit file changes for security issues
-if [[ "$CLAUDE_TOOL_NAME" =~ ^(Edit|Write)$ ]]; then
-  FILES="$CLAUDE_FILE_PATHS"
+INPUT="$(cat)"
+TOOL_NAME="$(echo "$INPUT" | jq -r '.tool_name')"
+FILE_PATH="$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')"
 
-  for file in $FILES; do
-    if [[ -f "$file" ]]; then
-      # Check for hardcoded secrets
-      if grep -qE '(password|secret|api_key|token)\s*[:=]\s*["\x27][^"\x27]+["\x27]' "$file"; then
-        echo "WARNING: Possible hardcoded secret in $file"
-      fi
+if [[ "$TOOL_NAME" =~ ^(Edit|Write)$ && -n "$FILE_PATH" && -f "$FILE_PATH" ]]; then
+  # Check for hardcoded secrets
+  if grep -qE '(password|secret|api_key|token)\s*[:=]\s*["\x27][^"\x27]+["\x27]' "$FILE_PATH"; then
+    echo "WARNING: Possible hardcoded secret in $FILE_PATH" >&2
+  fi
 
-      # Check for console.log in production code
-      if [[ "$file" =~ \.(ts|js|tsx|jsx)$ ]] && grep -q 'console.log' "$file"; then
-        echo "NOTE: console.log found in $file"
-      fi
-    fi
-  done
+  # Check for console.log in production code
+  if [[ "$FILE_PATH" =~ \.(ts|js|tsx|jsx)$ ]] && grep -q 'console.log' "$FILE_PATH"; then
+    echo "NOTE: console.log found in $FILE_PATH" >&2
+  fi
 fi
 
 exit 0
@@ -393,12 +424,9 @@ exit 0
 
 Matchers filter which tool triggers the hook:
 
-| Matcher | Matches |
-|---------|---------|
-| `""` (empty) | All tools |
-| `"Bash"` | Bash tool only |
-| `"Edit\|Write"` | Edit OR Write |
-| `"Edit.*"` | Edit and variants (regex) |
+- Exact match: `Write` matches only the Write tool
+- Regex: `Edit|Write` or `Notebook.*`
+- Match all: `*` (also works with `""` or omitted matcher)
 
 ---
 
@@ -438,18 +466,17 @@ HOOK SECURITY CHECKLIST
 }
 ```
 
-Hooks execute in order. If one fails, subsequent hooks may not run.
+All matching hooks run in parallel. If you need strict ordering (format → lint → test), make one wrapper script that runs them sequentially.
 
 ---
 
 ## Debugging Hooks
 
 ```bash
-# Test hook manually
-CLAUDE_TOOL_NAME="Edit" \
-CLAUDE_FILE_PATHS="src/app.ts" \
-CLAUDE_PROJECT_DIR="$(pwd)" \
-bash .claude/hooks/post-tool-format.sh
+# Test a PostToolUse hook manually (stdin JSON)
+export CLAUDE_PROJECT_DIR="$(pwd)"
+echo '{"hook_event_name":"PostToolUse","tool_name":"Edit","tool_input":{"file_path":"'"$(pwd)"'/src/app.ts"}}' \
+  | bash .claude/hooks/post-tool-format.sh
 
 # Check exit code
 echo $?

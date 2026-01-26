@@ -1,26 +1,26 @@
 ---
 name: software-clean-code-standard
-description: Canonical, cross-language clean code standard with stable rule IDs (CC-*) and language overlays. Single source of truth for clean code rules; code reviews cite CC-* IDs instead of restating rules.
+description: Canonical, cross-language clean code standard with stable rule IDs (CC-*). Use when writing/reviewing code, defining team standards, or mapping lint/CI findings to consistent CC-* rule citations.
 ---
 
 # Clean Code Standard — Quick Reference
 
-This skill is the authoritative clean code standard for Claude Code Kit. It defines stable rule IDs (`CC-*`), how to apply them in reviews, and how to extend them safely via language overlays and explicit exceptions.
+This skill is the authoritative clean code standard for this repository's shared skills. It defines stable rule IDs (`CC-*`), how to apply them in reviews, and how to extend them safely via language overlays and explicit exceptions.
 
-**Modern Best Practices (December 2025)**: Prefer small, reviewable changes and durable change context (https://google.github.io/eng-practices/review/developer/small-cls.html, https://google.github.io/eng-practices/review/developer/cl-descriptions.html). Use normative language consistently (https://www.rfc-editor.org/rfc/rfc2119). Treat security-by-design and secure defaults as baseline (https://owasp.org/www-project-top-ten/, https://csrc.nist.gov/pubs/sp/800/218/final). Build observable systems (https://opentelemetry.io/docs/).
+**Modern Best Practices (January 2026)**: Prefer small, reviewable changes and durable change context (https://google.github.io/eng-practices/review/developer/small-cls.html, https://google.github.io/eng-practices/review/developer/cl-descriptions.html). Use normative language consistently (RFC 2119: https://www.rfc-editor.org/rfc/rfc2119). Treat security-by-design and secure defaults as baseline (OWASP Top 10: https://owasp.org/www-project-top-ten/, NIST SSDF SP 800-218: https://csrc.nist.gov/pubs/sp/800/218/final). Build observable systems (OpenTelemetry: https://opentelemetry.io/docs/). For current tool choices, consult `data/sources.json`.
 
 ---
 
 ## Quick Reference
 
-| Need | Use | Command | When to Use |
+| Task | Tool/Framework | Command | When to Use |
 |------|-----|---------|-------------|
-| Cite a standard | `CC-*` rule ID | (n/a) | PR review comments, design discussions, postmortems |
-| Find the right category | `CC-NAM`, `CC-ERR`, `CC-SEC`, etc. | (n/a) | Categorize feedback without “style wars” |
-| Add stack nuance | Language overlay | (n/a) | When the base rule is too generic for a language/framework |
-| Allow an exception | Waiver record | (n/a) | When a rule must be violated temporarily with explicit risk |
-| Reuse shared checklists | `assets/checklists/` | (n/a) | When you need product-agnostic review/release checklists |
-| Reuse utility patterns | `utilities/` | (n/a) | When extracting shared auth/logging/errors/resilience/testing utilities |
+| Cite a standard | `CC-*` rule ID | N/A | PR review comments, design discussions, postmortems |
+| Categorize feedback | `CC-NAM`, `CC-ERR`, `CC-SEC`, etc. | N/A | Keep feedback consistent without "style wars" |
+| Add stack nuance | Language overlay | N/A | When the base rule is too generic for a language/framework |
+| Allow an exception | Waiver record | N/A | When a rule must be violated with explicit risk |
+| Reuse shared checklists | `assets/checklists/` | N/A | When you need product-agnostic review/release checklists |
+| Reuse utility patterns | `utilities/` | N/A | When extracting shared auth/logging/errors/resilience/testing utilities |
 
 ## When to Use This Skill
 
@@ -28,6 +28,13 @@ This skill is the authoritative clean code standard for Claude Code Kit. It defi
 - Reviewing code: cite `CC-*` IDs and avoid restating standards in reviews.
 - Building automation: map linters/CI gates to `CC-*` IDs.
 - Resolving recurring review debates: align on rule IDs, scope, and exceptions.
+
+## When NOT to Use This Skill
+
+- **Deep security audits**: Use [software-security-appsec](../software-security-appsec/SKILL.md) for OWASP/SAST deep dives beyond `CC-SEC-*` baseline.
+- **Review workflow mechanics**: Use [software-code-review](../software-code-review/SKILL.md) for PR workflow, reviewer assignment, and feedback patterns.
+- **Refactoring execution**: Use [qa-refactoring](../qa-refactoring/SKILL.md) for step-by-step refactoring patterns and quality gates.
+- **Architecture decisions**: Use [software-architecture-design](../software-architecture-design/SKILL.md) for system-level tradeoffs beyond code-level rules.
 
 ## Decision Tree: Base Rule vs Overlay vs Exception
 
@@ -100,7 +107,7 @@ Feedback needed: [What kind of guidance is this?]
 
 ## Trend Awareness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about clean code standards, linters, or code quality tools, you MUST use WebSearch to check current trends before answering.
+**IMPORTANT**: When users ask recommendation questions about clean code standards, linters, or code quality tools, you MUST use a web search capability (if available) to check current trends before answering. If web search is unavailable, say so and answer using `data/sources.json`, clearly flagging that the recommendation may be stale.
 
 ### Trigger Conditions
 
@@ -116,7 +123,7 @@ Feedback needed: [What kind of guidance is this?]
 
 1. Search: `"clean code best practices 2026"`
 2. Search: `"[specific linter] vs alternatives 2026"`
-3. Search: `"code quality tools trends January 2026"`
+3. Search: `"code quality tools trends 2026"`
 4. Search: `"[language] linter comparison 2026"`
 
 ### What to Report

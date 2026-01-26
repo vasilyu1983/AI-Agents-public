@@ -1,9 +1,9 @@
 ---
 name: ai-ml-data-science
-description: "End-to-end data science patterns (modern best practices): problem framing -> data -> EDA -> feature engineering (with feature stores) -> modelling -> evaluation -> reporting, plus SQL transformation (SQLMesh). Emphasizes MLOps integration, drift monitoring, and production-ready workflows."
+description: "End-to-end data science and ML engineering workflows: problem framing, data/EDA, feature engineering (feature stores), modelling, evaluation/reporting, plus SQL transformations with SQLMesh. Use for dataset exploration, feature design, model selection, metrics and slice analysis, model cards/eval reports, experiment reproducibility, and production handoff (monitoring and retraining)."
 ---
 
-# Data Science Engineering Suite – Quick Reference
+# Data Science Engineering Suite - Quick Reference
 
 This skill turns **raw data and questions** into **validated, documented models** ready for production:
 
@@ -15,7 +15,7 @@ This skill turns **raw data and questions** into **validated, documented models*
 - **MLOps**: CI/CD, CT (continuous training), CM (continuous monitoring)
 - **Production patterns**: Data contracts, lineage, feedback loops, streaming features
 
-**Modern emphasis (January 2026):** Feature stores, automated retraining, drift monitoring (Evidently AI), train-serve parity, and agentic ML loops (plan → execute → evaluate → improve). Tools: LightGBM 4.6, CatBoost, scikit-learn 1.7, PyTorch 2.9.1, Polars 1.x (lazy eval for >RAM datasets), lakeFS for data versioning.
+**Modern emphasis (2026):** Feature stores, automated retraining, drift monitoring (Evidently), train-serve parity, and agentic ML loops (plan -> execute -> evaluate -> improve). Tools: LightGBM, CatBoost, scikit-learn, PyTorch, Polars (lazy eval for larger-than-RAM datasets), lakeFS for data versioning.
 
 ---
 
@@ -32,20 +32,6 @@ This skill turns **raw data and questions** into **validated, documented models*
 | Model Evaluation | scikit-learn, custom metrics | `metrics.roc_auc_score()`, slice analysis | Validating model performance |
 
 ---
-
-## When to Use This Skill
-
-Claude should invoke this skill when the user asks for **hands-on DS/ML workflow help**, e.g.:
-
-- "Help me explore this dataset / find issues."
-- "Design features for this problem."
-- "Choose metrics and evaluate this model."
-- "Write a model evaluation report or model card."
-- "Structure an end-to-end DS project."
-- "Set up SQL transformations with SQLMesh."
-- "Build incremental feature pipelines in SQL."
-- "Create staging/intermediate/marts layers."
-- "Set up MLOps: CI/CD, continuous training, monitoring."
 
 ## Data Lake & Lakehouse
 
@@ -81,20 +67,20 @@ For adjacent topics, reference:
 
 ```text
 User needs ML for: [Problem Type]
-    ├─ Tabular Data?
-    │   ├─ Small-Medium (<1M rows)? → **LightGBM** (fast, efficient)
-    │   ├─ Large & Complex (>1M rows)? → **LightGBM** first, then NN if needed
-    │   └─ High-dim sparse (text, counts)? → Linear models, then shallow NN
-    │
-    ├─ Time Series?
-    │   ├─ Seasonality? → LightGBM, then see ai-ml-timeseries skill
-    │   └─ Long-term dependencies? → Transformers (ai-ml-timeseries)
-    │
-    ├─ Text or Mixed Modalities?
-    │   └─ LLMs/Transformers → See ai-llm
-    │
-    └─ SQL Transformations?
-        └─ SQLMesh (staging/intermediate/marts layers)
+  - Tabular data?
+    - Small-medium (<1M rows)? -> LightGBM (fast, efficient)
+    - Large and complex (>1M rows)? -> LightGBM first, then NN if needed
+    - High-dim sparse (text, counts)? -> Linear models, then shallow NN
+
+  - Time series?
+    - Seasonality? -> LightGBM, then see ai-ml-timeseries
+    - Long-term dependencies? -> Transformers (see ai-ml-timeseries)
+
+  - Text or mixed modalities?
+    - LLMs/Transformers -> See ai-llm
+
+  - SQL transformations?
+    - SQLMesh (staging/intermediate/marts layers)
 ```
 
 **Rule of thumb:** For tabular data, tree-based gradient boosting is a strong baseline, but must be validated against alternatives and constraints.
@@ -125,7 +111,7 @@ User needs ML for: [Problem Type]
 
 **Avoid**
 - Avoid random splits for temporal or user-correlated data.
-- Avoid “metric gaming” (optimizing the number without validating business impact).
+- Avoid "metric gaming" (optimizing the number without validating business impact).
 - Avoid training on labels created after the prediction timestamp (silent future leakage).
 
 # Core Patterns (Overview)
@@ -174,7 +160,7 @@ User needs ML for: [Problem Type]
 **Components:**
 
 - **Contracts:** Schema + ranges/nullability + freshness SLAs
-- **Lineage:** Track source → feature store → train → serve
+- **Lineage:** Track source -> feature store -> train -> serve
 - **Feature store hygiene:** Materialization cadence, backfill/replay, encoder versioning
 - **Schema evolution:** Backward/forward-compatible migrations with shadow runs
 
@@ -223,7 +209,7 @@ User needs ML for: [Problem Type]
 **Modern MLOps (CI/CD/CT/CM):**
 
 - **CI (Continuous Integration):** Automated testing, data validation, code quality
-- **CD (Continuous Delivery):** Environment-specific promotion (dev → staging → prod), canary deployment
+- **CD (Continuous Delivery):** Environment-specific promotion (dev -> staging -> prod), canary deployment
 - **CT (Continuous Training):** Drift-triggered and scheduled retraining
 - **CM (Continuous Monitoring):** Real-time data drift, performance, system health
 
@@ -304,11 +290,11 @@ Use these as copy-paste starting points:
 
 For SQL-based data transformation and feature engineering:
 
-- **SQLMesh project setup:** `assets/transformation/template-sqlmesh-project.md`
-- **SQLMesh model types:** `assets/transformation/template-sqlmesh-model.md` (FULL, INCREMENTAL, VIEW)
-- **Incremental models:** `assets/transformation/template-sqlmesh-incremental.md`
-- **DAG and dependencies:** `assets/transformation/template-sqlmesh-dag.md`
-- **Testing and data quality:** `assets/transformation/template-sqlmesh-testing.md`
+- **SQLMesh project setup:** `../data-lake-platform/assets/transformation/sqlmesh/template-sqlmesh-project.md`
+- **SQLMesh model types:** `../data-lake-platform/assets/transformation/sqlmesh/template-sqlmesh-model.md` (FULL, INCREMENTAL, VIEW)
+- **Incremental models:** `../data-lake-platform/assets/transformation/sqlmesh/template-sqlmesh-incremental.md`
+- **DAG and dependencies:** `../data-lake-platform/assets/transformation/sqlmesh/template-sqlmesh-dag.md`
+- **Testing and data quality:** `../data-lake-platform/assets/transformation/sqlmesh/template-sqlmesh-testing.md`
 
 **Use SQLMesh when:**
 - Building SQL-based feature pipelines
@@ -346,7 +332,7 @@ For SQL-based data transformation and feature engineering:
 - [template-sqlmesh-testing.md](../data-lake-platform/assets/transformation/sqlmesh/template-sqlmesh-testing.md)
 
 **Data**
-- [data/sources.json](data/sources.json) — Curated external references
+- [data/sources.json](data/sources.json) - Curated external references
 
 ---
 
