@@ -7,7 +7,7 @@ description: "Production-grade DevOps and platform engineering patterns: Kuberne
 
 This skill equips teams with actionable templates, checklists, and patterns for building self-service platforms, automating infrastructure with GitOps, deploying securely with DevSecOps, scaling with Kubernetes, ensuring reliability through SRE practices, and operating production systems with strong observability.
 
-**Modern Best Practices (Jan 2026)**: Kubernetes 1.33-1.35 (1.35 "Timbernetes" released Dec 2025 with in-place pod restart GA, OCI image volumes alpha), Docker Engine v27, Terraform 1.x / OpenTofu 1.9+ (OSS fork with state encryption), GitOps with Argo CD v3 and Flux v2, OpenTelemetry for traces/metrics/logs, eBPF-based observability (Cilium + Tetragon for security), and AIOps for self-healing systems (60%+ enterprise adoption projected).
+**Modern baseline (2026)**: IaC (Terraform/OpenTofu/Pulumi), GitOps (Argo CD/Flux), Kubernetes (follow upstream supported releases), OpenTelemetry + Prometheus/Grafana, supply-chain security (SBOM + signing + provenance), policy-as-code (OPA/Gatekeeper or Kyverno), and eBPF-powered networking/security/observability (e.g., Cilium + Tetragon).
 
 ---
 
@@ -17,7 +17,7 @@ This skill equips teams with actionable templates, checklists, and patterns for 
 |------|----------------|---------|-------------|
 | Infrastructure as Code | Terraform / OpenTofu | `terraform plan && terraform apply` | Provision cloud resources declaratively |
 | GitOps Deployment | Argo CD / Flux | `argocd app sync myapp` | Continuous reconciliation, declarative deployments |
-| Container Build | Docker Engine v27 | `docker build -t app:v1 .` | Package applications with dependencies |
+| Container Build | Docker Engine | `docker build -t app:v1 .` | Package applications with dependencies |
 | Kubernetes Deployment | kubectl / Helm (Kubernetes) | `kubectl apply -f deploy.yaml` / `helm upgrade app ./chart` | Deploy to K8s cluster, manage releases |
 | CI/CD Pipeline | GitHub Actions | Define workflow in `.github/workflows/ci.yml` | Automated testing, building, deploying |
 | Security Scanning | Trivy / Falco / Tetragon | `trivy image myapp:latest` | Vulnerability scanning, runtime security, eBPF enforcement |
@@ -33,7 +33,7 @@ This skill equips teams with actionable templates, checklists, and patterns for 
 ```text
 What do you need to accomplish?
     ├─ Infrastructure provisioning?
-    │   ├─ Cloud-agnostic → Terraform OR OpenTofu (OSS fork, state encryption)
+    │   ├─ Cloud-agnostic → Terraform or OpenTofu (OSS fork)
     │   ├─ Programming-first → Pulumi (TypeScript/Python/Go)
     │   ├─ AWS-specific → CloudFormation or Terraform/OpenTofu
     │   ├─ GCP-specific → Deployment Manager or Terraform/OpenTofu
@@ -118,7 +118,7 @@ Each guide includes:
 
 ## Templates (Copy-Paste Ready)
 
-Production templates organized by tech stack (27 templates total):
+Production templates organized by tech stack:
 
 ### AWS Cloud
 - [assets/aws/template-aws-ops.md](assets/aws/template-aws-ops.md) - AWS service operations and best practices
@@ -302,8 +302,7 @@ Production templates organized by tech stack (27 templates total):
 
 ## Optional: AI/Automation (AIOps)
 
-> **Note**: AI assists with analysis but cost/incident decisions need human approval.
-> **2026 Trend**: Gartner projects 60%+ of large enterprises will adopt AIOps-powered self-healing systems by 2026.
+> Note: AI can assist with analysis and triage, but infrastructure/cost/incident decisions require human approval and an audit trail (especially anything destructive or irreversible).
 
 ### AIOps Capabilities (2026)
 
@@ -328,8 +327,7 @@ Production templates organized by tech stack (27 templates total):
 
 ### Platform Engineering + AI
 
-**"Shift Down" Paradigm (2026)**: Instead of "shifting left" (pushing toil to developers), platform teams now embed AI capabilities directly into the platform:
-- AI-ready Internal Developer Platforms (94% view AI as critical)
+Platform teams increasingly embed AI capabilities directly into the platform:
 - Multi-agent orchestration for code generation, security validation, deployment
 - Intelligent defaults and guardrails that scale across teams
 
@@ -354,7 +352,7 @@ See [references/operational-patterns.md](references/operational-patterns.md) for
 
 ## External Resources
 
-See [data/sources.json](data/sources.json) for 55+ curated sources organized by tech stack:
+See [data/sources.json](data/sources.json) for curated sources organized by tech stack:
 - **Cloud Platforms**: AWS, GCP, Azure documentation and best practices
 - **Container Orchestration**: Kubernetes, Helm, Kustomize, Docker
 - **Infrastructure as Code**: Terraform, OpenTofu, Pulumi, CloudFormation, ARM templates
@@ -373,7 +371,7 @@ See [data/sources.json](data/sources.json) for 55+ curated sources organized by 
 
 ## Trend Awareness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about DevOps, platform engineering, or cloud infrastructure, you MUST use WebSearch to check current trends before answering.
+When users ask recommendation questions about DevOps, platform engineering, or cloud infrastructure, validate time-sensitive details (versions, deprecations, licensing, major releases) against primary sources.
 
 ### Trigger Conditions
 
@@ -386,12 +384,11 @@ See [data/sources.json](data/sources.json) for 55+ curated sources organized by 
 - "Best cloud provider for [use case]?"
 - "What orchestration/monitoring tool should I use?"
 
-### Required Searches
+### Minimum Verification (Preferred Order)
 
-1. Search: `"DevOps best practices 2026"`
-2. Search: `"[Kubernetes/Terraform/ArgoCD] vs alternatives 2026"`
-3. Search: `"platform engineering trends January 2026"`
-4. Search: `"[specific tool] new releases 2026"`
+1. Check the official docs + release notes linked in [data/sources.json](data/sources.json) for the specific tools you recommend.
+2. If internet access is available, confirm recent releases, breaking changes, and deprecations from those release pages.
+3. If internet access is not available, state that versions may have changed and focus on stable selection criteria (operational fit, ecosystem, maturity, team skills, compliance).
 
 ### What to Report
 

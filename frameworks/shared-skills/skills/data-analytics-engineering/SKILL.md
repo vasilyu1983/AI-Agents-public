@@ -42,6 +42,8 @@ description: Analytics engineering for reliable metrics and BI readiness. Build 
 ## Quality Checks
 
 - Keep metric definitions stable and versioned.
+- Treat metrics as APIs: document changes, deprecate safely, and backfill deliberately.
+- Define data contracts for core tables (schema, freshness, keys) to control downstream breakage.
 - Avoid mixed grains in a single model.
 - Ensure tests cover critical joins and aggregates.
 - Validate against source of truth and historical baselines.
@@ -56,6 +58,7 @@ description: Analytics engineering for reliable metrics and BI readiness. Build 
 
 - `references/modeling-patterns.md` for modeling guidance and data quality patterns.
 - `references/tool-comparison-2026.md` for dbt vs SQLMesh vs Coalesce decision matrix.
+- `data/sources.json` for curated vendor docs and trend-tracking sources (use as a WebSearch seed list).
 
 ## Related Skills
 
@@ -67,7 +70,7 @@ description: Analytics engineering for reliable metrics and BI readiness. Build 
 
 ## Trend Awareness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about analytics engineering, data modeling, or BI, you MUST use WebSearch to check current trends before answering.
+**IMPORTANT**: When users ask recommendation questions about analytics engineering, data modeling, or BI, you MUST use WebSearch to check current trends before answering. If WebSearch is unavailable, use `data/sources.json` + web browsing and state what you verified vs assumed.
 
 ### Trigger Conditions
 
@@ -98,15 +101,6 @@ After searching, provide:
 - **Emerging trends**: New tools, patterns, or standards gaining traction
 - **Deprecated/declining**: Tools/approaches losing relevance or support
 - **Recommendation**: Based on fresh data, not just static knowledge
-
-### Key 2026 Developments
-
-- **SQLMesh acquired by Fivetran (2025)**: Changes competitive dynamics
-- **Semantic Layer + AI**: 300% accuracy improvement for LLM queries vs raw SQL
-- **Agentic analytics**: AI agents autonomously building dashboards and detecting anomalies
-- **Metric debt**: Governance concern for inconsistent metric definitions
-- **dbt-expectations**: Now maintained by Metaplane (Dec 2024 fork)
-- **Open Semantic Interchange (OSI)**: Emerging interoperability standard
 
 ### Example Topics (verify with fresh search)
 

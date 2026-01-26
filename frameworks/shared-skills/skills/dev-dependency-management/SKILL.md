@@ -11,7 +11,7 @@ description: Package and dependency management patterns across ecosystems (npm, 
 
 ## When to Use This Skill
 
-Claude should invoke this skill when a user requests:
+The agent should invoke this skill when a user requests:
 
 - Adding new dependencies to a project
 - Updating existing dependencies safely
@@ -70,19 +70,19 @@ User needs: [Dependency Task]
     │   └─ Peer dependency mismatch?
     │       └─ Check version compatibility → Update parent or child
     │
-    ├─ Monorepo project?
-    │   ├─ Use pnpm workspaces (fastest, best)
-    │   ├─ Shared deps → Root package.json
-    │   ├─ Package-specific → Package directories
-    │   └─ Use Nx or Turborepo for task caching
-    │
-    └─ Choosing package manager?
-        ├─ New JS project → **pnpm** (fastest, best disk efficiency) or **Bun** (7× faster than npm)
-        ├─ Enterprise monorepo → **pnpm** (most stable workspace support)
-        ├─ Speed-focused experimentation → **Bun** (bleeding edge, production-ready Jan 2026)
-        ├─ Existing npm project → Migrate to pnpm or stay (check team preference)
-        ├─ Python → **uv** (10-100× faster), Poetry (mature), pip+venv (simple)
-        └─ Data science → **conda** or **uv** (faster environment setup)
+	├─ Monorepo project?
+	│   ├─ Use pnpm workspaces (recommended default)
+	│   ├─ Shared deps → Root package.json
+	│   ├─ Package-specific → Package directories
+	│   └─ Use Nx or Turborepo for task caching
+	│
+	└─ Choosing package manager?
+	    ├─ New JS project → **pnpm** (recommended default) or **Bun** (often faster; verify ecosystem maturity)
+	    ├─ Enterprise monorepo → **pnpm** (mature workspace support)
+	    ├─ Speed-focused experimentation → **Bun** (verify ecosystem maturity)
+	    ├─ Existing npm project → Migrate to pnpm or stay (check team preference)
+	    ├─ Python → **uv** (fast), Poetry (mature), pip+venv (simple)
+	    └─ Data science → **conda** or **uv** (faster environment setup)
 ```
 
 ---
@@ -408,7 +408,7 @@ For complementary workflows and deeper dives:
 
 ## External Resources
 
-See [`data/sources.json`](data/sources.json) for 82 curated resources:
+See [`data/sources.json`](data/sources.json) for curated resources:
 
 - **Package managers**: npm, pnpm, Yarn, pip, Poetry, Cargo, Go modules, Maven, Composer
 - **Semantic versioning**: SemVer spec, version calculators, constraint references
@@ -425,7 +425,7 @@ See [`data/sources.json`](data/sources.json) for 82 curated resources:
 
 ## Usage Notes
 
-**For Claude:**
+**For Codex / Claude Code:**
 
 - Use this skill when users need dependency management guidance
 - Reference specific resources based on the task (lockfiles, security, updates)

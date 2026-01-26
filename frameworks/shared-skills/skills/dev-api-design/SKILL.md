@@ -1,33 +1,27 @@
 ---
 name: dev-api-design
-description: Production-grade API design patterns for REST, GraphQL, and gRPC. Covers API architecture, OpenAPI/Swagger specs, versioning strategies, authentication flows, rate limiting, pagination, error handling, and documentation best practices for modern API development.
+description: Production-grade API design patterns for REST, GraphQL, gRPC, and tRPC. Covers API architecture, OpenAPI/Swagger specs, versioning/deprecation, authentication/authorization, rate limiting, pagination, error models, contract testing, and developer documentation.
 ---
 
 # API Development & Design — Quick Reference
 
-This skill provides execution-ready patterns for designing, implementing, and documenting production-grade APIs. Claude should apply these patterns when users need REST API design, GraphQL schemas, OpenAPI specifications, API versioning, authentication flows, or API documentation.
+Use this skill to design, implement, and document production-grade APIs (REST, GraphQL, gRPC, and tRPC). Apply it for contract design (OpenAPI), versioning/deprecation, authentication/authorization, rate limiting, pagination, error models, and developer documentation.
 
-**Modern Best Practices (Dec 2025)**: HTTP semantics and cacheability (RFC 9110), Problem Details error model (RFC 9457), OpenAPI 3.1, API-first + contract testing, strong AuthN/Z boundaries, explicit versioning/deprecation, and operable-by-default APIs (rate limits, idempotency, observability).
+**Modern best practices (Jan 2026)**: HTTP semantics and cacheability (RFC 9110), Problem Details error model (RFC 9457), OpenAPI 3.1+, contract-first + breaking-change detection, strong AuthN/Z boundaries, explicit versioning/deprecation, and operable-by-default APIs (idempotency, rate limits, observability, trace context).
 
 ---
 
-## When to Use This Skill
+## Default Execution Checklist
 
-Claude should invoke this skill when a user requests:
-
-- REST API design and endpoint structure
-- GraphQL schema design and resolver patterns
-- gRPC service definitions and protocol buffers
-- OpenAPI/Swagger specification creation
-- API versioning strategies (URL, header, content negotiation)
-- Authentication and authorization flows (JWT, OAuth2, API keys)
-- Rate limiting, throttling, and quota management
-- API pagination, filtering, and sorting patterns
-- Error response standardization
-- API documentation and developer portals
-- API security best practices (OWASP API Security Top 10)
-- API testing strategies (contract testing, mock servers)
-- API gateway configuration and management
+- Choose an API style based on constraints (public vs internal, performance, client query flexibility).
+- Define the contract first (OpenAPI or GraphQL schema; protobuf for gRPC).
+- Define the error model (RFC 9457 + stable error codes + trace IDs).
+- Define AuthN/AuthZ boundaries (scopes/roles/tenancy) and threat model.
+- Define pagination/filter/sort for all list endpoints.
+- Define rate limits/quotas, idempotency strategy (esp. POST), and retries/backoff guidance.
+- Define observability (W3C Trace Context, request IDs, metrics, logs) and SLOs.
+- Add contract tests + breaking-change checks in CI.
+- Publish docs with examples + migration/deprecation policy.
 
 ---
 
@@ -200,7 +194,7 @@ Production-ready, copy-paste API implementations with authentication, database, 
 
 - **[api-patterns-universal.md](assets/cross-platform/api-patterns-universal.md)** - Universal patterns for all frameworks
   - Authentication strategies, pagination, caching, versioning, validation
-- **[template-api-governance.md](assets/cross-platform/template-api-governance.md)** - **NEW** API governance, deprecation, multi-tenancy
+- **[template-api-governance.md](assets/cross-platform/template-api-governance.md)** - API governance, deprecation, multi-tenancy
   - Deprecation policy (90-day timeline), backward compatibility rules, error model templates
 - **[template-api-design-review-checklist.md](assets/cross-platform/template-api-design-review-checklist.md)** - Production API review checklist (security, reliability, operability)
 - **[template-api-error-model.md](assets/cross-platform/template-api-error-model.md)** - RFC 9457 Problem Details + stable error code registry
@@ -213,7 +207,7 @@ Production-ready, copy-paste API implementations with authentication, database, 
 
 - Version APIs from day one
 - Document deprecation policy before first deprecation
-- Use semantic versioning for API versions
+- Treat breaking changes as a major version (and keep minor changes backward compatible)
 - Include trace IDs in all error responses
 - Return appropriate HTTP status codes
 - Implement rate limiting with clear headers
@@ -274,36 +268,6 @@ See [data/sources.json](data/sources.json) for:
 
 ---
 
-## Quick Decision Matrix
-
-| Scenario | Recommendation |
-|----------|----------------|
-| Public API for third parties | REST with OpenAPI docs |
-| Internal microservices | gRPC for performance, REST for simplicity |
-| TypeScript monorepo (same team) | tRPC for end-to-end type safety |
-| Client needs flexible queries | GraphQL |
-| Real-time updates | GraphQL Subscriptions or WebSockets |
-| Simple CRUD operations | REST |
-| Complex data fetching | GraphQL |
-| High throughput required | gRPC |
-| Mobile/web clients | REST or GraphQL |
-| AI agents consuming API | REST + MCP wrapper |
-
----
-
-## Anti-Patterns to Avoid
-
-- **Verbs in URLs**: `/getUserById` → `/users/:id`
-- **Ignoring HTTP methods**: Using GET for mutations
-- **No versioning**: Breaking changes without version bump
-- **Inconsistent error format**: Different error structures per endpoint
-- **Missing pagination**: Returning unbounded lists
-- **No rate limiting**: Allowing unlimited requests
-- **Poor documentation**: Missing examples, outdated specs
-- **Security by obscurity**: Not using HTTPS, weak auth
-
----
-
 ## Related Skills
 
 This skill works best when combined with other specialized skills:
@@ -360,7 +324,7 @@ This skill works best when combined with other specialized skills:
 
 ## Usage Notes
 
-**For Claude:**
+**For the agent:**
 
 - Apply RESTful principles by default unless user requests GraphQL/gRPC
 - Always include pagination for list endpoints
@@ -373,42 +337,6 @@ This skill works best when combined with other specialized skills:
 
 ---
 
-## Trend Awareness Protocol
+## Time-Sensitive Recommendations
 
-**IMPORTANT**: When users ask recommendation questions about API design, frameworks, or documentation, you MUST use WebSearch to check current trends before answering.
-
-### Trigger Conditions
-
-- "What's the best API framework for [language/use case]?"
-- "What should I use for [REST/GraphQL/gRPC]?"
-- "What's the latest in API design?"
-- "Current best practices for [OpenAPI/API versioning]?"
-- "Is [approach/tool] still relevant in 2026?"
-- "[REST] vs [GraphQL] vs [gRPC]?"
-- "Best API documentation tool?"
-
-### Required Searches
-
-1. Search: `"API design best practices 2026"`
-2. Search: `"[specific framework] vs alternatives 2026"`
-3. Search: `"API trends January 2026"`
-4. Search: `"[REST/GraphQL/gRPC] comparison 2026"`
-
-### What to Report
-
-After searching, provide:
-
-- **Current landscape**: What API patterns/tools are popular NOW
-- **Emerging trends**: New frameworks, patterns, or standards gaining traction
-- **Deprecated/declining**: Approaches or tools losing relevance
-- **Recommendation**: Based on fresh data, not just static knowledge
-
-### Example Topics (verify with fresh search)
-
-- API frameworks (FastAPI, Express, Spring Boot, tRPC)
-- API specification (OpenAPI 3.1, AsyncAPI)
-- GraphQL ecosystem (Apollo, Relay, urql)
-- API documentation (Swagger UI, Redoc, Stoplight)
-- API gateways and management
-- API security standards and OWASP
-- Contract testing tools (Pact, Specmatic)
+If a user asks for "best" tools/frameworks, "latest" standards, or whether something is still relevant in 2026, do a quick web search using whatever browsing/search tool is available in the current environment. If web access is unavailable, answer from stable principles, state assumptions (traffic, latency, team skills, ecosystem), and avoid overstating currency.

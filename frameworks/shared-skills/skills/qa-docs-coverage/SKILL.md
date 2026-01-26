@@ -3,18 +3,14 @@ name: qa-docs-coverage
 description: "Docs as QA: audit doc coverage and freshness, validate runbooks, and maintain documentation quality gates for APIs, services, events, and operational workflows. Includes AI-assisted audits, observability patterns, and automated coverage tracking."
 ---
 
-# QA Docs Coverage (Jan 2026) — Discovery, Freshness, and Runbook Quality
+# QA Docs Coverage (Jan 2026) - Discovery, Freshness, and Runbook Quality
 
 ## Modern Best Practices (January 2026)
 
-- **AI-assisted audits**: Use [Mintlify](https://mintlify.com/), [DocuWriter.ai](https://www.docuwriter.ai/), or [Documentation.AI](https://documentation.ai/) for automated doc generation; require human review before publish
-- **Documentation observability**: Track freshness, coverage %, and staleness via CI dashboards—treat docs like production data
-- **Contract-first coverage**: Validate OpenAPI/AsyncAPI specs against actual code; use [Swagger Coverage](https://github.com/viclovsky/swagger-coverage) for gap detection
-- **Spectral linting**: Enforce API doc standards with [Spectral](https://stoplight.io/spectral) rulesets in CI
-- **MCP server integration**: Connect AI agents to live documentation context via [MCP servers](https://modelcontextprotocol.io/)
-- **Runbook testability**: Every runbook must be executable in staging; use synthetic tests for validation
-- **Cross-platform documentation**: Use AGENTS.md standard with symlinks to CLAUDE.md for multi-tool compatibility ([AGENTS.md Standard](https://ainativedev.io/news/the-rise-of-agents-md))
-- **Context extraction tools**: Use [gitingest](https://gitingest.com/) or [repo2txt](https://github.com/kirill-markin/repo2txt) for large codebase analysis before documentation audits
+- **Docs as QA**: Treat docs as production artifacts with owners, review cadence, and CI quality gates (links/style/contracts/freshness)
+- **Contract-first**: Validate OpenAPI/AsyncAPI/JSON Schema in CI; use coverage tools (Swagger Coverage / OpenAPI Coverage) to detect gaps
+- **Runbook testability**: Every runbook must be executable in staging; validate with synthetic tests and incident exercises
+- **Automation + observability**: Track coverage %, freshness, and drift via CI dashboards; prevent regressions via PR checklists
 
 This skill provides operational workflows for auditing existing codebases, identifying documentation gaps, and systematically generating missing documentation. It complements [docs-codebase](../docs-codebase/SKILL.md) by providing the **discovery and analysis** layer.
 
@@ -22,26 +18,37 @@ This skill provides operational workflows for auditing existing codebases, ident
 
 Core references: [Diataxis](https://diataxis.fr/) (doc structure), [OpenAPI](https://spec.openapis.org/oas/latest.html) (REST), [AsyncAPI](https://www.asyncapi.com/) (events).
 
----
+## When to use
 
-## When to Use This Skill
+- Auditing an existing repo for missing/outdated documentation
+- Adding documentation quality gates (lint/link checks/contracts/freshness) to CI/CD
+- Validating runbooks for incident readiness (MTTR reduction)
 
-Invoke this skill when:
+## When to avoid
 
-- Auditing documentation coverage for an existing codebase
-- Generating documentation for legacy or underdocumented projects
-- Creating documentation coverage reports
-- Systematically documenting APIs, services, events, or database schemas
-- Onboarding to a new codebase and need to understand what's documented vs not
-- Preparing for compliance audits requiring documentation
-- Setting up documentation maintenance processes
-- **Working with large codebases (100K-1M LOC)** — see Large Codebase Audit section
+- Writing new documentation from scratch without a component inventory (use discovery first)
+- Publishing AI-generated docs without human review and command/link verification
+
+## Quick start
+
+Use progressive disclosure: load only the reference file you need.
+
+1. Discover components: [references/discovery-patterns.md](references/discovery-patterns.md)
+2. Measure coverage + gaps: [references/audit-workflows.md](references/audit-workflows.md) (Phase 1-2) and [assets/coverage-report-template.md](assets/coverage-report-template.md)
+3. Prioritize work: [references/priority-framework.md](references/priority-framework.md)
+4. Create an actionable backlog: [assets/documentation-backlog-template.md](assets/documentation-backlog-template.md) and templates in [docs-codebase](../docs-codebase/SKILL.md)
+5. Prevent regression: [references/cicd-integration.md](references/cicd-integration.md) and [references/freshness-tracking.md](references/freshness-tracking.md)
+
+Optional (recommended scripts; run from the repo being audited):
+
+- Local link check: `python3 frameworks/shared-skills/skills/qa-docs-coverage/scripts/check_local_links.py docs/`
+- Freshness report: `python3 frameworks/shared-skills/skills/qa-docs-coverage/scripts/docs_freshness_report.py --docs-root docs/`
 
 ---
 
 ## Large Codebase Audit (100K-1M LOC)
 
-For large codebases, the key principle is: **LLMs don't need the entire codebase—they need the right context for the current task**.
+For large codebases, the key principle is: **LLMs don't need the entire codebase - they need the right context for the current task**.
 
 ### Phase 0: Context Extraction
 
@@ -51,7 +58,7 @@ Before starting an audit, extract codebase context using tools:
 |------|-------------|----------|
 | **gitingest** | Replace "github.com" with "gitingest.com" | Quick full-repo dump |
 | **repo2txt** | https://github.com/kirill-markin/repo2txt | Selective file extraction |
-| **tree** | `tree -L 3 --dirsfirst -I 'node_modules\|.git\|dist'` | Structure overview |
+| **tree** | `tree -L 3 --dirsfirst -I 'node_modules|.git|dist'` | Structure overview |
 
 ### Hierarchical Audit Strategy
 
@@ -121,14 +128,14 @@ Maintenance:
 
 ## Core QA (Default)
 
-### What “Docs as QA” Means
+### What "Docs as QA" Means
 
 - Treat docs as production quality artifacts: they reduce MTTR, enable safe changes, and define expected behavior.
 - REQUIRED doc types for reliability and debugging ergonomics:
-  - “How to run locally/CI” and “how to test”.
-  - Operational runbooks (alerts, common failures, rollback).
-  - Service contracts (OpenAPI/AsyncAPI) and schema examples.
-  - Known issues and limitations (with workarounds).
+  - "How to run locally/CI" and "how to test"
+  - Operational runbooks (alerts, common failures, rollback)
+  - Service contracts (OpenAPI/AsyncAPI) and schema examples
+  - Known issues and limitations (with workarounds)
 
 ### Coverage Model (Risk-Based)
 
@@ -139,15 +146,15 @@ Maintenance:
 
 ### Freshness Checks (Prevent Stale Docs)
 
-- Define owners, review cadence, and a “last verified” field for critical docs.
-- CI economics [Inference]:
+- Define owners, review cadence, and a "last verified" field for critical docs.
+- CI economics:
   - Block PRs only for missing/invalid P1 docs.
   - Warn for P2/P3 gaps; track via backlog.
 - Run link checks and linting as fast pre-merge steps.
 
 ### Runbook Testability
 
-- A runbook is “testable” if a new engineer can follow it and reach a measurable end state.
+- A runbook is "testable" if a new engineer can follow it and reach a measurable end state.
 - Include: prerequisites, exact commands, expected outputs, rollback criteria, and escalation paths.
 
 ### Do / Avoid

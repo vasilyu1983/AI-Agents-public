@@ -1,6 +1,6 @@
 ---
 name: document-xlsx
-description: Create, edit, and analyze Excel spreadsheets with formulas, formatting, charts, pivot tables, and data validation. Supports xlsx, exceljs, openpyxl, and pandas for comprehensive spreadsheet workflows in Node.js and Python.
+description: "Create, edit, audit, and extract Excel spreadsheets (.xlsx): generate reports/exports, apply formulas/formatting/charts/data validation, parse existing workbooks, and avoid spreadsheet risks (formula injection, broken links, hidden rows). Supports ExcelJS, openpyxl, pandas, XlsxWriter, and SheetJS."
 ---
 
 # Document XLSX Skill — Quick Reference
@@ -10,9 +10,10 @@ This skill enables creation, editing, and analysis of Excel spreadsheets program
 **Modern Best Practices (Jan 2026)**:
 - Treat spreadsheets as software: clear inputs/outputs, auditability, and versioning.
 - Protect data integrity: control totals, validation, and traceability to sources.
-- **Accessibility (WCAG 2.1 AA by April 2026)**: labels, contrast, structure. ADA compliance deadline.
-- **EU Distribution**: EAA (June 2025) requires EN 301 549 compliance for spreadsheets distributed in EU.
+- Accessibility: labels, contrast, structure; use Excel's Accessibility Checker; meet procurement/regulatory requirements when distributing externally.
+- If distributing in the EU or regulated contexts, follow applicable accessibility requirements (often aligned with EN 301 549 / WCAG).
 - Ship with a review loop and an owner (avoid "mystery models").
+- Security: treat untrusted input/workbooks as hostile (formula injection, external links, hidden content, macros).
 
 ---
 
@@ -29,17 +30,12 @@ This skill enables creation, editing, and analysis of Excel spreadsheets program
 | Styling | ExcelJS/openpyxl | Both | Conditional formatting |
 | Automation | xlwings | Python | Excel installed, interactive workflows |
 
-## When to Use This Skill
+## Guardrails and Caveats
 
-Claude should invoke this skill when a user requests:
-
-- Generate Excel reports from data
-- Create spreadsheets with formulas and formatting
-- Add charts and pivot tables
-- Parse and extract data from Excel files
-- Implement conditional formatting
-- Create data validation rules
-- Automate Excel-based workflows
+- Formula calculation: libraries write formulas; Excel computes results when opened. If you need computed values server-side, calculate in code and write values (or use a dedicated formula engine).
+- Pivot tables: programmatic creation is limited. Prefer pandas summaries (pivot tables as data) or Excel automation (xlwings/Office Scripts/VBA) if you truly need native pivots.
+- Macros: openpyxl can preserve existing VBA (`keep_vba=True`) but does not author macros; never generate or execute macros from untrusted input.
+- Spreadsheet injection: never put untrusted strings into `formula` fields; write them as text values and validate/sanitize user-provided data used in exports.
 
 ---
 
@@ -76,7 +72,7 @@ const data = [
 ];
 
 data.forEach((item, index) => {
-  const row = sheet.addRow({
+  sheet.addRow({
     product: item.product,
     qty: item.qty,
     price: item.price,
@@ -102,9 +98,7 @@ await workbook.xlsx.writeFile('report.xlsx');
 
 ```python
 from openpyxl import Workbook
-from openpyxl.styles import Font, Fill, PatternFill, Alignment
-from openpyxl.utils import get_column_letter
-from openpyxl.chart import BarChart, Reference
+from openpyxl.styles import Font, PatternFill
 
 wb = Workbook()
 ws = wb.active
@@ -115,7 +109,7 @@ headers = ['Product', 'Quantity', 'Price', 'Total']
 for col, header in enumerate(headers, 1):
     cell = ws.cell(row=1, column=col, value=header)
     cell.font = Font(bold=True, color='FFFFFF')
-    cell.fill = PatternFill(start_color='4472C4', fill_type='solid')
+    cell.fill = PatternFill(start_color='4472C4', end_color='4472C4', fill_type='solid')
 
 # Data
 data = [
@@ -179,11 +173,12 @@ chart.title = 'Sales by Product'
 chart.x_axis.title = 'Product'
 chart.y_axis.title = 'Sales'
 
-# Data range
-data = Reference(ws, min_col=4, min_row=1, max_row=len(data)+1, max_col=4)
-categories = Reference(ws, min_col=1, min_row=2, max_row=len(data)+1)
+# Data range (assumes column D contains the series and row 1 is headers)
+max_row = ws.max_row
+data_ref = Reference(ws, min_col=4, min_row=1, max_row=max_row, max_col=4)
+categories = Reference(ws, min_col=1, min_row=2, max_row=max_row)
 
-chart.add_data(data, titles_from_data=True)
+chart.add_data(data_ref, titles_from_data=True)
 chart.set_categories(categories)
 chart.shape = 4
 
@@ -248,14 +243,14 @@ Excel Task: [What do you need?]
     │   └─ Update formulas → openpyxl
     │
     └─ Complex features?
-        ├─ Pivot tables → openpyxl or xlwings
+        ├─ Pivot tables → pandas summary tables or xlwings (native pivots)
         ├─ Data validation → openpyxl DataValidation
-        └─ Macros → xlwings (Python-Excel bridge)
+        └─ Macros → preserve only; use xlwings for Excel automation
 ```
 
 ---
 
-## Do / Avoid (Dec 2025)
+## Do / Avoid (Jan 2026)
 
 ### Do
 

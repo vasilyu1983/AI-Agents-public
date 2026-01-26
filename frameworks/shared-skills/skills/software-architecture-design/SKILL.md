@@ -1,6 +1,6 @@
 ---
 name: software-architecture-design
-description: System design, architecture patterns, scalability tradeoffs, and distributed systems for production-grade software. Covers microservices, event-driven, CQRS, modular monoliths, and reliability patterns.
+description: Use when designing system architecture, choosing between monolith/microservices/serverless, planning scalability, or making technology decisions. Covers microservices, event-driven, CQRS, modular monoliths, distributed systems, and reliability patterns for production-grade software.
 ---
 
 # Software Architecture Design — Quick Reference
@@ -30,6 +30,16 @@ Invoke when working on:
 - **Resilience patterns**: Circuit breakers, retries, bulkheads, graceful degradation
 - **API contracts**: Service boundaries, versioning, integration patterns
 - **Architecture decisions**: ADRs, tradeoff analysis, technology selection
+
+## When NOT to Use This Skill
+
+Use other skills instead for:
+
+- **Single-service implementation** (routes, controllers, business logic) → [software-backend](../software-backend/SKILL.md)
+- **API endpoint design** (REST conventions, GraphQL schemas) → [dev-api-design](../dev-api-design/SKILL.md)
+- **Security implementation** (auth, encryption, OWASP) → [software-security-appsec](../software-security-appsec/SKILL.md)
+- **Frontend component architecture** → [software-frontend](../software-frontend/SKILL.md)
+- **Database query optimization** → [data-sql-optimization](../data-sql-optimization/SKILL.md)
 
 ## Decision Tree: Choosing Architecture Pattern
 
@@ -64,139 +74,36 @@ Project needs: [New System or Major Refactor]
 - Consistency vs availability tradeoffs (CAP theorem)
 - Operational maturity (monitoring, orchestration)
 
-**Industry Data (CNCF 2025):** 42% of organizations that adopted microservices have consolidated at least some services back into larger deployable units. Primary drivers: debugging complexity, operational overhead, network latency.
-
 See [references/modern-patterns.md](references/modern-patterns.md) for detailed pattern descriptions.
 
----
+## Workflow (System-Level)
 
-## Modern Architecture Patterns (Jan 2026)
+Use this workflow when a user asks for architecture recommendations, decomposition, or major platform decisions.
 
-### Data Mesh Architecture
+1. Clarify: problem statement, non-goals, constraints, and success metrics
+2. Capture quality attributes: availability, latency, throughput, durability, consistency, security, compliance, cost
+3. Propose 2–3 candidate architectures and compare tradeoffs
+4. Define boundaries: bounded contexts, ownership, APIs/events, integration contracts
+5. Decide data strategy: storage, consistency model, schema evolution, migrations
+6. Design for operations: SLOs, failure modes, observability, deployment, DR, incident playbooks
+7. Document decisions: write ADRs for key tradeoffs and irreversible choices
 
-Use when data silos impede cross-functional analytics.
+Preferred deliverables (pick what fits the request):
 
-**Principles:**
+- Architecture blueprint: `assets/planning/architecture-blueprint.md`
+- Decision record: `assets/planning/adr-template.md`
+- Pattern deep dives: `references/modern-patterns.md`, `references/scalability-reliability-guide.md`
 
-- Domain-oriented data ownership
-- Data as a product
-- Self-serve data platform
-- Federated computational governance
+## 2026 Considerations (Load Only When Relevant)
 
-| Do | Avoid |
-|----|-------|
-| Assign data ownership to domain teams | Centralized data lake without ownership |
-| Publish data with SLAs and documentation | Schema changes without consumer notification |
-| Use standard interfaces (APIs, SQL) | Proprietary formats without discoverability |
+For ecosystem-sensitive questions (current vendor constraints, shifting best practices), use `data/sources.json` as the starting index:
 
-### Composable Architecture
+- 2026 trends overview: `references/architecture-trends-2026.md`
+- Platform engineering / IDPs: `.platform_engineering_2026`
+- Data mesh and analytics architecture: `.scalability_reliability` (data mesh entries)
+- AI-native systems (RAG, agents, MCP/A2A): `.optional_ai_architecture`
 
-Use when business demands rapid capability assembly.
-
-**Characteristics:**
-
-- Packaged business capabilities (PBCs)
-- API-first integration
-- Low-code/no-code composition layer
-- Event-driven coordination
-
-| Do | Avoid |
-|----|-------|
-| Design components with clear contracts | Tightly coupled monolithic modules |
-| Use standard protocols (REST, GraphQL, gRPC) | Custom integration patterns |
-| Enable runtime composition | Build-time-only assembly |
-
-### Continuous Architecture
-
-Architecture evolves with software, not separate from it.
-
-**Practices:**
-
-- Just-enough upfront design
-- Delay decisions to responsible moment
-- Architect roles on delivery teams
-- Architecture fitness functions (automated checks)
-
-### Edge Computing Patterns
-
-Use when latency or bandwidth constraints require local processing.
-
-| Pattern | Use Case |
-|---------|----------|
-| Edge gateway | Protocol translation, local caching |
-| Edge compute workloads | Validation, transforms, local control loops |
-| Edge-cloud hybrid | Local processing, cloud aggregation |
-
-### Platform Engineering (2026)
-
-Internal developer platforms (IDPs) for self-service infrastructure. By 2026, 80% of large software engineering organizations will have platform teams (Gartner).
-
-**IDP Stack:**
-
-| Component | Tools | Purpose |
-| --------- | ----- | ------- |
-| Portal | Backstage (89% market share), Port | Service catalog, tech docs |
-| Golden paths | Scaffolder templates | Standardized project creation |
-| Infrastructure | Terraform, Crossplane | Self-service provisioning |
-| AI agents | First-class citizens with RBAC | Automated workflows |
-
-**FinOps Integration:** Platforms now implement pre-deployment cost gates that block services exceeding unit-economic thresholds.
-
-**Unified Delivery:** Single pipeline for app developers, ML engineers, and data scientists.
-
----
-
-### Optional: AI/Automation Extensions
-
-> **Note**: This section covers AI-specific architectural patterns. Skip if building traditional systems.
-
-#### RAG Architecture Patterns
-
-Retrieval-Augmented Generation for enterprise AI.
-
-| Component | Purpose |
-| --------- | ------- |
-| Vector store | Embedding storage (Pinecone, Weaviate, pgvector) |
-| Retriever | Semantic search over documents |
-| Generator | LLM produces responses with context |
-| Orchestrator | Chains retrieval and generation |
-
-#### Google's 8 Multi-Agent Design Patterns (Jan 2026)
-
-The agentic AI field is experiencing its "microservices revolution" — single all-purpose agents are being replaced by orchestrated teams of specialized agents.
-
-**Three foundational execution patterns:** Sequential, Loop, Parallel
-
-| Pattern | Description | Use Case |
-| ------- | ----------- | -------- |
-| Sequential Pipeline | Agents in assembly line, output → next input | Document processing, ETL |
-| Parallel Fan-out | Concurrent agent execution, results merged | Multi-source research |
-| Loop/Iterative | Agent refines until condition met | Code review, optimization |
-| Hierarchical | Manager delegates to worker agents | Complex task decomposition |
-| Bidding/Auction | Agents compete for task assignment | Resource allocation |
-| Human-in-the-loop | Approval gates for critical decisions | High-stakes workflows |
-| Reflection | Agent critiques and improves own output | Quality assurance |
-| Tool Use | Agent selects and invokes external tools | API integration |
-
-**Anti-patterns:**
-
-- Unbounded agent loops without termination conditions
-- Missing human-in-the-loop for critical decisions
-- No observability into agent actions and reasoning
-- Single monolithic agent trying to do everything
-
-#### Agent Communication Protocols
-
-| Protocol | Purpose | Standard |
-| -------- | ------- | -------- |
-| MCP (Model Context Protocol) | LLM-to-data source connection | Anthropic open standard |
-| A2A (Agent-to-Agent) | Inter-agent communication at scale | Google Cloud Agent Engine |
-
-**MCP enables:** Agents access external data (databases, APIs, file systems) through standardized interfaces.
-
-**A2A enables:** Cross-system agent orchestration, discovery, and collaboration between agents from different platforms.
-
----
+If fresh web access is not available, answer with best-known patterns and explicitly call out assumptions.
 
 ## Navigation
 
@@ -204,6 +111,7 @@ The agentic AI field is experiencing its "microservices revolution" — single a
 
 - [references/modern-patterns.md](references/modern-patterns.md) — 10 contemporary architecture patterns with decision trees (microservices, event-driven, serverless, CQRS, modular monolith, service mesh, edge computing)
 - [references/scalability-reliability-guide.md](references/scalability-reliability-guide.md) — CAP theorem, database scaling, caching strategies, circuit breakers, SRE patterns, observability
+- [references/architecture-trends-2026.md](references/architecture-trends-2026.md) — Platform engineering, data mesh, AI-native systems (load only when relevant)
 - [data/sources.json](data/sources.json) — 60 curated external resources (AWS, Azure, Google Cloud, Martin Fowler, microservices.io, SRE books, multi-agent patterns, MCP/A2A protocols, platform engineering 2026)
 
 ### Templates
@@ -232,25 +140,17 @@ The agentic AI field is experiencing its "microservices revolution" — single a
 
 **Reliability & Operations:**
 
-<!-- TODO: Add when skills are created
-- [../qa-resilience/SKILL.md](../qa-resilience/SKILL.md) — Resilience patterns, backpressure, failure handling
-- [../qa-observability/SKILL.md](../qa-observability/SKILL.md) — Monitoring, tracing, performance optimization
-- [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — Platform engineering, SRE, IaC, deployment strategies
--->
+- [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — CI/CD, deployment strategies, IaC, platform operations
+- [../qa-observability/SKILL.md](../qa-observability/SKILL.md) — Monitoring, tracing, alerting, SLOs
 
 **Security & Data:**
 
 - [../software-security-appsec/SKILL.md](../software-security-appsec/SKILL.md) — Threat modeling, authentication, authorization, secure design
-<!-- TODO: Add when skill is created
 - [../data-sql-optimization/SKILL.md](../data-sql-optimization/SKILL.md) — Database design, optimization, indexing strategies
--->
 
 **Quality & Code:**
 
 - [../software-code-review/SKILL.md](../software-code-review/SKILL.md) — Code review practices, architectural review
-<!-- TODO: Add when skill is created
-- [../qa-refactoring/SKILL.md](../qa-refactoring/SKILL.md) — Refactoring patterns, technical debt management
--->
 
 **Documentation:**
 
@@ -258,46 +158,12 @@ The agentic AI field is experiencing its "microservices revolution" — single a
 
 ---
 
-## Trend Awareness Protocol
+## Freshness Protocol (When the Question Depends on "Now")
 
-**IMPORTANT**: When users ask recommendation questions about software architecture, you MUST use WebSearch to check current trends before answering.
+Use this when the user is asking for current best practices, vendor-specific constraints, or trend-sensitive recommendations.
 
-### Trigger Conditions
-
-- "What's the best architecture for [use case]?"
-- "What should I use for [microservices/serverless/event-driven]?"
-- "What's the latest in system design?"
-- "Current best practices for [scalability/resilience/observability]?"
-- "Is [architecture pattern] still relevant in 2026?"
-- "[Monolith] vs [microservices] vs [modular monolith]?"
-- "Best approach for [distributed systems/data consistency]?"
-
-### Required Searches
-
-1. Search: `"software architecture best practices 2026"`
-2. Search: `"[microservices/serverless/event-driven] architecture 2026"`
-3. Search: `"system design patterns 2026"`
-4. Search: `"[specific pattern] vs alternatives 2026"`
-
-### What to Report
-
-After searching, provide:
-
-- **Current landscape**: What architecture patterns are popular NOW
-- **Emerging trends**: New patterns gaining traction (AI-native, edge)
-- **Deprecated/declining**: Approaches that are losing relevance
-- **Recommendation**: Based on fresh data and real-world case studies
-
-### Example Topics (verify with fresh search)
-
-- Modular monolith renaissance
-- AI-native architecture patterns
-- Edge computing and CDN-first design
-- Event-driven microservices evolution
-- Platform engineering and internal developer platforms
-- Observability-driven development
-
----
+1. If live web access is available, consult 2–3 authoritative sources from `data/sources.json` (cloud frameworks, SRE, pattern catalogs) and fold new constraints into the recommendation.
+2. If live web access is not available, answer with durable patterns and explicitly state assumptions that could change (vendor limits, pricing, managed-service capabilities, ecosystem maturity).
 
 ## Operational Playbooks
 

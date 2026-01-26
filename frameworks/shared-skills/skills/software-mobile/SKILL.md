@@ -1,6 +1,6 @@
 ---
 name: software-mobile
-description: Production-grade mobile app development with Swift (iOS), Kotlin (Android), React Native, and WebView patterns, including UI/UX, navigation, state management, networking, local storage, push notifications, and App Store deployment.
+description: Production-grade mobile app development and architecture for iOS (Swift/SwiftUI/UIKit), Android (Kotlin/Jetpack Compose), and cross-platform (React Native, Flutter, Kotlin Multiplatform, WebView). Use for navigation, state, networking, offline storage, auth/passkeys, push, performance, testing, CI/CD, and App Store/Play release readiness.
 ---
 
 # Mobile Development Skill — Quick Reference
@@ -68,15 +68,15 @@ Need to build mobile app for: [Target Audience]
     │   ├─ Need maximum performance / platform fidelity?
     │   │   └─ Build separate native apps (Swift + Kotlin)
     │   │
-    │   ├─ Need faster development + code sharing (70%+)?
-    │   │   ├─ JavaScript team? → React Native (Expo SDK 54, New Architecture)
-    │   │   ├─ Dart team? → Flutter (46% developer adoption, 102K GitHub stars)
-    │   │   └─ Kotlin team? → Kotlin Multiplatform (KMP) ⭐ RECOMMENDED
+    │   ├─ Need faster development + code sharing?
+    │   │   ├─ JavaScript/TypeScript team? → React Native (Expo-managed or bare)
+    │   │   ├─ Dart team? → Flutter
+    │   │   └─ Kotlin team? → Kotlin Multiplatform (KMP)
     │   │
-    │   ├─ Kotlin Multiplatform (KMP)? [Production-ready, 23% market share]
+    │   ├─ Kotlin Multiplatform (KMP)?
     │   │   ├─ Share business logic only? → KMP shared module + native UI
-    │   │   ├─ Share UI too? → Compose Multiplatform (iOS stable 2025)
-    │   │   └─ Enterprise backing? → Google Docs iOS uses KMP in production
+    │   │   ├─ Share some UI? → Compose Multiplatform (validate iOS maturity for your needs)
+    │   │   └─ Shared modules need platform UI? → Keep native UI, share domain/data/networking
     │   │
     │   └─ Wrapping existing web app?
     │       ├─ Simple wrapper? → WebView (iOS WKWebView / Android WebView)
@@ -92,7 +92,7 @@ Need to build mobile app for: [Target Audience]
 Choosing architecture pattern?
     │
     ├─ iOS (Swift)?
-    │   ├─ SwiftUI app? → MVVM with @Observable (Swift 6.2 defaults)
+    │   ├─ SwiftUI app? → MVVM with @Observable/ObservableObject (based on OS baseline)
     │   ├─ Complex SwiftUI? → TCA (Composable Architecture) for testability
     │   ├─ UIKit app? → MVVM-C (Coordinator pattern)
     │   ├─ Large team? → Clean Architecture + MVVM
@@ -165,7 +165,7 @@ Need to make API calls?
 
 - **UI Frameworks**: SwiftUI (declarative), UIKit (imperative)
 - **Architecture**: MVVM, Clean Architecture, Coordinator, TCA (Composable Architecture)
-- **Concurrency**: Swift 6.2 "Approachable Concurrency" — `@MainActor` defaults, `@concurrent` for parallelism, async/await, Combine
+- **Concurrency**: Swift Concurrency (async/await, actors, TaskGroup); keep UI state on `@MainActor`; enable strict concurrency checks as appropriate
 - **Storage**: Core Data, SwiftData, Keychain
 - **Networking**: URLSession, async/await patterns
 - **Platform compliance**: Privacy manifests + required-reason APIs, background execution limits, and accessibility settings (Dynamic Type, VoiceOver)
@@ -181,14 +181,14 @@ Need to make API calls?
 
 ### Cross-Platform Development
 
-- **Kotlin Multiplatform (KMP)**: Share Kotlin business logic; Compose Multiplatform for shared UI (iOS stable 2025). Used by Google Docs, McDonald's, Duolingo.
-- **React Native**: JavaScript/TypeScript, Expo SDK 54, New Architecture (bridgeless) default, Hermes required
-- **Flutter**: Dart, widget tree, platform channels, Impeller rendering engine (46% developer adoption)
+- **Kotlin Multiplatform (KMP)**: Share domain/data/networking; keep native UI; consider Compose Multiplatform when shared UI is worth the constraints
+- **React Native**: JavaScript/TypeScript; evaluate New Architecture readiness and native-module surface area; Expo-managed path is often fastest for greenfield apps
+- **Flutter**: Dart; high code sharing; validate platform-specific gaps and plugin maturity for your requirements
 - **WebView**: WKWebView (iOS), WebView (Android), JavaScript bridge
 
 ---
 
-## Platform Baselines (January 2026)
+## Platform Baselines (Verify Current Requirements)
 
 ### iOS/iPadOS (Core)
 
@@ -196,27 +196,30 @@ Need to make API calls?
 - Required-reason APIs are declared with valid reasons https://developer.apple.com/documentation/bundlereferences/privacy_manifest_files
 - Background work uses supported primitives (avoid fragile timers) https://developer.apple.com/documentation/backgroundtasks
 - App Transport Security is configured; exceptions are justified and documented https://developer.apple.com/documentation/bundlereferences/information_property_list/nsapptransportsecurity
-- **Swift 6.2**: Use "Approachable Concurrency" — `@MainActor` defaults, `@concurrent` for explicit parallelism https://www.swift.org/documentation/concurrency/
+- Concurrency is implemented with Swift Concurrency (async/await, actors, TaskGroup) and checked with current Swift language mode settings https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html
+- Swift 6 migration / strict concurrency guidance is followed when upgrading toolchains https://developer.apple.com/documentation/swift/adoptingswift6
+- UI/UX follows current Human Interface Guidelines (including accessibility) https://developer.apple.com/design/human-interface-guidelines/ios
 
 ### Android (Core)
 
 - Background work uses WorkManager for deferrable, guaranteed work https://developer.android.com/topic/libraries/architecture/workmanager
 - Network calls and auth state survive process death (no hidden singleton assumptions) [Inference]
-- Target SDK meets Google Play requirements (Android 16 / API 36) https://support.google.com/googleplay/android-developer/answer/11926878
-- **Play Integrity API required** — SafetyNet Attestation fully deprecated January 2025 https://developer.android.com/google/play/integrity
+- Target SDK meets current Google Play requirements (verify policy + deadlines) https://support.google.com/googleplay/android-developer/answer/11926878
+- Prefer Play Integrity API over deprecated SafetyNet Attestation https://developer.android.com/google/play/integrity
+- Prefer Credential Manager for passkeys and modern sign-in flows https://developer.android.com/identity/sign-in/credential-manager
 
 ### Cross-Platform (Core)
 
 - Feature parity is explicit (document what is native-only vs shared) [Inference]
 - Bridges are treated as public APIs (versioned, tested, and observable) [Inference]
-- **Expo SDK 54** (current): New Architecture enabled by default, `expo-av` deprecated — migrate to `expo-audio`/`expo-video` https://expo.dev/changelog/sdk-54
-- **React Native 0.81**: JSC removed, Hermes required; bridgeless architecture default
+- React Native upgrades follow the official upgrade guide; validate New Architecture readiness against your native-module surface area https://reactnative.dev/docs/upgrading
+- Expo SDK upgrades follow Expo release notes and upgrade guides https://expo.dev/changelog
 
 ### Optional: AI/Automation Extensions
 
 > **Note**: Skip unless the app ships AI/automation features.
 
-- iOS: Apple Foundation Models (on-device) https://developer.apple.com/documentation/foundationmodels
+- iOS: Core ML / on-device inference primitives https://developer.apple.com/documentation/coreml
 - Android: Google ML Kit https://developers.google.com/ml-kit
 - Verify: model size/battery impact, offline/online behavior, user controls (cancel/undo), and privacy boundaries [Inference]
 
@@ -368,7 +371,7 @@ Android (FCM):
 
 ## Trend Awareness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about mobile development, you MUST use WebSearch to check current trends before answering.
+**IMPORTANT**: When users ask recommendation questions about mobile development, you MUST use a web search capability (if available) to check current trends before answering. If web search is unavailable, say so and answer using `data/sources.json`, clearly flagging that the recommendation may be stale.
 
 ### Trigger Conditions
 
@@ -398,12 +401,12 @@ After searching, provide:
 
 ### Example Topics (verify with fresh search)
 
-- iOS 18/19 and Swift 6.2 "Approachable Concurrency"
-- Android 16 (API 36) and Kotlin Multiplatform (KMP)
-- React Native 0.81 New Architecture (bridgeless default)
-- Expo SDK 54 and expo-av deprecation
-- Flutter vs React Native vs KMP ecosystem (2026)
-- Compose Multiplatform for iOS (stable 2025)
+- Current iOS + Swift Concurrency migration guidance
+- Current Play target SDK policy and identity/auth guidance
+- React Native New Architecture maturity and upgrade pain points
+- Expo-managed vs bare React Native tradeoffs
+- Flutter vs React Native vs KMP ecosystem in 2026
+- Compose Multiplatform readiness for iOS in 2026
 
 ---
 

@@ -1,9 +1,9 @@
 ---
 name: ai-mlops
-description: Complete MLOps skill covering production ML lifecycle and security. Includes data ingestion, model deployment, drift detection, monitoring, plus ML security (prompt injection, jailbreak defense, RAG security, privacy, governance). Modern automation-first patterns with multi-layered defenses.
+description: Production MLOps and ML/LLM/agent security skill for deploying and operating ML systems in production (registry + CI/CD, serving, monitoring/drift, evaluation loops, incident response/runbooks, and governance), including GenAI security (prompt injection, jailbreaks, RAG security, privacy, and supply chain).
 ---
 
-# MLOps & ML Security — Complete Reference
+# MLOps & ML Security - Complete Reference (Jan 2026)
 
 Production ML lifecycle with **modern security practices**.
 
@@ -17,12 +17,12 @@ This skill covers:
 2. **Model deployment**: Batch jobs, real-time APIs, hybrid systems, event-driven automation
 3. **Operations**: Real-time monitoring, drift detection, automated retraining, incident response
 
-**Modern Best Practices (December 2025)**:
+**Modern Best Practices (Jan 2026)**:
 
-- Treat the model as a **versioned production artifact** with provenance, rollbacks, and audit logs (NIST SSDF: https://csrc.nist.gov/pubs/sp/800/218/final).
-- Align governance and documentation to risk posture (EU AI Act: https://eur-lex.europa.eu/eli/reg/2024/1689/oj; NIST AI RMF: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf).
-- Measure and manage drift with **clear triggers and playbooks**; “drift” is not one metric.
-- Make incident response and change management first-class (runbooks, on-call, postmortems).
+- Version everything that can change: model artifacts, data snapshots, feature definitions, prompts/configs, and agent graphs; require reproducibility, rollbacks, and audit logs (NIST SSDF: https://csrc.nist.gov/pubs/sp/800/218/final).
+- Gate changes with evals (offline + online) and safe rollout (shadow/canary/blue-green); treat regressions in quality, safety, latency, and cost as release blockers.
+- Align controls and documentation to risk posture (EU AI Act: https://eur-lex.europa.eu/eli/reg/2024/1689/oj; NIST AI RMF + GenAI profile: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf, https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf).
+- Operationalize security: threat model the full system (data, model, prompts, tools, RAG), harden the supply chain (SBOM/signing), and ship incident playbooks for both reliability and safety events.
 
 It is execution-focused:
 
@@ -32,8 +32,6 @@ It is execution-focused:
 - **Automated retraining** pipelines (monitor → detect → trigger → validate → deploy)
 - Incident handling with validated rollback and postmortems
 - Links to copy-paste templates in `assets/`
-
----
 
 ## Quick Reference
 
@@ -49,11 +47,9 @@ It is execution-focused:
 | AgentOps | AgentOps, Langfuse, LangSmith | `agentops.init()`, trace visualization | AI agent observability, session replay |
 | Incident Response | Runbooks, PagerDuty | Documented playbooks, alert routing | Handling failures and degradation |
 
----
+## Use This Skill When
 
-## When to Use This Skill
-
-Claude should invoke this skill when the user asks for **deployment, operations, or data ingestion** help, e.g.:
+Use this skill when the user asks for **deployment, operations, monitoring, incident handling, or governance** for ML/LLM/agent systems, e.g.:
 
 - "How do I deploy this model to prod?"
 - "Design a batch + online scoring architecture."
@@ -75,8 +71,6 @@ If the user is asking only about **EDA, modelling, or theory**, prefer:
 If the user is asking about **SQL transformation (after data is loaded)**, prefer:
 
 - `ai-ml-data-science` (SQLMesh templates for staging, intermediate, marts layers)
-
----
 
 ## Decision Tree: Choosing Deployment Strategy
 
@@ -102,8 +96,6 @@ User needs to deploy: [ML System]
         └─ Safety? → See ai-mlops skill
 ```
 
----
-
 ## Core Concepts (Vendor-Agnostic)
 
 - **Lifecycle loop**: train → validate → deploy → monitor → respond → retrain/retire.
@@ -125,7 +117,7 @@ User needs to deploy: [ML System]
 
 ## Core Patterns Overview
 
-This skill provides 15 production-ready patterns organized into comprehensive guides:
+This skill provides production-ready patterns and guides organized into comprehensive references:
 
 ### Data & Infrastructure Patterns
 
@@ -248,8 +240,6 @@ This skill provides 15 production-ready patterns organized into comprehensive gu
 - Edge drift detection
 - Intermittent connectivity handling
 
----
-
 ## Resources (Detailed Guides)
 
 For comprehensive operational guides, see:
@@ -272,6 +262,17 @@ For comprehensive operational guides, see:
 - **[Drift Detection Guide](references/drift-detection-guide.md)** - Statistical tests, automated detection, retraining triggers, recovery strategies
 - **[Incident Response Playbooks](references/incident-response-playbooks.md)** - Runbooks for common failure modes, diagnostics, resolution steps
 
+**Security & Governance:**
+
+- **[Threat Models](references/threat-models.md)** - Trust boundaries, attack surface, control mapping
+- **[Prompt Injection Mitigation](references/prompt-injection-mitigation.md)** - Input hardening, tool/RAG containment, least privilege
+- **[Jailbreak Defense](references/jailbreak-defense.md)** - Robust refusal behavior, safe completion patterns
+- **[RAG Security](references/rag-security.md)** - Retrieval poisoning, context injection, sensitive data leakage
+- **[Output Filtering](references/output-filtering.md)** - Layered filters (PII/toxicity/policy), block/rewrite strategies
+- **[Privacy Protection](references/privacy-protection.md)** - PII handling, data minimization, retention, consent
+- **[Supply Chain Security](references/supply-chain-security.md)** - SBOM, dependency pinning, artifact signing
+- **[Safety Evaluation](references/safety-evaluation.md)** - Red teaming, eval sets, incident readiness
+
 **Advanced Patterns:**
 
 - **[LLM & RAG Production Patterns](references/llm-rag-production-patterns.md)** - Prompt management, safety, cost optimization, caching, monitoring
@@ -279,8 +280,6 @@ For comprehensive operational guides, see:
 - **[Online Evaluation Patterns](references/online-evaluation-patterns.md)** - A/B testing, shadow deployments, feedback loops, automated retraining
 - **[AgentOps Patterns](references/agentops-patterns.md)** - AI agent observability, session replay, cost tracking, multi-agent debugging
 - **[Edge MLOps Patterns](references/edge-mlops-patterns.md)** - TinyML, federated learning, OTA updates, device-aware CI/CD
-
----
 
 ## Templates
 
@@ -353,9 +352,7 @@ For loading data into warehouses and pipelines:
 - [assets/monitoring/template-monitoring-plan.md](assets/monitoring/template-monitoring-plan.md)
 
 **Data**
-- [data/sources.json](data/sources.json) — Curated external references
-
----
+- [data/sources.json](data/sources.json) - Curated external references
 
 ## External Resources
 
@@ -368,8 +365,6 @@ See `data/sources.json` for curated references on:
 - Feature stores (Feast, Tecton, Vertex, Databricks)
 - Streaming & messaging (Kafka, Pulsar, Kinesis)
 - LLMOps & RAG infra (vector DBs, LLM gateways, safety tools)
-
----
 
 ## Data Lake & Lakehouse
 
@@ -384,11 +379,9 @@ For comprehensive data lake/lakehouse patterns (beyond dlt ingestion), see **[da
 
 This skill focuses on **ML-specific deployment, monitoring, and security**. Use data-lake-platform for general-purpose data infrastructure.
 
----
+## Recency Protocol (Tooling Recommendations)
 
-## Trend Awareness Protocol
-
-**IMPORTANT**: When users ask recommendation questions about MLOps, you MUST use WebSearch to check current trends before answering.
+When users ask recommendation questions about MLOps tooling, verify recency before answering.
 
 ### Trigger Conditions
 
@@ -401,14 +394,11 @@ This skill focuses on **ML-specific deployment, monitoring, and security**. Use 
 - "Best way to deploy [LLM/ML model] to production?"
 - "What feature store should I use?"
 
-### Required Searches
+### Minimal Recency Check
 
-1. Search: `"MLOps best practices 2026"`
-2. Search: `"[specific tool/platform] vs alternatives 2026"`
-3. Search: `"MLOps trends January 2026"`
-4. Search: `"LLMOps new tools 2026"`
-5. Search: `"AgentOps AI agent observability 2026"`
-6. Search: `"Edge MLOps TinyML 2026"`
+1. Start from `data/sources.json` and prefer sources with `add_as_web_search: true`.
+2. If web search or browsing is available, confirm at least: (a) the tool’s latest release/docs date, (b) active maintenance signals, (c) a recent comparison/alternatives post.
+3. If live search is not available, state that you are relying on static knowledge + `data/sources.json`, and recommend validation steps (POC + evals + rollout plan).
 
 ### What to Report
 
@@ -418,18 +408,6 @@ After searching, provide:
 - **Emerging trends**: New approaches gaining traction (LLMOps, GenAI ops)
 - **Deprecated/declining**: Tools or approaches losing relevance
 - **Recommendation**: Based on fresh data, not just static knowledge
-
-### Example Topics (verify with fresh search)
-
-- Model registries (MLflow, W&B, Comet, Neptune)
-- Feature stores (Feast, Tecton, Databricks Feature Store)
-- Experiment tracking (W&B, MLflow, Comet, Neptune)
-- Model serving (KServe, Seldon, Ray Serve, BentoML)
-- Monitoring (Evidently, Arize, WhyLabs, Fiddler)
-- LLMOps tools (LangSmith, Braintrust, Humanloop, Portkey)
-- Orchestration (Airflow, Dagster, Prefect, Flyte)
-
----
 
 ## Related Skills
 
@@ -442,7 +420,5 @@ For adjacent topics, reference these skills:
 - **[ai-llm-inference](../ai-llm-inference/SKILL.md)** - Model serving optimization, quantization, batching
 - **[ai-prompt-engineering](../ai-prompt-engineering/SKILL.md)** - Prompt design patterns and best practices
 - **[data-lake-platform](../data-lake-platform/SKILL.md)** - Data lake/lakehouse infrastructure (ClickHouse, Iceberg, Kafka)
-
----
 
 Use this skill to **turn trained models into reliable services**, not to derive the model itself.

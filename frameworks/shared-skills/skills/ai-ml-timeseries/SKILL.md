@@ -5,12 +5,15 @@ description: "Operational patterns, templates, and decision rules for time serie
 
 # Time Series Forecasting — Modern Patterns & Production Best Practices
 
-**Modern Best Practices (December 2025)**:
+**Modern Best Practices (January 2026)**:
 
 - Treat **time** as a first-class axis: temporal splits, rolling backtests, and point-in-time correctness.
 - Default to **strong baselines** (naive/seasonal naive) before complex models.
 - Prevent leakage: feature windows and aggregations must use only information available at prediction time.
 - Evaluate by **horizon** and **segment**; a single aggregate metric hides failures.
+- Prefer **probabilistic** forecasts when decisions are risk-sensitive (quantiles/intervals); evaluate calibration (coverage) and use pinball/CRPS.
+- For many related series, consider **global + hierarchical** approaches (shared models + reconciliation); validate across levels and key segments.
+- Treat **time zones/DST** as first-class; validate timestamp alignment before feature generation.
 - Define retraining cadence and degraded modes (fallback model, last-known-good forecast).
 
 This skill provides **operational, copy-paste-ready workflows** for forecasting with recent advances: TS-specific EDA, temporal validation, lag/rolling features, model selection, multi-step forecasting, backtesting, generative AI (Chronos, TimesFM), and production deployment with drift monitoring.
@@ -39,13 +42,11 @@ If the user is asking about **general ML modelling, deployment, or infrastructur
 
 - [ai-ml-data-science](../ai-ml-data-science/SKILL.md) - General data science workflows, EDA, feature engineering, evaluation
 - [ai-mlops](../ai-mlops/SKILL.md) - Model deployment, monitoring, drift detection, retraining automation
-- [ai-mlops](../ai-mlops/SKILL.md) - Security, privacy, governance for ML systems
 
 If the user is asking about **LLM/RAG/search**, prefer:
 
 - [ai-llm](../ai-llm/SKILL.md) - LLM fine-tuning, prompting, evaluation
 - [ai-rag](../ai-rag/SKILL.md) - RAG pipeline design and optimization
-- [ai-rag](../ai-rag/SKILL.md) - Search and retrieval systems
 
 ---
 
@@ -116,11 +117,13 @@ User needs time series forecasting for: [Data Type]
 - Do start with naive/seasonal naive baselines and compare against learned models (Forecasting: Principles and Practice: https://otexts.com/fpp3/).
 - Do backtest with rolling windows and preserve point-in-time correctness.
 - Do monitor for data pipeline changes (missing timestamps, level shifts, calendar changes).
+- Do align metrics/loss to the decision: asymmetric costs, service levels, and probabilistic targets (quantiles/intervals) when needed.
 
 **Avoid**
 - Avoid random splits for forecasting problems.
 - Avoid features that use future information (future aggregates, leakage via target encoding).
 - Avoid optimizing only aggregate metrics; always inspect horizon-wise errors and worst segments.
+- Avoid MAPE when the target can be 0 or near-0; prefer MASE/WAPE/sMAPE and horizon-wise reporting.
 
 ## Navigation: Core Patterns
 
@@ -145,7 +148,7 @@ User needs time series forecasting for: [Data Type]
   - Benchmark comparison: LightGBM vs Prophet vs Transformers vs RNNs
   - Explainability considerations for mission-critical domains
 
-- **[LightGBM TS Patterns](references/lightgbm-ts-patterns.md)** *(2024-2025 best practices)*
+- **[LightGBM TS Patterns](references/lightgbm-ts-patterns.md)** *(feature-based forecasting best practices)*
   - Why LightGBM excels: performance + efficiency + explainability
   - Feature engineering for tree-based models
   - Hyperparameter tuning for time series

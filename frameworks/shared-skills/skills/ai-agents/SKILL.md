@@ -5,18 +5,18 @@ description: Production-grade AI agent patterns with MCP integration, agentic RA
 
 # AI Agents Development — Production Skill Hub
 
-**Modern Best Practices (January 2026)**: deterministic control flow, bounded tools, auditable state, MCP-based tool integration (now under Linux Foundation/AAIF governance), handoff-first orchestration, multi-layer guardrails, OpenTelemetry tracing, and human-in-the-loop controls (OWASP LLM Top 10: https://owasp.org/www-project-top-10-for-large-language-model-applications/).
+**Modern Best Practices (January 2026)**: deterministic control flow, bounded tools, auditable state, MCP-based tool integration, handoff-first orchestration, multi-layer guardrails, OpenTelemetry tracing, and human-in-the-loop controls (OWASP LLM Top 10: https://owasp.org/www-project-top-10-for-large-language-model-applications/).
 
 This skill provides **production-ready operational patterns** for designing, building, evaluating, and deploying AI agents.
 It centralizes **procedures**, **checklists**, **decision rules**, and **templates** used across RAG agents, tool-using agents, OS agents, and multi-agent systems.
 
-No theory. No narrative. Only what Claude can execute.
+No theory. No narrative. Only operational steps and templates.
 
 ---
 
 ## When to Use This Skill
 
-Claude should activate this skill whenever the user asks for:
+Codex should activate this skill whenever the user asks for:
 
 - Designing an agent (LLM-based, tool-based, OS-based, or multi-agent).
 - Scoping capability maturity and rollout risk for new agent behaviors.
@@ -43,6 +43,16 @@ Claude should activate this skill whenever the user asks for:
 - **Search tuning (BM25/HNSW/hybrid)** → [ai-rag](../ai-rag/SKILL.md)
 - **Security/guardrails** → [ai-mlops](../ai-mlops/SKILL.md)
 - **Inference optimization** → [ai-llm-inference](../ai-llm-inference/SKILL.md)
+
+## Default Workflow (Production)
+
+- Pick an architecture with the Decision Tree (below); default to **workflow/FSM/DAG** for production.
+- Draft an agent spec with [`assets/core/agent-template-standard.md`](assets/core/agent-template-standard.md) (or [`assets/core/agent-template-quick.md`](assets/core/agent-template-quick.md)).
+- Specify tools and handoffs with JSON Schema using [`assets/tools/tool-definition.md`](assets/tools/tool-definition.md) and [`references/api-contracts-for-agents.md`](references/api-contracts-for-agents.md).
+- Add retrieval only when needed; start with [`assets/rag/rag-basic.md`](assets/rag/rag-basic.md) and scale via [`assets/rag/rag-advanced.md`](assets/rag/rag-advanced.md) + [`references/rag-patterns.md`](references/rag-patterns.md).
+- Add eval + telemetry early via [`references/evaluation-and-observability.md`](references/evaluation-and-observability.md).
+- Run the go/no-go gate with [`assets/checklists/agent-safety-checklist.md`](assets/checklists/agent-safety-checklist.md).
+- Plan deploy/rollback and safety controls via [`references/deployment-ci-cd-and-safety.md`](references/deployment-ci-cd-and-safety.md).
 
 ---
 
@@ -248,7 +258,7 @@ What does the agent need to do?
 ### Skill Packaging & Sharing
 
 - **Skill Lifecycle** - [`references/skill-lifecycle.md`](references/skill-lifecycle.md)
-  Scaffold, validate, package, and share Claude skills with teams (Slack-ready)
+  Scaffold, validate, package, and share skills with teams (Slack-ready)
 
 - **API Contracts for Agents** - [`references/api-contracts-for-agents.md`](references/api-contracts-for-agents.md)
   Request/response envelopes, safety gates, streaming/async patterns, error taxonomy
@@ -348,6 +358,7 @@ What does the agent need to do?
 ## Trend Awareness Protocol
 
 **IMPORTANT**: When users ask recommendation questions about AI agents, you MUST use WebSearch to check current trends before answering.
+If WebSearch is unavailable, use `data/sources.json` + any available web browsing tools, and explicitly state what you verified vs assumed.
 
 ### Trigger Conditions
 
@@ -380,17 +391,17 @@ After searching, provide:
 
 - Agent frameworks (LangGraph, CrewAI, AutoGen, Semantic Kernel, Pydantic AI)
 - MCP ecosystem (available servers, new integrations)
-- Agentic coding (Claude Code, Cursor, Windsurf, Cline)
+- Agentic coding (Codex CLI, Claude Code, Cursor, Windsurf, Cline)
 - Multi-agent patterns (hierarchical, collaborative, competitive)
 - Tool use protocols (MCP, function calling)
 - Agent evaluation (SWE-Bench, AgentBench, GAIA)
-- OS/computer use agents (Claude Computer Use, browser automation)
+- OS/computer use agents (computer-use APIs, browser automation)
 
 ---
 
 ## Related Skills
 
-This skill integrates with complementary Claude Code skills:
+This skill integrates with complementary skills:
 
 ### Core Dependencies
 
@@ -414,7 +425,7 @@ This skill integrates with complementary Claude Code skills:
 
 ---
 
-## Usage Notes for Claude
+## Usage Notes
 
 - **Modern Standards**: Default to MCP for tools, agentic RAG for retrieval, handoff-first for multi-agent
 - **Lightweight SKILL.md**: Use this file for quick reference and navigation
@@ -439,18 +450,6 @@ This skill integrates with complementary Claude Code skills:
 
 ---
 
-## AI-Native SDLC Pattern (Delegate → Review → Own)
+## AI-Native SDLC Template
 
-- **Plan**: Have the agent draft `PLAN.md` or use a planning tool; require code-path trace, dependency map, and risk/edge-case list before build starts.
-- **Design**: Convert mocks to components; enforce design tokens/style guides; surface accessibility gaps; keep MCP-linked component libraries in context.
-- **Build**: Let the agent scaffold end-to-end (models/APIs/UI/tests/docs); enforce long-run guardrails (time cap, allowed commands/tools, commit/PR gating, kill switch).
-- **Test**: Demand failing test first; agent generates and runs suites; require coverage deltas and flaky-test notes; human reviews assertions and fixtures.
-- **Review**: Agent runs first-pass review tuned for P0/P1; human focuses on architecture, performance, safety, and migration risk; always own final merge.
-- **Document**: Agent drafts PR summaries, module/file notes, and mermaid diagrams; require doc updates in the same run; human adds “why” and approvals.
-- **Deploy & Maintain**: Agent links logs/metrics via MCP for triage; propose hotfixes with rollback plans; human approves rollouts; track drift/regressions with evals.
-
-## Executive Briefing (Optional)
-
-- **Value**: Coding agents compress SDLC time; delegate mechanical work, keep humans on intent/architecture; measurable gains come from tight guardrails plus eval loops.
-- **Cost & Risk**: Training vs inference economics; long runs need caps/kill switches; data/secret handling and supply-chain policies stay human-owned.
-- **Governance**: Multi-layer guardrails (policy prompt, tool allowlist, auth scopes, eval gates, audit logs); require human sign-off for deploys and safety-sensitive changes.
+- Use [`assets/agent-template-ainative-sdlc.md`](assets/agent-template-ainative-sdlc.md) for the Delegate → Review → Own runbook (guardrails + outputs checklist).
