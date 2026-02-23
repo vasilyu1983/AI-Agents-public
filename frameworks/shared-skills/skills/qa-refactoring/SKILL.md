@@ -11,6 +11,7 @@ Defaults: baseline first, smallest safe step next, and proof via tests/contracts
 
 ## Quick Start (10 Minutes)
 
+- If key context is missing, ask for: what must not change (invariants), risk level (money/auth/migrations/concurrency), deployment constraints, and the smallest boundary that can be protected by tests.
 - Confirm baseline: `main` green; reproduce the behavior you must preserve.
 - Choose a boundary: API surface, module boundary, DB boundary, or request handler.
 - Add a safety net: characterization/contract/integration tests at that boundary.
@@ -109,6 +110,12 @@ Code issue: [Refactoring Scenario]
 - New architecture design from scratch: [software-architecture-design](../software-architecture-design/SKILL.md)
 - Test strategy and coverage planning: [qa-testing-strategy](../qa-testing-strategy/SKILL.md)
 
+## Scope Boundaries (Handoffs)
+
+- Pure test flake cleanup (timers, ordering, retries): `../qa-debugging/SKILL.md`
+- Pure performance tuning (SQL, indexing, query plans): `../data-sql-optimization/SKILL.md`
+- Architecture redesign decisions (service boundaries, eventing): `../software-architecture-design/SKILL.md`
+
 ## Operational Deep Dives
 
 ### Shared Foundation
@@ -139,6 +146,9 @@ Use deep-dive guides in `references/` (load only what you need):
 - **Code Smells Guide**: [references/code-smells-guide.md](references/code-smells-guide.md)
 - **Technical Debt Management**: [references/tech-debt-management.md](references/tech-debt-management.md)
 - **Legacy Code Modernization**: [references/legacy-code-strategies.md](references/legacy-code-strategies.md)
+- **Characterization Testing**: [references/characterization-testing.md](references/characterization-testing.md) - Golden master and approval testing patterns
+- **Strangler Fig Migration**: [references/strangler-fig-migration.md](references/strangler-fig-migration.md) - Incremental legacy migration strategies
+- **Automated Refactoring Tools**: [references/automated-refactoring-tools.md](references/automated-refactoring-tools.md) - Codemods, AST transforms, and IDE refactoring
 
 ## Optional: AI / Automation
 

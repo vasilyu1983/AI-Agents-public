@@ -50,7 +50,6 @@ Build and operate production data lakes and lakehouses: ingest, transform, store
 - Medallion (bronze/silver/gold): `references/architecture-patterns.md`
 - Data mesh (domain-owned data products): `references/architecture-patterns.md`
 - Streaming-first (Kappa): `references/streaming-patterns.md`
-- Diagrams/mermaid snippets: `references/overview.md`
 
 ## Quick Start
 
@@ -90,7 +89,6 @@ sqlmesh plan && sqlmesh run
 
 | Resource | Purpose |
 |----------|---------|
-| [references/overview.md](references/overview.md) | Diagrams and decision flows |
 | [references/architecture-patterns.md](references/architecture-patterns.md) | Medallion, data mesh |
 | [references/ingestion-patterns.md](references/ingestion-patterns.md) | dlt vs Airbyte, CDC |
 | [references/transformation-patterns.md](references/transformation-patterns.md) | SQLMesh vs dbt |
@@ -102,6 +100,9 @@ sqlmesh plan && sqlmesh run
 | [references/cost-optimization.md](references/cost-optimization.md) | Cost levers and maintenance |
 | [references/operational-playbook.md](references/operational-playbook.md) | Monitoring and incident response |
 | [references/governance-catalog.md](references/governance-catalog.md) | Catalog, lineage, access control |
+| [references/data-mesh-patterns.md](references/data-mesh-patterns.md) | Domain ownership, data products, federated governance |
+| [references/data-quality-patterns.md](references/data-quality-patterns.md) | Quality gates, validation frameworks, SLOs, anomaly detection |
+| [references/security-access-patterns.md](references/security-access-patterns.md) | Row/column security, encryption, audit logging, compliance |
 
 ## Templates
 

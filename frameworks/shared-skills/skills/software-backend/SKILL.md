@@ -304,6 +304,9 @@ See [references/infrastructure-economics.md](references/infrastructure-economics
 - [references/go-best-practices.md](references/go-best-practices.md) - Go idioms, concurrency, error handling, GORM usage, testing, profiling
 - [references/rust-best-practices.md](references/rust-best-practices.md) - Ownership, async, Axum, SeaORM, error handling, testing
 - [references/python-best-practices.md](references/python-best-practices.md) - FastAPI, SQLAlchemy, async patterns, validation, testing, performance
+- [references/nodejs-best-practices.md](references/nodejs-best-practices.md) - Event loop, async patterns, Express/Fastify/NestJS/Hono, error handling, memory management, security, profiling
+- [references/database-patterns.md](references/database-patterns.md) - PostgreSQL patterns (JSONB, CTEs, partitioning), connection pooling, migration strategies, ORM comparison, index design
+- [references/message-queues-background-jobs.md](references/message-queues-background-jobs.md) - BullMQ patterns, broker comparison (Redis/SQS/Kafka/RabbitMQ), idempotent jobs, DLQ, scheduling, delivery guarantees
 - [data/sources.json](data/sources.json) - External references per language/runtime
 - Shared checklists: [../software-clean-code-standard/assets/checklists/backend-api-review-checklist.md](../software-clean-code-standard/assets/checklists/backend-api-review-checklist.md), [../software-clean-code-standard/assets/checklists/secure-code-review-checklist.md](../software-clean-code-standard/assets/checklists/secure-code-review-checklist.md)
 

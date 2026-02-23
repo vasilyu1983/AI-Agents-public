@@ -137,6 +137,9 @@ jobs:
 | [references/swift-testing.md](references/swift-testing.md) | Swift Testing framework |
 | [references/simulator-commands.md](references/simulator-commands.md) | Complete simctl reference |
 | [references/xctest-patterns.md](references/xctest-patterns.md) | XCTest/XCUITest patterns |
+| [references/xcuitest-patterns.md](references/xcuitest-patterns.md) | XCUITest UI testing patterns |
+| [references/snapshot-testing-ios.md](references/snapshot-testing-ios.md) | Visual snapshot testing |
+| [references/ios-ci-optimization.md](references/ios-ci-optimization.md) | CI pipeline optimization |
 
 ## Templates
 

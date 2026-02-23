@@ -66,6 +66,85 @@ ln -s AGENTS.md CLAUDE.md
 - Stale runbooks (dangerous during incidents)
 - Copy/paste docs that drift from code
 
+## LLM-First Documentation Patterns
+
+When documentation is consumed primarily by AI agents (AGENTS.md, CLAUDE.md, canonical docs for coding assistants), stale docs become a distinct category of bug.
+
+### Stale Docs = Agent Bugs
+
+An agent reading stale docs will:
+- Attempt to fix problems that are already solved (e.g., "9 open gating gaps" that were all sealed)
+- Use wrong model names (e.g., "Claude Haiku" when code uses `gpt-4o`)
+- Apply wrong limits (e.g., "fully gated" when free tier actually gets 3/week)
+- Re-implement features that already exist
+
+**Rule:** Treat doc updates as part of the feature PR, not as a follow-up task.
+
+### Report Integration Lifecycle
+
+Temporary investigation docs (QA reports, research exports, audit findings) must not become permanent false sources of truth.
+
+Every dated report file must carry lifecycle metadata:
+
+```yaml
+---
+Status: pending-integration | integrated | superseded
+Integrates-into: docs/product/pricing-feature-matrix.md
+Owner: @username
+Delete-by: 2026-03-15
+---
+```
+
+Workflow:
+1. Create report with `Status: pending-integration`
+2. Extract durable findings into canonical docs
+3. Mark report `Status: integrated` with date
+4. Delete after `Delete-by` date (git history preserves everything)
+
+### Living Docs: Audit Tables with Status Columns
+
+Instead of deleting audit findings, add a Status column:
+
+| Gap | Status | Sealed In |
+|-----|--------|-----------|
+| Chart aspects visible to free | Sealed | PR #26 |
+| Dreams unlimited for free | Sealed | PR #26 |
+| Ask Cosmos no rate limit | Open | — |
+
+This preserves the audit trail while showing current state. Agents can quickly scan for `Open` items.
+
+### Two-Pass Consolidation
+
+When consolidating planning docs into canonical docs:
+
+1. **First pass:** Follow the plan — extract content, delete source files, fix cross-references
+2. **Second pass:** Audit deleted content against canonical destinations
+   - `git show` deleted files to recover any unique data missed in planning
+   - Compare code to docs for drift (e.g., feature marked "Planned" but code shows it's implemented)
+
+Even thorough consolidation plans miss unique data that only lived in one source doc.
+
+### Staleness Disclaimers Over Wrong Numbers
+
+For externally-sourced data (competitor pricing, API rate limits, third-party capabilities):
+
+```markdown
+> Prices as of Feb 2026 — verify current pricing at [source].
+```
+
+A staleness disclaimer is safer than a potentially wrong number. Wrong numbers in agent-consumed docs cause incorrect implementation decisions.
+
+### Decision Log Collision Prevention
+
+When adding entries to a decision log (e.g., `### D039 — Feature Name`):
+
+```bash
+# Always check the latest entry number before adding
+grep -o '### D[0-9]*' docs/decision-log.md | tail -1
+```
+
+Numbering collisions happen when two decisions are logged in rapid succession without checking.
+
 ## Resources
 
 | Resource | Purpose |
@@ -82,6 +161,9 @@ ln -s AGENTS.md CLAUDE.md
 | [references/documentation-testing.md](references/documentation-testing.md) | Vale, markdownlint, cspell |
 | [references/ai-documentation-tools.md](references/ai-documentation-tools.md) | Mintlify, DocuWriter, GEO |
 | [references/production-gotchas-guide.md](references/production-gotchas-guide.md) | Documenting platform issues |
+| [references/documentation-metrics.md](references/documentation-metrics.md) | Doc quality, freshness, coverage scoring |
+| [references/onboarding-documentation.md](references/onboarding-documentation.md) | Developer ramp-up guides, Day 1-Week 4 |
+| [references/runbook-writing-guide.md](references/runbook-writing-guide.md) | Operational runbooks, incident response |
 
 ## Templates
 

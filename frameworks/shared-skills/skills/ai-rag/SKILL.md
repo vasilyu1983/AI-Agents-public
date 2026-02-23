@@ -219,6 +219,9 @@ For adjacent topics, reference these skills:
 - [references/search-evaluation-guide.md](references/search-evaluation-guide.md)
 - [references/user-feedback-learning.md](references/user-feedback-learning.md)
 - [references/vector-search-patterns.md](references/vector-search-patterns.md)
+- [references/graph-rag-patterns.md](references/graph-rag-patterns.md)
+- [references/embedding-model-guide.md](references/embedding-model-guide.md)
+- [references/rag-caching-patterns.md](references/rag-caching-patterns.md)
 
 **Templates**
 - [assets/context/template-context-packing.md](assets/context/template-context-packing.md)

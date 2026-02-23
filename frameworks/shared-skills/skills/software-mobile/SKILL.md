@@ -329,7 +329,11 @@ Android (FCM):
 - [references/ios-best-practices.md](references/ios-best-practices.md) — iOS architecture, concurrency, testing, performance, defensive decoding, and accessibility
 - [references/android-best-practices.md](references/android-best-practices.md) — Android/Kotlin architecture, coroutines, Compose, testing, performance
 - [references/operational-playbook.md](references/operational-playbook.md) — Mobile architecture patterns, platform-specific guides, security notes, and decision tables
-- [README.md](README.md) — Folder overview and usage notes
+- [references/cross-platform-comparison.md](references/cross-platform-comparison.md) — React Native vs Flutter vs KMP vs native: performance, ecosystem, CI/CD, migration paths
+- [references/mobile-testing-patterns.md](references/mobile-testing-patterns.md) — Testing pyramid, XCTest, Espresso, Detox, Maestro, device farms, performance testing
+- [references/offline-first-architecture.md](references/offline-first-architecture.md) — Local databases, sync strategies, conflict resolution, background sync, optimistic updates
+- [references/push-notifications-guide.md](references/push-notifications-guide.md) — APNs, FCM, permission patterns, notification channels, rich notifications, analytics
+- [references/deep-linking-guide.md](references/deep-linking-guide.md) — Universal Links, App Links, deferred deep links, React Native integration, routing architecture
 - [data/sources.json](data/sources.json) — Curated external references by platform
 
 ### Shared Checklists

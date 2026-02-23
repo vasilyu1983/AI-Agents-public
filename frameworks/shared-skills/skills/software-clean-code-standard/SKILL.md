@@ -7,7 +7,7 @@ description: Canonical, cross-language clean code standard with stable rule IDs 
 
 This skill is the authoritative clean code standard for this repository's shared skills. It defines stable rule IDs (`CC-*`), how to apply them in reviews, and how to extend them safely via language overlays and explicit exceptions.
 
-**Modern Best Practices (January 2026)**: Prefer small, reviewable changes and durable change context (https://google.github.io/eng-practices/review/developer/small-cls.html, https://google.github.io/eng-practices/review/developer/cl-descriptions.html). Use normative language consistently (RFC 2119: https://www.rfc-editor.org/rfc/rfc2119). Treat security-by-design and secure defaults as baseline (OWASP Top 10: https://owasp.org/www-project-top-ten/, NIST SSDF SP 800-218: https://csrc.nist.gov/pubs/sp/800/218/final). Build observable systems (OpenTelemetry: https://opentelemetry.io/docs/). For current tool choices, consult `data/sources.json`.
+**Modern Best Practices (January 2026)**: Prefer small, reviewable changes and durable change context. Use RFC 2119 normative language consistently. Treat security-by-design and secure defaults as baseline (OWASP Top 10, NIST SSDF). Build observable systems (OpenTelemetry). For durable links and current tool choices, consult `data/sources.json`.
 
 ---
 
@@ -20,7 +20,7 @@ This skill is the authoritative clean code standard for this repository's shared
 | Add stack nuance | Language overlay | N/A | When the base rule is too generic for a language/framework |
 | Allow an exception | Waiver record | N/A | When a rule must be violated with explicit risk |
 | Reuse shared checklists | `assets/checklists/` | N/A | When you need product-agnostic review/release checklists |
-| Reuse utility patterns | `utilities/` | N/A | When extracting shared auth/logging/errors/resilience/testing utilities |
+| Reuse utility patterns | `references/*-utilities.md` | N/A | When extracting shared auth/logging/errors/resilience/testing utilities |
 
 ## When to Use This Skill
 
@@ -65,6 +65,8 @@ Feedback needed: [What kind of guidance is this?]
 - [references/art-of-clean-code-operational-checklist.md](references/art-of-clean-code-operational-checklist.md)
 - [references/refactoring-operational-checklist.md](references/refactoring-operational-checklist.md)
 - [references/design-patterns-operational-checklist.md](references/design-patterns-operational-checklist.md)
+- [references/functional-programming-patterns.md](references/functional-programming-patterns.md) — Result/Either types, pipe/compose, immutability, pure functions, railway-oriented programming, CC-* rule mapping
+- [references/code-complexity-metrics.md](references/code-complexity-metrics.md) — Cyclomatic/cognitive complexity, Halstead metrics, nesting depth, tooling (ESLint, SonarQube, CodeClimate), refactoring triggers
 - [data/sources.json](data/sources.json) — Durable external references for review, security-by-design, and observability
 - [CONVENTIONS.md](CONVENTIONS.md) — Skill structure and validation conventions
 - [SKILL-TEMPLATE.md](SKILL-TEMPLATE.md) — Copy-paste starter for new skills
@@ -79,16 +81,16 @@ Feedback needed: [What kind of guidance is this?]
 - [assets/checklists/ux-design-review-checklist.md](assets/checklists/ux-design-review-checklist.md)
 - [assets/checklists/ux-research-plan-template.md](assets/checklists/ux-research-plan-template.md)
 
-**Utilities**
-- [utilities/README.md](utilities/README.md)
-- [utilities/auth-utilities.md](utilities/auth-utilities.md)
-- [utilities/error-handling.md](utilities/error-handling.md)
-- [utilities/config-validation.md](utilities/config-validation.md)
-- [utilities/resilience-utilities.md](utilities/resilience-utilities.md)
-- [utilities/logging-utilities.md](utilities/logging-utilities.md)
-- [utilities/observability-utilities.md](utilities/observability-utilities.md)
-- [utilities/testing-utilities.md](utilities/testing-utilities.md)
-- [utilities/llm-utilities.md](utilities/llm-utilities.md)
+**Utility Patterns**
+
+- [references/auth-utilities.md](references/auth-utilities.md)
+- [references/error-handling.md](references/error-handling.md)
+- [references/config-validation.md](references/config-validation.md)
+- [references/resilience-utilities.md](references/resilience-utilities.md)
+- [references/logging-utilities.md](references/logging-utilities.md)
+- [references/observability-utilities.md](references/observability-utilities.md)
+- [references/testing-utilities.md](references/testing-utilities.md)
+- [references/llm-utilities.md](references/llm-utilities.md)
 
 **Related Skills**
 - [../software-code-review/SKILL.md](../software-code-review/SKILL.md) — Review workflow and judgment; cite `CC-*` IDs

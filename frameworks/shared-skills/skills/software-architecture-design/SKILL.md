@@ -112,6 +112,9 @@ If fresh web access is not available, answer with best-known patterns and explic
 - [references/modern-patterns.md](references/modern-patterns.md) — 10 contemporary architecture patterns with decision trees (microservices, event-driven, serverless, CQRS, modular monolith, service mesh, edge computing)
 - [references/scalability-reliability-guide.md](references/scalability-reliability-guide.md) — CAP theorem, database scaling, caching strategies, circuit breakers, SRE patterns, observability
 - [references/architecture-trends-2026.md](references/architecture-trends-2026.md) — Platform engineering, data mesh, AI-native systems (load only when relevant)
+- [references/data-architecture-patterns.md](references/data-architecture-patterns.md) — CQRS, event sourcing, data mesh, polyglot persistence, saga patterns, consistency models
+- [references/migration-modernization-guide.md](references/migration-modernization-guide.md) — Strangler fig pattern, database decomposition, feature flags for migration, risk assessment
+- [references/api-gateway-service-mesh.md](references/api-gateway-service-mesh.md) — API gateway patterns, service mesh (Istio/Linkerd), mTLS, observability, gateway vs mesh decision framework
 - [data/sources.json](data/sources.json) — 60 curated external resources (AWS, Azure, Google Cloud, Martin Fowler, microservices.io, SRE books, multi-agent patterns, MCP/A2A protocols, platform engineering 2026)
 
 ### Templates
@@ -176,3 +179,78 @@ Use this when the user is asking for current best practices, vendor-specific con
 **Architecture-Specific**
 
 - [references/operational-playbook.md](references/operational-playbook.md) — Detailed architecture questions, decomposition patterns, security layers, and external references
+
+## Tiered Access & Data Dedup Patterns
+
+Patterns for SaaS applications with free/paid tier differentiation and cross-component data sharing.
+
+### Spread-Then-Override for Tier Filtering
+
+When filtering API responses by subscription tier, prefer spread-then-override over allowlists:
+
+```typescript
+// PASS: Forward-compatible — new fields automatically pass through to all tiers
+function filterByTier(data: FullResponse, tier: Tier): FilteredResponse {
+  return {
+    ...data,
+    advancedField: tier === 'free'
+      ? { gated: true, teaser: summarize(data.advancedField) }
+      : data.advancedField,
+  };
+}
+
+// FAIL: Allowlist — silently drops newly added fields
+function filterByTier(data: FullResponse, tier: Tier): FilteredResponse {
+  return {
+    basicField: data.basicField,
+    // New fields added to FullResponse are silently dropped until someone remembers to add them here
+  };
+}
+```
+
+The spread pattern is forward-compatible: when a developer adds a new free-tier field, it's automatically available. The allowlist requires a second edit in the filter, which is easy to forget.
+
+### Discriminated Union for Gated API Fields
+
+Use a discriminated union to type-safely handle tier-dependent API response fields:
+
+```typescript
+type GatedField<T> =
+  | { gated: false; data: T }
+  | { gated: true; teaser: { count: number; preview: string } };
+
+// Type-safe consumption — compiler enforces handling both cases
+function renderField<T>(field: GatedField<T>, render: (data: T) => ReactNode) {
+  return field.gated
+    ? <UpgradePrompt teaser={field.teaser} />
+    : render(field.data);
+}
+```
+
+This is safer than polymorphic field shapes (`Transit[] | GatedObject`) because:
+- TypeScript narrows the type via the `gated` discriminant
+- No runtime `Array.isArray()` guards needed
+- Client code can't accidentally call `.sort()` on a gated object
+
+### SWR Key Dedup for Cross-Component Data
+
+When multiple components need the same server data ("sprinkle" pattern — personalization across dozens of components):
+
+```typescript
+// Single hook — SWR deduplicates by key
+function usePersonalContext() {
+  return useSWR('/api/daily-digest?locale=ru', fetcher, {
+    dedupingInterval: 60_000,
+    revalidateOnFocus: false,
+  });
+}
+
+// 12 components call usePersonalContext() → 1 HTTP request (SWR dedup)
+```
+
+**Critical:** The SWR key must be EXACTLY the same across all consumers (including query parameters like `?locale=ru`). A single differing param creates a duplicate request.
+
+Use this pattern when:
+- The same endpoint serves data to 3+ components
+- Data freshness requirements are the same across consumers
+- Components are on the same page/layout (same React tree)

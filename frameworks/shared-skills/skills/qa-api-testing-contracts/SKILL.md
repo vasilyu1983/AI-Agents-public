@@ -96,6 +96,9 @@ Choose one or combine:
 
 - Change safety and CDC patterns: `references/contract-testing-patterns.md`
 - AI-assisted tooling and decision matrix: `references/ai-contract-testing.md`
+- API versioning and backward compatibility: `references/api-versioning-strategies.md`
+- Schema-driven and property-based testing: `references/schema-driven-testing.md`
+- OWASP API security testing: `references/api-security-testing.md`
 - Curated authoritative links: `data/sources.json`
 
 ## Related Skills

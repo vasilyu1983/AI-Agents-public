@@ -285,6 +285,9 @@ Use only when explicitly requested and policy-compliant.
 - [references/excel-formulas.md](references/excel-formulas.md) — Formula reference and patterns
 - [references/excel-formatting.md](references/excel-formatting.md) — Styling, conditional formatting
 - [references/excel-charts.md](references/excel-charts.md) — Chart types and customization
+- [references/excel-data-validation.md](references/excel-data-validation.md) — Dropdowns, input constraints, cascading validation
+- [references/excel-pivot-tables.md](references/excel-pivot-tables.md) — Pivot workarounds, summary patterns, pandas
+- [references/excel-security-protection.md](references/excel-security-protection.md) — Sheet protection, formula injection prevention
 - [data/sources.json](data/sources.json) — Library documentation links
 
 **Templates**

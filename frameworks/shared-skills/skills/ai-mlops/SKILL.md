@@ -280,6 +280,9 @@ For comprehensive operational guides, see:
 - **[Online Evaluation Patterns](references/online-evaluation-patterns.md)** - A/B testing, shadow deployments, feedback loops, automated retraining
 - **[AgentOps Patterns](references/agentops-patterns.md)** - AI agent observability, session replay, cost tracking, multi-agent debugging
 - **[Edge MLOps Patterns](references/edge-mlops-patterns.md)** - TinyML, federated learning, OTA updates, device-aware CI/CD
+- **[Cost Management & FinOps](references/cost-management-finops.md)** - ML/LLM cost modeling, budget guardrails, chargeback, cloud optimization
+- **[Experiment Tracking Patterns](references/experiment-tracking-patterns.md)** - MLflow/W&B patterns, experiment organization, artifact management, team workflows
+- **[Automated Retraining Patterns](references/automated-retraining-patterns.md)** - Trigger strategies, validation gates, safe rollout, canary retraining pipelines
 
 ## Templates
 
@@ -336,6 +339,9 @@ For loading data into warehouses and pipelines:
 - [references/multi-region-patterns.md](references/multi-region-patterns.md)
 - [references/agentops-patterns.md](references/agentops-patterns.md)
 - [references/edge-mlops-patterns.md](references/edge-mlops-patterns.md)
+- [references/cost-management-finops.md](references/cost-management-finops.md)
+- [references/experiment-tracking-patterns.md](references/experiment-tracking-patterns.md)
+- [references/automated-retraining-patterns.md](references/automated-retraining-patterns.md)
 
 **Templates**
 - [template-dlt-pipeline.md](../data-lake-platform/assets/ingestion/dlt/template-dlt-pipeline.md)

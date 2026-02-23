@@ -372,6 +372,9 @@ BEST:
 - [references/rust-solana-best-practices.md](references/rust-solana-best-practices.md) - Solana + Anchor patterns
 - [references/cosmwasm-best-practices.md](references/cosmwasm-best-practices.md) - Cosmos/CosmWasm guidance
 - [references/ton-best-practices.md](references/ton-best-practices.md) - TON contracts (Tact/Fift/FunC) and deployment
+- [references/defi-protocol-patterns.md](references/defi-protocol-patterns.md) - AMM, lending, staking, yield farming, flash loans, oracle integration
+- [references/nft-token-standards.md](references/nft-token-standards.md) - ERC-20/721/1155, SPL Token, Metaplex, token gating, metadata
+- [references/cross-chain-bridges.md](references/cross-chain-bridges.md) - Bridge architectures, LayerZero, Wormhole, IBC, security analysis
 - [../software-security-appsec/references/smart-contract-security-auditing.md](../software-security-appsec/references/smart-contract-security-auditing.md) - Smart contract audit workflows and tools (see software-security-appsec skill)
 - [data/sources.json](data/sources.json) - Curated external references per chain
 - Shared secure review checklist: [../software-clean-code-standard/assets/checklists/secure-code-review-checklist.md](../software-clean-code-standard/assets/checklists/secure-code-review-checklist.md)

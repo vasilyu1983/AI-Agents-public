@@ -1,6 +1,6 @@
 ---
 name: document-pptx
-description: Create, edit, and analyze PowerPoint (.pptx) presentations: generate decks (pitch/QBR/training), apply templates/masters, add charts/images/tables, manage speaker notes, and extract slide content. Use when users mention PowerPoint/PPTX, slides, pitch deck, QBR/board deck, or presentation automation. Supports python-pptx, PptxGenJS, and PPTX-Automizer.
+description: "Create, edit, and analyze PowerPoint (.pptx) presentations: generate decks (pitch/QBR/training), apply templates/masters, add charts/images/tables, manage speaker notes, and extract slide content. Use when users mention PowerPoint/PPTX, slides, pitch deck, QBR/board deck, or presentation automation. Supports python-pptx, PptxGenJS, and PPTX-Automizer."
 ---
 
 # Document PPTX Skill - Quick Reference
@@ -291,6 +291,9 @@ Use only when explicitly requested and policy-compliant.
 **Resources**
 - [references/pptx-layouts.md](references/pptx-layouts.md) - Master slides, themes, templates
 - [references/pptx-charts.md](references/pptx-charts.md) - Chart types, data visualization
+- [references/pptx-animations-transitions.md](references/pptx-animations-transitions.md) - Slide transitions, build animations, timing
+- [references/pptx-speaker-notes-delivery.md](references/pptx-speaker-notes-delivery.md) - Speaker notes, presenter mode, delivery prep
+- [references/pptx-template-branding.md](references/pptx-template-branding.md) - Corporate templates, multi-brand support
 - [data/sources.json](data/sources.json) - Library documentation links
 
 **Templates**

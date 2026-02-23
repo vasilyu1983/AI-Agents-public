@@ -320,6 +320,21 @@ Trend reports frequently mention synthetic/AI participants. Use with clear bound
 
 - [references/competitive-ux-analysis.md](references/competitive-ux-analysis.md) — **Step-by-step flow patterns** from industry leaders (Wise, Revolut, Shopify, Notion, Linear, Stripe) + benchmarking methodology
 
+**Research Operations & Methods:**
+
+- [references/research-repository-management.md](references/research-repository-management.md) — Repository architecture, taxonomy, atomic research, PII handling, adoption metrics
+- [references/survey-design-guide.md](references/survey-design-guide.md) — Question types, bias prevention, sampling, sample size, distribution, platform comparison
+- [references/remote-research-patterns.md](references/remote-research-patterns.md) — Moderated remote, unmoderated testing, async methods, recruitment, tool comparison
+
+**Feedback Collection & Analysis:**
+
+- [references/bigtech-feedback-patterns.md](references/bigtech-feedback-patterns.md) — How top companies collect and act on user feedback
+- [references/feedback-tools-guide.md](references/feedback-tools-guide.md) — Feedback collection tool setup guides and selection matrix
+
+**Evaluative Iteration:**
+
+- [references/evaluative-research-loop.md](references/evaluative-research-loop.md) — Prototype-parity polishing loop (two-surface audit, drift classification, fast iteration)
+
 **Data & Sources:**
 
 - [data/sources.json](data/sources.json) — Curated external references
@@ -445,3 +460,9 @@ After searching, provide:
 - [assets/testing/usability-testing-checklist.md](assets/testing/usability-testing-checklist.md) — Usability testing checklist
 - [assets/audits/heuristic-evaluation-template.md](assets/audits/heuristic-evaluation-template.md) — Heuristic evaluation
 - [assets/audits/ux-audit-report-template.md](assets/audits/ux-audit-report-template.md) — Audit report
+
+---
+
+## Evaluative Research Loop
+
+For prototype-parity polishing (fast iteration when product is "almost ideal"), see [references/evaluative-research-loop.md](references/evaluative-research-loop.md). Covers: two-surface audit, drift classification (layout/density/control/content/state), friction-based prioritization, banner/loading guardrails, localization-readiness checks, and fast iteration cadence.

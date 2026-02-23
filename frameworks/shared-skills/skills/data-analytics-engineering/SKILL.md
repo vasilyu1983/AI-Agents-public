@@ -58,6 +58,9 @@ description: Analytics engineering for reliable metrics and BI readiness. Build 
 
 - `references/modeling-patterns.md` for modeling guidance and data quality patterns.
 - `references/tool-comparison-2026.md` for dbt vs SQLMesh vs Coalesce decision matrix.
+- `references/semantic-layer-patterns.md` for semantic layer implementation (Cube, dbt Semantic Layer, AtScale, warehouse-native).
+- `references/data-quality-testing.md` for data quality test strategies, dbt tests, Great Expectations, and alert design.
+- `references/metric-governance.md` for metric lifecycle management, ownership models, deprecation policies, and metric debt prevention.
 - `data/sources.json` for curated vendor docs and trend-tracking sources (use as a WebSearch seed list).
 
 ## Related Skills

@@ -76,6 +76,9 @@ Prevent:
 | Debugging approaches | Methodologies | `references/debugging-methodologies.md` |
 | What/when to log | Logging guide | `references/logging-best-practices.md` |
 | Safe prod debugging | Production patterns | `references/production-debugging-patterns.md` |
+| Memory leaks | Detection + profiling | `references/memory-leak-detection.md` |
+| Race conditions | Diagnosis + concurrency bugs | `references/race-condition-diagnosis.md` |
+| Distributed debugging | Cross-service RCA | `references/distributed-debugging.md` |
 | Copy-paste checklist | Debugging checklist | `assets/debugging/template-debugging-checklist.md` |
 | One-page triage | Debugging worksheet | `assets/debugging/template-debugging-worksheet.md` |
 | Incident response | Incident template | `assets/incidents/template-incident-response.md` |
@@ -90,3 +93,54 @@ Prevent:
 - `../data-sql-optimization/SKILL.md` (DB performance and query tuning)
 - `../ops-devops-platform/SKILL.md` (infra/CI/CD/incident operations)
 - `../dev-api-design/SKILL.md` (API behavior, contracts, error handling)
+
+---
+
+## Operational Addendum (Feb 2026)
+
+### Fast Failure Taxonomy (Default)
+
+Classify every failure first:
+- `path/glob`: missing path, shell expansion, quoting
+- `cli-contract`: invalid flag/unsupported option
+- `baseline`: pre-existing repo failure unrelated to current change
+- `logic`: regression introduced by current edits
+- `env/toolchain`: missing runtime/binary/version mismatch
+
+### Nonzero Exit Handling Standard
+
+On any nonzero command:
+1. Record first failing line.
+2. Classify with taxonomy above.
+3. Choose smallest confirming command.
+4. Retry only after changing one variable (command/path/env/input).
+
+### Path/Glob Guardrail
+
+Before using bracketed/dynamic paths:
+
+```bash
+test -e "<path>" || echo "missing path"
+```
+
+Prefer quoted paths and explicit file discovery:
+
+```bash
+rg --files <root> | rg '<needle>'
+```
+
+### Baseline Noise Control
+
+When broad checks fail due to unrelated baseline issues:
+- isolate task-relevant errors,
+- continue with targeted verification,
+- report baseline errors separately as `pre-existing`.
+
+### Debugging Output Minimum
+
+Every debugging report includes:
+- failure signature,
+- reproduction status,
+- root-cause class,
+- fix verification command,
+- prevention mechanism added.

@@ -238,6 +238,15 @@ True expertise in prompting extends beyond writing instructions to shaping the e
 - **[Additional Patterns](references/additional-patterns.md)** - Extended prompt engineering techniques
   - Advanced patterns, edge cases, optimization strategies
 
+- **[Prompt Testing & CI/CD](references/prompt-testing-ci-cd.md)** - Automated prompt evaluation pipelines
+  - Promptfoo, DeepEval integration, regression detection, A/B testing, quality gates
+
+- **[Multimodal Prompt Patterns](references/multimodal-prompt-patterns.md)** - Vision, audio, and document input patterns
+  - Image description, OCR+LLM, bounding box prompts, Whisper conditioning, video frame analysis
+
+- **[Prompt Security & Defense](references/prompt-security-defense.md)** - Securing LLM applications against adversarial attacks
+  - Injection detection (PromptGuard, Prompt Shields), defense-in-depth, taint tracking, red team testing
+
 ---
 
 ## Navigation: Templates

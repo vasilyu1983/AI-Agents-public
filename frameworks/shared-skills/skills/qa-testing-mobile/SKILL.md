@@ -22,6 +22,11 @@ Design and execute reliable, cost-aware mobile testing across iOS and Android (n
 - Address performance, network/offline, backgrounding, and permissions.
 - Define pre-release gates, staged rollout, and store readiness checks.
 
+## When NOT to Use
+
+- Platform-specific iOS test command details -> [qa-testing-ios](../qa-testing-ios/SKILL.md)
+- Platform-specific Android test command details -> [qa-testing-android](../qa-testing-android/SKILL.md)
+
 ## Inputs
 
 - Platforms, supported OS versions, and device targets.
@@ -69,6 +74,9 @@ Design and execute reliable, cost-aware mobile testing across iOS and Android (n
 
 - `references/framework-comparison.md` for choosing between XCUITest, Espresso/Compose, Appium, Detox, Maestro, and Flutter testing.
 - `references/flake-management.md` for flake control guidance.
+- `references/device-farm-strategies.md` for cloud device farm selection and cost optimization.
+- `references/mobile-performance-testing.md` for startup, jank, memory, and battery testing.
+- `references/cross-platform-test-patterns.md` for React Native, Flutter, and KMP testing patterns.
 - `data/sources.json` for curated documentation and device lab links.
 
 ## Related Skills

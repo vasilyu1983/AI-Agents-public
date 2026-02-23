@@ -187,6 +187,20 @@ User needs time series forecasting for: [Data Type]
   - Monitoring (error drift, feature drift, volume drift)
   - Fallback strategies, streaming ingestion, data governance
 
+### Advanced Forecasting
+
+- **[Anomaly Detection Patterns](references/anomaly-detection-patterns.md)**
+  - Statistical, ML, and deep learning anomaly detectors for time series
+  - Threshold tuning, alert fatigue reduction, seasonal adjustment
+
+- **[Hierarchical Forecasting](references/hierarchical-forecasting.md)**
+  - Bottom-up, top-down, and reconciliation methods
+  - Cross-level coherence, grouped series, MinT/WLS approaches
+
+- **[Probabilistic Forecasting](references/probabilistic-forecasting.md)**
+  - Quantile regression, conformal prediction, prediction intervals
+  - Calibration metrics (CRPS, pinball loss, coverage), decision-making under uncertainty
+
 ---
 
 ## Navigation: Templates (Copy-Paste Ready)

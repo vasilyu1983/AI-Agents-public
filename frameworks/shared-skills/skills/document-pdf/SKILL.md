@@ -157,6 +157,9 @@ Use only when explicitly requested and policy-compliant.
 **Resources**
 - [references/pdf-generation-patterns.md](references/pdf-generation-patterns.md) — Complex layouts, multi-page docs
 - [references/pdf-extraction-patterns.md](references/pdf-extraction-patterns.md) — Text, table, image extraction
+- [references/pdf-accessibility-compliance.md](references/pdf-accessibility-compliance.md) — Tagged PDFs, PDF/UA, EAA compliance
+- [references/pdf-forms-interactive.md](references/pdf-forms-interactive.md) — AcroForms, form filling, digital signatures
+- [references/pdf-security-redaction.md](references/pdf-security-redaction.md) — Encryption, permissions, real redaction
 - [data/sources.json](data/sources.json) — Library documentation links
 
 **Templates**

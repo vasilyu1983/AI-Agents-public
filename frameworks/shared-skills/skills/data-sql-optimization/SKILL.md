@@ -106,6 +106,9 @@ Find detailed operational patterns and quick references in:
 - **SQL Anti-Patterns**: [references/sql-antipatterns.md](references/sql-antipatterns.md)
 - **External Sources**: [data/sources.json](data/sources.json) — vendor docs and reference links
 - **Operational Standards**: [references/operational-patterns.md](references/operational-patterns.md) — Deep operational checklists, database-specific guidance, and template selection trees
+- **Connection Pooling**: [references/connection-pooling-patterns.md](references/connection-pooling-patterns.md) — PgBouncer, RDS Proxy, pool sizing, connection leak troubleshooting
+- **Partition Strategies**: [references/partition-strategies.md](references/partition-strategies.md) — Range/list/hash partitioning, pruning, maintenance, migration patterns
+- **Monitoring & Alerting**: [references/monitoring-alerting-patterns.md](references/monitoring-alerting-patterns.md) — pg_stat_statements dashboards, alert thresholds, slow query pipelines
 
 Each file includes:
 - Copy-paste ready checklists (e.g., "query review", "index design", "explain review")
@@ -187,6 +190,9 @@ Templates are organized by database technology for precision and clarity:
 - [references/sql-antipatterns.md](references/sql-antipatterns.md)
 - [references/index-patterns.md](references/index-patterns.md)
 - [references/sql-best-practices.md](references/sql-best-practices.md)
+- [references/connection-pooling-patterns.md](references/connection-pooling-patterns.md)
+- [references/partition-strategies.md](references/partition-strategies.md)
+- [references/monitoring-alerting-patterns.md](references/monitoring-alerting-patterns.md)
 
 **Templates**
 - [assets/cross-platform/template-slow-query.md](assets/cross-platform/template-slow-query.md)

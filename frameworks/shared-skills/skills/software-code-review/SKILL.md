@@ -218,6 +218,9 @@ Use [assets/core/review-comment-guidelines.md](assets/core/review-comment-guidel
 - [references/automation-tools.md](references/automation-tools.md)
 - [references/dotnet-efcore-crypto-rules.md](references/dotnet-efcore-crypto-rules.md)
 - [references/psychological-safety-guide.md](references/psychological-safety-guide.md)
+- [references/large-pr-review-strategies.md](references/large-pr-review-strategies.md)
+- [references/security-focused-review-guide.md](references/security-focused-review-guide.md)
+- [references/code-review-metrics.md](references/code-review-metrics.md)
 
 **Templates**
 - [assets/core/pull-request-description-template.md](assets/core/pull-request-description-template.md)

@@ -100,6 +100,17 @@ User needs:
 - Mixing draft notes and final requirements
 - Metrics without measurement plan
 - Docs with no owner or review cadence
+- Dual-state wording that mixes live behavior, target behavior, and migration behavior in one statement
+
+---
+
+## LLM Ambiguity Gate (Required for planning docs)
+
+- Label every behavior as exactly one of: `Live now`, `Target`, or `Transition` (with owner + end condition).
+- Label every metric as either `Reference signal` or `Release blocker`.
+- Define one canonical feature-gating contract per feature; all other docs must link to it instead of restating variants.
+- Keep assumptions/open questions separate from final decisions.
+- If conflicts exist across docs, mark one canonical source and add follow-up tasks to resolve mirrors.
 
 ---
 
@@ -121,6 +132,9 @@ Use:
 - [ ] Unambiguous acceptance criteria
 - [ ] Edge cases documented
 - [ ] AI can execute without clarification
+- [ ] Every behavior is labeled `Live now`, `Target`, or `Transition`
+- [ ] Metrics are labeled `Reference signal` or `Release blocker`
+- [ ] Each feature-gating rule has one canonical source (no conflicting duplicates)
 
 ### CLAUDE.md Quality
 - [ ] Architecture reflects actual structure
@@ -142,6 +156,9 @@ Use:
 | [references/convention-mining.md](references/convention-mining.md) | Extracting conventions |
 | [references/tribal-knowledge-recovery.md](references/tribal-knowledge-recovery.md) | Git history analysis |
 | [references/docs-audit-commands.md](references/docs-audit-commands.md) | Audit shell commands |
+| [references/stakeholder-alignment.md](references/stakeholder-alignment.md) | Stakeholder buy-in, RACI, conflict resolution |
+| [references/acceptance-criteria-patterns.md](references/acceptance-criteria-patterns.md) | Testable ACs, BDD, edge case coverage |
+| [references/prd-review-facilitation.md](references/prd-review-facilitation.md) | Running PRD reviews, feedback categorization |
 | [data/sources.json](data/sources.json) | Curated external sources |
 
 ## Templates

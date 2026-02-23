@@ -138,6 +138,9 @@ const nextConfig: NextConfig = {
 | [references/svelte-sveltekit-patterns.md](references/svelte-sveltekit-patterns.md) | Svelte 5, SvelteKit |
 | [references/remix-react-patterns.md](references/remix-react-patterns.md) | Remix loaders, actions |
 | [references/operational-playbook.md](references/operational-playbook.md) | Architecture, security |
+| [references/state-management-patterns.md](references/state-management-patterns.md) | TanStack Query, Zustand, Jotai, Redux Toolkit |
+| [references/testing-frontend-patterns.md](references/testing-frontend-patterns.md) | Vitest, Testing Library, Playwright, MSW |
+| [references/performance-optimization.md](references/performance-optimization.md) | Core Web Vitals, code splitting, image/font optimization |
 
 ## Templates
 
@@ -156,3 +159,223 @@ const nextConfig: NextConfig = {
 | [dev-api-design](../dev-api-design/SKILL.md) | REST/GraphQL |
 | [software-code-review](../software-code-review/SKILL.md) | Code review |
 | [ops-devops-platform](../ops-devops-platform/SKILL.md) | CI/CD |
+
+---
+
+## React 19 + Frontend Ops Addendum (Feb 2026)
+
+### Frequent Lint/Type Pitfalls (Operational)
+
+Treat these as first-class fix targets during frontend work:
+- `react-hooks/set-state-in-effect`
+- `react-hooks/purity`
+- `react-hooks/rules-of-hooks`
+- `react/no-unescaped-entities`
+
+### Frontend Verification Order
+
+1. Lint edited files only.
+2. Type-check edited feature surface.
+3. Run full project lint/type/build once before handoff.
+
+Avoid repeated full builds while known local lint/type failures remain.
+
+### CLI Drift Guard (ESLint/Vitest)
+
+Do not assume flags from older setups.
+
+Use:
+```bash
+npx eslint --help
+npx vitest --help
+```
+
+Then run commands compatible with the detected CLI mode.
+
+### Frontend Handoff Requirements
+
+Include in final output:
+- exact files changed,
+- lint/type/build commands run,
+- whether failures are new or baseline,
+- one prevention note for any repeated class of issue.
+
+### Route Deletion Link Audit
+
+After deleting or renaming any page/route/component file:
+
+1. Grep the codebase for the old path/import (e.g., `rg "from.*old-module"`, `rg "href.*old-route"`).
+2. Update or remove all references (imports, `<Link>` hrefs, redirects, sitemap entries).
+3. Check navigation components, breadcrumbs, and cross-link cards for stale references.
+
+Skipping this creates runtime 404s and broken imports that surface only in production.
+
+### Architecture Pre-Check Before New Infrastructure
+
+Before adding new infrastructure (new context providers, new API routes, new state stores):
+
+1. Search for existing patterns that already solve the problem (`rg "createContext"`, `rg "useQuery"`).
+2. Prefer extending existing infrastructure over creating parallel systems.
+3. If new infrastructure is truly needed, document why the existing pattern is insufficient.
+
+### Route Migration Checklist
+
+When consolidating or restructuring routes (e.g., many pages → tabbed architecture):
+
+1. Map all existing routes to their new destinations.
+2. Add redirects for removed routes (Next.js `redirects` in config or middleware).
+3. Update all internal `<Link>` components, `router.push()` calls, and shared navigation configs.
+4. Update sitemap, robots.txt, and any SEO metadata referencing old routes.
+5. Run a full-app link audit: `rg "href=" --glob "*.tsx"` to verify no stale paths remain.
+
+---
+
+## React 19 + Next.js 16 Production Gotchas (Feb 2026)
+
+Seven patterns learned from real production sessions.
+
+### 1. Hydration Safety Pattern
+
+In Next.js 16 + React 19 SSR, server components run in Node.js (UTC, no `window`) while client components hydrate in the browser. Every `new Date()`, `localStorage`, and browser API call is a potential mismatch.
+
+```typescript
+// PASS: useState(null) + useEffect — server renders skeleton, client fills real value
+const [moonPhase, setMoonPhase] = useState<string | null>(null);
+useEffect(() => {
+  setMoonPhase(calculateMoonPhase(new Date()));
+}, []);
+if (!moonPhase) return <Skeleton />;
+
+// FAIL: useMemo with Date() — server (UTC midnight) !== client (user timezone)
+const moonPhase = useMemo(() => calculateMoonPhase(new Date()), []);
+// Causes React Error #418 (hydration mismatch), 53 occurrences in production
+```
+
+**Rule**: Use `useState(null) + useEffect` for ANY computation depending on:
+- `new Date()` (timezone-dependent)
+- `localStorage` / `sessionStorage` (not available on server)
+- `window.*` properties (navigator, screen, location)
+- Any browser-only API
+
+### 2. Safe Storage Access (String Discriminator Pattern)
+
+JavaScript evaluates function arguments BEFORE the function body executes. Passing `localStorage` to a safe wrapper defeats the try/catch:
+
+```typescript
+// FAIL: localStorage is evaluated at the CALL SITE, before try/catch
+function safeGet(storage: Storage, key: string) {
+  try { return storage.getItem(key); } // too late — already threw
+  catch { return null; }
+}
+safeGet(localStorage, 'theme'); // SecurityError in Firefox (cookies disabled)
+
+// PASS: String discriminator — storage access inside try/catch
+function safeGet(type: 'local' | 'session', key: string) {
+  try {
+    const storage = type === 'local' ? window.localStorage : window.sessionStorage;
+    return storage.getItem(key);
+  } catch { return null; }
+}
+safeGet('local', 'theme'); // Safe — never throws
+```
+
+### 3. React Three Fiber (R3F) Prop Spreading
+
+Never rest-spread props onto R3F/Three.js elements. Unknown props corrupt Three.js internal state silently:
+
+```typescript
+// FAIL: Spreads isHovered, color, etc. onto <mesh> — breaks click handlers
+<mesh {...handlers} position={pos}>
+
+// PASS: Destructure and pass only known R3F event props
+const { onClick, onPointerOver, onPointerOut } = handlers;
+<mesh onClick={onClick} onPointerOver={onPointerOver} onPointerOut={onPointerOut} position={pos}>
+```
+
+### 4. Defensive Response Parsing
+
+Dev servers, CDNs, and proxies can return HTML error pages. Never call `.json()` without guards:
+
+```typescript
+// FAIL: Throws SyntaxError when server returns HTML error page
+const data = await response.json();
+
+// PASS: Check response.ok + try/catch json()
+if (!response.ok) {
+  throw new Error(`API error: ${response.status}`);
+}
+let data;
+try {
+  data = await response.json();
+} catch {
+  throw new Error('Invalid JSON response — server may have returned an error page');
+}
+```
+
+### 5. The Truthy `||` Fallback Trap
+
+`data.field || []` does NOT protect against truthy non-array objects:
+
+```typescript
+// FAIL: { __gated: true, teaser: "..." } is truthy — passes through as "the array"
+const items = data.transits || [];
+items.sort(); // TypeError: items.sort is not a function
+
+// PASS: Array.isArray() at system boundaries
+const items = Array.isArray(data.transits) ? data.transits : [];
+```
+
+### 6. Turbopack + macOS File Descriptor Limit
+
+macOS default ulimit (~256) is too low for Turbopack in large Next.js projects. Causes:
+- `EMFILE: too many open files` errors
+- `build-manifest.json` ENOENT panics
+- Stale chunk loading failures in browser
+
+Fix:
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+ulimit -n 10240
+
+# Emergency recovery when .next is corrupted
+# 1. Kill dev server
+# 2. rm -rf .next
+# 3. npm run dev
+```
+
+### 7. Procedural Generation over External Assets (WebGL)
+
+For WebGL/Three.js visuals, procedural generation (GLSL shaders) is more robust than external texture files:
+- No 404 errors from missing textures
+- No sandbox/CORS issues
+- No loading states or error cascades
+- Zero external file dependencies
+- Often more visually striking (simplex noise patterns)
+
+## Ops Runbook: SEO-Safe UI and Copy Refresh
+
+Use this for redesigns, pricing-copy updates, and landing refreshes that must not break indexed routes.
+
+### Command Checklist
+
+```bash
+# 1) Verify route/link impact
+rg -n "href=|router\.push\(|redirect\(" src app
+
+# 2) Verify metadata/sitemap/robots touchpoints
+rg -n "metadata|sitemap|robots|canonical|hreflang|alternates" src app
+
+# 3) Sweep for stale phrases (pricing/trial/campaign copy)
+rg -n "free trial|7-day|old-price|legacy-plan-name" src/messages src/components
+
+# 4) Build to catch route/import regressions
+npm run build
+```
+
+### No-Regressions Rules
+
+- Do not remove or rename indexed routes without explicit redirect mapping.
+- Keep locale routes and metadata aligned; no mixed-language metadata.
+- Update copy and analytics labels together when pricing language changes.
+- Run link audit after deleting/renaming components used by navigation cards.
+
