@@ -1,6 +1,6 @@
 ---
-name: claude-code-agents
-description: Create and maintain Claude Code agents/subagents (.claude/agents/*.md) with YAML frontmatter (name/description/tools/model/permissionMode/skills/hooks), least-privilege tool selection, delegation patterns (Task), context budgeting, and safety best practices.
+name: agents-subagents
+description: Create and maintain AI coding agent subagents (.claude/agents/*.md, .codex/agents/*.md) with YAML frontmatter (name/description/tools/model/permissionMode/skills/hooks), least-privilege tool selection, delegation patterns (Task), context budgeting, and safety best practices.
 ---
 
 # Claude Code Agents
@@ -81,9 +81,44 @@ For full tool semantics and permission patterns, use `references/agent-tools.md`
 
 ## Navigation
 
-- `frameworks/shared-skills/skills/claude-code-agents/references/agent-patterns.md`
-- `frameworks/shared-skills/skills/claude-code-agents/references/agent-tools.md`
-- `frameworks/shared-skills/skills/claude-code-agents/data/sources.json`
-- `frameworks/shared-skills/skills/claude-code-skills/SKILL.md`
-- `frameworks/shared-skills/skills/claude-code-commands/SKILL.md`
-- `frameworks/shared-skills/skills/claude-code-hooks/SKILL.md`
+- `frameworks/shared-skills/skills/agents-subagents/references/agent-patterns.md`
+- `frameworks/shared-skills/skills/agents-subagents/references/agent-tools.md`
+- `frameworks/shared-skills/skills/agents-subagents/data/sources.json`
+- `frameworks/shared-skills/skills/agents-skills/SKILL.md`
+- `frameworks/shared-skills/skills/agents-hooks/SKILL.md`
+
+## Operational Guardrails: Subagent Orchestration
+
+Use these defaults unless the user explicitly asks for wider fan-out.
+
+### Hard Limits
+
+- Keep active subagents <= 3.
+- Keep each subagent scope to one responsibility and a bounded file set.
+- Do not let multiple subagents edit the same file in parallel.
+
+### Handoff Template (Required)
+
+```text
+Goal:
+Constraints:
+Owned files:
+Do-not-touch files:
+Output format:
+Definition of done:
+```
+
+### Merge Discipline
+
+1. Wait for subagent outputs.
+2. Review for overlap/conflicts.
+3. Integrate one subagent result at a time.
+4. Run verification gates before final synthesis.
+
+### Stop Conditions
+
+Stop and re-plan when:
+- two subagents propose conflicting edits to same module,
+- repeated retries happen without new evidence,
+- context window starts dropping prior decisions.
+

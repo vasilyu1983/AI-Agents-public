@@ -80,6 +80,9 @@ Avoid:
 | Sandbox tools | Isolation tiers + hardening | `references/tool-sandboxing.md` |
 | Test multi-agent systems | Coordination patterns + suite template | `references/multi-agent-testing.md` |
 | Use LLM-as-judge safely | Biases + mitigations | `references/llm-judge-limitations.md` |
+| Test prompt injection attacks | Injection taxonomy + test cases | `references/prompt-injection-testing.md` |
+| Detect hallucinations | Detection methods + scoring | `references/hallucination-detection.md` |
+| Design eval datasets | Dataset construction + maintenance | `references/eval-dataset-design.md` |
 | Start from templates | Harness + scoring sheet + log | `assets/` |
 
 ## Decision Tree
@@ -114,6 +117,9 @@ Testing an agent?
 - `references/tool-sandboxing.md` - sandbox tiers, tool hardening, injection/exfil test ideas
 - `references/multi-agent-testing.md` - coordination testing patterns + suite template
 - `references/llm-judge-limitations.md` - LLM-as-judge biases, limits, mitigations
+- `references/prompt-injection-testing.md` - Injection taxonomy, test cases, and defense validation
+- `references/hallucination-detection.md` - Hallucination detection methods, scoring, and benchmarks
+- `references/eval-dataset-design.md` - Evaluation dataset construction, versioning, and maintenance
 
 ### Templates
 

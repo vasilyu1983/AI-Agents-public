@@ -248,6 +248,12 @@ For C#/.NET crypto/fintech services using Entity Framework Core, see:
 - [references/owasp-top-10.md](references/owasp-top-10.md) — OWASP Top 10:2025 (final) guide + 2021→2025 diffs
 - [references/advanced-xss-techniques.md](references/advanced-xss-techniques.md) — 2024-2025 XSS: mutation XSS, polyglots, SVG attacks, context-aware encoding
 
+#### API Security, Incident Response & Threat Modeling
+
+- [references/api-security-patterns.md](references/api-security-patterns.md) — OWASP API Security Top 10, BOLA/BFLA, rate limiting, API keys, GraphQL/gRPC security
+- [references/incident-response-playbook.md](references/incident-response-playbook.md) — IR team roles, severity triage, containment by incident type, evidence handling, communication templates, postmortem
+- [references/threat-modeling-guide.md](references/threat-modeling-guide.md) — STRIDE, PASTA, data flow diagrams, attack trees, risk scoring (CVSS/DREAD), lightweight agile threat modeling
+
 #### Foundation Security Patterns
 
 - [references/secure-design-principles.md](references/secure-design-principles.md) — Defense in depth, least privilege, secure defaults
@@ -342,6 +348,17 @@ After searching, provide:
 - API security (BOLA, broken auth)
 
 ---
+
+## Pre-Implementation Security Gate
+
+Before building any feature that involves storage, uploads, or user-generated content:
+
+1. **Threat model first**: Identify what an attacker could do with this feature (file upload → malware, storage → data exfiltration, user content → XSS).
+2. **Check OWASP mapping**: Map the feature to relevant OWASP Top 10 categories above.
+3. **Define constraints before coding**: Set file type allowlist, size limits, storage isolation, and access controls before writing the first line.
+4. **Review existing security patterns**: Check if the project already has upload/storage security utilities to reuse.
+
+Building storage/upload features without upfront security constraints leads to retroactive hardening that is more expensive and error-prone.
 
 ## Operational Playbooks
 - [references/operational-playbook.md](references/operational-playbook.md) — Core security principles, OWASP summaries, authentication patterns, and detailed code examples

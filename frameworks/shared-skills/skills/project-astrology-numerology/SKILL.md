@@ -34,6 +34,7 @@ First-pass checks before deep dives:
 - D026: quadrant loss from `atan(y/x)`; use `atan2(y, x)` for angles.
 - D027: local timezone contamination via `new Date(y, m, d, h)`; convert via `Date.UTC()` before Julian Day.
 - D028: date-only strings parsed at UTC midnight (day shift); parse into a safe UTC instant (or use an explicit time).
+- D029: eclipse type/position row-swap — Solar must be New Moon (conjunction), Lunar must be Full Moon (opposition); verify Saros numbers match the correct type.
 - Etc/GMT sign confusion: validate offset sign and direction when using IANA "Etc/GMT" zones.
 
 Use the full checklists and debugging flows in [references/operational-playbook.md](references/operational-playbook.md).
@@ -58,6 +59,7 @@ These standards are used to decide whether a result is acceptable or requires in
 - Planet longitudes: target within plus/minus 0.1 degrees versus astro.com for major bodies.
 - House cusps: target within plus/minus 0.5 degrees (house systems vary; high latitudes are fragile).
 - Ascendant/MC: target within plus/minus 0.1 degrees (high impact).
+- Vertex: target within plus/minus 0.5 degrees (colatitude method; less sensitive than ASC/MC).
 - Prefer transparent tolerances over exact equality; use `toBeCloseTo` style comparisons in tests.
 
 See [references/operational-playbook.md](references/operational-playbook.md) for verification checklists.
@@ -111,6 +113,27 @@ Resources
 - [references/angel-numbers.md](references/angel-numbers.md) - Angel number sequences and common patterns
 - [references/codebase-patterns.md](references/codebase-patterns.md) - Extension patterns
 - [references/testing-patterns.md](references/testing-patterns.md) - Test writing guide
+
+Extended Numerology Resources
+- [references/advanced-numerology.md](references/advanced-numerology.md) - Secondary calculations (Maturity, Karmic Debt, Personal Year, etc.)
+- [references/challenge-pinnacle-numbers.md](references/challenge-pinnacle-numbers.md) - Challenge Numbers, Pinnacle Numbers, Period Cycles
+- [references/chaldean-numerology.md](references/chaldean-numerology.md) - Chaldean system, letter mappings, compound numbers
+- [references/numerology-compatibility.md](references/numerology-compatibility.md) - Relationship numerology, Life Path matrix, combined numbers
+
+Specialized Astrology Techniques
+- [references/minor-aspects.md](references/minor-aspects.md) - Minor aspects, harmonic theory, aspect patterns
+- [references/declination-guide.md](references/declination-guide.md) - Declination, parallels, out-of-bounds planets
+- [references/midpoints-guide.md](references/midpoints-guide.md) - Midpoint calculation, Ebertin cosmobiology
+- [references/dignity-scoring.md](references/dignity-scoring.md) - Essential and accidental dignity scoring
+- [references/planetary-conditions.md](references/planetary-conditions.md) - Combustion, cazimi, retrograde, speed conditions
+- [references/antiscia-guide.md](references/antiscia-guide.md) - Antiscia and contra-antiscia mirror points
+- [references/sabian-symbols.md](references/sabian-symbols.md) - 360 degree symbols for interpretive depth
+- [references/planetary-hours.md](references/planetary-hours.md) - Classical planetary hours and day rulers
+- [references/time-lord-techniques.md](references/time-lord-techniques.md) - Hellenistic time-lord systems (Western dashas)
+- [references/synastry-composite.md](references/synastry-composite.md) - Synastry, composite, and Davison relationship charts
+- [references/relocation-astrology.md](references/relocation-astrology.md) - Astrocartography, relocated charts, local space
+- [references/arabic-parts-lots.md](references/arabic-parts-lots.md) - Classical Lots (Fortune, Spirit, Hermetic series)
+- [references/eclipse-guide.md](references/eclipse-guide.md) - Eclipse interpretation, Saros cycles, prenatal eclipses
 
 Predictive Astrology Resources
 - [references/lunar-nodes-guide.md](references/lunar-nodes-guide.md) - North/South Node interpretation

@@ -118,6 +118,123 @@ EXECUTION PATTERN:
    b. Report final status
 ```
 
+
+---
+
+## Worktree-First Delivery
+
+For production coding sessions, wrap `/execute-plan` with a delivery guardrail:
+
+1. Create one isolated worktree per feature.
+2. Execute only the approved plan scope in that worktree.
+3. Run repo-defined quality gate(s) before PR (example: `npm run test:analytics-gate`).
+4. Open one focused PR per feature branch.
+
+Example flow:
+
+```bash
+./scripts/git/feature-workflow.sh start <feature-slug>
+cd .worktrees/<feature-slug>
+# implement plan steps
+../../scripts/git/feature-workflow.sh gate
+../../scripts/git/feature-workflow.sh pr --title "feat: <summary>"
+```
+
+---
+
+## Agent Session Management (Lessons Learned)
+
+Real-world evidence from production coding sessions (Feb 2026):
+
+### Context Exhaustion Is the Dominant Constraint
+
+A single session covering 5 workstreams (i18n, auth, products, retention, docs) ran to 121MB / 33 context continuations. Each continuation lost detail from prior context, causing:
+- Repeated investigation of known pre-existing test failures
+- Redundant file reads that were already in earlier context
+- Solutions that contradicted decisions made earlier in the same session
+
+**Rule: One feature per session.** If scope creep appears during execution, checkpoint progress and start a fresh session for the new scope.
+
+| Session Style | Messages | Context Continuations | Errors | Outcome |
+|--------------|----------|----------------------|--------|---------|
+| Focused (chart gating) | 5 | 0 | 0 | Clean, zero rework |
+| Medium (crush UI + BirthTimeInput) | 8 | 0 | 1 rewrite | Good after UX audit |
+| Sprawling (3D + retention + quota + crush + i18n + docs) | 38 | 3+ | Multiple | Several errors, context loss |
+| Massive (full redesign implementation) | 100+ | 33 | Many | Completed but costly |
+
+### Pre-Written Plans Eliminate Rework
+
+Sessions with pre-written, numbered step plans had near-zero rework:
+- Docs actualization (11 steps, 10 files): zero rework, linear execution
+- i18n refactor (5 phases, 7 tasks): systematic, minimal rework
+
+Sessions without plans had 1-3 rewrites:
+- BirthTimeInput: v1 (3 dropdowns) → v2 (hybrid with numeric input) after UX skill audit
+- Phase 3 CTAs: multiple pivots as bugs were discovered during testing
+
+**Rule:** For any task touching 3+ files, write a plan first. The plan should include:
+1. Numbered steps with specific file paths
+2. Verification criteria per step
+3. Dependencies between steps
+
+### Verify Plans Against Actual SDK Types
+
+Plans written from documentation may reference APIs that don't match the actual SDK TypeScript types:
+- Plan said `stripe.customers.list().total_count` → SDK has `data.length`
+- Plan assumed `invoice.subscription` → API changed to `invoice.parent.subscription_details.subscription`
+
+**Rule:** Before executing a plan step that calls an external SDK, grep the actual TypeScript definitions:
+```bash
+# Verify Stripe SDK types before using planned API calls
+grep -r "total_count" node_modules/stripe/types/ || echo "NOT FOUND — check actual type"
+```
+
+### Checkpoint Protocol for Long Sessions
+
+If a session must span multiple features:
+1. After completing each feature, summarize: what changed, what was verified, what's pending
+2. Commit completed work before starting next feature
+3. If context starts feeling thin (repeating file reads, losing track of changes), start a new session
+4. Transfer context via a written summary in the plan file, not by relying on conversation history
+
+---
+
+## Command Preflight Protocol (Lessons Learned)
+
+Use this preflight before running broad edits/tests/reviews to avoid avoidable tool churn.
+
+### 60-Second Preflight
+
+1. Confirm context:
+   - `pwd`
+   - `git branch --show-current`
+   - `ls -la`
+2. Verify target paths before running heavy commands:
+   - `test -e <path>` or `rg --files <root> | head`
+   - Prefer discovery first, then exact-path commands.
+3. Validate command flags against actual tool version:
+   - Example: run `npx eslint --help` before assuming legacy flags like `--file`.
+4. Quote glob-sensitive paths (especially App Router segments):
+   - Use `'app/src/app/ask/[category]/page.tsx'` to avoid shell glob expansion errors.
+5. Fail fast on path errors:
+   - If command reports missing path/pattern, stop and re-derive repository shape before continuing.
+
+### Git/Branch Safety Preflight
+
+Run before `checkout`, `merge`, and `commit`:
+
+- `git status --porcelain` (must be clean or intentionally scoped)
+- `test -f .git/index.lock && ps aux | rg "[g]it"` (lock/process check)
+- If switching branches with local changes, commit or stash first.
+
+### E2E/Server Preflight
+
+Before Playwright/full E2E:
+
+- Verify target app dir exists (`test -d app`)
+- Verify web server port is free (`lsof -i :3001`)
+- Ensure test file/glob exists before running (`rg --files tests/e2e | rg <pattern>`)
+
 ---
 
 ## Structured Patterns
@@ -389,6 +506,9 @@ Step 5: Add edge case tests
 - [references/planning-templates.md](references/planning-templates.md) - Plan templates for common scenarios
 - [references/session-patterns.md](references/session-patterns.md) - Multi-session project management
 - [references/flow-metrics.md](references/flow-metrics.md) - DORA metrics, WIP limits, flow optimization
+- [references/agile-ceremony-patterns.md](references/agile-ceremony-patterns.md) - Sprint ceremonies, retrospectives, facilitation patterns
+- [references/technical-debt-management.md](references/technical-debt-management.md) - Debt classification, prioritization, remediation workflows
+- [references/remote-async-workflows.md](references/remote-async-workflows.md) - Async-first patterns, distributed team coordination
 - [assets/template-dor-dod.md](assets/template-dor-dod.md) - DoR/DoD checklists, estimation, cross-functional coordination
 - [assets/template-work-item-ticket.md](assets/template-work-item-ticket.md) - Work item ticket template (DoR/DoD + acceptance criteria)
 - [data/sources.json](data/sources.json) - Workflow methodology references
@@ -399,3 +519,112 @@ Step 5: Add edge case tests
 - [../docs-ai-prd/SKILL.md](../docs-ai-prd/SKILL.md) - Requirements to plan conversion
 - [../qa-testing-strategy/SKILL.md](../qa-testing-strategy/SKILL.md) - TDD workflow integration
 - [../qa-debugging/SKILL.md](../qa-debugging/SKILL.md) - Systematic debugging plans
+
+---
+
+## Operational Addendum (Feb 2026)
+
+### Shell Safety Gate (Run Before Any File/CLI Operation)
+
+1. Path check: `test -e <path>` (or `ls <path>`) before `sed/cat/rg` on a file.
+2. Quote dynamic paths and patterns.
+3. For multi-pattern ripgrep, always use `-e` form:
+
+```bash
+rg -n -e "pattern one" -e "pattern two" <targets>
+```
+
+4. For paths with glob chars (`[]`, `*`, `?`) or spaces, use quoting/escaping.
+
+### CLI Compatibility Probe (First Use Per Tool)
+
+Before first use in a session, run one capability probe and cache syntax for the rest of the task:
+
+```bash
+npx eslint --help
+npx vitest --help
+npx tsc --help
+```
+
+Use probed syntax, not assumed flags.
+
+### Tiered Verification Protocol
+
+Run checks in this order:
+
+1. Edited-file lint/type checks.
+2. Feature-scope tests.
+3. Full lint/type/build gate once before handoff.
+
+If the same baseline failure repeats unchanged twice, stop re-running broad checks and either:
+- narrow scope, or
+- record a baseline waiver in the handoff.
+
+### Failure Ledger (Mandatory on Nonzero Exit)
+
+After every failed command, capture:
+- Command
+- Failure class (path/glob/flag/env/baseline)
+- What changed before retry
+
+Do not retry an identical command without changing inputs/environment.
+
+### Done/Not Done Closure Contract
+
+Every execution summary must end with:
+- `Done`: completed acceptance criteria
+- `Not done`: remaining items/blockers
+- `Checks run`: exact commands run + pass/fail/skip
+- `Next required action`: one concrete next step
+
+### Session Scope Guard
+
+At session start, define a maximum scope boundary:
+
+1. State 1-2 deliverables for this session (not a wishlist).
+2. If scope creeps beyond the boundary, stop and split into a follow-up session.
+3. Prefer completing one feature fully over starting three partially.
+
+A session that exhausts context with half-finished work is worse than a session that ships one clean change.
+
+### Proactive Plan-Doc Reading
+
+Before implementing any feature step:
+
+1. Check if a plan/spec doc exists for the current feature (e.g., `docs/redesign/`, `docs/product/`, project plan files).
+2. Read the relevant section of the plan before writing code.
+3. Do not rely on user to paste plan context into the conversation — proactively find and load it.
+
+This prevents building features that contradict the agreed plan or miss requirements documented elsewhere.
+
+## Ops Session Control: Keep LLM Execution Reliable
+
+### Scope Limits (Default)
+
+- One feature stream per execution session.
+- If work spans more than 3 independent domains (for example i18n + pricing + analytics + UI), split into separate sessions.
+- For tasks touching 3+ files, require a numbered plan before edits.
+
+### Fan-Out Limits for Subtasks
+
+- Max 3 active subagents at once.
+- Assign each subagent a file ownership boundary.
+- Merge after each batch before spawning new subagents.
+
+### Practical Batch Pattern
+
+```text
+Batch 1: discovery + plan
+Batch 2: implementation in one domain
+Batch 3: verification + fixups
+Batch 4: handoff summary
+```
+
+### Checkpoint Contract (every batch)
+
+Report in one block:
+- what changed,
+- what was verified,
+- what is blocked,
+- exact next command.
+

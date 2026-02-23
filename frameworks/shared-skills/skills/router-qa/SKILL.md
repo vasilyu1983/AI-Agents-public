@@ -201,7 +201,7 @@ Use `frameworks/shared-skills/skills/router-qa/data/sources.json` for optional w
 
 **Route to**: `qa-docs-coverage`
 
-**If the user asks about CLAUDE.md/AGENTS.md/project memory/large codebase setup**: route to `claude-code-project-memory` (supporting: `qa-docs-coverage`, `docs-codebase`)
+**If the user asks about CLAUDE.md/AGENTS.md/project memory/large codebase setup**: route to `agents-project-memory` (supporting: `qa-docs-coverage`, `docs-codebase`)
 
 **Example questions**:
 
@@ -323,7 +323,7 @@ VALIDATED AGENT
 LARGE CODEBASE
   │
   ▼
-claude-code-project-memory ► Hierarchical CLAUDE.md setup
+agents-project-memory ► Hierarchical CLAUDE.md setup
   │                          (root + subdirectory docs)
   ├─► Root CLAUDE.md ────────► Architecture, conventions
   ├─► Subdirectory docs ─────► Module-specific context
@@ -405,7 +405,7 @@ qa-testing-strategy → qa-testing-mobile → qa-testing-ios (if iOS) → qa-tes
 | Add resilience | `qa-resilience` | `qa-observability` |
 | Refactor code | `qa-refactoring` | `qa-testing-strategy` |
 | Audit docs | `qa-docs-coverage` | `docs-codebase` |
-| Large codebase setup | `claude-code-project-memory` | `qa-docs-coverage`, `docs-codebase` |
+| Large codebase setup | `agents-project-memory` | `qa-docs-coverage`, `docs-codebase` |
 
 ---
 

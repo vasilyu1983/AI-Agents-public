@@ -45,7 +45,7 @@ OPERATIONS QUESTION
 - "Commit message" -> git-commit-message
 - "Write documentation" -> docs-codebase
 - "Write PRD/spec" -> docs-ai-prd
-- "Large codebase setup" -> claude-code-project-memory
+- "Large codebase setup" -> agents-project-memory
 ```
 
 ---
@@ -118,7 +118,7 @@ Use `frameworks/shared-skills/skills/router-operations/data/skill-registry.json`
 | `docs-codebase` | Technical documentation |
 | `docs-ai-prd` | PRDs for AI agents |
 | `qa-docs-coverage` | Documentation coverage audit |
-| `claude-code-project-memory` | Large codebase (100K-1M LOC) |
+| `agents-project-memory` | Large codebase (100K-1M LOC) |
 
 ---
 
@@ -175,7 +175,7 @@ Use `frameworks/shared-skills/skills/router-operations/data/skill-registry.json`
 
 | Skill | Purpose |
 |-------|---------|
-| `claude-code-project-memory` | CLAUDE.md, AGENTS.md |
+| `agents-project-memory` | CLAUDE.md, AGENTS.md |
 
 ---
 
@@ -205,7 +205,7 @@ qa-debugging -> qa-observability -> qa-resilience
 ### Large Codebase Setup
 
 ```text
-claude-code-project-memory -> qa-docs-coverage -> docs-codebase
+agents-project-memory -> qa-docs-coverage -> docs-codebase
 ```
 
 ---

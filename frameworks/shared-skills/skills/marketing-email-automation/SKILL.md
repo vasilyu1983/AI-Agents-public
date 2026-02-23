@@ -1,6 +1,6 @@
 ---
 name: marketing-email-automation
-description: Email marketing automation for HubSpot/Klaviyo/Mailchimp (and similar ESPs): design trigger-based lifecycle workflows (welcome, onboarding, nurture, win-back, cart abandonment), define segmentation + suppression/frequency policies, troubleshoot deliverability (SPF/DKIM/DMARC, one-click unsubscribe, list hygiene), and measure incrementality/ROI (holdouts, RPE, retention economics).
+description: "Email marketing automation for HubSpot/Klaviyo/Mailchimp (and similar ESPs): design trigger-based lifecycle workflows (welcome, onboarding, nurture, win-back, cart abandonment), define segmentation + suppression/frequency policies, troubleshoot deliverability (SPF/DKIM/DMARC, one-click unsubscribe, list hygiene), and measure incrementality/ROI (holdouts, RPE, retention economics)."
 ---
 
 # EMAIL AUTOMATION — WORKFLOW OS (OPERATIONAL)
@@ -340,6 +340,13 @@ See `references/email-economics.md` for definitions and calculations.
 - [references/klaviyo-setup.md](references/klaviyo-setup.md)
 - [references/mailchimp-setup.md](references/mailchimp-setup.md)
 - [references/accessibility.md](references/accessibility.md) — WCAG 2.2, EAA compliance, dark mode
+- [references/segmentation-strategies.md](references/segmentation-strategies.md) — Behavioral, RFM, lifecycle, zero-party data segmentation
+- [references/automation-workflows.md](references/automation-workflows.md) — Lifecycle flows, trigger design, branching, timing, benchmarks
+- [references/email-copywriting.md](references/email-copywriting.md) — Subject lines, preheaders, CTAs, mobile-first copy
+- [references/ab-testing-email.md](references/ab-testing-email.md) — Test design, sample sizing, winner selection, platform features
+- [references/re-engagement-winback.md](references/re-engagement-winback.md) — Sunset policies, win-back sequences, list hygiene
+- [references/transactional-email.md](references/transactional-email.md) — Transactional vs marketing email, delivery infra, compliance boundaries
+- [references/email-design-systems.md](references/email-design-systems.md) — Modular templates, responsive patterns, dark mode, client rendering
 
 ---
 

@@ -205,6 +205,12 @@ Comprehensive operational guides with checklists, patterns, and decision framewo
 - **[Agentic Patterns](references/agentic-patterns.md)** - Quick reference (canonical skill: [ai-agents](../ai-agents/SKILL.md))
 - **[RAG Best Practices](references/rag-best-practices.md)** - Quick reference (canonical skill: [ai-rag](../ai-rag/SKILL.md))
 
+### Emerging Patterns
+
+- **[Structured Output Patterns](references/structured-output-patterns.md)** - JSON mode, constrained decoding, schema enforcement, validation pipelines
+- **[Multimodal Patterns](references/multimodal-patterns.md)** - Vision-language models, audio/image inputs, cross-modal pipelines, cost management
+- **[Model Migration Guide](references/model-migration-guide.md)** - Provider migration playbook, eval-gated rollout, prompt adaptation, fallback strategies
+
 **Note:** Each resource file includes preflight/validation checklists, copy-paste reference tables, inline templates, anti-patterns, and decision matrices.
 
 ---

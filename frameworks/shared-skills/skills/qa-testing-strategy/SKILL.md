@@ -183,6 +183,9 @@ class LoginPage {
 | [observability-driven-testing.md](references/observability-driven-testing.md) | OpenTelemetry, trace-based |
 | [contract-testing-2026.md](references/contract-testing-2026.md) | Pact, Specmatic |
 | [synthetic-test-data.md](references/synthetic-test-data.md) | Privacy-safe, ephemeral test data |
+| [test-environment-management.md](references/test-environment-management.md) | Environment provisioning and lifecycle |
+| [quality-metrics-dashboard.md](references/quality-metrics-dashboard.md) | Quality metrics and dashboards |
+| [compliance-testing.md](references/compliance-testing.md) | SOC2, HIPAA, GDPR, PCI-DSS testing |
 
 ## Templates
 
@@ -211,3 +214,41 @@ class LoginPage {
 - [qa-agent-testing](../qa-agent-testing/SKILL.md) — Testing AI agents
 - [software-backend](../software-backend/SKILL.md) — API patterns to test
 - [ops-devops-platform](../ops-devops-platform/SKILL.md) — CI/CD pipelines
+
+## Ops Gate: Release-Safe Verification Sequence
+
+Use this sequence for feature branches that touch user flows, pricing, localization, or analytics.
+
+```bash
+# 1) Static checks
+npm run lint
+npm run typecheck
+
+# 2) Fast correctness
+npm run test:unit
+
+# 3) Critical path checks
+npm run test:e2e -- --grep "@critical"
+
+# 4) Instrumentation gate (if configured)
+npm run test:analytics-gate
+
+# 5) Production build
+npm run build
+```
+
+### If a Gate Fails
+
+1. Capture exact failing command and first error line.
+2. Classify: environment issue, baseline known failure, or regression.
+3. Re-run only the failed gate once after fix.
+4. Do not continue to later gates while earlier required gates are red.
+
+### Agent Output Contract for QA Handoff
+
+Always report:
+- commands run,
+- pass/fail per gate,
+- whether failures are pre-existing or introduced,
+- next blocking action.
+

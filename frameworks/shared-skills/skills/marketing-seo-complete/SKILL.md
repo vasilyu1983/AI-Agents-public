@@ -1,6 +1,6 @@
 ---
 name: marketing-seo-complete
-description: Complete SEO skill for technical audits (Core Web Vitals, site speed, crawlability/indexation, robots/sitemaps/canonicals, structured data, mobile, security, internal linking), SEO marketing strategy (keyword research, content planning, competitive analysis, E-E-A-T), operational workflows (cross-team collaboration, OKRs), link building, local SEO, international SEO (hreflang), and multi-platform SEO (Google, YouTube, Reddit, social). Updated for January 2026.
+description: "Use when running SEO audits, keyword research, content planning, or fixing technical SEO issues. Covers technical audits (Core Web Vitals, crawlability, structured data, robots/sitemaps/canonicals, mobile, security, internal linking), SEO strategy (keyword research, content planning, competitive analysis, E-E-A-T), link building, local SEO, international SEO (hreflang), and multi-platform SEO (Google, YouTube, Reddit, social). Updated for February 2026."
 ---
 
 # SEO Technical and Marketing - Operational Skill
@@ -18,6 +18,29 @@ This skill contains **actionable, production-ready systems** for **traditional s
 
 ---
 
+## SEO vs GEO (Overlap Map)
+
+Use this to avoid duplicating work across traditional SEO and AI answer engines.
+
+### Use `marketing-seo-complete` when
+
+- You need crawl/indexation fixes, internal linking, sitemaps, canonicals, CWV/performance, structured data eligibility
+- You want search demand capture (keywords), SERP strategy, link building, local/international SEO
+- You need predictable technical and content operations that improve discoverability across search surfaces
+
+### Use `marketing-ai-search-optimization` when
+
+- You care specifically about assistant visibility, citations, and “answer extraction” behavior (ChatGPT/Perplexity/Gemini/AIO)
+- You are building entity pages, comparison pages, integration pages, and proof blocks optimized for quoting/citation
+- You are measuring with a query bank and "share of model" rather than rankings
+
+> **Note**: For engineers building AEO monitoring platforms (API pipelines, citation databases, dashboards), see [project-aeo-monitoring-tools](../project-aeo-monitoring-tools/SKILL.md) — that's an engineering skill, not an SEO practitioner skill.
+
+### Use both when
+
+- You want compounding discoverability (SEO) and compounding citation capture (GEO) with the same pages
+- You are shipping high-intent pages (pricing, security, alternatives, integrations) and need both indexation + answer-ready structure
+
 ## 2026 Operating Assumptions (Evergreen)
 
 - Prioritize usefulness and intent satisfaction; technical SEO cannot compensate for weak content.
@@ -27,6 +50,14 @@ This skill contains **actionable, production-ready systems** for **traditional s
 - Core Web Vitals are a weak signal but a strong tiebreaker; fix regressions and obvious failures.
 - Structured data is for eligibility and rich results, not a ranking boost; use it to improve extraction and display.
 - SERPs are multi-surface (web, video, local, forums, social); measure channel-by-channel, not only rankings.
+
+
+### Next.js Programmatic Reality (Build vs Discoverability)
+
+- Static build artifact count is a deployment metric, not your SEO URL inventory.
+- Discoverable/indexable scope comes from canonical URLs in sitemap plus internal linking and indexability signals.
+- If `generateStaticParams()` causes build artifact explosion or ENOSPC, reduce pre-render scope first, keep long-tail URLs discoverable via sitemap.
+- Use a hybrid model for high-cardinality sites: pre-render priority URLs, serve long-tail dynamically (SSR/ISR), keep canonical/hreflang/sitemap/internal links aligned.
 
 Primary sources live in `data/sources.json`. For time-sensitive changes (core updates, reporting changes), use official sources first (Google Search Central / Search Status Dashboard); if your environment supports web search, refresh against current updates before giving definitive advice.
 
@@ -44,7 +75,8 @@ Primary sources live in `data/sources.json`. For time-sensitive changes (core up
 
 ## When NOT to Use
 
-- **Pure AI platform optimization** (ChatGPT, Perplexity, Gemini visibility) -> Use [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md)
+- **AI platform content optimization** (ChatGPT, Perplexity, Gemini visibility, citation strategy) -> Use [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md)
+- **AI monitoring platform engineering** (building API pipelines, citation databases, dashboards) -> Use [project-aeo-monitoring-tools](../project-aeo-monitoring-tools/SKILL.md)
 - **Paid search campaigns** (Google Ads, Bing Ads) -> Use [marketing-paid-advertising](../marketing-paid-advertising/SKILL.md)
 - **Social media strategy** (non-SEO focused) -> Use [marketing-social-media](../marketing-social-media/SKILL.md)
 - **Content creation process** (writing, editing, publishing) -> Use [marketing-content-strategy](../marketing-content-strategy/SKILL.md)
@@ -147,6 +179,12 @@ New/large site needs fast indexation
   -> Brand mentions > backlinks (early stage)
   -> See references/crawlability-indexing.md#indexation-acceleration
 
+Build fails from route explosion (ENOSPC / artifact limits)
+  -> Reduce `generateStaticParams` scope to priority URLs
+  -> Keep long-tail canonical URLs in sitemap
+  -> Strengthen internal linking to top dynamic pages
+  -> Validate indexation in GSC Coverage + URL Inspection
+
 ### Mobile Issues
 Mobile-unfriendly
   -> Check viewport meta tag
@@ -226,6 +264,13 @@ For each issue:
 - [references/seo-marketing-strategy.md](references/seo-marketing-strategy.md) - Keyword research, content planning, competitive analysis, brand building
 - [references/seo-operational-workflows.md](references/seo-operational-workflows.md) - Cross-team collaboration, OKRs, stakeholder communication
 - [references/total-search-optimization.md](references/total-search-optimization.md) - YouTube, Reddit, TikTok, LinkedIn, AI platforms
+- [references/content-decay-refresh.md](references/content-decay-refresh.md) - Content audit methodology, decay detection, refresh vs rewrite decisions
+- [references/ai-seo-tools.md](references/ai-seo-tools.md) - AI-powered SEO tool landscape, human-in-the-loop workflows
+
+### E-Commerce & Scale
+
+- [references/ecommerce-seo.md](references/ecommerce-seo.md) - Product pages, category strategy, shopping schema, inventory handling
+- [references/programmatic-seo.md](references/programmatic-seo.md) - Template-based page generation, quality controls, indexation management
 
 ### Link Building & Local SEO
 
@@ -328,7 +373,7 @@ Multi-platform visibility beyond Google.
 - YouTube SEO (video optimization, ranking factors)
 - Reddit SEO (forum results increasingly appear for "best", "vs", and review-intent queries)
 - Social SEO (LinkedIn B2B, TikTok B2C, X/Twitter)
-- AI platforms (ChatGPT, Perplexity, Gemini) - for deep coverage, use `marketing-ai-search-optimization`
+- AI platforms (ChatGPT, Perplexity, Gemini) - for optimization, use `marketing-ai-search-optimization`; for monitoring infrastructure, use `project-aeo-monitoring-tools`
 - Unified content distribution strategy
 
 **See full guide**: [references/total-search-optimization.md](references/total-search-optimization.md)
@@ -341,6 +386,8 @@ Multi-platform visibility beyond Google.
 
 - [../marketing-ai-search-optimization/SKILL.md](../marketing-ai-search-optimization/SKILL.md) - Search visibility beyond classic SERPs (complements technical SEO)
 - [../marketing-social-media/SKILL.md](../marketing-social-media/SKILL.md) - Social media marketing and content distribution
+- [../project-aeo-monitoring-tools/SKILL.md](../project-aeo-monitoring-tools/SKILL.md) - AEO monitoring infrastructure (engineering skill)
+- [../startup-growth-playbooks/SKILL.md](../startup-growth-playbooks/SKILL.md) - Programmatic SEO case studies (Zapier, Kinsta)
 
 **Technical Implementation**
 
@@ -411,16 +458,7 @@ See [data/sources.json](data/sources.json) for primary sources across:
 
 ## SEO Testing & Monitoring
 
-| Signal | Frequency | Alert Threshold |
-|--------|-----------|-----------------|
-| Indexation (GSC) | Daily | >5% drop |
-| CWV scores (CrUX) | Daily | Any metric fails |
-| Crawl errors | Daily | Any new 4xx/5xx |
-| Schema validity | Weekly | Any errors |
-
-**Do**: Lighthouse CI in pipeline, GSC API monitoring, CrUX field data, baseline before optimization
-
-**Avoid**: Testing on fast dev machines only, ignoring field data, multiple simultaneous changes
+See: `references/seo-testing-monitoring-and-collaboration.md`
 
 ---
 
@@ -442,14 +480,6 @@ See [data/sources.json](data/sources.json) for primary sources across:
 
 ---
 
-## Tools & Collaboration
-
-**Crawl tools**: Screaming Frog, Sitebulb, Semrush, Ahrefs, ContentKing, Lumar
-
-**Cross-team**: Product (early planning, redirects), Engineering (Lighthouse CI, CWV), Design (images, CLS)
-
----
-
 ## Anti-Patterns
 
 | Anti-Pattern (AVOID) | Better Practice (DO) |
@@ -460,8 +490,9 @@ See [data/sources.json](data/sources.json) for primary sources across:
 | Trust lab data only | Use CrUX (field data) as truth |
 | One-time audit | Continuous monitoring, quarterly deep audits |
 | Chase vanity metrics (rankings) | Track revenue, conversions, pipeline |
+| Chase static build page count as an SEO KPI | Track discoverable canonical URLs, indexation in GSC, and organic outcomes |
 | Optimize pages in isolation | Build topical authority clusters |
-| Ignore AI Overviews | Optimize for citation in AI results |
+| Ignore AI Overviews | Optimize for citation in AI results — see [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md) for content optimization and [project-aeo-monitoring-tools](../project-aeo-monitoring-tools/SKILL.md) for monitoring infrastructure |
 
 ---
 
@@ -482,10 +513,4 @@ If you're using a router-based setup, mention country/region/search engine expli
 
 ## SEO Mistakes (High Risk)
 
-High risk (can cause ranking loss or manual actions): keyword stuffing, link spam/toxic backlink patterns, hidden text/cloaking, doorway pages, deceptive structured data, scaled low-value content
-
-Common suppressors: weak E-E-A-T signals, poor internal linking, failing CWV, mobile-unfriendly UX, stale content, wrong canonicals
-
-Technical crawl/index blockers: accidental noindex, redirect chains >2 hops, broken links, missing sitemap, blocking critical JS/CSS for rendering
-
-Recovery: GSC Manual Actions -> Coverage report -> Traffic analysis -> Site audit -> Fix by severity -> Reconsideration (manual only) -> Expect weeks to months
+See: `references/seo-mistakes-high-risk.md`

@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Grep",
+      "Glob",
+      "WebFetch",
+      "WebSearch",
+      "Task",
+      "Bash(*)",
+      "mcp__*",
+      "Skill(*)",
+      "Skill(*:*)"
+    ],
+
+    "deny": [
+      "Bash(sudo *)",
+      "Bash(su *)",
+      "Bash(chmod 777 *)",
+      "Bash(dd *)",
+      "Bash(mkfs *)",
+      "Bash(fdisk *)",
+
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/secrets/**)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/*credentials*)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.kube/**)",
+      "Read(~/.gnupg/**)"
+    ],
+
+    "ask": [
+      "Bash(rm -rf *)",
+      "Bash(rm -r *)",
+      "Bash(rmdir *)",
+      "Bash(git push --force *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean -fd *)",
+      "Bash(docker system prune *)",
+      "Bash(kubectl delete *)",
+      "Bash(terraform destroy *)",
+      "Bash(DROP *)",
+      "Bash(DELETE FROM *)",
+      "Bash(TRUNCATE *)"
+    ],
+
+    "defaultMode": "acceptEdits"
+  }
+}

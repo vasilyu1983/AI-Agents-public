@@ -66,7 +66,27 @@ Never:
 - Reading technique and synthesis: `references/reading-techniques.md`
 - Timing and daily pulls: `references/astro-tarot-timing.md`, `references/daily-card-timing.md`
 - AI tarot product patterns: `references/ai-tarot-features.md`, `data/sources.json`
+- Reversed card interpretation: `references/reversed-cards-guide.md`
+- Yes/no readings: `references/yes-no-methods.md`
 - Other divination systems: `references/other-divination.md`
+
+## Advanced Techniques and Correspondences
+
+- Card interaction: `references/elemental-dignities.md` (elemental interactions between adjacent cards)
+- Court cards: `references/court-cards-framework.md` (16 court cards as people, energies, advice)
+- Significators and special cards: `references/significator-protocols.md` (shadow cards, clarifiers, jumpers, quintessence)
+- Astro-tarot decans: `references/decanic-mapping.md` (36-decan system mapped to Minor Arcana pips)
+- Kabbalistic Tree of Life: `references/kabbalistic-correspondences.md` (Tree of Life mapped to 78 cards)
+- Advanced timing methods: `references/advanced-timing.md` (multiple systems for answering "when")
+- Thoth Tarot system: `references/thoth-tarot-guide.md` (Crowley-Harris correspondences, Thelemic attributions)
+
+## Other Divination Systems (Extended)
+
+- Grand Tableau: `references/grand-tableau-lenormand.md` (Lenormand 36-card full spread)
+- Playing card cartomancy: `references/cartomancy-playing-cards.md` (52-card standard deck divination)
+- Ogham / Celtic Tree Oracle: `references/ogham-divination.md` (20 primary feda + 5 forfeda)
+- Lenormand card meanings: `references/lenormand-card-meanings.md` (36-card individual meanings and combination principles)
+- Elder Futhark runes: `references/rune-divination.md` (24 runes, casting methods, three-aett system)
 
 ## Output Templates
 

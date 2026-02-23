@@ -166,6 +166,18 @@ User needs: [API Type]
 - **[openapi-guide.md](references/openapi-guide.md)** - OpenAPI 3.1 specifications, Swagger UI, Redoc
 - **Templates:** [assets/openapi-template.yaml](assets/openapi-template.yaml) - Complete OpenAPI spec example
 
+### Webhooks & Event-Driven APIs
+
+- **[webhook-patterns.md](references/webhook-patterns.md)** - Webhook design, delivery guarantees, signature verification, retry policies, DLQs
+
+### Real-Time APIs
+
+- **[real-time-api-patterns.md](references/real-time-api-patterns.md)** - WebSockets, SSE, long polling, gRPC streaming, protocol selection guide
+
+### API Testing
+
+- **[api-testing-patterns.md](references/api-testing-patterns.md)** - Contract testing, integration testing, load testing, chaos testing for APIs
+
 ### Optional: AI/Automation (LLM/Agent APIs)
 
 - **[llm-agent-api-contracts.md](references/llm-agent-api-contracts.md)** - Streaming, long-running jobs, safety guardrails, observability

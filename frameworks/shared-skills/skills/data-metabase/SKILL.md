@@ -61,6 +61,9 @@ Your Metabase instance serves OpenAPI docs at `/api/docs` (e.g., `https://metaba
 | Reports (cards): create/edit patterns | [references/reports-cards.md](references/reports-cards.md)     |
 | Dashboards and card placement         | [references/dashboards.md](references/dashboards.md)           |
 | Charts and `visualization_settings`   | [references/charts-settings.md](references/charts-settings.md) |
+| Embedding & external integration      | [references/embedding-integration.md](references/embedding-integration.md) |
+| Permissions & collections management  | [references/permissions-collections.md](references/permissions-collections.md) |
+| Native SQL query patterns             | [references/native-query-patterns.md](references/native-query-patterns.md) |
 
 ## Scripts
 

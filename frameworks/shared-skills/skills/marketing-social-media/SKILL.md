@@ -1,6 +1,6 @@
 ---
 name: marketing-social-media
-description: Sustainable social media marketing and paid social: content systems, community management, influencer ops, social commerce, and attribution (2026).
+description: "Sustainable social media marketing and paid social: content systems, community management, influencer ops, social commerce, and attribution (2026)."
 ---
 
 # Social Media Marketing (Operational Skill)
@@ -244,6 +244,7 @@ For detailed platform-specific guidance, see:
 - [references/instagram-best-practices.md](references/instagram-best-practices.md)
 - [references/youtube-best-practices.md](references/youtube-best-practices.md)
 - [references/reddit-marketing-strategy.md](references/reddit-marketing-strategy.md)
+- [references/pinterest-strategy.md](references/pinterest-strategy.md)
 - [references/social-commerce-2026.md](references/social-commerce-2026.md)
 
 Use this skill when the user asks for:
@@ -275,10 +276,11 @@ Community: Spam rising -> Enforce guidelines | Low retention -> Add rituals | Ne
 | Category | Key Resources |
 |----------|---------------|
 | **Revenue & ROI** | [revenue-attribution-framework.md](references/revenue-attribution-framework.md) - Attribution, influencer/community ROI, brand lift |
-| **Platform Strategy** | [linkedin-engagement-patterns.md](references/linkedin-engagement-patterns.md), [tiktok-best-practices.md](references/tiktok-best-practices.md), [instagram-best-practices.md](references/instagram-best-practices.md), [youtube-best-practices.md](references/youtube-best-practices.md), [reddit-marketing-strategy.md](references/reddit-marketing-strategy.md) |
+| **Platform Strategy** | [linkedin-engagement-patterns.md](references/linkedin-engagement-patterns.md), [tiktok-best-practices.md](references/tiktok-best-practices.md), [instagram-best-practices.md](references/instagram-best-practices.md), [youtube-best-practices.md](references/youtube-best-practices.md), [reddit-marketing-strategy.md](references/reddit-marketing-strategy.md), [pinterest-strategy.md](references/pinterest-strategy.md) |
 | **Paid Social** | [paid-social-patterns.md](references/paid-social-patterns.md), [influencer-ops-and-partnerships.md](references/influencer-ops-and-partnerships.md) |
 | **Community** | [community-building-patterns.md](references/community-building-patterns.md) |
-| **Operations** | [operational-patterns.md](references/operational-patterns.md), [lead-systems-and-pipelines.md](references/lead-systems-and-pipelines.md) |
+| **Crisis & Reputation** | [crisis-communications.md](references/crisis-communications.md) - Crisis response, severity levels, recovery playbook |
+| **Operations** | [operational-patterns.md](references/operational-patterns.md), [lead-systems-and-pipelines.md](references/lead-systems-and-pipelines.md), [social-listening-intelligence.md](references/social-listening-intelligence.md) |
 | **AI (Optional)** | [ai-marketing-patterns.md](references/ai-marketing-patterns.md), [ai-marketing-governance.md](references/ai-marketing-governance.md) |
 
 ### Templates

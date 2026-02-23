@@ -287,6 +287,39 @@ Track documentation staleness and drift from code:
 - Observability dashboards and metrics
 - Automated doc reminder bots
 
+### API Documentation Validation
+
+**Resource**: [references/api-docs-validation.md](references/api-docs-validation.md)
+
+Validate API documentation accuracy against live behavior:
+
+- Schema-to-docs drift detection
+- Example request/response validation
+- Endpoint coverage auditing
+- Contract-first documentation workflows
+
+### Runbook Testing
+
+**Resource**: [references/runbook-testing.md](references/runbook-testing.md)
+
+Validate operational runbooks are executable and current:
+
+- Runbook testability criteria and scoring
+- Synthetic test execution in staging
+- Incident exercise integration
+- Staleness detection and refresh cadence
+
+### Documentation Quality Metrics
+
+**Resource**: [references/documentation-quality-metrics.md](references/documentation-quality-metrics.md)
+
+KPIs and dashboards for documentation health:
+
+- Coverage, freshness, and accuracy metrics
+- Documentation debt scoring formulas
+- CI dashboard integration patterns
+- Trend tracking and alerting thresholds
+
 ---
 
 ## Navigation: Templates

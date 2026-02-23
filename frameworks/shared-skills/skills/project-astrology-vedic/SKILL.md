@@ -70,8 +70,26 @@ When answering users:
 - `frameworks/shared-skills/skills/project-astrology-vedic/references/panchang-muhurta.md` (panchang + muhurta)
 - `frameworks/shared-skills/skills/project-astrology-vedic/references/ashtakavarga-system.md` (BAV/SAV)
 - `frameworks/shared-skills/skills/project-astrology-vedic/references/prashna-jyotish.md` (prashna)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/graha-significations.md` (planet meanings, dignities, karakas)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/rashi-guide.md` (sidereal sign attributes and groupings)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/bhava-significations.md` (house meanings and groupings)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/ashtakoot-matching.md` (Kundali matching / Guna Milan)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/remedies-guide.md` (remedial measures and gem/mantra recommendations)
 
-**Templates (copy structure, don’t paste placeholders)**
+**Advanced Systems and Methods (read as needed)**
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/shadbala-guide.md` (six-fold planetary strength scoring)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/jaimini-guide.md` (Jaimini sign-based system)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/kp-system.md` (Krishnamurti Paddhati / sub-lord theory)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/bhava-chalit.md` (Bhava Chalit house chart)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/tajaka-varshaphal.md` (annual horoscopy / Tajaka yogas)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/special-lagnas.md` (derived ascendant points)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/upagrahas-guide.md` (sub-planets / calculated points)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/sudarshan-chakra.md` (triple wheel analysis)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/vimsopaka-bala.md` (divisional chart strength scoring)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/sarvatobhadra-chakra.md` (transit / mundane analysis wheel)
+- `frameworks/shared-skills/skills/project-astrology-vedic/references/yogini-dasha.md` (36-year Yogini dasha cycle)
+
+**Templates (copy structure, don't paste placeholders)**
 - `frameworks/shared-skills/skills/project-astrology-vedic/assets/template-kundali-reading.md`
 - `frameworks/shared-skills/skills/project-astrology-vedic/assets/template-compatibility.md`
 - `frameworks/shared-skills/skills/project-astrology-vedic/assets/template-prashna.md`

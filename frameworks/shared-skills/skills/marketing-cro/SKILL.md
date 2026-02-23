@@ -351,6 +351,65 @@ STEP 4: Diagnose root cause
 
 ---
 
+## Core: In-App Monetization Gate Timing
+
+Freemium and subscription apps must decide **when** to show an upgrade prompt (paywall, modal, soft gate). Getting this wrong is a silent activation killer.
+
+### The Rule
+
+**Never show a monetization gate before the user has received first value.** A gate shown too early trains users to leave, not to pay.
+
+### Gate Trigger Patterns
+
+| Trigger | Mechanism | When to Use |
+|---------|-----------|-------------|
+| **Value-first** | Show gate only after the user completes a core action (e.g., generates a report, sees results) | Default for all products |
+| **Scroll-based** | Show gate after user scrolls past the first valuable content block | Content-heavy products, dashboards |
+| **Engagement timer** | Show gate after 15-30s of active engagement (not wall-clock time) | Products with immediate visible value |
+| **Usage count** | Show gate after N free uses (e.g., 3 questions, 5 exports) | Products with repeatable core actions |
+| **Feature boundary** | Gate specific premium features; leave core experience free | Products with clear free/paid feature split |
+
+### Timing Anti-Patterns
+
+| Anti-Pattern | Impact | Fix |
+|--------------|--------|-----|
+| **Immediate gate on first visit** | 40-60% bounce before any value delivered | Defer until after first value moment |
+| **Timed gate < 5s** | Users haven't oriented yet; feels like a trap | Minimum 15s active engagement OR scroll/action trigger |
+| **Gate before scroll** | Blocks users from discovering content below fold | Use scroll-depth trigger (e.g., past first content section) |
+| **Full-screen blocker on free content** | Punishes users for engaging | Use soft gates (banner, inline CTA) for free-tier content |
+| **Gate interrupting onboarding** | Breaks first-run experience | Complete onboarding → deliver first value → then gate |
+
+### Gate Placement Decision Tree
+
+```text
+WHEN TO SHOW THE MONETIZATION GATE:
+
+1. Has the user completed onboarding?
+   └─ No → DO NOT gate. Let them finish.
+
+2. Has the user seen their first valuable result?
+   └─ No → DO NOT gate. Deliver value first.
+
+3. Has the user had time to orient?
+   (scrolled past first content block OR 15s+ active engagement)
+   └─ No → DO NOT gate. Wait for engagement signal.
+
+4. User has received value and engaged → GATE IS SAFE
+   └─ Choose format:
+      ├─ Soft gate (banner/inline) → for free-tier content the user can still access
+      └─ Hard gate (modal/overlay) → for premium features the user cannot access
+```
+
+### Measurement
+
+Track the impact of gate timing on activation:
+
+- `gate_shown` → `gate_dismissed` vs `gate_converted` (immediate)
+- `gate_shown` → `generated_reading` or core value event within 7 days (downstream activation)
+- Compare activation rates for cohorts who saw the gate at different points in their journey
+
+---
+
 ## Reference: Triage, Speed, SOPs
 
 For page speed targets, CRO triage decision tree, operating cadence, and anti-patterns, see `references/triage-and-ops.md`.
@@ -394,7 +453,14 @@ Use `assets/ab-test-plan.md` to pre-register guardrails and invalidation criteri
 |-----------|-------------|
 | [advanced-testing.md](references/advanced-testing.md) | CUPED, sequential testing, MAB |
 | [ai-automation.md](references/ai-automation.md) | AI personalization, tool stack |
+| [form-optimization.md](references/form-optimization.md) | Field reduction, multi-step forms, validation UX |
+| [landing-page-optimization.md](references/landing-page-optimization.md) | Hero patterns, CTA placement, layout frameworks |
+| [mobile-cro.md](references/mobile-cro.md) | Thumb zones, tap targets, mobile checkout, speed |
+| [personalization-strategies.md](references/personalization-strategies.md) | Dynamic content, behavioral targeting, tool comparison |
+| [social-proof-trust-signals.md](references/social-proof-trust-signals.md) | Testimonials, reviews, trust badges, B2B/B2C patterns |
 | [triage-and-ops.md](references/triage-and-ops.md) | Page speed, triage, SOPs, anti-patterns |
+| [pricing-page-optimization.md](references/pricing-page-optimization.md) | Pricing psychology, plan tiers, enterprise vs self-serve |
+| [checkout-optimization.md](references/checkout-optimization.md) | Cart abandonment, payment UX, checkout flow design |
 
 ---
 

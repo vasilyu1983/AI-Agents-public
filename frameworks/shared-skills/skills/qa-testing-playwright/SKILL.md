@@ -102,6 +102,43 @@ If something is flaky:
 - Weakening assertions to "fix" flakes
 - Auto-healing that weakens assertions
 
+## Execution Preflight (High ROI)
+
+Run this preflight before expensive E2E runs to prevent avoidable failures.
+
+### Preflight Checklist
+
+1. Repository shape:
+- Confirm working directory and expected app root exist.
+- Verify spec paths before execution (`rg --files tests/e2e | rg <target>`).
+
+2. Port/process hygiene:
+- Check and clear stale dev server port before run (example: `lsof -i :3001`).
+- Avoid parallel local servers colliding with Playwright `webServer`.
+
+3. Command validity:
+- Validate CLI flags for current tool versions before batch runs.
+- Prefer exact spec paths or `--grep` over broad globs during triage.
+
+4. Artifact expectations:
+- Confirm result artifact paths exist before reading (`test -f <error-context.md>`).
+- If artifact path missing, inspect latest `test-results` index first.
+
+### Triage Sequence (Fastest Signal)
+
+1. Reproduce one failing test with `--workers=1`.
+2. Capture trace/video/screenshot for that single failure.
+3. Fix determinism root cause.
+4. Re-run targeted suite.
+5. Only then run broad regression.
+
+### Failure Patterns to Treat as Environment, Not Product Bugs
+
+- `EADDRINUSE` on Playwright web server port
+- Missing spec/result paths from stale assumptions
+- Shell glob expansion failures for bracketed route segments
+
+
 ## Resources
 
 | Resource | Purpose |
@@ -109,6 +146,9 @@ If something is flaky:
 | [references/playwright-mcp.md](references/playwright-mcp.md) | MCP & AI testing |
 | [references/playwright-patterns.md](references/playwright-patterns.md) | Advanced patterns |
 | [references/playwright-ci.md](references/playwright-ci.md) | CI configurations |
+| [references/playwright-authentication.md](references/playwright-authentication.md) | Auth patterns and session management |
+| [references/visual-regression-testing.md](references/visual-regression-testing.md) | Visual regression strategies |
+| [references/api-testing-playwright.md](references/api-testing-playwright.md) | API testing with APIRequestContext |
 | [data/sources.json](data/sources.json) | Documentation links |
 
 ## Templates

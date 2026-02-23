@@ -263,6 +263,9 @@ For comprehensive operational patterns and checklists, see:
 - [Reproducibility Checklist](references/reproducibility-checklist.md) - Experiment tracking, MLOps (CI/CD/CT/CM)
 - [Feature Freshness & Streaming](references/feature-freshness-streaming.md) - Real-time features, schema evolution
 - [Production Feedback Loops](references/production-feedback-loops.md) - Online learning, labeling, canary deployment
+- [Class Imbalance Patterns](references/class-imbalance-patterns.md) - Resampling, cost-sensitive learning, threshold tuning, evaluation for skewed datasets
+- [Hyperparameter Optimization](references/hyperparameter-optimization.md) - Bayesian optimization, early stopping, search strategies, budget allocation
+- [Interpretability & Explainability](references/interpretability-explainability.md) - SHAP, LIME, feature importance, model cards for regulated domains
 
 ---
 
@@ -316,6 +319,9 @@ For SQL-based data transformation and feature engineering:
 - [references/eda-best-practices.md](references/eda-best-practices.md)
 - [references/data-contracts-lineage.md](references/data-contracts-lineage.md)
 - [references/production-feedback-loops.md](references/production-feedback-loops.md)
+- [references/class-imbalance-patterns.md](references/class-imbalance-patterns.md)
+- [references/hyperparameter-optimization.md](references/hyperparameter-optimization.md)
+- [references/interpretability-explainability.md](references/interpretability-explainability.md)
 
 **Templates**
 - [assets/project/template-standard.md](assets/project/template-standard.md)

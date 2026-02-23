@@ -113,6 +113,10 @@ See [hypothesis-testing-guide.md](references/hypothesis-testing-guide.md) for AI
 | [hypothesis-testing-guide.md](references/hypothesis-testing-guide.md) | Experiment design and RAT workflows |
 | [market-sizing-patterns.md](references/market-sizing-patterns.md) | TAM/SAM/SOM methods and pitfalls |
 | [moat-assessment-framework.md](references/moat-assessment-framework.md) | Defensibility analysis |
+| [customer-interview-guide.md](references/customer-interview-guide.md) | Interview methodology, scripts, and analysis |
+| [landing-page-validation.md](references/landing-page-validation.md) | Smoke tests, conversion benchmarks, landing page tools |
+| [competitive-landscape-assessment.md](references/competitive-landscape-assessment.md) | Competitive scan, gap analysis, market mapping |
+| [pivot-framework.md](references/pivot-framework.md) | Pivot triggers, types, decision framework, case studies (Slack, Instagram, Shopify) |
 
 ## Templates
 

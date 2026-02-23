@@ -162,6 +162,8 @@ If you have web access tools, use them for current sentiment questions. Keep it 
 - Sentiment patterns: [references/sentiment-analysis-patterns.md](references/sentiment-analysis-patterns.md)
 - Competitive comparison: [references/competitor-review-comparison.md](references/competitor-review-comparison.md)
 - Pain to opportunity: [references/review-to-opportunity-mapping.md](references/review-to-opportunity-mapping.md)
+- Sampling methodology: [references/review-sampling-methodology.md](references/review-sampling-methodology.md)
+- Cross-platform synthesis: [references/cross-platform-synthesis.md](references/cross-platform-synthesis.md)
 - Source library + compliance anchors: [data/sources.json](data/sources.json)
 
 ---

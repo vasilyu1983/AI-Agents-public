@@ -172,6 +172,13 @@ SLIDE 6: CTA with offer
 | [references/ai-design-tools.md](references/ai-design-tools.md) | AI prompting, workflows |
 | [references/brand-collateral.md](references/brand-collateral.md) | One-pagers, case studies |
 | [references/2026-creative-trends.md](references/2026-creative-trends.md) | UGC-style, sensory design, Meta algorithm |
+| [references/video-creative-specs.md](references/video-creative-specs.md) | Video specs by platform, encoding, safe zones |
+| [references/motion-animation.md](references/motion-animation.md) | Animated ads, GIF/HTML5/Lottie, micro-interactions |
+| [references/accessibility-visual.md](references/accessibility-visual.md) | WCAG 2.2, contrast, alt text, inclusive design |
+| [references/creative-testing-framework.md](references/creative-testing-framework.md) | A/B testing, DCO, fatigue detection, iteration |
+| [references/infographic-data-viz.md](references/infographic-data-viz.md) | Chart selection, data storytelling, social infographics |
+| [references/typography-for-marketing.md](references/typography-for-marketing.md) | Font selection, type hierarchy, readability, email font stacks |
+| [references/photography-direction.md](references/photography-direction.md) | Art direction, stock vs custom, product photography, image optimization |
 
 ## Templates
 

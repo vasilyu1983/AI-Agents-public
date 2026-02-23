@@ -1,35 +1,35 @@
 ---
-name: claude-code-skills
-description: Comprehensive reference for creating Claude Code skills with progressive disclosure, SKILL.md structure, references/ organization, frontmatter specification, and best practices for modular capability development.
+name: agents-skills
+description: Comprehensive reference for creating AI agent skills (Claude Code, Codex CLI) with progressive disclosure, SKILL.md structure, references/ organization, frontmatter specification, and best practices for modular capability development.
 ---
 
-# Claude Code Skills - Meta Reference
+# Agent Skills - Meta Reference
 
-This skill provides the definitive reference for creating, organizing, and maintaining Claude Code skills. Use this when building new skills or improving existing skill architecture.
+This skill provides the definitive reference for creating, organizing, and maintaining agent skills. Use this when building new skills or improving existing skill architecture.
 
 ## Quick Reference
 
 | Component | Purpose | Required |
 |-----------|---------|----------|
 | `SKILL.md` | Main reference file with frontmatter | Yes |
-| `scripts/` | Executable code (runs, not loaded) | Optional |
+| `scripts/` | Executable code (prefer running) | Optional |
 | `references/` | Documentation (loaded on-demand) | Recommended |
 | `assets/` | Output files (templates, icons) | Optional |
 | `data/sources.json` | Curated external links | Recommended |
 
-**Cross-Platform**: Agent Skills standard adopted by Claude Code, Codex CLI, Gemini CLI, and VS Code Copilot. Skills are portable across platforms.
+**Cross-Platform**: Agent Skills are designed to be portable across runtimes (Claude Code, Codex CLI, Gemini CLI, VS Code Copilot).
 
 ## Skill Structure
 
 ```text
 skills/
-└── skill-name/
-    ├── SKILL.md           # Main reference (required)
-    ├── scripts/           # Executable code (Python/Bash) - runs, not loaded
-    │   └── validate.py
-    ├── references/        # Documentation loaded into context on-demand
-    │   ├── patterns.md
-    │   └── examples.md
+	└── skill-name/
+	    ├── SKILL.md           # Main reference (required)
+	    ├── scripts/           # Executable code (Python/Bash) - prefer running; read only to patch/review
+	    │   └── validate.py
+	    ├── references/        # Documentation loaded into context on-demand
+	    │   ├── patterns.md
+	    │   └── examples.md
     ├── assets/            # Files for OUTPUT (templates, icons, fonts)
     │   └── template.html
     └── data/
@@ -38,16 +38,19 @@ skills/
 
 **Directory purposes**:
 
-- `scripts/` - Executable code; output consumed, code never loads into context
+- `scripts/` - Executable code; prefer running scripts and consuming output (read only when you need to modify/review)
 - `references/` - Documentation loaded into context when the agent needs it
 - `assets/` - Files used in generated output (not loaded into context)
+ 
+Notes:
+- Prefer executing scripts instead of pasting large code into context; read scripts only when you need to modify or review them.
 
 ## SKILL.md Template
 
 ```markdown
 ---
 name: skill-name
-description: One-line description of what this skill provides and when to use it
+description: One-line description of what this skill provides and when to use it (include trigger keywords here)
 ---
 
 # Skill Name - Quick Reference
@@ -60,13 +63,9 @@ Brief overview of the skill's purpose and value.
 |------|-------------|-------------|
 | Task 1 | Tool A | Context for usage |
 
-## When to Use This Skill
+## Scope (Optional)
 
-The assistant should invoke this skill when a user requests:
-
-- Use case 1
-- Use case 2
-- Use case 3
+Keep this brief; the primary trigger mechanism is the frontmatter `description`.
 
 ## Core Concepts
 
@@ -89,7 +88,7 @@ Additional patterns...
 - [references/skill-validation.md](references/skill-validation.md) - Validation criteria
 
 **Related Skills**
-- [../claude-code-agents/SKILL.md](../claude-code-agents/SKILL.md) - Agent creation
+- [../agents-subagents/SKILL.md](../agents-subagents/SKILL.md) - Agent creation
 ```
 
 ## Progressive Disclosure
@@ -121,8 +120,6 @@ Skills use **progressive disclosure** to optimize token usage:
 ---
 name: string                        # Required: lowercase-kebab-case, matches folder name
 description: string                 # Required: PRIMARY trigger mechanism (50-300 chars)
-disable-model-invocation: boolean   # Optional: Only user can invoke (for /deploy, /commit)
-user-invocable: boolean             # Optional: false = background knowledge only
 ---
 ```
 
@@ -137,9 +134,7 @@ user-invocable: boolean             # Optional: false = background knowledge onl
 - Single line, 50-300 characters
 - Include key technologies/concepts as trigger keywords
 
-**Optional frontmatter**:
-- `disable-model-invocation: true` - Only user can invoke (for workflows with side effects: `/commit`, `/deploy`, `/send-slack`)
-- `user-invocable: false` - Not user-invocable (background knowledge only; runtime-dependent)
+Do not add extra frontmatter keys unless your runtime explicitly documents and supports them.
 
 ## Skill Categories
 
@@ -155,7 +150,7 @@ user-invocable: boolean             # Optional: false = background knowledge onl
 | Document | `document-` | `document-pdf`, `document-xlsx` |
 | Testing | `testing-`, `qa-testing-` | `qa-testing-playwright`, `qa-testing-strategy` |
 | Marketing | `marketing-` | `marketing-social-media`, `marketing-seo-complete` |
-| Claude Code | `claude-code-` | `claude-code-agents`, `claude-code-skills` |
+| Agents/Tools | `agents-` | `agents-subagents`, `agents-skills`, `agents-hooks` |
 
 ## sources.json Schema
 
@@ -200,7 +195,7 @@ Structure:
 
 Content:
 [ ] Quick reference table at top
-[ ] "When to Use" section present
+[ ] Frontmatter `description` includes trigger keywords
 [ ] Code examples are copy-paste ready
 [ ] Related skills linked at bottom
 
@@ -247,6 +242,7 @@ software-backend/
 - [data/sources.json](data/sources.json) - Official documentation links
 
 **Related Skills**
-- [../claude-code-agents/SKILL.md](../claude-code-agents/SKILL.md) - Agent creation
-- [../claude-code-commands/SKILL.md](../claude-code-commands/SKILL.md) - Command creation
-- [../claude-code-hooks/SKILL.md](../claude-code-hooks/SKILL.md) - Hook automation
+
+- [../agents-subagents/SKILL.md](../agents-subagents/SKILL.md) - Agent creation
+- [../agents-hooks/SKILL.md](../agents-hooks/SKILL.md) - Hook automation
+- [../agents-mcp/SKILL.md](../agents-mcp/SKILL.md) - MCP server integration

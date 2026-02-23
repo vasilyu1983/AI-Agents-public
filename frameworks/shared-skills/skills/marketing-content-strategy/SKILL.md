@@ -104,7 +104,7 @@ Use the linked guides/templates for implementation details:
 ## Resources & Templates
 
 **References** (deep-dive guides):
-[expert-mental-models.md](references/expert-mental-models.md) | [positioning-framework.md](references/positioning-framework.md) | [trust-building-playbook.md](references/trust-building-playbook.md) | [brand-architecture-guide.md](references/brand-architecture-guide.md) | [message-hierarchy.md](references/message-hierarchy.md) | [fintech-compliance-messaging.md](references/fintech-compliance-messaging.md) | [content-ops-checklist.md](references/content-ops-checklist.md) | [geo-optimization.md](references/geo-optimization.md) | [content-roi-attribution.md](references/content-roi-attribution.md) | [ai-content-automation.md](references/ai-content-automation.md) | [trend-awareness-protocol.md](references/trend-awareness-protocol.md) | [content-pillars.md](references/content-pillars.md)
+[expert-mental-models.md](references/expert-mental-models.md) | [positioning-framework.md](references/positioning-framework.md) | [trust-building-playbook.md](references/trust-building-playbook.md) | [brand-architecture-guide.md](references/brand-architecture-guide.md) | [message-hierarchy.md](references/message-hierarchy.md) | [fintech-compliance-messaging.md](references/fintech-compliance-messaging.md) | [content-ops-checklist.md](references/content-ops-checklist.md) | [geo-optimization.md](references/geo-optimization.md) | [content-roi-attribution.md](references/content-roi-attribution.md) | [ai-content-automation.md](references/ai-content-automation.md) | [trend-awareness-protocol.md](references/trend-awareness-protocol.md) | [content-pillars.md](references/content-pillars.md) | [editorial-calendar-ops.md](references/editorial-calendar-ops.md) | [content-distribution.md](references/content-distribution.md) | [content-repurposing.md](references/content-repurposing.md) | [thought-leadership.md](references/thought-leadership.md) | [video-content-strategy.md](references/video-content-strategy.md) | [content-governance.md](references/content-governance.md) | [audience-research-for-content.md](references/audience-research-for-content.md)
 
 **Templates** (copy-paste assets):
 [positioning-canvas.md](assets/positioning-canvas.md) | [trust-signals-checklist.md](assets/trust-signals-checklist.md) | [brand-connection-template.md](assets/brand-connection-template.md) | [messaging-matrix.md](assets/messaging-matrix.md) | [content-pillar-plan.md](assets/content-pillar-plan.md) | [content-brief.md](assets/content-brief.md) | [editorial-calendar.md](assets/editorial-calendar.md) | [content-strategy-brief.md](assets/content-strategy-brief.md) | [trust-brief.md](assets/trust-brief.md) | [content-roi-calculator.md](assets/content-roi-calculator.md)
@@ -149,6 +149,7 @@ This skill uses US/UK market defaults. For international marketing:
 - [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md) - AI search surface optimization
 - [startup-go-to-market](../startup-go-to-market/SKILL.md) - GTM strategy, ICP, channel selection
 - [product-management](../product-management/SKILL.md) - Product positioning, roadmap communication
+- [startup-growth-playbooks](../startup-growth-playbooks/SKILL.md) - Content-led growth case studies (Zapier, Ahrefs, HubSpot)
 
 ---
 

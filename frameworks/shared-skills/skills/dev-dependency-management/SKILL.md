@@ -187,6 +187,33 @@ Common mistakes to avoid when managing dependencies.
 - Dangerous anti-patterns (never updating, deprecated packages)
 - Moderate anti-patterns (overusing overrides, ignoring peer deps)
 
+### Container Dependency Patterns
+
+**[`references/container-dependency-patterns.md`](references/container-dependency-patterns.md)**
+
+Managing dependencies in containerized environments (Docker, OCI).
+
+- Multi-stage builds, layer caching, base image selection
+- Runtime vs build dependencies, image scanning, reproducible images
+
+### Version Conflict Resolution
+
+**[`references/version-conflict-resolution.md`](references/version-conflict-resolution.md)**
+
+Systematic approaches to resolving dependency version conflicts.
+
+- Diamond dependency problems, resolution algorithms by ecosystem
+- Override strategies, compatibility matrices, migration paths
+
+### License Compliance
+
+**[`references/license-compliance.md`](references/license-compliance.md)**
+
+Open-source license management and compliance automation.
+
+- License compatibility matrix, copyleft vs permissive, SPDX identifiers
+- Automated scanning (FOSSA, license-checker), policy enforcement in CI
+
 ---
 
 ## Navigation: Templates
@@ -487,3 +514,32 @@ After searching, provide:
 - Monorepo tools (Nx, Turborepo, Bazel)
 - Lockfile and reproducibility patterns
 - Automated dependency updates (Renovate, Dependabot)
+
+## Ops Preflight: Dependency and Toolchain Health (for LLM Agents)
+
+Run this before build/test/edit loops to prevent avoidable churn such as `next: command not found`.
+
+```bash
+# 1) Runtime + package manager sanity
+node -v
+npm -v
+
+# 2) Lockfile and install mode
+ls -1 package-lock.json pnpm-lock.yaml yarn.lock 2>/dev/null
+test -d node_modules || npm ci
+
+# 3) Verify framework binaries resolve
+npx next --version 2>/dev/null || echo "next missing"
+npx eslint --version 2>/dev/null || echo "eslint missing"
+
+# 4) Surface dependency graph issues early
+npm ls --depth=0
+```
+
+### Remediation Rules
+
+- If binary missing: install from lockfile, do not ad-hoc install random versions.
+- If lockfile drift detected: re-install using project standard tool (`npm ci`, `pnpm install --frozen-lockfile`, etc).
+- If peer dependency conflict appears, fix root cause before continuing broad edits.
+- Cache these checks at session start for long agent runs.
+

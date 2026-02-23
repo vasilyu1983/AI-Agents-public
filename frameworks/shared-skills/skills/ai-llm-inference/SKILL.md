@@ -176,6 +176,12 @@ For comprehensive guides on specific topics, see:
 - [Speculative Decoding Guide](references/speculative-decoding-guide.md) - Advanced generation acceleration
 - [Profiling & Capacity Planning](references/profiling-and-capacity-planning.md) - Benchmarking, SLOs, replica sizing
 
+### Cost & Routing
+
+- [Cost Optimization Patterns](references/cost-optimization-patterns.md) - Token budgets, caching economics, model tiering, cost-per-outcome tracking
+- [Multi-Model Routing](references/multi-model-routing.md) - Router architectures, quality-cost tradeoffs, cascading strategies, A/B routing
+- [Streaming Patterns](references/streaming-patterns.md) - SSE/WebSocket serving, token-by-token delivery, backpressure, client integration
+
 ---
 
 ## Templates
@@ -237,6 +243,9 @@ Performance measurement and validation:
 - [references/parallelism-patterns.md](references/parallelism-patterns.md)
 - [references/edge-cpu-optimization.md](references/edge-cpu-optimization.md)
 - [references/infrastructure-tuning.md](references/infrastructure-tuning.md)
+- [references/cost-optimization-patterns.md](references/cost-optimization-patterns.md)
+- [references/multi-model-routing.md](references/multi-model-routing.md)
+- [references/streaming-patterns.md](references/streaming-patterns.md)
 
 **Templates**
 - [assets/serving/template-llm-api.md](assets/serving/template-llm-api.md)

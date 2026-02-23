@@ -112,6 +112,9 @@ type(scope): summary line (max 72 chars)
 ## Workflow
 
 ```text
+0. Pre-staging typecheck (if project uses TypeScript):
+   - Run `tsc --noEmit` on changed files before staging
+   - Fix type errors before committing (avoids pre-commit hook retry loops)
 1. Get staged changes (staged only, not working tree):
    - git diff --staged --name-status
    - git diff --staged --stat
@@ -216,6 +219,9 @@ ANALYSIS:
 3. **Respect conventions**: Follow project's existing commit patterns if detected
 4. **Avoid hallucination**: Only describe what's actually in the diff
 5. **Be concise**: 50 chars is ideal, 72 is maximum for first line
+6. **Stage specific files**: Use `git add <file1> <file2>`, not `git add -A` or `git add .`, to avoid pulling in unrelated changes or sensitive files
+7. **Avoid heredoc in sandboxed shells**: Sandboxed environments may block temp file creation for here-documents. Use `git commit -m "$(cat <<'EOF'\nmessage\nEOF\n)"` or pass `-m "message"` directly
+8. **Pre-commit typecheck**: Run `tsc --noEmit` on the staged surface before committing to catch type errors early and avoid retry cascades from pre-commit hooks
 
 ## Example Analyses
 
@@ -414,6 +420,18 @@ Use it to standardize `type(scope): summary` messages and keep history automatio
 - AI-generated messages need human review and modification
 - Automated type detection may miss context
 - Security commits always need human judgment
+
+---
+
+## Resources
+
+| Resource | Purpose |
+|----------|---------|
+| [references/conventional-commits-guide.md](references/conventional-commits-guide.md) | Conventional Commits spec and tooling |
+| [references/commit-message-antipatterns.md](references/commit-message-antipatterns.md) | Common bad patterns, detection, linting |
+| [references/monorepo-commit-conventions.md](references/monorepo-commit-conventions.md) | Scope strategies for multi-package repos |
+| [references/changelog-generation-guide.md](references/changelog-generation-guide.md) | Changelog tooling setup, CI integration |
+| [data/sources.json](data/sources.json) | Curated external sources |
 
 ---
 

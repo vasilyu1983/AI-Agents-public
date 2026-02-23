@@ -200,6 +200,13 @@ ROAS below target?
 | [references/revenue-attribution-guide.md](references/revenue-attribution-guide.md) | Attribution models |
 | [references/sales-alignment-guide.md](references/sales-alignment-guide.md) | Pipeline + CRM alignment |
 | [references/operational-sops.md](references/operational-sops.md) | Weekly/monthly SOPs |
+| [references/programmatic-display.md](references/programmatic-display.md) | Programmatic buying, DSPs, DOOH |
+| [references/remarketing-retargeting.md](references/remarketing-retargeting.md) | Retargeting strategy + windows |
+| [references/youtube-ads-guide.md](references/youtube-ads-guide.md) | YouTube + Shorts specifics |
+| [references/creative-testing-ads.md](references/creative-testing-ads.md) | Creative testing methodology |
+| [references/privacy-cookieless-ads.md](references/privacy-cookieless-ads.md) | Privacy-first advertising |
+| [references/amazon-ads-guide.md](references/amazon-ads-guide.md) | Amazon Sponsored Products/Brands/Display, DSP |
+| [references/microsoft-ads-guide.md](references/microsoft-ads-guide.md) | Bing/Microsoft Ads, LinkedIn targeting, Copilot |
 
 ## Templates
 

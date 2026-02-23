@@ -282,6 +282,15 @@ What does the agent need to do?
 - **Deployment, CI/CD & Safety** - [`references/deployment-ci-cd-and-safety.md`](references/deployment-ci-cd-and-safety.md)
   Multi-layer guardrails, HITL controls, NIST AI RMF, production checklists
 
+- **Agent Debugging Patterns** - [`references/agent-debugging-patterns.md`](references/agent-debugging-patterns.md)
+  Systematic debugging for agentic systems: trace analysis, tool call failures, loop detection, state corruption
+
+- **Voice & Multimodal Agents** - [`references/voice-multimodal-agents.md`](references/voice-multimodal-agents.md)
+  Voice-first and multimodal agent patterns: speech pipelines, vision grounding, cross-modal orchestration
+
+- **Guardrails Implementation** - [`references/guardrails-implementation.md`](references/guardrails-implementation.md)
+  Multi-layer guardrail patterns: input/output validation, content filtering, PII detection, cost caps
+
 ---
 
 ## Navigation: Templates (Copy-Paste Ready)

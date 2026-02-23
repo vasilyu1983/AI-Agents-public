@@ -26,7 +26,7 @@ Provide Chinese zodiac, BaZi, Zi Wei Dou Shu, Feng Shui, and Qi Men Dun Jia guid
    - BaZi: Four Pillars, Day Master, Ten Gods, luck pillars.
    - Zi Wei: 12-palace chart + key stars + decade/year luck.
    - Feng Shui/Flying Stars: time + space sectors.
-   - Ze Ri / timing: auspicious day/hour selection.
+   - Ze Ri / date selection: `references/date-selection-ze-ri.md`
 3. Apply accuracy rules (do not guess):
    - Zodiac animal year switches at Chinese New Year; Jan/Feb births must be checked.
    - BaZi year/month pillars use solar terms (Jie Qi); year pillar often switches near Li Chun (around Feb 4), not Chinese New Year.
@@ -43,12 +43,31 @@ Provide Chinese zodiac, BaZi, Zi Wei Dou Shu, Feng Shui, and Qi Men Dun Jia guid
 - Compatibility: `references/compatibility-guide.md`
 - Zodiac calculations: `references/zodiac-calculations.md` and `references/chinese-calendar.md`
 - BaZi: `references/bazi-guide.md` and `references/bazi-day-master-analysis.md`
+  - Ten Gods: `references/ten-gods-guide.md`
+  - Combinations and clashes: `references/bazi-combinations-clashes.md`
+  - Luck pillars and timing: `references/da-yun-luck-pillars.md`
 - Zi Wei Dou Shu: `references/zi-wei-dou-shu.md`
 - Flying Stars / Feng Shui: `references/flying-stars-feng-shui.md` and `references/timing-fengshui.md`
 - Qi Men timing: `references/qi-men-dun-jia.md`
 - Annual forecast: `references/annual-forecast.md`
 - Animal profiles: `references/animal-personalities.md`
 - Five Elements: `references/five-elements-guide.md`
+
+## Request-to-resource map (advanced)
+
+- BaZi advanced analysis:
+  - Na Yin (sound elements): `references/na-yin-guide.md`
+  - Shen Sha (symbolic stars): `references/shen-sha-guide.md`
+  - Changsheng Cycle (12 life stages): `references/changsheng-cycle.md`
+  - Yong Shen (useful god / climate regulation): `references/yong-shen-guide.md`
+  - Kong Wang (void branch / emptiness): `references/kong-wang-guide.md`
+  - Special chart structures: `references/special-chart-structures.md`
+- Daily planning / almanac: `references/tong-shu-daily.md`
+- Zi Wei star catalog: `references/zi-wei-star-catalog.md`
+- Yi Jing hexagrams: `references/yi-jing-hexagrams.md`
+- Divination systems:
+  - Da Liu Ren (Six Ren oracle): `references/da-liu-ren.md`
+  - Mei Hua Yi Shu (Plum Blossom numerology): `references/mei-hua-yi-shu.md`
 
 ## Common pitfalls
 

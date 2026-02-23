@@ -61,6 +61,9 @@ Use this skill to produce decision-oriented competitive intelligence: define the
 | [market-mapping-guide.md](references/market-mapping-guide.md) | Market map creation |
 | [positioning-playbook.md](references/positioning-playbook.md) | Positioning methodology |
 | [industry-structure-and-differentiation.md](references/industry-structure-and-differentiation.md) | Porter 5 Forces + JTBD alternatives + strategy canvas |
+| [win-loss-analysis-guide.md](references/win-loss-analysis-guide.md) | Win/loss interview methodology, loss reason taxonomy, reporting |
+| [competitive-monitoring-setup.md](references/competitive-monitoring-setup.md) | CI monitoring sources, cadence, tools, zero-budget setup |
+| [category-creation-strategy.md](references/category-creation-strategy.md) | Category creation vs competition, Play Bigger framework, case studies |
 
 ## Templates
 

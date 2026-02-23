@@ -241,6 +241,9 @@ Industry: [Horizontal / Specific vertical]
 | [business-model-evolution.md](references/business-model-evolution.md) | Revenue model cycles and transitions |
 | [signal-vs-noise-filtering.md](references/signal-vs-noise-filtering.md) | Separating hype from substance |
 | [prediction-accuracy-tracking.md](references/prediction-accuracy-tracking.md) | Validating predictions over time |
+| [emerging-technology-radar.md](references/emerging-technology-radar.md) | Building and maintaining a technology radar |
+| [industry-trend-analysis.md](references/industry-trend-analysis.md) | Industry-specific trend analysis and cross-industry patterns |
+| [trend-signal-sources.md](references/trend-signal-sources.md) | Comprehensive catalog of trend signal sources by type and budget |
 
 ### Templates (Outputs)
 

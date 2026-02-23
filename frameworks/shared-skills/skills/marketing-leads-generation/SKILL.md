@@ -9,6 +9,12 @@ Built as a **no-fluff execution skill** for revenue-aligned demand generation.
 
 **Structure**: Core lead generation fundamentals first. AI-specific automation in clearly labeled "Optional: AI / Automation" sections.
 
+## Scope Boundary (Important)
+
+This skill covers pipeline creation up to qualification and meeting booking (Lead/MQL/SQL/PQL definitions, routing, SLAs, and conversion). It does not cover late-stage closing work such as proposals, negotiation, procurement, contract redlines, or expansion.
+
+If the user is asking for end-to-end sales execution (discovery-to-close), route to [startup-sales-execution](../startup-sales-execution/).
+
 ---
 
 ## Core: Lead Type Definitions
@@ -203,6 +209,8 @@ Use related skills instead for:
 - **AI search optimization** → [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md)
 - **Product-led growth ownership** → [product-management](../product-management/SKILL.md)
 - **Paid media buying/optimization** → [marketing-paid-advertising](../marketing-paid-advertising/SKILL.md)
+- **Discovery-to-close sales execution (proposals, negotiation, procurement)** → [startup-sales-execution](../startup-sales-execution/)
+- **Onboarding, retention, renewals, expansion** → [startup-customer-success](../startup-customer-success/)
 
 ---
 
@@ -356,6 +364,10 @@ See [`assets/email-deliverability-2025.md`](assets/email-deliverability-2025.md)
 ## Navigation: Sources & Assets
 
 - Operational patterns: [`references/operational-patterns.md`](references/operational-patterns.md)
+- **Strategy & targeting**: ICP & buyer personas ([`references/icp-buyer-personas.md`](references/icp-buyer-personas.md)), ABM account-based marketing ([`references/abm-account-based.md`](references/abm-account-based.md))
+- **Scoring & nurture**: Lead scoring models ([`references/lead-scoring-models.md`](references/lead-scoring-models.md)), lead nurturing workflows ([`references/lead-nurturing-workflows.md`](references/lead-nurturing-workflows.md))
+- **Acquisition channels**: Outbound sequences ([`references/outbound-sequences.md`](references/outbound-sequences.md)), webinar & event funnels ([`references/webinar-event-funnels.md`](references/webinar-event-funnels.md)), lead magnets & gating ([`references/lead-magnets-gating.md`](references/lead-magnets-gating.md))
+- **Partnerships & signals**: Referral & partner programs ([`references/referral-partner-programs.md`](references/referral-partner-programs.md)), intent data & buying signals ([`references/intent-data-buying-signals.md`](references/intent-data-buying-signals.md))
 - **Core templates**: email (`assets/email-sequence.md`), LinkedIn (`assets/linkedin-sequence.md`), cold call (`assets/cold-call-script.md`), landing audit (`assets/landing-audit-checklist.md`), lead scoring (`assets/lead-scoring-model.md`), channel plan (`assets/channel-plan-30-60-90.md`), speed-to-lead (`assets/speed-to-lead-playbook.md`), experiment log (`assets/experiment-matrix.md`), lead funnel definition ([assets/lead-funnel-definition.md](assets/lead-funnel-definition.md))
 - **Additional templates**: email deliverability (`assets/email-deliverability-2025.md`), LinkedIn outreach safety (`assets/linkedin-automation-safety-2025.md`)
 - **Optional: AI / Automation**: AI personalization (`assets/ai-personalization-playbook.md`)

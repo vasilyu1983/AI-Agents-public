@@ -71,6 +71,11 @@ posthog.capture('integration_working');
 | **Engagement** | Your engagement signal (1-2 max) | `feature_used` |
 | **Conversion** | `purchase_completed` | `checkout_started` |
 
+For auth-heavy products, add email reliability instrumentation early:
+- `auth_email_requested` (type: signup_confirm, magic_link, reset_password)
+- `auth_email_delivered` / `auth_email_bounced` / `auth_email_complained` (from provider webhooks)
+- `auth_email_link_clicked` (completion quality signal, not just send volume)
+
 ### 3. Session Context Registration
 
 Register standard context once per session using `posthog.register()`:
@@ -108,6 +113,13 @@ posthog.register({
 | Privacy compliance | [references/privacy-compliance.md](references/privacy-compliance.md) |
 | Event quality rules | [references/event-quality-rules.md](references/event-quality-rules.md) |
 | Production patterns | [references/production-hardening.md](references/production-hardening.md) |
+| Funnel analysis | [references/funnel-analysis.md](references/funnel-analysis.md) |
+| Cohort retention | [references/cohort-retention-analysis.md](references/cohort-retention-analysis.md) |
+| Experimentation | [references/experimentation-framework.md](references/experimentation-framework.md) |
+| User segmentation | [references/user-segmentation.md](references/user-segmentation.md) |
+| Data governance | [references/data-governance.md](references/data-governance.md) |
+| Session replay & heatmaps | [references/session-replay-heatmaps.md](references/session-replay-heatmaps.md) |
+| Attribution modeling | [references/attribution-modeling.md](references/attribution-modeling.md) |
 | Tracking plan template | [assets/tracking-plan-saas.md](assets/tracking-plan-saas.md) |
 | UTM standards | [assets/utm-naming-standards.md](assets/utm-naming-standards.md) |
 
@@ -220,3 +232,54 @@ If your query is primarily about GDPR/PIPL/LGPD or consent configuration, use [m
 ## Data Sources
 
 See [data/sources.json](data/sources.json) for official documentation links.
+
+## Ops Runbook: Instrumentation Gate (Pre-PR)
+
+Use this to keep analytics changes production-safe and queryable.
+
+### Pre-PR Commands
+
+```bash
+# 1) Find changed tracking calls
+rg -n "capture\(|track\(|analytics\.|posthog\." src app lib
+
+# 2) Enforce event/property naming policy
+rg -n "[A-Z]" src | rg "capture\(|track\("  # quick camelCase/PascalCase smell
+
+# 3) Validate tracking plan coverage
+# (keep a single source of truth file; fail if event is missing)
+rg -n "signup_started|signup_completed|checkout_started|trial_started" docs src
+
+# 4) Run analytics gate test (if project defines one)
+npm run test:analytics-gate
+```
+
+### Post-Deploy Smoke Query Template
+
+```sql
+-- Replace table names for your warehouse/provider
+select event,
+       count(*) as events,
+       count(distinct distinct_id) as users
+from events
+where timestamp >= now() - interval '24 hour'
+  and event in ('signup_started','signup_completed','checkout_started','trial_started')
+group by event
+order by events desc;
+```
+
+### Event Contract Minimum
+
+Each critical event must include:
+- stable event name (snake_case)
+- actor id (`user_id` or `distinct_id`)
+- object id (`*_id`)
+- source context (`surface`, `entry_point`, `utm_*` when relevant)
+- timestamp from server or trusted client clock
+
+### Gate Failure Policy
+
+- Missing critical event or required property: block merge.
+- Non-critical property drift: allow merge only with follow-up issue.
+- Silent event rename: block merge until dashboard/query migration is prepared.
+

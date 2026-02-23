@@ -303,8 +303,8 @@ Operations:
 
 ## References
 
-- Regions (entry points): `references/regions/europe.md`, `references/regions/americas.md`, `references/regions/asia-pacific.md`, `references/regions/mena.md`
-- Platforms (entry points): `references/platforms/china-ecosystem.md`, `references/platforms/japan-korea.md`, `references/platforms/russia-cis.md`
+- Regions (entry points): `references/regions/europe.md`, `references/regions/americas.md`, `references/regions/asia-pacific.md`, `references/regions/mena.md`, `references/regions/africa.md`, `references/regions/south-asia.md`
+- Platforms (entry points): `references/platforms/china-ecosystem.md`, `references/platforms/japan-korea.md`, `references/platforms/russia-cis.md`, `references/platforms/translation-management-systems.md`
 - Compliance (entry points): `references/compliance/gdpr.md`, `references/compliance/us-state-laws.md`, `references/compliance/casl.md`, `references/compliance/lgpd.md`, `references/compliance/pipl.md`
 - Cultural frameworks and workflows: `references/cultural/messaging-frameworks.md`, `references/cultural/imagery-guidelines.md`, `references/cultural/color-symbolism.md`, `references/cultural/ai-translation-workflows.md`
 - Curated external resources: `data/sources.json`

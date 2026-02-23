@@ -314,6 +314,9 @@ REQUIRED:
 | [learning-paths.md](references/learning-paths.md) | Onboarding sequences, tutorial design, courses |
 | [metrics-optimization.md](references/metrics-optimization.md) | KPI tracking, analytics, A/B testing |
 | [knowledge-ops.md](references/knowledge-ops.md) | Governance, workflows, and operating cadence |
+| [content-migration-guide.md](references/content-migration-guide.md) | Platform migration, URL redirects, content triage |
+| [multilingual-support.md](references/multilingual-support.md) | Translation workflows, glossary, RTL support |
+| [accessibility-standards.md](references/accessibility-standards.md) | WCAG 2.2 AA for help content, audit checklist |
 | [sources.json](data/sources.json) | Curated sources with `add_as_web_search` flags |
 
 ## Trend Awareness Protocol

@@ -43,6 +43,7 @@ TECHNICAL QUESTION
   |-> "Web3 / blockchain" -> software-crypto-web3
   |-> "Security / OWASP" -> software-security-appsec
   |-> "i18n / localization" -> software-localisation
+  |-> "Payments / Stripe / billing" -> software-payments
   |-> "Design REST/GraphQL" -> dev-api-design
   |-> "Manage dependencies" -> dev-dependency-management
   |-> "Plan implementation" -> dev-workflow-planning
@@ -51,12 +52,11 @@ TECHNICAL QUESTION
   |-> "Analytics engineering" -> data-analytics-engineering
   |-> "Optimize SQL" -> data-sql-optimization
   |-> "Build AEO monitoring tool" -> project-aeo-monitoring-tools
-  |-> "Create Claude agent" -> claude-code-agents
-  |-> "Create command" -> claude-code-commands
-  |-> "Create hook" -> claude-code-hooks
-  |-> "Set up MCP server" -> claude-code-mcp
-  |-> "Configure CLAUDE.md" -> claude-code-project-memory
-  |-> "Create skill" -> claude-code-skills
+  |-> "Create Claude agent" -> agents-subagents
+  |-> "Create skill" -> agents-skills
+  |-> "Create hook" -> agents-hooks
+  |-> "Set up MCP server" -> agents-mcp
+  |-> "Configure CLAUDE.md" -> agents-project-memory
   `-> No clear match -> software-architecture-design
 ```
 
@@ -91,7 +91,7 @@ data-lake-platform -> data-analytics-engineering -> data-sql-optimization -> ai-
 ### Claude Code Setup
 
 ```text
-claude-code-project-memory -> claude-code-skills -> claude-code-agents -> claude-code-commands -> claude-code-hooks -> claude-code-mcp
+agents-project-memory -> agents-skills -> agents-subagents -> agents-hooks -> agents-mcp
 ```
 
 ## Cross-Router Handoffs

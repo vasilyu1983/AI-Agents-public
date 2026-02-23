@@ -1,6 +1,6 @@
 ---
 name: startup-fundraising
-description: Use when raising startup capital (pre-seed through Series C+): decide raise vs bootstrap, size a round, build a deck + data room, run investor targeting/outreach, negotiate SAFEs/term sheets, manage diligence, and set investor reporting cadence post-close.
+description: "Use when raising startup capital (pre-seed through Series C+): decide raise vs bootstrap, size a round, build a deck + data room, run investor targeting/outreach, negotiate SAFEs/term sheets, manage diligence, and set investor reporting cadence post-close."
 ---
 
 # Startup Fundraising
@@ -268,6 +268,11 @@ CLOSE (Slides 8-12)
 | [cap-table-management.md](references/cap-table-management.md) | Cap table best practices, investor red flags, modeling |
 | [post-investment-operations.md](references/post-investment-operations.md) | Post-funding checklist, governance, investor relations |
 | [term-sheets-and-diligence.md](references/term-sheets-and-diligence.md) | Term sheet terms, data room, due diligence, investor updates |
+| [pitch-narrative-design.md](references/pitch-narrative-design.md) | Pitch storytelling, headline-driven slides, demo integration, Q&A handling |
+| [investor-targeting-and-crm.md](references/investor-targeting-and-crm.md) | Investor pipeline, warm intros, CRM setup, conversion benchmarks |
+| [valuation-negotiation.md](references/valuation-negotiation.md) | Valuation methods, negotiation tactics, terms tradeoffs, anti-dilution |
+| [safe-mechanics-guide.md](references/safe-mechanics-guide.md) | SAFE conversion math, stacking, vs convertible notes, common mistakes |
+| [investor-update-template.md](references/investor-update-template.md) | Post-raise investor communication cadence, update templates, reporting |
 
 ## Templates
 

@@ -22,6 +22,7 @@ Use this skill to choose a branching model, standardize PR discipline, enforce c
 | Task | Tool/Command | When to Use | Reference |
 |------|-------------|-------------|-----------|
 | Create feature branch | `git switch -c feat/name main` | Start new work | [Branching Strategies](references/branching-strategies.md) |
+| Create feature worktree | `git worktree add ../wt-feature -b feature/name origin/dev` | Isolate one feature per branch | [Branching Strategies](references/branching-strategies.md) |
 | Squash WIP commits | `git rebase -i HEAD~3` | Clean up before PR | [Interactive Rebase](references/interactive-rebase-guide.md) |
 | Conventional commit | `git commit -m "feat: add feature"` | All commits | [Commit Conventions](references/commit-conventions.md) |
 | Force push safely | `git push --force-with-lease` | After rebase | [Common Mistakes](references/common-mistakes.md) |
@@ -29,6 +30,42 @@ Use this skill to choose a branching model, standardize PR discipline, enforce c
 | Create stacked PRs | `gt create stack-name` (Graphite) | Large features | [Stacked Diffs](references/stacked-diffs-guide.md) |
 | Auto-generate changelog | `npx standard-version` | Before release | [Release Management](references/release-management.md) |
 | Run quality gates | GitHub Actions / GitLab CI | Every PR | [Automated Quality Gates](references/automated-quality-gates.md) |
+
+
+## AI Agent Feature Loop
+
+For AI-assisted engineering, prefer this default loop:
+
+1. Create one worktree per feature branch.
+2. Implement scoped changes only for that feature.
+3. Run repository quality gate(s) before PR.
+4. Open one focused PR to the integration branch.
+
+If repository scripts exist (for example `scripts/git/feature-workflow.sh`), use them to enforce this loop.
+
+## Local Safety Preflight (Before Checkout/Merge/Commit)
+
+Use this quick sequence to avoid common local Git blockers during agent-driven work.
+
+1. Working tree cleanliness:
+- `git status --porcelain`
+- If non-empty, decide explicitly: commit, stash, or abort branch switch.
+
+2. Lock/process check:
+- If Git commands fail with `index.lock`, check running Git processes first:
+  - `test -f .git/index.lock && ps aux | rg "[g]it"`
+- Remove stale lock only after confirming no active Git process.
+
+3. Branch switch guard:
+- Do not `checkout`/`switch` when local changes would be overwritten.
+- Commit/stash intentionally; avoid accidental context loss.
+
+4. Merge conflict protocol:
+- On conflict, stop new edits, resolve conflict file-by-file, rerun relevant tests, then complete merge commit.
+
+5. Automation note:
+- For recurring branch operations, prefer project scripts/worktrees over ad-hoc local branch juggling.
+
 
 ## Decision Tree: Choosing Branching Strategy
 
@@ -157,6 +194,33 @@ Team characteristics -> What's your situation?
 ---
 
 ## Navigation: Learning & Troubleshooting
+
+### Monorepo Workflows
+
+**[Monorepo Workflows](references/monorepo-workflows.md)** - Git patterns for monorepo repositories
+
+- Trunk-based branching for monorepos
+- Sparse checkout and partial clone
+- Affected-only CI (Nx, Turborepo, Bazel)
+- CODEOWNERS per package/directory
+- Monorepo vs polyrepo decision table
+
+### Git Hooks Automation
+
+**[Git Hooks Automation](references/git-hooks-automation.md)** - Pre-commit, commit-msg, pre-push hooks
+
+- Husky v9+ and lefthook setup
+- lint-staged and commitlint integration
+- Custom hooks (gitleaks, file size limits, branch naming)
+- Team distribution strategies
+
+### Git Bisect Debugging
+
+**[Git Bisect Debugging](references/git-bisect-debugging.md)** - Regression hunting with git bisect
+
+- Manual and automated bisect workflows
+- Writing bisect test scripts
+- Handling merge commits, log and replay
 
 ### Common Mistakes
 

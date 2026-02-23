@@ -1,6 +1,6 @@
 ---
-name: claude-code-hooks
-description: Create event-driven hooks for Claude Code automation. Configure hook events in settings or frontmatter, parse stdin JSON inputs, return decision-control JSON, and implement secure hook scripts.
+name: agents-hooks
+description: Create event-driven hooks for AI coding agent automation (Claude Code, Codex CLI). Configure hook events in settings or frontmatter, parse stdin JSON inputs, return decision-control JSON, and implement secure hook scripts.
 ---
 
 # Claude Code Hooks — Meta Reference
@@ -259,6 +259,28 @@ Use command hooks for fast, deterministic checks. Use prompt hooks for nuanced d
 
 ---
 
+## Permission Prompt Fatigue Reduction Pattern
+
+Use this when frequent approval dialogs slow down repeated safe workflows.
+
+### Strategy
+
+1. Identify repetitive, low-risk command prefixes (for example: test runners, read-only diagnostics).
+2. Approve narrow prefixes instead of full commands.
+3. Keep destructive or broad shells (`rm`, `git reset --hard`, generic interpreters with arbitrary input) out of auto-approval rules.
+4. Re-check approved prefixes periodically; remove stale ones.
+
+### Practical Guardrails
+
+- Allow only task-scoped prefixes (example: `npm run test:e2e`), not unrestricted executors.
+- Keep separate policy for write-outside-workspace actions.
+- Pair allow-rules with deny-rules for dangerous patterns.
+
+### Outcome
+
+This reduces repeated permission interruptions while preserving high-safety boundaries.
+
+
 ## Hook Templates
 
 ### Pre-Tool Validation
@@ -494,6 +516,6 @@ echo $?
 
 ### Related Skills
 
-- [../claude-code-commands/SKILL.md](../claude-code-commands/SKILL.md) — Command creation
-- [../claude-code-agents/SKILL.md](../claude-code-agents/SKILL.md) — Agent creation
+- [../agents-subagents/SKILL.md](../agents-subagents/SKILL.md) — Agent creation
+- [../agents-skills/SKILL.md](../agents-skills/SKILL.md) — Skill creation
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — CI/CD integration

@@ -7,10 +7,17 @@ description: "Implement and validate observability for quality engineering: Open
 
 Use telemetry (logs, metrics, traces, profiles) as a QA signal and a debugging substrate.
 
-Core references:
-- OpenTelemetry: https://opentelemetry.io/docs/
-- W3C Trace Context: https://www.w3.org/TR/trace-context/
-- Google SRE SLOs: https://sre.google/sre-book/service-level-objectives/
+Core references (see `data/sources.json`): OpenTelemetry, W3C Trace Context, and SLO practices (Google SRE).
+
+## Quick Start (Default)
+
+If key context is missing, ask for: critical user journeys, service/dependency inventory, environments (local/staging/prod), current telemetry stack, and current SLO/SLA commitments (if any).
+
+1. Establish the minimum bar: correlation IDs + structured logs + traces + golden metrics (latency, traffic, errors, saturation).
+2. Verify propagation: confirm `traceparent` (and your request ID) flow across boundaries end-to-end.
+3. Make failures diagnosable: every test failure captures a trace link (or trace ID) plus the correlated logs.
+4. Define SLIs/SLOs and error budget policy; wire burn-rate alerts (prefer multi-window burn rates).
+5. Produce artifacts: a readiness checklist plus an SLO definition and alert rules (use `assets/checklists/template-observability-readiness-checklist.md` and `assets/monitoring/slo/*`).
 
 ## Default QA stance
 
@@ -53,6 +60,9 @@ Open these guides when needed:
 | Profiling/load testing with evidence | `references/performance-profiling-guide.md` | `assets/load-testing/load-testing-k6.js`, `assets/load-testing/template-load-test-artillery.yaml` |
 | A maturity model and roadmap | `references/observability-maturity-model.md` | `assets/checklists/template-observability-readiness-checklist.md` |
 | What to avoid and how to fix it | `references/anti-patterns-best-practices.md` | `assets/checklists/template-observability-readiness-checklist.md` |
+| Alert design and fatigue reduction | `references/alerting-strategies.md` | `assets/monitoring/slo/prometheus-alert-rules.yaml` |
+| Dashboard hierarchy and layout | `references/dashboard-design-patterns.md` | `assets/monitoring/grafana/template-grafana-dashboard-observability.json` |
+| Structured logging and cost control | `references/log-aggregation-patterns.md` | `assets/observability/template-logging-setup.md` |
 
 Implementation guides (deep dives):
 - `references/core-observability-patterns.md`
@@ -62,6 +72,9 @@ Implementation guides (deep dives):
 - `references/performance-profiling-guide.md`
 - `references/observability-maturity-model.md`
 - `references/anti-patterns-best-practices.md`
+- `references/alerting-strategies.md`
+- `references/dashboard-design-patterns.md`
+- `references/log-aggregation-patterns.md`
 
 Templates (copy/paste):
 - `assets/checklists/template-observability-readiness-checklist.md`

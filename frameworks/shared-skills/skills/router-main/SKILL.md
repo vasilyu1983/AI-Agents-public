@@ -23,8 +23,8 @@ Universal entry point for the shared skill library. Use this router when the req
 
 ## High-Signal Triggers
 
-- Startup: "idea", "validate", "market", "pricing", "funding", "competitors", "GTM", "SEO", "leads", "pitch deck".
-- Engineering: "build/implement", "API", "frontend/backend", "database", "architecture", "AI/LLM/RAG", "agent", "MLOps".
+- Startup: "idea", "validate", "market", "pricing", "funding", "competitors", "GTM", "SEO", "leads", "pitch deck", "growth", "traction", "first users", "case studies".
+- Engineering: "build/implement", "API", "frontend/backend", "database", "architecture", "AI/LLM/RAG", "agent", "MLOps", "payments/billing/Stripe".
 - QA: "testing strategy", "E2E", "Playwright", "unit/integration tests", "coverage", "flake", "quality gates".
 - Operations: "deploy", "CI/CD", "Kubernetes/Docker", "monitoring", "logs/metrics/traces", "incident", "git", "release".
 

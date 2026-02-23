@@ -1,6 +1,6 @@
 ---
 name: startup-go-to-market
-description: Use when designing go-to-market strategy, selecting GTM motion (PLG/sales-led), defining ICP, planning product launches, or implementing AI-powered GTM automation. Covers channel selection, growth loops, RevOps alignment, and market entry execution.
+description: Use when designing go-to-market strategy, selecting GTM motion (PLG/sales-led/partner-led), defining ICP, planning product launches, designing partnership and channel partner programs, or implementing AI-powered GTM automation. Covers channel selection, growth loops, partnership strategy, RevOps alignment, and market entry execution.
 ---
 
 # Startup Go-to-Market
@@ -17,6 +17,8 @@ Systematic workflow for designing and executing market entry, launch, and growth
 - Choosing between PLG and sales-led motion
 - Planning product launches (soft, beta, ProductHunt, full)
 - Defining ICP and channel strategy
+- Designing partnership and channel partner programs
+- Evaluating partner types and partner-led distribution
 - Implementing AI-powered GTM automation
 
 ## When NOT to Use
@@ -25,6 +27,11 @@ Systematic workflow for designing and executing market entry, launch, and growth
 - Competitive intelligence -> [startup-competitive-analysis](../startup-competitive-analysis/)
 - Fundraising strategy -> [startup-fundraising](../startup-fundraising/)
 - Pricing and revenue models -> [startup-business-models](../startup-business-models/)
+- Closing deals, discovery calls, negotiation, procurement -> [startup-sales-execution](../startup-sales-execution/)
+- Onboarding, retention, renewals, expansion -> [startup-customer-success](../startup-customer-success/)
+- Finance operations (cash runway, billing/collections, close cadence) -> [startup-finance-ops](../startup-finance-ops/)
+- Legal basics (contracts, IP assignments, privacy fundamentals) -> [startup-legal-basics](../startup-legal-basics/)
+- Hiring/management for the first team -> [startup-hiring-and-management](../startup-hiring-and-management/)
 
 ---
 
@@ -55,6 +62,7 @@ If numbers are missing, proceed with ranges + explicit assumptions and list what
 3) Choose the motion (PLG / sales-led / hybrid)
 - Use the decision tree below for a fast cut.
 - For details: `references/plg-implementation.md` and `references/sales-motion-design.md`.
+ - For founder-led closing and a repeatable pipeline: [startup-sales-execution](../startup-sales-execution/).
 
 4) Pick 1-2 channels to sequence (not parallelize)
 - Use a bullseye-style test plan: quick tests, measure, double down.
@@ -63,6 +71,7 @@ If numbers are missing, proceed with ranges + explicit assumptions and list what
 5) Define measurement and RevOps alignment
 - Define shared lifecycle stages and the "one source of truth" for metrics (product + CRM).
 - Ensure handoffs are measurable (e.g., PQL -> SQL routing rules and SLAs for hybrid).
+ - Define post-sale ownership (onboarding, retention) and the minimum CS metrics to track.
 
 6) Produce deliverables + operating cadence
 - Draft GTM plan (`assets/gtm-strategy.md`) and launch plan (`assets/launch-playbook.md`).
@@ -195,6 +204,47 @@ Use when PLG brings users in, but conversion/expansion benefits from a human tou
 
 ---
 
+## Partnership Strategy
+
+Partnerships are a GTM channel, not a strategy. Treat them like any other channel: qualify, pilot, measure, scale or kill.
+
+### Partner Types
+
+| Type | What They Do | Economics | Best For |
+|------|-------------|-----------|----------|
+| **Integration / tech** | Build a joint product experience | Free or rev share on co-sold deals | Stickiness, product value |
+| **Referral / affiliate** | Send qualified leads your way | 10-30% of first-year revenue (typical) | Low-touch, high-volume |
+| **Reseller / channel** | Sell and support your product | 20-40% margin to partner | Geographic expansion, enterprise |
+| **Co-selling** | Joint sales motions on shared accounts | Shared pipeline, no margin | Enterprise, complex deals |
+| **Marketplace** | List on AWS/Azure/GCP/Salesforce | 3-20% marketplace fee | Enterprise procurement, discovery |
+
+### Partnership Readiness Checklist
+
+Do NOT pursue partnerships until:
+- You have a repeatable direct sales motion (partners amplify, they don't create PMF)
+- You can articulate mutual value (not just "they have customers we want")
+- You can support partner-sourced customers without degrading direct customer experience
+- You have someone (founder or hire) who owns the partnership
+
+### Partnership Funnel
+
+1. **Identify** — Map potential partners by audience overlap and incentive alignment
+2. **Qualify** — Score fit: audience match, technical compatibility, business model alignment, champion access
+3. **Pilot** — Run a small co-marketing or co-selling experiment with 1-2 partners (30-60 days)
+4. **Measure** — Track partner-sourced pipeline, conversion, revenue, and support load
+5. **Scale or kill** — Double down on partners that produce ROI; exit partnerships that don't
+
+### When Partnerships Are Premature
+
+- Pre-PMF (you don't know your own ICP yet — partners will amplify confusion)
+- No direct sales process (you can't teach partners what you haven't figured out)
+- Product requires heavy customization per deal (partners can't replicate your expertise)
+
+For BD execution (outreach, deal structures, negotiation): see [startup-sales-execution](../startup-sales-execution/).
+For deeper partnership strategy patterns: see `references/partnership-strategy.md`.
+
+---
+
 ## Do / Avoid
 
 ### Do
@@ -223,6 +273,10 @@ Use when PLG brings users in, but conversion/expansion benefits from a human tou
 | [sales-motion-design.md](references/sales-motion-design.md) | Sales process + RevOps |
 | [plg-implementation.md](references/plg-implementation.md) | PLG execution + PQL frameworks |
 | [ai-gtm-automation.md](references/ai-gtm-automation.md) | AI-powered GTM tools |
+| [partnership-strategy.md](references/partnership-strategy.md) | Partner types, program design, marketplace listing, co-marketing |
+| [launch-execution-guide.md](references/launch-execution-guide.md) | Launch types, timelines, day-of playbook, ProductHunt, post-launch analysis |
+| [icp-research-methodology.md](references/icp-research-methodology.md) | ICP research, validation, scoring, tiering, anti-ICP, documentation |
+| [revops-alignment.md](references/revops-alignment.md) | RevOps lifecycle stages, handoffs, SLAs, attribution, forecasting, reporting |
 
 ## Templates
 
@@ -246,9 +300,15 @@ Use when PLG brings users in, but conversion/expansion benefits from a human tou
 |-------|---------|
 | [startup-competitive-analysis](../startup-competitive-analysis/) | Market mapping, battlecards |
 | [startup-business-models](../startup-business-models/) | Pricing, unit economics |
+| [startup-sales-execution](../startup-sales-execution/) | Discovery, qualification, closing, negotiation |
+| [startup-customer-success](../startup-customer-success/) | Onboarding, retention, renewals, expansion |
+| [startup-finance-ops](../startup-finance-ops/) | Cash runway, billing/collections, finance cadence |
+| [startup-legal-basics](../startup-legal-basics/) | IP/contract/privacy readiness for selling |
+| [startup-hiring-and-management](../startup-hiring-and-management/) | First hires, interview loops, management cadence |
 | [marketing-ai-search-optimization](../marketing-ai-search-optimization/) | GEO/AI search visibility for content-led GTM |
 | [marketing-social-media](../marketing-social-media/) | Social channel execution |
 | [marketing-leads-generation](../marketing-leads-generation/) | Lead acquisition |
+| [startup-growth-playbooks](../startup-growth-playbooks/) | Case studies with numbers, stage-specific growth tactics |
 
 ---
 

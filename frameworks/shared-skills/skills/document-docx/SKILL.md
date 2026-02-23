@@ -191,6 +191,9 @@ Use only when explicitly requested and policy-compliant.
 - [references/docx-patterns.md](references/docx-patterns.md) - Advanced formatting, styles, headers/footers
 - [references/template-workflows.md](references/template-workflows.md) - Mail merge, batch generation
 - [references/tracked-changes.md](references/tracked-changes.md) - Tracked changes: what is feasible, and what is not
+- [references/accessibility-compliance.md](references/accessibility-compliance.md) - WCAG 2.2 AA, reading order, alt text, EU EAA
+- [references/cross-platform-compatibility.md](references/cross-platform-compatibility.md) - Rendering across Word, Google Docs, LibreOffice
+- [references/document-automation-pipelines.md](references/document-automation-pipelines.md) - CI/CD batch generation, quality gates
 - [data/sources.json](data/sources.json) - Library documentation links
 
 **Scripts**

@@ -179,6 +179,9 @@ The reference guides are intentionally large; search within them instead of load
 | [references/compose-testing.md](references/compose-testing.md) | Compose testing guide |
 | [references/uiautomator.md](references/uiautomator.md) | UIAutomator patterns (system UI) |
 | [references/gradle-managed-devices.md](references/gradle-managed-devices.md) | Managed Devices for CI |
+| [references/screenshot-testing.md](references/screenshot-testing.md) | Visual regression for Android |
+| [references/test-orchestrator-patterns.md](references/test-orchestrator-patterns.md) | AndroidX Test Orchestrator patterns |
+| [references/android-ci-optimization.md](references/android-ci-optimization.md) | CI pipeline optimization |
 | [data/sources.json](data/sources.json) | Documentation links |
 
 ## Templates

@@ -54,6 +54,7 @@ If numbers are missing, proceed with ranges + explicit assumptions and highlight
 - [startup-competitive-analysis](../startup-competitive-analysis/)
 - [startup-fundraising](../startup-fundraising/)
 - [startup-go-to-market](../startup-go-to-market/)
+- [startup-finance-ops](../startup-finance-ops/)
 
 ## Pricing Change Measurement & Experiment Design
 Use this when you are changing pricing, packaging, value metric, limits, discounts, or billing cadence.
@@ -86,6 +87,8 @@ Use this when you are changing pricing, packaging, value metric, limits, discoun
 
 Use `references/saas-metrics-playbook.md` for definitions and templates (MRR/ARR, churn, NRR, Quick Ratio, Magic Number, burn multiple, stage focus).
 
+If the user is asking “how long do we survive?” or “how do we run finance day-to-day?”, route to [startup-finance-ops](../startup-finance-ops/).
+
 ## Resources
 
 | Resource | Purpose |
@@ -93,6 +96,11 @@ Use `references/saas-metrics-playbook.md` for definitions and templates (MRR/ARR
 | [unit-economics-calculator.md](references/unit-economics-calculator.md) | LTV, CAC, payback calculations |
 | [pricing-research-guide.md](references/pricing-research-guide.md) | WTP research methodology |
 | [saas-metrics-playbook.md](references/saas-metrics-playbook.md) | SaaS-specific metrics deep dive |
+| [marketplace-economics.md](references/marketplace-economics.md) | Marketplace take rates, liquidity, supply/demand dynamics |
+| [usage-based-pricing.md](references/usage-based-pricing.md) | Usage-based and AI/credit pricing, metering, billing tools |
+| [freemium-conversion.md](references/freemium-conversion.md) | Free-to-paid conversion benchmarks, paywall design, PQL framework |
+| [credit-based-ai-pricing.md](references/credit-based-ai-pricing.md) | Token/credit pricing for AI-native products, cost modeling, margin management |
+| [enterprise-pricing-patterns.md](references/enterprise-pricing-patterns.md) | Enterprise contract structures, discount governance, expansion pricing |
 
 ## Templates
 
