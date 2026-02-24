@@ -1,0 +1,182 @@
+{
+  "metadata": {
+    "title": "AEO Monitoring Tools - Sources",
+    "description": "API documentation, commercial scraping services, and legal resources for building AEO monitoring infrastructure",
+    "last_updated": "2026-01-31",
+    "version": "1.0.0"
+  },
+  "api_documentation": [
+    {
+      "name": "Perplexity API Documentation",
+      "url": "https://docs.perplexity.ai/",
+      "description": "Official Perplexity API docs including Sonar (citations) and Search APIs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Google Gemini API Documentation",
+      "url": "https://ai.google.dev/gemini-api/docs",
+      "description": "Gemini API with free tier (1,500 requests/day)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic Claude API Documentation",
+      "url": "https://docs.anthropic.com/",
+      "description": "Claude API documentation including prompt caching",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI API Documentation",
+      "url": "https://platform.openai.com/docs",
+      "description": "OpenAI API docs including tool calling (web search availability varies by endpoint/plan)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "DeepSeek API Documentation",
+      "url": "https://platform.deepseek.com/api-docs",
+      "description": "DeepSeek API docs for chat completions and reasoning models",
+      "add_as_web_search": true
+    },
+    {
+      "name": "X API Documentation (Grok)",
+      "url": "https://developer.x.com/en/docs",
+      "description": "X platform API docs for Grok AI access",
+      "add_as_web_search": true
+    }
+  ],
+  "commercial_scraping_services": [
+    {
+      "name": "Oxylabs ChatGPT Scraper",
+      "url": "https://github.com/oxylabs/chatgpt-scraper",
+      "description": "Commercial ChatGPT web scraping solution with proxy infrastructure",
+      "add_as_web_search": false
+    },
+    {
+      "name": "BrightData ChatGPT Scraper",
+      "url": "https://brightdata.com/products/web-scraper/chatgpt",
+      "description": "Enterprise ChatGPT scraping service with compliance features",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Scrapeless",
+      "url": "https://scrapeless.com/",
+      "description": "Web scraping service with AI platform support",
+      "add_as_web_search": false
+    }
+  ],
+  "aeo_measurement_tools": [
+    {
+      "name": "Profound",
+      "url": "https://www.profound.ai/",
+      "description": "G2 Leader in AEO category (Winter 2026). Tracks 10+ engines including ChatGPT, Perplexity, Claude, Gemini",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Conductor",
+      "url": "https://www.conductor.com/academy/aeo-geo-benchmarks-report/",
+      "description": "Enterprise AEO platform with industry benchmarks and end-to-end optimization",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HubSpot AEO Grader",
+      "url": "https://www.hubspot.com/aeo-grader",
+      "description": "Free AEO analysis tool for brand visibility, sentiment, and competitive positioning",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Ahrefs Brand Radar",
+      "url": "https://ahrefs.com/brand-radar",
+      "description": "AI visibility tracking extension to Ahrefs SEO suite (launched early 2025)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Otterly.AI",
+      "url": "https://otterly.ai/",
+      "description": "AI search citation tracking for ChatGPT/Perplexity",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LLMrefs",
+      "url": "https://llmrefs.com/",
+      "description": "Free basic LLM citation tracking",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Goodie AI",
+      "url": "https://goodie.ai/",
+      "description": "Enterprise AEO monitoring platform",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AIclicks",
+      "url": "https://aiclicks.io/",
+      "description": "AEO tracking and AI search visibility analytics",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Semrush AI Toolkit",
+      "url": "https://www.semrush.com/ai-toolkit/",
+      "description": "Enterprise SEO suite with AI visibility tracking and AEO features",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SE Ranking AI Visibility",
+      "url": "https://seranking.com/",
+      "description": "Combined AI + classic SEO tracking platform",
+      "add_as_web_search": true
+    }
+  ],
+  "legal_and_compliance": [
+    {
+      "name": "Is Web Scraping Legal (2025 Guide)",
+      "url": "https://www.browserless.io/blog/is-web-scraping-legal",
+      "description": "Comprehensive legal analysis of web scraping practices",
+      "add_as_web_search": false
+    },
+    {
+      "name": "AI Chatbots Legal Risks - Cooley",
+      "url": "https://www.cooley.com/news/insight/2025/2025-10-21-ai-chatbots-at-the-crossroads-navigating-new-laws-and-compliance-risks",
+      "description": "Legal risks and compliance for AI chatbot interactions",
+      "add_as_web_search": false
+    },
+    {
+      "name": "CFPB AI Chatbot Guidance",
+      "url": "https://www.consumerfinance.gov/",
+      "description": "Consumer Financial Protection Bureau AI guidance",
+      "add_as_web_search": true
+    }
+  ],
+  "technical_resources": [
+    {
+      "name": "PostgreSQL Documentation",
+      "url": "https://www.postgresql.org/docs/",
+      "description": "PostgreSQL docs for response storage schema",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Supabase Documentation",
+      "url": "https://supabase.com/docs",
+      "description": "Supabase for managed PostgreSQL + auth",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Temporal Documentation",
+      "url": "https://docs.temporal.io/",
+      "description": "Workflow orchestration for scheduled monitoring jobs",
+      "add_as_web_search": false
+    }
+  ],
+  "research_and_benchmarks": [
+    {
+      "name": "GEO Study - Princeton",
+      "url": "https://arxiv.org/abs/2311.09735",
+      "description": "Generative Engine Optimization research (+35-40% visibility from statistics)",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Averi.ai B2B SaaS AEO Benchmark",
+      "url": "https://averi.ai/",
+      "description": "2026 B2B SaaS AEO benchmarks and platform analysis",
+      "add_as_web_search": true
+    }
+  ]
+}

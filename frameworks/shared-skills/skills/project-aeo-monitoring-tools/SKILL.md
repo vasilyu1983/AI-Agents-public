@@ -10,15 +10,24 @@ tags: [aeo, monitoring, scraping, api, competitive-analysis, engineering]
 Build custom infrastructure for monitoring AI search engine visibility and competitive citation analysis.
 
 **Audience**: Engineers building custom AEO monitoring systems
-**Related**: For AEO strategy and optimization guidance, see `marketing-ai-search-optimization`
+
+**For AEO strategy and content optimization**: Use [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md) instead.
+**For traditional SEO**: Use [marketing-seo-complete](../marketing-seo-complete/SKILL.md) instead.
 
 ## When to Use This Skill
 
-- Building custom AEO monitoring infrastructure
+- Building custom AEO monitoring infrastructure (API pipelines, citation databases, dashboards)
 - Evaluating build vs. buy decisions for AI search tracking
 - Understanding API vs. scraping trade-offs per platform
 - Designing data pipelines for citation analysis
 - Estimating costs for multi-platform monitoring
+
+## When NOT to Use
+
+- **AEO content optimization** (improving pages for citation) -> Use [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md)
+- **Traditional SEO** (crawlability, indexation, Core Web Vitals) -> Use [marketing-seo-complete](../marketing-seo-complete/SKILL.md)
+- **Content planning and editorial strategy** -> Use [marketing-content-strategy](../marketing-content-strategy/SKILL.md)
+- **Product analytics instrumentation** -> Use [marketing-product-analytics](../marketing-product-analytics/SKILL.md)
 
 ## Verify Before Committing
 
@@ -267,7 +276,7 @@ Map how citations flow between your content and AI responses.
 - Citation co-occurrence: which competitor pages appear alongside yours
 - Citation depth: direct citation vs. derived/summarized mentions
 - Temporal patterns: how citation freshness decays over time
-- Third-party citation tracking: monitor when third-party sources (G2, Reddit, YouTube, listicles) cite your brand in AI responses vs. your owned pages. See `marketing-ai-search-optimization/references/earned-aeo-third-party-citations.md` for the earned AEO strategy that feeds this data
+- Third-party citation tracking: monitor when third-party sources (G2, Reddit, YouTube, listicles) cite your brand in AI responses vs. your owned pages. See [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md) for the earned AEO strategy that feeds this data
 
 ### Content Optimization Engine
 
@@ -289,14 +298,14 @@ Understand how different user segments discover your brand through AI.
 
 ## Related Skills
 
-- `marketing-ai-search-optimization` - AEO strategy, content optimization, measurement methodology. Includes `.well-known/` AI discovery file implementation guides (`assets/technical/well-known-ai-discovery.md`): `llmprofiles.json`, `mcp.json`, `agents.json`, `agent.json`
-- `marketing-ai-search-optimization/references/earned-aeo-third-party-citations.md` - Earned AEO strategy (Reddit, G2, YouTube, Wikipedia) that feeds monitoring data
-- `marketing-ai-search-optimization/references/multimodal-content-optimization.md` - Video/audio optimization driving YouTube citation metrics
-- `marketing-ai-search-optimization/references/commerce-protocol-ucp.md` - Google UCP for e-commerce monitoring
-- `marketing-content-strategy` - Content planning and editorial strategy
-- `marketing-product-analytics` - Product analytics and measurement frameworks
-- `software-api-design` - API integration patterns
-- `qa-observability` - Monitoring and alerting setup
+| Skill | Purpose |
+|-------|---------|
+| [marketing-ai-search-optimization](../marketing-ai-search-optimization/SKILL.md) | AEO strategy, content optimization, measurement methodology, `.well-known/` AI discovery files, earned AEO (third-party citations), multimodal optimization, Google UCP |
+| [marketing-seo-complete](../marketing-seo-complete/SKILL.md) | Traditional SEO (crawlability, indexation, CWV, structured data, link building) |
+| [marketing-content-strategy](../marketing-content-strategy/SKILL.md) | Content planning and editorial strategy |
+| [marketing-product-analytics](../marketing-product-analytics/SKILL.md) | Product analytics and measurement frameworks |
+| [software-frontend](../software-frontend/SKILL.md) | SSR implementation for crawler access |
+| [qa-observability](../qa-observability/SKILL.md) | Monitoring and alerting setup |
 
 ## Disclaimer
 
