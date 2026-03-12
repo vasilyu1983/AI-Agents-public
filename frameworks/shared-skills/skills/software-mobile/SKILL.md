@@ -1,6 +1,6 @@
 ---
 name: software-mobile
-description: Production-grade mobile app development and architecture for iOS (Swift/SwiftUI/UIKit), Android (Kotlin/Jetpack Compose), and cross-platform (React Native, Flutter, Kotlin Multiplatform, WebView). Use for navigation, state, networking, offline storage, auth/passkeys, push, performance, testing, CI/CD, and App Store/Play release readiness.
+description: Production-grade iOS, Android, and cross-platform mobile dev. Use when building apps, handling auth/push, or preparing App Store releases.
 ---
 
 # Mobile Development Skill — Quick Reference
@@ -422,3 +422,9 @@ After searching, provide:
 - [../qa-resilience/SKILL.md](../qa-resilience/SKILL.md) — Resilience patterns for networked mobile apps
 - [../qa-testing-ios/SKILL.md](../qa-testing-ios/SKILL.md) — iOS-focused test planning, XCTest/Swift Testing patterns, device matrix, and app health checks
 - [../software-ui-ux-design/SKILL.md](../software-ui-ux-design/SKILL.md) — Mobile UI/UX design patterns and accessibility
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

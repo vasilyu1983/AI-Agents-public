@@ -1,44 +1,35 @@
 # Skills Index
 
-This directory contains 93 production-grade skills organized by domain.
+This directory contains 62 production-grade skills organized by domain and prefix family.
 
-**Total Skills:** 93 (88 domain skills + 5 routers)
-**Last Updated:** 2026-02-08
+**Total Skills:** 62
+**Last Updated:** 2026-03-12
 
 **Note:** Skills are defined by `SKILL.md`. Avoid adding `README.md` inside skill folders.
 
 ---
 
-## Router Architecture
+## Prefix Policy
 
-Start with `router-main` as your entry point. It routes to domain-specific routers:
+Prefixes encode the skill's primary operating domain.
 
-```text
-YOUR QUERY
-    │
-    ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              router-main                                     │
-│                         (Universal Entry Point)                              │
-└─────────────────────────────────┬───────────────────────────────────────────┘
-                                  │
-      ┌───────────────┬───────────┴───────────┬───────────────┐
-      │               │                       │               │
-      ▼               ▼                       ▼               ▼
-┌───────────┐  ┌─────────────┐  ┌─────────────────┐  ┌───────────┐
-│  router-  │  │   router-   │  │     router-     │  │  router-  │
-│  startup  │  │ engineering │  │   operations    │  │    qa     │
-│ 30 skills │  │  32 skills  │  │   18 skills     │  │ 12 skills │
-└───────────┘  └─────────────┘  └─────────────────┘  └───────────┘
-```
+| Prefix | Use For |
+|--------|---------|
+| `agents-` | Agent runtime building blocks and orchestration |
+| `ai-` | AI/ML methods, systems, inference, prompting, RAG |
+| `software-` | Application and platform engineering domains |
+| `dev-` | Developer workflow, engineering process, repo/system-of-work practices |
+| `data-` | Analytics engineering, BI, SQL, data platforms |
+| `qa-` | Testing, reliability, debugging, observability, refactoring quality |
+| `docs-` | Documentation systems, PRDs, codebase docs, doc governance |
+| `document-` | File-format operations on `.pdf`, `.docx`, `.xlsx`, `.pptx` |
+| `ops-` | Infrastructure and platform operations |
+| `product-` | Reusable product strategy or product-risk skills |
 
-| Router | Skills | Domain |
-|--------|--------|--------|
-| [router-main](router-main/SKILL.md) | — | Universal entry point, routes to domain routers |
-| [router-startup](router-startup/SKILL.md) | 30 | Startup (14), marketing (11), documents (4), help center (1) |
-| [router-engineering](router-engineering/SKILL.md) | 32 | AI/ML (8), software (11), dev tools (3), data (4), Claude Code (5), project (1) |
-| [router-operations](router-operations/SKILL.md) | 18 | QA (12), DevOps (1), git (2), documentation (2), project memory (1) |
-| [router-qa](router-qa/SKILL.md) | 12 | Testing (7), quality (5): debugging, observability, resilience, refactoring, docs coverage |
+Naming rule:
+- Use `software-*` for what teams build.
+- Use `dev-*` for how engineers work.
+- Avoid introducing new singleton prefixes unless you are intentionally creating a new family.
 
 ---
 
@@ -46,53 +37,16 @@ YOUR QUERY
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| [Routers](#routers-5-skills) | 5 | Meta-orchestration for intelligent skill routing |
-| [Startup](#startup-14-skills) | 14 | Validation, competition, business models, GTM, distribution audit, growth playbooks, sales, legal, finance, hiring, customer success, fundraising |
 | [AI/ML](#aiml-8-skills) | 8 | LLMs, agents, RAG, MLOps, data science, inference |
-| [Claude Code](#claude-code-5-skills) | 5 | Subagents, hooks, MCP, skills, memory |
+| [Agents](#agents-6-skills) | 6 | Subagents, hooks, MCP, skills, memory, swarm orchestration |
 | [Data](#data-4-skills) | 4 | Data lake/lakehouse, SQL optimization, analytics engineering, Metabase |
 | [Documentation](#documentation-2-skills) | 2 | AI-friendly PRDs, codebase docs |
 | [Document Formats](#document-formats-4-skills) | 4 | PDF, DOCX, XLSX, PPTX file processing |
-| [Developer Tools](#developer-tools-5-skills) | 5 | API design, dependencies, git, workflows |
-| [Marketing](#marketing-11-skills) | 11 | SEO, AI search, social media, lead gen, content, paid ads, email, CRO, analytics, localization, visual |
-| [Operations](#operations-2-skills) | 2 | DevOps platform, help center design |
-| [Product](#product-1-skill) | 1 | Product management |
-| [QA](#qa-12-skills) | 12 | Testing (7), quality (5): debugging, observability, resilience, refactoring, docs coverage |
-| [Software](#software-12-skills) | 12 | Frontend, backend, payments, mobile, architecture, security, UX research, clean code |
-| [Project-only](#project-only-7-skills) | 7 | Project-specific domain expertise (astrology suite, real estate, QTax, AEO monitoring) |
-
----
-
-## Routers (5 skills)
-
-| Skill | Description |
-|-------|-------------|
-| [router-main](router-main/SKILL.md) | Universal entry point that routes to domain-specific routers |
-| [router-startup](router-startup/SKILL.md) | Routes startup (14), marketing (11), documents (4), help center (1) |
-| [router-engineering](router-engineering/SKILL.md) | Routes AI/ML (8), software (12), dev tools (3), data (4), Claude Code (5) |
-| [router-operations](router-operations/SKILL.md) | Routes DevOps, git (2), documentation (2), help center skills (7 total) |
-| [router-qa](router-qa/SKILL.md) | Routes testing (7) and quality (5) skills (12 total) |
-
----
-
-## Startup (14 skills)
-
-| Skill | Description |
-|-------|-------------|
-| [startup-idea-validation](startup-idea-validation/SKILL.md) | Systematic 9-dimension validation: problem severity, market sizing, timing, moats, unit economics, founder-market fit, technical feasibility, GTM clarity, risk profile |
-| [startup-competitive-analysis](startup-competitive-analysis/SKILL.md) | Deep competitive intelligence, market mapping, positioning (April Dunford), moat analysis, battlecards |
-| [startup-business-models](startup-business-models/SKILL.md) | Revenue model design, unit economics (LTV, CAC, payback), pricing strategy, SaaS/marketplace metrics |
-| [startup-fundraising](startup-fundraising/SKILL.md) | Fundraising strategy, pitch preparation, investor targeting, term sheet negotiation, data rooms |
-| [startup-go-to-market](startup-go-to-market/SKILL.md) | GTM strategy, PLG/sales-led motion design, channel selection, launch planning, growth loops |
-| [startup-distribution-audit](startup-distribution-audit/SKILL.md) | Stage-aware distribution audit: skill gaps, proven playbooks, 30-day execution plan (bootstrapped default) |
-| [startup-growth-playbooks](startup-growth-playbooks/SKILL.md) | Evidence-based growth tactics: case studies with numbers, stage-specific playbooks, bootstrapped strategies |
-| [startup-sales-execution](startup-sales-execution/SKILL.md) | Founder-led sales execution: discovery, qualification, proposals, negotiation, closing, expansion |
-| [startup-legal-basics](startup-legal-basics/SKILL.md) | Startup legal basics: incorporation setup, IP assignment hygiene, contracts, privacy fundamentals |
-| [startup-finance-ops](startup-finance-ops/SKILL.md) | Startup finance operations: runway, cash forecasting, billing/collections, monthly close, KPI cadence |
-| [startup-hiring-and-management](startup-hiring-and-management/SKILL.md) | Early hiring and management: first hires, interview loops, onboarding, delegation cadence, PIPs, terminations |
-| [startup-customer-success](startup-customer-success/SKILL.md) | Customer success: onboarding, time-to-value, support triage, health scoring, retention and renewals |
-| [startup-trend-prediction](startup-trend-prediction/SKILL.md) | Analyze 2-3 year historical trends to predict 1-2 years ahead using adoption curves, cycle analysis, signal detection |
-| [startup-review-mining](startup-review-mining/SKILL.md) | Extract pain points from reviews (G2, Capterra, App Store, Reddit, HN) across 7 dimensions |
+| [Developer Tools](#developer-tools-8-skills) | 8 | API design, AI coding metrics, dependencies, context engineering, git workflow, git commit messages, dev planning, structured logs |
+| [Operations](#operations-2-skills) | 2 | DevOps platform engineering, NUKE CI/CD |
+| [Product](#product-2-skills) | 2 | Product management, help center design |
+| [QA](#qa-13-skills) | 13 | Testing (8), quality (5): debugging, observability, resilience, refactoring, docs coverage |
+| [Software](#software-13-skills) | 13 | Frontend, backend, C# backend, payments, mobile, architecture, security, UX research, clean code |
 
 ---
 
@@ -111,15 +65,16 @@ YOUR QUERY
 
 ---
 
-## Claude Code (5 skills)
+## Agents (6 skills)
 
 | Skill | Description |
 |-------|-------------|
 | [agents-subagents](agents-subagents/SKILL.md) | Create Claude Code agents with YAML frontmatter, tool selection, model specification |
 | [agents-hooks](agents-hooks/SKILL.md) | Event-driven hooks for automation: PreToolUse, PostToolUse, Stop events |
 | [agents-mcp](agents-mcp/SKILL.md) | Build Model Context Protocol (MCP) servers for database, filesystem, API connections |
-| [agents-project-memory](agents-project-memory/SKILL.md) | Configure CLAUDE.md/AGENTS.md for large codebases (100K-1M LOC), hierarchical docs |
+| [agents-project-memory](agents-project-memory/SKILL.md) | Configure CLAUDE.md/AGENTS.md/CODEX.md for large codebases (100K-1M LOC), hierarchical docs |
 | [agents-skills](agents-skills/SKILL.md) | Reference for creating skills with SKILL.md structure, references/, progressive disclosure |
+| [agents-swarm-orchestration](agents-swarm-orchestration/SKILL.md) | Coordinate parallel subagents via dependency-aware dispatch waves (Claude Code + Codex) |
 
 ---
 
@@ -127,7 +82,7 @@ YOUR QUERY
 
 | Skill | Description |
 |-------|-------------|
-| [docs-ai-prd](docs-ai-prd/SKILL.md) | PRDs, specs, and CLAUDE.md context for AI coding agents (Claude Code, Cursor, Custom GPTs) |
+| [docs-ai-prd](docs-ai-prd/SKILL.md) | Write PRDs, specs, briefs, and project context for AI coding agents (Claude Code, Cursor, Custom GPTs) |
 | [docs-codebase](docs-codebase/SKILL.md) | Technical writing: README, API docs, ADRs, changelogs, docs-as-code |
 
 **Note:** Documentation coverage audits are in [qa-docs-coverage](qa-docs-coverage/SKILL.md) under Quality.
@@ -145,33 +100,18 @@ YOUR QUERY
 
 ---
 
-## Developer Tools (5 skills)
+## Developer Tools (8 skills)
 
 | Skill | Description |
 |-------|-------------|
+| [dev-ai-coding-metrics](dev-ai-coding-metrics/SKILL.md) | Measure AI coding agent impact: adoption tracking, DORA/SPACE for AI teams, ROI frameworks, DX surveys, benchmarking |
 | [dev-api-design](dev-api-design/SKILL.md) | REST, GraphQL, gRPC patterns: versioning, auth, rate limiting, pagination |
+| [dev-context-engineering](dev-context-engineering/SKILL.md) | Context-driven development systems: AGENTS.md-first workflows, repo maturity, multi-repo coordination |
 | [dev-dependency-management](dev-dependency-management/SKILL.md) | Package management: npm, pip, cargo, maven, lockfiles, security scanning |
 | [dev-workflow-planning](dev-workflow-planning/SKILL.md) | Development workflows: brainstorm, write-plan, execute-plan patterns |
-| [git-commit-message](git-commit-message/SKILL.md) | Auto-generate conventional commit messages from git diffs |
-| [git-workflow](git-workflow/SKILL.md) | Git collaboration: branching strategies, PR workflows, commit conventions |
-
----
-
-## Marketing (11 skills)
-
-| Skill | Description |
-|-------|-------------|
-| [marketing-ai-search-optimization](marketing-ai-search-optimization/SKILL.md) | AI search visibility: GEO, AI Overviews citations, ChatGPT/Perplexity optimization |
-| [marketing-content-strategy](marketing-content-strategy/SKILL.md) | Content strategy: positioning, messaging hierarchy, content pillars, editorial calendars |
-| [marketing-cro](marketing-cro/SKILL.md) | Conversion rate optimization: A/B testing, landing pages, form design, funnel analysis |
-| [marketing-email-automation](marketing-email-automation/SKILL.md) | Email marketing automation: workflow design, HubSpot/Klaviyo/Mailchimp, nurture sequences |
-| [marketing-geo-localization](marketing-geo-localization/SKILL.md) | Geographic targeting and localization: regional campaigns, multi-market expansion |
-| [marketing-leads-generation](marketing-leads-generation/SKILL.md) | B2B pipeline: revenue-aligned demand generation, lead types, funnel design, scoring/routing |
-| [marketing-paid-advertising](marketing-paid-advertising/SKILL.md) | Paid advertising: Google, Meta, TikTok, LinkedIn - campaign structure, bidding, audiences |
-| [marketing-product-analytics](marketing-product-analytics/SKILL.md) | Product analytics: event taxonomy, tracking plans, PostHog/Amplitude/Mixpanel |
-| [marketing-seo-complete](marketing-seo-complete/SKILL.md) | Complete SEO: technical auditing, Core Web Vitals, keyword research, content planning |
-| [marketing-social-media](marketing-social-media/SKILL.md) | Social media marketing: platform-agnostic principles, content typology, engagement metrics |
-| [marketing-visual-design](marketing-visual-design/SKILL.md) | Visual marketing: ad creatives, social graphics, email visuals, AI design tools |
+| [dev-git-commit-message](dev-git-commit-message/SKILL.md) | Auto-generate conventional commit messages from git diffs |
+| [dev-git-workflow](dev-git-workflow/SKILL.md) | Git collaboration: branching strategies, PR workflows, commit conventions |
+| [dev-structured-logs](dev-structured-logs/SKILL.md) | Structured logging migration: ILogger/Serilog rewrites, JSON sink config, .NET logging scopes |
 
 ---
 
@@ -190,22 +130,23 @@ YOUR QUERY
 
 | Skill | Description |
 |-------|-------------|
-| [help-center-design](help-center-design/SKILL.md) | Help center & knowledge base: AI-first support, taxonomy, self-service optimization |
 | [ops-devops-platform](ops-devops-platform/SKILL.md) | DevOps: Kubernetes, GitOps, SRE, CI/CD security, AWS/GCP/Azure, Terraform |
+| [ops-nuke-cicd](ops-nuke-cicd/SKILL.md) | NUKE build pipelines: .NET CI/CD, target graphs, coverage/test reports, Docker image publishing |
 
 ---
 
-## Product (1 skill)
+## Product (2 skills)
 
 | Skill | Description |
 |-------|-------------|
 | [product-management](product-management/SKILL.md) | Product management: discovery, OKRs, roadmapping, metrics, strategy |
+| [product-help-center](product-help-center/SKILL.md) | Help center & knowledge base: AI-first support, taxonomy, self-service optimization |
 
 ---
 
-## QA (12 skills)
+## QA (13 skills)
 
-### Testing (7)
+### Testing (8)
 
 | Skill | Description |
 |-------|-------------|
@@ -214,6 +155,7 @@ YOUR QUERY
 | [qa-testing-ios](qa-testing-ios/SKILL.md) | iOS testing: Xcode simulator, XCTest, Swift Testing, UI automation |
 | [qa-testing-android](qa-testing-android/SKILL.md) | Android testing: Espresso, UIAutomator, Compose Testing, ADB automation |
 | [qa-testing-mobile](qa-testing-mobile/SKILL.md) | Mobile testing: iOS + Android, device matrix, Appium, Detox |
+| [qa-testing-nunit](qa-testing-nunit/SKILL.md) | C# testing: NUnit fixtures, WireMock, Testcontainers, API/component/integration scenarios |
 | [qa-api-testing-contracts](qa-api-testing-contracts/SKILL.md) | API contract testing: OpenAPI validation, consumer-driven contracts |
 | [qa-agent-testing](qa-agent-testing/SKILL.md) | QA harness for agentic systems: scenario suites, determinism controls, scoring rubrics |
 
@@ -229,15 +171,16 @@ YOUR QUERY
 
 ---
 
-## Software (12 skills)
+## Software (13 skills)
 
 | Skill | Description |
 |-------|-------------|
 | [software-architecture-design](software-architecture-design/SKILL.md) | System design: microservices, event-driven, CQRS, modular monoliths |
 | [software-backend](software-backend/SKILL.md) | Backend API: Node.js/Python/Rust/Go, Prisma ORM, PostgreSQL, GraphQL |
-| [software-payments](software-payments/SKILL.md) | Payments & billing: Stripe, Paddle, LemonSqueezy, RevenueCat, subscriptions, webhooks |
+| [software-payments](software-payments/SKILL.md) | Payments & billing: Stripe, Adyen, GoCardless, Mollie, Paddle, LemonSqueezy, Chargebee, Recurly, Lago, subscriptions, webhooks |
 | [software-clean-code-standard](software-clean-code-standard/SKILL.md) | Clean code standard: `CC-*` rule IDs, governance, language-agnostic rules |
 | [software-code-review](software-code-review/SKILL.md) | Code review: checklists, templates for correctness, security, performance |
+| [software-csharp-backend](software-csharp-backend/SKILL.md) | C#/.NET backend: service layers, data access, resilience, observability, anti-pattern detection |
 | [software-crypto-web3](software-crypto-web3/SKILL.md) | Blockchain: Solidity (EVM), Rust (Solana), CosmWasm, DeFi, security |
 | [software-frontend](software-frontend/SKILL.md) | Frontend: Next.js 16, React, TypeScript, Tailwind, shadcn/ui |
 | [software-localisation](software-localisation/SKILL.md) | Localization: i18n/l10n, ICU message format, RTL, translation workflows |
@@ -245,21 +188,6 @@ YOUR QUERY
 | [software-security-appsec](software-security-appsec/SKILL.md) | Application security: OWASP Top 10:2025, zero trust, authentication |
 | [software-ui-ux-design](software-ui-ux-design/SKILL.md) | UI/UX: usability heuristics, accessibility (WCAG 2.2 + 3.0 preview), design systems |
 | [software-ux-research](software-ux-research/SKILL.md) | UX research: JTBD, Kano Model, journey mapping, heuristic evaluation |
-
----
-
-## Project-only (8 skills)
-
-| Skill | Description |
-|-------|-------------|
-| [product-antifraud](product-antifraud/SKILL.md) | Log-based fraud detection for fintech: registration/auth abuse, bot detection, GDPR PII scanning |
-| [project-aeo-monitoring-tools](project-aeo-monitoring-tools/SKILL.md) | Build custom AI search monitoring tools for competitive AEO analysis |
-| [project-astrology-chinese](project-astrology-chinese/SKILL.md) | Expert Chinese astrology advisor for 12 Animal Zodiac, Five Elements, BaZi |
-| [project-astrology-numerology](project-astrology-numerology/SKILL.md) | Expert numerology advisor: validates calculations, catches logic bugs |
-| [project-astrology-tarot-divination](project-astrology-tarot-divination/SKILL.md) | Expert tarot and divination advisor with spreads, card meanings, I Ching |
-| [project-astrology-vedic](project-astrology-vedic/SKILL.md) | Expert Vedic/Jyotish astrology advisor with dashas, nakshatras, doshas |
-| [project-qtax](project-qtax/SKILL.md) | UK taxation expert: HMRC, MTD, Self-Assessment, income tax, NI contributions |
-| [project-real-estate-agent](project-real-estate-agent/SKILL.md) | 30+ year London real estate advisor: mortgages, market trends, Zone 1-3 |
 
 ---
 
@@ -310,15 +238,6 @@ Skills are automatically loaded when relevant. You can also invoke explicitly:
 
 ```text
 Use the software-frontend skill to help me build a Next.js component
-```
-
-### Router Usage
-
-Start with `router-main` for automatic routing:
-
-```text
-Ask router-main: "I need help building an API for my startup"
-→ Routes to router-engineering (technical) + router-startup (business)
 ```
 
 ### Adding New Skills

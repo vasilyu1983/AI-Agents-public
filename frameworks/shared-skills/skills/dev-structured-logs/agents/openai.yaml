@@ -1,0 +1,4 @@
+interface:
+  display_name: "Structured Logs"
+  short_description: "Run safe .NET structured logging migrations"
+  default_prompt: "Use $dev-structured-logs to run safe, dry-run-first .NET logging migrations for ILogger templates, handler scopes, and Serilog file-sink JSON settings."

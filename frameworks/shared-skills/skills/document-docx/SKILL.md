@@ -1,6 +1,7 @@
 ---
 name: document-docx
-description: Create, edit, and analyze Microsoft Word .docx files (reports, contracts, proposals) with styles, tables, headers/footers, template filling, content extraction, and conversion to HTML; support review workflows (comments/highlights) and inspect tracked changes via OOXML when needed using Python/Node.js (python-docx, docxtpl, mammoth.js, docx).
+description: "Create/edit .docx files with styles, tables, and templates. Use when asked to generate Word reports, contracts, proposals, or extract text."
+allowed-tools: Bash, Read, Write, Glob, Grep
 ---
 
 # Document DOCX Skill - Quick Reference
@@ -210,3 +211,9 @@ Use only when explicitly requested and policy-compliant.
 **Related Skills**
 - [../document-pdf/SKILL.md](../document-pdf/SKILL.md) - PDF generation and conversion
 - [../docs-codebase/SKILL.md](../docs-codebase/SKILL.md) - Technical writing patterns
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

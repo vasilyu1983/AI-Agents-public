@@ -1,6 +1,6 @@
 ---
 name: software-backend
-description: Production-grade backend service development across Node.js (Express/Fastify/NestJS/Hono), Bun, Python (FastAPI), Go, and Rust (Axum), with PostgreSQL and common ORMs (Prisma/Drizzle/SQLAlchemy/GORM/SeaORM). Use for REST/GraphQL/tRPC APIs, auth (OIDC/OAuth), caching, background jobs, observability (OpenTelemetry), testing, deployment readiness, and zero-trust defaults.
+description: Production-grade backend APIs for Node.js, Python, Go, Rust, and C# with PostgreSQL. Use when building REST/GraphQL/tRPC services or auth.
 ---
 
 # Software Backend Engineering
@@ -8,6 +8,8 @@ description: Production-grade backend service development across Node.js (Expres
 Use this skill to design, implement, and review production-grade backend services: API boundaries, data layer, auth, caching, observability, error handling, testing, and deployment.
 
 Defaults to bias toward: type-safe boundaries (validation at the edge), OpenTelemetry for observability, zero-trust assumptions, idempotency for retries, RFC 9457 errors, Postgres + pooling, structured logs, timeouts, and rate limiting.
+
+**Scaffolding rule**: When scaffolding a new project, show full working implementations for all domain logic — fraud rules, audit logging, webhook handlers, validation pipelines, background jobs. Don't just reference file names or stub functions; show the actual code so the user can run it immediately.
 
 ---
 
@@ -20,7 +22,7 @@ Defaults to bias toward: type-safe boundaries (validation at the edge), OpenTele
 | Type-Safe API | tRPC | Prefer for TS monorepos and internal APIs |
 | GraphQL API | Apollo Server / Pothos | Prefer for complex client-driven queries |
 | Database | PostgreSQL | Use pooling + migrations + query budgets |
-| ORM / Query Layer | Prisma / Drizzle / SQLAlchemy / GORM / SeaORM | Prefer explicit transactions |
+| ORM / Query Layer | Prisma / Drizzle / SQLAlchemy / GORM / SeaORM / EF Core | Prefer explicit transactions |
 | Authentication | OIDC/OAuth + sessions/JWT | Prefer httpOnly cookies for browsers |
 | Validation | Zod / Pydantic / validator libs | Validate at the boundary, not deep inside |
 | Caching | Redis (or managed) | Use TTLs + invalidation strategy |
@@ -49,66 +51,22 @@ Use a different skill when:
 - **Security audits and threat modeling** -> See [software-security-appsec](../software-security-appsec/SKILL.md)
 - **System architecture (beyond single service)** -> See [software-architecture-design](../software-architecture-design/SKILL.md)
 
-## Decision Tree: Backend Technology Selection
+## Technology Selection
 
-```text
-Backend project needs: [API Type]
-  - REST API?
-    - Simple CRUD -> Express/Fastify + Prisma/Drizzle
-    - Enterprise features -> NestJS (DI, modules)
-    - High performance -> Fastify (tight request lifecycle)
-    - Edge/Serverless -> Hono (Cloudflare Workers, Vercel Edge)
+Pick based on the strongest constraint, not feature lists:
 
-  - Type-Safe API?
-    - Full-stack TypeScript monorepo -> tRPC (no schema, no codegen)
-    - Public API with docs -> REST + OpenAPI
-    - Flexible data fetching -> GraphQL + Pothos/Apollo
+| Constraint | Default Pick | Why |
+|-----------|-------------|-----|
+| Team knows TypeScript only | Fastify/Hono + Prisma/Drizzle | Ecosystem depth, hiring ease |
+| Need <50ms P95, CPU-bound work | Go (net/http + sqlc/pgx) | Goroutines isolate CPU work; no event-loop risk |
+| Data-heavy / ML integration | Python (FastAPI + SQLAlchemy) | Best ecosystem for numpy/pandas/ML pipelines |
+| Memory-safety critical | Rust (Axum + SeaORM/SQLx) | Zero-cost abstractions, no GC |
+| Enterprise/.NET team | C# (ASP.NET Core + EF Core) | Azure integration, mature tooling |
+| Edge/serverless | Hono / platform-native handlers | Stateless, CPU-light, fast cold starts |
+| Fintech/audit-sensitive | Go + sqlc (or raw SQL) | ORM magic is a liability; you need auditable SQL |
 
-  - GraphQL API?
-    - Code-first -> Pothos GraphQL (TypeScript)
-    - Schema-first -> Apollo Server + GraphQL Codegen
-
-  - Runtime Selection?
-    - Enterprise stable -> Node.js (current LTS)
-    - Performance-critical -> Bun (verify runtime constraints)
-    - Security-focused -> Deno (verify platform support)
-
-  - Authentication Strategy?
-    - Browser sessions -> httpOnly cookies + server-side session store
-    - OAuth/Social -> OIDC/OAuth library (or platform auth)
-    - Service-to-service -> short-lived JWT + mTLS where possible
-
-  - Database Layer?
-    - Type-safe ORM -> Prisma (migrations, Studio)
-    - SQL-first/perf -> Drizzle (SQL-like API)
-    - Raw SQL -> driver + query builder (Kysely/sqlc/SQLx)
-    - Edge-compatible -> driver/ORM + Neon/Turso/D1
-
-  - Caching Strategy?
-    - Distributed cache -> Redis (multi-server)
-    - Serverless cache -> managed Redis (e.g., Upstash)
-    - In-memory cache -> process memory (single instance only)
-
-  - Edge Deployment?
-    - Global low-latency -> Cloudflare Workers
-    - Next.js integration -> Vercel Edge Functions
-    - AWS ecosystem -> Lambda@Edge
-
-  - Background Jobs?
-    - Complex workflows -> BullMQ (Redis-backed, retries)
-    - Serverless workflows -> AWS Step Functions
-    - Simple scheduling -> cron + durable storage
-```
-
-**Runtime & Language Alternatives:**
-
-- **Node.js (current LTS)** (Express/Fastify/NestJS + Prisma/Drizzle): default for broad ecosystem + mature tooling
-- **Bun** (Hono/Elysia + Drizzle): consider for perf-sensitive workloads (verify runtime constraints)
-- **Python** (FastAPI + SQLAlchemy): strong for data-heavy services and ML integration
-- **Go** (Fiber/Gin + GORM/sqlc): strong for concurrency and simple deploys
-- **Rust** (Axum + SeaORM/SQLx): strong for safety/performance-critical services
-
-See [assets/](assets/) for language-specific starter templates and [references/edge-deployment-guide.md](references/edge-deployment-guide.md) for edge computing patterns.
+For detailed framework/ORM/auth/caching selection trees, see [references/edge-deployment-guide.md](references/edge-deployment-guide.md) and language-specific references.
+See [assets/](assets/) for starter templates per language.
 
 ---
 
@@ -181,117 +139,111 @@ app.get('/health/ready', async (req, res) => {
 });
 ```
 
-### Migration Rollback Strategies
+### Common Mistakes (Non-Obvious)
 
-| Strategy | Description | Use When |
-|----------|-------------|----------|
-| Backward-compatible | New code works with old schema | Zero-downtime deployments |
-| Expand-contract | Add new, migrate, remove old | Schema changes |
-| Shadow tables | Write to both during transition | High-risk migrations |
-
----
-
-### Common Backend Mistakes to Avoid
-
-| FAIL Avoid | PASS Instead | Why |
-|----------|-----------|-----|
-| Storing sessions in memory | Use Redis/Upstash | Memory lost on restart, no horizontal scaling |
-| Synchronous file I/O | Use `fs.promises` or streams | Blocks event loop, kills throughput |
-| Unbounded queries | Always use `LIMIT` + cursor pagination | Memory exhaustion, slow responses |
-| Trusting client input | Validate with Zod at API boundaries | Injection attacks, type coercion bugs |
-| Hardcoded secrets | Use env vars + secret manager (Vault, AWS SM) | Security breach on repo exposure |
-| N+1 database queries | Use `include`/`select` or DataLoader | 10-100x performance degradation |
-| `console.log` in production | Use structured logging (Pino/Winston) | No correlation IDs, unqueryable logs |
-| Catching errors silently | Log + rethrow or handle explicitly | Hidden failures, debugging nightmares |
-| Missing connection pooling | Use Prisma connection pool or PgBouncer | Connection exhaustion under load |
-| No request timeouts | Set timeouts on HTTP clients and DB queries | Resource leaks, cascading failures |
-
-**Security anti-patterns:**
-
-- FAIL Don't use MD5/SHA1 for passwords -> Use Argon2id
-- FAIL Don't store JWTs in localStorage -> Use httpOnly cookies
-- FAIL Don't trust `X-Forwarded-For` without validation -> Configure trusted proxies
-- FAIL Don't skip rate limiting -> Use sliding window (Redis) or token bucket
-- FAIL Don't log sensitive data -> Redact PII, tokens, passwords
+| Avoid | Instead | Why |
+|-------|---------|-----|
+| N+1 queries | `include`/`select` or DataLoader | 10-100x perf hit; easy to miss in ORM code |
+| No request timeouts | Timeouts on HTTP clients, DB, handlers | Hung deps cascade; see Production Hardening below |
+| Missing connection pooling | Prisma pool / PgBouncer / pgx pool | Exhaustion under load on shared DB tiers |
+| Catching errors silently | Log + rethrow or handle explicitly | Hidden failures, impossible to debug |
 
 ---
 
-### Optional: AI/Automation Extensions
+## Production Hardening: Patterns Models Skip
 
-> **Note**: AI-assisted backend patterns. Skip if not using AI tooling.
+These are the patterns that separate "works in dev" from "survives production." Models tend to skip them unless explicitly prompted — add them to every service.
 
-#### AI-Assisted Code Generation
+### Request & Query Timeouts
 
-| Tool | Use Case |
-|------|----------|
-| GitHub Copilot | Inline suggestions, boilerplate |
-| Cursor | AI-first IDE, context-aware |
-| Claude Code | CLI-based development |
+Every outbound call needs a timeout. Without one, a hung dependency leaks connections and cascades failures.
 
-**Review requirements for AI-generated code:**
+```typescript
+// HTTP client timeout
+const response = await fetch(url, { signal: AbortSignal.timeout(5000) });
 
-- All imports verified against package.json
-- Type checker passes (strict mode)
-- Security scan passes
-- Tests cover generated code
+// Database query timeout (Prisma)
+await prisma.$queryRaw`SET statement_timeout = '3000'`;
 
----
-
-## Infrastructure Economics and Business Impact
-
-**Why this matters**: Backend decisions directly impact revenue. A 100ms latency increase can reduce conversions by 7%. A poorly chosen architecture can cost 10x more in cloud spend. Performance SLAs are revenue commitments.
-
-### Cost Modeling Quick Reference
-
-| Decision | Cost Impact | Revenue Impact |
-|----------|-------------|----------------|
-| Edge vs. Origin | 60-80% latency reduction | +2-5% conversion rate |
-| Serverless vs. Containers | Variable cost, scales to zero | Better unit economics at low scale |
-| Reserved vs. On-Demand | 30-60% cost savings | Predictable COGS |
-| Connection pooling | 50-70% fewer DB connections | Lower database costs |
-| Caching layer | 80-95% fewer origin requests | Reduced compute costs |
-
-### Performance SLA -> Revenue Mapping
-
-```text
-SLA Target -> Business Metric
-
-P50 latency < 100ms -> Baseline user experience
-P95 latency < 500ms -> 95% users satisfied
-P99 latency < 1000ms -> Enterprise SLA compliance
-Uptime 99.9% (43.8m downtime/month) -> Standard SLA tier
-Uptime 99.99% (4.4m downtime/month) -> Enterprise tier ($$$)
+// Express/Fastify request timeout
+server.register(import('@fastify/timeout'), { timeout: 30000 });
 ```
 
-### Unit Economics Checklist
+| Layer | Default Timeout | Rationale |
+|-------|----------------|-----------|
+| HTTP client calls | 5s | External APIs shouldn't block you |
+| Database queries | 3s | Slow queries = missing index or bad plan |
+| Request handler | 30s | Safety net for the whole request lifecycle |
+| Background jobs | 5min | Jobs that run longer need chunking |
 
-Before deploying any backend service, calculate:
+### Field-Level Selection (Don't `SELECT *`)
 
-- [ ] **Cost per request**: Total infra cost / monthly requests
-- [ ] **Cost per user**: Total infra cost / MAU
-- [ ] **Gross margin impact**: How does infra cost affect product margin?
-- [ ] **Scale economics**: At 10x traffic, does cost scale linearly or worse?
-- [ ] **Break-even point**: At what traffic level does this architecture pay for itself?
+ORMs default to fetching all columns. On wide tables this wastes bandwidth and hides performance problems.
 
-### Architecture Decision -> Business Impact
+```typescript
+// BAD: fetches all 30 columns
+const users = await prisma.user.findMany({ include: { posts: true } });
 
-| Architecture Choice | Technical Benefit | Business Impact |
-|---------------------|-------------------|-----------------|
-| CDN + Edge caching | Lower latency | Higher conversion, better SEO |
-| Read replicas | Scale reads | Handle traffic spikes without degradation |
-| Queue-based processing | Decouple services | Smoother UX during high load |
-| Multi-region deployment | Fault tolerance | Enterprise SLA compliance |
-| Auto-scaling | Right-sized infra | Lower COGS, better margins |
+// GOOD: fetch only what the endpoint needs
+const users = await prisma.user.findMany({
+  select: { id: true, name: true, email: true },
+  include: { posts: { select: { id: true, title: true } } }
+});
+```
 
-### FinOps Practices for Backend Teams
+For Go (sqlc): write explicit column lists in SQL queries — sqlc enforces this naturally.
+For Python (SQLAlchemy): use `load_only()` or explicit column selection.
 
-1. **Tag all resources** - Every resource tagged with `team`, `service`, `environment`
-2. **Set billing alerts** - Alert at 50%, 80%, 100% of budget
-3. **Review weekly** - 15-minute weekly cost review meeting
-4. **Right-size monthly** - Check CPU/memory utilization, downsize overprovisioned
-5. **Spot/Preemptible for non-prod** - 60-90% savings on dev/staging
+### Structured Error Responses (RFC 9457)
 
-See [references/infrastructure-economics.md](references/infrastructure-economics.md) for detailed cost modeling, cloud provider comparisons, and ROI calculators.
+Return machine-readable errors from day one. Clients shouldn't have to regex-parse error messages.
+
+```json
+{
+  "type": "https://api.example.com/problems/validation-error",
+  "title": "Validation failed",
+  "status": 422,
+  "detail": "email must be a valid email address",
+  "instance": "/v1/users",
+  "errors": [{ "field": "email", "message": "invalid format" }]
+}
+```
+
+Set `Content-Type: application/problem+json`. This format is a standard (RFC 9457) and parseable by any HTTP client.
+
+### Query Plan Verification
+
+Before shipping any new query to production, verify its execution plan:
+
+```sql
+EXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT)
+SELECT ... FROM ... WHERE ...;
+```
+
+Red flags in the output: `Seq Scan` on large tables, `Nested Loop` with high row estimates, `Sort` without index. Add indexes or rewrite the query before deploying.
+
+---
+
+## Performance Debugging Workflow
+
+When a service is slow, work through these layers in order. Fix the cheapest layer first — don't add caching before fixing N+1 queries.
+
+| Step | What to Check | Fix |
+|------|--------------|-----|
+| 1. Query analysis | Enable query logging, find N+1s and slow queries | Rewrite with `include`/joins, add `select` for field-level optimization |
+| 2. Indexing | Run `EXPLAIN ANALYZE` on slow queries | Add composite indexes matching WHERE + ORDER BY patterns |
+| 3. Connection pooling | Check connection count vs. pool size | Configure pool limits (Prisma `connection_limit`, PgBouncer, pgx pool) |
+| 4. Caching | Identify read-heavy, rarely-changing data | Add Redis/in-memory cache with TTL + invalidation strategy |
+| 5. Timeouts | Check for missing timeouts on DB, HTTP, handlers | Add timeouts at every layer (see Production Hardening above) |
+| 6. Platform tuning | Shared DB limits, cold starts, memory | Upgrade tier, add read replicas, tune runtime settings |
+
+**Key principle**: always measure before and after. Use structured logging with request IDs to trace specific slow requests end-to-end.
+
+---
+
+## Infrastructure Economics
+
+Backend architecture decisions directly impact cost and revenue. See [references/infrastructure-economics.md](references/infrastructure-economics.md) for detailed cost modeling, SLA-to-revenue mapping, unit economics checklists, and FinOps practices.
 
 ---
 
@@ -305,6 +257,7 @@ See [references/infrastructure-economics.md](references/infrastructure-economics
 - [references/rust-best-practices.md](references/rust-best-practices.md) - Ownership, async, Axum, SeaORM, error handling, testing
 - [references/python-best-practices.md](references/python-best-practices.md) - FastAPI, SQLAlchemy, async patterns, validation, testing, performance
 - [references/nodejs-best-practices.md](references/nodejs-best-practices.md) - Event loop, async patterns, Express/Fastify/NestJS/Hono, error handling, memory management, security, profiling
+- [references/csharp-best-practices.md](references/csharp-best-practices.md) - C# 14 / .NET 10 LTS, extension members, field keyword, ASP.NET Core 10 (validation, SSE, OpenAPI 3.1), EF Core 10 (LeftJoin, named filters), HybridCache, Polly v8 resilience
 - [references/database-patterns.md](references/database-patterns.md) - PostgreSQL patterns (JSONB, CTEs, partitioning), connection pooling, migration strategies, ORM comparison, index design
 - [references/message-queues-background-jobs.md](references/message-queues-background-jobs.md) - BullMQ patterns, broker comparison (Redis/SQS/Kafka/RabbitMQ), idempotent jobs, DLQ, scheduling, delivery guarantees
 - [data/sources.json](data/sources.json) - External references per language/runtime
@@ -325,6 +278,7 @@ See [references/infrastructure-economics.md](references/infrastructure-economics
 - [assets/go/template-go-fiber-gorm.md](assets/go/template-go-fiber-gorm.md) - Go + Fiber + GORM + PostgreSQL
 - [assets/rust/template-rust-axum-seaorm.md](assets/rust/template-rust-axum-seaorm.md) - Rust + Axum + SeaORM + PostgreSQL
 - [assets/python/template-python-fastapi-sqlalchemy.md](assets/python/template-python-fastapi-sqlalchemy.md) - Python + FastAPI + SQLAlchemy + PostgreSQL
+- [assets/csharp/template-csharp-aspnet-efcore.md](assets/csharp/template-csharp-aspnet-efcore.md) - C# + ASP.NET Core + Entity Framework Core + PostgreSQL
 
 **Related Skills**
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) - System decomposition, SLAs, and data flows
@@ -373,8 +327,18 @@ When users ask version-sensitive recommendation questions, do a quick freshness 
 - Drizzle vs Prisma for TypeScript
 - tRPC and end-to-end type safety
 - Edge computing and serverless patterns
+- .NET 10 LTS (Nov 2025) and C# 14 adoption
+- ASP.NET Core 10 built-in validation vs FluentValidation
+- EF Core 10 vs Dapper for C# data access
+- HybridCache vs manual IMemoryCache + IDistributedCache
 
 ---
 
 ## Operational Playbooks
 - [references/operational-playbook.md](references/operational-playbook.md) - Full backend architecture patterns, checklists, TypeScript notes, and decision tables
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "title": "Claude Code MCP - Sources",
+    "description": "Official documentation for MCP configuration and development in Claude Code",
+    "last_updated": "2026-01-21",
+    "skill": "agents-mcp"
+  },
+  "official_documentation": [
+    {
+      "name": "Claude Code MCP Documentation",
+      "url": "https://code.claude.com/docs/en/mcp",
+      "description": "Official MCP integration documentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Specification (November 2025)",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25",
+      "description": "Latest spec with CIMD, Enterprise-Managed Authorization, incremental scopes, Streamable HTTP",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Specification (June 2025)",
+      "url": "https://modelcontextprotocol.io/specification/2025-06-18",
+      "description": "Previous spec with Streamable HTTP, OAuth 2.1, structured outputs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MCP SDK Documentation",
+      "url": "https://github.com/modelcontextprotocol/typescript-sdk",
+      "description": "TypeScript SDK for building MCP servers",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Best Practices",
+      "url": "https://modelcontextprotocol.info/docs/best-practices/",
+      "description": "Architecture and implementation best practices for MCP servers",
+      "add_as_web_search": true
+    }
+  ],
+  "official_servers": [
+    {
+      "name": "MCP Servers Repository",
+      "url": "https://github.com/modelcontextprotocol/servers",
+      "description": "Official MCP server implementations (PostgreSQL, filesystem, git, etc.)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Registry (Preview)",
+      "url": "https://modelcontextprotocol.info/blog/mcp-next-version-update/",
+      "description": "Open catalog and API for MCP server discovery (launched September 2025)",
+      "add_as_web_search": false
+    }
+  ],
+  "tutorials": [
+    {
+      "name": "Building MCP Servers Guide",
+      "url": "https://modelcontextprotocol.io/docs/building-servers",
+      "description": "Step-by-step guide to building MCP servers",
+      "add_as_web_search": false
+    },
+    {
+      "name": "15 Best Practices for MCP Servers in Production",
+      "url": "https://thenewstack.io/15-best-practices-for-building-mcp-servers-in-production/",
+      "description": "Production deployment patterns, Docker containerization, zero-trust model",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Cloud Deployment Guide (Ekamoira)",
+      "url": "https://www.ekamoira.com/blog/mcp-servers-cloud-deployment-guide",
+      "description": "Cloudflare Workers, edge deployment, remote MCP server hosting",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MCP on AWS",
+      "url": "https://aws.amazon.com/blogs/machine-learning/unlocking-the-power-of-model-context-protocol-mcp-on-aws/",
+      "description": "AWS deployment patterns for MCP servers",
+      "add_as_web_search": false
+    }
+  ],
+  "security": [
+    {
+      "name": "State of MCP Server Security 2025 (Astrix Research)",
+      "url": "https://astrix.security/learn/blog/state-of-mcp-server-security-2025/",
+      "description": "Research: 53% use insecure secrets, 8.5% OAuth adoption, MCP Secret Wrapper solution",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Security Complete Guide (HiveTrail)",
+      "url": "https://hivetrail.com/blog/mcp-server-security-complete-guide/",
+      "description": "CVE-2025-6514, prompt injection attacks, zero-trust model, production security",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP November 2025 Authorization Spec (Aaron Parecki)",
+      "url": "https://aaronparecki.com/2025/11/25/1/mcp-authorization-spec-update",
+      "description": "CIMD, DCR deprecation, Enterprise IdP integration, incremental scopes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Auth Updates (March 2025)",
+      "url": "https://auth0.com/blog/mcp-specs-update-all-about-auth/",
+      "description": "OAuth 2.1 requirement, Resource Indicators (RFC 8707), token security",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MCP Security Risks and Challenges (Data Science Dojo)",
+      "url": "https://datasciencedojo.com/blog/mcp-security-risks-and-challenges/",
+      "description": "Toxic flow analysis, MCP-scan tool, prompt injection case studies",
+      "add_as_web_search": false
+    }
+  ],
+  "research": [
+    {
+      "name": "Radiologist Copilot: Orchestrated Tools Pattern (2025)",
+      "url": "https://arxiv.org/abs/2512.02814",
+      "description": "Agentic AI with tool orchestration - patterns applicable to MCP server design",
+      "add_as_web_search": false
+    },
+    {
+      "name": "PPTArena: Tool Routing Benchmark (2025)",
+      "url": "https://arxiv.org/abs/2512.03042",
+      "description": "Agent routing between programmatic and deterministic tools - MCP design patterns",
+      "add_as_web_search": false
+    }
+  ]
+}

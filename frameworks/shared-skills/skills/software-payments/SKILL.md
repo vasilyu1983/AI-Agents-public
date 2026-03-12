@@ -1,6 +1,6 @@
 ---
 name: software-payments
-description: Production-grade payment integration for Stripe, Paddle, LemonSqueezy, RevenueCat, Adyen, Chargebee, Recurly, and Lago. Covers checkout flows, subscription lifecycle, webhook handling, multi-currency/regional pricing, feature gating, one-time purchases, billing portal, refunds, usage-based billing, and payment testing. Use when implementing or debugging any payment/billing/subscription system.
+description: Production-grade payment integration for Stripe, Paddle, Adyen, and more. Use when implementing checkout, subscriptions, webhooks, or billing.
 ---
 
 # Payments & Billing Engineering
@@ -21,12 +21,17 @@ Defaults bias toward: Stripe as primary processor (most common), webhooks as sou
 | Enterprise / high-volume | Adyen | 250+ payment methods, interchange++ pricing |
 | Complex billing logic | Chargebee / Recurly on top of Stripe | Per-seat + usage, contract billing, revenue recognition |
 | Usage-based billing | Stripe Billing Meters or Lago (open-source) | API calls, AI tokens, compute metering |
+| UK Direct Debit | GoCardless | Bacs/SEPA/ACH DD, lowest involuntary churn |
+| EU multi-method | Mollie | iDEAL, Bancontact, SEPA DD, Klarna — 25+ methods |
+| Online + POS | Square | Unified commerce: online payments + in-person readers |
+| Bank-to-bank (A2A) | Open Banking (TrueLayer / Yapily) | Zero card fees, instant settlement, no chargebacks |
 | Webhook handling | Verify signature + idempotent handlers | Stripe retries for 3 days |
 | Feature gating | Tier hierarchy + feature matrix | Check at API boundary |
 | One-time purchases | Stripe Checkout `mode: 'payment'` | Alongside subscriptions |
 | Billing portal | Stripe Customer Portal | Self-service management |
 | Regional pricing | PPP-adjusted prices per country | Use `x-vercel-ip-country` or GeoIP |
 | PayPal button | Stripe PayPal method or PayPal Commerce Platform | Avoid Braintree — deprecated 2026, EOL Jan 2027 |
+| BNPL (e-commerce) | Klarna (via Stripe/Mollie/direct) | Split payments; UK regulation expected 2026-27 |
 | Testing | Stripe CLI + test cards | `4242 4242 4242 4242` |
 
 ## Scope
@@ -61,9 +66,11 @@ Three platform layers (can be combined):
 
 | Layer | Role | Examples |
 |-------|------|----------|
-| **Payment Processor** | Moves money, payment methods, fraud | Stripe, Adyen |
+| **Payment Processor** | Moves money, payment methods, fraud | Stripe, Adyen, Mollie, Square |
 | **Merchant of Record (MoR)** | Handles tax, legal, disputes for you | Paddle, LemonSqueezy, Stripe Managed Payments |
 | **Billing Orchestrator** | Subscription logic, dunning, revenue recognition | Chargebee, Recurly, Lago (open-source) |
+| **Direct Debit** | Bank-account recurring pulls | GoCardless (Bacs, SEPA, ACH) |
+| **Open Banking (A2A)** | Bank-to-bank instant payments | TrueLayer, Yapily |
 
 ```text
 Payment integration needs: [Business Model]
@@ -71,8 +78,9 @@ Payment integration needs: [Business Model]
   STEP 1: Choose your processor
     - Default / most common -> Stripe
     - Enterprise, >$1M/yr, 250+ payment methods -> Adyen
+    - EU-focused, need iDEAL/Bancontact/SEPA -> Mollie
     - Need PayPal button -> Stripe (PayPal method) or PayPal Commerce Platform
-    - ⚠ Do NOT start new projects on Braintree (deprecated 2026, EOL Jan 2027)
+    - WARNING: Do NOT start new projects on Braintree (deprecated 2026, EOL Jan 2027)
 
   STEP 2: Do you need a MoR?
     - Handle own tax + compliance -> Skip MoR, use processor directly
@@ -90,6 +98,11 @@ Payment integration needs: [Business Model]
     - Mobile app (iOS/Android) -> RevenueCat (wraps both stores)
     - Hybrid (web + app) -> RevenueCat + Stripe (share customer IDs)
     - Marketplace / multi-party -> Stripe Connect
+    - UK Direct Debit recurring -> GoCardless (Bacs DD, lowest involuntary churn)
+    - Multi-method EU checkout -> Mollie (25+ methods, single integration)
+    - Online + in-person POS -> Square (unified commerce)
+    - High-value A2A / zero card fees -> Open Banking (TrueLayer)
+    - BNPL for e-commerce -> Klarna (via Stripe, Mollie, or direct)
     - One-time digital goods -> Stripe Checkout (payment mode)
     - Physical goods -> Stripe + shipping integration
     - Emerging markets / PPP -> Multiple Stripe Price objects per region
@@ -97,52 +110,8 @@ Payment integration needs: [Business Model]
     - B2B invoicing -> Stripe Invoicing
 ```
 
----
-
-## Platform Comparison (Feb 2026)
-
-### Payment Processors
-
-| Feature | Stripe | Adyen |
-|---------|--------|-------|
-| **Model** | Payment processor | Payment processor (enterprise) |
-| **Tax handling** | Add-on (Stripe Tax) / MoR (Managed Payments) | Via partners or self-managed |
-| **Pricing** | 2.9% + 30c (US) | Interchange++ (volume-dependent) |
-| **Subscription mgmt** | Full API (Stripe Billing) | Basic (pair with Chargebee/Recurly) |
-| **Payment methods** | 100+ (dynamic selection) | 250+ (strongest local method coverage) |
-| **Checkout** | Hosted / Embedded / Custom | Drop-in / API / Hosted |
-| **Marketplace** | Stripe Connect | Adyen for Platforms |
-| **Best for** | Default choice, startups to enterprise | High-volume (>$1M/yr), global enterprise |
-
-### Merchants of Record (MoR)
-
-| Feature | Paddle | LemonSqueezy | Stripe Managed Payments |
-|---------|--------|--------------|------------------------|
-| **Tax handling** | Included (200+ countries) | Included | Included |
-| **Pricing** | 5% + 50c | 5% + 50c | TBD (expanding from preview) |
-| **Subscription mgmt** | Full API | Full API | Full Stripe API |
-| **API flexibility** | Paddle API | Simpler API | Full Stripe ecosystem |
-| **Best for** | SaaS (EU tax) | Indie SaaS, digital products | Already on Stripe, want MoR |
-
-### Billing Orchestrators (sit on top of processors)
-
-| Feature | Chargebee | Recurly | Lago |
-|---------|-----------|---------|------|
-| **Model** | Billing layer on Stripe/Adyen/Braintree | Billing layer on processors | Open-source billing engine |
-| **Pricing** | From $0 (Startup) to custom | From $0 to custom | Free (self-host) or cloud |
-| **Usage-based** | Limited (5K records cap) | Basic support | Full metering (designed for it) |
-| **Revenue recognition** | Built-in (RevRec) | Built-in | Via integrations |
-| **Dunning** | Advanced automation | Strong (best-in-class B2C) | Basic |
-| **Best for** | B2B SaaS, complex billing | B2C subscriptions, churn focus | AI/ML SaaS, usage-based pricing |
-
-### Mobile
-
-| Feature | RevenueCat |
-|---------|------------|
-| **Model** | Mobile subscription SDK |
-| **Pricing** | Free to $499/mo + % |
-| **Platforms** | iOS, Android, React Native, Flutter |
-| **Best for** | In-app purchases, cross-platform subscriptions |
+For detailed platform comparison tables, see [references/platform-comparison.md](references/platform-comparison.md).
+For UK/EU-specific platforms (GoCardless, Mollie, Square, Klarna, Open Banking), see [references/uk-eu-payments-guide.md](references/uk-eu-payments-guide.md).
 
 ---
 
@@ -229,67 +198,7 @@ const session = await stripe.checkout.sessions.create({
 
 **Webhooks are the source of truth for subscription state.** Never trust client-side callbacks alone.
 
-```typescript
-// Webhook route (Next.js App Router)
-export async function POST(request: NextRequest) {
-  const body = await request.text();
-  const signature = request.headers.get('stripe-signature');
-
-  if (!signature) {
-    return NextResponse.json({ error: 'Missing signature' }, { status: 400 });
-  }
-
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-  if (!webhookSecret) {
-    console.error('[webhook] STRIPE_WEBHOOK_SECRET not configured');
-    return NextResponse.json({ error: 'Config error' }, { status: 500 });
-  }
-
-  let event: Stripe.Event;
-  try {
-    event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
-  } catch (err) {
-    console.error('[webhook] Signature verification failed:', err);
-    return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
-  }
-
-  try {
-    switch (event.type) {
-      case 'checkout.session.completed':
-        await handleCheckoutCompleted(event.data.object);
-        break;
-      case 'checkout.session.expired':
-        handleCheckoutExpired(event.data.object); // Fire-and-forget
-        break;
-      case 'customer.subscription.created':
-        await handleSubscriptionCreated(event.data.object);
-        break;
-      case 'customer.subscription.updated':
-        await handleSubscriptionUpdated(event.data.object);
-        break;
-      case 'customer.subscription.deleted':
-        await handleSubscriptionDeleted(event.data.object);
-        break;
-      case 'invoice.payment_succeeded':
-        await handlePaymentSucceeded(event.data.object);
-        break;
-      case 'invoice.payment_failed':
-        await handlePaymentFailed(event.data.object);
-        break;
-      default:
-        console.log(`Unhandled event: ${event.type}`);
-    }
-    return NextResponse.json({ received: true });
-  } catch (error) {
-    console.error('[webhook] Handler failed', {
-      eventId: event.id,
-      eventType: event.type,
-      error: error instanceof Error ? error.message : 'Unknown',
-    });
-    return NextResponse.json({ error: 'Handler failed' }, { status: 500 });
-  }
-}
-```
+Pattern: read raw body as text → verify `stripe.webhooks.constructEvent(body, signature, secret)` → `switch(event.type)` → return `{ received: true }` on success or 500 on handler error (so Stripe retries). Full route implementation in [references/stripe-patterns.md](references/stripe-patterns.md).
 
 #### Essential Webhook Events
 
@@ -306,20 +215,7 @@ export async function POST(request: NextRequest) {
 
 #### Fire-and-Forget Pattern for Non-Critical Tracking
 
-```typescript
-// Abandonment tracking — MUST NOT fail the webhook response
-export function handleCheckoutExpired(session: Stripe.Checkout.Session): void {
-  const userId = session.metadata?.user_id;
-  if (!userId) return;
-
-  // No await, no throw — pure side effect
-  captureServerEvent(userId, 'checkout_abandoned', {
-    tier: session.metadata?.tier,
-    interval: session.metadata?.billing_interval,
-    session_id: session.id,
-  });
-}
-```
+For `checkout.session.expired` (and similar analytics events): call tracking without `await`, never `throw`. Non-critical tracking must not cause a webhook 500.
 
 ### 4. Subscription Tier Model
 
@@ -358,65 +254,11 @@ export function isTierUpgrade(current: SubscriptionTier, target: SubscriptionTie
 
 ### 5. Upgrade/Downgrade Flow
 
-```typescript
-// In-place upgrade: modify existing subscription with proration
-if (hasActivePaidSubscription) {
-  const currentSub = await stripe.subscriptions.retrieve(subscriptionId);
-
-  await stripe.subscriptions.update(subscriptionId, {
-    items: [{
-      id: currentSub.items.data[0].id,
-      price: newPriceId,
-    }],
-    proration_behavior: 'create_prorations', // Charge/credit difference
-    metadata: {
-      user_id: userId,
-      previous_tier: currentTier,
-      new_tier: newTier,
-    },
-  });
-
-  // Update local DB immediately (webhook will confirm)
-  await db.subscriptions.update({ tier: newTier }).where({ user_id: userId });
-
-  return { success: true, upgraded: isTierUpgrade(currentTier, newTier) };
-}
-```
+Use `stripe.subscriptions.update()` with `proration_behavior: 'create_prorations'` and the new `price` on the existing item. Update local DB immediately; webhook will confirm. See full lifecycle in [references/subscription-lifecycle.md](references/subscription-lifecycle.md).
 
 ### 6. Regional / PPP Pricing
 
-```typescript
-// Define emerging markets for PPP-adjusted pricing
-export const EMERGING_MARKETS = [
-  'IN', 'BR', 'MX', 'ID', 'PH', 'ZA', 'TR', 'VN',
-  'EG', 'MA', 'DZ', 'TN',
-] as const;
-
-// Create separate Stripe Price objects for each region
-// Standard: $9.99/mo, Emerging: $3.99/mo (~60% discount)
-
-export function getPriceId(
-  tier: PaidTier,
-  interval: BillingInterval,
-  countryCode?: string
-): string {
-  const isEmerging = countryCode && EMERGING_MARKETS.includes(countryCode);
-
-  if (interval === 'year') {
-    return isEmerging
-      ? TIER_EMERGING_ANNUAL_PRICE_IDS[tier]
-      : TIER_ANNUAL_PRICE_IDS[tier];
-  }
-
-  return isEmerging
-    ? TIER_EMERGING_PRICE_IDS[tier]
-    : TIER_PRICE_IDS[tier];
-}
-
-// Get country from Vercel header (or GeoIP service)
-const countryCode = request.headers.get('x-vercel-ip-country') || 'US';
-const priceId = getPriceId(tier, interval, countryCode);
-```
+Create separate Stripe Price objects per region (standard vs emerging). Use `x-vercel-ip-country` or GeoIP for detection. Full implementation and market list in [references/regional-pricing-guide.md](references/regional-pricing-guide.md).
 
 ### 7. One-Time Purchases Alongside Subscriptions
 
@@ -430,183 +272,40 @@ export function hasUnlimitedProductAccess(
 ): boolean {
   const isActive = status === 'active' || status === 'trialing';
   if (!isActive) return false;
-
   const productConfig = ONE_TIME_PRODUCTS[product];
   if (!productConfig.unlimitedFeature) return false;
-
   return hasFeatureAccess(tier, productConfig.unlimitedFeature);
 }
-
-// Checkout for one-time purchase
-const session = await stripe.checkout.sessions.create({
-  customer: customerId,
-  mode: 'payment', // Not 'subscription'
-  line_items: [{ price: productPriceId, quantity: 1 }],
-  metadata: {
-    user_id: userId,
-    product_type: 'crush_compatibility',
-    purchase_id: purchaseId, // Track in your DB
-  },
-  success_url: `${appUrl}/purchase/success?id=${purchaseId}`,
-  cancel_url: `${appUrl}/purchase/cancel`,
-});
 ```
 
 ### 8. Billing Portal
 
-```typescript
-// Minimal billing portal route
-export async function POST() {
-  const user = await getAuthenticatedUser();
-  const subscription = await db.subscriptions
-    .select('stripe_customer_id')
-    .where({ user_id: user.id })
-    .single();
-
-  if (!subscription?.stripe_customer_id) {
-    return NextResponse.json({ error: 'No billing account' }, { status: 404 });
-  }
-
-  const session = await stripe.billingPortal.sessions.create({
-    customer: subscription.stripe_customer_id,
-    return_url: `${appUrl}/settings/subscription`,
-  });
-
-  return NextResponse.json({ url: session.url });
-}
-```
+Use `stripe.billingPortal.sessions.create()` to redirect customers to Stripe's self-service portal for plan changes, payment method updates, and cancellation. See [references/stripe-patterns.md](references/stripe-patterns.md) for portal configuration checklist.
 
 ### 9. Referral/Coupon Integration
 
-```typescript
-// Check for pending referral before creating checkout
-const pendingReferral = await getUserPendingReferral(userId);
-
-const session = await stripe.checkout.sessions.create({
-  // ...
-  discounts: pendingReferral
-    ? [{ coupon: REFERRAL_COUPON_ID }]
-    : undefined,
-  // Only allow promo codes if no referral discount
-  allow_promotion_codes: !pendingReferral,
-});
-
-// On invoice.payment_succeeded, reward the referrer
-if (invoice.billing_reason === 'subscription_create') {
-  await stripe.customers.createBalanceTransaction(
-    referrerCustomerId,
-    {
-      amount: -creditAmount, // Negative = credit
-      currency: 'gbp',
-      description: `Referral reward (${referralCode})`,
-    }
-  );
-}
-```
+Key constraint: `allow_promotion_codes` and `discounts` are mutually exclusive in Stripe Checkout. If a referral coupon applies, set `discounts: [{ coupon: REFERRAL_COUPON_ID }]` and omit `allow_promotion_codes`. On `invoice.payment_succeeded` with `billing_reason === 'subscription_create'`, reward the referrer via `stripe.customers.createBalanceTransaction()`.
 
 ---
 
 ## Feature Gating Patterns
 
-### Three-Layer Feature Gating
+Every paid feature requires enforcement at 3 layers: **Feature Registry** (maps features to tiers), **API Enforcement** (returns 403), **UI Paywall** (shows upgrade CTA). Missing any layer creates a security hole or broken UX.
 
-Every paid feature requires enforcement at exactly 3 layers. Missing any layer creates either a security hole or a broken UX.
+Key anti-patterns:
+- **Gate on Wrong Key**: If the feature key is in the free tier, the gate is a permanent no-op.
+- **Polymorphic Field Shapes**: `transits: Transit[] | { __gated: true }` crashes `(data.transits || []).sort()`. Use consistent shapes with an explicit `transitsGated: boolean` flag.
+- **Checkout Mutual Exclusivity**: `allow_promotion_codes` + `discounts` together = Stripe rejects.
 
-| Layer | Role | Example | Failure Mode |
-|-------|------|---------|--------------|
-| **1. Feature Registry** | Maps features to tiers + defines benefit text | `FEATURES: { house_systems: { tier: 'cosmic' } }` | Wrong tier assignment = gate is a no-op |
-| **2. API Enforcement** | Returns 403 or gated response for unauthorized access | `if (!hasAccess(feature)) return Response.json({ error: 'upgrade' }, { status: 403 })` | Data leaks to free users |
-| **3. UI Paywall** | Shows upgrade CTA instead of locked content | `<FeatureBannerPreview feature="house_systems" />` | Users see broken/empty UI |
-
-PASS/FAIL:
-
-```
-FAIL: canAccess('natal_chart') where natal_chart is in free tier → always true, paywall never shows
-PASS: canAccess('house_systems') where house_systems is Cosmic-only → correctly gates advanced sections
-FAIL: UI shows paywall but API still returns full data → security hole
-PASS: API returns gated response AND UI shows paywall → defense in depth
-```
-
-Anti-pattern — "Gate on Wrong Key": The most dangerous gating bug. If the feature key used in `canAccess()` is listed in the free tier, the gate is a permanent no-op. Always verify the gate key maps to the correct tier in the feature registry.
-
-Pattern — Consistent Paywall Components: Use ONE paywall component across all features (e.g., `FeatureBannerPreview`). Don't build one-off locked views per feature.
-
-Pattern — Analytics on Every Gate: Every paywall must fire an analytics event (e.g., `feature_gated`) for conversion funnel measurement.
-
-### Gated API Response Shapes
-
-Anti-pattern — Polymorphic Field Shapes:
-
-```typescript
-// FAIL: Same field returns different types depending on tier
-type Response = {
-  transits: Transit[] | { __gated: true; count: number; topTransit: string };
-}
-// Client code: (data.transits || []).sort() → CRASH on gated object (truthy non-array)
-```
-
-```typescript
-// PASS: Consistent shape with explicit gated flag
-type Response = {
-  transits: Transit[];  // Always an array (empty for free, full for paid)
-  transitsGated: boolean;
-  transitTeaser?: { count: number; topTransit: string };
-}
-```
-
-If you must use polymorphic shapes, guard with `Array.isArray()` at the boundary:
-
-```typescript
-// Defensive: Array.isArray() guard, NOT || []
-const transits = Array.isArray(data.transits) ? data.transits : [];
-// WRONG: data.transits || [] — { __gated: true } is truthy, passes through
-```
-
-### Stripe Checkout Mutual Exclusivity
-
-```
-FAIL: { allow_promotion_codes: true, discounts: [{ coupon: introId }] } → Stripe rejects
-PASS: if (hasIntroCoupon) { discounts: [...] } else { allow_promotion_codes: true }
-```
-
-Test every billing path: monthly intro, monthly referral, annual no-discount, free trial. They exercise different parameter combinations.
-
-### SDK Types vs. Documentation
-
-```
-FAIL: Plan says stripe.customers.list().total_count — doesn't exist in SDK
-PASS: stripe.customers.list().data.length — actual SDK ApiList<T> shape
-```
-
-**Always verify Stripe SDK TypeScript types** (`node_modules/stripe/types/`), not documentation examples. SDK types diverge from REST API docs.
+**Always verify Stripe SDK TypeScript types** (`node_modules/stripe/types/`), not documentation examples.
 
 For detailed gating architecture (consumables, fraud prevention, discriminated unions), see [references/feature-gating-patterns.md](references/feature-gating-patterns.md).
 
 ---
 
-## Stripe API Version Notes (2025-2026)
+## Stripe API Version Notes
 
-| Version | Key Changes |
-|---------|-------------|
-| `2026-01-28.clover` | Subscription pause support, Reserve resources, per-payment-method capture config |
-| `2025-11-17.clover` | Invoice `parent.subscription_details` replaces top-level `subscription` field |
-| `2025+` | Managed Payments (MoR) — expanding from private preview |
-| `2024+` | Dynamic payment methods by default when `payment_method_types` omitted |
-| API v2 (`/v2`) | Improved idempotency — re-executes failed requests instead of returning cached error |
-
-### Invoice API Breaking Change
-
-```typescript
-// OLD (pre-2025): invoice.subscription was a string
-const subscriptionId = invoice.subscription;
-
-// NEW (2025+): access via parent.subscription_details
-const subscriptionDetails = invoice.parent?.subscription_details;
-const subscriptionId =
-  typeof subscriptionDetails?.subscription === 'string'
-    ? subscriptionDetails.subscription
-    : subscriptionDetails?.subscription?.id;
-```
+Current version: `2026-01-28.clover`. Key breaking change: `invoice.subscription` replaced by `invoice.parent.subscription_details` since `2025-11-17.clover`. Full version table and migration code in [references/stripe-patterns.md](references/stripe-patterns.md).
 
 ---
 
@@ -651,32 +350,33 @@ stripe trigger invoice.payment_failed
 
 ---
 
+## Checkout Contract Propagation
+
+When checkout API response contracts change, treat it as a cross-surface migration. Enumerate all entrypoints, update every caller, route blocked flows to one shared recovery UX. Full checklist in [references/in-app-browser-checkout-contract.md](references/in-app-browser-checkout-contract.md) and [assets/template-checkout-entrypoint-propagation-checklist.md](assets/template-checkout-entrypoint-propagation-checklist.md).
+
 ## Security Checklist
 
-- [ ] Webhook signature verified with `constructEvent()` on every request
-- [ ] `STRIPE_WEBHOOK_SECRET` stored in environment, never in code
-- [ ] Webhook endpoint returns 200 quickly (offload heavy work)
-- [ ] UUID validation on all `metadata.user_id` values before DB operations
-- [ ] HTTPS enforced in production for checkout URLs
-- [ ] Service role client used for webhook DB operations (bypasses RLS)
-- [ ] No PII logged (mask customer IDs in non-error logs)
-- [ ] Idempotency keys used for critical mutations
-- [ ] Rate limiting on checkout endpoint
-- [ ] Existing subscription check before creating new checkout
+10-point checklist covering webhook signature verification, secrets management, UUID validation, HTTPS, idempotency, and rate limiting. Full checklist in [references/stripe-patterns.md](references/stripe-patterns.md).
 
 ---
 
 ## Navigation
 
 **References**
-- [references/stripe-patterns.md](references/stripe-patterns.md) - Stripe patterns: webhook handlers, idempotency, status mapping, error handling, dunning, usage-based billing
+- [references/stripe-patterns.md](references/stripe-patterns.md) - Stripe patterns: webhook handlers, idempotency, status mapping, error handling, dunning, usage-based billing, security checklist, API version notes
 - [references/platform-comparison.md](references/platform-comparison.md) - Platform comparison: Stripe, Adyen, Paddle, LemonSqueezy, Chargebee, Recurly, Lago, Braintree (deprecated)
+- [references/uk-eu-payments-guide.md](references/uk-eu-payments-guide.md) - UK/EU platforms: GoCardless, Mollie, Square, PayPal Commerce, Klarna, Open Banking (TrueLayer, Yapily)
 - [references/testing-patterns.md](references/testing-patterns.md) - E2E testing: Stripe CLI, Playwright checkout, test cards, state sync
 - [references/subscription-lifecycle.md](references/subscription-lifecycle.md) - Full subscription state machine, trials, upgrades/downgrades, cancellation, dunning, pause/resume, database schema
 - [references/regional-pricing-guide.md](references/regional-pricing-guide.md) - PPP implementation, multi-currency Stripe prices, tax by region, fraud prevention, A/B testing pricing
 - [references/webhook-reliability-patterns.md](references/webhook-reliability-patterns.md) - Idempotency, retry handling, dead letter queues, monitoring, event ordering, queue-based processing
 - [references/feature-gating-patterns.md](references/feature-gating-patterns.md) - Feature gating: consumable vs binary unlocks, spread-then-override filtering, fraud prevention, discriminated union typed responses
-- [data/sources.json](data/sources.json) - External documentation links (59 sources)
+- [references/in-app-browser-checkout-contract.md](references/in-app-browser-checkout-contract.md) - Checkout response contract propagation for in-app browser recovery and cross-surface consistency
+- [references/ops-runbook-checkout-errors.md](references/ops-runbook-checkout-errors.md) - Checkout 500 debugging: RLS denials, auth policy, incident loop
+- [data/sources.json](data/sources.json) - External documentation links (69 sources)
+
+**Templates**
+- [assets/template-checkout-entrypoint-propagation-checklist.md](assets/template-checkout-entrypoint-propagation-checklist.md) - Migration checklist for contract changes across all checkout callers
 
 **Related Skills**
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) - Backend API patterns, database, auth
@@ -710,45 +410,17 @@ When users ask version-sensitive questions about payment platforms, do a freshne
 ### What to Report
 
 - **Current landscape**: what is stable and widely used now
-- **Emerging trends**: Managed Payments, usage-based billing, entitlements API
-- **Deprecated/declining**: hardcoded payment_method_types, top-level invoice.subscription
+- **Emerging trends**: Managed Payments, usage-based billing, entitlements API, Open Banking
+- **Deprecated/declining**: hardcoded payment_method_types, top-level invoice.subscription, Braintree
 - **Recommendation**: default choice + alternatives with trade-offs
 
-## Ops Runbook: Checkout 500 + Authorization or RLS Denials
+## Ops Runbook
 
-Use this when checkout endpoints return 500 and DB writes fail due to auth policy (for example PostgreSQL RLS, tenant predicates, or missing role grants).
+For checkout 500 errors with RLS/authorization denials: 5-step incident loop, required logging fields, and guardrails. See [references/ops-runbook-checkout-errors.md](references/ops-runbook-checkout-errors.md).
 
-### 5-Step Incident Loop
 
-```bash
-# 1) Trace checkout call path fast
-rg -n "checkout|purchase|subscription|webhook" src app lib
+## Fact-Checking
 
-# 2) Reproduce with minimal request (capture full response)
-curl -i -X POST http://localhost:3000/api/purchases/checkout \
-  -H 'content-type: application/json' \
-  -d '{"productKey":"example"}'
-
-# 3) Inspect auth and policy checks in code
-rg -n "auth\.|user_id|tenant_id|policy|row level|RLS|canPurchase" src app lib
-
-# 4) Verify DB policies (PostgreSQL)
-psql "$DATABASE_URL" -c "select schemaname, tablename, policyname, permissive, cmd, qual, with_check from pg_policies where tablename in ('purchases','subscriptions','orders') order by tablename, policyname;"
-
-# 5) Verify constrained insert path under app role
-psql "$DATABASE_URL" -c "begin; set local role app_user; -- run minimal insert/select test here; rollback;"
-```
-
-### Required Logging for Fast Triage
-
-- `request_id`, `user_id`, `tenant_id`, `product_key`, `price_id`, `policy_branch`
-- database error code + message + table name
-- payment provider request id (`stripe_request_id` or equivalent)
-
-### Guardrails
-
-- Keep checkout create calls idempotent (idempotency key per user + product + window).
-- Validate authorization before payment intent/session creation.
-- In webhook handlers, never trust client state; reconcile from provider event + DB.
-- Fail closed on entitlement write errors; do not grant access on partial checkout success.
-
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

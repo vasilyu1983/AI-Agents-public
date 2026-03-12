@@ -1,0 +1,3 @@
+{"instruction": "Summarize this text.", "input": "Example paragraph here.", "output": "Short summary."}
+{"instruction": "Classify sentiment.", "input": "The movie was amazing!", "output": "Positive"}
+{"instruction": "Rewrite formally.", "input": "gonna do this later", "output": "I will do this later."}

@@ -1,0 +1,1496 @@
+{
+  "metadata": {
+    "skill": "software-backend",
+    "updated": "2026-01-22",
+    "total_sources": 145,
+    "supported_stacks": [
+      "Node.js + Prisma + PostgreSQL",
+      "Bun + Hono/Elysia + Drizzle + PostgreSQL",
+      "Go + Fiber/Gin + GORM + PostgreSQL",
+      "Rust + Axum + SeaORM + PostgreSQL",
+      "Python + FastAPI + SQLAlchemy + PostgreSQL",
+      "C# + ASP.NET Core + EF Core + PostgreSQL"
+    ],
+    "extensible": true,
+    "latest_updates": "February 2026: Updated C# stack to .NET 10 LTS / C# 14 / EF Core 10 / ASP.NET Core 10. Added HybridCache, Polly v8 resilience, built-in validation, OpenAPI 3.1, SSE, passkeys, named query filters, LeftJoin, extension members, field keyword. January 2026: Added infrastructure economics (FinOps, cost modeling, SLA-to-revenue mapping), edge runtimes (Hono, Elysia, Bun), tRPC for end-to-end type safety, vector databases (Pinecone, Weaviate), Cloudflare Workers/Vercel Edge deployment patterns, Drizzle ORM expanded coverage, zero-trust security patterns."
+  },
+  "categories": {
+    "infrastructure_economics": [
+      {
+        "name": "FinOps Foundation Framework",
+        "url": "https://www.finops.org/framework/",
+        "type": "methodology",
+        "relevance": "Industry-standard cloud financial management framework, cost optimization practices.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Cost Management",
+        "url": "https://aws.amazon.com/aws-cost-management/",
+        "type": "service",
+        "relevance": "AWS cost optimization tools, budgets, recommendations, pricing models.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GCP Cost Management",
+        "url": "https://cloud.google.com/cost-management",
+        "type": "service",
+        "relevance": "GCP billing, cost optimization, committed use discounts, recommendations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Azure Cost Management",
+        "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/",
+        "type": "service",
+        "relevance": "Azure cost analysis, budgets, reserved instances, optimization.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Web Vitals",
+        "url": "https://web.dev/articles/vitals",
+        "type": "guide",
+        "relevance": "Core web vitals (LCP, INP, CLS), performance-to-business impact research.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cloudflare R2 Pricing",
+        "url": "https://developers.cloudflare.com/r2/pricing/",
+        "type": "pricing",
+        "relevance": "Zero egress fees object storage - significant for data-heavy backends.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "AWS Well-Architected Cost Optimization",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html",
+        "type": "guide",
+        "relevance": "AWS best practices for cost-efficient architectures, design principles.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Vercel Pricing Calculator",
+        "url": "https://vercel.com/docs/pricing",
+        "type": "pricing",
+        "relevance": "Serverless and edge function pricing, bandwidth costs, enterprise tiers.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "PlanetScale Pricing",
+        "url": "https://planetscale.com/pricing",
+        "type": "pricing",
+        "relevance": "Serverless MySQL pricing, rows read/written model for cost estimation.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Neon Pricing",
+        "url": "https://neon.tech/pricing",
+        "type": "pricing",
+        "relevance": "Serverless Postgres pricing, compute hours model, autoscaling costs.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      }
+    ],
+    "edge_runtimes": [
+      {
+        "name": "Hono Documentation",
+        "url": "https://hono.dev/",
+        "type": "framework",
+        "relevance": "Ultrafast edge-first web framework, works with Bun, Deno, Cloudflare Workers, Vercel Edge.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Elysia Documentation",
+        "url": "https://elysiajs.com/",
+        "type": "framework",
+        "relevance": "Bun-native framework, faster than Hono, end-to-end type safety, ergonomic API.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Bun Documentation",
+        "url": "https://bun.sh/docs",
+        "type": "runtime",
+        "relevance": "All-in-one JavaScript runtime 2-3x faster than Node.js, built-in bundler, test runner, package manager.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cloudflare Workers Documentation",
+        "url": "https://developers.cloudflare.com/workers/",
+        "type": "platform",
+        "relevance": "Edge computing platform with <1ms cold starts, global deployment, V8 isolates.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Vercel Edge Functions",
+        "url": "https://vercel.com/docs/functions/edge-functions",
+        "type": "platform",
+        "relevance": "Edge runtime for Next.js and standalone functions, tight framework integration.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Deno Documentation",
+        "url": "https://docs.deno.com/",
+        "type": "runtime",
+        "relevance": "Secure-by-default JavaScript runtime with native TypeScript, web standard APIs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "type_safe_apis": [
+      {
+        "name": "tRPC Documentation",
+        "url": "https://trpc.io/docs",
+        "type": "library",
+        "relevance": "End-to-end type-safe APIs without code generation or schemas, TypeScript inference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "tRPC + Next.js Guide",
+        "url": "https://trpc.io/docs/client/nextjs",
+        "type": "guide",
+        "relevance": "Integration patterns for tRPC with Next.js App Router and Pages Router.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Drizzle ORM Documentation",
+        "url": "https://orm.drizzle.team/docs/overview",
+        "type": "orm",
+        "relevance": "SQL-first TypeScript ORM, lightweight, edge-compatible, SQL-like API.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Drizzle vs Prisma Comparison",
+        "url": "https://orm.drizzle.team/docs/prisma",
+        "type": "comparison",
+        "relevance": "Official comparison of Drizzle and Prisma approaches, migration guide.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "vector_databases": [
+      {
+        "name": "Pinecone Documentation",
+        "url": "https://docs.pinecone.io/",
+        "type": "database",
+        "relevance": "Managed vector database for AI/ML applications, serverless, high performance.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Weaviate Documentation",
+        "url": "https://weaviate.io/developers/weaviate",
+        "type": "database",
+        "relevance": "Open-source vector database with GraphQL API, hybrid search, modules.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Qdrant Documentation",
+        "url": "https://qdrant.tech/documentation/",
+        "type": "database",
+        "relevance": "High-performance vector similarity search engine, Rust-based, filtering.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Chroma Documentation",
+        "url": "https://docs.trychroma.com/",
+        "type": "database",
+        "relevance": "AI-native embedding database, simple API, Python/JavaScript SDKs.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "nodejs_frameworks": [
+      {
+        "name": "Express.js Documentation",
+        "url": "https://expressjs.com/",
+        "type": "framework",
+        "relevance": "Most popular Node.js web framework, routing, middleware patterns.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Fastify Documentation",
+        "url": "https://fastify.dev/",
+        "type": "framework",
+        "relevance": "High-performance Node.js framework with schema validation, TypeScript support.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NestJS Documentation",
+        "url": "https://docs.nestjs.com/",
+        "type": "framework",
+        "relevance": "Enterprise-grade Node.js framework with TypeScript, dependency injection, modularity.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Koa.js Documentation",
+        "url": "https://koajs.com/",
+        "type": "framework",
+        "relevance": "Next-generation web framework by Express team, async/await focused.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "prisma_orm": [
+      {
+        "name": "Prisma Documentation",
+        "url": "https://www.prisma.io/docs",
+        "type": "orm",
+        "relevance": "Official Prisma ORM docs, schema design, migrations, queries, best practices.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Prisma Accelerate",
+        "url": "https://www.prisma.io/docs/accelerate",
+        "type": "service",
+        "relevance": "HTTP-based connection pooling, global caching, serverless/edge deployment optimization.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Prisma Schema Reference",
+        "url": "https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference",
+        "type": "reference",
+        "relevance": "Complete schema syntax reference, field types, attributes, relations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Prisma Client API",
+        "url": "https://www.prisma.io/docs/reference/api-reference/prisma-client-reference",
+        "type": "reference",
+        "relevance": "Prisma Client query methods, filtering, pagination, transactions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Prisma Migrate",
+        "url": "https://www.prisma.io/docs/concepts/components/prisma-migrate",
+        "type": "documentation",
+        "relevance": "Database migration workflows, schema evolution, production migrations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Prisma Best Practices",
+        "url": "https://www.prisma.io/docs/guides/performance-and-optimization",
+        "type": "guide",
+        "relevance": "Performance optimization, query efficiency, connection pooling.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "postgresql": [
+      {
+        "name": "PostgreSQL Official Documentation",
+        "url": "https://www.postgresql.org/docs/",
+        "type": "documentation",
+        "relevance": "Authoritative PostgreSQL reference, SQL syntax, data types, indexes, transactions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PostgreSQL Tutorial",
+        "url": "https://www.postgresqltutorial.com/",
+        "type": "tutorial",
+        "relevance": "Practical PostgreSQL tutorials, queries, indexes, stored procedures.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "PostgreSQL Performance Tuning",
+        "url": "https://wiki.postgresql.org/wiki/Performance_Optimization",
+        "type": "guide",
+        "relevance": "Performance optimization techniques, query tuning, configuration.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Use The Index, Luke",
+        "url": "https://use-the-index-luke.com/",
+        "type": "guide",
+        "relevance": "SQL indexing and tuning guide applicable to PostgreSQL.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "authentication_security": [
+      {
+        "name": "Helmet.js Documentation",
+        "url": "https://helmetjs.github.io/",
+        "type": "library",
+        "relevance": "Secure HTTP headers for Express/Node.js - protects against XSS, clickjacking, MIME sniffing.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Passport.js Documentation",
+        "url": "https://www.passportjs.org/",
+        "type": "library",
+        "relevance": "Authentication middleware for Node.js, multiple strategies (JWT, OAuth, local).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "JWT.io",
+        "url": "https://jwt.io/",
+        "type": "standard",
+        "relevance": "JSON Web Token specification, debugger, libraries.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OWASP API Security Top 10",
+        "url": "https://owasp.org/API-Security/",
+        "type": "standard",
+        "relevance": "API security risks and mitigations, authentication, authorization, injection.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OAuth 2.0 Simplified",
+        "url": "https://www.oauth.com/",
+        "type": "guide",
+        "relevance": "OAuth 2.0 flows, grant types, implementation patterns.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Auth0 Blog",
+        "url": "https://auth0.com/blog/",
+        "type": "blog",
+        "relevance": "Authentication patterns, JWT best practices, security tutorials.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "AWS Secrets Manager",
+        "url": "https://docs.aws.amazon.com/secretsmanager/",
+        "type": "service",
+        "relevance": "Secure secret storage, rotation, and access for production apps.",
+        "update_frequency": "continuous",
+        "access": "commercial",
+        "add_as_web_search": false
+      },
+      {
+        "name": "HashiCorp Vault",
+        "url": "https://www.vaultproject.io/docs",
+        "type": "platform",
+        "relevance": "Open-source secrets management, encryption as a service, PKI.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      }
+    ],
+    "validation": [
+      {
+        "name": "Zod Documentation",
+        "url": "https://zod.dev/",
+        "type": "library",
+        "relevance": "TypeScript-first schema validation, type inference, error handling.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Joi Documentation",
+        "url": "https://joi.dev/",
+        "type": "library",
+        "relevance": "Schema validation for JavaScript, complex validation rules.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "class-validator",
+        "url": "https://github.com/typestack/class-validator",
+        "type": "library",
+        "relevance": "Decorator-based validation for TypeScript classes (NestJS).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "caching": [
+      {
+        "name": "Redis Documentation",
+        "url": "https://redis.io/docs/",
+        "type": "database",
+        "relevance": "In-memory data store for caching, sessions, pub/sub, queues.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Node-cache",
+        "url": "https://github.com/node-cache/node-cache",
+        "type": "library",
+        "relevance": "In-memory caching for Node.js applications.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ioredis Documentation",
+        "url": "https://github.com/redis/ioredis",
+        "type": "library",
+        "relevance": "Robust Redis client for Node.js with cluster support, TypeScript.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "background_jobs": [
+      {
+        "name": "BullMQ Documentation",
+        "url": "https://docs.bullmq.io/",
+        "type": "library",
+        "relevance": "Redis-based job queue for Node.js, retries, priorities, scheduling.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Bull Documentation",
+        "url": "https://github.com/OptimalBits/bull",
+        "type": "library",
+        "relevance": "Popular Redis-based queue (predecessor to BullMQ).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Agenda Documentation",
+        "url": "https://github.com/agenda/agenda",
+        "type": "library",
+        "relevance": "MongoDB-based job scheduling for Node.js.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "testing": [
+      {
+        "name": "Jest Documentation",
+        "url": "https://jestjs.io/",
+        "type": "testing",
+        "relevance": "JavaScript testing framework, mocking, coverage, snapshots.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Vitest Documentation",
+        "url": "https://vitest.dev/",
+        "type": "testing",
+        "relevance": "Fast unit testing framework, Vite-powered, Jest-compatible.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Supertest",
+        "url": "https://github.com/ladjs/supertest",
+        "type": "library",
+        "relevance": "HTTP assertions for API testing.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Playwright Documentation",
+        "url": "https://playwright.dev/",
+        "type": "testing",
+        "relevance": "End-to-end testing for web applications, API testing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Testing Library",
+        "url": "https://testing-library.com/",
+        "type": "library",
+        "relevance": "User-centric testing utilities for DOM and React.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "logging_monitoring": [
+      {
+        "name": "Pino Documentation",
+        "url": "https://getpino.io/",
+        "type": "library",
+        "relevance": "High-performance Node.js logger, structured JSON logging.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Winston Documentation",
+        "url": "https://github.com/winstonjs/winston",
+        "type": "library",
+        "relevance": "Versatile logging library, multiple transports, formatting.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Sentry Documentation",
+        "url": "https://docs.sentry.io/",
+        "type": "service",
+        "relevance": "Error tracking and monitoring for production applications.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "New Relic APM",
+        "url": "https://docs.newrelic.com/",
+        "type": "service",
+        "relevance": "Application performance monitoring, distributed tracing.",
+        "update_frequency": "continuous",
+        "access": "commercial",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenTelemetry JS",
+        "url": "https://opentelemetry.io/docs/instrumentation/js/",
+        "type": "standard",
+        "relevance": "Observability framework for tracing, metrics, logs.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "api_documentation": [
+      {
+        "name": "Swagger/OpenAPI Specification",
+        "url": "https://swagger.io/specification/",
+        "type": "standard",
+        "relevance": "API documentation standard, schema definition.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "RFC 9457 - Problem Details for HTTP APIs",
+        "url": "https://www.rfc-editor.org/rfc/rfc9457",
+        "type": "standard",
+        "relevance": "Standard error response format for HTTP APIs (updates RFC 7807).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "swagger-jsdoc",
+        "url": "https://github.com/Surnet/swagger-jsdoc",
+        "type": "library",
+        "relevance": "Generate OpenAPI docs from JSDoc comments.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Postman Documentation",
+        "url": "https://learning.postman.com/",
+        "type": "tool",
+        "relevance": "API testing, documentation, collections.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      }
+    ],
+    "graphql": [
+      {
+        "name": "GraphQL Documentation",
+        "url": "https://graphql.org/learn/",
+        "type": "specification",
+        "relevance": "GraphQL query language specification, schema design.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apollo Server Documentation",
+        "url": "https://www.apollographql.com/docs/apollo-server/",
+        "type": "framework",
+        "relevance": "GraphQL server implementation for Node.js.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pothos GraphQL",
+        "url": "https://pothos-graphql.dev/",
+        "type": "library",
+        "relevance": "Type-safe GraphQL schema builder for TypeScript.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "nodejs_best_practices": [
+      {
+        "name": "Node.js Best Practices",
+        "url": "https://github.com/goldbergyoni/nodebestpractices",
+        "type": "guide",
+        "relevance": "Comprehensive Node.js best practices, production patterns, security.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Node.js Official Documentation",
+        "url": "https://nodejs.org/docs/latest/api/",
+        "type": "documentation",
+        "relevance": "Official Node.js API reference, modules, runtime behavior.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "The Twelve-Factor App",
+        "url": "https://12factor.net/",
+        "type": "methodology",
+        "relevance": "Methodology for building SaaS applications, configuration, deployment.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "typescript": [
+      {
+        "name": "TypeScript Documentation",
+        "url": "https://www.typescriptlang.org/docs/",
+        "type": "language",
+        "relevance": "TypeScript language reference, types, generics, advanced patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TypeScript Deep Dive",
+        "url": "https://basarat.gitbook.io/typescript/",
+        "type": "book",
+        "relevance": "In-depth TypeScript guide, advanced types, patterns.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "deployment": [
+      {
+        "name": "PM2 Documentation",
+        "url": "https://pm2.keymetrics.io/docs/",
+        "type": "tool",
+        "relevance": "Node.js process manager, clustering, monitoring, deployment.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Docker Documentation",
+        "url": "https://docs.docker.com/",
+        "type": "platform",
+        "relevance": "Containerization, Dockerfiles, multi-stage builds.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Nginx Documentation",
+        "url": "https://nginx.org/en/docs/",
+        "type": "web_server",
+        "relevance": "Reverse proxy, load balancing, serving static files.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "go_frameworks": [
+      {
+        "name": "Fiber Documentation",
+        "url": "https://docs.gofiber.io/",
+        "type": "framework",
+        "relevance": "Express-inspired Go framework, 10x faster than Express.js, zero memory allocation router.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Gin Web Framework",
+        "url": "https://gin-gonic.com/docs/",
+        "type": "framework",
+        "relevance": "High-performance Go web framework with martini-like API.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Echo Framework",
+        "url": "https://echo.labstack.com/",
+        "type": "framework",
+        "relevance": "Minimalist Go web framework with middleware, routing, data binding.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Go-Chi Router",
+        "url": "https://go-chi.io/",
+        "type": "library",
+        "relevance": "Lightweight, idiomatic Go HTTP router with middleware support.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "go_orm": [
+      {
+        "name": "GORM Documentation",
+        "url": "https://gorm.io/docs/",
+        "type": "orm",
+        "relevance": "Full-featured ORM for Go with associations, hooks, transactions, migrations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ent ORM",
+        "url": "https://entgo.io/docs/getting-started",
+        "type": "orm",
+        "relevance": "Entity framework for Go with type-safe graph-based approach.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "SQLBoiler",
+        "url": "https://github.com/volatiletech/sqlboiler",
+        "type": "orm",
+        "relevance": "Database-first ORM generating type-safe Go code from DB schema.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "go_ecosystem": [
+      {
+        "name": "Go Official Documentation",
+        "url": "https://go.dev/doc/",
+        "type": "language",
+        "relevance": "Official Go documentation, tutorials, effective Go practices.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Effective Go",
+        "url": "https://go.dev/doc/effective_go",
+        "type": "guide",
+        "relevance": "Official Go style guide, idioms, concurrency patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Go by Example",
+        "url": "https://gobyexample.com/",
+        "type": "tutorial",
+        "relevance": "Hands-on introduction to Go with annotated example programs.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "jwt-go Library",
+        "url": "https://github.com/golang-jwt/jwt",
+        "type": "library",
+        "relevance": "JWT implementation for Go authentication.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Testify Testing Toolkit",
+        "url": "https://github.com/stretchr/testify",
+        "type": "testing",
+        "relevance": "Common assertions and mocks for Go testing.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Air Live Reload",
+        "url": "https://github.com/cosmtrek/air",
+        "type": "tool",
+        "relevance": "Hot reload for Go applications during development.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "rust_frameworks": [
+      {
+        "name": "Axum Documentation",
+        "url": "https://docs.rs/axum/latest/axum/",
+        "type": "framework",
+        "relevance": "Ergonomic Rust web framework built on Tokio, Tower, and Hyper by Tokio team.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Actix Web Documentation",
+        "url": "https://actix.rs/docs/",
+        "type": "framework",
+        "relevance": "Powerful, pragmatic Rust web framework with actor model.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Rocket Documentation",
+        "url": "https://rocket.rs/",
+        "type": "framework",
+        "relevance": "Type-safe Rust web framework with compile-time guarantees.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Warp Framework",
+        "url": "https://docs.rs/warp/latest/warp/",
+        "type": "framework",
+        "relevance": "Composable Rust web framework with filter-based routing.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "rust_orm": [
+      {
+        "name": "SeaORM Documentation",
+        "url": "https://www.sea-ql.org/SeaORM/docs/index/",
+        "type": "orm",
+        "relevance": "Async ORM for Rust with SQLx backend, migrations, entities.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Diesel ORM",
+        "url": "https://diesel.rs/guides/getting-started",
+        "type": "orm",
+        "relevance": "Safe, extensible Rust ORM with compile-time query checking.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SQLx Documentation",
+        "url": "https://docs.rs/sqlx/latest/sqlx/",
+        "type": "library",
+        "relevance": "Async SQL toolkit for Rust with compile-time query verification.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "rust_ecosystem": [
+      {
+        "name": "Rust Official Documentation",
+        "url": "https://doc.rust-lang.org/",
+        "type": "language",
+        "relevance": "Official Rust documentation, the Book, standard library reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "The Rust Programming Language Book",
+        "url": "https://doc.rust-lang.org/book/",
+        "type": "book",
+        "relevance": "Comprehensive guide to Rust ownership, borrowing, lifetimes, concurrency.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Tokio Async Runtime",
+        "url": "https://tokio.rs/tokio/tutorial",
+        "type": "runtime",
+        "relevance": "Rust async runtime for non-blocking I/O, work-stealing scheduler.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Serde JSON",
+        "url": "https://serde.rs/",
+        "type": "library",
+        "relevance": "Serialization framework for Rust, JSON, TOML, YAML support.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "jsonwebtoken Crate",
+        "url": "https://docs.rs/jsonwebtoken/latest/jsonwebtoken/",
+        "type": "library",
+        "relevance": "JWT encoding and decoding for Rust authentication.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "argon2 Crate",
+        "url": "https://docs.rs/argon2/latest/argon2/",
+        "type": "library",
+        "relevance": "Argon2 password hashing for Rust (memory-hard, GPU-resistant).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "utoipa OpenAPI",
+        "url": "https://docs.rs/utoipa/latest/utoipa/",
+        "type": "library",
+        "relevance": "Compile-time OpenAPI documentation generation from Rust types.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "python_frameworks": [
+      {
+        "name": "FastAPI Documentation",
+        "url": "https://fastapi.tiangolo.com/",
+        "type": "framework",
+        "relevance": "Modern Python web framework with async support, automatic API docs, type hints.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Django Documentation",
+        "url": "https://docs.djangoproject.com/",
+        "type": "framework",
+        "relevance": "High-level Python web framework with ORM, admin interface, authentication.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Django REST Framework",
+        "url": "https://www.django-rest-framework.org/",
+        "type": "framework",
+        "relevance": "Powerful toolkit for building Web APIs with Django.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Flask Documentation",
+        "url": "https://flask.palletsprojects.com/",
+        "type": "framework",
+        "relevance": "Lightweight Python web framework with extensibility.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "python_orm": [
+      {
+        "name": "SQLAlchemy Documentation",
+        "url": "https://docs.sqlalchemy.org/",
+        "type": "orm",
+        "relevance": "Comprehensive Python SQL toolkit and ORM with async support (v2.0+).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Alembic Documentation",
+        "url": "https://alembic.sqlalchemy.org/",
+        "type": "migration",
+        "relevance": "Database migration tool for SQLAlchemy, schema versioning.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Tortoise ORM",
+        "url": "https://tortoise.github.io/",
+        "type": "orm",
+        "relevance": "Async ORM for Python inspired by Django ORM.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "python_ecosystem": [
+      {
+        "name": "Python Official Documentation",
+        "url": "https://docs.python.org/3/",
+        "type": "language",
+        "relevance": "Official Python documentation, standard library, language reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pydantic Documentation",
+        "url": "https://docs.pydantic.dev/",
+        "type": "library",
+        "relevance": "Data validation using Python type hints, automatic parsing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pytest Documentation",
+        "url": "https://docs.pytest.org/",
+        "type": "testing",
+        "relevance": "Python testing framework with fixtures, parametrization, mocking.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "python-jose JWT",
+        "url": "https://python-jose.readthedocs.io/",
+        "type": "library",
+        "relevance": "JWT implementation for Python authentication.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Passlib Documentation",
+        "url": "https://passlib.readthedocs.io/",
+        "type": "library",
+        "relevance": "Password hashing library with bcrypt, argon2 support.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Uvicorn Documentation",
+        "url": "https://www.uvicorn.org/",
+        "type": "server",
+        "relevance": "Lightning-fast ASGI server for Python async frameworks.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Celery Documentation",
+        "url": "https://docs.celeryq.dev/",
+        "type": "task_queue",
+        "relevance": "Distributed task queue for Python background jobs.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "MyPy Documentation",
+        "url": "https://mypy.readthedocs.io/",
+        "type": "tool",
+        "relevance": "Static type checker for Python, enforces type hints.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "asyncpg Documentation",
+        "url": "https://magicstack.github.io/asyncpg/",
+        "type": "library",
+        "relevance": "Fast PostgreSQL database client for Python asyncio.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "csharp_frameworks": [
+      {
+        "name": "ASP.NET Core Documentation",
+        "url": "https://learn.microsoft.com/aspnet/core/",
+        "type": "framework",
+        "relevance": "Official ASP.NET Core docs: Minimal APIs, controllers, middleware, DI, configuration, hosting.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": ".NET Documentation",
+        "url": "https://learn.microsoft.com/dotnet/",
+        "type": "platform",
+        "relevance": "Official .NET platform docs: runtime, SDK, C# language, libraries, performance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ASP.NET Core Minimal APIs",
+        "url": "https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis",
+        "type": "guide",
+        "relevance": "Minimal API pattern for lightweight HTTP APIs without controllers.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "C# Language Reference",
+        "url": "https://learn.microsoft.com/dotnet/csharp/",
+        "type": "language",
+        "relevance": "C# language features: records, pattern matching, nullable reference types, primary constructors.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": ".NET Release Notes",
+        "url": "https://github.com/dotnet/core/tree/main/release-notes",
+        "type": "release_notes",
+        "relevance": "Official .NET release notes, version support policies, breaking changes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "csharp_orm": [
+      {
+        "name": "Entity Framework Core Documentation",
+        "url": "https://learn.microsoft.com/ef/core/",
+        "type": "orm",
+        "relevance": "Official EF Core docs: DbContext, migrations, LINQ queries, relationships, performance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Npgsql EF Core Provider",
+        "url": "https://www.npgsql.org/efcore/",
+        "type": "provider",
+        "relevance": "PostgreSQL provider for EF Core: NpgSQL-specific features, JSON, arrays, enums.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Dapper Documentation",
+        "url": "https://github.com/DapperLib/Dapper",
+        "type": "micro_orm",
+        "relevance": "Lightweight micro-ORM for raw SQL with object mapping. High performance alternative to EF Core.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "EF Core Performance Docs",
+        "url": "https://learn.microsoft.com/ef/core/performance/",
+        "type": "guide",
+        "relevance": "EF Core performance: compiled queries, split queries, no-tracking, bulk operations.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "csharp_ecosystem": [
+      {
+        "name": "Serilog Documentation",
+        "url": "https://serilog.net/",
+        "type": "logging",
+        "relevance": "Structured logging for .NET: sinks, enrichers, message templates.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "FluentValidation Documentation",
+        "url": "https://docs.fluentvalidation.net/",
+        "type": "validation",
+        "relevance": "Fluent validation library for .NET: strongly-typed validation rules.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Polly Documentation",
+        "url": "https://github.com/App-vNext/Polly",
+        "type": "resilience",
+        "relevance": "Resilience and transient fault handling: retry, circuit breaker, timeout, bulkhead.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MediatR Documentation",
+        "url": "https://github.com/jbogard/MediatR",
+        "type": "library",
+        "relevance": "Mediator pattern for CQRS, pipeline behaviors, decoupled request handling.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "xUnit Documentation",
+        "url": "https://xunit.net/",
+        "type": "testing",
+        "relevance": "Unit testing framework for .NET: Facts, Theories, fixtures, parallel execution.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Moq Documentation",
+        "url": "https://github.com/devlooped/moq",
+        "type": "testing",
+        "relevance": "Mocking framework for .NET: setup, verification, LINQ-to-Mocks.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ASP.NET Core Architecture Guide",
+        "url": "https://dotnet.microsoft.com/learn/dotnet/architecture-guides",
+        "type": "guide",
+        "relevance": "Microsoft architecture guidance: Clean Architecture, microservices, DDD patterns.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Clean Architecture Template (ardalis)",
+        "url": "https://github.com/ardalis/CleanArchitecture",
+        "type": "template",
+        "relevance": "Popular ASP.NET Core clean architecture template by Steve Smith.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "StackExchange.Redis",
+        "url": "https://stackexchange.github.io/StackExchange.Redis/",
+        "type": "library",
+        "relevance": "High-performance Redis client for .NET: connection multiplexing, pipelining.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Hangfire Documentation",
+        "url": "https://www.hangfire.io/",
+        "type": "background_jobs",
+        "relevance": "Background job processing for .NET: fire-and-forget, delayed, recurring, continuations.",
+        "update_frequency": "active",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "BCrypt.Net-Next",
+        "url": "https://github.com/BcryptNet/bcrypt.net",
+        "type": "security",
+        "relevance": "BCrypt password hashing for .NET with configurable work factor.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "What's new in C# 14",
+        "url": "https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-14",
+        "type": "language",
+        "relevance": "C# 14 features: extension members, field keyword, null-conditional assignment, implicit spans.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "What's new in EF Core 10",
+        "url": "https://learn.microsoft.com/ef/core/what-is-new/ef-core-10.0/whatsnew",
+        "type": "orm",
+        "relevance": "EF Core 10: LeftJoin, named query filters, simplified ExecuteUpdate, vector search, JSON type.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "What's new in ASP.NET Core 10",
+        "url": "https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-10.0",
+        "type": "framework",
+        "relevance": "ASP.NET Core 10: built-in validation, OpenAPI 3.1, SSE, passkeys, HybridCache.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "HybridCache in ASP.NET Core",
+        "url": "https://learn.microsoft.com/aspnet/core/performance/caching/hybrid",
+        "type": "caching",
+        "relevance": "HybridCache: L1 in-memory + L2 distributed, stampede protection, tag-based invalidation.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Build resilient HTTP apps (.NET)",
+        "url": "https://learn.microsoft.com/dotnet/core/resilience/http-resilience",
+        "type": "resilience",
+        "relevance": "Microsoft.Extensions.Http.Resilience + Polly v8: standard resilience handler, retry, circuit breaker.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Announcing .NET 10",
+        "url": "https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/",
+        "type": "release_notes",
+        "relevance": ".NET 10 LTS announcement: AI integration, performance, unified platform.",
+        "update_frequency": "once",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  },
+  "research_tools": [
+    {
+      "name": "Prisma Studio",
+      "url": "https://www.prisma.io/studio",
+      "purpose": "Visual database browser and editor for Prisma projects.",
+      "use_case": "Database exploration, data editing during development."
+    },
+    {
+      "name": "Postman",
+      "url": "https://www.postman.com/",
+      "purpose": "API testing, documentation, collections.",
+      "use_case": "API development and testing."
+    },
+    {
+      "name": "pgAdmin",
+      "url": "https://www.pgadmin.org/",
+      "purpose": "PostgreSQL administration and query tool.",
+      "use_case": "Database management, query analysis."
+    },
+    {
+      "name": "npm trends",
+      "url": "https://npmtrends.com/",
+      "purpose": "Compare npm package popularity and trends.",
+      "use_case": "Evaluating library choices."
+    }
+  ],
+  "communities": [
+    {
+      "name": "Node.js Discord",
+      "url": "https://discord.gg/nodejs",
+      "platform": "discord",
+      "focus": "Node.js development, best practices, help."
+    },
+    {
+      "name": "Prisma Discord",
+      "url": "https://discord.gg/prisma",
+      "platform": "discord",
+      "focus": "Prisma ORM, schema design, migrations, troubleshooting."
+    },
+    {
+      "name": "r/node",
+      "url": "https://reddit.com/r/node",
+      "platform": "reddit",
+      "focus": "Node.js community, libraries, patterns, discussions."
+    },
+    {
+      "name": "r/PostgreSQL",
+      "url": "https://reddit.com/r/PostgreSQL",
+      "platform": "reddit",
+      "focus": "PostgreSQL database administration, optimization, queries."
+    },
+    {
+      "name": "Stack Overflow - Node.js",
+      "url": "https://stackoverflow.com/questions/tagged/node.js",
+      "platform": "stackoverflow",
+      "focus": "Q&A for Node.js development."
+    },
+    {
+      "name": "r/dotnet",
+      "url": "https://reddit.com/r/dotnet",
+      "platform": "reddit",
+      "focus": ".NET and C# community, ASP.NET Core, EF Core, patterns."
+    },
+    {
+      "name": "r/csharp",
+      "url": "https://reddit.com/r/csharp",
+      "platform": "reddit",
+      "focus": "C# language discussions, best practices, help."
+    },
+    {
+      "name": ".NET Discord",
+      "url": "https://discord.gg/dotnet",
+      "platform": "discord",
+      "focus": ".NET development, ASP.NET Core, EF Core, community help."
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 ---
 name: ai-agents
-description: Production-grade AI agent patterns with MCP integration, agentic RAG, handoff orchestration, multi-layer guardrails, observability, token economics, ROI frameworks, and build-vs-not decision guidance (modern best practices)
+description: Production AI agent patterns covering MCP, RAG, guardrails, observability, and ROI. Use when designing or evaluating agent systems.
 ---
 
 # AI Agents Development — Production Skill Hub
 
-**Modern Best Practices (January 2026)**: deterministic control flow, bounded tools, auditable state, MCP-based tool integration, handoff-first orchestration, multi-layer guardrails, OpenTelemetry tracing, and human-in-the-loop controls (OWASP LLM Top 10: https://owasp.org/www-project-top-10-for-large-language-model-applications/).
+**Modern Best Practices (March 2026)**: deterministic control flow, bounded tools, auditable state, MCP-based tool integration, handoff-first orchestration, multi-layer guardrails, OpenTelemetry tracing, and human-in-the-loop controls (OWASP LLM Top 10: https://owasp.org/www-project-top-10-for-large-language-model-applications/).
 
 This skill provides **production-ready operational patterns** for designing, building, evaluating, and deploying AI agents.
 It centralizes **procedures**, **checklists**, **decision rules**, and **templates** used across RAG agents, tool-using agents, OS agents, and multi-agent systems.
@@ -68,19 +68,45 @@ Codex should activate this skill whenever the user asks for:
 | **OS Agent** | Observe UI → act → verify | Sandbox, UI grounding | MCP | Desktop/browser control under strict guardrails |
 | **Code/SWE Agent** | Branch → edit → test → PR | Repo access, CI gates | MCP | Coding tasks with review/merge controls |
 
-### Framework Selection (2026)
+### Framework Selection (March 2026)
 
-| Framework | Architecture | Best For | Ease |
-|-----------|--------------|----------|------|
-| **LangGraph** | Graph-based, stateful | Enterprise, compliance, auditability | Medium |
-| **OpenAI Agents SDK** | Tool-centric, lightweight | Fast prototyping, OpenAI ecosystem | Easy |
-| **Google ADK** | Code-first, multi-language | Gemini/Vertex AI, polyglot teams | Medium |
-| **Pydantic AI** | Type-safe, graph FSM | Production Python, type safety | Medium |
-| **CrewAI** | Role-based crews | Team workflows, content generation | Easiest |
-| **AutoGen** | Conversational | Code generation, research | Medium |
-| **AWS Bedrock Agents** | Managed infrastructure | Enterprise AWS, knowledge bases | Easy |
+**Tier 1 — Production-Grade**
 
-See [`references/modern-best-practices.md`](references/modern-best-practices.md) for detailed framework comparison and selection guide.
+| Framework | Architecture | Best For | Languages | Ease |
+|-----------|--------------|----------|-----------|------|
+| **LangGraph** | Graph-based, stateful | Enterprise, compliance, auditability | Python, JS | Medium |
+| **Claude Agent SDK** | Event-driven, tool-centric | Anthropic ecosystem, Computer Use, MCP-native | Python, TS | Easy |
+| **OpenAI Agents SDK** | Tool-centric, lightweight | Fast prototyping, OpenAI ecosystem | Python | Easy |
+| **Google ADK** | Code-first, multi-language | Gemini/Vertex AI, polyglot teams | Python, TS, Go, Java | Medium |
+| **Pydantic AI** | Type-safe, graph FSM | Production Python, type safety, MCP+A2A native | Python | Medium |
+| **MS Agent Framework** | Kernel + multi-agent | Enterprise Azure, .NET/Java teams | Python, .NET, Java | Medium |
+
+**Tier 2 — Specialized**
+
+| Framework | Architecture | Best For | Languages | Ease |
+|-----------|--------------|----------|-----------|------|
+| **LlamaIndex** | Event-driven workflows | RAG-native agents, retrieval-heavy | Python, TS | Medium |
+| **CrewAI** | Role-based crews | Team workflows, content generation | Python | Easiest |
+| **Mastra** | Vercel AI SDK-based | TypeScript/Next.js teams | TypeScript | Easy |
+| **SmolAgents** | Code-first, minimalist | Lightweight, fewer LLM calls | Python | Easy |
+| **Agno** | FastAPI-native runtime | Production Python, 100+ integrations | Python | Easy |
+| **AWS Bedrock Agents** | Managed infrastructure | Enterprise AWS, knowledge bases | Python | Easy |
+
+**Tier 3 — Niche**
+
+| Framework | Niche |
+|-----------|-------|
+| **Haystack** | Enterprise RAG+agents pipeline (Airbus, NVIDIA) |
+| **DSPy** | Declarative optimization — compiles programs into prompts/weights |
+
+See [`references/modern-best-practices.md`](references/modern-best-practices.md) for detailed comparison and selection guide.
+
+### Framework Deep Dives
+
+- **Claude Agent SDK** - [`references/claude-agent-sdk-patterns.md`](references/claude-agent-sdk-patterns.md)
+  Agent definition, built-in tools (Bash, TextEditor, Computer), MCP servers, guardrails, multi-agent, streaming events
+- **Pydantic AI** - [`references/pydantic-ai-patterns.md`](references/pydantic-ai-patterns.md)
+  Type-safe agents, MCP toolsets, native A2A, pydantic-graph FSM, durable execution, HITL, TestModel testing
 
 ---
 
@@ -120,6 +146,30 @@ What does the agent need to do?
 
 - Use **MCP** for: Tool access, data retrieval, single-agent integration
 - Use **A2A** for: Agent-to-agent handoffs, multi-agent coordination, task delegation
+
+**Framework Selection** (after choosing architecture):
+
+```text
+Which framework?
+    ├─ MVP/Prototyping?
+    │   ├─ Python → OpenAI Agents SDK or CrewAI
+    │   └─ TypeScript → Mastra or Claude Agent SDK
+    │
+    ├─ Production →
+    │   ├─ Auditability/compliance? → LangGraph
+    │   ├─ Type safety + MCP/A2A native? → Pydantic AI
+    │   ├─ Anthropic models + Computer Use? → Claude Agent SDK
+    │   ├─ Google Cloud / Gemini? → Google ADK
+    │   ├─ Azure / .NET / Java? → MS Agent Framework
+    │   ├─ AWS managed? → Bedrock Agents
+    │   └─ RAG-heavy? → LlamaIndex Workflows
+    │
+    ├─ Minimalist / Research →
+    │   ├─ Fewest LLM calls? → SmolAgents
+    │   └─ Optimize prompts automatically? → DSPy
+    │
+    └─ Enterprise pipeline → Haystack
+```
 
 ---
 
@@ -177,6 +227,27 @@ What does the agent need to do?
   - Hallucination cost framework and mitigation ROI
   - Investment decision matrix
   - Monthly tracking dashboard
+
+---
+
+## Navigation: AI Engine Layers
+
+Five-layer architecture for production agent systems. Start with the overview, then drill into layer-specific patterns.
+
+- **AI Engine Architecture** — [`references/ai-engine-layers.md`](references/ai-engine-layers.md)
+  5-layer composition model, layer interaction matrix, implementation phases
+
+- **Context Graph Patterns** — [`references/context-graph-patterns.md`](references/context-graph-patterns.md)
+  Node/edge schema, traversal patterns, graph-RAG, memory tiers, conflict detection
+
+- **Inbox Engine Patterns** — [`references/inbox-engine-patterns.md`](references/inbox-engine-patterns.md)
+  Event-driven intake, signal classification, deduplication, priority routing, dead letter
+
+- **Knowledge Base Architecture** — [`assets/knowledge-base/kb-architecture.md`](assets/knowledge-base/kb-architecture.md)
+  Unified KB schema (vector + graph + doc index), provenance, freshness, multi-tenant
+
+> **Action Graph** → covered by [`references/operational-patterns.md`](references/operational-patterns.md) + [`references/agent-operations-best-practices.md`](references/agent-operations-best-practices.md)
+> **Data Agent** → covered by [`../ai-rag/SKILL.md`](../ai-rag/SKILL.md) + [`references/rag-patterns.md`](references/rag-patterns.md)
 
 ---
 
@@ -272,6 +343,11 @@ What does the agent need to do?
 - **Code/SWE Agents** - [`references/code-swe-agents.md`](references/code-swe-agents.md)
   SE 3.0 paradigm, autonomous coding patterns, SWE-Bench, HyperAgent architecture
 
+### Framework-Specific Patterns
+
+- **Pydantic AI Patterns** - [`references/pydantic-ai-patterns.md`](references/pydantic-ai-patterns.md)
+  Type-safe agents, MCP toolsets (Stdio/SSE/StreamableHTTP), A2A via `to_a2a()`, pydantic-graph FSM, durable execution, TestModel testing
+
 ---
 
 ## Navigation: Production Operations
@@ -366,45 +442,11 @@ What does the agent need to do?
 
 ## Trend Awareness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about AI agents, you MUST use WebSearch to check current trends before answering.
-If WebSearch is unavailable, use `data/sources.json` + any available web browsing tools, and explicitly state what you verified vs assumed.
+**IMPORTANT**: When users ask framework recommendations or "what's best for X" questions, use WebSearch to verify current landscape before answering. If unavailable, use `data/sources.json` and state what was verified vs assumed.
 
-### Trigger Conditions
+**Trigger**: framework comparisons, "best for [use case]", "is X still relevant?", "latest in AI agents", MCP server availability.
 
-- "What's the best agent framework for [use case]?"
-- "What should I use for [multi-agent/tool use/orchestration]?"
-- "What's the latest in AI agents?"
-- "Current best practices for [agent architecture/MCP/A2A]?"
-- "Is [LangGraph/CrewAI/AutoGen] still relevant in 2026?"
-- "[Agent framework A] vs [Agent framework B]?"
-- "Best way to build [coding agent/RAG agent/OS agent]?"
-- "What MCP servers are available?"
-
-### Required Searches
-
-1. Search: `"AI agent frameworks best practices 2026"`
-2. Search: `"[LangGraph/CrewAI/AutoGen/Semantic Kernel] comparison 2026"`
-3. Search: `"AI agent trends January 2026"`
-4. Search: `"MCP servers available 2026"`
-
-### What to Report
-
-After searching, provide:
-
-- **Current landscape**: What agent frameworks are popular NOW
-- **Emerging trends**: New patterns gaining traction (MCP, A2A, agentic coding)
-- **Deprecated/declining**: Frameworks or patterns losing relevance
-- **Recommendation**: Based on fresh data, not just static knowledge
-
-### Example Topics (verify with fresh search)
-
-- Agent frameworks (LangGraph, CrewAI, AutoGen, Semantic Kernel, Pydantic AI)
-- MCP ecosystem (available servers, new integrations)
-- Agentic coding (Codex CLI, Claude Code, Cursor, Windsurf, Cline)
-- Multi-agent patterns (hierarchical, collaborative, competitive)
-- Tool use protocols (MCP, function calling)
-- Agent evaluation (SWE-Bench, AgentBench, GAIA)
-- OS/computer use agents (computer-use APIs, browser automation)
+**Report**: current landscape, emerging trends, deprecated patterns, recommendation with rationale.
 
 ---
 
@@ -429,6 +471,7 @@ This skill integrates with complementary skills:
 - [`../dev-api-design/`](../dev-api-design/SKILL.md) - REST/GraphQL design for agent APIs and tool interfaces
 - [`../ai-mlops/`](../ai-mlops/SKILL.md) - Model deployment, monitoring, drift detection
 - [`../qa-debugging/`](../qa-debugging/SKILL.md) - Agent debugging, error analysis, root cause investigation
+- [`../dev-ai-coding-metrics/`](../dev-ai-coding-metrics/SKILL.md) - Team-level AI coding metrics: adoption, DORA/SPACE, ROI, DX surveys (this skill covers per-task agent economics)
 
 **Usage pattern**: Start here for agent architecture, then reference specialized skills for deep implementation details.
 
@@ -445,20 +488,13 @@ This skill integrates with complementary skills:
 
 ---
 
-## Key Modern Migrations
-
-**Traditional → Modern**:
-
-- Custom APIs → Model Context Protocol (MCP)
-- Static RAG → Agentic RAG with contextual retrieval
-- Ad-hoc handoffs → Versioned handoff APIs with JSON Schema
-- Single guardrail → Multi-layer defense (5+ layers)
-- LangChain agents → LangGraph stateful workflows
-- Custom observability → OpenTelemetry GenAI standards
-- Model-centric → Context engineering-centric
-
----
-
 ## AI-Native SDLC Template
 
 - Use [`assets/agent-template-ainative-sdlc.md`](assets/agent-template-ainative-sdlc.md) for the Delegate → Review → Own runbook (guardrails + outputs checklist).
+
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

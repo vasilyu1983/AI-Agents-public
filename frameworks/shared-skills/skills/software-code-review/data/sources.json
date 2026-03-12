@@ -1,0 +1,264 @@
+{
+  "metadata": {
+    "skill": "software-code-review",
+    "updated": "2026-01-17",
+    "description": "Curated resources for systematic code review across languages, stacks, and domains",
+    "total_sources": 37
+  },
+  "categories": {
+    "foundational_guides": [
+      {
+        "name": "Google Engineering Practices - Code Review",
+        "url": "https://google.github.io/eng-practices/review/",
+        "description": "Google's canonical code review process and policies, covering reviewer and author guidelines",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft Code-with-Engineering-Playbook - Code Reviews",
+        "url": "https://microsoft.github.io/code-with-engineering-playbook/code-reviews/",
+        "description": "Microsoft's engineering fundamentals for code reviews, recipes, and evidence-based practices",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SmartBear Best Practices for Code Review",
+        "url": "https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/",
+        "description": "Research-based best practices: review <400 LOC, inspection rate <500 LOC/hour",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Code Review Best Practices 2024 - GitKraken",
+        "url": "https://www.gitkraken.com/blog/code-review-best-practices-2024",
+        "description": "Modern code review practices including AI co-reviewers and team workflows",
+        "optional": true,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Swarmia Complete Guide to Code Reviews",
+        "url": "https://www.swarmia.com/blog/a-complete-guide-to-code-reviews/",
+        "description": "Comprehensive guide covering process, metrics, and team dynamics",
+        "add_as_web_search": false
+      }
+    ],
+    "security_focused": [
+      {
+        "name": "OWASP Code Review Guide",
+        "url": "https://owasp.org/www-project-code-review-guide/",
+        "description": "Technical guide for secure code review, covers preparation, execution, and reporting",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP Secure Coding Practices - Checklist",
+        "url": "https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/stable-en/02-checklist/05-checklist",
+        "description": "Quick reference checklist covering input validation, output encoding, access control, cryptography",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Application Security Code Review Guide 2025",
+        "url": "https://getfailsafe.com/application-security-code-review-the-ultimate-2025-guide/",
+        "description": "2025 application security review guide including AI-powered tools and DevSecOps workflows",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Security Code Review Checklist - Dr. McKayla",
+        "url": "https://www.michaelagreiler.com/security-code-review-checklist/",
+        "description": "Practical security checklist for finding vulnerabilities during code review",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Wiz Academy - Code Review Security Best Practices",
+        "url": "https://www.wiz.io/academy/code-review-security-best-practices",
+        "description": "Security-focused code review patterns and automated scanning integration",
+        "add_as_web_search": false
+      }
+    ],
+    "ai_powered_tools": [
+      {
+        "name": "Qodo Code Review 2025",
+        "url": "https://www.qodo.ai/blog/what-is-code-review/",
+        "description": "AI-powered code review tools, workflow, and 2025 best practices",
+        "optional": true,
+        "add_as_web_search": true
+      },
+      {
+        "name": "GitHub Copilot for Pull Requests",
+        "url": "https://docs.github.com/en/copilot/using-github-copilot/code-review/using-copilot-code-review",
+        "description": "AI-generated PR summaries, reviewer suggestions, and issue flagging",
+        "optional": true,
+        "add_as_web_search": true
+      },
+      {
+        "name": "CodeRabbit AI Code Reviews",
+        "url": "https://coderabbit.ai/",
+        "description": "Context-aware AI code reviews; validate current capabilities and claims via web search",
+        "optional": true,
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex for Code Review - Datadog Case Study",
+        "url": "https://openai.com/index/datadog/",
+        "description": "System-level context for PR review, reasoning over entire codebase and dependencies",
+        "optional": true,
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Security Agent for Code Review",
+        "url": "https://aws.amazon.com/blogs/aws/new-aws-security-agent-secures-applications-proactively-from-design-to-deployment-preview/",
+        "description": "Frontier agent for automated security reviews, OWASP Top 10 detection in PRs (preview 2026)",
+        "optional": true,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Endor Labs AI SAST",
+        "url": "https://www.endorlabs.com/learn/introducing-ai-sast-that-thinks-like-a-security-engineer",
+        "description": "AI SAST with 95% false positive reduction, business logic flaw detection across OWASP 2025 Top 10",
+        "optional": true,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Qodo Best AI Code Review Tools 2026",
+        "url": "https://www.qodo.ai/blog/best-ai-code-review-tools-2026/",
+        "description": "Comprehensive comparison of AI code review tools for enterprise scale in 2026",
+        "optional": true,
+        "add_as_web_search": true
+      }
+    ],
+    "language_style_guides": [
+      {
+        "name": "Google TypeScript Style Guide",
+        "url": "https://google.github.io/styleguide/tsguide.html",
+        "description": "Official Google TypeScript style guide for code review consistency",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Airbnb JavaScript Style Guide",
+        "url": "https://github.com/airbnb/javascript",
+        "description": "Industry-standard JavaScript style guide with rationale for each rule",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Google Python Style Guide",
+        "url": "https://google.github.io/styleguide/pyguide.html",
+        "description": "Comprehensive Python style guide covering naming, structure, and patterns",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Rust API Guidelines",
+        "url": "https://rust-lang.github.io/api-guidelines/",
+        "description": "Official Rust API design and code review guidelines",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Effective Go",
+        "url": "https://go.dev/doc/effective_go",
+        "description": "Official Go programming guide for idiomatic code review",
+        "add_as_web_search": false
+      }
+    ],
+    "automation_tools": [
+      {
+        "name": "SonarQube Documentation",
+        "url": "https://docs.sonarsource.com/sonarqube/latest/",
+        "description": "Static analysis platform for code quality and security scanning",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ESLint Documentation",
+        "url": "https://eslint.org/docs/latest/",
+        "description": "JavaScript/TypeScript linting tool configuration and rules",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Snyk Documentation",
+        "url": "https://docs.snyk.io/",
+        "description": "Security scanning for dependencies, containers, and code vulnerabilities",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Semgrep Rules and Patterns",
+        "url": "https://semgrep.dev/docs/",
+        "description": "Lightweight static analysis for custom security and correctness patterns",
+        "add_as_web_search": false
+      }
+    ],
+    "psychological_safety": [
+      {
+        "name": "The Fearless Organization by Amy Edmondson",
+        "url": "https://fearlessorganization.com/",
+        "description": "Research on psychological safety in teams and how to create it",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Code Reviews at Google - Dr. McKayla",
+        "url": "https://www.michaelagreiler.com/code-reviews-at-google/",
+        "description": "Insights into Google's lightweight, fast code review culture",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Psychological Safety and Software Quality Research",
+        "url": "https://link.springer.com/article/10.1007/s10664-023-10333-w",
+        "description": "Empirical Software Engineering research on psychological safety's impact on quality",
+        "add_as_web_search": false
+      }
+    ],
+    "blockchain_smart_contracts": [
+      {
+        "name": "ConsenSys Smart Contract Best Practices",
+        "url": "https://consensys.github.io/smart-contract-best-practices/",
+        "description": "Comprehensive security patterns for Ethereum smart contracts",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Trail of Bits Building Secure Contracts",
+        "url": "https://github.com/crytic/building-secure-contracts",
+        "description": "Security guidelines, testing frameworks, and common vulnerabilities",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenZeppelin Security Audits",
+        "url": "https://blog.openzeppelin.com/security-audits",
+        "description": "Real-world audit reports and lessons from smart contract reviews",
+        "add_as_web_search": false
+      }
+    ],
+    "stacked_prs_merge_queues": [
+      {
+        "name": "Graphite - Stack-Aware Merge Queue",
+        "url": "https://graphite.com/blog/the-first-stack-aware-merge-queue",
+        "description": "Stack-aware merge queue concepts and workflow rationale",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stacking.dev - The Stacking Workflow",
+        "url": "https://www.stacking.dev/",
+        "description": "Comprehensive guide to stacked PR workflows and tooling ecosystem",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Aviator Stacked PRs",
+        "url": "https://www.aviator.co/stacked-prs",
+        "description": "Aviator stack-aware merge queue with partial stack support and speculative execution",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Meta Sapling SCM",
+        "url": "https://sapling-scm.com/",
+        "description": "Source control system with native stacking support from Meta",
+        "add_as_web_search": false
+      }
+    ],
+    "dora_metrics": [
+      {
+        "name": "DORA Metrics in the Age of AI 2026",
+        "url": "https://plandek.com/blog/how-to-measure-dora-metrics-in-the-age-of-ai-2026/",
+        "description": "How to measure DORA metrics with AI adoption, including rework rate as fifth metric",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SonarSource - AI Impact on Code Quality",
+        "url": "https://www.sonarsource.com/blog/the-inevitable-rise-of-poor-code-quality-in-ai-accelerated-codebases/",
+        "description": "Discussion of AI adoption impact on code quality and review load; verify reported metrics via web search",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

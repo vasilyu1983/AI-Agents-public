@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "skill": "data-metabase",
+    "updated": "2026-01-25",
+    "total_sources": 12,
+    "description": "Official Metabase documentation links for API usage, embedding, permissions, and administration. Use for web search grounding when automating Metabase.",
+    "version": "1.1"
+  },
+  "categories": {
+    "api_and_automation": [
+      {
+        "name": "Metabase API documentation",
+        "url": "https://www.metabase.com/docs/latest/api",
+        "type": "documentation",
+        "relevance": "Primary reference for Metabase REST API endpoints, request/response shapes, and auth notes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metabase", "api"]
+      },
+      {
+        "name": "Metabase administration guide",
+        "url": "https://www.metabase.com/docs/latest/administration-guide/start",
+        "type": "documentation",
+        "relevance": "Admin settings, security controls, and environment configuration relevant to API access.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metabase", "admin", "security"]
+      },
+      {
+        "name": "Working with the Metabase API (Learn)",
+        "url": "https://www.metabase.com/learn/metabase-basics/administration/administration-and-operation/metabase-api",
+        "type": "tutorial",
+        "relevance": "Practical guide covering session caching, 401 handling, browser DevTools technique for discovering API shapes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metabase", "api", "tutorial"]
+      },
+      {
+        "name": "API keys documentation",
+        "url": "https://www.metabase.com/docs/latest/people-and-groups/api-keys",
+        "type": "documentation",
+        "relevance": "API key creation, group assignment, and permission scoping for programmatic access.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metabase", "api", "authentication"]
+      }
+    ],
+    "query_language": [
+      {
+        "name": "MBQL Reference (GitHub Wiki)",
+        "url": "https://github.com/metabase/metabase/wiki/(Incomplete)-MBQL-Reference",
+        "type": "reference",
+        "relevance": "Metabase Query Language reference for structured (query-builder) queries; essential for programmatic card creation.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metabase", "mbql", "query"]
+      }
+    ],
+    "serialization": [
+      {
+        "name": "Serialization documentation",
+        "url": "https://www.metabase.com/docs/latest/installation-and-operation/serialization",
+        "type": "documentation",
+        "relevance": "Export/import dashboards and questions between environments (Pro/Enterprise). Entity IDs for cross-instance stability.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metabase", "serialization", "migration"]
+      }
+    ],
+    "collections_permissions": [
+      {
+        "name": "Collections",
+        "url": "https://www.metabase.com/docs/latest/permissions/collections",
+        "type": "documentation",
+        "relevance": "How collections work and how permissions interact with saved questions/dashboards.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metabase", "collections", "permissions"]
+      },
+      {
+        "name": "Permissions overview",
+        "url": "https://www.metabase.com/docs/latest/permissions/start",
+        "type": "documentation",
+        "relevance": "Permission model for databases, collections, and user groups (critical for automation accounts).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metabase", "permissions"]
+      }
+    ],
+    "charts_and_dashboards": [
+      {
+        "name": "Visualizations",
+        "url": "https://www.metabase.com/docs/latest/questions/visualizations/start",
+        "type": "documentation",
+        "relevance": "UI-level chart types and settings; useful for mapping desired UI behavior to visualization_settings.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metabase", "charts", "visualization"]
+      },
+      {
+        "name": "Dashboards",
+        "url": "https://www.metabase.com/docs/latest/dashboards/introduction",
+        "type": "documentation",
+        "relevance": "Dashboard concepts and configuration patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metabase", "dashboards"]
+      }
+    ],
+    "embedding": [
+      {
+        "name": "Embedding introduction",
+        "url": "https://www.metabase.com/docs/latest/embedding/introduction",
+        "type": "documentation",
+        "relevance": "Embedding options and security trade-offs (relevant when API automation feeds embedded dashboards).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metabase", "embedding"]
+      },
+      {
+        "name": "Metabase GitHub repository",
+        "url": "https://github.com/metabase/metabase",
+        "type": "reference",
+        "relevance": "Source of truth for edge-case behavior and API internals when docs are ambiguous.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["metabase", "source"]
+      }
+    ],
+    "community_tools": [
+      {
+        "name": "metabase-api Python wrapper (PyPI)",
+        "url": "https://pypi.org/project/metabase-api/",
+        "type": "library",
+        "relevance": "Community Python wrapper with sync/async support; alternative to custom scripts for common operations.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["metabase", "python", "library"]
+      }
+    ]
+  }
+}

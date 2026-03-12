@@ -1,6 +1,6 @@
 ---
 name: qa-docs-coverage
-description: "Docs as QA: audit doc coverage and freshness, validate runbooks, and maintain documentation quality gates for APIs, services, events, and operational workflows. Includes AI-assisted audits, observability patterns, and automated coverage tracking."
+description: "Audit and enforce doc quality. Use when checking coverage, freshness, runbook validity, or cleaning stale/duplicate markdown after LLM edits."
 ---
 
 # QA Docs Coverage (Jan 2026) - Discovery, Freshness, and Runbook Quality
@@ -43,6 +43,24 @@ Optional (recommended scripts; run from the repo being audited):
 
 - Local link check: `python3 frameworks/shared-skills/skills/qa-docs-coverage/scripts/check_local_links.py docs/`
 - Freshness report: `python3 frameworks/shared-skills/skills/qa-docs-coverage/scripts/docs_freshness_report.py --docs-root docs/`
+
+### Docs Folder / LLM Iteration Audit (Critical Option)
+
+Use this when any repository has a `docs/` folder with many LLM-generated research and implementation artifacts across phases/iterations.
+
+1. Inventory docs and classify by type (`Tutorial`, `How-to`, `Reference`, `Explanation`).
+2. Detect duplicate topics and define one canonical file per topic/feature.
+3. Audit claim quality:
+   - external claims must include source link + verification date
+   - implementation claims must map to current code or decision log
+4. Enforce lifecycle metadata for non-canonical docs (`status`, `integrates_into`, `owner`, `last_verified`, `delete_by`).
+5. Trim aggressively at each phase boundary: integrated drafts must be deleted on schedule; track rare retention exceptions in backlog.
+
+Minimum QA gate for docs folders:
+- block merge if a canonical doc is missing for a changed feature
+- block merge if `delete_by` is passed for `integrated` docs
+- block merge on broken links or stale critical docs without owner
+- block merge if `AGENTS.md` or `README.md` is missing, stale, or not linked to current canonical docs
 
 ---
 
@@ -166,7 +184,7 @@ Maintenance:
 
 **Avoid**:
 
-- Large "doc-only" projects with no owners and no CI gates.
+- Large ungoverned `docs/` folders with no owners and no CI gates.
 - Writing runbooks that cannot be executed in a sandbox/staging environment.
 
 ---
@@ -189,6 +207,9 @@ Maintenance:
 
 ```text
 User needs: [Audit Type]
+    ├─ Repo has a docs folder with LLM-generated research/feature docs?
+    │   └─ Run Docs Folder / LLM Iteration Audit first, then apply P1/P2/P3 prioritization
+    │
     ├─ Starting fresh audit?
     │   ├─ Public-facing APIs? → Priority 1: External-Facing (OpenAPI, webhooks, error codes)
     │   ├─ Internal services/events? → Priority 2: Internal Integration (endpoints, schemas, jobs)
@@ -210,7 +231,7 @@ User needs: [Audit Type]
     │
     └─ Maintaining existing docs?
         └─ Check for:
-            ├─ Outdated docs (code changed, docs didn't) → Update or archive
+            ├─ Outdated docs (code changed, docs didn't) → Update or remove
             ├─ Orphaned docs (references non-existent code) → Remove
             └─ Missing coverage → Add to backlog → Prioritize
 ```
@@ -461,3 +482,9 @@ This skill works closely with:
 6. **Set up automation** - Use [references/cicd-integration.md](references/cicd-integration.md) for ongoing maintenance
 
 **Remember**: The goal is not 100% coverage, but **useful coverage** for the target audience. Document what developers, operators, and integrators actually need.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

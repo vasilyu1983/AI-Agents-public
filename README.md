@@ -1,121 +1,61 @@
 # AI Agents Library
 
-## Production-Ready AI Agent Prompts & Claude Code Skills
+## Production-Ready AI Agent Prompts & Skills
 
 <div align="center">
 
-A curated collection of **40+ Custom GPT agents** and **50 Claude Code skills** optimized for ChatGPT, Claude Projects, Codex, and Gemini platforms.
+A curated collection of **28 Custom GPT agents** and **62 AI coding agent skills** for ChatGPT, Claude Code, Codex CLI, and Gemini CLI.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Custom GPTs](https://img.shields.io/badge/Custom%20GPTs-40+-blue)](./custom-gpt)
-[![Claude Skills](https://img.shields.io/badge/Claude%20Skills-50-purple)](./frameworks/claude-code-kit)
+[![Custom GPTs](https://img.shields.io/badge/Custom%20GPTs-28-blue)](./custom-gpt)
+[![Skills](https://img.shields.io/badge/Skills-62-purple)](./frameworks/shared-skills)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Twitter Follow](https://img.shields.io/twitter/follow/vasilyu?style=social)](https://twitter.com/vasilyu)
 
-[Quick Start](#-quick-start) • [Custom GPTs](#-custom-gpt-agents) • [Claude Skills](#-claude-code-skills) • [Frameworks](#-frameworks) • [Contributing](#-contributing)
+[Quick Start](#quick-start) • [Custom GPTs](#custom-gpt-agents) • [Skills](#ai-coding-agent-skills) • [Contributing](#contributing)
 
 </div>
 
 ---
 
-## Table of Contents
-
-- [What's Inside](#whats-inside)
-- [Repository Architecture](#repository-architecture)
-- [Custom GPT Agents](#custom-gpt-agents)
-- [Claude Code Skills](#claude-code-skills)
-- [Frameworks](#frameworks)
-- [Quick Start](#quick-start)
-- [Prompt Engineering Framework](#prompt-engineering-framework)
-- [Platform Support](#platform-support)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## What's Inside
 
-This repository contains **40+ specialized AI agents** and **50 Claude Code skills** organized by domain, each optimized for specific tasks and workflows. All agents follow a consistent template structure with platform-specific optimizations.
-
-```mermaid
-graph TB
-    subgraph "AI Agents Library"
-        A[Custom GPT Agents<br/>40+ Specialized Agents] --> A1[Education]
-        A --> A2[Lifestyle]
-        A --> A3[Productivity]
-        A --> A4[Programming]
-        A --> A5[Research & Analysis]
-        A --> A6[Writing]
-
-        B[Claude Code Skills<br/>50 Development Skills] --> B1[Software Development]
-        B --> B2[AI/ML Engineering]
-        B --> B3[DevOps & Platform]
-        B --> B4[Quality & Testing]
-        B --> B5[Documentation]
-
-        C[Frameworks<br/>Copy-Paste Ready] --> C1[Claude Code Kit]
-        C --> C2[Codex Kit]
-        C --> C3[Gemini Kit]
-
-        D[Master Template v3.5<br/>13-Section Framework] --> A
-        D --> B
-        D --> C
-    end
-
-    style A fill:#4A90E2
-    style B fill:#9B59B6
-    style C fill:#E67E22
-    style D fill:#27AE60
-```
+This repository contains **28 specialized Custom GPT agents** and **62 AI coding agent skills** organized by domain. All agents follow a consistent template structure. All skills follow the [Agent Skills specification](https://agentskills.io/specification).
 
 ### What Makes This Different?
 
-- **Production-Ready**: Every agent tested and optimized for real-world use
-- **Multi-Platform**: Works across ChatGPT, Claude, Codex, and Gemini
-- **Systematic Framework**: Master Template v3.5 with 13 standardized sections
-- **Character-Optimized**: Custom GPT agents under 8000 char limit
-- **Curated Resources**: JSON source files with 60+ curated references per domain
-- **Copy-Paste Kits**: Complete `.claude/` and `.codex/` workspace templates
+- **Production-Ready**: Every agent and skill tested for real-world use
+- **Multi-Platform**: Custom GPTs for ChatGPT; skills for Claude Code, Codex CLI, and Gemini CLI
+- **62 Domain Skills**: Software, AI/ML, QA, DevOps, data, agents, and more
+- **Curated Resources**: JSON source files with curated references per domain
+- **Copy-Paste Ready**: Drop skills directly into your `.claude/skills/` or `.codex/skills/` workspace
 
 ## Repository Architecture
 
-```mermaid
-graph LR
-    subgraph "Repository Structure"
-        A[custom-gpt/] --> A1[education/]
-        A --> A2[lifestyle/]
-        A --> A3[productivity/]
-        A --> A4[programming/]
-        A --> A5[research-n-analysis/]
-        A --> A6[writing/]
-
-        B[frameworks/] --> B1[claude-code-kit/<br/>50 Skills]
-        B --> B2[codex-kit/<br/>Router System]
-        B --> B3[gemini-kit/<br/>Router System]
-
-        C[Each Agent] --> C1[01_agent-name.md<br/>Main Prompt]
-        C --> C2[02_sources.json<br/>Curated Resources]
-        C --> C3[agent-name.yaml<br/>Configuration]
-    end
-
-    style A fill:#4A90E2,color:#fff
-    style B fill:#9B59B6,color:#fff
-    style C fill:#27AE60,color:#fff
-```
-
-### Three-File Agent Pattern
-
-Every agent follows a consistent structure:
-
 ```text
-AgentName/
-├── 01_agent-name.md           # Main prompt file (<8000 chars for Custom GPT)
-├── 02_sources-agent-name.json # Curated web resources and references
-├── agent-name.yaml            # Configuration (role, commands, constraints)
-└── archive/                   # Version history (git-ignored)
+AI-Agents-public/
+├── custom-gpt/                    # 28 Custom GPT agents
+│   ├── education/                 # Learning and tutoring
+│   ├── lifestyle/                 # Health, fitness, entertainment
+│   ├── productivity/              # Business and professional tools
+│   ├── programming/               # Software development
+│   ├── research-n-analysis/       # Strategy and consulting
+│   └── writing/                   # Content creation
+├── frameworks/
+│   └── shared-skills/             # 62 AI coding agent skills
+│       └── skills/
+│           ├── ai-*/              # AI/ML skills (8)
+│           ├── agents-*/          # Agent orchestration (6)
+│           ├── software-*/        # Software engineering (13)
+│           ├── qa-*/              # Quality & testing (13)
+│           ├── dev-*/             # Developer tools (8)
+│           └── ...                # Data, docs, ops, product
+└── CONTRIBUTING.md
 ```
 
 ## Custom GPT Agents
 
-**40+ specialized agents** optimized for ChatGPT Custom GPTs (8000 character limit).
+**28 specialized agents** optimized for ChatGPT Custom GPTs (8000 character limit).
 
 ### Agent Categories
 
@@ -162,86 +102,73 @@ AgentName/
 - **AI Text Humaniser** - Transform AI content into natural writing while eliminating detection markers
 - **FAANG Resume Coach** - ATS optimization, STAR stories, and behavioral interview preparation
 
-[See full agent catalog →](./custom-gpt/README.md)
+### Three-File Agent Pattern
 
-## Claude Code Skills
+Every Custom GPT agent follows a consistent structure:
 
-**50 production-ready skills** for Claude Code, organized into domain-specific categories.
-
-```mermaid
-graph LR
-    subgraph "Claude Code Skills (50)"
-        A[Software Development] --> A1[Frontend<br/>Backend<br/>Architecture]
-        B[AI/ML Engineering] --> B1[LLM Engineering<br/>Agents<br/>Data Science]
-        C[DevOps & Platform] --> C1[Database<br/>Platform<br/>Document Automation]
-        D[Quality & Testing] --> D1[Code Review<br/>Testing<br/>Debugging<br/>Refactoring]
-        E[Documentation] --> E1[API Design<br/>Codebase Audit<br/>Technical Writing]
-    end
-
-    style A fill:#3498DB
-    style B fill:#9B59B6
-    style C fill:#E67E22
-    style D fill:#2ECC71
-    style E fill:#34495E,color:#fff
+```text
+AgentName/
+├── 01_agent-name.md           # Main prompt file (<8000 chars)
+├── 02_sources-agent-name.json # Curated web resources and references
+└── agent-name.yaml            # Configuration (role, commands, constraints)
 ```
+
+## AI Coding Agent Skills
+
+**62 production-ready skills** for Claude Code, Codex CLI, and Gemini CLI.
 
 ### Installation
 
-Copy the entire `.claude/skills/` directory to your Claude Code workspace:
-
 ```bash
-# Clone the repository
+# Clone repository
 git clone https://github.com/vasilyu1983/AI-Agents-public
 cd AI-Agents-public
 
-# Copy skills to Claude Code
-cp -r frameworks/claude-code-kit/initial-setup/skills ~/.config/claude-code/skills/
+# Install to Claude Code workspace
+cp -r frameworks/shared-skills/skills/ /path/to/your/repo/.claude/skills/
+
+# Or for Codex CLI
+cp -r frameworks/shared-skills/skills/ /path/to/your/repo/.codex/skills/
 ```
 
-[See full skills catalog →](./frameworks/README.md)
+### Skill Domains
 
-## Frameworks
+| Domain | Count | Highlights |
+|--------|-------|------------|
+| Software Development | 13 | Frontend, backend, C#/.NET, mobile, architecture, security, payments |
+| AI/ML Engineering | 8 | LLMs, agents, RAG, MLOps, data science, prompt engineering |
+| Quality & Testing | 13 | Playwright, iOS/Android, NUnit, debugging, observability, resilience |
+| Developer Tools | 8 | API design, git workflow, structured logs, context engineering |
+| Agents & Orchestration | 6 | Subagents, hooks, MCP, project memory, swarm orchestration |
+| Data | 4 | Analytics engineering, data lake, SQL optimization, Metabase |
+| Docs & Formats | 6 | PRDs, codebase docs, PDF/DOCX/XLSX/PPTX |
+| Operations | 2 | DevOps platform, NUKE CI/CD |
+| Product | 2 | Product management, help center |
 
-Three complete development kits for different AI platforms:
-
-### Claude Code Kit
-
-Complete `.claude/` workspace with 50 skills covering software development, AI/ML, DevOps, and quality engineering.
-
-**Copy-paste ready**: Drop the `initial-setup/` directory into your Claude Code workspace.
-
-### Codex Kit
-
-Router-based system for Codex CLI with intelligent agent dispatch and workflow orchestration.
-
-### Gemini Kit
-
-Gemini-optimized router system with platform-specific adaptations.
-
-[See frameworks documentation →](./frameworks/README.md)
+[See full skills catalog →](./frameworks/shared-skills/skills/INDEX.md)
 
 ## Quick Start
 
 ### Using a Custom GPT Agent
 
-1. Browse the [agent catalog](./custom-gpt/README.md) to find an agent
+1. Browse the agent catalog above to find an agent
 2. Navigate to the agent folder (e.g., `custom-gpt/productivity/Prompt Engineer/`)
 3. Copy content from `01_agent-name.md` (guaranteed <8000 chars)
 4. Create new Custom GPT in ChatGPT
 5. Paste into Instructions field
 6. Upload `02_sources-*.json` as knowledge file (optional)
 
-### Installing Claude Code Skills
+### Installing AI Coding Agent Skills
 
 ```bash
 # Clone repository
 git clone https://github.com/vasilyu1983/AI-Agents-public
 
-# Install all skills
-cp -r frameworks/claude-code-kit/initial-setup/skills ~/.config/claude-code/skills/
+# Install all skills to Claude Code
+cp -r frameworks/shared-skills/skills/ /path/to/your/repo/.claude/skills/
 
 # Verify installation
-ls ~/.config/claude-code/skills/
+ls /path/to/your/repo/.claude/skills/
 ```
 
 ### Using with Claude Projects
@@ -251,98 +178,9 @@ ls ~/.config/claude-code/skills/
 3. Add supplemental files (`02_sources-*.json`) if available
 4. Reference in custom instructions
 
-## Prompt Engineering Framework
-
-All agents built on **Master Template v3.5** with 13 standardized sections:
-
-1. **VARS** - Configuration variables
-2. **IDENTITY** - Role definition
-3. **CONTEXT** - Background knowledge
-4. **CONSTRAINTS** - Boundaries and requirements
-5. **PRECEDENCE & SAFETY** - Security protocols
-6. **OUTPUT CONTRACT** - Format specifications
-7. **FRAMEWORKS** - Reasoning frameworks
-8. **WORKFLOW** - Execution process
-9. **ERROR RECOVERY** - Edge case handling
-10. **TOOLS & UI** - Tool usage guidelines
-11. **MEMORY** - State management
-12. **COMMANDS** - Slash commands
-13. **EXEMPLARS** - Real-world examples
-
-### Template Features
-
-```mermaid
-graph TB
-    A[Master Template v3.5] --> B[4 Deployment Modes]
-    B --> B1[Standard Prompts<br/>Flexible length]
-    B --> B2[Custom GPTs<br/><8000 chars]
-    B --> B3[AI Agents<br/>~7500 chars]
-    B --> B4[AgentKit<br/><2000 chars]
-
-    A --> C[Platform Adaptations]
-    C --> C1[ChatGPT<br/>Memory optimization]
-    C --> C2[Claude<br/>Artifacts & thinking]
-    C --> C3[Gemini<br/>API-optimized]
-
-    A --> D[Token Optimization]
-    D --> D1[No dividers<br/>10-13% reduction]
-    D --> D2[Bullet points<br/>Better parsing]
-    D --> D3[Consolidated VARS]
-
-    style A fill:#27AE60,color:#fff
-    style B fill:#3498DB,color:#fff
-    style C fill:#9B59B6,color:#fff
-    style D fill:#E67E22,color:#fff
-```
-
-## Platform Support
-
-```mermaid
-graph LR
-    A[AI Agents Library] --> B[ChatGPT]
-    A --> C[Claude]
-    A --> D[Codex]
-    A --> E[Gemini]
-
-    B --> B1[Custom GPTs<br/>8000 char limit]
-    C --> C1[Claude Projects<br/>200k tokens]
-    C --> C2[Claude Code<br/>50 skills]
-    D --> D1[Codex CLI<br/>Router system]
-    E --> E1[Gemini<br/>Router system]
-
-    style A fill:#2C3E50,color:#fff
-    style B fill:#10A37F,color:#fff
-    style C fill:#D97757,color:#fff
-    style D fill:#4A90E2,color:#fff
-    style E fill:#4285F4,color:#fff
-```
-
-### Platform-Specific Features
-
-#### ChatGPT Custom GPTs
-
-- 8000 character hard limit (strictly enforced)
-- Memory feature integration
-- Knowledge file uploads
-- Target: 7,500-7,900 characters
-
-#### Claude Projects & Code
-
-- 200k token context window
-- Artifacts for long outputs
-- `<thinking>` tags for transparency
-- Multi-file knowledge base
-- 50 specialized skills
-
-#### Codex & Gemini
-
-- Router-based agent dispatch
-- Workflow orchestration
-- Platform-specific optimizations
-
 ## Contributing
 
-We welcome contributions! Please follow these guidelines:
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
 
 ### Adding a New Agent
 
@@ -351,39 +189,28 @@ We welcome contributions! Please follow these guidelines:
    - `01_agent-name.md` (<8000 chars for Custom GPT)
    - `02_sources-agent-name.json` (curated resources)
    - `agent-name.yaml` (configuration)
-3. Use Master Template v3.5 structure (13 sections)
-4. Validate character count: `wc -c 01_agent-name.md`
-5. Test on target platform
-6. Submit pull request
+3. Test on target platform
+4. Submit pull request
 
-### Adding a Claude Code Skill
+### Adding a Skill
 
-1. Create skill directory under appropriate category
-2. Add `SKILL.md` with skill definition
-3. Include resources and templates subdirectories
-4. Test skill activation in Claude Code
-5. Submit pull request
-
-### Quality Standards
-
-- All Custom GPT agents must be under 8000 characters
-- Include curated sources in JSON format
-- Follow YAML configuration schema
-- Test prompts before submission
-- Document any platform-specific features
+1. Create skill directory with `SKILL.md`
+2. Add `references/`, `data/`, and `assets/` as needed
+3. Follow the [Agent Skills specification](https://agentskills.io/specification)
+4. Submit pull request
 
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
-All prompts and configurations are provided as-is for educational and commercial use.
+All prompts, skills, and configurations are provided as-is for educational and commercial use.
 
 ## Resources
 
 ### Official Documentation
 
+- [Agent Skills Specification](https://agentskills.io/specification)
 - [OpenAI Custom GPTs](https://help.openai.com/en/articles/8554397-creating-a-gpt)
-- [Claude Projects](https://support.anthropic.com/en/articles/9517075-what-are-projects)
 - [Claude Code Documentation](https://github.com/anthropics/claude-code)
 
 ### Community
@@ -396,8 +223,8 @@ All prompts and configurations are provided as-is for educational and commercial
 
 <div align="center">
 
-**Built with the Master Template v3.5** | Production-ready since 2024
+**Production-ready since 2024**
 
-[Custom GPTs](./custom-gpt) • [Claude Skills](./frameworks/claude-code-kit) • [Frameworks](./frameworks)
+[Custom GPTs](./custom-gpt) • [Skills](./frameworks/shared-skills) • [Contributing](CONTRIBUTING.md)
 
 </div>

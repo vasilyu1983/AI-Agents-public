@@ -1,0 +1,1061 @@
+{
+  "metadata": {
+    "skill": "software-frontend-engineering",
+    "updated": "2026-01-17",
+    "total_sources": 124,
+    "primary_stack": "Next.js 16 + TypeScript + Tailwind CSS + shadcn/ui",
+    "extensible": true,
+    "supported_frameworks": "Next.js, Vue/Nuxt, Angular, Svelte/SvelteKit, Remix, Vite+React",
+    "latest_updates": "January 2026: Added DevTools MCP, Cache Components, React Compiler, and Vitest browser mode. Marked declining patterns (Redux, CSS-in-JS). Track the TypeScript roadmap (Corsa/tsgo) separately."
+  },
+  "categories": {
+    "nextjs": [
+      {
+        "name": "Next.js 16 Documentation",
+        "url": "https://nextjs.org/docs",
+        "type": "framework",
+        "relevance": "Official Next.js 16 docs with Turbopack, enhanced ISR/SSR/SSG, partial prerendering.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Next.js App Router",
+        "url": "https://nextjs.org/docs/app",
+        "type": "documentation",
+        "relevance": "App Router architecture, layouts, loading states, error handling.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Next.js Server Actions",
+        "url": "https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations",
+        "type": "documentation",
+        "relevance": "Server-side mutations, form handling, revalidation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Next.js Image Optimization",
+        "url": "https://nextjs.org/docs/app/building-your-application/optimizing/images",
+        "type": "documentation",
+        "relevance": "Image component, optimization, responsive images.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Next.js Examples",
+        "url": "https://github.com/vercel/next.js/tree/canary/examples",
+        "type": "examples",
+        "relevance": "Official Next.js example applications for various use cases.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Next.js 16 Blog Post",
+        "url": "https://nextjs.org/blog/next-16",
+        "type": "announcement",
+        "relevance": "Official Next.js 16 release notes - Turbopack, React 19 support, new features.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Next.js 16 Upgrade Guide",
+        "url": "https://nextjs.org/docs/app/guides/upgrading/version-16",
+        "type": "documentation",
+        "relevance": "Complete migration guide from Next.js 15 to 16 - middleware->proxy, async APIs, Turbopack, image changes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Next.js Proxy Documentation",
+        "url": "https://nextjs.org/docs/app/getting-started/proxy",
+        "type": "documentation",
+        "relevance": "New proxy.ts convention replacing middleware.ts - runs on Node.js runtime, network boundary patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Next.js proxy.js File Convention",
+        "url": "https://nextjs.org/docs/app/api-reference/file-conventions/proxy",
+        "type": "reference",
+        "relevance": "API reference for proxy.ts file convention - export function, config, matcher patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Next.js Codemods",
+        "url": "https://nextjs.org/docs/app/guides/upgrading/codemods",
+        "type": "tooling",
+        "relevance": "Automated migration tools for Next.js upgrades - middleware->proxy, async APIs, Turbopack config.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "react": [
+      {
+        "name": "React Documentation",
+        "url": "https://react.dev/",
+        "type": "library",
+        "relevance": "Official React docs, hooks, components, best practices.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React 19.2 Release Notes",
+        "url": "https://react.dev/blog/2025/10/01/react-19-2",
+        "type": "announcement",
+        "relevance": "React 19.2 features: Partial Prerendering, performance improvements, stable APIs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Critical Security Vulnerability in React Server Components (Dec 2025)",
+        "url": "https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components",
+        "type": "announcement",
+        "relevance": "Security advisory and patched versions for an unauthenticated RCE in React Server Components.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Denial of Service and Source Code Exposure in React Server Components (Dec 2025)",
+        "url": "https://react.dev/blog/2025/12/11/denial-of-service-and-source-code-exposure-in-react-server-components",
+        "type": "announcement",
+        "relevance": "Follow-up advisories for additional vulnerabilities in React Server Components and mitigations.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React Server Components",
+        "url": "https://react.dev/reference/rsc/server-components",
+        "type": "documentation",
+        "relevance": "Server Components, 'use client', 'use server', composition patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React use() Hook",
+        "url": "https://react.dev/reference/react/use",
+        "type": "reference",
+        "relevance": "React 19 use() hook for promise resolution with Suspense support.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React Hooks Reference",
+        "url": "https://react.dev/reference/react",
+        "type": "reference",
+        "relevance": "Complete hooks reference, useState, useEffect, custom hooks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Josh Comeau - Server Components Guide",
+        "url": "https://www.joshwcomeau.com/react/server-components/",
+        "type": "guide",
+        "relevance": "Comprehensive mental model for React Server Components.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "typescript": [
+      {
+        "name": "TypeScript Documentation",
+        "url": "https://www.typescriptlang.org/docs/",
+        "type": "language",
+        "relevance": "TypeScript language reference, types, generics, advanced patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React TypeScript Cheatsheet",
+        "url": "https://react-typescript-cheatsheet.netlify.app/",
+        "type": "guide",
+        "relevance": "TypeScript patterns for React components, hooks, props.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TypeScript Handbook",
+        "url": "https://www.typescriptlang.org/docs/handbook/",
+        "type": "documentation",
+        "relevance": "TypeScript 5.x handbook with satisfies operator, template literal types.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TypeScript 5.9 Release Notes",
+        "url": "https://devblogs.microsoft.com/typescript/announcing-typescript-5-9/",
+        "type": "announcement",
+        "relevance": "TypeScript 5.9 features: import defer, expandable hovers, performance improvements.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TypeScript Roadmap - Corsa (tsgo)",
+        "url": "https://www.infoq.com/news/2026/01/typescript-7-progress/",
+        "type": "announcement",
+        "relevance": "Track the TypeScript compiler rewrite (tsgo/Corsa) and timeline. Verify current status and release targets.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "tailwind_css": [
+      {
+        "name": "Tailwind CSS Documentation",
+        "url": "https://tailwindcss.com/docs",
+        "type": "framework",
+        "relevance": "Utility-first CSS framework, responsive design, customization.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tailwind UI Components",
+        "url": "https://tailwindui.com/components",
+        "type": "components",
+        "relevance": "Pre-built component examples (some free, some paid).",
+        "update_frequency": "active",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Headless UI",
+        "url": "https://headlessui.com/",
+        "type": "library",
+        "relevance": "Unstyled, accessible UI components for Tailwind CSS.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "shadcn_ui": [
+      {
+        "name": "shadcn/ui Documentation",
+        "url": "https://ui.shadcn.com/",
+        "type": "components",
+        "relevance": "Re-usable components built with Radix UI and Tailwind CSS.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Radix UI Primitives",
+        "url": "https://www.radix-ui.com/primitives",
+        "type": "library",
+        "relevance": "Unstyled, accessible components (basis of shadcn/ui).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "forms_validation": [
+      {
+        "name": "React Hook Form",
+        "url": "https://react-hook-form.com/",
+        "type": "library",
+        "relevance": "Performant form library with validation, TypeScript support.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Zod",
+        "url": "https://zod.dev/",
+        "type": "library",
+        "relevance": "TypeScript-first schema validation for forms and APIs.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Formik",
+        "url": "https://formik.org/",
+        "type": "library",
+        "relevance": "Alternative form library for React.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "data_fetching": [
+      {
+        "name": "tRPC Documentation",
+        "url": "https://trpc.io/docs",
+        "type": "library",
+        "relevance": "End-to-end type-safe APIs for full-stack TypeScript. Eliminates REST/GraphQL boilerplate.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SWR Documentation",
+        "url": "https://swr.vercel.app/",
+        "type": "library",
+        "relevance": "React hooks for data fetching, caching, revalidation (by Vercel).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TanStack Query",
+        "url": "https://tanstack.com/query/latest",
+        "type": "library",
+        "relevance": "Powerful async state management for data fetching (formerly React Query).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Axios",
+        "url": "https://axios-http.com/",
+        "type": "library",
+        "relevance": "Promise-based HTTP client for browsers and Node.js.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "state_management": [
+      {
+        "name": "Zustand",
+        "url": "https://zustand-demo.pmnd.rs/",
+        "type": "library",
+        "relevance": "Lightweight state management for React - recommended Redux alternative.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Recoil",
+        "url": "https://recoiljs.org/",
+        "type": "library",
+        "relevance": "Meta's state management library - atomic, flexible, modern Redux alternative.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Jotai",
+        "url": "https://jotai.org/",
+        "type": "library",
+        "relevance": "Primitive and flexible state management for React.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Redux Toolkit",
+        "url": "https://redux-toolkit.js.org/",
+        "type": "library",
+        "relevance": "Official Redux state management (for large-scale apps).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "authentication": [
+      {
+        "name": "NextAuth.js",
+        "url": "https://next-auth.js.org/",
+        "type": "library",
+        "relevance": "Authentication for Next.js (OAuth, credentials, JWT).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Clerk",
+        "url": "https://clerk.com/docs",
+        "type": "service",
+        "relevance": "Complete user management for Next.js.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Auth0",
+        "url": "https://auth0.com/docs",
+        "type": "service",
+        "relevance": "Authentication and authorization platform.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      }
+    ],
+    "animation": [
+      {
+        "name": "Framer Motion",
+        "url": "https://www.framer.com/motion/",
+        "type": "library",
+        "relevance": "Production-ready animations for React.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "tailwindcss-animate",
+        "url": "https://github.com/jamiebuilds/tailwindcss-animate",
+        "type": "plugin",
+        "relevance": "Animation utilities for Tailwind CSS.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "React Spring",
+        "url": "https://www.react-spring.dev/",
+        "type": "library",
+        "relevance": "Spring-physics based animations for React.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "testing": [
+      {
+        "name": "Vitest",
+        "url": "https://vitest.dev/",
+        "type": "testing",
+        "relevance": "Fast unit testing framework (Vite-powered, Jest-compatible).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Vitest Browser Mode",
+        "url": "https://vitest.dev/guide/browser/component-testing",
+        "type": "testing",
+        "relevance": "Vitest 4.0 stable browser mode for real browser component testing with Playwright/WebdriverIO.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Testing Library",
+        "url": "https://testing-library.com/docs/react-testing-library/intro/",
+        "type": "testing",
+        "relevance": "User-centric testing for React components.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Playwright",
+        "url": "https://playwright.dev/",
+        "type": "testing",
+        "relevance": "E2E testing for web applications.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Jest",
+        "url": "https://jestjs.io/",
+        "type": "testing",
+        "relevance": "Popular JavaScript testing framework.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "accessibility": [
+      {
+        "name": "WCAG 2.2 Guidelines",
+        "url": "https://www.w3.org/WAI/WCAG22/quickref/",
+        "type": "standard",
+        "relevance": "Web Content Accessibility Guidelines quick reference.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "MDN Accessibility",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/Accessibility",
+        "type": "documentation",
+        "relevance": "Comprehensive accessibility documentation and tutorials.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "axe DevTools",
+        "url": "https://www.deque.com/axe/devtools/",
+        "type": "tool",
+        "relevance": "Browser extension for accessibility testing.",
+        "update_frequency": "active",
+        "access": "freemium",
+        "add_as_web_search": false
+      }
+    ],
+    "icons_assets": [
+      {
+        "name": "Lucide Icons",
+        "url": "https://lucide.dev/",
+        "type": "icons",
+        "relevance": "Icon library (default for shadcn/ui).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Heroicons",
+        "url": "https://heroicons.com/",
+        "type": "icons",
+        "relevance": "SVG icons by Tailwind CSS creators.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "React Icons",
+        "url": "https://react-icons.github.io/react-icons/",
+        "type": "library",
+        "relevance": "Popular icon library for React.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "utilities": [
+      {
+        "name": "clsx",
+        "url": "https://github.com/lukeed/clsx",
+        "type": "utility",
+        "relevance": "Utility for constructing className strings conditionally.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "class-variance-authority",
+        "url": "https://cva.style/docs",
+        "type": "utility",
+        "relevance": "Component variants for TypeScript (used in shadcn/ui).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "date-fns",
+        "url": "https://date-fns.org/",
+        "type": "utility",
+        "relevance": "Modern date utility library.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "deployment": [
+      {
+        "name": "Vercel Documentation",
+        "url": "https://vercel.com/docs",
+        "type": "platform",
+        "relevance": "Deployment platform for Next.js (creators of Next.js).",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Netlify Documentation",
+        "url": "https://docs.netlify.com/",
+        "type": "platform",
+        "relevance": "Alternative deployment platform for frontend apps.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Vercel Edge Runtime",
+        "url": "https://vercel.com/docs/functions/edge-functions",
+        "type": "platform",
+        "relevance": "Edge deployment for global performance - serverless functions at the edge.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cloudflare Workers",
+        "url": "https://developers.cloudflare.com/workers/",
+        "type": "platform",
+        "relevance": "Serverless edge computing platform for Next.js and frontend apps.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      }
+    ],
+    "performance": [
+      {
+        "name": "web.dev Performance",
+        "url": "https://web.dev/performance/",
+        "type": "guide",
+        "relevance": "Web performance best practices by Google.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Core Web Vitals",
+        "url": "https://web.dev/vitals/",
+        "type": "guide",
+        "relevance": "Definitions, measurement guidance, and thresholds for LCP/INP/CLS.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Next.js Performance",
+        "url": "https://nextjs.org/docs/app/building-your-application/optimizing",
+        "type": "documentation",
+        "relevance": "Next.js-specific performance optimization techniques.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "best_practices": [
+      {
+        "name": "Next.js Best Practices",
+        "url": "https://nextjs.org/docs/app/building-your-application/routing/route-handlers",
+        "type": "guide",
+        "relevance": "Official Next.js patterns and best practices.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "React Patterns",
+        "url": "https://www.patterns.dev/react",
+        "type": "guide",
+        "relevance": "Design patterns for React applications.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Bulletproof React",
+        "url": "https://github.com/alan2207/bulletproof-react",
+        "type": "guide",
+        "relevance": "Scalable React application architecture patterns.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Frontend Trends 2026 - Syncfusion",
+        "url": "https://www.syncfusion.com/blogs/post/frontend-development-trends",
+        "type": "guide",
+        "relevance": "2026 frontend trends: AI-powered development, TypeScript standard, server-first architecture.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "8 Trends Web Dev 2026 - LogRocket",
+        "url": "https://blog.logrocket.com/8-trends-web-dev-2026/",
+        "type": "guide",
+        "relevance": "Web development trends 2026: edge computing, meta-frameworks, architecture as differentiator.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Frontend Trends Declining 2026",
+        "url": "https://levelup.gitconnected.com/frontend-trends-that-will-not-survive-2026-ce90e0276264",
+        "type": "guide",
+        "relevance": "Declining patterns in 2026: Redux, CSS-in-JS, Create React App, micro frontends.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Playwright Best Practices 2026",
+        "url": "https://www.browserstack.com/guide/playwright-best-practices",
+        "type": "guide",
+        "relevance": "15 Playwright testing best practices: semantic selectors, isolation, test design.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "vue_nuxt": [
+      {
+        "name": "Vue 3 Documentation",
+        "url": "https://vuejs.org/",
+        "type": "framework",
+        "relevance": "Official Vue 3 docs with Composition API, script setup, reactive patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Nuxt Documentation",
+        "url": "https://nuxt.com/docs",
+        "type": "framework",
+        "relevance": "Nuxt full-stack framework docs (Nuxt 4+). Covers auto-imports, Nitro server, file-based routing, SSR/SSG, and modules.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Nuxt 4 Roadmap",
+        "url": "https://nuxt.com/blog/roadmap-2025",
+        "type": "announcement",
+        "relevance": "Nuxt 4 features and timeline (June 2025), plus migration notes for teams currently on Nuxt 3.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pinia (Vue State Management)",
+        "url": "https://pinia.vuejs.org/",
+        "type": "library",
+        "relevance": "Official Vue state management, TypeScript support, devtools.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "VueUse",
+        "url": "https://vueuse.org/",
+        "type": "library",
+        "relevance": "Collection of Vue Composition utilities (200+ composables).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Nuxt UI",
+        "url": "https://ui.nuxt.com/",
+        "type": "components",
+        "relevance": "Official Nuxt component library with dark mode, icons, forms.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Vue Mastery",
+        "url": "https://www.vuemastery.com/",
+        "type": "learning",
+        "relevance": "Official Vue learning platform with courses and tutorials.",
+        "update_frequency": "active",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Mastering Nuxt",
+        "url": "https://masteringnuxt.com/",
+        "type": "learning",
+        "relevance": "Official Nuxt courses including Nuxt 4 full-stack unleashed.",
+        "update_frequency": "active",
+        "access": "paid",
+        "add_as_web_search": false
+      }
+    ],
+    "angular": [
+      {
+        "name": "Angular Documentation",
+        "url": "https://angular.dev/",
+        "type": "framework",
+        "relevance": "Official Angular docs with standalone components, signals, modern patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Angular Signals Guide",
+        "url": "https://angular.dev/guide/signals",
+        "type": "documentation",
+        "relevance": "Fine-grained reactivity with signals, computed values, effects.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Angular Release Notes",
+        "url": "https://angular.dev/guide/releases",
+        "type": "documentation",
+        "relevance": "Angular release notes and breaking changes. Use before upgrades and when validating version-specific patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Angular Material",
+        "url": "https://material.angular.io/",
+        "type": "components",
+        "relevance": "Official Material Design component library for Angular.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "PrimeNG",
+        "url": "https://primeng.org/",
+        "type": "components",
+        "relevance": "Rich UI component library for Angular with 90+ components.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Angular CLI",
+        "url": "https://angular.dev/cli",
+        "type": "tooling",
+        "relevance": "Command-line interface for Angular development.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "RxJS Documentation",
+        "url": "https://rxjs.dev/",
+        "type": "library",
+        "relevance": "Reactive programming library used extensively in Angular.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Angular 2025 Strategy",
+        "url": "https://blog.angular.dev/angular-2025-strategy-9ca333dfc334",
+        "type": "announcement",
+        "relevance": "Angular team's 2025 vision - zoneless, signals, performance.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "svelte_sveltekit": [
+      {
+        "name": "Svelte 5 Documentation",
+        "url": "https://svelte.dev/",
+        "type": "framework",
+        "relevance": "Svelte 5 with runes reactivity system ($state, $derived, $effect, $props).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SvelteKit Documentation",
+        "url": "https://kit.svelte.dev/",
+        "type": "framework",
+        "relevance": "SvelteKit full-stack framework with loaders, actions, progressive enhancement.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Runes Introduction",
+        "url": "https://svelte.dev/blog/runes",
+        "type": "announcement",
+        "relevance": "Official Svelte 5 runes announcement - universal reactivity.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Svelte Tutorial",
+        "url": "https://learn.svelte.dev/",
+        "type": "learning",
+        "relevance": "Interactive official Svelte tutorial with Svelte 5 examples.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Svelte Society",
+        "url": "https://sveltesociety.dev/",
+        "type": "community",
+        "relevance": "Svelte community resources, recipes, components.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Svelte 5 Migration Guide",
+        "url": "https://svelte.dev/docs/svelte/v5-migration-guide",
+        "type": "documentation",
+        "relevance": "Migration from Svelte 4 to 5, breaking changes, runes adoption.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "shadcn-svelte",
+        "url": "https://www.shadcn-svelte.com/",
+        "type": "components",
+        "relevance": "Svelte port of shadcn/ui components.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "remix": [
+      {
+        "name": "Remix Documentation",
+        "url": "https://remix.run/docs",
+        "type": "framework",
+        "relevance": "Full-stack React framework with loaders, actions, progressive enhancement.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Remix Examples",
+        "url": "https://github.com/remix-run/examples",
+        "type": "examples",
+        "relevance": "Official Remix example applications and patterns.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Remix vs Next.js Comparison",
+        "url": "https://strapi.io/blog/next-js-vs-remix-2025-developer-framework-comparison-guide",
+        "type": "guide",
+        "relevance": "Technical comparison for choosing between Remix and Next.js.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Remix Blog",
+        "url": "https://remix.run/blog",
+        "type": "blog",
+        "relevance": "Official Remix blog with updates and best practices.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Remix Stacks",
+        "url": "https://remix.run/docs/en/main/guides/templates",
+        "type": "templates",
+        "relevance": "Official production-ready Remix templates.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "vite": [
+      {
+        "name": "Vite Documentation",
+        "url": "https://vitejs.dev/",
+        "type": "tooling",
+        "relevance": "Next-generation frontend build tool with instant HMR.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Vite React Plugin",
+        "url": "https://github.com/vitejs/vite-plugin-react",
+        "type": "plugin",
+        "relevance": "Official Vite plugin for React Fast Refresh and JSX.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Vite Guide 2025",
+        "url": "https://codeparrot.ai/blogs/advanced-guide-to-using-vite-with-react-in-2025",
+        "type": "guide",
+        "relevance": "Modern Vite + React patterns and best practices.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Vitest",
+        "url": "https://vitest.dev/",
+        "type": "testing",
+        "relevance": "Blazing fast unit testing framework powered by Vite.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  },
+  "research_tools": [
+    {
+      "name": "React DevTools",
+      "url": "https://react.dev/learn/react-developer-tools",
+      "purpose": "Browser extension for debugging React applications.",
+      "use_case": "Component inspection, props debugging, performance profiling."
+    },
+    {
+      "name": "Tailwind CSS IntelliSense",
+      "url": "https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss",
+      "purpose": "VS Code extension for Tailwind CSS autocomplete.",
+      "use_case": "Class suggestions, linting, color previews."
+    },
+    {
+      "name": "v0 by Vercel",
+      "url": "https://v0.dev/",
+      "purpose": "AI-powered UI generation using shadcn/ui.",
+      "use_case": "Rapid component prototyping.",
+      "optional": true
+    },
+    {
+      "name": "Lighthouse",
+      "url": "https://developer.chrome.com/docs/lighthouse/",
+      "purpose": "Automated tool for improving web page quality.",
+      "use_case": "Performance, accessibility, SEO audits."
+    }
+  ],
+  "communities": [
+    {
+      "name": "Next.js Discord",
+      "url": "https://nextjs.org/discord",
+      "platform": "discord",
+      "focus": "Next.js development, App Router, deployment, troubleshooting."
+    },
+    {
+      "name": "Reactiflux Discord",
+      "url": "https://www.reactiflux.com/",
+      "platform": "discord",
+      "focus": "React community, help, discussions."
+    },
+    {
+      "name": "Tailwind CSS Discord",
+      "url": "https://tailwindcss.com/discord",
+      "platform": "discord",
+      "focus": "Tailwind CSS styling, customization, best practices."
+    },
+    {
+      "name": "r/nextjs",
+      "url": "https://reddit.com/r/nextjs",
+      "platform": "reddit",
+      "focus": "Next.js community, showcase, questions."
+    },
+    {
+      "name": "r/reactjs",
+      "url": "https://reddit.com/r/reactjs",
+      "platform": "reddit",
+      "focus": "React development, patterns, news."
+    }
+  ]
+}

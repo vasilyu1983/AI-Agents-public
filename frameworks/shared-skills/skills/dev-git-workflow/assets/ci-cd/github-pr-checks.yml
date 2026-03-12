@@ -1,0 +1,335 @@
+# GitHub Actions - PR Quality Checks
+# Place in: .github/workflows/pr-checks.yml
+
+name: PR Quality Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - main
+      - develop
+
+# Cancel previous runs if new commit pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Job 1: Code Quality Checks
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better analysis
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Check code formatting
+        run: npm run format:check
+
+      - name: Type check
+        run: npm run type-check
+        if: hashFiles('tsconfig.json') != ''
+
+  # Job 2: Tests and Coverage
+  test:
+    name: Tests & Coverage
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test -- --coverage
+
+      - name: Check coverage threshold
+        run: |
+          COVERAGE=$(npm test -- --coverage --silent | grep -oP '\d+(?=%)' | head -1)
+          THRESHOLD=80
+          echo "Coverage: $COVERAGE%"
+          if [ "$COVERAGE" -lt "$THRESHOLD" ]; then
+            echo "::error::Coverage $COVERAGE% is below $THRESHOLD% threshold"
+            exit 1
+          fi
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/coverage-final.json
+          flags: unittests
+          fail_ci_if_error: true
+
+  # Job 3: Build Check
+  build:
+    name: Build Verification
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Check bundle size
+        uses: andresz1/size-limit-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_step: install
+
+  # Job 4: Security Scan
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Snyk security scan
+        uses: snyk/actions/node@master
+        continue-on-error: true  # Don't block on vulnerabilities, just report
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Check for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+
+      - name: Dependency audit
+        run: npm audit --audit-level=moderate
+
+  # Job 5: PR Size Check
+  pr-size:
+    name: PR Size Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check PR size
+        run: |
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+
+          # Count lines changed
+          LINES_CHANGED=$(git diff --shortstat $BASE_SHA $HEAD_SHA | grep -oP '\d+(?= insertion)|\d+(?= deletion)' | awk '{s+=$1} END {print s}')
+
+          echo "Lines changed: $LINES_CHANGED"
+
+          # Warning at 400, error at 1000
+          if [ "$LINES_CHANGED" -gt 1000 ]; then
+            echo "::error::PR is too large ($LINES_CHANGED lines). Consider splitting into smaller PRs."
+            exit 1
+          elif [ "$LINES_CHANGED" -gt 400 ]; then
+            echo "::warning::PR is large ($LINES_CHANGED lines). Consider splitting for faster reviews."
+          fi
+
+      - name: Label PR by size
+        uses: CodeSeoul/pr-size-labeler@v1
+        with:
+          max_xs: 10
+          max_s: 100
+          max_m: 400
+          max_l: 1000
+          max_xl: 2000
+
+  # Job 6: Conventional Commits Check
+  commitlint:
+    name: Commit Message Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install commitlint
+        run: |
+          npm install --save-dev @commitlint/cli @commitlint/config-conventional
+
+      - name: Validate PR title
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+          scopes: |
+            auth
+            api
+            ui
+            db
+          requireScope: false
+
+      - name: Validate all commits
+        run: |
+          npx commitlint --from ${{ github.event.pull_request.base.sha }} --to HEAD --verbose
+
+  # Job 7: Accessibility Check (for frontend projects)
+  a11y:
+    name: Accessibility Check
+    runs-on: ubuntu-latest
+    if: hashFiles('**/package.json') != '' && github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run accessibility tests
+        run: npm run test:a11y
+        continue-on-error: true  # Report but don't block
+
+  # Job 8: Performance Benchmarks (optional)
+  performance:
+    name: Performance Benchmarks
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run benchmarks
+        run: npm run benchmark
+        continue-on-error: true
+
+      - name: Comment PR with results
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          script: |
+            const fs = require('fs');
+            const benchmarks = fs.readFileSync('benchmark-results.txt', 'utf8');
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## Performance Benchmarks\n\`\`\`\n${benchmarks}\n\`\`\``
+            });
+
+  # Job 9: Required Checks Summary
+  all-checks:
+    name: All Checks Passed
+    runs-on: ubuntu-latest
+    needs: [quality, test, build, security, pr-size, commitlint]
+    if: always()
+
+    steps:
+      - name: Check all jobs
+        run: |
+          if [[ "${{ needs.quality.result }}" != "success" ]] || \
+             [[ "${{ needs.test.result }}" != "success" ]] || \
+             [[ "${{ needs.build.result }}" != "success" ]] || \
+             [[ "${{ needs.security.result }}" != "success" ]] || \
+             [[ "${{ needs.pr-size.result }}" != "success" ]] || \
+             [[ "${{ needs.commitlint.result }}" != "success" ]]; then
+            echo "::error::One or more required checks failed"
+            exit 1
+          fi
+          echo "All required checks passed!"
+
+# Optional: Auto-assign reviewers
+# Uncomment if you want automatic reviewer assignment
+#
+# reviewer-assignment:
+#   name: Assign Reviewers
+#   runs-on: ubuntu-latest
+#   steps:
+#     - name: Auto-assign reviewers
+#       uses: kentaro-m/auto-assign-action@v1.2.1
+#       with:
+#         configuration-path: '.github/auto-assign.yml'
+
+# Optional: Auto-label by files changed
+# Uncomment if you want automatic labels based on changed files
+#
+# labeler:
+#   name: Auto-label PR
+#   runs-on: ubuntu-latest
+#   steps:
+#     - uses: actions/labeler@v5
+#       with:
+#         configuration-path: '.github/labeler.yml'
+#         repo-token: ${{ secrets.GITHUB_TOKEN }}

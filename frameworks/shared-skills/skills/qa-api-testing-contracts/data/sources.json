@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "skill": "qa-api-testing-contracts",
+    "updated": "2026-01-26",
+    "total_sources": 19,
+    "description": "Curated sources for API schema validation, contract testing, AI-powered test generation, and change safety across REST, GraphQL, and gRPC.",
+    "version": "1.2"
+  },
+  "categories": {
+    "specifications": [
+      {
+        "name": "OpenAPI Specification",
+        "url": "https://spec.openapis.org/oas/latest.html",
+        "type": "specification",
+        "relevance": "Primary schema contract for REST APIs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "JSON Schema (2020-12)",
+        "url": "https://json-schema.org/specification.html",
+        "type": "specification",
+        "relevance": "OpenAPI 3.1 uses JSON Schema for validation keywords and semantics.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "GraphQL Specification",
+        "url": "https://spec.graphql.org/",
+        "type": "specification",
+        "relevance": "Schema and execution semantics for GraphQL APIs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "gRPC Documentation",
+        "url": "https://grpc.io/docs/",
+        "type": "documentation",
+        "relevance": "RPC design and tooling reference for gRPC services.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Protocol Buffers Documentation",
+        "url": "https://protobuf.dev/",
+        "type": "documentation",
+        "relevance": "Schema definition and compatibility rules for protobuf.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "RFC 7807: Problem Details for HTTP APIs",
+        "url": "https://www.rfc-editor.org/rfc/rfc7807",
+        "type": "specification",
+        "relevance": "A standard error envelope; helps keep error handling consistent across clients and tests.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "tools": [
+      {
+        "name": "Spectral API Linter",
+        "url": "https://docs.stoplight.io/docs/spectral/674b27b261c3c-overview",
+        "type": "tool",
+        "relevance": "Rule-based OpenAPI and AsyncAPI linting for CI/CD governance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OASDiff",
+        "url": "https://github.com/Tufin/oasdiff",
+        "type": "tool",
+        "relevance": "OpenAPI diff and breaking-change detection for PR gates.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pact Contract Testing",
+        "url": "https://docs.pact.io/",
+        "type": "tool",
+        "relevance": "Consumer driven contract testing and CI integration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PactFlow",
+        "url": "https://pactflow.io/",
+        "type": "platform",
+        "relevance": "Enterprise Pact with AI Code Review, Bi-Directional Contract Testing, and team collaboration.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Specmatic",
+        "url": "https://specmatic.io/",
+        "type": "tool",
+        "relevance": "Schema-driven contract testing and intelligent service virtualisation for OpenAPI and GraphQL.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Keploy",
+        "url": "https://keploy.io/",
+        "type": "tool",
+        "relevance": "AI-powered automatic test generation from live API traffic with zero-code setup.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Schemathesis",
+        "url": "https://schemathesis.readthedocs.io/en/stable/",
+        "type": "tool",
+        "relevance": "Property-based API testing and schema validation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Prism Mock Server",
+        "url": "https://docs.stoplight.io/docs/prism/674b27b261c3c-overview",
+        "type": "tool",
+        "relevance": "OpenAPI mock server and request validation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Buf (Protobuf)",
+        "url": "https://buf.build/docs/",
+        "type": "tool",
+        "relevance": "Protobuf linting, breaking change detection, and schema registry.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Postman Documentation",
+        "url": "https://learning.postman.com/docs/introduction/overview/",
+        "type": "tool",
+        "relevance": "Collection-driven functional and contract tests for APIs with Postbot AI assistant.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GraphQL Inspector",
+        "url": "https://the-guild.dev/graphql/inspector",
+        "type": "tool",
+        "relevance": "Schema diffing, linting, breaking change detection, and CI integration for GraphQL.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apollo GraphOS",
+        "url": "https://www.apollographql.com/docs/graphos/",
+        "type": "platform",
+        "relevance": "Enterprise GraphQL schema management with build checks, operations checks, and contract enforcement.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      }
+    ],
+    "security": [
+      {
+        "name": "OWASP API Security Top 10",
+        "url": "https://owasp.org/www-project-api-security/",
+        "type": "specification",
+        "relevance": "Security risk categories to validate in API test plans.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

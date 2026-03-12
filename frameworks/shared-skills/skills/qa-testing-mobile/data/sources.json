@@ -1,0 +1,152 @@
+{
+  "metadata": {
+    "skill": "qa-testing-mobile",
+    "updated": "2026-01-26",
+    "total_sources": 15,
+    "description": "Curated sources for mobile testing strategy, automation frameworks, and device lab practices.",
+    "version": "1.1"
+  },
+  "categories": {
+    "platform_docs": [
+      {
+        "name": "Apple XCTest Documentation",
+        "url": "https://developer.apple.com/documentation/xctest",
+        "type": "documentation",
+        "relevance": "Core testing framework for iOS apps and UI automation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Android Testing Documentation",
+        "url": "https://developer.android.com/training/testing",
+        "type": "documentation",
+        "relevance": "Official Android test strategy, unit, and UI testing guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Espresso Documentation",
+        "url": "https://developer.android.com/training/testing/espresso",
+        "type": "documentation",
+        "relevance": "Primary Android UI testing framework reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Android Macrobenchmark",
+        "url": "https://developer.android.com/topic/performance/benchmarking/macrobenchmark-overview",
+        "type": "documentation",
+        "relevance": "Android performance benchmarking for startup/jank regressions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Swift Testing Documentation",
+        "url": "https://developer.apple.com/documentation/testing",
+        "type": "documentation",
+        "relevance": "Modern Swift unit/integration testing framework (complements XCTest; UI tests still use XCUITest).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Jetpack Compose Testing",
+        "url": "https://developer.android.com/develop/ui/compose/testing",
+        "type": "documentation",
+        "relevance": "Compose UI testing APIs and best practices (semantics, test tags, idling).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "automation_tools": [
+      {
+        "name": "Appium Documentation",
+        "url": "https://appium.io/docs/en/latest/",
+        "type": "tool",
+        "relevance": "Cross-platform mobile automation framework.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Detox Documentation",
+        "url": "https://wix.github.io/Detox/",
+        "type": "tool",
+        "relevance": "End-to-end testing for React Native apps.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Maestro Documentation",
+        "url": "https://maestro.mobile.dev/",
+        "type": "tool",
+        "relevance": "Cross-platform mobile UI testing with YAML flows (smoke/regression breadth).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Flutter integration_test",
+        "url": "https://docs.flutter.dev/testing/integration-tests",
+        "type": "documentation",
+        "relevance": "Official Flutter integration test guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Patrol (Flutter E2E)",
+        "url": "https://patrol.leancode.co/",
+        "type": "tool",
+        "relevance": "Flutter E2E testing framework built on top of integration_test.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "device_labs": [
+      {
+        "name": "Firebase Test Lab",
+        "url": "https://firebase.google.com/docs/test-lab",
+        "type": "service",
+        "relevance": "Device lab for automated and exploratory mobile testing.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Device Farm",
+        "url": "https://docs.aws.amazon.com/devicefarm/",
+        "type": "service",
+        "relevance": "Cloud device testing and CI integration.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "BrowserStack App Automate",
+        "url": "https://www.browserstack.com/app-automate",
+        "type": "service",
+        "relevance": "Device cloud for mobile automation and debugging.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Bitrise Device Testing",
+        "url": "https://bitrise.io/",
+        "type": "service",
+        "relevance": "Mobile CI/CD and device testing workflows.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

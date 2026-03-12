@@ -1,6 +1,6 @@
 ---
 name: qa-refactoring
-description: "Safe refactoring for legacy or complex codebases: preserve behavior while improving structure, reducing technical debt, and tightening quality gates. Use for characterization tests, seams/adapters, incremental refactor loops, strangler migrations, refactor PR sizing, and CI guardrails (lint/type/contract tests)."
+description: "Safe refactoring with behavior preservation. Use when reducing technical debt, applying strangler migrations, or tightening CI guardrails."
 ---
 
 # QA Refactoring Safety
@@ -164,3 +164,9 @@ Avoid:
 - Letting AI "fix tests" by weakening assertions to make CI green.
 
 See [data/sources.json](data/sources.json) for curated external references.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

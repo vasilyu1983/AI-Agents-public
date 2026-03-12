@@ -1,0 +1,631 @@
+{
+  "metadata": {
+    "skill": "dev-ai-coding-metrics",
+    "title": "AI Coding Agent Metrics for Engineering Teams",
+    "description": "Curated sources for measuring AI coding agent adoption, productivity impact, quality effects, ROI, developer experience, and benchmarking methodology.",
+    "last_updated": "2026-03-12",
+    "version": "1.0",
+    "total_sources": 55
+  },
+  "categories": {
+    "developer_productivity_research": [
+      {
+        "name": "DORA: Accelerate State of DevOps Report 2025",
+        "url": "https://dora.dev/research/",
+        "type": "research",
+        "description": "Google's DORA program annual report on software delivery performance. Includes four key metrics (deployment frequency, lead time, change failure rate, time to restore) now expanded with AI-augmented development findings.",
+        "relevance": "Gold-standard framework for measuring engineering team performance — baseline against which AI coding impact should be compared",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["dora", "metrics", "devops", "foundational", "benchmarking"]
+      },
+      {
+        "name": "SPACE Framework: A Multidimensional View of Developer Productivity",
+        "url": "https://queue.acm.org/detail.cfm?id=3454124",
+        "type": "academic",
+        "description": "Nicole Forsgren, Margaret-Anne Storey, Chandra Maddila, Thomas Zimmermann, Brian Houck, and Jenna Butler. Defines five dimensions: Satisfaction, Performance, Activity, Communication, Efficiency.",
+        "relevance": "Core productivity framework — prevents over-indexing on throughput when measuring AI coding tools",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["space", "productivity", "framework", "foundational", "forsgren"]
+      },
+      {
+        "name": "METR: Measuring the Impact of AI Coding Agents on Developer Productivity",
+        "url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-developers/",
+        "type": "research",
+        "description": "Randomized controlled trial with experienced open-source developers. Found AI coding tools did not improve speed on real-world tasks, challenging assumptions about AI productivity gains.",
+        "relevance": "Critical counterpoint to industry hype — demonstrates need for rigorous measurement methodology",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metr", "rct", "productivity", "counterpoint", "rigorous"]
+      },
+      {
+        "name": "McKinsey: Yes, You Can Measure Software Developer Productivity",
+        "url": "https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/yes-you-can-measure-software-developer-productivity",
+        "type": "report",
+        "description": "McKinsey's framework for developer productivity measurement across inner loop, outer loop, and organizational dimensions. Sparked significant industry debate.",
+        "relevance": "Influential (and contested) productivity framework — useful for understanding enterprise measurement approaches",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["mckinsey", "productivity", "enterprise", "measurement"]
+      },
+      {
+        "name": "ETH Zurich: Codified Context — Repo-Level AGENTS.md Evaluation",
+        "url": "https://arxiv.org/abs/2603.04692",
+        "type": "academic",
+        "description": "Empirical study evaluating how context files (AGENTS.md, CLAUDE.md) affect AI coding agent task completion rates across diverse repositories.",
+        "relevance": "Quantitative evidence linking context engineering practices to measurable AI coding productivity outcomes",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["eth-zurich", "context-files", "agents-md", "empirical", "benchmarking"]
+      },
+      {
+        "name": "Google DORA: State of DevOps — AI Impact Chapter",
+        "url": "https://dora.dev/research/ai/",
+        "type": "research",
+        "description": "DORA's dedicated analysis of how AI tools affect the four key metrics and developer well-being. Examines both code generation and broader SDLC automation.",
+        "relevance": "Connects AI tool adoption to the most widely used engineering performance framework",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["dora", "ai-impact", "devops", "metrics"]
+      },
+      {
+        "name": "Abi Noda: Developer Productivity — DX Research",
+        "url": "https://newsletter.abinoda.com/",
+        "type": "newsletter",
+        "description": "Ongoing research and analysis of developer experience metrics. Covers AI tool impact measurement, survey design for developer satisfaction, and productivity anti-patterns.",
+        "relevance": "Practitioner-focused productivity measurement insights — bridges academic frameworks and real-world implementation",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["dx", "newsletter", "productivity", "practitioner", "noda"]
+      },
+      {
+        "name": "Microsoft Research: Developer Productivity and AI Tools",
+        "url": "https://www.microsoft.com/en-us/research/group/software-analysis-and-intelligence/",
+        "type": "research",
+        "description": "Microsoft Research group studying software engineering productivity, including controlled studies of Copilot's impact on developer workflows, code quality, and cognitive load.",
+        "relevance": "Large-scale internal data on AI coding tool effects from one of the biggest engineering organizations",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["microsoft", "research", "copilot", "productivity", "cognitive-load"]
+      },
+      {
+        "name": "Kent Beck: Measuring Developer Productivity via Tidying",
+        "url": "https://tidyfirst.substack.com/",
+        "type": "blog",
+        "description": "Beck's perspective on developer productivity measurement — argues for focusing on option value, code tidying frequency, and design payoff rather than output volume.",
+        "relevance": "Philosophical counterweight to throughput-obsessed AI coding metrics — emphasizes design quality",
+        "update_frequency": "weekly",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": ["kent-beck", "productivity", "design", "philosophy", "tidying"]
+      },
+      {
+        "name": "Ciera Jaspan: Engineering Productivity at Google",
+        "url": "https://research.google/people/ciera-jaspan/",
+        "type": "research",
+        "description": "Google's engineering productivity research lead. Published work on developer satisfaction metrics, tool adoption measurement, and scaling productivity programs.",
+        "relevance": "Google-scale measurement methodology applicable to AI tool adoption tracking",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["google", "productivity", "measurement", "developer-satisfaction"]
+      }
+    ],
+    "ai_tool_adoption_data": [
+      {
+        "name": "GitHub Copilot Productivity Study (Peng et al. 2023)",
+        "url": "https://arxiv.org/abs/2302.06590",
+        "type": "academic",
+        "description": "Randomized controlled trial showing GitHub Copilot users completed tasks 55.8% faster. One of the most cited studies on AI coding tool productivity impact.",
+        "relevance": "Foundational quantitative evidence for AI coding tool ROI calculations",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["copilot", "rct", "productivity", "peng", "foundational"]
+      },
+      {
+        "name": "Stack Overflow Developer Survey 2025",
+        "url": "https://survey.stackoverflow.co/2025/",
+        "type": "survey",
+        "description": "Annual survey covering AI tool adoption rates, developer sentiment toward AI coding assistants, and self-reported productivity changes across 70,000+ developers.",
+        "relevance": "Largest cross-industry dataset on developer AI tool usage patterns and satisfaction",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["stackoverflow", "survey", "adoption", "sentiment", "large-scale"]
+      },
+      {
+        "name": "GitHub Octoverse 2025",
+        "url": "https://github.blog/news-insights/octoverse/octoverse-2025/",
+        "type": "report",
+        "description": "GitHub's annual state of open source report. Includes AI coding adoption metrics, Copilot usage trends, language and repo growth data, and AI-generated code volume statistics.",
+        "relevance": "Platform-level data on AI coding tool adoption at scale — covers millions of developers",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["github", "octoverse", "adoption", "trends", "open-source"]
+      },
+      {
+        "name": "JetBrains Developer Ecosystem Survey 2025",
+        "url": "https://www.jetbrains.com/lp/devecosystem-2025/",
+        "type": "survey",
+        "description": "Comprehensive developer survey including AI assistant adoption, preferred tools, perceived productivity changes, and concerns about AI-generated code quality.",
+        "relevance": "Cross-IDE perspective on AI coding adoption — complements GitHub-centric data",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["jetbrains", "survey", "adoption", "cross-platform"]
+      },
+      {
+        "name": "Sourcegraph: AI Code Generation Adoption Report",
+        "url": "https://sourcegraph.com/blog/ai-adoption-report",
+        "type": "report",
+        "description": "Enterprise-focused AI coding adoption data. Covers usage patterns, codebase-aware AI tool integration, and large monorepo challenges with AI assistants.",
+        "relevance": "Enterprise perspective on AI coding tool scaling challenges and adoption barriers",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["sourcegraph", "enterprise", "adoption", "monorepo"]
+      },
+      {
+        "name": "GitClear: AI Code Quality Analysis 2024–2025",
+        "url": "https://www.gitclear.com/coding_on_copilot_data_shows_ais_downward_pressure_on_code_quality",
+        "type": "research",
+        "description": "Analysis of 150M+ lines of code showing AI coding tools correlate with increased code churn, more reverted code, and reduced code reuse. Critical quality counterpoint.",
+        "relevance": "Essential data for quality-side metrics — proves productivity gains must be weighed against code quality effects",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["gitclear", "code-quality", "churn", "counterpoint", "empirical"]
+      },
+      {
+        "name": "Uplevel: Engineering Metrics and AI Tool Impact Study",
+        "url": "https://uplevelteam.com/blog/posts/uplevel-quantifies-impact-of-github-copilot",
+        "type": "research",
+        "description": "Controlled study of GitHub Copilot impact on engineering teams. Measured PR throughput, code review time, bug rates, and developer working hours across multiple teams.",
+        "relevance": "One of the few controlled enterprise studies measuring both productivity and quality effects simultaneously",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["uplevel", "controlled-study", "enterprise", "quality", "productivity"]
+      },
+      {
+        "name": "Harvard Business School: Navigating the Jagged Technological Frontier (Dell'Acqua et al.)",
+        "url": "https://www.hbs.edu/ris/Publication%20Files/24-013_d9b45b68-9e74-42d6-a1c6-c72fb70c7571.pdf",
+        "type": "academic",
+        "description": "BCG consultants using GPT-4 completed 12.2% more tasks, 25.1% faster, with 40% higher quality — but performed worse on tasks outside the AI frontier. Defines the 'jagged frontier' concept.",
+        "relevance": "Demonstrates AI tools amplify performance within capability boundary but harm performance outside it — critical for metric design",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["hbs", "jagged-frontier", "bcg", "task-boundary", "foundational"]
+      }
+    ],
+    "industry_case_studies": [
+      {
+        "name": "Block (Square): AI Coding Transformation Under Jack Dorsey",
+        "url": "https://www.block.xyz/inside/ai-coding",
+        "type": "case-study",
+        "description": "Block's company-wide AI coding adoption initiative. Reports on internal productivity metrics, developer satisfaction changes, and code review impact across engineering organization.",
+        "relevance": "Large-scale fintech case study with published internal metrics on AI coding adoption",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["block", "square", "fintech", "case-study", "dorsey"]
+      },
+      {
+        "name": "Stripe: AI Coding Agents in Production (Minions)",
+        "url": "https://stripe.com/blog/ai-engineering",
+        "type": "case-study",
+        "description": "Stripe's internal AI coding agent system handling production tasks. Covers safety guardrails, human-in-the-loop review, deployment metrics, and quality control for agent-generated code.",
+        "relevance": "Production-grade AI agent deployment with published safety and quality metrics",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["stripe", "agents", "production", "safety", "minions"]
+      },
+      {
+        "name": "Klarna: AI-Driven Engineering Transformation",
+        "url": "https://www.klarna.com/international/press/klarna-ai/",
+        "type": "case-study",
+        "description": "Klarna's aggressive AI adoption including replacing contractor workforce with AI tools. Reports headcount reduction, cost savings, and engineering velocity metrics.",
+        "relevance": "Controversial but data-rich case study on AI replacing human engineering capacity — ROI measurement reference",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["klarna", "cost-reduction", "transformation", "controversial", "roi"]
+      },
+      {
+        "name": "Coinbase: AI Coding Agent Metrics and Engineering Productivity",
+        "url": "https://www.coinbase.com/blog/ai-engineering-metrics",
+        "type": "case-study",
+        "description": "Coinbase engineering's published metrics on AI coding tool adoption, including acceptance rates, time savings, code review impact, and developer sentiment surveys.",
+        "relevance": "Crypto/fintech engineering team with published quantitative AI coding metrics",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["coinbase", "metrics", "fintech", "adoption-rates"]
+      },
+      {
+        "name": "Shopify: 'Do More with AI' Memo (Tobi Lutke)",
+        "url": "https://twitter.com/toaboronkay/status/1907841423613473178",
+        "type": "case-study",
+        "description": "Shopify CEO's internal memo mandating AI tool usage before requesting headcount. Represents the organizational policy shift toward AI-first engineering culture.",
+        "relevance": "Influential leadership mandate — template for organizational AI adoption measurement frameworks",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["shopify", "lutke", "mandate", "culture", "organizational"]
+      },
+      {
+        "name": "Anthropic: Internal AI-Assisted Software Development",
+        "url": "https://www.anthropic.com/research/swe-bench-sonnet",
+        "type": "case-study",
+        "description": "Anthropic's data on using Claude for internal software development. Includes SWE-bench performance, real-world coding task completion rates, and quality assessments.",
+        "relevance": "AI company eating its own dogfood — provides both benchmark and real-world coding metrics",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["anthropic", "claude", "internal", "swe-bench", "dogfooding"]
+      },
+      {
+        "name": "Google DeepMind: AI-Augmented Software Engineering",
+        "url": "https://deepmind.google/discover/blog/ai-software-engineering/",
+        "type": "case-study",
+        "description": "Google DeepMind's research on AI-assisted coding including AlphaCode results, internal productivity experiments, and code generation quality metrics.",
+        "relevance": "State-of-the-art AI coding capabilities from leading research lab with rigorous evaluation methodology",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["google", "deepmind", "alphacode", "research", "evaluation"]
+      },
+      {
+        "name": "Amazon CodeWhisperer: Enterprise Productivity Data",
+        "url": "https://aws.amazon.com/codewhisperer/resources/",
+        "type": "case-study",
+        "description": "Amazon's published data on CodeWhisperer (now Amazon Q Developer) productivity impact. Internal study showed 57% faster task completion and 27% higher success rate.",
+        "relevance": "Enterprise-scale AI coding tool with published controlled study metrics",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["amazon", "codewhisperer", "enterprise", "controlled-study", "q-developer"]
+      }
+    ],
+    "frameworks_and_methodologies": [
+      {
+        "name": "DX Company: Developer Experience Framework",
+        "url": "https://getdx.com/",
+        "type": "platform",
+        "description": "Research-backed developer experience measurement platform. Provides survey instruments, benchmarking data, and frameworks for measuring developer satisfaction and productivity including AI tool impact.",
+        "relevance": "Purpose-built DX measurement methodology — includes validated survey instruments for AI tool impact assessment",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": ["dx", "developer-experience", "surveys", "benchmarking", "platform"]
+      },
+      {
+        "name": "LinearB: Engineering Metrics and Benchmarks",
+        "url": "https://linearb.io/resources/engineering-benchmarks",
+        "type": "platform",
+        "description": "Engineering metrics platform providing cycle time, review time, and deployment frequency benchmarks. Includes AI impact tracking and team performance analytics.",
+        "relevance": "Industry benchmarks for engineering metrics — useful for comparing AI-augmented vs. baseline team performance",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": ["linearb", "benchmarks", "cycle-time", "engineering-metrics"]
+      },
+      {
+        "name": "DORA Metrics: Official Quick Check",
+        "url": "https://dora.dev/quickcheck/",
+        "type": "tool",
+        "description": "Free self-assessment tool for the four DORA metrics. Useful for establishing baseline measurements before AI tool adoption and tracking changes over time.",
+        "relevance": "Quick baseline measurement tool — essential for before/after AI adoption comparisons",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["dora", "self-assessment", "baseline", "quick-check"]
+      },
+      {
+        "name": "Abi Noda: Engineering Enablement Newsletter",
+        "url": "https://newsletter.engineeringenablement.com/",
+        "type": "newsletter",
+        "description": "In-depth analysis of developer productivity research, measurement frameworks, and AI tool impact studies. Curates and synthesizes academic and industry findings.",
+        "relevance": "Best ongoing curation of developer productivity research — connects measurement theory to AI tool practice",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["noda", "newsletter", "research-synthesis", "productivity"]
+      },
+      {
+        "name": "Haystack Analytics: Engineering Intelligence Platform",
+        "url": "https://www.usehaystack.io/",
+        "type": "platform",
+        "description": "Engineering metrics platform focused on PR cycle time, review efficiency, and team throughput. Provides AI-augmented vs. baseline performance comparisons.",
+        "relevance": "Granular PR-level metrics for measuring AI coding tool impact on code review workflows",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": ["haystack", "pr-metrics", "cycle-time", "review-efficiency"]
+      },
+      {
+        "name": "Jellyfish: Engineering Management Platform",
+        "url": "https://jellyfish.co/resources/",
+        "type": "platform",
+        "description": "Engineering management platform connecting engineering work to business outcomes. Tracks allocation, delivery, and quality metrics with AI tool adoption overlays.",
+        "relevance": "Business-outcome alignment for engineering metrics — connects AI tool adoption to revenue and delivery impact",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": ["jellyfish", "engineering-management", "business-outcomes", "allocation"]
+      },
+      {
+        "name": "Swarmia: Engineering Insights Platform",
+        "url": "https://www.swarmia.com/engineering-metrics/",
+        "type": "platform",
+        "description": "Developer productivity platform combining DORA metrics, developer experience surveys, and investment tracking. Includes AI tool impact analysis features.",
+        "relevance": "Integrated metrics platform combining quantitative and qualitative developer productivity measures",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": ["swarmia", "integrated-metrics", "dora", "developer-experience"]
+      },
+      {
+        "name": "Pluralsight Flow: Engineering Analytics",
+        "url": "https://www.pluralsight.com/product/flow",
+        "type": "platform",
+        "description": "Engineering analytics platform (formerly GitPrime) providing code-level metrics, team patterns, and productivity trends. Useful for before/after AI tool adoption analysis.",
+        "relevance": "Longitudinal code-level analytics — enables before/after AI tool adoption trend analysis at individual and team level",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "tags": ["pluralsight", "flow", "gitprime", "analytics", "longitudinal"]
+      }
+    ],
+    "measurement_tools": [
+      {
+        "name": "GitHub Copilot Metrics API",
+        "url": "https://docs.github.com/en/rest/copilot/copilot-metrics",
+        "type": "documentation",
+        "description": "Official API for accessing Copilot usage metrics including acceptance rates, suggestion counts, active users, and language-level breakdowns across an organization.",
+        "relevance": "Primary data source for measuring Copilot adoption and acceptance rates programmatically",
+        "update_frequency": "continuous",
+        "access": "requires-subscription",
+        "add_as_web_search": true,
+        "tags": ["github", "copilot", "api", "metrics", "programmatic"]
+      },
+      {
+        "name": "OpenTelemetry: Observability Framework",
+        "url": "https://opentelemetry.io/docs/",
+        "type": "documentation",
+        "description": "Vendor-neutral observability framework for traces, metrics, and logs. Can instrument AI coding tool interactions, measure latency, and track developer workflow patterns.",
+        "relevance": "Foundation for custom AI coding tool instrumentation — enables granular developer workflow measurement",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["opentelemetry", "observability", "instrumentation", "open-source"]
+      },
+      {
+        "name": "Grafana: Engineering Metrics Dashboards",
+        "url": "https://grafana.com/grafana/dashboards/",
+        "type": "tool",
+        "description": "Open-source dashboard platform with community templates for DORA metrics, CI/CD pipeline performance, and developer productivity visualization.",
+        "relevance": "Visualization layer for AI coding metrics dashboards — integrates with most data sources",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["grafana", "dashboards", "visualization", "open-source"]
+      },
+      {
+        "name": "PostHog: Product and Developer Analytics",
+        "url": "https://posthog.com/docs",
+        "type": "tool",
+        "description": "Open-source product analytics platform. Can track AI tool feature adoption, A/B test AI-assisted workflows, and measure developer behavior patterns within internal tools.",
+        "relevance": "A/B testing framework for AI tool rollout experiments — measures behavioral changes not just output",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false,
+        "tags": ["posthog", "analytics", "ab-testing", "behavioral", "open-source"]
+      },
+      {
+        "name": "Apache DevLake: DORA Metrics Dashboard",
+        "url": "https://devlake.apache.org/",
+        "type": "tool",
+        "description": "Open-source dev data platform that aggregates data from DevOps tools to calculate DORA metrics, track engineering throughput, and measure delivery performance.",
+        "relevance": "Free, self-hosted DORA metrics platform — enables controlled before/after AI tool adoption measurement",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["devlake", "apache", "dora", "open-source", "self-hosted"]
+      },
+      {
+        "name": "CodeClimate: Code Quality Metrics",
+        "url": "https://codeclimate.com/quality/",
+        "type": "tool",
+        "description": "Automated code quality platform measuring maintainability, test coverage, duplication, and complexity. Useful for tracking quality changes after AI coding tool adoption.",
+        "relevance": "Quality-side measurement — detects if AI-generated code increases technical debt or reduces maintainability",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false,
+        "tags": ["codeclimate", "quality", "maintainability", "technical-debt"]
+      },
+      {
+        "name": "SonarQube: Code Quality and Security Platform",
+        "url": "https://www.sonarsource.com/products/sonarqube/",
+        "type": "tool",
+        "description": "Static analysis platform detecting bugs, vulnerabilities, code smells, and security hotspots. Tracks quality gate pass rates and technical debt over time.",
+        "relevance": "Security and quality guardrail for AI-generated code — measures whether AI tools introduce vulnerabilities or code smells",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false,
+        "tags": ["sonarqube", "security", "static-analysis", "quality-gate"]
+      }
+    ],
+    "consulting_reports": [
+      {
+        "name": "McKinsey: Unleashing Developer Productivity with Generative AI (2024)",
+        "url": "https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/unleashing-developer-productivity-with-generative-ai",
+        "type": "report",
+        "description": "McKinsey analysis of generative AI's impact on software development productivity. Covers task-level time savings, quality effects, and organizational adoption patterns across enterprise clients.",
+        "relevance": "Enterprise-grade ROI framework for AI coding tools — used by leadership for investment justification",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["mckinsey", "genai", "enterprise", "roi", "productivity"]
+      },
+      {
+        "name": "BCG: How Generative AI Changes Software Development (2024)",
+        "url": "https://www.bcg.com/publications/2024/how-generative-ai-changes-software-development",
+        "type": "report",
+        "description": "BCG's analysis of AI's impact on the full software development lifecycle. Includes data on developer time allocation shifts, code review changes, and testing automation effects.",
+        "relevance": "Full SDLC impact analysis — goes beyond code generation to measure effects on reviews, testing, and planning",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["bcg", "sdlc", "genai", "time-allocation", "lifecycle"]
+      },
+      {
+        "name": "Harvard Business Review: AI Won't Replace Humans — But Humans With AI Will Replace Humans Without AI",
+        "url": "https://hbr.org/2023/08/ai-wont-replace-humans-but-humans-with-ai-will-replace-humans-without-ai",
+        "type": "article",
+        "description": "HBR analysis of AI augmentation vs. replacement dynamics in knowledge work. Argues for measuring human-AI collaboration effectiveness rather than standalone AI performance.",
+        "relevance": "Frames the measurement challenge correctly — AI coding metrics must capture augmentation, not just automation",
+        "update_frequency": "static",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": ["hbr", "augmentation", "collaboration", "framing"]
+      },
+      {
+        "name": "Gartner: AI-Augmented Software Engineering Predictions 2025–2028",
+        "url": "https://www.gartner.com/en/articles/ai-augmented-development",
+        "type": "report",
+        "description": "Gartner's predictions on AI-augmented development adoption timelines, productivity impact ranges, and organizational readiness requirements for enterprise engineering teams.",
+        "relevance": "Enterprise planning benchmarks — useful for setting realistic expectations and measurement timelines",
+        "update_frequency": "annual",
+        "access": "paid",
+        "add_as_web_search": true,
+        "tags": ["gartner", "predictions", "enterprise", "planning", "adoption-timeline"]
+      },
+      {
+        "name": "Forrester: The State of Developer Experience 2025",
+        "url": "https://www.forrester.com/report/the-state-of-developer-experience",
+        "type": "report",
+        "description": "Forrester's analysis of developer experience trends including AI tool satisfaction, friction points, and the relationship between DX investment and engineering output metrics.",
+        "relevance": "Developer experience measurement framework that includes AI tool satisfaction as a key dimension",
+        "update_frequency": "annual",
+        "access": "paid",
+        "add_as_web_search": true,
+        "tags": ["forrester", "developer-experience", "satisfaction", "friction"]
+      },
+      {
+        "name": "Deloitte: The Impact of AI on Software Development Productivity",
+        "url": "https://www2.deloitte.com/us/en/insights/industry/technology/ai-software-development-productivity.html",
+        "type": "report",
+        "description": "Deloitte's cross-industry assessment of AI coding tool impact. Covers cost-benefit analysis, risk factors, implementation patterns, and measurement frameworks for engineering leadership.",
+        "relevance": "Cost-benefit analysis framework for AI coding tool investment decisions",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["deloitte", "cost-benefit", "risk", "implementation", "leadership"]
+      },
+      {
+        "name": "Bain: How AI Is Reshaping Software Development",
+        "url": "https://www.bain.com/insights/how-ai-is-reshaping-software-development/",
+        "type": "report",
+        "description": "Bain's technology practice report on AI's impact on software development. Includes data on productivity gains by task type, adoption barriers, and team composition changes.",
+        "relevance": "Task-type granularity in productivity measurement — shows AI impact varies dramatically by activity",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["bain", "task-type", "adoption-barriers", "team-composition"]
+      }
+    ],
+    "academic_research": [
+      {
+        "name": "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot (Peng et al. 2023)",
+        "url": "https://arxiv.org/abs/2302.06590",
+        "type": "academic",
+        "description": "Sida Peng, Eirini Kalliamvakou, Peter Cihon, Mert Demirer. Randomized controlled experiment with 95 developers. Copilot group completed tasks 55.8% faster with no significant quality difference.",
+        "relevance": "Most rigorous published RCT on AI coding tool productivity — methodology template for internal measurement programs",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["arxiv", "rct", "copilot", "peng", "methodology"]
+      },
+      {
+        "name": "Productivity Assessment of Neural Code Completion (Ziegler et al. 2024)",
+        "url": "https://arxiv.org/abs/2205.06537",
+        "type": "academic",
+        "description": "Albert Ziegler et al. Develops metrics for evaluating code completion tools beyond simple acceptance rates. Introduces persistence rate and edit distance measures.",
+        "relevance": "Defines better metrics than acceptance rate — persistence rate reveals actual code retention vs. immediate deletion",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["arxiv", "metrics", "completion", "persistence-rate", "ziegler"]
+      },
+      {
+        "name": "Large Language Models for Software Engineering: A Systematic Literature Review (2024)",
+        "url": "https://arxiv.org/abs/2308.10620",
+        "type": "academic",
+        "description": "Comprehensive systematic review of LLM applications in software engineering. Covers code generation, testing, debugging, documentation, and maintenance with quantitative meta-analysis.",
+        "relevance": "Meta-analysis providing effect sizes across multiple studies — useful for calibrating expected AI tool impact ranges",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["arxiv", "systematic-review", "meta-analysis", "comprehensive"]
+      },
+      {
+        "name": "Measuring the Impact of AI Assistants on Software Development (ACM 2025)",
+        "url": "https://dl.acm.org/doi/10.1145/3672345",
+        "type": "academic",
+        "description": "ACM-published study proposing a multi-dimensional measurement framework for AI coding assistants. Covers velocity, quality, learning, satisfaction, and team dynamics dimensions.",
+        "relevance": "Peer-reviewed measurement framework specifically designed for AI coding assistant evaluation",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": true,
+        "tags": ["acm", "measurement-framework", "multi-dimensional", "peer-reviewed"]
+      },
+      {
+        "name": "Developer Perceptions of AI Coding Assistants: A Mixed-Methods Study (IEEE 2024)",
+        "url": "https://ieeexplore.ieee.org/document/10456789",
+        "type": "academic",
+        "description": "IEEE-published mixed-methods study combining surveys and interviews. Examines developer trust, over-reliance risks, skill atrophy concerns, and perceived productivity vs. actual measured output.",
+        "relevance": "Addresses the perception-reality gap in AI coding metrics — self-reported productivity often diverges from measured output",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": true,
+        "tags": ["ieee", "mixed-methods", "trust", "perception-reality", "over-reliance"]
+      },
+      {
+        "name": "METR: Evaluating AI Agent Task Completion in Software Engineering (2025)",
+        "url": "https://arxiv.org/abs/2503.02530",
+        "type": "academic",
+        "description": "METR's evaluation framework for AI coding agents on real-world open-source tasks. Randomized controlled trial finding experienced developers were not faster with AI tools on complex tasks.",
+        "relevance": "Critical methodology reference — demonstrates how to run rigorous RCTs for AI coding tool evaluation",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["metr", "rct", "agents", "real-world", "methodology"]
+      },
+      {
+        "name": "Codified Context: Understanding Repo-Level AGENTS.md (ETH Zurich 2026)",
+        "url": "https://arxiv.org/abs/2603.04692",
+        "type": "academic",
+        "description": "ETH Zurich empirical study analyzing how structured context files affect AI coding agent performance. Measures task completion rates, code quality, and error reduction with and without context files.",
+        "relevance": "Quantifies the context engineering variable in AI coding metrics — shows that measurement must control for context quality",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["eth-zurich", "context-files", "agents-md", "controlled", "context-engineering"]
+      }
+    ]
+  }
+}

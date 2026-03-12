@@ -1,6 +1,6 @@
 ---
 name: qa-testing-android
-description: Android testing with Espresso, UIAutomator, and Compose Testing; layered strategy, flake control, device matrix, CI integration, and ADB automation.
+description: Android testing with Espresso, UIAutomator, and Compose Testing. Use when building layered test strategy, device matrix, or CI integration.
 ---
 
 # QA Testing (Android)
@@ -197,3 +197,9 @@ The reference guides are intentionally large; search within them instead of load
 | [software-mobile](../software-mobile/SKILL.md) | Android development |
 | [qa-testing-strategy](../qa-testing-strategy/SKILL.md) | Test strategy |
 | [qa-testing-mobile](../qa-testing-mobile/SKILL.md) | Cross-platform mobile |
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

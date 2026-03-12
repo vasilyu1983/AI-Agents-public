@@ -1,0 +1,94 @@
+# .npmrc - Team Configuration Template
+# Copy to project root as .npmrc
+
+# =============================================================================
+# SECURITY
+# =============================================================================
+
+# Require package-lock.json for all installs
+package-lock=true
+
+# Strict SSL verification (never disable in production)
+strict-ssl=true
+
+# Audit packages on install
+audit=true
+
+# Audit level threshold (critical, high, moderate, low, info)
+audit-level=high
+
+# =============================================================================
+# PERFORMANCE
+# =============================================================================
+
+# Use npm ci behavior by default (prefer offline, faster)
+prefer-offline=true
+
+# Cache location (customize for CI/CD)
+# cache=/path/to/custom/cache
+
+# Fetch retries for network issues
+fetch-retries=3
+fetch-retry-mintimeout=10000
+fetch-retry-maxtimeout=60000
+
+# =============================================================================
+# REGISTRY
+# =============================================================================
+
+# Default registry (uncomment for private registry)
+# registry=https://registry.npmjs.org/
+
+# Scoped registry example (for private packages)
+# @mycompany:registry=https://npm.mycompany.com/
+
+# =============================================================================
+# SAVE BEHAVIOR
+# =============================================================================
+
+# Save exact versions (no ^ or ~)
+# save-exact=true
+
+# Default save type (prod, dev, optional, peer)
+save=true
+
+# =============================================================================
+# ENGINE STRICTNESS
+# =============================================================================
+
+# Fail if Node.js version doesn't match engines field
+engine-strict=true
+
+# =============================================================================
+# SCRIPTS
+# =============================================================================
+
+# Allow dependency scripts by default; set ignore-scripts=true in CI for maximum security.
+ignore-scripts=false
+
+# For maximum security in CI, use:
+# ignore-scripts=true
+
+# =============================================================================
+# LOGGING
+# =============================================================================
+
+# Log level (silent, error, warn, notice, http, timing, info, verbose, silly)
+loglevel=warn
+
+# =============================================================================
+# CI/CD SPECIFIC
+# =============================================================================
+
+# For CI environments, consider these settings:
+# prefer-offline=true
+# audit=true
+# audit-level=high
+# ignore-scripts=true (if you don't need postinstall scripts)
+# fund=false (disable funding messages)
+
+# Disable funding messages
+fund=false
+
+# Disable update notifier
+update-notifier=false

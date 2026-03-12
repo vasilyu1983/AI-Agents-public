@@ -1,6 +1,6 @@
 ---
 name: ai-ml-data-science
-description: "End-to-end data science and ML engineering workflows: problem framing, data/EDA, feature engineering (feature stores), modelling, evaluation/reporting, plus SQL transformations with SQLMesh. Use for dataset exploration, feature design, model selection, metrics and slice analysis, model cards/eval reports, experiment reproducibility, and production handoff (monitoring and retraining)."
+description: "ML and data science workflows — EDA, feature engineering, modelling, evaluation, and production handoff. Use when exploring data or building models."
 ---
 
 # Data Science Engineering Suite - Quick Reference
@@ -359,3 +359,9 @@ See [data/sources.json](data/sources.json) for curated foundational and implemen
 - **Cloud platforms**: AWS SageMaker, Google Vertex AI, Azure ML, Databricks, Snowflake
 
 Use this skill to **execute data science projects end-to-end**: concrete checklists, patterns, and templates, not theory.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

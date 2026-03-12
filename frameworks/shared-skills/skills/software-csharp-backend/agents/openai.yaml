@@ -1,0 +1,4 @@
+interface:
+  display_name: "C# Backend"
+  short_description: "C#/.NET backend implementation and review guidance"
+  default_prompt: "Use $software-csharp-backend for C#/.NET backend service implementation, refactoring, and backend-focused reviews. Use specialized skills for deep NUnit fixture work, NUKE pipelines, or deterministic logging rewrites."

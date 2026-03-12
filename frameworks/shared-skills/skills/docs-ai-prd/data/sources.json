@@ -1,0 +1,171 @@
+{
+  "metadata": {
+    "skill": "docs-ai-prd",
+    "updated": "2026-01-17",
+    "total_sources": 15,
+    "description": "Primary references for agentic coding documentation, PRD/spec writing, context engineering, and AI PRD risk/evaluation essentials.",
+    "version": "2.3"
+  },
+  "categories": {
+    "context_engineering": [
+      {
+        "name": "Anthropic: Effective Context Engineering for AI Agents",
+        "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+        "type": "documentation",
+        "relevance": "Official guide on context engineering patterns including compaction, just-in-time context, and memory strategies.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["context-engineering", "primary"]
+      },
+      {
+        "name": "GitHub Blog: Context Engineering",
+        "url": "https://github.blog/ai-and-ml/generative-ai/want-better-ai-outputs-try-context-engineering/",
+        "type": "article",
+        "relevance": "Explains context engineering evolution from prompt engineering; covers retrieval, context windows, and practical patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["context-engineering"]
+      },
+      {
+        "name": "Context Engineering Intro Repository",
+        "url": "https://github.com/coleam00/context-engineering-intro",
+        "type": "repository",
+        "relevance": "Reference implementation for context engineering patterns with Claude Code; includes examples folder pattern.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["context-engineering", "examples"]
+      },
+      {
+        "name": "AI PRD Template (OpenAI Product Lead)",
+        "url": "https://www.productcompass.pm/p/ai-prd-template",
+        "type": "template",
+        "relevance": "AI PRD framework by Miqdad Jaffer (Product Lead at OpenAI); covers AI-specific PRD sections and evaluation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["ai-prd", "template"]
+      }
+    ],
+    "agentic_coding_platform_docs": [
+      {
+        "name": "Claude Code Documentation (Anthropic)",
+        "url": "https://docs.anthropic.com/claude/code",
+        "type": "documentation",
+        "relevance": "Primary reference for Claude Code workflows and project memory patterns (CLAUDE.md).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["agentic-coding", "primary"]
+      },
+      {
+        "name": "GitHub Copilot Documentation",
+        "url": "https://docs.github.com/copilot",
+        "type": "documentation",
+        "relevance": "Official reference for Copilot features, policies, and integrations.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "tags": ["agentic-coding"]
+      },
+      {
+        "name": "Cursor Documentation",
+        "url": "https://docs.cursor.com/",
+        "type": "documentation",
+        "relevance": "Operational reference for Cursor workflows (context, edits, project setup).",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "tags": ["agentic-coding"]
+      }
+    ],
+    "prompting_and_prd_basics": [
+      {
+        "name": "OpenAI Prompt Engineering Guide",
+        "url": "https://platform.openai.com/docs/guides/prompt-engineering",
+        "type": "documentation",
+        "relevance": "Prompting best practices for instruction design and reliability patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["prompting"]
+      },
+      {
+        "name": "Anthropic Prompt Library",
+        "url": "https://docs.anthropic.com/claude/prompt-library",
+        "type": "documentation",
+        "relevance": "Official prompt patterns and safety-oriented prompting examples.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["prompting"]
+      }
+    ],
+    "ai_prd_risk_and_evaluation": [
+      {
+        "name": "NIST AI RMF 1.0",
+        "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10",
+        "type": "specification",
+        "relevance": "Risk management framing for AI systems (govern, map, measure, manage) useful for AI PRDs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["ai-prd", "risk"]
+      },
+      {
+        "name": "ISO/IEC 42001 Overview",
+        "url": "https://www.iso.org/standard/42001",
+        "type": "specification",
+        "relevance": "AI management system standard overview; useful for governance expectations in AI product PRDs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["ai-prd", "governance"]
+      },
+      {
+        "name": "EU AI Act (Regulation (EU) 2024/1689)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+        "type": "specification",
+        "relevance": "Primary regulatory text; impacts risk classification, transparency, and compliance planning for AI PRDs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["ai-prd", "compliance"]
+      },
+      {
+        "name": "OpenAI Evals",
+        "url": "https://github.com/openai/evals",
+        "type": "tool",
+        "relevance": "Evaluation harness patterns for LLM-based systems; useful reference for offline eval planning.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["ai-prd", "evaluation", "optional"]
+      }
+    ],
+    "optional_ai_automation": [
+      {
+        "name": "OWASP Top 10 for Large Language Model Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "reference",
+        "relevance": "Optional: threat taxonomy (prompt injection, data leakage, model supply chain) to drive AI PRD failure modes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["optional", "security", "ai-prd"]
+      },
+      {
+        "name": "FTC: Trade Regulation Rule on Consumer Reviews and Testimonials (16 CFR Part 465)",
+        "url": "https://www.federalregister.gov/documents/2024/08/22/2024-18519/trade-regulation-rule-on-the-use-of-consumer-reviews-and-testimonials",
+        "type": "specification",
+        "relevance": "Optional: regulatory reference for review/testimonial handling when AI systems generate or surface reviews.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["optional", "compliance"]
+      }
+    ]
+  }
+}

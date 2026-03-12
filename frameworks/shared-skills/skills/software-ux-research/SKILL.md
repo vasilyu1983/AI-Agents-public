@@ -1,6 +1,6 @@
 ---
 name: software-ux-research
-description: Use when conducting user research (interviews, usability tests, surveys, A/B tests) or designing research studies. Covers discovery, validation, evaluative methods, research ops, governance, and measurement for software experiences.
+description: Covers user research methods and research ops. Use when running interviews, usability tests, surveys, or A/B tests to de-risk product decisions.
 ---
 
 # Software UX Research Skill — Quick Reference
@@ -9,7 +9,7 @@ Use this skill to identify problems/opportunities and de-risk decisions. Use `so
 
 ---
 
-## Dec 2025 Baselines (Core)
+## Mar 2026 Baselines (Core)
 
 - **Human-centred design**: Iterative design + evaluation grounded in evidence (ISO 9241-210:2019) https://www.iso.org/standard/77520.html
 - **Usability definition**: Effectiveness, efficiency, satisfaction in context (ISO 9241-11:2018) https://www.iso.org/standard/63500.html
@@ -26,6 +26,7 @@ Use this skill to identify problems/opportunities and de-risk decisions. Use `so
 - Research Ops: intake, prioritization, repository/taxonomy, consent/PII handling.
 - **Demographic research**: Age-diverse, cultural, accessibility participant recruitment.
 - **A/B testing**: Experiment design, sample size, analysis, pitfalls.
+- **Non-technical user research**: Digital literacy assessment, simplified-flow validation, low-tech-confidence usability testing.
 
 ## When NOT to Use This Skill
 
@@ -54,17 +55,34 @@ Default outputs (pick what the user asked for):
 - Findings report (issues + severity + evidence + recommendations + confidence)
 - Decision brief (options + tradeoffs + recommendation + measurement plan)
 
+### Required Output Sections
+
+Every research output — plans, protocols, evaluations, reports — must include these sections. They represent the skill's core value beyond standard UX knowledge: governance, confidence calibration, and ethical research practice.
+
+1. **Method Justification**: Name the chosen method AND explain why alternatives were rejected. Do not just describe the method; explain why it was selected over at least 2 alternatives given the specific context (stage, timeline, sample, question type).
+
+2. **Confidence & Triangulation Assessment**: Tag every recommendation or finding with a confidence level:
+
+   | Confidence | Evidence requirement | Use for |
+   |------------|----------------------|---------|
+   | High | Multiple methods or sources agree | High-impact decisions |
+   | Medium | Strong signal from one method + supporting indicators | Prioritization |
+   | Low | Single source / small sample | Exploratory hypotheses only |
+
+3. **Consent & Data Handling**: Include a PII/consent section in every plan or protocol. Research that involves participants requires explicit attention to:
+   - Minimum PII collection
+   - Identity stored separately from study data
+   - Name/email redaction before broad sharing
+   - Recording access restricted to need-to-know
+   - Consent, purpose, retention, and opt-out documented
+
+4. **Decision Framework**: For evaluations and analysis outputs, provide a structured decision table with options, confidence levels, timelines, and risks — not just a single recommendation.
+
+5. **Pre-Decision Checklist**: For experiment evaluations (A/B tests, etc.), include a verification checklist of confounds and data quality checks to complete before any ship/kill decision.
+
 ---
 
 ## Method Chooser (Core)
-
-### Research Types (Keep Explicit)
-
-| Type | Goal | Primary Outputs |
-|------|------|-----------------|
-| Discovery | Understand needs and context | JTBD, opportunity areas, constraints |
-| Validation | Reduce solution risk | Go/no-go, prioritization signals |
-| Evaluative | Improve usability/accessibility | Severity-rated issues + fixes |
 
 ### Decision Tree (Fast)
 
@@ -76,15 +94,7 @@ What do you need?
   └─ WHICH / causal → experiments (if feasible) or preference tests
 ```
 
-### Method Selection Table (Practical)
-
-| Question | Best methods | Avoid when | Output |
-|----------|--------------|------------|--------|
-| What problems matter most? | Interviews, contextual inquiry, diary | Only surveys/analytics | Problem framing + evidence |
-| Can users complete key tasks? | Moderated usability tests, task analysis | Stakeholder review | Task success + issue list |
-| Is navigation findable? | Tree test, first-click, card sort | Extremely small audience [Inference] | IA changes + labels |
-| What is happening at scale? | Funnels, cohorts, logs, support taxonomy | Instrumentation missing | Baselines + segments + drop-offs |
-| Which variant performs better? | A/B, switchback, holdout | Insufficient power or high risk | Decision with confidence + guardrails |
+When selecting a method, always justify the choice by explaining why 2+ alternatives were rejected given the user's specific context. This is a key differentiator — generic "we'll do interviews" without justification is insufficient.
 
 ---
 
@@ -94,20 +104,17 @@ What do you need?
 
 | Stage | Decisions | Primary Methods | Secondary Methods | Output |
 |-------|-----------|-----------------|-------------------|--------|
-| Discovery | What to build and for whom | Interviews, field/diary, journey mapping | Competitive analysis, feedback mining | Opportunity brief + JTBD |
+| Discovery | What to build and for whom | Interviews, field/diary, journey mapping | Competitive analysis, feedback mining | Opportunity brief + JTBD + Forces of Progress |
 | Concept/MVP | Does the concept work? | Concept test, prototype usability | First-click/tree test | MVP scope + onboarding plan |
 | Launch | Is it usable + accessible? | Usability testing, accessibility review | Heuristic eval, session replay | Launch blockers + fixes |
 | Growth | What drives adoption/value? | Segmented analytics + qual follow-ups | Churn interviews, surveys | Retention drivers + friction |
 | Maturity | What to optimize/deprecate? | Experiments, longitudinal tracking | Unmoderated tests | Incremental roadmap |
 
-### Post-Launch Measurement (What to Track)
+### Discovery Outputs: Beyond Basic JTBD
 
-| Metric category | What it answers | Pair with |
-|----------------|------------------|----------|
-| Adoption | Are people using it? | Outcome/value metric |
-| Value | Does it help users succeed? | Adoption + qualitative reasons |
-| Reliability | Does it fail in ways users notice? | Error rate + recovery success |
-| Accessibility | Can diverse users complete flows? | Assistive-tech coverage + defect trends |
+Discovery research should produce more than job statements. Include:
+- **Forces of Progress diagram**: Map the four forces acting on switching behavior — Push (current pain), Pull (new solution appeal), Anxiety (fear of change), Habit (inertia). These forces explain why users do or don't adopt, which directly informs positioning and onboarding.
+- **Pain Point Severity Matrix**: Score each pain point by Frequency × Impact × Breadth to prioritize objectively. A pain that affects 3 roles weekly outranks one that affects 1 role monthly, even if the single-role pain feels more dramatic in interviews.
 
 ---
 
@@ -200,6 +207,20 @@ Research democratization is a recurring 2026 trend: non-researchers increasingly
 
 ---
 
+## Researching Non-Technical User Segments (2026)
+
+Quick checklist for research involving users with low digital literacy or low tech confidence. Full guidance in [references/non-technical-user-research.md](references/non-technical-user-research.md).
+
+- [ ] Assess digital literacy tier (excluded → dependent → hesitant → capable → confident)
+- [ ] Recruit via offline-first channels (community centers, libraries, phone outreach)
+- [ ] Use plain-language screening questions (no jargon, no self-rating scales)
+- [ ] Adapt methods: moderated-only testing, shorter sessions (30-40 min), read tasks aloud
+- [ ] Measure: unassisted task completion (>=80%), time-to-first-value (<2 min), error recovery rate
+- [ ] Frame findings as "inclusion improvements," not "dumbing down"
+- [ ] Cross-reference with [simplification audit template](../software-ui-ux-design/assets/audits/simplification-audit-template.md)
+
+---
+
 ## Measurement & Decision Quality (Core)
 
 ### Research ROI Quick Reference
@@ -216,21 +237,6 @@ Research democratization is a recurring 2026 trend: non-researchers increasingly
 - 1 discovery insight that prevents 1 wasted sprint = **$50,000-100,000 value**
 - Research that improves conversion 0.5% on 100k visitors × $50 LTV = **$25,000/month**
 
-### Triangulation Rubric
-
-| Confidence | Evidence requirement | Use for |
-|------------|----------------------|---------|
-| High | Multiple methods or sources agree | High-impact decisions |
-| Medium | Strong signal from one method + supporting indicators | Prioritization |
-| Low | Single source / small sample | Exploratory hypotheses |
-
-### Adoption vs Value (Avoid Vanity Metrics)
-
-| Metric type | Example | Common pitfall |
-|-------------|---------|----------------|
-| Adoption | Feature usage rate | “Used” ≠ “helpful” |
-| Value/outcome | Task success, goal completion | Harder to instrument |
-
 ### When NOT to Run A/B Tests
 
 | Situation | Why it fails | Better method |
@@ -243,10 +249,15 @@ Research democratization is a recurring 2026 trend: non-researchers increasingly
 
 ### Common Confounds (Call Out Early)
 
-- Selection bias (only power users respond).
-- Survivorship bias (you miss churned users).
-- Novelty effect (short-term lift).
-- Instrumentation changes mid-test (metrics drift).
+Always check for these in experiment evaluations. List each relevant confound with its risk level and how to verify — do not just name them:
+
+- Selection bias (only power users respond) — check segment composition.
+- Survivorship bias (you miss churned users) — compare with cohort-level data.
+- Novelty effect (short-term lift) — plot daily metrics to check for trend decay.
+- Instrumentation changes mid-test (metrics drift) — confirm no concurrent deployments.
+- Sample ratio mismatch (SRM) — run chi-square on assignment counts.
+- Peeking / multiple looks — confirm test was not checked before pre-set end date.
+- Feature interaction — check if other experiments ran concurrently on same surface.
 
 ---
 
@@ -311,9 +322,10 @@ Trend reports frequently mention synthetic/AI participants. Use with clear bound
 - [references/pain-point-extraction.md](references/pain-point-extraction.md) — Feedback-to-themes method
 - [references/review-mining-playbook.md](references/review-mining-playbook.md) — B2B/B2C review mining
 
-**Demographic & Quantitative Research (NEW):**
+**Demographic & Quantitative Research:**
 
 - [references/demographic-research-methods.md](references/demographic-research-methods.md) — Inclusive research for seniors, children, cultures, disabilities
+- [references/non-technical-user-research.md](references/non-technical-user-research.md) — Research methods for non-technical and low-digital-literacy users
 - [references/ab-testing-implementation.md](references/ab-testing-implementation.md) — A/B testing deep-dive (sample size, analysis, pitfalls)
 
 **Competitive UX Analysis & Flow Patterns:**
@@ -466,3 +478,9 @@ After searching, provide:
 ## Evaluative Research Loop
 
 For prototype-parity polishing (fast iteration when product is "almost ideal"), see [references/evaluative-research-loop.md](references/evaluative-research-loop.md). Covers: two-surface audit, drift classification (layout/density/control/content/state), friction-based prioritization, banner/loading guardrails, localization-readiness checks, and fast iteration cadence.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

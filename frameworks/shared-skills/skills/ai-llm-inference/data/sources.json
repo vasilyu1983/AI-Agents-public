@@ -1,0 +1,264 @@
+{
+  "metadata": {
+    "skill": "ai-llm-inference",
+    "updated": "2026-01-17",
+    "total_sources": 26,
+    "description": "Curated sources for production LLM inference: serving architectures, latency/throughput optimization, quantization, disaggregated inference, and runtime observability.",
+    "version": "4.0"
+  },
+  "categories": {
+    "foundational_papers_and_specs": [
+      {
+        "name": "vLLM: Easy and Fast LLM Serving with PagedAttention",
+        "url": "https://arxiv.org/abs/2309.06180",
+        "type": "research",
+        "relevance": "Reference architecture for KV-cache aware serving and high-throughput scheduling.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Orca: A Distributed Serving System for Transformer-Based Generative Models",
+        "url": "https://www.usenix.org/conference/osdi22/presentation/yu",
+        "type": "research",
+        "relevance": "Scheduling and batching foundations for high-throughput generative model serving.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FlashAttention",
+        "url": "https://arxiv.org/abs/2205.14135",
+        "type": "research",
+        "relevance": "Core attention kernel optimization; helps reason about memory/latency tradeoffs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FlashAttention-3",
+        "url": "https://pytorch.org/blog/flashattention-3/",
+        "type": "research",
+        "relevance": "Hopper-optimized attention achieving 85% GPU utilization with FP8 support.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FlashInfer: Efficient Attention Engine (MLSys 2025 Best Paper)",
+        "url": "https://arxiv.org/abs/2501.01005",
+        "type": "research",
+        "relevance": "NVIDIA's kernel library for LLM inference with unified attention/GEMM/MoE APIs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Fast Inference from Transformers via Speculative Decoding",
+        "url": "https://arxiv.org/abs/2302.01318",
+        "type": "research",
+        "relevance": "Speculative decoding technique for latency reduction with draft/target models.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "DistServe: Disaggregating Prefill and Decoding (OSDI 2024)",
+        "url": "https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf",
+        "type": "research",
+        "relevance": "Foundational paper for prefill/decode disaggregation architecture.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenTelemetry Semantic Conventions for GenAI",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "type": "specification",
+        "relevance": "Standard telemetry fields for tokens, latency, models, and tool calls in LLM serving.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "inference_engines_and_runtimes": [
+      {
+        "name": "vLLM Documentation",
+        "url": "https://docs.vllm.ai/",
+        "type": "documentation",
+        "relevance": "Implementation reference for KV-cache aware serving, batching, and deployment configuration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "vLLM Disaggregated Prefilling",
+        "url": "https://docs.vllm.ai/en/latest/features/disagg_prefill/",
+        "type": "documentation",
+        "relevance": "Official guide for prefill/decode separation in vLLM 0.6+.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TensorRT-LLM Documentation",
+        "url": "https://nvidia.github.io/TensorRT-LLM/",
+        "type": "documentation",
+        "relevance": "Vendor implementation reference for optimized GPU inference and kernel-level tuning.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Text Generation Inference (TGI) Documentation",
+        "url": "https://huggingface.co/docs/text-generation-inference",
+        "type": "documentation",
+        "relevance": "Production inference server patterns: batching, streaming, and deployment topologies.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "llama.cpp",
+        "url": "https://github.com/ggerganov/llama.cpp",
+        "type": "library",
+        "relevance": "Reference for CPU/edge inference and quantized model formats used in constrained environments.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SGLang",
+        "url": "https://github.com/sgl-project/sglang",
+        "type": "framework",
+        "relevance": "Serving framework with RadixAttention for KV cache reuse; 6.4x throughput on structured workloads.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SGLang Llama3 Performance Blog",
+        "url": "https://lmsys.org/blog/2024-07-25-sglang-llama3/",
+        "type": "blog",
+        "relevance": "Benchmarks showing SGLang performance advantages over vLLM and TensorRT-LLM.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FlashInfer GitHub",
+        "url": "https://github.com/flashinfer-ai/flashinfer",
+        "type": "library",
+        "relevance": "NVIDIA's kernel library integrated into vLLM and SGLang for optimized attention.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Triton Inference Server",
+        "url": "https://github.com/triton-inference-server/server",
+        "type": "tool",
+        "relevance": "Serving runtime reference for GPU inference, model ensembles, and production deployment patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "disaggregated_inference": [
+      {
+        "name": "Hao AI Lab: Disaggregated Inference 18 Months Later",
+        "url": "https://hao-ai-lab.github.io/blogs/distserve-retro/",
+        "type": "blog",
+        "relevance": "Retrospective on P/D disaggregation adoption across vLLM, SGLang, NVIDIA Dynamo.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Ray Serve Prefill/Decode Disaggregation",
+        "url": "https://docs.ray.io/en/latest/serve/llm/user-guides/prefill-decode.html",
+        "type": "documentation",
+        "relevance": "Ray Serve implementation of disaggregated inference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Perplexity: Disaggregated Prefill and Decode",
+        "url": "https://www.perplexity.ai/hub/blog/disaggregated-prefill-and-decode",
+        "type": "blog",
+        "relevance": "Production implementation patterns from Perplexity's KV messenger architecture.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "quantization_and_compression": [
+      {
+        "name": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+        "url": "https://arxiv.org/abs/2210.17323",
+        "type": "research",
+        "relevance": "Weight-only post-training quantization technique; useful for memory and cost reduction decisions.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "AWQ: Activation-aware Weight Quantization for LLMs",
+        "url": "https://arxiv.org/abs/2306.00978",
+        "type": "research",
+        "relevance": "Quantization approach that targets accuracy retention under aggressive compression.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "SmoothQuant",
+        "url": "https://arxiv.org/abs/2211.10438",
+        "type": "research",
+        "relevance": "Activation smoothing technique enabling accurate INT8 quantization for transformer inference.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "bitsandbytes",
+        "url": "https://github.com/bitsandbytes-foundation/bitsandbytes",
+        "type": "library",
+        "relevance": "Widely used low-precision kernels and quantization utilities; helpful for experimentation and integration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Compressed Tensors (llm-compressor)",
+        "url": "https://github.com/vllm-project/llm-compressor",
+        "type": "tool",
+        "relevance": "Model compression tooling and formats used for serving-time optimization workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "serving_operations_and_security": [
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "specification",
+        "relevance": "Threat categories for LLM-integrated serving (prompt injection, data leakage, abuse).",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Prometheus Documentation",
+        "url": "https://prometheus.io/docs/",
+        "type": "documentation",
+        "relevance": "Baseline monitoring stack for latency, errors, saturation metrics, and alerting.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

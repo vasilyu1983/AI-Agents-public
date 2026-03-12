@@ -1,0 +1,1208 @@
+{
+  "metadata": {
+    "skill": "software-crypto-web3",
+    "updated": "2026-01-23",
+    "total_sources": 145,
+    "supported_chains": [
+      "Ethereum (EVM)",
+      "Solana",
+      "Cosmos",
+      "Bitcoin",
+      "TON (The Open Network)",
+      "Polkadot",
+      "Avalanche",
+      "Near",
+      "Base",
+      "Arbitrum",
+      "Optimism"
+    ],
+    "extensible": true,
+    "latest_updates": "Jan 2026: Removed deprecated tools (Truffle, Ganache, Brownie, Waffle). Added Ape Framework, Halmos, Hardhat Chai Matchers. AI auditing tools, account abstraction (ERC-4337, EIP-7702), L2 resources."
+  },
+  "categories": {
+    "ethereum_core": [
+      {
+        "name": "Ethereum Official Documentation",
+        "url": "https://ethereum.org/en/developers/docs/",
+        "type": "documentation",
+        "relevance": "Official Ethereum docs, EVM, gas, consensus, nodes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Solidity Documentation",
+        "url": "https://docs.soliditylang.org/",
+        "type": "language",
+        "relevance": "Official Solidity language reference, syntax, best practices.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ethereum Yellow Paper",
+        "url": "https://ethereum.github.io/yellowpaper/paper.pdf",
+        "type": "specification",
+        "relevance": "Formal specification of Ethereum protocol and EVM.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "EIPs (Ethereum Improvement Proposals)",
+        "url": "https://eips.ethereum.org/",
+        "type": "standards",
+        "relevance": "ERC standards, protocol upgrades, community proposals.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "EVM Codes",
+        "url": "https://www.evm.codes/",
+        "type": "reference",
+        "relevance": "Interactive reference for EVM opcodes with gas costs.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "ethereum_frameworks": [
+      {
+        "name": "Hardhat Documentation",
+        "url": "https://hardhat.org/docs",
+        "type": "framework",
+        "relevance": "Ethereum development environment with testing, deployment, debugging.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Foundry Documentation",
+        "url": "https://getfoundry.sh/",
+        "type": "framework",
+        "relevance": "Blazing fast Ethereum testing framework written in Rust (forge, cast, anvil, chisel).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ape Framework",
+        "url": "https://docs.apeworx.io/",
+        "type": "framework",
+        "relevance": "Python smart contract framework (Brownie successor), multi-chain native, modular plugins.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "ethereum_libraries": [
+      {
+        "name": "OpenZeppelin Contracts",
+        "url": "https://docs.openzeppelin.com/contracts/",
+        "type": "library",
+        "relevance": "Battle-tested smart contract library (ERC20, ERC721, Access Control).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ethers.js Documentation",
+        "url": "https://docs.ethers.org/",
+        "type": "library",
+        "relevance": "Complete Ethereum library for JavaScript/TypeScript.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Web3.js Documentation",
+        "url": "https://web3js.readthedocs.io/",
+        "type": "library",
+        "relevance": "Ethereum JavaScript API for interacting with nodes.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Viem Documentation",
+        "url": "https://viem.sh/",
+        "type": "library",
+        "relevance": "Type-safe Ethereum library with excellent DX, wagmi backend.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Wagmi Documentation",
+        "url": "https://wagmi.sh/",
+        "type": "library",
+        "relevance": "React hooks for Ethereum, wallet connection, transactions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "RainbowKit Documentation",
+        "url": "https://www.rainbowkit.com/docs/introduction",
+        "type": "library",
+        "relevance": "Best-in-class wallet connection UI for React apps.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "solana_core": [
+      {
+        "name": "Solana Documentation",
+        "url": "https://docs.solana.com/",
+        "type": "documentation",
+        "relevance": "Official Solana docs, architecture, programs, transactions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Solana Cookbook",
+        "url": "https://solanacookbook.com/",
+        "type": "guide",
+        "relevance": "Practical recipes for Solana development with code examples.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Solana Program Library (SPL)",
+        "url": "https://spl.solana.com/",
+        "type": "library",
+        "relevance": "Collection of on-chain programs (tokens, governance, staking).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anchor Framework",
+        "url": "https://www.anchor-lang.com/",
+        "type": "framework",
+        "relevance": "Rust framework for Solana programs, reduces boilerplate.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Solana Web3.js",
+        "url": "https://solana-labs.github.io/solana-web3.js/",
+        "type": "library",
+        "relevance": "JavaScript library for interacting with Solana blockchain.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Metaplex Documentation",
+        "url": "https://docs.metaplex.com/",
+        "type": "library",
+        "relevance": "NFT standard and tooling for Solana (Candy Machine, Token Metadata).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "cosmos_core": [
+      {
+        "name": "Cosmos SDK Documentation",
+        "url": "https://docs.cosmos.network/",
+        "type": "documentation",
+        "relevance": "Official Cosmos SDK docs, IBC, modules, chains.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "CosmWasm Documentation",
+        "url": "https://docs.cosmwasm.com/",
+        "type": "framework",
+        "relevance": "Smart contract framework for Cosmos chains using Rust/WebAssembly.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "IBC Protocol",
+        "url": "https://ibc.cosmos.network/",
+        "type": "protocol",
+        "relevance": "Inter-Blockchain Communication protocol for cross-chain transfers.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "CosmJS Documentation",
+        "url": "https://cosmos.github.io/cosmjs/",
+        "type": "library",
+        "relevance": "JavaScript library for interacting with Cosmos chains.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "bitcoin_core": [
+      {
+        "name": "Bitcoin Core Documentation",
+        "url": "https://bitcoin.org/en/developer-documentation",
+        "type": "documentation",
+        "relevance": "Official Bitcoin developer documentation, RPC, protocol.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Bitcoin Improvement Proposals (BIPs)",
+        "url": "https://github.com/bitcoin/bips",
+        "type": "standards",
+        "relevance": "Bitcoin protocol improvement proposals and standards.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Lightning Network Documentation",
+        "url": "https://lightning.network/docs/",
+        "type": "protocol",
+        "relevance": "Layer 2 payment protocol for Bitcoin scalability.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Mastering Bitcoin (Book)",
+        "url": "https://github.com/bitcoinbook/bitcoinbook",
+        "type": "book",
+        "relevance": "Comprehensive guide to Bitcoin development by Andreas Antonopoulos.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "ton_core": [
+      {
+        "name": "TON Documentation",
+        "url": "https://docs.ton.org/",
+        "type": "documentation",
+        "relevance": "Official TON blockchain documentation, architecture, smart contracts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "FunC Language Documentation",
+        "url": "https://docs.ton.org/develop/func/overview",
+        "type": "language",
+        "relevance": "FunC smart contract language for TON blockchain.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tact Language Documentation",
+        "url": "https://docs.tact-lang.org/",
+        "type": "language",
+        "relevance": "High-level language for TON smart contracts (TypeScript-like syntax).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TON SDK",
+        "url": "https://github.com/ton-org/ton",
+        "type": "library",
+        "relevance": "TypeScript/JavaScript library for TON blockchain interaction.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Blueprint Framework",
+        "url": "https://github.com/ton-org/blueprint",
+        "type": "framework",
+        "relevance": "Development environment for TON smart contracts with testing.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TON Connect",
+        "url": "https://docs.ton.org/develop/dapps/ton-connect/overview",
+        "type": "protocol",
+        "relevance": "Protocol for connecting dApps to TON wallets.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Jetton Standard (TON)",
+        "url": "https://docs.ton.org/develop/dapps/defi/tokens",
+        "type": "standard",
+        "relevance": "Fungible token standard for TON blockchain (like ERC20).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NFT Standard (TON)",
+        "url": "https://docs.ton.org/develop/dapps/defi/nfts",
+        "type": "standard",
+        "relevance": "Non-fungible token standard for TON blockchain.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TON Verifier",
+        "url": "https://verifier.ton.org/",
+        "type": "tool",
+        "relevance": "Smart contract verification service for TON blockchain.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TON Community",
+        "url": "https://t.me/tondev_eng",
+        "type": "community",
+        "relevance": "Telegram community for TON developers (English).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TON Smart Challenge",
+        "url": "https://github.com/ton-community/tsc",
+        "type": "learning",
+        "relevance": "Step-by-step tutorials and challenges for TON development.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TONScan Explorer",
+        "url": "https://tonscan.org/",
+        "type": "tool",
+        "relevance": "Blockchain explorer for TON network transactions and contracts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TON API",
+        "url": "https://tonapi.io/",
+        "type": "infrastructure",
+        "relevance": "REST API for TON blockchain data and transactions.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Tonkeeper Wallet",
+        "url": "https://tonkeeper.com/",
+        "type": "wallet",
+        "relevance": "Popular TON wallet with TON Connect support for dApp integration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TON Telegram Bot API",
+        "url": "https://docs.ton.org/develop/dapps/telegram-apps/",
+        "type": "integration",
+        "relevance": "Build mini-apps inside Telegram with TON blockchain integration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "defi_protocols": [
+      {
+        "name": "Uniswap V3 Documentation",
+        "url": "https://docs.uniswap.org/",
+        "type": "protocol",
+        "relevance": "Automated Market Maker (AMM) with concentrated liquidity.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Aave Documentation",
+        "url": "https://docs.aave.com/",
+        "type": "protocol",
+        "relevance": "Decentralized lending and borrowing protocol.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Compound Protocol",
+        "url": "https://docs.compound.finance/",
+        "type": "protocol",
+        "relevance": "Algorithmic money market protocol for lending.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Curve Finance Documentation",
+        "url": "https://resources.curve.fi/",
+        "type": "protocol",
+        "relevance": "Stableswap AMM optimized for stablecoin trading.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "MakerDAO Documentation",
+        "url": "https://docs.makerdao.com/",
+        "type": "protocol",
+        "relevance": "Decentralized stablecoin (DAI) and collateralized debt positions.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Balancer Documentation",
+        "url": "https://docs.balancer.fi/",
+        "type": "protocol",
+        "relevance": "Generalized AMM with weighted pools and composable liquidity.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "security_tools": [
+      {
+        "name": "Slither Documentation",
+        "url": "https://github.com/crytic/slither",
+        "type": "tool",
+        "relevance": "Static analysis framework for Solidity, detects vulnerabilities.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Mythril Documentation",
+        "url": "https://github.com/ConsenSys/mythril",
+        "type": "tool",
+        "relevance": "Security analysis tool using symbolic execution and SMT solvers.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Echidna Documentation",
+        "url": "https://github.com/crytic/echidna",
+        "type": "tool",
+        "relevance": "Fuzzing tool for Ethereum smart contracts, property-based testing.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Manticore Documentation",
+        "url": "https://github.com/trailofbits/manticore",
+        "type": "tool",
+        "relevance": "Symbolic execution tool for analyzing smart contracts and binaries.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Certora Prover",
+        "url": "https://www.certora.com/",
+        "type": "tool",
+        "relevance": "Formal verification tool with specifications in CVL language.",
+        "update_frequency": "continuous",
+        "access": "free_tier",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Tenderly Platform",
+        "url": "https://tenderly.co/",
+        "type": "platform",
+        "relevance": "Debugging, monitoring, transaction simulations, alerting.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenZeppelin Defender",
+        "url": "https://docs.openzeppelin.com/defender/",
+        "type": "platform",
+        "relevance": "Operations platform with relayers, monitoring, automated tasks.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Aderyn",
+        "url": "https://github.com/Cyfrin/aderyn",
+        "type": "tool",
+        "relevance": "Rust-based static analyzer, faster than Slither for large codebases.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Medusa Fuzzer",
+        "url": "https://github.com/crytic/medusa",
+        "type": "tool",
+        "relevance": "Cross-platform Go fuzzer with parallelized testing, inspired by Echidna.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Sherlock AI",
+        "url": "https://sherlock.xyz/",
+        "type": "ai_auditor",
+        "relevance": "AI-powered auditing combining rule-based scanning with ML vulnerability detection (released Sept 2025).",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Olympix",
+        "url": "https://www.olympix.ai/",
+        "type": "ai_auditor",
+        "relevance": "AI security for DevSecOps and CI/CD integration, continuous code scanning.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AuditBase",
+        "url": "https://www.auditbase.com/",
+        "type": "ai_auditor",
+        "relevance": "LLM-powered auditing with 423+ detectors, trained on 14,000+ audit reports.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "SuMo Mutation Testing",
+        "url": "https://github.com/AzuraCon/SuMo",
+        "type": "tool",
+        "relevance": "Mutation testing for Solidity to assess test suite quality.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "security_resources": [
+      {
+        "name": "Smart Contract Security Best Practices",
+        "url": "https://consensys.github.io/smart-contract-best-practices/",
+        "type": "guide",
+        "relevance": "ConsenSys security patterns and known attack vectors.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST SP 800-57 Part 1 Rev. 5 - Key Management",
+        "url": "https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final",
+        "type": "standard",
+        "relevance": "Baseline guidance for cryptographic key management, lifecycles, and protections (useful for custody/signing models).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SWC Registry",
+        "url": "https://swcregistry.io/",
+        "type": "reference",
+        "relevance": "Smart Contract Weakness Classification registry.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Ethereum Smart Contract Security",
+        "url": "https://github.com/ethereumbook/ethereumbook/blob/develop/09smart-contracts-security.asciidoc",
+        "type": "guide",
+        "relevance": "Chapter from Mastering Ethereum on security patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Rekt News",
+        "url": "https://rekt.news/",
+        "type": "news",
+        "relevance": "DeFi hack post-mortems and security incident analysis.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeFi Hacks Analysis",
+        "url": "https://github.com/SunWeb3Sec/DeFiHackLabs",
+        "type": "repository",
+        "relevance": "Reproduced DeFi hacks with POCs in Foundry.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Secureum",
+        "url": "https://secureum.substack.com/",
+        "type": "course",
+        "relevance": "Security training bootcamp with audit techniques.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "oracles": [
+      {
+        "name": "Chainlink Documentation",
+        "url": "https://docs.chain.link/",
+        "type": "oracle",
+        "relevance": "Decentralized oracle network for price feeds and VRF.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pyth Network Documentation",
+        "url": "https://docs.pyth.network/",
+        "type": "oracle",
+        "relevance": "High-frequency oracle for DeFi with sub-second updates.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "UMA Protocol",
+        "url": "https://docs.uma.xyz/",
+        "type": "oracle",
+        "relevance": "Optimistic oracle with economic guarantees.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Band Protocol",
+        "url": "https://docs.bandchain.org/",
+        "type": "oracle",
+        "relevance": "Cross-chain data oracle for multi-chain dApps.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "indexing_querying": [
+      {
+        "name": "The Graph Documentation",
+        "url": "https://thegraph.com/docs/",
+        "type": "indexer",
+        "relevance": "Decentralized protocol for indexing and querying blockchain data.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Dune Analytics",
+        "url": "https://dune.com/docs/",
+        "type": "analytics",
+        "relevance": "SQL-based blockchain data analytics platform.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Alchemy Subgraphs",
+        "url": "https://docs.alchemy.com/docs/subgraphs",
+        "type": "service",
+        "relevance": "Managed subgraph hosting with enhanced performance.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      }
+    ],
+    "layer2_scaling": [
+      {
+        "name": "Optimism Documentation",
+        "url": "https://docs.optimism.io/",
+        "type": "layer2",
+        "relevance": "Optimistic rollup L2 scaling solution for Ethereum.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Arbitrum Documentation",
+        "url": "https://docs.arbitrum.io/",
+        "type": "layer2",
+        "relevance": "Optimistic rollup with fraud proofs and EVM compatibility.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "zkSync Documentation",
+        "url": "https://docs.zksync.io/",
+        "type": "layer2",
+        "relevance": "ZK-rollup L2 with zero-knowledge proofs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Polygon Documentation",
+        "url": "https://docs.polygon.technology/",
+        "type": "sidechain",
+        "relevance": "PoS sidechain and zkEVM solutions for Ethereum scaling.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "StarkNet Documentation",
+        "url": "https://docs.starknet.io/",
+        "type": "layer2",
+        "relevance": "ZK-rollup using STARK proofs and Cairo language.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "infrastructure": [
+      {
+        "name": "Alchemy Platform",
+        "url": "https://docs.alchemy.com/",
+        "type": "infrastructure",
+        "relevance": "Node provider with enhanced APIs, webhooks, analytics.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Infura Documentation",
+        "url": "https://docs.infura.io/",
+        "type": "infrastructure",
+        "relevance": "Ethereum and IPFS node infrastructure provider.",
+        "update_frequency": "active",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "QuickNode Documentation",
+        "url": "https://www.quicknode.com/docs",
+        "type": "infrastructure",
+        "relevance": "Multi-chain node provider with global infrastructure.",
+        "update_frequency": "active",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Moralis Documentation",
+        "url": "https://docs.moralis.io/",
+        "type": "platform",
+        "relevance": "Web3 development platform with APIs for NFTs, tokens, wallets.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      }
+    ],
+    "storage": [
+      {
+        "name": "IPFS Documentation",
+        "url": "https://docs.ipfs.tech/",
+        "type": "storage",
+        "relevance": "Distributed file system for decentralized storage.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Arweave Documentation",
+        "url": "https://docs.arweave.org/",
+        "type": "storage",
+        "relevance": "Permanent decentralized storage with one-time payment.",
+        "update_frequency": "active",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Filecoin Documentation",
+        "url": "https://docs.filecoin.io/",
+        "type": "storage",
+        "relevance": "Decentralized storage network with economic incentives.",
+        "update_frequency": "active",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Pinata Documentation",
+        "url": "https://docs.pinata.cloud/",
+        "type": "service",
+        "relevance": "IPFS pinning service with file management APIs.",
+        "update_frequency": "active",
+        "access": "freemium",
+        "add_as_web_search": false
+      }
+    ],
+    "testing_development": [
+      {
+        "name": "Anvil (Foundry)",
+        "url": "https://book.getfoundry.sh/anvil/",
+        "type": "tool",
+        "relevance": "Fast local Ethereum node with forking capabilities (Ganache replacement).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Hardhat Chai Matchers",
+        "url": "https://hardhat.org/hardhat-chai-matchers/docs/overview",
+        "type": "library",
+        "relevance": "Ethereum-specific assertions for Hardhat testing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Halmos",
+        "url": "https://github.com/a16z/halmos",
+        "type": "tool",
+        "relevance": "Symbolic testing for EVM smart contracts (a16z).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "learning_resources": [
+      {
+        "name": "CryptoZombies",
+        "url": "https://cryptozombies.io/",
+        "type": "tutorial",
+        "relevance": "Interactive Solidity tutorial building a game.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Solidity by Example",
+        "url": "https://solidity-by-example.org/",
+        "type": "tutorial",
+        "relevance": "Learn Solidity with simple annotated examples.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ethereum Stack Exchange",
+        "url": "https://ethereum.stackexchange.com/",
+        "type": "community",
+        "relevance": "Q&A platform for Ethereum developers.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Week in Ethereum News",
+        "url": "https://weekinethereumnews.com/",
+        "type": "newsletter",
+        "relevance": "Weekly Ethereum ecosystem updates and developments.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Ethereum Research Forum",
+        "url": "https://ethresear.ch/",
+        "type": "community",
+        "relevance": "Research discussions on Ethereum protocol improvements.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Mastering Ethereum (Book)",
+        "url": "https://github.com/ethereumbook/ethereumbook",
+        "type": "book",
+        "relevance": "Comprehensive guide to Ethereum development by Andreas Antonopoulos.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "nft_standards": [
+      {
+        "name": "ERC-721 Standard",
+        "url": "https://eips.ethereum.org/EIPS/eip-721",
+        "type": "standard",
+        "relevance": "Non-Fungible Token standard specification.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ERC-1155 Standard",
+        "url": "https://eips.ethereum.org/EIPS/eip-1155",
+        "type": "standard",
+        "relevance": "Multi-Token standard for fungible and non-fungible tokens.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ERC-4907 (Rental NFTs)",
+        "url": "https://eips.ethereum.org/EIPS/eip-4907",
+        "type": "standard",
+        "relevance": "NFT rental standard with user and owner roles.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenSea NFT Metadata",
+        "url": "https://docs.opensea.io/docs/metadata-standards",
+        "type": "standard",
+        "relevance": "NFT metadata standards for marketplace compatibility.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "mev_flashbots": [
+      {
+        "name": "Flashbots Documentation",
+        "url": "https://docs.flashbots.net/",
+        "type": "protocol",
+        "relevance": "MEV protection with private transaction pools and auctions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MEV-Boost Documentation",
+        "url": "https://boost.flashbots.net/",
+        "type": "tool",
+        "relevance": "PBS (Proposer-Builder Separation) for Ethereum validators.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "MEV Wiki",
+        "url": "https://www.mev.wiki/",
+        "type": "reference",
+        "relevance": "Comprehensive resource on Maximal Extractable Value.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "bridges_interop": [
+      {
+        "name": "Axelar Network",
+        "url": "https://docs.axelar.dev/",
+        "type": "bridge",
+        "relevance": "Cross-chain communication network with General Message Passing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LayerZero Documentation",
+        "url": "https://layerzero.gitbook.io/",
+        "type": "protocol",
+        "relevance": "Omnichain interoperability protocol for cross-chain dApps.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Wormhole Documentation",
+        "url": "https://docs.wormhole.com/",
+        "type": "bridge",
+        "relevance": "Generic message passing protocol for cross-chain communication.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "governance": [
+      {
+        "name": "OpenZeppelin Governor",
+        "url": "https://docs.openzeppelin.com/contracts/4.x/governance",
+        "type": "library",
+        "relevance": "Modular governance system for DAOs with flexible voting.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Snapshot Documentation",
+        "url": "https://docs.snapshot.org/",
+        "type": "platform",
+        "relevance": "Off-chain gasless voting platform for DAOs.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Tally Documentation",
+        "url": "https://docs.tally.xyz/",
+        "type": "platform",
+        "relevance": "On-chain governance interface and delegation tracking.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "account_abstraction": [
+      {
+        "name": "ERC-4337 Documentation",
+        "url": "https://docs.erc4337.io/",
+        "type": "standard",
+        "relevance": "Official ERC-4337 account abstraction spec, EntryPoint, UserOperations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Account Abstraction GitHub",
+        "url": "https://github.com/eth-infinitism/account-abstraction",
+        "type": "repository",
+        "relevance": "Reference implementation of ERC-4337 contracts (EntryPoint, SimpleAccount).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Alchemy Smart Accounts",
+        "url": "https://www.alchemy.com/overviews/what-is-account-abstraction",
+        "type": "guide",
+        "relevance": "Comprehensive account abstraction guide with smart wallet patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Biconomy SDK",
+        "url": "https://docs.biconomy.io/",
+        "type": "sdk",
+        "relevance": "Smart account SDK with paymaster, bundler, session keys.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ZeroDev SDK",
+        "url": "https://docs.zerodev.app/",
+        "type": "sdk",
+        "relevance": "Kernel smart account with plugins, paymasters, bundlers.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Safe Smart Account",
+        "url": "https://docs.safe.global/",
+        "type": "sdk",
+        "relevance": "Multi-sig smart accounts, ERC-4337 compatible, industry standard.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "layer2_base": [
+      {
+        "name": "Base Documentation",
+        "url": "https://docs.base.org/",
+        "type": "documentation",
+        "relevance": "Coinbase L2, OP Stack based, consumer app focus.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Base Builder Grants",
+        "url": "https://base.org/grants",
+        "type": "program",
+        "relevance": "Funding for Base ecosystem builders and developers.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "L2Beat",
+        "url": "https://l2beat.com/",
+        "type": "analytics",
+        "relevance": "L2 comparison, risk assessment, TVL tracking, stage classification.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  },
+  "research_tools": [
+    {
+      "name": "Etherscan",
+      "url": "https://etherscan.io/",
+      "purpose": "Ethereum blockchain explorer for transactions, contracts, addresses.",
+      "use_case": "Contract verification, transaction debugging, gas analytics."
+    },
+    {
+      "name": "Solscan",
+      "url": "https://solscan.io/",
+      "purpose": "Solana blockchain explorer with transaction and program analysis.",
+      "use_case": "Solana transaction tracing, program inspection."
+    },
+    {
+      "name": "DeFi Llama",
+      "url": "https://defillama.com/",
+      "purpose": "TVL aggregator and DeFi protocol analytics.",
+      "use_case": "Protocol research, TVL tracking, yield comparison."
+    },
+    {
+      "name": "Token Terminal",
+      "url": "https://tokenterminal.com/",
+      "purpose": "Financial metrics for crypto protocols (revenue, fees, users).",
+      "use_case": "Protocol fundamental analysis and comparisons."
+    },
+    {
+      "name": "L2Beat",
+      "url": "https://l2beat.com/",
+      "purpose": "Layer 2 scaling solutions comparison and risk assessment.",
+      "use_case": "L2 research, security analysis, TVL tracking."
+    }
+  ],
+  "community_forums": [
+    {
+      "name": "Ethereum Magicians Forum",
+      "url": "https://ethereum-magicians.org/",
+      "platform": "discourse",
+      "focus": "EIP discussions and protocol development."
+    },
+    {
+      "name": "r/ethdev",
+      "url": "https://reddit.com/r/ethdev",
+      "platform": "reddit",
+      "focus": "Ethereum developer community and Q&A."
+    },
+    {
+      "name": "Solana Discord",
+      "url": "https://discord.gg/solana",
+      "platform": "discord",
+      "focus": "Solana developer community support."
+    },
+    {
+      "name": "Foundry Telegram",
+      "url": "https://t.me/foundry_rs",
+      "platform": "telegram",
+      "focus": "Foundry framework support and discussions."
+    }
+  ]
+}

@@ -7,7 +7,7 @@ Thank you for your interest in contributing to the AI Agents Library! This docum
 - [Code of Conduct](#code-of-conduct)
 - [How Can I Contribute?](#how-can-i-contribute)
 - [Contributing Custom GPT Agents](#contributing-custom-gpt-agents)
-- [Contributing Claude Code Skills](#contributing-claude-code-skills)
+- [Contributing Skills](#contributing-skills)
 - [Quality Standards](#quality-standards)
 - [Submission Process](#submission-process)
 
@@ -34,8 +34,8 @@ This project follows a professional code of conduct. Please be respectful, const
 
 We welcome contributions of:
 - New Custom GPT agents
-- New Claude Code skills
-- Improvements to existing agents
+- New AI coding agent skills
+- Improvements to existing agents or skills
 - Documentation enhancements
 - Bug fixes
 
@@ -47,7 +47,6 @@ Before creating a new agent:
 
 1. **Check for duplicates**: Search existing agents to avoid overlap
 2. **Validate use case**: Ensure the agent serves a clear, practical purpose
-3. **Review Master Template**: Familiarize yourself with `Productivity/Prompt Engineer/02_master-template.md` structure
 
 ### Agent Requirements
 
@@ -55,9 +54,8 @@ Every Custom GPT agent must include:
 
 1. **Main Prompt File** (`01_agent-name.md`)
    - Must be under 8000 characters (strict requirement)
-   - Follow Master Template v3.5 structure (13 sections)
    - Use clear, concise language
-   - Include real-world examples in EXEMPLARS section
+   - Include real-world examples
 
 2. **Configuration File** (`agent-name.yaml`)
    - Define role title and scope
@@ -66,10 +64,9 @@ Every Custom GPT agent must include:
    - Match command names exactly with markdown COMMANDS section
 
 3. **Sources File** (`02_sources-agent-name.json`)
-   - Include at least 10 curated web resources
+   - Include curated web resources
    - Group by logical categories
    - Add descriptions for each source
-   - Flag frequently-updated sources with `add_as_web_search: true`
 
 ### File Structure
 
@@ -99,55 +96,73 @@ Choose the appropriate category:
 - `research-n-analysis/` - Strategic consulting and analysis
 - `writing/` - Content creation and writing assistance
 
-## Contributing Claude Code Skills
+## Contributing Skills
 
 ### Skill Requirements
 
-Every Claude Code skill must include:
+Every AI coding agent skill must include:
 
 1. **Skill Definition** (`SKILL.md`)
+   - YAML frontmatter with `name` and `description`
    - Clear description of what the skill does
-   - Activation triggers (file patterns, keywords)
-   - List of resources and templates
-   - Usage examples
+   - "When to Use This Skill" section
+   - Quick reference tables
 
-2. **Resources Directory** (`resources/`)
-   - Best practices guides
-   - Pattern documentation
-   - Reference materials
+2. **References Directory** (`references/`) - optional
+   - Operational guides and patterns
+   - Best practices documentation
 
-3. **Templates Directory** (`templates/`)
-   - Code scaffolds
-   - Configuration templates
-   - Example implementations
+3. **Data Directory** (`data/`) - optional
+   - `sources.json` with curated web references
 
-4. **Data Directory** (`data/` - optional)
-   - `sources.json` with curated references
-   - Structured data files
+4. **Assets Directory** (`assets/`) - optional
+   - Templates and scaffolds
 
 ### Skill Structure
 
 ```text
-frameworks/claude-code-kit/initial-setup/skills/skill-name/
-├── SKILL.md              # Skill definition
-├── resources/            # Guides and references
+frameworks/shared-skills/skills/skill-name/
+├── SKILL.md              # Skill definition (required)
+├── references/           # Guides and patterns
 │   ├── best-practices.md
 │   └── patterns.md
-├── templates/            # Code templates
-│   ├── template-1.md
-│   └── template-2.md
-└── data/                 # Optional structured data
-    └── sources.json
+├── data/                 # Curated references
+│   └── sources.json
+└── assets/               # Templates
+    └── template-1.md
+```
+
+### Skill SKILL.md Format
+
+```yaml
+---
+name: skill-name
+description: One-line description for AI coding agent UI
+---
+
+# Skill Title
+
+[Overview and when to use]
+
+## When to Use This Skill
+[Bullet points]
+
+## Quick Reference
+[Tables of tools, frameworks, patterns]
 ```
 
 ### Skill Categories
 
-Choose the appropriate category:
-- Software Development (frontend, backend, architecture, mobile, UI/UX)
-- AI/ML Engineering (LLM, agents, data science, ML ops)
-- DevOps & Platform (DevOps, database, document automation)
-- Quality & Testing (code review, testing, debugging, refactoring)
-- Documentation (API design, technical writing, codebase audit)
+Skills use domain prefixes:
+- `ai-*` - AI/ML methods, systems, inference
+- `agents-*` - Agent orchestration and tooling
+- `software-*` - Application engineering
+- `dev-*` - Developer workflow and process
+- `qa-*` - Testing, quality, debugging
+- `data-*` - Analytics, SQL, data platforms
+- `docs-*` / `document-*` - Documentation and file formats
+- `ops-*` - Infrastructure and platform operations
+- `product-*` - Product management
 
 ## Quality Standards
 
@@ -163,17 +178,16 @@ Choose the appropriate category:
 ### Custom GPT Specific:
 
 - [ ] Under 8000 characters (hard requirement)
-- [ ] All 13 template sections included
 - [ ] No `{{placeholder}}` variables remaining
 - [ ] Commands match between YAML and markdown
 - [ ] Tested in ChatGPT Custom GPT builder
 
-### Claude Code Skills Specific:
+### Skills Specific:
 
-- [ ] SKILL.md includes activation triggers
-- [ ] Resources directory has meaningful content
-- [ ] Templates are tested and functional
-- [ ] Skill activates correctly in Claude Code
+- [ ] SKILL.md includes proper YAML frontmatter
+- [ ] References directory has meaningful content (if included)
+- [ ] Follows [Agent Skills specification](https://agentskills.io/specification)
+- [ ] Skill activates correctly in Claude Code or Codex CLI
 
 ## Submission Process
 
@@ -182,7 +196,7 @@ Choose the appropriate category:
 ```bash
 git clone https://github.com/vasilyu1983/AI-Agents-public
 cd AI-Agents-public
-git checkout -b feature/your-agent-name
+git checkout -b feature/your-contribution
 ```
 
 ### 2. Create Your Contribution
@@ -198,18 +212,15 @@ wc -c "custom-gpt/category/Agent Name/01_agent-name.md"
 
 # Verify no placeholders
 grep "{{.*}}" "custom-gpt/category/Agent Name/01_agent-name.md"
-
-# Test in ChatGPT
-# Copy content and create a test Custom GPT
 ```
 
-**For Claude Code Skills:**
+**For Skills:**
 ```bash
-# Copy to Claude Code
-cp -r frameworks/claude-code-kit/initial-setup/skills/your-skill ~/.config/claude-code/skills/
+# Verify SKILL.md exists
+cat frameworks/shared-skills/skills/your-skill/SKILL.md
 
-# Test activation
-# Open Claude Code and verify skill activates
+# Check frontmatter
+head -5 frameworks/shared-skills/skills/your-skill/SKILL.md
 ```
 
 ### 4. Commit Your Changes
@@ -233,7 +244,6 @@ Use clear commit messages:
    - Use cases and value proposition
    - Testing performed
    - Character count validation (for Custom GPT)
-   - Screenshots or examples (optional)
 
 ### 6. Code Review
 
@@ -255,29 +265,6 @@ Recommended tools for development:
 - **YAML validator**: `yamllint filename.yaml`
 - **JSON validator**: `python3 -m json.tool filename.json`
 - **Markdown linter**: `markdownlint-cli2`
-
-### Testing Custom GPT Agents
-
-1. Copy the `01_agent-name.md` content
-2. Go to [ChatGPT Custom GPTs](https://chat.openai.com/gpts/editor)
-3. Create a new GPT
-4. Paste instructions
-5. Test with various queries
-6. Verify all slash commands work
-7. Check output quality and adherence to constraints
-
-### Testing Claude Code Skills
-
-1. Copy skill to Claude Code workspace:
-   ```bash
-   cp -r frameworks/claude-code-kit/initial-setup/skills/your-skill \
-         ~/.config/claude-code/skills/
-   ```
-2. Open Claude Code
-3. Create test files matching activation triggers
-4. Verify skill auto-activates
-5. Test templates and resources are accessible
-6. Check for any errors in Claude Code logs
 
 ## Style Guidelines
 
@@ -316,4 +303,4 @@ Contributors will be recognized in:
 - Release notes
 - Commit history
 
-Thank you for helping make AI Agents Library better! 🚀
+Thank you for helping make AI Agents Library better!

@@ -1,6 +1,7 @@
 ---
 name: document-pdf
-description: Extract text/tables from PDFs, create formatted PDFs, merge/split/rotate, handle forms and metadata. Supports pdf-lib/pdfkit (Node.js) and pypdf/pdfplumber/ReportLab (Python).
+description: Extract text/tables from PDFs, create formatted PDFs, merge/split/rotate, and handle forms. Use for any PDF generation or parsing task.
+allowed-tools: Bash, Read, Write, Glob, Grep
 ---
 
 # Document PDF Skill — Quick Reference
@@ -171,3 +172,9 @@ Use only when explicitly requested and policy-compliant.
 - [../document-docx/SKILL.md](../document-docx/SKILL.md) — Word document generation
 - [../document-xlsx/SKILL.md](../document-xlsx/SKILL.md) — Excel/spreadsheet workflows
 - [../document-pptx/SKILL.md](../document-pptx/SKILL.md) — PowerPoint presentations
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

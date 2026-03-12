@@ -1,6 +1,6 @@
 ---
 name: qa-testing-ios
-description: "Run and stabilize iOS tests (XCTest, XCUITest, Swift Testing) on simulators and devices with xcodebuild/simctl: choose destinations, manage simulator state, control flakes (locale/time/network/animations), configure CI, and collect/parse xcresult artifacts."
+description: "iOS testing with XCTest/XCUITest/Swift Testing via xcodebuild/simctl. Use when choosing destinations, controlling flakes, or parsing xcresult."
 ---
 
 # QA Testing (iOS)
@@ -154,3 +154,9 @@ jobs:
 | [software-mobile](../software-mobile/SKILL.md) | iOS development |
 | [qa-testing-strategy](../qa-testing-strategy/SKILL.md) | Test strategy |
 | [qa-testing-mobile](../qa-testing-mobile/SKILL.md) | Cross-platform mobile |
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

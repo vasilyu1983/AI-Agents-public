@@ -1,0 +1,245 @@
+{
+  "metadata": {
+    "skill": "ai-prompt-engineering",
+    "updated": "2026-01-17",
+    "last_updated": "2026-01-17",
+    "total_sources": 25,
+    "description": "Curated sources for production prompt engineering: output contracts, evaluation/regression testing, tool/RAG prompting, security, and multi-agent orchestration.",
+    "version": "3.1"
+  },
+  "categories": {
+    "standards_and_security": [
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "specification",
+        "relevance": "Threat categories and mitigations for prompt injection, data leakage, and tool misuse.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP LLM Prompt Injection Prevention Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+        "type": "specification",
+        "relevance": "Step-by-step prevention techniques for prompt injection attacks with defense-in-depth strategies.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST AI Risk Management Framework 1.0",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "type": "specification",
+        "relevance": "Governance baseline for risk assessment, controls, and documentation impacting prompts, logging, and evaluations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NIST Generative AI Profile (AI 600-1)",
+        "url": "https://airc.nist.gov/technical-reports/#NIST.AI.600-1",
+        "type": "specification",
+        "relevance": "GenAI-specific profile aligned to NIST AI RMF; useful for prompt safety and monitoring control mapping.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "EU AI Act (Regulation (EU) 2024/1689)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+        "type": "specification",
+        "relevance": "Regulatory baseline for transparency and documentation requirements that often affect prompt logging and outputs.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "JSON Schema",
+        "url": "https://json-schema.org/",
+        "type": "specification",
+        "relevance": "Schema standard for structured outputs, tool I/O validation, and contract testing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Semantic Conventions for GenAI",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "type": "specification",
+        "relevance": "Telemetry standard for tokens, latency, and model metadata needed for prompt monitoring and regression detection.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "prompt_and_tool_use_research": [
+      {
+        "name": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "url": "https://arxiv.org/abs/2201.11903",
+        "type": "research",
+        "relevance": "Foundational prompting technique; informs when hidden reasoning may help (avoid requiring full traces in production).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ReAct: Synergizing Reasoning and Acting in Language Models",
+        "url": "https://arxiv.org/abs/2210.03629",
+        "type": "research",
+        "relevance": "Core pattern for tool use; informs agent/tool prompting and error handling structure.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Self-Consistency Improves Chain of Thought Reasoning",
+        "url": "https://arxiv.org/abs/2203.11171",
+        "type": "research",
+        "relevance": "Reference for sampling-based reliability improvements; use cautiously with cost controls.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Toolformer",
+        "url": "https://arxiv.org/abs/2302.04761",
+        "type": "research",
+        "relevance": "Reference for learning tool-use behaviors and understanding tool-calling error modes.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Constitutional AI",
+        "url": "https://arxiv.org/abs/2212.08073",
+        "type": "research",
+        "relevance": "Reference for safety-aligned behavior via explicit principles; useful for policy scaffolding patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "vendor_docs_and_guides": [
+      {
+        "name": "OpenAI OpenAPI Specification (GitHub)",
+        "url": "https://github.com/openai/openai-openapi",
+        "type": "documentation",
+        "relevance": "Provider reference (OpenAPI) for request/response schemas and tool-related API behavior; useful for contract testing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Documentation",
+        "url": "https://docs.anthropic.com/",
+        "type": "documentation",
+        "relevance": "Provider-specific prompt/tool guidance and safety behavior notes.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Extended Thinking Documentation",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/extended-thinking-tips",
+        "type": "documentation",
+        "relevance": "Native extended thinking API: budget management, thinking blocks, multishot patterns, when to use vs think tool.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "The Think Tool - Anthropic Engineering",
+        "url": "https://www.anthropic.com/engineering/claude-think-tool",
+        "type": "documentation",
+        "relevance": "Think tool pattern for stopping and thinking during response generation; complements extended thinking.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Tool Use Documentation",
+        "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
+        "type": "documentation",
+        "relevance": "Provider-specific tool calling reference (schemas, tool inputs/outputs).",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Gemini Documentation",
+        "url": "https://ai.google.dev/docs",
+        "type": "documentation",
+        "relevance": "Provider-specific reference for multimodal prompting and deployment behavior.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Agents SDK (Python)",
+        "url": "https://github.com/openai/openai-agents-python",
+        "type": "documentation",
+        "relevance": "Reference implementation for agent orchestration patterns and tool-use workflows in OpenAI's SDK.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "evaluation_and_testing": [
+      {
+        "name": "Promptfoo - Prompt Testing Framework",
+        "url": "https://github.com/promptfoo/promptfoo",
+        "type": "tool",
+        "relevance": "Declarative prompt testing with CI/CD integration (GitHub Actions), red teaming, vulnerability scanning for LLMs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepEval - LLM Evaluation Framework",
+        "url": "https://github.com/confident-ai/deepeval",
+        "type": "tool",
+        "relevance": "Unit testing for LLM outputs (pytest-style), 40+ safety vulnerability red teaming, CI/CD integration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Evals",
+        "url": "https://github.com/openai/evals",
+        "type": "tool",
+        "relevance": "Reference implementation for building eval suites and regression tests.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "HELM",
+        "url": "https://crfm.stanford.edu/helm/latest/",
+        "type": "reference",
+        "relevance": "Benchmarking and evaluation framework; useful for thinking about broad evaluation coverage.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Cookbook",
+        "url": "https://cookbook.openai.com/",
+        "type": "examples",
+        "relevance": "Practical examples for structured outputs, tool calling, and evaluation patterns (provider-specific).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangSmith Documentation",
+        "url": "https://docs.smith.langchain.com/",
+        "type": "documentation",
+        "relevance": "Example observability/eval tooling for prompts and traces (tooling example).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

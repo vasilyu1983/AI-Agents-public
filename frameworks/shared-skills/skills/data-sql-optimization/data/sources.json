@@ -1,0 +1,126 @@
+{
+    "metadata": {
+        "title": "SQL Optimization - Sources",
+        "description": "Primary docs and high-signal references for OLTP SQL tuning: EXPLAIN/plan analysis, indexing, concurrency, migrations, backups, and security",
+        "last_updated": "2026-01-26"
+    },
+  "official_rdbms_docs": [
+    {
+      "name": "PostgreSQL Documentation (current)",
+      "url": "https://www.postgresql.org/docs/current/",
+      "description": "Canonical PostgreSQL reference (EXPLAIN, indexes, planner, vacuum, replication, security)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "PostgreSQL 18 Release Notes",
+      "url": "https://www.postgresql.org/docs/release/18.0/",
+      "description": "Official PostgreSQL 18 release notes (feature and performance changes)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "PostgreSQL 18 Release Announcement",
+      "url": "https://www.postgresql.org/about/news/postgresql-18-released-3142/",
+      "description": "PostgreSQL 18 announcement (async I/O, skip scan, parallel GIN, UUIDv7, data checksums)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MySQL Documentation",
+      "url": "https://dev.mysql.com/doc/",
+      "description": "MySQL reference manual (EXPLAIN, optimizer, InnoDB, Performance Schema, replication)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SQL Server Documentation",
+      "url": "https://learn.microsoft.com/en-us/sql/sql-server/",
+      "description": "SQL Server docs (execution plans, indexing, concurrency, HA/DR)",
+      "add_as_web_search": true
+    },
+        {
+            "name": "SQL Server 2025 What's New",
+            "url": "https://learn.microsoft.com/en-us/sql/sql-server/what-s-new-in-sql-server-2025",
+            "description": "SQL Server 2025 features (OPPO, optimized locking, tempdb space resource governance, expression cardinality estimation feedback)",
+            "add_as_web_search": true
+        },
+    {
+      "name": "Oracle Database Documentation",
+      "url": "https://docs.oracle.com/en/database/",
+      "description": "Oracle DB docs (optimizer, plans, indexes, performance)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SQLite Documentation",
+      "url": "https://www.sqlite.org/docs.html",
+      "description": "SQLite docs (query planner, indexes, pragmas, transactions)",
+      "add_as_web_search": true
+    }
+  ],
+  "core_topics": [
+    {
+      "name": "PostgreSQL - Using EXPLAIN",
+      "url": "https://www.postgresql.org/docs/current/using-explain.html",
+      "description": "How to read and use EXPLAIN output in PostgreSQL",
+      "add_as_web_search": true
+    },
+    {
+      "name": "PostgreSQL - Planner/Optimizer",
+      "url": "https://www.postgresql.org/docs/current/planner-optimizer.html",
+      "description": "Planner behavior, cost model, join strategies",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MySQL - EXPLAIN Output Format",
+      "url": "https://dev.mysql.com/doc/refman/en/explain-output.html",
+      "description": "MySQL EXPLAIN output and interpretation",
+      "add_as_web_search": true
+    }
+  ],
+  "high_signal_guides": [
+    {
+      "name": "Use The Index, Luke",
+      "url": "https://use-the-index-luke.com/",
+      "description": "Practical indexing and SQL performance patterns across databases",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OWASP SQL Injection Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+      "description": "OWASP SQL injection prevention best practices (parameterized queries, ORMs, least privilege)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "PostgreSQL Proxy Comparison 2025",
+      "url": "https://onidel.com/blog/postgresql-proxy-comparison-2025",
+      "description": "PgBouncer vs Pgcat vs Odyssey performance and feature comparison for connection pooling",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Connection Pooling Best Practices (Azure)",
+      "url": "https://learn.microsoft.com/en-us/azure/postgresql/connectivity/concepts-connection-pooling-best-practices",
+      "description": "PgBouncer pooling modes, pool sizing formulas, and deployment patterns",
+      "add_as_web_search": true
+    }
+  ],
+  "tools": [
+    {
+      "name": "pgBadger",
+      "url": "https://pgbadger.darold.net/",
+      "description": "PostgreSQL log analyzer (slow query triage and reporting)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Percona Toolkit",
+      "url": "https://docs.percona.com/percona-toolkit/",
+      "description": "Operational tooling for MySQL (diagnostics, replication, schema changes)",
+      "add_as_web_search": true
+    }
+  ],
+  "optional_ai": [
+    {
+      "name": "Explain-plan summarization (Optional)",
+      "url": "https://www.postgresql.org/docs/current/using-explain.html",
+      "description": "Optional automation layer for summarizing plans (requires human verification)",
+      "add_as_web_search": true,
+      "optional": true
+    }
+  ]
+}

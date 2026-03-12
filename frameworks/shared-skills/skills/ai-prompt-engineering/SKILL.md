@@ -1,6 +1,6 @@
 ---
 name: ai-prompt-engineering
-description: "Operational prompt engineering for production LLM apps: structured outputs (JSON/schema), deterministic extractors, RAG grounding/citations, tool/agent workflows, prompt safety (injection/exfiltration), and prompt evaluation/regression testing. Use when designing, debugging, or standardizing prompts for Codex CLI, Claude Code, and OpenAI/Anthropic/Gemini APIs."
+description: "Prompt engineering for production LLMs — structured outputs, RAG, tool workflows, and safety. Use when designing or debugging prompts for LLM APIs."
 ---
 
 # Prompt Engineering — Operational Skill
@@ -324,3 +324,9 @@ This skill provides foundational prompt engineering patterns. For specialized im
 - Run independent reads/searches in parallel when the environment supports it; keep writes/edits serialized
 - **AGENTS.md Integration**: Place project-specific prompt guidance in AGENTS.md files at global (~/.codex/AGENTS.md), project-level (./AGENTS.md), or subdirectory scope for layered instructions
 - **Reasoning Effort**: Use `medium` for interactive coding (default), `high`/`xhigh` for complex autonomous multi-hour tasks
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

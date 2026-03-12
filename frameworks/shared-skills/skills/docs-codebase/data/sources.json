@@ -1,0 +1,287 @@
+{
+  "metadata": {
+    "skill": "docs-codebase",
+    "updated": "2026-01-20",
+    "total_sources": 29,
+    "description": "Primary standards and practical tools for docs-as-code, API documentation, AI documentation tools, cross-platform AGENTS.md standard, and documentation quality checks.",
+    "version": "2.2"
+  },
+  "categories": {
+    "style_guides_and_writing": [
+      {
+        "name": "Google Developer Documentation Style Guide",
+        "url": "https://developers.google.com/style",
+        "type": "documentation",
+        "relevance": "Practical, widely used style guide for clear technical writing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["writing", "style"]
+      },
+      {
+        "name": "Microsoft Writing Style Guide",
+        "url": "https://learn.microsoft.com/en-us/style-guide/welcome/",
+        "type": "documentation",
+        "relevance": "Modern technical writing guidance with examples and conventions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["writing", "style"]
+      },
+      {
+        "name": "Diátaxis Framework",
+        "url": "https://diataxis.fr/",
+        "type": "framework",
+        "relevance": "Information architecture model (tutorials/how-to/reference/explanation) for maintainable docs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["docs-ia", "framework"]
+      }
+    ],
+    "markdown_and_content_standards": [
+      {
+        "name": "CommonMark Specification",
+        "url": "https://commonmark.org/",
+        "type": "specification",
+        "relevance": "Reference Markdown spec to reduce renderer inconsistencies.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["markdown"]
+      },
+      {
+        "name": "Keep a Changelog",
+        "url": "https://keepachangelog.com/",
+        "type": "specification",
+        "relevance": "Changelog format that stays readable and auditable over time.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["changelog"]
+      },
+      {
+        "name": "Semantic Versioning 2.0.0",
+        "url": "https://semver.org/",
+        "type": "specification",
+        "relevance": "Versioning rules for release notes and compatibility expectations.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["semver"]
+      },
+      {
+        "name": "Architecture Decision Records (ADR)",
+        "url": "https://adr.github.io/",
+        "type": "reference",
+        "relevance": "Entry point for ADR patterns and ecosystem.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["adr"]
+      }
+    ],
+    "api_documentation_and_specs": [
+      {
+        "name": "OpenAPI Specification",
+        "url": "https://spec.openapis.org/oas/",
+        "type": "specification",
+        "relevance": "Canonical OpenAPI spec landing page for versioned API documentation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["openapi"]
+      },
+      {
+        "name": "OpenAPI 3.2.0",
+        "url": "https://spec.openapis.org/oas/v3.2.0.html",
+        "type": "specification",
+        "relevance": "Latest OpenAPI spec version for modern API doc generation and tooling compatibility checks.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["openapi", "version"]
+      },
+      {
+        "name": "RFC 9457 - Problem Details for HTTP APIs",
+        "url": "https://www.rfc-editor.org/rfc/rfc9457",
+        "type": "specification",
+        "relevance": "Standard error format for HTTP APIs (updates RFC 7807).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["api", "errors", "rfc"]
+      }
+    ],
+    "docs_quality_and_ci": [
+      {
+        "name": "Vale",
+        "url": "https://vale.sh/",
+        "type": "tool",
+        "relevance": "Prose linter for consistent terminology and style in docs-as-code pipelines.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["lint", "docs"]
+      },
+      {
+        "name": "markdownlint",
+        "url": "https://github.com/DavidAnson/markdownlint",
+        "type": "tool",
+        "relevance": "Markdown style rules for consistent formatting across large doc sets.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["lint", "markdown"]
+      },
+      {
+        "name": "markdown-link-check",
+        "url": "https://github.com/tcort/markdown-link-check",
+        "type": "tool",
+        "relevance": "Automated link checking for docs to prevent broken navigation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["links", "ci"]
+      },
+      {
+        "name": "cspell",
+        "url": "https://cspell.org/",
+        "type": "tool",
+        "relevance": "Spell checking for docs and codebases with custom dictionaries.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["spelling", "ci"]
+      }
+    ],
+    "accessibility": [
+      {
+        "name": "Web Content Accessibility Guidelines (WCAG) 2.2 (W3C Recommendation)",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "type": "specification",
+        "relevance": "Accessibility baseline referenced by many orgs and policies; impacts docs sites and exported artifacts.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["accessibility", "wcag"]
+      },
+      {
+        "name": "WCAG 3.0 Working Draft",
+        "url": "https://www.w3.org/TR/wcag-3.0/",
+        "type": "specification",
+        "relevance": "Preview of outcome-based accessibility scoring model; functional categories for cognitive disabilities.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["accessibility", "wcag3"]
+      }
+    ],
+    "adr_and_architecture": [
+      {
+        "name": "AWS ADR Process",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/architectural-decision-records/adr-process.html",
+        "type": "documentation",
+        "relevance": "Enterprise ADR process with lifecycle management and team collaboration patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["adr", "enterprise"]
+      },
+      {
+        "name": "Google Cloud ADR Guide",
+        "url": "https://cloud.google.com/architecture/architecture-decision-records",
+        "type": "documentation",
+        "relevance": "Google's ADR framework with workload lifecycle and after-action review guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["adr", "enterprise"]
+      },
+      {
+        "name": "AWS ADR Best Practices Blog",
+        "url": "https://aws.amazon.com/blogs/architecture/master-architecture-decision-records-adrs-best-practices-for-effective-decision-making/",
+        "type": "article",
+        "relevance": "Readout meeting style, team collaboration, after-action reviews for ADRs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["adr", "best-practices"]
+      }
+    ],
+    "ai_documentation_tools": [
+      {
+        "name": "Mintlify",
+        "url": "https://www.mintlify.com",
+        "type": "tool",
+        "relevance": "AI-native documentation platform with LLM-optimized content and lifecycle integration.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": ["ai", "docs-platform"]
+      },
+      {
+        "name": "DocuWriter.ai",
+        "url": "https://www.docuwriter.ai/",
+        "type": "tool",
+        "relevance": "AI code documentation with UML diagrams and n8n workflow automation.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": ["ai", "code-docs"]
+      },
+      {
+        "name": "Document360 AI Documentation Trends 2026",
+        "url": "https://document360.com/blog/ai-documentation-trends/",
+        "type": "article",
+        "relevance": "MCP servers, multi-agent workflows, real-time content sync trends for 2026.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["ai", "trends"]
+      }
+    ],
+    "cross_platform_ai_standards": [
+      {
+        "name": "OpenAI AGENTS.md Guide",
+        "url": "https://developers.openai.com/codex/guides/agents-md",
+        "type": "documentation",
+        "relevance": "Official OpenAI Codex documentation for AGENTS.md cross-platform standard.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["agents-md", "codex", "cross-platform"]
+      },
+      {
+        "name": "OpenAI Codex Config Advanced",
+        "url": "https://developers.openai.com/codex/config-advanced/",
+        "type": "documentation",
+        "relevance": "Advanced configuration for OpenAI Codex including AGENTS.md settings and file size limits.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["codex", "configuration"]
+      },
+      {
+        "name": "Anthropic: Claude Code Best Practices",
+        "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+        "type": "documentation",
+        "relevance": "Official Anthropic best practices for Claude Code and CLAUDE.md configuration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["claude-code", "best-practices"]
+      },
+      {
+        "name": "Anthropic: Claude Code Memory Documentation",
+        "url": "https://docs.anthropic.com/en/docs/claude-code/memory",
+        "type": "documentation",
+        "relevance": "Official documentation for CLAUDE.md file format and memory management.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["claude-md", "memory"]
+      }
+    ]
+  }
+}

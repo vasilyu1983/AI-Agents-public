@@ -1,0 +1,151 @@
+{
+  "metadata": {
+    "skill": "qa-debugging",
+    "updated": "2026-01-26",
+    "version": "3.0",
+    "total_sources": 18,
+    "description": "Primary references for systematic debugging, troubleshooting, logging, tracing, profiling, incident response, and AI-assisted debugging (2026 standard)."
+  },
+  "categories": {
+    "sre_troubleshooting": [
+      {
+        "name": "Google SRE Book - Effective Troubleshooting",
+        "url": "https://sre.google/sre-book/effective-troubleshooting/",
+        "description": "Evidence-based troubleshooting workflow and tradeoffs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Managing Incidents",
+        "url": "https://sre.google/sre-book/managing-incidents/",
+        "description": "Incident response and coordination patterns.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "observability_standards": [
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "description": "Vendor-neutral traces/metrics/logs instrumentation and correlation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "W3C Trace Context",
+        "url": "https://www.w3.org/TR/trace-context/",
+        "description": "Standard for trace propagation (`traceparent`).",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "The Twelve-Factor App - Logs",
+        "url": "https://12factor.net/logs",
+        "description": "Logs as event streams; useful baseline for debugging in cloud environments.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "profiling_and_debuggers": [
+      {
+        "name": "Chrome DevTools - Performance",
+        "url": "https://developer.chrome.com/docs/devtools/performance/",
+        "description": "Frontend and Node.js performance profiling workflows.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Node.js Profiling Guide",
+        "url": "https://nodejs.org/en/docs/guides/simple-profiling/",
+        "description": "Official CPU/heap profiling basics for Node.js.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Python Logging HOWTO",
+        "url": "https://docs.python.org/3/howto/logging.html",
+        "description": "Official Python logging guidance and patterns.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "databases": [
+      {
+        "name": "PostgreSQL - EXPLAIN",
+        "url": "https://www.postgresql.org/docs/current/sql-explain.html",
+        "description": "Query plan inspection and analysis.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "PostgreSQL - pg_stat_statements",
+        "url": "https://www.postgresql.org/docs/current/pgstatstatements.html",
+        "description": "Server-side query performance statistics for debugging slow queries.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "ai_assisted_debugging": [
+      {
+        "name": "OpenTelemetry AI Agent Observability",
+        "url": "https://opentelemetry.io/blog/2025/ai-agent-observability/",
+        "description": "GenAI observability semantic conventions and LLM tracing standards.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Langfuse - LLM Observability",
+        "url": "https://langfuse.com/docs",
+        "description": "Open source LLM observability: tracing, evaluations, prompt management, cost tracking.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Visual Studio 2026 Debugging with Copilot",
+        "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-2026-debugging-with-copilot/",
+        "description": "AI-assisted debugging workflows in Visual Studio 2026.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "description": "Security guidance when using AI to summarize logs or propose fixes.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "distributed_tracing_2026": [
+      {
+        "name": "SigNoz - OpenTelemetry APM",
+        "url": "https://signoz.io/docs/",
+        "description": "Open source, OTel-native APM with unified traces, metrics, and logs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Distributed Tracing Tools 2026",
+        "url": "https://signoz.io/blog/distributed-tracing-tools/",
+        "description": "Comparison of top distributed tracing tools for microservices in 2026.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Better Stack - OpenTelemetry Best Practices",
+        "url": "https://betterstack.com/community/guides/observability/opentelemetry-best-practices/",
+        "description": "Comprehensive OTel best practices: instrumentation, collectors, sampling strategies.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "ai_debugging_tools": [
+      {
+        "name": "Cursor IDE",
+        "url": "https://cursor.com/",
+        "description": "AI-native IDE with multi-file debugging, codebase-aware RCA, parallel agent execution.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,928 @@
+{
+  "metadata": {
+    "skill": "software-ui-ux-design",
+    "updated": "2026-03-07",
+    "description": "Comprehensive UI/UX design resources covering usability, accessibility, design systems, platform guidelines (Apple HIG, Material 3), design tokens (DTCG 2025.10), performance UX (Core Web Vitals), modern interaction patterns, UI pattern inspiration, demographic-inclusive design, cultural patterns, CRO, AI design tools, and interface simplification for non-technical users",
+    "total_sources": 143
+  },
+  "categories": {
+    "usability_and_ux_research": [
+      {
+        "name": "Nielsen Norman Group",
+        "url": "https://www.nngroup.com/",
+        "description": "Evidence-based UX research, usability heuristics, and best practices",
+        "add_as_web_search": true
+      },
+      {
+        "name": "10 Usability Heuristics",
+        "url": "https://www.nngroup.com/articles/ten-usability-heuristics/",
+        "description": "Jakob Nielsen's foundational usability heuristics for UI design",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Laws of UX",
+        "url": "https://lawsofux.com/",
+        "description": "Collection of psychological principles and UX laws",
+        "add_as_web_search": false
+      },
+      {
+        "name": "UX Collective",
+        "url": "https://uxdesign.cc/",
+        "description": "Community-driven UX design articles and case studies",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Baymard Institute",
+        "url": "https://baymard.com/",
+        "description": "Large-scale UX research and e-commerce usability",
+        "add_as_web_search": true
+      },
+      {
+        "name": "UX Booth",
+        "url": "https://www.uxbooth.com/",
+        "description": "UX theory, methods, and practical insights",
+        "add_as_web_search": false
+      }
+    ],
+    "accessibility": [
+      {
+        "name": "WCAG 2.2 Guidelines",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "description": "Official W3C Web Content Accessibility Guidelines 2.2 (W3C Recommendation 2024-12-12)",
+        "add_as_web_search": false
+      },
+      {
+        "name": "European Accessibility Act (Directive (EU) 2019/882)",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019L0882",
+        "description": "EU accessibility requirements; applies to covered products/services from 28 June 2025",
+        "add_as_web_search": true
+      },
+      {
+        "name": "WAI-ARIA Authoring Practices",
+        "url": "https://www.w3.org/WAI/ARIA/apg/",
+        "description": "Accessible Rich Internet Applications implementation patterns",
+        "add_as_web_search": false
+      },
+      {
+        "name": "WebAIM",
+        "url": "https://webaim.org/",
+        "description": "Web accessibility resources, tools, and training",
+        "add_as_web_search": false
+      },
+      {
+        "name": "WebAIM Contrast Checker",
+        "url": "https://webaim.org/references/contrastchecker/",
+        "description": "Tool for checking color contrast ratios for WCAG compliance",
+        "add_as_web_search": false
+      },
+      {
+        "name": "A11y Project",
+        "url": "https://www.a11yproject.com/",
+        "description": "Community-driven accessibility resources and checklists",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Deque Accessibility Resources",
+        "url": "https://www.deque.com/resources/",
+        "description": "Accessibility testing tools and resources (axe DevTools)",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Inclusive Components",
+        "url": "https://inclusive-components.design/",
+        "description": "Accessible component patterns and implementations",
+        "add_as_web_search": false
+      },
+      {
+        "name": "GOV.UK Accessibility",
+        "url": "https://www.gov.uk/service-manual/helping-people-to-use-your-service",
+        "description": "Government accessibility standards and guidelines",
+        "add_as_web_search": false
+      },
+      {
+        "name": "WebAIM WCAG 2 Checklist",
+        "url": "https://webaim.org/standards/wcag/checklist",
+        "description": "Simplified WCAG 2.2 checklist for practitioners with clear pass/fail criteria",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Accessible.org WCAG Checklist",
+        "url": "https://accessible.org/wcag/",
+        "description": "Downloadable WCAG 2.2 AA checklist in Excel format for audit tracking",
+        "add_as_web_search": false
+      }
+    ],
+    "design_systems": [
+      {
+        "name": "Material Design 3",
+        "url": "https://m3.material.io/",
+        "description": "Google's comprehensive design system for Android and web",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apple Human Interface Guidelines",
+        "url": "https://developer.apple.com/design/human-interface-guidelines/",
+        "description": "iOS, macOS, watchOS, and tvOS design standards",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft Fluent Design",
+        "url": "https://www.microsoft.com/design/fluent/",
+        "description": "Microsoft's cross-platform design system",
+        "add_as_web_search": true
+      },
+      {
+        "name": "IBM Carbon Design System",
+        "url": "https://carbondesignsystem.com/",
+        "description": "IBM's open-source design system with components and patterns",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Shopify Polaris",
+        "url": "https://polaris.shopify.com/",
+        "description": "Shopify's design system for commerce interfaces",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Atlassian Design System",
+        "url": "https://atlassian.design/",
+        "description": "Design guidelines and components from Atlassian",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Ant Design",
+        "url": "https://ant.design/",
+        "description": "Enterprise-level UI design language and React components",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Lightning Design System",
+        "url": "https://www.lightningdesignsystem.com/",
+        "description": "Salesforce design system for enterprise applications",
+        "add_as_web_search": false
+      },
+      {
+        "name": "U.S. Web Design System",
+        "url": "https://designsystem.digital.gov/",
+        "description": "U.S. government websites design standards",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Design Systems Repo",
+        "url": "https://designsystemsrepo.com/",
+        "description": "Comprehensive collection of design system examples",
+        "add_as_web_search": false
+      }
+    ],
+    "component_libraries": [
+      {
+        "name": "Base UI",
+        "url": "https://base-ui.com/",
+        "description": "Next-gen unstyled component library from Radix/MUI team — recommended successor to Radix UI with modern patterns",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MUI (Material-UI)",
+        "url": "https://mui.com/",
+        "description": "React component library implementing Material Design",
+        "add_as_web_search": false
+      },
+      {
+        "name": "shadcn/ui",
+        "url": "https://ui.shadcn.com/",
+        "description": "Copy-paste accessible React components with Tailwind",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Radix UI",
+        "url": "https://www.radix-ui.com/",
+        "description": "Unstyled, accessible React component primitives",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Headless UI",
+        "url": "https://headlessui.com/",
+        "description": "Unstyled accessible components for React and Vue",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Chakra UI",
+        "url": "https://chakra-ui.com/",
+        "description": "Simple, modular, accessible React component library",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Bootstrap",
+        "url": "https://getbootstrap.com/",
+        "description": "Popular CSS framework with components",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Tailwind UI",
+        "url": "https://tailwindui.com/",
+        "description": "Premium Tailwind CSS component library",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Mantine",
+        "url": "https://mantine.dev/",
+        "description": "Modern React component library with 120+ components and 100+ hooks",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React Aria",
+        "url": "https://react-spectrum.adobe.com/react-aria/",
+        "description": "Adobe's accessible React component primitives (actively maintained alternative to Radix UI)",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Vuetify",
+        "url": "https://vuetifyjs.com/",
+        "description": "Material Design component framework for Vue.js",
+        "add_as_web_search": false
+      },
+      {
+        "name": "PrimeReact",
+        "url": "https://primereact.org/",
+        "description": "Rich UI component library for React with 90+ components",
+        "add_as_web_search": false
+      }
+    ],
+    "design_tools": [
+      {
+        "name": "Figma",
+        "url": "https://www.figma.com/",
+        "description": "Collaborative interface design tool and prototyping",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Figma Learn",
+        "url": "https://help.figma.com/hc/en-us/categories/360002051613",
+        "description": "Official Figma tutorials and design system guidance",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Sketch",
+        "url": "https://www.sketch.com/",
+        "description": "macOS design tool for UI/UX designers",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Penpot",
+        "url": "https://penpot.app/",
+        "description": "Open-source design and prototyping platform",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Framer",
+        "url": "https://www.framer.com/",
+        "description": "Interactive design and prototyping with code",
+        "add_as_web_search": false
+      }
+    ],
+    "user_research": [
+      {
+        "name": "User Interviews",
+        "url": "https://www.userinterviews.com/",
+        "description": "Platform for recruiting research participants",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Maze",
+        "url": "https://maze.co/",
+        "description": "Rapid user testing and research platform",
+        "add_as_web_search": false
+      },
+      {
+        "name": "UserTesting",
+        "url": "https://www.usertesting.com/",
+        "description": "Remote user testing and feedback platform",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Optimal Workshop",
+        "url": "https://www.optimalworkshop.com/",
+        "description": "Card sorting, tree testing, and IA tools",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Hotjar",
+        "url": "https://www.hotjar.com/",
+        "description": "Heatmaps, session recordings, and user feedback",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Lookback",
+        "url": "https://lookback.com/",
+        "description": "User research and usability testing platform",
+        "add_as_web_search": false
+      }
+    ],
+    "mobile_design": [
+      {
+        "name": "iOS Design Themes",
+        "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-ios",
+        "description": "iOS-specific design guidance and patterns",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Android Design Guide",
+        "url": "https://developer.android.com/design",
+        "description": "Android design principles and components",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Mobile UX Best Practices",
+        "url": "https://www.nngroup.com/topic/mobile-tablet/",
+        "description": "Nielsen Norman Group mobile usability research",
+        "add_as_web_search": true
+      }
+    ],
+    "responsive_design": [
+      {
+        "name": "Responsive Web Design Basics",
+        "url": "https://web.dev/responsive-web-design-basics/",
+        "description": "Google's guide to responsive design fundamentals",
+        "add_as_web_search": false
+      },
+      {
+        "name": "CSS-Tricks Responsive Design",
+        "url": "https://css-tricks.com/guides/responsive-design/",
+        "description": "Comprehensive responsive design techniques",
+        "add_as_web_search": false
+      },
+      {
+        "name": "This Is Responsive",
+        "url": "https://bradfrost.github.io/this-is-responsive/",
+        "description": "Responsive web design patterns and resources",
+        "add_as_web_search": false
+      }
+    ],
+    "interaction_design": [
+      {
+        "name": "Material Design 3 Motion",
+        "url": "https://m3.material.io/styles/motion/overview",
+        "description": "M3 motion system: easing, duration, transitions, and spring-based physics (1.13.0+)",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Interaction Design Foundation",
+        "url": "https://www.interaction-design.org/",
+        "description": "IxD education, courses, and literature",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Microinteractions",
+        "url": "https://microinteractions.com/",
+        "description": "Dan Saffer's micro-interaction design patterns",
+        "add_as_web_search": false
+      },
+      {
+        "name": "UI Animation Principles",
+        "url": "https://uxdesign.cc/the-ultimate-guide-to-proper-use-of-animation-in-ux-10bd98614fa9",
+        "description": "Animation timing, easing, and best practices",
+        "add_as_web_search": false
+      }
+    ],
+    "data_visualization": [
+      {
+        "name": "Data Visualization Catalogue",
+        "url": "https://datavizcatalogue.com/",
+        "description": "Library of visualization methods and when to use them",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Datawrapper Academy",
+        "url": "https://academy.datawrapper.de/",
+        "description": "Data visualization best practices and tutorials",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Observable Plot",
+        "url": "https://observablehq.com/@observablehq/plot",
+        "description": "JavaScript library for exploratory data visualization",
+        "add_as_web_search": false
+      }
+    ],
+    "typography": [
+      {
+        "name": "Google Fonts",
+        "url": "https://fonts.google.com/",
+        "description": "Free, open-source web fonts",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Typewolf",
+        "url": "https://www.typewolf.com/",
+        "description": "Typography inspiration and font recommendations",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Practical Typography",
+        "url": "https://practicaltypography.com/",
+        "description": "Matthew Butterick's typography guide",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Type Scale",
+        "url": "https://typescale.com/",
+        "description": "Visual calculator for typographic scales",
+        "add_as_web_search": false
+      }
+    ],
+    "color": [
+      {
+        "name": "Coolors",
+        "url": "https://coolors.co/",
+        "description": "Color palette generator and explorer",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Adobe Color",
+        "url": "https://color.adobe.com/",
+        "description": "Color wheel and palette creation tool",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Color Hunt",
+        "url": "https://colorhunt.co/",
+        "description": "Curated color palette inspiration",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Accessible Colors",
+        "url": "https://accessible-colors.com/",
+        "description": "WCAG-compliant color combination generator",
+        "add_as_web_search": false
+      }
+    ],
+    "standards_and_specs": [
+      {
+        "name": "W3C Web Sustainability Guidelines (WSG)",
+        "url": "https://www.w3.org/TR/web-sustainability-guidelines/",
+        "description": "80+ guidelines for sustainable digital design across UX, development, infrastructure, and business (W3C Draft Note, targeting Statement status 2026)",
+        "add_as_web_search": true
+      },
+      {
+        "name": "W3C Design Principles",
+        "url": "https://www.w3.org/TR/design-principles/",
+        "description": "Web platform design principles from W3C",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ISO 9241-210",
+        "url": "https://www.iso.org/standard/77520.html",
+        "description": "Human-centred design for interactive systems standard",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Design Tokens Technical Reports (Design Tokens Community Group)",
+        "url": "https://tr.designtokens.org/",
+        "description": "Design token formats and guidance (Design Tokens Technical Reports 2025.10)",
+        "add_as_web_search": true
+      }
+    ],
+    "animation_libraries": [
+      {
+        "name": "Framer Motion",
+        "url": "https://www.framer.com/motion/",
+        "description": "Production-ready React animation library with declarative API",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GSAP (GreenSock)",
+        "url": "https://greensock.com/gsap/",
+        "description": "Professional-grade JavaScript animation platform",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Lottie",
+        "url": "https://airbnb.design/lottie/",
+        "description": "Airbnb's JSON-based animation library for complex animations",
+        "add_as_web_search": false
+      },
+      {
+        "name": "React Spring",
+        "url": "https://react-spring.dev/",
+        "description": "Spring-physics based animation library for React",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anime.js",
+        "url": "https://animejs.com/",
+        "description": "Lightweight JavaScript animation library",
+        "add_as_web_search": false
+      }
+    ],
+    "modern_patterns_2024": [
+      {
+        "name": "Pencil & Paper - Microinteractions",
+        "url": "https://www.pencilandpaper.io/articles/microinteractions-ux-interaction-patterns",
+        "description": "UX microinteraction patterns and interaction design guide",
+        "add_as_web_search": false
+      },
+      {
+        "name": "UX Playbook - Interaction Design Patterns",
+        "url": "https://uxplaybook.org/articles/essential-interaction-design-patterns-and-techniques",
+        "description": "Essential interaction design patterns and techniques",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Mobisoftinfotech - Microinteractions Trends",
+        "url": "https://mobisoftinfotech.com/references/blog/microinteractions-ui-ux-design-trends-examples",
+        "description": "Latest microinteraction trends and examples for 2024",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Uxcel - Popular Microinteractions",
+        "url": "https://uxcel.com/blog/most-popular-microinteractions-every-ux-ui-designer-needs-to-know",
+        "description": "Essential microinteractions every designer should know",
+        "add_as_web_search": false
+      }
+    ],
+    "design_system_tools": [
+      {
+        "name": "Storybook",
+        "url": "https://storybook.js.org/",
+        "description": "Component development and documentation tool",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Style Dictionary",
+        "url": "https://amzn.github.io/style-dictionary/",
+        "description": "Design token transformation tool for multi-platform systems",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Chromatic",
+        "url": "https://www.chromatic.com/",
+        "description": "Visual regression testing for Storybook",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Zeroheight",
+        "url": "https://zeroheight.com/",
+        "description": "Design system documentation platform",
+        "add_as_web_search": false
+      }
+    ],
+    "platform_guidelines": [
+      {
+        "name": "Apple Human Interface Guidelines",
+        "url": "https://developer.apple.com/design/human-interface-guidelines/",
+        "description": "Apple platform design guidance (iOS, iPadOS, macOS, watchOS, tvOS, visionOS)",
+        "add_as_web_search": true
+      },
+      {
+        "name": "iOS Accessibility Guidelines 2025",
+        "url": "https://developer.apple.com/accessibility/",
+        "description": "Apple accessibility standards including Dynamic Type, VoiceOver, and assistive technologies",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Material Design 3 - Dynamic Color",
+        "url": "https://m3.material.io/styles/color/dynamic-color/overview",
+        "description": "Android 12+ Material You dynamic color system and personalization",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Android Large Screen Guidelines",
+        "url": "https://developer.android.com/large-screens",
+        "description": "Foldables, tablets, and desktop Android UI patterns",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Android Predictive Back",
+        "url": "https://developer.android.com/guide/navigation/predictive-back-gesture",
+        "description": "Android 13+ predictive back gesture implementation guide",
+        "add_as_web_search": true
+      }
+    ],
+    "web_standards": [
+      {
+        "name": "HTML Living Standard",
+        "url": "https://html.spec.whatwg.org/",
+        "description": "Authoritative HTML specification (semantics, forms, accessibility-relevant behavior)",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Media Queries Level 5",
+        "url": "https://www.w3.org/TR/mediaqueries-5/",
+        "description": "W3C spec defining user preference queries like prefers-reduced-motion",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Media Queries Level 4 (Pointer/Hover)",
+        "url": "https://www.w3.org/TR/mediaqueries-4/#mf-interaction",
+        "description": "W3C spec for input capability queries like pointer and hover",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Pointer Events",
+        "url": "https://www.w3.org/TR/pointerevents/",
+        "description": "W3C Recommendation covering cross-input pointer events",
+        "add_as_web_search": false
+      }
+    ],
+    "design_tokens_2025": [
+      {
+        "name": "Design Tokens Community Group Specification",
+        "url": "https://tr.designtokens.org/",
+        "description": "W3C DTCG format specification (2025.10) for .tokens.json files",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Design Tokens Community Group GitHub",
+        "url": "https://github.com/design-tokens/community-group",
+        "description": "Official DTCG repository with specification development and examples",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Tokens Studio for Figma",
+        "url": "https://tokens.studio/",
+        "description": "Figma plugin for design token management syncing with DTCG format",
+        "add_as_web_search": true
+      }
+    ],
+    "performance_ux": [
+      {
+        "name": "web.dev Core Web Vitals",
+        "url": "https://web.dev/vitals/",
+        "description": "Google's Core Web Vitals metrics (LCP, INP, CLS) and UX thresholds",
+        "add_as_web_search": true
+      },
+      {
+        "name": "web.dev Performance Patterns",
+        "url": "https://web.dev/patterns/performance/",
+        "description": "Performance optimization patterns including loading and rendering strategies",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Interaction to Next Paint (INP)",
+        "url": "https://web.dev/inp/",
+        "description": "INP metric guidance replacing FID for Core Web Vitals",
+        "add_as_web_search": false
+      }
+    ],
+    "wcag_3_preview": [
+      {
+        "name": "WCAG 3.0 Working Draft",
+        "url": "https://www.w3.org/TR/wcag-3.0/",
+        "description": "W3C WCAG 3.0 draft with new scoring system (0-4) and Bronze/Silver/Gold conformance levels",
+        "add_as_web_search": true
+      },
+      {
+        "name": "WCAG 3 Introduction",
+        "url": "https://www.w3.org/WAI/standards-guidelines/wcag/wcag3-intro/",
+        "description": "W3C introduction to WCAG 3.0 changes and timeline",
+        "add_as_web_search": false
+      }
+    ],
+    "ai_ux_optional": [
+      {
+        "name": "Google PAIR Guidebook",
+        "url": "https://pair.withgoogle.com/guidebook/",
+        "description": "People + AI Research practical patterns for AI feature design (transparency, control, feedback)",
+        "add_as_web_search": true,
+        "optional_category": "ai_automation"
+      },
+      {
+        "name": "Microsoft HAX Toolkit",
+        "url": "https://www.microsoft.com/en-us/haxtoolkit/",
+        "description": "Human-AI eXperience toolkit with guidelines and design patterns",
+        "add_as_web_search": true,
+        "optional_category": "ai_automation"
+      },
+      {
+        "name": "Apple Machine Learning Design Guidelines",
+        "url": "https://developer.apple.com/design/human-interface-guidelines/machine-learning",
+        "description": "Apple HIG section on ML feature design principles",
+        "add_as_web_search": false,
+        "optional_category": "ai_automation"
+      },
+      {
+        "name": "Anthropic Responsible Scaling Policy",
+        "url": "https://www.anthropic.com/responsible-scaling-policy",
+        "description": "Anthropic's AI safety framework with graduated safeguards for responsible AI development",
+        "add_as_web_search": true,
+        "optional_category": "ai_automation"
+      }
+    ],
+    "ui_pattern_inspiration": [
+      {
+        "name": "Mobbin",
+        "url": "https://mobbin.com/",
+        "description": "Curated library of 300k+ mobile and web UI screenshots from real apps, searchable by flow type, screen type, and UI element",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Refero Design",
+        "url": "https://refero.design/",
+        "description": "Web design references from real products, organized by page type and industry",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Page Flows",
+        "url": "https://pageflows.com/",
+        "description": "User flow recordings from top apps showing onboarding, checkout, and other key flows",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Screenlane",
+        "url": "https://screenlane.com/",
+        "description": "Mobile UI inspiration with annotated screenshots and flow analysis",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Dribbble",
+        "url": "https://dribbble.com/",
+        "description": "Design community showcase for UI concepts and visual inspiration (filter for production designs)",
+        "add_as_web_search": false
+      }
+    ],
+    "demographic_inclusive_design": [
+      {
+        "name": "Nielsen Norman Group - Elderly UX",
+        "url": "https://www.nngroup.com/articles/usability-for-senior-citizens/",
+        "description": "Usability guidelines for older adults (65+), touch targets, cognitive load",
+        "add_as_web_search": true
+      },
+      {
+        "name": "W3C Cognitive Accessibility",
+        "url": "https://www.w3.org/WAI/cognitive/",
+        "description": "W3C guidance on cognitive accessibility and neurodiversity",
+        "add_as_web_search": true
+      },
+      {
+        "name": "British Dyslexia Association - Style Guide",
+        "url": "https://www.bdadyslexia.org.uk/advice/employers/creating-a-dyslexia-friendly-workplace/dyslexia-friendly-style-guide",
+        "description": "Typography and formatting guidelines for dyslexia-friendly design",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ADHD Foundation",
+        "url": "https://www.adhdfoundation.org.uk/",
+        "description": "ADHD awareness resources for designing ADHD-friendly interfaces",
+        "add_as_web_search": false
+      },
+      {
+        "name": "COPPA Compliance Guide",
+        "url": "https://www.ftc.gov/business-guidance/references/complying-coppa-frequently-asked-questions",
+        "description": "FTC guidance on designing for children under 13 (US)",
+        "add_as_web_search": true
+      },
+      {
+        "name": "W3C COGA Design Patterns",
+        "url": "https://www.w3.org/TR/coga-usable/",
+        "description": "W3C cognitive accessibility design patterns and guidance",
+        "add_as_web_search": false
+      }
+    ],
+    "cultural_localization": [
+      {
+        "name": "W3C Internationalization",
+        "url": "https://www.w3.org/International/",
+        "description": "W3C internationalization standards and best practices",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Nielsen Norman Group - International UX",
+        "url": "https://www.nngroup.com/articles/international-ux/",
+        "description": "International UX research and cultural design considerations",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Baymard Institute - International E-commerce UX",
+        "url": "https://baymard.com/blog/international-ecommerce-ux",
+        "description": "Research on international e-commerce UX patterns and localization",
+        "add_as_web_search": true
+      },
+      {
+        "name": "RTL Styling Guide",
+        "url": "https://rtlstyling.com/",
+        "description": "Comprehensive guide to right-to-left (RTL) CSS and layout patterns",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Material Design - Bidirectionality",
+        "url": "https://m3.material.io/foundations/layout/applying-layout/compact#bidirectionality",
+        "description": "Google Material Design guidance on RTL and bidirectional layouts",
+        "add_as_web_search": false
+      }
+    ],
+    "conversion_rate_optimization": [
+      {
+        "name": "Baymard Institute",
+        "url": "https://baymard.com/",
+        "description": "Large-scale UX research with checkout usability benchmarks and CRO data",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Nielsen Norman Group - CRO",
+        "url": "https://www.nngroup.com/articles/conversion-rate-optimization/",
+        "description": "Evidence-based conversion rate optimization guidance",
+        "add_as_web_search": true
+      },
+      {
+        "name": "CXL Institute",
+        "url": "https://cxl.com/",
+        "description": "Conversion optimization research, courses, and case studies",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google HEART Framework",
+        "url": "https://research.google/pubs/pub36299/",
+        "description": "Google's user-centered metrics framework (Happiness, Engagement, Adoption, Retention, Task success)",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Unbounce CRO Resources",
+        "url": "https://unbounce.com/conversion-rate-optimization/",
+        "description": "Landing page optimization and CRO best practices",
+        "add_as_web_search": false
+      }
+    ],
+    "simplification_and_non_tech_ux": [
+      {
+        "name": "GOV.UK Design System",
+        "url": "https://design-system.service.gov.uk/",
+        "description": "UK government design system optimized for universal accessibility and low digital literacy",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Plain Language Guidelines (plainlanguage.gov)",
+        "url": "https://www.plainlanguage.gov/guidelines/",
+        "description": "US federal plain language guidelines for clear, understandable communication",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NNG - Low Literacy Users",
+        "url": "https://www.nngroup.com/articles/writing-for-lower-literacy-users/",
+        "description": "Nielsen Norman Group research on designing for users with lower literacy levels",
+        "add_as_web_search": true
+      },
+      {
+        "name": "W3C COGA Design Patterns",
+        "url": "https://www.w3.org/TR/coga-usable/",
+        "description": "W3C cognitive accessibility design patterns for users with cognitive and learning disabilities",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Hemingway Editor",
+        "url": "https://hemingwayapp.com/",
+        "description": "Reading level testing tool for validating content simplicity (target Grade 6-8)",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Good Things Foundation",
+        "url": "https://www.goodthingsfoundation.org/",
+        "description": "UK digital inclusion charity with research on digitally excluded populations",
+        "add_as_web_search": true
+      }
+    ],
+    "ai_design_tools_2025": [
+      {
+        "name": "Figma AI",
+        "url": "https://www.figma.com/ai/",
+        "description": "Figma's AI-powered design features for layout generation and suggestions",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Vercel v0",
+        "url": "https://v0.dev/",
+        "description": "AI-powered React/Tailwind/shadcn component code generation from prompts",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Stitch (formerly Galileo AI)",
+        "url": "https://stitch.withgoogle.com/",
+        "description": "AI-powered UI design generation from text descriptions — acquired by Google in 2025, now runs on Gemini models",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Relume",
+        "url": "https://www.relume.io/",
+        "description": "AI-powered sitemap and wireframe generator — generates complete sitemaps and wireframes from text prompts, integrates with Figma/Webflow",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Framer AI",
+        "url": "https://www.framer.com/ai",
+        "description": "AI-assisted website building and design generation",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Adobe Firefly",
+        "url": "https://www.adobe.com/products/firefly.html",
+        "description": "Adobe's generative AI for image creation and design assets",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Midjourney",
+        "url": "https://www.midjourney.com/",
+        "description": "AI image generation for design assets and illustrations",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

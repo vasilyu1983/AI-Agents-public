@@ -1,0 +1,354 @@
+{
+  "$schema": "./skill-dependencies-schema.json",
+  "metadata": {
+    "description": "Skill dependency graph for auto-generating Related Skills sections",
+    "updated": "2025-12-19",
+    "total_skills": 65,
+    "version": "1.3"
+  },
+  "domains": {
+    "software": {
+      "description": "Software engineering skills",
+      "skills": ["software-frontend", "software-backend", "software-mobile", "software-architecture-design", "software-clean-code-standard", "software-code-review", "software-security-appsec", "software-crypto-web3", "software-ui-ux-design", "software-ux-research", "software-localisation"]
+    },
+    "ai": {
+      "description": "AI/ML and LLM skills",
+      "skills": ["ai-agents", "ai-llm", "ai-llm-inference", "ai-ml-data-science", "ai-ml-timeseries", "ai-mlops", "ai-prompt-engineering", "ai-rag"]
+    },
+    "qa": {
+      "description": "Quality assurance and testing skills",
+      "skills": ["qa-agent-testing", "qa-testing-strategy", "qa-testing-playwright", "qa-testing-ios", "qa-debugging", "qa-observability", "qa-refactoring", "qa-resilience", "qa-docs-coverage"]
+    },
+    "ops": {
+      "description": "Operations and DevOps skills",
+      "skills": ["ops-devops-platform"]
+    },
+    "data": {
+      "description": "Data engineering skills",
+      "skills": ["data-sql-optimization", "data-lake-platform"]
+    },
+    "dev": {
+      "description": "Development workflow skills",
+      "skills": ["dev-api-design", "dev-dependency-management", "dev-workflow-planning", "dev-git-workflow", "dev-git-commit-message"]
+    },
+    "docs": {
+      "description": "Documentation skills",
+      "skills": ["docs-codebase", "docs-ai-prd"]
+    },
+    "document": {
+      "description": "Document processing skills",
+      "skills": ["document-pdf", "document-docx", "document-xlsx", "document-pptx"]
+    },
+    "claude-code": {
+      "description": "Claude Code specific skills",
+      "skills": ["agents-subagents", "claude-code-commands", "agents-hooks", "agents-mcp", "agents-project-memory", "agents-skills"]
+    },
+    "marketing": {
+      "description": "Marketing and SEO skills",
+      "skills": ["marketing-seo", "marketing-social-media", "marketing-leads-generation", "marketing-aeo-geo"]
+    },
+    "product": {
+      "description": "Product management skills",
+      "skills": ["product-management"]
+    },
+    "startup": {
+      "description": "Startup validation and opportunity discovery skills",
+      "skills": ["startup-idea-validation", "startup-review-mining", "startup-trend-prediction", "startup-competitive-analysis", "startup-business-models", "startup-go-to-market", "startup-fundraising"]
+    },
+    "routers": {
+      "description": "Meta-orchestration routers for intelligent skill routing",
+      "skills": ["router-main", "router-startup", "router-engineering", "router-operations"]
+    }
+  },
+  "dependencies": {
+    "software-frontend": {
+      "primary": ["software-backend", "dev-api-design", "qa-testing-playwright"],
+      "secondary": ["software-architecture-design", "software-ui-ux-design", "dev-git-workflow", "ops-devops-platform"],
+      "description_map": {
+        "software-backend": "Backend API development, Node.js, Prisma, authentication",
+        "dev-api-design": "REST/GraphQL API patterns, OpenAPI, versioning",
+        "qa-testing-playwright": "End-to-end testing with Playwright",
+        "software-architecture-design": "System design, scalability, microservices patterns",
+        "software-ui-ux-design": "UI/UX design patterns and accessibility",
+        "dev-git-workflow": "Git branching, PR workflow, commit conventions",
+        "ops-devops-platform": "Deployment, CI/CD, containerization, Kubernetes"
+      }
+    },
+    "software-backend": {
+      "primary": ["dev-api-design", "data-sql-optimization", "software-security-appsec"],
+      "secondary": ["software-architecture-design", "qa-testing-strategy", "ops-devops-platform", "qa-resilience"],
+      "description_map": {
+        "dev-api-design": "RESTful API patterns, GraphQL, versioning",
+        "data-sql-optimization": "SQL optimization, indexing, query tuning patterns",
+        "software-security-appsec": "Authentication/authorization and secure API design",
+        "software-architecture-design": "System decomposition, SLAs, and data flows",
+        "qa-testing-strategy": "Testing strategies, test pyramids, and coverage goals",
+        "ops-devops-platform": "CI/CD, infrastructure, and deployment safety",
+        "qa-resilience": "Resilience, retries, and failure playbooks"
+      }
+    },
+    "software-mobile": {
+      "primary": ["software-frontend", "software-backend", "qa-testing-ios"],
+      "secondary": ["software-ui-ux-design", "qa-resilience", "software-security-appsec"],
+      "description_map": {
+        "software-frontend": "Web-facing UI patterns and Next.js integration",
+        "software-backend": "API design, auth, and backend contracts for mobile clients",
+        "qa-testing-ios": "iOS testing with XCTest, UI automation",
+        "software-ui-ux-design": "Mobile UI/UX design patterns and accessibility",
+        "qa-resilience": "Resilience patterns for networked mobile apps",
+        "software-security-appsec": "Mobile security best practices"
+      }
+    },
+    "software-clean-code-standard": {
+      "primary": ["software-code-review", "qa-refactoring", "software-security-appsec"],
+      "secondary": ["software-architecture-design", "dev-git-workflow", "dev-workflow-planning"],
+      "description_map": {
+        "software-code-review": "Review workflow and judgment (cite CC-* IDs, avoid restating standards)",
+        "qa-refactoring": "Refactoring patterns, technical debt management, and quality gates",
+        "software-security-appsec": "Security deep dives beyond baseline clean code security hygiene",
+        "software-architecture-design": "System boundaries and architectural tradeoffs",
+        "dev-git-workflow": "PR workflows and branch protections for enforcement",
+        "dev-workflow-planning": "Process design, rollout planning, and adoption strategy"
+      }
+    },
+    "ai-agents": {
+      "primary": ["ai-llm", "ai-rag", "ai-prompt-engineering"],
+      "secondary": ["ai-mlops", "software-backend", "qa-observability"],
+      "description_map": {
+        "ai-llm": "LLM fundamentals, model selection, and integration patterns",
+        "ai-rag": "Retrieval-augmented generation patterns",
+        "ai-prompt-engineering": "Prompt design, optimization, and evaluation",
+        "ai-mlops": "ML model deployment, monitoring, and lifecycle",
+        "software-backend": "API integration and backend services for agents",
+        "qa-observability": "Monitoring and tracing for agent systems"
+      }
+    },
+    "ai-llm": {
+      "primary": ["ai-prompt-engineering", "ai-rag", "ai-agents"],
+      "secondary": ["ai-llm-inference", "ai-mlops", "software-backend"],
+      "description_map": {
+        "ai-prompt-engineering": "Prompt design and optimization",
+        "ai-rag": "Retrieval-augmented generation for grounded responses",
+        "ai-agents": "Agent architectures and orchestration",
+        "ai-llm-inference": "Inference optimization, vLLM, quantization",
+        "ai-mlops": "Model deployment and monitoring",
+        "software-backend": "Backend integration patterns for LLM apps"
+      }
+    },
+    "ops-devops-platform": {
+      "primary": ["software-architecture-design", "qa-resilience", "software-security-appsec"],
+      "secondary": ["qa-observability", "data-sql-optimization", "dev-git-workflow"],
+      "description_map": {
+        "software-architecture-design": "System design, scalability patterns",
+        "qa-resilience": "Chaos engineering, failure handling patterns",
+        "software-security-appsec": "Security hardening and compliance",
+        "qa-observability": "Monitoring, tracing, profiling",
+        "data-sql-optimization": "Database tuning and migrations",
+        "dev-git-workflow": "Git branching and CI/CD integration"
+      }
+    },
+    "qa-testing-strategy": {
+      "primary": ["qa-testing-playwright", "software-code-review", "qa-debugging"],
+      "secondary": ["qa-resilience", "qa-observability", "ops-devops-platform"],
+      "description_map": {
+        "qa-testing-playwright": "End-to-end testing with Playwright",
+        "software-code-review": "Code review best practices",
+        "qa-debugging": "Debugging strategies and tools",
+        "qa-resilience": "Resilience testing and chaos engineering",
+        "qa-observability": "Monitoring for test visibility",
+        "ops-devops-platform": "CI/CD integration for testing"
+      }
+    },
+    "dev-api-design": {
+      "primary": ["software-backend", "software-frontend", "docs-codebase"],
+      "secondary": ["software-architecture-design", "software-security-appsec", "qa-testing-strategy"],
+      "description_map": {
+        "software-backend": "Backend implementation of APIs",
+        "software-frontend": "Frontend consumption of APIs",
+        "docs-codebase": "API documentation patterns",
+        "software-architecture-design": "API architecture decisions",
+        "software-security-appsec": "API security best practices",
+        "qa-testing-strategy": "API testing strategies"
+      }
+    },
+    "product-management": {
+      "primary": ["docs-ai-prd", "dev-workflow-planning", "software-architecture-design"],
+      "secondary": ["software-ux-research", "marketing-leads-generation", "ai-agents", "startup-idea-validation"],
+      "description_map": {
+        "docs-ai-prd": "Product requirements documentation",
+        "dev-workflow-planning": "Development planning and estimation",
+        "software-architecture-design": "Technical architecture for products",
+        "software-ux-research": "User research for product decisions",
+        "marketing-leads-generation": "Go-to-market and growth strategies",
+        "ai-agents": "AI product patterns and agent architectures",
+        "startup-idea-validation": "Idea validation, hypothesis testing, Go/No-Go decisions"
+      }
+    },
+    "router-startup": {
+      "primary": ["startup-idea-validation", "startup-review-mining", "startup-trend-prediction"],
+      "secondary": ["product-management", "software-ux-research", "marketing-leads-generation", "router-engineering", "router-operations"],
+      "description_map": {
+        "startup-idea-validation": "9-dimension validation framework, Go/No-Go decisions",
+        "startup-review-mining": "Pain point extraction from reviews and testimonials",
+        "startup-trend-prediction": "Trend analysis, timing assessment, predictions",
+        "product-management": "Product strategy, discovery, roadmaps",
+        "software-ux-research": "User research methods and feedback analysis",
+        "marketing-leads-generation": "Go-to-market and growth strategies",
+        "router-engineering": "Technical implementation handoff",
+        "router-operations": "Testing and deployment handoff"
+      }
+    },
+    "router-engineering": {
+      "primary": ["ai-agents", "software-backend", "software-frontend"],
+      "secondary": ["ai-llm", "ai-rag", "router-startup", "router-operations"],
+      "description_map": {
+        "ai-agents": "AI agent architecture and patterns",
+        "software-backend": "Backend development and APIs",
+        "software-frontend": "Frontend development and UI",
+        "ai-llm": "LLM development and fine-tuning",
+        "ai-rag": "RAG and retrieval systems",
+        "router-startup": "Business strategy handoff",
+        "router-operations": "Testing and deployment handoff"
+      }
+    },
+    "router-operations": {
+      "primary": ["qa-testing-strategy", "ops-devops-platform", "qa-debugging"],
+      "secondary": ["qa-observability", "dev-git-workflow", "router-startup", "router-engineering"],
+      "description_map": {
+        "qa-testing-strategy": "Test strategy and planning",
+        "ops-devops-platform": "DevOps and deployment",
+        "qa-debugging": "Debugging and troubleshooting",
+        "qa-observability": "Monitoring and observability",
+        "dev-git-workflow": "Git branching and PR workflows",
+        "router-startup": "Business launch handoff",
+        "router-engineering": "Technical implementation handoff"
+      }
+    },
+    "startup-idea-validation": {
+      "primary": ["startup-review-mining", "startup-trend-prediction", "product-management"],
+      "secondary": ["software-ux-research", "marketing-leads-generation", "software-architecture-design"],
+      "description_map": {
+        "startup-review-mining": "Evidence gathering from reviews for validation",
+        "startup-trend-prediction": "Market timing and trend alignment assessment",
+        "product-management": "Discovery, hypothesis testing, customer interviews",
+        "software-ux-research": "User research for problem validation",
+        "marketing-leads-generation": "GTM validation and channel testing",
+        "software-architecture-design": "Technical feasibility assessment"
+      }
+    },
+    "startup-review-mining": {
+      "primary": ["startup-idea-validation", "startup-trend-prediction", "software-ux-research"],
+      "secondary": ["product-management", "marketing-social-media", "marketing-leads-generation"],
+      "description_map": {
+        "startup-idea-validation": "Feed pain points into validation scorecard",
+        "startup-trend-prediction": "Correlate pain patterns with market trends",
+        "software-ux-research": "User research and feedback analysis techniques",
+        "product-management": "Discovery insights and opportunity identification",
+        "marketing-social-media": "Social sentiment analysis",
+        "marketing-leads-generation": "Competitive positioning insights"
+      }
+    },
+    "startup-trend-prediction": {
+      "primary": ["startup-idea-validation", "startup-review-mining", "product-management"],
+      "secondary": ["ai-ml-data-science", "ai-agents", "marketing-leads-generation"],
+      "description_map": {
+        "startup-idea-validation": "Timing input for validation scoring",
+        "startup-review-mining": "Correlate trends with market pain patterns",
+        "product-management": "Strategic timing for product decisions",
+        "ai-ml-data-science": "ML trend analysis and forecasting patterns",
+        "ai-agents": "AI/ML trend tracking and predictions",
+        "marketing-leads-generation": "Market timing for GTM strategies"
+      }
+    },
+    "startup-competitive-analysis": {
+      "primary": ["startup-idea-validation", "startup-business-models", "startup-go-to-market"],
+      "secondary": ["startup-review-mining", "product-management", "marketing-leads-generation"],
+      "description_map": {
+        "startup-idea-validation": "Competitive moat scoring for validation",
+        "startup-business-models": "Competitive pricing and unit economics analysis",
+        "startup-go-to-market": "Positioning and channel differentiation",
+        "startup-review-mining": "Competitor weakness extraction from reviews",
+        "product-management": "Product positioning and feature differentiation",
+        "marketing-leads-generation": "Competitive messaging and battlecards"
+      }
+    },
+    "startup-business-models": {
+      "primary": ["startup-idea-validation", "startup-competitive-analysis", "startup-go-to-market"],
+      "secondary": ["startup-fundraising", "product-management", "ai-agents"],
+      "description_map": {
+        "startup-idea-validation": "Unit economics for validation scoring",
+        "startup-competitive-analysis": "Competitive pricing analysis",
+        "startup-go-to-market": "Pricing strategy for GTM",
+        "startup-fundraising": "Unit economics for investor presentations",
+        "product-management": "Revenue model alignment with product strategy",
+        "ai-agents": "AI agent/service pricing and economics"
+      }
+    },
+    "startup-go-to-market": {
+      "primary": ["startup-competitive-analysis", "startup-business-models", "marketing-leads-generation"],
+      "secondary": ["product-management", "marketing-social-media", "startup-idea-validation"],
+      "description_map": {
+        "startup-competitive-analysis": "Positioning and differentiation for GTM",
+        "startup-business-models": "Pricing and revenue model for launch",
+        "marketing-leads-generation": "Lead generation and channel execution",
+        "product-management": "Product-market fit and launch coordination",
+        "marketing-social-media": "Social media GTM channels",
+        "startup-idea-validation": "Validation of GTM assumptions"
+      }
+    },
+    "startup-fundraising": {
+      "primary": ["startup-business-models", "startup-competitive-analysis", "startup-idea-validation"],
+      "secondary": ["product-management", "startup-go-to-market", "startup-trend-prediction"],
+      "description_map": {
+        "startup-business-models": "Unit economics and revenue model for pitch",
+        "startup-competitive-analysis": "Moat and positioning for investors",
+        "startup-idea-validation": "Validation evidence for pitch deck",
+        "product-management": "Product roadmap for investor materials",
+        "startup-go-to-market": "GTM strategy for growth projections",
+        "startup-trend-prediction": "Market timing narrative for investors"
+      }
+    }
+  },
+  "cross_domain_links": {
+    "testing": {
+      "skills": ["qa-testing-strategy", "qa-testing-playwright", "qa-testing-ios"],
+      "related_domains": ["software", "ops"]
+    },
+    "security": {
+      "skills": ["software-security-appsec"],
+      "related_domains": ["software", "ops", "ai"]
+    },
+    "observability": {
+      "skills": ["qa-observability", "qa-debugging"],
+      "related_domains": ["ops", "software", "ai"]
+    },
+    "documentation": {
+      "skills": ["docs-codebase", "docs-ai-prd", "qa-docs-coverage"],
+      "related_domains": ["software", "product", "dev"]
+    },
+    "validation": {
+      "skills": ["startup-idea-validation", "startup-review-mining", "startup-trend-prediction"],
+      "related_domains": ["startup", "product", "marketing"]
+    },
+    "discovery": {
+      "skills": ["startup-review-mining", "software-ux-research", "product-management"],
+      "related_domains": ["startup", "product", "software"]
+    },
+    "competitive": {
+      "skills": ["startup-competitive-analysis", "startup-business-models", "marketing-leads-generation"],
+      "related_domains": ["startup", "marketing", "product"]
+    },
+    "monetization": {
+      "skills": ["startup-business-models", "startup-go-to-market", "startup-fundraising"],
+      "related_domains": ["startup", "product", "marketing"]
+    },
+    "agent_services": {
+      "skills": ["ai-agents", "ai-mlops", "qa-agent-testing"],
+      "related_domains": ["ai", "ops", "qa"]
+    },
+    "routing": {
+      "skills": ["router-main", "router-startup", "router-engineering", "router-operations"],
+      "related_domains": ["all"]
+    }
+  }
+}

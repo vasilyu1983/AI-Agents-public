@@ -1,0 +1,19 @@
+# pnpm-workspace.yaml
+# Configuration for pnpm workspaces (monorepos)
+# Documentation: https://pnpm.io/workspaces
+
+packages:
+  # Include all packages in the packages directory
+  - 'packages/*'
+
+  # Include all apps in the apps directory
+  - 'apps/*'
+
+  # Include additional workspaces
+  - 'libs/*'
+  - 'tools/*'
+
+  # Exclude specific directories
+  - '!**/test/**'
+  - '!**/dist/**'
+  - '!**/node_modules/**'

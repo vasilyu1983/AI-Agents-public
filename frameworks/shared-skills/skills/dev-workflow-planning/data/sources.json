@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "title": "Workflow Planning - Sources",
+    "description": "High-signal sources for planning levels, Definition of Ready/Done, slicing, acceptance criteria, and delivery/flow metrics",
+    "last_updated": "2026-01-17"
+  },
+  "planning_and_flow": [
+    {
+      "name": "DORA (DevOps Research and Assessment)",
+      "url": "https://dora.dev/",
+      "description": "Delivery and reliability metrics and research summaries (lead time, deployment frequency, MTTR, change failure rate)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "DORA 5 Metrics (2025 Update)",
+      "url": "https://cd.foundation/blog/2025/10/16/dora-5-metrics/",
+      "description": "Addition of Reliability as fifth DORA metric",
+      "add_as_web_search": true
+    },
+    {
+      "name": "DORA Metrics 2025 Best Practices",
+      "url": "https://www.oobeya.io/blog/dora-metrics-2025-best-practices",
+      "description": "2025 benchmarks, AI impact on metrics, calculation best practices",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Scrum Guide (Definition of Done, Sprint Planning)",
+      "url": "https://scrumguides.org/scrum-guide.html",
+      "description": "Official Scrum Guide reference for DoD and sprint planning",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Agile Alliance - Definition of Ready",
+      "url": "https://www.agilealliance.org/glossary/definition-of-ready/",
+      "description": "Definition of Ready concept and common usage",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Shape Up",
+      "url": "https://basecamp.com/shapeup",
+      "description": "Appetite-based scoping and shaping work before execution",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Atlassian WIP Limits Guide",
+      "url": "https://www.atlassian.com/agile/kanban/wip-limits",
+      "description": "WIP limits best practices for Kanban flow optimization",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Scrumban Framework Guide",
+      "url": "https://monday.com/blog/rnd/scrumban/",
+      "description": "Hybrid Scrum-Kanban methodology with planning triggers",
+      "add_as_web_search": true
+    }
+  ],
+  "acceptance_criteria_and_specs": [
+    {
+      "name": "Gherkin Syntax Reference",
+      "url": "https://cucumber.io/docs/gherkin/reference/",
+      "description": "Given/When/Then syntax reference for acceptance criteria",
+      "add_as_web_search": true
+    }
+  ],
+  "org_and_coordination": [
+    {
+      "name": "Team Topologies",
+      "url": "https://teamtopologies.com/",
+      "description": "Team interaction modes and organizational patterns for faster delivery with lower cognitive load",
+      "add_as_web_search": true
+    }
+  ],
+  "optional_ai": [
+    {
+      "name": "Planning automation with Claude Code (Optional)",
+      "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+      "description": "Optional AI-assisted workflows for planning (requires human validation)",
+      "add_as_web_search": true,
+      "optional": true
+    },
+    {
+      "name": "Addy Osmani - LLM Coding Workflow 2026",
+      "url": "https://addyosmani.com/blog/ai-coding-workflow/",
+      "description": "Planning-first approach for AI-assisted development, scope management patterns",
+      "add_as_web_search": true,
+      "optional": true
+    }
+  ]
+}

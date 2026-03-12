@@ -1,6 +1,6 @@
 ---
 name: software-crypto-web3
-description: Use when building blockchain applications or smart contracts across EVM (Solidity), Solana (Anchor/Rust), Cosmos (CosmWasm), and TON, including security/audit workflows, fuzz/invariant testing, upgrades, custody/signing, and backend integration (RPC, indexers, webhooks).
+description: Secure blockchain development for EVM, Solana, Cosmos, and TON. Use when building smart contracts, auditing, or integrating on-chain backends.
 ---
 
 # Software Crypto/Web3 Engineering
@@ -441,3 +441,9 @@ After searching, provide:
 
 ## Operational Playbooks
 - [references/operational-playbook.md](references/operational-playbook.md) - Smart contract architecture, security-first workflows, and platform-specific patterns
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

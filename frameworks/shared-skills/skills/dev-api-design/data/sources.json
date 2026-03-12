@@ -1,0 +1,182 @@
+{
+  "metadata": {
+    "title": "API Development & Design - Sources",
+    "description": "Primary standards and high-signal docs for REST/GraphQL/gRPC API design, error models, auth, governance, and operability",
+    "last_updated": "2026-01-17"
+  },
+  "standards_and_specs": [
+    {
+      "name": "RFC 9110 - HTTP Semantics",
+      "url": "https://datatracker.ietf.org/doc/html/rfc9110",
+      "description": "Canonical HTTP method semantics, caching, and safe/idempotent behavior",
+      "add_as_web_search": false
+    },
+    {
+      "name": "RFC 9457 - Problem Details for HTTP APIs",
+      "url": "https://datatracker.ietf.org/doc/html/rfc9457",
+      "description": "Standard error response format for HTTP APIs (obsoletes RFC 7807)",
+      "add_as_web_search": false
+    },
+    {
+      "name": "RFC 6585 - Additional HTTP Status Codes (429 Too Many Requests)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc6585",
+      "description": "Defines 429 Too Many Requests and related cache behavior",
+      "add_as_web_search": false
+    },
+    {
+      "name": "OpenAPI Specification (latest)",
+      "url": "https://spec.openapis.org/oas/latest.html",
+      "description": "Authoritative OpenAPI spec for API contracts and documentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GraphQL Specification",
+      "url": "https://spec.graphql.org/",
+      "description": "Official GraphQL specification and schema language",
+      "add_as_web_search": true
+    },
+    {
+      "name": "gRPC Documentation",
+      "url": "https://grpc.io/docs/",
+      "description": "Official gRPC guides (streaming, deadlines, load balancing)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Protocol Buffers (protobuf)",
+      "url": "https://protobuf.dev/",
+      "description": "Protobuf language guide and API reference",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AsyncAPI Specification",
+      "url": "https://www.asyncapi.com/docs",
+      "description": "Event-driven API specification for pub/sub and streaming APIs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OAuth 2.0 (RFC 6749)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc6749",
+      "description": "OAuth 2.0 authorization framework",
+      "add_as_web_search": false
+    },
+    {
+      "name": "JWT (RFC 7519)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc7519",
+      "description": "JSON Web Token standard",
+      "add_as_web_search": false
+    },
+    {
+      "name": "W3C Trace Context",
+      "url": "https://www.w3.org/TR/trace-context/",
+      "description": "Standard trace propagation (`traceparent`, `tracestate`) for distributed tracing",
+      "add_as_web_search": false
+    }
+  ],
+  "design_guides": [
+    {
+      "name": "Microsoft REST API Guidelines",
+      "url": "https://github.com/microsoft/api-guidelines",
+      "description": "REST API guidelines (resources, pagination, errors, compatibility)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Google API Design Guide",
+      "url": "https://cloud.google.com/apis/design",
+      "description": "Resource-oriented API design and compatibility guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Google API Improvement Proposals (AIP)",
+      "url": "https://google.aip.dev/",
+      "description": "API governance and review guidance (useful for consistent API reviews)",
+      "add_as_web_search": true
+    }
+  ],
+  "security_and_governance": [
+    {
+      "name": "OWASP API Security Top 10 (2023)",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "description": "Top API security risks and mitigations (current API-specific list)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OWASP Top 10 (2025)",
+      "url": "https://owasp.org/www-project-top-ten/",
+      "description": "Updated web application security risks including Supply Chain Failures",
+      "add_as_web_search": true
+    }
+  ],
+  "typescript_apis": [
+    {
+      "name": "tRPC Documentation",
+      "url": "https://trpc.io/docs",
+      "description": "TypeScript-first RPC framework with end-to-end type safety",
+      "add_as_web_search": true
+    },
+    {
+      "name": "T3 Stack (Next.js + tRPC)",
+      "url": "https://create.t3.gg/",
+      "description": "Full-stack TypeScript starter with tRPC, Prisma, NextAuth",
+      "add_as_web_search": true
+    }
+  ],
+  "ai_agent_apis": [
+    {
+      "name": "Model Context Protocol (MCP)",
+      "url": "https://modelcontextprotocol.io/introduction",
+      "description": "Anthropic's open standard for AI-to-API integration",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Specification",
+      "url": "https://spec.modelcontextprotocol.io/",
+      "description": "Technical specification for Model Context Protocol",
+      "add_as_web_search": true
+    }
+  ],
+  "tooling_and_testing": [
+    {
+      "name": "Spectral (OpenAPI linter)",
+      "url": "https://stoplight.io/open-source/spectral",
+      "description": "Lint OpenAPI documents and enforce style rules in CI",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAPI Generator",
+      "url": "https://openapi-generator.tech/",
+      "description": "Generate clients/servers/docs from OpenAPI specs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Pact (contract testing)",
+      "url": "https://docs.pact.io/",
+      "description": "Consumer-driven contract testing for microservices",
+      "add_as_web_search": true
+    }
+  ],
+  "observability": [
+    {
+      "name": "OpenTelemetry Documentation",
+      "url": "https://opentelemetry.io/docs/",
+      "description": "Vendor-neutral instrumentation and telemetry collection",
+      "add_as_web_search": true
+    }
+  ],
+  "legacy": [
+    {
+      "name": "RFC 7807 - Problem Details for HTTP APIs (Obsoleted)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc7807",
+      "description": "Legacy Problem Details RFC (obsoleted by RFC 9457); useful for older integrations",
+      "add_as_web_search": false
+    }
+  ],
+  "optional_ai": [
+    {
+      "name": "Postman AI (Optional)",
+      "url": "https://www.postman.com/postman-ai/",
+      "description": "AI features for API development (optional; requires human review)",
+      "add_as_web_search": true,
+      "optional": true
+    }
+  ]
+}

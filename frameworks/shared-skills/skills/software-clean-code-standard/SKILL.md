@@ -1,6 +1,6 @@
 ---
 name: software-clean-code-standard
-description: Canonical, cross-language clean code standard with stable rule IDs (CC-*). Use when writing/reviewing code, defining team standards, or mapping lint/CI findings to consistent CC-* rule citations.
+description: Cross-language clean code standard with stable CC-* rule IDs. Use when writing/reviewing code, defining team standards, or citing lint findings.
 ---
 
 # Clean Code Standard — Quick Reference
@@ -146,3 +146,9 @@ After searching, provide:
 - Rust analysis (clippy, cargo-deny)
 - Code quality metrics and reporting tools
 - AI-assisted code review tools
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

@@ -1,6 +1,6 @@
 ---
 name: ai-mlops
-description: Production MLOps and ML/LLM/agent security skill for deploying and operating ML systems in production (registry + CI/CD, serving, monitoring/drift, evaluation loops, incident response/runbooks, and governance), including GenAI security (prompt injection, jailbreaks, RAG security, privacy, and supply chain).
+description: Production MLOps covering CI/CD, serving, drift monitoring, and GenAI security. Use when deploying or operating ML and LLM systems in production.
 ---
 
 # MLOps & ML Security - Complete Reference (Jan 2026)
@@ -428,3 +428,9 @@ For adjacent topics, reference these skills:
 - **[data-lake-platform](../data-lake-platform/SKILL.md)** - Data lake/lakehouse infrastructure (ClickHouse, Iceberg, Kafka)
 
 Use this skill to **turn trained models into reliable services**, not to derive the model itself.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

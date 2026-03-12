@@ -1,0 +1,337 @@
+# Git Commit Message Generator - Project Configuration
+# This file customizes the skill behavior for your specific repository
+
+project:
+  name: "AI-Agents"
+  type: "documentation-repository"
+  description: "AI prompt and agent library with multi-framework support"
+
+# Directory patterns → Scope names
+# Patterns are matched in order (first match wins)
+scope_mapping:
+  # Framework-specific
+  "frameworks/claude-code-kit/**": "claude-kit"
+  "frameworks/codex-kit/**": "codex-kit"
+  "frameworks/gemini-kit/**": "gemini-kit"
+  "frameworks/shared-foundations/**": "shared-foundations"
+  "frameworks/a-smart-deploy/**": "smart-deploy"
+
+  # Custom GPT categories
+  "custom-gpt/education/**": "gpt-education"
+  "custom-gpt/lifestyle/**": "gpt-lifestyle"
+  "custom-gpt/productivity/**": "gpt-productivity"
+  "custom-gpt/programming/**": "gpt-programming"
+  "custom-gpt/research-n-analysis/**": "gpt-research"
+  "custom-gpt/writing/**": "gpt-writing"
+  "custom-gpt/altery/**": "gpt-altery"
+  "custom-gpt/**": "gpt"
+
+  # AI Agents
+  "ai-agents/**": "agents"
+
+  # Skills (cross-framework)
+  "**/skills/ai-prompt-engineering/**": "prompt-engineering"
+  "**/skills/ai-agents/**": "ai-agents"
+  "**/skills/ai-llm/**": "llm-engineering"
+  "**/skills/**": "skills"
+
+  # Documentation
+  "docs/agents/**": "docs-agents"
+  "docs/formatting/**": "docs-formatting"
+  "docs/diagrams/**": "docs-diagrams"
+  "docs/reference/**": "docs-reference"
+  "docs/**": "docs"
+
+  # Repository infrastructure
+  ".claude/**": "tooling"
+  ".cursor/**": "tooling"
+  ".github/**": "ci"
+
+  # Root config files
+  "CLAUDE.md": "meta"
+  "GEMINI.md": "meta"
+  "AGENTS.md": "meta"
+  "README.md": "docs"
+
+# Conventional Commits Configuration
+conventional_commits:
+  # Enforce scope for these types
+  require_scope_for: ["feat", "fix", "perf", "security"]
+
+  # Optional scope for these types
+  optional_scope_for: ["refactor", "test", "build", "ci", "docs", "style", "chore"]
+
+  # Maximum lengths
+  max_summary_length: 72  # Hard limit
+  ideal_summary_length: 50  # Soft limit (warn if exceeded)
+
+  # Summary line rules
+  imperative_mood: true
+  lowercase_description: true
+  no_period_at_end: true
+
+  # Multi-scope handling
+  allow_multiple_scopes: true
+  multi_scope_separator: ","
+  multi_scope_threshold: 3  # If >3 files across scopes, suggest broader scope
+
+# Tier System: Different format requirements by commit type
+tier_rules:
+  tier1:
+    types: ["feat", "fix", "perf", "security"]
+    description: "Critical commits requiring detailed documentation"
+    requirements:
+      - summary_line
+      - detailed_description
+      - affected_components
+      - impact_statement
+    format: |
+      <type>(<scope>): <summary>
+
+      - Detailed change 1
+      - Detailed change 2
+      - Detailed change 3
+
+      This change [impact statement - what user-facing benefit or risk addressed].
+
+      Affected files/components:
+      - path/to/file1
+      - path/to/file2
+
+  tier2:
+    types: ["refactor", "test", "build", "ci"]
+    description: "Standard commits requiring brief context"
+    requirements:
+      - summary_line
+      - brief_description
+      - affected_files
+    format: |
+      <type>(<scope>): <summary>
+
+      Brief explanation of what changed and why.
+
+      Files: path/to/file1, path/to/file2
+
+  tier3:
+    types: ["docs", "style", "chore"]
+    description: "Minor commits with optional description"
+    requirements:
+      - summary_line
+      - optional_description
+    format: |
+      <type>(<scope>): <summary>
+
+      [Optional: Additional context if needed]
+
+# Forbidden Patterns (case-insensitive)
+forbidden_patterns:
+  # Generic/vague messages
+  - pattern: "^(update|fix|change)\\s+(files?|stuff|things?|code)$"
+    reason: "Too vague - specify what was updated/fixed"
+    examples:
+      - "Update files → docs: update API reference"
+      - "Fix stuff → fix(auth): correct token validation"
+
+  # AI attribution (per your requirements)
+  - pattern: "generated with.*claude"
+    reason: "AI attribution not allowed in commit messages"
+
+  - pattern: "co-authored-by:\\s*claude"
+    reason: "AI attribution not allowed in commit messages"
+
+  - pattern: "noreply@anthropic\\.com"
+    reason: "AI attribution not allowed in commit messages"
+
+  # Work-in-progress markers
+  - pattern: "^wip[:\\s]"
+    reason: "WIP commits should be squashed before merging"
+    severity: "warning"  # Warning only, not blocking
+
+  - pattern: "^temp[:\\s]"
+    reason: "Temporary commits should be squashed before merging"
+    severity: "warning"
+
+  # Missing/invalid type prefix (Conventional Commits)
+  - pattern: "^(?!((feat|fix|perf|security|refactor|test|build|ci|docs|style|chore|revert))(\\([a-z0-9][a-z0-9,._-]*\\))?(!)?:\\s).+"
+    reason: "Commit must start with conventional prefix: type(scope): summary"
+
+  # Poor descriptions
+  - pattern: "^(feat|fix|docs)\\([^)]+\\):\\s*(add|update|fix|change)\\s*$"
+    reason: "Description too vague - specify what was added/fixed"
+    examples:
+      - "feat(api): add → feat(api): add user search endpoint"
+
+# Required Elements by Type
+required_elements:
+  feat:
+    - "What new functionality was added"
+    - "Which module/component affected"
+    - "User-facing benefit or use case"
+
+  fix:
+    - "What bug was fixed"
+    - "What incorrect behavior occurred"
+    - "How it was corrected"
+
+  security:
+    - "What vulnerability was addressed"
+    - "Severity level (if applicable)"
+    - "Whether it affects existing users"
+
+  perf:
+    - "What was optimized"
+    - "Measurable improvement (if available)"
+    - "Any trade-offs made"
+
+  refactor:
+    - "What was refactored"
+    - "Why the refactor was needed"
+    - "Confirmation of no behavior change"
+
+# Analysis Patterns: How to detect commit types from diffs
+analysis_patterns:
+  feat:
+    indicators:
+      file_patterns:
+        - "new file"
+        - "create mode"
+      code_patterns:
+        - "^\\+.*\\bfunction\\s+\\w+\\("  # New functions
+        - "^\\+.*\\bclass\\s+\\w+"  # New classes
+        - "^\\+.*\\bexport\\s+(function|class|const)"  # New exports
+        - "^\\+.*\\b(app\\.(get|post|put|delete)|router\\.)"  # New routes
+        - "^\\+.*\\bskill\\s*:"  # New skills
+        - "^\\+.*\\btemplate"  # New templates
+      minimum_additions: 20  # Threshold for feature vs. minor update
+
+  fix:
+    indicators:
+      file_patterns:
+        - "test\\.(js|ts|py|go)"  # Test file changes often indicate bug fixes
+      code_patterns:
+        - "^\\+.*\\bif\\s*\\("  # New conditionals (often validation fixes)
+        - "^\\+.*\\b(try|catch|throw|error)"  # Error handling
+        - "^-.*\\b(bug|issue|error|fail)"  # Removing buggy code
+        - "^\\+.*\\b(validate|sanitize|check)"  # Input validation
+      commit_message_hints:
+        - "\\b(bug|issue|error|crash|fail)\\b"
+
+  refactor:
+    indicators:
+      balanced_changes: true  # Similar additions and deletions
+      code_patterns:
+        - "^-.*\\bfunction\\s+\\w+\\(.*\\n^\\+.*\\bfunction\\s+\\w+\\("  # Renamed functions
+        - "extract|move|rename|reorganize"  # Common refactor words
+      no_new_features: true
+      test_coverage_unchanged: true
+
+  docs:
+    indicators:
+      file_patterns:
+        - "\\.md$"
+        - "\\.txt$"
+        - "README"
+        - "CHANGELOG"
+        - "/docs/"
+      exclude_with_code: false  # Allow mixed code + docs
+
+  test:
+    indicators:
+      file_patterns:
+        - "test\\.(js|ts|py|go|java)"
+        - "spec\\.(js|ts)"
+        - "__tests__/"
+        - "/tests?/"
+      code_patterns:
+        - "^\\+.*(describe|it|test|expect|assert)\\("
+
+  style:
+    indicators:
+      file_patterns:
+        - "\\.(css|scss|sass|less)$"
+        - "prettier"
+        - "eslint"
+      code_patterns:
+        - "^[+-]\\s*$"  # Only whitespace changes
+        - "formatting|indent|whitespace"
+
+  chore:
+    indicators:
+      file_patterns:
+        - "package\\.json"
+        - "package-lock\\.json"
+        - "yarn\\.lock"
+        - "requirements\\.txt"
+        - "Gemfile"
+        - "\\.gitignore"
+        - "\\.env"
+      commit_message_hints:
+        - "\\b(dependency|dependencies|deps|upgrade|bump)\\b"
+
+# Scope Detection Strategy
+scope_detection:
+  strategy: "smart"  # Options: smart, directory, manual, auto
+
+  # Smart detection rules
+  smart_rules:
+    # Single directory → Use that scope
+    - condition: "single_directory"
+      action: "use_directory_scope"
+
+    # Multiple files in same framework → Use framework scope
+    - condition: "same_framework"
+      action: "use_framework_scope"
+
+    # Changes span multiple frameworks → Use broader scope
+    - condition: "multiple_frameworks"
+      action: "suggest_broader_scope"
+      suggestions: ["frameworks", "cross-framework"]
+
+    # All files in docs/ → Use 'docs' scope
+    - condition: "all_in_docs"
+      action: "use_docs_scope"
+
+    # Mixed code + docs → Prefer code scope, note docs in description
+    - condition: "mixed_code_docs"
+      action: "prefer_code_scope"
+
+  # When to omit scope
+  omit_scope_when:
+    - "changes span more than 5 different scopes"
+    - "repository-wide refactor"
+    - "general documentation updates"
+
+# Output Preferences
+output:
+  show_analysis: true  # Show reasoning behind suggestions
+  show_alternatives: true  # Show alternative commit messages
+  alternative_count: 2  # Number of alternatives to generate
+  show_character_count: true  # Display character count for summary
+  show_tier: true  # Show which tier applies
+  show_validation: true  # Show validation results
+  color_coding: true  # Use color codes for terminal output
+
+# Validation Behavior
+validation:
+  mode: "strict"  # Options: strict, warning, disabled
+  block_on_forbidden: true  # Block commits with forbidden patterns
+  block_on_missing_required: true  # Block if required elements missing
+  block_on_length_exceeded: true  # Block if summary too long
+  allow_override: true  # Allow --no-verify bypass
+  show_examples_on_error: true  # Show examples when validation fails
+
+# Integration Settings (informational; no automation reads these fields)
+integration:
+  update_claude_md: false  # Docs live in CLAUDE.md/AGENTS.md
+  create_contributing_guide: false  # CONTRIBUTING.md is maintained manually
+  install_git_hooks: false  # Auto-install git hooks (set true to enable)
+
+# Metrics & Reporting
+metrics:
+  track_compliance: false  # Track format compliance over time
+  generate_reports: false  # Generate monthly compliance reports
+  report_path: ".claude/skills/dev-git-commit-message/reports/"
+
+# Version
+version: "2.1.1"
+last_updated: "2026-01-26"

@@ -1,0 +1,274 @@
+{
+  "metadata": {
+    "title": "Data Lake Platform - Sources",
+    "description": "Primary sources for lakehouse architecture, ingestion/CDC, open table formats, governance/lineage, and production operations",
+    "last_updated": "2026-01-26"
+  },
+  "architecture_and_modeling": [
+    {
+      "name": "Data Mesh Principles (Martin Fowler)",
+      "url": "https://martinfowler.com/articles/data-mesh-principles.html",
+      "description": "Data mesh concepts: domain ownership, data products, federated governance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Medallion Architecture (Databricks)",
+      "url": "https://www.databricks.com/glossary/medallion-architecture",
+      "description": "Bronze/Silver/Gold layering concept (use as a pattern reference; vendor framing)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Dimensional Modeling Techniques (Kimball Group)",
+      "url": "https://www.kimballgroup.com/data-warehouse-business-intelligence-references/kimball-techniques/dimensional-modeling-techniques/",
+      "description": "Dimensional modeling reference for BI-ready data products",
+      "add_as_web_search": true
+    }
+  ],
+  "open_table_formats": [
+    {
+      "name": "Apache XTable (Incubating)",
+      "url": "https://xtable.apache.org/",
+      "description": "Cross-format interoperability between Iceberg, Delta Lake, and Hudi (co-launched by Microsoft, Google, Onehouse)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Apache Iceberg Specification",
+      "url": "https://iceberg.apache.org/spec/",
+      "description": "Iceberg table format specification (snapshots, manifests, partitioning)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Iceberg REST Catalog (within Iceberg spec)",
+      "url": "https://iceberg.apache.org/spec/",
+      "description": "REST catalog API for Iceberg; search within the spec for catalog/REST sections",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Apache Iceberg Documentation",
+      "url": "https://iceberg.apache.org/docs/",
+      "description": "Iceberg docs including maintenance/compaction concepts",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Project Nessie",
+      "url": "https://projectnessie.org/",
+      "description": "Catalog with Git-like branching for data (often used with Iceberg)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Delta Lake Protocol",
+      "url": "https://github.com/delta-io/delta/blob/master/PROTOCOL.md",
+      "description": "Delta transaction log protocol (primary source for interoperability)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Apache Hudi Documentation",
+      "url": "https://hudi.apache.org/docs/overview",
+      "description": "Hudi table format docs (CDC/upserts, indexing, compaction)",
+      "add_as_web_search": true
+    }
+  ],
+  "file_formats": [
+    {
+      "name": "Apache Parquet Documentation",
+      "url": "https://parquet.apache.org/docs/",
+      "description": "Parquet format reference (schema, encoding, metadata)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Apache Avro Specification",
+      "url": "https://avro.apache.org/docs/current/spec.html",
+      "description": "Avro schema and serialization specification",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Apache Arrow Documentation",
+      "url": "https://arrow.apache.org/docs/",
+      "description": "Arrow in-memory format and ecosystem (useful for interchange and performance)",
+      "add_as_web_search": true
+    }
+  ],
+  "ingestion_cdc_streaming": [
+    {
+      "name": "dlt Documentation",
+      "url": "https://dlthub.com/docs",
+      "description": "dlt ingestion framework documentation (incremental loads, schema evolution patterns)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Airbyte Documentation",
+      "url": "https://docs.airbyte.com",
+      "description": "Airbyte connector and deployment documentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Debezium Documentation",
+      "url": "https://debezium.io/documentation/",
+      "description": "CDC patterns and connector documentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Apache Kafka Documentation",
+      "url": "https://kafka.apache.org/documentation/",
+      "description": "Kafka fundamentals (topics, partitions, retention, consumer groups)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Apache Flink Documentation",
+      "url": "https://flink.apache.org/what-is-flink/",
+      "description": "Stream processing concepts and architecture entry point",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Spark Structured Streaming Programming Guide",
+      "url": "https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html",
+      "description": "Structured Streaming guide (exactly-once semantics, checkpoints, sinks)",
+      "add_as_web_search": true
+    }
+  ],
+  "transformation_and_quality": [
+    {
+      "name": "SQLMesh Documentation",
+      "url": "https://sqlmesh.readthedocs.io/",
+      "description": "SQLMesh docs (plan/apply workflow, environments, audits/tests)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SQLMesh vs dbt Benchmark (Tobiko/Databricks)",
+      "url": "https://www.tobikodata.com/blog/tobiko-dbt-benchmark-databricks",
+      "description": "2025 benchmark blog comparing SQLMesh and dbt (treat as one data point; validate against your workload)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "dbt Documentation",
+      "url": "https://docs.getdbt.com/",
+      "description": "dbt docs (models, tests, exposures, semantic layer)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "dbt Semantic Layer",
+      "url": "https://docs.getdbt.com/docs/build/semantic-models",
+      "description": "dbt semantic layer for metrics definitions and LLM-based querying",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Great Expectations Documentation",
+      "url": "https://docs.greatexpectations.io/",
+      "description": "Data quality testing framework documentation",
+      "add_as_web_search": true
+    }
+  ],
+  "governance_lineage": [
+    {
+      "name": "OpenLineage Documentation",
+      "url": "https://openlineage.io/docs/",
+      "description": "Open lineage spec and integrations (lineage events, jobs, runs, datasets)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "DataHub Documentation",
+      "url": "https://datahubproject.io/docs/",
+      "description": "Metadata platform docs (catalog, lineage, governance workflows)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenMetadata Documentation",
+      "url": "https://docs.open-metadata.org/",
+      "description": "Metadata, lineage, and governance docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Apache Ranger Documentation",
+      "url": "https://ranger.apache.org/",
+      "description": "Centralized authorization and auditing for Hadoop/lake ecosystems",
+      "add_as_web_search": true
+    }
+  ],
+  "query_engines": [
+    {
+      "name": "Trino Documentation",
+      "url": "https://trino.io/docs/current/",
+      "description": "Trino query engine documentation (architecture, connectors, tuning)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Trino Iceberg Connector",
+      "url": "https://trino.io/docs/current/connector/iceberg.html",
+      "description": "How to query Iceberg tables from Trino (catalogs, maintenance, performance)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Spark SQL, DataFrames and Datasets Guide",
+      "url": "https://spark.apache.org/docs/latest/sql-programming-guide.html",
+      "description": "Spark SQL reference for transformations and lakehouse workloads",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ClickHouse Query Optimization Guide",
+      "url": "https://clickhouse.com/resources/engineering/clickhouse-query-optimisation-definitive-guide",
+      "description": "Definitive 2026 guide: ORDER BY design, join reordering, lazy materialization",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ClickHouse 2025 Features",
+      "url": "https://clickhouse.com/blog/alexey-favorite-features-2025",
+      "description": "2025 feature highlights: vector search, full-text search, data lake integration",
+      "add_as_web_search": true
+    },
+    {
+      "name": "DuckDB Documentation",
+      "url": "https://duckdb.org/docs/",
+      "description": "DuckDB in-process OLAP database documentation",
+      "add_as_web_search": true
+    }
+  ],
+  "data_observability": [
+    {
+      "name": "Monte Carlo Data Observability",
+      "url": "https://www.montecarlodata.com/",
+      "description": "Enterprise data observability platform (freshness, volume, schema, distribution)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Datafold",
+      "url": "https://www.datafold.com/",
+      "description": "Data diffing and CI/CD integration for data quality",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Elementary Data",
+      "url": "https://www.elementary-data.com/",
+      "description": "Open-source dbt-native data observability",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Soda Data Quality",
+      "url": "https://www.soda.io/",
+      "description": "Data quality checks and contracts platform",
+      "add_as_web_search": true
+    }
+  ],
+  "format_comparisons": [
+    {
+      "name": "Iceberg vs Delta vs Hudi Comparison (LakeFS)",
+      "url": "https://lakefs.io/blog/hudi-iceberg-and-delta-lake-data-lake-table-formats-compared/",
+      "description": "Comprehensive 2025 comparison of open table formats with Hudi Iceberg support",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Data Lakehouse Guide 2025-2026",
+      "url": "https://dev.to/alexmercedcoder/the-2025-2026-ultimate-guide-to-the-data-lakehouse-and-the-data-lakehouse-ecosystem-dig",
+      "description": "Comprehensive lakehouse ecosystem guide covering all major tools",
+      "add_as_web_search": true
+    }
+  ],
+  "optional_ai": [
+    {
+      "name": "Automated anomaly detection for data quality (Optional)",
+      "url": "https://docs.greatexpectations.io/",
+      "description": "Optional automation layer for anomaly detection (requires explicit rules and human review)",
+      "add_as_web_search": true,
+      "optional": true
+    }
+  ]
+}

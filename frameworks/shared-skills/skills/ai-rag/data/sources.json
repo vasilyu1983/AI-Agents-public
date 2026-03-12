@@ -1,0 +1,253 @@
+{
+  "metadata": {
+    "skill": "ai-rag",
+    "updated": "2026-01-17",
+    "total_sources": 26,
+    "description": "Curated sources for production RAG and search: retrieval methods, grounding/citations, evaluation, agentic RAG, and operational controls.",
+    "version": "4.0"
+  },
+  "categories": {
+    "foundational_papers": [
+      {
+        "name": "Retrieval-Augmented Generation (RAG)",
+        "url": "https://arxiv.org/abs/2005.11401",
+        "type": "research",
+        "relevance": "Foundational RAG architecture; useful for reasoning about retrieval vs generation responsibilities.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Dense Passage Retrieval (DPR)",
+        "url": "https://arxiv.org/abs/2004.04906",
+        "type": "research",
+        "relevance": "Dense retrieval baseline; helpful for embedding-based retrieval design and evaluation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "BEIR: A Heterogeneous Benchmark for Zero-Shot Evaluation of Information Retrieval Models",
+        "url": "https://arxiv.org/abs/2104.08663",
+        "type": "research",
+        "relevance": "Benchmark and evaluation framing for retrieval models across diverse tasks and corpora.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "HyDE: Hypothetical Document Embeddings",
+        "url": "https://arxiv.org/abs/2212.10496",
+        "type": "research",
+        "relevance": "Query-side technique to improve dense retrieval when queries are underspecified.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Seven Failure Points in RAG Systems",
+        "url": "https://arxiv.org/abs/2401.05856",
+        "type": "research",
+        "relevance": "Failure taxonomy for RAG stages (chunking, retrieval, reranking, synthesis, citations).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Self-RAG",
+        "url": "https://arxiv.org/abs/2310.11511",
+        "type": "research",
+        "relevance": "Approach for deciding when to retrieve and how to use retrieved content; useful for adaptive retrieval design.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ColBERT: Contextualized Late Interaction over BERT",
+        "url": "https://github.com/stanford-futuredata/ColBERT",
+        "type": "research",
+        "relevance": "Late interaction retrieval achieving state-of-the-art precision; foundation for RAGatouille and multimodal variants.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Enhancing RAG: A Study of Best Practices (Jan 2026)",
+        "url": "https://arxiv.org/abs/2501.07391",
+        "type": "research",
+        "relevance": "Systematic investigation of RAG optimization factors including chunk size, query expansion, and retrieval stride.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Agentic RAG Survey",
+        "url": "https://arxiv.org/html/2501.09136v1",
+        "type": "research",
+        "relevance": "Comprehensive survey of agentic RAG architectures with autonomous decision-making and iterative reasoning.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Introduction to Information Retrieval",
+        "url": "https://nlp.stanford.edu/IR-book/",
+        "type": "book",
+        "relevance": "Foundational IR concepts (ranking, BM25-style retrieval, evaluation) that underpin production search.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "implementation_docs_and_tools": [
+      {
+        "name": "FAISS",
+        "url": "https://faiss.ai/",
+        "type": "library",
+        "relevance": "Similarity search library used as a reference for ANN indexing and evaluation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "pgvector",
+        "url": "https://github.com/pgvector/pgvector",
+        "type": "library",
+        "relevance": "Vector search in PostgreSQL; common choice when you already run Postgres.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "pgvectorscale (Timescale)",
+        "url": "https://github.com/timescale/pgvectorscale",
+        "type": "library",
+        "relevance": "pgvector extension with StreamingDiskANN; competitive with dedicated vector DBs up to 50M vectors.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "RAGatouille",
+        "url": "https://github.com/AnswerDotAI/RAGatouille",
+        "type": "library",
+        "relevance": "Easy-to-use ColBERT integration for RAG pipelines; bridges research and practical implementation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Chonkie",
+        "url": "https://github.com/bhavnicksm/chonkie",
+        "type": "library",
+        "relevance": "Chunking library with semantic and late chunking strategies; optimized for different document types.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LanceDB",
+        "url": "https://lancedb.com/",
+        "type": "library",
+        "relevance": "Embedded vector database with serverless support; emerging option for local-first and edge applications.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Elasticsearch Documentation",
+        "url": "https://www.elastic.co/guide/index.html",
+        "type": "documentation",
+        "relevance": "Reference for sparse retrieval, hybrid search patterns, and ranking pipelines at scale.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenSearch Documentation",
+        "url": "https://opensearch.org/docs/",
+        "type": "documentation",
+        "relevance": "Open-source search stack reference for hybrid search and operational patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Sentence Transformers",
+        "url": "https://www.sbert.net/",
+        "type": "framework",
+        "relevance": "Open embedding model ecosystem; useful for dense retrieval baselines and evaluation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Unstructured",
+        "url": "https://unstructured.io/",
+        "type": "tool",
+        "relevance": "Document parsing for PDFs/tables/images; useful for ingestion pipelines with mixed formats.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      }
+    ],
+    "evaluation_frameworks": [
+      {
+        "name": "RAGAS",
+        "url": "https://docs.ragas.io/",
+        "type": "framework",
+        "relevance": "Industry-standard RAG evaluation with faithfulness, context precision/recall, and answer relevance metrics.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepEval",
+        "url": "https://deepeval.com/",
+        "type": "framework",
+        "relevance": "LLM evaluation framework with debuggable metrics; LLM judge reasoning visible for debugging.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TruLens",
+        "url": "https://www.trulens.org/",
+        "type": "framework",
+        "relevance": "RAG evaluation and tracing with feedback functions; deep LangChain/LlamaIndex integration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "security_and_observability": [
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "specification",
+        "relevance": "Threat categories for prompt injection via retrieved text and data leakage in RAG pipelines.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Semantic Conventions for GenAI",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "type": "specification",
+        "relevance": "Telemetry standard for RAG pipeline tracing (retrieval latency, tokens, model metadata).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Contextual Retrieval",
+        "url": "https://www.anthropic.com/news/contextual-retrieval",
+        "type": "technique",
+        "relevance": "Chunk context augmentation technique; 49% reduction in retrieval failure with contextual embeddings + BM25.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

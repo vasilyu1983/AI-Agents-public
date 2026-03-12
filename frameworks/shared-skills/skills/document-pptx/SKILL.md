@@ -1,6 +1,7 @@
 ---
 name: document-pptx
-description: "Create, edit, and analyze PowerPoint (.pptx) presentations: generate decks (pitch/QBR/training), apply templates/masters, add charts/images/tables, manage speaker notes, and extract slide content. Use when users mention PowerPoint/PPTX, slides, pitch deck, QBR/board deck, or presentation automation. Supports python-pptx, PptxGenJS, and PPTX-Automizer."
+description: "Create/edit .pptx presentations with charts, templates, and speaker notes. Use when asked for pitch decks, QBR decks, or slide automation."
+allowed-tools: Bash, Read, Write, Glob, Grep
 ---
 
 # Document PPTX Skill - Quick Reference
@@ -305,3 +306,9 @@ Use only when explicitly requested and policy-compliant.
 - [../document-pdf/SKILL.md](../document-pdf/SKILL.md) - Export presentations to PDF
 - [../document-xlsx/SKILL.md](../document-xlsx/SKILL.md) - Data source for charts
 - [../product-management/SKILL.md](../product-management/SKILL.md) - Product strategy decks
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

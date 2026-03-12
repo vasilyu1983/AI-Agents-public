@@ -1,6 +1,6 @@
 ---
 name: qa-testing-strategy
-description: Risk-based quality engineering test strategy for software delivery. Use when defining or updating test strategy, selecting unit/integration/contract/E2E/performance/security coverage, setting CI quality gates and suite budgets, managing flaky tests and test data, and operationalizing observability-first debugging and release criteria.
+description: Risk-based test strategy for software delivery. Use when defining coverage, setting CI gates, managing flaky tests, or establishing release criteria.
 ---
 
 # QA Testing Strategy (Jan 2026)
@@ -170,6 +170,25 @@ class LoginPage {
 - Sleeps/time-based waits (use event-based)
 - Coverage % as primary quality KPI
 
+## Feature Matrix vs Test Matrix Gate (Release Blocking)
+
+Before release, run a coverage audit that maps product features/backlog IDs to direct test evidence.
+
+### Gate Rules
+
+- Every release-scoped feature must map to at least one direct automated test, or an explicit waiver with owner/date.
+- Evidence must include file path and test identifier (suite/spec/case).
+- "Covered indirectly" is not accepted without written rationale and risk acknowledgment.
+- If critical features have no direct evidence, release is blocked.
+
+### Minimal Audit Output
+
+- feature/backlog id
+- coverage status (`direct`, `indirect`, `none`)
+- evidence reference
+- risk level
+- owner and due date for gaps
+
 ## Resources
 
 | Resource | Purpose |
@@ -186,6 +205,7 @@ class LoginPage {
 | [test-environment-management.md](references/test-environment-management.md) | Environment provisioning and lifecycle |
 | [quality-metrics-dashboard.md](references/quality-metrics-dashboard.md) | Quality metrics and dashboards |
 | [compliance-testing.md](references/compliance-testing.md) | SOC2, HIPAA, GDPR, PCI-DSS testing |
+| [feature-matrix-vs-test-matrix-gate.md](references/feature-matrix-vs-test-matrix-gate.md) | Release-blocking feature-to-test coverage audit |
 
 ## Templates
 
@@ -201,6 +221,7 @@ class LoginPage {
 | [template-k6-load-testing.md](assets/performance/template-k6-load-testing.md) | k6 performance |
 | [automation-pipeline-template.md](assets/automation-pipeline-template.md) | CI stages, budgets, gates |
 | [template-cucumber-gherkin.md](assets/bdd/template-cucumber-gherkin.md) | BDD feature files and steps |
+| [template-release-coverage-audit.md](assets/runbooks/template-release-coverage-audit.md) | Feature matrix vs test matrix release audit |
 
 ## Data
 
@@ -252,3 +273,8 @@ Always report:
 - whether failures are pre-existing or introduced,
 - next blocking action.
 
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

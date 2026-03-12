@@ -1,0 +1,133 @@
+{
+  "metadata": {
+    "skill": "qa-resilience",
+    "updated": "2026-01-23",
+    "version": "2.2",
+    "total_sources": 16,
+    "description": "Primary references for resilience patterns, failure mode testing, chaos engineering, and production hardening."
+  },
+  "categories": {
+    "reliability_foundations": [
+      {
+        "name": "AWS Well-Architected - Reliability Pillar",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html",
+        "description": "Reliability principles, testing, recovery, and failure isolation guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Table of Contents",
+        "url": "https://sre.google/sre-book/table-of-contents/",
+        "description": "Foundational reliability concepts including monitoring, incident response, and release engineering.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Temporal - Error Handling in Distributed Systems",
+        "url": "https://temporal.io/blog/error-handling-in-distributed-systems",
+        "description": "Comprehensive guide to resilience patterns in distributed systems (2025).",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "chaos_engineering": [
+      {
+        "name": "Principles of Chaos Engineering",
+        "url": "https://principlesofchaos.org/",
+        "description": "Core chaos methodology: steady state, hypothesis, experiment design, and safe execution.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "AWS Fault Injection Service (FIS)",
+        "url": "https://docs.aws.amazon.com/fis/latest/userguide/what-is.html",
+        "description": "AWS managed chaos engineering service with safety mechanisms and experiment templates.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Azure Chaos Studio",
+        "url": "https://learn.microsoft.com/en-us/azure/chaos-studio/chaos-studio-overview",
+        "description": "Azure managed chaos engineering for resilience testing and validation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Chaos Toolkit Documentation",
+        "url": "https://chaostoolkit.org/",
+        "description": "Open-source chaos engineering framework and experiment definitions.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "LitmusChaos Documentation",
+        "url": "https://litmuschaos.io/",
+        "description": "Kubernetes-native chaos experiments and workflows.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Steadybit - Chaos Engineering Best Practices",
+        "url": "https://steadybit.com/blog/chaos-experiments/",
+        "description": "Modern chaos engineering experiments and best practices (2025-2026).",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "patterns_and_specs": [
+      {
+        "name": "Martin Fowler - Circuit Breaker",
+        "url": "https://martinfowler.com/bliki/CircuitBreaker.html",
+        "description": "Canonical circuit breaker pattern description and intent.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Microsoft Azure Architecture - Retry Pattern",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/retry",
+        "description": "Retry guidance for transient failures (backoff, jitter, idempotency considerations).",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Microsoft Azure Architecture - Circuit Breaker Pattern",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker",
+        "description": "Circuit breaker guidance for preventing cascading failures.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Microsoft Azure Architecture - Bulkhead Pattern",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead",
+        "description": "Bulkhead/isolation guidance to prevent resource exhaustion cascades.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Resilience4j Documentation",
+        "url": "https://resilience4j.readme.io/",
+        "description": "Modern Java resilience library (circuit breaker, rate limiter, retry, bulkhead). Hystrix successor.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "kubernetes": [
+      {
+        "name": "Kubernetes - Liveness, Readiness, Startup Probes",
+        "url": "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/",
+        "description": "Probe patterns and configuration for resilient deployments.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "optional_ai_automation": [
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "description": "Optional governance baseline when using AI to generate scenarios or summarize chaos results.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "metadata": {
+    "skill": "ai-ml-timeseries",
+    "updated": "2026-01-17",
+    "total_sources": 17,
+    "description": "Curated sources for production time series forecasting: temporal validation/backtesting, feature engineering, model selection, and deployment considerations.",
+    "version": "3.0"
+  },
+  "categories": {
+    "foundational_books_and_papers": [
+      {
+        "name": "Forecasting: Principles and Practice (3rd ed.)",
+        "url": "https://otexts.com/fpp3/",
+        "type": "book",
+        "relevance": "Canonical reference for forecasting principles, evaluation, and backtesting workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks",
+        "url": "https://arxiv.org/abs/1704.04110",
+        "type": "research",
+        "relevance": "Foundational deep learning approach for probabilistic forecasting with RNNs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Temporal Fusion Transformers",
+        "url": "https://arxiv.org/abs/1912.09363",
+        "type": "research",
+        "relevance": "Interpretable multi-horizon forecasting model; common reference for deep TS architectures.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "M5 Forecasting Accuracy Competition",
+        "url": "https://www.kaggle.com/competitions/m5-forecasting-accuracy",
+        "type": "examples",
+        "relevance": "Large-scale retail forecasting benchmark; useful for feature-based forecasting patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "toolkits_and_libraries": [
+      {
+        "name": "statsmodels Documentation",
+        "url": "https://www.statsmodels.org/",
+        "type": "documentation",
+        "relevance": "Classical time series models (ARIMA/SARIMAX/state space) and diagnostics.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "sktime Documentation",
+        "url": "https://www.sktime.net/",
+        "type": "documentation",
+        "relevance": "Unified Python framework for time series ML with consistent evaluation interfaces.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Prophet Documentation",
+        "url": "https://facebook.github.io/prophet/",
+        "type": "documentation",
+        "relevance": "Interpretable seasonal/trend decomposition model; common baseline for business forecasting.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LightGBM Documentation",
+        "url": "https://lightgbm.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Strong baseline for feature-based forecasting with lag/rolling/calendar features.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PyTorch Forecasting Documentation",
+        "url": "https://pytorch-forecasting.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Deep learning forecasting library; includes TFT and common multi-horizon patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GluonTS Documentation",
+        "url": "https://ts.gluon.ai/",
+        "type": "documentation",
+        "relevance": "Probabilistic forecasting toolkit with DeepAR and related models.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Darts Documentation",
+        "url": "https://unit8co.github.io/darts/",
+        "type": "documentation",
+        "relevance": "Time series ML library supporting classical and deep forecasting approaches.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "time_series_foundation_models": [
+      {
+        "name": "TimesFM 2.5",
+        "url": "https://github.com/google-research/timesfm",
+        "type": "research",
+        "relevance": "Google's time series foundation model with XReg covariate support; competitive zero-shot performance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Chronos-2 (Amazon)",
+        "url": "https://github.com/amazon-science/chronos-forecasting",
+        "type": "research",
+        "relevance": "Universal forecasting with multivariate/covariate support (Oct 2025); best accuracy on GIFT-Eval benchmarks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Chronos-2 Announcement Blog",
+        "url": "https://www.amazon.science/blog/introducing-chronos-2-from-univariate-to-universal-forecasting",
+        "type": "blog",
+        "relevance": "Official announcement covering Chronos-2 capabilities, Chronos-Bolt performance (250x faster), and benchmark results.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "datasets_and_benchmarks": [
+      {
+        "name": "Monash Time Series Forecasting Repository",
+        "url": "https://forecastingdata.org/",
+        "type": "reference",
+        "relevance": "Collection of forecasting datasets for evaluation and benchmarking.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "UCI Machine Learning Repository",
+        "url": "https://archive.ics.uci.edu/",
+        "type": "reference",
+        "relevance": "Dataset source for prototyping and baseline comparisons (verify suitability and licensing).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST AI Risk Management Framework 1.0",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+        "type": "specification",
+        "relevance": "Governance baseline for risk management; relevant for high-impact forecasting deployments.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

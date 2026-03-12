@@ -1,0 +1,682 @@
+{
+  "metadata": {
+    "skill": "software-mobile-development",
+    "updated": "2026-01-26",
+    "total_sources": 71,
+    "primary_platforms": "iOS (Swift), Android (Kotlin), React Native, Flutter, Kotlin Multiplatform",
+    "extensible": true,
+    "latest_updates": "Refreshed baselines to be version-agnostic, removed future-specific claims, and emphasized official release notes/policies for iOS, Android, React Native, Expo, and KMP."
+  },
+  "categories": {
+    "ios_swift": [
+      {
+        "name": "Swift Programming Language",
+        "url": "https://docs.swift.org/swift-book/",
+        "type": "language",
+        "relevance": "Official Swift language guide, syntax, features, best practices.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SwiftUI Documentation",
+        "url": "https://developer.apple.com/documentation/swiftui/",
+        "type": "framework",
+        "relevance": "Apple's declarative UI framework for iOS, macOS, watchOS, tvOS.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "iOS & iPadOS Release Notes",
+        "url": "https://developer.apple.com/documentation/ios-ipados-release-notes",
+        "type": "reference",
+        "relevance": "Authoritative platform changes impacting APIs, behavior, and compatibility.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Privacy Manifest Files",
+        "url": "https://developer.apple.com/documentation/bundlereferences/privacy_manifest_files",
+        "type": "documentation",
+        "relevance": "Declare collected data and required-reason APIs for the app and embedded SDKs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Background Tasks",
+        "url": "https://developer.apple.com/documentation/backgroundtasks",
+        "type": "framework",
+        "relevance": "iOS primitives for deferrable background processing with system scheduling.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Core ML",
+        "url": "https://developer.apple.com/documentation/coreml",
+        "type": "framework",
+        "relevance": "On-device ML inference and model integration on Apple platforms.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "UIKit Documentation",
+        "url": "https://developer.apple.com/documentation/uikit/",
+        "type": "framework",
+        "relevance": "Traditional iOS UI framework, mature patterns, extensive components.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Human Interface Guidelines (iOS)",
+        "url": "https://developer.apple.com/design/human-interface-guidelines/ios",
+        "type": "design",
+        "relevance": "Apple's official design guidelines, UI patterns, accessibility.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Core Data Documentation",
+        "url": "https://developer.apple.com/documentation/coredata/",
+        "type": "persistence",
+        "relevance": "Apple's object graph and persistence framework.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Swift Concurrency",
+        "url": "https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html",
+        "type": "language",
+        "relevance": "async/await, actors, structured concurrency patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Swift.org Concurrency Documentation",
+        "url": "https://www.swift.org/documentation/concurrency/",
+        "type": "documentation",
+        "relevance": "Swift Concurrency reference and patterns (async/await, actors, structured concurrency).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Adopting Swift 6 Strict Concurrency",
+        "url": "https://developer.apple.com/documentation/swift/adoptingswift6",
+        "type": "documentation",
+        "relevance": "Migration guide for Swift 6 data-race safety and strict concurrency checking.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TCA - The Composable Architecture",
+        "url": "https://github.com/pointfreeco/swift-composable-architecture",
+        "type": "library",
+        "relevance": "Composable Architecture for SwiftUI: State, Action, Reducer, Store pattern.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "iOS Platform Overview",
+        "url": "https://developer.apple.com/ios/",
+        "type": "documentation",
+        "relevance": "Apple platform overview and entry point for current SDKs, announcements, and resources.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "android_kotlin": [
+      {
+        "name": "Kotlin Language Documentation",
+        "url": "https://kotlinlang.org/docs/home.html",
+        "type": "language",
+        "relevance": "Official Kotlin language docs, coroutines, flows, idioms.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Jetpack Compose",
+        "url": "https://developer.android.com/jetpack/compose",
+        "type": "framework",
+        "relevance": "Modern declarative UI toolkit for Android.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Jetpack Compose Performance Best Practices",
+        "url": "https://developer.android.com/develop/ui/compose/performance/bestpractices",
+        "type": "guide",
+        "relevance": "Compose performance: remember, state deferral, recomposition optimization.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Android Platform Releases",
+        "url": "https://developer.android.com/about/versions",
+        "type": "documentation",
+        "relevance": "Android platform release information and behavior changes across versions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Play Integrity API",
+        "url": "https://developer.android.com/google/play/integrity",
+        "type": "security",
+        "relevance": "Device and app integrity verification; use instead of deprecated SafetyNet Attestation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Credential Manager",
+        "url": "https://developer.android.com/identity/sign-in/credential-manager",
+        "type": "identity",
+        "relevance": "Recommended Android API for passkeys, passwords, and federated sign-in.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Kotlin Multiplatform for Android",
+        "url": "https://developer.android.com/kotlin/multiplatform",
+        "type": "framework",
+        "relevance": "Official Google guidance on KMP for sharing code between Android and iOS.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Kotlin Multiplatform Development Roadmap",
+        "url": "https://blog.jetbrains.com/kotlin/2025/08/kmp-roadmap-aug-2025/",
+        "type": "roadmap",
+        "relevance": "JetBrains KMP roadmap: Compose Multiplatform iOS stable, Swift export, library compilation.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Android Developers Guide",
+        "url": "https://developer.android.com/guide",
+        "type": "documentation",
+        "relevance": "Official Android development guide, architecture, components.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Material Design 3",
+        "url": "https://m3.material.io/",
+        "type": "design",
+        "relevance": "Google's design system, components, theming, accessibility.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Room Persistence Library",
+        "url": "https://developer.android.com/training/data-storage/room",
+        "type": "persistence",
+        "relevance": "SQLite abstraction layer, type-safe database access.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Kotlin Coroutines",
+        "url": "https://kotlinlang.org/docs/coroutines-overview.html",
+        "type": "concurrency",
+        "relevance": "Asynchronous programming, flows, channels, structured concurrency.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "networking": [
+      {
+        "name": "URLSession",
+        "url": "https://developer.apple.com/documentation/foundation/urlsession",
+        "type": "networking",
+        "relevance": "iOS native networking API, async/await support.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Alamofire",
+        "url": "https://github.com/Alamofire/Alamofire",
+        "type": "library",
+        "relevance": "Popular Swift HTTP networking library.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Retrofit",
+        "url": "https://square.github.io/retrofit/",
+        "type": "library",
+        "relevance": "Type-safe HTTP client for Android and Java.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OkHttp",
+        "url": "https://square.github.io/okhttp/",
+        "type": "library",
+        "relevance": "Efficient HTTP client for Android, used by Retrofit.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "architecture": [
+      {
+        "name": "Android Architecture Components",
+        "url": "https://developer.android.com/topic/architecture",
+        "type": "architecture",
+        "relevance": "ViewModel, LiveData, Room, Navigation, best practices.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "iOS Architecture Patterns",
+        "url": "https://developer.apple.com/documentation/swift/adopting-common-protocols",
+        "type": "architecture",
+        "relevance": "MVVM, MVC, Coordinator patterns for iOS.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Clean Architecture (Mobile)",
+        "url": "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+        "type": "architecture",
+        "relevance": "Separation of concerns, testability, maintainability.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "dependency_injection": [
+      {
+        "name": "Hilt (Android)",
+        "url": "https://developer.android.com/training/dependency-injection/hilt-android",
+        "type": "library",
+        "relevance": "Dependency injection library built on Dagger.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Koin",
+        "url": "https://insert-koin.io/",
+        "type": "library",
+        "relevance": "Lightweight dependency injection framework for Kotlin.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Swinject (iOS)",
+        "url": "https://github.com/Swinject/Swinject",
+        "type": "library",
+        "relevance": "Dependency injection framework for Swift.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "navigation": [
+      {
+        "name": "Navigation (Jetpack)",
+        "url": "https://developer.android.com/guide/navigation",
+        "type": "framework",
+        "relevance": "Type-safe navigation with Safe Args, deep links.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SwiftUI Navigation",
+        "url": "https://developer.apple.com/documentation/swiftui/navigation",
+        "type": "framework",
+        "relevance": "NavigationStack, NavigationPath, deep linking.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "authentication": [
+      {
+        "name": "Keychain Services (iOS)",
+        "url": "https://developer.apple.com/documentation/security/keychain_services",
+        "type": "security",
+        "relevance": "Secure storage for passwords, tokens, credentials.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "EncryptedSharedPreferences (Android)",
+        "url": "https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences",
+        "type": "security",
+        "relevance": "Encrypted key-value storage for sensitive data.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Firebase Authentication",
+        "url": "https://firebase.google.com/docs/auth",
+        "type": "service",
+        "relevance": "Cross-platform authentication with email, phone, OAuth.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Android Credential Manager",
+        "url": "https://developer.android.com/identity/sign-in/credential-manager",
+        "type": "security",
+        "relevance": "Modern unified credential API for passkeys, passwords, and federated sign-in. Replaces deprecated patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "push_notifications": [
+      {
+        "name": "Apple Push Notification Service (APNs)",
+        "url": "https://developer.apple.com/documentation/usernotifications",
+        "type": "service",
+        "relevance": "iOS push notifications, authorization, handling.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Firebase Cloud Messaging (FCM)",
+        "url": "https://firebase.google.com/docs/cloud-messaging",
+        "type": "service",
+        "relevance": "Cross-platform push notifications for Android and iOS.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "testing": [
+      {
+        "name": "XCTest (iOS)",
+        "url": "https://developer.apple.com/documentation/xctest",
+        "type": "testing",
+        "relevance": "Apple's unit and UI testing framework.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "JUnit (Android)",
+        "url": "https://junit.org/junit5/",
+        "type": "testing",
+        "relevance": "Standard unit testing framework for Java/Kotlin.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Espresso (Android)",
+        "url": "https://developer.android.com/training/testing/espresso",
+        "type": "testing",
+        "relevance": "UI testing framework for Android apps.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "MockK",
+        "url": "https://mockk.io/",
+        "type": "testing",
+        "relevance": "Mocking library for Kotlin.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "cross_platform": [
+      {
+        "name": "React Native Documentation",
+        "url": "https://reactnative.dev/docs/getting-started",
+        "type": "framework",
+        "relevance": "Cross-platform mobile development with JavaScript/TypeScript.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React Native New Architecture",
+        "url": "https://reactnative.dev/docs/new-architecture-intro",
+        "type": "documentation",
+        "relevance": "New Architecture concepts (Fabric, TurboModules) and migration considerations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Flutter Documentation",
+        "url": "https://docs.flutter.dev/",
+        "type": "framework",
+        "relevance": "Cross-platform development with Dart: tooling, widgets, and platform integration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Expo Documentation",
+        "url": "https://docs.expo.dev/",
+        "type": "platform",
+        "relevance": "React Native toolchain and services.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Expo Changelog",
+        "url": "https://expo.dev/changelog",
+        "type": "changelog",
+        "relevance": "Expo SDK release notes and upgrade guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Compose Multiplatform",
+        "url": "https://www.jetbrains.com/lp/compose-multiplatform/",
+        "type": "framework",
+        "relevance": "JetBrains UI framework for iOS, Android, Desktop, and Web using Kotlin.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Compose Multiplatform Releases",
+        "url": "https://github.com/JetBrains/compose-multiplatform/releases",
+        "type": "changelog",
+        "relevance": "Release notes and upgrade information for Compose Multiplatform.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Expo Router",
+        "url": "https://docs.expo.dev/router/introduction/",
+        "type": "framework",
+        "relevance": "File-based routing for React Native with Expo. Native navigation, deep linking, web support.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "webview": [
+      {
+        "name": "WKWebView (iOS)",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebview",
+        "type": "framework",
+        "relevance": "Modern WebKit view for iOS, JavaScript bridge.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "WebView (Android)",
+        "url": "https://developer.android.com/reference/android/webkit/WebView",
+        "type": "framework",
+        "relevance": "Web content display in Android apps, JavaScript interface.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "deployment": [
+      {
+        "name": "App Store Connect",
+        "url": "https://developer.apple.com/app-store-connect/",
+        "type": "platform",
+        "relevance": "iOS app distribution, TestFlight, App Store submission.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Google Play Console",
+        "url": "https://play.google.com/console/about/",
+        "type": "platform",
+        "relevance": "Android app publishing, testing tracks, production rollout.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Fastlane",
+        "url": "https://docs.fastlane.tools/",
+        "type": "automation",
+        "relevance": "CI/CD automation for iOS and Android deployment.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "analytics_monitoring": [
+      {
+        "name": "Firebase Analytics",
+        "url": "https://firebase.google.com/docs/analytics",
+        "type": "analytics",
+        "relevance": "Cross-platform app analytics and user insights.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Crashlytics",
+        "url": "https://firebase.google.com/docs/crashlytics",
+        "type": "monitoring",
+        "relevance": "Crash reporting and stability insights.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Sentry",
+        "url": "https://docs.sentry.io/platforms/",
+        "type": "monitoring",
+        "relevance": "Error tracking and performance monitoring for mobile.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      }
+    ],
+    "mobile_security": [
+      {
+        "name": "OWASP Mobile Application Security",
+        "url": "https://owasp.org/www-project-mobile-app-security/",
+        "type": "security",
+        "relevance": "OWASP MAS project: MASVS verification standard and MASTG testing guide.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP MASTG (Mobile Application Security Testing Guide)",
+        "url": "https://mas.owasp.org/MASTG/",
+        "type": "security",
+        "relevance": "Comprehensive mobile security testing methodology and techniques.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP MASVS (Mobile Application Security Verification Standard)",
+        "url": "https://mas.owasp.org/MASVS/",
+        "type": "security",
+        "relevance": "Security requirements framework for mobile apps: MASVS-STORAGE, MASVS-CRYPTO, MASVS-AUTH, etc.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mobile Application Security Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Mobile_Application_Security_Cheat_Sheet.html",
+        "type": "security",
+        "relevance": "Quick reference for mobile security best practices.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "community_learning": [
+      {
+        "name": "Swift by Sundell",
+        "url": "https://www.swiftbysundell.com/",
+        "type": "blog",
+        "relevance": "iOS development tips, patterns, best practices.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Android Weekly",
+        "url": "https://androidweekly.net/",
+        "type": "newsletter",
+        "relevance": "Curated Android development news and articles.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "raywenderlich.com",
+        "url": "https://www.kodeco.com/",
+        "type": "tutorials",
+        "relevance": "Comprehensive iOS and Android tutorials.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

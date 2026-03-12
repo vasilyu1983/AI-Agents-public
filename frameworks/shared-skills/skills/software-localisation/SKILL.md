@@ -1,6 +1,6 @@
 ---
 name: software-localisation
-description: Production-grade i18n/l10n patterns for React, Vue, Angular, Next.js, and Node.js. Covers library selection (i18next/react-i18next, FormatJS/react-intl, next-intl, vue-i18n, @angular/localize, Lingui, typesafe-i18n), ICU message format, RTL support, locale routing/detection, TMS integration, string extraction, and CI/CD translation workflows. Use when setting up or debugging localisation in a codebase.
+description: Production-grade i18n/l10n for React, Vue, Angular, and Next.js with ICU format and RTL support. Use when setting up or debugging localisation.
 ---
 
 # Software Localisation - Quick Reference
@@ -332,6 +332,7 @@ Run this on every locale file in CI to catch silent key collisions before they r
 - [references/testing-i18n.md](references/testing-i18n.md) - Pseudo-localisation, visual regression, plural testing, missing translation CI detection
 - [references/accessibility-i18n.md](references/accessibility-i18n.md) - Screen readers across languages, ARIA in multilingual contexts, BiDi accessibility, IME
 - [references/content-management-patterns.md](references/content-management-patterns.md) - Translation memory, glossaries, context for translators, MTPE workflows, cost optimisation
+- [references/ops-runbook.md](references/ops-runbook.md) - LLM-safe triage scripts for large catalogs, key-parity checks, CI gate patterns
 
 ### Templates (Production Starters)
 
@@ -346,7 +347,7 @@ Run this on every locale file in CI to catch silent key collisions before they r
 ### Related Skills
 
 - [../software-frontend/SKILL.md](../software-frontend/SKILL.md) - Frontend architecture patterns (React, Vue, Angular, Next.js)
-- [../marketing-seo-complete/SKILL.md](../marketing-seo-complete/SKILL.md) - Hreflang, international SEO
+- [../marketing-seo/SKILL.md](../marketing-seo/SKILL.md) - Hreflang, international SEO
 
 ## Common Patterns
 
@@ -365,37 +366,9 @@ locales/
     └── ... (same structure)
 ```
 
-### Lazy Loading (Performance)
+### Lazy Loading and TypeScript Integration
 
-```typescript
-// i18next: Load namespaces on demand
-i18n.loadNamespaces('dashboard').then(() => {
-  // Dashboard translations now available
-});
-
-// React Suspense integration
-<Suspense fallback={<Loading />}>
-  <Dashboard />
-</Suspense>
-```
-
-### TypeScript Integration
-
-```typescript
-// resources.d.ts - Type-safe keys
-import common from './locales/en/common.json';
-
-declare module 'i18next' {
-  interface CustomTypeOptions {
-    defaultNS: 'common';
-    resources: {
-      common: typeof common;
-    };
-  }
-}
-
-// Now t('nonexistent') shows TypeScript error
-```
+Load namespaces on demand (`i18n.loadNamespaces`) and use `CustomTypeOptions` in i18next to get compile-time key safety. See [references/framework-guides.md](references/framework-guides.md) for per-framework setup with code examples.
 
 ## Anti-Patterns to Avoid
 
@@ -484,62 +457,16 @@ npm view typesafe-i18n version
 
 ## Ops Runbook: Large Locale Catalogs (LLM-Safe)
 
-Use this when locale catalogs are too large for single reads, mixed-language UI appears, or missing keys are reported.
+Use this when locale catalogs are too large for single reads, mixed-language UI appears, or missing keys are reported. See [references/ops-runbook.md](references/ops-runbook.md) for triage scripts, key-parity checks, hardcoded string sweeps, and CI gate patterns.
 
-### 90-Second Triage
-
-```bash
-# 1) Confirm locale file layout
-rg --files src/messages | sort
-
-# 2) Detect oversized catalogs before reading
-wc -l src/messages/en/*.json src/messages/*/*.json | sort -nr | head
-
-# 3) Chunk reads for large files (avoid tool limits)
-sed -n '1,200p' src/messages/en/landing.json
-sed -n '201,400p' src/messages/en/landing.json
-```
-
-### Key Parity Check (Base vs Target Locale)
-
-```bash
-BASE=en
-TARGET=ru
-
-jq -r 'paths(scalars) | join(".")' src/messages/$BASE/*.json | sort -u > /tmp/$BASE.keys
-jq -r 'paths(scalars) | join(".")' src/messages/$TARGET/*.json | sort -u > /tmp/$TARGET.keys
-
-# Missing in target
-comm -23 /tmp/$BASE.keys /tmp/$TARGET.keys
-
-# Extra in target
-comm -13 /tmp/$BASE.keys /tmp/$TARGET.keys
-```
-
-### Hardcoded UI String Sweep
-
-```bash
-# TSX/TS hardcoded literals (quick heuristic)
-rg -n --pcre2 '"[A-Za-z][^"\n]{2,}"' src --glob '*.tsx' --glob '*.ts'
-
-# JSX text nodes
-rg -n --pcre2 '>[A-Za-z][^<]{2,}<' src --glob '*.tsx'
-```
-
-### CI Gate Pattern (No Mixed Language)
-
-```bash
-# Fail build if known missing-key sentinel appears
-rg -n '__MISSING_I18N__|TODO_TRANSLATE' src/messages && exit 1 || true
-
-# Optional: block English fallback on localized, indexable routes
-rg -n 'fallback.*en|defaultLocale.*en' src/app src/lib
-```
-
-### Operational Rules
-
+**Operational Rules**:
 - Never read large locale files in one shot; always chunk.
 - Use key diff first, translation pass second.
 - Treat marketing/SEO locale key gaps as release blockers.
 - Do not auto-insert machine translations without a tracked review pass.
 
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

@@ -1,6 +1,6 @@
 ---
 name: qa-agent-testing
-description: "QA harness for agentic systems: scenario suites, determinism/flake controls, tool sandboxing, scoring rubrics (including LLM-as-judge), and regression protocols covering success, safety, reliability, latency, and cost."
+description: "QA harness for LLM agents: scenario suites, flake controls, tool sandboxing, LLM-as-judge scoring, and regression protocols."
 ---
 
 # QA Agent Testing (Jan 2026)
@@ -150,3 +150,9 @@ See [data/sources.json](data/sources.json) for:
 7. Log results in regression log
 
 > **Success Criteria:** Each of the 10 tasks scores >= 12/18 and each refusal scores >= 2/3 (or PASS by your policy oracle), with stable results across reruns and no new hard failures.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

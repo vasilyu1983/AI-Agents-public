@@ -1,6 +1,6 @@
 ---
 name: agents-hooks
-description: Create event-driven hooks for AI coding agent automation (Claude Code, Codex CLI). Configure hook events in settings or frontmatter, parse stdin JSON inputs, return decision-control JSON, and implement secure hook scripts.
+description: Event-driven hooks for AI coding agents. Use when automating Claude Code or Codex CLI with stdin JSON and decision-control responses.
 ---
 
 # Claude Code Hooks — Meta Reference
@@ -154,60 +154,7 @@ PreToolUse hooks can allow/deny/ask and optionally modify the tool input via `up
 
 Note: older `decision`/`reason` fields are deprecated; prefer the `hookSpecificOutput.*` fields.
 
-### Example: Redirect Sensitive File Edits
-
-```bash
-#!/bin/bash
-set -euo pipefail
-
-INPUT="$(cat)"
-FILE_PATH="$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')"
-
-# Redirect package-lock.json edits to /dev/null
-if [[ "$FILE_PATH" == *"package-lock.json" ]]; then
-  UPDATED_INPUT="$(echo "$INPUT" | jq -c '.tool_input | .file_path = "/dev/null"')"
-  jq -cn --argjson updatedInput "$UPDATED_INPUT" '{
-    hookSpecificOutput: {
-      hookEventName: "PreToolUse",
-      permissionDecision: "allow",
-      permissionDecisionReason: "Redirected write to /dev/null",
-      updatedInput: $updatedInput
-    }
-  }'
-  exit 0
-fi
-
-echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"allow"}}'
-```
-
-### Example: Strip Sensitive Files from Git Add
-
-```bash
-#!/bin/bash
-set -euo pipefail
-
-INPUT="$(cat)"
-TOOL_NAME="$(echo "$INPUT" | jq -r '.tool_name')"
-CMD="$(echo "$INPUT" | jq -r '.tool_input.command // empty')"
-
-if [[ "$TOOL_NAME" == "Bash" && "$CMD" =~ ^git[[:space:]]+add ]]; then
-  # Remove .env files from staging
-  SAFE_CMD="$(echo "$CMD" | sed 's/\.env[^ ]*//g')"
-  if [[ "$SAFE_CMD" != "$CMD" ]]; then
-    echo '{}' | jq -cn --arg cmd "$SAFE_CMD" '{
-      hookSpecificOutput: {
-        hookEventName: "PreToolUse",
-        permissionDecision: "allow",
-        permissionDecisionReason: "Removed .env from git add",
-        updatedInput: { command: $cmd }
-      }
-    }'
-    exit 0
-  fi
-fi
-
-echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"allow"}}'
-```
+See [hook-templates.md](references/hook-templates.md) for full examples: redirect sensitive file edits to `/dev/null` and strip `.env` files from `git add` commands.
 
 ---
 
@@ -281,164 +228,33 @@ Use this when frequent approval dialogs slow down repeated safe workflows.
 This reduces repeated permission interruptions while preserving high-safety boundaries.
 
 
+## Runtime Preflight Hooks (Mandatory for Tool Reliability)
+
+Add a lightweight runtime preflight hook when workflows depend on specific local tool versions (for example Node for JS REPL, test runners, linters).
+
+### Preflight Responsibilities
+
+- Verify required binaries exist.
+- Verify minimum version constraints.
+- Emit a clear remediation message when requirements are not met.
+- Fail fast before expensive task execution starts.
+
+### Recommended Trigger
+
+- `SessionStart` for general runtime checks.
+- `Setup` for repository bootstrap checks.
+
+### Minimal Policy
+
+- Keep checks deterministic and fast (<1s target).
+- Do not auto-install dependencies silently in hooks.
+- Print exact command the operator should run to remediate.
+
 ## Hook Templates
 
-### Pre-Tool Validation
+Copy-paste templates for the five most common hook scenarios: PreToolUse validation, PostToolUse formatting, PostToolUse security audit, Stop test runner, and SessionStart environment check.
 
-```bash
-#!/bin/bash
-set -euo pipefail
-
-INPUT="$(cat)"
-TOOL_NAME="$(echo "$INPUT" | jq -r '.tool_name')"
-CMD="$(echo "$INPUT" | jq -r '.tool_input.command // empty')"
-
-if [[ "$TOOL_NAME" == "Bash" ]]; then
-  # Block rm -rf /
-  if echo "$CMD" | grep -qE 'rm\s+-rf\s+/'; then
-    echo '{}' | jq -cn '{
-      hookSpecificOutput: {
-        hookEventName: "PreToolUse",
-        permissionDecision: "deny",
-        permissionDecisionReason: "Dangerous rm command detected"
-      }
-    }'
-    exit 0
-  fi
-
-  # Block force push to main
-  if echo "$CMD" | grep -qE 'git\s+push.*--force.*(main|master)'; then
-    echo '{}' | jq -cn '{
-      hookSpecificOutput: {
-        hookEventName: "PreToolUse",
-        permissionDecision: "deny",
-        permissionDecisionReason: "Force push to main/master not allowed"
-      }
-    }'
-    exit 0
-  fi
-
-  # Soft-warning: possible credential exposure
-  if echo "$CMD" | grep -qE '(password|secret|api_key)\s*='; then
-    echo '{}' | jq -cn '{
-      hookSpecificOutput: {
-        hookEventName: "PreToolUse",
-        permissionDecision: "ask",
-        permissionDecisionReason: "Possible credential exposure in command",
-        additionalContext: "Command may include a secret. Confirm intent and avoid committing secrets."
-      }
-    }'
-    exit 0
-  fi
-fi
-
-exit 0
-```
-
-### Post-Tool Formatting
-
-```bash
-#!/bin/bash
-set -euo pipefail
-
-INPUT="$(cat)"
-TOOL_NAME="$(echo "$INPUT" | jq -r '.tool_name')"
-FILE_PATH="$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')"
-
-if [[ "$TOOL_NAME" =~ ^(Edit|Write)$ && -n "$FILE_PATH" && -f "$FILE_PATH" ]]; then
-  case "$FILE_PATH" in
-    *.js|*.ts|*.jsx|*.tsx|*.json|*.md)
-      npx prettier --write "$FILE_PATH" 2>/dev/null || true
-      ;;
-    *.py)
-      ruff format "$FILE_PATH" 2>/dev/null || true
-      ;;
-    *.go)
-      gofmt -w "$FILE_PATH" 2>/dev/null || true
-      ;;
-    *.rs)
-      rustfmt "$FILE_PATH" 2>/dev/null || true
-      ;;
-  esac
-fi
-
-exit 0
-```
-
-### Post-Tool Security Audit
-
-```bash
-#!/bin/bash
-set -euo pipefail
-
-INPUT="$(cat)"
-TOOL_NAME="$(echo "$INPUT" | jq -r '.tool_name')"
-FILE_PATH="$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')"
-
-if [[ "$TOOL_NAME" =~ ^(Edit|Write)$ && -n "$FILE_PATH" && -f "$FILE_PATH" ]]; then
-  # Check for hardcoded secrets
-  if grep -qE '(password|secret|api_key|token)\s*[:=]\s*["\x27][^"\x27]+["\x27]' "$FILE_PATH"; then
-    echo "WARNING: Possible hardcoded secret in $FILE_PATH" >&2
-  fi
-
-  # Check for console.log in production code
-  if [[ "$FILE_PATH" =~ \.(ts|js|tsx|jsx)$ ]] && grep -q 'console.log' "$FILE_PATH"; then
-    echo "NOTE: console.log found in $FILE_PATH" >&2
-  fi
-fi
-
-exit 0
-```
-
-### Stop Hook (Run Tests)
-
-```bash
-#!/bin/bash
-set -euo pipefail
-
-# Run tests after Claude finishes
-cd "$CLAUDE_PROJECT_DIR"
-
-# Detect test framework
-if [[ -f "package.json" ]]; then
-  if grep -q '"vitest"' package.json; then
-    npm run test 2>&1 | head -50
-  elif grep -q '"jest"' package.json; then
-    npm test 2>&1 | head -50
-  fi
-elif [[ -f "pytest.ini" ]] || [[ -f "pyproject.toml" ]]; then
-  pytest --tb=short 2>&1 | head -50
-fi
-
-exit 0
-```
-
-### Session Start
-
-```bash
-#!/bin/bash
-set -euo pipefail
-
-cd "$CLAUDE_PROJECT_DIR"
-
-# Check git status
-echo "=== Git Status ==="
-git status --short
-
-# Check for uncommitted changes
-if ! git diff --quiet; then
-  echo "WARNING: Uncommitted changes detected"
-fi
-
-# Verify dependencies
-if [[ -f "package.json" ]]; then
-  if [[ ! -d "node_modules" ]]; then
-    echo "NOTE: node_modules missing, run npm install"
-  fi
-fi
-
-exit 0
-```
+See [references/hook-templates.md](references/hook-templates.md) for all scripts.
 
 ---
 
@@ -454,18 +270,9 @@ Matchers filter which tool triggers the hook:
 
 ## Security Best Practices
 
-```text
-HOOK SECURITY CHECKLIST
+Hooks run with full user permissions outside the Bash tool sandbox. Key rules: validate all stdin input, quote every variable (`"$VAR"`), use absolute paths, never `eval` untrusted data, and set `-euo pipefail`.
 
-[ ] Validate all inputs with regex
-[ ] Quote all variables: "$VAR" not $VAR
-[ ] Use absolute paths
-[ ] No eval with untrusted input
-[ ] Set -euo pipefail at top
-[ ] Keep hooks fast (<1 second)
-[ ] Log actions for audit
-[ ] Test manually before deploying
-```
+See [references/hook-security.md](references/hook-security.md) for the full checklist, command injection prevention, path traversal defense, credential protection, and ShellCheck requirements.
 
 ---
 
@@ -510,12 +317,21 @@ echo $?
 
 ### Resources
 
+- [references/hook-templates.md](references/hook-templates.md) — Copy-paste hook scripts
 - [references/hook-patterns.md](references/hook-patterns.md) — Common patterns
 - [references/hook-security.md](references/hook-security.md) — Security guide
+- [references/runtime-preflight-hooks.md](references/runtime-preflight-hooks.md) — Runtime/version preflight patterns for SessionStart and Setup
 - [data/sources.json](data/sources.json) — Documentation links
+- [assets/template-preflight-runtime-hook.sh](assets/template-preflight-runtime-hook.sh) — Shell hook template for runtime/tool version checks
 
 ### Related Skills
 
 - [../agents-subagents/SKILL.md](../agents-subagents/SKILL.md) — Agent creation
 - [../agents-skills/SKILL.md](../agents-skills/SKILL.md) — Skill creation
 - [../ops-devops-platform/SKILL.md](../ops-devops-platform/SKILL.md) — CI/CD integration
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

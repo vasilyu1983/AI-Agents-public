@@ -1,0 +1,136 @@
+# pyproject.toml - Modern Python project configuration
+# Poetry documentation: https://python-poetry.org/docs/pyproject/
+
+[tool.poetry]
+name = "project-name"
+version = "0.1.0"
+description = "Project description"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/username/project"
+repository = "https://github.com/username/project"
+documentation = "https://project.readthedocs.io"
+keywords = ["keyword1", "keyword2"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+# Use caret (^) for flexible patch/minor updates
+requests = "^2.31.0"
+# Use tilde (~) for patch-only updates
+fastapi = "~0.104.0"
+# Use exact version for mission-critical deps
+pydantic = "==2.5.0"
+# Optional dependencies (install with: poetry install --extras "dev")
+uvicorn = {version = "^0.24.0", optional = true}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+black = "^23.11.0"
+ruff = "^0.1.6"
+mypy = "^1.7.0"
+pre-commit = "^3.5.0"
+
+[tool.poetry.group.test.dependencies]
+pytest-asyncio = "^0.21.0"
+pytest-mock = "^3.12.0"
+httpx = "^0.25.0"
+
+[tool.poetry.extras]
+dev = ["uvicorn"]
+
+[tool.poetry.scripts]
+# CLI commands
+app = "project.cli:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+# Black configuration
+[tool.black]
+line-length = 100
+target-version = ["py312", "py313"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | \.eggs
+  | build
+  | dist
+)/
+'''
+
+# Ruff configuration (Python linter)
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+]
+ignore = ["E501"]  # line too long (handled by black)
+
+[tool.ruff.isort]
+known-first-party = ["project"]
+
+# Pytest configuration
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--cov=project",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+    "-v",
+]
+
+# MyPy configuration
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+
+# Coverage configuration
+[tool.coverage.run]
+source = ["project"]
+omit = ["tests/*", "**/__pycache__/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]

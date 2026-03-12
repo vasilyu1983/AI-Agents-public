@@ -1,0 +1,179 @@
+{
+  "metadata": {
+    "skill": "qa-docs-coverage",
+    "updated": "2026-01-20",
+    "version": "3.1",
+    "total_sources": 23,
+    "description": "Primary references for documentation coverage, contracts, AI-assisted audits, documentation quality gates, and large codebase workflows."
+  },
+  "categories": {
+    "contracts_and_schemas": [
+      {
+        "name": "OpenAPI Specification (Latest)",
+        "url": "https://spec.openapis.org/oas/latest.html",
+        "description": "Industry standard for REST API contracts; use for shift-left validation and docs-as-tests.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "AsyncAPI Specification (v3)",
+        "url": "https://www.asyncapi.com/docs/reference/specification/v3.0.0",
+        "description": "Event-driven API contracts (Kafka, WebSocket, etc.).",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "JSON Schema",
+        "url": "https://json-schema.org/",
+        "description": "Schema standard for payload documentation and validation.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "documentation_frameworks": [
+      {
+        "name": "Diataxis Framework",
+        "url": "https://diataxis.fr/",
+        "description": "Docs structure model (tutorial/how-to/reference/explanation) for reducing doc debt and improving usability.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "The Good Docs Project",
+        "url": "https://www.thegooddocsproject.dev/",
+        "description": "Templates and best practices for documentation workflows.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Write the Docs - Guide",
+        "url": "https://www.writethedocs.org/guide/",
+        "description": "Community guide for documentation practices and workflows.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "documentation_quality_gates": [
+      {
+        "name": "Vale",
+        "url": "https://vale.sh/",
+        "description": "Prose linter for documentation quality checks in CI.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "markdownlint",
+        "url": "https://github.com/DavidAnson/markdownlint",
+        "description": "Markdown linter for consistent formatting.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "markdown-link-check",
+        "url": "https://github.com/tcort/markdown-link-check",
+        "description": "Broken link checking for Markdown files.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Spectral",
+        "url": "https://stoplight.io/spectral",
+        "description": "OpenAPI and AsyncAPI linting with custom rulesets for CI enforcement.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "api_coverage_tools": [
+      {
+        "name": "Swagger Coverage",
+        "url": "https://github.com/viclovsky/swagger-coverage",
+        "description": "OpenAPI specification coverage tool - tracks which endpoints are tested vs documented.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenAPI Coverage",
+        "url": "https://github.com/meetmatt/open-api-coverage",
+        "description": "Reports documented and executed parts of OpenAPI spec under test.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "AsyncAPI Studio",
+        "url": "https://studio.asyncapi.com/",
+        "description": "Visual editor and validator for AsyncAPI documents.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "ai_documentation_tools": [
+      {
+        "name": "Mintlify",
+        "url": "https://mintlify.com/",
+        "description": "AI-powered documentation platform with GitHub integration and docs-as-code workflow.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "DocuWriter.ai",
+        "url": "https://www.docuwriter.ai/",
+        "description": "Automated code documentation generation with n8n integration for CI/CD workflows.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Documentation.AI",
+        "url": "https://documentation.ai/",
+        "description": "AI documentation agent with MCP server support for agent-driven updates.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "optional_governance": [
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "description": "Optional governance baseline when using AI to draft or update documentation.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Model Context Protocol",
+        "url": "https://modelcontextprotocol.io/",
+        "description": "MCP servers for connecting AI agents to live documentation context.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "large_codebase_workflows": [
+      {
+        "name": "OpenAI AGENTS.md Guide",
+        "url": "https://developers.openai.com/codex/guides/agents-md",
+        "description": "Official OpenAI Codex documentation for AGENTS.md cross-platform standard.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenAI Codex Config Advanced",
+        "url": "https://developers.openai.com/codex/config-advanced/",
+        "description": "Advanced configuration for OpenAI Codex including file size limits and directory structure.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Anthropic: Claude Code Best Practices",
+        "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+        "description": "Official Anthropic best practices for Claude Code including large codebase strategies.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Anthropic: Claude Code Memory Documentation",
+        "url": "https://docs.anthropic.com/en/docs/claude-code/memory",
+        "description": "Official documentation for CLAUDE.md file format and hierarchical loading.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,1336 @@
+{
+  "metadata": {
+    "title": "UX Research & Analysis - Sources",
+    "description": "Curated resources for UX research methodologies, journey mapping, competitive analysis, usability testing, metrics frameworks, feedback analysis, research ops governance, demographic-inclusive research, A/B testing, and optional AI/automation research methods.",
+    "version": "1.6.0",
+    "last_updated": "2026-03-07",
+    "total_sources": 213
+  },
+  "standards_and_regulation": [
+    {
+      "name": "ISO 9241-210:2019 (Human-centred design for interactive systems)",
+      "url": "https://www.iso.org/standard/77520.html",
+      "description": "Primary standard describing human-centred design principles and activities",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ISO 9241-11:2018 (Usability: Definitions and concepts)",
+      "url": "https://www.iso.org/standard/63500.html",
+      "description": "Primary standard defining usability as effectiveness, efficiency, satisfaction in context",
+      "add_as_web_search": true
+    },
+    {
+      "name": "WCAG 2.2 (W3C Recommendation)",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "description": "Primary accessibility standard used for product acceptance criteria",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GDPR (EU 2016/679)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+      "description": "Primary EU privacy regulation relevant to consent/PII handling in research",
+      "add_as_web_search": true
+    },
+    {
+      "name": "European Accessibility Act (Directive (EU) 2019/882)",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019L0882",
+      "description": "EU accessibility requirements for covered products/services after 28 Jun 2025",
+      "add_as_web_search": true
+    }
+  ],
+  "ux_research_foundations": [
+    {
+      "name": "Nielsen Norman Group",
+      "url": "https://www.nngroup.com/articles/",
+      "description": "Industry-leading UX research articles and guidelines from Jakob Nielsen and Don Norman",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NNGroup State of UX 2026",
+      "url": "https://www.nngroup.com/articles/state-of-ux-2026/",
+      "description": "Annual state of UX report with industry trends, challenges, and predictions for 2026",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Lyssna UX Research Trends 2026",
+      "url": "https://www.lyssna.com/blog/ux-research-trends/",
+      "description": "2026 UX research trends analysis including 88% AI-assisted analysis adoption and 48% synthetic users prediction",
+      "add_as_web_search": true
+    },
+    {
+      "name": "UXStudioTeam 2026 Predictions",
+      "url": "https://www.uxstudioteam.com/ux-blog/ux-research-trends",
+      "description": "Expert predictions for UX research in 2026 covering AI, synthetic users, and research democratization",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Baymard Institute",
+      "url": "https://baymard.com/blog",
+      "description": "E-commerce UX research and benchmarks based on large-scale studies",
+      "add_as_web_search": true
+    },
+    {
+      "name": "UXPA - User Experience Professionals Association",
+      "url": "https://uxpa.org/references/",
+      "description": "Professional UX resources, standards, and career guidance",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Interaction Design Foundation",
+      "url": "https://www.interaction-design.org/literature",
+      "description": "Comprehensive UX design and research literature",
+      "add_as_web_search": true
+    },
+    {
+      "name": "UX Collective",
+      "url": "https://uxdesign.cc/",
+      "description": "Community-curated UX design and research articles",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Smashing Magazine UX",
+      "url": "https://www.smashingmagazine.com/category/ux-design/",
+      "description": "Practical UX design and research tutorials",
+      "add_as_web_search": true
+    },
+    {
+      "name": "A List Apart",
+      "url": "https://alistapart.com/topic/user-experience/",
+      "description": "Thoughtful articles on UX and web design",
+      "add_as_web_search": false
+    },
+    {
+      "name": "UX Matters",
+      "url": "https://www.uxmatters.com/",
+      "description": "Expert insights on UX strategy and research",
+      "add_as_web_search": false
+    }
+  ],
+  "heuristic_evaluation": [
+    {
+      "name": "Nielsen's 10 Usability Heuristics",
+      "url": "https://www.nngroup.com/articles/ten-usability-heuristics/",
+      "description": "Original 10 usability heuristics with detailed explanations",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Severity Ratings for Usability Problems",
+      "url": "https://www.nngroup.com/articles/how-to-rate-the-severity-of-usability-problems/",
+      "description": "Nielsen's severity rating scale for usability issues",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Heuristic Evaluation Process",
+      "url": "https://www.nngroup.com/articles/how-to-conduct-a-heuristic-evaluation/",
+      "description": "Step-by-step guide to conducting heuristic evaluations",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Cognitive Walkthrough",
+      "url": "https://www.nngroup.com/articles/cognitive-walkthroughs/",
+      "description": "Task-based usability inspection method",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Gerhardt-Powals Cognitive Principles",
+      "url": "https://www.interaction-design.org/literature/article/user-interface-design-guidelines-10-rules-of-thumb",
+      "description": "Cognitive engineering principles for interface design",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Shneiderman's Eight Golden Rules",
+      "url": "https://www.cs.umd.edu/~ben/goldenrules.html",
+      "description": "Interface design principles from Ben Shneiderman",
+      "add_as_web_search": false
+    }
+  ],
+  "journey_mapping": [
+    {
+      "name": "Customer Journey Mapping Guide - NNGroup",
+      "url": "https://www.nngroup.com/articles/customer-journey-mapping/",
+      "description": "Comprehensive guide to creating journey maps",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Service Blueprints - NNGroup",
+      "url": "https://www.nngroup.com/articles/service-blueprints-definition/",
+      "description": "Creating and using service blueprints",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Smaply - Journey Mapping Tool",
+      "url": "https://www.smaply.com/blog",
+      "description": "Journey mapping tool blog with templates and guides",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Miro Journey Map Templates",
+      "url": "https://miro.com/assets/customer-journey-map/",
+      "description": "Free journey mapping templates",
+      "add_as_web_search": false
+    },
+    {
+      "name": "UXPressia Journey Mapping",
+      "url": "https://uxpressia.com/blog",
+      "description": "Journey mapping insights and templates",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Customer Journey Analytics - McKinsey",
+      "url": "https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/customer-experience",
+      "description": "Strategic customer experience insights",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Touchpoint Analysis Guide",
+      "url": "https://www.nngroup.com/articles/touchpoints-customer-journey/",
+      "description": "Understanding and mapping customer touchpoints",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Emotional Journey Mapping",
+      "url": "https://www.nngroup.com/articles/journey-mapping-emotional-experience/",
+      "description": "Capturing emotions in journey maps",
+      "add_as_web_search": false
+    }
+  ],
+  "research_frameworks": [
+    {
+      "name": "JTBD.info - Jobs to be Done",
+      "url": "https://jtbd.info/",
+      "description": "Comprehensive JTBD framework resources",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Intercom on Jobs-to-be-Done",
+      "url": "https://www.intercom.com/references/books/intercom-on-jobs-to-be-done",
+      "description": "Intercom's practical JTBD guide",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Bob Moesta - Demand-Side Sales",
+      "url": "https://www.bobmoesta.com/",
+      "description": "JTBD co-creator's resources and insights",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Kano Model - Folding Burritos",
+      "url": "https://foldingburritos.com/blog/kano-model/",
+      "description": "Comprehensive Kano Model guide",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Design Council Double Diamond",
+      "url": "https://www.designcouncil.org.uk/our-references/the-double-diamond/",
+      "description": "Official Double Diamond framework",
+      "add_as_web_search": true
+    },
+    {
+      "name": "IDEO Design Thinking",
+      "url": "https://designthinking.ideo.com/",
+      "description": "Design thinking methodology from IDEO",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Stanford d.school",
+      "url": "https://dschool.stanford.edu/resources",
+      "description": "Design thinking resources and bootleg",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Teresa Torres - Continuous Discovery",
+      "url": "https://www.producttalk.org/",
+      "description": "Opportunity Solution Trees and discovery habits",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Strategyzer - Value Proposition Design",
+      "url": "https://www.strategyzer.com/library",
+      "description": "Value proposition canvas and business model resources",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Lean UX Principles",
+      "url": "https://www.nngroup.com/articles/lean-ux/",
+      "description": "Integrating UX into agile workflows",
+      "add_as_web_search": false
+    }
+  ],
+  "usability_testing": [
+    {
+      "name": "UserTesting Platform",
+      "url": "https://www.usertesting.com/resources",
+      "description": "Usability testing guides and benchmarks",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Maze - User Testing",
+      "url": "https://maze.co/guides/",
+      "description": "Product testing guides and templates",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Lookback - User Research",
+      "url": "https://lookback.io/blog",
+      "description": "Remote user research insights",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Optimal Workshop",
+      "url": "https://www.optimalworkshop.com/learn/",
+      "description": "Information architecture and card sorting research",
+      "add_as_web_search": false
+    },
+    {
+      "name": "UsabilityHub (Lyssna)",
+      "url": "https://www.lyssna.com/references/",
+      "description": "Quick usability testing resources",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Think-Aloud Protocol Guide",
+      "url": "https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/",
+      "description": "Definitive guide to think-aloud testing",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Remote Usability Testing",
+      "url": "https://www.nngroup.com/articles/remote-usability-tests/",
+      "description": "Best practices for remote testing",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Moderated vs Unmoderated Testing",
+      "url": "https://www.nngroup.com/articles/unmoderated-usability-testing/",
+      "description": "When to use each testing approach",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Task Scenarios for Usability Testing",
+      "url": "https://www.nngroup.com/articles/task-scenarios-usability-testing/",
+      "description": "Writing effective test tasks",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Guerrilla Testing Guide",
+      "url": "https://www.uxbooth.com/articles/the-art-of-guerrilla-usability-testing/",
+      "description": "Quick, informal usability testing",
+      "add_as_web_search": false
+    }
+  ],
+  "ux_metrics": [
+    {
+      "name": "HEART Framework - Google",
+      "url": "https://research.google/pubs/pub36299/",
+      "description": "Google's HEART framework for UX metrics",
+      "add_as_web_search": true
+    },
+    {
+      "name": "System Usability Scale (SUS)",
+      "url": "https://www.usability.gov/how-to-and-tools/methods/system-usability-scale.html",
+      "description": "Official SUS questionnaire and scoring",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MeasuringU - UX Metrics",
+      "url": "https://measuringu.com/",
+      "description": "UX measurement and statistics",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NPS - Bain & Company",
+      "url": "https://www.netpromotersystem.com/",
+      "description": "Net Promoter Score methodology",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Customer Effort Score (CES)",
+      "url": "https://www.nngroup.com/articles/customer-effort-score/",
+      "description": "Understanding and implementing CES",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Task Success Rate",
+      "url": "https://www.nngroup.com/articles/success-rate-the-simplest-usability-metric/",
+      "description": "Measuring task completion",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Time on Task Metrics",
+      "url": "https://www.nngroup.com/articles/time-on-task/",
+      "description": "Measuring and interpreting task time",
+      "add_as_web_search": false
+    },
+    {
+      "name": "UX Benchmarking",
+      "url": "https://www.nngroup.com/articles/ux-benchmarks/",
+      "description": "Industry UX benchmarks and standards",
+      "add_as_web_search": false
+    }
+  ],
+  "analytics_tools": [
+    {
+      "name": "Mixpanel - Product Analytics",
+      "url": "https://mixpanel.com/blog/",
+      "description": "Product analytics insights and guides",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Amplitude - Product Analytics",
+      "url": "https://amplitude.com/blog",
+      "description": "Behavioral analytics and product insights",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Heap - Digital Analytics",
+      "url": "https://heap.io/blog",
+      "description": "Auto-capture analytics guides",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Hotjar - Behavior Analytics",
+      "url": "https://www.hotjar.com/blog/",
+      "description": "Heatmaps, recordings, and feedback tools",
+      "add_as_web_search": true
+    },
+    {
+      "name": "FullStory - Digital Experience",
+      "url": "https://www.fullstory.com/blog/",
+      "description": "Session replay and experience analytics",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Google Analytics 4",
+      "url": "https://developers.google.com/analytics/devguides/collection/ga4",
+      "description": "GA4 documentation for UX metrics",
+      "add_as_web_search": true
+    },
+    {
+      "name": "PostHog - Product Analytics",
+      "url": "https://posthog.com/blog",
+      "description": "Open-source product analytics",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Pendo - Product Experience",
+      "url": "https://www.pendo.io/references/",
+      "description": "Product adoption and engagement analytics",
+      "add_as_web_search": false
+    }
+  ],
+  "competitive_analysis": [
+    {
+      "name": "Mobbin",
+      "url": "https://mobbin.com/",
+      "description": "Curated library of 300k+ mobile and web UI screenshots from real apps, searchable by flow type, screen type, and UI element",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Page Flows",
+      "url": "https://pageflows.com/",
+      "description": "User flow recordings from top apps showing onboarding, checkout, and other key flows",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Competitive UX Benchmarking - NNGroup",
+      "url": "https://www.nngroup.com/articles/competitive-usability-evaluations/",
+      "description": "Methods for competitive UX analysis",
+      "add_as_web_search": true
+    },
+    {
+      "name": "G2 Reviews",
+      "url": "https://www.g2.com/",
+      "description": "Software reviews and comparisons",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Capterra Reviews",
+      "url": "https://www.capterra.com/",
+      "description": "Business software reviews",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SimilarWeb",
+      "url": "https://www.similarweb.com/",
+      "description": "Website traffic and engagement data",
+      "add_as_web_search": false
+    },
+    {
+      "name": "AppAnnie (data.ai)",
+      "url": "https://www.data.ai/",
+      "description": "Mobile app analytics and rankings",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Baymard UX Benchmarks",
+      "url": "https://baymard.com/ux-benchmark",
+      "description": "E-commerce UX benchmarking database",
+      "add_as_web_search": true
+    }
+  ],
+  "top_company_case_studies": [
+    {
+      "name": "OpenAI Blog",
+      "url": "https://openai.com/blog/",
+      "description": "AI product design and research updates",
+      "add_as_web_search": true,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Apple Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/",
+      "description": "Apple's design principles and patterns",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Stripe Design",
+      "url": "https://stripe.com/blog/engineering",
+      "description": "Stripe's engineering and design blog",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Notion Design",
+      "url": "https://www.notion.so/blog",
+      "description": "Notion's product and design insights",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Linear Design",
+      "url": "https://linear.app/changelog",
+      "description": "Linear's product design evolution",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Figma Design Blog",
+      "url": "https://www.figma.com/blog/",
+      "description": "Figma's design and collaboration insights",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Spotify Design",
+      "url": "https://spotify.design/",
+      "description": "Spotify's design philosophy and process",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Airbnb Design",
+      "url": "https://airbnb.design/",
+      "description": "Airbnb's design team insights",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Google Design",
+      "url": "https://design.google/",
+      "description": "Google's design resources and case studies",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Microsoft Design",
+      "url": "https://medium.com/microsoft-design",
+      "description": "Microsoft's design team articles",
+      "add_as_web_search": false
+    }
+  ],
+  "thought_leaders": [
+    {
+      "name": "Don Norman",
+      "url": "https://jnd.org/",
+      "description": "Father of UX design - books and articles",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Steve Krug - Don't Make Me Think",
+      "url": "https://sensible.com/",
+      "description": "Usability pioneer and author",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Jared Spool",
+      "url": "https://www.uie.com/brainsparks/",
+      "description": "UX research and strategy insights",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Kim Goodwin",
+      "url": "https://www.cooper.com/journal/",
+      "description": "Goal-Directed Design methodology",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Alan Cooper",
+      "url": "https://www.cooper.com/",
+      "description": "Interaction design pioneer",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Aarron Walter",
+      "url": "https://www.aarronwalter.com/",
+      "description": "Emotional design expert",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Luke Wroblewski",
+      "url": "https://www.lukew.com/",
+      "description": "Mobile-first and form design expert",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Julie Zhuo",
+      "url": "https://www.juliezhuo.com/",
+      "description": "Design leadership and management",
+      "add_as_web_search": false
+    }
+  ],
+  "accessibility": [
+    {
+      "name": "WCAG 2.2 Guidelines",
+      "url": "https://www.w3.org/WAI/WCAG22/quickref/",
+      "description": "Web Content Accessibility Guidelines quick reference",
+      "add_as_web_search": true
+    },
+    {
+      "name": "WebAIM",
+      "url": "https://webaim.org/",
+      "description": "Accessibility evaluation and training",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Deque University",
+      "url": "https://www.deque.com/blog/",
+      "description": "Accessibility testing and compliance",
+      "add_as_web_search": false
+    },
+    {
+      "name": "A11y Project",
+      "url": "https://www.a11yproject.com/",
+      "description": "Community-driven accessibility resources",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Inclusive Design Principles",
+      "url": "https://inclusivedesignprinciples.org/",
+      "description": "Principles for inclusive design",
+      "add_as_web_search": false
+    },
+    {
+      "name": "axe DevTools",
+      "url": "https://www.deque.com/axe/",
+      "description": "Automated accessibility testing tool",
+      "add_as_web_search": false
+    }
+  ],
+  "user_research_methods": [
+    {
+      "name": "User Interview Techniques",
+      "url": "https://www.nngroup.com/articles/user-interviews/",
+      "description": "Conducting effective user interviews",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Card Sorting",
+      "url": "https://www.nngroup.com/articles/card-sorting-definition/",
+      "description": "Card sorting methodology",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Tree Testing",
+      "url": "https://www.nngroup.com/articles/tree-testing/",
+      "description": "Information architecture validation",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Diary Studies",
+      "url": "https://www.nngroup.com/articles/diary-studies/",
+      "description": "Longitudinal user research",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Contextual Inquiry",
+      "url": "https://www.nngroup.com/articles/contextual-inquiry/",
+      "description": "Field research methodology",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Survey Design",
+      "url": "https://www.nngroup.com/articles/surveys-ux-research/",
+      "description": "UX survey best practices",
+      "add_as_web_search": false
+    },
+    {
+      "name": "A/B Testing for UX",
+      "url": "https://www.nngroup.com/articles/putting-ab-testing-in-its-place/",
+      "description": "When and how to use A/B testing",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Persona Development",
+      "url": "https://www.nngroup.com/articles/persona/",
+      "description": "Creating evidence-based personas",
+      "add_as_web_search": false
+    }
+  ],
+  "design_systems": [
+    {
+      "name": "Material Design",
+      "url": "https://m3.material.io/",
+      "description": "Google's Material Design system",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Apple Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/",
+      "description": "Apple's design system and guidelines",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Carbon Design System (IBM)",
+      "url": "https://www.carbondesignsystem.com/",
+      "description": "IBM's open-source design system",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Atlassian Design System",
+      "url": "https://atlassian.design/",
+      "description": "Atlassian's design principles and components",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Shopify Polaris",
+      "url": "https://polaris.shopify.com/",
+      "description": "Shopify's design system",
+      "add_as_web_search": false
+    }
+  ],
+  "books_and_courses": [
+    {
+      "name": "Don't Make Me Think - Steve Krug",
+      "url": "https://sensible.com/dont-make-me-think/",
+      "description": "Classic web usability book",
+      "add_as_web_search": false
+    },
+    {
+      "name": "The Design of Everyday Things - Don Norman",
+      "url": "https://www.nngroup.com/books/design-everyday-things-revised/",
+      "description": "Foundational design book",
+      "add_as_web_search": false
+    },
+    {
+      "name": "About Face - Alan Cooper",
+      "url": "https://www.wiley.com/en-us/About+Face:+The+Essentials+of+Interaction+Design-p-9781118766576",
+      "description": "Comprehensive interaction design guide",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Continuous Discovery Habits - Teresa Torres",
+      "url": "https://www.producttalk.org/2021/05/continuous-discovery-habits/",
+      "description": "Modern product discovery framework",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Lean UX - Jeff Gothelf",
+      "url": "https://www.jeffgothelf.com/lean-ux-book/",
+      "description": "UX in agile environments",
+      "add_as_web_search": false
+    }
+  ],
+  "ai_assisted_research_optional": [
+    {
+      "name": "Google PAIR - People + AI Guidebook",
+      "url": "https://pair.withgoogle.com/guidebook/",
+      "description": "Practical patterns for designing AI features (transparency, user control, feedback, evaluation)",
+      "add_as_web_search": true,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "LLM-Assisted Heuristic Evaluation (arXiv 2025)",
+      "url": "https://arxiv.org/abs/2512.04262",
+      "description": "Research on GPT-4o reliability for automated usability evaluation with moderate consistency in issue detection",
+      "add_as_web_search": false,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Synthetic Cognitive Walkthrough (arXiv 2025)",
+      "url": "https://arxiv.org/abs/2512.03568",
+      "description": "Using LLMs (GPT-4, Gemini) to simulate cognitive walkthrough behavior for UX evaluation",
+      "add_as_web_search": false,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "LLM Visualization Complexity Assessment (arXiv 2025)",
+      "url": "https://arxiv.org/abs/2512.05536",
+      "description": "Zero-shot LLM prompting with GPT-4o mini for scalable visualization complexity assessment",
+      "add_as_web_search": false,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Dovetail - AI Research Analysis",
+      "url": "https://dovetail.com/",
+      "description": "AI-powered qualitative research analysis, auto-tagging, and insight synthesis",
+      "add_as_web_search": true,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Notably - AI Research Assistant",
+      "url": "https://www.notably.ai/",
+      "description": "AI-assisted research synthesis, pattern recognition, and insight generation",
+      "add_as_web_search": true,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Marvin - AI UX Research",
+      "url": "https://www.askmarvin.ai/",
+      "description": "AI-powered user research repository and analysis platform",
+      "add_as_web_search": false,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Grain - AI Meeting Intelligence",
+      "url": "https://grain.com/",
+      "description": "AI video highlights and research interview analysis",
+      "add_as_web_search": false,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Otter.ai - Transcription",
+      "url": "https://otter.ai/",
+      "description": "AI transcription for user interviews and research sessions",
+      "add_as_web_search": false,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Speak - AI Research Analysis",
+      "url": "https://www.speakai.co/",
+      "description": "AI analysis of unstructured language data from interviews and surveys",
+      "add_as_web_search": true,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Condens - Research Repository",
+      "url": "https://condens.io/",
+      "description": "AI-assisted research repository with automated tagging and synthesis",
+      "add_as_web_search": false,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "AI in UX Research - NNGroup",
+      "url": "https://www.nngroup.com/articles/ai-ux-getting-started/",
+      "description": "Guidelines for using AI tools in UX research workflows",
+      "add_as_web_search": true,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Synthetic Users - AI Research",
+      "url": "https://www.syntheticusers.com/",
+      "description": "AI-generated synthetic user research and persona simulation",
+      "add_as_web_search": true,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "UX Research with AI - Maze",
+      "url": "https://maze.co/blog/ai-ux-research/",
+      "description": "Practical guide to integrating AI into UX research workflows",
+      "add_as_web_search": true,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Looppanel - AI Research Analysis",
+      "url": "https://www.looppanel.com/",
+      "description": "AI-powered user research platform with auto-transcription, collaborative note-taking, and clip generation for interview analysis",
+      "add_as_web_search": true,
+      "optional_category": "ai_automation"
+    }
+  ],
+  "feedback_platforms_b2c": [
+    {
+      "name": "App Store Connect - Reviews API",
+      "url": "https://developer.apple.com/documentation/appstoreconnectapi/customer_reviews",
+      "description": "Official Apple API for accessing App Store reviews and ratings",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Google Play Console - Reviews",
+      "url": "https://support.google.com/googleplay/android-developer/answer/138230",
+      "description": "Google Play Console review management and export",
+      "add_as_web_search": false
+    },
+    {
+      "name": "AppFollow",
+      "url": "https://appfollow.io/",
+      "description": "App Store and Play Store review aggregation, sentiment tracking, and competitor monitoring",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Appbot",
+      "url": "https://appbot.co/",
+      "description": "Automated app review analysis with topic clustering and sentiment detection",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Trustpilot",
+      "url": "https://www.trustpilot.com/",
+      "description": "Consumer review platform for services and e-commerce",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Sensor Tower",
+      "url": "https://sensortower.com/",
+      "description": "Mobile app intelligence and review analytics",
+      "add_as_web_search": false
+    }
+  ],
+  "feedback_platforms_b2b": [
+    {
+      "name": "G2 - Software Reviews",
+      "url": "https://www.g2.com/",
+      "description": "B2B software reviews with LinkedIn-verified reviewers, 60M+ monthly visitors",
+      "add_as_web_search": true
+    },
+    {
+      "name": "G2 Seller Solutions",
+      "url": "https://sell.g2.com/",
+      "description": "Competitive intelligence dashboard, buyer intent signals, review exports",
+      "add_as_web_search": false
+    },
+    {
+      "name": "TrustRadius",
+      "url": "https://www.trustradius.com/",
+      "description": "Deep enterprise B2B reviews with 408-word average, detailed pros/cons/alternatives",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Capterra",
+      "url": "https://www.capterra.com/",
+      "description": "Business software reviews and discovery, higher volume shorter reviews",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GetApp",
+      "url": "https://www.getapp.com/",
+      "description": "Software comparison and review platform (Gartner)",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Software Advice",
+      "url": "https://www.softwareadvice.com/",
+      "description": "B2B software reviews and recommendations (Gartner)",
+      "add_as_web_search": false
+    }
+  ],
+  "feedback_collection_tools": [
+    {
+      "name": "Canny - Feature Voting",
+      "url": "https://canny.io/",
+      "description": "Public feature voting, roadmap management, and customer feedback tracking",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Productboard",
+      "url": "https://www.productboard.com/",
+      "description": "Enterprise voice of customer platform with feedback → feature linking",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Linear Customer Requests",
+      "url": "https://linear.app/customer-requests",
+      "description": "Link customer feedback directly to issues with revenue/tier attributes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Hotjar Feedback",
+      "url": "https://www.hotjar.com/product/feedback/",
+      "description": "In-app feedback widgets, NPS surveys, and visual feedback tools",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Userpilot",
+      "url": "https://userpilot.com/",
+      "description": "In-app NPS surveys with user targeting and segmentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Intercom Surveys",
+      "url": "https://www.intercom.com/surveys",
+      "description": "Customer communication platform with integrated surveys",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Typeform",
+      "url": "https://www.typeform.com/",
+      "description": "Conversational surveys and feedback forms",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Delighted",
+      "url": "https://delighted.com/",
+      "description": "NPS, CSAT, CES survey platform with automated distribution",
+      "add_as_web_search": false
+    }
+  ],
+  "feedback_analysis_tools": [
+    {
+      "name": "Dovetail",
+      "url": "https://dovetail.com/",
+      "description": "Qualitative research repository with automated tagging and theme clustering",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Qualtrics XM",
+      "url": "https://www.qualtrics.com/",
+      "description": "Enterprise experience management with text analytics and sentiment analysis",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MonkeyLearn",
+      "url": "https://monkeylearn.com/",
+      "description": "No-code text analytics for sentiment, intent, and topic extraction",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Thematic",
+      "url": "https://getthematic.com/",
+      "description": "Feedback analysis for product and CX teams",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Chattermill",
+      "url": "https://chattermill.com/",
+      "description": "Unified customer feedback analysis platform",
+      "add_as_web_search": false
+    }
+  ],
+  "bigtech_feedback_patterns": [
+    {
+      "name": "Linear Product Discovery",
+      "url": "https://productlane.com/blog/how-world-class-companies-like-stripe-linear-or-cron-do-product-discovery",
+      "description": "How Linear, Stripe, and Cron handle product discovery and customer feedback",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Figma 2024 Year Review",
+      "url": "https://www.figma.com/blog/figma-2024-we-shipped-it-you-shaped-it/",
+      "description": "Figma's 180 releases in 2024, community-driven development, UI3 redesign",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Airbnb Dscout Case Study",
+      "url": "https://dscout.com/case-studies/airbnb-case-study",
+      "description": "Airbnb's 'Ask a Guest Anything' rapid research program with 2,000+ insights",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Feedback Mechanisms",
+      "url": "https://openai.com/index/introducing-chatgpt/",
+      "description": "OpenAI's thumbs up/down, regenerate, and implicit feedback signals",
+      "add_as_web_search": false,
+      "optional_category": "ai_automation"
+    },
+    {
+      "name": "Stripe Developer Experience",
+      "url": "https://stripe.com/docs",
+      "description": "Stripe's docs feedback widget pattern and developer experience focus",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Supabase Community Discord",
+      "url": "https://discord.supabase.com/",
+      "description": "Supabase's Discord-first community feedback model with 200k+ members",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Vercel GitHub Discussions",
+      "url": "https://github.com/vercel/next.js/discussions",
+      "description": "Vercel's GitHub-first developer feedback in developer workflows",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Notion Template Gallery",
+      "url": "https://www.notion.so/templates",
+      "description": "Notion's template usage as implicit feedback signal",
+      "add_as_web_search": false
+    }
+  ],
+  "research_ops_2025": [
+    {
+      "name": "ResearchOps Community",
+      "url": "https://researchops.community/",
+      "description": "Global community for research operations with frameworks, templates, and best practices",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ReOps Library - Research Operations",
+      "url": "https://www.nngroup.com/articles/research-ops/",
+      "description": "NNGroup's guide to research operations, repository management, and scaling research",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Research Repository Best Practices",
+      "url": "https://www.nngroup.com/articles/research-repositories/",
+      "description": "Building and maintaining effective research repositories",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GDPR for UX Researchers",
+      "url": "https://www.nngroup.com/articles/gdpr-ux-research/",
+      "description": "GDPR compliance in user research, consent management, and PII handling",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Participant Recruitment Best Practices",
+      "url": "https://www.nngroup.com/articles/recruiting-test-participants/",
+      "description": "Effective participant recruitment strategies and panel management",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Research Intake Process",
+      "url": "https://dovetail.com/blog/research-intake/",
+      "description": "Setting up research intake processes and prioritization frameworks",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Atomic Research",
+      "url": "https://dovetail.com/blog/atomic-research/",
+      "description": "Atomic research methodology for building reusable insights",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Research Democratization",
+      "url": "https://www.nngroup.com/articles/democratizing-ux-research/",
+      "description": "Enabling non-researchers to conduct research safely with guardrails",
+      "add_as_web_search": true
+    }
+  ],
+  "research_tools_2025": [
+    {
+      "name": "Maze - Product Research",
+      "url": "https://maze.co/",
+      "description": "Continuous product discovery platform with unmoderated testing, A/B testing, and prototype validation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Great Question - Research CRM",
+      "url": "https://greatquestion.co/",
+      "description": "Research participant management, scheduling, incentive distribution, and panel building",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Respondent - B2B Recruitment",
+      "url": "https://www.respondent.io/",
+      "description": "B2B participant recruitment platform with professional targeting",
+      "add_as_web_search": true
+    },
+    {
+      "name": "User Interviews - Participant Recruitment",
+      "url": "https://www.userinterviews.com/",
+      "description": "Research participant recruitment with 3M+ panel and advanced targeting",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Loom - Research Recording",
+      "url": "https://www.loom.com/",
+      "description": "Async video recording for research walkthroughs and stakeholder updates",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Miro - Research Collaboration",
+      "url": "https://miro.com/assets/ux-research/",
+      "description": "Collaborative whiteboarding with research templates (affinity maps, journey maps)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "FigJam - Research Workshops",
+      "url": "https://www.figma.com/figjam/",
+      "description": "Figma's whiteboarding tool for research synthesis and stakeholder workshops",
+      "add_as_web_search": false
+    }
+  ],
+  "ai_research_methods_optional": [
+    {
+      "name": "HAX Toolkit - Microsoft Human-AI Interaction",
+      "url": "https://www.microsoft.com/en-us/haxtoolkit/",
+      "description": "Microsoft's guidelines for human-AI interaction design and evaluation",
+      "add_as_web_search": true,
+      "optional_category": "ai_ux"
+    },
+    {
+      "name": "AI Explainability 360 - IBM",
+      "url": "https://aix360.mybluemix.net/",
+      "description": "Toolkit for understanding AI decisions and explainability methods",
+      "add_as_web_search": false,
+      "optional_category": "ai_ux"
+    },
+    {
+      "name": "AI Trust Research - Anthropic",
+      "url": "https://www.anthropic.com/research",
+      "description": "Research on AI safety, trust calibration, and human-AI interaction",
+      "add_as_web_search": true,
+      "optional_category": "ai_ux"
+    },
+    {
+      "name": "Apple Machine Learning Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/machine-learning",
+      "description": "Apple's HIG for ML features: transparency, control, and user expectations",
+      "add_as_web_search": true,
+      "optional_category": "ai_ux"
+    },
+    {
+      "name": "AI UX Patterns - NNGroup",
+      "url": "https://www.nngroup.com/articles/ai-ux-design/",
+      "description": "UX patterns for AI-powered features: expectations, transparency, error handling",
+      "add_as_web_search": true,
+      "optional_category": "ai_ux"
+    },
+    {
+      "name": "Calibrated Trust in AI - CHI Research",
+      "url": "https://dl.acm.org/doi/proceedings/10.1145/3613904",
+      "description": "CHI 2024 proceedings on trust calibration, appropriate reliance, and AI transparency",
+      "add_as_web_search": false,
+      "optional_category": "ai_ux"
+    },
+    {
+      "name": "LLM Evaluation Frameworks",
+      "url": "https://cookbook.openai.com/examples/evaluation/getting_started_with_openai_evals",
+      "description": "OpenAI's guide to evaluating LLM outputs for quality and safety",
+      "add_as_web_search": true,
+      "optional_category": "ai_ux"
+    },
+    {
+      "name": "AI Incident Database",
+      "url": "https://incidentdatabase.ai/",
+      "description": "Database of AI failures and incidents for understanding failure modes",
+      "add_as_web_search": false,
+      "optional_category": "ai_ux"
+    }
+  ],
+  "non_technical_user_research": [
+    {
+      "name": "GOV.UK User Research Manual",
+      "url": "https://www.gov.uk/service-manual/user-research",
+      "description": "UK government user research guidance with strong emphasis on inclusive, low-literacy participant methods",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NNG - Low Literacy Users",
+      "url": "https://www.nngroup.com/articles/writing-for-lower-literacy-users/",
+      "description": "Nielsen Norman Group research on designing and testing with lower literacy users",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Good Things Foundation",
+      "url": "https://www.goodthingsfoundation.org/",
+      "description": "UK digital inclusion research with data on digitally excluded populations and intervention effectiveness",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OECD PIAAC (Adult Digital Literacy Data)",
+      "url": "https://www.oecd.org/skills/piaac/",
+      "description": "OECD international adult digital literacy assessment data across 40+ countries",
+      "add_as_web_search": true
+    }
+  ],
+  "demographic_inclusive_research": [
+    {
+      "name": "Nielsen Norman Group - Elderly UX Research",
+      "url": "https://www.nngroup.com/articles/usability-for-senior-citizens/",
+      "description": "Research methods and session adaptations for older adults (65+)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "W3C WAI - Involving Users",
+      "url": "https://www.w3.org/WAI/planning/involving-users/",
+      "description": "W3C guidelines for involving people with disabilities in research",
+      "add_as_web_search": true
+    },
+    {
+      "name": "UXPA - Inclusive Research",
+      "url": "https://uxpa.org/",
+      "description": "User Experience Professionals Association resources on inclusive research",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Nielsen Norman Group - International UX Research",
+      "url": "https://www.nngroup.com/articles/international-ux/",
+      "description": "Cross-cultural research methods and considerations",
+      "add_as_web_search": true
+    },
+    {
+      "name": "COPPA Compliance - Children's Research",
+      "url": "https://www.ftc.gov/business-guidance/references/complying-coppa-frequently-asked-questions",
+      "description": "FTC guidance on research with children under 13 (US)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "National Federation of the Blind",
+      "url": "https://nfb.org/",
+      "description": "Resources for recruiting blind/low vision participants",
+      "add_as_web_search": false
+    },
+    {
+      "name": "National Association of the Deaf",
+      "url": "https://www.nad.org/",
+      "description": "Resources for recruiting deaf/hard of hearing participants",
+      "add_as_web_search": false
+    }
+  ],
+  "ab_testing_experimentation": [
+    {
+      "name": "Google Experimentation Platform",
+      "url": "https://research.google/pubs/pub36299/",
+      "description": "Google's HEART framework paper and experimentation guidance",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Netflix Experimentation",
+      "url": "https://netflixtechblog.com/",
+      "description": "Netflix tech blog with experimentation and A/B testing case studies",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Statsig Documentation",
+      "url": "https://docs.statsig.com/",
+      "description": "Comprehensive A/B testing platform with statistical guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GrowthBook - Open Source A/B Testing",
+      "url": "https://www.growthbook.io/",
+      "description": "Open-source feature flagging and A/B testing platform",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LaunchDarkly - Feature Management",
+      "url": "https://launchdarkly.com/",
+      "description": "Feature flag and experimentation platform",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Evan Miller A/B Test Calculator",
+      "url": "https://www.evanmiller.org/ab-testing/",
+      "description": "Statistical calculators for sample size and significance",
+      "add_as_web_search": false
+    },
+    {
+      "name": "CXL - A/B Testing Guide",
+      "url": "https://cxl.com/blog/ab-testing-guide/",
+      "description": "Comprehensive A/B testing methodology and common mistakes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Booking.com Experimentation",
+      "url": "https://booking.ai/",
+      "description": "Booking.com's approach to large-scale experimentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Microsoft Experimentation Platform",
+      "url": "https://www.microsoft.com/en-us/research/project/experimentation-platform/",
+      "description": "Microsoft Research experimentation platform documentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Sample Size Calculator - Optimizely",
+      "url": "https://www.optimizely.com/sample-size-calculator/",
+      "description": "Visual sample size calculator for A/B tests",
+      "add_as_web_search": false
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: data-sql-optimization
-description: "Production-grade SQL optimization for OLTP systems: EXPLAIN/plan analysis, balanced indexing, schema and query design, migrations, backup/recovery, HA, security, and safe performance tuning across PostgreSQL, MySQL, SQL Server, Oracle, SQLite."
+description: "SQL optimization for OLTP systems: EXPLAIN analysis, indexing, schema design, migrations, HA, and security across major SQL platforms."
 ---
 
 # SQL Optimization — Comprehensive Reference
@@ -393,3 +393,9 @@ See [data/sources.json](data/sources.json) for 62+ curated resources including:
 ---
 
 Use [references/operational-patterns.md](references/operational-patterns.md) and the templates directory for detailed workflows, migration notes, and ready-to-run commands.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

@@ -1,0 +1,351 @@
+{
+  "dashboard": {
+    "title": "Service Observability - Unified Dashboard",
+    "description": "Unified observability dashboard combining logs, metrics, and traces",
+    "tags": ["observability", "production", "unified"],
+    "timezone": "browser",
+    "refresh": "30s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "Request Rate (req/s)",
+        "type": "graph",
+        "gridPos": { "x": 0, "y": 0, "w": 8, "h": 6 },
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{service=\"$service\"}[5m])) by (status)",
+            "legendFormat": "{{status}}"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "reqps",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Error Rate (%)",
+        "type": "graph",
+        "gridPos": { "x": 8, "y": 0, "w": 8, "h": 6 },
+        "targets": [
+          {
+            "expr": "(sum(rate(http_requests_total{service=\"$service\",status=~\"5..\"}[5m])) / sum(rate(http_requests_total{service=\"$service\"}[5m]))) * 100",
+            "legendFormat": "Error Rate"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "percent",
+            "min": 0,
+            "max": 100
+          }
+        ],
+        "alert": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [5],
+                "type": "gt"
+              },
+              "query": {
+                "params": ["A", "5m", "now"]
+              },
+              "type": "query"
+            }
+          ],
+          "frequency": "1m",
+          "handler": 1,
+          "message": "Error rate above 5%",
+          "name": "High Error Rate"
+        }
+      },
+      {
+        "id": 3,
+        "title": "Latency (P50, P95, P99)",
+        "type": "graph",
+        "gridPos": { "x": 16, "y": 0, "w": 8, "h": 6 },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket{service=\"$service\"}[5m]))",
+            "legendFormat": "P50"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{service=\"$service\"}[5m]))",
+            "legendFormat": "P95"
+          },
+          {
+            "expr": "histogram_quantile(0.99, rate(http_request_duration_seconds_bucket{service=\"$service\"}[5m]))",
+            "legendFormat": "P99"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "s",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Active Traces (last 5m)",
+        "type": "stat",
+        "gridPos": { "x": 0, "y": 6, "w": 4, "h": 4 },
+        "targets": [
+          {
+            "expr": "sum(increase(traces_total{service=\"$service\"}[5m]))",
+            "legendFormat": "Traces"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area"
+        }
+      },
+      {
+        "id": 5,
+        "title": "Error Logs (last 5m)",
+        "type": "stat",
+        "gridPos": { "x": 4, "y": 6, "w": 4, "h": 4 },
+        "targets": [
+          {
+            "expr": "sum(increase(log_messages_total{service=\"$service\",level=\"error\"}[5m]))",
+            "legendFormat": "Errors"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0, "color": "green" },
+                { "value": 10, "color": "yellow" },
+                { "value": 50, "color": "red" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 6,
+        "title": "Active Alerts",
+        "type": "stat",
+        "gridPos": { "x": 8, "y": 6, "w": 4, "h": 4 },
+        "targets": [
+          {
+            "expr": "count(ALERTS{service=\"$service\",alertstate=\"firing\"})",
+            "legendFormat": "Firing"
+          }
+        ],
+        "options": {
+          "colorMode": "background"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0, "color": "green" },
+                { "value": 1, "color": "orange" },
+                { "value": 3, "color": "red" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 7,
+        "title": "CPU Usage (%)",
+        "type": "gauge",
+        "gridPos": { "x": 12, "y": 6, "w": 6, "h": 4 },
+        "targets": [
+          {
+            "expr": "avg(rate(process_cpu_seconds_total{service=\"$service\"}[5m])) * 100",
+            "legendFormat": "CPU"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0, "color": "green" },
+                { "value": 70, "color": "yellow" },
+                { "value": 90, "color": "red" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 8,
+        "title": "Memory Usage (MB)",
+        "type": "gauge",
+        "gridPos": { "x": 18, "y": 6, "w": 6, "h": 4 },
+        "targets": [
+          {
+            "expr": "avg(process_resident_memory_bytes{service=\"$service\"}) / 1024 / 1024",
+            "legendFormat": "Memory"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "decmbytes",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0, "color": "green" },
+                { "value": 400, "color": "yellow" },
+                { "value": 800, "color": "red" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 9,
+        "title": "Recent Error Logs",
+        "type": "logs",
+        "gridPos": { "x": 0, "y": 10, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "{service=\"$service\", level=\"error\"}",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "showTime": true,
+          "showLabels": true,
+          "sortOrder": "Descending",
+          "wrapLogMessage": true
+        }
+      },
+      {
+        "id": 10,
+        "title": "Slowest Traces (P99)",
+        "type": "table",
+        "gridPos": { "x": 12, "y": 10, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "topk(10, histogram_quantile(0.99, rate(http_request_duration_seconds_bucket{service=\"$service\"}[5m])) by (endpoint))",
+            "format": "table",
+            "instant": true
+          }
+        ],
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "renameByName": {
+                "endpoint": "Endpoint",
+                "Value": "P99 Latency (s)"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Trace Waterfall (Click to explore)",
+        "type": "traces",
+        "gridPos": { "x": 0, "y": 18, "w": 24, "h": 10 },
+        "datasource": "Jaeger",
+        "targets": [
+          {
+            "query": "service=\"$service\"",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "showSpanDetails": true,
+          "showServiceGraph": true
+        }
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "service",
+          "type": "query",
+          "datasource": "Prometheus",
+          "query": "label_values(http_requests_total, service)",
+          "multi": false,
+          "includeAll": false,
+          "current": {
+            "value": "order-api",
+            "text": "order-api"
+          }
+        },
+        {
+          "name": "environment",
+          "type": "query",
+          "datasource": "Prometheus",
+          "query": "label_values(http_requests_total{service=\"$service\"}, environment)",
+          "multi": false,
+          "includeAll": false
+        }
+      ]
+    },
+    "annotations": {
+      "list": [
+        {
+          "name": "Deployments",
+          "datasource": "Prometheus",
+          "expr": "changes(deployment_info{service=\"$service\"}[5m]) > 0",
+          "iconColor": "blue",
+          "enable": true,
+          "tagKeys": "version"
+        },
+        {
+          "name": "Incidents",
+          "datasource": "Prometheus",
+          "expr": "ALERTS{service=\"$service\",alertstate=\"firing\",severity=\"critical\"}",
+          "iconColor": "red",
+          "enable": true
+        },
+        {
+          "name": "Slow Requests",
+          "datasource": "Jaeger",
+          "query": "service=\"$service\" AND duration > 1s",
+          "iconColor": "orange",
+          "enable": true
+        }
+      ]
+    },
+    "links": [
+      {
+        "title": "Jaeger - Trace Explorer",
+        "url": "http://jaeger:16686/search?service=$service",
+        "type": "link",
+        "icon": "external link"
+      },
+      {
+        "title": "Prometheus - Service Metrics",
+        "url": "http://prometheus:9090/graph?g0.expr=http_requests_total%7Bservice%3D%22$service%22%7D",
+        "type": "link",
+        "icon": "external link"
+      },
+      {
+        "title": "Loki - Service Logs",
+        "url": "http://loki:3100/loki/api/v1/query_range?query=%7Bservice%3D%22$service%22%7D",
+        "type": "link",
+        "icon": "external link"
+      }
+    ]
+  }
+}

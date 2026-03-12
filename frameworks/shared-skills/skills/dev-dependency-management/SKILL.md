@@ -1,6 +1,6 @@
 ---
 name: dev-dependency-management
-description: Package and dependency management patterns across ecosystems (npm, pip, cargo, maven). Covers lockfiles, semantic versioning, dependency security scanning, update strategies, monorepo workspaces, transitive dependencies, and avoiding dependency hell.
+description: Dependency management across npm, pip, cargo, and maven. Use when managing lockfiles, security scanning, versioning, or monorepo workspaces.
 ---
 
 # Dependency Management — Production Patterns
@@ -247,54 +247,13 @@ Open-source license management and compliance automation.
 
 ## Supply Chain Security
 
-**[assets/automation/template-supply-chain-security.md](assets/automation/template-supply-chain-security.md)** — Production-grade dependency security.
+**[assets/automation/template-supply-chain-security.md](assets/automation/template-supply-chain-security.md)** — Production-grade dependency security covering SBOM generation (CycloneDX/SPDX), provenance and attestation (SLSA, Sigstore), vulnerability management SLAs, upgrade playbooks, and EU Cyber Resilience Act requirements.
+
+Key rules: generate SBOM per release, sign artifacts (Sigstore/cosign), run audit scans in CI, fix critical CVEs within 24 hours, use `npm ci` (never `npm install`) in pipelines, batch non-security updates by risk level.
 
 Related templates:
 - [assets/automation/template-dependency-upgrade-playbook.md](assets/automation/template-dependency-upgrade-playbook.md)
 - [assets/automation/template-sbom-vuln-triage-checklist.md](assets/automation/template-sbom-vuln-triage-checklist.md)
-
-### Key Sections
-
-- **SBOM Generation** — CycloneDX, SPDX formats; CI/CD integration
-- **AI BOM (Emerging)** — Extended SBOM for AI-native systems (models, datasets, training artifacts)
-- **Provenance & Attestation** — SLSA levels, Sigstore signing, npm provenance
-- **Vulnerability Management** — Triage workflow, severity SLAs, scanning tools
-- **Upgrade Playbooks** — Batching strategy, rollback procedures
-- **Pinning & Reproducibility** — Lockfiles, hash pinning, version constraints
-- **EU Cyber Resilience Act** — SBOM requirements effective Dec 2027
-
-### Do / Avoid
-
-#### GOOD: Do
-
-- Generate SBOM for every release
-- Sign release artifacts (Sigstore/cosign)
-- Run vulnerability scans in CI/CD
-- Fix critical vulnerabilities within 24 hours
-- Use lockfiles for reproducible builds
-- Verify npm package provenance
-- Batch non-security updates by risk level
-
-#### BAD: Avoid
-
-- Publishing without SBOM
-- Using unsigned packages in production
-- Ignoring vulnerability scanner output
-- Updating all dependencies at once
-- Using wildcard version ranges (`*`, `>=`)
-- Committing without updating lockfile
-- Bypassing security gates "just this once"
-
-### Anti-Patterns
-
-| Anti-Pattern | Problem | Fix |
-|--------------|---------|-----|
-| **No SBOM** | Can't respond to supply chain attacks | Generate SBOM in CI/CD |
-| **Unsigned artifacts** | Tampering undetectable | Sign with Sigstore |
-| **Floating versions** | Build not reproducible | Use lockfiles + exact versions |
-| **All-at-once updates** | Hard to bisect regressions | Batch by risk level |
-| **npm install in CI** | Non-deterministic | Use `npm ci` |
-| **No audit gate** | Vulnerabilities ship to prod | Gate deployments on audit |
 
 ---
 
@@ -373,50 +332,23 @@ Lockfiles ensure reproducible builds across environments. Never add them to `.gi
 
 ### 2. Use Semantic Versioning
 
-Use caret (`^`) for most dependencies, exact versions for mission-critical, avoid wildcards (`*`).
-
-```json
-{
-  "dependencies": {
-    "express": "^4.18.0",  // Allows patches and minors
-    "critical-lib": "1.2.3"  // Exact for critical
-  }
-}
-```
+Use caret (`^`) for most dependencies, exact versions for mission-critical, avoid wildcards (`*`). See [`references/semver-guide.md`](references/semver-guide.md) for constraint syntax and strategies.
 
 ### 3. Audit Dependencies Regularly
 
-Run security audits weekly, fix critical vulnerabilities immediately.
-
-```bash
-npm audit
-npm audit fix
-```
+Run `npm audit` / `pip-audit` / `cargo audit` weekly; fix critical vulnerabilities immediately. See [`references/security-scanning.md`](references/security-scanning.md).
 
 ### 4. Minimize Dependencies
 
-The best dependency is the one you don't add. Ask: Can I implement this in <100 LOC?
+The best dependency is the one you don't add. Ask: Can I implement this in <100 LOC? See [`references/dependency-selection-guide.md`](references/dependency-selection-guide.md).
 
 ### 5. Update Regularly
 
-Update monthly or quarterly. Don't let technical debt accumulate.
-
-```bash
-npm outdated
-npm update
-```
+Update monthly or quarterly in batches — do not update all at once. See [`references/update-strategies.md`](references/update-strategies.md).
 
 ### 6. Use Overrides Sparingly
 
-Only override transitive dependencies for security patches or conflicts. Document why.
-
-```json
-{
-  "overrides": {
-    "axios": "1.6.0"  // CVE-2023-xxxxx fix
-  }
-}
-```
+Only override transitive dependencies for security patches or conflicts. Document why in a comment (`// CVE-2023-xxxxx fix`). See [`references/transitive-dependencies.md`](references/transitive-dependencies.md).
 
 ---
 
@@ -425,7 +357,7 @@ Only override transitive dependencies for security patches or conflicts. Documen
 For complementary workflows and deeper dives:
 
 - [`dev-api-design`](../dev-api-design/SKILL.md) - API versioning strategies, dependency injection patterns
-- [`git-workflow`](../git-workflow/SKILL.md) - Git workflows for managing lockfile conflicts, branching strategies
+- [`dev-git-workflow`](../dev-git-workflow/SKILL.md) - Git workflows for managing lockfile conflicts, branching strategies
 - [`qa-testing-strategy`](../qa-testing-strategy/SKILL.md) - Testing strategies for dependency updates, integration testing
 - [`software-security-appsec`](../software-security-appsec/SKILL.md) - OWASP Top 10, cryptography standards, authentication patterns
 - [`ops-devops-platform`](../ops-devops-platform/SKILL.md) - CI/CD pipelines, Docker containerization, DevSecOps, deployment automation
@@ -543,3 +475,8 @@ npm ls --depth=0
 - If peer dependency conflict appears, fix root cause before continuing broad edits.
 - Cache these checks at session start for long agent runs.
 
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

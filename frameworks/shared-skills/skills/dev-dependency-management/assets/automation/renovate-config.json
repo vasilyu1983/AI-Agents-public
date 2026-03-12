@@ -1,0 +1,171 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "description": "Renovate configuration for automated dependency updates",
+  "timezone": "America/New_York",
+  "schedule": [
+    "after 9am and before 5pm every weekday"
+  ],
+  "labels": [
+    "dependencies",
+    "automated"
+  ],
+  "assignees": [
+    "tech-lead"
+  ],
+  "reviewers": [
+    "platform-team"
+  ],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "commitMessagePrefix": "chore:",
+  "commitMessageAction": "update",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "semanticCommits": "enabled",
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "description": "Group all non-major dependencies together",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    },
+    {
+      "description": "Automatically merge patch updates for devDependencies",
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      "description": "Require manual review for major updates",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false,
+      "labels": [
+        "dependencies",
+        "major-update",
+        "needs-review"
+      ]
+    },
+    {
+      "description": "Prioritize security updates",
+      "matchDatasources": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "matchCurrentVersion": "!/^0/",
+      "semanticCommitType": "fix",
+      "semanticCommitScope": "security"
+    },
+    {
+      "description": "Group React ecosystem updates",
+      "matchPackagePatterns": [
+        "^react",
+        "^@types/react"
+      ],
+      "groupName": "React ecosystem"
+    },
+    {
+      "description": "Group Next.js ecosystem updates",
+      "matchPackagePatterns": [
+        "^next",
+        "^@next/",
+        "eslint-config-next"
+      ],
+      "groupName": "Next.js ecosystem"
+    },
+    {
+      "description": "Group TypeScript ecosystem updates",
+      "matchPackagePatterns": [
+        "^typescript",
+        "^@typescript-eslint/"
+      ],
+      "groupName": "TypeScript ecosystem"
+    },
+    {
+      "description": "Group testing libraries",
+      "matchPackagePatterns": [
+        "^jest",
+        "^@testing-library/",
+        "^vitest",
+        "^@vitest/"
+      ],
+      "groupName": "Testing libraries"
+    },
+    {
+      "description": "Pin specific packages to avoid breaking changes",
+      "matchPackageNames": [
+        "webpack",
+        "babel-core"
+      ],
+      "rangeStrategy": "pin"
+    },
+    {
+      "description": "Ignore certain packages",
+      "matchPackageNames": [
+        "moment"
+      ],
+      "enabled": false
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "labels": [
+      "security",
+      "dependencies"
+    ],
+    "assignees": [
+      "security-team"
+    ],
+    "prPriority": 10
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 5am on monday"
+    ]
+  },
+  "separateMajorMinor": true,
+  "separateMultipleMajor": true,
+  "prCreation": "immediate",
+  "rebaseWhen": "behind-base-branch",
+  "platformAutomerge": false,
+  "ignoreTests": false,
+  "stopUpdatingLabel": "on-hold",
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Dependency Dashboard",
+  "configMigration": true,
+  "pinDigests": false,
+  "rollbackPrs": true,
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**"
+  ],
+  "npm": {
+    "minimumReleaseAge": "3 days"
+  },
+  "postUpdateOptions": [
+    "npmDedupe"
+  ],
+  "enabledManagers": [
+    "npm",
+    "dockerfile",
+    "github-actions",
+    "terraform"
+  ]
+}

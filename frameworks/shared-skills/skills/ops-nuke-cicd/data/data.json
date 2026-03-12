@@ -1,0 +1,33 @@
+{
+  "topic": "dotnet_cicd_feedback_loop",
+  "microsoft_references": [
+    {
+      "title": ".NET CLI Tools Overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/"
+    },
+    {
+      "title": "dotnet build CLI",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build"
+    },
+    {
+      "title": "dotnet test CLI",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-test"
+    },
+    {
+      "title": "dotnet publish CLI",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish"
+    },
+    {
+      "title": ".NET Code Coverage",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-code-coverage"
+    },
+    {
+      "title": ".NET and Docker Overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/docker/introduction"
+    },
+    {
+      "title": ".NET Source Code",
+      "url": "https://github.com/dotnet"
+    }
+  ]
+}

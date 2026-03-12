@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "skill": "qa-testing-ios",
+    "updated": "2026-01-26",
+    "version": "2.3",
+    "total_sources": 8,
+    "description": "Primary references for iOS testing automation with Swift Testing (Testing module), XCTest/XCUITest, and simulator tooling."
+  },
+  "categories": {
+    "apple_official_docs": [
+      {
+        "name": "Swift Testing Documentation",
+        "url": "https://developer.apple.com/documentation/testing",
+        "description": "Official Swift Testing framework docs (Testing module; modern unit/integration testing).",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Swift Testing Overview",
+        "url": "https://developer.apple.com/xcode/swift-testing",
+        "description": "Apple's Swift Testing product page with feature overview.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "XCTest Documentation",
+        "url": "https://developer.apple.com/documentation/xctest",
+        "description": "Official XCTest framework docs (UI testing, performance testing).",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "simctl Documentation",
+        "url": "https://developer.apple.com/documentation/xcode/simctl",
+        "description": "Official `simctl` reference for simulator automation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Testing Your Apps in Xcode",
+        "url": "https://developer.apple.com/documentation/xcode/testing-your-apps-in-xcode",
+        "description": "Apple guidance on organizing and running tests in Xcode.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Xcodebuild Technote (TN2339)",
+        "url": "https://developer.apple.com/library/archive/technotes/tn2339/_index.html",
+        "description": "Command-line build and test reference patterns for `xcodebuild`.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "WWDC Testing Videos",
+        "url": "https://developer.apple.com/videos/testing",
+        "description": "Official Apple videos on testing practices and tooling updates.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "optional_ai_automation": [
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "description": "Optional governance baseline when using AI to expand test cases or triage failures.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ]
+  }
+}

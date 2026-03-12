@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "skill": "qa-agent-testing",
+    "updated": "2026-01-26",
+    "version": "3.1",
+    "total_sources": 24,
+    "description": "Primary references for evaluating agentic systems (task success, safety, reliability, latency, cost), tool sandboxing, multi-agent coordination, and LLM-as-judge patterns."
+  },
+  "categories": {
+    "governance_and_risk": [
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "description": "Governance baseline for risk assessment, controls, and documentation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "description": "Threat categories for prompt injection, data leakage, and tool misuse; useful for adversarial testing.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "EU AI Act (EUR-Lex)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+        "description": "Official EU AI Act text; use for compliance-related documentation, testing, and auditability requirements.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "evaluation_frameworks": [
+      {
+        "name": "Anthropic - Demystifying Evals for AI Agents",
+        "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+        "description": "Comprehensive eval strategies: 20-50 tasks from real failures, grade outcomes not paths, Swiss Cheese Model layering.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenAI Evals (GitHub)",
+        "url": "https://github.com/openai/evals",
+        "description": "Evaluation framework patterns and examples for automated scoring.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "DeepEval",
+        "url": "https://github.com/confident-ai/deepeval",
+        "description": "Open-source LLM evaluation framework with 14+ RAG metrics, agentic metrics, and pytest-style testing.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "DeepEval AI Agent Evaluation Guide",
+        "url": "https://deepeval.com/guides/guides-ai-agent-evaluation",
+        "description": "Two-layer evaluation approach (reasoning vs action), six core metrics for agent evaluation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "RAGAS",
+        "url": "https://docs.ragas.io/",
+        "description": "Framework for evaluating RAG pipelines with context-grounded QA metrics.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Anthropic - Develop Tests",
+        "url": "https://docs.anthropic.com/en/docs/build-with-claude/develop-tests",
+        "description": "Testing guidance for Claude applications and prompts.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "HELM Benchmark",
+        "url": "https://crfm.stanford.edu/helm/",
+        "description": "Benchmarking framework and evaluation dimensions for language models.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Bloom - Automated Behavioral Evaluations",
+        "url": "https://github.com/safety-research/bloom",
+        "description": "Anthropic's open-source tool for generating targeted behavioral trait evaluations.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "tool_sandboxing": [
+      {
+        "name": "UK AISI Inspect Sandboxing Toolkit",
+        "url": "https://www.aisi.gov.uk/blog/the-inspect-sandboxing-toolkit-scalable-and-secure-ai-agent-evaluations",
+        "description": "Government-backed sandboxing toolkit for secure AI agent evaluations with isolated execution.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Agent Sandbox for Kubernetes",
+        "url": "https://cloud.google.com/blog/products/containers-kubernetes/agentic-ai-on-kubernetes-and-gke",
+        "description": "Google Cloud's Kubernetes primitive for agent code execution with gVisor isolation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "gVisor Documentation",
+        "url": "https://gvisor.dev/",
+        "description": "Container sandbox runtime reference; useful for designing stronger isolation tiers for agent eval execution.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "multi_agent_testing": [
+      {
+        "name": "Game-Theoretic Lens on LLM-based Multi-Agent Systems (Survey)",
+        "url": "https://arxiv.org/abs/2601.15047",
+        "description": "Survey framing of LLM-based multi-agent systems; useful background for coordination test design.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "MARBLE Benchmark",
+        "url": "https://arxiv.org/abs/2410.01078",
+        "description": "Research framework and benchmark for multi-agent LLM coordination evaluation.",
+        "add_as_web_search": false,
+        "optional": true
+      }
+    ],
+    "llm_as_judge": [
+      {
+        "name": "Survey on LLM-as-a-Judge (arXiv)",
+        "url": "https://arxiv.org/abs/2411.15594",
+        "description": "Comprehensive survey on biases, limitations, and best practices for LLM-based evaluation.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "LMSYS - Chatbot Arena (Methodology)",
+        "url": "https://lmsys.org/blog/2023-05-03-arena/",
+        "description": "Public LLM benchmarking methodology with pairwise comparisons and aggregation; useful for judge/arena-style eval design.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "red_teaming_and_adversarial": [
+      {
+        "name": "Anthropic - Red Teaming Language Models",
+        "url": "https://www.anthropic.com/research/red-teaming-language-models",
+        "description": "Research on adversarial testing methodologies.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Red Teaming Language Models (arXiv)",
+        "url": "https://arxiv.org/abs/2202.03286",
+        "description": "Research reference for adversarial prompting and evaluation design.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "research_and_benchmarks": [
+      {
+        "name": "Constitutional AI (arXiv)",
+        "url": "https://arxiv.org/abs/2212.08073",
+        "description": "Safety-aligned behavior via explicit principles; relevant for policy tests.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "TruthfulQA (arXiv)",
+        "url": "https://arxiv.org/abs/2109.07958",
+        "description": "Benchmark reference for truthfulness and hallucination-oriented tests.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "optional_tools": [
+      {
+        "name": "promptfoo",
+        "url": "https://www.promptfoo.dev/",
+        "description": "Prompt testing and evaluation tooling; Anthropic uses a version for product evals.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "LangChain Evaluation",
+        "url": "https://python.langchain.com/docs/guides/evaluation/",
+        "description": "Optional: evaluation utilities; validate that metrics align with your oracles.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ]
+  }
+}

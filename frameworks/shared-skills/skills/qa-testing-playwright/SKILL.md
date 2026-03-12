@@ -1,6 +1,6 @@
 ---
 name: qa-testing-playwright
-description: "Use when writing E2E web tests, debugging flaky tests, or setting up Playwright CI. Covers: stable selectors (getByRole), parallelization/sharding, flake control, network mocking, visual testing, MCP/AI automation, and CI/CD integration."
+description: "E2E web testing with Playwright. Use when writing tests, debugging flakes, or setting up CI with selectors, sharding, and network mocking."
 ---
 
 # QA Testing (Playwright)
@@ -124,6 +124,15 @@ Run this preflight before expensive E2E runs to prevent avoidable failures.
 - Confirm result artifact paths exist before reading (`test -f <error-context.md>`).
 - If artifact path missing, inspect latest `test-results` index first.
 
+### Mandatory Sandbox/Port Decisions
+
+Before running Playwright in constrained environments (sandboxed terminals, CI containers, shared dev hosts), decide and document:
+
+- Bind host/port: confirm whether app server must use `127.0.0.1` or `0.0.0.0`, and verify selected port is free.
+- Escalation path: if bind attempts fail with `EPERM`/`EACCES`, escalate immediately instead of retry loops.
+- Long-flow timeout budget: set explicit per-test timeout for API-heavy flows (generation/checkout/report) instead of inflating global timeout.
+- Build lock hygiene: clear stale `.next/lock` and terminate stale build/dev PIDs before rerun.
+
 ### Triage Sequence (Fastest Signal)
 
 1. Reproduce one failing test with `--workers=1`.
@@ -149,6 +158,7 @@ Run this preflight before expensive E2E runs to prevent avoidable failures.
 | [references/playwright-authentication.md](references/playwright-authentication.md) | Auth patterns and session management |
 | [references/visual-regression-testing.md](references/visual-regression-testing.md) | Visual regression strategies |
 | [references/api-testing-playwright.md](references/api-testing-playwright.md) | API testing with APIRequestContext |
+| [references/playwright-preflight-sandbox.md](references/playwright-preflight-sandbox.md) | Sandbox/port preflight and escalation decisions |
 | [data/sources.json](data/sources.json) | Documentation links |
 
 ## Templates
@@ -157,6 +167,7 @@ Run this preflight before expensive E2E runs to prevent avoidable failures.
 |----------|---------|
 | [assets/template-playwright-e2e-review-checklist.md](assets/template-playwright-e2e-review-checklist.md) | E2E review checklist |
 | [assets/template-playwright-fail-on-flaky-reporter.js](assets/template-playwright-fail-on-flaky-reporter.js) | Fail CI on rerun-pass flakes |
+| [assets/template-playwright-preflight-checklist.md](assets/template-playwright-preflight-checklist.md) | Preflight checklist for port/sandbox/timeouts |
 
 ## Related Skills
 
@@ -165,3 +176,9 @@ Run this preflight before expensive E2E runs to prevent avoidable failures.
 | [qa-testing-strategy](../qa-testing-strategy/SKILL.md) | Overall test strategy |
 | [software-frontend](../software-frontend/SKILL.md) | Frontend development |
 | [ops-devops-platform](../ops-devops-platform/SKILL.md) | CI/CD integration |
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

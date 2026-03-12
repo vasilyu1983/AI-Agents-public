@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "title": "Git Commit Message - Sources",
+    "description": "Primary sources for commit message conventions, Conventional Commits, and security-sensitive git hygiene",
+    "last_updated": "2026-01-17"
+  },
+  "standards": [
+    {
+      "name": "Conventional Commits Specification 1.0.0",
+      "url": "https://www.conventionalcommits.org/en/v1.0.0/",
+      "description": "Authoritative Conventional Commits standard",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Semantic Versioning 2.0.0",
+      "url": "https://semver.org/",
+      "description": "SemVer specification",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Keep a Changelog",
+      "url": "https://keepachangelog.com/",
+      "description": "Changelog format standard",
+      "add_as_web_search": false
+    }
+  ],
+  "git_docs": [
+    {
+      "name": "Git Documentation",
+      "url": "https://git-scm.com/doc",
+      "description": "Official Git documentation hub",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Pro Git (book)",
+      "url": "https://git-scm.com/book/en/v2",
+      "description": "Git best practices and workflows",
+      "add_as_web_search": false
+    },
+    {
+      "name": "How to Write a Git Commit Message (cbea.ms)",
+      "url": "https://cbea.ms/git-commit/",
+      "description": "Classic, high-signal commit message guidance",
+      "add_as_web_search": false
+    }
+  ],
+  "tooling": [
+    {
+      "name": "commitlint",
+      "url": "https://commitlint.js.org/",
+      "description": "Lint commit messages against Conventional Commits rules",
+      "add_as_web_search": true
+    },
+    {
+      "name": "semantic-release",
+      "url": "https://semantic-release.gitbook.io/",
+      "description": "Automated releases driven by commit messages",
+      "add_as_web_search": true
+    },
+    {
+      "name": "pre-commit framework",
+      "url": "https://pre-commit.com/",
+      "description": "Manage pre-commit hooks (formatting, linting, secrets scanning)",
+      "add_as_web_search": true
+    }
+  ],
+  "security": [
+    {
+      "name": "Gitleaks",
+      "url": "https://gitleaks.io/",
+      "description": "Secret scanning for git repos (local + CI integration)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TruffleHog",
+      "url": "https://github.com/trufflesecurity/trufflehog",
+      "description": "Find and verify leaked secrets in git history",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CVSS v4.0 Calculator (FIRST)",
+      "url": "https://www.first.org/cvss/calculator/4.0",
+      "description": "Severity scoring reference for security-related commits and advisories",
+      "add_as_web_search": false
+    }
+  ],
+  "optional_ai": [
+    {
+      "name": "aicommits (Optional)",
+      "url": "https://github.com/Nutlope/aicommits",
+      "description": "AI commit message generator CLI (optional; must be human-edited)",
+      "add_as_web_search": true,
+      "optional": true
+    },
+    {
+      "name": "JetBrains AI Assistant VCS Integration (Optional)",
+      "url": "https://www.jetbrains.com/help/ai-assistant/ai-in-vcs-integration.html",
+      "description": "AI-powered commit message generation in JetBrains IDEs (optional; requires human review)",
+      "add_as_web_search": true,
+      "optional": true
+    },
+    {
+      "name": "Windsurf AI Commit Messages (Optional)",
+      "url": "https://docs.windsurf.com/windsurf/ai-commit-message",
+      "description": "AI-powered commit message generation in Windsurf IDE (optional; requires human review)",
+      "add_as_web_search": true,
+      "optional": true
+    },
+    {
+      "name": "AI Commit VS Code Extension (Optional)",
+      "url": "https://marketplace.visualstudio.com/items?itemName=Sitoi.ai-commit",
+      "description": "VS Code extension for AI-generated conventional commits (optional; requires human review)",
+      "add_as_web_search": true,
+      "optional": true
+    }
+  ]
+}

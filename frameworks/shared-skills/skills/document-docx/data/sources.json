@@ -1,0 +1,97 @@
+{
+  "metadata": {
+    "skill": "document-docx",
+    "updated": "2026-01-26",
+    "total_sources": 8,
+    "description": "DOCX automation libraries plus accessibility and document quality guidance.",
+    "version": "2.1"
+  },
+  "categories": {
+    "python_libraries": [
+      {
+        "name": "python-docx Documentation",
+        "url": "https://python-docx.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Primary reference for creating and editing .docx files in Python.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "docx"]
+      },
+      {
+        "name": "docxtpl Documentation",
+        "url": "https://docxtpl.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Template-based DOCX generation (mail merge-style) in Python.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "docx", "templates"]
+      }
+    ],
+    "nodejs_libraries": [
+      {
+        "name": "docx (docx.js)",
+        "url": "https://docx.js.org/",
+        "type": "documentation",
+        "relevance": "Generate .docx documents in Node.js with structured APIs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["nodejs", "docx"]
+      },
+      {
+        "name": "mammoth.js",
+        "url": "https://github.com/mwilliamson/mammoth.js",
+        "type": "library",
+        "relevance": "Convert .docx to HTML and extract content reliably for downstream processing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["nodejs", "docx", "conversion"]
+      }
+    ],
+    "quality_and_accessibility": [
+      {
+        "name": "Make your Word documents accessible (Microsoft Support)",
+        "url": "https://support.microsoft.com/en-us/office/make-your-word-documents-accessible-to-people-with-disabilities-d9bf3683-87ac-47ea-b91a-78dcacb3c66d",
+        "type": "guide",
+        "relevance": "Baseline accessibility practices for Word documents (styles, headings, tables, alt text).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["accessibility", "word"]
+      },
+      {
+        "name": "Office Open XML (ECMA-376)",
+        "url": "https://www.ecma-international.org/publications-and-standards/standards/ecma-376/",
+        "type": "specification",
+        "relevance": "Underlying standard behind .docx; helpful for interoperability edge cases.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["spec", "ooxml", "docx"]
+      },
+      {
+        "name": "Open XML SDK (Microsoft)",
+        "url": "https://learn.microsoft.com/en-us/office/open-xml/open-xml-sdk",
+        "type": "documentation",
+        "relevance": "Low-level .docx (OOXML) manipulation patterns, useful when high-level libs cannot express required changes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["dotnet", "ooxml", "docx"]
+      },
+      {
+        "name": "docx4j (docx4java)",
+        "url": "https://www.docx4java.org/trac/docx4j",
+        "type": "documentation",
+        "relevance": "Java library for advanced .docx (OOXML) operations, including revision- and interoperability-heavy workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["java", "ooxml", "docx"]
+      }
+    ]
+  }
+}

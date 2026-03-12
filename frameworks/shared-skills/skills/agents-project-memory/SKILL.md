@@ -1,6 +1,6 @@
 ---
 name: agents-project-memory
-description: Configure project memory files (CLAUDE.md, AGENTS.md, CODEX.md) for persistent context, coding standards, architecture decisions, and team conventions. Reference for the 4-tier memory hierarchy, cross-platform compatibility, and quick-add commands.
+description: Configure CLAUDE.md/AGENTS.md/CODEX.md for persistent agent context. Use when setting coding standards or architecture docs for a codebase.
 ---
 
 # Project Memory for Claude Code + Codex (Jan 2026)
@@ -135,3 +135,9 @@ If startup memory exceeds practical context budgets, trim before adding new rule
 | [agents-skills](../agents-skills/SKILL.md) | Skill creation patterns |
 | [agents-subagents](../agents-subagents/SKILL.md) | Agent/subagent setup |
 | [docs-codebase](../docs-codebase/SKILL.md) | Repo documentation patterns |
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

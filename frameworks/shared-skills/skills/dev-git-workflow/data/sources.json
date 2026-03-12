@@ -1,0 +1,134 @@
+{
+  "metadata": {
+    "title": "Git Collaboration Workflow - Sources",
+    "description": "High-signal sources for Git workflows, PR discipline, branching models, repository hardening, and release practices",
+    "last_updated": "2026-01-17"
+  },
+  "git_core": [
+    {
+      "name": "Git Documentation",
+      "url": "https://git-scm.com/doc",
+      "description": "Official Git documentation hub",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Pro Git (book)",
+      "url": "https://git-scm.com/book/en/v2",
+      "description": "Comprehensive Git book (branches, rebasing, workflows, internals)",
+      "add_as_web_search": false
+    }
+  ],
+  "workflows": [
+    {
+      "name": "Trunk-Based Development",
+      "url": "https://trunkbaseddevelopment.com/",
+      "description": "Trunk-based development patterns and trade-offs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Gitflow Workflow (Atlassian)",
+      "url": "https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow",
+      "description": "GitFlow concepts and comparisons",
+      "add_as_web_search": true
+    }
+  ],
+  "platform_docs": [
+    {
+      "name": "GitHub Flow",
+      "url": "https://docs.github.com/en/get-started/quickstart/github-flow",
+      "description": "Official GitHub Flow guide",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub - About protected branches",
+      "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+      "description": "Branch protection rules and enforcement options",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub - About CODEOWNERS",
+      "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+      "description": "CODEOWNERS file behavior for review routing and gates",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub - Managing a merge queue",
+      "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue",
+      "description": "Merge queue for keeping main green under high concurrency",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub - Commit signature verification",
+      "url": "https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification",
+      "description": "Signed commits/tags and verification behavior",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitLab - Merge requests",
+      "url": "https://docs.gitlab.com/ee/user/project/merge_requests/",
+      "description": "Merge request workflows, approvals, and pipelines",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitLab - Stacked diffs",
+      "url": "https://docs.gitlab.com/user/project/merge_requests/stacked_diffs/",
+      "description": "Stacked diffs workflow for large changes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitLab CLI - glab stack",
+      "url": "https://docs.gitlab.com/cli/stack/",
+      "description": "GitLab CLI commands for stacked diffs workflow (v1.42.0+)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "The Stacking Workflow",
+      "url": "https://www.stacking.dev/",
+      "description": "Comprehensive comparison of stacking tools (Graphite, ghstack, Sapling, spr)",
+      "add_as_web_search": true
+    }
+  ],
+  "commit_and_release": [
+    {
+      "name": "Conventional Commits Specification",
+      "url": "https://www.conventionalcommits.org/en/v1.0.0/",
+      "description": "Standard commit format used for automation and changelogs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Semantic Versioning 2.0.0",
+      "url": "https://semver.org/",
+      "description": "SemVer specification",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Keep a Changelog",
+      "url": "https://keepachangelog.com/",
+      "description": "Changelog format standard",
+      "add_as_web_search": false
+    }
+  ],
+  "security": [
+    {
+      "name": "Gitleaks",
+      "url": "https://gitleaks.io/",
+      "description": "Secret scanning for git repos (local + CI integration)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TruffleHog",
+      "url": "https://github.com/trufflesecurity/trufflehog",
+      "description": "Secret scanning and verification for git history",
+      "add_as_web_search": true
+    }
+  ],
+  "optional_ai": [
+    {
+      "name": "PR summarization and risk labeling (Optional)",
+      "url": "https://docs.github.com/en/copilot",
+      "description": "Optional AI assistance for PR summaries (requires human review; product features vary)",
+      "add_as_web_search": true,
+      "optional": true
+    }
+  ]
+}

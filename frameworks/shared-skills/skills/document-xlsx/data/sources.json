@@ -1,0 +1,107 @@
+{
+  "metadata": {
+    "skill": "document-xlsx",
+    "updated": "2026-01-17",
+    "total_sources": 9,
+    "description": "Official library documentation plus spreadsheet quality and accessibility guidance.",
+    "version": "2.1"
+  },
+  "categories": {
+    "python_libraries": [
+      {
+        "name": "openpyxl Documentation",
+        "url": "https://openpyxl.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Python library for reading/writing .xlsx with formatting, charts, and validation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "xlsx"]
+      },
+      {
+        "name": "XlsxWriter Documentation",
+        "url": "https://xlsxwriter.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Write-only Python library with rich formatting, charts, and in-cell rich text styling.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "xlsx", "write-only"]
+      },
+      {
+        "name": "pandas.DataFrame.to_excel",
+        "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_excel.html",
+        "type": "reference",
+        "relevance": "Export DataFrames to Excel; common for reporting and reproducible exports.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "pandas", "xlsx"]
+      },
+      {
+        "name": "xlwings Documentation",
+        "url": "https://docs.xlwings.org/",
+        "type": "documentation",
+        "relevance": "Python-Excel automation (useful for complex, interactive Excel workflows).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["python", "excel-automation"]
+      }
+    ],
+    "nodejs_libraries": [
+      {
+        "name": "ExcelJS",
+        "url": "https://github.com/exceljs/exceljs",
+        "type": "library",
+        "relevance": "Node.js library for generating and editing .xlsx files with styles and formulas.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["nodejs", "xlsx"]
+      },
+      {
+        "name": "SheetJS Documentation",
+        "url": "https://docs.sheetjs.com/",
+        "type": "documentation",
+        "relevance": "Spreadsheet parsing/writing across formats; useful for ingestion and exports.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["nodejs", "xlsx"]
+      }
+    ],
+    "quality_and_accessibility": [
+      {
+        "name": "Accessibility best practices with Excel spreadsheets (Microsoft Support)",
+        "url": "https://support.microsoft.com/en-us/office/accessibility-best-practices-with-excel-spreadsheets-6cc05fc5-1314-48b5-8eb3-683e49b3e593",
+        "type": "guide",
+        "relevance": "Practical guidance for making spreadsheets usable for people with disabilities (structure, labels, checkers).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["accessibility", "excel"]
+      },
+      {
+        "name": "Office Open XML (ECMA-376)",
+        "url": "https://www.ecma-international.org/publications-and-standards/standards/ecma-376/",
+        "type": "specification",
+        "relevance": "The underlying standard behind .xlsx; useful for edge cases and interoperability.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["spec", "ooxml", "xlsx"]
+      },
+      {
+        "name": "Microsoft Open Specifications (Office formats)",
+        "url": "https://learn.microsoft.com/en-us/openspecs/office_standards/ms-oi29500/7d096214-5f67-4e46-a1b8-88f8e9e6cf5b",
+        "type": "reference",
+        "relevance": "Reference entry point for Office Open XML and related Office format specifications.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["spec", "office"]
+      }
+    ]
+  }
+}

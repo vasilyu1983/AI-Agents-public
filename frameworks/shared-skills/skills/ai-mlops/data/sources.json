@@ -1,0 +1,271 @@
+{
+  "metadata": {
+    "skill": "ai-mlops",
+    "updated": "2026-01-17",
+    "total_sources": 28,
+    "description": "Curated sources for production MLOps, LLMOps, and AgentOps: lifecycle, CI/CD, monitoring, incident response, observability, and governance for ML/LLM/Agent systems.",
+    "version": "3.1"
+  },
+  "categories": {
+    "foundational_standards_and_security": [
+      {
+        "name": "EU AI Act (Regulation (EU) 2024/1689)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+        "type": "specification",
+        "relevance": "Regulatory baseline for risk classification, transparency, documentation, and controls.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST AI Risk Management Framework 1.0",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+        "type": "specification",
+        "relevance": "Baseline risk management framework for AI governance and accountability.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NIST Generative AI Profile (AI 600-1)",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+        "type": "specification",
+        "relevance": "GenAI-specific profile aligned to NIST AI RMF; useful for governance and control mapping.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "specification",
+        "relevance": "Threat categories for LLM-integrated systems (prompt injection, data leakage, abuse).",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST Secure Software Development Framework (SSDF)",
+        "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+        "type": "specification",
+        "relevance": "Secure development practices relevant for ML services, data pipelines, and supply chain.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST Cybersecurity Framework",
+        "url": "https://www.nist.gov/cyberframework",
+        "type": "reference",
+        "relevance": "General security risk management framework that complements ML/LLM governance in production.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ISO/IEC 42001 (AI management system)",
+        "url": "https://www.iso.org/standard/42001",
+        "type": "specification",
+        "relevance": "AI management system standard for organizational governance and continuous improvement.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": true
+      }
+    ],
+    "mlops_principles_and_papers": [
+      {
+        "name": "Hidden Technical Debt in Machine Learning Systems",
+        "url": "https://papers.nips.cc/paper_files/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html",
+        "type": "research",
+        "relevance": "Classic taxonomy of production failure modes and maintenance costs in ML systems.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "The ML Test Score",
+        "url": "https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/",
+        "type": "research",
+        "relevance": "Production readiness rubric for ML systems; useful for deployment gates and audits.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_tools_and_platforms": [
+      {
+        "name": "dlt Documentation",
+        "url": "https://dlthub.com/docs/",
+        "type": "documentation",
+        "relevance": "Data ingestion patterns for loading from APIs/databases into warehouses with incremental updates.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MLflow Documentation",
+        "url": "https://mlflow.org/docs/latest/",
+        "type": "documentation",
+        "relevance": "Experiment tracking and model registry patterns for promotion and rollback workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DVC Documentation",
+        "url": "https://dvc.org/doc",
+        "type": "documentation",
+        "relevance": "Versioning for datasets and model artifacts to support reproducibility and audits.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Feast Documentation",
+        "url": "https://docs.feast.dev/",
+        "type": "documentation",
+        "relevance": "Feature store reference for train/serve parity and offline/online feature reuse.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Kubernetes Documentation",
+        "url": "https://kubernetes.io/docs/",
+        "type": "documentation",
+        "relevance": "Baseline orchestration for model serving, batch jobs, and scalable ML platforms.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Docker Documentation",
+        "url": "https://docs.docker.com/",
+        "type": "documentation",
+        "relevance": "Containerization reference for reproducible builds and deployments of ML services.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Prometheus Documentation",
+        "url": "https://prometheus.io/docs/",
+        "type": "documentation",
+        "relevance": "Monitoring and alerting reference for latency/errors/saturation and SLO tracking.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "type": "documentation",
+        "relevance": "Distributed tracing/metrics/logs reference; supports auditability for ML/LLM systems.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Semantic Conventions for GenAI",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "type": "specification",
+        "relevance": "Standard telemetry attributes for tokens, models, and tool calls for GenAI endpoints.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "agentops_and_llmops": [
+      {
+        "name": "AgentOps Documentation",
+        "url": "https://docs.agentops.ai/",
+        "type": "documentation",
+        "relevance": "AI agent observability platform with session replay, cost tracking, and multi-agent tracing for CrewAI, LangGraph, OpenAI Agents SDK.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Langfuse Documentation",
+        "url": "https://langfuse.com/docs",
+        "type": "documentation",
+        "relevance": "Open-source LLM observability platform with tracing, evals, prompt management, and OpenTelemetry integration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangSmith Documentation",
+        "url": "https://docs.smith.langchain.com/",
+        "type": "documentation",
+        "relevance": "LangChain's observability platform with tracing, datasets, and evaluation workflows for LLM applications.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Arize AI Documentation",
+        "url": "https://docs.arize.com/",
+        "type": "documentation",
+        "relevance": "ML/LLM observability platform with drift detection, explainability, and production monitoring.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "WhyLabs AI Observatory",
+        "url": "https://docs.whylabs.ai/",
+        "type": "documentation",
+        "relevance": "ML/LLM monitoring platform with data quality profiling, drift detection, and alerting.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Braintrust Documentation",
+        "url": "https://www.braintrust.dev/docs",
+        "type": "documentation",
+        "relevance": "LLMOps platform focused on evaluation, logging, and prompt experimentation.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "vLLM Documentation",
+        "url": "https://docs.vllm.ai/",
+        "type": "documentation",
+        "relevance": "High-throughput LLM serving with PagedAttention, continuous batching, and OpenAI-compatible API.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ZenML Documentation",
+        "url": "https://docs.zenml.io/",
+        "type": "documentation",
+        "relevance": "MLOps framework with Model Control Plane providing better lineage tracking than MLflow, supports LLM workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Hopsworks Feature Store",
+        "url": "https://docs.hopsworks.ai/",
+        "type": "documentation",
+        "relevance": "Feature store with governance, audit logging, and drift detection for regulated industries (finance, healthcare).",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Edge Impulse Documentation",
+        "url": "https://docs.edgeimpulse.com/",
+        "type": "documentation",
+        "relevance": "TinyML/Edge MLOps platform for embedded ML deployment on microcontrollers and edge devices.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

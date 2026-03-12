@@ -1,6 +1,6 @@
 ---
 name: product-management
-description: "Founder-PM operating system: discovery, strategy, roadmaps, metrics, prioritization (RICE/ICE/kill criteria), product-market fit measurement (Sean Ellis, retention curves), stakeholder management, scope negotiation, and leadership - using templates, checklists, and patterns (no theory)."
+description: "Founder-PM toolkit for discovery, roadmaps, prioritization, and PMF measurement. Use when planning product strategy, metrics, or roadmaps."
 ---
 
 # Product Management (Jan 2026)
@@ -361,3 +361,9 @@ After searching, provide:
 - AI product management patterns
 - Prioritization frameworks (RICE, ICE, opportunity scoring)
 - OKR and metrics tools
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

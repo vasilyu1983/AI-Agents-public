@@ -1,6 +1,6 @@
 ---
 name: data-lake-platform
-description: "Data lake and lakehouse platform patterns: ingestion/CDC, transformations, open table formats (Iceberg/Delta/Hudi), query and serving engines (Trino/ClickHouse/DuckDB), orchestration, governance/lineage, cost and operations. Self-hosted and cloud options."
+description: "Data lake and lakehouse patterns: ingestion, CDC, Iceberg/Delta/Hudi, Trino/DuckDB, orchestration, and governance. Self-hosted and cloud."
 ---
 
 # Data Lake Platform
@@ -124,3 +124,9 @@ sqlmesh plan && sqlmesh run
 | [ai-mlops](../ai-mlops/SKILL.md) | ML deployment |
 | [ai-ml-data-science](../ai-ml-data-science/SKILL.md) | Feature engineering |
 | [data-sql-optimization](../data-sql-optimization/SKILL.md) | OLTP optimization |
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

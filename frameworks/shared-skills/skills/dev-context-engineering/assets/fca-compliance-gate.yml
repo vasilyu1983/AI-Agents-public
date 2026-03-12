@@ -1,0 +1,190 @@
+# FCA Compliance Gate — GitHub Actions Workflow
+#
+# Copy this file to `.github/workflows/fca-compliance-gate.yml` in every repository.
+# This workflow enforces FCA/EMI compliance requirements on all pull requests.
+#
+# Prerequisites:
+#   - Branch protection rules configured (require signed commits, no force-push)
+#   - gitleaks installed or available as GitHub Action
+#   - Semgrep or CodeQL configured for SAST
+#   - PR template with AI disclosure (see pr-template-ai-disclosure.md)
+
+name: FCA Compliance Gate
+
+on:
+  pull_request:
+    branches: [main, master, develop]
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+  pull-requests: read
+  security-events: write
+
+jobs:
+  signed-commits:
+    name: Verify Signed Commits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check all commits are signed
+        run: |
+          UNSIGNED=$(git log --format='%H %G?' origin/main..HEAD 2>/dev/null | grep -E ' N$' | head -5)
+          if [ -n "$UNSIGNED" ]; then
+            echo "::error::Unsigned commits detected. All commits must be signed (GPG or SSH)."
+            echo "$UNSIGNED"
+            exit 1
+          fi
+          echo "All commits are signed."
+
+  secrets-detection:
+    name: Secrets Detection
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  sast-scanning:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Semgrep
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: >-
+            p/security-audit
+            p/secrets
+            p/owasp-top-ten
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+
+  pii-detection:
+    name: PII Pattern Detection
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan for PII patterns in changed files
+        run: |
+          # Get changed files
+          CHANGED_FILES=$(git diff --name-only origin/main...HEAD 2>/dev/null || git diff --name-only HEAD~1)
+
+          # PII patterns to detect (conservative, high-precision)
+          PII_PATTERNS=(
+            '[0-9]{2}/[0-9]{2}/[0-9]{4}'                    # UK date format (potential DOB)
+            '[A-Z]{2}[0-9]{6}[A-Z]'                          # UK National Insurance Number
+            '[0-9]{4}[[:space:]][0-9]{4}[[:space:]][0-9]{4}[[:space:]][0-9]{4}'  # Card number format
+            'password[[:space:]]*=[[:space:]]*["\x27][^"\x27]+'  # Hardcoded passwords
+          )
+
+          FOUND=false
+          for file in $CHANGED_FILES; do
+            [ ! -f "$file" ] && continue
+            # Skip binary files and known safe files
+            case "$file" in
+              *.png|*.jpg|*.gif|*.ico|*.woff|*.lock|*.sum) continue ;;
+            esac
+
+            for pattern in "${PII_PATTERNS[@]}"; do
+              if grep -qE "$pattern" "$file" 2>/dev/null; then
+                echo "::warning file=$file::Potential PII pattern detected: $pattern"
+                FOUND=true
+              fi
+            done
+          done
+
+          if $FOUND; then
+            echo "::error::PII patterns detected in changed files. Review findings above."
+            echo "If these are false positives (e.g., test data), add inline comments explaining why."
+            exit 1
+          fi
+          echo "No PII patterns detected."
+
+  ai-disclosure:
+    name: AI Disclosure Check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Check PR body for AI disclosure
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          if [ -z "$PR_BODY" ]; then
+            echo "::error::PR description is empty. Please use the PR template with AI disclosure section."
+            exit 1
+          fi
+
+          # Check for AI disclosure section
+          if ! echo "$PR_BODY" | grep -qi "AI.*Involvement\|AI.*Disclosure\|AI.*Tools.*Used"; then
+            echo "::error::PR description missing AI Involvement Disclosure section."
+            echo "Please use the PR template and complete the AI disclosure checklist."
+            exit 1
+          fi
+
+          # Check for human verification checklist
+          if ! echo "$PR_BODY" | grep -qi "Human.*Verification\|Verification.*Checklist"; then
+            echo "::warning::PR description may be missing the Human Verification Checklist."
+          fi
+
+          echo "AI disclosure section found in PR description."
+
+  dependency-scan:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run dependency audit
+        run: |
+          # Detect package manager and run audit
+          if [ -f "package-lock.json" ] || [ -f "yarn.lock" ]; then
+            npm audit --audit-level=high 2>/dev/null || echo "::warning::npm audit found vulnerabilities"
+          elif [ -f "requirements.txt" ] || [ -f "Pipfile.lock" ]; then
+            pip install pip-audit 2>/dev/null && pip-audit 2>/dev/null || echo "::warning::pip-audit found vulnerabilities"
+          elif [ -f "go.sum" ]; then
+            go install golang.org/x/vuln/cmd/govulncheck@latest 2>/dev/null && govulncheck ./... 2>/dev/null || echo "::warning::govulncheck found vulnerabilities"
+          else
+            echo "No recognized package manager found. Skipping dependency audit."
+          fi
+
+  compliance-summary:
+    name: Compliance Summary
+    runs-on: ubuntu-latest
+    needs: [signed-commits, secrets-detection, sast-scanning, pii-detection, ai-disclosure, dependency-scan]
+    if: always()
+    steps:
+      - name: Report compliance status
+        run: |
+          echo "## FCA Compliance Gate Results"
+          echo ""
+          echo "| Check | Status |"
+          echo "|-------|--------|"
+          echo "| Signed Commits | ${{ needs.signed-commits.result }} |"
+          echo "| Secrets Detection | ${{ needs.secrets-detection.result }} |"
+          echo "| SAST Scanning | ${{ needs.sast-scanning.result }} |"
+          echo "| PII Detection | ${{ needs.pii-detection.result }} |"
+          echo "| AI Disclosure | ${{ needs.ai-disclosure.result }} |"
+          echo "| Dependency Scan | ${{ needs.dependency-scan.result }} |"
+
+          # Fail if any critical check failed
+          if [[ "${{ needs.signed-commits.result }}" == "failure" ]] || \
+             [[ "${{ needs.secrets-detection.result }}" == "failure" ]] || \
+             [[ "${{ needs.sast-scanning.result }}" == "failure" ]] || \
+             [[ "${{ needs.pii-detection.result }}" == "failure" ]] || \
+             [[ "${{ needs.ai-disclosure.result }}" == "failure" ]]; then
+            echo "::error::One or more compliance gates failed. PR cannot be merged."
+            exit 1
+          fi
+          echo "All compliance gates passed."

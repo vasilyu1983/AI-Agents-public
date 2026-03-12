@@ -1,6 +1,6 @@
 ---
 name: data-analytics-engineering
-description: Analytics engineering for reliable metrics and BI readiness. Build transformation layers, dimensional models, semantic metrics, data quality tests, and documentation. Use when you need dbt or SQL transformation strategy, metrics definition, or analytics data modeling.
+description: Analytics engineering for reliable metrics and BI readiness. Use when building dbt models, defining metrics, or designing analytics layers.
 ---
 
 # Data Analytics Engineering
@@ -116,3 +116,9 @@ After searching, provide:
 - Analytics engineering workflows and CI/CD
 - Agentic AI workflows for analytics
 - Data mesh and domain-owned data products
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

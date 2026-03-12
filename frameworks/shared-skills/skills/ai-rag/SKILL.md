@@ -1,6 +1,6 @@
 ---
 name: ai-rag
-description: Complete RAG and search engineering skill. Covers chunking strategies, hybrid retrieval (BM25 + vector), cross-encoder reranking, query rewriting, ranking pipelines, nDCG/MRR evaluation, and production search systems. Modern patterns for retrieval-augmented generation and semantic search.
+description: RAG and search engineering — chunking, hybrid retrieval, reranking, and nDCG evaluation. Use when building retrieval-augmented generation pipelines.
 ---
 
 # RAG & Search Engineering — Complete Reference
@@ -251,3 +251,9 @@ For adjacent topics, reference these skills:
 - [data/sources.json](data/sources.json) — Curated external references
 
 Use this skill whenever the user needs **retrieval-augmented system design or debugging**, not prompt work or deployment.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

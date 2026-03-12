@@ -1,6 +1,6 @@
 ---
 name: qa-observability
-description: "Implement and validate observability for quality engineering: OpenTelemetry logs/metrics/traces, W3C trace context propagation, SLI/SLO + error-budget release gates, burn-rate alerting, trace-based debugging for test failures, sampling/cardinality/cost controls, profiling (CPU/memory/continuous), synthetic/RUM signals, and APM stack integrations (Prometheus/Grafana/Jaeger/Tempo/Loki/Datadog/New Relic)."
+description: "Implement OpenTelemetry logs/metrics/traces, SLI/SLO gates, burn-rate alerts, and APM integrations. Use when adding or validating observability."
 ---
 
 # QA Observability and Performance Engineering
@@ -107,3 +107,9 @@ Curated sources:
 - Prefer burn-rate alerting against SLOs over alerting on raw infra metrics.
 - Treat sampling, cardinality, and retention as part of quality (not an afterthought).
 - When asked to pick vendors/tools, start from `data/sources.json` and validate time-sensitive claims with current docs/releases if the environment allows it.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

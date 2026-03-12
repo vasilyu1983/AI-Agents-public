@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://claude-code-kit/sources-schema.json",
+  "title": "Skill Sources Schema",
+  "description": "Schema for data/sources.json files in Claude Code Kit skills",
+  "type": "object",
+  "required": ["metadata", "categories"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["skill", "updated", "total_sources"],
+      "properties": {
+        "skill": {
+          "type": "string",
+          "description": "Skill name in kebab-case",
+          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$"
+        },
+        "updated": {
+          "type": "string",
+          "description": "Last updated date in ISO format",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "total_sources": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Total number of sources across all categories"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Brief description of sources coverage"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$",
+          "description": "Schema version (optional)"
+        },
+        "primary_stack": {
+          "type": "string",
+          "description": "Primary technology stack covered (optional)"
+        },
+        "supported_frameworks": {
+          "type": "string",
+          "description": "Comma-separated list of frameworks (optional)"
+        },
+        "extensible": {
+          "type": "boolean",
+          "description": "Whether sources can be extended (optional)"
+        },
+        "latest_updates": {
+          "type": "string",
+          "description": "Recent changes to sources (optional)"
+        }
+      }
+    },
+    "categories": {
+      "type": "object",
+      "description": "Sources organized by category",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/source"
+        },
+        "minItems": 1
+      },
+      "minProperties": 1
+    }
+  },
+  "definitions": {
+    "source": {
+      "type": "object",
+      "required": ["name", "url", "type", "relevance"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 100,
+          "description": "Human-readable resource name"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "HTTPS URL to the resource"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "documentation",
+            "tutorial",
+            "reference",
+            "tool",
+            "examples",
+            "framework",
+            "library",
+            "guide",
+            "blog",
+            "course",
+            "book",
+            "video",
+            "podcast",
+            "specification",
+            "announcement",
+            "research"
+          ],
+          "description": "Type of resource"
+        },
+        "relevance": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 300,
+          "description": "Why this resource matters for the skill"
+        },
+        "update_frequency": {
+          "type": "string",
+          "enum": ["continuous", "weekly", "monthly", "quarterly", "annual", "static"],
+          "default": "continuous",
+          "description": "How often the resource is updated"
+        },
+        "access": {
+          "type": "string",
+          "enum": ["free", "paid", "freemium"],
+          "default": "free",
+          "description": "Access model for the resource"
+        },
+        "add_as_web_search": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to prioritize this for web searches"
+        },
+        "version": {
+          "type": "string",
+          "description": "Specific version covered (optional)"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tags for filtering (optional)"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "metadata": {
+        "skill": "software-backend",
+        "updated": "2025-12-06",
+        "total_sources": 45,
+        "description": "Backend development resources for Node.js, Python, Go, Rust"
+      },
+      "categories": {
+        "nodejs": [
+          {
+            "name": "Node.js Documentation",
+            "url": "https://nodejs.org/docs/latest/api/",
+            "type": "documentation",
+            "relevance": "Official Node.js API reference for all built-in modules.",
+            "update_frequency": "continuous",
+            "access": "free",
+            "add_as_web_search": true
+          }
+        ]
+      }
+    }
+  ]
+}

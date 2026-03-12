@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "title": "Claude Code Agents - Sources",
+    "description": "Official documentation for Claude Code agents/subagents",
+    "last_updated": "2026-01-26",
+    "skill": "agents-subagents"
+  },
+  "official_documentation": [
+    {
+      "name": "Claude Code Subagents Documentation",
+      "url": "https://code.claude.com/docs/en/sub-agents",
+      "description": "Official subagents documentation with frontmatter fields, built-in agents, and best practices",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Overview",
+      "url": "https://code.claude.com/docs/en/overview",
+      "description": "Claude Code feature overview",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Changelog",
+      "url": "https://code.claude.com/docs/en/changelog",
+      "description": "Latest features, updates, and release notes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Best Practices",
+      "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+      "description": "Official best practices for agentic coding",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Building Agents with Claude Agent SDK",
+      "url": "https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk",
+      "description": "Guide to building agents with the Claude Agent SDK",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Equipping Agents with Agent Skills",
+      "url": "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills",
+      "description": "Progressive disclosure and skill architecture for agents",
+      "add_as_web_search": true
+    }
+  ],
+  "design_patterns": [
+    {
+      "name": "Agent Design Patterns (2026)",
+      "url": "https://rlancemartin.github.io/2026/01/09/agent_design/",
+      "description": "Context engineering, tool minimization, subagent patterns",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Best Practices for Claude Code Subagents",
+      "url": "https://www.pubnub.com/blog/best-practices-for-claude-code-sub-agents/",
+      "description": "Pipeline architecture, context management, tool permissions",
+      "add_as_web_search": false
+    }
+  ],
+  "community_resources": [
+    {
+      "name": "Awesome Claude Code Subagents",
+      "url": "https://github.com/VoltAgent/awesome-claude-code-subagents",
+      "description": "Production-ready subagents collection with 100+ specialized agents",
+      "add_as_web_search": false
+    },
+    {
+      "name": "ClaudeLog - Subagents Guide",
+      "url": "https://claudelog.com/mechanics/sub-agents/",
+      "description": "Community tutorials and best practices for subagents",
+      "add_as_web_search": false
+    }
+  ]
+}

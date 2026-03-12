@@ -1,6 +1,6 @@
 ---
 name: agents-mcp
-description: Configure and build Model Context Protocol (MCP) servers for AI coding agent integration (Claude Code, Codex CLI). Set up database, filesystem, git, and API connections. Build custom MCP servers with TypeScript/Python SDK, implement tools and resources, configure transports (stdio, HTTP), and deploy for production. Advises when to use MCP vs direct tool calls.
+description: Configure and build MCP servers for AI agent tool integration. Use when connecting Claude Code or Codex to databases, APIs, or custom tools.
 ---
 
 # MCP (Model Context Protocol) — Advisor & Reference
@@ -265,3 +265,9 @@ Unbounded auth retry loops waste context window and block productive work.
 ### Reuse Rule
 
 Cache working MCP connection settings per session and avoid repeated re-login/reconfigure unless health gate fails.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

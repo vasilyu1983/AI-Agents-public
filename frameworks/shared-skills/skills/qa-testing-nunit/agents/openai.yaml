@@ -1,0 +1,4 @@
+interface:
+  display_name: "NUnit Testing"
+  short_description: "Build resilient NUnit test suites"
+  default_prompt: "Use $qa-testing-nunit to design API, component, and integration NUnit suites with fixtures, WireMock, Testcontainers, and anti-flaky patterns."

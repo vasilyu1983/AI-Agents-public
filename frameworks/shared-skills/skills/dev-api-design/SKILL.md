@@ -1,6 +1,6 @@
 ---
 name: dev-api-design
-description: Production-grade API design patterns for REST, GraphQL, gRPC, and tRPC. Covers API architecture, OpenAPI/Swagger specs, versioning/deprecation, authentication/authorization, rate limiting, pagination, error models, contract testing, and developer documentation.
+description: REST/GraphQL/gRPC/tRPC API design patterns. Use when designing APIs, writing OpenAPI specs, versioning, auth, or rate limiting.
 ---
 
 # API Development & Design — Quick Reference
@@ -352,3 +352,9 @@ This skill works best when combined with other specialized skills:
 ## Time-Sensitive Recommendations
 
 If a user asks for "best" tools/frameworks, "latest" standards, or whether something is still relevant in 2026, do a quick web search using whatever browsing/search tool is available in the current environment. If web access is unavailable, answer from stable principles, state assumptions (traffic, latency, team skills, ecosystem), and avoid overstating currency.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

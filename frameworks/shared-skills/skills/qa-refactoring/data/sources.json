@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "skill": "qa-refactoring",
+    "updated": "2026-01-23",
+    "version": "2.1",
+    "total_sources": 16,
+    "description": "Primary references for safe refactoring, legacy code characterization tests, and CI quality gates. AI sources are optional."
+  },
+  "categories": {
+    "refactoring_foundations": [
+      {
+        "name": "Martin Fowler - Refactoring (Book)",
+        "url": "https://martinfowler.com/books/refactoring.html",
+        "description": "Canonical refactoring reference and catalog entry point.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Refactoring.Guru - Refactoring Catalog",
+        "url": "https://refactoring.guru/refactoring",
+        "description": "Refactoring patterns with examples; useful for mapping smells to moves.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Refactoring.Guru - Code Smells",
+        "url": "https://refactoring.guru/refactoring/smells",
+        "description": "Code smell identification and remediation hints.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "legacy_code_safety": [
+      {
+        "name": "Michael Feathers - Characterization Testing",
+        "url": "https://michaelfeathers.silvrback.com/characterization-testing",
+        "description": "Core technique for adding a safety net before refactoring legacy code.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Martin Fowler - Strangler Fig Application",
+        "url": "https://martinfowler.com/bliki/StranglerFigApplication.html",
+        "description": "Incremental modernization pattern for legacy systems.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Working Effectively with Legacy Code (Book)",
+        "url": "https://www.oreilly.com/library/view/working-effectively-with/0131177052/",
+        "description": "Seams, characterization tests, and incremental refactoring strategies.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "2026 Legacy Modernization Report",
+        "url": "https://devoxsoftware.com/blog/the-2026-legacy-modernization-report-research-insights-and-strategic-roadmap/",
+        "description": "Industry research on AI-driven modernization, characterization testing trends, and enterprise migration patterns.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "quality_gates": [
+      {
+        "name": "ESLint Documentation",
+        "url": "https://eslint.org/docs/latest/",
+        "description": "Lint rules and configuration for JavaScript/TypeScript quality gates.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Prettier Documentation",
+        "url": "https://prettier.io/docs/en/",
+        "description": "Code formatting to reduce diff noise and review friction.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "SonarQube Server 2025 LTA - Quality Gates",
+        "url": "https://docs.sonarsource.com/sonarqube-server/2025.1/instance-administration/analysis-functions/quality-gates",
+        "description": "Latest 2025 LTA quality gate configuration including Sonar way for AI Code.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "technical_debt": [
+      {
+        "name": "Gartner - Technical Debt Management",
+        "url": "https://www.gartner.com/en/infrastructure-and-it-operations-leaders/topics/technical-debt",
+        "description": "Analyst recommendations for structured debt reduction and portfolio management.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "TechDebt 2026 Conference",
+        "url": "https://conf.researchr.org/series/TechDebt",
+        "description": "Academic and industry research on technical debt identification and management strategies.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "ci_workflows": [
+      {
+        "name": "GitHub Actions - Automating Builds and Tests",
+        "url": "https://docs.github.com/en/actions/automating-builds-and-tests",
+        "description": "CI workflow building blocks (matrices, caching) for refactor safety.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "optional_ai_automation": [
+      {
+        "name": "GitHub Copilot",
+        "url": "https://github.com/features/copilot",
+        "description": "Optional: AI-assisted refactor suggestions; require tests/contracts to prove behavior preservation.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "JetBrains AI",
+        "url": "https://www.jetbrains.com/ai/",
+        "description": "Optional: IDE assistance for refactors; treat as a draft generator, not an oracle.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Qodo (CodiumAI)",
+        "url": "https://www.qodo.ai/",
+        "description": "Optional: AI-driven code integrity with test-driven refactoring and multi-language support.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ]
+  }
+}

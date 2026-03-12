@@ -1,0 +1,29 @@
+{
+  "topic": "dotnet_testing_feedback_loop",
+  "microsoft_references": [
+    {
+      "title": ".NET Testing Overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/"
+    },
+    {
+      "title": "dotnet test CLI",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-test"
+    },
+    {
+      "title": ".NET Code Coverage",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-code-coverage"
+    },
+    {
+      "title": "ASP.NET Core Integration Tests",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-9.0"
+    },
+    {
+      "title": "C# Coding Conventions",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions"
+    },
+    {
+      "title": ".NET Source Code",
+      "url": "https://github.com/dotnet"
+    }
+  ]
+}

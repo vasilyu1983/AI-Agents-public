@@ -1,0 +1,458 @@
+openapi: 3.1.0
+info:
+  title: Your API Name
+  version: 1.0.0
+  description: |
+    API description goes here. Include:
+    - What the API does
+    - Key features
+    - Authentication requirements
+  contact:
+    name: API Support
+    email: api@example.com
+    url: https://docs.example.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+  - url: https://staging.api.example.com/v1
+    description: Staging server
+  - url: http://localhost:3000/v1
+    description: Local development
+
+tags:
+  - name: Users
+    description: User management endpoints
+  - name: Authentication
+    description: Authentication and authorization
+
+paths:
+  /users:
+    get:
+      summary: List users
+      description: Retrieve a paginated list of users
+      operationId: listUsers
+      tags:
+        - Users
+      parameters:
+        - name: limit
+          in: query
+          description: Number of items to return (max 100)
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+        - name: offset
+          in: query
+          description: Number of items to skip
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - name: sort
+          in: query
+          description: Sort field and direction (e.g., "name" or "-created_at")
+          schema:
+            type: string
+            default: "-created_at"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  meta:
+                    $ref: '#/components/schemas/PaginationMeta'
+              examples:
+                success:
+                  value:
+                    data:
+                      - id: "123e4567-e89b-12d3-a456-426614174000"
+                        email: "john@example.com"
+                        name: "John Doe"
+                        status: "active"
+                        created_at: "2025-01-15T10:30:00Z"
+                    meta:
+                      total: 150
+                      limit: 20
+                      offset: 0
+                      hasMore: true
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+      security:
+        - bearerAuth: []
+
+    post:
+      summary: Create user
+      description: Create a new user account
+      operationId: createUser
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+            examples:
+              new_user:
+                value:
+                  email: "jane@example.com"
+                  name: "Jane Smith"
+                  password: "SecureP@ss123"
+      responses:
+        '201':
+          description: User created successfully
+          headers:
+            Location:
+              description: URL of created resource
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      security:
+        - bearerAuth: []
+
+  /users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        description: User ID
+        schema:
+          type: string
+          format: uuid
+
+    get:
+      summary: Get user
+      description: Retrieve a specific user by ID
+      operationId: getUser
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - bearerAuth: []
+
+    patch:
+      summary: Update user
+      description: Partially update a user
+      operationId: updateUser
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      security:
+        - bearerAuth: []
+
+    delete:
+      summary: Delete user
+      description: Delete a user account
+      operationId: deleteUser
+      tags:
+        - Users
+      responses:
+        '204':
+          description: User deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      security:
+        - bearerAuth: []
+
+  /auth/login:
+    post:
+      summary: Login
+      description: Authenticate user and receive tokens
+      operationId: login
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string
+                  expiresIn:
+                    type: integer
+                    description: Token expiration in seconds
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - email
+        - name
+        - status
+        - created_at
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique user identifier
+        email:
+          type: string
+          format: email
+          description: User email address
+        name:
+          type: string
+          description: User full name
+        status:
+          type: string
+          enum: [active, inactive, suspended]
+          description: User account status
+        created_at:
+          type: string
+          format: date-time
+          description: Account creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+
+    CreateUserRequest:
+      type: object
+      required:
+        - email
+        - name
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+        password:
+          type: string
+          format: password
+          minLength: 8
+
+    UpdateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+        status:
+          type: string
+          enum: [active, inactive, suspended]
+
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items
+        limit:
+          type: integer
+          description: Items per page
+        offset:
+          type: integer
+          description: Items skipped
+        hasMore:
+          type: boolean
+          description: Whether more items exist
+
+    Error:
+      type: object
+      required:
+        - type
+        - title
+        - status
+      properties:
+        type:
+          type: string
+          format: uri
+          description: Error type URI
+        title:
+          type: string
+          description: Human-readable error title
+        status:
+          type: integer
+          description: HTTP status code
+        detail:
+          type: string
+          description: Detailed error message
+        instance:
+          type: string
+          description: Request path
+        errors:
+          type: array
+          description: Field-level errors
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              code:
+                type: string
+              message:
+                type: string
+        traceId:
+          type: string
+          description: Request trace ID for debugging
+
+  responses:
+    BadRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            type: "https://api.example.com/errors/bad-request"
+            title: "Bad Request"
+            status: 400
+            detail: "The request could not be understood"
+            instance: "/api/v1/users"
+
+    UnauthorizedError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            type: "https://api.example.com/errors/unauthorized"
+            title: "Unauthorized"
+            status: 401
+            detail: "Authentication required"
+            instance: "/api/v1/users"
+
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            type: "https://api.example.com/errors/not-found"
+            title: "Not Found"
+            status: 404
+            detail: "User not found"
+            instance: "/api/v1/users/123"
+
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            type: "https://api.example.com/errors/validation"
+            title: "Validation Error"
+            status: 422
+            detail: "Request validation failed"
+            instance: "/api/v1/users"
+            errors:
+              - field: "email"
+                code: "INVALID_EMAIL"
+                message: "Email address is invalid"
+
+    RateLimitError:
+      description: Rate limit exceeded
+      headers:
+        X-RateLimit-Limit:
+          description: Request limit per window
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          description: Requests remaining
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          description: Reset timestamp
+          schema:
+            type: integer
+        Retry-After:
+          description: Seconds until retry allowed
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            type: "https://api.example.com/errors/rate-limit"
+            title: "Rate Limit Exceeded"
+            status: 429
+            detail: "Too many requests"
+            instance: "/api/v1/users"
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained from /auth/login
+
+security:
+  - bearerAuth: []

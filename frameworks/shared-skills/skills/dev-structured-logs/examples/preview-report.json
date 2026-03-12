@@ -1,0 +1,58 @@
+[
+  {
+    "file": "concatenation.before.cs",
+    "line": 1,
+    "original": "_logger.LogInformation(\"User \" + userId + \" logged in\");",
+    "transformed": "_logger.LogInformation(\"User {UserId} logged in\", userId);",
+    "risk_level": "low",
+    "reason": "Converted string-based log message to structured template"
+  },
+  {
+    "file": "handler-scope.before.cs",
+    "line": 7,
+    "original": "<handler body>",
+    "transformed": "<scope inserted>",
+    "risk_level": "medium",
+    "reason": "CommandHandler scope insertion"
+  },
+  {
+    "file": "handler-scope.before.cs",
+    "line": 7,
+    "original": "        _logger.LogInformation(\"Creating order \" + command.Id);",
+    "transformed": "        _logger.LogInformation(\"Creating order {Id}\", command.Id);",
+    "risk_level": "low",
+    "reason": "Converted string-based log message to structured template"
+  },
+  {
+    "file": "handler-scope.before.cs",
+    "line": 7,
+    "original": "",
+    "transformed": "        var __scopeItems = new Dictionary<string, object>\n        {\n            [\"Id\"] = command.Id,\n        };\n        using var _scope = _logger.BeginScope(__scopeItems);",
+    "risk_level": "medium",
+    "reason": "Inserted CommandHandler scope with command key properties. Verify logger variable and command properties"
+  },
+  {
+    "file": "interpolation.before.cs",
+    "line": 1,
+    "original": "_logger.LogWarning($\"Trace {traceId} for user {userId}\");",
+    "transformed": "_logger.LogWarning(\"Trace {TraceId} for user {UserId}\", traceId, userId);",
+    "risk_level": "low",
+    "reason": "Converted string-based log message to structured template"
+  },
+  {
+    "file": "side-effect.before.cs",
+    "line": 1,
+    "original": "_logger.LogInformation(\"Result: \" + ComputeExpensive());",
+    "transformed": "var __tmp0 = ComputeExpensive();\n_logger.LogInformation(\"Result: {Value0}\", __tmp0);",
+    "risk_level": "medium",
+    "reason": "Side-effect expression extracted to temp variable; requires manual review"
+  },
+  {
+    "file": "string-format.before.cs",
+    "line": 1,
+    "original": "_logger.LogInformation(String.Format(\"Order {0} for {1}\", orderId, userName));",
+    "transformed": "_logger.LogInformation(\"Order {OrderId} for {UserName}\", orderId, userName);",
+    "risk_level": "low",
+    "reason": "Converted string-based log message to structured template"
+  }
+]

@@ -1,0 +1,4 @@
+interface:
+  display_name: "NUKE CI/CD"
+  short_description: "Design NUKE CI/CD pipelines with fast feedback loops"
+  default_prompt: "Use $ops-nuke-cicd to design and debug NUKE CI/CD target graphs, build-test feedback loops, coverage reporting, Docker image publishing, and local-versus-CI execution behavior. Keep service-code and fixture-design changes in their specialized skills."

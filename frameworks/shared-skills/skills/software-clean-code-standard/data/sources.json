@@ -1,0 +1,360 @@
+{
+  "metadata": {
+    "skill": "software-clean-code-standard",
+    "updated": "2026-01-17",
+    "total_sources": 36,
+    "description": "Authoritative references for clean code standards (CC-*), code review practices, security-by-design, observability, refactoring, testing strategy, reliability, and modern linting/SAST tooling."
+  },
+  "categories": {
+    "code_review_practices": [
+      {
+        "name": "Google Engineering Practices - What to look for in a code review",
+        "url": "https://google.github.io/eng-practices/review/reviewer/looking-for.html",
+        "type": "guide",
+        "relevance": "Durable reviewer focus areas: complexity, tests, and relying on style guides instead of preference debates.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Engineering Practices - Small CLs",
+        "url": "https://google.github.io/eng-practices/review/developer/small-cls.html",
+        "type": "guide",
+        "relevance": "Explains why small, reviewable changes improve review quality and reduce rework.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Engineering Practices - Writing good CL descriptions",
+        "url": "https://google.github.io/eng-practices/review/developer/cl-descriptions.html",
+        "type": "guide",
+        "relevance": "Defines durable expectations for \"what\" and \"why\" so future readers can understand intent.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Engineering Practices - Code review speed",
+        "url": "https://google.github.io/eng-practices/review/reviewer/speed.html",
+        "type": "guide",
+        "relevance": "Sets expectations for review responsiveness to reduce process latency without sacrificing quality.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "commenting_and_feedback": [
+      {
+        "name": "Conventional Comments",
+        "url": "https://conventionalcomments.org/",
+        "type": "specification",
+        "relevance": "A lightweight, machine-parseable standard for review comment intent (issue/suggestion/question/nitpick).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "security": [
+      {
+        "name": "OWASP Top 10",
+        "url": "https://owasp.org/www-project-top-ten/",
+        "type": "reference",
+        "relevance": "Baseline web application security risks to consider in both coding and review standards.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST SSDF (SP 800-218)",
+        "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+        "type": "specification",
+        "relevance": "Secure software development framework for governance, practices, and organizational adoption.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "observability": [
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "type": "documentation",
+        "relevance": "Industry-standard approach to traces, metrics, and logs for observable systems.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "normative_language": [
+      {
+        "name": "RFC 2119 - Key words for use in RFCs to Indicate Requirement Levels",
+        "url": "https://www.rfc-editor.org/rfc/rfc2119",
+        "type": "specification",
+        "relevance": "Defines MUST/SHOULD/MAY requirement wording for stable standards documents.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "github_workflow_controls": [
+      {
+        "name": "GitHub Docs - Creating a pull request template",
+        "url": "https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository",
+        "type": "documentation",
+        "relevance": "Repository-level PR templates improve review context consistency and reduce back-and-forth.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "GitHub Docs - About CODEOWNERS",
+        "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+        "type": "documentation",
+        "relevance": "Routes reviews to responsible owners and helps scale review quality across teams.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "GitHub Docs - About protected branches",
+        "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+        "type": "documentation",
+        "relevance": "Explains branch protection controls (required reviews, status checks) for enforcement in CI.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "refactoring_and_design": [
+      {
+        "name": "Refactoring (Martin Fowler) - Catalog",
+        "url": "https://refactoring.com/catalog/",
+        "type": "reference",
+        "relevance": "Canonical refactoring patterns with intent and mechanics; useful for proposing precise, low-risk refactors.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "The Twelve-Factor App",
+        "url": "https://12factor.net/",
+        "type": "reference",
+        "relevance": "Operational principles for cloud-native apps (config, logs, concurrency, disposability) that inform reusable templates and defaults.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "C4 Model",
+        "url": "https://c4model.com/",
+        "type": "guide",
+        "relevance": "A lightweight diagramming model for communicating architecture with stable levels of detail; useful for skill resources and templates.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Documenting Architecture Decisions (Michael Nygard)",
+        "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+        "type": "blog",
+        "relevance": "Canonical ADR format and rationale; useful when skills recommend decision records for durability and traceability.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Builders' Library",
+        "url": "https://aws.amazon.com/builders-library/",
+        "type": "guide",
+        "relevance": "Operationally grounded essays on reliability and maintainability; good defaults for resilience and scaling patterns in templates.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "foundational_books": [
+      {
+        "name": "Clean Code (Robert C. Martin)",
+        "url": "https://www.pearson.com/en-us/subject-catalog/p/clean-code-a-handbook-of-agile-software-craftsmanship/P200000006168/9780132350884",
+        "type": "book",
+        "relevance": "Foundational readability and maintainability heuristics; use to inform checklists and examples (avoid copying prose into standards).",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Code Complete, 2nd Edition (Steve McConnell)",
+        "url": "https://www.microsoftpressstore.com/store/code-complete-9780735619678",
+        "type": "book",
+        "relevance": "Construction practices: defensive coding, complexity control, and practical discipline that maps well to CC-* review feedback.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "The Pragmatic Programmer (20th Anniversary Edition)",
+        "url": "https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/",
+        "type": "book",
+        "relevance": "Durable engineering habits: refactoring, testing, automation, and designing for change; good background for skill guidance.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Working Effectively with Legacy Code (Michael Feathers)",
+        "url": "https://www.pearson.com/en-us/subject-catalog/p/working-effectively-with-legacy-code/P200000006301/9780131177055",
+        "type": "book",
+        "relevance": "Change-safe techniques for legacy systems (seams, characterization tests, risk control); complements refactoring checklists.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false
+      }
+    ],
+    "testing_strategy": [
+      {
+        "name": "Google Testing Blog",
+        "url": "https://testing.googleblog.com/",
+        "type": "blog",
+        "relevance": "Testing strategy and maintainability practices from Google engineers; useful background for cross-skill testing guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Playwright Documentation",
+        "url": "https://playwright.dev/",
+        "type": "documentation",
+        "relevance": "E2E testing for web apps with reliable tooling and cross-browser support; good reference for test automation templates.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Testing Library - Guiding Principles",
+        "url": "https://testing-library.com/docs/guiding-principles",
+        "type": "guide",
+        "relevance": "Principles for writing tests that resemble user behavior and avoid brittle implementation-coupled assertions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "observability_and_reliability": [
+      {
+        "name": "Google SRE Book",
+        "url": "https://sre.google/sre-book/table-of-contents/",
+        "type": "book",
+        "relevance": "SLIs/SLOs, incident response, and reliability fundamentals; good baseline for operational and observability guidance.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Specifications",
+        "url": "https://opentelemetry.io/docs/specs/",
+        "type": "specification",
+        "relevance": "Semantic conventions and protocol-level specs for consistent observability across vendors and stacks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "specs_and_standards": [
+      {
+        "name": "RFC 9457 - Problem Details for HTTP APIs",
+        "url": "https://www.rfc-editor.org/rfc/rfc9457",
+        "type": "specification",
+        "relevance": "Standard error response format for HTTP APIs (updates RFC 7807); helps keep API templates consistent.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP Cheat Sheet Series",
+        "url": "https://cheatsheetseries.owasp.org/",
+        "type": "reference",
+        "relevance": "Practical security guidance (auth, session management, headers, input validation) for templates and reviews.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "optional_ai_automation": [
+      {
+        "name": "TypeScript Native Previews",
+        "url": "https://devblogs.microsoft.com/typescript/progress-on-typescript-7-december-2025/",
+        "type": "announcement",
+        "relevance": "Optional: TypeScript native tooling progress; useful when skills discuss build performance and editor/tooling ergonomics.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP Top 10 for Large Language Model Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "reference",
+        "relevance": "Optional: threat taxonomy for LLM applications (prompt injection, data leakage, model supply chain) for AI-enabled product work.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AI Code Review Tools 2026 (Qodo)",
+        "url": "https://www.qodo.ai/blog/best-ai-code-review-tools-2026/",
+        "type": "guide",
+        "relevance": "AI-assisted review tools landscape; addresses review throughput bottleneck as AI-generated code volume increases.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AI SAST Tools Guide 2026 (Arnica)",
+        "url": "https://www.arnica.io/blog/top-6-ai-sast-tools-for-2026-the-quick-guide-to-agentic-static-application-security-testing",
+        "type": "guide",
+        "relevance": "AI-native SAST for faster, more accurate vulnerability detection; covers Cycode, Snyk Code, Semgrep AI capabilities.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "modern_linting_tooling": [
+      {
+        "name": "Biome vs ESLint Comparison (Better Stack)",
+        "url": "https://betterstack.com/community/guides/scaling-nodejs/biome-eslint/",
+        "type": "guide",
+        "relevance": "Modern linter performance comparison; Biome is 10-25x faster than ESLint+Prettier with unified tooling.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Oxlint - Rust-based JavaScript Linter",
+        "url": "https://oxc.rs/docs/guide/usage/linter.html",
+        "type": "documentation",
+        "relevance": "50-100x faster than ESLint with zero config; production-ready standalone linter from Oxc project.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ruff - Python Linter and Formatter",
+        "url": "https://docs.astral.sh/ruff/",
+        "type": "documentation",
+        "relevance": "Rust-based Python linter 10-100x faster than Flake8; drop-in replacement with unified linting and formatting.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Code Quality Metrics for Large Orgs 2026 (Qodo)",
+        "url": "https://www.qodo.ai/blog/code-quality-metrics-2026/",
+        "type": "guide",
+        "relevance": "Technical debt metrics (TDR, code churn, defect ratio), benchmarks, and AI-generated code validation costs.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

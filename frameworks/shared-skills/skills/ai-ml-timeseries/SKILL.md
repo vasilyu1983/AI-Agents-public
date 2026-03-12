@@ -1,6 +1,6 @@
 ---
 name: ai-ml-timeseries
-description: "Operational patterns, templates, and decision rules for time series forecasting (modern best practices): tree-based methods (LightGBM), deep learning (Transformers, RNNs), future-guided learning, temporal validation, feature engineering, generative TS (Chronos), and production deployment. Emphasizes explainability, long-term dependency handling, and adaptive forecasting."
+description: "Time series forecasting — LightGBM, Transformers, temporal validation, feature engineering, and production deployment. Use when building TS models."
 ---
 
 # Time Series Forecasting — Modern Patterns & Production Best Practices
@@ -271,3 +271,9 @@ See [data/sources.json](data/sources.json) for curated web resources including:
 - Monitor for data distribution shifts in production
 
 **Key Principle:** Time series forecasting is about temporal structure, not IID assumptions. Use temporal validation, avoid future leakage, and choose models based on horizon length and data characteristics.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

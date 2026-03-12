@@ -1,0 +1,565 @@
+{
+  "metadata": {
+    "skill": "ai-llm",
+    "updated": "2026-01-17",
+    "audit_date": "2025-12-17",
+    "last_verified": "2025-12-17",
+    "total_sources": 59,
+    "description": "Curated resources for production LLM engineering: model selection, adaptation (prompting/RAG/fine-tuning), evaluation, deployment, and operations."
+  },
+  "categories": {
+    "foundational_papers_and_standards": [
+      {
+        "name": "Attention Is All You Need (Transformer)",
+        "url": "https://arxiv.org/abs/1706.03762",
+        "type": "research",
+        "relevance": "Foundational transformer architecture that underpins modern LLMs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LoRA: Low-Rank Adaptation",
+        "url": "https://arxiv.org/abs/2106.09685",
+        "type": "research",
+        "relevance": "Core reference for adapter-based fine-tuning used widely in production (LoRA/PEFT).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "QLoRA",
+        "url": "https://arxiv.org/abs/2305.14314",
+        "type": "research",
+        "relevance": "Quantized fine-tuning approach; useful for cost-aware adaptation strategies.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NIST AI Risk Management Framework 1.0",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+        "type": "specification",
+        "relevance": "Governance and risk management baseline for production AI systems.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NIST Generative AI Profile (NIST AI 600-1)",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+        "type": "specification",
+        "relevance": "Risk management profile for GenAI systems aligned to the NIST AI RMF.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "EU AI Act (Regulation (EU) 2024/1689)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+        "type": "specification",
+        "relevance": "Regulatory baseline for risk classification, transparency, and controls for AI systems in the EU.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "specification",
+        "relevance": "Threat categories and mitigations for LLM-integrated applications.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Semantic Conventions for GenAI",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "type": "specification",
+        "relevance": "Standardized telemetry for LLM requests (tokens, latency, model attributes).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "llm_platforms": [
+      {
+        "name": "OpenAI Platform Documentation",
+        "url": "https://platform.openai.com/docs",
+        "type": "documentation",
+        "relevance": "Official API, models, fine-tuning, embeddings, and endpoint usage.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Claude Documentation",
+        "url": "https://docs.anthropic.com/",
+        "type": "documentation",
+        "relevance": "Claude model API, safety, prompt engineering, agent SDK.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Gemini AI Documentation",
+        "url": "https://ai.google.dev/docs",
+        "type": "documentation",
+        "relevance": "Gemini model API, multimodal, and deployment reference.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mistral AI Documentation",
+        "url": "https://docs.mistral.ai/",
+        "type": "documentation",
+        "relevance": "Open and commercial Mistral models, API endpoints.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Azure OpenAI Service",
+        "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/",
+        "type": "documentation",
+        "relevance": "Enterprise OpenAI deployment, security, quota management.",
+        "update_frequency": "weekly",
+        "access": "subscription",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Bedrock",
+        "url": "https://docs.aws.amazon.com/bedrock/",
+        "type": "documentation",
+        "relevance": "Managed foundation model deployment (multiple providers).",
+        "update_frequency": "weekly",
+        "access": "subscription",
+        "add_as_web_search": true
+      }
+    ],
+    "open_source_models_and_frameworks": [
+      {
+        "name": "Hugging Face Transformers",
+        "url": "https://huggingface.co/docs/transformers",
+        "type": "documentation",
+        "relevance": "NLP model library, training, fine-tuning, inference recipes.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LLaMA Models (Meta)",
+        "url": "https://llama.meta.com/",
+        "type": "documentation",
+        "relevance": "Open Meta LLMs, deployment, evaluation.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "vLLM",
+        "url": "https://docs.vllm.ai/",
+        "type": "documentation",
+        "relevance": "High-throughput LLM serving and inference engine.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PEFT (Parameter-Efficient Fine-Tuning)",
+        "url": "https://huggingface.co/docs/peft",
+        "type": "documentation",
+        "relevance": "LoRA, QLoRA, adapters for efficient LLM fine-tuning.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepSpeed",
+        "url": "https://www.deepspeed.ai/",
+        "type": "documentation",
+        "relevance": "Distributed LLM training and optimization.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "prompt_engineering": [
+      {
+        "name": "Prompt Engineering Guide",
+        "url": "https://www.promptingguide.ai/",
+        "type": "documentation",
+        "relevance": "Comprehensive prompt engineering best practices.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Prompt Library",
+        "url": "https://docs.anthropic.com/en/prompt-library/library",
+        "type": "documentation",
+        "relevance": "Production prompt patterns and anti-patterns.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Chain-of-Thought Prompting Paper",
+        "url": "https://arxiv.org/abs/2201.11903",
+        "type": "documentation",
+        "relevance": "Explains stepwise reasoning for LLMs.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ReAct Pattern Paper",
+        "url": "https://arxiv.org/abs/2210.03629",
+        "type": "documentation",
+        "relevance": "Describes the ReAct agent prompting technique.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "rag_and_vector_databases": [
+      {
+        "name": "LlamaIndex Documentation",
+        "url": "https://docs.llamaindex.ai/",
+        "type": "documentation",
+        "relevance": "Data connectors, RAG patterns, index config, eval, multi-agent support.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangChain RAG Guide",
+        "url": "https://python.langchain.com/docs/use_cases/question_answering/",
+        "type": "documentation",
+        "relevance": "Best practices for retrieval-augmented generation.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangGraph Documentation",
+        "url": "https://langchain-ai.github.io/langgraph/",
+        "type": "documentation",
+        "relevance": "Stateful multi-agent workflows, graph-based orchestration (2025 standard for complex agents).",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft GraphRAG",
+        "url": "https://microsoft.github.io/graphrag/",
+        "type": "documentation",
+        "relevance": "Knowledge graph-based RAG for structured, deterministic retrieval (2025 trend).",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pathway RAG Framework",
+        "url": "https://pathway.com/developers/user-guide/llm-xpack/overview",
+        "type": "documentation",
+        "relevance": "Real-time data processing, end-to-end RAG with streaming ETL.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Haystack",
+        "url": "https://docs.haystack.deepset.ai/",
+        "type": "documentation",
+        "relevance": "End-to-end framework for RAG and eval.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pinecone",
+        "url": "https://docs.pinecone.io/",
+        "type": "documentation",
+        "relevance": "Managed vector DB for high-scale retrieval.",
+        "update_frequency": "weekly",
+        "access": "subscription",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Qdrant",
+        "url": "https://qdrant.tech/documentation/",
+        "type": "documentation",
+        "relevance": "Open-source vector DB for AI/RAG systems.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Chroma",
+        "url": "https://docs.trychroma.com/",
+        "type": "documentation",
+        "relevance": "Open-source embedding database for local RAG.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "evaluation_and_monitoring": [
+      {
+        "name": "OpenAI Evals",
+        "url": "https://github.com/openai/evals",
+        "type": "tool",
+        "relevance": "Framework for LLM evaluation and regression testing.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "HELM Benchmark",
+        "url": "https://crfm.stanford.edu/helm/",
+        "type": "research",
+        "relevance": "Holistic evaluation of language models.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anthropic Evals",
+        "url": "https://docs.anthropic.com/en/docs/test-and-evaluate",
+        "type": "documentation",
+        "relevance": "Official eval metrics for Claude and agentic systems.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangSmith",
+        "url": "https://docs.langchain.com/langsmith",
+        "type": "tool",
+        "relevance": "Observability and evaluation for LLM pipelines.",
+        "update_frequency": "monthly",
+        "access": "subscription",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Weights & Biases LLM",
+        "url": "https://wandb.ai/site/solutions/llmops",
+        "type": "tool",
+        "relevance": "Monitoring, experiment tracking, LLMOps.",
+        "update_frequency": "weekly",
+        "access": "subscription",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Arize AI Phoenix",
+        "url": "https://docs.arize.com/phoenix",
+        "type": "tool",
+        "relevance": "LLM observability, evaluation, tracing for production systems.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "agentic_frameworks_2025": [
+      {
+        "name": "Anthropic Agent SDK",
+        "url": "https://github.com/anthropics/anthropic-agent-sdk",
+        "type": "framework",
+        "relevance": "Official SDK for building Claude-powered agents with tool use and memory.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AutoGen",
+        "url": "https://microsoft.github.io/autogen/",
+        "type": "framework",
+        "relevance": "Multi-agent conversation framework (Microsoft Research).",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "CrewAI",
+        "url": "https://docs.crewai.com/",
+        "type": "framework",
+        "relevance": "Role-based multi-agent orchestration with hierarchical workflows.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangGraph Multi-Agent Guide",
+        "url": "https://langchain-ai.github.io/langgraph/tutorials/multi_agent/",
+        "type": "documentation",
+        "relevance": "Graph-based multi-agent systems with stateful workflows.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Semantic Kernel",
+        "url": "https://learn.microsoft.com/en-us/semantic-kernel/",
+        "type": "framework",
+        "relevance": "Microsoft's orchestration SDK for AI agents and plugins.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "production_deployment": [
+      {
+        "name": "LiteLLM",
+        "url": "https://docs.litellm.ai/",
+        "type": "tool",
+        "relevance": "Unified API for 100+ LLM providers, load balancing, cost tracking.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ollama",
+        "url": "https://ollama.com/",
+        "type": "tool",
+        "relevance": "Local LLM deployment with GGUF quantization support.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "RunPod",
+        "url": "https://docs.runpod.io/",
+        "type": "documentation",
+        "relevance": "GPU cloud for LLM inference with auto-scaling.",
+        "update_frequency": "weekly",
+        "access": "subscription",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Together AI",
+        "url": "https://docs.together.ai/",
+        "type": "documentation",
+        "relevance": "Fast inference for open-source models, fine-tuning support.",
+        "update_frequency": "weekly",
+        "access": "subscription",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SGLang",
+        "url": "https://github.com/sgl-project/sglang",
+        "type": "tool",
+        "relevance": "High-performance inference with RadixAttention for KV-cache reuse in agents/RAG (29% faster than vLLM on structured workloads).",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "FlashInfer",
+        "url": "https://github.com/flashinfer-ai/flashinfer",
+        "type": "tool",
+        "relevance": "Kernel library for custom LLM inference optimization, used by SGLang and vLLM.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LMDeploy",
+        "url": "https://github.com/InternLM/lmdeploy",
+        "type": "tool",
+        "relevance": "Inference framework with throughput comparable to SGLang, simpler setup than TensorRT-LLM.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "books": [
+      {
+        "name": "Designing Data-Intensive Applications (Martin Kleppmann)",
+        "url": "https://books.google.co.uk/books?id=BM7woQEACAAJ&dq=isbn:9781449373320&hl=&source=gbs_api",
+        "type": "book",
+        "relevance": "Replication, sharding, backpressure, and consistency for search/RAG infra and data planes.",
+        "update_frequency": "n/a",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AI Engineering (Chip Huyen)",
+        "url": "https://books.google.co.uk/books?id=YLbT0AEACAAJ&dq=isbn:9781098166304&hl=&source=gbs_api",
+        "type": "book",
+        "relevance": "Lifecycle for AI apps, evaluation/feedback loops, cost/latency optimization, and deployment patterns.",
+        "update_frequency": "n/a",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Building LLMs for Production (Louis-François Bouchard)",
+        "url": "https://books.google.co.uk/books?id=siLP0AEACAAJ&dq=Building+LLMs+for+Production&hl=&source=gbs_api",
+        "type": "book",
+        "relevance": "Applied RAG/agent workflows, evaluation, LangChain/LlamaIndex patterns, deployment checklists.",
+        "update_frequency": "n/a",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LLM Engineer’s Handbook (Paul Iusztin, Maxime Labonne)",
+        "url": "https://books.google.co.uk/books?id=BW7X0AEACAAJ&dq=isbn:9781836200079&hl=&source=gbs_api",
+        "type": "book",
+        "relevance": "FTI pipeline architecture, registries, cloud/RAG/agent templates for production LLMs.",
+        "update_frequency": "n/a",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Building Agentic AI Systems (Anjanava Biswas)",
+        "url": "https://books.google.co.uk/books?id=RkND0QEACAAJ&dq=isbn:9781803238753&hl=&source=gbs_api",
+        "type": "book",
+        "relevance": "Agent design patterns, coordinator/worker/delegator flows, trust and human-in-loop safeguards.",
+        "update_frequency": "n/a",
+        "access": "paid",
+        "add_as_web_search": true
+      }
+    ]
+  },
+  "research_tools": [
+    {
+      "name": "DSPy",
+      "url": "https://github.com/stanfordnlp/dspy",
+      "purpose": "Research framework for LLM prompt pipelines, dynamic prompting, and eval.",
+      "use_case": "When exploring novel LLM or RAG pipelines."
+    },
+    {
+      "name": "TRL (Transformer Reinforcement Learning)",
+      "url": "https://huggingface.co/docs/trl",
+      "purpose": "RLHF and PPO for LLM training/fine-tuning.",
+      "use_case": "When training LLMs with reinforcement learning or reward modeling."
+    }
+  ],
+  "communities": [
+    {
+      "name": "Hugging Face Forums",
+      "url": "https://discuss.huggingface.co/",
+      "platform": "forum",
+      "focus": "LLM development, fine-tuning, eval, datasets, troubleshooting"
+    },
+    {
+      "name": "LangChain Discord",
+      "url": "https://discord.gg/6adMQxSpJS",
+      "platform": "discord",
+      "focus": "RAG frameworks, chaining, deployment, LLMOps"
+    },
+    {
+      "name": "Anthropic Community",
+      "url": "https://community.anthropic.com/",
+      "platform": "forum",
+      "focus": "Claude, prompt design, safety, agentic workflows"
+    },
+    {
+      "name": "Weights & Biases Community",
+      "url": "https://community.wandb.ai/",
+      "platform": "forum",
+      "focus": "LLMOps, monitoring, eval best practices"
+    }
+  ]
+}

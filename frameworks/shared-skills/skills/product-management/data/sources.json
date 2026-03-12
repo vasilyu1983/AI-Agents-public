@@ -1,0 +1,293 @@
+{
+  "metadata": {
+    "skill": "product-management",
+    "updated": "2026-01-18",
+    "total_sources": 27,
+    "description": "Curated product management references for discovery, strategy, roadmaps, metrics, AI tools, and optional AI governance.",
+    "version": "2.2"
+  },
+  "categories": {
+    "discovery_and_user_research": [
+      {
+        "name": "GOV.UK Service Manual - User Research",
+        "url": "https://www.gov.uk/service-manual/user-research",
+        "type": "guide",
+        "relevance": "Practical user research guidance with strong ethics and evidence discipline.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["research", "ethics"]
+      },
+      {
+        "name": "Nielsen Norman Group",
+        "url": "https://www.nngroup.com/",
+        "type": "guide",
+        "relevance": "Research-backed UX and user research articles (validate applicability to your context).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["research", "ux"]
+      },
+      {
+        "name": "The Mom Test",
+        "url": "https://momtestbook.com/",
+        "type": "book",
+        "relevance": "Customer interview patterns to reduce bias and extract actionable insights.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false,
+        "tags": ["interviews"]
+      },
+      {
+        "name": "Opportunity Solution Tree",
+        "url": "https://www.producttalk.org/opportunity-solution-tree/",
+        "type": "framework",
+        "relevance": "Discovery structure for mapping outcomes → opportunities → solutions → experiments.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["discovery", "framework"]
+      },
+      {
+        "name": "Jobs-to-be-Done (JTBD)",
+        "url": "https://jtbd.info/",
+        "type": "framework",
+        "relevance": "Customer need framing for discovery and positioning (use with real evidence).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["discovery", "jtbd"]
+      }
+    ],
+    "strategy_positioning_and_planning": [
+      {
+        "name": "Working Backwards (Amazon)",
+        "url": "https://www.aboutamazon.com/news/company-news/working-backwards",
+        "type": "guide",
+        "relevance": "Amazon’s public description of the working backwards approach (press release + FAQ concept).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["strategy", "prfaq"]
+      },
+      {
+        "name": "April Dunford - Resources",
+        "url": "https://www.aprildunford.com/resources",
+        "type": "framework",
+        "relevance": "Positioning method and supporting materials; use with customer evidence and win/loss feedback.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["positioning"]
+      },
+      {
+        "name": "Good Strategy Bad Strategy (Richard Rumelt)",
+        "url": "https://goodstrategybadstrategy.com/",
+        "type": "book",
+        "relevance": "Strategy kernel framing: diagnosis, guiding policy, coherent actions.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false,
+        "tags": ["strategy"]
+      },
+      {
+        "name": "ProdPad - Now Next Later Roadmaps",
+        "url": "https://www.prodpad.com/downloads/now-next-later-roadmap-template/",
+        "type": "guide",
+        "relevance": "Roadmapping format useful under uncertainty; ensure outcomes and metrics are explicit.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["roadmaps"]
+      }
+    ],
+    "experimentation_and_metrics": [
+      {
+        "name": "Trustworthy Online Controlled Experiments (Kohavi, Tang, Xu)",
+        "url": "https://experimentguide.com/",
+        "type": "book",
+        "relevance": "Controlled experimentation foundations and pitfalls (measurement, power, interpretation).",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": true,
+        "tags": ["experiments", "metrics"]
+      },
+      {
+        "name": "Google Analytics (Developers)",
+        "url": "https://developers.google.com/analytics",
+        "type": "documentation",
+        "relevance": "Instrumentation and measurement reference for defining events and success metrics.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["analytics", "metrics"]
+      },
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "type": "documentation",
+        "relevance": "Vendor-neutral observability reference; useful when product metrics require reliable telemetry.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["observability", "metrics"]
+      },
+      {
+        "name": "Google SRE Book",
+        "url": "https://sre.google/sre-book/table-of-contents/",
+        "type": "book",
+        "relevance": "SLIs/SLOs and incident learning loops relevant to reliability requirements in PRDs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["reliability", "slo"]
+      },
+      {
+        "name": "PostHog Product Analytics",
+        "url": "https://posthog.com/docs/product-analytics",
+        "type": "documentation",
+        "relevance": "Open-source product analytics with built-in experimentation; recommended for technical teams.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["analytics", "experimentation", "open-source"]
+      },
+      {
+        "name": "Amplitude Analytics",
+        "url": "https://amplitude.com/docs",
+        "type": "documentation",
+        "relevance": "Enterprise product analytics with journey visualization; recommended for marketing and growth teams.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": ["analytics", "enterprise"]
+      },
+      {
+        "name": "ProductPlan State of Product Management Report",
+        "url": "https://www.productplan.com/2025-state-of-product-management-report/",
+        "type": "report",
+        "relevance": "Industry benchmarks for PM practices, AI adoption rates, revenue ownership trends.",
+        "update_frequency": "annual",
+        "access": "gated",
+        "add_as_web_search": true,
+        "tags": ["benchmarks", "trends", "metrics"]
+      },
+      {
+        "name": "OKR Institute - How to Set OKRs",
+        "url": "https://okrinstitute.org/how-to-set-okrs-for-your-team-in-2026-a-practical-future-ready-guide/",
+        "type": "guide",
+        "relevance": "Practical OKR setting guide with 70% stretch target methodology and weekly check-in cadence.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["okrs", "metrics", "goals"]
+      }
+    ],
+    "privacy_security_and_accessibility": [
+      {
+        "name": "GDPR (Regulation (EU) 2016/679)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+        "type": "specification",
+        "relevance": "Primary privacy regulation reference; impacts data collection, retention, and consent in product work.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["privacy", "regulation"]
+      },
+      {
+        "name": "WCAG 2.2 (W3C Recommendation)",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "type": "specification",
+        "relevance": "Accessibility baseline for product requirements and documentation artifacts.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["accessibility"]
+      },
+      {
+        "name": "NIST SSDF (SP 800-218)",
+        "url": "https://csrc.nist.gov/publications/detail/sp/800-218/final",
+        "type": "specification",
+        "relevance": "Secure software development baseline; useful for security requirements in PRDs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["security", "sdlc"]
+      }
+    ],
+    "ai_pm_tools_and_trends": [
+      {
+        "name": "CPO Club - Best AI PM Tools 2026",
+        "url": "https://cpoclub.com/tools/best-ai-product-management-tools/",
+        "type": "guide",
+        "relevance": "Comprehensive review of AI tools for PRD generation, feedback analysis, roadmapping.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["ai-tools", "productivity"]
+      },
+      {
+        "name": "ChatPRD",
+        "url": "https://www.chatprd.ai/",
+        "type": "tool",
+        "relevance": "Leading AI tool for PRD generation, user stories, and technical specs.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": ["ai-tools", "prd"]
+      },
+      {
+        "name": "Airtable - PM Trends 2026",
+        "url": "https://www.airtable.com/articles/product-management-trends",
+        "type": "article",
+        "relevance": "2026 PM trends including AI integration, business outcome focus, portfolio diversification.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["trends", "strategy"]
+      }
+    ],
+    "optional_ai_governance_and_automation": [
+      {
+        "name": "NIST AI RMF 1.0",
+        "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10",
+        "type": "specification",
+        "relevance": "Optional: AI risk management framing for AI-powered features and AI PRDs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["optional", "ai", "risk"]
+      },
+      {
+        "name": "ISO/IEC 42001 Overview",
+        "url": "https://www.iso.org/standard/42001",
+        "type": "specification",
+        "relevance": "Optional: AI management system reference for governance expectations.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["optional", "ai", "governance"]
+      },
+      {
+        "name": "EU AI Act (Regulation (EU) 2024/1689)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+        "type": "specification",
+        "relevance": "Optional: primary regulatory text that impacts AI system obligations and transparency requirements.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["optional", "ai", "compliance"]
+      },
+      {
+        "name": "OpenAI Prompt Engineering Guide",
+        "url": "https://platform.openai.com/docs/guides/prompt-engineering",
+        "type": "documentation",
+        "relevance": "Optional: prompting best practices for drafting and automating product documents; requires human review.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["optional", "ai", "automation"]
+      }
+    ]
+  }
+}

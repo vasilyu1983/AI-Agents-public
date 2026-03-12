@@ -1,0 +1,196 @@
+{
+  "metadata": {
+    "title": "Dependency Management - Sources",
+    "description": "Primary sources for lockfiles, reproducible builds, vulnerability management, SBOMs, AI BOM, and supply-chain security",
+    "last_updated": "2026-01-17"
+  },
+  "package_managers": [
+    {
+      "name": "npm Documentation",
+      "url": "https://docs.npmjs.com/",
+      "description": "Official npm docs (install, lockfiles, workspaces, auditing)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "pnpm Documentation",
+      "url": "https://pnpm.io/",
+      "description": "pnpm docs (workspaces, store, overrides)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Python Packaging User Guide (PyPA)",
+      "url": "https://packaging.python.org/",
+      "description": "Authoritative Python packaging guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Poetry Documentation",
+      "url": "https://python-poetry.org/docs/",
+      "description": "Poetry dependency management and lockfile usage",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Cargo Book",
+      "url": "https://doc.rust-lang.org/cargo/",
+      "description": "Rust Cargo reference (lockfiles, features, publishing)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Go Modules Reference",
+      "url": "https://go.dev/ref/mod",
+      "description": "Go module system reference",
+      "add_as_web_search": true
+    },
+    {
+      "name": "uv Documentation (Astral)",
+      "url": "https://docs.astral.sh/uv/",
+      "description": "Fast Python package manager that can replace pip/virtualenv in many workflows; verify current feature parity vs Poetry for your use case",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Bun Package Manager",
+      "url": "https://bun.sh/docs/cli/install",
+      "description": "JavaScript runtime with built-in package manager; verify current ecosystem maturity and compatibility for production use",
+      "add_as_web_search": true
+    }
+  ],
+  "versioning_and_reproducibility": [
+    {
+      "name": "Semantic Versioning 2.0.0",
+      "url": "https://semver.org/",
+      "description": "SemVer specification",
+      "add_as_web_search": false
+    },
+    {
+      "name": "npm - package-lock.json",
+      "url": "https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json",
+      "description": "Official npm lockfile documentation",
+      "add_as_web_search": true
+    }
+  ],
+  "vulnerability_management": [
+    {
+      "name": "Open Source Vulnerabilities (OSV)",
+      "url": "https://osv.dev/",
+      "description": "Open vulnerability database and API for OSS ecosystems",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub Advisory Database",
+      "url": "https://github.com/advisories",
+      "description": "Security advisories for open source vulnerabilities",
+      "add_as_web_search": true
+    }
+  ],
+  "supply_chain_security": [
+    {
+      "name": "NIST SP 800-218 (SSDF)",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-218/final",
+      "description": "Secure Software Development Framework",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SLSA v1.0 Specification",
+      "url": "https://slsa.dev/spec/v1.0/",
+      "description": "Supply-chain Levels for Software Artifacts (build provenance)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SPDX",
+      "url": "https://spdx.dev/",
+      "description": "SPDX SBOM standard (ISO/IEC)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CycloneDX",
+      "url": "https://cyclonedx.org/",
+      "description": "CycloneDX SBOM standard",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Sigstore",
+      "url": "https://www.sigstore.dev/",
+      "description": "Signing and verifying software artifacts (cosign, fulcio, rekor)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenSSF Scorecard",
+      "url": "https://securityscorecards.dev/",
+      "description": "Automated security health metrics for open source projects",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CISA SBOM Resources",
+      "url": "https://www.cisa.gov/sbom",
+      "description": "CISA SBOM minimum elements and federal requirements (2025 update)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "EU Cyber Resilience Act (CRA)",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act",
+      "description": "EU regulation requiring SBOMs for software products (effective Dec 2027)",
+      "add_as_web_search": true
+    }
+  ],
+  "tools": [
+    {
+      "name": "Syft (SBOM generator)",
+      "url": "https://github.com/anchore/syft",
+      "description": "Generate SBOMs from container images and filesystems",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Grype (vulnerability scanner)",
+      "url": "https://github.com/anchore/grype",
+      "description": "Scan container images and filesystems for known vulnerabilities",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Renovate",
+      "url": "https://docs.renovatebot.com/",
+      "description": "Automated dependency updates (highly configurable)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Dependabot",
+      "url": "https://github.com/dependabot",
+      "description": "Automated dependency updates and security alerts",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Socket.dev",
+      "url": "https://socket.dev/",
+      "description": "Supply chain security platform detecting malicious packages",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OWASP Dependency-Track",
+      "url": "https://dependencytrack.org/",
+      "description": "Continuous SBOM analysis platform for component risk identification",
+      "add_as_web_search": true
+    }
+  ],
+  "ai_supply_chain": [
+    {
+      "name": "Endor Labs - State of Dependency Management 2025",
+      "url": "https://www.endorlabs.com/lp/state-of-dependency-management-2025",
+      "description": "Research on AI coding agent risks in software supply chain",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AI BOM Concept (SD Times)",
+      "url": "https://sdtimes.com/ai/from-sbom-to-ai-bom-rethinking-supply-chain-security-for-ai-native-software/",
+      "description": "Extended SBOM for AI-native systems (models, datasets, training artifacts)",
+      "add_as_web_search": true
+    }
+  ],
+  "optional_ai": [
+    {
+      "name": "Automated PR triage and summarization (Optional)",
+      "url": "https://docs.github.com/en/copilot",
+      "description": "Optional AI assistance for PR summaries (requires human review; product features vary)",
+      "add_as_web_search": true,
+      "optional": true
+    }
+  ]
+}

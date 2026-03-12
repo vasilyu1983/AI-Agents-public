@@ -1,6 +1,6 @@
 ---
 name: agents-skills
-description: Comprehensive reference for creating AI agent skills (Claude Code, Codex CLI) with progressive disclosure, SKILL.md structure, references/ organization, frontmatter specification, and best practices for modular capability development.
+description: Reference for creating AI agent skills with SKILL.md structure. Use when building or improving modular skill files for Claude Code or Codex.
 ---
 
 # Agent Skills - Meta Reference
@@ -116,25 +116,44 @@ Skills use **progressive disclosure** to optimize token usage:
 
 ## Frontmatter Specification
 
-```yaml
----
-name: string                        # Required: lowercase-kebab-case, matches folder name
-description: string                 # Required: PRIMARY trigger mechanism (50-300 chars)
----
-```
+| Field | Type | Required | Purpose |
+|-------|------|----------|---------|
+| `name` | string | Yes | Kebab-case, must match folder name |
+| `description` | string | Yes | Primary trigger — runtime reads this to decide invocation |
+| `argument-hint` | string | No | Autocomplete hint shown in `/` menu (e.g. `[issue-number]`) |
+| `disable-model-invocation` | bool | No | `true` prevents auto-triggering; user must invoke with `/` |
+| `user-invocable` | bool | No | `false` hides from `/` menu; still loads as background context |
+| `allowed-tools` | string | No | Comma-separated tool allowlist (e.g. `Read, Grep, Glob`) |
+| `context` | string | No | Set to `fork` to run skill body in a subagent |
+| `agent` | string | No | Subagent type when `context: fork` (e.g. `Explore`, `Plan`) |
+| `model` | string | No | Model override (`opus`, `sonnet`, `haiku`) |
+| `hooks` | object | No | Lifecycle hooks scoped to this skill |
+| `license` | string | No | License identifier |
+| `compatibility` | string | No | Platform/version notes (1-500 chars) |
+| `metadata` | object | No | Author, version, mcp-server |
+
+See [references/frontmatter-reference.md](references/frontmatter-reference.md) for full specification, examples, and string substitutions.
 
 **Name rules**:
 - Use kebab-case: `ai-llm`, not `AI_LLM_Engineering`
 - Match folder name exactly
 - Be specific: `software-backend` not `backend`
+- No `claude` or `anthropic` in names (reserved words)
+- No XML angle brackets (`<` `>`) in any frontmatter value
 
 **Description rules** (PRIMARY TRIGGER):
-- Description is the primary triggering mechanism - the runtime uses it to decide when to invoke
-- Include "when to use" context HERE, not in the body
-- Single line, 50-300 characters
+- The runtime uses descriptions to decide which skills to auto-invoke
+- Format: `[What it does]. Use when [trigger phrases].`
+- Target ~150 chars when library has 50+ skills (budget: 2% of context window, ~16K chars shared across ALL skill descriptions)
 - Include key technologies/concepts as trigger keywords
+- Single-line YAML only — no multiline `>-`
 
-Do not add extra frontmatter keys unless your runtime explicitly documents and supports them.
+**String substitutions** (usable in skill body):
+- `$ARGUMENTS` / `$ARGUMENTS[N]` / `$N` — user-provided arguments from `/skill-name arg1 arg2`
+- `${CLAUDE_SESSION_ID}` — current session identifier
+- `${CLAUDE_SKILL_DIR}` — absolute path to this skill's directory
+
+**Dynamic context injection**: Use `` !`command` `` in the skill body to inject command output at load time.
 
 ## Skill Categories
 
@@ -145,11 +164,11 @@ Do not add extra frontmatter keys unless your runtime explicitly documents and s
 | Operations | `ops-` | `ops-devops-platform` |
 | Data | `data-` | `data-lake-platform`, `data-sql-optimization` |
 | Quality | `qa-` | `qa-debugging`, `qa-docs-coverage` |
-| Developer Tools | `dev-`, `git-` | `dev-api-design`, `git-commit-message`, `dev-workflow-planning` |
+| Developer Tools | `dev-` | `dev-api-design`, `dev-git-commit-message`, `dev-workflow-planning` |
 | Product | `product-` | `product-management`, `docs-ai-prd` |
 | Document | `document-` | `document-pdf`, `document-xlsx` |
 | Testing | `testing-`, `qa-testing-` | `qa-testing-playwright`, `qa-testing-strategy` |
-| Marketing | `marketing-` | `marketing-social-media`, `marketing-seo-complete` |
+| Marketing | `marketing-` | `marketing-social-media`, `marketing-seo` |
 | Agents/Tools | `agents-` | `agents-subagents`, `agents-skills`, `agents-hooks` |
 
 ## sources.json Schema
@@ -237,6 +256,8 @@ software-backend/
 ## Navigation
 
 **Resources**
+- [references/anthropic-skills-guide.md](references/anthropic-skills-guide.md) - Anthropic's official skill-building guide (distilled)
+- [references/frontmatter-reference.md](references/frontmatter-reference.md) - Complete frontmatter field specification
 - [references/skill-patterns.md](references/skill-patterns.md) - Common skill patterns
 - [references/skill-validation.md](references/skill-validation.md) - Validation criteria
 - [data/sources.json](data/sources.json) - Official documentation links
@@ -246,3 +267,9 @@ software-backend/
 - [../agents-subagents/SKILL.md](../agents-subagents/SKILL.md) - Agent creation
 - [../agents-hooks/SKILL.md](../agents-hooks/SKILL.md) - Hook automation
 - [../agents-mcp/SKILL.md](../agents-mcp/SKILL.md) - MCP server integration
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

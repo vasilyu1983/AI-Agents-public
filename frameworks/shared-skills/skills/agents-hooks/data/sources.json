@@ -1,0 +1,104 @@
+{
+  "metadata": {
+    "title": "Claude Code Hooks - Sources",
+    "description": "Official documentation and community resources for Claude Code event hooks",
+    "last_updated": "2026-01-21",
+    "skill": "agents-hooks"
+  },
+  "official_documentation": [
+    {
+      "name": "Claude Code Hooks Reference",
+      "url": "https://code.claude.com/docs/en/hooks.md",
+      "description": "Official hooks reference with events, environment variables, and exit codes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Hooks Guide",
+      "url": "https://code.claude.com/docs/en/hooks-guide.md",
+      "description": "Getting started guide with input modification examples",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Best Practices",
+      "url": "https://code.claude.com/docs/en/best-practices.md",
+      "description": "Best practices for configuring and operating Claude Code",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Plugins",
+      "url": "https://code.claude.com/docs/en/plugins.md",
+      "description": "Plugin system reference (skills, agents, hooks, and MCP components)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Changelog",
+      "url": "https://code.claude.com/docs/en/changelog.md",
+      "description": "Official changelog with hook feature updates",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Code Overview",
+      "url": "https://code.claude.com/docs/en/overview.md",
+      "description": "Official overview and documentation hub",
+      "add_as_web_search": false
+    }
+  ],
+  "community_resources": [
+    {
+      "name": "Claude Code Hooks Mastery",
+      "url": "https://github.com/disler/agents-hooks-mastery",
+      "description": "Community examples and patterns for hooks",
+      "add_as_web_search": false
+    },
+    {
+      "name": "DataCamp Claude Code Hooks Tutorial",
+      "url": "https://www.datacamp.com/tutorial/agents-hooks",
+      "description": "Practical guide with prompt-based hooks examples",
+      "add_as_web_search": false
+    },
+    {
+      "name": "eesel.ai Hooks Guide",
+      "url": "https://www.eesel.ai/blog/hooks-in-claude-code",
+      "description": "Complete workflow automation guide",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Builder.io Claude Code Tips",
+      "url": "https://www.builder.io/blog/claude-code",
+      "description": "Practical tips including context window optimization",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Awesome Claude Code",
+      "url": "https://github.com/hesreallyhim/awesome-claude-code",
+      "description": "Curated list of skills, hooks, commands, and plugins",
+      "add_as_web_search": false
+    }
+  ],
+  "security_references": [
+    {
+      "name": "Bash Pitfalls",
+      "url": "https://mywiki.wooledge.org/BashPitfalls",
+      "description": "Common bash scripting mistakes and security issues",
+      "add_as_web_search": false
+    },
+    {
+      "name": "ShellCheck",
+      "url": "https://www.shellcheck.net/",
+      "description": "Static analysis tool for shell scripts (mandatory for hooks)",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Google Shell Style Guide",
+      "url": "https://google.github.io/styleguide/shellguide.html",
+      "description": "Shell scripting best practices including 50-line guideline",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MIT Safe Shell Guide",
+      "url": "https://sipb.mit.edu/doc/safe-shell/",
+      "description": "Writing safe shell scripts from MIT SIPB",
+      "add_as_web_search": false
+    }
+  ]
+}

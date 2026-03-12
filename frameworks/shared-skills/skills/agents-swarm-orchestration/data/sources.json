@@ -1,0 +1,53 @@
+{
+  "metadata": {
+    "last_updated": "2026-03-01",
+    "domain": "multi-agent orchestration"
+  },
+  "sources": [
+    {
+      "name": "Codex Multi Agent Playbook (am.will)",
+      "url": "https://github.com/am-will/codex-skills",
+      "description": "Original Codex skills repo with planner, parallel-task, and llm-council multi-agent orchestration patterns",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AdaptOrch: Task-Adaptive Multi-Agent Orchestration",
+      "url": "https://arxiv.org/abs/2602.16873",
+      "description": "DAG topology routing algorithm for mapping task decomposition to optimal orchestration patterns. 12-23% improvement over static baselines.",
+      "add_as_web_search": false,
+      "arxiv_query": "AdaptOrch task-adaptive multi-agent orchestration LLM 2026"
+    },
+    {
+      "name": "Latency-Aware Orchestration for Parallel Multi-Agent Systems",
+      "url": "https://arxiv.org/abs/2601.10560",
+      "description": "Models multi-agent search space as probabilistic DAG, jointly optimizing accuracy and latency under parallel execution.",
+      "add_as_web_search": false,
+      "arxiv_query": "latency-aware orchestration parallel multi-agent LLM DAG 2026"
+    },
+    {
+      "name": "Multi-Agent Collaboration via Evolving Orchestration",
+      "url": "https://arxiv.org/abs/2505.19591",
+      "description": "RL-trained orchestrator dynamically sequences and prioritizes agents. Validates the puppeteer pattern for centralized coordination.",
+      "add_as_web_search": false,
+      "arxiv_query": "evolving orchestration multi-agent collaboration reinforcement learning 2025"
+    },
+    {
+      "name": "OpenAI Agents SDK Multi-Agent Patterns",
+      "url": "https://openai.github.io/openai-agents-python/multi_agent/",
+      "description": "Official OpenAI documentation for multi-agent orchestration with handoffs and routines",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Subagents Documentation",
+      "url": "https://code.claude.com/docs/en/sub-agents",
+      "description": "Official Claude Code documentation for dispatching subagents with Agent tool, worktree isolation, and model selection",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AI Agent Swarm Orchestration Best Practices (Fast.io)",
+      "url": "https://fast.io/resources/ai-agent-swarm-orchestration/",
+      "description": "Industry guide covering hierarchical, sequential, and peer-to-peer swarm architectures with practical tradeoffs",
+      "add_as_web_search": true
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "metadata": {
+    "skill": "data-analytics-engineering",
+    "updated": "2026-01-17",
+    "total_sources": 18,
+    "description": "Curated sources for analytics engineering: transformation tools, semantic layers, data quality, and lineage.",
+    "version": "2.0"
+  },
+  "categories": {
+    "modeling_and_metrics": [
+      {
+        "name": "Kimball Group",
+        "url": "https://www.kimballgroup.com/",
+        "type": "research",
+        "relevance": "Dimensional modeling principles and warehouse design patterns.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "dbt Semantic Layer",
+        "url": "https://docs.getdbt.com/docs/use-dbt-semantic-layer/dbt-sl",
+        "type": "documentation",
+        "relevance": "Metric definitions and semantic model patterns for analytics.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "dbt Metrics",
+        "url": "https://docs.getdbt.com/docs/build/build-metrics-intro",
+        "type": "documentation",
+        "relevance": "Metric definition syntax and modeling constraints.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Looker LookML Reference",
+        "url": "https://cloud.google.com/looker/docs/reference/lookml-terms",
+        "type": "documentation",
+        "relevance": "Semantic modeling patterns used in BI layers.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "State of Analytics Engineering 2025",
+        "url": "https://www.getdbt.com/resources/state-of-analytics-engineering-2025",
+        "type": "research",
+        "relevance": "Industry trends, semantic layer adoption, AI integration patterns.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "transformation_tools": [
+      {
+        "name": "dbt Documentation",
+        "url": "https://docs.getdbt.com/",
+        "type": "documentation",
+        "relevance": "Transformation workflows, testing, and project structure.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SQLMesh Documentation",
+        "url": "https://sqlmesh.readthedocs.io/en/stable/",
+        "type": "documentation",
+        "relevance": "Stateful transformations, virtual environments, performance optimization.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Coalesce Documentation",
+        "url": "https://docs.coalesce.io/",
+        "type": "documentation",
+        "relevance": "Visual transformation development, column-level lineage, enterprise governance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "semantic_layer": [
+      {
+        "name": "Cube Documentation",
+        "url": "https://cube.dev/docs/",
+        "type": "documentation",
+        "relevance": "Headless BI, semantic caching, pre-aggregations, API-first analytics.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "dbt Semantic Layer Best Practices",
+        "url": "https://docs.getdbt.com/best-practices/how-we-build-our-metrics/semantic-layer-9-conclusion",
+        "type": "documentation",
+        "relevance": "MetricFlow patterns, semantic model design, metric governance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "data_quality": [
+      {
+        "name": "Great Expectations Documentation",
+        "url": "https://docs.greatexpectations.io/",
+        "type": "tool",
+        "relevance": "Data quality testing and validation suites for Python pipelines.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Elementary Documentation",
+        "url": "https://docs.elementary-data.com/",
+        "type": "tool",
+        "relevance": "ML-based anomaly detection, dbt test observability, data monitoring.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "dbt-expectations (Metaplane)",
+        "url": "https://github.com/metaplane/dbt-expectations",
+        "type": "tool",
+        "relevance": "Extended dbt tests inspired by Great Expectations. Actively maintained fork.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "lineage_and_governance": [
+      {
+        "name": "OpenLineage",
+        "url": "https://openlineage.io/",
+        "type": "specification",
+        "relevance": "Open standard for data lineage across pipelines.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DataHub Documentation",
+        "url": "https://datahubproject.io/docs/",
+        "type": "tool",
+        "relevance": "Metadata catalog, dataset ownership, lineage visualization.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "trends_and_analysis": [
+      {
+        "name": "dbt vs SQLMesh Comparison (SYNQ)",
+        "url": "https://www.synq.io/blog/dbt-vs-sqlmesh-a-comparison-for-modern-data-teams",
+        "type": "analysis",
+        "relevance": "Detailed comparison of dbt and SQLMesh architecture and performance.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Semantic Layer Architectures (TypeDef AI)",
+        "url": "https://www.typedef.ai/resources/semantic-layer-architectures-explained-warehouse-native-vs-dbt-vs-cube",
+        "type": "analysis",
+        "relevance": "Comparison of warehouse-native vs dbt vs Cube semantic layers.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "2026 Data Quality Landscape (DataKitchen)",
+        "url": "https://datakitchen.io/the-2026-open-source-data-quality-and-data-observability-landscape/",
+        "type": "analysis",
+        "relevance": "Open-source data quality and observability tool landscape.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

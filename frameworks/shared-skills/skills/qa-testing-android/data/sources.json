@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "skill": "qa-testing-android",
+    "updated": "2026-01-26",
+    "version": "1.1",
+    "total_sources": 13,
+    "description": "Primary references for Android testing with Espresso, UIAutomator, and Compose Testing."
+  },
+  "categories": {
+    "google_official_docs": [
+      {
+        "name": "Android Testing Documentation",
+        "url": "https://developer.android.com/training/testing",
+        "description": "Official Android testing fundamentals and best practices.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Espresso Documentation",
+        "url": "https://developer.android.com/training/testing/espresso",
+        "description": "Official Espresso UI testing framework docs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Espresso Cheat Sheet",
+        "url": "https://developer.android.com/training/testing/espresso/cheat-sheet",
+        "description": "Quick reference for Espresso matchers, actions, and assertions.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "UIAutomator Documentation",
+        "url": "https://developer.android.com/training/testing/other-components/ui-automator",
+        "description": "Cross-app and system UI testing framework.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Testing Documentation",
+        "url": "https://developer.android.com/develop/ui/compose/testing",
+        "description": "Official Jetpack Compose testing guide.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Testing Codelab",
+        "url": "https://developer.android.com/codelabs/jetpack-compose-testing",
+        "description": "Hands-on tutorial for Compose UI testing.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Test Orchestrator",
+        "url": "https://developer.android.com/training/testing/instrumented-tests/androidx-test-libraries/runner#orchestrator",
+        "description": "Test isolation and crash recovery for instrumented tests.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Gradle Managed Devices",
+        "url": "https://developer.android.com/studio/test/gradle-managed-devices",
+        "description": "Provision and run emulator-based tests via Gradle for CI/CD.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Macrobenchmark",
+        "url": "https://developer.android.com/studio/profile/macrobenchmark",
+        "description": "Performance testing for startup and critical user journeys.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Baseline Profiles",
+        "url": "https://developer.android.com/topic/performance/baselineprofiles",
+        "description": "Improve runtime performance and startup with baseline profiles.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "community_resources": [
+      {
+        "name": "Test Automation University: Espresso",
+        "url": "https://testautomationu.applitools.com/espresso-mobile-testing-tutorial/",
+        "description": "Free Espresso testing course with hands-on exercises.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "BrowserStack Espresso Guide",
+        "url": "https://www.browserstack.com/guide/espresso-android-testing",
+        "description": "Comprehensive Espresso tutorial with real device testing.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "HeadSpin Espresso Guide",
+        "url": "https://www.headspin.io/blog/a-comprehensive-guide-to-android-ui-testing-with-espresso",
+        "description": "In-depth Espresso patterns and best practices.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ]
+  }
+}

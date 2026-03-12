@@ -1,0 +1,308 @@
+{
+  "metadata": {
+    "title": "Help Center Design - Sources",
+    "description": "Curated resources for AI-first help centers, knowledge bases, and self-service support (2025-2026)",
+    "last_updated": "2026-01-17",
+    "version": "1.1.0"
+  },
+  "platforms": [
+    {
+      "name": "Zendesk Guide Documentation",
+      "url": "https://support.zendesk.com/hc/en-us/categories/4405298743322-Guide-knowledge-base",
+      "description": "Official Zendesk knowledge base setup and best practices",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Intercom Help Center",
+      "url": "https://www.intercom.com/help",
+      "description": "Intercom product documentation and help center examples",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Freshdesk Knowledge Base",
+      "url": "https://support.freshdesk.com/",
+      "description": "Freshdesk support documentation and KB setup guides",
+      "add_as_web_search": false
+    },
+    {
+      "name": "GitBook Documentation",
+      "url": "https://docs.gitbook.com/",
+      "description": "GitBook docs-as-code platform documentation",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Notion Help Center",
+      "url": "https://www.notion.so/help",
+      "description": "Notion as knowledge base platform",
+      "add_as_web_search": false
+    }
+  ],
+  "ai_integration": [
+    {
+      "name": "Zendesk AI Knowledge Base Guide",
+      "url": "https://www.zendesk.com/service/help-center/ai-knowledge-base/",
+      "description": "AI-powered knowledge base features and setup",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Intercom Fin AI",
+      "url": "https://fin.ai/",
+      "description": "Intercom's AI agent for customer service",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Ada AI Customer Service",
+      "url": "https://www.ada.cx/",
+      "description": "AI-first customer service platform (83% resolution rate)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Chatbase AI Agents",
+      "url": "https://www.chatbase.co/",
+      "description": "Custom AI agents for customer service",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI RAG and Semantic Search",
+      "url": "https://help.openai.com/en/articles/8868588-retrieval-augmented-generation-rag-and-semantic-search-for-gpts",
+      "description": "Official OpenAI guide on RAG and semantic search for GPTs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Azure AI Search RAG Overview",
+      "url": "https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview",
+      "description": "Microsoft's RAG implementation patterns",
+      "add_as_web_search": false
+    }
+  ],
+  "best_practices_2025": [
+    {
+      "name": "Document360 KB Statistics 2025",
+      "url": "https://document360.com/blog/knowledge-base-statistics/",
+      "description": "Key knowledge base statistics and benchmarks for 2025",
+      "add_as_web_search": true
+    },
+    {
+      "name": "BetterDocs Future of Knowledge Bases",
+      "url": "https://betterdocs.co/future-of-knowledge-bases-trends/",
+      "description": "Knowledge base trends and predictions 2025-2026",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Gainsight Self-Service Trends 2025",
+      "url": "https://www.gainsight.com/blog/the-future-of-digital-self-service-5-trends-to-watch-in-2025/",
+      "description": "Digital self-service trends and predictions",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Help Scout Knowledge Base Guide",
+      "url": "https://www.helpscout.com/playlists/knowledge-base/",
+      "description": "Comprehensive guide to creating customer knowledge bases",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Guidejar KB Best Practices 2025",
+      "url": "https://www.guidejar.com/blog/knowledge-base-best-practices",
+      "description": "8 knowledge base best practices that actually work",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Khoros Customer Self-Service Guide 2025",
+      "url": "https://khoros.com/blog/customer-self-service",
+      "description": "Complete guide to customer self-service",
+      "add_as_web_search": true
+    }
+  ],
+  "onboarding_tutorials": [
+    {
+      "name": "UserPilot Interactive Guides",
+      "url": "https://userpilot.com/blog/interactive-guides/",
+      "description": "How to create interactive guides for SaaS",
+      "add_as_web_search": true
+    },
+    {
+      "name": "UserPilot In-App Tutorials",
+      "url": "https://userpilot.com/blog/in-app-tutorials-adoption/",
+      "description": "Using in-app tutorials to increase product adoption",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Whatfix Digital Adoption",
+      "url": "https://whatfix.com/",
+      "description": "Digital adoption platform for in-app guidance",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Appcues Product-Led Growth",
+      "url": "https://www.appcues.com/",
+      "description": "User onboarding and product adoption platform",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Pendo Product Analytics",
+      "url": "https://www.pendo.io/",
+      "description": "Product analytics and in-app guidance platform",
+      "add_as_web_search": false
+    },
+    {
+      "name": "eLearning Industry Interactive Tutorials",
+      "url": "https://elearningindustry.com/tips-create-interactive-immersive-online-training-tutorials",
+      "description": "Best practices for interactive online training",
+      "add_as_web_search": false
+    }
+  ],
+  "analytics_metrics": [
+    {
+      "name": "Zendesk Customer Self-Service Portals",
+      "url": "https://www.zendesk.com/service/help-center/customer-self-service/",
+      "description": "Self-service portal best practices and metrics",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ProProfs Knowledge Management Trends",
+      "url": "https://www.proprofskb.com/blog/trends-in-knowledge-base-management/",
+      "description": "Knowledge management trends and KPIs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Shelf Knowledge Management Trends 2025",
+      "url": "https://shelf.io/blog/the-9-knowledge-management-trends-you-can-expect-in-2025/",
+      "description": "9 knowledge management trends for 2025",
+      "add_as_web_search": true
+    }
+  ],
+  "agentic_ai_2026": [
+    {
+      "name": "Gartner Agentic AI Prediction 2029",
+      "url": "https://www.gartner.com/en/newsroom/press-releases/2025-03-05-gartner-predicts-agentic-ai-will-autonomously-resolve-80-percent-of-common-customer-service-issues-without-human-intervention-by-20290",
+      "description": "Gartner predicts 80% autonomous customer service resolution by 2029",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Forrester 2026 CX Predictions",
+      "url": "https://www.forrester.com/blogs/2026-the-year-ai-gets-real-for-customer-service-but-its-not-glamorous-work/",
+      "description": "Forrester predictions for AI in customer service 2026",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Synthflow State of CX 2026",
+      "url": "https://synthflow.ai/blog/state-of-customer-experience-2026-ai-agents",
+      "description": "Cisco survey: 56% AI interactions by mid-2026, agentic AI trends",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OneReach Agentic AI Stats 2026",
+      "url": "https://onereach.ai/blog/agentic-ai-adoption-rates-roi-market-trends/",
+      "description": "Agentic AI adoption rates, ROI, and market trends for 2026",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Salesforce Proactive Service AI",
+      "url": "https://www.startuphub.ai/ai-news/ai-research/2026/salesforce-launches-proactive-customer-service-ai/",
+      "description": "Salesforce's proactive AI that detects and resolves issues before reported",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Google Gemini Enterprise CX",
+      "url": "https://cloud.google.com/transform/a-new-era-agentic-commerce-retail-ai",
+      "description": "Google's agentic commerce platform for customer experience",
+      "add_as_web_search": true
+    }
+  ],
+  "platform_comparisons": [
+    {
+      "name": "Intercom vs Zendesk vs Freshdesk 2026 - Qualimero",
+      "url": "https://qualimero.com/en/blog/intercom-vs-zendesk-vs-freshdesk-comparison-2026",
+      "description": "Comprehensive 2026 comparison with pricing warnings and use case analysis",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Zendesk vs Intercom Comparison",
+      "url": "https://www.zendesk.com/service/comparison/zendesk-vs-intercom/",
+      "description": "Official Zendesk comparison with Intercom",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Freshdesk vs Zendesk Comparison",
+      "url": "https://www.freshworks.com/freshdesk/compare-helpdesks/zendesk-vs-freshdesk/",
+      "description": "Freshdesk comparison with Zendesk",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Zapier Zendesk vs Intercom 2025",
+      "url": "https://zapier.com/blog/zendesk-vs-intercom/",
+      "description": "Independent comparison of Zendesk and Intercom",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Desk365 Best KB Software 2026",
+      "url": "https://www.desk365.io/blog/best-knowledge-base-software/",
+      "description": "9 best knowledge base software for 2026",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Knowmax Best KB Software 2026",
+      "url": "https://knowmax.ai/knowledge-base/software/",
+      "description": "10 best knowledge base software in 2026",
+      "add_as_web_search": true
+    }
+  ],
+  "rag_implementation": [
+    {
+      "name": "SearchUnify RAG Best Practices",
+      "url": "https://www.searchunify.com/resource-center/sudo-technical-blogs/best-practices-for-using-retrieval-augmented-generation-rag-in-ai-chatbots",
+      "description": "Best practices for RAG in AI chatbots",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Botpress Build RAG Chatbot 2025",
+      "url": "https://botpress.com/blog/build-rag-chatbot",
+      "description": "How to build a RAG chatbot in 2025",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ChatRAG Knowledge Base Guide",
+      "url": "https://chatrag.co/blog/chatbot-knowledge-base-the-complete-guide-to-building-smarter-ai-assistants",
+      "description": "Complete guide to RAG-powered AI assistants",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Vercel AI SDK RAG Guide",
+      "url": "https://ai-sdk.dev/cookbook/guides/rag-chatbot",
+      "description": "Building RAG chatbots with Vercel AI SDK",
+      "add_as_web_search": false
+    },
+    {
+      "name": "n8n RAG Chatbot Tutorial",
+      "url": "https://blog.n8n.io/rag-chatbot/",
+      "description": "Build a custom knowledge RAG chatbot using n8n",
+      "add_as_web_search": false
+    }
+  ],
+  "examples": [
+    {
+      "name": "Help Scout KB Examples",
+      "url": "https://www.helpscout.com/helpu/knowledge-base-examples/",
+      "description": "18 knowledge base examples that get it right",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Slite KB Examples 2025",
+      "url": "https://slite.com/en/learn/knowledge-base-examples",
+      "description": "15 knowledge base examples to inspire you in 2025",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Stripe Documentation",
+      "url": "https://docs.stripe.com/",
+      "description": "Example of excellent developer documentation",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Notion Help Center Example",
+      "url": "https://www.notion.so/help",
+      "description": "Example of clean, searchable help center",
+      "add_as_web_search": false
+    }
+  ]
+}

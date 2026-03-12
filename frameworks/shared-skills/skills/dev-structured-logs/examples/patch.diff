@@ -1,0 +1,36 @@
+--- concatenation.before.cs
++++ concatenation.before.cs
+@@ -1 +1 @@
+-_logger.LogInformation("User " + userId + " logged in");
++_logger.LogInformation("User {UserId} logged in", userId);
+--- handler-scope.before.cs
++++ handler-scope.before.cs
+@@ -4,6 +4,11 @@
+ 
+     public async Task HandleAsync(CreateOrder command)
+     {
+-        _logger.LogInformation("Creating order " + command.Id);
++        var __scopeItems = new Dictionary<string, object>
++        {
++            ["Id"] = command.Id,
++        };
++        using var _scope = _logger.BeginScope(__scopeItems);
++        _logger.LogInformation("Creating order {Id}", command.Id);
+     }
+ }
+--- interpolation.before.cs
++++ interpolation.before.cs
+@@ -1 +1 @@
+-_logger.LogWarning($"Trace {traceId} for user {userId}");
++_logger.LogWarning("Trace {TraceId} for user {UserId}", traceId, userId);
+--- side-effect.before.cs
++++ side-effect.before.cs
+@@ -1 +1,2 @@
+-_logger.LogInformation("Result: " + ComputeExpensive());
++var __tmp0 = ComputeExpensive();
++_logger.LogInformation("Result: {Value0}", __tmp0);
+--- string-format.before.cs
++++ string-format.before.cs
+@@ -1 +1 @@
+-_logger.LogInformation(String.Format("Order {0} for {1}", orderId, userName));
++_logger.LogInformation("Order {OrderId} for {UserName}", orderId, userName);

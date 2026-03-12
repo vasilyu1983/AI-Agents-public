@@ -1,0 +1,298 @@
+{
+  "metadata": {
+    "title": "DevOps Platform - Sources",
+    "description": "Primary sources for Kubernetes operations, IaC, GitOps, CI/CD, observability, incident response, and platform governance",
+    "last_updated": "2026-01-26"
+  },
+  "kubernetes": [
+    {
+      "name": "Kubernetes Documentation",
+      "url": "https://kubernetes.io/docs/",
+      "description": "Canonical Kubernetes docs (workloads, networking, storage, security, ops)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kubernetes Releases",
+      "url": "https://kubernetes.io/releases/",
+      "description": "Release history and supported version policy entry point",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kubernetes Version Skew Policy",
+      "url": "https://kubernetes.io/releases/version-skew-policy/",
+      "description": "Supported version skew between components (kubelet/apiserver/etc.)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kubernetes API Reference",
+      "url": "https://kubernetes.io/docs/reference/generated/kubernetes-api/",
+      "description": "Generated API reference (choose a specific version when needed)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Helm Documentation",
+      "url": "https://helm.sh/docs/",
+      "description": "Helm charts, templating, and best practices",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kustomize Documentation",
+      "url": "https://kustomize.io/",
+      "description": "Kustomize overlays and configuration management",
+      "add_as_web_search": true
+    }
+  ],
+  "iac": [
+    {
+      "name": "Terraform Documentation",
+      "url": "https://developer.hashicorp.com/terraform",
+      "description": "Terraform core concepts, workflows, and language reference",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Terraform Releases",
+      "url": "https://github.com/hashicorp/terraform/releases",
+      "description": "Terraform release notes (current stable is 1.x)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenTofu Documentation",
+      "url": "https://opentofu.org/docs/",
+      "description": "Open-source Terraform fork (language + workflows, ecosystem compatibility)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Pulumi Documentation",
+      "url": "https://www.pulumi.com/docs/",
+      "description": "Programming-first IaC with TypeScript, Python, Go, C#",
+      "add_as_web_search": true
+    }
+  ],
+  "containers_and_artifacts": [
+    {
+      "name": "Docker Engine Release Notes",
+      "url": "https://docs.docker.com/engine/release-notes/",
+      "description": "Docker Engine release notes (breaking changes and security fixes)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OCI Image Specification",
+      "url": "https://github.com/opencontainers/image-spec",
+      "description": "OCI image format specification",
+      "add_as_web_search": true
+    }
+  ],
+  "gitops_and_delivery": [
+    {
+      "name": "Argo CD Documentation",
+      "url": "https://argo-cd.readthedocs.io/en/stable/",
+      "description": "Argo CD GitOps docs (apps, sync, RBAC, multi-env patterns)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Argo CD Releases",
+      "url": "https://github.com/argoproj/argo-cd/releases",
+      "description": "Argo CD release notes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Flux Documentation",
+      "url": "https://fluxcd.io/flux/",
+      "description": "Flux GitOps documentation and guides",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Flux Releases",
+      "url": "https://github.com/fluxcd/flux2/releases",
+      "description": "Flux release notes (v2 series)",
+      "add_as_web_search": true
+    }
+  ],
+  "observability": [
+    {
+      "name": "OpenTelemetry Documentation",
+      "url": "https://opentelemetry.io/docs/",
+      "description": "Vendor-neutral observability framework (traces, metrics, logs)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Prometheus Documentation",
+      "url": "https://prometheus.io/docs/",
+      "description": "Metrics collection and alerting",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Grafana Documentation",
+      "url": "https://grafana.com/docs/",
+      "description": "Dashboards and alerting",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Cilium Documentation",
+      "url": "https://docs.cilium.io/en/stable/",
+      "description": "eBPF-based networking, security, and observability for Kubernetes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Tetragon Documentation",
+      "url": "https://tetragon.io/docs/",
+      "description": "eBPF-based security observability and runtime enforcement",
+      "add_as_web_search": true
+    }
+  ],
+  "sre_and_incidents": [
+    {
+      "name": "Google SRE Books",
+      "url": "https://sre.google/books/",
+      "description": "SRE fundamentals, SLOs, alerting, incident response, and postmortems",
+      "add_as_web_search": true
+    }
+  ],
+  "security_and_supply_chain": [
+    {
+      "name": "NIST SP 800-218 (SSDF)",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-218/final",
+      "description": "Secure Software Development Framework",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SLSA v1.0 Specification",
+      "url": "https://slsa.dev/spec/v1.0/",
+      "description": "Supply-chain Levels for Software Artifacts (provenance and build integrity)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Sigstore",
+      "url": "https://www.sigstore.dev/",
+      "description": "Artifact signing and verification (cosign, transparency log)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "cosign (artifact signing)",
+      "url": "https://github.com/sigstore/cosign",
+      "description": "Sign and verify container images and other artifacts",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Syft (SBOM generation)",
+      "url": "https://github.com/anchore/syft",
+      "description": "Generate SBOMs for images and filesystems",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Grype (vulnerability scanning)",
+      "url": "https://github.com/anchore/grype",
+      "description": "Scan SBOMs and images for known vulnerabilities",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Trivy",
+      "url": "https://aquasecurity.github.io/trivy/",
+      "description": "Vulnerability/misconfiguration scanning for images, repos, and IaC",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CIS Benchmarks",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "description": "Security configuration benchmarks for platforms and components",
+      "add_as_web_search": true
+    }
+  ],
+  "policy_as_code": [
+    {
+      "name": "Open Policy Agent (OPA)",
+      "url": "https://www.openpolicyagent.org/docs/latest/",
+      "description": "Policy-as-code engine (Rego) and integrations",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OPA Gatekeeper",
+      "url": "https://open-policy-agent.github.io/gatekeeper/website/docs/",
+      "description": "OPA-based admission controller for Kubernetes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kyverno Documentation",
+      "url": "https://kyverno.io/docs/",
+      "description": "Kubernetes-native policy management and enforcement",
+      "add_as_web_search": true
+    }
+  ],
+  "finops_and_cost": [
+    {
+      "name": "FinOps Foundation Framework",
+      "url": "https://www.finops.org/framework/",
+      "description": "FinOps practices for cloud cost governance and accountability",
+      "add_as_web_search": true
+    }
+  ],
+  "cicd": [
+    {
+      "name": "GitHub Actions Documentation",
+      "url": "https://docs.github.com/en/actions",
+      "description": "Workflows, environments, OIDC, secrets, and deployment protection rules",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitLab CI/CD Documentation",
+      "url": "https://docs.gitlab.com/ee/ci/",
+      "description": "Pipelines, runners, environments, and security scanning",
+      "add_as_web_search": true
+    }
+  ],
+  "cloud_architecture_frameworks": [
+    {
+      "name": "AWS Well-Architected Framework",
+      "url": "https://aws.amazon.com/architecture/well-architected/",
+      "description": "Security, reliability, performance efficiency, cost optimization, sustainability",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GCP Architecture Framework",
+      "url": "https://cloud.google.com/architecture/framework",
+      "description": "Google Cloud architecture best practices",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Well-Architected Framework",
+      "url": "https://learn.microsoft.com/en-us/azure/well-architected/",
+      "description": "Azure architecture best practices",
+      "add_as_web_search": true
+    }
+  ],
+  "platform_engineering": [
+    {
+      "name": "Team Topologies",
+      "url": "https://teamtopologies.com/",
+      "description": "Org design patterns (platform teams, stream-aligned teams, team interactions)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CNCF Landscape",
+      "url": "https://landscape.cncf.io/",
+      "description": "Tooling map for cloud-native ecosystems (use for discovery, not authority)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Backstage Documentation",
+      "url": "https://backstage.io/docs/",
+      "description": "Spotify's open platform for building developer portals",
+      "add_as_web_search": true
+    }
+  ],
+  "aiops": [
+    {
+      "name": "PagerDuty AIOps (Optional)",
+      "url": "https://support.pagerduty.com/docs/aiops",
+      "description": "Optional AIOps features for event intelligence and incident workflows",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Alert summarization and incident assistance (Optional)",
+      "url": "https://sre.google/books/",
+      "description": "Optional automation layers for incident triage (requires human approval and audit)",
+      "add_as_web_search": true,
+      "optional": true
+    }
+  ]
+}

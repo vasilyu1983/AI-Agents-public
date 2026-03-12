@@ -1,0 +1,259 @@
+{
+  "metadata": {
+    "skill": "qa-testing-strategy",
+    "updated": "2026-01-26",
+    "version": "3.2",
+    "total_sources": 32,
+    "description": "Primary references for risk-based testing strategy, shift-left gates, flake control, CI economics, chaos engineering, observability-driven testing, synthetic data, and contract testing. AI sources are optional."
+  },
+  "categories": {
+    "sre_and_reliability": [
+      {
+        "name": "Google SRE Book - Service Level Objectives",
+        "url": "https://sre.google/sre-book/service-level-objectives/",
+        "description": "SLO/error budget framing for quality gates and release decisions.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Effective Troubleshooting",
+        "url": "https://sre.google/sre-book/effective-troubleshooting/",
+        "description": "Evidence-based troubleshooting workflow that maps well to flaky-test and incident triage.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "contracts_and_schemas": [
+      {
+        "name": "OpenAPI Specification (Latest)",
+        "url": "https://spec.openapis.org/oas/latest.html",
+        "description": "Canonical contract format for REST APIs; use for shift-left contract validation and test oracles.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "AsyncAPI Specification (v3)",
+        "url": "https://www.asyncapi.com/docs/reference/specification/v3.0.0",
+        "description": "Contract format for event-driven APIs; use for schema and integration tests.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "JSON Schema",
+        "url": "https://json-schema.org/",
+        "description": "Schema standard for structured data and contract testing.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Pact - Contract Testing Docs",
+        "url": "https://docs.pact.io/",
+        "description": "Consumer-driven contract testing patterns and tooling.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Specmatic - Contract-Driven Development",
+        "url": "https://specmatic.io/",
+        "description": "Contract-driven development using OpenAPI as executable contracts; alternative to Pact for API-first teams.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Karate - API Testing DSL",
+        "url": "https://karatelabs.github.io/karate/",
+        "description": "Unified DSL for API testing, contract testing, and performance testing in one framework.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "e2e_and_ui_testing": [
+      {
+        "name": "Playwright - Best Practices",
+        "url": "https://playwright.dev/docs/best-practices",
+        "description": "High-signal E2E practices: locators, web-first assertions, debugging tooling, sharding.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Locators",
+        "url": "https://playwright.dev/docs/locators",
+        "description": "Locator strategy (roles/labels/test IDs) and stability guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Cypress Documentation",
+        "url": "https://docs.cypress.io/",
+        "description": "Alternative E2E framework with excellent DX; strong for frontend-focused teams.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "unit_testing": [
+      {
+        "name": "Vitest Documentation",
+        "url": "https://vitest.dev/",
+        "description": "Fast Vite-native unit test runner; increasingly popular for modern JS/TS projects.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "integration_testing": [
+      {
+        "name": "Testcontainers",
+        "url": "https://testcontainers.com/",
+        "description": "Hermetic integration testing with real dependencies (DB, queues) running in containers.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "testcontainers-node",
+        "url": "https://node.testcontainers.org/",
+        "description": "Testcontainers for Node.js/TypeScript; common choice for API + DB integration tests.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "performance_and_capacity": [
+      {
+        "name": "k6 Documentation",
+        "url": "https://k6.io/docs/",
+        "description": "Load testing fundamentals and scenarios (ramp/spike/soak).",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Web Vitals",
+        "url": "https://web.dev/vitals/",
+        "description": "Core Web Vitals guidance for performance budgets and monitoring.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "chaos_engineering": [
+      {
+        "name": "Principles of Chaos Engineering",
+        "url": "https://principlesofchaos.org/",
+        "description": "Foundational principles for chaos engineering practice.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "LitmusChaos",
+        "url": "https://litmuschaos.io/",
+        "description": "Open-source Kubernetes-native chaos engineering platform.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Gremlin - Chaos Engineering",
+        "url": "https://www.gremlin.com/chaos-engineering",
+        "description": "Enterprise chaos engineering platform with attack library and gameday automation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "AWS Fault Injection Simulator",
+        "url": "https://aws.amazon.com/fis/",
+        "description": "AWS-native chaos engineering service for controlled experiments.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "observability_and_tracing": [
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "description": "Vendor-neutral observability framework for traces, metrics, and logs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Tracetest",
+        "url": "https://tracetest.io/",
+        "description": "Trace-based testing tool for asserting on OpenTelemetry traces.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Jaeger Tracing",
+        "url": "https://www.jaegertracing.io/",
+        "description": "Open-source distributed tracing platform for monitoring microservices.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "synthetic_data": [
+      {
+        "name": "K2view Test Data Management",
+        "url": "https://www.k2view.com/solutions/test-data-management/",
+        "description": "Enterprise test data management with subsetting, masking, and synthetic generation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Synthesized - Synthetic Data Platform",
+        "url": "https://www.synthesized.io/",
+        "description": "AI-powered synthetic data generation for privacy-compliant testing.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "accessibility": [
+      {
+        "name": "W3C - WCAG Overview",
+        "url": "https://www.w3.org/WAI/standards-guidelines/wcag/",
+        "description": "Accessibility baseline; align automated checks and manual audits with WCAG targets.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "axe-core",
+        "url": "https://github.com/dequelabs/axe-core",
+        "description": "Automation engine for accessibility rules; integrate into component/UI tests.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "security": [
+      {
+        "name": "OWASP ZAP Documentation",
+        "url": "https://www.zaproxy.org/docs/",
+        "description": "DAST scanning patterns and automation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OWASP Application Security Verification Standard (ASVS)",
+        "url": "https://owasp.org/www-project-application-security-verification-standard/",
+        "description": "Security verification requirements for planning test coverage and gates.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "optional_ai_automation": [
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "description": "Risk categories and mitigations for AI-assisted workflows; treat as optional extension.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "description": "AI governance baseline; useful when adopting AI-assisted testing and triage.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Meticulous - AI E2E Testing",
+        "url": "https://meticulous.ai/",
+        "description": "AI-powered automated E2E test recording and maintenance; emerging 2026 tool.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ]
+  }
+}

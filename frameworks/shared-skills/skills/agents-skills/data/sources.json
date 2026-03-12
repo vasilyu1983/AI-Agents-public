@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "title": "Agent Skills - Sources",
+    "description": "Official documentation and resources for agent skills",
+    "last_updated": "2026-01-28",
+    "skill": "agents-skills"
+  },
+  "official_documentation": [
+    {
+      "name": "Agent Skills Specification",
+      "url": "https://agentskills.io/specification",
+      "description": "Official open standard specification for SKILL.md format and progressive disclosure",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Skills Documentation",
+      "url": "https://code.claude.com/docs/en/skills",
+      "description": "Official skills documentation with structure and requirements",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Skill Authoring Best Practices",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices",
+      "description": "Official best practices for skill creation including scripts/, references/, assets/",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Agent Skills Overview",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview",
+      "description": "Agent Skills overview with SKILL.md structure and frontmatter options",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Agent Skills Blog Post",
+      "url": "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills",
+      "description": "Deep dive into skill architecture and design principles",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Introducing Agent Skills",
+      "url": "https://www.anthropic.com/news/skills",
+      "description": "Official announcement with overview of skills feature",
+      "add_as_web_search": false
+    }
+  ],
+  "help_center": [
+    {
+      "name": "Using Skills in Claude",
+      "url": "https://support.claude.com/en/articles/12512180-using-skills-in-claude",
+      "description": "User guide for working with skills",
+      "add_as_web_search": false
+    },
+    {
+      "name": "How to Create Custom Skills",
+      "url": "https://support.claude.com/en/articles/12512198-how-to-create-custom-skills",
+      "description": "Step-by-step guide for creating custom skills",
+      "add_as_web_search": true
+    }
+  ],
+  "community_resources": [
+    {
+      "name": "Anthropic Official Skills Repository",
+      "url": "https://github.com/anthropics/skills",
+      "description": "Official public repository for Skills examples",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Awesome Claude Skills",
+      "url": "https://github.com/travisvn/awesome-claude-skills",
+      "description": "Community curated skills collection",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Agent Skills Deep Dive",
+      "url": "https://leehanchung.github.io/blogs/2025/10/26/claude-skills-deep-dive/",
+      "description": "Technical deep dive into skills architecture",
+      "add_as_web_search": false
+    }
+  ],
+  "cross_platform": [
+    {
+      "name": "VS Code Copilot Agent Skills",
+      "url": "https://code.visualstudio.com/docs/copilot/customization/agent-skills",
+      "description": "Using Agent Skills in VS Code with .github/skills/ location",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Agent Skills Integration Guide",
+      "url": "https://agentskills.io/integrate-skills",
+      "description": "How to integrate skills into your agent",
+      "add_as_web_search": false
+    }
+  ]
+}

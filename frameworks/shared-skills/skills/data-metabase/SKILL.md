@@ -1,6 +1,6 @@
 ---
 name: data-metabase
-description: "Metabase REST API automation and troubleshooting: authenticate (API key preferred, session fallback), export/upsert questions (cards) and dashboards, standardize visualization_settings, and run/export results."
+description: "Metabase REST API automation: auth, export/upsert cards and dashboards, visualization_settings. Use when scripting Metabase via API."
 ---
 
 # Metabase
@@ -87,3 +87,9 @@ python3 frameworks/shared-skills/skills/data-metabase/scripts/metabase_api.py up
 # Create/update a dashboard from a JSON spec (base fields only)
 python3 frameworks/shared-skills/skills/data-metabase/scripts/metabase_api.py upsert-dashboard --spec dashboard-spec.json
 ```
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

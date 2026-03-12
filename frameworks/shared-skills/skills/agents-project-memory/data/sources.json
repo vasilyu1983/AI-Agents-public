@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "title": "Claude Code Project Memory - Sources",
+    "description": "Official documentation for CLAUDE.md project memory and cross-platform AGENTS.md compatibility",
+    "last_updated": "2026-01-21",
+    "skill": "agents-project-memory"
+  },
+  "official_anthropic": [
+    {
+      "name": "Claude Code Memory Management",
+      "url": "https://code.claude.com/docs/en/memory",
+      "description": "Primary documentation for memory management and CLAUDE.md",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CLAUDE.md Documentation",
+      "url": "https://code.claude.com/docs/en/memory#claudemd-files",
+      "description": "Official CLAUDE.md file format documentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Overview",
+      "url": "https://code.claude.com/docs/en/overview",
+      "description": "Claude Code feature overview",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic: Claude Code Best Practices",
+      "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+      "description": "Official Anthropic best practices for Claude Code and CLAUDE.md configuration",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Common Workflows",
+      "url": "https://code.claude.com/docs/en/common-workflows",
+      "description": "Official workflows including project setup and documentation",
+      "add_as_web_search": true
+    }
+  ],
+  "official_openai": [
+    {
+      "name": "OpenAI AGENTS.md Guide",
+      "url": "https://developers.openai.com/codex/guides/agents-md",
+      "description": "Official OpenAI Codex documentation for AGENTS.md cross-platform standard",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Config Advanced",
+      "url": "https://developers.openai.com/codex/config-advanced/",
+      "description": "Advanced configuration for OpenAI Codex including AGENTS.md settings",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Overview",
+      "url": "https://developers.openai.com/codex/overview",
+      "description": "Official OpenAI Codex CLI overview",
+      "add_as_web_search": true
+    }
+  ],
+  "cross_platform": [
+    {
+      "name": "AGENTS.md Official Site",
+      "url": "https://agents.md/",
+      "description": "Official AGENTS.md specification and supported tools list",
+      "add_as_web_search": true
+    }
+  ],
+  "community_guides": [
+    {
+      "name": "Claude Code Best Practices: Memory Management",
+      "url": "https://cuong.io/blog/2025/06/15-claude-code-best-practices-memory-management",
+      "description": "Practical tips for lean memory files and token optimization",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Path-Specific Rules in Claude Code",
+      "url": "https://paddo.dev/blog/claude-rules-path-specific-native/",
+      "description": "Guide to using YAML frontmatter for file-scoped rules",
+      "add_as_web_search": false
+    }
+  ]
+}

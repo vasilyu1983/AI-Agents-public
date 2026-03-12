@@ -1,6 +1,6 @@
 ---
 name: ai-llm-inference
-description: "Operational patterns for LLM inference: latency budgeting, tail-latency control, caching, batching/scheduling, quantization/compression, parallelism, and reliable serving at scale. Emphasizes production-grade performance, cost control, and observability."
+description: "LLM inference patterns — latency budgeting, caching, batching, quantization, and parallelism. Use when optimizing serving cost or tail latency."
 ---
 
 # LLMOps - Inference & Optimization - Production Skill Hub
@@ -329,3 +329,9 @@ See [data/sources.json](data/sources.json) for:
 ---
 
 Use this skill whenever the user needs **LLM inference performance, cost reduction, or serving architecture** guidance.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

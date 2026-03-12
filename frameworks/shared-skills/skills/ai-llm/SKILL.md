@@ -1,6 +1,6 @@
 ---
 name: ai-llm
-description: Production LLM engineering skill. Covers strategy selection (prompting vs RAG vs fine-tuning), dataset design, PEFT/LoRA, evaluation workflows, deployment handoff to inference serving, and lifecycle operations with cost/safety controls.
+description: Full LLM lifecycle skill — strategy selection, PEFT/LoRA, evaluation, and deployment. Use when building, fine-tuning, or operating LLM systems.
 ---
 
 # LLM Development & Engineering — Complete Reference
@@ -378,3 +378,9 @@ See **[data/sources.json](data/sources.json)** for 50+ curated authoritative sou
 **Sources:** [data/sources.json](data/sources.json) - Authoritative documentation links
 
 ---
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

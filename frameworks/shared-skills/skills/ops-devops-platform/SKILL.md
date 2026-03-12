@@ -1,6 +1,6 @@
 ---
 name: ops-devops-platform
-description: "Production-grade DevOps and platform engineering patterns: Kubernetes, Terraform, containers, GitOps, CI/CD, observability, incident response, security hardening, and cloud-native operations (AWS, GCP, Azure, Kafka)."
+description: "DevOps and platform engineering patterns: Kubernetes, Terraform, GitOps, CI/CD, observability, incident response, and cloud-native ops."
 ---
 
 # DevOps Engineering — Quick Reference
@@ -106,13 +106,7 @@ Operational best practices by domain:
 - **GitOps Workflows**: [references/gitops-workflows.md](references/gitops-workflows.md) - Continuous reconciliation, multi-environment promotion, ArgoCD/FluxCD patterns, progressive delivery
 - **SRE Incident Management**: [references/sre-incident-management.md](references/sre-incident-management.md) - Severity classification, escalation procedures, blameless postmortems, alert correlation, and runbooks
 - **Operational Standards**: [references/operational-patterns.md](references/operational-patterns.md) - Platform engineering blueprints, CI/CD safety, SLOs, and reliability drills
-
-Each guide includes:
-- Checklists for completeness and safety
-- Common anti-patterns and remediations
-- Step-by-step patterns for safe rollout, rollback, and verification
-- Decision matrices (e.g., deployment, escalation, monitoring strategy)
-- Real-world examples and edge case handling
+- **AIOps**: [references/aiops-patterns.md](references/aiops-patterns.md) - Self-healing systems, automated operations, AI-assisted analysis
 
 ---
 
@@ -172,55 +166,14 @@ Production templates organized by tech stack:
 
 ---
 
-## Navigation
+## Shared Utilities
 
-**Resources**
-- [references/operational-patterns.md](references/operational-patterns.md)
-- [references/sre-incident-management.md](references/sre-incident-management.md)
-- [references/devops-best-practices.md](references/devops-best-practices.md)
-- [references/platform-engineering-patterns.md](references/platform-engineering-patterns.md)
-- [references/gitops-workflows.md](references/gitops-workflows.md)
+Centralized patterns from [software-clean-code-standard](../software-clean-code-standard/) — extract, don't duplicate:
 
-**Shared Utilities** (Centralized patterns — extract, don't duplicate)
-- [../software-clean-code-standard/utilities/config-validation.md](../software-clean-code-standard/utilities/config-validation.md) — Zod 3.24+, secrets management (Vault, 1Password, Doppler)
-- [../software-clean-code-standard/utilities/resilience-utilities.md](../software-clean-code-standard/utilities/resilience-utilities.md) — p-retry v6, circuit breaker, OTel spans
-- [../software-clean-code-standard/utilities/logging-utilities.md](../software-clean-code-standard/utilities/logging-utilities.md) — pino v9 + OpenTelemetry integration
-- [../software-clean-code-standard/utilities/observability-utilities.md](../software-clean-code-standard/utilities/observability-utilities.md) — OpenTelemetry SDK, tracing, metrics
-- [../software-clean-code-standard/utilities/testing-utilities.md](../software-clean-code-standard/utilities/testing-utilities.md) — Test factories, fixtures, mocks
-- [../software-clean-code-standard/references/clean-code-standard.md](../software-clean-code-standard/references/clean-code-standard.md) — Canonical clean code rules (`CC-*`) for citation
-
-**Templates**
-- [assets/incident-response/template-postmortem.md](assets/incident-response/template-postmortem.md)
-- [assets/incident-response/template-runbook-starter.md](assets/incident-response/template-runbook-starter.md)
-- [assets/incident-response/template-incident-comm.md](assets/incident-response/template-incident-comm.md)
-- [assets/incident-response/template-incident-response.md](assets/incident-response/template-incident-response.md)
-- [assets/docker/template-docker-ops.md](assets/docker/template-docker-ops.md)
-- [assets/security/template-security-hardening.md](assets/security/template-security-hardening.md)
-- [assets/azure/template-azure-ops.md](assets/azure/template-azure-ops.md)
-- [assets/gcp/template-gcp-terraform.md](assets/gcp/template-gcp-terraform.md)
-- [assets/gcp/template-gcp-ops.md](assets/gcp/template-gcp-ops.md)
-- [assets/cicd-pipelines/template-release-safety.md](assets/cicd-pipelines/template-release-safety.md)
-- [assets/cicd-pipelines/template-gitops.md](assets/cicd-pipelines/template-gitops.md)
-- [assets/cicd-pipelines/template-ci-cd.md](assets/cicd-pipelines/template-ci-cd.md)
-- [assets/cicd-pipelines/template-github-actions.md](assets/cicd-pipelines/template-github-actions.md)
-- [assets/kafka/template-kafka-ops.md](assets/kafka/template-kafka-ops.md)
-- [assets/aws/template-aws-terraform.md](assets/aws/template-aws-terraform.md)
-- [assets/aws/template-aws-ops.md](assets/aws/template-aws-ops.md)
-- [assets/aws/template-cost-optimization.md](assets/aws/template-cost-optimization.md)
-- [assets/monitoring-observability/template-slo.md](assets/monitoring-observability/template-slo.md)
-- [assets/monitoring-observability/template-loadtest-perf.md](assets/monitoring-observability/template-loadtest-perf.md)
-- [assets/monitoring-observability/template-alert-rules.md](assets/monitoring-observability/template-alert-rules.md)
-- [assets/monitoring-observability/template-observability-slo.md](assets/monitoring-observability/template-observability-slo.md)
-- [assets/kubernetes/template-k8s-deploy.yaml](assets/kubernetes/template-k8s-deploy.yaml)
-- [assets/kubernetes/template-platform-api.md](assets/kubernetes/template-platform-api.md)
-- [assets/kubernetes/template-kubernetes-ops.md](assets/kubernetes/template-kubernetes-ops.md)
-- [assets/kubernetes/template-ha-dr.md](assets/kubernetes/template-ha-dr.md)
-- [assets/terraform-iac/template-env-promotion.md](assets/terraform-iac/template-env-promotion.md)
-- [assets/terraform-iac/template-iac-terraform.md](assets/terraform-iac/template-iac-terraform.md)
-- [assets/terraform-iac/template-module.md](assets/terraform-iac/template-module.md)
-
-**Data**
-- [data/sources.json](data/sources.json) — Curated external references
+- [config-validation.md](../software-clean-code-standard/utilities/config-validation.md) — Zod 3.24+, secrets management (Vault, 1Password, Doppler)
+- [resilience-utilities.md](../software-clean-code-standard/utilities/resilience-utilities.md) — p-retry v6, circuit breaker, OTel spans
+- [logging-utilities.md](../software-clean-code-standard/utilities/logging-utilities.md) — pino v9 + OpenTelemetry integration
+- [observability-utilities.md](../software-clean-code-standard/utilities/observability-utilities.md) — OpenTelemetry SDK, tracing, metrics
 
 ---
 
@@ -239,7 +192,7 @@ Production templates organized by tech stack:
 - [../software-backend/SKILL.md](../software-backend/SKILL.md) — Service-level design and integration patterns
 - [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md) — System design, scalability, and architectural patterns
 - [../dev-api-design/SKILL.md](../dev-api-design/SKILL.md) — RESTful API design and versioning
-- [../git-workflow/SKILL.md](../git-workflow/SKILL.md) — Git branching strategies and CI/CD integration
+- [../dev-git-workflow/SKILL.md](../dev-git-workflow/SKILL.md) — Git branching strategies and CI/CD integration
 
 **Optional: AI/Automation (Related Skills):**
 - [../ai-mlops/SKILL.md](../ai-mlops/SKILL.md) — ML model deployment, monitoring, and lifecycle management
@@ -262,7 +215,7 @@ Production templates organized by tech stack:
 
 ## Do / Avoid
 
-### GOOD: Do
+### Do
 
 - Tag all resources at creation time
 - Set budget alerts before hitting limits
@@ -271,73 +224,28 @@ Production templates organized by tech stack:
 - Set Kubernetes resource requests on all pods
 - Enable cluster autoscaler with scale-down
 - Document capacity planning assumptions
-- Run postmortems after every incident
+- Run blameless postmortems after every SEV1/2
 
-### BAD: Avoid
-
-- Deploying without cost tags
-- Running dev resources 24/7
-- Over-provisioning "just in case"
-- Ignoring reserved capacity opportunities
-- Disabling scale-down to "avoid disruption"
-- Alert fatigue (too many low-priority alerts)
-- Snowflake infrastructure (manual, undocumented)
-- "Clickops" drift (changes outside IaC)
-
----
-
-## Anti-Patterns
+### Avoid
 
 | Anti-Pattern | Problem | Fix |
 |--------------|---------|-----|
-| **No tagging** | Can't attribute costs | Enforce tags in CI/CD |
-| **Dev runs 24/7** | 70% waste | Scheduled shutdown |
-| **Over-provisioned** | Paying for unused capacity | Monthly right-sizing |
-| **No reservations** | Paying on-demand premium | 60-70% coverage target |
-| **Alert fatigue** | Real issues missed | SLO-based alerting, tuned thresholds |
-| **Snowflake infra** | Undocumented, unreproducible | Everything in Terraform/IaC |
-| **No postmortems** | Same incidents repeat | Blameless postmortem for every SEV1/2 |
+| No cost tags | Can't attribute spend | Enforce tags in CI/CD |
+| Dev runs 24/7 | ~70% waste | Scheduled shutdown |
+| Over-provisioned | Paying for idle capacity | Monthly right-sizing review |
+| No reservations | On-demand premium | 60-70% reserved coverage target |
+| Alert fatigue | Real issues missed | SLO-based alerting, tuned thresholds |
+| Snowflake infra | Unreproducible, undocumented | Everything in Terraform/IaC |
+| Clickops drift | Config outside IaC | Enforce GitOps reconciliation |
+| No postmortems | Same incidents repeat | Blameless postmortem for SEV1/2 |
 
 ---
 
 ## Optional: AI/Automation (AIOps)
 
-> Note: AI can assist with analysis and triage, but infrastructure/cost/incident decisions require human approval and an audit trail (especially anything destructive or irreversible).
+> AI can assist with analysis and triage, but infrastructure/cost/incident decisions require human approval and an audit trail.
 
-### AIOps Capabilities (2026)
-
-**Self-Healing Systems:**
-- AI-powered anomaly detection to predict failures before they happen
-- Automated remediation flows that trigger rollbacks or config changes
-- Intelligent test selection and risk-based change scoring in CI/CD
-- Causal graph analysis for instant root cause identification
-
-**Automated Operations:**
-- Unused resource detection and notification
-- Right-sizing recommendation generation
-- Alert summarization and correlation (reduce noise by 90%+)
-- Runbook step suggestions and automated execution
-
-### AI-Assisted Analysis
-
-- Cost trend prediction and anomaly detection
-- Incident pattern identification across services
-- Post-mortem theme extraction
-- Capacity planning predictions
-
-### Platform Engineering + AI
-
-Platform teams increasingly embed AI capabilities directly into the platform:
-- Multi-agent orchestration for code generation, security validation, deployment
-- Intelligent defaults and guardrails that scale across teams
-
-### Bounded Claims
-
-- AI recommendations need validation before action
-- Automated deletions require approval workflow
-- Cost predictions are estimates, not guarantees
-- Runbook suggestions need SRE verification
-- Self-healing actions should have human-defined policies and audit trails
+See [references/aiops-patterns.md](references/aiops-patterns.md) for self-healing systems, automated operations, AI-assisted analysis, and bounded claims.
 
 ---
 
@@ -408,3 +316,9 @@ After searching, provide:
 - Platform engineering tools (Backstage, Port, Kratix)
 - CI/CD platforms (GitHub Actions, GitLab CI, Dagger)
 - Cloud-native security (Falco, Trivy, policy engines)
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

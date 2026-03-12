@@ -1,13 +1,13 @@
 ---
 name: software-ui-ux-design
-description: Use when designing or auditing UI/UX (wireframes to UI specs), running heuristic and accessibility reviews (WCAG 2.2 AA, ARIA), defining design systems and tokens, improving flows/forms/states and conversion (CRO), or tailoring inclusive experiences (age, neurodiversity) across web/iOS/Android/desktop, including AI/automation UX patterns.
+description: Designs and audits UI/UX with WCAG 2.2 accessibility. Use when designing flows, running heuristic reviews, or defining design systems.
 ---
 
 # Software UI/UX Design
 
 Design intuitive, accessible, user-centered interfaces.
 
-**Baselines (Jan 2026)**:
+**Baselines (Mar 2026)**:
 - **Accessibility**: WCAG 2.2 Level AA — [W3C](https://www.w3.org/TR/WCAG22/)
 - **Performance**: Core Web Vitals (LCP ≤2.5s, INP ≤200ms, CLS ≤0.1) — [web.dev](https://web.dev/vitals/)
 - **Platforms**: [Apple HIG](https://developer.apple.com/design/human-interface-guidelines/), [Material 3](https://m3.material.io/)
@@ -34,6 +34,8 @@ Design challenge:
     │   └─ Conversion issues → CRO audit
     ├─ Building new UI?
     │   └─ references/ui-generation-workflows.md
+    ├─ Non-technical users / simplification?
+    │   └─ references/simplification-patterns.md
     ├─ Specific demographics?
     │   └─ references/demographic-inclusive-design.md
     └─ Platform constraints?
@@ -166,7 +168,12 @@ Design challenge:
 | [references/ai-automation-ux.md](references/ai-automation-ux.md) | AI/automation UX: chatbots, agents, progressive disclosure |
 | [references/cultural-design-patterns.md](references/cultural-design-patterns.md) | Cross-cultural design: RTL, CJK, color semiotics, locale UX |
 | [references/frontend-aesthetics-2025.md](references/frontend-aesthetics-2025.md) | Visual design trends 2025: glassmorphism, variable fonts, 3D |
-| [references/modern-ux-patterns-2025.md](references/modern-ux-patterns-2025.md) | Modern UX patterns: command palettes, skeleton states, dark mode |
+| [references/simplification-patterns.md](references/simplification-patterns.md) | Interface simplification for non-technical users, digital literacy spectrum |
+| [references/modern-ux-patterns-2025.md](references/modern-ux-patterns-2025.md) | Modern UX patterns: command palettes, skeleton states, dark mode, 2026 trends |
+| [references/data-visualization-ux.md](references/data-visualization-ux.md) | Data viz: chart selection, dashboards, accessible charts |
+| [references/typography-systems.md](references/typography-systems.md) | Type scales, font pairing, variable fonts, design tokens |
+| [references/performance-ux-vitals.md](references/performance-ux-vitals.md) | Core Web Vitals UX, perceived performance, loading patterns |
+| [references/prototype-to-production.md](references/prototype-to-production.md) | Prototype-to-production alignment, dashboard QA, design-to-ship checks |
 | [references/operational-playbook.md](references/operational-playbook.md) | Decision frameworks |
 
 ## Templates
@@ -178,6 +185,7 @@ Design challenge:
 | [assets/ui-generation/full-ui-spec.md](assets/ui-generation/full-ui-spec.md) | UI spec |
 | [assets/audits/cro-audit-template.md](assets/audits/cro-audit-template.md) | CRO audit |
 | [assets/accessibility/template-wcag-testing.md](assets/accessibility/template-wcag-testing.md) | WCAG testing |
+| [assets/audits/simplification-audit-template.md](assets/audits/simplification-audit-template.md) | Simplification audit |
 | [assets/design-systems/template-design-system.md](assets/design-systems/template-design-system.md) | Design system setup |
 | [assets/component-libraries/template-shadcn-ui.md](assets/component-libraries/template-shadcn-ui.md) | shadcn/ui integration |
 | [assets/component-libraries/template-mui-material-ui.md](assets/component-libraries/template-mui-material-ui.md) | MUI / Material UI |
@@ -200,90 +208,9 @@ Design challenge:
 
 ---
 
-## Prototype-to-Production Alignment (Dashboard Lesson Pack)
 
-Use this when a team says "prototype is close, but real page feels off".
+## Fact-Checking
 
-### 1) Desktop choreography before pixel tweaks
-
-- Start with asymmetric columns (about 60/40), not strict mirrored rows.
-- Keep independent vertical rhythm per column; align only intentional pairs.
-- Prevent dead-right canvas by moving right-column cards up when left grows.
-
-### 2) Compactness heuristics (web)
-
-- Tighten module spacing to ~10-14px in related zones.
-- Remove decorative section labels unless they add navigation value.
-- Merge adjacent related blocks into one container if this reduces visual fragmentation.
-- **Default to flat/compact, not expandable/accordion**: Use static inline content unless the user explicitly needs progressive disclosure. Expanding panels add interaction cost, layout shift, and complexity. Only use accordions/drawers when content volume genuinely exceeds viewport tolerance.
-
-### 3) Control standardization
-
-- One primary action per card context.
-- One share style across dashboard; avoid duplicate share controls in one context.
-- Replace oversized full-width disclosure controls with compact secondary pills/links.
-- Keep day chips + "This Week" as one visual family with stable alignment.
-
-### 4) De-duplication rules
-
-- Do not repeat the same meaning in metadata, chips, and body hints.
-- If context is shown under the hero title (date/moon/phase), remove duplicate decorative restatements.
-- Remove duplicate guidance fragments across Signal/Tension and Do/Do not.
-
-### 5) Banner governance
-
-- Promotional/validation banners are contextual, not always-on.
-- Dismissal must persist; route-level suppression is required for noisy cards.
-- Passive banners should not look selected (no heavy "active" border unless stateful).
-
-### 6) Loading-state quality bar
-
-- Skeletons must map to final IA (shape/count/relative sizing).
-- Keep header context visible while loading.
-- Avoid disconnected full-page placeholder compositions that create "messy" perception.
-
-### 7) i18n requirement in design handoff
-
-- Every user-visible string (including aria labels/tooltips) must be key-based.
-- Define EN keys as baseline in spec before implementation.
-- Reject hardcoded strings in final QA.
-
-### 8) Final QA pass sequence
-
-1. Desktop rhythm and right-side void check (1440+).
-2. Mobile chip size/contrast/alignment check.
-3. Control consistency sweep (buttons, links, share, chips).
-4. Expansion behavior check (no whitespace blowouts).
-5. Loading state and feature-surfacing sanity check.
-
-## Ops UI QA: Design-to-Ship Checks
-
-Use this after implementing visual changes to prevent "looks good in Figma, broken in prod" outcomes.
-
-### Fast QA Commands
-
-```bash
-# 1) Run build first (layout and import safety)
-npm run build
-
-# 2) Run accessibility smoke if available
-npm run test:e2e -- --grep "@a11y"
-
-# 3) Capture route screenshots for review set
-# (replace with your project screenshot task)
-npm run test:e2e -- --grep "@visual"
-```
-
-### Required Review Grid
-
-Validate each critical screen for:
-- desktop rhythm (1366+, 1440+, 1920),
-- mobile spacing and tap targets (360-430 width),
-- loading/empty/error state consistency,
-- contrast and focus visibility,
-- localization expansion (long strings, RTL if supported).
-
-### Operational Rule
-
-Do not sign off on visual changes without state coverage (loading, empty, error, success). Most production regressions hide outside the default happy state.
-
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

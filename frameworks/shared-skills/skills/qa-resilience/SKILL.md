@@ -1,6 +1,6 @@
 ---
 name: qa-resilience
-description: "Use when designing or testing resilience for distributed systems: timeouts/deadlines, retries (backoff + jitter, retry budgets), circuit breakers, bulkheads, backpressure/load shedding, graceful degradation, health checks, chaos experiments/game days/DR drills, and SLO-based reliability gates."
+description: "Design and test distributed-system resilience. Use when adding retries, circuit breakers, chaos experiments, or SLO-based reliability gates."
 ---
 
 # QA Resilience (Jan 2026) - Failure Mode Testing & Production Hardening
@@ -288,3 +288,9 @@ Avoid:
 - Document learnings and action items
 
 Success criteria: systems gracefully handle failures, recover automatically, maintain partial functionality during outages, and fail fast to prevent cascading failures. Resilience is tested proactively through fault injection and game days (with guardrails).
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

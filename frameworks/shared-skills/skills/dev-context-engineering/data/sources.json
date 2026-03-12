@@ -1,0 +1,945 @@
+{
+  "metadata": {
+    "skill": "dev-context-engineering",
+    "title": "Context Engineering for AI-Augmented Development",
+    "description": "Curated sources for context-driven development with AI coding agents across single and multi-repo organizations. Covers context engineering foundations, AGENTS.md standard, paradigm shift evidence, tool documentation, multi-repo patterns, regulatory compliance, security tooling, and practitioner insights.",
+    "last_updated": "2026-03-07",
+    "version": "3.0",
+    "total_sources": 83
+  },
+  "categories": {
+    "context_engineering": [
+      {
+        "name": "Anthropic: Effective Context Engineering for AI Agents",
+        "url": "https://www.anthropic.com/engineering/context-engineering",
+        "type": "documentation",
+        "description": "Anthropic's guide to structuring context for agent performance. Covers prompt design, tool use, memory, and orchestration patterns.",
+        "relevance": "Foundational framework for context design principles used throughout this skill",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["context-engineering", "anthropic", "agents", "foundational"]
+      },
+      {
+        "name": "Martin Fowler: Context Engineering for Coding Agents",
+        "url": "https://martinfowler.com/articles/context-engineering-coding-agents.html",
+        "type": "article",
+        "description": "Fowler's analysis of context engineering as an emerging discipline. Covers structured prompting, codebase context, and progressive disclosure.",
+        "relevance": "Industry validation from a respected voice — establishes CE as engineering, not hacking",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["context-engineering", "thought-leadership", "patterns"]
+      },
+      {
+        "name": "The Context Development Lifecycle (CDLC)",
+        "url": "https://jedi.be/blog/2025/06/02/the-context-development-lifecycle/",
+        "type": "article",
+        "description": "Generate-Evaluate-Distribute-Observe lifecycle for context artifacts. The continuous improvement loop for keeping context fresh.",
+        "relevance": "Core CDLC framework referenced throughout this skill — the feedback loop that makes CE sustainable",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["cdlc", "lifecycle", "context-engineering", "core"]
+      },
+      {
+        "name": "Andrej Karpathy: Observations on Agentic Coding",
+        "url": "https://karpathy.ai",
+        "type": "article",
+        "description": "Karpathy's observations on disciplined agentic coding patterns — surfacing assumptions, managing scope, pushing back on bad approaches",
+        "relevance": "Behavioral rules in this repo's .claude/rules/coding-behavior.md are based on these patterns",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["agentic-coding", "discipline", "patterns"]
+      },
+      {
+        "name": "Simon Willison: Context Engineering Practices",
+        "url": "https://simonwillison.net/tags/context-engineering/",
+        "type": "article",
+        "description": "Willison's ongoing documentation of context engineering patterns, tool comparisons, and practical tips",
+        "relevance": "Practitioner-level insights on what works and what doesn't in daily CE practice",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["context-engineering", "practitioner", "tips"]
+      },
+      {
+        "name": "Sourcegraph: The Death of the Junior Developer (and the Rise of the Context Engineer)",
+        "url": "https://sourcegraph.com/blog/the-death-of-the-junior-developer",
+        "type": "article",
+        "description": "Analysis of how AI agents change the role of developers, with context engineering as the new core skill",
+        "relevance": "Role transformation evidence — supports paradigm-comparison.md role evolution section",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["role-transformation", "context-engineering", "career"]
+      },
+      {
+        "name": "Anthropic: Claude Code Best Practices",
+        "url": "https://docs.anthropic.com/en/docs/claude-code/best-practices",
+        "type": "documentation",
+        "description": "Official best practices for Claude Code including CLAUDE.md structure, hooks, and memory patterns",
+        "relevance": "Authoritative guide for CLAUDE.md file structure and agent configuration",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["claude-code", "best-practices", "anthropic"]
+      },
+      {
+        "name": "Codified Context: Infrastructure for AI Agents in a Complex Codebase",
+        "url": "https://arxiv.org/abs/2602.20478",
+        "type": "research",
+        "description": "Three-tier memory architecture (hot constitution → specialist agents → cold MCP knowledge base) for 108K LOC codebase. 283 sessions over 70 days. Context infrastructure = 24.2% of codebase. Key finding: single-file manifests cannot scale beyond modest codebases.",
+        "relevance": "Research validation of tiered context architecture — supports maturity progression from L1 (single file) to L3+ (agents + knowledge base)",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["research", "three-tier", "mcp", "architecture", "context-infrastructure"]
+      },
+      {
+        "name": "Manus: Context Engineering for AI Agents — Lessons from Building Manus",
+        "url": "https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus",
+        "type": "article",
+        "description": "Production patterns: KV-cache hit rate as primary metric (10x cost difference), masking over removal, file system as extended memory, attention through recitation (todo.md), preserving failure states, avoiding few-shot brittleness.",
+        "relevance": "Advanced context optimization patterns applicable to CDLC Observe phase — cost and performance tuning",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["manus", "production", "kv-cache", "optimization", "context-engineering"]
+      },
+      {
+        "name": "Context Development Lifecycle: Your AI Agent Isn't Broken, Your Context Is",
+        "url": "https://www.vibesparking.com/en/blog/ai/context-engineering/2026-03-04-context-development-lifecycle-optimizing-context-for-ai-coding-agents/",
+        "type": "article",
+        "description": "External validation of CDLC framework (Generate → Evaluate → Distribute → Observe). Key insight: 'Every new session = onboarding a hire who knows programming but nothing about your project.' Adds test-driven context development concept.",
+        "relevance": "Independent validation of CDLC framework — confirms Generate-Evaluate-Distribute-Observe as industry-recognized lifecycle",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["cdlc", "validation", "context-engineering", "lifecycle"]
+      }
+    ],
+    "agents_md_standard": [
+      {
+        "name": "AGENTS.md Specification",
+        "url": "https://agents.md",
+        "type": "specification",
+        "description": "The AGENTS.md standard for repository agent instructions. Defines file format, sections, and cross-tool compatibility.",
+        "relevance": "Primary standard this entire skill builds upon — AGENTS.md is the source of truth",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["agents-md", "specification", "standard", "core"]
+      },
+      {
+        "name": "AGENTS.md GitHub Repository",
+        "url": "https://github.com/anthropics/agents-md",
+        "type": "repository",
+        "description": "Official repository for the AGENTS.md specification with examples and tooling",
+        "relevance": "Reference implementation and examples of well-structured AGENTS.md files",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["agents-md", "examples", "reference"]
+      },
+      {
+        "name": "Linux Foundation Agentic AI Foundation",
+        "url": "https://www.linuxfoundation.org/press/linux-foundation-launches-agentic-ai-initiative",
+        "type": "reference",
+        "description": "Industry governance body for agentic AI standards including AGENTS.md adoption",
+        "relevance": "Institutional backing for AGENTS.md — signals long-term standard viability",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["agents-md", "governance", "linux-foundation"]
+      },
+      {
+        "name": "GitHub: How to Write a Great agents.md",
+        "url": "https://github.blog/engineering/how-to-write-a-great-agents-md/",
+        "type": "article",
+        "description": "GitHub's guide to effective agents.md files — structure, content, anti-patterns",
+        "relevance": "Platform-specific best practices from the largest code hosting platform",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["agents-md", "github", "best-practices"]
+      },
+      {
+        "name": "AGENTS.md Adoption Tracker",
+        "url": "https://github.com/search?q=filename%3AAGENTS.md&type=code",
+        "type": "reference",
+        "description": "GitHub search showing AGENTS.md adoption across public repositories",
+        "relevance": "Track adoption growth — 60,000+ repos by March 2026 (arxiv 2601.18341: 15-23% agent adoption rate)",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["agents-md", "adoption", "metrics"]
+      },
+      {
+        "name": "ETH Zurich: Evaluating AGENTS.md — Are Context Files Helpful for Coding Agents?",
+        "url": "https://arxiv.org/abs/2602.11988",
+        "type": "research",
+        "description": "Empirical evaluation of context file effectiveness. 138 tasks, 4 models. LLM-generated files degrade performance by 3% and increase costs 20%+. Human-written files provide marginal +4% but raise costs 19%. Recommends limiting to non-inferable details only.",
+        "relevance": "Critical research caveat for AGENTS.md authoring — validates 'quality over quantity' principle and progressive disclosure pattern",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["research", "agents-md", "evaluation", "eth-zurich", "evidence"]
+      }
+    ],
+    "paradigm_shift": [
+      {
+        "name": "OpenAI: Harness Engineering",
+        "url": "https://openai.com/index/harness-engineering/",
+        "type": "article",
+        "description": "OpenAI's framework for organizing engineering work around AI agents — structured task descriptions, verification, feedback loops",
+        "relevance": "Codex-side perspective on context-driven development; validates dual-agent approach",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["codex", "openai", "harness-engineering"]
+      },
+      {
+        "name": "GitHub spec-kit",
+        "url": "https://github.com/github/spec-kit",
+        "type": "repository",
+        "description": "GitHub's toolkit for spec-driven AI development — templates, validation, best practices",
+        "relevance": "Practical tooling for spec-first workflows; complements docs-ai-prd skill",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["spec-driven", "github", "tooling"]
+      },
+      {
+        "name": "METR: Measuring AI Ability to Complete Long Tasks",
+        "url": "https://metr.org/blog/2025-07-01-measuring-ai-ability-to-complete-long-tasks/",
+        "type": "article",
+        "description": "Research showing unstructured AI coding ('vibe coding') is 19% slower with 1.7x more issues than structured approaches",
+        "relevance": "Key evidence for why context engineering matters — data-backed case against vibe coding",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["research", "vibe-coding", "evidence", "quantitative"]
+      },
+      {
+        "name": "Gartner: AI-Augmented Software Engineering Predictions",
+        "url": "https://www.gartner.com/en/articles/ai-augmented-development",
+        "type": "article",
+        "description": "Gartner predictions on AI-augmented development — 75% of enterprise developers using AI assistants by 2028",
+        "relevance": "Strategic context for organizational adoption planning",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["predictions", "enterprise", "adoption", "strategy"]
+      },
+      {
+        "name": "McKinsey: The Economic Potential of Generative AI in Software Engineering",
+        "url": "https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai",
+        "type": "article",
+        "description": "McKinsey analysis of AI impact on developer productivity — 20-45% time savings on coding tasks",
+        "relevance": "Business case data for CDLC investment and SDLC compression claims",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["research", "productivity", "business-case"]
+      },
+      {
+        "name": "Stack Overflow Developer Survey: AI Tools Adoption",
+        "url": "https://survey.stackoverflow.co/",
+        "type": "reference",
+        "description": "Annual developer survey tracking AI tool adoption rates, tool preferences, and satisfaction",
+        "relevance": "Industry benchmarks for AI tool adoption — useful for making the case internally",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["survey", "adoption", "benchmarks", "industry"]
+      },
+      {
+        "name": "Google DeepMind: AI-Assisted Software Engineering Study",
+        "url": "https://deepmind.google/discover/blog/",
+        "type": "article",
+        "description": "Google's research on AI coding agent productivity including Gemini-based development",
+        "relevance": "Multi-vendor evidence for context-driven development effectiveness",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["research", "google", "productivity", "evidence"]
+      },
+      {
+        "name": "Anthropic: 2026 Agentic Coding Trends Report",
+        "url": "https://resources.anthropic.com/2026-agentic-coding-trends-report",
+        "type": "report",
+        "description": "Eight trends reshaping software engineering: role shift to agent coordination, multi-agent teams, end-to-end agent runs (hours/days), agents learning to ask for help, spread beyond engineers, shorter timelines, security implications. AI in 60% of work but only 0-20% fully delegated.",
+        "relevance": "Authoritative industry report validating paradigm shift — data-backed trend evidence from the primary agent platform",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["anthropic", "trends", "report", "multi-agent", "paradigm-shift"]
+      }
+    ],
+    "tool_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://docs.anthropic.com/en/docs/claude-code",
+        "type": "documentation",
+        "description": "Official Claude Code CLI documentation — hooks, subagents, worktrees, MCP, memory files",
+        "relevance": "Primary agent tool — all CDLC patterns built on Claude Code capabilities",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["claude-code", "anthropic", "cli", "primary"]
+      },
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "description": "Claude Code source repository with issues, discussions, and changelog",
+        "relevance": "Track feature updates, bug reports, and community patterns",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["claude-code", "github", "changelog"]
+      },
+      {
+        "name": "OpenAI Codex Documentation",
+        "url": "https://openai.com/index/codex/",
+        "type": "documentation",
+        "description": "OpenAI Codex cloud agent — sandboxed async execution, AGENTS.md support",
+        "relevance": "Secondary agent tool — async batch tasks, issue triage, parallel execution",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["codex", "openai", "cloud-agent", "primary"]
+      },
+      {
+        "name": "Cursor Documentation",
+        "url": "https://docs.cursor.com",
+        "type": "documentation",
+        "description": "Cursor IDE with AI integration — .cursor/rules, agent mode, context management",
+        "relevance": "Supplementary tool — reads .cursor/rules for IDE-level context",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["cursor", "ide", "supplementary"]
+      },
+      {
+        "name": "GitHub Copilot Documentation",
+        "url": "https://docs.github.com/en/copilot",
+        "type": "documentation",
+        "description": "GitHub Copilot — inline suggestions, copilot-instructions.md, Copilot Workspace",
+        "relevance": "Supplementary tool — reads .github/copilot-instructions.md",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["copilot", "github", "supplementary"]
+      },
+      {
+        "name": "Windsurf (Codeium) Documentation",
+        "url": "https://docs.codeium.com",
+        "type": "documentation",
+        "description": "Windsurf IDE agent with Cascade — .windsurfrules context file support",
+        "relevance": "Alternative AI IDE — context patterns translate across tools",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["windsurf", "codeium", "supplementary"]
+      },
+      {
+        "name": "Amazon Q Developer Documentation",
+        "url": "https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/",
+        "type": "documentation",
+        "description": "AWS AI coding assistant — workspace context, guardrails, enterprise features",
+        "relevance": "Enterprise alternative — relevant for AWS-heavy organizations evaluating tools",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["amazon-q", "aws", "enterprise"]
+      },
+      {
+        "name": "Google Gemini CLI / Code Assist",
+        "url": "https://github.com/google-gemini/gemini-cli",
+        "type": "repository",
+        "description": "Google's CLI agent for coding — GEMINI.md context file, agent mode",
+        "relevance": "Third major agent platform — multi-agent strategy may include Gemini",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["gemini", "google", "cli"]
+      },
+      {
+        "name": "GitHub Agent HQ: Enterprise AI Controls & Agent Control Plane",
+        "url": "https://github.blog/changelog/2026-02-26-enterprise-ai-controls-agent-control-plane-now-generally-available/",
+        "type": "documentation",
+        "description": "Enterprise governance for AI agents on GitHub. Audit logging with actor_is_agent identifiers, agent_session.task events, MCP enterprise allowlists, custom agent definitions in .github/agents/*.md, programmatic agent management APIs.",
+        "relevance": "Enterprise audit and governance layer — complements FCA compliance requirements with platform-level controls",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["github", "enterprise", "audit", "governance", "agent-hq"]
+      },
+      {
+        "name": "VS Code: Context Engineering Guide",
+        "url": "https://code.visualstudio.com/docs/copilot/guides/context-engineering-guide",
+        "type": "documentation",
+        "description": "VS Code's three-step context engineering workflow: custom instructions (.github/copilot-instructions.md), planning agents (.github/agents/plan.agent.md), implementation agents. Agent handoffs for end-to-end flows.",
+        "relevance": "Platform-specific context patterns — shows convergence of AGENTS.md and .github/agents/ as complementary standards",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["vscode", "copilot", "context-engineering", "agents"]
+      }
+    ],
+    "multi_repo_patterns": [
+      {
+        "name": "Spine Pattern for Polyrepo Coordination",
+        "url": "https://www.thoughtworks.com/radar/techniques/spine-model",
+        "type": "article",
+        "description": "Coordination pattern for managing shared concerns across many repositories without coupling",
+        "relevance": "Architectural pattern for 100+ repo organizations — basis for coordination repo pattern",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["multi-repo", "coordination", "architecture", "spine"]
+      },
+      {
+        "name": "InnerSource Patterns",
+        "url": "https://patterns.innersourcecommons.org/",
+        "type": "reference",
+        "description": "Community patterns for internal open source practices — governance, contribution, review",
+        "relevance": "Governance model for shared context artifacts across teams",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["innersource", "governance", "patterns"]
+      },
+      {
+        "name": "GitHub Template Repositories",
+        "url": "https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository",
+        "type": "documentation",
+        "description": "GitHub's template repository feature for standardizing new repo creation",
+        "relevance": "Mechanism for Pattern 2 (Template Repository + Sync) in multi-repo strategy",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["github", "template", "bootstrapping"]
+      },
+      {
+        "name": "Git Submodules Documentation",
+        "url": "https://git-scm.com/book/en/v2/Git-Tools-Submodules",
+        "type": "documentation",
+        "description": "Official Git documentation for submodules — version-pinned shared code across repos",
+        "relevance": "Distribution mechanism for shared context: version-pinned, explicit updates",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["git", "submodules", "distribution"]
+      },
+      {
+        "name": "Monorepo vs Polyrepo: Comparison and Strategies",
+        "url": "https://www.atlassian.com/git/tutorials/monorepos",
+        "type": "article",
+        "description": "Atlassian's comparison of monorepo vs polyrepo strategies with trade-offs",
+        "relevance": "Background for choosing coordination pattern based on repo structure",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["monorepo", "polyrepo", "strategy"]
+      },
+      {
+        "name": "GitHub Actions: Reusable Workflows",
+        "url": "https://docs.github.com/en/actions/sharing-automations/reusing-workflows",
+        "type": "documentation",
+        "description": "GitHub Actions reusable workflows for sharing CI/CD patterns across repositories",
+        "relevance": "Mechanism for distributing compliance gates across 100 repos",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["github-actions", "ci-cd", "distribution"]
+      }
+    ],
+    "security_tooling": [
+      {
+        "name": "Gitleaks: Secret Detection",
+        "url": "https://github.com/gitleaks/gitleaks",
+        "type": "tool",
+        "description": "SAST tool for detecting hardcoded secrets in git repos — API keys, tokens, passwords",
+        "relevance": "Required compliance gate in fca-compliance-gate.yml — blocks merge on secrets",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["security", "secrets", "sast", "ci-cd"]
+      },
+      {
+        "name": "Semgrep",
+        "url": "https://semgrep.dev",
+        "type": "tool",
+        "description": "Lightweight static analysis for finding bugs, security issues, and enforcing code standards",
+        "relevance": "SAST scanning in compliance gate — security-audit, secrets, OWASP top 10 rulesets",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["security", "sast", "static-analysis", "ci-cd"]
+      },
+      {
+        "name": "GitHub CodeQL",
+        "url": "https://codeql.github.com",
+        "type": "tool",
+        "description": "GitHub's semantic code analysis engine for finding security vulnerabilities",
+        "relevance": "Alternative to Semgrep for SAST scanning in compliance gates",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["security", "codeql", "github", "sast"]
+      },
+      {
+        "name": "Snyk",
+        "url": "https://snyk.io",
+        "type": "tool",
+        "description": "Developer security platform — dependency scanning, container scanning, code analysis",
+        "relevance": "Dependency vulnerability scanning in compliance gate; alternative to Dependabot",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["security", "dependencies", "vulnerabilities"]
+      },
+      {
+        "name": "GitHub Dependabot",
+        "url": "https://docs.github.com/en/code-security/dependabot",
+        "type": "documentation",
+        "description": "Automated dependency updates and security alerts for GitHub repositories",
+        "relevance": "Dependency vulnerability scanning — complements gitleaks and SAST",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["security", "dependencies", "github", "automation"]
+      },
+      {
+        "name": "OWASP Top 10",
+        "url": "https://owasp.org/www-project-top-ten/",
+        "type": "reference",
+        "description": "OWASP Top 10 web application security risks — the baseline security checklist",
+        "relevance": "Referenced in Semgrep ruleset (p/owasp-top-ten); baseline for security rules",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["security", "owasp", "baseline"]
+      },
+      {
+        "name": "OWASP LLM Top 10",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "reference",
+        "description": "OWASP Top 10 risks specific to LLM applications — prompt injection, data leakage, etc.",
+        "relevance": "AI-specific security risks relevant when using coding agents in regulated environments",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["security", "owasp", "llm", "ai-security"]
+      },
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/artificial-intelligence/ai-risk-management-framework",
+        "type": "reference",
+        "description": "NIST framework for managing AI system risks — governance, mapping, measuring, managing",
+        "relevance": "Complements FCA requirements; US equivalent for AI risk governance",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["nist", "ai-risk", "governance", "framework"]
+      },
+      {
+        "name": "NIST AI Agent Standards Initiative (Feb 2026)",
+        "url": "https://www.nist.gov/caisi/ai-agent-standards-initiative",
+        "type": "reference",
+        "description": "First US government framework for autonomous AI agents. Three pillars: industry-led standards, community-led protocols, security research. Covers agent identity/authorization, governance controls, escalation protocols. RFI on AI Agent Security due March 2026.",
+        "relevance": "Emerging regulatory framework — complements FCA requirements with US-aligned standards for multinational organizations",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["nist", "standards", "ai-agents", "governance", "security"]
+      },
+      {
+        "name": "Northflank: How to Sandbox AI Agents — Isolation Patterns 2026",
+        "url": "https://northflank.com/blog/how-to-sandbox-ai-agents",
+        "type": "article",
+        "description": "Comprehensive sandbox isolation patterns: microVMs (Firecracker ~125ms boot, Kata), gVisor (syscall interception), standard containers. Network isolation, resource limits, zero-trust permissions. Sandboxed agents reduce security incidents 90%.",
+        "relevance": "Security isolation patterns for regulated agent execution — extends Stripe devbox pattern with vendor-neutral options",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["sandbox", "isolation", "microvm", "security", "agents"]
+      }
+    ],
+    "fca_emi_compliance": [
+      {
+        "name": "FCA PS21/3: Building Operational Resilience",
+        "url": "https://www.fca.org.uk/publications/policy-statements/ps21-3-building-operational-resilience",
+        "type": "reference",
+        "description": "FCA policy on operational resilience — Important Business Services, impact tolerances, scenario testing",
+        "relevance": "AI tools as critical dependencies in IBS; manual fallback pathways required",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["fca", "operational-resilience", "regulation", "core"]
+      },
+      {
+        "name": "FCA/PRA SS1/23: Model Risk Management",
+        "url": "https://www.bankofengland.co.uk/prudential-regulation/publication/2023/model-risk-management-principles-for-banks",
+        "type": "reference",
+        "description": "Model risk management principles — AI-generated code as model output requiring inventory, validation, monitoring",
+        "relevance": "Legal basis for tracking AI-generated code artifacts in model risk register",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["model-risk", "fca", "pra", "governance", "core"]
+      },
+      {
+        "name": "FCA SM&CR Regime",
+        "url": "https://www.fca.org.uk/firms/senior-managers-certification-regime",
+        "type": "reference",
+        "description": "Senior Managers and Certification Regime — named accountability for regulated activities",
+        "relevance": "Named Senior Manager must be accountable for AI tool governance; 'AI did it' is not a defense",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["smcr", "accountability", "fca", "core"]
+      },
+      {
+        "name": "FCA PS24/16: Critical Third Parties",
+        "url": "https://www.fca.org.uk/publications/policy-statements/ps24-16-oversight-critical-third-parties",
+        "type": "reference",
+        "description": "Critical Third Party oversight regime — AI providers (Anthropic, OpenAI) may be designated CTPs",
+        "relevance": "Portability requirement — dual-agent strategy (Claude Code + Codex) avoids vendor lock-in",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["ctp", "third-party", "fca", "portability"]
+      },
+      {
+        "name": "ICO: Guidance on AI and Data Protection",
+        "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/",
+        "type": "reference",
+        "description": "UK Information Commissioner's Office guidance on AI systems and data protection",
+        "relevance": "DPIA requirements, lawful basis for AI code generation, context files must not contain PII",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["gdpr", "ico", "data-protection", "ai", "core"]
+      },
+      {
+        "name": "FCA: Artificial Intelligence Update",
+        "url": "https://www.fca.org.uk/publications/corporate-documents/ai-update",
+        "type": "reference",
+        "description": "FCA's latest position on AI use by regulated firms — expectations, good practice, supervisory focus",
+        "relevance": "Regulatory direction on AI adoption in financial services; shapes governance requirements",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["fca", "ai-policy", "governance", "direction"]
+      },
+      {
+        "name": "EBA: Guidelines on AI Use in Financial Services",
+        "url": "https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/model-validation",
+        "type": "reference",
+        "description": "European Banking Authority guidelines on AI/ML models in financial services",
+        "relevance": "EU counterpart to FCA guidance — relevant for firms operating across UK and EU",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["eba", "eu", "financial-services", "regulation"]
+      },
+      {
+        "name": "UK Government: Pro-Innovation Approach to AI Regulation",
+        "url": "https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach",
+        "type": "reference",
+        "description": "UK government white paper on AI regulation principles — context-specific, proportionate approach",
+        "relevance": "Regulatory landscape for AI in UK — informs how FCA/PRA apply AI oversight",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["uk-government", "ai-regulation", "policy"]
+      },
+      {
+        "name": "FINRA 2026: GenAI Regulatory Oversight — AI Agents Section",
+        "url": "https://www.finra.org/rules-guidance/guidance/reports/2026-finra-annual-regulatory-oversight-report/gen-ai",
+        "type": "reference",
+        "description": "FINRA's first dedicated AI agents section. Defines agents as 'systems capable of autonomous actions on behalf of users.' Requires: prompt/output logging, model version tracking, human-in-the-loop review, agent action audit trails, guardrails to restrict behaviors.",
+        "relevance": "US financial regulator guidance — validates FCA approach and adds specificity on audit trail requirements for AI coding agents",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["finra", "regulation", "ai-agents", "audit-trail", "financial-services"]
+      }
+    ],
+    "data_protection": [
+      {
+        "name": "IAPP: GDPR and Agentic AI",
+        "url": "https://iapp.org/resources/article/gdpr-and-agentic-ai/",
+        "type": "article",
+        "description": "IAPP analysis of GDPR implications for agentic AI systems — data processing, legal basis, safeguards",
+        "relevance": "Legal framework for AI agent data processing in development workflows",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["gdpr", "iapp", "agentic-ai", "legal"]
+      },
+      {
+        "name": "PCI SSC: AI Principles for Payment Security",
+        "url": "https://www.pcisecuritystandards.org/",
+        "type": "reference",
+        "description": "PCI Security Standards Council — card data must never appear in agent context, prompts, or code",
+        "relevance": "Hard prohibition on card data in AI context — mandatory data-handling rule",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["pci-dss", "payments", "security"]
+      },
+      {
+        "name": "Anthropic: Data Processing Agreement (DPA)",
+        "url": "https://www.anthropic.com/policies/data-processing-agreement",
+        "type": "reference",
+        "description": "Anthropic's Data Processing Agreement for Claude and Claude Code usage",
+        "relevance": "Required contractual basis for using Claude Code under GDPR — verify DPA is in place",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["anthropic", "dpa", "gdpr", "contractual"]
+      },
+      {
+        "name": "OpenAI: Enterprise Data Processing",
+        "url": "https://openai.com/enterprise-privacy/",
+        "type": "reference",
+        "description": "OpenAI's enterprise privacy and data processing commitments for Codex",
+        "relevance": "Required for Codex usage under GDPR — verify terms meet FCA requirements",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["openai", "dpa", "gdpr", "enterprise"]
+      }
+    ],
+    "sdlc_and_devops": [
+      {
+        "name": "DORA: State of DevOps Report",
+        "url": "https://dora.dev/research/",
+        "type": "reference",
+        "description": "Google DORA research on DevOps capabilities, metrics (deployment frequency, lead time, MTTR, change failure rate)",
+        "relevance": "Baseline metrics for measuring SDLC compression — DORA metrics validate CDLC impact",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["devops", "metrics", "dora", "benchmarks"]
+      },
+      {
+        "name": "GitHub Branch Protection Rules",
+        "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-a-branch-protection-rule",
+        "type": "documentation",
+        "description": "GitHub branch protection configuration — required reviews, signed commits, status checks",
+        "relevance": "Enforcement mechanism for separation of duties, signed commits, and compliance gates",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["github", "branch-protection", "enforcement"]
+      },
+      {
+        "name": "Conventional Commits Specification",
+        "url": "https://www.conventionalcommits.org/",
+        "type": "specification",
+        "description": "Standard for structured commit messages — type(scope): description",
+        "relevance": "Commit convention referenced in compliance rules — enables automated changelogs and audit",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["commits", "convention", "audit-trail"]
+      },
+      {
+        "name": "GitHub CODEOWNERS",
+        "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+        "type": "documentation",
+        "description": "GitHub CODEOWNERS file for automatic review assignment based on file paths",
+        "relevance": "Enforcement mechanism for requiring security/compliance review on sensitive directories",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["github", "codeowners", "review", "enforcement"]
+      },
+      {
+        "name": "Git Signed Commits",
+        "url": "https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work",
+        "type": "documentation",
+        "description": "Git documentation for GPG/SSH commit signing — cryptographic attribution",
+        "relevance": "Mandatory audit trail requirement — all commits must be signed in regulated repos",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["git", "signing", "audit-trail", "compliance"]
+      },
+      {
+        "name": "GitHub: Enterprise AI Controls — Agent Control Plane GA",
+        "url": "https://github.blog/news-insights/company-news/pick-your-agent-use-claude-and-codex-on-agent-hq/",
+        "type": "documentation",
+        "description": "Claude and Codex as first-class agents on GitHub. Multi-agent parallel execution, draft PR creation, enterprise audit logging, organization-wide policy management, GitHub Code Quality integration.",
+        "relevance": "Platform convergence — both primary agents (Claude Code + Codex) now available in unified GitHub workflow with enterprise controls",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["github", "agent-hq", "claude", "codex", "enterprise"]
+      }
+    ],
+    "practitioner_insights": [
+      {
+        "name": "Addy Osmani: AI-Assisted Coding — Moving Beyond Autocomplete",
+        "url": "https://addyosmani.com/blog/ai-coding/",
+        "type": "article",
+        "description": "Google Chrome engineer on structured approaches to AI coding — beyond simple suggestions",
+        "relevance": "Practical patterns for moving from copilot-style to agent-style development",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["practitioner", "google", "patterns"]
+      },
+      {
+        "name": "Kent Beck: AI-Assisted Software Development",
+        "url": "https://tidyfirst.substack.com",
+        "type": "article",
+        "description": "Kent Beck's ongoing analysis of how AI changes software design — from TDD to AI-assisted patterns",
+        "relevance": "Foundational thinking on how development practices evolve with AI agents",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["practitioner", "tdd", "design", "thought-leadership"]
+      },
+      {
+        "name": "Lenny's Newsletter: How Top Engineering Teams Use AI Coding Agents",
+        "url": "https://www.lennysnewsletter.com",
+        "type": "article",
+        "description": "Case studies of engineering teams adopting AI coding agents at scale",
+        "relevance": "Real-world adoption patterns and organizational change management insights",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["case-studies", "adoption", "teams"]
+      },
+      {
+        "name": "Cognition AI: Building with Devin — Lessons Learned",
+        "url": "https://www.cognition.ai/blog",
+        "type": "article",
+        "description": "Cognition's blog on autonomous coding agents — context management, verification, limitations",
+        "relevance": "Alternative agent perspective — validates need for structured context regardless of tool",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["devin", "autonomous-agents", "lessons"]
+      },
+      {
+        "name": "Stripe: Minions — One-Shot End-to-End Coding Agents",
+        "url": "https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents",
+        "type": "article",
+        "description": "Stripe's internal coding agents merging 1,000+ PRs/week across hundreds of millions of LOC. Covers pre-hydration context patterns, 400+ MCP Toolshed, devbox isolation, max-2-CI-rounds verification, and the 'good for humans = good for LLMs' principle.",
+        "relevance": "Production-scale evidence for context engineering at a $1T+ payment company. Validates shift-left verification, agent rule files, selective CI, and human review separation of duties.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["stripe", "coding-agents", "scale", "fintech", "case-study", "mcp", "verification"]
+      },
+      {
+        "name": "Block/Square: Goose — Open Source Coding Agent",
+        "url": "https://github.com/block/goose",
+        "type": "repository",
+        "description": "Open-source coding agent by Block (Square). Stripe's Minions forked Goose as their core agent loop.",
+        "relevance": "Alternative agent framework — demonstrates interleaved agent loops with deterministic code",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["goose", "block", "open-source", "agent-framework"]
+      },
+      {
+        "name": "Sourcegraph: Code Intelligence for AI Agents",
+        "url": "https://sourcegraph.com",
+        "type": "tool",
+        "description": "Code intelligence platform used by Stripe Minions for codebase search and understanding via MCP",
+        "relevance": "Context retrieval tool for large codebases — alternative to grep/ripgrep for 100M+ LOC repos",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["sourcegraph", "code-intelligence", "search", "context-retrieval"]
+      },
+      {
+        "name": "Cortex: The Engineering Leader's Guide to AI Tools for Developers in 2026",
+        "url": "https://www.cortex.io/post/the-engineering-leaders-guide-to-ai-tools-for-developers-in-2026",
+        "type": "article",
+        "description": "Engineering leader perspective on AI tool adoption. ROI measurement (connect to DORA metrics, not usage), governance (SOC 2, ISO 27001), internal developer portal integration, multi-tool strategy. Key insight: 'Well-defined engineering standards enable meaningful AI measurement.'",
+        "relevance": "Leadership/management perspective on CE adoption — complements technical guidance with organizational strategy",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["leadership", "enterprise", "roi", "adoption", "governance"]
+      },
+      {
+        "name": "Block/Square: Jack Dorsey AI-Driven 40% Workforce Reduction",
+        "url": "https://fortune.com/2026/02/27/block-jack-dorsey-ceo-xyz-stock-square-4000-ai-layoffs/",
+        "type": "article",
+        "description": "Block cut 4,000 employees (40% of workforce) citing 'intelligence tools enabling smaller and flatter teams.' Gross profit up 24% YoY, stock rose 18%. Dorsey predicted most companies will follow within a year.",
+        "relevance": "Highest-profile case study of AI-driven team restructuring — validates the parallel team hypothesis at scale",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["team-transformation", "layoffs", "block", "case-study", "ai-native"]
+      },
+      {
+        "name": "HBR: Companies Are Laying Off Workers Because of AI's Potential — Not Its Performance",
+        "url": "https://hbr.org/2026/01/companies-are-laying-off-workers-because-of-ais-potential-not-its-performance",
+        "type": "article",
+        "description": "Harvard Business Review analysis showing many AI-driven layoffs are based on anticipated capabilities, not proven performance. Critical counter-narrative to the restructuring hype.",
+        "relevance": "Essential caveat for team transformation — challenges the assumption that AI has already proven itself enough to justify team cuts",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["team-transformation", "layoffs", "caveat", "hbr", "critical-analysis"]
+      },
+      {
+        "name": "SF Standard: AI Writes the Code Now — What's Left for Software Engineers?",
+        "url": "https://sfstandard.com/2026/02/19/ai-writes-code-now-s-left-software-engineers/",
+        "type": "article",
+        "description": "Graduate hiring at top 15 US tech companies down 55% since 2019. UC CS enrollment declining for first time since dot-com era. One engineer generates 100K+ lines across 6 projects in 2 weeks using Claude Code.",
+        "relevance": "Labor market evidence for the shift — data points on engineering role transformation and hiring trends",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["team-transformation", "labor-market", "hiring", "role-evolution"]
+      },
+      {
+        "name": "Harvard/P&G: When AI Joins the Team, Better Ideas Surface",
+        "url": "https://www.library.hbs.edu/working-knowledge/when-ai-joins-the-team-better-ideas-surface",
+        "type": "research",
+        "description": "Field experiment at P&G: teams with AI produced 3x more top-10% quality ideas. Individuals with AI matched quality of 2-person human teams without AI. AI expanded problem-solving expertise across broader employee populations.",
+        "relevance": "Rigorous experimental evidence that AI amplifies team capability — supports the 'smaller team + AI' hypothesis",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["research", "team-transformation", "harvard", "p&g", "evidence"]
+      },
+      {
+        "name": "OpenAI: Building an AI-Native Engineering Team",
+        "url": "https://developers.openai.com/codex/guides/build-ai-native-engineering-team",
+        "type": "documentation",
+        "description": "OpenAI's guide to structuring engineering teams around Codex and AI coding agents. Covers role definitions, workflow patterns, and team sizing for AI-native organizations.",
+        "relevance": "Authoritative guidance on AI-native team structure from the Codex platform provider",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["team-transformation", "openai", "codex", "ai-native", "guide"]
+      },
+      {
+        "name": "VC Corner: The Billion-Dollar Startup Formula — AI-Driven Small Teams Beating Giants",
+        "url": "https://www.thevccorner.com/p/the-billion-dollar-startup-formula",
+        "type": "article",
+        "description": "Midjourney ($200M ARR, 10 people), Cursor ($100M ARR, 20 people), BuiltWith ($14M/year, 1 person). Solo founders = 35% of 2024 startups. 1 AI engineer ≈ 5 traditional engineers.",
+        "relevance": "Venture capital perspective on AI-native team economics — concrete revenue/headcount ratios",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["team-transformation", "startups", "vc", "metrics", "ai-native"]
+      }
+    ]
+  }
+}

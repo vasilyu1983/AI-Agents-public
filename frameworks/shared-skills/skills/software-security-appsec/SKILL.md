@@ -1,6 +1,6 @@
 ---
 name: software-security-appsec
-description: Modern application security patterns aligned with OWASP Top 10:2025 (final), OWASP API Security Top 10 (2023), NIST SSDF, zero trust (incl. NSA ZIGs 2026), supply chain security (SBOM), passkeys/WebAuthn, authentication, authorization, input validation, cryptography, plus security ROI, breach cost modeling, and compliance-driven enterprise sales.
+description: AppSec patterns aligned with OWASP Top 10:2025 and NIST SSDF. Use when implementing auth, input validation, crypto, or reviewing security posture.
 ---
 
 # Software Security & AppSec — Quick Reference
@@ -362,3 +362,9 @@ Building storage/upload features without upfront security constraints leads to r
 
 ## Operational Playbooks
 - [references/operational-playbook.md](references/operational-playbook.md) — Core security principles, OWASP summaries, authentication patterns, and detailed code examples
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

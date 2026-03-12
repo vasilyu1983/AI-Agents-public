@@ -1,6 +1,6 @@
 ---
 name: qa-testing-mobile
-description: "Mobile app testing strategy and execution for iOS and Android (native + cross-platform): choose automation frameworks, define device matrix, control flakes, validate performance/reliability/accessibility, and set CI + release gates. Use when you need a mobile QA plan, device lab/CI setup, or guidance on XCUITest/Espresso/Appium/Detox/Maestro/Flutter testing."
+description: "Mobile QA for iOS and Android. Use when planning automation frameworks, device matrix, flake control, or CI/CD release gates."
 ---
 
 # QA Mobile Testing
@@ -85,3 +85,9 @@ Design and execute reliable, cost-aware mobile testing across iOS and Android (n
 - Use [qa-testing-android](../qa-testing-android/SKILL.md) for Android specific depth (Espresso, Compose Testing, UIAutomator).
 - Use [qa-testing-playwright](../qa-testing-playwright/SKILL.md) for web and webview testing.
 - Use [software-mobile](../software-mobile/SKILL.md) for mobile architecture guidance.
+
+## Fact-Checking
+
+- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
+- Prefer primary sources; report source links and dates for volatile information.
+- If web access is unavailable, state the limitation and mark guidance as unverified.

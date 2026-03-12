@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "skill": "document-pdf",
+    "updated": "2026-01-17",
+    "total_sources": 17,
+    "description": "PDF creation/extraction libraries plus accessibility and release-quality guidance.",
+    "version": "2.1"
+  },
+  "categories": {
+    "nodejs_libraries": [
+      {
+        "name": "pdf-lib",
+        "url": "https://pdf-lib.js.org/",
+        "type": "documentation",
+        "relevance": "Create and modify PDFs in JavaScript/TypeScript (forms, pages, attachments).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["nodejs", "pdf"]
+      },
+      {
+        "name": "PDFKit",
+        "url": "https://pdfkit.org/",
+        "type": "documentation",
+        "relevance": "Generate PDFs programmatically in Node.js with low-level layout control.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["nodejs", "pdf"]
+      }
+    ],
+    "python_libraries": [
+      {
+        "name": "pypdf Documentation",
+        "url": "https://pypdf.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Manipulate PDFs in Python (merge/split/rotate, metadata, encryption).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "pdf"]
+      },
+      {
+        "name": "pdfplumber",
+        "url": "https://github.com/jsvine/pdfplumber",
+        "type": "library",
+        "relevance": "Extract text/tables from PDFs in Python (OCR-free extraction patterns).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "pdf", "extraction"]
+      },
+      {
+        "name": "ReportLab Documentation",
+        "url": "https://www.reportlab.com/documentation/",
+        "type": "documentation",
+        "relevance": "Generate complex PDFs in Python (tables, charts, pagination).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "pdf", "generation"]
+      },
+      {
+        "name": "FPDF2 Documentation",
+        "url": "https://py-pdf.github.io/fpdf2/",
+        "type": "documentation",
+        "relevance": "Modern successor to FPDF with Unicode support, improved image handling, HTML rendering.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "pdf", "generation"]
+      },
+      {
+        "name": "Borb Documentation",
+        "url": "https://github.com/jorisschellekens/borb",
+        "type": "library",
+        "relevance": "Pure Python PDF library for creating and manipulating PDFs with interactive elements.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "pdf", "generation"]
+      },
+      {
+        "name": "WeasyPrint Documentation",
+        "url": "https://doc.courtbouillon.org/weasyprint/stable/",
+        "type": "documentation",
+        "relevance": "CSS3-based HTML to PDF conversion without browser dependency.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "pdf", "html-to-pdf"]
+      },
+      {
+        "name": "Camelot Documentation",
+        "url": "https://camelot-py.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "PDF table extraction with Lattice (bordered) and Stream (borderless) modes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "pdf", "extraction"]
+      }
+    ],
+    "accessibility_and_quality": [
+      {
+        "name": "Creating accessible PDFs in Adobe Acrobat",
+        "url": "https://helpx.adobe.com/acrobat/using/creating-accessible-pdfs.html",
+        "type": "guide",
+        "relevance": "Practical PDF accessibility guidance: tagging, reading order, alt text, checks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["accessibility", "pdf"]
+      },
+      {
+        "name": "Web Content Accessibility Guidelines (WCAG) 2.2 (W3C Recommendation)",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "type": "specification",
+        "relevance": "Accessibility baseline; relevant when PDFs are used for regulated/enterprise contexts.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["accessibility", "wcag"]
+      },
+      {
+        "name": "EN 301 549 (Accessibility requirements for ICT products and services)",
+        "url": "https://www.etsi.org/deliver/etsi_en/301500_301599/301549/",
+        "type": "specification",
+        "relevance": "Common EU-aligned accessibility requirements referenced in procurement and compliance programs.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["accessibility", "en301549", "eu"]
+      },
+      {
+        "name": "PDF/UA (Universal Accessibility) resources",
+        "url": "https://pdfa.org/resource/pdfua/",
+        "type": "reference",
+        "relevance": "PDF accessibility standard and ecosystem resources (useful for understanding tagged PDF requirements).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["accessibility", "pdfua", "standards"]
+      },
+      {
+        "name": "PDF/A (Archival) resources",
+        "url": "https://pdfa.org/resource/pdfa/",
+        "type": "reference",
+        "relevance": "Archival PDF guidance (PDF/A) for long-term retention and reproducible rendering.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["pdfa", "standards", "archival"]
+      },
+      {
+        "name": "PDF Association",
+        "url": "https://pdfa.org/",
+        "type": "reference",
+        "relevance": "Industry resources on PDF standards and accessibility practices (use for deeper dives).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["pdf", "standards"]
+      },
+      {
+        "name": "veraPDF",
+        "url": "https://verapdf.org/",
+        "type": "tool",
+        "relevance": "Open-source validator for PDF/A conformance; useful when archiving or compliance requires PDF/A.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["pdfa", "validation", "tool"]
+      },
+      {
+        "name": "Section508.gov",
+        "url": "https://www.section508.gov/",
+        "type": "reference",
+        "relevance": "US federal accessibility guidance often referenced in procurement and compliance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["accessibility", "us", "procurement"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "topic": "modular_architecture",
+  "external_references": [
+    {
+      "title": "Evolution of Software Architecture: From Monoliths",
+      "url": "https://dzone.com/articles/evolution-of-software-architecture-from-monoliths"
+    },
+    {
+      "title": "Modular Monolith Primer",
+      "url": "https://www.kamilgrzybek.com/blog/posts/modular-monolith-primer"
+    }
+  ],
+  "microsoft_references": [
+    {
+      "title": "C# Coding Conventions",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions"
+    },
+    {
+      "title": ".NET Dependency Injection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection"
+    },
+    {
+      "title": ".NET Options Pattern",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/options"
+    },
+    {
+      "title": ".NET Logging",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/logging"
+    },
+    {
+      "title": "Entity Framework Core",
+      "url": "https://learn.microsoft.com/en-us/ef/core/"
+    },
+    {
+      "title": ".NET Source Code",
+      "url": "https://github.com/dotnet"
+    }
+  ],
+  "example_context": [
+    {
+      "name": "pricing_modular_application",
+      "description": "Pricing is one example where business modules can be hosted inside a single deployment/composition unit while keeping module boundaries explicit.",
+      "notes": [
+        "Use module-specific contracts for interactions.",
+        "Keep business behavior inside modules.",
+        "Keep composition host focused on wiring and transport concerns."
+      ]
+    }
+  ]
+}

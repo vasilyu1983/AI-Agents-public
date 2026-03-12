@@ -1,0 +1,385 @@
+{
+  "metadata": {
+    "skill": "ai-agents",
+    "updated": "2026-03-06",
+    "total_sources": 42,
+    "description": "Curated sources for production agent systems: control flow, tool interfaces, safety boundaries, evaluation, observability, economics, and ROI.",
+    "version": "4.0"
+  },
+  "categories": {
+    "standards_and_governance": [
+      {
+        "name": "EU AI Act (Regulation (EU) 2024/1689)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+        "type": "specification",
+        "relevance": "Regulatory baseline for risk classification, transparency, documentation, and controls affecting agent systems.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST AI Risk Management Framework 1.0",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+        "type": "specification",
+        "relevance": "Governance and risk management framework for production AI systems.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NIST Generative AI Profile (AI 600-1)",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+        "type": "specification",
+        "relevance": "GenAI-specific profile aligned to NIST AI RMF; useful for logging, controls, and safety mapping.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "specification",
+        "relevance": "Threat categories for prompt injection, data leakage, tool misuse, and agent abuse scenarios.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST Secure Software Development Framework (SSDF)",
+        "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+        "type": "specification",
+        "relevance": "Secure development baseline relevant for tool implementation, supply chain, and deployment practices.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ISO/IEC 42001 (AI management system)",
+        "url": "https://www.iso.org/standard/42001",
+        "type": "specification",
+        "relevance": "AI management system standard for organizational governance and continuous improvement.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": true
+      }
+    ],
+    "protocols_and_interoperability": [
+      {
+        "name": "Model Context Protocol (MCP) Documentation",
+        "url": "https://modelcontextprotocol.io/docs/getting-started/intro",
+        "type": "specification",
+        "relevance": "Interoperability standard for connecting models/agents to tools and data sources via a consistent protocol.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "JSON Schema",
+        "url": "https://json-schema.org/",
+        "type": "specification",
+        "relevance": "Schema standard for tool I/O validation, handoff contracts, and structured outputs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Semantic Conventions for GenAI",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "type": "specification",
+        "relevance": "Standardized telemetry fields for LLM calls, tool calls, and agent tracing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "agent_patterns_and_research": [
+      {
+        "name": "ReAct: Synergizing Reasoning and Acting in Language Models",
+        "url": "https://arxiv.org/abs/2210.03629",
+        "type": "research",
+        "relevance": "Core pattern for tool use with interleaved reasoning and actions; informs agent loop design.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "url": "https://arxiv.org/abs/2201.11903",
+        "type": "research",
+        "relevance": "Foundational prompting technique; informs when hidden reasoning may help (do not require full traces in production).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Toolformer",
+        "url": "https://arxiv.org/abs/2302.04761",
+        "type": "research",
+        "relevance": "Reference for learning tool-use behaviors; useful for understanding tool calling failure modes.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Reflexion",
+        "url": "https://arxiv.org/abs/2303.11366",
+        "type": "research",
+        "relevance": "Reflection-based improvement pattern; useful for designing bounded self-critique loops with eval gates.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Retrieval-Augmented Generation (RAG)",
+        "url": "https://arxiv.org/abs/2005.11401",
+        "type": "research",
+        "relevance": "Foundational RAG architecture; relevant for agentic RAG and grounding/citation design.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "implementation_docs_and_playbooks": [
+      {
+        "name": "OpenAI Agents Guide",
+        "url": "https://platform.openai.com/docs/guides/agents",
+        "type": "documentation",
+        "relevance": "Example implementation patterns for tool use, memory, and agent workflows (provider-specific).",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Tool Use Documentation",
+        "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
+        "type": "documentation",
+        "relevance": "Provider-specific reference for tool calling and agent/tool interfaces.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangGraph Documentation",
+        "url": "https://langchain-ai.github.io/langgraph/",
+        "type": "documentation",
+        "relevance": "Example workflow/state-machine framework for deterministic agent control flow (tooling example).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Evals",
+        "url": "https://github.com/openai/evals",
+        "type": "tool",
+        "relevance": "Reference for building evaluation harnesses and regression tests (tooling example).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "type": "documentation",
+        "relevance": "Implementation reference for distributed tracing/metrics/logs supporting auditability of agents in production.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "agent_frameworks_2026": [
+      {
+        "name": "OpenAI Agents SDK",
+        "url": "https://platform.openai.com/docs/guides/agents",
+        "type": "documentation",
+        "relevance": "Lightweight, production-ready agent framework from OpenAI (March 2025). Tool-centric, easy onboarding, supports handoffs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Agent Development Kit (ADK)",
+        "url": "https://google.github.io/adk-docs/",
+        "type": "documentation",
+        "relevance": "Code-first, model-agnostic framework optimized for Gemini. Available in Python, TypeScript, Go, Java.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pydantic AI (v1.66.0)",
+        "url": "https://ai.pydantic.dev/",
+        "type": "documentation",
+        "relevance": "Type-safe Python agent framework (V1 GA Sep 2025). First-class MCP client (Stdio/SSE/StreamableHTTP), native A2A via to_a2a(), pydantic-graph FSM, durable execution with Prefect, HITL, TestModel/FunctionModel testing, OpenTelemetry + Logfire.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Bedrock Agents",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html",
+        "type": "documentation",
+        "relevance": "Enterprise agent framework with managed infrastructure, knowledge bases, and action groups.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "CrewAI Documentation",
+        "url": "https://docs.crewai.com/",
+        "type": "documentation",
+        "relevance": "Role-based multi-agent framework. Easiest onboarding, best for fast prototyping and team-based workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft Agent Framework (Semantic Kernel + AutoGen)",
+        "url": "https://learn.microsoft.com/en-us/semantic-kernel/",
+        "type": "documentation",
+        "relevance": "Unified Microsoft agent framework (RC Feb 2026, GA Q1 2026). Merges Semantic Kernel + AutoGen. Python, .NET, Java. Enterprise Azure integration, multi-agent orchestration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Claude Agent SDK",
+        "url": "https://docs.anthropic.com/en/docs/agents-and-tools/agent-sdk",
+        "type": "documentation",
+        "relevance": "Official Anthropic agent SDK (May 2025). Python + TypeScript. Deep MCP integration, Computer Use, built-in tools (Bash, TextEditor), guardrails. Powers Claude Code. 1.85M+ weekly npm downloads.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LlamaIndex Workflows",
+        "url": "https://docs.llamaindex.ai/en/stable/understanding/workflows/",
+        "type": "documentation",
+        "relevance": "Event-driven workflow system for RAG-native agents. 35k+ GitHub stars. llama-agents for microservice-based multi-agent. Strong retrieval foundation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mastra",
+        "url": "https://mastra.ai/docs",
+        "type": "documentation",
+        "relevance": "TypeScript-first agent framework from Gatsby team (YC-backed). Built on Vercel AI SDK. Leading choice for TypeScript/Next.js teams.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SmolAgents (HuggingFace)",
+        "url": "https://huggingface.co/docs/smolagents/",
+        "type": "documentation",
+        "relevance": "Minimalist ~1000-line agent framework. Code-first (write Python not JSON tool calls). 30% fewer LLM calls. Model-agnostic, Hub integration for sharing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Agno (formerly Phidata)",
+        "url": "https://docs.agno.com/",
+        "type": "documentation",
+        "relevance": "Production runtime for agentic software. Teams, workflows, guardrails, 100+ integrations, FastAPI-native. Growing fast.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Haystack (deepset)",
+        "url": "https://docs.haystack.deepset.ai/",
+        "type": "documentation",
+        "relevance": "Enterprise RAG+agents pipeline. Used by Airbus, Economist, NVIDIA. Strong pipeline orchestration, component-based architecture.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DSPy (Stanford)",
+        "url": "https://dspy.ai/",
+        "type": "documentation",
+        "relevance": "Declarative optimization approach — compiles programs into prompts/weights. Unique niche: replace manual prompt engineering with learned optimizations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "mcp_ecosystem_2026": [
+      {
+        "name": "MCP Specification (2025-11-25)",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25",
+        "type": "specification",
+        "relevance": "Latest MCP specification. Protocol now governed by Agentic AI Foundation (Linux Foundation) since Dec 2025.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MCP Security Best Practices (Red Hat)",
+        "url": "https://www.redhat.com/en/blog/model-context-protocol-mcp-understanding-security-risks-and-controls",
+        "type": "documentation",
+        "relevance": "Security analysis of MCP: prompt injection, tool permissions, lookalike tools, confused deputy attacks.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "economics_and_decision_frameworks": [
+      {
+        "name": "OpenAI API Pricing",
+        "url": "https://openai.com/api/pricing/",
+        "type": "documentation",
+        "relevance": "Current token pricing for GPT-4o, GPT-4o-mini, and other models. Essential for ROI calculations.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic API Pricing",
+        "url": "https://www.anthropic.com/pricing",
+        "type": "documentation",
+        "relevance": "Current token pricing for Claude 4.5/4.6 family (Opus, Sonnet, Haiku). Essential for ROI calculations.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google AI Pricing (Gemini)",
+        "url": "https://ai.google.dev/pricing",
+        "type": "documentation",
+        "relevance": "Current token pricing for Gemini 3 family (Pro, Flash) and other models. Essential for ROI calculations.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/research/building-effective-agents",
+        "type": "research",
+        "relevance": "Anthropic's guidance on agent architectures, when to use agents vs workflows, and production patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "a]6z: AI Agents Primer",
+        "url": "https://a16z.com/ai-agents-primer/",
+        "type": "research",
+        "relevance": "Venture capital perspective on agent economics, market sizing, and business model considerations.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Hallucination Leaderboard (Vectara)",
+        "url": "https://github.com/vectara/hallucination-leaderboard",
+        "type": "tool",
+        "relevance": "Benchmark for model hallucination rates. Essential for risk assessment and mitigation planning.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

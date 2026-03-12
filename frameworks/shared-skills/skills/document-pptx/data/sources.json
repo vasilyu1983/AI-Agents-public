@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "skill": "document-pptx",
+    "updated": "2026-01-17",
+    "total_sources": 7,
+    "description": "Official PPTX automation libraries and accessibility guidance for slide decks.",
+    "version": "2.1"
+  },
+  "categories": {
+    "python_libraries": [
+      {
+        "name": "python-pptx Documentation",
+        "url": "https://python-pptx.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Primary reference for creating and editing PowerPoint files in Python.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["python", "pptx"]
+      }
+    ],
+    "nodejs_libraries": [
+      {
+        "name": "PptxGenJS",
+        "url": "https://gitbrent.github.io/PptxGenJS/",
+        "type": "documentation",
+        "relevance": "Primary reference for generating PowerPoint decks in Node.js.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["nodejs", "pptx"]
+      },
+      {
+        "name": "PPTX-Automizer",
+        "url": "https://github.com/niclasgz/pptx-automizer",
+        "type": "library",
+        "relevance": "Template-driven PPTX automation for Node.js. Design in PowerPoint, inject data programmatically.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["nodejs", "pptx", "templates"]
+      }
+    ],
+    "quality_and_accessibility": [
+      {
+        "name": "Make your PowerPoint presentations accessible (Microsoft Support)",
+        "url": "https://support.microsoft.com/en-us/office/make-your-powerpoint-presentations-accessible-to-people-with-disabilities-6f7772b2-2f33-4bd2-8ca7-dae3b2b3ef25",
+        "type": "guide",
+        "relevance": "Baseline accessibility practices for PPTX: reading order, alt text, slide titles, and contrast.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["accessibility", "powerpoint"]
+      },
+      {
+        "name": "Web Content Accessibility Guidelines (WCAG) 2.2 (W3C Recommendation)",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "type": "specification",
+        "relevance": "Accessibility baseline that affects slide decks when distributed as web/PDF or used in enterprise contexts.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["accessibility", "wcag"]
+      },
+      {
+        "name": "Office Open XML (ECMA-376)",
+        "url": "https://www.ecma-international.org/publications-and-standards/standards/ecma-376/",
+        "type": "specification",
+        "relevance": "Underlying standard behind .pptx; useful for interoperability and edge cases.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": ["spec", "ooxml", "pptx"]
+      },
+      {
+        "name": "Microsoft Open Specifications (Office formats)",
+        "url": "https://learn.microsoft.com/en-us/openspecs/office_standards/ms-oi29500/7d096214-5f67-4e46-a1b8-88f8e9e6cf5b",
+        "type": "reference",
+        "relevance": "Reference entry point for Office Open XML and related Office format specifications.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["spec", "office"]
+      }
+    ]
+  }
+}
