@@ -453,6 +453,20 @@ Create an index in `docs/adr/README.md`:
 | [0003](0003-use-mongodb.md) | Use MongoDB for Sessions | Superseded | 2025-10-01 | ADR-0001 |
 ```
 
+## Architecture Doc State Separation
+
+Architecture documents (ADRs, design docs, migration specs) must distinguish three states:
+
+- **Verified current state**: what has been confirmed against actual repos, contracts, and runtime behavior — not inherited from stale summaries.
+- **Selected target state**: the decided direction, with explicit ADR or decision reference.
+- **Unresolved gaps**: what is still open, who owns resolution, and when it is expected to close.
+
+Flattening these together makes docs unsafe to trust. Cross-repo architecture claims (participating repo inventories, event flows, contract surfaces, publication-safety assertions) must be repo-verified, not copied from prior documentation.
+
+For platform libraries, stale docs are not cosmetic — they change how future engineers and agents modify the code. Update docs and ADRs in the same delivery cycle as runtime behavior changes.
+
+---
+
 ## ADR Anti-Patterns
 
 **BAD: Avoid**:

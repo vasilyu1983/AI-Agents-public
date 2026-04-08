@@ -399,6 +399,15 @@ For organizations managing shared context at scale:
 - Retire skills with <5% usage over a quarter
 - Promote high-usage skills to mandatory/recommended
 
+## Cross-Repo Architecture Verification
+
+Architecture claims that span multiple repositories must be verified against actual repos, not inherited from prior documentation:
+
+- Participating repo inventories, event flows, contract surfaces, and publication-safety claims can drift across docs. Verify each claim against the source repo before using it as implementation context.
+- Documentation becomes safer once it distinguishes verified current state, selected target state, and unresolved gaps instead of flattening them together.
+- When context packs contain mixed current-state and target-state language, reorganize them into canonical sections (inputs, reviews, target architecture, decisions, migration material) before using them as implementation input.
+- Treat architecture verification as a recurring activity, not a one-time setup step. Cross-repo claims decay faster than single-repo context.
+
 ## Anti-Patterns
 
 | Anti-Pattern | Problem | Fix |

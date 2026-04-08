@@ -13,6 +13,11 @@
 - Separate poison/dead-letter handling from transient retry paths.
 - Include operation IDs and message metadata in logs/traces.
 - Verify duplicate and out-of-order delivery behavior in tests.
+- Classify non-retryable exceptions before entering generic retry logic, not inside it. A `KafkaNonRetryableException` that flows through the retry loop repeats side effects and violates operator expectations.
+- Treat cancellation as control flow, not failure handling. `OperationCanceledException` must exit the consumer loop before failure routing kicks in. Treating shutdown as a processing failure can incorrectly commit messages, route them to retry/DLQ, or pause partitions during normal host stop.
+- Isolate failure-routing failures to the affected partition. A retry/DLQ publish failure should pause only that partition, not kill the whole consumer task or sleep the entire loop. Produce visible host-level faulting instead of leaving a dead background task behind.
+- Treat retry/DLQ adoption as a contract change: switching from "commit in finally" to "commit only after success or retry/DLQ publish" changes runtime semantics even if public APIs stay the same. New behavior must be explicitly opt-in.
+- Add regression coverage for legacy consumer behaviors (shared fan-out, custom `IMessageSubscription`) whenever core consumer internals change. New failure-handling modes are not safe if they break older extension points.
 
 ## Multi-tenant services
 - Resolve tenant context at boundary and propagate through all layers.

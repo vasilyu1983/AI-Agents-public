@@ -49,6 +49,12 @@ Use this guide for ephemeral infrastructure in integration and component tests.
 - Emit startup logs on readiness failure.
 - When using multiple containers (for example DB + broker + schema registry), compose them with one shared test network.
 
+## CI Docker Host Resolution
+- CI environments cannot assume `localhost`. GitLab runners using remote Docker hosts make loopback the wrong advertised endpoint.
+- Test harnesses must resolve the externally reachable Docker host from Testcontainers host detection or the `DOCKER_HOST` environment variable instead of hard-coding `127.0.0.1`.
+- Hard-coded localhost ports create a false sense of stability — one port collision breaks the entire suite. Use dynamic host-port reservation and provide environment overrides for local manual runs.
+- Code-only fixes can make a suite CI-compatible, but the final proof still requires a real pipeline run.
+
 ## Common Targets
 - Relational databases for persistence behavior.
 - Message brokers for async flow verification.

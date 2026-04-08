@@ -61,8 +61,14 @@ nuke TestAll
 - Run integration tests only where required by scope.
 - For one project, do not run multiple `dotnet test` commands in parallel in the same job.
 
+## Pipeline Wiring as Feature Completion
+- New test suites (especially Docker-backed component tests) must be wired into the canonical pipeline path as part of feature completion, not as follow-up cleanup.
+- Docker-backed suites need an explicit validation lane and must not accidentally create circular NUKE target graphs.
+- Treat pipeline wiring failures as blocking — an unwired suite gives false confidence that the feature is tested.
+
 ## Failure Diagnostics
 - Slow local loop: confirm local target is not triggering API/DB/component suites.
 - Repeated restore/build overhead: confirm `NoRestore` and `NoBuild` settings.
 - CI timeout risk: split large suites by category and review container startup readiness.
 - Intermittent MSBuild lock failures: sequence test invocations per project and avoid output-path contention.
+- New test suite not running in CI: verify the suite's target is reachable from the canonical pipeline entry point without circular dependencies.

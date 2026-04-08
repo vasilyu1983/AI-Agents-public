@@ -11,6 +11,23 @@ Detailed implementation patterns for building observable systems with OpenTeleme
 - Pattern: Performance Profiling
 - Pattern: Capacity Planning
 
+## Pattern: Operational vs Analytics Observability
+
+**Use when:** Designing observability for platform libraries or services where operational signals and analytics/reporting serve different consumers.
+
+Operational control-plane visibility and analytics-plane reporting are related but different concerns — separate them in design:
+
+- **Operational** (PROD monitoring, latency, incident response): signals that trigger alerts, feed on-call dashboards, and drive immediate action. Consumers are SREs and on-call engineers.
+- **Analytics** (BI, funnels, ad-hoc inquiry, reporting): signals that feed business dashboards, provider comparisons, and retrospective analysis. Consumers are product managers, analysts, and engineering leads.
+
+Design guidelines:
+- Keep operational metrics minimal, high-signal, and SLO-aligned. Avoid mixing BI counters into on-call dashboards.
+- Keep analytics pipelines decoupled from operational alerting — a broken reporting query must not degrade incident response.
+- When evaluating observability tooling, separate facts, inferences, non-negotiables, and option tradeoffs instead of blending them into an early recommendation. Neutral comparison docs work best.
+- The data-ownership question (who controls metrics definitions, retention, and access) is different for operational vs analytics signals and should be addressed explicitly.
+
+---
+
 ## Pattern: OpenTelemetry End-to-End Setup
 
 **Use when:** Building observable services from scratch or migrating to OTel standard.

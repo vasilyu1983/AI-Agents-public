@@ -297,6 +297,19 @@ rate(bulkhead_queue_wait_seconds_sum[5m]) / rate(bulkhead_queue_wait_seconds_cou
 
 ---
 
+## Partition-Scoped Failure Isolation
+
+**Use when:** A single consumer or worker handles multiple logical partitions (e.g., Kafka partitions, sharded queues) and a failure in one partition must not affect others.
+
+Partition-scoped isolation is narrower than service-level bulkheads — it applies within a single consumer handling multiple partitions:
+
+- When a retry/DLQ publish fails for one partition, pause only that partition rather than sleeping the entire consumer loop or killing the consumer task.
+- Failure-routing failures should produce visible host-level faulting (health check degradation, metrics), not leave a dead background task behind.
+- A silent failure in one partition's retry path should not prevent other partitions from making progress.
+- This pattern complements service-level bulkheads: bulkheads isolate between services; partition-scoped isolation operates within a single service's internal processing.
+
+---
+
 ## Checklist
 
 - [ ] Separate thread pools/queues for different services
@@ -307,6 +320,7 @@ rate(bulkhead_queue_wait_seconds_sum[5m]) / rate(bulkhead_queue_wait_seconds_cou
 - [ ] Alerts when pools saturate
 - [ ] Load shedding when queue fills
 - [ ] Database connection pools separated (read/write)
+- [ ] Partition-scoped failures isolated (no cross-partition impact within a consumer)
 
 ---
 

@@ -433,6 +433,28 @@ Stage 4: Steady State
 
 ---
 
+## Migration Plan Binding
+
+Migration plans are only executable when architecture, controls, and rollout mechanics are bound together in a single coherent plan:
+
+- **Target-state decisions** must be connected to pilot-provider rollout sequencing, degraded modes, cutover controls, readiness checks, and decommission sequencing.
+- Architecture proposals alone are not enough — the plan needs explicit stages, open-gap tracking, and clear acknowledgement of what is still unresolved.
+- Roadmaps, trackers, and architecture docs must stay synchronized in the same delivery cycle. When they drift, they become contradictory instructions for the next implementation session.
+- Distinguish verified current state, selected target state, and unresolved gaps in all migration documentation. Flattening them together makes docs unsafe to trust.
+
+### Migration Plan Checklist
+
+- [ ] Target architecture documented with explicit boundaries
+- [ ] Pilot-provider or canary rollout sequence defined
+- [ ] Degraded mode behavior specified (what happens when new path fails)
+- [ ] Cutover controls identified (feature flags, traffic routing, kill switches)
+- [ ] Readiness checks listed (what must be true before each phase advances)
+- [ ] Decommission sequencing planned (what gets removed, when, and by whom)
+- [ ] Open gaps explicitly tracked with owners
+- [ ] Roadmap, architecture doc, and gap tracker synchronized
+
+---
+
 ## Anti-Patterns
 
 ### 1. Big Bang Rewrite

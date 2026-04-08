@@ -455,6 +455,14 @@ GOOD: Fix bug, add regression test, prevent recurrence
 [ ] Team notified of findings?
 ```
 
+**Behavioral Infrastructure Debugging** (consumer semantics, retry/DLQ, failure routing, shutdown flow):
+```
+[ ] Review gate inserted between isolation and fix — do not rush from isolation to fix for contract-affecting changes
+[ ] Pattern: isolate highest-risk gap → get review → fix only the risky slice → revalidate
+[ ] Verify that fix does not alter commit/retry/DLQ semantics as an unintended side effect
+[ ] Check that legacy extension points still work after the fix
+```
+
 ---
 
 > **Remember**: Debugging is a skill that improves with practice. The best debuggers are systematic, patient, and document their findings.

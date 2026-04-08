@@ -20,6 +20,8 @@
 - Propagate `CancellationToken` through all async work.
 - Stop downstream work quickly after cancellation.
 - Ensure disposal and cleanup paths are cancellation-safe.
+- Never catch `OperationCanceledException` in the normal failure path. Consumer and worker loops need an explicit shutdown path that exits cleanly before any failure routing (retry, DLQ, pause) kicks in.
+- Classify exceptions as retryable vs non-retryable before entering generic retry logic. Letting non-retryable exceptions flow through retry loops repeats side effects and misleads operators.
 
 ## Background jobs and workers
 - Make job handlers idempotent and resumable.

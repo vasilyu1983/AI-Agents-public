@@ -105,7 +105,19 @@ Review rules for **C#/.NET crypto/fintech services** using **Entity Framework Co
 
 ---
 
-## 9. Merge Requests
+## 9. Behavioral Infrastructure Changes
+
+When a change alters runtime semantics (consumer commit behavior, retry/DLQ routing, failure handling, shutdown flow):
+
+- Does this change alter commit, retry, or DLQ semantics? If yes, is the new behavior explicitly opt-in?
+- Are legacy extension points (shared subscriptions, custom `IMessageSubscription`, fan-out consumers) still exercised by tests?
+- Is `OperationCanceledException` kept outside the normal failure path? Cancellation must exit the processing loop before failure routing kicks in
+- Are failure-routing failures (e.g., failed DLQ publish) isolated to the affected partition, not killing the whole consumer task?
+- For high-risk behavioral work, use the review-first fix loop: implement → review → isolate highest-risk gap → fix only the risky slice → revalidate. This is not cleanup — it is how behavioral infrastructure work becomes safe
+
+---
+
+## 10. Merge Requests
 
 - MR contains logically related changes — feature, bugfix, or refactor
 - If refactoring is included, it is separated from functional changes (structurally or via commits)
