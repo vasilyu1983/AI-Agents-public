@@ -49,9 +49,17 @@ python3 "$MR/validate_graph.py" context/graphs/knowledge-graph.json
 # 7. build/validate THIS hub's own context graph (the dev-context-engineering
 #    scripts are reused as-is — do not reimplement them here)
 python3 "$CE/scan_context_artifacts.py" . \
-        --out context/graphs/context-graph.json
-python3 "$CE/validate_context_graph.py" context/graphs/context-graph.json
+        --output context/graphs/context-graph.json
+python3 "$CE/validate_context_graph.py" context/graphs/context-graph.json --repo .
 ```
+
+> **Expected on a blank hub:** `validate_context_graph.py` flags the root
+> `AGENTS.md` as an `orphan` (one node, no edges) and exits non-zero. That
+> is correct for an empty skeleton — the scanner is repo-native and only
+> the hot-layer file exists yet. The orphan clears once you populate the
+> hub: as catalog pages, profiles, and `.claude/rules/` (if you add a
+> runtime layer) come in and cross-link, edges form. Do not restructure
+> the hub to silence this on day one.
 
 Then compile catalog pages from the profiles using the templates in
 `../templates/` and the `dev-context-multi-repo` workflow. File generated
