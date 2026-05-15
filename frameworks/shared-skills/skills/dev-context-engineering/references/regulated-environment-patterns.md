@@ -2,6 +2,49 @@
 
 FCA/EMI compliance patterns for AI-driven development. Covers regulatory framework mapping, mandatory agent rules, CI/CD compliance gates, change approval workflows, and audit trail requirements.
 
+## Table of Contents
+
+- [Regulatory Framework Coverage](#regulatory-framework-coverage)
+- [PS21/3: Operational Resilience](#ps213-operational-resilience)
+- [SS1/23: Model Risk Management](#ss123-model-risk-management)
+- [SM&CR: Senior Managers and Certification Regime](#sm&cr-senior-managers-and-certification-regime)
+- [PS24/16: Critical Third Parties (CTP)](#ps2416-critical-third-parties-ctp)
+- [GDPR / UK GDPR](#gdpr-uk-gdpr)
+- [PCI DSS](#pci-dss)
+- [NIST AI Agent Standards Initiative (2026)](#nist-ai-agent-standards-initiative-2026)
+- [FINRA 2026: AI Agent Regulatory Precedent](#finra-2026-ai-agent-regulatory-precedent)
+- [Industry Evidence: AI Agents in Regulated Fintech](#industry-evidence-ai-agents-in-regulated-fintech)
+- [Stripe Minions (1,000+ PRs/week, $1T+ payment volume)](#stripe-minions-1000-prsweek-$1t-payment-volume)
+- [Mandatory Agent Rules](#mandatory-agent-rules)
+- [1. FCA/EMI Compliance (`.claude/rules/compliance-fca-emi.md`)](#1-fcaemi-compliance-clauderulescompliance-fca-emimd)
+- [2. Data Handling (`.claude/rules/data-handling-gdpr-pci.md`)](#2-data-handling-clauderulesdata-handling-gdpr-pcimd)
+- [3. AI Agent Governance (`.claude/rules/ai-agent-governance.md`)](#3-ai-agent-governance-clauderulesai-agent-governancemd)
+- [Change Approval Workflow](#change-approval-workflow)
+- [Standard Flow](#standard-flow)
+- [Enhanced Flow (Security-Critical Paths)](#enhanced-flow-security-critical-paths)
+- [CODEOWNERS Configuration](#codeowners-configuration)
+- [.github/CODEOWNERS](#githubcodeowners)
+- [Security-critical directories require security team review](#security-critical-directories-require-security-team-review)
+- [Agent rules require compliance review](#agent-rules-require-compliance-review)
+- [Infrastructure requires DevOps review](#infrastructure-requires-devops-review)
+- [Audit Trail Requirements](#audit-trail-requirements)
+- [Git as Compliance Tool](#git-as-compliance-tool)
+- [PR Description Template](#pr-description-template)
+- [Quarterly Integrity Checks](#quarterly-integrity-checks)
+- [Run quarterly across all repos](#run-quarterly-across-all-repos)
+- [Audit Log Export](#audit-log-export)
+- [Export audit log for a date range](#export-audit-log-for-a-date-range)
+- [Compliance-Aware CI/CD](#compliance-aware-cicd)
+- [Gate Summary](#gate-summary)
+- [Compliance Metrics](#compliance-metrics)
+- [Incident Response: AI Tool Failures](#incident-response-ai-tool-failures)
+- [Severity Classification](#severity-classification)
+- [Post-Incident Actions](#post-incident-actions)
+- [Agent Execution Security](#agent-execution-security)
+- [Sandbox Isolation Patterns](#sandbox-isolation-patterns)
+- [GitHub Enterprise Agent Audit Integration](#github-enterprise-agent-audit-integration)
+- [Related References](#related-references)
+
 ## Regulatory Framework Coverage
 
 ### PS21/3: Operational Resilience
@@ -36,7 +79,7 @@ Named accountability for AI tool governance:
 
 AI providers may be designated as Critical Third Parties:
 
-- **Portability**: Maintain ability to switch between AI providers (AGENTS.md supports both Claude Code and Codex)
+- **Portability**: Maintain ability to switch between AI providers and context surfaces
 - **Concentration risk**: Do not depend on a single AI provider for all development
 - **Contractual provisions**: Ensure DPA and service terms with AI providers meet FCA requirements
 - **Incident reporting**: AI tool outages affecting IBS must be reported per operational resilience framework
@@ -60,7 +103,7 @@ Payment Card Industry requirements:
 - **Logging**: AI tool access to payment-related code must be auditable
 - **Key management**: AI agents must never see encryption keys, even in test environments
 
-### NIST AI Agent Standards Initiative (Feb 2026)
+### NIST AI Agent Standards Initiative (2026)
 
 The first US government framework specifically targeting autonomous AI agents, launched by NIST's Center for AI Standards and Innovation (CAISI):
 
@@ -368,30 +411,29 @@ For regulated environments, agent code execution requires isolation beyond git w
 4. Human-in-the-loop gates: Approval required for high-risk operations
 5. Immutable audit trails: Track every code execution, tool call, and API request
 
-Sandboxed agents reduce security incidents by 90% compared to unrestricted access (Northflank 2026).
+Sandboxing and network restriction materially reduce blast radius compared to unrestricted agent execution.
 
-### GitHub Agent HQ Audit Integration
+### GitHub Enterprise Agent Audit Integration
 
-GitHub's Enterprise AI Controls (GA Feb 2026) provide platform-level audit capabilities that complement repository-level compliance:
+GitHub's enterprise agent controls provide platform-level audit capabilities that complement repository-level compliance:
 
 **Audit log enhancements for agents:**
-- `actor_is_agent` identifier distinguishes agent from human actions
-- `agent_session.task` events capture session start, completion, and failure
-- Searchable by specific agent type (Claude, Codex, third-party)
-- Organization-level and enterprise-level aggregation
+- agent-specific audit events distinguish agent actions from human actions
+- session-level task events capture lifecycle and status
+- events can be reviewed at organization and enterprise scope
 
 **Enterprise governance features:**
-- Custom agent definitions in `.github/agents/*.md` with push protection rules
-- Enterprise-wide MCP allowlists via centralized registry URL
-- Programmatic policy enforcement via APIs
-- Custom roles with fine-grained AI governance permissions
+- custom agent definitions in `.github/agents/`
+- enterprise controls for approved agents and MCP servers
+- policy enforcement and review at org / enterprise scope
+- custom roles for AI governance
 
 **Integration with FCA compliance:**
 These controls map to FCA requirements:
-- `actor_is_agent` → SM&CR accountability (which agent, on whose behalf)
-- Session events → PS21/3 operational resilience (track agent availability)
-- MCP allowlists → PS24/16 CTP management (control third-party tool access)
-- Push protection → Separation of duties (protect compliance rule files)
+- agent-specific audit events → SM&CR accountability
+- session events → PS21/3 operational resilience
+- approved-agent and MCP controls → PS24/16 third-party governance
+- protected agent definition files → separation of duties
 
 ## Related References
 

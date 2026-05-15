@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/dev-context-multi-repo/schemas/evidence-ref.schema.json",
+  "title": "EvidenceRef",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["path", "reason"],
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "Repo-relative path to the source file."
+    },
+    "snippet": {
+      "type": "string",
+      "description": "Short extracted snippet or note."
+    },
+    "reason": {
+      "type": "string",
+      "description": "Why this file was used as evidence."
+    },
+    "last_seen_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

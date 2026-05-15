@@ -1,9 +1,9 @@
 # Skills Index
 
-This directory contains 62 production-grade skills organized by domain and prefix family.
+This directory contains 64 production-grade skills organized by domain and prefix family.
 
-**Total Skills:** 62
-**Last Updated:** 2026-03-12
+**Total Skills:** 64
+**Last Updated:** 2026-05-15
 
 **Note:** Skills are defined by `SKILL.md`. Avoid adding `README.md` inside skill folders.
 
@@ -100,13 +100,15 @@ Naming rule:
 
 ---
 
-## Developer Tools (8 skills)
+## Developer Tools (10 skills)
 
 | Skill | Description |
 |-------|-------------|
 | [dev-ai-coding-metrics](dev-ai-coding-metrics/SKILL.md) | Measure AI coding agent impact: adoption tracking, DORA/SPACE for AI teams, ROI frameworks, DX surveys, benchmarking |
 | [dev-api-design](dev-api-design/SKILL.md) | REST, GraphQL, gRPC patterns: versioning, auth, rate limiting, pagination |
-| [dev-context-engineering](dev-context-engineering/SKILL.md) | Context-driven development systems: AGENTS.md-first workflows, repo maturity, multi-repo coordination |
+| [dev-context-code-graph](dev-context-code-graph/SKILL.md) | Per-repo code graphs in JSON: symbol/import/call/inheritance maps, blast radius, PPR retrieval, structural risk |
+| [dev-context-engineering](dev-context-engineering/SKILL.md) | Repo-native AI context layers: AGENTS.md-first workflows, context graphs, multi-tool rollout, regulated environments |
+| [dev-context-multi-repo](dev-context-multi-repo/SKILL.md) | Multi-repo context hubs: portfolio scan, cross-repo knowledge graph, compiled markdown hub, copy-paste hub scaffold |
 | [dev-dependency-management](dev-dependency-management/SKILL.md) | Package management: npm, pip, cargo, maven, lockfiles, security scanning |
 | [dev-workflow-planning](dev-workflow-planning/SKILL.md) | Development workflows: brainstorm, write-plan, execute-plan patterns |
 | [dev-git-commit-message](dev-git-commit-message/SKILL.md) | Auto-generate conventional commit messages from git diffs |

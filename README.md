@@ -4,11 +4,11 @@
 
 <div align="center">
 
-A curated collection of **28 Custom GPT agents** and **62 AI coding agent skills** for ChatGPT, Claude Code, Codex CLI, and Gemini CLI.
+A curated collection of **28 Custom GPT agents** and **64 AI coding agent skills** for ChatGPT, Claude Code, Codex CLI, and Gemini CLI.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Custom GPTs](https://img.shields.io/badge/Custom%20GPTs-28-blue)](./custom-gpt)
-[![Skills](https://img.shields.io/badge/Skills-62-purple)](./frameworks/shared-skills)
+[![Skills](https://img.shields.io/badge/Skills-64-purple)](./frameworks/shared-skills)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Twitter Follow](https://img.shields.io/twitter/follow/vasilyu?style=social)](https://twitter.com/vasilyu)
 
@@ -20,13 +20,13 @@ A curated collection of **28 Custom GPT agents** and **62 AI coding agent skills
 
 ## What's Inside
 
-This repository contains **28 specialized Custom GPT agents** and **62 AI coding agent skills** organized by domain. All agents follow a consistent template structure. All skills follow the [Agent Skills specification](https://agentskills.io/specification).
+This repository contains **28 specialized Custom GPT agents** and **64 AI coding agent skills** organized by domain. All agents follow a consistent template structure. All skills follow the [Agent Skills specification](https://agentskills.io/specification).
 
 ### What Makes This Different?
 
 - **Production-Ready**: Every agent and skill tested for real-world use
 - **Multi-Platform**: Custom GPTs for ChatGPT; skills for Claude Code, Codex CLI, and Gemini CLI
-- **62 Domain Skills**: Software, AI/ML, QA, DevOps, data, agents, and more
+- **64 Domain Skills**: Software, AI/ML, QA, DevOps, data, agents, and more
 - **Curated Resources**: JSON source files with curated references per domain
 - **Copy-Paste Ready**: Drop skills directly into your `.claude/skills/` or `.codex/skills/` workspace
 
@@ -42,13 +42,13 @@ AI-Agents-public/
 │   ├── research-n-analysis/       # Strategy and consulting
 │   └── writing/                   # Content creation
 ├── frameworks/
-│   └── shared-skills/             # 62 AI coding agent skills
+│   └── shared-skills/             # 64 AI coding agent skills
 │       └── skills/
 │           ├── ai-*/              # AI/ML skills (8)
 │           ├── agents-*/          # Agent orchestration (6)
 │           ├── software-*/        # Software engineering (13)
 │           ├── qa-*/              # Quality & testing (13)
-│           ├── dev-*/             # Developer tools (8)
+│           ├── dev-*/             # Developer tools (10)
 │           └── ...                # Data, docs, ops, product
 └── CONTRIBUTING.md
 ```
@@ -115,7 +115,7 @@ AgentName/
 
 ## AI Coding Agent Skills
 
-**62 production-ready skills** for Claude Code, Codex CLI, and Gemini CLI.
+**64 production-ready skills** for Claude Code, Codex CLI, and Gemini CLI.
 
 ### Installation
 
@@ -138,7 +138,7 @@ cp -r frameworks/shared-skills/skills/ /path/to/your/repo/.codex/skills/
 | Software Development | 13 | Frontend, backend, C#/.NET, mobile, architecture, security, payments |
 | AI/ML Engineering | 8 | LLMs, agents, RAG, MLOps, data science, prompt engineering |
 | Quality & Testing | 13 | Playwright, iOS/Android, NUnit, debugging, observability, resilience |
-| Developer Tools | 8 | API design, git workflow, structured logs, context engineering |
+| Developer Tools | 10 | Code graphs, multi-repo context hubs, context engineering, API design, git workflow |
 | Agents & Orchestration | 6 | Subagents, hooks, MCP, project memory, swarm orchestration |
 | Data | 4 | Analytics engineering, data lake, SQL optimization, Metabase |
 | Docs & Formats | 6 | PRDs, codebase docs, PDF/DOCX/XLSX/PPTX |

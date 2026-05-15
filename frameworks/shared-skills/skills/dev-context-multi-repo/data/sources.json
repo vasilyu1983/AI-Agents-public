@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "skill": "dev-context-multi-repo",
+    "title": "Multi-Repo Context Hub",
+    "description": "Curated sources for AGENTS.md guidance, context engineering, repo instruction surfaces, and documentation quality patterns used by the multi-repo context hub skill.",
+    "last_updated": "2026-04-25",
+    "updated": "2026-04-25",
+    "version": "1.1",
+    "total_sources": 17,
+    "verified_on": "2026-04-25"
+  },
+  "external_sources": [
+    {
+      "name": "garrytan/gbrain",
+      "url": "https://github.com/garrytan/gbrain",
+      "commit_sha": "adb02b7826a010700efc968b18df8aaf17d8ffa1",
+      "license": "MIT",
+      "extracted_date": "2026-04-13",
+      "patterns_used": [
+        "compiled-truth-timeline-template",
+        "mece-resolver-governance",
+        "nightly-dream-cycle"
+      ],
+      "research_pack": "docs/research/2026-04-13-context-engineering-skill-scan.md"
+    },
+    {
+      "name": "MemPalace/mempalace",
+      "url": "https://github.com/MemPalace/mempalace",
+      "commit_sha": "6614b9b4e71e67da2236493b036b7bf42ba2d55f",
+      "license": "MIT",
+      "extracted_date": "2026-04-13",
+      "patterns_used": [
+        "temporal-kg-validity-windows",
+        "contradiction-detection-categories"
+      ],
+      "research_pack": "docs/research/2026-04-13-context-engineering-skill-scan.md"
+    }
+  ],
+  "categories": {
+    "context_and_memory": [
+      {
+        "name": "AGENTS.md Specification",
+        "url": "https://agents.md",
+        "type": "specification",
+        "description": "Portable repo instruction standard for agents.",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "medium"
+      },
+      {
+        "name": "Anthropic: Effective Context Engineering for AI Agents",
+        "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+        "type": "documentation",
+        "description": "Primary guide for context engineering, context rot, just-in-time context, compaction, note-taking, and multi-agent isolation patterns.",
+        "add_as_web_search": true,
+        "verified_on": "2026-04-25",
+        "volatility": "medium"
+      },
+      {
+        "name": "OpenAI: Harness engineering: leveraging Codex in an agent-first world",
+        "url": "https://openai.com/index/harness-engineering/",
+        "type": "documentation",
+        "description": "Primary OpenAI guidance for repository knowledge as the system of record, short AGENTS.md maps, checked-in plans, and doc-gardening loops.",
+        "add_as_web_search": true,
+        "verified_on": "2026-04-25",
+        "volatility": "high"
+      },
+      {
+        "name": "LangChain: Context engineering in agents",
+        "url": "https://docs.langchain.com/oss/python/langchain/context-engineering",
+        "type": "documentation",
+        "description": "Agent context model covering model context, tool context, lifecycle context, state, and long-term store boundaries.",
+        "add_as_web_search": true,
+        "verified_on": "2026-04-25",
+        "volatility": "high"
+      },
+      {
+        "name": "Claude Code Memory",
+        "url": "https://code.claude.com/docs/en/memory",
+        "type": "documentation",
+        "description": "Official project memory guidance for CLAUDE.md and scoped memory.",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "high"
+      }
+    ],
+    "platform_context_surfaces": [
+      {
+        "name": "OpenAI Codex AGENTS.md Guide",
+        "url": "https://developers.openai.com/codex/guides/agents-md",
+        "type": "documentation",
+        "description": "Current OpenAI guidance for AGENTS.md behavior.",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "high"
+      },
+      {
+        "name": "GitHub Copilot Repository Instructions",
+        "url": "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions",
+        "type": "documentation",
+        "description": "Repository and path-specific instruction surfaces for Copilot.",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "high"
+      },
+      {
+        "name": "GitHub Copilot Custom Agents",
+        "url": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents",
+        "type": "documentation",
+        "description": "Custom agent surface for GitHub-native workflows.",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "high"
+      },
+      {
+        "name": "VS Code Custom Instructions",
+        "url": "https://code.visualstudio.com/docs/copilot/customization/custom-instructions",
+        "type": "documentation",
+        "description": "Instruction layering and scope behavior in VS Code AI workflows.",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "high"
+      }
+    ],
+    "knowledge_graph_methodology": [
+      {
+        "name": "Understand-Anything: Multi-Agent Knowledge Graph Pipeline",
+        "url": "https://github.com/Lum1104/Understand-Anything",
+        "type": "reference_implementation",
+        "description": "7-phase multi-agent pipeline (Pre-flight → Scan → Analyze → Assemble → Architecture → Tour → Review → Save) using tree-sitter AST and LLM semantic enrichment to build JSON knowledge graphs from codebases. Key adoptable patterns: two-pass analysis, graph-as-artifact, 7-check automated validation, BFS traversal for focused context.",
+        "add_as_web_search": false,
+        "verified_on": "2026-03-21",
+        "volatility": "medium"
+      },
+      {
+        "name": "Microsoft GraphRAG",
+        "url": "https://microsoft.github.io/graphrag/",
+        "type": "documentation",
+        "description": "Official GraphRAG documentation for indexing, query modes, local/global search, and graph-backed corpus retrieval patterns.",
+        "add_as_web_search": true,
+        "verified_on": "2026-04-25",
+        "volatility": "medium"
+      },
+      {
+        "name": "Use Graph When It Needs: Efficiently and Adaptively Integrating Retrieval-Augmented Generation with Graphs",
+        "url": "https://arxiv.org/abs/2602.03578",
+        "type": "paper",
+        "description": "February 2026 paper documenting the graph-overuse trap and adaptive routing between dense retrieval and graph-based retrieval.",
+        "add_as_web_search": true,
+        "verified_on": "2026-04-25",
+        "volatility": "medium"
+      }
+    ],
+    "docs_and_quality": [
+      {
+        "name": "JSON Schema",
+        "url": "https://json-schema.org/",
+        "type": "standard",
+        "description": "Schema standard for normalized profile contracts.",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "low"
+      },
+      {
+        "name": "Diataxis",
+        "url": "https://diataxis.fr/",
+        "type": "framework",
+        "description": "Canonical docs information architecture.",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "low"
+      },
+      {
+        "name": "Write the Docs Guide",
+        "url": "https://www.writethedocs.org/guide/",
+        "type": "guide",
+        "description": "Documentation governance and quality patterns.",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "low"
+      }
+    ]
+  }
+}

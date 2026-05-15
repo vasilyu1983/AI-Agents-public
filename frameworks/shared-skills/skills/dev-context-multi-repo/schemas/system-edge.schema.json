@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/dev-context-multi-repo/schemas/system-edge.schema.json",
+  "title": "SystemEdge",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source", "target", "relation", "confidence"],
+  "properties": {
+    "source": { "type": "string" },
+    "target": { "type": "string" },
+    "relation": {
+      "type": "string",
+      "enum": [
+        "depends_on",
+        "calls",
+        "publishes_to",
+        "consumes_from",
+        "owns_data_in",
+        "deploys_with",
+        "replaces",
+        "shares_library_with",
+        "unknown",
+        "contains",
+        "imports",
+        "exposes",
+        "subscribes_to",
+        "reads_from",
+        "writes_to",
+        "extends",
+        "related_to",
+        "uses_provider",
+        "implements_process",
+        "documents",
+        "governed_by"
+      ]
+    },
+    "group": {
+      "type": "string",
+      "enum": ["structural","behavioral","data_flow","dependency","semantic"]
+    },
+    "weight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Dependency strength. contains=1.0, exposes/owns_data_in=0.9, calls/publishes_to/subscribes_to=0.8, imports=0.7, depends_on=0.6, related_to=0.3"
+    },
+    "notes": { "type": "string" },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "./evidence-ref.schema.json"
+      }
+    },
+    "first_seen_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_verified_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "stale": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,3 +1,5 @@
+> **Example template for a regulated fintech.** Swap rule IDs, regime references (FCA/EMI, SM&CR, SS1/23, IBS register), and gate steps for your own regulatory context before use. This is illustrative scaffolding, not legal or compliance advice.
+
 # FCA/EMI Compliance Rules for AI Coding Agents
 
 > Copy this file to `.claude/rules/compliance-fca-emi.md` in every repository.

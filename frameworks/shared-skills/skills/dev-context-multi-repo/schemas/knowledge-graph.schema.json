@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/dev-context-multi-repo/schemas/knowledge-graph.schema.json",
+  "title": "KnowledgeGraph",
+  "type": "object",
+  "required": ["meta", "nodes", "edges"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["portfolio_name", "generated_at", "version", "node_count", "edge_count", "graph_contract_version", "build_source"],
+      "properties": {
+        "portfolio_name": { "type": "string" },
+        "generated_at": { "type": "string", "format": "date-time" },
+        "version": { "type": "string" },
+        "graph_contract_version": { "type": "string" },
+        "build_source": { "type": "string", "enum": ["profiles", "hub"] },
+        "node_count": { "type": "integer" },
+        "edge_count": { "type": "integer" },
+        "portfolio_metrics": {
+          "type": "object",
+          "properties": {
+            "repo_count": { "type": "integer" },
+            "service_count": { "type": "integer" },
+            "provider_count": { "type": "integer" },
+            "process_count": { "type": "integer" },
+            "gap_count": { "type": "integer" },
+            "loc_total": { "type": "integer" }
+          }
+        },
+        "base_commit_shas": {
+          "type": "object",
+          "description": "Map of repo_id to git SHA at scan time",
+          "additionalProperties": { "type": "string" }
+        },
+        "validation": {
+          "type": "object",
+          "properties": {
+            "checks_passed": { "type": "integer" },
+            "checks_total": { "type": "integer" },
+            "last_validated_at": { "type": "string", "format": "date-time" }
+          }
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "label"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["repo","service","domain","provider","process","artifact","library","package","api_endpoint","queue_topic","database","table","entity","event","config","context_artifact","skill","agent"]
+          },
+          "label": { "type": "string" },
+          "summary": {
+            "type": "string",
+            "description": "1-2 sentence plain-English description of this node's purpose. LLM-enrichable."
+          },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "3-5 lowercase hyphenated tags (e.g. ['payments', 'kafka-producer', 'csharp']). LLM-enrichable."
+          },
+          "importance": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Fan-in count: number of edges whose target is this node. Higher = more critical. Computed by query_graph.py --rank."
+          },
+          "parent_id": { "type": "string" },
+          "domain": { "type": "string" },
+          "properties": { "type": "object" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "evidence": { "type": "array", "items": { "type": "object" } },
+          "first_seen_at": { "type": "string", "format": "date-time" },
+          "last_verified_at": { "type": "string", "format": "date-time" },
+          "stale": { "type": "boolean" },
+          "community_id": {
+            "type": "string",
+            "description": "Community label assigned by community detection. Use community_id_<resolution> for multi-resolution runs."
+          },
+          "ppr_score": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Personalized PageRank score from the most recent PPR query, when persisted back to the graph."
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "relation", "group"],
+        "properties": {
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "relation": {
+            "type": "string",
+            "enum": ["contains","imports","exposes","calls","subscribes_to","publishes_to","reads_from","writes_to","owns_data_in","depends_on","shares_library_with","deploys_with","replaces","extends","related_to","similar_to","contradicts","co_occurs","uses_provider","implements_process","documents","governed_by"]
+          },
+          "group": {
+            "type": "string",
+            "enum": ["structural","behavioral","data_flow","dependency","semantic"]
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Dependency strength. Convention: contains=1.0, exposes/owns_data_in=0.9, calls/publishes_to/subscribes_to=0.8, imports=0.7, depends_on=0.6, related_to/semantic=0.3. Use weight_static + weight_calibrated when calibration has run."
+          },
+          "weight_static": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Original static weight before calibration. Set by calibrate_weights.py."
+          },
+          "weight_calibrated": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Calibrated weight from multi-source evidence (manifest, schema, code, prose). Preferred when present."
+          },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "evidence": { "type": "array", "items": { "type": "object" } },
+          "notes": { "type": "string" },
+          "first_seen_at": { "type": "string", "format": "date-time" },
+          "last_verified_at": { "type": "string", "format": "date-time" },
+          "stale": { "type": "boolean" },
+          "edge_id": {
+            "type": "string",
+            "description": "Stable edge identifier. Required when supersession or bitemporal fields are used. Convention: <source>__<relation>__<target>."
+          },
+          "valid_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Bitemporal event-time: when this relationship became true in the world. Optional."
+          },
+          "valid_until": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Bitemporal event-time: when this relationship stopped being true. Optional. Omit or null for currently-valid edges."
+          },
+          "ingested_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Bitemporal transaction-time: when the system learned about this relationship. Optional."
+          },
+          "ingested_until": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Bitemporal transaction-time: when this knowledge was superseded inside the system. Optional."
+          },
+          "superseded_by": {
+            "type": "string",
+            "description": "Edge id that replaced this edge. Use supersession instead of deletion to preserve audit history."
+          },
+          "supersedes": {
+            "type": "string",
+            "description": "Edge id that this edge replaces. Inverse of superseded_by."
+          },
+          "community_id": {
+            "type": "string",
+            "description": "Community label assigned by community detection (e.g. Louvain). Multi-resolution detections use community_id_<resolution>."
+          }
+        }
+      }
+    }
+  }
+}

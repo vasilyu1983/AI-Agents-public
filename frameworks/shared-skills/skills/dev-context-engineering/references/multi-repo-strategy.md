@@ -5,9 +5,9 @@ Managing context-driven development across 100+ repositories. Patterns for shari
 ```mermaid
 flowchart TD
     AGENTS["AGENTS.md\n(source of truth)"]
-    CLAUDE["CLAUDE.md\n(symlink)"]
+    CLAUDE["CLAUDE.md\n(optional wrapper)"]
 
-    AGENTS ---|"ln -s"| CLAUDE
+    AGENTS ---|"import or symlink"| CLAUDE
 
     CC["Claude Code\nreads CLAUDE.md"]
     CX["Codex\nreads AGENTS.md"]
@@ -21,19 +21,50 @@ flowchart TD
     style CX fill:#fdebd0,color:#7e5109
 ```
 
+## Table of Contents
+
+- [Cross-Platform Convention](#cross-platform-convention)
+- [Coordination Patterns](#coordination-patterns)
+- [Pattern 1: Root Coordination Layer (Recommended for Polyrepo)](#pattern-1-root-coordination-layer-recommended-for-polyrepo)
+- [Pattern 2: Template Repository + Sync](#pattern-2-template-repository-sync)
+- [.github/workflows/template-sync.yml](#githubworkflowstemplate-syncyml)
+- [Pattern 3: Workspace-Level Context](#pattern-3-workspace-level-context)
+- [Developer workflow](#developer-workflow)
+- [Or via shell alias](#or-via-shell-alias)
+- [Pattern 4: Centralized MCP Toolshed (from Stripe)](#pattern-4-centralized-mcp-toolshed-from-stripe)
+- [GitHub Agents and Enterprise Controls (March 2026)](#github-agents-and-enterprise-controls-march-2026)
+- [VS Code Context Engineering Patterns](#vs-code-context-engineering-patterns)
+- [Shared vs Local Context](#shared-vs-local-context)
+- [Mandatory Context (All 100 repos)](#mandatory-context-all-100-repos)
+- [Recommended Context (Most repos)](#recommended-context-most-repos)
+- [Local-Only Context (Per-repo)](#local-only-context-per-repo)
+- [Distribution Mechanisms](#distribution-mechanisms)
+- [Recommended combination for regulated orgs](#recommended-combination-for-regulated-orgs)
+- [Token Budget at Scale](#token-budget-at-scale)
+- [Optimization strategies](#optimization-strategies)
+- [Cost estimation (100 repos, 20 developers)](#cost-estimation-100-repos-20-developers)
+- [Sync Scripts](#sync-scripts)
+- [Validate all repos for compliance](#validate-all-repos-for-compliance)
+- [validate-repos.sh — Run from parent directory containing all repos](#validate-repossh-—-run-from-parent-directory-containing-all-repos)
+- [Push mandatory rules to all repos](#push-mandatory-rules-to-all-repos)
+- [sync-rules.sh — Push mandatory rules from coordination repo to all repos](#sync-rulessh-—-push-mandatory-rules-from-coordination-repo-to-all-repos)
+- [InnerSource Governance](#innersource-governance)
+- [Context Curation Guild](#context-curation-guild)
+- [Change Management](#change-management)
+- [Quarterly Context Audit](#quarterly-context-audit)
+- [Skill Usage Metrics](#skill-usage-metrics)
+- [Anti-Patterns](#anti-patterns)
+- [Related References](#related-references)
+
 ## Cross-Platform Convention
 
-**AGENTS.md is the primary file.** `CLAUDE.md` is always a symlink:
+**AGENTS.md is the portable baseline.** Add runtime-specific files only when they unlock real capability:
 
-```bash
-ln -s AGENTS.md CLAUDE.md
-```
+- Codex uses `AGENTS.md` directly.
+- Claude Code can use `CLAUDE.md`, imports, `.claude/rules/`, and `.claude/agents/`.
+- GitHub Copilot and VS Code can use `AGENTS.md`, `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, and `.github/agents/*.agent.md`.
 
-- Codex reads `AGENTS.md` directly
-- Claude Code reads `CLAUDE.md` (the symlink)
-- One file maintained, zero drift between agents
-
-This convention applies to every repo in the organization.
+If you maintain both `AGENTS.md` and `CLAUDE.md`, use a thin wrapper/import or a symlink. The key rule is **no duplicated drift**.
 
 ## Coordination Patterns
 
@@ -46,7 +77,7 @@ A dedicated meta-repo holds shared context. Individual repos maintain focused lo
 ```
 coordination-repo/                    # Shared context (ONE repo)
 ├── AGENTS.md                         # Org-wide agent instructions (PRIMARY)
-├── CLAUDE.md -> AGENTS.md            # Symlink for Claude Code
+├── CLAUDE.md                         # Optional Claude wrapper/import
 ├── .claude/
 │   ├── skills/ -> shared-skills/     # Shared skills (symlink or submodule)
 │   ├── rules/
@@ -56,6 +87,10 @@ coordination-repo/                    # Shared context (ONE repo)
 │   │   ├── security-baseline.md      # Security standards (mandatory)
 │   │   └── ai-agent-governance.md    # AI tool restrictions (mandatory)
 │   └── settings.json
+├── .github/
+│   ├── copilot-instructions.md       # GitHub-wide agent guidance
+│   ├── instructions/                 # Path-specific instructions
+│   └── agents/                       # Custom GitHub/Copilot agents
 ├── docs/
 │   ├── architecture-overview.md      # Cross-repo architecture map
 │   └── engineering-standards.md      # Org-wide engineering standards
@@ -67,16 +102,20 @@ coordination-repo/                    # Shared context (ONE repo)
     ├── clone-repos.sh                # Onboard new developers
     ├── sync-rules.sh                 # Push rule updates to all repos
     ├── validate-repos.sh             # Audit all repos for compliance
-    └── setup-symlinks.sh             # Ensure CLAUDE.md symlinks exist
+    └── sync-agent-entrypoints.sh     # Keep entrypoints aligned
 ```
 
 ```
 per-repo/ (each of 100 repos)
 ├── AGENTS.md                         # Repo-specific context (PRIMARY)
-├── CLAUDE.md -> AGENTS.md            # Always symlinked, never separate
+├── CLAUDE.md                         # Optional Claude wrapper/import
 ├── .claude/
 │   └── rules/                        # Repo-specific rules only
 │       └── domain-patterns.md        # Tech/domain-specific rules
+├── .github/
+│   ├── copilot-instructions.md       # Optional GitHub/Copilot guidance
+│   ├── instructions/                 # Optional path-specific instructions
+│   └── agents/                       # Optional custom agents
 ├── docs/
 │   ├── specs/                        # Feature specifications
 │   └── plans/                        # Implementation plans
@@ -174,60 +213,42 @@ A single MCP server aggregates 400+ tools spanning internal systems and SaaS pla
 
 **Combining patterns**: Stripe's Toolshed (Pattern 4) complements the Coordination Repo (Pattern 1). Use Pattern 1 for static context (rules, AGENTS.md templates) and Pattern 4 for dynamic context (ticket details, build status, code search).
 
-### GitHub Agent HQ (Feb 2026)
+### GitHub Agents and Enterprise Controls (March 2026)
 
-GitHub's Agent HQ provides a platform-level coordination layer. Claude and Codex run as first-class agents within GitHub's security perimeter:
+GitHub now provides two complementary layers:
 
-**Enterprise AI Controls (GA Feb 2026):**
-- **Audit logging**: `actor_is_agent` identifier on every action, `agent_session.task` events tracking session lifecycle
-- **Custom agent definitions**: Protected `.github/agents/*.md` files with enterprise-wide push rules
-- **MCP enterprise allowlists**: Centralized registry URL for approved MCP servers across all repos
-- **Programmatic management**: APIs for enterprise-wide agent configuration and policy enforcement
-- **Session visibility**: 24-hour cloud agent session history without record limits
+- **Repository context surfaces**: `AGENTS.md`, `.github/copilot-instructions.md`, and `.github/instructions/*.instructions.md`
+- **Agent surfaces**: `.github/agents/*.agent.md` plus GitHub Copilot coding agent and third-party agents
 
-**Multi-agent on GitHub:**
-- Assign Claude and Codex to the same task for comparative analysis
-- Surface competing architectural approaches and edge cases
-- Review different solutions side-by-side within existing PR workflows
-- Draft PRs created by agents integrate into standard review process
+For enterprise governance, GitHub's agent control plane adds:
 
-**Relationship to Coordination Patterns:**
-Agent HQ complements (does not replace) the coordination repo. Use Agent HQ for:
-- Platform-level governance (audit logs, permissions, MCP allowlists)
-- Agent execution and PR creation
+- audit-log events that distinguish agent actions from human actions
+- session-level visibility for agent tasks
+- enterprise controls for which agents and MCP servers are allowed
 
-Use the coordination repo for:
-- Shared context (AGENTS.md, rules, skills)
-- Cross-repo standards and compliance rules
-- Developer workstation setup (`--add-dir`)
+Use GitHub for platform-level governance and execution. Use the coordination repo for shared policy, templates, and cross-repo standards.
 
 ### VS Code Context Engineering Patterns
 
-VS Code's context engineering guide (March 2026) introduces complementary context files alongside AGENTS.md:
+VS Code's March 2026 guidance converges on the same layered model:
 
-**Three-step workflow:**
-1. **Custom instructions** (`.github/copilot-instructions.md`) — project-wide context loaded into all chat interactions
-2. **Planning agents** (`.github/agents/plan.agent.md`) — persona-driven planning with tool access and handoffs
-3. **Implementation agents** (`.github/agents/implement.agent.md`) — code generation following validated plans
+1. `AGENTS.md` as a portable baseline
+2. `.github/copilot-instructions.md` for repo-wide GitHub/Copilot instructions
+3. `.github/instructions/*.instructions.md` for path-specific behavior
+4. `.github/agents/*.agent.md` for planning or implementation personas
 
-**Relationship to AGENTS.md:**
-These patterns converge with AGENTS.md rather than competing:
-- `AGENTS.md` = agent-agnostic instructions (Claude Code, Codex, any agent)
-- `.github/copilot-instructions.md` = Copilot-specific context (VS Code, GitHub)
-- `.github/agents/*.md` = Agent skill definitions (VS Code agent mode)
-
-**For multi-repo organizations**, standardize all three via the coordination repo template, ensuring agents get consistent context regardless of which platform invokes them.
+For multi-repo organizations, standardize the baseline plus the runtime-specific layers you actually use.
 
 ## Shared vs Local Context
 
 ### Mandatory Context (All 100 repos)
 
-These files MUST exist in every repo. Non-negotiable for regulated organizations:
+These are the baseline artifacts for regulated organizations. `AGENTS.md` and the compliance rule files are mandatory. `CLAUDE.md` is optional, but if present it must stay aligned:
 
 | File | Purpose | Enforcement |
 |------|---------|-------------|
-| `AGENTS.md` | Agent instructions (primary) | CI check: file exists |
-| `CLAUDE.md` | Symlink to AGENTS.md | CI check: is symlink |
+| `AGENTS.md` | Portable agent instructions | CI check: file exists |
+| `CLAUDE.md` | Optional Claude wrapper/import | CI check: if present, no duplicated drift |
 | `.claude/rules/compliance-fca-emi.md` | FCA/EMI audit trail, separation of duties | Template sync |
 | `.claude/rules/data-handling-gdpr-pci.md` | GDPR/PCI safe/prohibited data | Template sync |
 | `.claude/rules/ai-agent-governance.md` | AI tool restrictions, disclosure | Template sync |
@@ -321,9 +342,9 @@ for repo in */; do
     fi
   done
 
-  # Check CLAUDE.md is a symlink
-  if [ -f "$repo/CLAUDE.md" ] && [ ! -L "$repo/CLAUDE.md" ]; then
-    echo "NOT SYMLINK: ${repo}CLAUDE.md (should be ln -s AGENTS.md CLAUDE.md)"
+  # Check CLAUDE.md does not drift if present
+  if [ -f "$repo/CLAUDE.md" ] && [ ! -L "$repo/CLAUDE.md" ] && ! grep -q '@AGENTS.md' "$repo/CLAUDE.md"; then
+    echo "REVIEW: ${repo}CLAUDE.md exists but is neither a wrapper nor a symlink"
     repo_pass=false
   fi
 
@@ -362,9 +383,9 @@ for repo in repos/*/; do
     cp "$COORDINATION_REPO/.claude/rules/$rule" "$repo/.claude/rules/$rule"
   done
 
-  # Ensure CLAUDE.md symlink
-  if [ ! -L "$repo/CLAUDE.md" ]; then
-    (cd "$repo" && ln -sf AGENTS.md CLAUDE.md)
+  # Ensure Claude compatibility wrapper if desired
+  if [ -f "$repo/AGENTS.md" ] && [ ! -f "$repo/CLAUDE.md" ]; then
+    printf '@AGENTS.md\n' > "$repo/CLAUDE.md"
   fi
 
   echo "Synced: $name"
@@ -399,25 +420,50 @@ For organizations managing shared context at scale:
 - Retire skills with <5% usage over a quarter
 - Promote high-usage skills to mandatory/recommended
 
-## Cross-Repo Architecture Verification
-
-Architecture claims that span multiple repositories must be verified against actual repos, not inherited from prior documentation:
-
-- Participating repo inventories, event flows, contract surfaces, and publication-safety claims can drift across docs. Verify each claim against the source repo before using it as implementation context.
-- Documentation becomes safer once it distinguishes verified current state, selected target state, and unresolved gaps instead of flattening them together.
-- When context packs contain mixed current-state and target-state language, reorganize them into canonical sections (inputs, reviews, target architecture, decisions, migration material) before using them as implementation input.
-- Treat architecture verification as a recurring activity, not a one-time setup step. Cross-repo claims decay faster than single-repo context.
-
 ## Anti-Patterns
 
 | Anti-Pattern | Problem | Fix |
 |-------------|---------|-----|
 | **God coordination repo** | 5000+ line AGENTS.md covering everything | Keep coordination AGENTS.md to org-wide concerns only |
 | **Copy-paste rules** | Same rules duplicated across 100 repos | Use sync mechanism, single source of truth |
-| **Divergent symlinks** | CLAUDE.md and AGENTS.md contain different content | Enforce symlink check in CI |
+| **Divergent entrypoints** | `CLAUDE.md` drifts away from `AGENTS.md` | Enforce wrapper-or-symlink checks in CI |
 | **Manual sync** | "Remember to copy rules when they change" | Automate with CI/CD sync workflow |
 | **No local context** | Repos rely entirely on coordination repo | Each repo needs its own AGENTS.md with repo-specific content |
 | **Over-syncing** | Every rule synced to every repo | Distinguish mandatory (sync) vs recommended (opt-in) |
+
+## Durable vs Replaceable — The Tool-Portability Boundary
+
+<!-- Source: github.com/garrytan/gbrain@adb02b7826a010700efc968b18df8aaf17d8ffa1 (MIT), extracted 2026-04-13 -->
+
+The patterns above handle *portfolio* multi-repo strategy — many services, one org, shared rules. There's a second, orthogonal axis worth naming explicitly: splitting **agent behavior** from **world knowledge** into two repos along a durability line.
+
+**The boundary test** (apply to every file):
+
+| Question | If YES → | Example |
+|----------|---------|---------|
+| Would this file transfer if you switched AI agents? | Agent repo (replaceable) | `AGENTS.md`, `.claude/rules/`, hooks, subagent configs, operational state |
+| Would this file transfer if you switched to a different person or team? | Knowledge repo (durable) | Architecture docs, decision records, system maps, domain concepts, entity dossiers |
+
+The two axes — "which agent runs this?" and "whose knowledge is this?" — are independent. A repo can have:
+
+- Replaceable *and* portable → agent repo
+- Durable *and* org-owned → knowledge/docs repo
+- Both → split into two repos so the survival rules are explicit
+
+**Why this matters**: if agent config and world knowledge live in the same repo, you lose one when you swap the other. Switch from Claude Code to Codex and you shouldn't lose your architecture docs. Change teams and the incoming team shouldn't inherit your personal tool preferences. The split makes each failure mode impossible by construction.
+
+**Decision tree for a new file**:
+
+```
+About a person, company, system, decision, or domain concept → knowledge repo
+About how the agent should behave → agent repo
+Original thinking (yours, an architect's, a PM's) → knowledge repo (under an originals/ area)
+Session logs, daily ops state, task lists → agent repo
+Skill configs, hooks, cron definitions → agent repo
+Rules about policy, compliance, safety → knowledge repo if org-wide, agent repo if agent-local
+```
+
+**Interaction with the portfolio patterns above**: the durable/replaceable split happens *per organizational unit* (a team, a user, a project). The portfolio patterns handle how multiple such units coordinate. Pattern 1 (Root Coordination Layer) can itself be split — the coordination repo holds shared policy (durable), while each developer's agent config lives elsewhere (replaceable).
 
 ## Related References
 
@@ -425,3 +471,4 @@ Architecture claims that span multiple repositories must be verified against act
 - **regulated-environment-patterns.md** — Compliance rules that must be synced
 - **fast-track-guide.md** — Batch onboarding for 100 repos
 - **context-development-lifecycle.md** — The CDLC feedback loop at scale
+- **information-routing-rules.md** — The *per-information* routing rule (world vs operations vs session) that complements this *per-file* repo boundary

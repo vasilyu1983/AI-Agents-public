@@ -3,32 +3,83 @@
     "skill": "dev-context-engineering",
     "title": "Context Engineering for AI-Augmented Development",
     "description": "Curated sources for context-driven development with AI coding agents across single and multi-repo organizations. Covers context engineering foundations, AGENTS.md standard, paradigm shift evidence, tool documentation, multi-repo patterns, regulatory compliance, security tooling, and practitioner insights.",
-    "last_updated": "2026-03-07",
-    "version": "3.0",
-    "total_sources": 83
+    "last_updated": "2026-04-13",
+    "updated": "2026-04-13",
+    "version": "3.3",
+    "total_sources": 105,
+    "verified_on": "2026-03-21",
+    "verification_policy": "Prefer official vendor docs, regulator pages, and primary research for volatile claims. Mark high-volatility sources explicitly."
   },
+  "external_sources": [
+    {
+      "name": "garrytan/gbrain",
+      "url": "https://github.com/garrytan/gbrain",
+      "commit_sha": "adb02b7826a010700efc968b18df8aaf17d8ffa1",
+      "license": "MIT",
+      "extracted_date": "2026-04-13",
+      "patterns_used": [
+        "context-resolver-pattern",
+        "latent-vs-deterministic",
+        "information-routing-rules",
+        "durable-vs-replaceable-axis"
+      ],
+      "research_pack": "docs/research/2026-04-13-context-engineering-skill-scan.md"
+    },
+    {
+      "name": "MemPalace/mempalace",
+      "url": "https://github.com/MemPalace/mempalace",
+      "commit_sha": "6614b9b4e71e67da2236493b036b7bf42ba2d55f",
+      "license": "MIT",
+      "extracted_date": "2026-04-13",
+      "patterns_used": [
+        "progressive-loading-tiers-l0-l3",
+        "hot-layer-performance-budgets",
+        "verbatim-raw-anti-summarization"
+      ],
+      "research_pack": "docs/research/2026-04-13-context-engineering-skill-scan.md"
+    }
+  ],
   "categories": {
+    "knowledge_graph_methodology": [
+      {
+        "name": "Understand-Anything: Multi-Agent Knowledge Graph Pipeline",
+        "url": "https://github.com/Lum1104/Understand-Anything",
+        "type": "reference_implementation",
+        "description": "Multi-agent pipeline using tree-sitter AST and LLM semantic enrichment to build JSON knowledge graphs from codebases. Adoptable patterns: graph-as-artifact (committable JSON), BFS traversal for focused context windows, 7-check automated validation, two-pass analysis (deterministic + LLM).",
+        "relevance": "Influenced the context-graph schema and scan_context_artifacts.py design — specifically the graph-as-artifact pattern and validation check framework",
+        "update_frequency": "occasional",
+        "access": "open-source",
+        "add_as_web_search": false,
+        "verified_on": "2026-03-21",
+        "volatility": "medium",
+        "tags": ["knowledge-graph", "context-engineering", "reference-implementation"]
+      }
+    ],
     "context_engineering": [
       {
         "name": "Anthropic: Effective Context Engineering for AI Agents",
-        "url": "https://www.anthropic.com/engineering/context-engineering",
+        "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-coding-agents",
         "type": "documentation",
-        "description": "Anthropic's guide to structuring context for agent performance. Covers prompt design, tool use, memory, and orchestration patterns.",
+        "description": "Anthropic's official guide to context engineering for coding agents. Covers context retrieval, memory, tools, planning, and execution patterns.",
         "relevance": "Foundational framework for context design principles used throughout this skill",
         "update_frequency": "static",
         "access": "free",
         "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "medium",
         "tags": ["context-engineering", "anthropic", "agents", "foundational"]
       },
       {
         "name": "Martin Fowler: Context Engineering for Coding Agents",
-        "url": "https://martinfowler.com/articles/context-engineering-coding-agents.html",
+        "url": "https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html",
         "type": "article",
         "description": "Fowler's analysis of context engineering as an emerging discipline. Covers structured prompting, codebase context, and progressive disclosure.",
         "relevance": "Industry validation from a respected voice — establishes CE as engineering, not hacking",
         "update_frequency": "static",
         "access": "free",
         "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "low",
         "tags": ["context-engineering", "thought-leadership", "patterns"]
       },
       {
@@ -47,11 +98,37 @@
         "url": "https://karpathy.ai",
         "type": "article",
         "description": "Karpathy's observations on disciplined agentic coding patterns — surfacing assumptions, managing scope, pushing back on bad approaches",
-        "relevance": "Behavioral rules in this repo's .claude/rules/coding-behavior.md are based on these patterns",
+        "relevance": "Source material for the canonical behavioral rules maintained in agents-memory: frameworks/shared-skills/skills/agents-memory/references/coding-behavior.md (standalone file) and frameworks/shared-skills/skills/agents-memory/references/memory-examples.md §Example 6 (inline template). The repo-root .claude/rules/coding-behavior.md is a symlink to the canonical file.",
+        "derivative_source": {
+          "name": "forrestchang/andrej-karpathy-skills",
+          "url": "https://github.com/forrestchang/andrej-karpathy-skills",
+          "commit_sha": "fb8fdb0aa74ccf587d2b666da7160e0d0eb94e6a",
+          "license": "MIT",
+          "extracted": "2026-04-15",
+          "refinements_applied": [
+            "goal transformation (vague task → verifiable goal)",
+            "trace test (every changed line traces to user request)",
+            "200-line rewrite heuristic",
+            "orphan vs pre-existing dead code distinction",
+            "tradeoff disclosure framing",
+            "working-if success metric"
+          ]
+        },
         "update_frequency": "static",
         "access": "free",
         "add_as_web_search": true,
-        "tags": ["agentic-coding", "discipline", "patterns"]
+        "tags": ["agentic-coding", "discipline", "patterns", "karpathy", "behavioral-rules"]
+      },
+      {
+        "name": "karpathy/autoresearch",
+        "url": "https://github.com/karpathy/autoresearch",
+        "type": "tool",
+        "description": "Autonomous ML experiment agent with bounded modification surface, fixed eval metric, and git-as-experiment-ledger. The original autonomous improvement loop pattern.",
+        "relevance": "Reference implementation for autonomous context improvement — defines the change→eval→keep/revert loop applied to CDLC",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": ["autoresearch", "autonomous-improvement", "experiment-loop", "karpathy"]
       },
       {
         "name": "Simon Willison: Context Engineering Practices",
@@ -76,14 +153,16 @@
         "tags": ["role-transformation", "context-engineering", "career"]
       },
       {
-        "name": "Anthropic: Claude Code Best Practices",
-        "url": "https://docs.anthropic.com/en/docs/claude-code/best-practices",
+        "name": "Anthropic: Claude Code Memory and CLAUDE.md",
+        "url": "https://docs.anthropic.com/en/docs/claude-code/memory",
         "type": "documentation",
-        "description": "Official best practices for Claude Code including CLAUDE.md structure, hooks, and memory patterns",
-        "relevance": "Authoritative guide for CLAUDE.md file structure and agent configuration",
+        "description": "Official Claude Code documentation for memory files, imports, project memory, and directory-scoped guidance.",
+        "relevance": "Authoritative guide for CLAUDE.md structure, imports, and repo-level memory patterns",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "high",
         "tags": ["claude-code", "best-practices", "anthropic"]
       },
       {
@@ -130,50 +209,60 @@
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "medium",
         "tags": ["agents-md", "specification", "standard", "core"]
       },
       {
         "name": "AGENTS.md GitHub Repository",
-        "url": "https://github.com/anthropics/agents-md",
+        "url": "https://github.com/openai/agents.md",
         "type": "repository",
         "description": "Official repository for the AGENTS.md specification with examples and tooling",
         "relevance": "Reference implementation and examples of well-structured AGENTS.md files",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": false,
+        "verified_on": "2026-03-13",
+        "volatility": "medium",
         "tags": ["agents-md", "examples", "reference"]
       },
       {
-        "name": "Linux Foundation Agentic AI Foundation",
-        "url": "https://www.linuxfoundation.org/press/linux-foundation-launches-agentic-ai-initiative",
+        "name": "GitHub Docs: Repository Custom Instructions and AGENTS.md",
+        "url": "https://docs.github.com/en/copilot/how-tos/custom-instructions/adding-repository-custom-instructions-for-github-copilot",
         "type": "reference",
-        "description": "Industry governance body for agentic AI standards including AGENTS.md adoption",
-        "relevance": "Institutional backing for AGENTS.md — signals long-term standard viability",
+        "description": "Official GitHub documentation for repository instructions, path-specific instructions, and agent instruction files including AGENTS.md, CLAUDE.md, and GEMINI.md.",
+        "relevance": "Primary-source evidence that GitHub/Copilot now supports layered repository context instead of a single file convention",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": true,
-        "tags": ["agents-md", "governance", "linux-foundation"]
+        "verified_on": "2026-03-13",
+        "volatility": "high",
+        "tags": ["agents-md", "github", "custom-instructions", "support"]
       },
       {
-        "name": "GitHub: How to Write a Great agents.md",
-        "url": "https://github.blog/engineering/how-to-write-a-great-agents-md/",
+        "name": "Agentic AI Foundation Stewardship via AGENTS.md",
+        "url": "https://agents.md",
         "type": "article",
-        "description": "GitHub's guide to effective agents.md files — structure, content, anti-patterns",
-        "relevance": "Platform-specific best practices from the largest code hosting platform",
+        "description": "The AGENTS.md site documents stewardship under the Agentic AI Foundation and provides the current specification and FAQ.",
+        "relevance": "Use this instead of outdated secondary references when discussing AGENTS.md governance or stewardship",
         "update_frequency": "static",
         "access": "free",
         "add_as_web_search": true,
-        "tags": ["agents-md", "github", "best-practices"]
+        "verified_on": "2026-03-13",
+        "volatility": "medium",
+        "tags": ["agents-md", "governance", "stewardship"]
       },
       {
         "name": "AGENTS.md Adoption Tracker",
         "url": "https://github.com/search?q=filename%3AAGENTS.md&type=code",
         "type": "reference",
         "description": "GitHub search showing AGENTS.md adoption across public repositories",
-        "relevance": "Track adoption growth — 60,000+ repos by March 2026 (arxiv 2601.18341: 15-23% agent adoption rate)",
+        "relevance": "Use only as a rough directional signal; do not rely on this search page for stable adoption metrics",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": false,
+        "verified_on": "2026-03-13",
+        "volatility": "high",
         "tags": ["agents-md", "adoption", "metrics"]
       },
       {
@@ -198,18 +287,165 @@
         "update_frequency": "static",
         "access": "free",
         "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "low",
         "tags": ["codex", "openai", "harness-engineering"]
       },
       {
         "name": "GitHub spec-kit",
         "url": "https://github.com/github/spec-kit",
         "type": "repository",
-        "description": "GitHub's toolkit for spec-driven AI development — templates, validation, best practices",
-        "relevance": "Practical tooling for spec-first workflows; complements docs-ai-prd skill",
+        "description": "GitHub's toolkit for spec-driven AI development — templates, validation, best practices. Specs live in .specify/specs/<feature>/ as spec.md, plan.md, tasks.md. Install via uv tool install specify-cli.",
+        "relevance": "L3 artifact pipeline in framework-selection-matrix; most-cited spec-driven framework as of April 2026 (~92k stars, GitHub-backed)",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": false,
-        "tags": ["spec-driven", "github", "tooling"]
+        "verified_on": "2026-05-01",
+        "volatility": "low",
+        "tags": ["spec-driven", "github", "tooling", "L3"]
+      },
+      {
+        "name": "OpenSpec (Fission-AI)",
+        "url": "https://github.com/Fission-AI/OpenSpec",
+        "type": "repository",
+        "description": "Community spec-driven framework. Specs live in openspec/changes/ as proposal.md, spec.md, design.md, tasks.md. Installs via npm i -g @fission-ai/openspec; commands /opsx:propose, /opsx:apply, /opsx:archive. Integrates ADRs alongside specs.",
+        "relevance": "L3 artifact pipeline alternative to Spec Kit in framework-selection-matrix; npm-native, ADRs co-located",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-05-01",
+        "volatility": "medium",
+        "tags": ["spec-driven", "community", "L3"]
+      },
+      {
+        "name": "obra/superpowers",
+        "url": "https://github.com/obra/superpowers",
+        "type": "repository",
+        "description": "Skills-based engineering methodology shipped as a folder of Markdown files. 14 documented skills (brainstorming, writing-plans, TDD, systematic-debugging, subagent-driven-development, two-stage code review, …). Plugin configs for Claude Code, Codex, Cursor, OpenCode, Copilot CLI, Gemini CLI. Skills enforce discipline at runtime (refuse-to-code-until-clarified).",
+        "relevance": "L2 methodology layer in framework-selection-matrix; pick when discipline drift (TDD, debugging quality) is the bottleneck. ~150-175k stars, on Anthropic plugin marketplace.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-05-01",
+        "volatility": "medium",
+        "tags": ["skills", "methodology", "claude-code", "L2"]
+      },
+      {
+        "name": "gsd-build/get-shit-done (GSD)",
+        "url": "https://github.com/gsd-build/get-shit-done",
+        "type": "repository",
+        "description": "Context-engineering and lifecycle framework targeting context rot — quality degradation as the context window fills. Full mode: 59 skills + 33 subagents; minimal mode: 6 skills. Generates PROJECT.md, REQUIREMENTS.md, ROADMAP.md, STATE.md, phase docs. Installs via npx get-shit-done-cc@latest. Ships git hooks for automated context management.",
+        "relevance": "L2 lifecycle / context-management layer in framework-selection-matrix; pick when context rot in long sessions is the bottleneck. ~59k stars.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-05-01",
+        "volatility": "medium",
+        "tags": ["context-management", "subagents", "lifecycle", "L2"]
+      },
+      {
+        "name": "Anthropic Agent Skills overview",
+        "url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview",
+        "type": "documentation",
+        "description": "Anthropic's official skill system. A skill is a directory with SKILL.md (YAML frontmatter + instructions) plus optional scripts and reference files. Three-level progressive disclosure: metadata always loaded (~100 tokens), instructions on trigger (<5k tokens), bundled resources on demand. Personal skills at ~/.claude/skills/, project skills at .claude/skills/.",
+        "relevance": "L2 capability layer foundation in framework-selection-matrix; the substrate superpowers, GSD, and custom skills build on.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-05-01",
+        "volatility": "medium",
+        "tags": ["skills", "anthropic", "claude-code", "L2"]
+      },
+      {
+        "name": "AGENTS.md spec",
+        "url": "https://agents.md",
+        "type": "documentation",
+        "description": "Canonical spec for the AGENTS.md portable baseline. Single Markdown file at repo root that all major agents (Codex, Claude Code, Amp, Jules, Cursor, Factory) read natively. 32 KiB Codex limit. Stewarded by the Linux Foundation's Agentic AI Foundation.",
+        "relevance": "L0 portable baseline in framework-selection-matrix; mandatory layer for cross-tool consistency",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-05-01",
+        "volatility": "low",
+        "tags": ["agents-md", "portable-baseline", "linux-foundation", "L0"]
+      },
+      {
+        "name": "Cursor rules documentation",
+        "url": "https://cursor.com/docs/rules",
+        "type": "documentation",
+        "description": "Per-project and per-path instruction files for Cursor IDE using .mdc (Markdown Cursor) format with YAML frontmatter for conditional activation. Legacy .cursorrules root file deprecated. Global rules at ~/.cursor/rules/.",
+        "relevance": "L1 runtime-specific layer in framework-selection-matrix; mandatory for Cursor-primary teams (Cursor does not read AGENTS.md natively)",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-05-01",
+        "volatility": "medium",
+        "tags": ["cursor", "ide", "rules", "L1"]
+      },
+      {
+        "name": "GitHub Copilot custom instructions",
+        "url": "https://docs.github.com/copilot/customizing-copilot/adding-custom-instructions-for-github-copilot",
+        "type": "documentation",
+        "description": "Copilot repo-wide instructions at .github/copilot-instructions.md. Path-specific instructions via .github/**/*.instructions.md with applyTo frontmatter (added July 2025). Agent-specific instructions added November 2025.",
+        "relevance": "L1 runtime-specific layer in framework-selection-matrix; mandatory for Copilot-primary teams",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-05-01",
+        "volatility": "medium",
+        "tags": ["copilot", "github", "rules", "L1"]
+      },
+      {
+        "name": "Cline rules documentation",
+        "url": "https://docs.cline.bot/features/cline-rules",
+        "type": "documentation",
+        "description": ".clinerules file or .clinerules/ directory injected into Cline's system prompt on every request. Inactive rules at clinerules-bank/. v3.13 added a per-rule toggle UI.",
+        "relevance": "L1 runtime-specific layer in framework-selection-matrix; required for Cline (VS Code extension) workflows",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-05-01",
+        "volatility": "medium",
+        "tags": ["cline", "vscode", "rules", "L1"]
+      },
+      {
+        "name": "Aider conventions",
+        "url": "https://aider.chat/docs/usage/conventions.html",
+        "type": "documentation",
+        "description": "CONVENTIONS.md loaded into every Aider session via .aider.conf.yml. Documents language preferences, style, testing standards, git practices. Community-editable conventions at github.com/Aider-AI/conventions.",
+        "relevance": "L1 runtime-specific layer in framework-selection-matrix; required for Aider pair-programming workflows",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-05-01",
+        "volatility": "low",
+        "tags": ["aider", "cli", "conventions", "L1"]
+      },
+      {
+        "name": "Martin Fowler / Böckeler: SDD Tools — Three Levels of Spec-Driven Development",
+        "url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
+        "type": "article",
+        "description": "Defines three maturity levels for spec-driven development: Spec-First (write then discard), Spec-Anchored (spec lives alongside code), Spec-as-Source (spec is primary artifact, code regenerated). Evaluates tooling landscape.",
+        "relevance": "Canonical SDD maturity framework referenced in the Spec-Driven Development section of this skill",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-17",
+        "volatility": "low",
+        "tags": ["spec-driven", "maturity", "martin-fowler", "methodology"]
+      },
+      {
+        "name": "Julián De Angelis: The Spec Is the New Code — A Guide to Spec Driven Development",
+        "url": "https://x.com/juliandeangeIis/status/2033303156340240481",
+        "type": "article",
+        "description": "SDD methodology guide from MercadoLibre's GenAI Technical Leader. Covers the ambiguity problem, ecosystem convergence (Spec Kit, Symphony, Ralph Loop), the specify-plan-task-implement process, tradeoffs (2-3x token cost for dramatically better results), and rollout to 20,000 developers.",
+        "relevance": "Practitioner case study at scale — validates SDD methodology with 5,000+ workshop participants and production evidence",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-17",
+        "volatility": "low",
+        "tags": ["spec-driven", "case-study", "mercadolibre", "methodology", "scale"]
       },
       {
         "name": "METR: Measuring AI Ability to Complete Long Tasks",
@@ -276,6 +512,201 @@
         "access": "free",
         "add_as_web_search": true,
         "tags": ["anthropic", "trends", "report", "multi-agent", "paradigm-shift"]
+      },
+      {
+        "name": "Shopify CEO: AI Hiring Freeze Memo",
+        "url": "https://www.cnbc.com/2025/04/07/shopify-ceo-says-staffers-need-to-prove-jobs-cant-be-done-by-ai-before-asking-for-more-headcount.html",
+        "type": "article",
+        "description": "Shopify CEO Tobi Lutke's April 2025 internal memo: teams must demonstrate why AI cannot do the work before requesting headcount. AI usage added to performance reviews.",
+        "relevance": "Highest-profile public statement of AI-first hiring policy — direct evidence for team size paradigm shift",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["shopify", "hiring-freeze", "team-transformation", "policy", "paradigm-shift"]
+      },
+      {
+        "name": "Anthropic: How AI Is Transforming Work at Anthropic",
+        "url": "https://www.anthropic.com/news/how-ai-is-transforming-work-at-anthropic",
+        "type": "article",
+        "description": "Anthropic internal data: 90% of Claude Code written by Claude, engineers use Claude in 59% of work (up from 28%), 50% productivity boost, 5 PRs/engineer/day. Most employees can fully delegate only 0-20% of work.",
+        "relevance": "Primary-source quantitative evidence from the leading agent platform — both the promise and the limits",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["anthropic", "internal-data", "productivity", "team-transformation", "evidence"]
+      },
+      {
+        "name": "Pragmatic Engineer: Future of Software Engineering with AI",
+        "url": "https://newsletter.pragmaticengineer.com/p/the-future-of-software-engineering",
+        "type": "article",
+        "description": "Gergely Orosz on the 'one-pizza team' replacing the 'two-pizza team.' Predicts decrease in specialization, consolidation into 3-4 full-stack engineers. Warns AI makes teams 'dysfunctional faster' if culture is poor.",
+        "relevance": "Origin of 'one-pizza team' taxonomy — key thought leader framing the shift with both optimism and caveats",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["pragmatic-engineer", "one-pizza-team", "team-transformation", "taxonomy", "counterpoint"]
+      },
+      {
+        "name": "Satya Nadella: AI Writes 30% of Microsoft's Code",
+        "url": "https://www.theverge.com/news/648818/satya-nadella-microsoft-ai-code-llamacon",
+        "type": "article",
+        "description": "Nadella at LlamaCon (April 2025): 30% of Microsoft code is AI-generated. Describes a 'new production function' where AI generates code without proportionally more engineers.",
+        "relevance": "Direct evidence from a $3T company — validates the scale of AI code generation in big tech",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["microsoft", "nadella", "ai-generated-code", "big-tech", "paradigm-shift"]
+      },
+      {
+        "name": "CNBC: Y Combinator Startups Fastest Growing in Fund History",
+        "url": "https://www.cnbc.com/2025/03/06/y-combinators-latest-batch-of-startups-is-on-pace-to-be-the-fastest-growing-in-fund-history.html",
+        "type": "article",
+        "description": "Y Combinator 2025 batch on pace to be fastest-growing in fund history. 88% of startups are AI-native. 25% have 95%+ AI-generated codebases.",
+        "relevance": "VC ecosystem evidence for AI-native startup economics — validates 'lean team + AI' investment thesis",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["y-combinator", "vc", "startups", "ai-native", "investment"]
+      },
+      {
+        "name": "Every.to: The Two-Slice Team",
+        "url": "https://every.to/napkin-math/the-two-slice-team",
+        "type": "article",
+        "description": "Concept of the 'two-slice team' (1-2 people). Every.to runs 4 products each operated by 1 person with 99% AI-written code. Explores the economics and psychology of extreme team minimalism.",
+        "relevance": "Origin of 'two-slice team' taxonomy — demonstrates the solo-operator model with real revenue data",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["every-to", "two-slice-team", "solo-operator", "taxonomy", "ai-native"]
+      },
+      {
+        "name": "Fortune: Klarna CEO Admits AI Cuts Went Too Far",
+        "url": "https://fortune.com/2025/05/22/klarna-ceo-humans-ai/",
+        "type": "article",
+        "description": "Klarna CEO Sebastian Siemiatkowski: chatbot gave generic responses, couldn't handle nuance. Company began rehiring. Average pay rose 60% ($126K → $203K) as workforce skewed senior.",
+        "relevance": "Critical counterpoint — the highest-profile AI-driven layoff reversal. Essential caveat for team transformation planning.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["klarna", "reversal", "counterpoint", "team-transformation", "cautionary"]
+      },
+      {
+        "name": "MLQ: Klarna CEO Regrets AI-Driven Layoffs",
+        "url": "https://www.mlq.ai/klarna-ceo-regrets-ai-layoffs/",
+        "type": "article",
+        "description": "Analysis of Klarna's 2026 reversal: cut from 5,527 to 2,907 employees, AI replaced 853 FTEs, then admitted going too far. 55% of companies report regretting AI-driven layoffs.",
+        "relevance": "Quantitative details on the Klarna reversal — the '55% regret rate' data point",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["klarna", "reversal", "quantitative", "regret-rate", "team-transformation"]
+      },
+      {
+        "name": "Faros AI: The Real Impact of AI on Coding Productivity",
+        "url": "https://www.faros.ai/blog/the-real-impact-of-ai-on-coding-productivity",
+        "type": "article",
+        "description": "Study of 10,000+ developers: high-AI teams completed 21% more tasks but PR review time increased 91%, bugs per developer up 9%, PR sizes up 154%. Bottleneck shifted from writing to reviewing.",
+        "relevance": "Critical quantitative counterpoint — shows AI throughput gains come with review and quality costs",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["faros-ai", "productivity", "counterpoint", "quantitative", "review-bottleneck"]
+      },
+      {
+        "name": "Lean AI Leaderboard: Revenue Per Employee",
+        "url": "https://www.leanaileaderboard.com/",
+        "type": "reference",
+        "description": "Tracks revenue-per-employee metrics for AI-native companies. AI-native average: $3.48M RPE vs traditional SaaS $200K-$610K (5.7x gap). Midjourney $4.1M, Cursor $3.3M.",
+        "relevance": "Quantitative foundation for AI-native RPE claims and the team-size economic argument",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "high",
+        "tags": ["rpe", "economics", "ai-native", "metrics", "leaderboard"]
+      },
+      {
+        "name": "Optimum Partners: Engineering Management in the Age of AI (2026)",
+        "url": "https://optimumpartners.co/engineering-management-2026/",
+        "type": "article",
+        "description": "Introduces the 'Centaur Pod' model: 3-person team (architect + 2 AI reliability engineers + agents). Predicts engineering management evolves from people management to agent orchestration.",
+        "relevance": "Origin of 'Centaur Pod' taxonomy — specific team structure for AI-augmented engineering",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["centaur-pod", "team-structure", "taxonomy", "engineering-management"]
+      },
+      {
+        "name": "Gartner: 80% of Engineering Workforce Must Upskill by 2027",
+        "url": "https://www.gartner.com/en/newsroom/press-releases/2024-10-29-gartner-says-by-2027-80-percent-of-the-software-engineering-workforce-will-need-to-upskill",
+        "type": "article",
+        "description": "Gartner prediction (Oct 2024): 80% of the software engineering workforce will need to upskill in AI-augmented development practices by 2027.",
+        "relevance": "Sets the scale of the transition challenge — upskilling is non-trivial and affects team planning timelines",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["gartner", "upskilling", "workforce", "prediction", "transition"]
+      },
+      {
+        "name": "CNBC: Duolingo 'AI-First' Company",
+        "url": "https://www.cnbc.com/2025/09/02/duolingo-ai-first-company.html",
+        "type": "article",
+        "description": "Duolingo's AI-first policy: contractors cut in waves, CEO reports '4 or 5 times as much content in the same time,' 148 AI-written courses delivered.",
+        "relevance": "Evidence of AI-first transformation in a consumer tech company — content generation as a proxy for engineering output",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["duolingo", "ai-first", "content-generation", "team-transformation"]
+      },
+      {
+        "name": "Sam Altman: The One-Person Unicorn",
+        "url": "https://fortune.com/2024/02/04/sam-altman-predicts-one-person-unicorn-ai/",
+        "type": "article",
+        "description": "Sam Altman's prediction that AI will enable solo founders to build billion-dollar companies. Origin of the 'one-person unicorn' concept.",
+        "relevance": "Origin of the 'one-person unicorn' term — sets the aspirational endpoint of the team-size spectrum",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["altman", "one-person-unicorn", "prediction", "solo-founder"]
+      },
+      {
+        "name": "Meta: Zuckerberg Predicts Mid-Level Engineer AI",
+        "url": "https://www.entrepreneur.com/business-news/mark-zuckerberg-says-meta-will-have-ai-that-is-as-good-as/487133",
+        "type": "article",
+        "description": "Zuckerberg (Jan 2025): 'AI that can effectively be a mid-level engineer.' Meta cut 5% of staff while investing in AI infrastructure.",
+        "relevance": "Big tech CEO framing AI as replacing mid-level engineering work — shapes hiring and team composition decisions",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "verified_on": "2026-03-16",
+        "volatility": "low",
+        "tags": ["meta", "zuckerberg", "mid-level-engineer", "big-tech", "prediction"]
       }
     ],
     "tool_documentation": [
@@ -302,14 +733,16 @@
         "tags": ["claude-code", "github", "changelog"]
       },
       {
-        "name": "OpenAI Codex Documentation",
-        "url": "https://openai.com/index/codex/",
+        "name": "OpenAI: Introducing Codex",
+        "url": "https://openai.com/index/introducing-codex/",
         "type": "documentation",
-        "description": "OpenAI Codex cloud agent — sandboxed async execution, AGENTS.md support",
-        "relevance": "Secondary agent tool — async batch tasks, issue triage, parallel execution",
+        "description": "OpenAI's Codex launch and product overview covering agentic coding workflows, repository setup, and execution model.",
+        "relevance": "Primary-source overview for Codex positioning and workflow assumptions",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "high",
         "tags": ["codex", "openai", "cloud-agent", "primary"]
       },
       {
@@ -327,11 +760,13 @@
         "name": "GitHub Copilot Documentation",
         "url": "https://docs.github.com/en/copilot",
         "type": "documentation",
-        "description": "GitHub Copilot — inline suggestions, copilot-instructions.md, Copilot Workspace",
-        "relevance": "Supplementary tool — reads .github/copilot-instructions.md",
+        "description": "GitHub Copilot documentation covering repository instructions, path-specific instructions, AGENTS.md support, coding agent, and custom agents.",
+        "relevance": "Primary-source documentation for GitHub-native context files and agent workflows",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": false,
+        "verified_on": "2026-03-13",
+        "volatility": "high",
         "tags": ["copilot", "github", "supplementary"]
       },
       {
@@ -368,26 +803,43 @@
         "tags": ["gemini", "google", "cli"]
       },
       {
-        "name": "GitHub Agent HQ: Enterprise AI Controls & Agent Control Plane",
-        "url": "https://github.blog/changelog/2026-02-26-enterprise-ai-controls-agent-control-plane-now-generally-available/",
+        "name": "GitHub Docs: Enterprise Management for Agents",
+        "url": "https://docs.github.com/en/copilot/concepts/agents/enterprise-management",
         "type": "documentation",
-        "description": "Enterprise governance for AI agents on GitHub. Audit logging with actor_is_agent identifiers, agent_session.task events, MCP enterprise allowlists, custom agent definitions in .github/agents/*.md, programmatic agent management APIs.",
-        "relevance": "Enterprise audit and governance layer — complements FCA compliance requirements with platform-level controls",
+        "description": "Official GitHub documentation for enterprise agent management, governance controls, and organization-wide administration.",
+        "relevance": "Use this for GitHub enterprise governance claims instead of unstable branding or marketing names",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": true,
-        "tags": ["github", "enterprise", "audit", "governance", "agent-hq"]
+        "verified_on": "2026-03-13",
+        "volatility": "high",
+        "tags": ["github", "enterprise", "audit", "governance", "agents"]
       },
       {
         "name": "VS Code: Context Engineering Guide",
         "url": "https://code.visualstudio.com/docs/copilot/guides/context-engineering-guide",
         "type": "documentation",
-        "description": "VS Code's three-step context engineering workflow: custom instructions (.github/copilot-instructions.md), planning agents (.github/agents/plan.agent.md), implementation agents. Agent handoffs for end-to-end flows.",
-        "relevance": "Platform-specific context patterns — shows convergence of AGENTS.md and .github/agents/ as complementary standards",
+        "description": "VS Code guidance for layered context: AGENTS.md, custom instructions, prompt files, and custom chat modes / agents.",
+        "relevance": "Primary-source evidence that editor workflows now converge on layered repository context",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "high",
         "tags": ["vscode", "copilot", "context-engineering", "agents"]
+      },
+      {
+        "name": "context-hub (chub) — Curated API Docs and Skills for Coding Agents",
+        "url": "https://github.com/andrewyng/context-hub",
+        "type": "repository",
+        "description": "CLI tool providing agents with curated, versioned API documentation from a searchable CDN. Dual content model (Docs vs Skills), self-improving loop via annotations and feedback, progressive disclosure, multi-source trust signaling (official/maintainer/community), Agent Skills spec compatible. 500+ library entries.",
+        "relevance": "External knowledge distribution tool complementing repo-native context — fills the gap between AGENTS.md (repo context) and web search (unreliable). Supports the Cross-Tool Context Model's external knowledge layer.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "verified_on": "2026-03-17",
+        "volatility": "medium",
+        "tags": ["context-distribution", "external-knowledge", "api-docs", "tooling", "andrew-ng"]
       }
     ],
     "multi_repo_patterns": [
@@ -548,14 +1000,16 @@
         "tags": ["nist", "ai-risk", "governance", "framework"]
       },
       {
-        "name": "NIST AI Agent Standards Initiative (Feb 2026)",
+        "name": "NIST AI Agent Standards Initiative",
         "url": "https://www.nist.gov/caisi/ai-agent-standards-initiative",
         "type": "reference",
-        "description": "First US government framework for autonomous AI agents. Three pillars: industry-led standards, community-led protocols, security research. Covers agent identity/authorization, governance controls, escalation protocols. RFI on AI Agent Security due March 2026.",
+        "description": "NIST CAISI initiative for AI agent standards and security. Covers agent identity, authorization, governance controls, and security research.",
         "relevance": "Emerging regulatory framework — complements FCA requirements with US-aligned standards for multinational organizations",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": true,
+        "verified_on": "2026-03-13",
+        "volatility": "high",
         "tags": ["nist", "standards", "ai-agents", "governance", "security"]
       },
       {
@@ -774,15 +1228,17 @@
         "tags": ["git", "signing", "audit-trail", "compliance"]
       },
       {
-        "name": "GitHub: Enterprise AI Controls — Agent Control Plane GA",
-        "url": "https://github.blog/news-insights/company-news/pick-your-agent-use-claude-and-codex-on-agent-hq/",
+        "name": "GitHub Docs: Agentic Audit Log Events",
+        "url": "https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/agentic-audit-log-events",
         "type": "documentation",
-        "description": "Claude and Codex as first-class agents on GitHub. Multi-agent parallel execution, draft PR creation, enterprise audit logging, organization-wide policy management, GitHub Code Quality integration.",
-        "relevance": "Platform convergence — both primary agents (Claude Code + Codex) now available in unified GitHub workflow with enterprise controls",
+        "description": "Official GitHub documentation for agent-specific audit log events and enterprise observability of agent activity.",
+        "relevance": "Primary-source reference for audit and accountability claims in regulated GitHub agent workflows",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": true,
-        "tags": ["github", "agent-hq", "claude", "codex", "enterprise"]
+        "verified_on": "2026-03-13",
+        "volatility": "high",
+        "tags": ["github", "audit", "enterprise", "agents"]
       }
     ],
     "practitioner_insights": [

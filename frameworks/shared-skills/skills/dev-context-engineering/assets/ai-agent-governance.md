@@ -1,3 +1,5 @@
+> **Example template for a regulated fintech.** Swap rule IDs, regime references (FCA/EMI, SM&CR, SS1/23, IBS register), and gate steps for your own regulatory context before use. This is illustrative scaffolding, not legal or compliance advice.
+
 # AI Agent Governance Rules
 
 > Copy this file to `.claude/rules/ai-agent-governance.md` in every repository.
@@ -47,7 +49,7 @@ Unapproved tools must not be used on company repositories without security team 
 
 ### Required Settings
 - Telemetry: Review and approve data sharing settings
-- Context: AGENTS.md + CLAUDE.md symlink convention in all repos
+- Context: portable `AGENTS.md` baseline plus tool-specific files only where needed
 - Rules: Mandatory compliance rules installed (compliance-fca-emi.md, data-handling-gdpr-pci.md)
 - Hooks: Pre-commit validation hooks enabled where available
 

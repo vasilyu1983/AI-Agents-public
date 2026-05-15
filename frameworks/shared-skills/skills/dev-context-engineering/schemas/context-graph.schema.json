@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/dev-context-engineering/schemas/context-graph.schema.json",
+  "title": "ContextGraph",
+  "description": "Per-repo context graph: instructions, rules, specs, plans, hooks, subagents, references, assets, and the relationships between them.",
+  "type": "object",
+  "required": ["meta", "nodes", "edges"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["scope", "generated_at"],
+      "properties": {
+        "scope": { "type": "string" },
+        "generated_at": { "type": "string", "format": "date-time" },
+        "graph_contract_version": {
+          "type": "string",
+          "description": "Schema contract version. Bump on breaking changes."
+        },
+        "maturity_level": { "type": "string", "enum": ["L0","L1","L2","L3","L4"] },
+        "validation": {
+          "type": "object",
+          "properties": {
+            "checks_passed": { "type": "integer" },
+            "checks_total": { "type": "integer" },
+            "last_validated_at": { "type": "string", "format": "date-time" }
+          }
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "label", "path"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["agents_md","claude_md","rule","spec","plan","subagent","hook","copilot_instructions","github_agent","reference","asset","skill"]
+          },
+          "label": { "type": "string" },
+          "path": { "type": "string" },
+          "summary": {
+            "type": "string",
+            "description": "1-2 sentence description of this artifact's purpose."
+          },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "last_modified_at": { "type": "string", "format": "date-time" },
+          "last_verified_at": { "type": "string", "format": "date-time" },
+          "first_seen_at": { "type": "string", "format": "date-time" },
+          "token_cost": { "type": "integer" },
+          "loading_tier": { "type": "string", "enum": ["L1_always","L2_on_demand","L3_referenced"] },
+          "stale": { "type": "boolean" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "evidence": {
+            "type": "array",
+            "items": { "type": "object" },
+            "description": "Provenance refs (file paths, line ranges, scan timestamps). LLM-enrichable."
+          },
+          "importance": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Fan-in count or PageRank score. Computed by validate/query passes."
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "relation"],
+        "properties": {
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "relation": {
+            "type": "string",
+            "enum": ["imports","delegates_to","enforces","documents","triggers","validates","overrides","extends","references","supersedes"]
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Static dependency strength. Convention: enforces=1.0, imports=0.9, delegates_to=0.8, documents=0.5, references=0.3"
+          },
+          "weight_static": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Original static weight before calibration. Set by calibration passes."
+          },
+          "weight_calibrated": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Calibrated weight from multi-source evidence. Set by calibration passes; preferred when present."
+          },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "evidence": {
+            "type": "array",
+            "items": { "type": "object" },
+            "description": "Provenance refs that justify this edge (file path, line range, regex match, doc anchor)."
+          },
+          "notes": { "type": "string" },
+          "first_seen_at": { "type": "string", "format": "date-time" },
+          "last_verified_at": { "type": "string", "format": "date-time" },
+          "stale": { "type": "boolean" },
+          "valid_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Bitemporal: when this relationship became true in the world. Optional."
+          },
+          "valid_until": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Bitemporal: when this relationship stopped being true. Optional. Use null for currently-valid edges."
+          },
+          "superseded_by": {
+            "type": "string",
+            "description": "Edge id that replaced this edge. Used for supersession instead of deletion."
+          },
+          "supersedes": {
+            "type": "string",
+            "description": "Edge id that this edge replaces. Inverse of superseded_by."
+          },
+          "edge_id": {
+            "type": "string",
+            "description": "Stable edge identifier. Required when supersession or bitemporal fields are used."
+          }
+        }
+      }
+    }
+  }
+}

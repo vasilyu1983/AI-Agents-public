@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "title": "dev-context-code-graph sources",
+    "skill": "dev-context-code-graph",
+    "description": "Primary references for code graph extraction, JSON graph contracts, and parser behavior.",
+    "last_updated": "2026-04-25",
+    "updated": "2026-04-25",
+    "total_sources": 6
+  },
+  "external_sources": [
+    {
+      "name": "garrytan/gbrain",
+      "url": "https://github.com/garrytan/gbrain",
+      "commit_sha": "adb02b7826a010700efc968b18df8aaf17d8ffa1",
+      "license": "MIT",
+      "extracted_date": "2026-04-13",
+      "patterns_used": [
+        "deterministic-collectors-discipline"
+      ],
+      "research_pack": "docs/research/2026-04-13-context-engineering-skill-scan.md",
+      "notes": "Cited for convergent-evidence validation of the deterministic-first parser pipeline discipline. No structural changes made to this skill; one-line citation in references/code-graph-patterns.md only."
+    }
+  ],
+  "primary_sources": [
+    {
+      "name": "code-review-graph",
+      "url": "https://github.com/tirth8205/code-review-graph",
+      "description": "Reference implementation for graph-as-artifact code review workflows and blast-radius analysis.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "JSON Schema",
+      "url": "https://json-schema.org/",
+      "description": "Canonical schema reference for the code-profile and code-graph contracts.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Python ast",
+      "url": "https://docs.python.org/3/library/ast.html",
+      "description": "Primary source for Python AST parsing and node semantics.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "tree-sitter",
+      "url": "https://tree-sitter.github.io/tree-sitter/",
+      "description": "Reference for parser-driven syntax trees and language adapter design.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Sourcegraph Code Graph",
+      "url": "https://sourcegraph.com/docs/cody/core-concepts/code-graph",
+      "description": "Current product documentation describing code graph data as structural context for codebase-aware AI assistance.",
+      "add_as_web_search": true
+    }
+  ]
+}
