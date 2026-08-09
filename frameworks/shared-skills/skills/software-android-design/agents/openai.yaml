@@ -1,0 +1,4 @@
+interface:
+  display_name: "Android Design"
+  short_description: "Native Android design audits and review loops"
+  default_prompt: "Use $software-android-design to review or refine a native Android screen on a freshly verified emulator build, focusing on Material layout, typography, color, shape, motion, and adaptive patterns."

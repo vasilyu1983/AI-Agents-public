@@ -1,0 +1,11 @@
+interface:
+  display_name: "iOS Testing"
+  short_description: "Guides iOS testing with XCTest, XCUITest, Swift Testing, simctl, and xcresult"
+  default_prompt: "Use $qa-testing-ios for iOS testing guidance — choosing destinations, controlling flakes, parsing test artifacts, and CI configuration for native apps."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "XcodeBuildMCP"
+      description: "Optional XcodeBuildMCP server for simulator test execution and log capture."
+policy:
+  allow_implicit_invocation: true

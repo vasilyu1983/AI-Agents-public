@@ -1,0 +1,4 @@
+interface:
+  display_name: "Time Series Forecasting - Production Patterns"
+  short_description: "Time series forecasting — temporal validation, global/panel models"
+  default_prompt: "Use $ai-ml-timeseries for Time series forecasting — temporal validation, global/panel models, probabilistic forecasts, and TS foundation models. Use when building or reviewing forecasts."

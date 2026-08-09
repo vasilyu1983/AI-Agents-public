@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Vector Brain"
+  short_description: "Builds reusable vector-brain implementations"
+  default_prompt: "Use $ai-vector-brain for vector-brain implementation: repo brain, docs brain, compliance brain, pgvector SQL, corpus manifests, ingest scripts, retrieval tool contracts, and eval seeds."

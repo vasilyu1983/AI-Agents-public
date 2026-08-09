@@ -1,0 +1,122 @@
+{
+  "metadata": {
+    "skill": "ops-incident-response",
+    "description": "Primary SRE and incident-management references",
+    "last_updated": "2026-07-11",
+    "title": "Incident Response - Sources"
+  },
+  "sources": [
+    {
+      "name": "Incident Metrics in SRE — Štěpán Davidovič (Google SRE / O'Reilly)",
+      "url": "https://sre.google/resources/practices-and-processes/incident-metrics-in-sre/",
+      "type": "methodology",
+      "notes": "Authority for the MTTx distributional caveat: incident durations are heavy-tailed; means are 'poorly suited for decision making or trend analysis'. Recommends percentiles and incident frequency/rate as replacements.",
+      "accessed": "2026-05-17"
+    },
+    {
+      "name": "Alerting on SLOs — Google SRE Workbook",
+      "url": "https://sre.google/workbook/alerting-on-slos/",
+      "type": "methodology",
+      "notes": "Source for burn-rate thresholds: '2% budget consumption in one hour and 5% budget consumption in six hours as reasonable starting numbers for paging.' Used in references/slo-incident-triggering.md.",
+      "accessed": "2026-05-17"
+    },
+    {
+      "name": "Howie Post-Incident Guide — PagerDuty",
+      "url": "https://howie-guide.pagerduty.com/",
+      "type": "standard",
+      "notes": "Open standard for structured post-incident review. Covers narrative framing, structured interviews, near-miss inclusion, and human-factors lens. Added to references/postmortem-facilitation.md as the named standard for SEV1/SEV2 reviews.",
+      "accessed": "2026-05-17"
+    },
+    {
+      "name": "Automated Postmortems 2025: incident.io vs FireHydrant vs PagerDuty",
+      "url": "https://incident.io/blog/incident-io-vs-firehydrant-vs-pagerduty-automated-postmortems-2025",
+      "type": "methodology",
+      "notes": "Source for 2025–26 declare-and-mobilize process expectations: auto-create incident channel, automated role assignment, status-page automation, auto postmortem doc at close. Used in SKILL.md Workflow section. Framed as process design, not a product endorsement.",
+      "accessed": "2026-05-17"
+    },
+    {
+      "name": "Google SRE Incident Management Guide",
+      "url": "https://sre.google/resources/practices-and-processes/incident-management-guide/",
+      "type": "methodology",
+      "notes": "Google SRE end-to-end incident management process grounded in incident command and operational readiness.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "Google SRE Anatomy of an Incident",
+      "url": "https://sre.google/resources/practices-and-processes/anatomy-of-an-incident/",
+      "type": "methodology",
+      "notes": "Lifecycle framing for preparedness, response, recovery, and mitigation.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "Atlassian Incident Management Handbook",
+      "url": "https://www.atlassian.com/incident-management/handbook",
+      "type": "methodology",
+      "notes": "Incident-management operating model covering severity, coordination, communication, and learning loops.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "PagerDuty Incident Response Documentation",
+      "url": "https://response.pagerduty.com/",
+      "type": "docs",
+      "notes": "Open-sourced PagerDuty incident response process covering before, during, and after an incident.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "PagerDuty During an Incident",
+      "url": "https://response.pagerduty.com/during/during_an_incident/",
+      "type": "docs",
+      "notes": "Operational guidance for major incident execution, coordination, and documentation.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "PagerDuty Severity Levels",
+      "url": "https://response.pagerduty.com/before/severity_levels/",
+      "type": "docs",
+      "notes": "Severity model guidance for response expectations and escalation policy.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "Grafana OnCall OSS in maintenance mode / archival notice",
+      "url": "https://grafana.com/blog/grafana-oncall-maintenance-mode/",
+      "type": "vendor-notice",
+      "notes": "Grafana OnCall OSS entered maintenance mode 2025-03-11; the OSS Cloud Connection was shut down and the GitHub repo archived 2026-03-24. Grafana now directs teams to Grafana Cloud IRM (merges OnCall + Incident). Used in SKILL.md Fact-Checking tooling-landscape note.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "Freshworks completes FireHydrant acquisition",
+      "url": "https://www.freshworks.com/",
+      "type": "vendor-notice",
+      "notes": "Freshworks closed its ~$88.7M acquisition of FireHydrant on 2026-01-01 per Freshworks' Q1 2026 10-Q; FireHydrant now sits inside the Freshservice portfolio. Used in SKILL.md Fact-Checking tooling-landscape note. Verify current FireHydrant product positioning before recommending it as standalone.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "PagerDuty Jeli UI end-of-life notice",
+      "url": "https://support.pagerduty.com/main/docs/jeli-post-incident-reviews",
+      "type": "vendor-notice",
+      "notes": "PagerDuty is retiring the standalone Jeli UI (EOL 2026-12-22); Howie-based post-incident review capability is being folded into PagerDuty's native Post-Incident Reviews product. The Howie methodology/guide itself (howie-guide.pagerduty.com) is unaffected and remains the named standard in postmortem-facilitation.md.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "DORA Article 19 — Reporting of major ICT-related incidents",
+      "url": "https://www.regulation-dora.eu/dora-incident-reporting",
+      "type": "regulation",
+      "notes": "Confirms the triple cascade: 4-hour initial notification after classification as 'major' (with a 24-hour backstop from detection if classification is delayed), 72-hour intermediate report, 1-month final report. Templates harmonized by RTS 2025/301 and ITS 2024/2956. Used in SKILL.md Regulatory Reporting Overlays section.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "NIS2 Directive Article 23 — Reporting obligations",
+      "url": "https://www.nis-2-directive.com/NIS_2_Directive_Article_23.html",
+      "type": "regulation",
+      "notes": "Confirms the 24-hour early warning / 72-hour incident notification / 1-month final report cascade, with the clock starting on awareness of a significant incident rather than on internal severity classification (contrast with DORA's classification-triggered clock). Used in SKILL.md Regulatory Reporting Overlays section.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "SEC Item 1.05 Form 8-K cybersecurity incident disclosure",
+      "url": "https://www.sec.gov/resources-small-businesses/small-business-compliance-guides/cybersecurity-risk-management-strategy-governance-incident-disclosure",
+      "type": "regulation",
+      "notes": "Confirms the 4-business-day filing deadline runs from the registrant's determination that an incident is material, not from discovery; materiality determination itself must be made without unreasonable delay. Used in SKILL.md Regulatory Reporting Overlays section.",
+      "accessed": "2026-07-11"
+    }
+  ]
+}

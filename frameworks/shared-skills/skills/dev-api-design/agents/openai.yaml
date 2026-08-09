@@ -1,0 +1,4 @@
+interface:
+  display_name: "API Development & Design — Quick Reference"
+  short_description: "Designs durable API contracts across REST, GraphQL, gRPC, tRPC, and AsyncAPI"
+  default_prompt: "Use $dev-api-design for Designs durable API contracts across REST, GraphQL, gRPC, tRPC, and AsyncAPI. Use when specifying interfaces, auth, versioning, errors, rate limits, or agent APIs."

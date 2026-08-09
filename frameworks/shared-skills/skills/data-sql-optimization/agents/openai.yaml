@@ -1,0 +1,4 @@
+interface:
+  display_name: "SQL Optimization"
+  short_description: "Diagnoses and tunes SQL for OLTP workloads"
+  default_prompt: "Use $data-sql-optimization to diagnose and tune SQL for OLTP workloads on PostgreSQL, MySQL, and SQL Server: tuning queries, reading plans, indexing, or fixing lock contention."

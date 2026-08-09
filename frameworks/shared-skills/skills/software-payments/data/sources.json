@@ -1,0 +1,856 @@
+{
+  "metadata": {
+    "skill": "software-payments",
+    "updated": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 82,
+    "supported_platforms": [
+      "Stripe",
+      "Adyen",
+      "Paddle",
+      "LemonSqueezy",
+      "RevenueCat",
+      "Chargebee",
+      "Recurly",
+      "Lago",
+      "GoCardless",
+      "Mollie",
+      "Square",
+      "Klarna",
+      "Checkout.com",
+      "Open Banking (TrueLayer, Yapily)"
+    ],
+    "extensible": true,
+    "latest_updates": "July 2026: Verified PSD3/PSR status (political agreement Nov 2025, texts agreed April 2026, awaiting Official Journal publication), EU Instant Payments Regulation milestones, Visa VAMP 2026 thresholds, Mastercard ECP thresholds, PCI DSS v4.0.1 as sole active version, and Stripe Managed Payments general-availability status against primary sources. March 2026: Refreshed Stripe checkout and billing sources with Payment Links, flexible billing mode, Subscription Schedules, PayPal, and Pay by Bank. Added RevenueCat Web Billing and LemonSqueezy usage-based billing. Updated Open Banking adoption sources and replaced broad Braintree EOL wording with current PayPal deprecation-policy sources.",
+    "title": "Software Payments - Sources",
+    "description": "Production-grade payment integration for Stripe, Paddle, Adyen, and more. Use when implementing checkout, subscriptions, webhooks, billing, tax/VAT, merchant of record, marketplaces, mobile subscriptions, or payment methods."
+  },
+  "categories": {
+    "stripe_core": [
+      {
+        "name": "Stripe Documentation",
+        "url": "https://docs.stripe.com/",
+        "type": "documentation",
+        "description": "Official Stripe API documentation, guides, and reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe API Reference",
+        "url": "https://docs.stripe.com/api",
+        "type": "reference",
+        "description": "Complete API reference for all Stripe resources.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe API Changelog",
+        "url": "https://docs.stripe.com/changelog",
+        "type": "changelog",
+        "description": "Breaking changes, new features, deprecations per API version.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe Sessions 2025 Updates",
+        "url": "https://stripe.com/blog/top-product-updates-sessions-2025",
+        "type": "announcement",
+        "description": "Major product announcements including Managed Payments MoR.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "stripe_checkout": [
+      {
+        "name": "Stripe Checkout Documentation",
+        "url": "https://docs.stripe.com/payments/checkout",
+        "type": "guide",
+        "description": "Hosted checkout implementation, payment methods, customization.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe Elements Documentation",
+        "url": "https://docs.stripe.com/payments/elements",
+        "type": "guide",
+        "description": "Embedded payment UI components for custom checkout.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Dynamic Payment Methods",
+        "url": "https://docs.stripe.com/payments/payment-methods/dynamic-payment-methods",
+        "type": "guide",
+        "description": "Let Stripe auto-select optimal payment methods by region/device.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe Payment Links",
+        "url": "https://docs.stripe.com/payment-links",
+        "type": "guide",
+        "description": "No-code hosted payment links for one-time purchases and subscriptions.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe PayPal Activation",
+        "url": "https://docs.stripe.com/payments/paypal/activate",
+        "type": "guide",
+        "description": "Enable PayPal as a Stripe payment method in supported regions.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "stripe_billing": [
+      {
+        "name": "Stripe Billing Documentation",
+        "url": "https://docs.stripe.com/billing",
+        "type": "guide",
+        "description": "Subscription billing, invoicing, meters, proration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe Billing Meters",
+        "url": "https://docs.stripe.com/billing/subscriptions/usage-based/recording-usage",
+        "type": "guide",
+        "description": "Usage-based billing with meters for API calls, tokens, etc.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe Customer Portal",
+        "url": "https://docs.stripe.com/customer-management/integrate-customer-portal",
+        "type": "guide",
+        "description": "Self-service subscription management for customers.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Stripe Pricing Strategies",
+        "url": "https://docs.stripe.com/products-prices/pricing-models",
+        "type": "guide",
+        "description": "Flat rate, per-seat, usage-based, tiered pricing models.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Stripe Revenue Recovery",
+        "url": "https://docs.stripe.com/billing/revenue-recovery",
+        "type": "guide",
+        "description": "Dunning, smart retries, and failed payment recovery.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe Entitlements",
+        "url": "https://docs.stripe.com/billing/entitlements",
+        "type": "guide",
+        "description": "Feature gating via Stripe Entitlements API (2025+).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe Billing Mode",
+        "url": "https://docs.stripe.com/billing/subscriptions/billing-mode",
+        "type": "guide",
+        "description": "Classic vs flexible billing mode, including mixed-interval subscriptions.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe Subscription Schedules",
+        "url": "https://docs.stripe.com/billing/subscriptions/subscription-schedules",
+        "type": "guide",
+        "description": "Plan phased billing changes, future upgrades, and contract starts.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "stripe_webhooks": [
+      {
+        "name": "Stripe Webhooks Documentation",
+        "url": "https://docs.stripe.com/webhooks",
+        "type": "guide",
+        "description": "Webhook setup, signature verification, event types, retry logic.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe Webhook Best Practices",
+        "url": "https://www.stigg.io/blog-posts/best-practices-i-wish-we-knew-when-integrating-stripe-webhooks",
+        "type": "blog",
+        "description": "Real-world webhook integration lessons and patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Stripe Idempotency",
+        "url": "https://stripe.com/blog/idempotency",
+        "type": "blog",
+        "description": "Official Stripe blog on designing robust APIs with idempotency.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Stripe Advanced Error Handling",
+        "url": "https://docs.stripe.com/error-low-level",
+        "type": "guide",
+        "description": "Error types, retry strategies, idempotency key behavior.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "stripe_security": [
+      {
+        "name": "Stripe Security Documentation",
+        "url": "https://docs.stripe.com/security",
+        "type": "guide",
+        "description": "PCI compliance, security best practices, data handling.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Stripe Radar (Fraud)",
+        "url": "https://docs.stripe.com/radar",
+        "type": "guide",
+        "description": "ML-based fraud prevention, rules, risk scoring.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "stripe_testing": [
+      {
+        "name": "Stripe Testing Documentation",
+        "url": "https://docs.stripe.com/testing",
+        "type": "guide",
+        "description": "Test mode, test cards, simulating events, Stripe CLI.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe CLI Documentation",
+        "url": "https://docs.stripe.com/stripe-cli",
+        "type": "tool",
+        "description": "Local webhook testing, event triggering, log tailing.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "stripe_connect": [
+      {
+        "name": "Stripe Connect Overview",
+        "url": "https://docs.stripe.com/connect",
+        "type": "guide",
+        "description": "Marketplace and multi-party payment patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "stripe_managed_payments": [
+      {
+        "name": "Stripe Managed Payments",
+        "url": "https://docs.stripe.com/payments/managed-payments",
+        "type": "guide",
+        "description": "Stripe merchant-of-record offering, GA as of 2026, eligibility-gated rollout for digital-product sellers.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe Pay by Bank",
+        "url": "https://docs.stripe.com/payments/pay-by-bank",
+        "type": "guide",
+        "description": "Stripe account-to-account payment method for supported markets.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "stripe_sdks": [
+      {
+        "name": "stripe-node (Server SDK)",
+        "url": "https://github.com/stripe/stripe-node",
+        "type": "library",
+        "description": "Official Node.js/TypeScript Stripe SDK.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "@stripe/stripe-js (Browser SDK)",
+        "url": "https://github.com/stripe/stripe-js",
+        "type": "library",
+        "description": "Stripe.js loader for browser-side checkout and Elements.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "stripe-python",
+        "url": "https://github.com/stripe/stripe-python",
+        "type": "library",
+        "description": "Official Python Stripe SDK.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "stripe-go",
+        "url": "https://github.com/stripe/stripe-go",
+        "type": "library",
+        "description": "Official Go Stripe SDK.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "paddle": [
+      {
+        "name": "Paddle Documentation",
+        "url": "https://developer.paddle.com/",
+        "type": "documentation",
+        "description": "Paddle billing API, checkout, webhooks, subscriptions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Paddle Billing API",
+        "url": "https://developer.paddle.com/api-reference/overview",
+        "type": "reference",
+        "description": "Complete Paddle API reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Paddle Retain",
+        "url": "https://www.paddle.com/retain",
+        "type": "product",
+        "description": "Dunning and churn reduction tool built into Paddle.",
+        "update_frequency": "active",
+        "access": "commercial",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Paddle vs Stripe Comparison",
+        "url": "https://www.paddle.com/compare/stripe",
+        "type": "comparison",
+        "description": "Official Paddle comparison against Stripe.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "lemonsqueezy": [
+      {
+        "name": "LemonSqueezy Documentation",
+        "url": "https://docs.lemonsqueezy.com/",
+        "type": "documentation",
+        "description": "LemonSqueezy API, checkout, webhooks, subscriptions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LemonSqueezy API Reference",
+        "url": "https://docs.lemonsqueezy.com/api",
+        "type": "reference",
+        "description": "Complete LemonSqueezy API reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Stripe + LemonSqueezy Update",
+        "url": "https://www.lemonsqueezy.com/blog/stripe-lemon-squeezy-update-2025",
+        "type": "announcement",
+        "description": "Integration progress after Stripe acquisition.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LemonSqueezy Usage-Based Billing",
+        "url": "https://docs.lemonsqueezy.com/help/products/usage-based-billing",
+        "type": "guide",
+        "description": "Usage records, billing periods, and overage billing in LemonSqueezy.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "revenuecat": [
+      {
+        "name": "RevenueCat Documentation",
+        "url": "https://www.revenuecat.com/docs/",
+        "type": "documentation",
+        "description": "RevenueCat SDK, API, webhooks, entitlements for mobile.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "RevenueCat API Reference",
+        "url": "https://www.revenuecat.com/docs/api-v2/overview",
+        "type": "reference",
+        "description": "Server-side API for subscription management.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "RevenueCat React Native SDK",
+        "url": "https://www.revenuecat.com/docs/getting-started/installation/reactnative",
+        "type": "guide",
+        "description": "React Native in-app purchase integration.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "RevenueCat Web Billing Overview",
+        "url": "https://www.revenuecat.com/docs/web/web-billing/overview",
+        "type": "guide",
+        "description": "RevenueCat web checkout and shared entitlement model.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "RevenueCat Stripe Integration",
+        "url": "https://www.revenuecat.com/docs/web/integrations/stripe",
+        "type": "guide",
+        "description": "Sync RevenueCat web billing with Stripe as the billing engine.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "adyen": [
+      {
+        "name": "Adyen Documentation",
+        "url": "https://docs.adyen.com/",
+        "type": "documentation",
+        "description": "Official Adyen integration guides, payment methods, and platform docs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Adyen API Explorer",
+        "url": "https://docs.adyen.com/api-explorer/",
+        "type": "reference",
+        "description": "Complete Adyen API reference with interactive examples.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Adyen for Platforms",
+        "url": "https://docs.adyen.com/platforms",
+        "type": "guide",
+        "description": "Marketplace and multi-party payment patterns (equivalent to Stripe Connect).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Adyen GitHub",
+        "url": "https://github.com/adyen",
+        "type": "library",
+        "description": "Official SDKs, plugins, and example integrations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "chargebee": [
+      {
+        "name": "Chargebee Documentation",
+        "url": "https://www.chargebee.com/docs",
+        "type": "documentation",
+        "description": "Subscription billing, invoicing, revenue recognition, checkout.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Chargebee API Reference",
+        "url": "https://apidocs.chargebee.com/docs/api/getting-started",
+        "type": "reference",
+        "description": "Complete Chargebee REST API reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Chargebee RevRec",
+        "url": "https://www.chargebee.com/docs/revrec/getting-started-with-revrec/about-revrec",
+        "type": "product",
+        "description": "ASC 606 / IFRS 15 compliant revenue recognition.",
+        "update_frequency": "active",
+        "access": "commercial",
+        "add_as_web_search": false
+      }
+    ],
+    "recurly": [
+      {
+        "name": "Recurly Documentation",
+        "url": "https://docs.recurly.com/",
+        "type": "documentation",
+        "description": "Subscription billing, dunning, revenue recovery.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Recurly API Reference",
+        "url": "https://recurly.com/developers/api/v2021-02-25/",
+        "type": "reference",
+        "description": "Complete Recurly REST API reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "lago": [
+      {
+        "name": "Lago Documentation",
+        "url": "https://docs.getlago.com/",
+        "type": "documentation",
+        "description": "Open-source usage-based billing: metering, aggregation, invoicing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Lago GitHub",
+        "url": "https://github.com/getlago/lago",
+        "type": "library",
+        "description": "Open-source billing engine (MIT license). Self-hostable.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Lago API Reference",
+        "url": "https://docs.getlago.com/api-reference/intro",
+        "type": "reference",
+        "description": "Lago REST API for metering, subscriptions, invoicing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "braintree_deprecated": [
+      {
+        "name": "Braintree Documentation",
+        "url": "https://developer.paypal.com/braintree/docs/",
+        "type": "documentation",
+        "description": "Legacy Braintree documentation. Use current PayPal deprecation policy before recommending it.",
+        "update_frequency": "declining",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Braintree Client SDK Deprecation Policy",
+        "url": "https://developer.paypal.com/braintree/docs/guides/client-sdk/deprecation-policy",
+        "type": "policy",
+        "description": "Official PayPal policy for deprecated Braintree client SDKs and support windows.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Braintree Drop-in Deprecation Notice",
+        "url": "https://developer.paypal.com/braintree/docs/guides/drop-in/overview/ios/v7/",
+        "type": "notice",
+        "description": "Official Drop-in deprecation timing and migration guidance.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PayPal Commerce Platform",
+        "url": "https://developer.paypal.com/docs/multiparty/",
+        "type": "documentation",
+        "description": "Modern PayPal API stack and common migration target from older Braintree surfaces.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "gocardless": [
+      {
+        "name": "GoCardless Documentation",
+        "url": "https://developer.gocardless.com/",
+        "type": "documentation",
+        "description": "Direct Debit specialist: Bacs (UK), SEPA (EU), ACH (US). Recurring bank payments.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GoCardless API Reference",
+        "url": "https://developer.gocardless.com/api-reference/",
+        "type": "reference",
+        "description": "Complete GoCardless REST API for mandates, payments, and billing requests.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "mollie": [
+      {
+        "name": "Mollie Documentation",
+        "url": "https://docs.mollie.com/docs/getting-started",
+        "type": "documentation",
+        "description": "European multi-method payment processor: cards, iDEAL, Bancontact, SEPA DD, Klarna.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mollie API Reference",
+        "url": "https://docs.mollie.com/reference/payments-api",
+        "type": "reference",
+        "description": "Complete Mollie REST API for payments, subscriptions, and methods.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "square": [
+      {
+        "name": "Square Developer Documentation",
+        "url": "https://developer.squareup.com/docs",
+        "type": "documentation",
+        "description": "Online payments, POS, invoicing, banking. Strong UK presence.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Square UK Pricing",
+        "url": "https://squareup.com/gb/en/pricing",
+        "type": "reference",
+        "description": "UK pricing: 1.75% in-person, 1.4%+25p EU cards online.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "klarna": [
+      {
+        "name": "Klarna Developer Documentation",
+        "url": "https://docs.klarna.com/",
+        "type": "documentation",
+        "description": "BNPL integration: Pay in 3/4, Pay Later, Pay Now. UK/EU e-commerce.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "open_banking": [
+      {
+        "name": "TrueLayer Documentation",
+        "url": "https://docs.truelayer.com/",
+        "type": "documentation",
+        "description": "Open Banking payments (A2A) and data API. UK/EU bank-to-bank.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "UK Open Banking",
+        "url": "https://www.openbanking.org.uk/",
+        "type": "standard",
+        "description": "UK Open Banking standards, statistics, and regulated providers.",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Open Banking UK 15M+ Users Update",
+        "url": "https://www.openbanking.org.uk/news/open-banking-surges-to-15-million-uk-users-as-july-marks-record-adoption/",
+        "type": "news",
+        "description": "Official Open Banking adoption milestone update from Open Banking Limited.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "FCA Open Banking 2025 Progress",
+        "url": "https://www.fca.org.uk/news/news-stories/open-banking-2025-progress",
+        "type": "regulatory",
+        "description": "FCA update on open banking progress and market direction.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "checkout_com": [
+      {
+        "name": "Checkout.com Documentation",
+        "url": "https://www.checkout.com/docs",
+        "type": "documentation",
+        "description": "Enterprise online payments: cards, Apple Pay, Google Pay. Interchange++ pricing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "payment_standards": [
+      {
+        "name": "PCI DSS Compliance Guide",
+        "url": "https://www.pcisecuritystandards.org/",
+        "type": "standard",
+        "description": "Payment Card Industry Data Security Standard.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Strong Customer Authentication (SCA)",
+        "url": "https://docs.stripe.com/strong-customer-authentication",
+        "type": "guide",
+        "description": "EU SCA requirements for payment authentication (3D Secure).",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "EMVCo EMV 3-D Secure",
+        "url": "https://www.emvco.com/emv-technologies/3-d-secure/",
+        "type": "standard",
+        "description": "Current EMV 3DS specification (2.3.1) and roadmap toward 2.4.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ECB Instant Payments Regulation Overview",
+        "url": "https://www.ecb.europa.eu/paym/retail/instant_payments/html/instant_payments_regulation.en.html",
+        "type": "regulatory",
+        "description": "Official ECB summary of EU Instant Payments Regulation milestones for euro and non-euro member states.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "European Parliament Legislative Train — Payment Services",
+        "url": "https://www.europarl.europa.eu/legislative-train/theme-an-economy-that-works-for-people/file-revision-of-eu-rules-on-payment-services",
+        "type": "regulatory",
+        "description": "Authoritative tracker for PSD3 / PSR legislative status and timeline.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Visa Acquirer Monitoring Program (VAMP) Fact Sheet",
+        "url": "https://corporate.visa.com/content/dam/VCOM/corporate/visa-perspectives/security-and-trust/documents/visa-acquirer-monitoring-program-fact-sheet-2025.pdf",
+        "type": "reference",
+        "description": "Official Visa fact sheet for VAMP fraud/dispute ratio thresholds and enforcement.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mastercard Rules for Merchants",
+        "url": "https://www.mastercard.com/global/en/business/support/rules.html",
+        "type": "reference",
+        "description": "Mastercard chargeback and compliance program rules, including ECP thresholds.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PCI SSC Future-Dated Requirements Guidance",
+        "url": "https://blog.pcisecuritystandards.org/now-is-the-time-for-organizations-to-adopt-the-future-dated-requirements-of-pci-dss-v4-x",
+        "type": "guide",
+        "description": "Official PCI SSC guidance confirming v4.0.1 status and the 31 March 2025 future-dated requirement deadline.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "FCA Regulating Buy Now Pay Later",
+        "url": "https://www.fca.org.uk/firms/regulating-buy-now-pay-later",
+        "type": "regulatory",
+        "description": "FCA's official BNPL (deferred payment credit) regime, in force 15 July 2026.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  },
+  "research_tools": [
+    {
+      "name": "Stripe Dashboard",
+      "url": "https://dashboard.stripe.com/",
+      "purpose": "Manage products, prices, subscriptions, view logs.",
+      "use_case": "Configuration and debugging."
+    },
+    {
+      "name": "Stripe CLI",
+      "url": "https://docs.stripe.com/stripe-cli",
+      "purpose": "Local webhook testing, event simulation.",
+      "use_case": "Development and testing."
+    },
+    {
+      "name": "Stripe Tax Calculator",
+      "url": "https://dashboard.stripe.com/tax",
+      "purpose": "Tax rate lookup and calculation.",
+      "use_case": "Regional pricing validation."
+    }
+  ],
+  "communities": [
+    {
+      "name": "Stripe Discord",
+      "url": "https://discord.gg/stripe",
+      "platform": "discord",
+      "focus": "Stripe integration help, community patterns."
+    },
+    {
+      "name": "r/stripe",
+      "url": "https://reddit.com/r/stripe",
+      "platform": "reddit",
+      "focus": "Stripe integration discussions, troubleshooting."
+    },
+    {
+      "name": "Indie Hackers",
+      "url": "https://www.indiehackers.com/",
+      "platform": "forum",
+      "focus": "Payment integration discussions for indie products."
+    }
+  ]
+}

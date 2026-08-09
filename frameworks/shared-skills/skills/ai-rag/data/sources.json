@@ -1,0 +1,584 @@
+{
+  "metadata": {
+    "skill": "ai-rag",
+    "updated": "2026-08-09",
+    "total_sources": 60,
+    "description": "Primary-source catalog for retrieval engineering: retrieval mode choice, hosted retrieval, tool-first/MCP, crawl and research ingestion, hybrid and multivector search, multimodal and graph retrieval, evaluation, observability, and 2025-2026 research additions (hallucination detection, corpus poisoning, LazyGraphRAG, LightRAG, Jina reranker-v3, iterative retrieval, long-context degradation, agentic RAG query planning, SDAG sparse-attention poisoning defense, ColBERT-Att, AMES, OpenAI Responses API file search, streaming trust-weight EMA for graph-element confidence).",
+    "version": "5.6",
+    "title": "AI RAG - Sources",
+    "last_updated": "2026-08-09"
+  },
+  "categories": {
+    "foundational_research": [
+      {
+        "name": "The Semantic Illusion: Certified Limits of Embedding-Based Hallucination Detection in RAG Systems",
+        "url": "https://arxiv.org/abs/2512.15068",
+        "type": "research",
+        "relevance": "Single-author preprint (grade C). Embedding/NLI hallucination detectors yield ~100% FPR at high recall on real RLHF-model hallucinations (HaluEval); GPT-4-as-judge ≈7% FPR. Use LLM reasoning judge for production safety gates.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "A-RAG: Scaling Agentic RAG via Hierarchical Retrieval Interfaces",
+        "url": "https://arxiv.org/abs/2602.03442",
+        "type": "research",
+        "relevance": "Preprint (grade C, verified May 2026). Proposes hierarchical retrieval tools (keyword search, semantic search, chunk reading) so the agent adaptively selects retrieval granularity per sub-question. Reports OOD QA benchmark gains with comparable or fewer retrieved tokens vs fixed-pipeline RAG. Supports query-planning-first and multi-granularity retrieval patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "SDAG: Sparse Document Attention for Corpus Poisoning Defense",
+        "url": "https://arxiv.org/abs/2602.04711",
+        "type": "research",
+        "relevance": "Preprint (grade C, verified May 2026). Block-sparse attention prevents cross-document adversarial influence at generation time. No fine-tuning required. Complements hybrid retrieval (retrieval-time defense) with a generation-time defense layer. Test against your own poisoning corpus before relying on in production.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Iterative Retrieval for Multi-Hop QA (ChemKGMultiHopQA)",
+        "url": "https://arxiv.org/abs/2601.19827",
+        "type": "research",
+        "relevance": "Preprint (grade B, chemistry domain). Iterative retrieve-refine beats all-gold-context by up to +25.6pp (non-reasoning) / ~+9.7pp (reasoning) on multi-hop questions. Supports using agentic loops for multi-hop, not simple lookup.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Long-Context Retrieval Degradation with Hard Negatives (replication)",
+        "url": "https://arxiv.org/abs/2501.01880",
+        "type": "research",
+        "relevance": "Preprint replication of SIGIR 2025 / ICLR 2025 finding (grade B). Increasing retrieved top-k degrades quality when hard negatives are present; rerank before context packing.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+        "url": "https://arxiv.org/abs/2005.11401",
+        "type": "research",
+        "relevance": "Foundational framing for separating retrieval and generation responsibilities.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "BEIR Benchmark",
+        "url": "https://arxiv.org/abs/2104.08663",
+        "type": "research",
+        "relevance": "Durable benchmark reference for retrieval quality across heterogeneous datasets.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "HyDE: Hypothetical Document Embeddings",
+        "url": "https://arxiv.org/abs/2212.10496",
+        "type": "research",
+        "relevance": "Useful for query-side retrieval improvement when user queries are underspecified.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Seven Failure Points in RAG Systems",
+        "url": "https://arxiv.org/abs/2401.05856",
+        "type": "research",
+        "relevance": "Failure taxonomy for chunking, retrieval, ranking, synthesis, and citations.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Self-RAG",
+        "url": "https://arxiv.org/abs/2310.11511",
+        "type": "research",
+        "relevance": "Reference for adaptive retrieval and self-correction patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ColBERT",
+        "url": "https://arxiv.org/abs/2004.12832",
+        "type": "research",
+        "relevance": "Foundational late-interaction retrieval reference for multivector-style precision upgrades.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "hosted_retrieval_and_protocols": [
+      {
+        "name": "Anthropic Web Search Tool Reference",
+        "url": "https://platform.claude.com/docs/en/docs/build-with-claude/tool-use/web-search-tool",
+        "type": "documentation",
+        "relevance": "Primary source for Anthropic managed web retrieval. Current versions: web_search_20260209 (dynamic filtering, recommended) and web_search_20250305 (basic). Supports allowed_domains, blocked_domains, max_uses, user_location. $10/1k searches. Not available on Bedrock; Vertex AI basic only.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI File Search Guide (Responses API)",
+        "url": "https://platform.openai.com/docs/guides/file-search",
+        "type": "documentation",
+        "relevance": "Primary source for provider-managed hosted retrieval via the Responses API + Vector Store API. The Assistants API file-search is deprecated April 2026, shutdown August 26 2026 — new work must use the Responses API.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol Introduction",
+        "url": "https://modelcontextprotocol.io/introduction",
+        "type": "specification",
+        "relevance": "Primary source for tool-first and resource-based retrieval over MCP.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Claude Code MCP",
+        "url": "https://docs.anthropic.com/en/docs/claude-code/mcp",
+        "type": "documentation",
+        "relevance": "Operational reference for MCP in an agent environment and tool/resource access patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Contextual Retrieval",
+        "url": "https://www.anthropic.com/news/contextual-retrieval",
+        "type": "technique",
+        "relevance": "Primary source for chunk-context augmentation as an alternative to full late chunking.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "vector_and_search_platforms": [
+      {
+        "name": "FAISS",
+        "url": "https://faiss.ai/",
+        "type": "library",
+        "relevance": "Reference for flat and ANN indexing fundamentals.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "pgvector",
+        "url": "https://github.com/pgvector/pgvector",
+        "type": "library",
+        "relevance": "Primary source for Postgres-native vector retrieval.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "pgvectorscale",
+        "url": "https://github.com/timescale/pgvectorscale",
+        "type": "library",
+        "relevance": "Primary source for pgvector scaling and DiskANN-style indexing in Postgres stacks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Qdrant Multivector Representations",
+        "url": "https://qdrant.tech/documentation/tutorials-search-engineering/using-multivector-representations/",
+        "type": "documentation",
+        "relevance": "Primary source for multivector retrieval and late-interaction deployment patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Weaviate Vector Search",
+        "url": "https://docs.weaviate.io/weaviate/concepts/search/vector-search",
+        "type": "documentation",
+        "relevance": "Primary source for vector search and named-vector concepts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Elasticsearch Documentation",
+        "url": "https://www.elastic.co/guide/index.html",
+        "type": "documentation",
+        "relevance": "Primary source for hybrid search and ranking pipelines at scale.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenSearch Documentation",
+        "url": "https://opensearch.org/docs/latest/",
+        "type": "documentation",
+        "relevance": "Open-source reference for hybrid retrieval and search operations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LanceDB Documentation",
+        "url": "https://lancedb.com/docs/",
+        "type": "documentation",
+        "relevance": "Primary source for embedded and local-first retrieval patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Sentence Transformers",
+        "url": "https://www.sbert.net/",
+        "type": "framework",
+        "relevance": "Open-weight embedding and reranking ecosystem for baseline retrieval experiments.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Jina reranker-v3",
+        "url": "https://huggingface.co/jinaai/jina-reranker-v3",
+        "type": "model",
+        "relevance": "Preprint (arXiv 2509.25085, verified July 2026) + HF corroboration (grade B). ~0.6B params (built on Qwen3-0.6B), listwise causal ('last but not late interaction') architecture, up to 64-doc window within 131K token context. BEIR 61.94 nDCG@10 (SOTA among evaluated rerankers at publication), MIRACL 66.50 (18 langs); beats bge-reranker-v2-m3 (same param count) and mxbai-rerank-large-v2 (2.5x larger) on BEIR. License CC BY-NC 4.0 (non-commercial) — Jina AI is now part of Elastic; commercial use requires an Elastic sales license waiver, and roadmap/support continuity should be confirmed post-acquisition before depending on this model. Verify current standing on MTEB/Agentset leaderboard before citing as SOTA.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Zerank-2",
+        "url": "https://huggingface.co/zeroentropy/zerank-2",
+        "type": "model",
+        "relevance": "Top-ranked open-weight reranker on Agentset Reranker Leaderboard (Feb 2026). Verify current standing before citing as SOTA.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cohere Rerank 4 Pro",
+        "url": "https://docs.cohere.com/reference/rerank",
+        "type": "model",
+        "relevance": "Top-ranked commercial reranker on Agentset Reranker Leaderboard (Feb 2026). Verify current standing and pricing before citing as SOTA.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Voyage rerank-2.5",
+        "url": "https://docs.voyageai.com/docs/reranker",
+        "type": "model",
+        "relevance": "Top-ranked commercial reranker on Agentset Reranker Leaderboard (Feb 2026). Verify current standing and pricing before citing as SOTA.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Voyage 4 Large",
+        "url": "https://docs.voyageai.com/docs/embeddings",
+        "type": "model",
+        "relevance": "MoE embedding model from Voyage AI. Verify current MTEB standing and pricing before citing as SOTA.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Long-Context Retrieval Degradation — SIGIR 2025",
+        "url": "https://doi.org/10.1145/3726302.3731690",
+        "type": "research",
+        "relevance": "Peer-reviewed (grade B, SIGIR 2025 + ICLR 2025 + replication arXiv 2501.01880). Retrieved top-k quality rises then degrades when hard negatives are present. Rerank before context packing.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "multimodal_and_graph_retrieval": [
+      {
+        "name": "Microsoft GraphRAG",
+        "url": "https://microsoft.github.io/graphrag/",
+        "type": "documentation",
+        "relevance": "Primary source for graph-based retrieval and community summary patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft BenchmarkQED — LazyGraphRAG Evaluation",
+        "url": "https://github.com/microsoft/benchmark-qed",
+        "type": "research",
+        "relevance": "Corporate study (grade B, MIT license, multi-baseline). LazyGraphRAG achieves ~700× lower query cost than full GraphRAG Global at comparable global-query quality. Recommended default starting point for graph-augmented retrieval.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LightRAG",
+        "url": "https://github.com/HKUDS/LightRAG",
+        "type": "library",
+        "relevance": "Framework-agnostic dual-level graph + vector RAG (MIT). Cost-dominant alternative to Microsoft GraphRAG for teams not on the MS stack. Published benchmarks: ~$0.50 / ~3 min to index 500 pages; ~70-90% of full GraphRAG quality across domains. Verify on your own corpus before citing numbers.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ColPali",
+        "url": "https://github.com/illuin-tech/colpali",
+        "type": "library",
+        "relevance": "Primary source for visual-document retrieval over PDFs and page images.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ColBERT-Att (arXiv 2603.25248)",
+        "url": "https://arxiv.org/abs/2603.25248",
+        "type": "research",
+        "relevance": "ECIR 2026 LIR workshop. Late interaction + attention weights on query and document terms; recall gains on MS-MARCO, BEIR, and LoTTE. Relevant for PDF page retrieval where standard ColBERT precision is insufficient.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "AMES — Approximate Multimodal Enterprise Search (arXiv 2603.13537)",
+        "url": "https://arxiv.org/abs/2603.13537",
+        "type": "research",
+        "relevance": "ECIR 2026 LIR workshop. Late interaction for cross-modal retrieval (text + image + table) without modality-specific logic; two-stage pipeline; ViDoRe V3 benchmark. Relevant for mixed-modality PDF corpora.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Unstructured Documentation",
+        "url": "https://docs.unstructured.io/",
+        "type": "documentation",
+        "relevance": "Primary source for parsing mixed documents, PDFs, tables, and images before retrieval.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "aws_native_rag": [
+      {
+        "name": "Amazon Bedrock Embeddings — Amazon Nova 2 Multimodal",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html",
+        "type": "documentation",
+        "relevance": "AWS-native default embedder for Bedrock Knowledge Bases as of 2026; supersedes Titan Embeddings for new KB builds. Verify current Bedrock embeddings catalog before selecting.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "verify_against": "https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html"
+      },
+      {
+        "name": "Amazon Textract",
+        "url": "https://docs.aws.amazon.com/textract/latest/dg/what-is.html",
+        "type": "documentation",
+        "relevance": "AWS-native OCR and document extraction service. Returns form key-value pairs, table cells, and multi-page structure beyond generic PDF text extraction. AWS-native preprocessing step before Bedrock KB ingestion for scanned or form-heavy documents.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "verify_against": "https://aws.amazon.com/textract/"
+      },
+      {
+        "name": "paperless-ngx REST API",
+        "url": "https://docs.paperless-ngx.com/api/",
+        "type": "documentation",
+        "relevance": "Self-hosted document archive (scanned PDFs, invoices, contracts). REST API at /api/documents/ and consume folder ingestion. Documents exit pre-OCR'd with metadata, usable as a corpus source for Bedrock KB or custom RAG pipelines.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "verify_against": "https://github.com/paperless-ngx/paperless-ngx"
+      },
+      {
+        "name": "Amazon Bedrock Data Automation (BDA)",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/bda.html",
+        "type": "documentation",
+        "relevance": "AWS-recommended intelligent document processing front door for Bedrock RAG pipelines (March 2026 unification). One API classifies and extracts via foundation models, flat per-doc pricing. Uses Textract as OCR layer for complex docs in 'Bedrock Pipeline' mode; standalone Textract remains best for high-volume standardized formats (~75% cheaper per doc, ~95%+ compliance accuracy).",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "verify_against": "https://aws.amazon.com/bedrock/data-automation/"
+      },
+      {
+        "name": "Amazon Bedrock Rerank API",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html",
+        "type": "documentation",
+        "relevance": "Managed reranking wired directly into Bedrock KB retrieval (June 2026). Available models: Cohere Rerank 3.5 and Amazon Rerank. Removes the need for a separate reranker call after Retrieve. Cohere Command R/R+ are now legacy; active Cohere surface in Bedrock = Embed v3/v4 + Rerank 3.5.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "verify_against": "https://aws.amazon.com/bedrock/"
+      },
+      {
+        "name": "Amazon Kendra GenAI Index",
+        "url": "https://docs.aws.amazon.com/kendra/latest/dg/what-is-kendra.html",
+        "type": "documentation",
+        "relevance": "Managed retriever (hybrid keyword+vector + semantic + built-in reranker). Index once, reuse across Bedrock Knowledge Bases AND Amazon Q Business. Bedrock KB can be built on top of it. AWS production enterprise-RAG stack: Kendra GenAI Index + Retriever API + Bedrock FM.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "verify_against": "https://aws.amazon.com/kendra/"
+      },
+      {
+        "name": "Amazon Bedrock Guardrails",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+        "type": "documentation",
+        "relevance": "AWS-native safety/governance layer for RAG. Contextual grounding check (grounding + relevance thresholds) is the managed hallucination/faithfulness gate; plus PII redaction, denied topics, prompt-attack detection, Automated Reasoning. Integrates with RetrieveAndGenerate and the standalone ApplyGuardrail API.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "verify_against": "https://aws.amazon.com/bedrock/guardrails/"
+      }
+    ],
+    "research_and_ingestion_tooling": [
+      {
+        "name": "Firecrawl",
+        "url": "https://github.com/mendableai/firecrawl",
+        "type": "tooling",
+        "relevance": "Reference for website crawling, extraction, and Markdown-first ingestion before retrieval.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "GPT Researcher",
+        "url": "https://github.com/assafelovic/gpt-researcher",
+        "type": "tooling",
+        "relevance": "Reference for multi-source research loops that gather evidence before synthesis.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "dlt",
+        "url": "https://github.com/dlt-hub/dlt",
+        "type": "tooling",
+        "relevance": "Reference for recurring API and SaaS ingestion pipelines that feed retrieval systems.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "simonw/llm",
+        "url": "https://github.com/simonw/llm",
+        "type": "tooling",
+        "relevance": "Reference for lightweight local and remote LLM workflows during retrieval prototyping and evaluation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "evaluation_frameworks": [
+      {
+        "name": "Ragas Documentation",
+        "url": "https://docs.ragas.io/",
+        "type": "framework",
+        "relevance": "Primary source for RAG evaluation workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ragas Test Data Generation",
+        "url": "https://docs.ragas.io/en/stable/concepts/test_data_generation/rag/",
+        "type": "documentation",
+        "relevance": "Primary source for synthetic testset generation and knowledge-graph-assisted eval scaffolding.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ragas Agent Evaluation",
+        "url": "https://docs.ragas.io/en/stable/tutorials/agent/",
+        "type": "documentation",
+        "relevance": "Primary source for evaluating agentic retrieval and tool workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepEval",
+        "url": "https://github.com/confident-ai/deepeval",
+        "type": "framework",
+        "relevance": "Primary source for CI-friendly LLM and RAG evaluation tooling.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TruLens",
+        "url": "https://www.trulens.org/",
+        "type": "framework",
+        "relevance": "Primary source for instrumentation and production feedback loops for RAG apps.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "CCRS — Calibrated Confidence for RAG Systems (arXiv 2506.20128)",
+        "url": "https://arxiv.org/abs/2506.20128",
+        "type": "research",
+        "relevance": "Zero-shot LLM-as-judge RAG evaluation framework; no labeled data required. Cited in rag-evaluation-guide.md tooling section. Verify against your own corpus before production use.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "security_and_observability": [
+      {
+        "name": "PoisonedRAG — Corpus Poisoning Attack and Defense",
+        "url": "https://github.com/sleeepeer/PoisonedRAG",
+        "type": "research",
+        "relevance": "USENIX Security 2025 (peer-reviewed). ~5 injected adversarial docs → >90% ASR on vector-only RAG. BM25+vector hybrid (RRF, α≈0.3–0.7) drops gradient-guided adversarial co-retrieval from 38%→0%. Hybrid retrieval is an architectural poisoning defense.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "specification",
+        "relevance": "Threat model for prompt injection, data leakage, and insecure retrieval pipelines.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry GenAI Semantic Conventions",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "type": "specification",
+        "relevance": "Primary source for tracing model and retrieval events while noting the conventions continue to evolve.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "operational_brain_references": [
+      {
+        "name": "garrytan/gbrain",
+        "url": "https://github.com/garrytan/gbrain",
+        "type": "github_repo",
+        "relevance": "MIT-licensed operational agent-brain reference for routing relationship questions to typed graph traversal while using hybrid lexical + vector search for evidence text and citations.",
+        "license": "MIT",
+        "verified": "2026-05-18",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "topoteretes/cognee",
+        "url": "https://github.com/topoteretes/cognee",
+        "commit_sha": "a148eab58eb2f9769585f10da5486543c9ece457",
+        "type": "github_repo",
+        "relevance": "Apache-2.0 agent-memory/graph-RAG framework. Source for P-CS-5 in confidence-scoring.md: streaming per-element (node/edge) trust-weight update via exponential moving average (`stream_update_weight`, default alpha=0.1) applied at each feedback event with O(1) cost and no retrain pass, consumed downstream in retrieval scoring (brute_force_triplet_search.py). alpha=0.1 is cognee's own calibration, not a universal constant.",
+        "license": "Apache-2.0",
+        "verified": "2026-08-09",
+        "extracted_date": "2026-08-09",
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

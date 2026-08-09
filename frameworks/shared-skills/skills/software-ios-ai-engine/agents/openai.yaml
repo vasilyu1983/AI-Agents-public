@@ -1,0 +1,6 @@
+interface:
+  display_name: "iOS Local AI Engine"
+  short_description: "Design local iOS AI engines"
+  default_prompt: "Use $software-ios-ai-engine to design a local iOS AI engine with Apple Foundation Models, typed outputs, deterministic fallbacks, and cloud opt-in."
+policy:
+  allow_implicit_invocation: true

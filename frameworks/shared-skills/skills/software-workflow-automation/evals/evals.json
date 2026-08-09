@@ -1,0 +1,59 @@
+{
+  "skill_name": "software-workflow-automation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A SaaS company runs a critical billing workflow: when a subscription renews, it charges the payment processor, updates the customer record in the database, and sends a confirmation email. The workflow is currently implemented as a single n8n HTTP Request chain with no retry policy. The payment processor charges on the first HTTP request; retrying a failed POST will double-charge the customer. Design the correct retry and idempotency strategy, identify which steps are non-idempotent, and recommend whether n8n is the right platform for this workflow or if Temporal or Trigger.dev should be used instead.",
+      "expected_output": "The skill should identify the payment charge as a non-idempotent POST requiring an idempotency key, explain that n8n's default retry behavior will double-charge without idempotency guards, recommend moving the billing workflow to Temporal or Trigger.dev for durable execution semantics, and provide the idempotency key strategy (per-subscription-period key) for the payment step.",
+      "files": [],
+      "expectations": [
+        "The output identifies the payment charge POST as non-idempotent and requiring an idempotency key scoped to the subscription renewal period.",
+        "The output explains that n8n's connector retries do not carry idempotency keys by default and will cause double charges.",
+        "The output recommends Temporal or Trigger.dev v3 over n8n for this workflow, citing durable execution and deterministic retry semantics.",
+        "The output separates the three steps (charge, database update, email) by idempotency class: billable, replay-safe, and at-least-once acceptable.",
+        "The output specifies a dead-letter or failure handling path for exhausted payment retries."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A team is still running Trigger.dev v3 in mid-2026 and has 15 tasks defined, some of which have been running for days (long-running import jobs). Trigger.dev v3 stopped accepting new deploys on 2026-04-01 and was fully shut down on 2026-07-01. Outline the migration strategy to v4, explain how in-flight v3 runs should be handled given the shutdown deadline, identify the self-hosted infrastructure change required for v4, and list the top three code-level breaking changes they will encounter.",
+      "expected_output": "The skill should warn that v3 is already fully shut down as of the shutdown date and there is no fallback, recommend migrating to v4 immediately with staged rollout to staging first, explain that in-flight v3 runs could not survive past the shutdown date and must have been drained or re-run under v4 before then, identify the collapse of provider/coordinator/trigger-worker into a single supervisor process as the key self-hosted infrastructure change, and identify the deprecated sdk/v3 import path, mandatory queue predefinition, and unified lifecycle hook argument objects as top code-level breaking changes.",
+      "files": [],
+      "expectations": [
+        "The output states that Trigger.dev v3 is fully shut down (2026-07-01) with no fallback path, not merely deprecated or soon-to-be-deprecated.",
+        "The output recommends migrating to v4 with a staging deploy before production cutover, and warns that any migration attempted after the shutdown date has no v3 infrastructure left to fall back on.",
+        "The output identifies the single supervisor process (replacing the v3 provider/coordinator/trigger-worker split) as the new self-hosted infrastructure requirement for v4.",
+        "The output lists at least three code-level breaking changes: the deprecated `@trigger.dev/sdk/v3` import path, mandatory predefined queues via `queue()`, and unified lifecycle hook argument objects.",
+        "The output notes that Trigger.dev's outbound static IPs can change during a major-version migration and any IP allowlist should be updated."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A team is evaluating LangGraph vs Langflow for a production customer support agent that: classifies incoming tickets, routes them to the correct handler, calls external APIs to fetch customer context, and escalates to a human when confidence is low. The agent will handle 5,000 tickets per day and must be auditable. Compare the two options on testability, observability, durability, and operational maintainability. Recommend one for production and one for prototyping.",
+      "expected_output": "The skill should recommend LangGraph for production (code-first, testable, PostgresSaver for durability, LangSmith for observability) and Langflow for initial prototyping only. It should warn against keeping production agent logic in Langflow nodes, note that Langflow's ownership changed twice (DataStax acquired it, then IBM's acquisition of DataStax closed) and that the DataStax-hosted managed Langflow product was retired in early 2026, and call out LangGraph's invoke vs stream distinction for user-facing feedback.",
+      "files": [],
+      "expectations": [
+        "The output recommends LangGraph for production citing code-first testability, version control, and PostgresSaver durability.",
+        "The output recommends Langflow only for prototyping and explicitly warns against keeping production logic in Langflow nodes.",
+        "The output notes Langflow's DataStax-then-IBM ownership history and that the DataStax-hosted managed product was deprecated and shut down in early 2026, rather than treating DataStax as the current owner or host.",
+        "The output explains LangGraph's invoke vs stream distinction and recommends stream for user-facing ticket status feedback.",
+        "The output warns that LangGraph MemorySaver is not production-durable and requires PostgresSaver.",
+        "The output addresses auditability via LangSmith or equivalent structured run logging."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "A startup wants to build a self-hosted automation platform for internal operations: syncing CRM contacts to a data warehouse nightly, sending Slack alerts when deals close, and running a weekly revenue report. They have a Postgres database, one backend engineer, and do not want to operate a Temporal cluster. Evaluate n8n, Inngest, and Hatchet for this use case. Recommend one platform and explain when the team should consider migrating to code.",
+      "expected_output": "The skill should recommend n8n as the best fit for SaaS integration glue with limited engineering bandwidth, note n8n's self-hosted SQLite deprecation path for production use (recommend Postgres) and that Community Edition is fair-code licensed for internal use, warn about Inngest step credit costs for the nightly sync workload (hedged as volatile pricing), explain that Hatchet reached 1.0 in 2026 but still carries self-hosted operational overhead (Postgres-backed, mostly invite-only cloud), and define a clear escalation threshold for moving to custom code.",
+      "files": [],
+      "expectations": [
+        "The output recommends n8n for SaaS integration glue with many connectors and low engineering overhead.",
+        "The output notes n8n's SQLite deprecation path for production self-hosted use and recommends Postgres for the production instance.",
+        "The output warns that Inngest step credits accumulate quickly for high-volume nightly sync workloads, while hedging exact pricing as subject to change.",
+        "The output does not claim Hatchet is still pre-1.0 (it reached 1.0 on 2026-04-24); it instead weighs Hatchet's Postgres-only self-hosted operational overhead and limited/invite-only managed cloud availability as the operational risk.",
+        "The output defines a concrete threshold for migrating workflows to custom code (e.g., when correctness, testing, or SLA requirements exceed what a visual tool can safely provide).",
+        "The output identifies n8n's credential encryption key migration as a critical step when upgrading across a major version boundary."
+      ]
+    }
+  ]
+}

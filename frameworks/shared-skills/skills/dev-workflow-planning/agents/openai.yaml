@@ -1,0 +1,4 @@
+interface:
+  display_name: "Workflow Planning"
+  short_description: "Plans complex development workflows for Claude Code, Codex, and assistants"
+  default_prompt: "Use $dev-workflow-planning for Plans complex development workflows for Claude Code, Codex, and assistants. Use when breaking features, refactors, migrations, or parallel work into verified steps."

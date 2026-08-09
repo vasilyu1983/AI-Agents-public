@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Product Operating Model"
+  short_description: "Designs operating models for AI in product teams"
+  default_prompt: "Use $ai-product-operating-model for Designs operating models for AI in product teams. Use when planning platform ownership, provider strategy, data boundaries, evals, or sensitive-data controls."

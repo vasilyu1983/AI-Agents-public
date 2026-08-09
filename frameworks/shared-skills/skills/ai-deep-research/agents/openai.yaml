@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deep Research"
+  short_description: "Builds repeatable deep-research workflows for verified synthesis"
+  default_prompt: "Use $ai-deep-research for Builds repeatable deep-research workflows for verified synthesis. Use when producing evidence-backed briefs, comparisons, or research dossiers."

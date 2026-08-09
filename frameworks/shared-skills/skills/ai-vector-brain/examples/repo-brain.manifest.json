@@ -1,0 +1,20 @@
+{
+  "brain_id": "example-repo-brain",
+  "backend": "postgres_pgvector",
+  "corpus_type": "repo",
+  "embedding_model": "voyage-code-3@1024",
+  "embedding_model_alternatives": [
+    "openai/text-embedding-3-large@1024",
+    "voyage-4-large@1024",
+    "Qwen/Qwen3-Embedding-8B@3072",
+    "bge-m3@1024"
+  ],
+  "_model_strings_note": "Verify all model strings and dimensions against current vendor docs before use; embedding model APIs change frequently.",
+  "source_roots": ["."],
+  "source_excludes": ["**/node_modules/**", "**/.git/**", "**/dist/**", "**/build/**", "**/.venv/**"],
+  "chunking": {"strategy": "heading_and_code_boundary", "target_tokens": 500, "overlap_tokens": 50},
+  "retrieval": {"mode": "hybrid_rrf", "candidate_k": 50, "return_k": 10, "rrf_k": 60},
+  "freshness": {"mode": "git_diff", "max_staleness_hours": 24},
+  "eval": {"dataset": "evals/repo-retrieval.jsonl", "primary_metric": "path_recall@5", "min_value": 0.85}
+}
+

@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-remote-runtime",
+    "title": "AI Coding Agents Remote Runtime - Sources",
+    "description": "Official documentation and implementation references for remote coding-agent sessions, bridge transport, and local-UI remote-execution patterns",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 15,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en/",
+        "type": "documentation",
+        "relevance": "Primary runtime documentation for Claude Code modes and remote behavior",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Authoritative implementation reference for remote sessions, bridge transport, and SDK-to-REPL adaptation",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anthropic: Claude Code Best Practices",
+        "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+        "type": "guide",
+        "relevance": "Broader operational patterns relevant to multi-mode coding-agent runtimes",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "cross_runtime_references": [
+      {
+        "name": "Codex CLI Documentation",
+        "url": "https://github.com/openai/codex",
+        "type": "documentation",
+        "relevance": "Cross-runtime comparison point for remote-capable coding-agent CLIs",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex App Server Daemon Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/app-server-daemon/README.md",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for app-server daemon lifecycle, remote-control bootstrap, JSON lifecycle output, update loop, and serialized mutations",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex App Server Protocol Exporter Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/app-server-protocol/src/export.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for TypeScript and JSON schema protocol artifact generation, generated-code headers, and experimental API filtering",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex App Server Schema Fixture Tests",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/app-server-protocol/tests/schema_fixtures.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for schema fixture validation, protocol drift detection, fixture diffs, and explicit schema update workflow",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI: Codex for (almost) everything",
+        "url": "https://openai.com/index/codex-for-almost-everything/",
+        "type": "product_post",
+        "relevance": "April 2026 first-party source for remote devboxes, multiple terminals, app/browser workflows, memory, automations, and long-running work",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol Specification",
+        "url": "https://modelcontextprotocol.io/",
+        "type": "specification",
+        "relevance": "Reference when remote runtimes also bridge tool servers and typed control flows",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Goose 2.0: ACP and new TUI",
+        "url": "https://goose-docs.ai/blog/2026/04/08/goose-acp-and-new-tui/",
+        "type": "announcement",
+        "relevance": "April 8, 2026: ACP becomes default server mode in Goose 2.0 (not a subcommand). HTTP daemon and WebSocket bridge are opt-in overlays. Relevant to ACP framing in remote-runtime transport selection.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Claude Code Routines (web-scheduled-tasks)",
+        "url": "https://code.claude.com/docs/en/web-scheduled-tasks",
+        "type": "documentation",
+        "relevance": "Routines as cloud-hosted remote execution: trigger → container start → agent loop → artifacts → result. Lifecycle model for cloud-container remote runtime mode.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code: Continue local sessions from any device with Remote Control",
+        "url": "https://code.claude.com/docs/en/remote-control",
+        "type": "documentation",
+        "relevance": "Verified 2026-07-11. Primary source for the shipped Remote Control feature: server mode (`claude remote-control`, --spawn, --capacity), interactive mode (--remote-control/--rc), /remote-control slash command, outbound-HTTPS-only no-inbound-ports network model, short-lived scoped credentials, and explicit contrast table with Claude Code on the web.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code on the web",
+        "url": "https://code.claude.com/docs/en/claude-code-on-the-web",
+        "type": "documentation",
+        "relevance": "Verified 2026-07-11. Cloud-VM session model (claude.ai/code, --cloud flag) distinct from Remote Control; each session gets an isolated VM with the repo cloned. Sibling of Routines on the same cloud-session substrate.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "openai/codex issue #25552 — app-server-daemon README staleness",
+        "url": "https://github.com/openai/codex/issues/25552",
+        "type": "issue",
+        "relevance": "Verified 2026-07-11. Corrects a stale claim about top-level `codex remote-control` bootstrap behavior; clarifies it runs foreground app-server with remote control enabled for one invocation, while daemon lifecycle lives under explicit subcommands.",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "openai/codex discussion #21935 — codex remote-control intended direction",
+        "url": "https://github.com/openai/codex/discussions/21935",
+        "type": "discussion",
+        "relevance": "Verified 2026-07-11. Clarifies `codex remote-control` (v0.130+) is infrastructure for SSH workflows and custom integrations, not the user-facing QR/mobile-pairing flow — that flow is mediated by the Codex desktop app.",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

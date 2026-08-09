@@ -1,0 +1,102 @@
+[
+  {
+    "id": "F01",
+    "name": "Onboarding Checklist",
+    "description": "Guided onboarding checklist for new users; surfaced in-app on first login with progress indicators.",
+    "reach": 8500,
+    "impact": 3,
+    "confidence": 1.0,
+    "effort_weeks": 3,
+    "theme": "retention"
+  },
+  {
+    "id": "F02",
+    "name": "Referral Program",
+    "description": "Two-sided referral with reward credits; requires invite flow, credit wallet, and notifications.",
+    "reach": 6000,
+    "impact": 2,
+    "confidence": 0.8,
+    "effort_weeks": 8,
+    "theme": "growth"
+  },
+  {
+    "id": "F03",
+    "name": "Usage-Based Billing Tier",
+    "description": "Add a pay-per-use tier below the starter plan to reduce CAC for SMB/prosumer segment.",
+    "reach": 4200,
+    "impact": 2,
+    "confidence": 0.8,
+    "effort_weeks": 10,
+    "theme": "monetization"
+  },
+  {
+    "id": "F04",
+    "name": "Bulk CSV Import",
+    "description": "Allow users to import up to 10,000 records via CSV with field mapping and dedup.",
+    "reach": 2100,
+    "impact": 1,
+    "confidence": 1.0,
+    "effort_weeks": 4,
+    "theme": "retention"
+  },
+  {
+    "id": "F05",
+    "name": "API Rate-Limit Increase",
+    "description": "Raise default API rate limit from 60 to 300 req/min for Pro+ plans; infra sharding required.",
+    "reach": 900,
+    "impact": 1,
+    "confidence": 0.8,
+    "effort_weeks": 6,
+    "theme": "infra"
+  },
+  {
+    "id": "F06",
+    "name": "AI-Powered Smart Search",
+    "description": "Embed semantic search across all user content using vector index; replaces keyword-only search.",
+    "reach": 7200,
+    "impact": 2,
+    "confidence": 0.5,
+    "effort_weeks": 14,
+    "theme": "retention"
+  },
+  {
+    "id": "F07",
+    "name": "Annual Plan Upsell Prompt",
+    "description": "In-app nudge at day 45 offering 20% discount on annual plan; A/B tested copy.",
+    "reach": 5500,
+    "impact": 2,
+    "confidence": 1.0,
+    "effort_weeks": 1,
+    "theme": "monetization"
+  },
+  {
+    "id": "F08",
+    "name": "SOC 2 Type II Audit",
+    "description": "Complete SOC 2 Type II readiness: policy docs, vendor assessments, pen-test, audit engagement.",
+    "reach": 1200,
+    "impact": 3,
+    "confidence": 0.8,
+    "effort_weeks": 26,
+    "theme": "infra"
+  },
+  {
+    "id": "F09",
+    "name": "Mobile Push Notifications",
+    "description": "Re-engagement push notifications for iOS/Android; personalised digest of pending action items.",
+    "reach": 9800,
+    "impact": 1,
+    "confidence": 0.5,
+    "effort_weeks": 5,
+    "theme": "retention"
+  },
+  {
+    "id": "F10",
+    "name": "Slack Integration",
+    "description": "Bidirectional Slack integration: post updates to channels and create items from Slack commands.",
+    "reach": 3400,
+    "impact": 2,
+    "confidence": 1.0,
+    "effort_weeks": 7,
+    "theme": "growth"
+  }
+]

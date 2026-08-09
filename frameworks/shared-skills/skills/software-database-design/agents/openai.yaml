@@ -1,0 +1,4 @@
+interface:
+  display_name: "Database Design"
+  short_description: "Designs database schemas, migrations, and data models for PostgreSQL, MySQL"
+  default_prompt: "Use $software-database-design for Designs database schemas, migrations, and data models for PostgreSQL, MySQL, MongoDB, and Redis. Use when planning tables, relationships, indexes, or ORM-backed schema changes."

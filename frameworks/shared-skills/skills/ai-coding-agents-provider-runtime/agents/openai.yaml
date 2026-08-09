@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Provider Runtime"
+  short_description: "Design provider runtimes for coding agents"
+  default_prompt: "Use $ai-coding-agents-provider-runtime to design model abstraction, streaming semantics, tool-call normalization, retries, context-window policy, or fallback routing for a coding-agent runtime."

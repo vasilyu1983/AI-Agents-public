@@ -1,0 +1,322 @@
+[
+  {
+    "source": "documents",
+    "target": "claude_code",
+    "relation": "contains",
+    "group": "structural",
+    "weight": 1,
+    "confidence": 0.85
+  },
+  {
+    "source": "claude_code",
+    "target": "provider-bun",
+    "relation": "uses_provider",
+    "group": "dependency",
+    "weight": 0.8,
+    "confidence": 0.82
+  },
+  {
+    "source": "claude_code",
+    "target": "provider-anthropic-sdk",
+    "relation": "uses_provider",
+    "group": "dependency",
+    "weight": 0.9,
+    "confidence": 0.9
+  },
+  {
+    "source": "claude_code",
+    "target": "provider-mcp-sdk",
+    "relation": "uses_provider",
+    "group": "dependency",
+    "weight": 0.9,
+    "confidence": 0.9
+  },
+  {
+    "source": "claude_code",
+    "target": "provider-axios",
+    "relation": "uses_provider",
+    "group": "dependency",
+    "weight": 0.7,
+    "confidence": 0.82
+  },
+  {
+    "source": "claude_code",
+    "target": "provider-git",
+    "relation": "uses_provider",
+    "group": "dependency",
+    "weight": 0.8,
+    "confidence": 0.8
+  },
+  {
+    "source": "claude_code",
+    "target": "provider-tmux",
+    "relation": "uses_provider",
+    "group": "dependency",
+    "weight": 0.7,
+    "confidence": 0.76
+  },
+  {
+    "source": "claude_code",
+    "target": "process-terminal-agent-runtime",
+    "relation": "implements_process",
+    "group": "behavioral",
+    "weight": 0.9,
+    "confidence": 0.88
+  },
+  {
+    "source": "claude_code",
+    "target": "process-remote-session-management",
+    "relation": "implements_process",
+    "group": "behavioral",
+    "weight": 0.9,
+    "confidence": 0.9
+  },
+  {
+    "source": "claude_code",
+    "target": "process-permission-mediation",
+    "relation": "implements_process",
+    "group": "behavioral",
+    "weight": 0.9,
+    "confidence": 0.9
+  },
+  {
+    "source": "claude_code",
+    "target": "process-worktree-orchestration",
+    "relation": "implements_process",
+    "group": "behavioral",
+    "weight": 0.9,
+    "confidence": 0.9
+  },
+  {
+    "source": "claude_code",
+    "target": "process-plugin-and-skill-loading",
+    "relation": "implements_process",
+    "group": "behavioral",
+    "weight": 0.8,
+    "confidence": 0.84
+  },
+  {
+    "source": "claude_code",
+    "target": "process-background-agent-execution",
+    "relation": "implements_process",
+    "group": "behavioral",
+    "weight": 0.8,
+    "confidence": 0.86
+  },
+  {
+    "source": "claude_code",
+    "target": "process-transport-recovery",
+    "relation": "implements_process",
+    "group": "behavioral",
+    "weight": 0.9,
+    "confidence": 0.89
+  },
+  {
+    "source": "claude_code",
+    "target": "artifact-query-ts",
+    "relation": "contains",
+    "group": "structural",
+    "weight": 0.95,
+    "confidence": 0.9
+  },
+  {
+    "source": "claude_code",
+    "target": "artifact-query-engine-ts",
+    "relation": "contains",
+    "group": "structural",
+    "weight": 0.95,
+    "confidence": 0.88
+  },
+  {
+    "source": "claude_code",
+    "target": "artifact-setup-ts",
+    "relation": "contains",
+    "group": "structural",
+    "weight": 0.95,
+    "confidence": 0.9
+  },
+  {
+    "source": "claude_code",
+    "target": "artifact-task-ts",
+    "relation": "contains",
+    "group": "structural",
+    "weight": 0.95,
+    "confidence": 0.88
+  },
+  {
+    "source": "claude_code",
+    "target": "artifact-remote-session-manager-ts",
+    "relation": "contains",
+    "group": "structural",
+    "weight": 0.95,
+    "confidence": 0.9
+  },
+  {
+    "source": "claude_code",
+    "target": "artifact-remote-permission-bridge-ts",
+    "relation": "contains",
+    "group": "structural",
+    "weight": 0.95,
+    "confidence": 0.9
+  },
+  {
+    "source": "claude_code",
+    "target": "artifact-hybrid-transport-ts",
+    "relation": "contains",
+    "group": "structural",
+    "weight": 0.95,
+    "confidence": 0.9
+  },
+  {
+    "source": "claude_code",
+    "target": "artifact-sse-transport-ts",
+    "relation": "contains",
+    "group": "structural",
+    "weight": 0.95,
+    "confidence": 0.9
+  },
+  {
+    "source": "artifact-query-ts",
+    "target": "process-terminal-agent-runtime",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.7,
+    "confidence": 0.9
+  },
+  {
+    "source": "artifact-query-ts",
+    "target": "process-background-agent-execution",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.6,
+    "confidence": 0.82
+  },
+  {
+    "source": "artifact-query-ts",
+    "target": "process-transport-recovery",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.6,
+    "confidence": 0.8
+  },
+  {
+    "source": "artifact-query-ts",
+    "target": "provider-anthropic-sdk",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.5,
+    "confidence": 0.86
+  },
+  {
+    "source": "artifact-query-engine-ts",
+    "target": "process-terminal-agent-runtime",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.7,
+    "confidence": 0.86
+  },
+  {
+    "source": "artifact-query-engine-ts",
+    "target": "process-plugin-and-skill-loading",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.7,
+    "confidence": 0.84
+  },
+  {
+    "source": "artifact-setup-ts",
+    "target": "process-worktree-orchestration",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.8,
+    "confidence": 0.9
+  },
+  {
+    "source": "artifact-setup-ts",
+    "target": "process-plugin-and-skill-loading",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.7,
+    "confidence": 0.82
+  },
+  {
+    "source": "artifact-setup-ts",
+    "target": "provider-bun",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.5,
+    "confidence": 0.82
+  },
+  {
+    "source": "artifact-setup-ts",
+    "target": "provider-git",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.5,
+    "confidence": 0.84
+  },
+  {
+    "source": "artifact-setup-ts",
+    "target": "provider-tmux",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.5,
+    "confidence": 0.78
+  },
+  {
+    "source": "artifact-task-ts",
+    "target": "process-background-agent-execution",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.7,
+    "confidence": 0.88
+  },
+  {
+    "source": "artifact-remote-session-manager-ts",
+    "target": "process-remote-session-management",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.8,
+    "confidence": 0.9
+  },
+  {
+    "source": "artifact-remote-session-manager-ts",
+    "target": "process-permission-mediation",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.7,
+    "confidence": 0.82
+  },
+  {
+    "source": "artifact-remote-permission-bridge-ts",
+    "target": "process-permission-mediation",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.8,
+    "confidence": 0.9
+  },
+  {
+    "source": "artifact-hybrid-transport-ts",
+    "target": "process-transport-recovery",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.8,
+    "confidence": 0.9
+  },
+  {
+    "source": "artifact-hybrid-transport-ts",
+    "target": "provider-axios",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.6,
+    "confidence": 0.88
+  },
+  {
+    "source": "artifact-sse-transport-ts",
+    "target": "process-transport-recovery",
+    "relation": "documents",
+    "group": "semantic",
+    "weight": 0.8,
+    "confidence": 0.9
+  }
+]

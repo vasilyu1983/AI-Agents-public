@@ -1,0 +1,196 @@
+{
+  "metadata": {
+    "skill": "qa-testing-playwright",
+    "updated": "2026-07-11",
+    "version": "3.3",
+    "total_sources": 24,
+    "description": "Primary references for Playwright E2E testing: scope control, stable locators, authentication, API testing, visual testing, CI sharding, AI-assisted workflows, Clock API, and @playwright/cli token-efficient automation.",
+    "title": "QA Testing Playwright - Sources",
+    "last_updated": "2026-07-11",
+    "note": "Playwright ships roughly monthly; treat every pinned version number in this skill as due for re-verification against https://playwright.dev/docs/release-notes."
+  },
+  "categories": {
+    "playwright_official_docs": [
+      {
+        "name": "Playwright Documentation - Intro",
+        "url": "https://playwright.dev/docs/intro",
+        "description": "Official documentation entry point and setup.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Best Practices",
+        "url": "https://playwright.dev/docs/best-practices",
+        "description": "High-signal guidance for stable tests and CI execution.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Locators",
+        "url": "https://playwright.dev/docs/locators",
+        "description": "Selector strategy (roles/labels/test IDs) and stability guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Authentication",
+        "url": "https://playwright.dev/docs/auth",
+        "description": "Storage state, setup projects, worker auth, and IndexedDB-backed auth reuse.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - API Testing",
+        "url": "https://playwright.dev/docs/api-testing",
+        "description": "APIRequestContext patterns for API-only tests and UI/API hybrid flows.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Retries",
+        "url": "https://playwright.dev/docs/test-retries",
+        "description": "Retries and patterns for handling failures vs identifying flakes.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Visual Comparisons",
+        "url": "https://playwright.dev/docs/test-snapshots",
+        "description": "Built-in screenshot assertions, masking, thresholds, and baseline workflow.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Sharding",
+        "url": "https://playwright.dev/docs/test-sharding",
+        "description": "Sharding long-running suites across machines for CI economics.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Trace Viewer",
+        "url": "https://playwright.dev/docs/trace-viewer",
+        "description": "Debugging tool for triaging failures with traces, screenshots, and steps.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Browsers",
+        "url": "https://playwright.dev/docs/browsers",
+        "description": "Bundled browsers vs stable channels (Chrome/Edge) and when to use them.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Continuous Integration",
+        "url": "https://playwright.dev/docs/ci",
+        "description": "CI configuration patterns and artifact capture.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Page Object Models",
+        "url": "https://playwright.dev/docs/pom",
+        "description": "POM guidance for keeping suites maintainable without hiding user intent.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Playwright - Test Agents",
+        "url": "https://playwright.dev/docs/test-agents",
+        "description": "Official planner/generator/healer workflows and agent initialization.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright - Release Notes",
+        "url": "https://playwright.dev/docs/release-notes",
+        "description": "Latest features and breaking changes (v1.61.1 current as of 2026-07-11; verify before pinning — Playwright ships roughly monthly).",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Playwright - Clock API",
+        "url": "https://playwright.dev/docs/clock",
+        "description": "Fake timer API for deterministic time control in tests: setFixedTime, fastForward, pauseAt, runFor.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-06-09"
+      }
+    ],
+    "mcp_ai_automation": [
+      {
+        "name": "Microsoft Playwright MCP",
+        "url": "https://github.com/microsoft/playwright-mcp",
+        "description": "Official MCP server for AI-driven browser automation via accessibility tree (package: @playwright/mcp).",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Playwright MCP Guide 2026",
+        "url": "https://www.testleaf.com/blog/playwright-mcp-ai-test-automation-2026/",
+        "description": "Third-party overview of Playwright MCP; verify against the official README before applying in production.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Playwright CLI (@playwright/cli)",
+        "url": "https://www.npmjs.com/package/@playwright/cli",
+        "description": "Official token-efficient CLI alternative to Playwright MCP. Uses shell commands instead of MCP protocol (~27k vs ~114k tokens/task per third-party benchmarks, ~4x fewer). Best for high-throughput coding agents.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Playwright Coding Agents / Agent CLI Docs",
+        "url": "https://playwright.dev/docs/getting-started-cli",
+        "description": "Official docs for the agent-facing CLI workflow (installable skills, snapshot/click/screenshot commands, dashboard via `playwright-cli show`).",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "visual_testing": [
+      {
+        "name": "Chromatic - Playwright Integration",
+        "url": "https://www.chromatic.com/docs/playwright/",
+        "description": "Visual regression testing with Chromatic for Playwright tests.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Percy - Playwright Integration",
+        "url": "https://www.browserstack.com/docs/percy/integrate/playwright",
+        "description": "Canonical BrowserStack Percy docs for Playwright visual testing.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "community_tools": [
+      {
+        "name": "MCP Playwright",
+        "url": "https://github.com/executeautomation/mcp-playwright",
+        "description": "Community MCP server for AI-driven browser automation; reference for orchestrating Playwright tests through LLM tool calls and natural language test generation.",
+        "add_as_web_search": false,
+        "optional": true
+      }
+    ],
+    "real_device_testing": [
+      {
+        "name": "BrowserStack - Playwright iOS",
+        "url": "https://www.browserstack.com/guide/playwright-ios-automation",
+        "description": "Running Playwright on real iOS devices via BrowserStack.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "LambdaTest - Playwright iOS",
+        "url": "https://www.lambdatest.com/blog/playwright-testing-on-ios-real-devices/",
+        "description": "Playwright testing on real iOS devices with LambdaTest.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ]
+  }
+}

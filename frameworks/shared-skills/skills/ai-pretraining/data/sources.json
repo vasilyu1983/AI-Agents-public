@@ -1,0 +1,299 @@
+{
+  "metadata": {
+    "skill": "ai-pretraining",
+    "updated": "2026-07-11",
+    "audit_date": "2026-07-11",
+    "last_verified": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 31,
+    "title": "AI Pretraining From Scratch - Sources",
+    "description": "Primary sources for building transformer/GPT and BPE tokenizer from first principles: Karpathy Zero-to-Hero series, nanoGPT, nanochat, minbpe, Raschka LLMs-from-scratch, foundational papers, modern-architecture papers (RoPE/RMSNorm/SwiGLU/GQA/FlashAttention), the modded-nanoGPT/Muon speedrun frontier, production Muon reports (Kimi K2 MuonClip, DeepSeek-V4, GLM-5), and PyTorch mixed-precision docs."
+  },
+  "categories": {
+    "foundational_papers": [
+      {
+        "name": "Attention Is All You Need (Vaswani et al. 2017)",
+        "url": "https://arxiv.org/abs/1706.03762",
+        "type": "research",
+        "relevance": "Original transformer architecture: scaled dot-product attention, multi-head attention, positional encoding, encoder-decoder stack.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Language Models are Unsupervised Multitask Learners (GPT-2, Radford et al. 2019)",
+        "url": "https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf",
+        "type": "research",
+        "relevance": "GPT-2 architecture details: pre-norm placement, weight tying, byte-level BPE tokenizer design, hyperparameters for 124M model.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Language Models are Few-Shot Learners (GPT-3, Brown et al. 2020)",
+        "url": "https://arxiv.org/abs/2005.14165",
+        "type": "research",
+        "relevance": "GPT-3 training hyperparameters: cosine LR schedule, Adam betas, weight decay configuration, batch size ramp.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "karpathy_zero_to_hero": [
+      {
+        "name": "Neural Networks: Zero to Hero — Full Playlist (Karpathy)",
+        "url": "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ",
+        "type": "course",
+        "relevance": "Complete from-scratch curriculum: micrograd (autograd), makemore (character LMs), nanoGPT build, GPT tokenizer, GPT-2 reproduction.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Let's build GPT: from scratch, in code, spelled out (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+        "type": "video",
+        "relevance": "Step-by-step transformer implementation: bigram baseline to multi-head attention to full GPT on Shakespeare.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Let's reproduce GPT-2 (124M) (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=l8pRSuU81PU",
+        "type": "video",
+        "relevance": "End-to-end GPT-2 reproduction: weight loading from HuggingFace, bf16 autocast, gradient accumulation, cosine LR, FineWeb-Edu training.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Let's build the GPT Tokenizer (Karpathy)",
+        "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
+        "type": "video",
+        "relevance": "Byte-level BPE from scratch: merge algorithm, vocab construction, encode/decode, tiktoken comparison.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "modern_architecture_papers": [
+      {
+        "name": "RoFormer: Rotary Position Embedding (Su et al. 2021)",
+        "url": "https://arxiv.org/abs/2104.09864",
+        "type": "research",
+        "relevance": "RoPE — rotary positional embeddings applied to q/k inside attention. Replaces learned absolute position tables; encodes relative position and extrapolates to longer contexts. Standard in Llama/Mistral/Qwen/Gemma.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Root Mean Square Layer Normalization (Zhang & Sennrich 2019)",
+        "url": "https://arxiv.org/abs/1910.07467",
+        "type": "research",
+        "relevance": "RMSNorm — drops mean-centering and bias from LayerNorm, rescaling by RMS only. Cheaper and stable at depth; the norm in modern decoder stacks.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "GLU Variants Improve Transformer (Shazeer 2020)",
+        "url": "https://arxiv.org/abs/2002.05202",
+        "type": "research",
+        "relevance": "SwiGLU — gated FFN (silu(gate(x)) * up(x)) that replaces the GELU-MLP. Hidden dim scaled to ~8/3*d to hold params constant. Quality gain per parameter.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "GQA: Training Generalized Multi-Query Transformer Models (Ainslie et al. 2023)",
+        "url": "https://arxiv.org/abs/2305.13245",
+        "type": "research",
+        "relevance": "Grouped-query attention — fewer KV heads than query heads. Shrinks the KV cache with negligible quality loss; the MHA/MQA interpolation used in modern models.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FlashAttention-2 (Dao 2023)",
+        "url": "https://arxiv.org/abs/2307.08691",
+        "type": "research",
+        "relevance": "IO-aware tiled attention kernel — O(T) memory instead of O(T^2). Backs PyTorch F.scaled_dot_product_attention. (FlashAttention v1: arxiv.org/abs/2205.14135.)",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FlashAttention-3 (Shah et al. 2024)",
+        "url": "https://arxiv.org/abs/2407.08608",
+        "type": "research",
+        "relevance": "Hopper-optimized attention: asynchrony, warp-specialization, FP8 (~1.6-2x over FA-2). The 2026 standard kernel SDPA/vLLM/SGLang dispatch to; FA-4 extends this to Blackwell.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Muon is Scalable for LLM Training (Moonshot AI, Feb 2025)",
+        "url": "https://arxiv.org/abs/2502.16982",
+        "type": "research",
+        "relevance": "Weight-decay + per-parameter update-scale fixes that let Muon train at scale without bespoke tuning; the paper's own benchmark is the 3B/16B-active Moonlight MoE (~2x AdamW compute efficiency at that scale) — cite each later production model's own report for its recipe, not this paper directly.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "FlashAttention-4: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling (Dao et al., March 2026)",
+        "url": "https://arxiv.org/abs/2603.05451",
+        "type": "research",
+        "relevance": "Blackwell (B200/GB200) attention kernel, ~20% over cuDNN's prior best. Confirmed real/shipped as of March 2026 — the current kernel SDPA dispatches to on Blackwell, mirroring FA-3 on Hopper.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Kimi K2 Technical Report (Moonshot AI, 2025)",
+        "url": "https://github.com/moonshotai/kimi-k2",
+        "type": "research",
+        "relevance": "Confirms MuonClip (Muon + QK-Clip attention-logit bound) at 1T-param scale, 15.5T tokens, no loss spikes. Verified production use of a Muon variant — cite this directly rather than the original Moonlight paper.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GLM-5 Technical Report: From Vibe Coding to Agentic Engineering (Zhipu AI, Feb 2026)",
+        "url": "https://arxiv.org/abs/2602.15763",
+        "type": "research",
+        "relevance": "~745B-param MoE; documents a zero-redundant-communication distributed Muon implementation and an internal GQA-8 vs MLA ablation where GQA-8 won — evidence attention-scheme choice at the frontier has not converged on MLA.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "reference_implementations": [
+      {
+        "name": "nanoGPT (Karpathy)",
+        "url": "https://github.com/karpathy/nanoGPT",
+        "type": "repository",
+        "relevance": "Canonical minimal GPT implementation. Reference for model.py architecture, train.py loop, weight init, and GPT-2 weight loading.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "minbpe (Karpathy)",
+        "url": "https://github.com/karpathy/minbpe",
+        "type": "repository",
+        "relevance": "Minimal BPE tokenizer implementation. Reference for BasicTokenizer, RegexTokenizer, GPT-4 pre-tokenization pattern.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Build a Large Language Model From Scratch (Raschka, Manning 2024)",
+        "url": "https://www.manning.com/books/build-a-large-language-model-from-scratch",
+        "type": "book",
+        "relevance": "End-to-end textbook: BPE tokenization, GPT architecture, pretraining loop, temperature/top-k sampling, loading GPT-2 weights, classification fine-tuning, instruction/SFT fine-tuning, LoRA. Pedagogical spine matches this skill through the pretraining chapters.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LLMs-from-scratch (Raschka)",
+        "url": "https://github.com/rasbt/LLMs-from-scratch",
+        "type": "repository",
+        "relevance": "Book companion code for 'Build a Large Language Model From Scratch'. Chapter-by-chapter GPT implementation with detailed explanations.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "nanochat (Karpathy)",
+        "url": "https://github.com/karpathy/nanochat",
+        "type": "repository",
+        "relevance": "2025 full-stack from-scratch successor to nanoGPT: tokenizer training, pretraining on FineWeb, midtraining, SFT, RL (GRPO), eval, and serving in ~8k lines. The current end-to-end 'from scratch' reference pipeline.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "modded-nanoGPT (Keller Jordan et al.)",
+        "url": "https://github.com/KellerJordan/modded-nanogpt",
+        "type": "repository",
+        "relevance": "GPT-2 reproduction speedrun and Muon optimizer reference. Modern stack: Muon, rotary embeddings, QK-Norm, ReLU^2, logit softcap, zero-init projections, embedding-skip connections. Record wall-clock is a moving target — check the README.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "pytorch_docs": [
+      {
+        "name": "PyTorch Automatic Mixed Precision (torch.autocast)",
+        "url": "https://pytorch.org/docs/stable/amp.html",
+        "type": "documentation",
+        "relevance": "torch.autocast API, bfloat16 vs float16 guidance, GradScaler for fp16, device compatibility notes.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PyTorch Gradient Checkpointing (torch.utils.checkpoint)",
+        "url": "https://pytorch.org/docs/stable/checkpoint.html",
+        "type": "documentation",
+        "relevance": "Activation checkpointing API for trading memory for compute during backward pass.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "architecture_limitations_and_workarounds": [
+      {
+        "name": "DeepSeek-V3 Technical Report (2024)",
+        "url": "https://arxiv.org/abs/2412.19437",
+        "type": "paper",
+        "relevance": "Multi-head Latent Attention (MLA) low-rank KV compression + decoupled RoPE; blockwise/group-128 FP8 training with FP32 accumulation; aux-loss-free MoE load balancing.",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "YaRN: Efficient Context Window Extension of LLMs (Peng et al. 2023)",
+        "url": "https://arxiv.org/abs/2309.00071",
+        "type": "paper",
+        "relevance": "RoPE context extension: frequency-band-wise interpolation + attention temperature; the strongest of linear-PI / NTK-aware / YaRN. Train-short-extend-long recipe.",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Efficient Streaming Language Models with Attention Sinks (Xiao et al. 2023)",
+        "url": "https://arxiv.org/abs/2309.17453",
+        "type": "paper",
+        "relevance": "Attention-sink phenomenon and StreamingLLM: keep sink tokens + recent window for fixed-memory long streams; grounds softmax pathology and long-context workaround sections.",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Methods of Improving LLM Training Stability (Takase et al. 2024)",
+        "url": "https://arxiv.org/abs/2410.16682",
+        "type": "paper",
+        "relevance": "QK-Norm, logit soft-capping, and init/normalization choices that bound attention-logit growth and prevent loss spikes at scale.",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Transformer Feed-Forward Layers Are Key-Value Memories (Geva et al. 2020)",
+        "url": "https://arxiv.org/abs/2012.14913",
+        "type": "paper",
+        "relevance": "The key-value-memory view of the FFN: up-projection keys detect patterns, down-projection values write content — grounds the MLP/FFN knowledge-storage framing.",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ELECTRA: Pre-training Text Encoders as Discriminators (Clark et al. 2020)",
+        "url": "https://arxiv.org/abs/2003.10555",
+        "type": "paper",
+        "relevance": "Replaced-token-detection fixes MLM's ~15%-token sample inefficiency; grounds the encoder-only limitation/workaround in the family contrast.",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

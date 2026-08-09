@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/dev-context-multi-repo/schemas/hub-summary.schema.json",
+  "title": "HubSummary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["portfolio_name", "repo_count", "generated_at"],
+  "properties": {
+    "portfolio_name": { "type": "string" },
+    "repo_count": { "type": "integer", "minimum": 0 },
+    "groups": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "primary_languages": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "repo_kinds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "key_domains": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "high_risk_repos": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

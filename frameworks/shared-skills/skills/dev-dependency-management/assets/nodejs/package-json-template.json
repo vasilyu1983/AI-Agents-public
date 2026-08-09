@@ -1,0 +1,22 @@
+{
+  "name": "project-name",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Project description",
+  "type": "module",
+  "packageManager": "pnpm@<current-major>",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "deps:install:ci": "pnpm install --frozen-lockfile",
+    "deps:outdated": "pnpm outdated -r",
+    "deps:audit": "pnpm audit",
+    "deps:update": "pnpm update -r"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "pnpm": {
+    "onlyBuiltDependencies": []
+  }
+}

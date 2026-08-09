@@ -1,0 +1,4 @@
+interface:
+  display_name: "PPTX Automation"
+  short_description: "Create/edit .pptx presentations with charts, templates, and speaker notes"
+  default_prompt: "Use $document-pptx for Create/edit .pptx presentations with charts, templates, and speaker notes. Use when asked for pitch decks, QBR decks, or slide automation."

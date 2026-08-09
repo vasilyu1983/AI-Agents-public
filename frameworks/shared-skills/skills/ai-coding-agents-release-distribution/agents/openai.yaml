@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Release And Distribution"
+  short_description: "Design release and distribution systems for coding-agent CLIs"
+  default_prompt: "Use $ai-coding-agents-release-distribution to design packaging, update channels, plugin compatibility, cache migrations, or install footprints for a coding-agent CLI."

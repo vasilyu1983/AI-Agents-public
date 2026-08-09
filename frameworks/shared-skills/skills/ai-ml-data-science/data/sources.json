@@ -1,0 +1,330 @@
+{
+  "metadata": {
+    "skill": "ai-ml-data-science",
+    "updated": "2026-07-11",
+    "total_sources": 33,
+    "description": "Curated sources for practical data science workflows: framing, EDA, validation, tabular modeling, evaluation, uncertainty, reproducibility, DS-to-MLOps handoff, and LLM data pipelines.",
+    "version": "4.3",
+    "title": "AI Ml Data Science - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "foundational_papers_and_books": [
+      {
+        "name": "The Elements of Statistical Learning",
+        "url": "https://hastie.su.domains/ElemStatLearn/",
+        "type": "book",
+        "relevance": "Core reference for statistical learning concepts and evaluation foundations.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "An Introduction to Statistical Learning",
+        "url": "https://www.statlearning.com/",
+        "type": "book",
+        "relevance": "Practical ML and statistics reference for model selection, validation, and interpretation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Datasheets for Datasets",
+        "url": "https://arxiv.org/abs/1803.09010",
+        "type": "research",
+        "relevance": "Dataset documentation framework for governance, provenance, and risk assessment.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Model Cards for Model Reporting",
+        "url": "https://arxiv.org/abs/1810.03993",
+        "type": "research",
+        "relevance": "Standardized reporting template for model performance, intended use, and limitations.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Hidden Technical Debt in Machine Learning Systems",
+        "url": "https://papers.nips.cc/paper_files/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html",
+        "type": "research",
+        "relevance": "Classic reference on production ML failure modes and maintenance costs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "python_workflow_and_compute": [
+      {
+        "name": "uv Documentation",
+        "url": "https://docs.astral.sh/uv/",
+        "type": "documentation",
+        "relevance": "Modern Python project, dependency, and script management for reproducible DS workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "marimo Documentation",
+        "url": "https://docs.marimo.io/",
+        "type": "documentation",
+        "relevance": "Git-friendly, reactive notebooks for exploratory analysis and reviewable DS workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "pandas Documentation",
+        "url": "https://pandas.pydata.org/docs/",
+        "type": "documentation",
+        "relevance": "Core tabular data manipulation and analysis reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Polars Documentation",
+        "url": "https://docs.pola.rs/",
+        "type": "documentation",
+        "relevance": "High-performance dataframe engine with lazy execution for scalable transforms.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DuckDB Python Documentation",
+        "url": "https://duckdb.org/docs/current/clients/python/overview.html",
+        "type": "documentation",
+        "relevance": "Embedded analytical SQL engine for local reproducible DS analysis.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "core_ml_and_evaluation": [
+      {
+        "name": "scikit-learn Documentation",
+        "url": "https://scikit-learn.org/stable/",
+        "type": "documentation",
+        "relevance": "Core preprocessing, model selection, metrics, threshold tuning, and calibration utilities. Verified current stable release is 1.9.0 (2026-06-02); check installed version before citing API specifics.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LightGBM Documentation",
+        "url": "https://lightgbm.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Strong tabular baseline for fast iteration and structured-data experiments.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "CatBoost Documentation",
+        "url": "https://catboost.ai/en/docs/",
+        "type": "documentation",
+        "relevance": "Gradient boosting with strong categorical support and competitive tabular performance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PyTorch Documentation",
+        "url": "https://pytorch.org/docs/stable/",
+        "type": "documentation",
+        "relevance": "Deep learning framework reference when neural approaches are justified.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MAPIE Documentation",
+        "url": "https://mapie.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Prediction intervals and conformal prediction utilities for uncertainty-aware model outputs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "data_quality_and_validation": [
+      {
+        "name": "Pandera Documentation",
+        "url": "https://pandera.readthedocs.io/en/stable/",
+        "type": "documentation",
+        "relevance": "Schema and dataframe validation for DS pipelines and feature contracts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Great Expectations Core Documentation",
+        "url": "https://docs.greatexpectations.io/docs/core/introduction/",
+        "type": "documentation",
+        "relevance": "Expectation-based validation workflows for dataset and pipeline checks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Evidently Documentation",
+        "url": "https://docs.evidentlyai.com/",
+        "type": "documentation",
+        "relevance": "Data quality, drift, and monitoring metrics used in DS handoff and validation reviews.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "experimentation_and_automation": [
+      {
+        "name": "karpathy/autoresearch",
+        "url": "https://github.com/karpathy/autoresearch",
+        "type": "tool",
+        "relevance": "Autonomous ML experiment agent: bounded modification surface, fixed eval metric (val_bpb), git-as-experiment-ledger, 5-min time budget per run. Reference for Pattern 8.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "reproducibility_and_handoff": [
+      {
+        "name": "MLflow Documentation",
+        "url": "https://mlflow.org/docs/latest/",
+        "type": "documentation",
+        "relevance": "Experiment tracking, model registry, and artifact lineage for reproducible DS work.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Weights & Biases Documentation",
+        "url": "https://docs.wandb.ai/",
+        "type": "documentation",
+        "relevance": "Experiment tracking, comparisons, artifact lineage, and collaborative reviews.",
+        "update_frequency": "continuous",
+        "access": "free_tier",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DVC Documentation",
+        "url": "https://dvc.org/doc",
+        "type": "documentation",
+        "relevance": "Data and pipeline version tracking for reproducible experiments.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "lakeFS Documentation",
+        "url": "https://docs.lakefs.io/",
+        "type": "documentation",
+        "relevance": "Git-like versioning for data lakes and branchable data experiments.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Feast Documentation",
+        "url": "https://docs.feast.dev/getting-started/concepts/feature-retrieval",
+        "type": "documentation",
+        "relevance": "Feature-store reference for train/serve parity and reusable feature definitions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SQLMesh Documentation",
+        "url": "https://sqlmesh.readthedocs.io/en/stable/",
+        "type": "documentation",
+        "relevance": "SQL transformation patterns for staging, intermediate, and marts layers with testing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "llm_data_pipelines": [
+      {
+        "name": "TabPFN-2.5 (arXiv 2511.08667)",
+        "url": "https://arxiv.org/abs/2511.08667",
+        "type": "research",
+        "relevance": "TabPFN-2.5 extends the TabPFN family to 50k rows and 2k features. Confirmed resolving as of 2026-05-17. Win-rate figures are model-version-specific; hedge before asserting.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "updated": "2026-05-17"
+      },
+      {
+        "name": "text-dedup (MinHash/LSH deduplication library)",
+        "url": "https://github.com/ChenghaoMou/text-dedup",
+        "type": "tool",
+        "relevance": "Production-grade MinHash LSH and exact dedup for large text corpora. Used in LLM data pipeline reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "updated": "2026-05-17"
+      },
+      {
+        "name": "Min-K% Prob — Contamination Detection (arXiv 2310.16789)",
+        "url": "https://arxiv.org/abs/2310.16789",
+        "type": "research",
+        "relevance": "Post-training benchmark contamination detection via minimum-k% token log-probability. Cited in evaluation-patterns.md §10 and llm-data-pipeline.md §4.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "updated": "2026-05-17"
+      },
+      {
+        "name": "Cleanlab Documentation",
+        "url": "https://docs.cleanlab.ai/",
+        "type": "documentation",
+        "relevance": "Confident learning and label noise detection for supervised ML datasets. Referenced in data-contracts-lineage.md §7 annotation-quality section.",
+        "update_frequency": "continuous",
+        "access": "free_tier",
+        "add_as_web_search": true,
+        "updated": "2026-05-17"
+      }
+    ],
+    "governance_and_security": [
+      {
+        "name": "NIST AI Risk Management Framework 1.0",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+        "type": "specification",
+        "relevance": "Governance baseline for AI risk management, documentation, accountability, and controls.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "EU AI Act (Regulation (EU) 2024/1689)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+        "type": "specification",
+        "relevance": "Regulatory baseline affecting documentation, monitoring, and high-risk model governance.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST Secure Software Development Framework (SSDF)",
+        "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+        "type": "specification",
+        "relevance": "Secure development practices relevant for DS pipelines and service handoff.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST AI 600-1 Generative AI Profile",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+        "type": "specification",
+        "relevance": "Useful governance reference when DS work overlaps with GenAI systems or agentic evaluation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

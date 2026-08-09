@@ -1,0 +1,31 @@
+# .npmrc - shared config for npm-compatible registries
+# Works with npm and many pnpm workflows. Exact CI install behavior still comes
+# from the package-manager command, not from .npmrc alone.
+
+# SECURITY
+strict-ssl=true
+engine-strict=true
+audit=true
+audit-level=high
+
+# REGISTRY
+registry=https://registry.npmjs.org/
+# @mycompany:registry=https://npm.mycompany.com/
+
+# INSTALL / RESOLUTION
+fund=false
+update-notifier=false
+save-exact=false
+prefer-offline=true
+
+# SCRIPTS
+# Keep lifecycle scripts enabled by default for local development.
+# In CI, pair script restrictions with package-manager policy:
+# - pnpm: approve-builds + onlyBuiltDependencies
+# - npm: dedicated CI job policy
+ignore-scripts=false
+
+# NETWORK
+fetch-retries=3
+fetch-retry-mintimeout=10000
+fetch-retry-maxtimeout=60000

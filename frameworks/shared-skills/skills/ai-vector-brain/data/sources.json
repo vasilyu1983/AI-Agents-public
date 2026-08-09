@@ -1,0 +1,815 @@
+{
+  "metadata": {
+    "skill": "ai-vector-brain",
+    "title": "AI Vector Brain - Sources",
+    "description": "Curated, vendor-primary sources for the vector-brain skill. Validate freshness on each major skill revision.",
+    "version": "1.1",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "review_cadence": "30d",
+    "total_sources": 75,
+    "source_policy": "Prefer vendor-primary and project-primary docs; verify volatile pricing, quotas, and model names before use."
+  },
+  "categories": {
+    "primary_sources": [
+    {
+      "id": "pgvector-readme",
+      "title": "pgvector — open-source vector similarity for Postgres",
+      "url": "https://github.com/pgvector/pgvector",
+      "category": "backend-core",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["halfvec", "hnsw.iterative_scan", "relaxed_order", "halfvec_cosine_ops", "Hybrid Search", "Reciprocal Rank Fusion", "cross-encoder", "sparsevec", "sparsevec_ip_ops", "sparsevec - up to 1,000 non-zero elements", "Sparse vectors can have up to 16,000 non-zero elements", "8 * non-zero elements + 16", "binary_quantize(vector) → bit", "Use expression indexing for binary quantization", "CREATE INDEX ON items USING hnsw ((binary_quantize(embedding)::bit(3)) bit_hamming_ops);", "<~>", "Re-rank by the original vectors for better recall", "Use the `bit` type to store binary vectors"]
+    },
+    {
+      "id": "pgvector-releases",
+      "title": "pgvector release notes",
+      "url": "https://github.com/pgvector/pgvector/releases",
+      "category": "backend-core",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "notes": "0.8.3 released 2026-06-18, superseding 0.8.2. Confirm the CHANGELOG for 0.8.3+ contents before citing specific fixes; 0.8.2 remains the documented CVE-2026-3172 security floor.",
+      "verify_against": ["0.8.0 iterative_scan", "0.8.1 Postgres 18", "0.8.2 parallel HNSW fix", "0.8.3"]
+    },
+    {
+      "id": "pgvector-082-release-announcement",
+      "title": "pgvector 0.8.2 released — CVE-2026-3172 security fix",
+      "url": "https://www.postgresql.org/about/news/pgvector-082-released-3245/",
+      "category": "backend-core",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "notes": "Security release (2026-02-26). Patches CVE-2026-3172: buffer overflow in parallel HNSW index builds that can leak data from other relations or crash the server. Upgrade to >=0.8.2 before enabling parallel HNSW builds. See production-runbook.md Security section.",
+      "verify_against": ["CVE-2026-3172", "buffer overflow", "parallel HNSW"]
+    },
+    {
+      "id": "pgvectorscale-readme",
+      "title": "pgvectorscale — StreamingDiskANN for Postgres",
+      "url": "https://github.com/timescale/pgvectorscale",
+      "category": "backend-scale",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["StreamingDiskANN", "SBQ", "no BM25", "no statbm25", "no full-text index", "storage_layout", "memory_optimized", "diskann.query_rescore"]
+    },
+    {
+      "id": "anthropic-contextual-retrieval",
+      "title": "Anthropic — Introducing Contextual Retrieval",
+      "url": "https://www.anthropic.com/news/contextual-retrieval",
+      "category": "retrieval-pattern",
+      "authority": "primary",
+      "add_as_web_search": false
+    },
+    {
+      "id": "openai-embeddings",
+      "title": "OpenAI Embeddings API reference",
+      "url": "https://platform.openai.com/docs/guides/embeddings",
+      "category": "embedder",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["text-embedding-3-small", "text-embedding-3-large", "dimensions parameter"]
+    },
+    {
+      "id": "voyage-embeddings",
+      "title": "Voyage AI — Embeddings and Reranker docs",
+      "url": "https://docs.voyageai.com/",
+      "category": "embedder",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["rerank-2.5", "voyage-4", "voyage-4-lite", "voyage-4-large", "voyage-4-nano", "voyage-3 (legacy)", "voyage-3.5 (legacy)"]
+    },
+    {
+      "id": "cohere-rerank",
+      "title": "Cohere Rerank API",
+      "url": "https://docs.cohere.com/docs/rerank-overview",
+      "category": "reranker",
+      "authority": "primary",
+      "add_as_web_search": true
+    },
+    {
+      "id": "qdrant-docs",
+      "title": "Qdrant documentation",
+      "url": "https://qdrant.tech/documentation/",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["sparse vector index", "Inverse Document Frequency (IDF)", "IDF modifier", "inverted index", "dot-product similarity searches", "Sparse vectors in Qdrant are kept in special storage and indexed in a separate index", "named sparse vector", "text-sparse", "Working with SPLADE", "FastEmbed"]
+    },
+    {
+      "id": "qdrant-quantization",
+      "title": "Qdrant — Quantization guide",
+      "url": "https://qdrant.tech/documentation/guides/quantization/",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": [
+        "compresses each vector component from a 32-bit float to an 8-bit integer, achieving 4x compression",
+        "reduces each vector component to one to two bits for up to 32x compression",
+        "enables up to 64x compression when minimizing memory is the top priority",
+        "pre-select using quantized index, and then re-scored using original vectors",
+        "Qdrant can re-evaluate top-k search results using the original vectors"
+      ]
+    },
+    {
+      "id": "weaviate-docs",
+      "title": "Weaviate — BM25 keyword search",
+      "url": "https://docs.weaviate.io/weaviate/search/bm25",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": [".bm25()", "BM25F scores", "BM25 search", "BM25 (Best match 25)", "property weighting"]
+    },
+    {
+      "id": "weaviate-quantization",
+      "title": "Weaviate — Vector Quantization (PQ, BQ, SQ)",
+      "url": "https://docs.weaviate.io/weaviate/concepts/vector-quantization",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": [
+        "Product quantization is a multi-step quantization technique that is available for use with `hnsw` indexes in Weaviate.",
+        "Binary quantization (BQ) is a quantization technique that converts each vector embedding to a binary representation.",
+        "Usually each vector dimension requires 32 bits, but the binary representation only requires 1 bit, representing a 32x reduction in storage requirements.",
+        "Scalar quantization (SQ)...transforms the float representation to an 8 bit integer. This is a 4x reduction in size."
+      ]
+    },
+    {
+      "id": "milvus-docs",
+      "title": "Milvus documentation",
+      "url": "https://milvus.io/docs",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["full text search", "BM25", "sparse vector", "analyzer"]
+    },
+    {
+      "id": "vespa-docs",
+      "title": "Vespa — BM25 rank feature reference",
+      "url": "https://docs.vespa.ai/en/reference/bm25.html",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["bm25(content)", "bm25 rank feature", "k1", "b", "enable-bm25", "rank-profile"]
+    },
+    {
+      "id": "vespa-ann-hnsw",
+      "title": "Vespa — Approximate Nearest Neighbor HNSW (quantization types)",
+      "url": "https://docs.vespa.ai/en/querying/approximate-nn-hnsw.html",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": [
+        "Vespa supports double, float, bfloat16, int8 and single-bit values",
+        "single-bit values greatly reduce both memory and cpu costs, and can be effectively combined with larger vector values stored on disk as a paged attribute",
+        "int8 - 1 byte per value. Also used to represent packed binary values.",
+        "using bfloat16 instead of float saves close to 50% memory usage without significant accuracy loss"
+      ]
+    },
+    {
+      "id": "lancedb-docs",
+      "title": "LanceDB documentation",
+      "url": "https://lancedb.github.io/lancedb/",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["Full-Text Search", "BM25", "keyword-based search", "Lance", "FTS"]
+    },
+    {
+      "id": "lancedb-embedded",
+      "title": "LanceDB documentation — embedded library",
+      "url": "https://docs.lancedb.com/",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["open-source embedded library", "client SDKs in Python, TypeScript and Rust"]
+    },
+    {
+      "id": "chroma-local",
+      "title": "Chroma documentation — local / self-hosted",
+      "url": "https://docs.trychroma.com/",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["Run it locally, self-host, or use Chroma Cloud"]
+    },
+    {
+      "id": "ragas-docs",
+      "title": "RAGAS — Retrieval-Augmented Generation Assessment",
+      "url": "https://docs.ragas.io/",
+      "category": "eval-harness",
+      "authority": "primary",
+      "add_as_web_search": true
+    },
+    {
+      "id": "deepeval-docs",
+      "title": "DeepEval documentation",
+      "url": "https://docs.confident-ai.com/",
+      "category": "eval-harness",
+      "authority": "primary",
+      "add_as_web_search": true
+    },
+    {
+      "id": "trulens-docs",
+      "title": "TruLens documentation",
+      "url": "https://www.trulens.org/",
+      "category": "eval-harness",
+      "authority": "primary",
+      "add_as_web_search": true
+    },
+    {
+      "id": "phoenix-arize-docs",
+      "title": "Arize Phoenix — tracing and evals",
+      "url": "https://docs.arize.com/phoenix",
+      "category": "observability",
+      "authority": "primary",
+      "add_as_web_search": true
+    },
+    {
+      "id": "microsoft-graphrag",
+      "title": "Microsoft GraphRAG",
+      "url": "https://github.com/microsoft/graphrag",
+      "category": "deferred-extension",
+      "authority": "primary",
+      "add_as_web_search": true
+    },
+    {
+      "id": "lightrag",
+      "title": "LightRAG",
+      "url": "https://github.com/HKUDS/LightRAG",
+      "category": "deferred-extension",
+      "authority": "primary",
+      "add_as_web_search": true
+    },
+    {
+      "id": "ragatouille",
+      "title": "RAGatouille — ColBERT serving",
+      "url": "https://github.com/AnswerDotAI/RAGatouille",
+      "category": "deferred-extension",
+      "authority": "primary",
+      "add_as_web_search": true
+    },
+    {
+      "id": "colpali-paper",
+      "title": "ColPali — Efficient Document Retrieval with Vision Language Models",
+      "url": "https://arxiv.org/abs/2407.01449",
+      "category": "deferred-extension",
+      "authority": "research",
+      "add_as_web_search": true
+    },
+    {
+      "id": "postgres-rls",
+      "title": "PostgreSQL — Row Security Policies",
+      "url": "https://www.postgresql.org/docs/current/ddl-rowsecurity.html",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false
+    },
+    {
+      "id": "aws-s3-vectors",
+      "title": "Amazon S3 Vectors — vector storage in S3",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors.html",
+      "category": "backend-serverless",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["vector bucket", "vector index", "Bedrock Knowledge Bases integration", "metadata filter", "regions"]
+    },
+    {
+      "id": "aws-bedrock-knowledge-bases",
+      "title": "AWS Bedrock Knowledge Bases",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html",
+      "category": "backend-managed",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["S3 Vectors", "OpenSearch Serverless", "Aurora pgvector", "chunking strategy"]
+    },
+    {
+      "id": "aws-bedrock-embeddings",
+      "title": "Amazon Bedrock embedding models (Nova 2 Multimodal Embeddings, Titan legacy)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html",
+      "category": "backend-managed",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["Nova 2 Multimodal Embeddings", "embedding dimension", "model id", "Titan Text Embeddings", "invoke_model"]
+    },
+    {
+      "id": "aws-bedrock-data-automation",
+      "title": "Amazon Bedrock Data Automation — intelligent document processing",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/bda.html",
+      "category": "ingestion-ocr",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["classification", "extraction", "per-document pricing", "Bedrock Pipeline mode", "Textract OCR layer"]
+    },
+    {
+      "id": "aws-bedrock-guardrails",
+      "title": "Amazon Bedrock Guardrails — grounding check, PII redaction, Automated Reasoning",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+      "category": "backend-managed",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["contextual grounding check", "PII redaction", "Automated Reasoning", "ApplyGuardrail", "prompt attack", "denied topics"]
+    },
+    {
+      "id": "aws-bedrock-rerank",
+      "title": "Amazon Bedrock Rerank API (Cohere Rerank 3.5, Amazon Rerank)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html",
+      "category": "backend-managed",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["Rerank API", "Cohere Rerank 3.5", "Amazon Rerank", "relevance score", "Knowledge Bases reranking"]
+    },
+    {
+      "id": "aws-kendra-genai-index",
+      "title": "Amazon Kendra GenAI Index — managed retriever for RAG",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-kendra-genai-index.html",
+      "category": "backend-managed",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["GenAI Index", "Retriever API", "hybrid search", "reuse across Q Business", "Bedrock Knowledge Bases"]
+    },
+    {
+      "id": "aws-textract",
+      "title": "Amazon Textract — OCR, forms and tables extraction",
+      "url": "https://docs.aws.amazon.com/textract/latest/dg/what-is.html",
+      "category": "ingestion-ocr",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["StartDocumentTextDetection", "AnalyzeDocument", "forms", "tables", "block"]
+    },
+    {
+      "id": "paperless-ngx-api",
+      "title": "paperless-ngx REST API (document source + OCR)",
+      "url": "https://docs.paperless-ngx.com/api/",
+      "category": "ingestion-ocr",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["/api/documents/", "content", "download", "consume folder", "correspondent", "document_type", "tags"]
+    },
+    {
+      "id": "turbopuffer-docs",
+      "title": "Turbopuffer — Full-Text Search (BM25)",
+      "url": "https://turbopuffer.com/docs/fts",
+      "category": "backend-serverless",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["BM25 full-text search", "BM25 scoring algorithm", "Hybrid Search combining both vector and BM25 results", "k1", "b", "namespace", "object storage"]
+    },
+    {
+      "id": "pinecone-serverless",
+      "title": "Pinecone Serverless documentation",
+      "url": "https://docs.pinecone.io/guides/indexes/understanding-indexes#serverless-indexes",
+      "category": "backend-serverless",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["serverless index", "namespace", "pricing", "read units", "write units"]
+    },
+    {
+      "id": "cloudflare-vectorize",
+      "title": "Cloudflare Vectorize",
+      "url": "https://developers.cloudflare.com/vectorize/best-practices/create-indexes/",
+      "category": "backend-edge",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["cosine", "euclidean", "dot-product", "distance metric", "vector similarity", "--metric="]
+    },
+    {
+      "id": "upstash-vector",
+      "title": "Upstash Vector",
+      "url": "https://upstash.com/docs/vector/overall/getstarted",
+      "category": "backend-edge",
+      "authority": "primary",
+      "add_as_web_search": true
+    },
+    {
+      "id": "azure-ai-search-vector",
+      "title": "Azure AI Search — BM25 Relevance Scoring",
+      "url": "https://learn.microsoft.com/azure/search/index-similarity-and-scoring",
+      "category": "backend-managed",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["BM25Similarity", "Fixed algorithm on all search services created after July 2020", "BM25 relevance scoring", "scoringStatistics", "ClassicSimilarity", "k1", "b"]
+    },
+    {
+      "id": "vertex-vector-search",
+      "title": "Vertex AI Vector Search",
+      "url": "https://cloud.google.com/vertex-ai/docs/vector-search/overview",
+      "category": "backend-managed",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["streaming updates", "shard sizing", "pricing per node-hour"]
+    },
+    {
+      "id": "opensearch-knn",
+      "title": "OpenSearch k-NN plugin",
+      "url": "https://opensearch.org/docs/latest/search-plugins/knn/index/",
+      "category": "backend-search-engine",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["HNSW", "Faiss engine", "Lucene engine", "serverless"]
+    },
+    {
+      "id": "elasticsearch-vector",
+      "title": "Elasticsearch — similarity modules (BM25 default)",
+      "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-similarity.html",
+      "category": "backend-search-engine",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["BM25 similarity (default)", "Type name: `BM25`", "k1", "b"]
+    },
+    {
+      "id": "elasticsearch-dense-vector",
+      "title": "Elasticsearch — dense_vector field type (BBQ / int8 / int4 quantization)",
+      "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/dense-vector.html",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": [
+        "reduces each dimension to a single bit precision. This reduces the memory footprint by 96% (or 32x)",
+        "Quantizes each dimension of the vector to 1-byte integers. This reduces the memory footprint by 75% (or 4x)",
+        "Quantizes each dimension of the vector to half-byte integers. This reduces the memory footprint by 87% (or 8x)",
+        "the default index type is `bbq_disk` when available under the current license",
+        "Quantization will continue to keep the raw float vector values on disk for reranking",
+        "bbq_hnsw",
+        "int8_hnsw",
+        "int4_hnsw"
+      ]
+    },
+    {
+      "id": "redis-stack-vector",
+      "title": "Redis Search — scoring (BM25STD default)",
+      "url": "https://redis.io/docs/latest/develop/ai/search-and-query/advanced-concepts/scoring/",
+      "category": "backend-search-engine",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["BM25STD (default)", "BM25STD", "FT.SEARCH myIndex \"foo\" SCORER BM25STD", "BM25 scorer was renamed BM25STD in Redis Open Source 8.4", "BM25 is deprecated"]
+    },
+    {
+      "id": "mongodb-atlas-vector",
+      "title": "MongoDB Atlas Vector Search",
+      "url": "https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/",
+      "category": "backend-search-engine",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["Lucene scoring algorithm", "Lucene documentation", "frequency of occurrence", "position of the search term"]
+    },
+    {
+      "id": "mongodb-atlas-quantization",
+      "title": "MongoDB Atlas — Vector Quantization (scalar, binary)",
+      "url": "https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-quantization/",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": [
+        "Scalar quantization involves first identifying the minimum and maximum values for each dimension of the indexed vectors to establish a range of values for a dimension.",
+        "Binary quantization involves assuming a midpoint of `0` for each dimension, which is typically appropriate for embeddings normalized to length `1`",
+        "In MongoDB Vector Search, this quantization reduces the vector embedding's RAM cost to about one fourth (`1/3.75`) of the pre-quantization cost.",
+        "In MongoDB Vector Search, this quantization reduces the vector embedding's RAM cost to one twenty-fourth (`1/24`) of the pre-quantization cost.",
+        "We recommend quantization for applications with a large number of vectors, such as over 100,000."
+      ]
+    },
+    {
+      "id": "chroma-docs",
+      "title": "Chroma — Querying Collections / Full-Text Search",
+      "url": "https://docs.trychroma.com/docs/querying-collections/full-text-search",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["$contains", "$not_contains", "full-text search", "case-sensitive", "$regex"]
+    },
+    {
+      "id": "openai-file-search",
+      "title": "OpenAI File Search / Vector Stores",
+      "url": "https://platform.openai.com/docs/assistants/tools/file-search",
+      "category": "backend-managed",
+      "authority": "primary",
+      "add_as_web_search": true
+    },
+    {
+      "id": "paradedb-docs",
+      "title": "ParadeDB — BM25 + vector in Postgres",
+      "url": "https://docs.paradedb.com/",
+      "category": "backend-core",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["pg_search", "Tantivy", "BM25 ranking"]
+    },
+    {
+      "id": "qwen3-embedding",
+      "title": "Qwen3-Embedding — Apache-2.0 multilingual embedder, top-ranked on MTEB multilingual v2 through mid-2026 (open-weight leadership churns fast; verify live standing, e.g. NVIDIA Llama-Embed-Nemotron-8B has since been reported ahead)",
+      "url": "https://qwenlm.github.io/blog/qwen3-embedding/",
+      "category": "embedder",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["Qwen3-Embedding-8B", "MTEB multilingual v2", "Apache-2.0"]
+    },
+    {
+      "id": "voyage-3-5",
+      "title": "Voyage AI — voyage-3.5 (legacy; superseded by voyage-4 family)",
+      "url": "https://blog.voyageai.com/2025/05/20/voyage-3-5/",
+      "category": "embedder",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "notes": "Legacy model string. Current tier is voyage-4 (MoE architecture). See voyage-4 entry.",
+      "verify_against": ["voyage-3.5", "int8", "Matryoshka", "storage reduction vs OpenAI-v3-large"]
+    },
+    {
+      "id": "voyage-4",
+      "title": "Voyage AI — voyage-4 family (MoE architecture, current tier as of 2026)",
+      "url": "https://docs.voyageai.com/",
+      "category": "embedder",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["voyage-4", "voyage-4-large", "voyage-4-lite", "voyage-4-nano", "MoE architecture"]
+    },
+    {
+      "id": "gemini-embedding-001",
+      "title": "Google — gemini-embedding-001 (#1 API-tier MTEB English April 2026, 3072 dims Matryoshka; open-weight models now lead overall — verify current standing before citing as #1 overall)",
+      "url": "https://ai.google.dev/gemini-api/docs/embeddings",
+      "category": "embedder",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": [
+        "gemini-embedding-001",
+        "MTEB English score 68.32",
+        "3072 dimensions",
+        "Matryoshka truncation to 768",
+        "$0.15/M tokens",
+        "$0.075/M batch",
+        "#1 API-tier MTEB English (April 2026); open-weight models now lead overall — verify current standing before citing as #1 overall"
+      ]
+    },
+    {
+      "id": "cohere-embed-v4",
+      "title": "Cohere Embed v4 — multimodal text+images, 1536 dims, 128k context, Matryoshka + binary quantization",
+      "url": "https://docs.cohere.com/docs/embed-api",
+      "category": "embedder",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": [
+        "embed-v4",
+        "multimodal",
+        "1536 dimensions",
+        "128k context",
+        "Matryoshka",
+        "binary quantization",
+        "$0.12/M tokens"
+      ]
+    },
+    {
+      "id": "muvera-paper",
+      "title": "MUVERA: Multi-Vector Retrieval via Fixed Dimensional Encodings (Dhulipala et al., NeurIPS 2024)",
+      "url": "https://arxiv.org/abs/2405.19504",
+      "category": "deferred-extension",
+      "authority": "research",
+      "add_as_web_search": true,
+      "verify_against": ["Fixed Dimensional Encoding", "MaxSim approximation", "BEIR recall", "Qdrant", "Weaviate 1.31"]
+    },
+    {
+      "id": "garrytan-gbrain",
+      "title": "GBrain - operational agent brain with markdown source layer and pgvector retrieval",
+      "url": "https://github.com/garrytan/gbrain",
+      "category": "operational-brain",
+      "authority": "project-primary",
+      "license": "MIT",
+      "verified": "2026-05-18",
+      "add_as_web_search": true,
+      "verify_against": ["brain/source routing", "PGLite default", "Postgres + pgvector scale path", "hybrid search", "typed graph links", "maintenance loops"]
+    },
+    {
+      "id": "pg-textsearch-intro",
+      "title": "PostgreSQL 18 — 12.1 Introduction (why FTS exists: no linguistic support / no ranking in LIKE; tsvector/tsquery/@@)",
+      "url": "https://www.postgresql.org/docs/current/textsearch-intro.html",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["no linguistic support", "ordering (ranking)", "tsvector", "tsquery", "@@", "proximity ranking"]
+    },
+    {
+      "id": "pg-textsearch-controls",
+      "title": "PostgreSQL 18 — 12.3 Controlling Text Search (to_tsquery, ts_rank, ts_rank_cd, setweight)",
+      "url": "https://www.postgresql.org/docs/current/textsearch-controls.html",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["websearch_to_tsquery", "ts_rank_cd", "normalization flag 32", "setweight A B C D"]
+    },
+    {
+      "id": "pg-textsearch-tables",
+      "title": "PostgreSQL 18 — 12.2 Tables and Indexes (generated tsvector column, GIN)",
+      "url": "https://www.postgresql.org/docs/current/textsearch-tables.html",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["GENERATED ALWAYS AS", "STORED", "GIN", "coalesce"]
+    },
+    {
+      "id": "pg-textsearch-features",
+      "title": "PostgreSQL 18 — 12.4 Additional Features (ts_headline, ts_stat, tsvector_update_trigger)",
+      "url": "https://www.postgresql.org/docs/current/textsearch-features.html",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["ts_headline", "ts_stat", "tsvector_update_trigger_column", "setweight"]
+    },
+    {
+      "id": "pg-textsearch-limitations",
+      "title": "PostgreSQL 18 — 12.11 Limitations (tsvector/lexeme/position limits)",
+      "url": "https://www.postgresql.org/docs/current/textsearch-limitations.html",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["1 megabyte", "2 kilobytes", "16383 positions", "256 positions per lexeme"]
+    },
+    {
+      "id": "pg-textsearch-indexes",
+      "title": "PostgreSQL 18 — 12.9 Preferred Index Types for Text Search (GIN vs GiST)",
+      "url": "https://www.postgresql.org/docs/current/textsearch-indexes.html",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["GIN preferred", "GiST lossy", "recheck"]
+    },
+    {
+      "id": "pg-unaccent",
+      "title": "PostgreSQL 18 — F.48 unaccent (diacritic-removing text-search dictionary; config-via-CREATE/ALTER TEXT SEARCH CONFIGURATION)",
+      "url": "https://www.postgresql.org/docs/current/unaccent.html",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["CREATE TEXT SEARCH CONFIGURATION", "ALTER MAPPING ... WITH unaccent", "removes diacritics", "unaccent dictionary"]
+    },
+    {
+      "id": "pg-trgm",
+      "title": "PostgreSQL 18 — F.35 pg_trgm (trigram similarity, fuzzy match)",
+      "url": "https://www.postgresql.org/docs/current/pgtrgm.html",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["similarity()", "% operator", "gin_trgm_ops", "pg_trgm.similarity_threshold"]
+    },
+    {
+      "id": "postgrespro-rum",
+      "title": "RUM index access method (positional/rank-in-index alternative to GIN)",
+      "url": "https://github.com/postgrespro/rum",
+      "category": "deferred-extension",
+      "authority": "project-primary",
+      "license": "BSD-style (PostgreSQL-like)",
+      "verified": "2026-05-19",
+      "add_as_web_search": true,
+      "verify_against": ["latest release/tag and date", "PostgreSQL 16/17/18 support", "slower build vs GIN", "ORDER BY timestamp"]
+    },
+    {
+      "id": "paradedb-pg-search",
+      "title": "ParadeDB pg_search — BM25 full-text search extension for Postgres",
+      "url": "https://github.com/paradedb/paradedb",
+      "category": "backend-core",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["pg_search", "BM25", "@@@ operator", "bm25 index", "Tantivy"]
+    },
+    {
+      "id": "opensearch-bm25",
+      "title": "OpenSearch — Full-text queries (match query, BM25 default similarity)",
+      "url": "https://docs.opensearch.org/latest/query-dsl/full-text/match/",
+      "category": "backend-search-engine",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["BM25 default similarity", "match query"]
+    },
+    {
+      "id": "pinecone-fts",
+      "title": "Pinecone — Full-text search (BM25 via document-schema API, public preview)",
+      "url": "https://docs.pinecone.io/guides/search/full-text-search",
+      "category": "backend-serverless",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["BM25 scoring", "full_text_search field", "IDF", "length normalization", "public preview", "2026-01.alpha"]
+    },
+    {
+      "id": "opensearch-neural-sparse",
+      "title": "OpenSearch — Neural Sparse Search (sparse_encoding ingest processor, neural_sparse query, two-phase processor)",
+      "url": "https://docs.opensearch.org/latest/vector-search/ai-search/neural-sparse-search/",
+      "category": "backend-search-engine",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["neural sparse", "sparse_encoding", "neural sparse query two-phase processor", "Sparse encoding processor", "sparse vector field type"]
+    },
+    {
+      "id": "elasticsearch-elser",
+      "title": "Elasticsearch — ELSER (Elastic Learned Sparse EncodeR; sparse_vector field; learned sparse retrieval)",
+      "url": "https://www.elastic.co/guide/en/machine-learning/current/ml-nlp-elser.html",
+      "category": "backend-search-engine",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["Elastic Learned Sparse EncodeR", "ELSER", "sparse vector", "sparse_vector", "ELSER expands the indexed and searched passages into collections of terms", "learned associations capturing relevance", "out-of-domain model"]
+    },
+    {
+      "id": "duckdb-vss",
+      "title": "DuckDB — Vector Similarity Search (vss) extension",
+      "url": "https://duckdb.org/docs/current/core_extensions/vss.html",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["vss", "HNSW", "array_distance", "array_cosine_distance", "array_negative_inner_product", "INSTALL vss", "LOAD vss", "CREATE INDEX", "USING HNSW", "hnsw_enable_experimental_persistence", "Only vectors consisting of FLOATs (32-bit, single precision) are supported at the moment"]
+    },
+    {
+      "id": "sqlite-vec",
+      "title": "sqlite-vec — KNN vector search as a SQLite extension",
+      "url": "https://github.com/asg017/sqlite-vec",
+      "category": "backend-alt",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["vec0", "create virtual table", "using vec0", "KNN", "order by distance", "Written in pure C, no dependencies, runs anywhere SQLite runs"]
+    },
+    {
+      "id": "hf-tei",
+      "title": "Hugging Face Text Embeddings Inference (TEI)",
+      "url": "https://github.com/huggingface/text-embeddings-inference",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["Token based dynamic batching", "OpenAI-compatible endpoints via HTTP", "A blazing fast inference solution for text embeddings models"]
+    },
+    {
+      "id": "infinity-embeddings",
+      "title": "Infinity — high-throughput embedding server (michaelfeil)",
+      "url": "https://github.com/michaelfeil/infinity",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["Infinity is a high-throughput, low-latency REST API for serving text-embeddings", "Infinity uses dynamic batching and tokenization dedicated in worker threads", "Mix-and-match multiple models. Infinity orchestrates them.", "OpenAPI aligned to OpenAI's API specs"]
+    },
+    {
+      "id": "vllm-embeddings",
+      "title": "vLLM — Pooling / Embedding Models (/v1/embeddings)",
+      "url": "https://docs.vllm.ai/en/latest/models/pooling_models.html",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["OpenAI-compatible Embeddings API (`/v1/embeddings`)", "Converts unstructured data (text, images, audio, etc.) into structured numerical vectors (embeddings)."]
+    },
+    {
+      "id": "ollama-embeddings",
+      "title": "Ollama API — embeddings endpoint (/api/embed)",
+      "url": "https://github.com/ollama/ollama/blob/main/docs/api.md",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["/api/embed", "Generate embeddings from a model", "/api/embeddings", "this endpoint has been superseded by `/api/embed`"]
+    },
+    {
+      "id": "llama-cpp-embeddings",
+      "title": "llama.cpp — llama-server --embedding / /embedding endpoint",
+      "url": "https://github.com/ggml-org/llama.cpp",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": false,
+      "verify_against": ["llama-server -m model.gguf --embedding --pooling cls -ub 8192", "# use the /embedding endpoint", "Serve an embedding model"]
+    },
+    {
+      "id": "gemini-embedding-2",
+      "title": "Google — gemini-embedding-2 (GA March 2026; first natively multimodal Gemini embedder: text+images+video+audio+PDFs, 3072 dims, 8192-token context, 100+ languages)",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+      "category": "embedder",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "notes": "Model ID: gemini-embedding-2 (GA), gemini-embedding-2-preview (original preview). Use for multimodal corpora. For text-only corpora, gemini-embedding-001 remains preferred (higher MTEB English score). Verified via ai.google.dev June 2026.",
+      "verify_against": [
+        "gemini-embedding-2",
+        "gemini-embedding-2-preview",
+        "3072 dimensions",
+        "8192 text tokens",
+        "multimodal",
+        "text, images, video, audio, PDFs"
+      ]
+    },
+    {
+      "id": "voyage-4-large",
+      "title": "Voyage AI — voyage-4-large (MoE architecture, 1024-dim default with Matryoshka 256/512/2048 options, GA Jan 2026)",
+      "url": "https://blog.voyageai.com/2026/03/03/moe-voyage-4-large/",
+      "category": "embedder",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "notes": "GA January 2026. Default dim 1024; Matryoshka options: 256, 512, 2048. voyage-3-large is the legacy model string. See also voyage-4 entry for the full family.",
+      "verify_against": [
+        "voyage-4-large",
+        "MoE",
+        "1024",
+        "Matryoshka"
+      ]
+    },
+    {
+      "id": "neon-pg-search-deprecation",
+      "title": "Neon — pg_search (ParadeDB) no longer available for new projects as of March 19, 2026",
+      "url": "https://neon.com/docs/extensions/pg_search",
+      "category": "platform",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "notes": "As of 2026-03-19, pg_search cannot be added to new Neon projects. Existing projects retain access. Teams on new Neon projects should use the ts_rank/FTS path or an external lexical leg. See references/bm25-when-ts_rank-isnt-enough.md Known traps section.",
+      "verify_against": [
+        "pg_search not available for new projects",
+        "March 19, 2026",
+        "existing projects"
+      ]
+    }
+    ]
+  }
+}

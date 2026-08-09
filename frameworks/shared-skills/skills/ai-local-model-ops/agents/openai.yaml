@@ -1,0 +1,4 @@
+interface:
+  display_name: "Local Model Operations"
+  short_description: "Runs local and self-hosted LLM workflows with Ollama, Open WebUI, llamafile, and"
+  default_prompt: "Use $ai-local-model-ops for Runs local and self-hosted LLM workflows with Ollama, Open WebUI, llamafile, and lightweight adaptation paths. Use when choosing or operating private model stacks."

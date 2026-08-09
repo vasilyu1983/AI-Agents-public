@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software Solution Architecture"
+  short_description: "Designs cross-system target states and transition plans from business workflows"
+  default_prompt: "Use $software-solution-architecture for Designs cross-system target states and transition plans from business workflows and system boundaries. Use when comparing end-to-end solution options or phased migrations."

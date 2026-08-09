@@ -1,0 +1,67 @@
+{
+  "service_name": "Example B2B SaaS Platform",
+  "test_date": "2026-03-21",
+  "environment": "staging-prod-parity",
+  "budgets": {
+    "lcp_ms": 2500,
+    "inp_ms": 200,
+    "cls": 0.1,
+    "api_p95_ms": 400,
+    "api_throughput_rps": 150,
+    "error_rate_pct": 1.0,
+    "bundle_size_kb": 350
+  },
+  "results": {
+    "lcp_ms": 2810,
+    "inp_ms": 185,
+    "cls": 0.06,
+    "api_p95_ms": 387,
+    "api_throughput_rps": 162,
+    "error_rate_pct": 0.4,
+    "bundle_size_kb": 412
+  },
+  "test_scenarios": [
+    {
+      "name": "smoke_login_dashboard",
+      "type": "load",
+      "duration_minutes": 1,
+      "virtual_users": 5,
+      "description": "Login → dashboard load under minimal concurrency. PR-gate smoke check."
+    },
+    {
+      "name": "load_core_api_endpoints",
+      "type": "load",
+      "duration_minutes": 15,
+      "virtual_users": 100,
+      "description": "Full load test covering create/read/update on core API routes at expected peak traffic."
+    },
+    {
+      "name": "soak_memory_leak_check",
+      "type": "soak",
+      "duration_minutes": 120,
+      "virtual_users": 50,
+      "description": "Sustained load over 2 hours to detect memory leaks, connection pool exhaustion, and GC degradation."
+    },
+    {
+      "name": "stress_find_ceiling",
+      "type": "stress",
+      "duration_minutes": 20,
+      "virtual_users": 500,
+      "description": "Ramp VUs from 50 to 500 in 10-min increments to locate max throughput before SLO violation."
+    },
+    {
+      "name": "spike_autoscaling_validation",
+      "type": "spike",
+      "duration_minutes": 10,
+      "virtual_users": 300,
+      "description": "Sudden 10x traffic spike to validate autoscaling triggers, cold-start latency, and queue depth."
+    },
+    {
+      "name": "nightly_regression_suite",
+      "type": "load",
+      "duration_minutes": 30,
+      "virtual_users": 80,
+      "description": "Nightly full regression against baseline snapshot to catch latency and throughput regressions."
+    }
+  ]
+}

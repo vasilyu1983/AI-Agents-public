@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dev Repo Research"
+  short_description: "Scans public GitHub repos for skills, practices, or code patterns"
+  default_prompt: "Use $research-git to scan public GitHub repos for agent skills, dev practices, CI/PR workflows, or framework code patterns; return attributed research packs before any merge."

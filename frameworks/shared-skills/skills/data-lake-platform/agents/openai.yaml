@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Lake Platform"
+  short_description: "Designs lakehouse platforms across Iceberg, Delta, Hudi, and Paimon"
+  default_prompt: "Use $data-lake-platform for Designs lakehouse platforms across Iceberg, Delta, Hudi, and Paimon. Use when choosing catalogs, CDC paths, query engines, governance, or cost controls."

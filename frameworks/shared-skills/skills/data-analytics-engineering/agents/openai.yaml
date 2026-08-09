@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analytics Engineering"
+  short_description: "Builds analytics engineering layers for metrics, contracts, and BI-ready models"
+  default_prompt: "Use $data-analytics-engineering for Builds analytics engineering layers for metrics, contracts, and BI-ready models. Use when shaping dbt or SQLMesh marts, metric governance, lineage, or data quality."

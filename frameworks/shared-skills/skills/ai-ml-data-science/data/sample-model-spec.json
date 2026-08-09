@@ -1,0 +1,71 @@
+{
+  "model_name": "customer-churn-predictor",
+  "version": "1.4.0",
+  "model_type": "classification",
+  "task_description": "Predict whether a B2B SaaS customer will churn within the next 30 days, scored daily at midnight UTC.",
+  "intended_use": "Trigger proactive customer success interventions for accounts with churn probability >= 0.35. Not intended for automated account termination or pricing decisions.",
+  "training_data": {
+    "source": "data-warehouse.customers.events_mart",
+    "date_range": {"start": "2023-01-01", "end": "2025-09-30"},
+    "row_count": 284500,
+    "feature_count": 47,
+    "target_variable": "churned_within_30d",
+    "temporal_column": "snapshot_date",
+    "data_collection_date": "2025-10-15"
+  },
+  "features": [
+    {"name": "days_since_last_login",        "type": "numeric",      "description": "Days elapsed since the account last had any user login, as of snapshot_date"},
+    {"name": "active_seats_last_30d",        "type": "numeric",      "description": "Number of distinct user seats with at least one session in the prior 30-day window"},
+    {"name": "support_tickets_open",         "type": "numeric",      "description": "Count of unresolved support tickets at snapshot time"},
+    {"name": "mrr_usd",                      "type": "numeric",      "description": "Monthly recurring revenue in USD at snapshot time"},
+    {"name": "contract_months_remaining",    "type": "numeric",      "description": "Months left on current contract term at snapshot_date"},
+    {"name": "nps_score_last",               "type": "numeric",      "description": "Most recent NPS survey score (-100 to 100); null if no survey in last 90d"},
+    {"name": "feature_adoption_pct",         "type": "numeric",      "description": "Fraction of paid feature modules with at least one event in the last 30d"},
+    {"name": "plan_tier",                    "type": "categorical",  "description": "Subscription tier: starter, growth, enterprise"},
+    {"name": "industry_vertical",            "type": "categorical",  "description": "Account industry classification"},
+    {"name": "account_age_days",             "type": "numeric",      "description": "Days since account creation at snapshot_date"},
+    {"name": "api_calls_last_7d",            "type": "numeric",      "description": "Total API calls originating from the account in the 7-day window ending at snapshot_date"},
+    {"name": "billing_overdue_flag",         "type": "binary",       "description": "1 if any invoice is past due at snapshot_date, else 0"},
+    {"name": "cs_health_score",              "type": "numeric",      "description": "Composite customer success health score (0-100) set by CS team, updated weekly"},
+    {"name": "rollup_logins_prev_quarter",   "type": "numeric",      "description": "Total login events in the calendar quarter prior to snapshot_date"},
+    {"name": "export_events_last_30d",       "type": "numeric",      "description": "Number of data-export events (CSV/API bulk) in the 30-day window; elevated counts may signal offboarding"},
+    {"name": "integrations_active_count",    "type": "numeric",      "description": "Number of third-party integrations in a connected state at snapshot_date"}
+  ],
+  "performance_metrics": [
+    {"metric": "ROC-AUC",          "value": 0.847, "benchmark": 0.800, "split": "temporal-holdout-2025-Q3"},
+    {"metric": "PR-AUC",           "value": 0.612, "benchmark": 0.550, "split": "temporal-holdout-2025-Q3"},
+    {"metric": "Precision@0.35",   "value": 0.701, "benchmark": 0.650, "split": "temporal-holdout-2025-Q3"},
+    {"metric": "Recall@0.35",      "value": 0.583, "benchmark": 0.500, "split": "temporal-holdout-2025-Q3"},
+    {"metric": "Brier Score",      "value": 0.094, "benchmark": 0.120, "split": "temporal-holdout-2025-Q3"},
+    {"metric": "ECE (calibration)","value": 0.031, "benchmark": 0.050, "split": "temporal-holdout-2025-Q3"}
+  ],
+  "limitations": [
+    "Model performance degrades for accounts with fewer than 60 days of history — flag these as low-confidence predictions.",
+    "NPS score is missing for ~38% of accounts; the model imputes median; predictions for this segment are less reliable.",
+    "Trained only on B2B SaaS accounts; not validated for B2C or marketplace customers.",
+    "Seasonal effects (e.g., end-of-year budget cycles) are partially captured but not explicitly modelled.",
+    "Model does not account for macroeconomic shocks or sudden product outages that would shift baseline churn rates."
+  ],
+  "ethical_considerations": [
+    "Churn scores must not be used to deprioritize support for accounts predicted to churn — this creates a self-fulfilling prophecy.",
+    "Score distributions should be audited quarterly across industry_vertical to detect disparate false-positive rates.",
+    "CS interventions triggered by this model must be logged for feedback collection and bias monitoring.",
+    "Do not surface raw probability scores to customers; communicate only through internal tooling."
+  ],
+  "prediction_timestamp_defined": true,
+  "prediction_timestamp_field": "snapshot_date",
+  "label_timestamp_field": "churn_event_date",
+  "train_val_test_split_method": "temporal",
+  "split_config": {
+    "train_end": "2025-06-30",
+    "val_end": "2025-08-31",
+    "test_end": "2025-09-30"
+  },
+  "lineage": {
+    "experiment_id": "exp-churn-v14-20251010",
+    "git_commit": "a3f9c12",
+    "feature_store_version": "feast-churn-2025-10",
+    "mlflow_run_id": "8b2e44f1dc2a4c60b7f3a591e1c8d0ae",
+    "model_artifact": "s3://ml-models/churn/v1.4.0/model.pkl"
+  }
+}

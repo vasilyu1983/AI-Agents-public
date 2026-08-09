@@ -1,0 +1,167 @@
+{
+  "metadata": {
+    "skill": "gamedev-godot",
+    "updated": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 17,
+    "title": "Gamedev Godot - Sources",
+    "description": "Primary sources for creating a Godot 4.x game from empty project to exported build with mid-2026 best practices: editor/project setup, typed GDScript and C#, scene/node architecture, signals and autoloads, CharacterBody movement, TileMapLayer/GridMap, profiling and object pooling, renderer choice, and per-platform export. Godot facts drift across 4.x minor versions; volatile sources are marked add_as_web_search for live re-verification."
+  },
+  "categories": {
+    "setup_and_project": [
+      {
+        "name": "Godot Docs - Introduction & Getting Started",
+        "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/index.html",
+        "description": "Official getting-started path: editor tour, first project, scenes and nodes. Version-pinned to /stable/; check the version selector for your minor.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - Project Organization & Best Practices",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/best_practices/project_organization.html",
+        "description": "Official guidance on folder layout, version control, and what to commit vs gitignore.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - Version Control Systems",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/best_practices/version_control_systems.html",
+        "description": "Official gitignore recommendations, including excluding the generated .godot/ cache.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - InputEvent & Input Map",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/inputs/inputevent.html",
+        "description": "Official input handling: input map actions, Input singleton, get_vector for movement.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "language_and_architecture": [
+      {
+        "name": "Godot Docs - GDScript Reference",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html",
+        "description": "Official GDScript language reference: static typing, class_name, @export, @onready.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - Signals",
+        "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html",
+        "description": "Official signals tutorial underpinning the signals-up / calls-down decoupling pattern.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - Singletons (Autoload)",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/singletons_autoload.html",
+        "description": "Official autoload/singleton guidance for cross-scene global state.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - Idle & Physics Processing",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/idle_and_physics_processing.html",
+        "description": "Official explanation of _process vs _physics_process and the fixed timestep.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - C# / .NET Basics",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/index.html",
+        "description": "Official C# support docs including platform/export caveats. Web export support for C# is volatile across 4.x - verify.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "scenes_nodes_and_performance": [
+      {
+        "name": "Godot Docs - Nodes and Scenes",
+        "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_and_scenes.html",
+        "description": "Official model of scenes as reusable prefabs and the node tree.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - CharacterBody2D / move_and_slide",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/physics/using_character_body_2d.html",
+        "description": "Official CharacterBody movement pattern: set velocity, call move_and_slide().",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - Using TileMapLayer",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/2d/using_tilemaps.html",
+        "description": "Official 2D tile workflow. The monolithic TileMap node was split into TileMapLayer in a 4.x minor - verify the current node for your version.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - The Profiler & Optimization",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/debug/the_profiler.html",
+        "description": "Official profiler and debugging tools for finding real bottlenecks before optimizing.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "rendering_and_export": [
+      {
+        "name": "Godot Docs - Renderers",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/rendering/renderers.html",
+        "description": "Official Forward+ / Mobile / Compatibility renderer comparison and target guidance. Names/capabilities drift across 4.x - verify.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - Exporting Projects & Export Templates",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/export/exporting_projects.html",
+        "description": "Official export workflow, export-template version matching, per-platform presets, and headless CI export.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - Global Illumination (LightmapGI / SDFGI / VoxelGI)",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/3d/global_illumination/introduction_to_global_illumination.html",
+        "description": "Official GI comparison: baked LightmapGI vs real-time SDFGI (Forward+ only) vs VoxelGI, and renderer constraints.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - Pipeline Compilations / Shader Stutter",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/performance/pipeline_compilations.html",
+        "description": "Official guidance on shader/pipeline compilation stutter and mitigation (cache, pre-warm). Path/naming drifts across versions - verify.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Docs - High-level Multiplayer",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/networking/high_level_multiplayer.html",
+        "description": "Official MultiplayerAPI, MultiplayerSynchronizer, and @rpc annotations for server-authoritative networking.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Godot Docs - Saving Games (FileAccess / ResourceSaver security)",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html",
+        "description": "Official save-system guidance; JSON via FileAccess vs custom Resources, and the resource-deserialization security caveat.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Engine Blog - Introducing the Godot Asset Store",
+        "url": "https://godotengine.org/article/introducing-the-godot-asset-store/",
+        "description": "Official announcement of the Asset Store replacing the Asset Library starting in 4.7; old Asset Library links break. Re-verify migration status per release.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Godot Engine - Console Support",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/platform/consoles.html",
+        "description": "Official statement that Godot has no first-party console export; console shipping requires a third-party middleware/porting vendor. Verify current vendor list before committing to a console SKU.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ]
+  }
+}

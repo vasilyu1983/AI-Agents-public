@@ -1,0 +1,204 @@
+{
+  "product_name": "Clearpath B2B SaaS Platform",
+  "scan_date": "2026-03-10",
+  "vulnerabilities": [
+    {
+      "id": "VULN-001",
+      "title": "Reflected XSS in search query parameter",
+      "severity": "high",
+      "status": "open",
+      "discovered_date": "2026-03-10",
+      "due_date": "2026-03-17",
+      "scanner": "OWASP ZAP",
+      "category": "xss",
+      "affected_component": "web-app/search"
+    },
+    {
+      "id": "VULN-002",
+      "title": "SQL injection in report filter endpoint",
+      "severity": "critical",
+      "status": "in_progress",
+      "discovered_date": "2026-03-10",
+      "due_date": "2026-03-11",
+      "scanner": "Semgrep",
+      "category": "sqli",
+      "affected_component": "api/reports"
+    },
+    {
+      "id": "VULN-003",
+      "title": "Hardcoded AWS secret key in deployment script",
+      "severity": "critical",
+      "status": "resolved",
+      "discovered_date": "2026-03-01",
+      "due_date": "2026-03-02",
+      "scanner": "gitleaks",
+      "category": "secrets",
+      "affected_component": "infra/deploy"
+    },
+    {
+      "id": "VULN-004",
+      "title": "Insecure direct object reference in invoice download",
+      "severity": "high",
+      "status": "open",
+      "discovered_date": "2026-03-08",
+      "due_date": "2026-03-15",
+      "scanner": "Burp Suite",
+      "category": "auth",
+      "affected_component": "api/billing"
+    },
+    {
+      "id": "VULN-005",
+      "title": "lodash 4.17.20 prototype pollution (CVE-2021-23337)",
+      "severity": "high",
+      "status": "open",
+      "discovered_date": "2026-03-10",
+      "due_date": "2026-03-17",
+      "scanner": "Dependabot",
+      "category": "dependency",
+      "affected_component": "frontend/node_modules"
+    },
+    {
+      "id": "VULN-006",
+      "title": "Missing CSRF token on account settings form",
+      "severity": "medium",
+      "status": "open",
+      "discovered_date": "2026-02-18",
+      "due_date": "2026-03-20",
+      "scanner": "OWASP ZAP",
+      "category": "csrf",
+      "affected_component": "web-app/settings"
+    },
+    {
+      "id": "VULN-007",
+      "title": "TLS 1.0 enabled on legacy admin subdomain",
+      "severity": "medium",
+      "status": "in_progress",
+      "discovered_date": "2026-03-05",
+      "due_date": "2026-04-04",
+      "scanner": "Nuclei",
+      "category": "crypto",
+      "affected_component": "infra/admin-subdomain"
+    },
+    {
+      "id": "VULN-008",
+      "title": "Container image running as root (Ubuntu 22.04 base)",
+      "severity": "medium",
+      "status": "open",
+      "discovered_date": "2026-03-10",
+      "due_date": "2026-04-09",
+      "scanner": "Trivy",
+      "category": "config",
+      "affected_component": "docker/api-service"
+    },
+    {
+      "id": "VULN-009",
+      "title": "Verbose stack trace exposed in 500 error responses",
+      "severity": "low",
+      "status": "open",
+      "discovered_date": "2026-02-01",
+      "due_date": "2026-05-02",
+      "scanner": "OWASP ZAP",
+      "category": "config",
+      "affected_component": "api/error-handler"
+    },
+    {
+      "id": "VULN-010",
+      "title": "Password reset token does not expire",
+      "severity": "high",
+      "status": "resolved",
+      "discovered_date": "2026-02-20",
+      "due_date": "2026-02-27",
+      "scanner": "Burp Suite",
+      "category": "auth",
+      "affected_component": "api/auth"
+    },
+    {
+      "id": "VULN-011",
+      "title": "Stored XSS in organization display name field",
+      "severity": "high",
+      "status": "open",
+      "discovered_date": "2026-03-09",
+      "due_date": "2026-03-16",
+      "scanner": "Semgrep",
+      "category": "xss",
+      "affected_component": "web-app/org-settings"
+    },
+    {
+      "id": "VULN-012",
+      "title": "OpenSSL 3.0.7 heap buffer overflow (CVE-2022-3602)",
+      "severity": "critical",
+      "status": "open",
+      "discovered_date": "2026-03-10",
+      "due_date": "2026-03-11",
+      "scanner": "Trivy",
+      "category": "dependency",
+      "affected_component": "docker/base-image"
+    },
+    {
+      "id": "VULN-013",
+      "title": "S3 bucket with public read ACL (audit logs bucket)",
+      "severity": "high",
+      "status": "in_progress",
+      "discovered_date": "2026-03-07",
+      "due_date": "2026-03-14",
+      "scanner": "Checkov",
+      "category": "config",
+      "affected_component": "infra/s3"
+    },
+    {
+      "id": "VULN-014",
+      "title": "Weak bcrypt cost factor (cost=8) for password hashing",
+      "severity": "medium",
+      "status": "open",
+      "discovered_date": "2026-03-03",
+      "due_date": "2026-04-02",
+      "scanner": "Semgrep",
+      "category": "crypto",
+      "affected_component": "api/auth"
+    },
+    {
+      "id": "VULN-015",
+      "title": "Missing Content-Security-Policy header on marketing pages",
+      "severity": "low",
+      "status": "open",
+      "discovered_date": "2026-03-10",
+      "due_date": "2026-06-08",
+      "scanner": "Nuclei",
+      "category": "config",
+      "affected_component": "web-app/marketing"
+    },
+    {
+      "id": "VULN-016",
+      "title": "Unrestricted file upload allows server-side script execution",
+      "severity": "critical",
+      "status": "open",
+      "discovered_date": "2026-03-10",
+      "due_date": "2026-03-11",
+      "scanner": "Burp Suite",
+      "category": "upload",
+      "affected_component": "api/file-upload"
+    },
+    {
+      "id": "VULN-017",
+      "title": "JWT algorithm confusion attack (RS256 to HS256 downgrade)",
+      "severity": "high",
+      "status": "open",
+      "discovered_date": "2026-03-06",
+      "due_date": "2026-03-13",
+      "scanner": "Burp Suite",
+      "category": "auth",
+      "affected_component": "api/auth"
+    },
+    {
+      "id": "VULN-018",
+      "title": "Terraform IAM role with wildcard resource permissions",
+      "severity": "medium",
+      "status": "resolved",
+      "discovered_date": "2026-03-02",
+      "due_date": "2026-04-01",
+      "scanner": "Checkov",
+      "category": "config",
+      "affected_component": "infra/iam"
+    }
+  ]
+}

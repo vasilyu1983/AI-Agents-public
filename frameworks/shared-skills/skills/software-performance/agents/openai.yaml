@@ -1,0 +1,4 @@
+interface:
+  display_name: "Performance"
+  short_description: "Systematic profiling, load testing, performance budgets, and regression"
+  default_prompt: "Use $software-performance for Systematic profiling, load testing, performance budgets, and regression prevention. Use when diagnosing slow services, benchmarking systems, or preventing regressions."

@@ -1,0 +1,70 @@
+{
+  "skill_name": "software-solution-architecture",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design the target state for a regulated onboarding journey that spans a web app, CRM, KYC vendor, payments provider, and finance back office. We need current-state pain points, target-state options, system-of-record choices, an interim coexistence design, and migration waves that avoid a big-bang cutover.",
+      "expected_output": "The skill should activate, stay at the system-landscape level, compare multiple cross-system options, identify systems of record and trust boundaries, and produce a phased transition plan rather than jumping into service-internal runtime patterns.",
+      "files": [],
+      "expectations": [
+        "The output maps the participating systems, owners, and boundaries.",
+        "The output compares at least two target-state options before recommending one.",
+        "The output includes an interim state or migration wave plan.",
+        "The output avoids defaulting into service-level decomposition detail."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We have an ERP, warehouse system, storefront, and customer support platform all touching order state. Choose where order truth should live, decide which boundaries should be API versus events versus batch, and propose a rollout sequence that lets legacy and new flows coexist for two quarters.",
+      "expected_output": "The skill should activate and focus on systems of record, integration choices, coexistence rules, and rollout waves across the landscape.",
+      "files": [],
+      "expectations": [
+        "The output identifies a system-of-record strategy.",
+        "The output chooses integration styles per boundary and explains why.",
+        "The output includes coexistence or reconciliation rules.",
+        "The output stays at the solution level rather than prescribing microservices internals."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Compare three solution options for a claims workflow modernization: keep the legacy core and add an anti-corruption layer, split channels first with a BFF, or introduce an event backbone between the portal, policy admin, and case management systems. Recommend one option and define what not to decide yet.",
+      "expected_output": "The skill should activate, compare multiple solution options, call out the preferred target state, and state which deeper architecture decisions should be deferred to companion skills.",
+      "files": [],
+      "expectations": [
+        "The output compares the listed landscape options instead of collapsing immediately to one.",
+        "The output calls out what remains intentionally deferred.",
+        "The output routes runtime-depth questions to companion skills."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Within a known payments solution, choose modular monolith versus microservices, decide bounded contexts, and define retry, timeout, and circuit-breaker policy for the settlement domain.",
+      "expected_output": "The skill should stay inactive or hand off because this is runtime and platform architecture inside a known solution rather than cross-system solution design.",
+      "files": [],
+      "expectations": [
+        "The response routes the task to software-architecture-design.",
+        "The response does not present itself as the primary skill for this prompt."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Design the REST API contract and RFC 9457 error model for an invoicing endpoint, including pagination, filtering, and versioning rules.",
+      "expected_output": "The skill should stay inactive or defer because the request is API contract design, not solution architecture.",
+      "files": [],
+      "expectations": [
+        "The response routes the task to dev-api-design.",
+        "The response does not expand into landscape-level migration or target-state planning."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Implement authN and authZ patterns, secret handling, and OWASP-aligned controls for a new backend service that already has a chosen architecture.",
+      "expected_output": "The skill should stay inactive or defer because the main problem is security implementation inside a service.",
+      "files": [],
+      "expectations": [
+        "The response routes the task to software-security-appsec or software-backend.",
+        "The response does not claim solution-architecture ownership for this request."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "skill_name": "software-security-appsec",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Map the following five findings from a Node.js 20 / Express 5 API to OWASP Top 10:2025 categories: (1) a SQL query built with string concatenation from a URL query parameter, (2) a JWT verified only on the client side with the algorithm set to 'none', (3) an npm dependency three hops deep in the graph with a published PoC for RCE, (4) admin endpoints returning full stack traces in 500 responses, (5) a file-upload endpoint that stores files at the exact name provided by the multipart Content-Disposition header. Provide the A-number, category name, severity rationale, and one concrete remediation per finding.",
+      "expected_output": "The skill should map each finding to the correct OWASP Top 10:2025 category, provide A-numbers, give severity rationale grounded in the 2025 list ordering, and recommend remediations that address the root cause rather than surface symptoms.",
+      "files": [],
+      "expectations": [
+        "The SQL concatenation finding is mapped to A05:2025 (Injection) with parameterised queries or an ORM as the remediation.",
+        "The JWT 'none' algorithm finding is mapped to A07:2025 (Authentication Failures) or A04:2025 (Cryptographic Failures) with server-side algorithm pinning as the fix.",
+        "The transitive RCE dependency finding is mapped to A03:2025 (Software Supply Chain Failures) with lockfile-pinning, audit CI gate, and SBOM generation as controls.",
+        "The stack trace leakage finding is mapped to A02:2025 (Security Misconfiguration) with error-handler hardening that returns a generic message in production.",
+        "The filename traversal upload finding is mapped to A01:2025 (Broken Access Control) or A05:2025 (Injection) with server-generated storage names and content-type validation as remediation."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A Python FastAPI service uses an LLM tool-calling agent. The agent has three MCP server connections: (1) a read-only document retrieval server scoped to the current user's tenant, (2) a mutation server that can create and delete records across all tenants, (3) a code-execution server with network egress enabled. Design a threat model covering prompt injection, cross-tenant leakage, tool misuse, and memory poisoning. Produce a concise AppSec design brief with control recommendations for each threat, capability scoping guidance, and an approval-flow requirement.",
+      "expected_output": "The skill should produce a structured threat model that treats all tool calls and retrieved content as untrusted, separates read-only from mutating capabilities, recommends scope restrictions on the code-execution server, and specifies explicit human-in-the-loop or automated approval gates for mutating actions.",
+      "files": [],
+      "expectations": [
+        "The output identifies prompt injection from retrieved document content as a first-class threat and recommends input sanitisation and output validation at the tool boundary.",
+        "The output flags the cross-tenant mutation server as over-broad and recommends per-tenant scoping or explicit deny-by-default controls enforced server-side.",
+        "The output requires separation of read-only and mutating MCP capabilities into distinct server connections or capability namespaces.",
+        "The output recommends disabling or sandboxing network egress on the code-execution server and logging all executions with intent and result.",
+        "The output specifies an approval gate (human review or policy-engine check) before any mutating tool call is permitted to execute.",
+        "The output addresses memory poisoning as a vector and recommends provenance tagging or integrity checks on any long-term memory written by agent actions."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A Go 1.22 microservice builds and publishes a Docker image via a GitHub Actions workflow. There is currently no SLSA provenance, no Sigstore signing, no SBOM, and the workflow uses a third-party action pinned by tag rather than commit SHA. Review the supply-chain posture, identify the gaps against SLSA Build Level 2, and produce a hardened workflow outline with Sigstore cosign signing, SBOM generation (CycloneDX format), and SHA-pinned action references. Include any additional controls needed to reach SLSA Build L2.",
+      "expected_output": "The skill should identify each supply-chain gap clearly, map them to SLSA Build L2 requirements, produce a concrete workflow outline with cosign signing, CycloneDX SBOM generation, and SHA-pinned third-party actions, and call out the provenance attestation step explicitly.",
+      "files": [],
+      "expectations": [
+        "The output identifies the tag-pinned action as a supply-chain risk and replaces it with the commit-SHA pin in the remediated workflow.",
+        "The output maps the missing provenance to SLSA Build Level 2's provenance-generation requirement and includes a provenance attestation step using slsa-github-generator or equivalent.",
+        "The output adds a cosign sign step after the Docker push with the image digest reference, not the tag.",
+        "The output adds SBOM generation in CycloneDX format using syft or equivalent and attaches it to the release or registry entry.",
+        "The output recommends lockfile use for Go modules and an audit step (govulncheck or equivalent) to address transitive dependency risk."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Review the following secrets-handling practices in a TypeScript Next.js 14 application and identify all violations: (1) NEXT_PUBLIC_STRIPE_SECRET_KEY used as a public env var, (2) a .env file committed to the repo containing DATABASE_URL with credentials, (3) API keys loaded at module initialisation time causing build failures when the secret is absent in the CI preview environment, (4) JWT signing secret stored in localStorage and read by the auth middleware. Provide a remediation plan that applies secure-by-default design.",
+      "expected_output": "The skill should flag each secrets-handling violation with its risk, apply secure design principles (never expose secrets to the client, never commit secrets, lazy initialisation, server-only storage), and produce a concrete remediation plan.",
+      "files": [],
+      "expectations": [
+        "The output flags NEXT_PUBLIC_ prefix for the Stripe secret key as a client-side exposure risk and requires renaming to a server-only env var.",
+        "The output requires the .env file with credentials to be added to .gitignore, all committed secrets to be rotated, and a secrets manager or CI secret injection to be used instead.",
+        "The output recommends lazy client initialisation so that missing secrets at build time do not break CI preview environments.",
+        "The output identifies localStorage as an insecure location for JWT signing secrets and requires server-side HttpOnly cookie or server-memory storage.",
+        "The output references the OWASP Top 10:2025 A04 (Cryptographic Failures) or A02 (Security Misconfiguration) category for at least one finding."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "An engineering team is building an auth flow for a React SPA backed by a Django REST Framework API. They are considering three options: (1) username/password with JWT stored in localStorage, (2) passkeys (WebAuthn) with server sessions, (3) OAuth 2.1 PKCE with an external IdP (Auth0) and short-lived access tokens stored in memory. Recommend the best option for a browser-first SaaS product that will eventually add mobile apps, justify the decision against the skill's auth defaults, and describe the key pitfalls to avoid for the chosen option.",
+      "expected_output": "The skill should apply its auth defaults (passkeys where feasible, server sessions for browser apps, PKCE for delegated sign-in), identify localStorage JWT as the weakest option, and recommend either passkeys-plus-sessions or PKCE depending on multi-platform need, with concrete pitfalls.",
+      "files": [],
+      "expectations": [
+        "The output rejects localStorage JWT storage as insecure (XSS-accessible) without a strong compensating control.",
+        "The output recommends either option 2 (passkeys with server sessions) or option 3 (OAuth 2.1 PKCE) as the preferred path, consistent with the skill's auth defaults.",
+        "The output explains why option 3 (PKCE with external IdP) is preferable when mobile apps are a planned target, given PKCE's cross-platform applicability.",
+        "The output identifies at least two concrete pitfalls for the chosen option, such as token-refresh race conditions or session fixation.",
+        "The output advises choosing the simplest safe model that matches the app shape, not the most complex mechanism."
+      ]
+    }
+  ]
+}

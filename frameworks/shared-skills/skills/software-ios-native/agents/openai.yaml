@@ -1,0 +1,4 @@
+interface:
+  display_name: "Native iOS"
+  short_description: "Guides native iOS: Swift, SwiftUI, UIKit interop, concurrency, persistence."
+  default_prompt: "Use $software-ios-native for Guides native iOS with Swift, SwiftUI, UIKit interop, concurrency, and persistence. Use when building or reviewing iPhone/iPad apps after establishing runtime truth."

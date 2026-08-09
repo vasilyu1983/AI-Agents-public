@@ -1,0 +1,403 @@
+{
+  "metadata": {
+    "skill": "qa-resilience",
+    "updated": "2026-07-11",
+    "version": "3.4",
+    "total_sources": 36,
+    "description": "Primary-source catalog for resilience engineering: deadlines, retries, hedging, overload protection, chaos testing, mesh policies, resilience telemetry, SLO-as-code, and AI/LLM failure modes.",
+    "title": "QA Resilience - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "reliability_foundations": [
+      {
+        "name": "AWS Well-Architected - Reliability Pillar",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html",
+        "type": "documentation",
+        "relevance": "Primary source for failure isolation, recovery, and reliability design principles.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Embracing Risk",
+        "url": "https://sre.google/sre-book/embracing-risk/",
+        "type": "documentation",
+        "relevance": "Foundational framing for SLOs, error budgets, and reliability tradeoffs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Handling Overload",
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "type": "documentation",
+        "relevance": "Primary source for overload behavior, admission control, and graceful rejection.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Addressing Cascading Failures",
+        "url": "https://sre.google/sre-book/addressing-cascading-failures/",
+        "type": "documentation",
+        "relevance": "Primary source for retries, backoff, fail-fast behavior, and anti-amplification patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Workbook - Alerting on SLOs",
+        "url": "https://sre.google/workbook/alerting-on-slos/",
+        "type": "documentation",
+        "relevance": "Primary source for multi-window burn-rate alerting and release or ops guardrails.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Bronson, Aghayev, Charapko, Zhu - Metastable Failures in Distributed Systems (HotOS 2021)",
+        "url": "https://sigops.org/s/conferences/hotos/2021/papers/hotos21-s11-bronson.pdf",
+        "type": "paper",
+        "relevance": "Defines the metastable-failure class (self-sustaining feedback loops that outlive their trigger) distinct from ordinary cascading failures; foundational reading for cascading-failure-prevention.md's metastable-failures section. Verified real and publicly available 2026-07-11.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "rpc_and_client_resilience": [
+      {
+        "name": "gRPC Deadlines Guide",
+        "url": "https://grpc.io/docs/guides/deadlines/",
+        "type": "documentation",
+        "relevance": "Primary source for deadline propagation and timeout ownership across RPC boundaries.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "gRPC Retry Guide",
+        "url": "https://grpc.io/docs/guides/retry/",
+        "type": "documentation",
+        "relevance": "Primary source for retry policy, retry throttling, and retry observability in gRPC.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "gRPC Request Hedging Guide",
+        "url": "https://grpc.io/docs/guides/request-hedging/",
+        "type": "documentation",
+        "relevance": "Primary source for when and how to use hedging to reduce tail latency safely.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Microsoft .NET HTTP Resilience",
+        "url": "https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience",
+        "type": "documentation",
+        "relevance": "Primary source for modern .NET resilience handlers and shared outbound HTTP policy composition.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Polly Documentation",
+        "url": "https://www.pollydocs.org/",
+        "type": "documentation",
+        "relevance": "Primary source for resilience pipeline concepts including timeout, retry, breaker, rate limiting, and hedging.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "patterns_and_specs": [
+      {
+        "name": "Martin Fowler - Circuit Breaker",
+        "url": "https://martinfowler.com/bliki/CircuitBreaker.html",
+        "type": "reference",
+        "relevance": "Canonical pattern description for circuit breakers.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Microsoft Azure Architecture - Retry Pattern",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/retry",
+        "type": "documentation",
+        "relevance": "Retry guidance for transient failures, backoff, jitter, and idempotency.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Microsoft Azure Architecture - Circuit Breaker Pattern",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker",
+        "type": "documentation",
+        "relevance": "Circuit breaker guidance for preventing cascading failures.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Microsoft Azure Architecture - Bulkhead Pattern",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead",
+        "type": "documentation",
+        "relevance": "Bulkhead guidance for isolation and resource exhaustion prevention.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Resilience4j Documentation",
+        "url": "https://resilience4j.readme.io/",
+        "type": "documentation",
+        "relevance": "Primary Java reference for circuit breaker, retry, bulkhead, rate limiter, and time limiter patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Michael T. Nygard - Release It! (2nd ed.)",
+        "url": "https://pragprog.com/titles/mnee2/release-it-second-edition/",
+        "type": "book",
+        "relevance": "Origin source for the stability-patterns vocabulary this skill builds on (circuit breaker, bulkhead, timeouts, fail fast, steady state). Author and title verified 2026-07-11.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "gateway_and_mesh": [
+      {
+        "name": "Envoy Adaptive Concurrency Filter",
+        "url": "https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/adaptive_concurrency_filter",
+        "type": "documentation",
+        "relevance": "Primary source for adaptive concurrency and latency-based load protection in shared infrastructure.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Envoy Outlier Detection",
+        "url": "https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/outlier",
+        "type": "documentation",
+        "relevance": "Primary source for passive health, endpoint ejection, and bad-host containment.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "chaos_engineering": [
+      {
+        "name": "Principles of Chaos Engineering",
+        "url": "https://principlesofchaos.org/",
+        "type": "principles",
+        "relevance": "Core chaos methodology: steady state, hypothesis, experiment design, and safe execution.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "AWS Fault Injection Service (FIS)",
+        "url": "https://docs.aws.amazon.com/fis/latest/userguide/what-is.html",
+        "type": "documentation",
+        "relevance": "Managed chaos engineering service with guardrails and experiment templates. Supports EC2, ECS, EKS pod-level faults (via ephemeral containers), RDS/Aurora failover, network latency on VPC subnets, and the AZ Power Interruption scenario for full AZ-failure simulation including ARC Zonal Autoshift integration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Azure Chaos Studio",
+        "url": "https://learn.microsoft.com/en-us/azure/chaos-studio/chaos-studio-overview",
+        "type": "documentation",
+        "relevance": "Managed chaos engineering for Azure workloads and fault experiments. Core experiment service is GA. Chaos Studio Workspaces (scenario catalog with zone/region-failure templates, drag-and-drop Scenario Designer) entered public preview 2026-07-01 -- treat Workspaces-specific claims as preview-stage.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Chaos Toolkit Documentation",
+        "url": "https://chaostoolkit.org/",
+        "type": "documentation",
+        "relevance": "Open-source experiment framework for deterministic and staged resilience testing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "LitmusChaos Documentation",
+        "url": "https://docs.litmuschaos.io/",
+        "type": "documentation",
+        "relevance": "Kubernetes-native chaos workflows and experiments, CNCF Incubating project (active, not archived). Helm is the recommended installation method; the legacy litmus-operator-v3.0.0.yaml approach is no longer maintained. Point-release number changes frequently and conflicting values were seen across sources on 2026-07-11 (3.2x range) -- verify the exact current release at github.com/litmuschaos/litmus/releases rather than trusting a pinned number.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Shopify Toxiproxy",
+        "url": "https://github.com/Shopify/toxiproxy",
+        "type": "documentation",
+        "relevance": "TCP proxy for deterministic fault injection (latency, bandwidth, resets) in integration and CI tests. Latest release: v2.12.0 (March 2025).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Chaos Mesh Documentation",
+        "url": "https://chaos-mesh.org",
+        "type": "documentation",
+        "relevance": "CNCF Kubernetes chaos engineering platform using CRDs for network, pod, and stress faults.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "LitmusChaos Home",
+        "url": "https://litmuschaos.io",
+        "type": "documentation",
+        "relevance": "CNCF Kubernetes chaos engineering with a pre-built experiment hub and GameDay workflow engine.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Gremlin Documentation",
+        "url": "https://www.gremlin.com",
+        "type": "documentation",
+        "relevance": "Commercial chaos engineering platform with UI, RBAC, audit logs, and pre-built scenario library. 2025 additions: Failure Flags by proxy (no-code sidecar), Reliability Intelligence (AI-powered experiment analysis), Private Edition (self-hosted), .NET Failure Flags SDK.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Gremlin Failure Flags",
+        "url": "https://www.gremlin.com/docs/failure-flags-overview",
+        "type": "documentation",
+        "relevance": "Application-level fault injection without infrastructure changes. Use SDK integration or a no-code sidecar proxy to inject latency, exceptions, and custom behaviors at named points in application code. Supports Go, Node, Python, Java, .NET (2025). No-ops when no experiment is active.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Steadybit Documentation",
+        "url": "https://docs.steadybit.com/",
+        "type": "documentation",
+        "relevance": "Modern resilience experimentation platform and safe rollout guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "kubernetes_and_platform": [
+      {
+        "name": "Kubernetes - Liveness, Readiness, Startup Probes",
+        "url": "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/",
+        "type": "documentation",
+        "relevance": "Primary source for probe behavior and configuration in resilient deployments.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "telemetry_and_semantics": [
+      {
+        "name": "OpenTelemetry HTTP Semantic Conventions",
+        "url": "https://opentelemetry.io/docs/specs/semconv/http/",
+        "type": "specification",
+        "relevance": "Primary source for HTTP telemetry naming including server/client attributes and error semantics.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "optional_ai_automation": [
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "type": "framework",
+        "relevance": "Optional governance baseline when using AI to generate scenarios or summarize resilience test results.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "slo_as_code": [
+      {
+        "name": "OpenSLO Specification",
+        "url": "https://github.com/OpenSLO/OpenSLO",
+        "type": "specification",
+        "relevance": "Vendor-agnostic open specification for declaring SLOs and error budgets in version-controlled YAML (openslo/v1 API). Enables SLO-as-code workflows with CI validation via the oslo CLI.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-05"
+      },
+      {
+        "name": "Sloth - Prometheus SLO Generator",
+        "url": "https://github.com/slok/sloth",
+        "type": "tooling",
+        "relevance": "Generates Prometheus SLI recording rules and multi-window multi-burn-rate alert rules from a simple SLO spec. Supports OpenSLO input and Kubernetes via Prometheus Operator CRDs. v0.16.0 released April 2026.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-05"
+      },
+      {
+        "name": "Pyrra - SLO Management for Prometheus",
+        "url": "https://github.com/pyrra-dev/pyrra",
+        "type": "tooling",
+        "relevance": "Kubernetes-native SLO management: watches SLO CRD resources, generates Prometheus recording rules, provides UI for error budgets and burn rates. v0.10.0 released April 2026.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-05"
+      }
+    ]
+  }
+}

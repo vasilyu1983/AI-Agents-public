@@ -1,0 +1,455 @@
+{
+  "metadata": {
+    "skill": "docs-ai-prd",
+    "updated": "2026-07-11",
+    "version": "3.3",
+    "total_sources": 27,
+    "description": "Curated primary sources for project memory, agent instructions, prompting, evaluations, AI governance, and measurement.",
+    "title": "Docs AI Prd - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "context_and_memory": [
+      {
+        "name": "Anthropic: Effective Context Engineering for AI Agents",
+        "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+        "canonical_url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+        "type": "documentation",
+        "relevance": "Primary reference for context engineering patterns and just-in-time context design.",
+        "status": "live",
+        "volatility": "medium",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "context-engineering",
+          "primary"
+        ]
+      },
+      {
+        "name": "Claude Code Overview",
+        "url": "https://code.claude.com/docs/en/overview",
+        "canonical_url": "https://code.claude.com/docs/en/overview",
+        "type": "documentation",
+        "relevance": "Primary Claude Code overview for current capabilities and workflow framing.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "claude-code",
+          "primary"
+        ]
+      },
+      {
+        "name": "Claude Code Memory",
+        "url": "https://code.claude.com/docs/en/memory",
+        "canonical_url": "https://code.claude.com/docs/en/memory",
+        "type": "documentation",
+        "relevance": "Primary source for CLAUDE.md memory loading, imports, and precedence.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "claude-code",
+          "memory",
+          "primary"
+        ]
+      }
+    ],
+    "platform_context_surfaces": [
+      {
+        "name": "GitHub Copilot Repository Custom Instructions",
+        "url": "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions",
+        "canonical_url": "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions",
+        "type": "documentation",
+        "relevance": "Defines repository-wide instructions, path-specific instructions, and AGENTS.md precedence for Copilot.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "github-copilot",
+          "instructions",
+          "primary"
+        ]
+      },
+      {
+        "name": "GitHub Copilot Custom Agents",
+        "url": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents",
+        "canonical_url": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents",
+        "type": "documentation",
+        "relevance": "Primary source for repository-level custom agents under .github/agents.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "github-copilot",
+          "agents",
+          "primary"
+        ]
+      },
+      {
+        "name": "GitHub Copilot Agent Skills",
+        "url": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-skills",
+        "canonical_url": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-skills",
+        "type": "documentation",
+        "relevance": "Primary source for skills support in Copilot coding agent, CLI, and VS Code agent mode.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "github-copilot",
+          "skills",
+          "primary"
+        ]
+      },
+      {
+        "name": "GitHub Copilot Agent Environment Customization",
+        "url": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-environment",
+        "canonical_url": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-environment",
+        "type": "documentation",
+        "relevance": "Primary source for repository setup steps via copilot-setup-steps workflow.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "github-copilot",
+          "environment",
+          "primary"
+        ]
+      },
+      {
+        "name": "Cursor Rules for AI",
+        "url": "https://cursor.com/docs",
+        "canonical_url": "https://cursor.com/docs",
+        "type": "documentation",
+        "relevance": "Canonical Cursor docs root. Use docs search for project rules, AGENTS.md support, and scoped rule guidance.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "cursor",
+          "rules",
+          "primary"
+        ]
+      },
+      {
+        "name": "Cursor CLI",
+        "url": "https://cursor.com/docs",
+        "canonical_url": "https://cursor.com/docs",
+        "type": "documentation",
+        "relevance": "Canonical Cursor docs root. Use docs search for CLI usage, context loading, and approval behavior.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "cursor",
+          "cli",
+          "primary"
+        ]
+      }
+    ],
+    "prompting_and_evaluation": [
+      {
+        "name": "GitHub Spec Kit",
+        "url": "https://github.com/github/spec-kit",
+        "canonical_url": "https://github.github.com/spec-kit/",
+        "type": "reference",
+        "relevance": "Open-source spec-driven development toolkit from GitHub. Announced 2025-09-02; grew from ~71k★ (Feb 2026) to ~111k★ (Jun 2026) -- treat any star count as stale within weeks and re-check live. Provides structured spec templates, EARS notation integration, and AI-agent-friendly requirements workflows. Docs at https://github.github.com/spec-kit/",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-07-11",
+        "add_as_web_search": true,
+        "tags": [
+          "spec-driven-development",
+          "github",
+          "requirements",
+          "primary"
+        ]
+      },
+      {
+        "name": "EARS (Easy Approach to Requirements Syntax)",
+        "url": "https://alistairmavin.com/ears/",
+        "canonical_url": "https://alistairmavin.com/ears/",
+        "type": "reference",
+        "relevance": "Constrained-natural-language requirements notation (When/Where/If/While/The system shall…) developed at Rolls-Royce in 2009, used in spec-driven workflows including GitHub Spec Kit. Reduces ambiguity in acceptance criteria and AI-generated specs.",
+        "status": "live",
+        "volatility": "low",
+        "last_verified": "2026-07-11",
+        "add_as_web_search": true,
+        "tags": [
+          "requirements",
+          "spec-driven-development",
+          "acceptance-criteria"
+        ]
+      },
+      {
+        "name": "Kiro — AWS Spec-Driven AI IDE",
+        "url": "https://kiro.dev",
+        "canonical_url": "https://kiro.dev",
+        "type": "tool",
+        "relevance": "AWS spec-driven AI IDE/agent (publicly announced 2025-07-14, GA internationally in 2026) that enforces a spec-first workflow: requirements → design → tasks → implementation. AWS is positioning it as the successor to Amazon Q Developer. Check current docs for pricing, model access, and GA scope -- this category moves faster than any static summary.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-07-11",
+        "add_as_web_search": true,
+        "tags": [
+          "spec-driven-development",
+          "aws",
+          "ai-coding",
+          "tool"
+        ]
+      },
+      {
+        "name": "BMAD-METHOD",
+        "url": "https://github.com/bmad-code-org/BMAD-METHOD",
+        "canonical_url": "https://github.com/bmad-code-org/BMAD-METHOD",
+        "type": "reference",
+        "relevance": "Open-source agentic spec-driven framework (repo moved from bmadcode/BMAD-METHOD to bmad-code-org/BMAD-METHOD; update saved links). Structures AI-assisted delivery into Analyst→Architect→Developer→QA agent roles, each consuming specs produced by the previous stage. Reference for multi-agent spec pipeline design.",
+        "status": "live",
+        "volatility": "medium",
+        "last_verified": "2026-07-11",
+        "add_as_web_search": true,
+        "tags": [
+          "spec-driven-development",
+          "agentic-framework",
+          "multi-agent"
+        ]
+      },
+      {
+        "name": "Spec-Driven Development: The Spec Is the New Code (@juliandeangeIis)",
+        "url": "https://x.com/juliandeangeIis/status/2033303156340240481",
+        "canonical_url": "https://x.com/juliandeangeIis/status/2033303156340240481",
+        "type": "article",
+        "relevance": "Community guide on SDD for AI coding — separating functional from technical specs before execution to reduce LLM uncertainty. Covers acceptance criteria, minimal deltas, and using the AI agent's analysis as the spec refinement loop.",
+        "status": "live",
+        "volatility": "low",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": false,
+        "tags": [
+          "spec-driven-development",
+          "ai-coding",
+          "community"
+        ]
+      },
+      {
+        "name": "OpenAI Prompt Engineering",
+        "url": "https://developers.openai.com/api/docs/guides/prompt-engineering",
+        "canonical_url": "https://developers.openai.com/api/docs/guides/prompt-engineering",
+        "type": "documentation",
+        "relevance": "Primary prompt guidance for current OpenAI APIs.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-07-11",
+        "add_as_web_search": true,
+        "tags": [
+          "openai",
+          "prompting",
+          "primary"
+        ]
+      },
+      {
+        "name": "OpenAI Reasoning Best Practices",
+        "url": "https://developers.openai.com/api/docs/guides/reasoning-best-practices",
+        "canonical_url": "https://developers.openai.com/api/docs/guides/reasoning-best-practices",
+        "type": "documentation",
+        "relevance": "Primary guidance on prompting reasoning models, including avoiding chain-of-thought prompts.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "openai",
+          "reasoning",
+          "primary"
+        ]
+      },
+      {
+        "name": "OpenAI Working with Evals",
+        "url": "https://developers.openai.com/api/docs/guides/evals",
+        "canonical_url": "https://developers.openai.com/api/docs/guides/evals",
+        "type": "documentation",
+        "relevance": "Primary OpenAI guide for running evals in the current API/docs structure.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "openai",
+          "evals",
+          "primary"
+        ]
+      },
+      {
+        "name": "OpenAI Evaluation Best Practices",
+        "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+        "canonical_url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+        "type": "documentation",
+        "relevance": "Primary guidance on eval objectives, datasets, metrics, human review, and continuous evaluation.",
+        "status": "live",
+        "volatility": "high",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "openai",
+          "evals",
+          "primary"
+        ]
+      }
+    ],
+    "governance_and_risk": [
+      {
+        "name": "NIST AI RMF 1.0",
+        "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10",
+        "canonical_url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10",
+        "type": "standard",
+        "relevance": "Base AI governance reference for trustworthy AI and risk-management framing.",
+        "status": "live",
+        "volatility": "low",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "nist",
+          "governance",
+          "primary"
+        ]
+      },
+      {
+        "name": "NIST AI RMF: Generative AI Profile",
+        "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+        "canonical_url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+        "type": "standard",
+        "relevance": "Companion guidance for generative AI-specific risk identification and controls.",
+        "status": "live",
+        "volatility": "low",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "nist",
+          "genai",
+          "primary"
+        ]
+      },
+      {
+        "name": "ISO/IEC 42001:2023",
+        "url": "https://www.iso.org/standard/42001",
+        "canonical_url": "https://www.iso.org/standard/42001",
+        "type": "standard",
+        "relevance": "AI management system standard used for governance expectations in enterprise AI delivery.",
+        "status": "live",
+        "volatility": "low",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "iso",
+          "governance"
+        ]
+      },
+      {
+        "name": "EU AI Act",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+        "canonical_url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+        "type": "regulation",
+        "relevance": "Primary legal text for AI risk classification, transparency, and compliance planning.",
+        "status": "live",
+        "volatility": "medium",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "regulation",
+          "eu",
+          "primary"
+        ]
+      },
+      {
+        "name": "OWASP GenAI Security Project",
+        "url": "https://genai.owasp.org/",
+        "canonical_url": "https://genai.owasp.org/",
+        "type": "reference",
+        "relevance": "Current OWASP home for generative AI and agentic AI security guidance.",
+        "status": "live",
+        "volatility": "medium",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "owasp",
+          "genai",
+          "security"
+        ]
+      },
+      {
+        "name": "OWASP LLM Applications Cybersecurity and Governance Checklist",
+        "url": "https://genai.owasp.org/resource/llm-applications-cybersecurity-and-governance-checklist-english/",
+        "canonical_url": "https://genai.owasp.org/resource/llm-applications-cybersecurity-and-governance-checklist-english/",
+        "type": "reference",
+        "relevance": "Practical checklist for LLM and GenAI security, governance, and adoption controls.",
+        "status": "live",
+        "volatility": "medium",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "owasp",
+          "llm",
+          "security"
+        ]
+      }
+    ],
+    "measurement_and_research": [
+      {
+        "name": "METR: Early-2025 AI and Experienced Open-Source Developers",
+        "url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
+        "canonical_url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
+        "type": "research",
+        "relevance": "Useful cautionary reference on measured productivity versus perceived productivity in early-2025 AI tooling. Randomized trial: experienced OSS developers were ~19% slower with early-2025 AI tools on real tasks, yet estimated afterward that AI had made them ~20% faster -- a large perception/measurement gap worth citing whenever a PRD leans on anecdotal \"AI made this faster\" claims instead of measured evals.",
+        "status": "live",
+        "volatility": "medium",
+        "last_verified": "2026-07-11",
+        "add_as_web_search": true,
+        "tags": [
+          "productivity",
+          "metrics",
+          "research"
+        ]
+      },
+      {
+        "name": "METR: 2026 productivity experiment update",
+        "url": "https://metr.org/blog/2026-02-24-uplift-update/",
+        "canonical_url": "https://metr.org/blog/2026-02-24-uplift-update/",
+        "type": "research",
+        "relevance": "Important caveat on selection effects and the limits of carrying early-2025 productivity findings forward unchanged.",
+        "status": "live",
+        "volatility": "medium",
+        "last_verified": "2026-05-15",
+        "add_as_web_search": true,
+        "tags": [
+          "productivity",
+          "metrics",
+          "research"
+        ]
+      },
+      {
+        "name": "Thariq — Using Claude Code: The Unreasonable Effectiveness of HTML",
+        "url": "https://x.com/trq212/status/2052809885763747935",
+        "type": "first_party_practitioner_post",
+        "relevance": "First-party Claude Code team guidance on HTML as default output format for human-facing specs, plans, code reviews, and interactive artifacts. Cited in Output Format section: 100-line read-through threshold, 2-4x generation cost, export-button pattern, design-system HTML reference file.",
+        "status": "live",
+        "volatility": "low",
+        "last_verified": "2026-05-12",
+        "captured": "2026-05-12",
+        "add_as_web_search": false,
+        "tags": [
+          "output-format",
+          "html",
+          "specs",
+          "claude-code"
+        ]
+      }
+    ]
+  }
+}

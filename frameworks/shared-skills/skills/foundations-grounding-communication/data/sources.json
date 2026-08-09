@@ -1,0 +1,193 @@
+{
+  "metadata": {
+    "title": "Grounding & Communication Foundations — Sources",
+    "description": "Primary references for 10 grounding-theory primitives: common ground, grounding criterion, contributions (presentation+acceptance), evidence of understanding, repair, presupposition, audience design, joint commitment, least collaborative effort, grounding cost. Clark canonical layer plus modern multi-agent LLM application.",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-grounding-communication",
+    "total_sources": 26
+  },
+  "canonical_texts": [
+    {
+      "id": "ClarkBrennan1991",
+      "name": "Grounding in Communication",
+      "url": "https://psycnet.apa.org/doi/10.1037/10096-006",
+      "description": "Clark and Brennan (1991). In Resnick, Levine, & Teasley (eds.) Perspectives on Socially Shared Cognition (APA). Canonical paper introducing grounding criterion, evidence of understanding hierarchy, and grounding cost across communication tracks. Primary source for primitives #1, #2, #4, #10.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Clark1996",
+      "name": "Using Language",
+      "url": "https://www.cambridge.org/core/books/using-language/2611C8AB45FF8AC4F1F0EC8C8E96A02E",
+      "description": "Clark (1996). Cambridge University Press. Book-length treatment of language as joint action; covers contributions, joint commitment, and least collaborative effort. Primary source for primitives #3, #8, #9.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ClarkSchaefer1989",
+      "name": "Contributing to Discourse",
+      "url": "https://doi.org/10.1207/s15516709cog1302_7",
+      "description": "Clark and Schaefer (1989). Cognitive Science 13(2):259–294. Defines presentation and acceptance phases of contributions. Primary source for primitive #3.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ClarkWilkesGibbs1986",
+      "name": "Referring as a Collaborative Process",
+      "url": "https://doi.org/10.1016/0010-0277(86)90010-7",
+      "description": "Clark and Wilkes-Gibbs (1986). Cognition 22(1):1–39. Establishes least collaborative effort principle through referring expressions. Primary source for primitive #9.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Schegloff1977",
+      "name": "The Preference for Self-Correction in the Organization of Repair in Conversation",
+      "url": "https://doi.org/10.2307/413107",
+      "description": "Schegloff, Jefferson, and Sacks (1977). Language 53(2):361–382. Foundational conversation-analysis paper on repair sequences. Primary source for primitive #5.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Grice1975",
+      "name": "Logic and Conversation",
+      "url": "https://www.ucl.ac.uk/ls/studypacks/Grice-Logic.pdf",
+      "description": "Grice (1975). In Cole and Morgan (eds.) Syntax and Semantics 3: Speech Acts. Cooperative principle, conversational implicature, foundation for presupposition theory. Primary source for primitive #6.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Stalnaker1974",
+      "name": "Pragmatic Presuppositions",
+      "url": "https://www.academia.edu/2543700/Pragmatic_presuppositions",
+      "description": "Stalnaker (1974). In Munitz and Unger (eds.) Semantics and Philosophy. Formal account of presupposition as common-ground requirement. Primary source for primitive #6.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Bell1984",
+      "name": "Language Style as Audience Design",
+      "url": "https://doi.org/10.1017/S004740450001037X",
+      "description": "Bell (1984). Language in Society 13(2):145–204. Audience design framework. Primary source for primitive #7.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ClarkMurphy1982",
+      "name": "Audience Design in Meaning and Reference",
+      "url": "https://doi.org/10.1016/S0166-4115(09)60059-5",
+      "description": "Clark and Murphy (1982). In Le Ny and Kintsch (eds.) Language and Comprehension. Tailoring of meaning to audience. Secondary source for primitive #7.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Aumann1976",
+      "name": "Agreeing to Disagree",
+      "url": "https://doi.org/10.1214/aos/1176343654",
+      "description": "Aumann (1976). Annals of Statistics 4(6):1236–1239. Formal common-knowledge result; mutual-belief mathematics underlying common ground. Primary source for primitive #1 formal layer.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Lewis1969",
+      "name": "Convention: A Philosophical Study",
+      "url": "https://www.wiley.com/en-us/Convention%3A+A+Philosophical+Study-p-9780631232568",
+      "description": "Lewis (1969). Harvard University Press / Blackwell. Common knowledge as basis for convention and coordination. Foundational source for primitive #1.",
+      "url_check": "manual"
+    },
+    {
+      "id": "SperberWilson1986",
+      "name": "Relevance: Communication and Cognition",
+      "url": "https://www.wiley.com/en-us/Relevance%3A+Communication+and+Cognition%2C+2nd+Edition-p-9780631198789",
+      "description": "Sperber and Wilson (1986/1995). Blackwell. Relevance theory; alternative framework to Gricean implicature. Secondary source for primitives #6, #7.",
+      "url_check": "manual"
+    },
+    {
+      "id": "BrennanClark1996",
+      "name": "Conceptual Pacts and Lexical Choice in Conversation",
+      "url": "https://doi.org/10.1037/0278-7393.22.6.1482",
+      "description": "Brennan and Clark (1996). Journal of Experimental Psychology: Learning, Memory, and Cognition 22(6):1482–1493. Conceptual pacts as personal common ground. Secondary source for primitives #1, #7.",
+      "url_check": "manual"
+    },
+    {
+      "id": "MAST2025",
+      "name": "Why Do Multi-Agent LLM Systems Fail?",
+      "url": "https://arxiv.org/abs/2503.13657",
+      "description": "Cemri et al. (2025). NeurIPS. Empirical taxonomy of 14 multi-agent LLM failure modes across 1,600+ traces, grouped into system design issues, inter-agent misalignment, and task verification. Primary modern source for connecting grounding theory to LLM agent failures.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Traum1994",
+      "name": "A Computational Theory of Grounding in Natural Language Conversation",
+      "url": "https://www.cs.rochester.edu/research/cisd/pubs/traum-1994.pdf",
+      "description": "Traum (1994). PhD thesis, University of Rochester. Computational implementation of grounding for dialogue systems; bridge between Clark's framework and computational agents. Secondary source for all primitives in computational application.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Rifts2025",
+      "name": "Navigating Rifts in Human-LLM Grounding: Study and Benchmark",
+      "url": "https://aclanthology.org/2025.acl-long.1016/",
+      "description": "Shaikh, Mozannar, Bansal, Fourney, Horvitz (2025). ACL 2025. Taxonomy of grounding acts; Rifts benchmark from WildChat, MultiWOZ, Bing Chat logs showing LLMs initiate clarification 3x less and follow-up 16x less than humans; early grounding failures predict later breakdown. Primary evidence for #4, #5.",
+      "url_check": "auto"
+    },
+    {
+      "id": "NewsInterview2025",
+      "name": "NewsInterview: a Dataset and a Playground to Evaluate LLMs' Grounding Gap via Informational Interviews",
+      "url": "https://aclanthology.org/2025.acl-long.1580/",
+      "description": "Spangher, Lu, Kalyan, Cho, Huang, Shi, May (2025). ACL 2025. 45,848 NPR/CNN interviews; human interviewers produce acknowledgements in ~9% of utterances, all LLM variants produce ~0%; LLMs also fail at audience-state-sensitive pivoting. Supports #4, #7.",
+      "url_check": "auto"
+    },
+    {
+      "id": "UbuntuCG2025",
+      "name": "Understanding Common Ground Misalignment in Goal-Oriented Dialog: A Case-Study with Ubuntu Chat Logs",
+      "url": "https://aclanthology.org/2025.acl-long.161/",
+      "description": "Sarkar, Srikanth, Pellegrin, Rudinger, Bonial, Resnik (2025). ACL 2025. 200 dyadic Ubuntu IRC conversations (7,590 turns); operationalizes Clark & Brennan common ground as conversational friction; friction correlates with task failure; GPT-4o detects overt friction at 77.22% F1, implicit at 64.81%. Supports #1, #5.",
+      "url_check": "auto"
+    },
+    {
+      "id": "InferAct2025",
+      "name": "Preemptive Detection and Correction of Misaligned Actions in LLM Agents",
+      "url": "https://aclanthology.org/2025.emnlp-main.12/",
+      "description": "Fang, Zhu, Gurevych (2025). EMNLP 2025. InferAct: two-unit system (Task Inference + Task Verification) detects misalignment before irreversible action; best Macro-F1 in 11/12 settings across 3 tasks × 4 LLMs, +8% avg over strongest baseline. Extends primitive #5 with preemptive repair pattern.",
+      "url_check": "auto"
+    },
+    {
+      "id": "CRSA2025",
+      "name": "Collaborative Rational Speech Act: Pragmatic Reasoning for Multi-Turn Dialog",
+      "url": "https://aclanthology.org/2025.emnlp-main.1145/",
+      "description": "Estienne, Ben Zenou, Naderi, Cheung, Piantanida (2025). EMNLP 2025. CRSA: information-theoretic RSA extension with private meaning spaces, dialogue-history-conditioned gain function, and belief tracking. Outperforms RSA baseline; speaker entropy 8.18 vs 14.27 (RSA) on MDDial. Grounds #8, #9.",
+      "url_check": "auto"
+    },
+    {
+      "id": "GroundingGaps2024",
+      "name": "Grounding Gaps in Language Model Generations",
+      "url": "https://aclanthology.org/2024.naacl-long.348/",
+      "description": "Shaikh, Gligorić, Khetan, Gerstgrasser, Yang, Jurafsky (2024). NAACL-HLT 2024. Coins 'presumptive grounders': LLMs assume common ground rather than using grounding acts (clarification, acknowledgment). Introduces grounding-act taxonomy and metrics. Key finding: RLHF/preference training reduces grounding acts. Predecessor to Rifts ACL 2025 (same first author). Code+benchmarks: github.com/oshaikh13/grounding-gaps. Evidence grade B. Primary evidence for #4, #5.",
+      "url_check": "auto"
+    },
+    {
+      "id": "FACTSGrounding2025",
+      "name": "The FACTS Grounding Leaderboard: Benchmarking LLMs' Ability to Ground Responses to Long-Form Input",
+      "url": "https://arxiv.org/abs/2501.03200",
+      "description": "Jacovi et al. (2025). Google. arXiv 2501.03200, January 2025. Leaderboard benchmarking LLMs' factual grounding to long-form documents (up to 32K tokens). 1,719 examples (860 public, 859 private). RAG-attribution sense of grounding: whether generated responses remain grounded in provided documents. Scope: LLM-attribution grounding only — distinct from Clark conversational grounding covered by this skill's primitives.",
+      "url_check": "auto"
+    },
+    {
+      "id": "RAGAS2024",
+      "name": "RAGAS: Automated Evaluation of Retrieval Augmented Generation",
+      "url": "https://aclanthology.org/2024.eacl-demo.16/",
+      "description": "Es, James, Espinosa Anke, Schockaert (2024). EACL 2024. Framework for evaluating RAG systems without ground-truth annotations. Faithfulness metric operationalizes claim→source grounding for RAG pipelines. Scope: RAG-attribution grounding only — distinct from Clark conversational grounding covered by this skill's primitives.",
+      "url_check": "auto"
+    },
+    {
+      "id": "WallatFaithfulness2024",
+      "name": "Correctness is not Faithfulness in RAG Attributions",
+      "url": "https://arxiv.org/abs/2412.18004",
+      "description": "Wallat, Heuss, de Rijke, Anand (2024). arXiv 2412.18004, December 2024; ICTIR 2025. Distinguishes correctness (cited documents support statements) from faithfulness (model genuinely relies on cited documents). Up to 57% of citations are post-rationalized — correct in appearance but not genuinely grounded in the source. Evidence grade A. Scope: RAG-attribution grounding only — distinct from Clark conversational grounding covered by this skill's primitives.",
+      "url_check": "auto"
+    },
+    {
+      "id": "GSAR2026",
+      "name": "GSAR: Typed Grounding for Hallucination Detection and Recovery in Multi-Agent LLMs",
+      "url": "https://arxiv.org/abs/2604.23366",
+      "description": "Kamelhar (2026). arXiv 2604.23366, April 2026. PREPRINT — no peer review confirmed; code not confirmed in public repo. Applies Clark-vocabulary grounding to multi-agent output verification. Four-way claim typology: grounded, ungrounded, contradicted, complementary. Evidence-type-specific weights, asymmetric contradiction-penalised score, three-tier decision function (proceed/regenerate/replan) under compute budget. Evaluated on FEVER. Maps to Primitive #5 (Repair) and #4 (Evidence of Understanding).",
+      "url_check": "auto"
+    },
+    {
+      "id": "AwN2025",
+      "name": "Learning to Ask: When LLM Agents Meet Unclear Instruction",
+      "url": "https://aclanthology.org/2025.emnlp-main.1104/",
+      "description": "Wang et al. (2025). EMNLP 2025, pp. 21773–21784. NoisyToolBench: ambiguous real-world tool-use instructions. Ask-when-Needed (AwN) framework: agents ask clarifying questions when encountering unclear instruction obstacles. Significantly outperforms existing frameworks on NoisyToolBench. Operationalizes Primitive #5 (Repair) — ask-for-clarification channel — in tool-use agent context. Complements InferAct (preemptive) with ambiguity-triggered reactive clarification. Code+datasets released. Evidence grade B.",
+      "url_check": "auto"
+    }
+  ]
+}

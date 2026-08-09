@@ -1,0 +1,50 @@
+# Codex Custom Agent Template for Coding Tasks
+#
+# Place in .codex/agents/ (project) or ~/.codex/agents/ (personal)
+# Codex agents are explicitly spawned, not auto-delegated by description.
+
+name = "{agent-name}"
+description = "{What it does}. Use when {triggers}."
+model = "<current-codex-model>"    # resolve via the Codex model picker (developers.openai.com/codex/models); avoid pinning a snapshot
+# model_reasoning_effort = "high"    # For complex analysis tasks
+
+# Sandbox modes for coding agents:
+# - "read-only"        → Code review, security scanning, analysis
+# - "workspace-write"  → Test generation, refactoring, migration
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+You are a coding agent that {purpose statement}.
+
+## Constraints
+
+- {What you must NOT do}
+- {Files you must NOT touch}
+- Only modify files directly related to the assigned task
+
+## Workflow
+
+1. {Discovery: read and search relevant files}
+2. {Analysis: understand the code and identify what needs to change}
+3. {Action: make targeted changes}
+4. {Verification: run tests, check your work}
+
+## Output Contract
+
+When complete, report:
+- Files modified and why
+- Tests run and results
+- Any issues or warnings discovered
+
+## Self-Verification
+
+Before completing:
+- Run the relevant test suite
+- Verify no unintended files were changed
+- Check that the output matches the expected format
+"""
+
+# MCP servers (uncomment to add external tool access)
+# [mcp_servers.eslint]
+# command = "npx"
+# args = ["@anthropic/eslint-mcp-server"]

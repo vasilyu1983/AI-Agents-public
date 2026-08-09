@@ -1,0 +1,543 @@
+{
+  "metadata": {
+    "title": "AI Behavioral Economics Foundations — Sources",
+    "description": "Primary papers and references for 16 behavioral-economics and behavior-design primitives: prospect theory, loss aversion, anchoring, defaults, social proof, scarcity, hyperbolic discounting, mental accounting, choice architecture, dual-system cognition, decoy effect, habit loop, reinforcement schedules, cognitive load and working memory, context-dependent retrieval, and implementation intentions.",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-behavioral-economics",
+    "total_sources": 66
+  },
+  "primary_papers": [
+    {
+      "id": "KahnemanTversky1979",
+      "name": "Prospect Theory: An Analysis of Decision Under Risk",
+      "url": "https://www.jstor.org/stable/1914185",
+      "description": "Kahneman, D. & Tversky, A. (1979). Econometrica, 47(2), 263–292. Foundational paper for prospect theory, the S-shaped value function, and probability weighting. Source for primitive #1 (prospect theory) and background for #2 (loss aversion).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "TverskyKahneman1981",
+      "name": "The Framing of Decisions and the Psychology of Choice",
+      "url": "https://www.science.org/doi/10.1126/science.7455683",
+      "description": "Tversky, A. & Kahneman, D. (1981). Science, 211(4481), 453–458. Framing effects: same outcomes described as gains vs losses produce different choices. Source for primitive #1 (prospect theory) and #2 (loss aversion).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "TverskyKahneman1992",
+      "name": "Advances in Prospect Theory: Cumulative Representation of Uncertainty",
+      "url": "https://link.springer.com/article/10.1007/BF00122574",
+      "description": "Tversky, A. & Kahneman, D. (1992). Journal of Risk and Uncertainty, 5(4), 297–323. Extends prospect theory to cumulative weighting; establishes canonical loss aversion coefficient λ ≈ 2.25. Primary source for primitive #2 (loss aversion).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "TverskyKahneman1974",
+      "name": "Judgment Under Uncertainty: Heuristics and Biases",
+      "url": "https://www.science.org/doi/10.1126/science.185.4157.1124",
+      "description": "Tversky, A. & Kahneman, D. (1974). Science, 185(4157), 1124–1131. Anchoring and adjustment heuristic; availability and representativeness heuristics. Primary source for primitive #3 (anchoring).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ArielyLoewensteinPrelec2003",
+      "name": "Coherent Arbitrariness: Stable Demand Curves Without Stable Preferences",
+      "url": "https://academic.oup.com/qje/article/118/1/73/1895996",
+      "description": "Ariely, D., Loewenstein, G. & Prelec, D. (2003). Quarterly Journal of Economics, 118(1), 73–106. Arbitrary coherence: random anchors persistently distort willingness to pay. Source for primitive #3 (anchoring).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "JohnsonGoldstein2003",
+      "name": "Do Defaults Save Lives?",
+      "url": "https://www.science.org/doi/10.1126/science.1091721",
+      "description": "Johnson, E. J. & Goldstein, D. (2003). Science, 302(5649), 1338–1339. Opt-in vs opt-out organ donation rates across countries; canonical demonstration of default-bias power. Source for primitive #4 (defaults).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "SamuelsonZeckhauser1988",
+      "name": "Status Quo Bias in Decision Making",
+      "url": "https://link.springer.com/article/10.1007/BF00055564",
+      "description": "Samuelson, W. & Zeckhauser, R. (1988). Journal of Risk and Uncertainty, 1(1), 7–59. Status quo bias: preference for the existing state of affairs. Source for primitive #4 (defaults).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "SchultzNolan2007",
+      "name": "The Constructive, Destructive, and Reconstructive Power of Social Norms",
+      "url": "https://journals.sagepub.com/doi/10.1111/j.1467-9280.2007.01917.x",
+      "description": "Schultz, P. W., Nolan, J. M., Cialdini, R. B., Goldstein, N. J. & Griskevicius, V. (2007). Psychological Science, 18(5), 429–434. Negative social proof backfire effect. Source for primitive #5 (social proof).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "WorcheLee1975",
+      "name": "Effects of Supply and Demand on Ratings of Object Value",
+      "url": "https://psycnet.apa.org/doi/10.1037/0022-3514.32.5.906",
+      "description": "Worchel, S., Lee, J. & Adewole, A. (1975). Journal of Personality and Social Psychology, 32(5), 906–914. Scarcity increases perceived value; foundational experiment. Source for primitive #6 (scarcity).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Laibson1997",
+      "name": "Golden Eggs and Hyperbolic Discounting",
+      "url": "https://academic.oup.com/qje/article/112/2/443/1870925",
+      "description": "Laibson, D. (1997). Quarterly Journal of Economics, 112(2), 443–478. Quasi-hyperbolic (β-δ) discounting model. Primary source for primitive #7 (hyperbolic discounting).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ODonoghueRabin1999",
+      "name": "Doing It Now or Later",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/aer.89.1.103",
+      "description": "O'Donoghue, T. & Rabin, M. (1999). American Economic Review, 89(1), 103–124. Present bias and procrastination in the β-δ model. Source for primitive #7 (hyperbolic discounting).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "FrederickLoewenstein2002",
+      "name": "Time Discounting and Time Preference: A Critical Review",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/002205102320161311",
+      "description": "Frederick, S., Loewenstein, G. & O'Donoghue, T. (2002). Journal of Economic Literature, 40(2), 351–401. Comprehensive review of time preferences, present bias, and hyperbolic discounting. Source for primitive #7.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Thaler1985",
+      "name": "Mental Accounting and Consumer Choice",
+      "url": "https://pubsonline.informs.org/doi/abs/10.1287/mksc.4.3.199",
+      "description": "Thaler, R. H. (1985). Marketing Science, 4(3), 199–214. Foundational paper on mental accounting. Source for primitive #8 (mental accounting).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Thaler1999",
+      "name": "Mental Accounting Matters",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/(SICI)1099-0771(199909)12:3%3C183::AID-BDM318%3E3.0.CO;2-F",
+      "description": "Thaler, R. H. (1999). Journal of Behavioral Decision Making, 12(3), 183–206. Extended treatment of mental accounting, sunk costs, and transaction utility. Source for primitive #8.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "LoewensteinPrelec1991",
+      "name": "Negative Time Preference",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/aer.81.2.347",
+      "description": "Loewenstein, G. & Prelec, D. (1991). American Economic Review, 81(2), 347–352. Negative time preference; temporal framing and payment timing. Source for primitives #7 and #8.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "IyengarLepper2000",
+      "name": "When Choice Is Demotivating: Can One Desire Too Much of a Good Thing?",
+      "url": "https://psycnet.apa.org/doi/10.1037/0022-3514.79.6.995",
+      "description": "Iyengar, S. S. & Lepper, M. R. (2000). Journal of Personality and Social Psychology, 79(6), 995–1006. Choice overload (jam study): too many options reduce engagement and selection. Source for primitive #9 (choice architecture).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Johnson2012",
+      "name": "Beyond Nudges: Tools of a Choice Architecture",
+      "url": "https://link.springer.com/article/10.1007/s11002-012-9186-1",
+      "description": "Johnson et al. (2012). Marketing Letters, 23(2), 487–504. Taxonomy of choice architecture tools beyond defaults. Source for primitive #9 (choice architecture).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Kahneman2011",
+      "name": "Thinking, Fast and Slow",
+      "url": "https://us.macmillan.com/books/9780374533557/thinkingfastandslow",
+      "description": "Kahneman, D. (2011). Farrar, Straus and Giroux. Comprehensive treatment of dual-system theory, prospect theory, loss aversion, anchoring, and availability heuristic. Source for primitives #1, #2, #3, #10.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "StanovichWest2000",
+      "name": "Individual Differences in Reasoning: Implications for the Rationality Debate",
+      "url": "https://doi.org/10.1017/S0140525X00003435",
+      "description": "Stanovich, K. E. & West, R. F. (2000). Behavioral and Brain Sciences, 23(5), 645–665. System 1/System 2 nomenclature foundation. Source for primitive #10 (dual-system).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "AlterOppenheimer2009",
+      "name": "Uniting the Tribes of Fluency to Form a Metacognitive Nation",
+      "url": "https://journals.sagepub.com/doi/10.1177/1088868309341564",
+      "description": "Alter, A. L. & Oppenheimer, D. M. (2009). Personality and Social Psychology Review, 13(3), 219–235. Processing fluency effects on evaluation. Source for primitive #10 (dual-system — fluency).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "HuberPaynePuto1982",
+      "name": "Adding Asymmetrically Dominated Alternatives: Violations of Regularity and the Similarity Hypothesis",
+      "url": "https://academic.oup.com/jcr/article/9/1/90/1825737",
+      "description": "Huber, J., Payne, J. W. & Puto, C. (1982). Journal of Consumer Research, 9(1), 90–98. Foundational paper on asymmetric dominance / decoy effect. Source for primitive #11 (decoy effect).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "TverskySimonson1993",
+      "name": "Context-Dependent Preferences",
+      "url": "https://pubsonline.informs.org/doi/10.1287/mnsc.39.10.1179",
+      "description": "Tversky, A. & Simonson, I. (1993). Management Science, 39(10), 1179–1189. Theoretical framework for context-dependent preferences including decoy and compromise effects. Source for primitive #11.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "WoodRunger2016",
+      "name": "Psychology of Habit",
+      "url": "https://www.annualreviews.org/doi/10.1146/annurev-psych-122414-033417",
+      "description": "Wood, W. & Rünger, D. (2016). Annual Review of Psychology, 67, 289–314. Modern review of habit psychology, dual-system model, context-cue dependence. Source for primitive #12.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "LallyEtAl2010",
+      "name": "How Are Habits Formed: Modelling Habit Formation in the Real World",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/ejsp.674",
+      "description": "Lally, P., van Jaarsveld, C. H. M., Potts, H. W. W. & Wardle, J. (2010). European Journal of Social Psychology, 40(6), 998–1009. Field measurement of time-to-automaticity (median ~66 days, range 18–254). Source for primitive #12 and the empirical basis of habit stacking (#16).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "HardwickEtAl2019",
+      "name": "Time-Dependent Competition Between Goal-Directed and Habitual Response Preparation",
+      "url": "https://www.nature.com/articles/s41562-019-0725-0",
+      "description": "Hardwick, R. M., Forrence, A. D., Krakauer, J. W. & Haith, A. M. (2019). Nature Human Behaviour, 3, 1252–1262. Goal-directed vs stimulus-response system competition under time pressure. Source for primitive #12.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "RobbinsCosta2017",
+      "name": "Habits",
+      "url": "https://www.cell.com/current-biology/fulltext/S0960-9822(17)31043-9",
+      "description": "Robbins, T. W. & Costa, R. M. (2017). Current Biology, 27(22), R1200–R1206. Neural circuitry of habit: dorsolateral striatum and the basal-ganglia stimulus-response system. Source for primitive #12.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "WoodTamWitt2005",
+      "name": "Changing Circumstances, Disrupting Habits",
+      "url": "https://psycnet.apa.org/doi/10.1037/0022-3514.88.6.918",
+      "description": "Wood, W., Tam, L. & Witt, M. G. (2005). Journal of Personality and Social Psychology, 88(6), 918–933. Habits collapse when context changes; transition states are habit-formation windows. Source for primitives #12, #15.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Schultz1997",
+      "name": "A Neural Substrate of Prediction and Reward",
+      "url": "https://www.science.org/doi/10.1126/science.275.5306.1593",
+      "description": "Schultz, W., Dayan, P. & Montague, P. R. (1997). Science, 275(5306), 1593–1599. Dopamine as reward prediction-error signal. Mechanistic basis for the engagement power of variable-ratio schedules. Source for primitive #13.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Glimcher2011",
+      "name": "Understanding Dopamine and Reinforcement Learning: The Dopamine Reward Prediction Error Hypothesis",
+      "url": "https://www.pnas.org/doi/10.1073/pnas.1014269108",
+      "description": "Glimcher, P. W. (2011). PNAS, 108 (Suppl. 3), 15647–15654. Modern synthesis of the prediction-error account of dopamine. Source for primitive #13.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Miller1956",
+      "name": "The Magical Number Seven, Plus or Minus Two",
+      "url": "https://psycnet.apa.org/doi/10.1037/h0043158",
+      "description": "Miller, G. A. (1956). Psychological Review, 63(2), 81–97. Original chunk-capacity bound for working memory. Source for primitive #14.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Cowan2001",
+      "name": "The Magical Number 4 in Short-Term Memory",
+      "url": "https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/abs/magical-number-4-in-shortterm-memory-a-reconsideration-of-mental-storage-capacity/44023F1147D4A1D44BDC0AD9DE9CE8D7",
+      "description": "Cowan, N. (2001). Behavioral and Brain Sciences, 24(1), 87–114. Revised lower bound for novel material under interference. Source for primitive #14.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "SwellerVanMerrienboerPaas2019",
+      "name": "Cognitive Architecture and Instructional Design: 20 Years Later",
+      "url": "https://link.springer.com/article/10.1007/s10648-019-09465-5",
+      "description": "Sweller, J., van Merriënboer, J. J. G. & Paas, F. (2019). Educational Psychology Review, 31, 261–292. Modern reformulation of cognitive load theory; intrinsic / extraneous / germane decomposition. Source for primitive #14.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Monsell2003",
+      "name": "Task Switching",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S1364661303000287",
+      "description": "Monsell, S. (2003). Trends in Cognitive Sciences, 7(3), 134–140. Task-switching cost evidence base; relevant to interruption and notification design. Source for primitive #14.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "TulvingThomson1973",
+      "name": "Encoding Specificity and Retrieval Processes in Episodic Memory",
+      "url": "https://psycnet.apa.org/doi/10.1037/h0020071",
+      "description": "Tulving, E. & Thomson, D. M. (1973). Psychological Review, 80(5), 352–373. Foundational paper on cue-dependence of retrieval. Source for primitive #15.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "SmithVela2001",
+      "name": "Environmental Context-Dependent Memory: A Review and Meta-Analysis",
+      "url": "https://link.springer.com/article/10.3758/BF03196157",
+      "description": "Smith, S. M. & Vela, E. (2001). Psychonomic Bulletin & Review, 8(2), 203–220. Meta-analysis of environment-context effects on retrieval. Source for primitive #15.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "NealEtAl2011",
+      "name": "The Pull of the Past: When Do Habits Persist Despite Conflict With Motives?",
+      "url": "https://journals.sagepub.com/doi/10.1177/0146167211419863",
+      "description": "Neal, D. T., Wood, W., Wu, M. & Kurlander, D. (2011). Personality and Social Psychology Bulletin, 37(11), 1428–1437. Context cues dominate motivation in habitual behavior. Source for primitives #12, #15.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Gollwitzer1999",
+      "name": "Implementation Intentions: Strong Effects of Simple Plans",
+      "url": "https://psycnet.apa.org/doi/10.1037/0003-066X.54.7.493",
+      "description": "Gollwitzer, P. M. (1999). American Psychologist, 54(7), 493–503. Original formulation of if-then implementation intentions. Source for primitive #16.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "GollwitzerSheeran2006",
+      "name": "Implementation Intentions and Goal Achievement: A Meta-Analysis of Effects and Processes",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0065260106380021",
+      "description": "Gollwitzer, P. M. & Sheeran, P. (2006). Advances in Experimental Social Psychology, 38, 69–119. Meta-analysis: medium-to-large effect (d ≈ 0.65) across 94 studies. Source for primitive #16.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "BrownImaiVieiderCamerer2024",
+      "name": "Meta-analysis of Empirical Estimates of Loss Aversion",
+      "url": "https://www.aeaweb.org/articles?id=10.1257%2Fjel.20221698",
+      "description": "Brown, A.L., Imai, T., Vieider, F.M. & Camerer, C.F. (2024). Journal of Economic Literature, 62(2), 485–516. 607 estimates from 150 articles; mean λ = 1.955 (95% CI [1.820, 2.102]), below the canonical 2.25. Grade-A 2024 downward revision of the loss aversion coefficient; updates primitive #2.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "WalasekMullettStewart2024",
+      "name": "A meta-analysis of loss aversion in risky contexts",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0167487024000485",
+      "description": "Walasek, L., Mullett, T.L. & Stewart, N. (2024). Journal of Economic Psychology, 103, 102740. Random-effects meta-analysis of 17 studies; λ = 1.31 (95% CI [1.10, 1.53]) in risky choice contexts. Independent downward revision corroborating BrownEtAl2024; updates primitive #2.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "LossAversionNotRobust2025",
+      "name": "Loss aversion is not robust: A re-meta-analysis",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0167487025000133",
+      "description": "Yechiam, E. & Zeif, D. (2025). Journal of Economic Psychology, 107, 2025. Re-analysis of Brown et al. 2024 dataset; λ ≈ 1.07 (not significant) for symmetric unordered gain-loss stimuli; loss aversion only appears when losses < gains or payoffs are ordered. Key design-dependency caveat for primitive #2. Verified: authors and venue confirmed July 2026.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "HuEtAl2025NudgeMeta",
+      "name": "Assessing Nudge Impact: A Comprehensive Second-Order Meta-Analysis",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/bdm.70053",
+      "description": "Hu, B. et al. (2025). Journal of Behavioral Decision Making. Second-order meta-analysis of 14 nudge meta-analyses (1,638 studies, ~30M participants). Raw d=0.27; publication-bias-corrected d=0.004. Government at-scale trials show smaller effects than academic RCTs. Grade-A 2025 finding; major caveat for primitives #4 and #9.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "GriederKistlerSchmitz2024",
+      "name": "How sludge impairs the effectiveness of policy programs: a field experiment with SMEs",
+      "url": "https://www.cambridge.org/core/journals/behavioural-public-policy/article/how-sludge-impairs-the-effectiveness-of-policy-programs-a-field-experiment-with-smes/D4AEFEE62D2F65804C990DF3AB8571F1",
+      "description": "Grieder, M., Kistler, D. & Schmitz, J. (2024). Behavioural Public Policy, 9(4). N=173 SMEs; single ordering-step sludge reduced uptake from 91.7% to 51.7% (-40pp). Field calibration of sludge magnitude; evidence base for sludge audits in choice architecture design; relevant to primitives #9 and #14.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "CherepMaesSingh2025",
+      "name": "LLM Agents Are Hypersensitive to Nudges",
+      "url": "https://arxiv.org/abs/2505.11584",
+      "description": "Cherep, M., Maes, P. & Singh, N. arXiv:2505.11584 (May 2025); published as 'AI agents are sensitive to nudges,' PNAS 2026 (DOI 10.1073/pnas.2537030123) — not ICLR. Multi-model benchmark (GPT-3.5/4o/o3, Gemini, Claude); default-option nudge shifted human choice probability 0.51->0.88 (+37pp) while several LLMs (GPT-4o, Claude 3 Haiku, o3-Mini, GPT-3.5-Turbo) shifted to ~1.0 from baselines of 0.33-0.58; Claude 3.5 Sonnet and Gemini 1.5 Pro stayed near human levels (~0.89-0.91). CoT/few-shot shift but do not resolve the sensitivity. New frontier: AI agents as subjects of choice architecture. Relevant to primitives #4, #9.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "BiniCongHuangJin2026",
+      "name": "Behavioral Economics of AI: LLM Biases and Corrections",
+      "url": "https://arxiv.org/abs/2602.09362",
+      "description": "Bini, P., Cong, L.W., Huang, X. & Jin, L.J. (2026). arXiv:2602.09362; NBER Working Paper 34745. Systematic behavioral economics biases in LLMs; preference-based tasks more human-like in larger models; prompting for rationality reduces but does not eliminate biases. Corroborates LLM nudge hypersensitivity finding; relevant to primitives #4, #9, #10.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "SheeranListromGollwitzer2024",
+      "name": "The when and how of planning: Meta-analysis of the scope and components of implementation intentions in 642 tests",
+      "url": "https://www.tandfonline.com/doi/abs/10.1080/10463283.2024.2334563",
+      "description": "Sheeran, P., Listrom, L. & Gollwitzer, P.M. (2024). European Review of Social Psychology, 36(1). 642 tests; d=0.27–0.66 across outcome types; larger effects with if-then format, high motivation, rehearsal; new cue-response taxonomy. OSF public data. Updates primitive #16 (extends Gollwitzer & Sheeran 2006).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    }
+  ],
+  "books": [
+    {
+      "id": "ThalerSunstein2008",
+      "name": "Nudge: Improving Decisions About Health, Wealth, and Happiness",
+      "url": "https://yalebooks.yale.edu/book/9780300122237/nudge/",
+      "description": "Thaler, R. H. & Sunstein, C. R. (2008). Yale University Press. Canonical choice architecture framework; libertarian paternalism; defaults, nudges, and harm test. Source for primitives #4, #9, and the ethical bounds section.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Ariely2008",
+      "name": "Predictably Irrational",
+      "url": "https://harpercollins.com/products/predictably-irrational-revised-and-expanded-edition-dan-ariely",
+      "description": "Ariely, D. (2008). HarperCollins. Practitioner-accessible treatment of anchoring, decoy effect, social norms, pain of paying, and mental accounting. Source for primitives #3, #8, #11.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "FersterSkinner1957",
+      "name": "Schedules of Reinforcement",
+      "url": "https://www.bfskinner.org/product/schedules-of-reinforcement/",
+      "description": "Ferster, C. B. & Skinner, B. F. (1957). Appleton-Century-Crofts. Canonical taxonomy of reinforcement schedules (FR / VR / FI / VI) and the partial-reinforcement extinction effect. Source for primitive #13.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Schull2012",
+      "name": "Addiction by Design: Machine Gambling in Las Vegas",
+      "url": "https://press.princeton.edu/books/paperback/9780691160887/addiction-by-design",
+      "description": "Schüll, N. D. (2012). Princeton University Press. Variable-ratio schedule compulsion mechanics; the dark-pattern reference text for primitive #13's misuse boundary.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Eyal2014",
+      "name": "Hooked: How to Build Habit-Forming Products",
+      "url": "https://www.nirandfar.com/hooked/",
+      "description": "Eyal, N. (2014). Portfolio. Applied product use of variable rewards; should be read alongside the misuse-boundary literature (Schüll 2012, ICO Children's Code). Source for primitives #12, #13.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Cialdini1984",
+      "name": "Influence: The Psychology of Persuasion",
+      "url": "https://harpercollins.com/products/influence-new-and-expanded-robert-b-cialdini",
+      "description": "Cialdini, R. B. (1984). HarperCollins. Six principles of influence including social proof and scarcity. Source for primitives #5 and #6.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    }
+  ],
+  "regulatory_references": [
+    {
+      "id": "ASA-CAP",
+      "name": "ASA CAP Code (UK) — Misleading Advertising and Sales Promotions",
+      "url": "https://www.asa.org.uk/type/non_broadcast/code_section/03.html",
+      "description": "UK Advertising Standards Authority CAP Code. Sections 3 (Misleading advertising) and 8 (Sales Promotions). Governs fake urgency, false scarcity, and misleading pricing claims. Relevant to primitives #3, #6.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "CPRs2008",
+      "name": "Consumer Protection from Unfair Trading Regulations 2008 (UK)",
+      "url": "https://www.legislation.gov.uk/uksi/2008/1277/contents/made",
+      "description": "UK CPRs 2008. Prohibits aggressive commercial practices, false urgency, and misleading omissions. Relevant to primitives #4, #6, #9.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ICO-Consent",
+      "name": "ICO Guidance on Consent Under GDPR (UK)",
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/consent/",
+      "description": "ICO UK GDPR consent guidance. Explicit prohibition on default consent; affirmative action required. Critical for primitive #4 (defaults) in consent contexts.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ICO-ChildrensCode",
+      "name": "ICO Age-Appropriate Design Code (Children's Code) (UK)",
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/childrens-information/childrens-code-guidance-and-resources/age-appropriate-design-code/",
+      "description": "UK Information Commissioner's Office Age-Appropriate Design Code. Standard 13 (Detrimental use of data) and Standard 14 (Nudge techniques) constrain engagement-design and reward-schedule patterns directed at under-18 users. Critical regulatory boundary for primitives #12, #13.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ICO-DeceptiveDesign",
+      "name": "ICO Guidance on Harmful Online Design / Deceptive Design Patterns (UK)",
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/childrens-information/childrens-code-guidance-and-resources/harmful-online-design/",
+      "description": "ICO guidance citing cognitive overload, friction asymmetry, and engineered habit loops as routes to invalid consent and harmful design. Source for the misuse boundary on primitives #4, #12, #13, #14.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "DSA-X-Fine-2025",
+      "name": "EC Issues First Non-Compliance Fine Under the DSA: X Fined €120 Million for Dark Patterns",
+      "url": "https://www.goodwinlaw.com/en/insights/publications/2025/12/alerts-practices-antc-ec-issues-first-non-compliance-fine-under",
+      "description": "Goodwin Law advisory, December 2025. EC imposed €120M fine on X under DSA Art. 25 for dark patterns including deceptive verification and opaque advertising. First DSA enforcement action; establishes live regulatory risk for dark-pattern design. Relevant to Ethical Bounds section.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "DSAObservatory2025",
+      "name": "Investigation: Platforms still use manipulative design despite DSA rules",
+      "url": "https://dsa-observatory.eu/2025/08/07/investigation-platforms-still-use-manipulative-design-despite-dsa-rules/",
+      "description": "DSA Observatory (August 2025). Empirical investigation of dark pattern prevalence on Very Large Online Platforms; provides behavioral evidence base for DSA Art. 25 and 27 enforcement. Relevant to Ethical Bounds and Misuse Boundaries sections.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "EUAIActArt5_2024",
+      "name": "EU AI Act Article 5 — Prohibited AI Practices (Regulation (EU) 2024/1689)",
+      "url": "https://artificialintelligenceact.eu/article/5/",
+      "description": "Regulation (EU) 2024/1689, Art. 5(1)(a). Prohibits AI systems using subliminal techniques beyond a person's consciousness, or purposefully manipulative or deceptive techniques, that materially distort behaviour causing significant harm. In force 2 Feb 2025. Penalties: up to €35M or 7% of global annual turnover (Art. 99(3)). Commission guidelines C(2025) 5052 final (adopted 29 July 2025; an earlier Feb 2025 version circulated informally) name dark patterns as a prohibited manipulative technique. Directly relevant to algorithmic applications of primitives #4, #9, #10. Verified: artificialintelligenceact.eu/article/5/ + artificialintelligenceact.eu/article/99/.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "FTCvAmazon2025",
+      "name": "FTC v. Amazon — Prime Enrollment and Cancellation Dark Patterns Settlement",
+      "url": "https://www.ftc.gov/news-events/news/press-releases",
+      "description": "FTC settlement, announced 25 September 2025. $2.5B total ($1.0B civil penalty + $1.5B in consumer refunds to ~35M Prime subscribers) over deceptive Prime enrollment and cancellation flows, actionable under FTC Act Section 5. Largest US dark-pattern enforcement to date; establishes live US regulatory risk parallel to EU DSA Art. 25. Note: the FTC's separate 'click-to-cancel' rule was vacated by the Eighth Circuit (July 2025) on procedural grounds; rulemaking reopened via ANPRM (30 Jan 2026). Relevant to Ethical Bounds and Regulatory Context sections and primitives #4, #9.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ScheibehenneGreifenederTodd2010",
+      "name": "Can There Ever Be Too Many Options? A Meta-Analytic Review of Choice Overload",
+      "url": "https://academic.oup.com/jcr/article/37/3/409/1828647",
+      "description": "Scheibehenne, B., Greifeneder, R. & Todd, P. M. (2010). Journal of Consumer Research, 37(3), 409–425. Meta-analysis of 63 conditions from 50 experiments (N=5,036); mean choice overload effect ≈ 0 with high between-study variance. No universal mechanism reliably produces choice overload; context moderators (preference clarity, expertise asymmetry, option quality) dominate. Critical replication-status note for primitive #9. Verified: JCR abstract confirmed title, authors, year, N, and zero-mean finding.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ImaiNunnariWuVieider2025",
+      "name": "Meta-Analysis of Prospect Theory Parameters",
+      "url": "https://www.ifo.de/en/cesifo/publications/2025/working-paper/meta-analysis-prospect-theory-parameters",
+      "description": "Imai, T., Nunnari, S., Wu, J. & Vieider, F. M. (2025). CESifo Working Paper No. 12334. First joint meta-analysis of all cumulative prospect theory parameters simultaneously. 166 papers, 812 estimates. Key finding: experimental and measurement design indicators are the strongest predictors of parameter variation — procedure invariance violations explain much of cross-study heterogeneity. Confirms diminishing sensitivity to outcomes and probabilities. Caution: specific parameter point estimates (γ, α) were not confirmed from the primary source page; treat canonical values as design-dependent. Evidence grade B (working paper). Verified: CESifo/ifo.de publication page confirmed title, authors, WP number, and 166 papers / 812 estimates.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "MilkmanEtAl2021Nature",
+      "name": "Megastudies improve the impact of applied behavioural science",
+      "url": "https://www.nature.com/articles/s41586-021-04128-4",
+      "description": "Milkman, K. L. et al. (2021). Nature. Gym attendance megastudy: 61,293 gym members, 54 distinct behavioural interventions tested simultaneously. Demonstrates that sequential A/B testing of single interventions inflates apparent winner effect size; simultaneous comparison corrects this. Source for megastudy methodology. Note: primary URL requires institutional access; existence and core findings corroborated by Duckworth & Milkman PNAS Nexus 2022 (DuckworthMilkman2022) which explicitly describes this study. Evidence grade A (peer-reviewed Nature). URL confirmed as the canonical DOI; full-text access paywalled.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "DuckworthMilkman2022",
+      "name": "A guide to megastudies",
+      "url": "https://academic.oup.com/pnasnexus/article/1/5/pgac214/6751928",
+      "description": "Duckworth, A. L. & Milkman, K. L. (2022). PNAS Nexus, 1(5), pgac214. Canonical methodology paper for megastudies: defines megastudy as a massive field experiment testing many treatments simultaneously in one large sample with a shared objectively-measured outcome. When megastudies outperform sequential A/B testing: high uncertainty about dominant mechanism, scalable delivery channel, shared outcome metric. Discusses the vaccine adoption megastudy (680,000 participants, 22 treatments). Directly supports the Comparative Calibration recipe. Evidence grade A (peer-reviewed). Verified: PNAS Nexus page confirmed title, authors, year, DOI, and key findings.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "OECDFixingFrictions2024",
+      "name": "Fixing Frictions: Sludge Audits Around the World",
+      "url": "https://oecd-opsi.org/publications/fixing-frictions-sludge-audits-around-the-world/",
+      "description": "OECD Observatory of Public Sector Innovation (2024). Published July 2024. Public governance policy paper. Codifies repeatable sludge audit methodology: behavioural journey mapping, four friction cost categories (search, decision, cognitive, emotional), nine good-practice principles. Draws on International Sludge Academy case studies involving 16 governments across 14 countries. Directly supports the Sludge Audit recipe. Evidence grade B (practitioner methodology with 10+ case studies; not a controlled RCT). Verified: OECD OPSI page confirmed title, organization, year, and methodology elements.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    }
+  ]
+}

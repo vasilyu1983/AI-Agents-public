@@ -1,0 +1,4 @@
+interface:
+  display_name: "Help Center Design"
+  short_description: "Designs AI-first help centers and self-service support systems"
+  default_prompt: "Use $product-help-center for Designs AI-first help centers and self-service support systems. Use when shaping taxonomy, article templates, support AI, or docs platform choices."

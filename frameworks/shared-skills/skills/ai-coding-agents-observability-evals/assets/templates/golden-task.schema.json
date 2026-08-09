@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skills.ai-coding-agents/observability-evals/golden-task.schema.json",
+  "title": "GoldenTask",
+  "description": "A single entry in the golden-task corpus used to drive regression evals for a coding agent. Each entry defines an input, the expected artifact, and the scoring criteria.",
+  "type": "object",
+  "required": ["id", "version", "task", "expected", "scoring"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,79}$",
+      "description": "Stable, kebab-case identifier. Never reuse or rename — eval history is keyed on this."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Increment when the expected output or scoring criteria change materially. Old versions should be archived, not overwritten."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Free-form labels for filtering (e.g. 'regression', 'smoke', 'security', 'refactor')."
+    },
+    "task": {
+      "type": "object",
+      "required": ["prompt"],
+      "additionalProperties": false,
+      "description": "The agent input: the prompt the agent receives, plus optional repo snapshot and tool permissions.",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The exact prompt string sent to the agent. No template variables — must be fully rendered."
+        },
+        "repo_snapshot": {
+          "type": "string",
+          "description": "Path or URI to a deterministic repo fixture (tarball, git ref, or fixture ID) the agent operates on. Omit for prompt-only tasks."
+        },
+        "allowed_tools": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Tool names the agent is permitted to use during this task. Overrides session defaults."
+        },
+        "max_turns": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Hard turn limit for this task. If the agent exceeds this, the run is scored as a timeout."
+        },
+        "context_files": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Files to pre-load into the agent's context window before the prompt."
+        }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "required": ["artifact_type"],
+      "additionalProperties": false,
+      "description": "The expected output artifact and acceptance criteria.",
+      "properties": {
+        "artifact_type": {
+          "type": "string",
+          "enum": ["file_diff", "file_create", "command_output", "json_object", "markdown_section", "no_change"],
+          "description": "Structural type of the expected output."
+        },
+        "artifact_path": {
+          "type": "string",
+          "description": "File path (relative to repo root) of the expected artifact. Required for 'file_diff' and 'file_create'."
+        },
+        "content": {
+          "type": "string",
+          "description": "Expected content string or JSON-serialized object. For 'file_diff', this is a unified diff."
+        },
+        "content_schema": {
+          "type": "object",
+          "description": "JSON Schema that the artifact content must satisfy. Mutually exclusive with 'content'."
+        },
+        "contains": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Substrings that must appear in the artifact. Evaluated after 'content' check."
+        },
+        "excludes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Substrings that must NOT appear in the artifact."
+        }
+      }
+    },
+    "scoring": {
+      "type": "object",
+      "required": ["method"],
+      "additionalProperties": false,
+      "description": "How the run is graded.",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["exact_match", "fuzzy_match", "schema_valid", "llm_judge", "custom"],
+          "description": "Primary scoring method. 'llm_judge' requires a judge_prompt. 'custom' requires a scorer_ref."
+        },
+        "fuzzy_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Minimum similarity ratio (0–1) required to pass. Used when method = 'fuzzy_match'."
+        },
+        "judge_prompt": {
+          "type": "string",
+          "description": "System prompt for the LLM judge. Must instruct the judge to return a JSON object with a 'pass' boolean and 'reason' string. Used when method = 'llm_judge'."
+        },
+        "scorer_ref": {
+          "type": "string",
+          "description": "Module path or URI to a custom scorer callable (e.g. 'evals.scorers:check_typescript_compiles'). Used when method = 'custom'."
+        },
+        "pass_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 1.0,
+          "description": "Fraction of sub-checks that must pass for the task to be marked as passed. Allows partial credit."
+        }
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Reference scores from the last known-good run. Used to detect regression.",
+      "properties": {
+        "model": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "pass_rate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "median_turns": { "type": "number", "minimum": 0 },
+        "notes": { "type": "string" }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Free-form key-value pairs for tooling (CI pipeline ID, author, linked issue, etc.).",
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "examples": [
+    {
+      "id": "add-missing-return-type",
+      "version": 1,
+      "tags": ["regression", "typescript"],
+      "task": {
+        "prompt": "Add explicit return types to all exported functions in src/utils.ts that are missing them.",
+        "repo_snapshot": "fixtures/ts-project-v1.tar.gz",
+        "allowed_tools": ["Read", "Edit", "Bash"],
+        "max_turns": 10
+      },
+      "expected": {
+        "artifact_type": "file_diff",
+        "artifact_path": "src/utils.ts",
+        "contains": [": string", ": number", ": void"],
+        "excludes": ["any"]
+      },
+      "scoring": {
+        "method": "llm_judge",
+        "judge_prompt": "You are a TypeScript expert. The agent was asked to add return types. Return {\"pass\": true/false, \"reason\": \"...\"}. Pass if all exported functions now have explicit return types and no 'any' was introduced.",
+        "pass_threshold": 1.0
+      },
+      "baseline": {
+        "model": "<provider-model-slug-at-baseline-date>",
+        "date": "2026-04-01",
+        "pass_rate": 0.94,
+        "median_turns": 4
+      }
+    }
+  ]
+}

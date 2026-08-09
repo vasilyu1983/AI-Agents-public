@@ -1,0 +1,320 @@
+# GitLab CI - Merge Request Quality Checks
+# Place in: .gitlab-ci.yml
+
+# Pipeline stages
+stages:
+  - validate
+  - test
+  - quality
+  - security
+  - report
+
+# Global variables
+variables:
+  NODE_VERSION: "20"
+  COVERAGE_THRESHOLD: "80"
+
+# Cache configuration
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .npm/
+
+# Workflow rules - only run on MRs
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# Job templates
+.node_job_template: &node_job
+  image: node:${NODE_VERSION}
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+
+# Stage 1: Validation
+commitlint:
+  stage: validate
+  image: node:${NODE_VERSION}
+  script:
+    - npm install @commitlint/cli @commitlint/config-conventional
+    - echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+    - npx commitlint --from $CI_MERGE_REQUEST_DIFF_BASE_SHA --to HEAD --verbose
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+mr-size-check:
+  stage: validate
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache git
+  script:
+    - |
+      git fetch origin $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+      LINES_CHANGED=$(git diff --shortstat origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME...HEAD | grep -oP '\d+(?= insertion)|\d+(?= deletion)' | awk '{s+=$1} END {print s}')
+      echo "Lines changed: $LINES_CHANGED"
+
+      if [ "$LINES_CHANGED" -gt 1000 ]; then
+        echo "ERROR: MR is too large ($LINES_CHANGED lines). Split into smaller MRs."
+        exit 1
+      elif [ "$LINES_CHANGED" -gt 400 ]; then
+        echo "WARNING: MR is large ($LINES_CHANGED lines). Consider splitting for faster reviews."
+      fi
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+# Stage 2: Tests
+unit-tests:
+  <<: *node_job
+  stage: test
+  script:
+    - npm test -- --coverage
+    - COVERAGE=$(npm test -- --coverage --silent | grep -oP '\d+(?=%)' | head -1 || echo "0")
+    - echo "Coverage: $COVERAGE%"
+    - |
+      if [ "$COVERAGE" -lt "$COVERAGE_THRESHOLD" ]; then
+        echo "ERROR: Coverage $COVERAGE% is below $COVERAGE_THRESHOLD% threshold"
+        exit 1
+      fi
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+integration-tests:
+  <<: *node_job
+  stage: test
+  services:
+    - postgres:15
+    - redis:7
+  variables:
+    POSTGRES_DB: test_db
+    POSTGRES_USER: test_user
+    POSTGRES_PASSWORD: test_password
+    DATABASE_URL: postgresql://test_user:test_password@postgres:5432/test_db
+    REDIS_URL: redis://redis:6379
+  script:
+    - npm run test:integration
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - "src/**/*.ts"
+        - "tests/integration/**/*.ts"
+
+e2e-tests:
+  <<: *node_job
+  stage: test
+  script:
+    - npm run test:e2e
+  artifacts:
+    when: on_failure
+    paths:
+      - tests/e2e/screenshots/
+      - tests/e2e/videos/
+    expire_in: 1 week
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - "src/**/*.ts"
+        - "tests/e2e/**/*.ts"
+
+# Stage 3: Code Quality
+lint:
+  <<: *node_job
+  stage: quality
+  script:
+    - npm run lint
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+format-check:
+  <<: *node_job
+  stage: quality
+  script:
+    - npm run format:check
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+type-check:
+  <<: *node_job
+  stage: quality
+  script:
+    - npm run type-check
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      exists:
+        - tsconfig.json
+
+build:
+  <<: *node_job
+  stage: quality
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+      - build/
+    expire_in: 1 week
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+code-quality:
+  stage: quality
+  image: docker:stable
+  services:
+    - docker:stable-dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    CODE_QUALITY_IMAGE: "registry.gitlab.com/gitlab-org/ci-cd/codequality:latest"
+  allow_failure: true
+  script:
+    - |
+      docker run \
+        --env SOURCE_CODE="$PWD" \
+        --volume "$PWD":/code \
+        --volume /var/run/docker.sock:/var/run/docker.sock \
+        "$CODE_QUALITY_IMAGE" /code
+  artifacts:
+    reports:
+      codequality: gl-code-quality-report.json
+    expire_in: 1 week
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+# Stage 4: Security
+dependency-scan:
+  <<: *node_job
+  stage: security
+  script:
+    - npm audit --audit-level=moderate
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+secret-detection:
+  stage: security
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache git
+  script:
+    - |
+      git fetch origin $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+      git diff origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME...HEAD | grep -iE '(password|secret|key|token|api_key)' && exit 1 || exit 0
+  allow_failure: false
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+sast:
+  stage: security
+  image: returntocorp/semgrep
+  script:
+    - semgrep --config=auto --json --output=gl-sast-report.json .
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
+    expire_in: 1 week
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+# Stage 5: Report
+merge-request-report:
+  stage: report
+  image: alpine:latest
+  needs:
+    - unit-tests
+    - lint
+    - build
+  before_script:
+    - apk add --no-cache curl jq
+  script:
+    - |
+      # Post comment to MR with summary
+      COMMENT=$(cat <<EOF
+      ## CI/CD Pipeline Summary
+
+      All checks passed.
+
+      - Unit tests: Passed
+      - Linting: Passed
+      - Build: Passed
+      - Code coverage: $(cat coverage/coverage-summary.json | jq '.total.lines.pct')%
+
+      Ready for review!
+      EOF
+      )
+
+      curl --request POST \
+        --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" \
+        --data "body=$COMMENT" \
+        "$CI_API_V4_URL/projects/$CI_PROJECT_ID/merge_requests/$CI_MERGE_REQUEST_IID/notes"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: on_success
+
+# Optional: Performance benchmarks
+performance:
+  <<: *node_job
+  stage: quality
+  script:
+    - npm run benchmark || true
+    - cat benchmark-results.txt
+  artifacts:
+    reports:
+      metrics: benchmark-results.txt
+    expire_in: 1 week
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+
+# Optional: Accessibility tests
+accessibility:
+  <<: *node_job
+  stage: quality
+  script:
+    - npm run build
+    - npm run test:a11y || true
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+
+# Optional: Bundle size check
+bundle-size:
+  <<: *node_job
+  stage: quality
+  script:
+    - npm run build
+    - npm run analyze:bundle || true
+  artifacts:
+    paths:
+      - bundle-analysis.html
+    expire_in: 1 week
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+
+# Merge request approval rules (configure in GitLab UI)
+# Settings > Merge Requests > Merge request approvals
+# - Require 2 approvals
+# - Prevent approval by author
+# - Prevent committers from approving
+# - Require approval from code owners
+# - Remove all approvals when new commits are pushed
+
+# Branch protection rules (configure in GitLab UI)
+# Settings > Repository > Protected branches
+# - Protected: main, develop
+# - Allowed to merge: Maintainers
+# - Allowed to push: No one
+# - Require approval before merging
+# - Pipelines must succeed

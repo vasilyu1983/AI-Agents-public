@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "skill": "software-accessibility",
+    "updated": "2026-07-11",
+    "total_sources": 13,
+    "description": "Primary standards, implementation guides, and tooling references for accessibility engineering.",
+    "title": "Software Accessibility - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "standards": [
+      {
+        "name": "WCAG 2.2",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "description": "Current W3C accessibility baseline for digital products.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "WAI-ARIA Authoring Practices Guide",
+        "url": "https://www.w3.org/WAI/ARIA/apg/",
+        "description": "Canonical widget patterns, keyboard behavior, and ARIA guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "EN 301 549",
+        "url": "https://www.etsi.org/deliver/etsi_en/301500_301599/301549/",
+        "description": "European accessibility requirements for ICT procurement and compliance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Section 508",
+        "url": "https://www.section508.gov/",
+        "description": "US federal accessibility requirements and implementation guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "European Accessibility Act",
+        "url": "https://eur-lex.europa.eu/eli/dir/2019/882",
+        "description": "Official EAA legal text for digital accessibility obligations in the EU market.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "European Commission EAA Notice",
+        "url": "https://digital-strategy.ec.europa.eu/en/news/eu-becomes-more-accessible-all",
+        "description": "European Commission guidance on EAA application timing and business obligations.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Federal Register — DOJ ADA Title II Web/Mobile Compliance-Date Extension",
+        "url": "https://www.federalregister.gov/documents/2026/04/20/2026-07663/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web",
+        "description": "DOJ Interim Final Rule, effective 20 April 2026, extending ADA Title II web/mobile-app compliance dates by one year (population 50,000+: 26 Apr 2027; under 50,000 or special districts: 26 Apr 2028). Technical standard remains WCAG 2.1 AA. Verify comment-period outcome before citing as final.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "W3C WCAG 3 Introduction",
+        "url": "https://www.w3.org/WAI/standards-guidelines/wcag/wcag3-intro/",
+        "description": "Current status of the WCAG 3.0 Working Draft; use to verify draft date, outcome count, and conformance-tier model before citing 3.0 details.",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_and_tooling": [
+      {
+        "name": "axe-core",
+        "url": "https://github.com/dequelabs/axe-core",
+        "description": "Widely used automation library for accessibility rule checks.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Playwright Accessibility Testing",
+        "url": "https://playwright.dev/docs/accessibility-testing",
+        "description": "Playwright guidance for accessibility assertions in E2E tests.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "The A11Y Project",
+        "url": "https://www.a11yproject.com/",
+        "description": "Practical accessibility checklists and implementation articles.",
+        "add_as_web_search": false
+      },
+      {
+        "name": "WebAIM",
+        "url": "https://webaim.org/",
+        "description": "Accessibility implementation resources, tools, and testing guidance.",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FTC Decision and Order — accessiBe",
+        "url": "https://www.ftc.gov/legal-library/browse/cases-proceedings/accessibe-inc",
+        "description": "FTC final order (approved April 2025) fining accessiBe $1,000,000 for deceptive claims that its overlay widget automatically achieved WCAG compliance. Cite as grounds against recommending overlays as a compliance solution; verify current status before citing as ongoing litigation.",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

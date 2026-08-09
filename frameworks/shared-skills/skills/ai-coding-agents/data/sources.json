@@ -1,0 +1,266 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents",
+    "title": "AI Coding Agents - Sources",
+    "description": "Official documentation, research, and community resources for building AI coding agents across Claude Code, Codex, and Agent SDK",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 27,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en",
+        "type": "documentation",
+        "relevance": "Primary platform for coding agent definitions, subagents, and multi-agent teams",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Sub-Agents Guide",
+        "url": "https://code.claude.com/docs/en/sub-agents",
+        "type": "guide",
+        "relevance": "How to create custom agents in .claude/agents/, frontmatter fields, tool scoping",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Agent Teams",
+        "url": "https://code.claude.com/docs/en/agent-teams",
+        "type": "guide",
+        "relevance": "Multi-agent team creation, mailbox communication, worktree isolation",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Agent View",
+        "url": "https://code.claude.com/docs/en/agent-view",
+        "type": "guide",
+        "relevance": "Background agents, claude agents dashboard, claude --bg, daemon supervisor, roster.json, claude agents --json for CI",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Agent View (blog)",
+        "url": "https://claude.com/blog/agent-view-in-claude-code",
+        "type": "blog",
+        "relevance": "Announcement and usage patterns for background agent management via claude agents dashboard",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Claude Code Permission Modes",
+        "url": "https://code.claude.com/docs/en/permission-modes",
+        "type": "guide",
+        "relevance": "All six permission modes (default, acceptEdits, plan, auto, dontAsk, bypassPermissions), auto mode classifier, Shift+Tab cycling, disableAutoMode",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Agent SDK Documentation",
+        "url": "https://code.claude.com/docs/en/agent-sdk",
+        "type": "documentation",
+        "relevance": "Programmatic agent creation with custom tools, hooks, and orchestration",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Codex CLI Documentation",
+        "url": "https://github.com/openai/codex",
+        "type": "documentation",
+        "relevance": "Codex custom agents in .toml format, sandbox modes, developer instructions",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol Specification",
+        "url": "https://modelcontextprotocol.io/",
+        "type": "specification",
+        "relevance": "MCP server design for custom dev tool integration with coding agents",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Hooks Documentation",
+        "url": "https://code.claude.com/docs/en/hooks",
+        "type": "guide",
+        "relevance": "Lifecycle hooks for agent safety guardrails and tool permission control",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GitHub Copilot CLI Custom Agents Configuration",
+        "url": "https://docs.github.com/en/copilot/reference/custom-agents-configuration",
+        "type": "guide",
+        "relevance": "Custom agent frontmatter (.agent.md), tool/permission model, and MCP server support for GitHub Copilot CLI — verified 2026-07-11 as materially expanded vs. its 'terminal helper only' 2025 scope",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "research_and_benchmarks": [
+      {
+        "name": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+        "url": "https://arxiv.org/abs/2310.06770",
+        "type": "research",
+        "relevance": "Benchmark for evaluating coding agents on real-world software engineering tasks",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "SWE-bench Verified",
+        "url": "https://www.swebench.com/",
+        "type": "benchmark",
+        "relevance": "Human-validated subset of SWE-bench for reliable coding agent evaluation",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Software Engineering 3.0 Survey",
+        "url": "https://arxiv.org/abs/2404.06268",
+        "type": "research",
+        "relevance": "Survey of AI-driven software development paradigms and coding agent architectures",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Multi-Agent Software Development Survey",
+        "url": "https://arxiv.org/abs/2404.02183",
+        "type": "research",
+        "relevance": "Survey of multi-agent approaches to software development including role-based teams",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "patterns_and_best_practices": [
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "Official Anthropic guidance on agent architectures, tool use, and production patterns",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic: Agent Skills for Claude Code",
+        "url": "https://www.anthropic.com/engineering/claude-code-agent-skills",
+        "type": "guide",
+        "relevance": "How to create and use skills with coding agents in Claude Code",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Best Practices",
+        "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+        "type": "guide",
+        "relevance": "Production patterns for Claude Code including subagents and tool safety",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Context Engineering for AI Coding Agents",
+        "url": "https://www.anthropic.com/engineering/context-engineering",
+        "type": "guide",
+        "relevance": "Context management strategies for coding agents working with large codebases",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "tools_and_frameworks": [
+      {
+        "name": "ESLint",
+        "url": "https://eslint.org/docs/latest/",
+        "type": "tool",
+        "relevance": "JavaScript/TypeScript linter commonly wrapped as agent tool",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Ruff",
+        "url": "https://docs.astral.sh/ruff/",
+        "type": "tool",
+        "relevance": "Fast Python linter/formatter commonly wrapped as agent tool",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "pytest",
+        "url": "https://docs.pytest.org/",
+        "type": "tool",
+        "relevance": "Python test framework for test generator and verification agents",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Jest",
+        "url": "https://jestjs.io/docs/getting-started",
+        "type": "tool",
+        "relevance": "JavaScript test framework for test generator and verification agents",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "community_resources": [
+      {
+        "name": "Awesome Claude Code",
+        "url": "https://github.com/anthropics/awesome-claude-code",
+        "type": "collection",
+        "relevance": "Community-curated collection of Claude Code configurations, agents, and patterns",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Closed-source product page and issue tracker for Claude Code; not the implementation source — use code.claude.com/docs/en for authoritative behavior docs",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Claude Agent SDK Repository",
+        "url": "https://github.com/anthropics/claude-agent-sdk",
+        "type": "repository",
+        "relevance": "Source code for the Claude Agent SDK with Python and TypeScript examples",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anthropic Cookbook: Agent Patterns",
+        "url": "https://github.com/anthropics/anthropic-cookbook",
+        "type": "collection",
+        "relevance": "Example implementations of agent patterns including tool use and multi-agent",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

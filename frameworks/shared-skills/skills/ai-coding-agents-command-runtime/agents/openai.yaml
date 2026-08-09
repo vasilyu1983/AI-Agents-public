@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Command Runtime"
+  short_description: "Design command runtimes for agent CLIs"
+  default_prompt: "Use $ai-coding-agents-command-runtime to design slash-command registries, lazy loaders, aliases, forked commands, or remote-safe command dispatch for a coding-agent CLI."

@@ -1,0 +1,260 @@
+{
+  "metadata": {
+    "skill": "document-docx",
+    "updated": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "last_validated": "2026-07-11",
+    "total_sources": 16,
+    "description": "Current DOCX generation, extraction, accessibility, and interoperability sources for Word workflows.",
+    "version": "2.3",
+    "title": "Document DOCX - Sources"
+  },
+  "categories": {
+    "python_libraries": [
+      {
+        "name": "python-docx Documentation",
+        "url": "https://python-docx.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Primary reference for creating and editing .docx files in Python. Comments support (Document.add_comment) requires v1.2.0+; verify installed version before promising it.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "python",
+          "docx",
+          "comments"
+        ]
+      },
+      {
+        "name": "docxtpl Documentation",
+        "url": "https://docxtpl.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Template-driven DOCX generation in Python for Word-authored layouts and mail-merge-style automation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "python",
+          "docx",
+          "templates"
+        ]
+      }
+    ],
+    "nodejs_and_html_conversion": [
+      {
+        "name": "docx Documentation",
+        "url": "https://docx.js.org/",
+        "type": "documentation",
+        "relevance": "Primary usage documentation for generating .docx documents in Node.js/TypeScript.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "nodejs",
+          "typescript",
+          "docx"
+        ]
+      },
+      {
+        "name": "docx npm Package",
+        "url": "https://www.npmjs.com/package/docx",
+        "type": "package",
+        "relevance": "Canonical package page for current published version, install metadata, and release recency.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "nodejs",
+          "typescript",
+          "docx",
+          "versions"
+        ]
+      },
+      {
+        "name": "mammoth.js",
+        "url": "https://github.com/mwilliamson/mammoth.js",
+        "type": "library",
+        "relevance": "Semantic DOCX-to-HTML conversion; important for extraction workflows and security caveats around unsanitized output.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "nodejs",
+          "docx",
+          "html",
+          "conversion"
+        ]
+      }
+    ],
+    "llm_and_extraction_workflows": [
+      {
+        "name": "Docling Supported Formats",
+        "url": "https://docling-project.github.io/docling/usage/supported_formats/",
+        "type": "documentation",
+        "relevance": "Current supported-format matrix for multi-format document ingestion and structured extraction.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "docling",
+          "docx",
+          "markdown",
+          "html",
+          "json"
+        ]
+      },
+      {
+        "name": "Docling (IBM Research) — GitHub",
+        "url": "https://github.com/docling-project/docling",
+        "type": "library",
+        "relevance": "Production document-extraction library (IBM Research) producing structured DoclingDocument from DOCX, PDF, PPTX, XLSX, HTML, and images. Primary source for releases, issue tracking, and integration examples.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-17",
+        "tags": [
+          "docling",
+          "docx",
+          "extraction",
+          "llm",
+          "ibm"
+        ]
+      },
+      {
+        "name": "Mistral OCR",
+        "url": "https://mistral.ai/news/mistral-ocr",
+        "type": "api",
+        "relevance": "OCR API understanding text, tables, equations, and embedded media across document formats including DOCX-derived images; ~1000 pages per dollar. Docs at https://docs.mistral.ai/",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-17",
+        "tags": [
+          "ocr",
+          "mistral",
+          "extraction",
+          "tables",
+          "api"
+        ]
+      },
+      {
+        "name": "MarkItDown",
+        "url": "https://github.com/microsoft/markitdown",
+        "type": "library",
+        "relevance": "Markdown-focused conversion pipeline from Microsoft, useful for LLM/RAG-friendly extraction from DOCX.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "markdown",
+          "docx",
+          "llm",
+          "rag"
+        ]
+      }
+    ],
+    "quality_interoperability_and_accessibility": [
+      {
+        "name": "Make Your Word Documents Accessible (Microsoft Support)",
+        "url": "https://support.microsoft.com/en-us/office/make-your-word-documents-accessible-to-people-with-disabilities-d9bf3683-87ac-47ea-b91a-78dcacb3c66d",
+        "type": "guide",
+        "relevance": "Baseline accessibility practices for Word documents, including headings, tables, alt text, and checker usage.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "accessibility",
+          "word",
+          "docx"
+        ]
+      },
+      {
+        "name": "W3C WAI - European Union",
+        "url": "https://www.w3.org/WAI/policies/european-union/",
+        "type": "policy",
+        "relevance": "Useful for current context on EU accessibility law and which WCAG version is currently referenced by EN 301 549.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "accessibility",
+          "eaa",
+          "en-301-549",
+          "wcag"
+        ]
+      },
+      {
+        "name": "Office Open XML (ECMA-376)",
+        "url": "https://ecma-international.org/publications-and-standards/standards/ecma-376/",
+        "type": "specification",
+        "relevance": "Underlying standard behind .docx; useful for interoperability edge cases and OOXML-level work.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "spec",
+          "ooxml",
+          "docx"
+        ]
+      },
+      {
+        "name": "Open XML SDK (Microsoft Learn)",
+        "url": "https://learn.microsoft.com/en-us/office/open-xml/open-xml-sdk",
+        "type": "documentation",
+        "relevance": "Primary Microsoft documentation for low-level OOXML manipulation in .NET.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "dotnet",
+          "ooxml",
+          "docx"
+        ]
+      },
+      {
+        "name": "DocumentFormat.OpenXml (NuGet)",
+        "url": "https://www.nuget.org/packages/documentformat.openxml/",
+        "type": "package",
+        "relevance": "Canonical package page for current Open XML SDK release version and install metadata.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "dotnet",
+          "ooxml",
+          "versions"
+        ]
+      },
+      {
+        "name": "docx4j Releases",
+        "url": "https://github.com/plutext/docx4j/releases",
+        "type": "releases",
+        "relevance": "Current release stream for docx4j/docx4java, preferable to the older trac site for version checks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "java",
+          "ooxml",
+          "docx",
+          "versions"
+        ]
+      },
+      {
+        "name": "docx2pdf",
+        "url": "https://github.com/AlJohri/docx2pdf",
+        "type": "library",
+        "relevance": "Current project documentation for Word-based DOCX-to-PDF conversion on Windows/macOS.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "pdf",
+          "docx",
+          "conversion"
+        ]
+      }
+    ]
+  }
+}

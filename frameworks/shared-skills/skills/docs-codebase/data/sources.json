@@ -1,0 +1,561 @@
+{
+  "metadata": {
+    "skill": "docs-codebase",
+    "updated": "2026-08-09",
+    "total_sources": 40,
+    "description": "Primary standards and practical tools for docs-as-code, OpenAPI and AsyncAPI documentation, AI-readable docs, cross-platform instruction files, and documentation quality checks.",
+    "version": "2.5",
+    "title": "Docs Codebase - Sources",
+    "last_updated": "2026-08-09"
+  },
+  "categories": {
+    "style_guides_and_writing": [
+      {
+        "name": "Google Developer Documentation Style Guide",
+        "url": "https://developers.google.com/style",
+        "type": "documentation",
+        "relevance": "Practical, widely used style guide for clear technical writing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "writing",
+          "style"
+        ]
+      },
+      {
+        "name": "Microsoft Writing Style Guide",
+        "url": "https://learn.microsoft.com/en-us/style-guide/welcome/",
+        "type": "documentation",
+        "relevance": "Modern technical writing guidance with examples and conventions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "writing",
+          "style"
+        ]
+      },
+      {
+        "name": "Diataxis Framework",
+        "url": "https://diataxis.fr/",
+        "type": "framework",
+        "relevance": "Information architecture model for tutorials, how-to guides, reference, and explanation docs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "docs-ia",
+          "framework"
+        ]
+      },
+      {
+        "name": "blader/humanizer",
+        "url": "https://github.com/blader/humanizer",
+        "type": "tool",
+        "relevance": "Source taxonomy for AI-writing tells (elegant variation, copula avoidance, negative parallelisms, false ranges, knowledge-cutoff disclaimers, etc.) adapted into writing-best-practices.md's AI-Writing Tells section. Pinned at commit 523374dee72d67c7b2b5f858ea0094ffda49c3ac (MIT license), extracted 2026-08-09.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "writing",
+          "ai-tells",
+          "style"
+        ]
+      }
+    ],
+    "markdown_and_content_standards": [
+      {
+        "name": "CommonMark Specification",
+        "url": "https://commonmark.org/",
+        "type": "specification",
+        "relevance": "Reference Markdown spec to reduce renderer inconsistencies.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "markdown"
+        ]
+      },
+      {
+        "name": "Keep a Changelog",
+        "url": "https://keepachangelog.com/",
+        "type": "specification",
+        "relevance": "Changelog format that stays readable and auditable over time.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "changelog"
+        ]
+      },
+      {
+        "name": "Semantic Versioning 2.0.0",
+        "url": "https://semver.org/",
+        "type": "specification",
+        "relevance": "Versioning rules for release notes and compatibility expectations.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "semver"
+        ]
+      },
+      {
+        "name": "Architecture Decision Records (ADR)",
+        "url": "https://adr.github.io/",
+        "type": "reference",
+        "relevance": "Entry point for ADR patterns and ecosystem.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "adr"
+        ]
+      }
+    ],
+    "api_documentation_and_specs": [
+      {
+        "name": "OpenAPI Specification",
+        "url": "https://spec.openapis.org/oas/",
+        "type": "specification",
+        "relevance": "Canonical OpenAPI landing page for versioned API documentation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "openapi"
+        ]
+      },
+      {
+        "name": "OpenAPI 3.2.0",
+        "url": "https://spec.openapis.org/oas/v3.2.0.html",
+        "type": "specification",
+        "relevance": "Latest published OpenAPI version with sequential media types, richer tags, and query operation improvements.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "openapi",
+          "version"
+        ]
+      },
+      {
+        "name": "AsyncAPI Specification v3.1.0",
+        "url": "https://www.asyncapi.com/docs/reference/specification/v3.1.0",
+        "type": "specification",
+        "relevance": "Primary spec for event-driven, streaming, and message-driven API documentation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "asyncapi",
+          "events"
+        ]
+      },
+      {
+        "name": "Arazzo Specification",
+        "url": "https://spec.openapis.org/arazzo/latest.html",
+        "type": "specification",
+        "relevance": "Workflow descriptions for multi-step API usage and task-oriented API docs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "arazzo",
+          "api-workflows"
+        ]
+      },
+      {
+        "name": "RFC 9457 - Problem Details for HTTP APIs",
+        "url": "https://www.rfc-editor.org/rfc/rfc9457",
+        "type": "specification",
+        "relevance": "Current standard error format for HTTP APIs; obsoletes RFC 7807.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "api",
+          "errors",
+          "rfc"
+        ]
+      }
+    ],
+    "docs_quality_and_ci": [
+      {
+        "name": "Vale",
+        "url": "https://vale.sh/",
+        "type": "tool",
+        "relevance": "Prose linter for consistent terminology and style in docs-as-code pipelines.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "lint",
+          "docs"
+        ]
+      },
+      {
+        "name": "markdownlint",
+        "url": "https://github.com/DavidAnson/markdownlint",
+        "type": "tool",
+        "relevance": "Markdown style rules for consistent formatting across large doc sets.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "lint",
+          "markdown"
+        ]
+      },
+      {
+        "name": "markdown-link-check",
+        "url": "https://github.com/tcort/markdown-link-check",
+        "type": "tool",
+        "relevance": "Automated link checking for docs to prevent broken navigation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "links",
+          "ci"
+        ]
+      },
+      {
+        "name": "cspell",
+        "url": "https://cspell.org/",
+        "type": "tool",
+        "relevance": "Spell checking for docs and codebases with custom dictionaries.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "spelling",
+          "ci"
+        ]
+      },
+      {
+        "name": "Redocly CLI",
+        "url": "https://redocly.com/docs/cli",
+        "type": "tool",
+        "relevance": "API linting, bundling, and governance checks for OpenAPI and related specifications.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "openapi",
+          "lint",
+          "contracts"
+        ]
+      }
+    ],
+    "accessibility": [
+      {
+        "name": "Web Content Accessibility Guidelines (WCAG) 2.2",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "type": "specification",
+        "relevance": "Accessibility baseline referenced by many orgs and policies; impacts docs sites and exported artifacts.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "accessibility",
+          "wcag"
+        ]
+      },
+      {
+        "name": "WCAG 3.0 Working Draft",
+        "url": "https://www.w3.org/TR/wcag-3.0/",
+        "type": "specification",
+        "relevance": "Preview of outcome-based accessibility guidance for long-term planning.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "accessibility",
+          "wcag3"
+        ]
+      }
+    ],
+    "adr_and_architecture": [
+      {
+        "name": "AWS ADR Process",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/architectural-decision-records/adr-process.html",
+        "type": "documentation",
+        "relevance": "Enterprise ADR process with lifecycle management and collaboration patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "adr",
+          "enterprise"
+        ]
+      },
+      {
+        "name": "Google Cloud ADR Guide",
+        "url": "https://docs.cloud.google.com/architecture/architecture-decision-records",
+        "type": "documentation",
+        "relevance": "Google's ADR framework with lifecycle and after-action guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "adr",
+          "enterprise"
+        ]
+      },
+      {
+        "name": "AWS ADR Best Practices",
+        "url": "https://aws.amazon.com/blogs/architecture/master-architecture-decision-records-adrs-best-practices-for-effective-decision-making/",
+        "type": "article",
+        "relevance": "Practical team workflows for review cadence, readouts, and ADR maintenance.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "adr",
+          "best-practices"
+        ]
+      }
+    ],
+    "docs_site_generators": [
+      {
+        "name": "MkDocs",
+        "url": "https://www.mkdocs.org/",
+        "type": "documentation",
+        "relevance": "Simple Markdown docs sites, especially strong for Python and ops-oriented repos.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "docs-site",
+          "mkdocs"
+        ]
+      },
+      {
+        "name": "Docusaurus",
+        "url": "https://docusaurus.io/",
+        "type": "documentation",
+        "relevance": "Versioned docs portals with strong ecosystem support for large product documentation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "docs-site",
+          "docusaurus"
+        ]
+      },
+      {
+        "name": "VitePress",
+        "url": "https://vitepress.dev/",
+        "type": "documentation",
+        "relevance": "Modern Vue-powered docs site generator with strong Markdown ergonomics and llms.txt support.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "docs-site",
+          "vitepress",
+          "llms"
+        ]
+      },
+      {
+        "name": "Astro Starlight",
+        "url": "https://starlight.astro.build/",
+        "type": "documentation",
+        "relevance": "Astro-based documentation framework with strong content architecture and plugin ecosystem.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "docs-site",
+          "starlight",
+          "astro"
+        ]
+      }
+    ],
+    "ai_documentation_platforms": [
+      {
+        "name": "Mintlify",
+        "url": "https://www.mintlify.com",
+        "type": "tool",
+        "relevance": "Hosted developer docs platform with API docs, search, and AI-facing content features.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": [
+          "ai",
+          "docs-platform"
+        ]
+      },
+      {
+        "name": "ReadMe",
+        "url": "https://readme.com/",
+        "type": "tool",
+        "relevance": "Hosted API and product documentation platform with changelogs, metrics, and interactive docs.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": [
+          "ai",
+          "api-docs",
+          "docs-platform"
+        ]
+      },
+      {
+        "name": "Apidog",
+        "url": "https://apidog.com/",
+        "type": "tool",
+        "relevance": "Integrated API platform spanning design, testing, mocking, and documentation.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": [
+          "api",
+          "docs-platform",
+          "testing"
+        ]
+      }
+    ],
+    "agent_readable_docs_and_protocols": [
+      {
+        "name": "OpenAI Harness Engineering",
+        "url": "https://openai.com/index/harness-engineering/",
+        "type": "article",
+        "relevance": "Current OpenAI engineering guidance on making repositories agent-legible through versioned, repo-local artifacts instead of ad hoc instructions.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "codex",
+          "agent-readable",
+          "repo-context"
+        ]
+      },
+      {
+        "name": "Anthropic Effective Context Engineering for AI Agents",
+        "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+        "type": "article",
+        "relevance": "Current context-engineering guidance for token utility, separation of concerns, and avoiding bloated ambiguous context.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "context-engineering",
+          "agents",
+          "agent-readable"
+        ]
+      },
+      {
+        "name": "VS Code Copilot Custom Instructions",
+        "url": "https://code.visualstudio.com/docs/copilot/customization/custom-instructions",
+        "type": "documentation",
+        "relevance": "Current Microsoft guidance on AGENTS.md, file-based instructions, concise rules, and selective instruction loading.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "copilot",
+          "agents-md",
+          "instructions"
+        ]
+      },
+      {
+        "name": "llms.txt",
+        "url": "https://llmstxt.org/",
+        "type": "specification",
+        "relevance": "Reference convention for publishing AI-readable summaries and deeper docs indexes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "llms",
+          "agent-readable",
+          "docs"
+        ]
+      },
+      {
+        "name": "Model Context Protocol - Build a Server",
+        "url": "https://modelcontextprotocol.io/docs/develop/build-server",
+        "type": "documentation",
+        "relevance": "Primary protocol documentation for building MCP-backed documentation workflows and tooling.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "mcp",
+          "protocol",
+          "docs"
+        ]
+      }
+    ],
+    "cross_platform_ai_standards": [
+      {
+        "name": "OpenAI AGENTS.md Guide",
+        "url": "https://developers.openai.com/codex/guides/agents-md",
+        "type": "documentation",
+        "relevance": "Official OpenAI guide for repo-wide and subdirectory AGENTS.md instruction files.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "agents-md",
+          "codex",
+          "cross-platform"
+        ]
+      },
+      {
+        "name": "OpenAI Codex Advanced Configuration",
+        "url": "https://developers.openai.com/codex/config-advanced/",
+        "type": "documentation",
+        "relevance": "Advanced Codex configuration, including AGENTS.md-related behavior and repo controls.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "codex",
+          "configuration"
+        ]
+      },
+      {
+        "name": "Claude Code Overview",
+        "url": "https://code.claude.com/docs/en/overview",
+        "type": "documentation",
+        "relevance": "Canonical Claude Code docs entry point for project-scoped behavior and repo workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "claude-code",
+          "overview"
+        ]
+      },
+      {
+        "name": "Claude Code Best Practices",
+        "url": "https://code.claude.com/docs/en/best-practices",
+        "type": "documentation",
+        "relevance": "Official best practices for keeping Claude Code guidance concise, modular, and scoped.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "claude-code",
+          "best-practices"
+        ]
+      },
+      {
+        "name": "Claude Code Memory",
+        "url": "https://code.claude.com/docs/en/memory",
+        "type": "documentation",
+        "relevance": "Official documentation for CLAUDE.md memory behavior, imports, and project hierarchy.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "claude-md",
+          "memory"
+        ]
+      }
+    ]
+  }
+}

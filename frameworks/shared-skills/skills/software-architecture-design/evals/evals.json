@@ -1,0 +1,68 @@
+{
+  "skill_name": "software-architecture-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Inside a known commerce solution, decide whether the order domain should stay a modular monolith or split into services. We need bounded contexts, deployable-unit boundaries, consistency rules between order and inventory, resilience policy, and a recommended ownership model.",
+      "expected_output": "The skill should activate, stay at runtime and operability depth, compare modular monolith versus services, and make explicit boundary and consistency decisions.",
+      "files": [],
+      "expectations": [
+        "The output compares at least two runtime topology options.",
+        "The output defaults to the simplest viable topology unless clear evidence justifies more distribution.",
+        "The output includes bounded contexts, consistency model, and operability ownership."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A 40-repo estate has too many small services and uneven delivery practices. Recommend which runtimes should stay separate, which can be consolidated, what the platform defaults should be, and how to sequence modernization without breaking hard compliance boundaries.",
+      "expected_output": "The skill should activate for estate and platform architecture, distinguish repo count from runtime count, and produce a platform-first modernization recommendation.",
+      "files": [],
+      "expectations": [
+        "The output classifies runtime versus repo concerns separately.",
+        "The output recommends platform defaults such as templates, observability, or policy gates.",
+        "The output includes consolidation or retention criteria for runtime units."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "For a known analytics platform, choose between synchronous APIs, event choreography, or orchestration for cross-service data updates. We need idempotency, replay, saga boundaries, rollback posture, and observability requirements.",
+      "expected_output": "The skill should activate and make deep distributed-system tradeoffs around consistency, orchestration, and resilience.",
+      "files": [],
+      "expectations": [
+        "The output addresses consistency and failure handling explicitly.",
+        "The output names the recommended coordination pattern plus rejected alternatives.",
+        "The output includes observability and rollback requirements."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Plan the target-state architecture for a customer-support journey that spans CRM, billing, ticketing, and a legacy back office. Compare end-to-end options, choose systems of record, and define migration waves.",
+      "expected_output": "The skill should stay inactive or hand off because the unresolved problem is cross-system target-state and transition design rather than runtime architecture inside a known solution.",
+      "files": [],
+      "expectations": [
+        "The response routes the task to software-solution-architecture.",
+        "The response does not claim primary ownership for landscape-level target-state design."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Implement an MCP server for our internal tools and decide the exact tool schema, auth, and transport details for the runtime.",
+      "expected_output": "The skill should stay inactive or defer because the request is MCP implementation, not architecture-level guidance.",
+      "files": [],
+      "expectations": [
+        "The response routes the task to agents-mcp or ai-agents.",
+        "The response does not expand into generic platform-architecture guidance as the primary answer."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Design a REST API with pagination, filtering, RFC 9457 errors, and versioning for an existing service.",
+      "expected_output": "The skill should stay inactive or defer because the main problem is API contract design, not runtime architecture.",
+      "files": [],
+      "expectations": [
+        "The response routes the task to dev-api-design.",
+        "The response does not present architecture-design as the owning skill."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,570 @@
+{
+  "metadata": {
+    "skill": "ai-llm",
+    "updated": "2026-07-11",
+    "audit_date": "2026-07-11",
+    "last_verified": "2026-07-11",
+    "total_sources": 60,
+    "description": "Curated July 2026 sources for LLM engineering: architecture selection, retrieval, adaptation, evaluation, migration, deployment, governance, current-provider verification, post-training algorithms, MoE, distributed training, and test-time compute.",
+    "title": "AI Llm - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "standards_and_protocols": [
+      {
+        "name": "Attention Is All You Need (Transformer)",
+        "url": "https://arxiv.org/abs/1706.03762",
+        "type": "research",
+        "relevance": "Foundational transformer architecture reference.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LoRA: Low-Rank Adaptation",
+        "url": "https://arxiv.org/abs/2106.09685",
+        "type": "research",
+        "relevance": "Canonical reference for parameter-efficient model adaptation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NIST AI Risk Management Framework 1.0",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+        "type": "specification",
+        "relevance": "Governance baseline for production AI systems.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NIST Generative AI Profile (NIST AI 600-1)",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+        "type": "specification",
+        "relevance": "Risk-management profile for generative AI systems.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "EU AI Act (Regulation (EU) 2024/1689)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+        "type": "specification",
+        "relevance": "Regulatory baseline for transparency, GPAI obligations, and deployment controls in the EU.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "specification",
+        "relevance": "Threat model and mitigation baseline for LLM-integrated systems.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol",
+        "url": "https://modelcontextprotocol.io/",
+        "type": "specification",
+        "relevance": "Primary protocol reference for tool, resource, and prompt interoperability.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Semantic Conventions for GenAI",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "type": "specification",
+        "relevance": "Preferred telemetry reference for LLM request, token, latency, and tool-call tracing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "official_platform_docs": [
+      {
+        "name": "OpenAI Platform Documentation",
+        "url": "https://platform.openai.com/docs",
+        "type": "documentation",
+        "relevance": "Official API, models, embeddings, tools, and operational guidance.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Responses API vs Chat Completions",
+        "url": "https://platform.openai.com/docs/guides/responses-vs-chat-completions",
+        "type": "documentation",
+        "relevance": "Current OpenAI guidance for core response surfaces and migration planning.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Remote MCP Tools",
+        "url": "https://platform.openai.com/docs/guides/tools-remote-mcp",
+        "type": "documentation",
+        "relevance": "Official remote MCP integration guidance for tool-connected systems.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Fine-Tuning Guide",
+        "url": "https://platform.openai.com/docs/guides/fine-tuning",
+        "type": "documentation",
+        "relevance": "Official guide for model optimization and adaptation workflows.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Graders",
+        "url": "https://platform.openai.com/docs/guides/graders",
+        "type": "documentation",
+        "relevance": "Official evaluator/grader patterns for LLM quality gates.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI API Pricing",
+        "url": "https://openai.com/api/pricing/",
+        "type": "documentation",
+        "relevance": "Current pricing page for cost modeling and budget checks.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Documentation",
+        "url": "https://docs.anthropic.com/",
+        "type": "documentation",
+        "relevance": "Official Claude API, safety, and deployment documentation.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Prompt Engineering Overview",
+        "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview",
+        "type": "documentation",
+        "relevance": "Official guidance for Claude prompting and reasoning patterns.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Test and Evaluate Overview",
+        "url": "https://docs.anthropic.com/en/docs/test-and-evaluate/overview",
+        "type": "documentation",
+        "relevance": "Official eval and regression guidance for Claude systems.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Prompt Caching",
+        "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching",
+        "type": "documentation",
+        "relevance": "Current prompt-caching semantics and cost behavior for Claude workloads.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic MCP Guide",
+        "url": "https://docs.anthropic.com/en/docs/agents-and-tools/mcp",
+        "type": "documentation",
+        "relevance": "Official Claude guidance for using MCP with agents and tools.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Gemini API Documentation",
+        "url": "https://ai.google.dev/gemini-api/docs",
+        "type": "documentation",
+        "relevance": "Official Gemini API surface, multimodal capabilities, and platform guidance.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Gemini Structured Output",
+        "url": "https://ai.google.dev/gemini-api/docs/structured-output",
+        "type": "documentation",
+        "relevance": "Official structured-output and schema guidance for Gemini.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Gemini Function Calling",
+        "url": "https://ai.google.dev/gemini-api/docs/function-calling",
+        "type": "documentation",
+        "relevance": "Official tool/function-calling guidance for Gemini.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Gemini Long Context",
+        "url": "https://ai.google.dev/gemini-api/docs/long-context",
+        "type": "documentation",
+        "relevance": "Official long-context and context-management guidance for Gemini.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Models Overview",
+        "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+        "type": "documentation",
+        "relevance": "Canonical model reference: API IDs, pricing, context windows, and capability flags for all current Claude models including Fable 5, Opus 4.8, Sonnet 5, and Haiku 4.5. Sonnet 4.6 and earlier are documented as legacy models on the same page.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Introducing Claude Fable 5 and Claude Mythos 5",
+        "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+        "type": "documentation",
+        "relevance": "Launch announcement for Fable 5 (GA, $10/$50 per MTok, 1M context, 128k output, safety-classifier fallback to Opus 4.8 in <5% of sessions) and Mythos 5 (Project Glasswing, research-access only).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Claude Sonnet 5 announcement",
+        "url": "https://www.anthropic.com/news/claude-sonnet-5",
+        "type": "documentation",
+        "relevance": "Launch announcement for Claude Sonnet 5 (GA 2026-06-30, `claude-sonnet-5`), positioned as the most agentic Sonnet; list price $3/$15 per MTok with introductory pricing of $2/$10 per MTok through 2026-08-31. Replaces Sonnet 4.6 as the current speed/intelligence-balance tier.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "OpenAI Assistants API Deprecation",
+        "url": "https://developers.openai.com/api/docs/deprecations",
+        "type": "documentation",
+        "relevance": "Confirms the Assistants API (beta) sunsets 2026-08-26 with no extension; all /v1/assistants, /v1/threads, and related endpoints stop working that day. Required check before any OpenAI migration plan.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Google Gemini API Models",
+        "url": "https://ai.google.dev/gemini-api/docs/models",
+        "type": "documentation",
+        "relevance": "Canonical Google model list: Gemini 3.1 Pro (large-context reasoning tier, GA 2026-02-19), Gemini 3.5 Flash (GA 2026-05-19), and current deprecation schedule. Verify current IDs, context limits, and pricing before stack selection — do not assume a specific context-window figure without checking this page.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "OpenAI Model Release Notes",
+        "url": "https://help.openai.com/en/articles/9624314-model-release-notes",
+        "type": "documentation",
+        "relevance": "Canonical OpenAI model release history, including the GPT-5.6 family (Luna/Terra/Sol tiers, public since 2026-07-09). Verify current flagship and pricing before stack selection.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "frameworks_and_infrastructure": [
+      {
+        "name": "Hugging Face Transformers",
+        "url": "https://huggingface.co/docs/transformers",
+        "type": "documentation",
+        "relevance": "Core open ecosystem reference for model loading, training, and inference.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PEFT",
+        "url": "https://huggingface.co/docs/peft",
+        "type": "documentation",
+        "relevance": "Current adapter-based fine-tuning patterns including LoRA-family methods.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "vLLM Documentation",
+        "url": "https://docs.vllm.ai/",
+        "type": "documentation",
+        "relevance": "High-throughput open-source serving engine reference.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LiteLLM Documentation",
+        "url": "https://docs.litellm.ai/",
+        "type": "documentation",
+        "relevance": "Provider routing, fallback, cost tracking, and gateway patterns.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LlamaIndex Documentation",
+        "url": "https://docs.llamaindex.ai/",
+        "type": "documentation",
+        "relevance": "Retrieval, indexing, and workflow patterns for RAG-heavy systems.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangGraph Documentation",
+        "url": "https://langchain-ai.github.io/langgraph/",
+        "type": "documentation",
+        "relevance": "Stateful workflow and multi-agent orchestration reference.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Haystack Documentation",
+        "url": "https://docs.haystack.deepset.ai/",
+        "type": "documentation",
+        "relevance": "RAG, pipelines, and evaluation framework reference.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Qdrant Documentation",
+        "url": "https://qdrant.tech/documentation/",
+        "type": "documentation",
+        "relevance": "Open-source vector database reference for retrieval systems.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pinecone Documentation",
+        "url": "https://docs.pinecone.io/",
+        "type": "documentation",
+        "relevance": "Managed vector retrieval platform reference.",
+        "update_frequency": "weekly",
+        "access": "subscription",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft GraphRAG",
+        "url": "https://microsoft.github.io/graphrag/",
+        "type": "documentation",
+        "relevance": "Graph-based retrieval and knowledge synthesis patterns.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PydanticAI Documentation",
+        "url": "https://ai.pydantic.dev/",
+        "type": "documentation",
+        "relevance": "Type-safe agent and structured-output workflows for Python teams.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Semantic Kernel",
+        "url": "https://learn.microsoft.com/en-us/semantic-kernel/",
+        "type": "documentation",
+        "relevance": "Enterprise orchestration framework for .NET, Java, and Python teams.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Agents SDK",
+        "url": "https://openai.github.io/openai-agents-python/",
+        "type": "documentation",
+        "relevance": "Official SDK reference for OpenAI-centric agent workflows.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Agent Development Kit",
+        "url": "https://google.github.io/adk-docs/",
+        "type": "documentation",
+        "relevance": "Official Google ADK reference for agent workflows around Gemini ecosystems.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "post_training_and_rl": [
+      {
+        "name": "DPO: Direct Preference Optimization",
+        "url": "https://arxiv.org/abs/2305.18290",
+        "type": "research",
+        "relevance": "Foundational reference for DPO — preference optimization without a reward model or rollouts.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "SimPO: Simple Preference Optimization",
+        "url": "https://arxiv.org/abs/2405.14734",
+        "type": "research",
+        "relevance": "DPO variant without reference model; length-normalized margin reward.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "KTO: Model Alignment as Prospect Theoretic Optimization",
+        "url": "https://arxiv.org/abs/2402.01306",
+        "type": "research",
+        "relevance": "Preference optimization from binary (scalar) feedback rather than pairwise comparisons.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "url": "https://arxiv.org/abs/2403.07691",
+        "type": "research",
+        "relevance": "Single-stage SFT + alignment without reference model.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "DeepSeekMath (GRPO source)",
+        "url": "https://arxiv.org/abs/2402.03300",
+        "type": "research",
+        "relevance": "Primary reference introducing GRPO (Group Relative Policy Optimization) for RL with verifiable rewards.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "DeepSeek-R1 Technical Report",
+        "url": "https://arxiv.org/abs/2501.12948",
+        "type": "research",
+        "relevance": "Large-scale RLVR/GRPO application; important for understanding 2025-2026 RL post-training practice.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TRL (Transformer Reinforcement Learning) Documentation",
+        "url": "https://huggingface.co/docs/trl",
+        "type": "documentation",
+        "relevance": "Hugging Face library supporting DPO, KTO, GRPO, ORPO, SFT trainers; verify supported algorithms against current version.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenRLHF",
+        "url": "https://github.com/OpenRLHF/OpenRLHF",
+        "type": "tool",
+        "relevance": "Open-source RLHF framework supporting PPO, DPO, GRPO at large scale.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GSPO (Group Sequence Policy Optimization)",
+        "url": "https://arxiv.org/abs/2507.18071",
+        "type": "research",
+        "relevance": "Qwen team (Zheng et al., 2025). GRPO-family RL method with sequence-level (not token-level) importance sampling; fixes routing-induced training collapse on MoE models. Production standard for large-scale MoE RL; used to train Qwen3. Verify arXiv ID before citing.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "evaluation_and_observability": [
+      {
+        "name": "lm-evaluation-harness (EleutherAI)",
+        "url": "https://github.com/EleutherAI/lm-evaluation-harness",
+        "type": "tool",
+        "relevance": "De facto open standard for offline benchmark evaluation of language models; covers MMLU, HellaSwag, GSM8K, HumanEval, and hundreds more.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Evals",
+        "url": "https://github.com/openai/evals",
+        "type": "tool",
+        "relevance": "Open-source evaluation harness reference and examples.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "HELM",
+        "url": "https://crfm.stanford.edu/helm/",
+        "type": "research",
+        "relevance": "Broad benchmarking and evaluation framework reference.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangSmith Documentation",
+        "url": "https://docs.langchain.com/langsmith",
+        "type": "tool",
+        "relevance": "Tracing, evaluation, and experiment-management reference.",
+        "update_frequency": "monthly",
+        "access": "subscription",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Arize Phoenix Documentation",
+        "url": "https://docs.arize.com/phoenix",
+        "type": "tool",
+        "relevance": "LLM observability, tracing, and evaluation platform reference.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Weights & Biases LLMOps",
+        "url": "https://wandb.ai/site/solutions/llmops",
+        "type": "tool",
+        "relevance": "Experiment tracking, observability, and LLMOps workflows.",
+        "update_frequency": "weekly",
+        "access": "subscription",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepEval Documentation",
+        "url": "https://docs.confident-ai.com/",
+        "type": "tool",
+        "relevance": "Evaluation and regression framework for LLM applications.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Braintrust Documentation",
+        "url": "https://www.braintrust.dev/docs",
+        "type": "tool",
+        "relevance": "Prompt/eval tracing, dataset, and experiment-management reference.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

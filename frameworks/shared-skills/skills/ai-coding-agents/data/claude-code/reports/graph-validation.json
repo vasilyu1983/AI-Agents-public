@@ -1,0 +1,58 @@
+{
+  "graph": "../graphs/knowledge-graph.json",
+  "checks_passed": 8,
+  "checks_total": 8,
+  "node_count": 23,
+  "edge_count": 40,
+  "repairs_applied": [],
+  "results": [
+    {
+      "check": "schema_compliance",
+      "passed": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "check": "dangling_refs",
+      "passed": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "check": "orphans",
+      "passed": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "check": "confidence_floor",
+      "passed": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "check": "duplicates",
+      "passed": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "check": "containment_consistency",
+      "passed": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "check": "staleness",
+      "passed": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "check": "circular_deps",
+      "passed": true,
+      "issue_count": 0,
+      "issues": []
+    }
+  ]
+}

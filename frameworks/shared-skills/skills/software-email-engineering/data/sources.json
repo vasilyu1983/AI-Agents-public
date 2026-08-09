@@ -1,0 +1,142 @@
+{
+  "metadata": {
+    "skill": "software-email-engineering",
+    "updated": "2026-07-11",
+    "total_sources": 21,
+    "description": "Primary deliverability, provider, and template-engineering sources for transactional email systems.",
+    "title": "Software Email Engineering - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "standards_and_deliverability": [
+      {
+        "name": "DMARC",
+        "url": "https://www.rfc-editor.org/rfc/rfc7489",
+        "description": "Core DMARC policy and reporting standard.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DKIM",
+        "url": "https://www.rfc-editor.org/rfc/rfc6376",
+        "description": "DomainKeys Identified Mail signing standard.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SPF",
+        "url": "https://www.rfc-editor.org/rfc/rfc7208",
+        "description": "Sender Policy Framework reference.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Email Sender Guidelines",
+        "url": "https://support.google.com/a/answer/81126",
+        "description": "Current Gmail sender requirements covering authentication, TLS, PTR hygiene, spam rates, and one-click unsubscribe for bulk senders.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Can I Email",
+        "url": "https://www.caniemail.com/",
+        "description": "Email client support matrix for HTML/CSS features.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Twilio SendGrid Event Webhook",
+        "url": "https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/event",
+        "description": "Official SendGrid event webhook reference for delivery, bounce, and engagement tracking.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Postmaster Tools",
+        "url": "https://postmaster.google.com",
+        "description": "Domain/IP reputation, spam-rate, and (as of 2026) Postmaster Tools V2 compliance-status dashboard.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft high-volume sender requirements announcement",
+        "url": "https://techcommunity.microsoft.com/blog/microsoftdefenderforoffice365blog/strengthening-email-ecosystem-outlook%e2%80%99s-new-requirements-for-high%e2%80%90volume-senders/4399730",
+        "description": "Official Microsoft announcement of Outlook.com/Hotmail bulk-sender SPF/DKIM/DMARC requirements and SMTP 550 5.7.515 rejection behavior (May 2025 enforcement).",
+        "add_as_web_search": true
+      },
+      {
+        "name": "BIMI Group",
+        "url": "https://bimigroup.org",
+        "description": "BIMI specification, VMC/CMC certificate guidance, and current Mark Verifying Authority (MVA) issuer list.",
+        "add_as_web_search": true
+      }
+    ],
+    "providers_and_templates": [
+      {
+        "name": "Amazon SES Sending Guide",
+        "url": "https://docs.aws.amazon.com/ses/latest/dg/send-email.html",
+        "description": "Official Amazon SES sending guidance, quotas, and message flow behavior.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Twilio SendGrid Mail Send API",
+        "url": "https://www.twilio.com/docs/sendgrid/api-reference/mail-send/mail-send",
+        "description": "Official SendGrid send API reference for payload semantics and provider capabilities.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Twilio SendGrid SMTP Sending",
+        "url": "https://www.twilio.com/docs/sendgrid/for-developers/sending-email/getting-started-smtp",
+        "description": "Official SendGrid SMTP guidance for fallback or legacy integrations.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mailgun Sending Messages",
+        "url": "https://documentation.mailgun.com/docs/mailgun/user-manual/sending-messages/sending-messages",
+        "description": "Official Mailgun sending and provider behavior guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mailgun Messages API",
+        "url": "https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages",
+        "description": "Official Mailgun API reference for message submission and metadata fields.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Postmark Docs",
+        "url": "https://postmarkapp.com/developer",
+        "description": "Transactional email provider docs with deliverability emphasis.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Postmark Inbound Processing",
+        "url": "https://postmarkapp.com/developer/user-guide/inbound",
+        "description": "Official Postmark inbound webhook and parsing behavior reference.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Resend Docs",
+        "url": "https://resend.com/docs",
+        "description": "API-first transactional email provider documentation.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React Email",
+        "url": "https://react.email/docs/introduction",
+        "description": "Component-based email templating for React teams.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MJML",
+        "url": "https://documentation.mjml.io/",
+        "description": "Responsive email markup framework and compatibility patterns.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Twilio SendGrid Inbound Parse",
+        "url": "https://www.twilio.com/docs/sendgrid/for-developers/parsing-email/setting-up-the-inbound-parse-webhook",
+        "description": "Official inbound parse webhook setup guidance for SendGrid.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mailgun Receiving Routes",
+        "url": "https://documentation.mailgun.com/docs/mailgun/user-manual/receive-forward-store/routes",
+        "description": "Official Mailgun inbound routes and message receiving workflow documentation.",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

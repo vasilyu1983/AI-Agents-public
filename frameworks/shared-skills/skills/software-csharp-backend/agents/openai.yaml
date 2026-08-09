@@ -1,0 +1,4 @@
+interface:
+  display_name: "C# Backend"
+  short_description: "Applies C# and .NET backend standards"
+  default_prompt: "Use $software-csharp-backend for Applies C# and .NET backend standards. Use when shaping API boundaries, data access, resilience, observability, or security defaults."

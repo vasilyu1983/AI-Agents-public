@@ -1,0 +1,234 @@
+{
+  "sources": [
+    {
+      "title": "WCAG 2.2 Specification",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "category": "standards",
+      "description": "W3C Web Content Accessibility Guidelines 2.2 — the normative standard for web accessibility compliance. Updated December 2024 (4.1.1 Parsing SC removed).",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "Understanding WCAG 2.2",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/",
+      "category": "standards",
+      "description": "Non-normative guidance explaining each WCAG 2.2 success criterion with intent, benefits, and techniques",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "WCAG 2.2 Understanding: Conformance",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/conformance.html",
+      "category": "standards",
+      "description": "W3C guidance on what WCAG conformance requires and why automated checks alone are insufficient",
+      "last_verified": "2026-04"
+    },
+    {
+      "title": "WCAG 3.0 Working Draft (March 2026)",
+      "url": "https://www.w3.org/TR/wcag-3.0/",
+      "category": "standards",
+      "description": "W3C Working Draft — outcomes-based conformance model, not yet a Recommendation. Candidate Recommendation expected Q4 2027; W3C Recommendation not before late 2029. Do not gate products against this draft; use WCAG 2.2 AA.",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "ARIA Authoring Practices Guide (APG)",
+      "url": "https://www.w3.org/WAI/ARIA/apg/",
+      "category": "standards",
+      "description": "Keyboard interaction patterns and ARIA usage for custom UI components (tabs, menus, dialogs, etc.)",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "axe-core",
+      "url": "https://github.com/dequelabs/axe-core",
+      "category": "tools",
+      "description": "Accessibility testing engine — current stable 4.12.x (June 2026). Broad rule coverage, low false-positive noise in common stacks, integrations for all major test frameworks.",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "@axe-core/playwright",
+      "url": "https://www.npmjs.com/package/@axe-core/playwright",
+      "category": "tools",
+      "description": "axe-core integration for Playwright test suites",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "cypress-axe",
+      "url": "https://www.npmjs.com/package/cypress-axe",
+      "category": "tools",
+      "description": "axe-core integration for Cypress test suites",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Lighthouse Documentation",
+      "url": "https://developer.chrome.com/docs/lighthouse/",
+      "category": "tools",
+      "description": "Google Lighthouse auditing tool — includes accessibility, performance, SEO, and best practices",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Lighthouse CI",
+      "url": "https://github.com/GoogleChrome/lighthouse-ci",
+      "category": "tools",
+      "description": "Lighthouse CI integration for automated accessibility scoring in pipelines",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Pa11y",
+      "url": "https://pa11y.org/",
+      "category": "tools",
+      "description": "CLI-focused accessibility testing tool — good for simple CI pipelines",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "IBM Equal Access Checker",
+      "url": "https://www.ibm.com/able/toolkit/tools/",
+      "category": "tools",
+      "description": "IBM accessibility checker (current: v4.0.17, April 2026) with additional rule coverage beyond axe-core, including cognitive accessibility and additional ARIA patterns",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "WebAIM Million 2025",
+      "url": "https://webaim.org/projects/million/2025",
+      "category": "education",
+      "description": "Annual scan of 1,000,000 home pages (February 2025): 95.9% had detectable WCAG failures; 79.1% had low-contrast text; average 51 errors per page. Pages using ARIA averaged 34.2% more errors — prefer native HTML semantics.",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "WebAIM",
+      "url": "https://webaim.org/",
+      "category": "education",
+      "description": "Web accessibility resources, training, and the WebAIM Million annual survey of web accessibility",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Deque University",
+      "url": "https://dequeuniversity.com/",
+      "category": "education",
+      "description": "Accessibility training and axe rule documentation with remediation guidance",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Deque DevTools Glossary",
+      "url": "https://docs.deque.com/devtools-for-web/4/en/glossary/",
+      "category": "education",
+      "description": "Deque guidance on issue types, impact labels, and where expert review is still required",
+      "last_verified": "2026-04"
+    },
+    {
+      "title": "Playwright Accessibility Testing",
+      "url": "https://playwright.dev/docs/accessibility-testing",
+      "category": "tools",
+      "description": "Official Playwright documentation for accessibility testing with @axe-core/playwright — AxeBuilder patterns, include/exclude, known-violation handling",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "Android Accessibility Developer Guide",
+      "url": "https://developer.android.com/guide/topics/ui/accessibility",
+      "category": "mobile",
+      "description": "Android accessibility development guide — content descriptions, custom views, testing",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Android Accessibility Testing (Espresso)",
+      "url": "https://developer.android.com/training/testing/espresso/accessibility-checking",
+      "category": "mobile",
+      "description": "Espresso AccessibilityChecks API for automated accessibility validation in Android tests",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "Apple Accessibility Developer Guide",
+      "url": "https://developer.apple.com/accessibility/",
+      "category": "mobile",
+      "description": "Apple accessibility development resources for iOS, iPadOS, and macOS",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Apple Accessibility Inspector",
+      "url": "https://developer.apple.com/documentation/accessibility/accessibility-inspector",
+      "category": "mobile",
+      "description": "Xcode tool for auditing accessibility properties and running automated checks on iOS/macOS apps",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "EN 301 549 V3.2.1 — European ICT Accessibility Standard (current)",
+      "url": "https://www.etsi.org/deliver/etsi_en/301500_301599/301549/03.02.01_60/en_301549v030201p.pdf",
+      "category": "regulation",
+      "description": "Current harmonized European standard for ICT accessibility (March 2021) — references WCAG 2.1 AA. V4.1.1 (incorporating WCAG 2.2 AA) had a public-review draft (v4.1.0) released November 2025; publication in the Official Journal of the EU expected around October 2026 (unverified as of 2026-07-11 — EU/ETSI publication timelines have slipped before). Audit against WCAG 2.2 now to avoid a re-audit gap when V4.1.1 is adopted.",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "European Accessibility Act (EAA)",
+      "url": "https://ec.europa.eu/social/main.jsp?catId=1202",
+      "category": "regulation",
+      "description": "EU directive (2019/882) requiring accessibility for in-scope products and services, conformance via EN 301 549. Enforcement ACTIVE since 28 June 2025 for new and substantially-modified services (active enforcement underway — e.g. French legal notices and Nov 2025 injunctions); existing services have a transitional period until 28 June 2030. Native mobile apps are in scope as software. Ongoing obligation, not a cleared past deadline.",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "ADA.gov — Web Accessibility Guidance",
+      "url": "https://www.ada.gov/resources/web-guidance/",
+      "category": "regulation",
+      "description": "US Department of Justice guidance on ADA web accessibility obligations. Title II applies only to state/local government; Title III (private business) has no DOJ technical-standard rule or fixed deadline.",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "Federal Register — Extension of Compliance Dates, ADA Title II Web and Mobile App Accessibility Rule",
+      "url": "https://www.federalregister.gov/documents/2026/04/20/2026-07663/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web",
+      "category": "regulation",
+      "description": "DOJ Interim Final Rule, effective 20 April 2026, extending ADA Title II web/mobile-app compliance dates by one year: population 50,000+ now 26 April 2027 (was 24 April 2026); population under 50,000 or special districts now 26 April 2028 (was 24 April 2027). Underlying technical standard remains WCAG 2.1 Level AA (final rule adopted 24 April 2024). Comment period closed 22 June 2026 — verify before citing as final.",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "Section508.gov — Applicability & Conformance Requirements",
+      "url": "https://www.section508.gov/develop/applicability-conformance/",
+      "category": "regulation",
+      "description": "US federal ICT accessibility standard. Current binding technical standard is WCAG 2.0 Level AA (2017 refresh) — has not been updated to reference WCAG 2.1 or 2.2. Target 2.2 AA as forward cover, but 2.0 AA is the current legal baseline.",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "UsableNet — 2025 Midyear Digital Accessibility Lawsuit Report",
+      "url": "https://info.usablenet.com/hubfs/2025-MidYear-Report-FINAL.pdf?hsLang=en",
+      "category": "education",
+      "description": "22.6% of H1 2025 US web-accessibility lawsuit filings (456 of ~2,000+) targeted sites with an accessibility overlay/widget installed; overlay presence is increasingly cited in complaints as evidence of awareness without adequate remediation. Basis for the skill's overlay-warning guidance.",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "FTC Final Order — AccessiBe",
+      "url": "https://www.ftc.gov/news-events/news/press-releases/2025/04/ftc-approves-final-order-requiring-accessibe-pay-1-million",
+      "category": "regulation",
+      "description": "FTC fined AccessiBe $1,000,000 (final order approved April 2025) for false, misleading, or unsubstantiated advertising claims about automated WCAG/ADA compliance, and barred future compliance claims without evidence. Cite as grounds for not recommending overlay products as a compliance solution.",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "WebAIM Screen Reader User Survey #10",
+      "url": "https://webaim.org/projects/screenreadersurvey10/",
+      "category": "education",
+      "description": "Fielded Dec 2023-Jan 2024, published Feb 2024, 1,539 respondents — the latest published edition as of 2026-07-11 (Survey #11 was in the field, results not yet published). Desktop primary share: JAWS 41%, NVDA 38%, VoiceOver 8.2%. Commonly-used desktop share: NVDA 65.6%, JAWS 60.5%, VoiceOver 43.9%. Mobile: VoiceOver 70.6%, TalkBack 34.6%. JAWS leads NVDA in North America/Australia; NVDA leads elsewhere.",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "Storybook Accessibility Addon",
+      "url": "https://storybook.js.org/addons/@storybook/addon-a11y",
+      "category": "tools",
+      "description": "Storybook addon that runs axe-core on every story — component-level accessibility testing",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "W3C COGA (Cognitive Accessibility) — WAI Overview",
+      "url": "https://www.w3.org/WAI/cognitive/",
+      "category": "standards",
+      "description": "W3C Cognitive Accessibility Task Force (COGA) — design patterns, gap analysis, and guidance for users with cognitive, learning, and neurological disabilities beyond WCAG",
+      "last_verified": "2026-04"
+    },
+    {
+      "title": "eslint-plugin-jsx-a11y",
+      "url": "https://github.com/jsx-eslint/eslint-plugin-jsx-a11y",
+      "category": "tools",
+      "description": "ESLint plugin providing static accessibility linting rules for JSX — catches missing alt text, label associations, keyboard-interaction issues, and ARIA errors at build time",
+      "last_verified": "2026-04"
+    }
+  ],
+  "metadata": {
+    "title": "QA Testing Accessibility - Sources",
+    "description": "Accessibility testing automation, WCAG 2.2 audit planning, CI accessibility gates, and assistive-technology verification. Use when adding axe-core or Lighthouse audits, calibrating gate policy, planning screen reader testing, or running manual accessibility audits.",
+    "last_updated": "2026-07-11",
+    "skill": "qa-testing-accessibility"
+  }
+}

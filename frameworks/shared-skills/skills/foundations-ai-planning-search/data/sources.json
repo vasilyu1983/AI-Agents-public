@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "title": "AI Planning And Search Foundations - Sources",
+    "description": "Primary references for state-space search, heuristic search, CSPs, adversarial search, classical planning, HTN, belief-state planning, and planner-agent integration.",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-ai-planning-search",
+    "total_sources": 12
+  },
+  "textbooks": [
+    {
+      "id": "AIMA",
+      "name": "Artificial Intelligence: A Modern Approach",
+      "url": "https://aima.cs.berkeley.edu/",
+      "description": "Russell & Norvig. Canonical AI textbook for state-space search, informed search, CSPs, adversarial search, planning, uncertainty, and agent task environments.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Poole-Mackworth",
+      "name": "Artificial Intelligence: Foundations of Computational Agents",
+      "url": "https://artint.info/",
+      "description": "Poole & Mackworth. Open textbook covering search, constraint satisfaction, planning, knowledge representation, and decision making.",
+      "add_as_web_search": false
+    }
+  ],
+  "software_and_specs": [
+    {
+      "id": "AIMA-Python",
+      "name": "AIMA Python",
+      "url": "https://github.com/aimacode/aima-python",
+      "description": "Reference implementations accompanying Artificial Intelligence: A Modern Approach, including search, games, CSPs, and planning examples.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Fast-Downward",
+      "name": "Fast Downward Planning System",
+      "url": "https://www.fast-downward.org/",
+      "description": "Research planning system for classical planning. Useful as a reference point for PDDL-style planning and heuristic search in planning domains.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Planning-Wiki-PDDL",
+      "name": "Planning.wiki PDDL Reference",
+      "url": "https://planning.wiki/ref/pddl",
+      "description": "Practical reference for PDDL domain/problem syntax and planning constructs.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "OR-Tools-CP-SAT",
+      "name": "OR-Tools CP-SAT Solver",
+      "url": "https://developers.google.com/optimization/cp/cp_solver",
+      "description": "Google OR-Tools documentation for constraint programming with CP-SAT; useful when CSP modeling should become executable solver work.",
+      "add_as_web_search": false
+    }
+  ],
+  "papers": [
+    {
+      "id": "Hart-Nilsson-Raphael-1968",
+      "name": "A Formal Basis for the Heuristic Determination of Minimum Cost Paths",
+      "url": "https://doi.org/10.1109/TSSC.1968.300136",
+      "description": "Hart, Nilsson & Raphael (1968). Foundational A* paper establishing heuristic search for minimum-cost paths.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Fikes-Nilsson-1971",
+      "name": "STRIPS: A New Approach to the Application of Theorem Proving to Problem Solving",
+      "url": "https://doi.org/10.1016/0004-3702(71)90010-5",
+      "description": "Fikes & Nilsson (1971). Original STRIPS paper for symbolic action preconditions and effects in automated planning.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Coulom-2006-MCTS",
+      "name": "Efficient Selectivity and Backup Operators in Monte-Carlo Tree Search",
+      "url": "https://doi.org/10.1007/978-3-540-75538-8_7",
+      "description": "Coulom (2006), Computers and Games CG 2006, LNCS 4630, pp. 72-83. Foundational Monte Carlo Tree Search reference for high-branching game-tree search. 2026-07-11 correction: the DOI previously recorded here (10.1007/11871842_29) actually resolves to Kocsis & Szepesvari's UCT paper below, not to this one — corrected to Coulom's own DOI.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Kocsis-Szepesvari-2006-UCT",
+      "name": "Bandit Based Monte-Carlo Planning",
+      "url": "https://doi.org/10.1007/11871842_29",
+      "description": "Kocsis & Szepesvari (2006), Machine Learning: ECML 2006, LNCS 4212, pp. 282-293. Introduces UCT, the UCB1-based tree policy Q(s,a) + c*sqrt(ln(N(s))/N(s,a)) that most modern MCTS implementations use for selection. Referenced in Primitive #6.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Gobel-2026-PDDL-MCP",
+      "name": "Agentic LLM Planning via Step-Wise PDDL Simulation: An Empirical Characterisation",
+      "url": "https://arxiv.org/abs/2603.06064",
+      "description": "Göbel, Lorang, Zips & Glück (arXiv:2603.06064, 2026). Evaluates LLM-as-search-policy over MCP-exposed PDDL simulators (PyPDDLEngine) on Blocksworld: agentic setting reaches 66.7% vs 63.7% for direct LLM planning, at 5.7x token cost, versus 85.3% for classical Fast Downward. Referenced in Primitive #10.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Correa-2025-LLM-Heuristics",
+      "name": "Classical Planning with LLM-Generated Heuristics: Challenging the State of the Art with Python Code",
+      "url": "https://arxiv.org/abs/2503.18809",
+      "description": "Corrêa, Pereira & Seipp (arXiv:2503.18809, 2025). An LLM generates several domain-dependent Python heuristic functions, selected by training-task performance within a greedy best-first search; the resulting heuristics solve more unseen test tasks than state-of-the-art domain-independent heuristics for classical planning, using an unoptimized Python planner against optimized C++ baselines. Treat LLM-generated heuristics as inadmissible by default. Referenced in Primitive #3.",
+      "add_as_web_search": false
+    }
+  ]
+}

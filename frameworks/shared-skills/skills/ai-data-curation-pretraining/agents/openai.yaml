@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pretraining Data Curation"
+  short_description: "Builds and audits LLM pretraining corpora: filtering, dedup, decontamination"
+  default_prompt: "Use $ai-data-curation-pretraining to build or audit an LLM pretraining corpus: extraction, filtering, dedup, decontamination, data mixing, and synthetic data."

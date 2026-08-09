@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Workflow (Modern Team Collaboration)"
+  short_description: "Designs team Git workflows for branching, PRs, and releases"
+  default_prompt: "Use $dev-git-workflow for Designs team Git workflows for branching, PRs, and releases. Use when choosing branching models, stacked PRs, merge queues, or collaboration rules."

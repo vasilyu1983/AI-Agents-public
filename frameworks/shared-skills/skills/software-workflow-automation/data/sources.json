@@ -1,0 +1,102 @@
+{
+  "metadata": {
+    "title": "software-workflow-automation - Sources",
+    "description": "Workflow automation platform references as of July 2026: n8n, Langflow, Huginn, Temporal, Trigger.dev v4, and automation governance patterns across deployment, retries, idempotency, licensing, and AI-tool surfaces.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "software-workflow-automation",
+    "total_sources": 14
+  },
+  "categories": {
+    "platforms": [
+      {
+        "name": "n8n Documentation",
+        "url": "https://docs.n8n.io/",
+        "description": "Primary source for n8n workflow design, nodes, credentials, governance, and hosting behavior.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Langflow Deployment Overview",
+        "url": "https://docs.langflow.org/deployment-overview",
+        "description": "Primary source for deploying Langflow flows and exposing local builds safely.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Langflow MCP Server",
+        "url": "https://docs.langflow.org/mcp-server",
+        "description": "Primary source for using Langflow as an MCP server and exposing flow tools to coding agents.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Huginn Repository",
+        "url": "https://github.com/huginn/huginn",
+        "description": "Reference source for Huginn self-hosted automation agents, scenarios, and deployment expectations.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Temporal Workflows",
+        "url": "https://docs.temporal.io/workflows",
+        "description": "Primary source for durable execution, replay, retries, and code-defined workflows.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol (spec)",
+        "url": "https://modelcontextprotocol.io/",
+        "description": "Canonical Model Context Protocol: concepts, architecture, ecosystem. The dominant 2026 pattern for connecting AI apps/agents to external tools and data.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "MCP — Build a Server",
+        "url": "https://modelcontextprotocol.io/docs/develop/build-server",
+        "description": "Official guide to building MCP servers (exposing tools/data to AI agents). Resolve current SDK and tooling at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Trigger.dev Idempotency",
+        "url": "https://trigger.dev/docs/idempotency",
+        "description": "Primary source for idempotency design in long-running code-first background workflows.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Trigger.dev Migrating from v3",
+        "url": "https://trigger.dev/docs/migrating-from-v3",
+        "description": "Primary source for v3-to-v4 breaking changes: SDK import path, queue predefinition, lifecycle hook signatures, self-hosting changes. v3 was fully shut down 2026-07-01.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "n8n Sustainable Use License",
+        "url": "https://docs.n8n.io/sustainable-use-license/",
+        "description": "Primary source for n8n's fair-code license terms governing self-hosted Community Edition and commercial-resale restrictions.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Hatchet Documentation",
+        "url": "https://docs.hatchet.run/",
+        "description": "Primary source for Hatchet's Postgres-backed durable workflow engine, now post-1.0 (GA 2026-04-24).",
+        "add_as_web_search": true
+      }
+    ],
+    "operations_and_governance": [
+      {
+        "name": "n8n Queue Mode",
+        "url": "https://docs.n8n.io/hosting/scaling/queue-mode/",
+        "description": "Primary source for n8n scaling, worker mode, and execution-concurrency operating patterns.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "n8n Source Control and Environments",
+        "url": "https://docs.n8n.io/source-control-environments/",
+        "description": "Primary source for n8n Git-backed environments, branch patterns, and workflow promotion between instances.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "n8n External Secrets",
+        "url": "https://docs.n8n.io/external-secrets/",
+        "description": "Primary source for vault-backed credential handling, project scoping, and secrets governance in n8n.",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Code Graph Report</title>
+  <style>
+    :root {
+      --bg: #f7f7f3;
+      --panel: #ffffff;
+      --ink: #172121;
+      --muted: #5b6464;
+      --line: #d5dddb;
+      --accent: #0f766e;
+      --accent-soft: #d8f0ee;
+      --warning: #92400e;
+      --warning-soft: #fef3c7;
+      --code-bg: #eff4f3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #f7f7f3 0%, #edf5f3 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+      margin-bottom: 24px;
+    }
+    h1, h2, h3 { margin: 0 0 12px; line-height: 1.1; }
+    p { color: var(--muted); }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .card {
+      background: var(--accent-soft);
+      border: 1px solid rgba(15, 118, 110, 0.16);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .card strong {
+      display: block;
+      font-size: 24px;
+      margin-top: 6px;
+    }
+    .section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .controls input, .controls select {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font: inherit;
+      min-width: 220px;
+      background: white;
+    }
+    .mermaid-source {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 16px;
+      border-radius: 14px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--warning-soft);
+      color: var(--warning);
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="badge">Static report</span>
+      <h1>Claude Code Graph Report</h1>
+      <p>Generated from <code>../graphs/knowledge-graph.json</code>. This report keeps the skill headless while making the graph easy to review locally.</p>
+      <div class="cards">
+        <div class="card"><span>Node types</span><strong>5</strong></div>
+        <div class="card"><span>Edge relations</span><strong>4</strong></div>
+        <div class="card"><span>Total nodes</span><strong>23</strong></div>
+        <div class="card"><span>Total edges</span><strong>40</strong></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Build Metadata</h2>
+      <table>
+        <thead><tr><th>Field</th><th>Value</th></tr></thead>
+        <tbody><tr><td>Title</td><td>Claude Code Graph Report</td></tr>
+<tr><td>Graph File</td><td>../graphs/knowledge-graph.json</td></tr>
+<tr><td>Generated At</td><td>2026-04-03T12:00:00+00:00</td></tr>
+<tr><td>Graph Contract</td><td>1.1</td></tr>
+<tr><td>Build Source</td><td>profiles</td></tr>
+<tr><td>Node Count</td><td>23</td></tr>
+<tr><td>Edge Count</td><td>40</td></tr>
+<tr><td>Base Commit SHAs</td><td>0</td></tr>
+<tr><td>Portfolio Metrics</td><td>{&quot;process_count&quot;: 7, &quot;provider_count&quot;: 6, &quot;repo_count&quot;: 1}</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>Validation And Freshness</h2>
+      <table>
+        <thead><tr><th>Artifact</th><th>Status</th><th>Details</th></tr></thead>
+        <tbody><tr><td>Graph Validation</td><td>8/8 checks passed</td><td>schema_compliance, dangling_refs, orphans, confidence_floor, duplicates, containment_consistency, staleness, circular_deps</td></tr>
+<tr><td>Consistency</td><td>missing</td><td>consistency-report.json not found</td></tr>
+<tr><td>Incremental Update</td><td>missing</td><td>incremental-update.json not found</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>Graph Inventory</h2>
+      <div class="cards">
+        <div>
+          <h3>Nodes By Type</h3>
+          <table>
+            <thead><tr><th>Type</th><th>Count</th></tr></thead>
+            <tbody><tr><td>artifact</td><td>8</td></tr>
+<tr><td>process</td><td>7</td></tr>
+<tr><td>provider</td><td>6</td></tr>
+<tr><td>domain</td><td>1</td></tr>
+<tr><td>repo</td><td>1</td></tr></tbody>
+          </table>
+        </div>
+        <div>
+          <h3>Edges By Relation</h3>
+          <table>
+            <thead><tr><th>Relation</th><th>Count</th></tr></thead>
+            <tbody><tr><td>documents</td><td>18</td></tr>
+<tr><td>contains</td><td>9</td></tr>
+<tr><td>implements_process</td><td>7</td></tr>
+<tr><td>uses_provider</td><td>6</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Top Connected Nodes</h2>
+      <table>
+        <thead><tr><th>Label</th><th>Type</th><th>Domain</th><th>Fan-In</th><th>Weighted</th><th>ID</th></tr></thead>
+        <tbody><tr><td>Transport Recovery</td><td>process</td><td>Documents</td><td>4</td><td>3.1</td><td>process-transport-recovery</td></tr>
+<tr><td>Permission Mediation</td><td>process</td><td>Documents</td><td>3</td><td>2.4</td><td>process-permission-mediation</td></tr>
+<tr><td>Terminal Agent Runtime</td><td>process</td><td>Documents</td><td>3</td><td>2.3</td><td>process-terminal-agent-runtime</td></tr>
+<tr><td>Plugin And Skill Loading</td><td>process</td><td>Documents</td><td>3</td><td>2.2</td><td>process-plugin-and-skill-loading</td></tr>
+<tr><td>Background Agent Execution</td><td>process</td><td>Documents</td><td>3</td><td>2.1</td><td>process-background-agent-execution</td></tr>
+<tr><td>Remote Session Management</td><td>process</td><td>Documents</td><td>2</td><td>1.7</td><td>process-remote-session-management</td></tr>
+<tr><td>Worktree Orchestration</td><td>process</td><td>Documents</td><td>2</td><td>1.7</td><td>process-worktree-orchestration</td></tr>
+<tr><td>Anthropic SDK</td><td>provider</td><td>Documents</td><td>2</td><td>1.4</td><td>provider-anthropic-sdk</td></tr>
+<tr><td>Axios</td><td>provider</td><td>Documents</td><td>2</td><td>1.3</td><td>provider-axios</td></tr>
+<tr><td>Bun</td><td>provider</td><td>Documents</td><td>2</td><td>1.3</td><td>provider-bun</td></tr>
+<tr><td>Git</td><td>provider</td><td>Documents</td><td>2</td><td>1.3</td><td>provider-git</td></tr>
+<tr><td>tmux</td><td>provider</td><td>Documents</td><td>2</td><td>1.2</td><td>provider-tmux</td></tr>
+<tr><td>claude_code</td><td>repo</td><td>Documents</td><td>1</td><td>1.0</td><td>claude_code</td></tr>
+<tr><td>HybridTransport.ts</td><td>artifact</td><td>Documents</td><td>1</td><td>0.95</td><td>artifact-hybrid-transport-ts</td></tr>
+<tr><td>QueryEngine.ts</td><td>artifact</td><td>Documents</td><td>1</td><td>0.95</td><td>artifact-query-engine-ts</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>High-Signal Relationship Slices</h2>
+      <h3>Domains To Repositories</h3>
+      <table>
+        <thead><tr><th>Source</th><th>Relation</th><th>Target</th><th>Target Type</th></tr></thead>
+        <tbody><tr><td>Documents</td><td>contains</td><td>claude_code</td><td>repo</td></tr></tbody>
+      </table>
+      <h3>Repositories To Providers</h3>
+      <table>
+        <thead><tr><th>Source</th><th>Relation</th><th>Target</th><th>Target Type</th></tr></thead>
+        <tbody><tr><td>claude_code</td><td>uses_provider</td><td>Anthropic SDK</td><td>provider</td></tr>
+<tr><td>claude_code</td><td>uses_provider</td><td>Axios</td><td>provider</td></tr>
+<tr><td>claude_code</td><td>uses_provider</td><td>Bun</td><td>provider</td></tr>
+<tr><td>claude_code</td><td>uses_provider</td><td>Git</td><td>provider</td></tr>
+<tr><td>claude_code</td><td>uses_provider</td><td>Model Context Protocol SDK</td><td>provider</td></tr>
+<tr><td>claude_code</td><td>uses_provider</td><td>tmux</td><td>provider</td></tr></tbody>
+      </table>
+      <h3>Repositories To Processes</h3>
+      <table>
+        <thead><tr><th>Source</th><th>Relation</th><th>Target</th><th>Target Type</th></tr></thead>
+        <tbody><tr><td>claude_code</td><td>implements_process</td><td>Background Agent Execution</td><td>process</td></tr>
+<tr><td>claude_code</td><td>implements_process</td><td>Permission Mediation</td><td>process</td></tr>
+<tr><td>claude_code</td><td>implements_process</td><td>Plugin And Skill Loading</td><td>process</td></tr>
+<tr><td>claude_code</td><td>implements_process</td><td>Remote Session Management</td><td>process</td></tr>
+<tr><td>claude_code</td><td>implements_process</td><td>Terminal Agent Runtime</td><td>process</td></tr>
+<tr><td>claude_code</td><td>implements_process</td><td>Transport Recovery</td><td>process</td></tr>
+<tr><td>claude_code</td><td>implements_process</td><td>Worktree Orchestration</td><td>process</td></tr></tbody>
+      </table>
+    </section>
+
+    
+            <section class="section">
+              <h3>Platform Overview</h3>
+              <p>Domains, repositories, providers, and processes.</p>
+              <pre class="mermaid-source"><code>flowchart LR
+  %% Platform Overview
+  subgraph group_Documents[&quot;Domain: Documents&quot;]
+    process_background_agent_execution[&quot;Background Agent Execution&quot;]
+    process_permission_mediation[&quot;Permission Mediation&quot;]
+    process_plugin_and_skill_loading[&quot;Plugin And Skill Loading&quot;]
+    process_remote_session_management[&quot;Remote Session Management&quot;]
+    process_terminal_agent_runtime[&quot;Terminal Agent Runtime&quot;]
+    process_transport_recovery[&quot;Transport Recovery&quot;]
+    process_worktree_orchestration[&quot;Worktree Orchestration&quot;]
+    provider_anthropic_sdk[&quot;Anthropic SDK&quot;]
+    provider_axios[&quot;Axios&quot;]
+    provider_bun[&quot;Bun&quot;]
+    provider_git[&quot;Git&quot;]
+    provider_mcp_sdk[&quot;Model Context Protocol SDK&quot;]
+    provider_tmux[&quot;tmux&quot;]
+    claude_code[&quot;claude_code&quot;]
+  end
+  subgraph group_domain[&quot;Domain: domain&quot;]
+    documents[&quot;Documents&quot;]
+  end
+  claude_code --&gt;|implements_process| process_background_agent_execution
+  claude_code --&gt;|implements_process| process_permission_mediation
+  claude_code --&gt;|implements_process| process_plugin_and_skill_loading
+  claude_code --&gt;|implements_process| process_remote_session_management
+  claude_code --&gt;|implements_process| process_terminal_agent_runtime
+  claude_code --&gt;|implements_process| process_transport_recovery
+  claude_code --&gt;|implements_process| process_worktree_orchestration
+  claude_code --&gt;|uses_provider| provider_anthropic_sdk
+  claude_code --&gt;|uses_provider| provider_axios
+  claude_code --&gt;|uses_provider| provider_bun
+  claude_code --&gt;|uses_provider| provider_git
+  claude_code --&gt;|uses_provider| provider_mcp_sdk
+  claude_code --&gt;|uses_provider| provider_tmux
+  documents --&gt;|contains| claude_code
+  classDef type_domain fill:#ede9fe,stroke:#7c3aed,color:#1f2937;
+  classDef type_process fill:#dcfce7,stroke:#15803d,color:#14532d;
+  classDef type_provider fill:#fef3c7,stroke:#d97706,color:#1f2937;
+  classDef type_repo fill:#dbeafe,stroke:#1d4ed8,color:#0f172a;
+  classDef type_unknown fill:#ffffff,stroke:#64748b,color:#0f172a;
+  class documents type_domain;
+  class process_background_agent_execution type_process;
+  class process_permission_mediation type_process;
+  class process_plugin_and_skill_loading type_process;
+  class process_remote_session_management type_process;
+  class process_terminal_agent_runtime type_process;
+  class process_transport_recovery type_process;
+  class process_worktree_orchestration type_process;
+  class provider_anthropic_sdk type_provider;
+  class provider_axios type_provider;
+  class provider_bun type_provider;
+  class provider_git type_provider;
+  class provider_mcp_sdk type_provider;
+  class provider_tmux type_provider;
+  class claude_code type_repo;</code></pre>
+            </section>
+            
+            <section class="section">
+              <h3>Data Topology</h3>
+              <p>Repositories and storage relationships.</p>
+              <pre class="mermaid-source"><code>flowchart LR
+  %% Data Topology
+  subgraph group_Documents[&quot;Domain: Documents&quot;]
+    claude_code[&quot;claude_code&quot;]
+  end
+  subgraph group_domain[&quot;Domain: domain&quot;]
+    documents[&quot;Documents&quot;]
+  end
+  documents --&gt;|contains| claude_code
+  classDef type_domain fill:#ede9fe,stroke:#7c3aed,color:#1f2937;
+  classDef type_repo fill:#dbeafe,stroke:#1d4ed8,color:#0f172a;
+  classDef type_unknown fill:#ffffff,stroke:#64748b,color:#0f172a;
+  class documents type_domain;
+  class claude_code type_repo;</code></pre>
+            </section>
+            
+            <section class="section">
+              <h3>Documentation Coverage</h3>
+              <p>Artifacts and the nodes they document.</p>
+              <pre class="mermaid-source"><code>flowchart LR
+  %% Documentation Coverage
+  subgraph group_artifact[&quot;Type: artifact&quot;]
+    artifact_hybrid_transport_ts[&quot;HybridTransport.ts&quot;]
+    artifact_query_engine_ts[&quot;QueryEngine.ts&quot;]
+    artifact_remote_session_manager_ts[&quot;RemoteSessionManager.ts&quot;]
+    artifact_sse_transport_ts[&quot;SSETransport.ts&quot;]
+    artifact_task_ts[&quot;Task.ts&quot;]
+    artifact_query_ts[&quot;query.ts&quot;]
+    artifact_remote_permission_bridge_ts[&quot;remotePermissionBridge.ts&quot;]
+    artifact_setup_ts[&quot;setup.ts&quot;]
+  end
+  subgraph group_domain[&quot;Type: domain&quot;]
+    documents[&quot;Documents&quot;]
+  end
+  subgraph group_process[&quot;Type: process&quot;]
+    process_background_agent_execution[&quot;Background Agent Execution&quot;]
+    process_permission_mediation[&quot;Permission Mediation&quot;]
+    process_plugin_and_skill_loading[&quot;Plugin And Skill Loading&quot;]
+    process_remote_session_management[&quot;Remote Session Management&quot;]
+    process_terminal_agent_runtime[&quot;Terminal Agent Runtime&quot;]
+    process_transport_recovery[&quot;Transport Recovery&quot;]
+    process_worktree_orchestration[&quot;Worktree Orchestration&quot;]
+  end
+  subgraph group_provider[&quot;Type: provider&quot;]
+    provider_anthropic_sdk[&quot;Anthropic SDK&quot;]
+    provider_axios[&quot;Axios&quot;]
+    provider_bun[&quot;Bun&quot;]
+    provider_git[&quot;Git&quot;]
+    provider_mcp_sdk[&quot;Model Context Protocol SDK&quot;]
+    provider_tmux[&quot;tmux&quot;]
+  end
+  subgraph group_repo[&quot;Type: repo&quot;]
+    claude_code[&quot;claude_code&quot;]
+  end
+  artifact_hybrid_transport_ts --&gt;|documents| process_transport_recovery
+  artifact_hybrid_transport_ts --&gt;|documents| provider_axios
+  artifact_query_engine_ts --&gt;|documents| process_plugin_and_skill_loading
+  artifact_query_engine_ts --&gt;|documents| process_terminal_agent_runtime
+  artifact_query_ts --&gt;|documents| process_background_agent_execution
+  artifact_query_ts --&gt;|documents| process_terminal_agent_runtime
+  artifact_query_ts --&gt;|documents| process_transport_recovery
+  artifact_query_ts --&gt;|documents| provider_anthropic_sdk
+  artifact_remote_permission_bridge_ts --&gt;|documents| process_permission_mediation
+  artifact_remote_session_manager_ts --&gt;|documents| process_permission_mediation
+  artifact_remote_session_manager_ts --&gt;|documents| process_remote_session_management
+  artifact_setup_ts --&gt;|documents| process_plugin_and_skill_loading
+  artifact_setup_ts --&gt;|documents| process_worktree_orchestration
+  artifact_setup_ts --&gt;|documents| provider_bun
+  artifact_setup_ts --&gt;|documents| provider_git
+  artifact_setup_ts --&gt;|documents| provider_tmux
+  artifact_sse_transport_ts --&gt;|documents| process_transport_recovery
+  artifact_task_ts --&gt;|documents| process_background_agent_execution
+  claude_code --&gt;|contains| artifact_hybrid_transport_ts
+  claude_code --&gt;|contains| artifact_query_engine_ts
+  claude_code --&gt;|contains| artifact_query_ts
+  claude_code --&gt;|contains| artifact_remote_permission_bridge_ts
+  claude_code --&gt;|contains| artifact_remote_session_manager_ts
+  claude_code --&gt;|contains| artifact_setup_ts
+  claude_code --&gt;|contains| artifact_sse_transport_ts
+  claude_code --&gt;|contains| artifact_task_ts
+  claude_code --&gt;|implements_process| process_background_agent_execution
+  claude_code --&gt;|implements_process| process_permission_mediation
+  claude_code --&gt;|implements_process| process_plugin_and_skill_loading
+  claude_code --&gt;|implements_process| process_remote_session_management
+  claude_code --&gt;|implements_process| process_terminal_agent_runtime
+  claude_code --&gt;|implements_process| process_transport_recovery
+  claude_code --&gt;|implements_process| process_worktree_orchestration
+  claude_code --&gt;|uses_provider| provider_anthropic_sdk
+  claude_code --&gt;|uses_provider| provider_axios
+  claude_code --&gt;|uses_provider| provider_bun
+  claude_code --&gt;|uses_provider| provider_git
+  claude_code --&gt;|uses_provider| provider_mcp_sdk
+  claude_code --&gt;|uses_provider| provider_tmux
+  documents --&gt;|contains| claude_code
+  classDef type_artifact fill:#f3f4f6,stroke:#6b7280,color:#111827;
+  classDef type_domain fill:#ede9fe,stroke:#7c3aed,color:#1f2937;
+  classDef type_process fill:#dcfce7,stroke:#15803d,color:#14532d;
+  classDef type_provider fill:#fef3c7,stroke:#d97706,color:#1f2937;
+  classDef type_repo fill:#dbeafe,stroke:#1d4ed8,color:#0f172a;
+  classDef type_unknown fill:#ffffff,stroke:#64748b,color:#0f172a;
+  class documents type_domain;
+  class artifact_hybrid_transport_ts type_artifact;
+  class artifact_query_engine_ts type_artifact;
+  class artifact_remote_session_manager_ts type_artifact;
+  class artifact_sse_transport_ts type_artifact;
+  class artifact_task_ts type_artifact;
+  class artifact_query_ts type_artifact;
+  class artifact_remote_permission_bridge_ts type_artifact;
+  class artifact_setup_ts type_artifact;
+  class process_background_agent_execution type_process;
+  class process_permission_mediation type_process;
+  class process_plugin_and_skill_loading type_process;
+  class process_remote_session_management type_process;
+  class process_terminal_agent_runtime type_process;
+  class process_transport_recovery type_process;
+  class process_worktree_orchestration type_process;
+  class provider_anthropic_sdk type_provider;
+  class provider_axios type_provider;
+  class provider_bun type_provider;
+  class provider_git type_provider;
+  class provider_mcp_sdk type_provider;
+  class provider_tmux type_provider;
+  class claude_code type_repo;</code></pre>
+            </section>
+            
+
+    <section class="section">
+      <h2>Node Index</h2>
+      <div class="controls">
+        <input id="nodeSearch" type="search" placeholder="Search labels, ids, summaries, domains, tags">
+        <select id="nodeTypeFilter">
+          <option value="">All node types</option>
+          <option value="artifact">artifact (8)</option>
+<option value="process">process (7)</option>
+<option value="provider">provider (6)</option>
+<option value="domain">domain (1)</option>
+<option value="repo">repo (1)</option>
+        </select>
+      </div>
+      <table id="nodeTable">
+        <thead>
+          <tr>
+            <th>Label</th>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Domain</th>
+            <th>Summary</th>
+            <th>Tags</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-type="artifact" data-search="artifact-hybrid-transport-ts hybridtransport.ts hybrid transport with websocket reads, serialized post writes, batching, and backpressure. documents transport"><td>HybridTransport.ts</td><td><code>artifact-hybrid-transport-ts</code></td><td>artifact</td><td>Documents</td><td>Hybrid transport with WebSocket reads, serialized POST writes, batching, and backpressure.</td><td>transport</td></tr>
+<tr data-type="artifact" data-search="artifact-query-engine-ts queryengine.ts persistent execution coordinator for prompt assembly, query execution, and plugin-aware system prompt composition. documents runtime-spine"><td>QueryEngine.ts</td><td><code>artifact-query-engine-ts</code></td><td>artifact</td><td>Documents</td><td>Persistent execution coordinator for prompt assembly, query execution, and plugin-aware system prompt composition.</td><td>runtime-spine</td></tr>
+<tr data-type="artifact" data-search="artifact-remote-session-manager-ts remotesessionmanager.ts remote session manager with message callbacks and permission request handling. documents remote-runtime"><td>RemoteSessionManager.ts</td><td><code>artifact-remote-session-manager-ts</code></td><td>artifact</td><td>Documents</td><td>Remote session manager with message callbacks and permission request handling.</td><td>remote-runtime</td></tr>
+<tr data-type="artifact" data-search="artifact-sse-transport-ts ssetransport.ts sse transport with resumable sequence tracking and reconnect behavior. documents transport"><td>SSETransport.ts</td><td><code>artifact-sse-transport-ts</code></td><td>artifact</td><td>Documents</td><td>SSE transport with resumable sequence tracking and reconnect behavior.</td><td>transport</td></tr>
+<tr data-type="artifact" data-search="artifact-task-ts task.ts task model defining background execution types and lifecycle states. documents tasks"><td>Task.ts</td><td><code>artifact-task-ts</code></td><td>artifact</td><td>Documents</td><td>Task model defining background execution types and lifecycle states.</td><td>tasks</td></tr>
+<tr data-type="artifact" data-search="artifact-query-ts query.ts main query loop with task-budget accounting and max_output_tokens recovery logic. documents runtime-spine"><td>query.ts</td><td><code>artifact-query-ts</code></td><td>artifact</td><td>Documents</td><td>Main query loop with task-budget accounting and max_output_tokens recovery logic.</td><td>runtime-spine</td></tr>
+<tr data-type="artifact" data-search="artifact-remote-permission-bridge-ts remotepermissionbridge.ts permission bridge that synthesizes assistant messages and fallback tool stubs for remote tools. documents permissions"><td>remotePermissionBridge.ts</td><td><code>artifact-remote-permission-bridge-ts</code></td><td>artifact</td><td>Documents</td><td>Permission bridge that synthesizes assistant messages and fallback tool stubs for remote tools.</td><td>permissions</td></tr>
+<tr data-type="artifact" data-search="artifact-setup-ts setup.ts startup lifecycle file covering hooks snapshots, worktree setup, tmux bootstrapping, and file-change watching. documents startup"><td>setup.ts</td><td><code>artifact-setup-ts</code></td><td>artifact</td><td>Documents</td><td>Startup lifecycle file covering hooks snapshots, worktree setup, tmux bootstrapping, and file-change watching.</td><td>startup</td></tr>
+<tr data-type="domain" data-search="documents documents local document portfolio grouping for repo snapshots stored under the user&#x27;s documents directory. portfolio-root"><td>Documents</td><td><code>documents</code></td><td>domain</td><td></td><td>Local document portfolio grouping for repo snapshots stored under the user&#x27;s Documents directory.</td><td>portfolio-root</td></tr>
+<tr data-type="process" data-search="process-background-agent-execution background agent execution task model spanning local shell, local agent, remote agent, teammate, workflow, and mcp monitor execution paths. documents tasks, multi-agent"><td>Background Agent Execution</td><td><code>process-background-agent-execution</code></td><td>process</td><td>Documents</td><td>Task model spanning local shell, local agent, remote agent, teammate, workflow, and MCP monitor execution paths.</td><td>tasks, multi-agent</td></tr>
+<tr data-type="process" data-search="process-permission-mediation permission mediation maps remote tool approval requests into locally renderable permission flows and fallback tool stubs. documents permissions, approval-flow"><td>Permission Mediation</td><td><code>process-permission-mediation</code></td><td>process</td><td>Documents</td><td>Maps remote tool approval requests into locally renderable permission flows and fallback tool stubs.</td><td>permissions, approval-flow</td></tr>
+<tr data-type="process" data-search="process-plugin-and-skill-loading plugin and skill loading loads plugins, skills, and prompt parts while avoiding startup races and stale configuration snapshots. documents plugins, skills"><td>Plugin And Skill Loading</td><td><code>process-plugin-and-skill-loading</code></td><td>process</td><td>Documents</td><td>Loads plugins, skills, and prompt parts while avoiding startup races and stale configuration snapshots.</td><td>plugins, skills</td></tr>
+<tr data-type="process" data-search="process-remote-session-management remote session management control plane for remote sessions with websocket reads, http writes, connection lifecycle, and message routing. documents remote-runtime, sessions"><td>Remote Session Management</td><td><code>process-remote-session-management</code></td><td>process</td><td>Documents</td><td>Control plane for remote sessions with WebSocket reads, HTTP writes, connection lifecycle, and message routing.</td><td>remote-runtime, sessions</td></tr>
+<tr data-type="process" data-search="process-terminal-agent-runtime terminal agent runtime interactive terminal execution loop that assembles prompts, renders ui messages, and coordinates coding-agent behavior. documents terminal-ui, agent-loop"><td>Terminal Agent Runtime</td><td><code>process-terminal-agent-runtime</code></td><td>process</td><td>Documents</td><td>Interactive terminal execution loop that assembles prompts, renders UI messages, and coordinates coding-agent behavior.</td><td>terminal-ui, agent-loop</td></tr>
+<tr data-type="process" data-search="process-transport-recovery transport recovery stream buffering, serialized writes, reconnect behavior, and bounded recovery paths for network and model output failures. documents transport, recovery"><td>Transport Recovery</td><td><code>process-transport-recovery</code></td><td>process</td><td>Documents</td><td>Stream buffering, serialized writes, reconnect behavior, and bounded recovery paths for network and model output failures.</td><td>transport, recovery</td></tr>
+<tr data-type="process" data-search="process-worktree-orchestration worktree orchestration creates or switches isolated worktree sessions, resolves canonical repo roots, and coordinates tmux bootstrapping. documents worktrees, session-setup"><td>Worktree Orchestration</td><td><code>process-worktree-orchestration</code></td><td>process</td><td>Documents</td><td>Creates or switches isolated worktree sessions, resolves canonical repo roots, and coordinates tmux bootstrapping.</td><td>worktrees, session-setup</td></tr>
+<tr data-type="provider" data-search="provider-anthropic-sdk anthropic sdk primary model sdk dependency for message types, streaming, and api error handling. documents llm, sdk"><td>Anthropic SDK</td><td><code>provider-anthropic-sdk</code></td><td>provider</td><td>Documents</td><td>Primary model SDK dependency for message types, streaming, and API error handling.</td><td>llm, sdk</td></tr>
+<tr data-type="provider" data-search="provider-axios axios http client used across bridge, analytics, and transport flows. documents http, client"><td>Axios</td><td><code>provider-axios</code></td><td>provider</td><td>Documents</td><td>HTTP client used across bridge, analytics, and transport flows.</td><td>http, client</td></tr>
+<tr data-type="provider" data-search="provider-bun bun runtime and build feature provider used by setup and startup code. documents runtime, build-tool"><td>Bun</td><td><code>provider-bun</code></td><td>provider</td><td>Documents</td><td>Runtime and build feature provider used by setup and startup code.</td><td>runtime, build-tool</td></tr>
+<tr data-type="provider" data-search="provider-git git repository root and worktree operations depend on git-aware filesystem behavior. documents vcs, worktrees"><td>Git</td><td><code>provider-git</code></td><td>provider</td><td>Documents</td><td>Repository root and worktree operations depend on Git-aware filesystem behavior.</td><td>vcs, worktrees</td></tr>
+<tr data-type="provider" data-search="provider-mcp-sdk model context protocol sdk protocol sdk used for mcp server entrypoints and mcp-aware tool types. documents mcp, sdk"><td>Model Context Protocol SDK</td><td><code>provider-mcp-sdk</code></td><td>provider</td><td>Documents</td><td>Protocol SDK used for MCP server entrypoints and MCP-aware tool types.</td><td>mcp, sdk</td></tr>
+<tr data-type="provider" data-search="provider-tmux tmux optional terminal session isolation layer for worktree and teammate flows. documents terminal, session-isolation"><td>tmux</td><td><code>provider-tmux</code></td><td>provider</td><td>Documents</td><td>Optional terminal session isolation layer for worktree and teammate flows.</td><td>terminal, session-isolation</td></tr>
+<tr data-type="repo" data-search="claude_code claude_code modular typescript/bun coding-agent runtime with a react terminal ui, remote-session bridge, mcp entrypoints, plugin and skill loading, and worktree-aware execution. documents ai-coding-agents, terminal-ui, remote-runtime, mcp, worktrees"><td>claude_code</td><td><code>claude_code</code></td><td>repo</td><td>Documents</td><td>Modular TypeScript/Bun coding-agent runtime with a React terminal UI, remote-session bridge, MCP entrypoints, plugin and skill loading, and worktree-aware exec…</td><td>ai-coding-agents, terminal-ui, remote-runtime, mcp, worktrees</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script>
+    const searchInput = document.getElementById('nodeSearch');
+    const typeFilter = document.getElementById('nodeTypeFilter');
+    const rows = Array.from(document.querySelectorAll('#nodeTable tbody tr'));
+
+    function applyFilters() {
+      const query = (searchInput.value || '').trim().toLowerCase();
+      const type = typeFilter.value;
+      for (const row of rows) {
+        const matchesQuery = !query || row.dataset.search.includes(query);
+        const matchesType = !type || row.dataset.type === type;
+        row.style.display = matchesQuery && matchesType ? '' : 'none';
+      }
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    typeFilter.addEventListener('change', applyFilters);
+  </script>
+</body>
+</html>

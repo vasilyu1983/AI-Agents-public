@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-command-runtime",
+    "title": "AI Coding Agents Command Runtime - Sources",
+    "description": "Official documentation and implementation references for slash-command registries, command dispatch, and remote-safe command runtimes",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 8,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en",
+        "type": "documentation",
+        "relevance": "Primary product documentation for Claude Code runtime and command surfaces",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "High-level guidance on agent control flow and dependable operator surfaces",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Authoritative implementation reference for command registry composition, lazy loaders, and remote-safe filtering",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Codex CLI Repository",
+        "url": "https://github.com/openai/codex",
+        "type": "repository",
+        "relevance": "Cross-runtime comparison point for command and agent CLI architecture",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Slash Command Source",
+        "url": "https://github.com/openai/codex/blob/7d47056ea42636271ac020b86347fbbef49490aa/codex-rs/tui/src/slash_command.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for command metadata, aliases, inline-argument support, active-task availability, side-conversation availability, and presentation order",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Model Context Protocol Specification",
+        "url": "https://modelcontextprotocol.io/",
+        "type": "specification",
+        "relevance": "Reference when command flows inject or expose MCP-backed capabilities",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "verified_2026_07_11": [
+      {
+        "name": "Claude Code Docs: Create custom subagents (Fork the current conversation)",
+        "url": "https://code.claude.com/docs/en/sub-agents",
+        "type": "documentation",
+        "relevance": "Authoritative source for /fork command, CLAUDE_CODE_FORK_SUBAGENT env var, fork depth limits, and background-execution semantics; used to correct a prior community-tweet citation",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Docs: Manage multiple agents with agent view",
+        "url": "https://code.claude.com/docs/en/agent-view",
+        "type": "documentation",
+        "relevance": "Authoritative source correcting the prior claim that /agents is a slash command; Agent View is opened via the claude agents CLI subcommand with Pinned/Ready for review/Needs input/Working/Completed groups",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

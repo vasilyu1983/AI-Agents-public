@@ -1,0 +1,206 @@
+# Lockfile Management
+
+**Freshness anchor:** June 2026. Lockfile commands and semantics differ by ecosystem; do not normalize everything to `npm ci`.
+
+## Table of Contents
+
+- [Why Lockfiles Matter](#why-lockfiles-matter)
+- [Current Lockfile Matrix](#current-lockfile-matrix)
+- [Golden Rules](#golden-rules)
+- [1. Commit lock state for applications](#1-commit-lock-state-for-applications)
+- [2. Do not hand-edit lockfiles](#2-do-not-hand-edit-lockfiles)
+- [3. Keep manifest and lock state in sync](#3-keep-manifest-and-lock-state-in-sync)
+- [4. Avoid mixed package-manager state](#4-avoid-mixed-package-manager-state)
+- [Recommended Workflows](#recommended-workflows)
+- [Node.js](#nodejs)
+- [npm](#npm)
+- [pnpm](#pnpm)
+- [Yarn 4](#yarn-4)
+- [Bun](#bun)
+- [Python](#python)
+- [uv](#uv)
+- [Poetry](#poetry)
+- [pip-tools](#pip-tools)
+- [Rust / Go / PHP](#rust-go-php)
+- [Rust](#rust)
+- [Go](#go)
+- [PHP](#php)
+- [Regeneration Rules](#regeneration-rules)
+- [CI Rules](#ci-rules)
+- [Drift Recovery](#drift-recovery)
+- [Symptom: exact install fails](#symptom-exact-install-fails)
+- [Review Checklist](#review-checklist)
+- [Special Cases](#special-cases)
+- [Cargo](#cargo)
+- [Python](#python)
+- [Java and .NET](#java-and-net)
+- [Anti-Patterns](#anti-patterns)
+
+## Why Lockfiles Matter
+
+Lockfiles provide:
+
+- reproducible dependency resolution
+- faster, deterministic CI installs
+- a reviewable record of transitive changes
+- a rollback point when upgrades fail
+
+## Current Lockfile Matrix
+
+| Ecosystem | Manifest | Lock state | Exact/CI install | Notes |
+|-----------|----------|------------|------------------|-------|
+| npm | `package.json` | `package-lock.json` | `npm ci` | Fails if manifest and lockfile drift |
+| pnpm | `package.json` | `pnpm-lock.yaml` | `pnpm install --frozen-lockfile` | Prefer one workspace root lockfile |
+| Yarn 4 | `package.json` | `yarn.lock` | `yarn install --immutable` | `--immutable` is the modern exact-install form |
+| Bun | `package.json` | `bun.lock` | `bun ci` | Use Bun-native CI flow when repo is on Bun |
+| uv | `pyproject.toml` | `uv.lock` | `uv sync --frozen` | `uv.lock` is tool-specific; `pylock.toml` is the cross-tool spec |
+| Poetry | `pyproject.toml` | `poetry.lock` | `poetry sync` | Use `sync` when exact environment reconciliation matters |
+| pip-tools | `requirements.in` / `pyproject.toml` | compiled `requirements.txt` | `pip-sync` | Treat compiled requirements as generated lock output |
+| Cargo | `Cargo.toml` | `Cargo.lock` | `cargo build --locked` | Commit for apps; libraries usually omit |
+| Go | `go.mod` | `go.sum` | `go mod download` / `go mod tidy` | Module semantics differ from npm-style tree locks |
+| Composer | `composer.json` | `composer.lock` | `composer install --no-interaction --prefer-dist` | Commit for apps |
+
+## Golden Rules
+
+### 1. Commit lock state for applications
+
+- Do commit lockfiles for deployable applications
+- Do not `.gitignore` application lockfiles
+- Follow ecosystem-specific exceptions instead of universal rules
+
+### 2. Do not hand-edit lockfiles
+
+- Regenerate them through the package manager
+- Review lockfile diffs like code, especially for transitive jumps and source changes
+
+### 3. Keep manifest and lock state in sync
+
+If the exact install command fails, the first suspect is manifest-lock drift.
+
+### 4. Avoid mixed package-manager state
+
+For Node repos, never keep multiple active lockfiles for one package graph.
+
+## Recommended Workflows
+
+### Node.js
+
+```bash
+# npm
+npm install            # update manifest + package-lock.json
+npm ci                 # exact install from package-lock.json
+
+# pnpm
+pnpm add lodash
+pnpm install --frozen-lockfile
+
+# Yarn 4
+yarn add lodash
+yarn install --immutable
+
+# Bun
+bun add lodash
+bun ci
+```
+
+### Python
+
+```bash
+# uv
+uv add httpx
+uv sync --frozen
+
+# Poetry
+poetry add httpx
+poetry sync
+
+# pip-tools
+pip-compile pyproject.toml -o requirements.txt
+pip-sync requirements.txt
+```
+
+### Rust / Go / PHP
+
+```bash
+# Rust
+cargo update -p serde
+cargo build --locked
+
+# Go
+go mod tidy
+go mod verify
+
+# PHP
+composer update vendor/package
+composer install --no-interaction --prefer-dist
+```
+
+## Regeneration Rules
+
+Regenerate lock state when:
+
+- dependencies change
+- package-manager major versions change and the lock format changes
+- registry or source configuration changes
+- security policy requires rebuilding a compromised graph
+
+Do **not** regenerate lockfiles just to "clean them up" unless the change has a clear reason.
+
+## CI Rules
+
+- Use the exact install command for the ecosystem
+- Fail fast on drift
+- Cache the package-manager store, not mutable `node_modules` snapshots, unless the platform has a strong reason otherwise
+- Generate SBOMs after a successful exact install, not from a partially restored workspace
+
+## Drift Recovery
+
+### Symptom: exact install fails
+
+Common causes:
+
+- manifest changed without lockfile update
+- lockfile generated by a different manager
+- lockfile format bumped by a toolchain upgrade
+- registry settings changed
+
+Recovery order:
+
+1. Confirm the intended package manager
+2. Confirm the pinned manager or wrapper version
+3. Regenerate lock state with the intended manager
+4. Re-run the exact install command
+
+## Review Checklist
+
+- Did the manifest change match the lockfile diff?
+- Did any registry host or tarball source change unexpectedly?
+- Did install/build scripts become newly required?
+- Did a transitive package jump farther than expected for a patch update?
+- Did the lockfile format change because the toolchain changed?
+
+## Special Cases
+
+### Cargo
+
+- Applications: commit `Cargo.lock`
+- Libraries: usually omit `Cargo.lock`, unless repo policy or release process says otherwise
+
+### Python
+
+- `uv.lock` is the uv-native lockfile
+- `pylock.toml` is the PyPA standard for interoperable lockfiles
+- `requirements.txt` can be either a hand-maintained manifest or a compiled lock artifact; be explicit which one the repo uses
+
+### Java and .NET
+
+- Wrapper and restore-lock workflows matter as much as dependency declarations
+- For these ecosystems, "lockfile management" often means a mix of wrapper pinning, resolved graph review, and deterministic restore settings rather than one universal file
+
+## Anti-Patterns
+
+- `npm install` in CI when `npm ci` exists
+- `yarn install --frozen-lockfile` in Yarn 4 docs and templates instead of `--immutable`
+- using mutable `poetry install` where `poetry sync` is the reproducibility requirement
+- regenerating lockfiles during unrelated refactors
+- reviewing only manifest changes and ignoring transitive lockfile churn

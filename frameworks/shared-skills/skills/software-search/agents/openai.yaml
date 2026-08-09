@@ -1,0 +1,4 @@
+interface:
+  display_name: "Search"
+  short_description: "Designs application search systems"
+  default_prompt: "Use $software-search for Designs application search systems. Use when choosing engines, indexing, relevance tuning, facets, autocomplete, or search analytics."

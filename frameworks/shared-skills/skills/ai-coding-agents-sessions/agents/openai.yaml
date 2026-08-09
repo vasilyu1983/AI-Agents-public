@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Sessions"
+  short_description: "Design coding-agent session lifecycle"
+  default_prompt: "Use $ai-coding-agents-sessions to design resume flows, transcript restoration, cross-worktree recovery, or session-state persistence for a coding-agent runtime."

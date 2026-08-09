@@ -1,0 +1,218 @@
+{
+  "metadata": {
+    "skill": "ai-scaling-laws",
+    "title": "AI Scaling Laws - Sources",
+    "description": "Canonical papers and references for LLM scaling laws, compute-optimal training, Kaplan vs Chinchilla, and GPU compute estimation.",
+    "updated": "2026-07-11",
+    "audit_date": "2026-07-11",
+    "last_verified": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 22
+  },
+  "categories": {
+    "foundational_papers": [
+      {
+        "name": "Kaplan et al. — Scaling Laws for Neural Language Models",
+        "url": "https://arxiv.org/abs/2001.08361",
+        "type": "research",
+        "relevance": "Original scaling laws paper (2020). Establishes power-law relationships between loss, model size (N), dataset size (D), and compute (C). Found N should scale faster than D — later corrected by Chinchilla. Primary reference for the pre-Chinchilla regime and the C ≈ 6ND approximation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Hoffmann et al. — Training Compute-Optimal Large Language Models (Chinchilla)",
+        "url": "https://arxiv.org/abs/2203.15556",
+        "type": "research",
+        "relevance": "The Chinchilla paper (2022). Demonstrates that N and D should scale equally for a fixed compute budget, yielding the ~20 tokens-per-parameter heuristic. Provides the L(N,D) loss form and Table A3 with precise optimal (N*, D*) pairs. Required reading for any scaling law reasoning.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Brown et al. — Language Models are Few-Shot Learners (GPT-3)",
+        "url": "https://arxiv.org/abs/2005.14165",
+        "type": "research",
+        "relevance": "GPT-3 paper (2020). 175B parameter model trained on ~300B tokens — a canonical example of a Kaplan-era under-trained model. Reference for GPT-3 sizing, training compute, and the few-shot emergence results that motivated scale-up.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Radford et al. — Language Models are Unsupervised Multitask Learners (GPT-2)",
+        "url": "https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf",
+        "type": "research",
+        "relevance": "GPT-2 paper (2019). 124M–1.5B parameter models; primary reference for GPT-2 architecture, training setup, and the 124M reproduction target. Token counts and architecture details are used in sizing worked examples.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "extended_references": [
+      {
+        "name": "Goodfellow, Bengio, Courville — Deep Learning (textbook)",
+        "url": "https://www.deeplearningbook.org/",
+        "type": "textbook",
+        "relevance": "Mathematical background for optimization, generalization, and capacity. Load just-in-time for foundational math (e.g., bias-variance tradeoff, regularization) when scaling law derivations require it.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "DeepMind Research Blog — Chinchilla Scaling Laws",
+        "url": "https://www.deepmind.com/blog/an-empirical-analysis-of-compute-optimal-large-language-model-training",
+        "type": "blog",
+        "relevance": "DeepMind's public blog post summarizing the Chinchilla result for practitioners. Good for quick orientation and the headline findings without the full paper.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Epoch AI — Chinchilla's Wild Implications",
+        "url": "https://epochai.org/blog/chinchillas-wild-implications",
+        "type": "blog",
+        "relevance": "Epoch AI analysis (2022) of the practical implications of Chinchilla, including the data-constrained regime, over-training, and why most large models at the time were significantly undertrained. Useful for understanding the gap between Chinchilla-optimal and real-world deployments.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Touvron et al. — LLaMA: Open and Efficient Foundation Language Models",
+        "url": "https://arxiv.org/abs/2302.13971",
+        "type": "research",
+        "relevance": "LLaMA paper (2023). Early example of deliberate over-training past Chinchilla-optimal (7B params on 1T tokens) to produce inference-efficient models. Superseded by Llama 3 (15T tokens) for the extreme-over-training argument, but the original statement of the inference-cost rationale.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Meta — Llama 3 Model Card",
+        "url": "https://github.com/meta-llama/llama3/blob/main/MODEL_CARD.md",
+        "type": "documentation",
+        "relevance": "Llama 3 (2024). 8B and 70B both trained on 15T tokens (~1,875 tok/param for 8B), ~75x Chinchilla-optimal. A canonical extreme-over-training datapoint (dense-model case; Llama 4 is the more current MoE example); performance improved log-linearly well past the Chinchilla point.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "post_chinchilla_research": [
+      {
+        "name": "Besiroglu et al. — Chinchilla Scaling: A replication attempt",
+        "url": "https://arxiv.org/abs/2404.10102",
+        "type": "research",
+        "relevance": "Epoch AI replication (2024) of Hoffmann et al. Approach 3. Shows the published parametric fit is biased (pre-convergence optimizer + rounding) with implausibly narrow confidence intervals; corrected exponents are alpha~0.35, beta~0.37. Mandatory caveat on any quote of the Chinchilla constants.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Muennighoff et al. — Scaling Data-Constrained Language Models",
+        "url": "https://arxiv.org/abs/2305.16264",
+        "type": "research",
+        "relevance": "NeurIPS 2023. Up to ~4 epochs of repeated data are nearly as good as fresh data; marginal value decays to ~0 past ~16 epochs. Data-constrained generalization of Chinchilla; train smaller-for-more-epochs when data-bound.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Sardana & Frankle et al. — Beyond Chinchilla-Optimal: Accounting for Inference",
+        "url": "https://arxiv.org/abs/2401.00448",
+        "type": "research",
+        "relevance": "ICML 2024. Adds inference cost to the scaling objective: deployed models should be smaller and trained far longer than Chinchilla-optimal. Quality improves out to ~10,000 tok/param. The rigorous basis for the over-training default.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Kumar et al. — Scaling Laws for Precision",
+        "url": "https://arxiv.org/abs/2411.04330",
+        "type": "research",
+        "relevance": "2024. Low-precision training reduces effective parameter count; post-training-quantization damage grows with training tokens, so over-training can harm a heavily-quantized deployment. Unifies training- and inference-precision effects. Relevant given FP8 training / INT4-8 serving in 2026.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Ludziejewski et al. — Scaling Laws for Fine-Grained Mixture of Experts",
+        "url": "https://arxiv.org/abs/2402.07871",
+        "type": "research",
+        "relevance": "2024. Introduces granularity (expert size vs FFN) as a scaling hyperparameter; G=1 (expert == dense FFN) is suboptimal at nearly every budget. Apply 6ND with activated params for MoE; granularity/sparsity are first-class knobs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pearce & Song — Reconciling Kaplan and Chinchilla Scaling Laws",
+        "url": "https://arxiv.org/abs/2406.12907",
+        "type": "research",
+        "relevance": "2024. Shows the Kaplan vs Chinchilla disagreement is methodological: parameter/FLOP counting at small scale, warmup duration, and scale-dependent optimizer tuning. Correcting these reproduces Chinchilla's N* ~ C^0.50 from Kaplan's setup.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Porian et al. — Resolving Discrepancies in Compute-Optimal Scaling of Language Models",
+        "url": "https://arxiv.org/abs/2406.19146",
+        "type": "research",
+        "relevance": "NeurIPS 2024. Independent confirmation that the Kaplan/Chinchilla gap stems from last-layer compute, warmup, and optimizer tuning rather than a real disagreement about scaling behavior.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Snell et al. — Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters",
+        "url": "https://arxiv.org/abs/2408.03314",
+        "type": "research",
+        "relevance": "ICLR 2025. Test-time compute (sampling+verification, search) as a third scaling axis, substitutable with pretraining; the inference-to-pretraining token ratio sets the optimal split. Scaling law under the o1/o3 reasoning paradigm.",
+        "update_frequency": "evolving",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Busbridge et al. (Apple) — Distillation Scaling Laws",
+        "url": "https://arxiv.org/abs/2502.08606",
+        "type": "research",
+        "relevance": "ICLR 2025. Law for distilled-student loss vs teacher/student compute allocation; compute-optimal distillation recipes for teacher-exists vs teacher-also-trained scenarios.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Wisconsin-Madison/Stanford — Test-Time Scaling Makes Overtraining Compute-Optimal",
+        "url": "https://arxiv.org/abs/2604.01411",
+        "type": "research",
+        "relevance": "2026. Train-to-Test (T2) scaling laws jointly optimizing model size, training tokens, and inference-sample count under one end-to-end train+inference budget; confirms planning for test-time sampling pushes optimal pretraining further into over-training. Verify against the latest revision before quoting fixed ratios -- most active scaling frontier in 2026.",
+        "update_frequency": "evolving",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Meta et al. — The Art of Scaling Reinforcement Learning Compute for LLMs",
+        "url": "https://arxiv.org/abs/2510.13786 (UNVERIFIED -- confirm via arXiv search before use)",
+        "type": "research",
+        "relevance": "Oct 2025. First rigorous RL post-training compute scaling study (400K+ GPU-hours): RL compute-performance follows a sigmoidal curve with a recipe-dependent ceiling, not a clean Chinchilla-style power law. UNVERIFIED arXiv ID (not independently confirmed during the 2026-07-11 audit) -- search by title to find the current ID and figures before citing a specific number.",
+        "update_frequency": "evolving",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Scaling Behaviors of LLM Reinforcement Learning Post-Training",
+        "url": "https://arxiv.org/abs/2509.25300",
+        "type": "research",
+        "relevance": "2025. Finds RL post-training scaling saturates faster and differently than pretraining scaling; naive pretraining-style power-law extrapolation overstates expected RL-compute gains.",
+        "update_frequency": "evolving",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Meta — Llama 4 (Scout/Maverick/Behemoth) release materials",
+        "url": "https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
+        "type": "documentation",
+        "relevance": "2025. Current canonical over-training + MoE datapoint superseding Llama 3 for 'what's a current example': Scout/Maverick at 17B activated params (109B / ~400B total) trained on an estimated ~22-40T tokens; Behemoth (unreleased) targets ~288B activated / ~2T total params. Verify token/param figures against the live model card -- pre-release numbers were estimates.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

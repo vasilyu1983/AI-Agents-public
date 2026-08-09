@@ -1,0 +1,55 @@
+# .github/dependabot.yml
+# Baseline using grouped updates and optional multi-ecosystem grouping.
+
+version: 2
+
+multi-ecosystem-groups:
+  infrastructure:
+    schedule:
+      interval: "weekly"
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+    groups:
+      node-runtime:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      node-dev:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+      node-security:
+        applies-to: "security-updates"
+        patterns:
+          - "*"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    patterns:
+      - "*"
+    multi-ecosystem-group: "infrastructure"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    patterns:
+      - "*"
+    multi-ecosystem-group: "infrastructure"
+
+  - package-ecosystem: "terraform"
+    directory: "/"
+    patterns:
+      - "*"
+    multi-ecosystem-group: "infrastructure"

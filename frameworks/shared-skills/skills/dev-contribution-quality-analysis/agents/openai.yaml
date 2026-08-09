@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dev Contribution Quality Analysis"
+  short_description: "Analyzes commit and PR history to score contribution quality objectively. Use"
+  default_prompt: "Use $dev-contribution-quality-analysis for Analyzes commit and PR history to score contribution quality objectively. Use when building engineering scorecards, calibrating promotions, or measuring AI-assist impact."

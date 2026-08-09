@@ -1,0 +1,536 @@
+{
+  "metadata": {
+    "skill": "ai-agents",
+    "updated": "2026-07-11",
+    "total_sources": 56,
+    "description": "Curated primary sources for production agent systems: architecture, protocols, tool design, evaluation, observability, and economics.",
+    "version": "5.4",
+    "title": "AI Agents - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "standards_and_governance": [
+      {
+        "name": "EU AI Act (Regulation (EU) 2024/1689)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+        "type": "specification",
+        "relevance": "Regulatory baseline for risk classification, transparency, documentation, and controls affecting agent systems.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST AI Risk Management Framework 1.0",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+        "type": "specification",
+        "relevance": "Governance and risk management framework for production AI systems.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NIST Generative AI Profile (AI 600-1)",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+        "type": "specification",
+        "relevance": "GenAI-specific profile aligned to NIST AI RMF; useful for controls, logging, and deployment planning.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "specification",
+        "relevance": "Threat categories for prompt injection, data leakage, tool misuse, and agent abuse scenarios.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST Secure Software Development Framework (SSDF)",
+        "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+        "type": "specification",
+        "relevance": "Secure development baseline relevant for tool implementation, supply chain, and deployment practices.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ISO/IEC 42001",
+        "url": "https://www.iso.org/standard/42001",
+        "type": "specification",
+        "relevance": "AI management system standard for organizational governance and continuous improvement.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "CVE-2026-30623 — Command injection via Anthropic MCP SDK (stdio)",
+        "url": "https://docs.litellm.ai/blog/mcp-stdio-command-injection-april-2026",
+        "type": "advisory",
+        "relevance": "CVE record + mitigation context for the MCP stdio command-injection class. Pair with the OX Security systemic advisory. April 2026.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "protocols_and_interoperability": [
+      {
+        "name": "Agent Skills Specification",
+        "url": "https://agentskills.io/specification",
+        "type": "specification",
+        "relevance": "Official skill packaging specification for SKILL.md structure, metadata, and progressive disclosure.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol (MCP) Introduction",
+        "url": "https://modelcontextprotocol.io/docs/getting-started/intro",
+        "type": "specification",
+        "relevance": "High-level overview of MCP for tool and resource integration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MCP Transport Specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+        "type": "specification",
+        "relevance": "Primary source for MCP transport guidance, including stdio and Streamable HTTP. Current stable: 2025-11-25.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MCP Authorization Specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization",
+        "type": "specification",
+        "relevance": "Primary source for MCP authorization, OAuth 2.1, and OpenID Connect guidance for remote servers. Current stable: 2025-11-25.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Agent2Agent (A2A) Protocol Overview",
+        "url": "https://a2a-protocol.org/latest/",
+        "type": "specification",
+        "relevance": "Primary source for agent cards, task handoffs, and agent-to-agent interoperability. A2A v1.0 under Linux Foundation governance. Verified 2026-06-09.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Agent2Agent (A2A) Protocol Specification",
+        "url": "https://a2a-protocol.org/latest/specification/",
+        "type": "specification",
+        "relevance": "Full A2A v1.0 specification: tasks, messages, artifacts, agent cards, JSON-RPC/gRPC/HTTP-REST protocol bindings, security. Verified 2026-06-09.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MAST: A Multi-Agent System Taxonomy (arXiv:2503.13657)",
+        "url": "https://arxiv.org/abs/2503.13657",
+        "type": "research",
+        "relevance": "Canonical MAST taxonomy: 14 failure modes across 3 categories. Original Cemri et al. distribution ≈ Specification/System Design 41.8%, Inter-Agent Misalignment 36.9%, Task Verification 21.3% (figures vary across secondary write-ups applying MAST to other trace sets — verify against the primary PDF/HTML before quoting). NeurIPS 2025 Datasets & Benchmarks track. Re-verified 2026-07-11.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "JSON Schema",
+        "url": "https://json-schema.org/",
+        "type": "specification",
+        "relevance": "Schema standard for tool I/O validation, handoff contracts, and structured outputs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Semantic Conventions for GenAI",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "type": "specification",
+        "relevance": "Standardized telemetry fields for LLM calls, tool calls, and agent tracing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OX Security — Systemic MCP STDIO RCE advisory (CVE-2026-30623)",
+        "url": "https://www.ox.security/blog/the-mother-of-all-ai-supply-chains-critical-systemic-vulnerability-at-the-core-of-the-mcp/",
+        "type": "advisory",
+        "relevance": "Verified by-design config->OS-command execution in official MCP SDK stdio interface; Anthropic confirmed by-design and declined a protocol fix. Load-bearing for MCP host sandboxing guidance. Multi-source corroborated (The Register, CSA, Infosecurity, CVE-2026-30623), April 2026.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MCP 2026 Roadmap & 2026-07-28 Release Candidate",
+        "url": "https://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/",
+        "type": "specification",
+        "relevance": "Primary source (MCP blog). 2025-11-25 remains current stable as of June 2026; a 2026-07-28 revision (largest since launch) is in release candidate: stateless HTTP core, MCP Apps (server-rendered UIs), Tasks extension (long-running work), OAuth/OIDC-aligned auth, formal deprecation policy. Build on 2025-11-25 today; track blog for ratification.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_docs_and_playbooks": [
+      {
+        "name": "The Machine that Builds the Machine — Symphony (@daniel_mac8)",
+        "url": "https://x.com/daniel_mac8/status/2034344165211832481",
+        "type": "article",
+        "relevance": "Deep dive on OpenAI's Symphony — an open-source Elixir-based orchestrator that polls Linear, spawns Codex agents in isolated workspaces with 300-line Jinja2 workflow templates, self-reviews PRs, and manages full issue lifecycle. Demonstrates outcome-based vs prompt-based agent paradigm at 10-agent concurrency: 26 tasks, 27 PRs, 32K LOC in 36 hours.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Building Agents",
+        "url": "https://developers.openai.com/tracks/building-agents",
+        "type": "documentation",
+        "relevance": "Official playbook for agent design, tools, orchestration, evals, MCP/connectors, and operations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Claude Code Best Practices",
+        "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+        "type": "documentation",
+        "relevance": "Official guidance for context, subagents, memory, and code-agent operating patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Writing Tools for Agents",
+        "url": "https://www.anthropic.com/engineering/writing-tools-for-agents",
+        "type": "documentation",
+        "relevance": "Primary source for tool design: narrow tools, strong descriptions, examples, and predictable side-effect boundaries.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Tool Use Documentation",
+        "url": "https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview",
+        "type": "documentation",
+        "relevance": "Official provider reference for tool calling, tool schemas, and tool-use orchestration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangGraph Documentation",
+        "url": "https://langchain-ai.github.io/langgraph/",
+        "type": "documentation",
+        "relevance": "Reference implementation for stateful workflow agents, checkpoints, and human-in-the-loop patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Evals",
+        "url": "https://github.com/openai/evals",
+        "type": "tool",
+        "relevance": "Reference tooling for evaluation harnesses and regression tests.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "type": "documentation",
+        "relevance": "Implementation reference for distributed tracing, metrics, and logs in production systems.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "framework_docs": [
+      {
+        "name": "OpenAI Agents SDK for Python",
+        "url": "https://openai.github.io/openai-agents-python/",
+        "type": "documentation",
+        "relevance": "Official Python SDK for tool-centric agents, handoffs, tracing, and human-in-the-loop patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Agents SDK for JavaScript",
+        "url": "https://openai.github.io/openai-agents-js/",
+        "type": "documentation",
+        "relevance": "Official JavaScript SDK for OpenAI agents; use when checking language support or JS-specific patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Agent Development Kit (ADK)",
+        "url": "https://google.github.io/adk-docs/",
+        "type": "documentation",
+        "relevance": "Official code-first framework docs for Gemini-oriented agents and multi-language teams.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pydantic AI",
+        "url": "https://ai.pydantic.dev/",
+        "type": "documentation",
+        "relevance": "Official type-safe Python agent framework docs; verify current MCP, A2A, testing, and durable-execution support here.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Bedrock Agents",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html",
+        "type": "documentation",
+        "relevance": "Official managed-agent documentation for AWS environments.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "CrewAI Documentation",
+        "url": "https://docs.crewai.com/",
+        "type": "documentation",
+        "relevance": "Official role-based multi-agent framework documentation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft Agent Framework Overview",
+        "url": "https://learn.microsoft.com/en-us/agent-framework/overview",
+        "type": "documentation",
+        "relevance": "Official overview for Microsoft's agent framework; use this to verify current lifecycle, language support, and Azure positioning.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Claude Agent SDK",
+        "url": "https://docs.anthropic.com/en/docs/claude-code/sdk",
+        "type": "documentation",
+        "relevance": "Official Anthropic SDK docs for code agents, MCP integration, tools, computer use, and subagents.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LlamaIndex Workflows",
+        "url": "https://docs.llamaindex.ai/en/stable/understanding/workflows/",
+        "type": "documentation",
+        "relevance": "Official workflow and orchestration docs for retrieval-heavy agent systems.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mastra Documentation",
+        "url": "https://mastra.ai/docs",
+        "type": "documentation",
+        "relevance": "Official TypeScript-oriented agent framework documentation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Spring AI Reference",
+        "url": "https://docs.spring.io/spring-ai/reference/",
+        "type": "documentation",
+        "relevance": "Official Java/Kotlin agent framework: ChatClient, Advisors, ToolCallback, A2A integration, AutoMemoryTools.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Semantic Kernel → Microsoft Agent Framework Migration Guide",
+        "url": "https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-semantic-kernel/",
+        "type": "documentation",
+        "relevance": "Official migration path; SK is in maintenance, MAF is the forward path. Verify before starting any greenfield SK work.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SmolAgents Documentation",
+        "url": "https://huggingface.co/docs/smolagents/",
+        "type": "documentation",
+        "relevance": "Official lightweight agent framework documentation from Hugging Face.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Agno Documentation",
+        "url": "https://docs.agno.com/",
+        "type": "documentation",
+        "relevance": "Official documentation for Agno's agent runtime, workflows, memory, and integrations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Haystack Documentation",
+        "url": "https://docs.haystack.deepset.ai/",
+        "type": "documentation",
+        "relevance": "Official documentation for Haystack pipelines and agent components.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DSPy Documentation",
+        "url": "https://dspy.ai/",
+        "type": "documentation",
+        "relevance": "Official docs for declarative prompt/program optimization and agentic modules.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWL (CAMEL-AI)",
+        "url": "https://github.com/camel-ai/owl",
+        "type": "tool",
+        "relevance": "Multi-agent cooperation framework from CAMEL-AI that tops GAIA benchmark; reference for agent team coordination and real-world task completion benchmarks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Dify",
+        "url": "https://github.com/langgenius/dify",
+        "type": "tool",
+        "relevance": "Open-source LLM app builder combining workflows, RAG pipelines, and agents in a single platform; reference for integrated agentic application architecture patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "economics_and_decision_frameworks": [
+      {
+        "name": "OpenAI API Pricing",
+        "url": "https://openai.com/api/pricing/",
+        "type": "documentation",
+        "relevance": "Current pricing for OpenAI models and tools; required for ROI and budget calculations.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic API Pricing",
+        "url": "https://www.anthropic.com/pricing",
+        "type": "documentation",
+        "relevance": "Current pricing for Anthropic models and platform usage; required for ROI and budget calculations.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google AI Pricing",
+        "url": "https://ai.google.dev/pricing",
+        "type": "documentation",
+        "relevance": "Current pricing for Gemini-family models and related services.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/research/building-effective-agents",
+        "type": "research",
+        "relevance": "High-signal guidance on when to use workflows vs agents and how to keep agent systems simple.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "karpathy/autoresearch",
+        "url": "https://github.com/karpathy/autoresearch",
+        "type": "tool",
+        "relevance": "Reference implementation for autonomous improvement loops: bounded modification surface, fixed eval metric, git-as-experiment-ledger. Defines the research/experiment agent architecture.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ole Lehmann: Skill Optimization with Autonomous Loops",
+        "url": "https://www.olelehmann.com",
+        "type": "article",
+        "relevance": "Generalizes autoresearch to prompt/skill improvement: yes/no scoring checklist, agent loops change → test → keep/revert until 95%+. Case study: 56% → 92% in 4 rounds.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "a16z: AI Agents Primer",
+        "url": "https://a16z.com/ai-agents-primer/",
+        "type": "research",
+        "relevance": "External perspective on agent economics, market tradeoffs, and operating-model assumptions.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Hallucination Leaderboard (Vectara)",
+        "url": "https://github.com/vectara/hallucination-leaderboard",
+        "type": "tool",
+        "relevance": "Benchmark reference for hallucination-rate comparisons and risk discussions.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ccusage — Claude Code Usage Analyzer",
+        "url": "https://github.com/ryoppippi/ccusage",
+        "type": "tool",
+        "relevance": "CLI tool that reads local Claude Code JSONL logs to produce daily, weekly, monthly, and session-level token and cost reports.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "@ccusage/codex — Codex CLI Usage Analyzer",
+        "url": "https://www.npmjs.com/package/@ccusage/codex",
+        "type": "tool",
+        "relevance": "CLI tool that reads local Codex CLI JSONL session logs to produce daily, monthly, and session-level token and cost reports.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "@ccusage/mcp — Usage Data MCP Server",
+        "url": "https://www.npmjs.com/package/@ccusage/mcp",
+        "type": "tool",
+        "relevance": "MCP server that exposes ccusage data as agent-accessible tools for cost-aware agent loops and self-monitoring.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Single-Agent LLMs Outperform Multi-Agent Systems Under Equal Thinking Token Budgets (Tran & Kiela)",
+        "url": "https://arxiv.org/abs/2604.02460",
+        "type": "research",
+        "relevance": "Information-theoretic (Data Processing Inequality) argument that single-agent matches/beats multi-agent at equal token budget; build-vs-multi-agent decision input. Apr 2026 arXiv preprint, NOT peer-reviewed; scope: text-only multi-hop reasoning. Verify before relying.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Agentic Much? Adoption of Coding Agents on GitHub (arXiv:2601.18341)",
+        "url": "https://arxiv.org/abs/2601.18341",
+        "type": "research",
+        "relevance": "129,134-project empirical study estimating ~16-23% coding-agent adoption at file/commit level on GitHub by late 2025. Use as the sourced baseline instead of single-vendor PR-count marketing claims. Verified 2026-07-11.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

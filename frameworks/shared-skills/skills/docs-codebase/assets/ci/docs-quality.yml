@@ -1,0 +1,66 @@
+name: Docs Quality
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "**.md"
+
+jobs:
+  markdownlint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+
+      - name: Run markdownlint
+        # Adjust the glob to match your docs layout.
+        # --config points at the shared config from this skill.
+        run: |
+          markdownlint \
+            --config .markdownlint.yaml \
+            "docs/**/*.md" "*.md" \
+            --ignore node_modules \
+            --ignore .archive
+
+  link-check:
+    name: Markdown link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install markdown-link-check
+        run: npm install -g markdown-link-check
+
+      - name: Run link check
+        # --quiet suppresses successful link output; remove for verbose logs.
+        # The .mlc-config.json (optional) can whitelist localhost or slow external URLs.
+        run: |
+          find docs -name "*.md" ! -path "*/.archive/*" | \
+            xargs -I {} markdown-link-check {} \
+              --quiet \
+              --config .mlc-config.json || true
+        # "|| true" prevents the job from failing on transient external link failures.
+        # Remove it if you want strict enforcement of external links.
+
+  vale:
+    name: Vale prose lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install Vale
+        uses: errata-ai/vale-action@v2
+        with:
+          # Point at the .vale.ini from this skill, or the repo root copy.
+          config: .vale.ini
+          # Lint the docs/ directory. Adjust if your docs live elsewhere.
+          files: docs/
+          # Fail on warnings and above. Set to "error" for a lighter touch.
+          fail_on_error: true
+        env:
+          # Required for private repos when vale-action fetches style packages.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

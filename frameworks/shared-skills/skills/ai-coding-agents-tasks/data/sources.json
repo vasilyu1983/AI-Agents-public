@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-tasks",
+    "title": "AI Coding Agents Tasks - Sources",
+    "description": "Official documentation and implementation references for coding-agent task models, task lists, background execution, and teammate coordination",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 18,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en/",
+        "type": "documentation",
+        "relevance": "Primary runtime documentation for Claude Code operational behavior",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Slash Commands",
+        "url": "https://code.claude.com/docs/en/slash-commands",
+        "type": "documentation",
+        "relevance": "Official command and prompt-surface documentation relevant to task launch, task discovery, and interactive coordination flows",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Subagents",
+        "url": "https://code.claude.com/docs/en/sub-agents",
+        "type": "documentation",
+        "relevance": "Official subagent delegation model for task handoff, worker context isolation, and teammate-style coordination",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Authoritative implementation reference for task types, background execution, task dialogs, and task-list watching",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "High-level context for structuring durable agent workflows and delegated work",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "cross_runtime_references": [
+      {
+        "name": "Codex CLI Documentation",
+        "url": "https://github.com/openai/codex",
+        "type": "documentation",
+        "relevance": "Cross-runtime comparison point for background work and agent task patterns",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Cloud Tasks CLI Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/cloud-tasks/src/cli.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for cloud task commands, attempt bounds, status/list/apply/diff surfaces, branch and environment fields",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Cloud Tasks App Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/cloud-tasks/src/app.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for task apply result levels, skipped/conflict paths, and local materialization behavior",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Agent Graph Store Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/agent-graph-store/src/store.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for persisted parent-child thread topology, stable ordering, status updates, and breadth-first descendant traversal",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Agents SDK Handoffs",
+        "url": "https://openai.github.io/openai-agents-python/handoffs/",
+        "type": "documentation",
+        "relevance": "Official cross-runtime handoff model for delegated task execution and worker routing",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Agents SDK Sessions",
+        "url": "https://openai.github.io/openai-agents-python/sessions/",
+        "type": "documentation",
+        "relevance": "Official session-state reference for task continuity, persistence, and resume behavior across runs",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Chris Hayduk — Using Codex Goals Effectively",
+        "url": "https://x.com/ChrisHayduk/status/2053807198870880743",
+        "type": "first_party_practitioner_post",
+        "relevance": "First-party (OpenAI) guidance on Codex /goal command: quantitative-goal pattern, checklist-as-score trick, tight feedback loops, and 3-file journaling for multi-day runs. Source for the 'Goal-Mode Loops' section.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "captured": "2026-05-12"
+      },
+      {
+        "name": "Jarrod Watts — You Need More Than a Ralph Loop",
+        "url": "https://x.com/jarrodwatts/status/2052372045829382430",
+        "type": "practitioner_post",
+        "relevance": "Critique of bare goal-mode/ralph loops. Source for the 'When bare goal-mode is not enough' subsection: ambiguity bottleneck, single-context-window bottleneck, cross-context memory bottleneck, and pointers to orchestrator+reviewer triad and Watts 4-file journaling. Companion github skill: https://github.com/jarrodwatts/long-running-agent-skill",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "captured": "2026-05-12"
+      },
+      {
+        "name": "Anthropic: Introducing Routines in Claude Code",
+        "url": "https://claude.com/blog/introducing-routines-in-claude-code",
+        "type": "product_post",
+        "relevance": "First-party source for published Routines daily run caps: Pro 5/day, Max 15/day, Team/Enterprise 25/day with overage billing, and the one-off-run exemption from the daily cap. Source for the Limits and Caps section.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "captured": "2026-07-11"
+      },
+      {
+        "name": "Claude Code Routines Docs",
+        "url": "https://code.claude.com/docs/en/routines",
+        "type": "documentation",
+        "relevance": "Current canonical Routines reference; confirms research-preview status, daily caps, and one-off-run exemption as of 2026-07-11.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true,
+        "captured": "2026-07-11"
+      },
+      {
+        "name": "Claude Code Changelog — v2.1.198 (background subagents by default)",
+        "url": "https://code.claude.com/docs/en/changelog",
+        "type": "changelog",
+        "relevance": "First-party source that subagent spawns run in the background by default as of 2026-07-01, with Notification hook events (agent_needs_input / agent_completed) on completion or input-needed. Source for Background-Subagent Task Semantics.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false,
+        "captured": "2026-07-11"
+      },
+      {
+        "name": "Claude Code Changelog — v2.1.186 (background permission-prompt routing)",
+        "url": "https://code.claude.com/docs/en/changelog",
+        "type": "changelog",
+        "relevance": "First-party source that background subagent permission prompts surface into the parent/lead session (2026-06-22) instead of silently auto-denying. Corrects an earlier auto-deny-only description of background-subagent behavior. Source for Background-Subagent Task Semantics.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false,
+        "captured": "2026-07-11"
+      },
+      {
+        "name": "Claude Code Subagents Docs — Task-to-Agent rename",
+        "url": "https://code.claude.com/docs/en/sub-agents",
+        "type": "documentation",
+        "relevance": "Confirms the subagent-spawn tool was renamed Task -> Agent in v2.1.63, with Task(...) preserved as a legacy alias. Source for the task-types-and-lifecycle.md naming note.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true,
+        "captured": "2026-07-11"
+      }
+    ]
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "metadata": {
+    "title": "software-android-design - Primary Sources",
+    "description": "Material Design and Android developer references for native Android design guidance",
+    "updated": "2026-07-11",
+    "skill": "software-android-design",
+    "last_updated": "2026-07-11",
+    "note": "Android 17 (API 37) shipped 2026-06-16; Android 16 (API 36) is the prior release. Google Play requires target API 36 for new apps/updates as of the 2026-08-31 deadline (existing apps: API 35 minimum), with a one-time extension to 2026-11-01. Material 3 Expressive components are split between stable material3 1.4.0 and experimental 1.5.0-alpha behind @ExperimentalMaterial3ExpressiveApi as of mid-2026. Re-verify all of the above at the URLs below before relying on a specific version number."
+  },
+  "official_google": [
+    {
+      "name": "Material Design 3",
+      "url": "https://m3.material.io/",
+      "description": "Primary design reference for Material Design 3 components, styles, and foundations",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Material Design 3 Expressive",
+      "url": "https://m3.material.io/blog/material-expressive",
+      "description": "Material 3 Expressive update with enhanced motion, shape, color, and component expressiveness",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Compose Material 3 API Reference",
+      "url": "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary",
+      "description": "Kotlin API reference for Compose Material 3 components. Stable material3 was 1.4.0 with Expressive-specific APIs in 1.5.0-alpha behind @ExperimentalMaterial3ExpressiveApi as of mid-2026 — verify current stable/alpha split at https://developer.android.com/jetpack/androidx/releases/compose-material3",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Android Developers - Design",
+      "url": "https://developer.android.com/design",
+      "description": "Android design hub for UI guidelines, adaptive layouts, and Material integration",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Adaptive Layouts",
+      "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive",
+      "description": "Canonical adaptive layout patterns — ListDetailPaneScaffold, SupportingPaneScaffold, NavigationSuiteScaffold",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Dynamic Color",
+      "url": "https://developer.android.com/develop/ui/compose/designsystems/material3#dynamic-color",
+      "description": "Dynamic color integration with Compose Material 3 on Android 12+",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Material Symbols and Icons",
+      "url": "https://fonts.google.com/icons",
+      "description": "Official Material icon library for Android",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Material 3",
+      "url": "https://m3.material.io/",
+      "description": "Canonical Material 3 (incl. Expressive) design guidance. Verify alpha/stable API surface (MotionScheme, shape morphing) at use-time.",
+      "add_as_web_search": true,
+      "optional": false
+    },
+    {
+      "name": "Android 16 Platform",
+      "url": "https://developer.android.com/about/versions/16",
+      "description": "Android 16 (API 36) behavior/platform changes incl. large-screen resizability/orientation, mandatory edge-to-edge, and predictive back defaults. Prior release as of 2026-07-11 — Android 17 (API 37) shipped 2026-06-16. Verify specifics at use-time.",
+      "add_as_web_search": true,
+      "optional": false
+    },
+    {
+      "name": "Android 17 Release Notes",
+      "url": "https://developer.android.com/about/versions/17",
+      "description": "Android 17 (API level 37) shipped 2026-06-16 and is the current platform release as of this validation. Verify current release before treating any specific API number as latest.",
+      "add_as_web_search": true,
+      "optional": false
+    },
+    {
+      "name": "Google Play Target API Requirements",
+      "url": "https://developer.android.com/google/play/requirements/target-sdk",
+      "description": "Google Play target-API deadline (moves roughly annually). As of 2026-07-11: new apps/updates must target API 36 by 2026-08-31 (one-time extension to 2026-11-01), existing apps must target at least API 35. Re-check before citing a specific number.",
+      "add_as_web_search": true,
+      "optional": false
+    },
+    {
+      "name": "Predictive Back Gesture Guide",
+      "url": "https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture",
+      "description": "Predictive back is mandatory system behavior for apps targeting API 36+ on Android 16+ devices; onBackPressed()/KEYCODE_BACK are no longer dispatched at that target. Use PredictiveBackHandler (Compose) or OnBackInvokedCallback.",
+      "add_as_web_search": true,
+      "optional": false
+    }
+  ],
+  "tooling": [
+    {
+      "name": "Android Studio Layout Inspector",
+      "url": "https://developer.android.com/studio/debug/layout-inspector",
+      "description": "Live layout inspection for Compose and View hierarchies",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Compose BOM Version Mapping",
+      "url": "https://developer.android.com/develop/ui/compose/bom/bom-mapping",
+      "description": "Current Compose BOM version and per-artifact mapping. 2026.06.00 was the latest stable BOM as of 2026-07-11; Compose BOM ships roughly monthly — re-check before pinning a version in generated build files.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Compose Preview",
+      "url": "https://developer.android.com/develop/ui/compose/tooling/previews",
+      "description": "Compose @Preview annotation for rapid visual iteration in Android Studio",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ADB (Android Debug Bridge)",
+      "url": "https://developer.android.com/tools/adb",
+      "description": "Command-line tool for device communication, screencap, UI dumps, and app management",
+      "add_as_web_search": false
+    }
+  ],
+  "secondary_references": [
+    {
+      "name": "NN/g - Cards Component",
+      "url": "https://www.nngroup.com/articles/cards-component/",
+      "description": "General card-pattern reference for overview surfaces",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Google I/O - Material Design Sessions",
+      "url": "https://io.google/",
+      "description": "Latest Material Design and Compose sessions from the most recent Google I/O (2025 introduced Material 3 Expressive; check for a newer I/O year before citing session content as current)",
+      "add_as_web_search": true
+    }
+  ]
+}

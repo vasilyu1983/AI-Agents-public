@@ -1,0 +1,129 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-execution-sandbox",
+    "title": "AI Coding Agents Execution Sandbox - Sources",
+    "description": "Official documentation and implementation references for sandboxing, process isolation, filesystem policy, network controls, and execution safety in coding-agent runtimes",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 12,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en/",
+        "type": "documentation",
+        "relevance": "Primary product documentation for runtime execution, approvals, and local operating model",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code — Configure the sandboxed Bash tool",
+        "url": "https://code.claude.com/docs/en/sandboxing",
+        "type": "documentation",
+        "relevance": "Primary source for the shipping Bash sandbox: settings.json keys, mode names, platform backends, credential deny/mask, TLS-blind allowlist caveat, and documented compatibility failures. Fetched and cross-checked 2026-07-11.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Codex — Sandboxing concept doc",
+        "url": "https://developers.openai.com/codex/concepts/sandboxing",
+        "type": "documentation",
+        "relevance": "Primary source for Codex sandbox mode names (read-only/workspace-write/danger-full-access) and the separate approval-policy axis (untrusted/on-request/never). Fetched and cross-checked 2026-07-11.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol Specification",
+        "url": "https://modelcontextprotocol.io/",
+        "type": "specification",
+        "relevance": "Reference for tool and server capability boundaries when execution crosses process or transport layers",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Primary implementation reference for sandbox mode, working-directory boundaries, and approval integration",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Codex CLI Repository",
+        "url": "https://github.com/openai/codex",
+        "type": "repository",
+        "relevance": "Cross-runtime comparison point for command execution, approvals, and sandbox boundaries",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Core Sandbox Support Matrix",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/core/README.md",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for macOS Seatbelt, Linux Landlock/bubblewrap, Windows sandbox backend, split policy fallback, and fail-closed behavior",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI: Building a safe, effective sandbox to enable Codex on Windows",
+        "url": "https://openai.com/index/building-codex-windows-sandbox/",
+        "type": "engineering_post",
+        "relevance": "May 2026 first-party explanation of sandbox design tradeoffs, useful defaults, full-access risk, and process-tree enforcement",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "security_references": [
+      {
+        "name": "OWASP Application Security Verification Standard",
+        "url": "https://owasp.org/www-project-application-security-verification-standard/",
+        "type": "standard",
+        "relevance": "Useful security baseline for least privilege, environment separation, and command execution boundaries",
+        "update_frequency": "yearly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP Docker Security Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html",
+        "type": "guide",
+        "relevance": "Practical isolation patterns when coding-agent execution uses containers or microVMs",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "goose_aaif_references": [
+      {
+        "name": "Goose moves to the Agentic AI Foundation (AAIF)",
+        "url": "https://goose-docs.ai/blog/2026/04/07/goose-moves-to-aaif/",
+        "type": "announcement",
+        "relevance": "April 7, 2026 post documenting transfer of goose from Block to AAIF (Linux Foundation). Repository moved to aaif-goose/goose, documentation to goose-docs.ai.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenTelemetry GenAI Agent Spans Semantic Conventions",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/",
+        "type": "specification",
+        "relevance": "Experimental OTel spec for gen_ai agent spans: gen_ai.operation.name, gen_ai.agent.name/id/version, tool child spans gen_ai.tool.name / gen_ai.tool.call.id. Relevant to sandbox denial events and agent-span observability.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

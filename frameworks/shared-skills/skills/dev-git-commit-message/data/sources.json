@@ -1,0 +1,152 @@
+{
+  "metadata": {
+    "skill": "dev-git-commit-message",
+    "title": "Git Commit Message Sources",
+    "description": "Primary sources for Conventional Commits, Git hooks, commit linting, and release automation guidance.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "version": "3.2",
+    "total_sources": 19
+  },
+  "standards": [
+    {
+      "name": "Conventional Commits Specification 1.0.0",
+      "url": "https://www.conventionalcommits.org/en/v1.0.0/",
+      "description": "Authoritative conventional commit format and breaking-change rules. v1.0.0 is current stable as of July 2026; no v2 released.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Semantic Versioning 2.0.0",
+      "url": "https://semver.org/spec/v2.0.0.html",
+      "description": "Versioning rules commonly paired with Conventional Commits.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Keep a Changelog 1.1.0",
+      "url": "https://keepachangelog.com/en/1.1.0/",
+      "description": "Versioned changelog format reference.",
+      "add_as_web_search": false
+    }
+  ],
+  "git_docs": [
+    {
+      "name": "Git Hooks",
+      "url": "https://git-scm.com/docs/githooks",
+      "description": "Official source for hook behavior such as pre-commit, prepare-commit-msg, and commit-msg.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Git Interpret Trailers",
+      "url": "https://git-scm.com/docs/git-interpret-trailers",
+      "description": "Official trailer syntax for footers such as BREAKING CHANGE and issue references.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "How to Write a Git Commit Message",
+      "url": "https://cbea.ms/git-commit/",
+      "description": "Classic, high-signal commit writing guidance.",
+      "add_as_web_search": false
+    }
+  ],
+  "tooling": [
+    {
+      "name": "commitlint Getting Started",
+      "url": "https://commitlint.js.org/guides/getting-started.html",
+      "description": "Official setup and config guidance. commitlint is at v21.x (21.2.1) as of July 2026, requires Node 22+; config uses ESM export default syntax.",
+      "add_as_web_search": true,
+      "verified": "2026-07-11"
+    },
+    {
+      "name": "semantic-release",
+      "url": "https://semantic-release.gitbook.io/semantic-release/",
+      "description": "Official automated release documentation driven by commit history. At v25.x and actively maintained as of mid-2026 (recent work adds npm trusted publishing).",
+      "add_as_web_search": true,
+      "verified": "2026-07-11"
+    },
+    {
+      "name": "Changesets Intro",
+      "url": "https://github.com/changesets/changesets/blob/main/docs/intro-to-using-changesets.md",
+      "description": "Official changesets introduction for human-reviewed release notes in package repos.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Release Please Action",
+      "url": "https://github.com/googleapis/release-please-action",
+      "description": "Official GitHub Action for PR-driven release automation. Reached v5 in April 2026 (Node 24 runtime); underlying release-please package is v17.x. Manifest/config-file approach remains preferred for multi-package repos. Re-verify the major tag before pinning — this project ships majors faster than most release tooling.",
+      "add_as_web_search": true,
+      "verified": "2026-07-11"
+    },
+    {
+      "name": "pre-commit Framework",
+      "url": "https://pre-commit.com/",
+      "description": "Framework for managing repo hooks, including secret scanning and message validation wrappers.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "standard-version",
+      "url": "https://github.com/conventional-changelog/standard-version",
+      "description": "Deprecated since 2022 (not archived). README points adopters to release-please (GitHub-native) or the community fork commit-and-tag-version (non-GitHub CI). Do not adopt for new projects.",
+      "add_as_web_search": false,
+      "verified": "2026-07-11"
+    }
+  ],
+  "security": [
+    {
+      "name": "Gitleaks",
+      "url": "https://gitleaks.io/",
+      "description": "Secret scanning for local repos and CI pipelines.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TruffleHog",
+      "url": "https://github.com/trufflesecurity/trufflehog",
+      "description": "Secret detection and verification in repositories and history.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CVSS v4.0 Calculator",
+      "url": "https://www.first.org/cvss/calculator/4.0",
+      "description": "Severity scoring reference for vulnerability-related commit notes and advisories.",
+      "add_as_web_search": false
+    }
+  ],
+  "ai_attribution": [
+    {
+      "name": "AI Commit Attribution Patterns 2026",
+      "url": "https://elite-ai-assisted-coding.dev/p/attribute-git-commits-to-ai-agents",
+      "description": "Emerging opt-in pattern: Assisted-by trailer in commit body for audit trail. Not a default requirement. Verified June 2026.",
+      "add_as_web_search": true,
+      "verified": "2026-06-09"
+    },
+    {
+      "name": "Open Source AI Contributions: the Assisted-by Git Trailer Standard",
+      "url": "https://allthingsopen.org/articles/open-source-ai-contributions-assisted-by-git-trailer-standard",
+      "description": "Assisted-by has converged as a distinct trailer from Co-Authored-By through 2026, adopted or discussed by Linux Kernel, Fedora, Rocky Linux, OpenTelemetry, Apache Software Foundation, LLVM, and QEMU. Rationale: Co-Authored-By implies authorship/copyright standing an AI tool cannot hold or sign a CLA for. Verified July 2026.",
+      "add_as_web_search": true,
+      "verified": "2026-07-11"
+    },
+    {
+      "name": "Best Practices for Committing AI-Generated Code",
+      "url": "https://www.deployhq.com/git/committing-ai-generated-code",
+      "description": "Industry guidance on quality review, attribution, and test coverage for AI-assisted commits.",
+      "add_as_web_search": true,
+      "verified": "2026-06-09"
+    }
+  ],
+  "optional_examples": [
+    {
+      "name": "JetBrains AI Assistant VCS Integration",
+      "url": "https://www.jetbrains.com/help/ai-assistant/ai-in-vcs-integration.html",
+      "description": "Optional IDE-native commit message assistance example.",
+      "add_as_web_search": true,
+      "optional": true
+    },
+    {
+      "name": "Windsurf AI Commit Messages",
+      "url": "https://docs.windsurf.com/windsurf/ai-commit-message",
+      "description": "Optional IDE-native commit message assistance example.",
+      "add_as_web_search": true,
+      "optional": true
+    }
+  ]
+}

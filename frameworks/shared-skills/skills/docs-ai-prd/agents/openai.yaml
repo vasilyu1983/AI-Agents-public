@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI PRDs & Context"
+  short_description: "Writes PRDs and specs optimized for coding assistants"
+  default_prompt: "Use $docs-ai-prd for Writes PRDs and specs optimized for coding assistants. Use when authoring requirements or project context for Claude Code, Cursor, Copilot, or Codex."

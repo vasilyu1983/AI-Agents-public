@@ -1,0 +1,345 @@
+{
+  "metadata": {
+    "skill": "qa-testing-mobile",
+    "updated": "2026-07-11",
+    "total_sources": 35,
+    "description": "Curated primary sources for mobile testing strategy, automation frameworks, release channels, accessibility, and device lab practices.",
+    "version": "1.6",
+    "title": "QA Testing Mobile - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "platform_docs": [
+      {
+        "name": "Apple XCTest Documentation",
+        "url": "https://developer.apple.com/documentation/xctest",
+        "type": "documentation",
+        "relevance": "Core testing framework for iOS apps and UI automation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Android Testing Documentation",
+        "url": "https://developer.android.com/training/testing",
+        "type": "documentation",
+        "relevance": "Official Android test strategy, unit, and UI testing guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Espresso Documentation",
+        "url": "https://developer.android.com/training/testing/espresso",
+        "type": "documentation",
+        "relevance": "Primary Android UI testing framework reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Android Macrobenchmark",
+        "url": "https://developer.android.com/topic/performance/benchmarking/macrobenchmark-overview",
+        "type": "documentation",
+        "relevance": "Android performance benchmarking for startup/jank regressions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Swift Testing Documentation",
+        "url": "https://developer.apple.com/documentation/testing",
+        "type": "documentation",
+        "relevance": "Modern Swift unit/integration testing framework (complements XCTest; UI tests still use XCUITest).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Jetpack Compose Testing",
+        "url": "https://developer.android.com/develop/ui/compose/testing",
+        "type": "documentation",
+        "relevance": "Compose UI testing APIs and best practices (semantics, test tags, idling).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "XCTest Accessibility Audit",
+        "url": "https://developer.apple.com/documentation/xctest/xcuiapplication/4337463-performaccessibilityaudit",
+        "type": "documentation",
+        "relevance": "Apple accessibility audit API for UI test coverage and release gates.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Xcode 26 Release Notes",
+        "url": "https://developer.apple.com/documentation/xcode-release-notes/xcode-26-release-notes",
+        "type": "documentation",
+        "relevance": "Primary source for Xcode 26 known issues affecting test workflows: Allocations instrument miss-reporting for native Swift types, Coding Assistant Cancel unreliability, and default TLS Client Hello changes that can break staging test tiers.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apple Developer Forums 762217 — UNUserNotificationCenter delegate isolation",
+        "url": "https://developer.apple.com/forums/thread/762217",
+        "type": "forum",
+        "relevance": "Push-path crash class that must be validated during iOS push QA. Transport proof and app-open proof are separate gates.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apple Developer Forums 796407 — Swift 6 UNUserNotificationCenter crash",
+        "url": "https://developer.apple.com/forums/thread/796407",
+        "type": "forum",
+        "relevance": "Swift 6 strict-concurrency runtime check on UNUserNotificationCenter — affects test-harness auth-request flows and push smoke tests.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Compose Accessibility Testing",
+        "url": "https://developer.android.com/develop/ui/compose/accessibility/testing",
+        "type": "documentation",
+        "relevance": "Android accessibility testing guidance for Compose-based UIs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apple TestFlight",
+        "url": "https://developer.apple.com/testflight/",
+        "type": "documentation",
+        "relevance": "Current iOS beta distribution and pre-release validation workflow.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Play Pre-Launch Reports",
+        "url": "https://support.google.com/googleplay/android-developer/answer/9842757",
+        "type": "documentation",
+        "relevance": "Android store-side automated device testing before rollout.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "automation_tools": [
+      {
+        "name": "Appium 3 Migration Guide",
+        "url": "https://appium.io/docs/en/3.1/guides/migrating-2-to-3/",
+        "type": "tool",
+        "relevance": "Appium 3.x migration from 2.x: drops JSON Wire Protocol entirely (W3C only), requires Node ^20.19.0 || ^22.12.0 || >=24.0.0. Simpler migration than 1.x to 2.x. Latest stable is 3.5.x as of 2026-06 (github.com/appium/appium/releases).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Detox Documentation",
+        "url": "https://wix.github.io/Detox/",
+        "type": "tool",
+        "relevance": "End-to-end testing for React Native apps.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Maestro Documentation",
+        "url": "https://docs.maestro.dev/",
+        "type": "tool",
+        "relevance": "Cross-platform mobile UI testing with YAML flows (smoke/regression breadth). Maestro MCP, Maestro Studio, and Maestro Cloud docs. Old domain maestro.mobile.dev redirects here.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Maestro MCP Server Documentation",
+        "url": "https://docs.maestro.dev/get-started/maestro-mcp",
+        "type": "documentation",
+        "relevance": "Official Maestro MCP setup: integrating Maestro with Claude Code, Claude Desktop, Cursor, Codex, and other AI IDEs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Flutter integration_test",
+        "url": "https://docs.flutter.dev/testing/integration-tests",
+        "type": "documentation",
+        "relevance": "Official Flutter integration test guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Patrol (Flutter E2E)",
+        "url": "https://patrol.leancode.co/",
+        "type": "tool",
+        "relevance": "Flutter E2E testing framework built on top of integration_test.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React Native Testing Overview",
+        "url": "https://reactnative.dev/docs/testing-overview",
+        "type": "documentation",
+        "relevance": "Official React Native testing guidance across unit, component, and end-to-end layers.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "EAS Build and Submit (Expo)",
+        "url": "https://expo.dev/eas",
+        "type": "tool",
+        "relevance": "Canonical CI binary pipeline for React Native / Expo: cloud-builds signed IPA/AAB and submits to TestFlight and Play Store.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Kotlin Multiplatform Run Tests",
+        "url": "https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-run-tests.html",
+        "type": "documentation",
+        "relevance": "Official Kotlin Multiplatform test execution guidance for shared and platform tests.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Patrol 4.0 Release — LeanCode",
+        "url": "https://leancode.co/blog/patrol-4-0-release",
+        "type": "documentation",
+        "relevance": "Patrol 4.0 (December 2025): Flutter Web support, VS Code extension with working patrolTest() play button, improved debugging. Superseded by 4.6.x as of 2026-07; see Patrol MCP entry below for the current AI-agent integration.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Patrol MCP Release — LeanCode",
+        "url": "https://leancode.co/blog/patrol-mcp-release",
+        "type": "documentation",
+        "relevance": "Patrol MCP: exposes `patrol develop` to AI coding agents (Claude Code, Cursor) for AI-assisted authoring/running/debugging of Flutter E2E tests. Flutter-ecosystem analogue of Maestro MCP. Stable Patrol release is 4.6.x as of 2026-07-11.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "React Native 0.82 — New Architecture Only",
+        "url": "https://reactnative.dev/blog/2025/10/08/react-native-0.82",
+        "type": "documentation",
+        "relevance": "React Native 0.82 removes the option to disable the New Architecture. New Architecture was the default since 0.76 (Oct 2024). Testing implication: Detox must be compatible with the installed RN version; confirm before upgrading.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-06-09"
+      }
+    ],
+    "device_labs": [
+      {
+        "name": "Firebase Test Lab",
+        "url": "https://firebase.google.com/docs/test-lab",
+        "type": "service",
+        "relevance": "Device lab for automated and exploratory mobile testing.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Device Farm",
+        "url": "https://docs.aws.amazon.com/devicefarm/",
+        "type": "service",
+        "relevance": "Cloud device testing and CI integration.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Device Farm Pricing",
+        "url": "https://aws.amazon.com/device-farm/pricing/",
+        "type": "pricing",
+        "relevance": "Live pricing and quota reference for procurement and budgeting.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "BrowserStack App Automate",
+        "url": "https://www.browserstack.com/app-automate",
+        "type": "service",
+        "relevance": "Device cloud for mobile automation and debugging.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "BrowserStack Maestro Getting Started",
+        "url": "https://www.browserstack.com/docs/app-automate/maestro/getting-started",
+        "type": "documentation",
+        "relevance": "Current BrowserStack guidance for running Maestro tests in App Automate.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Firebase Test Lab Quotas And Pricing",
+        "url": "https://firebase.google.com/pricing",
+        "type": "pricing",
+        "relevance": "Current Firebase pricing and quota guidance used for Test Lab budgeting.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Bitrise Virtual Device Testing",
+        "url": "https://docs.bitrise.io/en/testing/testing-ios-apps-on-virtual-devices.html",
+        "type": "service",
+        "relevance": "Bitrise-hosted mobile CI testing path for simulator and virtual-device workflows.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "App Percy — BrowserStack Native App Visual Testing",
+        "url": "https://www.browserstack.com/app-percy",
+        "type": "service",
+        "relevance": "BrowserStack's dedicated visual regression platform for native iOS and Android apps. Includes Visual Review Agent (AI-powered bounding boxes and natural-language change summaries, 3x faster review). Distinct from Percy (which covers web/hybrid). Access to 30,000+ real devices.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "last_verified": "2026-06-09"
+      }
+    ],
+    "accessibility_tools": [
+      {
+        "name": "axe DevTools for Mobile — Deque",
+        "url": "https://www.deque.com/axe/devtools/mobile-accessibility/",
+        "type": "tool",
+        "relevance": "Automated accessibility testing for native iOS and Android apps (and React Native, Flutter, .NET MAUI). Mobile analogue of axe-core: WCAG-mapped rule engine runs against native accessibility trees. Complements — does not replace — manual VoiceOver and TalkBack verification.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "last_verified": "2026-05"
+      },
+      {
+        "name": "axe DevTools Mobile Documentation — Deque Docs",
+        "url": "https://docs.deque.com/devtools-mobile/",
+        "type": "documentation",
+        "relevance": "Official axe DevTools Mobile reference: iOS and Android setup, XCUITest and Appium integration, CI/CD pipeline integration, and rule reference.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05"
+      }
+    ]
+  }
+}

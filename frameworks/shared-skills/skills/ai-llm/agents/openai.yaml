@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM Engineering"
+  short_description: "Guides the LLM lifecycle from strategy to deployment"
+  default_prompt: "Use $ai-llm for Guides the LLM lifecycle from strategy to deployment. Use when planning, comparing, fine-tuning, migrating, or operating LLM systems."

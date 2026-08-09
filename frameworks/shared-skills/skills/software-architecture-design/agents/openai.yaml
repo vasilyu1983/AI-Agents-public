@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Design"
+  short_description: "Designs runtime and platform architecture inside a chosen solution"
+  default_prompt: "Use $software-architecture-design for Designs runtime and platform architecture inside a chosen solution. Use when deciding modular monolith vs services, consistency, resilience, or estate topology."

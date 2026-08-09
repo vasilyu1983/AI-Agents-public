@@ -1,0 +1,4 @@
+interface:
+  display_name: "Consumer Neuroscience Foundations"
+  short_description: "Applies consumer-neuroscience primitives for attention, arousal, memory, reward"
+  default_prompt: "Use $foundations-consumer-neuroscience for attention, salience, arousal, bonding, narrative, approach-avoidance, memory, reward anticipation, embodiment, predictive processing, or ethical neuro-marketing."

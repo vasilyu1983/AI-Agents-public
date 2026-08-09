@@ -1,0 +1,171 @@
+{
+  "metadata": {
+    "skill": "qa-testing-ios",
+    "updated": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "version": "3.3",
+    "total_sources": 20,
+    "description": "Primary references for iOS testing automation with Swift Testing, XCTest/XCUITest, simctl, xcresult, and CI environment drift checks.",
+    "title": "QA Testing Ios - Sources"
+  },
+  "categories": {
+    "apple_official_docs": [
+      {
+        "name": "Swift Testing Documentation",
+        "url": "https://developer.apple.com/documentation/testing",
+        "description": "Primary reference for the Testing module, traits, tags, parameterized tests, and migration guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Swift Testing Overview",
+        "url": "https://developer.apple.com/xcode/swift-testing",
+        "description": "Apple product overview for Swift Testing. Useful for orientation, but verify behavior against API docs and release notes.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "XCTest Documentation",
+        "url": "https://developer.apple.com/documentation/xctest",
+        "description": "Primary reference for XCTest, XCUITest, performance testing, and result reporting.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "simctl Documentation",
+        "url": "https://developer.apple.com/documentation/xcode/simctl",
+        "description": "Primary reference for simulator automation and device state control.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Testing Your Apps in Xcode",
+        "url": "https://developer.apple.com/documentation/xcode/testing-your-apps-in-xcode",
+        "description": "Apple guidance on organizing tests, test plans, execution, and results in Xcode.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Xcode Release Notes Index",
+        "url": "https://developer.apple.com/documentation/xcode-release-notes/",
+        "description": "Canonical entry point for current Xcode release notes when command behavior or tooling changes may have shifted.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Xcode 26 Release Notes",
+        "url": "https://developer.apple.com/documentation/xcode-release-notes/xcode-26-release-notes",
+        "description": "Current major-version release notes for the Xcode 26 family.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "WWDC25: Record, replay, and review: UI automation with Xcode",
+        "url": "https://developer.apple.com/videos/play/wwdc2025/344",
+        "description": "Apple session covering modern UI automation workflows, test plans, and reviewing artifacts. Primary source for Xcode 26 UI automation recording authoring flow.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-05"
+      },
+      {
+        "name": "WWDC25: What's new in Xcode 26",
+        "url": "https://developer.apple.com/videos/play/wwdc2025/247",
+        "description": "Xcode 26 overview session. Confirms the new UI automation recording code-generation system and the Automation Explorer in test reports.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-05"
+      },
+      {
+        "name": "Recording UI automation for testing (Apple Developer Documentation)",
+        "url": "https://developer.apple.com/documentation/XCUIAutomation/recording-ui-automation-for-testing",
+        "description": "Apple reference documenting the Xcode 26 UI recording workflow: Start Recording button, query selection (identifier vs label vs predicate), and post-recording review steps.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-05"
+      },
+      {
+        "name": "WWDC24: Meet Swift Testing",
+        "url": "https://developer.apple.com/videos/play/wwdc2024/10179/",
+        "description": "Apple introduction to the Testing module and its core model.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "ci_environment_checks": [
+      {
+        "name": "GitHub Actions Runner Images",
+        "url": "https://github.com/actions/runner-images",
+        "description": "Source of truth for available macOS labels, Xcode support policy, and runner drift when using GitHub Actions.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Xcode Cloud Release Notes",
+        "url": "https://developer.apple.com/xcode-cloud/release-notes/",
+        "description": "Current Xcode Cloud environment changes, known issues, and supported Xcode versions.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Xcode Cloud Overview and Pricing",
+        "url": "https://developer.apple.com/xcode-cloud/",
+        "description": "Current compute-hour pricing tiers. As of 2026-07-11: 25 hours/month included with Apple Developer Program, then $49.99/100hrs up to $3,999.99/10,000hrs. Re-verify before budgeting.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "GitHub Actions Runner Pricing",
+        "url": "https://docs.github.com/en/billing/reference/actions-runner-pricing",
+        "description": "Current per-minute rates and included-minute multipliers for hosted runners. As of the Jan 1, 2026 repricing: macOS (3-4 core) ~$0.062/min overage, 10x multiplier against included minutes vs Linux x86. Re-verify before budgeting.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "snapshot_testing": [
+      {
+        "name": "swift-snapshot-testing Releases",
+        "url": "https://github.com/pointfreeco/swift-snapshot-testing/releases",
+        "description": "Use this to verify the current package version before copying a dependency snippet. Latest as of 2026-07-11: 1.19.3.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "swift-snapshot-testing issue #1089: crash on iOS 26.2 simulator",
+        "url": "https://github.com/pointfreeco/swift-snapshot-testing/issues/1089",
+        "description": "Open issue as of mid-2026: crash in add(traits:viewController:to:) on iOS 26.2 simulator across every snapshot strategy. Check status before pinning Xcode 26.2 / iOS 26.2 for a snapshot-test lane.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "xcode_26_testing": [
+      {
+        "name": "Xcode 26.4 Release Notes",
+        "url": "https://developer.apple.com/documentation/xcode-release-notes/xcode-26_4-release-notes",
+        "description": "Release notes for Xcode 26.4 (shipped March 24, 2026, with Swift 6.3). Confirms the XCTAssert-inside-@Test runtime-warning change and Swift Testing image-attachment refinements beyond the initial Xcode 26 release.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Swift Testing What's New (Swift 6.2/Xcode 26) — Swift Forums",
+        "url": "https://forums.swift.org/t/whats-new-in-testing-swift-6-2-xcode-26/80688",
+        "description": "Community roundup of Swift Testing changes since Swift 6.0: runtime issue detection, issue handling traits, XCTest interop changes. Authoritative bridge between WWDC sessions and what landed in the SDK.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "macOS 26 GitHub Actions Runner — GA Announcement",
+        "url": "https://github.blog/changelog/2026-02-26-macos-26-is-now-generally-available-for-github-hosted-runners/",
+        "description": "Official GA announcement for macos-26 runner image. Confirms arm64 availability, base Xcode version, and migration path from macos-15. macos-latest began migrating to macos-26 starting June 15, 2026.",
+        "add_as_web_search": false,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      }
+    ]
+  }
+}

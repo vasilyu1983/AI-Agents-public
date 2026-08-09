@@ -1,0 +1,23 @@
+# pnpm-workspace.yaml
+# Baseline for pnpm workspaces and build-script controls.
+
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "libs/*"
+  - "tools/*"
+  - "!**/dist/**"
+  - "!**/node_modules/**"
+
+# Delay adoption of freshly published packages in high-sensitivity repos.
+# Value is minutes; 1440 = 24 hours.
+minimumReleaseAge: 1440
+
+# Limit which dependencies may run install/build scripts.
+# Populate this allowlist with real packages used by the repo.
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+
+# Track packages whose build scripts should stay blocked.
+ignoredBuiltDependencies: []

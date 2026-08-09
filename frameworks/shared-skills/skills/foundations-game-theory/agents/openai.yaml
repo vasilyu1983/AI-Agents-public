@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Theory Foundations"
+  short_description: "Applies game-theory primitives for strategic AI systems"
+  default_prompt: "Use $foundations-game-theory for auctions, incentives, attribution, negotiation, debate, trust, or multi-agent coordination."

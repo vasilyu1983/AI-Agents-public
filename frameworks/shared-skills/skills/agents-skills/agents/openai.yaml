@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Skills"
+  short_description: "Creates and audits agent skills, references, scripts, and metadata"
+  default_prompt: "Use $agents-skills for Creates and audits agent skills with SKILL.md, references, scripts, and platform-scoped metadata. Use when creating, updating, or validating shared skills."

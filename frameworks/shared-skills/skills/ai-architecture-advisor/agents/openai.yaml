@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Architecture Advisor"
+  short_description: "Chooses among AI/ML approaches: classical ML, LLM, RAG, fine-tuning, agents"
+  default_prompt: "Use $ai-architecture-advisor to choose among AI/ML approaches: classical ML, LLM, RAG, fine-tuning, agents, multimodal, embeddings. Use when picking or scaling an architecture."

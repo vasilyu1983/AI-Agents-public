@@ -1,0 +1,317 @@
+{
+  "metadata": {
+    "title": "AI LLM Inference - Sources",
+    "description": "Primary references for July 2026 LLM inference guidance across runtimes, routing, disaggregation, quantization, and observability.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 47,
+    "skill": "ai-llm-inference"
+  },
+  "official_runtime_docs": [
+    {
+      "name": "vLLM Documentation",
+      "url": "https://docs.vllm.ai/",
+      "description": "Primary docs for vLLM serving, engine args, features, and deployment behavior.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "vLLM Structured Outputs",
+      "url": "https://docs.vllm.ai/en/latest/features/structured_outputs/",
+      "description": "Current structured-output behavior, reasoning interaction, and backend configuration.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "vLLM Disaggregated Prefilling",
+      "url": "https://docs.vllm.ai/en/latest/features/disagg_prefill/",
+      "description": "Experimental prefill/decode split guidance and caveats for vLLM.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "vLLM Disaggregated Encoder",
+      "url": "https://docs.vllm.ai/en/latest/features/disagg_encoder/",
+      "description": "Multimodal encoder/decode separation guidance.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "vLLM Quantization Docs",
+      "url": "https://docs.vllm.ai/en/stable/features/quantization/",
+      "description": "Runtime-native quantization support and format references.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "vLLM INT8 W8A8",
+      "url": "https://docs.vllm.ai/en/stable/features/quantization/int8.html",
+      "description": "Important runtime-specific caveats for INT8 W8A8 support.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SGLang Documentation",
+      "url": "https://docs.sglang.io/",
+      "description": "Primary docs for SGLang runtime behavior, advanced features, and server configuration.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SGLang Quantization",
+      "url": "https://docs.sglang.io/docs/advanced_features/quantization",
+      "description": "SGLang quantization docs (FP8, FP4/NVFP4, MXFP4/MXFP8, INT4/INT8 W8A8, AWQ, GPTQ, compressed-tensors, quark, gguf, quantized KV cache). The path moved from advanced_features/quantization.html (404) to docs/advanced_features/quantization; page now resolves. Verified 2026-07-11.",
+      "add_as_web_search": true,
+      "last_verified": "2026-07-11"
+    },
+    {
+      "name": "SGLang Structured Outputs",
+      "url": "https://docs.sglang.io/advanced_features/structured_outputs.html",
+      "description": "Grammar-backed structured outputs with JSON schema, regex, and EBNF.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SGLang Structured Outputs For Reasoning Models",
+      "url": "https://docs.sglang.io/advanced_features/structured_outputs_for_reasoning_models.html",
+      "description": "Reasoning-parser interaction with constrained decoding.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SGLang PD Disaggregation",
+      "url": "https://docs.sglang.io/advanced_features/pd_disaggregation.html",
+      "description": "Prefill/decode separation guidance, transfer backends, and routing notes.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SGLang EPD Disaggregation",
+      "url": "https://docs.sglang.io/advanced_features/epd_disaggregation.html",
+      "description": "Encoder-prefill-decode separation for multimodal and advanced serving topologies.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SGLang LoRA Serving",
+      "url": "https://docs.sglang.io/advanced_features/lora.html",
+      "description": "Multi-LoRA, dynamic loading, pinning, and concurrency controls.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SGLang HiCache",
+      "url": "https://docs.sglang.io/advanced_features/hicache.html",
+      "description": "Hierarchical KV caching for longer-context and reuse-heavy workloads.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SGLang Model Gateway",
+      "url": "https://docs.sglang.io/advanced_features/sgl_model_gateway.html",
+      "description": "Control-plane and routing docs for large-scale SGLang fleets.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SGLang DP Router",
+      "url": "https://docs.sglang.io/advanced_features/dp_dpa_smg_guide.html",
+      "description": "Current DP, DPA, and SGLang Model Gateway routing guide for production data-parallel serving.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TensorRT-LLM Documentation",
+      "url": "https://nvidia.github.io/TensorRT-LLM/",
+      "description": "Primary docs for TensorRT-LLM serving, build flow, and runtime features.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TensorRT-LLM Numerical Precision",
+      "url": "https://nvidia.github.io/TensorRT-LLM/reference/precision.html",
+      "description": "Precision modes and supported deployment paths for TensorRT-LLM.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TensorRT-LLM KV Cache Reuse",
+      "url": "https://nvidia.github.io/TensorRT-LLM/advanced/kv-cache-reuse.html",
+      "description": "Priority-based eviction, reuse controls, and cache event support.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TensorRT-LLM Disaggregated Serving",
+      "url": "https://nvidia.github.io/TensorRT-LLM/features/disagg-serving.html",
+      "description": "Current TensorRT-LLM disaggregated serving topology and operational guidance.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "llama.cpp",
+      "url": "https://github.com/ggerganov/llama.cpp",
+      "description": "Reference runtime for GGUF and CPU or edge inference.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "vLLM V1 Engine Guide",
+      "url": "https://docs.vllm.ai/en/stable/usage/v1_guide/",
+      "description": "V1 engine guide documenting V0 deprecation and removed APIs: best_of, GPU-CPU KV swap, per-request logits processors, request-level structured output backend. Verified 2026-05-17.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "vLLM V1 Metrics Design",
+      "url": "https://docs.vllm.ai/en/stable/design/v1/metrics.html",
+      "description": "V1 Prometheus metrics API. Replaces V0 engine.get_stats() dict-access pattern. Exposes /metrics endpoint with vllm: prefix. Verified 2026-05-17.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "vLLM Speculative Decoding",
+      "url": "https://docs.vllm.ai/en/stable/features/speculative_decoding/",
+      "description": "vLLM supported speculative decoding algorithms: EAGLE, MTP, Draft Model, PARD, MLP, N-Gram, Suffix. Verified 2026-05-17.",
+      "add_as_web_search": true
+    }
+  ],
+  "routing_and_control_planes": [
+    {
+      "name": "vLLM Production Stack",
+      "url": "https://docs.vllm.ai/projects/production-stack/",
+      "description": "Reference cluster stack for vLLM with Helm-based K8s deployment, model/prefix-aware routing, and LMCache KV offloading. The URL moved from blog.vllm.ai/production-stack/ (which 404s) to docs.vllm.ai/projects/production-stack/ under the main docs site.",
+      "add_as_web_search": true,
+      "last_verified": "2026-07-11"
+    },
+    {
+      "name": "NVIDIA vLLM Release Notes",
+      "url": "https://docs.nvidia.com/deeplearning/frameworks/vllm-release-notes/index.html",
+      "description": "NVIDIA Optimized Frameworks vLLM release notes covering versions 25.09 through 26.04. NVIDIA-packaged builds, pull instructions, and integration notes for NVIDIA hardware.",
+      "add_as_web_search": true,
+      "last_verified": "2026-06-09"
+    },
+    {
+      "name": "Dynamo (open-source, Apache 2.0)",
+      "url": "https://github.com/ai-dynamo/dynamo",
+      "description": "Open-source multi-cloud inference orchestration. Supports AWS EKS, GKE. Used by Moonshot AI, Mistral AI, Baseten, Alibaba. Apache 2.0. Verified 2026-05-17.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LMCache",
+      "url": "https://lmcache.ai/",
+      "description": "Open-source KV cache Knowledge Delivery Network. CPU DRAM KV offload, integrates with vLLM and TGI. V1 compatibility: verify at github.com/LMCache/LMCache. Verified 2026-05-17.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "vLLM Semantic Router Iris",
+      "url": "https://blog.vllm.ai/2026/01/05/vllm-sr-iris.html",
+      "description": "Current vLLM routing layer focused on model routing, safety, and semantic caching.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "llm-d Quick Start",
+      "url": "https://llm-d.ai/docs/guide/Installation/quickstart",
+      "description": "Entry point for llm-d deployment and operational model.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "llm-d Architecture Overview",
+      "url": "https://llm-d.ai/docs/architecture",
+      "description": "Kubernetes-native distributed inference architecture with KV-aware routing and disaggregation.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "llm-d Inference Router Architecture",
+      "url": "https://llm-d.ai/docs/architecture/Components/inference-scheduler",
+      "description": "Routing signals, scorers, and phase-aware scheduling architecture.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "llm-d Precise Prefix Cache Aware Routing",
+      "url": "https://llm-d.ai/docs/guide/Installation/precise-prefix-cache-aware",
+      "description": "Concrete guide for KV-events based prefix-aware scheduling.",
+      "add_as_web_search": true
+    }
+  ],
+  "foundational_papers": [
+    {
+      "name": "vLLM: Easy and Fast LLM Serving with PagedAttention",
+      "url": "https://arxiv.org/abs/2309.06180",
+      "description": "Foundational paper for KV-cache-aware serving and paging.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Orca: A Distributed Serving System for Transformer-Based Generative Models",
+      "url": "https://www.usenix.org/conference/osdi22/presentation/yu",
+      "description": "Foundational scheduling and iteration-level batching paper.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "DistServe: Disaggregating Prefill and Decoding",
+      "url": "https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf",
+      "description": "Foundational paper for prefill/decode disaggregation.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty",
+      "url": "https://arxiv.org/abs/2401.15077",
+      "description": "EAGLE speculative decoding algorithm. Draft head on target model hidden states.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Medusa: Simple LLM Inference Acceleration Framework",
+      "url": "https://arxiv.org/abs/2401.10774",
+      "description": "Medusa multi-head speculative decoding algorithm.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "DeepSeek-V3 Technical Report (MTP)",
+      "url": "https://arxiv.org/abs/2412.19437",
+      "description": "DeepSeek-V3 architecture including native Multi-Token Prediction (MTP) heads.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Mixtral MoE Architecture Reference",
+      "url": "https://arxiv.org/abs/2401.04088",
+      "description": "Mixtral MoE architecture paper for expert parallelism context.",
+      "add_as_web_search": false
+    }
+  ],
+  "observability_and_safety": [
+    {
+      "name": "OpenTelemetry Semantic Conventions for GenAI",
+      "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+      "description": "Canonical telemetry vocabulary for request, token, and model metrics.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OWASP Top 10 for LLM Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "description": "Security baseline for inference-facing applications and APIs.",
+      "add_as_web_search": true
+    }
+  ],
+  "architecture_and_attention_serving": [
+    {
+      "name": "SmoothQuant: Accurate and Efficient Post-Training Quantization for LLMs (Xiao et al. 2022)",
+      "url": "https://arxiv.org/abs/2211.10438",
+      "type": "paper",
+      "description": "Migrates quantization difficulty from activation outliers to weights via per-channel scaling — why W8A8 needs calibration and how it avoids the outlier-feature failure that breaks naive INT8 activations.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Efficient Streaming Language Models with Attention Sinks (Xiao et al. 2023)",
+      "url": "https://arxiv.org/abs/2309.17453",
+      "type": "paper",
+      "description": "StreamingLLM: keep sink tokens + a rolling recent window for fixed-memory effectively-infinite decoding; the canonical long-context serving workaround and its middle-context cost.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Ring Attention with Blockwise Transformers for Near-Infinite Context (Liu et al. 2023)",
+      "url": "https://arxiv.org/abs/2310.01889",
+      "type": "paper",
+      "description": "Sequence-parallel attention distributing KV across devices for >1M-token context; grounds the ring-attention long-context serving option.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Efficiently Scaling Transformer Inference (Pope et al. 2022)",
+      "url": "https://arxiv.org/abs/2211.05102",
+      "type": "paper",
+      "description": "Memory-bandwidth-bound decode vs compute-bound prefill, arithmetic-intensity / roofline analysis, and the batching-vs-latency tradeoff that the roofline section builds on.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Insights into DeepSeek-V3: Scaling Challenges and Hardware for AI (2025)",
+      "url": "https://arxiv.org/abs/2505.09343",
+      "type": "research",
+      "description": "MLA KV-cache economics: DeepSeek-V3 ~70 KB/token vs ~192-328 KB/token for GQA models; 576-dim latent (512 KV + 64 decoupled RoPE). Source for the 2.7-4.7x reduction figures.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "P-EAGLE: Parallel Speculative Decoding in vLLM (vLLM blog, 2026)",
+      "url": "https://vllm.ai/blog/2026-03-13-p-eagle",
+      "type": "blog",
+      "description": "Parallel draft generation on top of EAGLE-3 (~1.05-1.69x over vanilla EAGLE-3), integrated into vLLM. Marker that EAGLE-3 is now production-standard, not a preview.",
+      "add_as_web_search": true
+    }
+  ]
+}

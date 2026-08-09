@@ -1,0 +1,4 @@
+interface:
+  display_name: "Network Science Foundations"
+  short_description: "Applies network science to graph systems"
+  default_prompt: "Use $foundations-network-science for centrality, PageRank, community detection, small-world networks, scale-free networks, percolation, SIR contagion, link prediction, clustering, graph embeddings, or temporal networks."

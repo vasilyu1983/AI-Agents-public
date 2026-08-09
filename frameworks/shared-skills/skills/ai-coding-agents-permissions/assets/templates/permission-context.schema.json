@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skills.ai-coding-agents/permissions/permission-context.schema.json",
+  "title": "PermissionContext",
+  "description": "The typed runtime context passed to the permission-decision function when an agent requests a tool call. Represents all facts available at decision time.",
+  "type": "object",
+  "required": ["request_id", "session", "tool", "decision_required_by"],
+  "additionalProperties": false,
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "description": "Unique ID for this permission request. Used to correlate allow/deny responses with pending requests."
+    },
+    "decision_required_by": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Deadline for the decision. If no response by this time, the runtime defaults to 'deny'."
+    },
+    "session": {
+      "type": "object",
+      "required": ["session_id", "agent_id", "turn"],
+      "additionalProperties": false,
+      "description": "Context about the session making the request.",
+      "properties": {
+        "session_id": { "type": "string" },
+        "agent_id": { "type": "string", "description": "ID of the agent definition (e.g. YAML name or .md filename stem)." },
+        "agent_source": {
+          "type": "string",
+          "enum": ["builtin", "project", "user", "plugin", "remote"],
+          "description": "Origin of the agent definition. 'remote' means the agent was spawned from a remote-runtime or ACP delegation."
+        },
+        "turn": { "type": "integer", "minimum": 0 },
+        "task_id": { "type": ["string", "null"] },
+        "is_subagent": { "type": "boolean", "description": "True if this session was spawned by an orchestrator agent." },
+        "parent_session_id": { "type": ["string", "null"] }
+      }
+    },
+    "tool": {
+      "type": "object",
+      "required": ["name", "arguments"],
+      "additionalProperties": false,
+      "description": "The tool being requested and the arguments it was called with.",
+      "properties": {
+        "name": { "type": "string", "description": "Tool name (e.g. 'Bash', 'Edit', 'mcp__github__create_pr')." },
+        "source": {
+          "type": "string",
+          "enum": ["builtin", "mcp", "plugin", "remote"],
+          "description": "Where the tool is registered."
+        },
+        "arguments": {
+          "type": "object",
+          "description": "Raw arguments object passed to the tool. Structure is tool-specific.",
+          "additionalProperties": true
+        },
+        "estimated_side_effects": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["file_read", "file_write", "file_delete", "process_exec", "network_outbound", "network_inbound", "env_read", "env_write"]
+          },
+          "description": "Side-effect categories predicted by static analysis of the tool and arguments. Advisory only."
+        },
+        "is_destructive": {
+          "type": "boolean",
+          "description": "True if the tool is classified as destructive (delete, overwrite, exec with side effects)."
+        }
+      }
+    },
+    "policy_match": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The policy rule that matched this request, if any. Null means no explicit rule; default behavior applies.",
+      "properties": {
+        "rule_id": { "type": "string" },
+        "rule_source": {
+          "type": "string",
+          "enum": ["builtin_default", "project_settings", "user_settings", "managed_policy"]
+        },
+        "decision": {
+          "type": "string",
+          "enum": ["allow", "ask", "deny"]
+        },
+        "matched_pattern": {
+          "type": "string",
+          "description": "The glob or regex pattern in the rule that matched this tool call."
+        }
+      }
+    },
+    "approval_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Additional context to surface in the approval UI when decision = 'ask'.",
+      "properties": {
+        "display_tool_name": { "type": "string" },
+        "display_arguments_summary": { "type": "string", "description": "Human-readable summary of the arguments (not the raw object)." },
+        "risk_label": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"],
+          "description": "Risk label to show in the approval prompt."
+        },
+        "suggested_decision": {
+          "type": "string",
+          "enum": ["allow", "deny"],
+          "description": "The runtime's suggested decision based on policy and heuristics."
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "request_id": "perm_01j9kx2fvg3b4h7r",
+      "decision_required_by": "2026-04-27T14:22:31.000Z",
+      "session": {
+        "session_id": "sess_01j9kx2fvg3b4h7r",
+        "agent_id": "code-reviewer",
+        "agent_source": "project",
+        "turn": 3,
+        "task_id": null,
+        "is_subagent": false,
+        "parent_session_id": null
+      },
+      "tool": {
+        "name": "Bash",
+        "source": "builtin",
+        "arguments": { "command": "rm -rf dist/" },
+        "estimated_side_effects": ["process_exec", "file_delete"],
+        "is_destructive": true
+      },
+      "policy_match": {
+        "rule_id": "destructive-bash-ask",
+        "rule_source": "project_settings",
+        "decision": "ask",
+        "matched_pattern": "Bash(rm *)"
+      },
+      "approval_context": {
+        "display_tool_name": "Bash",
+        "display_arguments_summary": "Delete 'dist/' directory recursively",
+        "risk_label": "high",
+        "suggested_decision": "deny"
+      }
+    }
+  ]
+}

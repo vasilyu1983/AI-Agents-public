@@ -1,0 +1,618 @@
+{
+  "meta": {
+    "portfolio_name": "claude-code",
+    "portfolio": "Claude Code",
+    "generated_at": "2026-04-03T12:00:00+00:00",
+    "version": "1.0",
+    "graph_contract_version": "1.1",
+    "build_source": "profiles",
+    "node_count": 23,
+    "edge_count": 40,
+    "portfolio_metrics": {
+      "repo_count": 1,
+      "provider_count": 6,
+      "process_count": 7
+    }
+  },
+  "nodes": [
+    {
+      "id": "claude_code",
+      "type": "repo",
+      "label": "claude_code",
+      "domain": "Documents",
+      "summary": "Modular TypeScript/Bun coding-agent runtime with a React terminal UI, remote-session bridge, MCP entrypoints, plugin and skill loading, and worktree-aware execution.",
+      "tags": [
+        "ai-coding-agents",
+        "terminal-ui",
+        "remote-runtime",
+        "mcp",
+        "worktrees"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "documents",
+      "type": "domain",
+      "label": "Documents",
+      "summary": "Local document portfolio grouping for repo snapshots stored under the user's Documents directory.",
+      "tags": [
+        "portfolio-root"
+      ],
+      "confidence": 1
+    },
+    {
+      "id": "provider-bun",
+      "type": "provider",
+      "label": "Bun",
+      "domain": "Documents",
+      "summary": "Runtime and build feature provider used by setup and startup code.",
+      "tags": [
+        "runtime",
+        "build-tool"
+      ],
+      "confidence": 0.82
+    },
+    {
+      "id": "provider-anthropic-sdk",
+      "type": "provider",
+      "label": "Anthropic SDK",
+      "domain": "Documents",
+      "summary": "Primary model SDK dependency for message types, streaming, and API error handling.",
+      "tags": [
+        "llm",
+        "sdk"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "provider-mcp-sdk",
+      "type": "provider",
+      "label": "Model Context Protocol SDK",
+      "domain": "Documents",
+      "summary": "Protocol SDK used for MCP server entrypoints and MCP-aware tool types.",
+      "tags": [
+        "mcp",
+        "sdk"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "provider-axios",
+      "type": "provider",
+      "label": "Axios",
+      "domain": "Documents",
+      "summary": "HTTP client used across bridge, analytics, and transport flows.",
+      "tags": [
+        "http",
+        "client"
+      ],
+      "confidence": 0.82
+    },
+    {
+      "id": "provider-git",
+      "type": "provider",
+      "label": "Git",
+      "domain": "Documents",
+      "summary": "Repository root and worktree operations depend on Git-aware filesystem behavior.",
+      "tags": [
+        "vcs",
+        "worktrees"
+      ],
+      "confidence": 0.8
+    },
+    {
+      "id": "provider-tmux",
+      "type": "provider",
+      "label": "tmux",
+      "domain": "Documents",
+      "summary": "Optional terminal session isolation layer for worktree and teammate flows.",
+      "tags": [
+        "terminal",
+        "session-isolation"
+      ],
+      "confidence": 0.76
+    },
+    {
+      "id": "process-terminal-agent-runtime",
+      "type": "process",
+      "label": "Terminal Agent Runtime",
+      "domain": "Documents",
+      "summary": "Interactive terminal execution loop that assembles prompts, renders UI messages, and coordinates coding-agent behavior.",
+      "tags": [
+        "terminal-ui",
+        "agent-loop"
+      ],
+      "confidence": 0.88
+    },
+    {
+      "id": "process-remote-session-management",
+      "type": "process",
+      "label": "Remote Session Management",
+      "domain": "Documents",
+      "summary": "Control plane for remote sessions with WebSocket reads, HTTP writes, connection lifecycle, and message routing.",
+      "tags": [
+        "remote-runtime",
+        "sessions"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "process-permission-mediation",
+      "type": "process",
+      "label": "Permission Mediation",
+      "domain": "Documents",
+      "summary": "Maps remote tool approval requests into locally renderable permission flows and fallback tool stubs.",
+      "tags": [
+        "permissions",
+        "approval-flow"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "process-worktree-orchestration",
+      "type": "process",
+      "label": "Worktree Orchestration",
+      "domain": "Documents",
+      "summary": "Creates or switches isolated worktree sessions, resolves canonical repo roots, and coordinates tmux bootstrapping.",
+      "tags": [
+        "worktrees",
+        "session-setup"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "process-plugin-and-skill-loading",
+      "type": "process",
+      "label": "Plugin And Skill Loading",
+      "domain": "Documents",
+      "summary": "Loads plugins, skills, and prompt parts while avoiding startup races and stale configuration snapshots.",
+      "tags": [
+        "plugins",
+        "skills"
+      ],
+      "confidence": 0.84
+    },
+    {
+      "id": "process-background-agent-execution",
+      "type": "process",
+      "label": "Background Agent Execution",
+      "domain": "Documents",
+      "summary": "Task model spanning local shell, local agent, remote agent, teammate, workflow, and MCP monitor execution paths.",
+      "tags": [
+        "tasks",
+        "multi-agent"
+      ],
+      "confidence": 0.86
+    },
+    {
+      "id": "process-transport-recovery",
+      "type": "process",
+      "label": "Transport Recovery",
+      "domain": "Documents",
+      "summary": "Stream buffering, serialized writes, reconnect behavior, and bounded recovery paths for network and model output failures.",
+      "tags": [
+        "transport",
+        "recovery"
+      ],
+      "confidence": 0.89
+    },
+    {
+      "id": "artifact-query-ts",
+      "type": "artifact",
+      "label": "query.ts",
+      "domain": "Documents",
+      "parent_id": "claude_code",
+      "summary": "Main query loop with task-budget accounting and max_output_tokens recovery logic.",
+      "tags": [
+        "runtime-spine"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "artifact-query-engine-ts",
+      "type": "artifact",
+      "label": "QueryEngine.ts",
+      "domain": "Documents",
+      "parent_id": "claude_code",
+      "summary": "Persistent execution coordinator for prompt assembly, query execution, and plugin-aware system prompt composition.",
+      "tags": [
+        "runtime-spine"
+      ],
+      "confidence": 0.88
+    },
+    {
+      "id": "artifact-setup-ts",
+      "type": "artifact",
+      "label": "setup.ts",
+      "domain": "Documents",
+      "parent_id": "claude_code",
+      "summary": "Startup lifecycle file covering hooks snapshots, worktree setup, tmux bootstrapping, and file-change watching.",
+      "tags": [
+        "startup"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "artifact-task-ts",
+      "type": "artifact",
+      "label": "Task.ts",
+      "domain": "Documents",
+      "parent_id": "claude_code",
+      "summary": "Task model defining background execution types and lifecycle states.",
+      "tags": [
+        "tasks"
+      ],
+      "confidence": 0.88
+    },
+    {
+      "id": "artifact-remote-session-manager-ts",
+      "type": "artifact",
+      "label": "RemoteSessionManager.ts",
+      "domain": "Documents",
+      "parent_id": "claude_code",
+      "summary": "Remote session manager with message callbacks and permission request handling.",
+      "tags": [
+        "remote-runtime"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "artifact-remote-permission-bridge-ts",
+      "type": "artifact",
+      "label": "remotePermissionBridge.ts",
+      "domain": "Documents",
+      "parent_id": "claude_code",
+      "summary": "Permission bridge that synthesizes assistant messages and fallback tool stubs for remote tools.",
+      "tags": [
+        "permissions"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "artifact-hybrid-transport-ts",
+      "type": "artifact",
+      "label": "HybridTransport.ts",
+      "domain": "Documents",
+      "parent_id": "claude_code",
+      "summary": "Hybrid transport with WebSocket reads, serialized POST writes, batching, and backpressure.",
+      "tags": [
+        "transport"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "artifact-sse-transport-ts",
+      "type": "artifact",
+      "label": "SSETransport.ts",
+      "domain": "Documents",
+      "parent_id": "claude_code",
+      "summary": "SSE transport with resumable sequence tracking and reconnect behavior.",
+      "tags": [
+        "transport"
+      ],
+      "confidence": 0.9
+    }
+  ],
+  "edges": [
+    {
+      "source": "documents",
+      "target": "claude_code",
+      "relation": "contains",
+      "group": "structural",
+      "weight": 1,
+      "confidence": 0.85
+    },
+    {
+      "source": "claude_code",
+      "target": "provider-bun",
+      "relation": "uses_provider",
+      "group": "dependency",
+      "weight": 0.8,
+      "confidence": 0.82
+    },
+    {
+      "source": "claude_code",
+      "target": "provider-anthropic-sdk",
+      "relation": "uses_provider",
+      "group": "dependency",
+      "weight": 0.9,
+      "confidence": 0.9
+    },
+    {
+      "source": "claude_code",
+      "target": "provider-mcp-sdk",
+      "relation": "uses_provider",
+      "group": "dependency",
+      "weight": 0.9,
+      "confidence": 0.9
+    },
+    {
+      "source": "claude_code",
+      "target": "provider-axios",
+      "relation": "uses_provider",
+      "group": "dependency",
+      "weight": 0.7,
+      "confidence": 0.82
+    },
+    {
+      "source": "claude_code",
+      "target": "provider-git",
+      "relation": "uses_provider",
+      "group": "dependency",
+      "weight": 0.8,
+      "confidence": 0.8
+    },
+    {
+      "source": "claude_code",
+      "target": "provider-tmux",
+      "relation": "uses_provider",
+      "group": "dependency",
+      "weight": 0.7,
+      "confidence": 0.76
+    },
+    {
+      "source": "claude_code",
+      "target": "process-terminal-agent-runtime",
+      "relation": "implements_process",
+      "group": "behavioral",
+      "weight": 0.9,
+      "confidence": 0.88
+    },
+    {
+      "source": "claude_code",
+      "target": "process-remote-session-management",
+      "relation": "implements_process",
+      "group": "behavioral",
+      "weight": 0.9,
+      "confidence": 0.9
+    },
+    {
+      "source": "claude_code",
+      "target": "process-permission-mediation",
+      "relation": "implements_process",
+      "group": "behavioral",
+      "weight": 0.9,
+      "confidence": 0.9
+    },
+    {
+      "source": "claude_code",
+      "target": "process-worktree-orchestration",
+      "relation": "implements_process",
+      "group": "behavioral",
+      "weight": 0.9,
+      "confidence": 0.9
+    },
+    {
+      "source": "claude_code",
+      "target": "process-plugin-and-skill-loading",
+      "relation": "implements_process",
+      "group": "behavioral",
+      "weight": 0.8,
+      "confidence": 0.84
+    },
+    {
+      "source": "claude_code",
+      "target": "process-background-agent-execution",
+      "relation": "implements_process",
+      "group": "behavioral",
+      "weight": 0.8,
+      "confidence": 0.86
+    },
+    {
+      "source": "claude_code",
+      "target": "process-transport-recovery",
+      "relation": "implements_process",
+      "group": "behavioral",
+      "weight": 0.9,
+      "confidence": 0.89
+    },
+    {
+      "source": "claude_code",
+      "target": "artifact-query-ts",
+      "relation": "contains",
+      "group": "structural",
+      "weight": 0.95,
+      "confidence": 0.9
+    },
+    {
+      "source": "claude_code",
+      "target": "artifact-query-engine-ts",
+      "relation": "contains",
+      "group": "structural",
+      "weight": 0.95,
+      "confidence": 0.88
+    },
+    {
+      "source": "claude_code",
+      "target": "artifact-setup-ts",
+      "relation": "contains",
+      "group": "structural",
+      "weight": 0.95,
+      "confidence": 0.9
+    },
+    {
+      "source": "claude_code",
+      "target": "artifact-task-ts",
+      "relation": "contains",
+      "group": "structural",
+      "weight": 0.95,
+      "confidence": 0.88
+    },
+    {
+      "source": "claude_code",
+      "target": "artifact-remote-session-manager-ts",
+      "relation": "contains",
+      "group": "structural",
+      "weight": 0.95,
+      "confidence": 0.9
+    },
+    {
+      "source": "claude_code",
+      "target": "artifact-remote-permission-bridge-ts",
+      "relation": "contains",
+      "group": "structural",
+      "weight": 0.95,
+      "confidence": 0.9
+    },
+    {
+      "source": "claude_code",
+      "target": "artifact-hybrid-transport-ts",
+      "relation": "contains",
+      "group": "structural",
+      "weight": 0.95,
+      "confidence": 0.9
+    },
+    {
+      "source": "claude_code",
+      "target": "artifact-sse-transport-ts",
+      "relation": "contains",
+      "group": "structural",
+      "weight": 0.95,
+      "confidence": 0.9
+    },
+    {
+      "source": "artifact-query-ts",
+      "target": "process-terminal-agent-runtime",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.7,
+      "confidence": 0.9
+    },
+    {
+      "source": "artifact-query-ts",
+      "target": "process-background-agent-execution",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.6,
+      "confidence": 0.82
+    },
+    {
+      "source": "artifact-query-ts",
+      "target": "process-transport-recovery",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.6,
+      "confidence": 0.8
+    },
+    {
+      "source": "artifact-query-ts",
+      "target": "provider-anthropic-sdk",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.5,
+      "confidence": 0.86
+    },
+    {
+      "source": "artifact-query-engine-ts",
+      "target": "process-terminal-agent-runtime",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.7,
+      "confidence": 0.86
+    },
+    {
+      "source": "artifact-query-engine-ts",
+      "target": "process-plugin-and-skill-loading",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.7,
+      "confidence": 0.84
+    },
+    {
+      "source": "artifact-setup-ts",
+      "target": "process-worktree-orchestration",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.8,
+      "confidence": 0.9
+    },
+    {
+      "source": "artifact-setup-ts",
+      "target": "process-plugin-and-skill-loading",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.7,
+      "confidence": 0.82
+    },
+    {
+      "source": "artifact-setup-ts",
+      "target": "provider-bun",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.5,
+      "confidence": 0.82
+    },
+    {
+      "source": "artifact-setup-ts",
+      "target": "provider-git",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.5,
+      "confidence": 0.84
+    },
+    {
+      "source": "artifact-setup-ts",
+      "target": "provider-tmux",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.5,
+      "confidence": 0.78
+    },
+    {
+      "source": "artifact-task-ts",
+      "target": "process-background-agent-execution",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.7,
+      "confidence": 0.88
+    },
+    {
+      "source": "artifact-remote-session-manager-ts",
+      "target": "process-remote-session-management",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.8,
+      "confidence": 0.9
+    },
+    {
+      "source": "artifact-remote-session-manager-ts",
+      "target": "process-permission-mediation",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.7,
+      "confidence": 0.82
+    },
+    {
+      "source": "artifact-remote-permission-bridge-ts",
+      "target": "process-permission-mediation",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.8,
+      "confidence": 0.9
+    },
+    {
+      "source": "artifact-hybrid-transport-ts",
+      "target": "process-transport-recovery",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.8,
+      "confidence": 0.9
+    },
+    {
+      "source": "artifact-hybrid-transport-ts",
+      "target": "provider-axios",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.6,
+      "confidence": 0.88
+    },
+    {
+      "source": "artifact-sse-transport-ts",
+      "target": "process-transport-recovery",
+      "relation": "documents",
+      "group": "semantic",
+      "weight": 0.8,
+      "confidence": 0.9
+    }
+  ]
+}

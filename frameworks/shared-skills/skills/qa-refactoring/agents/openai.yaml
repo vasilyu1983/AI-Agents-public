@@ -1,0 +1,4 @@
+interface:
+  display_name: "Refactoring QA"
+  short_description: "Safe refactoring with behavior preservation"
+  default_prompt: "Use $qa-refactoring for Safe refactoring with behavior preservation. Use when reducing technical debt, planning codemods, applying strangler migrations, or tightening CI guardrails around risky changes."

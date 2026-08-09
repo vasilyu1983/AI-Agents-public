@@ -1,0 +1,74 @@
+{
+  "team_name": "Platform Engineering",
+  "team_size": 20,
+  "measurement_period_weeks": 12,
+  "ai_tooling_monthly_cost": 1200,
+  "avg_dev_hourly_rate": 95,
+  "hours_saved_per_dev_per_week": 3.5,
+  "adoption_pct": 72,
+  "notes": "12-week pilot using GitHub Copilot (assistant) and Claude Code (agent mode on selected tasks). Baseline established from prior 12-week period.",
+  "metric_families": {
+    "adoption": {
+      "score": 72,
+      "signals": [
+        "14 of 20 developers are active weekly (70% WAU)",
+        "License utilization at 72% — above 60% rollout threshold",
+        "Feature breadth shallow: 80% use inline completion only; 25% use agent mode",
+        "Suggestion acceptance rate: 31% (industry median ~27%)",
+        "Agent invocation rate: 4.2 tasks/dev/week among agent-mode users"
+      ]
+    },
+    "delivery": {
+      "score": 61,
+      "signals": [
+        "Cycle time (commit to deploy): reduced 11% vs baseline",
+        "PR review turnaround unchanged for agent-authored PRs — reviewers spending more time on verification",
+        "Lead time for changes: no statistically significant change at team level",
+        "Deployment frequency up 8% — driven by 3 teams, not distributed",
+        "Onboarding time to first meaningful contribution: -18% for Q1 cohort (n=3, small sample)"
+      ]
+    },
+    "quality": {
+      "score": 54,
+      "signals": [
+        "Defect escape rate: no change vs baseline (stable at 1.4 bugs/deploy)",
+        "Revert rate for AI-assisted PRs: 6.2% vs 4.8% baseline — elevated, watch closely",
+        "Review burden increased 14% on agent-authored PRs (more rounds requested)",
+        "Security scan findings on new code: +9% raw count, severity mix unchanged",
+        "Test coverage delta: +2.1 percentage points — modest positive signal"
+      ]
+    },
+    "economics": {
+      "score": 78,
+      "signals": [
+        "Cost per active user: $85.71/month ($1,200 / 14 active users)",
+        "Annualized tool cost: $14,400",
+        "Estimated annual hours saved: 3,276 hours (20 devs × 3.5 h/wk × 52 wks × 72% utilization factor)",
+        "Estimated annual value at $95/hr fully-loaded: $311,220",
+        "Net annual benefit: ~$296,820 after tool cost",
+        "Payback period: under 3 weeks"
+      ]
+    },
+    "experience": {
+      "score": 66,
+      "signals": [
+        "Tool NPS: +28 (promoters 52%, detractors 24%)",
+        "Top friction: context window limits, hallucinated API signatures, slow agent mode on large repos",
+        "Trust burden elevated for agent output — 68% of surveyed devs say they verify agent code more carefully than their own",
+        "Frustration / give-up rate: 19% of agent sessions abandoned before completion",
+        "Cognitive load self-report: split — 40% say lower, 35% say higher for complex tasks"
+      ]
+    },
+    "agent_execution": {
+      "score": 49,
+      "signals": [
+        "Task completion rate: 61% fully autonomous (agent mode, no human takeover)",
+        "Human takeover rate: 28% of agent sessions required developer intervention",
+        "PR merge rate for agent-authored PRs: 74% (vs 88% for human PRs)",
+        "Post-merge revert/hotfix rate for agent PRs: 8.1% (vs 4.8% baseline) — leading risk signal",
+        "Reviewer effort per accepted agent task: 1.8x manual PR review time",
+        "Policy/security exception rate: 2 incidents in period (both low severity)"
+      ]
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "skill": "qa-testing-performance",
+    "updated": "2026-07-11",
+    "version": "1.2",
+    "total_sources": 18,
+    "description": "Primary references for performance and load testing, profiling, Core Web Vitals, CI performance budgets, capacity planning, continuous profiling, and LLM/AI API performance testing.",
+    "title": "QA Testing Performance - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "load_testing_tools": [
+      {
+        "name": "Grafana k6 Documentation",
+        "url": "https://grafana.com/docs/k6/latest/",
+        "description": "Primary k6 load testing documentation: scripting, thresholds, scenarios, extensions, and CI integration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "k6 2.0 Release (GA 2026-05-11, per github.com/grafana/k6/releases/tag/v2.0.0)",
+        "url": "https://grafana.com/blog/k6-2-0-release/",
+        "description": "k6 2.0 GA: Playwright-compatible browser module, new expect() assertion API, four AI commands (k6 x agent, k6 x mcp, k6 x docs, k6 x explore) for agent-assisted test authoring, and k6 Operator reaching 1.0 for stable Kubernetes distributed execution. Materially changes scripting and frontend perf coverage vs the 1.x model. Latest patch is v2.1.0 (2026-06-30, opt-in feature flags, no breaking changes) — re-verify at the GitHub releases URL before pinning a version.",
+        "add_as_web_search": false,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Locust Documentation",
+        "url": "https://docs.locust.io/en/stable/",
+        "description": "Python-based distributed load testing: user classes, events, distributed mode, and custom shapes.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Artillery Documentation",
+        "url": "https://www.artillery.io/docs",
+        "description": "YAML + JS load testing: scenarios, plugins, expect assertions, and CI integration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Grafana k6 Cloud",
+        "url": "https://grafana.com/docs/grafana-cloud/testing/k6/",
+        "description": "Managed k6 execution: cloud runs, performance insights, and trend analysis.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "frontend_performance": [
+      {
+        "name": "web.dev - Core Web Vitals",
+        "url": "https://web.dev/articles/vitals",
+        "description": "Google's Core Web Vitals definitions, thresholds, and measurement guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Lighthouse CI Documentation",
+        "url": "https://github.com/GoogleChrome/lighthouse-ci",
+        "description": "Lighthouse CI setup, assertions, server, and GitHub integration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google PageSpeed Insights API",
+        "url": "https://developers.google.com/speed/docs/insights/v5/get-started",
+        "description": "PageSpeed Insights API for programmatic Lighthouse audits and field data from CrUX.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "web.dev - INP (Interaction to Next Paint)",
+        "url": "https://web.dev/articles/inp",
+        "description": "INP metric definition, measurement, and optimization guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "profiling_and_analysis": [
+      {
+        "name": "Node.js Diagnostics Guide",
+        "url": "https://nodejs.org/en/learn/diagnostics",
+        "description": "Official Node.js profiling, heap snapshots, and diagnostic channels.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "py-spy Documentation",
+        "url": "https://github.com/benfred/py-spy",
+        "description": "Sampling profiler for Python: flamegraphs, top, and record modes.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Go pprof Documentation",
+        "url": "https://pkg.go.dev/net/http/pprof",
+        "description": "Go built-in profiling: CPU, memory, goroutine, and block profiles.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "async-profiler (Java/JVM)",
+        "url": "https://github.com/async-profiler/async-profiler",
+        "description": "Low-overhead JVM profiler: CPU, allocation, lock, and wall-clock profiling with flamegraph output.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "capacity_and_sre": [
+      {
+        "name": "Google SRE Book - Service Level Objectives",
+        "url": "https://sre.google/sre-book/service-level-objectives/",
+        "description": "SLO/error budget framing for performance targets and release gates.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Workbook - Non-Abstract Large System Design",
+        "url": "https://sre.google/workbook/non-abstract-design/",
+        "description": "Capacity planning, traffic estimation, and infrastructure sizing methodology.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "continuous_profiling": [
+      {
+        "name": "Grafana Pyroscope 2.0 Release",
+        "url": "https://grafana.com/blog/pyroscope-2-0-release/",
+        "description": "Pyroscope 2.0 (announced 2026-04-21): rearchitected continuous profiling with OTLP support, single write path, stateless read path, and 95% symbol storage reduction. Powers Grafana Cloud Profiles, which has run the v2 architecture in production since April 2025.",
+        "add_as_web_search": false,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Grafana Pyroscope Documentation",
+        "url": "https://grafana.com/docs/pyroscope/latest/",
+        "description": "Continuous profiling setup, SDK integration, eBPF agent, and Grafana dashboard integration.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "llm_performance_testing": [
+      {
+        "name": "Load Testing LLM Applications: Why k6 and Locust Lie to You",
+        "url": "https://tianpan.co/blog/2026-03-19-load-testing-llm-applications",
+        "description": "Deep analysis of why standard load testing tools misreport LLM latency; TTFT vs ITL vs goodput metrics; warm/cold cache test design; mock-based CI approach. Published 2026-03-19.",
+        "add_as_web_search": false,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      }
+    ]
+  }
+}

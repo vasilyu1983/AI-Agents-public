@@ -1,0 +1,109 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-observability-evals",
+    "title": "AI Coding Agents Observability And Evals - Sources",
+    "description": "Official documentation and implementation references for tracing, replay, regression evals, and cost controls in coding-agent runtimes",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 10,
+    "version": "1.3"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "High-level guidance on reliability, tool usage, and eval-driven agent improvement",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "type": "documentation",
+        "relevance": "Reference model for trace, span, log, and metric correlation across runtimes",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Primary implementation reference for session events, task boundaries, and runtime telemetry opportunities",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Codex CLI Repository",
+        "url": "https://github.com/openai/codex",
+        "type": "repository",
+        "relevance": "Cross-runtime comparison point for agent tracing, provider usage, and operational surfaces",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex State and Doctor Source",
+        "url": "https://github.com/openai/codex/blob/7d47056ea42636271ac020b86347fbbef49490aa/codex-rs/state/src/lib.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for rollout metadata extraction, SQLite state mirrors, goals/log databases, backfill metrics, and diagnostic telemetry shape",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "evaluation_references": [
+      {
+        "name": "Inspect AI Documentation",
+        "url": "https://inspect.aisi.org.uk/",
+        "type": "documentation",
+        "relevance": "Reference for structured eval runs, scoring, and regression workflows",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Evals Design Guide",
+        "url": "https://developers.openai.com/api/docs/guides/evals",
+        "type": "guide",
+        "relevance": "Reference for practical eval construction, scorecards, and release gating",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses (arXiv 2604.25850)",
+        "url": "https://arxiv.org/abs/2604.25850",
+        "type": "paper",
+        "relevance": "Primary source for the harness self-evolution closed loop: component/experience/decision observability, falsifiable-contract edits, Terminal-Bench 2 and SWE-bench-verified transfer results",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Building Effective AI Coding Agents for the Terminal (arXiv 2603.05344)",
+        "url": "https://arxiv.org/abs/2603.05344",
+        "type": "paper",
+        "relevance": "Independent terminal coding-agent reference architecture (workload-specialized model routing, dual-agent plan/execute, lazy tool discovery, adaptive compaction) used to corroborate runtime-decomposition completeness",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry GenAI Semantic Conventions (moved to dedicated repo, mid-2026)",
+        "url": "https://github.com/open-telemetry/semantic-conventions-genai",
+        "type": "specification",
+        "relevance": "Development-status OTel spec for gen_ai agent/tool spans: gen_ai.operation.name, gen_ai.agent.name/id/version, gen_ai.tool.name/tool.call.id, gen_ai.conversation.id. Requires OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental. As of mid-2026 the spec split out of open-telemetry/semantic-conventions into this dedicated repo; the old opentelemetry.io/docs/specs/semconv/gen-ai/* pages now show moved notices and the attribute registry marks gen_ai.* entries deprecated-in-place (relocated, names unchanged). Contrast with Codex proprietary otel crate.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

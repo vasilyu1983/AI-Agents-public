@@ -1,0 +1,352 @@
+{
+  "metadata": {
+    "title": "Dependency Management - Sources",
+    "description": "Official-first sources for package managers, lockfiles, update automation, SBOMs, provenance, and supply-chain policy",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "dev-dependency-management",
+    "total_sources": 54
+  },
+  "official_documentation": [
+    {
+      "name": "npm Docs",
+      "url": "https://docs.npmjs.com/",
+      "description": "Official npm documentation for installs, lockfiles, auditing, and workspaces",
+      "add_as_web_search": true
+    },
+    {
+      "name": "npm ci",
+      "url": "https://docs.npmjs.com/cli/v11/commands/npm-ci/",
+      "description": "Current npm lockfile install command",
+      "add_as_web_search": true
+    },
+    {
+      "name": "npm audit",
+      "url": "https://docs.npmjs.com/cli/v11/commands/npm-audit/",
+      "description": "Current npm vulnerability and signature verification workflow",
+      "add_as_web_search": true
+    },
+    {
+      "name": "npm sbom",
+      "url": "https://docs.npmjs.com/cli/v11/commands/npm-sbom/",
+      "description": "Generate SBOMs directly from npm",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Node.js package.json fields",
+      "url": "https://nodejs.org/api/packages.html",
+      "description": "Current Node.js docs for package metadata such as type and packageManager-related guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "pnpm Docs",
+      "url": "https://pnpm.io/",
+      "description": "Official pnpm documentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "pnpm installation",
+      "url": "https://pnpm.io/installation",
+      "description": "Current pnpm installation guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "pnpm settings",
+      "url": "https://pnpm.io/settings",
+      "description": "Current pnpm settings including supply-chain controls such as minimumReleaseAge and onlyBuiltDependencies",
+      "add_as_web_search": true
+    },
+    {
+      "name": "pnpm approve-builds",
+      "url": "https://pnpm.io/cli/approve-builds",
+      "description": "Approve install scripts and populate build-script allowlists",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Yarn install",
+      "url": "https://yarnpkg.com/cli/install",
+      "description": "Current Yarn 4 install workflow and immutable installs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Bun install",
+      "url": "https://bun.sh/docs/pm/cli/install",
+      "description": "Current Bun install, bun ci, workspaces, and minimumReleaseAge guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Bun audit",
+      "url": "https://bun.sh/docs/pm/cli/audit",
+      "description": "Current Bun vulnerability scanning command",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Python Packaging User Guide",
+      "url": "https://packaging.python.org/",
+      "description": "Authoritative Python packaging guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "PyPA Dependency Groups",
+      "url": "https://packaging.python.org/en/latest/specifications/dependency-groups/",
+      "description": "Standardized dependency-group metadata for pyproject.toml",
+      "add_as_web_search": true
+    },
+    {
+      "name": "PyPA pylock.toml",
+      "url": "https://packaging.python.org/en/latest/specifications/pylock-toml/",
+      "description": "Standardized lock-file format for Python ecosystems",
+      "add_as_web_search": true
+    },
+    {
+      "name": "uv Docs",
+      "url": "https://docs.astral.sh/uv/",
+      "description": "Official uv documentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "uv locking and syncing",
+      "url": "https://docs.astral.sh/uv/concepts/projects/sync/",
+      "description": "Current uv.lock and uv sync behavior",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Poetry Docs",
+      "url": "https://python-poetry.org/docs/",
+      "description": "Official Poetry documentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Poetry commands",
+      "url": "https://python-poetry.org/docs/main/cli/",
+      "description": "Current Poetry CLI documentation including sync and show",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Cargo Book",
+      "url": "https://doc.rust-lang.org/cargo/",
+      "description": "Official Cargo reference",
+      "add_as_web_search": true
+    },
+    {
+      "name": "cargo build",
+      "url": "https://doc.rust-lang.org/cargo/commands/cargo-build.html",
+      "description": "Current Cargo build flags such as --locked",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Go Modules Reference",
+      "url": "https://go.dev/ref/mod",
+      "description": "Official Go module system reference",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Go vulnerability management",
+      "url": "https://go.dev/doc/security/vuln/",
+      "description": "Official guidance for govulncheck and the Go vulnerability database",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Maven dependency mechanism",
+      "url": "https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html",
+      "description": "Official Maven dependency management guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Gradle dependency management basics",
+      "url": "https://docs.gradle.org/current/userguide/dependency_management_basics.html",
+      "description": "Official Gradle dependency management guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NuGet PackageReference guidance",
+      "url": "https://learn.microsoft.com/en-us/nuget/what-is-nuget",
+      "description": "Microsoft guidance on PackageReference and modern NuGet workflows",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NuGet dependency resolution",
+      "url": "https://learn.microsoft.com/en-us/nuget/concepts/dependency-resolution",
+      "description": "Microsoft guidance on NuGet dependency resolution behavior",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Composer basic usage",
+      "url": "https://getcomposer.org/doc/01-basic-usage.md",
+      "description": "Official Composer install and lockfile usage",
+      "add_as_web_search": true
+    }
+  ],
+  "standards_and_policy": [
+    {
+      "name": "Semantic Versioning 2.0.0",
+      "url": "https://semver.org/",
+      "description": "SemVer specification",
+      "add_as_web_search": false
+    },
+    {
+      "name": "NIST SP 800-218 (SSDF)",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "description": "Secure Software Development Framework",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SLSA v1.2 Specification",
+      "url": "https://slsa.dev/spec/v1.2/",
+      "description": "Current SLSA specification for supply-chain controls and provenance; v1.2 clarifies build isolation requirements, updates attestation structure, and adds dependency tracing to provenance schema",
+      "add_as_web_search": true,
+      "verified": "2026-06-09"
+    },
+    {
+      "name": "SPDX",
+      "url": "https://spdx.dev/",
+      "description": "SPDX SBOM standard",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CycloneDX",
+      "url": "https://cyclonedx.org/",
+      "description": "CycloneDX SBOM standard",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Sigstore",
+      "url": "https://www.sigstore.dev/",
+      "description": "Signing and verifying software artifacts",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CISA SBOM resources",
+      "url": "https://www.cisa.gov/topics/information-communications-technology-supply-chain-security/sbom",
+      "description": "CISA SBOM guidance and resource hub",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CISA 2025 SBOM minimum elements",
+      "url": "https://www.cisa.gov/resources-tools/resources/2025-minimum-elements-software-bill-materials-sbom",
+      "description": "Updated CISA SBOM minimum-elements guidance published in 2025; adds mandatory component hash, license info, tool name, and generation context beyond the 2021 NTIA baseline",
+      "add_as_web_search": true,
+      "verified": "2026-06-09"
+    },
+    {
+      "name": "EU Cyber Resilience Act",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act",
+      "description": "European Commission guidance on CRA timelines and obligations",
+      "add_as_web_search": true
+    }
+  ],
+  "automation_and_security": [
+    {
+      "name": "OSV",
+      "url": "https://osv.dev/",
+      "description": "Open vulnerability database and API for open source ecosystems",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub Advisory Database",
+      "url": "https://github.com/advisories",
+      "description": "Official GitHub-hosted advisory database",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Dependabot configuration options",
+      "url": "https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference",
+      "description": "Current dependabot.yml options",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Dependabot multi-ecosystem updates",
+      "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/configuring-multi-ecosystem-updates",
+      "description": "Grouped updates across ecosystems",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Renovate configuration options",
+      "url": "https://docs.renovatebot.com/configuration-options/",
+      "description": "Current Renovate configuration reference",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OWASP Dependency-Track",
+      "url": "https://dependencytrack.org/",
+      "description": "Continuous SBOM analysis platform",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Syft",
+      "url": "https://github.com/anchore/syft",
+      "description": "SBOM generation for filesystems and container images",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Grype",
+      "url": "https://github.com/anchore/grype",
+      "description": "Vulnerability scanning for filesystems and container images",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenSSF Scorecard",
+      "url": "https://securityscorecards.dev/",
+      "description": "Automated security health metrics for open source projects",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CISA Shai-Hulud npm supply chain alert",
+      "url": "https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem",
+      "description": "CISA September 2025 alert on the Shai-Hulud self-replicating worm affecting 500+ npm packages; establishes minimumReleaseAge and token hygiene as primary mitigations",
+      "add_as_web_search": true,
+      "verified": "2026-06-09"
+    },
+    {
+      "name": "Microsoft Security: dependency confusion npm attack May 2026",
+      "url": "https://www.microsoft.com/en-us/security/blog/2026/05/29/33-malicious-npm-packages-abuse-dependency-confusion-profile-developer-environments/",
+      "description": "May 2026 Microsoft Security Blog on 33 malicious npm packages abusing dependency confusion via org-scoped namespace mimicry; scope allowlists and private registry enforcement as mitigations",
+      "add_as_web_search": true,
+      "verified": "2026-06-09"
+    },
+    {
+      "name": "pnpm 11 release announcement",
+      "url": "https://pnpm.io/blog/releases/11.0",
+      "description": "pnpm 11 (April 2026): requires Node.js 22, pure ESM, SQLite store, tighter supply-chain defaults including approve-builds and onlyBuiltDependencies changes",
+      "add_as_web_search": true,
+      "verified": "2026-06-09"
+    },
+    {
+      "name": "pnpm 12 (native Rust port)",
+      "url": "https://pnpm.io/blog",
+      "description": "pnpm 12: native Rust port, installed via `pnpm self-update` from pnpm 11.10+; supersedes the pnpm 11 ESM/SQLite release as the current major as of July 2026",
+      "add_as_web_search": true,
+      "verified": "2026-07-11"
+    },
+    {
+      "name": "npm v12 security overhaul",
+      "url": "https://thehackernews.com/2026/07/npm-12-disables-install-scripts-by.html",
+      "description": "npm 12 (shipping July 2026): disables install scripts, git dependencies, and remote-URL dependencies by default; accelerated timeline follows repeated 2026 npm namespace-takeover incidents",
+      "add_as_web_search": true,
+      "verified": "2026-07-11"
+    },
+    {
+      "name": "Miasma npm supply chain compromise",
+      "url": "https://www.techtimes.com/articles/318328/20260613/npm-v12-security-overhaul-blocks-install-scripts-default-july-deadline-ci-migration.htm",
+      "description": "June 2026: compromise of the @redhat-cloud-services npm namespace (32 packages), followed by a 'Phantom Gyp' technique hitting 57 more packages in a 2-hour window; directly accelerated npm v12's default-deny release",
+      "add_as_web_search": true,
+      "verified": "2026-07-11"
+    }
+  ],
+  "optional_vendor_research": [
+    {
+      "name": "Socket.dev",
+      "url": "https://socket.dev/",
+      "description": "Vendor tooling focused on package-behavior and supply-chain risk signals",
+      "add_as_web_search": true,
+      "optional": true
+    },
+    {
+      "name": "Endor Labs - State of Dependency Management 2025",
+      "url": "https://www.endorlabs.com/lp/state-of-dependency-management-2025",
+      "description": "Vendor research on dependency and AI-driven supply-chain risk",
+      "add_as_web_search": true,
+      "optional": true
+    }
+  ]
+}

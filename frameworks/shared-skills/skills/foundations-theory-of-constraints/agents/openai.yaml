@@ -1,0 +1,4 @@
+interface:
+  display_name: "Theory of Constraints Foundations"
+  short_description: "Theory of Constraints primitives: throughput, critical chain, policy constraints"
+  default_prompt: "Use $foundations-theory-of-constraints for Five Focusing Steps, drum-buffer-rope, throughput accounting, thinking processes, critical chain, policy constraints, or bottleneck-based sequencing."

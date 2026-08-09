@@ -1,0 +1,4 @@
+interface:
+  display_name: "Information Theory Foundations"
+  short_description: "Applies information-theory primitives for AI systems"
+  default_prompt: "Use $foundations-information-theory for entropy, mutual information, KL/JS divergence, compression, channel limits, MDL, bottlenecks, or signal quality."

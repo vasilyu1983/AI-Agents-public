@@ -1,0 +1,120 @@
+{
+  "metadata": {
+    "skill": "software-desktop",
+    "updated": "2026-07-11",
+    "total_sources": 17,
+    "description": "Primary framework, security, packaging, updater, and signing sources for desktop application engineering.",
+    "title": "Software Desktop - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "frameworks": [
+      {
+        "name": "Electron Docs",
+        "url": "https://www.electronjs.org/docs/latest/",
+        "description": "Official Electron architecture, APIs, packaging, and security guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tauri Docs",
+        "url": "https://tauri.app/start/",
+        "description": "Official Tauri docs for app architecture, bundling, and updater behavior.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Compose Multiplatform Getting Started",
+        "url": "https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-getting-started.html",
+        "description": "Official guide for creating Compose Multiplatform apps that target desktop alongside other platforms.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Compose Desktop Components",
+        "url": "https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-desktop-components.html",
+        "description": "Official desktop-specific Compose Multiplatform API and behavior reference.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Flutter Desktop",
+        "url": "https://docs.flutter.dev/platform-integration/desktop",
+        "description": "Flutter guidance for desktop targets and platform integration.",
+        "add_as_web_search": true
+      },
+      {
+        "name": ".NET MAUI Docs",
+        "url": "https://learn.microsoft.com/en-us/dotnet/maui/",
+        "description": "Official .NET MAUI desktop and cross-platform app guidance.",
+        "add_as_web_search": true
+      }
+    ],
+    "security": [
+      {
+        "name": "Electron Security",
+        "url": "https://www.electronjs.org/docs/latest/tutorial/security",
+        "description": "Official Electron security checklist for renderer isolation, IPC validation, and secure content loading.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tauri Security",
+        "url": "https://v2.tauri.app/security/",
+        "description": "Official Tauri security model, trust-boundary, and WebView hardening guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tauri Capabilities",
+        "url": "https://v2.tauri.app/security/capabilities/",
+        "description": "Official Tauri capabilities and permission-boundary documentation for frontend-to-core access control.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Electron Process Model",
+        "url": "https://www.electronjs.org/docs/latest/tutorial/process-model",
+        "description": "Official Electron main/renderer/preload process model and contextIsolation/IPC boundary reference.",
+        "add_as_web_search": true
+      }
+    ],
+    "distribution": [
+      {
+        "name": "Apple Notarization",
+        "url": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution",
+        "description": "Authoritative macOS notarization process for distributed apps.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft SignTool",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/seccrypto/signtool",
+        "description": "Windows code signing reference for desktop distribution.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Azure Artifact Signing (formerly Trusted Signing)",
+        "url": "https://azure.microsoft.com/en-us/products/artifact-signing",
+        "description": "Microsoft's current cloud-native Windows code-signing service; verify current naming, GA scope, and eligibility before quoting.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Sparkle",
+        "url": "https://sparkle-project.org/documentation/",
+        "description": "Update framework docs for native macOS desktop apps (Sparkle 2.x is current).",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tauri Updater",
+        "url": "https://v2.tauri.app/plugin/updater/",
+        "description": "Official updater plugin documentation for Tauri desktop release and signature verification flows.",
+        "add_as_web_search": true
+      },
+      {
+        "name": ".NET MAUI Windows Deployment",
+        "url": "https://learn.microsoft.com/en-us/dotnet/maui/windows/deployment/overview",
+        "description": "Official Windows deployment guidance for .NET MAUI desktop apps.",
+        "add_as_web_search": true
+      },
+      {
+        "name": ".NET MAUI Mac Catalyst Outside App Store",
+        "url": "https://learn.microsoft.com/en-us/dotnet/maui/mac-catalyst/deployment/publish-outside-app-store",
+        "description": "Official Mac Catalyst signing, packaging, and notarization guidance for distribution outside the Mac App Store.",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

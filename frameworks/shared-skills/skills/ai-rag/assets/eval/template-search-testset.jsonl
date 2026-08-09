@@ -1,0 +1,3 @@
+{"query": "reset my password", "gold_docs": ["doc1", "doc2"]}
+{"query": "how to change billing information", "gold_docs": ["doc3"]}
+{"query": "benefits enrollment deadline", "gold_docs": ["doc4", "doc5"]}

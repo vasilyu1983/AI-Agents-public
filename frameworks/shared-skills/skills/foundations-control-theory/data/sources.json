@@ -1,0 +1,197 @@
+{
+  "metadata": {
+    "title": "AI Foundations Control Theory — Sources",
+    "description": "Primary references for 12 control-theory primitives: PID, feedback/feedforward, observability, controllability, Lyapunov stability, MPC, Kalman filter, dead-time compensation, anti-windup, gain scheduling, circuit breaker, backpressure, rate limiting, and DeePC/behavioral systems",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-control-theory",
+    "total_sources": 26
+  },
+  "textbooks": [
+    {
+      "id": "Astrom-Murray",
+      "name": "Feedback Systems: An Introduction for Scientists and Engineers",
+      "url": "https://fbsbook.org",
+      "description": "Åström & Murray (2020). Canonical graduate-level textbook on feedback control. Covers PID, state-space, Lyapunov, MPC, Kalman filter, and dead-time compensation. Free PDF available at fbsbook.org. Primary source for primitives #1–#9.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Franklin-Powell",
+      "name": "Feedback Control of Dynamic Systems",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/feedback-control-of-dynamic-systems/P200000003487",
+      "description": "Franklin, Powell & Emami-Naeini, 8th ed. (2019). Standard undergraduate/graduate control textbook. Covers PID tuning, state-space, Kalman filter, MPC, and root locus. Primary source for primitives #1, #2, #3, #6, #7, #8.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Ogata",
+      "name": "Modern Control Engineering",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/modern-control-engineering/P200000003307",
+      "description": "Ogata, K., 5th ed. (2010). Comprehensive control engineering reference. Source for observability, controllability, and Lyapunov stability (primitives #3, #4).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Hellerstein",
+      "name": "Feedback Control of Computing Systems",
+      "url": "https://www.wiley.com/en-us/Feedback+Control+of+Computing+Systems-p-9780471266372",
+      "description": "Hellerstein, Diao, Parekh & Tilbury (2004). Wiley. The definitive reference applying control theory to computing systems — web servers, databases, operating systems. Source for computing-domain applications across all 11 primitives.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Camacho-Bordons",
+      "name": "Model Predictive Control",
+      "url": "https://link.springer.com/book/10.1007/978-0-85729-398-5",
+      "description": "Camacho & Bordons, 2nd ed. (2007). Springer. Primary reference for MPC theory, receding horizon, constraint handling, and stability (primitive #5).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Release-It",
+      "name": "Release It! Design and Deploy Production-Ready Software",
+      "url": "https://pragprog.com/titles/mnee2/release-it-second-edition/",
+      "description": "Nygard, M., 2nd ed. (2018). Pragmatic Bookshelf. Canonical practitioner reference for circuit breaker and stability patterns in distributed systems (primitive #10).",
+      "add_as_web_search": false
+    }
+  ],
+  "papers": [
+    {
+      "id": "Kalman1960",
+      "name": "A New Approach to Linear Filtering and Prediction Problems",
+      "url": "https://www.cs.unc.edu/~welch/kalman/media/pdf/Kalman1960.pdf",
+      "description": "Kalman, R.E. (1960). ASME J. Basic Engineering 82:35-45. Original paper introducing the Kalman filter. Foundational source for primitive #6.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Ziegler-Nichols",
+      "name": "Optimum Settings for Automatic Controllers",
+      "url": "https://doi.org/10.1115/1.4019264",
+      "description": "Ziegler & Nichols (1942). ASME Trans. 64:759-768. Original paper introducing the Ziegler-Nichols PID tuning method. Source for primitive #1 tuning.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Smith1957",
+      "name": "Closer control of loops with dead time",
+      "url": "https://www.researchgate.net/publication/288876285_Closer_control_of_loops_with_dead_time",
+      "description": "Smith, O.J.M. (1957). Chemical Engineering Progress 53(5):217-219. Original Smith Predictor paper for dead-time compensation. Source for primitive #7.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Rugh-Shamma",
+      "name": "Research on gain scheduling",
+      "url": "https://doi.org/10.1016/S0005-1098(00)00058-3",
+      "description": "Rugh & Shamma (2000). Automatica 36(10):1401-1425. Survey of gain scheduling theory and practice. Source for primitive #9.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Lyapunov1892",
+      "name": "The General Problem of the Stability of Motion",
+      "url": "https://doi.org/10.1080/00207179208934253",
+      "description": "Lyapunov, A.M. (1892, English translation 1992). Taylor & Francis. Original Lyapunov stability theory. Source for primitive #4.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Welch-Bishop",
+      "name": "An Introduction to the Kalman Filter",
+      "url": "https://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf",
+      "description": "Welch & Bishop (2006). UNC-Chapel Hill TR 95-041. Accessible Kalman filter tutorial with discrete-time formulation. Secondary source for primitive #6.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Fowler-CB",
+      "name": "CircuitBreaker pattern",
+      "url": "https://martinfowler.com/bliki/CircuitBreaker.html",
+      "description": "Fowler, M. martinfowler.com. Practitioner description of the circuit breaker pattern with state machine. Secondary source for primitive #10.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Varghese-Algorithmics",
+      "name": "Network Algorithmics",
+      "url": "https://www.sciencedirect.com/book/9780120884773/network-algorithmics",
+      "description": "Varghese, G. (2004). Morgan Kaufmann. Token bucket and leaky bucket algorithms. Source for primitive #11.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Yang-CBFRL-2025",
+      "name": "CBF-RL: Safety Filtering Reinforcement Learning in Training with Control Barrier Functions",
+      "url": "https://arxiv.org/abs/2510.14959",
+      "description": "Yang, Werner, de Sa & Ames (2025/2026). ICRA 2026. Integrates control barrier functions into RL training rollouts, producing policies that are provably safe and operate without runtime safety filters. Hardware-validated on Unitree G1 humanoid. Code: https://github.com/lzyang2000/cbf-rl-navigation-demo. Extends primitive #4 (Lyapunov stability) to learned controllers.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Schimperna-KoopmanMPC-2025",
+      "name": "Stability of data-driven Koopman MPC with terminal conditions",
+      "url": "https://arxiv.org/abs/2511.21248",
+      "description": "Schimperna, Bold, Köhler, Worthmann & Magni (2025/2026). arXiv:2511.21248. Proves recursive feasibility and asymptotic stability for MPC using kernel EDMD (Koopman operator) as data-driven surrogate, with terminal conditions and proportional error bound. Extends primitive #5 to nonlinear plants without an explicit model.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Jakob-IQC-OCO-2025",
+      "name": "Online Convex Optimization and Integral Quadratic Constraints: An automated approach to regret analysis",
+      "url": "https://arxiv.org/abs/2503.23600",
+      "description": "Jakob & Iannelli (2025). IEEE CDC 2025. Applies Integral Quadratic Constraints (IQC) to derive automated regret guarantees for first-order OCO algorithms expressed as linear dynamical systems in feedback with monotone operators. Bridges classical control robustness analysis and online optimization. Relevant when combining adaptive/online MPC with formal guarantees.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Malvankar-WVA-2026",
+      "name": "WVA: A Global Optimization Control Plane for llmd",
+      "url": "https://arxiv.org/abs/2603.09730",
+      "description": "Malvankar et al. (2026). arXiv:2603.09730. Application-aware feedback autoscaler for LLM inference (Kubernetes/llm-d) that uses KV-cache saturation and queue depth as controlled variables. Achieves 37% throughput improvement and 10x failure reduction vs HPA. Open-source: https://github.com/llm-d-incubation/workload-variant-autoscaler. Instantiates primitives #5, #10, #11 for LLM serving.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Coulson-DeePC-2019",
+      "name": "Data-Enabled Predictive Control: In the Shallows of the DeePC",
+      "url": "https://arxiv.org/abs/1811.05890",
+      "description": "Coulson, Lygeros & Dörfler (2019). ECC 2019. Foundational DeePC paper. Replaces the explicit plant model in MPC with a Hankel matrix of past input-output trajectories, using Willems' Fundamental Lemma (2005). For LTI noiseless systems DeePC is equivalent to classical MPC. Verified via arXiv search 2026-05-17. Canonical source for primitive #12. Note: arXiv ID 1811.10455 is an unrelated ML paper — use 1811.05890.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Willems-FundamentalLemma-2005",
+      "name": "A note on persistency of excitation",
+      "url": "https://doi.org/10.1016/j.sysconle.2004.09.003",
+      "description": "Willems, Rapisarda, Markovsky & De Moor (2005). Systems & Control Letters 54(4):325-329. Establishes that all trajectories of a controllable LTI system can be parameterized by the columns of a Hankel matrix built from a single persistently-exciting experiment. Theoretical backbone of DeePC and behavioral systems control. DOI is well-established in literature; treat as confirmed.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Sivaranjani-sysid-2025",
+      "name": "Control-Oriented System Identification: Classical, Learning, and Physics-Informed Approaches",
+      "url": "https://arxiv.org/abs/2512.06315",
+      "description": "Sivaranjani, Shi, Atanasov, Duong, Feng, Martin, Xu, Gupta & Allgöwer (2025). arXiv:2512.06315. Submitted 2025-12-06. Survey of control-oriented sysid covering classical, ML, and physics-informed approaches. Key finding: ML models trained without control-relevant constraints (dissipativity, stability) can destabilize control loops. Evidence grade B — arXiv only, no confirmed peer-review venue as of 2026-05-17.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Daras-DeePCKoopman-2026",
+      "name": "DeePC vs. Koopman MPC for Pasteurization: A Comparative Study",
+      "url": "https://arxiv.org/abs/2604.00524",
+      "description": "Daráš, Valábek & Klaučo (2026). arXiv:2604.00524. Head-to-head comparison of DeePC and Koopman MPC on a multivariable pasteurization process. Finding: Koopman MPC tracks more tightly under the chosen cost; DeePC produces substantially smoother input trajectories. Verified via WebFetch 2026-07-11. Paper-only; single-process case study, generalizability to other plants unverified. Source for the DeePC-vs-Koopman tradeoff in primitive #12.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "deJong-ScalableDeePC-2025",
+      "name": "Scalable Nonlinear DeePC: Bridging Direct and Indirect Methods and Basis Reduction",
+      "url": "https://arxiv.org/abs/2512.14535",
+      "description": "de Jong, Lazar, Weiland & Dörfler (2025). arXiv:2512.14535. Studies regularized nonlinear DeePC; introduces SVD-based dimensionality reduction preserving equivalence with subspace predictive control (SPC). Verified via WebFetch 2026-07-11. arXiv preprint only; no confirmed peer-review venue as of 2026-07-11 — evidence grade B. Source for the Hankel-matrix-scaling fix in primitive #12.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Tymoshenko-Predictive-2026",
+      "name": "Predictive Autoscaling for Node.js on Kubernetes: Lower Latency, Right-Sized Capacity",
+      "url": "https://arxiv.org/abs/2604.19705",
+      "description": "Tymoshenko, Maraschi & Collina (2026). arXiv:2604.19705. Feedforward-dominant predictive autoscaler for Node.js/Kubernetes. Confirmed empirical: 26ms median latency vs. 154ms for KEDA and 522ms for HPA under steady ramp load. Matteo Collina is Node.js core maintainer. Paper-only; no open code confirmed. Caveat: Node.js-specific; generalizability to other runtimes unverified. Source for Predictive Autoscaler composition recipe.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Prinos-StableAgenticControl-2026",
+      "name": "Stable Agentic Control: Tool-Mediated LLM Architecture for Autonomous Cyber Defense",
+      "url": "https://arxiv.org/abs/2605.03034",
+      "description": "Prinos, Brush, Denton, Wang, Knox, Antani, Foltz & Villaseñor (2026). arXiv:2605.03034. Applies Input-to-State Stability (ISS) formally to an LLM-based agentic system; Lyapunov function machine-checked in Lean 4. Key finding: finite action catalogs at tool interfaces guarantee stability independent of model capability or temperature. A tool-mediated Claude Sonnet 4 controller reduced attacker payoff by 59% vs. a deterministic greedy baseline; a Claude Haiku 4.5 controller stayed catalog-bounded despite converging to a suboptimal value. Confirms that stability must be baked into loop architecture, not delegated to the model. Extends primitive #4 (Lyapunov stability) to LLM agent loops. Paper-only; domain is autonomous cyber defense. Verified via WebFetch against arxiv.org/abs/2605.03034 on 2026-07-11 — full author list confirmed, no author named Iyer; earlier version of this record misattributed the paper.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Echigo-ProbCBF-2026",
+      "name": "Probabilistic Control Barrier Functions for Systems with State Estimation Uncertainty using Sub-Gaussian Concentration",
+      "url": "https://arxiv.org/abs/2604.08831",
+      "description": "Echigo, van Wijk, Mestres, Daş, Burdick & Ames (2026). arXiv:2604.08831. Particle-based probabilistic CBF framework providing tight probabilistic safety guarantees via sub-Gaussian concentration bounds and finite-sample CVaR estimates. Extends classical (deterministic) CBF to systems with sensor noise. Relevant when deterministic CBF is applied with noisy measurements. Paper-only; no code confirmed.",
+      "add_as_web_search": false
+    }
+  ]
+}

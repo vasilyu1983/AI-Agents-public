@@ -1,0 +1,4 @@
+interface:
+  display_name: "Managed App Backends"
+  short_description: "Chooses managed backend platforms such as Supabase, Convex, and Firebase"
+  default_prompt: "Use $software-baas-platforms for Chooses managed backend platforms such as Supabase, Convex, and Firebase. Use when comparing database, auth, realtime, and backend-service tradeoffs."

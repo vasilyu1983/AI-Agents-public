@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prompt Engineering — Operational Skill"
+  short_description: "Prompt engineering for production LLMs — structured outputs, evals, RAG, tool"
+  default_prompt: "Use $ai-prompt-engineering for Prompt engineering for production LLMs — structured outputs, evals, RAG, tool workflows, multimodal prompting, and safety. Use when designing, debugging, or shipping prompts."

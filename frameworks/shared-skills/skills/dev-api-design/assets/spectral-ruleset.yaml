@@ -1,0 +1,110 @@
+# Spectral custom ruleset for OpenAPI linting.
+#
+# Run:
+#   npx @stoplight/spectral-cli lint openapi.yaml --ruleset assets/spectral-ruleset.yaml
+#
+# Requires @stoplight/spectral-cli >= 6.x and @stoplight/spectral-formats.
+
+extends: "spectral:oas"
+
+rules:
+  # Every operation must have an operationId (enables SDK generation and tooling).
+  operation-operationId-required:
+    description: "Operations must have an operationId."
+    message: "Operation '{{path}}' is missing an operationId."
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete,head,options,trace]"
+    then:
+      field: operationId
+      function: truthy
+
+  # Every operation must have a short human-readable summary.
+  operation-summary-required:
+    description: "Operations must have a summary."
+    message: "Operation '{{path}}' is missing a summary."
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete,head,options,trace]"
+    then:
+      field: summary
+      function: truthy
+
+  # Every operation must declare at least one 4xx client-error response.
+  operation-4xx-response:
+    description: "Operations must declare at least one 4xx error response."
+    message: "Operation '{{path}}' has no 4xx response defined."
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete,head,options,trace]"
+    then:
+      field: responses
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            "^4\\d{2}$":
+              type: object
+          minProperties: 1
+
+  # Every operation must declare at least one 5xx server-error response.
+  operation-5xx-response:
+    description: "Operations must declare at least one 5xx error response."
+    message: "Operation '{{path}}' has no 5xx response defined."
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete,head,options,trace]"
+    then:
+      field: responses
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            "^5\\d{2}$":
+              type: object
+          minProperties: 1
+
+  # Inline request/response schemas should be in components/schemas, not inlined.
+  no-inline-schemas:
+    description: "Schemas should be defined in components/schemas, not inlined."
+    message: "Inline schema found at '{{path}}'. Move it to components/schemas and use $ref."
+    severity: warn
+    given:
+      - "$.paths[*][*].requestBody.content[*].schema"
+      - "$.paths[*][*].responses[*].content[*].schema"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required:
+            - "$ref"
+
+  # Ban 'type: string' without a format or enum when a stricter type is expected.
+  # More practically: ban schemas with no type at all (catches implicit 'any').
+  no-schema-without-type:
+    description: "Schemas in components must declare a type."
+    message: "Schema '{{path}}' has no type declared — may resolve to 'any'."
+    severity: warn
+    given: "$.components.schemas[*]"
+    then:
+      field: type
+      function: truthy
+
+  # operationId must use camelCase or kebab-case — no spaces or special chars.
+  operation-operationId-format:
+    description: "operationId must be camelCase or kebab-case."
+    message: "operationId '{{value}}' must use only letters, digits, hyphens, or underscores."
+    severity: error
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-zA-Z][a-zA-Z0-9_-]*$"
+
+  # Require a description on every path item for documentation quality.
+  path-description:
+    description: "Path items should have a description for documentation."
+    message: "Path '{{path}}' is missing a description."
+    severity: info
+    given: "$.paths[*]"
+    then:
+      field: description
+      function: truthy

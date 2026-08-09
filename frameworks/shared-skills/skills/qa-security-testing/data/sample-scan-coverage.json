@@ -1,0 +1,164 @@
+{
+  "scan_date": "2026-03-10",
+  "scanners": [
+    {
+      "name": "Semgrep",
+      "type": "SAST",
+      "last_run": "2026-03-10"
+    },
+    {
+      "name": "CodeQL",
+      "type": "SAST",
+      "last_run": "2026-03-09"
+    },
+    {
+      "name": "OWASP ZAP",
+      "type": "DAST",
+      "last_run": "2026-03-10"
+    },
+    {
+      "name": "Burp Suite",
+      "type": "DAST",
+      "last_run": "2026-03-08"
+    },
+    {
+      "name": "Nuclei",
+      "type": "DAST",
+      "last_run": "2026-03-10"
+    },
+    {
+      "name": "Dependabot",
+      "type": "SCA",
+      "last_run": "2026-03-10"
+    },
+    {
+      "name": "Trivy",
+      "type": "Container/IaC",
+      "last_run": "2026-03-10"
+    },
+    {
+      "name": "Checkov",
+      "type": "IaC",
+      "last_run": "2026-03-10"
+    },
+    {
+      "name": "gitleaks",
+      "type": "Secrets",
+      "last_run": "2026-03-10"
+    }
+  ],
+  "attack_surfaces": [
+    {
+      "name": "Web App",
+      "scanners": {
+        "Semgrep": true,
+        "CodeQL": true,
+        "OWASP ZAP": true,
+        "Burp Suite": true,
+        "Nuclei": true,
+        "Dependabot": false,
+        "Trivy": false,
+        "Checkov": false,
+        "gitleaks": false
+      }
+    },
+    {
+      "name": "API Endpoints",
+      "scanners": {
+        "Semgrep": true,
+        "CodeQL": true,
+        "OWASP ZAP": true,
+        "Burp Suite": true,
+        "Nuclei": true,
+        "Dependabot": false,
+        "Trivy": false,
+        "Checkov": false,
+        "gitleaks": false
+      }
+    },
+    {
+      "name": "Authentication",
+      "scanners": {
+        "Semgrep": true,
+        "CodeQL": true,
+        "OWASP ZAP": true,
+        "Burp Suite": true,
+        "Nuclei": false,
+        "Dependabot": false,
+        "Trivy": false,
+        "Checkov": false,
+        "gitleaks": false
+      }
+    },
+    {
+      "name": "Dependencies/SCA",
+      "scanners": {
+        "Semgrep": false,
+        "CodeQL": false,
+        "OWASP ZAP": false,
+        "Burp Suite": false,
+        "Nuclei": false,
+        "Dependabot": true,
+        "Trivy": true,
+        "Checkov": false,
+        "gitleaks": false
+      }
+    },
+    {
+      "name": "Infrastructure/Cloud",
+      "scanners": {
+        "Semgrep": false,
+        "CodeQL": false,
+        "OWASP ZAP": false,
+        "Burp Suite": false,
+        "Nuclei": true,
+        "Dependabot": false,
+        "Trivy": true,
+        "Checkov": true,
+        "gitleaks": false
+      }
+    },
+    {
+      "name": "Mobile",
+      "scanners": {
+        "Semgrep": false,
+        "CodeQL": false,
+        "OWASP ZAP": false,
+        "Burp Suite": false,
+        "Nuclei": false,
+        "Dependabot": false,
+        "Trivy": false,
+        "Checkov": false,
+        "gitleaks": false
+      }
+    },
+    {
+      "name": "Secrets/Credentials",
+      "scanners": {
+        "Semgrep": false,
+        "CodeQL": false,
+        "OWASP ZAP": false,
+        "Burp Suite": false,
+        "Nuclei": false,
+        "Dependabot": false,
+        "Trivy": false,
+        "Checkov": false,
+        "gitleaks": true
+      }
+    },
+    {
+      "name": "Container Images",
+      "scanners": {
+        "Semgrep": false,
+        "CodeQL": false,
+        "OWASP ZAP": false,
+        "Burp Suite": false,
+        "Nuclei": false,
+        "Dependabot": false,
+        "Trivy": true,
+        "Checkov": false,
+        "gitleaks": false
+      }
+    }
+  ]
+}

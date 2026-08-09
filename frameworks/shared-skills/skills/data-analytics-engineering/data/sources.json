@@ -1,0 +1,301 @@
+{
+  "metadata": {
+    "skill": "data-analytics-engineering",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "description": "Primary-source-first references for analytics engineering: transformation stacks, semantic layers, data contracts, lineage, catalogs, data quality, and July 2026 market context.",
+    "total_sources": 30,
+    "trust_tiers": {
+      "primary": "Official vendor docs, standards, or first-party product documentation. Prefer these for factual claims and current recommendations.",
+      "secondary": "Vendor research, comparison articles, or landscape summaries. Use for context only after checking primary sources."
+    },
+    "default_source_policy": "Use primary sources first. Verify recommendation questions against current official docs and recent release notes. Use secondary sources only for framing or market context.",
+    "title": "Data Analytics Engineering - Sources"
+  },
+  "categories": {
+    "transformation_and_development": [
+      {
+        "name": "dbt Core v2 Announcement",
+        "url": "https://docs.getdbt.com/blog/dbt-core-v2-is-here",
+        "description": "Official dbt Labs blog post announcing dbt Core v2 alpha (June 2026), built on Fusion foundations, Apache 2.0. First-party source for v2 migration and Fusion GA timeline. Confirmed still alpha as of July 2026; no GA date published.",
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "retrieved": "2026-06-09",
+        "last_reviewed": "2026-07-11",
+        "max_age_days": 90,
+        "add_as_web_search": true
+      },
+      {
+        "name": "SQLMesh Linux Foundation Announcement",
+        "url": "https://www.linuxfoundation.org/press/linux-foundation-welcomes-sqlmesh-project",
+        "description": "Official Linux Foundation press release (announced March 25, 2026 at KubeCon + CloudNativeCon Europe) confirming SQLMesh contribution by Fivetran, neutral governance, and founding member list (Benzinga, CloudKitchens, Harness, Infinite Lambda, Jump AI, Minerva). Fivetran acquired SQLMesh creator Tobiko Data in Sept 2025.",
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "retrieved": "2026-06-09",
+        "last_reviewed": "2026-07-11",
+        "max_age_days": 180,
+        "add_as_web_search": true
+      },
+      {
+        "name": "dbt Developer Hub",
+        "url": "https://docs.getdbt.com/",
+        "description": "Official dbt documentation hub for transformations, governance, semantic layer, and platform workflows.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "dbt Semantic Layer",
+        "url": "https://docs.getdbt.com/docs/use-dbt-semantic-layer/dbt-sl",
+        "description": "Official dbt semantic layer documentation and entrypoint for MetricFlow-related guidance.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "SQLMesh Documentation",
+        "url": "https://sqlmesh.readthedocs.io/en/stable/",
+        "description": "Official SQLMesh documentation for project structure, environments, plans, and integrations.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "SQLMesh Plans",
+        "url": "https://sqlmesh.readthedocs.io/en/stable/concepts/plans/",
+        "description": "Official SQLMesh docs for plan creation, change categories, backfills, and forward-only rollout behavior.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "SQLMesh Audits",
+        "url": "https://sqlmesh.readthedocs.io/en/stable/concepts/audits/",
+        "description": "Official SQLMesh docs for audit-based data quality assertions.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "SQLMesh Tests",
+        "url": "https://sqlmesh.readthedocs.io/en/stable/concepts/tests/",
+        "description": "Official SQLMesh docs for unit and model testing patterns.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Coalesce Documentation",
+        "url": "https://docs.coalesce.io/",
+        "description": "Official Coalesce documentation for metadata-driven and visual transformation workflows.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      }
+    ],
+    "semantic_layers_and_serving": [
+      {
+        "name": "Lightdash Semantic Layer",
+        "url": "https://docs.lightdash.com/guides/lightdash-semantic-layer",
+        "description": "Official Lightdash guide to its dbt-aligned semantic-layer approach.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Lightdash YAML Reference",
+        "url": "https://docs.lightdash.com/references/lightdash-yaml",
+        "description": "Official Lightdash YAML reference for metadata and semantic configuration.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-13",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Lightdash Metrics Catalog",
+        "url": "https://docs.lightdash.com/guides/metrics-catalog/catalog",
+        "description": "Official Lightdash documentation for metric discovery and catalog behavior.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Lightdash AI Agents",
+        "url": "https://docs.lightdash.com/guides/ai-agents",
+        "description": "Official Lightdash guide for AI-agent and governed-metric workflows.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 90,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cube Documentation",
+        "url": "https://cube.dev/docs/product/introduction",
+        "description": "Official Cube documentation for headless BI, APIs, caching, and pre-aggregations.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Snowflake Semantic Views",
+        "url": "https://docs.snowflake.com/en/user-guide/views-semantic/overview",
+        "description": "Official Snowflake overview for native semantic views and governed metric serving.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Databricks Unity Catalog Metric Views",
+        "url": "https://docs.databricks.com/aws/en/business-semantics/metric-views",
+        "description": "Official Databricks guide for YAML-defined governed metric views in Unity Catalog.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      }
+    ],
+    "contracts_catalogs_and_lineage": [
+      {
+        "name": "OpenMetadata Documentation",
+        "url": "https://docs.open-metadata.org/",
+        "description": "Official OpenMetadata documentation hub covering discovery, governance, lineage, observability, and AI context.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenMetadata Data Contracts",
+        "url": "https://docs.open-metadata.org/latest/how-to-guides/data-contracts",
+        "description": "Official OpenMetadata guide for defining and operating data contracts.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenMetadata MCP With Claude",
+        "url": "https://docs.open-metadata.org/latest/how-to-guides/mcp/claude",
+        "description": "Official OpenMetadata guide for exposing metadata context to agent tooling through MCP.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 90,
+        "add_as_web_search": true
+      },
+      {
+        "name": "DataHub API Tutorials",
+        "url": "https://docs.datahub.com/docs/api/tutorials",
+        "description": "Official DataHub API tutorial hub for metadata automation workflows.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "DataHub Data Contracts Tutorial",
+        "url": "https://docs.datahub.com/docs/api/tutorials/data-contracts",
+        "description": "Official DataHub tutorial for managing data contracts through the metadata API.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "DataHub Assertions Tutorial",
+        "url": "https://docs.datahub.com/docs/api/tutorials/assertions",
+        "description": "Official DataHub tutorial for freshness, volume, schema, and SQL assertions.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenLineage Documentation",
+        "url": "https://openlineage.io/docs/",
+        "description": "Official OpenLineage docs for standard lineage events and integration patterns.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      }
+    ],
+    "data_quality_and_observability": [
+      {
+        "name": "Elementary Documentation",
+        "url": "https://docs.elementary-data.com/home",
+        "description": "Official Elementary docs for dbt-native monitoring and anomaly workflows.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Great Expectations Documentation",
+        "url": "https://docs.greatexpectations.io/docs/home/",
+        "description": "Official Great Expectations docs for expectation-based data validation.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Soda Documentation",
+        "url": "https://docs.soda.io/",
+        "description": "Official Soda docs for SQL- and dataset-oriented quality checks.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "dbt-expectations (Metaplane)",
+        "url": "https://github.com/metaplane/dbt-expectations",
+        "description": "Maintained dbt package for richer expectations inside dbt projects.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      }
+    ],
+    "market_context_secondary": [
+      {
+        "name": "State of Analytics Engineering 2025",
+        "url": "https://www.getdbt.com/resources/state-of-analytics-engineering-2025",
+        "description": "dbt Labs report useful for adoption and market framing, not as sole authority for 2026 recommendations.",
+        "trust_tier": "secondary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 180,
+        "add_as_web_search": true
+      },
+      {
+        "name": "dbt vs SQLMesh Comparison (SYNQ)",
+        "url": "https://www.synq.io/blog/dbt-vs-sqlmesh-a-comparison-for-modern-data-teams",
+        "description": "Secondary comparison for framing tradeoffs; verify feature claims against official docs.",
+        "trust_tier": "secondary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 90,
+        "add_as_web_search": true
+      },
+      {
+        "name": "2026 Open Source Data Quality And Observability Landscape",
+        "url": "https://datakitchen.io/blog/the-2026-open-source-data-quality-and-data-observability-landscape/",
+        "description": "Secondary landscape scan for tool discovery; validate recommendations against official vendor docs.",
+        "trust_tier": "secondary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 90,
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

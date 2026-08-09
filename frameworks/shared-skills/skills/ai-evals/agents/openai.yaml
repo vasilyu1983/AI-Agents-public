@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Evals & Fine-Tuning"
+  short_description: "Designs trustworthy LLM/agent eval and optimization programs"
+  default_prompt: "Use $ai-evals for LLM/agent eval and optimization methodology: judge bias, thresholds, reproducibility, fine-tune/test-time/distillation gates. Load for graders, gates, or max-performance choices."

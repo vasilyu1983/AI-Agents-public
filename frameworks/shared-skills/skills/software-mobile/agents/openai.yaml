@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mobile"
+  short_description: "Guides mobile platform selection and delivery across native and cross-platform"
+  default_prompt: "Use $software-mobile for Guides mobile platform selection and delivery across native and cross-platform stacks. Use when planning auth, push, deep links, releases, or app architecture."

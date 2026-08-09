@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security Testing QA"
+  short_description: "Builds automated security testing pipelines for SAST, DAST, SCA, secret"
+  default_prompt: "Use $qa-security-testing for Builds automated security testing pipelines for SAST, DAST, SCA, secret scanning, and containers. Use when integrating scanners into CI or managing security regression gates."

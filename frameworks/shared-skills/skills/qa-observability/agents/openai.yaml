@@ -1,0 +1,4 @@
+interface:
+  display_name: "Observability QA"
+  short_description: "Implement OpenTelemetry logs/metrics/traces, SLI/SLO gates, burn-rate alerts"
+  default_prompt: "Use $qa-observability for Implement OpenTelemetry logs/metrics/traces, SLI/SLO gates, burn-rate alerts, and APM integrations. Use when adding or validating observability."

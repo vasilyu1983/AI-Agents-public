@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Review"
+  short_description: "Applies systematic code review patterns and checklists"
+  default_prompt: "Use $software-code-review for Applies systematic code review patterns and checklists. Use when reviewing PRs or diffs for correctness, security, readability, maintainability, and AI-generated changes."

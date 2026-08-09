@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "title": "docs-notes-retrieval - Sources",
+    "description": "Official and community references for local-first note-vault retrieval, markdown packaging, and notebook-style exports.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "docs-notes-retrieval"
+  },
+  "official_sources": [
+    {
+      "name": "Obsidian Help",
+      "url": "https://obsidian.md/help/",
+      "description": "Official Obsidian documentation for vault structure, frontmatter, wikilinks, and graph-native note workflows.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CommonMark Specification",
+      "url": "https://spec.commonmark.org/",
+      "description": "Markdown baseline for normalizing note content across local note systems.",
+      "add_as_web_search": true
+    }
+  ],
+  "community_patterns": [
+    {
+      "name": "Obsidian Skills",
+      "url": "https://github.com/kepano/obsidian-skills",
+      "description": "Official Obsidian-maintainer Agent Skills package (kepano) implementing the Agent Skills spec for Claude Code, Codex, and OpenCode: obsidian-markdown (wikilinks/embeds/callouts/properties), obsidian-bases, json-canvas, obsidian-cli, and defuddle (clean-markdown web extraction). Verified 2026-07-11.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "NotebookLM Integration",
+      "url": "https://github.com/PleasePrompto/notebooklm-skill",
+      "description": "Community pattern for preparing NotebookLM-adjacent note workflows, summaries, and source bundles.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Deep Research Skill",
+      "url": "https://github.com/199-biotechnologies/claude-deep-research-skill",
+      "description": "Reference for staged research packaging when notes and source bundles feed a broader synthesis workflow.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Karpathy LLM Wiki gist",
+      "url": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      "description": "General-purpose bootstrap prompt for an LLM that incrementally builds an interlinked markdown wiki from raw sources. Three-part split: raw sources, generated wiki (entities/concepts/sources/synthesis), schema docs. Tool-agnostic; works with Claude Code, Codex, or Obsidian-style local vaults.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "AI Edge — How to Give Claude Perfect Memory",
+      "url": "https://x.com/aiedge_/status/2046966170868486512",
+      "description": "Practitioner three-layer memory guide (thread active 2026-04-22, existence and substance confirmed via search 2026-07-11; specific view/bookmark counts could not be independently verified and are not cited). Used narrowly for the archive-snapshot recipe in the 'Snapshot the AI-owned layer' subsection: weekly point-in-time copy of the AI-owned memory directory to a read-only location outside the agent's write scope. The article's 4-file Master Folder variant (Instructions/Memory/Context/Archive-Guide) is intentionally NOT adopted to avoid proliferating journaling-file schemes alongside Hayduk, Watts, Karpathy, and Ganim.",
+      "add_as_web_search": false,
+      "captured": "2026-05-12"
+    },
+    {
+      "name": "Corey Ganim — AI-Curated Wiki Pattern",
+      "url": "https://x.com/coreyganim/status/2041144598446092411",
+      "description": "Practitioner pattern (thread active 2026-04-06, existence and substance confirmed via search 2026-07-11; specific view/bookmark counts could not be independently verified and are not cited) for an AI-curated knowledge base: raw/ (human append-only) + wiki/ (AI-rewritten, AI-owned) + outputs/ (generated artifacts) + CLAUDE.md as schema file. Source for the 'AI-Curated Wiki Variant (Ganim Pattern)' section: the 4-step compounding loop, the verbatim monthly health-check prompt, and the 'plain folders > plugin stacks' tooling stance.",
+      "add_as_web_search": false,
+      "captured": "2026-05-12"
+    }
+  ]
+}

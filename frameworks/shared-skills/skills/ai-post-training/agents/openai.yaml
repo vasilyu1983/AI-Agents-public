@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Post-Training"
+  short_description: "RLHF, DPO, GRPO, RLVR, reward models, alignment"
+  default_prompt: "Use $ai-post-training for post-training and alignment: reward modeling, RLHF/PPO, DPO/DAAs, GRPO, RLVR, RLAIF, over-optimization, when adapting an SFT model with preference or verifiable-reward signals."

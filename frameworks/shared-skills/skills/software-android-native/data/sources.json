@@ -1,0 +1,193 @@
+{
+  "metadata": {
+    "skill": "software-android-native",
+    "updated": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 25,
+    "description": "Primary sources for native Android development, Android Studio agent workflows, Gradle/ADB tooling, and proof-first Codex or Claude Code execution guidance.",
+    "title": "Software Android Native - Sources"
+  },
+  "categories": {
+    "android_platform": [
+      {
+        "name": "Jetpack Compose Documentation",
+        "url": "https://developer.android.com/develop/ui/compose",
+        "description": "Primary reference for Jetpack Compose UI framework, state management, and Compose APIs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Kotlin Documentation",
+        "url": "https://kotlinlang.org/docs/home.html",
+        "description": "Primary Kotlin language reference including coroutines, Flow, and K2 compiler.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Studio",
+        "url": "https://developer.android.com/studio",
+        "description": "Primary landing page for Android Studio features, Gemini integration, and release notes.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android API 36 Behavior Changes",
+        "url": "https://developer.android.com/about/versions/16/behavior-changes-all",
+        "description": "Behavior changes affecting all apps targeting Android 16 (API 36) — the current Google Play target-API floor as of 2026-07-11.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android 17 Release Notes",
+        "url": "https://developer.android.com/about/versions/17/release-notes",
+        "description": "Android 17 (API 37) shipped stable 2026-06-16; behavior changes for apps targeting the newest platform release. Resolve current API level at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "16KB Page Size Support",
+        "url": "https://developer.android.com/guide/practices/page-sizes",
+        "description": "16KB memory page-size compatibility requirement for apps shipping native (.so) libraries. Verify current enforcement date at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Navigation",
+        "url": "https://developer.android.com/guide/navigation/design/compose",
+        "description": "Primary reference for Jetpack Compose Navigation with type-safe routes.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "ViewModel Documentation",
+        "url": "https://developer.android.com/topic/libraries/architecture/viewmodel",
+        "description": "Primary reference for ViewModel lifecycle, StateFlow, and Hilt integration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Hilt Dependency Injection",
+        "url": "https://developer.android.com/training/dependency-injection/hilt-android",
+        "description": "Primary reference for Hilt DI setup, modules, and ViewModel injection.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Room Persistence Library",
+        "url": "https://developer.android.com/training/data-storage/room",
+        "description": "Primary reference for Room database, DAOs, migrations, and KSP integration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "WorkManager",
+        "url": "https://developer.android.com/topic/libraries/architecture/workmanager",
+        "description": "Primary reference for background work scheduling and CoroutineWorker.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google Play Billing Library",
+        "url": "https://developer.android.com/google/play/billing",
+        "description": "Primary reference for Play Billing Library integration, subscriptions, and consumables.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Data Safety Declarations",
+        "url": "https://developer.android.com/guide/topics/data/collect-share",
+        "description": "Primary reference for Play Console data safety form and declaration requirements.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Target SDK Requirements",
+        "url": "https://developer.android.com/google/play/requirements/target-sdk",
+        "description": "Current target SDK level requirements for new apps and updates on Google Play.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Testing",
+        "url": "https://developer.android.com/develop/ui/compose/testing",
+        "description": "Primary reference for Compose UI testing APIs, semantics, and test rules.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google Play Target API Level Requirement",
+        "url": "https://developer.android.com/google/play/requirements/target-sdk",
+        "description": "Authoritative Google Play target-API requirement. ALWAYS read the current required level and date here; never hardcode a targeting deadline.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Gemini Nano (on-device AI)",
+        "url": "https://developer.android.com/ai/gemini-nano",
+        "description": "On-device Gemini Nano / AICore + ML Kit GenAI APIs. Resolve current model generation and preview/GA status at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Studio Releases",
+        "url": "https://developer.android.com/studio/releases",
+        "description": "Authoritative Android Studio release notes incl. Agent Mode and profiler changes. Resolve current version at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "agent_platforms": [
+      {
+        "name": "OpenAI Codex AGENTS.md Guide",
+        "url": "https://developers.openai.com/codex/guides/agents-md/",
+        "description": "Official guidance for Codex project memory in AGENTS.md.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Claude Code Memory",
+        "url": "https://docs.anthropic.com/en/docs/claude-code/memory",
+        "description": "Official Claude Code memory and repo-context guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Claude Code Common Workflows",
+        "url": "https://code.claude.com/docs/en/tutorials",
+        "description": "Official workflows guidance including verification and worktree patterns.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Claude Code Subagents",
+        "url": "https://code.claude.com/docs/en/sub-agents",
+        "description": "Official guidance for focused subagents and tool scoping.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Claude Code Hooks",
+        "url": "https://code.claude.com/docs/en/hooks",
+        "description": "Official hook lifecycle documentation for guardrails and post-tool checks.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "build_tools": [
+      {
+        "name": "Gradle Build Tool",
+        "url": "https://docs.gradle.org/current/userguide/userguide.html",
+        "description": "Primary Gradle documentation for build scripts, tasks, and configuration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Gradle Plugin (AGP)",
+        "url": "https://developer.android.com/build",
+        "description": "Primary reference for AGP configuration, build variants, and version catalog integration.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ]
+  }
+}

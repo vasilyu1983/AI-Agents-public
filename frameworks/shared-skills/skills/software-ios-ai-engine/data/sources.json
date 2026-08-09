@@ -1,0 +1,312 @@
+{
+  "metadata": {
+    "skill": "software-ios-ai-engine",
+    "title": "Software iOS Local AI Engine - Sources",
+    "description": "Primary research and vendor-doc sources backing the local iOS AI engine skill. Recheck freshness whenever Apple Foundation Models framework, iOS major version, or the SLM-on-device landscape shifts.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "version": "2026-07-11",
+    "total_sources": 33,
+    "freshness_cadence": "quarterly",
+    "cross_skill_references": [
+      {
+        "skill": "software-ios-design",
+        "path": "../../software-ios-design/SKILL.md",
+        "when": "rendering the answer bubble, grounding line, action row, follow-up chips"
+      },
+      {
+        "skill": "software-ios-native",
+        "path": "../../software-ios-native/SKILL.md",
+        "when": "SwiftUI architecture, Observation, concurrency around the composer layer"
+      },
+      {
+        "skill": "ai-rag",
+        "path": "../../ai-rag/SKILL.md",
+        "when": "upstream retrieval into the evidence bundle (chunking, reranking, freshness)"
+      },
+      {
+        "skill": "ai-context-layer",
+        "path": "../../ai-context-layer/SKILL.md",
+        "when": "durable per-user context store that assembles the bundle"
+      },
+      {
+        "skill": "ai-prompt-engineering",
+        "path": "../../ai-prompt-engineering/SKILL.md",
+        "when": "prompt contract inside Option A (voice rules, anchor discipline, anti-hallucination)"
+      },
+      {
+        "skill": "ai-llm-inference",
+        "path": "../../ai-llm-inference/SKILL.md",
+        "when": "model-choice tradeoffs (Apple FM vs an MLX-served open-weight model vs cloud), tokenization, inference perf"
+      },
+      {
+        "skill": "ai-evals-observer",
+        "path": "agent/team role, not a shared skill folder",
+        "when": "regression gates and trace grading of composer output"
+      }
+    ]
+  },
+  "primary_sources": [
+    {
+      "id": "apple-foundation-models-docs",
+      "title": "Foundation Models — Apple Developer Documentation",
+      "url": "https://developer.apple.com/documentation/FoundationModels",
+      "category": "vendor_doc",
+      "covers": ["option-a-foundation-models"],
+      "recheck_when": "iOS major version changes or Apple announces ML framework updates"
+    },
+    {
+      "id": "apple-foundation-models-generating",
+      "title": "Generating content and performing tasks with Foundation Models",
+      "url": "https://developer.apple.com/documentation/FoundationModels/generating-content-and-performing-tasks-with-foundation-models",
+      "category": "vendor_doc",
+      "covers": ["option-a-foundation-models", "swiftui-composer-integration"]
+    },
+    {
+      "id": "apple-foundation-models-updates",
+      "title": "Foundation Models updates",
+      "url": "https://developer.apple.com/documentation/Updates/FoundationModels",
+      "category": "vendor_doc",
+      "covers": ["option-a-foundation-models", "foundation-models-app-skeleton"]
+    },
+    {
+      "id": "apple-foundation-models-tool",
+      "title": "Tool — Foundation Models",
+      "url": "https://developer.apple.com/documentation/foundationmodels/tool",
+      "category": "vendor_doc",
+      "covers": ["foundation-models-app-skeleton", "local-ai-task-patterns"]
+    },
+    {
+      "id": "apple-foundation-models-wwdc25",
+      "title": "Meet the Foundation Models framework (WWDC25)",
+      "url": "https://developer.apple.com/videos/play/wwdc2025/286/",
+      "category": "vendor_doc",
+      "covers": ["option-a-foundation-models"]
+    },
+    {
+      "id": "apple-foundation-models-deep-dive-wwdc25",
+      "title": "Deep dive into the Foundation Models framework (WWDC25)",
+      "url": "https://developer.apple.com/videos/play/wwdc2025/301/",
+      "category": "vendor_doc",
+      "covers": ["option-a-foundation-models", "swiftui-composer-integration"]
+    },
+    {
+      "id": "apple-foundation-models-prompt-safety-wwdc25",
+      "title": "Explore prompt design and safety for on-device foundation models (WWDC25)",
+      "url": "https://developer.apple.com/videos/play/wwdc2025/248/",
+      "category": "vendor_doc",
+      "covers": ["option-a-foundation-models", "intent-router-patterns"]
+    },
+    {
+      "id": "apple-foundation-models-context-window-tn3193",
+      "title": "TN3193: Managing the on-device foundation model's context window",
+      "url": "https://developer.apple.com/documentation/technotes/tn3193-managing-the-on-device-foundation-model-s-context-window",
+      "category": "vendor_doc",
+      "covers": ["option-a-foundation-models", "three-tier-architecture", "option-c-retrieval-stitch"]
+    },
+    {
+      "id": "apple-foundation-models-prompting",
+      "title": "Prompting an on-device foundation model",
+      "url": "https://developer.apple.com/documentation/foundationmodels/prompting-an-on-device-foundation-model",
+      "category": "vendor_doc",
+      "covers": ["option-a-foundation-models"]
+    },
+    {
+      "id": "apple-app-intents-siri-apple-intelligence",
+      "title": "Integrating actions with Siri and Apple Intelligence",
+      "url": "https://developer.apple.com/documentation/AppIntents/Integrating-actions-with-siri-and-apple-intelligence",
+      "category": "vendor_doc",
+      "covers": ["intent-router-patterns", "three-tier-architecture", "local-ai-task-patterns"]
+    },
+    {
+      "id": "apple-natural-language-docs",
+      "title": "Natural Language — Apple Developer Documentation",
+      "url": "https://developer.apple.com/documentation/NaturalLanguage",
+      "category": "vendor_doc",
+      "covers": ["local-ai-task-patterns", "intent-router-patterns"]
+    },
+    {
+      "id": "apple-nl-embedding-docs",
+      "title": "NLEmbedding — Apple Developer Documentation",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nlembedding",
+      "category": "vendor_doc",
+      "covers": ["on-device-vector-retrieval-ios", "option-c-retrieval-stitch"]
+    },
+    {
+      "id": "apple-nl-contextual-embedding-docs",
+      "title": "NLContextualEmbedding — Apple Developer Documentation",
+      "url": "https://developer.apple.com/documentation/naturallanguage/nlcontextualembedding",
+      "category": "vendor_doc",
+      "covers": ["local-ai-task-patterns", "option-c-retrieval-stitch"]
+    },
+    {
+      "id": "apple-accelerate-docs",
+      "title": "Accelerate — Apple Developer Documentation",
+      "url": "https://developer.apple.com/documentation/Accelerate",
+      "category": "vendor_doc",
+      "covers": ["on-device-vector-retrieval-ios"]
+    },
+    {
+      "id": "apple-app-intents-discovery",
+      "title": "Making actions and content discoverable and widely available",
+      "url": "https://developer.apple.com/documentation/appintents/making-actions-and-content-discoverable-and-widely-available/",
+      "category": "vendor_doc",
+      "covers": ["foundation-models-app-skeleton", "local-ai-task-patterns"]
+    },
+    {
+      "id": "apple-core-ml-docs",
+      "title": "Core ML — Apple Developer Documentation",
+      "url": "https://developer.apple.com/documentation/coreml",
+      "category": "vendor_doc",
+      "covers": ["local-ai-task-patterns"]
+    },
+    {
+      "id": "apple-core-ml-overview",
+      "title": "Core ML Overview",
+      "url": "https://developer.apple.com/machine-learning/core-ml/",
+      "category": "vendor_doc",
+      "covers": ["local-ai-task-patterns"]
+    },
+    {
+      "id": "apple-on-device-server-models",
+      "title": "Introducing Apple's On-Device and Server Foundation Models",
+      "url": "https://machinelearning.apple.com/research/introducing-apple-foundation-models",
+      "category": "research",
+      "covers": ["option-a-foundation-models", "three-tier-architecture"]
+    },
+    {
+      "id": "apple-foundation-2025-updates",
+      "title": "Updates to Apple's On-Device and Server Foundation Language Models",
+      "url": "https://machinelearning.apple.com/research/apple-foundation-models-2025-updates",
+      "category": "research",
+      "covers": ["option-a-foundation-models"]
+    },
+    {
+      "id": "apple-foundation-models-third-gen-2026",
+      "title": "Introducing the Third Generation of Apple's Foundation Models",
+      "url": "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models",
+      "category": "research",
+      "covers": ["option-a-foundation-models"],
+      "recheck_when": "iOS/iPadOS/macOS 27 ships publicly — as of 2026-07-11 this is developer-beta only; do not treat AFM Core Advanced (20B sparse, 12GB+ tier) or the LanguageModel third-party protocol as shipped"
+    },
+    {
+      "id": "apple-foundation-models-tn3193-contextsize",
+      "title": "TN3193: Managing the on-device foundation model's context window (contextSize / tokenCount(for:), iOS 26.4+)",
+      "url": "https://developer.apple.com/documentation/technotes/tn3193-managing-the-on-device-foundation-model-s-context-window",
+      "category": "vendor_doc",
+      "covers": ["option-a-foundation-models", "three-tier-architecture", "patterns-antipatterns-traps-scenarios"]
+    },
+    {
+      "id": "apple-foundation-models-acceptable-use",
+      "title": "Acceptable use requirements for the Foundation Models framework",
+      "url": "https://developer.apple.com/apple-intelligence/acceptable-use-requirements-for-the-foundation-models-framework/",
+      "category": "vendor_doc",
+      "covers": ["option-a-foundation-models"]
+    },
+    {
+      "id": "apple-private-cloud-compute",
+      "title": "Private Cloud Compute: A new frontier for AI privacy in the cloud",
+      "url": "https://security.apple.com/blog/private-cloud-compute/",
+      "category": "vendor_doc",
+      "covers": ["three-tier-architecture", "composition-with-rag-context-vector"],
+      "recheck_when": "Apple changes PCC guarantees or third-party data-center expansion (Google Cloud, announced June 2026)"
+    }
+  ],
+  "supporting_sources": [
+    {
+      "id": "ragflow-2025-review",
+      "title": "From RAG to Context — 2025 year-end review of RAG",
+      "url": "https://ragflow.io/blog/rag-review-2025-from-rag-to-context",
+      "category": "industry_review",
+      "covers": ["three-tier-architecture", "option-c-retrieval-stitch"]
+    },
+    {
+      "id": "google-ai-edge-slm-rag",
+      "title": "On-device small language models with multimodality, RAG, and Function Calling",
+      "url": "https://developers.googleblog.com/google-ai-edge-small-language-models-multimodality-rag-function-calling/",
+      "category": "vendor_doc",
+      "covers": ["option-a-foundation-models", "three-tier-architecture"]
+    },
+    {
+      "id": "rpm-personalization-blackbox",
+      "title": "RPM: Reasoning-Level Personalization for Black-Box Large Language Models",
+      "url": "https://arxiv.org/html/2505.21082v4",
+      "category": "research_paper",
+      "covers": ["three-tier-architecture", "option-c-retrieval-stitch"]
+    },
+    {
+      "id": "fit-rag",
+      "title": "FIT-RAG: Black-Box RAG with Factual Information and Token Reduction",
+      "url": "https://arxiv.org/html/2403.14374v1",
+      "category": "research_paper",
+      "covers": ["option-c-retrieval-stitch", "three-tier-architecture"]
+    },
+    {
+      "id": "rasa-llm-chatbot-arch",
+      "title": "LLM Chatbot Architecture",
+      "url": "https://rasa.com/blog/llm-chatbot-architecture",
+      "category": "industry_guide",
+      "covers": ["intent-router-patterns", "three-tier-architecture"]
+    },
+    {
+      "id": "aisera-hybrid-conversation-design",
+      "title": "Conversation Design (ICM, LLM, and Hybrid)",
+      "url": "https://docs.aisera.com/aisera-platform/crafting-the-conversation/conversation-design-icm-llm-and-hybrid",
+      "category": "industry_guide",
+      "covers": ["three-tier-architecture", "intent-router-patterns"]
+    },
+    {
+      "id": "hybrid-intent-llm",
+      "title": "Intent-Driven Natural Language Interface — Hybrid LLM + Intent Classification",
+      "url": "https://medium.com/data-science-collective/intent-driven-natural-language-interface-a-hybrid-llm-intent-classification-approach-e1d96ad6f35d",
+      "category": "practitioner_writeup",
+      "covers": ["intent-router-patterns"]
+    },
+    {
+      "id": "ibm-nlg-overview",
+      "title": "What is Natural Language Generation (NLG)?",
+      "url": "https://www.ibm.com/think/topics/natural-language-generation",
+      "category": "fundamentals",
+      "covers": ["nlg-fundamentals", "option-b-sentence-bank"]
+    },
+    {
+      "id": "awesome-nlg",
+      "title": "awesome-nlg — curated NLG resources",
+      "url": "https://github.com/accelerated-text/awesome-nlg",
+      "category": "reference_list",
+      "covers": ["nlg-fundamentals", "option-b-sentence-bank"]
+    },
+    {
+      "id": "deepsense-slm-rag-edge",
+      "title": "Deploying Small LLMs with RAG on Edge",
+      "url": "https://deepsense.ai/blog/implementing-small-language-models-slms-with-rag-on-embedded-devices-leading-to-cost-reduction-data-privacy-and-offline-use/",
+      "category": "industry_guide",
+      "covers": ["option-a-foundation-models", "three-tier-architecture"]
+    }
+  ],
+  "categories": {
+    "ai": [
+      {
+        "name": "Foundation Models Framework",
+        "url": "https://developer.apple.com/documentation/foundationmodels",
+        "description": "Apple on-device Foundation Models framework: @Generable guided generation, tool calling, availability checks. Verify supported input modalities at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Apple Machine Learning",
+        "url": "https://developer.apple.com/machine-learning/",
+        "description": "Canonical Apple on-device ML hub (Foundation Models, Core ML, MLX direction). Resolve current capabilities and OS gating at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "App Store Review Guidelines",
+        "url": "https://developer.apple.com/app-store/review/guidelines/",
+        "description": "Review rules that govern AI-generated content: 4.3(b) saturated category (fortune-telling/astrology), 1.2 UGC safety, 2.5.2 no executable-code download, 5.1.1 data. Re-read live before each submission. Mapped in software-ios-design/references/app-review-guidelines-map.md",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ]
+  }
+}

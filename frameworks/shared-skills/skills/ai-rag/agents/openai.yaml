@@ -1,0 +1,4 @@
+interface:
+  display_name: "RAG & Retrieval Engineering"
+  short_description: "Designs retrieval-augmented generation and search systems"
+  default_prompt: "Use $ai-rag to design retrieval-augmented generation and search systems. Use when choosing retrieval, chunking, hybrid search, grounding, or RAG evaluation patterns."

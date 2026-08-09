@@ -1,0 +1,19 @@
+interface:
+  display_name: "iOS Design"
+  short_description: "Native iOS design audits and review loops"
+  default_prompt: "Use $software-ios-design to review or refine a native iOS screen on a freshly verified build, focusing on HIG layout, typography, materials, navigation, and dashboards."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "XcodeBuildMCP"
+      description: "Optional XcodeBuildMCP server for simulator build, screenshot, UI inspection, and log-driven design verification when available"
+  cli:
+    - type: "brew-or-mint"
+      value: "xcbeautify"
+      description: "Optional CLI formatter for clean xcodebuild output when XcodeBuildMCP is unavailable"
+  plugins:
+    - type: "codex-plugin"
+      value: "Build iOS Apps"
+      description: "Improves SwiftUI animation generation (e.g., scroll reveal animations) when available in Codex"
+policy:
+  allow_implicit_invocation: true

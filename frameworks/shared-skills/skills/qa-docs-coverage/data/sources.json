@@ -1,0 +1,228 @@
+{
+  "metadata": {
+    "skill": "qa-docs-coverage",
+    "updated": "2026-07-11",
+    "version": "4.2",
+    "total_sources": 26,
+    "description": "Primary references for documentation coverage, freshness, contract validation, AI instruction audits, and CI quality gates.",
+    "title": "QA Docs Coverage - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "contracts_and_schemas": [
+      {
+        "name": "OpenAPI Specification",
+        "url": "https://spec.openapis.org/oas/latest.html",
+        "description": "Primary reference for REST API contracts.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "AsyncAPI Specification v3.1",
+        "url": "https://www.asyncapi.com/docs/reference/specification/v3.1.0",
+        "description": "Primary reference for event-driven API contracts, currently on the 3.x line (3.0 released Nov 2023, 3.1.0 also published). New documents should default to `asyncapi: 3.0.0` unless a 3.1-only feature is needed.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "JSON Schema",
+        "url": "https://json-schema.org/",
+        "description": "Schema standard for payload validation and documentation.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "documentation_frameworks": [
+      {
+        "name": "Diataxis",
+        "url": "https://diataxis.fr/",
+        "description": "Information architecture for tutorials, how-to guides, reference, and explanation. Created 2020 by Daniele Procida (Django core developer, Director of Engineering for documentation at Canonical); see the colophon at https://diataxis.fr/colophon/ for attribution and history.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "The Good Docs Project",
+        "url": "https://www.thegooddocsproject.dev/",
+        "description": "Documentation templates and best practices.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Write the Docs Guide",
+        "url": "https://www.writethedocs.org/guide/",
+        "description": "Community guidance for docs workflows and governance.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "quality_gates": [
+      {
+        "name": "Vale",
+        "url": "https://vale.sh/",
+        "description": "Prose linting for docs quality checks. Actively maintained with LSP support (vale-ls) and Views for targeted YAML/JSON/TOML scoping; check the GitHub releases page (https://github.com/vale-cli/vale/releases) for the exact current version before pinning one in CI, since the project moved from errata-ai/vale to vale-cli/vale and version numbers found in older docs may lag.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "markdownlint-cli2",
+        "url": "https://github.com/DavidAnson/markdownlint-cli2",
+        "description": "Fast, configuration-based Markdown linting CLI. v0.23.0+ as of July 2026 (npm). Prefer markdownlint-cli2 over the legacy markdownlint-cli.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Lychee",
+        "url": "https://github.com/lycheeverse/lychee",
+        "description": "Fast external link checking for CI and large docs trees. v0.24.x releases current as of mid-2026; confirm the pinned version in lycheeverse/lychee-action before relying on a specific number.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "api_validation": [
+      {
+        "name": "Spectral",
+        "url": "https://stoplight.io/open-source/spectral",
+        "description": "Linter for OpenAPI, AsyncAPI, and Arazzo v1 documents.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Redocly CLI Lint",
+        "url": "https://redocly.com/docs/cli/commands/lint",
+        "description": "OpenAPI, AsyncAPI, and Arazzo linting, bundling, and preview. v2.36.0+ as of June 2026 (ESM-only from v2, requires Node.js 22.12+ or 20.19+).",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "AsyncAPI CLI",
+        "url": "https://www.asyncapi.com/docs/tools/cli/usage",
+        "description": "Validation and tooling for AsyncAPI specs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "oasdiff",
+        "url": "https://github.com/oasdiff/oasdiff",
+        "description": "Breaking-change detection for OpenAPI diffs. 300+ rules, GitHub Action available. Primary replacement for Optic, whose GitHub repo was archived 2026-01-12 following Atlassian's April 2024 acquisition and no subsequent Compass integration shipping.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "docstring_and_code_doc_coverage": [
+      {
+        "name": "interrogate",
+        "url": "https://interrogate.readthedocs.io/",
+        "description": "Python docstring coverage checker; reports which modules, classes, functions, and methods lack docstrings and can gate CI on a minimum coverage percentage. Coverage percentage measures presence only, not quality — pair with a manual spot-check (see SKILL.md Coverage vs. Usefulness).",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "docstr-coverage",
+        "url": "https://github.com/HunterMcGushion/docstr_coverage",
+        "description": "Python docstring coverage tool with per-file and project-wide statistics; predates and partly inspired interrogate. Same presence-not-quality caveat applies.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "ai_instruction_coverage": [
+      {
+        "name": "OpenAI AGENTS.md Guide",
+        "url": "https://developers.openai.com/codex/guides/agents-md",
+        "description": "Current AGENTS.md behavior for Codex and OpenAI coding agents. Discovery walks git root to cwd, concatenating global ~/.codex/AGENTS.md plus every AGENTS.md on the path; 32 KiB combined cap by default (project_doc_max_bytes in ~/.codex/config.toml); files discovered later can be partially or fully dropped once the cap is hit.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Anthropic Claude Memory",
+        "url": "https://code.claude.com/docs/en/memory",
+        "description": "Current CLAUDE.md and imported memory guidance. As of 2026 this covers two complementary systems: CLAUDE.md (instructions the user writes) and Auto memory (notes Claude writes itself from corrections and observed preferences) — an AI-instruction audit should check both, not just CLAUDE.md.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Anthropic Claude Best Practices",
+        "url": "https://code.claude.com/docs/en/best-practices",
+        "description": "Current Claude Code workflow and repo guidance.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Model Context Protocol Intro",
+        "url": "https://modelcontextprotocol.io/docs/getting-started/intro",
+        "description": "Overview of MCP resources, tools, and prompts for agent-connected systems.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "llms.txt specification",
+        "url": "https://llms.txt",
+        "description": "De facto convention for AI-agent-readable docs. Plain Markdown at /llms.txt summarizes API endpoints, auth, and schemas for IDE agents, MCP tools, and coding assistants. Adopted by Stripe, Cloudflare, and Vercel among others; not an RFC or W3C standard. Adoption-rate and citation-impact claims vary widely by methodology (one crawl reports 844,000+ sites via BuiltWith while independent Tranco-Top-10k crawls in 2026 find roughly 5-10% adoption, and at least one 2026 analysis found no measurable correlation between having llms.txt and being cited by LLMs) — treat any single adoption number as unverified as of 2026-07-11 and cite the methodology, not just the figure.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "large_repo_context": [
+      {
+        "name": "gitingest",
+        "url": "https://gitingest.com/",
+        "description": "Prompt-friendly repository ingest for large repos.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "repo-to-text",
+        "url": "https://github.com/kirill-markin/repo-to-text",
+        "description": "Selective repository-to-text extraction for large codebase audits.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "optional_ai_doc_tools": [
+      {
+        "name": "Mintlify",
+        "url": "https://mintlify.com/",
+        "description": "Commercial docs platform; optional for teams with managed docs portals.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Documentation.AI",
+        "url": "https://documentation.ai/",
+        "description": "Optional AI documentation tooling; verify claims before recommending.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Fern API docs",
+        "url": "https://buildwithfern.com/",
+        "description": "API docs generation with automatic llms.txt output and OpenAPI-driven reference pages. Optional for teams adopting agent-readable docs.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "governance": [
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "description": "Optional governance baseline for AI-assisted documentation workflows.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ]
+  }
+}

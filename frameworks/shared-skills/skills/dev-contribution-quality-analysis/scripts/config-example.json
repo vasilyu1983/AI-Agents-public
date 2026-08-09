@@ -1,0 +1,113 @@
+{
+    "_comment": "Configuration for dev-contribution-quality-analysis scripts. Copy and customise. Paths are resolved relative to the config file location.",
+
+    "input_commits": "../inputs/raw-commits.csv",
+    "input_mr": "../inputs/mr-acceptances.csv",
+    "output_profiles": "../derived/contribution-profiles.json",
+    "output_report": "../reports/quality-report.md",
+    "output_json": "../derived/quality-scores.json",
+    "identity_alias_matrix_json": "",
+    "repo_roots": [],
+
+    "_input_hint": "CSVs must match the format produced by the project-scoped counterpart skill extraction scripts (extract-commits.sh, extract-mr-acceptances.sh).",
+    "_identity_hint": "The shared identity alias matrix from the project-scoped counterpart skill is loaded first when present. Use email_to_person below only for run-specific overrides.",
+    "_repo_roots_hint": "Optional repo roots for Tier 2 analysis (complexity delta, test path detection, CC-* sampling). When omitted, analysis uses CSV-only Tier 1 signals.",
+
+    "target_persons": [],
+    "target_teams": [],
+    "_target_hint": "When empty, all persons in the CSV are analyzed. Specify names (canonical, after alias resolution) to limit scope.",
+
+    "email_to_person": {
+        "_comment": "Config-local identity overrides layered on top of shared alias matrix.",
+        "jane.doe@company.com": "Jane Doe"
+    },
+
+    "person_timezone": {
+        "_comment": "UTC offset (hours) per person for local-time analysis.",
+        "_default": 0,
+        "Jane Doe": -5
+    },
+
+    "role_calibration": {
+        "_comment": "Role-based expectation adjustments. Keys are canonical person names.",
+        "_roles": "ic (default), lead, manager, cto",
+        "_example": {
+            "Alice Smith": {
+                "role": "lead",
+                "d1_multiplier": 0.7,
+                "d2_multiplier": 0.8,
+                "d4_multiplier": 1.3,
+                "mr_baseline_per_week": 1.5
+            }
+        }
+    },
+
+    "analysis_window_days": 90,
+    "_window_hint": "Recommended minimum: 60 days. Below 60 days, some signals become noisy.",
+
+    "scoring": {
+        "d1_weight": 20,
+        "d2_weight": 25,
+        "d3_weight": 15,
+        "d4_weight": 20,
+        "d5_weight": 10,
+        "d6_weight": 10,
+        "_d6_hint": "D6 is context-only and does not affect tier assignment regardless of weight."
+    },
+
+    "quality_sampling": {
+        "_comment": "Code quality sampling configuration. Requires repo_roots to be set.",
+        "enabled": false,
+        "sample_size_per_person": 5,
+        "include_cc_rules": true,
+        "max_diff_lines_per_commit": 300,
+        "skip_merge_commits": true,
+        "seed": null,
+        "supported_ast_extensions": [".py"]
+    },
+
+    "thresholds": {
+        "_comment": "Scoring thresholds. See references/scoring-model.md for full definitions.",
+        "min_commits": 30,
+        "min_active_days": 20,
+        "churn_14d_pct_good": 8,
+        "churn_14d_pct_warning": 15,
+        "churn_14d_pct_red": 25,
+        "duplication_pct_good": 5,
+        "duplication_pct_warning": 10,
+        "duplication_pct_red": 15,
+        "refactoring_ratio_good": 15,
+        "refactoring_ratio_ok": 8,
+        "refactoring_ratio_low": 3,
+        "pr_size_elite": 250,
+        "pr_size_good": 500,
+        "pr_size_red": 1000,
+        "self_merge_rate_good": 0,
+        "self_merge_rate_warning": 5,
+        "self_merge_rate_red": 10,
+        "commit_msg_min_length": 10,
+        "review_rate_good_per_week": 2.0,
+        "review_rate_ok_per_week": 1.0,
+        "review_rate_low_per_week": 0.5,
+        "test_ratio_good": 40,
+        "test_ratio_ok": 25,
+        "test_ratio_low": 15
+    },
+
+    "report_options": {
+        "mode": "person",
+        "_modes": "person | team",
+        "include_dimension_breakdown": true,
+        "include_sampled_commits": true,
+        "include_trend_analysis": false,
+        "_trend_hint": "Trend analysis requires multiple analysis windows. Run the pipeline for each window and pass all profiles to generate-quality-report.py."
+    },
+
+    "non_working_date_ranges": [
+        {
+            "name": "Year-end holiday window",
+            "start": "2025-12-31",
+            "end": "2026-01-09"
+        }
+    ]
+}

@@ -1,0 +1,223 @@
+{
+  "metadata": {
+    "skill": "qa-testing-android",
+    "updated": "2026-07-11",
+    "version": "1.5",
+    "total_sources": 28,
+    "description": "Primary references for Android testing with Espresso, UI Automator, Compose Testing, screenshot tests, and adaptive UI validation.",
+    "title": "QA Testing Android - Sources",
+    "last_updated": "2026-07-11",
+    "note": "Android 17 (API 37) shipped 2026-06-16. Google Play requires target API 36 for new apps/updates as of the 2026-08-31 deadline (existing apps: API 35 minimum), with a one-time extension to 2026-11-01. Re-verify at https://developer.android.com/google/play/requirements/target-sdk before relying on a specific API number."
+  },
+  "categories": {
+    "google_official_docs": [
+      {
+        "name": "Android Testing Documentation",
+        "url": "https://developer.android.com/training/testing",
+        "description": "Official Android testing fundamentals and best practices.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Espresso Documentation",
+        "url": "https://developer.android.com/training/testing/espresso",
+        "description": "Official Espresso UI testing framework docs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Espresso Cheat Sheet",
+        "url": "https://developer.android.com/training/testing/espresso/cheat-sheet",
+        "description": "Quick reference for Espresso matchers, actions, and assertions.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "UI Automator Documentation",
+        "url": "https://developer.android.com/training/testing/other-components/ui-automator",
+        "description": "Modern UI Automator guidance for system UI, cross-app flows, and benchmarking drivers.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "UI Automator Release Notes",
+        "url": "https://developer.android.com/jetpack/androidx/releases/test-uiautomator",
+        "description": "Current UI Automator release status and API changes.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Testing Documentation",
+        "url": "https://developer.android.com/develop/ui/compose/testing",
+        "description": "Official Jetpack Compose testing guide.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Testing Codelab",
+        "url": "https://developer.android.com/codelabs/jetpack-compose-testing",
+        "description": "Hands-on tutorial for Compose UI testing.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Android Test Orchestrator",
+        "url": "https://developer.android.com/training/testing/instrumented-tests/androidx-test-libraries/runner",
+        "description": "Test isolation and crash recovery for instrumented tests.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Build-Managed Devices",
+        "url": "https://developer.android.com/studio/test/managed-devices",
+        "description": "Provision and run emulator-based tests via Gradle for CI and sharding.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Screenshot Testing",
+        "url": "https://developer.android.com/training/testing/ui-tests/screenshot",
+        "description": "Official overview of screenshot testing strategies on Android.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Preview Screenshot Testing",
+        "url": "https://developer.android.com/studio/preview/compose-screenshot-testing",
+        "description": "Official setup and workflow for Compose Preview screenshot tests.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Test Different Screen Sizes",
+        "url": "https://developer.android.com/training/testing/different-screens",
+        "description": "Official guidance for validating apps across screen sizes and form factors.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Libraries and Tools to Test Different Screen Sizes",
+        "url": "https://developer.android.com/training/testing/different-screens/tools",
+        "description": "Espresso Device API, DeviceConfigurationOverride, and related adaptive UI tooling.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Espresso Device API",
+        "url": "https://developer.android.com/studio/test/espresso-api",
+        "description": "Project setup and APIs for screen-size and device-state simulation in tests.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Accessibility Checking",
+        "url": "https://developer.android.com/training/testing/espresso/accessibility-checking",
+        "description": "Enable and configure accessibility checks in Espresso tests.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Macrobenchmark",
+        "url": "https://developer.android.com/studio/profile/macrobenchmark",
+        "description": "Performance testing for startup and critical user journeys.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Baseline Profiles",
+        "url": "https://developer.android.com/topic/performance/baselineprofiles",
+        "description": "Improve runtime performance and startup with baseline profiles.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Android Gradle Plugin Release Notes",
+        "url": "https://developer.android.com/build/releases/about-agp",
+        "description": "Current AGP stable release and migration guidance; AGP 9.2.x is the current stable series as of 2026-07.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Android 17 Release Notes",
+        "url": "https://developer.android.com/about/versions/17/release-notes",
+        "description": "Android 17 (API level 37) shipped 2026-06-16. Test tooling (Robolectric, Maestro) may lag API-level support by weeks to months after each Android release — verify before assuming coverage.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Google Play Target API Level Requirement",
+        "url": "https://developer.android.com/google/play/requirements/target-sdk",
+        "description": "Current target-API deadline: new apps/updates must target API 36 by 2026-08-31 (extension to 2026-11-01 available); existing untouched apps must target at least API 35. This deadline moves roughly yearly — re-check before citing a specific number.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Robolectric",
+        "url": "https://robolectric.org",
+        "description": "JVM Android unit test framework; 4.16.x supports SDK 36 (requires JDK 21). API 37 (Android 17) support not yet released as of 2026-07-11 (robolectric/robolectric#11239).",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "community_resources": [
+      {
+        "name": "Test Automation University: Espresso",
+        "url": "https://testautomationu.applitools.com/espresso-mobile-testing-tutorial/",
+        "description": "Free Espresso testing course with hands-on exercises.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "BrowserStack Espresso Guide",
+        "url": "https://www.browserstack.com/guide/espresso-android-testing",
+        "description": "Vendor tutorial focused on Espresso basics and real-device testing tradeoffs.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "modern_tooling": [
+      {
+        "name": "android-junit-framework Gradle Plugin",
+        "url": "https://github.com/mannodermaus/android-junit-framework",
+        "description": "Gradle plugin enabling JUnit 5 and 6 on Android (renamed from android-junit5 in 2026; v2.0+ supports JUnit 6).",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "MockK",
+        "url": "https://mockk.io",
+        "description": "Kotlin-first mocking library supporting object singletons, suspend functions, final classes, and extension functions.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Turbine",
+        "url": "https://github.com/cashapp/turbine",
+        "description": "Cash App testing library for Kotlin Flow and StateFlow: deterministic emission assertions with turbineScope and awaitItem.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Maestro",
+        "url": "https://maestro.dev",
+        "description": "Declarative YAML E2E testing framework for Android, iOS, and web; includes MaestroGPT for LLM-generated flow scaffolding. API 35/36 support added in 2026 (Maestro Cloud lagged local support); API 37 support unverified as of 2026-07-11.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Roborazzi",
+        "url": "https://github.com/takahirom/roborazzi",
+        "description": "JVM screenshot testing library via Robolectric; v1.55+ adds AGP 9.0/Gradle 9 compatibility.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      }
+    ]
+  }
+}

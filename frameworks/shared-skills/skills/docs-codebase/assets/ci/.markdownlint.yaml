@@ -1,0 +1,60 @@
+# .markdownlint.yaml
+# Markdownlint configuration for documentation quality CI.
+# Reference: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+
+default: true
+
+# MD013 — Line length.
+# Disabled: long lines are common in tables, code blocks, and template files.
+# Set to true and configure line_length if the team wants enforcement.
+MD013: false
+
+# MD024 — Multiple headings with the same content.
+# Allow duplicate headings only when they are not siblings (e.g., same H2 in different H1 sections).
+MD024:
+  siblings_only: true
+
+# MD033 — Inline HTML.
+# Allow inline HTML; useful for badges, collapsible sections, and custom callouts.
+MD033: false
+
+# MD041 — First line should be a top-level heading.
+# Disable for files that start with frontmatter (YAML ---) or template preambles.
+MD041: false
+
+# MD034 — Bare URL used.
+# Disabled for internal reference files that list raw URLs intentionally.
+MD034: false
+
+# MD007 — Unordered list indentation.
+# Enforce 2-space indentation for consistent nesting.
+MD007:
+  indent: 2
+
+# MD009 — Trailing spaces.
+# Enabled; trailing spaces indicate unfinished edits.
+MD009: true
+
+# MD010 — Hard tabs.
+# Enabled; use spaces throughout markdown.
+MD010: true
+
+# MD022 — Headings should be surrounded by blank lines.
+MD022: true
+
+# MD023 — Headings must start at the beginning of the line.
+MD023: true
+
+# MD025 — Multiple top-level headings.
+# One H1 per file.
+MD025: true
+
+# MD031 — Fenced code blocks should be surrounded by blank lines.
+MD031: true
+
+# MD036 — Emphasis used instead of a heading.
+# Catches patterns like **Bold line** used as a section title.
+MD036: true
+
+# MD047 — Files should end with a single newline.
+MD047: true

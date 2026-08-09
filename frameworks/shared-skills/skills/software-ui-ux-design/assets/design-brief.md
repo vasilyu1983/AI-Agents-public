@@ -1,0 +1,22 @@
+# Design Brief Template
+
+- **Problem & goal:** What user problem are we solving? Success metric?  
+- **Audience & context:** Personas, platform (web/mobile), environment constraints  
+- **Surface type:** Landing page, marketing surface, app shell, dashboard, or detail page  
+- **Scope:** In/out of scope, dependencies, rollout phases, feature flags  
+- **Visual thesis:** One sentence on the mood, energy, and first-glance impression  
+- **Content plan:** Hero, support, detail, proof, final CTA or equivalent page narrative  
+- **Interaction thesis:** The 2-3 motions or hierarchy shifts that should create presence  
+- **Experience principles:** Tone, accessibility goals, brand constraints, motion guidelines  
+- **Reference inputs:** Brand system, screenshots, mood board, competitor references, existing product surfaces  
+- **Conceptual model:** How the system should behave vs. how users think; mappings, signifiers, constraints  
+- **Mental-model risks:** Assumptions to validate, prior tools to match or reframe, terms that may confuse  
+- **User journeys:** Primary/edge flows, error/empty/loading states, recovery paths  
+- **IA & navigation:** Entry points, key screens, information hierarchy, breadcrumbs  
+- **Content & microcopy:** Voice, labels, CTA text, validation/error messaging rules, utility copy vs marketing copy rules  
+- **Visual anchor & imagery:** Main hero/media idea, what it communicates, and what must stay out of the frame  
+- **Viewport constraints:** First-screen budget, sticky/floating UI constraints, breakpoints to review  
+- **Accessibility:** Target WCAG level, keyboard support, color contrast, ARIA landmarks  
+- **Success metrics:** Task success/time, error/slip rate, first-click success, SUS/CSAT, guardrails  
+- **Verification plan:** Which viewports, states, and browser/rendering checks will validate the result  
+- **Experimentation:** A/B hypotheses, success metrics, guardrail metrics, telemetry needed  

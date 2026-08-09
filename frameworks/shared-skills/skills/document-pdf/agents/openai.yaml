@@ -1,0 +1,4 @@
+interface:
+  display_name: "Document PDF Skill — Quick Reference"
+  short_description: "Extracts, creates, and transforms PDF documents"
+  default_prompt: "Use $document-pdf for Extracts, creates, and transforms PDF documents. Use when parsing text or tables, generating files, merging pages, or handling PDF forms."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend"
+  short_description: "Builds frontend applications across major web stacks"
+  default_prompt: "Use $software-frontend for Builds frontend applications across major web stacks. Use when implementing UI, fixing hydration or SSR issues, or setting up modern frontend architecture."

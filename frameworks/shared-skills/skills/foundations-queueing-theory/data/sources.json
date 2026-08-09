@@ -1,0 +1,222 @@
+{
+  "metadata": {
+    "title": "AI Queueing Theory Foundations — Sources",
+    "description": "Primary texts and references for 11 queueing-theory primitives: Little's Law, M/M/1, M/M/c (Erlang-C), M/G/1 P-K formula, priority queues, Jackson networks, Kingman's formula, bufferbloat, USL, Erlang-B loss systems, and fork-join queues.",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-queueing-theory",
+    "total_sources": 29
+  },
+  "foundational_texts": [
+    {
+      "id": "Kleinrock1975",
+      "name": "Queueing Systems, Vol. 1: Theory",
+      "url": "https://www.wiley.com/en-us/Queueing+Systems%2C+Volume+1%3A+Theory-p-9780471491101",
+      "description": "Kleinrock, L. (1975). Wiley-Interscience. The canonical reference for M/M/1, M/M/c, M/G/1, priority queues, and Jackson networks. Primary source for primitives 01–07.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Kleinrock1976",
+      "name": "Queueing Systems, Vol. 2: Computer Applications",
+      "url": "https://www.wiley.com/en-us/Queueing+Systems%2C+Volume+2%3A+Computer+Applications-p-9780471491101",
+      "description": "Kleinrock, L. (1976). Wiley-Interscience. Application of queueing theory to computer systems, packet-switched networks, and scheduling. Primary source for primitives 05, 06, 08.",
+      "url_check": "manual"
+    },
+    {
+      "id": "HarcholBalter2013",
+      "name": "Performance Modeling and Design of Computer Systems",
+      "url": "https://www.cs.cmu.edu/~harchol/PerformanceModeling/book.html",
+      "description": "Harchol-Balter, M. (2013). Cambridge University Press. Rigorous treatment of M/M/1, M/M/c, M/G/1, priority queues, fork-join, and scheduling policies. Primary source for all 11 primitives.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Cooper1981",
+      "name": "Introduction to Queueing Theory (2nd ed.)",
+      "url": "https://www.worldcat.org/title/introduction-to-queueing-theory/oclc/7434851",
+      "description": "Cooper, R. B. (1981). North-Holland. Standard graduate text covering M/M/1, M/M/c, Erlang-B, Erlang-C, and networks of queues. Primary source for primitives 02, 03, 06, 10.",
+      "url_check": "manual"
+    }
+  ],
+  "seminal_papers": [
+    {
+      "id": "ScullySIGMETRICS2018",
+      "name": "SOAP: One Clean Analysis of All Age-Based Scheduling Policies",
+      "url": "https://arxiv.org/abs/1712.00790",
+      "description": "Scully, Z., Harchol-Balter, M., & Scheller-Wolf, A. (2018). POMACS / ACM SIGMETRICS 2018. Unifying framework for all M/G/1 age-based scheduling policies (FCFS, FB, SRPT, Gittins, and variants). Provides a single response-time formula for any SOAP policy; primary theoretical basis for comparing SRPT, Gittins, and foreground-background scheduling.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Little1961",
+      "name": "A Proof for the Queuing Formula: L = λW",
+      "url": "https://doi.org/10.1287/opre.9.3.383",
+      "description": "Little, J. D. C. (1961). Operations Research, 9(3), 383–387. Formal proof of Little's Law. Primary source for primitive 01.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Erlang1917",
+      "name": "Solution of some Problems in the Theory of Probabilities of Significance in Automatic Telephone Exchanges",
+      "url": "https://www.worldcat.org/title/solution-of-some-problems-in-the-theory-of-probabilities/oclc/678921574",
+      "description": "Erlang, A. K. (1917). Post Office Electrical Engineers' Journal, 10, 189–197. Original derivation of Erlang-B and Erlang-C formulas. Primary source for primitives 03, 10.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Jackson1957",
+      "name": "Networks of Waiting Lines",
+      "url": "https://doi.org/10.1287/opre.5.4.518",
+      "description": "Jackson, J. R. (1957). Operations Research, 5(4), 518–521. Product-form solution for open networks of M/M/c queues. Primary source for primitive 06.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Kingman1961",
+      "name": "The Single Server Queue in Heavy Traffic",
+      "url": "https://doi.org/10.1017/S0305004100036094",
+      "description": "Kingman, J. F. C. (1961). Mathematical Proceedings of the Cambridge Philosophical Society, 57(4), 902–904. Heavy-traffic approximation for G/G/1 queue wait time. Primary source for primitive 07.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Pollaczek1930",
+      "name": "Über eine Aufgabe der Wahrscheinlichkeitstheorie",
+      "url": "https://doi.org/10.1007/BF01246594",
+      "description": "Pollaczek, F. (1930). Mathematische Zeitschrift, 32(1), 64–100. Original derivation of the P-K (Pollaczek-Khinchine) mean-value formula for M/G/1. Primary source for primitive 04.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Khinchine1932",
+      "name": "Mathematical theory of a stationary queue",
+      "url": "https://www.worldcat.org/title/mathematical-theory-of-a-stationary-queue/oclc/223372180",
+      "description": "Khinchine, A. Y. (1932). Matematicheskii Sbornik, 39(4), 73–84. Independent derivation of the P-K formula. Co-primary source for primitive 04.",
+      "url_check": "manual"
+    },
+    {
+      "id": "NelsonTantawi1988",
+      "name": "The Approximate Analysis of Fork/Join Synchronization in Parallel Queues",
+      "url": "https://doi.org/10.1109/12.2221",
+      "description": "Nelson, R. & Tantawi, A. N. (1988). IEEE Transactions on Computers, 37(6), 739–743. Approximation analysis for fork-join queue response times. Primary source for primitive 11.",
+      "url_check": "manual"
+    }
+  ],
+  "books_and_monographs": [
+    {
+      "id": "Gunther2007",
+      "name": "Guerrilla Capacity Planning",
+      "url": "https://link.springer.com/book/10.1007/978-3-540-68867-4",
+      "description": "Gunther, N. J. (2007). Springer. Introduces the Universal Scalability Law (USL) including contention (σ) and coherency (κ) coefficients, retrograde scaling, and N_max. Primary source for primitive 09.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Gunther2008USL",
+      "name": "A General Theory of Computational Scalability Based on Rational Functions",
+      "url": "https://arxiv.org/abs/0808.1431",
+      "description": "Gunther, N. J. (2008). arXiv:0808.1431 (posted August 2008; corrected 2026-07-11 — prior entry had a stray 'cs/' prefix and mislabeled the year as 2007). Formal mathematical derivation of the USL model. Secondary source for primitive 09.",
+      "url_check": "auto"
+    }
+  ],
+  "applied_references": [
+    {
+      "id": "Gettys2012",
+      "name": "Bufferbloat: Dark Buffers in the Internet",
+      "url": "https://dl.acm.org/doi/10.1145/2063176.2063196",
+      "description": "Gettys, J. & Nichols, K. (2012). ACM Queue, 9(11). Coined and defined the bufferbloat phenomenon; motivation for AQM solutions. Primary source for primitive 08.",
+      "url_check": "manual"
+    },
+    {
+      "id": "CoDel2012",
+      "name": "Controlling Queue Delay (CoDel)",
+      "url": "https://dl.acm.org/doi/10.1145/2209249.2209264",
+      "description": "Nichols, K. & Jacobson, V. (2012). ACM Queue, 10(5). CoDel (Controlled Delay) active queue management algorithm; solution for bufferbloat. Supporting source for primitive 08.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Amdahl1967",
+      "name": "Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities",
+      "url": "https://doi.org/10.1145/1465482.1465560",
+      "description": "Amdahl, G. (1967). AFIPS, 30, 483–485. Original Amdahl's Law — parallel speedup with serialized fraction. Degenerate case of USL (κ=0). Supporting source for primitive 09.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Whitt1993",
+      "name": "Approximations for the GI/G/m queue",
+      "url": "https://doi.org/10.1111/j.1937-5956.1993.tb00094.x",
+      "description": "Whitt, W. (1993). Production and Operations Management, 2(2), 114–161. Heavy-traffic approximations for G/G/c (multi-server generalization of Kingman). Supporting source for primitive 07.",
+      "url_check": "manual"
+    },
+    {
+      "id": "DeanGhemawat2008",
+      "name": "MapReduce: Simplified Data Processing on Large Clusters",
+      "url": "https://dl.acm.org/doi/10.1145/1327452.1327492",
+      "description": "Dean, J. & Ghemawat, S. (2008). CACM, 51(1), 107–113. MapReduce architecture with speculative execution for straggler mitigation. Supporting source for primitive 11 (fork-join straggler handling).",
+      "url_check": "manual"
+    }
+  ],
+  "recent_papers_2025_2026": [
+    {
+      "id": "HarlevYuScully2025",
+      "name": "A Gittins Policy for Optimizing Tail Latency",
+      "url": "https://dl.acm.org/doi/10.1145/3727109",
+      "description": "Harlev, A., Yu, G., & Scully, Z. (2025). SIGMETRICS 2025 / POMACS. First scheduling policy achieving strong tail optimality in the light-tailed M/G/1 without known job sizes, using a Gittins index with a novel negative discount rate.",
+      "url_check": "auto"
+    },
+    {
+      "id": "NguyenVarmaMaguluri2025",
+      "name": "Finite-Time Behavior of Erlang-C Model: Mixing Time, Mean Queue Length and Tail Bounds",
+      "url": "https://dl.acm.org/doi/10.1145/3726854.3727287",
+      "description": "Nguyen, H. H., Varma, S. M., & Maguluri, S. T. (2025). SIGMETRICS 2025 / POMACS. First finite-time (non-asymptotic) bounds for the M/M/c / Erlang-C queue: mixing time, transient mean queue length, and tail bounds; phase transition at the Halfin-Whitt heavy-traffic regime.",
+      "url_check": "auto"
+    },
+    {
+      "id": "MitzenmacherShahout2025",
+      "name": "Queueing, Predictions, and Large Language Models: Challenges and Open Problems",
+      "url": "https://pubsonline.informs.org/doi/10.1287/stsy.2025.0106",
+      "description": "Mitzenmacher, M. & Shahout, R. (2025). Stochastic Systems, Vol. 15, No. 3. Peer-reviewed queueing framework for LLM inference scheduling: SPRPT with predicted output lengths, Trail policy (preemption age threshold for KV-cache cost avoidance), graceful degradation under bounded prediction error; open problems in memory-aware and compound LLM scheduling.",
+      "url_check": "auto"
+    },
+    {
+      "id": "DaiDengLiPeng2025",
+      "name": "Optimal Scheduling Algorithms for LLM Inference: Theory and Practice (formerly \"Throughput-Optimal Scheduling Algorithms for LLM Inference and AI Agents\")",
+      "url": "https://arxiv.org/abs/2504.07347",
+      "description": "Dai, J. G., Deng, T., Li, Y., & Peng, T. (2025/2026). arXiv:2504.07347 (v3 adds Deng as co-author); accepted POMACS / SIGMETRICS 2026 (DOI 10.1145/3771574), with a companion abstract at the SIGMETRICS 2026 conference (DOI 10.1145/3801489.3806878). Proves work-conserving scheduling achieves maximum throughput for single LLM inference engines and for DAG/fork-join multi-agent routing topologies; shows work-conservation alone is insufficient for general multi-agent LLM networks. Empirically validates Orca and Sarathi-serve as throughput-optimal; identifies vLLM (vanilla) as not maximally stable.",
+      "url_check": "auto"
+    },
+    {
+      "id": "CiucuMehri2025",
+      "name": "On the Distribution of Sojourn Times in Tandem Queues",
+      "url": "https://dl.acm.org/doi/10.1145/3727140",
+      "description": "Ciucu, F. & Mehri, S. (2025). POMACS / SIGMETRICS 2025, Vol. 9, No. 2, Article 27. Polynomial-exponential bounds on end-to-end sojourn time distributions in tandem queues with general arrivals and light-tailed service; bounds are numerically sharp for two-stage exponential case; polynomial degree tracks number of bottleneck stages.",
+      "url_check": "auto"
+    },
+    {
+      "id": "MoseleyNewmanPruhsZhou2025",
+      "name": "Robust Gittins for Stochastic Scheduling",
+      "url": "https://dl.acm.org/doi/10.1145/3726854.3727315",
+      "description": "Moseley, B., Newman, H., Pruhs, K., & Zhou, R. (2025). SIGMETRICS 2025. Proves standard Gittins index is not robust under distributional perturbation; introduces Robust Gittins policy with bounded degradation parameterized by a new distributional error measure.",
+      "url_check": "auto"
+    },
+    {
+      "id": "JaiswalEtAl2026",
+      "name": "SageServe: Optimizing LLM Serving on Cloud Data Centers with Forecast Aware Auto-Scaling",
+      "url": "https://dl.acm.org/doi/10.1145/3771576",
+      "description": "Jaiswal, S. et al. (2025/2026). POMACS / SIGMETRICS 2026. Multi-timescale queueing control for LLM cloud serving: short-horizon routing + long-horizon GPU VM scaling co-optimized via traffic forecasting and ILP. Production-validated at Microsoft Office 365 (10M+ requests/day, 3 regions). 25% GPU-hour savings, 80% reduction in autoscaling waste.",
+      "url_check": "auto"
+    },
+    {
+      "id": "ShahoutArXiv2024",
+      "name": "Don't Stop Me Now: Embedding Based Scheduling for LLMs",
+      "url": "https://arxiv.org/abs/2410.01035",
+      "description": "Shahout, R., Malach, E., Liu, C., Jiang, W., Yu, M., & Mitzenmacher, M. (2024). arXiv:2410.01035. Embedding-based output-length prediction enabling SRPT scheduling of LLM requests with limited preemption (Trail policy); addresses KV-cache memory overhead during preemption. Venue pending confirmation.",
+      "url_check": "auto"
+    },
+    {
+      "id": "GrosofHurtadoLange2026",
+      "name": "Outperforming Multiserver SRPT at All Loads",
+      "url": "https://arxiv.org/abs/2510.25963",
+      "description": "Grosof, I. & Hurtado-Lange, D. (2025/2026). Accepted SIGMETRICS 2026. Introduces SEK-SMOD, the first scheduling policy to provably achieve lower mean response time than SRPT-k across all loads and all job size distributions in M/G/k queues. Preprint under peer review.",
+      "url_check": "auto"
+    },
+    {
+      "id": "InferenceFleetSim2026",
+      "name": "inference-fleet-sim: A Queueing-Theory-Grounded Fleet Capacity Planner for LLM Inference",
+      "url": "https://arxiv.org/abs/2603.16054",
+      "description": "Chen, H., Liu, X., Liu, Y., Jiang, J., He, B., & Liu, X. (2026). arXiv:2603.16054. Combines analytical M/G/c queueing theory with discrete-event simulation for GPU fleet sizing under heavy-tailed token-length distributions. Demonstrates that analytical M/G/c alone produces incorrect fleet sizing for split thresholds, GPU type selection, and utilization assessment under realistic LLM workloads.",
+      "url_check": "auto"
+    }
+  ]
+}

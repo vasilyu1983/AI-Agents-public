@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-sessions",
+    "title": "AI Coding Agents Sessions - Sources",
+    "description": "Official documentation and implementation references for coding-agent session lifecycle, resume, checkpointing, and transcript restoration",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 12,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en",
+        "type": "documentation",
+        "relevance": "Primary runtime documentation for Claude Code session behavior",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Manage Sessions",
+        "url": "https://code.claude.com/docs/en/sessions",
+        "type": "documentation",
+        "relevance": "Authoritative source for --continue/--resume/--from-pr, the /resume picker, session naming and default names, session-picker scoping and widen keys (Ctrl+W/Ctrl+A/Ctrl+B), /branch and --fork-session semantics, transcript storage path and cleanupPeriodDays retention",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Checkpointing",
+        "url": "https://code.claude.com/docs/en/checkpointing",
+        "type": "documentation",
+        "relevance": "Authoritative source for /rewind, Esc-Esc entry, per-prompt checkpoint creation, restore modes (code/conversation/both), Summarize from here / Summarize up to here, the bash-command tracking limitation, and rewind-past-/clear- behavior (v2.1.191+)",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Create Custom Subagents",
+        "url": "https://code.claude.com/docs/en/sub-agents",
+        "type": "documentation",
+        "relevance": "Authoritative source for fork-vs-named-subagent startup modes, CLAUDE_CODE_FORK_SUBAGENT env var, /fork slash command, version gates (v2.1.117 minimum, v2.1.161 default-on), coordinator-mode incompatibility, no-nested-forks rule, isolation: worktree option, and prompt-cache economics",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Agent View Documentation",
+        "url": "https://code.claude.com/docs/en/agent-view",
+        "type": "guide",
+        "relevance": "Agent-view panel for monitoring and resuming background agents; claude agents / claude attach / claude stop / claude respawn / claude rm; disableAgentView setting; daemon roster.json, jobs/<id>/state.json, and worktree.bgIsolation; CI use via claude agents --json",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Agent View Blog Post",
+        "url": "https://claude.com/blog/agent-view-in-claude-code",
+        "type": "engineering_post",
+        "relevance": "Announcement and deep dive on agent-view: background session state paths, daemon architecture, awaySummary behavior, and CI integration via claude agents --json",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Settings Reference",
+        "url": "https://code.claude.com/docs/en/settings",
+        "type": "documentation",
+        "relevance": "Confirms exact settings.json keys and defaults relevant to session lifecycle: disableAgentView, cleanupPeriodDays (default 30 days, minimum 1), awaySummaryEnabled (default true)",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Closed-source product page and issue tracker for Claude Code; not the implementation source — use code.claude.com/docs/en for authoritative behavior docs",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anthropic: Claude Code Best Practices",
+        "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+        "type": "guide",
+        "relevance": "Broader operational patterns for stable Claude Code usage and recovery",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "cross_runtime_references": [
+      {
+        "name": "Codex CLI Developer Commands Reference",
+        "url": "https://learn.chatgpt.com/docs/developer-commands?surface=cli",
+        "type": "documentation",
+        "relevance": "Current official reference (redirect target of developers.openai.com/codex/cli/reference) for codex resume/--last/--all, codex fork, and codex cloud/cloud-tasks (list/exec/apply) command syntax; re-verified 2026-07-11. Does not publicly document SQLite storage internals — those remain sourced from the pinned commit below",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Codex CLI Documentation (GitHub)",
+        "url": "https://github.com/openai/codex",
+        "type": "documentation",
+        "relevance": "Cross-runtime comparison point for session behavior in coding-agent CLIs",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Session/Task/Turn Protocol Source",
+        "url": "https://github.com/openai/codex/blob/7d47056ea42636271ac020b86347fbbef49490aa/codex-rs/docs/protocol_v1.md",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for Codex Session, Task, Turn, SQ/EQ protocol, response bookmarks, interruption, and one-active-task semantics. Storage/protocol internals not restated in public docs as of 2026-07-11 — treat as commit-pinned engineering detail, re-check against current source before relying on exact file/module names",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "General guidance on durable agent workflows and operational state",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

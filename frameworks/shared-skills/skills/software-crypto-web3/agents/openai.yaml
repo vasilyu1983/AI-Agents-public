@@ -1,0 +1,4 @@
+interface:
+  display_name: "Crypto / Web3"
+  short_description: "Guides secure blockchain dev across EVM, Bitcoin, Solana, Cosmos, and TON."
+  default_prompt: "Use $software-crypto-web3 for secure blockchain dev: contracts, wallets, custody, bridges, on-chain backends across EVM, Bitcoin, Solana, Cosmos, TON."

@@ -1,0 +1,196 @@
+{
+  "metadata": {
+    "title": "Git Collaboration Workflow - Sources",
+    "description": "High-signal sources for Git workflows, PR discipline, branching models, repository hardening, and release practices",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "dev-git-workflow",
+    "total_sources": 28
+  },
+  "git_core": [
+    {
+      "name": "Git Documentation",
+      "url": "https://git-scm.com/docs",
+      "description": "Official Git documentation hub",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Pro Git (book)",
+      "url": "https://git-scm.com/book/en/v2",
+      "description": "Comprehensive Git book (branches, rebasing, workflows, internals)",
+      "add_as_web_search": false
+    },
+    {
+      "name": "git-worktree",
+      "url": "https://git-scm.com/docs/git-worktree",
+      "description": "Official reference for worktree creation, removal, and cleanup",
+      "add_as_web_search": true
+    },
+    {
+      "name": "git-sparse-checkout",
+      "url": "https://git-scm.com/docs/git-sparse-checkout",
+      "description": "Official reference for sparse checkout in large repositories and monorepos",
+      "add_as_web_search": true
+    }
+  ],
+  "workflows": [
+    {
+      "name": "Trunk-Based Development",
+      "url": "https://trunkbaseddevelopment.com/",
+      "description": "Trunk-based development patterns and trade-offs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Gitflow Workflow (Atlassian)",
+      "url": "https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow",
+      "description": "GitFlow concepts and comparisons",
+      "add_as_web_search": true
+    }
+  ],
+  "platform_docs": [
+    {
+      "name": "GitHub Flow",
+      "url": "https://docs.github.com/en/get-started/using-github/github-flow",
+      "description": "Official GitHub Flow guide",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub - About rulesets",
+      "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets",
+      "description": "Repository governance with rulesets, merge requirements, and enforcement scopes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub - About protected branches",
+      "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+      "description": "Protected branch rules and their limitations compared with rulesets",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub - About CODEOWNERS",
+      "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+      "description": "CODEOWNERS file behavior for review routing and gates",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub - Managing a merge queue",
+      "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue",
+      "description": "Merge queue for keeping main green under high concurrency",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub - Commit signature verification",
+      "url": "https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification",
+      "description": "Signed commits/tags and verification behavior",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitLab - Merge requests",
+      "url": "https://docs.gitlab.com/user/project/merge_requests/",
+      "description": "Merge request workflows, approvals, and pipelines",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitLab - Merge trains",
+      "url": "https://docs.gitlab.com/ci/pipelines/merge_trains/",
+      "description": "GitLab merge queue analogue for keeping the target branch green under concurrency",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitLab - Stacked diffs",
+      "url": "https://docs.gitlab.com/user/project/merge_requests/stacked_diffs/",
+      "description": "Experimental stacked diffs workflow for large changes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitLab CLI - glab stack",
+      "url": "https://docs.gitlab.com/cli/stack/",
+      "description": "GitLab CLI commands for stacked diffs workflow (v1.42.0+)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "The Stacking Workflow",
+      "url": "https://www.stacking.dev/",
+      "description": "Comprehensive comparison of stacking tools (Graphite, ghstack, Sapling, spr)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub Stacked PRs (gh-stack)",
+      "url": "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-stacked-pull-requests",
+      "description": "GitHub native stacked pull requests via gh-stack CLI extension; entered private preview 13 April 2026, waitlist-gated at gh.io/stacksbeta, no GA date announced as of this verification — verify current status",
+      "add_as_web_search": true,
+      "verified_date": "2026-07-11"
+    }
+  ],
+  "commit_and_release": [
+    {
+      "name": "Conventional Commits Specification",
+      "url": "https://www.conventionalcommits.org/en/v1.0.0/",
+      "description": "Standard commit format used for automation and changelogs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Semantic Versioning 2.0.0",
+      "url": "https://semver.org/",
+      "description": "SemVer specification",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Keep a Changelog",
+      "url": "https://keepachangelog.com/",
+      "description": "Changelog format standard",
+      "add_as_web_search": false
+    },
+    {
+      "name": "semantic-release",
+      "url": "https://semantic-release.gitbook.io/",
+      "description": "Official documentation for fully automated semantic releases",
+      "add_as_web_search": true
+    },
+    {
+      "name": "release-please",
+      "url": "https://github.com/googleapis/release-please",
+      "description": "GitHub-first release automation for version PRs and release notes",
+      "add_as_web_search": true
+    }
+  ],
+  "security": [
+    {
+      "name": "GitHub - Secret scanning and push protection",
+      "url": "https://docs.github.com/en/code-security/how-tos/secure-your-secrets/work-with-leak-prevention",
+      "description": "Push protection and secret scanning for GitHub repositories",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Gitleaks",
+      "url": "https://gitleaks.io/",
+      "description": "Secret scanning for git repos (local + CI integration)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TruffleHog",
+      "url": "https://github.com/trufflesecurity/trufflehog",
+      "description": "Secret scanning and verification for git history",
+      "add_as_web_search": true
+    }
+  ],
+  "optional_ai": [
+    {
+      "name": "GitHub Copilot code review (Optional)",
+      "url": "https://docs.github.com/en/copilot/concepts/agents/code-review",
+      "description": "Optional AI-assisted review workflow for pull requests; always requires human review",
+      "add_as_web_search": true,
+      "optional": true
+    }
+  ],
+  "alternative_vcs": [
+    {
+      "name": "Jujutsu (jj) VCS",
+      "url": "https://github.com/jj-vcs/jj",
+      "description": "Git-compatible VCS from Google with first-class stacking, undo history, and conflict-free rebase; v0.42+ as of June 2026; used internally at Google; optional reference for teams evaluating alternatives to raw Git",
+      "add_as_web_search": true,
+      "optional": true,
+      "verified_date": "2026-07-11"
+    }
+  ]
+}

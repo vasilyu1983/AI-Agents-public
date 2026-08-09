@@ -1,0 +1,146 @@
+{
+  "metadata": {
+    "title": "Agent Skills - Sources",
+    "description": "Official sources for portable skill authoring plus runtime-specific verification",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "agents-skills",
+    "total_sources": 21
+  },
+  "official_documentation": [
+    {
+      "name": "Agent Skills Open Specification",
+      "url": "https://agentskills.io/specification",
+      "description": "Portable baseline for SKILL.md structure, progressive disclosure, and open-standard concepts",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Skills Documentation",
+      "url": "https://code.claude.com/docs/en/skills",
+      "description": "Current Claude Code skills documentation and behavior",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic Agent Skills Overview",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview",
+      "description": "Anthropic overview for agent skills, structure, and lifecycle",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic Agent Skills Best Practices",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices",
+      "description": "Anthropic best practices for supporting files, iterative improvement, and context management",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Using Skills in Claude",
+      "url": "https://support.claude.com/en/articles/12512180-using-skills-in-claude",
+      "description": "Anthropic help-center guidance for using skills in Claude products",
+      "add_as_web_search": false
+    },
+    {
+      "name": "How to Create Custom Skills",
+      "url": "https://support.claude.com/en/articles/12512198-how-to-create-custom-skills",
+      "description": "Anthropic help-center guide for skill creation and packaging",
+      "add_as_web_search": true
+    },
+    {
+      "name": "VS Code Agent Skills",
+      "url": "https://code.visualstudio.com/docs/copilot/customization/agent-skills",
+      "description": "Official VS Code documentation for agent skills and editor-specific customization",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Skills Docs",
+      "url": "https://developers.openai.com/codex/skills",
+      "description": "Official Codex CLI skills documentation: native discovery paths (.agents/skills scanned repo-upward, ~/.codex/skills, .codex/skills), name+description frontmatter, no adjunct manifest required. Verified July 2026",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic Skills Engineering Post",
+      "url": "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills",
+      "description": "Anthropic engineering perspective on why skills exist and how to structure them",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Lessons from Building Claude Code: How We Use Skills",
+      "url": "https://x.com/trq212/article/2033949937936085378",
+      "description": "First-party engineering post from Claude Code lead on 9 skill categories and operational patterns from Anthropic internal use",
+      "add_as_web_search": false
+    }
+  ],
+  "official_examples": [
+    {
+      "name": "Anthropic Skills Repository",
+      "url": "https://github.com/anthropics/skills",
+      "description": "Official public examples of skill packaging and authoring patterns",
+      "add_as_web_search": false
+    }
+  ],
+  "community_tools": [
+    {
+      "name": "Superpowers (obra)",
+      "url": "https://github.com/obra/superpowers",
+      "description": "20+ battle-tested community skills covering TDD, debugging, and plan-to-execute workflows; 96k+ stars. Strong reference for skill design patterns and progressive disclosure conventions",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Awesome Claude Skills",
+      "url": "https://github.com/travisvn/awesome-claude-skills",
+      "description": "Largest curated skill catalog on GitHub; 22k+ stars. Useful for discovering community skill patterns, naming conventions, and real-world SKILL.md examples",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Skill Creator (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
+      "description": "Meta-skill for generating new SKILL.md files from natural language workflow descriptions; reference for bootstrapping skill authoring",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Matt Pocock Skills",
+      "url": "https://github.com/mattpocock/skills",
+      "description": "23k+ stars. Curated set of practical engineering skills published straight from the author's .claude directory; high-signal reference for skill authoring style",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Superpowers Marketplace (obra)",
+      "url": "https://github.com/obra/superpowers-marketplace",
+      "description": "Official marketplace for the Superpowers ecosystem with 20+ battle-tested skills (/brainstorm, /write-plan, /execute-plan) and SessionStart context injection",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Everything Claude Code",
+      "url": "https://github.com/affaan-m/everything-claude-code",
+      "description": "Hackathon-winning harness assembling 30 agents, 136 skills, 60 slash commands with 1282 tests at 98% coverage; reference for large-scale skill+agent packaging",
+      "add_as_web_search": false
+    },
+    {
+      "name": "ComposioHQ Awesome Claude Skills",
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills",
+      "description": "50+ production skills cross-compatible with Claude Code, Codex, Cursor, and Gemini CLI; install via /skill add. Useful pattern reference for portable skill authoring",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Codex Skills Marketplace",
+      "url": "https://codex-marketplace.com/skills",
+      "description": "Codex skill marketplace; notable for Dimillian's macOS/iOS skills as cross-runtime skill design references",
+      "add_as_web_search": true
+    }
+  ],
+  "architecture_patterns": [
+    {
+      "name": "xAI x-algorithm",
+      "url": "https://github.com/xai-org/x-algorithm",
+      "description": "Open recommendation-system pipeline used as a pattern source for staged candidate generation, hydration, filtering, scoring, selection, validation, and side effects",
+      "add_as_web_search": true
+    }
+  ],
+  "research_and_methods": [
+    {
+      "name": "Microsoft SkillOpt",
+      "url": "https://github.com/microsoft/SkillOpt",
+      "description": "MIT framework that optimizes skill documents as trainable artifacts via a rollout -> reflect -> validate loop with bounded add/delete/replace edits accepted only on a strictly non-regressing held-out score. Source for the Edit Gate (regression rule) in references/skill-validation.md; methodology only, not vendored as a skill",
+      "add_as_web_search": true
+    }
+  ]
+}

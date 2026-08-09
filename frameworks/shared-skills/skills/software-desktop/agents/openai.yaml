@@ -1,0 +1,4 @@
+interface:
+  display_name: "Desktop Apps"
+  short_description: "Guides cross-platform and native desktop development with Electron, Tauri"
+  default_prompt: "Use $software-desktop for Guides cross-platform and native desktop development with Electron, Tauri, Flutter Desktop, MAUI, and platform-native frameworks. Use when choosing a stack or packaging installers."

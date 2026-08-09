@@ -1,0 +1,51 @@
+{
+  "service_name": "checkout-service",
+  "stack": "Node.js 20 / TypeScript",
+  "environment": "production",
+  "team": "platform-reliability",
+  "notes": "B2B SaaS checkout microservice. Handles payment initiation, order creation, and inventory reservation. Downstream dependencies: payment-gateway, inventory-service, notification-service, postgres, redis. Assessment date: 2026-03-21.",
+  "signals": {
+    "structured_logs": {
+      "has": true,
+      "json_format": true,
+      "correlation_id": true,
+      "pii_redacted": false,
+      "comment": "Logs are JSON via pino. request_id and trace_id are included. Card numbers are redacted but customer email is still logged in plaintext on checkout errors.",
+      "score": 14
+    },
+    "metrics": {
+      "has": true,
+      "golden_signals_covered": true,
+      "histograms": true,
+      "exemplars": false,
+      "comment": "Prometheus metrics exposed on /metrics. Latency histograms and error counters are present for all critical paths. Exemplars not yet enabled — prom-client upgrade pending.",
+      "score": 16
+    },
+    "distributed_tracing": {
+      "has": true,
+      "auto_instrumented": true,
+      "manual_spans": false,
+      "propagation_verified": true,
+      "comment": "OpenTelemetry Node.js auto-instrumentation active. traceparent propagated to payment-gateway and inventory-service. No manual spans around checkout workflow steps (payment authorisation, inventory lock, order creation).",
+      "score": 13
+    },
+    "slo_sli": {
+      "defined": true,
+      "error_budget_policy": false,
+      "comment": "SLOs are defined in a Notion doc for availability and p95 latency. No formal error budget policy or tooling to track budget consumption. Alerting is not wired to burn rate.",
+      "score": 8
+    },
+    "alerting": {
+      "burn_rate_alerts": false,
+      "no_alert_fatigue": false,
+      "comment": "Alerts exist for raw error rate > 5% and CPU > 80%. No burn-rate alerts. On-call team reports ~12 pages per week, many of which are noisy infrastructure alerts with no actionable signal.",
+      "score": 5
+    },
+    "correlation_ids": {
+      "request_id": true,
+      "across_services": false,
+      "comment": "X-Request-ID is generated at the API gateway and propagated into checkout-service logs. It is NOT forwarded to payment-gateway or inventory-service, so cross-service correlation requires manual trace lookup.",
+      "score": 5
+    }
+  }
+}

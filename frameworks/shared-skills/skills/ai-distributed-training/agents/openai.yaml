@@ -1,0 +1,4 @@
+interface:
+  display_name: "Distributed Training"
+  short_description: "Multi-GPU pre-training: DDP, FSDP2, ZeRO, parallelism, fp8, Muon, rented GPUs"
+  default_prompt: "Use $ai-distributed-training for multi-GPU pre-training parallelism (DDP, FSDP2, ZeRO, tensor/pipeline/expert), scaling a run, training MoE, fp8/Muon, or reproducing GPT-2 on rented GPUs."

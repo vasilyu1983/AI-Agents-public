@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-plugins",
+    "title": "AI Coding Agents Plugins - Sources",
+    "description": "Official documentation and source references for coding-agent plugin architecture, plugin loading, and runtime trust boundaries",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 15,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en",
+        "type": "documentation",
+        "relevance": "Primary product documentation for Claude Code runtime behavior and extension surfaces",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Plugins Reference",
+        "url": "https://code.claude.com/docs/en/plugins-reference",
+        "type": "reference",
+        "relevance": "Complete plugin.json manifest schema, lspServers plugin capability, LSP tool activation semantics, install scopes, policy gates, and plugin subagent restrictions",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Discover Plugins",
+        "url": "https://code.claude.com/docs/en/discover-plugins",
+        "type": "guide",
+        "relevance": "Official and community marketplace repos (anthropics/claude-plugins-official, anthropics/claude-plugins-community), /plugin UI tabs, install scopes, and plugin discovery flow",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Hooks Documentation",
+        "url": "https://code.claude.com/docs/en/hooks",
+        "type": "guide",
+        "relevance": "Hook lifecycle and event model used by plugin-provided hooks",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol Specification",
+        "url": "https://modelcontextprotocol.io/",
+        "type": "specification",
+        "relevance": "Reference for MCP server capability design and integration constraints",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GitHub Copilot CLI: About CLI Plugins",
+        "url": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-cli-plugins",
+        "type": "guide",
+        "relevance": "Copilot CLI plugin capability model (agents, skills, hooks, MCP, LSP), manifest location, and default marketplaces (copilot-plugins, awesome-copilot)",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GitHub Copilot CLI Plugin Reference",
+        "url": "https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference",
+        "type": "reference",
+        "relevance": "Complete plugin.json and marketplace.json field schemas for Copilot CLI, including the .claude-plugin/plugin.json fallback manifest location that makes Claude Code plugins load unmodified",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GitHub Copilot CLI: Finding and Installing Plugins",
+        "url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing",
+        "type": "guide",
+        "relevance": "Install source syntax (owner/repo, owner/repo:path, git URL, local path, plugin@marketplace) and declarative enabledPlugins configuration",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Closed-source product page and issue tracker for Claude Code; not the implementation source — use code.claude.com/docs/en for authoritative behavior docs",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Claude Plugins Official Marketplace",
+        "url": "https://github.com/anthropics/claude-plugins-official",
+        "type": "repository",
+        "relevance": "Anthropic-curated official plugin marketplace; auto-loaded in Claude Code; reference for plugin packaging layout and approved plugin examples",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Claude Plugins Community Marketplace",
+        "url": "https://github.com/anthropics/claude-plugins-community",
+        "type": "repository",
+        "relevance": "Community-contributed plugin marketplace; must be manually added via /plugin > Marketplaces; reference for third-party plugin packaging patterns",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anthropic: Agent Skills for Claude Code",
+        "url": "https://www.anthropic.com/engineering/claude-code-agent-skills",
+        "type": "guide",
+        "relevance": "How packaged skills relate to runtime extension and prompt-budget constraints",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "patterns_and_safety": [
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "High-level guidance on agent-tool architecture and durable runtime boundaries",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Codex CLI Documentation",
+        "url": "https://github.com/openai/codex",
+        "type": "documentation",
+        "relevance": "Cross-runtime comparison point for coding-agent CLI constraints and extension patterns",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Plugin Manifest Source",
+        "url": "https://github.com/openai/codex/blob/7d47056ea42636271ac020b86347fbbef49490aa/codex-rs/core-plugins/src/manifest.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for plugin manifest fields, skills/MCP/apps/hooks paths, interface metadata, asset path validation, and default prompt limits",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

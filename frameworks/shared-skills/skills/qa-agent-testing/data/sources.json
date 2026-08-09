@@ -1,0 +1,338 @@
+{
+  "metadata": {
+    "skill": "qa-agent-testing",
+    "updated": "2026-07-11",
+    "version": "4.3",
+    "total_sources": 42,
+    "last_citation_audit": "2026-07-11",
+    "description": "Primary references for evaluating agentic systems with offline and online evals, graders, trace and tool testing, sandboxing, multi-agent coordination, adversarial QA, red-team scanners, and agentic benchmark methodology.",
+    "title": "QA Agent Testing - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "governance_and_risk": [
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "description": "Governance baseline for risk assessment, controls, and documentation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "description": "Threat categories for prompt injection, data leakage, and tool misuse.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OWASP Top 10 for Agentic Applications 2026",
+        "url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+        "description": "Current OWASP guidance for agent-specific security risks: Agent Goal Hijack, Tool Misuse, Agent Identity Abuse, Supply Chain Compromise, Memory & Context Poisoning, Insecure Inter-Agent Communication, and Cascading Agent Failures. Released December 2025.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "EU AI Act (EUR-Lex)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+        "description": "Official EU AI Act text for compliance, testing, and auditability requirements.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "lmnr",
+        "url": "https://github.com/lmnr-ai/lmnr",
+        "description": "Trace and evaluate agent behavior with execution graphs, latency metrics, and LLM-as-judge scoring; reference for agent observability and eval pipeline design.",
+        "add_as_web_search": false,
+        "optional": true
+      },
+      {
+        "name": "Agent Governance Toolkit (Microsoft)",
+        "url": "https://github.com/microsoft/agent-governance-toolkit",
+        "description": "Security middleware for agents providing authorization controls, audit logging, and policy enforcement; reference for agent safety testing and governance guardrails.",
+        "add_as_web_search": false,
+        "optional": true
+      }
+    ],
+    "evaluation_frameworks": [
+      {
+        "name": "Anthropic - Demystifying Evals for AI Agents",
+        "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+        "description": "Practical agent-eval guidance: use real tasks, grade outcomes rather than paths, and layer evals.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Anthropic - Develop Tests",
+        "url": "https://docs.anthropic.com/en/docs/build-with-claude/develop-tests",
+        "description": "Anthropic testing guidance for prompts, guardrails, and application behaviors.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenAI - Evals Guide",
+        "url": "https://platform.openai.com/docs/guides/evals",
+        "description": "Official OpenAI guide for eval design, workflow-level coverage, and structured eval development.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenAI - Graders Guide",
+        "url": "https://platform.openai.com/docs/guides/graders",
+        "description": "Official OpenAI guide for code-based and model-based graders, including agent evaluation patterns.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenAI - Agent Evals Guide",
+        "url": "https://platform.openai.com/docs/guides/agent-evals",
+        "description": "OpenAI guidance on evaluating agent behavior, tool usage, and workflow outcomes.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenAI - Trace Grading Guide",
+        "url": "https://platform.openai.com/docs/guides/trace-grading",
+        "description": "Official guidance for grading tool traces and workflow execution rather than only final outputs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenAI Evals (GitHub)",
+        "url": "https://github.com/openai/evals",
+        "description": "Open-source package for automated evaluation harnesses. The hosted OpenAI Platform Evals UI is being shut down (read-only Oct 2026, shutdown Nov 2026). The open-source package and API remain functional. Verify current status before use.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "DeepEval",
+        "url": "https://github.com/confident-ai/deepeval",
+        "description": "Open-source LLM evaluation framework with agent, RAG, and pytest-style testing patterns. v4.0 (2026) adds agent-native evaluation: Task Completion, Tool Correctness, Step Efficiency, and Plan Quality metrics with @observe tracing integration.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "DeepEval Docs",
+        "url": "https://deepeval.com/docs/metrics-introduction",
+        "description": "Official DeepEval documentation covering metrics, pytest integration, CI setup, and agent evaluation patterns including trace-based and full-trajectory metrics.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Braintrust",
+        "url": "https://www.braintrust.dev/docs",
+        "description": "Commercial managed eval platform with experiment tracking, human-review queues, and SDK support for Python and TypeScript.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Langfuse",
+        "url": "https://langfuse.com/docs",
+        "description": "Open-source LLM observability and online eval platform; production tracing, cost tracking, session replay, and LLM-as-judge triggers on live traffic.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "RAGAS Docs",
+        "url": "https://docs.ragas.io/",
+        "description": "Evaluation framework for RAG, agents, and tool or workflow behaviors.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "HELM Benchmark",
+        "url": "https://crfm.stanford.edu/helm/",
+        "description": "Benchmarking framework and evaluation dimensions for language models and systems.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "tool_sandboxing": [
+      {
+        "name": "UK AISI Inspect Docs",
+        "url": "https://inspect.aisi.org.uk/",
+        "description": "Official Inspect documentation for eval execution, sandboxes, and tooling.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "UK AISI Inspect Sandboxing Toolkit",
+        "url": "https://www.aisi.gov.uk/blog/the-inspect-sandboxing-toolkit-scalable-and-secure-ai-agent-evaluations",
+        "description": "Background article on the Inspect sandboxing toolkit and its design goals.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "OpenAI - Building Agents Safely",
+        "url": "https://platform.openai.com/docs/guides/safety-best-practices#building-agents-safely",
+        "description": "Current OpenAI safety guidance for approvals, isolation, and tool risk reduction.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "gVisor Documentation",
+        "url": "https://gvisor.dev/",
+        "description": "Sandbox runtime reference for isolated execution environments.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "multi_agent_testing": [
+      {
+        "name": "Game-Theoretic Lens on LLM-based Multi-Agent Systems",
+        "url": "https://arxiv.org/abs/2601.15047",
+        "description": "Survey framing of multi-agent LLM systems and coordination issues.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "MultiAgentBench (MARBLE framework)",
+        "url": "https://arxiv.org/abs/2503.01935",
+        "description": "Benchmark and framework (code name MARBLE) for evaluating collaboration and competition among LLM agents. \"MultiAgentBench: Evaluating the Collaboration and Competition of LLM Agents\" (Kunlun Zhu et al., submitted March 2025, arXiv 2503.01935). Corrects a previous arXiv ID (2410.01078) in this file that resolved to an unrelated robotics paper.",
+        "add_as_web_search": false,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "llm_as_judge": [
+      {
+        "name": "Survey on LLM-as-a-Judge",
+        "url": "https://arxiv.org/abs/2411.15594",
+        "description": "Survey of biases, limitations, and mitigation patterns for model judges.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "LangSmith Evaluation Docs",
+        "url": "https://docs.langchain.com/langsmith/evaluation",
+        "description": "Current LangSmith documentation for offline and online evaluations, with 30+ evaluator templates covering safety, response quality, trajectory, and multimodal evaluation.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "LangSmith Trajectory Evaluators",
+        "url": "https://docs.langchain.com/langsmith/trajectory-evals",
+        "description": "Guidance on evaluating agent trajectories, tool calls, and intermediate steps using the agentevals open-source package (langchain-ai/agentevals).",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "LangChain AgentEvals",
+        "url": "https://github.com/langchain-ai/agentevals",
+        "description": "Open-source package from LangChain providing trajectory match evaluators and LLM-judge evaluators for agent step sequences. Integrates with LangSmith for scoring and dataset management.",
+        "add_as_web_search": false,
+        "optional": true,
+        "last_verified": "2026-06-09"
+      }
+    ],
+    "red_teaming_and_adversarial": [
+      {
+        "name": "Anthropic - Red Teaming Language Models",
+        "url": "https://www.anthropic.com/research/red-teaming-language-models",
+        "description": "Research on adversarial testing methodologies for language models.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Promptfoo",
+        "url": "https://www.promptfoo.dev/",
+        "description": "Prompt testing and evaluation tooling used for automated eval workflows.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Promptfoo Red Team Docs",
+        "url": "https://www.promptfoo.dev/docs/red-team/",
+        "description": "Red-team workflows and attack-pattern guidance for LLM and agent systems.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "garak (NVIDIA LLM Vulnerability Scanner)",
+        "url": "https://github.com/NVIDIA/garak",
+        "description": "Open-source LLM vulnerability scanner (Apache 2.0, maintained by NVIDIA), actively maintained as of 2026-07-11. Latest confirmed stable at last verification: v0.14.1 (April 2026), with v0.15.1.pre1 in pre-release (May 2026) — verify current stable version at release time rather than pinning to a specific number here. Recent versions have added agent-focused probes (multi-turn adversarial probes, tool-using-agent probes, system-prompt-extraction). Runs batch probes across promptinject, DAN jailbreaks, encoding bypass, data replay, and malware generation families. Use as a pre-release gate or nightly adversarial coverage scan.",
+        "add_as_web_search": false,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "garak Docs",
+        "url": "https://docs.garak.ai/garak",
+        "description": "Official garak documentation covering probes, detectors, and scanning workflows.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "PyRIT (Microsoft Python Risk Identification Tool)",
+        "url": "https://github.com/microsoft/PyRIT",
+        "description": "Open-source multi-turn adversarial orchestration framework for generative AI red teaming (MIT license, maintained by Microsoft AI Red Team). Coordinates LLM-powered attackers across turns using orchestrators, converters, and scorers. Supports single-turn, multi-turn, crescendo (gradually escalating), and TAP (Tree of Attacks with Pruning) orchestrators. Used on 100+ Microsoft products including Copilot (per Microsoft Security Blog — verify current figure). Note: the repo briefly lived at github.com/Azure/PyRIT; that mirror was archived March 27, 2026 and consolidated back into github.com/microsoft/PyRIT, which is the canonical repo as of 2026-07-11.",
+        "add_as_web_search": false,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "PyRIT Docs",
+        "url": "https://microsoft.github.io/PyRIT/",
+        "description": "Official PyRIT documentation covering orchestrators, targets, converters, and scorers.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "research_and_benchmarks": [
+      {
+        "name": "Constitutional AI",
+        "url": "https://arxiv.org/abs/2212.08073",
+        "description": "Reference for explicit safety principles and policy-oriented behavior.",
+        "add_as_web_search": false,
+        "optional": true
+      },
+      {
+        "name": "TruthfulQA",
+        "url": "https://arxiv.org/abs/2109.07958",
+        "description": "Benchmark reference for truthfulness and hallucination-oriented tests.",
+        "add_as_web_search": false,
+        "optional": true
+      },
+      {
+        "name": "τ-bench (Sierra Research)",
+        "url": "https://arxiv.org/abs/2406.12045",
+        "description": "Tool-Agent-User interaction benchmark: evaluates agents on multi-turn policy adherence and tool use via simulated user conversations. Introduces pass^k metric for reliability across k trials. Code at github.com/sierra-research/tau-bench.",
+        "add_as_web_search": false,
+        "optional": false,
+        "last_verified": "2026-05"
+      },
+      {
+        "name": "τ²-bench (Sierra Research)",
+        "url": "https://arxiv.org/abs/2506.07982",
+        "description": "Dual-control agentic benchmark where both agent and user can invoke tools to modify shared world state (telecom domain). Exposes autonomous-vs-collaborative capability gap (~20pp drop). arXiv 2506.07982, June 2025. Code at github.com/sierra-research/tau2-bench.",
+        "add_as_web_search": false,
+        "optional": false,
+        "last_verified": "2026-05"
+      },
+      {
+        "name": "Agentic Benchmark Checklist (ABC)",
+        "url": "https://arxiv.org/abs/2507.02825",
+        "description": "Peer-reviewed methodology (arXiv 2507.02825, July 2025) for constructing and auditing agentic benchmarks across three categories: Task Validity, Outcome Validity, and Benchmark Reporting. Addresses systematic over/underestimation flaws (up to 100% in relative terms) found in widely-used benchmarks including SWE-bench and TAU-bench. Live checklist at uiuc-kang-lab.github.io/agentic-benchmarks/.",
+        "add_as_web_search": false,
+        "optional": false,
+        "last_verified": "2026-05"
+      },
+      {
+        "name": "Agentic Benchmark Checklist (ABC) - Live Checklist",
+        "url": "https://uiuc-kang-lab.github.io/agentic-benchmarks/",
+        "description": "Interactive checklist for applying ABC task validity, outcome validity, and reporting criteria to any agentic benchmark.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-05"
+      }
+    ]
+  }
+}

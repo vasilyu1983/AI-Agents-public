@@ -1,0 +1,238 @@
+{
+  "metadata": {
+    "skill": "ai-distributed-training",
+    "title": "AI Distributed Training - Sources",
+    "description": "Curated mid-2026 sources for distributed LLM pre-training: FlashAttention 1/2/3, DeepSpeed ZeRO, PyTorch FSDP2, Megatron-LM/Core, DeepSeek-V3 (DualPipe/EP/fp8), Ring Attention (context parallel), Muon/MuonClip (Kimi K2, DeepSeek-V4, GLM-5), torchtitan, pre-training frameworks (litgpt, nanotron), GPT-2 reproduction projects, and rented GPU provider docs.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "audit_date": "2026-07-11",
+    "last_verified": "2026-07-11",
+    "total_sources": 24
+  },
+  "categories": {
+    "research_papers": [
+      {
+        "name": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+        "url": "https://arxiv.org/abs/2205.14135",
+        "type": "research",
+        "relevance": "Foundational paper introducing FlashAttention — O(N) memory attention via tiled SRAM recomputation. Essential reference for understanding memory-efficient attention at pre-training scale.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+        "url": "https://arxiv.org/abs/2307.08691",
+        "type": "research",
+        "relevance": "FlashAttention-2 improvements: better thread-block partitioning, 2x speedup over v1. Current default for A100/H100 pre-training.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ZeRO: Memory Optimizations Toward Training Trillion Parameter Models",
+        "url": "https://arxiv.org/abs/1910.02054",
+        "type": "research",
+        "relevance": "Primary ZeRO paper describing stages 1, 2, and 3 optimizer/gradient/parameter sharding. Canonical reference for DeepSpeed ZeRO design.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism",
+        "url": "https://arxiv.org/abs/1909.08053",
+        "type": "research",
+        "relevance": "Foundational paper for tensor parallelism in transformers (column/row parallel linear layers). Basis for all Megatron-style 3-D parallelism implementations.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision",
+        "url": "https://arxiv.org/abs/2407.08608",
+        "type": "research",
+        "relevance": "Hopper-specific (H100) attention: warp-specialization, async, and fp8 attention. Current state of the art for memory-efficient attention on H100/Blackwell.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "DeepSeek-V3 Technical Report",
+        "url": "https://arxiv.org/abs/2412.19437",
+        "type": "research",
+        "relevance": "Landmark efficient-training reference: DualPipe bidirectional pipeline overlap, cross-node expert parallelism without tensor parallelism, fine-grained fp8 training, auxiliary-loss-free MoE load balancing. Essential for any MoE / frontier-scale distributed training.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Reducing Activation Recomputation in Large Transformer Models",
+        "url": "https://arxiv.org/abs/2205.05198",
+        "type": "research",
+        "relevance": "Megatron selective activation checkpointing + sequence parallelism. The canonical reference for activation-memory reduction beyond naive full checkpointing.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Ring Attention with Blockwise Transformers for Near-Infinite Context",
+        "url": "https://arxiv.org/abs/2310.01889",
+        "type": "research",
+        "relevance": "Foundation for context parallelism: shards the sequence dimension and overlaps blockwise attention with ring communication. Basis for long-context training in torchtitan and Megatron.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Kimi K2 Technical Report (MuonClip optimizer at 1T-param MoE scale)",
+        "url": "https://arxiv.org/abs/2507.20534",
+        "type": "research",
+        "relevance": "Production-scale evidence for the Muon/MuonClip optimizer: 1T-param MoE pre-trained on 15.5T tokens with MuonClip + WSD schedule. Reference for optimizer choice beyond AdamW at scale.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TorchTitan: One-stop PyTorch native solution for production-ready LLM pre-training",
+        "url": "https://arxiv.org/abs/2410.06511",
+        "type": "research",
+        "relevance": "PyTorch-native large-scale pre-training: FSDP2, tensor/context/pipeline parallelism, torch.compile, and fp8 composed in one reference framework. Primary source for modern FSDP2-based recipes.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Muon is Scalable for LLM Training (Moonshot AI 2025)",
+        "url": "https://arxiv.org/abs/2502.16982",
+        "type": "research",
+        "relevance": "Weight-decay + per-parameter update-scale fixes that let Muon train at scale without bespoke tuning. Basis for trillion-param production use (Kimi K2, DeepSeek-V4, GLM-5).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pretraining Large Language Models with NVFP4 (NVIDIA 2025)",
+        "url": "https://arxiv.org/abs/2509.25149",
+        "type": "research",
+        "relevance": "12B model on 10T tokens with NVFP4 matching fp8 baseline; MXFP4 needed ~36% more tokens. Source for FP4-training maturity and NVFP4-vs-MXFP4 format choice on Blackwell.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence",
+        "url": "https://arxiv.org/abs/2606.19348",
+        "type": "research",
+        "relevance": "Primary confirmation that DeepSeek-V4 uses the Muon optimizer for pretraining convergence/stability. Verify exact figures against this report before quoting (recent release, June 2026).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GLM-5: from Vibe Coding to Agentic Engineering (Zhipu/Z.ai)",
+        "url": "https://arxiv.org/abs/2602.15763",
+        "type": "research",
+        "relevance": "Primary source for GLM-5's Muon usage: describes a per-head 'Muon Split' orthogonalization and a zero-redundancy distributed Muon implementation, building on GLM-4.5's recipe.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "official_framework_docs": [
+      {
+        "name": "PyTorch FSDP Tutorial",
+        "url": "https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html",
+        "type": "documentation",
+        "relevance": "Official PyTorch FSDP walkthrough: sharding strategies, mixed precision, checkpointing, and performance tips. Primary reference for FSDP configuration.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepSpeed Documentation",
+        "url": "https://www.deepspeed.ai/docs/config-json/",
+        "type": "documentation",
+        "relevance": "Official DeepSpeed ZeRO config reference: ZeRO stages, offload settings, gradient accumulation, bf16/fp16 config. Authoritative source for DeepSpeed setup.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Megatron-LM GitHub",
+        "url": "https://github.com/NVIDIA/Megatron-LM",
+        "type": "tool",
+        "relevance": "NVIDIA's reference implementation for tensor, pipeline, and data parallelism at very large scale. Canonical source for 3-D parallelism configuration and training recipes.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "pretraining_frameworks": [
+      {
+        "name": "torchtitan GitHub",
+        "url": "https://github.com/pytorch/torchtitan",
+        "type": "tool",
+        "relevance": "PyTorch's own reference pre-training framework built on FSDP2, context parallelism, and torch.compile. Actively developed Meta reference for large-scale pre-training.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "HuggingFace nanotron GitHub",
+        "url": "https://github.com/huggingface/nanotron",
+        "type": "tool",
+        "relevance": "HuggingFace's efficient 3-D parallel pre-training framework. Used for BLOOM and IDEFICS. Supports tensor, pipeline, and data parallelism with a clean config system.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "modded-nanoGPT GitHub (Karpathy fork with speed records)",
+        "url": "https://github.com/KellerJordan/modded-nanoGPT",
+        "type": "tool",
+        "relevance": "Speed-optimized nanoGPT fork. Reference for GPT-2 124M reproduction with minimal code. Holds community speed records; excellent for benchmarking training throughput.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "llm.c GitHub (Karpathy)",
+        "url": "https://github.com/karpathy/llm.c",
+        "type": "tool",
+        "relevance": "Karpathy's minimal C/CUDA GPT-2 pre-training implementation. Educational reference; used in 'Let's reproduce GPT-2' video. Excellent for understanding training loop fundamentals.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "rented_gpu_providers": [
+      {
+        "name": "RunPod Pricing",
+        "url": "https://www.runpod.io/gpu-instance/pricing",
+        "type": "documentation",
+        "relevance": "Current RunPod GPU instance pricing including spot (interruptible) rates for A100, H100, and A10G. Verify before budgeting — prices change frequently.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Lambda Labs GPU Cloud Pricing",
+        "url": "https://lambdalabs.com/service/gpu-cloud#pricing",
+        "type": "documentation",
+        "relevance": "Lambda Labs on-demand and reserved GPU pricing. Often competitive for A100 clusters. Verify current rates; availability fluctuates.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Modal GPU Compute Pricing",
+        "url": "https://modal.com/pricing",
+        "type": "documentation",
+        "relevance": "Modal serverless GPU pricing. Per-second billing; good for short burst jobs and profiling runs. Supports H100 and A100 with simple Python SDK.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

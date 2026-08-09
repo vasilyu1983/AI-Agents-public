@@ -1,0 +1,4 @@
+interface:
+  display_name: "Causal Inference Foundations"
+  short_description: "Applies causal-inference primitives for confounded-impact attribution"
+  default_prompt: "Use $foundations-causal-inference for causal-inference primitives (DAGs, IV, RDD, DiD, synthetic control, propensity, CATE) when attributing confounded impact or diagnosing rollout and LLM-eval confounding."

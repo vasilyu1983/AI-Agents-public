@@ -1,0 +1,603 @@
+{
+  "metadata": {
+    "skill": "software-localisation",
+    "updated": "2026-07-11",
+    "total_sources": 63,
+    "description": "Curated resources for i18n/l10n in modern web applications covering libraries, standards, TMS platforms, AI translation, and best practices.",
+    "title": "Software Localisation - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "i18next Documentation",
+        "url": "https://www.i18next.com/",
+        "type": "documentation",
+        "relevance": "Primary i18n framework documentation. Covers configuration, plugins, and integration patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "i18next TypeScript Guide",
+        "url": "https://www.i18next.com/overview/typescript",
+        "type": "documentation",
+        "relevance": "Official i18next TypeScript guidance including selector API and large-catalog typing recommendations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "i18next Plugins and Utils",
+        "url": "https://www.i18next.com/overview/plugins-and-utils",
+        "type": "documentation",
+        "relevance": "Official overview of supported plugins and utilities, including the current CLI/tooling ecosystem.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "react-i18next Documentation",
+        "url": "https://react.i18next.com/",
+        "type": "documentation",
+        "relevance": "React-specific i18next bindings. Hooks, components, and SSR patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "FormatJS / react-intl",
+        "url": "https://formatjs.github.io/",
+        "type": "documentation",
+        "relevance": "ICU-focused i18n library. Official react-intl documentation and ICU message syntax.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "vue-i18n Documentation",
+        "url": "https://vue-i18n.intlify.dev/",
+        "type": "documentation",
+        "relevance": "Official Vue 3 i18n solution. Composition API integration and tooling.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Angular Internationalization",
+        "url": "https://angular.dev/guide/i18n",
+        "type": "documentation",
+        "relevance": "Official Angular i18n guide. @angular/localize setup and AOT compilation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "next-intl Documentation",
+        "url": "https://next-intl.dev/",
+        "type": "documentation",
+        "relevance": "Canonical next-intl docs. App Router, request config, proxy setup, localized pathnames, and CMS integration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LinguiJS Documentation",
+        "url": "https://lingui.dev/",
+        "type": "documentation",
+        "relevance": "Minimal bundle i18n library. ICU syntax with React, Vue, and Svelte support.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "typesafe-i18n Documentation",
+        "url": "https://github.com/codingcommons/typesafe-i18n",
+        "type": "documentation",
+        "relevance": "TypeScript-first i18n with compile-time type checking. Use conditionally and review maintenance cadence before adopting.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "standards_specifications": [
+      {
+        "name": "ICU Message Format",
+        "url": "https://unicode-org.github.io/icu/userguide/format_parse/messages/",
+        "type": "specification",
+        "relevance": "Canonical ICU message syntax specification. Pluralisation, select, formatting.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Unicode CLDR",
+        "url": "https://cldr.unicode.org/",
+        "type": "specification",
+        "relevance": "Common Locale Data Repository. Plural rules, date/number formats by locale. Version and per-language category counts change on each release (CLDR 48.2 was current as of March 2026, CLDR 49 planned for October 2026) — always re-check the live chart rather than a cached version number.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "BCP 47 Language Tags",
+        "url": "https://www.rfc-editor.org/info/bcp47",
+        "type": "specification",
+        "relevance": "IETF standard for language tags (en-US, de-DE). Used in Accept-Language headers.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "MDN Intl API",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl",
+        "type": "reference",
+        "relevance": "JavaScript Internationalization API. DateTimeFormat, NumberFormat, Collator.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ECMAScript Internationalization API",
+        "url": "https://tc39.es/ecma402/",
+        "type": "specification",
+        "relevance": "ECMA-402 specification. Defines Intl object and locale-sensitive operations.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "tms_platforms": [
+      {
+        "name": "Phrase (formerly Memsource)",
+        "url": "https://phrase.com/",
+        "type": "tool",
+        "relevance": "Enterprise TMS with developer tools. GitHub/GitLab integration, CLI, API.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Lokalise",
+        "url": "https://lokalise.com/",
+        "type": "tool",
+        "relevance": "Developer-friendly TMS. Figma plugin, GitHub integration, collaborative translation.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Crowdin",
+        "url": "https://crowdin.com/",
+        "type": "tool",
+        "relevance": "Community and enterprise TMS. Open source free tier, crowdsourcing support.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Transifex",
+        "url": "https://www.transifex.com/",
+        "type": "tool",
+        "relevance": "Localization platform with API-first approach. CI/CD integration, string detection.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "POEditor",
+        "url": "https://poeditor.com/",
+        "type": "tool",
+        "relevance": "Simple TMS for smaller teams. GitHub integration, reasonable pricing.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Locize",
+        "url": "https://www.locize.com/",
+        "type": "tool",
+        "relevance": "i18next-native TMS by i18next creators. Real-time sync, versioning.",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Weblate",
+        "url": "https://weblate.org/",
+        "type": "tool",
+        "relevance": "Self-hostable, libre-licensed continuous localization platform. Primary choice when data residency or self-hosting is a hard requirement.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      }
+    ],
+    "guides_tutorials": [
+      {
+        "name": "W3C i18n Best Practices for Spec Developers",
+        "url": "https://w3c.github.io/bp-i18n-specdev/",
+        "type": "specification",
+        "relevance": "W3C guidelines for internationalisation in web specifications. Authoritative reference for standards compliance.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Shopify i18n Best Practices for Front-End",
+        "url": "https://shopify.engineering/internationalization-i18n-best-practices-front-end-developers",
+        "type": "guide",
+        "relevance": "Enterprise i18n patterns from Shopify engineering. UTF-8 encoding, text expansion, concatenation avoidance.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Lingui vs i18next Comparison",
+        "url": "https://lingui.dev/misc/i18next",
+        "type": "guide",
+        "relevance": "Official LinguiJS comparison with i18next. Bundle size, TypeScript, extraction differences.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "react-i18next vs react-intl Comparison",
+        "url": "https://www.locize.com/blog/react-intl-vs-react-i18next",
+        "type": "guide",
+        "relevance": "Detailed comparison by i18next maintainers. Bundle size, features, use cases.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Best React i18n Libraries - Phrase",
+        "url": "https://phrase.com/blog/posts/react-i18n-best-libraries/",
+        "type": "guide",
+        "relevance": "Comprehensive React i18n library comparison with code examples.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ICU Message Format Guide - Phrase",
+        "url": "https://phrase.com/blog/posts/guide-to-the-icu-message-format/",
+        "type": "guide",
+        "relevance": "Practical ICU syntax guide with pluralisation and select examples.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ICU Message Format Guide - Lokalise",
+        "url": "https://lokalise.com/blog/complete-guide-to-icu-message-format/",
+        "type": "guide",
+        "relevance": "Complete ICU guide with CLDR plural rules and escaping patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TypeScript i18n Best Practices",
+        "url": "https://caisy.io/blog/typescript-i18n",
+        "type": "guide",
+        "relevance": "Type-safe i18n patterns in TypeScript. Type generation and validation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Angular Localization Guide - Centus",
+        "url": "https://centus.com/blog/angular-localization",
+        "type": "guide",
+        "relevance": "Comprehensive Angular i18n setup with @angular/localize and alternatives.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "i18n Benefits and Best Practices - Smartling",
+        "url": "https://www.smartling.com/blog/i18n",
+        "type": "guide",
+        "relevance": "Business case for i18n. Planning strategies and workflow optimization.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FormatJS ICU Syntax Guide",
+        "url": "https://formatjs.github.io/docs/core-concepts/icu-syntax",
+        "type": "guide",
+        "relevance": "Primary ICU syntax guide from the FormatJS project. Good replacement for third-party ICU overview articles.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "tools_cli": [
+      {
+        "name": "i18next-cli",
+        "url": "https://github.com/i18next/i18next-cli",
+        "type": "tool",
+        "relevance": "Official i18next extraction, linting, locale syncing, and type-generation CLI.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "i18next-parser",
+        "url": "https://github.com/i18next/i18next-parser",
+        "type": "tool",
+        "relevance": "Legacy extraction tool for repos already standardized on parser config.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "@formatjs/cli",
+        "url": "https://formatjs.github.io/docs/tooling/cli",
+        "type": "tool",
+        "relevance": "FormatJS extraction and compilation. ICU message validation.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Lingui CLI",
+        "url": "https://lingui.dev/ref/cli",
+        "type": "tool",
+        "relevance": "LinguiJS string extraction and compilation. Catalog management.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "i18next-http-backend",
+        "url": "https://github.com/i18next/i18next-http-backend",
+        "type": "library",
+        "relevance": "Load translations from backend/CDN. Lazy loading support.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "i18next-browser-languagedetector",
+        "url": "https://github.com/i18next/i18next-browser-languageDetector",
+        "type": "library",
+        "relevance": "Browser locale detection. Cookie, localStorage, navigator, query string.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "vscode_extensions": [
+      {
+        "name": "i18n Ally",
+        "url": "https://marketplace.visualstudio.com/items?itemName=Lokalise.i18n-ally",
+        "type": "tool",
+        "relevance": "VS Code extension for i18n. Inline annotations, auto-extraction, framework detection.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "rtl_resources": [
+      {
+        "name": "RTL Styling 101",
+        "url": "https://rtlstyling.com/",
+        "type": "guide",
+        "relevance": "Comprehensive RTL CSS guide. Logical properties, BiDi, testing strategies.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MDN CSS Logical Properties",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Logical_properties_and_values",
+        "type": "reference",
+        "relevance": "CSS logical properties reference. margin-inline-start, padding-block-end.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Material Design Bidirectionality",
+        "url": "https://m2.material.io/design/usability/bidirectionality.html",
+        "type": "guide",
+        "relevance": "Google Material Design RTL guidelines. Icons, mirroring, layout patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "testing": [
+      {
+        "name": "Testing Library i18n Guide",
+        "url": "https://testing-library.com/docs/react-testing-library/setup/",
+        "type": "guide",
+        "relevance": "Testing React components with i18n. Provider wrapping patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Pseudolocalization",
+        "url": "https://phrase.com/blog/posts/pseudolocalization/",
+        "type": "guide",
+        "relevance": "Testing i18n readiness without real translations. Accent characters, expansion.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "framework_specific": [
+      {
+        "name": "Next.js Internationalization Docs",
+        "url": "https://nextjs.org/docs/app/guides/internationalization",
+        "type": "documentation",
+        "relevance": "Official Next.js i18n routing. App Router patterns, async params, and locale-aware routing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Next.js Proxy Docs",
+        "url": "https://nextjs.org/docs/app/getting-started/proxy",
+        "type": "documentation",
+        "relevance": "Official Next.js proxy file guidance replacing middleware terminology in Next.js 16.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Nuxt i18n Module",
+        "url": "https://i18n.nuxtjs.org/",
+        "type": "documentation",
+        "relevance": "Official Nuxt.js i18n module. Auto-routing, SEO, lazy loading.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "npm_comparisons": [
+      {
+        "name": "npm compare: react-i18next vs react-intl",
+        "url": "https://npm-compare.com/react-i18next,react-intl",
+        "type": "reference",
+        "relevance": "Live npm download stats and comparison. Bundle size, popularity trends.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Bundlephobia: i18next",
+        "url": "https://bundlephobia.com/package/i18next",
+        "type": "reference",
+        "relevance": "Bundle size analysis for i18next and dependencies.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "ai_translation": [
+      {
+        "name": "i18n-ai-translate",
+        "url": "https://github.com/taahamahdi/i18n-ai-translate",
+        "type": "tool",
+        "relevance": "AI-powered translation for i18next JSON using ChatGPT, Gemini, Claude, or local Ollama. Preserves file structure and variables.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "i18nexus",
+        "url": "https://i18nexus.com/",
+        "type": "tool",
+        "relevance": "AI translation management platform for React and Next.js. Automated workflows and CI/CD integration.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Locize Blog - What is i18n",
+        "url": "https://www.locize.com/blog/what-is-i18n/",
+        "type": "guide",
+        "relevance": "Modern i18n practices including AI translation, RSC patterns, and metadata for context.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AI Translation Trends (annual)",
+        "url": "https://www.machinetranslation.com/blog/best-trends-in-ai-translation-2026",
+        "type": "guide",
+        "relevance": "Industry trends including consensus-based translation, edge translation, and domain-specific models.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Forrester Wave TMS Q3 2025",
+        "url": "https://www.forrester.com/blogs/announcing-the-first-forrester-wave-translation-management-systems-q3-2025/",
+        "type": "report",
+        "relevance": "Enterprise TMS market evaluation covering Phrase, Lokalise, Crowdin, and 9 other vendors. Vendor rankings and feature sets shift yearly — treat this as directional context, not a current-quarter ranking, and check for a newer Wave before citing a leader/challenger position.",
+        "update_frequency": "annual",
+        "access": "gated",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MessageFormat 2.0 Documentation",
+        "url": "https://unicode-org.github.io/icu/userguide/format_parse/messages/mf2.html",
+        "type": "specification",
+        "relevance": "ICU MessageFormat 2.0 specification. LDML syntax reached Final Candidate/stabilized status, but ICU's Java implementation is only draft-status and the C++ implementation remains a technology preview as of mid-2026; no major i18n library or TMS has shipped production MF2 support. Re-verify implementation status before recommending migration.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "accessibility_regulation": [
+      {
+        "name": "European Accessibility Act (EAA) — European Commission",
+        "url": "https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en",
+        "type": "regulation",
+        "relevance": "Enforceable since 28 June 2025 for EU-market products/services placed after that date (transition to 28 June 2030 for pre-existing services). Accessibility law, not a translation mandate, but interlocks with EU rules requiring consumer information in the member-state language. Verify current scope/deadlines before advising a compliance date.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "mcp": [
+      {
+        "name": "Model Context Protocol (spec)",
+        "url": "https://modelcontextprotocol.io/",
+        "description": "Canonical Model Context Protocol: concepts, architecture, ecosystem. The dominant current pattern for connecting AI apps/agents to external tools and data.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "MCP — Build a Server",
+        "url": "https://modelcontextprotocol.io/docs/develop/build-server",
+        "description": "Official guide to building MCP servers (exposing tools/data to AI agents). Resolve current SDK and tooling at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "security_advisories": [
+      {
+        "name": "Vue I18n Security Advisory GHSA-p2ph-7g93-hw3m",
+        "url": "https://github.com/intlify/vue-i18n/security/advisories/GHSA-p2ph-7g93-hw3m",
+        "type": "advisory",
+        "relevance": "Official Vue I18n XSS advisory covering affected 9.x-11.x lines and patched versions.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Vue I18n Security Advisory GHSA-9r9m-ffp6-9x4v",
+        "url": "https://github.com/intlify/vue-i18n/security/advisories/GHSA-9r9m-ffp6-9x4v",
+        "type": "advisory",
+        "relevance": "Official Vue I18n advisory to verify package versions against before recommending upgrades.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Vue I18n Security Advisory GHSA-x8qp-wqqm-57ph (CVE-2025-53892)",
+        "url": "https://github.com/advisories/GHSA-x8qp-wqqm-57ph",
+        "type": "advisory",
+        "relevance": "escapeParameterHtml fails to prevent tag-based DOM XSS via v-html. Fixed in 9.14.5, 10.0.8, 11.1.10. Verify current package version before recommending v-html with translated content.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Angular i18n Security Advisory GHSA-prjf-86w9-mfqv (CVE-2026-27970)",
+        "url": "https://github.com/advisories/GHSA-prjf-86w9-mfqv",
+        "type": "advisory",
+        "relevance": "XSS in Angular's ICU/i18n pipeline when translation files are compromised and rendered without CSP/Trusted Types. Fixed in 21.2.0, 21.1.6, 20.3.17, 19.2.19.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

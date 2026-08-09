@@ -1,0 +1,4 @@
+interface:
+  display_name: "arXiv Scout"
+  short_description: "Finds and triages recent arXiv papers with required arXiv attribution"
+  default_prompt: "Use $research-arxiv-scout for recent arXiv papers, AI/ML categories, agents, software/QA, arXiv IDs, paper triage, attribution, and source-list updates."

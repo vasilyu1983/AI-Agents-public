@@ -1,0 +1,4 @@
+interface:
+  display_name: "Playwright Testing"
+  short_description: "Builds and debugs Playwright E2E suites"
+  default_prompt: "Use $qa-testing-playwright for Builds and debugs Playwright E2E suites. Use when authoring browser tests, fixing flakes, or hardening Playwright CI and locator strategy."

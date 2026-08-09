@@ -1,0 +1,66 @@
+{
+  "_comment": "Example mapping for a requirements-hub. Copy and adapt for your own portfolio: replace repo_pattern globs and hub_docs paths to match your domain structure.",
+  "hub_root": ".",
+  "last_verified_pattern": "last_verified:\\s*(\\d{4}-\\d{2}-\\d{2})",
+  "mappings": [
+    {
+      "repo_pattern": "payments-ledger*",
+      "hub_docs": [
+        "overview/data-catalog.md",
+        "overview/process-catalog.md",
+        "payments-ledger/**/*.md"
+      ],
+      "change_weight": "critical"
+    },
+    {
+      "repo_pattern": "payments*",
+      "hub_docs": [
+        "incomings/**/*.md",
+        "overview/process-catalog.md"
+      ],
+      "change_weight": "critical"
+    },
+    {
+      "repo_pattern": "identity*",
+      "hub_docs": [
+        "identity-risk/**/*.md"
+      ],
+      "change_weight": "critical"
+    },
+    {
+      "repo_pattern": "cards*",
+      "hub_docs": [
+        "cards/**/*.md"
+      ],
+      "change_weight": "critical"
+    },
+    {
+      "repo_pattern": "crypto*",
+      "hub_docs": [
+        "crypto/**/*.md"
+      ],
+      "change_weight": "critical"
+    },
+    {
+      "repo_pattern": "notifications*",
+      "hub_docs": [
+        "notifications/**/*.md"
+      ],
+      "change_weight": "standard"
+    },
+    {
+      "repo_pattern": "web*",
+      "hub_docs": [
+        "channels/**/*.md"
+      ],
+      "change_weight": "standard"
+    },
+    {
+      "repo_pattern": "infra*",
+      "hub_docs": [
+        "infrastructure/**/*.md"
+      ],
+      "change_weight": "standard"
+    }
+  ]
+}

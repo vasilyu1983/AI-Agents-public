@@ -1,0 +1,4 @@
+interface:
+  display_name: "MLOps & LLMOps - Production Operations Hub"
+  short_description: "Operates production MLOps for ML, LLM, and agent systems"
+  default_prompt: "Use $ai-mlops for Operates production MLOps for ML, LLM, and agent systems. Use when designing deployment, monitoring, retraining, incident response, or GenAI security workflows."

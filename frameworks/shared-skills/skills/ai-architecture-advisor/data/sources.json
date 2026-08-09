@@ -1,0 +1,569 @@
+{
+  "metadata": {
+    "skill": "ai-architecture-advisor",
+    "title": "AI Architecture Advisor - Sources",
+    "updated": "2026-07-11",
+    "audit_date": "2026-07-11",
+    "last_verified": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 59,
+    "description": "Primary references for AI/ML architecture selection: gradient-boosted tree family, tabular foundation models (TabPFN-3 / TabICL v2), trees-vs-deep-learning on tabular data, older/foundational net families (RNN/LSTM, CNN/ViT, encoder-decoder/encoder-only, GAN/VAE), the prompt/reasoning/RAG/fine-tune decision, long-context-vs-RAG and RAFT, test-time compute / thinking budget, post-training & alignment (RLHF/PPO, DPO/DAAs, GRPO, RLVR, RLAIF/CAI), transfer learning/distillation, agent build-vs-not, MCP, SLMs for agents, model architecture (MoE granularity / attention variants MLA+NSA / SSM-hybrid / diffusion-LM), emerging classes (BLT, JEPA, world models), multimodal omni-vs-specialist, embedding/retrieval model selection, recsys/ranking, and how to discover & vet new architectures."
+  },
+  "categories": {
+    "classical_ml_and_trees": [
+      {
+        "name": "XGBoost: A Scalable Tree Boosting System (Chen & Guestrin)",
+        "url": "https://arxiv.org/abs/1603.02754",
+        "type": "research",
+        "relevance": "Canonical XGBoost reference: regularization and second-order gradients.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LightGBM: A Highly Efficient Gradient Boosting Decision Tree",
+        "url": "https://papers.nips.cc/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html",
+        "type": "research",
+        "relevance": "Histogram binning + leaf-wise growth; why LightGBM is fast on large data.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "CatBoost: unbiased boosting with categorical features",
+        "url": "https://arxiv.org/abs/1706.09516",
+        "type": "research",
+        "relevance": "Ordered boosting and native categorical handling; when CatBoost wins.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Why do tree-based models still outperform deep learning on tabular data?",
+        "url": "https://arxiv.org/abs/2207.08815",
+        "type": "research",
+        "relevance": "Empirical basis for the trees-vs-deep-learning default on tabular data (2022; now contested for small tables by tabular foundation models).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Accurate predictions on small data with a tabular foundation model (TabPFN v2, Nature 2025)",
+        "url": "https://www.nature.com/articles/s41586-024-08328-6",
+        "type": "research",
+        "relevance": "In-context tabular FM beats tuned GBDTs on datasets up to ~10k rows in a single forward pass; the 2025 update to 'trees always win on tabular'.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TabPFN-2.5 / Prior Labs (state of tabular foundation models)",
+        "url": "https://priorlabs.ai/tabpfn-2",
+        "type": "documentation",
+        "relevance": "Current tabular FM: when it beats tuned tree ensembles, size limits, and deployment tradeoffs vs GBDTs.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TabPFN-2.5: Tabular Foundation Model (arXiv 2511.08667)",
+        "url": "https://arxiv.org/abs/2511.08667",
+        "type": "research",
+        "relevance": "Nov 2025 release raising the envelope to ~50k rows / ~2k features (~87% win-rate vs default XGBoost up to 100k rows) plus a distillation engine to compact MLPs/trees. Superseded by TabPFN-3 for size; kept for the distillation method. Volatile — verify limits.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TabPFN-3 / Prior Labs (current tabular FM frontier)",
+        "url": "https://priorlabs.ai/technical-reports/tabpfn-3",
+        "type": "documentation",
+        "relevance": "Released May 2026. Envelope is a rows-vs-features tradeoff, not a flat ceiling: up to 1M rows x 200 features, or 100K rows x 2K features, or 1K rows x 20K features. Licensed under the TABPFN-3.0 License v1.0 (permissive for research/internal evaluation; commercial/product use needs the API or a commercial license from Prior Labs, acquired by SAP in May 2026) — check before production. Volatile — verify limits (confirmed 2026-07-11).",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TabICL v2: open-source tabular foundation model (arXiv 2602.11139)",
+        "url": "https://arxiv.org/abs/2602.11139",
+        "type": "research",
+        "relevance": "Confirmed real: 'TabICLv2: A better, faster, scalable, and open tabular foundation model' (Qu, Holzmuller, Varoquaux, Le Morvan; submitted Feb 11 2026); open weights + inference code, reports beating RealTabPFN-2.5 without tuning/ensembling. The recommended alternative to TabPFN when its non-commercial license blocks deployment. Verify current benchmarks (confirmed 2026-07-11).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "scikit-learn: Ensemble methods (user guide)",
+        "url": "https://scikit-learn.org/stable/modules/ensemble.html",
+        "type": "documentation",
+        "relevance": "Bagging vs boosting, RandomForest and gradient boosting practical guidance.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "foundational_net_families": [
+      {
+        "name": "Build a Large Language Model (From Scratch) — Sebastian Raschka (Manning, 2025)",
+        "url": "https://www.manning.com/books/build-a-large-language-model-from-scratch",
+        "type": "book",
+        "relevance": "End-to-end decoder-only LLM internals from first principles: BPE tokenization, self/causal/multi-head attention, layer norm, GELU, residuals, pretraining, SFT, and LoRA; the implementation anchor for the transformer/LLM and 'train from scratch' lanes (frames RNN/LSTM as the historical motivation for attention).",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Long Short-Term Memory (Hochreiter & Schmidhuber)",
+        "url": "https://www.bioinf.jku.at/publications/older/2604.pdf",
+        "type": "research",
+        "relevance": "The LSTM reference; still the right call for strict-streaming / tiny-footprint sequence models where Transformers are overkill.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Deep Residual Learning for Image Recognition (ResNet)",
+        "url": "https://arxiv.org/abs/1512.03385",
+        "type": "research",
+        "relevance": "Canonical CNN reference; CNNs remain the default for spatial image features and edge/on-device vision before reaching for ViT at scale.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer (T5)",
+        "url": "https://arxiv.org/abs/1910.10683",
+        "type": "research",
+        "relevance": "Encoder-decoder (seq2seq) reference; the right shape for fixed text-to-text transforms (translate/summarize/parse) with paired data.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "BERT: Pre-training of Deep Bidirectional Transformers",
+        "url": "https://arxiv.org/abs/1810.04805",
+        "type": "research",
+        "relevance": "Encoder-only reference; still the default backbone for text classification/NER and the retrieval-embedding backbone behind RAG and rankers — not replaced by decoder-only LLMs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "llm_rag_finetune_decision": [
+      {
+        "name": "Retrieval-Augmented Generation for Knowledge-Intensive NLP (Lewis et al.)",
+        "url": "https://arxiv.org/abs/2005.11401",
+        "type": "research",
+        "relevance": "Foundational RAG reference; knowledge gaps via retrieval, not training.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LoRA: Low-Rank Adaptation of Large Language Models",
+        "url": "https://arxiv.org/abs/2106.09685",
+        "type": "research",
+        "relevance": "Parameter-efficient fine-tuning; the practical adapt path for behavior gaps.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "RAFT: Adapting Language Model to Domain-Specific RAG",
+        "url": "https://openreview.net/forum?id=rzQGHXNReU",
+        "type": "research",
+        "relevance": "Retrieval-augmented fine-tuning combines RAG grounding with behavior shaping instead of choosing one; the modern answer to RAG-vs-fine-tune as either/or.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Long-Context LLMs Meet RAG: Overcoming Challenges for Long Inputs in RAG",
+        "url": "https://arxiv.org/abs/2410.05983",
+        "type": "research",
+        "relevance": "When long context obviates RAG vs when retrieval still wins; the long-context-vs-RAG decision the prompt->RAG ladder now must include.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anthropic: Building effective agents",
+        "url": "https://www.anthropic.com/research/building-effective-agents",
+        "type": "documentation",
+        "relevance": "When a single call or workflow beats an agent; agent build-vs-not guidance.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol (MCP) specification",
+        "url": "https://modelcontextprotocol.io",
+        "type": "documentation",
+        "relevance": "The 2025 standard for agent tool/data integration; the protocol-choice consideration in the agent lane.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Small Language Models are the Future of Agentic AI (NVIDIA)",
+        "url": "https://arxiv.org/abs/2506.02153",
+        "type": "research",
+        "relevance": "Argues SLMs are sufficient and cheaper for narrow, repetitive agent steps; reserve frontier models for hard planning.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "reasoning_and_test_time_compute": [
+      {
+        "name": "The State of LLM Reasoning Model Inference (Raschka)",
+        "url": "https://magazine.sebastianraschka.com/p/state-of-llm-reasoning-and-inference-scaling",
+        "type": "blog",
+        "relevance": "Survey of reasoning models and test-time compute; when scaling inference beats train-time fine-tuning for logic gaps.",
+        "update_frequency": "yearly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Rethinking Fine-Tuning when Scaling Test-Time Compute",
+        "url": "https://arxiv.org/abs/2502.07154",
+        "type": "research",
+        "relevance": "Test-time strategy interacts with fine-tuning choice; evidence the reasoning rung is distinct from the fine-tune rung.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "transfer_and_distillation": [
+      {
+        "name": "Distilling the Knowledge in a Neural Network (Hinton et al.)",
+        "url": "https://arxiv.org/abs/1503.02531",
+        "type": "research",
+        "relevance": "Teacher-to-student distillation: transfer behavior to a cheaper model.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "A Survey on Transfer Learning (Pan & Yang)",
+        "url": "https://ieeexplore.ieee.org/document/5288526",
+        "type": "research",
+        "relevance": "Framework for choosing a knowledge-transfer mechanism by what stays fixed.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false
+      }
+    ],
+    "model_architectures": [
+      {
+        "name": "DeepSeek-V3 Technical Report",
+        "url": "https://arxiv.org/abs/2412.19437",
+        "type": "research",
+        "relevance": "Foundational frontier MoE reference (671B total / 37B active); evidence MoE is the frontier default and where the dense-vs-MoE tradeoff (FLOPs vs VRAM) bites when self-hosting. Superseded on the frontier by DeepSeek-V4 (Pro 1.6T/49B active, Flash 284B/13B active; preview Apr 2026, 1M-token context) — cite V3 for the architecture rationale, V4 for current frontier scale. Verify current generation before quoting sizes.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+        "url": "https://arxiv.org/abs/2312.00752",
+        "type": "research",
+        "relevance": "Foundational selective state-space model; basis for choosing SSMs over Transformers on long sequences / throughput.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Jamba: A Hybrid Transformer-Mamba Language Model (AI21)",
+        "url": "https://arxiv.org/abs/2403.19887",
+        "type": "research",
+        "relevance": "Production-relevant SSM/attention hybrid with MoE; when KV-cache memory at very long context makes a hybrid beat a pure Transformer.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Mercury: Diffusion Large Language Models (Inception Labs)",
+        "url": "https://arxiv.org/abs/2506.17298",
+        "type": "research",
+        "relevance": "Production diffusion-LM; Mercury 2 (Feb 2026) confirmed at ~1,000+ tok/s on current GPUs. Google's open diffusion-LM entrant is DiffusionGemma (Jun 2026, Apache-2.0, 26B MoE/3.8B active, 1000+ tok/s on H100) — distinct from the closed 'Gemini Diffusion' research demo (first shown May 2025, no public weights); name whichever is actually being proposed. Volatile — verify maturity and naming (confirmed 2026-07-11).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepSeek-V2 (Multi-head Latent Attention / MLA)",
+        "url": "https://arxiv.org/abs/2405.04434",
+        "type": "research",
+        "relevance": "Introduces MLA: compresses the KV cache ~90%+ by projecting to a low-dim latent before caching; the standard attention variant on DeepSeek-class models and the key lever when KV-cache memory binds.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Native Sparse Attention (NSA, arXiv 2502.11089)",
+        "url": "https://arxiv.org/abs/2502.11089",
+        "type": "research",
+        "relevance": "Hardware-aligned, natively-trainable block-sparse attention (compression + selection + sliding window); ~11x speedup at 64k context. Corrected 2026-07-11: NSA itself is the research precursor, not what shipped — DeepSeek-V3.2 (Sep 2025) runs the distinct, finer-grained DeepSeek Sparse Attention (DSA, via a lightning indexer), not NSA. Still the long-context cost lever to know when self-hosting; don't conflate the two.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GQA: Training Generalized Multi-Query Transformer Models",
+        "url": "https://arxiv.org/abs/2305.13245",
+        "type": "research",
+        "relevance": "Grouped-query attention — the universal default attention variant in 2025-2026 open models; the baseline MLA/NSA improve on.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Byte Latent Transformer: Patches Scale Better Than Tokens (Meta)",
+        "url": "https://arxiv.org/abs/2412.09871",
+        "type": "research",
+        "relevance": "Tokenizer-free byte-level architecture matching tokenized performance at scale; the leading emerging 'name but don't yet bet on it' alternative for robustness/multilingual.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "post_training_and_alignment": [
+      {
+        "name": "Reinforcement Learning from Human Feedback (Nathan Lambert, 2026)",
+        "url": "https://rlhfbook.com",
+        "type": "book",
+        "relevance": "Comprehensive current treatment of the post-training/alignment stack: reward modeling (Bradley-Terry, ORM/PRM), PPO, GRPO/GSPO/CISPO, DPO and direct-alignment algorithms, rejection sampling, RLVR, RLAIF/Constitutional AI, over-optimization, and evaluation. The anchor reference for the post-training lane.",
+        "update_frequency": "yearly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "InstructGPT: Training LMs to follow instructions with human feedback",
+        "url": "https://arxiv.org/abs/2203.02155",
+        "type": "research",
+        "relevance": "Canonical RLHF recipe (SFT -> reward model -> PPO); the historical baseline for the post-training lane.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Direct Preference Optimization (DPO)",
+        "url": "https://arxiv.org/abs/2305.18290",
+        "type": "research",
+        "relevance": "Offline preference optimization without a reward model or RL loop; the default first preference-tuning method and basis for DAAs (KTO/ORPO/SimPO).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via RL (GRPO)",
+        "url": "https://arxiv.org/abs/2501.12948",
+        "type": "research",
+        "relevance": "GRPO + RLVR reasoning recipe (group-relative advantage drops the critic; verifiable rewards replace human labels); the widely-replicated 2026 reasoning-model training blueprint.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tulu 3: Pushing Frontiers in Open Language Model Post-Training (AI2)",
+        "url": "https://arxiv.org/abs/2411.15124",
+        "type": "research",
+        "relevance": "Open, reproducible end-to-end post-training recipe (SFT -> DPO -> RLVR); a canonical worked pipeline for the post-training lane.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Build a Reasoning Model (From Scratch) — Sebastian Raschka (Manning MEAP)",
+        "url": "https://www.manning.com/books/build-a-reasoning-model-from-scratch",
+        "type": "book",
+        "relevance": "Reasoning-model build: inference-time compute scaling (CoT, voting, best-of-N), RL for reasoning (RLVR), and SFT+distillation; pairs the reasoning rung with implementation depth.",
+        "update_frequency": "yearly",
+        "access": "paid",
+        "add_as_web_search": false
+      }
+    ],
+    "multimodal_and_embeddings": [
+      {
+        "name": "a16z: The State of Generative Media 2026",
+        "url": "https://a16z.com/the-state-of-generative-media-2026/",
+        "type": "blog",
+        "relevance": "Evidence enterprises deploy many specialist models alongside omni models; the omni-vs-specialist multimodal decision. Verify figures before quoting.",
+        "update_frequency": "yearly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MTEB: Massive Text Embedding Benchmark",
+        "url": "https://arxiv.org/abs/2210.07316",
+        "type": "research",
+        "relevance": "Standard benchmark for comparing embedding models; the filter step in embedding-model selection (live leaderboard volatile — verify current leaders).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "BGE-M3: Multi-Lingual, Multi-Functionality, Multi-Granularity Embeddings",
+        "url": "https://arxiv.org/abs/2402.03216",
+        "type": "research",
+        "relevance": "Open-weight embedder with dense+sparse+multi-vector in one model; common self-hosted default and on-ramp to late-interaction retrieval.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ColBERT: Efficient Passage Search via Late Interaction over BERT",
+        "url": "https://arxiv.org/abs/2004.12832",
+        "type": "research",
+        "relevance": "Late-interaction / multi-vector retrieval; when its precision justifies its storage cost in the retrieval-architecture axis.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "recsys_and_ranking": [
+      {
+        "name": "Actions Speak Louder than Words: Generative Recommenders (Meta HSTU)",
+        "url": "https://arxiv.org/abs/2402.17152",
+        "type": "research",
+        "relevance": "Production trillion-parameter generative/sequential recommender; evidence recsys is a distinct lane (implicit feedback, <50ms, dynamic catalog) not vector-RAG.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "agents_and_context_engineering": [
+      {
+        "name": "Anthropic: How we built our multi-agent research system",
+        "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+        "type": "documentation",
+        "relevance": "When multi-agent (orchestrator-worker) wins vs a single agent; token-cost multiples and parallel/independent-subtask conditions.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Research: Towards a Science of Scaling Agent Systems",
+        "url": "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/",
+        "type": "blog",
+        "relevance": "Evidence multi-agent can lower quality on sequential tasks via coordination overhead; supports default-to-single-agent.",
+        "update_frequency": "yearly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "aws_and_document_services": [
+      {
+        "name": "Amazon Bedrock — model catalog and model cards",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html",
+        "type": "documentation",
+        "relevance": "AWS managed inference: Claude, Amazon Nova 2, OpenAI GPT-5.x, and 18+ providers / 110+ models available via Bedrock as of June 2026. The routing signal when 'must run on AWS' is the constraint.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon Bedrock Knowledge Bases",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html",
+        "type": "documentation",
+        "relevance": "AWS managed RAG path: S3 ingestion, built-in chunking + retrieval, zero-ops. Includes Amazon Nova 2 Multimodal Embeddings as the 2026 default embedder (supersedes Titan). Reach for this before building a custom RAG stack on AWS.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon Textract — developer guide",
+        "url": "https://docs.aws.amazon.com/textract/latest/dg/what-is.html",
+        "type": "documentation",
+        "relevance": "AWS managed OCR specialist: structured extraction of forms, tables, and handwriting. The routing target when the multimodal specialist decision lands on AWS and OCR is the load-bearing capability.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "paperless-ngx — documentation",
+        "url": "https://docs.paperless-ngx.com",
+        "type": "documentation",
+        "relevance": "Self-hosted OSS document store and OCR pipeline: REST API, IMAP/consume-folder ingestion, built-in OCR (Tesseract). The routing target when the specialist pipeline must be self-hosted and open-source.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon Bedrock Data Automation (BDA) — developer guide",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/data-automation.html",
+        "type": "documentation",
+        "relevance": "AWS-recommended default for intelligent document processing (IDP): FM-based classify and extract with flat per-doc pricing, with OCR-layer integration options alongside Textract for the extraction step. Route to Textract standalone only for high-volume standardized docs or 95%+ compliance SLA requirements. The specific 'Pipeline mode wraps Textract, March 2026' framing could not be re-confirmed against a dated primary source as of 2026-07-11 — verify the current BDA/Textract integration mechanics against the live developer guide before quoting a launch date.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon Kendra GenAI Index — developer guide",
+        "url": "https://docs.aws.amazon.com/kendra/latest/dg/what-is-kendra.html",
+        "type": "documentation",
+        "relevance": "Managed retriever index reusable across Amazon Q Business and Bedrock Knowledge Bases. Prefer over a per-surface KB when the same index must serve multiple surfaces (Q Business assistant + KB retrieval component simultaneously).",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon Bedrock Rerank API — developer guide",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html",
+        "type": "documentation",
+        "relevance": "AWS native reranking: Cohere Rerank 3.5 and Amazon Rerank available via the Bedrock Rerank API. The managed quality lever for bi-encoder top-k → rerank top-n retrieval pipelines on AWS; reach for this before building a custom cross-encoder.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon Bedrock Guardrails — developer guide",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html",
+        "type": "documentation",
+        "relevance": "AWS-native safety and governance layer: content moderation, prompt-attack detection, denied topics, PII redaction, contextual grounding check (RAG faithfulness/hallucination gate with grounding + relevance thresholds), and Automated Reasoning (mathematically verifiable). Model-independent via the ApplyGuardrail API. The routing signal for regulated/safety-critical AWS deployments.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "architecture_discovery_and_eval": [
+      {
+        "name": "LMArena (human-preference model leaderboard)",
+        "url": "https://lmarena.ai",
+        "type": "documentation",
+        "relevance": "Human-preference Elo across models; use as a directional elimination filter when discovering/vetting new models, not as a verdict.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Hugging Face Daily Papers",
+        "url": "https://huggingface.co/papers",
+        "type": "documentation",
+        "relevance": "Primary release feed for scouting new architectures/methods; the discovery step before vetting.",
+        "update_frequency": "daily",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Artificial Analysis (model cost/intelligence/latency tracker)",
+        "url": "https://artificialanalysis.ai",
+        "type": "documentation",
+        "relevance": "Cross-model cost vs quality vs latency tradeoff data for architecture/model selection and routing-policy design.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "V-JEPA 2: Self-Supervised Video Models / Joint-Embedding Predictive Architecture (Meta)",
+        "url": "https://arxiv.org/abs/2506.09985",
+        "type": "research",
+        "relevance": "Leading non-generative latent-predictive (JEPA) architecture; emerging-production for robotics/video understanding. The canonical example of the 'name but don't yet bet on it' emerging class for embodied/world-model work.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

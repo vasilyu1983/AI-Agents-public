@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+._*
+
+# macOS duplicate-copy artifacts ("file 2.md") — these accumulate in
+# hand-curated directories that the sync script never overwrites.
+* 2
+* 2.*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Environment / secrets — never commit
+.env
+.env.*
+*.key
+*.pem
+
+# Local working data
+staging/
+
+# The sync script lives in the PRIVATE repo (AI-Agents/scripts/). Its blocklist
+# patterns name confidential entities, so publishing it would be a disclosure.
+sync-repo-into-public.sh

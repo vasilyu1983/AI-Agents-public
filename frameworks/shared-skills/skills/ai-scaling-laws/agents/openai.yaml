@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaling Laws"
+  short_description: "Sizes models and token budgets using Kaplan/Chinchilla scaling laws."
+  default_prompt: "Use $ai-scaling-laws to size models and token budgets with Kaplan/Chinchilla scaling laws when reasoning about compute-optimal N and D, tokens-per-parameter ratios, or over-training tradeoffs."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Science Engineering Suite - Quick Reference"
+  short_description: "ML and data science workflows - EDA, feature engineering, modelling, evaluation"
+  default_prompt: "Use $ai-ml-data-science for ML and data science workflows - EDA, feature engineering, modelling, evaluation, and production handoff. Use when exploring data or building models."

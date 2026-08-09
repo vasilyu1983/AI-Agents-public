@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Permissions"
+  short_description: "Design coding-agent approval systems"
+  default_prompt: "Use $ai-coding-agents-permissions to design tool approval flows, plan-mode transitions, sandbox prompts, or leader-worker permission routing for a coding-agent runtime."

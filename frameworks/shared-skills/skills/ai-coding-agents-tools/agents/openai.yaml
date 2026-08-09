@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Tools"
+  short_description: "Design tool runtimes for coding agents"
+  default_prompt: "Use $ai-coding-agents-tools to design tool registries, deferred loading, permission-aware execution, tool search, or remote tool-result rendering for a coding-agent runtime."

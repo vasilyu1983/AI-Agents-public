@@ -1,0 +1,4 @@
+interface:
+  display_name: "Localisation"
+  short_description: "Implements i18n/l10n for React, Vue, Angular, Next.js with ICU and RTL support"
+  default_prompt: "Use $software-localisation for production i18n/l10n: React, Vue, Angular, Next.js with ICU format and RTL support. Use when setting up or debugging localisation."

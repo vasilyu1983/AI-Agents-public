@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Voice Bots — Voice Pipeline and Telephony"
+  short_description: "Builds production voice bots with STT/TTS pipelines and telephony integration"
+  default_prompt: "Use $ai-voice-bots for building voice bots, IVR systems, and real-time speech agents. Use when designing STT/TTS streaming, telephony integration, latency optimization, or voice quality monitoring in pure Python."

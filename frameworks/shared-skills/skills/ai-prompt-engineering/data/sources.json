@@ -1,0 +1,390 @@
+{
+  "metadata": {
+    "skill": "ai-prompt-engineering",
+    "updated": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 40,
+    "description": "Curated sources for production prompt engineering: provider-native prompt ops, structured outputs, evaluation/regression testing, tool/RAG prompting, security, and observability.",
+    "version": "4.3",
+    "title": "AI Prompt Engineering - Sources"
+  },
+  "categories": {
+    "standards_and_security": [
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "specification",
+        "relevance": "Threat categories and mitigations for prompt injection, data leakage, and tool misuse.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP LLM Prompt Injection Prevention Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+        "type": "specification",
+        "relevance": "Step-by-step prevention techniques for prompt injection with defense-in-depth patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP Top 10 for Agentic Applications 2026",
+        "url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+        "type": "specification",
+        "relevance": "Finalized OWASP framework for agentic AI threats (ASI01-ASI10: goal hijack, tool misuse, identity/privilege abuse, supply chain, unexpected code execution, memory/context poisoning, insecure inter-agent comms, cascading failures, human-agent trust exploitation, rogue agents). Parallel to OWASP LLM Top 10, not replacing it.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "NIST AI Risk Management Framework 1.0",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "type": "specification",
+        "relevance": "Governance baseline for risk assessment, controls, and documentation that affect prompts, logging, and evaluations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NIST Generative AI Profile (AI 600-1)",
+        "url": "https://airc.nist.gov/technical-reports/#NIST.AI.600-1",
+        "type": "specification",
+        "relevance": "GenAI-specific profile aligned to NIST AI RMF; useful for prompt safety and monitoring control mapping.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "EU AI Act (Regulation (EU) 2024/1689)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+        "type": "specification",
+        "relevance": "Regulatory baseline for transparency and documentation requirements that often affect prompt logging and outputs.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "JSON Schema",
+        "url": "https://json-schema.org/",
+        "type": "specification",
+        "relevance": "Schema standard for structured outputs, tool I/O validation, and contract testing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry Semantic Conventions for GenAI",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "type": "specification",
+        "relevance": "Experimental telemetry conventions for tokens, latency, and model metadata needed for prompt monitoring and regression detection.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "prompt_and_tool_use_research": [
+      {
+        "name": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "url": "https://arxiv.org/abs/2201.11903",
+        "type": "research",
+        "relevance": "Foundational prompting technique; useful historical context for when private reasoning may help.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ReAct: Synergizing Reasoning and Acting in Language Models",
+        "url": "https://arxiv.org/abs/2210.03629",
+        "type": "research",
+        "relevance": "Core pattern for tool use; informs agent/tool prompting and error handling structure.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Self-Consistency Improves Chain of Thought Reasoning",
+        "url": "https://arxiv.org/abs/2203.11171",
+        "type": "research",
+        "relevance": "Reference for sampling-based reliability improvements; use cautiously with cost controls.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Toolformer",
+        "url": "https://arxiv.org/abs/2302.04761",
+        "type": "research",
+        "relevance": "Reference for learning tool-use behaviors and understanding tool-calling error modes.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Constitutional AI",
+        "url": "https://arxiv.org/abs/2212.08073",
+        "type": "research",
+        "relevance": "Reference for safety-aligned behavior via explicit principles; useful for policy scaffolding patterns.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "vendor_docs_and_guides": [
+      {
+        "name": "OpenAI Prompting Guide",
+        "url": "https://developers.openai.com/api/docs/guides/prompting",
+        "type": "documentation",
+        "relevance": "Primary OpenAI guide for prompt design, prompt structure, and reasoning/task framing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Structured Outputs",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+        "type": "documentation",
+        "relevance": "Primary source for schema-first structured outputs and strict JSON contracts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Evals",
+        "url": "https://developers.openai.com/api/docs/guides/evals",
+        "type": "documentation",
+        "relevance": "Primary source for provider-native evaluation workflows and prompt regression testing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Graders",
+        "url": "https://developers.openai.com/api/docs/guides/graders",
+        "type": "documentation",
+        "relevance": "Primary source for score-based evaluation and rubric/LLM judging patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Evaluation Getting Started",
+        "url": "https://developers.openai.com/api/docs/guides/evaluation-getting-started",
+        "type": "documentation",
+        "relevance": "Primary source for datasets, evaluation setup, and getting started with prompt eval loops.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Prompt Optimizer",
+        "url": "https://developers.openai.com/api/docs/guides/prompt-optimizer",
+        "type": "documentation",
+        "relevance": "Provider-native prompt improvement workflow for finding stronger prompt candidates before manual editing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Prompt Caching",
+        "url": "https://developers.openai.com/api/docs/guides/prompt-caching",
+        "type": "documentation",
+        "relevance": "Primary source for caching stable prompt prefixes and reducing prompt-operating cost.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Prompt Engineering Overview",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview",
+        "type": "documentation",
+        "relevance": "Primary Anthropic overview for prompt engineering patterns and workflow framing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Prompting Tools",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-tools",
+        "type": "documentation",
+        "relevance": "Provider-native prompt tooling surface for templates, generation, improvement, and prompt operations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Claude Prompting Best Practices",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
+        "type": "documentation",
+        "relevance": "Primary Anthropic best-practices reference for clear instructions, XML tags, examples, and evaluation habits.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Eval Tool",
+        "url": "https://platform.claude.com/docs/en/test-and-evaluate/eval-tool",
+        "type": "documentation",
+        "relevance": "Provider-native evaluation surface for tracking prompt/model quality before release.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Define Success and Build Evals",
+        "url": "https://platform.claude.com/docs/en/test-and-evaluate/define-success-and-build-evals",
+        "type": "documentation",
+        "relevance": "Primary source for success criteria, eval design, and rollout gating on Anthropic.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Adaptive Thinking",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking",
+        "type": "documentation",
+        "relevance": "Current Anthropic guidance for model-native thinking behavior — adaptive thinking is the only supported thinking-on mode for Claude Opus 4.7.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Opus 4.8 — What's New",
+        "url": "https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-8",
+        "type": "documentation",
+        "relevance": "Primary source for Opus 4.8: same API contract as 4.7 (no breaking changes), new features (mid-conversation system messages, refusal stop_details, lower 1024-token cache minimum, fast mode research preview), effort default now 'high' on all surfaces, improved tool triggering and long-context agentic quality.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Claude Opus 4.7 — What's New",
+        "url": "https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7",
+        "type": "documentation",
+        "relevance": "Primary source for Opus 4.7 breaking changes (budget_tokens removed, sampling params removed, thinking omitted by default), new features (adaptive thinking, xhigh effort, task budgets, 2576px images, 1:1 coordinates), and new tokenizer specs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-17"
+      },
+      {
+        "name": "Introducing Claude Fable 5 and Claude Mythos 5",
+        "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+        "type": "documentation",
+        "relevance": "Launch announcement for Fable 5 (GA June 9, 2026; always-on adaptive thinking; 1M context; 128k output; $10/$50 per MTok; safety-classifier fallback to Opus 4.8 in <5% of sessions) and Mythos 5 (Project Glasswing, research-access only).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Redeploying Claude Fable 5",
+        "url": "https://www.anthropic.com/news/redeploying-fable-5",
+        "type": "documentation",
+        "relevance": "Fable 5 was suspended for all users June 12, 2026 after US export controls followed a jailbreak disclosure, then redeployed globally July 1, 2026 with a tightened safety classifier that flags more benign coding requests. Load-bearing for prompt-contract resilience planning: do not treat Mythos-class model availability as a stable dependency; re-baseline refusal-rate evals after any provider-side classifier update.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "XGrammar — Structured Output Engine",
+        "url": "https://xgrammar.mlc.ai",
+        "type": "tool",
+        "relevance": "Open-source grammar-constrained decoding engine used for structured output in self-hosted inference stacks (vLLM, SGLang, TensorRT-LLM). Verify default status per framework version before relying on it.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-17"
+      },
+      {
+        "name": "DSPy — Programming with Foundation Models",
+        "url": "https://dspy.ai",
+        "type": "tool",
+        "relevance": "Automatic prompt optimization framework. MIPROv2 optimizer proposes and searches better instructions for multi-step pipelines given a metric and labeled data.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-17"
+      },
+      {
+        "name": "Google Gemini Prompting Strategies",
+        "url": "https://ai.google.dev/gemini-api/docs/prompting-strategies",
+        "type": "documentation",
+        "relevance": "Primary Google guide for prompt design, parameter tuning, and current model-specific prompting guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Gemini Structured Output",
+        "url": "https://ai.google.dev/gemini-api/docs/structured-output",
+        "type": "documentation",
+        "relevance": "Primary source for schema-constrained outputs on Gemini.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "operator_content": [
+      {
+        "name": "Why AI evals are the hottest new skill for product builders | Hamel Husain & Shreya Shankar (Lenny's Podcast)",
+        "url": "https://www.lennysnewsletter.com/p/why-ai-evals-are-the-hottest-new-skill",
+        "type": "podcast",
+        "relevance": "PM-oriented eval guidance: error analysis workflows, eval prompts as living PRDs, and why rigorous evals remain essential for AI product quality.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AI prompt engineering in 2025: What works and what doesn't | Sander Schulhoff (Lenny's Podcast)",
+        "url": "https://www.lennysnewsletter.com/p/ai-prompt-engineering-in-2025-sander-schulhoff",
+        "type": "podcast",
+        "relevance": "Current-state overview of prompt engineering effectiveness, covering what techniques still work and where teams waste effort.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "evaluation_and_testing": [
+      {
+        "name": "Promptfoo - Prompt Testing Framework",
+        "url": "https://github.com/promptfoo/promptfoo",
+        "type": "tool",
+        "relevance": "Declarative prompt testing with CI/CD integration, red teaming, and side-by-side comparison.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepEval - LLM Evaluation Framework",
+        "url": "https://github.com/confident-ai/deepeval",
+        "type": "tool",
+        "relevance": "Python-native evaluation framework for unit tests, red teaming, and LLM quality gates.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Cookbook",
+        "url": "https://developers.openai.com/cookbook",
+        "type": "examples",
+        "relevance": "Practical examples for structured outputs, tool calling, prompt optimization, and evaluation patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangSmith Documentation",
+        "url": "https://docs.langchain.com/langsmith/home",
+        "type": "documentation",
+        "relevance": "Example observability/eval tooling for prompts and traces across prompt workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+-- 011_quantize_rescore.sql
+-- HNSW expression index on binary_quantize(embedding) + two-pass rescore.
+--
+-- WHY: At the default tier (single-node, <100M vectors), storing raw float32
+-- vectors inflates RAM and increases ANN scan latency.  binary_quantize()
+-- compresses 32× (one bit per dimension), letting the HNSW graph-walk run
+-- over cheap bit comparisons (Hamming distance) while a second pass rescores
+-- the top-K candidates at full float32 precision to recover recall.
+--
+-- SELECTION CRITERION: adopt when RAM or query-latency budgets are failing
+-- evals at the DEFAULT tier, before considering the scale-tier path in
+-- references/graph-theory-at-scale.md.  Do NOT adopt for:
+--   • corpora < ~100k vectors (premature optimization; see SKILL.md anti-pattern
+--     "ingesting tens of millions of vectors because storage is cheap")
+--   • embedding dimensions < ~512 (quantization noise dominates recall loss)
+--   • workloads already in the 100M+ scale tier (use graph-theory-at-scale.md)
+--
+-- RECALL-LOSS BUDGET: the :oversample multiplier is NOT a constant.  It MUST
+-- be measured on your labeled eval set (recall@k before vs after quantization).
+-- A common starting range is 4–10×, but your corpus distribution determines the
+-- right value.  Mirror spec intent: tune against the eval set, not a default.
+--
+-- APPROACH: EXPRESSION index (no extra materialized column, no UPDATE backfill).
+-- pgvector >= 0.7.0 required for binary_quantize() and bit_hamming_ops.
+-- See references/quantization-and-rescore.md for the full decision context.
+--
+-- SQL not executed (no local Postgres); structural + reversibility check only.
+
+-- ---------------------------------------------------------------------------
+-- UP  — create HNSW expression index on binary_quantize(embedding)
+-- ---------------------------------------------------------------------------
+
+-- Replace 1536 (= N, the embedding dimension) with the actual dimension
+-- used in your schema (e.g. 1536 for text-embedding-3-small, 3072 for
+-- text-embedding-3-large, 1024 for Cohere embed-v4 (Amazon Nova 2 is
+-- Matryoshka-tunable: 3072/1024/384/256), 768 for many open models).
+-- The expression binary_quantize(embedding)::bit(1536) is evaluated at index
+-- time and at query time; no extra column is stored or maintained.
+CREATE INDEX idx_embeddings_bq_hnsw
+  ON embeddings
+  USING hnsw ((binary_quantize(embedding)::bit(1536)) bit_hamming_ops)
+  WITH (m = 16, ef_construction = 64);
+
+-- ---------------------------------------------------------------------------
+-- Two-pass query pattern (paste-ready; NOT a stored function — embed in the
+-- application layer or a CTE, do not run as a migration step)
+--
+-- :query_embedding  — float32 query vector (same dimension as the indexed column)
+-- :k               — final result count
+-- :oversample      — candidate multiplier; measure on your labeled eval set
+--                    before fixing a value (common starting range: 4–10×)
+--
+-- Pass 1 — Hamming prefilter via the expression index (cheap, ~32× less data)
+-- Pass 2 — exact cosine rescore of the top candidates at full float32 precision
+--
+-- WITH candidates AS (
+--   SELECT id, embedding
+--   FROM   embeddings
+--   ORDER  BY binary_quantize(embedding)::bit(1536) <~>
+--             binary_quantize(:query_embedding)::bit(1536)
+--   LIMIT  :k * :oversample          -- oversample factor is eval-measured
+-- )
+-- SELECT id
+-- FROM   candidates
+-- ORDER  BY embedding <=> :query_embedding   -- full-precision cosine rescore
+-- LIMIT  :k;
+--
+-- The Pass-2 rescore above runs at full float32 precision: re-ranking on
+-- the original vectors is the pgvector docs pattern and the best-recall
+-- choice. It is the default; do not change it for recall reasons.
+--
+-- Optional memory variant (NOT a sequential step — it REPLACES the Pass-2
+-- ORDER BY): swap the rescore to halfvec to cut rescore memory ~2× at a
+-- small precision cost. This slightly LOWERS recall versus the
+-- full-precision Pass 2; use it only when rescore memory is the binding
+-- constraint:
+--   ORDER  BY embedding::halfvec(1536) <=> :query_embedding::halfvec(1536)
+-- ---------------------------------------------------------------------------
+
+-- ---------------------------------------------------------------------------
+-- DOWN  (true inverse: drops exactly what UP created; nothing else was created)
+-- ---------------------------------------------------------------------------
+-- DROP INDEX IF EXISTS idx_embeddings_bq_hnsw;

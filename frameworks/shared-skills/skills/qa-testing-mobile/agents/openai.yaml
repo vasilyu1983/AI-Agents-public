@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mobile QA"
+  short_description: "Mobile QA for iOS and Android"
+  default_prompt: "Use $qa-testing-mobile for Mobile QA for iOS and Android. Use when planning automation frameworks, device matrix, flake control, or CI/CD release gates."

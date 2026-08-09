@@ -1,0 +1,247 @@
+{
+  "metadata": {
+    "skill": "document-pptx",
+    "updated": "2026-07-11",
+    "total_sources": 15,
+    "description": "PPTX automation libraries, repair guidance, and accessibility/compliance references for slide decks.",
+    "version": "2.3",
+    "title": "Document PPTX - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "python_libraries": [
+      {
+        "name": "python-pptx Documentation",
+        "url": "https://python-pptx.readthedocs.io/en/latest/",
+        "type": "documentation",
+        "relevance": "Primary reference for creating, editing, and extracting .pptx files in Python. Confirms the RGBColor class name (not RgbColor) and current chart/enum API surface.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "python",
+          "pptx"
+        ]
+      },
+      {
+        "name": "python-pptx Release History",
+        "url": "https://python-pptx.readthedocs.io/en/latest/community/updates.html",
+        "type": "documentation",
+        "relevance": "Use to compare documentation state against released versions and note feature drift.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-15",
+        "tags": [
+          "python",
+          "pptx",
+          "releases"
+        ]
+      },
+      {
+        "name": "python-pptx on PyPI",
+        "url": "https://pypi.org/project/python-pptx/",
+        "type": "package",
+        "relevance": "Authoritative packaged release version and install metadata. Check here before citing a version. Latest release verified 2026-07-11 was 1.0.2 (2024-08-07) — the project has had no newer release since; do not assume a 2026 release exists without checking.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "python",
+          "pptx",
+          "package"
+        ]
+      },
+      {
+        "name": "Docling (IBM Research) — GitHub",
+        "url": "https://github.com/docling-project/docling",
+        "type": "library",
+        "relevance": "Production document-extraction library (IBM Research) producing structured DoclingDocument from PPTX, PDF, DOCX, XLSX, HTML, and images. Primary source for releases, issue tracking, and integration examples.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-17",
+        "tags": [
+          "docling",
+          "pptx",
+          "extraction",
+          "llm",
+          "ibm"
+        ]
+      },
+      {
+        "name": "Mistral OCR",
+        "url": "https://mistral.ai/news/mistral-ocr",
+        "type": "api",
+        "relevance": "OCR API understanding text, tables, equations, and embedded media across document formats including PPTX-derived images; ~1000 pages per dollar. Docs at https://docs.mistral.ai/",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-17",
+        "tags": [
+          "ocr",
+          "mistral",
+          "extraction",
+          "tables",
+          "api"
+        ]
+      }
+    ],
+    "nodejs_libraries": [
+      {
+        "name": "PptxGenJS Integration Guide",
+        "url": "https://gitbrent.github.io/PptxGenJS/docs/integration/",
+        "type": "documentation",
+        "relevance": "Primary reference for Node.js, browser, and framework integration patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-15",
+        "tags": [
+          "nodejs",
+          "pptx",
+          "browser"
+        ]
+      },
+      {
+        "name": "PptxGenJS on npm",
+        "url": "https://www.npmjs.com/package/pptxgenjs",
+        "type": "package",
+        "relevance": "Authoritative package release metadata and install information for PptxGenJS.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-15",
+        "tags": [
+          "nodejs",
+          "pptx",
+          "package"
+        ]
+      },
+      {
+        "name": "PptxGenJS HTML to PowerPoint",
+        "url": "https://gitbrent.github.io/PptxGenJS/docs/html-to-powerpoint/",
+        "type": "documentation",
+        "relevance": "Reference for HTML table and DOM-to-slide export patterns when deck content comes from web UI or reports.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-15",
+        "tags": [
+          "nodejs",
+          "pptx",
+          "html"
+        ]
+      },
+      {
+        "name": "PPTX-Automizer",
+        "url": "https://github.com/singerla/pptx-automizer",
+        "type": "library",
+        "relevance": "Template-driven PowerPoint automation for server-side workflows. Use for named-element replacement in designer-owned decks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-15",
+        "tags": [
+          "nodejs",
+          "pptx",
+          "templates"
+        ]
+      }
+    ],
+    "accessibility_and_quality": [
+      {
+        "name": "Make your PowerPoint presentations accessible (Microsoft Support)",
+        "url": "https://support.microsoft.com/en-us/office/make-your-powerpoint-presentations-accessible-to-people-with-disabilities-6f7772b2-2f33-4bd2-8ca7-dae3b2b3ef25",
+        "type": "guide",
+        "relevance": "Baseline accessibility practices for PowerPoint: slide titles, reading order, contrast, alt text, and built-in checks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-15",
+        "tags": [
+          "accessibility",
+          "powerpoint"
+        ]
+      },
+      {
+        "name": "EU Web Accessibility Directive standards and harmonisation",
+        "url": "https://digital-strategy.ec.europa.eu/en/policies/web-accessibility-directive-standards-and-harmonisation",
+        "type": "reference",
+        "relevance": "Use to explain the current EU harmonised standards position around EN 301 549 and WCAG mapping. As of 2026-07-11, the in-force EN 301 549 (v3.2.1) still cites WCAG 2.1 AA; a WCAG 2.2 AA revision (provisional V4.0.0) is in late-stage ETSI/CEN/CENELEC drafting with 2026 publication expected but not yet confirmed in force.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "accessibility",
+          "en301549",
+          "eu"
+        ]
+      },
+      {
+        "name": "Web Content Accessibility Guidelines (WCAG) 2.2",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "type": "specification",
+        "relevance": "Recommended best-practice accessibility baseline for distributed slide decks and exported PDF/web derivatives.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-05-15",
+        "tags": [
+          "accessibility",
+          "wcag"
+        ]
+      }
+    ],
+    "specs_and_troubleshooting": [
+      {
+        "name": "Office Open XML (ECMA-376)",
+        "url": "https://www.ecma-international.org/publications-and-standards/standards/ecma-376/",
+        "type": "specification",
+        "relevance": "Underlying .pptx standard. Useful for OOXML edge cases, repair, and interoperability debugging.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-05-15",
+        "tags": [
+          "spec",
+          "ooxml",
+          "pptx"
+        ]
+      },
+      {
+        "name": "MS-PPTX: PowerPoint (.pptx) Extensions",
+        "url": "https://learn.microsoft.com/en-us/openspecs/office_standards/ms-pptx/",
+        "type": "reference",
+        "relevance": "Microsoft implementation details for PowerPoint OOXML extensions and format-specific behavior.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-15",
+        "tags": [
+          "spec",
+          "office",
+          "pptx"
+        ]
+      },
+      {
+        "name": "PptxGenJS Needs Repair Errors",
+        "url": "https://gitbrent.github.io/PptxGenJS/docs/needs-repair-errors/",
+        "type": "guide",
+        "relevance": "Primary troubleshooting reference when generated decks trigger PowerPoint repair dialogs or unreadable-content warnings.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-15",
+        "tags": [
+          "nodejs",
+          "pptx",
+          "repair"
+        ]
+      }
+    ]
+  }
+}

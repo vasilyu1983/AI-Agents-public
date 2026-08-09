@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "title": "ai-product-operating-model - Primary Sources",
+    "description": "Primary operating-model, provider-control, and governance references refreshed for July 2026. Corrected A2A protocol status (now Linux Foundation, v1.0 stable), EU AI Act Digital Omnibus adoption status, and softened volatile model-name claims.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "ai-product-operating-model",
+    "total_sources": 16
+  },
+  "operating_model": [
+    {
+      "name": "OpenAI Agents SDK",
+      "url": "https://openai.github.io/openai-agents-python/",
+      "description": "Official OpenAI agent runtime concepts, orchestration, and tool patterns",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Architecture",
+      "url": "https://modelcontextprotocol.io/docs/concepts/architecture",
+      "description": "Official MCP architecture for tool and context boundaries",
+      "add_as_web_search": true
+    },
+    {
+      "name": "A2A Protocol (Agent-to-Agent)",
+      "url": "https://a2a-protocol.org/latest/specification/",
+      "description": "Inter-agent task-delegation standard complementing MCP. MCP defines tool/context boundaries; A2A defines agent-to-agent task handoff. Now a Linux Foundation project (moved from the original google.github.io/A2A URL, which is stale); reached a stable v1.0 with signed Agent Cards and multi-cloud adoption. Verify current version and adoption footprint before relying on it as a production routing backbone.",
+      "add_as_web_search": true
+    }
+  ],
+  "product_and_platform": [
+    {
+      "name": "OpenAI Enterprise Privacy",
+      "url": "https://openai.com/enterprise-privacy/",
+      "description": "Official OpenAI enterprise privacy, control, and data handling posture",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Platform Data Controls",
+      "url": "https://platform.openai.com/docs/models/how-we-use-your-data",
+      "description": "Official OpenAI platform data usage and training control guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI RBAC",
+      "url": "https://platform.openai.com/docs/guides/rbac",
+      "description": "Official OpenAI role-based access control guidance for product teams",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic Claude Code Data Usage",
+      "url": "https://docs.anthropic.com/en/docs/claude-code/data-usage",
+      "description": "Official Anthropic data usage, retention, and storage guidance for Claude Code",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic Processor vs Controller",
+      "url": "https://support.anthropic.com/en/articles/9267385-does-anthropic-act-as-a-data-processor-or-controller",
+      "description": "Official Anthropic legal posture reference for controller and processor questions",
+      "add_as_web_search": true
+    }
+  ],
+  "governance_and_controls": [
+    {
+      "name": "OpenAI Remote MCP Tools Guide",
+      "url": "https://platform.openai.com/docs/guides/tools-remote-mcp",
+      "description": "Official guidance on remote MCP tools and runtime boundaries",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NIST AI RMF Generative AI Profile",
+      "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+      "description": "Official NIST publication page for AI RMF Generative AI Profile (NIST AI 600-1), governance and control patterns specific to generative AI systems",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NIST AI RMF Playbook",
+      "url": "https://airc.nist.gov/AI_RMF_Knowledge_Base/Playbook",
+      "description": "Operational playbook for mapping AI governance controls to product delivery work",
+      "add_as_web_search": true
+    },
+    {
+      "name": "EU AI Act Official Text",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "description": "Official legal text for EU AI Act obligations, definitions, and applicability timing",
+      "add_as_web_search": true
+    },
+    {
+      "name": "EU AI Act Implementation Timeline",
+      "url": "https://artificialintelligenceact.eu/implementation-timeline/",
+      "description": "Authoritative phase-in milestone dates for EU AI Act obligations — prohibited AI (2025-02-02), GPAI (2025-08-02), high-risk AI systems (2026-08-02), legacy GPAI models (2027-08-02). Verified 2026-05-17.",
+      "add_as_web_search": true
+    }
+  ],
+  "model_lifecycle": [
+    {
+      "name": "Anthropic Models Overview",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+      "description": "Canonical source for current and deprecated Anthropic model IDs, deprecation notices, and migration guidance. Model family names and tiers (e.g. Haiku/Sonnet/Opus and any higher tier) churn on a roughly quarterly cadence — do not hardcode a specific model name or ID in platform config or documentation; always re-verify against this page at build/deploy time.",
+      "add_as_web_search": true
+    }
+  ],
+  "governance_extensions": [
+    {
+      "name": "EU AI Act Digital Omnibus Deadline Extension (Gibson Dunn / White & Case, mid-2026)",
+      "url": "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+      "description": "Legal briefings confirming the May 7, 2026 political agreement (European Parliament endorsed June 16, 2026; Council final sign-off June 29, 2026): Annex III high-risk systems (new/substantially modified) get a 16-month extension to Dec 2, 2027; Annex I AI safety components get a 12-month extension to Aug 2, 2028; Article 50(2) AI-generated-content marking/detection duties get a transition extension to Dec 2, 2026 for systems already on the market before Aug 2, 2026. Treat as adopted pending official-journal publication, not as a pending proposal.",
+      "add_as_web_search": true
+    }
+  ]
+}

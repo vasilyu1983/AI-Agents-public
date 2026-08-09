@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Streaming"
+  short_description: "Designs streaming platforms for Kafka, Flink, CDC, and lakehouse ingestion."
+  default_prompt: "Use $data-streaming when planning event backbones, CDC pipelines, schema governance, or real-time lakehouse delivery across Kafka, Flink, and lakehouse ingestion."

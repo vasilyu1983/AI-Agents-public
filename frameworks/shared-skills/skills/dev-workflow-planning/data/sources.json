@@ -1,0 +1,226 @@
+{
+  "metadata": {
+    "title": "Workflow Planning - Sources",
+    "description": "Canonical sources for planning workflows, platform-native execution, DORA metrics, Definition of Ready / Done, and acceptance criteria",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "freshness_verified": "2026-07-11",
+    "skill": "dev-workflow-planning",
+    "total_sources": 31
+  },
+  "platform_workflows": [
+    {
+      "name": "Claude Code Common Workflows",
+      "url": "https://docs.anthropic.com/en/docs/claude-code/common-workflows",
+      "description": "Official Claude Code workflow guidance, including planning, repo setup, and common execution patterns",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Subagents",
+      "url": "https://docs.anthropic.com/en/docs/claude-code/sub-agents",
+      "description": "Official Anthropic guidance for bounded delegation and subagent workflows",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex AGENTS.md Guide",
+      "url": "https://developers.openai.com/codex/guides/agents-md",
+      "description": "Official guide for durable repo instructions in Codex",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Skills",
+      "url": "https://developers.openai.com/codex/skills",
+      "description": "Official guide for adding reusable skill workflows to Codex",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Workflows",
+      "url": "https://developers.openai.com/codex/workflows",
+      "description": "Official workflow guidance for planning, execution, and durable artifacts such as PLANS.md",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Best Practices",
+      "url": "https://developers.openai.com/codex/learn/best-practices",
+      "description": "Official best practices for planning, delegation, and review in Codex",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Multi-Agent Systems",
+      "url": "https://developers.openai.com/codex/multi-agent",
+      "description": "Official guidance on splitting work across multiple agents without shared-state collisions",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Worktrees",
+      "url": "https://developers.openai.com/codex/app/worktrees",
+      "description": "Official app guidance for worktree-based review and reconciliation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Review",
+      "url": "https://developers.openai.com/codex/app/review",
+      "description": "Official guidance for reviewing changes and handling comments in Codex app",
+      "add_as_web_search": true
+    }
+  ],
+  "planning_and_delivery": [
+    {
+      "name": "DORA Metrics Guide",
+      "url": "https://dora.dev/guides/dora-metrics/",
+      "description": "Official DORA metrics definitions and usage guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "DORA Quick Check",
+      "url": "https://dora.dev/quickcheck",
+      "description": "Official DORA quick-check workflow and discussion prompts",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Scrum Guide",
+      "url": "https://scrumguides.org/scrum-guide.html",
+      "description": "Official Scrum Guide reference for planning and Definition of Done",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Agile Alliance - Definition of Ready",
+      "url": "https://www.agilealliance.org/glossary/definition-of-ready/",
+      "description": "Definition of Ready concept and common usage",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Shape Up",
+      "url": "https://basecamp.com/shapeup",
+      "description": "Appetite-based scoping and shaping work before execution",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Atlassian WIP Limits Guide",
+      "url": "https://www.atlassian.com/agile/kanban/wip-limits",
+      "description": "WIP limits best practices for Kanban flow optimization",
+      "add_as_web_search": true
+    }
+  ],
+  "acceptance_criteria_and_specs": [
+    {
+      "name": "Gherkin Syntax Reference",
+      "url": "https://cucumber.io/docs/gherkin/reference/",
+      "description": "Given/When/Then syntax reference for acceptance criteria",
+      "add_as_web_search": true
+    },
+    {
+      "name": "EARS (Easy Approach to Requirements Syntax)",
+      "url": "https://alistairmavin.com/ears/",
+      "description": "Constrained-natural-language requirements notation (When/Where/If/While/The system shall…). Established method for writing unambiguous acceptance criteria; integrated into GitHub Spec Kit and AI-agent spec workflows.",
+      "add_as_web_search": true
+    }
+  ],
+  "organization_design": [
+    {
+      "name": "Team Topologies",
+      "url": "https://teamtopologies.com/",
+      "description": "Team interaction modes and organizational patterns for faster delivery with lower cognitive load",
+      "add_as_web_search": true
+    }
+  ],
+  "optional_reading": [
+    {
+      "name": "Addy Osmani - LLM Coding Workflow",
+      "url": "https://addyosmani.com/blog/ai-coding-workflow/",
+      "description": "Planning-first AI coding workflow patterns and scope-management heuristics",
+      "add_as_web_search": true,
+      "optional": true
+    },
+    {
+      "name": "Spec-Driven Development: The Spec Is the New Code (@juliandeangeIis)",
+      "url": "https://x.com/juliandeangeIis/status/2033303156340240481",
+      "description": "Guide on spec-driven development (SDD) for AI coding agents — separating functional from technical specs before execution. Key insight: the biggest bottleneck isn't the model, it's the human giving instructions; separating functional from technical specs reduces LLM uncertainty",
+      "add_as_web_search": false,
+      "optional": true
+    },
+    {
+      "name": "The Machine that Builds the Machine — Symphony (@daniel_mac8)",
+      "url": "https://x.com/daniel_mac8/status/2034344165211832481",
+      "description": "Real-world orchestration workflow: Symphony uses 300-line Jinja2 playbook templates per issue type, polling Linear for work, spawning Codex agents in isolated workspaces, and completing full ticket-to-PR lifecycle. Demonstrates issue-driven development at scale",
+      "add_as_web_search": false,
+      "optional": true
+    },
+    {
+      "name": "Task Master AI",
+      "url": "https://github.com/eyaltoledano/claude-task-master",
+      "description": "Feed a PRD to get structured tasks with dependencies; Claude executes them. Reference for automated planning-to-execution workflows and PRD-driven task decomposition",
+      "add_as_web_search": false,
+      "optional": true
+    },
+    {
+      "name": "Using Codex Goals Effectively — Chris Hayduk (OpenAI)",
+      "url": "https://x.com/ChrisHayduk/status/2053807198870880743",
+      "description": "First-party guidance on multi-day Codex /goal runs: source for the 3-file journaling pattern (PLAN.md / EXPERIMENTS.md / EXPERIMENT_NOTES.md) that separates curated history from append-only scratchpad. Cited in Long-Horizon Agent Journaling section.",
+      "add_as_web_search": false,
+      "optional": true
+    },
+    {
+      "name": "Using Claude Code: The Unreasonable Effectiveness of HTML — Thariq (Anthropic)",
+      "url": "https://x.com/trq212/status/2052809885763747935",
+      "description": "First-party Claude Code team guidance on HTML as output format for human-facing plans and specs. Cited in Output Format for Plan Documents: 100-line read-through threshold, 2-4x generation cost, export-button closure pattern, version-control diff tradeoffs.",
+      "add_as_web_search": false,
+      "optional": true
+    },
+    {
+      "name": "You Need More Than a Ralph Loop — Jarrod Watts",
+      "url": "https://x.com/jarrodwatts/status/2052372045829382430",
+      "description": "Critique of bare ralph/goal-mode loops with three failure modes: ambiguity compounds, single-context-window saturation, cross-context memory gaps. Source for the Watts 4-file journaling pattern (GOAL.md / STANDARDS.md / IMPLEMENT.md / PROGRESS.md) and the pre-loop interview phase. Companion github skill: https://github.com/jarrodwatts/long-running-agent-skill",
+      "add_as_web_search": false,
+      "optional": true
+    },
+    {
+      "name": "GitHub Spec Kit",
+      "url": "https://github.com/github/spec-kit",
+      "description": "Open-source spec-driven development toolkit from GitHub. Announced 2025-09-02; star count grows fast (≈92k early May 2026, ≈111k mid-June 2026) — check star-history.com/github/spec-kit for the current figure rather than repeating a fixed number. Ships Spec→Plan→Tasks→Implement pipeline, 30+ agent integrations (Claude, Codex, Gemini, Kiro, Windsurf), EARS notation support. Docs: https://github.github.com/spec-kit/",
+      "add_as_web_search": true,
+      "optional": true,
+      "freshness_verified": "2026-07-11"
+    },
+    {
+      "name": "Kiro — AWS Spec-Driven AI IDE",
+      "url": "https://kiro.dev",
+      "description": "AWS spec-driven AI IDE launched mid-2025, powered by Claude via Amazon Bedrock. Enforces requirements.md (EARS format) → design.md → tasks.md → implementation pipeline. Adds agent hooks (event-driven background automations), MCP support, steering rules. Pricing moved to a multi-tier credit model: Free (50 credits/month), Pro ($20/month), plus Pro+/Pro Max/Power tiers — verify current tiers at kiro.dev/pricing since this has already changed once. Verified 2026-07.",
+      "add_as_web_search": true,
+      "optional": true,
+      "freshness_verified": "2026-07-11"
+    },
+    {
+      "name": "BMAD-METHOD",
+      "url": "https://github.com/bmadcode/BMAD-METHOD",
+      "description": "Open-source agentic spec-driven framework. Orchestrates 12+ AI agents (Analyst, PM, Architect, Scrum Master, Developer, QA), each consuming specs produced by the previous stage. Reference for multi-agent spec pipeline design.",
+      "add_as_web_search": true,
+      "optional": true,
+      "freshness_verified": "2026-06-09"
+    },
+    {
+      "name": "Claude Code Plan Mode / Ultraplan Docs",
+      "url": "https://code.claude.com/docs/en/ultraplan",
+      "description": "Plan mode is read-only (no writes, no side effects). Enter via /plan (Jan 2026), Shift+Tab twice, or --permission-mode plan. Ultraplan (research preview, gated to paid plans) offloads planning to a cloud session running multiple agents in parallel — it is a cloud-parallel mode, not a slower-but-deeper local mode. Plan mode's benefit is avoiding trial-and-error rework tokens; do not quote a specific percentage figure without checking it against this current doc first.",
+      "add_as_web_search": true,
+      "optional": true,
+      "freshness_verified": "2026-07-11"
+    },
+    {
+      "name": "Kiro Introducing Blog Post",
+      "url": "https://kiro.dev/blog/introducing-kiro/",
+      "description": "Official Kiro launch post. Confirms spec-first pipeline, EARS-formatted requirements.md, agent hooks, MCP support. Pricing has since moved to a multi-tier credit model (see kiro.dev/pricing) — this post reflects launch-time pricing only. Verified 2026-07.",
+      "add_as_web_search": false,
+      "optional": true,
+      "freshness_verified": "2026-07-11"
+    },
+    {
+      "name": "Addy Osmani agent-skills — interview-me",
+      "url": "https://github.com/addyosmani/agent-skills/blob/7676817c12a1317454ae3898a0c5c1eacf5dd3d5/skills/interview-me/SKILL.md",
+      "description": "MIT-licensed skill defining the one-question-at-a-time-with-attached-guess interview mechanic and the falsifiable 'predict the next three reactions' stop test, used in Pre-loop setup phase. Commit 7676817. Extracted 2026-08-09.",
+      "add_as_web_search": false,
+      "optional": true,
+      "freshness_verified": "2026-08-09"
+    }
+  ]
+}

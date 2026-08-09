@@ -1,0 +1,112 @@
+{
+  "metadata": {
+    "skill": "software-realtime",
+    "updated": "2026-07-11",
+    "total_sources": 14,
+    "description": "Primary transport, collaboration, and managed real-time sources.",
+    "title": "Software Realtime - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "transports": [
+      {
+        "name": "MDN Server-Sent Events",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events",
+        "description": "SSE protocol behavior and browser support.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MDN WebSocket",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebSocket",
+        "description": "Browser WebSocket API behavior and limitations.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Socket.IO Docs",
+        "url": "https://socket.io/docs/v4/",
+        "description": "WebSocket-like abstraction, rooms, adapters, and scaling patterns.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "WebTransport",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebTransport_API",
+        "description": "Emerging transport for specialized low-latency cases.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MDN WebRTC Data Channels",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Using_data_channels",
+        "description": "Browser data-channel guidance for peer-to-peer real-time cases and transport tradeoffs.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NATS Documentation",
+        "url": "https://docs.nats.io/",
+        "description": "Primary docs for low-latency pub/sub, request-reply, and streaming-oriented real-time backplanes.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "WebKit Blog - WebTransport support",
+        "url": "https://webkit.org/blog/17862/webkit-features-for-safari-26-4/",
+        "description": "Confirms WebTransport support shipped in Safari 26.4 (March 2026), crossing WebTransport into Baseline status. Check for newer WebKit release notes before citing.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "caniuse - WebTransport",
+        "url": "https://caniuse.com/webtransport",
+        "description": "Current cross-browser support table for the WebTransport API; verify before treating any browser-support claim as current.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "W3Techs - HTTP/3 usage statistics",
+        "url": "https://w3techs.com/technologies/details/ce-http3",
+        "description": "Current percentage of websites serving HTTP/3; use to hedge QUIC/WebTransport infra-readiness claims.",
+        "add_as_web_search": true
+      }
+    ],
+    "collaboration_and_managed": [
+      {
+        "name": "Yjs Docs",
+        "url": "https://docs.yjs.dev/",
+        "description": "CRDT collaboration primitives and ecosystem.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Automerge Docs",
+        "url": "https://automerge.org/docs/",
+        "description": "Document sync and merge model for collaborative systems.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Liveblocks Docs",
+        "url": "https://liveblocks.io/docs",
+        "description": "Managed collaboration primitives and presence services.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PartyKit Docs",
+        "url": "https://docs.partykit.io/",
+        "description": "Managed real-time rooms and edge-backed collaboration.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ably Documentation",
+        "url": "https://ably.com/docs",
+        "description": "Managed realtime messaging, presence, and pub/sub platform documentation.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cloudflare Durable Objects - WebSocket best practices and limits",
+        "url": "https://developers.cloudflare.com/durable-objects/best-practices/websockets/",
+        "description": "Hibernation API behavior, per-Durable-Object WebSocket connection ceiling, and outbound-connection billing caveats.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Redis Streams documentation",
+        "url": "https://redis.io/docs/latest/develop/data-types/streams/",
+        "description": "Consumer-group and replay semantics used when comparing Redis Pub/Sub vs Redis Streams vs Kafka for fan-out.",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

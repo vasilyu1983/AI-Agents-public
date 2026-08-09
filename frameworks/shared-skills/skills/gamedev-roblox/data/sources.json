@@ -1,0 +1,325 @@
+{
+  "metadata": {
+    "skill": "gamedev-roblox",
+    "updated": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 43,
+    "title": "Software Roblox World Creation - Sources",
+    "description": "Primary sources for creating a Roblox experience with Jul 2026 best practices: Studio/Rojo/Script Sync toolchain, Luau (strict types, task library, native codegen, buffer), client-server architecture, ProfileStore data persistence and the 2026 per-experience DataStore budget model, Unified Lighting, instance streaming, performance and memory-leak patterns, the rewritten (Jun 2026) Recommended-For-You discovery algorithm, monetization, 2026 facial-age-estimation child-safety policy, 2D UGC Premium-publishing requirement, and AI-assisted creation. Roblox facts drift; volatile sources are marked add_as_web_search for live re-verification."
+  },
+  "categories": {
+    "toolchain_and_setup": [
+      {
+        "name": "External Tools (Official Docs)",
+        "url": "https://create.roblox.com/docs/projects/external-tools",
+        "description": "Official overview of Rojo, Wally, Rokit and the external development toolchain.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Script Sync (Official Docs)",
+        "url": "https://create.roblox.com/docs/scripting/sync",
+        "description": "Official Script Sync workflow and current beta limitation that it syncs Script, LocalScript, ModuleScript, and Folder instances.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Studio Script Sync - Now In Beta",
+        "url": "https://devforum.roblox.com/t/studio-script-sync-now-in-beta/4065468",
+        "description": "Roblox-native external file sync for scripts; Team Create compatible; Beta announcement lists Language Server Support and Open in External Editor as shipped. Beta status — verify.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "External Development Without Rojo (Azul, Rokit, Wally, Git)",
+        "url": "https://devforum.roblox.com/t/external-development-without-rojo-a-guide-to-azul-rokit-wally-git/4617424",
+        "description": "May 2026 guide to the Studio-first Azul + Rokit + Wally external-editing stack.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "How to Setup and Use Rojo",
+        "url": "https://devforum.roblox.com/t/how-to-setup-and-use-rojo/3806285",
+        "description": "Community walkthrough for Rojo project setup and default.project.json.",
+        "add_as_web_search": false,
+        "optional": true
+      }
+    ],
+    "luau_language": [
+      {
+        "name": "Luau Type Checking (Official Docs)",
+        "url": "https://create.roblox.com/docs/luau/type-checking",
+        "description": "--!strict / --!nonstrict modes and type annotation syntax.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Luau Native Code Generation (Official Docs)",
+        "url": "https://create.roblox.com/docs/luau/native-code-gen",
+        "description": "--!native usage, platform support, and restrictions.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "General Release - Luau's New Type Solver",
+        "url": "https://devforum.roblox.com/t/general-release-luau-s-new-type-solver/4084991",
+        "description": "Nov 2025 GA of the new type solver and strict-mode migration timeline.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "task Library (Official Docs)",
+        "url": "https://create.roblox.com/docs/reference/engine/libraries/task",
+        "description": "task.wait/spawn/delay/defer/cancel — the replacement for deprecated wait()/spawn()/delay().",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Luau Recap: Runtime 2025",
+        "url": "https://luau.org/news/2025-12-19-luau-recap-runtime-2025/",
+        "description": "2025 language additions: vector built-in, math additions, buffer bit ops, native perf.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "architecture_and_data": [
+      {
+        "name": "UnreliableRemoteEvent (Official Docs)",
+        "url": "https://create.roblox.com/docs/reference/engine/classes/UnreliableRemoteEvent",
+        "description": "Unreliable, unordered networking primitive for high-frequency low-stakes data.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "How to Secure Your RemoteEvent and RemoteFunction",
+        "url": "https://devforum.roblox.com/t/how-to-secure-your-remoteevent-and-remotefunction/3345363",
+        "description": "Rate limiting, type validation, and server authority for OnServerEvent handlers.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "ProfileStore - Save Your Player Data",
+        "url": "https://devforum.roblox.com/t/profilestore-save-your-player-data-easy-datastore-module/3190543",
+        "description": "Community-standard session-locked player data library; successor to ProfileService.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Session Locking Explained (DataStore)",
+        "url": "https://devforum.roblox.com/t/session-locking-explained-datastore/846799",
+        "description": "DataStore session locks, UpdateAsync vs SetAsync, and the duplication exploit.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Data Stores (Official Docs)",
+        "url": "https://create.roblox.com/docs/cloud-services/data-stores",
+        "description": "DataStoreService usage, request limits, and best practices. Verify current limits.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Matter ECS (GitHub)",
+        "url": "https://github.com/matter-ecs/matter",
+        "description": "Modern Luau ECS framework; verify current maintenance activity before starting a new production dependency.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "DataStores Access and Storage Updates",
+        "url": "https://devforum.roblox.com/t/datastores-access-and-storage-updates/3597255",
+        "description": "2026 change moving DataStore request/storage budget from per-server to per-experience, with a shared pool and total storage cap, plus Extended Services for extra capacity. Verify current numeric caps.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Jolt Typed Networking",
+        "url": "https://devforum.roblox.com/t/jolt-a-high-performance-type-safe-and-developer-friendly-networking-library-for-roblox/4095212",
+        "description": "Community typed networking wrapper over RemoteEvent, UnreliableRemoteEvent, and RemoteFunction. Verify package maturity before adopting.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "ByteNet Typed Networking",
+        "url": "https://github.com/ffrostfall/ByteNet",
+        "description": "Community typed networking library for Luau/Roblox; use as an alternative comparison point to Jolt.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Knit Framework",
+        "url": "https://github.com/Sleitnick/Knit",
+        "description": "Legacy Roblox framework whose README marks it as no longer maintained.",
+        "add_as_web_search": false,
+        "optional": true
+      }
+    ],
+    "world_building": [
+      {
+        "name": "Construct Your World (Environmental Art Curriculum)",
+        "url": "https://create.roblox.com/docs/tutorials/curriculums/environmental-art/construct-your-world",
+        "description": "Official greybox-to-first-playable world-building pipeline.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Assemble Modular Environments",
+        "url": "https://create.roblox.com/docs/tutorials/use-case-tutorials/modeling/assemble-modular-environments",
+        "description": "Kit-based modular construction tutorial.",
+        "add_as_web_search": false,
+        "optional": true
+      },
+      {
+        "name": "Unified Lighting Is Fully Live",
+        "url": "https://devforum.roblox.com/t/let-there-be-unified-light-unified-lighting-is-fully-live/3401512",
+        "description": "Technology enum deprecated; new LightingStyle + PrioritizeLightingQuality. Verify property names.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Instance Streaming (Official Docs)",
+        "url": "https://create.roblox.com/docs/workspace/streaming",
+        "description": "StreamingEnabled, StreamingMode, radius settings and best practices.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "SLIM - Scalable Lightweight Interactive Models",
+        "url": "https://devforum.roblox.com/t/client-beta-introducing-scalable-lightweight-interactive-models-slim/4034709",
+        "description": "Next-gen LOD system (Client Beta). Verify shipping status.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Testing Modes (Official Docs)",
+        "url": "https://create.roblox.com/docs/studio/testing-modes",
+        "description": "Play / Run / Team Test / Device Emulator reference.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "performance": [
+      {
+        "name": "Performance Considerations, Improvements and Optimizations",
+        "url": "https://devforum.roblox.com/t/performance-considerations-improvements-and-optimizations-when-making-a-game/817499",
+        "description": "Comprehensive community optimization reference with verified methods.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Optimization Guide - Memory, Draw Calls, Network Tips",
+        "url": "https://devforum.roblox.com/t/tutorial-roblox-optimization-guide-memory-draw-calls-and-network-tips/3881861",
+        "description": "Practitioner tutorial with draw-call targets and network KB/s benchmarks. Verify numbers.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Connecting Events Without Disconnecting (Memory Leak)",
+        "url": "https://devforum.roblox.com/t/connecting-events-without-disconnecting-them-is-probably-the-most-common-memory-leak-nobody-talks-about/4525277",
+        "description": "Canonical post on the :Connect-without-:Disconnect leak with fix patterns.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Using the MicroProfiler (Documentation)",
+        "url": "https://devforum.roblox.com/t/using-the-microprofiler-microprofiler-documentation/1077015",
+        "description": "Reading the profiler, key task labels, and dump workflow.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "discovery_economy_policy": [
+      {
+        "name": "Improved Recommended For You Algorithm and Analytics",
+        "url": "https://devforum.roblox.com/t/boost-your-discovery-with-the-improved-recommended-for-you-algorithm-and-analytics-for-creators/3587441",
+        "description": "Baseline source on the six public RFY discovery signals and the creator analytics dashboard.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Testing More Recommended For You Algorithm Signals",
+        "url": "https://devforum.roblox.com/t/testing-more-recommended-for-you-algorithm-signals/4568033",
+        "description": "April 2026 announcement that Roblox is testing RFY signals beyond the original 7-day signal set; superseded by the June 2026 rewrite below. Kept for history.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Recommended For You Algorithm Improvements That Better Value Long-Term Retention",
+        "url": "https://devforum.roblox.com/t/recommended-for-you-algorithm-improvements-that-better-value-long-term-retention/4684575",
+        "description": "Jun 15 2026 rewrite of RFY: 7-day window replaced by a 28-day window split into Day 1 / Day 2-7 / Day 8-28; qPTR retired in favor of play-through rate + first-play bounce rate. Current baseline as of Jul 2026 — verify no further changes.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Creator Rewards (Official Creator Docs, GitHub)",
+        "url": "https://github.com/Roblox/creator-docs/blob/main/content/en-us/creator-rewards.md",
+        "description": "Active Spender definition, daily and audience-expansion reward terms, hold period. Verify rates.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Introducing the US 18+ DevEx Rate",
+        "url": "https://devforum.roblox.com/t/introducing-the-us-18-devex-rate-earn-42-more-on-spend-from-18-us-players/4607091",
+        "description": "Higher DevEx rate for age-checked 18+ US-player spend. Verify rate and effective date.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Introducing Roblox Plus Subscription",
+        "url": "https://about.roblox.com/newsroom/2026/04/introducing-roblox-plus-subscription",
+        "description": "Premium replacement; creator bonus via PromptRobloxSubscriptionPurchase. Verify price and terms.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Updating Age Requirements for Restricted Content",
+        "url": "https://devforum.roblox.com/t/updating-age-requirements-for-experiences-with-restricted-content-maturity-label/3905863",
+        "description": "Restricted label 17+ to 18+, age verification, and discovery restrictions for under-18s.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "First Time User Experience / Onboarding",
+        "url": "https://devforum.roblox.com/t/learn-more-about-first-time-user-experience-onboarding/2621940",
+        "description": "Official FTUE guidance: core loop, progression, adaptive hints for D1 retention.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Marketplace Fees and Commissions (Official Docs)",
+        "url": "https://create.roblox.com/docs/marketplace/marketplace-fees-and-commissions",
+        "description": "Current UGC upload fees and revenue splits. Verified Jul 2026: 300 Robux/3D item, 10 Robux/2D item, 30% base 3D creator commission. FETCH LIVE before quoting any UGC number since it has changed more than once in 12 months.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Building a Safer Marketplace: Updates to 2D Avatar Items",
+        "url": "https://devforum.roblox.com/t/building-a-safer-marketplace-updates-to-2d-avatar-items-uploading-and-publishing-requirements/4474667",
+        "description": "Mar 19 2026 policy requiring an active Roblox Premium 1000/2200 subscription to publish 2D avatar clothing; non-compliant existing items face delisting after a Jul 31 2026 grace period. Verify current deadline/tier before acting.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Facial Age Estimation for Safer Chat",
+        "url": "https://about.roblox.com/age-estimation",
+        "description": "Official page on Roblox's facial-age-estimation system, age bands (Under 9/9-12/13-15/16-17/18-20/21+), and chat/social feature gating by band. Global rollout completed ~Jun 2026 per Roblox newsroom; supersedes the older '13+ binary' framing.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Roblox Requires Age Checks for Communication (Newsroom)",
+        "url": "https://about.roblox.com/newsroom/2025/11/roblox-requires-age-checks-limits-minor-and-adult-chat",
+        "description": "Nov 2025 announcement that started mandatory age checks for chat access; the origin of the facial-age-estimation rollout completed globally in 2026.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "[Full Release] Studio Script Sync",
+        "url": "https://devforum.roblox.com/t/full-release-studio-script-sync/4688454",
+        "description": "Confirms Script Sync reached Full Release ~late Jun 2026, adding conflict resolution, safer file deletion, simplified sync workflow, and Team Create sync indicators.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ]
+  }
+}

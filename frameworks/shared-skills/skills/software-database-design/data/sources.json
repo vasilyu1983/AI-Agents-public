@@ -1,0 +1,124 @@
+{
+  "metadata": {
+    "skill": "software-database-design",
+    "updated": "2026-07-11",
+    "total_sources": 18,
+    "description": "Primary July 2026 design, migration, ORM, and AI-context-layer sources for relational and document data models.",
+    "title": "Software Database Design - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "relational_design": [
+      {
+        "name": "PostgreSQL Documentation",
+        "url": "https://www.postgresql.org/docs/",
+        "description": "Authoritative source for schema, indexing, constraints, and operational behavior.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MySQL Documentation",
+        "url": "https://dev.mysql.com/doc/",
+        "description": "Official MySQL schema, indexing, and DDL reference.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MongoDB Data Modeling",
+        "url": "https://www.mongodb.com/docs/manual/core/data-model-design/",
+        "description": "Document-modeling patterns and tradeoffs for MongoDB.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MongoDB Atlas Vector Search",
+        "url": "https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/",
+        "description": "Atlas Vector Search index definition, $vectorSearch stage, filtered ANN, and hybrid search via $rankFusion.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MongoDB Atlas Search",
+        "url": "https://www.mongodb.com/docs/atlas/atlas-search/atlas-search-overview/",
+        "description": "Lucene-based full-text search co-located with operational data; pairs with vector search for hybrid retrieval.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MongoDB Building AI Applications",
+        "url": "https://www.mongodb.com/docs/atlas/atlas-vector-search/ai-integrations/",
+        "description": "Reference patterns for RAG, agent memory, and embedding lifecycle on Atlas.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Redis Data Types",
+        "url": "https://redis.io/docs/latest/develop/data-types/",
+        "description": "Primary source for Redis storage structures and access patterns.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PostgreSQL Partitioning",
+        "url": "https://www.postgresql.org/docs/current/ddl-partitioning.html",
+        "description": "Primary guidance for declarative partitioning design, limitations, and maintenance tradeoffs.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PostgreSQL Row Security Policies",
+        "url": "https://www.postgresql.org/docs/current/ddl-rowsecurity.html",
+        "description": "Primary reference for row-level security semantics and policy behavior.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PostgreSQL 18 Release Notes",
+        "url": "https://www.postgresql.org/docs/release/18/",
+        "description": "Current release notes for verifying version-sensitive schema and DDL behavior.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SQLite Generated Columns",
+        "url": "https://www.sqlite.org/gencol.html",
+        "description": "Primary reference for generated columns in SQLite-backed application schemas.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PostgreSQL Explicit Locking",
+        "url": "https://www.postgresql.org/docs/current/explicit-locking.html",
+        "description": "Authoritative lock-level reference for ALTER TABLE and DDL operations; verify lock levels here before treating a migration as safe.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "pgvector",
+        "url": "https://github.com/pgvector/pgvector",
+        "description": "Primary source for pgvector version, HNSW/IVFFlat index parameters, and changelog.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "RFC 9562 - UUID Specification",
+        "url": "https://www.rfc-editor.org/rfc/rfc9562.html",
+        "description": "IETF standard defining UUIDv7 and successors to RFC 4122; primary source for UUID version semantics.",
+        "add_as_web_search": true
+      }
+    ],
+    "orms_and_migrations": [
+      {
+        "name": "Prisma Schema Docs",
+        "url": "https://www.prisma.io/docs/orm/prisma-schema",
+        "description": "Prisma schema, relations, and migration behavior.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "EF Core Modeling",
+        "url": "https://learn.microsoft.com/en-us/ef/core/modeling/",
+        "description": "EF Core entity modeling, relationships, and conventions.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SQLAlchemy ORM",
+        "url": "https://docs.sqlalchemy.org/en/20/orm/",
+        "description": "SQLAlchemy ORM modeling and relationship patterns.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Drizzle ORM Docs",
+        "url": "https://orm.drizzle.team/docs/overview",
+        "description": "Type-safe schema definition and migration workflow for Drizzle.",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

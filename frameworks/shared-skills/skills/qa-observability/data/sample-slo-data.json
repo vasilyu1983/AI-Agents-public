@@ -1,0 +1,57 @@
+[
+  {
+    "name": "checkout-availability",
+    "service": "checkout-service",
+    "metric_type": "availability",
+    "target_pct": 99.9,
+    "window_days": 30,
+    "current_availability_pct": 99.85,
+    "good_events": 2156340,
+    "total_events": 2157780,
+    "comment": "Availability measured as successful HTTP 2xx responses / total requests. 1440 failures in the current 30-day window. Budget is partially consumed — two payment-gateway timeout incidents in the last 10 days."
+  },
+  {
+    "name": "checkout-p95-latency",
+    "service": "checkout-service",
+    "metric_type": "latency",
+    "target_pct": 99.5,
+    "window_days": 30,
+    "current_availability_pct": 98.9,
+    "good_events": 2135270,
+    "total_events": 2157780,
+    "comment": "Good event = checkout completes in < 2000ms. Current p95 is ~2400ms after a slow inventory-service rollout. Budget is exhausted — 22480 requests exceeded the latency threshold vs. 10789 allowed."
+  },
+  {
+    "name": "payment-gateway-error-rate",
+    "service": "checkout-service",
+    "metric_type": "error_rate",
+    "target_pct": 99.95,
+    "window_days": 30,
+    "current_availability_pct": 99.97,
+    "good_events": 2157130,
+    "total_events": 2157780,
+    "comment": "Good event = payment request does not return a 5xx or gateway timeout. Currently healthy — only 650 gateway errors this window vs. 1079 allowed."
+  },
+  {
+    "name": "inventory-lock-availability",
+    "service": "inventory-service",
+    "metric_type": "availability",
+    "target_pct": 99.9,
+    "window_days": 30,
+    "current_availability_pct": 99.92,
+    "good_events": 1083450,
+    "total_events": 1084320,
+    "comment": "Inventory reservation availability SLO. Healthy — 870 lock failures vs. 1084 allowed."
+  },
+  {
+    "name": "notification-delivery-rate",
+    "service": "notification-service",
+    "metric_type": "availability",
+    "target_pct": 99.0,
+    "window_days": 30,
+    "current_availability_pct": 97.8,
+    "good_events": 87120,
+    "total_events": 89080,
+    "comment": "Good event = order confirmation email delivered within 60 seconds. A sendgrid integration issue from 2026-03-15 caused a bulk delivery failure. Budget is exhausted."
+  }
+]

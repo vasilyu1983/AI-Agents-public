@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-release-distribution",
+    "title": "AI Coding Agents Release And Distribution - Sources",
+    "description": "Official documentation and implementation references for packaging, update channels, plugin compatibility, and state migrations in coding-agent CLIs",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 12,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Anthropic Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en/",
+        "type": "documentation",
+        "relevance": "Useful runtime-facing documentation for packaging expectations, settings, and extensions around Claude Code-class CLIs",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Semantic Versioning Specification",
+        "url": "https://semver.org/",
+        "type": "specification",
+        "relevance": "Reference for compatibility policy across core runtime, plugins, and state schemas",
+        "update_frequency": "yearly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Primary implementation reference for plugin cache, runtime state, and release-shape assumptions",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Codex CLI Repository",
+        "url": "https://github.com/openai/codex",
+        "type": "repository",
+        "relevance": "Cross-runtime comparison point for packaging and distribution patterns in AI coding CLIs",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex CLI Main Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/cli/src/main.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for install/update/doctor/app-server subcommands and CLI release surface boundaries",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Doctor Source",
+        "url": "https://github.com/openai/codex/tree/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/cli/src/doctor",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for install provenance, update-target checks, sandbox helper readiness, app-server status, and redacted JSON diagnostics",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Product Page",
+        "url": "https://openai.com/codex/",
+        "type": "product_page",
+        "relevance": "Current first-party distribution and product-surface context for Codex app, CLI, IDE, worktrees, skills, and enterprise workflows",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol Specification",
+        "url": "https://modelcontextprotocol.io/",
+        "type": "specification",
+        "relevance": "Reference for compatibility boundaries when CLI releases affect server, tool, or plugin interfaces",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Linux Foundation: Formation of the Agentic AI Foundation",
+        "url": "https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation",
+        "type": "press_release",
+        "relevance": "December 2025 announcement of AAIF formation; founding Platinum members: AWS, Anthropic, Block, Bloomberg, Cloudflare, Google, Microsoft, OpenAI; 170+ total members. Governance and trust baseline for AAIF-hosted OSS coding agents.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Claude Code Settings (autoUpdatesChannel, DISABLE_AUTOUPDATER, requiredMinimumVersion / requiredMaximumVersion / minimumVersion)",
+        "url": "https://code.claude.com/docs/en/settings",
+        "type": "documentation",
+        "relevance": "Verified 2026-07-11: autoUpdatesChannel takes only \"latest\" (default) or \"stable\" (no \"disabled\" value exists); updates are stopped via the DISABLE_AUTOUPDATER env var, a separate control. requiredMinimumVersion/requiredMaximumVersion are managed-settings-only hard startup blockers that fail open on an invalid value (stripped, not enforced); minimumVersion is the older soft floor that blocks downgrades but not startup. Relevant to enterprise-managed distribution and update-channel design.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Codex Environment Variables Reference (CODEX_HOME) and GitHub install instructions",
+        "url": "https://developers.openai.com/codex/environment-variables",
+        "type": "documentation",
+        "relevance": "Verified 2026-07-11: CODEX_HOME overrides the root directory (default ~/.codex) for config.toml, auth.json, logs, transcripts, and plugin metadata; it is a state-root override, not an install channel. Confirmed exact install commands: npm install -g @openai/codex (scoped package name is load-bearing) and brew install --cask codex.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Goose 2.0: ACP and new TUI",
+        "url": "https://goose-docs.ai/blog/2026/04/08/goose-acp-and-new-tui/",
+        "type": "announcement",
+        "relevance": "April 8, 2026: Goose 2.0 architecture — TypeScript TUI beta, Electron → Tauri desktop migration, ACP as default server interface. Case study for desktop-runtime upgrade as a distribution concern.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

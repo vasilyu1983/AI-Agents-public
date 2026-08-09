@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Agents Development — Architecture Hub"
+  short_description: "AI agent architecture, protocol choice, evaluation, observability, and"
+  default_prompt: "Use $ai-agents for AI agent architecture, protocol choice, evaluation, observability, and build-vs-not decisions. Use when scoping or reviewing agent systems before deeper implementation."

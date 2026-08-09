@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Observability And Evals"
+  short_description: "Design observability and eval loops for coding agents"
+  default_prompt: "Use $ai-coding-agents-observability-evals to design traces, replay, regression suites, tool-call grading, latency metrics, or cost accounting for a coding-agent runtime."

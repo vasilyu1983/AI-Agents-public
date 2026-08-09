@@ -1,0 +1,5 @@
+# ai-product-operating-model — Raw Learnings
+
+Append one dated bullet per applied task. Periodically consolidated into `learnings.consolidated.md`.
+
+- 2026-07-11: July 2026 audit found two stale factual claims that had drifted past their sell-by date without being wrong when first written: (1) the A2A protocol section still described a "returning 404" / unresolved-URL state from June 2026 — by July 2026 A2A had moved to the Linux Foundation, shipped a stable v1.0 with signed Agent Cards, and gained multi-cloud adoption, so the canonical URL and framing needed a full rewrite, not a patch; (2) the EU AI Act Digital Omnibus deadline extensions were still framed as "pending formal adoption" when Parliament (June 16, 2026) and Council (June 29, 2026) had since finalized them. Lesson: any citation to a fast-moving standard or in-progress legislative process needs an explicit "verify this has not since been finalized/superseded" flag baked into the text, not just a source URL — political-agreement-stage claims age out within weeks, not quarters.

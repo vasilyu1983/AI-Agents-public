@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Terminal UI"
+  short_description: "Design terminal-first coding-agent UX: REPL, status lines, keybindings"
+  default_prompt: "Use $ai-coding-agents-terminal-ui to design a coding-agent REPL, prompt input, status lines, keybindings, history rendering, notifications, or Agent Teams display modes."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Remote Runtime"
+  short_description: "Design remote coding-agent runtimes"
+  default_prompt: "Use $ai-coding-agents-remote-runtime to design remote sessions, bridge transport, local-UI remote-execution, reconnect logic, or permission bridging for a coding-agent runtime."

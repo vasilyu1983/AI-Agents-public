@@ -1,0 +1,381 @@
+{
+  "metadata": {
+    "skill": "document-pdf",
+    "updated": "2026-07-11",
+    "total_sources": 25,
+    "description": "PDF creation/extraction libraries plus accessibility and release-quality guidance.",
+    "version": "2.3",
+    "title": "Document PDF - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "nodejs_libraries": [
+      {
+        "name": "pdf-lib",
+        "url": "https://pdf-lib.js.org/",
+        "type": "documentation",
+        "relevance": "Create and modify PDFs in JavaScript/TypeScript (forms, pages, attachments). Upstream (Hopding/pdf-lib) has had no active releases for an extended period as of mid-2026; maintained forks exist (e.g. @cantoo/pdf-lib) — evaluate before depending on it for new work.",
+        "update_frequency": "low (upstream)",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "nodejs",
+          "pdf",
+          "maintenance-risk"
+        ]
+      },
+      {
+        "name": "PDFKit",
+        "url": "https://pdfkit.org/",
+        "type": "documentation",
+        "relevance": "Generate PDFs programmatically in Node.js with low-level layout control.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "nodejs",
+          "pdf"
+        ]
+      },
+      {
+        "name": "Playwright page.pdf()",
+        "url": "https://playwright.dev/docs/api/class-page#page-pdf",
+        "type": "documentation",
+        "relevance": "Render browser-faithful HTML/CSS to PDF, including print settings such as tagged output and outlines.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "nodejs",
+          "pdf",
+          "html-to-pdf"
+        ]
+      }
+    ],
+    "python_libraries": [
+      {
+        "name": "pypdf Documentation",
+        "url": "https://pypdf.readthedocs.io/en/latest/",
+        "type": "documentation",
+        "relevance": "Manipulate PDFs in Python (merge/split/rotate, metadata, encryption).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "python",
+          "pdf"
+        ]
+      },
+      {
+        "name": "pdfplumber",
+        "url": "https://github.com/jsvine/pdfplumber",
+        "type": "library",
+        "relevance": "Extract text/tables from PDFs in Python (OCR-free extraction patterns).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "python",
+          "pdf",
+          "extraction"
+        ]
+      },
+      {
+        "name": "ReportLab Documentation",
+        "url": "https://www.reportlab.com/docs/reportlab-userguide.pdf",
+        "type": "documentation",
+        "relevance": "Generate complex PDFs in Python (tables, charts, pagination).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "python",
+          "pdf",
+          "generation"
+        ]
+      },
+      {
+        "name": "FPDF2 Documentation",
+        "url": "https://py-pdf.github.io/fpdf2/",
+        "type": "documentation",
+        "relevance": "Modern successor to FPDF with Unicode support, improved image handling, HTML rendering.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "python",
+          "pdf",
+          "generation"
+        ]
+      },
+      {
+        "name": "PyMuPDF Documentation",
+        "url": "https://pymupdf.readthedocs.io/en/latest/",
+        "type": "documentation",
+        "relevance": "Low-level PDF/image access for rasterization, image extraction, OCR pipelines, and redaction workflows. Dual-licensed AGPL-3.0/commercial (Artifex) — verify license fit before use in closed-source or SaaS deployments.",
+        "update_frequency": "continuous",
+        "access": "free (AGPL) / paid (commercial license)",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "python",
+          "pdf",
+          "extraction",
+          "redaction",
+          "licensing"
+        ]
+      },
+      {
+        "name": "OCRmyPDF Documentation",
+        "url": "https://ocrmypdf.readthedocs.io/en/latest/",
+        "type": "documentation",
+        "relevance": "Add searchable OCR text layers to scanned PDFs before downstream extraction or review.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "python",
+          "pdf",
+          "ocr"
+        ]
+      },
+      {
+        "name": "WeasyPrint Documentation",
+        "url": "https://doc.courtbouillon.org/weasyprint/stable/",
+        "type": "documentation",
+        "relevance": "CSS3-based HTML to PDF conversion without browser dependency.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "python",
+          "pdf",
+          "html-to-pdf"
+        ]
+      },
+      {
+        "name": "Camelot Documentation",
+        "url": "https://camelot-py.readthedocs.io/en/master/",
+        "type": "documentation",
+        "relevance": "PDF table extraction with Lattice (bordered) and Stream (borderless) modes; 2026 releases (camelot-py 2.x) add an optional neural backend. Use the `camelot-py` package, not the stale `camelot-fork`.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "python",
+          "pdf",
+          "extraction"
+        ]
+      },
+      {
+        "name": "pyHanko Documentation",
+        "url": "https://docs.pyhanko.eu/en/latest/",
+        "type": "documentation",
+        "relevance": "Digitally sign and validate PDFs using PKCS#12, PKCS#11, and advanced PAdES workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "python",
+          "pdf",
+          "signatures"
+        ]
+      },
+      {
+        "name": "PyMuPDF4LLM Documentation",
+        "url": "https://pymupdf.readthedocs.io/en/latest/pymupdf4llm/",
+        "type": "documentation",
+        "relevance": "Extracts PDF content as LLM-ready Markdown with no ML/GPU dependency; uses OCR only when needed. Primary reference for RAG and LLM ingestion pipelines built on PDFs. Built on PyMuPDF, so it inherits the same AGPL-3.0/commercial dual license.",
+        "update_frequency": "continuous",
+        "access": "free (AGPL) / paid (commercial license)",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "python",
+          "pdf",
+          "extraction",
+          "llm",
+          "rag",
+          "markdown"
+        ]
+      },
+      {
+        "name": "PyMuPDF4LLM on PyPI",
+        "url": "https://pypi.org/project/pymupdf4llm/",
+        "type": "package",
+        "relevance": "Canonical package page for current pymupdf4llm release version and install metadata.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "python",
+          "pdf",
+          "llm",
+          "versions"
+        ]
+      },
+      {
+        "name": "Docling (IBM Research) — GitHub",
+        "url": "https://github.com/docling-project/docling",
+        "type": "library",
+        "relevance": "Production document-extraction library (IBM Research) producing structured DoclingDocument from PDF, DOCX, PPTX, XLSX, HTML, and images. Primary source for releases, issue tracking, and integration examples.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "docling",
+          "pdf",
+          "extraction",
+          "llm",
+          "ibm"
+        ]
+      },
+      {
+        "name": "Mistral OCR",
+        "url": "https://mistral.ai/news/mistral-ocr",
+        "type": "api",
+        "relevance": "OCR API understanding text, tables, equations, and embedded media across document formats. Pricing changes release-over-release (roughly $2-4 per 1,000 pages standard as of mid-2026, ~50% off via batch API) — check https://mistral.ai/pricing at time of use instead of relying on a fixed figure. Docs at https://docs.mistral.ai/",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "ocr",
+          "mistral",
+          "extraction",
+          "tables",
+          "api"
+        ]
+      }
+    ],
+    "accessibility_and_quality": [
+      {
+        "name": "Creating accessible PDFs in Adobe Acrobat",
+        "url": "https://helpx.adobe.com/acrobat/using/creating-accessible-pdfs.html",
+        "type": "guide",
+        "relevance": "Practical PDF accessibility guidance: tagging, reading order, alt text, checks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "accessibility",
+          "pdf"
+        ]
+      },
+      {
+        "name": "Web Content Accessibility Guidelines (WCAG) 2.2 (W3C Recommendation)",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "type": "specification",
+        "relevance": "Accessibility baseline; relevant when PDFs are used for regulated/enterprise contexts.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "accessibility",
+          "wcag"
+        ]
+      },
+      {
+        "name": "EN 301 549 (Accessibility requirements for ICT products and services)",
+        "url": "https://portal.etsi.org/webapp/ewp/copy_file.asp?wki_id=70644",
+        "type": "specification",
+        "relevance": "Common EU-aligned accessibility requirements referenced in procurement and compliance programs.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "accessibility",
+          "en301549",
+          "eu"
+        ]
+      },
+      {
+        "name": "PDF/UA (Universal Accessibility) resources",
+        "url": "https://pdfa.org/resource/pdfua/",
+        "type": "reference",
+        "relevance": "PDF accessibility standard and ecosystem resources (useful for understanding tagged PDF requirements).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "accessibility",
+          "pdfua",
+          "standards"
+        ]
+      },
+      {
+        "name": "PDF/A (Archival) resources",
+        "url": "https://pdfa.org/resource/pdfa/",
+        "type": "reference",
+        "relevance": "Archival PDF guidance (PDF/A) for long-term retention and reproducible rendering.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "pdfa",
+          "standards",
+          "archival"
+        ]
+      },
+      {
+        "name": "PDF Association",
+        "url": "https://pdfa.org/",
+        "type": "reference",
+        "relevance": "Industry resources on PDF standards and accessibility practices (use for deeper dives).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "pdf",
+          "standards"
+        ]
+      },
+      {
+        "name": "PAC (PDF Accessibility Checker)",
+        "url": "https://pac.pdf-accessibility.org/en",
+        "type": "tool",
+        "relevance": "Practical PDF/UA accessibility validation tool for tagged PDFs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "accessibility",
+          "pdfua",
+          "tool"
+        ]
+      },
+      {
+        "name": "veraPDF",
+        "url": "https://verapdf.org/",
+        "type": "tool",
+        "relevance": "Open-source validator for PDF/A conformance; useful when archiving or compliance requires PDF/A.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "pdfa",
+          "validation",
+          "tool"
+        ]
+      },
+      {
+        "name": "Section 508 Document Authoring Guidance",
+        "url": "https://www.section508.gov/create/documents/",
+        "type": "reference",
+        "relevance": "US federal guidance for creating accessible documents, including PDFs and source documents that export to PDF.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "accessibility",
+          "us",
+          "procurement"
+        ]
+      }
+    ]
+  }
+}

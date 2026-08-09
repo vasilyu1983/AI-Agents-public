@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ops Cost Optimization"
+  short_description: "Audits SaaS/PaaS, cloud commitment, and AI/LLM costs across major clouds"
+  default_prompt: "Use $ops-cost-optimization to audit SaaS/PaaS, cloud commitment, and AI/LLM costs. Use when analyzing bills, right-sizing plans, or deciding whether to buy commitments."

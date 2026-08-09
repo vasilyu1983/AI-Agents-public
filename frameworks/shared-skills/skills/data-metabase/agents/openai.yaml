@@ -1,0 +1,4 @@
+interface:
+  display_name: "Metabase Automation"
+  short_description: "Automates Metabase cards, dashboards, Remote Sync, embedding, and MCP"
+  default_prompt: "Use $data-metabase to automate Metabase cards, dashboards, Remote Sync, embedding, tenants, and the Agent API/MCP server. Use when scripting, promoting, or embedding Metabase content."

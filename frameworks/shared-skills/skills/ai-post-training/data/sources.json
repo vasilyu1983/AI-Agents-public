@@ -1,0 +1,148 @@
+{
+  "metadata": {
+    "skill": "ai-post-training",
+    "updated": "2026-07-11",
+    "audit_date": "2026-07-11",
+    "last_verified": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 20,
+    "title": "AI Post-Training - Sources",
+    "description": "Primary sources for post-training and alignment: Lambert's RLHF book (anchor), InstructGPT, DPO and the direct-alignment family, PPO, GRPO/RLVR (DeepSeek-R1), GSPO, RLOO, Constitutional AI/RLAIF, process reward models, open recipes (Tulu 3), and Raschka's reasoning-model book. Algorithm names, framework support, and lab-specific recipes are volatile — verify against primary sources before quoting; as of mid-2026, GRPO is a family (DAPO/GSPO/Dr.GRPO/RLOO/newer variants), not one fixed objective."
+  },
+  "categories": {
+    "anchor_books": [
+      {
+        "title": "Reinforcement Learning from Human Feedback (RLHF Book)",
+        "author": "Nathan Lambert",
+        "url": "https://rlhfbook.com",
+        "type": "book",
+        "note": "The anchor source for this skill: reward modeling, preference data, policy-gradient (PPO), direct alignment (DPO/DAAs), RLVR, rejection sampling, RLAIF/Constitutional AI, over-optimization, evaluation."
+      },
+      {
+        "title": "Build a Reasoning Model (From Scratch)",
+        "author": "Sebastian Raschka",
+        "url": "https://www.manning.com/books/build-a-reasoning-model-from-scratch",
+        "type": "book",
+        "note": "Reasoning-model training walkthrough: RLVR, GRPO, verifier-based rewards, test-time compute."
+      }
+    ],
+    "foundational_rlhf": [
+      {
+        "title": "Training language models to follow instructions with human feedback (InstructGPT)",
+        "url": "https://arxiv.org/abs/2203.02155",
+        "type": "paper",
+        "note": "The canonical SFT -> reward model -> PPO RLHF pipeline."
+      },
+      {
+        "title": "Proximal Policy Optimization Algorithms (PPO)",
+        "url": "https://arxiv.org/abs/1707.06347",
+        "type": "paper",
+        "note": "The policy-gradient algorithm underlying reward-model RLHF."
+      },
+      {
+        "title": "Deep reinforcement learning from human preferences",
+        "url": "https://arxiv.org/abs/1706.03741",
+        "type": "paper",
+        "note": "Origin of learning a reward model from human preference comparisons."
+      }
+    ],
+    "direct_alignment": [
+      {
+        "title": "Direct Preference Optimization (DPO)",
+        "url": "https://arxiv.org/abs/2305.18290",
+        "type": "paper",
+        "note": "RLHF reframed as a classification loss on the policy; no reward model or RL loop."
+      },
+      {
+        "title": "KTO: Model Alignment as Prospect Theoretic Optimization",
+        "url": "https://arxiv.org/abs/2402.01306",
+        "type": "paper",
+        "note": "Direct alignment from unpaired (good/bad) feedback."
+      },
+      {
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "url": "https://arxiv.org/abs/2403.07691",
+        "type": "paper",
+        "note": "Single-stage, reference-model-free SFT+preference objective."
+      },
+      {
+        "title": "SimPO: Simple Preference Optimization with a Reference-Free Reward",
+        "url": "https://arxiv.org/abs/2405.14734",
+        "type": "paper",
+        "note": "Length-normalized, reference-free direct alignment."
+      }
+    ],
+    "reasoning_rl_and_grpo": [
+      {
+        "title": "DeepSeekMath / GRPO (Group Relative Policy Optimization)",
+        "url": "https://arxiv.org/abs/2402.03300",
+        "type": "paper",
+        "note": "Introduces GRPO: group-relative advantage, drops the value model."
+      },
+      {
+        "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via RL",
+        "url": "https://arxiv.org/abs/2501.12948",
+        "type": "paper",
+        "note": "Large-scale RLVR via GRPO; verifiable rewards for reasoning."
+      },
+      {
+        "title": "Group Sequence Policy Optimization (GSPO, Zheng et al., Qwen 2025)",
+        "url": "https://arxiv.org/abs/2507.18071",
+        "type": "paper",
+        "note": "Sequence-level importance ratio + sequence-level clipping; fixes GRPO non-convergence on MoE from expert-routing volatility (removes need for Routing Replay); trained Qwen3-235B-A22B."
+      },
+      {
+        "title": "Understanding R1-Zero-Like Training: A Critical Perspective (Dr. GRPO, 2025)",
+        "url": "https://arxiv.org/abs/2503.20783",
+        "type": "paper",
+        "note": "Identifies GRPO's per-response length-normalization and advantage-std biases (inflate length, miscalibrate by difficulty); Dr. GRPO removes the normalizations."
+      },
+      {
+        "title": "DAPO: An Open-Source LLM Reinforcement Learning System at Scale (2025)",
+        "url": "https://arxiv.org/abs/2503.14476",
+        "type": "paper",
+        "note": "Decoupled-clip, dynamic sampling, token-level loss, drops KL; open large-scale RL recipe addressing GRPO entropy collapse and length bias. Now TRL's default GRPOTrainer loss type (verified 2026-07)."
+      },
+      {
+        "title": "Back to Basics: Revisiting REINFORCE-Style Optimization for Learning from Human Feedback (RLOO)",
+        "url": "https://arxiv.org/abs/2402.14740",
+        "type": "paper",
+        "note": "Critic-free REINFORCE with a leave-one-out group baseline; simpler alternative to GRPO/PPO. TRL ships an RLOOTrainer (verified 2026-07)."
+      }
+    ],
+    "ai_feedback_and_reward_modeling": [
+      {
+        "title": "Constitutional AI: Harmlessness from AI Feedback",
+        "url": "https://arxiv.org/abs/2212.08073",
+        "type": "paper",
+        "note": "Self-critique against a written constitution; RLAIF for harmlessness."
+      },
+      {
+        "title": "Let's Verify Step by Step (process reward models)",
+        "url": "https://arxiv.org/abs/2305.20050",
+        "type": "paper",
+        "note": "Process (step-level) vs outcome reward models for reasoning."
+      }
+    ],
+    "open_recipes": [
+      {
+        "title": "Tulu 3: Pushing Frontiers in Open Language Model Post-Training",
+        "url": "https://arxiv.org/abs/2411.15124",
+        "type": "paper",
+        "note": "Fully open post-training recipe: SFT + DPO + RLVR, synthetic + human data."
+      },
+      {
+        "title": "TRL (Transformer Reinforcement Learning) docs",
+        "url": "https://huggingface.co/docs/trl",
+        "type": "docs",
+        "note": "Reference implementation of SFT/DPO/PPO/GRPO/RLOO; GSPO is a GRPOTrainer loss_type, not a separate trainer; DAPO is the GRPOTrainer default loss type; environment-owned rewards (Harbor/OpenEnv) added 2026. Verify current API before quoting — moves fast (checked 2026-07)."
+      },
+      {
+        "title": "Llama 2: reward modeling and RLHF (helpfulness + safety RMs)",
+        "url": "https://arxiv.org/abs/2307.09288",
+        "type": "paper",
+        "note": "Two-reward-model RLHF at production scale; rejection sampling + PPO."
+      }
+    ]
+  }
+}

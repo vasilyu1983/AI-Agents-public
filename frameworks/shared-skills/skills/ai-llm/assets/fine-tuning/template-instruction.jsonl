@@ -1,0 +1,2 @@
+{"messages":[{"role":"system","content":"You rewrite text to be concise."},{"role":"user","content":"Rewrite this: I will try to go to the store later."},{"role":"assistant","content":"I may go to the store later."}]}
+{"messages":[{"role":"system","content":"You provide entity extraction."},{"role":"user","content":"Extract entities: Sam visited Tokyo."},{"role":"assistant","content":"{\"entities\": [{\"person\": \"Sam\"}, {\"location\": \"Tokyo\"}]}"}]}

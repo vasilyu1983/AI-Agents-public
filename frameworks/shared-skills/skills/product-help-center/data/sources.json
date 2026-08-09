@@ -1,0 +1,220 @@
+{
+  "metadata": {
+    "title": "Help Center Design - Sources",
+    "description": "Curated sources for AI-first help centers, support platforms, and AI-consumable documentation.",
+    "last_updated": "2026-07-11",
+    "last_verified": "2026-07-11",
+    "version": "2.1.0",
+    "skill": "product-help-center"
+  },
+  "official_platform_docs": [
+    {
+      "name": "Zendesk - About AI agents",
+      "url": "https://support.zendesk.com/hc/en-us/articles/6970583409690-About-AI-agents",
+      "description": "Official Zendesk overview of AI agents for customer service. URL corrected 2026-07-11 (prior article ID 404'd after Zendesk's May-June 2026 AI agent packaging consolidation).",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Zendesk - Optimize help center content for AI agents",
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408845739162-Optimizing-your-help-center-content-for-AI-agents",
+      "description": "Official Zendesk guidance on preparing knowledge content for AI agents.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Intercom - Quick start: create a Fin Procedure",
+      "url": "https://www.intercom.com/help/en/articles/12599391-quick-start-create-a-fin-procedure",
+      "description": "Official Intercom guidance on policy and operating procedures for Fin. URL corrected 2026-07-11 (prior article ID 404'd; Intercom renamed Fin Tasks to Fin Procedures).",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Intercom - Create collections in your Help Center",
+      "url": "https://www.intercom.com/help/en/articles/56647-create-collections-in-your-help-center",
+      "description": "Official Intercom information architecture guidance for public help centers. URL corrected 2026-07-11 (prior article ID 404'd).",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "medium",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ReadMe - Build with AI",
+      "url": "https://docs.readme.com/main/docs/ai-overview",
+      "description": "Official ReadMe overview of Ask AI, MCP servers, and LLM-facing docs features.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitBook - AI-native documentation",
+      "url": "https://gitbook.com/docs/getting-started/ai-documentation",
+      "description": "Official GitBook guidance on AI-native docs and AI editing workflows.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Mintlify - What is Mintlify?",
+      "url": "https://www.mintlify.com/docs/what-is-mintlify",
+      "description": "Official Mintlify positioning for people-and-AI documentation.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "medium",
+      "status": "active",
+      "add_as_web_search": true
+    }
+  ],
+  "official_ai_docs": [
+    {
+      "name": "ReadMe - LLMs.txt",
+      "url": "https://docs.readme.com/main/docs/LLMstxt",
+      "description": "Official ReadMe guidance on automatically generated LLM-facing docs metadata.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ReadMe - MCP servers",
+      "url": "https://docs.readme.com/main/docs/mcp-servers",
+      "description": "Official ReadMe documentation for MCP support in documentation hubs.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitBook - MCP servers for published docs",
+      "url": "https://gitbook.com/docs/ai-and-search/mcp-servers-for-published-docs",
+      "description": "Official GitBook guidance on exposing published docs through MCP. URL corrected 2026-07-11 (prior path 404'd after a docs reorg).",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitBook - AI coding assistants and skill.md",
+      "url": "https://gitbook.com/docs/creating-content/ai-coding-assistants-and-skillmd",
+      "description": "Official GitBook documentation for skill.md and AI coding assistant context.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Mintlify - llms.txt",
+      "url": "https://www.mintlify.com/docs/ai/llmstxt",
+      "description": "Official Mintlify documentation for llms.txt and llms-full.txt support.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Mintlify - Model Context Protocol",
+      "url": "https://www.mintlify.com/docs/ai/model-context-protocol",
+      "description": "Official Mintlify documentation for generated MCP servers.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    }
+  ],
+  "official_protocols": [
+    {
+      "name": "Model Context Protocol",
+      "url": "https://modelcontextprotocol.io/introduction",
+      "description": "Official introduction to the Model Context Protocol.",
+      "source_type": "official_spec",
+      "authority": "primary",
+      "volatility": "medium",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "llms.txt",
+      "url": "https://llmstxt.org/",
+      "description": "Specification proposal and format reference for llms.txt.",
+      "source_type": "official_spec",
+      "authority": "primary",
+      "volatility": "medium",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure AI Search - RAG overview",
+      "url": "https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview",
+      "description": "Official Microsoft guidance for retrieval-augmented generation architectures.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "medium",
+      "status": "active",
+      "add_as_web_search": true
+    }
+  ],
+  "independent_analysis": [
+    {
+      "name": "GitBook - AI docs readership growth research",
+      "url": "https://www.gitbook.com/blog/ai-docs-data-2025",
+      "description": "Platform research data point on AI readership growth for documentation.",
+      "source_type": "vendor_research",
+      "authority": "secondary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Zapier - Zendesk vs Intercom",
+      "url": "https://zapier.com/blog/zendesk-vs-intercom/",
+      "description": "Independent comparison for support-suite tradeoffs.",
+      "source_type": "independent_comparison",
+      "authority": "secondary",
+      "volatility": "high",
+      "status": "active",
+      "add_as_web_search": true
+    }
+  ],
+  "examples": [
+    {
+      "name": "Stripe Documentation",
+      "url": "https://docs.stripe.com/",
+      "description": "Example of a high-quality developer documentation surface.",
+      "source_type": "example",
+      "authority": "secondary",
+      "volatility": "medium",
+      "status": "active",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Notion Help Center",
+      "url": "https://www.notion.so/help",
+      "description": "Example of a clean, consumer-oriented help center.",
+      "source_type": "example",
+      "authority": "secondary",
+      "volatility": "medium",
+      "status": "active",
+      "add_as_web_search": false
+    }
+  ]
+}

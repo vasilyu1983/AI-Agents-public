@@ -1,0 +1,118 @@
+{
+  "metadata": {
+    "skill": "software-ai-integration",
+    "updated": "2026-05-17",
+    "total_sources": 16,
+    "description": "Primary SDK, provider, and evaluation sources for AI feature integration in products.",
+    "title": "Software AI Integration - Sources",
+    "last_updated": "2026-05-17"
+  },
+  "categories": {
+    "providers_and_sdks": [
+      {
+        "name": "OpenAI Developers",
+        "url": "https://platform.openai.com/docs",
+        "description": "Official OpenAI API and product integration documentation.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Docs",
+        "url": "https://docs.anthropic.com/",
+        "description": "Official Anthropic API documentation and streaming/tool use guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Vercel AI SDK",
+        "url": "https://sdk.vercel.ai/docs",
+        "description": "Streaming UI, structured output, and provider abstraction patterns.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol",
+        "url": "https://modelcontextprotocol.io/",
+        "description": "Open tool protocol reference for AI-enabled applications.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol (spec)",
+        "url": "https://modelcontextprotocol.io/",
+        "description": "Canonical Model Context Protocol: concepts, architecture, ecosystem. The dominant 2026 pattern for connecting AI apps/agents to external tools and data.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "MCP — Build a Server",
+        "url": "https://modelcontextprotocol.io/docs/develop/build-server",
+        "description": "Official guide to building MCP servers (exposing tools/data to AI agents). Resolve current SDK and tooling at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "operator_content": [
+      {
+        "name": "Counterintuitive advice for building AI products | Lenny's Newsletter",
+        "url": "https://www.lennysnewsletter.com/p/counterintuitive-advice-for-building",
+        "description": "Interviews with 20+ AI product builders on AI UX patterns, AI-native product design, and lessons from shipping AI features at Adobe, GitHub, Intercom, Perplexity, and others.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "How to build AI product sense | Lenny's Newsletter",
+        "url": "https://www.lennysnewsletter.com/p/how-to-build-ai-product-sense",
+        "description": "Practical guide for developing AI product sense including usability sessions, evals, and prompt optimization for product managers building AI features.",
+        "add_as_web_search": true
+      }
+    ],
+    "community_tools": [
+      {
+        "name": "Portkey AI Gateway",
+        "url": "https://github.com/Portkey-AI/gateway",
+        "description": "Route requests to 250+ LLMs via a single unified API; reference for multi-provider AI integration patterns and fallback routing strategies.",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LangGraph",
+        "url": "https://github.com/langchain-ai/langgraph",
+        "description": "Graph-based agent orchestration framework; reference for stateful workflow integration when product features are truly agent-shaped.",
+        "add_as_web_search": false
+      },
+      {
+        "name": "CrewAI",
+        "url": "https://github.com/crewAIInc/crewAI",
+        "description": "Role-based multi-agent framework; reference for collaborative workflow patterns beyond standard in-app chat integrations.",
+        "add_as_web_search": false
+      },
+      {
+        "name": "CopilotKit",
+        "url": "https://github.com/CopilotKit/CopilotKit",
+        "description": "Embeds AI copilots into React apps with pre-built components; reference for in-app AI assistant integration and frontend AI UX patterns.",
+        "add_as_web_search": false
+      }
+    ],
+    "safety_and_evaluation": [
+      {
+        "name": "OpenAI Safety Best Practices",
+        "url": "https://platform.openai.com/docs/guides/safety-best-practices",
+        "description": "Operational guidance for guardrails, moderation, and deployment safety.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Prompt Engineering Overview",
+        "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview",
+        "description": "Prompt and tool-use guidance relevant to production integrations.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Langfuse Docs",
+        "url": "https://langfuse.com/docs",
+        "description": "Tracing, evaluation, and feedback loops for LLM-powered features.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Humanloop Evaluation Guides",
+        "url": "https://humanloop.com/docs",
+        "description": "Evaluation and iteration patterns for AI product features.",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "skill": "software-solution-architecture",
+    "description": "Curated resources for cross-system solution design, integration boundaries, and phased migrations",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 12,
+    "title": "Software Solution Architecture - Sources",
+    "verification_note": "All 12 URLs live-checked 2026-07-11; content spot-verified against current publisher pages, not just link liveness."
+  },
+  "solution_architecture_core": [
+    {
+      "name": "Microsoft Azure Architecture Center",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/",
+      "description": "Official architecture patterns, reference architectures, and workload design guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AWS Well-Architected Framework",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html",
+      "description": "Official AWS guidance for architecture tradeoffs across reliability, security, performance, cost, and operations",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Google Cloud Well-Architected Framework",
+      "url": "https://docs.cloud.google.com/architecture/framework",
+      "description": "Official Google Cloud guidance across 6 pillars (operational excellence, security/privacy/compliance, reliability, cost optimization, performance optimization, sustainability); cloud.google.com/architecture/framework now redirects here",
+      "add_as_web_search": true
+    },
+    {
+      "name": "C4 Model",
+      "url": "https://c4model.com/",
+      "description": "Official lightweight architecture diagramming model for context, containers, components, and code",
+      "add_as_web_search": true
+    }
+  ],
+  "integration_and_boundaries": [
+    {
+      "name": "AsyncAPI Documentation",
+      "url": "https://www.asyncapi.com/docs",
+      "description": "Official docs for event-driven and message-based interface design",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAPI Specification",
+      "url": "https://spec.openapis.org/oas/latest.html",
+      "description": "Official OpenAPI specification for HTTP API contract design",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Pattern - Backends for Frontends",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends",
+      "description": "Official BFF pattern guidance for channel-specific aggregation and boundary shaping",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Pattern - Gateway Aggregation",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-aggregation",
+      "description": "Official guidance for reducing chattiness and aggregating cross-service calls behind a gateway",
+      "add_as_web_search": true
+    }
+  ],
+  "transition_and_migration": [
+    {
+      "name": "AWS Prescriptive Guidance - Strangler Fig",
+      "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/strangler-fig.html",
+      "description": "Official incremental modernization pattern for controlled migration from legacy systems",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AWS Prescriptive Guidance - Decomposing Monoliths FAQ",
+      "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-decomposing-monoliths/faq.html",
+      "description": "Official AWS guidance on decomposition tradeoffs, business-capability boundaries, and operational cost",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Pattern - Anti-Corruption Layer",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer",
+      "description": "Official pattern for isolating new solution design from legacy semantics during phased migration",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Documenting Architecture Decisions",
+      "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+      "description": "Canonical ADR write-up for documenting solution and architecture tradeoffs",
+      "add_as_web_search": true
+    }
+  ]
+}

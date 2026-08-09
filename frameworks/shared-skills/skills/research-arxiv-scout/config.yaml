@@ -1,0 +1,143 @@
+# arXiv Research Scout - Project Configuration
+# Maps skills/agent domains to relevant arXiv research categories
+
+project:
+  name: "AI-Agents"
+  type: "documentation-repository"
+  description: "AI prompt and agent library with multi-framework support"
+  base_path: "."
+
+search:
+  default_time_window_months: 3
+  max_results_per_query: 50
+  sort_by: "submittedDate"
+  sort_order: "descending"
+
+category_mappings:
+  ai-prompt-engineering:
+    categories: ["cs.CL", "cs.AI", "cs.LG"]
+    keywords: ["prompt", "in-context learning", "instruction tuning", "chain-of-thought"]
+    time_window_months: 6
+
+  ai-agents:
+    categories: ["cs.AI", "cs.MA", "cs.CL"]
+    keywords: ["agents", "tool use", "planning", "multi-agent", "ReAct"]
+    time_window_months: 6
+
+  ai-llm:
+    categories: ["cs.CL", "cs.LG", "stat.ML"]
+    keywords: ["language model", "transformer", "alignment", "evaluation", "benchmark"]
+    time_window_months: 6
+
+  ai-rag:
+    categories: ["cs.IR", "cs.CL", "cs.DB"]
+    keywords: ["retrieval augmented", "RAG", "dense retrieval", "reranking", "embeddings"]
+    time_window_months: 12
+
+  ai-llm-inference:
+    categories: ["cs.DC", "cs.LG", "cs.PF"]
+    keywords: ["inference", "serving", "latency", "batching", "quantization", "throughput"]
+    time_window_months: 24
+
+  ai-mlops:
+    categories: ["cs.LG", "cs.DC", "cs.SE"]
+    keywords: ["deployment", "monitoring", "evaluation", "drift", "serving"]
+    time_window_months: 24
+
+  qa-observability:
+    categories: ["cs.SE", "cs.PF"]
+    keywords: ["observability", "monitoring", "tracing", "OpenTelemetry", "profiling"]
+    time_window_months: 36
+
+  qa-resilience:
+    categories: ["cs.SE", "cs.DC"]
+    keywords: ["resilience", "fault tolerance", "reliability", "chaos engineering"]
+    time_window_months: 36
+
+  qa-refactoring:
+    categories: ["cs.SE", "cs.AI"]
+    keywords: ["refactoring", "code quality", "technical debt", "program analysis"]
+    time_window_months: 36
+
+  software-architecture-design:
+    categories: ["cs.SE", "cs.DC"]
+    keywords: ["software architecture", "design patterns", "distributed systems"]
+    time_window_months: 36
+
+  software-code-review:
+    categories: ["cs.SE", "cs.AI"]
+    keywords: ["code review", "static analysis", "bug detection", "program analysis"]
+    time_window_months: 36
+
+  software-security-appsec:
+    categories: ["cs.CR", "cs.SE", "cs.AI"]
+    keywords: ["security", "vulnerability", "adversarial", "safety", "prompt injection"]
+    time_window_months: 24
+
+  dev-api-design:
+    categories: ["cs.NI", "cs.SE"]
+    keywords: ["API design", "REST", "GraphQL", "OpenAPI"]
+    time_window_months: 60
+
+  data-sql-optimization:
+    categories: ["cs.DB", "cs.SE"]
+    keywords: ["query optimization", "indexing", "transaction", "database performance"]
+    time_window_months: 60
+
+  # Killer-Feature Mode: contributes hci_retention_paper signal to the bundle's
+  # Killer-Feature Convergence Protocol (owned by startup-review-mining).
+  # See references/product-retention-categories.md for full taxonomy + scoring.
+  killer-feature-retention:
+    categories: ["cs.HC", "cs.CY", "cs.SI", "cs.IR"]
+    keywords: ["long-term retention", "feature adoption", "freemium conversion",
+               "willingness to pay", "habit formation", "paywall design",
+               "aha moment", "engagement vs retention", "churn study"]
+    time_window_months: 60
+    promote_to_bundle_ledger: true   # rigor>=7 papers land in pay-trigger-ledger.tsv
+
+arxiv_categories:
+  cs.AI:
+    name: "Artificial Intelligence"
+    description: "Agents, planning, reasoning, knowledge representation"
+  cs.CL:
+    name: "Computation and Language"
+    description: "NLP, LLMs, prompting, dialogue systems"
+  cs.LG:
+    name: "Machine Learning"
+    description: "Model architectures, optimization, training methods"
+  cs.IR:
+    name: "Information Retrieval"
+    description: "Search, ranking, retrieval, embeddings"
+  cs.SE:
+    name: "Software Engineering"
+    description: "Program analysis, testing, code generation, quality"
+  cs.CR:
+    name: "Cryptography and Security"
+    description: "Security, robustness, privacy, adversarial ML"
+  cs.DB:
+    name: "Databases"
+    description: "Database systems, indexing, query processing"
+  cs.DC:
+    name: "Distributed Computing"
+    description: "Distributed systems, scaling, serving"
+  cs.PF:
+    name: "Performance"
+    description: "Profiling, performance analysis, optimization"
+  cs.NI:
+    name: "Networking and Internet Architecture"
+    description: "Internet systems, APIs, distributed architectures"
+  cs.MA:
+    name: "Multiagent Systems"
+    description: "Coordination, communication, emergent behavior"
+  stat.ML:
+    name: "Machine Learning (Statistics)"
+    description: "Evaluation, metrics, statistical methods"
+  cs.HC:
+    name: "Human-Computer Interaction"
+    description: "Interaction patterns, retention studies, feature adoption, freemium / paywall design (killer-feature mode primary)"
+  cs.CY:
+    name: "Computers and Society"
+    description: "Adoption studies, longitudinal user studies, willingness-to-pay surveys"
+  cs.SI:
+    name: "Social and Information Networks"
+    description: "Network-effect features (multiplayer, social), engagement loops, virality vs retention separation"

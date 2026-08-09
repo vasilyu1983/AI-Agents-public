@@ -1,0 +1,4 @@
+interface:
+  display_name: "Workflow Automation"
+  short_description: "Designs automation with n8n, Langflow, Temporal, and Trigger.dev"
+  default_prompt: "Use $software-workflow-automation for Designs workflow automation with n8n, Langflow, Temporal, and Trigger.dev. Use when choosing automation platforms, durable runtimes, or custom code."

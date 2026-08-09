@@ -1,0 +1,3 @@
+{"case_id":"generic_policy_effective_date","expected_ids":["policy:access-control:v3:clause-4"],"retrieved_ids":["policy:access-control:v3:clause-4","policy:access-control:v2:clause-4"],"graded_relevance":{"policy:access-control:v3:clause-4":3,"policy:access-control:v2:clause-4":1}}
+{"case_id":"generic_code_symbol_lookup","expected_ids":["repo:service-client:retry-config"],"retrieved_ids":["repo:service-client:retry-config","repo:service-client:call-wrapper"],"graded_relevance":{"repo:service-client:retry-config":3,"repo:service-client:call-wrapper":2}}
+{"case_id":"generic_unanswerable","expected_ids":[],"retrieved_ids":[],"graded_relevance":{}}

@@ -1,0 +1,272 @@
+{
+  "metadata": {
+    "skill": "document-xlsx",
+    "updated": "2026-07-11",
+    "total_sources": 17,
+    "description": "Official spreadsheet automation libraries plus workbook security, accessibility, and cloud automation guidance.",
+    "version": "2.3",
+    "title": "Document XLSX - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "python_libraries": [
+      {
+        "name": "openpyxl Documentation",
+        "url": "https://openpyxl.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Python library for reading and editing .xlsx/.xlsm files, including tables, validation, protection, and workbook loading options. Current stable release is 3.1.5; see the Optimised Modes page for write_only/read_only streaming behavior on large files.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "python",
+          "xlsx",
+          "editing"
+        ]
+      },
+      {
+        "name": "XlsxWriter Documentation",
+        "url": "https://xlsxwriter.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Write-focused Python library for table-first exports, formatting, formulas, charts, and polished report outputs. Write-only: cannot open or edit an existing workbook.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "python",
+          "xlsx",
+          "reports"
+        ]
+      },
+      {
+        "name": "pandas.DataFrame.to_excel",
+        "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_excel.html",
+        "type": "reference",
+        "relevance": "DataFrame export reference for reproducible Excel outputs, engine selection, freeze panes, and styling workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "python",
+          "pandas",
+          "xlsx"
+        ]
+      },
+      {
+        "name": "xlwings Documentation",
+        "url": "https://docs.xlwings.org/en/latest/",
+        "type": "documentation",
+        "relevance": "Python-to-Excel automation when you need native Excel features on a machine with Excel installed.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "python",
+          "excel-automation",
+          "desktop"
+        ]
+      },
+      {
+        "name": "calamine — GitHub",
+        "url": "https://github.com/tafia/calamine",
+        "type": "library",
+        "relevance": "Fast pure-Rust reader for xls, xlsx, xlsb, and ods; zero ML/GPU dependency. Use directly via Python bindings (python-calamine) for high-performance spreadsheet ingestion in LLM and data pipelines.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-17",
+        "tags": [
+          "rust",
+          "xlsx",
+          "xls",
+          "ods",
+          "extraction",
+          "performance"
+        ]
+      },
+      {
+        "name": "Docling (IBM Research) — GitHub",
+        "url": "https://github.com/docling-project/docling",
+        "type": "library",
+        "relevance": "Production document-extraction library (IBM Research) producing structured DoclingDocument from XLSX, PDF, DOCX, PPTX, HTML, and images. Primary source for releases, issue tracking, and integration examples.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-17",
+        "tags": [
+          "docling",
+          "xlsx",
+          "extraction",
+          "llm",
+          "ibm"
+        ]
+      },
+      {
+        "name": "Mistral OCR",
+        "url": "https://mistral.ai/news/mistral-ocr",
+        "type": "api",
+        "relevance": "OCR API understanding text, tables, equations, and embedded media across document formats; ~1000 pages per dollar. Relevant when Excel data is embedded in scanned or image-heavy documents. Docs at https://docs.mistral.ai/",
+        "update_frequency": "continuous",
+        "access": "paid",
+        "add_as_web_search": true,
+        "last_verified": "2026-05-17",
+        "tags": [
+          "ocr",
+          "mistral",
+          "extraction",
+          "tables",
+          "api"
+        ]
+      }
+    ],
+    "nodejs_libraries": [
+      {
+        "name": "ExcelJS",
+        "url": "https://github.com/exceljs/exceljs",
+        "type": "library",
+        "relevance": "Node.js library for generating and editing .xlsx files with styles, formulas, tables, and workbook structure operations. Native chart generation is not supported; pivot-table support is experimental as of the 4.4.x/4.5.x line.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-07-11",
+        "tags": [
+          "nodejs",
+          "xlsx",
+          "typescript"
+        ]
+      },
+      {
+        "name": "SheetJS Documentation",
+        "url": "https://docs.sheetjs.com/",
+        "type": "documentation",
+        "relevance": "Spreadsheet ingestion and export across formats; useful for parsing, interoperability, and metadata-aware workbook handling.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "nodejs",
+          "xlsx",
+          "ingestion"
+        ]
+      },
+      {
+        "name": "SheetJS Security Notes",
+        "url": "https://docs.sheetjs.com/docs/miscellany/security/",
+        "type": "guide",
+        "relevance": "Security guidance for formula injection, hyperlinks, and workbook parsing risks in spreadsheet workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "security",
+          "sheetjs",
+          "xlsx"
+        ]
+      }
+    ],
+    "cloud_automation": [
+      {
+        "name": "Office Scripts PivotTables",
+        "url": "https://learn.microsoft.com/en-us/office/dev/scripts/develop/pivottables",
+        "type": "documentation",
+        "relevance": "Official Excel on the web automation reference for creating and manipulating native PivotTables with Office Scripts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "office-scripts",
+          "pivot-tables",
+          "excel-web"
+        ]
+      },
+      {
+        "name": "Office Scripts Table Interface",
+        "url": "https://learn.microsoft.com/en-us/javascript/api/office-scripts/excelscript/excelscript.table?view=office-scripts",
+        "type": "reference",
+        "relevance": "Reference for table operations in Office Scripts, including headers, totals, filters, and structured workbook automation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "office-scripts",
+          "tables",
+          "excel-web"
+        ]
+      },
+      {
+        "name": "Microsoft Graph Excel Workbook API",
+        "url": "https://learn.microsoft.com/en-us/graph/api/resources/excel?view=graph-rest-1.0",
+        "type": "documentation",
+        "relevance": "Remote workbook sessions and workbook object model for Microsoft 365-hosted Excel files.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "graph",
+          "excel",
+          "api"
+        ]
+      }
+    ],
+    "accessibility_and_compliance": [
+      {
+        "name": "Accessibility Best Practices with Excel Spreadsheets",
+        "url": "https://support.microsoft.com/en-us/office/accessibility-best-practices-with-excel-spreadsheets-6cc05fc5-1314-48b5-8eb3-683e49b3e593",
+        "type": "guide",
+        "relevance": "Practical Microsoft guidance for descriptive worksheet names, accessible tables, meaningful links, and workbook checkers.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "accessibility",
+          "excel",
+          "microsoft"
+        ]
+      },
+      {
+        "name": "Section 508 Accessible Spreadsheets",
+        "url": "https://www.section508.gov/create/spreadsheets/",
+        "type": "guide",
+        "relevance": "US federal accessibility guidance for spreadsheets, including workbook structure, A1 context, and blank worksheet avoidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "accessibility",
+          "section508",
+          "spreadsheets"
+        ]
+      },
+      {
+        "name": "ECMA-376 Office Open XML",
+        "url": "https://ecma-international.org/publications-and-standards/standards/ecma-376/",
+        "type": "specification",
+        "relevance": "Underlying OOXML standard behind .xlsx; useful for interoperability edge cases and low-level workbook inspection.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "spec",
+          "ooxml",
+          "xlsx"
+        ]
+      },
+      {
+        "name": "Microsoft Open Specifications for OOXML",
+        "url": "https://learn.microsoft.com/en-us/openspecs/office_standards/ms-oi29500/1fd4a662-8623-49c0-82f0-18fa91b413b8",
+        "type": "reference",
+        "relevance": "Stable entry point for Microsoft's published Office Open XML implementation notes and format details.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "spec",
+          "office",
+          "ooxml"
+        ]
+      }
+    ]
+  }
+}

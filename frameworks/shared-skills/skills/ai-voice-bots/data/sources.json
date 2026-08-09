@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "title": "ai-voice-bots - Sources",
+    "description": "Official and adjacent sources for building production voice bots with Python-first pipelines and telephony integration.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "ai-voice-bots",
+    "total_sources": 21
+  },
+  "official_sources": [
+    {
+      "name": "Pipecat GitHub",
+      "url": "https://github.com/pipecat-ai/pipecat",
+      "description": "Open-source framework for voice and multimodal conversational AI.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Pipecat Docs",
+      "url": "https://docs.pipecat.ai/",
+      "description": "Official Pipecat documentation for pipeline design, transports, and processors.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LiveKit Agents GitHub",
+      "url": "https://github.com/livekit/agents",
+      "description": "LiveKit's agent framework for real-time voice and multimodal AI applications.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LiveKit Agents Docs",
+      "url": "https://docs.livekit.io/agents/",
+      "description": "Official LiveKit Agents documentation for VoicePipelineAgent and plugins.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Deepgram Docs",
+      "url": "https://developers.deepgram.com/docs",
+      "description": "Deepgram STT/TTS API documentation. Nova-3 is the default STT recommendation.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ElevenLabs Docs",
+      "url": "https://elevenlabs.io/docs",
+      "description": "ElevenLabs TTS API documentation. Flash v2.5 (eleven_flash_v2_5) for lowest-latency streaming; Turbo v2.5 is functionally equivalent. Eleven v3 not for real-time.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Cartesia Docs",
+      "url": "https://docs.cartesia.ai/",
+      "description": "Cartesia Sonic TTS API. Ultra-low latency voice synthesis. Sonic-3 is current default; Sonic-3.5 + Ink-2 (streaming TTS/STT stack, shipped Jun 2026) is the newer alternative — verify current benchmark numbers.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Realtime API Docs",
+      "url": "https://platform.openai.com/docs/guides/realtime",
+      "description": "OpenAI Realtime API (GA, out of beta). Model line iterates roughly every 8-10 weeks (gpt-realtime-2 -> gpt-realtime-2.1 / gpt-realtime-2.1-mini as of Jul 2026); verify current model IDs, pricing, and region availability before each release.",
+      "add_as_web_search": true
+    }
+  ],
+  "adjacent_references": [
+    {
+      "name": "Twilio Programmable Voice",
+      "url": "https://www.twilio.com/docs/voice",
+      "description": "Twilio Voice API for phone call management and SIP integration.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Vapi Docs",
+      "url": "https://docs.vapi.ai/",
+      "description": "Vapi voice AI platform documentation.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Bland.ai Docs",
+      "url": "https://docs.bland.ai/",
+      "description": "Bland.ai voice agent API documentation.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Retell AI Docs",
+      "url": "https://docs.retellai.com/",
+      "description": "Retell AI enterprise voice agent platform documentation.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Telnyx Docs",
+      "url": "https://developers.telnyx.com/docs/overview",
+      "description": "Telnyx voice and SIP API documentation.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AssemblyAI Docs",
+      "url": "https://www.assemblyai.com/docs",
+      "description": "AssemblyAI STT API. Universal-2 model for high-accuracy transcription.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Speech Services",
+      "url": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/",
+      "description": "Azure Cognitive Services Speech-to-Text and Text-to-Speech.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "PlayHT Docs",
+      "url": "https://docs.play.ht/",
+      "description": "PlayHT TTS API for voice cloning and low-latency synthesis.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "WebRTC Specification",
+      "url": "https://www.w3.org/TR/webrtc/",
+      "description": "W3C WebRTC specification for real-time communication.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "ITU-T P.800 (MOS)",
+      "url": "https://www.itu.int/rec/T-REC-P.800/en",
+      "description": "ITU standard for Mean Opinion Score voice quality measurement.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Deepgram Flux Docs",
+      "url": "https://developers.deepgram.com/docs/flux/quickstart",
+      "description": "Deepgram Flux conversational speech recognition — fused STT + turn detection. flux-general-en and flux-general-multi (multilingual GA Apr 2026, ~260ms median end-of-turn).",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Pipecat Smart Turn GitHub",
+      "url": "https://github.com/pipecat-ai/smart-turn",
+      "description": "Open-weight ~8M-param semantic turn-detection model (Whisper-tiny encoder + classifier). v3.x: ~12ms CPU, ~23 languages, int8 8MB.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "EVA-Bench (ServiceNow)",
+      "url": "https://github.com/ServiceNow/eva",
+      "description": "End-to-end voice-agent evaluation framework. Bot-to-bot audio eval scoring EVA-A (accuracy) + EVA-X (experience). arXiv 2605.13841 (May 2026, preprint).",
+      "add_as_web_search": false
+    }
+  ]
+}

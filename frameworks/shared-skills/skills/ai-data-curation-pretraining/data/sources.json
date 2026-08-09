@@ -1,0 +1,303 @@
+{
+  "metadata": {
+    "skill": "ai-data-curation-pretraining",
+    "updated": "2026-07-11",
+    "audit_date": "2026-07-11",
+    "last_verified": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 31,
+    "description": "Primary sources for LLM pretraining data curation: open corpus recipes, data-curation benchmarks, deduplication, decontamination, data mixing, synthetic data generation, governance, and evaluation harness.",
+    "title": "AI Data Curation Pretraining - Sources"
+  },
+  "categories": {
+    "web_corpora_and_recipes": [
+      {
+        "name": "FineWeb: Decanting the Web for the Finest Text Data at Scale (HF Blog)",
+        "url": "https://huggingface.co/spaces/HuggingFaceFW/blogpost-fineweb-v1",
+        "type": "blog",
+        "relevance": "End-to-end recipe for FineWeb and FineWeb-Edu: CommonCrawl extraction via datatrove, Gopher+C4 heuristics, edu-score classifier, dedup. Primary reference for the HF open curation pipeline.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FineWeb Paper (arXiv 2406.17557)",
+        "url": "https://arxiv.org/abs/2406.17557",
+        "type": "research",
+        "relevance": "Peer-reviewed companion to the FineWeb blog. Documents ablation methodology, heuristic filter choices, and edu-score classifier training procedure.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Dolma: Open Language Dataset (AllenAI GitHub)",
+        "url": "https://github.com/allenai/dolma",
+        "type": "tool",
+        "relevance": "Open corpus toolkit from AllenAI used for OLMo pretraining. Documents tagging, filtering, mixing, and decontamination tooling.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Dolma Paper (arXiv 2402.00159)",
+        "url": "https://arxiv.org/abs/2402.00159",
+        "type": "research",
+        "relevance": "Describes the Dolma corpus: 3T tokens, multi-source mixing (CC, GitHub, C4, books, Reddit, papers), filtering decisions, and datasheet.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "The Pile: An 800GB Dataset of Diverse Text (arXiv 2101.00027)",
+        "url": "https://arxiv.org/abs/2101.00027",
+        "type": "research",
+        "relevance": "Foundational open corpus paper from EleutherAI. 22-source mixture, domain-level mixing rationale, and datasheet. Baseline reference for multi-source corpus design.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "RedPajama (Together AI GitHub)",
+        "url": "https://github.com/togethercomputer/RedPajama-Data",
+        "type": "tool",
+        "relevance": "Open reproduction of LLaMA training data. Documents source proportions (CC, C4, GitHub, books, arXiv, Wikipedia, StackExchange) and filtering steps.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "HuggingFace datatrove (GitHub)",
+        "url": "https://github.com/huggingface/datatrove",
+        "type": "tool",
+        "relevance": "Primary toolkit for large-scale web data processing: WARC readers, HTMLExtractor, language filter, Gopher/C4 quality filters, MinHash dedup, decontamination. Used in FineWeb production pipeline.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DataComp-LM: In search of the next generation of training sets (arXiv 2406.11794)",
+        "url": "https://arxiv.org/abs/2406.11794",
+        "type": "research",
+        "relevance": "The controlled benchmark for data curation: a 240T-token CommonCrawl pool, fixed training/compute, 53 downstream evals. Established that a single fastText classifier trained on high-quality reference text (DCLM-Baseline) beats heuristic filter stacks. De-facto reference point for filtering comparisons.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Nemotron-CC: Transforming Common Crawl into a Refined Long-Horizon Pretraining Dataset (arXiv 2412.02595)",
+        "url": "https://arxiv.org/abs/2412.02595",
+        "type": "research",
+        "relevance": "NVIDIA recipe addressing the token-yield problem: classifier ensemble + synthetic rephrasing of mid/low-quality pages recovers 6.3T usable tokens where aggressive filters would discard ~90%. Establishes synthetic rephrasing as a quality multiplier for multi-trillion-token runs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FineWeb2: One Pipeline to Scale Them All (arXiv 2506.20920)",
+        "url": "https://arxiv.org/abs/2506.20920",
+        "type": "research",
+        "relevance": "Extends the FineWeb/datatrove pipeline to 1000+ languages with per-language threshold tuning; 20TB / 5B-document multilingual dataset. Default baseline for non-English and multilingual corpus construction.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "The Common Pile v0.1: An 8TB Dataset of Public Domain and Openly Licensed Text (arXiv 2506.05209)",
+        "url": "https://arxiv.org/abs/2506.05209",
+        "type": "research",
+        "relevance": "8TB openly licensed / public-domain corpus across 30 sources; Comma 7B models competitive with unlicensed-data peers. Primary open-license corpus of record for IP/copyright-sensitive pretraining.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Common Corpus (arXiv 2506.01732, Pleias / AI Alliance)",
+        "url": "https://arxiv.org/abs/2506.01732",
+        "type": "research",
+        "relevance": "~2T-token openly licensed corpus with heavy non-English coverage (French, German, multilingual); complements Common Pile's English/code skew for open-license pretraining. Verified current as of 2026-07-11; no v2 found at that date.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Blu-WERP: A Scalable Pipeline for Preprocessing LLM Datasets (arXiv 2511.18054)",
+        "url": "https://arxiv.org/abs/2511.18054",
+        "type": "research",
+        "relevance": "Reports +4.0% vs. DCLM-Baseline and +9.5% vs. FineWeb aggregate at 1B scale via JusText extraction + Bloom-filter dedup + semantic classifier. Emerging challenger as of Nov 2025 / verified 2026-07-11 — not yet independently replicated or adopted by a frontier lab; cite as a benchmark to test against, not a settled default.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "data_mixing": [
+      {
+        "name": "DoReMi: Optimizing Data Mixtures Speeds Up Language Model Pretraining (arXiv 2305.10429)",
+        "url": "https://arxiv.org/abs/2305.10429",
+        "type": "research",
+        "relevance": "Group-DRO on a small proxy model finds domain weights minimizing worst-case excess loss, transferred to the full run. +6.5pp few-shot vs Pile defaults at 2.6x fewer steps. Standard principled alternative to hand-tuned domain ratios.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance (arXiv 2403.16952)",
+        "url": "https://arxiv.org/abs/2403.16952",
+        "type": "research",
+        "relevance": "Fits a scaling-law surface over mixture ratios from small proxy runs to extrapolate the optimal mix before spending full compute. Lets you predict the target-scale optimum from cheap experiments.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "RegMix: Data Mixture as Regression for Language Model Pre-training (arXiv 2407.01492)",
+        "url": "https://arxiv.org/abs/2407.01492",
+        "type": "research",
+        "relevance": "Trains many small models on random mixtures, regresses performance on ratios, selects the predicted-best mixture. Matches DoReMi quality at lower compute; scales to many candidate domains.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "deduplication_and_decontamination": [
+      {
+        "name": "Deduplicating Training Data Makes Language Models Better (arXiv 2107.06499)",
+        "url": "https://arxiv.org/abs/2107.06499",
+        "type": "research",
+        "relevance": "Canonical paper showing MinHash near-dedup and exact-substring suffix-array dedup improve model quality. Establishes the two-stage dedup protocol that FineWeb, Dolma, and RedPajama follow.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "SemDeDup: Data-efficient learning at web-scale through semantic deduplication (arXiv 2303.09540)",
+        "url": "https://arxiv.org/abs/2303.09540",
+        "type": "research",
+        "relevance": "Embedding-cluster deduplication removes semantic near-duplicates (paraphrases, translations) that MinHash and suffix-array miss. Complements, not replaces, surface-form dedup in frontier recipes; can drop ~50% of data with minimal quality loss.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "synthetic_data_generation": [
+      {
+        "name": "Phi-1: Textbooks Are All You Need (arXiv 2306.11644)",
+        "url": "https://arxiv.org/abs/2306.11644",
+        "type": "research",
+        "relevance": "Microsoft Phi-1 paper demonstrating that high-quality synthetic textbook data (1.3B tokens) enables 1.3B model to outperform 13B models on coding. Primary reference for synthetic textbook generation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Cosmopedia: Synthetic Textbooks at Scale (HF Blog)",
+        "url": "https://huggingface.co/blog/cosmopedia",
+        "type": "blog",
+        "relevance": "Recipe for generating 30B tokens of synthetic textbooks using Mixtral-8x7B-Instruct. Documents prompt design, style variation, and quality filtering for Cosmopedia v2.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Self-Instruct: Aligning LMs with Self-Generated Instructions (arXiv 2212.10560)",
+        "url": "https://arxiv.org/abs/2212.10560",
+        "type": "research",
+        "relevance": "Foundational method for bootstrapping instruction data from a seed model. Core technique for synthetic data generation pipelines that do not use human annotation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Evol-Instruct / WizardLM: Empowering LLMs with Evol-Instruct (arXiv 2304.12244)",
+        "url": "https://arxiv.org/abs/2304.12244",
+        "type": "research",
+        "relevance": "Introduces Evol-Instruct: iterative rewriting of instructions to increase complexity and diversity. Used to produce WizardLM training data; widely adopted in synthetic SFT data generation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Rephrasing the Web (WRAP): A Recipe for Compute and Data-Efficient Language Modeling (arXiv 2401.16380)",
+        "url": "https://arxiv.org/abs/2401.16380",
+        "type": "research",
+        "relevance": "Seminal 'rephrase rather than only filter' paradigm: an instruct model rewrites web pages into cleaner styles (Wikipedia-like, QA), giving ~3x pretraining speedup at fixed compute. The method Nemotron-CC later scales to full CommonCrawl.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Demystifying Synthetic Data in LLM Pre-training (arXiv 2510.01631)",
+        "url": "https://arxiv.org/abs/2510.01631",
+        "type": "research",
+        "relevance": "Scaling-law study (Oct 2025) on natural/synthetic mixes finding moderate synthetic ratios (~1/3 rephrased-synthetic) reduce irreducible loss without a collapse signature — complicates the 'any recursion collapses' reading of Shumailov et al. Use to calibrate synthetic-mix ratios, not to dismiss the collapse risk.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Escaping Model Collapse via Synthetic Data Verification (ICLR 2026 Workshop)",
+        "url": "https://openreview.net/forum?id=YzDC5hjGUM",
+        "type": "research",
+        "relevance": "Shows external verification (stronger model, human rater, or task verifier) prevents model collapse even under fully recursive retraining, where mixing a fixed ratio of real data alone does not. Grounds the 'verifier-gate synthetic data' core principle with a collapse-specific mechanism.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "governance_and_evaluation": [
+      {
+        "name": "Datasheets for Datasets (arXiv 1803.09010)",
+        "url": "https://arxiv.org/abs/1803.09010",
+        "type": "research",
+        "relevance": "Gebru et al. canonical reference for dataset documentation: motivation, composition, collection process, preprocessing, uses, distribution, maintenance. Required practice before publishing any curated corpus.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "AI models collapse when trained on recursively generated data (Shumailov et al., Nature 2024)",
+        "url": "https://www.nature.com/articles/s41586-024-07566-y",
+        "type": "research",
+        "relevance": "Canonical peer-reviewed reference for model collapse: recursive training on model-generated data narrows the distribution and erodes tail knowledge. Nature 631:755-759 (2024), DOI 10.1038/s41586-024-07566-y. Grounds the synthetic-data collapse trap.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "lm-evaluation-harness (EleutherAI GitHub)",
+        "url": "https://github.com/EleutherAI/lm-evaluation-harness",
+        "type": "tool",
+        "relevance": "De facto evaluation harness for pretraining ablations. Covers HellaSwag, ARC, MMLU, GSM8K, and hundreds more. Required tool for measuring eval delta across ablation runs.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "EU AI Act Article 53(1)(d) — Template for the Public Summary of Training Content (European Commission AI Office)",
+        "url": "https://digital-strategy.ec.europa.eu/en/news/commission-presents-template-general-purpose-ai-model-providers-summarise-data-used-train-their",
+        "type": "official",
+        "relevance": "Mandatory template (published 2025-07-24) GPAI providers must use to publicly disclose training-data categories (crawled/scraped, licensed, user, synthetic, other), effective 2025-08-02 (2027-08-02 for pre-existing models); AI Office compliance checks begin 2026-08-02, fines up to EUR 15M / 3% global revenue. Curation pipelines should log source category per document from extraction onward to make this disclosure cheap.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Copyright in AI Pre-Training Data Filtering: Regulatory Landscape and Mitigation Strategies (arXiv 2512.02047)",
+        "url": "https://arxiv.org/abs/2512.02047",
+        "type": "research",
+        "relevance": "Maps the EU DSM Directive Article 4 TDM opt-out mechanism, the AI Act copyright-compliance obligations for GPAI providers, and practical mitigation strategies (opt-out signal detection, provenance logging) for pretraining-data filtering pipelines.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "GlotLID: Language Identification for Low-Resource Languages (GitHub / HF)",
+        "url": "https://github.com/cisnlp/GlotLID",
+        "type": "tool",
+        "relevance": "2000+ language identification model adopted by FineWeb2 as the successor to fastText lid.176 for multilingual and code-switched web corpora. Preferred over lid.176 once language coverage or code-switching exceeds lid.176's reliable range.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

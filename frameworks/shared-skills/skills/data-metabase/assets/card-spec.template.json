@@ -1,0 +1,14 @@
+{
+  "name": "Daily signups",
+  "description": "Automation-managed card",
+  "collection_id": 0,
+  "display": "line",
+  "dataset_query": {
+    "database": 0,
+    "type": "native",
+    "native": {
+      "query": "select current_date as day, 1 as signups"
+    }
+  },
+  "visualization_settings": {}
+}

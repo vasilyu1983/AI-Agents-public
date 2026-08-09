@@ -1,0 +1,150 @@
+{
+  "metadata": {
+    "skill": "research-arxiv-scout",
+    "title": "research-arxiv-scout - Sources",
+    "description": "Official arXiv docs plus complementary discovery and citation tooling used to scout, validate, and curate research links",
+    "last_updated": "2026-07-11"
+  },
+  "arxiv_official": [
+    {
+      "name": "arXiv API Documentation",
+      "url": "https://info.arxiv.org/help/api/index.html",
+      "description": "Official arXiv API docs and guidelines",
+      "add_as_web_search": true
+    },
+    {
+      "name": "arXiv API Terms of Use",
+      "url": "https://info.arxiv.org/help/api/tou.html",
+      "description": "Attribution and usage requirements for arXiv API consumers",
+      "add_as_web_search": false
+    },
+    {
+      "name": "arXiv Category Taxonomy",
+      "url": "https://arxiv.org/category_taxonomy",
+      "description": "Complete category list (cs.AI, cs.CL, cs.LG, etc.)",
+      "add_as_web_search": false
+    },
+    {
+      "name": "arXiv Search Help",
+      "url": "https://info.arxiv.org/help/search/index.html",
+      "description": "Search syntax and operator reference for arXiv site search",
+      "add_as_web_search": false
+    },
+    {
+      "name": "arXiv Monthly Submissions",
+      "url": "https://arxiv.org/stats/monthly_submissions",
+      "description": "Trends by category over time (useful for monitoring activity)",
+      "add_as_web_search": false
+    },
+    {
+      "name": "arXiv RSS Feeds",
+      "url": "https://rss.arxiv.org/rss/{category}",
+      "description": "Per-category RSS feeds updated daily ~midnight ET. Replace {category} with e.g. cs.AI, cs.LG, cs.CL. Use as the first step in the daily-digest workflow.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "arXiv New Listings",
+      "url": "https://arxiv.org/list/{cat}/new",
+      "description": "HTML new-submission listing pages per category. Replace {cat} with e.g. cs.AI. Updated each weekday; useful for visual daily review alongside RSS.",
+      "add_as_web_search": false
+    }
+  ],
+  "programmatic_metadata": [
+    {
+      "name": "Semantic Scholar API",
+      "url": "https://api.semanticscholar.org/",
+      "description": "Citation and metadata API for verification and enrichment. Unauthenticated requests share a pool of 5,000 requests/5 min across all callers; since August 2024 free personal-email API keys and 3rd-party-app keys are no longer approved (allenai/s2-folks release notes). Verify current limits before bulk citation chasing.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "OpenAlex",
+      "url": "https://openalex.org/",
+      "description": "Open catalog of scholarly works and citations. Since 13 Feb 2026 every API request requires a free API key (create at openalex.org/settings/api); the old mailto polite pool is gone. Pricing is usage-based ($1/day free allowance; ID lookups free, search calls ~$1/1000) -- verify current terms at developers.openalex.org/guides/authentication before high-volume pulls.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenCitations",
+      "url": "https://opencitations.net/",
+      "description": "Open citation data infrastructure",
+      "add_as_web_search": false
+    }
+  ],
+  "discovery_tools": [
+    {
+      "name": "Semantic Scholar",
+      "url": "https://www.semanticscholar.org/",
+      "description": "Paper discovery with citation graphs and metadata",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Hugging Face Papers",
+      "url": "https://huggingface.co/papers",
+      "description": "Daily paper highlights and community discussion; primary replacement for Papers with Code social signal",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Hugging Face Trending",
+      "url": "https://huggingface.co/trending",
+      "description": "Trending models, datasets, and spaces; useful for code-release signals alongside HF Papers",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Connected Papers",
+      "url": "https://www.connectedpapers.com/",
+      "description": "Visual exploration of related papers and prior work",
+      "add_as_web_search": true
+    },
+    {
+      "name": "alphaXiv",
+      "url": "https://alphaxiv.org",
+      "description": "Social signal layer on top of arXiv: comments, trending papers, and discussion threads. Use as a pre-triage filter before deep API triage.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Emergent Mind",
+      "url": "https://emergentmind.com",
+      "description": "Aggregates arXiv paper signals from X (Twitter), Reddit, GitHub, and HN. Free tier. Useful for identifying papers with broad cross-community attention early.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "arxiv-sanity-lite",
+      "url": "https://arxiv-sanity-lite.com",
+      "description": "Karpathy's SVM-based arXiv recommender. Learns from papers you mark as interesting; good for personalised daily digests.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "ResearchRabbit",
+      "url": "https://researchrabbit.ai",
+      "description": "Citation-network discovery tool. Builds visual citation graphs from seed papers and surfaces related prior and future work. Acquired by Litmaps (relaunched Oct 2025); now freemium (free + paid tiers) rather than fully free -- confirm current tier limits before relying on bulk exports.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Litmaps",
+      "url": "https://litmaps.com",
+      "description": "Citation maps with monitor alerts for new papers citing your seeds. Free tier available. Acquired ResearchRabbit in Oct 2025; the two products remain separately branded as of mid-2026.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Zeta Alpha",
+      "url": "https://search.zeta-alpha.com",
+      "description": "Neural search over arXiv and other AI/ML preprint sources. Free web interface; useful for semantic queries that keyword search misses.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "codesota.com",
+      "url": "https://codesota.com",
+      "description": "Leaderboard and benchmark lookup for code-related tasks. Use for state-of-the-art comparisons previously served by Papers with Code leaderboards.",
+      "add_as_web_search": true
+    }
+  ],
+  "dead_or_changed": [
+    {
+      "name": "Papers with Code",
+      "url": "https://paperswithcode.com/",
+      "description": "DEAD as of July 2025. paperswithcode.com now 301-redirects to Hugging Face Trending; GitHub data is frozen. Replaced by: HF Papers (huggingface.co/papers) for social signal, HF Trending (huggingface.co/trending) for code-release signals, and codesota.com for leaderboard lookups.",
+      "add_as_web_search": false,
+      "status": "dead",
+      "dead_since": "2025-07"
+    }
+  ]
+}

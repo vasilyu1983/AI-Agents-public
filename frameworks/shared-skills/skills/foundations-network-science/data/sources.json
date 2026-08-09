@@ -1,0 +1,244 @@
+{
+  "metadata": {
+    "title": "AI Network Science Foundations — Sources",
+    "description": "Primary papers and references for 11 canonical network-science primitives: centrality, PageRank, community detection, small-world, scale-free, percolation, SIR contagion, link prediction, graph clustering, graph embeddings, and temporal networks",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-network-science",
+    "total_sources": 33
+  },
+  "textbooks": [
+    {
+      "id": "Newman2010",
+      "name": "Networks: An Introduction",
+      "url": "https://global.oup.com/academic/product/networks-9780199206650",
+      "description": "Mark E. J. Newman (2010). Oxford University Press. Comprehensive treatment of network structure, centrality, community detection, random graphs, epidemics, and network robustness. Primary textbook reference for primitives #1–#7 and #9.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Barabasi2016",
+      "name": "Network Science",
+      "url": "https://networksciencebook.com/",
+      "description": "Albert-László Barabási (2016). Cambridge University Press. Open-access textbook. Canonical reference for scale-free networks, preferential attachment, Barabási-Albert model, hubs, robustness, and epidemic spreading on networks. Primary reference for primitives #5, #6, #7.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "EasleyKleinberg2010",
+      "name": "Networks, Crowds, and Markets: Reasoning about a Highly Connected World",
+      "url": "https://www.cs.cornell.edu/home/kleinber/networks-book/",
+      "description": "David Easley and Jon Kleinberg (2010). Cambridge University Press. Open-access. Game theory, network formation, auctions, PageRank, cascades, power laws, small worlds. Primary reference for primitives #2, #4, #5, #7, #8.",
+      "add_as_web_search": false
+    }
+  ],
+  "research_papers": [
+    {
+      "id": "WattsStrogatz1998",
+      "name": "Collective dynamics of small-world networks",
+      "url": "https://doi.org/10.1038/30918",
+      "description": "Watts and Strogatz (1998). Nature. Foundational small-world paper introducing the Watts-Strogatz model. Defines clustering coefficient C and characteristic path length L; shows biological, social, and technological networks exhibit high C and low L simultaneously. Primary reference for primitive #4.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "BarabasiAlbert1999",
+      "name": "Emergence of Scaling in Random Networks",
+      "url": "https://doi.org/10.1126/science.286.5439.509",
+      "description": "Barabási and Albert (1999). Science. Foundational scale-free paper introducing preferential attachment and the Barabási-Albert model. Shows power-law degree distributions emerge from growth + preferential attachment. Primary reference for primitive #5.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "BrinPage1998",
+      "name": "The anatomy of a large-scale hypertextual Web search engine",
+      "url": "https://doi.org/10.1016/S0169-7552(98)00110-X",
+      "description": "Brin and Page (1998). Computer Networks. Original PageRank paper. Defines the random surfer model, damping factor d=0.85, and iterative power-method computation. Primary reference for primitive #2.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Fortunato2010",
+      "name": "Community detection in graphs",
+      "url": "https://doi.org/10.1016/j.physrep.2009.11.002",
+      "description": "Santo Fortunato (2010). Physics Reports. Comprehensive review of community detection algorithms including modularity, spectral methods, label propagation, and hierarchical approaches. Identifies the resolution limit of modularity maximisation. Primary reference for primitive #3 and #9.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Louvain2008",
+      "name": "Fast unfolding of communities in large networks",
+      "url": "https://doi.org/10.1088/1742-5468/2008/10/P10008",
+      "description": "Blondel, Guillaume, Lambiotte, and Lefebvre (2008). Journal of Statistical Mechanics. Louvain algorithm for fast hierarchical community detection by modularity optimisation. O(n log n) complexity for large graphs. Primary algorithm reference for primitive #3.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "KossWatts2006",
+      "name": "Empirical analysis of an evolving social network",
+      "url": "https://doi.org/10.1126/science.1116869",
+      "description": "Kossinets and Watts (2006). Science. Longitudinal analysis of a university email network. Demonstrates how temporal dynamics and triadic closure drive network evolution. Primary reference for temporal network evolution in primitive #11.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "HolmeSaramaki2012",
+      "name": "Temporal networks",
+      "url": "https://doi.org/10.1016/j.physrep.2012.03.001",
+      "description": "Holme and Saramäki (2012). Physics Reports. Comprehensive review of temporal network formalisms, time-respecting paths, burstiness, and consequences for spreading processes. Primary reference for primitive #11.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "AdamicAdar2003",
+      "name": "Friends and neighbors on the Web",
+      "url": "https://doi.org/10.1016/S0378-8733(03)00009-1",
+      "description": "Adamic and Adar (2003). Social Networks. Introduces the Adamic-Adar index for link prediction using common neighbors weighted by inverse log frequency. Primary reference for primitive #8.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Perozzi2014",
+      "name": "DeepWalk: Online Learning of Social Representations",
+      "url": "https://doi.org/10.1145/2623330.2623732",
+      "description": "Perozzi, Al-Rfou, and Skiena (2014). KDD. Introduces DeepWalk — random-walk sequences fed to SkipGram to learn node embeddings. Foundational graph embedding algorithm. Primary reference for primitive #10.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "GroverLeskovec2016",
+      "name": "node2vec: Scalable Feature Learning for Networks",
+      "url": "https://doi.org/10.1145/2939672.2939754",
+      "description": "Grover and Leskovec (2016). KDD. Introduces node2vec — biased random walks with BFS/DFS balance parameters p and q to learn embeddings that capture both structural equivalence and community membership. Primary reference for primitive #10.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "KipfWelling2017",
+      "name": "Semi-Supervised Classification with Graph Convolutional Networks",
+      "url": "https://arxiv.org/abs/1609.02907",
+      "description": "Kipf and Welling (2017). ICLR. Introduces GCN — spectral graph convolutions for semi-supervised node classification. Foundational graph neural network reference for primitive #10.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ClausetPowerLaw2009",
+      "name": "Power-law distributions in empirical data",
+      "url": "https://doi.org/10.1137/070710111",
+      "description": "Clauset, Shalizi, and Newman (2009). SIAM Review. Rigorous maximum-likelihood method and goodness-of-fit test for power-law distributions. Necessary statistical methodology for verifying scale-free claims in primitive #5.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "BroidoClauset2019",
+      "name": "Scale-free networks are rare",
+      "url": "https://doi.org/10.1038/s41467-019-08746-5",
+      "description": "Broido and Clauset (2019). Nature Communications. Empirical assessment of 927 networks using a strict statistical definition (maximum-likelihood power-law fit across a full 5-tier taxonomy from 'super-weak' to 'strongest'). Finds only ~4% meet the 'strongest' scale-free criterion, though 57% qualify under at least the weakest tier. Use as a caution source before claiming strong scale-free structure — but see Holme2019 for the contested framing of this result.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "StumpfWiufMay2005SamplingBias",
+      "name": "Subnets of scale-free networks are not scale-free: Sampling properties of networks",
+      "url": "https://doi.org/10.1073/pnas.0501179102",
+      "description": "Stumpf, Wiuf, and May (2005). PNAS 102(12):4221-4224. Shows that random subsampling of a scale-free network does not, in general, produce a scale-free subnet — the sampled degree distribution can belong to a different family than the true underlying distribution (this holds for classical/exponential random graphs but not for scale-free ones). Foundational result for 'the network you measure isn't the network that exists': API crawls, snowball samples, and partial graphs used in most applied network analysis are subnets, and their apparent degree distribution is not a reliable estimate of the full network's. VERIFIED 2026-07-11.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Holme2019RareEverywhere",
+      "name": "Rare and everywhere: Perspectives on scale-free networks",
+      "url": "https://doi.org/10.1038/s41467-019-09038-8",
+      "description": "Petter Holme (2019). Nature Communications 10:1016. Companion commentary published alongside Broido & Clauset (2019), reframing the same evidence: whether a network 'is scale-free' is highly sensitive to the strictness of the statistical definition used, and scale-freeness is only cleanly defined in the infinite-size limit — finite empirical networks always require a judgment call on tolerance. Represents the contested, not settled, status of the scale-free debate: Barabási and others separately disputed Broido & Clauset's methodology and thresholds in public commentary. VERIFIED 2026-07-11.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Freeman1977",
+      "name": "A set of measures of centrality based on betweenness",
+      "url": "https://doi.org/10.2307/3033543",
+      "description": "Freeman (1977). Sociometry. Foundational paper defining betweenness centrality as the fraction of all-pairs shortest paths passing through a node. Primary reference for centrality measures in primitive #1.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Pastor-Satorras2001",
+      "name": "Epidemic Spreading in Scale-Free Networks",
+      "url": "https://doi.org/10.1103/PhysRevLett.86.3200",
+      "description": "Pastor-Satorras and Vespignani (2001). Physical Review Letters. Shows that SIR/SIS epidemics on scale-free networks have a vanishing epidemic threshold due to degree heterogeneity. Key result for SIR on scale-free networks in primitives #5 and #7.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "AlbertBarabasiRobustness2000",
+      "name": "Error and attack tolerance of complex networks",
+      "url": "https://doi.org/10.1038/35019019",
+      "description": "Albert, Jeong, and Barabási (2000). Nature. Demonstrates that scale-free networks are robust to random failures but fragile under targeted hub attacks — foundational percolation result. Primary reference for primitive #6.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "LuZhou2011",
+      "name": "Link prediction in complex networks: A survey",
+      "url": "https://doi.org/10.1016/j.physa.2010.11.027",
+      "description": "Lü and Zhou (2011). Physica A. Comprehensive survey of link prediction methods: common neighbors, Jaccard, Adamic-Adar, Katz index, random walk scores, and matrix factorisation baselines. Primary reference for primitive #8.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Arnaudon2025HypergraphRecon",
+      "name": "Hypergraph reconstruction from dynamics",
+      "url": "https://doi.org/10.1038/s41467-025-57664-2",
+      "description": "Arnaudon et al. (2025). Nature Communications 16:2691. Introduces THIS (Taylor-based Hypergraph Inference using SINDy): reconstructs hypergraphs and simplicial complexes from time-series data without knowledge of coupling functions. Reveals >60% of EEG dynamics arise from non-pairwise interactions. Code: Zenodo 10.5281/zenodo.10530470. Corroborating primitive: #11 temporal networks, higher-order structure inference.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Lucas2026HigherOrderReducibility",
+      "name": "Reducibility of higher-order networks from dynamics",
+      "url": "https://doi.org/10.1038/s41467-025-68273-4",
+      "description": "Lucas et al. (2026). Nature Communications. Information-theoretic framework (density matrix + multiorder Laplacian) to test whether a hypergraph reduces to pairwise interactions without dynamical information loss. Analyzed 60 real-world datasets; contact networks reducible, coauthorship not; degree heterogeneity is the key predictor. Code: https://github.com/maximelucas/hypergraph_reducibility. Maps to primitives #3 and #11 as a preprocessing test.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "FerrazDeArruda2024HigherOrderContagion",
+      "name": "Contagion dynamics on higher-order networks",
+      "url": "https://doi.org/10.1038/s42254-024-00733-0",
+      "description": "Ferraz de Arruda, Aleta, and Moreno (2024). Nature Reviews Physics. Review of SIR/SIS contagion on hypergraphs and simplicial complexes. Establishes that group interactions produce discontinuous phase transitions with bistability and hysteresis, dual thresholds, and explosive spreading absent in pairwise models. Key update to primitive #7.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Iacopini2025CollectiveDynamicsHigherOrder",
+      "name": "Collective dynamics on higher-order networks",
+      "url": "https://doi.org/10.1038/s42254-025-00916-3",
+      "description": "Battiston, Bick, Lucas, Millán, Skardal, and Zhang (2026). Nature Reviews Physics 8:146-159, published 2026-02-16 (preprint arXiv:2510.05253, 2025). CORRECTED 2026-07-11: previously misattributed to 'Iacopini et al.' — Iacopini is not an author of this paper; verified author list is Battiston, Bick, Lucas, Millán, Skardal, Zhang. Surveys how higher-order interactions reshape collective dynamics including synchronization, contagion, and consensus. Key result: higher-order couplings induce subcritical bifurcations, creating bistability absent in pairwise networks. Corroborates FerrazDeArruda2024.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Dhulipala2024GVELeiden",
+      "name": "GVE-Leiden: Fast Leiden Algorithm for Community Detection in Shared Memory Setting",
+      "url": "https://doi.org/10.1145/3673038.3673146",
+      "description": "Sahu, Kothapalli, and Banerjee (2024). ICPP 2024, ACM. CORRECTED 2026-07-11: previously misattributed to 'Dhulipala and Shun' — verified authors are Subhajit Sahu, Kishore Kothapalli, and Dip Sankar Banerjee (IIIT Hyderabad / IIT Jodhpur). Parallel OpenMP implementation of Leiden community detection. Outperforms NetworKit Leiden by 8.2×, GPU cuGraph by 3.0×; processes 3.8B-edge graphs at 403M edges/s. Code: https://github.com/puzzlef/leiden-communities-openmp, Zenodo 10.5281/zenodo.11778357. Key operational update to primitive #3 for large-scale use.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Huang2025TGBSeq",
+      "name": "TGB-Seq Benchmark: Challenging Temporal GNNs with Complex Sequential Dynamics",
+      "url": "https://arxiv.org/abs/2502.02975",
+      "description": "Yi, Peng, Zheng, Mo, Wei, Ye, Zixuan, and Huang (2025). ICLR 2025. CORRECTED 2026-07-11: previously cited as 'Huang et al.' — Zengfeng Huang is the last (senior) author, not first author; first author is Lu Yi, so the conventional short-cite is 'Yi et al.'. Introduces TGB-Seq benchmark with minimized repeated edges to test genuine sequential dynamics learning. Finds that GraphMixer and DyGFormer are incapable of learning sequential dynamics, suffering significant performance degradation. Exposes overfit-to-recurrence failure mode in temporal GNNs. Code + leaderboard: tgb.complexdatalab.com. Maps to primitive #11.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Wang2025GraphFoundationModels",
+      "name": "Graph Foundation Models: Concepts, Opportunities and Challenges",
+      "url": "https://doi.org/10.1109/TPAMI.2025.3548729",
+      "description": "Liu, Yang, Lu, Chen, Li, Zhang, Bai, Fang, Sun, Yu, and Shi (2025). IEEE TPAMI 47(6):5023-5044. CORRECTED 2026-07-11: previously misattributed to 'Wang et al.' — verified first author is Jiawei Liu, not Wang; no author named Wang appears on this paper. Taxonomy and survey of Graph Foundation Models (GFMs): pre-trained large graph models that generalize across domains via zero-shot/few-shot transfer. Three categories: universal, domain-specific, task-specific GFMs. Demonstrates cross-domain zero-shot performance on node classification and link prediction. Extends primitive #10 graph embeddings substantially.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Peixoto2023DescriptiveVsInferential",
+      "name": "Descriptive vs. Inferential Community Detection in Networks: Pitfalls, Myths and Half-Truths",
+      "url": "https://doi.org/10.1017/9781009118897",
+      "description": "Tiago P. Peixoto (2023). Cambridge University Press (Elements in the Structure and Dynamics of Complex Networks). arXiv:2112.00183. Establishes the descriptive vs. inferential distinction in community detection: descriptive methods (modularity, Louvain) always return a partition without testing whether structure exists; inferential methods (SBM) perform Bayesian model selection under a generative stochastic block model and can answer 'is there community structure at all?' Avoids resolution limit by construction. Code: graph-tool https://graph-tool.skewed.de/. VERIFIED 2026-05-17.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "PeixotoKirkley2023CheapLunches",
+      "name": "Implicit models, latent compression, intrinsic biases, and cheap lunches in community detection",
+      "url": "https://doi.org/10.1103/PhysRevE.108.024309",
+      "description": "Tiago P. Peixoto and Alec Kirkley (2023). Physical Review E 108, 024309. arXiv:2210.09186. Proves that inferential community detection methods have auditable implicit biases (unlike modularity's hidden resolution limit); shows these biases can be identified and corrected. Key result: 'cheap lunches' — both descriptive and inferential methods have biases, but inferential biases are transparent. Corroborates Peixoto2023 book. VERIFIED 2026-05-17.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Artime2024RobustnessResilience",
+      "name": "Robustness and resilience of complex networks",
+      "url": "https://doi.org/10.1038/s42254-023-00676-y",
+      "description": "Oriol Artime, Marco Grassia, Manlio De Domenico, James P. Gleeson, Hernán A. Makse, Giuseppe Mangioni, Matjaž Perc, and Filippo Radicchi (2024). Nature Reviews Physics 6, 114–131. Comprehensive review covering multilayer and interdependent network percolation, optimal dismantling, cascading failures, and early-warning signals. Key result: cross-layer dependency links produce first-order (abrupt, catastrophic) percolation transitions qualitatively different from single-layer gradual collapse. Code: https://github.com/NetworkDismantling/review. VERIFIED 2026-05-17.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Watts2002Cascades",
+      "name": "A simple model of global cascades on random networks",
+      "url": "https://doi.org/10.1073/pnas.082090499",
+      "description": "Duncan J. Watts (2002). PNAS 99(9): 5766–5771. Foundational threshold/complex contagion model. Introduces node adoption threshold φᵢ (fraction of neighbours that must have adopted before node i adopts) and derives cascade conditions on random networks. Shows clustered networks can accelerate complex contagion (repeated exposure from same neighborhood), contrasting with SIR where clustering slows spread. Canonical reference for complex contagion / social adoption modelling. NOTE: DOI confirmed structurally correct (pnas.082090499); primary URL 403 in this session — well-established canonical reference cited by 10000+ papers.",
+      "add_as_web_search": false
+    }
+  ]
+}

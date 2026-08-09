@@ -1,0 +1,174 @@
+{
+  "metadata": {
+    "title": "Theory of Constraints Foundations — Sources",
+    "description": "Primary books and references for 11 TOC primitives: five focusing steps, drum-buffer-rope, throughput accounting, evaporating cloud, current/future reality trees, prerequisite and transition trees, critical chain, policy constraints, and thinking processes. Includes software/DevOps lineage (Phoenix Project, DevOps Handbook, Flow Framework) and 2025 empirical literature.",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-theory-of-constraints",
+    "total_sources": 23
+  },
+  "books": [
+    {
+      "id": "TheGoal",
+      "name": "The Goal: A Process of Ongoing Improvement",
+      "url": "https://www.northriverpress.com/the-goal/",
+      "description": "Goldratt, E.M. & Cox, J. (1984). The foundational TOC text. Source for Five Focusing Steps (primitive 01) and the TOC system concept. 3rd revised edition 2004.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "TheRace",
+      "name": "The Race",
+      "url": "https://www.northriverpress.com/the-race/",
+      "description": "Goldratt, E.M. & Fox, R.E. (1986). Introduces Drum-Buffer-Rope and flow-based production scheduling. Source for primitive 02 (DBR).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "HaystackSyndrome",
+      "name": "The Haystack Syndrome: Sifting Information Out of the Data Ocean",
+      "url": "https://www.northriverpress.com/the-haystack-syndrome/",
+      "description": "Goldratt, E.M. (1990). Introduces Throughput Accounting (T, I, OE framework) and the distinction from cost accounting. Source for primitive 03 (Throughput Accounting) and primitive 10 (Policy Constraints).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ItsNotLuck",
+      "name": "It's Not Luck",
+      "url": "https://www.northriverpress.com/its-not-luck/",
+      "description": "Goldratt, E.M. (1994). Introduces the full Thinking Processes suite: Evaporating Cloud, CRT, FRT, PRT, TT. Source for primitives 04–08 and 11.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "CriticalChain",
+      "name": "Critical Chain",
+      "url": "https://www.northriverpress.com/critical-chain/",
+      "description": "Goldratt, E.M. (1997). Introduces Critical Chain Project Management (CCPM), Project Buffer, Feeding Buffer, and buffer management. Source for primitive 09.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ConstraintsManagementHandbook",
+      "name": "The Constraints Management Handbook",
+      "url": "https://www.routledge.com/The-Constraints-Management-Handbook/Cox-Spencer/p/book/9781574440072",
+      "description": "Cox, J.F. & Spencer, M.S. (1998). CRC Press/St. Lucie Press. Comprehensive reference for all TOC concepts including 5FS, DBR, TA, and Thinking Processes. Source for all 11 primitives.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ThroughputAccounting",
+      "name": "Throughput Accounting",
+      "url": "https://www.northriverpress.com/throughput-accounting/",
+      "description": "Corbett, T. (1998). North River Press. Dedicated treatment of T/I/OE measurement, T/CU product mix decisions, and the comparison with cost accounting. Source for primitive 03.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ProjectManagementFastLane",
+      "name": "Project Management in the Fast Lane: Applying the Theory of Constraints",
+      "url": "https://www.routledge.com/Project-Management-in-the-Fast-Lane-Applying-the-Theory-of-Constraints/Newbold/p/book/9781574440744",
+      "description": "Newbold, R.C. (1998). St. Lucie Press. Practical CCPM application including buffer sizing, critical chain identification, and resource buffers. Source for primitive 09.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ThinkingForChange",
+      "name": "Thinking for a Change: Putting the TOC Thinking Processes to Work",
+      "url": "https://www.routledge.com/Thinking-for-a-Change-Putting-the-TOC-Thinking-Processes-to-Work/Scheinkopf/p/book/9781574441635",
+      "description": "Scheinkopf, L.J. (1999). CRC Press. Practitioner guide to applying all five Thinking Processes. Source for primitive 11 and detailed application guidance for primitives 04–08.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "CriticalChainProjectManagement",
+      "name": "Critical Chain Project Management",
+      "url": "https://us.artechhouse.com/Critical-Chain-Project-Management-P978.aspx",
+      "description": "Leach, L.P. (2000). Artech House. Comprehensive CCPM implementation guide including S-DBR for project management. Source for primitive 09.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ManufacturingAtWarpSpeed",
+      "name": "Manufacturing at Warp Speed: Optimizing Supply Chain Financial Performance",
+      "url": "https://www.routledge.com/Manufacturing-at-Warp-Speed-Optimizing-Supply-Chain-Financial-Performance/Schragenheim-Dettmer/p/book/9781574443219",
+      "description": "Schragenheim, E. & Dettmer, H.W. (2001). CRC Press. Advanced DBR and policy constraint application in supply chain and operations. Source for primitives 02 and 10.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "LogicalThinkingProcess",
+      "name": "The Logical Thinking Process: A Systems Approach to Complex Problem Solving",
+      "url": "https://asq.org/quality-press/display-item?item=H1199",
+      "description": "Dettmer, H.W. (2007). ASQ Quality Press. The most comprehensive academic treatment of all five Thinking Processes including Categories of Legitimate Reservation. Source for primitives 04–08 and 11.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "SupplyChainAtWarpSpeed",
+      "name": "Supply Chain Management at Warp Speed: Integrating the System from End to End",
+      "url": "https://www.routledge.com/Supply-Chain-Management-at-Warp-Speed-Integrating-the-System-from-End/Schragenheim-Dettmer-Patterson/p/book/9781420073577",
+      "description": "Schragenheim, E., Dettmer, H.W. & Patterson, J.W. (2009). CRC Press. Introduces Simplified DBR (S-DBR). Source for primitive 02.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "GoldrattBeyondTheGoal",
+      "name": "Beyond the Goal: Eliyahu Goldratt Speaks on the Theory of Constraints",
+      "url": "https://www.northriverpress.com/beyond-the-goal/",
+      "description": "Goldratt, E.M. (2005). Audio/book collection covering TOC applications to services, projects, and distribution. Background reference for all 11 primitives.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "PhoenixProject",
+      "name": "The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win",
+      "url": "https://itrevolution.com/product/the-phoenix-project/",
+      "description": "Kim, G., Behr, K. & Spafford, G. (2013). IT Revolution Press. The primary text translating Goldratt's Three Ways and TOC constraint logic into IT operations and software delivery. Explicitly modeled on The Goal; introduced 'The Four Types of Work' and the Three Ways (flow, feedback, continual learning). 500,000+ copies sold. Source for software/DevOps application of 5FS, DBR, and Policy Constraints.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "DevOpsHandbook",
+      "name": "The DevOps Handbook: How to Create World-Class Agility, Reliability, and Security in Technology Organizations",
+      "url": "https://itrevolution.com/product/the-devops-handbook/",
+      "description": "Kim, G., Humble, J., Debois, P. & Willis, J. (2016). IT Revolution Press. Second edition 2021. Formalizes 'The First Way' (flow) as direct application of TOC constraint logic to software delivery pipelines. The industry-standard bridge between Goldratt's manufacturing model and DevOps practice. Source for software/DevOps application of 5FS, DBR, and throughput accounting.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ProjectToProduct",
+      "name": "Project to Product: How to Survive and Thrive in the Age of Digital Disruption with the Flow Framework",
+      "url": "https://itrevolution.com/product/project-to-product/",
+      "description": "Kersten, M. (2018). IT Revolution Press. Introduces the Flow Framework, which maps TOC's Five Focusing Steps onto software value streams. Defines four Flow Items (features, defects, risks, debt) and five Flow Metrics (velocity, time, efficiency, load, distribution). Treats the value stream as the drum in a DBR-equivalent model. Source for software application of 5FS (primitive 01) and DBR (primitive 02) via Flow Load as the buffer signal.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "FlowEngineering",
+      "name": "Flow Engineering: From Value Stream Mapping to Effective Action",
+      "url": "https://itrevolution.com/product/flow-engineering/",
+      "description": "Pereira, S. & Davis, A. (2024). IT Revolution Press. 304 pages. Five-map workshop methodology grounded in Value Stream Mapping, cybernetics, and the Toyota Production System. Operationalizes TOC constraint identification in software and knowledge-work contexts; connects to CRT and 5FS via collaborative mapping. 2026 Axiom Book Awards Gold Medal winner. Source for applied VSM-as-constraint-identification in software delivery.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "CCPMSystematicReview2025",
+      "name": "Critical Chain Project Management: A Systematic Literature Review (2025)",
+      "url": "https://www.mdpi.com/2076-3417/15/15/8147",
+      "description": "MDPI Applied Sciences, Volume 15, Issue 15, 2025. DOI: 10.3390/app15158147. Systematic literature review analyzing 62 CCPM studies from Scopus and Web of Science (2014–2025). Key findings: most studies use simulation/modeling; construction and manufacturing dominate; growing integration trend with Scrum, Lean Construction, and predictive algorithms. Note: full paper behind MDPI paywall at time of last verification; DOI and bibliographic metadata confirmed via publisher redirect. The specific 19.3% construction time reduction finding cited in some summaries derives from a separate 2023 MDPI Buildings study — treat as unconfirmed detail until primary paper is read.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "MabinCavana2024",
+      "name": "Integrating TOC Thinking Processes with Qualitative System Dynamics",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/sdr.1768",
+      "description": "Mabin, V.J. & Cavana, R.Y. (2024). System Dynamics Review, Wiley. DOI: 10.1002/sdr.1768. Provides a six-stage framework combining TOC Thinking Processes (CRT) with qualitative system dynamics (Qual SD) modeling. Demonstrates that CRT + SD modeling produces more collective insights than either method alone. Peer-reviewed. Note: volume/issue number could not be independently confirmed from primary source (paywall); DOI confirmed valid. Applies to complex multi-stakeholder constraint scenarios that resist single-root CRT analysis.",
+      "add_as_web_search": false
+    }
+  ],
+  "articles": [
+    {
+      "id": "RevengeOfQA2026",
+      "name": "The Revenge of QA: How AI Code Generation Is Exposing Decades of Process Debt",
+      "url": "https://itrevolution.com/articles/the-revenge-of-qa-how-ai-code-generation-is-exposing-decades-of-process-debt/",
+      "description": "Brown, L. (January 2026). IT Revolution. Practitioner synthesis framing AI-driven code review bottleneck as a direct TOC/5FS problem: code creation is not the constraint — verification, code review, and integration are. References 'Revenge of QA' (Hendrickson, Fredrick, Enochs, Willis, Kazempour; Enterprise Technology Leadership Journal, Fall 2025). Evidence grade B: practitioner synthesis, not peer-reviewed RCT.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ShiftingBottleneckLogilica2025",
+      "name": "The Shifting Bottleneck Conundrum: How AI Is Reshaping the Software Development Lifecycle",
+      "url": "https://www.logilica.com/blog/the-shifting-bottleneck-conundrum-how-ai-is-reshaping-the-software-development-lifecycle",
+      "description": "Logilica (December 9, 2025). Independent practitioner analysis of AI-driven code review bottleneck. Key claims: 67% of developers use AI for coding yet merge approvals remain 77% human-controlled; median engineer at large company takes ~13 hours to merge a PR; teams using AI-assisted review see 30% faster merge approvals. Corroborates the constraint-shift pattern documented by Faros AI (2025) and IT Revolution (2026). Evidence grade B: observational practitioner data, not RCT.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "RubinsteinMeyerEvans2001",
+      "name": "Executive Control of Cognitive Processes in Task Switching",
+      "url": "https://doi.org/10.1037/0096-1523.27.4.763",
+      "description": "Rubinstein, J.S., Meyer, D.E. & Evans, J.E. (2001). Journal of Experimental Psychology: Human Perception and Performance, 27(4), 763-797. DOI: 10.1037/0096-1523.27.4.763. Peer-reviewed, replicated experimental evidence that task switching imposes a measurable time cost, increasing with rule complexity and decreasing with advance cuing. Independent cognitive-psychology research, not a TOC or CCPM study — cited in this skill as mechanism-level corroboration for Critical Chain's anti-multitasking guidance, not as validation of Goldratt's specific throughput-loss percentages. Source for primitive 09 (Critical Chain) evidence-grading section.",
+      "add_as_web_search": false
+    }
+  ]
+}

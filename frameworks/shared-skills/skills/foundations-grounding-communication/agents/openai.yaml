@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grounding Communication Foundations"
+  short_description: "Applies grounding theory to agent handoffs"
+  default_prompt: "Use $foundations-grounding-communication to design or audit a human-AI or agent-agent handoff for common ground, acceptance evidence, repair, and presupposition failures."

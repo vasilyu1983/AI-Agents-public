@@ -1,0 +1,248 @@
+{
+  "metadata": {
+    "skill": "software-architecture-design",
+    "description": "Official-first resources for runtime architecture, platform design, distributed systems, and estate modernization",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 36,
+    "title": "Software Architecture Design - Sources"
+  },
+  "architecture_patterns": [
+    {
+      "name": "Microsoft Azure Architecture Center",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/",
+      "description": "Official cloud architecture patterns, reference architectures, and design guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AWS Well-Architected Framework",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html",
+      "description": "Official AWS guidance across reliability, security, operations, performance, cost, and sustainability",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Google Cloud Architecture Framework",
+      "url": "https://cloud.google.com/architecture/framework",
+      "description": "Official Google Cloud system-design and operational-guidance framework",
+      "add_as_web_search": true
+    },
+    {
+      "name": "C4 Model",
+      "url": "https://c4model.com/",
+      "description": "Durable architecture communication model for context, containers, components, and code",
+      "add_as_web_search": false
+    },
+    {
+      "name": "The Twelve-Factor App",
+      "url": "https://12factor.net/",
+      "description": "Durable operational design principles for cloud-native applications",
+      "add_as_web_search": false
+    }
+  ],
+  "adr_templates": [
+    {
+      "name": "Azure Well-Architected - Architecture Decision Record",
+      "url": "https://learn.microsoft.com/en-us/azure/well-architected/architect-role/architecture-decision-record",
+      "description": "Official Azure guidance for ADR usage and content",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AWS ADR Best Practices",
+      "url": "https://aws.amazon.com/blogs/architecture/master-architecture-decision-records-adrs-best-practices-for-effective-decision-making/",
+      "description": "Official AWS guidance on effective ADR process and governance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Documenting Architecture Decisions",
+      "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+      "description": "Canonical ADR write-up for documenting tradeoffs and irreversible choices",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Architectural Decision Records (adr.github.io)",
+      "url": "https://adr.github.io/",
+      "description": "Community-maintained ADR hub: MADR/Nygard/Y-Statement templates and a current tooling catalog (adr-tools, adr.zone, ReflectRally, dotnet-adr); verify tool statuses here before recommending one",
+      "add_as_web_search": true
+    }
+  ],
+  "distributed_systems": [
+    {
+      "name": "Azure Pattern - Queue-Based Load Leveling",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+      "description": "Official pattern for smoothing bursty workloads and decoupling producers from consumers",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Pattern - Competing Consumers",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/competing-consumers",
+      "description": "Official pattern for parallel work consumption and throughput scaling",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Pattern - Circuit Breaker",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker",
+      "description": "Official pattern for isolating dependency failures and preventing cascades",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Pattern - Retry",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/retry",
+      "description": "Official retry and backoff guidance for transient-failure handling",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Pattern - Bulkhead",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead",
+      "description": "Official pattern for isolating resources and containing failure blast radius",
+      "add_as_web_search": true
+    }
+  ],
+  "scalability_reliability": [
+    {
+      "name": "Google SRE Book",
+      "url": "https://sre.google/sre-book/table-of-contents/",
+      "description": "Official Google site reliability engineering reference",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Google SRE Workbook",
+      "url": "https://sre.google/workbook/table-of-contents/",
+      "description": "Official implementation guidance for SLOs, incident response, and reliability operations",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Azure Pattern - Sharding",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/sharding",
+      "description": "Official database-partitioning guidance for scale and isolation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenTelemetry Documentation",
+      "url": "https://opentelemetry.io/docs/",
+      "description": "Official observability framework documentation for metrics, logs, and traces",
+      "add_as_web_search": true
+    }
+  ],
+  "event_driven": [
+    {
+      "name": "AsyncAPI Documentation",
+      "url": "https://www.asyncapi.com/docs",
+      "description": "Official documentation for message-driven and event-driven interface design",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AWS Event-Driven Architecture",
+      "url": "https://aws.amazon.com/event-driven-architecture/",
+      "description": "Official AWS guidance for event-driven systems and integration posture",
+      "add_as_web_search": true
+    }
+  ],
+  "observability": [
+    {
+      "name": "OpenTelemetry Observability Primer",
+      "url": "https://opentelemetry.io/docs/concepts/observability-primer/",
+      "description": "Official primer for traces, metrics, and logs in production systems",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Google SRE - Service Level Objectives",
+      "url": "https://sre.google/sre-book/service-level-objectives/",
+      "description": "Official SLO and error-budget guidance",
+      "add_as_web_search": false
+    }
+  ],
+  "api_design": [
+    {
+      "name": "OpenAPI Specification",
+      "url": "https://spec.openapis.org/oas/latest.html",
+      "description": "Official HTTP API contract specification",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure API Design Best Practices",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design",
+      "description": "Official API design guidance for HTTP services",
+      "add_as_web_search": true
+    },
+    {
+      "name": "RFC 9457 - Problem Details for HTTP APIs",
+      "url": "https://www.rfc-editor.org/rfc/rfc9457",
+      "description": "Standardized error-response format for HTTP APIs",
+      "add_as_web_search": true
+    }
+  ],
+  "modern_architecture_2026": [
+    {
+      "name": "Istio Ambient Mode Overview",
+      "url": "https://istio.io/latest/docs/ambient/overview/",
+      "description": "Official overview of ambient mesh for service-to-service connectivity",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Model Context Protocol Specification",
+      "url": "https://modelcontextprotocol.io/specification/draft/basic",
+      "description": "Official MCP specification for tool and context interoperability",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Agent2Agent Protocol Specification",
+      "url": "https://a2aproject.github.io/A2A/latest/specification/",
+      "description": "Official A2A specification for agent-to-agent communication",
+      "add_as_web_search": true
+    }
+  ],
+  "optional_ai_architecture": [
+    {
+      "name": "Model Context Protocol Specification - Draft",
+      "url": "https://modelcontextprotocol.io/specification/draft/basic",
+      "description": "Use for current MCP capabilities, transport, and interoperability details",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Agent2Agent Protocol Specification",
+      "url": "https://a2aproject.github.io/A2A/latest/specification/",
+      "description": "Use for current A2A task, artifact, and transport semantics",
+      "add_as_web_search": true
+    }
+  ],
+  "platform_engineering_2026": [
+    {
+      "name": "Backstage - What Is Backstage?",
+      "url": "https://backstage.io/docs/overview/what-is-backstage",
+      "description": "Official overview of Backstage as an internal developer portal and platform surface",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Backstage Software Catalog Overview",
+      "url": "https://backstage.io/docs/features/software-catalog/software-catalog-overview",
+      "description": "Official software catalog guidance for ownership, discovery, and metadata",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Backstage Software Templates",
+      "url": "https://backstage.io/docs/features/software-templates/",
+      "description": "Official template-based golden-path guidance for self-service platforms",
+      "add_as_web_search": true
+    }
+  ],
+  "estate_modernization_2026": [
+    {
+      "name": "AWS Prescriptive Guidance - Strangler Fig",
+      "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/strangler-fig.html",
+      "description": "Official incremental modernization pattern for controlled migration from legacy systems",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AWS Prescriptive Guidance - Decomposing Monoliths FAQ",
+      "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-decomposing-monoliths/faq.html",
+      "description": "Official guidance on decomposition tradeoffs and business-capability boundaries",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Pattern - Anti-Corruption Layer",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer",
+      "description": "Official pattern for isolating new architecture from legacy semantics during migration",
+      "add_as_web_search": true
+    }
+  ]
+}

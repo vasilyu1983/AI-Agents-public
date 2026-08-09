@@ -1,0 +1,4 @@
+interface:
+  display_name: "Incident Response"
+  short_description: "Guides incident response from detection through postmortem"
+  default_prompt: "Use $ops-incident-response for Guides incident response from detection through postmortem. Use when designing on-call runbooks, triaging production incidents, writing status updates, or improving MTTD and MTTR."

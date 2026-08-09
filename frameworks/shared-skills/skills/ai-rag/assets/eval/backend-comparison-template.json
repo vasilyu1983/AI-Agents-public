@@ -1,0 +1,44 @@
+{
+  "comparison_id": "generic-retrieval-backend-comparison",
+  "corpus": {
+    "name": "replace-with-corpus-name",
+    "document_count": 0,
+    "retrieval_unit_count": 0,
+    "embedding_model": "provider/model@dimension",
+    "chunker_version": "chunker-name@version"
+  },
+  "queries": "assets/eval/golden-retrieval-cases.jsonl",
+  "backends": [
+    {
+      "backend": "pgvector",
+      "retrieval_mode": "hybrid_rrf",
+      "index_config": {"vector_index": "hnsw", "lexical": "postgres_fts"},
+      "prediction_file": "runs/pgvector.predictions.jsonl"
+    },
+    {
+      "backend": "qdrant",
+      "retrieval_mode": "dense_sparse_rrf",
+      "index_config": {"dense": true, "sparse": true, "multivector_rerank": false},
+      "prediction_file": "runs/qdrant.predictions.jsonl"
+    },
+    {
+      "backend": "search_engine_hybrid",
+      "retrieval_mode": "bm25_plus_vector",
+      "index_config": {"engine": "elasticsearch_or_opensearch", "fusion": "rrf"},
+      "prediction_file": "runs/search-engine.predictions.jsonl"
+    },
+    {
+      "backend": "hosted_retrieval",
+      "retrieval_mode": "provider_managed",
+      "index_config": {"provider": "replace-with-provider", "defaults_documented": true},
+      "prediction_file": "runs/hosted.predictions.jsonl"
+    }
+  ],
+  "report_metrics": ["recall@5", "recall@10", "mrr@10", "ndcg@10", "p50_latency_ms", "p95_latency_ms", "empty_result_rate", "citation_coverage"],
+  "rules": [
+    "Use the same corpus snapshot and expected evidence IDs for every backend.",
+    "Do not compare backend claims from marketing pages; compare prediction files.",
+    "Slice results by query tags before choosing a backend.",
+    "Record index build time, memory footprint, and re-embed/reindex cost separately from query quality."
+  ]
+}

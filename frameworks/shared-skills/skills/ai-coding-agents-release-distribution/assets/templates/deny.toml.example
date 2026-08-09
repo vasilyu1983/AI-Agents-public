@@ -1,0 +1,108 @@
+# deny.toml.example
+#
+# Supply-chain security policy for coding-agent custom distributions.
+# Based on the Goose custom-distro and cargo-deny pattern.
+# Copy this file to your distribution's root as `deny.toml` and fill in values.
+#
+# This file is checked by the distribution build pipeline before packaging.
+# A build that violates any rule below must fail with a clear error message.
+
+[meta]
+# Minimum deny.toml schema version the build tool must support.
+schema_version = "1"
+
+# ── Licenses ──────────────────────────────────────────────────────────────────
+# Specify which licenses are allowed in runtime dependencies.
+# Unlisted licenses cause the build to fail.
+
+[licenses]
+allow = [
+  "MIT",
+  "Apache-2.0",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "ISC",
+  "MPL-2.0",        # copyleft but file-scoped; review before including
+  "CC0-1.0",
+  "Unlicense",
+]
+
+# Licenses that are explicitly denied.
+deny = [
+  "GPL-2.0",
+  "GPL-3.0",
+  "AGPL-3.0",       # network copyleft; incompatible with closed distributions
+  "LGPL-2.0",
+  "LGPL-2.1",
+  "LGPL-3.0",
+  "SSPL-1.0",
+  "BSL-1.1",
+]
+
+# Packages to exempt from the license check (e.g. dev-only tooling).
+# Format: "package-name@version-range"
+exceptions = [
+  # "some-dev-tool@*",
+]
+
+# ── Providers ─────────────────────────────────────────────────────────────────
+# Pin which model providers are allowed in this distribution.
+# Any provider not in this list will be rejected at runtime startup.
+
+[providers]
+allow = [
+  "anthropic",
+  # "openai",
+  # "gemini",
+  # "ollama",
+]
+
+# ── Plugins ───────────────────────────────────────────────────────────────────
+# Control which plugins may be installed by end users.
+
+[plugins]
+# "all" allows any plugin from approved registries.
+# "pinned" only allows plugins explicitly listed in [[plugins.pinned]].
+mode = "pinned"
+
+[[plugins.pinned]]
+id      = "example-plugin"
+version = ">=1.0.0, <2.0.0"
+sha256  = "abc123..."   # set to the expected SHA-256 of the plugin archive
+
+# ── Registries ────────────────────────────────────────────────────────────────
+# Approved plugin registries. Only plugins from these registries will be fetched.
+
+[registries]
+allow = [
+  "https://plugins.yourorg.example/registry",
+]
+deny = [
+  # Block the public registry in enterprise distributions.
+  # "https://plugins.agent.example/registry",
+]
+
+# ── Network ───────────────────────────────────────────────────────────────────
+# Egress policy for the distribution binary itself (not agent sandbox — see sandbox-policy.toml).
+
+[network]
+# Allow telemetry to your own endpoint only; deny to third-party analytics.
+allow_telemetry_hosts = [
+  "telemetry.yourorg.example",
+]
+deny_telemetry_hosts = [
+  "analytics.third-party.example",
+]
+
+# ── Updates ───────────────────────────────────────────────────────────────────
+
+[updates]
+# Channel this distribution receives updates from.
+channel = "stable"   # stable | beta | nightly
+
+# Minimum version that may be auto-installed. Prevents downgrade attacks.
+min_auto_install_version = "1.0.0"
+
+# Require cryptographic signature verification before installing updates.
+require_signature = true
+signing_key_path  = "keys/update-signing.pub"

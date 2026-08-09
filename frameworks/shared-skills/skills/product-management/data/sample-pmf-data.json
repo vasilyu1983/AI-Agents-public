@@ -1,0 +1,28 @@
+{
+  "product_name": "Clearpath",
+  "assessment_date": "2026-03-21",
+  "segment": "SMB operations teams (10–200 employees)",
+  "assessor": "Founding PM",
+  "dimensions": {
+    "problem_severity": {
+      "score": 4,
+      "evidence": "78% of interviewed users rated the problem 9+/10 in pain severity. 3 churned from a competitor citing the same core gap. Users described the status-quo workaround as 'embarrassing spreadsheet archaeology'."
+    },
+    "solution_quality": {
+      "score": 3,
+      "evidence": "Sean Ellis survey: 34% 'very disappointed' (below 40% threshold). NPS = +22. Core workflow rated 4.1/5 in usability; onboarding completion rate 61% (target 75%). Advanced features used by fewer than 20% of actives."
+    },
+    "market_timing": {
+      "score": 4,
+      "evidence": "3 well-funded competitors launched in past 18 months, validating the category. Remote-first mandates accelerating tool consolidation. SMB ops software search volume up 38% YoY per keyword planner data (verified 2026-01)."
+    },
+    "team_market_fit": {
+      "score": 3,
+      "evidence": "Founders have 6 years of ops management experience. No prior SaaS company built. Deep domain expertise but first-time distribution challenge. One advisor is a former VP Ops at a 500-person co."
+    },
+    "economic_viability": {
+      "score": 2,
+      "evidence": "Current ARPA $89/mo; CAC $1,400 blended; payback 24 months (target <18). Gross margin 71%. Trial-to-paid 18% (industry benchmark 25%). LTV:CAC 1.8x — below 3x threshold. Pricing experiment underway."
+    }
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Accessibility"
+  short_description: "Implements accessibility fixes in code"
+  default_prompt: "Use $software-accessibility for Implements accessibility fixes in code. Use when remediating semantic HTML, ARIA, focus, keyboard support, or screen-reader behavior."

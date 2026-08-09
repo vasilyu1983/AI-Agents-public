@@ -1,0 +1,276 @@
+{
+  "metadata": {
+    "skill": "dev-contribution-quality-analysis",
+    "updated": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 31,
+    "description": "Sources for developer contribution quality analysis covering commit-level metrics, code quality measurement, AI attribution, and engineering productivity frameworks.",
+    "title": "Contribution Quality Analysis - Sources"
+  },
+  "categories": {
+    "developer_productivity_research": [
+      {
+        "name": "DX Core 4: Measuring Developer Productivity",
+        "url": "https://getdx.com/research/measuring-developer-productivity-with-the-dx-core-4/",
+        "type": "research",
+        "relevance": "Unified framework replacing standalone DORA/SPACE with four oppositional dimensions (speed, effectiveness, quality, impact). Current standard for productivity measurement.",
+        "update_frequency": "annual",
+        "access": "free"
+      },
+      {
+        "name": "DORA 2024 Accelerate State of DevOps Report",
+        "url": "https://dora.dev/research/2024/dora-report/",
+        "type": "research",
+        "relevance": "Industry benchmarks for delivery metrics. Finding: 7.2% stability decrease per 25% AI adoption increase — critical calibration data.",
+        "update_frequency": "annual",
+        "access": "free"
+      },
+      {
+        "name": "SPACE of Developer Productivity",
+        "url": "https://queue.acm.org/detail.cfm?id=3454124",
+        "type": "research",
+        "relevance": "Five-dimension framework (Satisfaction, Performance, Activity, Communication, Efficiency) that underpins DX Core 4.",
+        "update_frequency": "static",
+        "access": "free"
+      },
+      {
+        "name": "GitHub Octoverse 2025",
+        "url": "https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/",
+        "type": "research",
+        "relevance": "986M pushes analyzed. Provides baseline norms for commit frequency, PR size, and review patterns across the industry.",
+        "update_frequency": "annual",
+        "access": "free"
+      }
+    ],
+    "code_quality_measurement": [
+      {
+        "name": "GitClear Diff Delta Methodology",
+        "url": "https://www.gitclear.com/diff_delta_factors",
+        "type": "documentation",
+        "relevance": "Proprietary commit-level quality metric classifying line changes into 7 operations. The closest thing to ground-truth commit quality scoring.",
+        "update_frequency": "quarterly",
+        "access": "freemium"
+      },
+      {
+        "name": "GitClear AI Code Quality Research 2025",
+        "url": "https://www.gitclear.com/ai_assistant_code_quality_2025_research",
+        "type": "research",
+        "relevance": "211M lines analyzed (2020-2024). Key data: duplication +48%, refactoring -60%, churn +84%. Defines the quality baseline for AI-era commits.",
+        "update_frequency": "annual",
+        "access": "free"
+      },
+      {
+        "name": "CodeScene Behavioral Code Analysis",
+        "url": "https://codescene.com/product/behavioral-code-analysis",
+        "type": "tool",
+        "relevance": "Code Health scores (25+ factors, 1-10 scale) combined with git activity. Hotspot methodology for identifying high-risk code areas.",
+        "update_frequency": "continuous",
+        "access": "freemium"
+      },
+      {
+        "name": "SonarSource Cognitive Complexity",
+        "url": "https://www.sonarsource.com/resources/library/cyclomatic-complexity/",
+        "type": "guide",
+        "relevance": "Defines cognitive complexity as alternative to cyclomatic complexity. Better alignment with how developers process code mentally.",
+        "update_frequency": "static",
+        "access": "free"
+      }
+    ],
+    "ghost_engineering_research": [
+      {
+        "name": "Stanford Ghost Engineer Study",
+        "url": "https://www.yegordb.com/",
+        "type": "research",
+        "relevance": "50,000+ engineers at 100+ companies. 9.5% ghost engineers. Methodology: simulates 10-expert panel per commit (r=0.82 with expert judgment).",
+        "update_frequency": "static",
+        "access": "free"
+      },
+      {
+        "name": "METR AI Developer Productivity Study (arxiv 2507.09089)",
+        "url": "https://arxiv.org/abs/2507.09089",
+        "type": "research",
+        "relevance": "RCT, 16 developers, 246 tasks. Developers felt 20% faster but were actually 19% slower with early-2025 tools (CI: +2% to +39%). Follow-up (Feb 2026) found unreliable signal due to recruitment issues — effect uncertain for latest tools.",
+        "update_frequency": "static",
+        "access": "free"
+      },
+      {
+        "name": "DORA 2025: State of AI-Assisted Software Development",
+        "url": "https://dora.dev/dora-report-2025/",
+        "type": "research",
+        "relevance": "90% AI adoption reported; AI adoption now correlates with higher throughput (reversal from 2024). New 7-archetype methodology replaces low/medium/high/elite clusters. Core finding: AI is a 'mirror and multiplier' of existing team strengths/dysfunctions. Does NOT contain the 54%/242.7%/66.2% bug-incident-epic figures commonly cited alongside it — those are Faros AI's, see below.",
+        "update_frequency": "annual",
+        "access": "free"
+      },
+      {
+        "name": "Faros AI: AI Engineering Report 2026 — The Acceleration Whiplash",
+        "url": "https://www.faros.ai/research/ai-acceleration-whiplash",
+        "type": "research",
+        "relevance": "Proprietary telemetry across 22,000+ developers / 4,000+ teams (not survey-based like DORA). Bugs per developer +54%, incidents per PR +242.7%, epics completed per developer +66%. Frequently misattributed to the DORA 2025 report in secondary coverage — verify attribution before citing as 'DORA'.",
+        "update_frequency": "annual",
+        "access": "free"
+      }
+    ],
+    "ai_attribution_and_detection": [
+      {
+        "name": "Agent Trace Specification",
+        "url": "https://agent-trace.dev/",
+        "type": "specification",
+        "relevance": "Vendor-neutral RFC for recording AI vs. human contributions at file and line level. Four contributor types: human, AI, mixed, unknown.",
+        "update_frequency": "monthly",
+        "access": "free"
+      },
+      {
+        "name": "Agent Blame (Mesa)",
+        "url": "https://github.com/mesa-dot-dev/agentblame",
+        "type": "tool",
+        "relevance": "Open-source line-level AI attribution for git repos. Hooks intercept AI edits from Cursor, Claude Code, OpenCode. Apache 2.0.",
+        "update_frequency": "monthly",
+        "access": "free"
+      },
+      {
+        "name": "Git AI Attribution Tool",
+        "url": "https://usegitai.com/",
+        "type": "tool",
+        "relevance": "Open-source git extension tracking AI-generated code. Provides AI Blame, acceptance rate analytics, and multi-agent support.",
+        "update_frequency": "monthly",
+        "access": "free"
+      },
+      {
+        "name": "Fingerprinting AI Coding Agents on GitHub",
+        "url": "https://arxiv.org/html/2601.17406v1",
+        "type": "research",
+        "relevance": "33,580 PRs, 97.2% F1-score in agent identification using 41 features. Most discriminative: multiline commit ratio (44.7%), change concentration (10.1%).",
+        "update_frequency": "static",
+        "access": "free"
+      },
+      {
+        "name": "Pangram Labs AI Code Detector",
+        "url": "https://www.pangram.com/use-cases/developers",
+        "type": "tool",
+        "relevance": "Commercial AI code detector using AST analysis, token probability, entropy measurement, neural fingerprinting. CI/CD API available.",
+        "update_frequency": "continuous",
+        "access": "freemium"
+      },
+      {
+        "name": "Veracode GenAI Code Security Report 2025",
+        "url": "https://www.veracode.com/resources/analyst-reports/2025-genai-code-security-report/",
+        "type": "research",
+        "relevance": "Tested 100+ LLMs across 4 languages and 80 tasks. 45% of AI-generated code fails security checks; AI code has 2.74x more XSS vulnerabilities than human-written code. Authoritative source for AI security quality claims. Does NOT report the 1.75x logic-error figure (that is CodeRabbit's, see below) — do not conflate the two sources.",
+        "update_frequency": "annual",
+        "access": "free"
+      },
+      {
+        "name": "CodeRabbit AI vs. Human PR Quality Analysis (Dec 2025)",
+        "url": "https://www.coderabbit.ai/blog",
+        "type": "research",
+        "relevance": "Analysis of 470 real pull requests. AI-authored PRs show 1.75x more logic/correctness errors than human-authored PRs. Frequently miscited as a Veracode finding — verify attribution before quoting.",
+        "update_frequency": "static",
+        "access": "free"
+      }
+    ],
+    "commit_and_pr_practices": [
+      {
+        "name": "Google Engineering Practices: Small CLs",
+        "url": "https://google.github.io/eng-practices/review/developer/small-cls.html",
+        "type": "guide",
+        "relevance": "Defines the standard for small, focused change lists. Basis for PR size scoring thresholds.",
+        "update_frequency": "quarterly",
+        "access": "free"
+      },
+      {
+        "name": "Google Engineering Practices: CL Descriptions",
+        "url": "https://google.github.io/eng-practices/review/developer/cl-descriptions.html",
+        "type": "guide",
+        "relevance": "Standard for commit/CL description quality. Basis for commit message quality scoring.",
+        "update_frequency": "quarterly",
+        "access": "free"
+      },
+      {
+        "name": "Git SubmittingPatches",
+        "url": "https://git-scm.com/docs/SubmittingPatches",
+        "type": "guide",
+        "relevance": "Official Git guidance on patch submission quality. Foundational reference for commit discipline metrics.",
+        "update_frequency": "static",
+        "access": "free"
+      },
+      {
+        "name": "Conventional Commits Specification",
+        "url": "https://www.conventionalcommits.org/en/v1.0.0/",
+        "type": "specification",
+        "relevance": "Standard format for structured commit messages. Used in commit message quality scoring.",
+        "update_frequency": "static",
+        "access": "free"
+      }
+    ],
+    "code_review_practices": [
+      {
+        "name": "Google Engineering Practices: Code Review Speed",
+        "url": "https://google.github.io/eng-practices/review/reviewer/speed.html",
+        "type": "guide",
+        "relevance": "Defines review responsiveness expectations. Basis for D4 review responsiveness scoring.",
+        "update_frequency": "quarterly",
+        "access": "free"
+      },
+      {
+        "name": "Conventional Comments",
+        "url": "https://conventionalcomments.org/",
+        "type": "specification",
+        "relevance": "Machine-parseable review comment intent labels. Reference for review depth analysis.",
+        "update_frequency": "static",
+        "access": "free"
+      },
+      {
+        "name": "PRPulse: PR Metrics That Predict Team Velocity",
+        "url": "https://prpulse.dev/pull-request-metrics",
+        "type": "blog",
+        "relevance": "Concrete benchmarks: time to first review (elite < 2h), PR size (elite < 250 LOC), review depth thresholds.",
+        "update_frequency": "static",
+        "access": "free"
+      }
+    ],
+    "engineering_metrics_and_benchmarks": [
+      {
+        "name": "Qodo: Code Quality Metrics 2026",
+        "url": "https://www.qodo.ai/blog/code-quality-metrics-2026/",
+        "type": "blog",
+        "relevance": "Eight measurable review quality signals including turnaround time, comment depth, and review duration benchmarks.",
+        "update_frequency": "static",
+        "access": "free"
+      },
+      {
+        "name": "DX: Why Cyclomatic Complexity Misleads",
+        "url": "https://getdx.com/blog/cyclomatic-complexity/",
+        "type": "blog",
+        "relevance": "Argues cognitive complexity better predicts developer effort than cyclomatic complexity. Supports D2 metric choice.",
+        "update_frequency": "static",
+        "access": "free"
+      },
+      {
+        "name": "Jellyfish: Are 10% Actually Ghost Engineers?",
+        "url": "https://jellyfish.co/blog/ghost-engineers/",
+        "type": "blog",
+        "relevance": "Industry response to Stanford ghost engineering study with practical measurement approaches for engineering leaders.",
+        "update_frequency": "static",
+        "access": "free"
+      }
+    ],
+    "clean_code_standards": [
+      {
+        "name": "Clean Code Standard (CC-* Rules)",
+        "url_template": "../software-clean-code-standard/SKILL.md",
+        "type": "reference",
+        "relevance": "Internal shared-skill rubric with stable CC-* rules used for commit sampling; not an external source.",
+        "update_frequency": "quarterly",
+        "access": "repo-local"
+      },
+      {
+        "name": "OWASP Top Ten 2025",
+        "url": "https://owasp.org/www-project-top-ten/",
+        "type": "reference",
+        "relevance": "Security vulnerability baseline referenced by CC-SEC rules. Used in security-sensitive file change assessment.",
+        "update_frequency": "annual",
+        "access": "free"
+      }
+    ]
+  }
+}

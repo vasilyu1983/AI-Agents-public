@@ -1,0 +1,4 @@
+interface:
+  display_name: "UI / UX Design"
+  short_description: "Designs and audits UI/UX systems with usability and accessibility requirements"
+  default_prompt: "Use $software-ui-ux-design for Designs and audits UI/UX systems with usability and accessibility requirements. Use when shaping flows, design systems, interaction patterns, or WCAG-aware product behavior."

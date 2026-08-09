@@ -1,0 +1,4 @@
+interface:
+  display_name: "Queueing Theory Foundations"
+  short_description: "Applies queueing theory for capacity and latency sizing decisions"
+  default_prompt: "Use $foundations-queueing-theory for Little's Law, M/M/c, Erlang, Kingman, and USL to size capacity, predict non-linear latency growth, and manage queue overrun risk."

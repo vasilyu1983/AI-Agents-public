@@ -1,0 +1,454 @@
+{
+  "metadata": {
+    "title": "Data Lake Platform - Sources",
+    "description": "Primary sources for July 2026 lakehouse architecture, catalogs, open table formats, CDC, governance, and production operations",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 47,
+    "skill": "data-lake-platform",
+    "trust_tiers": {
+      "primary": "Official project, vendor, standards, or source documentation. Prefer for factual claims and current behavior.",
+      "secondary": "Tutorials, landscape reports, community references, and implementation examples. Use for framing after checking primary sources."
+    },
+    "default_source_policy": "Use official project, vendor, and standards docs first for table format, catalog, connector, and managed-service behavior. Use architecture articles for framing only."
+  },
+  "architecture_and_modeling": [
+    {
+      "name": "Data Mesh Principles (Martin Fowler)",
+      "url": "https://martinfowler.com/articles/data-mesh-principles.html",
+      "description": "Data mesh concepts: domain ownership, data products, federated governance",
+      "add_as_web_search": true,
+      "trust_tier": "secondary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 180
+    },
+    {
+      "name": "Medallion Architecture (Databricks)",
+      "url": "https://www.databricks.com/blog/what-is-medallion-architecture",
+      "description": "Bronze, silver, gold layering reference",
+      "add_as_web_search": true,
+      "trust_tier": "secondary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 180
+    },
+    {
+      "name": "Dimensional Modeling Techniques (Kimball Group)",
+      "url": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/",
+      "description": "Dimensional modeling reference for BI-ready data products",
+      "add_as_web_search": true,
+      "trust_tier": "secondary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 180
+    }
+  ],
+  "catalogs_and_interop": [
+    {
+      "name": "Apache Polaris Overview",
+      "url": "https://polaris.apache.org/docs/latest/overview/",
+      "description": "Open-source catalog for Apache Iceberg with REST-oriented control plane",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache Iceberg Specification",
+      "url": "https://iceberg.apache.org/spec/",
+      "description": "Primary table format specification including REST catalog details and v3 capabilities",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache Iceberg Branching and Tagging",
+      "url": "https://iceberg.apache.org/docs/latest/branching/",
+      "description": "Primary docs for branches and tags in Iceberg workflows",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Project Nessie",
+      "url": "https://projectnessie.org/",
+      "description": "Catalog with Git-like branching and tagging for data workflows",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "AWS Glue Iceberg REST Catalog",
+      "url": "https://docs.aws.amazon.com/glue/latest/dg/connect-glu-iceberg-rest.html",
+      "description": "AWS-managed Iceberg REST endpoint and authentication behavior",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Amazon S3 Tables",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html",
+      "description": "Managed Apache Iceberg tables in S3 table buckets",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Snowflake Open Catalog",
+      "url": "https://docs.snowflake.com/en/user-guide/tables-iceberg-open-catalog",
+      "description": "Snowflake-managed catalog for Apache Iceberg tables",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Delta Lake UniForm",
+      "url": "https://docs.delta.io/delta-uniform/",
+      "description": "Delta interoperability layer for Iceberg-compatible metadata reads",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache XTable",
+      "url": "https://xtable.apache.org/",
+      "description": "Cross-format interoperability between Iceberg, Delta Lake, and Hudi",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache Gravitino Documentation",
+      "url": "https://gravitino.apache.org/",
+      "description": "Apache TLP (Jun 2025); federated catalog of catalogs; 1.2.0 (Mar 2026) added Table Maintenance Service, ClickHouse catalog, scan planning offload; 1.2.1 (May 2026) is current stable patch",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-07-11",
+      "max_age_days": 120
+    },
+    {
+      "name": "DuckLake v1.0 Announcement",
+      "url": "https://ducklake.select/2026/04/13/ducklake-10/",
+      "description": "DuckLake GA (Apr 13 2026): SQL-catalog-backed lakehouse format, PostgreSQL/SQLite/DuckDB catalogs, Iceberg-compatible deletion vectors, Spark/Trino/DataFusion clients",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-07-11",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache Polaris Graduation Announcement",
+      "url": "https://polaris.apache.org/blog/2026/02/19/apache-polaris-graduates-to-top-level-project/",
+      "description": "Apache Polaris graduates to Top-Level Project Feb 19 2026; ~100 contributors, 6 releases, 2800+ PRs",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-07-11",
+      "max_age_days": 120
+    },
+    {
+      "name": "Snowflake Iceberg v3 GA Release Notes",
+      "url": "https://docs.snowflake.com/en/release-notes/2026/other/2026-05-07-iceberg-v3-ga",
+      "description": "Iceberg v3 general availability on Snowflake (May 7 2026); deletion vectors, row lineage",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-07-11",
+      "max_age_days": 120
+    },
+    {
+      "name": "Databricks Apache Iceberg v3 Public Preview",
+      "url": "https://www.databricks.com/blog/next-era-open-lakehouse-apache-icebergtm-v3-public-preview-databricks",
+      "description": "Iceberg v3 on Databricks is Public Preview (announced Apr 9 2026, Databricks Runtime 18.0+ with Unity Catalog) \u2014 not GA; do not conflate with Snowflake/AWS GA status",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-07-11",
+      "max_age_days": 90
+    },
+    {
+      "name": "Trino Iceberg Connector Documentation",
+      "url": "https://trino.io/docs/current/connector/iceberg.html",
+      "description": "Canonical source for Trino's Iceberg format-version support; v3 is marked experimental with row-level update/delete/OPTIMIZE unsupported on v3 tables",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-07-11",
+      "max_age_days": 90
+    }
+  ],
+  "open_table_formats": [
+    {
+      "name": "Apache Iceberg Documentation",
+      "url": "https://iceberg.apache.org/docs/",
+      "description": "Iceberg docs for operations, maintenance, and ecosystem usage",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Delta Lake Documentation",
+      "url": "https://docs.delta.io/",
+      "description": "Delta Lake docs including protocol, connectors, and interoperability features",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-07-11",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache Hudi Documentation",
+      "url": "https://hudi.apache.org/docs/overview/",
+      "description": "Hudi docs for table services, indexing, and mutable workloads",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-07-11",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache Paimon Documentation",
+      "url": "https://paimon.apache.org/docs/master/",
+      "description": "Paimon docs for streaming-first mutable lakehouse tables",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-07-11",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache Parquet Documentation",
+      "url": "https://parquet.apache.org/docs/",
+      "description": "Parquet file format reference",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache Arrow Documentation",
+      "url": "https://arrow.apache.org/docs/",
+      "description": "Arrow ecosystem and in-memory interoperability reference",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    }
+  ],
+  "ingestion_cdc_streaming": [
+    {
+      "name": "dlt Documentation",
+      "url": "https://dlthub.com/docs/intro",
+      "description": "Code-first ingestion framework docs",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Airbyte Documentation",
+      "url": "https://docs.airbyte.com",
+      "description": "Connector and deployment docs for Airbyte",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Debezium Documentation",
+      "url": "https://debezium.io/documentation/",
+      "description": "Primary docs for CDC connectors and event semantics",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache Flink CDC",
+      "url": "https://nightlies.apache.org/flink/flink-cdc-docs-release-3.6/",
+      "description": "Streaming CDC docs for Flink-based pipelines",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache Kafka Documentation",
+      "url": "https://kafka.apache.org/documentation/",
+      "description": "Kafka fundamentals for durable CDC and event backbones",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Spark Structured Streaming Programming Guide",
+      "url": "https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html",
+      "description": "Spark streaming guide for checkpointing, sinks, and streaming semantics",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    }
+  ],
+  "transformation_and_quality": [
+    {
+      "name": "SQLMesh Documentation",
+      "url": "https://sqlmesh.readthedocs.io/",
+      "description": "SQLMesh docs for plan, environment, and audit workflows",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "dbt Documentation",
+      "url": "https://docs.getdbt.com/",
+      "description": "dbt docs for models, tests, and deployment patterns",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "dbt Semantic Layer",
+      "url": "https://docs.getdbt.com/docs/build/semantic-models",
+      "description": "dbt metrics and semantic model reference",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Great Expectations Documentation",
+      "url": "https://docs.greatexpectations.io/docs/home/",
+      "description": "Data quality testing framework documentation",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Soda Documentation",
+      "url": "https://docs.soda.io/",
+      "description": "Data quality and observability checks documentation",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    }
+  ],
+  "governance_and_lineage": [
+    {
+      "name": "OpenLineage Documentation",
+      "url": "https://openlineage.io/docs/",
+      "description": "Lineage standard and integration docs",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "DataHub Documentation",
+      "url": "https://docs.datahub.com/docs/",
+      "description": "Metadata platform docs for catalog, ownership, and governance",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "OpenMetadata Documentation",
+      "url": "https://docs.open-metadata.org/",
+      "description": "OpenMetadata docs for catalog, lineage, and profiling",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Apache Ranger Documentation",
+      "url": "https://ranger.apache.org/",
+      "description": "Centralized authorization and auditing for data platforms",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Databricks Unity Catalog Documentation",
+      "url": "https://docs.databricks.com/aws/en/data-governance/unity-catalog/",
+      "description": "Databricks governance plane for catalogs, access control, and lineage",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    }
+  ],
+  "query_and_compute": [
+    {
+      "name": "Trino Documentation",
+      "url": "https://trino.io/docs/current/",
+      "description": "Trino query engine documentation",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Trino Lakehouse Connector",
+      "url": "https://trino.io/docs/current/connector/lakehouse.html",
+      "description": "Lakehouse connector docs for Iceberg, Delta Lake, and Hudi access",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "Spark SQL, DataFrames and Datasets Guide",
+      "url": "https://spark.apache.org/docs/latest/sql-programming-guide.html",
+      "description": "Spark SQL reference for lakehouse workloads",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "DuckDB Documentation",
+      "url": "https://duckdb.org/docs/",
+      "description": "DuckDB docs for embedded analytics",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    },
+    {
+      "name": "DuckDB Iceberg Extension",
+      "url": "https://duckdb.org/docs/stable/core_extensions/iceberg/overview",
+      "description": "DuckDB docs for querying Iceberg tables and catalogs",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    }
+  ],
+  "secondary_context": [
+    {
+      "name": "ClickHouse Query Optimization Guide",
+      "url": "https://clickhouse.com/resources/engineering/clickhouse-query-optimisation-definitive-guide",
+      "description": "Vendor guide for ClickHouse query design and tuning",
+      "add_as_web_search": true,
+      "trust_tier": "secondary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 180
+    },
+    {
+      "name": "Iceberg vs Delta vs Hudi Comparison (LakeFS)",
+      "url": "https://lakefs.io/blog/hudi-iceberg-and-delta-lake-data-lake-table-formats-compared/",
+      "description": "Secondary comparison resource; validate all claims against primary docs",
+      "add_as_web_search": true,
+      "trust_tier": "secondary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 180
+    }
+  ]
+}

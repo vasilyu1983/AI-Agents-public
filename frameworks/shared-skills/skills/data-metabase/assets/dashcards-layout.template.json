@@ -1,0 +1,25 @@
+{
+  "cards": [
+    {
+      "id": 101,
+      "row": 0,
+      "col": 0,
+      "sizeX": 9,
+      "sizeY": 4
+    },
+    {
+      "id": 102,
+      "row": 0,
+      "col": 9,
+      "sizeX": 9,
+      "sizeY": 4
+    },
+    {
+      "id": 103,
+      "row": 4,
+      "col": 0,
+      "sizeX": 18,
+      "sizeY": 6
+    }
+  ]
+}

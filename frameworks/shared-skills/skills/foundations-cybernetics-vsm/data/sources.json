@@ -1,0 +1,172 @@
+{
+  "metadata": {
+    "title": "Cybernetics and VSM Foundations — Sources",
+    "description": "Primary texts and references for 11 cybernetics and VSM primitives: feedback loops, Ashby's Law, VSM systems 1–5, S3*, recursion levels, variety engineering, and algedonic channels",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-cybernetics-vsm",
+    "total_sources": 23
+  },
+  "primary_texts": [
+    {
+      "id": "Beer1972",
+      "name": "Brain of the Firm",
+      "url": "https://www.wiley.com/en-gb/Brain+of+the+Firm%2C+2nd+Edition-p-9780471276326",
+      "description": "Beer, S. (1972, 2nd ed. 1981). Allen Lane / Wiley. Canonical VSM definition: Systems 1–5, algedonic channels, recursion principle. Primary source for primitives #3–#8, #11.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Beer1979",
+      "name": "Heart of Enterprise",
+      "url": "https://www.wiley.com/en-gb/The+Heart+of+Enterprise-p-9780471948377",
+      "description": "Beer, S. (1979). Wiley. Variety engineering, amplifiers, attenuators, and transducers. Management of complexity. Primary source for primitives #2, #10.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Beer1985",
+      "name": "Diagnosing the System for Organizations",
+      "url": "https://www.wiley.com/en-gb/Diagnosing+the+System+for+Organizations-p-9780471906421",
+      "description": "Beer, S. (1985). Wiley. Practical VSM application guide with diagnostic exercises. Primary source for all VSM system primitives and the system-in-focus concept.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Ashby1956",
+      "name": "An Introduction to Cybernetics",
+      "url": "https://archive.org/details/introductiontocy00ashb",
+      "description": "Ashby, W.R. (1956). Chapman & Hall. Law of Requisite Variety (ch. 11), homeostasis, and variety. Primary source for primitive #2.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Wiener1948",
+      "name": "Cybernetics: Or Control and Communication in the Animal and the Machine",
+      "url": "https://mitpress.mit.edu/9780262730099/cybernetics/",
+      "description": "Wiener, N. (1948, 2nd ed. 1961). MIT Press. Feedback, negative feedback as purposive behaviour, and the foundations of cybernetics. Primary source for primitive #1.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Conant1970",
+      "name": "Every Good Regulator of a System Must Be a Model of That System",
+      "url": "https://doi.org/10.1080/00207727008920220",
+      "description": "Conant, R.C., & Ashby, W.R. (1970). International Journal of Systems Science, 1(2), 89–97. Good regulator theorem — foundational support for Ashby's Law (primitive #2) and the necessity of internal modelling.",
+      "url_check": "manual"
+    },
+    {
+      "id": "EspinosaWalker2011",
+      "name": "A Complexity Approach to Sustainability",
+      "url": "https://www.worldscientific.com/worldscibooks/10.1142/p626",
+      "description": "Espinosa, A., & Walker, J. (2011). Imperial College Press. VSM applied to sustainability and complex real-world systems. Source for VSM practice references across all primitives.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Schwaninger2006",
+      "name": "Intelligent Organizations",
+      "url": "https://link.springer.com/book/10.1007/3-540-28131-3",
+      "description": "Schwaninger, M. (2006). Springer. VSM, management cybernetics, and intelligent organisation design. Secondary source for S3/S4 interface (primitive #5, #7) and identity (primitive #8).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Hoverstadt2009",
+      "name": "The Fractal Organization",
+      "url": "https://www.wiley.com/en-gb/The+Fractal+Organization%3A+Creating+sustainable+organizations+with+the+Viable+System+Model-p-9780470060568",
+      "description": "Hoverstadt, P. (2009). Wiley. Practitioner-oriented VSM with recursion patterns, S3* implementation, and algedonic channel design. Secondary source for all VSM primitives.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Sterman2000",
+      "name": "Business Dynamics: Systems Thinking and Modeling for a Complex World",
+      "url": "https://www.mhhe.com/business/management/sterman/",
+      "description": "Sterman, J.D. (2000). McGraw-Hill. Feedback loop notation, causal loop diagrams, delay analysis, and oscillation dynamics. Secondary source for primitive #1.",
+      "url_check": "manual"
+    },
+    {
+      "id": "MaturanaVarela1980",
+      "name": "Autopoiesis and Cognition",
+      "url": "https://link.springer.com/book/10.1007/978-94-009-8947-4",
+      "description": "Maturana, H.R., & Varela, F.J. (1980). Reidel. Autopoiesis — self-production and closure in viable systems. Theoretical background for S5 identity closure (primitive #8) and recursion (primitive #9).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Jackson2003",
+      "name": "Systems Thinking: Creative Holism for Managers",
+      "url": "https://www.wiley.com/en-gb/Systems+Thinking%3A+Creative+Holism+for+Managers-p-9780470845226",
+      "description": "Jackson, M.C. (2003). Wiley. Overview of systems methodologies including VSM in the context of management cybernetics. Useful secondary source for contextualising Beer's work.",
+      "url_check": "manual"
+    },
+    {
+      "id": "PembertonCollective2020",
+      "name": "VSM Guide — A Practical Guide to the Viable System Model",
+      "url": "https://www.pembertonpublishing.co.uk/vsm-guide/",
+      "description": "Pemberton, J. (2020). Practitioner guide for applying VSM in organisations. Useful supplementary reference for recursion levels and S3* audit in contemporary organisations.",
+      "url_check": "manual"
+    },
+    {
+      "id": "BeerPlatform1994",
+      "name": "Beyond Dispute: The Invention of Team Syntegrity",
+      "url": "https://www.wiley.com/en-gb/Beyond+Dispute%3A+The+Invention+of+Team+Syntegrity-p-9780471943747",
+      "description": "Beer, S. (1994). Wiley. Beer's later work on syntegration and participatory decision-making. Background for S4 intelligence and S5 governance design.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Espinosa2025SRBS",
+      "name": "Revisiting the Viable System Model as an emancipatory systems approach",
+      "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/sres.3090",
+      "description": "Espinosa, A. (2025). Systems Research and Behavioral Science, 42(1), 171–188. DOI: 10.1002/sres.3090. Argues VSM is an emancipatory rather than purely functionalist model; addresses Jackson's critiques. Empirical grounding via Colombia community case study (see Espinosa & Martinez-Lozada 2025). Relevant to primitives #3, #8, #9.",
+      "url_check": "manual"
+    },
+    {
+      "id": "EspinosaLozada2025SPAR",
+      "name": "The Viable System Model to Support Sustainable Self-Governance in Communities: Learning from Case Studies",
+      "url": "https://link.springer.com/article/10.1007/s11213-025-09724-3",
+      "description": "Espinosa, A., & Martinez-Lozada, A. (2025). Systemic Practice and Action Research. DOI: 10.1007/s11213-025-09724-3. Empirical VSM application to community self-governance in Colombia; demonstrates VSM-guided S1–S5 design enables durable self-funded community projects. Corroborates Espinosa2025SRBS. Relevant to primitives #3, #8, #9.",
+      "url_check": "manual"
+    },
+    {
+      "id": "SchwaningerOtt2025LNCS",
+      "name": "Variety Engineering – A Cybernetic Concept with Practical Implications",
+      "url": "https://link.springer.com/chapter/10.1007/978-3-031-82957-4_21",
+      "description": "Schwaninger, M., & Ott, S.C. (2025). In: EUROCAST 2024. LNCS vol. 15173, Springer. DOI: 10.1007/978-3-031-82957-4_21. Formalises Variety Engineering as mutual complexity amplification/attenuation; illustrates with ecological, social, economic cases. Updated version of SRBS 2023 article. Relevant to primitive #10.",
+      "url_check": "manual"
+    },
+    {
+      "id": "AgentCybernetics2026",
+      "name": "The Agent Use of Agent Beings: Agent Cybernetics Is the Missing Science of Foundation Agents",
+      "url": "https://arxiv.org/abs/2605.10754",
+      "description": "Wang, X., Yang, C., Zhao, H., Lin, Z., & Hu, S. (2026). arXiv:2605.10754 [cs.AI]. Maps six canonical laws of classical cybernetics (including Ashby's Law of Requisite Variety and the Good Regulator theorem) onto six agent design principles, synthesising three engineering desiderata: reliability, lifelong running, and self-improvement. Evidence grade: C (preprint, no peer review; conceptual framework). Relevant to primitive #2 (Ashby's Law), Agent-Team Topology Audit recipe.",
+      "url_check": "manual"
+    },
+    {
+      "id": "MiehlingAgenticSystems2025",
+      "name": "Agentic AI Needs a Systems Theory",
+      "url": "https://arxiv.org/abs/2503.00237",
+      "description": "Miehling, E., Ramamurthy, K.N., Varshney, K.R., et al. (2025). arXiv:2503.00237 [cs.AI]. Argues advanced AI agent development requires a systems-theoretic perspective; interactions between agents and environment produce emergent capabilities not apparent from isolated components. Cites Ashby and Wiener. Corroborates AgentCybernetics2026 from a different entry point. Evidence grade: C (preprint). Relevant to primitives #1, #2.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ZeiniPowerVSM2026",
+      "name": "The Viable System Model Through a Power-Relations Lens: Towards a Power-Aware Conceptual Framework",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/sres.70028",
+      "description": "Zeini, N. (2026, early online). Systems Research and Behavioral Science. DOI: 10.1002/sres.70028. Critiques VSM's limited engagement with power relations; proposes integrating Beer's VSM with Gaventa's power-cube framework to produce a power-aware VSM diagnostic layer (visible/hidden/invisible power × local/national/global levels). Evidence grade: B (peer-reviewed journal; conceptual extension with case application). Relevant to Known Traps: Power-blind trap.",
+      "url_check": "manual"
+    },
+    {
+      "id": "PerezRiosVSMAI2025",
+      "name": "The Viable System Model and the Taxonomy of Organizational Pathologies in the Age of Artificial Intelligence (AI)",
+      "url": "https://www.mdpi.com/2079-8954/13/9/749",
+      "description": "Perez Rios, J. (2025). Systems, 13(9), 749. MDPI. DOI: 10.3390/systems13090749. Applies VSM together with Perez Rios's Taxonomy of Organizational Pathologies (TOP) to AI governance risks; maps 13 organisational pathologies to VSM systems and AI-advancement failure modes. Evidence grade: B (peer-reviewed journal; conceptual/applied paper). Relevant to VSM Pathology Checklist for AI Systems.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Medina2011",
+      "name": "Cybernetic Revolutionaries: Technology and Politics in Allende's Chile",
+      "url": "https://mitpress.mit.edu/9780262525969/cybernetic-revolutionaries/",
+      "description": "Medina, E. (2011). MIT Press. Primary archival history of Project Cybersyn (Chile, 1971-1973) — Stafford Beer's real-world VSM deployment. Documents the actual scope (telex network + one mainframe, not networked real-time control), the October 1972 truckers'-strike operational use, partial rollout (~26.7% of nationalized firms by May 1973), and the project's end after the 11 September 1973 coup. Corrects the popular 'real-time control room ran the economy' myth. Evidence grade: A (peer-reviewed academic monograph, primary archival research). Relevant to Historical Grounding: Project Cybersyn in patterns-scenarios-traps.md.",
+      "url_check": "manual"
+    },
+    {
+      "id": "SiegenfeldBarYam2025",
+      "name": "A Formal Definition of Scale-Dependent Complexity and the Multi-Scale Law of Requisite Variety",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12385218/",
+      "description": "Siegenfeld, A.F., & Bar-Yam, Y. (2025). Entropy, 27(8), 835. MDPI. DOI: 10.3390/e27080835 (PMC-indexed as PMC12385218). Proposes a multi-scale generalisation of Ashby's Law showing that variety requirements and regulator capacity are scale-dependent. Implies that in hierarchical or recursive systems (including nested agent architectures), variety analysis must be performed at each recursion level independently rather than once for the whole. Evidence grade: B (peer-reviewed journal; PMC-indexed). Relevant to primitive #2 (Ashby's Law), primitive #9 (Recursion Levels), and Agent-Team Topology Audit recipe.",
+      "url_check": "manual"
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "metadata": {
+    "skill": "qa-persona-testing",
+    "title": "QA Persona Testing - Sources",
+    "description": "Primary references for persona-based / synthetic-user app testing: LLM persona simulation research, validity critiques, severity models, web-agent task design, and browser automation tooling.",
+    "version": "1.1",
+    "updated": "2026-08-01",
+    "last_updated": "2026-08-01",
+    "last_citation_audit": "2026-08-01",
+    "total_sources": 17
+  },
+  "categories": {
+    "persona_simulation_research": [
+      {
+        "name": "UXAgent: An LLM-Agent-Based Usability Testing Framework (system paper)",
+        "url": "https://arxiv.org/abs/2504.09407",
+        "description": "Reference architecture: Persona Generator + LLM Agent Module (with memory/interaction log) + Universal Browser Connector + Result Viewer for simulated usability testing.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-16"
+      },
+      {
+        "name": "UXAgent CHI'25 extended abstract",
+        "url": "https://arxiv.org/abs/2502.12561",
+        "description": "Earlier UXAgent write-up; heuristic evaluation with UX researchers and practitioner concerns about LLM-agent usability studies.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-16"
+      },
+      {
+        "name": "Persona2Web: Benchmarking Personalized Web Agents",
+        "url": "https://arxiv.org/abs/2602.17003",
+        "description": "Personalization from implicit user preference history rather than explicit instructions; basis for persona memory/state design.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-16"
+      },
+      {
+        "name": "The Chameleon's Limit: Persona Fidelity and Population Homogenization in LLMs",
+        "url": "https://arxiv.org/abs/2604.24698",
+        "description": "10 models, 1,144 personas, 26 identity dimensions. Source of the fidelity trap (every model at fidelity rho > 0.9 also showed between-group Cohen's d > 6) and the attribute-truncation mention rates (gender 89%, country 86%, ideology 60%, age 33%, social class 25%). Figures verified against the arXiv HTML full text, not a secondary summary.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-08-01"
+      },
+      {
+        "name": "Occupational persona audit against US BLS demographics",
+        "url": "https://arxiv.org/abs/2510.21011",
+        "description": "1.5M+ generated occupational personas compared with BLS data across 41 occupations; demographic skew recurs across models with unrelated training origins, making it structural rather than vendor-specific. Grounds the confidence downgrade for specialist/enterprise personas.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-08-01"
+      },
+      {
+        "name": "Simulating Identity: persona prompting does not reduce stereotyping",
+        "url": "https://arxiv.org/abs/2509.08484",
+        "description": "Persona conditioning changed surface wording without reducing abstraction/stereotyping bias; in-group personas stereotyped as much as out-group ones. Grounds the rule that a persona label is not a bias control.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-08-01"
+      }
+    ],
+    "validity_and_limits": [
+      {
+        "name": "NN/g: Evaluating AI-Simulated Behavior — Three Studies on Digital Twins and Synthetic Users",
+        "url": "https://www.nngroup.com/articles/ai-simulations-studies/",
+        "description": "Synthesis of 2024-2025 studies: lower variance, direction-over-magnitude reliability, interview-grounded twins (85%) vs demographic-only (55%), ethical-disclosure guidance.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-16"
+      },
+      {
+        "name": "The Illusion of Intervention: Your LLM-Simulated Experiment is an Observational Study",
+        "url": "https://arxiv.org/abs/2605.20767",
+        "description": "Methodological argument that persona-conditioned simulation is observational, not interventional; grounds the no-causal-claims rule.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-16"
+      },
+      {
+        "name": "Catching UX Flaws in Code: Leveraging LLMs to Identify Usability Flaws (IEEE VL/HCC 2025)",
+        "url": "https://arxiv.org/abs/2512.04262",
+        "description": "Empirical reliability data: moderate issue-detection agreement (Kappa ~0.50) but weak severity-rating reliability (near-zero Krippendorff's Alpha); grounds the second-pass severity rule.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-16"
+      },
+      {
+        "name": "Intersectional Sycophancy in Multi-Turn LLM Conversations",
+        "url": "https://arxiv.org/abs/2604.11609",
+        "description": "768 multi-turn conversations x 128 personas x 3 domains. Primary source for the anti-sycophancy rules: model choice dominates (GPT-5-nano 2.96 vs Claude Haiku 4.5 1.74, p < 1e-32), subjective domains elicit ~41% more sycophancy than mathematics, and the effect is intersectional rather than tied to one demographic axis. Grounds the 'record the model' session-log field and the mandatory adversarial pass on subjective surfaces.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-08-01"
+      },
+      {
+        "name": "Synthetic users vs real participants (practitioner critique)",
+        "url": "https://userevaluation.com/post/synthetic-users-vs-real-participants/",
+        "description": "Practitioner color on sycophancy and identity flattening. Demoted 2026-08-01: no longer load-bearing now that arXiv:2604.11609 and arXiv:2604.24698 cover the same failure modes with primary data. Keep only as corroboration.",
+        "add_as_web_search": false,
+        "optional": true,
+        "last_verified": "2026-07-16"
+      }
+    ],
+    "methods_and_scales": [
+      {
+        "name": "NN/g: How to Rate the Severity of Usability Problems",
+        "url": "https://www.nngroup.com/articles/how-to-rate-the-severity-of-usability-problems/",
+        "description": "Canonical 0-4 severity scale used by the session log and findings report.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-16"
+      },
+      {
+        "name": "NN/g: Thinking Aloud — The #1 Usability Tool",
+        "url": "https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/",
+        "description": "Think-aloud protocol conventions mirrored by the dual-channel session log.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-16"
+      }
+    ],
+    "web_agent_task_design": [
+      {
+        "name": "WebArena benchmark",
+        "url": "https://webarena.dev/",
+        "description": "Reproducible, bounded, verifiable web-task design pattern used for scenario construction.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-16"
+      }
+    ],
+    "tooling": [
+      {
+        "name": "Playwright MCP",
+        "url": "https://github.com/microsoft/playwright-mcp",
+        "description": "Official Playwright MCP server: accessibility-tree snapshots and browser tools used in Phase 3. Verify tool names here before prescribing calls.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-16"
+      },
+      {
+        "name": "Chrome DevTools MCP",
+        "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+        "description": "Chrome DevTools MCP server: console, network, performance, and emulation evidence channels. Source for the emulate parameter set (viewport with mobile/touch flags, networkConditions, cpuThrottlingRate, geolocation, colorScheme) and for isolatedContext page isolation.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-08-01"
+      },
+      {
+        "name": "Playwright CLI",
+        "url": "https://github.com/microsoft/playwright-cli",
+        "description": "Official shell-based companion to Playwright MCP: snapshots are written to disk as compact YAML with element refs rather than returned inline, so token cost stays flat across long runs. Positioned for token-constrained coding-agent work; this skill uses it for regression re-checks, not exploratory persona discovery. Token-reduction figures circulating in practitioner blogs are secondary — do not cite a magnitude.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-08-01"
+      }
+    ]
+  }
+}

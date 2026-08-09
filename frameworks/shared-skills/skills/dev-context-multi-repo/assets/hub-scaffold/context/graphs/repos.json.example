@@ -1,0 +1,31 @@
+{
+  "_comment": "Example portfolio registry. discover_repos.py generates the real context/graphs/repos.json. Copy/adapt this shape; replace every placeholder. No org-specific names.",
+  "generated": "<YYYY-MM-DD>",
+  "repos_root": "~/repos",
+  "repos": [
+    {
+      "name": "payments",
+      "path": "~/repos/payments",
+      "domain": "payments",
+      "kind": "service",
+      "primary_language": "<lang>",
+      "last_scanned": null
+    },
+    {
+      "name": "payments-ledger",
+      "path": "~/repos/payments-ledger",
+      "domain": "payments",
+      "kind": "service",
+      "primary_language": "<lang>",
+      "last_scanned": null
+    },
+    {
+      "name": "shared-core",
+      "path": "~/repos/shared-core",
+      "domain": "core",
+      "kind": "library",
+      "primary_language": "<lang>",
+      "last_scanned": null
+    }
+  ]
+}

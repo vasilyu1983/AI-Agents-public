@@ -1,0 +1,241 @@
+{
+  "metadata": {
+    "skill": "qa-debugging",
+    "updated": "2026-07-11",
+    "version": "3.5",
+    "total_sources": 29,
+    "description": "Primary references for systematic debugging, safe production investigation, profiling, distributed tracing, agent/LLM debugging security, deterministic record-and-replay debugging, and validated-corpus search-first triage (verified July 2026).",
+    "title": "QA Debugging - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "sre_troubleshooting": [
+      {
+        "name": "Google SRE Book - Effective Troubleshooting",
+        "url": "https://sre.google/sre-book/effective-troubleshooting/",
+        "description": "Evidence-based troubleshooting workflow and tradeoffs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Managing Incidents",
+        "url": "https://sre.google/sre-book/managing-incidents/",
+        "description": "Incident response and coordination patterns.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "observability_standards": [
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "description": "Vendor-neutral traces/metrics/logs instrumentation and correlation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenTelemetry Zero-Code Instrumentation",
+        "url": "https://opentelemetry.io/docs/zero-code/",
+        "description": "Current zero-code instrumentation guidance, including eBPF-based approaches.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "OpenTelemetry GenAI Semantic Conventions",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "description": "Current GenAI tracing attributes, agent spans, MCP tool call spans, and content-capture events. Status as of 2026-07-11: primary sources conflict on gen_ai.client span stability (some early-2026 reports say stable; the OTel semconv pages were still labeled Development as of May 2026) -- verify against opentelemetry.io/docs/specs/semconv/gen-ai/ before relying on it; gen_ai.agent spans and the overall convention set remain Development/experimental. Switch to the latest experimental attribute set via OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental (default still emits pre-v1.36 attributes).",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07"
+      },
+      {
+        "name": "OpenTelemetry eBPF Instrumentation (OBI)",
+        "url": "https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation",
+        "description": "Official OTel project form of Grafana Beyla's instrumentation engine (donated 2025). Zero-code OTLP span emission for Go, Python, Node.js, Java, and Rust via eBPF uprobes.",
+        "add_as_web_search": false,
+        "optional": true,
+        "last_verified": "2026-06"
+      },
+      {
+        "name": "W3C Trace Context",
+        "url": "https://www.w3.org/TR/trace-context/",
+        "description": "Standard for trace propagation (`traceparent`).",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "The Twelve-Factor App - Logs",
+        "url": "https://12factor.net/logs",
+        "description": "Logs as event streams; useful baseline for debugging in cloud environments.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "record_and_replay": [
+      {
+        "name": "rr: lightweight recording & deterministic debugging",
+        "url": "https://rr-project.org/",
+        "description": "Mozilla-originated deterministic record-and-replay debugger for Linux. v5.9.0 (Feb 2024): works with perf_event_paranoid=2 on Linux ≥ 6.10. v5.8.0 added lldb support. AArch64 now production-quality. Use rr.soft for VMs without HW perf counters.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "rr.soft — rr without hardware performance counters",
+        "url": "https://github.com/sidkshatriya/rr.soft",
+        "description": "Runs rr in a Linux VM on Apple Silicon macOS or cloud VMs lacking CPU hardware performance counters. Use rr record -W for software-counter mode. Supports x86-64 and AArch64 Linux.",
+        "add_as_web_search": false,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Pernosco — Omniscient Debugging",
+        "url": "https://pernos.co/",
+        "description": "Omniscient debugger built on top of rr recordings. Builds a complete CPU-state database from the recording for instant time-travel. Targets C, C++, Ada, Rust, and V8 JS on x86-64 Linux. Free for approved open-source projects; hosted and on-premises for teams.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      }
+    ],
+    "profiling_and_debuggers": [
+      {
+        "name": "Chrome DevTools - Performance",
+        "url": "https://developer.chrome.com/docs/devtools/performance/",
+        "description": "Frontend and Node.js performance profiling workflows.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Chrome DevTools - Memory Problems",
+        "url": "https://developer.chrome.com/docs/devtools/memory-problems/",
+        "description": "Official browser memory leak and heap investigation workflows.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Node.js - Using Heap Snapshot",
+        "url": "https://nodejs.org/en/learn/diagnostics/memory/using-heap-snapshot",
+        "description": "Official Node.js heap snapshot workflow for leak debugging.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Node.js - Using Heap Profiler",
+        "url": "https://nodejs.org/en/learn/diagnostics/memory/using-heap-profiler",
+        "description": "Official Node.js heap profiling workflow.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Node.js - Using Linux perf",
+        "url": "https://nodejs.org/en/learn/diagnostics/poor-performance/using-linux-perf",
+        "description": "Official low-level CPU investigation workflow for Linux production systems.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Python Logging HOWTO",
+        "url": "https://docs.python.org/3/howto/logging.html",
+        "description": "Official Python logging guidance and patterns.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "databases": [
+      {
+        "name": "PostgreSQL - EXPLAIN",
+        "url": "https://www.postgresql.org/docs/current/sql-explain.html",
+        "description": "Query plan inspection and analysis.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "PostgreSQL - pg_stat_statements",
+        "url": "https://www.postgresql.org/docs/current/pgstatstatements.html",
+        "description": "Server-side query performance statistics for debugging slow queries.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "ai_assisted_debugging": [
+      {
+        "name": "Langfuse Documentation",
+        "url": "https://langfuse.com/docs",
+        "description": "LLM tracing, evaluations, prompt/version tracking, and cost debugging workflows.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/",
+        "description": "Current OWASP baseline for LLM application risks relevant to AI-assisted debugging.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OWASP Top 10 for Agentic Applications for 2026",
+        "url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+        "description": "Agent-specific failure and abuse modes relevant to agent/tool debugging in 2026.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OWASP Practical Guide for Secure MCP Server Development",
+        "url": "https://genai.owasp.org/resource/a-practical-guide-for-secure-mcp-server-development/",
+        "description": "Security controls for MCP servers and tool integrations used during debugging.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "distributed_tracing_and_profiles": [
+      {
+        "name": "SigNoz Documentation",
+        "url": "https://signoz.io/docs/",
+        "description": "OTel-native traces, metrics, and logs reference for debugging workflows.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Grafana Pyroscope Documentation",
+        "url": "https://grafana.com/docs/pyroscope/latest/",
+        "description": "Continuous profiling reference for intermittent CPU and memory issues. Pyroscope 2.0 (announced 2026-04-21) is a ground-up rearchitecture: single-write-once storage with symbol deduplication (up to 95% symbol-storage reduction in Grafana's own production use) and stateless querying.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Sentry Profiling Documentation",
+        "url": "https://docs.sentry.io/product/profiling/",
+        "description": "Continuous and sampled profiling workflows tied to errors and traces.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "knowledge_corpus_search": [
+      {
+        "name": "Stack Exchange API v2.3 — search/advanced",
+        "url": "https://api.stackexchange.com/docs",
+        "description": "Public Q&A search API behind community Stack Overflow MCP servers. Search-first triage for recognizable errors before deep debugging. API key raises rate limits only (not a secret).",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-06"
+      },
+      {
+        "name": "@gscalzo/stackoverflow-mcp (community MCP server)",
+        "url": "https://github.com/gscalzo/stackoverflow-mcp",
+        "description": "Community MCP server over the Stack Exchange API. Tools: search_by_error, search_by_tags, analyze_stack_trace. Install: npx -y @gscalzo/stackoverflow-mcp. Verify tool surface before citing.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-06"
+      },
+      {
+        "name": "Stack Overflow for Agents (beta — confirmed launched, endpoint details still unverified)",
+        "url": "https://agents.stackoverflow.com/llms.txt",
+        "description": "API-first validated-answer exchange, publicly announced by Stack Overflow on 2026-06-10 (stackoverflow.blog): search before burning tokens, optional human-approved write-back (TILs/Questions/Blueprints). API keys + operator SSO. Product existence and launch date are confirmed via the primary announcement; exact endpoint paths and request/response shapes were not independently re-verified here — confirm against agents.stackoverflow.com/llms.txt before wiring any call.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11-existence-confirmed-endpoints-unverified"
+      }
+    ]
+  }
+}

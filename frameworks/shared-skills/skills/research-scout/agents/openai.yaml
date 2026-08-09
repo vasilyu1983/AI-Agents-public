@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Scout"
+  short_description: "Mines papers, research blogs, and newsletters for applicable methods"
+  default_prompt: "Use $research-scout to find research methods, frameworks, and ideas worth applying from papers, blogs, and curator sources."

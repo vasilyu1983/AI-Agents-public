@@ -1,0 +1,290 @@
+{
+  "metadata": {
+    "title": "agents-mcp - Primary Sources",
+    "description": "Official MCP, client, SDK, registry, and tooling primary references",
+    "last_updated": "2026-08-09",
+    "updated": "2026-08-09",
+    "skill": "agents-mcp",
+    "total_sources": 44
+  },
+  "official_specification": [
+    {
+      "name": "MCP Specification (2025-11-25)",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25",
+      "description": "Current protocol baseline used by this skill",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Draft / RC Changelog (2026-07-28)",
+      "url": "https://modelcontextprotocol.io/specification/draft/changelog",
+      "description": "Redesign since 2025-11-25 (stateless protocol, MRTR, server/discover, Roots/Sampling/Logging deprecated). Finalizes 2026-07-28 — verified 2026-07-11, ~2.5 weeks from final; do not pre-adopt in production until then",
+      "add_as_web_search": true
+    },
+    {
+      "name": "The 2026-07-28 MCP Specification Release Candidate (blog)",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/",
+      "description": "Official announcement confirming the 2026-07-28 final ship date and the 10-week SDK/client validation window",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Beta SDKs for the 2026-07-28 MCP Spec RC (blog)",
+      "url": "https://blog.modelcontextprotocol.io/posts/sdk-betas-2026-07-28/",
+      "description": "Confirms TypeScript SDK v2 is in beta targeting the 2026-07-28 spec; v1.x remains the production lane for >=6 months after v2 stabilizes",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Specification Changelog (2025-11-25)",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/changelog",
+      "description": "Protocol changes including tasks, URL-mode elicitation, and other recent additions",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Authorization Spec",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization",
+      "description": "Authorization behavior for HTTP transports when a server supports auth",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Transport Spec",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+      "description": "Current transport guidance covering stdio, Streamable HTTP, and compatibility behavior",
+      "add_as_web_search": true
+    }
+  ],
+  "governance": [
+    {
+      "name": "MCP Joins the Agentic AI Foundation (official MCP blog)",
+      "url": "https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/",
+      "description": "Anthropic donated MCP to the Agentic AI Foundation (AAIF), a directed fund under the Linux Foundation, effective 2025-12-09. Existing maintainers keep full technical authority via the SEP process; the foundation provides neutral governance infrastructure and does not set technical direction. Founding members: Anthropic, Block, OpenAI, with AWS, Google, Microsoft, Cloudflare, Bloomberg support. Verified 2026-07-11",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Agentic AI Foundation — Model Context Protocol project page",
+      "url": "https://aaif.io/projects/model-context-protocol/",
+      "description": "AAIF's own project page for MCP; use to confirm current governance/member status rather than assuming Anthropic sole stewardship",
+      "add_as_web_search": true
+    }
+  ],
+  "official_registry": [
+    {
+      "name": "MCP Registry",
+      "url": "https://registry.modelcontextprotocol.io",
+      "description": "Official registry for discovering published MCP servers",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Registry Overview",
+      "url": "https://modelcontextprotocol.io/registry/about",
+      "description": "Official explanation of registry publishing and server metadata",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Registry Quickstart",
+      "url": "https://modelcontextprotocol.io/registry/quickstart",
+      "description": "Official guidance for publishing with server.json and mcp-publisher",
+      "add_as_web_search": true
+    }
+  ],
+  "official_client_docs": [
+    {
+      "name": "Claude Code MCP Docs",
+      "url": "https://docs.claude.com/en/docs/claude-code/mcp",
+      "description": "Official Claude Code setup, scopes, shared config, and server guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Docs MCP Guide",
+      "url": "https://platform.openai.com/docs/guides/tools-remote-mcp",
+      "description": "Official OpenAI guidance for MCP in Codex, the API, and the Agents SDK",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Codex Config Reference (MCP)",
+      "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+      "description": "Authoritative ~/.codex/config.toml schema: [mcp_servers.*] stdio/HTTP fields, timeouts, env, tool gating, OAuth callback. developers.openai.com/codex/config-reference now redirects here",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Tool Search docs",
+      "url": "https://code.claude.com/docs/en/agent-sdk/tool-search",
+      "description": "Official ENABLE_TOOL_SEARCH behavior, thresholds, model support (all but Haiku), and 10,000-tool catalog limit. Verified 2026-07-11",
+      "add_as_web_search": true
+    },
+    {
+      "name": "openai/codex PR #4904 (mcp add --url support)",
+      "url": "https://github.com/openai/codex/pull/4904",
+      "description": "Merged 2025-10-08. Adds --url and --bearer-token-env-var to `codex mcp add` for Streamable HTTP servers — corrects this skill's prior 'stdio only' claim, which was already stale when written",
+      "add_as_web_search": false
+    },
+    {
+      "name": "anthropics/claude-code issue #40314 (HTTP tools not deferred)",
+      "url": "https://github.com/anthropics/claude-code/issues/40314",
+      "description": "Confirmed, closed-as-not-planned gap: ENABLE_TOOL_SEARCH does not reliably defer Streamable HTTP MCP tool schemas, observed loading ~120K tokens (60% of a 200K context) upfront for a ~250-tool HTTP gateway even with auto:5 set. Verified 2026-07-11",
+      "add_as_web_search": false
+    }
+  ],
+  "official_sdk_docs": [
+    {
+      "name": "TypeScript SDK Docs",
+      "url": "https://ts.sdk.modelcontextprotocol.io/documents/server.html",
+      "description": "Official TypeScript SDK server guide for the stable v1 lane",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TypeScript SDK Repository",
+      "url": "https://github.com/modelcontextprotocol/typescript-sdk",
+      "description": "Official TypeScript SDK repo, including v2 status and release information",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Python SDK Repository",
+      "url": "https://github.com/modelcontextprotocol/python-sdk",
+      "description": "Official Python SDK repo with FastMCP examples and release guidance",
+      "add_as_web_search": true
+    }
+  ],
+  "official_tools_and_extensions": [
+    {
+      "name": "MCP Tools (Inspector)",
+      "url": "https://modelcontextprotocol.io/docs/tools",
+      "description": "Official Inspector documentation for debugging and smoke-testing servers",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Apps Extension",
+      "url": "https://modelcontextprotocol.io/blog/mcp-apps-sdk",
+      "description": "Official extension for building UI components for supporting MCP clients",
+      "add_as_web_search": true
+    }
+  ],
+  "community_resources": [
+    {
+      "name": "claude-code-templates mcp-builder skill (davila7)",
+      "url": "https://raw.githubusercontent.com/davila7/claude-code-templates/22d8efa9e9afcf31b98b7e3952ec557694e72c13/cli-tool/components/skills/development/mcp-builder/SKILL.md",
+      "description": "Source for this skill's Tool Annotation Hints section (references/mcp-custom.md) and mcp-evaluation.md's 10-question/6-criteria eval spec. davila7/claude-code-templates, commit 22d8efa9e9afcf31b98b7e3952ec557694e72c13, MIT license, extracted 2026-08-09. Rewritten in local voice, not copied verbatim.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "FastMCP",
+      "url": "https://github.com/jlowin/fastmcp",
+      "description": "Minimal Python framework for building MCP servers; reference for rapid server prototyping and clean tool/resource definition",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MCPHub",
+      "url": "https://github.com/samanhappy/mcphub",
+      "description": "Multi-server management via HTTP; reference for hosting and routing across multiple MCP server instances",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Context7",
+      "url": "https://github.com/upstash/context7",
+      "description": "MCP server that injects up-to-date library documentation into LLM context; reference for retrieval-augmented MCP server patterns",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Tavily MCP",
+      "url": "https://github.com/tavily-ai/tavily-mcp",
+      "description": "AI-native search engine exposed as an MCP server; reference for structured data retrieval and search tool design via MCP",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Codebase Memory MCP",
+      "url": "https://github.com/DeusData/codebase-memory-mcp",
+      "description": "Repo-to-knowledge-graph MCP server; reference for persistent codebase memory and reusable engineering context surfaces",
+      "add_as_web_search": false
+    },
+    {
+      "name": "How to Use Claude Code for Jira (@zuchka_)",
+      "url": "https://x.com/zuchka_/status/2034309119285551409",
+      "description": "Long-form X Article on integrating Claude Code with Jira via the Atlassian Rovo MCP server — covers API token auth, MCP setup, JQL via natural language, full ticket-to-PR workflow, troubleshooting, and advanced patterns including batch ops and sprint planning",
+      "add_as_web_search": false
+    },
+    {
+      "name": "AI-Native Design with Paper MCP (@tkkong)",
+      "url": "https://x.com/tkkong/status/2034368184036561160",
+      "description": "Long-form X Article on AI-native design using Claude Code + Paper MCP — covers MCP server setup, Paper Snapshot, iterative human-agent design collaboration, design exploration, and push-to-code roundtrip workflows",
+      "add_as_web_search": false
+    }
+  ],
+  "curated_servers": [
+    {
+      "name": "DBHub",
+      "url": "https://github.com/bytebase/dbhub",
+      "description": "Zero-dependency database MCP for Postgres, MySQL, SQLite with ~3 tools; ultra-lightweight",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Sentry MCP",
+      "url": "https://github.com/getsentry/sentry-mcp",
+      "description": "Error tracking and AI-powered issue search; official remote MCP with OAuth",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Exa Search MCP",
+      "url": "https://github.com/exa-labs/exa-mcp-server",
+      "description": "AI-native semantic web search with structured results; ~3 tools",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Firecrawl MCP",
+      "url": "https://github.com/mendableai/firecrawl-mcp-server",
+      "description": "Web scraping to clean LLM-ready data with autonomous research capability",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Docker MCP",
+      "url": "https://github.com/ckreiling/mcp-server-docker",
+      "description": "Container and image management; lightweight ~6 tools",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Kubernetes MCP",
+      "url": "https://github.com/containers/kubernetes-mcp-server",
+      "description": "K8s/OpenShift management with modular toolsets; disable unused toolsets to reduce tokens",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Grafana MCP",
+      "url": "https://github.com/grafana/mcp-grafana",
+      "description": "Dashboards, metrics, and alerting access for observability workflows",
+      "add_as_web_search": false
+    },
+    {
+      "name": "XcodeBuildMCP",
+      "url": "https://github.com/nicklama/XcodeBuildMCP",
+      "description": "Xcode project building and management for iOS/macOS agent workflows",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MCP Optimizer (Stacklok)",
+      "url": "https://github.com/stacklok/mcp-optimizer",
+      "description": "Semantic tool filtering proxy; reduces MCP token overhead by ~96%",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Awesome MCP Servers",
+      "url": "https://github.com/appcypher/awesome-mcp-servers",
+      "description": "Community-curated list of MCP servers across 28+ categories",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Awesome Remote MCP Servers",
+      "url": "https://github.com/jaw9c/awesome-remote-mcp-servers",
+      "description": "Curated list of official and well-maintained remote MCP servers",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Stack Overflow MCP (community, @gscalzo)",
+      "url": "https://github.com/gscalzo/stackoverflow-mcp",
+      "description": "Community MCP server over the public Stack Exchange API. Tools: search_by_error, search_by_tags, analyze_stack_trace. Search-first Q&A corpus for debugging; pairs with qa-debugging. Verify tool surface before citing.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Stack Overflow for Agents (emerging, secondary-sourced)",
+      "url": "https://agents.stackoverflow.com/llms.txt",
+      "description": "API-first validated-answer exchange for agents: search before burning tokens, optional write-back (TILs/Blueprints), API keys + operator SSO. Beta; confirm endpoints against primary docs before wiring.",
+      "add_as_web_search": false
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pretraining From Scratch"
+  short_description: "Build a transformer/GPT and BPE tokenizer from scratch"
+  default_prompt: "Use $ai-pretraining when building a transformer/GPT and BPE tokenizer from scratch: autograd, self-attention, nanoGPT-style pretraining loop, byte-level tokenizer."

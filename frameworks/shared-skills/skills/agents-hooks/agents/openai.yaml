@@ -1,0 +1,4 @@
+interface:
+  display_name: "Claude Code Hooks + Codex Notifications"
+  short_description: "Claude Code lifecycle hooks and Codex CLI notifications"
+  default_prompt: "Use $agents-hooks to configure Claude Code hooks and Codex hooks.json/notify callbacks. Use when adding guardrails, preflight, audit trails, worktree automation, or budget enforcement."

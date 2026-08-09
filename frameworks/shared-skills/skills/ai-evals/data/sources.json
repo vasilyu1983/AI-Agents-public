@@ -1,0 +1,618 @@
+{
+  "metadata": {
+    "skill": "ai-evals",
+    "updated": "2026-07-11",
+    "total_sources": 65,
+    "description": "Primary-source catalog for LLM/agent evaluation and optimization methodology: LLM-as-judge reliability/bias and advanced judging (juries, fine-tuned judges, calibration), eval frameworks, threshold calibration, eval statistics, fine-tuning decision loops (SFT, RFT, graders, PEFT/LoRA/QLoRA, preference tuning), test-time compute, data construction, distillation, online/production eval, safety/red-team eval, and reproducibility/contamination. Verify framework and fine-tuning APIs against official docs before recommending a specific call.",
+    "version": "1.3",
+    "title": "AI Evals - Sources",
+    "last_updated": "2026-07-11",
+    "last_validated": "2026-07-11"
+  },
+  "categories": {
+    "judge_reliability_research": [
+      {
+        "name": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+        "url": "https://arxiv.org/abs/2306.05685",
+        "type": "research",
+        "relevance": "Canonical LLM-as-judge paper. Documents position bias, verbosity bias, and self-enhancement (self-preference) bias, and validates judge-human agreement. Foundational for the bias taxonomy.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Large Language Models are not Fair Evaluators",
+        "url": "https://arxiv.org/abs/2305.17926",
+        "type": "research",
+        "relevance": "Quantifies position bias in pairwise LLM judging and proposes balanced-position calibration (run both orderings). Basis for the both-orderings-must-agree control.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment",
+        "url": "https://arxiv.org/abs/2303.16634",
+        "type": "research",
+        "relevance": "Rubric/chain-of-thought judge design with form-filling, plus probability-weighted scoring (expectation over score-token logprobs). Basis for the CoT-before-verdict and probability-weighted scoring guidance in advanced-judging.md.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Length-Controlled AlpacaEval: A Simple Way to Debias Automatic Evaluators",
+        "url": "https://arxiv.org/abs/2404.04475",
+        "type": "research",
+        "relevance": "2024. Quantifies and corrects length/verbosity bias in LLM-judge leaderboards via regression-based length control. Basis for treating length bias as a measurable, correctable confound rather than just a prompt instruction.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Judging the Judges: Evaluating Alignment and Vulnerabilities in LLMs-as-Judges (Bavaresco et al.)",
+        "url": "https://arxiv.org/abs/2406.12624",
+        "type": "research",
+        "relevance": "2024 survey/benchmark of LLM-judge reliability across tasks; documents where judges agree with humans and where they fail. Basis for 'measure judge-human agreement, do not assume it' across threshold-derivation.md and advanced-judging.md.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "advanced_judging_research": [
+      {
+        "name": "Replacing Judges with Juries (PoLL: Panel of LLm evaluators)",
+        "url": "https://arxiv.org/abs/2404.18796",
+        "type": "research",
+        "relevance": "2024. Shows a panel of smaller diverse judges agrees with humans better and cheaper than one large judge, and reduces intra-model self-preference bias. Basis for the juries/ensembles section in advanced-judging.md.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Prometheus 2: An Open Source LM Specialized in Evaluating Other LMs",
+        "url": "https://arxiv.org/abs/2405.01535",
+        "type": "research",
+        "relevance": "2024. Open fine-tuned judge model supporting direct-assessment and pairwise grading against custom rubrics. Reference for the prompted-vs-fine-tuned judge tradeoff; verify current model/license before adopting.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "JudgeLM: Fine-tuned Large Language Models are Scalable Judges",
+        "url": "https://arxiv.org/abs/2310.17631",
+        "type": "research",
+        "relevance": "Fine-tuned judge with bias-mitigation training (swap/reference augmentation). Supporting reference for fine-tuned-judge viability and bias controls in advanced-judging.md.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "eval_statistics_methods": [
+      {
+        "name": "scipy.stats.bootstrap",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+        "type": "documentation",
+        "relevance": "Reference implementation for bootstrap confidence intervals (BCa and percentile) used throughout eval-statistics.md. Verify current API/params per scipy version.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "statsmodels: McNemar's test (contingency tables)",
+        "url": "https://www.statsmodels.org/stable/generated/statsmodels.stats.contingency_tables.mcnemar.html",
+        "type": "documentation",
+        "relevance": "Reference implementation of McNemar's paired test for binary same-case comparisons (the correct test for 'A passed cases B failed'). Used in eval-statistics.md.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Benjamini & Hochberg, Controlling the False Discovery Rate",
+        "url": "https://www.jstor.org/stable/2346101",
+        "type": "research",
+        "relevance": "Foundational FDR multiple-comparison correction; default for slice/metric dashboards in eval-statistics.md. statsmodels provides multipletests(method='fdr_bh').",
+        "update_frequency": "static",
+        "access": "paywalled",
+        "add_as_web_search": false
+      },
+      {
+        "name": "CUPED: Improving the Sensitivity of Online Controlled Experiments (Deng et al.)",
+        "url": "https://exp-platform.com/Documents/2013-02-CUPED-ImprovingSensitivityOfControlledExperiments.pdf",
+        "type": "research",
+        "relevance": "Variance-reduction via pre-experiment covariate adjustment; basis for the CUPED-style variance reduction note in eval-statistics.md (offline paired and online A/B).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "safety_and_redteam_research": [
+      {
+        "name": "Universal and Transferable Adversarial Attacks on Aligned Language Models (GCG)",
+        "url": "https://arxiv.org/abs/2307.15043",
+        "type": "research",
+        "relevance": "Automated adversarial suffix attacks; basis for testing adaptive/automated jailbreaks (not just static suites) in safety-redteam-eval.md.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+        "url": "https://arxiv.org/abs/2302.12173",
+        "type": "research",
+        "relevance": "Defines indirect prompt injection via retrieved/tool content — the dominant agentic attack. Basis for the planted-instruction injection methodology in safety-redteam-eval.md.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "XSTest: A Test Suite for Identifying Exaggerated Safety Behaviours",
+        "url": "https://arxiv.org/abs/2308.01263",
+        "type": "research",
+        "relevance": "Benign-but-adjacent prompts to measure over-refusal. Basis for scoring the 'should-comply' set alongside the harmful set in safety-redteam-eval.md.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "reference",
+        "relevance": "Practitioner taxonomy of LLM risks (prompt injection, excessive agency, data exfiltration). Maps to the agentic-safety eval categories in safety-redteam-eval.md. Verify current version.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "Inspect AI (UK AISI)",
+        "url": "https://inspect.aisi.org.uk/",
+        "type": "documentation",
+        "relevance": "Solver/scorer eval framework for agentic and tool-use tasks; supports model graders. Verify current scorer API before copying snippets.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "lighteval (Hugging Face)",
+        "url": "https://github.com/huggingface/lighteval",
+        "type": "documentation",
+        "relevance": "Multi-backend benchmark runner. v0.13 uses one-file-one-task; verify task-string format and backend flags per version.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "lm-evaluation-harness (EleutherAI)",
+        "url": "https://github.com/EleutherAI/lm-evaluation-harness",
+        "type": "documentation",
+        "relevance": "Reproducible academic benchmark harness; contamination-aware. The benchmark lingua franca for open models.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Ragas",
+        "url": "https://docs.ragas.io/",
+        "type": "documentation",
+        "relevance": "RAG faithfulness/context metrics and synthetic testset generation. Read what each metric computes before gating; verify metric defs per version.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepEval",
+        "url": "https://github.com/confident-ai/deepeval",
+        "type": "documentation",
+        "relevance": "pytest-style LLM eval assertions (G-Eval and others) for CI regression gating in app repos.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "promptfoo",
+        "url": "https://www.promptfoo.dev/docs/",
+        "type": "documentation",
+        "relevance": "Config-driven prompt/app matrix testing with assertions and model graders; fast for prompt A/B in CI. Acquired by OpenAI March 9, 2026 — remains open source; roadmap now OpenAI-aligned.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Promptfoo Joining OpenAI",
+        "url": "https://www.promptfoo.dev/blog/promptfoo-joining-openai/",
+        "type": "announcement",
+        "relevance": "Acquisition announcement (March 9, 2026): OpenAI acquires Promptfoo; product remains open source; roadmap aligns with OpenAI infrastructure. Factor into vendor-neutrality decisions for multi-provider eval stacks.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Braintrust Docs",
+        "url": "https://www.braintrust.dev/docs",
+        "type": "documentation",
+        "relevance": "Hosted experiment/dataset/score tracking platform; a logging and iteration layer, not a metric source by itself.",
+        "update_frequency": "frequent",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Langfuse Documentation",
+        "url": "https://langfuse.com/docs",
+        "type": "documentation",
+        "relevance": "Open-source, self-hostable LLM observability and online eval sampling platform. OTel-native tracing with online eval scoring hooks. Use for production-trace sampling and self-hosted deployments. Verify current SDK and eval sampling API before use.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Arize Phoenix Documentation",
+        "url": "https://docs.arize.com/phoenix",
+        "type": "documentation",
+        "relevance": "Open-source, vendor-agnostic LLM observability and RAG eval framework with OTel-native tracing and enterprise production monitoring. Use for retrieval attribution in production and multi-provider eval stacks.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "W&B Weave Documentation",
+        "url": "https://weave-docs.wandb.ai/",
+        "type": "documentation",
+        "relevance": "Weights & Biases tracing and eval layer for ML teams already using W&B for training runs. Covers experiment tracking, production tracing, and custom graders. Best fit when the team is W&B-native.",
+        "update_frequency": "frequent",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon Bedrock Model Evaluation",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html",
+        "type": "documentation",
+        "relevance": "Managed model-comparison and RAG evaluation (Knowledge Bases) on Bedrock. Supports LLM-as-judge, human, and automatic metrics. Native option for AWS/Bedrock-stack teams; verify current job types, eligible models, and metric support before use.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "benchmarks_and_contamination": [
+      {
+        "name": "HELM (Holistic Evaluation of Language Models)",
+        "url": "https://crfm.stanford.edu/helm/",
+        "type": "reference",
+        "relevance": "Multi-metric, multi-scenario benchmark methodology; reference for slice-aware, multi-dimension evaluation rather than single-number gates.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Evals",
+        "url": "https://github.com/openai/evals",
+        "type": "documentation",
+        "relevance": "Registry-based eval framework and template patterns (match, model-graded). Useful as a structural reference for eval/grader templates.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "fine_tuning_platform_docs": [
+      {
+        "name": "OpenAI Model Optimization Guide",
+        "url": "https://platform.openai.com/docs/guides/model-optimization",
+        "type": "documentation",
+        "relevance": "Official model-optimization overview tying evals, prompt optimization, and fine-tuning together. Use to verify current OpenAI platform flow before recommending an optimization path.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Supervised Fine-Tuning Guide",
+        "url": "https://platform.openai.com/docs/guides/supervised-fine-tuning",
+        "type": "documentation",
+        "relevance": "Official SFT workflow and dataset guidance. Basis for eval-first SFT gating and current JSONL/job requirements; verify eligible models and schemas.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Fine-Tuning Best Practices",
+        "url": "https://platform.openai.com/docs/guides/fine-tuning-best-practices",
+        "type": "documentation",
+        "relevance": "Official iteration guidance on data quality, diversity, and diagnosing weak fine-tune results. Supports the training-data-quality-over-volume guidance.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Reinforcement Fine-Tuning Guide",
+        "url": "https://platform.openai.com/docs/guides/reinforcement-fine-tuning",
+        "type": "documentation",
+        "relevance": "Official RFT workflow using programmable graders for reasoning-domain optimization. Verify current model eligibility, grader schema, and dataset requirements.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Graders Guide",
+        "url": "https://platform.openai.com/docs/guides/graders/",
+        "type": "documentation",
+        "relevance": "Official grader types used for evals and fine-tuning. Supports guidance on deterministic, model, code, and multi-grader reward composition.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Model Selection Guide",
+        "url": "https://platform.openai.com/docs/guides/model-selection",
+        "type": "documentation",
+        "relevance": "Official guidance that fine-tuning should follow baseline/model-selection work, not replace it. Verify current model tradeoffs and availability.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Hugging Face TRL Documentation",
+        "url": "https://huggingface.co/docs/trl/",
+        "type": "documentation",
+        "relevance": "Official transformers reinforcement-learning and preference-training library docs (SFTTrainer, DPOTrainer, related trainers). Verify current trainer APIs.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Hugging Face PEFT LoRA Guide",
+        "url": "https://huggingface.co/docs/peft/developer_guides/lora",
+        "type": "documentation",
+        "relevance": "Official PEFT LoRA guide for parameter-efficient adaptation. Verify current target-module, adapter, quantization, and merge/deploy APIs.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Axolotl Documentation",
+        "url": "https://docs.axolotl.ai/",
+        "type": "documentation",
+        "relevance": "Open-source fine-tuning framework documentation for SFT, LoRA/QLoRA, preference, and reward-model workflows. Verify current config keys before use.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Unsloth Documentation",
+        "url": "https://docs.unsloth.ai/",
+        "type": "documentation",
+        "relevance": "Open-source efficient fine-tuning docs for LoRA/QLoRA workflows. Useful for local/open-model adaptation planning; verify current notebooks and hardware support.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon Bedrock Custom Model Import",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html",
+        "type": "documentation",
+        "relevance": "AWS path for bringing a fine-tuned open model into Bedrock's serving layer. Use instead of HF/OpenAI fine-tuning paths when the stack is AWS-native. Verify current supported model architectures and import requirements.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon SageMaker Training Jobs",
+        "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/train-model.html",
+        "type": "documentation",
+        "relevance": "Primary AWS fine-tuning surface for SFT and RL-style training on managed infrastructure. Replaces HF/OpenAI fine-tuning paths for AWS-stack users. Verify current container images, instance types, and SageMaker Clarify integration for training transparency.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "fine_tuning_research_methods": [
+      {
+        "name": "Training language models to follow instructions with human feedback",
+        "url": "https://arxiv.org/abs/2203.02155",
+        "type": "research",
+        "relevance": "InstructGPT/RLHF paper. Foundational reference for SFT plus preference/reward optimization and human-evaluation comparison against base models.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+        "url": "https://arxiv.org/abs/2305.18290",
+        "type": "research",
+        "relevance": "Canonical DPO paper. Basis for choosing preference tuning when pairwise preference labels are available and reward-model/RL complexity is unnecessary.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LoRA: Low-Rank Adaptation of Large Language Models",
+        "url": "https://arxiv.org/abs/2106.09685",
+        "type": "research",
+        "relevance": "Canonical parameter-efficient fine-tuning method that freezes base weights and trains low-rank adapter matrices. Basis for PEFT/adapter method selection.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "QLoRA: Efficient Finetuning of Quantized LLMs",
+        "url": "https://arxiv.org/abs/2305.14314",
+        "type": "research",
+        "relevance": "Canonical quantized LoRA method. Basis for low-memory open-model adaptation guidance and for treating QLoRA as a compute method, not a product-quality guarantee.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "optimization_method_research": [
+      {
+        "name": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "url": "https://arxiv.org/abs/2201.11903",
+        "type": "research",
+        "relevance": "Foundational prompting-pattern source for decomposed reasoning. Use as background for reasoning-slice prompt baselines before heavier optimization.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+        "url": "https://arxiv.org/abs/2203.11171",
+        "type": "research",
+        "relevance": "Canonical sample-and-aggregate test-time compute method. Basis for pass@k, majority-vote, and marginal-cost gates in llm-optimization-technique-map.md.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+        "url": "https://arxiv.org/abs/2305.10601",
+        "type": "research",
+        "relevance": "Search-over-thoughts inference method. Useful for high-value planning/reasoning slices where verifier or heuristic quality can be evaluated.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "A Survey of Test-Time Compute: From Intuitive Inference to Deliberate Reasoning",
+        "url": "https://arxiv.org/abs/2501.02497",
+        "type": "research",
+        "relevance": "Recent taxonomy for inference-time scaling methods. Use for source refresh before recommending newer test-time compute variants.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+        "url": "https://arxiv.org/abs/2303.11366",
+        "type": "research",
+        "relevance": "Critique/retry and verbal feedback loop for agents. Basis for retry-lift and trace-grounded feedback gates.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Self-Refine: Iterative Refinement with Self-Feedback",
+        "url": "https://arxiv.org/abs/2303.17651",
+        "type": "research",
+        "relevance": "Self-feedback refinement method. Useful as a low-lift inference-time baseline before fine-tuning; requires self-feedback reliability checks.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+        "url": "https://arxiv.org/abs/2212.10560",
+        "type": "research",
+        "relevance": "Synthetic instruction generation and filtering recipe. Basis for data-construction guidance with human anchors and leakage controls.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LIMA: Less Is More for Alignment",
+        "url": "https://arxiv.org/abs/2305.11206",
+        "type": "research",
+        "relevance": "High-quality-small-data alignment reference. Basis for 'curation before volume' and lift-per-example gates.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "WizardCoder: Empowering Code Large Language Models with Evol-Instruct",
+        "url": "https://arxiv.org/abs/2306.08568",
+        "type": "research",
+        "relevance": "Domain-specific Evol-Instruct application for code. Supports synthetic hard-example generation guidance with domain-specific validation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "RAFT: Adapting Language Model to Domain Specific RAG",
+        "url": "https://arxiv.org/abs/2403.10131",
+        "type": "research",
+        "relevance": "Retrieval-augmented fine-tuning recipe with distractors. Basis for grounded-answer, citation-support, and distractor-robustness gates.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "KTO: Model Alignment as Prospect Theoretic Optimization",
+        "url": "https://arxiv.org/abs/2402.01306",
+        "type": "research",
+        "relevance": "Preference-alignment loss for desirable/undesirable binary feedback. Basis for choosing KTO when pairwise labels are unavailable.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "url": "https://arxiv.org/abs/2403.07691",
+        "type": "research",
+        "relevance": "Single-stage SFT plus preference penalty without a reference model. Basis for reference-free preference tuning tradeoffs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "SimPO: Simple Preference Optimization with a Reference-Free Reward",
+        "url": "https://arxiv.org/abs/2405.14734",
+        "type": "research",
+        "relevance": "Reference-free DPO-style preference optimization with length-aware reward formulation. Basis for memory/cost-sensitive preference tuning guidance.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models",
+        "url": "https://arxiv.org/abs/2402.03300",
+        "type": "research",
+        "relevance": "Introduces GRPO-style verifiable-reward optimization in an open reasoning setting. Basis for RLVR/GRPO verifier-first gates.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+        "url": "https://arxiv.org/abs/2501.12948",
+        "type": "research",
+        "relevance": "Reasoning RL technical report. Supports the guidance that verifiable rewards can move reasoning when verifier quality is high.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes",
+        "url": "https://arxiv.org/abs/2305.02301",
+        "type": "research",
+        "relevance": "Rationale-augmented distillation method. Basis for student-vs-teacher quality/cost Pareto gates.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Constitutional AI: Harmlessness from AI Feedback",
+        "url": "https://arxiv.org/abs/2212.08073",
+        "type": "research",
+        "relevance": "RLAIF and critique/revision source. Basis for principle-guided data construction, reward-model cautions, and safety replay.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Self-Rewarding Language Models",
+        "url": "https://arxiv.org/abs/2401.10020",
+        "type": "research",
+        "relevance": "Self-generated reward/judge training method. Useful as a high-risk validate-only idea because self-judging can amplify judge bias.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "MDP-GRPO: Stabilized Group Relative Policy Optimization for Multi-Constraint Instruction Following",
+        "url": "https://arxiv.org/abs/2606.06058",
+        "type": "research",
+        "relevance": "Emerging GRPO stabilization direction surfaced in arXiv scan. Track as validate-only until implementation support and independent reproduction are clear.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

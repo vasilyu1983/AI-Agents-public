@@ -1,0 +1,70 @@
+{
+  "$schema": "https://skills.ai-coding-agents/plugins/plugin.manifest.schema.json",
+  "id": "{{PLUGIN_ID}}",
+  "name": "{{PLUGIN_DISPLAY_NAME}}",
+  "version": "0.1.0",
+  "description": "{{ONE_LINE_DESCRIPTION}}",
+  "author": "{{AUTHOR_NAME_OR_ORG}}",
+  "license": "MIT",
+
+  "runtime": {
+    "min_agent_version": "1.0.0",
+    "max_agent_version": null,
+    "platform": ["claude-code", "codex", "agent-sdk"],
+    "languages": ["node", "python"]
+  },
+
+  "entry": {
+    "node": "dist/index.js",
+    "python": "src/main.py"
+  },
+
+  "tools": [
+    {
+      "name": "{{TOOL_NAME}}",
+      "description": "{{TOOL_DESCRIPTION}}",
+      "schema_path": "schemas/{{TOOL_NAME}}.schema.json",
+      "side_effects": ["file_read"],
+      "requires_approval": false
+    }
+  ],
+
+  "commands": [
+    {
+      "name": "{{COMMAND_NAME}}",
+      "description": "{{COMMAND_DESCRIPTION}}",
+      "prompt_path": "commands/{{COMMAND_NAME}}.md",
+      "allowed_tools": ["{{TOOL_NAME}}"]
+    }
+  ],
+
+  "permissions": {
+    "required": [],
+    "optional": ["network_outbound"]
+  },
+
+  "settings": {
+    "schema_path": "schemas/settings.schema.json",
+    "defaults_path": "settings.defaults.json"
+  },
+
+  "hooks": {
+    "on_install": "scripts/on_install.sh",
+    "on_uninstall": "scripts/on_uninstall.sh",
+    "on_update": null
+  },
+
+  "assets": {
+    "icon": "assets/icon.png",
+    "screenshots": []
+  },
+
+  "repository": "https://github.com/{{ORG}}/{{PLUGIN_ID}}",
+  "homepage": "https://{{PLUGIN_ID}}.example.com",
+  "bugs": "https://github.com/{{ORG}}/{{PLUGIN_ID}}/issues",
+
+  "keywords": ["{{KEYWORD_1}}", "{{KEYWORD_2}}"],
+
+  "changelog_path": "CHANGELOG.md",
+  "readme_path": "README.md"
+}

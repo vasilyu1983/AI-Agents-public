@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Integration"
+  short_description: "Applies production AI integration patterns for chat, structured output"
+  default_prompt: "Use $software-ai-integration for Applies production AI integration patterns for chat, structured output, guardrails, provider routing, and AI UX. Use when adding LLM-powered features to an application."

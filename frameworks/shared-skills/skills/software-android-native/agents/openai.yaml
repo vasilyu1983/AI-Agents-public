@@ -1,0 +1,4 @@
+interface:
+  display_name: "Native Android"
+  short_description: "Guides native Android development with Kotlin, Jetpack Compose, and Views"
+  default_prompt: "Use $software-android-native for Guides native Android development with Kotlin, Jetpack Compose, and Views interop. Use when building, rewriting, or reviewing modern Android apps after establishing runtime truth."

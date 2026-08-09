@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reliability Theory Foundations"
+  short_description: "Reliability-theory primitives for MTBF, availability, FMEA, hazards, and SLOs"
+  default_prompt: "Use $foundations-reliability-theory for MTBF/MTTR, availability, hazard functions, bathtub curves, fault trees, FMEA, redundancy math, error budgets, Weibull analysis, system reliability, or reliability allocation."

@@ -1,0 +1,893 @@
+{
+  "metadata": {
+    "skill": "research-scout",
+    "title": "Dev Research Scout - Sources",
+    "description": "Multi-source research idea mining: arXiv, HF Papers, Semantic Scholar, Papers with Code, conferences, industry research blogs, and curator newsletters.",
+    "version": "2.1",
+    "last_updated": "2026-07-11",
+    "currency_review": "2026-07-11 Jul-2026 verified sweep (OpenAlex mandate date corrected to 2026-02-13; Elicit pricing overhaul; ResearchRabbit acquisition date corrected to 2025-05-08)",
+    "total_sources": 51,
+    "attribution": {
+      "arxiv": "Thank you to arXiv for use of its open access interoperability."
+    }
+  },
+  "dead_or_changed": [
+    {
+      "name": "Papers with Code",
+      "url": "https://huggingface.co/papers",
+      "change": "Shut down by Meta in July 2025; paperswithcode.com now 301-redirects to Hugging Face Trending Papers",
+      "date": "2025-07-01",
+      "replacement": "HF Papers (huggingface.co/papers) + GitHub repo signal via research-git + Emergent Mind (emergentmind.com)"
+    },
+    {
+      "name": "Distill.pub",
+      "url": "https://distill.pub/",
+      "change": "Indefinite hiatus since 2021; confirmed no resumption through May 2026; archive only",
+      "date": "2021-09-01",
+      "replacement": "HF Blog (huggingface.co/blog) for visual explainers; Lilian Weng Lil'Log for synthesis"
+    },
+    {
+      "name": "arXiv export API endpoint",
+      "url": "https://info.arxiv.org/help/api/index.html",
+      "change": "Stricter 429 enforcement from Feb 2026; hard 1 request / 3s, single connection",
+      "date": "2026-02-01",
+      "replacement": "Same endpoint; enforce 3s delay in all query scripts"
+    },
+    {
+      "name": "OpenAlex",
+      "url": "https://openalex.org/",
+      "change": "API key mandatory since 2026-02-13 (verify at openalex.org/pricing as of 2026-07-11); polite-pool email param retired. Keyed requests get $1/day free credit (~usual research volume); unkeyed requests get $0.10/day then 409s.",
+      "date": "2026-02-13",
+      "replacement": "Same service; register for free API key at openalex.org/settings/api"
+    },
+    {
+      "name": "Connected Papers",
+      "url": "https://www.connectedpapers.com/",
+      "change": "Paid tier introduced 2025; free plan limited to 50 inputs/searches",
+      "date": "2025-01-01",
+      "replacement": "OpenAlex citation graph (free) or Semantic Scholar's graph API for bulk use"
+    },
+    {
+      "name": "ICLR / OpenReview",
+      "url": "https://docs.openreview.net/",
+      "change": "OpenReview API v2 mandatory; v1 deprecated; all 2026 venues on v2",
+      "date": "2026-01-01",
+      "replacement": "Same venue; use OpenReview API v2 endpoints"
+    },
+    {
+      "name": "Andrej Karpathy blog",
+      "url": "https://karpathy.bearblog.dev/blog/",
+      "change": "URL moved from karpathy.github.io to karpathy.bearblog.dev/blog/ (also karpathy.substack.com)",
+      "date": "2025-01-01",
+      "replacement": "https://karpathy.bearblog.dev/blog/"
+    },
+    {
+      "name": "Anthropic Research blog",
+      "url": "https://www.anthropic.com/research",
+      "change": "Expanded: added Alignment Science Blog (alignment.anthropic.com, Mar 2026) and Frontier Red Team blog (red.anthropic.com)",
+      "date": "2026-03-01",
+      "replacement": "Additive — original blog still active; see new sources in industry_research_blogs"
+    },
+    {
+      "name": "Semantic Scholar API",
+      "url": "https://www.semanticscholar.org/product/api",
+      "change": "Key now officially recommended; ~1 RPS authenticated; exponential backoff required",
+      "date": "2026-01-01",
+      "replacement": "Same service; register for API key at semanticscholar.org/product/api"
+    }
+  ],
+  "categories": {
+    "arxiv": [
+      {
+        "name": "arXiv API Documentation",
+        "url": "https://info.arxiv.org/help/api/index.html",
+        "type": "docs",
+        "relevance": "Official arXiv API reference and best practices.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "arxiv",
+          "api"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "arXiv API Terms of Use",
+        "url": "https://info.arxiv.org/help/api/tou.html",
+        "type": "policy",
+        "relevance": "Attribution and usage requirements. Required acknowledgement string included in metadata.attribution.arxiv.",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "arxiv",
+          "compliance"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "arXiv Category Taxonomy",
+        "url": "https://arxiv.org/category_taxonomy",
+        "type": "reference",
+        "relevance": "Canonical category list (cs.AI, cs.CL, cs.LG, etc.).",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "arxiv",
+          "taxonomy"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "arXiv export API endpoint",
+        "url": "https://export.arxiv.org/api/query",
+        "type": "api",
+        "relevance": "Programmatic search endpoint used by the scout.",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "arxiv",
+          "api"
+        ],
+        "access_tier": "free",
+        "status_2026": "changed",
+        "status_note": "Stricter 429 enforcement from Feb 2026; hard 1 request / 3s, single connection."
+      },
+      {
+        "name": "alphaXiv",
+        "url": "https://www.alphaxiv.org/",
+        "type": "tool",
+        "relevance": "Community discussion layer over arXiv. Useful for spotting flagged issues and corroboration.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "arxiv",
+          "discussion"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      }
+    ],
+    "hf_papers": [
+      {
+        "name": "Hugging Face Papers",
+        "url": "https://huggingface.co/papers",
+        "type": "tool",
+        "relevance": "Daily community-curated paper highlights with discussion, biased to LLM/VLM/agent work.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "hf_papers",
+          "discovery"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Hugging Face Papers Trending",
+        "url": "https://huggingface.co/papers?date=trending",
+        "type": "tool",
+        "relevance": "Trending view; useful for cresting-method detection. Also the landing target for paperswithcode.com redirects after Jul 2025 shutdown.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "hf_papers",
+          "trending"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Daily Papers RSS",
+        "url": "https://huggingface.co/papers.rss",
+        "type": "feed",
+        "relevance": "RSS feed for daily papers; supports automation.",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "hf_papers",
+          "rss"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      }
+    ],
+    "semantic_scholar": [
+      {
+        "name": "Semantic Scholar API",
+        "url": "https://api.semanticscholar.org/",
+        "type": "api",
+        "relevance": "Citation graph, influential-papers API, embedding search. Key officially recommended; ~1 RPS authenticated; use exponential backoff.",
+        "access": "free with rate limit; key required for higher tier",
+        "add_as_web_search": false,
+        "tags": [
+          "semantic_scholar",
+          "api"
+        ],
+        "access_tier": "freemium",
+        "status_2026": "changed",
+        "status_note": "Key now officially recommended; ~1 RPS authenticated; exponential backoff required."
+      },
+      {
+        "name": "Semantic Scholar Search",
+        "url": "https://www.semanticscholar.org/search",
+        "type": "tool",
+        "relevance": "Web UI for paper discovery and citation traversal.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "semantic_scholar",
+          "discovery"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "OpenAlex",
+        "url": "https://openalex.org/",
+        "type": "api",
+        "relevance": "Open catalog of scholarly works; complementary to Semantic Scholar. API key mandatory since 2026-02-13; keyed = $1/day free credit, unkeyed = $0.10/day then 409s.",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": [
+          "openalex",
+          "citations"
+        ],
+        "access_tier": "freemium",
+        "status_2026": "changed",
+        "status_note": "API key mandatory since 2026-02-13 (verify at openalex.org/pricing as of 2026-07-11); polite-pool email param retired. Usage-based pricing: singleton lookups free, list/search/semantic calls metered; $1/day free credit with a key covers normal research use."
+      },
+      {
+        "name": "Connected Papers",
+        "url": "https://www.connectedpapers.com/",
+        "type": "tool",
+        "relevance": "Visual prior-work and derivative-work exploration. Free plan limited to 50 inputs/searches since 2025.",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": [
+          "connected_papers",
+          "graph"
+        ],
+        "access_tier": "freemium",
+        "status_2026": "changed",
+        "status_note": "Paid tier introduced 2025; free plan limited to 50 inputs/searches."
+      }
+    ],
+    "papers_with_code": [
+      {
+        "name": "Papers with Code data archive (DEAD SOURCE — historical only)",
+        "url": "https://github.com/paperswithcode/paperswithcode-data",
+        "type": "archive",
+        "relevance": "Papers with Code was shut down by Meta in July 2025; paperswithcode.com now 301-redirects to Hugging Face Trending Papers. This GitHub snapshot is the frozen, no-longer-updated historical dataset. Use ONLY for pre-July-2025 method/benchmark lookups. Do NOT treat as a live reproducibility signal. Live replacement: HF Papers + direct GitHub repo/stars (via research-git) + OpenReview/alphaXiv. For benchmark/leaderboard-table lookups, codesota.com (https://codesota.com/) is a community-maintained alternative — not a full replacement but useful for current SOTA table queries.",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "papers_with_code",
+          "archive",
+          "dead-source"
+        ],
+        "access_tier": "free",
+        "status_2026": "dead",
+        "status_note": "Meta shutdown Jul 2025; paperswithcode.com 301-redirects to HF Trending Papers; GitHub dataset frozen."
+      }
+    ],
+    "conferences": [
+      {
+        "name": "NeurIPS Proceedings",
+        "url": "https://proceedings.neurips.cc/",
+        "type": "venue",
+        "relevance": "Canonical NeurIPS accepted-paper archive.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "conference",
+          "neurips"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "ICML Proceedings (PMLR)",
+        "url": "https://proceedings.mlr.press/",
+        "type": "venue",
+        "relevance": "ICML, AISTATS, COLT, UAI accepted-paper archive (PMLR).",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "conference",
+          "icml",
+          "pmlr"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "ICLR / OpenReview",
+        "url": "https://openreview.net/group?id=ICLR.cc",
+        "type": "venue",
+        "relevance": "ICLR accepted papers and open review discussions. Use OpenReview API v2; v1 is deprecated.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "conference",
+          "iclr",
+          "openreview"
+        ],
+        "access_tier": "free",
+        "status_2026": "changed",
+        "status_note": "OpenReview API v2; v1 deprecated; all 2026 venues on v2."
+      },
+      {
+        "name": "ACL Anthology",
+        "url": "https://aclanthology.org/",
+        "type": "venue",
+        "relevance": "ACL, EMNLP, NAACL, EACL, COLING accepted-paper archive.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "conference",
+          "acl",
+          "emnlp"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "KDD Proceedings",
+        "url": "https://dl.acm.org/conference/kdd",
+        "type": "venue",
+        "relevance": "KDD accepted papers (ACM Digital Library).",
+        "access": "free abstracts; some PDFs paywalled",
+        "add_as_web_search": true,
+        "tags": [
+          "conference",
+          "kdd"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "ICSE Proceedings",
+        "url": "https://dl.acm.org/conference/icse",
+        "type": "venue",
+        "relevance": "Software Engineering top venue.",
+        "access": "free abstracts; some PDFs paywalled",
+        "add_as_web_search": true,
+        "tags": [
+          "conference",
+          "icse",
+          "software-engineering"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "FSE Proceedings",
+        "url": "https://dl.acm.org/conference/fse",
+        "type": "venue",
+        "relevance": "Foundations of Software Engineering.",
+        "access": "free abstracts; some PDFs paywalled",
+        "add_as_web_search": true,
+        "tags": [
+          "conference",
+          "fse",
+          "software-engineering"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "USENIX Open Access Proceedings",
+        "url": "https://www.usenix.org/publications/proceedings",
+        "type": "venue",
+        "relevance": "OSDI/NSDI/ATC/Security proceedings. Fills the systems/SWE venue gap; all proceedings open-access.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "conference",
+          "usenix",
+          "systems",
+          "software-engineering"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      }
+    ],
+    "industry_research_blogs": [
+      {
+        "name": "Anthropic Research",
+        "url": "https://www.anthropic.com/research",
+        "type": "blog",
+        "relevance": "LLM safety, interpretability, agents, Claude evals. Expanded Mar 2026: see also alignment.anthropic.com and red.anthropic.com.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "industry",
+          "anthropic"
+        ],
+        "access_tier": "free",
+        "status_2026": "changed",
+        "status_note": "Expanded: added Alignment Science Blog (alignment.anthropic.com, Mar 2026) and Frontier Red Team blog (red.anthropic.com)."
+      },
+      {
+        "name": "Anthropic Alignment Science Blog",
+        "url": "https://alignment.anthropic.com/",
+        "type": "blog",
+        "relevance": "Dedicated interpretability and oversight research blog launched Mar 2026. Primary venue for Anthropic alignment/interpretability work.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "industry",
+          "anthropic",
+          "alignment",
+          "interpretability"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "OpenAI Research",
+        "url": "https://openai.com/research",
+        "type": "blog",
+        "relevance": "OpenAI research and engineering write-ups.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "industry",
+          "openai"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Google DeepMind Blog",
+        "url": "https://deepmind.google/blog/",
+        "type": "blog",
+        "relevance": "DeepMind research announcements and explainers.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "industry",
+          "deepmind"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Google Research Blog",
+        "url": "https://research.google/blog/",
+        "type": "blog",
+        "relevance": "Google Research across ML, systems, IR, accessibility.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "industry",
+          "google"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Meta AI Research",
+        "url": "https://ai.meta.com/research/",
+        "type": "blog",
+        "relevance": "Meta AI / FAIR research write-ups.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "industry",
+          "meta"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Microsoft Research Blog",
+        "url": "https://www.microsoft.com/en-us/research/blog/",
+        "type": "blog",
+        "relevance": "MSR research across ML, systems, HCI.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "industry",
+          "microsoft"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Apple Machine Learning Research",
+        "url": "https://machinelearning.apple.com/",
+        "type": "blog",
+        "relevance": "Apple ML research; biased to on-device and privacy.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "industry",
+          "apple"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Hugging Face Blog",
+        "url": "https://huggingface.co/blog",
+        "type": "blog",
+        "relevance": "Applied research and tutorials, often with code.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "industry",
+          "huggingface"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Distill.pub (archive)",
+        "url": "https://distill.pub/",
+        "type": "blog",
+        "relevance": "Visual ML explanations. DEAD — indefinite hiatus since 2021; archive only, no new content through May 2026. Use as historical reference for foundational method visualizations only.",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "distill",
+          "archive",
+          "dead-source"
+        ],
+        "access_tier": "free",
+        "status_2026": "dead",
+        "status_note": "Indefinite hiatus since 2021; confirmed no resumption through May 2026. Archive only."
+      },
+      {
+        "name": "AI Alignment Forum",
+        "url": "https://www.alignmentforum.org/",
+        "type": "blog",
+        "relevance": "Primary venue for technical AI safety and interpretability research outside peer-reviewed conferences. Complements alignment.anthropic.com with community-authored posts.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "alignment",
+          "safety",
+          "interpretability"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      }
+    ],
+    "curator_newsletters": [
+      {
+        "name": "Lilian Weng's Lil'Log",
+        "url": "https://lilianweng.github.io/",
+        "type": "blog",
+        "relevance": "Long-form synthesis of LLM agents, RL, prompting, evals. High applicability.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "lilianweng"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Sebastian Raschka - Ahead of AI",
+        "url": "https://magazine.sebastianraschka.com/",
+        "type": "newsletter",
+        "relevance": "Practical LLM and ML breakdowns; reproducibility-leaning.",
+        "access": "free with paid tier",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "raschka"
+        ],
+        "access_tier": "freemium",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Eugene Yan - eugeneyan.com",
+        "url": "https://eugeneyan.com/",
+        "type": "blog",
+        "relevance": "Applied ML systems, LLM patterns, evaluation. Author now at Anthropic; posts through May 2026.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "eugeneyan"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": "Author now at Anthropic; posts through May 2026."
+      },
+      {
+        "name": "Latent Space",
+        "url": "https://www.latent.space/",
+        "type": "newsletter",
+        "relevance": "Applied AI engineering, builder interviews, frameworks.",
+        "access": "free with paid tier",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "latent-space"
+        ],
+        "access_tier": "freemium",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Simon Willison - simonwillison.net",
+        "url": "https://simonwillison.net/",
+        "type": "blog",
+        "relevance": "LLM tools, prompt injection, applied tinkering with verbose method notes.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "simonw"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "The Batch (DeepLearning.AI)",
+        "url": "https://www.deeplearning.ai/the-batch",
+        "type": "newsletter",
+        "relevance": "Weekly digest by Andrew Ng; balanced industry + research coverage.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "the-batch"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Import AI (Jack Clark)",
+        "url": "https://jack-clark.net/",
+        "type": "newsletter",
+        "relevance": "AI policy + research weekly; high signal on emerging systems.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "import-ai"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Chip Huyen - huyenchip.com",
+        "url": "https://huyenchip.com/",
+        "type": "blog",
+        "relevance": "ML systems, LLM stack, deployment patterns.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "chiphuyen"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Andrej Karpathy - karpathy.bearblog.dev",
+        "url": "https://karpathy.bearblog.dev/blog/",
+        "type": "blog",
+        "relevance": "Foundational ML and LLM internals; rare but high signal. URL moved from karpathy.github.io; also at karpathy.substack.com.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "karpathy"
+        ],
+        "access_tier": "free",
+        "status_2026": "changed",
+        "status_note": "URL moved from karpathy.github.io to karpathy.bearblog.dev/blog/ (also karpathy.substack.com)."
+      },
+      {
+        "name": "Interconnects (Nathan Lambert)",
+        "url": "https://www.interconnects.ai/",
+        "type": "newsletter",
+        "relevance": "Post-training, RLHF, open-model ecosystem specialist. Deep coverage of alignment fine-tuning, open weights models (Llama, Mistral), and RLHF research. 1–3x/week, high signal.",
+        "access": "free with paid tier",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "interconnects",
+          "rlhf",
+          "post-training"
+        ],
+        "access_tier": "freemium",
+        "status_2026": "alive",
+        "status_note": "",
+        "rss": "https://www.interconnects.ai/feed"
+      },
+      {
+        "name": "Davis Summarizes Papers (Davis Blalock)",
+        "url": "https://dblalock.substack.com/",
+        "type": "newsletter",
+        "relevance": "Systematic weekly triage of ~600 arXiv ML papers down to 10–20 picks. 10k+ researcher subscribers. Skews ML fundamentals; less coverage of systems or NLP-specific work.",
+        "access": "free with paid tier",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "davis-blalock",
+          "triage"
+        ],
+        "access_tier": "freemium",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "aimodels.fyi",
+        "url": "https://www.aimodels.fyi/",
+        "type": "tool",
+        "relevance": "Maintained paper+model index with follow/alert; tracks lab output across HF/arXiv/GitHub. Useful for watching specific model families.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "curator",
+          "models",
+          "discovery"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      }
+    ],
+    "paper_discovery_tools": [
+      {
+        "name": "Emergent Mind",
+        "url": "https://www.emergentmind.com/",
+        "type": "tool",
+        "relevance": "arXiv aggregator that cross-references X/Reddit/GitHub traction. Partial Papers-with-Code replacement for method-popularity signal; surfaces papers gaining community traction before formal citation accumulation.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "discovery",
+          "arxiv",
+          "social-signal"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      }
+    ],
+    "methodology_anchors": [
+      {
+        "name": "ACM Reproducibility Badging",
+        "url": "https://www.acm.org/publications/policies/artifact-review-and-badging-current",
+        "type": "reference",
+        "relevance": "Reproducibility grading rubric. Source for evidence-grade rubric in idea-extraction-framework.",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "methodology",
+          "reproducibility"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "ML Reproducibility Checklist",
+        "url": "https://www.cs.mcgill.ca/~jpineau/ReproducibilityChecklist.pdf",
+        "type": "reference",
+        "relevance": "Pineau et al. checklist used at NeurIPS reviews; canonical reproducibility framing.",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "methodology",
+          "reproducibility"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      },
+      {
+        "name": "Goodhart's Law / benchmark gaming literature",
+        "url": "https://en.wikipedia.org/wiki/Goodhart%27s_law",
+        "type": "reference",
+        "relevance": "Background for trap 12 (benchmark-gaming).",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "methodology",
+          "goodhart"
+        ],
+        "access_tier": "free",
+        "status_2026": "alive",
+        "status_note": ""
+      }
+    ],
+    "commercial_accelerators": [
+      {
+        "name": "Elicit",
+        "url": "https://elicit.com/",
+        "type": "tool",
+        "relevance": "AI-assisted literature review and evidence synthesis; extracts claims across large paper sets. Useful for rapid systematic review when scanning 100+ papers.",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": [
+          "discovery",
+          "literature-review",
+          "commercial"
+        ],
+        "access_tier": "freemium",
+        "status_2026": "changed",
+        "status_note": "Re-verified 2026-07-11: Elicit overhauled pricing since the May-2026 sweep. Free Basic tier is now unlimited search/summaries/full-text chat; only Research Agent and Research Reports are usage-capped on Free. Paid Pro is $49/mo (~$588/yr), Scale $169/mo (~$2,028/yr), Enterprise custom. The old '5,000 one-time credits, Plus ~$12/mo' figures are stale — do not cite them. Treat elicit.com/pricing as canonical; third-party aggregator price quotes vary wildly.",
+        "cost_tier": "Freemium — free unlimited search/summaries/chat, capped Research Agent/Reports; paid Pro $49/mo, Scale $169/mo (verify at elicit.com/pricing)",
+        "free_alternative": "Semantic Scholar API + manual extraction"
+      },
+      {
+        "name": "Consensus",
+        "url": "https://consensus.app/",
+        "type": "tool",
+        "relevance": "Semantic paper search with evidence quality tags; good for yes/no empirical questions across research.",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "tags": [
+          "discovery",
+          "evidence-extraction",
+          "commercial"
+        ],
+        "access_tier": "freemium",
+        "status_2026": "alive",
+        "status_note": "Verified May-2026. Freemium: free tier ~unlimited basic searches with capped monthly AI analyses (Pro Analyses / Study Snapshots ~10/mo, Deep Search ~3/mo) — sources disagree on exact caps; paid from ~$10/mo. Verify caps at consensus.app/pricing.",
+        "cost_tier": "Freemium — free basic searches + capped monthly AI analyses; paid from ~$10/mo (verify caps)",
+        "free_alternative": "Semantic Scholar Search + manual evidence extraction"
+      },
+      {
+        "name": "ResearchRabbit",
+        "url": "https://www.researchrabbit.ai/",
+        "type": "tool",
+        "relevance": "Citation graph + email alerts for new papers citing your seed set. Good for tracking a method family without repeated manual searches.",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "discovery",
+          "citation-graph",
+          "alerts"
+        ],
+        "access_tier": "free",
+        "status_2026": "changed",
+        "status_note": "Re-verified 2026-07-11: acquired by Litmaps on 2025-05-08 (not 2026 — corrected date), relaunched with a freemium (RR+ paid) tier around 2025-10-30/11. Free plan still $0 — unlimited searches, 50-input cap, 1 project, no sharing.",
+        "cost_tier": "Freemium since Nov 2025 (Litmaps-acquired May 2025) — free plan still $0 (50-input cap, 1 project, no sharing); RR+ paid tier",
+        "free_alternative": "OpenAlex citation graph API (no account)"
+      }
+    ]
+  }
+}

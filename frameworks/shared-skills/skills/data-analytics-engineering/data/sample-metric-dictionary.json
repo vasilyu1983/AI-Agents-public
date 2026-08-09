@@ -1,0 +1,173 @@
+{
+  "company_name": "Clarityx (B2B SaaS — Revenue Intelligence)",
+  "last_updated": "2026-03-21",
+  "metrics": [
+    {
+      "name": "monthly_recurring_revenue",
+      "category": "revenue",
+      "description": "Total normalized monthly revenue from active subscriptions, excluding one-time fees, professional services, and credits.",
+      "formula": "SUM(contract_value / contract_term_months) WHERE contract_status = 'active'",
+      "data_source": "billing.subscriptions",
+      "owner": "revenue_team@clarityx.io",
+      "refresh_cadence": "daily",
+      "dimensions": ["plan_tier", "region", "sales_segment", "industry"],
+      "example_value": 2450000,
+      "sla": "available by 06:00 UTC each day"
+    },
+    {
+      "name": "net_revenue_retention",
+      "category": "revenue",
+      "description": "Percentage of recurring revenue retained from an existing cohort of customers after 12 months, including expansions, contractions, and churn.",
+      "formula": "(starting_arr + expansion_arr - contraction_arr - churned_arr) / starting_arr * 100",
+      "data_source": "billing.subscriptions JOIN billing.events",
+      "owner": "finance@clarityx.io",
+      "refresh_cadence": "monthly",
+      "dimensions": ["cohort_month", "sales_segment", "plan_tier"],
+      "example_value": 118.4,
+      "sla": "published by 5th of following month"
+    },
+    {
+      "name": "annual_recurring_revenue",
+      "category": "revenue",
+      "description": "Annualized value of active subscription contracts, normalized to a 12-month period. Excludes one-time and variable revenue.",
+      "formula": "SUM(monthly_recurring_revenue) * 12",
+      "data_source": "billing.subscriptions",
+      "owner": "revenue_team@clarityx.io",
+      "refresh_cadence": "daily",
+      "dimensions": ["plan_tier", "region", "sales_segment", "account_manager"],
+      "example_value": 29400000
+    },
+    {
+      "name": "customer_acquisition_cost",
+      "category": "marketing",
+      "description": "Total sales and marketing spend divided by the number of new customers acquired in the same period. Includes fully-loaded salaries, tooling, and ad spend.",
+      "formula": "total_sales_and_marketing_spend / new_customers_acquired",
+      "data_source": "finance.gl_expenses JOIN crm.opportunities",
+      "owner": "marketing_ops@clarityx.io",
+      "refresh_cadence": "monthly",
+      "dimensions": ["channel", "sales_segment", "region"],
+      "example_value": 8200
+    },
+    {
+      "name": "product_qualified_lead_count",
+      "category": "marketing",
+      "description": "Number of free-tier or trial users who have hit a predefined product engagement threshold indicating readiness for a sales conversation.",
+      "formula": "COUNT(user_id) WHERE pql_score >= 70 AND trial_status = 'active'",
+      "data_source": "product.user_events JOIN marketing.pql_scores",
+      "owner": "growth@clarityx.io",
+      "refresh_cadence": "daily",
+      "dimensions": ["industry", "company_size", "acquisition_channel"],
+      "example_value": 342
+    },
+    {
+      "name": "daily_active_users",
+      "category": "product",
+      "description": "Count of distinct authenticated users who performed at least one meaningful action (page view excluded) within a calendar day.",
+      "formula": "COUNT(DISTINCT user_id) WHERE event_type NOT IN ('page_view') AND event_date = CURRENT_DATE - 1",
+      "data_source": "product.events",
+      "owner": "product_analytics@clarityx.io",
+      "refresh_cadence": "daily",
+      "dimensions": ["plan_tier", "feature_area", "platform", "region"],
+      "example_value": 4871
+    },
+    {
+      "name": "feature_adoption_rate",
+      "category": "product",
+      "description": "Percentage of active accounts that used a given feature at least once within the last 30 rolling days.",
+      "formula": "COUNT(DISTINCT account_id WHERE feature_used) / COUNT(DISTINCT active_account_id) * 100",
+      "data_source": "product.feature_events JOIN billing.subscriptions",
+      "owner": "product_analytics@clarityx.io",
+      "refresh_cadence": "weekly",
+      "dimensions": ["feature_name", "plan_tier", "cohort_month"],
+      "example_value": 63.2
+    },
+    {
+      "name": "time_to_first_value",
+      "category": "product",
+      "description": "Median number of days from account creation to the first instance where a user completes the core activation milestone (first report published).",
+      "formula": "PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY first_value_date - account_created_date)",
+      "data_source": "product.activation_events",
+      "owner": "product@clarityx.io",
+      "refresh_cadence": "weekly",
+      "dimensions": ["plan_tier", "onboarding_cohort", "sales_segment"],
+      "example_value": 3.5
+    },
+    {
+      "name": "ticket_first_response_time_p50",
+      "category": "support",
+      "description": "Median time in hours between a support ticket being opened and the first human response from the support team.",
+      "formula": "PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY DATEDIFF('hour', created_at, first_response_at)) WHERE first_response_at IS NOT NULL",
+      "data_source": "support.tickets",
+      "owner": "support_ops@clarityx.io",
+      "refresh_cadence": "daily",
+      "dimensions": ["priority", "plan_tier", "region", "category"],
+      "example_value": 1.4
+    },
+    {
+      "name": "csat_score",
+      "category": "support",
+      "description": "Percentage of post-resolution customer satisfaction surveys rated 4 or 5 out of 5, calculated over a rolling 30-day window.",
+      "formula": "COUNT(rating >= 4) / COUNT(survey_submitted) * 100",
+      "data_source": "support.csat_surveys",
+      "owner": "support_ops@clarityx.io",
+      "refresh_cadence": "weekly",
+      "dimensions": ["priority", "plan_tier", "agent_id"],
+      "example_value": 91.3
+    },
+    {
+      "name": "logo_churn_rate",
+      "category": "revenue",
+      "description": "Percentage of accounts that cancelled or did not renew in the measured period, relative to the starting account count.",
+      "formula": "churned_accounts / accounts_at_period_start * 100",
+      "data_source": "billing.subscriptions",
+      "owner": "revenue_team@clarityx.io",
+      "refresh_cadence": "monthly",
+      "dimensions": ["plan_tier", "sales_segment", "churn_reason"],
+      "example_value": 1.8
+    },
+    {
+      "name": "pipeline_coverage",
+      "category": "revenue",
+      "description": "Ratio of total open pipeline value to quarterly revenue target, indicating headroom for hitting forecast.",
+      "formula": "SUM(opportunity_amount WHERE stage NOT IN ('closed_won','closed_lost')) / quarterly_revenue_target",
+      "data_source": "crm.opportunities JOIN finance.targets",
+      "owner": "sales_ops@clarityx.io",
+      "refresh_cadence": "daily",
+      "dimensions": ["region", "account_executive", "quarter"],
+      "example_value": 3.2
+    },
+    {
+      "name": "activation_rate",
+      "category": "product",
+      "description": "Pct of new accounts hitting activation",
+      "formula": "activated / signups * 100",
+      "data_source": "product.events",
+      "owner": "",
+      "refresh_cadence": "",
+      "dimensions": [],
+      "example_value": null
+    },
+    {
+      "name": "MQL Volume",
+      "category": "marketing",
+      "description": "",
+      "formula": "",
+      "data_source": "marketing.leads",
+      "owner": "demand_gen@clarityx.io",
+      "refresh_cadence": "weekly",
+      "dimensions": ["channel", "campaign"],
+      "example_value": 580
+    },
+    {
+      "name": "support_ticket_volume",
+      "category": "support",
+      "description": "Total number of new support tickets opened in the reporting period, segmented by channel and priority.",
+      "formula": "COUNT(ticket_id) WHERE created_at BETWEEN period_start AND period_end",
+      "data_source": "TBD",
+      "owner": "support_ops@clarityx.io",
+      "refresh_cadence": "daily",
+      "dimensions": ["channel", "priority", "category", "region"],
+      "example_value": 214
+    }
+  ]
+}

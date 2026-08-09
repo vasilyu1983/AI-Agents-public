@@ -1,0 +1,4 @@
+interface:
+  display_name: "Android Runtime Debugging"
+  short_description: "Build/install/launch proof and ANR/jank/memory triage for Android apps"
+  default_prompt: "Use $software-android-runtime-debugging for build/install/launch proof, stale-build triage, and ANR/jank/memory/startup performance debugging for native Android apps."

@@ -1,0 +1,154 @@
+# Artillery Load Testing Template
+#
+# Alternative to k6 - YAML-based load testing
+# Install: npm install -g artillery
+# Run: artillery run load-test.yaml
+
+config:
+  target: "https://api.example.com"
+  phases:
+    # Warm-up phase
+    - duration: 60
+      arrivalRate: 5
+      name: "Warm up"
+
+    # Ramp up to target load
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 50
+      name: "Ramp up to 50 users/sec"
+
+    # Sustained load
+    - duration: 300
+      arrivalRate: 50
+      name: "Sustained load (50 users/sec)"
+
+    # Peak load
+    - duration: 120
+      arrivalRate: 50
+      rampTo: 100
+      name: "Ramp up to 100 users/sec"
+
+    # Peak sustained
+    - duration: 300
+      arrivalRate: 100
+      name: "Peak load (100 users/sec)"
+
+    # Ramp down
+    - duration: 60
+      arrivalRate: 100
+      rampTo: 0
+      name: "Ramp down"
+
+  # HTTP configuration
+  http:
+    timeout: 30
+    pool: 50  # Connection pool size
+
+  # Performance thresholds
+  ensure:
+    p95: 500  # P95 latency < 500ms
+    p99: 1000 # P99 latency < 1s
+    maxErrorRate: 1  # Error rate < 1%
+
+  # Variables
+  variables:
+    user_ids:
+      - "user-1"
+      - "user-2"
+      - "user-3"
+      - "user-4"
+      - "user-5"
+
+    product_ids:
+      - 101
+      - 102
+      - 103
+      - 104
+      - 105
+
+  # Plugins
+  plugins:
+    metrics-by-endpoint:
+      stripQueryString: true
+    expect: {}
+
+scenarios:
+  # Scenario 1: Browse products (60% of users)
+  - name: "Browse Products"
+    weight: 60
+    flow:
+      - get:
+          url: "/api/products"
+          headers:
+            Authorization: "Bearer {{ $processEnvironment.AUTH_TOKEN }}"
+            X-User-ID: "{{ user_ids }}"
+          capture:
+            - json: "$.data[0].id"
+              as: "product_id"
+          expect:
+            - statusCode: 200
+            - contentType: json
+            - hasProperty: data
+
+      - think: 2  # User reads for 2 seconds
+
+      - get:
+          url: "/api/products/{{ product_id }}"
+          headers:
+            Authorization: "Bearer {{ $processEnvironment.AUTH_TOKEN }}"
+          expect:
+            - statusCode: 200
+
+      - think: 3
+
+  # Scenario 2: Create order (30% of users)
+  - name: "Create Order"
+    weight: 30
+    flow:
+      - post:
+          url: "/api/orders"
+          headers:
+            Authorization: "Bearer {{ $processEnvironment.AUTH_TOKEN }}"
+            Content-Type: "application/json"
+            X-User-ID: "{{ user_ids }}"
+          json:
+            items:
+              - product_id: "{{ product_ids }}"
+                quantity: "{{ $randomNumber(1, 5) }}"
+          capture:
+            - json: "$.order_id"
+              as: "order_id"
+          expect:
+            - statusCode: 201
+            - hasProperty: order_id
+
+      - think: 1
+
+      - get:
+          url: "/api/orders/{{ order_id }}"
+          headers:
+            Authorization: "Bearer {{ $processEnvironment.AUTH_TOKEN }}"
+          expect:
+            - statusCode: 200
+
+  # Scenario 3: View order history (10% of users)
+  - name: "View Order History"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/orders?user_id={{ user_ids }}"
+          headers:
+            Authorization: "Bearer {{ $processEnvironment.AUTH_TOKEN }}"
+          expect:
+            - statusCode: 200
+            - contentType: json
+
+# Custom metrics
+# after:
+#   flow:
+#     - log: "Test completed"
+
+# Reporting
+# artillery run load-test.yaml --output report.json
+# artillery report report.json --output report.html

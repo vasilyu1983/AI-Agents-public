@@ -1,0 +1,4 @@
+interface:
+  display_name: "Technical Documentation"
+  short_description: "Writes and reorganizes docs-as-code for software repos"
+  default_prompt: "Use $docs-codebase for Writes and reorganizes docs-as-code for software repos. Use when updating READMEs, runbooks, onboarding docs, API references, or agent instruction files."

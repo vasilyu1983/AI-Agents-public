@@ -1,0 +1,4 @@
+interface:
+  display_name: "Email Engineering"
+  short_description: "Designs transactional email systems and send infrastructure"
+  default_prompt: "Use $software-email-engineering for Designs transactional email systems and send infrastructure. Use when implementing resets, receipts, deliverability controls, templates, or inbound email handling."

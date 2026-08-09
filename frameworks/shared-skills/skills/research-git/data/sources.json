@@ -1,0 +1,434 @@
+{
+  "metadata": {
+    "title": "Repo Research - Sources",
+    "last_updated": "2026-06-10",
+    "description": "Curated registry for scanning public GitHub repos across three modes: skill (agent-skill ecosystem), practice (real-team git/PR/CI), code (framework idioms). Includes high-signal authors, awesome-list entry points, per-mode target lists, and license compatibility.",
+    "skill": "research-git"
+  },
+  "name": [
+    "research-git sources"
+  ],
+  "updated": [
+    "2026-04-23",
+    "2026-04-28",
+    "2026-05-17",
+    "2026-06-10"
+  ],
+  "mode_index": {
+    "skill": [
+      "registries",
+      "awesome_lists",
+      "high_signal_authors",
+      "skill_domain_hot_lists"
+    ],
+    "practice": [
+      "practice_scan_registries",
+      "practice_hot_list"
+    ],
+    "code": [
+      "code_registries",
+      "code_hot_list_by_language"
+    ]
+  },
+  "registries": [
+    {
+      "name": "Agent Skills specification",
+      "url": "https://agentskills.io",
+      "purpose": "Open format spec for SKILL.md, frontmatter schema, directory structure",
+      "verification_required": true
+    },
+    {
+      "name": "GitHub Topic: agent-skills",
+      "url": "https://github.com/topics/agent-skills",
+      "purpose": "Topic-tagged repos — NOISY as of April 2026, triage before trusting",
+      "signal_quality": "low-medium"
+    },
+    {
+      "name": "GitHub Topic: claude-skills",
+      "url": "https://github.com/topics/claude-skills",
+      "purpose": "Narrower topic, higher signal than agent-skills",
+      "signal_quality": "medium-high"
+    },
+    {
+      "name": "GitHub Topic: codex-skills",
+      "url": "https://github.com/topics/codex-skills",
+      "purpose": "Narrower topic for Codex-aligned skills",
+      "signal_quality": "medium-high"
+    },
+    {
+      "name": "Official MCP Registry",
+      "url": "https://registry.modelcontextprotocol.io",
+      "purpose": "Canonical Model Context Protocol server registry (community/Anthropic-maintained). High-signal, low-spam discovery for MCP servers — far cleaner than GitHub topic search for agent-tooling research. API: GET /v0/servers",
+      "signal_quality": "high"
+    },
+    {
+      "name": "Anthropic Skills (official)",
+      "url": "https://github.com/anthropics/skills",
+      "purpose": "Reference implementation, spec docs, official skill examples",
+      "license": "Apache 2.0 (code), CC-BY-4.0 (docs)",
+      "signal_quality": "high"
+    },
+    {
+      "name": "Skills.sh (Vercel)",
+      "url": "https://skills.sh",
+      "purpose": "87k+ skills, open leaderboard, run by Vercel — install/discover hub",
+      "signal_quality": "high"
+    },
+    {
+      "name": "SkillsMP",
+      "url": "https://skillsmp.com",
+      "purpose": "425k+ skills aggregated from GitHub, search-first interface",
+      "signal_quality": "medium-high",
+      "triage_required": true
+    },
+    {
+      "name": "awesome-skills.com",
+      "url": "https://awesome-skills.com",
+      "purpose": "Web view of curated awesome list — 1030+ agent skills, 150+ plugins",
+      "signal_quality": "medium"
+    },
+    {
+      "name": "LobeHub Skills",
+      "url": "https://lobehub.com/skills",
+      "purpose": "AI gateway with Claude skills as a side feature; slick UI",
+      "signal_quality": "low-medium"
+    },
+    {
+      "name": "ClawHub (OpenClaw skill registry)",
+      "url": "https://clawhub.ai",
+      "purpose": "npm-equivalent for OpenClaw agent skills — semver, vector search (OpenAI embeddings + Convex), VirusTotal SHA-256 scanning. Source repo: github.com/openclaw/clawhub",
+      "signal_quality": "medium-high",
+      "triage_required": true,
+      "verification_required": true
+    }
+  ],
+  "awesome_lists": [
+    {
+      "name": "VoltAgent/awesome-agent-skills",
+      "url": "https://github.com/VoltAgent/awesome-agent-skills",
+      "purpose": "1000+ agent skills from official dev teams and community",
+      "triage_required": true
+    },
+    {
+      "name": "skillmatic-ai/awesome-agent-skills",
+      "url": "https://github.com/skillmatic-ai/awesome-agent-skills",
+      "purpose": "Definitive resource for modular SKILL.md packages",
+      "triage_required": true
+    },
+    {
+      "name": "ComposioHQ/awesome-claude-skills",
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills",
+      "purpose": "Claude-specific skills and customization workflows",
+      "triage_required": true
+    },
+    {
+      "name": "alirezarezvani/claude-skills",
+      "url": "https://github.com/alirezarezvani/claude-skills",
+      "purpose": "Claude Code skills for Claude/Codex/Gemini/Cursor",
+      "triage_required": true
+    },
+    {
+      "name": "phuryn/pm-skills",
+      "url": "https://github.com/phuryn/pm-skills",
+      "purpose": "Product-management skills, commands, plugins",
+      "triage_required": true
+    },
+    {
+      "name": "hesreallyhim/awesome-claude-code",
+      "url": "https://github.com/hesreallyhim/awesome-claude-code",
+      "purpose": "Broad scope — skills + hooks + slash-commands + agent orchestrators + plugins",
+      "triage_required": true
+    },
+    {
+      "name": "travisvn/awesome-claude-skills",
+      "url": "https://github.com/travisvn/awesome-claude-skills",
+      "purpose": "Claude Code-leaning curation of skills",
+      "triage_required": true
+    },
+    {
+      "name": "BehiSecc/awesome-claude-skills",
+      "url": "https://github.com/BehiSecc/awesome-claude-skills",
+      "purpose": "65 full-stack skills with progressive disclosure (React, NestJS, Python, DevOps) — useful pattern reference",
+      "triage_required": true
+    },
+    {
+      "name": "sickn33/antigravity-awesome-skills",
+      "url": "https://github.com/sickn33/antigravity-awesome-skills",
+      "purpose": "1400+ skills with installer CLI, bundles, workflows — biggest installable corpus",
+      "triage_required": true
+    }
+  ],
+  "high_signal_authors": [
+    {
+      "name": "twostraws (Paul Hudson)",
+      "github": "https://github.com/twostraws",
+      "specialty": "Swift/SwiftUI/Swift Concurrency/SwiftData/Swift Testing",
+      "url": "https://github.com/twostraws"
+    },
+    {
+      "name": "AvdLee (Antoine van der Lee)",
+      "github": "https://github.com/AvdLee",
+      "specialty": "iOS/Swift Concurrency/Core Data/Xcode build optimization",
+      "url": "https://github.com/AvdLee"
+    },
+    {
+      "name": "addyosmani",
+      "github": "https://github.com/addyosmani",
+      "specialty": "Production engineering, performance, web platform",
+      "url": "https://github.com/addyosmani"
+    },
+    {
+      "name": "K-Dense-AI",
+      "github": "https://github.com/K-Dense-AI",
+      "specialty": "Scientific research, finance, analysis, writing",
+      "url": "https://github.com/K-Dense-AI"
+    },
+    {
+      "name": "callstackincubator",
+      "github": "https://github.com/callstackincubator",
+      "specialty": "React Native",
+      "url": "https://github.com/callstackincubator"
+    },
+    {
+      "name": "vercel-labs",
+      "github": "https://github.com/vercel-labs",
+      "specialty": "Next.js, Vercel platform, frontend",
+      "url": "https://github.com/vercel-labs"
+    },
+    {
+      "name": "anthropics",
+      "github": "https://github.com/anthropics",
+      "specialty": "Official Anthropic skills and examples",
+      "url": "https://github.com/anthropics"
+    },
+    {
+      "name": "mattpocock (Matt Pocock)",
+      "github": "https://github.com/mattpocock/skills",
+      "specialty": "TypeScript, type-level programming, education",
+      "url": "https://github.com/mattpocock/skills"
+    },
+    {
+      "name": "alirezarezvani",
+      "github": "https://github.com/alirezarezvani/claude-skills",
+      "specialty": "232+ skills across 8 coding agents — engineering, marketing, product, compliance",
+      "url": "https://github.com/alirezarezvani/claude-skills"
+    },
+    {
+      "name": "glebis",
+      "github": "https://github.com/glebis/claude-skills",
+      "specialty": "Claude Code workflow skills",
+      "url": "https://github.com/glebis/claude-skills"
+    }
+  ],
+  "skill_domain_hot_lists": {
+    "ios": [
+      "twostraws/SwiftUI-Agent-Skill",
+      "twostraws/Swift-Concurrency-Agent-Skill",
+      "twostraws/Swift-Testing-Agent-Skill",
+      "twostraws/SwiftData-Agent-Skill",
+      "AvdLee/SwiftUI-Agent-Skill",
+      "AvdLee/Swift-Concurrency-Agent-Skill",
+      "AvdLee/Core-Data-Agent-Skill",
+      "AvdLee/Xcode-Build-Optimization-Agent-Skill"
+    ],
+    "react-native": [
+      "callstackincubator/agent-skills"
+    ],
+    "context-engineering": [
+      "muratcankoylan/Agent-Skills-for-Context-Engineering"
+    ],
+    "scientific": [
+      "K-Dense-AI/scientific-agent-skills"
+    ],
+    "production-engineering": [
+      "addyosmani/agent-skills"
+    ],
+    "frontend-web": [
+      "vercel-labs/agent-skills"
+    ],
+    "agent-self-improvement": [
+      "https://skillsmp.com/skills/bitwarden-ai-plugins-plugins-claude-retrospective-skills-retrospecting-skill-md"
+    ]
+  },
+  "practice_scan_registries": [
+    {
+      "name": "OpenSSF Scorecard",
+      "url": "https://api.scorecard.dev/",
+      "purpose": "Automated security + maintenance signal per repo (query: /projects/github.com/<owner>/<repo>)",
+      "signal_quality": "high"
+    },
+    {
+      "name": "CHAOSS metrics",
+      "url": "https://chaoss.community/kbtopic/all-metrics/",
+      "purpose": "Open-source project health metrics framework — use as interpretation guide for Scorecard outputs"
+    },
+    {
+      "name": "GitHub Actions repos with 1000+ stars",
+      "url": "https://github.com/search?q=stars%3A%3E1000+path%3A.github%2Fworkflows&type=code",
+      "purpose": "Code search for workflow patterns (auth required, higher rate-limit cost)"
+    }
+  ],
+  "practice_hot_list": {
+    "monorepo_practices": [
+      "vercel/turborepo",
+      "nrwl/nx",
+      "microsoft/vscode",
+      "facebook/react",
+      "vercel/next.js"
+    ],
+    "release_automation": [
+      "googleapis/release-please",
+      "changesets/changesets",
+      "googleapis/node-googleapis"
+    ],
+    "security_ci": [
+      "ossf/scorecard",
+      "oauth2-proxy/oauth2-proxy",
+      "sigstore/cosign"
+    ],
+    "merge_queue_users": [
+      "rust-lang/rust",
+      "vercel/next.js",
+      "microsoft/TypeScript"
+    ],
+    "stacked_diffs": [
+      "withgraphite/graphite-cli"
+    ],
+    "adr_practice": [
+      "joelparkerhenderson/architecture-decision-record",
+      "arc42/arc42-template"
+    ]
+  },
+  "code_registries": [
+    {
+      "name": "GitHub Advanced Search — language + stars",
+      "url": "https://github.com/search?q=language%3A%3Cx%3E+stars%3A%3E1000&type=repositories",
+      "purpose": "Find high-signal repos per language"
+    },
+    {
+      "name": "OpenSSF Scorecard",
+      "url": "https://api.scorecard.dev/",
+      "purpose": "Quality signal — same as practice mode"
+    },
+    {
+      "name": "awesome-<language>",
+      "url": "https://github.com/search?q=awesome-%3Clanguage%3E&type=repositories",
+      "purpose": "Language-scoped curated lists (e.g., avelino/awesome-go, vinta/awesome-python)"
+    }
+  ],
+  "code_hot_list_by_language": {
+    "typescript": [
+      "vercel/next.js",
+      "trpc/trpc",
+      "TanStack/query",
+      "drizzle-team/drizzle-orm",
+      "remix-run/react-router"
+    ],
+    "python": [
+      "fastapi/fastapi",
+      "pydantic/pydantic",
+      "astral-sh/uv",
+      "astral-sh/ruff",
+      "encode/httpx"
+    ],
+    "rust": [
+      "tokio-rs/tokio",
+      "serde-rs/serde",
+      "clap-rs/clap",
+      "rust-lang/cargo"
+    ],
+    "go": [
+      "grpc/grpc-go",
+      "spf13/cobra",
+      "uber-go/zap"
+    ],
+    "swift": [
+      "pointfreeco/swift-composable-architecture",
+      "apple/swift-async-algorithms",
+      "vapor/vapor"
+    ],
+    "kotlin": [
+      "Kotlin/kotlinx.coroutines",
+      "ktorio/ktor"
+    ]
+  },
+  "license_compatibility": {
+    "MIT": "permits derived work with attribution",
+    "Apache-2.0": "permits derived work with attribution and patent grant",
+    "BSD-2-Clause": "permits derived work with attribution",
+    "BSD-3-Clause": "permits derived work with attribution",
+    "CC-BY-4.0": "permits derived work with attribution (docs)",
+    "ISC": "permits derived work with attribution (MIT-equivalent)",
+    "GPL-2.0": "viral copyleft — derivatives must be GPL — DO NOT USE",
+    "GPL-3.0": "viral copyleft — derivatives must be GPL — DO NOT USE",
+    "AGPL-3.0": "stronger viral copyleft — DO NOT USE",
+    "CC-BY-SA-4.0": "copyleft share-alike — avoid for catalog merges",
+    "Proprietary": "DO NOT EXTRACT — get permission first"
+  },
+  "ecosystem_analytics": [
+    {
+      "name": "GH Archive",
+      "url": "https://www.gharchive.org",
+      "purpose": "Full GitHub event stream (WatchEvent, PushEvent, IssuesEvent, etc.) archived hourly. Use for star-spike detection and activity correlation. BigQuery dataset: bigquery-public-data.github_archive_day",
+      "rate_limit": "No API rate limit — data downloaded as gzip hourly files or queried via BigQuery",
+      "example_use": "SELECT DATE(created_at), COUNT(*) FROM bigquery-public-data.github_archive_day.events_* WHERE type='WatchEvent' AND repo.name='owner/repo' GROUP BY 1 — a 2000-star day with no PushEvents is almost always a fake-star burst"
+    },
+    {
+      "name": "OSS Insight",
+      "url": "https://ossinsight.io",
+      "purpose": "Aggregated GitHub analytics: star history, contributor timelines, language trends, comparative repo analysis. REST API at api.ossinsight.io/v1/repos/{owner}/{repo}/. No auth required for public data.",
+      "rate_limit": "No documented hard limit for public queries; use sparingly (pause between calls)",
+      "example_use": "GET https://api.ossinsight.io/v1/repos/{owner}/{repo}/stars/history — returns daily star deltas for spike detection without BigQuery"
+    },
+    {
+      "name": "deps.dev (Google Open Source Insights)",
+      "url": "https://deps.dev",
+      "purpose": "Reverse dependency counts, vulnerability advisories, and license propagation for packages across npm, PyPI, Go, Maven, Cargo. Use when assessing whether a repo is a critical shared dependency or isolated experiment.",
+      "rate_limit": "No auth required; no documented limit for single queries",
+      "example_use": "GET https://api.deps.dev/v3alpha/systems/npm/packages/%40vercel%2Fai — returns dependentCount, advisories, licenses for the Vercel AI SDK"
+    },
+    {
+      "name": "Libraries.io",
+      "url": "https://libraries.io",
+      "purpose": "SourceRank score (composite quality signal), dependent repository count, version history, and maintainer metadata across 6M+ packages. Open dataset available for bulk analysis.",
+      "rate_limit": "API: 60 req/min with free key",
+      "example_use": "GET https://libraries.io/api/npm/react?api_key=KEY — returns sourcerank, dependents_count, latest_stable_release"
+    },
+    {
+      "name": "star-history.com",
+      "url": "https://star-history.com",
+      "purpose": "Visual star timeline for GitHub repos. An S-curve is organic growth; a vertical cliff is a purchased-star event. Use as a quick sanity check before running GH Archive queries.",
+      "rate_limit": "Browser tool; no public API — use ossinsight.io for programmatic access",
+      "example_use": "https://star-history.com/#owner/repo — view star growth curve to spot purchase events"
+    }
+  ],
+  "cross_host_registries": [
+    {
+      "name": "Sourcegraph Public Search",
+      "url": "https://sourcegraph.com/search",
+      "purpose": "Cross-host code search across GitHub, GitLab, and Bitbucket public repos. Query language: repo:, file:, content:, lang:, patternType:regexp. No auth required for public repos. Useful for finding code patterns that span multiple hosting platforms.",
+      "rate_limit": "No documented public limit; throttles on very broad queries",
+      "example_use": "repo:/SKILL.md$/ file:references/ lang:Markdown content:\"discovery-protocol\" — finds all repos with a discovery-protocol reference in a SKILL.md-rooted references dir"
+    },
+    {
+      "name": "GitLab API — top repos by stars",
+      "url": "https://gitlab.com/api/v4/projects?order_by=stars&sort=desc",
+      "purpose": "GitLab hosts a distinct CI-template ecosystem (GitLab CI .yml templates, Auto DevOps). Use when researching CI/CD practices beyond GitHub Actions, or when a target is GitLab-native.",
+      "rate_limit": "Unauthenticated: 500 req/hr. Authenticated: 2000 req/hr",
+      "example_use": "GET https://gitlab.com/api/v4/projects?order_by=stars&sort=desc&per_page=20&topic=devops — top DevOps repos on GitLab for Mode B practice scan"
+    },
+    {
+      "name": "Codeberg / SourceHut (note)",
+      "url": "https://codeberg.org",
+      "purpose": "Niche systems-tooling and privacy-focused communities. Codeberg (Gitea-based) and SourceHut host a small but high-signal set of Rust/C/Go systems tools and minimal-dependency libraries. Worth checking when Mode C targets low-dependency systems code not well-represented on GitHub.",
+      "rate_limit": "Codeberg API mirrors Gitea: 30 req/min unauthenticated. SourceHut: varies by service.",
+      "example_use": "https://codeberg.org/explore/repos?sort=newest&limit=20&topic=systems — recent systems-tooling repos on Codeberg"
+    }
+  ],
+  "april_2026_caveats": {
+    "llm_generated_spam": "Since late 2025, many agent-skill repos are LLM-generated shells. Triage: commit history before 2025-09, varied file sizes, issue/PR activity, description not ending in '...for Claude/Codex'.",
+    "topic_noise": "topic:agent-skills has >5000 results, ~60% low-signal. Prefer topic:claude-skills / topic:codex-skills or named authors.",
+    "awesome_list_drift": "Many awesome-lists are LLM-curated and link to dead or LLM-generated repos. Spot-check 3 random entries before trusting.",
+    "scorecard_gaps": "OpenSSF Scorecard is widely adopted but not universal. Fall back to CODEOWNERS + commit-signing ratio + contributor count for repos without Scorecard."
+  }
+}

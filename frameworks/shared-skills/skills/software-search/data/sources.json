@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "skill": "software-search",
+    "updated": "2026-07-11",
+    "total_sources": 16,
+    "description": "Primary engine, indexing, and search-quality sources for application search.",
+    "title": "Software Search - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "engines": [
+      {
+        "name": "PostgreSQL Text Search",
+        "url": "https://www.postgresql.org/docs/current/textsearch.html",
+        "description": "Native full-text search capabilities and indexing in PostgreSQL.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PostgreSQL pg_trgm",
+        "url": "https://www.postgresql.org/docs/current/pgtrgm.html",
+        "description": "Official trigram similarity and fuzzy matching support for PostgreSQL search implementations.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Elasticsearch Reference",
+        "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html",
+        "description": "Core indexing, analyzers, scoring, and aggregation guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Elasticsearch Rank Eval",
+        "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/search-rank-eval.html",
+        "description": "Official ranking-evaluation API guidance for judged-query relevance testing.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenSearch Docs",
+        "url": "https://docs.opensearch.org/latest/",
+        "description": "OpenSearch query, cluster, and relevance documentation.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Algolia Docs",
+        "url": "https://www.algolia.com/doc/",
+        "description": "Managed search engine guidance for search-as-you-type and analytics.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Typesense Docs",
+        "url": "https://typesense.org/docs/",
+        "description": "Developer-friendly search engine and search UX patterns.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Meilisearch Docs",
+        "url": "https://www.meilisearch.com/docs",
+        "description": "Simple full-text search engine and relevance tuning documentation.",
+        "add_as_web_search": true
+      }
+    ],
+    "vector_and_hybrid": [
+      {
+        "name": "pgvector",
+        "url": "https://github.com/pgvector/pgvector",
+        "description": "Vector similarity search inside PostgreSQL.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Qdrant Docs",
+        "url": "https://qdrant.tech/documentation/",
+        "description": "Vector and hybrid search engine documentation.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenSearch Vector Search",
+        "url": "https://docs.opensearch.org/latest/vector-search/",
+        "description": "Official OpenSearch vector and hybrid retrieval guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Weaviate Hybrid Search",
+        "url": "https://docs.weaviate.io/weaviate/search/hybrid",
+        "description": "Weaviate native BM25 + vector hybrid search and fusion algorithm docs.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Qdrant Hybrid Queries",
+        "url": "https://qdrant.tech/documentation/search/hybrid-queries/",
+        "description": "Qdrant Query API prefetch, RRF, and DBSF fusion for native BM25 + dense hybrid search.",
+        "add_as_web_search": true
+      }
+    ],
+    "retrieval": [
+      {
+        "name": "Elasticsearch Reference",
+        "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html",
+        "description": "Elasticsearch indexing, hybrid retrieval (RRF), and quantization. Always read the 'current' docs; do not hardcode a major version.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenSearch Documentation",
+        "url": "https://docs.opensearch.org/latest/",
+        "description": "OpenSearch vector/hybrid search and quantization. Resolve current version features at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "pgvector",
+        "url": "https://github.com/pgvector/pgvector",
+        "description": "Postgres vector extension; combine with full-text/BM25 for in-database hybrid search. Verify current quantization (halfvec) support at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ]
+  }
+}

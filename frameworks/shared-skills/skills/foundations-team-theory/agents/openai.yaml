@@ -1,0 +1,4 @@
+interface:
+  display_name: "Team Theory Foundations"
+  short_description: "Applies team theory to subagent design"
+  default_prompt: "Use $foundations-team-theory for cooperative multi-agent decisions, subagent allocation, communication value, Dec-POMDPs, decentralized control, and information structures."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Notes Retrieval"
+  short_description: "Builds local-first note vault retrieval for Obsidian, markdown notebooks, and"
+  default_prompt: "Use $docs-notes-retrieval for Builds local-first note vault retrieval for Obsidian, markdown notebooks, and NotebookLM-adjacent exports. Use when packaging notes into LLM-ready context."

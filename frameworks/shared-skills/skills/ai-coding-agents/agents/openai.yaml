@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents"
+  short_description: "Creates coding agents on Claude Code, Codex, and Agent SDK. Use when defining"
+  default_prompt: "Use $ai-coding-agents for Creates coding agents on Claude Code, Codex, and Agent SDK. Use when defining review, test, refactor, or team agents — not building a runtime."

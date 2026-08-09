@@ -1,0 +1,61 @@
+{
+  "skill_name": "software-performance",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A Next.js 14 e-commerce product listing page has an LCP of 4.8 seconds in field data (CrUX, mobile, 75th percentile). The page hero image is 1.2MB, served without explicit width/height attributes, and loaded without a fetchpriority hint. TTFB is 1.1 seconds. The Lighthouse TBT is 620ms. Prioritize the fixes, estimate the expected LCP improvement per fix, and define the CI gate configuration for Lighthouse CI to prevent regression.",
+      "expected_output": "The skill should prioritize TTFB first (server-side; blocks everything), then hero image size and format, then fetchpriority hint, then missing dimensions for CLS, then TBT/JS; should estimate per-fix LCP gains; should produce a .lighthouserc.json with LCP, TBT, and CLS thresholds; and should note that field data at 75th percentile is the ranking signal, not Lighthouse lab score alone.",
+      "files": [],
+      "expectations": [
+        "The output identifies TTFB as the first fix because 1.1s TTFB makes a sub-2.5s LCP structurally impossible without server-side improvements.",
+        "The output recommends hero image optimization (format conversion to WebP/AVIF, resize to display dimensions) as a high-impact LCP fix.",
+        "The output adds fetchpriority='high' to the LCP image element to ensure early fetch.",
+        "The output adds explicit width and height attributes to prevent CLS from missing dimensions.",
+        "The output provides a .lighthouserc.json or equivalent CI configuration with threshold assertions for LCP, TBT, and CLS.",
+        "The output notes that CrUX field data at the 75th percentile is the ground truth for Google ranking, not Lighthouse lab scores."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A Node.js REST API serving mobile clients has a p95 latency of 1.2 seconds under 200 concurrent users during k6 load tests. The team suspects a database bottleneck. EXPLAIN output shows a sequential scan on a table with 8 million rows because the query filters on an unindexed column. A second slow endpoint also appears in traces and calls the same table three times in a loop (N+1). Design the full investigation and remediation plan, write the k6 load test configuration with pass/fail thresholds, and specify the regression gate for CI.",
+      "expected_output": "The skill should recommend adding the missing index first, then eliminating N+1 by batching or using a join, should provide a k6 test script with staged load and p95/p99 thresholds, should require a before/after benchmark comparison, and should warn against adding caches before the query behavior is fixed.",
+      "files": [],
+      "expectations": [
+        "The output identifies the missing index and N+1 query as the two bottlenecks and explains why they must be fixed before considering caching.",
+        "The output provides a k6 script with thresholds for p95 and p99 latency and error rate.",
+        "The output requires a baseline benchmark before any change and a post-fix benchmark to verify improvement.",
+        "The output explicitly warns against adding a cache layer before the query behavior is fixed.",
+        "The output specifies how to integrate the k6 smoke or load test into CI as a regression gate.",
+        "The output separates the index fix from the N+1 fix as two independent changes so each can be measured individually."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A product team wants to enforce a performance budget for their React SPA. The main JS bundle is currently 620kB gzipped. They use Vite as their bundler. Define a complete budget (LCP, INP, CLS, JS bytes, CSS bytes, Lighthouse score), set up Lighthouse CI for pull request gating, and provide a perf-budget.json compatible with the check_perf_budget.py validation script. Explain the INP budget specifically and why FID is no longer relevant.",
+      "expected_output": "The skill should produce a perf-budget.json with all key metrics, note that 620kB JS is over budget and recommend code splitting, explain INP (all interactions, 200ms good threshold) and that FID was retired in March 2024, provide LHCI config, and specify the GitHub Actions integration pattern.",
+      "files": [],
+      "expectations": [
+        "The output produces a perf-budget.json with lcp_ms, inp_ms, cls, tbt_ms, js_bytes, css_bytes, and lighthouse_performance_score fields.",
+        "The output identifies 620kB gzipped JS as over budget (typical AA target is 150-350kB) and recommends route-based code splitting.",
+        "The output explains that INP measures all interactions throughout the page lifetime at the 98th percentile, with a good threshold of 200ms.",
+        "The output states that FID was retired in March 2024 and replaced by INP, and explains the practical difference.",
+        "The output provides a .lighthouserc.json or LHCI config with assertion thresholds matching the budget.",
+        "The output includes a GitHub Actions step or equivalent CI integration for the Lighthouse gate."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "After a release, p99 API latency increased from 400ms to 1.8 seconds on a Go HTTP service. There were no infrastructure changes. The release included a new middleware that decodes and validates a JWT on every request and a new endpoint that triggers a report generation job. Using flamegraphs and before/after benchmarks, describe the investigation workflow, identify likely causes, and specify the statistical comparison method to confirm the regression is real and not noise.",
+      "expected_output": "The skill should recommend capturing a CPU flamegraph under load to identify the hot path, checking if JWT decode is happening repeatedly without caching, isolating the report generation endpoint as a potential resource hog, requiring at least 5 benchmark runs before and after with median and p99 comparison, and explaining why a single benchmark run is insufficient for confirming regression.",
+      "files": [],
+      "expectations": [
+        "The output recommends capturing a CPU flamegraph (pprof for Go) under production-like load to identify the actual hot path before guessing.",
+        "The output identifies repeated JWT decode/validation per request without a result cache as a likely CPU bottleneck.",
+        "The output identifies the report generation job as a potential I/O or CPU resource contention source and recommends isolating it.",
+        "The output requires at least 5 benchmark runs with median and p99 statistics before and after each change, not a single run.",
+        "The output explains the statistical reason (warmup effects, GC pauses, environmental noise) why a single benchmark run cannot confirm a regression.",
+        "The output provides a concrete before/after comparison method such as hyperfine or a custom script that calculates percentage delta and flags regressions above a threshold."
+      ]
+    }
+  ]
+}

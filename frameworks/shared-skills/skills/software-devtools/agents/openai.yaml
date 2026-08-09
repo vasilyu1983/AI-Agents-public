@@ -1,0 +1,4 @@
+interface:
+  display_name: "DevTools"
+  short_description: "Designs developer tools, SDKs, CLIs, IDE extensions, and code generators"
+  default_prompt: "Use $software-devtools for Designs developer tools, SDKs, CLIs, IDE extensions, and code generators. Use when shaping DX, typed clients, code generation, or package distribution workflows."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Roblox World Creation"
+  short_description: "Creates Roblox experiences from empty Studio place to published world"
+  default_prompt: "Use $gamedev-roblox when starting, building, validating, or shipping a Roblox game, experience, or world with Studio, Luau, performance, discovery, and monetization constraints."

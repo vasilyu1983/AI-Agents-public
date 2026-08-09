@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Game Creation"
+  short_description: "Creates Godot games from empty project to exported build"
+  default_prompt: "Use $gamedev-godot when starting, building, validating, or shipping a Godot 2D/3D game or app with GDScript or C#, scenes and nodes, performance, rendering, and export constraints."

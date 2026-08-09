@@ -1,0 +1,237 @@
+{
+  "metadata": {
+    "title": "software-ios-design - Primary Sources",
+    "description": "Apple design references, HIG subpages, WWDC25/WWDC26 sessions, and XcodeBuildMCP docs for native iOS design guidance",
+    "updated": "2026-07-11",
+    "skill": "software-ios-design",
+    "last_updated": "2026-07-11",
+    "total_sources": 36
+  },
+  "official_apple": [
+    {
+      "name": "Apple Design",
+      "url": "https://developer.apple.com/design/",
+      "description": "Apple design hub for Human Interface Guidelines, resources, and platform design guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "App Store Review Guidelines",
+      "url": "https://developer.apple.com/app-store/review/guidelines/",
+      "description": "Canonical review rules (Safety, Performance, Business, Design, Legal). Source of truth for app-review-guidelines-map.md; re-read live before each submission as Apple edits it without versioning",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/",
+      "description": "Primary design reference for Apple platforms",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HIG - Designing for iOS",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-ios",
+      "description": "iOS-specific design guidance including layout, navigation, and platform idioms",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HIG - Accessibility",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "description": "Apple accessibility guidance including VoiceOver, Dynamic Type, Reduce Motion, and Nutrition Labels",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HIG - Buttons",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "description": "Button design, hierarchy, and placement guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HIG - Sheets",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+      "description": "Sheet and modal presentation guidance including detents",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HIG - Materials",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/materials",
+      "description": "Materials guidance for translucency, blur, and layering",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HIG - Dark Mode",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/dark-mode",
+      "description": "Dark Mode color, contrast, and adaptation guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HIG - Layout",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "description": "Layout, spacing, safe areas, and adaptivity guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HIG - Typography",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "description": "Typography, Dynamic Type, and text hierarchy guidance",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HIG - Tab Views",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/tab-views",
+      "description": "Apple guidance for tab-based app structure",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Liquid Glass Technology Overview",
+      "url": "https://developer.apple.com/documentation/technologyoverviews/liquid-glass",
+      "description": "Apple overview of the current Liquid Glass design language and system behavior",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Applying Liquid Glass to Custom Views",
+      "url": "https://developer.apple.com/documentation/SwiftUI/Applying-Liquid-Glass-to-custom-views",
+      "description": "SwiftUI guide for adopting Liquid Glass in custom views (iOS 26+)",
+      "add_as_web_search": true
+    },
+    {
+      "name": "glassEffect(_:in:)",
+      "url": "https://developer.apple.com/documentation/swiftui/view/glasseffect(_:in:)",
+      "description": "API reference for the SwiftUI glassEffect modifier",
+      "add_as_web_search": false
+    },
+    {
+      "name": "GlassEffectContainer",
+      "url": "https://developer.apple.com/documentation/swiftui/glasseffectcontainer",
+      "description": "API reference for grouping and morphing Liquid Glass shapes",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Apple Fonts",
+      "url": "https://developer.apple.com/fonts/",
+      "description": "San Francisco, Dynamic Type, and Apple typography resources",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SF Symbols",
+      "url": "https://developer.apple.com/sf-symbols/",
+      "description": "SF Symbols library (SF Symbols 7 shipped with iOS 26 at ~6,900 symbols; SF Symbols 8 previewed at WWDC26 for iOS 27, beta as of this validation). Re-check the current symbol count and shipping version at use-time.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Apple Design Resources",
+      "url": "https://developer.apple.com/design/resources/",
+      "description": "Official design resources for Apple platforms",
+      "add_as_web_search": false
+    },
+    {
+      "name": "WWDC25 - Meet Liquid Glass",
+      "url": "https://developer.apple.com/videos/play/wwdc2025/219/",
+      "description": "Apple session introducing the Liquid Glass material and its design philosophy",
+      "add_as_web_search": true
+    },
+    {
+      "name": "WWDC25 - Build a SwiftUI app with the new design",
+      "url": "https://developer.apple.com/videos/play/wwdc2025/323/",
+      "description": "Apple session on adopting the new iOS 26 design language in SwiftUI",
+      "add_as_web_search": true
+    },
+    {
+      "name": "WWDC25 - What's new in SwiftUI",
+      "url": "https://developer.apple.com/videos/play/wwdc2025/230/",
+      "description": "WWDC25 overview of SwiftUI changes including iOS 26 APIs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "WWDC25 - Build an AppKit-like macOS app with the new design",
+      "url": "https://developer.apple.com/videos/play/wwdc2025/310/",
+      "description": "macOS-focused new-design session; relevant cross-platform design principles",
+      "add_as_web_search": false
+    },
+    {
+      "name": "WWDC26 sessions index",
+      "url": "https://developer.apple.com/videos/wwdc2026/",
+      "description": "WWDC26 (June 2026) session index. Previewed iOS/iPadOS/macOS 27 Liquid Glass revisions (reduced default transparency, system Clear/Tinted control, reversed search placement), SF Symbols 8, and Icon Composer 2. Treat all iOS 27 content as beta/announced-not-shipped until GA release notes confirm it.",
+      "add_as_web_search": true,
+      "optional": false
+    },
+    {
+      "name": "Adopting Liquid Glass",
+      "url": "https://developer.apple.com/documentation/technologyoverviews/adopting-liquid-glass",
+      "description": "Apple technology overview for adopting the Liquid Glass design language. Verify component-level guidance at use-time.",
+      "add_as_web_search": true,
+      "optional": false
+    },
+    {
+      "name": "Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/",
+      "description": "Canonical Apple HIG root: tab bars, accessibility, materials. Resolve current iOS design changes at use-time.",
+      "add_as_web_search": true,
+      "optional": false
+    }
+  ],
+  "tooling": [
+    {
+      "name": "XcodeBuildMCP",
+      "url": "https://github.com/getsentry/XcodeBuildMCP",
+      "description": "Upstream repository for the MCP server and CLI",
+      "add_as_web_search": true
+    },
+    {
+      "name": "XcodeBuildMCP Configuration",
+      "url": "https://raw.githubusercontent.com/getsentry/XcodeBuildMCP/main/docs/CONFIGURATION.md",
+      "description": "Current config shape, workflow selection, and session defaults",
+      "add_as_web_search": false
+    },
+    {
+      "name": "XcodeBuildMCP CLI",
+      "url": "https://raw.githubusercontent.com/getsentry/XcodeBuildMCP/main/docs/CLI.md",
+      "description": "CLI usage and command patterns",
+      "add_as_web_search": false
+    },
+    {
+      "name": "XcodeBuildMCP Tools",
+      "url": "https://raw.githubusercontent.com/getsentry/XcodeBuildMCP/main/docs/TOOLS.md",
+      "description": "Tool and workflow reference for simulator, UI, and debugging operations",
+      "add_as_web_search": false
+    }
+  ],
+  "build_and_docs_tooling": [
+    {
+      "name": "xcbeautify",
+      "url": "https://github.com/cpisciotta/xcbeautify",
+      "description": "Formats xcodebuild output into clean, readable logs - use when XcodeBuildMCP is unavailable to prevent agents wasting context on raw build noise",
+      "add_as_web_search": false
+    },
+    {
+      "name": "DocSetQuery",
+      "url": "https://github.com/PaulSolt/DocSetQuery",
+      "description": "Fast local Apple documentation querying from DocSet bundles - gives agents concrete API signatures instead of fuzzy recall",
+      "add_as_web_search": false
+    },
+    {
+      "name": "sosumi.ai",
+      "url": "https://sosumi.ai",
+      "description": "Web-based Apple documentation search for HIG and framework freshness checks",
+      "add_as_web_search": true
+    }
+  ],
+  "secondary_references": [
+    {
+      "name": "OpenAI Codex - Build for iOS and macOS",
+      "url": "https://developers.openai.com/codex/use-cases/native-ios-macos-apps",
+      "description": "Codex workflow guidance for CLI-first native Apple-platform development, XcodeBuildMCP escalation, and specialized SwiftUI skills",
+      "add_as_web_search": false
+    },
+    {
+      "name": "NN/g - Cards Component",
+      "url": "https://www.nngroup.com/articles/cards-component/",
+      "description": "General card-pattern reference for overview surfaces",
+      "add_as_web_search": false
+    },
+    {
+      "name": "NN/g - Liquid Glass Is Cracked, and Usability Suffers in iOS 26",
+      "url": "https://www.nngroup.com/articles/liquid-glass/",
+      "description": "Independent usability audit of iOS 26 Liquid Glass: contrast measurements, tab-bar collapse confusion, touch-target spacing, and over-animation criticism. Source for the contrast/NN/g claims in ios26-liquid-glass.md and swiftui-design-antipatterns.md.",
+      "add_as_web_search": true
+    }
+  ]
+}

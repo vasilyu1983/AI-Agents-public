@@ -1,0 +1,509 @@
+{
+  "metadata": {
+    "title": "AI Game Theory Foundations — Sources",
+    "description": "Primary papers and references for 22 applied game-theory primitives plus the formal theory map: game forms, equilibria, mechanism design, auctions, matching, bargaining, cooperative game theory, and learning in games",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-game-theory",
+    "total_sources": 69
+  },
+  "research_papers": [
+    {
+      "id": "ECON",
+      "name": "ECON: From Debate to Equilibrium (Bayesian Nash Coordination)",
+      "url": "https://arxiv.org/abs/2506.08292",
+      "openreview": "https://openreview.net/forum?id=RQwexjUCxm",
+      "description": "Bayesian Nash equilibrium for multi-LLM coordination (ICML 2025). +11.2% accuracy, -21.4% tokens. Source for mechanism #1 (ECON, agent-team layer) and belief-driven coordination concept.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "A-HMAD",
+      "name": "A-HMAD: Adaptive Heterogeneous Multi-Agent Debate",
+      "url": "https://link.springer.com/article/10.1007/s44443-025-00353-3",
+      "description": "Adaptive heterogeneous multi-agent debate. +4-6% accuracy, -30% factual errors over homogeneous debate. Source for mechanism #2 (adversarial debate).",
+      "add_as_web_search": true
+    },
+    {
+      "id": "AgentAuditor",
+      "name": "AgentAuditor: Reasoning Tree Audit",
+      "url": "https://arxiv.org/html/2602.09341",
+      "description": "Auditing multi-agent LLM reasoning trees outperforms majority vote and LLM-as-judge. +5pp absolute accuracy over majority vote. Source for mechanism #13 (reasoning-tree audit) and #2 (adversarial debate synthesis).",
+      "add_as_web_search": true
+    },
+    {
+      "id": "ShapleyFlow",
+      "name": "ShapleyFlow: Cooperative Game Theory for Agentic Workflows",
+      "url": "https://arxiv.org/abs/2502.00510",
+      "description": "Shapley value attribution for multi-agent workflows. Source for mechanism #4 (Shapley contribution).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "RedDebate",
+      "name": "RedDebate: Multi-Agent Debate + Red-Teaming",
+      "url": "https://arxiv.org/abs/2506.11083",
+      "description": "Multi-agent debate combined with red-teaming and long-term memory. Source for mechanism #2 (adversarial debate — red-team memory variant).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "AlphaEvolve",
+      "name": "AlphaEvolve: LLM-Driven Algorithm Evolution",
+      "url": "https://arxiv.org/abs/2506.13131",
+      "description": "General evolutionary coding-agent baseline from DeepMind. Pair with VAD-CFR for game-theoretic MARL claims. Source for mechanism #10 (evolutionary coordination search).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ShinkaEvolve",
+      "name": "ShinkaEvolve: Sample-Efficient Algorithm Evolution",
+      "url": "https://arxiv.org/html/2509.19349v1",
+      "description": "Sakana AI ICLR 2026. Order-of-magnitude fewer LLM calls than AlphaEvolve via parent-sampling, code-novelty rejection, and bandit-based ensemble selection. Source for mechanism #10 (sample-efficient evolutionary search).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "PROClaim",
+      "name": "PROClaim: Courtroom-Style Progressive RAG Debate",
+      "url": "https://arxiv.org/html/2603.28488v1",
+      "description": "March 2026. Courtroom-style multi-agent debate with progressive RAG and role-switching. +10pp accuracy over standard multi-agent debate on claim verification. Source for mechanism #8.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "Pareto-Nash",
+      "name": "Pareto-Nash Equilibrium for Multi-Objective Agent Systems",
+      "url": "https://arxiv.org/abs/2412.20523",
+      "description": "Multi-objective game theory for agent systems. Source for mechanism #9 (Pareto-Nash multi-objective).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "IJCAI-25",
+      "name": "IJCAI-25: Game Theory Meets Large Language Models",
+      "url": "https://arxiv.org/abs/2503.16424",
+      "description": "Survey of pro-social bias and tacit collusion in LLM-based game-theoretic settings. Background for mechanisms #6, #7.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "DeepMind-GT",
+      "name": "DeepMind: Game Theory Insights Into Asymmetric Multi-Agent Games",
+      "url": "https://deepmind.google/blog/game-theory-insights-into-asymmetric-multi-agent-games/",
+      "description": "DeepMind blog. Asymmetric multi-agent game theory insights. Background for mechanism #9 (Pareto-Nash).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "WisdomSilicon",
+      "name": "Wisdom of the Silicon Crowd: LLM Ensemble Prediction",
+      "url": "https://www.science.org/doi/10.1126/sciadv.adp1528",
+      "description": "Science Advances 2025. Ensemble LLM prediction markets. Source for mechanism #11 (prediction market / confidence betting).",
+      "add_as_web_search": true
+    },
+    {
+      "id": "AI-Negotiation",
+      "name": "AI Negotiation: Lessons from 180,098 Negotiations",
+      "url": "https://medium.com/@fabioherle/building-autonomous-negotiations-that-actually-work-lessons-from-180-098-ai-negotiations-805a2f8798a4",
+      "description": "Practitioner dataset of AI-to-AI negotiations. Useful for BATNA/ZOPA heuristics, not a universal benchmark. Source for mechanism #12 (negotiation protocol).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "HiveMind",
+      "name": "HiveMind: Contribution-Guided Online Prompt Optimization",
+      "url": "https://arxiv.org/abs/2512.06432",
+      "description": "Dec 2025. Online per-member prompt mutation guided by Shapley contribution scores. Source for mechanism #17 (agent-team layer) and Shapley online variant in #4.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "FAIRGAME",
+      "name": "FAIRGAME: Game-Theoretic Lens on LLM Multi-Agent Systems",
+      "url": "https://arxiv.org/abs/2601.15047",
+      "description": "Jan 2026. Payoff-scaled iterated Prisoner's Dilemma + Public Goods Games for measuring defection tendency. Source for mechanism #6 (cooperation and defection).",
+      "add_as_web_search": true
+    },
+    {
+      "id": "Shapley-Coop",
+      "name": "Shapley-Coop: Credit Assignment for Emergent Cooperation",
+      "url": "https://openreview.net/pdf?id=HnJ1UkuJXS",
+      "description": "OpenReview 2025. Shapley Chain-of-Thought + structured negotiation for spontaneous cooperation via task-time pricing. Source for mechanism #4 (Shapley contribution) and #12 (negotiation).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "MAST",
+      "name": "MAST: Why Do Multi-Agent LLM Systems Fail?",
+      "url": "https://arxiv.org/abs/2503.13657",
+      "description": "Cemri, Pan, Yang et al., NeurIPS 2025. 14 failure modes × 3 categories (specification 41.8%, inter-agent misalignment 36.9%, verification 21.3%). Validated on 1,600+ traces. Background for all primitives.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "TalkCheap",
+      "name": "Talk Isn't Always Cheap: Failure Modes in Multi-Agent Debate",
+      "url": "https://arxiv.org/abs/2509.05396",
+      "description": "2025. Cases where multi-agent debate degrades below single-agent. Source for when-NOT-to-use guidance in mechanism #2.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "PersuasionDebate",
+      "name": "Persuasion-Driven Adversarial Influence in Multi-Agent LLM Debate",
+      "url": "https://www.nature.com/articles/s41598-026-42705-7",
+      "description": "Nature Sci Reports 2026. Weak agents can persuade stronger agents off correct answers. Source for sycophancy hazard in mechanism #2.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "AdaptiveStability",
+      "name": "Adaptive Stability Detection for Multi-Agent Debate Convergence",
+      "url": "https://openreview.net/forum?id=Vusd1Hw2D9",
+      "description": "OpenReview 2026. Beta-Binomial + KS test for non-numeric debate convergence. Source for stopping rule in mechanism #2.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "VAD-CFR",
+      "name": "Discovering Multiagent Learning Algorithms with Large Language Models",
+      "url": "https://arxiv.org/abs/2602.16928",
+      "description": "Feb 2026. Applies AlphaEvolve to game-theoretic MARL, discovering VAD-CFR and SHOR-PSRO variants. Primary source for game-theory-specific claims in mechanism #10.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "CodeEvolve",
+      "name": "CodeEvolve: A Coding Agent Framework for Algorithm Evolution",
+      "url": "https://arxiv.org/html/2510.14150v1",
+      "description": "2025. Open-source algorithm-evolution framework with island-based GA and inspiration-based crossover. Secondary implementation option for mechanism #10.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Self-MoA",
+      "name": "Rethinking Mixture-of-Agents: Is Mixing Different Large Language Models Beneficial?",
+      "url": "https://arxiv.org/abs/2502.00674",
+      "description": "2025. Self-MoA shows same-model multi-sample aggregation can outperform heterogeneous MoA in some settings. Source for mechanism #2 when-not-to-use heterogeneity.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "CredibilityScoring",
+      "name": "An Adversary-Resistant Multi-Agent LLM System via Credibility Scoring",
+      "url": "https://arxiv.org/abs/2505.24239",
+      "description": "2025. Credibility scoring to mitigate adversarial and low-performing agents in multi-agent systems. Source for mechanism #14.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "DynamicRoleAssignment",
+      "name": "Dynamic Role Assignment for Multi-Agent Debate",
+      "url": "https://arxiv.org/abs/2601.17152",
+      "description": "Jan 2026. Meta-debate with proposal and peer-review stages for capability-aware debate role assignment. Source for mechanism #16.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "BeyondMajorityVoting",
+      "name": "Beyond Majority Voting: LLM Aggregation by Leveraging Higher-Order Information",
+      "url": "https://arxiv.org/abs/2510.01499",
+      "description": "2025. Introduces Optimal Weight and Inverse Surprising Popularity aggregation. Source for mechanism #18.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "MixtureOfAgents",
+      "name": "Mixture-of-Agents Enhances Large Language Model Capabilities",
+      "url": "https://arxiv.org/abs/2406.04692",
+      "description": "2024. Layered proposer/aggregator context for multi-agent answer aggregation. Background for mechanisms #18 and #19.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "RCS",
+      "name": "Beyond Majority Voting: Efficient Best-Of-N with Radial Consensus Score",
+      "url": "https://arxiv.org/abs/2604.12196",
+      "description": "Apr 2026. Embedding-geometry best-of-N selector that supports uniform, frequency, and probability weighting. Source for mechanism #19.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "PolyBench",
+      "name": "PolyBench: Benchmarking LLM Forecasting and Trading Capabilities on Live Prediction Market Data",
+      "url": "https://arxiv.org/abs/2604.14199",
+      "description": "Apr 2026. Prediction-market benchmark with timestamped market states, news, and CLOB snapshots. Source for mechanism #11 traps around confidence and live-market forecasting.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "FakePredictionMarkets",
+      "name": "Going All-In on LLM Accuracy: Fake Prediction Markets, Real Confidence Signals",
+      "url": "https://arxiv.org/abs/2512.05998",
+      "description": "Dec 2025. Fictional prediction-market framing creates legible confidence/stake signals. Source for mechanism #11.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "ConformalSocialChoice",
+      "name": "From Debate to Decision: Conformal Social Choice for Safe Multi-Agent Deliberation",
+      "url": "https://arxiv.org/abs/2604.07667",
+      "description": "Apr 2026. Aggregates heterogeneous agent probability distributions with conformal calibration to produce act-vs-escalate prediction sets. Source for mechanism #20.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "ProvenanceParadox",
+      "name": "The Provenance Paradox in Multi-Agent LLM Routing",
+      "url": "https://arxiv.org/abs/2603.18043",
+      "description": "Mar 2026. Shows self-claimed quality routing can perform worse than random and proposes delegation contracts plus attested identity. Source for mechanism #21.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "CoalitionFormationLLM",
+      "name": "Coalition Formation in LLM Agent Networks",
+      "url": "https://arxiv.org/abs/2604.14386",
+      "description": "Apr 2026. Hedonic-game framework for stable partitions among LLM agents with Coalition-of-Thought protocol. Source for mechanism #22.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "AntiCollusionAI",
+      "name": "Mapping Human Anti-Collusion Mechanisms to Multi-agent AI Systems",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0950705126007938",
+      "description": "Apr 2026. Taxonomy of sanctions, leniency, monitoring, market design, and governance controls for multi-agent AI collusion risk. Background for mechanisms #6, #14, #20, and #21.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "GenerativeSocialChoice",
+      "name": "Generative Social Choice",
+      "url": "https://arxiv.org/abs/2309.01291",
+      "description": "Foundational generative social choice reference for producing and selecting outputs under preference diversity. Source for mechanism #15.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "RepresentativeSocialChoice",
+      "name": "Representative Social Choice",
+      "url": "https://arxiv.org/abs/2410.23953",
+      "description": "Representative social choice reference for preserving stakeholder coverage and minority signal. Source for mechanism #15.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "OsborneRubinstein",
+      "name": "A Course in Game Theory",
+      "url": "https://mitpress.mit.edu/9780262650403/a-course-in-game-theory/",
+      "description": "Osborne and Rubinstein textbook. Classical reference for normal-form games, extensive-form games, Nash equilibrium, mixed strategies, repeated games, and bargaining foundations.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "FudenbergTirole",
+      "name": "Game Theory",
+      "url": "https://mitpress.mit.edu/9780262061414/game-theory/",
+      "description": "Fudenberg and Tirole graduate reference. Source for noncooperative game theory, strategic form games, subgame perfection, repeated games, incomplete information, and equilibrium refinements.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "MyersonBook",
+      "name": "Game Theory: Analysis of Conflict",
+      "url": "https://mitpressbookstore.mit.edu/book/9780674341166",
+      "description": "Myerson textbook. Reference for strategic form, extensive form, Bayesian games, cooperative game theory, and methodological foundations.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "AlgorithmicGameTheory",
+      "name": "Algorithmic Game Theory",
+      "url": "https://www.cambridge.org/core/books/algorithmic-game-theory/0092C07CA8B724E1B1BE2238DDD66B38",
+      "description": "Nisan, Roughgarden, Tardos, and Vazirani edited volume. Canonical reference for computational equilibria, algorithmic mechanism design, auctions, and price of anarchy.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ShohamLeytonBrown",
+      "name": "Multiagent Systems: Algorithmic, Game-Theoretic, and Logical Foundations",
+      "url": "https://www.masfoundations.org/",
+      "description": "Shoham and Leyton-Brown reference for multiagent systems, normal-form games, extensive-form games, auctions, voting, social choice, and mechanism design.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Vickrey1961",
+      "name": "Counterspeculation, Auctions, and Competitive Sealed Tenders",
+      "url": "https://doi.org/10.1111/j.1540-6261.1961.tb02789.x",
+      "description": "Vickrey 1961. Classical second-price sealed-bid auction reference and foundation for truthful auction discussion.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Clarke1971",
+      "name": "Multipart Pricing of Public Goods",
+      "url": "https://doi.org/10.1007/BF01726210",
+      "description": "Clarke 1971. Public-goods pricing and pivotal mechanism foundation for Groves/VCG-style mechanisms.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Myerson1981",
+      "name": "Optimal Auction Design",
+      "url": "https://doi.org/10.1287/moor.6.1.58",
+      "description": "Myerson 1981. Revenue-optimal auction design under private information; source for Myerson auction and virtual valuation concepts.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "GaleShapley1962",
+      "name": "College Admissions and the Stability of Marriage",
+      "url": "https://doi.org/10.1080/00029890.1962.11989827",
+      "description": "Gale and Shapley 1962. Stable matching and deferred acceptance foundation for market-design coverage.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Rubinstein1982",
+      "name": "Perfect Equilibrium in a Bargaining Model",
+      "url": "https://doi.org/10.2307/1912531",
+      "description": "Rubinstein 1982. Alternating-offers bargaining model and subgame-perfect equilibrium foundation for bargaining theory.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "CesaBianchiLugosi",
+      "name": "Prediction, Learning, and Games",
+      "url": "https://www.cambridge.org/core/books/prediction-learning-and-games/frontmatter/7EB7D6727081209EA7CB8FF4FBA4AEF1",
+      "description": "Cesa-Bianchi and Lugosi reference for prediction with expert advice, regret minimization, bandits, and learning-in-games foundations.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "HartMasColell2000",
+      "name": "A Simple Adaptive Procedure Leading to Correlated Equilibrium",
+      "url": "https://doi.org/10.1111/1468-0262.00153",
+      "description": "Hart and Mas-Colell 2000. Regret-matching and correlated equilibrium foundation for adaptive coordination.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "CFR2007",
+      "name": "Regret Minimization in Games with Incomplete Information",
+      "url": "https://papers.nips.cc/paper/3306-regret-minimization-in-games-with-incomplete-information",
+      "description": "Zinkevich, Johanson, Bowling, and Piccione 2007. Counterfactual regret minimization for large imperfect-information games.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "PSRO2017",
+      "name": "A Unified Game-Theoretic Approach to Multiagent Reinforcement Learning",
+      "url": "https://arxiv.org/abs/1711.00832",
+      "description": "Lanctot et al. 2017. Policy-Space Response Oracles and empirical game-theoretic analysis for MARL.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "INPO",
+      "name": "Iterative Nash Policy Optimization: Aligning LLMs with General Preferences via No-Regret Learning",
+      "url": "https://arxiv.org/abs/2407.00617",
+      "openreview": "https://iclr.cc/virtual/2025/oral/31853",
+      "description": "ICLR 2025 Oral. Frames RLHF as a two-player zero-sum game; applies online mirror descent (no-regret) self-play to approximate Nash policy without win-rate estimation. LLaMA-3-8B: 42.6% AlpacaEval 2.0, 37.8% Arena-Hard win rate, outperforming SOTA RLHF baselines. Source for learning-in-games note in mechanism #6 and #10.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "MechDesignFinetune",
+      "name": "Mechanism Design for LLM Fine-tuning with Multiple Reward Models",
+      "url": "https://arxiv.org/abs/2405.16276",
+      "description": "NeurIPS 2024. Proves truthful reporting is strictly dominated without payments in multi-stakeholder LLM fine-tuning; derives affine maximizer (weighted VCG) payment scheme achieving DSIC and IR. Source for misreport hazard note in mechanism #7.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "TTS-PeerPrediction",
+      "name": "Incentive-Aligned Multi-Source LLM Summaries (Truthful Text Summarization)",
+      "url": "https://arxiv.org/abs/2509.25184",
+      "description": "ICLR 2026. Decomposes multi-source synthesis into atomic claims, applies multi-task peer-prediction to reward informative source agreement; formal BNE guarantee for honest reporting. Source for claim-level truthfulness recipe in mechanisms #7 and #14.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "ConvexMarkovGames",
+      "name": "Convex Markov Games: A New Frontier for Multi-Agent Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2410.16600",
+      "description": "ICML 2025. Generalizes Markov games to convex preferences over occupancy measures; proves pure Nash equilibria exist; gradient descent on exploitability upper bound approximates them. Domains: fairness, safety, behavioral diversity. Source for formal theory note in mechanism #9 and #10.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "MAC-SPGG",
+      "name": "Everyone Contributes! Incentivizing Strategic Cooperation in Multi-LLM Systems via Sequential Public Goods Games",
+      "url": "https://arxiv.org/abs/2508.02076",
+      "description": "NeurIPS 2025 + AAMAS 2026. Redesigns public-goods reward so effortful LLM contribution is the unique SPNE; sequential observation eliminates free-rider equilibria. Outperforms single-agent, CoT, and standard cooperative baselines across reasoning/math/code/NLP. Source for SPNE free-riding fix in mechanism #6.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "SmoothRM-LastIterate",
+      "name": "Efficient Last-Iterate Convergence in Solving Extensive-Form Games",
+      "url": "https://openreview.net/forum?id=JzWtqd9CGJ",
+      "description": "NeurIPS 2025 (Meng, Yang, Zhang, Ge, Yang, Ding, Li, An, Gao). Proves smoothed RM+ variants achieve last-iterate (not just average-iterate) convergence to Nash equilibria in extensive-form games. Note: the linear-rate-for-restarted-variant result in two-player zero-sum matrix games is from the ICLR 2025 predecessor (arXiv:2311.00676), not this paper. Closes theory-practice gap for CFR+ deployments. Source for learning-in-games formal theory update.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "CalvanoAER2020",
+      "name": "Artificial Intelligence, Algorithmic Pricing, and Collusion",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/aer.20190623",
+      "doi": "10.1257/aer.20190623",
+      "description": "Calvano, Calzolari, Denicolò, Pastorello. American Economic Review 110(10):3267–3297, 2020. Q-learning pricing algorithms consistently reach supra-competitive prices via tacit coordination (no explicit communication), sustained by punishment-and-forgiveness strategies. Peer-reviewed empirical econ with replication code. Primary source for algorithmic-collusion trap recipe.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "NegotiationArena",
+      "name": "How Well Can LLMs Negotiate? NegotiationArena Platform and Analysis",
+      "url": "https://arxiv.org/abs/2402.05863",
+      "arxiv_id": "2402.05863",
+      "description": "Bianchi, Chia, Yuksekgonul, Tagliabue, Jurafsky, Zou 2024. Evaluates LLM negotiation in ultimatum games, trading games, and price negotiations. Documents irrational behavior mirroring human negotiators, including large deviations from Nash best-response. Primary behavioral benchmark for LLM rationality trap.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "GameBench",
+      "name": "GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents",
+      "url": "https://arxiv.org/abs/2406.06613",
+      "arxiv_id": "2406.06613",
+      "description": "Costarelli et al. 2024. Cross-domain benchmark across 9 strategic game environments. Key finding: no LLM matches human performance; GPT-4 performs worse than random in some settings even with CoT/RAP scaffolding. Primary behavioral benchmark for LLM rationality trap.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "PapadimitriouRoughgarden2008",
+      "name": "Computing Correlated Equilibria in Multi-Player Games",
+      "url": "https://doi.org/10.1145/1374376.1374380",
+      "doi": "10.1145/1374376.1374380",
+      "description": "Papadimitriou and Roughgarden. JACM 55(3), 2008. Shows coarse correlated equilibrium (CCE) is polynomial-time computable in many game classes; correlated equilibrium (CE) requires an LP. Key computability distinction: no-regret learning (Hart-Mas-Colell) converges to CCE, not CE. Source for CCE/CE note in formal-theory-map.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "DeepCFR",
+      "name": "Deep Counterfactual Regret Minimization",
+      "url": "https://arxiv.org/abs/1811.00164",
+      "arxiv_id": "1811.00164",
+      "description": "Brown, Sandholm, Amos. ICML 2019. Extends CFR to large imperfect-information games via neural network approximation of counterfactual values, enabling tabular-infeasible game trees. Foundation for production EFG solving beyond vanilla CFR. Source for CFR-lineage note in formal-theory-map.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ReBeL",
+      "name": "Combining Deep Reinforcement Learning and Search for Imperfect-Information Games",
+      "url": "https://arxiv.org/abs/2007.13544",
+      "arxiv_id": "2007.13544",
+      "description": "Brown, Bakhtin, Lerer, Gong. NeurIPS 2020. ReBeL combines deep RL value functions with search in imperfect-information games, generalizing AlphaZero-style planning. Use when combining search with learned value estimation in EFG settings. Source for CFR-lineage note in formal-theory-map.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Nash1950",
+      "name": "Equilibrium Points in N-Person Games",
+      "url": "https://www.pnas.org/doi/10.1073/pnas.36.1.48",
+      "doi": "10.1073/pnas.36.1.48",
+      "description": "Nash 1950. PNAS 36(1):48-49. Proves existence of at least one equilibrium point (in mixed strategies, via Kakutani's fixed-point theorem) for every finite n-person game. Source for Nash-existence note in formal-theory-map: existence does not imply a pure-strategy equilibrium or uniqueness.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Friedman1971",
+      "name": "A Non-Cooperative Equilibrium for Supergames",
+      "url": "https://academic.oup.com/restud/article-abstract/38/1/1/1519477",
+      "doi": "10.2307/2296617",
+      "description": "Friedman 1971. Review of Economic Studies 38(1):1-12. Nash-reversion trigger-strategy equilibrium in infinitely repeated games (supergames) — an early, restricted precursor to the general Folk Theorem. Source for the repeated-game / folk-theorem note in formal-theory-map.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "FudenbergMaskin1986",
+      "name": "The Folk Theorem in Repeated Games with Discounting or with Incomplete Information",
+      "url": "https://scholar.harvard.edu/maskin/publications/folk-theorem-repeated-games-discounting-or-incomplete-information",
+      "doi": "10.2307/1911307",
+      "description": "Fudenberg and Maskin 1986. Econometrica 54(3):533-554. Canonical general statement: with sufficiently patient players and (near-)perfect monitoring, any feasible, individually-rational payoff profile is sustainable as a subgame-perfect equilibrium of the infinitely repeated game. Establishes the multiplicity (equilibrium-selection) result behind reputation/cooperation claims in mechanisms #5 and #6.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "FudenbergLevineMaskin1994",
+      "name": "The Folk Theorem with Imperfect Public Information",
+      "url": "https://scholar.harvard.edu/fudenberg/publications/folk-theorem-repeated-games-imperfect-public-information",
+      "doi": "10.2307/2951757",
+      "description": "Fudenberg, Levine, and Maskin 1994. Econometrica 62(5):997-1039. Extends the Folk Theorem to repeated games with imperfect public monitoring (players observe a noisy public signal, not each other's actions directly) under stronger identifiability conditions. Source for the imperfect-monitoring boundary note on the Folk Theorem.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "MyersonSatterthwaite1983",
+      "name": "Efficient Mechanisms for Bilateral Trading",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/0022053183900480",
+      "doi": "10.1016/0022-0531(83)90048-0",
+      "description": "Myerson and Satterthwaite 1983. Journal of Economic Theory 29(2):265-281. Proves no mechanism for bilateral trade under private values can be simultaneously ex-post efficient, budget-balanced, and (Bayesian) individually rational — an impossibility result, not a design flaw. Source for the participation-constraint / bilateral-trade-impossibility trap in formal-theory-map and SKILL.md.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "YokooFalseName2004",
+      "name": "The Effect of False-Name Bids in Combinatorial Auctions: New Fraud in Internet Auctions",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0899825603000459",
+      "doi": "10.1016/S0899-8256(03)00045-9",
+      "description": "Yokoo, Sakurai, and Matsubara 2004. Games and Economic Behavior 46(1):174-188. Shows VCG is not false-name-proof in combinatorial auctions and that no false-name-proof mechanism achieves Pareto efficiency in general; gives a sufficient concavity condition under which VCG is false-name-proof. Source for the false-name-bid trap in formal-theory-map and SKILL.md.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "AxelrodHamilton1981",
+      "name": "The Evolution of Cooperation",
+      "url": "https://www.science.org/doi/10.1126/science.7466396",
+      "doi": "10.1126/science.7466396",
+      "description": "Axelrod and Hamilton 1981. Science 211(4489):1390-1396. Reports Rapoport's Tit-for-Tat winning both rounds of Axelrod's round-robin iterated-Prisoner's-Dilemma tournaments (200-round pairings, summed scores) via niceness, retaliation, and forgiveness. Source for the corrected Axelrod-tournament note in mechanism #6 — the result is tournament- and environment-specific, not a proof that Tit-for-Tat is a universally optimal or dominant strategy.",
+      "add_as_web_search": false
+    }
+  ]
+}

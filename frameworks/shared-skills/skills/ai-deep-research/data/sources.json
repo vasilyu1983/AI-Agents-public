@@ -1,0 +1,120 @@
+{
+  "metadata": {
+    "title": "ai-deep-research - Sources",
+    "description": "Research workflow tooling and source-packaging references for evidence-backed deep research.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "ai-deep-research",
+    "total_sources": 17
+  },
+  "research_workflows": [
+    {
+      "name": "GPT Researcher",
+      "url": "https://github.com/assafelovic/gpt-researcher",
+      "description": "Reference for staged autonomous research workflows and compiled research reports.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Deep Research Skill",
+      "url": "https://github.com/199-biotechnologies/claude-deep-research-skill",
+      "description": "Reference for multi-phase research structure and long-running synthesis workflows.",
+      "add_as_web_search": false
+    }
+  ],
+  "capture_and_search": [
+    {
+      "name": "Firecrawl",
+      "url": "https://github.com/mendableai/firecrawl",
+      "description": "Reference for website capture and extraction before research synthesis.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Tavily MCP",
+      "url": "https://github.com/tavily-ai/tavily-mcp",
+      "description": "Search-oriented MCP server for evidence gathering in research workflows.",
+      "add_as_web_search": false
+    }
+  ],
+  "local_iteration": [
+    {
+      "name": "simonw/llm",
+      "url": "https://github.com/simonw/llm",
+      "description": "Lightweight CLI for local iteration, prompt testing, and side-by-side model checks during research work.",
+      "add_as_web_search": false
+    }
+  ],
+  "vendor_docs": [
+    {
+      "name": "Anthropic Web Search Tool Docs",
+      "url": "https://platform.claude.com/docs/en/docs/build-with-claude/tool-use/web-search-tool",
+      "description": "Superseded path — see the agents-and-tools entry below for the current doc tree and current tool version (web_search_20260318). Kept for history; fetched 2026-05-17.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Anthropic Claude Opus 4.7 What's New",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7",
+      "description": "Primary doc for Claude Opus 4.7 model ID, capabilities, and API surface. Ground truth from verified-facts packet.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Gemini Deep Research API Docs",
+      "url": "https://ai.google.dev/gemini-api/docs/deep-research",
+      "description": "Primary doc for Gemini Deep Research model IDs (deep-research-preview-04-2026, deep-research-max-preview-04-2026), Interactions API endpoint, parameters. Fetched 2026-05-17.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Perplexity Chat Completions API Reference",
+      "url": "https://docs.perplexity.ai/api-reference/chat-completions-post",
+      "description": "OpenAPI spec listing Perplexity model ID strings: sonar, sonar-pro, sonar-deep-research, sonar-reasoning-pro. Fetched 2026-05-17.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "OpenAI Deep Research Guide",
+      "url": "https://developers.openai.com/api/docs/guides/deep-research",
+      "description": "Feature guide for OpenAI deep research. Model IDs o3-deep-research (depth) and o4-mini-deep-research (speed/cost) still described here as current. Old platform.openai.com URL redirects here. Verified 2026-07-11 — CAUTION: this guide disagreed with the deprecations page on the same date (see next entry); do not treat this page alone as proof the models are still supported.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "OpenAI API Deprecations Page",
+      "url": "https://developers.openai.com/api/docs/deprecations",
+      "description": "Authoritative sunset-date source. Lists o3-deep-research (snapshot o3-deep-research-2025-06-26) and o4-mini-deep-research (snapshot o4-mini-deep-research-2025-06-26) as shut down 2026-07-23, recommended replacement gpt-5.5-pro, announced 2026-04-22. Verified 2026-07-11. Always check this page, not just the feature guide, before wiring a pipeline to a specific OpenAI model ID.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "xAI Developer Docs — Tools Overview",
+      "url": "https://docs.x.ai/developers/tools/overview",
+      "description": "Primary doc confirming xAI now documents server-side web_search and x_search tools (API-invocable, demonstrated with grok-4.5), priced by token usage plus tool invocations. No dedicated one-call deep-research report model yet. Verified 2026-07-11.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Perplexity API Pricing",
+      "url": "https://docs.perplexity.ai/guides/pricing",
+      "description": "Perplexity sonar-deep-research multi-component token pricing confirmed: $2/M input, $8/M output, $3/M reasoning, $2/M citation, $5 per 1,000 search queries. Whether a separate flat per-request fee applies is inconsistently reported by secondary sources as of 2026-07-11 — confirm on this page for your account tier before budgeting. Typical full-query cost now runs roughly $0.30–$1.30+ depending on reasoning depth and search count (higher than earlier estimates). Verified 2026-07-11.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Anthropic Web Search Tool Docs (agents-and-tools path)",
+      "url": "https://platform.claude.com/docs/en/docs/agents-and-tools/tool-use/web-search-tool",
+      "description": "Current canonical URL for Anthropic web search tool. GA, no beta header required. Three versions live: web_search_20250305 (basic), web_search_20260209 (dynamic filtering), web_search_20260318 (current — adds response-inclusion control). Dynamic filtering supported models: Claude Fable 5, Opus 4.8, Mythos 5, Mythos Preview, Opus 4.7, Opus 4.6, Sonnet 5, Sonnet 4.6. Verified 2026-07-11.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Anthropic Memory Tool Docs",
+      "url": "https://platform.claude.com/docs/en/docs/agents-and-tools/tool-use/memory-tool",
+      "description": "Primary doc for the Anthropic memory tool (memory_20250818): a client-side tool writing to a client-controlled persistent directory (conventionally /memories; path is application-defined, NOT a platform-mandated /mnt/memory/ mount). Confirmed GA, no beta header, available on all Claude 4+ models. Cross-session persistence is app-implemented. 'Dreaming'/'Auto Dream' is a Claude Code/community pattern, NOT a documented platform capability. Verified 2026-07-11.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Anthropic News — Claude Sonnet 5",
+      "url": "https://www.anthropic.com/news/claude-sonnet-5",
+      "description": "Primary doc: Claude Sonnet 5 GA 2026-06-30, replaces Sonnet 4.6 as default free/Pro model, near-Opus agentic performance at lower cost. Verified 2026-07-11.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Anthropic News — Claude Fable 5 and Mythos 5",
+      "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+      "description": "Primary doc: Mythos-class tier sits above Opus-class. Fable 5 and Mythos 5 GA 2026-06-09; briefly export-restricted to US persons 2026-06-12 through 2026-06-30; globally available again from 2026-07-01. Relevant to which Claude model to select for research-quality baselines. Verified 2026-07-11.",
+      "add_as_web_search": false
+    }
+  ]
+}

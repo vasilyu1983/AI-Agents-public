@@ -1,0 +1,186 @@
+{
+  "metadata": {
+    "title": "AI Distributed Systems Foundations — Sources",
+    "description": "Primary papers and references for 11 distributed-systems primitives: CAP/PACELC, FLP impossibility, Paxos, Raft, vector clocks, CRDTs, idempotency, leases/fencing, quorums, causal consistency, and broadcast protocols",
+    "last_updated": "2026-05-17",
+    "skill": "foundations-distributed-systems",
+    "total_sources": 25
+  },
+  "research_papers": [
+    {
+      "id": "Lamport1978",
+      "name": "Time, Clocks, and the Ordering of Events in a Distributed System",
+      "url": "https://lamport.azurewebsites.net/pubs/time-clocks.pdf",
+      "description": "Lamport 1978. Introduced logical clocks (Lamport timestamps) and happens-before relation. Foundation for vector clocks (#5) and causal consistency (#10).",
+      "url_check": "manual"
+    },
+    {
+      "id": "FLP1985",
+      "name": "Impossibility of Distributed Consensus with One Faulty Process",
+      "url": "https://doi.org/10.1145/3149.214121",
+      "description": "Fischer, Lynch, and Paterson 1985. Proves no deterministic asynchronous consensus protocol can guarantee both safety and termination with even one crash fault. Foundation for primitive #2 (FLP Impossibility).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Lamport1998",
+      "name": "The Part-Time Parliament (Paxos)",
+      "url": "https://lamport.azurewebsites.net/pubs/lamport-paxos.pdf",
+      "description": "Lamport 1998. Original Paxos consensus protocol. Foundation for primitive #3.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Brewer2000",
+      "name": "Towards Robust Distributed Systems (CAP Conjecture)",
+      "url": "https://people.eecs.berkeley.edu/~brewer/cs262b-2004/PODC-keynote.pdf",
+      "description": "Brewer 2000 PODC keynote. Introduced the CAP conjecture. Foundation for primitive #1.",
+      "url_check": "manual"
+    },
+    {
+      "id": "GilbertLynch2002",
+      "name": "Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services",
+      "url": "https://doi.org/10.1145/564585.564601",
+      "description": "Gilbert and Lynch 2002. Formal proof of the CAP theorem. Foundation for primitive #1.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Ongaro2014",
+      "name": "In Search of an Understandable Consensus Algorithm (Raft)",
+      "url": "https://raft.github.io/raft.pdf",
+      "description": "Ongaro and Ousterhout 2014. Raft consensus algorithm — leader-based, understandable alternative to Paxos. Foundation for primitive #4.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Shapiro2011",
+      "name": "Conflict-Free Replicated Data Types",
+      "url": "https://doi.org/10.1007/978-3-642-24550-3_29",
+      "description": "Shapiro, Preguica, Baquero, Zawirski 2011. Formal definition of CRDTs (convergent and commutative replicated data types). Foundation for primitive #6.",
+      "url_check": "manual"
+    },
+    {
+      "id": "DeCandia2007",
+      "name": "Dynamo: Amazon's Highly Available Key-Value Store",
+      "url": "https://doi.org/10.1145/1294261.1294281",
+      "description": "DeCandia et al. 2007. Dynamo paper introducing NWR quorums, vector clocks, sloppy quorums, and hinted handoff. Foundation for primitives #5, #9.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Corbett2013",
+      "name": "Spanner: Google's Globally Distributed Database",
+      "url": "https://doi.org/10.1145/2491245",
+      "description": "Corbett et al. 2013. Spanner paper introducing TrueTime-based external consistency across globally distributed transactions. Background for CAP/PACELC (#1) and leases (#8).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Abadi2012",
+      "name": "Consistency Tradeoffs in Modern Distributed Database System Design: CAP is Only Part of the Story",
+      "url": "https://doi.org/10.1109/MC.2012.33",
+      "description": "Abadi 2012. Introduced the PACELC model extending CAP to include latency vs. consistency under normal (non-partition) operation. Foundation for primitive #1 (PACELC extension).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Lakshman2010",
+      "name": "Cassandra: A Decentralized Structured Storage System",
+      "url": "https://doi.org/10.1145/1773912.1773922",
+      "description": "Lakshman and Malik 2010. Cassandra paper describing gossip-based membership, consistent hashing, and tunable consistency. Background for broadcast protocols (#11) and quorums (#9).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Kleppmann2017",
+      "name": "Designing Data-Intensive Applications",
+      "url": "https://dataintensive.net/",
+      "description": "Kleppmann 2017. Comprehensive reference covering replication, partitioning, transactions, consensus, and batch/stream processing. Primary practitioner reference for all 11 primitives.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Birman2007",
+      "name": "The Promise, and Limitations, of Gossip Protocols",
+      "url": "https://doi.org/10.1145/1317379.1317382",
+      "description": "Birman 2007. Analysis of gossip protocol convergence, scalability, and failure modes. Foundation for broadcast protocols (#11).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Chandra2007",
+      "name": "Paxos Made Live — An Engineering Perspective",
+      "url": "https://doi.org/10.1145/1281100.1281103",
+      "description": "Chandra, Griesemer, and Redstone 2007. Engineering experience implementing Paxos in Google Chubby; covers multi-Paxos, leader leases, and practical failure modes. Background for primitives #3, #8.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Arun2025Shoalpp",
+      "name": "Shoal++: High Throughput DAG BFT Can Be Fast and Robust!",
+      "url": "https://www.usenix.org/conference/nsdi25/presentation/arun",
+      "description": "Arun, Li, Suri-Payer, Das, Spiegelman. NSDI 2025. DAG-based BFT consensus reducing average commit latency from 10.5 to 4.5 message delays (60% reduction) while matching state-of-the-art DAG throughput. Successor to Bullshark/Shoal. Relevant to primitives #3, #4, #11.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Zhang2025Basilisk",
+      "name": "Basilisk: Using Provenance Invariants to Automate Proofs of Undecidable Protocols",
+      "url": "https://www.usenix.org/conference/osdi25/presentation/zhang-tony",
+      "description": "Zhang, Singh, Chajed, Kapritsos, Parno. OSDI 2025 Best Paper (Jay Lepreau Award). Automates safety proofs for distributed protocols via Provenance Invariants derived by Atomic Sharding static analysis. Applied to 16 protocols. Artifact: github.com/GLaDOS-Michigan/Basilisk. Relevant to primitives #2, #3, #4.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Howard2025SCV",
+      "name": "Smart Casual Verification of the Confidential Consortium Framework",
+      "url": "https://www.usenix.org/conference/nsdi25/presentation/howard",
+      "description": "Howard, Kuppe, Ashton, Chamayou, Crooks. NSDI 2025. Hybrid TLA+ simulation-in-CI approach (Smart Casual Verification) catching 6 consensus bugs (5 safety, 1 liveness) in a production Raft variant without full formal proof. Applicable to any distributed consensus system. arXiv:2406.17455. Relevant to primitives #3, #4, #8.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Frank2025Picsou",
+      "name": "Picsou: Enabling Replicated State Machines to Communicate Efficiently",
+      "url": "https://www.usenix.org/conference/osdi25/presentation/frank",
+      "description": "Frank et al. OSDI 2025. Introduces Cross-Cluster Consistent Broadcast (C3B) and Quorum Acknowledgments (QUACKs) enabling reliable RSM-to-RSM communication with constant metadata overhead and 24x perf improvement over prior approaches. arXiv:2312.11029. Relevant to primitive #11, #3, #4.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Shen2025Mako",
+      "name": "Mako: Speculative Distributed Transactions with Geo-Replication",
+      "url": "https://www.usenix.org/conference/osdi25/presentation/shen-weihai",
+      "description": "Shen, Cui, Sen, Angel, Mu. OSDI 2025. Decouples transaction execution from replication via speculative 2PC with bounded-abort guarantees. 3.66M TPC-C tx/s across 10 geo-replicated shards. Artifact: github.com/makodb/mako. Relevant to primitives #3, #7, #9.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Schultz2025MongoDB",
+      "name": "Design and Modular Verification of Distributed Transactions in MongoDB",
+      "url": "https://www.vldb.org/pvldb/vol18/p5045-schultz.pdf",
+      "description": "Schultz, Demirbas. PVLDB vol.18 no.12, 2025. Modular TLA+ specification of MongoDB's distributed transaction protocol with automated conformance testing of the C++ implementation. Novel permissiveness analysis. Artifact: github.com/mongodb-labs/vldb25-dist-txns. Relevant to primitives #3, #7, #10.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Bantikyan2025Pineapple",
+      "name": "Pineapple: Unifying Multi-Paxos and Atomic Shared Registers",
+      "url": "https://www.usenix.org/conference/nsdi25/presentation/bantikyan",
+      "description": "Bantikyan, Zarnstorff, Chou, Tseng, Palmieri. NSDI 2025. Unifies Multi-Paxos and ABD registers via logical timestamps; any node serves reads/writes; >50% median latency reduction vs. Raft in balanced workloads; beats EPaxos tail latency. Relevant to primitives #3, #4.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Babel2025Mysticeti",
+      "name": "Mysticeti: Reaching the Limits of Latency with Uncertified DAGs",
+      "url": "https://arxiv.org/abs/2310.14821",
+      "description": "Babel, Chursin, Danezis, Kichidis, Kokoris-Kogias, Koshy, Sonnino, Tian. NDSS 2025 (arXiv:2310.14821). First uncertified DAG BFT protocol to achieve the 3-message-round latency lower bound. WAN commit latency 0.5 s at >200 k TPS; 4× latency reduction on Sui production deployment. Mysticeti-FPC fast path weaves certificates into the DAG without additional round trips. Relevant to primitives #3a, #11.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Spiegelman2022Narwhal",
+      "name": "Narwhal and Tusk: A DAG-based Mempool and Efficient BFT Consensus",
+      "url": "https://arxiv.org/abs/2105.11827",
+      "description": "Danezis, Kokoris-Kogias, Sonnino, Spiegelman. EuroSys 2022 (arXiv:2105.11827). Introduces the DAG-mempool architecture separating reliable transaction dissemination from consensus ordering. Narwhal-HotStuff achieves >130 k TPS vs. 1,800 TPS for standard HotStuff. Foundational predecessor to Bullshark, Shoal, Shoal++, and Mysticeti. Relevant to primitive #3a.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Zhong2024DistServe",
+      "name": "DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving",
+      "url": "https://arxiv.org/abs/2401.09670",
+      "description": "Zhong, Liu, Chen, Hu, Zhu, Liu, Jin, Zhang. OSDI 2024 (arXiv:2401.09670). Disaggregates LLM prefill (compute-bound) and decode (memory-bandwidth-bound) onto separate GPU pools to independently optimise TTFT and ITL. Demonstrates 7.4× more requests or 12.6× tighter SLO vs. co-located state-of-the-art. Production adoption via vLLM at Meta, LinkedIn, Hugging Face. Artifact: github.com/LLMServe/DistServe. Relevant to primitives #7, #9, #11.",
+      "url_check": "manual"
+    },
+    {
+      "id": "EigerPORTPlus2025",
+      "name": "Pushing the Limit: Verified Performance-Optimal Causally-Consistent Database Transactions",
+      "url": "https://arxiv.org/abs/2411.07049",
+      "description": "Ghasemirad, Sprenger, Liu, Multazzu, Basin. arXiv:2411.07049, accepted TACAS 2025. Eiger-PORT+ proves performance-optimal read transactions are achievable under TCCv (Transactional Causal Consistency with convergence), refuting an earlier conjecture that this was impossible. First deductive verification of a complex concurrency control protocol via model refinement. Relevant to primitive #10.",
+      "url_check": "manual"
+    }
+  ]
+}

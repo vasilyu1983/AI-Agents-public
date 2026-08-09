@@ -1,0 +1,4 @@
+interface:
+  display_name: "Decision Theory Foundations"
+  short_description: "Applies decision-theory primitives for utility, VoI, regret, options, bandits"
+  default_prompt: "Use $foundations-decision-theory for expected utility, Bayesian decisions, minimax regret, value of information, MCDA, real options, prospect theory, bandits, or stochastic dominance."

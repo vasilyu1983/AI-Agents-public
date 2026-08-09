@@ -1,0 +1,4 @@
+interface:
+  display_name: "Android Testing"
+  short_description: "Designs Android testing with Espresso, UI Automator, and Compose"
+  default_prompt: "Use $qa-testing-android for Designs Android testing with Espresso, UI Automator, and Compose. Use when planning device matrices, screenshot tests, CI flows, or flake-control workflows."

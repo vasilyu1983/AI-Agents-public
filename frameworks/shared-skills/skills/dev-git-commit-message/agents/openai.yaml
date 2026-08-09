@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Commit Messages"
+  short_description: "Generates or validates Conventional Commits messages from staged diffs"
+  default_prompt: "Use $dev-git-commit-message when drafting commit messages, checking repo rules, or inferring scope from changed files for a staged diff."

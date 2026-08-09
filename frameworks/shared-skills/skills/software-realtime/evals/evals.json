@@ -1,0 +1,60 @@
+{
+  "skill_name": "software-realtime",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Choose a real-time transport and collaboration stack for a 10,000-CCU collaborative whiteboard. Users draw on a shared canvas, see each other's cursors, and need offline-resilient persistence. The team is three engineers, TypeScript stack, no existing real-time infra. Budget is moderate. Evaluate Liveblocks v2, PartyKit on Cloudflare, and a self-hosted Yjs + y-websocket setup. Recommend one path with justification and call out the top two operational risks.",
+      "expected_output": "The skill should assess the three options against CCU, presence, CRDT, and operational complexity axes. It should surface the PartyKit DO per-room single-thread limit as a scaling trap at 10k CCU, note Liveblocks v2 channel/MAU pricing inflection, recommend the self-hosted Yjs path or Liveblocks with explicit sharding advice, and name tombstone compaction and sticky-session/fan-out as top operational risks.",
+      "files": [],
+      "expectations": [
+        "The output compares at least three options (Liveblocks v2, PartyKit, self-hosted Yjs) on CCU, presence, and operational overhead.",
+        "The output flags the PartyKit Durable Object single-thread-per-room constraint as a bottleneck at 10k CCU.",
+        "The output notes Liveblocks v2 MAU-based pricing as a cost inflection for high-CCU applications.",
+        "The output recommends keeping awareness (cursors) separate from document CRDT state.",
+        "The output names at least two operational risks (tombstone compaction, WebSocket fan-out, or reconnect handling).",
+        "The output produces a concrete recommendation rather than listing options without guidance."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A live sports dashboard needs to push score updates to 50,000 concurrent browser clients. Updates arrive from a backend every 2 seconds. There is no client-to-server messaging. The team wants to minimize infrastructure complexity and cost. Evaluate SSE, WebSocket, and HTTP long-polling. Recommend one transport and explain why the others are ruled out.",
+      "expected_output": "The skill should recommend SSE as the default for one-way server push, explain that WebSocket is over-engineered for no client-to-server traffic, and rule out long-polling as inefficient at 50k CCU. It should also address fan-out architecture (pub/sub or broadcast) and note that standard HTTP load balancers handle SSE without sticky sessions.",
+      "files": [],
+      "expectations": [
+        "The output recommends SSE as the primary transport for one-way server push at this scale.",
+        "The output explains why WebSocket is unnecessary when there is no client-to-server messaging.",
+        "The output rules out long-polling on efficiency or connection overhead grounds.",
+        "The output addresses fan-out to 50k clients (pub/sub, broadcast bus, or edge CDN streaming).",
+        "The output notes SSE reconnect behavior and the Last-Event-ID header as a reliability mechanism.",
+        "The output does not recommend a managed bidirectional real-time platform for a one-way use case."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A team is migrating a Socket.IO v4 chat application from a single Node.js server to a three-node cluster behind a standard round-robin load balancer. The existing setup uses Socket.IO with default configuration and Redis for session storage but no Socket.IO adapter. Identify the production gaps, specify which Socket.IO adapter to add and at what version, explain the sticky-session vs WebSocket-only tradeoff, and write the minimal configuration changes required.",
+      "expected_output": "The skill should identify that Socket.IO without an adapter cannot fan out messages across nodes, recommend @socket.io/redis-adapter v8 with ioredis v5, warn about the polling fallback requiring sticky sessions, and provide the minimal server-side configuration change. It should also call out the maxHttpBufferSize regression in Engine.IO v6 (included in Socket.IO v4.7).",
+      "files": [],
+      "expectations": [
+        "The output identifies missing cross-node fan-out as the primary production gap.",
+        "The output recommends @socket.io/redis-adapter v8 and specifies the ioredis v5 peer dependency requirement.",
+        "The output explains the sticky-session requirement for HTTP long-polling fallback and recommends disabling polling if stickiness is unavailable.",
+        "The output notes the maxHttpBufferSize default change in Engine.IO v6 / Socket.IO v4.7.",
+        "The output provides concrete configuration code or pseudo-code for adding the adapter."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "A product team wants to add collaborative rich-text editing to an existing web app. They are evaluating Yjs, Automerge 2, and Loro. The document corpus is large (thousands of long-lived documents edited daily for months). Latency requirements are p99 under 100ms for local edits. The team has no prior CRDT experience. Recommend one library, explain tombstone compaction strategy for long-lived documents, and identify the biggest risk with the rejected alternatives.",
+      "expected_output": "The skill should recommend Yjs based on ecosystem maturity and provider availability, explain periodic tombstone compaction via Y.encodeStateAsUpdate re-initialization, reject Loro on pre-1.0 API instability grounds, and reject Automerge 2 on WASM bundle size impact for mobile web. It should note Yjs awareness separation from document state.",
+      "files": [],
+      "expectations": [
+        "The output recommends Yjs based on ecosystem maturity, provider availability, and production track record.",
+        "The output explains tombstone accumulation in long-lived Yjs documents and the compaction strategy.",
+        "The output rejects Loro citing pre-1.0 API instability and lack of a ready-made sync provider.",
+        "The output rejects Automerge 2 citing WASM bundle size (~500 KB) as a risk for the use case.",
+        "The output notes that Yjs awareness state is separate from Y.Doc and must be handled independently.",
+        "The output does not recommend rolling a custom CRDT implementation."
+      ]
+    }
+  ]
+}

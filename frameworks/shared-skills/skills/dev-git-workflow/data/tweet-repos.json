@@ -1,0 +1,890 @@
+{
+  "metadata": {
+    "title": "Curated Repo Lists from Twitter/X — 2026-03-20",
+    "description": "All repos extracted from two viral tweets for evaluation and reference",
+    "last_updated": "2026-03-21",
+    "sources": [
+      {
+        "tweet": "https://x.com/DAIEvolutionHub/status/2034996724490805331",
+        "author": "@DAIEvolutionHub (Kshitij Mishra)",
+        "title": "Top Github Repositories which everyone should look",
+        "date": "2026-03-20",
+        "views": "181K"
+      },
+      {
+        "tweet": "https://x.com/zodchiii/status/2034924354337714642",
+        "author": "@zodchiii (darkzodchi)",
+        "title": "Top 50 Claude Skills & GitHub Repos for AI — The Only List You Need",
+        "date": "2026-03-20",
+        "views": "569K"
+      }
+    ]
+  },
+
+  "tweet1_roadmaps": [
+    {
+      "name": "Developer Roadmap",
+      "url": "https://github.com/kamranahmedse/developer-roadmap",
+      "description": "Clear paths for frontend, backend, devops, AI — beginner to advanced",
+      "add_as_web_search": false
+    },
+    {
+      "name": "roadmap.sh",
+      "url": "https://roadmap.sh/",
+      "description": "Interactive developer roadmaps companion site",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet1_curated_lists": [
+    {
+      "name": "Awesome",
+      "url": "https://github.com/sindresorhus/awesome",
+      "description": "Wikipedia for developers — thousands of curated resource lists",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Top GitHub Repositories",
+      "url": "https://github.com/sachin-source/top-github-repositories-which-everyone-should-look",
+      "description": "Master list aggregating top repos across categories",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet1_interview_prep": [
+    {
+      "name": "Coding Interview University",
+      "url": "https://github.com/jwasham/coding-interview-university",
+      "description": "Full curriculum: DSA, system design, databases",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Tech Interview Handbook",
+      "url": "https://github.com/yangshun/tech-interview-handbook",
+      "description": "Covers coding + behavioral interview prep",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Interviews",
+      "url": "https://github.com/kdn251/interviews",
+      "description": "Interview prep repo with DSA focus",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet1_system_design": [
+    {
+      "name": "System Design Primer",
+      "url": "https://github.com/donnemartin/system-design-primer",
+      "description": "Scalability, real-world systems, interview questions",
+      "add_as_web_search": false
+    },
+    {
+      "name": "System Design (Karan Pratap Singh)",
+      "url": "https://github.com/karanpratapsingh/system-design",
+      "description": "Advanced system design with companion course",
+      "add_as_web_search": false
+    },
+    {
+      "name": "System Design Resources",
+      "url": "https://github.com/InterviewReady/system-design-resources",
+      "description": "Curated system design interview resources",
+      "add_as_web_search": false
+    },
+    {
+      "name": "System Design 101",
+      "url": "https://github.com/ByteByteGoHq/system-design-101",
+      "description": "Visual system design explanations by ByteByteGo",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Awesome System Design Resources",
+      "url": "https://github.com/ashishps1/awesome-system-design-resources",
+      "description": "System design interview prep with AlgoMaster blog",
+      "add_as_web_search": false
+    },
+    {
+      "name": "DSA + System Design Combo",
+      "url": "https://github.com/arpit20adlakha/Data-Structure-Algorithms-LLD-HLD",
+      "description": "Combined DSA + system design (LLD + HLD)",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet1_learning": [
+    {
+      "name": "freeCodeCamp",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp",
+      "description": "Full courses + projects, millions of users",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Every Programmer Should Know",
+      "url": "https://github.com/mtdvio/every-programmer-should-know",
+      "description": "Real-world concepts most developers skip",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Build Your Own X",
+      "url": "https://github.com/codecrafters-io/build-your-own-x",
+      "description": "Build databases, editors, tools from scratch",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Project-Based Learning",
+      "url": "https://github.com/practical-tutorials/project-based-learning",
+      "description": "Hands-on project tutorials across languages",
+      "add_as_web_search": false
+    },
+    {
+      "name": "What Happens When",
+      "url": "https://github.com/alex/what-happens-when",
+      "description": "Insanely detailed: what happens when you open google.com",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet1_javascript": [
+    {
+      "name": "JavaScript Questions",
+      "url": "https://github.com/lydiahallie/javascript-questions",
+      "description": "Deep JS explanations, not just answers",
+      "add_as_web_search": false
+    },
+    {
+      "name": "JavaScript Algorithms",
+      "url": "https://github.com/trekhleb/javascript-algorithms",
+      "description": "Clean + practical DSA in JavaScript",
+      "add_as_web_search": false
+    },
+    {
+      "name": "You Don't Know JS",
+      "url": "https://github.com/getify/You-Dont-Know-JS/",
+      "description": "Deep JS knowledge — must-read book series",
+      "add_as_web_search": false
+    },
+    {
+      "name": "30 Seconds of Code",
+      "url": "https://github.com/Chalarangelo/30-seconds-of-code",
+      "description": "Quick JS/CSS/Python solutions and snippets",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet1_algorithms": [
+    {
+      "name": "The Algorithms",
+      "url": "https://github.com/TheAlgorithms",
+      "description": "Huge multi-language algorithm collection",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet1_devops": [
+    {
+      "name": "DevOps Tools",
+      "url": "https://github.com/techiescamp/devops-tools/",
+      "description": "Curated DevOps tooling reference",
+      "add_as_web_search": false
+    },
+    {
+      "name": "DevOps Exercises",
+      "url": "https://github.com/bregman-arie/devops-exercises",
+      "description": "2600+ DevOps questions and exercises",
+      "add_as_web_search": false
+    },
+    {
+      "name": "DevOps Roadmap",
+      "url": "https://github.com/milanm/DevOps-Roadmap",
+      "description": "DevOps learning path and roadmap",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet1_design": [
+    {
+      "name": "Design Resources for Developers",
+      "url": "https://github.com/bradtraversy/design-resources-for-developers",
+      "description": "UI/UX resources for developers",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Design Patterns for Humans",
+      "url": "https://github.com/kamranahmedse/design-patterns-for-humans",
+      "description": "Simple explanations of design patterns",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet1_tools_and_apis": [
+    {
+      "name": "Free For Dev",
+      "url": "https://github.com/ripienaar/free-for-dev",
+      "description": "Free hosting, APIs, DBs for developers",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Public APIs",
+      "url": "https://github.com/public-apis/public-apis",
+      "description": "Hundreds of free APIs for projects",
+      "add_as_web_search": false
+    },
+    {
+      "name": ".gitignore Templates",
+      "url": "https://github.com/github/gitignore",
+      "description": "Official GitHub .gitignore templates for every language",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet1_mobile": [
+    {
+      "name": "React Native Apps",
+      "url": "https://github.com/ReactNativeNews/React-Native-Apps",
+      "description": "Production-level React Native examples",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet1_other": [
+    {
+      "name": "TensorFlow",
+      "url": "https://github.com/tensorflow/tensorflow",
+      "description": "One of the biggest ML frameworks",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Best Websites for Programmers",
+      "url": "https://github.com/sdmg15/Best-websites-a-programmer-should-visit/",
+      "description": "Developer resource websites in one place",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Engineering Blogs",
+      "url": "https://github.com/kilimchoi/engineering-blogs",
+      "description": "Curated list of engineering company blogs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Resources to Become a Great Engineering Leader",
+      "url": "https://github.com/gregorojstersek/resources-to-become-a-great-engineering-leader",
+      "description": "Leadership resources for engineering managers",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Tech Jobs with Relocation",
+      "url": "https://github.com/AndrewStetsenko/tech-jobs-with-relocation/",
+      "description": "Tech jobs offering relocation packages",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_skills_official": [
+    {
+      "name": "PDF Processing (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/pdf",
+      "description": "Read, extract tables, fill forms, merge/split PDFs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "DOCX (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/docx",
+      "description": "Create & edit Word docs with tracked changes, comments, formatting",
+      "add_as_web_search": false
+    },
+    {
+      "name": "PPTX (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/pptx",
+      "description": "Slide decks from natural language with layouts, charts, speaker notes",
+      "add_as_web_search": false
+    },
+    {
+      "name": "XLSX (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/xlsx",
+      "description": "Formulas, analysis, charts via plain English",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Doc Co-Authoring (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/doc-coauthoring",
+      "description": "Real collaborative writing — human writes, Claude responds",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Frontend Design (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
+      "description": "Real design systems, bold typography — 277k+ installs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Canvas Design (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/canvas-design",
+      "description": "Social graphics, posters, covers — text in, PNG/PDF out",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Algorithmic Art (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/algorithmic-art",
+      "description": "Fractal patterns, geometric compositions via p5.js",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Theme Factory (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/theme-factory",
+      "description": "Batch-generate color schemes from one prompt",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Web Artifacts Builder (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/web-artifacts-builder",
+      "description": "Calculators, dashboards via natural language",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Brand Guidelines (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/brand-guidelines",
+      "description": "Encode your brand into a skill — auto-applies everywhere",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Skill Creator (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
+      "description": "Meta-skill: describe a workflow, get a SKILL.md in 5 min",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Anthropic Skills Repo",
+      "url": "https://github.com/anthropics/skills",
+      "description": "Official reference implementations for all Anthropic skills",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_skills_community": [
+    {
+      "name": "Superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "description": "20+ battle-tested skills — TDD, debugging, plan-to-execute. 96k+ stars",
+      "add_as_web_search": false
+    },
+    {
+      "name": "File Search (massgen)",
+      "url": "https://github.com/massgen/massgen",
+      "description": "Ripgrep + ast-grep mastery for file search",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Context Optimization",
+      "url": "https://github.com/muratcankoylan/agent-skills-for-context-engineering",
+      "description": "Reduce token costs, KV-cache tricks. 13.9k stars",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Remotion Best Practices",
+      "url": "https://github.com/remotion-dev/remotion",
+      "description": "AI video generation framework. 117k weekly installs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Marketing Skills",
+      "url": "https://github.com/coreyhaines31/marketingskills",
+      "description": "20+ skills: CRO, copywriting, SEO, email sequences, growth — by Corey Haines",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude SEO",
+      "url": "https://github.com/AgriciDaniel/claude-seo",
+      "description": "Full-site audits, schema validation — 12 sub-skills",
+      "add_as_web_search": false
+    },
+    {
+      "name": "NotebookLM Integration",
+      "url": "https://github.com/PleasePrompto/notebooklm-skill",
+      "description": "Claude + NotebookLM bridge — summaries, mind maps, flashcards",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Obsidian Skills",
+      "url": "https://github.com/kepano/obsidian-skills",
+      "description": "By Obsidian's CEO — auto-tagging, auto-linking, vault-native",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Deep Research Skill",
+      "url": "https://github.com/199-biotechnologies/claude-deep-research-skill",
+      "description": "8-phase research with auto-continuation",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_skills_catalogs": [
+    {
+      "name": "Awesome Claude Skills",
+      "url": "https://github.com/travisvn/awesome-claude-skills",
+      "description": "Best curated skill list — 22k+ stars",
+      "add_as_web_search": false
+    },
+    {
+      "name": "SkillsMP",
+      "url": "https://skillsmp.com",
+      "description": "80k+ skills, largest catalog",
+      "add_as_web_search": false
+    },
+    {
+      "name": "AI Template Skills",
+      "url": "https://aitmpl.com/skills",
+      "description": "Templates with one-command install",
+      "add_as_web_search": false
+    },
+    {
+      "name": "SkillHub",
+      "url": "https://skillhub.club",
+      "description": "31k+ skills, AI-rated",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Agent Skills IO",
+      "url": "https://agentskills.io",
+      "description": "Official spec reference for agent skills",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_mcp_servers": [
+    {
+      "name": "Tavily MCP",
+      "url": "https://github.com/tavily-ai/tavily-mcp",
+      "description": "Search engine built for AI agents — clean structured data",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Context7",
+      "url": "https://github.com/upstash/context7",
+      "description": "Injects up-to-date library docs into LLM context",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Task Master AI",
+      "url": "https://github.com/eyaltoledano/claude-task-master",
+      "description": "Feed a PRD → structured tasks with dependencies → Claude executes",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Excel MCP Server",
+      "url": "https://github.com/haris-musa/excel-mcp-server",
+      "description": "Manipulate Excel without Microsoft Excel",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MCP Playwright",
+      "url": "https://github.com/executeautomation/mcp-playwright",
+      "description": "Browser automation for LLMs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Stealth Browser MCP",
+      "url": "https://github.com/vibheksoni/stealth-browser-mcp",
+      "description": "Undetectable browser automation",
+      "add_as_web_search": false
+    },
+    {
+      "name": "FastMCP",
+      "url": "https://github.com/jlowin/fastmcp",
+      "description": "Build MCP servers in minimal Python",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Markdownify MCP",
+      "url": "https://github.com/zcaceres/markdownify-mcp",
+      "description": "PDFs, images, audio → Markdown",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MCPHub",
+      "url": "https://github.com/samanhappy/mcphub",
+      "description": "Manage multiple MCP servers via HTTP",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Codebase Memory MCP",
+      "url": "https://github.com/DeusData/codebase-memory-mcp",
+      "description": "Codebase → persistent knowledge graph",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_agent_frameworks": [
+    {
+      "name": "OpenClaw",
+      "url": "https://github.com/openclaw/openclaw",
+      "description": "Persistent, multi-channel AI agent — writes its own skills. 210k+ stars",
+      "add_as_web_search": false
+    },
+    {
+      "name": "AutoGPT",
+      "url": "https://github.com/Significant-Gravitas/AutoGPT",
+      "description": "Full agent platform for long-running tasks",
+      "add_as_web_search": false
+    },
+    {
+      "name": "LangGraph",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "description": "Agents as graphs — multi-agent orchestration. 26.8k stars",
+      "add_as_web_search": false
+    },
+    {
+      "name": "OWL (CAMEL-AI)",
+      "url": "https://github.com/camel-ai/owl",
+      "description": "Multi-agent cooperation — tops GAIA benchmark",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Dify",
+      "url": "https://github.com/langgenius/dify",
+      "description": "Open-source LLM app builder — workflows, RAG, agents all-in-one",
+      "add_as_web_search": false
+    },
+    {
+      "name": "CrewAI",
+      "url": "https://github.com/crewAIInc/crewAI",
+      "description": "Multi-agent with roles, goals, backstories",
+      "add_as_web_search": false
+    },
+    {
+      "name": "CopilotKit",
+      "url": "https://github.com/CopilotKit/CopilotKit",
+      "description": "Embed AI copilots into React apps",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_local_ai": [
+    {
+      "name": "Ollama",
+      "url": "https://github.com/ollama/ollama",
+      "description": "Run LLMs locally with one command",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Open WebUI",
+      "url": "https://github.com/open-webui/open-webui",
+      "description": "Self-hosted ChatGPT-like interface",
+      "add_as_web_search": false
+    },
+    {
+      "name": "LlamaFile",
+      "url": "https://github.com/Mozilla-Ocho/llamafile",
+      "description": "LLM as single executable — zero dependencies",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Unsloth",
+      "url": "https://github.com/unslothai/unsloth",
+      "description": "Fine-tune 2x faster, 70% less memory",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_workflow_automation": [
+    {
+      "name": "n8n",
+      "url": "https://github.com/n8n-io/n8n",
+      "description": "Open-source automation, 400+ integrations + AI nodes",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Langflow",
+      "url": "https://github.com/langflow-ai/langflow",
+      "description": "Visual drag-and-drop for agent pipelines. 140k stars",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Huginn",
+      "url": "https://github.com/huginn/huginn",
+      "description": "Self-hosted web agents — monitoring, alerts, privacy-first",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_search_and_data": [
+    {
+      "name": "GPT Researcher",
+      "url": "https://github.com/assafelovic/gpt-researcher",
+      "description": "Autonomous research → compiled reports",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Firecrawl",
+      "url": "https://github.com/mendableai/firecrawl",
+      "description": "Any website → LLM-ready data",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Vanna AI",
+      "url": "https://github.com/vanna-ai/vanna",
+      "description": "Natural language → SQL",
+      "add_as_web_search": false
+    },
+    {
+      "name": "BeaconBay CK",
+      "url": "https://github.com/BeaconBay/ck",
+      "description": "Search code by meaning, not keywords",
+      "add_as_web_search": false
+    },
+    {
+      "name": "ExtractThinker",
+      "url": "https://github.com/enoch3712/ExtractThinker",
+      "description": "ORM for document intelligence",
+      "add_as_web_search": false
+    },
+    {
+      "name": "OmniRoute",
+      "url": "https://github.com/diegosouzapw/OmniRoute",
+      "description": "API proxy for 44+ AI providers",
+      "add_as_web_search": false
+    },
+    {
+      "name": "dlt",
+      "url": "https://github.com/dlt-hub/dlt",
+      "description": "LLM-native data pipelines from 5,000+ sources",
+      "add_as_web_search": false
+    },
+    {
+      "name": "simonw/llm",
+      "url": "https://github.com/simonw/llm",
+      "description": "Lightweight CLI for local and remote LLMs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Portkey AI Gateway",
+      "url": "https://github.com/Portkey-AI/gateway",
+      "description": "Route requests to 250+ LLMs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "lmnr",
+      "url": "https://github.com/lmnr-ai/lmnr",
+      "description": "Trace and evaluate agent behavior",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_dev_tools": [
+    {
+      "name": "DSPy",
+      "url": "https://github.com/stanfordnlp/dspy",
+      "description": "Program (not prompt) foundation models — Stanford",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Spec Kit (GitHub)",
+      "url": "https://github.com/github/spec-kit",
+      "description": "Spec-driven dev — write specs, AI generates code. 50k+ stars",
+      "add_as_web_search": false
+    },
+    {
+      "name": "NVIDIA NemoClaw",
+      "url": "https://github.com/NVIDIA/NemoClaw",
+      "description": "Secure sandbox for autonomous agents",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Pydantic AI",
+      "url": "https://github.com/pydantic/pydantic-ai",
+      "description": "Type-safe agent framework",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_curated_collections": [
+    {
+      "name": "Awesome Agents",
+      "url": "https://github.com/kyrolabs/awesome-agents",
+      "description": "100+ open-source agent tools",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MAGI//ARCHIVE",
+      "url": "https://tom-doerr.github.io/repo_posts/",
+      "description": "Daily feed of fresh AI repos",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_agent_orchestration": [
+    {
+      "name": "gstack",
+      "url": "https://github.com/garrytan/gstack",
+      "description": "Claude Code as virtual engineering team",
+      "add_as_web_search": false
+    },
+    {
+      "name": "cmux",
+      "url": "https://github.com/craigsc/cmux",
+      "description": "Multiple Claude agents in parallel",
+      "add_as_web_search": false
+    },
+    {
+      "name": "figaro",
+      "url": "https://github.com/byt3bl33d3r/figaro",
+      "description": "Orchestrate Claude agent fleets on desktop",
+      "add_as_web_search": false
+    },
+    {
+      "name": "claude-squad",
+      "url": "https://github.com/smtg-ai/claude-squad",
+      "description": "Terminal agents in parallel sessions",
+      "add_as_web_search": false
+    },
+    {
+      "name": "deer-flow (ByteDance)",
+      "url": "https://github.com/bytedance/deer-flow",
+      "description": "Sub-agents and sandboxes through skills",
+      "add_as_web_search": false
+    },
+    {
+      "name": "SWE-AF",
+      "url": "https://github.com/Agent-Field/SWE-AF",
+      "description": "One API call spins up engineering team",
+      "add_as_web_search": false
+    },
+    {
+      "name": "AIlice",
+      "url": "https://github.com/myshell-ai/AIlice",
+      "description": "Complex tasks → dynamic agents",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Agent Alchemy",
+      "url": "https://github.com/sequenzia/agent-alchemy",
+      "description": "Claude Code + plugins + task manager",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_agent_infrastructure_security": [
+    {
+      "name": "Ghost OS",
+      "url": "https://github.com/ghostwright/ghost-os",
+      "description": "AI agents operate every Mac app",
+      "add_as_web_search": false
+    },
+    {
+      "name": "e2b Desktop",
+      "url": "https://github.com/e2b-dev/desktop",
+      "description": "Isolated virtual desktops for agents",
+      "add_as_web_search": false
+    },
+    {
+      "name": "container-use (Dagger)",
+      "url": "https://github.com/dagger/container-use",
+      "description": "Containerized environments for coding agents",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Canopy",
+      "url": "https://github.com/kwalus/Canopy",
+      "description": "Encrypted P2P mesh for AI agents",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Agent Governance Toolkit (Microsoft)",
+      "url": "https://github.com/microsoft/agent-governance-toolkit",
+      "description": "Security middleware for agents",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Code Security Review (Anthropic)",
+      "url": "https://github.com/anthropics/claude-code-security-review",
+      "description": "PRs analyzed for security vulnerabilities",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Promptfoo",
+      "url": "https://github.com/promptfoo/promptfoo",
+      "description": "Automated security testing for AI models",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_memory_context": [
+    {
+      "name": "Mem9",
+      "url": "https://github.com/mem9-ai/mem9",
+      "description": "Memory system for AI agents",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Codefire",
+      "url": "https://github.com/websitebutlers/codefire-app",
+      "description": "Persistent memory for coding agents",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Memobase",
+      "url": "https://github.com/memodb-io/memobase",
+      "description": "User profile memory for LLMs",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_coding_agents": [
+    {
+      "name": "Qwen Code",
+      "url": "https://github.com/QwenLM/qwen-code",
+      "description": "Terminal AI coding agent by QwenLM",
+      "add_as_web_search": false
+    },
+    {
+      "name": "gptme",
+      "url": "https://github.com/gptme/gptme",
+      "description": "Personal AI agent in terminal",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Inspector",
+      "url": "https://github.com/kangraemin/claude-inspector",
+      "description": "See hidden Claude Code prompt mechanics",
+      "add_as_web_search": false
+    },
+    {
+      "name": "TDD Guard",
+      "url": "https://github.com/nizos/tdd-guard",
+      "description": "Enforces test-first for AI agents",
+      "add_as_web_search": false
+    },
+    {
+      "name": "rendergit (Karpathy)",
+      "url": "https://github.com/karpathy/rendergit",
+      "description": "Git repo → single file for humans and LLMs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "autoresearch (Karpathy)",
+      "url": "https://github.com/karpathy/autoresearch",
+      "description": "Autonomous LLM training system",
+      "add_as_web_search": false
+    }
+  ],
+
+  "tweet2_video_other": [
+    {
+      "name": "LTX-Desktop (Lightricks)",
+      "url": "https://github.com/Lightricks/LTX-Desktop",
+      "description": "Generate and edit videos locally",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MetaClaw",
+      "url": "https://github.com/aiming-lab/MetaClaw",
+      "description": "Evolve AI agents without GPU",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Vane",
+      "url": "https://github.com/ItzCrazyKns/Vane",
+      "description": "AI answering engine with local LLMs",
+      "add_as_web_search": false
+    }
+  ]
+}

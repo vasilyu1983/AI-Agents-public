@@ -1,0 +1,145 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-permissions",
+    "title": "AI Coding Agents Permissions - Sources",
+    "description": "Official documentation and implementation references for coding-agent approval systems, permission modes, and delegated permission routing",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 15,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en",
+        "type": "documentation",
+        "relevance": "Primary product documentation for runtime behavior and approval surfaces",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Permission Modes",
+        "url": "https://code.claude.com/docs/en/permission-modes",
+        "type": "reference",
+        "relevance": "All six permission modes (default, acceptEdits, plan, auto, dontAsk, bypassPermissions), auto mode classifier detail, Shift+Tab cycling, disableAutoMode, plugin subagent restrictions",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic Engineering: Claude Code Auto Mode",
+        "url": "https://www.anthropic.com/engineering/claude-code-auto-mode",
+        "type": "engineering_post",
+        "relevance": "Deep dive on auto mode two-stage classifier architecture, transcript stripping against prompt injection, false positive/negative rates",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Hooks Documentation",
+        "url": "https://code.claude.com/docs/en/hooks",
+        "type": "guide",
+        "relevance": "Hook and event model for automated checks that feed approval decisions, including the `if` permission-rule scoping field on hook handlers and its fail-open behavior",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Permissions Reference",
+        "url": "https://code.claude.com/docs/en/permissions",
+        "type": "reference",
+        "relevance": "Full permission rule syntax: evaluation order (deny > ask > allow, first match wins), tool-name and parameter-value (`Tool(param:value)`) rules, Agent/MCP/Read/Edit/WebFetch/Cd specifiers, protected paths, managed-only settings, and settings precedence for permission rules",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Settings Documentation",
+        "url": "https://code.claude.com/docs/en/settings",
+        "type": "reference",
+        "relevance": "Settings precedence order (managed > CLI args > local project > shared project > user) that permission-rule audits must reason about alongside deny-wins-regardless-of-scope semantics",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Closed-source product page and issue tracker; not the implementation source — use code.claude.com/docs/en for authoritative behavior docs",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "High-level guidance on agent control boundaries and reliable tool use",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "cross_runtime_references": [
+      {
+        "name": "Codex CLI Documentation",
+        "url": "https://github.com/openai/codex",
+        "type": "documentation",
+        "relevance": "Cross-runtime comparison point for sandbox and approval behavior",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Split Permissions Source",
+        "url": "https://github.com/openai/codex/blob/main/codex-rs/protocol/src/permissions.rs",
+        "type": "repository_source",
+        "relevance": "First-party source for split filesystem policy, read/write/deny access, network policy, protected metadata names (`.git`, `.agents`, `.codex` — re-verified against `main` 2026-07-11, unchanged), and sandbox capability modeling. Prefer `main` over a pinned commit for this fast-moving config surface (see AskForApproval enum drift note in SKILL.md)",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Execpolicy README",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/execpolicy/README.md",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for prefix-rule policy evaluation, strictest-decision wins, examples as tests, host_executable matching, and structured policy output. Content re-checked against `main` 2026-07-11 (allow/prompt/forbidden decisions, host_executable fallback rules) with no material drift",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Network Proxy Config Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/network-proxy/src/config.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for domain allow/deny config, local binding policy, unix socket permissions, and MITM proxy settings",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Network Connect Policy Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/network-proxy/src/connect_policy.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for network destination checks, deny precedence, loopback/private target handling, and local binding enforcement",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Model Context Protocol Specification",
+        "url": "https://modelcontextprotocol.io/",
+        "type": "specification",
+        "relevance": "Reference for tool and server capability boundaries when approvals cross tool or transport layers",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Management"
+  short_description: "Founder-PM toolkit for discovery, roadmaps, prioritization, and PMF measurement"
+  default_prompt: "Use $product-management for Founder-PM toolkit for discovery, roadmaps, prioritization, and PMF measurement. Use when planning product strategy, metrics, or roadmaps."

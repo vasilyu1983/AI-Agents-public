@@ -1,0 +1,182 @@
+{
+  "metadata": {
+    "skill": "ops-cost-optimization",
+    "description": "Official pricing pages and billing documentation for supported platforms",
+    "last_updated": "2026-07-11",
+    "title": "Cost Optimization - Sources"
+  },
+  "sources": [
+    {
+      "name": "Vercel Pricing",
+      "url": "https://vercel.com/pricing",
+      "type": "pricing_page",
+      "notes": "Plan comparison, usage-based pricing details"
+    },
+    {
+      "name": "Vercel Usage & Billing Docs",
+      "url": "https://vercel.com/docs/pricing",
+      "type": "documentation",
+      "notes": "Detailed billing model, spend management, per-metric pricing"
+    },
+    {
+      "name": "Supabase Pricing",
+      "url": "https://supabase.com/pricing",
+      "type": "pricing_page",
+      "notes": "Plan tiers, compute add-ons, usage-based pricing"
+    },
+    {
+      "name": "Supabase Billing Docs",
+      "url": "https://supabase.com/docs/guides/platform/billing",
+      "type": "documentation",
+      "notes": "Billing FAQ, spend caps, project pausing"
+    },
+    {
+      "name": "Resend Pricing",
+      "url": "https://resend.com/pricing",
+      "type": "pricing_page",
+      "notes": "Free tier, Pro tier, volume pricing"
+    },
+    {
+      "name": "Stripe Pricing",
+      "url": "https://stripe.com/pricing",
+      "type": "pricing_page",
+      "notes": "Processing fees, product-specific pricing"
+    },
+    {
+      "name": "Cloudflare Plans",
+      "url": "https://www.cloudflare.com/plans/",
+      "type": "pricing_page",
+      "notes": "Free vs Pro vs Business vs Enterprise"
+    },
+    {
+      "name": "Cloudflare Workers Pricing",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "type": "pricing_page",
+      "notes": "Workers, KV, R2, D1 pricing"
+    },
+    {
+      "name": "Anthropic API Pricing",
+      "url": "https://www.anthropic.com/pricing",
+      "type": "pricing_page",
+      "notes": "Claude model pricing, prompt caching, batch API"
+    },
+    {
+      "name": "OpenAI API Pricing",
+      "url": "https://openai.com/api/pricing/",
+      "type": "pricing_page",
+      "notes": "GPT model pricing, fine-tuning, embeddings"
+    },
+    {
+      "name": "GitHub Pricing",
+      "url": "https://github.com/pricing",
+      "type": "pricing_page",
+      "notes": "Plans, Actions minutes, Copilot, storage"
+    },
+    {
+      "name": "GitHub Actions Billing",
+      "url": "https://docs.github.com/en/billing/managing-billing-for-github-actions",
+      "type": "documentation",
+      "notes": "Per-minute pricing by OS, storage, spending limits"
+    },
+    {
+      "name": "PostHog Pricing",
+      "url": "https://posthog.com/pricing",
+      "type": "pricing_page",
+      "notes": "Free tier, per-product pricing, volume discounts"
+    },
+    {
+      "name": "Sentry Pricing",
+      "url": "https://sentry.io/pricing/",
+      "type": "pricing_page",
+      "notes": "Free tier, Team, Business, per-category pricing"
+    },
+    {
+      "name": "GoDaddy Domain Pricing",
+      "url": "https://www.godaddy.com/tlds/pricing",
+      "type": "pricing_page",
+      "notes": "Registration vs renewal pricing by TLD"
+    },
+    {
+      "name": "Cloudflare Registrar",
+      "url": "https://www.cloudflare.com/products/registrar/",
+      "type": "pricing_page",
+      "notes": "At-cost domain pricing, transfer process"
+    },
+    {
+      "name": "Namecheap Pricing",
+      "url": "https://www.namecheap.com/domains/",
+      "type": "pricing_page",
+      "notes": "Domain pricing, WhoisGuard, DNS"
+    },
+    {
+      "name": "FinOps Framework - Quantify Business Value Domain",
+      "url": "https://www.finops.org/framework/domains/",
+      "type": "methodology",
+      "notes": "FinOps Foundation canonical framework; Unit Economics is an official capability under the Quantify Business Value domain",
+      "accessed": "2026-05-17"
+    },
+    {
+      "name": "FinOps Framework 2026 (Cloud+ scopes)",
+      "url": "https://www.finops.org/framework/",
+      "type": "methodology",
+      "notes": "2026 Framework revision: mission expanded from 'Value of Cloud' to 'Value of Technology'; introduces FinOps Scopes ('Cloud+') spanning Public Cloud, SaaS, Data Center, Data Cloud Platforms, and a dedicated AI Technology Category with its own capabilities/KPIs/FOCUS alignment. Issued as an annual revision rather than a single version number.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "FOCUS Specification",
+      "url": "https://focus.finops.org/focus-specification/",
+      "type": "standard",
+      "notes": "FinOps Open Cost and Usage Specification. Current version: FOCUS 1.4 (ratified June 4, 2026) — corrects this file's prior entry, which cited 1.3 (Dec 4, 2025) as current. 1.4 adds Invoice Detail and Billing Period datasets and expands the Contract Commitment dataset from 13 to 30 columns. FOCUS 1.2 (May 29, 2025) added SaaS/PaaS normalization.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "Infracost Guardrails Docs",
+      "url": "https://www.infracost.io/docs/infracost_cloud/guardrails/",
+      "type": "docs",
+      "notes": "Infracost IaC cost diff and budget-threshold merge gates for CI pipelines. Infracost raised a $15M Series A on 2025-11-18, led by Pruven Capital with Y Combinator, Sequoia, and others participating.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "Langfuse LLM Observability",
+      "url": "https://langfuse.com/docs",
+      "type": "docs",
+      "notes": "Open-source LLM observability: per-trace and per-user cost attribution, token usage, latency. Self-hostable.",
+      "accessed": "2026-05-17"
+    },
+    {
+      "name": "Anthropic API Pricing (verified detail page)",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "type": "pricing_page",
+      "notes": "Authoritative per-model token rates, prompt-caching multipliers (1.25x/2x write, 0.1x read), batch discount (50%), and Claude Consumption Unit marketplace billing mechanics. Confirmed Opus 4.8 at $5/$25 per MTok and Haiku 4.5 at $1/$5 per MTok, correcting stale figures previously carried in references/ai-api-cost-guide.md.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "AWS Savings Plans vs Reserved Instances (AWS docs)",
+      "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-ris.html",
+      "type": "documentation",
+      "notes": "Official mechanics for Compute Savings Plans vs Reserved Instances; commitment shape, discount depth, and applicability scope.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "GCP Committed Use Discounts Overview",
+      "url": "https://docs.cloud.google.com/compute/docs/instances/committed-use-discounts-overview",
+      "type": "documentation",
+      "notes": "Resource-based vs flexible CUD mechanics; CUD sharing enabled by default for new billing accounts created on/after 2026-06-16.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "OpenCost",
+      "url": "https://opencost.io/",
+      "type": "docs",
+      "notes": "CNCF-incubating open-source Kubernetes cost allocation engine, originally donated by Kubecost. Kubecost (commercial) was acquired by IBM in 2024 and now sits alongside Cloudability and Turbonomic in IBM's FinOps suite; verify current OpenCost governance independence at decision time.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "Vercel Fluid Compute Active CPU Pricing",
+      "url": "https://vercel.com/docs/functions/usage-and-pricing",
+      "type": "pricing_page",
+      "notes": "Active CPU pricing bills only for CPU time actually executing (not idle/wait time), replacing flat GB-hour duration billing on Fluid compute. Reported up to 90% savings for high-idle-time workloads (e.g. AI inference with I/O wait). Confirms accuracy of vercel-cost-guide.md's function duration guidance.",
+      "accessed": "2026-07-11"
+    }
+  ]
+}

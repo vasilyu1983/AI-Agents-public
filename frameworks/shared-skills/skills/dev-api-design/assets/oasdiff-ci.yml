@@ -1,0 +1,43 @@
+name: API Breaking-Change Detection
+
+on:
+  pull_request:
+    paths:
+      - "openapi.yaml"
+      - "openapi/**"
+
+jobs:
+  oasdiff:
+    name: Detect breaking changes (oasdiff)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # need full history to resolve base ref
+
+      - name: Install oasdiff
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/tufin/oasdiff/main/install.sh \
+            | sh -s -- -b /usr/local/bin
+
+      - name: Fetch base OpenAPI spec from main
+        run: |
+          git show origin/main:openapi.yaml > /tmp/openapi-base.yaml 2>/dev/null \
+            || echo "No openapi.yaml on main yet; skipping base fetch."
+
+      - name: Run breaking-change check
+        id: oasdiff
+        run: |
+          oasdiff breaking /tmp/openapi-base.yaml openapi.yaml \
+            --format=text \
+            --fail-on ERR \
+            | tee /tmp/oasdiff-report.txt
+
+      - name: Post summary to PR
+        if: always()
+        run: |
+          echo "## API Breaking-Change Report" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat /tmp/oasdiff-report.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Distributed Systems Foundations"
+  short_description: "Applies distributed-systems primitives"
+  default_prompt: "Use $foundations-distributed-systems for CAP/PACELC, FLP, Paxos, Raft, Lamport/vector clocks, CRDTs, idempotency, leases/fencing, quorums, causal consistency, or broadcast protocols."

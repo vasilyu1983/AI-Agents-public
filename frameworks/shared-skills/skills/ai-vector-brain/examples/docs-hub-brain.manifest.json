@@ -1,0 +1,27 @@
+{
+  "brain_id": "example-docs-hub-brain",
+  "backend": "postgres_pgvector",
+  "corpus_type": "docs_hub",
+  "embedding_model": "openai/text-embedding-3-large@1024",
+  "embedding_model_alternatives": [
+    "voyage-4-large@1024",
+    "cohere/embed-v4@1536",
+    "bge-m3@1024",
+    "Qwen/Qwen3-Embedding-8B@3072"
+  ],
+  "_model_strings_note": "Verify all model strings and dimensions against current vendor docs before use; embedding model APIs change frequently.",
+  "source_roots": ["docs/", "context/"],
+  "source_excludes": ["**/.archive/**", "**/drafts/**"],
+  "chunking": {"strategy": "heading", "target_tokens": 600, "overlap_tokens": 80, "preserve_parents": true},
+  "contextual_retrieval": {"enabled": false, "_note": "enable when recall@10 stalls below target; see references/contextual-retrieval.md"},
+  "retrieval": {
+    "mode": "hybrid_rrf",
+    "candidate_k": 50,
+    "return_k": 10,
+    "rrf_k": 60,
+    "rerank": {"enabled": false, "_note": "enable with voyage-rerank-2.5 or bge-reranker-v2-m3 if precision-at-top matters; see references/reranking-recipe.md"}
+  },
+  "freshness": {"mode": "scheduled_scan", "max_staleness_hours": 168},
+  "eval": {"dataset": "evals/docs-retrieval.jsonl", "primary_metric": "recall@10", "min_value": 0.85}
+}
+

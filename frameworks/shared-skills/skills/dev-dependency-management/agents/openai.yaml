@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dependency Management - Production Patterns"
+  short_description: "Guides dependency management across languages and ecosystems"
+  default_prompt: "Use $dev-dependency-management when choosing package managers, lockfiles, update policy, security scanning, SBOMs, or monorepo patterns."

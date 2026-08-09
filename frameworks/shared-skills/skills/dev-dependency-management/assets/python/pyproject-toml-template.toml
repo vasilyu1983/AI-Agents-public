@@ -1,0 +1,42 @@
+# pyproject.toml - modern Python dependency-management baseline
+# Uses standardized project metadata and dependency groups.
+# Works well with uv and remains compatible with modern Python tooling.
+
+[project]
+name = "project-name"
+version = "0.1.0"
+description = "Project description"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  # "httpx>=0.27,<1.0",
+]
+
+[project.optional-dependencies]
+server = [
+  # "uvicorn>=0.30,<1.0",
+]
+
+[dependency-groups]
+dev = [
+  # "pytest>=8,<9",
+  # "ruff>=0.11,<1",
+]
+typecheck = [
+  # "mypy>=1.10,<2",
+]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+addopts = ["-q"]
+testpaths = ["tests"]

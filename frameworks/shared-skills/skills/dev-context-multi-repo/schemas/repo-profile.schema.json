@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/dev-context-multi-repo/schemas/repo-profile.schema.json",
+  "title": "RepoProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "repo_id",
+    "repo_name",
+    "repo_path",
+    "status",
+    "languages",
+    "repo_kind",
+    "architecture_style",
+    "summary",
+    "evidence",
+    "confidence_score",
+    "last_scanned_at"
+  ],
+  "properties": {
+    "repo_id": { "type": "string" },
+    "repo_name": { "type": "string" },
+    "repo_path": { "type": "string" },
+    "repo_group": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["active", "legacy", "archived", "experimental", "unknown"]
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["internal", "public", "private", "unknown"]
+    },
+    "default_branch": { "type": "string" },
+    "languages": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "frameworks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "package_managers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "build_tools": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "runtime_targets": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "repo_kind": {
+      "type": "string",
+      "enum": ["service", "app", "library", "infra", "data", "docs", "mono-root", "unknown"]
+    },
+    "entrypoints": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "dependencies_direct": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "dependencies_infra": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "interfaces_exposed": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "data_stores": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "architecture_style": {
+      "type": "string",
+      "enum": [
+        "monolith",
+        "modular-monolith",
+        "microservice",
+        "workspace",
+        "batch",
+        "event-driven",
+        "mixed",
+        "unknown"
+      ]
+    },
+    "domain_tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "integrates_with": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "owner_signals": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "test_signals": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "delivery_signals": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "summary": { "type": "string" },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "./evidence-ref.schema.json"
+      }
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "last_scanned_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sub_entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "label"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "api_endpoint",
+              "queue_topic",
+              "database",
+              "table",
+              "entity",
+              "event",
+              "config",
+              "context_artifact",
+              "skill",
+              "agent",
+              "package",
+              "nuget_package"
+            ]
+          },
+          "label": { "type": "string" },
+          "path": { "type": "string" },
+          "properties": { "type": "object" }
+        }
+      }
+    }
+  }
+}

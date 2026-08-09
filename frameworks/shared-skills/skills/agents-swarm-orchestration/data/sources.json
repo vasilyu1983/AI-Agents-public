@@ -1,0 +1,214 @@
+{
+  "metadata": {
+    "title": "Agents Swarm Orchestration - Sources",
+    "description": "Official documentation, research, and secondary references for multi-agent orchestration across Claude Code, Codex, and OpenAI Agents SDK",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "agents-swarm-orchestration",
+    "total_sources": 33
+  },
+  "official_documentation": [
+    {
+      "name": "Claude Code Subagents Documentation",
+      "url": "https://code.claude.com/docs/en/sub-agents",
+      "description": "Official Claude Code guide for subagents, capabilities, isolation, and context management",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Agent Teams Documentation",
+      "url": "https://code.claude.com/docs/en/agent-teams",
+      "description": "Official Claude Code guide for coordinating multiple Claude Code sessions with shared tasks and messaging",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic Claude Code Best Practices",
+      "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+      "description": "Anthropic guidance for productive coding workflows, delegation, and context management",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Codex Multi-Agents",
+      "url": "https://developers.openai.com/codex/concepts/multi-agents",
+      "description": "Official OpenAI Codex guidance for main-thread focus, parallel workers, and read-heavy fan-out",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Codex Subagents",
+      "url": "https://developers.openai.com/codex/subagents",
+      "description": "Official Codex subagent documentation: TOML config, concurrency settings, custom agents, sandbox inheritance, CSV batch processing",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Agents SDK - Agents",
+      "url": "https://openai.github.io/openai-agents-python/agents/",
+      "description": "Official Agents SDK documentation describing manager-style orchestration, handoffs, tools, and guardrails",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Agents SDK - Multi-Agent Guide",
+      "url": "https://openai.github.io/openai-agents-python/multi_agent/",
+      "description": "Official OpenAI multi-agent orchestration guide with code and design pattern examples",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Prompt Caching Guide",
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching",
+      "description": "Official guide for structuring shared prompt prefixes and cache-friendly worker prompts",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Safety in Building Agents",
+      "url": "https://developers.openai.com/api/docs/guides/agent-builder-safety",
+      "description": "Official safety guidance for prompt injection defense, structured outputs, approvals, and evals",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Models Overview",
+      "url": "https://developers.openai.com/api/docs/models",
+      "description": "Current OpenAI model catalog for verifying latest flagship and smaller model options",
+      "add_as_web_search": true
+    }
+  ],
+  "research": [
+    {
+      "name": "AdaptOrch: Task-Adaptive Multi-Agent Orchestration",
+      "url": "https://arxiv.org/abs/2602.16873",
+      "description": "Task-adaptive orchestration that maps decomposition shape to execution pattern instead of using one static topology",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Latency-Aware Orchestration for Parallel Multi-Agent Systems",
+      "url": "https://arxiv.org/abs/2601.10560",
+      "description": "Accuracy and latency tradeoffs for parallel execution modeled over probabilistic DAGs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Multi-Agent Collaboration via Evolving Orchestration",
+      "url": "https://arxiv.org/abs/2505.19591",
+      "description": "Dynamic sequencing and prioritization with a learned orchestrator, useful as a design reference not a direct recipe",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Aligned Agents, Biased Swarm: Measuring Bias Amplification in Multi-Agent Systems (Li et al., ICLR 2026)",
+      "url": "https://arxiv.org/abs/2604.08963",
+      "description": "Peer-reviewed (ICLR 2026, open code). Structured multi-agent workflows amplify individual-agent bias into systemic polarization; injecting neutral context can accelerate it. Basis for the structured-pipeline bias anti-pattern.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets (Tran & Kiela)",
+      "url": "https://arxiv.org/abs/2604.02460",
+      "description": "Apr 2026 arXiv preprint, NOT peer-reviewed; scope limited to multi-hop reasoning, text-only. Data Processing Inequality argument for single-agent superiority at equal budget. Basis for the equal-budget fan-out trap. Verify before relying.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Agent Contracts: A Formal Framework for Resource-Bounded Autonomous AI Systems (Ye & Tan)",
+      "url": "https://arxiv.org/abs/2601.08815",
+      "description": "2026 arXiv paper establishing the budget-conservation invariant (child agent budgets are strict subsets of the parent's remaining budget) cited in SKILL.md §Operating Principles for per-worker budget enforcement.",
+      "add_as_web_search": false,
+      "verified": "2026-07-11"
+    }
+  ],
+  "community_resources": [
+    {
+      "name": "claude-squad",
+      "url": "https://github.com/smtg-ai/claude-squad",
+      "description": "Terminal-based parallel Claude agent sessions; reference implementation for multi-agent concurrency patterns in local environments",
+      "add_as_web_search": false
+    },
+    {
+      "name": "cmux",
+      "url": "https://github.com/craigsc/cmux",
+      "description": "Multiplexer for running multiple Claude agents in parallel; minimal orchestration approach for fan-out task execution",
+      "add_as_web_search": false
+    },
+    {
+      "name": "figaro",
+      "url": "https://github.com/byt3bl33d3r/figaro",
+      "description": "Desktop-based orchestration of Claude agent fleets; demonstrates local multi-agent coordination and session management",
+      "add_as_web_search": false
+    },
+    {
+      "name": "gstack",
+      "url": "https://github.com/garrytan/gstack",
+      "description": "Claude Code configured as a virtual engineering team; reference for role-based agent orchestration and parallel workstreams",
+      "add_as_web_search": false
+    },
+    {
+      "name": "LangGraph",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "description": "Agents-as-graphs framework for multi-agent orchestration with explicit state management; 26.8k stars, strong reference for DAG-based orchestration patterns",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Codex Multi Agent Playbook (am.will)",
+      "url": "https://github.com/am-will/codex-skills",
+      "description": "Secondary inspiration for Codex swarm workflows; useful for examples but should be checked against primary docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CODEX MULTI AGENT PLAYBOOK: SWARMS LVL. 1 (@LLMJunky)",
+      "url": "https://x.com/LLMJunky/status/2027032974202421336",
+      "description": "Long-form X Article on multi-agent swarm orchestration with Codex — covers Swarm Waves (sequential parallelism), Super Swarms (total parallelism), orchestrator roles, dependency graphs, max_threads config, and model/reasoning level selection per agent",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Nav Toor — 30 Claude Code Sub-Agents I Actually Use",
+      "url": "https://x.com/heynavtoor/status/2050148589134045443",
+      "description": "Practitioner catalog of 30 sub-agent .md definitions across 8 categories (2026-05-01; 96K views). Cited narrowly for the 'Worker Self-Rejection Rules' section: the cross-cutting pattern of embedding a named negative criterion ('reject your own draft if X') in worker system prompts to pre-filter plausible-but-wrong output before it reaches the lead. The 30-agent catalog itself is a prompt-template reference, not absorbed piecemeal; the self-rejection rule is the load-bearing design pattern lifted from it.",
+      "add_as_web_search": false,
+      "captured": "2026-05-12"
+    },
+    {
+      "name": "Claude Subagents vs. Agent Teams, Explained (@akshay_pachaar)",
+      "url": "https://x.com/akshay_pachaar/status/2033167408463069526",
+      "description": "Explainer on two distinct multi-agent paradigms in Claude Code: when to use subagents (isolated context, delegation) vs. agent teams (collaborative, shared context). Key insight: most people reach for multi-agent when they shouldn't",
+      "add_as_web_search": false
+    },
+    {
+      "name": "The Machine that Builds the Machine — Symphony (@daniel_mac8)",
+      "url": "https://x.com/daniel_mac8/status/2034344165211832481",
+      "description": "Deep dive on OpenAI's Symphony — an Elixir-based orchestrator that polls Linear, spawns Codex agents in isolated workspaces, implements features, self-reviews PRs, and manages full issue lifecycle. Real numbers: 26 tasks, 27 PRs, 32K LOC in 36 hours at 10-agent concurrency",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Andrej Karpathy - Claude Coding Notes",
+      "url": "https://x.com/karpathy/status/2015883857489522876",
+      "description": "Operator-level coding-agent pitfalls that justify verifier loops, tighter scope control, and resistance to overcomplicated multi-agent execution",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Sarah Chieng - Lessons Learned From Building Multi-Agent Workflows",
+      "url": "https://www.cerebras.ai/blog/lessons-learned-from-building-multi-agent-workflows",
+      "description": "April 2026 field report on orchestrator-plus-line-cook patterns, minimum viable context, phased fan-out, no shared-file writes, and one-builder-plus-verifiers discipline",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Walden Yan - Multi-Agents: What's Actually Working",
+      "url": "https://cognition.ai/blog/multi-agents-working",
+      "description": "April 2026 Cognition update: parallel-writer swarms still fail in practice; the narrow class that works is manager-and-workers setups where extra agents contribute intelligence while writes stay single-threaded",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Agents In 2026: Agent View, Subagents, Teams, And What Parallel Sessions Actually Cost",
+      "url": "https://www.cloudzero.com/blog/claude-code-agents/",
+      "description": "June 2026 cost analysis: tiered-model teams (Opus lead + Sonnet workers + Haiku formatters) cost ~40% less than all-Opus at minimal capability loss. Also covers /clear between dispatches cutting per-message token cost 30–50%.",
+      "add_as_web_search": false,
+      "captured": "2026-06-09"
+    },
+    {
+      "name": "Agentic AI Frameworks 2026: LangGraph vs CrewAI vs OpenAI SDK",
+      "url": "https://uvik.net/blog/agentic-ai-frameworks/",
+      "description": "June 2026 framework landscape: Microsoft merged AutoGen + Semantic Kernel into Microsoft Agent Framework v1.0 (GA April 2026) — AutoGen is now in maintenance mode. OpenAI Agents SDK April 2026 overhaul added native sandbox, sub-agent patterns, and first-class MCP. Used as basis for Framework Quick-Pick table in SKILL.md.",
+      "add_as_web_search": false,
+      "captured": "2026-06-09"
+    },
+    {
+      "name": "Multi-Agent in Production 2026: 3 Patterns That Survived",
+      "url": "https://niteagent.com/blog/multi-agent-production-2026/",
+      "description": "May 2026 production survey describing orchestrator-worker as the default multi-agent pattern in production, alongside supervisor/hierarchical and swarm (peer, no central control) as the other two topologies that survived. The page does not state a specific adoption percentage — do not cite a numeric split from this source.",
+      "add_as_web_search": false,
+      "captured": "2026-06-09",
+      "verified": "2026-07-11"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Docs Coverage QA"
+  short_description: "Audits and enforces doc quality"
+  default_prompt: "Use $qa-docs-coverage for auditing and enforcing documentation quality. Use when checking coverage, freshness, runbook validity, AI-instruction coverage, or cleaning stale/duplicate markdown after LLM edits."

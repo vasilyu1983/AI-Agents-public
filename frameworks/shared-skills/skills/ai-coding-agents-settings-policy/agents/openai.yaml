@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Settings Policy"
+  short_description: "Design settings and policy layers"
+  default_prompt: "Use $ai-coding-agents-settings-policy to design source precedence, managed policy, env controls, or runtime settings validation for a coding-agent runtime."

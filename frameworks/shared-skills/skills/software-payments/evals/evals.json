@@ -1,0 +1,70 @@
+{
+  "skill_name": "software-payments",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A Node.js 20 / Express webhook handler receives Stripe events and updates subscription entitlements. The current implementation verifies the Stripe-Signature header using stripe.webhooks.constructEvent, but does not deduplicate events: a customer.subscription.updated event that fires twice (Stripe retries on 500) has been double-applying proration credits. Design an idempotent webhook processing pattern using the event id field as the idempotency key, describe the storage strategy (database vs Redis), and explain how to handle out-of-order delivery for customer.subscription.deleted arriving before customer.subscription.updated.",
+      "expected_output": "The skill should apply the webhook reliability defaults: verified signatures, idempotent processing keyed on event.id, and explicit handling of out-of-order delivery. It should recommend a durable idempotency store (not in-memory), describe the check-then-process pattern, and handle the out-of-order case with event sequencing or idempotent state merging.",
+      "files": [],
+      "expectations": [
+        "The output keys idempotency on the Stripe event.id field, not the object id or a hash of the payload.",
+        "The output recommends a durable store (database row or Redis with TTL) rather than in-memory deduplication that does not survive restarts.",
+        "The output describes a check-before-process pattern: look up the event id, skip if already processed, otherwise process and mark as done in an atomic or transactional step.",
+        "The output addresses out-of-order delivery by comparing event timestamps or using Stripe's created field to determine which event represents the later state.",
+        "The output confirms that signature verification using stripe.webhooks.constructEvent must remain the first step, before any idempotency logic."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A SaaS product is launching in the UK and Germany. The checkout must support SCA/3DS2 for card payments under PSD2. The engineering team is using Stripe Payment Element and wants to know: (1) which Stripe test card numbers trigger a 3DS challenge vs pass without challenge in test mode, (2) how to handle the stripe.confirmPayment return value when a 3DS challenge is declined, (3) whether the PaymentIntent status after a successful 3DS challenge is 'succeeded' or 'requires_capture', and (4) which webhook event confirms a 3DS-authenticated payment is safe to provision.",
+      "expected_output": "The skill should provide accurate Stripe test card numbers for 3DS challenge and no-challenge paths, explain the confirmPayment error object on decline, clarify PaymentIntent status transitions, and confirm the correct webhook event for provisioning. It should apply the default that webhooks, not client redirects, are the source of truth.",
+      "files": [],
+      "expectations": [
+        "The output provides the Stripe test card 4000002500003155 (or equivalent documented 3DS-required card) for triggering a mandatory 3DS challenge in test mode.",
+        "The output provides a no-challenge test card such as 4242424242424242 and notes that it passes SCA exemptions in test mode.",
+        "The output explains that stripe.confirmPayment returns a result.error object when a 3DS challenge is declined and that the UI must handle this error without provisioning access.",
+        "The output clarifies that a successful 3DS challenge transitions the PaymentIntent to 'succeeded' for automatic capture or 'requires_capture' for manual capture, and that the choice depends on the capture_method setting.",
+        "The output identifies payment_intent.succeeded as the correct webhook event to use for provisioning, reinforcing that the client redirect is UX only."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A B2B SaaS startup is building its first checkout. The team is deciding between Stripe Checkout (hosted), Stripe Payment Element (custom), and building a fully custom payment form with Stripe.js confirmCardPayment. The product requires: custom brand colours and logo, no redirect away from the app domain, and plans to add BNPL methods (Klarna, Afterpay) within six months. Apply the skill's hosted-vs-custom checkout decision logic and recommend the right option with rationale and the key implementation defaults to follow.",
+      "expected_output": "The skill should apply its checkout selection defaults: hosted first unless branded custom UI is a hard requirement. Given no-redirect and BNPL requirements, it should recommend Payment Element as the right balance, explain why fully custom card form loses dynamic payment methods, and state the implementation defaults.",
+      "files": [],
+      "expectations": [
+        "The output rules out Stripe Checkout as insufficient because the product requires staying on the app domain with no redirect.",
+        "The output rules out the fully custom Stripe.js confirmCardPayment form because omitting payment_method_types loses automatic BNPL method support.",
+        "The output recommends Stripe Payment Element with Express Checkout Element as the correct option for branded custom UX plus dynamic payment methods.",
+        "The output states the implementation default: omit payment_method_types to allow Stripe to surface BNPL and other methods dynamically.",
+        "The output reminds the team that provisioning must wait for the payment_intent.succeeded or checkout.session.completed webhook, not the client-side redirect."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "An iOS app (Swift, iOS 17 minimum) sells premium features as non-consumable in-app purchases. The team is debating three architectures: (A) verify purchases purely on-device using StoreKit 2 Transaction.currentEntitlements, (B) verify JWS transaction receipts on a backend server and store entitlement state in the app's own database, (C) add RevenueCat between StoreKit 2 and the backend. Define the policy boundary that Apple enforces for in-app digital goods, compare the three options against StoreKit 2 native pattern defaults, recommend the right starting architecture, and describe the entitlement registry pattern required for a robust implementation.",
+      "expected_output": "The skill should enforce the Apple policy boundary (no Stripe for digital goods in native app), default to StoreKit 2 with backend JWS verification as the primary pattern, add RevenueCat only when multi-platform entitlement sync materially justifies it, and describe the three-layer entitlement registry (registry, API enforcement, UI paywall).",
+      "files": [],
+      "expectations": [
+        "The output explicitly states that selling iOS in-app digital goods through Stripe inside the native app flow violates Apple policy and must not be done.",
+        "The output recommends option B (StoreKit 2 backend JWS verification) as the default for a single-platform iOS product, citing the skill's StoreKit 2 native pattern default.",
+        "The output explains that on-device only verification (option A) is insufficient because entitlement state is lost on device reset and cannot be enforced server-side.",
+        "The output states that RevenueCat (option C) is optional and should be added only when cross-platform entitlement sync, experiments, or web-plus-store coordination materially justify the additional operational surface.",
+        "The output describes the entitlement registry pattern: a canonical entitlement store, API-boundary enforcement, and UI paywall as the three enforcement layers."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "A subscription product has three plan tiers: Free, Pro, and Enterprise. Feature gating is currently implemented only in the React frontend by checking a planTier prop. There is no server-side enforcement. The team wants to harden the gating before launch. Design the full entitlement registry and enforcement architecture, specifying: where the canonical entitlement state lives, how it is kept in sync with Stripe subscription webhooks, how the API enforces access, and how the UI paywall is driven from the same source of truth. Include the minimum webhook events the subscription listener must handle.",
+      "expected_output": "The skill should reject client-only gating as insufficient, define a canonical entitlement registry synced via webhooks, specify API-boundary enforcement, and describe the three-layer enforcement model (registry, API, UI) from a single source of truth.",
+      "files": [],
+      "expectations": [
+        "The output identifies frontend-only feature gating as a critical gap because client-side checks are bypassable and are not enforced for API consumers.",
+        "The output defines a canonical entitlement registry (database table or service) that stores the resolved feature set per account, keyed on a stable internal account or subscription ID rather than a Stripe object ID.",
+        "The output specifies the minimum webhook events to handle: customer.subscription.created, customer.subscription.updated, customer.subscription.deleted, and invoice.payment_failed for grace-period handling.",
+        "The output requires API middleware or a gate function to check the entitlement registry on every request to a gated resource, not just at login or session creation.",
+        "The output describes the UI paywall as the third layer driven from the same entitlement registry via an API call or session claim, not from a hardcoded plan name."
+      ]
+    }
+  ]
+}

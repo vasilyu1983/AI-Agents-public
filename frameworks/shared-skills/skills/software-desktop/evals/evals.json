@@ -1,0 +1,58 @@
+{
+  "skill_name": "software-desktop",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We are building a cross-platform B2C desktop finance app targeting macOS, Windows, and Linux for users in the EU. The team has a React frontend and wants the smallest possible bundle size. We need auto-update and plan to distribute outside app stores. Which framework should we use, what security settings are mandatory, and what do we need to do for EU Accessibility Act compliance now that enforcement started in June 2025?",
+      "expected_output": "The skill should recommend Tauri over Electron given bundle size priority and OS webview approach, explain mandatory security defaults including the capability system rewrite, cover EU Accessibility Act June 2025 enforcement scope and EN 301 549 / WCAG 2.1 AA requirements, and address auto-update via the Tauri updater plugin with signature verification.",
+      "files": [],
+      "expectations": [
+        "The output recommends Tauri over Electron for the given constraints (bundle size, security model, OS webview).",
+        "The output explains the Tauri 2 capability system and that the Tauri 1 allowlist was removed.",
+        "The output mentions EU Accessibility Act June 2025 enforcement date and that new products must conform immediately.",
+        "The output references EN 301 549 or WCAG 2.1 AA as the applicable technical standard.",
+        "The output covers the Tauri updater plugin requirement for a pubkey and HTTPS endpoint.",
+        "The output addresses keyboard accessibility and screen reader support as required accessibility criteria."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We have an Electron app built with nodeIntegration: true that was written three years ago. We are migrating it to use contextIsolation, removing nodeIntegration, and adding a preload script. Walk me through the migration steps, what breaks, and what security gaps were open while nodeIntegration was true.",
+      "expected_output": "The skill should explain the security risk of nodeIntegration: true (full Node.js access from renderer, XSS-to-RCE), describe the migration path to contextBridge with preload scripts, list what patterns break (direct require in renderer, window.process access), and enforce sandbox: true as the next step after contextIsolation.",
+      "files": [],
+      "expectations": [
+        "The output identifies nodeIntegration: true as exposing full Node.js access to the renderer process.",
+        "The output explains that XSS in the renderer with nodeIntegration: true is equivalent to remote code execution.",
+        "The output describes the contextBridge.exposeInMainWorld pattern for the preload script.",
+        "The output lists specific renderer code patterns that break during migration (direct require, window.process, global Node APIs).",
+        "The output recommends enabling sandbox: true as the next hardening step."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We are setting up code signing and notarization for a macOS Tauri app. We were using altool in our CI pipeline. What do we need to change, and what are the common failures teams hit after moving to notarytool?",
+      "expected_output": "The skill should confirm altool was removed and notarytool is the required replacement, explain the --keychain-profile approach for CI credentials, cover stapling the notarization ticket, and call out missing --options runtime on codesign as a common rejection cause.",
+      "files": [],
+      "expectations": [
+        "The output confirms altool was deprecated and removed (Xcode 15+) and notarytool is the only supported path.",
+        "The output explains using --keychain-profile for storing Apple credentials in CI without exposing them in logs.",
+        "The output covers xcrun stapler staple as a required post-notarization step.",
+        "The output identifies missing --options runtime on the codesign invocation as a common notarization rejection.",
+        "The output warns against using test keypairs for notarization profile credentials in production."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "We have a Tauri app that was built for Tauri 1.x. We are migrating to Tauri 2. List the breaking changes we will hit, focusing on the IPC surface, plugin imports, and the allowlist system.",
+      "expected_output": "The skill should cover the allowlist-to-capabilities migration, the renamed plugin packages under @tauri-apps/plugin-*, the updated invoke API, and the cargo tauri migrate tool as the starting point.",
+      "files": [],
+      "expectations": [
+        "The output explains that the Tauri 1 allowlist in tauri.conf.json is replaced by capability files in src-tauri/capabilities/.",
+        "The output lists the plugin package rename pattern (tauri::api::* to @tauri-apps/plugin-*).",
+        "The output mentions the cargo tauri migrate or npx @tauri-apps/cli migrate tool.",
+        "The output explains the updated invoke import path (@tauri-apps/api/core) and stricter argument serialization.",
+        "The output warns against using 0.x plugin crate versions alongside tauri 2.x."
+      ]
+    }
+  ]
+}

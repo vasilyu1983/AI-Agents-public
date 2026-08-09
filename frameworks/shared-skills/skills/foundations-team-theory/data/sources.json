@@ -1,0 +1,202 @@
+{
+  "metadata": {
+    "title": "Team Theory Foundations — Sources",
+    "description": "Primary references for 10 team-theory primitives: team decision problem, information structure, person-by-person optimality, value of communication, Radner's LQG theorem, Witsenhausen counterexample, information cost, organizational forms, Dec-POMDP / MARL extension, common-task condition. Marschak–Radner classical layer plus modern multi-agent LLM extensions.",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-team-theory",
+    "total_sources": 27
+  },
+  "canonical_texts": [
+    {
+      "id": "Marschak1955",
+      "name": "Elements for a Theory of Teams",
+      "url": "https://doi.org/10.1287/mnsc.1.2.127",
+      "description": "Marschak (1955). Management Science 1(2):127–137. Founding paper of team theory; defines team decision problem, information structure, common-task condition. Primary source for primitives #1, #2, #10.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Radner1962",
+      "name": "Team Decision Problems",
+      "url": "https://doi.org/10.1214/aoms/1177704566",
+      "description": "Radner (1962). Annals of Mathematical Statistics 33(3):857–881. Proves linear-quadratic-Gaussian team optimality theorem. Primary source for primitive #5 (Radner's LQG theorem) and #3 (person-by-person optimality).",
+      "url_check": "manual"
+    },
+    {
+      "id": "MarschakRadner1972",
+      "name": "Economic Theory of Teams",
+      "url": "https://yalebooks.yale.edu/book/9780300012842/economic-theory-teams/",
+      "description": "Marschak and Radner (1972). Yale University Press. Canonical book-length treatment of team theory. Covers all classical primitives. Primary source for primitives #1, #2, #3, #4, #5, #7.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Witsenhausen1968",
+      "name": "A Counterexample in Stochastic Optimum Control",
+      "url": "https://doi.org/10.1137/0306011",
+      "description": "Witsenhausen (1968). SIAM Journal on Control 6(1):131–147. Shows nonlinear policies strictly dominate linear in a non-classical two-stage LQG team. Primary source for primitive #6.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Sims2003",
+      "name": "Implications of Rational Inattention",
+      "url": "https://doi.org/10.1016/S0304-3932(03)00029-1",
+      "description": "Sims (2003). Journal of Monetary Economics 50(3):665–690. Information-cost framework that translates to bounded-rationality team problems. Primary source for primitive #7 (information cost).",
+      "url_check": "manual"
+    },
+    {
+      "id": "SahStiglitz1986",
+      "name": "The Architecture of Economic Systems: Hierarchies and Polyarchies",
+      "url": "https://www.jstor.org/stable/1804171",
+      "description": "Sah and Stiglitz (1986). American Economic Review 76(4):716–727. Compares hierarchical and polyarchical organizational forms under noisy information. Primary source for primitive #8.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Radner1993",
+      "name": "The Organization of Decentralized Information Processing",
+      "url": "https://doi.org/10.2307/2951732",
+      "description": "Radner (1993). Econometrica 61(5):1109–1146. Formal model of organizational form selection under information processing constraints. Primary source for primitive #8.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Bernstein2002",
+      "name": "The Complexity of Decentralized Control of Markov Decision Processes",
+      "url": "https://doi.org/10.1287/moor.27.4.819.297",
+      "description": "Bernstein, Givan, Immerman, Zilberstein (2002). Mathematics of Operations Research 27(4):819–840. Establishes NEXP-completeness of finite-horizon Dec-POMDP. Primary source for primitive #9.",
+      "url_check": "manual"
+    },
+    {
+      "id": "OliehoekAmato2016",
+      "name": "A Concise Introduction to Decentralized POMDPs",
+      "url": "https://link.springer.com/book/10.1007/978-3-319-28929-8",
+      "description": "Oliehoek and Amato (2016). Springer. Modern textbook treatment of Dec-POMDPs and MARL. Primary source for primitive #9.",
+      "url_check": "manual"
+    },
+    {
+      "id": "MAPPO2022",
+      "name": "The Surprising Effectiveness of PPO in Cooperative Multi-Agent Games",
+      "url": "https://arxiv.org/abs/2103.01955",
+      "description": "Yu et al. (2022). NeurIPS. Multi-Agent PPO (MAPPO) with centralized training, decentralized execution. Modern MARL benchmark for cooperative team problems. Secondary source for primitive #9.",
+      "url_check": "auto"
+    },
+    {
+      "id": "QMIX2018",
+      "name": "QMIX: Monotonic Value Function Factorisation for Deep Multi-Agent Reinforcement Learning",
+      "url": "https://arxiv.org/abs/1803.11485",
+      "description": "Rashid et al. (2018). ICML. Value-decomposition method for cooperative MARL. Secondary source for primitive #9.",
+      "url_check": "auto"
+    },
+    {
+      "id": "MAST2025",
+      "name": "Why Do Multi-Agent LLM Systems Fail?",
+      "url": "https://arxiv.org/abs/2503.13657",
+      "description": "Cemri et al. (2025). NeurIPS. Empirical taxonomy of 14 multi-agent LLM failure modes across 1,600+ traces, grouped into system design issues, inter-agent misalignment, and task verification. Primary modern source for translating team-theory primitives to LLM agent failures.",
+      "url_check": "auto"
+    },
+    {
+      "id": "OrchestrationTraces2026",
+      "name": "Reinforcement Learning for LLM-based Multi-Agent Systems through Orchestration Traces",
+      "url": "https://arxiv.org/abs/2605.02801",
+      "description": "Decomposes orchestration into five sub-decisions: spawn, delegate, communicate, aggregate, stop. Direct application of team-theoretic structure to LLM agent design. Secondary source for primitives #2, #4, #8.",
+      "url_check": "auto"
+    },
+    {
+      "id": "CoordinationLayer2026",
+      "name": "Coordination as an Architectural Layer for LLM-Based Multi-Agent Systems",
+      "url": "https://arxiv.org/abs/2605.03310",
+      "description": "Argues coordination should be a configurable layer separate from agent logic. Aligns with team-theoretic separation of information structure from decision rules. Secondary source for primitives #2, #8.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Ho1980",
+      "name": "Team Decision Theory and Information Structures",
+      "url": "https://doi.org/10.1109/PROC.1980.11707",
+      "description": "Y.-C. Ho (1980). Proceedings of the IEEE 68(6):644–654. Survey of team decision theory and information structure taxonomy. Secondary source for primitives #2, #3.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Aumann1976",
+      "name": "Agreeing to Disagree",
+      "url": "https://doi.org/10.1214/aos/1176343654",
+      "description": "Aumann (1976). Annals of Statistics 4(6):1236–1239. Common-knowledge result connecting team-theoretic shared belief to formal common ground. Boundary reference between team theory and grounding-communication.",
+      "url_check": "manual"
+    },
+    {
+      "id": "TranKiela2026",
+      "name": "Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets",
+      "url": "https://arxiv.org/abs/2604.02460",
+      "description": "Tran & Kiela (2026). arXiv cs.CL. Controlled empirical comparison of single-agent vs. five multi-agent architectures (sequential, subtask-parallel, parallel-roles, debate, ensemble) across Qwen3, DeepSeek-R1, Gemini 2.5 families. Single agents consistently match or exceed multi-agent on multi-hop reasoning under equal token budgets. Grounded in the Data Processing Inequality. Corroborated by Cemri et al. (2025, MAST, NeurIPS, arXiv:2503.13657) and Dochkina (2026, arXiv:2603.28990). Source for primitive #4 (value of communication, negative case) and #7 (information cost).",
+      "url_check": "auto"
+    },
+    {
+      "id": "LatentMAS2025",
+      "name": "Latent Collaboration in Multi-Agent Systems (LatentMAS)",
+      "url": "https://arxiv.org/abs/2511.20639",
+      "description": "Zou et al. (2025). arXiv cs.CL. ICML 2026 Spotlight. Agents exchange information via shared latent working memory (last-layer embeddings) rather than natural language. Up to 14.6% accuracy gain, 4–4.3× inference speedup, 70.8–83.7% token reduction vs. text-based multi-agent baselines. Evaluated on 9 benchmarks. Code open-sourced at github.com/Gen-Verse/LatentMAS. Corroborated by Rath (2026, arXiv:2601.04170) on semantic drift quantification and Shen et al. (2025, arXiv:2505.23352) on topology-dependent degradation. Source for primitive #2 (information structure: message representation layer) and #4 (value of communication: lossless vs. lossy channel).",
+      "url_check": "auto"
+    },
+    {
+      "id": "Dochkina2026",
+      "name": "Drop the Hierarchy and Roles: How Self-Organizing LLM Agents Outperform Designed Structures",
+      "url": "https://arxiv.org/abs/2603.28990",
+      "description": "Dochkina (2026). IEEE Access (submitted). 25,000-task empirical comparison of 8 coordination protocols (rigid hierarchy to emergent self-organization) across 8 LLMs and 4–256 agent configurations. Self-organizing sequential protocol outperforms centralized orchestration by 14% (Cohen's d=1.86, p<0.0001) and scales sub-linearly to 256 agents. Open-source models achieve 95% of closed-source quality at 24× lower cost. Corroborated by CARD (Wu et al., ICLR 2026, arXiv:2603.01089) and MegaAgent (ACL 2025). Source for primitive #8 (fourth organizational form: emergent self-organization) and #3 (role co-optimization beyond PBPO).",
+      "url_check": "auto"
+    },
+    {
+      "id": "ShenLiu2025TopologyEffects",
+      "name": "Understanding the Information Propagation Effects of Communication Topologies in LLM-based Multi-Agent Systems",
+      "url": "https://arxiv.org/abs/2505.23352",
+      "description": "Shen, Liu, Dai et al. (2025). arXiv cs.MA. Causal empirical study showing non-monotonic effect of topology density on LLM multi-agent task performance: moderately sparse topologies optimally suppress error propagation while preserving beneficial information diffusion. Proposes EIB-Learner adaptive topology. Corroborated by CARD (Wu et al., ICLR 2026, arXiv:2603.01089) and AgentsNet (July 2025, arXiv:2507.08616). Source for primitive #2 (topology as information structure design variable) and #4 (non-monotonic value of communication in dense agent graphs).",
+      "url_check": "auto"
+    },
+    {
+      "id": "NpjAI2025HumanAITeaming",
+      "name": "Human-AI teaming in healthcare: 1 + 1 > 2?",
+      "url": "https://www.nature.com/articles/s44387-025-00052-4",
+      "description": "Liu, Zhang, Chen, and Chen (2025). npj Artificial Intelligence (Nature portfolio), December 2025, DOI 10.1038/s44387-025-00052-4. Authors confirmed 2026-07-11. Reliability analysis of 52 empirical clinical studies. Finds that teaming interaction mode (simultaneous vs. sequential) and clinician expertise (juniors benefit more than seniors) are the primary moderators of human-AI team complementarity; simultaneous mode (parallel observation) outperforms sequential mode (cascaded observation). Corroborated by Kargarnovin, Hernandez, Reiners, Cruz-Neira, Bochenek & Karwowski (2026, Frontiers in Robotics and AI, DOI 10.3389/frobt.2026.1733942, PRISMA review of 104 studies) and Gonzalez, Donahue, Goldstein, Heidari, Jalali, Schelble, Singh & Woolley (2026, PNAS Nexus 5(3):pgag030, complementarity framework). Both corroborating papers verified to exist 2026-07-11. Source for primitive #2 (temporal information structure in human-AI teams) and #8 (organizational form: simultaneous vs. sequential observation).",
+      "url_check": "manual"
+    },
+    {
+      "id": "EdmondsonBransby2023",
+      "name": "Psychological Safety Comes of Age: Observed Themes in an Established Literature",
+      "url": "https://doi.org/10.1146/annurev-orgpsych-120420-014649",
+      "description": "Edmondson, A.C. and Bransby, D.P. (2023). Annual Review of Organizational Psychology and Organizational Behavior 10:55–78. Field's authoritative state-of-the-literature review. Establishes that psychological safety robustly benefits learning and adaptive performance; cites Eldor, Hodor & Cappelli (2023, see PsychSafetyNonlinear2023) as the primary empirical basis for a curvilinear boundary condition (high psych safety can harm routine in-role performance). Primary source for P0-A Anti-Pattern row. URL is Annual Reviews DOI-stable; full-text access requires subscription — url_check manual. Re-verified 2026-07-11: title/authors/journal/volume/pages confirmed via multiple secondary listings (SciRP, HBS faculty page).",
+      "url_check": "manual"
+    },
+    {
+      "id": "PsychSafetyNonlinear2023",
+      "name": "The limits of psychological safety: Nonlinear relationships with performance",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0749597823000316",
+      "description": "Eldor, Hodor, and Cappelli (2023). Organizational Behavior and Human Decision Processes 177. Authors confirmed 2026-07-11 via secondary sources (RePEc/IDEAS, ResearchGate) after ScienceDirect returned 403 on direct fetch. Five independent studies show routine task performance rises with psychological safety only to a point, then declines (inverted-U); collective accountability buffers the downside. This is the primary empirical source for the curvilinear claim; Edmondson & Bransby (2023) cites it as the field's key nonlinearity finding.",
+      "url_check": "manual",
+      "verification_note": "Author names confirmed 2026-07-11 (previously listed as unverified). Full-text still paywalled on ScienceDirect; abstract and findings confirmed via RePEc/IDEAS and ResearchGate secondary listings."
+    },
+    {
+      "id": "SinnemannWeiss2025",
+      "name": "Team Virtuality and Innovation",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/job.2889",
+      "description": "Sinnemann & Weiss (2025). Journal of Organizational Behavior 46:867–888. Meta-analysis of 132 independent samples, N=7,004 teams, 167 effect sizes. Finds no significant main effect of team virtuality on team innovation; effect is significantly moderated by task type (divergent tasks: virtuality-tolerant; convergent tasks: virtuality hurts) and communication technology (video > audio > text for innovation). Primary source for P1-A Decision Checklist item and Virtual Team Design pattern. URL returned 402 during verification; high confidence from multiple secondary sources confirming existence and findings.",
+      "url_check": "manual",
+      "verification_note": "Primary URL returned 402 (paywall). Existence and findings confirmed at HIGH confidence via audit secondary sources."
+    },
+    {
+      "id": "BrandonHollingshead2004",
+      "name": "Transactive Memory Systems in Organizations: Matching Tasks, Expertise, and People",
+      "url": "https://doi.org/10.1287/orsc.1040.0069",
+      "description": "Brandon, D.P. and Hollingshead, A.B. (2004). Organization Science 15(6):633-644. Establishes TMS as a shared cognitive division of labor: members specialize in different knowledge domains, and the team maintains a shared directory of expertise. Three measurable dimensions: specialization, credibility, coordination. Task structure is a primary developmental influence. Primary source for P0-B TMS analog in Primitive #2. Verified: title, authors (first-author order confirmed — Brandon is first author), year, journal, page range, and core claims confirmed via direct fetch and secondary listings (RePEc/IDEAS) 2026-07-11.",
+      "url_check": "auto"
+    },
+    {
+      "id": "HemmerEtAl2024CTP",
+      "name": "Complementarity in Human-AI Collaboration: Concept, Sources, and Evidence",
+      "url": "https://arxiv.org/abs/2404.00029",
+      "description": "Hemmer, Schemmer, Kühl, Vössing, Satzger (2024). European Journal of Information Systems (2025). Formalizes complementary team performance (CTP) — human-AI output exceeding either alone. CTP is rare in practice. Two necessary conditions for CTP: (1) information asymmetry (human holds local context AI lacks) and (2) capability asymmetry (human provides judgment on novel cases). Two empirical studies confirm these as viable CTP pathways. Primary source for P1-B CTP conditions in Composition Recipes and Trap in patterns-scenarios-traps.md. Verified via arXiv abstract fetch.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Brooks1975",
+      "name": "The Mythical Man-Month: Essays on Software Engineering",
+      "url": "https://www.pearson.com/en-us/subject-catalog/p/mythical-man-month-the-essays-on-software-engineering-anniversary-edition/P200000003438",
+      "description": "Brooks, F.P. (1975; 20th-anniversary ed. 1995). Addison-Wesley. Establishes that adding personnel to a late software project makes it later, because pairwise communication paths grow combinatorially (~n(n-1)/2) with team size while individual output does not. Long-standing, uncontested management-of-engineering classic; used here only as the qualitative mechanism (quadratic coordination-link growth), not as a quantitative team-theory result. Primary source for P0-C team-size / coordination-cost curve in primitives-overview.md #8b.",
+      "url_check": "manual"
+    }
+  ]
+}

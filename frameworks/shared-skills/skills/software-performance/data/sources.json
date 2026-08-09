@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "skill": "software-performance",
+    "updated": "2026-07-11",
+    "total_sources": 9,
+    "description": "Primary profiling, performance-budget, and load-testing sources.",
+    "title": "Software Performance - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "frontend_and_observability": [
+      {
+        "name": "Web Vitals",
+        "url": "https://web.dev/articles/vitals",
+        "description": "Current guidance for LCP, INP, and CLS baselines.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Lighthouse",
+        "url": "https://developer.chrome.com/docs/lighthouse/overview",
+        "description": "Audit guidance for web performance and CI budgets.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry",
+        "url": "https://opentelemetry.io/docs/",
+        "description": "Tracing and metrics instrumentation for performance diagnosis.",
+        "add_as_web_search": true
+      }
+    ],
+    "profiling_and_load": [
+      {
+        "name": "k6 Docs",
+        "url": "https://grafana.com/docs/k6/latest/",
+        "description": "Load-testing scripts, thresholds, and CI integration.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "k6 Versioning and Stability Guarantees",
+        "url": "https://grafana.com/docs/k6/latest/reference/versioning-and-stability-guarantees/",
+        "description": "k6 reached v1.0 in 2025; defines what is covered by semver stability vs. experimental APIs that can still break on minor versions.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "async-profiler Releases",
+        "url": "https://github.com/async-profiler/async-profiler/releases",
+        "description": "JVM CPU/allocation/lock profiler; check current version for native lock-contention detection support before recommending flags.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Go pprof",
+        "url": "https://pkg.go.dev/net/http/pprof",
+        "description": "Go CPU and memory profiling reference.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "py-spy",
+        "url": "https://github.com/benfred/py-spy",
+        "description": "Python production-safe sampling profiler.",
+        "add_as_web_search": true
+      },
+      {
+        "name": ".NET Diagnostics",
+        "url": "https://learn.microsoft.com/en-us/dotnet/core/diagnostics/",
+        "description": "CPU, memory, trace, and performance tooling for .NET.",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

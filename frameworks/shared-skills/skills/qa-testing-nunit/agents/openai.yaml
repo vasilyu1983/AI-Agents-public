@@ -1,0 +1,4 @@
+interface:
+  display_name: "NUnit & Integration Testing"
+  short_description: "Designs NUnit-based C# test suites for API, component, and integration coverage"
+  default_prompt: "Use $qa-testing-nunit for Designs NUnit-based C# test suites for API, component, and integration coverage. Use when creating fixtures, wiring Testcontainers, or reducing flaky CI behavior."

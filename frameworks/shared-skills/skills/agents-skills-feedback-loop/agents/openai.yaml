@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Skills — Feedback Loop"
+  short_description: "Wires per-skill learnings loops, eval-gated promotion, and drift audits"
+  default_prompt: "Use $agents-skills-feedback-loop for adding per-skill learnings loops for dated patterns, mistakes, and domain facts. Use when wiring skill memory, consolidation, eval-gated promotion, or drift audits."

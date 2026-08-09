@@ -1,0 +1,118 @@
+{
+  "metadata": {
+    "title": "Claude Code Hooks + Codex Notifications - Sources",
+    "description": "Primary sources for Claude Code lifecycle hooks and Codex CLI notification callbacks",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "agents-hooks",
+    "total_sources": 17
+  },
+  "official_documentation": [
+    {
+      "name": "Claude Code Hooks",
+      "url": "https://code.claude.com/docs/en/hooks",
+      "description": "Official Claude Code hooks reference covering all 30 events, hook types (command/http/mcp_tool/prompt/agent), schemas, exit codes, matcher syntax, and execution behavior. Re-verified 2026-07-11: confirmed parallel execution of all matching hooks per event (dedup by command+args or URL, no documented tie-break for conflicting allow/deny), `allowManagedHooksOnly` enterprise lockdown, the `if` permission-rule scoping field on tool-event hooks, and that plugin `hooks/hooks.json` plus skill/agent frontmatter (with a `once` run-then-remove flag) are two more hook-bearing scopes beyond the four settings.json locations. This page itself does not state a cross-scope precedence order for hooks — see the Settings entry below for that.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Hooks Guide",
+      "url": "https://code.claude.com/docs/en/hooks-guide",
+      "description": "Official guide with practical hook examples including compaction, config auditing, and workflow automation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Overview",
+      "url": "https://code.claude.com/docs/en/overview",
+      "description": "Official overview of Claude Code capabilities and surrounding platform concepts",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Code Best Practices",
+      "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+      "description": "Official Anthropic engineering guidance for operating Claude Code effectively",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Advanced Configuration",
+      "url": "https://developers.openai.com/codex/config-advanced/",
+      "description": "Official Codex configuration reference including notify callbacks, sandbox, approvals, and TUI notifications",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex CLI Overview",
+      "url": "https://developers.openai.com/codex/cli/overview/",
+      "description": "Official Codex CLI overview for the broader execution model and configuration surface",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Codex Hooks Reference",
+      "url": "https://developers.openai.com/codex/hooks",
+      "description": "Official Codex hooks.json/config.toml [hooks] reference (redirects to learn.chatgpt.com/docs/hooks as of 2026-07). Re-verified 2026-07-11: 10 events (SessionStart, SubagentStart, PreToolUse, PermissionRequest, PostToolUse, PreCompact, PostCompact, UserPromptSubmit, SubagentStop, Stop), only `type: command` handlers execute (prompt/agent parsed-but-skipped, async parsed-but-nonfunctional), Windows supported via `commandWindows` override (corrects an earlier no-Windows assumption), default timeout 600s, toggle via `[features] hooks = false`.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Models Overview (pricing + lineup)",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+      "description": "Official current + legacy Claude model table with API IDs and per-MTok pricing. Verified 2026-07-11: current flagship Claude Opus 4.8 ($5/$25 per MTok), Claude Sonnet 5 ($2/$10 introductory through 2026-08-31, $3/$15 standard after), Claude Haiku 4.5 ($1/$5); Claude Opus 4.7 and Sonnet 4.6 are now legacy-but-served. Use to keep any cost-estimation reference (e.g. budget-and-loop-hooks.md) from drifting.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI API Pricing",
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "description": "Official OpenAI API pricing. Verified 2026-07-11: GPT-5/GPT-5 Mini retired from the pricing page in mid-2026, superseded by GPT-5.4/GPT-5.5 (GPT-5.5 ~$5/$30 per MTok, GPT-5.4 Mini ~$0.75/$4.50). Cross-check before quoting GPT-5-era prices in cost tables.",
+      "add_as_web_search": true
+    }
+  ],
+  "community_resources": [
+    {
+      "name": "Awesome Claude Code",
+      "url": "https://github.com/hesreallyhim/awesome-claude-code",
+      "description": "Curated ecosystem index for Claude Code skills, hooks, and tooling",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Builder.io Claude Code Tips",
+      "url": "https://www.builder.io/blog/claude-code",
+      "description": "Secondary operational tips, including workflow patterns and context usage",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Code Settings & Environment Variables",
+      "url": "https://code.claude.com/docs/en/settings",
+      "description": "Official Claude Code settings reference covering configuration scopes and settings.json structure. Re-verified 2026-07-11: exact precedence is managed > CLI flags > project `.claude/settings.local.json` > project `.claude/settings.json` > user `~/.claude/settings.json` — corrects a prior version of this skill that ranked `.claude/settings.local.json` last instead of third. Note permission rules (and hook registrations) merge across scopes rather than strictly override, so this order mainly resolves single-value setting conflicts.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TDD Guard",
+      "url": "https://github.com/nizos/tdd-guard",
+      "description": "Enforces test-first development for AI agents via hooks; reference for hook-based quality gates that prevent agents from writing implementation before tests",
+      "add_as_web_search": false
+    }
+  ],
+  "security_references": [
+    {
+      "name": "Bash Pitfalls",
+      "url": "https://mywiki.wooledge.org/BashPitfalls",
+      "description": "Common bash scripting mistakes and shell safety issues",
+      "add_as_web_search": false
+    },
+    {
+      "name": "ShellCheck",
+      "url": "https://www.shellcheck.net/",
+      "description": "Static analysis tool for shell scripts used in hooks and callback programs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Google Shell Style Guide",
+      "url": "https://google.github.io/styleguide/shellguide.html",
+      "description": "Shell scripting style and safety practices for maintainable automation",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MIT Safe Shell Guide",
+      "url": "https://sipb.mit.edu/doc/safe-shell/",
+      "description": "Safe shell scripting guidance for hostile or untrusted input handling",
+      "add_as_web_search": false
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "metadata": {
+    "skill": "software-ios-runtime-debugging",
+    "updated": "2026-07-11",
+    "version": "1.1",
+    "total_sources": 18,
+    "description": "Primary references for native iOS build/install/launch proof, simulator control, bundle inspection, XcodeBuildMCP fallback behavior, and runtime performance triage (Instruments, MetricKit, hangs, Jetsam, crash symbolication, thermal, launch time).",
+    "title": "Software Ios Runtime Debugging - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "apple_platform": [
+      {
+        "name": "xcodebuild Documentation",
+        "url": "https://developer.apple.com/documentation/xcode/building-your-app-to-include-debugging-information",
+        "description": "Apple documentation entry point for Xcode build behavior and build products.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "simctl Documentation",
+        "url": "https://developer.apple.com/documentation/xcode/simctl",
+        "description": "Primary reference for simulator automation, install, launch, boot, and shutdown behavior.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Xcode Release Notes Index",
+        "url": "https://developer.apple.com/documentation/xcode-release-notes/",
+        "description": "Use when CLI or simulator behavior may have changed across Xcode releases.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Information Property List",
+        "url": "https://developer.apple.com/documentation/bundleresources/information_property_list",
+        "description": "Primary reference for bundle metadata and executable path expansion.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "xcodebuildmcp": [
+      {
+        "name": "XcodeBuildMCP Repository",
+        "url": "https://github.com/getsentry/XcodeBuildMCP",
+        "description": "Primary upstream repository for XcodeBuildMCP CLI and MCP server.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "XcodeBuildMCP Configuration",
+        "url": "https://raw.githubusercontent.com/getsentry/XcodeBuildMCP/main/docs/CONFIGURATION.md",
+        "description": "Canonical config schema, session defaults, and workflow selection.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "XcodeBuildMCP Tools Reference",
+        "url": "https://raw.githubusercontent.com/getsentry/XcodeBuildMCP/main/docs/TOOLS.md",
+        "description": "Canonical list of MCP tool names and workflow coverage.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "XcodeBuildMCP CLI Reference",
+        "url": "https://raw.githubusercontent.com/getsentry/XcodeBuildMCP/main/docs/CLI.md",
+        "description": "CLI install and setup commands for local fallback guidance.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "apple_platform_additions": [
+      {
+        "name": "Xcode Release Notes",
+        "url": "https://developer.apple.com/documentation/xcode-release-notes",
+        "description": "Authoritative Xcode release notes: LLDB async stepping, new Instruments (SwiftUI, Processor Trace), explicitly built modules. Resolve current Xcode version at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Building with Explicit Module Dependencies",
+        "url": "https://developer.apple.com/documentation/xcode/building-your-project-with-explicit-module-dependencies",
+        "description": "Apple guidance on explicitly built modules: build-cache and DerivedData implications relevant to stale-build triage.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "runtime_performance": [
+      {
+        "name": "Understanding Hangs in Your App",
+        "url": "https://developer.apple.com/documentation/xcode/understanding-hangs-in-your-app",
+        "description": "Apple's canonical hang definition and the ~250ms default hang-reporting threshold used across Instruments and MetricKit.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Addressing Watchdog Terminations",
+        "url": "https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations",
+        "description": "Watchdog termination causes (0x8badf00d), including scene-create and background-task expiration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Identifying High-Memory Use with Jetsam Event Reports",
+        "url": "https://developer.apple.com/documentation/xcode/identifying-high-memory-use-with-jetsam-event-reports",
+        "description": "Apple's guidance on reading jetsam event reports; per-device memory limits are not published and must be treated as empirical.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "MetricKit Documentation",
+        "url": "https://developer.apple.com/documentation/metrickit",
+        "description": "MXMetricPayload / MXDiagnosticPayload capabilities, delivery timing, and the App Store/TestFlight-only constraint.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Analyzing CPU Usage with the Processor Trace Instrument",
+        "url": "https://developer.apple.com/documentation/xcode/analyzing-cpu-usage-with-processor-trace",
+        "description": "Processor Trace hardware requirements (M4+ Apple silicon, A18-class iPhones) — re-verify chip cutoff at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "ProcessInfo.ThermalState",
+        "url": "https://developer.apple.com/documentation/foundation/processinfo/thermalstate-swift.enum",
+        "description": "Thermal state enum and change notification for adaptive workload throttling.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Configuring Your Project to Use Mergeable Libraries",
+        "url": "https://developer.apple.com/documentation/xcode/configuring-your-project-to-use-mergeable-libraries",
+        "description": "Mergeable libraries (Xcode 15+) for static-linking launch speed without losing dynamic-linking debug build times.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "WWDC Instruments and Performance Sessions",
+        "url": "https://developer.apple.com/videos/",
+        "description": "Search each year's WWDC catalog for the current Instruments/responsiveness session; instrument names and templates change across Xcode releases.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "brain_id": "example-policy-brain",
+  "backend": "postgres_pgvector",
+  "corpus_type": "compliance_policy",
+  "embedding_model": "voyage-4-large@1024",
+  "embedding_model_alternatives": [
+    "openai/text-embedding-3-large@1024",
+    "cohere/embed-v4@1536",
+    "gemini/gemini-embedding-2@3072"
+  ],
+  "_model_strings_note": "Verify all model strings and dimensions against current vendor docs before use; embedding model APIs change frequently.",
+  "source_roots": ["policies/", "controls/", "runbooks/"],
+  "chunking": {"strategy": "clause_aware", "target_tokens": 450, "overlap_tokens": 50, "preserve_parents": true},
+  "contextual_retrieval": {"enabled": true, "model": "claude-haiku-4-5", "max_context_tokens": 100, "prompt_cache": true},
+  "retrieval": {
+    "mode": "hybrid_rrf",
+    "candidate_k": 75,
+    "return_k": 12,
+    "rrf_k": 60,
+    "rerank": {"enabled": true, "model": "voyage-rerank-2.5", "top_n": 12},
+    "filters_required": ["authority", "as_of"],
+    "_future": "graph_bounded_hybrid_rrf is a deferred extension; see references/corpus-playbooks.md"
+  },
+  "freshness": {"mode": "reviewed_release", "max_staleness_hours": 720},
+  "eval": {
+    "dataset": "evals/policy-retrieval.jsonl",
+    "primary_metric": "citation_precision",
+    "min_value": 0.95,
+    "secondary_metrics": {"refusal_correctness": 0.9, "effective_time_correctness": 0.95}
+  }
+}
+

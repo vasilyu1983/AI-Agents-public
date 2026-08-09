@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/dev-context-multi-repo/schemas/scan-registry-entry.schema.json",
+  "title": "ScanRegistryEntry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["repo_id", "repo_path", "repo_group", "status"],
+  "properties": {
+    "repo_id": { "type": "string" },
+    "repo_path": { "type": "string" },
+    "repo_group": { "type": "string" },
+    "default_branch": { "type": "string" },
+    "scan_mode": {
+      "type": "string",
+      "enum": ["full", "delta", "single-repo"]
+    },
+    "exclusions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "scanned", "failed", "skipped"]
+    },
+    "last_scanned_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

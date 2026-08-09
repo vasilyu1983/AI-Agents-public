@@ -1,0 +1,306 @@
+{
+  "sources": [
+    {
+      "title": "OWASP Testing Guide v5",
+      "url": "https://owasp.org/www-project-web-security-testing-guide/v52/",
+      "category": "standards",
+      "description": "Comprehensive web application security testing methodology covering all test categories",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "OWASP Top 10:2025",
+      "url": "https://owasp.org/Top10/2025/",
+      "category": "standards",
+      "description": "Current full release. Announced at OWASP Global AppSec Washington D.C., November 2025; final published text released January 2026 — fully current as of 2026-07. New: A03:2025 Software Supply Chain Failures, A10:2025 Mishandling of Exceptional Conditions. SSRF folded into A01 Broken Access Control; A09 renamed Security Logging and Alerting Failures. Supersedes the 2021 edition.",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "OWASP Risk Rating Methodology",
+      "url": "https://owasp.org/www-community/OWASP_Risk_Rating_Methodology",
+      "category": "standards",
+      "description": "OWASP method for combining likelihood and business impact when setting severity and remediation priority",
+      "last_verified": "2026-04"
+    },
+    {
+      "title": "Semgrep Documentation",
+      "url": "https://semgrep.dev/docs/",
+      "category": "sast",
+      "description": "Semgrep setup, rule writing, CI integration, and managed policies",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Semgrep CI Blocking and Errors",
+      "url": "https://semgrep.dev/docs/semgrep-ci/configuring-blocking-and-errors-in-ci",
+      "category": "sast",
+      "description": "Semgrep guidance for policy-driven blocking, non-blocking findings, and CI exit behavior",
+      "last_verified": "2026-04"
+    },
+    {
+      "title": "Semgrep Rules Registry",
+      "url": "https://semgrep.dev/explore",
+      "category": "sast",
+      "description": "Searchable registry of community and pro Semgrep rules",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "CodeQL Documentation",
+      "url": "https://codeql.github.com/docs/",
+      "category": "sast",
+      "description": "CodeQL query language, database creation, CI integration with GitHub Actions",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "OWASP ZAP Documentation",
+      "url": "https://www.zaproxy.org/docs/",
+      "category": "dast",
+      "description": "ZAP automation framework, API scanning, authentication, and CI integration",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Nuclei Documentation",
+      "url": "https://docs.projectdiscovery.io/tools/nuclei/overview",
+      "category": "dast",
+      "description": "Nuclei template-based scanning, custom templates, and CI usage",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Nuclei Templates Repository",
+      "url": "https://github.com/projectdiscovery/nuclei-templates",
+      "category": "dast",
+      "description": "Community-maintained vulnerability detection templates for Nuclei",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Trivy Documentation",
+      "url": "https://aquasecurity.github.io/trivy/",
+      "category": "scanning",
+      "description": "Trivy for container, filesystem, IaC, and SBOM scanning",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Trivy Filtering and Ignore Policy",
+      "url": "https://trivy.dev/docs/latest/configuration/filtering/",
+      "category": "scanning",
+      "description": "Trivy guidance on filtering findings, ignore policy, and policy-tuned gating",
+      "last_verified": "2026-04"
+    },
+    {
+      "title": "gitleaks Documentation",
+      "url": "https://github.com/gitleaks/gitleaks",
+      "category": "secrets",
+      "description": "gitleaks setup, custom patterns, pre-commit hooks, and CI integration",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "TruffleHog Documentation",
+      "url": "https://trufflesecurity.com/trufflehog",
+      "category": "secrets",
+      "description": "TruffleHog secret detection with verification, git history scanning",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Snyk Documentation",
+      "url": "https://docs.snyk.io/",
+      "category": "sca",
+      "description": "Snyk Open Source, Code, Container, and IaC scanning documentation",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "CycloneDX SBOM Specification",
+      "url": "https://cyclonedx.org/specification/overview/",
+      "category": "sbom",
+      "description": "CycloneDX SBOM format specification for software bill of materials",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "SPDX Specification",
+      "url": "https://spdx.github.io/spdx-spec/v3.0.1/",
+      "category": "sbom",
+      "description": "SPDX software bill of materials format, ISO/IEC 5962:2021",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Checkov Documentation",
+      "url": "https://www.checkov.io/1.Welcome/Quick%20Start.html",
+      "category": "iac",
+      "description": "Checkov IaC scanning for Terraform, CloudFormation, Kubernetes, and Helm",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "GitHub Advanced Security Documentation",
+      "url": "https://docs.github.com/en/code-security",
+      "category": "platform",
+      "description": "GitHub code scanning, secret scanning, Dependabot, and security overview",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "NIST SP 800-218 SSDF",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "category": "standards",
+      "description": "Secure Software Development Framework for integrating security into SDLC",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "Claude Code Security Review (Anthropic)",
+      "url": "https://github.com/anthropics/claude-code-security-review",
+      "category": "tools",
+      "description": "Automated PR security vulnerability analysis using Claude; reference for AI-assisted security review integration in CI pipelines",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "container-use (Dagger)",
+      "url": "https://github.com/dagger/container-use",
+      "category": "tools",
+      "description": "Containerized environments for coding agents; reference for sandboxed execution in security-sensitive contexts and agent isolation testing",
+      "last_verified": "2026-03"
+    },
+    {
+      "title": "SLSA Framework",
+      "url": "https://slsa.dev",
+      "category": "supply-chain",
+      "description": "Supply-chain Levels for Software Artifacts — graduated framework for build provenance and artifact integrity. Current spec: v1.1 (April 2025). Three-level Build track (L1–L3); Source and Dependencies tracks under development. v1.0 documentation still referenced in many tools — map L4 (legacy) to Build L3.",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "Sigstore",
+      "url": "https://sigstore.dev",
+      "category": "supply-chain",
+      "description": "Free, open signing infrastructure for software artifacts using keyless OIDC signing via Fulcio CA and Rekor transparency log",
+      "last_verified": "2026-04"
+    },
+    {
+      "title": "in-toto",
+      "url": "https://in-toto.io",
+      "category": "supply-chain",
+      "description": "Framework for recording and verifying each step in a software supply chain via signed attestations; used with SLSA provenance predicates",
+      "last_verified": "2026-04"
+    },
+    {
+      "title": "OWASP API Security Top 10 (2023)",
+      "url": "https://owasp.org/API-Security",
+      "category": "standards",
+      "description": "OWASP API Security Top 10 2023 edition; covers BOLA, broken auth, SSRF, security misconfiguration, and more",
+      "last_verified": "2026-04"
+    },
+    {
+      "title": "OWASP Top 10 for Large Language Model Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications",
+      "category": "standards",
+      "description": "OWASP LLM Top 10 v2 (2025 edition) — prompt injection, sensitive data disclosure, supply chain, excessive agency, and AI-specific risks",
+      "last_verified": "2026-04"
+    },
+    {
+      "title": "OWASP Top 10 (2021, superseded)",
+      "url": "https://owasp.org/www-project-top-ten/2021/",
+      "category": "standards",
+      "description": "Superseded by OWASP Top 10:2025. Retained only as an ID alias: many scanner rule-packs still emit 2021 category tags pending updates — map 2021 IDs to their 2025 equivalents (see references/owasp-top-10-coverage.md).",
+      "last_verified": "2026-05"
+    },
+    {
+      "title": "OWASP Application Security Verification Standard (ASVS) 5.0",
+      "url": "https://owasp.org/www-project-application-security-verification-standard/",
+      "category": "standards",
+      "description": "ASVS 5.0.0 released May 30, 2025. First major update since 4.0 (2019). ~350 requirements across 17 chapters; expanded API, SPA, and microservice coverage; action-oriented requirements; clarifies that black-box testing alone is insufficient for most controls. Supersedes ASVS 4.0.3.",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "OWASP Top 10 for Agentic Applications (2026)",
+      "url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+      "category": "standards",
+      "description": "Separate from LLM Top 10. Announced 2025-12-09 (OWASP GenAI Security Project, Black Hat Europe / OWASP Agentic Security Summit); officially released and current as of 2026-07. Ten categories, prefix ASI01-ASI10: planning, tool use, identity, supply chain, code execution, memory, inter-agent communication, cascading failures, human-agent trust, rogue agents.",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "OpenGrep",
+      "url": "https://github.com/opengrep/opengrep",
+      "category": "sast",
+      "description": "Community fork of Semgrep Community Edition (LGPL-2.1), launched January 2025 after Semgrep moved cross-function taint analysis to its commercial platform. Backed by Aikido, Endor Labs, Jit, Orca Security. Fully backward-compatible with Semgrep rule format, JSON, and SARIF output. No paid tier.",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "SLSA v1.1 Specification",
+      "url": "https://slsa.dev/spec/v1.0/",
+      "category": "supply-chain",
+      "description": "Current approved SLSA specification (v1.1, April 2025). Three-level Build track (L1–L3) plus Source and Dependencies tracks under development. v1.2 RC2 was in public review late 2025.",
+      "last_verified": "2026-06-09"
+    },
+    {
+      "title": "Trivy Supply Chain Compromise Advisory (2026-03-19)",
+      "url": "https://github.com/aquasecurity/trivy/security/advisories/GHSA-69fq-xp46-6x23",
+      "category": "scanning",
+      "description": "2026-03-19: threat actor (attributed to TeamPCP) used compromised credentials to publish a malicious Trivy v0.69.4 release, force-push 75 of 76 version tags in aquasecurity/trivy-action to credential-stealing malware, and replace all 7 tags in aquasecurity/setup-trivy. Root cause: non-atomic credential rotation after an initial disclosure on 2026-03-01 left a valid token active for days. Malware exfiltrated SSH keys, cloud credentials, Kubernetes tokens, and env vars via HTTP POST to a typosquatted domain. Safe versions: Trivy 0.69.2/0.69.3+, trivy-action 0.35.0+, setup-trivy 0.2.6+ (recreated). Key lesson: because version TAGS themselves were force-pushed, a pin like `@0.28.0` is not inherently safe from this class of attack — pin to a release SHA digest, and verify with `gh attestation verify` where attestations exist.",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "CVSS v4.0 (FIRST.org)",
+      "url": "https://www.first.org/cvss/v4.0/",
+      "category": "standards",
+      "description": "Current CVSS major version, released November 2023. As of 2026, NVD publishes CVSS v4.0 alongside v3.1 for newly scored CVEs (official NVD support); historical CVEs keep their v3.1 score and are not being retroactively re-scored. Numeric severity bands (Critical 9.0-10, High 7.0-8.9, Medium 4.0-6.9, Low 0.1-3.9) are unchanged from v3.1, but the underlying vector-to-score computation differs (v4.0 adds Safety, Automatable, and Supplemental/Threat/Environmental metric groups and removes the old impact-subscore formula) — do not treat a v3.1 score and a v4.0 score for two different CVEs as directly comparable without checking which version produced each.",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "EPSS - Exploit Prediction Scoring System (FIRST.org)",
+      "url": "https://www.first.org/epss/",
+      "category": "standards",
+      "description": "FIRST.org SIG. Current model: EPSS v4 (model version 2025.03.14), publishing daily since 2025-03-17. Produces a 0-1 probability that a given CVE will be exploited in the wild in the next 30 days, using CVSS subscores, exploit-code availability, and threat-intel signals as features. Complements, does not replace, CVSS: CVSS scores technical severity if exploited; EPSS scores the probability of exploitation. Use both plus reachability for triage (see Vulnerability Management Workflow in SKILL.md).",
+      "last_verified": "2026-07-11"
+    },
+    {
+      "title": "Betterleaks",
+      "url": "https://github.com/betterleaks/betterleaks",
+      "category": "secrets",
+      "description": "Open-source secrets scanner created 2026-02-03 by the original gitleaks author as gitleaks' de facto successor; co-maintained with long-time gitleaks contributors. Reached v1.1.1 by 2026-03-17 and v1.1.2 by 2026-04-08. gitleaks itself is now feature-complete (security patches only). Betterleaks is young (weeks old at last check) — pilot it alongside gitleaks rather than replacing gitleaks outright until it has a longer track record in your CI.",
+      "last_verified": "2026-07-11"
+    }
+  ],
+  "metadata": {
+    "title": "QA Security Testing - Sources",
+    "description": "Automated security testing pipelines for SAST, DAST, SCA, secret scanning, and container scanning. Use when integrating security scanners into CI, triaging findings, setting vulnerability SLAs, or building security regression tests.",
+    "last_updated": "2026-07-11",
+    "skill": "qa-security-testing"
+  },
+  "game_theory_security_testing": [
+    {
+      "title": "Tambe — Security and Game Theory (2011)",
+      "url": "https://www.cambridge.org/core/books/security-and-game-theory/",
+      "category": "game-theory",
+      "description": "Stackelberg security game formalism with ARMOR (LAX) and IRIS (port) deployed systems. Foundation for scan-scheduling-as-security-game and red-team Stackelberg models.",
+      "last_verified": "2026-05-02"
+    },
+    {
+      "title": "Sandler & Arce — Terrorism and Game Theory (Simulation & Gaming 2003)",
+      "url": "https://journals.sagepub.com/doi/10.1177/1046878103255789",
+      "category": "game-theory",
+      "description": "Attacker cost-benefit and timing models. Applicable to exploitation-window analysis and dependency scan cadence decisions (P4).",
+      "last_verified": "2026-05-02"
+    },
+    {
+      "title": "Gordon & Loeb — Economics of Information Security Investment (ACM TISSEC 2002)",
+      "url": "https://dl.acm.org/doi/10.1145/581271.581274",
+      "category": "game-theory",
+      "description": "Repeated-game investment framing for security testing cadence; dependency scanning frequency as marginal-value optimization.",
+      "last_verified": "2026-05-02"
+    },
+    {
+      "title": "MITRE ATT&CK Framework",
+      "url": "https://attack.mitre.org/",
+      "category": "red-team",
+      "description": "Canonical tactic and technique taxonomy for red-team exercise scoring (R3) and ATT&CK coverage metric in anti-pattern A2.",
+      "last_verified": "2026-05-02"
+    },
+    {
+      "title": "CISA / MITRE ATT&CK Adversary Emulation Plans",
+      "url": "https://attackevals.mitre-engenuity.org/",
+      "category": "red-team",
+      "description": "Operationalized emulation plans grounding attacker behavior models used in red-team Stackelberg framing (P3) and scan scheduling (P1).",
+      "last_verified": "2026-05-02"
+    },
+    {
+      "title": "AFL++ Coverage-Guided Fuzzer",
+      "url": "https://aflplus.plus/",
+      "category": "fuzzing",
+      "description": "Coverage-guided fuzzing feedback loop that approximates multi-armed bandit exploration. Primary reference for fuzz seed selection pattern (P2) and R2.",
+      "last_verified": "2026-05-02"
+    }
+  ]
+}

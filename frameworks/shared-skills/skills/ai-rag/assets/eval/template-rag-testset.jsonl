@@ -1,0 +1,3 @@
+{"query": "What is the warranty period?", "gold_answer": "1 year", "doc_ids": ["docA", "docB"]}
+{"query": "List the main steps in the installation process.", "gold_answer": "Step 1, Step 2, Step 3", "doc_ids": ["docC"]}
+{"query": "Summarize the safety instructions.", "gold_answer": "<expected_summary>", "doc_ids": ["docD"]}

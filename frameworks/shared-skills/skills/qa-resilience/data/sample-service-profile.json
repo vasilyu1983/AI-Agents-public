@@ -1,0 +1,106 @@
+{
+  "service_name": "checkout-service",
+  "description": "Core e-commerce checkout orchestrator. Handles cart finalization, payment processing, inventory reservation, and order creation.",
+  "team": "platform-payments",
+  "language": "Go",
+  "deployment": "Kubernetes",
+  "assessed_date": "2026-03-21",
+  "dependencies": [
+    {
+      "name": "payment-gateway",
+      "type": "external",
+      "criticality": "high",
+      "notes": "Stripe API; any failure blocks order completion"
+    },
+    {
+      "name": "inventory-service",
+      "type": "internal",
+      "criticality": "high",
+      "notes": "gRPC; must reserve stock before charging"
+    },
+    {
+      "name": "order-db",
+      "type": "db",
+      "criticality": "high",
+      "notes": "PostgreSQL primary/replica; orders table"
+    },
+    {
+      "name": "session-cache",
+      "type": "cache",
+      "criticality": "medium",
+      "notes": "Redis; cart state and idempotency keys"
+    },
+    {
+      "name": "fraud-detection",
+      "type": "external",
+      "criticality": "medium",
+      "notes": "Third-party REST API; high p99 latency observed"
+    },
+    {
+      "name": "notification-service",
+      "type": "internal",
+      "criticality": "low",
+      "notes": "Async email/SMS; non-blocking for checkout flow"
+    },
+    {
+      "name": "product-catalog",
+      "type": "internal",
+      "criticality": "low",
+      "notes": "Used only to enrich order receipt; can be stale"
+    }
+  ],
+  "patterns": {
+    "timeouts": {
+      "has_it": true,
+      "configured_correctly": false,
+      "notes": "HTTP client timeout set to 30s globally. No per-dependency tuning; no DB statement timeout; no pool-wait timeout. Deadline propagation across gRPC calls is missing."
+    },
+    "retries": {
+      "has_it": true,
+      "configured_correctly": false,
+      "notes": "Retries enabled for payment-gateway and inventory-service but fixed interval (500ms), no jitter. Non-idempotent order-creation endpoint retried without idempotency key check. No per-try timeout."
+    },
+    "retry_budget": {
+      "has_it": false,
+      "configured_correctly": false,
+      "notes": "No retry budget or token bucket in place. During a partial payment-gateway outage, retry amplification caused 8x spike in outbound requests."
+    },
+    "hedging": {
+      "has_it": false,
+      "configured_correctly": false,
+      "notes": "Not implemented. fraud-detection has p99 of 1.8s; a hedged read to a second endpoint would reduce tail latency. Operation is read-only and safe to hedge."
+    },
+    "circuit_breaker": {
+      "has_it": true,
+      "configured_correctly": false,
+      "notes": "Circuit breaker present for payment-gateway only. inventory-service, fraud-detection, and product-catalog have no breaker. Breaker window is 10s with 2-failure threshold — trips too aggressively on transient errors."
+    },
+    "bulkheads": {
+      "has_it": false,
+      "configured_correctly": false,
+      "notes": "All outbound HTTP calls share a single connection pool (max 100). A spike against fraud-detection exhausted the pool and starved payment-gateway calls. No per-dependency pool isolation."
+    },
+    "graceful_degradation": {
+      "has_it": true,
+      "configured_correctly": true,
+      "notes": "notification-service and product-catalog calls are wrapped in fire-and-forget with a 5s timeout. Order completes without them. Degraded state is logged and increments a counter metric."
+    },
+    "health_checks": {
+      "has_it": true,
+      "configured_correctly": false,
+      "notes": "Liveness probe calls /healthz which checks DB connectivity and Redis ping — too deep. If DB is slow, probe fails, triggering unnecessary pod restarts. Readiness probe is the same endpoint. No startup probe; slow init causes readiness failures on deploy."
+    },
+    "chaos_testing": {
+      "has_it": false,
+      "configured_correctly": false,
+      "notes": "No chaos or fault injection in place. Last DR drill was 14 months ago. Failover behavior for order-db replica promotion has never been tested end-to-end."
+    }
+  },
+  "observability": {
+    "has_tracing": true,
+    "has_alerts": true,
+    "slo_defined": true,
+    "slo_target": "99.5% success rate, p99 < 800ms over 28-day window",
+    "notes": "OTel tracing in place but retry counts and circuit breaker state transitions are not emitted as span attributes. Degraded-mode duration metric exists but has no alert threshold set."
+  }
+}

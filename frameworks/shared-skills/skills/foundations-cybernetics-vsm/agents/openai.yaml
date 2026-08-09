@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cybernetics and VSM Foundations"
+  short_description: "Applies VSM and Ashby's Law to diagnose org or agent-system viability"
+  default_prompt: "Use $foundations-cybernetics-vsm for VSM S1-S5, Ashby's Law, recursion, variety engineering, and algedonic channels when diagnosing org or agent-hierarchy viability."

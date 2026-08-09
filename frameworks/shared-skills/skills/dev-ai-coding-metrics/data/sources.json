@@ -1,0 +1,454 @@
+{
+  "metadata": {
+    "skill": "dev-ai-coding-metrics",
+    "title": "AI Coding Metrics for Engineering Teams",
+    "description": "Curated July 2026 source set for measuring coding assistants and coding agents across adoption, delivery, quality, ROI, experience, and agent-execution outcomes.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "retrieved": "2026-07-11",
+    "last_reviewed": "2026-07-11",
+    "version": "2.4",
+    "total_sources": 33,
+    "schema_notes": {
+      "status": "live | redirect | dead | questionable",
+      "evidence_tier": "peer_reviewed | official | independent | vendor | commentary"
+    },
+    "retired_examples": [
+      {
+        "name": "ETH Zurich Codified Context (old ID)",
+        "former_url": "https://arxiv.org/abs/2603.04692",
+        "reason": "Wrong paper identifier for the relevant repository-context evidence"
+      },
+      {
+        "name": "Amazon CodeWhisperer resources",
+        "former_url": "https://aws.amazon.com/codewhisperer/resources/",
+        "reason": "Replaced by Amazon Q Developer branding and docs"
+      },
+      {
+        "name": "Stripe AI engineering case study",
+        "former_url": "https://stripe.com/blog/ai-engineering",
+        "reason": "Unstable or unavailable as a default source"
+      },
+      {
+        "name": "Coinbase AI engineering metrics case study",
+        "former_url": "https://www.coinbase.com/blog/ai-engineering-metrics",
+        "reason": "Unstable or unavailable as a default source"
+      },
+      {
+        "name": "Shopify memo via social post",
+        "former_url": "https://twitter.com/toaboronkay/status/1907841423613473178",
+        "reason": "Social repost is not a stable primary source"
+      }
+    ]
+  },
+  "categories": {
+    "foundational_research": [
+      {
+        "name": "DORA Research Hub",
+        "url": "https://dora.dev/research/",
+        "type": "research-hub",
+        "description": "Primary home for DORA reports and measurement frameworks.",
+        "relevance": "Top-level source for engineering performance research and current AI-related report links.",
+        "status": "live",
+        "last_verified": "2026-05-17",
+        "evidence_tier": "official",
+        "add_as_web_search": true,
+        "tags": ["dora", "research", "foundational", "engineering-performance"]
+      },
+      {
+        "name": "DORA 2025: AI-Assisted Software Development",
+        "url": "https://cloud.google.com/resources/content/2025-dora-ai-assisted-software-development-report",
+        "type": "report",
+        "description": "DORA's 2025 dedicated report on AI-assisted software development (Google Cloud). Covers how AI affects code quality, flow, delivery throughput, and delivery stability.",
+        "relevance": "Primary 2025/2026 framing for conditional AI impact rather than default optimism. Use this URL for the AI-specific report; the dora.dev hub links the broader annual report.",
+        "status": "live",
+        "last_verified": "2026-05-17",
+        "evidence_tier": "official",
+        "add_as_web_search": true,
+        "tags": ["dora", "ai", "delivery", "quality", "2025", "google-cloud"]
+      },
+      {
+        "name": "DORA 2025: AI Capability Model",
+        "url": "https://dora.dev/ai/capabilities-model/report/",
+        "type": "framework",
+        "description": "Capability model describing the organizational conditions that make AI helpful rather than disruptive.",
+        "relevance": "Useful for separating tool usage from organization readiness and AI-accessibility.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": true,
+        "tags": ["dora", "capability-model", "readiness", "ai-accessibility"]
+      },
+      {
+        "name": "DORA 2026: ROI of AI-Assisted Software Development",
+        "url": "https://dora.dev/ai/roi/report/",
+        "type": "report",
+        "description": "DORA's 2026 follow-up report (dated 2026.01, widely covered April-May 2026) providing a financial framework for AI investment ROI. Introduces the J-Curve adoption model (learning curve, verification tax, downstream process friction), a scenario-based ROI methodology (conservative/realistic/optimistic), and an 'instability tax' finding: AI adoption raises individual effectiveness and code quality but also change-failure rate in the report's illustrative model (5% to 6%). Also finds AI yields 35-40% gains on simple tasks vs. ~10% on complex legacy code.",
+        "relevance": "Distinct from the 2025 DORA AI report — cite separately. Directly reinforces this skill's scenario-planning and task-complexity-segmentation rules in roi-framework.md and benchmarking-methodology.md. Treat the illustrative ~39% first-year ROI figure as a vendor scenario model, not a transferable benchmark.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "add_as_web_search": true,
+        "tags": ["dora", "roi", "j-curve", "instability-tax", "scenario-planning", "2026"]
+      },
+      {
+        "name": "SPACE Framework: A Multidimensional View of Developer Productivity",
+        "url": "https://queue.acm.org/detail.cfm?id=3454124",
+        "type": "academic",
+        "description": "Foundational framework covering satisfaction, performance, activity, communication, and efficiency.",
+        "relevance": "Prevents over-indexing on raw throughput when evaluating AI tools.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "peer_reviewed",
+        "add_as_web_search": false,
+        "tags": ["space", "productivity", "framework", "developer-experience"]
+      },
+      {
+        "name": "METR: Early 2025 AI on Experienced Open-Source Developers (RCT)",
+        "url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
+        "type": "study",
+        "description": "Randomized controlled trial (data Feb–Jun 2025, published 2025-07-10) on realistic open-source tasks with experienced developers. Found participants were ~19% SLOWER with early-2025 AI tools, contrary to developer self-predictions.",
+        "relevance": "Primary counterweight to 'AI always speeds development up' claims; establishes RCT baseline for the early-2025 tooling generation.",
+        "status": "live",
+        "last_verified": "2026-05-17",
+        "evidence_tier": "independent",
+        "add_as_web_search": true,
+        "tags": ["metr", "rct", "real-world", "counterpoint", "slowdown", "2025"]
+      },
+      {
+        "name": "METR 2026 Update: Changing Developer Productivity Experiment Design",
+        "url": "https://metr.org/blog/2026-02-24-uplift-update/",
+        "type": "study",
+        "description": "METR update (2026-02-24) stating they believe developers are likely more sped up in early 2026 than early-2025 estimates suggested, but noting their new experiment gives an unreliable signal because 30–50% of participating developers declined to submit tasks they didn't want to do without AI (selection bias).",
+        "relevance": "Critical for any claim about AI productivity trajectories into 2026: signals likely improvement but with significant methodological caveats. Do not cite as proof of productivity gains without flagging the selection bias.",
+        "status": "live",
+        "last_verified": "2026-05-17",
+        "evidence_tier": "independent",
+        "add_as_web_search": true,
+        "tags": ["metr", "rct", "selection-bias", "2026", "productivity-trajectory", "counterpoint"]
+      },
+      {
+        "name": "METR May 2026 Self-Reported AI Productivity Survey",
+        "url": "https://metr.org/blog/2026-05-11-ai-usage-survey/",
+        "type": "study",
+        "description": "Survey of 349 technical workers (87 engineers, 71 researchers, 129 academics/PhD students, 48 founders/managers), conducted Feb–Apr 2026, published 2026-05-11. Median self-reported value-of-work change: 1.4–2x. METR notes significant skepticism: their 2025 RCT found participants overestimated AI time effects by 40 percentage points on average.",
+        "relevance": "Use when discussing self-reported vs. controlled productivity data. Establishes 2026 trajectory context but must not be cited as controlled evidence of gains. Pair with METR 2025 RCT for balanced framing.",
+        "status": "live",
+        "last_verified": "2026-06-09",
+        "evidence_tier": "independent",
+        "add_as_web_search": true,
+        "tags": ["metr", "survey", "self-reported", "2026", "productivity-trajectory", "counterpoint"]
+      },
+      {
+        "name": "Evaluating the Impact of AGENTS.md Files on LLM-Coding Agents",
+        "url": "https://arxiv.org/abs/2602.11988",
+        "type": "academic",
+        "description": "Study of how repository-level agent instruction files affect cost and task performance.",
+        "relevance": "Use when discussing context engineering as a moderator rather than a guaranteed lift.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "peer_reviewed",
+        "add_as_web_search": true,
+        "tags": ["agents-md", "context", "repo-instructions", "agent-performance"]
+      },
+      {
+        "name": "GitHub Copilot RCT (Peng et al. 2023)",
+        "url": "https://arxiv.org/abs/2302.06590",
+        "type": "academic",
+        "description": "Randomized study often cited for Copilot productivity gains on constrained tasks.",
+        "relevance": "Still useful, but should be interpreted as narrower than current agentic workflows.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "peer_reviewed",
+        "add_as_web_search": false,
+        "tags": ["copilot", "rct", "productivity", "historic-baseline"]
+      },
+      {
+        "name": "Productivity Assessment of Neural Code Completion",
+        "url": "https://arxiv.org/abs/2205.06537",
+        "type": "academic",
+        "description": "Study introducing persistence-oriented metrics for code completion usefulness.",
+        "relevance": "Useful for replacing naive acceptance-rate-only interpretations.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "peer_reviewed",
+        "add_as_web_search": false,
+        "tags": ["completion", "persistence", "metrics", "code-completion"]
+      }
+    ],
+    "adoption_and_sentiment": [
+      {
+        "name": "Stack Overflow Developer Survey 2025",
+        "url": "https://survey.stackoverflow.co/2025/",
+        "type": "survey",
+        "description": "Large annual developer survey with AI adoption and sentiment data.",
+        "relevance": "Useful for directional benchmarking on awareness, usage, and trust.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "independent",
+        "add_as_web_search": true,
+        "tags": ["survey", "adoption", "sentiment", "stackoverflow"]
+      },
+      {
+        "name": "JetBrains Developer Ecosystem Survey 2025",
+        "url": "https://www.jetbrains.com/lp/devecosystem-2025/",
+        "type": "survey",
+        "description": "Developer ecosystem survey with IDE, workflow, and AI assistant adoption data.",
+        "relevance": "Cross-checks GitHub- or ChatGPT-centric usage assumptions.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "independent",
+        "add_as_web_search": true,
+        "tags": ["survey", "jetbrains", "ecosystem", "adoption"]
+      },
+      {
+        "name": "GitHub Octoverse 2025",
+        "url": "https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/",
+        "type": "report",
+        "description": "GitHub's annual report with platform-level development and AI trends.",
+        "relevance": "Good directional source for broad platform usage shifts, not causal ROI claims.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": true,
+        "tags": ["github", "octoverse", "platform-trends", "adoption"]
+      },
+      {
+        "name": "Faros AI Engineering Report 2026",
+        "url": "https://www.faros.ai/research/ai-acceleration-whiplash",
+        "type": "report",
+        "description": "Organizational telemetry (not RCT) from 22,000 developers across 4,000 teams. Key figures: average PR size +51.3%; files touched per developer per month +149.9%; PRs merged without review +31.3%; lead time commit to production +480.4%; throughput (epics per developer) approximately +66%; incidents per PR approximately +243%. Reflects throughput-vs-quality divergence at scale.",
+        "relevance": "Use when illustrating throughput-vs-quality divergence. The PR-merge-without-review (+31.3%) and lead-time (+480.4%) figures are operationally significant — do not cite only throughput. Vendor telemetry, not RCT.",
+        "status": "live",
+        "last_verified": "2026-06-09",
+        "evidence_tier": "vendor",
+        "add_as_web_search": true,
+        "tags": ["faros", "telemetry", "throughput", "review-burden", "incidents", "2026"]
+      },
+      {
+        "name": "GitClear: AI and Code Quality Analysis",
+        "url": "https://www.gitclear.com/coding_on_copilot_data_shows_ais_downward_pressure_on_code_quality",
+        "type": "research",
+        "description": "Large-scale code-churn and reuse analysis focused on AI-assisted code quality patterns.",
+        "relevance": "Useful caution source for rework, churn, and retained-quality discussions.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "independent",
+        "add_as_web_search": true,
+        "tags": ["gitclear", "quality", "churn", "retention"]
+      }
+    ],
+    "operator_content": [
+      {
+        "name": "AI tools are overdelivering: results from our large-scale AI productivity survey | Lenny's Newsletter",
+        "url": "https://www.lennysnewsletter.com/p/ai-tools-are-overdelivering-results",
+        "type": "survey",
+        "description": "Large-scale survey (1,750 respondents) on AI productivity impact across PMs, engineers, designers, and founders. Covers time savings, quality perception, role-specific patterns, and reported downsides.",
+        "relevance": "Independent cross-role productivity data useful for benchmarking self-reported AI impact alongside controlled studies.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "commentary",
+        "add_as_web_search": true,
+        "tags": ["survey", "productivity", "ai-impact", "cross-role", "lenny"]
+      },
+      {
+        "name": "How to measure AI developer productivity in 2025 | Nicole Forsgren (Lenny's Podcast)",
+        "url": "https://www.lennysnewsletter.com/p/how-to-measure-ai-developer-productivity",
+        "type": "podcast",
+        "description": "Nicole Forsgren (creator of DORA and SPACE frameworks) discusses current approaches to measuring AI developer productivity, gaps in existing metrics, and practical guidance for engineering leaders.",
+        "relevance": "Direct bridge between DORA/SPACE frameworks and AI-era measurement; from the primary author of both frameworks.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "commentary",
+        "add_as_web_search": true,
+        "tags": ["dora", "space", "measurement", "ai-productivity", "forsgren", "lenny"]
+      }
+    ],
+    "agent_evaluation": [
+      {
+        "name": "OpenAI SWE-Lancer",
+        "url": "https://openai.com/index/swe-lancer/",
+        "type": "benchmark",
+        "description": "OpenAI benchmark and evaluation framing for freelance-style software engineering tasks.",
+        "relevance": "Better fit for agentic software work than narrow completion-only benchmarks.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": true,
+        "tags": ["swe-lancer", "agents", "benchmark", "task-completion"]
+      },
+      {
+        "name": "RE-Bench",
+        "url": "https://arxiv.org/abs/2411.15114",
+        "type": "benchmark",
+        "description": "Benchmark focused on realistic and economically meaningful software engineering work.",
+        "relevance": "Useful for benchmark-to-production gap discussions in agent evaluations.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "peer_reviewed",
+        "add_as_web_search": true,
+        "tags": ["re-bench", "benchmark", "realistic", "agents"]
+      },
+      {
+        "name": "GitHub Blog: Validating Agentic Behavior",
+        "url": "https://github.blog/ai-and-ml/generative-ai/validating-agentic-behavior-when-correct-isnt-deterministic/",
+        "type": "article",
+        "description": "Discussion of practical validation for nondeterministic agentic behavior in coding workflows.",
+        "relevance": "Good support for treating benchmark wins as insufficient without workflow-level validation and production evidence.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": true,
+        "tags": ["benchmarks", "saturation", "github", "evaluation"]
+      }
+    ],
+    "measurement_tool_docs": [
+      {
+        "name": "GitHub Copilot Admin Metrics",
+        "url": "https://docs.github.com/en/copilot/concepts/copilot-usage-metrics",
+        "type": "documentation",
+        "description": "Current GitHub documentation for Copilot metrics, entitlements, and admin measurement.",
+        "relevance": "Primary first-party reference for GitHub Copilot adoption and usage definitions.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": true,
+        "tags": ["github", "copilot", "metrics", "admin", "official"]
+      },
+      {
+        "name": "ChatGPT Enterprise and Edu User Analytics",
+        "url": "https://help.openai.com/en/articles/10875114-user-analytics-for-chatgpt-enterprise-and-edu-public-beta",
+        "type": "documentation",
+        "description": "OpenAI documentation for ChatGPT workspace analytics.",
+        "relevance": "Useful when measuring workspace adoption separately from API-driven coding workflows.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": true,
+        "tags": ["openai", "chatgpt", "analytics", "workspace"]
+      },
+      {
+        "name": "Amazon Q Developer",
+        "url": "https://aws.amazon.com/q/developer/",
+        "type": "documentation",
+        "description": "Official Amazon Q Developer landing page replacing historical CodeWhisperer references.",
+        "relevance": "Use for current naming and product-surface references instead of legacy CodeWhisperer URLs.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": true,
+        "tags": ["amazon-q", "aws", "developer-tools", "current-product"]
+      },
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "type": "documentation",
+        "description": "Vendor-neutral observability framework docs.",
+        "relevance": "Use when instrumenting custom events, traces, and workflow metadata for internal AI coding systems.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": false,
+        "tags": ["opentelemetry", "observability", "instrumentation"]
+      },
+      {
+        "name": "PostHog Documentation",
+        "url": "https://posthog.com/docs",
+        "type": "documentation",
+        "description": "Product analytics and experimentation docs.",
+        "relevance": "Useful for instrumenting internal AI workflow events and experiments.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": false,
+        "tags": ["posthog", "analytics", "experimentation"]
+      },
+      {
+        "name": "Apache DevLake",
+        "url": "https://devlake.apache.org/",
+        "type": "documentation",
+        "description": "Open-source engineering metrics platform with DORA support.",
+        "relevance": "Useful for team-level delivery instrumentation and baselining.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": true,
+        "tags": ["devlake", "dora", "delivery", "open-source"]
+      }
+    ],
+    "platform_and_practice": [
+      {
+        "name": "DX Platform",
+        "url": "https://getdx.com/",
+        "type": "platform",
+        "description": "Developer experience platform and survey methodology vendor.",
+        "relevance": "Useful for survey design patterns and DX language, but treat benchmarking claims as vendor evidence.",
+        "status": "live",
+        "last_verified": "2026-05-17",
+        "evidence_tier": "vendor",
+        "add_as_web_search": true,
+        "tags": ["dx", "surveys", "developer-experience", "vendor"]
+      },
+      {
+        "name": "DX Core 4: Developer Productivity Measurement Framework",
+        "url": "https://getdx.com/research/dx-core-4/",
+        "type": "framework",
+        "description": "DX's four-dimension developer productivity framework. Covers speed, effectiveness, quality, and impact. A framework for measuring holistic developer productivity beyond narrow throughput metrics.",
+        "relevance": "Use when the team needs a structured measurement model that goes beyond DORA delivery metrics. Treat specific benchmark figures as vendor evidence pending independent replication.",
+        "status": "live",
+        "last_verified": "2026-05-17",
+        "evidence_tier": "vendor",
+        "add_as_web_search": true,
+        "tags": ["dx", "core-4", "framework", "developer-productivity", "measurement"]
+      },
+      {
+        "name": "LinearB Engineering Benchmarks",
+        "url": "https://linearb.io/platform/engineering-metrics",
+        "type": "platform",
+        "description": "Benchmark content for delivery metrics and engineering analytics.",
+        "relevance": "Useful for directional comparison only; not a substitute for internal controls.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "vendor",
+        "add_as_web_search": true,
+        "tags": ["linearb", "benchmarks", "delivery", "vendor"]
+      },
+      {
+        "name": "Swarmia Engineering Metrics",
+        "url": "https://www.swarmia.com/engineering-metrics/",
+        "type": "platform",
+        "description": "Engineering metrics and workflow commentary from a vendor platform.",
+        "relevance": "Useful for implementation ideas, but treat performance claims as vendor evidence.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "vendor",
+        "add_as_web_search": true,
+        "tags": ["swarmia", "engineering-metrics", "vendor"]
+      },
+      {
+        "name": "Grafana Dashboards",
+        "url": "https://grafana.com/grafana/dashboards/",
+        "type": "tool",
+        "description": "Visualization catalog for dashboards and engineering telemetry.",
+        "relevance": "Useful for packaging delivery and quality metrics once definitions are stable.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": false,
+        "tags": ["grafana", "dashboards", "visualization"]
+      },
+      {
+        "name": "SonarQube",
+        "url": "https://www.sonarsource.com/products/sonarqube/",
+        "type": "tool",
+        "description": "Static analysis and code quality platform.",
+        "relevance": "Useful as a quality-side measurement input when tracking AI-generated or AI-assisted code.",
+        "status": "live",
+        "last_verified": "2026-05-15",
+        "evidence_tier": "official",
+        "add_as_web_search": false,
+        "tags": ["sonarqube", "quality", "security", "static-analysis"]
+      }
+    ]
+  }
+}

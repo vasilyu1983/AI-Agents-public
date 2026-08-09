@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/dev-context-code-graph/schemas/code-profile.schema.json",
+  "title": "CodeProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "repo_id",
+    "repo_name",
+    "repo_path",
+    "languages",
+    "files",
+    "symbols",
+    "relations",
+    "summary",
+    "evidence",
+    "confidence_score",
+    "last_scanned_at"
+  ],
+  "properties": {
+    "repo_id": { "type": "string" },
+    "repo_name": { "type": "string" },
+    "repo_path": { "type": "string" },
+    "languages": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "path", "language", "kind", "parse_status"],
+        "properties": {
+          "id": { "type": "string" },
+          "path": { "type": "string" },
+          "language": { "type": "string" },
+          "kind": {
+            "type": "string",
+            "enum": ["source", "test", "config", "unknown"]
+          },
+          "parse_status": {
+            "type": "string",
+            "enum": ["parsed", "heuristic", "unsupported", "error", "skipped"]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "label", "path", "language", "parent_id"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["module", "class", "function", "method", "test"]
+          },
+          "label": { "type": "string" },
+          "path": { "type": "string" },
+          "language": { "type": "string" },
+          "parent_id": { "type": "string" },
+          "line_start": { "type": "integer", "minimum": 1 },
+          "line_end": { "type": "integer", "minimum": 1 },
+          "signature": { "type": "string" },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "target", "relation", "group", "confidence"],
+        "properties": {
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "relation": {
+            "type": "string",
+            "enum": ["contains", "defines", "imports", "calls", "inherits", "references", "tests"]
+          },
+          "group": {
+            "type": "string",
+            "enum": ["structural", "dependency", "behavioral", "semantic"]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "summary": { "type": "string" },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "reason"],
+        "properties": {
+          "path": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "last_scanned_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

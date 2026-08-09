@@ -1,0 +1,4 @@
+interface:
+  display_name: "Resilience QA"
+  short_description: "Designs and tests distributed-system resilience"
+  default_prompt: "Use $qa-resilience for Designs and tests distributed-system resilience. Use when adding retries, deadlines, hedging, circuit breakers, overload protection, chaos experiments, or SLO reliability gates."

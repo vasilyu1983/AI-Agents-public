@@ -1,0 +1,406 @@
+{
+  "metadata": {
+    "skill": "data-metabase",
+    "updated": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 22,
+    "description": "Official Metabase documentation links for API automation, Agent API, Remote Sync, embedding, tenants, permissions, and release tracking.",
+    "version": "1.3",
+    "title": "Data Metabase - Sources",
+    "trust_tiers": {
+      "primary": "Official project, vendor, standards, or source documentation. Prefer for factual claims and current behavior.",
+      "secondary": "Tutorials, landscape reports, community references, and implementation examples. Use for framing after checking primary sources."
+    },
+    "default_source_policy": "Use current Metabase docs first for endpoint shapes, auth, plan availability, Remote Sync, embedding, Agent API, and release-sensitive UI surfaces. Use Learn/tutorial pages for implementation context only."
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Metabase API documentation",
+        "url": "https://www.metabase.com/docs/latest/api",
+        "type": "documentation",
+        "relevance": "Primary reference for classic Metabase REST API endpoints, request shapes, and auth notes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "api"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      },
+      {
+        "name": "Metabase API changelog",
+        "url": "https://www.metabase.com/docs/latest/developers-guide/api-changelog",
+        "type": "documentation",
+        "relevance": "Track endpoint additions, removals, deprecations, and behavior changes across Metabase versions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "api",
+          "changelog"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      },
+      {
+        "name": "Metabase administration guide",
+        "url": "https://www.metabase.com/docs/latest/configuring-metabase/start",
+        "type": "documentation",
+        "relevance": "Admin settings, security controls, and environment configuration relevant to API access.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "admin",
+          "security"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      },
+      {
+        "name": "Working with the Metabase API (Learn)",
+        "url": "https://www.metabase.com/learn/metabase-basics/administration/administration-and-operation/metabase-api",
+        "type": "tutorial",
+        "relevance": "Practical guide covering session caching, 401 handling, browser DevTools technique for discovering API shapes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "api",
+          "tutorial"
+        ],
+        "trust_tier": "secondary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 180
+      },
+      {
+        "name": "API keys documentation",
+        "url": "https://www.metabase.com/docs/latest/people-and-groups/api-keys",
+        "type": "documentation",
+        "relevance": "API key creation, group assignment, and permission scoping for programmatic access.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "api",
+          "authentication"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      },
+      {
+        "name": "Metabase CLI documentation",
+        "url": "https://www.metabase.com/docs/latest/installation-and-operation/metabase-cli",
+        "type": "documentation",
+        "relevance": "Official @metabase/cli (v62+): create questions, dashboards, documents, and transforms from the terminal or an AI agent, distinct from the JAR server-admin commands.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "cli",
+          "automation",
+          "v62"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      }
+    ],
+    "promotion_and_sync": [
+      {
+        "name": "Remote Sync",
+        "url": "https://www.metabase.com/docs/latest/installation-and-operation/remote-sync",
+        "type": "documentation",
+        "relevance": "Git-backed synchronization and promotion workflow for collections, models, questions, and dashboards.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "remote-sync",
+          "deployment"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      },
+      {
+        "name": "Serialization documentation",
+        "url": "https://www.metabase.com/docs/latest/installation-and-operation/serialization",
+        "type": "documentation",
+        "relevance": "Export/import dashboards and questions between environments (Pro/Enterprise). Entity IDs for cross-instance stability.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "serialization",
+          "migration"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      }
+    ],
+    "embedding_and_tenants": [
+      {
+        "name": "Embedding introduction",
+        "url": "https://www.metabase.com/docs/latest/embedding/introduction",
+        "type": "documentation",
+        "relevance": "Entry point for public, signed, interactive, and modular embedding approaches.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "embedding"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      },
+      {
+        "name": "Tenants",
+        "url": "https://www.metabase.com/docs/latest/embedding/tenants",
+        "type": "documentation",
+        "relevance": "Multi-tenant isolation model for embedded analytics and routed data/model access.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "tenants",
+          "embedding"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      },
+      {
+        "name": "Embedding permissions",
+        "url": "https://www.metabase.com/docs/latest/permissions/embedding",
+        "type": "documentation",
+        "relevance": "Permissions model for embedding surfaces, tenants, and end-user access isolation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "embedding",
+          "permissions"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      }
+    ],
+    "ai_and_semantic_access": [
+      {
+        "name": "Agent API",
+        "url": "https://www.metabase.com/docs/latest/ai/agent-api?use_case=bi",
+        "type": "documentation",
+        "relevance": "Versioned API surface for AI agents to discover semantic context and construct Metabase queries safely.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "agent-api",
+          "ai"
+        ],
+        "trust_tier": "secondary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 180
+      },
+      {
+        "name": "Data model sync",
+        "url": "https://www.metabase.com/docs/latest/data-modeling/start",
+        "type": "documentation",
+        "relevance": "Data model synchronization guidance for keeping semantic definitions aligned across environments and teams.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "semantic-model",
+          "sync"
+        ],
+        "trust_tier": "secondary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 180
+      }
+    ],
+    "dashboards_and_visuals": [
+      {
+        "name": "Dashboards",
+        "url": "https://www.metabase.com/docs/latest/dashboards/introduction",
+        "type": "documentation",
+        "relevance": "Dashboard concepts, filters, tabs, and layout behavior relevant to automation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "dashboards"
+        ],
+        "trust_tier": "secondary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 180
+      },
+      {
+        "name": "Visualizations",
+        "url": "https://www.metabase.com/docs/latest/questions/sharing/visualizing-results",
+        "type": "documentation",
+        "relevance": "Chart types, display behavior, and visualization settings guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "charts",
+          "visualization"
+        ],
+        "trust_tier": "secondary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 180
+      }
+    ],
+    "permissions_and_governance": [
+      {
+        "name": "Collections",
+        "url": "https://www.metabase.com/docs/latest/permissions/collections",
+        "type": "documentation",
+        "relevance": "How collections work and how permissions interact with saved questions and dashboards.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "collections",
+          "permissions"
+        ],
+        "trust_tier": "secondary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 180
+      },
+      {
+        "name": "Permissions overview",
+        "url": "https://www.metabase.com/docs/latest/permissions/start",
+        "type": "documentation",
+        "relevance": "Permission model for databases, collections, groups, and automation accounts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "permissions"
+        ],
+        "trust_tier": "secondary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 180
+      }
+    ],
+    "releases_and_secondary": [
+      {
+        "name": "Metabase releases page",
+        "url": "https://www.metabase.com/releases",
+        "type": "release-notes",
+        "relevance": "Canonical release index. v59 (Mar 2026): Data Studio, AI SQL in OSS. v60 (Apr 2026): official MCP server, Metabot in Slack, AI open-sourced. v61 (May 2026): AI governance, dashboards-as-code. v62 (Jun 2026, current): official Metabase CLI, MCP SQL/collection-write + interactive charts, Schema Viewer, custom visualizations, Alert Management hub, Library sub-collections. v63 reported in beta as of Jul 2026. Verify /docs/latest before citing specific behavior.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "release",
+          "v59",
+          "v60",
+          "v61"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 60
+      },
+      {
+        "name": "Metabase GitHub repository",
+        "url": "https://github.com/metabase/metabase",
+        "type": "reference",
+        "relevance": "Source of truth for edge-case behavior and API internals when docs are ambiguous.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "metabase",
+          "source"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      },
+      {
+        "name": "Metabase MCP server documentation",
+        "url": "https://www.metabase.com/docs/latest/ai/mcp",
+        "type": "documentation",
+        "relevance": "Official MCP server (v60+): connects Metabase to Claude, Cursor, VS Code, and other MCP clients. Enables dashboards-as-code from AI terminals (v61+). As of v62, can execute SQL, create collections, and render interactive charts in the AI client. Same permissions as authenticated user.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "mcp",
+          "ai",
+          "v60"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      },
+      {
+        "name": "AI in Metabase documentation",
+        "url": "https://www.metabase.com/docs/latest/ai/start",
+        "type": "documentation",
+        "relevance": "Entry point for all AI features: Metabot, Agent API, MCP server, AI settings, and AI governance (v61+). Covers plan availability and per-feature access controls.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "tags": [
+          "metabase",
+          "ai",
+          "metabot",
+          "governance"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      },
+      {
+        "name": "MBQL Reference (GitHub Wiki, legacy)",
+        "url": "https://github.com/metabase/metabase/wiki/(Incomplete)-MBQL-Reference",
+        "type": "reference",
+        "relevance": "Legacy reference for MBQL concepts. Useful as a secondary source, but treat it as incomplete and confirm against exported payloads.",
+        "update_frequency": "periodic",
+        "access": "free",
+        "add_as_web_search": false,
+        "tags": [
+          "metabase",
+          "mbql",
+          "legacy"
+        ],
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90
+      }
+    ]
+  }
+}

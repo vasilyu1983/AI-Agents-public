@@ -1,0 +1,4 @@
+interface:
+  display_name: "Accessibility QA"
+  short_description: "Builds accessibility testing workflows for WCAG 2.2 compliance"
+  default_prompt: "Use $qa-testing-accessibility for Builds accessibility testing workflows for WCAG 2.2 compliance. Use when adding axe-core or Lighthouse audits, CI accessibility gates, or screen-reader test coverage."

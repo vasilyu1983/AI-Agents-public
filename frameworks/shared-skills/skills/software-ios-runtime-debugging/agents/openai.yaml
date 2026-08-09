@@ -1,0 +1,11 @@
+interface:
+  display_name: "iOS Runtime Debugging"
+  short_description: "Build/install/launch proof, hang/crash/jank/memory triage for native iOS apps"
+  default_prompt: "Use $software-ios-runtime-debugging to prove build/install/launch truth for a native iOS app, then triage hangs, crashes, jank, memory kills, or launch-time regressions with evidence."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "XcodeBuildMCP"
+      description: "Optional XcodeBuildMCP server for simulator build, install, launch, screenshot, and log inspection when available"
+policy:
+  allow_implicit_invocation: true

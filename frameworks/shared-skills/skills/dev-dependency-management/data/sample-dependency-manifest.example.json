@@ -1,0 +1,280 @@
+{
+  "project_name": "acme-platform",
+  "description": "Node.js API + Python ML service polyglot monorepo",
+  "manifest_date": "2026-03-21",
+  "ecosystems": [
+    {
+      "name": "nodejs",
+      "package_manager": "pnpm",
+      "package_manager_version": "9.1.0",
+      "lockfile_present": true,
+      "lockfile_file": "pnpm-lock.yaml",
+      "package_manager_pinned": true,
+      "packageManager_field": "pnpm@9.1.0",
+      "frozen_install_in_ci": true,
+      "update_policy": {
+        "patch": "weekly",
+        "minor": "monthly",
+        "major": "manual",
+        "automation_tool": "renovate"
+      },
+      "security_scanning": {
+        "tool": "npm audit / socket.dev",
+        "active": true,
+        "last_run_date": "2026-03-20",
+        "runs_in_ci": true
+      },
+      "sbom_generation": {
+        "tool": "npm sbom",
+        "active": false,
+        "format": "spdx"
+      },
+      "dependencies": [
+        {
+          "name": "express",
+          "version": "4.18.2",
+          "type": "prod",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 40,
+          "is_maintained": true
+        },
+        {
+          "name": "lodash",
+          "version": "4.17.19",
+          "type": "prod",
+          "known_vulnerability": true,
+          "severity": "medium",
+          "days_since_update": 620,
+          "is_maintained": false
+        },
+        {
+          "name": "axios",
+          "version": "0.21.1",
+          "type": "prod",
+          "known_vulnerability": true,
+          "severity": "high",
+          "days_since_update": 890,
+          "is_maintained": false
+        },
+        {
+          "name": "jsonwebtoken",
+          "version": "9.0.0",
+          "type": "prod",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 95,
+          "is_maintained": true
+        },
+        {
+          "name": "dotenv",
+          "version": "16.3.1",
+          "type": "prod",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 55,
+          "is_maintained": true
+        },
+        {
+          "name": "serialize-javascript",
+          "version": "3.1.0",
+          "type": "prod",
+          "known_vulnerability": true,
+          "severity": "critical",
+          "days_since_update": 1100,
+          "is_maintained": false
+        },
+        {
+          "name": "zod",
+          "version": "3.22.4",
+          "type": "prod",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 30,
+          "is_maintained": true
+        },
+        {
+          "name": "prisma",
+          "version": "5.10.0",
+          "type": "prod",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 18,
+          "is_maintained": true
+        },
+        {
+          "name": "vitest",
+          "version": "1.3.1",
+          "type": "dev",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 22,
+          "is_maintained": true
+        },
+        {
+          "name": "eslint",
+          "version": "8.57.0",
+          "type": "dev",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 35,
+          "is_maintained": true
+        },
+        {
+          "name": "node-forge",
+          "version": "0.10.0",
+          "type": "dev",
+          "known_vulnerability": true,
+          "severity": "high",
+          "days_since_update": 750,
+          "is_maintained": false
+        },
+        {
+          "name": "typescript",
+          "version": "5.3.3",
+          "type": "dev",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 45,
+          "is_maintained": true
+        }
+      ]
+    },
+    {
+      "name": "python",
+      "package_manager": "uv",
+      "package_manager_version": "0.3.1",
+      "lockfile_present": true,
+      "lockfile_file": "uv.lock",
+      "package_manager_pinned": false,
+      "frozen_install_in_ci": true,
+      "update_policy": {
+        "patch": "monthly",
+        "minor": "quarterly",
+        "major": "manual",
+        "automation_tool": "dependabot"
+      },
+      "security_scanning": {
+        "tool": "pip-audit",
+        "active": true,
+        "last_run_date": "2026-03-15",
+        "runs_in_ci": true
+      },
+      "sbom_generation": {
+        "tool": "cyclonedx-py",
+        "active": true,
+        "format": "cyclonedx-1.5"
+      },
+      "dependencies": [
+        {
+          "name": "fastapi",
+          "version": "0.110.0",
+          "type": "prod",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 28,
+          "is_maintained": true
+        },
+        {
+          "name": "pydantic",
+          "version": "2.6.4",
+          "type": "prod",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 20,
+          "is_maintained": true
+        },
+        {
+          "name": "numpy",
+          "version": "1.24.0",
+          "type": "prod",
+          "known_vulnerability": true,
+          "severity": "medium",
+          "days_since_update": 400,
+          "is_maintained": true
+        },
+        {
+          "name": "Pillow",
+          "version": "9.3.0",
+          "type": "prod",
+          "known_vulnerability": true,
+          "severity": "high",
+          "days_since_update": 510,
+          "is_maintained": true
+        },
+        {
+          "name": "cryptography",
+          "version": "41.0.7",
+          "type": "prod",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 60,
+          "is_maintained": true
+        },
+        {
+          "name": "httpx",
+          "version": "0.27.0",
+          "type": "prod",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 35,
+          "is_maintained": true
+        },
+        {
+          "name": "sqlalchemy",
+          "version": "2.0.28",
+          "type": "prod",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 25,
+          "is_maintained": true
+        },
+        {
+          "name": "PyYAML",
+          "version": "5.3.1",
+          "type": "prod",
+          "known_vulnerability": true,
+          "severity": "critical",
+          "days_since_update": 1200,
+          "is_maintained": true
+        },
+        {
+          "name": "requests",
+          "version": "2.28.2",
+          "type": "prod",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 120,
+          "is_maintained": true
+        },
+        {
+          "name": "pytest",
+          "version": "8.1.1",
+          "type": "dev",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 18,
+          "is_maintained": true
+        },
+        {
+          "name": "ruff",
+          "version": "0.3.4",
+          "type": "dev",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 12,
+          "is_maintained": true
+        },
+        {
+          "name": "mypy",
+          "version": "1.9.0",
+          "type": "dev",
+          "known_vulnerability": false,
+          "severity": "none",
+          "days_since_update": 30,
+          "is_maintained": true
+        }
+      ]
+    }
+  ]
+}

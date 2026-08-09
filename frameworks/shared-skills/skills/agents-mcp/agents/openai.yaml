@@ -1,0 +1,4 @@
+interface:
+  display_name: "MCP (Model Context Protocol)"
+  short_description: "Configures and hardens MCP servers for agent tooling"
+  default_prompt: "Use $agents-mcp to configure and harden MCP servers for Claude Code and Codex agents. Use when connecting databases, APIs, files, or SaaS via MCP, or building custom servers."

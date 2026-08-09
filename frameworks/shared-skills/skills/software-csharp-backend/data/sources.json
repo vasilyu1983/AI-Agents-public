@@ -1,0 +1,174 @@
+{
+  "metadata": {
+    "title": "C# Backend - Sources",
+    "description": "Official sources for modern .NET backend architecture, ASP.NET Core API defaults, EF Core 10, resilience, caching, observability, GC/runtime, and compatibility guidance. Verify volatile dates against the live support-policy page before relying on them.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "software-csharp-backend",
+    "total_sources": 26
+  },
+  "official_documentation": [
+    {
+      "name": "What's new in .NET 10",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-10/overview",
+      "description": "Current platform-level changes that affect backend service defaults, runtime choices, and modern library usage.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "What's new in ASP.NET Core 10.0",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-10.0?view=aspnetcore-10.0",
+      "description": "Current ASP.NET Core changes for OpenAPI, diagnostics, auth, hosting, and API behavior.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "What's new in C# 14",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14",
+      "description": "Current language feature reference for modern C# code-generation and readability decisions.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Dependency injection in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection",
+      "description": "DI fundamentals including service registration patterns and keyed services guidance.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Options pattern in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/options",
+      "description": "Strongly typed configuration, validation, and startup-fail-fast patterns.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Logging in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/logging",
+      "description": "Core logging behavior, providers, scopes, and structured logging defaults.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Caching in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/caching",
+      "description": "Current caching guidance including HybridCache and cache abstraction defaults.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TimeProvider overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/datetime/timeprovider-overview",
+      "description": "Current clock abstraction guidance for deterministic testing and time-sensitive services.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HTTP resilience in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience",
+      "description": "Standard resilience handlers, retry semantics, timeouts, and unsafe-method configuration.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Entity Framework Core",
+      "url": "https://learn.microsoft.com/en-us/ef/core/",
+      "description": "Current EF Core guidance and provider-specific documentation entry point.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "What's new in EF Core 10",
+      "url": "https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-10.0/whatsnew",
+      "description": "Current EF Core 10 feature reference for query filters, LINQ, and persistence behavior.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ASP.NET Core error handling",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-10.0",
+      "description": "ProblemDetails, exception handling middleware, and IExceptionHandler usage.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ASP.NET Core OpenAPI overview",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/overview?view=aspnetcore-10.0",
+      "description": "Built-in OpenAPI generation, transformer model, and modern API host defaults.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ASP.NET Core rate limiting",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?view=aspnetcore-10.0",
+      "description": "Built-in rate limiting middleware and policy configuration for public APIs.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ASP.NET Core request timeouts",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/timeouts?view=aspnetcore-10.0",
+      "description": "Request timeout middleware and endpoint-level timeout policies.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Native AOT deployment for ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/native-aot?view=aspnetcore-10.0",
+      "description": "Current guidance for when Native AOT is a good fit for web APIs and background services, including reflection/EF Core limitations.",
+      "add_as_web_search": true
+    },
+    {
+      "name": ".NET and .NET Core official support policy",
+      "url": "https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core",
+      "description": "Authoritative, always-current LTS/STS end-of-support dates; verify .NET 8/9/10 support windows here before quoting a specific date.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Workstation vs. server garbage collection (GC)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/workstation-server-gc",
+      "description": "Current guidance on GC mode selection, including DATAS (Dynamic Adaptation to Application Sizes) defaults by version.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "IHttpClientFactory guidance",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests",
+      "description": "Why IHttpClientFactory replaces raw HttpClient instantiation; socket exhaustion and DNS-staleness rationale.",
+      "add_as_web_search": true
+    }
+  ],
+  "breaking_changes": [
+    {
+      "name": "WithOpenApi is deprecated",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/breaking-changes/10/withopenapi-deprecated?view=aspnetcore-10.0",
+      "description": "Tracks the .NET 10 deprecation of WithOpenApi in favor of built-in OpenAPI services and transformers.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Exception handler middleware suppresses diagnostics by default",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/breaking-changes/10/exception-handler-diagnostics-suppressed?view=aspnetcore-10.0",
+      "description": "Documents the .NET 10 diagnostics change and SuppressDiagnosticsCallback behavior.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ISystemClock is obsolete",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/breaking-changes/8/isystemclock-obsolete?view=aspnetcore-10.0",
+      "description": "Documents the move from ISystemClock to TimeProvider-based patterns.",
+      "add_as_web_search": true
+    }
+  ],
+  "distributed_runtime": [
+    {
+      "name": "Aspire service defaults",
+      "url": "https://aspire.dev/fundamentals/service-defaults/",
+      "description": "Optional composition profile for distributed .NET services using shared defaults for telemetry, health, and resilience.",
+      "add_as_web_search": true
+    }
+  ],
+  "architecture_and_patterns": [
+    {
+      "name": ".NET microservices architecture eBook",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/",
+      "description": "Official architecture guidance for service boundaries, DDD/CQRS tradeoffs, and distributed system design.",
+      "add_as_web_search": true
+    },
+    {
+      "name": ".NET DDD and CQRS patterns",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/",
+      "description": "Official reference for domain/application boundaries and CQRS usage without imposing a single library stack.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Modular Monolith Primer",
+      "url": "https://www.kamilgrzybek.com/blog/posts/modular-monolith-primer",
+      "description": "Supplemental modular monolith reference that remains useful beyond the official docs.",
+      "add_as_web_search": true
+    }
+  ]
+}

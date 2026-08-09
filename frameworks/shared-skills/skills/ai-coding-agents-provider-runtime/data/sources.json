@@ -1,0 +1,127 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-provider-runtime",
+    "title": "AI Coding Agents Provider Runtime - Sources",
+    "description": "Official documentation and implementation references for provider abstraction, streaming normalization, retries, and fallback routing in coding-agent runtimes",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 12,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "OpenAI API Documentation",
+        "url": "https://platform.openai.com/docs/",
+        "type": "documentation",
+        "relevance": "Primary reference for model requests, streaming, tools, and usage accounting on OpenAI providers",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic API Documentation",
+        "url": "https://docs.anthropic.com/",
+        "type": "documentation",
+        "relevance": "Primary reference for Claude model requests, streaming, tools, and provider-specific behavior",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Platform Documentation",
+        "url": "https://platform.claude.com/docs/",
+        "type": "documentation",
+        "relevance": "Current home for Claude Messages API reference, Message Batches API, and prompt-caching mechanics; cross-check alongside docs.anthropic.com",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Gemini API Documentation",
+        "url": "https://ai.google.dev/gemini-api/docs",
+        "type": "documentation",
+        "relevance": "Primary reference for Gemini request/response shape, cachedContents explicit caching, and responseSchema structured output used in the provider capability matrix",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Primary implementation reference for Claude-oriented coding-agent runtime assumptions",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Codex CLI Repository",
+        "url": "https://github.com/openai/codex",
+        "type": "repository",
+        "relevance": "Cross-runtime comparison point for OpenAI-oriented coding-agent provider design",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Model Provider Source",
+        "url": "https://github.com/openai/codex/tree/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/model-provider/src",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for provider abstraction and provider registration concepts",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Ollama Provider Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/ollama/src/lib.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for local Ollama server readiness, model availability, fetch behavior, and version-gated local provider support",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex LM Studio Provider Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/lmstudio/src/lib.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for LM Studio readiness checks, model loading, and local-provider diagnostics",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "cross_runtime_references": [
+      {
+        "name": "Model Context Protocol Specification",
+        "url": "https://modelcontextprotocol.io/",
+        "type": "specification",
+        "relevance": "Useful for aligning provider outputs with tool-calling and server capability contracts",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "Useful high-level guidance for model and tool orchestration tradeoffs in agent systems",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI: Migrate from Assistants to Responses API",
+        "url": "https://developers.openai.com/api/docs/guides/migrate-to-responses",
+        "type": "guide",
+        "relevance": "Migration guide for Assistants API → Responses API (Assistants API sunsets Aug 26, 2026). Documents cache-utilization advantage, built-in tool primitives (code_interpreter, file_search, remote MCP), and recommended path for new agentic work.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

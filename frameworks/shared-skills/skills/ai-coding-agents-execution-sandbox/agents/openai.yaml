@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Execution Sandbox"
+  short_description: "Design sandbox and isolation models for coding agents"
+  default_prompt: "Use $ai-coding-agents-execution-sandbox to design process isolation, filesystem policy, network controls, workspace mounts, or destructive-command boundaries for a coding-agent runtime."

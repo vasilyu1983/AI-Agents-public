@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-settings-policy",
+    "title": "AI Coding Agents Settings Policy - Sources",
+    "description": "Official documentation and implementation references for settings precedence, managed policy, schema validation, and safe runtime application",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 8,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en",
+        "type": "documentation",
+        "relevance": "Primary product documentation for configuration and managed runtime behavior",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Settings Reference",
+        "url": "https://code.claude.com/docs/en/settings",
+        "type": "reference",
+        "relevance": "Complete settings key listing. Precedence verified 2026-07-11: managed > CLI flags > .claude/settings.local.json > .claude/settings.json (project) > ~/.claude/settings.json (user). Managed-settings-only keys confirmed: allowManagedPermissionRulesOnly, allowManagedHooksOnly, allowManagedMcpServersOnly, claudeMd, disableSideloadFlags, forceRemoteSettingsRefresh, blockedMarketplaces, forceLoginMethod/OrgUUID/GatewayUrl, allowAllClaudeAiMcps, allowedChannelPlugins, deniedMcpServers. disableAutoMode, disableAgentView, disableBundledSkills, autoUpdatesChannel exist in all scopes (not managed-only). cleanupPeriodDays default is 30 (min 1). strictPluginOnlyCustomization, policyHelper, and parentSettingsBehavior could not be verified as of 2026-07-11 and were removed from this skill's claims.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "JSON Schema",
+        "url": "https://json-schema.org/",
+        "type": "specification",
+        "relevance": "Reference for machine-validated settings contracts and schema publication",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Closed-source product page and issue tracker for Claude Code; not the implementation source — use code.claude.com/docs/en for authoritative behavior docs",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Codex CLI Repository",
+        "url": "https://github.com/openai/codex",
+        "type": "repository",
+        "relevance": "Cross-runtime comparison point for agent CLI configuration layers",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Config Layer Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/config/src/state.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for config layer stack, managed requirements, loader overrides, disabled layers, and config debug metadata",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI: Running Codex safely at OpenAI",
+        "url": "https://openai.com/index/running-codex-safely/",
+        "type": "safety_post",
+        "relevance": "May 2026 first-party source for enterprise control surfaces, configuration management, sandboxing, and agent-aware telemetry",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "High-level reference for keeping policy and runtime control boundaries explicit",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "repo_id": "claude_code",
+  "repo_name": "claude_code",
+  "repo_path": "~/Documents/claude_code",
+  "repo_group": "Documents",
+  "status": "active",
+  "visibility": "unknown",
+  "default_branch": "unknown",
+  "languages": [
+    "TypeScript",
+    "JavaScript"
+  ],
+  "frameworks": [
+    "React"
+  ],
+  "package_managers": [],
+  "build_tools": [
+    "Bun"
+  ],
+  "runtime_targets": [
+    "terminal-cli",
+    "remote-session-bridge",
+    "mcp-server",
+    "agent-sdk-entrypoints"
+  ],
+  "repo_kind": "app",
+  "entrypoints": [
+    "main.tsx",
+    "query.ts",
+    "QueryEngine.ts",
+    "entrypoints/mcp.ts",
+    "setup.ts"
+  ],
+  "dependencies_direct": [
+    "@anthropic-ai/sdk",
+    "@modelcontextprotocol/sdk",
+    "axios",
+    "lodash-es",
+    "react",
+    "strip-ansi",
+    "usehooks-ts"
+  ],
+  "dependencies_infra": [
+    "git",
+    "tmux"
+  ],
+  "interfaces_exposed": [
+    "terminal cli",
+    "remote session bridge",
+    "mcp server entrypoint",
+    "tool execution runtime"
+  ],
+  "data_stores": [
+    "filesystem"
+  ],
+  "architecture_style": "modular-monolith",
+  "domain_tags": [
+    "ai-coding-agents",
+    "terminal-ui",
+    "remote-runtime",
+    "mcp",
+    "worktrees",
+    "plugin-platform"
+  ],
+  "integrates_with": [
+    "Anthropic Messages API",
+    "MCP servers",
+    "git worktrees",
+    "tmux sessions",
+    "session ingress transports"
+  ],
+  "owner_signals": [],
+  "test_signals": [],
+  "delivery_signals": [],
+  "risk_flags": [
+    "missing-readme",
+    "missing-ci-signals",
+    "missing-package-manifests",
+    "snapshot-without-git-metadata",
+    "test-coverage-not-evident"
+  ],
+  "summary": "Claude Code is a modular TypeScript/Bun coding-agent runtime with a React terminal UI, remote-session bridge, MCP entrypoints, plugin and skill loading, worktree-aware session setup, and explicit transport and recovery logic.",
+  "evidence": [
+    {
+      "path": "query.ts",
+      "reason": "Defines the main query loop, task budget accounting, and max_output_tokens recovery behavior."
+    },
+    {
+      "path": "QueryEngine.ts",
+      "reason": "Coordinates persistent query execution, plugin loading, prompt assembly, and structured output enforcement."
+    },
+    {
+      "path": "setup.ts",
+      "reason": "Initializes hooks, file-change watching, worktree creation, tmux sessions, and startup lifecycle behavior."
+    },
+    {
+      "path": "remote/RemoteSessionManager.ts",
+      "reason": "Implements remote-session orchestration with WebSocket reads, HTTP writes, and permission request callbacks."
+    },
+    {
+      "path": "remote/remotePermissionBridge.ts",
+      "reason": "Bridges remote permission requests into synthetic assistant messages and local tool stubs."
+    },
+    {
+      "path": "cli/transports/HybridTransport.ts",
+      "reason": "Provides a serialized hybrid transport with WebSocket reads, POST writes, buffering, and backpressure-aware batching."
+    },
+    {
+      "path": "cli/transports/SSETransport.ts",
+      "reason": "Implements resumable SSE transport with sequence tracking and reconnect semantics."
+    },
+    {
+      "path": "Task.ts",
+      "reason": "Defines task types spanning local, remote, teammate, workflow, and MCP-monitor execution paths."
+    },
+    {
+      "path": "entrypoints/mcp.ts",
+      "reason": "Exposes an MCP server entrypoint using the Model Context Protocol SDK."
+    },
+    {
+      "path": ".claude/settings.local.json",
+      "reason": "Shows the repo ships agent-instruction style configuration instead of being instruction-free."
+    }
+  ],
+  "confidence_score": 0.85,
+  "last_scanned_at": "2026-04-03T12:00:00+00:00"
+}

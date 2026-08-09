@@ -1,0 +1,166 @@
+# PMF Scorecard — Path A (B2B / SaaS)
+#
+# Use this scorecard for products where:
+#   - revenue is per-account (seats, contracts, usage tiers)
+#   - the buyer and end-user may differ
+#   - retention is measured at workspace/account level
+#   - the value-metric must support expansion (NRR > 100% top-quartile)
+#
+# Run AFTER the PMF Insight Engine has produced a digest. The engine surfaces
+# blind spots; the scorecard converts them (plus board-quality benchmarks)
+# into a 0-100 readiness score that names what to fix next.
+#
+# Score interpretation:
+#   85-100  STRONG PMF   — scale acquisition; sequence is GTM, not product
+#   70-84   APPROACHING  — one or two dimensions are blocking; fix the lowest weighted
+#   55-69   EARLY SIGNAL — a hidden lover-segment likely exists; tighten scope
+#   <55     NO PMF YET   — do not scale; iterate
+#
+# All thresholds reflect 2026 SaaS-board benchmarks. Override per project in
+# data/projects/<project>.yaml -> scorecard.threshold_overrides.
+
+scorecard:
+  name: pmf-scorecard-b2b
+  version: "2026.06"
+  total_weight: 100
+  # pricing_model controls how nrr and value_metric_alignment are interpreted.
+  # Set to "consumption" or "outcome" for usage-based / AI-native products.
+  #   seat        — default. Score nrr on net subscription dollar retention.
+  #                 Score value_metric_alignment on seat-to-value correlation.
+  #   consumption — Score nrr on dollar/consumption expansion per account cohort.
+  #                 Score value_metric_alignment on consumable-unit-to-value fit
+  #                 (tokens, API calls, runs, outcomes). See pmf-measurement.md
+  #                 Usage-Based section for leading indicators and the AI retention cliff.
+  #   outcome     — Score nrr on outcome-delivered dollar expansion. Value metric is
+  #                 the outcome unit (tasks completed, results delivered). Same
+  #                 consumption-cohort interpretation as above.
+  pricing_model: seat   # override: seat | consumption | outcome
+
+dimensions:
+
+  - id: sean_ellis
+    weight: 15
+    source_detector: "01-hidden-lover-segment"
+    metric: "pmf_score (very_disappointed share) within best-fit segment"
+    bands:
+      strong:     ">= 0.50"   # >50% very disappointed in segment
+      good:       "0.40-0.49"
+      tipping:    "0.30-0.39"
+      no_signal:  "< 0.30"
+    notes: "Always read by segment, not blended. Detector #1 surfaces hidden lovers."
+
+  - id: retention_curve_flatten
+    weight: 20
+    source_detector: "02-inverted-retention + retention dashboard"
+    metric: "user-month-N retention vs month-3 baseline (curve flattening)"
+    bands:
+      strong:     "month-12 retention >= 80% of month-3"
+      good:       "60-79%"
+      tipping:    "40-59%"
+      no_signal:  "< 40%"
+    notes: "Flattening matters more than absolute level. A flat 30% beats a decaying 70%."
+
+  - id: switching_evidence
+    weight: 10
+    source_detector: "06-switching-trigger-clusters"
+    metric: "n_mentions of dominant trigger / sample size, force_balance > 0"
+    bands:
+      strong:     ">= 50% of interviewees cite same trigger; force_balance >= +3"
+      good:       "30-49%; force_balance +1 to +3"
+      tipping:    "<30%; force_balance > 0"
+      no_signal:  "no shared trigger; force_balance <= 0"
+
+  - id: pain_intensity
+    weight: 5
+    metric: "Q2-Q4 free-text in Sean Ellis survey + sales call notes"
+    bands:
+      strong:     "users describe current state as costly (money/time/risk) — quantified"
+      good:       "users describe annoyance, qualitative"
+      tipping:    "users describe inconvenience, mild"
+      no_signal:  "users cannot articulate the pain"
+
+  - id: willingness_to_pay
+    weight: 10
+    metric: "actual ACV / target-ICP-LTV; Van Westendorp PSM if not yet selling"
+    bands:
+      strong:     "buyers pay full price without negotiation; >=70% close at list"
+      good:       "minor discounting (<20%) common"
+      tipping:    "30-50% discounts to close"
+      no_signal:  "deals only close on free trials extended >2x or >50% discount"
+
+  - id: value_metric_alignment
+    weight: 5
+    source_detector: "04-pricing-value-mismatch"
+    metric: "median rank distance between revenue and predictive value-metric"
+    bands:
+      strong:     "median rank distance < 0.15"
+      good:       "0.15-0.30"
+      tipping:    "0.30-0.50"
+      no_signal:  "> 0.50"
+
+  - id: icp_concentration
+    weight: 10
+    metric: "share of paying ARR coming from one ICP segment (Apollo rubric)"
+    bands:
+      strong:     ">= 60% from one tightly-defined ICP"
+      good:       "40-59%"
+      tipping:    "20-39%"
+      no_signal:  "< 20% — selling to anyone who'll buy"
+    notes: "Concentration is GOOD at PMF stage. Diversification is post-PMF."
+
+  - id: cac_payback_12mo
+    weight: 10
+    metric: "blended CAC / monthly gross profit, in months"
+    bands:
+      strong:     "<= 6 months"           # 2026 top-quartile (Aleph × Benchmarkit, n=342)
+      good:       "7-12"                  # strong/goal benchmark, not top-quartile
+      tipping:    "13-18"
+      no_signal:  "> 18 months"
+    notes: >
+      2025 median payback is ~16 months. Top-quartile is <=6 months (Aleph x Benchmarkit 2026,
+      n=342). <12 months is a strong goal benchmark but is NOT top-quartile — do not report
+      sub-12 as top-quartile at board level.
+
+  - id: nrr_net_revenue_retention
+    weight: 10
+    metric: "net revenue retention 12-month, top-quartile cohort"
+    bands:
+      strong:     ">= 120%"
+      good:       "105-119%"
+      tipping:    "94-104%"
+      no_signal:  "< 94%"
+    notes: >
+      Score against the ACV-band median for your segment, not the blended average.
+      2026 benchmarks (ChartMogul/Optifai): enterprise ~118% median, mid-market ~108%,
+      SMB/blended ~99%. >100% is the floor for PMF; the right bar depends on your ACV band.
+      For consumption/usage-based models: score on dollar/consumption expansion per account
+      cohort, not subscription-status NRR — a fixed-floor subscription can show 99% NRR
+      while consumption stagnates. See references/pmf-measurement.md Usage-Based section.
+
+  - id: durable_advantage
+    weight: 5
+    metric: "qualitative — distribution lock-in OR data network effect OR workflow embed"
+    bands:
+      strong:     "structural lock-in (data graph, integrations, regulated workflow)"
+      good:       "process embed (replacing core workflow tool)"
+      tipping:    "stronger feature than competition"
+      no_signal:  "feature parity, switching is easy"
+
+scoring_rules:
+  formula: "sum_of(dimension_score * weight) where dimension_score in {1.0=strong, 0.7=good, 0.4=tipping, 0.0=no_signal}"
+  output:
+    - "total_score"
+    - "weakest_dimension"
+    - "strongest_dimension"
+    - "next_action"
+
+handoff:
+  from_engine:
+    - "Detector digest from PMF Insight Engine"
+    - "Sean Ellis segment-sliced disappointment scores"
+    - "Cohort retention curves by acquisition source"
+    - "ARR / NRR by plan_tier"
+  to_bet_memo:
+    - "Lowest-scoring dimension whose detector also fired"
+    - "Single bet that moves the score on that dimension"
+    - "Kill criterion if the bet does not move the dimension by >=1 band in 90 days"

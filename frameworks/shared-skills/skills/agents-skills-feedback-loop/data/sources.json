@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "title": "Agent Skills Feedback Loop - Sources",
+    "description": "Graded May-2026 evidence base for the learnings-loop maturity claims and the Layer 1 (auto-capture) and Layer 3 (eval-gated promotion) designs. Analytical grading and design mapping in references/evidence-base.md.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "agents-skills-feedback-loop",
+    "total_sources": 11
+  },
+  "research_peer_reviewed": [
+    {
+      "name": "Memory for Autonomous LLM Agents: Mechanisms, Evaluation, and Emerging Frontiers (arXiv 2603.07670)",
+      "url": "https://arxiv.org/abs/2603.07670",
+      "description": "Grade A. Survey establishing memory as a first-class agent discipline in 2026; names the open problems (continual consolidation, trustworthy reflection, learned forgetting) that justify keeping Layers 2-3 conservative.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models (arXiv 2510.04618, ICLR 2026)",
+      "url": "https://arxiv.org/abs/2510.04618",
+      "description": "Grade A. SOTA shape for Layer 2 consolidation: Generator/Reflector/Curator evolving playbook; defines the 'context collapse' and 'brevity bias' failure modes structured incremental consolidation must avoid.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ICLR 2026 Workshop on Memory for LLM-Based Agentic Systems (MemAgents)",
+      "url": "https://iclr.cc/virtual/2026/workshop/10000792",
+      "description": "Grade A. Evidence that memory-for-agents is an active first-class research venue in 2026 - the field is unsettled, which is why this skill keeps promotion human-gated.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "SkillOpt: Executive Strategy for Self-Evolving Agent Skills (arXiv 2605.23904)",
+      "url": "https://arxiv.org/abs/2605.23904",
+      "description": "Grade A (May 2026). First systematic text-space optimizer for agent skills: optimizer model turns scored rollouts into bounded add/delete/replace edits accepted only when they strictly improve held-out validation score. +23.5pp on GPT-5.5, tested across Claude Code and Codex. Confirms the Layer 3 gate principle: quality of the verifier bounds quality of self-improvement.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CoEvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification (arXiv 2604.01687)",
+      "url": "https://arxiv.org/abs/2604.01687",
+      "description": "Grade A (April 2026; retitled from 'EvoSkills' between v1 and v2, confirmed July 2026). Co-evolutionary verification framework (Skill Generator + Surrogate Verifier, no ground-truth) achieving 71.1% pass rate on SkillsBench (+40.5pp over no-skill). Both SkillOpt and CoEvoSkills use held-out/surrogate validation gates, validating this skill's human-gated promotion model as the conservative zero-cost form of the same pattern.",
+      "add_as_web_search": true
+    }
+  ],
+  "industry_practice": [
+    {
+      "name": "Testing Agent Skills Systematically with Evals - OpenAI",
+      "url": "https://developers.openai.com/blog/eval-skills",
+      "description": "Grade B. Establishes eval mechanics this design reuses (captured run -> checks -> comparable score; failures become tests). Re-verified July 2026: covers measurement, not threshold gating or CI blocking -- that half is sourced from Braintrust below, not this page.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Agent Observability: The Complete Guide for 2026 - Braintrust",
+      "url": "https://www.braintrust.dev/articles/agent-observability-complete-guide-2026",
+      "description": "Grade C. Production-failure -> eval -> CI-gate workflow; corroborates the Layer 3 pattern from the tooling side. Vendor framing discounted.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "State of AI Agent Memory 2026 - mem0",
+      "url": "https://mem0.ai/blog/state-of-ai-agent-memory-2026",
+      "description": "Grade C. Append-only ADD memory production-ready (92.5 on LoCoMo); procedural memory (agent-driven self-capture/consolidation) named explicitly as early-stage tooling, not production practice - corroborates Layer 1 default-off. Vendor framing discounted.",
+      "add_as_web_search": false
+    }
+  ],
+  "pattern_origin_and_press": [
+    {
+      "name": "What Is the Learnings Loop - MindStudio",
+      "url": "https://www.mindstudio.ai/blog/learnings-loop-claude-code-skills-self-improvement",
+      "description": "Grade C. The base loop pattern this skill is explicitly borrowed from (see SKILL.md intro); pattern evidence only, not validation.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "ACE Prevents Context Collapse with Evolving Playbooks for Self-Improving AI Agents - VentureBeat",
+      "url": "https://venturebeat.com/ai/ace-prevents-context-collapse-with-evolving-playbooks-for-self-improving-ai",
+      "description": "Grade C. Independent trade-press corroboration of ACE (arXiv 2510.04618); framing only, the paper is the load-bearing source.",
+      "add_as_web_search": false
+    }
+  ],
+  "external_patterns": [
+    {
+      "name": "ECC (Everything Claude Code) - continuous-learning-v2",
+      "url": "https://github.com/affaan-m/ECC",
+      "commit_sha": "51a6950bde756fe3ebc8879aa0c8ee49b9c53e78",
+      "license": "MIT",
+      "extracted_date": "2026-08-09",
+      "description": "Pattern-evidence only, not validated by this repo. Source of the atomic confidence-scored 'instinct' concept documented in references/instinct-pattern.md as a complement to the base learnings loop. This repo does not adopt ECC's automatic project-to-global promotion or its unverified '100% reliable' hook-capture claim.",
+      "add_as_web_search": false
+    }
+  ]
+}

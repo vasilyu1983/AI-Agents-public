@@ -1,0 +1,4 @@
+interface:
+  display_name: "UX Research"
+  short_description: "Guides user research methods and research ops"
+  default_prompt: "Use $software-ux-research for Guides user research methods and research ops. Use when running interviews, usability tests, surveys, or A/B tests to de-risk product decisions."

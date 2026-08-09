@@ -1,0 +1,44 @@
+{
+  "skill_name": "software-ios-ai-engine",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design the AI layer for a reusable native iOS skeleton in May 2026. It should support Apple Foundation Models when available, but still work on unsupported devices. What architecture should the skill recommend?",
+      "expected_output": "The skill should recommend a LocalAIEngine facade with typed Swift contracts, a Foundation Models implementation gated by runtime availability, and a deterministic fallback implementation. It should not put raw model prose directly into SwiftUI.",
+      "files": [],
+      "expectations": [
+        "Recommends a stable LocalAIEngine or equivalent facade.",
+        "Gates Foundation Models by runtime availability, not OS version alone.",
+        "Requires deterministic fallback for unsupported or not-ready devices.",
+        "Requires typed Swift output contracts such as @Generable or deterministic structs.",
+        "Does not recommend parsing raw model prose in views."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "An iOS app wants local vector search over user notes and app help content, fully offline. Should ai-vector-brain own the runtime implementation?",
+      "expected_output": "The skill should say the iOS runtime path belongs in software-ios-ai-engine, using Natural Language embeddings, lexical search, or a local vector table with content hashes and corpus versions. ai-vector-brain can own upstream corpus/chunk/eval assets or server vector backends, not the on-device runtime.",
+      "files": [],
+      "expectations": [
+        "Routes on-device iOS retrieval to software-ios-ai-engine.",
+        "Mentions Natural Language embeddings or local vector table options.",
+        "Requires source anchors, content hashes, corpus versions, and model IDs.",
+        "Routes server-scale vector DB work to ai-vector-brain.",
+        "Includes an eval gate for query to expected evidence IDs."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A Foundation Models feature needs current data from the app database. Should the model decide everything itself?",
+      "expected_output": "The skill should recommend wrapping app data access in a bounded service/tool, using tool calling only when the model genuinely needs to decide when to search. If retrieval is always required, run retrieval before the model call and pass compact results. Side effects should stay in local services that App Intents or Foundation Models tools can call.",
+      "files": [],
+      "expectations": [
+        "Separates Foundation Models tools from App Intents.",
+        "Keeps side effects in local services.",
+        "Uses tool calling only when necessary.",
+        "Recommends prefetching compact retrieval results when retrieval is always required.",
+        "Mentions context-window budget impact from tools and outputs."
+      ]
+    }
+  ]
+}

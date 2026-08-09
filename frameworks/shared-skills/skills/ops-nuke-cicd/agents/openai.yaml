@@ -1,0 +1,4 @@
+interface:
+  display_name: "NUKE CI/CD"
+  short_description: "Designs and troubleshoots NUKE-based CI/CD pipelines for .NET services"
+  default_prompt: "Use $ops-nuke-cicd for Designs and troubleshoots NUKE-based CI/CD pipelines for .NET services. Use when refactoring target graphs, splitting test flows, publishing reports, or diagnosing slow pipelines."

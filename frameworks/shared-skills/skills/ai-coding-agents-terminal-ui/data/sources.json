@@ -1,0 +1,163 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-terminal-ui",
+    "title": "AI Coding Agents Terminal UI - Sources",
+    "description": "Official documentation and implementation references for terminal-first coding-agent REPL design, prompt input, history rendering, and background-task UX",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 16,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en/",
+        "type": "documentation",
+        "relevance": "Primary product context for Claude Code's interactive terminal experience",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Slash Commands",
+        "url": "https://code.claude.com/docs/en/slash-commands",
+        "type": "documentation",
+        "relevance": "Official interactive command-surface and prompt-discovery documentation for terminal-first coding agents",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Textual Guide",
+        "url": "https://textual.textualize.io/guide/",
+        "type": "documentation",
+        "relevance": "Official high-level TUI framework reference for host-owned state, message loops, and layout composition",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Textual Workers",
+        "url": "https://textual.textualize.io/guide/workers/",
+        "type": "documentation",
+        "relevance": "Official worker and background-update guidance for terminal UIs that need responsive foreground interactions",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "prompt_toolkit Full Screen Applications",
+        "url": "https://python-prompt-toolkit.readthedocs.io/en/3.0.50/pages/full_screen_apps.html",
+        "type": "documentation",
+        "relevance": "Official prompt_toolkit reference for full-screen terminal application layout, keybindings, and alternate-screen behavior",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code: Customize your status line",
+        "url": "https://code.claude.com/docs/en/statusline",
+        "type": "documentation",
+        "relevance": "Primary source for statusLine settings.json fields, available JSON status data, update triggers/debounce, and the COLUMNS/LINES terminal-size footgun. Verified 2026-07-11.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code: Customize keyboard shortcuts",
+        "url": "https://code.claude.com/docs/en/keybindings",
+        "type": "documentation",
+        "relevance": "Primary source for keybindings.json contexts/actions, reserved shortcuts, and terminal-multiplexer key conflicts. Verified 2026-07-11.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code: Orchestrate teams of Claude Code sessions",
+        "url": "https://code.claude.com/docs/en/agent-teams",
+        "type": "documentation",
+        "relevance": "Primary source for Agent Teams display modes (in-process default, split-pane tmux/iTerm2 requirement, unsupported terminals) and teammate-panel keybindings. Verified 2026-07-11.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Authoritative implementation reference for REPL ownership, prompt input, background-task surfaces, and virtual scroll",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anthropic: Claude Code Best Practices",
+        "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+        "type": "guide",
+        "relevance": "Operational framing for high-quality Claude Code interaction patterns",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Bubble Tea Repository",
+        "url": "https://github.com/charmbracelet/bubbletea",
+        "type": "repository",
+        "relevance": "Widely used terminal UI framework reference for message-driven state machines, viewport behavior, and high-frequency terminal updates",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "cross_runtime_references": [
+      {
+        "name": "Codex CLI Documentation",
+        "url": "https://github.com/openai/codex",
+        "type": "documentation",
+        "relevance": "Cross-runtime comparison point for terminal-first coding-agent UX",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex TUI Snapshot Source",
+        "url": "https://github.com/openai/codex/tree/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/tui/src/chatwidget/snapshots",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for snapshot-tested terminal UI states: approvals, status lines, hooks, plugins, app-server warnings, goals, and narrow terminals",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI: Codex for (almost) everything",
+        "url": "https://openai.com/index/codex-for-almost-everything/",
+        "type": "product_post",
+        "relevance": "April 2026 first-party source for multi-surface Codex UX across terminal, app, browser, remote devboxes, and computer use",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Goose 2.0: ACP and new TUI",
+        "url": "https://goose-docs.ai/blog/2026/04/08/goose-acp-and-new-tui/",
+        "type": "announcement",
+        "relevance": "April 8, 2026: Goose 2.0 TypeScript TUI beta (npx @aaif/goose) + Electron → Tauri desktop migration. Both clients of a shared ACP daemon. Source for the updated cross-platform patterns section.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Gemini CLI Repository",
+        "url": "https://github.com/google-gemini/gemini-cli",
+        "type": "repository",
+        "relevance": "Google's open-source TypeScript coding-agent CLI (Apache 2.0, 105k+ stars). Uses Ink 6 TUI stack. Second major TypeScript coding-agent reference alongside Claude Code.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "skill_name": "software-mobile",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A startup wants to build a fitness-tracking app with real-time heart-rate display from HealthKit on iOS, Google Fit integration on Android, custom Canvas animations for live data, and Bluetooth LE device pairing. They have a team of two iOS engineers and one Android engineer. Should they go native or cross-platform? Justify the recommendation.",
+      "expected_output": "The skill should recommend separate native apps given HealthKit, Google Fit, custom BLE, and Canvas animation requirements. It should identify these native integration and performance constraints as the evidence that tips the platform decision, reference the platform selection decision tree, and note the team shape aligns with native.",
+      "files": [],
+      "expectations": [
+        "The output invokes the platform selection decision tree from the skill.",
+        "The output identifies HealthKit, Google Fit, BLE, and Canvas animation as native-integration and performance signals that justify separate native apps over React Native or Flutter.",
+        "The output does not recommend React Native or Flutter without explicitly acknowledging the native escape-hatch cost those integrations would incur.",
+        "The output notes that the team shape (2 iOS, 1 Android engineers) is consistent with the native recommendation.",
+        "The output avoids using unsourced benchmark claims about framework performance."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "An iOS app sends push notifications from a Node.js backend. The engineering team reports that push notifications work perfectly in local Simulator testing and in Xcode direct-device builds, but after uploading to TestFlight the notifications stop arriving. Walk through the diagnosis and the fix.",
+      "expected_output": "The skill should identify the APNs environment mismatch as the root cause: local/Xcode builds use the sandbox environment while TestFlight requires production. It should prescribe checking aps-environment in the archived entitlements, verifying the backend device row records push_environment = production, and validating both the transport path and the notification-open path on the TestFlight build.",
+      "files": [],
+      "expectations": [
+        "The output identifies the sandbox vs production APNs environment mismatch as the primary suspect.",
+        "The output prescribes inspecting the archived .app entitlements for aps-environment = production before upload.",
+        "The output recommends verifying the backend device row records push_environment = production after a TestFlight install.",
+        "The output explicitly states that local Simulator push success is not proof of TestFlight production delivery, invoking the never-treat-local-push-success-as-TestFlight-proof rule.",
+        "The output includes validating the notification-open path (cold start tap, warm resume tap) after transport proof succeeds."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A React Native 0.76 Expo-managed app targeting both iOS and Android uses a third-party native module that has not been updated for the New Architecture. The team wants to ship in two weeks. What are their options and what is the recommended path?",
+      "expected_output": "The skill should note that RN 0.76 defaults to the New Architecture, identify the stale native module as a compatibility risk, present options (stay on old arch via interop layer, find an alternative module, fork + update the module, or delay), and recommend evaluating the interop compatibility layer first before deciding to delay or fork.",
+      "files": [],
+      "expectations": [
+        "The output notes that React Native 0.76 ships with the New Architecture as the default.",
+        "The output identifies the stale native module as a New Architecture compatibility risk that must be evaluated before the two-week deadline.",
+        "The output presents at least two concrete options: interop layer and module replacement or fork.",
+        "The output does not recommend blindly disabling the New Architecture without noting it as a regression from the current default.",
+        "The output avoids relying on stale framework comparison tables without noting that RN 0.76+ changed the default."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "A mobile app with English, French, German, and Japanese locales has a backend that returns AI-generated daily horoscope summaries as prose. The iOS client currently displays these summaries raw. French and Japanese users are seeing English text. Diagnose the problem and recommend the correct i18n architecture.",
+      "expected_output": "The skill should identify that backend-generated prose cannot be localized client-side and must be handled server-side. It should recommend Pattern A (generate-in-locale) or Pattern B (translate-after-cache) from the backend translation pipeline section, provide selection criteria, and prescribe the locale detection priority (query param > Accept-Language header > stored profile) and the client contract (inject ?locale= and Accept-Language on every request).",
+      "files": [],
+      "expectations": [
+        "The output correctly diagnoses the problem as generated prose returning in English regardless of locale, not a missing l10n key issue.",
+        "The output references Pattern A (generate-in-locale) and Pattern B (translate-after-cache) from the backend translation pipeline.",
+        "The output recommends Pattern A for on-demand AI content like horoscope summaries or explains the trade-off clearly.",
+        "The output prescribes the locale detection priority: ?locale= query param > Accept-Language header > stored profile locale.",
+        "The output prescribes the mobile client contract: inject ?locale= and Accept-Language on every API request and read the locale at request-build time, not at client-construction time."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "A team is preparing to submit an Android app update to Google Play. The app currently targets API 34. The Play Store dashboard is showing a warning about the upcoming target SDK requirement. What must the team do before submitting the update, and what are the key compliance checks?",
+      "expected_output": "The skill should state that Play requires API 35 (Android 15) for new apps and updates since August 2025, instruct the team to bump targetSdkVersion to 35, and list the release gate checks: target SDK compliance, Data safety declaration, Play Integrity (not SafetyNet), and real-device verification. It should also note that exact deadline dates must be re-verified against the Google Play target API policy page.",
+      "files": [],
+      "expectations": [
+        "The output states the Play target SDK requirement has been API 35 since August 31, 2025 and directs the team to upgrade.",
+        "The output treats target SDK compliance as a release gate, not a suggestion.",
+        "The output includes Data safety declaration, Play Integrity API (not deprecated SafetyNet), and real-device verification in the release checklist.",
+        "The output explicitly notes that exact deadline dates should be re-verified against the Google Play target API policy page before release.",
+        "The output does not treat old policy dates as timeless, following the known anti-pattern warning."
+      ]
+    }
+  ]
+}

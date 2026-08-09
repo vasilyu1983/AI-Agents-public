@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Memory"
+  short_description: "Manages persistent agent context across AGENTS.md, CLAUDE.md, and repo rules"
+  default_prompt: "Use $agents-memory to manage AGENTS.md, CLAUDE.md, and scoped repo rules for Claude Code and Codex. Use when fixing stale memory, ignored instructions, memory audits, or model-upgrade migration."

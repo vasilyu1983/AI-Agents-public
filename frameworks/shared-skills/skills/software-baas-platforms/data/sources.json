@@ -1,0 +1,206 @@
+{
+  "metadata": {
+    "skill": "software-baas-platforms",
+    "title": "Managed App Backends - Sources",
+    "description": "Official platform documentation for Supabase, Convex, Firebase, Appwrite, PocketBase, Neon, and PlanetScale, including current security, deployment, branching, and relational-backend surfaces.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 30
+  },
+  "categories": {
+    "supabase": [
+      {
+        "name": "Supabase Auth",
+        "url": "https://supabase.com/docs/guides/auth",
+        "description": "Primary source for Supabase authentication flows, providers, session handling, and server/client auth boundaries.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Supabase Row Level Security",
+        "url": "https://supabase.com/docs/guides/database/postgres/row-level-security",
+        "description": "Primary source for Postgres RLS policy design in Supabase.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Supabase Realtime: Postgres Changes",
+        "url": "https://supabase.com/docs/guides/realtime/postgres-changes",
+        "description": "Primary source for listening to Postgres changes through Supabase Realtime.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Supabase Storage",
+        "url": "https://supabase.com/docs/guides/storage",
+        "description": "Primary source for Supabase object storage behavior, access control, and file-serving patterns.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Supabase Edge Functions",
+        "url": "https://supabase.com/docs/guides/functions",
+        "description": "Primary source for Supabase server-side functions and edge runtime guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Supabase Branching",
+        "url": "https://supabase.com/docs/guides/deployment/branching",
+        "description": "Primary source for Supabase development branches, migration flow, config propagation, and deploy sequencing.",
+        "add_as_web_search": true
+      }
+    ],
+    "convex": [
+      {
+        "name": "Convex Auth",
+        "url": "https://docs.convex.dev/auth",
+        "description": "Primary source for Convex authentication with OIDC and JWT providers.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Convex Query Functions",
+        "url": "https://docs.convex.dev/functions/query-functions",
+        "description": "Primary source for reactive query patterns in Convex.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Convex Mutation Functions",
+        "url": "https://docs.convex.dev/functions/mutation-functions",
+        "description": "Primary source for transactional writes and mutation behavior in Convex.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Convex Scheduled Functions",
+        "url": "https://docs.convex.dev/scheduling/scheduled-functions",
+        "description": "Primary source for durable workflows and scheduled execution in Convex.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Convex File Storage",
+        "url": "https://docs.convex.dev/file-storage",
+        "description": "Primary source for file storage flows in Convex.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Convex Production",
+        "url": "https://docs.convex.dev/production",
+        "description": "Primary source for production deployment, maintenance, regions, networking, and operating Convex in live environments.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Convex HTTP Actions",
+        "url": "https://docs.convex.dev/functions/http-actions",
+        "description": "Primary source for building HTTP-facing integration endpoints inside Convex.",
+        "add_as_web_search": true
+      }
+    ],
+    "firebase": [
+      {
+        "name": "Firebase Security Rules",
+        "url": "https://firebase.google.com/docs/rules",
+        "description": "Primary source for Firebase's server-enforced rules model across Firestore, Realtime Database, and Storage.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cloud Firestore Documentation",
+        "url": "https://firebase.google.com/docs/firestore",
+        "description": "Primary source for Firestore data model, SDKs, and operations.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Firestore Real-time Queries at Scale",
+        "url": "https://firebase.google.com/docs/firestore/real-time_queries_at_scale",
+        "description": "Official scaling guidance for Firestore real-time listeners and query behavior.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Firebase SQL Connect (formerly Data Connect)",
+        "url": "https://firebase.google.com/docs/data-connect",
+        "description": "Primary source for Firebase's managed PostgreSQL relational backend surface; renamed from Data Connect to SQL Connect — verify current product name and GA status before recommending it.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Firebase App Hosting",
+        "url": "https://firebase.google.com/docs/app-hosting",
+        "description": "Primary source for Firebase's full-stack app deployment layer and hosting/runtime boundaries.",
+        "add_as_web_search": true
+      }
+    ],
+    "appwrite": [
+      {
+        "name": "Appwrite Auth",
+        "url": "https://appwrite.io/docs/products/auth",
+        "description": "Primary source for Appwrite authentication features.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Appwrite Databases",
+        "url": "https://appwrite.io/docs/products/databases",
+        "description": "Primary source for Appwrite databases, permissions, and data APIs.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Appwrite Realtime",
+        "url": "https://appwrite.io/docs/products/realtime",
+        "description": "Primary source for Appwrite realtime subscriptions.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Appwrite Functions",
+        "url": "https://appwrite.io/docs/products/functions",
+        "description": "Primary source for Appwrite server-side functions.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Appwrite Storage",
+        "url": "https://appwrite.io/docs/products/storage",
+        "description": "Primary source for Appwrite file storage and permissions.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Appwrite Self-hosting",
+        "url": "https://appwrite.io/docs/advanced/self-hosting",
+        "description": "Primary source for Appwrite Cloud versus self-hosting tradeoffs, maintenance, scaling, and compliance-control expectations.",
+        "add_as_web_search": true
+      }
+    ],
+    "pocketbase": [
+      {
+        "name": "PocketBase Documentation",
+        "url": "https://pocketbase.io/docs/",
+        "description": "Primary source for PocketBase auth, collections, APIs, realtime, migrations, and the current pre-1.0 compatibility caveat.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PocketBase Going to Production",
+        "url": "https://pocketbase.io/docs/going-to-production/",
+        "description": "Primary source for production deployment, proxying, backups, SMTP, and operational hardening guidance in PocketBase.",
+        "add_as_web_search": true
+      }
+    ],
+    "neon": [
+      {
+        "name": "Neon Documentation",
+        "url": "https://neon.com/docs",
+        "description": "Primary source for Neon serverless Postgres: branching, scale-to-zero, and current ownership (Neon operates under Databricks following the 2025 acquisition) and pricing.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Neon Pricing",
+        "url": "https://neon.com/pricing",
+        "description": "Primary source for current Neon pricing tiers, storage, and compute rates; treat any cached figure as stale and re-verify here.",
+        "add_as_web_search": true
+      }
+    ],
+    "planetscale": [
+      {
+        "name": "PlanetScale Postgres Documentation",
+        "url": "https://planetscale.com/docs/postgres",
+        "description": "Primary source for PlanetScale's Postgres offering, branching, and single-node entry tier.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PlanetScale Pricing",
+        "url": "https://planetscale.com/pricing",
+        "description": "Primary source for current PlanetScale pricing across MySQL/Vitess and Postgres product lines; treat any cached figure as stale and re-verify here.",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

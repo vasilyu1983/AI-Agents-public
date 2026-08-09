@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cloudflare Wrangler"
+  short_description: "Guides Wrangler CLI commands, bindings, local dev, deployment, and config"
+  default_prompt: "Use $software-cloudflare-wrangler for Cloudflare Wrangler CLI work involving Workers, KV, R2, D1, Vectorize, Hyperdrive, Workers AI, Queues, local dev, deploys, or wrangler config."

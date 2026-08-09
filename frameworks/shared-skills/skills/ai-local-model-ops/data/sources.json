@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "title": "ai-local-model-ops - Sources",
+    "description": "Local and self-hosted LLM runtime references for July 2026: local execution, self-hosted chat UIs, Apple Silicon / MLX, desktop runtimes, portable packaging, lightweight adaptation, and local optimization levers.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "ai-local-model-ops",
+    "total_sources": 15
+  },
+  "runtime_and_ui": [
+    {
+      "name": "Ollama",
+      "url": "https://github.com/ollama/ollama",
+      "description": "Reference runtime for local model execution and simple self-hosted workflows.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Open WebUI",
+      "url": "https://github.com/open-webui/open-webui",
+      "description": "Self-hosted ChatGPT-like interface for local and private model usage.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "LM Studio",
+      "url": "https://lmstudio.ai",
+      "description": "Cross-platform desktop GUI runtime with in-app HuggingFace model browser. Supports GGUF and MLX model formats; targets non-technical users and rapid model comparisons.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Microsoft Foundry Local",
+      "url": "https://learn.microsoft.com/en-us/ai/foundry-local",
+      "description": "Microsoft-managed local runtime with curated model catalog and SDK-first API. Windows / enterprise-adjacent developer workflows.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "simonw/llm",
+      "url": "https://github.com/simonw/llm",
+      "description": "Lightweight CLI for local and remote model experimentation and comparison.",
+      "add_as_web_search": false
+    }
+  ],
+  "apple_silicon": [
+    {
+      "name": "MLX (mlx-lm)",
+      "url": "https://github.com/ml-explore/mlx-lm",
+      "description": "Apple's ML framework for Apple Silicon. Primary path for on-device inference, LoRA fine-tuning, and custom generation pipelines targeting Metal. Supports quantization natively.",
+      "add_as_web_search": false
+    }
+  ],
+  "packaging_and_adaptation": [
+    {
+      "name": "LlamaFile",
+      "url": "https://github.com/Mozilla-Ocho/llamafile",
+      "description": "Portable single-executable packaging for local model delivery.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Unsloth",
+      "url": "https://github.com/unslothai/unsloth",
+      "description": "Lightweight adaptation and fine-tuning workflows on constrained hardware.",
+      "add_as_web_search": false
+    }
+  ],
+  "optimization_and_serving": [
+    {
+      "name": "vLLM V1 Guide",
+      "url": "https://docs.vllm.ai/en/stable/usage/v1_guide/",
+      "description": "vLLM V1 engine documentation. V0 is fully deprecated. Covers speculative decoding, KV-cache quantization, and FP8 serving.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "llama.cpp",
+      "url": "https://github.com/ggml-org/llama.cpp",
+      "description": "Reference GGUF inference engine underpinning Ollama and LM Studio. Source of truth for KV-cache quantization flags, speculative decoding options, and Apple Silicon Metal support.",
+      "add_as_web_search": false
+    }
+  ],
+  "small_models": [
+    {
+      "name": "HuggingFace Model Hub",
+      "url": "https://huggingface.co/models",
+      "description": "Primary source for current Gemma, Phi, and Qwen model releases and version tags. Always verify point-release availability here before recommending a specific version to users.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Gemma Releases Page",
+      "url": "https://ai.google.dev/gemma/docs/releases",
+      "description": "Official Google Gemma release notes. Current as of June 2026: Gemma 4 12B (April 2, 2026, Apache 2.0, encoder-free multimodal), QAT weights (June 5, 2026, ~72% memory reduction). Verify exact weights and context window before recommending.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Ollama Releases",
+      "url": "https://github.com/ollama/ollama/releases",
+      "description": "Official Ollama release notes. Stable was v0.30.10 (June 17, 2026) as of this validation, with pre-releases moving faster; the repo now advertises Kimi-K2, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, and Gemma support in its own README. Includes `ollama launch` capability for launching integrated tools and companion applications (e.g., `ollama launch hermes-desktop`, `ollama launch codex`) — confirmed current as of July 2026. Verify current version before quoting.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "DeepSeek (Hugging Face org)",
+      "url": "https://huggingface.co/deepseek-ai",
+      "description": "Primary source for current DeepSeek V3.x/R1 releases and R1-Distill-* small models. MIT-licensed as of the V3.2/R1 line. Full V3/R1-class MoE (~671-675B total params) does not fit on a single consumer GPU or single H100 at usable quant; only the distills are laptop/workstation-class. Verify current release and license before quoting.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Mistral AI News",
+      "url": "https://mistral.ai/news",
+      "description": "Primary source for Mistral 3 / Ministral (3B/8B/14B dense, Apache 2.0) and Mistral Large 3 (675B total / 41B active MoE, Dec 2025) releases. Verify current sizes, license, and context window before quoting.",
+      "add_as_web_search": true
+    }
+  ]
+}

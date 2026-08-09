@@ -1,0 +1,130 @@
+{
+  "metadata": {
+    "skill": "software-devtools",
+    "updated": "2026-07-11",
+    "total_sources": 18,
+    "description": "Primary references for CLI, SDK, IDE extension, language-server, and package publishing work, including current registry-publishing security practices.",
+    "title": "Software Devtools - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "sdk_and_cli": [
+      {
+        "name": "OpenAPI Specification",
+        "url": "https://spec.openapis.org/oas/latest.html",
+        "description": "Source contract for schema-driven SDK and client generation.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cobra",
+        "url": "https://cobra.dev/",
+        "description": "Go CLI framework and UX conventions for subcommand-oriented tools.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Typer",
+        "url": "https://typer.tiangolo.com/",
+        "description": "Python CLI framework with type-driven argument handling.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "oclif",
+        "url": "https://oclif.io/",
+        "description": "JavaScript/TypeScript CLI framework for plugin-friendly tools.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Language Server Protocol",
+        "url": "https://microsoft.github.io/language-server-protocol/",
+        "description": "Official LSP overview and specification entrypoint for multi-editor language tooling.",
+        "add_as_web_search": true
+      }
+    ],
+    "mcp": [
+      {
+        "name": "Model Context Protocol (spec)",
+        "url": "https://modelcontextprotocol.io/",
+        "description": "Canonical Model Context Protocol: concepts, architecture, ecosystem. The dominant 2026 pattern for connecting AI apps/agents to external tools and data.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "MCP — Build a Server",
+        "url": "https://modelcontextprotocol.io/docs/develop/build-server",
+        "description": "Official guide to building MCP servers (exposing tools/data to AI agents). Resolve current SDK and tooling at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "MCP — Build a Client",
+        "url": "https://modelcontextprotocol.io/docs/develop/build-client",
+        "description": "Official guide to building MCP clients. Relevant for SDK/CLI products exposing or consuming agent tool surfaces.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Official MCP Registry",
+        "url": "https://registry.modelcontextprotocol.io/",
+        "description": "Official metadata registry for publicly discoverable MCP servers; in preview since late 2025, ~10k server records by mid-2026. Points to npm/PyPI/etc. packages rather than hosting them.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "ide_and_publishing": [
+      {
+        "name": "VS Code Extension API",
+        "url": "https://code.visualstudio.com/api",
+        "description": "Primary docs for editor extensions, activation, and publishing.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "npm Package Publishing",
+        "url": "https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry",
+        "description": "Official npm packaging and publishing guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "npm Provenance Statements",
+        "url": "https://docs.npmjs.com/generating-provenance-statements/",
+        "description": "Official npm provenance, attestations, and verification guidance for secure package publishing.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "npm Trusted Publishing",
+        "url": "https://docs.npmjs.com/trusted-publishers/",
+        "description": "Official npm trusted-publishing (OIDC) guidance; reached general availability mid-2025 and is the current recommended alternative to long-lived publish tokens for GitHub Actions and GitLab CI.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "CISA Advisory — npm Supply Chain Compromise (Shai-Hulud)",
+        "url": "https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem",
+        "description": "Government advisory on the Shai-Hulud self-propagating npm worm (Sept 2025, second wave Nov 2025); baseline threat model for publish-credential and install-script hardening.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PyPI Packaging Guide",
+        "url": "https://packaging.python.org/en/latest/",
+        "description": "Python packaging, distribution metadata, and publishing workflow.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "crates.io Policies",
+        "url": "https://doc.rust-lang.org/cargo/reference/publishing.html",
+        "description": "Rust crate publishing and package metadata guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NuGet Package Publishing",
+        "url": "https://learn.microsoft.com/en-us/nuget/quickstart/create-and-publish-a-package-using-the-dotnet-cli",
+        "description": "Official NuGet package publishing workflow and API-key handling guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Maven Central Publisher Portal",
+        "url": "https://central.sonatype.org/publish/publish-portal-guide/",
+        "description": "Official Maven Central publisher portal guide for artifact validation and release workflow.",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,331 @@
+{
+  "metadata": {
+    "title": "Project Memory for Claude Code + Codex - Sources",
+    "description": "Official documentation for Claude Code memory, Codex AGENTS.md behavior, and cross-platform project memory compatibility",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "agents-memory",
+    "total_sources": 42
+  },
+  "official_anthropic": [
+    {
+      "name": "Anthropic: Best Practices for Claude Opus 4.7 with Claude Code",
+      "url": "https://claude.com/blog/best-practices-for-using-claude-opus-4-7-with-claude-code",
+      "description": "Primary source for Opus 4.7 behavior changes (shipped 2026-04-16): literal instruction following, fewer default subagents, xhigh default reasoning, adaptive thinking replacing budget_tokens, auto-calibrated response length, tokenizer change, positive examples over 'Don't do this'.",
+      "published": "2026-04-16",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic: What's New in Claude Opus 4.8",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-8",
+      "description": "Primary source for Opus 4.8 (shipped 2026-05-28, model id claude-opus-4-8): effort default is now 'high' on all surfaces including Claude Code (not xhigh); mid-conversation system messages preserve prompt cache; 1M context by default; better compaction recovery and tool triggering; budget_tokens still returns 400; lower 1,024-token cache minimum.",
+      "published": "2026-05-28",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic: Claude Opus 4.7 Prompting Guide",
+      "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering",
+      "description": "Official prompting guidance referenced by the 4.7 best-practices blog. Adaptive thinking, intent-first prompting, and tool-use patterns.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic: Introducing Claude Sonnet 5",
+      "url": "https://www.anthropic.com/news/claude-sonnet-5",
+      "description": "Primary source: Claude Sonnet 5 (shipped 2026-06-30) supersedes the Opus 4.7/4.8 line as the default Claude Code model; effort still defaults to `high` (verified via the Sonnet 5 prompting guide below), same as Opus 4.8 — the 4.8 migration checklist's effort guidance carries forward unchanged.",
+      "published": "2026-06-30",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic: Prompting Claude Sonnet 5",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5",
+      "description": "Confirms effort defaults to `high` on Sonnet 5 (same as Sonnet 4.6 and Opus 4.8); raise to `xhigh` for the hardest coding/agentic tasks.",
+      "published": "2026-06-30",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic: Claude Fable 5 and Claude Mythos 5",
+      "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+      "description": "Primary source: Claude Fable 5 / Mythos 5 (shipped 2026-06-09, global availability from 2026-07-01) is Anthropic's newest generation, above the Opus 4.x line. 1M-token default context window — raises the temptation to skip external memory/retrieval; this skill's progressive-disclosure discipline applies more, not less, at this scale.",
+      "published": "2026-06-09",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic: Prompting Claude Fable 5",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5",
+      "description": "Confirms adaptive thinking remains the only thinking mode on Fable 5/Mythos 5 (`budget_tokens` still rejected); thinking depth is driven by the effort parameter and query complexity, not a memory-file setting.",
+      "published": "2026-06-09",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Memory Management",
+      "url": "https://code.claude.com/docs/en/memory",
+      "description": "Primary documentation for memory management and CLAUDE.md",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CLAUDE.md Documentation",
+      "url": "https://code.claude.com/docs/en/memory#claudemd-files",
+      "description": "Official CLAUDE.md file format documentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Overview",
+      "url": "https://code.claude.com/docs/en/overview",
+      "description": "Claude Code feature overview",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic: Claude Code Best Practices",
+      "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+      "description": "Official Anthropic best practices for Claude Code and CLAUDE.md configuration",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Common Workflows",
+      "url": "https://code.claude.com/docs/en/common-workflows",
+      "description": "Official workflows including project setup and documentation",
+      "add_as_web_search": true
+    }
+  ],
+  "official_openai": [
+    {
+      "name": "OpenAI AGENTS.md Guide",
+      "url": "https://developers.openai.com/codex/guides/agents-md",
+      "description": "Official OpenAI Codex documentation for AGENTS.md cross-platform standard",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Config Advanced",
+      "url": "https://developers.openai.com/codex/config-advanced/",
+      "description": "Advanced configuration for OpenAI Codex including AGENTS.md settings",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Memories",
+      "url": "https://developers.openai.com/codex/memories",
+      "description": "Codex accumulated-recall layer (auto-memory analog): enable via [features] memories = true in ~/.codex/config.toml; stored in ~/.codex/memories/; off by default in EEA/UK/CH; sub-keys generate_memories, use_memories, disable_on_external_context; official guidance keeps must-always rules in AGENTS.md, treats memories as local recall only.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Overview",
+      "url": "https://developers.openai.com/codex/overview",
+      "description": "Official OpenAI Codex CLI overview",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Skills",
+      "url": "https://developers.openai.com/codex/skills",
+      "description": "Official OpenAI Codex skills and metadata documentation",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Subagents",
+      "url": "https://developers.openai.com/codex/subagents/",
+      "description": "Codex custom agents, TOML format, built-in agents, thread model, and CSV batch processing",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Best Practices",
+      "url": "https://developers.openai.com/codex/learn/best-practices",
+      "description": "config.toml layering, retrospective AGENTS.md workflow, essential coverage checklist, and progression model",
+      "add_as_web_search": true
+    }
+  ],
+  "cross_platform": [
+    {
+      "name": "AGENTS.md Official Site",
+      "url": "https://agents.md/",
+      "description": "Official AGENTS.md specification and supported tools list",
+      "add_as_web_search": true
+    }
+  ],
+  "adjacent_agent_memory": [
+    {
+      "name": "Hermes Persistent Memory Docs",
+      "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory/",
+      "description": "Reference for keeping always-loaded memory small and separating profile memory from searchable recall.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Hermes Prompt Assembly Docs",
+      "url": "https://hermes-agent.nousresearch.com/docs/developer-guide/prompt-assembly/",
+      "description": "Reference for prompt stability and cache-aware assembly decisions in agent memory systems.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Hermes Session Storage Docs",
+      "url": "https://hermes-agent.nousresearch.com/docs/developer-guide/session-storage/",
+      "description": "Reference for keeping long-tail session history in searchable storage instead of the hot prompt layer.",
+      "add_as_web_search": true
+    }
+  ],
+  "community_guides": [
+    {
+      "name": "Boris Cherny on Opus 4.7 with Claude Code",
+      "url": "https://x.com/bcherny/status/2044822408826380440",
+      "description": "Secondary: Anthropic Claude Code PM's note that Opus 4.7 feels more intelligent, agentic, and precise than 4.6 and takes a few days to learn. Links to the primary best-practices post.",
+      "published": "2026-04-16",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Pawel Huryn: Opus 4.7 migration guide",
+      "url": "https://x.com/PawelHuryn/status/2046197132105769065",
+      "description": "Tertiary synthesis: 10 concrete moves for the 4.7 upgrade — strategic context in CLAUDE.md once, per-task intent each turn, delete progress scaffolding, flip don'ts to positive examples, DISPATCH.md for fan-out, review plans not diffs, regression-test old prompts, cost-per-correct-output-token framing.",
+      "published": "2026-06-18",
+      "add_as_web_search": false
+    },
+    {
+      "name": "GitHub Blog: How to Write a Great AGENTS.md (2,500-repo analysis)",
+      "url": "https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-2500-repositories/",
+      "description": "Data-driven analysis of 2,500+ repos revealing six core sections, instruction budget limits, and concrete structural recommendations",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Builder.io: Claude Code Tips and Best Practices",
+      "url": "https://www.builder.io/blog/claude-code-tips-best-practices",
+      "description": "Practical Claude Code tips including CLAUDE.md structure, feedback loops, and verification workflows",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HumanLayer: Writing a Good CLAUDE.md",
+      "url": "https://www.humanlayer.dev/blog/writing-a-good-claude-md",
+      "description": "Community guide to effective CLAUDE.md structure with emphasis on feedback loops and progressive disclosure",
+      "add_as_web_search": true
+    },
+    {
+      "name": "alexop.dev: Stop Bloating Your CLAUDE.md \u2014 Progressive Disclosure",
+      "url": "https://alexop.dev/posts/stop-bloating-your-claude-md-progressive-disclosure-ai-coding-tools/",
+      "description": "Progressive disclosure architecture pattern for keeping root memory lean while maintaining deep context access",
+      "add_as_web_search": true
+    },
+    {
+      "name": "UX Planet: CLAUDE.md Best Practices",
+      "url": "https://uxplanet.org/claude-md-best-practices-1ef4f861ce7c",
+      "description": "Community best practices for CLAUDE.md including size targets and essential sections",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TurboDocx: How to Write CLAUDE.md That Works",
+      "url": "https://www.turbodocx.com/blog/how-to-write-claude-md-best-practices",
+      "description": "Practical guide covering what to include vs exclude, with emphasis on avoiding code style rules and generic advice",
+      "add_as_web_search": true
+    },
+    {
+      "name": "DEV Community: CLAUDE.md in Monorepos",
+      "url": "https://dev.to/anvodev/how-i-organized-my-claudemd-in-a-monorepo-with-too-many-contexts-37k7",
+      "description": "Real-world monorepo organization with hierarchical CLAUDE.md and context loading strategies",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Builder.io: AGENTS.md Best Tips",
+      "url": "https://www.builder.io/blog/agents-md",
+      "description": "Cross-platform AGENTS.md guide with three-tier boundary model and concrete examples",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Codebase Memory MCP",
+      "url": "https://github.com/DeusData/codebase-memory-mcp",
+      "description": "Converts a codebase into a persistent knowledge graph for agents; reference for structured memory that survives across sessions and agents",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Mem9",
+      "url": "https://github.com/mem9-ai/mem9",
+      "description": "Dedicated memory system for AI agents; reference for cross-session memory architecture and retrieval patterns",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Code Best Practices: Memory Management",
+      "url": "https://cuong.io/blog/2025/06/15-claude-code-best-practices-memory-management",
+      "description": "Practical tips for lean memory files and token optimization",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Path-Specific Rules in Claude Code",
+      "url": "https://paddo.dev/blog/claude-rules-path-specific-native/",
+      "description": "Guide to using YAML frontmatter for file-scoped rules",
+      "add_as_web_search": false
+    },
+    {
+      "name": "OpenClaw AGENTS.md (Real-World Example)",
+      "url": "https://github.com/openclaw/openclaw/blob/main/AGENTS.md",
+      "description": "Battle-tested AGENTS.md from a production TypeScript CLI with multi-agent safety, operational playbooks, and release guardrails",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Code Settings & Environment Variables",
+      "url": "https://code.claude.com/docs/en/settings#environment-variables",
+      "description": "Official Claude Code settings reference covering configuration scopes (managed/user/project/local), settings.json structure, subagent locations, MCP server config, CLAUDE.md locations, and environment variables",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Hooks Guide",
+      "url": "https://code.claude.com/docs/en/hooks-guide",
+      "description": "Official hooks documentation for deterministic guardrails that complement advisory project memory",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Cost Management",
+      "url": "https://code.claude.com/docs/en/costs",
+      "description": "Token consumption, context window management, and cost optimization strategies for CLAUDE.md",
+      "add_as_web_search": true
+    },
+    {
+      "name": "forrestchang/andrej-karpathy-skills",
+      "url": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "description": "MIT-licensed Karpathy-inspired behavioral-rules plugin. Source for goal-transformation pattern, trace test, 200-line rewrite heuristic, orphan-vs-pre-existing dead code distinction, tradeoff disclosure framing, and working-if success metric. Derivative of Karpathy's public observations on LLM coding pitfalls.",
+      "add_as_web_search": false,
+      "license": "MIT",
+      "commit_sha": "fb8fdb0aa74ccf587d2b666da7160e0d0eb94e6a",
+      "extracted": "2026-04-15",
+      "extracted_by": "research-git",
+      "files_used": [
+        "CLAUDE.md",
+        "skills/karpathy-guidelines/SKILL.md",
+        "EXAMPLES.md",
+        "README.md"
+      ],
+      "patterns_merged": [
+        "M1: goal transformation (Transform Vague Tasks to Verifiable Goals)",
+        "M2: working-if success metric (Measuring Whether Memory Is Working)",
+        "M3: trace test (Every changed line must trace directly to the user's request)",
+        "M4: 200-line rewrite heuristic",
+        "M5: orphan vs pre-existing dead code distinction",
+        "M6: tradeoff disclosure framing"
+      ],
+      "karpathy_quotes_cited": [
+        "The models make wrong assumptions on your behalf and just run along with them without checking.",
+        "They really like to overcomplicate code and APIs, bloat abstractions, don't clean up dead code.",
+        "LLMs are exceptionally good at looping until they meet specific goals... give it success criteria."
+      ],
+      "research_pack": "docs/research/2026-04-15-agents-memory-skill-scan.md"
+    },
+    {
+      "name": "garrytan/gstack",
+      "url": "https://github.com/garrytan/gstack",
+      "description": "MIT-licensed Garry Tan / Y Combinator AI-engineering workflow skill pack. Source for the completeness-maximalism operating mode: compression-ratio framing (human-team time vs. AI-assisted time by task type), the boil-the-ocean completeness heuristic, the three-layer search-before-building knowledge model, and the destructive-command safe-exceptions allowlist pattern. Companion contract to coding-behavior.md's defensive-minimalism mode, not a merge into it.",
+      "add_as_web_search": false,
+      "license": "MIT",
+      "commit_sha": "94993f74012782fd94416dd44b8314f6363a13a4",
+      "extracted": "2026-08-09",
+      "extracted_by": "general-purpose agent (coding-behavior-completeness.md authoring task)",
+      "files_used": [
+        "ETHOS.md",
+        "AGENTS.md",
+        "careful/SKILL.md"
+      ],
+      "patterns_merged": [
+        "M1: compression-ratio table reframed as time-savings justification for completeness",
+        "M2: boil-the-ocean completeness heuristic (prefer the full implementation when the marginal cost is small)",
+        "M3: three-layer knowledge model for search-before-building (established pattern / current trend / reasoned from the problem)",
+        "M4: safe-exceptions allowlist pattern for otherwise-forbidden destructive operations",
+        "M5: user-sovereignty framing (two models agreeing is signal, not a mandate to act unprompted)"
+      ],
+      "garry_tan_quotes_cited": [
+        "The marginal cost of completeness is near zero with AI. Do the whole thing.",
+        "The answer is the finished product, not a plan to build it."
+      ],
+      "companion_file": "coding-behavior-completeness.md"
+    }
+  ]
+}

@@ -1,0 +1,620 @@
+{
+  "metadata": {
+    "skill": "software-code-review",
+    "title": "Code Review Sources",
+    "description": "Verified July 2026 sources for code review workflows, AI-assisted review, platform-native controls, and supporting security/quality tooling.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "version": "2.1",
+    "total_sources": 32,
+    "schema_notes": {
+      "status": "live | legacy | moved | restricted | retired",
+      "evidence_tier": "official | independent | vendor | community",
+      "source_type": "official | independent | vendor | community"
+    },
+    "retired_examples": [
+      {
+        "name": "GitKraken Code Review Best Practices 2024",
+        "url": "https://www.gitkraken.com/blog/code-review-best-practices-2024",
+        "reason": "A dated vendor blog is not a stable default source for current recommendations."
+      },
+      {
+        "name": "Qodo Best AI Code Review Tools 2026",
+        "url": "https://www.qodo.ai/blog/best-ai-code-review-tools-2026/",
+        "reason": "Article URL no longer resolves to a stable article target; use official docs or product docs instead."
+      },
+      {
+        "name": "Qodo What Is Code Review",
+        "url": "https://www.qodo.ai/blog/what-is-code-review/",
+        "reason": "Article URL no longer resolves to a stable article target; use official docs or product docs instead."
+      },
+      {
+        "name": "ConsenSys Smart Contract Best Practices",
+        "url": "https://consensys.github.io/smart-contract-best-practices/",
+        "reason": "Historical page moved; use maintained Solidity and Trail of Bits references instead."
+      },
+      {
+        "name": "OpenAI Datadog Case Study",
+        "url": "https://openai.com/index/datadog/",
+        "reason": "Useful case study, but weaker than the main Codex product page for current tool-surface guidance."
+      }
+    ]
+  },
+  "categories": {
+    "foundational_guides": [
+      {
+        "name": "Google Engineering Practices - Code Review",
+        "url": "https://google.github.io/eng-practices/review/",
+        "type": "guide",
+        "description": "Canonical lightweight review guidance covering reviewer and author behavior.",
+        "relevance": "Good baseline for review scope, change size, and practical reviewer expectations.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "foundational",
+          "review-process",
+          "google"
+        ]
+      },
+      {
+        "name": "Microsoft Code With Engineering Playbook - Code Reviews",
+        "url": "https://microsoft.github.io/code-with-engineering-playbook/code-reviews/",
+        "type": "guide",
+        "description": "Engineering playbook guidance for structured reviews and team review practices.",
+        "relevance": "Useful secondary baseline for pragmatic process guidance.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "foundational",
+          "review-process",
+          "microsoft"
+        ]
+      },
+      {
+        "name": "Conventional Comments",
+        "url": "https://conventionalcomments.org/",
+        "type": "reference",
+        "description": "Labeling system for intent-aware review comments such as issue, suggestion, and nitpick.",
+        "relevance": "Helpful for consistent review tone and structure across teams and tools.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "community",
+        "platform": "cross-platform",
+        "source_type": "community",
+        "add_as_web_search": false,
+        "tags": [
+          "comments",
+          "communication",
+          "review-style"
+        ]
+      },
+      {
+        "name": "SmartBear Best Practices for Peer Code Review",
+        "url": "https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/",
+        "type": "guide",
+        "description": "Long-lived peer review guidance often cited for review-size and inspection-rate heuristics.",
+        "relevance": "Useful historical reference, but any hard thresholds should be treated as heuristics rather than policy.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "vendor",
+        "platform": "cross-platform",
+        "source_type": "vendor",
+        "add_as_web_search": false,
+        "tags": [
+          "heuristics",
+          "review-size",
+          "historical"
+        ]
+      }
+    ],
+    "security_and_quality": [
+      {
+        "name": "OWASP Code Review Guide",
+        "url": "https://owasp.org/www-project-code-review-guide/",
+        "type": "guide",
+        "description": "OWASP project guidance for secure code review preparation and execution.",
+        "relevance": "Primary AppSec review reference for secure review methodology.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "owasp",
+          "security",
+          "review"
+        ]
+      },
+      {
+        "name": "OWASP Secure Coding Practices Quick Reference - Checklist",
+        "url": "https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/stable-en/02-checklist/05-checklist",
+        "type": "checklist",
+        "description": "Secure coding checklist covering validation, auth, cryptography, and data protection.",
+        "relevance": "Useful companion checklist during security-focused code review.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "owasp",
+          "checklist",
+          "secure-coding"
+        ]
+      },
+      {
+        "name": "GitHub Code Security - Supported Alerts in Code Scanning",
+        "url": "https://docs.github.com/en/code-security/code-scanning/introduction/supported-alerts-in-code-scanning",
+        "type": "documentation",
+        "description": "Current GitHub code scanning capability surface and alert coverage.",
+        "relevance": "Useful to distinguish native GitHub code scanning from broader review or SAST claims.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "github",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "github",
+          "code-scanning",
+          "security"
+        ]
+      },
+      {
+        "name": "Semgrep Documentation",
+        "url": "https://semgrep.dev/docs/",
+        "type": "documentation",
+        "description": "Docs for Semgrep rules, CI integration, and code scanning patterns.",
+        "relevance": "Good cross-platform static analysis reference for correctness and security review automation.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "semgrep",
+          "sast",
+          "static-analysis"
+        ]
+      },
+      {
+        "name": "SonarQube Server Documentation",
+        "url": "https://docs.sonarsource.com/sonarqube-server/latest/",
+        "type": "documentation",
+        "description": "Current SonarQube Server docs covering quality gates and static analysis.",
+        "relevance": "Useful for quality-gate and scanner integration guidance.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "sonarqube",
+          "quality-gates",
+          "static-analysis"
+        ]
+      },
+      {
+        "name": "Snyk Documentation",
+        "url": "https://docs.snyk.io/",
+        "type": "documentation",
+        "description": "Docs for dependency, code, container, and IaC scanning workflows.",
+        "relevance": "Useful for supply-chain and review-adjacent security automation guidance.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "snyk",
+          "sca",
+          "security"
+        ]
+      }
+    ],
+    "platform_native_review": [
+      {
+        "name": "GitHub Copilot Code Review",
+        "url": "https://docs.github.com/en/copilot/tutorials/review-ai-generated-code",
+        "type": "documentation",
+        "description": "Official GitHub Copilot review flow for AI-generated changes and pull requests. Copilot code review moved to an agentic architecture in 2026 (tool-calling to gather repo context before commenting) and added reasoning-tier routing for complex changes; verify current tier/architecture details here rather than assuming a fixed behavior.",
+        "relevance": "Primary source for modern GitHub-native AI review guidance.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "github",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "github",
+          "copilot",
+          "code-review"
+        ]
+      },
+      {
+        "name": "GitHub Copilot Automatic Code Review",
+        "url": "https://docs.github.com/en/copilot/how-tos/agents/copilot-code-review/automatic-code-review",
+        "type": "documentation",
+        "description": "Configuration for automatic pull request review by Copilot.",
+        "relevance": "Needed when discussing native AI auto-review rather than manual on-demand review.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "github",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "github",
+          "copilot",
+          "auto-review"
+        ]
+      },
+      {
+        "name": "GitHub Repository Instructions for Copilot",
+        "url": "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions",
+        "type": "documentation",
+        "description": "Repository and path-specific custom instructions for Copilot.",
+        "relevance": "Important for keeping AI review comments aligned with local conventions and generated-file boundaries.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "github",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "github",
+          "copilot",
+          "instructions"
+        ]
+      },
+      {
+        "name": "GitHub Configure Coding Guidelines and Excluded Content",
+        "url": "https://docs.github.com/en/copilot/how-tos/agents/copilot-code-review/configure-coding-guidelines",
+        "type": "documentation",
+        "description": "Guidance for coding guidelines and excluded files in Copilot code review.",
+        "relevance": "Useful for AI review scoping and generated-file exclusion.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "github",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "github",
+          "copilot",
+          "exclusions"
+        ]
+      },
+      {
+        "name": "GitHub Merge Queue",
+        "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue",
+        "type": "documentation",
+        "description": "Native merge queue workflow and CI implications for GitHub repositories.",
+        "relevance": "Primary source for GitHub-native serialized merge automation.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "github",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "github",
+          "merge-queue",
+          "ci"
+        ]
+      },
+      {
+        "name": "GitLab Duo in Merge Requests",
+        "url": "https://docs.gitlab.com/user/project/merge_requests/duo_in_merge_requests/",
+        "type": "documentation",
+        "description": "GitLab Duo features available directly in merge requests.",
+        "relevance": "Primary source for GitLab-native AI assistance during review.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "gitlab",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "gitlab",
+          "duo",
+          "merge-request"
+        ]
+      },
+      {
+        "name": "GitLab Custom Review Instructions",
+        "url": "https://docs.gitlab.com/user/gitlab_duo/customize_duo/review_instructions/",
+        "type": "documentation",
+        "description": "Custom instructions for GitLab Duo code review.",
+        "relevance": "Needed for repository-specific review guidance on GitLab.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "gitlab",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "gitlab",
+          "duo",
+          "instructions"
+        ]
+      },
+      {
+        "name": "GitLab Merge Request Approvals",
+        "url": "https://docs.gitlab.com/user/project/merge_requests/approvals/",
+        "type": "documentation",
+        "description": "GitLab merge request approval workflow and reviewer controls.",
+        "relevance": "Primary source for required approvals on GitLab.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "gitlab",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "gitlab",
+          "approvals",
+          "merge-request"
+        ]
+      },
+      {
+        "name": "Bitbucket Cloud Code Insights",
+        "url": "https://support.atlassian.com/bitbucket-cloud/docs/code-insights/",
+        "type": "documentation",
+        "description": "Bitbucket Cloud interface for annotations, reports, and review signals from external tools.",
+        "relevance": "Primary native review automation surface for Bitbucket Cloud.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "bitbucket",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "bitbucket",
+          "code-insights",
+          "review-automation"
+        ]
+      }
+    ],
+    "third_party_ai_review": [
+      {
+        "name": "CodeRabbit Documentation",
+        "url": "https://docs.coderabbit.ai/",
+        "type": "documentation",
+        "description": "Official CodeRabbit documentation for setup, review behavior, and platform support.",
+        "relevance": "Preferred source when discussing CodeRabbit capabilities instead of marketing pages.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "coderabbit",
+          "ai-review",
+          "docs"
+        ]
+      },
+      {
+        "name": "Qodo PR-Agent Repository",
+        "url": "https://github.com/The-PR-Agent/pr-agent",
+        "type": "tool",
+        "description": "Open-source PR-Agent repository. Qodo transferred project governance to an independent community organization in 2026 (new org, external maintainer); Qodo remains a sponsor but now sells a separate commercial code-review product. Re-verify the canonical repo location before citing, since it moved once already.",
+        "relevance": "Better primary source than unstable Qodo blog URLs for feature and configuration details.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "community",
+        "platform": "cross-platform",
+        "source_type": "community",
+        "add_as_web_search": true,
+        "tags": [
+          "qodo",
+          "pr-agent",
+          "ai-review",
+          "community-governed"
+        ]
+      },
+      {
+        "name": "OpenAI Codex",
+        "url": "https://openai.com/codex/",
+        "type": "documentation",
+        "description": "Official Codex product page for agentic software engineering workflows.",
+        "relevance": "Useful current source when discussing agent-based review or codebase-aware software engineering assistance.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "openai",
+          "codex",
+          "agents"
+        ]
+      },
+      {
+        "name": "Amazon Q Developer",
+        "url": "https://aws.amazon.com/q/developer/",
+        "type": "documentation",
+        "description": "Official Amazon Q Developer entry point for AWS developer-assistance workflows.",
+        "relevance": "Current AWS product surface to cite instead of historical CodeWhisperer or CodeGuru branding.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "aws",
+          "amazon-q",
+          "developer-tools"
+        ]
+      },
+      {
+        "name": "Amazon CodeGuru Reviewer Availability Change",
+        "url": "https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/codeguru-reviewer-availability-change.html",
+        "type": "announcement",
+        "description": "AWS moved CodeGuru Reviewer to a maintenance lifecycle; new repository associations have not been accepted since November 7, 2025. Existing associations continue to work.",
+        "relevance": "Important legacy note so the skill does not recommend a deprecated path.",
+        "status": "legacy",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "replacement_url": "https://aws.amazon.com/q/developer/",
+        "add_as_web_search": true,
+        "tags": [
+          "aws",
+          "codeguru",
+          "legacy"
+        ]
+      },
+      {
+        "name": "Claude Code Security Review (Anthropic)",
+        "url": "https://github.com/anthropics/claude-code-security-review",
+        "type": "tool",
+        "description": "Anthropic's open-source tool for automated PR security vulnerability analysis using Claude; reference for AI-assisted security review integration in CI pipelines.",
+        "relevance": "First-party Anthropic implementation of AI-powered security review \u2014 strong reference for agent-assisted code review quality gates.",
+        "status": "live",
+        "last_verified": "2026-03-21",
+        "evidence_tier": "official",
+        "platform": "cross-platform",
+        "source_type": "official",
+        "add_as_web_search": false,
+        "tags": [
+          "anthropic",
+          "security-review",
+          "ai-review",
+          "ci"
+        ]
+      },
+      {
+        "name": "alibaba/open-code-review",
+        "url": "https://github.com/alibaba/open-code-review",
+        "type": "tool",
+        "description": "Org-backed open-source AI code review tool. Source for the pre-review deterministic file gate, size-gated planning-pass threshold, and post-loop self-refutation filter pass documented in references/deterministic-vs-llm-routing.md.",
+        "relevance": "Concrete, falsifiable hybrid deterministic/LLM routing architecture for AI review tooling; extracted as a pattern reference, not copied verbatim.",
+        "status": "live",
+        "last_verified": "2026-08-09",
+        "evidence_tier": "community",
+        "platform": "cross-platform",
+        "source_type": "community",
+        "license": "Apache-2.0",
+        "commit_sha": "f44821d9aa0993e8e3cf90ae3fe12e733e045b15",
+        "extracted_date": "2026-08-09",
+        "add_as_web_search": false,
+        "tags": [
+          "ai-review",
+          "deterministic-gate",
+          "routing",
+          "false-positive-reduction"
+        ]
+      }
+    ],
+    "smart_contract_review": [
+      {
+        "name": "Solidity Security Considerations",
+        "url": "https://docs.soliditylang.org/en/latest/security-considerations.html",
+        "type": "documentation",
+        "description": "Official Solidity security pitfalls and language-specific review concerns.",
+        "relevance": "Primary language-level review source for Solidity contracts.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "official",
+        "platform": "domain-specific",
+        "source_type": "official",
+        "add_as_web_search": true,
+        "tags": [
+          "solidity",
+          "security",
+          "smart-contracts"
+        ]
+      },
+      {
+        "name": "Trail of Bits - Building Secure Contracts",
+        "url": "https://github.com/crytic/building-secure-contracts",
+        "type": "reference",
+        "description": "Maintained repository of smart contract security guidance and tools.",
+        "relevance": "Good replacement for older moved smart contract best-practice pages.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "community",
+        "platform": "domain-specific",
+        "source_type": "community",
+        "add_as_web_search": true,
+        "tags": [
+          "trail-of-bits",
+          "crytic",
+          "smart-contracts"
+        ]
+      }
+    ],
+    "mcp": [
+      {
+        "name": "Model Context Protocol (spec)",
+        "url": "https://modelcontextprotocol.io/",
+        "description": "Canonical Model Context Protocol: concepts, architecture, ecosystem. The dominant 2026 pattern for connecting AI apps/agents to external tools and data.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "MCP \u2014 Build a Server",
+        "url": "https://modelcontextprotocol.io/docs/develop/build-server",
+        "description": "Official guide to building MCP servers (exposing tools/data to AI agents). Resolve current SDK and tooling at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "team_and_research": [
+      {
+        "name": "Swarmia - A Complete Guide to Code Reviews",
+        "url": "https://www.swarmia.com/blog/a-complete-guide-to-code-reviews/",
+        "type": "guide",
+        "description": "Operational guidance for review process, batch size, and team behavior.",
+        "relevance": "Useful independent reference for process design, though still secondary to official docs.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "independent",
+        "platform": "cross-platform",
+        "source_type": "independent",
+        "add_as_web_search": false,
+        "tags": [
+          "process",
+          "reviews",
+          "team-practice"
+        ]
+      },
+      {
+        "name": "The Fearless Organization",
+        "url": "https://fearlessorganization.com/",
+        "type": "book",
+        "description": "Amy Edmondson's work on psychological safety in teams.",
+        "relevance": "Useful support for constructive review culture and feedback style.",
+        "status": "live",
+        "last_verified": "2026-07-11",
+        "evidence_tier": "independent",
+        "platform": "cross-platform",
+        "source_type": "independent",
+        "add_as_web_search": false,
+        "tags": [
+          "psychological-safety",
+          "feedback",
+          "team-culture"
+        ]
+      }
+    ]
+  }
+}

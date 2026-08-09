@@ -1,0 +1,198 @@
+{
+  "metadata": {
+    "skill": "software-android-runtime-debugging",
+    "updated": "2026-07-11",
+    "version": "1.1",
+    "total_sources": 25,
+    "description": "Primary references for native Android build/install/launch proof, ADB, APK inspection, Gradle troubleshooting, Compose debugging, R8 triage, and ANR/jank/memory/startup performance triage.",
+    "title": "Software Android Runtime Debugging - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "android_platform": [
+      {
+        "name": "ADB Documentation",
+        "url": "https://developer.android.com/tools/adb",
+        "description": "Primary reference for ADB commands: install, uninstall, shell, logcat, and device connectivity.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Studio Release Notes",
+        "url": "https://developer.android.com/studio/releases",
+        "description": "Use when IDE, emulator, or toolchain behavior may have changed across Android Studio releases.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Android App Bundle Format",
+        "url": "https://developer.android.com/guide/app-bundle",
+        "description": "Primary reference for AAB format, bundletool, and split APK delivery.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Manifest Reference",
+        "url": "https://developer.android.com/guide/topics/manifest/manifest-intro",
+        "description": "Primary reference for manifest merging, activity declarations, permissions, and intent filters.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Studio Releases",
+        "url": "https://developer.android.com/studio/releases",
+        "description": "Authoritative Android Studio release notes: profiler, LeakCanary integration, Agent Mode. Resolve current version at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android 16 Platform",
+        "url": "https://developer.android.com/about/versions/16",
+        "description": "Android 16 platform/behavior changes relevant to install/launch and stale-build triage. Verify specifics at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Versions Overview",
+        "url": "https://developer.android.com/about/versions",
+        "description": "Canonical index of Android platform versions; use to confirm the current release (Android 17/API 37 as of 2026-06-16) before citing a version as latest.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "16KB Page Size Support",
+        "url": "https://developer.android.com/guide/practices/page-sizes",
+        "description": "16KB page-size requirement for native libraries, mandatory for app updates since 2026-05-01. Verify current enforcement status.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google Play Target API Requirements",
+        "url": "https://developer.android.com/google/play/requirements/target-sdk",
+        "description": "Rolling Google Play target-API deadline (API 36 as of 2026-08-31, extension to 2026-11-01). Re-verify before citing a specific date or API level.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "gradle_build_system": [
+      {
+        "name": "AGP Release Notes",
+        "url": "https://developer.android.com/build/releases/gradle-plugin",
+        "description": "Android Gradle Plugin version compatibility, migration guides, and breaking changes.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "AGP Compatibility Roadmap",
+        "url": "https://developer.android.com/build/releases/gradle-plugin-roadmap",
+        "description": "AGP-to-Gradle-to-JDK minimum version matrix, including the AGP 9.x series. Verify before assuming an older wrapper version still works.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Gradle Build Cache Documentation",
+        "url": "https://docs.gradle.org/current/userguide/build_cache.html",
+        "description": "Gradle build cache behavior, invalidation, and debugging. Upstream Gradle docs.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "compose": [
+      {
+        "name": "Jetpack Compose Performance",
+        "url": "https://developer.android.com/develop/ui/compose/performance",
+        "description": "Compose performance guidance: stability, recomposition, Layout Inspector, and benchmarking.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Compiler Reports and Stability",
+        "url": "https://developer.android.com/develop/ui/compose/performance/stability",
+        "description": "Compose compiler stability analysis, metrics generation, and class stability configuration.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "performance": [
+      {
+        "name": "ANR Diagnosis and Fixes",
+        "url": "https://developer.android.com/topic/performance/anrs/diagnose-and-fix-anrs",
+        "description": "Canonical ANR thresholds (input dispatch, broadcast, service) and diagnosis workflow. Thresholds have shifted across Android versions; verify before quoting.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Vitals: ANR",
+        "url": "https://developer.android.com/topic/performance/vitals/anr",
+        "description": "Play Console user-perceived ANR rate bad-behavior thresholds (0.47% overall / 8% per-device as of 2026-07-11). Re-verify since Google adjusts these.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Vitals: Crashes",
+        "url": "https://developer.android.com/topic/performance/vitals/crash",
+        "description": "Play Console user-perceived crash rate bad-behavior thresholds (1.09% overall / 8% per-device as of 2026-07-11). Re-verify since Google adjusts these.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "System Tracing Overview (Perfetto)",
+        "url": "https://developer.android.com/topic/performance/tracing",
+        "description": "Perfetto as the current system-tracing stack (Systrace is retired); recording flags and categories change release to release.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Perfetto Docs",
+        "url": "https://perfetto.dev/docs/",
+        "description": "Upstream Perfetto documentation: recording, trace format, and the ui.perfetto.dev analysis UI.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Baseline Profiles Overview",
+        "url": "https://developer.android.com/topic/performance/baselineprofiles/overview",
+        "description": "Baseline Profile AOT-compilation mechanics and current minimum tooling versions.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Macrobenchmark Overview",
+        "url": "https://developer.android.com/topic/performance/benchmarking/macrobenchmark-overview",
+        "description": "Macrobenchmark library for startup and frame-timing measurement, and how it differs from in-process microbenchmarks.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "StrictMode API Reference",
+        "url": "https://developer.android.com/reference/android/os/StrictMode",
+        "description": "Main-thread disk/network detection and VM policy violations; detector coverage has expanded across releases.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "LeakCanary",
+        "url": "https://square.github.io/leakcanary/",
+        "description": "Memory leak detection for debug builds. Stable line is 2.x (2.14, 2024-04-17) with a 3.0 alpha in development as of 2026-07-11; verify current recommended version before pinning.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "minification": [
+      {
+        "name": "R8 Shrink, Obfuscate, and Optimize",
+        "url": "https://developer.android.com/build/shrink-code",
+        "description": "Primary reference for R8 code shrinking, resource shrinking, obfuscation, and keep rules.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "R8 FAQ and Compatibility",
+        "url": "https://r8.googlesource.com/r8/+/refs/heads/main/compatibility-faq.md",
+        "description": "R8 full mode vs compatibility mode, common migration issues, and library-specific guidance.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ]
+  }
+}

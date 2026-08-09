@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-tools",
+    "title": "AI Coding Agents Tools - Sources",
+    "description": "Official documentation and implementation references for tool registries, deferred loading, tool search, and execution runtimes",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "total_sources": 9,
+    "version": "1.1"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en",
+        "type": "documentation",
+        "relevance": "Primary product documentation for built-in tools, MCP usage, and runtime behavior",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Tools Reference",
+        "url": "https://code.claude.com/docs/en/tools-reference",
+        "type": "reference",
+        "relevance": "Complete tool list including LSP tool, Agent(type) parameterized tool, all built-ins with permission requirements; confirms Agent background-by-default since v2.1.198 and background-subagent permission prompt routing since v2.1.186 (verified 2026-07-11)",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Plugins Reference",
+        "url": "https://code.claude.com/docs/en/plugins-reference",
+        "type": "reference",
+        "relevance": "lspServers plugin capability, LSP tool activation semantics, plugin manifest schema",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol Specification",
+        "url": "https://modelcontextprotocol.io/",
+        "type": "specification",
+        "relevance": "Reference for MCP-backed tools and remote capability contracts",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Authoritative implementation reference for tool contracts, pool assembly, deferred loading, and execution",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Codex CLI Repository",
+        "url": "https://github.com/openai/codex",
+        "type": "repository",
+        "relevance": "Cross-runtime comparison point for agent tool design and CLI execution surfaces",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Unified Exec Tool Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/core/src/tools/handlers/shell_spec.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for unified exec, PTY sessions, write_stdin, output budgets, and permission-aware execution parameters",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Use Cases",
+        "url": "https://developers.openai.com/codex/use-cases",
+        "type": "documentation",
+        "relevance": "May 2026 source for composable CLI tools Codex can use and production workflow patterns",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "High-level guidance on reliable tool usage in agent systems",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

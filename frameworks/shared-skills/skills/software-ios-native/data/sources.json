@@ -1,0 +1,358 @@
+{
+  "metadata": {
+    "skill": "software-ios-native",
+    "updated": "2026-07-11",
+    "last_updated": "2026-07-11",
+    "total_sources": 47,
+    "description": "Primary sources for native iOS development, SwiftUI and concurrency modernization, SwiftData and Core Data persistence, Xcode agentic coding workflows (introduced 26.3, current stable 26.6), XcodeBuildMCP, proof-first Codex or Claude Code execution guidance, the April 2026 Known iOS Traps list, and the WWDC26 (June 2026) iOS 27/Xcode 27 beta preview.",
+    "title": "Software Ios Native - Sources"
+  },
+  "categories": {
+    "apple_platform": [
+      {
+        "name": "Xcode",
+        "url": "https://developer.apple.com/xcode/",
+        "description": "Primary landing page for Xcode features, simulators, coding intelligence, and release surfaces.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "February 2026 Apple Developer Announcement",
+        "url": "https://developer.apple.com/hello/february26/",
+        "description": "Announcement page covering the Xcode 26.3 coding assistant and agent integrations (feature introduced this release; refined in later 26.x point releases).",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Meet agentic coding in Xcode",
+        "url": "https://developer.apple.com/videos/play/tech-talks/111428/",
+        "description": "Apple talk covering coding agents, build/test flows, documentation search, and MCP integration in Xcode.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "SwiftUI Documentation",
+        "url": "https://developer.apple.com/documentation/swiftui",
+        "description": "Primary SwiftUI reference.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Swift Testing Documentation",
+        "url": "https://developer.apple.com/documentation/testing",
+        "description": "Primary reference for Swift Testing.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "XCTest Documentation",
+        "url": "https://developer.apple.com/documentation/xctest",
+        "description": "Primary reference for XCTest and XCUITest.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Adopting Swift 6",
+        "url": "https://developer.apple.com/documentation/swift/adoptingswift6",
+        "description": "Primary migration guidance for Swift 6 data-race safety and concurrency checking.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Background Tasks",
+        "url": "https://developer.apple.com/documentation/backgroundtasks",
+        "description": "Primary framework documentation for deferred background work.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Core Data Documentation",
+        "url": "https://developer.apple.com/documentation/coredata",
+        "description": "Primary Core Data framework reference for model design, contexts, fetches, and persistence APIs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "NSPersistentCloudKitContainer",
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontainer",
+        "description": "Primary reference for Core Data and CloudKit mirroring.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "SwiftData iCloud Sync",
+        "url": "https://developer.apple.com/documentation/swiftdata/syncing-model-data-across-a-persons-devices",
+        "description": "Primary reference for SwiftData automatic iCloud sync, CloudKit capability requirements, schema limits, and production schema promotion.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Mirroring a Core Data Store with CloudKit",
+        "url": "https://developer.apple.com/documentation/CoreData/mirroring-a-core-data-store-with-cloudkit",
+        "description": "Primary reference for Core Data + CloudKit private database mirroring, setup, sync behavior, and schema constraints.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "CloudKit Database",
+        "url": "https://developer.apple.com/documentation/CloudKit/CKDatabase",
+        "description": "Primary reference for public, private, and shared CloudKit database scopes.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "CloudKit Sharing",
+        "url": "https://developer.apple.com/documentation/cloudkit/sharing-cloudkit-data-with-other-icloud-users",
+        "description": "Primary reference for sharing private CloudKit data with other iCloud users.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "App Intents Discovery",
+        "url": "https://developer.apple.com/documentation/appintents/making-actions-and-content-discoverable-and-widely-available/",
+        "description": "Primary reference for exposing actions and content to Siri, Spotlight, Shortcuts, widgets, controls, and Apple Intelligence.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "App Store Submission Requirements",
+        "url": "https://developer.apple.com/app-store/submitting/",
+        "description": "Primary reference for current App Store SDK and Xcode upload requirements.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Accessing Data When the Store Changes",
+        "url": "https://developer.apple.com/documentation/coredata/accessing-data-when-the-store-changes",
+        "description": "Primary reference for persistent history tracking, remote changes, and multi-writer coordination.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Privacy Manifest Files",
+        "url": "https://developer.apple.com/documentation/bundlereferences/privacy_manifest_files",
+        "description": "Primary reference for privacy manifests and related declarations.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Third-Party SDK Requirements",
+        "url": "https://developer.apple.com/support/third-party-SDK-requirements/",
+        "description": "Apple requirements for listed third-party SDKs and submission-time compliance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "simctl Documentation",
+        "url": "https://developer.apple.com/documentation/xcode/simctl",
+        "description": "Primary simulator automation reference.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "agent_platforms": [
+      {
+        "name": "OpenAI Codex AGENTS.md Guide",
+        "url": "https://developers.openai.com/codex/guides/agents-md/",
+        "description": "Official guidance for Codex project memory in AGENTS.md.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenAI Codex Prompting Guide",
+        "url": "https://developers.openai.com/codex/guides/prompting/",
+        "description": "Official prompting guidance for Codex workflows.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Claude Code Memory",
+        "url": "https://docs.anthropic.com/en/docs/claude-code/memory",
+        "description": "Official Claude Code memory and repo-context guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Claude Code Common Workflows",
+        "url": "https://code.claude.com/docs/en/tutorials",
+        "description": "Official workflows guidance including verification and worktree patterns.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Claude Code Subagents",
+        "url": "https://code.claude.com/docs/en/sub-agents",
+        "description": "Official guidance for focused subagents and tool scoping.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Claude Code Hooks",
+        "url": "https://code.claude.com/docs/en/hooks",
+        "description": "Official hook lifecycle documentation for guardrails and post-tool checks.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "xcodebuildmcp": [
+      {
+        "name": "XcodeBuildMCP Repository",
+        "url": "https://github.com/getsentry/XcodeBuildMCP",
+        "description": "Primary upstream repository for XcodeBuildMCP CLI and MCP server.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "XcodeBuildMCP Configuration",
+        "url": "https://raw.githubusercontent.com/getsentry/XcodeBuildMCP/main/docs/CONFIGURATION.md",
+        "description": "Canonical config schema, session defaults, workflow selection, and environment variable mapping.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "XcodeBuildMCP Tools Reference",
+        "url": "https://raw.githubusercontent.com/getsentry/XcodeBuildMCP/main/docs/TOOLS.md",
+        "description": "Canonical workflow groups and tool names for the MCP server.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "XcodeBuildMCP CLI Reference",
+        "url": "https://raw.githubusercontent.com/getsentry/XcodeBuildMCP/main/docs/CLI.md",
+        "description": "Canonical CLI install, setup, and workflow examples.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "XcodeBuildMCP Skills Reference",
+        "url": "https://raw.githubusercontent.com/getsentry/XcodeBuildMCP/main/docs/SKILLS.md",
+        "description": "Canonical documentation for optional CLI and MCP skill installation.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "known_traps_references": [
+      {
+        "name": "twocentstudios — 3 Swift Concurrency Challenges (2025-08-12)",
+        "url": "https://twocentstudios.com/2025/08/12/3-swift-concurrency-challenges-from-the-last-2-weeks/",
+        "description": "Canonical external writeup of the `_performBlockAfterCATransactionCommitSynchronizes:` crash family with the five root-cause patterns.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Apple Developer Forums 796407 — Crash in Swift 6 with UNUserNotificationCenter",
+        "url": "https://developer.apple.com/forums/thread/796407",
+        "description": "Official thread documenting the Swift 6 strict-concurrency crash on UNUserNotificationCenter delegate methods.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Apple Developer Forums 762217 — Implement UNUserNotificationCenterDelegate",
+        "url": "https://developer.apple.com/forums/thread/762217",
+        "description": "Official thread on the canonical delegate isolation fix pattern.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Apple Developer Forums 764413 — Swift Concurrency crash in iOS 18",
+        "url": "https://developer.apple.com/forums/thread/764413",
+        "description": "Official thread on iOS 18+ Swift concurrency regression class.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Apple Developer Forums 803827 — Core Data main actor-isolated property",
+        "url": "https://developer.apple.com/forums/thread/803827",
+        "description": "Official thread on Core Data strict-concurrency isolation errors and the NSManagedObjectID fix.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Swift Forums 81696 — Explosion of isolation violations in Xcode 26 Beta 6",
+        "url": "https://forums.swift.org/t/explosion-of-isolation-violations-in-xcode-26-beta-6/81696",
+        "description": "Canonical discussion of Default Main Actor Isolation migration pain and layered-pass fix strategy.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Swift Forums 74954 — @Observable updates and main thread",
+        "url": "https://forums.swift.org/t/do-update-to-observable-properties-have-to-be-done-on-the-main-thread/74954",
+        "description": "Canonical discussion confirming @Observable mutations must be main-isolated despite internal thread-safety.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Donny Wals — Should you opt-in to Swift 6.2 Main Actor isolation?",
+        "url": "https://www.donnywals.com/should-you-opt-in-to-swift-6-2s-main-actor-isolation/",
+        "description": "Practical guidance for app-target adoption of default main-actor isolation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Donny Wals — Setting default actor isolation in Xcode 26",
+        "url": "https://www.donnywals.com/setting-default-actor-isolation-in-xcode-26/",
+        "description": "Xcode 26 build setting walkthrough for SWIFT_DEFAULT_ACTOR_ISOLATION.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "SwiftLee — Default Actor Isolation in Swift 6.2",
+        "url": "https://www.avanderlee.com/concurrency/default-actor-isolation-in-swift-6-2/",
+        "description": "Reference article on Swift 6.2 default actor isolation semantics and migration patterns.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Swift by Sundell — Avoiding SwiftUI's AnyView",
+        "url": "https://www.swiftbysundell.com/articles/avoiding-anyview-in-swiftui/",
+        "description": "Canonical writeup on why AnyView defeats SwiftUI's type-based diffing and recommended @ViewBuilder / generics alternatives.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Jorgemrht — Coordinator Pattern in SwiftUI (Sep 2025)",
+        "url": "https://jorgemrht.dev/2025/09/10/coordinator-Pattern-in-SwiftUI-Best-Practice-Navigation",
+        "description": "Practical coordinator pattern for NavigationStack + @Entry environment injection + enum routes.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Yagodemartin — iOS 26 withAnimation Regression (Sep 2025)",
+        "url": "https://medium.com/@yagodemartin/ios-26-animation-regression-mainactor-swift-6-2-f93b27b7b2d4",
+        "description": "Writeup documenting the @MainActor + withAnimation regression on iOS 26 / Swift 6.2.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Xcode 26 Release Notes",
+        "url": "https://developer.apple.com/documentation/xcode-release-notes/xcode-26-release-notes",
+        "description": "Primary source for Xcode 26 known issues: Allocations instrument, SubscriptionStatus.all stale, TLS Client Hello change, Coding Assistant Cancel unreliability.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "apple_platform_additions": [
+      {
+        "name": "Foundation Models Framework",
+        "url": "https://developer.apple.com/documentation/foundationmodels",
+        "description": "Apple on-device Foundation Models framework: guided generation (@Generable/@Guide) and tool calling. Confirm input modality and OS availability at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Xcode Release Notes",
+        "url": "https://developer.apple.com/documentation/xcode-release-notes",
+        "description": "Authoritative Xcode release notes: explicitly built modules, LLDB async stepping, new Instruments. Resolve current Xcode version at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Xcode 27 Release Notes (beta — announced WWDC26, not yet shipped)",
+        "url": "https://developer.apple.com/documentation/xcode-release-notes/xcode-27-release-notes",
+        "description": "Beta release notes for Xcode 27 / Swift 6.4 / iOS 27 SDK, previewed at WWDC26 (June 2026). Treat every claim here as provisional until Apple ships a GA build; do not recommend Xcode 27-only APIs for App Store submissions.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ]
+  }
+}

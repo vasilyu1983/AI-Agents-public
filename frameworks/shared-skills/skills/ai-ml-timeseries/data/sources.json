@@ -1,0 +1,165 @@
+{
+  "metadata": {
+    "skill": "ai-ml-timeseries",
+    "updated": "2026-07-11",
+    "total_sources": 16,
+    "description": "Curated primary sources for July 2026 time series forecasting: baselines, global/panel forecasting, hierarchical reconciliation, probabilistic evaluation, and TS foundation models. Includes Chronos-2/Chronos-Bolt, Toto 2.0, TimesFM 2.5, TiRex, and fev-bench.",
+    "version": "4.3",
+    "title": "AI Ml Timeseries - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "foundations_and_benchmarks": [
+      {
+        "name": "Forecasting: Principles and Practice (3rd ed.)",
+        "url": "https://otexts.com/fpp3/",
+        "type": "book",
+        "relevance": "Canonical reference for forecasting principles, baselines, and evaluation workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "M5 Forecasting Accuracy Competition",
+        "url": "https://www.kaggle.com/competitions/m5-forecasting-accuracy",
+        "type": "benchmark",
+        "relevance": "Benchmark reference for large-scale retail and feature-based forecasting workflows.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "forecasting_frameworks": [
+      {
+        "name": "statsmodels Documentation",
+        "url": "https://www.statsmodels.org/",
+        "type": "documentation",
+        "relevance": "Local classical models and decomposition diagnostics.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LightGBM Documentation",
+        "url": "https://lightgbm.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Official tree-boosting reference used in feature-based forecasting stacks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MLForecast Documentation",
+        "url": "https://nixtlaverse.nixtla.io/mlforecast/docs/getting-started/end_to_end_walkthrough.html",
+        "type": "documentation",
+        "relevance": "Official Nixtla docs for global feature-based forecasting with lags, date features, and static features.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "HierarchicalForecast Documentation",
+        "url": "https://nixtlaverse.nixtla.io/hierarchicalforecast/",
+        "type": "documentation",
+        "relevance": "Official reconciliation docs for coherent hierarchical and grouped forecasts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "skforecast Documentation",
+        "url": "https://skforecast.org/",
+        "type": "documentation",
+        "relevance": "Official recursive and direct forecasting workflows around tabular regressors. Current version ~0.22.x (April 2026); verify at https://skforecast.org/ before quoting a version number.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AutoGluon Time Series Documentation",
+        "url": "https://auto.gluon.ai/stable/tutorials/timeseries/index.html",
+        "type": "documentation",
+        "relevance": "Official AutoGluon docs for rapid time-series benchmarking, ensembling, and TSFM comparisons.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "probabilistic_and_calibration": [
+      {
+        "name": "MAPIE Documentation",
+        "url": "https://mapie.readthedocs.io/en/latest/",
+        "type": "documentation",
+        "relevance": "Official conformal prediction reference, including current regression and time-series APIs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "foundation_models_and_governance": [
+      {
+        "name": "Chronos Forecasting Repository (includes Chronos-2 and Chronos-Bolt)",
+        "url": "https://github.com/amazon-science/chronos-forecasting",
+        "type": "official_repository",
+        "relevance": "Official repository for Amazon's Chronos TSFM family. Chronos-2 (released 20 Oct 2025) adds zero-shot multivariate and covariate support and reports a 90.7% fev-bench win rate. Chronos-Bolt (released 26 Nov 2024, not 2025 — verified via the Dec 2024 AWS launch blog) is up to 250x faster and ~20x more memory-efficient than original Chronos. Verify current model card before recommending a specific variant.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Chronos-2: From Univariate to Universal Forecasting (paper)",
+        "url": "https://arxiv.org/abs/2510.15821",
+        "type": "paper",
+        "relevance": "Primary source for Chronos-2's reported fev-bench results: 90.7% win rate / 47.3% skill score, ahead of TiRex (80.8% / 42.6%). Cite this paper rather than a secondary blog when quoting the figures.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TimesFM Repository",
+        "url": "https://github.com/google-research/timesfm",
+        "type": "official_repository",
+        "relevance": "Official repository for Google's TimesFM time-series foundation models. TimesFM 2.5 (released Sept 2025) is a 200M-param decoder-only model with a 16,384-step context window and, with the optional quantile head, forecasts up to 1,000 steps — a large jump from TimesFM 2.0's 500M params / 2,048-step context. Chronos-2 and Salesforce Moirai 2.0 have since displaced TimesFM 2.5 at the top of GIFT-Eval; verify the current leaderboard before calling it best-in-class. LoRA fine-tuning via HuggingFace PEFT is documented in timesfm-forecasting/examples/finetuning/.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Toto — Datadog Time-Series Foundation Model",
+        "url": "https://github.com/DataDog/toto",
+        "type": "official_repository",
+        "relevance": "Toto 2.0 (published to Hugging Face May 2026, not April): multivariate zero-shot TSFM using u-µP scaling. Model family 4M-2.5B params; hyperparameters tuned on the 4M model transfer to the 2.5B checkpoint. Leads BOOM (Datadog's own observability benchmark), GIFT-Eval, and the contamination-resistant TIME benchmark. Verify general-domain fit and current fine-tuning support before using outside observability contexts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TiRex / TiRex-2 (NX-AI)",
+        "url": "https://github.com/NX-AI/tirex",
+        "type": "official_repository",
+        "relevance": "NX-AI's 35M-parameter xLSTM zero-shot forecaster; strong on GIFT-Eval and the second-best fev-bench model behind Chronos-2 (80.8% win rate / 42.6% skill score). TiRex-2 (2026) adds multivariate, covariate-aware, and streaming forecasting in a single checkpoint. Previously unverifiable in this skill's earlier revision — now confirmed via the official repo and model card.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "fev-bench: Realistic Forecasting Benchmark and Leaderboard",
+        "url": "https://huggingface.co/spaces/autogluon/fev-bench",
+        "type": "benchmark",
+        "relevance": "100-task forecasting benchmark (paper: arxiv.org/abs/2509.26468) spanning 7 domains, built from 96 unique datasets; 30 tasks include known dynamic covariates, 24 past dynamic covariates, 19 static covariates. Also ships fev-bench-mini (20 tasks) for cheaper comparisons. Preferred over informal ablations for TSFM comparisons. Python library: fev (github.com/autogluon/fev).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST AI Risk Management Framework 1.0",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+        "type": "specification",
+        "relevance": "Governance baseline for high-impact forecasting deployments and operational risk controls.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "DevOps Engineering — Quick Reference"
+  short_description: "Designs DevOps and platform engineering systems"
+  default_prompt: "Use $ops-devops-platform for Designs DevOps and platform engineering systems. Use when planning Kubernetes, Terraform, GitOps, CI/CD, observability, incident response, or cloud-native operations."

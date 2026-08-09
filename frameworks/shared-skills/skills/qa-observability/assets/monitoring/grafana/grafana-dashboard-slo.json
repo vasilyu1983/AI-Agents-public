@@ -1,0 +1,336 @@
+{
+  "dashboard": {
+    "title": "Service SLO Dashboard",
+    "tags": ["slo", "observability", "production"],
+    "timezone": "browser",
+    "refresh": "1m",
+    "time": {
+      "from": "now-30d",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "Availability SLI (30d Rolling)",
+        "type": "gauge",
+        "gridPos": { "x": 0, "y": 0, "w": 6, "h": 6 },
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{service=\"$service\",status!~\"5..\"}[30d])) / sum(rate(http_requests_total{service=\"$service\"}[30d]))",
+            "legendFormat": "Availability"
+          }
+        ],
+        "options": {
+          "orientation": "auto",
+          "showThresholdLabels": true,
+          "showThresholdMarkers": true
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percentunit",
+            "min": 0.99,
+            "max": 1,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0.99, "color": "red" },
+                { "value": 0.995, "color": "yellow" },
+                { "value": 0.999, "color": "green" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "Error Budget Remaining",
+        "type": "gauge",
+        "gridPos": { "x": 6, "y": 0, "w": 6, "h": 6 },
+        "targets": [
+          {
+            "expr": "((0.999 - (1 - (sum(rate(http_requests_total{service=\"$service\",status!~\"5..\"}[30d])) / sum(rate(http_requests_total{service=\"$service\"}[30d]))))) / 0.001) * 100",
+            "legendFormat": "Budget Remaining"
+          }
+        ],
+        "options": {
+          "orientation": "auto",
+          "showThresholdLabels": true,
+          "showThresholdMarkers": true
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0, "color": "red" },
+                { "value": 10, "color": "orange" },
+                { "value": 25, "color": "yellow" },
+                { "value": 50, "color": "green" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "P99 Latency (Target: 500ms)",
+        "type": "gauge",
+        "gridPos": { "x": 12, "y": 0, "w": 6, "h": 6 },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.99, rate(http_request_duration_seconds_bucket{service=\"$service\"}[5m]))",
+            "legendFormat": "P99 Latency"
+          }
+        ],
+        "options": {
+          "orientation": "auto",
+          "showThresholdLabels": true,
+          "showThresholdMarkers": true
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s",
+            "min": 0,
+            "max": 2,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0, "color": "green" },
+                { "value": 0.5, "color": "yellow" },
+                { "value": 1.0, "color": "red" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "Request Rate (req/s)",
+        "type": "stat",
+        "gridPos": { "x": 18, "y": 0, "w": 6, "h": 6 },
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{service=\"$service\"}[5m]))",
+            "legendFormat": "Requests/s"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "reqps",
+            "decimals": 2
+          }
+        }
+      },
+      {
+        "id": 5,
+        "title": "SLI History (30 days)",
+        "type": "graph",
+        "gridPos": { "x": 0, "y": 6, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "0.999",
+            "legendFormat": "Target (99.9%)"
+          },
+          {
+            "expr": "sum(rate(http_requests_total{service=\"$service\",status!~\"5..\"}[1h])) / sum(rate(http_requests_total{service=\"$service\"}[1h]))",
+            "legendFormat": "Actual SLI"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "percentunit",
+            "min": 0.99,
+            "max": 1
+          }
+        ],
+        "seriesOverrides": [
+          {
+            "alias": "Target (99.9%)",
+            "color": "#73BF69",
+            "dashes": true,
+            "fill": 0,
+            "linewidth": 2
+          },
+          {
+            "alias": "Actual SLI",
+            "color": "#5794F2",
+            "fill": 1,
+            "fillGradient": 5
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Error Budget Burn Rate (1h window)",
+        "type": "graph",
+        "gridPos": { "x": 12, "y": 6, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "(1 - (sum(rate(http_requests_total{service=\"$service\",status!~\"5..\"}[1h])) / sum(rate(http_requests_total{service=\"$service\"}[1h])))) / (1 - 0.999)",
+            "legendFormat": "Burn Rate"
+          },
+          {
+            "expr": "14.4",
+            "legendFormat": "Critical Threshold (14.4x)"
+          },
+          {
+            "expr": "6",
+            "legendFormat": "Warning Threshold (6x)"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "short",
+            "min": 0,
+            "max": 20
+          }
+        ],
+        "seriesOverrides": [
+          {
+            "alias": "Critical Threshold (14.4x)",
+            "color": "#F2495C",
+            "dashes": true,
+            "fill": 0
+          },
+          {
+            "alias": "Warning Threshold (6x)",
+            "color": "#FF9830",
+            "dashes": true,
+            "fill": 0
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Latency Distribution (P50, P95, P99)",
+        "type": "graph",
+        "gridPos": { "x": 0, "y": 14, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket{service=\"$service\"}[5m]))",
+            "legendFormat": "P50"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{service=\"$service\"}[5m]))",
+            "legendFormat": "P95"
+          },
+          {
+            "expr": "histogram_quantile(0.99, rate(http_request_duration_seconds_bucket{service=\"$service\"}[5m]))",
+            "legendFormat": "P99"
+          },
+          {
+            "expr": "0.5",
+            "legendFormat": "SLO Target (500ms)"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "s",
+            "min": 0
+          }
+        ],
+        "seriesOverrides": [
+          {
+            "alias": "SLO Target (500ms)",
+            "color": "#73BF69",
+            "dashes": true,
+            "fill": 0
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Error Rate by Status Code",
+        "type": "graph",
+        "gridPos": { "x": 12, "y": 14, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "sum by (status) (rate(http_requests_total{service=\"$service\",status=~\"5..\"}[5m]))",
+            "legendFormat": "{{status}}"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "reqps",
+            "min": 0
+          }
+        ],
+        "stack": true
+      },
+      {
+        "id": 9,
+        "title": "Active Alerts",
+        "type": "table",
+        "gridPos": { "x": 0, "y": 22, "w": 24, "h": 6 },
+        "targets": [
+          {
+            "expr": "ALERTS{service=\"$service\",alertstate=\"firing\"}",
+            "format": "table",
+            "instant": true
+          }
+        ],
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "Value": true,
+                "__name__": true
+              },
+              "indexByName": {
+                "alertname": 0,
+                "severity": 1,
+                "alertstate": 2,
+                "summary": 3
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "service",
+          "type": "query",
+          "datasource": "Prometheus",
+          "query": "label_values(http_requests_total, service)",
+          "multi": false,
+          "includeAll": false,
+          "current": {
+            "value": "order-api",
+            "text": "order-api"
+          }
+        }
+      ]
+    },
+    "annotations": {
+      "list": [
+        {
+          "name": "Deployments",
+          "datasource": "Prometheus",
+          "expr": "changes(deployment_info{service=\"$service\"}[5m]) > 0",
+          "iconColor": "blue",
+          "enable": true
+        },
+        {
+          "name": "Incidents",
+          "datasource": "Prometheus",
+          "expr": "ALERTS{service=\"$service\",alertstate=\"firing\",severity=\"critical\"}",
+          "iconColor": "red",
+          "enable": true
+        }
+      ]
+    }
+  }
+}

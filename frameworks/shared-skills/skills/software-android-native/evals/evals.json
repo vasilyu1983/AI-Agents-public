@@ -1,0 +1,70 @@
+{
+  "skill_name": "software-android-native",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A Kotlin 2.x Android app with Compose 1.8+ uses Strong Skipping Mode. The app has a LazyColumn displaying a list of TransactionItem data class objects. Every time a single transaction's status changes, every row in the list recomposes even for rows with unchanged data. The ViewModel emits a fresh List<TransactionItem> via _uiState.value = _uiState.value.copy(transactions = updatedList) on each event. What is the root cause and what are the correct fixes?",
+      "expected_output": "The skill should identify this as the Strong Skipping Mode identity check footgun: emitting a fresh data class reference per event defeats Compose's reference-based skip check. Fixes include: splitting UI state into @Immutable slices, hoisting the transactions list to a separate StateFlow with stateIn, using PersistentList<T> from kotlinx-collections-immutable, and wrapping per-row callbacks in remember(id) { { ... } }.",
+      "files": [],
+      "expectations": [
+        "The output identifies the root cause as Strong Skipping Mode comparing unstable params by instance reference, causing full list recomposition on every copy().",
+        "The output prescribes splitting UI state into @Immutable slices or using a separate StateFlow for the transaction list.",
+        "The output prescribes using stateIn(scope, WhileSubscribed(5000), ...) to hoist derived lists to the ViewModel.",
+        "The output recommends PersistentList<T> from kotlinx-collections-immutable as a stable list type.",
+        "The output explains that LazyListScope.items lambdas are not auto-memoized by Strong Skipping and prescribes remember(id) { { ... } } for per-row callbacks."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "An Android Kotlin 2.x app uses Compose 1.10.0. After upgrading from Compose 1.9.x, the team sees a crash in production: java.lang.IllegalStateException: RecompositionObserver was notified about state modification during composition from SnapshotStateObserver. Additionally, a nested Popup in the Settings screen positions itself at screen coordinates instead of relative to its parent anchor. What is the recommended diagnosis path?",
+      "expected_output": "The skill should identify these as Compose 1.10.0 regressions: the reentrant-modification crash in SnapshotStateObserver and nested Popup positioning are fixed in Compose UI 1.10.1 (January 2026). The recommendation is to upgrade to Compose UI 1.10.1 before treating either as an app-level bug.",
+      "files": [],
+      "expectations": [
+        "The output identifies both symptoms as known Compose 1.10.x regressions fixed in Compose UI 1.10.1.",
+        "The output recommends upgrading to Compose UI 1.10.1 as the first step before any app-level debugging.",
+        "The output references the compose-debugging route (software-android-runtime-debugging) for deeper triage if the upgrade does not resolve the crash.",
+        "The output does not recommend reverting to Compose 1.9.x as the primary fix without mentioning the 1.10.1 patch.",
+        "The output correctly attributes the SnapshotStateObserver crash as a Compose runtime regression, not a ViewModel or data-layer bug."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "An Android release build of an app using kotlinx-serialization 1.9.0 and AGP 8.6 works fine in debug builds but crashes at runtime with SerializationException: Serializer for class 'PaymentRequest' is not found. The class is annotated with @Serializable. The CI pipeline runs only debug tests. What is the cause and what must be done to prevent this class of regression?",
+      "expected_output": "The skill should identify this as the R8 full-mode stripping of kotlinx-serialization-generated $serializer companion classes. The fix is to add explicit ProGuard/R8 keep rules for the generated $serializer classes and to add a release-variant smoke test to CI that exercises every @Serializable entry point.",
+      "files": [],
+      "expectations": [
+        "The output identifies R8 full mode in AGP 8.x release builds stripping kotlinx-serialization generated $serializer classes as the root cause.",
+        "The output prescribes adding explicit ProGuard/R8 keep rules for generated $serializer and $*$serializer companion classes.",
+        "The output prescribes adding a release-variant CI smoke test that exercises every @Serializable entry point.",
+        "The output explains why the bug is invisible in debug builds (R8 only runs in release).",
+        "The output references the proguard-r8-triage route (software-android-runtime-debugging) for detailed keep-rule patterns."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "A Kotlin 2.x Android app has a ViewModel that fetches user orders from a Room database on Dispatchers.IO and updates a MutableStateFlow<OrdersUiState> directly inside the withContext(Dispatchers.IO) block. On Compose 1.8+ with Strong Skipping enabled, users report intermittent ConcurrentModificationException crashes originating from SnapshotStateObserver. What is the anti-pattern and what is the correct implementation?",
+      "expected_output": "The skill should identify this as the main-thread UI mutation anti-pattern: mutating _uiState.value inside a withContext(Dispatchers.IO) block means the mutation can happen on the IO dispatcher while Compose reads snapshot state on the main thread. The fix is to return the data as a plain value from withContext, assign _uiState.value outside the block on the main dispatcher, and collect via collectAsStateWithLifecycle().",
+      "files": [],
+      "expectations": [
+        "The output identifies the anti-pattern as mutating _uiState.value or emitting from inside a withContext(Dispatchers.IO) block.",
+        "The output prescribes doing blocking work inside withContext(Dispatchers.IO) { ... } returning a plain value, and assigning to _uiState.value outside that block on the main dispatcher.",
+        "The output prescribes collecting the StateFlow via collectAsStateWithLifecycle(), never with a raw collect inside LaunchedEffect.",
+        "The output connects the ConcurrentModificationException in SnapshotStateObserver to the off-main state mutation, not to a data-layer bug.",
+        "The output references the compose-state-concurrency reference for deeper patterns."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "A Kotlin 2.x Android project is still using kapt for Hilt and Room annotation processing. A senior engineer suggests migrating to KSP2 before upgrading to Kotlin 2.1. Explain the risk of staying on kapt and the migration path.",
+      "expected_output": "The skill should explain that kapt uses the old JVM backend and is often incompatible with K2 in Kotlin 2.x, can silently drop generated code, and slows every build. Hilt, Room, and Moshi-codegen all support KSP2 as of their 2025 releases. The migration path is to replace kapt with KSP2 (K2-compatible) in the Gradle build files and verify generated code after the switch.",
+      "files": [],
+      "expectations": [
+        "The output identifies kapt as incompatible with the K2 compiler in Kotlin 2.x and explains the risk of silently dropped generated code.",
+        "The output references anti-pattern K5 from the Kotlin Anti-Patterns table: keeping kapt on Kotlin 2.x annotation processors.",
+        "The output states that Hilt, Room, and Moshi-codegen support KSP2 as of their 2025 releases.",
+        "The output prescribes migrating to KSP2 (K2-compatible) in libs.versions.toml and build.gradle.kts.",
+        "The output recommends verifying generated code after the migration, not just checking that the build succeeds."
+      ]
+    }
+  ]
+}

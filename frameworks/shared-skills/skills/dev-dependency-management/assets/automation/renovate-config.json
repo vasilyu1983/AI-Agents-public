@@ -1,0 +1,67 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "description": "Renovate configuration for dependency updates",
+  "timezone": "UTC",
+  "labels": [
+    "dependencies"
+  ],
+  "semanticCommits": "enabled",
+  "rangeStrategy": "bump",
+  "dependencyDashboard": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 5am on monday"
+    ]
+  },
+  "packageRules": [
+    {
+      "description": "Delay very new npm releases in high-sensitivity repos",
+      "matchManagers": [
+        "npm"
+      ],
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Group non-major dev dependency updates",
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchUpdateTypes": [
+        "patch",
+        "minor"
+      ],
+      "groupName": "dev dependencies (non-major)"
+    },
+    {
+      "description": "Require dashboard approval for major updates",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true,
+      "labels": [
+        "dependencies",
+        "major-update"
+      ]
+    },
+    {
+      "description": "Group React and Next.js family updates",
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "next",
+        "eslint-config-next"
+      ],
+      "groupName": "react-next"
+    }
+  ],
+  "enabledManagers": [
+    "npm",
+    "dockerfile",
+    "github-actions",
+    "terraform"
+  ]
+}

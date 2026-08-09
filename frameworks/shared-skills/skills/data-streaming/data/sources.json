@@ -1,0 +1,243 @@
+{
+  "metadata": {
+    "skill": "data-streaming",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "description": "Primary-source-first references for streaming data platforms, stream processing, CDC, schema governance, and managed-service comparisons.",
+    "total_sources": 25,
+    "trust_tiers": {
+      "primary": "Official project, vendor, or standards documentation. Prefer these for current behavior, feature support, limits, and operations guidance.",
+      "secondary": "Useful ecosystem references or vendor overviews. Use for context only after checking primary sources."
+    },
+    "default_source_policy": "Use primary sources first. Verify recommendation questions against current official docs and release notes, especially for managed services and version-specific features.",
+    "title": "Data Streaming - Sources"
+  },
+  "categories": {
+    "event_backbones": [
+      {
+        "name": "Apache Kafka Documentation",
+        "url": "https://kafka.apache.org/documentation/",
+        "description": "Official Kafka documentation for brokers, clients, KRaft, topic configuration, and operations.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Redpanda Documentation",
+        "url": "https://docs.redpanda.com/current/",
+        "description": "Official Redpanda docs for Kafka API compatibility, tiered storage, and cluster operations.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apache Pulsar Documentation",
+        "url": "https://pulsar.apache.org/docs/",
+        "description": "Official Pulsar docs for multi-tenancy, geo-replication, transactions, and broker operations.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon Kinesis Data Streams Developer Guide",
+        "url": "https://docs.aws.amazon.com/streams/latest/dev/introduction.html",
+        "description": "Official Kinesis docs for shards, scaling, enhanced fan-out, and AWS-managed streaming design.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 90,
+        "add_as_web_search": true
+      },
+      {
+        "name": "KIP-1150: Diskless Topics (Kafka Wiki)",
+        "url": "https://cwiki.apache.org/confluence/display/KAFKA/KIP-1150:+Diskless+Topics",
+        "description": "Accepted 2026-03-02 (9 binding + 5 non-binding votes). Umbrella/motivational KIP for storage-compute separation and data direct to object storage. Implementation is via sub-KIPs (e.g. KIP-1163); NOT yet production-ready upstream. WarpStream and AutoMQ implement this architecture commercially. Read as design intent for upstream Kafka roadmap.",
+        "trust_tier": "primary",
+        "last_verified": "2026-06-09",
+        "max_age_days": 180,
+        "add_as_web_search": true
+      },
+      {
+        "name": "KIP-932: Queues for Kafka (Kafka Wiki)",
+        "url": "https://cwiki.apache.org/confluence/display/KAFKA/KIP-932:+Queues+for+Kafka",
+        "description": "Share groups enabling queue semantics: multiple consumers cooperate on the same partition with per-record acknowledgment, allowing consumer count to exceed partition count. Early access in 4.0; protocol stabilized in 4.1; GA in Kafka 4.2 (Feb 2026). Confluent Cloud GA also announced with 4.2.",
+        "trust_tier": "primary",
+        "last_verified": "2026-06-09",
+        "max_age_days": 180,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apache Kafka 4.3.1 Release Announcement",
+        "url": "https://kafka.apache.org/blog/releases/",
+        "description": "Latest stable Kafka release: 4.3.1 (Jun 25, 2026), a patch release fixing ~15 issues since 4.3.0 (May 22, 2026, 25 KIPs / 600+ commits) including a critical Kafka Streams RocksDB native memory leak. All 4.x versions are KRaft-only — no ZooKeeper path exists.",
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 90,
+        "add_as_web_search": true
+      }
+    ],
+    "stream_processing": [
+      {
+        "name": "Apache Flink Documentation",
+        "url": "https://nightlies.apache.org/flink/flink-docs-stable/",
+        "description": "Official Flink docs for event-time processing, checkpoints, savepoints, state backends, and connectors. Latest stable: Flink 2.3.0 (Jun 25, 2026) — changelog conversion SQL operators, redesigned native S3 filesystem, adaptive partition selection.",
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apache Flink Checkpoints",
+        "url": "https://nightlies.apache.org/flink/flink-docs-stable/docs/dev/datastream/fault-tolerance/checkpointing/",
+        "description": "Official Flink guide for checkpoint configuration, fault tolerance, and operational tradeoffs.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apache Flink Savepoints",
+        "url": "https://nightlies.apache.org/flink/flink-docs-stable/docs/ops/state/savepoints/",
+        "description": "Official Flink guidance for stateful upgrades, savepoints, and restore workflows.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Kafka Streams Documentation",
+        "url": "https://kafka.apache.org/documentation/streams/",
+        "description": "Official Kafka Streams documentation for stateful stream processing inside Kafka applications.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Spark Structured Streaming Programming Guide",
+        "url": "https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html",
+        "description": "Official Spark guide for streaming semantics, triggers, state, sinks, and recovery.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      }
+    ],
+    "cdc_and_connectors": [
+      {
+        "name": "Debezium Documentation",
+        "url": "https://debezium.io/documentation/reference/stable/",
+        "description": "Official Debezium docs for log-based CDC, snapshots, schema history, and connector behavior.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Flink CDC Documentation",
+        "url": "https://nightlies.apache.org/flink/flink-cdc-docs-master/",
+        "description": "Official Flink CDC documentation for source connectors and streaming CDC pipelines.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 90,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Kafka Connect Documentation",
+        "url": "https://kafka.apache.org/documentation/#connect",
+        "description": "Official Kafka Connect documentation for source and sink connector architecture and operations.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      }
+    ],
+    "schema_and_contracts": [
+      {
+        "name": "Confluent Schema Registry Fundamentals",
+        "url": "https://docs.confluent.io/platform/current/schema-registry/fundamentals/index.html",
+        "description": "Official Schema Registry docs for compatibility modes, governance, and schema evolution patterns.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apicurio Registry Documentation",
+        "url": "https://www.apicur.io/registry/docs/",
+        "description": "Official Apicurio docs for open schema and artifact registry workflows.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Glue Schema Registry",
+        "url": "https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html",
+        "description": "Official AWS documentation for schema registry support in managed streaming workflows.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 90,
+        "add_as_web_search": true
+      }
+    ],
+    "real_time_delivery": [
+      {
+        "name": "Apache Iceberg Documentation",
+        "url": "https://iceberg.apache.org/docs/latest/",
+        "description": "Official Iceberg docs for sink targets, table semantics, and downstream lakehouse consumption.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apache Iceberg Format Specification (v3)",
+        "url": "https://iceberg.apache.org/spec/",
+        "description": "Iceberg v3 spec is ratified. v3 adds: deletion vectors, row lineage (_row_id / _last_updated_sequence_number), semi-structured/variant data, default column values, geometry/geography types, nanosecond timestamps, and native encryption foundations. GA on Snowflake (May 7, 2026) and Databricks Runtime 18.0+ (Unity Catalog, all clouds); AWS support announced. Trino is not yet v3-ready as of mid-2026 — verify per-engine support in a multi-engine stack. Prefer over docs/latest/ when reasoning about v3 capabilities.",
+        "trust_tier": "primary",
+        "last_verified": "2026-07-11",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Flink Dynamic Iceberg Sink (Apache Flink blog)",
+        "url": "https://flink.apache.org/2025/11/11/from-stream-to-lakehouse-kafka-ingestion-with-the-flink-dynamic-iceberg-sink/",
+        "description": "Official Flink blog post on the Dynamic Iceberg Sink for multi-table streaming writes with automatic schema evolution. Recommended production pattern for Kafka -> Flink -> Iceberg pipelines. Checkpoint interval 5 min, 128 MB target file size, compaction on cold partitions.",
+        "trust_tier": "primary",
+        "last_verified": "2026-06-09",
+        "max_age_days": 180,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apache Paimon",
+        "url": "https://paimon.apache.org/",
+        "description": "Streaming lakehouse table format (Apache project). Always fetch current docs — version numbers and benchmarks not asserted here.",
+        "trust_tier": "primary",
+        "last_verified": "2026-05-17",
+        "max_age_days": 90,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apache Hudi Documentation",
+        "url": "https://hudi.apache.org/docs/overview/",
+        "description": "Official Hudi docs for mutable lakehouse sinks and incremental processing patterns.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "ClickHouse Kafka Table Engine",
+        "url": "https://clickhouse.com/docs/engines/table-engines/integrations/kafka",
+        "description": "Official ClickHouse docs for Kafka ingestion into low-latency serving systems.",
+        "trust_tier": "primary",
+        "last_verified": "2026-03-14",
+        "max_age_days": 120,
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

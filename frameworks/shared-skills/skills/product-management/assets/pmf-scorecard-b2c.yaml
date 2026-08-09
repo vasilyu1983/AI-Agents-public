@@ -1,0 +1,137 @@
+# PMF Scorecard — Path B (B2C / Consumer / Mobile)
+#
+# Use this scorecard for products where:
+#   - revenue is per-user (subscription, IAP, ad-supported)
+#   - acquisition is paid + viral, conversion is days not weeks
+#   - retention is measured at user level
+#   - the dominant retention pattern is fast-decay-then-flatten
+#
+# Differs from B2B path on three weights:
+#   - retention_w4 (heavier than 12-month for B2C)
+#   - viral_coefficient (B2B does not have this dimension)
+#   - cac_payback_6mo (consumer is short-payback or it doesn't work)
+#
+# Run AFTER the PMF Insight Engine has produced a digest.
+
+scorecard:
+  name: pmf-scorecard-b2c
+  version: "2026.05"
+  total_weight: 100
+
+dimensions:
+
+  - id: sean_ellis
+    weight: 15
+    source_detector: "01-hidden-lover-segment"
+    metric: "pmf_score (very_disappointed share) within best-fit segment"
+    bands:
+      strong:     ">= 0.50"
+      good:       "0.40-0.49"
+      tipping:    "0.30-0.39"
+      no_signal:  "< 0.30"
+    notes: "Per-segment, not blended. Hidden segment is the entire game in viral B2C."
+
+  - id: retention_w4
+    weight: 10
+    metric: "Week-4 retention of new-signup cohort, smile-curve shape"
+    bands:
+      strong:     ">= 25% (top decile for consumer subscription)"
+      good:       "15-24%"
+      tipping:    "8-14% (Amplitude 7% Day-7 rule extended)"
+      no_signal:  "< 8%"
+
+  - id: switching_evidence
+    weight: 15
+    source_detector: "06-switching-trigger-clusters"
+    metric: "share of acquired users with a clear push trigger (not drift)"
+    bands:
+      strong:     ">= 60% cite a specific moment/event"
+      good:       "40-59%"
+      tipping:    "20-39%"
+      no_signal:  "< 20% — drift adoption, low intentionality"
+    notes: "Drift adoption predicts low LTV in B2C even when growth looks healthy."
+
+  - id: pain_intensity
+    weight: 10
+    metric: "Q2-Q4 survey free-text + 1-3 star app-store reviews of alternatives"
+    bands:
+      strong:     "users name an emotional or status payoff (not feature)"
+      good:       "users name a concrete inconvenience"
+      tipping:    "users name a mild preference"
+      no_signal:  "users cite curiosity / boredom"
+
+  - id: willingness_to_pay
+    weight: 15
+    metric: "trial-to-paid conversion, free-tier corpse rate (detector #9)"
+    bands:
+      strong:     "trial-to-paid >= 25% AND free-corpse-rate < 30% per segment"
+      good:       "trial-to-paid 15-24%"
+      tipping:    "trial-to-paid 8-14%"
+      no_signal:  "trial-to-paid < 8% OR free-corpse-rate > 70%"
+
+  - id: value_metric_alignment
+    weight: 5
+    source_detector: "04-pricing-value-mismatch"
+    metric: "rank-divergence between revenue and engagement-frequency metric"
+    bands:
+      strong:     "rank distance < 0.20"
+      good:       "0.20-0.35"
+      tipping:    "0.35-0.50"
+      no_signal:  "> 0.50"
+
+  - id: viral_coefficient
+    weight: 10
+    metric: "k-factor — invites sent per active user × invite acceptance rate"
+    bands:
+      strong:     "k >= 0.7 (sustained organic growth)"
+      good:       "0.4-0.69 (paid amplifies meaningfully)"
+      tipping:    "0.2-0.39 (paid carries; viral helps margin)"
+      no_signal:  "< 0.2 (no viral leverage)"
+
+  - id: app_store_signal
+    weight: 5
+    metric: "App Store + Google Play 30-day rating + qualitative review tone"
+    bands:
+      strong:     ">= 4.6 with reviews citing emotional / status outcomes"
+      good:       "4.3-4.5"
+      tipping:    "4.0-4.2"
+      no_signal:  "< 4.0 OR reviews are universally feature-asks"
+
+  - id: cac_payback_6mo
+    weight: 5
+    metric: "blended paid CAC / monthly gross profit per user"
+    bands:
+      strong:     "<= 6 months"
+      good:       "7-9"
+      tipping:    "10-12"
+      no_signal:  "> 12 months"
+    notes: "Consumer subscriptions need short payback because LTV is shorter than B2B."
+
+  - id: category_entry_point
+    weight: 10
+    metric: "share of new users acquired via one repeatable, non-paid mechanism"
+    bands:
+      strong:     ">= 40% via one entry point (ChatGPT recommendation, share trigger, App Store organic)"
+      good:       "20-39%"
+      tipping:    "10-19%"
+      no_signal:  "< 10% organic — entirely paid-dependent"
+    notes: "Detector #10 (distribution-decay) flags when this entry point starts rotting."
+
+scoring_rules:
+  formula: "sum_of(dimension_score * weight) where dimension_score in {1.0=strong, 0.7=good, 0.4=tipping, 0.0=no_signal}"
+  output:
+    - "total_score"
+    - "weakest_dimension"
+    - "strongest_dimension"
+    - "next_action"
+
+handoff:
+  from_engine:
+    - "Detector digest, with #1 (hidden-lover-segment) read first"
+    - "Switching-trigger cluster table"
+    - "Free-tier corpse profile by segment"
+    - "Cohort retention by acquisition channel"
+  to_bet_memo:
+    - "If sean_ellis is the lowest dimension → bet is a positioning/scope test, not a feature"
+    - "If switching_evidence is lowest → bet is messaging/landing aligned to a single trigger"
+    - "If retention_w4 is lowest → bet is onboarding redesign anchored on the predictive activation event from detector #3"

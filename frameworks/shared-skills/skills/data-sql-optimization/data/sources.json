@@ -1,0 +1,335 @@
+{
+  "metadata": {
+    "title": "SQL Optimization - Sources",
+    "description": "Primary vendor docs and high-signal references for OLTP SQL tuning, plans, indexing, concurrency, monitoring, pooling, migrations, and security.",
+    "last_updated": "2026-06-09",
+    "updated": "2026-06-09",
+    "skill": "data-sql-optimization",
+    "total_sources": 34,
+    "trust_tiers": {
+      "primary": "Official project, vendor, standards, or source documentation. Prefer for factual claims and current behavior.",
+      "secondary": "Tutorials, landscape reports, community references, and implementation examples. Use for framing after checking primary sources."
+    },
+    "default_source_policy": "Use official engine docs first for behavior and syntax. Verify release-sensitive features, cloud limits, and managed-service behavior against current primary docs before recommendations."
+  },
+  "official_engine_docs": [
+    {
+      "name": "PostgreSQL Documentation (current)",
+      "url": "https://www.postgresql.org/docs/current/",
+      "description": "Canonical PostgreSQL reference for EXPLAIN, indexes, planner, statistics, vacuum, replication, and security.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "PostgreSQL 18 Release Notes",
+      "url": "https://www.postgresql.org/docs/18/release-18.html",
+      "description": "Version-specific PostgreSQL 18 behavior and new performance features.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "MySQL 9.7 Reference Manual",
+      "url": "https://dev.mysql.com/doc/refman/9.7/en/",
+      "description": "MySQL 9.7 LTS (GA 2026-04-21) — current LTS. Optimizer, EXPLAIN, InnoDB, HyperGraph optimizer, partitioning, Performance Schema, and replication documentation. Use 8.4 docs for teams on the 8.4 LTS branch.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-06-09",
+      "max_age_days": 120
+    },
+    {
+      "name": "MySQL 8.4 Reference Manual",
+      "url": "https://dev.mysql.com/doc/refman/8.4/en/",
+      "description": "MySQL 8.4 LTS — still supported; use when the target deployment is on the 8.4 branch.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "SQL Server Documentation",
+      "url": "https://learn.microsoft.com/en-us/sql/sql-server/",
+      "description": "Microsoft SQL Server documentation for execution plans, Query Store, indexing, concurrency, and HA/DR.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "Oracle Database Documentation",
+      "url": "https://docs.oracle.com/en/database/",
+      "description": "Oracle optimizer, execution plan, index, and performance tuning documentation.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "SQLite Documentation",
+      "url": "https://www.sqlite.org/docs.html",
+      "description": "SQLite query planner, indexes, transactions, pragmas, and optimizer documentation.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    }
+  ],
+  "postgresql_topics": [
+    {
+      "name": "PostgreSQL - Using EXPLAIN",
+      "url": "https://www.postgresql.org/docs/current/using-explain.html",
+      "description": "How to read PostgreSQL plan nodes and cost estimates.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "PostgreSQL - Multicolumn Indexes",
+      "url": "https://www.postgresql.org/docs/18/indexes-multicolumn.html",
+      "description": "Composite-index behavior, including PostgreSQL 18 skip scan guidance.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "PostgreSQL - CREATE STATISTICS",
+      "url": "https://www.postgresql.org/docs/18/sql-createstatistics.html",
+      "description": "Extended statistics for correlated predicates and cardinality estimation.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "PostgreSQL - Monitoring Statistics",
+      "url": "https://www.postgresql.org/docs/current/monitoring-stats.html",
+      "description": "Statistics collector views including pg_stat_statements-related operational context.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "PostgreSQL 18 Release Announcement",
+      "url": "https://www.postgresql.org/about/news/postgresql-18-released-3142/",
+      "description": "Overview of PostgreSQL 18 additions such as async I/O, pg_aios, UUIDv7, and pg_upgrade statistics retention.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "PostgreSQL 18 Asynchronous I/O — Release Notes Detail",
+      "url": "https://www.postgresql.org/about/news/postgresql-18-released-3142/",
+      "description": "PostgreSQL 18 released 2025-09-25. AIO is GA: new io_method setting (worker / io_uring / sync), pg_aios system view for monitoring in-flight I/Os. Covers sequential scans, bitmap heap scans, and vacuum. Up to ~3x throughput in I/O-bound scenarios per release benchmarks. Use the release announcement and the pg18 release notes (release-18.html) for exact behavior; verify specifics against official docs.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 120
+    }
+  ],
+  "mysql_topics": [
+    {
+      "name": "MySQL - EXPLAIN Output Format",
+      "url": "https://dev.mysql.com/doc/refman/8.4/en/explain-output.html",
+      "description": "MySQL EXPLAIN columns and interpretation.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "MySQL - Optimizer Statistics",
+      "url": "https://dev.mysql.com/doc/refman/8.4/en/optimizer-statistics.html",
+      "description": "Histograms and optimizer statistics behavior in MySQL 8.4.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "MySQL - Invisible Indexes",
+      "url": "https://dev.mysql.com/doc/refman/8.4/en/invisible-indexes.html",
+      "description": "Safe index-retirement and what-if testing via invisible indexes.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "MySQL - Index Merge Optimization",
+      "url": "https://dev.mysql.com/doc/refman/8.4/en/index-merge-optimization.html",
+      "description": "How MySQL handles OR conditions and multi-index access paths.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "MySQL - Partitioning Limitations",
+      "url": "https://dev.mysql.com/doc/refman/8.4/en/partitioning-limitations-storage-engines.html",
+      "description": "Current partitioning constraints, including storage-engine limitations and foreign-key caveats.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    }
+  ],
+  "sql_server_topics": [
+    {
+      "name": "SQL Server - Optional Parameter Optimization",
+      "url": "https://learn.microsoft.com/en-us/sql/relational-databases/performance/optional-parameter-optimization?view=sql-server-ver17",
+      "description": "Current OPPO behavior, prerequisites, and compatibility-level requirements.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "SQL Server - Optimized Locking",
+      "url": "https://learn.microsoft.com/en-us/sql/relational-databases/performance/optimized-locking?view=sql-server-ver17",
+      "description": "TID locking and LAQ behavior, including prerequisites and operational tradeoffs.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "SQL Server - Query Store for Secondary Replicas",
+      "url": "https://learn.microsoft.com/en-us/sql/relational-databases/performance/query-store-for-secondary-replicas?view=sql-server-ver17",
+      "description": "Readable-secondary Query Store behavior and configuration guidance.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "SQL Server - Query Processing Architecture Guide",
+      "url": "https://learn.microsoft.com/en-us/sql/relational-databases/query-processing-architecture-guide?view=sql-server-ver17",
+      "description": "Optimizer, execution plan, cardinality, and query-processing fundamentals.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "SQL Server 2025 — What's New",
+      "url": "https://learn.microsoft.com/en-us/sql/sql-server/what-s-new-in-sql-server-2025",
+      "description": "Pointer source only — always fetch live for current feature state. Specific CE-Feedback and optimizer internals details from secondary sources are UNVERIFIED here; treat this entry as a web-search-enabled pointer to official Microsoft Learn docs.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 60
+    }
+  ],
+  "sqlite_topics": [
+    {
+      "name": "SQLite Query Planner",
+      "url": "https://www.sqlite.org/queryplanner.html",
+      "description": "Planner behavior, index use, and OR-connected-term handling.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "SQLite PRAGMA optimize / ANALYZE",
+      "url": "https://www.sqlite.org/lang_analyze.html",
+      "description": "Modern guidance for ANALYZE and PRAGMA optimize.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    }
+  ],
+  "operations_and_security": [
+    {
+      "name": "PgBouncer Feature Matrix",
+      "url": "https://www.pgbouncer.org/features.html",
+      "description": "Authoritative compatibility table for pooling modes, prepared statements, temp tables, LISTEN/NOTIFY, and more.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "Google Cloud SQL - Manage Database Connections",
+      "url": "https://cloud.google.com/sql/docs/postgres/manage-connections",
+      "description": "Current Cloud SQL guidance for connection management, pooling, and Managed Connection Pooling.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "OWASP SQL Injection Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+      "description": "Primary application-security reference for parameterization, least privilege, and SQL injection prevention.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "pgBadger",
+      "url": "https://pgbadger.darold.net/",
+      "description": "PostgreSQL log analyzer for slow-query triage and operational reporting.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    },
+    {
+      "name": "Percona Toolkit",
+      "url": "https://docs.percona.com/percona-toolkit/",
+      "description": "Operational tooling for MySQL diagnostics, replication, and online schema change support.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 120
+    }
+  ],
+  "high_signal_guides": [
+    {
+      "name": "Use The Index, Luke",
+      "url": "https://use-the-index-luke.com/",
+      "description": "Cross-database indexing and execution-plan patterns. Useful secondary reference after vendor docs.",
+      "add_as_web_search": true,
+      "trust_tier": "secondary",
+      "last_verified": "2026-04-12",
+      "max_age_days": 180
+    },
+    {
+      "name": "LITHE: A Query Rewrite Advisor using LLMs (EDBT 2026)",
+      "url": "https://openproceedings.org/2026/conf/edbt/paper-93.pdf",
+      "description": "LLM-based SQL query rewrite research. arXiv 2502.12918 (submitted 2025-02-18, NOT a 2026 arXiv). Published at EDBT 2026. Result on TPC-DS / PostgreSQL: geomean runtime speedup 13.2x vs SOTA 4.9x. Use for framing LLM-assisted query rewriting; verify reproducibility claims independently before citing in recommendations.",
+      "add_as_web_search": false,
+      "trust_tier": "secondary",
+      "last_verified": "2026-05-17",
+      "max_age_days": 365
+    },
+    {
+      "name": "pgvector GitHub — Releases and Documentation",
+      "url": "https://github.com/pgvector/pgvector",
+      "description": "pgvector 0.8.x release notes and index tuning guidance. Authoritative source for HNSW/IVFFlat parameters, filtered ANN behavior (0.8+ planner improvements), and managed-service availability. Check for current version before advising on specific index types or query patterns.",
+      "add_as_web_search": true,
+      "trust_tier": "primary",
+      "last_verified": "2026-06-09",
+      "max_age_days": 90
+    },
+    {
+      "name": "MySQL 9.7 — HyperGraph Optimizer Available in Community Edition",
+      "url": "https://blogs.oracle.com/mysql/the-hypergraph-optimizer-is-now-available-in-mysql-9-7-community-edition",
+      "description": "Oracle announcement confirming HyperGraph optimizer availability in MySQL 9.7 Community Edition (April 2026). Not enabled by default; opt-in per session. Use for framing optimizer discussion; verify exact syntax and defaults against MySQL 9.7 reference manual.",
+      "add_as_web_search": false,
+      "trust_tier": "secondary",
+      "last_verified": "2026-06-09",
+      "max_age_days": 180
+    }
+  ]
+}

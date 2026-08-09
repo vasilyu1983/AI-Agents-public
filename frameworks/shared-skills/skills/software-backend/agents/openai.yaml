@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backend"
+  short_description: "Builds backend services and APIs with durable defaults"
+  default_prompt: "Use $software-backend for Builds backend services and APIs with durable defaults. Use when implementing REST, GraphQL, tRPC, or gRPC services with auth, queues, data, or observability."

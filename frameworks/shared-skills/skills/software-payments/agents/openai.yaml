@@ -1,0 +1,4 @@
+interface:
+  display_name: "Payments"
+  short_description: "Designs production payment and billing systems"
+  default_prompt: "Use $software-payments for Designs production payment and billing systems. Use when implementing Stripe, Paddle, Adyen, subscriptions, tax, marketplaces, or mobile purchase flows."

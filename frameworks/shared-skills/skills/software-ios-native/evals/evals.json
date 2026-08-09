@@ -1,0 +1,110 @@
+{
+  "skill_name": "software-ios-native",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "An iOS 17+ app using Swift 6.2 and Xcode 26 has a UNUserNotificationCenterDelegate class where didReceive and willPresent are marked nonisolated async. Inside each method the code calls await MainActor.run { self.updateUI() }. After migrating to Swift 6.2, tapping a notification sometimes freezes the app with a crash referencing _performBlockAfterCATransactionCommitSynchronizes: 'Call must be made on main thread'. Diagnose the crash and provide the fix.",
+      "expected_output": "The skill should identify this as the nonisolated async delegate + nested MainActor.run footgun documented in Known iOS Traps. The fix is to mark the delegate class @unchecked Sendable, mark the delegate methods @MainActor, and remove the nested await MainActor.run hops. The output should also warn against bulk-silencing Swift 6 isolation errors with @preconcurrency.",
+      "files": [],
+      "expectations": [
+        "The output identifies the crash cause as the nonisolated async UNUserNotificationCenterDelegate + nested await MainActor.run pattern from the Known iOS Traps table.",
+        "The output prescribes marking the delegate class @unchecked Sendable and marking the delegate methods @MainActor.",
+        "The output prescribes removing the nested await MainActor.run { } hops from inside nonisolated async methods.",
+        "The output warns that _performBlockAfterCATransactionCommitSynchronizes: is a private SwiftUI symbol and should be web-searched before any code review.",
+        "The output does not recommend bulk-silencing Swift 6 isolation errors with @preconcurrency as a fix."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "An iOS 17+ app using StoreKit 2 shows the wrong subscription tier in the paywall after a user upgrades from Monthly to Annual. The ViewModel fetches subscription status using SubscriptionStatus.all and caches it in an @Observable property. The paywall continues to show the old tier until the app is force-closed and relaunched. The app targets Xcode 26. What is the root cause and what is the correct fix?",
+      "expected_output": "The skill should identify this as the Xcode 26 SubscriptionStatus.all stale-after-subscription-change bug from Known iOS Traps. The fix is to query Product.SubscriptionInfo.Status directly or read currentEntitlements after a Transaction.updates tick, not to rely on the cached SubscriptionStatus.all array.",
+      "files": [],
+      "expectations": [
+        "The output identifies the root cause as the Xcode 26 StoreKit 2 bug where SubscriptionStatus.all returns a cached value after upgrade or downgrade.",
+        "The output prescribes querying Product.SubscriptionInfo.Status directly or reading currentEntitlements after a Transaction.updates tick.",
+        "The output explicitly states that the cached SubscriptionStatus.all array must not be trusted after a subscription change on Xcode 26.",
+        "The output does not recommend force-close-and-relaunch as the production fix.",
+        "The output connects the fix to the Transaction.updates observation loop as the correct invalidation trigger."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "An iOS 26 app uses Swift 6.2 with SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor enabled in build settings. Several views use withAnimation { } calls inside @MainActor methods to trigger list transitions and card reveals. After enabling the flag, some animations fail to start or skip directly to their final state on iOS 26.0 and iOS 26.2. What is the issue and what is the recommended workaround?",
+      "expected_output": "The skill should identify this as the iOS 26 withAnimation regression inside @MainActor methods documented in Known iOS Traps. The workarounds are: hoist withAnimation outside the @MainActor body, or wrap the animation trigger in Task { @MainActor in withAnimation(...) { ... } }. The output should also note the regression affects iOS 26.0 and 26.2 and recommend verifying on iOS 26.4.",
+      "files": [],
+      "expectations": [
+        "The output identifies this as the known iOS 26 withAnimation regression inside @MainActor methods.",
+        "The output prescribes hoisting withAnimation outside the @MainActor body as the primary workaround.",
+        "The output prescribes wrapping the trigger in Task { @MainActor in withAnimation(...) { ... } } as an alternative workaround.",
+        "The output notes the regression was observed on iOS 26.0 and iOS 26.2 and recommends verifying on iOS 26.4.",
+        "The output does not recommend disabling SWIFT_DEFAULT_ACTOR_ISOLATION as the fix."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "A production iOS 17+ app has a bare Task { } block inside an @MainActor @Observable class that runs a cooldown timer: after an action completes it calls Task { try await Task.sleep(for: .milliseconds(500)); self.state = .idle }. Under Swift 6.2 with StrictConcurrency enabled, this sometimes crashes with a main-actor isolation violation. Explain why, and provide the correct pattern.",
+      "expected_output": "The skill should explain that a bare Task { } in a @MainActor class does NOT inherit the @MainActor isolation under Swift 5.7+ StrictConcurrency / Swift 6.2 — it runs on the global executor. The fix is Task { @MainActor [weak self] in try await Task.sleep(...); self?.state = .idle }. The output should reference the bare Task { } isolation trap from Known iOS Traps.",
+      "files": [],
+      "expectations": [
+        "The output explains that bare Task { } in a @MainActor class does not inherit main actor isolation under Swift 6.2 with StrictConcurrency.",
+        "The output prescribes Task { @MainActor [weak self] in ... } as the correct pattern.",
+        "The output identifies this as the same crash class as the nonisolated async delegate footgun, noting it is pattern #2 in Known iOS Traps.",
+        "The output includes [weak self] in the corrected code to prevent retain cycles in the detached task.",
+        "The output does not suggest disabling StrictConcurrency or adding @preconcurrency as the solution."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "An Xcode 26 project's new App Store submission is failing at validation with the error: 'Missing UISupportedInterfaceOrientations~ipad key in Info.plist'. The Info.plist is generated by a script (generate-infoplist.sh) during the local build but the project also targets Xcode Cloud. The key is present in the local build but not in the Xcode Cloud archive. Diagnose the problem and provide the fix.",
+      "expected_output": "The skill should diagnose this as a CI-landmine caused by the generated Info.plist not being committed to git or regenerated in a CI hook. The fix is to either commit the generated output with git add -f, or add a ci_scripts/ci_post_clone.sh hook that calls the generation script before Xcode Cloud resolves dependencies. The output should reference the generated files and Xcode Cloud CI hook entries from the Quick Reference table.",
+      "files": [],
+      "expectations": [
+        "The output diagnoses the root cause as the generated Info.plist existing locally but absent on Xcode Cloud because generation only runs in local build phases.",
+        "The output prescribes adding a ci_scripts/ci_post_clone.sh hook to call generate-infoplist.sh on Xcode Cloud.",
+        "The output mentions using git add -f to commit generated outputs as an alternative fix.",
+        "The output references the gitignored-folder-with-tracked-files CI landmine pattern from the Quick Reference table.",
+        "The output notes that App Store validation can fail on generated metadata even when the simulator build looks correct."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Create a reusable native iOS app skeleton for May 2026 that works for most new apps. It must avoid Vercel and Supabase by default, use iCloud for user data, and leave room for Apple Foundation Models, App Intents, StoreKit, push, and local vector search.",
+      "expected_output": "The skill should route to the native iOS app foundation skeleton. It should recommend SwiftUI, Observation, SwiftData/Core Data, CloudKit/iCloud, App Intents, an optional LocalAIEngine facade, local retrieval hooks, and Xcode proof gates. It should call out that CloudKit-only is not enough for admin jobs, cron, moderation, web dashboards, or server-owned permissions.",
+      "files": [],
+      "expectations": [
+        "The output recommends SwiftUI and Observation as the UI/state defaults.",
+        "The output recommends SwiftData + CloudKit private sync as the default user-data path and Core Data + CloudKit for mature migration/sharing needs.",
+        "The output includes App Intents as a first-class module for Siri, Spotlight, Shortcuts, widgets, controls, and Apple Intelligence exposure.",
+        "The output includes a LocalAIEngine or equivalent AI facade with Foundation Models as optional, not mandatory.",
+        "The output includes proof gates such as build, test, fresh install/launch, archive, CloudKit schema checks, and real-device checks for device-only capabilities.",
+        "The output states CloudKit-only is not suitable for cron, admin dashboards, moderation queues, or server-owned permission workflows."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "An iOS-only app wants a database in iCloud. Some records are private notes, some are shared with another user, and some are public catalog rows. Should the skeleton use one SwiftData CloudKit store for all of it?",
+      "expected_output": "The skill should not recommend one SwiftData private sync store for all data. It should separate private user data, shared records, and public records. SwiftData + CloudKit private sync is fine for private data; Core Data CloudKit sharing or direct CloudKit is needed for collaboration; direct CloudKit public database is needed for public catalog rows. It should warn about schema constraints and production schema promotion.",
+      "files": [],
+      "expectations": [
+        "The output separates private, shared, and public CloudKit database scopes.",
+        "The output recommends SwiftData + CloudKit private sync only for private user data.",
+        "The output recommends Core Data CloudKit sharing or direct CloudKit for collaboration.",
+        "The output recommends direct CloudKit public database for public catalog rows.",
+        "The output warns about CloudKit schema constraints and production schema promotion."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "A native iOS skeleton stores user notes locally and wants semantic search over them. The user asks whether to add pgvector and a server vector database immediately.",
+      "expected_output": "The skill should route the iOS runtime semantic search decision to software-ios-ai-engine. It should recommend starting with local lexical search, Natural Language embeddings, or a local vector table depending on corpus size, and route pgvector/server vector database work to ai-vector-brain only when corpus size, sharing, ACLs, or hybrid/rerank requirements exceed device scope.",
+      "files": [],
+      "expectations": [
+        "The output does not recommend pgvector immediately for a private on-device note corpus.",
+        "The output routes on-device iOS semantic/vector retrieval to software-ios-ai-engine.",
+        "The output names local lexical search, Natural Language embeddings, or a local vector table as options.",
+        "The output routes server-scale vector database work to ai-vector-brain.",
+        "The output requires evidence IDs, content hashes, corpus versions, and eval cases for retrieval quality."
+      ]
+    }
+  ]
+}

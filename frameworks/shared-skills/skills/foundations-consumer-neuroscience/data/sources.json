@@ -1,0 +1,501 @@
+{
+  "metadata": {
+    "title": "Consumer Neuroscience Foundations — Sources",
+    "description": "Primary papers and references for 12 consumer-neuroscience primitives: attention & salience, arousal physiology, social bonding, narrative transportation, approach-avoidance, mirror systems, neuroaesthetics, interoception, memory consolidation, reward anticipation, embodied cognition, predictive processing.",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-consumer-neuroscience",
+    "total_sources": 61
+  },
+  "primary_papers": [
+    {
+      "id": "TreiSman1980",
+      "name": "A Feature-Integration Theory of Attention",
+      "url": "https://www.sciencedirect.com/science/article/pii/0010028580900055",
+      "description": "Treisman, A. M. & Gelade, G. (1980). Cognitive Psychology, 12(1), 97–136. Foundational Feature Integration Theory; pre-attentive feature detection and the distinction between automatic feature pop-out and serial search. Primary source for primitive #1 (attention & salience).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "IttiKoch2001",
+      "name": "Computational Modelling of Visual Attention",
+      "url": "https://www.nature.com/articles/nrn2001",
+      "description": "Itti, L. & Koch, C. (2001). Nature Reviews Neuroscience, 2(3), 194–203. Computational salience maps formalizing bottom-up attentional priority. Primary source for primitive #1 (attention & salience).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Bigne2025",
+      "name": "How to Conduct Valuable Marketing Research With Neurophysiological Tools",
+      "url": "https://onlinelibrary.wiley.com/journal/15206793",
+      "description": "Bigne, E. et al. (2025). Psychology & Marketing. Comprehensive methodological review of neurophysiological tools (EEG, GSR, eye-tracking, fMRI, facial EMG) in consumer research; 2025 empirical anchor for primitives #1 (attention), #2 (arousal), and #6 (mirror systems).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "YerkesDodson1908",
+      "name": "The Relation of Strength of Stimulus to Rapidity of Habit-Formation",
+      "url": "https://www.jstor.org/stable/1412503",
+      "description": "Yerkes, R. M. & Dodson, J. D. (1908). Journal of Comparative Neurology and Psychology, 18(5), 459–482. Foundational Yerkes-Dodson law; inverted-U relationship between arousal and performance. Primary source for primitive #2 (arousal physiology).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "McEwen2007",
+      "name": "Physiology and Neurobiology of Stress and Adaptation",
+      "url": "https://journals.physiology.org/doi/10.1152/physrev.00041.2006",
+      "description": "McEwen, B. S. (2007). Physiological Reviews, 87(3), 873–904. Allostatic load model; sustained autonomic activation as physiological cost. Primary source for primitive #2 (arousal physiology).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "FrontiersNeuroergo2025",
+      "name": "Neuro-Insights: A Systematic Review of Neuromarketing Perspectives Across Consumer Buying Stages",
+      "url": "https://www.frontiersin.org/articles/10.3389/fnrgo.2025.1542847",
+      "description": "Frontiers in Neuroergonomics (11 July 2025). DOI: 10.3389/fnrgo.2025.1542847. Systematic review of neuromarketing tools and findings across pre-purchase, purchase, and post-purchase stages. SOR framing. 2025 empirical anchor for primitives #2 (arousal), #4 (narrative), and composition recipes.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Zak2012",
+      "name": "The Moral Molecule",
+      "url": "https://www.penguin.com/the-moral-molecule",
+      "description": "Zak, P. J. (2012). The Moral Molecule. Dutton. Oxytocin, trust, and prosocial economic behavior; narrative as oxytocin trigger. Primary source for primitive #3 (social bonding).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Carter2014",
+      "name": "Oxytocin Pathways and the Evolution of Human Behavior",
+      "url": "https://www.annualreviews.org/doi/10.1146/annurev-psych-010213-115110",
+      "description": "Carter, C. S. (2014). Annual Review of Psychology, 65, 17–39. Evolutionary depth of oxytocin affiliative circuits; bonding, parental care, and social group cohesion. Primary source for primitive #3 (social bonding).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "GreenBrock2000",
+      "name": "The Role of Transportation in the Persuasiveness of Public Narratives",
+      "url": "https://psycnet.apa.org/doi/10.1037/0022-3514.79.5.701",
+      "description": "Green, M. C. & Brock, T. C. (2000). Journal of Personality and Social Psychology, 79(5), 701–721. Foundational transportation theory; transportation score predicts attitude change and belief formation. Primary source for primitive #4 (narrative transportation).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Buckner2008",
+      "name": "The Brain's Default Network",
+      "url": "https://nyaspubs.onlinelibrary.wiley.com/doi/10.1196/annals.1440.011",
+      "description": "Buckner, R. L., Andrews-Hanna, J. R. & Schacter, D. L. (2008). Annals of the New York Academy of Sciences, 1124(1), 1–38. Default Mode Network and self-referential processing; vmPFC role in narrative absorption. Primary source for primitive #4 (narrative transportation).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "FrontiersHumanNeuro2024",
+      "name": "xAI/fMRI Approaches to Brand Narrative and Default-Mode Processing",
+      "url": "https://www.frontiersin.org/journals/human-neuroscience",
+      "description": "Frontiers in Human Neuroscience (2024). fMRI evidence on brand-narrative alignment with default-mode network processing and downstream brand preference. 2024 empirical anchor for primitive #4 (narrative transportation).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Higgins1997",
+      "name": "Beyond Pleasure and Pain",
+      "url": "https://psycnet.apa.org/doi/10.1037/0003-066X.52.12.1280",
+      "description": "Higgins, E. T. (1997). American Psychologist, 52(12), 1280–1300. Foundational regulatory focus theory; promotion vs prevention orientation. Primary source for primitive #5 (approach-avoidance).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "CarverWhite1994",
+      "name": "Behavioral Inhibition, Behavioral Activation, and Affective Responses to Impending Reward and Punishment",
+      "url": "https://psycnet.apa.org/doi/10.1037/0022-3514.67.2.319",
+      "description": "Carver, C. S. & White, T. L. (1994). Journal of Personality and Social Psychology, 67(2), 319–333. BIS/BAS scale and behavioral evidence; reward vs threat sensitivity dissociation. Primary source for primitive #5 (approach-avoidance).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "RizzolattiCraighero2004",
+      "name": "The Mirror-Neuron System",
+      "url": "https://www.annualreviews.org/doi/10.1146/annurev.neuro.27.070203.144230",
+      "description": "Rizzolatti, G. & Craighero, L. (2004). Annual Review of Neuroscience, 27, 169–192. Foundational mirror neuron system review; motor simulation of observed actions. Primary source for primitive #6 (mirror systems).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Hatfield1993",
+      "name": "Emotional Contagion",
+      "url": "https://www.jstor.org/stable/20182234",
+      "description": "Hatfield, E., Cacioppo, J. T. & Rapson, R. L. (1993). Current Directions in Psychological Science, 2(3), 96–99. Foundational emotional contagion; automatic mirroring of observed emotional expressions. Primary source for primitive #6 (mirror systems).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "RamachandranHirstein1999",
+      "name": "The Science of Art: A Neurological Theory of Aesthetic Experience",
+      "url": "https://doi.org/10.1093/acprof:oso/9780195167030.003.0001",
+      "description": "Ramachandran, V. S. & Hirstein, W. (1999). Journal of Consciousness Studies, 6(6–7), 15–51. Foundational neuroaesthetics; peak-shift principle; eight laws of artistic experience. Primary source for primitive #7 (neuroaesthetics).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Chatterjee2014",
+      "name": "The Aesthetic Brain",
+      "url": "https://global.oup.com/academic/product/the-aesthetic-brain-9780199811436",
+      "description": "Chatterjee, A. (2014). The Aesthetic Brain. Oxford University Press. Neural basis of visual beauty; ventral pathway and aesthetic reward; symmetry and contour processing. Primary source for primitive #7 (neuroaesthetics).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Damasio1996",
+      "name": "Descartes' Error",
+      "url": "https://www.penguinrandomhouse.com/books/86179/descartes-error-by-antonio-damasio/",
+      "description": "Damasio, A. R. (1996). Descartes' Error. Papermac. Somatic marker hypothesis; vmPFC integration of body-state signals into pre-deliberative decision bias. Primary source for primitive #8 (interoception & somatic markers).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Craig2009",
+      "name": "How Do You Feel — Now? The Anterior Insula and Human Awareness",
+      "url": "https://www.nature.com/articles/nrn2555",
+      "description": "Craig, A. D. (2009). Nature Reviews Neuroscience, 10(1), 59–70. Anterior insula as the primary cortical substrate for interoception; meta-interoception and subjective feeling states. Primary source for primitive #8 (interoception & somatic markers).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Hebb1949",
+      "name": "The Organization of Behavior",
+      "url": "https://www.taylorfrancis.com/books/mono/10.4324/9781410612403/organization-behavior-donald-hebb",
+      "description": "Hebb, D. O. (1949). The Organization of Behavior. Wiley. Hebbian synaptic potentiation; the foundational mechanism for experience-dependent neural plasticity and learning. Primary source for primitive #9 (memory consolidation).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Walker2017",
+      "name": "Why We Sleep",
+      "url": "https://www.simonandschuster.com/books/Why-We-Sleep/Matthew-Walker/9781501144325",
+      "description": "Walker, M. P. (2017). Why We Sleep. Scribner. Sleep-dependent hippocampal replay; NREM slow-wave consolidation; sleep disruption effects on memory formation. Primary source for primitive #9 (memory consolidation).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Knutson2001",
+      "name": "Anticipation of Increasing Monetary Reward Selectively Recruits Nucleus Accumbens",
+      "url": "https://www.jneurosci.org/content/21/16/RC159",
+      "description": "Knutson, B., Adams, C. M., Fong, G. W. & Hommer, D. (2001). Journal of Neuroscience, 21(16), RC159. Nucleus accumbens activation during reward anticipation; wanting signal peaks before reward delivery. Primary source for primitive #10 (reward anticipation).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Berridge2007",
+      "name": "The Debate Over Dopamine's Role in Reward: The Case for Incentive Salience",
+      "url": "https://link.springer.com/article/10.1007/s00213-006-0578-x",
+      "description": "Berridge, K. C. (2007). Psychopharmacology, 191(3), 391–431. Wanting/liking dissociation; incentive salience theory; mesolimbic dopamine as wanting signal distinct from hedonic liking. Primary source for primitive #10 (reward anticipation).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "LakoffJohnson1999",
+      "name": "Philosophy in the Flesh",
+      "url": "https://www.basicbooks.com/titles/george-lakoff/philosophy-in-the-flesh/9780465056736/",
+      "description": "Lakoff, G. & Johnson, M. (1999). Philosophy in the Flesh. Basic Books. Conceptual metaphor theory; sensorimotor grounding of abstract thought; embodied cognition. Primary source for primitive #11 (embodied cognition).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Barsalou2008",
+      "name": "Grounded Cognition",
+      "url": "https://www.annualreviews.org/doi/10.1146/annurev.psych.59.103006.093639",
+      "description": "Barsalou, L. W. (2008). Annual Review of Psychology, 59, 617–645. Perceptual symbol systems; grounded simulation of concepts through partial sensorimotor reenactment. Primary source for primitive #11 (embodied cognition).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Friston2010",
+      "name": "The Free-Energy Principle: A Unified Brain Theory?",
+      "url": "https://www.nature.com/articles/nrn2787",
+      "description": "Friston, K. (2010). Nature Reviews Neuroscience, 11(2), 127–138. Free-energy minimization as the unifying computational principle of brain function; predictive processing. Primary source for primitive #12 (predictive processing).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Clark2013",
+      "name": "Whatever Next? Predictive Brains, Situated Agents, and the Future of Cognitive Science",
+      "url": "https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/whatever-next-predictive-brains-situated-agents-and-the-future-of-cognitive-science/33542C736E17E3D1D44E8D03BE5F4CD9",
+      "description": "Clark, A. (2013). Behavioral and Brain Sciences, 36(3), 181–204. Active inference; predictive processing as unifying cognitive science framework; design implications for prediction-error management. Primary source for primitive #12 (predictive processing).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ConstantClark2019",
+      "name": "Extended Active Inference",
+      "url": "https://royalsocietypublishing.org/doi/10.1098/rstb.2019.0220",
+      "description": "Constant, A., Clark, A., Kirchhoff, M. & Friston, K. (2019). Philosophical Transactions of the Royal Society B, 374. Active inference extended beyond the skull; niche construction; product design shapes user world-models. Source for primitive #12 (predictive processing).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Sprevak2024",
+      "name": "Predictive Processing: A Review",
+      "url": "https://onlinelibrary.wiley.com/journal/17568765",
+      "description": "Sprevak, M. (2024). Topics in Cognitive Science; and (2025) Inquiry. Current state of predictive processing theory; scope of evidence and applied range. 2024/2025 empirical anchor for primitive #12 (predictive processing).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Bansal2025",
+      "name": "Neuromarketing and the Marketing Mix: An Integrative Review and Future Research Agenda Using the TMC Approach",
+      "url": "https://onlinelibrary.wiley.com/journal/10970825",
+      "description": "Bansal, A. et al. (2025). International Journal of Consumer Studies. Integrative review of neuromarketing across the marketing mix using the TMC approach; SOR framing. 2025 empirical anchor for composition recipes and Frontiers neuro-insights cross-reference.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "F1000Research2024",
+      "name": "Noninvasive Neuromarketing Methods: An Overview",
+      "url": "https://f1000research.com/articles/14-1132",
+      "description": "F1000Research 14:1132 (2024). Overview of noninvasive neuromarketing measurement methods (EEG, fMRI, fNIRS, GSR, eye-tracking, facial EMG); methodological limitations and ethical constraints. Cross-reference for primitives #2, #6, and #8.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "SchultzMontague1997",
+      "name": "A Neural Substrate of Prediction and Reward",
+      "url": "https://www.science.org/doi/10.1126/science.275.5306.1593",
+      "description": "Schultz, W., Dayan, P. & Montague, P. R. (1997). Science, 275(5306), 1593–1599. VTA dopamine neurons as prediction-error signals; ~200ms anticipatory onset before conditioned cue. Cross-reference for primitive #10 (reward anticipation) and #12 (predictive processing).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "OttEtAl2013",
+      "name": "Oxytocin and Social Reward: Is There a Link?",
+      "url": "https://www.frontiersin.org/articles/10.3389/fnins.2013.00264",
+      "description": "Ott, V. et al. (2013). Frontiers in Neuroscience, 7, 264. Oxytocin plasma half-life ~3–5 minutes; social reward circuitry; implications for session-level warmth design. Source for primitive #3 (social bonding).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "BAAS2025NatComms",
+      "name": "A neurofunctional signature of affective arousal generalizes across valence domains and distinguishes subjective experience from autonomic reactivity",
+      "url": "https://www.nature.com/articles/s41467-025-61706-0",
+      "description": "Nature Communications (July 14, 2025). DOI: 10.1038/s41467-025-61706-0. Discovery n=60/36; validation across 24 studies, n=868. Identifies a brain affective arousal signature (BAAS) in distributed cortical-subcortical systems (prefrontal, PAG, thalamo-amygdala-insula). BAAS generalizes across valence (positive and negative) and is statistically distinct from autonomic arousal (GSR/HRV) and from wakefulness. Key CORRECT for primitive #2: GSR/autonomic signals do not fully proxy subjective affective arousal.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "DeclerckoxytocinRep2020NHB",
+      "name": "A registered replication study on oxytocin and trust",
+      "url": "https://www.nature.com/articles/s41562-020-0878-x",
+      "description": "Declerck, C. H., Boone, C., Pauwels, L., Vogt, B., & Fehr, E. (2020). Nature Human Behaviour, 4, 646–655. Registered pre-registered replication with >95% power. No main effect of intranasal oxytocin on trusting behavior under standard social conditions. Exploratory: possible effect in low-trust-disposition individuals. Required qualification for primitive #3 (social bonding) — the simple oxytocin=trust narrative is overclaiming.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ReliabilityEEGAds2024JA",
+      "name": "Reliability of EEG Metrics for Assessing Video Advertisements",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/00913367.2024.2418109",
+      "description": "Journal of Advertising (2024/2025 online first). DOI: 10.1080/00913367.2024.2418109. n=116 participants, 13 TV commercials. ISC is the most reliable EEG metric for ad testing (n≈11–15 for r=0.7 reliability). Alpha, beta, gamma, theta reliability improve with repetition. Alpha-asymmetry reliability does not improve with additional viewings — a key limitation for its use in neuromarketing. Key update for primitives #1 and #2.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ISCAttentionMeta2025BMC",
+      "name": "Intersubject correlation as a predictor of attention: a systematic review",
+      "url": "https://link.springer.com/article/10.1186/s40359-025-02879-7",
+      "description": "BMC Psychology (2025). DOI: 10.1186/s40359-025-02879-7. PMC: PMC12100797. 14 studies, 27 effect sizes. Meta-analytic estimate r=0.65 (p<0.001) for ISC as neural marker of attentional engagement. Covers naturalistic stimuli (video clips) and controlled tasks. Corroborates ISC as the highest-reliability neuromarketing EEG metric. Key update for primitive #1 (attention).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ConsumerEEGEval2026SciReports",
+      "name": "A comprehensive evaluation framework for consumer-grade EEG devices: signal quality, robustness, and usability",
+      "url": "https://www.nature.com/articles/s41598-026-39056-8",
+      "description": "Scientific Reports (2026). DOI: 10.1038/s41598-026-39056-8. n=30 participants, 4 consumer-grade EEG devices (BrainLink Pro, NeuroNicle FX2, Mindwave Mobile2, Muse2) vs DSI-24 research-grade reference. P300 detectable in consumer devices but ERP temporal pattern distorted. Muse2 shows poorest signal quality (broadband power distortion, highest test-retest variability). Consumer devices more artifact-prone in frontal region. Key qualification for primitive #1 and #2 instrumentation claims.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ConsumerEEGDataset2026SciData",
+      "name": "EEG dataset of consumer- and research-grade systems",
+      "url": "https://www.nature.com/articles/s41597-026-06962-5",
+      "description": "Scientific Data (2026). DOI: 10.1038/s41597-026-06962-5. PMC: PMC13076875. Public dataset from the same consumer vs. research-grade EEG evaluation study (Finding 3). Enables cross-study validation and standardization of consumer EEG claims. Corroborating source for consumer EEG qualification.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Poldrack2011Neuron",
+      "name": "Inferring mental states from neuroimaging data",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0896627311009627",
+      "description": "Poldrack, R. A. (2011). Neuron, 72(5), 692–697. DOI: 10.1016/j.neuron.2011.11.001. Foundational critique of reverse inference in neuroimaging: inferring a mental state from observed brain activation requires a highly selective mapping between state and region — a condition rarely met. Landmark paper in neuromarketing methodology; anchors the ML-ON-NEURO REVERSE INFERENCE TRAP and the Anti-Frameworks ML-classifier-as-mind-reader entry in frameworks-meta.md.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Marques2025PM",
+      "name": "Predicting advertising preference using machine learning on EDA and facial action",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/mar.22118",
+      "description": "Marques et al. (2025). Psychology & Marketing, 42(1), 175–192. DOI: 10.1002/mar.22118. Random Forest model on EDA + facial action coding unit (FEA) data achieves 81% accuracy and 81% F1 for predicting ad preference. Single-lab result; not yet replicated across independent stimulus sets. Evidence grade: B — promising but treat as lab-specific until cross-validated. Anchors ML-ON-NEURO OVERFIT trap in patterns-scenarios-traps.md.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "FrontiersMlNeuromarketing2025",
+      "name": "ML/DL in Neuromarketing Research — Editorial and Research Topic",
+      "url": "https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2025.1638225/full",
+      "description": "Frontiers in Human Neuroscience (2025). DOI: 10.3389/fnhum.2025.1638225. PMC: PMC12230022. Editorial summarising 8 contributions on ML and DL in consumer neuroscience research. Identifies reverse inference and small-N overfitting as two persistent challenges ML is claimed to resolve but does not; ML changes the surface form of reverse inference (trained prior) rather than eliminating it. Evidence grade: B — peer-reviewed synthesis; no direct empirical test of the ML-vs-reverse-inference claim. Anchors ML-ON-NEURO REVERSE INFERENCE TRAP and Anti-Frameworks row in frameworks-meta.md.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Genevsky2025PNASNexus",
+      "name": "Neuroforecasting reveals generalizable components of choice",
+      "url": "https://academic.oup.com/pnasnexus/article/4/2/pgaf029/8016018",
+      "description": "Genevsky, A., Tong, L. C., & Knutson, B. (2025). PNAS Nexus, 4(2), pgaf029. DOI: 10.1093/pnasnexus/pgaf029. Two-experiment fMRI study showing NAcc activity (early affective response) forecasts aggregate internet-market choices regardless of lab-sample demographic representativeness; MPFC does not generalize. Sample ~20–25 subjects sufficient for reliable forecast. Key update for primitive #10 (reward anticipation) and neuroforecasting applications.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Srirangarajan2026PNASNexus",
+      "name": "Brain activity reveals how wildlife imagery evokes engagement on social media",
+      "url": "https://academic.oup.com/pnasnexus/article/5/2/pgag012/8487340",
+      "description": "Srirangarajan, T., Sawe, N., Thys, T., Wu, X. C., & Knutson, B. (2026). PNAS Nexus, 5(2), pgag012. n=34. Group MPFC activity forecast aggregate social-media engagement (National Geographic Instagram) out-of-sample; NAcc and MPFC both predicted individual liking and donations. Domain-dependent result: in conservation/social-media domain MPFC (not NAcc) generalised to aggregate — distinct from Genevsky 2025 (commercial markets, NAcc → aggregate). Together the two papers establish that the region forecasting aggregate is domain-dependent.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    }
+  ],
+  "regulatory_sources": [
+    {
+      "id": "DMCCAct2024",
+      "name": "Digital Markets, Competition and Consumers Act 2024",
+      "url": "https://www.legislation.gov.uk/ukpga/2024/13",
+      "description": "UK primary legislation. In force 6 April 2025. Restates and extends CPRs 2008 consumer protection provisions. CMA direct civil enforcement; fines up to 10% of global annual turnover. Online choice architecture and dark patterns directly actionable. Relevant to all primitives via ethical bounds sections.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "CMAProceduralGuidance2025",
+      "name": "CMA DMCC Act Procedural Guidance — April 2025",
+      "url": "https://www.gov.uk/government/publications/cma-procedural-guidance-dmcc-act",
+      "description": "CMA (April 2025). Procedural guidance on enforcement powers under the DMCC Act 2024. Establishes CMA investigation and enforcement process. Relevant to ethical bounds, misuse boundaries across all primitives.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "CMAPriceTransparency2025",
+      "name": "CMA Price Transparency Guidance — December 2025",
+      "url": "https://www.gov.uk/government/publications/cma-price-transparency-guidance",
+      "description": "CMA (December 2025). Guidance on price transparency requirements under DMCC Act 2024; drip pricing and incremental price reveal addressed. Relevant to primitive #2 (manufactured arousal via pricing pressure) and composition recipes.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "CMAEnforcement2025",
+      "name": "CMA First DMCC Enforcement Actions — 18 November 2025",
+      "url": "https://www.gov.uk/cma-cases/digital-markets-competition-and-consumers-act-2024-enforcement",
+      "description": "CMA (18 November 2025). First enforcement actions under DMCC Act 2024 against 8 firms; drip pricing, default opt-ins, pressure selling. ~100 advisory letters across 14 sectors. Directly referenced in SKILL.md UK Regulatory Context section.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ASACAPCode",
+      "name": "ASA CAP Code (Non-Broadcast Advertising)",
+      "url": "https://www.asa.org.uk/codes-and-rulings/advertising-codes/non-broadcast-code.html",
+      "description": "ASA/CAP (current). Non-broadcast advertising standards; misleading claims, false testimonials, fabricated social proof, manufactured urgency. Relevant to primitives #6 (mirror systems/testimonials) and #3 (social bonding/fabricated warmth).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ICOBiometricGuidance",
+      "name": "ICO Guidance on Biometric Data and Special Category Processing",
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/",
+      "description": "ICO / UK GDPR (current). Special-category data; Article 9 explicit consent requirements for biometric and physiological measurement (GSR, HRV, eye-tracking, facial EMG, EEG). Directly relevant to DMCC compliance audit recipe and primitives #2, #6, and #8 misuse boundaries.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "CPRs2008",
+      "name": "Consumer Protection from Unfair Trading Regulations 2008",
+      "url": "https://www.legislation.gov.uk/uksi/2008/1277/contents",
+      "description": "UK statutory instrument. Aggressive and misleading commercial practices; now restated and extended within DMCC Act 2024. Historical anchor for dark-pattern analysis; provisions relevant to manufactured urgency and pressure-selling primitives.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ThalerSunstein2008",
+      "name": "Nudge: Improving Decisions About Health, Wealth, and Happiness",
+      "url": "https://yalebooks.yale.edu/book/9780300122237/nudge/",
+      "description": "Thaler, R. H. & Sunstein, C. R. (2008). Yale University Press. Harm test for nudge vs dark pattern; choice architecture ethics. Applied as the ethical frame across all primitives in SKILL.md and primitives-overview.md.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "EUAIAct2024",
+      "name": "EU AI Act (Regulation (EU) 2024/1689)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+      "description": "EU primary legislation. Article 5 prohibitions in force 2 February 2025: subliminal/manipulative AI techniques causing significant harm; exploitation of vulnerabilities (age, disability, socio-economic). Workplace and education emotion-recognition prohibited. Article 50 transparency obligations for emotion-recognition and biometric-categorisation systems. Annex III high-risk classification covers commercial emotion recognition. Directly relevant to Ethical Bounds EU section and primitives #2, #3, #6, #8 misuse boundaries.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "EUAIActHighRiskAug2026",
+      "name": "EU AI Act High-Risk System Obligations — In Force 2 August 2026",
+      "url": "https://artificialintelligenceact.eu/article/6/",
+      "description": "EU AI Act Article 6 + Annex III. From 2 August 2026, high-risk AI systems including commercial emotion-recognition and biometric-categorisation must meet data governance, technical documentation, transparency, human oversight, accuracy, robustness, and post-market monitoring requirements. Any consumer product using AI to infer affect from facial expression, voice, GSR, HRV, eye-tracking, or fNIRS must be compliant. Anchors the May 2026 readiness window referenced in SKILL.md EU Regulatory Context.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "EUAIActArticle5",
+      "name": "EU AI Act Article 5 — Prohibited AI Practices",
+      "url": "https://artificialintelligenceact.eu/article/5/",
+      "description": "EU AI Act Article 5. Prohibited practices include subliminal techniques beyond consciousness, purposefully manipulative or deceptive techniques causing significant harm, and exploitation of vulnerabilities (age, disability, socio-economic). In force 2 February 2025. Directly captures the manipulation column of the SKILL.md ethics table when AI is in the loop. Reinforces the Vulnerable-User Note alongside DMCC enforcement priorities.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "CaliforniaSB1223_2025",
+      "name": "California SB 1223 — Neural Data as CCPA Sensitive Personal Information",
+      "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240SB1223",
+      "description": "California SB 1223 (signed 28 Sep 2024; effective 1 Jan 2025). Amends CCPA to include 'neural data' — signals from central or peripheral nervous system — as sensitive personal information. Requires separate opt-in consent; right to delete and restrict sharing apply. Directly relevant to any consumer product capturing EEG, GSR, eye-tracking, facial coding, or voice-affect signals served to California users. Anchors the US Regulatory Context section in SKILL.md and US Neural Data Laws gate in ethics-operational-checklist.md.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ColoradoHB241058_2024",
+      "name": "Colorado HB 24-1058 — Neural Data Under Colorado Privacy Act",
+      "url": "https://leg.colorado.gov/bills/hb24-1058",
+      "description": "Colorado HB 24-1058 (signed April 2024; effective 7 August 2024). Amends Colorado Privacy Act to include 'neural data' within 'biological data' as a category of sensitive data. First US law to define and protect neural data specifically. Requires opt-in consent for processing. Anchors the US Regulatory Context section in SKILL.md.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ConnecticutSB1295_2025",
+      "name": "Connecticut SB 1295 — Neural Data Under CTDPA",
+      "url": "https://natlawreview.com/article/connecticut-amends-connecticut-data-privacy-act",
+      "description": "Connecticut SB 1295 (signed 24 June 2025; effective 1 July 2026). Amends Connecticut Data Privacy Act to add neural data as a sensitive data category. Express consumer consent required for processing; selling sensitive data without consent prohibited. Processing thresholds removed for sensitive data. Anchors the US Regulatory Context section in SKILL.md and US Neural Data Laws gate in ethics-operational-checklist.md.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "UNESCONeurotechRecommendation2025",
+      "name": "UNESCO Recommendation on the Ethics of Neurotechnology",
+      "url": "https://www.unesco.org/en/legal-affairs/recommendation-ethics-neurotechnology",
+      "description": "UNESCO General Conference, 43rd session (adopted 12 November 2025). First global non-binding ethical framework for neurotechnology covering neural data across commercial uses. Principles include mental privacy, transparency, consent, human dignity, and protection of vulnerable groups. Non-binding but widely cited in board-level compliance discussions and DPA engagement. Anchors the US/global Regulatory Context section in SKILL.md.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "OxytocinTrustBioRxiv2025",
+      "name": "Oxytocin increases trust in humans with a low disposition to trust (bioRxiv 2025, preprint)",
+      "url": "https://www.biorxiv.org/content/10.1101/2025.10.01.679711v1",
+      "description": "bioRxiv preprint (2025; DOI: 10.1101/2025.10.01.679711). Preregistered high-powered study. Oxytocin administration increased trusting behaviour by ~15%; pooled analysis (low-trusting individuals) yielded ~16.9% increase. Selective effect in low-trust-disposition individuals. Note: PREPRINT — not yet peer-reviewed; treat as preliminary. Cited in SKILL.md Fact-Checking #3 (social bonding) oxytocin replication note. Context: the Declerck 2020 registered replication (peer-reviewed, Nature Human Behaviour) found no main effect; this preprint provides a qualified positive result under restricted conditions. Both must be cited together.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "VermontH814_2026",
+      "name": "Vermont H.814 / Act 101 — Neurological Rights Statement, No Consent Gate (corrected)",
+      "url": "https://www.cooley.com/news/insight/2026/2026-06-23-from-maple-to-mind-taps-new-vermont-law-puts-neurotech-on-notice",
+      "description": "Vermont H.814 / Act 101 (signed 18 May 2026; effective 1 July 2026). CORRECTED: the enacted act was substantially narrowed in the Senate — the consent requirement and private right of action were stripped before passage. It recognises a largely declaratory 'neurological rights' statement (mental privacy, freedom of thought, non-discrimination in neurotechnology) with enforcement resting exclusively with the Vermont Attorney General, and commissions a study reporting to the next legislative session. No consent gate for businesses. Vermont's binding neural-data framework is S.71 (neural data as sensitive data), effective 1 January 2028. Do not cite H.814 as an active consent gate. Anchors the corrected US Regulatory Context section in SKILL.md and US Neural Data Laws gate in ethics-operational-checklist.md.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    }
+  ]
+}

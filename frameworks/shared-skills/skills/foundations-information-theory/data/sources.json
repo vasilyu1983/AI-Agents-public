@@ -1,0 +1,293 @@
+{
+  "metadata": {
+    "title": "AI Foundations Information Theory — Sources",
+    "description": "Primary papers and references for 11 information-theory primitives: Shannon entropy, mutual information, KL divergence, cross-entropy, channel capacity, rate-distortion, MDL, information bottleneck, Fano's inequality, AEP, and redundancy/compression.",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-information-theory",
+    "total_sources": 38
+  },
+  "research_papers": [
+    {
+      "id": "Shannon1948",
+      "name": "Shannon: A Mathematical Theory of Communication",
+      "url": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf",
+      "description": "Shannon, C. E. (1948). Bell System Technical Journal, 27(3), 379–423. Foundational paper introducing entropy, channel capacity, source coding theorem, and channel coding theorem. Primary source for primitives #1, #5, #10.",
+      "add_as_web_search": false,
+      "url_check": "skip"
+    },
+    {
+      "id": "CoverThomas2006",
+      "name": "Cover & Thomas: Elements of Information Theory, 2nd ed.",
+      "url": "https://www.wiley.com/en-us/Elements+of+Information+Theory%2C+2nd+Edition-p-9780471241959",
+      "description": "Cover, T. M. & Thomas, J. A. (2006). Wiley. Canonical textbook reference for all 11 primitives. Entropy (Ch.2), AEP (Ch.3), rate-distortion (Ch.10), MDL (Ch.14).",
+      "add_as_web_search": false,
+      "url_check": "skip"
+    },
+    {
+      "id": "MacKay2003",
+      "name": "MacKay: Information Theory, Inference, and Learning Algorithms",
+      "url": "https://www.inference.org.uk/mackay/itila/",
+      "description": "MacKay, D. J. C. (2003). Cambridge University Press. Free online. Covers all primitives with worked examples. Entropy (Ch.2), source coding (Ch.5–6), channel capacity (Ch.9–11), IB-adjacent material (Ch.28).",
+      "add_as_web_search": true
+    },
+    {
+      "id": "TishbyIB2000",
+      "name": "Tishby, Pereira & Bialek: The Information Bottleneck Method",
+      "url": "https://arxiv.org/abs/physics/0004057",
+      "description": "Tishby, N., Pereira, F. C. & Bialek, W. (2000). arXiv:physics/0004057. Original information bottleneck paper. Self-consistency equations, IB curve, Lagrangian formulation. Primary source for primitive #8.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "TishbyDNN2017",
+      "name": "Tishby & Schwartz-Ziv: Opening the Black Box via Information",
+      "url": "https://arxiv.org/abs/1703.00810",
+      "description": "Tishby, N. & Schwartz-Ziv, R. (2017). arXiv:1703.00810. IB interpretation of deep neural network layers — fitting and compression phases. Source for primitive #8 (deep learning view).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "SaxeIB2018",
+      "name": "Saxe et al.: On the Information Bottleneck Theory of Deep Learning",
+      "url": "https://arxiv.org/abs/1805.05815",
+      "description": "Saxe, A. M. et al. (2018). ICLR 2019. Rebuttal to Tishby/Schwartz-Ziv: compression phase depends on activation function and MI estimator; does not generalize. Critical for IB anti-pattern guidance in primitive #8.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "AlemiVIB2017",
+      "name": "Alemi et al.: Deep Variational Information Bottleneck",
+      "url": "https://arxiv.org/abs/1612.00410",
+      "description": "Alemi, A. A. et al. (2017). ICLR 2017. Variational IB (VIB) for high-dimensional data; gradient-based optimization via ELBO-style bound. Source for primitive #8 (variational IB).",
+      "add_as_web_search": true
+    },
+    {
+      "id": "Rissanen1978",
+      "name": "Rissanen: Modeling by Shortest Data Description",
+      "url": "https://doi.org/10.1016/0005-1098(78)90005-5",
+      "description": "Rissanen, J. (1978). Automatica, 14(5), 465–471. Original MDL paper. Two-part code: L(model) + L(data|model). Primary source for primitive #7.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "GrunwaldMDL2007",
+      "name": "Grünwald: The Minimum Description Length Principle",
+      "url": "https://mitpress.mit.edu/9780262572279/the-minimum-description-length-principle/",
+      "description": "Grünwald, P. (2007). MIT Press. Comprehensive MDL reference: two-part codes, NML, refined MDL, stochastic complexity, Bayesian connection. Primary source for primitive #7.",
+      "add_as_web_search": false,
+      "url_check": "skip"
+    },
+    {
+      "id": "MINE2018",
+      "name": "Belghazi et al.: MINE — Mutual Information Neural Estimation",
+      "url": "https://arxiv.org/abs/1801.04062",
+      "description": "Belghazi, M. I. et al. (2018). ICML 2018. Neural lower bound on MI using Donsker-Varadhan representation. Enables MI estimation in high-dimensional continuous spaces. Source for primitive #2 (continuous MI estimation).",
+      "add_as_web_search": true
+    },
+    {
+      "id": "Paninski2003",
+      "name": "Paninski: Estimation of Entropy and Mutual Information",
+      "url": "https://doi.org/10.1162/089976603321780272",
+      "description": "Paninski, L. (2003). Neural Computation, 15(6), 1191–1253. Bias-variance analysis of plug-in entropy and MI estimators; conditions for consistent estimation. Source for primitive #2 failure modes.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "KraskovKNN2004",
+      "name": "Kraskov, Stögbauer & Grassberger: Estimating Mutual Information",
+      "url": "https://arxiv.org/abs/cond-mat/0305641",
+      "description": "Kraskov, A., Stögbauer, H. & Grassberger, P. (2004). Physical Review E, 69(6). k-NN based MI estimator for continuous random variables; widely used in neuroscience and ML. Source for primitive #2.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "KullbackLeibler1951",
+      "name": "Kullback & Leibler: On Information and Sufficiency",
+      "url": "https://doi.org/10.1214/aoms/1177729694",
+      "description": "Kullback, S. & Leibler, R. A. (1951). Annals of Mathematical Statistics, 22(1), 79–86. Original KL divergence paper. Primary source for primitive #3.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Lin1991JSD",
+      "name": "Lin: Divergence Measures Based on the Shannon Entropy",
+      "url": "https://doi.org/10.1109/18.61115",
+      "description": "Lin, J. (1991). IEEE Transactions on Information Theory, 37(1), 145–151. Introduces Jensen-Shannon divergence as a symmetric, bounded divergence. Source for primitive #3 (JS divergence).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Fano1961",
+      "name": "Fano: Transmission of Information",
+      "url": "https://archive.org/details/transmissionofin00fano",
+      "description": "Fano, R. M. (1961). MIT Press. Original derivation of Fano's inequality and its application to channel coding converse. Primary source for primitive #9.",
+      "add_as_web_search": false,
+      "url_check": "skip"
+    },
+    {
+      "id": "Blahut1972",
+      "name": "Blahut: Computation of Channel Capacity and Rate-Distortion Functions",
+      "url": "https://doi.org/10.1109/TIT.1972.1054855",
+      "description": "Blahut, R. E. (1972). IEEE Transactions on Information Theory, 18(4), 460–473. Blahut-Arimoto algorithm for computing R(D) and C numerically. Source for primitives #5, #6.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Shannon1959RD",
+      "name": "Shannon: Coding Theorems for a Discrete Source with a Fidelity Criterion",
+      "url": "https://www.jstor.org/stable/23071084",
+      "description": "Shannon, C. E. (1959). IRE National Convention Record, part 4, 142–163. Original rate-distortion theorem. Primary source for primitive #6.",
+      "add_as_web_search": false,
+      "url_check": "skip"
+    },
+    {
+      "id": "Huffman1952",
+      "name": "Huffman: A Method for the Construction of Minimum-Redundancy Codes",
+      "url": "https://doi.org/10.1109/JRPROC.1952.273898",
+      "description": "Huffman, D. A. (1952). Proceedings of the IRE, 40(9), 1098–1101. Huffman coding algorithm. Source for primitive #11.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "LZ77",
+      "name": "Ziv & Lempel: A Universal Algorithm for Sequential Data Compression (LZ77)",
+      "url": "https://doi.org/10.1109/TIT.1977.1055714",
+      "description": "Ziv, J. & Lempel, A. (1977). IEEE Transactions on Information Theory, 23(3), 337–343. LZ77 algorithm; basis for zlib, DEFLATE, gzip. Source for primitive #11.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "LZ78",
+      "name": "Ziv & Lempel: Compression of Individual Sequences via Variable-Rate Coding (LZ78)",
+      "url": "https://doi.org/10.1109/TIT.1978.1055934",
+      "description": "Ziv, J. & Lempel, A. (1978). IEEE Transactions on Information Theory, 24(5), 530–536. LZ78 algorithm; basis for LZW, GIF. Source for primitive #11.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "NCD2005",
+      "name": "Cilibrasi & Vitányi: Clustering by Compression",
+      "url": "https://arxiv.org/abs/cs/0312044",
+      "description": "Cilibrasi, R. & Vitányi, P. M. B. (2005). IEEE Transactions on Information Theory, 51(4), 1523–1545. Normalized Compression Distance (NCD) for parameter-free similarity. Source for primitive #11.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "PolyanskiyFiniteBlocklength2010",
+      "name": "Polyanskiy, Poor & Verdú: Channel Coding Rate in the Finite Blocklength Regime",
+      "url": "https://arxiv.org/abs/0901.3972",
+      "description": "Polyanskiy, Y., Poor, H. V. & Verdú, S. (2010). IEEE Transactions on Information Theory, 56(5), 2307–2359. Finite blocklength converse and achievability bounds. Source for primitives #5, #10 (practical rate gap).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ArithmeticCoding1987",
+      "name": "Witten, Neal & Cleary: Arithmetic Coding for Data Compression",
+      "url": "https://doi.org/10.1145/214748.214749",
+      "description": "Witten, I. H., Neal, R. M. & Cleary, J. G. (1987). Communications of the ACM, 30(6), 520–540. Practical arithmetic coding. Source for primitive #11.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "McMillan1953",
+      "name": "McMillan: The Basic Theorems of Information Theory",
+      "url": "https://doi.org/10.1214/aoms/1177728913",
+      "description": "McMillan, B. (1953). Annals of Mathematical Statistics, 24(2), 196–219. AEP for stationary ergodic processes; extends Shannon's i.i.d. result. Source for primitive #10.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Rissanen1996Stochastic",
+      "name": "Rissanen: Fisher Information and Stochastic Complexity",
+      "url": "https://doi.org/10.1109/18.481785",
+      "description": "Rissanen, J. (1996). IEEE Transactions on Information Theory, 42(1), 40–47. Stochastic complexity and the NML code. Source for primitive #7 (refined MDL).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "LabelSmoothing2019",
+      "name": "Müller et al.: When Does Label Smoothing Help?",
+      "url": "https://arxiv.org/abs/1906.02629",
+      "description": "Müller, R. et al. (2019). NeurIPS 2019. Analysis of label smoothing as a form of soft cross-entropy target; shows effect on calibration and knowledge distillation. Source for primitive #4 (one-hot label limitation).",
+      "add_as_web_search": true
+    },
+    {
+      "id": "KoLMogorovTest2025",
+      "name": "Yoran et al.: The KoLMogorov Test: Compression by Code Generation",
+      "url": "https://arxiv.org/abs/2503.13992",
+      "description": "Yoran, O., Zheng, K., Gloeckle, F., Gehring, J., Synnaeve, G. & Cohen, T. (2025). ICLR 2025. Kolmogorov-complexity benchmark for code-generating LLMs: model must produce shortest program that outputs a given sequence. Shows GPT-4o and Llama-3.1-405B perform poorly; synthetic-data gains do not generalise to real data. Grounds compression as a rigorous, contamination-proof intelligence metric. Relevant to primitives #7, #11.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "RDPEntropy2025",
+      "name": "Niu et al.: Rate-Distortion-Perception Trade-Off in Information Theory, Generative Models, and Intelligent Communications",
+      "url": "https://www.mdpi.com/1099-4300/27/4/373",
+      "description": "Niu, X., Bai, B., Guo, N., Zhang, W. & Han, W. (2025). Entropy, 27(4), 373. Peer-reviewed survey/theory extending rate-distortion with a perceptual constraint: proves high perceptual fidelity strictly raises the minimum rate; derives the information RDP (I-RDP) function; covers KL, TV, and Wasserstein divergence as perception measures. Relevant to primitives #3, #6.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "OptimalNeuralCompressorsRDP2025",
+      "name": "Lei, Hassani & Bidokhti: Optimal Neural Compressors for the Rate-Distortion-Perception Tradeoff",
+      "url": "https://arxiv.org/abs/2503.17558",
+      "description": "Lei, E., Hassani, H. & Bidokhti, S. S. (2025). NeurIPS 2025. Proposes lattice-based neural compressors optimal for the RDP tradeoff; shared dithering provides common randomness; empirically validated on synthetic and real data. Applied complement to RDPEntropy2025. Relevant to primitive #6.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "MIProtocol2025",
+      "name": "Abdelaleem, Martini & Nemenman: Accurate Estimation of Mutual Information in High Dimensional Data",
+      "url": "https://arxiv.org/abs/2506.00330",
+      "description": "Abdelaleem, E., Martini, K. M. & Nemenman, I. (2025). arXiv:2506.00330 (stat.ML). Practical protocol for reliable neural MI estimation: confidence intervals, consistency checks, probabilistic critics for high-MI regimes. Identifies when neural estimators fail (no accepted tests) and when they succeed (low-dimensional latent dependence, sufficient N). Extends existing MINE/NWJ failure-mode guidance in primitive #2.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "NeuralDiffEntropyMI2025",
+      "name": "Ni & Lotz: A Neural Difference-of-Entropies Estimator for Mutual Information",
+      "url": "https://arxiv.org/abs/2502.13085",
+      "description": "Ni, H. & Lotz, M. (2025). arXiv:2502.13085 (stat.ML). Normalizing-flow-based MI estimator using block autoregressive conditional density parameterisation; improved bias-variance trade-offs on standard benchmarks across 17 experiments. Addresses the high-dimensional MI estimation failure mode in primitive #2.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "NIBT2025",
+      "name": "Zhu et al.: Narrowing Information Bottleneck Theory for Multimodal Image-Text Representations Interpretability",
+      "url": "https://arxiv.org/abs/2502.14889",
+      "description": "Zhu, Z., Jin, Z., Zhang, J., Yang, N., Huang, J., Zhou, J. & Chen, F. (2025). ICLR 2025. Reformulates IB for multimodal (CLIP) settings: eliminates randomness and hyperparameter dependency of standard IB; satisfies attribution axioms; introduces negative property concept. Code: https://github.com/LMBTough/NIB. +9% image, +59% text interpretability vs. baselines. Extends primitive #8 to multimodal regime.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "CIBR2025",
+      "name": "Cross-modal Information Bottleneck Regularization for Robust CLIP Generalization",
+      "url": "https://arxiv.org/abs/2503.24182",
+      "description": "CIBR (2025). ICANN 2025. Interprets CLIP contrastive objective as implicit IB optimization maximising shared cross-modal information while discarding modality-specific redundancy; adds explicit IB regularization (CIBR) yielding superior zero-shot and retrieval performance. Independent corroboration for IB in multimodal learning. Relevant to primitive #8.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "fDIMENeurIPS2024",
+      "name": "Letizia, Novello & Tonello: Mutual Information Estimation via f-Divergence and Data Derangements",
+      "url": "https://arxiv.org/abs/2305.20025",
+      "description": "Letizia, N. A., Novello, N. & Tonello, A. M. (2024). NeurIPS 2024. Proposes f-DIME: discriminative MI estimators based on f-divergence variational representation with derangement architecture; removes the log(K) upper-bound artefact present in InfoNCE/contrastive estimators; achieves excellent bias/variance trade-off at lower complexity than MINE/NWJ. Code: https://github.com/tonellolab/fDIME. Verified: title, authors, NeurIPS 2024 venue, and code repo confirmed via primary URL 2026-05-17. Addresses InfoNCE ceiling bias anti-pattern for primitive #2.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "HellstromGenBounds2024",
+      "name": "Hellström, Durisi, Guedj & Raginsky: Generalization Bounds — Perspectives from Information Theory and PAC-Bayes",
+      "url": "https://arxiv.org/abs/2309.04381",
+      "description": "Hellström, F., Durisi, G., Guedj, B. & Raginsky, M. (2023/2024). arXiv:2309.04381 (cs.LG), 228-page monograph, v2 revised March 2024. Unifies PAC-Bayesian and information-theoretic generalization bounds under the conditional mutual information (CMI) framework; shows modular proof structure; derives tighter bounds for deep learning by conditioning on training algorithm trajectory. Evidence grade B: large monograph widely cited but arXiv preprint only — no journal or book publication confirmed via primary URL 2026-05-17. Relevant to IT Generalization Bounds theory area and primitive #2.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "GIB2025",
+      "name": "Westphal, Hailes & Musolesi: A Generalized Information Bottleneck Theory of Deep Learning",
+      "url": "https://arxiv.org/abs/2509.26327",
+      "description": "Westphal, C., Hailes, S. & Musolesi, M. (2025/2026). arXiv:2509.26327 (cs.LG/cs.IT), submitted September 2025, revised January 2026. Reformulates IB using synergistic information (joint-only information via average interaction information); demonstrates compression phases in ReLU networks and Transformers where standard IB fails (Saxe et al. criterion). GIB upper-bounds standard IB under perfect estimation. Evidence grade C: preprint only, no peer-review confirmation as of 2026-05-17. Treat as a promising candidate, not established practice. Relevant to primitive #8.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "RadioRDQuantization2025",
+      "name": "Radio: Rate-Distortion Optimization for Large Language Model Compression",
+      "url": "https://arxiv.org/abs/2505.03031",
+      "description": "Radio (2025). ICML 2025. Applies rate-distortion theory directly to LLM weight quantization: formulates per-layer bit allocation as an R(D) optimization, introduces a stochastic numerical solver, and shows that scalar quantization is suboptimal — block/vector quantization yields lower distortion at equal bitrate. Demonstrates the practical value of R(D) framework for model compression. Relevant to primitive #6, #7.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "FlatnessITBounds2025",
+      "name": "Peng et al.: Flatness-Leveraging Information-Theoretic Generalization Bounds",
+      "url": "https://arxiv.org/abs/2601.01465",
+      "description": "Peng et al. (2025/2026). ICLR 2025 (note: submitted January 4, 2026; year discrepancy may reflect ICLR 2026 labeling — venue confirmed as ICLR, exact year unresolved per audit). Derives IT generalization bounds incorporating loss-landscape flatness; 'numerically much tighter' than prior IT bounds; improves Ω(1) to O(1/√n) rate for gradient descent on convex-Lipschitz problems using omniscient trajectory technique. Builds on Hellström et al. CMI framework (HellstromGenBounds2024). Evidence grade B: ICLR conference paper; venue confirmed. Relevant to IT Generalization Bounds theory area.",
+      "add_as_web_search": true
+    }
+  ]
+}

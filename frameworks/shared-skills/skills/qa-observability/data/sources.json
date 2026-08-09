@@ -1,0 +1,266 @@
+{
+  "metadata": {
+    "skill": "qa-observability",
+    "updated": "2026-07-11",
+    "version": "2.6",
+    "total_sources": 33,
+    "description": "Primary references for correlated telemetry, OpenTelemetry instrumentation, SLOs, burn-rate alerting, and performance evidence.",
+    "title": "QA Observability - Sources",
+    "last_updated": "2026-07-11"
+  },
+  "categories": {
+    "standards_and_core_docs": [
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "description": "Primary vendor-neutral observability documentation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenTelemetry JavaScript",
+        "url": "https://opentelemetry.io/docs/languages/js/",
+        "description": "JavaScript status, instrumentation, and exporter guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenTelemetry Python",
+        "url": "https://opentelemetry.io/docs/languages/python/",
+        "description": "Python status, instrumentation, and exporter guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenTelemetry Collector",
+        "url": "https://opentelemetry.io/docs/collector/",
+        "description": "Collector configuration, pipelines, and deployment guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenTelemetry OTLP Exporter Configuration",
+        "url": "https://opentelemetry.io/docs/specs/otel/protocol/exporter/",
+        "description": "Canonical environment-variable and endpoint behavior for OTLP exporters.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenTelemetry HTTP Semantic Conventions",
+        "url": "https://opentelemetry.io/docs/specs/semconv/registry/attributes/http/",
+        "description": "Stable HTTP attribute naming and protocol conventions.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "W3C Trace Context",
+        "url": "https://www.w3.org/TR/trace-context/",
+        "description": "Trace propagation standard for traceparent and tracestate.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "OpenTelemetry GenAI Semantic Conventions",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "description": "Standardised span, metric, and event attributes for LLM and agent calls (gen_ai.operation.name, gen_ai.provider.name, token usage, tool calls, eval results). The conventions moved to a dedicated repo (open-telemetry/semantic-conventions-genai) in 2026. Precise stability tier of gen_ai.client and gen_ai.agent spans is unverified as of 2026-07-11 \u2014 secondary sources conflict (some report gen_ai.client reached Stable in early 2026, others report the whole GenAI/MCP surface still Development as of May 2026 with v1.36 as the transition baseline).",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-07-11",
+        "stability_warning": "Do not assume gen_ai.client, gen_ai.agent, or MCP conventions are Stable. Check the primary spec and its CHANGELOG before shipping. Use OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental to pin to latest experimental version."
+      }
+    ],
+    "slo_and_error_budgets": [
+      {
+        "name": "Google SRE Book - Service Level Objectives",
+        "url": "https://sre.google/sre-book/service-level-objectives/",
+        "description": "SLOs and error budgets as reliability and release gates.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Workbook - Alerting on SLOs",
+        "url": "https://sre.google/workbook/alerting-on-slos/",
+        "description": "Multi-window burn-rate alerting and page design.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Monitoring Distributed Systems",
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "description": "Golden signals and monitoring design for service-oriented systems.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Workbook - Handling Overload",
+        "url": "https://sre.google/workbook/handling-overload/",
+        "description": "Useful when relating saturation, load shedding, and error-budget behavior.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "metrics_and_dashboards": [
+      {
+        "name": "Prometheus Documentation",
+        "url": "https://prometheus.io/docs/",
+        "description": "Metrics collection, PromQL, alerting rules, and exemplars.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Prometheus Histograms and Summaries",
+        "url": "https://prometheus.io/docs/practices/histograms/",
+        "description": "Latency histogram guidance, bucket tradeoffs, and native histogram context.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Grafana Documentation",
+        "url": "https://grafana.com/docs/grafana/latest/",
+        "description": "Dashboards, alerting, annotations, and exemplars.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Grafana Loki",
+        "url": "https://grafana.com/docs/loki/latest/",
+        "description": "Log aggregation, label discipline, and LogQL.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "performance_and_testing": [
+      {
+        "name": "Grafana k6",
+        "url": "https://grafana.com/docs/k6/latest/",
+        "description": "Canonical k6 load-testing documentation and thresholds guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Grafana Pyroscope",
+        "url": "https://grafana.com/docs/pyroscope/latest/",
+        "description": "Continuous profiling and profile-driven debugging.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Parca Overview",
+        "url": "https://www.parca.dev/docs/overview/",
+        "description": "Open-source continuous profiling with eBPF-based collection.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Web Vitals",
+        "url": "https://web.dev/vitals/",
+        "description": "Frontend performance signals and budgets.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Lighthouse CI",
+        "url": "https://googlechrome.github.io/lighthouse-ci/",
+        "description": "Automated Lighthouse checks for CI and performance budgets.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "ebpf_and_advanced": [
+      {
+        "name": "OpenTelemetry Profiles",
+        "url": "https://opentelemetry.io/docs/concepts/signals/profiles/",
+        "description": "The fourth OTel signal (alongside traces, metrics, logs). Entered public Alpha March 2026. Reference implementation: opentelemetry-ebpf-profiler (Elastic donation). Cross-signal correlation via trace_id/span_id. Target GA Q3 2026. Do not use for critical production workloads yet.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "eBPF Foundation",
+        "url": "https://ebpf.io/applications/",
+        "description": "eBPF observability use cases and tooling landscape.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Grafana Beyla",
+        "url": "https://grafana.com/oss/beyla-ebpf/",
+        "description": "Open-source eBPF auto-instrumentation agent (Grafana's distribution of the upstream opentelemetry-ebpf-instrumentation / OBI CNCF project) that emits OTel traces and Prometheus metrics without code changes. Beyla's own versioning has moved into the 3.x line since the OBI donation (v3.27.0 confirmed released 2026-07-08) and ships new minor versions roughly weekly; do not cite a specific minor version without checking the releases page first.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "Pixie (CNCF)",
+        "url": "https://github.com/pixie-io/pixie",
+        "description": "eBPF-based zero-instrumentation observability for Kubernetes; captures requests, profiles, and network flows in-cluster.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Honeycomb",
+        "url": "https://www.honeycomb.io/",
+        "description": "High-cardinality wide-event observability platform; accepts OTel traces via OTLP and supports arbitrary GROUP BY at query time.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "SigNoz",
+        "url": "https://signoz.io/",
+        "description": "Open-source OTel-native APM with ClickHouse backend; self-hosted alternative to Datadog/New Relic with unified traces, metrics, and logs.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Coroot",
+        "url": "https://coroot.com/",
+        "description": "Open-source APM combining eBPF-based auto-discovery, ClickHouse storage, and automated health inspection for service topology and SLO checks.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "optional_ai_automation": [
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "description": "Governance baseline when applying AI to alert triage or remediation.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "llm_observability_and_2026_additions": [
+      {
+        "name": "OpenTelemetry Profiles Alpha Announcement",
+        "url": "https://opentelemetry.io/blog/2026/profiles-alpha/",
+        "description": "Official announcement of OTel Profiles entering public Alpha (March 2026). Reference implementation is opentelemetry-ebpf-profiler. Target GA Q3 2026.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Deprecating Span Events API",
+        "url": "https://opentelemetry.io/blog/2026/deprecating-span-events/",
+        "description": "OTel blog post (March 2026) announcing the deprecation of Span.AddEvent and Span.RecordException in favour of log-based events via the Logs API.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-06-09"
+      },
+      {
+        "name": "Prometheus Native Histograms \u2014 GA Announcement",
+        "url": "https://grafana.com/whats-new/2025-10-29-native-histograms-are-generally-available/",
+        "description": "Grafana Labs announcement of Prometheus native histograms reaching GA (October 2025). Eliminates bucket pre-selection; requires protobuf exposition; treat rollout as infrastructure change.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-07-11"
+      },
+      {
+        "name": "OpenTelemetry GenAI Observability (blog 2026)",
+        "url": "https://opentelemetry.io/blog/2026/genai-observability/",
+        "description": "OTel blog (2026) covering LLM tracing, agent span hierarchies, token-usage metrics, and eval event integration using GenAI semconv.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-06-09"
+      }
+    ]
+  }
+}

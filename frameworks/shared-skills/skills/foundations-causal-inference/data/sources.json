@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "title": "AI Foundations Causal Inference — Sources",
+    "description": "Primary academic references for 12 causal inference primitives: DAGs/SCMs, do-calculus, backdoor/frontdoor criteria, instrumental variables, RDD, DiD, synthetic control, propensity score methods, CATE/uplift, Simpson's paradox, mediation analysis, and sensitivity analysis.",
+    "last_updated": "2026-07-11",
+    "skill": "foundations-causal-inference",
+    "total_sources": 31
+  },
+  "foundational_books": [
+    {
+      "id": "Pearl2009",
+      "name": "Pearl — Causality: Models, Reasoning, and Inference (2nd ed.)",
+      "url": "https://doi.org/10.1017/CBO9780511803161",
+      "description": "The canonical reference for DAGs, structural causal models, do-calculus, backdoor and frontdoor criteria, and counterfactual analysis. Chapters 1–3 cover the core identification theory underlying primitives #1–#3 and #10.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ImbensRubin2015",
+      "name": "Imbens & Rubin — Causal Inference for Statistics, Social, and Biomedical Sciences",
+      "url": "https://doi.org/10.1017/CBO9781139025751",
+      "description": "Canonical potential-outcomes framework reference. Covers IV, propensity scores, matching, and IPW. Primary source for primitives #4 and #8.",
+      "url_check": "manual"
+    },
+    {
+      "id": "AngristPischke2009",
+      "name": "Angrist & Pischke — Mostly Harmless Econometrics",
+      "url": "https://press.princeton.edu/books/paperback/9780691120355/mostly-harmless-econometrics",
+      "description": "Applied econometrics bible for IV, RDD, and DiD. The standard reference for identification-assumption diagnostics in empirical work. Primary source for primitives #4, #5, #6.",
+      "url_check": "manual"
+    },
+    {
+      "id": "HernanRobins2020",
+      "name": "Hernán & Robins — What If (freely available online)",
+      "url": "https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/",
+      "description": "Comprehensive causal inference textbook covering DAGs, time-varying treatments, IPW, and marginal structural models. Freely available. Primary source for primitives #1–#3 and #8.",
+      "url_check": "auto"
+    },
+    {
+      "id": "VanderWeele2015",
+      "name": "VanderWeele — Explanation in Causal Inference: Methods for Mediation and Interaction",
+      "url": "https://doi.org/10.1093/oso/9780199325870.001.0001",
+      "description": "Canonical reference for causal mediation analysis using potential outcomes. Covers NDE, NIE, interaction, and sensitivity analysis for mediation. Primary source for primitive #11.",
+      "url_check": "manual"
+    }
+  ],
+  "research_papers": [
+    {
+      "id": "PearlDoCalculus1995",
+      "name": "Pearl (1995) — Causal Diagrams for Empirical Research",
+      "url": "https://doi.org/10.1093/biomet/82.4.669",
+      "description": "Original paper introducing the do-operator and do-calculus. Source for primitive #2.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ImbensAngrist1994",
+      "name": "Imbens & Angrist (1994) — Identification and Estimation of LATE",
+      "url": "https://doi.org/10.2307/2951620",
+      "description": "Foundational paper identifying the Local Average Treatment Effect via IV. Source for primitive #4.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ImbensTitiunik2008",
+      "name": "Imbens & Lemieux (2008) — Regression Discontinuity Designs: A Guide to Practice",
+      "url": "https://doi.org/10.1016/j.jeconom.2007.05.001",
+      "description": "Practical guide to RDD: bandwidth selection, local linear regression, and validity tests. Source for primitive #5.",
+      "url_check": "manual"
+    },
+    {
+      "id": "CalonicoEtAl2014",
+      "name": "Calonico, Cattaneo & Titiunik (2014) — Robust Nonparametric Confidence Intervals for RDD",
+      "url": "https://doi.org/10.3982/ECTA11757",
+      "description": "MSE-optimal bandwidth selection and bias-corrected CI for RDD. Source for primitive #5 bandwidth guidance.",
+      "url_check": "manual"
+    },
+    {
+      "id": "CallawaySantAnna2021",
+      "name": "Callaway & Sant'Anna (2021) — Difference-in-Differences with Multiple Time Periods",
+      "url": "https://doi.org/10.1016/j.jeconom.2020.12.001",
+      "description": "Staggered DiD estimator that avoids TWFE negative-weight bias under heterogeneous treatment effects. Source for primitive #6 staggered design guidance.",
+      "url_check": "auto"
+    },
+    {
+      "id": "AbadieEtAl2010",
+      "name": "Abadie, Diamond & Hainmueller (2010) — Synthetic Control Methods",
+      "url": "https://doi.org/10.1198/jasa.2009.ap08746",
+      "description": "Original synthetic control paper with the tobacco California case study. Source for primitive #7.",
+      "url_check": "manual"
+    },
+    {
+      "id": "RosenbaumRubin1983",
+      "name": "Rosenbaum & Rubin (1983) — The Central Role of the Propensity Score",
+      "url": "https://doi.org/10.1093/biomet/70.1.41",
+      "description": "Original propensity score paper. Establishes balancing-score theorem and justification for propensity-based methods. Source for primitive #8.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ChernozhukovEtAl2018",
+      "name": "Chernozhukov et al. (2018) — Double/Debiased Machine Learning",
+      "url": "https://doi.org/10.1111/ectj.12097",
+      "description": "DML framework for Neyman-orthogonal, doubly robust treatment effect estimation using ML nuisance functions. Source for DR/R-learner in primitives #8 and #9.",
+      "url_check": "auto"
+    },
+    {
+      "id": "ColangeloLee2025",
+      "name": "Colangelo & Lee (2025) — Double Debiased Machine Learning Nonparametric Inference with Continuous Treatments",
+      "url": "https://doi.org/10.1080/07350015.2025.2505487",
+      "description": "Extends DML to continuous treatment variables using kernel-based estimators for the average dose-response function (ADRF). Doubly robust to misspecification of one nuisance function; asymptotically normal with nonparametric convergence rates. Companion to Chernozhukov et al. (2018) for continuous treatment settings. Source for primitives #8 and #9 when treatment is continuous.",
+      "url_check": "auto"
+    },
+    {
+      "id": "ChernozhukovCinelli2026",
+      "name": "Chernozhukov, Cinelli, Newey, Sharma & Syrgkanis (2026) — Long Story Short: Omitted Variable Bias in Causal Machine Learning",
+      "url": "https://doi.org/10.1162/REST.a.1705",
+      "description": "General theory of omitted variable bias for DML/causal ML estimands (ATE, average causal derivatives, policy effects). Bounds bias using plausibility judgments on omitted-variable explanatory power; provides valid confidence intervals. Extends sensitivity analysis from OLS/IV to ML-estimated causal parameters. Implemented in the dml.sensemakr R package. Source for primitive #12 sensitivity in ML pipelines.",
+      "url_check": "manual"
+    },
+    {
+      "id": "WagerAthey2018",
+      "name": "Wager & Athey (2018) — Estimation and Inference of Heterogeneous Treatment Effects",
+      "url": "https://doi.org/10.1080/01621459.2017.1319839",
+      "description": "Causal forests: asymptotically normal CATE estimation with honest sample splitting. Source for primitive #9.",
+      "url_check": "manual"
+    },
+    {
+      "id": "AtheyImbens2017",
+      "name": "Athey & Imbens (2017) — The State of Applied Econometrics",
+      "url": "https://doi.org/10.1257/jep.31.2.3",
+      "description": "Survey of ML-based causal inference methods including CATE and meta-learners. Source for primitives #8 and #9.",
+      "url_check": "auto"
+    },
+    {
+      "id": "VanderWeeleDing2017",
+      "name": "VanderWeele & Ding (2017) — Sensitivity Analysis in Observational Research: The E-Value",
+      "url": "https://doi.org/10.7326/M16-2607",
+      "description": "Original E-value paper. Provides the formula and interpretive framework for sensitivity analysis of observational estimates. Source for primitive #12.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Rosenbaum2002",
+      "name": "Rosenbaum (2002) — Observational Studies (2nd ed.)",
+      "url": "https://doi.org/10.1007/978-1-4757-3692-2",
+      "description": "The foundational reference for Rosenbaum bounds and sensitivity analysis in matched observational studies. Source for primitive #12.",
+      "url_check": "manual"
+    },
+    {
+      "id": "CinelliHazlett2020",
+      "name": "Cinelli & Hazlett (2020) — Making Sense of Sensitivity: Extending Omitted Variable Bias",
+      "url": "https://doi.org/10.1111/rssb.12348",
+      "description": "Partial R² approach to sensitivity analysis for regression-based estimates. Source for primitive #12 mean-difference sensitivity.",
+      "url_check": "auto"
+    },
+    {
+      "id": "CinelliHazlett2025",
+      "name": "Cinelli & Hazlett (2025) — An Omitted Variable Bias Framework for Sensitivity Analysis of Instrumental Variables",
+      "url": "https://doi.org/10.1093/biomet/asaf004",
+      "description": "Extends the partial-R² OVB sensitivity framework to IV estimates. Introduces IV robustness values quantifying the minimum confounder strength or exclusion-restriction violation needed to overturn conclusions. Implemented in the iv.sensemakr R package. Companion method to Cinelli & Hazlett (2020) for regression settings. Source for primitive #12 IV sensitivity.",
+      "url_check": "manual"
+    },
+    {
+      "id": "BorusyakEtAl2024",
+      "name": "Borusyak, Jaravel & Spiess (2024) — Revisiting Event-Study Designs: Robust and Efficient Estimation",
+      "url": "https://academic.oup.com/restud/article/91/6/3253/7601390",
+      "description": "Imputation estimator for staggered DiD: fit Y(0) model on never/not-yet-treated observations; impute counterfactuals for treated cells; take weighted average. Asymptotically efficient under unrestricted treatment-effect heterogeneity. Provides valid pre-trend tests and event-study plots. Requires no always-treated units. R/Stata packages: didimputation / did_imputation. Review of Economic Studies, Vol. 91, Issue 6, November 2024, pp. 3253–3285. doi:10.1093/restud/rhae011. Source for primitive #6 staggered DiD.",
+      "url_check": "auto"
+    },
+    {
+      "id": "RambachanRoth2023",
+      "name": "Rambachan & Roth (2023) — A More Credible Approach to Parallel Trends",
+      "url": "https://academic.oup.com/restud/article-abstract/90/5/2555/7039335",
+      "description": "HonestDiD: sensitivity analysis for parallel-trends violations. Imposes restrictions on how much post-treatment trend violations can exceed pre-treatment violations; produces valid confidence intervals under those restrictions. Avoids the binary 'pass pre-trend test → proceed' logic. Review of Economic Studies, Vol. 90, Issue 5, October 2023, pp. 2555–2591. doi:10.1093/restud/rhad018. R/Stata package: HonestDiD. Source for primitive #6 parallel-trends robustness.",
+      "url_check": "manual"
+    },
+    {
+      "id": "RothEtAl2023",
+      "name": "Roth, Sant'Anna, Bilinski & Poe (2023) — What's Trending in Difference-in-Differences?",
+      "url": "https://doi.org/10.1016/j.jeconom.2022.11.001",
+      "description": "Practitioner synthesis of the staggered-DiD revolution. Covers TWFE bias, heterogeneity-robust estimators (Callaway–Sant'Anna, Sun–Abraham, BJS, Gardner), parallel-trends relaxation (HonestDiD), and alternative inference frameworks. Journal of Econometrics, 235(2), 2218–2244, 2023. Canonical navigational reference for staggered-DiD method selection.",
+      "url_check": "manual"
+    },
+    {
+      "id": "SunAbraham2021",
+      "name": "Sun & Abraham (2021) — Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects",
+      "url": "https://doi.org/10.1016/j.jeconom.2020.09.006",
+      "description": "Interaction-weighted estimator for staggered DiD. Decomposes TWFE coefficients by cohort to eliminate contamination across treatment-timing groups under heterogeneous treatment effects. Journal of Econometrics, 225(2), 175–199, 2021. Source for primitive #6 staggered DiD.",
+      "url_check": "manual"
+    },
+    {
+      "id": "GoodmanBacon2021",
+      "name": "Goodman-Bacon (2021) — Difference-in-Differences with Variation in Treatment Timing",
+      "url": "https://doi.org/10.1016/j.jeconom.2021.03.014",
+      "description": "Shows that the TWFE estimator equals a weighted average of all possible two-group/two-period DiD comparisons. Weights can be negative under heterogeneous treatment effects, explaining why TWFE is biased in staggered designs. The Goodman-Bacon decomposition is the diagnostic for identifying which comparison groups drive TWFE bias. Journal of Econometrics, 225(2), 254–277, 2021. Source for primitive #6 TWFE failure mode.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ArkhangelskyEtAl2021",
+      "name": "Arkhangelsky, Athey, Hirshberg, Imbens & Wager (2021) — Synthetic Difference-in-Differences",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/aer.20190159",
+      "description": "Synthetic DiD (SDiD): combines synthetic control unit weights with DiD time weights to jointly balance pre-treatment outcomes. Inherits robustness of synthetic control for few treated units while recovering DiD efficiency when units are many. American Economic Review, 111(12), 4088–4118, 2021. doi:10.1257/aer.20190159. R package: synthdid. Source for primitive #7 extension bridging SC and DiD.",
+      "url_check": "auto"
+    },
+    {
+      "id": "SantAnnaZhao2020",
+      "name": "Sant'Anna & Zhao (2020) — Doubly Robust Difference-in-Differences Estimators",
+      "url": "https://doi.org/10.1016/j.jeconom.2020.06.003",
+      "description": "Doubly robust DiD estimators that are consistent if either the propensity score or the outcome regression model is correctly specified. Provides the theoretical foundation for the doubly robust component of the Callaway–Sant'Anna (2021) estimator. Journal of Econometrics, 219(1), 101–122, 2020. Source for primitive #6 and #8 doubly robust estimation.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Gardner2022",
+      "name": "Gardner (2022) — Two-Stage Differences in Differences",
+      "url": "https://arxiv.org/abs/2207.05943",
+      "description": "Two-stage DiD: stage 1 regresses Y on unit and time fixed effects using untreated/not-yet-treated observations to estimate Y(0); stage 2 regresses residuals on treatment dummies. Robust to heterogeneous effects under staggered adoption; intuitive extension to event studies and covariates. R package: did2s. Working paper, arXiv:2207.05943, 2022. Source for primitive #6 staggered DiD.",
+      "url_check": "auto"
+    },
+    {
+      "id": "FrauenEtAl2026",
+      "name": "Frauen et al. (2026) — Causal Methods for LLM Development and Evaluation",
+      "url": "https://arxiv.org/abs/2605.25998",
+      "description": "Argues that central questions in LLM development and evaluation (data-mix effects, judge bias, prompt-to-model routing) are inherently causal and underserved by causal methods; logged LLM-pipeline data are subject to confounding and non-stationary deployment shift. Submitted May 25, 2026. Source for the LLM Evaluation Pipeline composition recipe in SKILL.md.",
+      "url_check": "manual"
+    },
+    {
+      "id": "LLMCannotDiscoverCausality2025",
+      "name": "LLM Cannot Discover Causality, and Should Be Restricted to Non-Decisional Support in Causal Discovery (2025)",
+      "url": "https://arxiv.org/abs/2506.00844",
+      "description": "Argues LLM-proposed causal graphs should be treated as priors to seed DAG construction, not as identified causal models; edges must be validated with data-driven independence/faithfulness tests. Source for the 'LLM-assisted causal discovery' note in SKILL.md.",
+      "url_check": "manual"
+    }
+  ]
+}

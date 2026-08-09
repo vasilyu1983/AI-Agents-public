@@ -1,0 +1,4 @@
+interface:
+  display_name: "Control Theory Foundations"
+  short_description: "Applies control-theory primitives for PID, MPC, Kalman, stability, and limits"
+  default_prompt: "Use $foundations-control-theory for PID, MPC, Kalman filters, Lyapunov stability, anti-windup, dead time, circuit breakers, rate limiting, autoscaling, retry/backoff, budget pacing, or stable agent loops."
