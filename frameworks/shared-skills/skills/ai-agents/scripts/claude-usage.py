@@ -79,16 +79,21 @@ except ImportError:  # resolver missing — use the embedded fallback
     load_pricing = None
     pricing_path = None
 
-PRICE_TABLE_LAST_VERIFIED = date.fromisoformat("2026-04-16")
+PRICE_TABLE_LAST_VERIFIED = date.fromisoformat("2026-08-10")
 PRICE_TABLE_STALE_AFTER_DAYS = 30
 
+# Verified against platform.claude.com/docs/en/about-claude/pricing on 2026-08-10.
+# cache_read is 0.1x base input, cache_create 1.25x (the 5-minute write).
+# A missing key falls through to DEFAULT_PRICING at Sonnet rates, which prices
+# an Opus log ~5x low without erroring — so entries are corrected here, not
+# deleted, even when a rate turns out to be wrong.
 FALLBACK_PRICING = {
-    "claude-opus-4-7":    {"input": 15.00, "output": 75.00, "cache_read": 1.50, "cache_create": 18.75},  # TODO verify post-launch (Opus 4.7 shipped 2026-04-16; tier assumed identical to 4.6 until Anthropic publishes otherwise)
-    "claude-opus-4-6":    {"input": 15.00, "output": 75.00, "cache_read": 1.50, "cache_create": 18.75},
-    "claude-opus-4-5":    {"input": 15.00, "output": 75.00, "cache_read": 1.50, "cache_create": 18.75},
+    "claude-opus-4-7":    {"input": 5.00,  "output": 25.00, "cache_read": 0.50, "cache_create": 6.25},
+    "claude-opus-4-6":    {"input": 5.00,  "output": 25.00, "cache_read": 0.50, "cache_create": 6.25},
+    "claude-opus-4-5":    {"input": 5.00,  "output": 25.00, "cache_read": 0.50, "cache_create": 6.25},
     "claude-sonnet-4-6":  {"input": 3.00,  "output": 15.00, "cache_read": 0.30, "cache_create": 3.75},
     "claude-sonnet-4-5":  {"input": 3.00,  "output": 15.00, "cache_read": 0.30, "cache_create": 3.75},
-    "claude-haiku-4-5":   {"input": 0.80,  "output": 4.00,  "cache_read": 0.08, "cache_create": 1.00},
+    "claude-haiku-4-5":   {"input": 1.00,  "output": 5.00,  "cache_read": 0.10, "cache_create": 1.25},
 }
 DEFAULT_PRICING = {"input": 3.00, "output": 15.00, "cache_read": 0.30, "cache_create": 3.75}
 
