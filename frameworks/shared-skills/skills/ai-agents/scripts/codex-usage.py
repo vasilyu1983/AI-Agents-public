@@ -51,9 +51,10 @@ SESSIONS_DIR = CODEX_HOME / "sessions"
 # ones. Unknown IDs fall through to DEFAULT_PRICING, which under-reports newer
 # top-tier models — add them here rather than relying on the default.
 #
-# GPT-5.6 input/output rates mirror ai-llm/scripts/cost_estimator.py. That table
-# carries no cached-token column, so the `cached` values below are derived at 25%
-# of input (the ratio the gpt-5 entries already use), not read off a price page.
+# GPT-5.6 input/output rates mirror ai-llm/scripts/cost_estimator.py. The
+# GPT-5.6 `cached` values are read off the price page (0.1x input). The older
+# gpt-5/o3/o4-mini rows keep the 0.25x-of-input figures they were entered with,
+# which is why the ratio is not uniform down the table.
 # ---------------------------------------------------------------------------
 
 # Import the resolver from this skill's OWN _lib/. The skill is self-contained:
@@ -68,13 +69,16 @@ except ImportError:  # resolver missing — use the embedded fallback
     load_pricing = None
     pricing_path = None
 
-PRICE_TABLE_LAST_VERIFIED = date.fromisoformat("2026-07-11")
+PRICE_TABLE_LAST_VERIFIED = date.fromisoformat("2026-08-10")
 PRICE_TABLE_STALE_AFTER_DAYS = 30
 
 FALLBACK_PRICING = {
-    "gpt-5.6-sol":   {"input": 5.00, "output": 30.00, "cached": 1.25},
-    "gpt-5.6-terra": {"input": 2.50, "output": 15.00, "cached": 0.625},
-    "gpt-5.6-luna":  {"input": 1.00, "output": 6.00, "cached": 0.25},
+    # Current tiers verified against developers.openai.com/api/docs/pricing on
+    # 2026-08-10. Cached input is 0.1x base input, not the 0.25x assumed here
+    # previously. The rows below this block are retired rates kept for replay.
+    "gpt-5.6-sol":   {"input": 5.00, "output": 30.00, "cached": 0.50},
+    "gpt-5.6-terra": {"input": 2.00, "output": 12.00, "cached": 0.20},
+    "gpt-5.6-luna":  {"input": 0.20, "output": 1.20, "cached": 0.02},
     "gpt-5.5":   {"input": 2.00, "output": 8.00, "cached": 0.50},
     "gpt-5":     {"input": 2.00, "output": 8.00, "cached": 0.50},
     "gpt-5.4":   {"input": 2.00, "output": 8.00, "cached": 0.50},
@@ -109,7 +113,9 @@ def _load_pricing() -> tuple[dict, str, date]:
         table[key.split("/", 1)[-1]] = {
             "input": entry["input_per_1m"],
             "output": entry["output_per_1m"],
-            "cached": entry.get("cache_read_per_1m", entry["input_per_1m"] * 0.25),
+            # 0.1x input is the published cached-input ratio for current OpenAI
+            # tiers; used only when the shared table carries no explicit column.
+            "cached": entry.get("cache_read_per_1m", entry["input_per_1m"] * 0.10),
         }
     if not table:
         return FALLBACK_PRICING, "embedded fallback (no openai rows)", PRICE_TABLE_LAST_VERIFIED

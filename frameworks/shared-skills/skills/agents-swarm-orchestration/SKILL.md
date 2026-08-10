@@ -2,8 +2,8 @@
 name: agents-swarm-orchestration
 description: "Coordinates parallel subagents and multi-agent workflows. Use when splitting work into dependency-aware workers, verifier passes, or isolated research streams."
 compatibility: Claude Code + Codex. Claude Code Agent tool (renamed from Task in v2.1.63) plus Codex subagents — runtime-specific dispatch.
-version: "1.3"
-last_validated: 2026-07-11
+version: "1.4"
+last_validated: 2026-08-10
 ---
 
 # Swarm Orchestration
@@ -22,9 +22,13 @@ Coordinate multiple workers without polluting the main thread. Use this skill af
 | Read-heavy scans, tests, triage, summarization | Parallel workers | Keeps noisy intermediate output off the lead thread |
 | One coordinator should retain user ownership | Manager / agents-as-tools | Lead keeps control of decisions and final answer |
 | Specialist should take over the conversation | Handoff | Ownership moves to the specialist agent |
+| Work of unknown extent — discovery *is* the task | Loop until K empty rounds | A fixed task list cannot be enumerated up front |
+| Many items, known stages, high intermediate volume | Scripted workflow (Claude Code) | Script holds control flow; lead context holds only the result |
 
 ## Navigation
 
+- [references/loop-orchestration.md](references/loop-orchestration.md) - Bounded iteration vs retry, loop-until-dry, convergence detection, termination predicates, dedup-target rule
+- [references/scripted-workflows.md](references/scripted-workflows.md) - Script-held deterministic control flow (Claude Code Workflows): `agent`/`parallel`/`pipeline`, barrier-vs-pipeline, resume and caching
 - [references/platform-patterns.md](references/platform-patterns.md) - Platform guidance for Claude Code subagents, Codex subagents, Codex multi-agents, and OpenAI Agents SDK
 - [references/output-contracts.md](references/output-contracts.md) - Task schema, worker report schema, and merge contract
 - [references/operational-guardrails.md](references/operational-guardrails.md) - Safety, stop conditions, observability, and verification gates
@@ -43,6 +47,8 @@ Coordinate multiple workers without polluting the main thread. Use this skill af
 - [../ai-coding-agents-permissions/SKILL.md](../ai-coding-agents-permissions/SKILL.md) - Approval routing, allow or ask modes, and worker permission handoff
 - [../ai-coding-agents-tasks/SKILL.md](../ai-coding-agents-tasks/SKILL.md) - Background task runtimes, teammate queues, and task ownership
 - [../dev-workflow-planning/SKILL.md](../dev-workflow-planning/SKILL.md) - Create the plan before fan-out
+- [../ai-agents/references/autonomous-loop-patterns.md](../ai-agents/references/autonomous-loop-patterns.md) - Shape C autonomous loops: PRD-driven drivers, circuit breakers, drift detection (framework-neutral)
+- [../ai-agents/references/context-graph-patterns.md](../ai-agents/references/context-graph-patterns.md) - Graph-structured agent state: node/edge schema, traversal, conflict resolution
 - [data/sources.json](data/sources.json) - Curated official docs, research, and secondary references
 
 > **Maintainer note:** eight URLs here are intentionally duplicated from `../agents-subagents/data/sources.json` (Claude Code subagents, Agent Teams, Codex Multi-Agents, Codex Subagents, both OpenAI Agents SDK pages, OpenAI prompt-caching guide, Karpathy coding notes). Each skill frames those sources for a different reader. When a URL rotates, update both files in the same commit.
@@ -105,6 +111,8 @@ Name the pattern explicitly when proposing a design. Full detail: `../agents-sub
 | **Hierarchical swarm** | Portfolio-wide migrations; top-level lead coordinates sub-leads. Max depth 2; enforce interface contracts. Errors compound across levels — a sub-lead's misread of its brief propagates to every worker beneath it uncaught, so put verification at each level, not just the top |
 | **Debate-before-dispatch** | 2–4 perspective agents argue tradeoffs before interfaces freeze; output becomes part of each worker brief |
 | **Planner → Generator → Evaluator** / **Blueprint** | Owned by `agents-subagents` — deterministic nodes alternating with agentic nodes |
+| **Loop-until-dry / budget-bounded loop** | Work of unknown extent where enumerating the task list *is* the job; terminates on K empty rounds or budget, never a fixed count. [references/loop-orchestration.md](references/loop-orchestration.md) |
+| **Scripted workflow** | Control flow is knowable in advance and intermediate volume is high; a script holds the loops and branching so the lead's context holds only the final answer. Claude Code only. [references/scripted-workflows.md](references/scripted-workflows.md) |
 
 ## Typical Scenarios
 
@@ -234,13 +242,15 @@ Use exact model names from [references/platform-patterns.md](references/platform
 
 ## Escalation Over Retry
 
-On task failure, escalate structurally — do not loop:
+On task **failure**, escalate structurally — do not loop:
 
 1. **Self-fix** — worker re-plans and retries once with a different approach.
 2. **Escalate to lead** — worker reports failure + diagnosis; lead reassigns, re-scopes, or continues.
 3. **Escalate to human** — lead flags as outside agent authority (safety issue, ambiguous requirements, destructive operation).
 
 Retry the same approach **at most once**. Recurring failure is structural, not transient.
+
+**This governs failure handling, not iteration.** Bounded iteration — where each pass succeeds but surfaces the next pass's input — is a separate, legitimate regime with its own termination discipline. The test: if a second pass would consume *different* input than the first, it is iteration, not retry. Unknown-extent discovery (bug hunts, dead-code sweeps, dependency chasing) should loop until convergence, not stop after one pass. See [references/loop-orchestration.md](references/loop-orchestration.md) for loop shapes, termination predicates, and the dedup-target rule.
 
 **Progressive tool loading:** Start workers with a minimal `tools` list; expand only when the worker signals it needs more. Pass `tools` explicitly in the dispatch contract.
 

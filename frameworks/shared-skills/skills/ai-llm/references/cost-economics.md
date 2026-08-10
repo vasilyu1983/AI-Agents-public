@@ -78,8 +78,8 @@ Production cost modeling, unit economics, and decision frameworks for LLM system
 | Gemini 3.1 Pro | Verify at ai.google.dev | Verify | Large-context frontier option |
 | Gemini 3.5 Flash | Verify at ai.google.dev | Verify | Speed tier |
 | GPT-5.6 Sol | $5 | $30 | OpenAI's current top tier for long-horizon/agentic/cyber-science work (public since 2026-07-09) |
-| GPT-5.6 Terra | $2.50 | $15 | Balanced efficiency/capability tier |
-| GPT-5.6 Luna | $1 | $6 | Speed/cost tier |
+| GPT-5.6 Terra | $2.00 | $12 | Balanced efficiency/capability tier |
+| GPT-5.6 Luna | $0.20 | $1.20 | Speed/cost tier |
 
 > Fable 5 SLA note: sessions that trigger the safety classifier are served by Opus 4.8 ($5/$25), not Fable 5 ($10/$50). Budget for blended pricing if you route high-risk workloads through Fable 5.
 >

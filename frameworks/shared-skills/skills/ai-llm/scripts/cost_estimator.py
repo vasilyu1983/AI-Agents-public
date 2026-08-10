@@ -67,13 +67,13 @@ FALLBACK_PROVIDERS: dict[str, dict] = {
         "notes": "GPT-5.6 Sol (top tier, long-horizon/agentic/cyber-science; public since 2026-07-09)",
     },
     "openai/gpt-5.6-terra": {
-        "input_per_1m": 2.50,
-        "output_per_1m": 15.00,
+        "input_per_1m": 2.00,
+        "output_per_1m": 12.00,
         "notes": "GPT-5.6 Terra (balanced efficiency/capability)",
     },
     "openai/gpt-5.6-luna": {
-        "input_per_1m": 1.00,
-        "output_per_1m": 6.00,
+        "input_per_1m": 0.20,
+        "output_per_1m": 1.20,
         "notes": "GPT-5.6 Luna (speed/cost tier)",
     },
     "anthropic/claude-fable-5": {

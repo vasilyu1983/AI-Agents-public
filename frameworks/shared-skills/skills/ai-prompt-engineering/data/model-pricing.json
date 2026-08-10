@@ -56,9 +56,15 @@
     "anthropic/claude-sonnet-5": {
       "input_per_1m": 3.0,
       "model": "claude-sonnet-5",
-      "notes": "Claude Sonnet 5 (GA 2026-06-30); intro price $2/$10 through 2026-08-31 \u2014 confirm which rate applies",
+      "notes": "Claude Sonnet 5 (GA 2026-06-30). List price $3/$15; introductory $2/$10 through 2026-08-31 \u2014 see promotional_rate. Verified platform.claude.com/docs/en/about-claude/pricing 2026-08-10.",
       "output_per_1m": 15.0,
-      "vendor": "anthropic"
+      "vendor": "anthropic",
+      "promotional_rate": {
+        "input_per_1m": 2.0,
+        "output_per_1m": 10.0,
+        "through": "2026-08-31",
+        "note": "Introductory pricing; list price applies from 2026-09-01."
+      }
     },
     "google/gemini-3.1-pro": {
       "input_per_1m": 2.0,
@@ -116,10 +122,10 @@
     },
     "openai/gpt-5.6-luna": {
       "cache_read_per_1m": 0.25,
-      "input_per_1m": 1.0,
+      "input_per_1m": 0.2,
       "model": "gpt-5.6-luna",
-      "notes": "GPT-5.6 Luna (speed/cost tier)",
-      "output_per_1m": 6.0,
+      "notes": "GPT-5.6 Luna (speed/cost tier); verified developers.openai.com/api/docs/pricing 2026-08-10",
+      "output_per_1m": 1.2,
       "vendor": "openai"
     },
     "openai/gpt-5.6-sol": {
@@ -132,10 +138,10 @@
     },
     "openai/gpt-5.6-terra": {
       "cache_read_per_1m": 0.625,
-      "input_per_1m": 2.5,
+      "input_per_1m": 2.0,
       "model": "gpt-5.6-terra",
-      "notes": "GPT-5.6 Terra (balanced efficiency/capability)",
-      "output_per_1m": 15.0,
+      "notes": "GPT-5.6 Terra (balanced efficiency/capability); verified developers.openai.com/api/docs/pricing 2026-08-10",
+      "output_per_1m": 12.0,
       "vendor": "openai"
     },
     "openai/o3": {

@@ -2,10 +2,10 @@
   "metadata": {
     "title": "Agents Swarm Orchestration - Sources",
     "description": "Official documentation, research, and secondary references for multi-agent orchestration across Claude Code, Codex, and OpenAI Agents SDK",
-    "last_updated": "2026-07-11",
-    "updated": "2026-07-11",
+    "last_updated": "2026-08-10",
+    "updated": "2026-08-10",
     "skill": "agents-swarm-orchestration",
-    "total_sources": 33
+    "total_sources": 37
   },
   "official_documentation": [
     {
@@ -66,6 +66,12 @@
       "name": "OpenAI Models Overview",
       "url": "https://developers.openai.com/api/docs/models",
       "description": "Current OpenAI model catalog for verifying latest flagship and smaller model options",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Workflows Documentation",
+      "url": "https://code.claude.com/docs/en/workflows",
+      "description": "Official reference for Dynamic Workflows: agent/parallel/pipeline primitives, concurrency ceilings, resume semantics",
       "add_as_web_search": true
     }
   ],
@@ -209,6 +215,30 @@
       "add_as_web_search": false,
       "captured": "2026-06-09",
       "verified": "2026-07-11"
+    },
+    {
+      "name": "Claude Code Workflows: Deterministic Multi-Agent Orchestration (alexop.dev)",
+      "url": "https://alexop.dev/posts/claude-code-workflows-deterministic-orchestration/",
+      "description": "Walkthrough of script-held control flow, barrier-vs-pipeline tradeoffs, and context-cost rationale",
+      "add_as_web_search": true
+    },
+    {
+      "name": "The Workflow Tool: Scripted Multi-Agent Orchestration (ClaudeWorld)",
+      "url": "https://claude-world.com/tutorials/s27-workflow-orchestration/",
+      "description": "Tutorial on workflow scripts: primitives, structured output schemas, and determinism constraints",
+      "add_as_web_search": true
+    },
+    {
+      "name": "The Parallel Subagent Race: Codex CLI Multi-Agent v2 vs Claude Dynamic Workflows",
+      "url": "https://codex.danielvaughan.com/2026/06/08/parallel-subagent-race-codex-cli-multi-agent-v2-claude-dynamic-workflows-architecture-comparison/",
+      "description": "Side-by-side comparison of Codex declarative TOML roles vs Claude Code code-mode orchestration; depth and thread defaults",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Graphs vs. Loops: Agentic AI Orchestration Debate 2026 (explainx.ai)",
+      "url": "https://explainx.ai/blog/graphs-vs-loops-agentic-ai-debate-linear-andrew-ng-2026",
+      "description": "July 2026 industry debate framing graph-structured vs loop-structured agent orchestration",
+      "add_as_web_search": true
     }
   ]
 }

@@ -2,8 +2,8 @@
 name: ai-coding-agents-tasks
 description: "Designs background task systems for coding-agent runtimes. Use when implementing task lists, worker tasks, background execution, cancellation, or teammate task coordination."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-10
 ---
 
 # AI Coding Agents Tasks
@@ -46,6 +46,7 @@ UI/session reflection
 | Where do I actually host the trigger + agent (Vercel, Fly, CF, Render)? | [`../software-paas-hosting/references/agent-hosting-matrix.md`](../software-paas-hosting/references/agent-hosting-matrix.md) | Per-shape PaaS stacks + reference architectures |
 | How do I statically validate a recipe blueprint YAML? | [`scripts/recipe_scanner.py`](scripts/recipe_scanner.py) | stdlib-only validator: required fields, parameter types, extension risk gates, placeholder detection |
 | How does OpenAI Codex model cloud tasks, apply/diff, and agent graphs? | [`references/openai-codex-cloud-tasks-and-agent-graph.md`](references/openai-codex-cloud-tasks-and-agent-graph.md) | Task CLI lifecycle, best-of-N attempts, partial apply states, environment filters, and persisted parent-child topology |
+| How do I model iterative or cyclic work — and what differs between Claude Code and Codex? | [`references/loop-and-graph-runtime-surfaces.md`](references/loop-and-graph-runtime-surfaces.md) | Surface matrix, queue-vs-cyclic-graph data model, portable loop contract, scheduled-loop state rules |
 
 ## When To Use
 
@@ -60,6 +61,8 @@ UI/session reflection
 | Need | Use Instead |
 |------|-------------|
 | Multi-agent planning and ownership contracts | [`../agents-swarm-orchestration/SKILL.md`](../agents-swarm-orchestration/SKILL.md) |
+| Loop shapes, termination predicates, and convergence detection | [`../agents-swarm-orchestration/references/loop-orchestration.md`](../agents-swarm-orchestration/references/loop-orchestration.md) |
+| Script-held deterministic control flow (Claude Code Workflows) | [`../agents-swarm-orchestration/references/scripted-workflows.md`](../agents-swarm-orchestration/references/scripted-workflows.md) |
 | Terminal UI and task dialogs | [`../ai-coding-agents-terminal-ui/SKILL.md`](../ai-coding-agents-terminal-ui/SKILL.md) |
 | Session resume and transcript persistence | [`../ai-coding-agents-sessions/SKILL.md`](../ai-coding-agents-sessions/SKILL.md) |
 | Prompt-cache economics when spawning subagent tasks | [`../ai-coding-agents-sessions/references/resume-path-decision-tree.md`](../ai-coding-agents-sessions/references/resume-path-decision-tree.md) — blank vs. forked subagent startup, cache-prefix economics; also [`../ai-coding-agents-sessions/references/context-forking.md`](../ai-coding-agents-sessions/references/context-forking.md) |

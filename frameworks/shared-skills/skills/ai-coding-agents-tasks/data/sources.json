@@ -3,9 +3,9 @@
     "skill": "ai-coding-agents-tasks",
     "title": "AI Coding Agents Tasks - Sources",
     "description": "Official documentation and implementation references for coding-agent task models, task lists, background execution, and teammate coordination",
-    "last_updated": "2026-07-11",
-    "updated": "2026-07-11",
-    "total_sources": 18,
+    "last_updated": "2026-08-10",
+    "updated": "2026-08-10",
+    "total_sources": 20,
     "version": "1.1"
   },
   "categories": {
@@ -182,6 +182,24 @@
         "access": "free",
         "add_as_web_search": true,
         "captured": "2026-07-11"
+      },
+      {
+        "name": "Claude Code Workflows Documentation",
+        "url": "https://code.claude.com/docs/en/workflows",
+        "type": "documentation",
+        "relevance": "Code-mode orchestration surface: loop and fan-out primitives absent from Codex CLI",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Codex CLI Multi-Agent v2 vs Claude Dynamic Workflows",
+        "url": "https://codex.danielvaughan.com/2026/06/08/parallel-subagent-race-codex-cli-multi-agent-v2-claude-dynamic-workflows-architecture-comparison/",
+        "type": "documentation",
+        "relevance": "Runtime asymmetry reference: TOML roles, max_depth/max_threads defaults, spawn_agents_on_csv",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
       }
     ]
   }
