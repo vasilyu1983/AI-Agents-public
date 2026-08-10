@@ -260,7 +260,7 @@ answer_composed
   latencyMs=187
   safetyBoundary=supportive_non_clinical
   emotionalIntent=true
-  tierBand=premium
+  tierBand=cosmic
   locale=en
   validatorResult=ok
   regenerate=false

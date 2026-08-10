@@ -158,9 +158,9 @@ Verified against the live ASC *Edit Localization* dialog's remaining-characters 
 | Subscription Display Name | **35 characters** |
 | Subscription Description | **55 characters** |
 
-For CJK scripts (Japanese, Korean, Chinese Simplified), Apple counts code points, not visual width — a 20-code-point Chinese sentence is 20 chars against the 55 max, not 40. For RTL scripts (Arabic, Hebrew), technical Latin proper nouns such as API or SDK names should usually stay Latin; transliterating can obscure the standard being referenced.
+For CJK scripts (Japanese, Korean, Chinese Simplified), Apple counts code points, not visual width — a 20-code-point Chinese sentence is 20 chars against the 55 max, not 40. For RTL scripts (Arabic, Hebrew), the `VSOP87`-style Latin proper nouns should usually stay Latin; transliterating loses the meaning of technical standards.
 
-Recommended file structure for version-controlled subscription copy:
+Recommended file structure for version-controlled subscription copy (used in the Cosmic Copilot repo, works for any app):
 
 ```
 fastlane/metadata/<locale>/subscription.txt
@@ -172,13 +172,13 @@ One file per locale, INI-style sections named after the ASC product IDs. Example
 # Subscription localization — de (draft, needs native speaker review)
 # Character limits: name ≤ 35 chars, description ≤ 55 chars
 
-[PremiumMonthly]
-name: Premium Monatlich
-description: Erweiterte Funktionen und tägliche Einblicke.
+[CosmicMonthly]
+name: Cosmic Monatlich
+description: KI-Chart-Lesungen, tägliche Führung, VSOP87-Präzision.
 
-[PremiumAnnual]
-name: Premium Jährlich
-description: Erweiterte Funktionen und tägliche Einblicke.
+[CosmicAnnual]
+name: Cosmic Jährlich
+description: KI-Chart-Lesungen, tägliche Führung, VSOP87-Präzision.
 ```
 
 Fastlane's `deliver` action does not automatically upload subscription localizations — a custom script or the App Store Connect API `POST /v1/subscriptionLocalizations` endpoint is the only path. Because nothing reads these files automatically today, a single `subscription.txt` per locale is cleaner than 4 separate `name.txt` / `description.txt` files nested in per-product subdirectories (a translator editing one language wants every piece of subscription copy for their locale in one file, not four).

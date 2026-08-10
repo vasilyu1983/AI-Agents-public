@@ -331,7 +331,7 @@ Use `DatePickerDialog` and `TimePickerDialog` for date and time selection. They 
 ```kotlin
 ListItem(
     headlineContent = { Text("Energy Level") },
-    supportingContent = { Text("Today's guided reflection") },
+    supportingContent = { Text("Today's cosmic energy reading") },
     leadingContent = { Icon(Icons.Rounded.Bolt, contentDescription = null) },
     trailingContent = { Text("High", color = MaterialTheme.colorScheme.primary) }
 )

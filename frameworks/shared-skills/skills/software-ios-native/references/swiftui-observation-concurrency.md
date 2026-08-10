@@ -300,10 +300,10 @@ private func startResendCooldownTimer() {
 }
 ```
 
-**Representative instances** (worked examples of the same anti-pattern):
+**Real instances found in cosmic-swift** (worked examples of the same anti-pattern):
 
-- `Core/Session/SessionStore.swift` — a resend-cooldown timer mutating observable countdown state each second
-- `Core/Purchases/PurchaseManager.swift` — a `for await Transaction.updates` loop mutating active-subscription state
+- `Core/Auth/AuthSession.swift` — `startResendCooldownTimer` per-second mutation of `otpResendCooldown`
+- `Core/Billing/StoreKitManager.swift` — `startTransactionListener` `for await Transaction.updates` loop mutating `activeSubscriptionProductID`
 - `Core/Analytics/AnalyticsClient.swift` — `scheduleFlush` debounce timer mutating `lastFlushAt` / `pendingEventCount`
 - `Features/Ask/AskStore.swift` — two `submitState` cleanup tasks that sleep then reset state
 
@@ -326,7 +326,7 @@ If all consumers of an `actor` type are `@MainActor` types, the `@MainActor → 
 
 **Rule of thumb:** promote the type to `@MainActor final class` unless it genuinely needs to coordinate concurrent access from multiple non-`@MainActor` contexts.
 
-**Worked examples:**
+**Worked examples from cosmic-swift:**
 
 ```swift
 // BEFORE — separate actor, subtle resumption bugs
@@ -585,7 +585,7 @@ Remove the print after the debugging session — it's not meant to live in the c
 
 ### The web-search escape valve
 
-**Meta-lesson from repeated debugging cycles:** when a bug persists across 3+ "obviously correct" fixes targeting the same symptom class, **stop code-reviewing and web-search**. Each additional fix is almost certainly a real independent bug that was hiding behind the same symptom class, but it is not THE bug. The actual root cause is usually in a place that code review is blind to — a framework interaction (UNUserNotificationCenter, SceneKit, StoreKit), private SwiftUI machinery, or a Swift Concurrency edge case that's documented but not obvious from the API surface.
+**Meta-lesson from a real 17-iteration cosmic-swift debugging session:** when a bug persists across 3+ "obviously correct" fixes targeting the same symptom class, **stop code-reviewing and web-search**. Each additional fix is almost certainly a real independent bug that was hiding behind the same symptom class, but it is not THE bug. The actual root cause is usually in a place that code review is blind to — a framework interaction (UNUserNotificationCenter, SceneKit, StoreKit), a private SwiftUI machinery, or a Swift Concurrency edge case that's documented but not obvious from the API surface.
 
 Symptoms that should trigger the web-search escape valve immediately:
 
@@ -593,9 +593,9 @@ Symptoms that should trigger the web-search escape valve immediately:
 - Crash fires on a Swift Concurrency Task on a cooperative queue, not main thread
 - Crash reproduces on a single line in a short function that compiles cleanly and looks correct
 - The same assertion message recurs across multiple "obviously correct" fixes
-- You're adding defensive `await MainActor.run { ... }` wraps because "it can't hurt" — that pattern can cause the same bug class. More wraps in the wrong places make it worse.
+- You're adding defensive `await MainActor.run { ... }` wraps because "it can't hurt" — that's the pattern that caused the cosmic-swift bug. More wraps in the wrong places make it worse.
 
-Search query template: `<private symbol> "<exact assertion message>" <platform> <year>`. Examples that can surface the underlying framework issue early:
+Search query template: `<private symbol> "<exact assertion message>" <platform> <year>`. Examples that would have closed the cosmic-swift bug at iteration 1 instead of iteration 17:
 
 - `_performBlockAfterCATransactionCommitSynchronizes "Call must be made on main thread" SwiftUI 2025`
 - `UNUserNotificationCenter nonisolated async crash main thread Swift 6`
@@ -640,10 +640,10 @@ enum GatedOr<T: Decodable & Equatable>: Decodable, Equatable {
 
 Usage:
 ```swift
-struct ContentResponse: Decodable, Equatable {
-    let summary: ContentSummary?                 // always present
-    let premiumDetails: GatedOr<DetailData>?     // data for premium, gated for free
-    let advanced: GatedOr<AdvancedData>?         // data for premium, gated for free
+struct NumerologyResponse: Decodable, Equatable {
+    let profile: NumerologyProfile?          // always present
+    let angelNumbers: GatedOr<AngelData>?    // data for cosmic, gated for free
+    let advanced: GatedOr<AdvancedData>?     // data for cosmic, gated for free
 }
 ```
 
@@ -675,23 +675,23 @@ enum AnyCodableValue: Decodable, Equatable {
 }
 ```
 
-Use for fields like `metadata.explanation` that might be a string OR an object depending on the backend version.
+Use for fields like `birthday.meaning` that might be a string OR an object depending on the backend version.
 
 ### Lenient Custom Decoders
 
 When a DTO has fields that might have unexpected types, use `try?` per field:
 
 ```swift
-extension JournalEntry: Decodable {
+extension DreamEntry: Decodable {
     private enum CodingKeys: String, CodingKey {
-        case id, entryDate, description, tags, analysis
+        case id, dreamDate, description, emotions, interpretation
     }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         id = try? c.decodeIfPresent(String.self, forKey: .id)
-        entryDate = try? c.decodeIfPresent(String.self, forKey: .entryDate)
-        analysis = try? c.decodeIfPresent(EntryAnalysis.self, forKey: .analysis)
+        dreamDate = try? c.decodeIfPresent(String.self, forKey: .dreamDate)
+        interpretation = try? c.decodeIfPresent(DreamInterpretation.self, forKey: .interpretation)
         // Each field that fails becomes nil instead of crashing the entire response
     }
 }
@@ -703,11 +703,11 @@ Backend APIs often wrap data in a response object. Don't decode the inner type d
 
 ```swift
 // BAD: Wrong — assumes flat response
-dailyReport = try await apiClient.get(.dailyReport)
+dailyReading = try await apiClient.get(.horoscopeDaily(sign: "cancer"))
 
 // GOOD: Right — decode the wrapper first
-let response: DailyReportResponse = try await apiClient.get(.dailyReport)
-dailyReport = response.report
+let response: DailyHoroscopeResponse = try await apiClient.get(.horoscopeDaily(sign: "cancer"))
+dailyReading = response.horoscope
 ```
 
 ### Common Decode Failures
@@ -763,11 +763,11 @@ Complex view bodies cause "failed to produce diagnostic for expression" — the 
 ```swift
 // BAD: Conditional inside trailing closure ViewBuilder
 .overlay { if isActive { RoundedRectangle().stroke(color) } }
-.background { if showPanel { ExamplePanel { Color.clear } } }
+.background { if showPanel { CosmicPanel { Color.clear } } }
 
 // GOOD: Use parenthesized form with ternary — no branching for the type checker
 .overlay(RoundedRectangle().stroke(isActive ? color : .clear))
-.background(ExamplePanel { Color.clear })
+.background(CosmicPanel { Color.clear })
 ```
 
 ```swift
@@ -790,7 +790,7 @@ ForEach(steps) { step in ... }
 
 SwiftUI reserves common names. If you create `struct Group`, it shadows SwiftUI's `Group` view and causes compile errors across the entire project. Prefix with your app name:
 
-- `Group` → `AppGroup` or `ChartGroup`
+- `Group` → `CosmicGroup` or `ChartGroup`
 - `Section` → avoid as a model name
 - `Label` → avoid as a model name
 - `Image` → avoid as a model name

@@ -132,7 +132,7 @@ This makes the dev Xcode build and the production TestFlight build coexist on th
 #### iOS register payload
 
 ```swift
-// iOS client — ExampleApp/Core/Push/PushRegistrationService.swift
+// iOS client — CosmicCopilot/Core/Push/PushRegistrationService.swift
 private struct PushRegistrationRequest: Encodable {
     let deviceToken: String
     let platform: String
@@ -158,7 +158,7 @@ private func currentAPNSEnvironment() -> String {
 ```
 
 ```typescript
-// Backend (Next.js / Node) — web-app/src/app/api/v1/mobile/push/register/route.ts
+// Backend (Next.js / Node) — cosmic-copilot/app/src/app/api/v1/mobile/push/register/route.ts
 const registerPushDeviceSchema = z.object({
   deviceToken: z.string().min(16).max(512),
   platform: z.literal('ios').default('ios'),
@@ -172,7 +172,7 @@ const registerPushDeviceSchema = z.object({
 Backend send code example:
 
 ```typescript
-// Backend APNs sender — web-app/src/lib/push/send.ts
+// Backend APNs sender — cosmic-copilot/app/src/lib/push/send.ts
 const { data: devices } = await supabase
   .from('mobile_push_devices')
   .select('device_token, push_environment, notification_categories')
@@ -231,7 +231,7 @@ where mpd.user_id = au.id
   and mpd.is_active = false;
 ```
 
-Keep a repo-local `scripts/push-devices-cleanup.sql` with diagnostic queries, preview, cleanup, and verification sections so the procedure is reviewable before use.
+A full worked script with diagnostic queries, preview, cleanup, and verification sections lives at `cosmic-swift/scripts/push-devices-cleanup.sql` in the cosmic project.
 
 #### TestFlight push pre-flight gates
 
@@ -270,7 +270,7 @@ After flipping `APNS_ENVIRONMENT=production` in the deployment environment (e.g.
 Create a fresh archive in Xcode (Product → Archive). Before uploading, inspect the signed entitlements:
 
 ```bash
-codesign -d --entitlements - "/path/to/ExampleApp.xcarchive/Products/Applications/ExampleApp.app" \
+codesign -d --entitlements - "/path/to/CosmicCopilot.xcarchive/Products/Applications/CosmicCopilot.app" \
   2>&1 | grep -A1 aps-environment
 ```
 
@@ -885,7 +885,7 @@ For iOS push work, the first question is not whether APNs exists in the architec
 Use the archived `.app`, not the checked-in `.entitlements` file, as the source of truth:
 
 ```bash
-codesign -d --entitlements - "/path/to/ExampleApp.app" | grep -A1 aps-environment
+codesign -d --entitlements - "/path/to/CosmicCopilot.app" | grep -A1 aps-environment
 ```
 
 Expected output for TestFlight / App Store readiness:

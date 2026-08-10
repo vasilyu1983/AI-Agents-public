@@ -66,14 +66,14 @@ Learning-loop request
 End-to-end recipes. Each maps to the machinery below — no new commands.
 
 **1. Wire a high-traffic domain skill for the first time.**
-You keep re-teaching `example-tax-guidance` the same HMRC quirks. Seed the loop, add
+You keep re-teaching `project-taxation` the same HMRC quirks. Seed the loop, add
 the addendum, smoke-test:
 ```bash
 cp frameworks/shared-skills/skills/agents-skills-feedback-loop/assets/learnings.template.md \
-   frameworks/shared-skills/skills/example-tax-guidance/learnings.consolidated.md
-# add the ## Learnings Loop addendum to example-tax-guidance/SKILL.md (verbatim, see The Addendum)
+   frameworks/shared-skills/skills/project-taxation/learnings.consolidated.md
+# add the ## Learnings Loop addendum to project-taxation/SKILL.md (verbatim, see The Addendum)
 python3 frameworks/shared-skills/skills/agents-skills-feedback-loop/scripts/append_learning.py \
-   frameworks/shared-skills/skills/example-tax-guidance --section "Domain Knowledge" \
+   frameworks/shared-skills/skills/project-taxation --section "Domain Knowledge" \
    --text "MTD quarterly update deadline is 1 month + 7 days after period end."
 ```
 Full procedure: `references/wiring-protocol.md`. Add a per-skill filter override
@@ -269,7 +269,7 @@ The loop above works at **skill granularity** — one `learnings.md` per skill. 
 
 ## What Counts as a Learning (the filter)
 
-The filter is project-specific. The default filter lives in `references/learnings-format.md` under *Quality Filters*. Override per-skill if your domain needs a sharper bar — e.g. `example-tax-guidance` should reject anything not anchored to an HMRC manual reference or a dated statute.
+The filter is project-specific. The default filter lives in `references/learnings-format.md` under *Quality Filters*. Override per-skill if your domain needs a sharper bar — e.g. `project-taxation` should reject anything not anchored to an HMRC manual reference or a dated statute.
 
 ## Judgment Calls (what a non-expert misses)
 
@@ -285,7 +285,7 @@ The mechanics above (caps, dates, dedup ratio) are checkable by script. The foll
 ## Anti-Patterns
 
 - **Auto-rewriting SKILL.md.** The loop never modifies `SKILL.md`. If consolidation produces a durable rule, promote it to `references/` by hand. Silent self-modification of skills is the failure mode this design exists to prevent.
-- **One central learnings file across all skills.** Forbidden. `skill-a` learnings must not leak into `skill-b`. See `feedback_project_skills_independent`.
+- **One central learnings file across all skills.** Forbidden. `project-cosmic-tarot` learnings must not leak into `software-payments`. See `feedback_project_skills_independent`.
 - **Learnings that duplicate `CLAUDE.md` or `coding-behavior.md`.** General coding rules belong in those files, not in a per-skill loop.
 - **Undated entries.** Without a date the entry cannot age, cannot be pruned, and cannot be weighted. Reject on append.
 

@@ -85,9 +85,9 @@ The script must find the repo to know which skills are wired and where
 
 1. `LEARNINGS_SKILLS_ROOT` env var (explicit override — set this in CI or
    non-standard layouts).
-2. The installed script's own shared-skills tree.
-3. Runtime-standard `$HOME` layouts (`.agents/skills`, `.codex/skills`,
-   `.claude/skills`).
+2. Common `$HOME`-relative layouts (`Documents/Code/AI-Agents/…`,
+   `Documents/AI-Agents/…`, `AI-Agents/…`, `projects/…`, `code/…`,
+   `.agents/skills`).
 
 A candidate counts only if it actually contains
 `agents-skills-feedback-loop/scripts/append_learning.py`. If none match →

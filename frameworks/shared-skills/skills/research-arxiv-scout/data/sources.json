@@ -145,6 +145,54 @@
       "add_as_web_search": false,
       "status": "dead",
       "dead_since": "2025-07"
+    },
+    {
+      "name": "arXiv export API endpoint",
+      "url": "https://info.arxiv.org/help/api/index.html",
+      "description": "CHANGED: stricter 429 enforcement from Feb 2026 — hard 1 request / 3s, single connection. Previously a politeness request, now enforced. Parallel query bursts are the fastest route to a throttle. Replacement: same endpoint; enforce the 3s gap in all query scripts (scripts/generate_arxiv_scout_queries.py reports estimated_min_runtime_seconds for this reason). See references/arxiv-api-guide.md#rate-limiting-enforced-as-of-2026.",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2026-02-01"
+    },
+    {
+      "name": "OpenAlex",
+      "url": "https://openalex.org/",
+      "description": "CHANGED: API key mandatory since 2026-02-13; the mailto polite-pool parameter is retired. Keyed requests get $1/day free credit (covers usual research volume); unkeyed requests get $0.10/day then 409. Replacement: same service — register a free key at openalex.org/settings/api. Primary fallback when Semantic Scholar keys are unavailable.",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2026-02-13"
+    },
+    {
+      "name": "Semantic Scholar API",
+      "url": "https://www.semanticscholar.org/product/api",
+      "description": "CHANGED: key now officially recommended; ~1 RPS authenticated; exponential backoff required. Since Aug 2024 free personal-email keys and 3rd-party-app keys are no longer approved — apply with an institutional email or fall back to OpenAlex. Replacement: same service; register at semanticscholar.org/product/api.",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2026-01-01"
+    },
+    {
+      "name": "Connected Papers",
+      "url": "https://www.connectedpapers.com/",
+      "description": "CHANGED: paid tier introduced 2025; free plan limited to 50 inputs/searches. Replacement for bulk citation-graph work: OpenAlex citation graph (free with key) or the Semantic Scholar graph API.",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2025-01-01"
+    },
+    {
+      "name": "ICLR / OpenReview",
+      "url": "https://docs.openreview.net/",
+      "description": "CHANGED: OpenReview API v2 is mandatory; v1 is deprecated and all 2026 venues are on v2. Affects any attempt to verify a claimed ICLR acceptance against the venue rather than trusting the author's arXiv comment field. Replacement: same venue; use API v2 endpoints.",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2026-01-01"
+    },
+    {
+      "name": "ResearchRabbit",
+      "url": "https://researchrabbit.ai",
+      "description": "CHANGED: acquired by Litmaps (2025-05-08; relaunched Oct 2025) and moved from fully free to freemium. Confirm current tier limits before relying on bulk exports. Replacement: Litmaps (litmaps.com) free tier, or OpenAlex for programmatic citation-network work.",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2025-05-08"
     }
   ]
 }

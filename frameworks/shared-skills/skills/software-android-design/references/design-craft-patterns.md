@@ -326,7 +326,7 @@ Reserve accent colors for interactive elements and categorization, not decoratio
 
 ### Atmospheric Effects
 
-For spiritual-guidance or wellness themes, add subtle radial gradients behind the content layer:
+For cosmic/wellness themes, add subtle radial gradients behind the content layer:
 
 ```kotlin
 Canvas(modifier = Modifier.fillMaxSize()) {

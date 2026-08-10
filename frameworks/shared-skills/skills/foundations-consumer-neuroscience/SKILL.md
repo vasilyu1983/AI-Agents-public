@@ -17,7 +17,7 @@ last_validated: 2026-07-11
 
 **Apply consumer-neuroscience when:**
 - Attention/salience design — first-7-second hook, visual hierarchy, modal vs inline
-- Anxiety-driven engagement loops (spiritual-guidance, dating, status apps) — needs DMCC ethical audit
+- Anxiety-driven engagement loops (cosmic, dating, status apps) — needs DMCC ethical audit
 - Parasocial / narrative-led conversion (creator content, branded characters)
 - Daily-cadence retention with timing-sensitive triggers (consolidation windows, wake-time)
 - Trust repair, reciprocity, or oxytocin-bond design in social/community products

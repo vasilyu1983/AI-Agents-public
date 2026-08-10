@@ -29,6 +29,7 @@ import json
 import os
 import sys
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 
 
@@ -39,8 +40,42 @@ from pathlib import Path
 CODEX_HOME = Path(os.environ.get("CODEX_HOME", Path.home() / ".codex"))
 SESSIONS_DIR = CODEX_HOME / "sessions"
 
-# Approximate pricing per 1M tokens (April 2026 — update as needed)
-PRICING = {
+# ---------------------------------------------------------------------------
+# Pricing table — USD per 1M tokens.
+#
+# Model IDs here are deliberately pinned and historical: replaying old sessions
+# must price them at the rates that applied then, so retired IDs stay in the
+# table. What rots is not the IDs but the *rates*, so the table expires loudly
+# instead of being silently trusted. Bump PRICE_TABLE_LAST_VERIFIED when you
+# re-check https://openai.com/api/pricing/; add new IDs without removing old
+# ones. Unknown IDs fall through to DEFAULT_PRICING, which under-reports newer
+# top-tier models — add them here rather than relying on the default.
+#
+# GPT-5.6 input/output rates mirror ai-llm/scripts/cost_estimator.py. That table
+# carries no cached-token column, so the `cached` values below are derived at 25%
+# of input (the ratio the gpt-5 entries already use), not read off a price page.
+# ---------------------------------------------------------------------------
+
+# Import the resolver from this skill's OWN _lib/. The skill is self-contained:
+# it carries its own _lib/ and data/, so it works detached from the repo
+# (public-repo clone, single-folder copy, plugin). resolve() first because
+# skills deploy as symlinks, so a lexical path escapes into the deployment root.
+_here = Path(__file__).resolve()
+sys.path.insert(0, str(_here.parents[1] / "_lib"))
+try:
+    from resolve_versions import load_pricing, pricing_path
+except ImportError:  # resolver missing — use the embedded fallback
+    load_pricing = None
+    pricing_path = None
+
+PRICE_TABLE_LAST_VERIFIED = date.fromisoformat("2026-07-11")
+PRICE_TABLE_STALE_AFTER_DAYS = 30
+
+FALLBACK_PRICING = {
+    "gpt-5.6-sol":   {"input": 5.00, "output": 30.00, "cached": 1.25},
+    "gpt-5.6-terra": {"input": 2.50, "output": 15.00, "cached": 0.625},
+    "gpt-5.6-luna":  {"input": 1.00, "output": 6.00, "cached": 0.25},
+    "gpt-5.5":   {"input": 2.00, "output": 8.00, "cached": 0.50},
     "gpt-5":     {"input": 2.00, "output": 8.00, "cached": 0.50},
     "gpt-5.4":   {"input": 2.00, "output": 8.00, "cached": 0.50},
     "gpt-4.1":   {"input": 2.00, "output": 8.00, "cached": 0.50},
@@ -51,9 +86,67 @@ PRICING = {
 DEFAULT_PRICING = {"input": 2.00, "output": 8.00, "cached": 0.50}
 
 
+def _load_pricing() -> tuple[dict, str, date]:
+    """Return (pricing, provenance, last_verified), preferring the shared table.
+
+    Adapts the shared schema (`*_per_1m`) into this script's field names rather
+    than renaming either side.
+    """
+    if load_pricing is None:
+        return FALLBACK_PRICING, "embedded fallback (resolver not importable)", PRICE_TABLE_LAST_VERIFIED
+
+    doc = load_pricing(__file__)
+    models = doc.get("models") if isinstance(doc, dict) else None
+    if not isinstance(models, dict):
+        return FALLBACK_PRICING, "embedded fallback (shared table unavailable)", PRICE_TABLE_LAST_VERIFIED
+
+    table = {}
+    for key, entry in models.items():
+        if not isinstance(entry, dict) or entry.get("vendor") != "openai":
+            continue
+        if "input_per_1m" not in entry or "output_per_1m" not in entry:
+            continue
+        table[key.split("/", 1)[-1]] = {
+            "input": entry["input_per_1m"],
+            "output": entry["output_per_1m"],
+            "cached": entry.get("cache_read_per_1m", entry["input_per_1m"] * 0.25),
+        }
+    if not table:
+        return FALLBACK_PRICING, "embedded fallback (no openai rows)", PRICE_TABLE_LAST_VERIFIED
+
+    verified = PRICE_TABLE_LAST_VERIFIED
+    stamp = doc.get("last_verified")
+    if isinstance(stamp, str):
+        try:
+            verified = date.fromisoformat(stamp)
+        except ValueError:
+            pass
+    path = pricing_path(__file__) if pricing_path else None
+    return table, f"shared: {path}" if path else "shared", verified
+
+
+PRICING, PRICING_SOURCE, PRICING_VERIFIED = _load_pricing()
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+def warn_if_price_table_stale() -> None:
+    """Warn once if the embedded pricing table is older than the staleness window.
+
+    Called from main() rather than estimate_cost() because the reports call
+    estimate_cost per row; warning there would repeat the notice for every line.
+    """
+    age_days = (date.today() - PRICING_VERIFIED).days
+    if age_days > PRICE_TABLE_STALE_AFTER_DAYS:
+        print(
+            f"[WARN] Pricing is {age_days} days old "
+            f"(last verified {PRICING_VERIFIED.isoformat()}, source: {PRICING_SOURCE}); "
+            "costs below are estimates — verify at https://openai.com/api/pricing/.",
+            file=sys.stderr,
+        )
+
 
 def estimate_cost(model: str, inp: int, out: int, cached: int) -> float:
     """Estimate cost in USD from token counts."""
@@ -473,6 +566,7 @@ def main():
     if hasattr(args, "until") and args.until:
         args.until = parse_date(args.until)
 
+    warn_if_price_table_stale()
     args.func(args)
 
 

@@ -53,12 +53,12 @@ Implications:
 
 ## Worked Example
 
-**Scenario**: A daily mindfulness app uses the copy "Navigate your path with perfect clarity" throughout onboarding. User testing shows the copy "feels aspirational but distant." Day-1 engagement is moderate.
+**Scenario**: A daily spiritual guidance app uses the copy "Navigate your path with cosmic clarity" throughout the onboarding. User testing shows the copy "feels aspirational but distant." Day-1 engagement is moderate.
 
-Diagnosis: "navigate" and "perfect clarity" are spatial-abstract metaphors. They are not grounded in the actual sensorimotor experience users report: synthetic research examples include "feels like a moment of stillness," "like a breath before the day starts," and "I can think more clearly." These are breathing/stillness metaphors, not navigation metaphors. Incongruent grounding.
+Diagnosis: "navigate" and "cosmic clarity" are spatial-abstract metaphors. They are not grounded in the actual sensorimotor experience users report: NPS verbatims include "feels like a moment of stillness," "like a breath before the day starts," "I can think more clearly." These are breathing/stillness metaphors, not navigation metaphors. Incongruent grounding.
 
 Fix:
-1. Replace "Navigate your path with perfect clarity" with "A moment of stillness before the day begins. Your reflection, ready."
+1. Replace "Navigate your path with cosmic clarity" with "A moment of stillness before the day begins. Your reading, ready."
 2. UI opening animation: a slow breath-rhythm fade-in rather than a swipe-to-reveal gesture.
 3. Opening screen gesture: tap to reveal (not swipe) — congruent with "resting on" rather than "moving through."
 

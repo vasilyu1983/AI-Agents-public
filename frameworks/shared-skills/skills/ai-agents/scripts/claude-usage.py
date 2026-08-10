@@ -31,7 +31,7 @@ import json
 import os
 import sys
 from collections import defaultdict
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 
 
@@ -50,8 +50,39 @@ else:
 STATS_CACHE = CLAUDE_DIR / "stats-cache.json"
 PROJECTS_DIR = CLAUDE_DIR / "projects"
 
-# Approximate pricing per 1M tokens (April 2026 — update as needed)
-PRICING = {
+# ---------------------------------------------------------------------------
+# Pricing table — USD per 1M tokens.
+#
+# The authoritative table is this skill's own data/model-pricing.json, read at
+# runtime via _lib/resolve_versions.py — the same file whether the skill runs
+# from the repo or from ~/.claude, ~/.agents or ~/.codex. The dict below is a
+# FALLBACK for when that file cannot be located.
+#
+# Model IDs here are deliberately pinned and historical: replaying old logs must
+# price them at the rates that applied then, so retired IDs stay in the table.
+# What rots is not the IDs but the *rates*, so the table expires loudly instead
+# of being silently trusted. Update https://claude.com/pricing rates in the JSON
+# and bump its last_verified; add new IDs without removing old ones.
+# ---------------------------------------------------------------------------
+
+# Resolve symlinks first: skills deploy as individual symlinks, so a lexical
+# relative path would escape into the deployment root instead of the repo.
+# Import the resolver from this skill's OWN _lib/. The skill is self-contained:
+# it carries its own _lib/ and data/, so it works detached from the repo
+# (public-repo clone, single-folder copy, plugin). resolve() first because
+# skills deploy as symlinks, so a lexical path escapes into the deployment root.
+_here = Path(__file__).resolve()
+sys.path.insert(0, str(_here.parents[1] / "_lib"))
+try:
+    from resolve_versions import load_pricing, pricing_path
+except ImportError:  # resolver missing — use the embedded fallback
+    load_pricing = None
+    pricing_path = None
+
+PRICE_TABLE_LAST_VERIFIED = date.fromisoformat("2026-04-16")
+PRICE_TABLE_STALE_AFTER_DAYS = 30
+
+FALLBACK_PRICING = {
     "claude-opus-4-7":    {"input": 15.00, "output": 75.00, "cache_read": 1.50, "cache_create": 18.75},  # TODO verify post-launch (Opus 4.7 shipped 2026-04-16; tier assumed identical to 4.6 until Anthropic publishes otherwise)
     "claude-opus-4-6":    {"input": 15.00, "output": 75.00, "cache_read": 1.50, "cache_create": 18.75},
     "claude-opus-4-5":    {"input": 15.00, "output": 75.00, "cache_read": 1.50, "cache_create": 18.75},
@@ -62,9 +93,69 @@ PRICING = {
 DEFAULT_PRICING = {"input": 3.00, "output": 15.00, "cache_read": 0.30, "cache_create": 3.75}
 
 
+def _load_pricing() -> tuple[dict, str, date]:
+    """Return (pricing, provenance, last_verified), preferring the shared table.
+
+    Adapts the shared schema (`*_per_1m`) into this script's field names rather
+    than renaming either side: the shared file stays vendor-neutral and this
+    script's arithmetic keeps the keys it already uses.
+    """
+    if load_pricing is None:
+        return FALLBACK_PRICING, "embedded fallback (resolver not importable)", PRICE_TABLE_LAST_VERIFIED
+
+    doc = load_pricing(__file__)
+    models = doc.get("models") if isinstance(doc, dict) else None
+    if not isinstance(models, dict):
+        return FALLBACK_PRICING, "embedded fallback (shared table unavailable)", PRICE_TABLE_LAST_VERIFIED
+
+    table = {}
+    for key, entry in models.items():
+        if not isinstance(entry, dict) or entry.get("vendor") != "anthropic":
+            continue
+        if "input_per_1m" not in entry or "output_per_1m" not in entry:
+            continue
+        table[key.split("/", 1)[-1]] = {
+            "input": entry["input_per_1m"],
+            "output": entry["output_per_1m"],
+            "cache_read": entry.get("cache_read_per_1m", 0.0),
+            "cache_create": entry.get("cache_write_per_1m", 0.0),
+        }
+    if not table:
+        return FALLBACK_PRICING, "embedded fallback (no anthropic rows)", PRICE_TABLE_LAST_VERIFIED
+
+    verified = PRICE_TABLE_LAST_VERIFIED
+    stamp = doc.get("last_verified")
+    if isinstance(stamp, str):
+        try:
+            verified = date.fromisoformat(stamp)
+        except ValueError:
+            pass
+    path = pricing_path(__file__) if pricing_path else None
+    return table, f"shared: {path}" if path else "shared", verified
+
+
+PRICING, PRICING_SOURCE, PRICING_VERIFIED = _load_pricing()
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+def warn_if_price_table_stale() -> None:
+    """Warn once if the embedded pricing table is older than the staleness window.
+
+    Called from main() rather than estimate_cost() because the reports call
+    estimate_cost per row; warning there would repeat the notice for every line.
+    """
+    age_days = (date.today() - PRICING_VERIFIED).days
+    if age_days > PRICE_TABLE_STALE_AFTER_DAYS:
+        print(
+            f"[WARN] Pricing is {age_days} days old "
+            f"(last verified {PRICING_VERIFIED.isoformat()}, source: {PRICING_SOURCE}); "
+            "costs below are estimates — verify at https://claude.com/pricing.",
+            file=sys.stderr,
+        )
+
 
 def estimate_cost(model: str, inp: int, out: int, cache_read: int, cache_create: int) -> float:
     """Estimate cost in USD from token counts."""
@@ -498,6 +589,7 @@ def main():
     if hasattr(args, "until") and args.until:
         args.until = parse_date(args.until)
 
+    warn_if_price_table_stale()
     args.func(args)
 
 

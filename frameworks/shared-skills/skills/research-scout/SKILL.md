@@ -19,7 +19,7 @@ Scans high-signal research sources for **methods, frameworks, and ideas worth ap
 
 **Key distinction from sibling scouts:**
 - **This skill** = research-grade idea mining (papers + research blogs + curated synthesis)
-- **Community-pain workflow** = community-pain mining (Reddit / HN / GitHub Issues / G2 / Stack Overflow)
+- **`startup-painpoint-scanner`** = community-pain mining (Reddit / HN / GitHub Issues / G2 / Stack Overflow)
 - **`research-arxiv-scout`** = arXiv-only deep triage with category taxonomy and attribution; specialist downstream
 - **`research-git`** = public GitHub repo research for skills, practices, and code patterns (separate concern)
 
@@ -55,12 +55,12 @@ Invoke when users ask for:
 | Situation | Use instead |
 |-----------|------------|
 | arXiv-only deep triage with attribution | `research-arxiv-scout` |
-| Community pain points, not research methods | Use a dedicated community-pain workflow |
+| Community pain points, not research methods | `startup-painpoint-scanner` |
 | Mining public GitHub repos for skills, practices, or code patterns | `research-git` |
 | Validated Q&A answers or known-error solutions (the Stack Overflow corpus / Stack Overflow for Agents exchange) | `qa-debugging` — that is solved-answer lookup, not research-method mining |
 | Production deep-research synthesis (verified citations + reasoning trace) | `ai-deep-research` |
 | Single-paper summary for a known arXiv ID | `research-arxiv-scout` step 3 |
-| End-user career positioning, company interview reviews, recruiter pitches, or CV tailoring | Use a dedicated career workflow; this skill may still mine research methods to improve it |
+| End-user career positioning, company interview reviews, recruiter pitches, or CV tailoring | `project-career-jobhunt`; this skill may still mine research methods to improve that skill |
 
 ---
 
@@ -248,11 +248,11 @@ Match each surviving idea against shape catalog in [idea-extraction-framework.md
 
 ## Killer-Feature Mode (Feature-Precedent Mining)
 
-Specialized mode for contributing the **`industry_blog_attribution`** and **`hci_retention_paper`** signals to a downstream feature-convergence workflow.
+Specialized mode for contributing the **`industry_blog_attribution`** and **`hci_retention_paper`** signals to the bundle's [Killer-Feature Convergence Protocol](../startup-review-mining/references/killer-feature-convergence.md) owned by `startup-review-mining`.
 
 **Premise.** Engineering and PM blog post-mortems and HCI retention papers periodically attribute retention, conversion, or revenue to a specific feature with named metrics. These are the highest-credibility single signals in the bundle (when they exist).
 
-**When to use:** a product-review workflow requests feature-precedent evidence, OR you want a published metric-backed attribution claim for a candidate feature.
+**When to use:** bundle handoff from `startup-review-mining` Killer-Feature Mode KF3, OR you want a published metric-backed attribution claim for a candidate feature.
 
 **Workflow:**
 
@@ -263,18 +263,18 @@ KF-PREC-2. SCAN  — generate_blog_queries.py with engineering-blog domain list
                    generate_conference_queries.py for CHI / CSCW / UIST / IUI
 KF-PREC-3. EXTRACT — classify attribution as explicit / strong / implicit / reject;
                      extract the feature noun (must be testable) and the WTP quote
-KF-PREC-4. APPEND — to the downstream workflow's pay-trigger ledger
+KF-PREC-4. APPEND — to ../startup-review-mining/assets/pay-trigger-ledger.tsv
                     signal_type = industry_blog_attribution (blog posts)
                                  | hci_retention_paper (CHI/CSCW/UIST/IUI)
-KF-PREC-5. HAND OFF — invoke the downstream feature-convergence step
+KF-PREC-5. HAND OFF — run ../startup-review-mining/scripts/converge_killer_features.py
 ```
 
 **New method shape.** This mode adds `monetizable-feature-pattern` to the [idea-extraction-framework](references/idea-extraction-framework.md#method-shapes) catalog. It uses different scoring gates than the research-method shapes (Trap 11 and Trap 12 do not auto-kill; instead it kills on marketing/PR authorship and promotes on quantitative metric + internal authority).
 
 **References:**
 - [references/feature-precedent-mining.md](references/feature-precedent-mining.md) — full extraction protocol, source mix, anti-patterns, precision honesty
-- Downstream feature-convergence contract — bundle Convergence Rule
-- Downstream extraction-prompt contract — engineering post-mortem attribution prompt
+- [../startup-review-mining/references/killer-feature-convergence.md](../startup-review-mining/references/killer-feature-convergence.md) — bundle Convergence Rule
+- [../startup-review-mining/references/llm-extraction-prompts.md](../startup-review-mining/references/llm-extraction-prompts.md) §7 — engineering post-mortem attribution prompt
 
 ---
 
@@ -315,6 +315,7 @@ KF-PREC-5. HAND OFF — invoke the downstream feature-convergence step
 | [curator-newsletters-strategy.md](references/curator-newsletters-strategy.md) | Lilian Weng, Sebastian Raschka, Eugene Yan, Latent Space, Simon Willison, The Batch, Import AI — coverage and bias notes |
 | [source-currency.md](references/source-currency.md) | May-2026 verified status table, structural shifts, and anti-pattern catalog for stale/dead/changed sources |
 | [free-first-sourcing-recipe.md](references/free-first-sourcing-recipe.md) | Decision ladder: free/official-API first → justified escalation to freemium/paid → cost-aware fallbacks |
+| [../startup-painpoint-scanner/references/crawl-access-economics.md](../startup-painpoint-scanner/references/crawl-access-economics.md) | Shared (owned by `startup-painpoint-scanner`): block signatures, control-query check, `llms.txt`, access-class table. Read before concluding a source has little on a topic — applies to blog/newsletter fetches and any rate-limited API |
 | [feature-precedent-mining.md](references/feature-precedent-mining.md) | Killer-feature mode: contributes industry_blog_attribution + hci_retention_paper signals to the bundle's Convergence Protocol; defines the `monetizable-feature-pattern` method shape |
 
 ---
@@ -346,7 +347,7 @@ These are **enforced by the aggregator's rule ladder** (Step 4), not advisory:
 | `agents-skills` | Use when packaging stolen ideas as a new skill |
 | `agents-skills-feedback-loop` | Runtime dependency — the Learnings Loop calls its `append_learning.py` / `consolidate.py` scripts |
 | `research-git` | Reproducibility-signal replacement for dead Papers with Code (GitHub repo/reimplementation inspection) |
-| Dedicated career workflow | Owns job-search matching, tailoring, ATS gates, and interview preparation; use this skill only to mine supporting research methods |
+| `project-career-jobhunt` | Owns AI-company jobhunt workflows; use this skill to mine research methods that improve matching, tailoring, ATS gates, or interview prep |
 
 ---
 
@@ -356,12 +357,12 @@ One node in the startup signal chain. Preserve the partition — hand off, do no
 
 | Stage | Skill | Owns |
 |-------|-------|------|
-| Scan - community pain | Dedicated community-pain workflow | Reddit / HN / GitHub Issues / forums / complaint DBs |
-| Scan - reviews | Dedicated product-review workflow | App stores / G2 / Trustpilot / community reviews |
+| Scan - community pain | `startup-painpoint-scanner` | Reddit / HN / GitHub Issues / forums / complaint DBs |
+| Scan - reviews | `startup-review-mining` | App stores / G2 / Trustpilot / community reviews |
 | Scan - research methods | `research-scout` (this skill) | Papers / research blogs / curator newsletters |
-| Validate | Dedicated idea-validation workflow | Go / pivot / kill on scanned evidence |
+| Validate | `startup-idea-validation` | Go / pivot / kill on scanned evidence |
 
-**Hand off when:** you need product/market pain rather than research methods -> the community-pain or product-review workflow; a mined method needs a build / no-build decision -> the idea-validation workflow. This skill does not absorb product-signal sources.
+**Hand off when:** you need product/market pain rather than research methods -> `startup-painpoint-scanner` (community) or `startup-review-mining` (reviews); a mined method needs a build / no-build decision -> `startup-idea-validation`. This skill does not absorb product-signal sources.
 
 ---
 

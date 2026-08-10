@@ -2,7 +2,7 @@
 
 Comprehensive guide to designing user experiences for AI-powered products: agent interfaces, conversational UI, generative content, human-AI collaboration, and regulatory compliance. Covers trust calibration, transparency, loading states, handoff patterns, and agentic UI. Applies to chatbots, copilots, autonomous agents, recommendation engines, and any product where AI generates, suggests, or acts on behalf of users.
 
-**Last Updated**: March 2026
+**Last Updated**: August 2026
 
 ---
 ## Table of Contents
@@ -40,6 +40,13 @@ Comprehensive guide to designing user experiences for AI-powered products: agent
 - [Agent Status Dashboard](#agent-status-dashboard)
 - [Tool Use Visibility](#tool-use-visibility)
 - [Approval Gates](#approval-gates)
+- [Reversibility Tiering](#reversibility-tiering)
+- [Interruption and Steering](#interruption-and-steering)
+- [Cost and Consumption Visibility](#cost-and-consumption-visibility)
+- [Agent Memory as an Editable Surface](#agent-memory-as-an-editable-surface)
+- [Human-Agent Interaction Principles](#human-agent-interaction-principles)
+- [Agent-Computer Interface (ACI)](#agent-computer-interface-aci)
+- [Generative UI and the Agent-to-UI Contract](#generative-ui-and-the-agent-to-ui-contract)
 - [Anti-Patterns](#anti-patterns)
 - [Common AI UX Mistakes](#common-ai-ux-mistakes)
 - [Anthropomorphism Scale](#anthropomorphism-scale)
@@ -709,6 +716,124 @@ APPROVAL GATE UI:
 └────────────────────────────────────────────────────────┘
 ```
 
+### Reversibility Tiering
+
+The Approval Gates table above selects the *UI pattern* once you've decided to gate. This decides *whether* to gate at all — and the deciding variable is reversibility, not importance. The two compose: tier first, then pick the gate UI by trigger type.
+
+| Tier | Action class | Behavior | User recourse |
+|------|--------------|----------|---------------|
+| **Auto-approve** | Safe and reversible (read a file, draft text, run a query) | Agent proceeds silently; action appears in the activity log | Undo from log |
+| **Notify-gate** | Impactful but recoverable (edit a document, move a file, update a record) | Agent proceeds *and* surfaces a dismissible notice with an inline undo | Undo without restarting the task |
+| **Block-gate** | Irreversible or externally visible (send email, delete, publish, spend money) | Agent halts and waits for explicit approval before proceeding | Approve, edit, or deny before anything happens |
+
+Two design consequences most implementations get wrong:
+
+- **A notify-gate without a working undo is just a block-gate with extra steps** — or worse, an unrecoverable action wearing a recoverable-looking UI. If you can't build the undo, promote the action to block-gate.
+- **Tier by what the action does in the world, not by how confident the model is.** High confidence on an irreversible action is still irreversible. Confidence belongs in the display (see Confidence Indicators), never in the gating decision.
+
+Framework-level support now exists for this: LangGraph exposes interrupt/resume as a first-class runtime construct, meaning the pause point is part of the agent's execution graph rather than a UI-layer afterthought. Design the tiers against that runtime capability rather than trying to bolt approval onto a streaming response.
+
+> **Evidence note**: the three-tier shape is widely repeated across 2026 pattern catalogs whose wording is near-identical, so treat the *blog* corroboration as weak — possible circular reposting. The load-bearing evidence is that agent frameworks now ship interrupt/resume primitives, not the number of posts describing the pattern.
+
+### Interruption and Steering
+
+Users change their mind mid-task. Most agent UIs treat this as an error path — offering only "stop" — when it is a normal, expected interaction that deserves first-class support.
+
+Zou et al. (2026) formalize three interruption types and show that all six LLM backbones they tested struggle to handle them gracefully in long-horizon web navigation. Design for all three:
+
+| Type | User intent | Required agent behavior | UI affordance |
+|------|-------------|-------------------------|---------------|
+| **Addition** | "Also do X" | Absorb the new requirement without discarding completed work | Append-to-task input that stays live during execution |
+| **Revision** | "Actually, make it Y instead" | Update the goal, re-plan from current state, keep valid prior steps | Editable plan/goal surface, not a read-only progress log |
+| **Retraction** | "Never mind the X part" | Drop the requirement and unwind only its dependent steps | Per-step or per-requirement removal, not all-or-nothing cancel |
+
+Design rules that follow:
+
+- **The composer stays enabled while the agent works.** Disabling input during execution forces users to either wait or hard-stop — the two worst options.
+- **Distinguish stop / pause / redirect.** A single "Stop" button collapses three different intents into the most destructive one.
+- **Show what survives an interruption.** After a revision, state which completed steps were kept and which are being redone; otherwise users can't tell whether interrupting cost them the whole run.
+- **Test interruption explicitly.** It is a distinct failure surface from the happy path — see [../software-ux-research/references/agentic-evaluation-methods.md](../../software-ux-research/references/agentic-evaluation-methods.md).
+
+*Source: [arXiv:2604.00892](https://arxiv.org/abs/2604.00892), Zou et al., "When Users Change Their Mind: Evaluating Interruptible Agents in Long-Horizon Web Navigation" (2026-04-01). InterruptBench, derived from WebArena-Lite; code and dataset public.*
+
+### Cost and Consumption Visibility
+
+Agent token cost compounds in ways users cannot predict from the interface: retries, growing context windows, and multi-step tool chains all multiply usage invisibly. Datadog's production telemetry reports that token usage per request "more than doubled for median customers year over year and quadrupled for 90th-percentile power users" — which makes consumption a UX surface, not a billing afterthought.
+
+| Surface | What to show | Where |
+|---------|--------------|-------|
+| **Pre-flight estimate** | Expected cost/tokens before a long-running task starts | Task confirmation, alongside the plan |
+| **Live accrual** | Running total while the agent works | Status area, updating with each step |
+| **Post-task receipt** | Actual vs. estimated, with the steps that dominated | Activity log entry |
+| **Budget ceiling** | User-set limit that triggers a block-gate when approached | Settings, surfaced again at the gate |
+
+Rules:
+
+- **Express cost in the user's unit, not yours.** "About 3 minutes and £0.40" beats "~48,000 tokens" for anyone who isn't an engineer. Show tokens as secondary detail.
+- **Retries are the surprise.** A task that silently retried four times and cost 5× the estimate reads as a billing bug. Attribute retry cost explicitly.
+- **A budget ceiling only works if crossing it stops the agent.** A warning the agent blows through is worse than no ceiling, because it trains users to ignore the signal.
+
+### Agent Memory as an Editable Surface
+
+Once an agent persists preferences and facts across sessions, memory stops being infrastructure and becomes a thing users have opinions about. Treat it as a first-class surface:
+
+- **Viewable** — users can see what the agent believes about them, in plain language, not as a JSON dump.
+- **Attributable** — each memory shows when and from which interaction it was learned. "Why does it think that?" is the first question every user asks.
+- **Editable and deletable** — per-item correction and removal, not just a global wipe. A wrong memory that can only be fixed by erasing everything will simply stay wrong.
+- **Scoped** — users can tell which memories affect current behavior versus which are dormant history. This is the distinction between a memory *log* and a memory *state*.
+
+The deletion path carries a legal dimension for EU-facing products: persisted user facts are personal data, and GDPR erasure rights apply to what the agent remembers, not only to what the database row says.
+
+---
+
+## Human-Agent Interaction Principles
+
+Zhu et al. (2026) argue agents should be evaluated on interaction quality rather than autonomous task performance alone, and organize design guidance across **four interaction stages**. The stage frame is more useful than the individual principles for design review, because it surfaces the two stages teams routinely skip.
+
+| Stage | Design question | Commonly skipped because |
+|-------|-----------------|--------------------------|
+| **Initially** | How does the user establish intent, scope, and constraints before the agent acts? | Teams optimize the demo path, where intent is assumed |
+| **During interaction** | Can the user observe, interrupt, steer, and understand what's happening? | Progress is treated as something to display, not something to act on |
+| **Over time** | Does the relationship improve — does it learn preferences, and can the user shape that? | Requires longitudinal thinking; invisible in a single-session usability test |
+| **When things go wrong** | Can the user diagnose the failure, recover, and decide whether to trust the next run? | The failure surface is large and unglamorous |
+
+This maps cleanly onto the design skill's existing state-coverage rule. Where a conventional UI needs loading / empty / error / offline / happy states, an agent surface needs those *plus* the four stages above — "when things go wrong" is not the same as an error state, because it includes partial success, wrong-but-plausible output, and recoverable mid-task failure.
+
+**Applying it as a review**: for any agent surface, ask the four stage questions in order. A surface that answers only "during interaction" is a demo, not a product.
+
+*Source: [arXiv:2606.20630](https://arxiv.org/abs/2606.20630), Zhu, Wang, Xiao, Shen, "Design Principles for Human-Agent Interaction" (2026-05-28). 14 principles across 4 stages, applied to evaluate nine agent systems. Position paper — the principles are argued and applied, not empirically validated in a controlled study.*
+
+### Agent-Computer Interface (ACI)
+
+A design discipline symmetric to human-computer interface design: the *agent's* interface to its tools deserves the same care as the user's interface to the product. Anthropic's position is blunt — "We spent more time optimizing our tools than the overall prompt."
+
+This belongs in a UI/UX reference because tool design is where most agent UX failures originate. An agent that picks the wrong tool, or calls the right tool with malformed arguments, produces a user-visible failure that no amount of interface polish repairs.
+
+| Principle | Applied to tool design |
+|-----------|------------------------|
+| **Write for a competent stranger** | Tool descriptions should read like a docstring written for a new engineer with no context — not a terse schema label |
+| **Poka-yoke the arguments** | Design parameters so malformed calls are hard to express: absolute paths over relative, enums over free strings, required fields over optional-with-defaults |
+| **Test empirically** | Run realistic tasks and read the actual tool calls. Mispicks and malformed arguments are observable, and they cluster |
+| **Match format to failure cost** | Formats the model can produce reliably beat formats that are elegant but easy to get subtly wrong |
+
+*Source: [Anthropic, "Building Effective AI Agents"](https://www.anthropic.com/engineering/building-effective-agents) (2024-12-19). Pre-dates this scan's window but remains canonical and widely cited 18 months on.*
+
+### Generative UI and the Agent-to-UI Contract
+
+When an agent selects or generates interface at runtime rather than the developer pre-building every view, the boundary between agent and UI needs an explicit contract. An emerging spec layer addresses this — AG-UI (CopilotKit), A2UI, Open-JSON-UI, and MCP Apps.
+
+The design-relevant idea is the **event contract shape**, independent of which spec wins: the agent emits typed events (tool call started/finished, generative UI component requested, human-in-the-loop interrupt raised, state delta) and the UI layer owns how each is rendered. That separation is what makes approval gates, tool-use visibility, and streaming coexist without the agent hardcoding presentation.
+
+Design constraints that survive whichever spec you adopt:
+
+- **The agent proposes UI; the design system disposes.** Runtime-generated interface must resolve to your existing components and tokens, or the product's visual coherence degrades one generation at a time.
+- **Constrain the component vocabulary.** An agent that can emit arbitrary layout will eventually emit bad layout. A bounded set of composable, pre-designed components is the accessible and on-brand option.
+- **Generated UI is still UI.** Focus order, target size, contrast, and reduced-motion apply identically. It is not exempt because a model produced it.
+
+Reference implementations worth reading for pattern (not vendoring): [CopilotKit/AG-UI](https://github.com/CopilotKit/CopilotKit) (MIT), [Vercel AI Elements](https://github.com/vercel/ai), [assistant-ui](https://github.com/assistant-ui/assistant-ui) (MIT) — all actively maintained as of 2026-08-10.
+
+> **Maturity caveat**: the GenUI spec layer is unsettled and vendor-authored. Adopt the *contract shape*; treat any specific spec as a bet, not a standard.
+
 ---
 
 ## Anti-Patterns
@@ -716,7 +841,7 @@ APPROVAL GATE UI:
 ### Common AI UX Mistakes
 
 | Anti-Pattern | Problem | Correct Approach |
-|-------------|---------|------------------|
+|--------------|---------|------------------|
 | **Anthropomorphizing** | Creates false expectations of understanding, empathy, or memory | Describe capabilities accurately; avoid first-person emotional language |
 | **"AI says so" authority** | Removes human accountability for decisions | Human reviews AI recommendations; AI provides supporting evidence |
 | **False certainty** | Overconfidence in uncertain outputs erodes trust when wrong | Communicate uncertainty with confidence indicators and hedging language |
@@ -752,7 +877,7 @@ Sources: [Impeccable.style](https://impeccable.style/), [NNGroup](https://www.nn
 ### Anthropomorphism Scale
 
 | Level | Example | Risk | Recommendation |
-|-------|---------|------|---------------|
+|-------|---------|------|----------------|
 | **None** | "Results generated" | No emotional connection | Good for tools and utilities |
 | **Minimal** | "AI Assistant" with abstract icon | Low risk | Recommended default for most products |
 | **Moderate** | Named assistant with personality traits | Medium: users may over-trust | Use for brand differentiation with clear AI disclosure |

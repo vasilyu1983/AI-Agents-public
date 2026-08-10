@@ -17,9 +17,9 @@ These are the specific shapes of AGENTS.md text that turn into agent failures, o
 
 ### 1. Wrong identifier (scheme, function, flag, file path)
 
-> "Run the repo gate locally: `xcodebuild -scheme **ExampleAppLegacy** -destination ... build`."
+> "Run the repo gate locally: `xcodebuild -scheme **CosmicSwift** -destination ... build`."
 
-Real scheme is `ExampleApp`. Agent runs the command verbatim, build fails. Worst because the failure is downstream — the agent thinks it's been given a working command.
+Real scheme is `CosmicCopilot`. Agent runs the command verbatim, build fails. Worst because the failure is downstream — the agent thinks it's been given a working command.
 
 **Fix**: every named identifier in AGENTS.md must round-trip with the actual project. Treat AGENTS.md commands as a contract; copy them from the real run, don't re-type from memory.
 
@@ -157,7 +157,7 @@ Fix high+medium immediately. Bundle low into a follow-up pass.
 
 ## Source-of-truth / exporter pattern (multi-repo portfolios)
 
-When one repo owns a shared resource (e.g. locale catalogs in `web-app/src/messages/`) and other repos consume it via export, all consumer AGENTS.md files must:
+When one repo owns a shared resource (e.g. locale catalogs in `cosmic-copilot/app/src/messages/`) and other repos consume it via export, all consumer AGENTS.md files must:
 
 1. Name the upstream path explicitly: "Catalog source of truth: `<upstream-path>`."
 2. State the export is read-only locally: "Edit upstream, not the export."

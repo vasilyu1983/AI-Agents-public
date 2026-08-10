@@ -53,7 +53,25 @@ arXiv scout request
 - Prefer `sortBy=submittedDate` and `sortOrder=descending` when scouting recent work.
 - Start with `max_results=50`; paginate if needed.
 
-Minimal query skeleton:
+Generate queries from `config.yaml` rather than hand-building them:
+
+```bash
+# List available config keys (skill → categories, window)
+python3 scripts/generate_arxiv_scout_queries.py --list-skills
+
+# Resolve categories, keywords, and time window from config.yaml
+python3 scripts/generate_arxiv_scout_queries.py --skill ai-agents
+
+# Ad-hoc topic when no config key fits
+python3 scripts/generate_arxiv_scout_queries.py --topic "agent memory" \
+    --categories cs.AI cs.CL --windows 30d 90d
+```
+
+The output includes `estimated_min_runtime_seconds` — at the enforced 1 req/3s
+this is the floor for executing the emitted queries serially. Do not parallelise
+to beat it; that is the fastest route to a 429.
+
+Minimal query skeleton (if building by hand):
 
 ```text
 search_query=cat:cs.AI AND (agents OR "tool use")
@@ -152,7 +170,8 @@ Expect 0-2 strong rows per scan — sparse but high credibility per hit. Zero ro
 
 Resources:
 
-- [data/sources.json](data/sources.json) — Official arXiv sources and complementary discovery tools
+- [data/sources.json](data/sources.json) — Official arXiv sources, complementary discovery tools, and the `dead_or_changed` inventory (arXiv 429 enforcement, OpenAlex key mandate, Semantic Scholar key policy, OpenReview v2, Connected Papers / ResearchRabbit tier changes)
+- [scripts/generate_arxiv_scout_queries.py](scripts/generate_arxiv_scout_queries.py) — Query generator; resolves categories/keywords/window from `config.yaml` (`--skill`) or an ad-hoc `--topic`. Stdlib only
 - [references/arxiv-api-guide.md](references/arxiv-api-guide.md) — API query patterns for `export.arxiv.org/api/query`
 - [references/category-taxonomy.md](references/category-taxonomy.md) — Category selection and examples
 - [references/product-retention-categories.md](references/product-retention-categories.md) — Killer-feature mode (HCI retention papers) categories + scoring

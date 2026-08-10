@@ -18,9 +18,8 @@ Design contract (see references/closed-loop-capture.md):
     fires once/session (Claude SessionEnd) or per-turn (Codex Stop).
   - Fail-silent, fail-logged: always exit 0; every decision is logged, and
     that log IS the capture-rate instrumentation the loop design requires.
-  - No hardcoded user paths: skills root is derived from the installed script,
-    discovered in runtime-standard locations, or set via LEARNINGS_SKILLS_ROOT.
-    Portable to any laptop / any username.
+  - No hardcoded user paths: skills root is discovered under $HOME or set via
+    LEARNINGS_SKILLS_ROOT. Portable to any laptop / any username.
 """
 
 from __future__ import annotations
@@ -46,13 +45,15 @@ ENTRY_CAP = 240            # mirror append_learning.py's atomicity cap
 MAX_ATTEMPTS = 3           # per (session, skill); bounds Codex per-turn cost
 SEEN_TTL_SECONDS = 7 * 86400
 
-# Skills-root discovery: env wins; then the script's installed skill tree; then
-# runtime-standard $HOME locations. A candidate must contain append_learning.py.
-SCRIPT_SKILLS_ROOT = Path(__file__).resolve().parents[2]
+# Skills-root discovery: env wins; else common $HOME-relative layouts. Never a
+# hardcoded username. A candidate must actually contain append_learning.py.
 ROOT_CANDIDATES = (
+    "Documents/Code/AI-Agents/frameworks/shared-skills/skills",
+    "Documents/AI-Agents/frameworks/shared-skills/skills",
+    "AI-Agents/frameworks/shared-skills/skills",
+    "projects/AI-Agents/frameworks/shared-skills/skills",
+    "code/AI-Agents/frameworks/shared-skills/skills",
     ".agents/skills",
-    ".codex/skills",
-    ".claude/skills",
 )
 
 
@@ -69,7 +70,6 @@ def log(msg: str) -> None:
 def discover_skills_root() -> Path | None:
     env = os.environ.get("LEARNINGS_SKILLS_ROOT")
     cands = [Path(env)] if env else []
-    cands.append(SCRIPT_SKILLS_ROOT)
     cands += [HOME / c for c in ROOT_CANDIDATES]
     for d in cands:
         if d.is_dir() and (d / APPEND_REL).is_file():

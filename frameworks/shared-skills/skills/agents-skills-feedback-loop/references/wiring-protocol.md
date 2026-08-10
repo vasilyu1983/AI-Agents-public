@@ -4,7 +4,7 @@ How to opt a skill into the learnings loop. Five mechanical steps.
 
 ## Step 1 — Seed the files
 
-From the host skill's directory (e.g. `frameworks/shared-skills/skills/example-tax-guidance/`):
+From the host skill's directory (e.g. `frameworks/shared-skills/skills/project-taxation/`):
 
 ```bash
 cp ../agents-skills-feedback-loop/assets/learnings.template.md ./learnings.consolidated.md
@@ -46,7 +46,7 @@ to `.gitignore` and document the override — but the repo default is committed.
 
 ```bash
 python3 frameworks/shared-skills/skills/agents-skills-feedback-loop/scripts/append_learning.py \
-  frameworks/shared-skills/skills/example-tax-guidance \
+  frameworks/shared-skills/skills/project-taxation \
   --section "Patterns That Work" \
   --text "Learnings loop wired on $(date +%Y-%m-%d); confirms file shape."
 ```
@@ -58,7 +58,7 @@ Confirms the script can read the directory and write a valid entry.
 If you want a portfolio view of which skills have loops wired, add a line to `agents-skills-feedback-loop/learnings.consolidated.md` under *Domain Knowledge*:
 
 ```markdown
-- [YYYY-MM-DD] Loop wired into `example-tax-guidance`. Filter override: HMRC-anchored only.
+- [YYYY-MM-DD] Loop wired into `project-taxation`. Filter override: HMRC-anchored only.
 ```
 
 ## Override Filters (when the default is wrong)

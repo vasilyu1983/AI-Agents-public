@@ -2,8 +2,8 @@
 name: software-ui-ux-design
 description: "Designs and audits UI/UX systems with usability and accessibility requirements. Use when shaping flows, design systems, interaction patterns, or WCAG-aware product behavior."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-10
 ---
 
 # Software UI/UX Design
@@ -70,6 +70,17 @@ Consumer-grade product work is judged on the rows below, not just task completio
 
 If three or more rows fail, the screen is debt regardless of what metrics say. See `consumer-craft-patterns.md` for the full playbook.
 
+For agent surfaces — anything that acts on the user's behalf over multiple steps — add these four rows. They fail independently of the ones above, and a surface can pass every row of the table above while failing all four of these.
+
+| Dimension | Pass | Fail |
+|-----------|------|------|
+| Steerability | user can add, revise, or retract a requirement mid-run; composer stays live | only "Stop", or input disabled while working |
+| Action reversibility | tiered auto / notify+undo / block by what the action does in the world | one confirm dialog for everything, or none |
+| Cost visibility | estimate before, accrual during, receipt after — in the user's units | token counts only, or nothing until the invoice |
+| Memory legibility | user can see, attribute, edit, and delete what the agent remembers | opaque personalization, or global wipe as the only control |
+
+See [references/ai-automation-ux.md](references/ai-automation-ux.md) for each.
+
 ## Workflow
 
 1. Confirm the mode: audit, new UI, design-system decision, or AI frontend brief.
@@ -93,7 +104,7 @@ UI/UX design task
 
 ## Accessibility Baseline
 
-WCAG 2.2 is the current W3C standard (October 2023; became ISO standard October 2025) and the legally mandated baseline under the European Accessibility Act (in force June 2025), ADA/Section 508, and EN 301 549. WCAG 3.0 remains a Working Draft (updated March 2026 with 174 draft outcomes); Candidate Recommendation is anticipated Q4 2027 and full Recommendation 2028 or later — do not use it as a compliance target yet.
+WCAG 2.2 is the current W3C standard (October 2023; became ISO standard October 2025) and the legally mandated baseline under the European Accessibility Act (in force June 2025), ADA/Section 508, and EN 301 549. WCAG 3.0 remains a Working Draft — the 3 March 2026 update published the majority of requirements plus a proposed conformance model for public review, and renamed "outcomes" to "requirements". Candidate Recommendation is anticipated Q4 2027 and full Recommendation 2028 or later — do not use it as a compliance target yet. Note its broader stated scope (static, dynamic, interactive, and *streaming* content; apps, tools, publishing) when designing token-by-token streaming agent surfaces: WCAG 2.2 remains the compliance baseline, but streaming UI is squarely in WCAG 3's forward scope.
 
 | Requirement | Minimum target | Notes |
 |-------------|---------------|-------|
@@ -164,6 +175,9 @@ When using AI to generate UI:
 - Recommending patterns from another platform without checking whether web, iOS, or Android conventions support them cleanly.
 - Treating EU compliance as a legal afterthought. The European Accessibility Act (in force since 28 June 2025) and DSA Article 25 (dark-pattern prohibition) create design-level obligations with active enforcement (in September 2025 the CNIL fined Google €325M and SHEIN €150M for cookie-consent dark patterns). For any EU-facing B2C surface, accessibility and consent design are legal requirements, not preferences.
 - Specifying motion or scroll-driven animation without `prefers-reduced-motion` fallback. CSS scroll-driven animations are invisible to users with reduced-motion preferences if the spec doesn't explicitly handle the case.
+- Designing agent surfaces where the only mid-run control is "Stop". Users change their mind in three distinct ways — adding a requirement, revising the goal, retracting part of it — and collapsing all three into a cancel button forces the most destructive option. Interruption is a normal interaction, not an error path.
+- Gating agent actions by model confidence instead of by real-world reversibility. High confidence on an irreversible action is still irreversible; confidence belongs in the display, never in the gating decision.
+- Shipping a "notify and undo" affordance whose undo does not actually work. That is an unrecoverable action wearing a recoverable-looking UI — worse than an honest confirmation dialog. If the undo can't be built, promote the action to a blocking gate.
 
 ## Common Anti-Patterns
 
@@ -226,7 +240,7 @@ When using AI to generate UI:
 
 - [references/cro-framework.md](references/cro-framework.md) — conversion optimization via research and testing
 - [references/ai-assisted-frontend-briefing.md](references/ai-assisted-frontend-briefing.md) — briefing AI to generate UI
-- [references/ai-automation-ux.md](references/ai-automation-ux.md) — UX for chat, agents, and automation
+- [references/ai-automation-ux.md](references/ai-automation-ux.md) — UX for chat, agents, and automation; reversibility-tiered approval gates, interruption/steering, cost visibility, agent memory surfaces, the 4-stage human-agent frame, ACI tool design, and the agent-to-UI event contract
 - [references/ai-design-tools.md](references/ai-design-tools.md) — AI-assisted design tools: use, quality control, ethics
 
 *Performance*
@@ -236,6 +250,8 @@ When using AI to generate UI:
 - [data/sources.json](data/sources.json)
 
 **Scripts** — offline design-database search engine (stdlib-only Python, vendored from [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), MIT)
+
+> **Upstream trust note (verified 2026-08-10):** that repo shows 115,186 stars against only 493 watchers and 30 contributors on a repo created 2025-11-30 — a star-inflation signature. This says nothing about the vendored content, which was taken on merit and is unaffected. It does mean: never cite its star count as social proof, and re-diff before pulling any upstream update.
 
 - `scripts/search.py` — CLI: `--design-system`, `--domain <domain>`, `--stack <stack>`, `--persist`
 - `scripts/core.py` — BM25 engine and CSV domain config

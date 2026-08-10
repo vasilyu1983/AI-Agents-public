@@ -11,7 +11,7 @@ How to validate AGENTS.md / CLAUDE.md across multiple repos and find alignment o
 - [Suppressing False Positives](#suppressing-false-positives)
 - [Recommended Cadence](#recommended-cadence)
 - [What compare_blocks.sh Tells You](#what-compare_blockssh-tells-you)
-- [Worked Example: Four-Repo Product Portfolio](#worked-example-four-repo-product-portfolio)
+- [Worked Example: Cosmic Portfolio (4 repos)](#worked-example-cosmic-portfolio-4-repos)
 - [Limitations](#limitations)
 
 ## The Three Scripts
@@ -74,13 +74,13 @@ The validator handles four common path styles automatically:
 |------------|---------|------------|
 | Repo-rooted | `` `scripts/foo.sh` `` | Tries `<repo>/scripts/foo.sh` |
 | Explicit relative | `` `./scripts/foo.sh` `` | Same |
-| Sibling repo | `` `../mobile-ios/x.md` `` | Resolves at parent dir; treated valid if sibling repo path exists |
+| Sibling repo | `` `../cosmic-swift/x.md` `` | Resolves at parent dir; treated valid if sibling repo path exists |
 | Prefix-relative | `` `lib/stripe/` `` (when convention is "all `lib/` paths under `app/src/`") | Auto-tries `app/`, `app/src/`, `app/lib/`, `src/`, `lib/`, `docs/context/` prefixes |
 
 For non-default prefix conventions, declare them explicitly in the AGENTS.md header:
 
 ```markdown
-<!-- audit-path-prefix: ../mobile-ios/docs/context/ -->
+<!-- audit-path-prefix: ../cosmic-swift/docs/context/ -->
 <!-- audit-path-prefix: app/src/, app/lib/ -->
 ```
 
@@ -115,14 +115,14 @@ For each H2 section that appears in 2+ repos:
 
 The output is informational, not an enforcement gate. Use it as input to a quarterly review.
 
-## Worked Example: Four-Repo Product Portfolio
+## Worked Example: Cosmic Portfolio (4 repos)
 
-An illustrative run across `mobile-ios`, `web-app`, `landing-site`, and `mobile-android` surfaced:
+Initial run on the cosmic portfolio (cosmic-swift, cosmic-copilot, cosmic-landing, cosmic-kotlin) surfaced:
 
-- 42 false-positive HIGH issues from prefix-relative paths in `web-app` — fixed by adding `<!-- audit-path-prefix: ../mobile-ios/docs/context/ -->` and the auto-prefix list.
-- 4 real stale-path HIGH issues in `landing-site` — references to PRD/design/strategy docs that didn't exist. Fixed by replacing them with real existing doc paths.
-- 2 expected stale-path HIGH issues in `mobile-android` — `./gradlew`, `res/values/strings.xml`. The first is scaffold-stage tooling; the second is a "DON'T do this" anti-pattern example. Suppressed via `<!-- audit-ignore: ./gradlew, res/values/strings.xml -->`.
-- 1 scaffold-tense MED in `mobile-android` — auto-suppressed by the existing Pre-Code Caveat section.
+- 42 false-positive HIGH issues from prefix-relative paths in cosmic-copilot — fixed by adding `<!-- audit-path-prefix: ../cosmic-swift/docs/context/ -->` and the auto-prefix list.
+- 4 real stale-path HIGH issues in cosmic-landing — references to PRD/design/strategy docs that didn't exist. Fixed by replacing with real existing doc paths.
+- 2 expected stale-path HIGH issues in cosmic-kotlin — `./gradlew`, `res/values/strings.xml`. The first is scaffold-stage tooling; the second is a "DON'T do this" anti-pattern example. Suppressed via `<!-- audit-ignore: ./gradlew, res/values/strings.xml -->`.
+- 1 scaffold-tense MED in cosmic-kotlin — auto-suppressed by the existing Pre-Code Caveat section.
 
 Final state: 0 HIGH / 0 MED / 0 LOW across all four repos.
 

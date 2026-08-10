@@ -1,0 +1,185 @@
+{
+  "_doc": "Model pricing, USD per 1M tokens. Owned by this skill: read at runtime by this skill's scripts via _lib/resolve_versions.py (pricing_path/load_pricing), which resolves symlinks first so ~/.claude, ~/.agents and ~/.codex deployments all read this same file. Hand-maintained \u2014 no public API resolves provider pricing \u2014 so bump last_verified when you re-check the vendor pages. Retired model IDs stay: replaying historical usage logs must price them at the rates that applied then.",
+  "_maintenance": "Hand-maintained: no public API resolves provider prices the way npm resolves package versions. Bump last_verified when you re-check the vendor pricing pages; consumers warn once the table is older than stale_after_days. Retired model IDs are kept deliberately \u2014 replaying historical usage logs must price them at the rates that applied then.",
+  "last_verified": "2026-08-10",
+  "stale_after_days": 30,
+  "sources": {
+    "anthropic": "https://claude.com/pricing",
+    "openai": "https://openai.com/api/pricing/",
+    "google": "https://ai.google.dev/gemini-api/docs/pricing",
+    "mistral": "https://mistral.ai/pricing",
+    "groq": "https://groq.com/pricing",
+    "together": "https://together.ai/pricing"
+  },
+  "models": {
+    "anthropic/claude-fable-5": {
+      "input_per_1m": 10.0,
+      "model": "claude-fable-5",
+      "notes": "Claude Fable 5 (GA 2026-06-09); <5% of high-risk sessions fall back to Opus 4.8 billing",
+      "output_per_1m": 50.0,
+      "vendor": "anthropic"
+    },
+    "anthropic/claude-haiku-4-5": {
+      "cache_read_per_1m": 0.08,
+      "cache_write_per_1m": 1.0,
+      "input_per_1m": 1.0,
+      "model": "claude-haiku-4-5",
+      "notes": "Claude Haiku 4.5 (fastest tier). Verified against platform.claude.com/docs/en/about-claude/pricing on 2026-08-10. Note $0.80/$4.00 is Haiku 3.5 (retired), not this model.",
+      "output_per_1m": 5.0,
+      "vendor": "anthropic"
+    },
+    "anthropic/claude-opus-4-5": {
+      "cache_read_per_1m": 1.5,
+      "cache_write_per_1m": 18.75,
+      "input_per_1m": 15.0,
+      "model": "claude-opus-4-5",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 75.0,
+      "vendor": "anthropic"
+    },
+    "anthropic/claude-opus-4-6": {
+      "cache_read_per_1m": 1.5,
+      "cache_write_per_1m": 18.75,
+      "input_per_1m": 15.0,
+      "model": "claude-opus-4-6",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 75.0,
+      "vendor": "anthropic"
+    },
+    "anthropic/claude-opus-4-7": {
+      "cache_read_per_1m": 1.5,
+      "cache_write_per_1m": 18.75,
+      "input_per_1m": 15.0,
+      "model": "claude-opus-4-7",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 75.0,
+      "vendor": "anthropic"
+    },
+    "anthropic/claude-opus-4-8": {
+      "input_per_1m": 5.0,
+      "model": "claude-opus-4-8",
+      "notes": "Claude Opus 4.8 (standalone flagship)",
+      "output_per_1m": 25.0,
+      "vendor": "anthropic"
+    },
+    "anthropic/claude-sonnet-4-5": {
+      "cache_read_per_1m": 0.3,
+      "cache_write_per_1m": 3.75,
+      "input_per_1m": 3.0,
+      "model": "claude-sonnet-4-5",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 15.0,
+      "vendor": "anthropic"
+    },
+    "anthropic/claude-sonnet-4-6": {
+      "cache_read_per_1m": 0.3,
+      "cache_write_per_1m": 3.75,
+      "input_per_1m": 3.0,
+      "model": "claude-sonnet-4-6",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 15.0,
+      "vendor": "anthropic"
+    },
+    "anthropic/claude-sonnet-5": {
+      "input_per_1m": 3.0,
+      "model": "claude-sonnet-5",
+      "notes": "Claude Sonnet 5 (GA 2026-06-30); intro price $2/$10 through 2026-08-31 \u2014 confirm which rate applies",
+      "output_per_1m": 15.0,
+      "vendor": "anthropic"
+    },
+    "google/gemini-3.1-pro": {
+      "input_per_1m": 2.0,
+      "model": "gemini-3.1-pro",
+      "notes": "Gemini 3.1 Pro, <=200k ctx (doubles above 200k); third-party aggregator figures \u2014 verify at ai.google.dev/gemini-api/docs/pricing",
+      "output_per_1m": 12.0,
+      "vendor": "google"
+    },
+    "google/gemini-3.5-flash": {
+      "input_per_1m": 1.5,
+      "model": "gemini-3.5-flash",
+      "notes": "Gemini 3.5 Flash (GA 2026-05-19); third-party aggregator figures \u2014 verify at ai.google.dev/gemini-api/docs/pricing",
+      "output_per_1m": 9.0,
+      "vendor": "google"
+    },
+    "openai/codex-mini": {
+      "cache_read_per_1m": 0.375,
+      "input_per_1m": 1.5,
+      "model": "codex-mini",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 6.0,
+      "vendor": "openai"
+    },
+    "openai/gpt-4.1": {
+      "cache_read_per_1m": 0.5,
+      "input_per_1m": 2.0,
+      "model": "gpt-4.1",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 8.0,
+      "vendor": "openai"
+    },
+    "openai/gpt-5": {
+      "cache_read_per_1m": 0.5,
+      "input_per_1m": 2.0,
+      "model": "gpt-5",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 8.0,
+      "vendor": "openai"
+    },
+    "openai/gpt-5.4": {
+      "cache_read_per_1m": 0.5,
+      "input_per_1m": 2.0,
+      "model": "gpt-5.4",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 8.0,
+      "vendor": "openai"
+    },
+    "openai/gpt-5.5": {
+      "cache_read_per_1m": 0.5,
+      "input_per_1m": 2.0,
+      "model": "gpt-5.5",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 8.0,
+      "vendor": "openai"
+    },
+    "openai/gpt-5.6-luna": {
+      "cache_read_per_1m": 0.25,
+      "input_per_1m": 1.0,
+      "model": "gpt-5.6-luna",
+      "notes": "GPT-5.6 Luna (speed/cost tier)",
+      "output_per_1m": 6.0,
+      "vendor": "openai"
+    },
+    "openai/gpt-5.6-sol": {
+      "cache_read_per_1m": 1.25,
+      "input_per_1m": 5.0,
+      "model": "gpt-5.6-sol",
+      "notes": "GPT-5.6 Sol (top tier, long-horizon/agentic/cyber-science; public since 2026-07-09)",
+      "output_per_1m": 30.0,
+      "vendor": "openai"
+    },
+    "openai/gpt-5.6-terra": {
+      "cache_read_per_1m": 0.625,
+      "input_per_1m": 2.5,
+      "model": "gpt-5.6-terra",
+      "notes": "GPT-5.6 Terra (balanced efficiency/capability)",
+      "output_per_1m": 15.0,
+      "vendor": "openai"
+    },
+    "openai/o3": {
+      "cache_read_per_1m": 0.5,
+      "input_per_1m": 2.0,
+      "model": "o3",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 8.0,
+      "vendor": "openai"
+    },
+    "openai/o4-mini": {
+      "cache_read_per_1m": 0.275,
+      "input_per_1m": 1.1,
+      "model": "o4-mini",
+      "notes": "historical rate retained for replaying past usage logs",
+      "output_per_1m": 4.4,
+      "vendor": "openai"
+    }
+  }
+}

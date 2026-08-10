@@ -229,7 +229,7 @@ if [[ -n "$ts_authoritative" ]]; then
 fi
 
 # Scaffold-tense smell: present-tense enforcement in repos with very few code files
-if [[ "$has_pre_code_caveat" -eq 0 && ! -d "$repo/src" && ! -d "$repo/app" && ! -e "$repo/project.yml" && ! -e "$repo/package.json" && ! -e "$repo/build.gradle" && ! -e "$repo/build.gradle.kts" && ! -e "$repo/Package.swift" ]]; then
+if [[ "$has_pre_code_caveat" -eq 0 && ! -d "$repo/src" && ! -d "$repo/app" && ! -d "$repo/CosmicCopilot" && ! -e "$repo/package.json" && ! -e "$repo/build.gradle" && ! -e "$repo/build.gradle.kts" && ! -e "$repo/Package.swift" ]]; then
   if grep -qE '(must come from|must be|All user-facing)' "$canonical" 2>/dev/null; then
     add_issue "MED" "scaffold-tense" "AGENTS.md uses present-tense enforcement but no code roots detected (src/ app/ etc); add a Pre-Code Caveat (see references/cross-doc-audit.md)"
   fi

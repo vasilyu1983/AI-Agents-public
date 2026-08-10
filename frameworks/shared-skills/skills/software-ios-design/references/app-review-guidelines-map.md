@@ -85,7 +85,7 @@ This gate runs **before** design or code. 4.3(b) is the rule that rejects whole 
 - Give substantial **free value before any paywall** (clears 3.1.1 and the "this app does nothing but ask for money" rejection).
 - Make it demonstrably **more than a content feed**: local state, user inputs, and features that justify being an app rather than a webpage (clears 4.2).
 - Differentiate from the category clones in a way a reviewer can see in 30 seconds of use.
-- If advising on a divination or spiritual-guidance concept, **say this explicitly up front**: "This category is named in Guideline 4.3(b); to pass review the app must clear a unique/high-quality bar — here is what that requires." Do not present a generic reading-generator as review-ready.
+- If advising on a divination/cosmic concept, **say this explicitly up front**: "This category is named in Guideline 4.3(b); to pass review the app must clear a unique/high-quality bar — here is what that requires." Do not present a generic reading-generator as review-ready.
 
 ## 5. Legal
 
@@ -102,7 +102,7 @@ This gate runs **before** design or code. 4.3(b) is the rule that rejects whole 
 If the app generates user-facing text/images with a model (local or cloud), additionally:
 
 - **1.2 applies even to model output.** A surface that can produce content shown to the user needs a safety filter and, where users can share generated content, a report path. Safety/refusal copy must be content that was actually reviewed — not free-form model output.
-- **Divination and spiritual-guidance AI features sit inside 4.3(b).** "AI horoscope/tarot reader" does not escape the saturated-category bar by being AI — it raises it. The unique/high-quality requirement above still governs. See [../../software-ios-ai-engine/SKILL.md](../../software-ios-ai-engine/SKILL.md) for the engine-side framing.
+- **Divination/cosmic AI features sit inside 4.3(b).** "AI horoscope/tarot reader" does not escape the saturated-category bar by being AI — it raises it. The unique/high-quality requirement above still governs. See [../../software-ios-ai-engine/SKILL.md](../../software-ios-ai-engine/SKILL.md) for the engine-side framing.
 - **2.5.2:** shipping/updating model weights, prompts, sentence-bank fragments, or retrieval data is allowed; downloading code that changes app behavior is not.
 
 ## Pre-submit gate

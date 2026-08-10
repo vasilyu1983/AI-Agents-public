@@ -67,6 +67,21 @@ mcp-server-filesystem/
 
 ## 3. Package Configuration
 
+> **Version policy.** Caret ranges below already pull the newest compatible
+> release on `npm install`; they pin **major** versions only, because a major is
+> a breaking-change boundary this template's code depends on. Resolve current
+> majors before starting a project rather than trusting this file's age:
+>
+> ```bash
+> python3 frameworks/shared-skills/scripts/refresh-versions.py
+> cat frameworks/shared-skills/skills/agents-mcp/data/versions.json
+> ```
+>
+> That is this skill's own `data/versions.json`, rewritten in place by the
+> refresh script. If a major there is ahead of a
+> range below, read that package's migration guide first — a major bump is a
+> code change, not a number change.
+
 ```json
 {
   "name": "[mcp-server-filesystem]",
@@ -82,15 +97,15 @@ mcp-server-filesystem/
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
-    "zod": "^3.22.0",
+    "zod": "^4.0.0",
     "winston": "^3.11.0",
     "minimatch": "^9.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
+    "@types/node": "^24.0.0",
     "tsx": "^4.7.0",
-    "typescript": "^5.3.0",
-    "vitest": "^1.0.0"
+    "typescript": "^7.0.0",
+    "vitest": "^3.0.0"
   }
 }
 ```

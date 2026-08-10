@@ -74,7 +74,7 @@ Production cost modeling, unit economics, and decision frameworks for LLM system
 | Claude Opus 4.8 | $5 | $25 | Standalone flagship; also serves Fable 5 fallback sessions |
 | Claude Sonnet 5 | $3 / $2 (intro) | $15 / $10 (intro) | GA 2026-06-30; introductory pricing through 2026-08-31, then list price. Verify which rate applies before modeling cost. |
 | Claude Sonnet 4.6 | $3 | $15 | Now legacy — still served, but plan migration to Sonnet 5 for new work |
-| Claude Haiku 4.5 | $1 | $5 | Fastest tier |
+| Claude Haiku 4.5 | $1.00 | $5 | Fastest tier |
 | Gemini 3.1 Pro | Verify at ai.google.dev | Verify | Large-context frontier option |
 | Gemini 3.5 Flash | Verify at ai.google.dev | Verify | Speed tier |
 | GPT-5.6 Sol | $5 | $30 | OpenAI's current top tier for long-horizon/agentic/cyber-science work (public since 2026-07-09) |

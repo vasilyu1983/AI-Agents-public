@@ -53,7 +53,7 @@ Use this reference when native iOS work needs verified runtime execution, proof-
 - Do not keep retrying an unavailable MCP path; switch to Apple CLI as soon as tool reality is clear.
 - Route simulator drift, packaging failures, missing executables, and stale-app suspicion to [software-ios-runtime-debugging](../../software-ios-runtime-debugging/SKILL.md).
 - Magic numbers in Canvas drawing code are geometric constants, not layout tokens. Do not extract them into the design system.
-- Magic numbers in SwiftUI layout code should use design-system tokens such as `AppSpacing` and `AppRadius`.
+- Magic numbers in SwiftUI layout code should use design-system tokens such as `CosmicSpacing` and `CosmicRadius`.
 - On a dirty git tree, prefer a stash -> narrow edit -> commit -> pop workflow over manual hunk juggling when landing a surgical fix.
 - If the project uses XcodeGen and the target declares `sources: [path: ...]`, regenerate the project after adding new Swift files instead of editing `.pbxproj`.
 

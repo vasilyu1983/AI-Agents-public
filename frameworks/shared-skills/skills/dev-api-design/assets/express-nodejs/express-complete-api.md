@@ -68,6 +68,26 @@ import { ApiError, NotFoundError } from '@/utils/errors';
 
 ## 1. Dependencies (package.json)
 
+> **Version policy.** The ranges below are caret ranges, so `npm install` already
+> pulls the newest compatible release — they do not need editing every month.
+> They pin **major** versions only, because a major is a breaking-change boundary
+> the code in this template depends on (Express 5 error handling, Zod 4 schema
+> API, Prisma 7 client).
+>
+> Before starting a new project, resolve the current majors rather than trusting
+> this file's age:
+>
+> ```bash
+> # Refresh the resolved versions (npm / nodejs.org / endoflife.date)
+> python3 frameworks/shared-skills/scripts/refresh-versions.py
+> cat frameworks/shared-skills/skills/dev-api-design/data/versions.json
+> ```
+>
+> That file is this skill's own `data/versions.json`, rewritten in place by the
+> refresh script. If a major there is ahead of a range below, check that
+> package's migration guide before bumping — a major bump is a code change, not
+> a number change.
+
 ```json
 {
   "name": "express-api",
@@ -81,32 +101,31 @@ import { ApiError, NotFoundError } from '@/utils/errors';
     "generate": "prisma generate"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "express-async-errors": "^3.1.1",
-    "@prisma/client": "^5.8.0",
-    "zod": "^3.22.4",
+    "express": "^5.0.0",
+    "@prisma/client": "^7.0.0",
+    "zod": "^4.0.0",
     "bcrypt": "^5.1.1",
     "jsonwebtoken": "^9.0.2",
-    "dotenv": "^16.3.1",
-    "helmet": "^7.1.0",
+    "dotenv": "^17.0.0",
+    "helmet": "^8.0.0",
     "cors": "^2.8.5",
     "express-rate-limit": "^7.1.5",
-    "redis": "^4.6.12",
+    "redis": "^6.0.0",
     "morgan": "^1.10.0",
     "winston": "^3.11.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.10.6",
+    "@types/express": "^5.0.0",
+    "@types/node": "^24.0.0",
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/cors": "^2.8.17",
     "@types/morgan": "^1.9.9",
-    "typescript": "^5.3.3",
+    "typescript": "^7.0.0",
     "tsx": "^4.7.0",
-    "jest": "^29.7.0",
-    "@types/jest": "^29.5.11",
-    "supertest": "^6.3.3",
+    "jest": "^30.0.0",
+    "@types/jest": "^30.0.0",
+    "supertest": "^7.0.0",
     "@types/supertest": "^6.0.2",
     "prisma": "^5.8.0"
   }
@@ -807,7 +826,8 @@ export default router;
 
 ```typescript
 import express from 'express';
-import 'express-async-errors';
+// Express 5 forwards rejected promises from async handlers to the error
+// middleware natively — the express-async-errors shim is no longer needed.
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -946,4 +966,4 @@ npm test
 - Structured logging
 - Graceful shutdown handling
 - Type safety throughout
-- Async error handling with express-async-errors
+- Async error handling (native in Express 5)

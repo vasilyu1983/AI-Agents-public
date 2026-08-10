@@ -216,7 +216,7 @@ Vercel bills at the team level, but the Usage dashboard breaks down consumption 
 
 **Common pattern -- a single landing site consuming most bandwidth:**
 
-A marketing site or landing page (e.g., `landing-site`) may generate 80%+ of Fast Origin Transfer because it has heavy assets, SSR on every page, or no CDN caching. For this pattern, evaluate:
+A marketing site or landing page (e.g., `cosmic-landing`) may generate 80%+ of Fast Origin Transfer because it has heavy assets, SSR on every page, or no CDN caching. For this pattern, evaluate:
 
 - Can the site be fully statically exported (`output: 'export'` in Next.js)?
 - Should it move to a platform with free or cheaper bandwidth (Cloudflare Pages, Netlify)?

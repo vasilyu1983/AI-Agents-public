@@ -12,7 +12,7 @@ set -euo pipefail
 #   ./scripts/scaffold-composers.sh <target-swift-source-root>
 #
 # Example:
-#   ./scripts/scaffold-composers.sh App/Features/Ask/Composers
+#   ./scripts/scaffold-composers.sh CosmicCopilot/Features/Ask/Composers
 #
 # After running, wire the chain in your DI container and the screen's store.
 # Do not commit these stubs without implementing them — empty composers fall

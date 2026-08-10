@@ -2,8 +2,8 @@
 name: software-ux-research
 description: "Guides user research methods and research ops. Use when running interviews, usability tests, surveys, or A/B tests to de-risk product decisions."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-10
 ---
 
 # Software UX Research
@@ -134,6 +134,7 @@ Before delivering any research output:
 - [ ] Consent obtained; recordings, transcripts, and participant identity stored separately
 - [ ] EU/UK participant data: DPA in place before sending to AI-processing vendor; EU AI Act high-risk (Annex III) deployer obligations postponed from 2026-08-02 to 2027-12-02 under the Digital Omnibus — the European Parliament (16 June 2026) and Council (29 June 2026) have both given final approval; the act enters into force shortly after Official Journal publication (verify the exact effective date before citing it as settled law)
 - [ ] Disconfirming evidence documented, not only confirming clips
+- [ ] Agentic products: study ran multi-turn, exercised at least one interruption, and included seeded incorrect outputs if trust was measured
 
 ## Research Ops Rules
 
@@ -150,7 +151,9 @@ For AI-powered product research (the *thing being studied* is AI-driven):
 - test trust calibration, failure recovery, explainability, tool-use disclosure, and approval gating
 - separate wrong output from unclear output and non-recoverable failure
 - run multi-turn sessions for agentic products — single-turn studies miss most of the failure surface
-- see [references/ai-in-research.md](references/ai-in-research.md) for the full dimension list and method mapping
+- test steering explicitly: users change their mind mid-task, and addition/revision/retraction fail differently
+- measure trust calibration against seeded *incorrect* outputs; an all-correct study cannot distinguish good judgment from blind acceptance
+- see [references/ai-in-research.md](references/ai-in-research.md) for the full dimension list and method mapping, and [references/agentic-evaluation-methods.md](references/agentic-evaluation-methods.md) for the multi-turn protocols
 
 For AI *in the research workflow* (synthesis tools, AI moderators, synthetic users):
 
@@ -189,6 +192,10 @@ For accessibility-sensitive research:
 - Post-hoc segmentation hunting: slicing experiment results by 20 segments until one is significant. Pre-register segmentation analysis before the experiment reads out, or apply a correction (Bonferroni, FDR) when segments are exploratory.
 - Satisfaction theater: surveys conducted to put a number on a slide rather than to inform a decision. If the survey result would not change anything, do not run it.
 - Power-gaming experimentation: extending experiments until significance appears, hiding losing variants, or changing the primary metric mid-experiment to ship a desired outcome. Each of these invalidates the result.
+- Rating agent transcripts instead of having raters use the agent. Someone who did not have the conversation cannot judge trust, patience, or perceived competence — their scores track fluency instead. Multi-turn evaluation requires first-person experience.
+- Measuring trust in an AI product using only correct outputs. Without seeded errors you can measure acceptance, but you cannot distinguish good calibration from blind acceptance — and over-reliance is the failure that matters.
+- Reporting task completion for agentic tasks without elapsed time and cost. A task that completed after six minutes and four retries is not the same outcome as one that took twenty seconds; completion rate alone hides it.
+- Citing a model benchmark as a UX finding. Benchmarks tell you the capability ceiling, not whether your interface lets users reach it.
 - Recruiting the customer-success rolodex as a research panel: those users are atypically engaged, vocal, and cooperative. Generalizing from them is a top-of-funnel research failure — find disengaged, lapsed, and never-converted users too.
 
 ## Navigation
@@ -204,6 +211,7 @@ For accessibility-sensitive research:
 - [references/ab-testing-implementation.md](references/ab-testing-implementation.md)
 - [references/non-technical-user-research.md](references/non-technical-user-research.md)
 - [references/ai-in-research.md](references/ai-in-research.md)
+- [references/agentic-evaluation-methods.md](references/agentic-evaluation-methods.md) — evaluating multi-turn agentic products: interruption/steering testing, multi-turn first-person evaluation, trust calibration with seeded errors, agent-augmented heuristic evaluation
 - [references/consumer-experience-quality.md](references/consumer-experience-quality.md) — Continuous Discovery, JTBD Switch, friction logging, emotion measurement, diary studies, competitive UX benchmarking, opportunity sizing, JTBD outcome statements, watch parties, embedding models
 - [references/ia-testing-guide.md](references/ia-testing-guide.md) — card sort (open/closed/hybrid), tree testing, first-click testing, 5-second testing
 - [references/evaluative-methods-guide.md](references/evaluative-methods-guide.md) — Wizard of Oz, concierge, painted-door, fake-door/smoke, conjoint, MaxDiff, Kano, beta panels

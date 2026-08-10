@@ -59,7 +59,7 @@ Measures the durability and quality of contributed code.
 
 ### Code-Only LOC
 
-Every D2 sub-signal that references "lines" or "additions" is computed against `code_loc`, not raw `net_loc`. `code_loc` excludes `.json`, `.yaml`, `.yml`, `.toml`, `.md`, `.rst`, `.txt`, `.csv`, lockfiles, snapshots, generated paths, and editor metadata — see the project-scoped counterpart skill's `packs/example-pack/references/loc-measurement-best-practices.md` → "Code LOC" for the full include / exclude lists. Test files count as `code_loc` but are tagged `test_loc` so churn and duplication ratios can separate test from product code.
+Every D2 sub-signal that references "lines" or "additions" is computed against `code_loc`, not raw `net_loc`. `code_loc` excludes `.json`, `.yaml`, `.yml`, `.toml`, `.md`, `.rst`, `.txt`, `.csv`, lockfiles, snapshots, generated paths, and editor metadata — see the project-scoped counterpart skill's `packs/it-insider-risk/references/loc-measurement-best-practices.md` → "Code LOC" for the full include / exclude lists. Test files count as `code_loc` but are tagged `test_loc` so churn and duplication ratios can separate test from product code.
 
 ### Complexity-Weighted Rating
 
@@ -70,7 +70,7 @@ weighted_code_lines = Σ over touched code files:
     net_code_lines(file) × (1 + α · max(0, ΔCC(file)) + β · novelty(file))
 ```
 
-with `α ≈ 0.05`, `β ≈ 1.0`, `ΔCC` capped at +20, `novelty ∈ {0, 0.25, 0.5}`. Aggregate per person over the window, compare against team median, and assign the four-band rating used in the sub-signal table. This is the same rating defined in the project-scoped counterpart skill's `packs/example-pack/references/loc-measurement-best-practices.md` → "Complexity-Weighted Rating"; both skills must produce identical numbers from the same CSV input.
+with `α ≈ 0.05`, `β ≈ 1.0`, `ΔCC` capped at +20, `novelty ∈ {0, 0.25, 0.5}`. Aggregate per person over the window, compare against team median, and assign the four-band rating used in the sub-signal table. This is the same rating defined in the project-scoped counterpart skill's `packs/it-insider-risk/references/loc-measurement-best-practices.md` → "Complexity-Weighted Rating"; both skills must produce identical numbers from the same CSV input.
 
 Refactors that *lower* complexity keep credit (ΔCC is floored at zero, not negative). Mega-commits where one commit contains > 30% of window `code_loc` fall back to manual review — the rating is non-robust under squash-merge until the diff is split.
 

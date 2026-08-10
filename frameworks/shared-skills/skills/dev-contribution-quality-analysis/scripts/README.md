@@ -50,7 +50,7 @@ repo,commit_hash,author_name,author_email,datetime,weekday,hour,timezone,subject
 | docs_ins, docs_del | int | Markdown and prose (`.md .mdx .rst .txt .adoc`) |
 | other_ins, other_del | int | Data, lockfiles, generated, vendored, snapshots, minified |
 
-D2 sub-signals that reference "lines" or "code volume" use `code_ins + code_del` (`code_loc` / `code_churn`), not raw `insertions + deletions`. Reports must show `support_share = (test+config+docs+other) / total` next to the headline number so readers can see how much of the diff is supporting activity vs. authored code. The classification rules and the complexity-weighted rating formula live in the project-scoped counterpart skill's `packs/example-pack/references/loc-measurement-best-practices.md`.
+D2 sub-signals that reference "lines" or "code volume" use `code_ins + code_del` (`code_loc` / `code_churn`), not raw `insertions + deletions`. Reports must show `support_share = (test+config+docs+other) / total` next to the headline number so readers can see how much of the diff is supporting activity vs. authored code. The classification rules and the complexity-weighted rating formula live in the project-scoped counterpart skill's `packs/it-insider-risk/references/loc-measurement-best-practices.md`.
 
 For the rating itself, use this skill's vendored `compute-code-rating.py`. It reads the same CSV and produces `code-rating.csv` and `code-rating.md` keyed on the resolved person identity. This skill's `extract-contribution-profile.py` should consume those outputs rather than reimplement classification.
 

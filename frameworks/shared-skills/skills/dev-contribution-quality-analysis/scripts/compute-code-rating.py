@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
-"""Summarise code-focused contribution activity from an augmented commit CSV.
+"""Compute per-person code-only LOC and a complexity-weighted rating from raw-commits.csv.
 
-The input must include code, test, configuration, documentation, and other
-insert/delete buckets. Merge commits are ignored. Results are written as a
-per-person CSV and, optionally, a compact Markdown table.
+Reads the augmented schema produced by extract-commits.sh (with code_ins/code_del,
+test_ins/test_del, config_ins/config_del, docs_ins/docs_del, other_ins/other_del).
+Older CSVs without the per-class columns produce zeros for those splits — re-run the
+extractor first.
 
-The score is a transparent heuristic, not a performance assessment. It uses
-source insertions as the base, then applies bounded adjustments for the share of
-source changes, number of files touched, and insertion-heavy work. Interpret it
-with review quality, role, tenure, delivery outcomes, and the source data's
-coverage.
+Outputs:
+  - tables/code-rating.csv: one row per person with code_loc, churn_loc, complexity
+    proxy, weighted code lines, band, and supporting-activity ratio.
+  - reports/code-rating.md: short markdown summary banded against the team median.
+
+Tier-1 rating uses a numstat-only complexity proxy (file diversity, novelty share,
+max-extension share). For Tier-2 cyclomatic complexity, run a separate static-analysis
+pass (lizard, scc, sonar) against repo checkouts and merge the result on commit_hash.
+
+See:
+  references/loc-measurement-best-practices.md → "Code LOC: Extension-Level Filtering"
+  references/loc-measurement-best-practices.md → "Complexity-Weighted Rating"
 """
 from __future__ import annotations
 
@@ -17,276 +25,258 @@ import argparse
 import csv
 import json
 import statistics
-from dataclasses import dataclass
+from collections import defaultdict
 from pathlib import Path
-from typing import Any, Iterable
+
+# Tunable rating weights. Mirror the formula in loc-measurement-best-practices.md.
+ALPHA = 0.05   # cyclomatic-delta multiplier (per +1 ΔCC)
+BETA = 1.0     # novelty multiplier
+DELTA_CC_CAP = 20
+
+# Numstat-only complexity proxy. See module docstring for the upgrade path.
+def complexity_proxy(commit: dict[str, int]) -> float:
+    """Return a non-negative ΔCC proxy in [0, DELTA_CC_CAP].
+
+    Without a repo checkout we cannot compute real cyclomatic delta. The proxy
+    rewards commits that touch more code files (broader change surface) and
+    have a higher code share (less config noise). It is intentionally weak —
+    swap for real CC when checkouts and lizard/scc are available.
+    """
+    files = max(commit.get("files_changed", 0), 1)
+    code_ins = commit.get("code_ins", 0)
+    code_del = commit.get("code_del", 0)
+    code_lines = code_ins + code_del
+    total_lines = (
+        code_lines
+        + commit.get("test_ins", 0) + commit.get("test_del", 0)
+        + commit.get("config_ins", 0) + commit.get("config_del", 0)
+        + commit.get("docs_ins", 0) + commit.get("docs_del", 0)
+        + commit.get("other_ins", 0) + commit.get("other_del", 0)
+    )
+    if total_lines == 0 or code_lines == 0:
+        return 0.0
+    code_share = code_lines / total_lines
+    # File-spread proxy: log-shaped, capped.
+    spread = min(files, 10) / 10.0  # 0.1 .. 1.0
+    proxy = DELTA_CC_CAP * code_share * spread
+    return max(0.0, min(proxy, DELTA_CC_CAP))
 
 
-CATEGORIES = ("code", "test", "config", "docs", "other")
-MIN_COMMITS_FOR_MEDIAN = 5
+def novelty(commit: dict[str, int]) -> float:
+    """Coarse novelty estimate from numstat shape.
+
+    Without per-file new/modified/deleted classification we approximate with the
+    insertion / total ratio. Pure refactors (heavy deletes) get 0; new modules
+    where deletions are minimal get up to 0.5. Matches the bands in the spec.
+    """
+    code_ins = commit.get("code_ins", 0)
+    code_del = commit.get("code_del", 0)
+    total = code_ins + code_del
+    if total == 0:
+        return 0.0
+    add_ratio = code_ins / total
+    if add_ratio >= 0.95:
+        return 0.5
+    if add_ratio >= 0.7:
+        return 0.25
+    return 0.0
 
 
-def integer(value: object) -> int:
-    """Convert a CSV value to a non-negative integer, defaulting to zero."""
+def weighted_code_lines(commit: dict[str, int]) -> float:
+    """Per-commit weighted code lines: code_loc × (1 + α·ΔCC + β·novelty)."""
+    net_code = commit.get("code_ins", 0) - commit.get("code_del", 0)
+    if net_code <= 0:
+        # Refactors that net-delete still earn baseline credit on insertions only,
+        # so the rating does not punish cleanup. ΔCC stays floored at 0.
+        net_code = max(0, commit.get("code_ins", 0))
+    factor = 1.0 + ALPHA * complexity_proxy(commit) + BETA * novelty(commit)
+    return net_code * factor
+
+
+def parse_int(value: str | None) -> int:
+    if value is None or value == "":
+        return 0
     try:
-        return max(0, int(str(value or "0")))
-    except (TypeError, ValueError):
+        return int(value)
+    except ValueError:
         return 0
 
 
-def load_aliases(path: Path | None) -> dict[str, str]:
-    """Load supported email-to-person JSON shapes."""
-    if path is None or not path.exists():
-        return {}
-
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict):
-        raise ValueError("identity mapping must be a JSON object")
-
-    wrapped = payload.get("email_to_person")
-    if isinstance(wrapped, dict):
-        return {
-            str(email).strip().lower(): str(person).strip()
-            for email, person in wrapped.items()
-            if str(email).strip() and str(person).strip()
-        }
-
-    if all(isinstance(value, str) for value in payload.values()):
-        return {
-            str(email).strip().lower(): str(person).strip()
-            for email, person in payload.items()
-            if str(email).strip() and str(person).strip()
-        }
-
-    aliases: dict[str, str] = {}
-    for person, metadata in payload.items():
-        if not isinstance(metadata, dict):
-            continue
-        for email in metadata.get("emails", []):
-            normalized = str(email).strip().lower()
-            if normalized:
-                aliases[normalized] = str(person).strip()
-    return aliases
-
-
-def row_counts(row: dict[str, str]) -> dict[str, int]:
-    counts: dict[str, int] = {}
-    for category in CATEGORIES:
-        counts[f"{category}_ins"] = integer(row.get(f"{category}_ins"))
-        counts[f"{category}_del"] = integer(row.get(f"{category}_del"))
-    return counts
-
-
-def activity_weight(row: dict[str, str], counts: dict[str, int]) -> float:
-    """Return a bounded, auditable score for one non-merge commit."""
-    added = counts["code_ins"]
-    removed = counts["code_del"]
-    source_churn = added + removed
-    total_churn = sum(counts.values())
-    if added == 0 or source_churn == 0 or total_churn == 0:
-        return 0.0
-
-    source_share = source_churn / total_churn
-    file_spread = min(integer(row.get("files_changed")), 12) / 12
-
-    # A deliberately modest proxy: at most 20 points, based on how much of the
-    # change is source code and how broadly it is distributed.
-    complexity_proxy = 20 * source_share * file_spread
-
-    insertion_share = added / source_churn
-    if insertion_share >= 0.95:
-        novelty_adjustment = 0.50
-    elif insertion_share >= 0.75:
-        novelty_adjustment = 0.25
-    else:
-        novelty_adjustment = 0.0
-
-    multiplier = 1 + (0.05 * complexity_proxy) + novelty_adjustment
-    return added * multiplier
-
-
-@dataclass
-class PersonTotals:
-    commits: int = 0
-    code_ins: int = 0
-    code_del: int = 0
-    test_ins: int = 0
-    test_del: int = 0
-    config_ins: int = 0
-    config_del: int = 0
-    docs_ins: int = 0
-    docs_del: int = 0
-    other_ins: int = 0
-    other_del: int = 0
-    weighted_code_lines: float = 0.0
-
-    def add(self, row: dict[str, str]) -> None:
-        counts = row_counts(row)
-        self.commits += 1
-        for key, value in counts.items():
-            setattr(self, key, getattr(self, key) + value)
-        self.weighted_code_lines += activity_weight(row, counts)
-
-    def churn(self, category: str) -> int:
-        return getattr(self, f"{category}_ins") + getattr(self, f"{category}_del")
-
-    @property
-    def code_loc(self) -> int:
-        return self.code_ins - self.code_del
-
-    @property
-    def support_churn(self) -> int:
-        return sum(self.churn(category) for category in CATEGORIES if category != "code")
-
-
-def collect(
-    rows: Iterable[dict[str, str]], aliases: dict[str, str]
-) -> dict[str, PersonTotals]:
-    people: dict[str, PersonTotals] = {}
+def aggregate(rows: list[dict], identity_map: dict[str, str] | None) -> dict[str, dict]:
+    by_person: dict[str, dict] = defaultdict(lambda: {
+        "commits": 0,
+        "code_ins": 0, "code_del": 0,
+        "test_ins": 0, "test_del": 0,
+        "config_ins": 0, "config_del": 0,
+        "docs_ins": 0, "docs_del": 0,
+        "other_ins": 0, "other_del": 0,
+        "weighted_code_lines": 0.0,
+    })
     for row in rows:
-        if integer(row.get("is_merge")) == 1:
+        if parse_int(row.get("is_merge")) == 1:
             continue
-        email = (row.get("author_email") or "").strip().lower()
-        identity = aliases.get(email, email)
-        if not identity:
+        email = (row.get("author_email") or "").lower()
+        person = identity_map.get(email, email) if identity_map else email
+        if not person:
             continue
-        totals = people.setdefault(identity, PersonTotals())
-        totals.add(row)
-    return people
+        commit = {
+            "files_changed": parse_int(row.get("files_changed")),
+            "code_ins": parse_int(row.get("code_ins")),
+            "code_del": parse_int(row.get("code_del")),
+            "test_ins": parse_int(row.get("test_ins")),
+            "test_del": parse_int(row.get("test_del")),
+            "config_ins": parse_int(row.get("config_ins")),
+            "config_del": parse_int(row.get("config_del")),
+            "docs_ins": parse_int(row.get("docs_ins")),
+            "docs_del": parse_int(row.get("docs_del")),
+            "other_ins": parse_int(row.get("other_ins")),
+            "other_del": parse_int(row.get("other_del")),
+        }
+        agg = by_person[person]
+        agg["commits"] += 1
+        for k, v in commit.items():
+            if k == "files_changed":
+                continue
+            agg[k] += v
+        agg["weighted_code_lines"] += weighted_code_lines(commit)
+    return by_person
 
 
-def rating_band(score: float, team_median: float) -> str:
-    if team_median <= 0:
-        return "U"
-    relative = score / team_median
-    if relative >= 1.5:
+def band(weighted: float, median: float) -> str:
+    if median <= 0:
+        return "U"  # undetermined: team has no signal
+    ratio = weighted / median
+    if ratio >= 1.5:
         return "A"
-    if relative >= 0.7:
+    if ratio >= 0.7:
         return "B"
-    if relative >= 0.3:
+    if ratio >= 0.3:
         return "C"
     return "D"
 
 
-def output_rows(
-    people: dict[str, PersonTotals], team_median: float
-) -> list[dict[str, Any]]:
-    result: list[dict[str, Any]] = []
-    ordered = sorted(
-        people.items(), key=lambda item: (-item[1].weighted_code_lines, item[0])
-    )
-    for person, totals in ordered:
-        code_churn = totals.churn("code")
-        all_churn = code_churn + totals.support_churn
-        support_share = totals.support_churn / all_churn if all_churn else 0.0
-        relative = totals.weighted_code_lines / team_median if team_median else 0.0
-        result.append(
-            {
-                "person": person,
-                "commits": totals.commits,
-                "code_loc": totals.code_loc,
-                "code_churn": code_churn,
-                "test_loc": totals.churn("test"),
-                "config_loc": totals.churn("config"),
-                "docs_loc": totals.churn("docs"),
-                "other_loc": totals.churn("other"),
-                "support_share": f"{support_share:.3f}",
-                "weighted_code_lines": f"{totals.weighted_code_lines:.1f}",
-                "weighted_vs_median": f"{relative:.2f}",
-                "band": rating_band(totals.weighted_code_lines, team_median),
-            }
-        )
-    return result
-
-
-def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
-    fields = [
-        "person",
-        "commits",
-        "code_loc",
-        "code_churn",
-        "test_loc",
-        "config_loc",
-        "docs_loc",
-        "other_loc",
-        "support_share",
-        "weighted_code_lines",
-        "weighted_vs_median",
-        "band",
-    ]
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
-        writer.writeheader()
-        writer.writerows(rows)
-
-
-def write_markdown(path: Path, rows: list[dict[str, Any]], team_median: float) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    lines = [
-        "# Code Contribution Activity",
-        "",
-        f"Median weighted code lines for contributors with at least "
-        f"{MIN_COMMITS_FOR_MEDIAN} commits: **{team_median:.1f}**.",
-        "",
-        "Bands compare this heuristic with the eligible team median: "
-        "A >= 1.5x, B >= 0.7x, C >= 0.3x, D below 0.3x, U unavailable.",
-        "",
-        "This is an activity signal, not an individual performance score. "
-        "Review source-data coverage and contribution context before use.",
-        "",
-        "| Person | Commits | Code LOC | Code churn | Test | Config | Docs | "
-        "Other | Support share | Weighted | x median | Band |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:-:|",
-    ]
-    for row in rows:
-        lines.append(
-            "| {person} | {commits} | {code_loc} | {code_churn} | {test_loc} | "
-            "{config_loc} | {docs_loc} | {other_loc} | {support_share} | "
-            "{weighted_code_lines} | {weighted_vs_median} | {band} |".format(**row)
-        )
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-
-def parse_arguments() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input", required=True, type=Path, help="Augmented commit CSV")
-    parser.add_argument("--out-csv", required=True, type=Path, help="Summary CSV")
-    parser.add_argument("--out-md", type=Path, help="Optional Markdown summary")
-    parser.add_argument("--identity", type=Path, help="Optional identity alias JSON")
-    return parser.parse_args()
-
-
 def main() -> int:
-    args = parse_arguments()
-    aliases = load_aliases(args.identity)
-    with args.input.open(encoding="utf-8", newline="") as handle:
-        reader = csv.DictReader(handle)
-        if reader.fieldnames is None:
-            print("Input CSV has no header.")
-            return 2
-        required = {"author_email", "is_merge", "code_ins", "code_del"}
-        missing = sorted(required.difference(reader.fieldnames))
-        if missing:
-            print(f"Input CSV is missing required columns: {', '.join(missing)}")
-            return 2
-        people = collect(reader, aliases)
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--input", required=True, type=Path, help="raw-commits.csv (augmented schema)")
+    ap.add_argument("--out-csv", required=True, type=Path, help="Per-person table output")
+    ap.add_argument("--out-md", type=Path, help="Optional markdown summary output")
+    ap.add_argument("--identity", type=Path, help="identity-aliases.json (email -> person)")
+    args = ap.parse_args()
 
-    eligible = [
-        totals.weighted_code_lines
-        for totals in people.values()
-        if totals.commits >= MIN_COMMITS_FOR_MEDIAN
+    identity_map = None
+    if args.identity and args.identity.exists():
+        raw = json.loads(args.identity.read_text())
+        identity_map = {}
+        # Three accepted shapes:
+        # 1. Flat {email: person}
+        # 2. Wrapped {"email_to_person": {email: person}, ...metadata}
+        # 3. Catalog {person: {"emails": [...]}}
+        if isinstance(raw, dict) and isinstance(raw.get("email_to_person"), dict):
+            for email, person in raw["email_to_person"].items():
+                identity_map[email.lower()] = person
+        elif isinstance(raw, dict) and all(isinstance(v, str) for v in raw.values()):
+            identity_map = {k.lower(): v for k, v in raw.items()}
+        else:
+            for person, info in raw.items():
+                if isinstance(info, dict):
+                    for email in info.get("emails", []):
+                        identity_map[email.lower()] = person
+
+    with args.input.open(newline="") as f:
+        rows = list(csv.DictReader(f))
+    if not rows:
+        print("No commits in input.", flush=True)
+        return 0
+    if "code_ins" not in rows[0]:
+        print(
+            "ERROR: input CSV is missing per-class columns (code_ins, etc.). "
+            "Re-run extract-commits.sh against the augmented schema.",
+            flush=True,
+        )
+        return 2
+
+    by_person = aggregate(rows, identity_map)
+    weighted_values = [p["weighted_code_lines"] for p in by_person.values() if p["commits"] >= 5]
+    team_median = statistics.median(weighted_values) if weighted_values else 0.0
+
+    args.out_csv.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = [
+        "person", "commits",
+        "code_loc", "code_churn", "test_loc", "config_loc", "docs_loc", "other_loc",
+        "support_share",
+        "weighted_code_lines", "weighted_vs_median", "band",
     ]
-    team_median = statistics.median(eligible) if eligible else 0.0
-    rows = output_rows(people, team_median)
-    write_csv(args.out_csv, rows)
-    if args.out_md is not None:
-        write_markdown(args.out_md, rows, team_median)
+    with args.out_csv.open("w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for person, agg in sorted(by_person.items(), key=lambda kv: -kv[1]["weighted_code_lines"]):
+            code_loc = agg["code_ins"] - agg["code_del"]
+            code_churn = agg["code_ins"] + agg["code_del"]
+            test_loc = agg["test_ins"] + agg["test_del"]
+            config_loc = agg["config_ins"] + agg["config_del"]
+            docs_loc = agg["docs_ins"] + agg["docs_del"]
+            other_loc = agg["other_ins"] + agg["other_del"]
+            non_code_total = test_loc + config_loc + docs_loc + other_loc
+            denom = code_churn + non_code_total
+            support_share = (non_code_total / denom) if denom else 0.0
+            ratio = (agg["weighted_code_lines"] / team_median) if team_median else 0.0
+            writer.writerow({
+                "person": person,
+                "commits": agg["commits"],
+                "code_loc": code_loc,
+                "code_churn": code_churn,
+                "test_loc": test_loc,
+                "config_loc": config_loc,
+                "docs_loc": docs_loc,
+                "other_loc": other_loc,
+                "support_share": f"{support_share:.3f}",
+                "weighted_code_lines": f"{agg['weighted_code_lines']:.1f}",
+                "weighted_vs_median": f"{ratio:.2f}",
+                "band": band(agg["weighted_code_lines"], team_median),
+            })
 
-    print(
-        f"Wrote {args.out_csv} for {len(rows)} contributors "
-        f"(eligible median {team_median:.1f})"
-    )
+    if args.out_md:
+        args.out_md.parent.mkdir(parents=True, exist_ok=True)
+        with args.out_md.open("w") as f:
+            f.write("# Code-Only LOC and Complexity-Weighted Rating\n\n")
+            f.write(f"Team median weighted code lines (>= 5 commits): **{team_median:.1f}**\n\n")
+            f.write("Bands: A (>=1.5x median), B (0.7-1.5x), C (0.3-0.7x), D (<0.3x).\n\n")
+            f.write("Rating uses a numstat-only complexity proxy. For real cyclomatic complexity, ")
+            f.write("run a static-analysis pass (lizard, scc, sonar) against repo checkouts and ")
+            f.write("merge on commit_hash.\n\n")
+            f.write(
+                "Buckets: **Code** = py/ts/go/rs/java/swift/sql/css/sh… "
+                "**Test** = test/spec dirs + `_test`/`.test`. "
+                "**Config** = json/yaml/toml/xml/.env/Dockerfile… "
+                "**Docs** = md/mdx/rst/txt/adoc. "
+                "**Other** = lockfiles, minified, generated, vendored, binary. "
+                "Code% = code churn / (code + non-code churn). "
+                "Full recognition rules: "
+                "`packs/it-insider-risk/references/loc-bucket-classification.md`.\n\n"
+            )
+            f.write(
+                "| Person | Commits | Code LOC | Code Churn | Test | Config | Docs | Other | Code% | Weighted | x Median | Band |\n"
+            )
+            f.write("|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:-:|\n")
+            for person, agg in sorted(by_person.items(), key=lambda kv: -kv[1]["weighted_code_lines"]):
+                code_loc = agg["code_ins"] - agg["code_del"]
+                code_churn = agg["code_ins"] + agg["code_del"]
+                test_loc = agg["test_ins"] + agg["test_del"]
+                config_loc = agg["config_ins"] + agg["config_del"]
+                docs_loc = agg["docs_ins"] + agg["docs_del"]
+                other_loc = agg["other_ins"] + agg["other_del"]
+                non_code_total = test_loc + config_loc + docs_loc + other_loc
+                denom = code_churn + non_code_total
+                code_share = (code_churn / denom) if denom else 0.0
+                ratio = (agg["weighted_code_lines"] / team_median) if team_median else 0.0
+                f.write(
+                    f"| {person} | {agg['commits']} | {code_loc} | {code_churn} | "
+                    f"{test_loc} | {config_loc} | {docs_loc} | {other_loc} | "
+                    f"{code_share:.0%} | {agg['weighted_code_lines']:.0f} | "
+                    f"{ratio:.2f} | {band(agg['weighted_code_lines'], team_median)} |\n"
+                )
+
+    print(f"Wrote {args.out_csv} ({len(by_person)} people, median weighted = {team_median:.1f})")
     return 0
 
 
