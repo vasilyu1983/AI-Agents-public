@@ -19,6 +19,10 @@
 
 ## What's Inside
 
+Agent skills are portable instruction sets that teach AI agents how to execute domain work
+well — each is a directory with a `SKILL.md` entry point (YAML frontmatter + routing),
+progressive-disclosure references, and self-contained scripts and data.
+
 Two things, usable independently:
 
 - **[`frameworks/shared-skills/`](frameworks/shared-skills/)** — 140 agent skills following the
@@ -111,6 +115,15 @@ AI-Agents-public/
 ├── CONTRIBUTING.md
 └── LICENSE
 ```
+
+## Standards & Compatibility
+
+- **Specification**: skills follow the [Agent Skills specification](https://agentskills.io/specification) —
+  portable directories, YAML frontmatter, progressive disclosure.
+- **Platforms**: Claude Code (`~/.claude/skills`) and Codex CLI (`~/.agents/skills`); the same
+  directories work in both.
+- **Self-containment**: every skill works detached from this repo — own `data/`, own `scripts/`,
+  symlink-safe path resolution — so a single copied folder is a working install.
 
 ## Scope
 
