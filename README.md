@@ -116,6 +116,29 @@ AI-Agents-public/
 └── LICENSE
 ```
 
+## How This Library Is Built
+
+These skills are the public subset of a larger private library that is run as an
+engineered system, not a prompt collection. Every skill here passed through that
+system's quality machinery:
+
+- **A routing engine** — 8 domain routers dispatch 500+ decision scenarios, each an
+  ordered skill chain with an explicit gate and a named failure mode. Skills are
+  written to compose, not just to exist.
+- **A generated knowledge graph with drift gates** — the catalog (nodes, ownership,
+  ordered scenario edges) is exported from the markdown and CI-checked against it,
+  so prose and structure provably cannot diverge. A pre-tool hook blocks
+  confabulated skill names at invocation time.
+- **Adversarial review** — scenario content is periodically challenged by parallel
+  expert-panel agent runs (consistency, currency, decision value), and fixes are
+  verified by retrieval smoke tests before merging.
+- **Static security screening** — third-party skills are scanned for prompt
+  injection, hidden Unicode, and exfiltration sinks before they enter the library
+  (taxonomy adapted from NVIDIA/SkillSpector).
+- **Freshness discipline** — volatile facts (framework versions, model pricing)
+  live in per-skill `data/` files refreshed by script, and prose is gated against
+  its own data to stop version rot.
+
 ## Standards & Compatibility
 
 - **Specification**: skills follow the [Agent Skills specification](https://agentskills.io/specification) —
