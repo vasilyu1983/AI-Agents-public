@@ -25,8 +25,8 @@ Source: https://code.claude.com/docs/en/sub-agents
 - Subagents run in their own context window with their own system prompt, tool access, and permissions.
 - They work well when the lead only needs the result back.
 - They are the right default for focused workers that explore, triage, review, or modify exclusive files.
-- Subagents stay inside one session. If workers need to communicate with each other directly, use agent teams instead.
-- Subagents cannot spawn other subagents, so keep each assignment bounded.
+- Subagents stay inside one session. If workers need to communicate with each other directly, use agent teams or cross-session messaging (Aug 2026, macOS/Linux) instead.
+- Since June 2026 subagents can spawn their own subagents; chains are capped at 5 levels. Keep assignments bounded anyway — the cap is a runaway backstop, not a design target.
 
 Practical default:
 
@@ -70,7 +70,7 @@ Key frontmatter fields:
 | `mcpServers` | MCP servers scoped to this subagent (inline or reference) |
 | `hooks` | Lifecycle hooks: PreToolUse, PostToolUse, Stop |
 | `memory` | Persistent memory scope: `user`, `project`, or `local` |
-| `background` | `true` to always run in background |
+| `background` | Pins foreground vs background. Background is the default since ~2026-07 (v2.1.195+); set `false` for edit-capable workers |
 | `effort` | `low`, `medium`, `high`, `xhigh`, `max` (Opus only; `xhigh` is the new 4.7-era default — see [`../../agents-subagents/references/cost-control.md`](../../agents-subagents/references/cost-control.md) §"Opus 4.7 Cost Levers") |
 | `isolation` | `worktree` for git-worktree isolation |
 | `color` | UI color: red, blue, green, yellow, purple, orange, pink, cyan |
@@ -92,8 +92,10 @@ Invocation modes:
 
 Foreground vs background:
 
-- **Foreground**: blocks main conversation; permission prompts pass through.
-- **Background**: runs concurrently; permissions pre-approved at launch, unapproved actions auto-denied. Ctrl+B backgrounds a running task.
+Background is the **default** since ~July 2026 (v2.1.195+); set `background: false` in frontmatter to pin a worker to the foreground.
+
+- **Foreground**: blocks main conversation; permission prompts pass through. Pin edit-capable workers here.
+- **Background** (default): runs concurrently; permissions pre-approved at launch, unapproved actions auto-denied. Ctrl+B backgrounds a running foreground task.
 
 Resume: use `SendMessage` with the agent ID to continue a completed subagent with full prior context. Subagent transcripts persist independently of main conversation compaction.
 
@@ -106,7 +108,9 @@ Source: https://code.claude.com/docs/en/agent-teams
 - Agent teams are separate Claude Code sessions coordinated by a lead.
 - Teams use a shared task list and direct inter-agent messaging.
 - They are best for work that benefits from disagreement, discussion, and self-coordination between workers.
-- The feature is experimental and disabled by default; enable via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` in settings.json or environment. Minimum version at launch was Claude Code `v2.1.32`.
+- The feature is experimental and disabled by default; enable via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in settings.json or environment. Minimum version at launch was Claude Code `v2.1.32`. As of Aug 2026 the behavior still churns week to week — re-verify against the docs on every CLI bump.
+- **Enabling the flag changes subagent semantics session-wide:** subagent results come back as idle notifications rather than synchronous returns. Any flow that waits on a subagent's return value can stall. Do not enable teams in sessions built around blocking subagent calls.
+- **`~/.claude/teams/{team-name}/` is runtime state, not a config artifact.** The runtime writes it when the lead creates the team. Do not pre-author, template, or version it. Reusable roles live in subagent definitions and are referenced at spawn time.
 - At initial research-preview launch this required **Opus 4.6 or newer** as the lead model. Current docs describe a per-team "default teammate model" setting instead of a hard lead-model floor — verify the live requirement against [code.claude.com/docs/en/agent-teams](https://code.claude.com/docs/en/agent-teams) before assuming a model gate still applies.
 - Known limitations (verify against current SDK docs): split-pane display mode does not work reliably in the VS Code extension — use the terminal CLI or in-process display mode. Earlier practitioner reports of background teammates stalling on unseen permission prompts are not currently confirmed in official docs; treat as a risk to re-verify and keep edit-capable teammates foreground until you have.
 

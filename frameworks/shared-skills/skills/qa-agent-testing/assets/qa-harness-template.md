@@ -98,3 +98,27 @@ Notes:
 - [key issue]
 - [key improvement]
 ```
+
+## Iterative Coding Trajectory Add-On
+
+Use this add-on when the agent must extend its own prior code across evolving specifications. Start each checkpoint with fresh conversation and runtime state, carry only the preceding workspace, and retain earlier contracts as regression tests.
+
+| Field | Value |
+|---|---|
+| `trajectory_id` | [Stable problem/run identifier] |
+| `checkpoint_id` | [Ordered checkpoint identifier] |
+| `parent_checkpoint_id` | [Previous checkpoint; null for Start] |
+| `spec_version` | [Specification version or content hash] |
+| `workspace_identity` | [Repository/worktree/run identity] |
+| `workspace_hash` | [Hash of the produced workspace tree] |
+| `progress_phase` | [Start / Early / Mid / Late / Final] |
+| `strict_correct` | [All current + regression tests pass: true/false] |
+| `isolated_correct` | [All current non-regression tests pass: true/false] |
+| `core_correct` | [Current core tests pass: true/false] |
+| `regression_correct` | [All prior-checkpoint tests pass: true/false/not-applicable] |
+| `erosion` | [Complexity-mass share, or null if no workspace] |
+| `verbosity` | [Union of redundant/clone lines divided by LOC, or null] |
+| `cost` | [Checkpoint cost + currency, or unavailable] |
+| `duration` | [Checkpoint wall-clock duration + unit] |
+
+Keep test-category counts and failing test IDs in the underlying run artifact. Keep hidden black-box benchmark tests outside the agent context; for production TDAD runs, expose targeted source-to-test context while retaining a separate held-out evaluation slice.

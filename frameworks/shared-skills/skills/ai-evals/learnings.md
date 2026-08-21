@@ -7,6 +7,7 @@
 - [2026-06-06] After a prompt or routing patch, recapture only affected cohorts for speed, then render a full report from the active corpus before claiming a matrix-wide result.
 ## Mistakes to Avoid
 
+- [2026-08-14] Benchmark comparison must fail when current or baseline task-mode keys are missing, because denominator drift can hide a routing regression.
 - [2026-07-08] Fail-closed judge defaults invert on planted-bad TNR gates (which expect 'fail') — a dead judge looks calibrated. Use a third 'error' state satisfying neither gate, and calibrate both directions (TNR + planted-good TPR).
 - [2026-06-10] ~40% of a first paid baseline's 'model failures' were grader phrase-list brittleness — store rawReply so grader fixes re-grade offline instantly, no recapture spend.
 - [2026-06-06] For prompt-tree evals, canonical fingerprints must cover every routed prompt branch being tuned; a single known-time canonical prompt missed unknown-birth-time prompt edits and let stale captures look current.

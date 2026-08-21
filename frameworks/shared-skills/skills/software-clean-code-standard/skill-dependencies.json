@@ -53,7 +53,7 @@
     },
     "startup": {
       "description": "Startup validation and opportunity discovery skills",
-      "skills": ["startup-idea-validation", "startup-review-mining", "startup-market-intel", "startup-market-intel", "startup-business-models", "startup-gtm-strategy", "startup-fundraising"]
+      "skills": ["startup-idea-validation", "research-review-mining", "startup-market-intel", "startup-market-intel", "startup-business-models", "startup-gtm-strategy", "startup-fundraising"]
     },
     "routers": {
       "description": "Meta-orchestration routers for intelligent skill routing",
@@ -185,11 +185,11 @@
       }
     },
     "router-startup": {
-      "primary": ["startup-idea-validation", "startup-review-mining", "startup-market-intel"],
+      "primary": ["startup-idea-validation", "research-review-mining", "startup-market-intel"],
       "secondary": ["product-management", "software-ux-research", "marketing-leads-generation", "router-engineering", "router-operations"],
       "description_map": {
         "startup-idea-validation": "9-dimension validation framework, Go/No-Go decisions",
-        "startup-review-mining": "Pain point extraction from reviews and testimonials",
+        "research-review-mining": "Pain point extraction from reviews and testimonials",
         "startup-market-intel": "Trend analysis, timing assessment, predictions",
         "product-management": "Product strategy, discovery, roadmaps",
         "software-ux-research": "User research methods and feedback analysis",
@@ -225,10 +225,10 @@
       }
     },
     "startup-idea-validation": {
-      "primary": ["startup-review-mining", "startup-market-intel", "product-management"],
+      "primary": ["research-review-mining", "startup-market-intel", "product-management"],
       "secondary": ["software-ux-research", "marketing-leads-generation", "software-architecture-design"],
       "description_map": {
-        "startup-review-mining": "Evidence gathering from reviews for validation",
+        "research-review-mining": "Evidence gathering from reviews for validation",
         "startup-market-intel": "Market timing and trend alignment assessment",
         "product-management": "Discovery, hypothesis testing, customer interviews",
         "software-ux-research": "User research for problem validation",
@@ -236,7 +236,7 @@
         "software-architecture-design": "Technical feasibility assessment"
       }
     },
-    "startup-review-mining": {
+    "research-review-mining": {
       "primary": ["startup-idea-validation", "startup-market-intel", "software-ux-research"],
       "secondary": ["product-management", "marketing-social-media", "marketing-leads-generation"],
       "description_map": {
@@ -249,11 +249,11 @@
       }
     },
     "startup-market-intel": {
-      "primary": ["startup-idea-validation", "startup-review-mining", "product-management"],
+      "primary": ["startup-idea-validation", "research-review-mining", "product-management"],
       "secondary": ["ai-ml-data-science", "ai-agents", "marketing-leads-generation"],
       "description_map": {
         "startup-idea-validation": "Timing input for validation scoring",
-        "startup-review-mining": "Correlate trends with market pain patterns",
+        "research-review-mining": "Correlate trends with market pain patterns",
         "product-management": "Strategic timing for product decisions",
         "ai-ml-data-science": "ML trend analysis and forecasting patterns",
         "ai-agents": "AI/ML trend tracking and predictions",
@@ -262,12 +262,12 @@
     },
     "startup-market-intel": {
       "primary": ["startup-idea-validation", "startup-business-models", "startup-gtm-strategy"],
-      "secondary": ["startup-review-mining", "product-management", "marketing-leads-generation"],
+      "secondary": ["research-review-mining", "product-management", "marketing-leads-generation"],
       "description_map": {
         "startup-idea-validation": "Competitive moat scoring for validation",
         "startup-business-models": "Competitive pricing and unit economics analysis",
         "startup-gtm-strategy": "Positioning and channel differentiation",
-        "startup-review-mining": "Competitor weakness extraction from reviews",
+        "research-review-mining": "Competitor weakness extraction from reviews",
         "product-management": "Product positioning and feature differentiation",
         "marketing-leads-generation": "Competitive messaging and battlecards"
       }
@@ -327,11 +327,11 @@
       "related_domains": ["software", "product", "dev"]
     },
     "validation": {
-      "skills": ["startup-idea-validation", "startup-review-mining", "startup-market-intel"],
+      "skills": ["startup-idea-validation", "research-review-mining", "startup-market-intel"],
       "related_domains": ["startup", "product", "marketing"]
     },
     "discovery": {
-      "skills": ["startup-review-mining", "software-ux-research", "product-management"],
+      "skills": ["research-review-mining", "software-ux-research", "product-management"],
       "related_domains": ["startup", "product", "software"]
     },
     "competitive": {

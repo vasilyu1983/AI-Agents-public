@@ -12,6 +12,8 @@ Use this skill to design or review the execution substrate for a coding-agent ru
 
 This skill covers where and how code runs. It complements permission routing by defining the actual isolation and policy envelope around execution.
 
+For **remote** execution — managed sandbox providers, ephemeral cloud workspaces per task, hosted agent runtimes, egress policy across a network boundary, and cost per task — use `ai-coding-agents-cloud-sandboxes` instead.
+
 ## ASCII Flow
 
 ```text

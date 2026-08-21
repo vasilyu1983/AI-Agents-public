@@ -1,4 +1,4 @@
 interface:
   display_name: "Consumer Neuroscience Foundations"
-  short_description: "Applies consumer-neuroscience primitives for attention, arousal, memory, reward"
-  default_prompt: "Use $foundations-consumer-neuroscience for attention, salience, arousal, bonding, narrative, approach-avoidance, memory, reward anticipation, embodiment, predictive processing, or ethical neuro-marketing."
+  short_description: "Consumer-neuroscience primitives for attention, arousal, memory, and reward"
+  default_prompt: "Use $foundations-consumer-neuroscience for attention, arousal, bonding, narrative, memory, reward, embodiment, predictive processing, ethical UX, neuro study design, or DMCC / EU AI Act compliance gates."

@@ -33,9 +33,12 @@ The crucial property: it isn't enough for both parties to *know* X. They must ea
 
 **Diagnostic**: ask the agent to summarize the brief in its own words *before* acting. If the summary diverges, you didn't have the common ground you assumed.
 
+**Static vs. dynamic (2026).** Common ground is not only established, it is *maintained and revised*. Yao et al. (2026) name "loss of shared interaction history" as the leading failure mode in multi-turn agent negotiation — dyads of agents that each solve the task in isolation fail together, because neither maintains an accurate model of what has been jointly settled. The fix is structural rather than prompt-level: externalize the shared state into an object both parties read and write, rather than relying on each party's reconstruction of the transcript.
+
 **Failure modes**:
 - "I told the model in the system prompt" treated as mutual belief
 - Common ground decays under context compression but is treated as still present
+- Common ground assumed static once established; no mechanism maintains it across turns
 - Communal common ground assumed across human-AI boundary (the model doesn't share your team's slang)
 
 ---
@@ -121,10 +124,15 @@ Communication isn't complete after presentation. It is complete after acceptance
 
 **Multi-agent evidence typing (GSAR 2026, preprint).** Kamelhar (arXiv 2604.23366) maps Clark grounding vocabulary to multi-agent output verification via a four-way claim typology that formalizes repair evidence types: *grounded* (evidence-backed — Clark's demonstration evidence), *ungrounded* (no acceptance evidence), *contradicted* (failed repair; conflicting evidence), *complementary* (new common-ground contribution). Coupled with a three-tier recovery function (proceed / regenerate / replan) under compute budget. Treat as validate-before-adopting: arXiv preprint April 2026, peer review unconfirmed, code not yet in public repo.
 
+**Repair as a common-ground update, not an utterance (2026).** A repair is only complete when the shared model changes, not when the correction is acknowledged. Poelitz et al. (2026) find LLM collaborators fail to update assumptions after a repair completes, and that joint vocabulary with a partner *shrinks* across trials where human-human pairs build it up. NC-Bench (Moore et al. 2026) separately finds repair is the weakest conversational competence class: 5–75% accuracy on repeat requests against 95–100% on plain answering, across six 2–8B open models. The rates are small-model-specific; the ordering is the transferable result.
+
+**Practical consequence**: after a correction, require restatement of the *revised shared state*, not of the correction itself. "Got it, not the OAuth handler" is an acknowledgment of a delta. "So: the SAML handler in `src/auth/saml.py`, endpoints preserved" is a common-ground update.
+
 **Failure modes**:
 - No repair channel at all — agent guesses and proceeds
 - Repair channel exists but using it is implicitly punished by completion-rate metrics
 - Repair only happens after work is wrong; no preventive other-initiated repair
+- Repair is acknowledged but assumptions are not updated — the agent proceeds on its pre-repair model
 - No distinction between evidence types — treating "ungrounded" and "contradicted" claims identically degrades recovery targeting
 
 ---

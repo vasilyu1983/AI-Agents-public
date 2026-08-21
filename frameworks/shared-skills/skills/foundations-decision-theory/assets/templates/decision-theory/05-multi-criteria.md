@@ -61,10 +61,28 @@ WSM scores:
 - B: 0.35×0.7 + 0.30×0.95 + 0.20×0.8 + 0.15×0.6 = 0.245 + 0.285 + 0.160 + 0.090 = **0.780**
 - C: 0.35×0.6 + 0.30×0.80 + 0.20×0.9 + 0.15×0.85 = 0.210 + 0.240 + 0.180 + 0.128 = **0.758**
 
-Ranking: A > B > C. Sensitivity check: if reliability weight increases to 0.45 (−0.10 from cost), B overtakes A. Flag this rank-reversal to stakeholders.
+Ranking: A > B > C. Sensitivity check: if reliability weight increases to 0.45 (−0.10 from cost), B overtakes A. Flag this reordering to stakeholders.
+
+## Two Distinct Rank-Reversal Tests
+
+The reordering above is *weight sensitivity* — the ranking moves because a stated preference moved. That is expected behavior and only needs disclosure. A separate and more damaging failure is **rank reversal in the Wang–Triantaphyllou sense**: the ranking changes when the *alternative set* changes, with weights and scores held fixed. Adding a new vendor D, or dropping a clearly dominated one, should not swap A and B. When it does, the method is producing an artifact rather than a preference.
+
+Three standard tests, now operationalized in Scikit-Criteria by Cabral et al. (arXiv:2508.00129):
+
+| Test | Checks | Audited failure rate |
+| --- | --- | --- |
+| RRT1 | The top alternative survives removal of a non-optimal alternative | ~3.7% (stable in 96.3%) |
+| RRT2 | Rankings stay transitive across pairwise subproblems | ~14.8% fail |
+| RRT3 | Decomposing into subproblems and recomposing reproduces the full ranking | ~48% fail |
+
+Those rates come from auditing 27 pipeline/dataset combinations drawn from the published MCDM literature — so rank reversal is a routine property of methods in active use, not an adversarial edge case. Normalization choice drives much of it: TOPSIS and VIKOR are known-susceptible, while COMET and SPOTIS are constructed to resist it.
+
+**Practical rule:** run both checks and report them separately. Weight sensitivity is disclosed as a preference boundary; an RRT2/RRT3 failure means the ranking should not be presented as a result at all until the method or normalization is changed.
 
 ## Sources
 
 - Saaty, T. L. (1980). The Analytic Hierarchy Process. McGraw-Hill.
 - Hwang, C. L. and Yoon, K. (1981). Multiple Attribute Decision Making. Springer.
 - Belton, V. and Stewart, T. J. (2002). Multiple Criteria Decision Analysis: An Integrated Approach. Kluwer.
+- Wang, X. and Triantaphyllou, E. (2008). "Ranking irregularities when evaluating alternatives by using some ELECTRE methods." Omega 36(1).
+- Cabral, J. B. et al. (2025/2026). "Closing a 17-Year Gap: Algorithmic Detection and Empirical Prevalence of Rank Reversal in Multi-Criteria Decision Analysis." arXiv:2508.00129.

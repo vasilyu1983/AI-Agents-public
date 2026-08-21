@@ -358,8 +358,8 @@ Generic templates either lack animation entirely or scatter meaningless micro-in
 
 **Staggered Reveal Pattern:**
 ```tsx
-// Framer Motion example
-import { motion } from 'framer-motion'
+// Motion example (formerly Framer Motion)
+import { motion } from 'motion/react'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -438,7 +438,7 @@ export function Hero() {
 - Benefit: No JavaScript, no library overhead
 - Limitation: Limited choreography, no complex physics
 
-**Framer Motion (React):**
+**Motion (formerly Framer Motion) (React):**
 - Use for: Complex orchestrated animations, page transitions, gestures
 - Benefit: Declarative, powerful, great DX
 - Trade-off: 30kb+ bundle size
@@ -457,8 +457,8 @@ export function Hero() {
 
 **1. Page Transitions**
 ```tsx
-// Next.js with Framer Motion
-import { motion, AnimatePresence } from 'framer-motion'
+// Next.js with Motion
+import { motion, AnimatePresence } from 'motion/react'
 
 export default function MyApp({ Component, pageProps, router }) {
   return (
@@ -974,7 +974,7 @@ AI tools fail at:
 - Nord Theme: https://www.nordtheme.com/
 
 **Animation Libraries:**
-- Framer Motion: https://www.framer.com/motion/
+- Motion (formerly Framer Motion): https://motion.dev/
 - GSAP: https://greensock.com/gsap/
 - Lottie: https://airbnb.design/lottie/
 - Canvas Confetti: https://www.kirilv.com/canvas-confetti/

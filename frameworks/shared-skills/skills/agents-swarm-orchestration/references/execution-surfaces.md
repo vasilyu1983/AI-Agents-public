@@ -8,6 +8,7 @@ Use this reference when the lead already has a valid plan and now needs to choos
 - [Subagents Or Codex Workers](#subagents-or-codex-workers)
 - [Claude Code Agent Teams](#claude-code-agent-teams)
 - [Agent Team Communication Patterns](#agent-team-communication-patterns)
+- [Cross-Session Messaging](#cross-session-messaging)
 - [Manager vs Handoff](#manager-vs-handoff)
 
 ## Single Thread
@@ -32,13 +33,20 @@ Use isolated workers when the lead only needs the result back:
 Platform notes:
 
 - Claude Code subagents may auto-delegate based on the registered description.
+- Claude Code subagents run in the background by default since ~July 2026 (v2.1.195+); pin a worker with `background: false` when its permission prompts must reach the human.
 - Codex subagents require explicit spawning.
 - Codex defaults to `max_threads: 6` and `max_depth: 1`.
-- Keep nesting at depth 1 on both platforms; recursive fan-out multiplies tokens and latency quickly.
+- Since June 2026 Claude Code subagents can spawn their own subagents, with chains capped at 5 levels. That is a platform ceiling, not a recommendation — keep nesting at depth 1 (2 for hierarchical migrations) because recursive fan-out multiplies tokens and latency quickly and errors compound uncaught across levels. Codex stays at `max_depth: 1`.
 
 ## Claude Code Agent Teams
 
 Use agent teams when workers need direct discussion, self-coordination, or a shared task list. Reserve this for work where teammate-to-teammate communication is part of the solution rather than a convenience.
+
+Aug 2026 status — experimental, gated behind `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`, behavior churning weekly. Three constraints before choosing this surface:
+
+- **Team config is runtime state, not an authored artifact.** `~/.claude/teams/{team-name}/` is written by the runtime when the lead creates a team. Do not pre-author or version it. Reusable roles belong in subagent definitions, which are referenced at spawn time.
+- **With teams enabled, subagent results return as idle notifications.** A flow that blocks waiting on a subagent's return value can stall. Do not enable the flag for sessions whose orchestration depends on synchronous subagent returns.
+- **A subagent definition's `skills:` and `mcpServers` frontmatter is ignored when it runs as a teammate.** Teammates load skills and MCP servers from project/user settings instead. A worker that depends on a preloaded skill will silently run without it.
 
 Good fits:
 
@@ -85,6 +93,20 @@ Optional hooks can keep team work disciplined:
 - `TeammateIdle`: give feedback and keep the teammate active if the result is not good enough yet
 - `TaskCreated`: validate a task before it enters the list
 - `TaskCompleted`: enforce quality checks before a task is marked complete
+
+## Cross-Session Messaging
+
+Shipped Aug 2026, macOS and Linux only. Independent Claude Code sessions can message each other directly without forming a team — no `TeamCreate`, no shared task list, no experimental flag.
+
+Use it when the only thing that has to cross a session boundary is a finding:
+
+- a long-running session in another terminal or worktree needs to hand back a result
+- two humans-in-the-loop sessions are working adjacent areas and one discovers something the other needs
+- you want peer messaging without accepting the agent-teams caveats above
+
+Prefer a full agent team only when you also need the shared task list, self-claiming, or the `TeammateIdle` / `TaskCreated` / `TaskCompleted` quality gates. If the requirement is just "pass this finding over there", cross-session messaging is the lighter surface and is not experimental.
+
+Same distillation discipline applies: send synthesis, not raw logs. Windows sessions have no equivalent — fall back to file-backed state.
 
 ## Manager vs Handoff
 

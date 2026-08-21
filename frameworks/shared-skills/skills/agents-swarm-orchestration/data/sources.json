@@ -2,23 +2,32 @@
   "metadata": {
     "title": "Agents Swarm Orchestration - Sources",
     "description": "Official documentation, research, and secondary references for multi-agent orchestration across Claude Code, Codex, and OpenAI Agents SDK",
-    "last_updated": "2026-08-10",
-    "updated": "2026-08-10",
+    "last_updated": "2026-08-15",
+    "updated": "2026-08-15",
     "skill": "agents-swarm-orchestration",
-    "total_sources": 37
+    "total_sources": 38
   },
   "official_documentation": [
     {
       "name": "Claude Code Subagents Documentation",
       "url": "https://code.claude.com/docs/en/sub-agents",
-      "description": "Official Claude Code guide for subagents, capabilities, isolation, and context management",
-      "add_as_web_search": true
+      "description": "Official Claude Code guide for subagents, capabilities, isolation, and context management. Basis for the Aug 2026 vocabulary pass: background-by-default since ~2026-07 (v2.1.195+) and subagent-spawns-subagent nesting (June 2026, chains capped at 5 levels).",
+      "add_as_web_search": true,
+      "verified": "2026-08-15"
     },
     {
       "name": "Claude Code Agent Teams Documentation",
       "url": "https://code.claude.com/docs/en/agent-teams",
-      "description": "Official Claude Code guide for coordinating multiple Claude Code sessions with shared tasks and messaging",
-      "add_as_web_search": true
+      "description": "Official Claude Code guide for coordinating multiple Claude Code sessions with shared tasks and messaging. Aug 2026: still experimental behind CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1, behavior churning weekly; ~/.claude/teams/ is runtime state, not an authored artifact.",
+      "add_as_web_search": true,
+      "verified": "2026-08-15"
+    },
+    {
+      "name": "Claude Code Cross-Session Messaging",
+      "url": "https://code.claude.com/docs/en/cross-session-messaging",
+      "description": "Aug 2026 (macOS/Linux): independent Claude Code sessions message each other without forming a team. Lighter alternative to agent teams when only findings need to cross a session boundary. Basis for execution-surfaces.md §Cross-Session Messaging.",
+      "add_as_web_search": true,
+      "verified": "2026-08-15"
     },
     {
       "name": "Anthropic Claude Code Best Practices",

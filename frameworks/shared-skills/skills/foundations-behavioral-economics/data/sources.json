@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Behavioral Economics Foundations — Sources",
     "description": "Primary papers and references for 16 behavioral-economics and behavior-design primitives: prospect theory, loss aversion, anchoring, defaults, social proof, scarcity, hyperbolic discounting, mental accounting, choice architecture, dual-system cognition, decoy effect, habit loop, reinforcement schedules, cognitive load and working memory, context-dependent retrieval, and implementation intentions.",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-behavioral-economics",
-    "total_sources": 66
+    "total_sources": 68
   },
   "primary_papers": [
     {
@@ -355,7 +355,23 @@
       "id": "CherepMaesSingh2025",
       "name": "LLM Agents Are Hypersensitive to Nudges",
       "url": "https://arxiv.org/abs/2505.11584",
-      "description": "Cherep, M., Maes, P. & Singh, N. arXiv:2505.11584 (May 2025); published as 'AI agents are sensitive to nudges,' PNAS 2026 (DOI 10.1073/pnas.2537030123) — not ICLR. Multi-model benchmark (GPT-3.5/4o/o3, Gemini, Claude); default-option nudge shifted human choice probability 0.51->0.88 (+37pp) while several LLMs (GPT-4o, Claude 3 Haiku, o3-Mini, GPT-3.5-Turbo) shifted to ~1.0 from baselines of 0.33-0.58; Claude 3.5 Sonnet and Gemini 1.5 Pro stayed near human levels (~0.89-0.91). CoT/few-shot shift but do not resolve the sensitivity. New frontier: AI agents as subjects of choice architecture. Relevant to primitives #4, #9.",
+      "description": "Cherep, M., Maes, P. & Singh, N. arXiv:2505.11584 (May 2025); published as 'AI agents are sensitive to nudges,' PNAS 123(25), 15 June 2026 (DOI 10.1073/pnas.2537030123) — not ICLR. Multi-model benchmark (GPT-3.5/4o/o3, Gemini, Claude); default-option nudge shifted human choice probability 0.51->0.88 (+37pp) while several LLMs (GPT-4o, Claude 3 Haiku, o3-Mini, GPT-3.5-Turbo) shifted to ~1.0 from baselines of 0.33-0.58; Claude 3.5 Sonnet and Gemini 1.5 Pro stayed near human levels (~0.89-0.91). CoT/few-shot shift but do not resolve the sensitivity; reasoning-optimized models partially restore human-level sensitivity but inconsistently and at substantial compute cost. New frontier: AI agents as subjects of choice architecture. Relevant to primitives #4, #9. Verified 2026-08-14: PNAS volume 123, issue 25, 15 June 2026 and DOI confirmed via MIT Media Lab publication page (PNAS page itself returns 403 to automated fetch).",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "TangEtAl2025GUIAgentsDarkPatterns",
+      "name": "Dark Patterns Meet GUI Agents: LLM Agent Susceptibility to Manipulative Interfaces and the Role of Human Oversight",
+      "url": "https://arxiv.org/abs/2509.10723",
+      "description": "Tang, J., Chen, C., Li, J., Zhang, Z., Guo, B., Khalilov, I., Gebreegziabher, S. A., Yao, B., Wang, D., Ye, Y., Li, T., Xiao, Z., Yao, Y. & Li, T. J.-J. arXiv:2509.10723 (12 September 2025). Two-phase empirical study of humans, LLM GUI agents, and human-agent teams across 16 dark-pattern types. Key findings: agents often fail to recognize dark patterns, and even when aware prioritize task completion over protective action; humans succumb via cognitive shortcuts and habitual compliance while agents falter from procedural blind spots; human oversight improves avoidance but introduces attentional tunneling and cognitive load. Design implication: agent guardrails must be structural (scope limits, confirmation gates), not detection prompts. Relevant to primitives #4, #9 and the Ethical Bounds AI-agent section. Verified 2026-08-14: arXiv abstract confirmed title, full author list, date, and findings.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ShiEtAl2026SirenSongLLM",
+      "name": "The Siren Song of LLMs: How Users Perceive and Respond to Dark Patterns in Large Language Models",
+      "url": "https://arxiv.org/abs/2509.10830",
+      "description": "Shi, Y., Xiao, Q., Hu, Q., Shen, H. & Shen, H. arXiv:2509.10830 (submitted 13 September 2025; final version March 2026). Accepted at CHI 2026 (Barcelona). Study with 34 participants comparing manipulative vs neutral LLM responses. Defines conversational dark patterns as manipulative or deceptive behaviors enacted in dialogue rather than interface layout — exaggerated agreement (sycophancy), biased framing, privacy intrusion. Users detect these via conversational signals but often accept them as normal support; accountability attribution is contested (company, model, or user). Establishes generated turns, not just screens, as a harm-test surface. Relevant to primitives #5, #10 and the Ethical Bounds section. Verified 2026-08-14: arXiv abstract confirmed title, authors, dates, CHI 2026 acceptance, and N=34.",
       "add_as_web_search": false,
       "url_check": "manual"
     },
@@ -436,10 +452,18 @@
       "url_check": "manual"
     },
     {
+      "id": "DMCCAct2024",
+      "name": "Digital Markets, Competition and Consumers Act 2024 (UK)",
+      "url": "https://www.legislation.gov.uk/ukpga/2024/13/part/4/chapter/1",
+      "description": "UK primary legislation, consumer-protection provisions in force 6 April 2025. s.226 misleading actions, s.227 misleading omissions, s.228 aggressive practices, Sch. 20 banned practices (actionable without a consumer-detriment test). Revoked and replaced CPRs 2008 via s.251(1). CMA holds direct civil-enforcement power with fines up to 10% of global annual turnover, no court order required. Enforcement to date: 8 firms 18 November 2025 (drip pricing, default opt-ins, pressure selling) plus ~100 advisory letters across 14 sectors; Marks Electrical £1.2m reduced to £720,000 with ~£600,000 redress on 18 June 2026 (automatic opt-ins). This is the controlling UK instrument for primitives #4, #6, #9.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
       "id": "CPRs2008",
-      "name": "Consumer Protection from Unfair Trading Regulations 2008 (UK)",
+      "name": "Consumer Protection from Unfair Trading Regulations 2008 (UK) — REVOKED 6 April 2025",
       "url": "https://www.legislation.gov.uk/uksi/2008/1277/contents/made",
-      "description": "UK CPRs 2008. Prohibits aggressive commercial practices, false urgency, and misleading omissions. Relevant to primitives #4, #6, #9.",
+      "description": "UK CPRs 2008 (SI 2008/1277). REVOKED on 6 April 2025 by DMCC Act 2024 s.251(1), commenced by SI 2025/272. Superseded by DMCC ss.226-228 and Sch. 20 — cite the DMCC for any current obligation. Retained here as the historical anchor: pre-April-2025 enforcement precedent and academic literature is framed in CPRs regulation numbers (Reg. 5 misleading actions, Reg. 6 misleading omissions, Reg. 7 aggressive practices). Note that legislation.gov.uk may not show a revocation banner on the SI page because the revised-text pipeline lags commencement.",
       "add_as_web_search": false,
       "url_check": "manual"
     },
@@ -495,7 +519,7 @@
       "id": "FTCvAmazon2025",
       "name": "FTC v. Amazon — Prime Enrollment and Cancellation Dark Patterns Settlement",
       "url": "https://www.ftc.gov/news-events/news/press-releases",
-      "description": "FTC settlement, announced 25 September 2025. $2.5B total ($1.0B civil penalty + $1.5B in consumer refunds to ~35M Prime subscribers) over deceptive Prime enrollment and cancellation flows, actionable under FTC Act Section 5. Largest US dark-pattern enforcement to date; establishes live US regulatory risk parallel to EU DSA Art. 25. Note: the FTC's separate 'click-to-cancel' rule was vacated by the Eighth Circuit (July 2025) on procedural grounds; rulemaking reopened via ANPRM (30 Jan 2026). Relevant to Ethical Bounds and Regulatory Context sections and primitives #4, #9.",
+      "description": "FTC settlement, announced 25 September 2025. $2.5B total ($1.0B civil penalty + $1.5B in consumer refunds to ~35M Prime subscribers) over deceptive Prime enrollment and cancellation flows, actionable under FTC Act Section 5 and ROSCA. Largest US dark-pattern enforcement to date; establishes live US regulatory risk parallel to EU DSA Art. 25. Click-to-cancel rule status: vacated by the Eighth Circuit (July 2025) on procedural (APA notice-and-comment) grounds, not on the merits; ANPRM sent to OIRA 30 Jan 2026, published for comment March 2026, comments closed 13 April 2026 (~100 comments). Enforcement continues under Sec. 5/ROSCA regardless of rule status — see FTC v. Uber (amended complaint 15 Dec 2025, 21 states + DC as co-plaintiffs; UberOne cancellation alleged to require up to 32 actions across 23 screens). ~30 US states maintain independent automatic-renewal statutes. Relevant to Ethical Bounds and Regulatory Context sections and primitives #4, #9. Verified 2026-08-14 via Jones Day (May 2026) and Arnold & Porter (Feb 2026) advisories.",
       "add_as_web_search": false,
       "url_check": "manual"
     },

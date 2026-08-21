@@ -1,13 +1,13 @@
 {
   "metadata": {
     "skill": "qa-agent-testing",
-    "updated": "2026-07-11",
-    "version": "4.3",
-    "total_sources": 42,
-    "last_citation_audit": "2026-07-11",
-    "description": "Primary references for evaluating agentic systems with offline and online evals, graders, trace and tool testing, sandboxing, multi-agent coordination, adversarial QA, red-team scanners, and agentic benchmark methodology.",
+    "updated": "2026-08-21",
+    "version": "4.4",
+    "total_sources": 43,
+    "last_citation_audit": "2026-08-21",
+    "description": "Primary references for evaluating agentic systems with offline and online evals, graders, trace and tool testing, sandboxing, multi-agent coordination, iterative coding trajectories, adversarial QA, red-team scanners, and agentic benchmark methodology.",
     "title": "QA Agent Testing - Sources",
-    "last_updated": "2026-07-11"
+    "last_updated": "2026-08-21"
   },
   "categories": {
     "governance_and_risk": [
@@ -287,6 +287,14 @@
       }
     ],
     "research_and_benchmarks": [
+      {
+        "name": "SlopCodeBench: Benchmarking How Coding Agents Degrade Over Long-Horizon Iterative Tasks",
+        "url": "https://arxiv.org/abs/2603.24755v1",
+        "description": "March 2026 preprint introducing evolving-specification, carried-workspace checkpoints for iterative coding agents, with strict/isolated/core/regression correctness slices and longitudinal structural erosion, verbosity, cost, and duration signals. Reported experiments cover the Python track; the human repository panel is an unmatched calibration reference.",
+        "add_as_web_search": false,
+        "optional": false,
+        "last_verified": "2026-08-21"
+      },
       {
         "name": "Constitutional AI",
         "url": "https://arxiv.org/abs/2212.08073",

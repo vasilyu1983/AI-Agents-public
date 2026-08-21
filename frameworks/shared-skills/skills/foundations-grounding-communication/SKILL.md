@@ -2,8 +2,8 @@
 name: foundations-grounding-communication
 description: Grounding-theory primitives for human-AI and agent handoffs, common ground, acceptance evidence, repair, and ambiguity. Use when coordinating meaning.
 compatibility: Portable core only.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-14
 ---
 
 # Grounding & Communication Foundations
@@ -18,6 +18,8 @@ last_validated: 2026-07-11
 10 canonical grounding-theory primitives for the process by which two or more parties establish *enough* shared understanding to coordinate. Founded by Herbert Clark and colleagues (1989, 1991, 1996), grounding theory is the most-cited formal account of how interlocutors solve the "do we mean the same thing?" problem efficiently.
 
 It is the missing layer for multi-agent LLM systems: empirical work on multi-agent failures (MAST taxonomy, NeurIPS 2025) identifies system-design specification issues, inter-agent misalignment, and task-verification gaps across 1,600+ traces. Agents often proceed on different interpretations of the same brief. That is not only a coordination problem (information structure); it is a grounding problem (insufficient common ground at handoff). [foundations-team-theory](../foundations-team-theory/SKILL.md) tells you *whether* agents should communicate; this skill tells you *how* they actually establish shared meaning when they do.
+
+**Static vs. dynamic grounding (2026).** The distinction now carries the most diagnostic weight. *Static* grounding maps language to a shared context in one shot; *dynamic* grounding requires negotiating meaning across turns — joint plan formation, commitment, and execution. Yao, Zou, and Hawkins (2026) show the gap is not a reasoning-capacity problem: in an iterated negotiation game with verifiable jointly optimal outcomes, agents that identify Pareto-optimal allocations *in isolation* consistently fail to reach them *as dyads*, across models. Their four failure modes — loss of shared interaction history, anchoring to early proposals, defaulting to equal splits over reward-maximizing coordination, and referential binding errors across turns — map onto primitives #1, #3, #8, and #6 respectively. Most benchmarks and most agent handoff designs still test only the static case.
 
 ## When to Apply
 
@@ -80,7 +82,7 @@ Full definitions, inputs, outputs, failure modes, and worked examples: [`referen
 | 2 | Grounding Criterion | Over-grounding (excess confirmation overhead) or under-grounding (acting on uncertain interpretation) |
 | 3 | Contributions: Presentation + Acceptance | "I sent the message, so we're done" — communication isn't complete until acceptance is signaled |
 | 4 | Evidence of Understanding | Acknowledgment vs. understanding conflated; "ack" doesn't mean "got it". LLMs emit 3× fewer clarification initiations and 16× fewer follow-ups than humans (Rifts, ACL 2025); benchmark: aclanthology.org/2025.acl-long.1016/ |
-| 5 | Repair | Errors compound silently because no repair protocol exists; agent acts on misinterpretation. LLMs fail to initiate repair-seeking acts at comparable human rates; early repair failures predict compounding breakdown (Rifts, ACL 2025) |
+| 5 | Repair | Errors compound silently because no repair protocol exists; agent acts on misinterpretation. LLMs fail to initiate repair-seeking acts at comparable human rates; early repair failures predict compounding breakdown (Rifts, ACL 2025). Repair is the weakest measured conversational competence: 5–75% accuracy on repeat requests vs 95–100% on plain answering (NC-Bench, 2026). Models also fail to *update assumptions after* a repair completes (Poelitz et al. 2026) — the repair lands but common ground doesn't move |
 | 6 | Presupposition | Brief assumes context the recipient doesn't have; MAST-style specification failures live here |
 | 7 | Audience Design | Brief written for the writer, not the reader; tokens spent on wrong abstractions. LLMs fail to pivot to audience-state-informed questions, instead repeating similar follow-ups (NewsInterview, ACL 2025) |
 | 8 | Joint Commitment | Handoff treated as transmission rather than joint coordination. CRSA (EMNLP 2025) formalizes this: joint task distribution P(m_A,m_B,y) captures what both agents know about outcomes — a formal model of the mutual-obligation structure joint commitment requires |
@@ -98,6 +100,8 @@ Full definitions, inputs, outputs, failure modes, and worked examples: [`referen
 | Conversation analysis (Sacks, Schegloff) | Repair sequences, turn-taking, adjacency pairs; Ubuntu-CG (Sarkar et al., ACL 2025) provides first real-world empirical validation: friction (failed repair initiation) predicts task failure; current LLMs detect implicit friction poorly (64.81% F1) | #5 |
 | Joint action theory | Frame communication as coordinated activity, not message-passing | #8, #9 |
 | Collaborative RSA (CRSA) | Multi-turn dialogue where agents hold private information and must converge on shared outcomes | #8, #9 |
+| Dynamic grounding (Yao et al. 2026) | Coordination spans many turns and joint plans must be formed, committed to, and executed — not just interpreted once | #1, #3, #6, #8 |
+| Protocol semantic layer (Yuan et al. 2026) | Deciding what the transport protocol gives you vs. what you must build; 18-protocol survey against communication/syntactic/semantic layers | #3, #5, #6 |
 | Common-knowledge logic (Aumann, Lewis) | Need formal model of what is mutual belief | #1 |
 | Audience design (Bell, Clark & Murphy) | Tailor message to recipient | #7 |
 
@@ -113,6 +117,7 @@ See [`references/primitives-overview.md`](references/primitives-overview.md) for
 | Subagent acts immediately on first reading of the brief | Grounding criterion (#2) set to zero; no acceptance phase | Build acceptance into the protocol — agent restates intent before executing |
 | User says "ok" / agent emits "ack" — taken as confirmation of understanding | Evidence of understanding (#4) confuses acknowledgment with comprehension | Require active evidence: paraphrase, plan, or worked example, not just acknowledgment. (Empirical: LLMs produce near-zero acknowledgement statements (~0%) vs ~9% in human dialogue — NewsInterview, ACL 2025) |
 | No mechanism for "wait, I don't understand" once a task starts | Repair (#5) channel missing; errors compound | Provide explicit "ask for clarification" tool; reward its use when uncertainty is high. For irreversible actions, preemptive verification (infer task from action sequence, check against user intent) outperforms reactive repair (InferAct, EMNLP 2025) |
+| Repair happens, but the agent proceeds on its pre-repair assumptions | Repair (#5) treated as an utterance rather than a common-ground update; the correction is acknowledged and then not propagated | After a correction, require restatement of the *revised* shared state, not of the correction. Empirically LLM collaborators fail to update assumptions post-repair, and their joint vocabulary with a partner shrinks rather than grows over trials (Poelitz et al. 2026) |
 | Brief mentions "the dashboard" without antecedent | Presupposition (#6) failed; agent fills in wrong referent | Audit briefs for definite references; resolve antecedents before handoff |
 | Brief written in domain shorthand the recipient doesn't share; LLMs repeat similar follow-ups rather than pivoting to audience-state-informed questions | Audience design (#7) failed; speaker-centric, listener state untracked | Rewrite for the recipient's vocabulary; check by having a peer (or different agent) read it cold |
 | Handoff treated as fire-and-forget | Joint commitment (#8) violated; communication framed as transmission | Wait for acceptance signal before considering the handoff complete |
@@ -150,7 +155,9 @@ _Context_: Orchestrator dispatches a subagent on a non-trivial task. MAST data m
 6. Provide a repair channel (#5): an explicit "ask the user / orchestrator" tool with a low threshold for use under uncertainty. Consider preemptive repair verification: before executing irreversible actions, a Task Inference + Task Verification unit can verify alignment between observed agent plan and stated user intent (InferAct pattern, EMNLP 2025, +8% Macro-F1 over baselines across 3 tasks).
 7. Compute total cost (#9, #10): brief tokens + acceptance tokens + expected repair tokens. Optimize the sum, not just brief tokens.
 
-**A2A/MCP note (2026).** Agent-to-Agent (A2A, Google/Linux Foundation, 2025) and MCP standardize the *transport* layer for inter-agent handoffs. They do not solve the grounding layer. An A2A task delegation carries a structured payload, but whether the receiving agent shares the sending agent's interpretation of that payload is still a Clark-layer problem: presuppositions must be resolved (#6), audience design applied (#7), and an acceptance phase built into the A2A response before execution begins (#3).
+**A2A/MCP note (2026).** Agent-to-Agent (A2A, Google/Linux Foundation, 2025) and MCP standardize the *transport* layer for inter-agent handoffs. They do not solve the grounding layer. Yuan et al. (2026) survey 18 agent communication protocols against a three-layer taxonomy — communication (reliable transmission), syntactic (message schemas), semantic (meaning alignment) — and find most provide "limited protocol-level mechanisms for clarification, context alignment, and verification." Agents "exchange messages correctly without ensuring they understand them in the same way." Semantic responsibilities get pushed into prompts, wrappers, and orchestration logic.
+
+Practical consequence: the grounding layer is yours to build, per-integration, until protocols carry it. An A2A task delegation carries a structured payload, but whether the receiving agent shares the sending agent's interpretation of that payload is still a Clark-layer problem: resolve presuppositions (#6), apply audience design (#7), and build an acceptance phase into the A2A response before execution begins (#3).
 
 **Worked example.** Orchestrator brief v1: "Refactor the auth module." Acceptance step: subagent restates: "I'll modify the OAuth2 handler in `src/auth/`, preserve existing endpoints, add tests." Orchestrator notices it missed a target file — the brief should have specified `src/auth/oauth2.py` not the whole module. Repair: 50 tokens. Without acceptance step: subagent rewrites a different file; repair cost 5,000+ tokens. Acceptance step earned its keep.
 
@@ -162,6 +169,16 @@ _Context_: An agent loops for many turns; context gets compressed by the harness
 2. Set grounding criterion (#2) higher near compression boundaries — verify shared state before acting.
 3. Use repair (#5) proactively — re-establish key facts after compression rather than waiting for failure.
 4. Track grounding cost (#10) — re-grounding has a token cost that competes with productive work; make it explicit in the budget.
+
+### Multi-turn agent↔agent coordination (dynamic grounding)
+
+_Context_: Two agents must converge on a joint plan over several turns — negotiation, resource allocation, division of labor, peer review. Distinct from a one-shot handoff: the failure is not a bad brief but a failure to *maintain and revise* shared state across turns. Individually capable agents still fail as dyads here (Yao et al. 2026).
+
+1. Externalize the shared plan (#1, #8). Do not rely on each agent's reading of the transcript — keep a single explicit joint-state object both agents read and write. Loss of shared interaction history is failure mode #1 in the negotiation data.
+2. Re-bind references every turn (#6). Referential binding errors across turns are a named failure mode: "the second option," "your earlier proposal," "that split" drift as the transcript grows. Restate referents by identity, not by position in the conversation.
+3. Force explicit commitment steps (#3, #8). Distinguish "I am exploring X" from "I commit to X." Anchoring to early proposals is a named failure mode — untagged exploratory proposals get treated as commitments by the other side.
+4. Watch for the fairness default (#2). Agents default to equal splits over reward-maximizing coordination. If the jointly optimal outcome is asymmetric, state that explicitly; symmetric-looking compromises are a grounding failure wearing the costume of a reasonable outcome.
+5. Verify convergence, don't assume it (#4). Ask each agent independently to state the agreed plan. Agreement in the transcript is not agreement in their models.
 
 ### Human-AI handoff at end of agent run
 
@@ -280,7 +297,11 @@ Communication or handoff boundary
 - Sarkar et al. (2025) "Understanding Common Ground Misalignment." ACL 2025. Ubuntu-CG: 200 conversations, 7,590 turns; friction correlates with task failure; LLM friction detection 77.22% (overt) / 64.81% (implicit) F1. Supports #1, #5.
 - Fang, Zhu, Gurevych (2025) "Preemptive Detection and Correction of Misaligned Actions." EMNLP 2025, pp. 222–244. InferAct: +8% avg Macro-F1, 11/12 settings best across 3 tasks × 4 LLMs. Extends #5.
 - Estienne et al. (2025) "Collaborative Rational Speech Act." EMNLP 2025. CRSA extends RSA to multi-turn with private meaning spaces; speaker entropy 8.18 vs 14.27 baseline on medical dialogue. Grounds #8, #9.
-- Empirical numbers (e.g., MAST percentages, Rifts rates) are dataset-specific. Re-verify against your own production traces before treating as priors.
+- Yao, Zou, Hawkins (2026) "Talk is Cheap, Communication is Hard: Dynamic Grounding Failures and Repair in Multi-Agent Negotiation." arXiv 2605.01750. Iterated negotiation game with verifiable jointly optimal outcomes; agents solve in isolation but dyads fail across models; four named failure modes. Static-vs-dynamic grounding distinction. Preprint — no peer review confirmed.
+- Poelitz, Doshi-Velez, Lindley (2026) "A Benchmark to Assess Common Ground in Human-AI Collaboration." arXiv 2602.21337. 40-participant Helper/Worker puzzle task, 2×2 design; measures task, object, and communication levels. AI Helpers show minimal efficiency gain across trials where humans improve; joint vocabulary shrinks; models fail to update assumptions after repair. Preprint — no peer review confirmed.
+- Yuan et al. (2026) "Beyond Message Passing: A Semantic View of Agent Communication Protocols." arXiv 2604.02369. Surveys 18 protocols (MCP, A2A, Agora, ACP variants) against a communication/syntactic/semantic taxonomy; cites Clark's joint-activity framing to motivate the semantic layer. Preprint — no peer review confirmed.
+- Moore, An, Ahmed, Gala (2026) "NC-Bench: An LLM Benchmark for Evaluating Conversational Competence." arXiv 2601.06426. 14 interaction patterns, 720 test cases, 6 open-source models (2–8B, Granite/Llama/Qwen). Repair (repeat) 5–75% vs answering 95–100%. Small-model sample — do not generalize the rates to frontier models; the *ordering* (repair weakest) is the transferable finding.
+- Empirical numbers (e.g., MAST percentages, Rifts rates, NC-Bench accuracies) are dataset- and model-specific. Re-verify against your own production traces before treating as priors. The four 2026 entries above are arXiv preprints; the Clark canonical layer and the ACL/EMNLP 2025 layer are peer-reviewed.
 
 ## Learnings Loop
 

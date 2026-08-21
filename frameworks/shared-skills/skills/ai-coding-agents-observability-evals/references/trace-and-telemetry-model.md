@@ -10,6 +10,21 @@ Use a layered telemetry model for coding agents:
    Tool calls, approvals, subprocess boundaries, file edits, retries, worker spawning, and verification passes.
 4. **Outcome layer**
    Success or failure category, latency, token usage, cost, and any regression score outputs.
+5. **Trajectory layer**
+   Iterative-eval lineage, specification version, carried-workspace identity, per-checkpoint correctness and structural quality, cost, and duration.
+
+## Iterative checkpoint payload
+
+When an eval carries the agent's own workspace across evolving specifications, emit one record per checkpoint with:
+
+- `trajectory_id`, `checkpoint_id`, and `parent_checkpoint_id`
+- `spec_version`
+- stable workspace identity and a content hash; keep source contents in the replay-safe artifact store, not metric dimensions
+- separate strict, isolated, core, and regression results
+- erosion and verbosity values produced by the pack's version-pinned analyzers
+- checkpoint cost and duration
+
+Preserve an explicit parent edge rather than inferring order from timestamps. The lineage must support candidate-versus-baseline trajectory-slope comparisons and late-checkpoint regression queries. Keep identifiers or hashes out of low-cardinality metrics labels; join them in the trace or eval store instead.
 
 ## Minimum replay-safe payload
 
@@ -39,6 +54,7 @@ Persist enough state to explain a bad run without depending on transient UI even
 - **Remote sessions**: Bridge control messages belong in the trace even when the local UI never re-renders them directly.
 - **Resume flows**: A resumed session should continue the same semantic session lineage while marking the restore boundary explicitly.
 - **Verifier passes**: Record them separately from implementation attempts so regressions can distinguish “wrong fix” from “missing verification.”
+- **Carried workspaces**: Hash the exact checkpoint output before the next specification begins. A resumed or retried checkpoint must identify the input workspace and its attempt, rather than silently overwriting lineage.
 
 ## Practical tip
 

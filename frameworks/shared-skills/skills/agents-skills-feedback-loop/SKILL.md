@@ -2,7 +2,7 @@
 name: agents-skills-feedback-loop
 description: Adds per-skill learnings loops for dated patterns, mistakes, and domain facts. Use when wiring skill memory, consolidation, or drift audits.
 version: "1.1"
-last_validated: 2026-07-11
+last_validated: 2026-08-15
 ---
 
 # Agent Skills — Feedback Loop

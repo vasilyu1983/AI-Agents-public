@@ -1,6 +1,6 @@
 ---
 description: Formal theory map for decision-theory foundations. Use to separate normative decision quality from descriptive human choice.
-last_verified: 2026-05-02
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -26,3 +26,5 @@ Use this map when a decision recommendation needs an explicit decision rule, uti
 ## Production Rule
 
 Before using a decision score, state the decision maker, action set, state space, probability source, utility or loss function, and sensitivity range. Without those, the score is a spreadsheet preference, not decision theory.
+
+"Probability source" now has to name whether the number came from a human, a model, or a market, because the three carry different failure modes. A model-generated prior is a forecaster with a measurable track record, not a ground truth: as of early 2026 the best LLMs still trail human superforecasters on ForecastBench, skew overconfident on events they rate as likely, and produce verbalized confidence that diverges from both their own token likelihoods and realized accuracy. Record the provenance so the sensitivity range can be set against it.

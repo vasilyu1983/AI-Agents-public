@@ -2,6 +2,7 @@
 
 ## Patterns That Work
 
+- [2026-08-18] On Codex CLI 0.147.0, `codex mcp add NAME --url URL` automatically starts and can complete OAuth when the remote server advertises OAuth support, so verify the command output before running a separate `codex mcp login NAME`.
 ## Mistakes to Avoid
 
 - [2026-07-11] CORRECTION of 2026-06-18 entry below: 'codex mcp add' DOES support --url (+ --bearer-token-env-var) for Streamable HTTP servers — added in openai/codex PR #4904, merged 2025-10-08, well before the earlier "stdio only" claim was written. Confirmed live against `codex mcp add --help` on codex-cli 0.144.1. The earlier bullet was already stale when authored; verify CLI facts against the installed binary's --help, not just docs pages, since docs can lag shipped CLI features.

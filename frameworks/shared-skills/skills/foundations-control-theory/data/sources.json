@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Foundations Control Theory — Sources",
     "description": "Primary references for 12 control-theory primitives: PID, feedback/feedforward, observability, controllability, Lyapunov stability, MPC, Kalman filter, dead-time compensation, anti-windup, gain scheduling, circuit breaker, backpressure, rate limiting, and DeePC/behavioral systems",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-control-theory",
-    "total_sources": 26
+    "total_sources": 29
   },
   "textbooks": [
     {
@@ -113,8 +113,33 @@
       "id": "Yang-CBFRL-2025",
       "name": "CBF-RL: Safety Filtering Reinforcement Learning in Training with Control Barrier Functions",
       "url": "https://arxiv.org/abs/2510.14959",
-      "description": "Yang, Werner, de Sa & Ames (2025/2026). ICRA 2026. Integrates control barrier functions into RL training rollouts, producing policies that are provably safe and operate without runtime safety filters. Hardware-validated on Unitree G1 humanoid. Code: https://github.com/lzyang2000/cbf-rl-navigation-demo. Extends primitive #4 (Lyapunov stability) to learned controllers.",
-      "add_as_web_search": false
+      "description": "Yang, Werner, de Sa & Ames (2025/2026). Accepted to ICRA 2026 — confirmed via arXiv abstract 2026-08-14. Integrates control barrier functions into RL training rollouts, producing policies that internalize safety constraints and deploy without a runtime safety filter. Hardware-validated on Unitree G1 humanoid (obstacle avoidance, stair climbing). Code: https://github.com/lzyang2000/cbf-rl-navigation-demo. Extends primitive #4 (Lyapunov stability) to learned controllers.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Miyaoka-CBFLLM-2026",
+      "name": "Control Barrier Function for Aligning Large Language Models",
+      "url": "https://arxiv.org/abs/2511.03121",
+      "description": "Miyaoka & Inoue (2025/2026). Published in IEEE Transactions on Control Systems Technology (2026) — peer-reviewed, unusual for control-theory-on-LLM work. Applies a CBF safety filter to the token predicted by a baseline LLM, intervening in generated text without fine-tuning the base model. Requires an evaluation model to define the barrier; the guarantee is bounded by that evaluator's quality. Scope boundary: controls the decoding loop of one model, not an agent tool-use loop. Verified via WebFetch 2026-08-14. Extends primitive #4 to LLM decoding.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Nogueira-ARCMultiAgent-2026",
+      "name": "A Systematic Approach to Multi-Agent AI from Advanced Regulatory Control Theory: Safe and Auditable LLM Operator Agents for Process Control",
+      "url": "https://arxiv.org/abs/2606.30877",
+      "description": "Nogueira & Skogestad (2026). arXiv:2606.30877, submitted 2026-06-29 (eess.SY). Maps each feedback loop of an advanced-regulatory-control chain to one scoped LLM operator agent carrying its controlled variable, setpoint, chain priority, and selector kind. Conflicts resolve by structural priority — MIN/MAX selector networks for CV-CV contention, split-range for MV-MV contention — deterministically in the orchestrator, regardless of LLM output. Evaluated on a dairy-barn ventilation scenario over 4 days with Qwen 2.5 7B Instruct; contribution is architecture and auditable trajectories, not a benchmark. Skogestad originated the ARC framing. arXiv preprint only — evidence grade B. Verified via WebFetch 2026-08-14. Source for the multi-agent constraint-arbitration recipe.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "Paul-ContextAssembly-2026",
+      "name": "Context Assembly as the Controlled Variable: A Control-Theoretic View of Harness Policies for Frozen LLM Agents",
+      "url": "https://arxiv.org/abs/2607.25408",
+      "description": "Paul, D. (2026). arXiv:2607.25408, submitted 2026-07-28. Frames harness policy for a frozen LLM — prompt template, few-shot demonstrations, retrieved-context volume, planning/verification passes — as the controlled variable, with an outer context policy learned online via contextual bandit or REINFORCE. Stability claim is non-decreasing expected reward under bounded policy change, weaker than Lyapunov asymptotic stability. No quantitative results; empirics deferred to a companion paper. Evidence grade C — useful as framing, not evidence. Verified via WebFetch 2026-08-14.",
+      "add_as_web_search": false,
+      "url_check": "manual"
     },
     {
       "id": "Schimperna-KoopmanMPC-2025",
@@ -176,7 +201,7 @@
       "id": "Tymoshenko-Predictive-2026",
       "name": "Predictive Autoscaling for Node.js on Kubernetes: Lower Latency, Right-Sized Capacity",
       "url": "https://arxiv.org/abs/2604.19705",
-      "description": "Tymoshenko, Maraschi & Collina (2026). arXiv:2604.19705. Feedforward-dominant predictive autoscaler for Node.js/Kubernetes. Confirmed empirical: 26ms median latency vs. 154ms for KEDA and 522ms for HPA under steady ramp load. Matteo Collina is Node.js core maintainer. Paper-only; no open code confirmed. Caveat: Node.js-specific; generalizability to other runtimes unverified. Source for Predictive Autoscaler composition recipe.",
+      "description": "Tymoshenko, Maraschi & Collina (2026). arXiv:2604.19705. Feedforward-dominant predictive autoscaler for Node.js/Kubernetes. Submitted 2026-04-21, revised 2026-04-22. Confirmed empirical: 26ms median latency vs. 154ms for KEDA and 522ms for HPA under steady ramp load — re-verified verbatim via WebFetch 2026-08-14. Matteo Collina is Node.js core maintainer. Paper-only; no open code confirmed. Caveat: Node.js-specific; generalizability to other runtimes unverified. Source for Predictive Autoscaler composition recipe.",
       "add_as_web_search": false
     },
     {

@@ -2,7 +2,7 @@
 
 Reusable blocks for the highest-leverage project-memory sections. Each fragment carries a cache-protection or context-budget rationale — the *why* is what makes the block worth keeping in hot memory.
 
-Sources: Paweł Huryn, ["Claude Code's Limits Are Generous. The Problem Is Your Harness."](https://x.com/PawelHuryn/status/2048170309396926577) (Apr 25, 2026); Thariq, ["Lessons from Building Claude Code"](https://x.com/trq212/status/2024574133011673516) and ["Session Management & 1M Context"](https://x.com/trq212/status/2044548257058328723); [Claude Code – Model configuration](https://code.claude.com/docs/en/model-config); [Codex – Subagents](https://developers.openai.com/codex/subagents).
+Sources: Paweł Huryn, ["Claude Code's Limits Are Generous. The Problem Is Your Harness."](https://x.com/PawelHuryn/status/2048170309396926577) (Apr 25, 2026); Thariq, ["Lessons from Building Claude Code"](https://x.com/trq212/status/2024574133011673516) and ["Session Management & 1M Context"](https://x.com/trq212/status/2044548257058328723); [Claude Code – Model configuration](https://code.claude.com/docs/en/model-config); [Codex – Subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents).
 
 ## Table of Contents
 

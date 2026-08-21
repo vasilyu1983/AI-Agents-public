@@ -1,6 +1,6 @@
 ---
 description: Domain-agnostic overview of 16 behavioral-economics primitives. For consumer applied recipes, see downstream consumer skills (marketing-cro, startup-business-models, product-management, marketing-content-strategy, marketing-paid-advertising).
-last_verified: 2026-05-17
+last_verified: 2026-08-14
 status: stable
 ---
 

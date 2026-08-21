@@ -249,6 +249,7 @@ When a session delegates work to an external ACP agent (see `ai-coding-agents-re
 - [`references/permission-routing-local-remote-and-worker.md`](references/permission-routing-local-remote-and-worker.md) — Approval flows for REPL, remote sessions, and swarm workers
 - [`references/openai-codex-request-permissions-and-split-policy.md`](references/openai-codex-request-permissions-and-split-policy.md) — OpenAI Codex split filesystem policy, protected metadata, `request_permissions`, and hostile-case tests
 - [`references/openai-codex-execpolicy-and-network-proxy.md`](references/openai-codex-execpolicy-and-network-proxy.md) — OpenAI Codex executable policy engine and network proxy boundary patterns
+- [`references/hostile-path-test-checklist.md`](references/hostile-path-test-checklist.md) — Adversarial path, symlink, and containment cases for permission-boundary tests
 
 ### Data
 

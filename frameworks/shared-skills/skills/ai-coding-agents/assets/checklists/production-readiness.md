@@ -9,6 +9,10 @@ Deployment gate for coding agents and coding agent teams. Complete before sharin
 - [ ] Produces correct output format matching the output contract
 - [ ] Self-verification step validates output correctly
 - [ ] No scope creep observed (agent stays within assigned files/directories)
+- [ ] Edit/refactor/migration agent passed at least one 3+ checkpoint evolving-spec sequence
+- [ ] Each checkpoint used a fresh conversation/context while carrying the same agent-created workspace
+- [ ] Every checkpoint retained and reran all prior regression tests
+- [ ] Readiness is not inferred from one-shot green tests or plan-first/quality prompts alone
 
 ## Token Budget
 
@@ -68,3 +72,4 @@ Deployment gate for coding agents and coding agent teams. Complete before sharin
 - [ ] Know how to read agent transcripts for debugging
 - [ ] Feedback loop: how will you learn about agent failures in real use?
 - [ ] Plan for iterating: when and how to update the agent based on usage
+- [ ] Checkpoint correctness, cost, and maintainability trajectory have named owners and review cadence

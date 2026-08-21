@@ -1,6 +1,6 @@
 ---
 description: Applied patterns, scenarios, anti-patterns, and known traps for decision-theory foundations.
-last_verified: 2026-05-02
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -17,12 +17,13 @@ status: stable
 | Adaptive allocation | Options reveal performance over time | Bandit -> guardrails -> dominance check |
 | Deep uncertainty | Probabilities unknowable; large or high-dimensional scenario space | RDM (Lempert 2003) → scenario discovery (PRIM) → strategy robustness check |
 | Multi-stage adaptive planning | Long-horizon decisions with observable threshold-crossings across > 2 stages | DAPP (Haasnoot 2013) → pathway map → tipping-point triggers |
+| Clarify or commit | An agent holds an ambiguous instruction mid-trajectory | Cost-penalized EVPI per candidate question → specification-vs-model uncertainty split → trajectory-position decay check |
 
 ## Known Traps
 
 - Expected value is not expected utility.
 - EVPI is an upper bound; most real studies have lower EVSI.
-- MCDA rankings can reverse under small weight changes.
+- MCDA rankings can reverse under small weight changes. Separately and more seriously, they can reverse when the *alternative set* changes with weights fixed — an audit of published MCDM pipelines found the recomposition test (RRT3) failing in ~48% of cases (Cabral et al. 2025/2026). Weight sensitivity needs disclosure; an RRT2/RRT3 failure invalidates the ranking.
 - Real options require uncertainty to resolve before the option expires.
 - Bandits optimize measured reward, not necessarily product quality or fairness.
 - Stochastic dominance avoids specifying utility only under the relevant dominance order.

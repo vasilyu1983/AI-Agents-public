@@ -1,6 +1,6 @@
 ---
 description: Formal theory map for behavioral-economics foundations. Use to separate empirical behavioral effects from ethical product application.
-last_verified: 2026-05-02
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -22,6 +22,7 @@ Use this map when a behavioral recommendation needs a source-level effect, ethic
 | Intertemporal choice | Hyperbolic and beta-delta discounting | Present bias, trials, commitments | Do not exploit self-control failures |
 | Mental accounting | Account labels, sunk costs, transaction utility | Bundles, budgets, price framing | Labels must clarify, not obscure cost |
 | Context effects | Decoy, compromise, ordering effects | Pricing tier and menu design | Target option must be defensible |
+| Artificial agents as choice subjects | Nudge sensitivity of LLM policies; default/suggestion/highlighting response curves | Auditing environments an AI agent will act in; setting agent action scope | Agent susceptibility is model-specific and generally exceeds human; detection ability does not imply resistance, so guardrails must be structural rather than prompted (Cherep et al., PNAS 123(25), 2026; Tang et al., arXiv:2509.10723, 2025) |
 
 ## Production Rule
 

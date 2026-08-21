@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Reliability Theory Foundations — Sources",
     "description": "Primary texts, standards, and references for 11 reliability theory primitives: MTBF/MTTR, availability composition, hazard functions, bathtub curve, fault tree analysis, FMEA, redundancy math, error budgets, Weibull analysis, system reliability, reliability allocation.",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-reliability-theory",
-    "total_sources": 27,
+    "total_sources": 33,
     "chapter_citation_note": "Chapter-level citations for Lewis (1995), O'Connor & Kleyner (2012), and Birolini (2017) were removed 2026-07-11. A July-2026 audit found the per-primitive chapter numbers could not be verified against the books' actual tables of contents (spot-checked against a confirmed 2nd-ed. Lewis ToC) and, for Birolini, the same 'Chapter 2' was attributed to seven unrelated primitives — a strong fabrication signal. These sources remain valid topical references; cite them at the book level, not the chapter level, until someone verifies chapter numbers against a physical copy of each edition."
   },
   "books": [
@@ -254,8 +254,8 @@
       "url": "https://arxiv.org/abs/2602.16666",
       "doi_or_url": "https://arxiv.org/abs/2602.16666",
       "dashboard": "https://hal.cs.princeton.edu/reliability",
-      "description": "Proposes 12 concrete metrics decomposing AI agent reliability across four dimensions: consistency, robustness, predictability, and safety. Argues single-run success metrics obscure critical operational flaws — agents may succeed on average but fail consistently under perturbation or repeated execution. Directly extends system reliability primitives (01, 10) into the AI agent domain. Dashboard (hal.cs.princeton.edu/reliability, Princeton) confirmed live, evaluates 15 agents across 2 benchmarks on 12 metrics as of 2026-07-11.",
-      "verified_via": "WebFetch 2026-05-17; re-verified WebFetch 2026-07-11 (venue update to ICML 2026, dashboard content confirmed)",
+      "description": "Proposes 12 concrete metrics decomposing AI agent reliability across four dimensions: consistency, robustness, predictability, and safety. Argues single-run success metrics obscure critical operational flaws — agents may succeed on average but fail consistently under perturbation or repeated execution. Directly extends system reliability primitives (01, 10) into the AI agent domain. Dashboard (hal.cs.princeton.edu/reliability, Princeton SAgE Group) confirmed live, evaluating 15 agents from Anthropic, OpenAI, and Google across 2 benchmarks (GAIA, tau-bench airline) on 12 metrics as of 2026-08-14. The final published version adds frontier-model coverage, a corrected outcome-consistency formula, and fixes preventing agents from reaching benchmark answers via file paths or online mirrors — the headline finding is unchanged: capability gains have yielded only small reliability improvements.",
+      "verified_via": "WebFetch 2026-05-17; re-verified 2026-07-11 (venue update to ICML 2026); re-verified WebFetch 2026-08-14 (dashboard live, agent/benchmark/metric counts and corrected-formula note confirmed)",
       "primitives": ["01", "10"]
     },
     {
@@ -319,6 +319,78 @@
       "description": "Accessible peer-reviewed introduction to Safety-II and resilience engineering. Key claim: 'successful and failed work performance have the same causes' — variability in worker performance is normal, not deviant, and is the foundation of both safe and unsafe outcomes in sociotechnical systems. Use as entry point before Hollnagel 2014.",
       "verified_via": "WebFetch 2026-05-17 — title, author, journal, year, PMC ID confirmed",
       "primitives": ["05", "06"]
+    },
+    {
+      "id": "Cemri2025MAST",
+      "name": "Why Do Multi-Agent LLM Systems Fail?",
+      "author": "Cemri, M., Pan, M. Z., Yang, S., Agrawal, L. A., Chopra, B., Tiwari, R., Keutzer, K., Parameswaran, A., Klein, D., Ramchandran, K., Zaharia, M., Gonzalez, J. E., & Stoica, I.",
+      "year": 2025,
+      "venue": "arXiv preprint cs.AI (v1 2025-03-17, v3 2025-10-26)",
+      "url": "https://arxiv.org/abs/2503.13657",
+      "url_check": "manual",
+      "description": "Introduces MAST (Multi-Agent System Failure Taxonomy): 14 failure modes in 3 categories — specification/system design (~41.8% of failures), inter-agent misalignment (~36.9%), and task verification. Built from 1,600+ annotated traces across 7 multi-agent frameworks; 150 traces manually analysed; inter-annotator agreement kappa = 0.88. Establishes that the largest failure category is specification, which has no per-step reliability at all — so improving each agent's r_i cannot address it. Grounds the SKILL.md anti-pattern against treating a multi-agent topology as a plain series chain. Note: error-amplification multipliers attributed to MAST in secondary write-ups are not in the paper; cite only the figures listed here.",
+      "verified_via": "WebFetch 2026-08-14 — title, full author list, dates, 14 modes / 3 categories, 1,600+ traces, 150 manually analysed, kappa = 0.88 confirmed. No peer-reviewed venue acceptance indicated.",
+      "primitives": ["06", "10"]
+    },
+    {
+      "id": "Wu2026SilentFailures",
+      "name": "When Errors Become Narratives: A Longitudinal Taxonomy of Silent Failures in a Production LLM Agent Runtime",
+      "author": "Wu, W.",
+      "year": 2026,
+      "venue": "arXiv preprint cs.SE",
+      "url": "https://arxiv.org/abs/2606.14589",
+      "url_check": "manual",
+      "description": "Eight-week longitudinal study of a production personal-assistant agent runtime: 22 incidents, five-class silent-failure taxonomy. Key finding for FMEA Detection scoring — roughly 70% of silent failures were caught by human observation rather than by automated testing or audit, in a system carrying 4,286 unit tests and 827 governance checks across 8 LLM providers and ~40 scheduled jobs. Identifies 'fail-plausible' failure unique to LLM systems: the model transforms a failed step into fluent, plausible narrative, so no error signal reaches a human. Failures persisted 13 hours to 60 days, with duration driven by architectural seams between components. Single-author preprint; treat the taxonomy as useful framing and the quantitative figures as single-site evidence.",
+      "verified_via": "WebFetch 2026-08-14 — title, author, 2026-06-12 submission, 22 incidents, ~70% human-caught, 4,286 tests / 827 checks confirmed",
+      "primitives": ["06"]
+    },
+    {
+      "id": "Wang2026Horizon",
+      "name": "The Long-Horizon Task Mirage? Diagnosing Where and Why Agentic Systems Break",
+      "author": "Wang, X. J., Bai, H., Sun, Y., Wang, H., Zhang, S., Hu, W., Schroder, M., Mutlu, B., Song, D., & Nowak, R. D.",
+      "year": 2026,
+      "venue": "arXiv preprint cs.AI",
+      "url": "https://arxiv.org/abs/2604.11978",
+      "url_check": "manual",
+      "description": "HORIZON diagnostic benchmark for failure attribution in agentic systems. 3,100+ trajectories across four agentic domains; inter-annotator reliability kappa = 0.61, human-judge agreement kappa = 0.84. Finding: agents perform strongly on short- and mid-horizon tasks and break down on long-horizon ones — independent corroboration of the Reliability Decay Curve framing (Khanal 2026) and direct evidence that short-task reliability must not be extrapolated to long tasks.",
+      "verified_via": "WebFetch 2026-08-14 — title, full author list, 2026-04-13 submission, 3,100+ trajectories, both kappa values confirmed",
+      "primitives": ["01", "03"]
+    },
+    {
+      "id": "Dastidar2026AgentReliabilitySource",
+      "name": "Where Does Agent Reliability Come From? A Cross-Benchmark Decomposition of Verification Loops, Specialist Models, and Scaffolding in a Production Enterprise Agent",
+      "author": "Dastidar, A. (Leni Team)",
+      "year": 2026,
+      "venue": "arXiv preprint cs.SE",
+      "url": "https://arxiv.org/abs/2607.17044",
+      "url_check": "manual",
+      "description": "Cross-benchmark decomposition of where a production enterprise agent's reliability uplift originates. Results: +11.0 pp on SpreadsheetBench Verified (91.25% vs 80.25%, n=400, p<0.001), +7 to +10 pp on BullshitBench v2, ~+15 pp on GAIA validation (75.2% pass@1, n=165; 83.0% best-of-k). Key finding for reliability allocation (primitive 11): most uplift comes from scaffolding, routing, and specialist-model selection, not from verification — the verification step contributes only ~+1.5 pp in isolation. Instruments the loop end-to-end for an empirical verifier confusion matrix (catch rate ~0.20, fix rate 0.75, no false-alarm regressions), which means a verifier is a low-coverage detection control and should not be scored as strong Detection in an agent FMEA. Single-vendor production system; treat the decomposition as directional.",
+      "verified_via": "WebFetch 2026-08-14 — title, author, 2026-07-19 submission, all benchmark deltas and verifier catch/fix rates confirmed",
+      "primitives": ["06", "11"]
+    },
+    {
+      "id": "AWS2025DynamoDBOutage",
+      "name": "AWS Post-Event Summary: Service Disruption in US-EAST-1 (October 19-20, 2025)",
+      "author": "Amazon Web Services",
+      "year": 2025,
+      "publisher": "Amazon Web Services",
+      "url": "https://aws.amazon.com/message/101925/",
+      "url_check": "manual",
+      "description": "Official AWS postmortem. Root cause: a race condition between two independent DNS Enactor components in DynamoDB's automated DNS management left an empty DNS record for the regional endpoint, in a state that blocked subsequent plan updates from being applied — the automation designed to prevent the fault produced it. DynamoDB recovered in ~2h52m (23:48 PDT to 02:40 PDT) but dependent services (EC2, Lambda, ECS/EKS) took until the following afternoon to drain backlogs. Load-bearing for two SKILL.md points: config/control-plane propagation is a series element with fan-out that replication cannot mitigate, and MTTR must be measured to dependent-service recovery, not to root-cause fix.",
+      "verified_via": "WebFetch 2026-08-14 — vendor-published root cause, Enactor race mechanism, timings confirmed",
+      "primitives": ["01", "05", "10"]
+    },
+    {
+      "id": "Cloudflare2025Outage",
+      "name": "Cloudflare outage on November 18, 2025",
+      "author": "Cloudflare",
+      "year": 2025,
+      "publisher": "Cloudflare",
+      "url": "https://blog.cloudflare.com/18-november-2025-outage/",
+      "url_check": "manual",
+      "description": "Official Cloudflare postmortem. Root cause: a database permissions change exposed table metadata the Bot Management feature-file query did not filter, returning duplicate column entries and doubling the file past a 200-feature preallocation limit; the Rust proxy panicked on load, producing widespread HTTP 5xx. 3h38m major impact (11:20-14:58 UTC), full recovery 17:06 UTC. Diagnostic note worth citing: because ClickHouse nodes picked up the permissions change gradually, the file alternated good/bad every five minutes and the incident initially presented as a DDoS. Remediations included hardening internal config-file ingestion as if it were user input and adding global feature kill switches.",
+      "verified_via": "WebFetch 2026-08-14 — vendor-published root cause, mechanism, timings, and stated remediations confirmed",
+      "primitives": ["05", "10"]
     }
   ]
 }

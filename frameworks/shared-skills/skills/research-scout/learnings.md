@@ -2,6 +2,7 @@
 
 ## Patterns That Work
 
+- [2026-08-12] Before adjudicating a tension between a new rule and an established framework, read that framework's own scope statement: C4's FAQ self-scopes to static structure and prescribes supplements, settling by primary source.
 - [2026-05-30] If both ideas already have same-day per-claim-graded evidence, the right mode is PACKAGE (Steps 3/5c/6), not a fresh SEARCH. Prove no source was invented in packaging via comm -23 (packaged URLs subset of source-doc URLs).
 - [2026-05-30] The two-plus source-family corroboration gate earned its keep; it correctly capped a strong single-channel founder-revenue claim (Cupidly 4,967/mo from one X post) at validate not promote.
 - [2026-05-17] Skill-uplift: give workers a parent-verified fact packet + verify-or-hedge mandate for non-packet dates; they then hedge volatile facts instead of asserting them, closing gaps without propagating over-claims.
@@ -15,6 +16,9 @@
 - [2026-05-17] Foundations-skill maturity audits: scan workers near-universally recommend "seed N learnings entries" to 'activate' an empty learnings loop as a P0/P1 — applying this fabricates field-use evidence that never happened (fail-loud violation). Parent must inject a standing override into every uplift worker (fix scaffold only, never invent entries); 14/15 workers proposed seeding, override held in all 14.
 ## Mistakes to Avoid
 
+- [2026-08-17] Vendored CSVs can carry deliberate local edits (ui-ux-design colors.csv WCAG notes vs upstream ui-ux-pro-max): upstream sync must be row-level merge, never overwrite.
+- [2026-08-17] Anonymous raw.githubusercontent.com 429s fast on multi-file drift checks; fetch via gh api -H 'Accept: application/vnd.github.raw' instead.
+- [2026-08-12] Ranking skills by diagram-term density needs a homonym filter first: 'C4' matched the Colossal Clean Crawled Corpus in 4 AI skills but the C4 architecture model in only 2 — raw 'rg -c' ranked the dataset skills above the real consumers.
 - [2026-07-11] A 4-week-old sweep still had wrong facts (OpenAlex mandate date, Elicit's repriced tiers, ResearchRabbit's acquisition year); verify dates against primary announcements, never cite tool pricing without a re-verification date.
 - [2026-05-30] Tag manufactured demand before grading virality; revenue driven by a paid ad or quiz-funnel (Coursiv) is ad-spend not product-market pull and must not score as organic virality.
 - [2026-05-29] iOS-opportunity scans must check incumbent M&A, not just complaint density: ranked 'AI photo-calorie' as a fresh wedge, but MyFitnessPal had already acquired Cal AI (Mar 2026) — the killer feature was already consolidated.
@@ -28,6 +32,7 @@
 - [2026-05-17] Scan workers over-claim version/compat facts; re-verify every load-bearing version or contradiction claim against primary sources and write the accurate partial form, never the worker's blanket claim.
 ## Domain Knowledge
 
+- [2026-08-17] 'UI UX Max Pro' users mention = nextlevelbuilder/ui-ux-pro-max-skill; try name permutations before reporting a source link missing.
 - [2026-06-11] May 2026 EU Digital Omnibus postponed AI Act Annex III high-risk deployer obligations from 2026-08-02 to 2027-12-02 (provisional, formal adoption ~mid-2026); any skill citing the August 2026 date is stale.
 - [2026-05-30] Award and editorial signals (Apple Design Awards) prove distribution via near-zero-CAC featuring but not ROI; grade them on a separate axis from revenue and never conflate the two.
 - [2026-05-17] zsh does not word-split unquoted $VAR (unlike bash); multi-path git commands must list paths literally or use an array, or git sees one giant pathspec.

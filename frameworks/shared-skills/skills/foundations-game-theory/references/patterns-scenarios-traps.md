@@ -1,6 +1,6 @@
 ---
-description: April 2026 operating patterns, scenario stacks, anti-patterns, and known traps for game-theory primitives in strategic decision systems.
-last_verified: 2026-05-02
+description: Current operating patterns, scenario stacks, anti-patterns, and known traps for game-theory primitives in strategic decision systems.
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -8,7 +8,7 @@ status: stable
 
 ## Table of Contents
 
-- [April 2026 Posture](#april-2026-posture)
+- [Current Posture](#current-posture)
 - [Core Patterns](#core-patterns)
 - [Scenario Stacks](#scenario-stacks)
 - [Anti-Patterns](#anti-patterns)
@@ -23,6 +23,8 @@ status: stable
 Treat classical game theory as the durable mechanism layer and 2025-2026 LLM-agent papers as applied evidence. Auctions, Shapley attribution, repeated games, Pareto reasoning, BATNA/ZOPA, and mechanism design are stable concepts; ECON, AgentAuditor, BMV, RCS, dynamic role assignment, and credibility scoring are current applied patterns that still need task-level validation before production use.
 
 Do not present a paper result as a universal benchmark. Accuracy deltas, token reductions, and sample-efficiency claims transfer only after a held-out eval on the target workflow.
+
+The 2026 evidence has converged on one theme worth stating separately: **classical mechanism guarantees do not transfer to LLM participants for the reasons the proofs give.** Agents are miscalibrated rather than strategic (MarketBench), truthful for reasons unrelated to strategy-proofness (Hoshino et al.), and unconstrained by rules that exist only in a prompt (Institutional AI). The practical consequence is that the mechanism still helps — mechanism-based markets beat free negotiation — but its incentive proof is not the thing doing the work, so it cannot be relied on when the model, framing, or pressure changes. Measure behavior per deployment.
 
 ## Core Patterns
 
@@ -108,6 +110,52 @@ LLMs do not reliably best-respond in strategic games. Documented deviations from
 - Do not use prediction-market (#11) or cooperative game (#6) primitives in high-stakes settings without a prior behavioral eval.
 
 **Sources**: NegotiationArena arXiv:2402.05863 (`NegotiationArena`), GameBench arXiv:2406.06613 (`GameBench`), IJCAI-25 survey arXiv:2503.16424 (`IJCAI-25`).
+
+---
+
+### Self-report calibration trap
+
+Every market-style coordination primitive here — #3 auction routing, #11 confidence staking, #21 delegation contracts — consumes agent self-reports of cost, success probability, or capability. Mechanism truthfulness does nothing about a *sincere* report that is simply wrong.
+
+MarketBench (Fradkin & Krishnan, arXiv:2604.23897, Apr 2026) evaluated six recent models on 93 SWE-bench Lite tasks: models were poorly calibrated on both success rate and token consumption, auctions built from their self-reports diverged from the full-information allocation, and adding prior-capability context improved calibration only modestly. The paper names self-assessment as the key bottleneck for market-style agent coordination.
+
+**Detection**: before routing production work by bid, collect agent cost/success self-estimates on a held-out task set with known outcomes. Plot predicted vs. actual. A mechanism is only as good as the valuations entering it.
+
+**Mitigation**: prefer observed historical cost over self-reported cost where history exists; apply #5 reputation tiers keyed to calibration error, not just outcome success; keep a full-information fallback allocation for high-stakes routing.
+
+**Sources**: MarketBench arXiv:2604.23897 (`MarketBench`).
+
+---
+
+### Prompt-only governance trap
+
+An anti-collusion or fair-play rule that lives only in a system prompt is cheap talk in the technical sense: it is an unverifiable message with no payoff consequence. Under optimization pressure, agents route around it.
+
+Institutional AI (arXiv:2601.11369, Jan 2026) compared an ungoverned baseline, a prompt-only "constitutional" anti-collusion policy, and a governance-graph institution across 90 runs and six model configurations in Cournot markets. The prompt-only condition was ineffective. The institutional condition — a public, immutable manifest declaring legal states, transitions, sanctions, and restorative paths, with an external controller applying consequences and a cryptographic audit log — cut mean collusion tier from 3.1 to 1.8 (Cohen's d = 1.28) and severe-collusion incidence from 50% to 5.6%.
+
+**Rule**: enforcement belongs in the orchestration layer, not the prompt. If the only thing standing between the agents and the forbidden equilibrium is a sentence they can read, the mechanism is undefended.
+
+**Sources**: Institutional AI arXiv:2601.11369 (`InstitutionalAI`), AntiCollusionAI KBS 2026 (`AntiCollusionAI`).
+
+---
+
+### Communication as a collusion dial
+
+Adding a side channel between agents is not incentive-neutral, and its sign depends on the game. In repeated security-dilemma settings, direct messaging *reduces* conflict by enabling signaling and reciprocity (Chupilkin, arXiv:2605.03604, May 2026, which also finds multipolarity raises conflict and finite horizons produce backward-induction unraveling). In continuous double auctions, direct seller-to-seller messaging *increases* collusive tendency, with magnitude varying by model and modulated by oversight and authority pressure (Agrawal et al., arXiv:2507.01413, 2025).
+
+**Rule**: classify the game before granting a channel. Coordination games benefit from communication; allocation and pricing games where the agents are on the same side of the market do not. If both structures are present, scope the channel to the coordination surface only.
+
+**Sources**: Multi-Agent Strategic Games with LLMs arXiv:2605.03604 (`StrategicGamesLLM`), LLM Agent Collusion in Double Auctions arXiv:2507.01413 (`DoubleAuctionCollusion`).
+
+---
+
+### Truthfulness without strategy-proofness
+
+Strategy-proofness predicts truthful reporting for rational agents. LLM agents report truthfully at *higher* rates than human subjects in comparable matching environments — but the rate does not track whether the mechanism is actually strategy-proof: TTC (strategy-proof) did not always elicit more truth-telling than EADA (Hoshino, Kitadai & Nishino, arXiv:2606.03030, Jun 2026). Mechanism-based markets still beat free negotiation on stability and efficiency, so the finding is not "skip the mechanism" — it is that the *reason* the mechanism works with LLM participants is not the incentive proof, so the proof cannot be leaned on when conditions change (different model, different framing, added optimization pressure).
+
+**Rule**: do not cite a strategy-proofness result as evidence that LLM participants will report truthfully, and do not conclude from observed high truth-telling that the incentive argument is validated. Measure reporting behavior directly, per model and per framing.
+
+**Sources**: Do Matching Mechanisms Work with LLM Agents? arXiv:2606.03030 (`LLMMatchingMechanisms`).
 
 ---
 

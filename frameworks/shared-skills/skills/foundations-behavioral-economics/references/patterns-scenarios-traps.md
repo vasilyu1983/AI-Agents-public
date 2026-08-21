@@ -1,6 +1,6 @@
 ---
 description: Applied patterns, scenarios, anti-patterns, and known traps for behavioral-economics foundations.
-last_verified: 2026-05-02
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -24,6 +24,9 @@ status: stable
 - Anchors need a relevant comparison class.
 - Decoys are safest when they clarify tradeoffs, not when they hide true value.
 - Published coefficients are not product constants; measure locally.
+- An AI agent acting for a user is itself a nudge target, and typically a more susceptible one than the user. Audit per model.
+- Instructing an agent to avoid dark patterns does not make it resistant — it may detect one and proceed anyway. Constrain scope and gate irreversible actions instead.
+- Conversational manipulation (sycophantic agreement, biased framing, privacy probing) is a dark pattern even with a clean interface. The harm test applies to generated turns.
 
 ## Exit Checklist
 
@@ -32,3 +35,4 @@ status: stable
 - [ ] The user can opt out or reverse easily.
 - [ ] The copy can be disclosed without embarrassment.
 - [ ] The team is measuring retention, refunds, complaints, and trust, not only conversion.
+- [ ] If an AI agent acts in or on this flow, its susceptibility was tested and irreversible actions are structurally gated.

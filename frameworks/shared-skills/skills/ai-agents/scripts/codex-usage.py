@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import glob
+import hashlib
 import json
 import os
 import sys
@@ -87,7 +88,7 @@ FALLBACK_PRICING = {
     "o4-mini":   {"input": 1.10, "output": 4.40, "cached": 0.275},
     "codex-mini": {"input": 1.50, "output": 6.00, "cached": 0.375},
 }
-DEFAULT_PRICING = {"input": 2.00, "output": 8.00, "cached": 0.50}
+DEFAULT_PRICING = None  # Unknown pricing is intentionally never guessed.
 
 
 def _load_pricing() -> tuple[dict, str, date]:
@@ -116,7 +117,11 @@ def _load_pricing() -> tuple[dict, str, date]:
             # 0.1x input is the published cached-input ratio for current OpenAI
             # tiers; used only when the shared table carries no explicit column.
             "cached": entry.get("cache_read_per_1m", entry["input_per_1m"] * 0.10),
+            "rate_source": entry.get("pricing_source", doc.get("sources", {}).get("openai")),
+            "rate_verified_at": entry.get("pricing_verified_at", doc.get("last_verified")),
         }
+        if "cache_write_per_1m" in entry:
+            table[key.split("/", 1)[-1]]["cache_write"] = entry["cache_write_per_1m"]
     if not table:
         return FALLBACK_PRICING, "embedded fallback (no openai rows)", PRICE_TABLE_LAST_VERIFIED
 
@@ -154,20 +159,71 @@ def warn_if_price_table_stale() -> None:
         )
 
 
-def estimate_cost(model: str, inp: int, out: int, cached: int) -> float:
-    """Estimate cost in USD from token counts."""
-    prices = DEFAULT_PRICING
-    for key, p in PRICING.items():
-        if key in (model or ""):
-            prices = p
-            break
-    # Non-cached input = total input minus cached portion
-    non_cached = max(0, inp - cached)
-    return (
+def pricing_provenance() -> dict:
+    """Return bounded, reproducible provenance; never emit session content."""
+    path = pricing_path(__file__) if pricing_path else None
+    digest = None
+    if path:
+        try:
+            digest = hashlib.sha256(Path(path).read_bytes()).hexdigest()
+        except OSError:
+            pass
+    return {
+        "pricingSource": PRICING_SOURCE,
+        "pricingLastVerified": PRICING_VERIFIED.isoformat(),
+        "pricingSha256": digest,
+    }
+
+
+def attribute_cost(model: str, inp: int, out: int, cached: int,
+                   cache_write: int = 0, *, usage_source: str = "last",
+                   service_tier: str | None = None,
+                   context_pricing_class: str | None = None) -> dict:
+    """Fail-closed cost attribution for one logged request.
+
+    The local log does not normally record service tier or the pricing-context
+    band.  A known model alone therefore does not prove a billable list price.
+    `last` is a request counter; a reconstructed cumulative delta is estimated.
+    Reasoning is deliberately absent: it is included in output_tokens.
+    """
+    provenance = pricing_provenance()
+    prices = PRICING.get(model)
+    result = {
+        "model": model,
+        "usageSource": usage_source,
+        "costUSD": None,
+        "costStatus": "unpriced",
+        "unpricedReason": None,
+        **provenance,
+    }
+    if prices is None:
+        result["unpricedReason"] = "unknown_model_id"
+        return result
+    result["rateSource"] = prices.get("rate_source")
+    result["rateVerifiedAt"] = prices.get("rate_verified_at")
+    if service_tier != "standard":
+        result["unpricedReason"] = "ambiguous_service_tier"
+        return result
+    if context_pricing_class != "standard":
+        result["unpricedReason"] = "ambiguous_long_context_pricing"
+        return result
+    if cache_write and "cache_write" not in prices:
+        result["unpricedReason"] = "cache_write_rate_unavailable"
+        return result
+    non_cached = max(0, inp - cached - cache_write)
+    result["costUSD"] = (
         non_cached * prices["input"] / 1_000_000
-        + out * prices["output"] / 1_000_000
         + cached * prices["cached"] / 1_000_000
+        + cache_write * prices.get("cache_write", 0) / 1_000_000
+        + out * prices["output"] / 1_000_000
     )
+    result["costStatus"] = "exact" if usage_source == "last" else "estimated"
+    return result
+
+
+def estimate_cost(model: str, inp: int, out: int, cached: int) -> float | None:
+    """Compatibility helper: only return a cost where the attribution is safe."""
+    return attribute_cost(model, inp, out, cached)["costUSD"]
 
 
 def parse_date(s: str) -> str:
@@ -190,7 +246,16 @@ def fmt_tokens(n: int) -> str:
 
 
 def fmt_cost(c: float) -> str:
-    return f"${c:.2f}"
+    return "unpriced" if c is None else f"${c:.2f}"
+
+
+def fmt_cost_summary(priced_total: float, unpriced_rows: int) -> str:
+    """Do not render an incomplete aggregation as a $0.00 total."""
+    if not unpriced_rows:
+        return fmt_cost(priced_total)
+    if priced_total == 0:
+        return "unpriced"
+    return f"${priced_total:.2f} known subtotal; {unpriced_rows} unpriced row(s)"
 
 
 def print_table(headers: list[str], rows: list[list[str]], right_align: set[int] | None = None):
@@ -239,8 +304,11 @@ def parse_session_events(path: str):
     - Non-dict payloads
     """
     current_model = "unknown"
+    service_tier = None
+    context_pricing_class = None
     prev_totals = {"input_tokens": 0, "cached_input_tokens": 0,
-                   "output_tokens": 0, "reasoning_output_tokens": 0}
+                   "cache_write_input_tokens": 0, "output_tokens": 0,
+                   "reasoning_output_tokens": 0}
 
     with open(path) as f:
         for line in f:
@@ -262,8 +330,14 @@ def parse_session_events(path: str):
             # Extract model from turn_context
             if rec_type == "turn_context":
                 model = payload.get("model")
+                if model and model != current_model:
+                    # Cumulative totals belong to a model epoch, not the whole
+                    # JSONL file.  Reset before a later total-only event.
+                    prev_totals = {key: 0 for key in prev_totals}
                 if model:
                     current_model = model
+                service_tier = payload.get("service_tier")
+                context_pricing_class = payload.get("context_pricing_class")
 
             # Extract token usage from event_msg with token_count
             if rec_type == "event_msg" and payload.get("type") == "token_count":
@@ -275,14 +349,18 @@ def parse_session_events(path: str):
 
                 # Prefer last_token_usage (per-turn delta)
                 last = info.get("last_token_usage")
-                if isinstance(last, dict) and last.get("input_tokens"):
+                if isinstance(last, dict):
                     yield {
                         "timestamp": timestamp,
                         "model": current_model,
                         "input": last.get("input_tokens", 0) or 0,
                         "output": last.get("output_tokens", 0) or 0,
                         "cached": last.get("cached_input_tokens", 0) or 0,
+                        "cache_write": last.get("cache_write_input_tokens", 0) or 0,
                         "reasoning": last.get("reasoning_output_tokens", 0) or 0,
+                        "usage_source": "last",
+                        "service_tier": service_tier,
+                        "context_pricing_class": context_pricing_class,
                     }
                     # Update prev_totals from total if available
                     total = info.get("total_token_usage")
@@ -290,6 +368,7 @@ def parse_session_events(path: str):
                         prev_totals = {
                             "input_tokens": total.get("input_tokens", 0) or 0,
                             "cached_input_tokens": total.get("cached_input_tokens", 0) or 0,
+                            "cache_write_input_tokens": total.get("cache_write_input_tokens", 0) or 0,
                             "output_tokens": total.get("output_tokens", 0) or 0,
                             "reasoning_output_tokens": total.get("reasoning_output_tokens", 0) or 0,
                         }
@@ -298,10 +377,14 @@ def parse_session_events(path: str):
                 # Fallback: compute delta from cumulative total_token_usage
                 total = info.get("total_token_usage")
                 if isinstance(total, dict):
-                    inp = (total.get("input_tokens", 0) or 0) - prev_totals["input_tokens"]
-                    out = (total.get("output_tokens", 0) or 0) - prev_totals["output_tokens"]
-                    cached = (total.get("cached_input_tokens", 0) or 0) - prev_totals["cached_input_tokens"]
-                    reasoning = (total.get("reasoning_output_tokens", 0) or 0) - prev_totals["reasoning_output_tokens"]
+                    raw = {key: total.get(key, 0) or 0 for key in prev_totals}
+                    reset = any(raw[key] < prev_totals[key] for key in prev_totals)
+                    base = {key: 0 for key in prev_totals} if reset else prev_totals
+                    inp = raw["input_tokens"] - base["input_tokens"]
+                    out = raw["output_tokens"] - base["output_tokens"]
+                    cached = raw["cached_input_tokens"] - base["cached_input_tokens"]
+                    reasoning = raw["reasoning_output_tokens"] - base["reasoning_output_tokens"]
+                    cache_write = raw.get("cache_write_input_tokens", 0) - base.get("cache_write_input_tokens", 0)
 
                     if inp > 0 or out > 0:
                         yield {
@@ -310,15 +393,14 @@ def parse_session_events(path: str):
                             "input": max(0, inp),
                             "output": max(0, out),
                             "cached": max(0, cached),
+                            "cache_write": max(0, cache_write),
                             "reasoning": max(0, reasoning),
+                            "usage_source": "total_delta_reset" if reset else "total_delta",
+                            "service_tier": service_tier,
+                            "context_pricing_class": context_pricing_class,
                         }
 
-                    prev_totals = {
-                        "input_tokens": total.get("input_tokens", 0) or 0,
-                        "cached_input_tokens": total.get("cached_input_tokens", 0) or 0,
-                        "output_tokens": total.get("output_tokens", 0) or 0,
-                        "reasoning_output_tokens": total.get("reasoning_output_tokens", 0) or 0,
-                    }
+                    prev_totals = raw
 
 
 def iter_all_events(since: str | None = None, until: str | None = None):
@@ -329,6 +411,12 @@ def iter_all_events(since: str | None = None, until: str | None = None):
             if not in_range(date, since, until):
                 continue
             event["session_id"] = session_id
+            event["attribution"] = attribute_cost(
+                event["model"], event["input"], event["output"], event["cached"],
+                event.get("cache_write", 0), usage_source=event["usage_source"],
+                service_tier=event.get("service_tier"),
+                context_pricing_class=event.get("context_pricing_class"),
+            )
             yield event
 
 
@@ -360,7 +448,7 @@ def cmd_daily(args):
             cost = estimate_cost("", d["input"], d["output"], d["cached"])
             out.append({"date": date, "inputTokens": d["input"], "outputTokens": d["output"],
                         "cachedInputTokens": d["cached"], "reasoningOutputTokens": d["reasoning"],
-                        "turns": d["turns"], "costUSD": round(cost, 4),
+                        "turns": d["turns"], "costUSD": round(cost, 4) if cost is not None else None,
                         "models": sorted(d["models"])})
         json.dump({"daily": out}, sys.stdout, indent=2)
         print()
@@ -368,17 +456,19 @@ def cmd_daily(args):
 
     rows = []
     total_cost = 0.0
+    unpriced_rows = 0
     for date in sorted(daily):
         d = daily[date]
         cost = estimate_cost("", d["input"], d["output"], d["cached"])
-        total_cost += cost
+        total_cost += cost or 0
+        unpriced_rows += cost is None
         rows.append([date, fmt_tokens(d["input"]), fmt_tokens(d["output"]),
                       fmt_tokens(d["cached"]), fmt_tokens(d["reasoning"]),
                       str(d["turns"]), fmt_cost(cost)])
 
     print_table(["Date", "Input", "Output", "Cached", "Reasoning", "Turns", "Est. Cost"],
                 rows, {1, 2, 3, 4, 5, 6})
-    print(f"\nTotal estimated cost: {fmt_cost(total_cost)}")
+    print(f"\nCost summary: {fmt_cost_summary(total_cost, unpriced_rows)}")
 
 
 # ---------------------------------------------------------------------------
@@ -408,24 +498,26 @@ def cmd_monthly(args):
             cost = estimate_cost("", m["input"], m["output"], m["cached"])
             out.append({"month": month, "inputTokens": m["input"], "outputTokens": m["output"],
                         "cachedInputTokens": m["cached"], "reasoningOutputTokens": m["reasoning"],
-                        "turns": m["turns"], "costUSD": round(cost, 4)})
+                        "turns": m["turns"], "costUSD": round(cost, 4) if cost is not None else None})
         json.dump({"monthly": out}, sys.stdout, indent=2)
         print()
         return
 
     rows = []
     total_cost = 0.0
+    unpriced_rows = 0
     for month in sorted(monthly):
         m = monthly[month]
         cost = estimate_cost("", m["input"], m["output"], m["cached"])
-        total_cost += cost
+        total_cost += cost or 0
+        unpriced_rows += cost is None
         rows.append([month, fmt_tokens(m["input"]), fmt_tokens(m["output"]),
                       fmt_tokens(m["cached"]), fmt_tokens(m["reasoning"]),
                       str(m["turns"]), fmt_cost(cost)])
 
     print_table(["Month", "Input", "Output", "Cached", "Reasoning", "Turns", "Est. Cost"],
                 rows, {1, 2, 3, 4, 5, 6})
-    print(f"\nTotal estimated cost: {fmt_cost(total_cost)}")
+    print(f"\nCost summary: {fmt_cost_summary(total_cost, unpriced_rows)}")
 
 
 # ---------------------------------------------------------------------------
@@ -466,16 +558,18 @@ def cmd_sessions(args):
             out.append({"sessionId": sid, "date": s["first_ts"][:10],
                         "model": s["model"], "inputTokens": s["input"],
                         "outputTokens": s["output"], "cachedInputTokens": s["cached"],
-                        "turns": s["turns"], "costUSD": round(cost, 4)})
+                        "turns": s["turns"], "costUSD": round(cost, 4) if cost is not None else None})
         json.dump({"sessions": out}, sys.stdout, indent=2)
         print()
         return
 
     rows = []
     total_cost = 0.0
+    unpriced_rows = 0
     for sid, s in sorted_sessions:
         cost = estimate_cost(s["model"], s["input"], s["output"], s["cached"])
-        total_cost += cost
+        total_cost += cost or 0
+        unpriced_rows += cost is None
         # Truncate session ID for display
         short_id = sid[:30] + "..." if len(sid) > 33 else sid
         rows.append([s["first_ts"][:10], short_id, s["model"],
@@ -484,7 +578,7 @@ def cmd_sessions(args):
 
     print_table(["Date", "Session", "Model", "Input", "Output", "Turns", "Est. Cost"],
                 rows, {3, 4, 5, 6})
-    print(f"\nTotal estimated cost: {fmt_cost(total_cost)}")
+    print(f"\nCost summary: {fmt_cost_summary(total_cost, unpriced_rows)}")
     print(f"Showing {len(sorted_sessions)} session(s)")
 
 
@@ -513,23 +607,45 @@ def cmd_models(args):
             cost = estimate_cost(model, m["input"], m["output"], m["cached"])
             out[model] = {"inputTokens": m["input"], "outputTokens": m["output"],
                           "cachedInputTokens": m["cached"], "reasoningOutputTokens": m["reasoning"],
-                          "turns": m["turns"], "costUSD": round(cost, 4)}
+                          "turns": m["turns"], "costUSD": round(cost, 4) if cost is not None else None}
         json.dump({"models": out}, sys.stdout, indent=2)
         print()
         return
 
     rows = []
     total_cost = 0.0
+    unpriced_rows = 0
     for model, m in sorted(models.items()):
         cost = estimate_cost(model, m["input"], m["output"], m["cached"])
-        total_cost += cost
+        total_cost += cost or 0
+        unpriced_rows += cost is None
         rows.append([model, fmt_tokens(m["input"]), fmt_tokens(m["output"]),
                       fmt_tokens(m["cached"]), fmt_tokens(m["reasoning"]),
                       str(m["turns"]), fmt_cost(cost)])
 
     print_table(["Model", "Input", "Output", "Cached", "Reasoning", "Turns", "Est. Cost"],
                 rows, {1, 2, 3, 4, 5, 6})
-    print(f"\nTotal estimated cost: {fmt_cost(total_cost)}")
+    print(f"\nCost summary: {fmt_cost_summary(total_cost, unpriced_rows)}")
+
+
+def cmd_traces(args):
+    """Emit bounded per-request accounting rows, never transcript payloads."""
+    rows = []
+    for ev in iter_all_events(args.since, args.until):
+        a = ev["attribution"]
+        rows.append({
+            "sessionId": ev["session_id"], "timestamp": ev["timestamp"],
+            "model": ev["model"], "inputTokens": ev["input"],
+            "cachedInputTokens": ev["cached"], "cacheWriteInputTokens": ev.get("cache_write", 0),
+            "outputTokens": ev["output"], "usageSource": ev["usage_source"],
+            "costUSD": a["costUSD"], "costStatus": a["costStatus"],
+            "unpricedReason": a["unpricedReason"],
+            "pricingSource": a["pricingSource"],
+            "pricingLastVerified": a["pricingLastVerified"], "pricingSha256": a["pricingSha256"],
+            "rateSource": a.get("rateSource"), "rateVerifiedAt": a.get("rateVerifiedAt"),
+        })
+    json.dump({"traces": rows}, sys.stdout, indent=2)
+    print()
 
 
 # ---------------------------------------------------------------------------
@@ -564,6 +680,10 @@ def main():
     p_models = sub.add_parser("models", help="Per-model all-time totals")
     add_common(p_models)
     p_models.set_defaults(func=cmd_models)
+
+    p_traces = sub.add_parser("traces", help="Per-request bounded cost-attribution JSON")
+    add_common(p_traces)
+    p_traces.set_defaults(func=cmd_traces)
 
     args = parser.parse_args()
 

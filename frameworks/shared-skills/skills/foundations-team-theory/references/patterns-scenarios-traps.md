@@ -130,7 +130,9 @@ If subagent A is rewarded for code that compiles and subagent B is rewarded for 
 
 High psychological safety robustly benefits learning, innovation, and adaptive tasks. For *routine in-role tasks*, the relationship is curvilinear (inverted-U): very high psychological safety can redirect attention toward exploration at the expense of execution, degrading routine performance. The moderation variable is task type; accountability structures are the mechanism that prevents the downside in execution-heavy contexts.
 
-**Source**: Edmondson & Bransby (2023, Annual Review of Organizational Psychology and Organizational Behavior 10:55–78). The nonlinear/curvilinear claim's primary empirical source is Eldor, Hodor & Cappelli (2023, Organizational Behavior and Human Decision Processes 177; five independent studies) — author names confirmed 2026-07-11 via secondary listings after the primary ScienceDirect URL returned 403; full text remains paywalled, so the specific effect sizes are still hedged pending direct access.
+**Source**: Edmondson & Bransby (2023, Annual Review of Organizational Psychology and Organizational Behavior 10:55–78). The nonlinear/curvilinear claim's primary empirical source is Eldor, Hodor & Cappelli (2023, Organizational Behavior and Human Decision Processes 177, article 104255; five independent studies) — title, authors, and article number confirmed 2026-08-14; full text remains paywalled, so specific effect sizes stay hedged.
+
+**Evidential status (as of 2026-08-14)**: the curvilinear result rests on a single multi-study paper with no independent replication located. It has attracted methodological criticism — supervisor-rated "routine task performance" is vulnerable to halo effects, and the reported 80–90th-percentile turning point may be a statistical artifact rather than a theoretical threshold — though that critique is a practitioner blog post, not peer-reviewed. Treat the inverted-U as a boundary condition worth testing in your own context, not as an established effect that licenses withholding psychological safety from execution-heavy teams.
 
 **Fix**: segment psychological safety interventions by task type. Apply to learning/adaptive contexts by default; pair with explicit accountability structures for execution-heavy phases.
 
@@ -149,6 +151,24 @@ Human-AI teams outperform humans alone in the majority of studies. However, exce
 **Source**: Hemmer et al. (2024/2025). "Complementarity in Human-AI Collaboration: Concept, Sources, and Evidence." *European Journal of Information Systems* (arXiv:2404.00029). Two empirical studies confirm information asymmetry and capability asymmetry as CTP conditions.
 
 **Fix**: before adding a human review step, verify which CTP condition it satisfies. If neither, remove the human from the loop.
+
+### Trap: Assuming a team will use the expertise it contains
+
+Adding a strong specialist to a team does not mean the team's output reflects that specialist. Self-organizing LLM teams underperform their own best member by up to 41.1% on ML benchmarks *even when explicitly told which agent is the expert* — the failure is in the aggregation rule, not in expert identification. Teams converge on integrative compromise, averaging expert and non-expert positions rather than deferring, and the deficit widens as the team grows.
+
+**Source**: Pappu, El, Cao, di Nolfo, Sun, Cao & Zou (2026). "Multi-Agent Teams Hold Experts Back." arXiv:2602.01011, ICML 2026.
+
+**Fix**: make deference structural rather than emergent — route the decision to the competent agent, or weight contributions by a verifiable competence signal (past accuracy on the task class, a test the agent can pass), not by conversational assertiveness. Always benchmark the team against its single-best-member baseline; a team that loses to one good agent is paying coordination cost for negative return.
+
+**Countervailing consideration**: the same consensus-seeking that suppresses expertise is what makes these teams resistant to adversarial or compromised members. Where an untrusted agent could poison the output, pooling is the correct rule and the expertise loss is the price of robustness. Decide which regime you are in before removing the consensus step.
+
+### Trap: Treating "collective intelligence" as a tunable team property (human teams)
+
+The widely-cited claim that groups have a general collective-intelligence factor `c` — analogous to individual `g`, and improvable by selecting for social sensitivity or equal turn-taking — is contested rather than established. Meta-analytic pooling of 857 groups puts the correlation between `c` and external group performance at r=.26, with most constituent studies failing to control for members' individual intelligence; a 2024 replication attempt favors a two-factor (fluid/crystallized) structure over a single `c`; and earlier work failed to recover a dominant CI factor in virtual text-based groups at all.
+
+**Sources**: Rowe, Hattie & Hester (2021, *Cognitive Research: Principles and Implications*); Rowe, Hattie & Munro (2024, *PLOS ONE* 19:e0307945). Both samples are small — the status is "contested," not "refuted."
+
+**Fix**: do not build a team-design argument on `c` as a single optimizable quantity. Use the levers team theory actually licenses: the observation partition (#2), the aggregation rule (#3), communication cost (#4), and organizational form (#8). If you want to test a composition heuristic from this literature, treat it as a local experiment with a measured baseline.
 
 ### Trap: Over-applying mechanism design when payoffs do align
 
@@ -176,5 +196,6 @@ Symmetric trap: adding voting, auctions, or incentive-compatibility scaffolding 
 - **Computational layer (high confidence)**: Bernstein et al. (2002) Dec-POMDP complexity; Oliehoek & Amato (2016) textbook treatment.
 - **Modern multi-agent LLM layer (verify before using)**: MAST (Cemri et al. 2025), May 2026 orchestration-trace work, and coordination-layer papers. Empirical percentages are dataset-specific — re-verify against your own production traces before treating as priors.
 - **MARL approximation methods (rapidly evolving)**: MAPPO, QMIX, MADDPG. Check arXiv for current state-of-the-art when implementing.
+- **Human-team empirical layer (contested — hedge explicitly)**: the collective-intelligence `c`-factor and the psychological-safety curvilinear boundary condition are both single-or-few-study findings facing replication questions. Cite them as contested hypotheses with the countervailing evidence attached, never as settled effects. Effect sizes in this layer are small and samples are modest.
 
-When in doubt, primary sources before secondary.
+When in doubt, primary sources before secondary. When a finding is contested, say so in the same sentence that states it — a hedge in a footnote does not survive being quoted.

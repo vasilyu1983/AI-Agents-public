@@ -8,7 +8,7 @@
 - [Triage delta for killer-feature mode](#triage-delta-for-killer-feature-mode)
 - [Honest precision](#honest-precision)
 
-Specialized arXiv category + keyword map for contributing the **`hci_retention_paper`** signal to the bundle's [Killer-Feature Convergence Protocol](../../startup-review-mining/references/killer-feature-convergence.md) owned by `startup-review-mining`.
+Specialized arXiv category + keyword map for contributing the **`hci_retention_paper`** signal to the bundle's [Killer-Feature Convergence Protocol](../../research-review-mining/references/killer-feature-convergence.md) owned by `research-review-mining`.
 
 **Premise.** HCI and CSCW research periodically publishes long-term studies that empirically tie *specific interaction patterns or features* to user retention, engagement, or willingness-to-pay. These are the slowest-but-most-rigorous signal in the bundle. arXiv's `cs.HC` category indexes most of this work; `cs.CY` and `cs.SI` catch adjacent retention/adoption research.
 
@@ -104,7 +104,7 @@ The standard 0-10 scoring in SKILL.md still applies, but add this scoring dimens
 - The feature is described specifically enough to map to a candidate `feature_id` in the bundle
 - The paper's product/category overlaps the bundle's target
 
-When a paper passes, append a row to `../../startup-review-mining/assets/pay-trigger-ledger.tsv` with:
+When a paper passes, append a row to `../../research-review-mining/assets/pay-trigger-ledger.tsv` with:
 
 ```
 signal_type        = hci_retention_paper
@@ -115,7 +115,7 @@ llm_method         = hci_paper_extraction
 notes              = arxiv_id=<id>; rigor_score=<n>/10
 ```
 
-Then run `../../startup-review-mining/scripts/converge_killer_features.py`.
+Then run `../../research-review-mining/scripts/converge_killer_features.py`.
 
 ---
 
@@ -129,4 +129,4 @@ Coverage is sparse but **high credibility per hit**. Expect:
 
 When this mode returns 0 strong rows, that's information for the convergence aggregator: the absence of academic attribution is normal for most products, so it should not downgrade other signals. The Convergence Rule already requires only 3 of 6 signal types — this mode often contributes 0, and the protocol assumes that's fine.
 
-See the precision-ceiling table in [`../../startup-review-mining/references/killer-feature-convergence.md`](../../startup-review-mining/references/killer-feature-convergence.md).
+See the precision-ceiling table in [`../../research-review-mining/references/killer-feature-convergence.md`](../../research-review-mining/references/killer-feature-convergence.md).

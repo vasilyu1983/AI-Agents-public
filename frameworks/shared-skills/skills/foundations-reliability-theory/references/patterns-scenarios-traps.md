@@ -68,6 +68,9 @@ Use this reference before accepting availability math, redundancy claims, FMEA p
 - Allocation trap: subsystem targets are assigned uniformly despite unequal topology criticality.
 - SLO drift trap: changing SLI definitions invalidates historical error budget comparisons.
 - MIL-HDBK trap: handbook tables may be conservative or stale for modern components.
+- Config-propagation trap: a configuration or control-plane update reaches every replica, so replication multiplies its blast radius instead of dividing it. No parallel-path formula models this; enumerate it as a basic event in the fault tree. Both the AWS DynamoDB DNS-automation failure (19–20 Oct 2025) and the Cloudflare Bot Management feature-file failure (18 Nov 2025) took this shape — in each case the components stayed healthy and the propagated artefact was the fault.
+- Backlog-tail trap: MTTR measured to root-cause fix understates recovery. After the Oct 2025 DynamoDB event the service itself recovered in under three hours while dependent services drained backlogs for most of the following day. Measure MTTR to dependent-service recovery, not to the fix.
+- Remembered-failure-mode trap: redundancy encodes the last failure you experienced. us-east-1 has failed in three structurally different ways since 2021; designs hardened against one mode were still taken out by the next. Ask which mode your redundancy assumes.
 - Single-run success rate as reliability metric for agent systems — trap: a single pass/fail ignores consistency variance across repeated runs, sensitivity to semantically equivalent task variants, and failure-type-specific fault tolerance. Fix: use pass^k across ≥10 runs; measure perturbation degradation at ε=0.1–0.3; inject fault types (timeout, rate limit, schema drift) at controlled intensity and measure per-type impact. (ReliabilityBench, Gupta 2026, arXiv:2601.06112.)
 
 ## Compact Review Sequence

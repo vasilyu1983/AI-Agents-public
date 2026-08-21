@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Distributed Systems Foundations — Sources",
     "description": "Primary papers and references for 11 distributed-systems primitives: CAP/PACELC, FLP impossibility, Paxos, Raft, vector clocks, CRDTs, idempotency, leases/fencing, quorums, causal consistency, and broadcast protocols",
-    "last_updated": "2026-05-17",
+    "last_updated": "2026-08-14",
     "skill": "foundations-distributed-systems",
-    "total_sources": 25
+    "total_sources": 34
   },
   "research_papers": [
     {
@@ -180,6 +180,69 @@
       "name": "Pushing the Limit: Verified Performance-Optimal Causally-Consistent Database Transactions",
       "url": "https://arxiv.org/abs/2411.07049",
       "description": "Ghasemirad, Sprenger, Liu, Multazzu, Basin. arXiv:2411.07049, accepted TACAS 2025. Eiger-PORT+ proves performance-optimal read transactions are achievable under TCCv (Transactional Causal Consistency with convergence), refuting an earlier conjecture that this was impossible. First deductive verification of a complex concurrency control protocol via model refinement. Relevant to primitive #10.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Zeno2026SwitchBFT",
+      "name": "In Link We Trust: BFT at the Speed of CFT using Switches",
+      "url": "https://www.usenix.org/conference/nsdi26/presentation/zeno",
+      "description": "Zeno, Ben-David, Silberstein (Technion). NSDI 2026, pp. 1431-1452. SwitchBFT uses packet source authentication to drop cryptographic signatures on the fault-free path and programmable switches to enforce agreement and verify safety, reaching the speed of NOPaxos (in-switch CFT). Data-centre trusted-network assumption only; does not transfer to WAN or public-validator settings. Relevant to primitives #3, #3a.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Tang2026Jetpack",
+      "name": "Jetpack: Consensus Made Generally Fast",
+      "url": "https://www.usenix.org/conference/osdi26/technical-sessions",
+      "description": "Tang, Zhang, Shen (Stony Brook), Shi (DatenLord), Mu (Stony Brook). OSDI 2026. Plugin framework retrofitting a 1-RTT fast path onto existing consensus protocols by racing fast and original paths while forcing the original path to honour the committed decision. Up to 60% average commit-latency reduction across six consensus systems over 10 AWS datacentres. Names the 'view change hazard': stable-operation promises can become invalid after leader elections. Relevant to primitives #3, #4.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Zhang2026EqualOpportunity",
+      "name": "Equal Opportunity: A Correctness Condition for Ordered Consensus",
+      "url": "https://www.usenix.org/conference/osdi26/technical-sessions",
+      "description": "Zhang, Ni, Basu, Cohen, Yin, Alvisi, van Renesse, Chen, Zhou (Cornell / UW / UCSB / Microsoft Research). OSDI 2026. Formalises ordering fairness as a correctness condition distinct from agreement and liveness; introduces the Secret Random Oracle (trusted-hardware and threshold-VRF constructions) and Pompe-SRO, mitigating front-running and sandwich attacks at moderate latency cost. Relevant to primitives #3, #3a, #11.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Acumen2026",
+      "name": "Acumen: Encrypted Real-Time Collaboration with Strong Snapshot Consistency",
+      "url": "https://www.usenix.org/conference/osdi26/technical-sessions",
+      "description": "OSDI 2026. First CRDT-based system providing strong snapshot consistency under end-to-end encryption: untrusted users create verifiable snapshots to invite collaborators without revealing prior edit history. Also provides confidentiality, integrity, and fork-causal consistency via cryptographic accumulators and a secure garbage-collection mechanism. Evaluated at 25 concurrent typists. Relevant to primitives #6, #10.",
+      "url_check": "manual"
+    },
+    {
+      "id": "AWS2025UsEast1",
+      "name": "AWS Post-Event Summary: Amazon DynamoDB Service Disruption in US-EAST-1 (October 20, 2025)",
+      "url": "https://aws.amazon.com/message/101925/",
+      "description": "Official AWS post-event summary. Latent race condition between two concurrent DynamoDB DNS Enactor processes produced an empty DNS record for the regional endpoint; recovery then caused congestive collapse in EC2 lease re-establishment and a backlog of network state propagation, cascading to NLB, Lambda, ECS, EKS, STS, Redshift and 100+ services. Canonical worked example of a control-plane automation failure rather than an algorithmic consensus failure. Relevant to the operational-triage sections and primitives #8, #11.",
+      "url_check": "manual"
+    },
+    {
+      "id": "JepsenGalera2026",
+      "name": "Jepsen: MariaDB Galera Cluster 12.1.2",
+      "url": "https://jepsen.io/analyses/mariadb-galera-cluster-12.1.2",
+      "description": "Kingsbury, 2026-03-16. Tested 12.1.2 through 12.2.2. Under MariaDB's recommended innodb_flush_log_at_trx_commit=0, committed transactions were lost on coordinated crashes; setting it to 1 reduced but did not eliminate loss. Also found lost update (P4) and stale reads in healthy clusters against a claimed isolation 'between Serializable and Repeatable Read'. Reference case for the trap of trusting vendor-recommended configuration as a durability guarantee. Relevant to primitives #1, #9, #10.",
+      "url_check": "manual"
+    },
+    {
+      "id": "JepsenTigerBeetle2025",
+      "name": "Jepsen: TigerBeetle 0.16.11",
+      "url": "https://jepsen.io/analyses/tigerbeetle-0.16.11",
+      "description": "Kingsbury, 2025-06-06. Tested 0.16.11 through 0.16.30. Only two safety issues found; exceptional resilience to disk corruption across every replica; Strong Serializability upheld. Positive reference case for systems built around deterministic simulation testing from the start. TigerBeetle's companion post 'Fuzzer Blind Spots (Meet Jepsen!)' documents what in-house fuzzing missed. Relevant to the testing section and primitives #4, #9.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Automerge3",
+      "name": "Automerge 3.0 Release Notes",
+      "url": "https://automerge.org/blog/automerge-3/",
+      "description": "July 2025. Re-implementation using the columnar compression format in memory as well as on disk: >10x memory reduction (Moby Dick document 700MB to 1.3MB) and long-history load times cut from hours to seconds. Automerge 2 file format retained; the deprecated Text class was removed (strings collaborative by default) and RawString renamed ImmutableString, so upgrading is a migration. Relevant to primitive #6.",
+      "url_check": "manual"
+    },
+    {
+      "id": "CoAgent2026",
+      "name": "CoAgent: Concurrency Control for Multi-Agent Systems",
+      "url": "https://arxiv.org/abs/2606.15376",
+      "description": "Lyu, Zhang, Wu, Wei, Chen. arXiv:2606.15376, June 2026 preprint (not peer-reviewed; cited for its diagnosis rather than as a settled result). Argues 2PL and OCC fit agent workloads badly because agent transactions span long inference, have broad opaque read sets, and write unbuffered through tools. Proposes MTPO (Monotonic Trajectory Pre-Order): fix a serialization order at launch, serve order-filtered reads, apply writes speculatively in place over undoable tools. Reports within 5% of serial correctness at 1.4x speedup. Relevant to primitives #6, #7, #10.",
       "url_check": "manual"
     }
   ]

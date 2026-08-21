@@ -61,3 +61,5 @@ The stable layer is classical and low-drift. The application layer is high-drift
 - Do not apply Radner linear-policy results when actions signal to later agents.
 - Do not confuse per-agent prompt tuning with team optimality.
 - Do not claim Dec-POMDP framing gives an exact production solution; finite-horizon Dec-POMDPs are intractable in worst case.
+- Do not assume a team uses the expertise it contains; aggregation rules that pool opinions can lose to the team's own best member (Pappu et al., ICML 2026). Benchmark against the single-best-member baseline.
+- Do not present the collective-intelligence `c`-factor or the psychological-safety inverted-U as established findings; both are contested and should be cited with their replication status attached.

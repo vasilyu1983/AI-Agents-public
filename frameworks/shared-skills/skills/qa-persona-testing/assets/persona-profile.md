@@ -57,5 +57,5 @@ The simulated persona MUST:
 
 - ICP evidence source: {{interview notes / review mining / analytics / assumption}}
 - Confidence: {{validated / partially validated / assumed}}
-- Skills used to derive it: {{e.g., startup-idea-validation, startup-review-mining, software-ux-research}}
+- Skills used to derive it: {{e.g., startup-idea-validation, research-review-mining, software-ux-research}}
 - Date created / last revised: {{YYYY-MM-DD}}

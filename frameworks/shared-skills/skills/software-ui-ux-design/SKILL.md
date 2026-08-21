@@ -2,8 +2,8 @@
 name: software-ui-ux-design
 description: "Designs and audits UI/UX systems with usability and accessibility requirements. Use when shaping flows, design systems, interaction patterns, or WCAG-aware product behavior."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.2"
-last_validated: 2026-08-10
+version: "1.3"
+last_validated: 2026-08-13
 ---
 
 # Software UI/UX Design
@@ -121,7 +121,11 @@ Before finalizing any UI/UX design output:
 - [ ] All five state types covered: loading, empty, error, offline/degraded, and happy path
 - [ ] Primary action is singular per view; secondary actions visually subordinate
 - [ ] Craft Bar row pass/fail reviewed; fewer than 3 fails before shipping
-- [ ] Accessibility: focus order, error recovery, target size (≥44×44pt), color contrast (AA minimum)
+- [ ] Accessibility is *computed, not asserted*: every contrast ratio in the spec comes from running `scripts/contrast_check.py <fg> <bg>` — never from estimation (a model-estimated ratio labeled "computed" is a fabrication) — and is measured against the surface the text actually renders on (row, card, modal), not only the page canvas; focus order listed element by element; target size (≥44×44pt)
+- [ ] Dynamic content announces itself: any live-updating region (new rows, status changes, streaming) has a specified `aria-live` politeness level and batching rule — a visual pulse alone is invisible to screen readers
+- [ ] Single-key shortcuts specify a remap/disable mechanism (WCAG 2.1.4) and focus-scoping rule
+- [ ] Press + commit states specified for *every* tappable element, not demonstrated once on the primary CTA and left implicit elsewhere
+- [ ] Undo/recovery semantics defined end-to-end: what happens to server state, audit trail, and concurrent users when an action is undone; every focus surface has a named normal-path exit (not just error-path)
 - [ ] Consent and accept/reject buttons carry equal visual weight (DSA Article 25)
 - [ ] Motion fallback present for any scroll-driven or CSS animation (prefers-reduced-motion)
 - [ ] Microcopy uses user voice: names cause, offers specific recovery step
@@ -178,6 +182,8 @@ When using AI to generate UI:
 - Designing agent surfaces where the only mid-run control is "Stop". Users change their mind in three distinct ways — adding a requirement, revising the goal, retracting part of it — and collapsing all three into a cancel button forces the most destructive option. Interruption is a normal interaction, not an error path.
 - Gating agent actions by model confidence instead of by real-world reversibility. High confidence on an irreversible action is still irreversible; confidence belongs in the display, never in the gating decision.
 - Shipping a "notify and undo" affordance whose undo does not actually work. That is an unrecoverable action wearing a recoverable-looking UI — worse than an honest confirmation dialog. If the undo can't be built, promote the action to a blocking gate.
+- Writing accessibility as checklist assertions ("AA minimum", "focus order logical") instead of computed, implementable constraints. Expert review rejects specs whose contrast was never calculated at the element's real size and whose live regions have no announcement behavior — checklist-level a11y reads as bolted-on and fails sign-off.
+- Spec depth inversely proportional to surface frequency: the daily-return screen (home, dashboard) written in one paragraph while one-time flows get pages. Detail budget should follow visit frequency.
 
 ## Common Anti-Patterns
 
@@ -225,6 +231,7 @@ When using AI to generate UI:
 - [references/frontend-aesthetics.md](references/frontend-aesthetics.md) — distinctive design beyond template-driven looks
 - [references/typography-systems.md](references/typography-systems.md) — systematic, accessible, responsive type
 - [references/dark-mode-theming.md](references/dark-mode-theming.md) — dark mode and multi-theme systems
+- [references/motion-design.md](references/motion-design.md) — functional motion: library landscape (Motion née Framer Motion, GSAP), spring/tween defaults, reduced-motion implementation, motion spec checklist
 - [references/consumer-craft-patterns.md](references/consumer-craft-patterns.md) — consumer-grade craft playbook
 
 *Patterns & surfaces*
@@ -253,12 +260,13 @@ When using AI to generate UI:
 
 > **Upstream trust note (verified 2026-08-10):** that repo shows 115,186 stars against only 493 watchers and 30 contributors on a repo created 2025-11-30 — a star-inflation signature. This says nothing about the vendored content, which was taken on merit and is unaffected. It does mean: never cite its star count as social proof, and re-diff before pulling any upstream update.
 
-- `scripts/search.py` — CLI: `--design-system`, `--domain <domain>`, `--stack <stack>`, `--persist`
+- `scripts/search.py` — CLI: `--design-system`, `--domain <domain>`, `--stack <stack>`, `--persist`, `--format designmd` (exports the generated design system as a spec-conformant `DESIGN.md` — Google Labs' Apache-2.0 portable design-context format auto-read from project root by Claude Code, Cursor, Windsurf, Kiro)
 - `scripts/core.py` — BM25 engine and CSV domain config
+- `scripts/contrast_check.py` — WCAG contrast calculator (single pair, stdin batch, or tokens×surfaces cross product); the only accepted source for contrast numbers in a spec
 - `scripts/design_system.py` — design-system generation and Master + page-overrides persistence
 - `data/*.csv` and `data/stacks/*.csv` — style, color, typography, product, landing, chart, UX-guideline, icon, and per-stack databases
-- `data/slides/*.csv` — slide/deck design database (layouts, typography, charts, copy formulas, backgrounds, color logic, layout logic, narrative strategies); not yet wired into `scripts/core.py` domain config, so `scripts/search.py` cannot query it directly — read these CSVs directly until the engine is extended
-- `data/cip/*.csv` — corporate identity pack reference data (industries, deliverables, mockup contexts); same caveat — not yet wired into the search engine
+- `data/slides/*.csv` — slide/deck design database (layouts, typography, charts, copy formulas, backgrounds, color logic, layout logic, narrative strategies); queryable via `scripts/search.py --slide <domain>` (wired into `SLIDE_CONFIG` in `scripts/core.py`)
+- `data/cip/*.csv` — corporate identity pack reference data (industries, deliverables, mockup contexts); queryable via `scripts/search.py --cip <domain>` (wired into `CIP_CONFIG`)
 
 **Templates**
 

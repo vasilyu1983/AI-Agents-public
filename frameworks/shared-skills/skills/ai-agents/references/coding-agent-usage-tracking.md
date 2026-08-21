@@ -147,6 +147,21 @@ Each file at `~/.codex/sessions/YYYY/MM/DD/rollout-{timestamp}-{uuid}.jsonl` con
 | `reasoning_output_tokens` | Reasoning tokens — informational, not separately billed |
 | `total_tokens` | Sum of input + output |
 
+For cost accounting, sum **only** `last_token_usage` per request. `total_token_usage`
+is cumulative within an epoch and summing it across events duplicates tokens. If
+`last_token_usage` is absent, reconstruct a delta from consecutive totals; a
+decrease starts a new epoch (for example after context compaction or model
+change). Never add `reasoning_output_tokens` again: it is already within
+`output_tokens`.
+
+`scripts/codex-usage.py traces` emits bounded accounting rows only (session ID,
+timestamp, counters, model, source and pricing provenance), never prompt or tool
+content. Cost is fail-closed as `unpriced` unless the exact model ID, standard
+service tier, standard context-pricing class and every applicable cache rate are
+known. A total-delta reconstruction is marked `estimated`; `last_token_usage`
+with all of those conditions is `exact`. A model ID alone cannot distinguish
+GPT-5.6 Sol standard from Fast or long-context billing.
+
 **Model name** comes from `turn_context` entries (separate JSONL lines with `type: "turn_context"`):
 
 ```json

@@ -137,11 +137,11 @@ Suggested scoring (0-10):
 
 ## Killer-Feature Mode (HCI Retention Papers)
 
-Specialized mode that contributes the **`hci_retention_paper`** signal to the bundle's [Killer-Feature Convergence Protocol](../startup-review-mining/references/killer-feature-convergence.md) owned by `startup-review-mining`.
+Specialized mode that contributes the **`hci_retention_paper`** signal to the bundle's [Killer-Feature Convergence Protocol](../research-review-mining/references/killer-feature-convergence.md) owned by `research-review-mining`.
 
 **Premise.** HCI/CSCW/UIST work periodically publishes long-term studies that empirically tie a specific feature or interaction pattern to retention, freemium conversion, or willingness-to-pay. arXiv's `cs.HC` (plus `cs.CY`, `cs.SI`, `cs.IR`) indexes most of this work — though only ~50-70% of CHI/CSCW is on arXiv, so the ACM-only fraction stays with `research-scout`'s conference query generator.
 
-**When to use:** bundle handoff from `startup-review-mining` Killer-Feature Mode KF3 asks for the HCI signal; OR you have a candidate `feature_id` and want a rigorous attribution study.
+**When to use:** bundle handoff from `research-review-mining` Killer-Feature Mode KF3 asks for the HCI signal; OR you have a candidate `feature_id` and want a rigorous attribution study.
 
 **Workflow delta:**
 
@@ -153,17 +153,17 @@ KF-ARX-2. Query arXiv per templates in references/product-retention-categories.m
 KF-ARX-3. Triage with the standard 0-10 dimensions PLUS the
           "Attribution rigor" dimension defined in that reference
 KF-ARX-4. Only papers with rigor>=7 graduate to a row on
-          ../startup-review-mining/assets/pay-trigger-ledger.tsv
+          ../research-review-mining/assets/pay-trigger-ledger.tsv
           (signal_type=hci_retention_paper; wtp_strength=strong if causal,
            implicit if correlational only)
-KF-ARX-5. Run ../startup-review-mining/scripts/converge_killer_features.py
+KF-ARX-5. Run ../research-review-mining/scripts/converge_killer_features.py
 ```
 
 Expect 0-2 strong rows per scan — sparse but high credibility per hit. Zero rows is normal and does not downgrade other signals in the Convergence Rule.
 
 **References:**
 - [references/product-retention-categories.md](references/product-retention-categories.md) — categories, keyword groups, query templates, attribution-rigor scoring, anti-patterns
-- [../startup-review-mining/references/killer-feature-convergence.md](../startup-review-mining/references/killer-feature-convergence.md) — bundle Convergence Rule
+- [../research-review-mining/references/killer-feature-convergence.md](../research-review-mining/references/killer-feature-convergence.md) — bundle Convergence Rule
 - [config.yaml](config.yaml) — `killer-feature-retention` key
 
 ## Navigation

@@ -2,8 +2,8 @@
   "metadata": {
     "title": "Claude Code Hooks + Codex Notifications - Sources",
     "description": "Primary sources for Claude Code lifecycle hooks and Codex CLI notification callbacks",
-    "last_updated": "2026-07-11",
-    "updated": "2026-07-11",
+    "last_updated": "2026-08-14",
+    "updated": "2026-08-14",
     "skill": "agents-hooks",
     "total_sources": 17
   },
@@ -40,7 +40,7 @@
     },
     {
       "name": "OpenAI Codex CLI Overview",
-      "url": "https://developers.openai.com/codex/cli/overview/",
+      "url": "https://learn.chatgpt.com/docs/codex/cli",
       "description": "Official Codex CLI overview for the broader execution model and configuration surface",
       "add_as_web_search": false
     },

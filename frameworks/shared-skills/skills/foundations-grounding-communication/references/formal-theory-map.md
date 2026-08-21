@@ -25,6 +25,8 @@ Use this file when a task needs source-level justification, production boundarie
 | Formal common knowledge | Lewis (1969), Aumann (1976) | Model mutual belief when exact recursion matters |
 | Computational grounding | Traum (1994) | Translate grounding moves into dialogue-state machinery |
 | LLM multi-agent failures | Cemri et al. (2025) MAST | Map specification, context-loss, and inter-agent failures to handoff design |
+| Dynamic (multi-turn) grounding | Yao, Zou, Hawkins (2026) | Separate one-shot interpretation from sustained joint plan formation and commitment |
+| Protocol semantic layer | Yuan et al. (2026) | Decide what A2A/MCP-class transport gives you vs. what the application must build |
 
 ## Primitive-To-Source Map
 
@@ -53,7 +55,16 @@ Use grounding theory to improve communication protocol design. Do not treat it a
 
 ## Application Layer Status
 
-The stable layer is classical and low-drift. The application layer is high-drift: MAST v3 (last revised Oct 2025; accepted NeurIPS 2025 Datasets & Benchmarks Track) reports 1,600+ traces, 14 failure modes, and three broad categories: system design issues, inter-agent misalignment, and task verification. Emerging 2026 practitioner and research work on agent coordination layers and orchestration tracing points the same direction — message protocol, communication topology, and stopping/aggregation decisions should be explicit design surfaces, not improvised natural-language side effects — but treat this as directional signal, not a specific benchmarked result, until a citable source is added to `data/sources.json`.
+The stable layer is classical and low-drift. The application layer is high-drift: MAST v3 (last revised Oct 2025; accepted NeurIPS 2025 Datasets & Benchmarks Track) reports 1,600+ traces, 14 failure modes, and three broad categories: system design issues, inter-agent misalignment, and task verification.
+
+The 2026 layer resolves what was previously directional signal here — that message protocol and coordination structure should be explicit design surfaces rather than improvised natural-language side effects — into citable work:
+
+- **Protocol semantics** (`SemanticProtocols2026`, arXiv 2604.02369): 18 protocols surveyed against a communication / syntactic / semantic taxonomy. Most protocols provide limited protocol-level clarification, context alignment, and verification; semantic responsibilities land in prompts and orchestration logic. Confirms the grounding layer is application-owned today.
+- **Dynamic grounding** (`DynamicGrounding2026`, arXiv 2605.01750): separates static (one-shot interpretation) from dynamic (multi-turn joint plan formation, commitment, execution) grounding, and shows the dyadic coordination gap is not explained by individual reasoning limits or information exchange volume.
+- **Human-AI common ground** (`CommonGroundBench2026`, arXiv 2602.21337): a controlled Helper/Worker benchmark measuring grounding at task, object, and communication levels; finds AI collaborators do not show the cross-trial efficiency gains humans do, and fail to update assumptions after repair.
+- **Conversational competence** (`NCBench2026`, arXiv 2601.06426): repair is the weakest measured competence class relative to plain answering.
+
+All four are arXiv preprints as of 2026-08-14. Treat the *direction* as well-supported and the *numbers* as provisional.
 
 ## Do Not Overclaim
 
@@ -61,3 +72,6 @@ The stable layer is classical and low-drift. The application layer is high-drift
 - Do not claim common ground exists because a prompt contained the relevant text.
 - Do not hard-code MAST percentages into policy without rerunning local trace analysis.
 - Do not use grounding theory for incentive conflicts; switch to game theory when payoffs diverge.
+- Do not treat a completed repair as a completed common-ground update; the correction can be acknowledged without the shared model moving (`CommonGroundBench2026`).
+- Do not infer dynamic grounding ability from static benchmark scores. Agents that interpret a brief correctly in one shot still fail to sustain a joint plan across turns (`DynamicGrounding2026`).
+- Do not treat a structured protocol payload (A2A, MCP, ACP) as evidence of shared interpretation; those layers standardize transport and schema, not meaning (`SemanticProtocols2026`).

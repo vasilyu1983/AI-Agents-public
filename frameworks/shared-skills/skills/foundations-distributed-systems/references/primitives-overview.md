@@ -1,6 +1,6 @@
 ---
 description: Domain-agnostic overview of 11 distributed-systems primitives with anti-patterns and a decision checklist.
-last_verified: 2026-05-02
+last_verified: 2026-08-14
 status: stable
 ---
 

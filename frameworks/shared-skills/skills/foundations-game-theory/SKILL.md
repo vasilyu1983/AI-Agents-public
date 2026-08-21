@@ -1,9 +1,9 @@
 ---
 name: foundations-game-theory
-description: Game-theory primitives for strategic decision systems, auctions, incentives, attribution, negotiation, debate, and trust. Use when modeling strategic coordination.
+description: Game-theory primitives for strategic decision systems, auctions, mechanism design, incentives, attribution, negotiation, debate, and trust. Use when modeling strategic play.
 compatibility: Claude Code + Codex. Portable core — primitives apply across domains.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-14
 ---
 
 # Game Theory Foundations
@@ -144,6 +144,9 @@ Nash equilibrium, Bayesian Nash equilibrium, and most mechanism-design proofs as
 - A "competitor" may be a satisficer bound by an internal OKR or a legacy contract, not a profit-maximizing best-responder — modeling them as rational invites a confidently wrong prediction.
 - Bidders or negotiating parties often do not share a common prior on value — private information about downstream use, not risk attitude, is driving the gap.
 - LLM agents do not reliably best-respond at all: pro-social bias, framing sensitivity, and authority compliance are documented, repeated deviations from Nash play (see the LLM rationality trap in [`patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md)). Any incentive-compatibility argument built on "agents best-respond" needs a held-out behavioral check before it is trusted for LLM participants.
+- The deviation runs in both directions, and over-truthfulness breaks proofs the same way strategic misreporting does. LLM agents in matching markets reveal preferences truthfully at *higher* rates than human subjects, but truth-telling does not track strategy-proofness — a strategy-proof mechanism did not elicit more truthful reports than a manipulable one (Hoshino, Kitadai & Nishino, arXiv:2606.03030, June 2026). Mechanism-based markets still beat free negotiation on stability and efficiency; the conclusion is that matching theory is a useful but incomplete guide for LLM-agent institutions, not that the guarantees transfer.
+
+**Self-assessment is the binding constraint on agent markets.** Auctions, task routing (#3), and confidence staking (#11) all consume agent self-reports of cost and success probability. MarketBench (Fradkin & Krishnan, arXiv:2604.23897, April 2026) measured six recent models on 93 SWE-bench Lite tasks and found them poorly calibrated on both success rate and token consumption; auctions built from those self-reports diverged from the full-information allocation, and supplying prior-capability context improved calibration only modestly. Before routing real work by agent bids, measure calibration on held-out tasks — an incentive-compatible mechanism fed miscalibrated valuations allocates badly without anyone misreporting strategically.
 
 Habit: before invoking a solution concept, ask "would every party recognize this as the same game I do?" If not, either model it explicitly as a game of incomplete information (Bayesian game) or drop equilibrium language and use the frame as a heuristic only.
 
@@ -169,8 +172,11 @@ Textbook mechanism design proves *existence* of a truthful, efficient, individua
 | **Participation constraints failing** | Individual rationality assumes the average outside option; when the *highest*-value participants have the best outside options, they opt out first and adversely select the remaining pool | A mechanism designed around expected participants, not the marginal one who is deciding whether to walk | Check IR against the highest-value participant's outside option; Myerson & Satterthwaite (1983) show no mechanism for private-value bilateral trade can be simultaneously efficient, budget-balanced, and individually rational — some efficiency loss or subsidy is structurally unavoidable |
 | **Budget imbalance** | VCG is efficient and truthful but generally runs a deficit or surplus that must land somewhere | Multi-sided mechanisms with no natural residual claimant | Decide upfront who absorbs the imbalance (platform take-rate, budget-neutral variant, or accept the inefficiency) rather than discovering it at settlement |
 | **Computational infeasibility** | Exact VCG for combinatorial allocation requires solving an often NP-hard optimization for the winning allocation and every counterfactual-without-bidder-*i* allocation | Task/resource routing over bundles, not single-item slots | Use approximate/greedy VCG variants and disclose the resulting efficiency loss, or restrict to single-item/separable settings where exact VCG is tractable |
+| **Rules stated only in the prompt** | A policy the participants can read but nothing enforces is cheap talk; under optimization pressure agents route around it | LLM participants told "do not collude" in a system prompt, with no state machine, sanction, or audit log behind it | Enforce in the orchestration layer, not the prompt — declare legal states, transitions, and sanctions outside the agents and have a controller apply them (Institutional AI, arXiv:2601.11369, Jan 2026: prompt-only constitutional policy was ineffective; governance-graph enforcement cut severe-collusion incidence from 50% to 5.6% across 90 runs) |
 
-**Practical tell**: if a mechanism is called "truthful" or "incentive-compatible" but nobody can name (a) the participation constraint being satisfied, (b) how false identities are prevented, and (c) who absorbs budget imbalance, the claim has not actually been checked.
+**Practical tell**: if a mechanism is called "truthful" or "incentive-compatible" but nobody can name (a) the participation constraint being satisfied, (b) how false identities are prevented, (c) who absorbs budget imbalance, and (d) what enforces the rules other than the prompt, the claim has not actually been checked.
+
+**Communication channels are a collusion dial, not a neutral feature.** Direct seller-to-seller messaging raises collusive tendency in simulated continuous double auctions, with the effect varying by model and modulated by oversight and authority pressure (Agrawal et al., arXiv:2507.01413, 2025). The same channel that reduces conflict in coordination games raises coordinated overpricing in market games — decide which game you are actually running before granting agents a side channel.
 
 ---
 
@@ -211,6 +217,9 @@ Textbook mechanism design proves *existence* of a truthful, efficient, individua
 | Optimizing one metric in a multi-party mechanism | Goodharting shifts harm to unmeasured parties | Add Pareto and stakeholder checks before launch |
 | Hiding minority evidence in synthesis | Minority-correct answers are a common failure case | Preserve dissent, runner-up, and outlier evidence |
 | Calling a multi-principal synthesis incentive-compatible without designing a payment scheme | Truthful reporting is strictly dominated without payments in multi-stakeholder settings (NeurIPS 2024 proof) | Add affine maximizer (weighted VCG) payment or explicitly scope to a single-principal setting |
+| Running an auction over uncalibrated agent self-reports | Allocation quality is bounded by valuation accuracy, not by mechanism truthfulness — miscalibrated bids misallocate even under honest reporting | Measure bid calibration on held-out tasks before routing real work (MarketBench) |
+| Encoding mechanism rules as prompt instructions | Declarative prohibitions have no binding force under optimization pressure | Enforce legal states, transitions, and sanctions in the orchestration layer with an audit log |
+| Scoring a negotiation agent on deal rate | Frontier models saturate deal rate while diverging widely on surplus extraction, belief calibration, and constraint compliance | Score surplus captured, cue use, and compliance separately (TERMS-Bench) |
 
 ---
 
@@ -264,6 +273,7 @@ Quick stacks:
   **Inputs:** Partner track record (prior-interaction count n, defection incidents), payoff matrix cells for cooperation vs. defection on the proposed arrangement, each party's BATNA and stated interests.
   **Rules:** If n < 3 interactions → require contractual escrow or clawback clause (iterated PD cannot be relied on with insufficient history); if n ≥ 3 and no defection → tit-for-tat sufficient; assign reputation tier (probationary / standard / proven) based on defection rate and interaction depth (#5); locate ZOPA as overlap between each party's reservation value and walk-away point (#12); flag if no ZOPA exists — do not negotiate, renegotiate the scope.
   **Outputs:** Recommended contract structure (escrow clause if n < 3, tit-for-tat terms if n ≥ 3), reputation tier assigned, ZOPA range or no-deal flag, payoff-scale test result (cooperation dominant or defection dominant under current incentives).
+  **If an LLM runs the negotiation:** do not accept deal rate as the success metric — it saturates across frontier models while surplus extraction, belief calibration, and constraint compliance still diverge sharply (TERMS-Bench, arXiv:2605.13909, 2026, 13 systems). Score surplus captured against the counterpart's latent payoff, and treat a high close rate with low surplus as conceding, not winning.
 
 - **High-quality synthesis**: #13 (reasoning-tree audit) + #7 (mechanism-design synthesis) + #11 (confidence betting)
   **Inputs:** Candidate outputs or claims, evidence source per claim, participant confidence estimates, synthesis stakes (reversible vs. irreversible decision).
@@ -317,7 +327,7 @@ Quick stacks:
 - Per-mechanism playbooks: [`assets/templates/game-theory/`](assets/templates/game-theory/) (one file per primitive)
 - Composition guide: [`assets/templates/game-theory/README.md`](assets/templates/game-theory/README.md)
 - Formal theory map: [`references/formal-theory-map.md`](references/formal-theory-map.md)
-- April 2026 patterns, scenarios, and traps: [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md)
+- Current patterns, scenarios, and traps: [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md)
 - Domain-agnostic primitives overview: [`references/primitives-overview.md`](references/primitives-overview.md)
 - Sources: [`data/sources.json`](data/sources.json)
 
@@ -335,7 +345,7 @@ Use [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-tra
 2. Use the [Quick Reference](#quick-reference) table to map failure mode → primitive.
 3. Open the per-mechanism playbook in [`assets/templates/game-theory/`](assets/templates/game-theory/) for the full problem/solution/launch-prompt template.
 4. For multi-failure scenarios, use the [Composition Recipes](#composition-recipes) or the full [`assets/templates/game-theory/README.md`](assets/templates/game-theory/README.md) to stack primitives.
-5. Check [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md) for April 2026 trap coverage before shipping the mechanism.
+5. Check [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md) for trap coverage before shipping the mechanism.
 6. For agent-team applied recipes (team.yaml manifest fields, agent-team anti-patterns, decision checklist for team launches), load [`agents-subagents/references/game-theory-agent-teams.md`](../agents-subagents/references/game-theory-agent-teams.md).
 7. For other domain applied recipes — pricing, paid advertising, CRO, security, market intel — see each domain skill's `references/game-theory-applied.md` (or `game-theory-pricing.md` for `startup-business-models`).
 

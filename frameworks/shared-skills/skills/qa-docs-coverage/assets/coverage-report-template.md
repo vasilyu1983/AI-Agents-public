@@ -162,7 +162,7 @@ Target Score: Y (reduce by Z% by [date])
 
 - [ ] Document [Important Gap 1]
 - [ ] Document [Important Gap 2]
-- [ ] Create [Missing Diagram]
+- [ ] Create [Missing Diagram] — name the mechanism it must show, or close as not-a-gap (`docs-diagram-design`)
 
 ### Ongoing
 

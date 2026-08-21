@@ -2,8 +2,8 @@
 name: ai-coding-agents
 description: "Creates coding agents on Claude Code, Codex, and Agent SDK. Use when defining review, test, refactor, or team agents — not building a runtime."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-21
 ---
 
 # AI Coding Agents — Creation Hub
@@ -120,7 +120,8 @@ classify: define agent on existing platform OR build runtime subsystem
 7. **Design the context strategy**: What files does the agent need? How does it discover them? What is the token budget?
 8. **Add verification**: How does the agent check its own work? For teams: assign a separate verifier.
 9. **Smoke test**: Run on 3+ representative tasks before deploying.
-10. **Iterate**: Observe real behavior, tighten scope, improve prompts.
+10. **Test extension robustness**: For edit, refactor, and migration agents, run at least one evolving-spec sequence with 3+ checkpoints. Start each checkpoint in a fresh conversation/context, carry forward the same agent-created workspace, and retain all prior regression tests.
+11. **Iterate**: Observe real behavior, tighten scope, improve prompts.
 
 ## Known Traps
 
@@ -129,6 +130,7 @@ classify: define agent on existing platform OR build runtime subsystem
 - inheriting parent context blindly across phases instead of re-briefing from current repo truth
 - building a multi-agent coding team before the task graph, file ownership, and merge plan exist
 - assuming Claude Code, Codex, and SDK workers expose equivalent tools, hooks, and approval semantics
+- treating one-shot green tests, a plan-first prompt, or an anti-slop prompt as evidence that edit-capable agents remain extensible over repeated changes
 
 ## Common Anti-Patterns
 
@@ -437,4 +439,3 @@ The spine above is rebuilt-and-verified against the Claude Code lineage and, as 
 Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

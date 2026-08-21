@@ -2,9 +2,9 @@
   "metadata": {
     "title": "Grounding & Communication Foundations — Sources",
     "description": "Primary references for 10 grounding-theory primitives: common ground, grounding criterion, contributions (presentation+acceptance), evidence of understanding, repair, presupposition, audience design, joint commitment, least collaborative effort, grounding cost. Clark canonical layer plus modern multi-agent LLM application.",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-grounding-communication",
-    "total_sources": 26
+    "total_sources": 30
   },
   "canonical_texts": [
     {
@@ -188,6 +188,34 @@
       "url": "https://aclanthology.org/2025.emnlp-main.1104/",
       "description": "Wang et al. (2025). EMNLP 2025, pp. 21773–21784. NoisyToolBench: ambiguous real-world tool-use instructions. Ask-when-Needed (AwN) framework: agents ask clarifying questions when encountering unclear instruction obstacles. Significantly outperforms existing frameworks on NoisyToolBench. Operationalizes Primitive #5 (Repair) — ask-for-clarification channel — in tool-use agent context. Complements InferAct (preemptive) with ambiguity-triggered reactive clarification. Code+datasets released. Evidence grade B.",
       "url_check": "auto"
+    },
+    {
+      "id": "DynamicGrounding2026",
+      "name": "Talk is Cheap, Communication is Hard: Dynamic Grounding Failures and Repair in Multi-Agent Negotiation",
+      "url": "https://arxiv.org/abs/2605.01750",
+      "description": "Yao, Zou, Hawkins (2026). arXiv 2605.01750v2, May 2026. PREPRINT — no peer review confirmed. Introduces the static-vs-dynamic grounding distinction: static maps language to shared context, dynamic requires negotiating meaning across turns. Iterated multi-turn negotiation game where two agents allocate shared resources to private projects with verifiable jointly optimal outcomes. Key result: agents identify Pareto-optimal allocations in isolation but dyads consistently fail to reach them across models — the coordination gap is not explained by individual reasoning limits or insufficient information exchange. Four failure modes: loss of shared interaction history (#1), stubborn anchoring to early proposals (#3, #8), defaulting to equal splits over reward-maximizing coordination (#2), referential binding errors across turns (#6). Grounds the multi-turn agent-agent coordination recipe.",
+      "url_check": "manual"
+    },
+    {
+      "id": "CommonGroundBench2026",
+      "name": "A Benchmark to Assess Common Ground in Human-AI Collaboration",
+      "url": "https://arxiv.org/abs/2602.21337",
+      "description": "Poelitz, Doshi-Velez, Lindley (2026). arXiv 2602.21337v1, February 2026. PREPRINT — no peer review confirmed. Helper/Worker collaborative puzzle-matching task; 40 Prolific participants in a 2x2 design (role x shared/non-shared view), four trials plus practice. Measures common ground at three levels: task (success, word and turn counts), object (shared referential conventions), communication (presentations, clarifications, repairs, acceptances). Key findings: shared visual feedback raises accuracy (chi-sq(1)=11.57, p<0.001); no learning effect across trials for AI, contrary to human-human patterns; human Helpers reduce communication over trials (F(1,28)=11.67, p<0.01) while AI Helpers show minimal efficiency gain; joint vocabulary stays small and shrinks (F(1,28)=12.28, p<0.001); models fail to update assumptions after repairs. Small sample — treat effect directions as informative, magnitudes as provisional. Supports #1, #4, #5.",
+      "url_check": "manual"
+    },
+    {
+      "id": "SemanticProtocols2026",
+      "name": "Beyond Message Passing: A Semantic View of Agent Communication Protocols",
+      "url": "https://arxiv.org/abs/2604.02369",
+      "description": "Yuan, Lyu, Yuan, Zhang, He, Geng, Du, Sun, Chen, Han, Kang, Chen, Wu, Liu (2026). arXiv 2604.02369v3, submitted March 2026, revised April 2026. PREPRINT — no peer review confirmed. Surveys 18 representative agent communication protocols (MCP, A2A, Agent Protocol, Agora, ACP variants) against a three-layer taxonomy: communication (reliable transmission), syntactic (message schemas), semantic (meaning alignment). Invokes Clark's joint-activity framing — communication requires mutual belief about shared knowledge, intentions, assumptions — to motivate the semantic layer. Key finding: most protocols provide limited protocol-level mechanisms for clarification, context alignment, and verification; semantic responsibilities are pushed into prompts, wrappers, and application-specific orchestration logic. Agents 'exchange messages correctly without ensuring they understand them in the same way.' Citable support for the A2A/MCP transport-vs-grounding boundary. Supports #3, #5, #6.",
+      "url_check": "manual"
+    },
+    {
+      "id": "NCBench2026",
+      "name": "NC-Bench: An LLM Benchmark for Evaluating Conversational Competence",
+      "url": "https://arxiv.org/abs/2601.06426",
+      "description": "Moore, An, Ahmed, Gala (2026). arXiv 2601.06426v2, March 2026. PREPRINT — no peer review confirmed. Conversation-analysis-grounded benchmark measuring the form and structure of natural conversation rather than content accuracy. 14 interaction patterns across three sets (basic, RAG, complex request); 720 test cases (180/180/360); 6 open-source models from 3 families (Granite, Llama, Qwen) at 2-8B. Key result for this skill: repair is the weakest competence class — 5-75% accuracy on repeat requests against 95-100% on answering inquiries; sequence closers 55-100%; sequence abort 20-100%. Small-model sample: the absolute rates do not transfer to frontier models, but the ordering (repair weakest, answering strongest) is the usable finding. Supports #5.",
+      "url_check": "manual"
     }
   ]
 }

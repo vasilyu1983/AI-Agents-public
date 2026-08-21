@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Network Science Foundations — Sources",
     "description": "Primary papers and references for 11 canonical network-science primitives: centrality, PageRank, community detection, small-world, scale-free, percolation, SIR contagion, link prediction, graph clustering, graph embeddings, and temporal networks",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-network-science",
-    "total_sources": 33
+    "total_sources": 40
   },
   "textbooks": [
     {
@@ -238,6 +238,69 @@
       "name": "A simple model of global cascades on random networks",
       "url": "https://doi.org/10.1073/pnas.082090499",
       "description": "Duncan J. Watts (2002). PNAS 99(9): 5766–5771. Foundational threshold/complex contagion model. Introduces node adoption threshold φᵢ (fraction of neighbours that must have adopted before node i adopts) and derives cascade conditions on random networks. Shows clustered networks can accelerate complex contagion (repeated exposure from same neighborhood), contrasting with SIR where clustering slows spread. Canonical reference for complex contagion / social adoption modelling. NOTE: DOI confirmed structurally correct (pnas.082090499); primary URL 403 in this session — well-established canonical reference cited by 10000+ papers.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Coll2025HIF",
+      "name": "HIF: The hypergraph interchange format for higher-order networks",
+      "url": "https://doi.org/10.1017/nws.2025.10018",
+      "description": "Coll, Joslyn, Landry, Lotito, Myers, Pickard, Praggastis, and Szufel (2025). Network Science 13, e21. arXiv:2507.11520. Defines a JSON schema (network-type, metadata, nodes, edges, incidences) for undirected hypergraphs, directed hypergraphs, and abstract simplicial complexes, with node/edge/incidence attributes. Jointly authored by maintainers of HypergraphX, HyperNetX, XGI, and SimpleHypergraphs.jl, so it is the interoperability path between higher-order packages rather than one library's format. Schema, test suite, and datasets: https://github.com/HIF-org/HIF-standard. Operational complement to primitives #3, #7, #11 when higher-order analysis spans more than one tool. VERIFIED 2026-08-14.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Bokov2025LDLeiden",
+      "name": "LD-Leiden: Local Parallel Community Detection in Large Dynamic Networks",
+      "url": "https://arxiv.org/abs/2502.18497",
+      "description": "Bokov, Konovalov, Uporova, Moiseev, Safonov, and Radionov (2025, revised 2026). arXiv preprint 2502.18497 — preprint status, not peer-reviewed as of 2026-08-14. Incremental Leiden: updates an existing partition after each edge batch using affected-frontier detection and conflict-filtered parallel moves, bounding cost to visited regions instead of rerunning the full algorithm. Reports 48.77x over warm-started Leidenalg across 100 batches and ~0.996 of full-rerun modularity on graphs up to 214M vertices / 3.30B edges. Relevant to primitive #3 whenever the graph evolves rather than being analysed once. VERIFIED 2026-08-14.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": false
+    },
+    {
+      "id": "GhoshSaule2025DetectorChoice",
+      "name": "The Role of Community Detection Methods in Performance Variations of Graph Mining Tasks",
+      "url": "https://arxiv.org/abs/2509.09045",
+      "description": "Shrabani Ghosh and Erik Saule (2025). arXiv preprint 2509.09045 — preprint status, not peer-reviewed as of 2026-08-14. Empirically compares community-detection algorithms as an upstream stage and finds downstream graph-mining performance varies materially by detector, so the partition is not a neutral preprocessing step and modularity is not a proxy for downstream utility. Practical consequence for primitive #3 and the GraphRAG partitioning recipe: evaluate detectors against the downstream metric. VERIFIED 2026-08-14.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Huang2024TGB2",
+      "name": "TGB 2.0: A Benchmark for Learning on Temporal Knowledge Graphs and Heterogeneous Graphs",
+      "url": "https://arxiv.org/abs/2406.09639",
+      "description": "Gastinger, Huang, Galkin, Loghmani, Parviz, Zhou, Friedrich, Rabbany, Rabusseau, and Poursafaei (2024). NeurIPS 2024 Datasets and Benchmarks. Establishes the evaluation protocol correction for dynamic link prediction: score as a ranking task against multiple negatives using MRR rather than binary classification against one random negative, and include historical negatives (past edges absent at the current step), which are substantially harder than random draws. Together with TGB-Seq (Yi et al. 2025) this defines the current evidence standard for primitive #8 and #11 evaluation. Leaderboard: https://tgb.complexdatalab.com/. VERIFIED 2026-08-14.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Liu2025GraphAugmentedAgents",
+      "name": "Graph-Augmented Large Language Model Agents: Current Progress and Future Prospects",
+      "url": "https://arxiv.org/abs/2507.21407",
+      "description": "Yixin Liu, Guibin Zhang, Kun Wang, Shiyuan Li, and Shirui Pan (2025). arXiv preprint 2507.21407 — preprint status, not peer-reviewed as of 2026-08-14. Survey of graph structure inside LLM agent systems across planning graphs, graph-based long-term memory, tool graphs, and multi-agent orchestration. Establishes that agent communication topology is a graph-design problem rather than a metaphor, which is the basis for applying centrality (#1), percolation (#6), and contagion (#7) to agent systems. VERIFIED 2026-08-14.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Zhang2024GDesigner",
+      "name": "G-Designer: Architecting Multi-agent Communication Topologies via Graph Neural Networks",
+      "url": "https://arxiv.org/abs/2410.11782",
+      "description": "Guibin Zhang et al. (2024/2025). arXiv preprint 2410.11782 — preprint status, not peer-reviewed as of 2026-08-14. Uses a variational graph auto-encoder to generate task-conditioned sparse communication topologies for LLM multi-agent systems instead of fixed hand-picked patterns. Reports up to ~95.33% token reduction versus dense topologies and ~0.3% accuracy degradation under adversarial agent attack. TREAT PERCENTAGES AS BENCHMARK-SPECIFIC (MMLU, HumanEval; model- and scaffold-dependent) — the transferable claim is structural: topology density is a token-cost and error-propagation tradeoff. Maps to primitives #1 and #6 applied to agent graphs. VERIFIED 2026-08-14.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Zhang2026AgentRouter",
+      "name": "AgentRouter: A Knowledge-Graph-Guided LLM Router for Collaborative Multi-Agent Question Answering",
+      "url": "https://aclanthology.org/2026.acl-long.33/",
+      "description": "Zheyuan Zhang, Kaiwen Shi, Zhengqing Yuan, Zehong Wang, Tianyi Ma, Keerthiram Murugesan, Vincent Galassi, Chuxu Zhang, and Yanfang Ye (2026). ACL 2026 (Long Papers), San Diego. Formulates multi-agent QA routing as a knowledge-graph-guided problem: builds a heterogeneous graph over query, entities, and candidate agents, then propagates with a heterogeneous GNN to produce task-aware routing distributions, supervised by empirical per-agent performance signals. Concrete instance of agent selection as a ranking problem on a heterogeneous graph rather than flat classification. VERIFIED 2026-08-14.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
       "add_as_web_search": false
     }
   ]

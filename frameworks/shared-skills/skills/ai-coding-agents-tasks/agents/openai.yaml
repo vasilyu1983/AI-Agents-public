@@ -1,4 +1,4 @@
 interface:
   display_name: "AI Coding Agents — Tasks"
-  short_description: "Design coding-agent task runtimes"
-  default_prompt: "Use $ai-coding-agents-tasks to design task types, background execution, task lists, cancellation, or teammate task coordination for a coding-agent runtime."
+  short_description: "Design Loop and Graph Engineering task runtimes"
+  default_prompt: "Use $ai-coding-agents-tasks to design Loop Engineering and Graph Engineering runtime surfaces, including task types, cyclic or workflow graphs, background execution, cancellation, and teammate coordination."

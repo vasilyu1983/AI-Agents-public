@@ -1,9 +1,9 @@
 ---
 name: foundations-causal-inference
-description: Causal-inference primitives: DAGs, IV, RDD, DiD, synthetic control, propensity, CATE. Use when attributing confounded impact or diagnosing rollout and LLM-eval confounding.
+description: Causal-inference primitives: DAGs, IV, RDD, DiD, synthetic control, propensity, CATE, interference. Use when attributing confounded impact or rollout and LLM-eval confounding.
 compatibility: Portable core only.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-14
 ---
 
 # Causal Inference Foundations
@@ -19,10 +19,11 @@ last_validated: 2026-07-11
 - Confounding suspected — non-random treatment assignment
 - Heterogeneous treatment effects matter (CATE, uplift)
 - Mediation question — "is the effect through path X or path Y?"
+- Units interfere — marketplace, social graph, shared inventory, ranking model, or agents sharing a backend resource; randomization alone does not identify the launch effect
 - LLM evaluation pipeline uses logged data — prompt distribution, judge bias, or user self-selection confound the quality signal (Pearl's Ladder applies: estimating P(Y|do(prompt)) is different from P(Y|prompt))
 
 **Skip and use simpler alternatives when:**
-- Clean RCT / A/B test is already running — read the result, don't re-derive it observationally
+- Clean RCT / A/B test is already running *and* units do not interfere — read the result, don't re-derive it observationally. If units share a marketplace, graph, or backend resource, the test is not clean: see [Interference and SUTVA](#interference-and-sutva-when-randomization-is-not-enough)
 - Question is "how big is the effect?" rather than "does it cause" — descriptive analytics is enough
 - No plausible causal mechanism — correlation is just measurement, not insight
 - Sample size too small for propensity overlap (n < 1000 typical) — flag and collect more data
@@ -38,6 +39,7 @@ last_validated: 2026-07-11
 - [Misuse Boundaries](#misuse-boundaries)
 - [Decision Checklist](#decision-checklist)
 - [Composition Recipes](#composition-recipes)
+- [Interference and SUTVA](#interference-and-sutva-when-randomization-is-not-enough)
 - [Expert Judgment](#expert-judgment)
 - [Workflow](#workflow)
 - [ASCII Flow](#ascii-flow)
@@ -98,6 +100,7 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 | Observational adjustment | Need propensity scores, weighting, matching, doubly robust estimation | #3, #8 |
 | Heterogeneous effects | Need CATE, uplift, policy learning, or subgroup effect estimates | #9 |
 | Mediation/counterfactual pathways | Need direct/indirect effects and pathway assumptions | #11 |
+| Interference / experimental design | Need cluster, geo, or switchback randomization because units affect each other | All — SUTVA is a precondition |
 | Robustness/sensitivity | Need unobserved-confounding bounds or tipping-point analysis | #12 |
 
 ---
@@ -114,6 +117,7 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 | Conditioning on a post-treatment variable | Blocks the causal pathway; introduces collider bias on mediator or mediator-proxy | Identify mediators in the DAG before adjusting; use mediation analysis (#11) if the path is the target |
 | Averaging heterogeneous effects into one ATE | Subgroups with opposing effects cancel; action on ATE harms some users | Run CATE/uplift (#9); segment before averaging |
 | Ignoring unmeasured confounding in observational studies | Effect estimate is unidentified; direction may flip under plausible confounders | Report E-value and Rosenbaum bounds (#12) alongside every observational point estimate. For IV estimates, also compute IV robustness values (Cinelli & Hazlett 2025, *Biometrika*) |
+| Treating a marketplace or social-graph A/B test as unit-randomized | SUTVA fails: treated units change control units' outcomes, so the difference-in-means is biased even under perfect randomization | Name the interference structure before estimating. Cluster or switchback the design; estimate with a bias-aware estimator rather than difference-in-means |
 
 ---
 
@@ -129,6 +133,7 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 | Publishing CATE without overlap checks | Heterogeneous effects extrapolate outside support | Check positivity and subgroup sample size |
 | Calling observational estimates “proven impact” | Unmeasured confounding remains possible | Report sensitivity analysis |
 | Conditioning on post-treatment variables | Blocks or distorts the causal path | Separate total, direct, and mediated effects |
+| Reporting a unit-level A/B result as the launch effect under interference | Unit-level and global treatment effects differ when SUTVA fails | Name the interference structure; use a cluster/geo/switchback design and say which estimand it targets |
 
 ---
 
@@ -138,6 +143,7 @@ Use this to pick the right method before modeling:
 
 - [ ] **Can you draw the assumed DAG?** If not, stop — assumptions are implicit and untestable. Draw DAG (#1) first.
 - [ ] **Is the effect you want interventional (do(X)) or conditional?** If interventional, check identifiability with do-calculus (#2).
+- [ ] **Can one unit's treatment change another unit's outcome?** (marketplace supply/demand, social graph, shared inventory, ranking model, geographic proximity) If yes, SUTVA fails and randomization alone does not save you — fix the *design* (cluster, geo, or switchback) before choosing an estimator. See [Interference and SUTVA](#interference-and-sutva-when-randomization-is-not-enough).
 - [ ] **Do you have an RCT or clean natural experiment?** If yes, use the design directly. If no, continue.
 - [ ] **Is there a threshold that determines treatment?** → RDD (#5).
 - [ ] **Is there pre/post data with a comparable untreated group?** → DiD (#6). Check parallel trends first.
@@ -208,7 +214,26 @@ Use this to pick the right method before modeling:
 4. CATE (#9) — surface heterogeneous effects by prompt category, task type, or user cohort; avoid reporting a flat ATE that masks regressions in a subgroup.
 5. Sensitivity analysis (#12) — compute E-value on the key quality claim; judge-bias is a plausible unmeasured confounder — report how strong it would need to be to nullify the finding.
 
-**Note on LLM-assisted causal discovery**: LLMs can propose DAG edges from domain knowledge but cannot replace data-driven identification checks. Use LLM outputs as priors to seed a DAG; validate edges with statistical tests (faithfulness, independence). Do not treat LLM-generated graphs as identified causal models. (Reference: arxiv 2506.00844, "LLM Cannot Discover Causality", 2025.)
+**Note on LLM-assisted causal discovery**: LLMs can propose DAG edges from domain knowledge but cannot replace data-driven identification checks — autoregressive next-token modeling has no mechanism for establishing direction. Use LLM outputs as priors to seed a DAG; validate edges with statistical tests (faithfulness, independence). Do not treat LLM-generated graphs as identified causal models. The restriction is on *decisional* authority, not on all LLM involvement: LLM-guided heuristic search over the structure space is a legitimate accelerator, since the search result is still validated against data. Reported LLM causal-discovery accuracy is separately confounded by memorization: the standard bnlearn benchmark graphs (Sachs, Asia, Alarm, Child) are widely published and plausibly in pretraining corpora, so benchmark scores are weak evidence of causal reasoning — prefer a graph your own domain generated. (Wu, Yu, Wu & Tan 2025, arXiv:2506.00844; contamination caveat per CausalBench, arXiv:2404.06349.)
+
+---
+
+## Interference and SUTVA: When Randomization Is Not Enough
+
+Every primitive above assumes SUTVA: one unit's treatment does not affect another unit's outcome. In marketplaces, social graphs, shared-inventory systems, and ranking models this is false by construction, and a clean randomized A/B test is still biased — the control group is contaminated by the treatment. This is a *design* problem; no estimator applied afterwards recovers the estimand.
+
+Identify the interference structure first, then pick the design:
+
+| Interference structure | Design | Estimation note |
+|---|---|---|
+| Spatial or graph neighbors (social, geo, ride-hailing) | Cluster randomization on the graph's dense components | Difference-in-neighbors (Peng, Ye & Zheng 2025) attains second-order bias in interference magnitude with far lower variance than Horvitz–Thompson |
+| Temporal carryover on a single shared system (pricing, matching, ranking) | Switchback: randomize treatment over time blocks | Block length must exceed the carryover order *m*; optimal design in Bojinov, Simchi-Levi & Zhao (2023, *Management Science*) |
+| Both spatial and temporal (delivery, marketplace supply) | Clustered switchback (Jia, Kallus & Yu 2025) | Truncated Horvitz–Thompson; MSE matches the lower bound up to log terms on sparse graphs |
+| Market-level equilibrium effects (budget, inventory, auction) | Geo or market-level randomization; unit-level tests cannot see it | Few treated units — use randomization inference, not asymptotic SEs |
+
+**The reporting distinction that matters**: under interference, the unit-level "treatment effect" and the effect of switching *everyone* (the global/total treatment effect) are different quantities. A cluster or switchback design estimates the latter, which is usually the decision-relevant one for a launch. Say which one you estimated.
+
+Agent and LLM products hit this directly: agents sharing a rate limit, a retrieval index, a cache, or a tool backend interfere through the shared resource, so per-session randomization understates or inverts the launch effect.
 
 ---
 
@@ -253,7 +278,7 @@ The textbook assumption is rarely violated the way the textbook describes it. Wh
 - If a credible design already exists (valid IV, sharp RDD, staggered DiD with a heterogeneity-robust estimator) and the target is a single ATE/ATT/LATE, doubly-robust ML nuisance estimation buys efficiency, not identification. The design is doing the causal work; DML is just a better nuisance-function fitter.
 - Causal ML (causal forests, DML, meta-learners) earns its complexity when: (a) covariates are high-dimensional with an unknown confounding functional form, (b) the question is heterogeneity (CATE/uplift) that a single quasi-experiment cannot answer without infeasible sample size, or (c) treatment is continuous/high-cardinality with no closed-form estimator.
 - It does not repair a broken identification strategy. Running `econml` on top of a DiD with violated parallel trends, or a `dowhy` refutation suite on top of an IV with a leaky exclusion restriction, produces a precise, doubly-robust, wrong answer. Fix identification before reaching for machine learning.
-- **Where the literature is genuinely unsettled** (state this plainly rather than picking a side): (1) which staggered-DiD estimator (Callaway–Sant'Anna, Sun–Abraham, BJS, Gardner) to prefer in finite samples is an active research question — they can disagree meaningfully on the same panel, and no single one dominates across all panel structures (Roth, Sant'Anna, Bilinski & Poe 2023); (2) the best-practice sensitivity-analysis default for ML-based ATEs (Chernozhukov, Cinelli et al. 2026 vs. simpler partial-R² benchmarks) is still settling in applied practice; (3) using LLMs to propose or accelerate causal discovery has no consensus validation protocol as of mid-2026 — treat LLM-proposed edges as priors to test, not conclusions to report.
+- **Where the literature is genuinely unsettled** (state this plainly rather than picking a side): (1) which staggered-DiD estimator (Callaway–Sant'Anna, Sun–Abraham, BJS, Gardner) to prefer is setting-dependent, not resolved — the 2026 JEL practitioner's guide (Baker, Callaway, Cunningham, Goodman-Bacon & Sant'Anna) frames the choice by design and target estimand rather than naming a winner, and the estimators can disagree meaningfully on the same panel; (2) the best-practice sensitivity-analysis default for ML-based ATEs (Chernozhukov, Cinelli et al. 2026 vs. simpler partial-R² benchmarks) is still settling in applied practice; (3) using LLMs to propose or accelerate causal discovery has no consensus validation protocol as of mid-2026 — treat LLM-proposed edges as priors to test, not conclusions to report.
 
 ---
 
@@ -319,10 +344,11 @@ New consumer domain layers should follow the same gate-then-recipe pattern rathe
 - Hernán & Robins *What If* (2020, freely available) is the canonical reference for time-varying treatments, IPW, and marginal structural models.
 - Chernozhukov et al. (2018) on double/debiased machine learning (DML) is the source for doubly robust and Neyman-orthogonal estimator claims. For continuous treatments, the DML extension is Colangelo & Lee (2025, *Journal of Business & Economic Statistics*, doi:10.1080/07350015.2025.2505487). For omitted-variable sensitivity analysis of DML estimates, see Chernozhukov, Cinelli et al. (2026, *Review of Economics and Statistics*, doi:10.1162/REST.a.1705). Implemented in dml.sensemakr.
 - Sensitivity analysis E-values: VanderWeele & Ding (2017); Rosenbaum bounds: Rosenbaum (2002) *Observational Studies*. Sensitivity analysis for IV estimates: Cinelli & Hazlett (2025, *Biometrika*, doi:10.1093/biomet/asaf004) extends the partial-R² OVB framework to handle exclusion-restriction violations and instrument confounding. Implemented in iv.sensemakr R package.
-- For staggered DiD, the canonical method set (as of 2026) is: Callaway & Sant'Anna (2021, *JoE*, doi:10.1016/j.jeconom.2020.12.001); Sun & Abraham (2021, *JoE*, doi:10.1016/j.jeconom.2020.09.006); Borusyak, Jaravel & Spiess (2024, *RES*, doi:10.1093/restud/rhae011) imputation estimator; Gardner (2022, arXiv:2207.05943) two-stage DiD. Goodman-Bacon (2021, *JoE*, doi:10.1016/j.jeconom.2021.03.014) decomposition explains why plain TWFE fails. Navigational synthesis: Roth, Sant'Anna, Bilinski & Poe (2023, *JoE*, doi:10.1016/j.jeconom.2022.11.001).
+- For staggered DiD, the canonical method set (as of 2026) is: Callaway & Sant'Anna (2021, *JoE*, doi:10.1016/j.jeconom.2020.12.001); Sun & Abraham (2021, *JoE*, doi:10.1016/j.jeconom.2020.09.006); Borusyak, Jaravel & Spiess (2024, *RES*, doi:10.1093/restud/rhae011) imputation estimator; Gardner (2022, arXiv:2207.05943) two-stage DiD. Goodman-Bacon (2021, *JoE*, doi:10.1016/j.jeconom.2021.03.014) decomposition explains why plain TWFE fails. Navigational synthesis: Roth, Sant'Anna, Bilinski & Poe (2023, *JoE*, doi:10.1016/j.jeconom.2022.11.001). The current practitioner-facing reference is Baker, Callaway, Cunningham, Goodman-Bacon & Sant'Anna (2026, *JEL* 64(2), 498–557, doi:10.1257/jel.20251650) — organizes DiD designs by estimand, covariates, weights, and timing rather than prescribing one estimator.
 - For parallel-trends robustness: Rambachan & Roth (2023, *RES*, doi:10.1093/restud/rhad018) HonestDiD. Pre-trend tests have low power; HonestDiD provides honest CIs under bounded violations without the binary pass/fail logic.
 - For Synthetic DiD (bridging SC and DiD): Arkhangelsky et al. (2021, *AER*, doi:10.1257/aer.20190159). R package `synthdid`.
 - For doubly robust DiD with covariates: Sant'Anna & Zhao (2020, *JoE*, doi:10.1016/j.jeconom.2020.06.003) DR-DiD; underpins the Callaway–Sant'Anna estimator.
+- For interference and SUTVA violations: Bojinov, Simchi-Levi & Zhao (2023, *Management Science* 69(7), 3759–3777, doi:10.1287/mnsc.2022.4583) for optimal switchback design under carryover; Jia, Kallus & Yu (2025, arXiv:2312.15574) for clustered switchback under joint spatio-temporal interference; Peng, Ye & Zheng (2025, arXiv:2503.02271) for the differences-in-neighbors estimator under network interference. These are design methods — verify the assumed interference structure before citing an estimator's guarantees.
 - Method effectiveness is sample-size and domain dependent. Validate identification assumptions explicitly before reporting estimates.
 - Source links and verified dates in each per-primitive file are the canonical evidence tier.
 

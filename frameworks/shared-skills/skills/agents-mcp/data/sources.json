@@ -2,34 +2,34 @@
   "metadata": {
     "title": "agents-mcp - Primary Sources",
     "description": "Official MCP, client, SDK, registry, and tooling primary references",
-    "last_updated": "2026-08-09",
-    "updated": "2026-08-09",
+    "last_updated": "2026-08-11",
+    "updated": "2026-08-11",
     "skill": "agents-mcp",
     "total_sources": 44
   },
   "official_specification": [
     {
-      "name": "MCP Specification (2025-11-25)",
+      "name": "MCP Specification (2026-07-28) — current",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28",
+      "description": "Current protocol version, shipped 2026-07-28. Stateless (no initialize handshake, no Mcp-Session-Id), server/discover RPC, MRTR replaces server-initiated requests. Verified 2026-08-11",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Changelog (2026-07-28)",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/changelog",
+      "description": "Authoritative list of changes since 2025-11-25: stateless protocol (SEP-2567/2575), MRTR (SEP-2322), Roots/Sampling/Logging deprecated (SEP-2577), feature lifecycle with 12-month minimum deprecation window (SEP-2596). Verified 2026-08-11",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Deprecated Features Registry (2026-07-28)",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/deprecated",
+      "description": "Live registry of every feature currently in the Deprecated state. Check before relying on Roots, Sampling, Logging, HTTP+SSE transport, or OAuth Dynamic Client Registration — the 12-month window is a floor, not a removal date",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MCP Specification (2025-11-25) — superseded",
       "url": "https://modelcontextprotocol.io/specification/2025-11-25",
-      "description": "Current protocol baseline used by this skill",
-      "add_as_web_search": true
-    },
-    {
-      "name": "MCP Draft / RC Changelog (2026-07-28)",
-      "url": "https://modelcontextprotocol.io/specification/draft/changelog",
-      "description": "Redesign since 2025-11-25 (stateless protocol, MRTR, server/discover, Roots/Sampling/Logging deprecated). Finalizes 2026-07-28 — verified 2026-07-11, ~2.5 weeks from final; do not pre-adopt in production until then",
-      "add_as_web_search": true
-    },
-    {
-      "name": "The 2026-07-28 MCP Specification Release Candidate (blog)",
-      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/",
-      "description": "Official announcement confirming the 2026-07-28 final ship date and the 10-week SDK/client validation window",
-      "add_as_web_search": true
-    },
-    {
-      "name": "Beta SDKs for the 2026-07-28 MCP Spec RC (blog)",
-      "url": "https://blog.modelcontextprotocol.io/posts/sdk-betas-2026-07-28/",
-      "description": "Confirms TypeScript SDK v2 is in beta targeting the 2026-07-28 spec; v1.x remains the production lane for >=6 months after v2 stabilizes",
+      "description": "Previous protocol baseline, superseded by 2026-07-28. Consult only when maintaining a server still pinned to this version",
       "add_as_web_search": true
     },
     {

@@ -2,7 +2,7 @@
 name: agents-skills
 description: Creates and audits agent skills with SKILL.md, references, scripts, and platform-scoped metadata. Use when creating, updating, or validating shared skills.
 version: "1.1"
-last_validated: 2026-07-11
+last_validated: 2026-08-15
 ---
 
 # Agent Skills

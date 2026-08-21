@@ -83,6 +83,22 @@
 
 ---
 
+### Multi-Agent Constraint Arbitration
+
+**Problem**: Several agents each defend a different objective and resolve conflicts by negotiating — nondeterministic, unauditable, sensitive to prompt and temperature.
+
+**Stack**:
+1. Scoped loops ([Lyapunov](04-lyapunov-stability.md)) — one agent per controlled variable; no agent writes another's actuator
+2. MIN/MAX selectors — arbitrate competing controlled variables over one actuator
+3. Split-range logic — order multiple actuators serving one controlled variable by cost
+4. [Circuit breaker](10-circuit-breaker-backpressure.md) + [token bucket](11-rate-limiting-token-bucket.md) — unchanged, per tool
+
+**Sequence**: Each agent reports its loop's error → orchestrator applies fixed priority order → selector picks the governing loop → split-range engages actuators in cost order. Arbitration never calls the model.
+
+**Reference**: Nogueira & Skogestad (2026, arXiv:2606.30877). Architecture is the transferable claim; the 4-day dairy-barn ventilation evaluation is illustrative.
+
+---
+
 ### Distributed System Resilience Stack
 
 **Problem**: Microservice calls to downstream APIs fail intermittently; queues grow under load; recovery is slow.

@@ -1,7 +1,7 @@
 {
   "_doc": "Model pricing, USD per 1M tokens. Owned by this skill: read at runtime by this skill's scripts via _lib/resolve_versions.py (pricing_path/load_pricing), which resolves symlinks first so ~/.claude, ~/.agents and ~/.codex deployments all read this same file. Hand-maintained \u2014 no public API resolves provider pricing \u2014 so bump last_verified when you re-check the vendor pages. Retired model IDs stay: replaying historical usage logs must price them at the rates that applied then.",
   "_maintenance": "Hand-maintained: no public API resolves provider prices the way npm resolves package versions. Bump last_verified when you re-check the vendor pricing pages; consumers warn once the table is older than stale_after_days. Retired model IDs are kept deliberately \u2014 replaying historical usage logs must price them at the rates that applied then.",
-  "last_verified": "2026-08-10",
+  "last_verified": "2026-08-15",
   "stale_after_days": 30,
   "sources": {
     "anthropic": "https://claude.com/pricing",
@@ -129,11 +129,14 @@
       "vendor": "openai"
     },
     "openai/gpt-5.6-sol": {
-      "cache_read_per_1m": 1.25,
+      "cache_read_per_1m": 0.5,
+      "cache_write_per_1m": 6.25,
       "input_per_1m": 5.0,
       "model": "gpt-5.6-sol",
-      "notes": "GPT-5.6 Sol (top tier, long-horizon/agentic/cyber-science; public since 2026-07-09)",
+      "notes": "GPT-5.6 Sol standard tier: $5 input, $0.50 cached input, $30 output, and cache write 1.25x uncached input. Verified 2026-08-15 at developers.openai.com/api/docs/models/gpt-5.6-sol. Fast service and long-context billing differ; do not infer either from a model ID alone.",
       "output_per_1m": 30.0,
+      "pricing_source": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+      "pricing_verified_at": "2026-08-15",
       "vendor": "openai"
     },
     "openai/gpt-5.6-terra": {

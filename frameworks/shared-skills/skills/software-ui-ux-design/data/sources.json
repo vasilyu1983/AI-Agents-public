@@ -1,12 +1,12 @@
 {
   "metadata": {
     "skill": "software-ui-ux-design",
-    "updated": "2026-08-09",
+    "updated": "2026-08-13",
     "description": "Comprehensive UI/UX design resources covering usability, accessibility, design systems, platform guidelines (Apple HIG, Material 3, Android large screens), DTCG design token reports, Core Web Vitals, AI-era UX patterns, demographic-inclusive design, cultural patterns, CRO, and interface simplification for non-technical users",
-    "total_sources": 160,
+    "total_sources": 163,
     "search_guidance": "Prefer official standards and platform docs first, vendor docs second, and treat community articles or inspiration galleries as non-authoritative.",
     "title": "Software Ui UX Design - Sources",
-    "last_updated": "2026-08-09"
+    "last_updated": "2026-08-13"
   },
   "categories": {
     "usability_and_ux_research": [
@@ -249,6 +249,12 @@
         "url": "https://primereact.org/",
         "description": "Rich UI component library for React with 90+ components",
         "add_as_web_search": false
+      },
+      {
+        "name": "21st.dev",
+        "url": "https://21st.dev/",
+        "description": "Community registry of React + Tailwind components on shadcn conventions with 21st MCP (search, AI generation, accessibility audit); per-component licensing - audit before commercial use",
+        "add_as_web_search": true
       }
     ],
     "design_tools": [
@@ -487,9 +493,9 @@
     ],
     "animation_libraries": [
       {
-        "name": "Framer Motion",
-        "url": "https://www.framer.com/motion/",
-        "description": "Production-ready React animation library with declarative API",
+        "name": "Motion (formerly Framer Motion)",
+        "url": "https://motion.dev/",
+        "description": "Hybrid animation library, independent since 2025 - npm package 'motion', React import 'motion/react', plus Vue and vanilla JS; springs, layout animation, reduced-motion support",
         "add_as_web_search": true
       },
       {
@@ -984,6 +990,12 @@
         "url": "https://www.midjourney.com/",
         "description": "AI image generation for design assets and illustrations",
         "add_as_web_search": true
+      },
+      {
+        "name": "Higgsfield MCP",
+        "url": "https://higgsfield.ai/mcp",
+        "description": "Hosted MCP for 30+ image/video generation models with named camera-motion presets; commercial rights gated by plan tier - verify before client deliverables",
+        "add_as_web_search": true
       }
     ],
     "operator_perspectives": [
@@ -1027,23 +1039,27 @@
         "description": "Upstream of the vendored offline design database (styles, palettes, font pairings, UX guidelines, stack rules) and BM25 search scripts; MIT licensed",
         "add_as_web_search": false,
         "upstream_skill_path": ".claude/skills/ui-ux-pro-max/data/",
-        "commit_sha": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
-        "sync_date": "2026-08-09",
+        "commit_sha": "a38d04c3d5c298c851dbe5e6ee1965ee3de42cb5",
+        "sync_date": "2026-08-17",
         "license": "MIT",
         "local_path": "data/",
         "files": [
-          "motion.csv",
-          "stacks/wpf.csv",
-          "stacks/winui.csv",
-          "stacks/javafx.csv",
-          "stacks/avalonia.csv",
-          "stacks/uno.csv",
-          "stacks/uwp.csv",
+          "styles.csv",
           "colors.csv",
+          "typography.csv",
+          "google-fonts.csv",
+          "charts.csv",
+          "ux-guidelines.csv",
+          "ui-reasoning.csv",
+          "landing.csv",
           "products.csv",
-          "typography.csv"
+          "icons.csv",
+          "motion.csv",
+          "app-interface.csv",
+          "react-performance.csv",
+          "stacks/*.csv (all 22)"
         ],
-        "notes": "Extends the original vendored ui-ux-pro-max import with 7 additional verbatim CSVs (1 base motion.csv + 6 stacks/*.csv) not previously synced. Files are byte-identical copies from the pinned upstream skill directory. colors.csv, products.csv, and typography.csv were re-synced from the same pinned commit on 2026-08-09: colors.csv and products.csv each gained 31 new product-type rows (192 total, up from 161), products.csv also corrected stale Keywords on 14 shared rows, and typography.csv gained one row (Bauhaus Geometric, 74 total), fixed all 73 shared Google Fonts URLs to the fonts.googleapis.com/css2 CSS-import format, and removed a stray '57' data-corruption artifact from the Gen Z Brutal row's Notes field."
+        "notes": "Full re-sync 2026-08-17 to upstream a38d04c (v2.0 'Intelligent Design System Generation'). All 13 base CSVs and all 22 stacks/*.csv are verbatim upstream copies EXCEPT typography.csv, which appends two LOCAL rows (75 'Premium Sans (Satoshi · Fontshare)', 76 'Startup Bold (Clash Display · Fontshare)') preserving Fontshare-hosted pairings with working api.fontshare.com URLs after upstream replaced those fonts with Google-importable alternatives (DM Sans; Outfit + Rubik). Upstream deltas absorbed: ux-guidelines +21 rows (WCAG 2.2 focus/target-size/auth + resilient text & compact UI), ui-reasoning +31 product types with new Reasoning/Confidence columns, styles +4 rows (Fluent 2, Shopify Polaris, Adobe Spectrum, Spectrum 2) with new taxonomy columns (Style ID, Aliases, Status, motion cost/risk) that supersede the former local Liquid Glass/motion annotations, colors full contrast overhaul, google-fonts +11 families. Schema changes are additive-only; local forked scripts (core.py/search.py/design_system.py, which add slides/cip domains upstream lacks) read columns by name and remain compatible. Upstream scripts have diverged substantially (core.py 993 lines vs local fork 420, new reasoning_contract.py); script-level reconciliation deliberately deferred."
       },
       {
         "name": "Design System Skill (Next Level Builder) — Slide/Deck Data",
@@ -1051,8 +1067,8 @@
         "description": "Slide-deck design database (layouts, typography, charts, copy formulas, backgrounds, color logic, layout logic, narrative strategies) from the sibling design-system skill in the same upstream repo; MIT licensed",
         "add_as_web_search": false,
         "upstream_skill_path": ".claude/skills/design-system/data/",
-        "commit_sha": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
-        "sync_date": "2026-08-09",
+        "commit_sha": "a38d04c3d5c298c851dbe5e6ee1965ee3de42cb5",
+        "sync_date": "2026-08-17",
         "license": "MIT",
         "local_path": "data/slides/",
         "files": [
@@ -1073,8 +1089,8 @@
         "description": "Corporate identity pack reference data (industries, deliverables, mockup contexts) from the sibling design skill in the same upstream repo; MIT licensed",
         "add_as_web_search": false,
         "upstream_skill_path": ".claude/skills/design/data/cip/",
-        "commit_sha": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
-        "sync_date": "2026-08-09",
+        "commit_sha": "a38d04c3d5c298c851dbe5e6ee1965ee3de42cb5",
+        "sync_date": "2026-08-17",
         "license": "MIT",
         "local_path": "data/cip/",
         "files": [
@@ -1083,6 +1099,12 @@
           "mockup-contexts.csv"
         ],
         "notes": "Sourced from a DISTINCT upstream skill (design, under its data/cip/ subpath) in the same repo, not from ui-ux-pro-max/data. Placed under data/cip/ (mirroring the upstream subpath name) to keep provenance visually distinct. The upstream cip/ directory also contains a styles.csv, which was intentionally NOT imported (out of approved scope)."
+      },
+      {
+        "name": "DESIGN.md specification (Google Labs)",
+        "url": "https://github.com/google-labs-code/design.md",
+        "description": "Apache-2.0 open format for portable design context (YAML tokens + markdown prose) auto-read by coding agents from project root; target format for search.py --format designmd export",
+        "add_as_web_search": true
       }
     ]
   }

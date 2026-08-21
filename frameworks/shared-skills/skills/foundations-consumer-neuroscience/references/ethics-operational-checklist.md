@@ -1,6 +1,6 @@
 ---
-description: Operational go/no-go gates for DMCC Act 2024, EU AI Act, and UK/EU GDPR. Pre-study and pre-deployment checklists, vulnerable-user gate, decision tree, and documentation pack.
-last_verified: 2026-07-11
+description: Operational go/no-go gates for DMCC Act 2024, EU AI Act, US neural-data laws, and UK/EU GDPR. Pre-study and pre-deployment checklists, vulnerable-user gate, decision tree, and documentation pack.
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -46,7 +46,7 @@ Run before shipping any feature that applies consumer-neuroscience primitives to
 ### DMCC Act 2024 — Online Choice Architecture Audit (in force 6 April 2025)
 
 - [ ] **No drip pricing**: is the full price (including all mandatory charges) displayed before the user enters the purchase flow?
-- [ ] **No default opt-ins that benefit the operator at user expense**: are all pre-selected defaults genuinely in the user's interest? Would the CMA's November 2025 enforcement guidance consider any default manipulative?
+- [ ] **No default opt-ins that benefit the operator at user expense**: are all pre-selected defaults genuinely in the user's interest? This is the pattern that produced the CMA's second DMCC penalty (Marks Electrical, 18 June 2026: £720,000 plus ~£600,000 consumer redress for auto-opting customers into paid add-on services). Any charge a user did not expressly agree to is the highest-probability enforcement trigger.
 - [ ] **No false urgency**: are countdown timers, "limited stock" signals, and "X people viewing this" indicators accurate and verifiable? If not, remove.
 - [ ] **No confirm-shaming**: does the decline option use neutral language? ("No thanks" not "No, I don't want to improve my life")
 - [ ] **No forced continuity**: is auto-renewal prominently disclosed before purchase, with a clear and accessible cancellation path?
@@ -58,15 +58,21 @@ Run before shipping any feature that applies consumer-neuroscience primitives to
 - [ ] **No manipulative/deceptive techniques check**: does any AI system use deceptive techniques or techniques that exploit psychological weaknesses to materially distort behaviour in a way that harms the user? If yes, prohibited outright.
 - [ ] **Vulnerability-exploitation check**: does any AI system exploit vulnerabilities of specific groups (age, disability, socio-economic situation) to materially distort their behaviour? If yes, prohibited outright for those groups.
 
-### EU AI Act High-Risk (in force 2 August 2026, if applicable)
+### EU AI Act Article 50 Transparency (in force 2 August 2026 — NOT delayed)
 
-Apply this section if the product uses AI to infer affective state from facial expression, voice, GSR, HRV, gaze, or any biometric stream, or performs biometric categorisation.
+Apply now to any product using AI to infer affective state or perform biometric categorisation. The Digital Omnibus deferred the high-risk regime but left transparency on the original schedule.
+
+- [ ] **Article 50 notice live**: are users explicitly informed, conspicuously and *before* data capture, that an emotion-recognition or biometric-categorisation system is operating? This is a current obligation, not a future one.
+- [ ] **Watermarking grace tracked** (if generating/manipulating synthetic content): the Art. 50(2) watermarking duty has a grace period to 2 December 2026 for systems already on the market.
+
+### EU AI Act High-Risk (deferred to 2 December 2027, if applicable)
+
+Apply this section if the product uses AI to infer affective state from facial expression, voice, GSR, HRV, gaze, or any biometric stream, or performs biometric categorisation. The **AI Digital Omnibus** (in force 27 July 2026) moved standalone Annex III obligations from 2 August 2026 to **2 December 2027** (Annex I: 2 August 2028). This is schedule relief only — build toward these gates, do not drop them.
 
 - [ ] **High-risk classification confirmed**: has the system been assessed as an emotion-recognition or biometric-categorisation system under Annex III?
 - [ ] **Data governance documentation complete**: is the training dataset documented for composition, provenance, and demographic representativeness?
 - [ ] **Technical documentation filed** (Article 11): is the required technical documentation prepared and maintainable?
 - [ ] **Human oversight mechanism implemented** (Article 14): can a human reviewer identify, monitor, and override the system's outputs?
-- [ ] **Article 50 transparency notice implemented**: are users explicitly informed that an emotion-recognition or biometric-categorisation system is operating? Is this notice conspicuous and prior to data capture?
 - [ ] **Post-market monitoring plan documented** (Article 72): is there a plan for ongoing performance monitoring and incident reporting?
 - [ ] **Accuracy and robustness testing completed** (Article 15): has the system been tested for accuracy across relevant demographic subgroups?
 
@@ -79,6 +85,10 @@ Apply this section if the product uses AI to infer affective state from facial e
 
 ### US Neural Data Laws (where product serves US users)
 
+**Scope first — do not over-apply.** These statutes target signals from the nervous system measured directly (EEG, fNIRS). Montana expressly excludes "downstream physical effects of neural activity" (pupil dilation, motor activity, breathing rate); California excludes data inferred from nonneural information; Colorado reaches only identification-purpose data. GSR, HRV, eye-tracking, facial coding, and voice affect therefore fall mostly **outside** these laws — but remain governed by general sensitive-data/biometric statutes and GDPR Art. 9. Answer this gate first:
+
+- [ ] **Signal classification done**: is the captured signal true neural data (EEG/fNIRS) or a downstream/inferred physiological signal? Record the determination and the statute relied on. If downstream, route to the general GDPR/biometric gates above rather than claiming exemption.
+- [ ] **Montana SB 163 consent gate** (effective 1 Oct 2025) — **strictest US regime**: if the product captures neurotechnology data from Montana users, is express consent obtained *separately for each purpose and each third-party recipient* (collection, marketing use, research use, disclosure, transfer, sale)?
 - [ ] **California SB 1223 consent gate** (effective 1 Jan 2025): if the product captures EEG, GSR, voice, facial-coding, or any nervous-system-derived signal from California users, is separate opt-in consent obtained before capture? Is the right to delete and restrict sharing documented in the privacy notice?
 - [ ] **Colorado HB 24-1058** (effective 7 Aug 2024): if product serves Colorado users and captures neural data (signals from central or peripheral nervous system), is it treated as sensitive data under the Colorado Privacy Act with opt-in consent?
 - [ ] **Connecticut SB 1295** (effective 1 Jul 2026): if product serves Connecticut users and captures neural data, is express consumer consent obtained? Is neural data excluded from sale without consent?
@@ -103,7 +113,7 @@ If the target audience is any of the following: wellness users, anxiety-relief u
 | Oxytocin-proxy warmth without genuine care mechanic (#3 misuse) | Short-term affiliation collapse in vulnerable users has amplified harm; DMCC aggressive-practices provision |
 | Unbounded reward-anticipation loops (#10 misuse) | Compulsion-design risk is elevated in anxiety and financial-distress contexts; harm-test failure |
 | Interoceptive urgency manufacturing (#8 misuse — "your body is telling you something is wrong") | Manufacturing somatic anxiety to drive purchase is manipulation under DMCC vulnerable-user clause |
-| AI-driven affect inference without high-risk readiness | From 2 August 2026: deploying emotion-recognition AI without Annex III compliance in commercial deployment serving vulnerable cohorts is a regulatory breach |
+| AI-driven affect inference without transparency or high-risk readiness | Article 50 notice is owed now (2 August 2026); Annex III compliance is owed by 2 December 2027. For vulnerable cohorts the Article 5 prohibition may bar the deployment outright, regardless of either deadline |
 
 **Default position for ambiguous primitive deployment in vulnerable-user context: No.** Shift the default to Yes only with documented harm-test outcome showing user benefit on reflection, easy reversibility, and no exploitation of pre-conscious mechanisms.
 

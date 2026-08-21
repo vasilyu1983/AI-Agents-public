@@ -1,6 +1,6 @@
 ---
 description: Formal theory map for control-theory foundations. Use to distinguish stability guarantees from operational heuristics.
-last_verified: 2026-05-02
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -23,6 +23,7 @@ Use this map when a feedback-control recommendation needs a formal stability arg
 | Stochastic estimation | Linear Gaussian state estimation | Kalman filtering and sensor fusion | Kalman optimality is assumption-bound |
 | Networked control | Queues, admission control, backpressure signals | Circuit breakers, rate limiting, overload protection | Fail-fast without throttling can move overload elsewhere |
 | Behavioral systems / Willems | Hankel matrices of past trajectories, persistency of excitation, Fundamental Lemma | DeePC (model-free MPC), data-driven control without parametric identification | Willems' Lemma is exact for noiseless LTI; noisy/nonlinear plants require regularization and stability proofs are weaker |
+| Advanced regulatory control (ARC) | Selector networks (MIN/MAX), split-range logic, chain priority ordering | Multi-loop and multi-agent decomposition where competing objectives share actuators; deterministic conflict resolution | Arbitration is structural, not optimal — priority order is a design decision that must be justified, and a badly-ordered chain fails deterministically rather than gracefully |
 
 ## Applied Primitive Coverage
 

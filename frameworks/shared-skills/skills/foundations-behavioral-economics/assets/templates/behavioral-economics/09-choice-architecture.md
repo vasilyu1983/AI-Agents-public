@@ -34,7 +34,7 @@ Choice architecture subsumes many other primitives (defaults, anchoring, decoy e
 1. The "recommended" or highlighted option is genuinely the best option for the modal user in this context — not the highest-margin option for the operator.
 2. All options (including downgrade, cancel, free tier) are accessible without unreasonable friction.
 3. Reduced choice sets remove options the user doesn't need, not options the operator doesn't want them to find.
-4. UK CPRs 2008: aggressive commercial practices include "creating a false impression about the nature of the product or market."
+4. **UK DMCC Act 2024 s.228** (aggressive practices — harassment, coercion, or undue influence that significantly impairs the average consumer’s freedom of choice), in force 6 April 2025, replacing CPRs 2008 Reg. 7. Burying cancellation behind repeated confirmation screens is the paradigm case: the CMA’s first DMCC infringement decisions (18 November 2025) covered exactly this class of conduct alongside drip pricing and default opt-ins.
 
 ## Inputs
 

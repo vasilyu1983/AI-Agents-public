@@ -3,10 +3,10 @@
     "skill": "ai-coding-agents",
     "title": "AI Coding Agents - Sources",
     "description": "Official documentation, research, and community resources for building AI coding agents across Claude Code, Codex, and Agent SDK",
-    "last_updated": "2026-07-11",
-    "updated": "2026-07-11",
-    "total_sources": 27,
-    "version": "1.1"
+    "last_updated": "2026-08-21",
+    "updated": "2026-08-21",
+    "total_sources": 28,
+    "version": "1.2"
   },
   "categories": {
     "official_documentation": [
@@ -143,6 +143,15 @@
         "url": "https://arxiv.org/abs/2404.02183",
         "type": "research",
         "relevance": "Survey of multi-agent approaches to software development including role-based teams",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "SlopCodeBench: Benchmarking How Coding Agents Degrade Over Long-Horizon Iterative Tasks",
+        "url": "https://arxiv.org/abs/2603.24755v1",
+        "type": "research-preprint",
+        "relevance": "Supports carried-workspace, fresh-context, evolving-spec readiness tests and cautions that planning or quality prompts can improve initial structure without proving long-run extension robustness",
         "update_frequency": "static",
         "access": "free",
         "add_as_web_search": false

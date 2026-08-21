@@ -75,6 +75,10 @@ If you only measure the first half of the funnel, you will overstate value.
 | Cost per accepted task | total operating cost / accepted tasks | unit economics |
 | Cost per merged PR | total operating + reviewer cost / merged agent PRs | scaling decision |
 | Benchmark-to-production gap | benchmark score vs merge / revert outcomes | anti-self-deception metric |
+| Extension robustness | retained correctness and acceptable quality across an evolving-spec, carried-workspace checkpoint sequence | reveals deterioration hidden by one-shot completion |
+| Structural erosion slope | change in structural-erosion signal across ordered checkpoints | detects complexity concentrating as the workspace evolves |
+| Verbosity slope | change in locally defined redundancy/clone signal across ordered checkpoints | detects redundant code accumulating over time |
+| Late-checkpoint cost and review burden | runtime cost and reviewer or remediation effort in late/final checkpoints | exposes compounding maintenance cost |
 
 ---
 
@@ -93,6 +97,7 @@ For internal agents, define these events:
 - `pr_reverted`
 - `policy_exception`
 - `security_exception`
+- `trajectory_checkpoint_completed`
 
 Recommended properties:
 
@@ -106,6 +111,21 @@ Recommended properties:
 - `input_cost`
 - `output_cost`
 - `human_rework_minutes`
+- `trajectory_id`
+- `checkpoint_id`
+- `parent_checkpoint_id`
+- `spec_version`
+- `workspace_identity`
+- `workspace_hash`
+- `progress_phase`
+- `strict_correct`
+- `isolated_correct`
+- `core_correct`
+- `regression_correct`
+- `erosion`
+- `verbosity`
+- `cost`
+- `duration`
 
 Without these events, you cannot build reliable agent metrics.
 
@@ -138,6 +158,8 @@ Track:
 - PR merge rate
 - reviewer effort per accepted task
 - policy / security exceptions
+- extension-robustness sequence result for edit-capable agents
+- structural erosion and verbosity slopes across checkpoints
 
 ### Scorecard B: Scaling Agent Workflow
 
@@ -151,6 +173,7 @@ Track:
 - cost per merged PR
 - completion rate by task type
 - benchmark-to-production gap
+- late/final checkpoint cost and reviewer or remediation burden
 
 ### Scorecard C: Executive Decision
 
@@ -163,6 +186,8 @@ Track:
 - reviewer effort trend
 - quality / exception trend
 - cost per accepted task
+- extension-robustness trend by task class
+- late-checkpoint cost and review-burden trend
 - recommendation: expand, narrow, or stop
 
 ---
@@ -184,6 +209,8 @@ Interpretation:
 - if merge rate is stable and reviewer burden falls, the workflow is improving
 
 Do not claim autonomy gains without reviewer-burden data.
+
+For iterative agent evaluations, segment cost and review or remediation effort by progress phase. Stable aggregate cost can conceal a late-checkpoint spike caused by accumulated design debt.
 
 ---
 
@@ -221,6 +248,10 @@ Bad benchmark uses:
 Better framing:
 
 > Benchmarks tell us what the agent may be capable of. Production acceptance tells us whether that capability survives contact with our repos, standards, and reviewers.
+
+For edit, refactor, and migration agents, add at least one evolving-spec sequence with three or more checkpoints. Use a fresh conversation/context at each checkpoint, carry the same agent-created workspace forward, and retain prior regression tests. Report the correctness trajectory beside structural-erosion and verbosity slopes plus late-checkpoint cost and review burden. A one-shot green suite or a planning/quality prompt is not evidence of long-run extension robustness.
+
+SlopCodeBench v1 motivates this measurement shape, but its paper averages are not organizational targets and its trajectory signals do not establish causal ROI. Use `qa-agent-testing` for benchmark protocol, `ai-coding-agents-observability-evals` for lineage and telemetry, and `software-clean-code-standard` for metric interpretation.
 
 ---
 
@@ -285,6 +316,8 @@ Suggested one-line summary:
 | calling benchmark gains business value | benchmark != accepted production work |
 | ignoring reviewer cost | overstates ROI materially |
 | blending task types | high-volume easy tasks hide hard-task failures |
+| using preprint averages as targets | substitutes another benchmark's task/model mix for local evidence |
+| reporting only final-checkpoint quality | hides when and how degradation or cost accumulated |
 
 ---
 

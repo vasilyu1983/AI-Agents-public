@@ -2,9 +2,9 @@
   "metadata": {
     "title": "Team Theory Foundations — Sources",
     "description": "Primary references for 10 team-theory primitives: team decision problem, information structure, person-by-person optimality, value of communication, Radner's LQG theorem, Witsenhausen counterexample, information cost, organizational forms, Dec-POMDP / MARL extension, common-task condition. Marschak–Radner classical layer plus modern multi-agent LLM extensions.",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-team-theory",
-    "total_sources": 27
+    "total_sources": 30
   },
   "canonical_texts": [
     {
@@ -95,7 +95,7 @@
       "id": "OrchestrationTraces2026",
       "name": "Reinforcement Learning for LLM-based Multi-Agent Systems through Orchestration Traces",
       "url": "https://arxiv.org/abs/2605.02801",
-      "description": "Decomposes orchestration into five sub-decisions: spawn, delegate, communicate, aggregate, stop. Direct application of team-theoretic structure to LLM agent design. Secondary source for primitives #2, #4, #8.",
+      "description": "Decomposes orchestration into five sub-decisions: spawn, delegate, communicate, aggregate, stop. Direct application of team-theoretic structure to LLM agent design. Secondary source for primitives #2, #4, #8. Title and existence re-verified via direct arXiv fetch 2026-08-14 (author: Chenchen Zhang, submitted May 2026).",
       "url_check": "auto"
     },
     {
@@ -123,21 +123,21 @@
       "id": "TranKiela2026",
       "name": "Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets",
       "url": "https://arxiv.org/abs/2604.02460",
-      "description": "Tran & Kiela (2026). arXiv cs.CL. Controlled empirical comparison of single-agent vs. five multi-agent architectures (sequential, subtask-parallel, parallel-roles, debate, ensemble) across Qwen3, DeepSeek-R1, Gemini 2.5 families. Single agents consistently match or exceed multi-agent on multi-hop reasoning under equal token budgets. Grounded in the Data Processing Inequality. Corroborated by Cemri et al. (2025, MAST, NeurIPS, arXiv:2503.13657) and Dochkina (2026, arXiv:2603.28990). Source for primitive #4 (value of communication, negative case) and #7 (information cost).",
+      "description": "Tran & Kiela (2026). arXiv cs.CL. Controlled empirical comparison of single-agent vs. five multi-agent architectures (sequential, subtask-parallel, parallel-roles, debate, ensemble) across Qwen3, DeepSeek-R1, Gemini 2.5 families. Single agents consistently match or exceed multi-agent on multi-hop reasoning under equal token budgets. Grounded in the Data Processing Inequality. Corroborated by Cemri et al. (2025, MAST, NeurIPS, arXiv:2503.13657) and Dochkina (2026, arXiv:2603.28990). Source for primitive #4 (value of communication, negative case) and #7 (information cost). Title and authors (Dat Tran, Douwe Kiela) re-verified via direct arXiv fetch 2026-08-14.",
       "url_check": "auto"
     },
     {
       "id": "LatentMAS2025",
       "name": "Latent Collaboration in Multi-Agent Systems (LatentMAS)",
       "url": "https://arxiv.org/abs/2511.20639",
-      "description": "Zou et al. (2025). arXiv cs.CL. ICML 2026 Spotlight. Agents exchange information via shared latent working memory (last-layer embeddings) rather than natural language. Up to 14.6% accuracy gain, 4–4.3× inference speedup, 70.8–83.7% token reduction vs. text-based multi-agent baselines. Evaluated on 9 benchmarks. Code open-sourced at github.com/Gen-Verse/LatentMAS. Corroborated by Rath (2026, arXiv:2601.04170) on semantic drift quantification and Shen et al. (2025, arXiv:2505.23352) on topology-dependent degradation. Source for primitive #2 (information structure: message representation layer) and #4 (value of communication: lossless vs. lossy channel).",
+      "description": "Zou et al. (2025). arXiv cs.CL. ICML 2026 Spotlight. Agents exchange information via shared latent working memory (last-layer embeddings) rather than natural language. Up to 14.6% accuracy gain, 4–4.3× inference speedup, 70.8–83.7% token reduction vs. text-based multi-agent baselines. Evaluated on 9 benchmarks. Code open-sourced at github.com/Gen-Verse/LatentMAS. Corroborated by Rath (2026, arXiv:2601.04170) on semantic drift quantification and Shen et al. (2025, arXiv:2505.23352) on topology-dependent degradation. Source for primitive #2 (information structure: message representation layer) and #4 (value of communication: lossless vs. lossy channel). Title, 13-author list, ICML 2026 Spotlight status, and the 14.6% / 4–4.3× / 70.8–83.7% figures re-verified via direct arXiv fetch 2026-08-14.",
       "url_check": "auto"
     },
     {
       "id": "Dochkina2026",
       "name": "Drop the Hierarchy and Roles: How Self-Organizing LLM Agents Outperform Designed Structures",
       "url": "https://arxiv.org/abs/2603.28990",
-      "description": "Dochkina (2026). IEEE Access (submitted). 25,000-task empirical comparison of 8 coordination protocols (rigid hierarchy to emergent self-organization) across 8 LLMs and 4–256 agent configurations. Self-organizing sequential protocol outperforms centralized orchestration by 14% (Cohen's d=1.86, p<0.0001) and scales sub-linearly to 256 agents. Open-source models achieve 95% of closed-source quality at 24× lower cost. Corroborated by CARD (Wu et al., ICLR 2026, arXiv:2603.01089) and MegaAgent (ACL 2025). Source for primitive #8 (fourth organizational form: emergent self-organization) and #3 (role co-optimization beyond PBPO).",
+      "description": "Dochkina (2026). IEEE Access (submitted). 25,000-task empirical comparison of 8 coordination protocols (rigid hierarchy to emergent self-organization) across 8 LLMs and 4–256 agent configurations. Self-organizing sequential protocol outperforms centralized orchestration by 14% (Cohen's d=1.86, p<0.0001) and scales sub-linearly to 256 agents. Open-source models achieve 95% of closed-source quality at 24× lower cost. Corroborated by CARD (Wu et al., ICLR 2026, arXiv:2603.01089) and MegaAgent (ACL 2025). Source for primitive #8 (fourth organizational form: emergent self-organization) and #3 (role co-optimization beyond PBPO). Title, author (Victoria Dochkina), March 2026 submission, and the 14% improvement figure re-verified via direct arXiv fetch 2026-08-14. Note tension with Pappu2026ExpertsHeldBack: self-organization helps structural coordination but does not fix competence-weighted aggregation.",
       "url_check": "auto"
     },
     {
@@ -165,9 +165,9 @@
       "id": "PsychSafetyNonlinear2023",
       "name": "The limits of psychological safety: Nonlinear relationships with performance",
       "url": "https://www.sciencedirect.com/science/article/abs/pii/S0749597823000316",
-      "description": "Eldor, Hodor, and Cappelli (2023). Organizational Behavior and Human Decision Processes 177. Authors confirmed 2026-07-11 via secondary sources (RePEc/IDEAS, ResearchGate) after ScienceDirect returned 403 on direct fetch. Five independent studies show routine task performance rises with psychological safety only to a point, then declines (inverted-U); collective accountability buffers the downside. This is the primary empirical source for the curvilinear claim; Edmondson & Bransby (2023) cites it as the field's key nonlinearity finding.",
+      "description": "Eldor, Hodor, and Cappelli (2023). Organizational Behavior and Human Decision Processes 177, article 104255. Five independent studies (nursing plus four other organizational settings) show routine in-role task performance rises with psychological safety only to a point, then declines (inverted-U); collective accountability moderates the downside. Primary empirical source for the curvilinear claim; Edmondson & Bransby (2023) cites it as the field's key nonlinearity finding. Article number, authors, journal, and volume re-confirmed 2026-08-14.",
       "url_check": "manual",
-      "verification_note": "Author names confirmed 2026-07-11 (previously listed as unverified). Full-text still paywalled on ScienceDirect; abstract and findings confirmed via RePEc/IDEAS and ResearchGate secondary listings."
+      "verification_note": "Re-verified 2026-08-14: title, authors, volume 177, article 104255 confirmed via multiple secondary listings (TAU CRIS, PsycNet, AHRQ PSNet). Full text still paywalled on ScienceDirect, so effect sizes remain hedged. No independent replication located as of 2026-08-14. A practitioner critique (Geraghty, psychsafety.com, 2023 — blog, not peer-reviewed) raises supervisor-rating bias and questions whether the 80–90th-percentile turning point is a statistical artifact; noted in the skill as a reason to hedge, not cited as evidence."
     },
     {
       "id": "SinnemannWeiss2025",
@@ -189,6 +189,27 @@
       "name": "Complementarity in Human-AI Collaboration: Concept, Sources, and Evidence",
       "url": "https://arxiv.org/abs/2404.00029",
       "description": "Hemmer, Schemmer, Kühl, Vössing, Satzger (2024). European Journal of Information Systems (2025). Formalizes complementary team performance (CTP) — human-AI output exceeding either alone. CTP is rare in practice. Two necessary conditions for CTP: (1) information asymmetry (human holds local context AI lacks) and (2) capability asymmetry (human provides judgment on novel cases). Two empirical studies confirm these as viable CTP pathways. Primary source for P1-B CTP conditions in Composition Recipes and Trap in patterns-scenarios-traps.md. Verified via arXiv abstract fetch.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Pappu2026ExpertsHeldBack",
+      "name": "Multi-Agent Teams Hold Experts Back",
+      "url": "https://arxiv.org/abs/2602.01011",
+      "description": "Pappu, El, Cao, di Nolfo, Sun, Cao, and Zou (2026). arXiv:2602.01011, ICML 2026. Self-organizing LLM teams underperform their strongest individual member by up to 41.1% on ML benchmarks even when explicitly told which agent is the expert. Mechanism is integrative compromise — averaging expert and non-expert views instead of weighting by competence — and the deficit widens with team size. The same consensus-seeking behavior improves robustness to adversarial agents, making this a genuine tradeoff rather than a pure defect. Title, full author list, ICML 2026 acceptance, and the 41.1% figure verified via direct arXiv fetch 2026-08-14. Source for primitive #3 (aggregation rule as part of the joint policy; PBPO teams losing to their own best member) and the expertise-deference Anti-Pattern row.",
+      "url_check": "auto"
+    },
+    {
+      "id": "RoweHattieHester2021",
+      "name": "g versus c: comparing individual and collective intelligence across two meta-analyses",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8019454/",
+      "description": "Rowe, Hattie, and Hester (2021). Cognitive Research: Principles and Implications. Meta-analysis pooling 857 groups across nine criterion tasks from eight independent samples. Finds the collective-intelligence c-factor correlates only r=.26 (95% CI .10–.40) with external group performance, and that all but four studies (five independent samples, N=366 groups) failed to control for members' individual intelligence. Primary source for the contested status of the c-factor in primitives-overview #2 and the collective-intelligence Anti-Pattern row. Authors, journal, group count, correlation, and the individual-IQ control caveat verified via PMC full text 2026-08-14.",
+      "url_check": "auto"
+    },
+    {
+      "id": "RoweHattieMunro2024",
+      "name": "High-performing teams: Is collective intelligence the answer?",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0307945",
+      "description": "Rowe, Hattie, and Munro (2024). PLOS ONE 19:e0307945. 85 participants in 29 groups. Contrary to Woolley et al.'s (2010) hypothesized single-factor model, findings favor a two-factor cFluid/cCrystal structure grounded in Cattell's fluid/crystallized distinction. Small sample — supports 'contested,' not 'refuted.' Corroborates RoweHattieHester2021. Title, authors, year, journal, sample size, and two-factor finding verified via direct fetch 2026-08-14. Source for the collective-intelligence caveat in primitives-overview #2 and patterns-scenarios-traps.md.",
       "url_check": "auto"
     },
     {

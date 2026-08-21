@@ -2,7 +2,7 @@
 
 Offline, searchable design-intelligence database: 80+ UI styles, 160 color palettes, 70+ font pairings, 160 product-type recommendations, severity-rated UX guidelines, chart-type guidance, icon recommendations, and stack-specific implementation rules for 16 frameworks. Queried via a stdlib-only Python BM25 search engine — no network, no dependencies.
 
-Vendored from [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) (MIT, © 2024 Next Level Builder). Data lives in `../data/*.csv` and `../data/stacks/*.csv`, both queryable via the BM25 engine in `../scripts/`. `../data/slides/*.csv` (slide/deck design data) and `../data/cip/*.csv` (corporate identity pack data) are also vendored from the same upstream repo but from its sibling `design-system` and `design` skills respectively — read these CSVs directly, since `scripts/core.py`'s domain config does not yet enumerate them and `scripts/search.py` cannot query them.
+Vendored from [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) (MIT, © 2024 Next Level Builder). Data lives in `../data/*.csv` and `../data/stacks/*.csv`, both queryable via the BM25 engine in `../scripts/`. `../data/slides/*.csv` (slide/deck design data) and `../data/cip/*.csv` (corporate identity pack data) are also vendored from the same upstream repo but from its sibling `design-system` and `design` skills respectively — query them via the locally added `search.py --slide <domain>` and `search.py --cip <domain>` flags (a local extension; upstream's search engine does not enumerate these).
 
 ## Table of Contents
 
@@ -50,6 +50,13 @@ python3 scripts/search.py "<query>" --design-system --persist -p "Project" [--pa
 This creates `design-system/MASTER.md` (global source of truth) and optionally `design-system/pages/<page>.md` (page-specific deviations). Retrieval rule when building a page: read MASTER.md, check `pages/<page>.md`; if the page file exists its rules override Master.
 
 This is the same master-plus-overrides pattern used for repo memory hierarchies: one global contract, narrow scoped exceptions, never a blended copy.
+
+Add `--format designmd` to also emit [DESIGN.md](https://github.com/google-labs-code/design.md) (Apache-2.0) — a portable YAML-front-matter + markdown format that Claude Code, Cursor, Windsurf, and Kiro auto-read from a project root. Combine with `--persist` to write `DESIGN.md` at `--output-dir` (default: cwd) alongside the usual `design-system/MASTER.md`; without `--persist` it prints to stdout. Fields the CSV database can't populate (spacing scale, corner-radius tokens, full typography scale) are declared under the spec's `omitted` front-matter key rather than invented.
+
+```bash
+python3 scripts/search.py "<query>" --design-system --format designmd
+python3 scripts/search.py "<query>" --design-system --format designmd --persist -p "Project"
+```
 
 ## Step 3: Domain Deep-Dives
 

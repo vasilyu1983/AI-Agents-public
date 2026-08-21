@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Queueing Theory Foundations — Sources",
     "description": "Primary texts and references for 11 queueing-theory primitives: Little's Law, M/M/1, M/M/c (Erlang-C), M/G/1 P-K formula, priority queues, Jackson networks, Kingman's formula, bufferbloat, USL, Erlang-B loss systems, and fork-join queues.",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-queueing-theory",
-    "total_sources": 29
+    "total_sources": 33
   },
   "foundational_texts": [
     {
@@ -170,11 +170,18 @@
       "url_check": "auto"
     },
     {
-      "id": "DaiDengLiPeng2025",
-      "name": "Optimal Scheduling Algorithms for LLM Inference: Theory and Practice (formerly \"Throughput-Optimal Scheduling Algorithms for LLM Inference and AI Agents\")",
+      "id": "DaiDengLiPeng2026",
+      "name": "Throughput-Optimal Scheduling Algorithms for LLM Inference and AI Agents",
       "url": "https://arxiv.org/abs/2504.07347",
-      "description": "Dai, J. G., Deng, T., Li, Y., & Peng, T. (2025/2026). arXiv:2504.07347 (v3 adds Deng as co-author); accepted POMACS / SIGMETRICS 2026 (DOI 10.1145/3771574), with a companion abstract at the SIGMETRICS 2026 conference (DOI 10.1145/3801489.3806878). Proves work-conserving scheduling achieves maximum throughput for single LLM inference engines and for DAG/fork-join multi-agent routing topologies; shows work-conservation alone is insufficient for general multi-agent LLM networks. Empirically validates Orca and Sarathi-serve as throughput-optimal; identifies vLLM (vanilla) as not maximally stable.",
-      "url_check": "auto"
+      "description": "Dai, J. G., Deng, T., Li, Y., & Peng, T. (2026). arXiv:2504.07347 v3 (May 2026). Fluid-limit framework for multi-class batched processing networks. Proves work-conserving scheduling achieves maximum throughput for single LLM inference engines and for DAG/fork-join multi-agent routing topologies; shows work-conservation alone is insufficient for general multi-agent networks with batch-size constraints or cyclic routing. Empirically validates Orca and Sarathi-serve as throughput-optimal; identifies vanilla vLLM and FasterTransformer as lacking maximum stability. CORRECTION 2026-08-14: a prior entry wrongly merged this paper with DOI 10.1145/3771574 and the title 'Optimal Scheduling Algorithms for LLM Inference: Theory and Practice'. That is a separate paper (see BariHegdeDeVeciana2026); this one retains its original title and remains a preprint.",
+      "url_check": "manual"
+    },
+    {
+      "id": "BariHegdeDeVeciana2026",
+      "name": "Optimal Scheduling Algorithms for LLM Inference: Theory and Practice",
+      "url": "https://arxiv.org/abs/2508.01002",
+      "description": "Bari, A., Hegde, P., & de Veciana, G. (2026). POMACS Vol. 9, No. 3, Article 59 / SIGMETRICS 2026 (DOI 10.1145/3771574; conference abstract DOI 10.1145/3801489.3806878). Identifies optimal tiling and dynamic resource allocation as the binding design principles for prefill/decode scheduling. Introduces the Resource-Aware Dynamic (RAD) scheduler, proven throughput-optimal under mild conditions, and the SLO-Aware LLM Inference (SLAI) scheduler which prioritizes decode requests near their TBT deadline and reorders prefill by prompt length. Reports 53% median TTFT reduction and 26% higher maximum serving capacity vs. Sarathi-serve.",
+      "url_check": "manual"
     },
     {
       "id": "CiucuMehri2025",
@@ -198,11 +205,11 @@
       "url_check": "auto"
     },
     {
-      "id": "ShahoutArXiv2024",
+      "id": "ShahoutICLR2025",
       "name": "Don't Stop Me Now: Embedding Based Scheduling for LLMs",
-      "url": "https://arxiv.org/abs/2410.01035",
-      "description": "Shahout, R., Malach, E., Liu, C., Jiang, W., Yu, M., & Mitzenmacher, M. (2024). arXiv:2410.01035. Embedding-based output-length prediction enabling SRPT scheduling of LLM requests with limited preemption (Trail policy); addresses KV-cache memory overhead during preemption. Venue pending confirmation.",
-      "url_check": "auto"
+      "url": "https://openreview.net/forum?id=7JhGdZvW4T",
+      "description": "Shahout, R., Malach, E., Liu, C., Jiang, W., Yu, M., & Mitzenmacher, M. (2025). ICLR 2025 (Singapore, April 2025); preprint arXiv:2410.01035. Venue confirmed 2026-08-14 (was previously recorded as pending). Introduces TRAIL: recycles the target LLM's own per-token internal embedding into a lightweight classifier predicting each running request's remaining output length, then applies a prediction-based SRPT variant with limited preemption — preemption allowed early while KV-cache footprint is small, restricted as requests near completion.",
+      "url_check": "manual"
     },
     {
       "id": "GrosofHurtadoLange2026",
@@ -210,6 +217,27 @@
       "url": "https://arxiv.org/abs/2510.25963",
       "description": "Grosof, I. & Hurtado-Lange, D. (2025/2026). Accepted SIGMETRICS 2026. Introduces SEK-SMOD, the first scheduling policy to provably achieve lower mean response time than SRPT-k across all loads and all job size distributions in M/G/k queues. Preprint under peer review.",
       "url_check": "auto"
+    },
+    {
+      "id": "NieSiZhou2026",
+      "name": "A Queueing-Theoretic Framework for Stability Analysis of LLM Inference with KV Cache Memory Constraints",
+      "url": "https://arxiv.org/abs/2605.04595",
+      "description": "Nie, C., Si, N., & Zhou, Z. (2026). ICML 2026; arXiv:2605.04595 (May 2026). First queueing-theoretic framework incorporating BOTH computation and GPU memory constraints into LLM inference stability analysis. Derives rigorous stability and instability conditions for whether a service can absorb its arrival rate without unbounded queue growth, under continuous batching and any work-conserving scheduling policy. Yields a cluster-sizing tool: combine forecast arrival rate with the derived stable service rate. Validated on production GPU environments with stability-condition deviations typically within 10%.",
+      "url_check": "manual"
+    },
+    {
+      "id": "AoDongLuoSimchiLevi2026",
+      "name": "Service-Induced Congestion in Memory-Constrained LLM Serving",
+      "url": "https://arxiv.org/abs/2606.15555",
+      "description": "Ao, R., Dong, J., Luo, G., & Simchi-Levi, D. (2026). arXiv:2606.15555 (June 2026). Identifies service-induced congestion: KV cache grows per generated token, so serving itself creates endogenous future capacity pressure; exceeding memory forces eviction and restart of active requests. Proves the eviction-free equilibrium is UNSTABLE for homogeneous saturated workloads, converging to a limit cycle with up to 50% throughput loss. For heterogeneous workloads, establishes stability criteria showing heterogeneity desynchronizes completions and stabilizes the system; under input-dominated scaling, coprime decode lengths stabilize while synchronized completions drive instability. Preprint.",
+      "url_check": "manual"
+    },
+    {
+      "id": "YuHarlevAdakroyScully2026",
+      "name": "A Tale of Two Traffics: Optimizing Tail Latency in the Light-Tailed M/G/k",
+      "url": "https://doi.org/10.1145/3771561",
+      "description": "Yu, G., Harlev, A., Adakroy, R., & Scully, Z. (2026). POMACS / SIGMETRICS 2026. Proves gamma-Boost is tail-constant optimal for the light-tailed M/G/k in heavy traffic, but shows empirically it can underperform FCFS at lighter loads. Introduces an improved variant that counterintuitively gives MORE priority to larger jobs, proven heavy-traffic optimal with state-of-the-art empirical tail latency at light load. Practical implication: tail-latency policy choice is load-regime-dependent, so a policy tuned at peak may be harmful off-peak.",
+      "url_check": "manual"
     },
     {
       "id": "InferenceFleetSim2026",

@@ -2,6 +2,12 @@
 
 Treat coding-agent evals as a release discipline, not a side project.
 
+## Contents
+
+- Core eval pack and iterative self-extension
+- Scoring, judge controls, and pairwise evaluation
+- Release gates, cost controls, and edge cases
+
 ## Core eval pack
 
 Every serious coding-agent runtime should have:
@@ -11,7 +17,26 @@ Every serious coding-agent runtime should have:
 - **tool-choice tasks** where the correct path depends on search or inspection before editing
 - **verification tasks** that punish self-approval and reward separate verification
 - **multi-agent tasks** when the product supports workers, teammates, or coordinator flows
+- **iterative self-extension tasks** that carry the agent's own workspace through evolving specifications
 - **cost and latency baselines** per task family
+
+## Iterative self-extension pack
+
+Use a versioned trajectory pack for agents that repeatedly extend a repository. A trajectory starts from an empty or fixed seed workspace, then carries the candidate's own checkpoint output into the next evolved specification. Do not replace it with reference code between checkpoints: that erases the effect of the candidate's earlier design decisions.
+
+At each checkpoint, collect:
+
+- lineage: `trajectory_id`, `checkpoint_id`, `parent_checkpoint_id`, and `spec_version`
+- workspace provenance: stable workspace identity plus a content hash
+- correctness: strict, isolated, core, and regression results as separate fields
+- structural-quality signals: erosion and verbosity
+- operations: cost and duration
+
+Keep the pack's detailed task construction, fresh-context protocol, and hidden black-box testing with [`../../qa-agent-testing/SKILL.md`](../../qa-agent-testing/SKILL.md). Keep the definitions and interpretation of erosion and verbosity with [`../../software-clean-code-standard/SKILL.md`](../../software-clean-code-standard/SKILL.md). This eval-ops layer owns versioning, telemetry, comparison, and release decisions.
+
+Green tests at one checkpoint—or even a green final snapshot—do not prove extension robustness. Compare candidate and baseline across the full trajectory. Report per-checkpoint levels, candidate-versus-baseline slope, and late-checkpoint correctness regressions; do not collapse these into one final pass rate. Set gates from repeated runs on the product's own representative pack rather than importing a universal slope or metric threshold.
+
+SlopCodeBench (arXiv:2603.24755v1) provides preprint evidence for this failure mode in its Python track. Its anti-slop and plan-first prompts improved initial quality, but did not halt the quality-degradation slope or consistently improve correctness. Treat prompt changes as evaluated interventions, not as sufficient controls.
 
 ## Score more than final correctness
 
@@ -70,6 +95,8 @@ Block release when any of these regress materially:
 - median or p95 cost per task family
 - median or p95 latency for common tasks
 - false-positive or false-negative rate on code-review tasks
+- candidate-versus-baseline structural-quality slope on iterative packs
+- strict, isolated, core, or regression results at late checkpoints, even when the final aggregate remains acceptable
 
 ## Cost tips
 

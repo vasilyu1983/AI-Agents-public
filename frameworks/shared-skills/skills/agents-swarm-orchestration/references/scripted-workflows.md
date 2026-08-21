@@ -17,7 +17,7 @@
 
 Where [../SKILL.md](../SKILL.md) covers dispatch where the **lead model decides** each wave turn by turn, this reference covers orchestration where **a script decides** and the model only executes leaf tasks. This is the third execution surface — distinct from both isolated subagents and agent teams.
 
-Runtime-specific: Claude Code Dynamic Workflows (shipped 2026-05-28 with Opus 4.8; CLI v2.1.154+). Codex CLI has no equivalent code-mode primitive as of v0.137 — see [../../ai-coding-agents-tasks/references/loop-and-graph-runtime-surfaces.md](../../ai-coding-agents-tasks/references/loop-and-graph-runtime-surfaces.md). Verify against current release notes before committing; this surface is young and moving.
+Runtime-specific: Claude Code **dynamic workflows** — the official name for this surface (shipped 2026-05-28 with Opus 4.8; CLI v2.1.154+). Scripts live as JavaScript files in `.claude/workflows/`, which makes this the repeatable, version-controllable orchestration artifact: subagent and team dispatch are per-run decisions, a workflow script is a committed one. Codex CLI has no equivalent code-mode primitive as of v0.137 — see [../../ai-coding-agents-tasks/references/loop-and-graph-runtime-surfaces.md](../../ai-coding-agents-tasks/references/loop-and-graph-runtime-surfaces.md). Verify against current release notes before committing; this surface is young and moving.
 
 ## What Changes When The Script Holds The Loop
 

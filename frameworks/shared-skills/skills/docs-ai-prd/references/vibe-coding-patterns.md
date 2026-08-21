@@ -4,11 +4,14 @@
 
 - [Contents](#contents)
 - [Core Patterns](#core-patterns)
+- [Terminology: vibe coding vs agentic engineering](#terminology-vibe-coding-vs-agentic-engineering)
 - [Decision Matrices](#decision-matrices)
 - [Common Mistakes](#common-mistakes)
 - [Quick Reference](#quick-reference)
 
 *Purpose: Operational patterns for running "vibe coding" workflows with GenAI and coding agents. Focus on copy-ready patterns, iterative loops, and team/agent collaboration for rapid software delivery.*
+
+> **Scope.** This file covers the **prototype** mode — fast, outcome-accepted, code largely unread. The disciplined mode for code that ships is **agentic engineering**, and its patterns live elsewhere: `ai-coding-agents` (agent design), `dev-context-engineering` (repo context and AGENTS.md), `qa-refactoring` (driving agents against existing code). See [Terminology](#terminology-vibe-coding-vs-agentic-engineering) before applying anything here to production work.
 
 ## Contents
 
@@ -108,12 +111,27 @@
 - [ ] PR describes functional + vibe outcomes
 - [ ] No unrelated refactors in the feature PR
 
+## Terminology: vibe coding vs agentic engineering
+
+These are two different modes, not two names for one thing. Using the wrong word for the wrong mode is how teams end up applying prototype discipline to production code.
+
+| Mode | What it means | Accountability | Use for |
+|---|---|---|---|
+| **Vibe coding** | Prompt-driven, outcome-accepted, code largely unread. Karpathy's original framing (2025-02-02): "forget that the code even exists" | None claimed | Throwaway prototypes, spikes, low-stakes tasks |
+| **Agentic engineering** | Human directs fallible agents while staying accountable for the result. Specs first, every diff reviewed, tests as the gate | Human owns the output | Anything that ships |
+
+Karpathy's split (Sequoia Ascent, 2026-04-30): vibe coding "raises the floor... lets almost anyone create software by describing what they want"; agentic engineering "raises the ceiling... the professional discipline of coordinating fallible agents while preserving correctness, security, taste, and maintainability."
+
+**On the name.** Simon Willison coined "vibe engineering" (2025-10-07) for the disciplined mode, then retired it in a postscript dated 2026-02-23: "It looks like the term 'Agentic Engineering' is coming out on top for this now." Addy Osmani drove the change (2026-02-04) on the grounds that "the word 'vibe' carries too much baggage. It signals casualness." **Use "agentic engineering" for the disciplined mode.** "Vibe engineering" is a dead term; recognize it in older writing, don't produce it.
+
+The operative discipline, independent of naming — Willison's rule: do not commit code you could not explain to someone else.
+
 ## Decision Matrices
 
 | Situation                   | Approach                | Validation                 |
 |-----------------------------|-------------------------|----------------------------|
 | Prototype, new idea         | Vibe coding loop        | Outcome-based feedback     |
-| Production feature          | Agentic loop + QA       | QA checklist + review      |
+| Production feature          | Agentic engineering     | Per-diff review + gate     |
 | Refactor/migrate            | Progressive disclosure  | Test/run each iteration    |
 | Stuck agent, blocked cycle  | Human intervention      | Manual review/adjustment   |
 
@@ -121,8 +139,9 @@
 
 ## Common Mistakes
 
-- AVOID: Reviewing every line of agent code (not trusting the agent)  
-  - BEST: Accept/observe outcomes, focus on feedback.
+- AVOID: Line-by-line review **during a throwaway prototype loop**, where it stalls the iteration you are paying for.
+  - BEST: In the prototype loop, accept and observe outcomes.
+  - **Does not generalize.** The moment the code is a candidate to merge, per-diff review is mandatory — this is the line between vibe coding and agentic engineering. Willison's rule: do not commit code you could not explain to someone else. Osmani: review agent output "with the same rigor applied to human colleague submissions."
 
 - AVOID: Giving full, complex specs at once  
   - BEST: Use progressive disclosure, one requirement at a time.

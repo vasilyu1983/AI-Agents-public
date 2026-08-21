@@ -57,6 +57,7 @@ Avoid hardcoding popularity metrics (stars/downloads) in specs; validate them on
 | **Radix UI** | Primitives | Unstyled | Strong | Custom design systems | Mature primitives; you own styling and composition |
 | **Headless UI** | Primitives | Unstyled | Good | Tailwind teams | Smaller component surface area |
 | **Mantine** | Full component system | Built-in theming | Good | Rapid development | Less standardized across orgs |
+| **21st.dev** | Community registry on shadcn conventions + AI generation (21st MCP) | Tailwind CSS | Varies per contributor — audit each pull | Fast prototyping, AI-assisted component sourcing | Uneven quality, per-component licensing, copy-in = no upstream patches |
 
 ---
 
@@ -327,6 +328,32 @@ npm install @mantine/core @mantine/hooks
 ```bash
 npm install @headlessui/react
 ```
+
+---
+
+### 8. 21st.dev (community registry + 21st MCP)
+
+**Overview**: Community-driven registry of 12,000+ React + Tailwind components built on shadcn/ui conventions — "npm for design engineers". Not a curated library: contributors publish directly. Its **21st MCP** (formerly "Magic MCP"; legacy `@21st-dev/magic` now proxies to it) exposes catalog search, natural-language component *generation in the project's own style*, and accessibility/design audits inside Claude Code, Cursor, Windsurf, and other MCP clients. Credit-based freemium — verify current pricing at 21st.dev before quoting numbers.
+
+**Key Strengths**:
+- Massive breadth for prototyping and design exploration (multiple AI-generated variants per request)
+- shadcn-style copy-in install (`npx shadcn add <url>` or AI-ready prompt) — you own the code
+- First-class agent path: the only registry in this table with a native MCP for search/generate/audit
+- Good source of interaction patterns to *reference* even when you rebuild by hand
+
+**Limitations**:
+- Quality and maintenance vary by contributor; no centralized QA
+- **Licensing is per-component, not blanket** — check before commercial use
+- Copy-in model means no upstream security/bug patches; your repo owns all future maintenance
+- Registry components won't match an established design system without a token-normalization pass
+
+**Use When**:
+- Rapid prototyping or exploring visual directions with AI assistance
+- Already on shadcn/Tailwind conventions and prepared to audit + normalize every pull
+
+**Avoid When**:
+- Regulated or long-lived product surfaces where provenance and patch paths matter
+- The team lacks capacity to review third-party component code line by line
 
 ---
 

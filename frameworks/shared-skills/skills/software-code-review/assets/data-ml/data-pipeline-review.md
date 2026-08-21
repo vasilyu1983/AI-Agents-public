@@ -8,7 +8,7 @@ Specialized checklist for reviewing data processing pipelines, ETL/ELT workflows
 
 ### Design Principles
 - [ ] Pipeline purpose and scope clearly defined
-- [ ] Data flow diagram documented
+- [ ] Data flow is legible — a diagram where one is warranted, prose where it is faster (`docs-diagram-design`)
 - [ ] Input/output contracts specified
 - [ ] Pipeline stages logically separated
 - [ ] Idempotency ensured (can re-run safely)
@@ -298,7 +298,7 @@ Specialized checklist for reviewing data processing pipelines, ETL/ELT workflows
 - [ ] Incident response process documented
 
 ### Documentation
-- [ ] Architecture diagram available
+- [ ] Any architecture diagram present shows the mechanism, not a box inventory — absent by design is a pass
 - [ ] Data dictionary maintained
 - [ ] SLA/SLO documented
 - [ ] Owners and contacts listed

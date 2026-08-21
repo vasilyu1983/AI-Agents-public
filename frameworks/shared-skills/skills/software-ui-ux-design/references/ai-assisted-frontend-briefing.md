@@ -12,6 +12,7 @@ Use this reference when the user is asking an AI to generate or reshape a fronte
 - [Structure the Page as a Narrative](#structure-the-page-as-a-narrative)
 - [Landing Pages vs Apps](#landing-pages-vs-apps)
 - [Copy and Imagery Rules](#copy-and-imagery-rules)
+- [Component Sourcing and Generated Assets](#component-sourcing-and-generated-assets)
 - [Motion and Verification](#motion-and-verification)
 - [Typical Failure Modes](#typical-failure-modes)
 - [Litmus Checks](#litmus-checks)
@@ -110,6 +111,15 @@ Each section should have one job. If a section is trying to do two things, cut o
 - Use one strong visual idea per section. If an image is present, it should either establish atmosphere, explain the product, or support trust.
 - If an image can be removed without changing the reading of the section, the image is probably decorative and should be reconsidered.
 - When existing brand photography or product visuals exist, prefer them over synthetic style exploration.
+
+## Component Sourcing and Generated Assets
+
+Optional accelerators for the brief — each requires the brief to exist first; none replaces it.
+
+- **Component registries with MCP access** (e.g., 21st.dev's 21st MCP — see [component-library-comparison.md](component-library-comparison.md)): useful for pulling or generating shadcn-convention components in the project's own style during prototyping. Always follow a pull with a license check and a token-normalization pass against the brief's semantic tokens — registry components arrive with their own values baked in.
+- **Generated visual anchors**: when no brand photography exists, any connected image-generation MCP (see [ai-design-tools.md](ai-design-tools.md)) can produce the hero image or mood-board directions the Shared Quickstart calls for. Specify aspect ratio to match the target viewport, generate 2-4 variants, and pick one *before* code generation so the composition is designed around a real asset, not a placeholder box.
+- **Generated motion references**: video-generation tools with named camera presets can communicate an interaction thesis ("slow dolly-in on the hero") more precisely than adjectives — use as a reference artifact in the brief, not as shipped media, and confirm commercial-use rights before any generated asset ships.
+- **DESIGN.md as the brief carrier**: when the design system is generated from this skill's offline database, export it as a `DESIGN.md` file in the project root (`scripts/search.py --design-system --format designmd`) so any coding agent — Claude Code, Cursor, Windsurf — picks up the same tokens and constraints without re-briefing.
 
 ## Motion and Verification
 

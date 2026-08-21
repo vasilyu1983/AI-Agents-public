@@ -1,4 +1,4 @@
 interface:
   display_name: "AI Agents Development — Architecture Hub"
-  short_description: "AI agent architecture, protocol choice, evaluation, observability, and"
-  default_prompt: "Use $ai-agents for AI agent architecture, protocol choice, evaluation, observability, and build-vs-not decisions. Use when scoping or reviewing agent systems before deeper implementation."
+  short_description: "AI agent architecture plus graph and loop composition"
+  default_prompt: "Use $ai-agents for AI agent architecture, Graph Engineering and Loop Engineering composition, protocol choice, evaluation, and observability. Use when scoping or reviewing systems before implementation."

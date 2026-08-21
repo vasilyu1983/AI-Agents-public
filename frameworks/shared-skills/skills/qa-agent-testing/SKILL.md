@@ -1,9 +1,9 @@
 ---
 name: qa-agent-testing
-description: "Builds QA harnesses for LLM agents with evals, trace grading, red-team packs, and regression workflows. Use when testing tool-using, multi-turn, or multi-agent systems."
+description: "Builds QA harnesses for LLM agents. Use when evaluating tool, trace, red-team, regression, multi-agent, or carried-workspace trajectory behavior."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-21
 ---
 
 # QA Agent Testing
@@ -17,6 +17,7 @@ Design and run reliable evaluation suites for LLM agents, including tool-using, 
    - Smoke suite: 5-8 highest-signal checks for PR gates
    - Regression suite: 15-25 tasks from real failures, tickets, or production traces
    - Refusal/security pack: unsafe requests, prompt injection, tool-output poisoning, and exfiltration attempts
+   - Iterative coding trajectory: evolving specifications applied to the agent's own carried workspace, when extension quality matters
 3. Define objective graders first: schema checks, golden traces, deterministic mocks, policy oracles, and tool side-effect checks.
 4. Add model-based graders only where objective checks are insufficient; calibrate them and log judge versions.
 5. Run offline evals with deterministic controls and trace logging.
@@ -105,6 +106,21 @@ Working rule:
 
 Use [`references/coding-agent-regression-testing.md`](references/coding-agent-regression-testing.md) for the benchmark details, protocol, and how to combine this with classic TDD.
 
+### Iterative Extension Evaluation
+
+A coding agent can pass independent tasks yet degrade when it repeatedly extends its own earlier work. For edit, refactor, and migration agents, add an evolving-spec trajectory when this compounding risk is in scope:
+
+- start from an empty workspace, then carry the agent-produced workspace from checkpoint to checkpoint
+- start each checkpoint with fresh conversation and runtime state so only the workspace preserves earlier decisions
+- grade observable behavior through an external black-box contract, including held-out tests
+- report strict, isolated, core, and regression correctness separately at every checkpoint
+- track structural erosion, verbosity, cost, and duration as trajectory signals; do not treat the quality signals as correctness predictors
+- aggregate unequal-length trajectories into Start, Early, Mid, Late, and Final phases
+
+Benchmark-mode hidden tests and production-mode targeted test context serve different goals. Keep held-out tests hidden from the agent when estimating unbiased benchmark performance. In production regression control, expose the relevant TDAD source-to-test map and targeted test context so the agent can protect known behavior; retain a separate held-out evaluation slice for measurement.
+
+Use [`references/iterative-coding-agent-evals.md`](references/iterative-coding-agent-evals.md) for the protocol, formulas, interpretation limits, and trajectory record.
+
 ## Do / Avoid
 
 Do:
@@ -128,6 +144,7 @@ Avoid:
 |---|---|---|
 | Build the starter suite | Task patterns + starter scaffold | `references/test-case-design.md` |
 | Control regressions in coding agents | TDAD pattern + source-to-test context | `references/coding-agent-regression-testing.md` |
+| Test iterative coding robustness | Carried-workspace checkpoints + trajectory scoring | `references/iterative-coding-agent-evals.md` |
 | Design refusals | Refusal categories + templates | `references/refusal-patterns.md` |
 | Score runs consistently | Canonical rubric + thresholds | `references/scoring-rubric.md` |
 | Compute suite math | CLI utility script | `scripts/score_suite.py` |
@@ -212,6 +229,7 @@ Agent QA request
 - `references/multi-agent-testing.md` - coordination testing patterns and handoff checks
 - `references/llm-judge-limitations.md` - judge biases, calibration, and escalation rules
 - `references/agentic-benchmarks.md` - τ²-bench usage, ABC checklist, and anti-patterns for reading benchmark results
+- `references/iterative-coding-agent-evals.md` - evolving-spec, carried-workspace protocol and longitudinal quality signals
 
 ### Templates
 
@@ -252,4 +270,3 @@ See `data/sources.json` for current primary sources, including OpenAI eval and g
 Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

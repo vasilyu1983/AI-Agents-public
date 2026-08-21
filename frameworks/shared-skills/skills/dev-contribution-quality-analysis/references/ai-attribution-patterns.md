@@ -41,9 +41,19 @@ When neither ground-truth attribution nor commercial detection tools are availab
 
 ### Commit Message Fingerprints
 
-From the arxiv 2601.17406 study of 33,580 PRs across five AI agents:
+From the arxiv 2601.17406 study of 33,580 PRs across five AI agents. The paper's
+abstract reports **97.2% F1** for multi-class agent identification, and gives two
+per-feature importances: *multiline commit patterns at 67.5% for Codex* and
+*conditional statements at 27.2% for Claude Code* — both agent-specific, not
+pooled across agents.
 
-| Feature | Importance | Signal |
+The per-feature percentages below could not be located in the abstract or the
+arXiv HTML (checked 2026-08-17); treat them as **unverified** and read the
+ordering, not the magnitudes, until someone confirms them against the paper's
+results tables. Note the tension: the abstract prices multiline commit patterns
+at 67.5% for Codex, where this table says 44.7%.
+
+| Feature | Importance (unverified) | Signal |
 |---------|-----------|--------|
 | Multiline commit ratio | 44.7% | AI agents produce significantly more multiline commit messages |
 | Change concentration | 10.1% | AI commits tend to touch files with higher directory depth |

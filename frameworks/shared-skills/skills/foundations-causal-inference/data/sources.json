@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Foundations Causal Inference — Sources",
     "description": "Primary academic references for 12 causal inference primitives: DAGs/SCMs, do-calculus, backdoor/frontdoor criteria, instrumental variables, RDD, DiD, synthetic control, propensity score methods, CATE/uplift, Simpson's paradox, mediation analysis, and sensitivity analysis.",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-causal-inference",
-    "total_sources": 31
+    "total_sources": 36
   },
   "foundational_books": [
     {
@@ -213,18 +213,60 @@
       "url_check": "auto"
     },
     {
+      "id": "BakerEtAl2026",
+      "name": "Baker, Callaway, Cunningham, Goodman-Bacon & Sant'Anna (2026) — Difference-in-Differences Designs: A Practitioner's Guide",
+      "url": "https://doi.org/10.1257/jel.20251650",
+      "description": "Current practitioner-facing synthesis of the DiD literature. Organizes DiD designs and estimators by target estimand, covariates, weights, multiple periods, and staggered timing rather than prescribing a single estimator; reiterates that TWFE misleads under heterogeneous effects and that pre-trend tests have limited power. Journal of Economic Literature, 64(2), 498–557, June 2026. Preprint: arXiv:2503.13323. Supersedes Roth et al. (2023) as the default navigational reference for primitive #6.",
+      "last_verified": "2026-08-14",
+      "url_check": "auto"
+    },
+    {
+      "id": "BojinovEtAl2023",
+      "name": "Bojinov, Simchi-Levi & Zhao (2023) — Design and Analysis of Switchback Experiments",
+      "url": "https://doi.org/10.1287/mnsc.2022.4583",
+      "description": "Derives the optimal switchback design under assumptions on the order of the carryover effect, via a minimax discrete optimization formulation. The canonical reference for temporal-interference designs on a single shared system (pricing, matching, ranking). Management Science, 69(7), 3759–3777, 2023. Preprint: arXiv:2009.00148. Source for the Interference and SUTVA section in SKILL.md.",
+      "last_verified": "2026-08-14",
+      "url_check": "manual"
+    },
+    {
+      "id": "JiaKallusYu2025",
+      "name": "Jia, Kallus & Yu (2025) — Clustered Switchback Designs for Experimentation Under Spatio-temporal Interference",
+      "url": "https://arxiv.org/abs/2312.15574",
+      "description": "Handles spatial (graph-neighbor) and temporal (carryover) interference jointly by randomizing at the cluster-block level. Truncated Horvitz–Thompson estimator attains Õ(1/NT) MSE, matching the lower bound up to log terms for sparse graphs. Submitted December 2023; revised March 2025. Source for the combined spatio-temporal row of the interference design table in SKILL.md.",
+      "last_verified": "2026-08-14",
+      "url_check": "auto"
+    },
+    {
+      "id": "PengYeZheng2025",
+      "name": "Peng, Ye & Zheng (2025) — Differences-in-Neighbors for Network Interference in Experiments",
+      "url": "https://arxiv.org/abs/2503.02271",
+      "description": "Differences-in-Neighbors (DN) estimator for network interference: bias is second-order in interference magnitude (vs first-order for difference-in-means) with variance exponentially smaller than Horvitz–Thompson. Composes with clustered designs for improved bias-variance tradeoffs. Validated on real social networks and ride-sharing simulations. Submitted March 4, 2025. Source for the graph-interference row of the interference design table in SKILL.md.",
+      "last_verified": "2026-08-14",
+      "url_check": "auto"
+    },
+    {
       "id": "FrauenEtAl2026",
       "name": "Frauen et al. (2026) — Causal Methods for LLM Development and Evaluation",
       "url": "https://arxiv.org/abs/2605.25998",
-      "description": "Argues that central questions in LLM development and evaluation (data-mix effects, judge bias, prompt-to-model routing) are inherently causal and underserved by causal methods; logged LLM-pipeline data are subject to confounding and non-stationary deployment shift. Submitted May 25, 2026. Source for the LLM Evaluation Pipeline composition recipe in SKILL.md.",
-      "url_check": "manual"
+      "description": "Argues that central questions in LLM development and evaluation (data-mix effects, judge bias, prompt-to-model routing) are inherently causal and underserved by causal methods; logged LLM-pipeline data are subject to confounding and non-stationary deployment shift. Maps causal opportunities across the pipeline (pretraining, alignment, routing). Submitted May 25, 2026; published at KDD 2026. Source for the LLM Evaluation Pipeline composition recipe in SKILL.md.",
+      "last_verified": "2026-08-14",
+      "url_check": "auto"
+    },
+    {
+      "id": "CausalBench2024",
+      "name": "CausalBench (2024) — A Comprehensive Benchmark for Causal Learning Capability of Large Language Models",
+      "url": "https://arxiv.org/abs/2404.06349",
+      "description": "Benchmark suite for LLM causal-learning capability across small (Asia, Cancer, Earthquake, Survey, Sachs) and medium (Child, Insurance, Alarm, Barley) bnlearn graphs. Notes that these standard graphs are widely published and plausibly present in pretraining corpora, so scores may reflect memorization rather than causal reasoning. Source for the benchmark-contamination caveat on LLM-assisted causal discovery in SKILL.md.",
+      "last_verified": "2026-08-14",
+      "url_check": "auto"
     },
     {
       "id": "LLMCannotDiscoverCausality2025",
       "name": "LLM Cannot Discover Causality, and Should Be Restricted to Non-Decisional Support in Causal Discovery (2025)",
       "url": "https://arxiv.org/abs/2506.00844",
-      "description": "Argues LLM-proposed causal graphs should be treated as priors to seed DAG construction, not as identified causal models; edges must be validated with data-driven independence/faithfulness tests. Source for the 'LLM-assisted causal discovery' note in SKILL.md.",
-      "url_check": "manual"
+      "description": "Argues LLM-proposed causal graphs should be treated as priors to seed DAG construction, not as identified causal models; edges must be validated with data-driven independence/faithfulness tests. Authors show LLM-guided heuristic search can still accelerate convergence in structure learning — the restriction is on decisional authority, not on all LLM use. Wu, Yu, Wu & Tan, submitted June 1, 2025. Source for the 'LLM-assisted causal discovery' note in SKILL.md.",
+      "last_verified": "2026-08-14",
+      "url_check": "auto"
     }
   ]
 }

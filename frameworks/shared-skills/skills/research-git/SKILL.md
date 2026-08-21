@@ -69,7 +69,7 @@ Manual extraction is unsustainable. The agent-skill ecosystem alone has 1,400+ r
 
 **Target**: OSS clones of a specific commercial product (e.g., `supabase/supabase` clones Firebase, `plausible/analytics` clones Google Analytics).
 **Fetch**: README.md, CHANGELOG.md, docs/, landing pages — the marketing surface that reveals which features the OSS author chose to replicate (and which they explicitly didn't).
-**Output**: rows on the shared `pay-trigger-ledger.tsv` with `signal_type=oss_clone_focus` → contributes to the bundle's [Killer-Feature Convergence Protocol](../startup-review-mining/references/killer-feature-convergence.md) owned by `startup-review-mining`.
+**Output**: rows on the shared `pay-trigger-ledger.tsv` with `signal_type=oss_clone_focus` → contributes to the bundle's [Killer-Feature Convergence Protocol](../research-review-mining/references/killer-feature-convergence.md) owned by `research-review-mining`.
 **Use when**: the bundle is hunting a killer feature for a commercial product, OR you want to know what the OSS world considers the load-bearing feature(s) of a category leader.
 **Premise**: OSS authors only reimplement what they think matters. That choice is revealed preference under cost — a strong proxy for monetizable core.
 **Reference**: [references/killer-feature-mining.md](references/killer-feature-mining.md) — full extraction protocol + LLM prompts.
@@ -81,7 +81,7 @@ Manual extraction is unsustainable. The agent-skill ecosystem alone has 1,400+ r
 - **Policy redesign**: your team's PR workflow is breaking — scan how 5 leading OSS repos handle it
 - **Framework adoption**: you're committing to a new framework — pull idioms from the repos that stress-test it
 - **Periodic refresh**: quarterly re-scan of a domain to catch new patterns from active maintainers
-- **Bundle handoff — killer-feature scan**: `startup-review-mining` Killer-Feature Mode asks Mode D for the OSS clone signal on a target commercial product
+- **Bundle handoff — killer-feature scan**: `research-review-mining` Killer-Feature Mode asks Mode D for the OSS clone signal on a target commercial product
 
 ## When NOT to Use
 
@@ -290,9 +290,9 @@ scripts/fetch_repo_assets.sh supabase/supabase \
 # → JSONL of explicitly-omitted features (inverse signal — these are the
 #   parts of Firebase that OSS authors think aren't paid for)
 
-# Append rows to ../startup-review-mining/assets/pay-trigger-ledger.tsv
+# Append rows to ../research-review-mining/assets/pay-trigger-ledger.tsv
 #   signal_type = oss_clone_focus
-# Run ../startup-review-mining/scripts/converge_killer_features.py
+# Run ../research-review-mining/scripts/converge_killer_features.py
 # Convergence Rule decides which feature_ids cross the 3-of-6 threshold
 ```
 

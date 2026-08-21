@@ -2,8 +2,8 @@
 name: foundations-decision-theory
 description: Decision-theory primitives for uncertain choices, utility, Bayesian decisions, regret, value of information, MCDA, options, and bandits. Use when choosing under uncertainty.
 compatibility: Portable core only.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-14
 ---
 
 # Decision Theory Foundations
@@ -36,6 +36,7 @@ last_validated: 2026-07-11
 - [Misuse Boundaries](#misuse-boundaries)
 - [When Expected-Value Reasoning Breaks Down](#when-expected-value-reasoning-breaks-down-non-ergodicity-ruin-risk-and-kelly)
 - [Elicitation Failure Modes](#elicitation-failure-modes)
+  - [Machine-Elicited Probabilities](#machine-elicited-probabilities)
 - [Decision Checklist](#decision-checklist)
 - [Anti-Patterns](#anti-patterns)
 - [Composition Recipes](#composition-recipes)
@@ -107,6 +108,7 @@ Use [`references/formal-theory-map.md`](references/formal-theory-map.md) when th
 |---|---|---|
 | Optimizing expected value for a risk-averse decision maker | EV ignores utility curvature and downside pain | Compute expected utility and certainty equivalent |
 | Treating MCDA weights as objective truth | Weights encode stakeholder preferences | Disclose weights and run sensitivity analysis |
+| Reporting an MCDA ranking without a rank-reversal test | Adding or dropping an irrelevant alternative silently reorders the result; an audit of 27 published MCDM pipeline/dataset combinations found recomposition consistency (RRT3) failing in ~48% of examples and transitivity (RRT2) in ~15% | Run the Wang–Triantaphyllou RRT1–RRT3 tests alongside weight sensitivity (Cabral et al., arXiv:2508.00129) |
 | Running experiments without VoI | A study can be statistically interesting but decision-worthless | Compute EVPI/EVSI before funding research |
 | Applying EU under deep ambiguity | Unknown probabilities violate the input contract | Use minimax regret, maximin, or ambiguity-aware criteria; or use Wasserstein DRRO when sample data on states are available |
 | Treating bandits as free optimization | Exploration has opportunity cost and fairness/product constraints | Set regret budget, guardrails, and stopping rules |
@@ -143,6 +145,15 @@ Formal primitives are only as good as the probabilities, utilities, and weights 
 | Weights presented as objective | MCDA (#5) weights are framed as model output rather than negotiated stakeholder preference | Disclose weight provenance and run sensitivity analysis; treat weights as an input to be negotiated, not a discovered fact |
 | Stated risk tolerance vs. revealed risk tolerance | Survey-elicited utility/risk-aversion parameters diverge from what the same stakeholder actually does under real stakes | Cross-check elicited CARA/CRRA parameters (#6) against revealed past choices (insurance, past bets) where available |
 | Ambiguity flattened into a probability | An unknown probability is silently converted to 50/50 or a base rate, hiding ambiguity aversion | Run the Ellsberg/Allais diagnostic (#9) first; do not treat "unknown" as "known and uniform" |
+
+### Machine-Elicited Probabilities
+
+Probability inputs increasingly come from an LLM rather than a human panel. Treat them as a calibrated-but-not-superhuman forecaster, and score them the same way you would score a person:
+
+- **Accuracy is close but not yet at parity.** On ForecastBench (Forecasting Research Institute), human superforecasters led the best LLMs by 0.017 Brier points as of 2026-01-29, with extrapolated parity projected for November 2026 (95% CI Jan 2026 – Nov 2027). Machine forecasts are usable as one panel member; they are not yet a replacement for a calibrated human on a high-stakes prior.
+- **Overconfidence is directional, not uniform.** Models skew overconfident on events they rate as likely, while staying reasonably calibrated in the low-probability tail. Discount high stated probabilities more than low ones.
+- **Verbalized confidence is not the model's probability.** A stated "I'm 90% sure" diverges from both token-level likelihood and realized accuracy, and RLHF-style alignment training degrades calibration by rewarding confident phrasing. Score against outcomes; never take the sentence at face value.
+- **Aggregate rather than single-shot.** The anchoring correction above applies unchanged: sample independently across prompts or models before pooling, rather than accepting one generation as the estimate.
 
 ---
 
@@ -221,9 +232,20 @@ _Context_: Marketing budget, experiment slots, or engineering capacity must be a
 _Context_: An AI agent or orchestration layer must decide whether to invoke an expensive large model, run a retrieval step, or route a query to one of several LLM backends — each with different quality-cost profiles.
 
 1. **VoI gate before each costly call** (#4): estimate EVPI for the decision the LLM call is meant to inform. If the agent's current context already implies a high-confidence action, skip the call — the information cannot change the decision. Apply this gate to retrieval steps (is the retrieved chunk likely to shift the answer?) and to model-tier selection (does this query warrant the 175B model over the 7B?).
-2. **Bandit-driven model routing** (#10): treat each LLM backend (or prompt variant) as a bandit arm with unknown quality distribution per query class. Use Thompson sampling to learn the best arm per context cluster; this yields provably-efficient exploration with sub-linear regret across the routing fleet (arXiv:2506.17670, 2026).
+2. **Bandit-driven model routing** (#10): treat each LLM backend (or prompt variant) as a bandit arm with unknown quality distribution per query class. Use Thompson sampling to learn the best arm per context cluster; a LinUCB-based policy achieves sublinear regret without predicting future prompts or accessing model internals, including under unstructured context evolution as users refine queries mid-session (Poon et al., arXiv:2506.17670).
 3. **Risk aversion on tail latency** (#6): for SLA-sensitive paths, compute the certainty equivalent of the latency distribution — a risk-neutral mean-latency comparison may select a high-variance backend a risk-averse product cannot afford.
 4. **Stochastic dominance check before full reallocation** (#11): once enough observations accumulate, verify that the preferred arm FSD-dominates alternatives across quality and cost dimensions before committing the full traffic budget.
+
+---
+
+### Clarify-or-commit: should the agent ask the user a question?
+
+_Context_: An agent holds an ambiguous instruction and must decide whether to ask a clarifying question or proceed on its best reading. Each question costs user patience; a wrong assumption costs a wasted trajectory.
+
+1. **Score each candidate question by EVPI** (#4), not by how uncertain the agent feels. The value of a question is the expected improvement in the *action*, so a question whose answers all lead to the same next step has zero value however uncertain the agent is. Penalize by an asking cost to suppress redundant questions — EVPI-scored clarification cut question count 1.5–2.7x at higher task success than uncertainty-threshold baselines (Suri et al., arXiv:2511.08798).
+2. **Separate specification uncertainty from model uncertainty.** Only the first is fixable by asking. Ambiguity about what the user wants is a question; ambiguity about whether the agent's own output is correct is a verification or retrieval step, and asking the user will not resolve it.
+3. **Treat EVPI as decaying with trajectory position** — this is the main departure from single-shot VoI. Question value is not stationary over a long-horizon task: goal-level clarification decays to baseline value after roughly the first 10% of execution, while input-level clarification stays useful to about the 50% mark. Past the midpoint, asking performs *worse* than never asking, because the cost of rework already sunk exceeds the information gain (Gulati et al., arXiv:2605.07937, ~6,000 runs across 4 models).
+4. **Budget the asking rate explicitly.** Frontier models fail this in both directions — over-asking in 52% of sessions or suppressing questions entirely. Front-load goal questions before acting, allow input questions mid-trajectory, and commit after the midpoint rather than asking late.
 
 ---
 
@@ -295,8 +317,12 @@ This skill is a self-contained foundations primitive. Cross-link only to other `
 - Distributionally Robust Performative Optimization: Jia et al. (NeurIPS 2025). arXiv:2407.01344. [Primitives #3, #1]
 - Online Decision-Focused Learning: Capitaine et al. (ICLR 2026). arXiv:2505.13564. [Primitive #4]
 - DFL via Dual Surrogates: Rodriguez-Diaz et al. (NeurIPS 2025). arXiv:2511.04909. [Primitive #4]
-- Multi-LLM selection via contextual bandits: arXiv:2506.17670 (2026). Online bandit policy for routing queries across LLM backends under unstructured context evolution. [Primitive #10; app-builder recipe]
-- Decision-Centric Design for LLM Systems: arXiv:2604.00414 (2026). Formalizes VoI gating and clarify-or-commit tradeoffs as explicit decision problems in LLM orchestration. [Primitive #4; app-builder recipe]
+- Multi-LLM selection via contextual bandits: Poon, Dai, Liu, Kong, Lui, Zuo (arXiv:2506.17670, June 2025). LinUCB routing across LLM backends with sublinear regret under unstructured context evolution. [Primitive #10; app-builder recipe]
+- Decision-Centric Design for LLM Systems: Sun (arXiv:2604.00414, April 2026). Separates the decision layer from generation in LLM systems; formalizes VoI gating and clarify-or-commit tradeoffs as explicit decision problems. [Primitive #4; app-builder recipe]
+- EVPI-scored agent clarification: Suri, Mathur, Lipka, Dernoncourt, Rossi, Manocha (arXiv:2511.08798, Nov 2025, rev. Apr 2026). SAGE-Agent; cost-penalized EVPI over candidate questions; 1.5–2.7x fewer questions at higher success. [Primitive #4; clarify-or-commit recipe]
+- Clarification timing decay: Gulati, Gupta, Lumer, Sen, Subbiah (arXiv:2605.07937, May 2026). ~6,000 runs, 4 dimensions, 3 benchmarks, 4 frontier models. Goal-clarification value decays by ~10% of execution, input by ~50%; asking past the midpoint underperforms never asking. [Primitive #4; clarify-or-commit recipe]
+- MCDA rank-reversal prevalence: Cabral et al. (arXiv:2508.00129, July 2025, rev. Aug 2026). Operationalizes Wang–Triantaphyllou RRT1–RRT3 in Scikit-Criteria; RRT3 fails in ~48% and RRT2 in ~14.8% of audited published pipelines. [Primitive #5; misuse boundaries]
+- LLM vs. superforecaster calibration: Bastani, Kučinskas, Reynolds (Forecasting Research Institute, ForecastBench). Superforecasters ahead by 0.017 Brier points as of 2026-01-29; extrapolated parity Nov 2026 (95% CI Jan 2026 – Nov 2027). Verify the current leaderboard before citing the gap — it is a moving number. [Elicitation Failure Modes]
 - Numeric thresholds (e.g., EVSI formulas, CE approximations) should be verified against primary sources before citing in decisions.
 
 ## Learnings Loop

@@ -1,9 +1,9 @@
 ---
 name: dev-ai-coding-metrics
-description: "Measures AI coding impact across adoption, delivery, quality, cost, and experience. Use when building ROI scorecards, pilot metrics, or leadership reports for AI coding programs."
+description: "Measures AI coding impact and extension robustness. Use when tracking delivery, quality trajectories, cost, experience, pilots, scorecards, or leadership reporting."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.2"
-last_validated: 2026-07-11
+last_validated: 2026-08-21
 ---
 
 # AI Coding Metrics
@@ -82,7 +82,7 @@ Use the smallest scorecard that can answer the decision:
 |--------|-------------------|
 | adoption | whether usage is real and sustained |
 | delivery | whether software flow is faster where AI actually touches the path |
-| quality | whether speed gains are offset by defects, rework, or review burden |
+| quality | whether speed gains are offset by defects, rework, review burden, or declining extension robustness |
 | economics | whether the value justifies tool and operating cost |
 | experience | whether developers trust the tool and want to keep using it |
 | agent execution | whether autonomous workflows succeed in production, not just in demos |
@@ -111,9 +111,10 @@ Use before publishing any AI coding report:
 - [ ] Vendor evidence labeled as vendor evidence
 - [ ] Usage measured after stabilization (not week-1 novelty period)
 - [ ] Review burden and rework cost included in ROI model
+- [ ] Edit-capable agents measured across evolving-spec checkpoints, including late-checkpoint cost and quality slopes
 - [ ] Aggregated at team level (no manager-visible individual dashboards)
 
-## Current Evidence Posture (as of 2026-07-11)
+## Current Evidence Posture (as of 2026-08-21)
 
 | Claim | Evidence | Caveat |
 |-------|----------|--------|
@@ -126,6 +127,7 @@ Use before publishing any AI coding report:
 | Modeled first-year AI ROI ~39% (500-person org); adoption raises change-failure rate (5%->6%), an "instability tax" | DORA 2026 ROI of AI-Assisted Software Development report (Apr 2026) | Vendor-modeled scenario, not a cross-org RCT; treat the 39% figure as an illustrative scenario, not a universal benchmark |
 | AI yields 35-40% gains on simple tasks but ~10% on complex legacy code | DORA 2026 ROI report | Reinforces task-complexity segmentation already required by this skill's study design defaults |
 | DX Core 4 unifies DORA + SPACE + DevEx into 4 dimensions (Speed, Effectiveness, Quality, Business Impact) | DX Core 4, formalized publicly Apr 2026 | Vendor framework; specific benchmarks need independent replication |
+| One-shot pass rates can miss degradation across repeated agent edits | SlopCodeBench v1, Mar 2026 preprint | Python experiments only; trajectory signals are not correctness proofs or universal targets |
 
 ## Anti-Gaming Checklist
 
@@ -139,6 +141,7 @@ Reject a scorecard or report if any of the following apply:
 - [ ] Review burden excluded from ROI model
 - [ ] Individual-level AI usage visible to managers
 - [ ] Directional before/after movement stated as causal without controlled design
+- [ ] SlopCodeBench averages or trajectory signals used as organizational targets or causal ROI evidence
 
 ## Navigation
 
@@ -188,4 +191,3 @@ Reject a scorecard or report if any of the following apply:
 Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

@@ -12,7 +12,7 @@
 - [Where Mode D's output goes](#where-mode-ds-output-goes)
 - [Honest precision](#honest-precision)
 
-Specialized mode for contributing the **`oss_clone_focus`** signal to the bundle's Killer-Feature Convergence Protocol owned by `startup-review-mining`.
+Specialized mode for contributing the **`oss_clone_focus`** signal to the bundle's Killer-Feature Convergence Protocol owned by `research-review-mining`.
 
 **The premise.** When developers spend nights/weekends building an OSS clone of a commercial product, they pick which features to replicate. They almost never reimplement the full surface — they reimplement the **one or two features they consider load-bearing for the use case**. That choice is a strong (and very cheap to extract) signal about which features the market sees as the monetizable core.
 
@@ -27,13 +27,13 @@ The signal is so strong because it's **revealed preference under cost** — the 
 
 ## When to use this mode
 
-- A bundle handoff from `startup-review-mining` Killer-Feature Mode KF4 asks for the OSS clone signal
+- A bundle handoff from `research-review-mining` Killer-Feature Mode KF4 asks for the OSS clone signal
 - You're researching a commercial product and want to see what the OSS world considers its essential feature(s)
 - You have a candidate `feature_id` and want to check if any OSS clone explicitly markets it as the load-bearing feature
 
 ## What this mode does NOT do
 
-- Mode D does **not** decide whether a feature is the killer feature. It contributes **one** of the six signal types. The Convergence Rule in `../../startup-review-mining/references/killer-feature-convergence.md` (≥3 signals + ≥1 explicit/strong WTP) does the deciding.
+- Mode D does **not** decide whether a feature is the killer feature. It contributes **one** of the six signal types. The Convergence Rule in `../../research-review-mining/references/killer-feature-convergence.md` (≥3 signals + ≥1 explicit/strong WTP) does the deciding.
 - Mode D does **not** extract code patterns from the OSS clone — that's Mode C. Mode D only mines the **focus signal**: which features were chosen for replication, which were skipped, and (when present) which features the README explicitly attributes monetizability to.
 
 ---
@@ -106,7 +106,7 @@ KF-OSS-3. EXTRACT omissions (LLM, inverse signal)
 
 KF-OSS-4. APPEND to shared ledger
           - For each "included" feature, append a row to
-            ../../startup-review-mining/assets/pay-trigger-ledger.tsv with:
+            ../../research-review-mining/assets/pay-trigger-ledger.tsv with:
               signal_type   = oss_clone_focus
               wtp_quote     = the README/landing-page quote
               wtp_strength  = strong (if "we built X because users pay for it" type wording)
@@ -116,7 +116,7 @@ KF-OSS-4. APPEND to shared ledger
               homepage_marketed = (leave blank — not the right field for OSS)
 
 KF-OSS-5. HAND OFF to convergence
-          - Call ../../startup-review-mining/scripts/converge_killer_features.py
+          - Call ../../research-review-mining/scripts/converge_killer_features.py
           - The aggregator will look for 3-of-6 signal-type convergence including oss_clone_focus
 ```
 
@@ -124,7 +124,7 @@ KF-OSS-5. HAND OFF to convergence
 
 ## LLM extraction prompts
 
-These are Mode D-specific. The general WTP/convergence prompts live in `../../startup-review-mining/references/llm-extraction-prompts.md`.
+These are Mode D-specific. The general WTP/convergence prompts live in `../../research-review-mining/references/llm-extraction-prompts.md`.
 
 ### §1 — OSS clone focus extraction
 
@@ -199,7 +199,7 @@ talked-about but aren't actually paid for.
 - **Omission rows** (Prompt §2 output) → optional but valuable; reduce the score of feature_ids that other signals overweight
 - **Research pack** at `docs/research/YYYY-MM-DD-killer-feature-<product>-scan.md` documenting the OSS clones reviewed, the focus signals extracted, and which feature_ids appeared most/least often
 
-The convergence aggregator is owned by `startup-review-mining`; this skill only contributes one of the six signal types.
+The convergence aggregator is owned by `research-review-mining`; this skill only contributes one of the six signal types.
 
 ---
 
@@ -212,4 +212,4 @@ It is the **least reliable signal** for:
 - Vertical enterprise software (CRM, ERP, finance) — OSS authors don't replicate procurement-driven features
 - Brand-driven consumer SaaS (Calm, Headspace, Duolingo) — the killer "feature" is brand/content, not codeable
 
-Cross-reference the precision ceiling table in [`../../startup-review-mining/references/killer-feature-convergence.md`](../../startup-review-mining/references/killer-feature-convergence.md).
+Cross-reference the precision ceiling table in [`../../research-review-mining/references/killer-feature-convergence.md`](../../research-review-mining/references/killer-feature-convergence.md).

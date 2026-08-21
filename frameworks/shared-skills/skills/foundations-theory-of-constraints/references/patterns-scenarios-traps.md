@@ -1,6 +1,6 @@
 ---
 description: Applied patterns, scenarios, anti-patterns, and known traps for Theory of Constraints foundations.
-last_verified: 2026-05-02
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -25,7 +25,7 @@ status: stable
 - Throughput accounting ranks by constraint use, not gross margin.
 - Policy constraints are often protected by incentive metrics.
 - Thinking Process diagrams need rigorous logic checks, not attractive formatting.
-- **AI coding tools shift the constraint downstream.** After AI coding adoption, the constraint typically moves from code writing to code review, QA, or integration — not to code generation. Optimizing code generation without identifying the new downstream constraint merely shifts the bottleneck (reported pattern 2024–2026; sources: IT Revolution "Revenge of QA" Jan 2026; Logilica Dec 2025; Faros AI 2025 telemetry). Re-run 5FS when DORA metrics stay flat despite improved individual coding velocity.
+- **AI coding tools shift the constraint downstream.** After AI coding adoption, the constraint typically moves from code writing to code review, verification, or integration — not to code generation. Optimizing code generation without identifying the new downstream constraint merely shifts the bottleneck. DORA's *2025 State of AI-assisted Software Development* (n≈5,000) found that higher AI adoption raises delivery throughput *and* delivery instability, with generation time savings reallocated to verification overhead; IT Revolution (Jan 2026) and Logilica (Dec 2025) report the same pattern from practitioner telemetry. Re-run 5FS when delivery metrics stay flat despite improved individual coding velocity. Note the TOC subtlety: faster generation genuinely elevates a non-constraint, so flat throughput is the *predicted* result, not a surprise.
 
 ## Constraint vs. Bottleneck-of-the-Day (Expert Judgment)
 

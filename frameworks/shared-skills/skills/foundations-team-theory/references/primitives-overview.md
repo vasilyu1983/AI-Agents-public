@@ -59,6 +59,8 @@ For applied patterns and anti-patterns specific to subagent design, see [`patter
 
 **Human team analog — Transactive Memory Systems (TMS):** In human teams, the information structure corresponds to a *transactive memory system* (Wegner 1987): each member specializes in different knowledge domains and the group maintains a shared directory of "who knows what." TMS is explicitly *differentiated* (not shared), making it the direct human-team analog to the formal `η` partition. Three measurable dimensions of a functioning TMS: specialization (each member owns distinct knowledge), credibility (members trust each other's domain knowledge), and coordination (members can retrieve from each other without redundant encoding). Brandon & Hollingshead (2004, Organization Science 15(6)) establish that task structure is a primary developmental influence on TMS. For subagent design, this maps to: (a) assign each agent a disjoint observation lane, (b) build a "who-knows-what" directory at the orchestrator level, (c) route queries to the agent whose lane covers the domain. Narayanan et al. (2025, Human Factors) extends TMS to human-AI teams, confirming the construct applies when AI takes a specialist role.
 
+**Do not substitute "collective intelligence" for information-structure design.** The popular reading of Woolley et al. (2010) — that groups have a general intelligence factor `c` analogous to individual `g`, tunable via composition — is contested. Rowe, Hattie & Hester (2021, *Cognitive Research*) pooled 857 groups and found `c` correlates only r=.26 with external group performance, with all but four studies failing to control for members' individual intelligence; Rowe, Hattie & Munro (2024, *PLOS ONE*) favor a two-factor fluid/crystallized structure over a unified `c`, and earlier work failed to recover a dominant CI factor in virtual text-based groups. Sample sizes are small on both sides, so the honest status is *contested*, not *refuted*. Practical consequence: treat composition heuristics from this literature (social sensitivity, turn-taking equality, gender composition) as local hypotheses to test, and design the observation partition `η` and the aggregation rule (#3) first — those are the levers team theory actually licenses.
+
 **Failure modes**:
 - Assumed information structure differs from actual (e.g., hidden global state agents implicitly read)
 - Non-classical structure treated as classical → linear policies look optimal but aren't (see #6)
@@ -75,9 +77,14 @@ For applied patterns and anti-patterns specific to subagent design, see [`patter
 
 **Diagnostic**: hold all agent rules fixed except two; vary that pair jointly. If you find a higher `E[U]`, you were at a PBPO that wasn't the team optimum.
 
+**The aggregation rule is part of the joint policy.** A team can be PBPO — every agent reasoning well given the others — and still lose to its own best member, because how contributions are combined is itself a policy choice. Pappu et al. (2026, ICML, arXiv:2602.01011) show self-organizing LLM teams underperforming their strongest member by up to 41.1% on ML benchmarks *even when told which agent is the expert*: the teams identify expertise correctly, then dilute it through integrative compromise, averaging expert and non-expert positions. The deficit grows with team size. The design consequence is that competence-weighted routing must be built into the aggregation step explicitly; it does not emerge from agents that individually know who the expert is. Note the tradeoff the same paper reports — consensus-seeking is what makes these teams resistant to adversarial members, so pooling is the right rule when robustness dominates peak accuracy.
+
+**Baseline discipline**: always evaluate a team design against its single-best-member baseline. A team that cannot beat one good agent is paying coordination cost (#4, #7) for negative return.
+
 **Failure modes**:
 - Local prompt-tuning that achieves PBPO but ignores joint redesign
 - "Each agent is doing its best" used as evidence of system optimality
+- Treating aggregation as neutral plumbing rather than as a decision rule that must be optimized jointly with the agents
 
 ---
 

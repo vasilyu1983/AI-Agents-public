@@ -7,6 +7,7 @@ Use this file as the on-demand map for the `ai-agents` skill. Start with the sho
 - [Fast Paths](#fast-paths)
 - [Decision And Economics](#decision-and-economics)
 - [Core Architecture](#core-architecture)
+- [Graph And Loop Composition](#graph-and-loop-composition)
 - [Protocols And Contracts](#protocols-and-contracts)
 - [Capability Patterns](#capability-patterns)
 - [Engine Layers](#engine-layers)
@@ -55,6 +56,11 @@ Use this file as the on-demand map for the `ai-agents` skill. Start with the sho
   [`framework-landscape.md`](framework-landscape.md) ->
   [`../../ai-bot-builder/references/framework-selection.md`](../../ai-bot-builder/references/framework-selection.md) (for Python/TS bot depth)
 
+- "Graph engineering", "loop engineering", agent workflow graph, improvement loop, or knowledge graph:
+  [`graph-and-loop-engineering.md`](graph-and-loop-engineering.md) ->
+  choose the graph purpose ->
+  the linked specialist skill
+
 ## Decision And Economics
 
 - [`build-vs-not-decision.md`](build-vs-not-decision.md) - default "do not build an agent" gate, alternatives, kill triggers
@@ -72,6 +78,10 @@ Use this file as the on-demand map for the `ai-agents` skill. Start with the sho
 - [`context-engineering.md`](context-engineering.md) - progressive disclosure, retrieval timing, context hygiene
 - [`context-rotation-and-state.md`](context-rotation-and-state.md) - fresh-context workers, durable state, and session vs project boundaries
 - [`memory-systems.md`](memory-systems.md) - session, episodic, long-term, task memory tradeoffs
+
+## Graph And Loop Composition
+
+- [`graph-and-loop-engineering.md`](graph-and-loop-engineering.md) - disambiguates agent/workflow graphs, networked improvement graphs, and knowledge/context graphs; routes graph and loop requests to the relevant specialist skill
 
 ## Protocols And Contracts
 

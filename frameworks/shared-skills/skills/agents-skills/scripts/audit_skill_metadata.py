@@ -19,7 +19,7 @@ LONG_SKILL_LINE_LIMIT = 250
 VERY_LONG_SKILL_LINE_LIMIT = 350
 TOP_LONG_SKILLS_LIMIT = 10
 DEFAULT_BENCHMARK_MANIFEST = Path("evals/tasks/pilot-router-and-long-skills.json")
-DEFAULT_COMPACT_DISCOVERY = Path("DISCOVERY.md")
+DEFAULT_COMPACT_DISCOVERY = Path("graph/codex-discovery.md")
 DEFAULT_COMPACT_DISCOVERY_BUDGET = 8000
 # Shared description-budget thresholds. Keep these in sync with current docs:
 # Claude Code default budget = 1% of context (~8000 chars fallback) per
@@ -261,7 +261,7 @@ def compute_description_budget(rows: list[dict[str, object]]) -> dict[str, objec
 
 
 def compact_discovery_summary(catalog_root: Path) -> dict[str, object]:
-    discovery_path = catalog_root / DEFAULT_COMPACT_DISCOVERY
+    discovery_path = catalog_root.parent / DEFAULT_COMPACT_DISCOVERY
     if not discovery_path.exists():
         return {
             "path": str(discovery_path),
@@ -279,7 +279,7 @@ def compact_discovery_summary(catalog_root: Path) -> dict[str, object]:
         "chars": len(text),
         "budget": DEFAULT_COMPACT_DISCOVERY_BUDGET,
         "fits_budget": len(text) <= DEFAULT_COMPACT_DISCOVERY_BUDGET,
-        "generated": "generate_compact_discovery.py" in text,
+        "generated": "Generated compact discovery map for Codex" in text,
     }
 
 
@@ -355,6 +355,11 @@ def print_markdown(catalog_root: Path, rows: list[dict[str, object]]) -> None:
     longest = top_long_skills(rows, benchmark_skills=benchmark_skills if manifest_path else None)
     budget = compute_description_budget(rows)
     compact_discovery = compact_discovery_summary(catalog_root)
+    compact_discovery_ok = bool(
+        compact_discovery["exists"]
+        and compact_discovery["fits_budget"]
+        and compact_discovery["generated"]
+    )
     print("## Skill Metadata Audit Summary")
     print()
     print(f"- Catalog: `{catalog_root}`")
@@ -373,6 +378,8 @@ def print_markdown(catalog_root: Path, rows: list[dict[str, object]]) -> None:
         "warning": "WARNING (silent truncation likely on Codex / default Claude Code)",
         "critical": "CRITICAL (silent skill exclusion likely on every runtime)",
     }[str(budget["risk_level"])]
+    if budget["risk_level"] != "ok" and compact_discovery_ok:
+        risk_label = "MITIGATED (full catalog is over budget; generated compact discovery passes)"
     print("## Description Budget")
     print(
         f"- Total description chars: {budget['total_chars']:,} across "
@@ -392,6 +399,16 @@ def print_markdown(catalog_root: Path, rows: list[dict[str, object]]) -> None:
         print("- Skills over per-entry cap:")
         for item in list(budget["over_per_entry_cap"])[:TOP_LONG_SKILLS_LIMIT]:
             print(f"  - `{item['skill']}`: {item['chars']} chars")
+    print()
+
+    print("## Compact Discovery")
+    print(f"- Path: `{compact_discovery['path']}`")
+    print(f"- Exists: {'yes' if compact_discovery['exists'] else 'no'}")
+    print(
+        f"- Size: {compact_discovery['chars']:,}/{compact_discovery['budget']:,} chars "
+        f"({'fits' if compact_discovery['fits_budget'] else 'OVER'})"
+    )
+    print(f"- Generated artifact: {'yes' if compact_discovery['generated'] else 'no'}")
     print()
 
     if benchmark_summary:
@@ -458,7 +475,13 @@ def main() -> int:
     else:
         print_markdown(catalog_root, rows)
 
-    return 1 if args.strict and warning_count else 0
+    compact_discovery = compact_discovery_summary(catalog_root)
+    compact_discovery_ok = bool(
+        compact_discovery["exists"]
+        and compact_discovery["fits_budget"]
+        and compact_discovery["generated"]
+    )
+    return 1 if args.strict and (warning_count or not compact_discovery_ok) else 0
 
 
 if __name__ == "__main__":

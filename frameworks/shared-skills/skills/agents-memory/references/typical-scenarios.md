@@ -93,10 +93,10 @@ End-to-end walkthroughs for the situations that bring people to this skill. Each
 **Which layer**:
 
 - **Shared, committed** → `AGENTS.md` at repo root (run `codex` `/init` to scaffold). Nested `AGENTS.md` in packages that need local context.
-- **Personal, cross-repo** → `~/.codex/AGENTS.md`.
-- **Local-only override** → `AGENTS.override.md` (uncommitted).
+- **Personal behavioral instructions, cross-repo** → `~/.codex/AGENTS.md`.
+- **Higher-precedence directory guidance** → `AGENTS.override.md`; it may be developer-local or checked in.
 - **Operational config** (model, reasoning effort, sandbox/approval, MCP servers, multi-agent limits) → `config.toml`, **not** `AGENTS.md`. See [loading-and-layers.md](loading-and-layers.md) for the split.
-- **Accumulated recall** → the Codex `memories` layer (opt-in; off by default in EEA/UK/CH) — keep must-always rules in `AGENTS.md`, not here.
+- **Accumulated recall** → the Codex `memories` layer (opt-in; off by default) — keep must-always rules in `AGENTS.md`, not here.
 
 **What to write**: the same essentials checklist as Claude Code (layout, exact build/test/lint commands, conventions, prohibitions, verification). Skip Claude-only mechanisms (`.claude/rules/`, `claudeMdExcludes`, hooks) — they do nothing in Codex.
 
@@ -132,7 +132,7 @@ End-to-end walkthroughs for the situations that bring people to this skill. Each
 1. **No interactive escapes.** Remove any rule that says "ask the user before X" as the only safeguard — in headless mode there is nobody to ask. Convert those to a hard default or a CI gate.
 2. **Exact, non-interactive commands.** Flags that prompt (`-i`, interactive rebases, `git add -i`) will hang. Document the non-interactive equivalents.
 3. **Verification must be machine-checkable.** "Confirm it looks right" is useless headless; specify the command whose exit code decides pass/fail.
-4. **Auto-memory may differ.** **[Claude Code]** machine-local auto-memory and **[Codex]** the `memories` layer may be absent or disabled in CI (Codex memories are off by default in EEA/UK/CH and may be unset on a fresh runner). Do not rely on accumulated recall existing — put anything load-bearing in committed `AGENTS.md`.
+4. **Auto-memory may differ.** **[Claude Code]** machine-local auto-memory and **[Codex]** the `memories` layer may be absent or disabled in CI (Codex memories are off by default and may be unset on a fresh runner). Do not rely on accumulated recall existing — put anything load-bearing in committed `AGENTS.md`.
 5. **Interactively-authenticated MCP servers may be missing.** Tools that need a browser login can be absent in headless runs; gate on their presence rather than assuming them.
 
 **Verify**: dry-run the exact CI invocation locally with no TTY (e.g. pipe from `/dev/null`); confirm it completes without waiting on input and that every verification step returns a real exit code.

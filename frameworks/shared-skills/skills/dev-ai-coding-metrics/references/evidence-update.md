@@ -1,6 +1,12 @@
-# What Changed Since 2025 (as of 2026-07)
+# What Changed Since 2025 (as of 2026-08)
 
-_Verified 2026-07-11. Synthesizes METR 2025 RCT, METR Feb 2026 update, METR May 2026 survey, DORA 2025 AI report, DORA 2026 ROI report, DX Core 4, and Faros 2026 telemetry._
+_Verified 2026-08-21. Synthesizes METR 2025 RCT, METR Feb 2026 update, METR May 2026 survey, DORA 2025 AI report, DORA 2026 ROI report, DX Core 4, Faros 2026 telemetry, and SlopCodeBench v1._
+
+## SlopCodeBench v1 (extension robustness)
+
+The March 2026 preprint evaluates coding agents across evolving specifications while carrying forward each agent's own workspace and starting each checkpoint without the prior conversation context. Its central measurement implication is that snapshot pass rates can miss degrading extensibility; trajectory-level structural erosion and verbosity reveal a different dimension of performance. Its prompt intervention improved initial quality but did not halt degradation, so planning or quality prompts are not substitutes for longitudinal evaluation. Primary URL: https://arxiv.org/abs/2603.24755v1
+
+Use the paper to justify checkpoint-level extension-robustness, quality-slope, cost, and review-burden measurement. Do not use its model averages as organizational targets or infer that the quality signals cause correctness or ROI outcomes. The reported experiments are Python-only, and the article is a preprint.
 
 ## METR RCT (the 2025 baseline)
 

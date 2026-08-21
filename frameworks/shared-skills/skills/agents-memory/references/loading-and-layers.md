@@ -20,7 +20,7 @@
 - `AGENTS.md` is the primary project-memory file for Codex.
 - Keep one concise file per directory that needs local context instead of relying on undocumented import chains.
 - Codex also supports personal/global memory via `~/.codex/AGENTS.md`.
-- Use `AGENTS.override.md` only for local developer overrides that should not be committed as the shared contract.
+- At each global or project directory level, `AGENTS.override.md` takes precedence over `AGENTS.md`; Codex loads at most one instruction file per directory. An override can be developer-local or checked-in scoped guidance—its defining behavior is precedence, not Git status.
 - Advanced Codex config can change discovery behavior with `project_doc_fallback_filenames` and `project_doc_max_bytes`.
 - `codex` exposes an `/init` command that generates a starter `AGENTS.md` project-instructions scaffold — the Codex analog of bootstrapping `CLAUDE.md`.
 
@@ -36,7 +36,7 @@ Codex now ships an accumulated-recall layer (the Codex analog of Claude Code aut
   ```
 
 - **Storage**: under the Codex home directory, default `~/.codex/memories/` — machine-local, not committed.
-- **Default-off jurisdictions**: memories are **off by default in the EEA, the UK, and Switzerland** until explicitly enabled. Do not assume a teammate in those regions has the same recall layer you do.
+- **Default**: local Codex memories are **off by default** until explicitly enabled. Do not assume a teammate or fresh runner has the same recall layer you do.
 - **Key sub-settings** (all under the `memories` table):
 
   | Key | Effect |
@@ -57,7 +57,7 @@ If the task is specifically about OpenClaw runtime setup, `openclaw.json`, works
 
 If the task is about session transcripts, resume flows, rewind, or cross-worktree recovery, use [../../ai-coding-agents-sessions/SKILL.md](../../ai-coding-agents-sessions/SKILL.md). Those are runtime session concerns, not durable project memory.
 
-**Layering**: `~/.codex/config.toml` (personal) → `.codex/config.toml` (repo) → CLI overrides.
+**Layering, highest precedence first**: CLI flags and `--config`; trusted project `.codex/config.toml` files from root to current directory (closest wins); a selected profile; user `~/.codex/config.toml`; system config; built-in defaults. Managed `requirements.toml` can constrain security-sensitive choices across those layers. Untrusted projects do not load project-scoped config, hooks, or rules. Route detailed precedence questions to `ai-coding-agents-settings-policy` so this memory skill does not duplicate the full policy model.
 
 | What goes where | config.toml | AGENTS.md |
 |----------------|-------------|-----------|
@@ -70,5 +70,22 @@ If the task is about session transcripts, resume flows, rewind, or cross-worktre
 | Engineering conventions, PR standards | | ✓ |
 | Constraints and prohibitions | | ✓ |
 | Verification methods | | ✓ |
+
+### Approval review is configuration, not project memory
+
+Keep approval mechanics out of `AGENTS.md`. Put them in `config.toml`, a trusted project-scoped `.codex/config.toml`, an executable policy rule, or a temporary CLI/session override. `AGENTS.md` may state the team's workflow boundary (for example, "ask before deploying production"), but it does not grant filesystem or network authority and should not be used as an approval allowlist.
+
+For automatic review without removing the workspace sandbox, use:
+
+```toml
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+approvals_reviewer = "auto_review"
+```
+
+- `approvals_reviewer = "auto_review"` routes eligible approval prompts to the reviewer subagent; it does not widen the sandbox or change actions that are already allowed inside it.
+- Keep `approval_policy = "on-request"` when prompts may still be needed. `approval_policy = "never"` suppresses prompts but does not grant missing filesystem or network capabilities.
+- Use `/permissions` to adjust the active permission profile during a session. If automatic review denies an action that the user has checked and intends to allow, `/approve` retries one recent denial.
+- Persist narrow command-prefix rules only for stable, reviewed commands. A rule allowing a mutable repository wrapper script also trusts future changes to that script, so prefer the smallest useful subcommand prefix and keep destructive primitives denied.
 
 Note: `config.toml` is shared across Codex CLI, IDE extension, and Codex app.

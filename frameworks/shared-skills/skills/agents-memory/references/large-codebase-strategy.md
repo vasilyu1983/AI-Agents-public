@@ -220,8 +220,8 @@ Codex should use a directory-based `AGENTS.md` hierarchy:
 - Keep shared repo rules in the root `AGENTS.md`
 - Add package-level `AGENTS.md` files only where local conventions matter
 - Run Codex from the relevant subtree or keep the cwd inside that package so the directory chain applies naturally
-- Keep personal defaults in `~/.codex/AGENTS.md`
-- Use `AGENTS.override.md` only for developer-local overrides, not as the shared team contract
+- Keep personal behavioral instructions in `~/.codex/AGENTS.md`; keep runtime defaults in `~/.codex/config.toml`
+- Use `AGENTS.override.md` when one directory needs higher-precedence guidance. It may be local or checked in; its defining behavior is that it wins over `AGENTS.md` at the same level
 
 ### Manual Context Management
 

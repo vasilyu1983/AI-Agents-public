@@ -2,8 +2,8 @@
 name: foundations-information-theory
 description: Information-theory primitives for AI systems, entropy, mutual information, KL, compression, channel limits, MDL, bottlenecks, and signal quality. Use when quantifying information.
 compatibility: Portable core only.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-14
 ---
 
 # Information Theory Foundations
@@ -17,6 +17,9 @@ last_validated: 2026-07-11
 - Feature selection by mutual information with target
 - Retrieval re-ranking, MMR, or diversity-aware candidate selection
 - Prompt-quality diagnosis via output-conditional entropy / Fano bound
+- Hallucination / abstention gating via semantic entropy over meaning-clustered samples (#1)
+- RL post-training diagnostics — policy-entropy collapse is the dominant failure mode in RLVR (#1)
+- Agent-to-agent message budgets and KV-cache handoff sizing, framed as a bottleneck/rate problem (#6, #8)
 
 **Skip and use simpler alternatives when:**
 - Question is about *causation*, not *information* — use foundations-causal-inference
@@ -52,7 +55,7 @@ last_validated: 2026-07-11
 
 | # | Primitive | Core Formula | Use When |
 |---|-----------|-------------|----------|
-| 1 | [Shannon Entropy](#1-shannon-entropy) | H(X) = −Σ p log p | Measuring uncertainty, budgeting bits |
+| 1 | [Shannon Entropy](#1-shannon-entropy) | H(X) = −Σ p log p | Measuring uncertainty, budgeting bits. Two high-value LLM specializations: *semantic* entropy — cluster sampled generations by meaning (NLI equivalence), take entropy over clusters, not tokens (Farquhar et al., *Nature* 630, 2024) — for hallucination detection; and *policy* entropy for RLVR collapse diagnosis. |
 | 2 | [Mutual Information](#2-mutual-information) | I(X;Y) = H(X) − H(X\|Y) | Scoring relevance, detecting dependence |
 | 3 | [KL Divergence](#3-kl-divergence) | D_KL(P‖Q) = Σ p log(p/q) | Comparing distributions, training objectives |
 | 4 | [Cross-Entropy](#4-cross-entropy) | H(P,Q) = −Σ p log q | Loss functions, perplexity, model evaluation |
@@ -113,9 +116,12 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 | Applying the Huffman/LZ code directly without checking entropy rate | Huffman codes are optimal only for known i.i.d. distributions; they are suboptimal for correlated sources where the entropy rate H(X_n | X_{n-1},...,X_1) < H(X_1) | Model source correlations first (estimate entropy rate); apply arithmetic coding or LZ-family codes that exploit sequential dependencies (#11) |
 | Assuming the information bottleneck β controls compression monotonically | The IB curve is non-convex for finite-sample or discrete cases; solutions can jump discontinuously as β changes | Sweep β densely and validate the I(T;X)/I(T;Y) tradeoff curve empirically; confirm phase transitions match the task (#8) |
 | Using InfoNCE/NWJ as an unconstrained MI estimator in contrastive learning | InfoNCE is bounded above by log(K) where K = number of negative samples; severely underestimates MI when true MI >> log(K), which is common in SSL pretraining; gradients become misleading at high MI regimes | Apply f-DIME estimators (Letizia, Novello & Tonello, NeurIPS 2024; code: github.com/tonellolab/fDIME) which use derangement architecture to remove the upper-bound artefact; or use the Abdelaleem-Martini-Nemenman confidence-interval protocol (#2) to detect estimator failure before trusting MI values |
-| Claiming "LLMs are optimal compressors" without a Kolmogorov benchmark | Current models (GPT-4o, Llama-3.1-405B) fail the KoLMogorov Test — producing the *shortest* program for a data sequence is distinct from next-token prediction; synthetic gains do not transfer to real sequences | Use KoLMogorov Test (ICLR 2025) as the benchmark for compression-as-intelligence claims; treat cross-entropy/BPB as a proxy, not a proof (#11) |
+| Claiming "LLMs are optimal compressors" without a Kolmogorov benchmark | Current models (GPT-4o, Llama-3.1-405B) fail the KoLMogorov Test — producing the *shortest* program for a data sequence is distinct from next-token prediction; synthetic gains do not transfer to real sequences | Split the claim in two, because the evidence points opposite ways. *Average-case* compression does track capability: BPC on a held-out corpus correlates near-linearly with benchmark scores, Pearson ≈ −0.95 across 30 models and 12 benchmarks (Huang et al., COLM 2024, arXiv:2404.09937) — which makes BPC a cheap, contamination-resistant evaluation proxy. *Worst-case* compression does not: producing the shortest program for a sequence is a different problem, and frontier models score poorly on the KoLMogorov Test (ICLR 2025), with synthetic gains failing to transfer to real sequences. Use BPC to rank models; do not upgrade that correlation into a Kolmogorov-optimality claim (#11) |
 | Using classical R(D) to bound generative model compression | Classical R(D) does not account for perceptual quality; the RDP tradeoff proves that matching the source *distribution* (not just minimising distortion) requires additional rate | Apply the three-way RDP function; use KL, TV, or Wasserstein as the perception constraint divergence measure (#3, #6) |
 | Ignoring R(D) theory when choosing LLM weight quantization scheme | Scalar quantization is suboptimal; block-coding (vector quantization) yields strictly lower distortion at the same bitrate per classical R(D) results — Radio (ICML 2025) directly applies R(D)-optimal stochastic quantization to LLM weights and outperforms standard PTQ | Frame LLM quantization as a rate-distortion optimization; prefer vector/lattice quantizers over scalar; use Blahut-Arimoto to find the optimal bit allocation per layer (#6, #7) |
+| Using token-level entropy or sequence log-prob to detect hallucination | Token entropy is high whenever *phrasing* is free, which is almost always; the same fact stated five ways scores as maximum uncertainty. It measures lexical, not epistemic, uncertainty, so it fires on paraphrase and misses confident falsehoods | Compute entropy over meaning-equivalence clusters, not tokens: sample N generations, cluster by bidirectional NLI entailment, take entropy of the cluster distribution (Farquhar et al., *Nature* 630:625–630, 2024). For single-generation latency budgets, semantic entropy probes read the estimate off hidden states (Kossen et al., arXiv:2406.15927). Semantic entropy detects confabulation — arbitrary, sampling-unstable answers — not consistently-wrong beliefs, which are invisible to any sampling-based estimator (#1) |
+| Treating falling policy entropy during RL post-training as convergence | In RLVR the empirical fit R = −a·e^H + b holds: downstream reward is *bought* with policy entropy, so a collapsed-entropy policy has spent its exploration budget and has hit a ceiling, not found an optimum. Over 95% of the entropy drop and most of the gain occur early, then a plateau (Cui et al., arXiv:2505.22617) | Log policy entropy as a first-class training metric and fit the R/H curve to predict the ceiling before spending the compute. Collapse is driven by tokens with high covariance between log-prob and advantage — restrict updates on those via Clip-Cov or KL-Cov rather than adding a blanket entropy bonus, which trades away the signal indiscriminately (#1) |
+| Sizing agent-to-agent messages by token count instead of task-relevant information | Multi-agent handoffs are a rate-constrained channel; a message budget set by token count optimizes the wrong quantity and drops task-critical bits while preserving fluent filler | Frame the handoff as an IB problem — minimize I(X;M) subject to I(M;task) — and quantize the message rather than truncating it. Farooq & Iqbal (IEEE ICRA 2026, arXiv:2602.02035) combine IB with vector quantization and a gating mechanism for 71.4% bandwidth reduction; the same framing applies to KV-cache handoffs and summary passing between LLM agents (#6, #8) |
 | Applying standard IB directly to multimodal (image-text) representations | Standard IB's randomness and hyperparameter dependency cause failure in multimodal settings; the IB curve is not interpretable for CLIP-type architectures | Use NIBT (ICLR 2025, code: github.com/LMBTough/NIB) which satisfies attribution axioms and eliminates these pathologies (#8) |
 
 ---
@@ -293,7 +299,9 @@ _(No cross-links at this time. Consumer skills — ai-prompt-engineering, ai-con
 
 - All formulas and theorems are sourced to Cover & Thomas (2006) 2nd ed. and MacKay (2003) as primary references; verify equation numbers and chapter numbers before using in citations — do not assume a plausible-sounding chapter attribution is correct. A 2026-07-11 audit found and corrected two real instances of this failure mode in this skill's own files: `primitives-overview.md` had misattributed MacKay Ch.28 ("Model Comparison and Occam's Razor") to information bottleneck when it actually grounds MDL (#7), and `09-fano-inequality.md` cited MacKay Ch.8 for Fano's inequality when MacKay's book never derives Fano's inequality at all. Treat every textbook chapter citation in this skill (and any you add) as needing independent verification, not just author/year/title.
 - Numeric results (compression ratios, capacity values) are task- and channel-specific; do not transfer benchmarks across domains without re-deriving.
-- The information bottleneck claims (IB = DNN compression) remain contested as of July 2026; see Saxe et al. (2018) rebuttal before asserting IB explains deep learning generalization, and treat the 2025/2026 reconciliation attempts (NIBT, CIBR, GIB) as partial and estimator-dependent, not a settled resolution — GIB in particular is an unreviewed preprint.
+- Semantic entropy (Farquhar et al., *Nature* 630:625–630, 2024) is peer-reviewed and reproducible, but its scope is narrower than "hallucination detection" implies: it flags *confabulations* — answers that vary arbitrarily across samples — and is blind to errors the model states consistently. Do not present it as a general factuality check.
+- The RLVR entropy law R = −a·e^H + b (Cui et al., arXiv:2505.22617) is an empirical fit across the model families tested, not a theorem. The qualitative claim (performance is traded from entropy; collapse caps gains) replicates widely; the fitted constants a and b do not transfer across setups — refit rather than reusing published values.
+- The information bottleneck claims (IB = DNN compression) remain contested as of August 2026; see Saxe et al. (2018) rebuttal before asserting IB explains deep learning generalization, and treat the 2025/2026 reconciliation attempts (NIBT, CIBR, GIB) as partial and estimator-dependent, not a settled resolution — GIB in particular is an unreviewed preprint.
 - If web access is unavailable, mark runtime-specific MI estimation results as unverified.
 - Source links and verified dates in each per-primitive file are the canonical evidence tier.
 

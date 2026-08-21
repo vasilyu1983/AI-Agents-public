@@ -49,6 +49,9 @@ Use this reference before making production claims about replication, ordering, 
 | CRDT for money balance | Invariants do not commute under arbitrary merge | Coordinate the invariant with consensus/transaction |
 | Wall clock for causality | Clock skew and concurrency break event ordering | Use logical/vector clocks or session guarantees |
 | Majority quorum by count only | Zones, racks, or regions may fail together | Model failure domains and reconfiguration |
+| Trusting the vendor's recommended configuration for durability | Recommended defaults are tuned for benchmark performance, not for surviving correlated crashes. Jepsen's MariaDB Galera Cluster 12.1.2 report (2026-03) found the documented recommended setting acknowledged commits before flushing, silently losing committed transactions on coordinated node crashes | Read what each durability flag actually does at the storage layer; test the configuration you will actually deploy, under correlated (not just single-node) crashes |
+| Verified spec, unverified binary | A TLA+ model or safety proof constrains the specification; production runs the implementation. The spec-to-code gap is where most real consensus bugs live | Close the gap explicitly: conformance testing against the spec, deterministic simulation over the real binary, or an external black-box consistency report — see the evidence hierarchy in `formal-theory-map.md` |
+| Recovery load planned as steady-state load | Reconnect, lease-renewal, and cache-refill storms after an outage can exceed normal peak by an order of magnitude and cause a second, longer outage — the AWS us-east-1 October 2025 cascade is the reference case | Capacity-plan and load-test the *recovery* path separately; add backoff, jitter, and admission control to reconnection and lease-renewal paths, not just to request paths |
 | Dual-write without outbox | Writing to the database and publishing to the broker in two separate operations creates a split-brain window: a crash between the two writes leaves one durable and the other lost — breaking at-least-once delivery | Use the transactional outbox pattern: write the mutation and the outbox row in the same DB transaction; relay publishes from the outbox via CDC or polling; consumers still implement idempotent receivers (#7) |
 
 ## Known Traps
@@ -58,7 +61,9 @@ Use this reference before making production claims about replication, ordering, 
 - Read trap: reading from a follower can violate a stronger advertised model.
 - Retry trap: retries after timeout may duplicate writes even when the first write succeeded.
 - Clock trap: synchronized clocks can bound uncertainty but do not remove causality requirements.
-- CRDT tombstone trap: set CRDTs may grow metadata unless compaction is designed.
+- CRDT tombstone trap: set CRDTs may grow metadata unless compaction is designed. Harder still under end-to-end encryption, where the server cannot inspect what it is collecting.
+- Control-plane trap: the automation that manages replicas, DNS, leases, and membership is itself a distributed system, and is usually less tested than the data plane it manages. Most recent large-scale outages originate there.
+- Ordering-fairness trap: consensus fixes *an* order, not a fair one. Where order position carries value, agreement and liveness can both hold while the ordering is systematically biased.
 
 ## Compact Review Sequence
 

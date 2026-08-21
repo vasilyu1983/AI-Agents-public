@@ -237,13 +237,44 @@ class DesignSystemGenerator:
                 "mood": best_typography.get("Mood/Style Keywords", reasoning.get("typography_mood", "")),
                 "best_for": best_typography.get("Best For", ""),
                 "google_fonts_url": best_typography.get("Google Fonts URL", ""),
-                "css_import": best_typography.get("CSS Import", "")
+                "css_import": best_typography.get("CSS Import", ""),
+                "load_mismatch": _font_load_mismatch(best_typography),
             },
             "key_effects": combined_effects,
             "anti_patterns": reasoning.get("anti_patterns", ""),
             "decision_rules": reasoning.get("decision_rules", {}),
             "severity": reasoning.get("severity", "MEDIUM")
         }
+
+
+def _font_load_mismatch(typography_row: dict) -> str:
+    """Return a warning when the CSS import does not load the named fonts.
+
+    Guards against silent font substitution: a row that names one family
+    (e.g. Satoshi) while its import loads another (e.g. DM Sans) would
+    otherwise ship a design system whose stated direction never renders.
+    """
+    css_import = typography_row.get("CSS Import", "").lower()
+    if not css_import:
+        return ""
+    missing = []
+    for col in ("Heading Font", "Body Font"):
+        name = typography_row.get(col, "").strip()
+        if not name:
+            continue
+        slug_forms = {
+            name.lower().replace(" ", "+"),
+            name.lower().replace(" ", "-"),
+            name.lower().replace(" ", "%20"),
+            name.lower(),
+        }
+        if not any(s in css_import for s in slug_forms):
+            missing.append(name)
+    if missing:
+        return (f"WARNING: CSS import does not load {', '.join(missing)} — "
+                "the import resolves a substitute family. Fix the data row or "
+                "self-host the named font before shipping.")
+    return ""
 
 
 # ============ OUTPUT FORMATTERS ============
@@ -387,6 +418,9 @@ def format_ascii_box(design_system: dict) -> str:
         lines.append(f"│     Google Fonts: {typography.get('google_fonts_url', '')}".ljust(BOX_WIDTH) + "│")
     if typography.get("css_import"):
         lines.append(f"│     CSS Import: {typography.get('css_import', '')[:70]}...".ljust(BOX_WIDTH) + "│")
+    if typography.get("load_mismatch"):
+        for line in wrap_text(typography["load_mismatch"], "│     ", BOX_WIDTH):
+            lines.append(line.ljust(BOX_WIDTH) + "│")
 
     # Key Effects section
     if effects:
@@ -499,6 +533,8 @@ def format_markdown(design_system: dict) -> str:
         lines.append(f"```css")
         lines.append(f"{typography.get('css_import', '')}")
         lines.append(f"```")
+    if typography.get("load_mismatch"):
+        lines.append(f"- **{typography['load_mismatch']}**")
     lines.append("")
 
     # Key Effects section
@@ -528,8 +564,170 @@ def format_markdown(design_system: dict) -> str:
     return "\n".join(lines)
 
 
+def _yaml_str(value: str) -> str:
+    """Quote a YAML scalar string, escaping embedded double quotes."""
+    return '"' + str(value).replace('\\', '\\\\').replace('"', '\\"') + '"'
+
+
+def format_designmd(design_system: dict) -> str:
+    """Format design system as a DESIGN.md file (Google Labs open format,
+    Apache-2.0, github.com/google-labs-code/design.md).
+
+    Emits YAML front matter (name, colors, typography, spacing/rounded when
+    derivable) followed by the canonical markdown section order: Overview,
+    Colors, Typography, Layout, Elevation & Depth, Shapes, Components,
+    Do's and Don'ts. Fields the database cannot populate (e.g. `rounded`,
+    per-token `spacing` scale) are omitted rather than invented, and are
+    declared via the spec's `omitted` front-matter key.
+    """
+    project = design_system.get("project_name", "PROJECT")
+    pattern = design_system.get("pattern", {})
+    style = design_system.get("style", {})
+    colors = design_system.get("colors", {})
+    typography = design_system.get("typography", {})
+    effects = design_system.get("key_effects", "")
+    anti_patterns = design_system.get("anti_patterns", "")
+
+    # ---- Front matter: colors ----
+    color_tokens = [
+        ("primary", colors.get("primary")),
+        ("on-primary", colors.get("on_primary")),
+        ("secondary", colors.get("secondary")),
+        ("accent", colors.get("accent")),
+        ("background", colors.get("background")),
+        ("foreground", colors.get("foreground")),
+        ("muted", colors.get("muted")),
+        ("border", colors.get("border")),
+        ("destructive", colors.get("destructive")),
+        ("ring", colors.get("ring")),
+    ]
+    color_tokens = [(name, val) for name, val in color_tokens if val]
+
+    # ---- Front matter: typography ----
+    # The database gives one heading font + one body font (no full type
+    # scale), so only two typography tokens can be populated per spec.
+    heading_font = typography.get("heading", "")
+    body_font = typography.get("body", "")
+
+    omitted_sections = []
+    if not (typography.get("heading") or typography.get("body")):
+        omitted_sections.append("typography")
+    # The database has no spacing scale or corner-radius tokens.
+    omitted_sections.append("spacing")
+    omitted_sections.append("rounded")
+
+    lines = []
+    lines.append("---")
+    lines.append("version: alpha")
+    lines.append(f"name: {_yaml_str(project)}")
+    if style.get("name"):
+        desc = f"{style.get('name')} style" + (f" for {design_system.get('category')}" if design_system.get("category") else "")
+        lines.append(f"description: {_yaml_str(desc)}")
+
+    if color_tokens:
+        lines.append("colors:")
+        for name, val in color_tokens:
+            lines.append(f"  {name}: {_yaml_str(val)}")
+
+    if heading_font or body_font:
+        lines.append("typography:")
+        if heading_font:
+            lines.append("  headline:")
+            lines.append(f"    fontFamily: {_yaml_str(heading_font)}")
+        if body_font:
+            lines.append("  body:")
+            lines.append(f"    fontFamily: {_yaml_str(body_font)}")
+
+    if omitted_sections:
+        lines.append("omitted:")
+        for section in omitted_sections:
+            lines.append(f"  - {section}")
+
+    lines.append("---")
+    lines.append("")
+
+    # ---- Markdown body (canonical section order) ----
+    lines.append("## Overview")
+    lines.append("")
+    overview_bits = []
+    if style.get("name"):
+        overview_bits.append(f"This design system uses a **{style.get('name')}** style")
+        if design_system.get("category"):
+            overview_bits.append(f" for a {design_system.get('category')} product")
+        overview_bits.append(".")
+    lines.append("".join(overview_bits) if overview_bits else f"Design system for {project}.")
+    if style.get("keywords"):
+        lines.append("")
+        lines.append(f"**Keywords:** {style.get('keywords')}")
+    if style.get("best_for"):
+        lines.append("")
+        lines.append(f"**Best for:** {style.get('best_for')}")
+    lines.append("")
+
+    lines.append("## Colors")
+    lines.append("")
+    if color_tokens:
+        for name, val in color_tokens:
+            lines.append(f"- **{name.replace('-', ' ').title()} (`{val}`)**")
+        if colors.get("notes"):
+            lines.append("")
+            lines.append(f"*Notes: {colors.get('notes')}*")
+    else:
+        lines.append("No color palette available for this query.")
+    lines.append("")
+
+    lines.append("## Typography")
+    lines.append("")
+    if heading_font or body_font:
+        if heading_font:
+            lines.append(f"- **Heading:** {heading_font}")
+        if body_font:
+            lines.append(f"- **Body:** {body_font}")
+        if typography.get("mood"):
+            lines.append(f"- **Mood:** {typography.get('mood')}")
+        if typography.get("best_for"):
+            lines.append(f"- **Best for:** {typography.get('best_for')}")
+        if typography.get("load_mismatch"):
+            lines.append(f"- **{typography['load_mismatch']}**")
+    else:
+        lines.append("No typography pairing available for this query.")
+    lines.append("")
+
+    lines.append("## Components")
+    lines.append("")
+    if effects:
+        lines.append(f"**Key effects:** {effects}")
+        lines.append("")
+    lines.append("Implementation checklist:")
+    lines.append("")
+    checklist_items = [
+        "No emojis as icons (use SVG: Heroicons/Lucide)",
+        "cursor-pointer on all clickable elements",
+        "Hover states with smooth transitions (150-300ms)",
+        "Light mode: text contrast 4.5:1 minimum",
+        "Focus states visible for keyboard nav",
+        "prefers-reduced-motion respected",
+        "Responsive: 375px, 768px, 1024px, 1440px",
+    ]
+    for item in checklist_items:
+        lines.append(f"- [ ] {item}")
+    lines.append("")
+
+    lines.append("## Do's and Don'ts")
+    lines.append("")
+    if anti_patterns:
+        for anti in [a.strip() for a in anti_patterns.split("+")]:
+            if anti:
+                lines.append(f"- Don't {anti[0].lower() + anti[1:] if len(anti) > 1 else anti.lower()}")
+    if pattern.get("conversion"):
+        lines.append(f"- Do follow the {pattern.get('name', 'recommended')} pattern: {pattern.get('conversion')}")
+    lines.append("")
+
+    return "\n".join(lines)
+
+
 # ============ MAIN ENTRY POINT ============
-def generate_design_system(query: str, project_name: str = None, output_format: str = "ascii", 
+def generate_design_system(query: str, project_name: str = None, output_format: str = "ascii",
                            persist: bool = False, page: str = None, output_dir: str = None) -> str:
     """
     Main entry point for design system generation.
@@ -537,8 +735,9 @@ def generate_design_system(query: str, project_name: str = None, output_format: 
     Args:
         query: Search query (e.g., "SaaS dashboard", "e-commerce luxury")
         project_name: Optional project name for output header
-        output_format: "ascii" (default) or "markdown"
+        output_format: "ascii", "markdown", or "designmd" (Google Labs DESIGN.md format)
         persist: If True, save design system to design-system/ folder
+                 (with output_format="designmd", also writes DESIGN.md to output_dir)
         page: Optional page name for page-specific override file
         output_dir: Optional output directory (defaults to current working directory)
 
@@ -547,17 +746,47 @@ def generate_design_system(query: str, project_name: str = None, output_format: 
     """
     generator = DesignSystemGenerator()
     design_system = generator.generate(query, project_name)
-    
+
     # Persist to files if requested
     if persist:
         persist_design_system(design_system, page, output_dir, query)
+        if output_format == "designmd":
+            persist_designmd(design_system, output_dir)
 
     if output_format == "markdown":
         return format_markdown(design_system)
+    if output_format == "designmd":
+        return format_designmd(design_system)
     return format_ascii_box(design_system)
 
 
 # ============ PERSISTENCE FUNCTIONS ============
+def persist_designmd(design_system: dict, output_dir: str = None) -> dict:
+    """
+    Persist design system as DESIGN.md at the project root (not nested under
+    design-system/, per the Google Labs convention of coding agents
+    auto-reading DESIGN.md from the project root).
+
+    Args:
+        design_system: The generated design system dictionary
+        output_dir: Optional output directory (defaults to current working directory)
+
+    Returns:
+        dict with created file path and status
+    """
+    base_dir = Path(output_dir) if output_dir else Path.cwd()
+    base_dir.mkdir(parents=True, exist_ok=True)
+
+    designmd_file = base_dir / "DESIGN.md"
+    with open(designmd_file, 'w', encoding='utf-8') as f:
+        f.write(format_designmd(design_system))
+
+    return {
+        "status": "success",
+        "created_files": [str(designmd_file)]
+    }
+
+
 def persist_design_system(design_system: dict, page: str = None, output_dir: str = None, page_query: str = None) -> dict:
     """
     Persist design system to design-system/<project>/ folder using Master + Overrides pattern.
@@ -1140,7 +1369,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate Design System")
     parser.add_argument("query", help="Search query (e.g., 'SaaS dashboard')")
     parser.add_argument("--project-name", "-p", type=str, default=None, help="Project name")
-    parser.add_argument("--format", "-f", choices=["ascii", "markdown"], default="ascii", help="Output format")
+    parser.add_argument("--format", "-f", choices=["ascii", "markdown", "designmd"], default="ascii", help="Output format")
 
     args = parser.parse_args()
 

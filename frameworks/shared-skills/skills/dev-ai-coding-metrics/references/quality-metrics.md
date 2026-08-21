@@ -123,6 +123,17 @@ Track these weekly, graphed over time:
 - Code duplication rate increases > 5 percentage points: investigate
 - Mean function length increases > 20%: enforce lint rules
 
+### Repeated-Edit Trajectory Signals
+
+For edit-capable coding agents, supplement snapshot complexity metrics with an evolving-spec sequence of at least three checkpoints. Track:
+
+- **Extension robustness** — whether current behavior and all retained prior regression tests remain correct at each checkpoint.
+- **Structural erosion slope** — the direction and rate of change in structural erosion across ordered checkpoints.
+- **Verbosity slope** — the direction and rate of change in locally defined redundant-pattern and clone-line coverage across ordered checkpoints.
+- **Late-checkpoint burden** — operating cost plus reviewer or remediation effort in late/final checkpoints compared with earlier phases.
+
+Use the metric definitions and rule mapping in `software-clean-code-standard/references/code-complexity-metrics.md`. Treat slopes as advisory trend signals: they do not prove correctness, and SlopCodeBench v1 averages are neither universal gates nor organizational targets. Pair them with behavioral tests, regression retention, and human review.
+
 ### Complexity Reduction Strategies for AI Code
 
 1. **Constrain AI output** — Include maximum function length and complexity rules in AI context (CLAUDE.md, .cursorrules)
@@ -431,6 +442,13 @@ COMPLEXITY
   Mean cyclomatic complexity: {n}  [{↑/↓/→}]  Target: ≤ baseline + 10%
   Code duplication rate:      {n}% [{↑/↓/→}]  Target: ≤ baseline
   Mean function length:       {n}  [{↑/↓/→}]  Target: ≤ baseline + 15%
+  Structural erosion slope:   {n/checkpoint} [{↑/↓/→}]  Advisory; compare with local baseline
+  Verbosity slope:            {n/checkpoint} [{↑/↓/→}]  Advisory; compare with local baseline
+
+EXTENSION ROBUSTNESS (EDIT-CAPABLE AGENTS)
+  Checkpoints passing current + retained regression tests: {n}/{total}
+  Late-checkpoint operating cost:  {amount} [{↑/↓/→}]  Compare with early/mid phases
+  Late-checkpoint review/remediation effort: {minutes} [{↑/↓/→}]  Compare with early/mid phases
 
 TESTING
   Line coverage:              {n}% [{↑/↓/→}]  Target: > 80%

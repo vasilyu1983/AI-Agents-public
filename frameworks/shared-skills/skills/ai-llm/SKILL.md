@@ -1,6 +1,6 @@
 ---
 name: ai-llm
-description: "Guides the LLM lifecycle from strategy to deployment. Use when planning, comparing, fine-tuning, migrating, or operating LLM systems."
+description: "Guides the LLM lifecycle from strategy to deployment. Use when planning, comparing, fine-tuning, distilling, compressing, migrating, or operating LLM systems."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.2"
 last_validated: 2026-07-11
@@ -202,7 +202,7 @@ Use this protocol whenever the user asks about current providers, models, framew
 - **[Evaluation Patterns](references/eval-patterns.md)** - offline/online evaluation, lm-eval-harness standard, judge-model calibration, traceability
 - **[Cost Economics](references/cost-economics.md)** - TCO, budget guardrails, and ROI framing
 - **[Fine-Tuning Recipes](references/fine-tuning-recipes.md)** - SFT, LoRA, mid-training/annealing, over-training regime, and the 2026 post-training stack pointer
-- **[Advanced LLM Patterns](references/advanced-llm-patterns.md)** - RLHF loop, pretraining path, test-time compute scaling
+- **[Advanced LLM Patterns](references/advanced-llm-patterns.md)** - RLHF loop, pretraining path, test-time compute scaling, and model compression: quantization, pruning, and **knowledge distillation** (teacher soft labels -> student training -> validation). This skill owns the distillation *recipe*; `ai-architecture-advisor` owns the prior decision of whether to distil at all, and `ai-pretraining` explicitly delegates distillation here.
 - **[Structured Output Patterns](references/structured-output-patterns.md)** - provider-native schema enforcement and validation fallbacks
 - **[Multimodal Patterns](references/multimodal-patterns.md)** - vision/audio/document workflows with explicit freshness caveats
 - **[Anti-Patterns](references/anti-patterns.md)** - failure modes to detect early

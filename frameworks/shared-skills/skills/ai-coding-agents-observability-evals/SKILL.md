@@ -1,9 +1,9 @@
 ---
 name: ai-coding-agents-observability-evals
-description: "Designs observability and eval systems for coding agents. Use when implementing traces, replay, regression suites, tool-call grading, or cost accounting for agent runtimes."
+description: "Designs coding-agent observability and evals. Use when measuring traces, replay, checkpoint lineage, quality trajectories, tool grading, regression, or cost."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-21
 ---
 
 # AI Coding Agents Observability And Evals
@@ -39,7 +39,7 @@ release decision
 | Question | Read | Outcome |
 |----------|------|---------|
 | What should the trace and telemetry model include? | [`references/trace-and-telemetry-model.md`](references/trace-and-telemetry-model.md) | Durable trace schema, session correlation, event stages, and replay boundaries |
-| How should evals, regressions, and cost controls work? | [`references/evals-regression-and-cost-ops.md`](references/evals-regression-and-cost-ops.md) | Golden tasks, scorecards, failure grading, and cost-aware release gates |
+| How should evals, regressions, and cost controls work? | [`references/evals-regression-and-cost-ops.md`](references/evals-regression-and-cost-ops.md) | Golden tasks, iterative self-extension packs, trajectory scorecards, and cost-aware release gates |
 | How do I use the eval/trace substrate to improve the harness itself? | [`references/harness-self-evolution.md`](references/harness-self-evolution.md) | Closed-loop harness evolution: three observability pillars, falsifiable-contract edits, attribution |
 | How does OpenAI Codex combine rollout replay, SQLite state, doctor reports, and telemetry? | [`references/openai-codex-rollout-doctor-telemetry.md`](references/openai-codex-rollout-doctor-telemetry.md) | Replay artifacts, rebuildable state indexes, redacted diagnostics, W3C traces, token metrics |
 | How does Codex wire OTel exporters and what analytics events exist? | [`references/openai-codex-otel-config.md`](references/openai-codex-otel-config.md) | OtelSettings TOML schema, exporter selection, W3C tracestate, contrast with proprietary analytics events |
@@ -48,6 +48,7 @@ release decision
 
 - Design tracing and replay for a coding-agent CLI
 - Add regression evals for coding, review, or task-execution agents
+- Evaluate whether a coding agent preserves correctness and structural quality while extending its own workspace across evolving specifications
 - Grade tool calls, patch quality, verification behavior, or handoff quality
 - Build latency, token, and cost accounting for agent sessions
 - Review how incidents and bad runs should be debugged from stored traces
@@ -67,10 +68,10 @@ release decision
 1. **Define the trace spine.** Session, turn, tool call, approval, worker, and verification events should share one correlation model.
 2. **Store replay-safe artifacts.** Persist prompts, tool inputs, outputs, diffs, approvals, and synthesized summaries with enough structure to replay failures.
 3. **Separate product telemetry from eval telemetry.** Production traces describe what happened; eval runs describe whether it was acceptable.
-4. **Build golden task packs.** Keep a representative set of coding, review, debugging, and multi-agent tasks with stable scoring rubrics.
+4. **Build golden task packs.** Keep a representative set of coding, review, debugging, multi-agent, and iterative self-extension tasks with stable scoring rubrics.
 5. **Grade behavior, not just final output.** Score tool choice, verification discipline, retry loops, escalation quality, and cost efficiency.
 6. **Keep telemetry cardinality under control.** Stable prompt IDs, opaque hashes, and bounded error categories belong in event payloads; high-cardinality strings do not belong in metrics dimensions.
-7. **Attach release gates to deltas.** Compare candidate changes against a known baseline for quality, cost, latency, and failure mode drift.
+7. **Attach release gates to deltas.** Compare candidate changes against a known baseline for quality, cost, latency, failure-mode drift, and—when work carries across checkpoints—trajectory slope and late-checkpoint regressions.
 8. **Instrument incident triage.** A bad run should be trace-searchable by repo, user, session, tool, provider, worker, and error family.
 9. **Review regressions continuously.** Add new real failures back into the eval corpus so the system hardens over time.
 
@@ -81,6 +82,7 @@ release decision
 - Keep event ordering monotonic within a session even when log sinks or transports are asynchronous.
 - Store enough normalized state to debug a run without depending on transient UI rendering.
 - Score traces at multiple layers: final answer, tool behavior, and workflow correctness.
+- Preserve checkpoint and workspace lineage for iterative evals; a final snapshot cannot explain when extensibility was lost.
 - Track token and cost usage per turn and per subsystem, not only per session total.
 - Use eval results to block releases when quality or cost drift exceeds explicit thresholds.
 - Hash or redact user-identifying plugin or extension data before it becomes telemetry dimensions.
@@ -120,6 +122,7 @@ release decision
 - Eval suites scoring final answers while missing workflow regressions.
 - Cost spikes that cannot be attributed to provider, tool, or worker class.
 - Release gates based on synthetic tasks that miss real production failures.
+- Green tests at a final checkpoint masking steadily worsening extension robustness or structural quality.
 - Metrics or dashboards becoming unusable because free-form strings were emitted as dimensions.
 
 ## Minimal Viable Version
@@ -128,6 +131,7 @@ release decision
 - One replay-safe storage shape for prompts, tool calls, outputs, and approvals.
 - One searchable incident view over stored traces.
 - One golden-task eval pack with stable rubrics.
+- One carried-workspace trajectory with per-checkpoint correctness, quality, cost, and duration when the product performs repeated repository edits.
 - One low-cardinality telemetry policy for event fields versus metrics dimensions.
 - One explicit threshold for blocking regressions in quality or cost.
 
@@ -139,6 +143,7 @@ release decision
 - Eval grading for verification discipline, escalation quality, and retry behavior.
 - Continuous ingestion of real production failures into regression packs.
 - Rollout gates that compare candidate builds to known-good baselines.
+- Iterative self-extension packs that compare candidate and baseline trajectories, including degradation slope and late-checkpoint behavior rather than only final scores.
 - A closed-loop **harness self-evolution** layer that turns the eval corpus into an optimizer signal (see [`references/harness-self-evolution.md`](references/harness-self-evolution.md)) — advanced, not MVP.
 
 ## Known Traps
@@ -148,6 +153,7 @@ release decision
 - Aggregating eval, runtime, and cost signals into one scoreboard and making regressions impossible to attribute.
 - Tagging telemetry with raw prompts, provider payloads, or user data that should have been redacted or hashed before export.
 - Shipping evaluation suites that reward benchmark gains while ignoring recoverability, debuggability, and operational failure modes.
+- Treating an anti-slop or plan-first prompt as a durable quality control without measuring what happens after repeated extensions.
 
 ## Common Anti-Patterns
 
@@ -157,6 +163,14 @@ release decision
 - Measuring only session-total cost with no attribution.
 - Emitting raw provider, plugin, or prompt text into metrics tags.
 - Shipping on benchmark wins while ignoring incident-debuggability.
+
+## Iterative Self-Extension Trajectories
+
+Single-shot correctness and green tests do not prove extension robustness. Add a versioned iterative pack when the agent is expected to revisit the same codebase: each checkpoint supplies an evolved external specification and the agent continues from its own prior workspace. Record fresh checkpoint context separately from the carried code so the eval measures the consequences of earlier design choices rather than conversation recall.
+
+For every checkpoint, persist lineage plus the outcome vector: `trajectory_id`, `checkpoint_id`, `parent_checkpoint_id`, `spec_version`, workspace identity and content hash, strict/isolated/core/regression results, erosion, verbosity, cost, and duration. Compare candidate and baseline trajectories on both level and slope. A release review should surface worsening structural-quality slope or a late-checkpoint correctness regression even when the final aggregate score is green. Derive product-specific gates from a representative baseline and repeated runs; SlopCodeBench does not establish universal thresholds.
+
+SlopCodeBench's Python experiments found that anti-slop and plan-first prompts improved initial structural quality, but did not halt the degradation slope or consistently improve correctness. Prompt-only controls are therefore insufficient: keep the trajectory pack as the control surface and treat prompt changes as candidates to evaluate. Use [`../qa-agent-testing/SKILL.md`](../qa-agent-testing/SKILL.md) for the detailed carried-workspace benchmark protocol and [`../software-clean-code-standard/SKILL.md`](../software-clean-code-standard/SKILL.md) for structural-erosion and verbosity definitions; this skill owns their telemetry and release-gate integration, not their formulas.
 
 ## OTel gen_ai Semantic Conventions
 
@@ -223,6 +237,7 @@ These are the calls a strong operator makes differently from a team that just wi
 - [`references/harness-self-evolution.md`](references/harness-self-evolution.md) — Closed-loop harness evolution: three observability pillars, falsifiable-contract edits, evidence and recipe
 - [`references/openai-codex-rollout-doctor-telemetry.md`](references/openai-codex-rollout-doctor-telemetry.md) — OpenAI Codex rollout replay, SQLite mirror, doctor report schema, trace propagation, and metrics
 - [`references/openai-codex-otel-config.md`](references/openai-codex-otel-config.md) — OtelSettings TOML schema, OtelExporter variants, W3C tracestate members, analytics event contrast
+- [`references/recovery-trace-events.md`](references/recovery-trace-events.md) — Recovery-event taxonomy and trace requirements for interrupted or resumed agent work
 
 ### Data
 

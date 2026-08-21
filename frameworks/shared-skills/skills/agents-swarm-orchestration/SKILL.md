@@ -1,9 +1,9 @@
 ---
 name: agents-swarm-orchestration
-description: "Coordinates parallel subagents and multi-agent workflows. Use when splitting work into dependency-aware workers, verifier passes, or isolated research streams."
+description: "Coordinates multi-agent execution across subagents, teams, and workflows. Use when planning dependency-aware fan-out, verifier passes, runtime selection, or Loop Engineering."
 compatibility: Claude Code + Codex. Claude Code Agent tool (renamed from Task in v2.1.63) plus Codex subagents — runtime-specific dispatch.
-version: "1.4"
-last_validated: 2026-08-10
+version: "1.5"
+last_validated: 2026-08-15
 ---
 
 # Swarm Orchestration
@@ -11,6 +11,17 @@ last_validated: 2026-08-10
 Advanced execution layer for multi-worker runs after agent or team selection.
 
 Coordinate multiple workers without polluting the main thread. Use this skill after `agents-subagents` has already selected the right agent, member, team, or debate pattern. This skill is for choosing the orchestration surface, freezing task ownership before fan-out, and requiring structured outputs that the lead agent can validate and merge safely.
+
+## Terminology (Aug 2026)
+
+"Swarm" is community vocabulary — it appears nowhere in Anthropic documentation. Use the official primitive names when writing configs, prompts, or docs; keep "swarm" only as informal shorthand for the whole category.
+
+| Informal | Official primitive | Status (Aug 2026) |
+|----------|-------------------|-------------------|
+| "swarm of subagents" | **Subagents** | GA. Background by default since ~2026-07 (v2.1.195+); pin with `background` frontmatter. Can spawn their own subagents since June 2026 — chains capped at 5 levels |
+| "swarm with peer chat" | **Agent teams** | Experimental, env-gated `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. Behavior churns weekly — re-verify before relying |
+| "scripted swarm" | **Dynamic workflows** | Shipped 2026-05. JS in `.claude/workflows/`; ≤1000 agents/run, 16 concurrent. The repeatable-orchestration artifact |
+| "swarm across terminals" | **Cross-session messaging** | Aug 2026, macOS/Linux. Sessions message each other without a team — lighter than teams for passing findings |
 
 ## Quick Reference
 
@@ -23,11 +34,13 @@ Coordinate multiple workers without polluting the main thread. Use this skill af
 | One coordinator should retain user ownership | Manager / agents-as-tools | Lead keeps control of decisions and final answer |
 | Specialist should take over the conversation | Handoff | Ownership moves to the specialist agent |
 | Work of unknown extent — discovery *is* the task | Loop until K empty rounds | A fixed task list cannot be enumerated up front |
+| **Loop Engineering**: recurring discovery or evaluation | Loop-until-dry or budget-bounded loop | Define convergence, termination, and state checkpoints |
 | Many items, known stages, high intermediate volume | Scripted workflow (Claude Code) | Script holds control flow; lead context holds only the result |
 
 ## Navigation
 
 - [references/loop-orchestration.md](references/loop-orchestration.md) - Bounded iteration vs retry, loop-until-dry, convergence detection, termination predicates, dedup-target rule
+- [../ai-coding-agents-tasks/references/loop-and-graph-runtime-surfaces.md](../ai-coding-agents-tasks/references/loop-and-graph-runtime-surfaces.md) - Loop Engineering and Graph Engineering runtime comparison: task queues, cyclic graphs, and workflows
 - [references/scripted-workflows.md](references/scripted-workflows.md) - Script-held deterministic control flow (Claude Code Workflows): `agent`/`parallel`/`pipeline`, barrier-vs-pipeline, resume and caching
 - [references/platform-patterns.md](references/platform-patterns.md) - Platform guidance for Claude Code subagents, Codex subagents, Codex multi-agents, and OpenAI Agents SDK
 - [references/output-contracts.md](references/output-contracts.md) - Task schema, worker report schema, and merge contract
@@ -61,6 +74,7 @@ Coordinate multiple workers without polluting the main thread. Use this skill af
 | 3+ bounded tasks with clear ownership or dependencies | Tasks share the same file or unresolved interface |
 | Requirements, decisions, synthesis must stay in one lead context | Main blocker is product ambiguity, not execution bandwidth |
 | Exploration, tests, logs, or review can run in parallel | Workers would need the same context and make the same decisions |
+| Loop Engineering needs a bounded multi-pass orchestration contract | One pass or a simple queue already meets the goal |
 | Verification must be explicit, not implied by worker confidence | Work is small enough that orchestration cost exceeds execution cost |
 
 ## Relationship To Agents-Subagents
@@ -236,7 +250,7 @@ For CI-safe dispatch, batch fan-out, and blueprint-style deterministic-plus-agen
 
 **3 edit-capable worker cap** applies to agents sharing a branch — tracks context-window contention and super-linear merge cost. Worktree isolation relaxes this for read-only workers but does not remove coordination overhead.
 
-**Background mode (Claude Code):** Keep edit-capable workers foreground (permission prompts pass through). Fan out read-only scans and audits with `background: true` or `Ctrl+B`. Mix: edit wave foreground, read-only wave background.
+**Background mode (Claude Code):** Subagents run in the background **by default** since ~July 2026 (v2.1.195+) — background is no longer the opt-in. Pin edit-capable workers to the foreground (`background: false`) so permission prompts pass through; leave read-only scans and audits on the default. Mix: edit wave foreground, read-only wave background.
 
 Use exact model names from [references/platform-patterns.md](references/platform-patterns.md) — catalogs change faster than orchestration patterns.
 
@@ -289,7 +303,7 @@ Source: [Nav Toor — *30 Claude Code Sub-Agents I Actually Use*](https://x.com/
 | Loading all tools for every worker by default | Use progressive tool loading; expand toolset only on demand |
 | Letting workers decide merge outcomes | The lead owns validation, merge order, and final synthesis |
 | Running edit-capable workers in background without pre-approving permissions | Pre-approve needed permissions at launch or use foreground for edit workers |
-| Codex `max_depth` > 1 | Keep at 1; Claude Code and Codex subagents cannot recurse ([runtime-surfaces.md](../agents-subagents/references/runtime-surfaces.md)) |
+| Codex `max_depth` > 1 | Keep at 1; Codex subagents must not recurse ([runtime-surfaces.md](../agents-subagents/references/runtime-surfaces.md)). Claude Code subagents *can* nest since June 2026 (chain cap 5) — keep to 2 by policy, not by platform limit |
 | No per-worker budget | Set token/time/tool caps at launch; budget breach → mandatory stop + escalation, not a warning log |
 | No structured telemetry | Assign run id or span id; log inputs, outputs, status, tokens, duration to one place |
 | No checkpoints on long runs | Snapshot task state, reports, and decisions at wave boundaries |
@@ -336,7 +350,7 @@ Source: [Nav Toor — *30 Claude Code Sub-Agents I Actually Use*](https://x.com/
 
 ## Fact-Checking
 
-Originally inspired by the Codex swarm playbook (am.will / LLMJunky); updated against primary platform docs. Adds per-worker budgets, structured telemetry, checkpoint/resume, and a named-patterns vocabulary. Last freshness pass: July 2026.
+Originally inspired by the Codex swarm playbook (am.will / LLMJunky); updated against primary platform docs. Adds per-worker budgets, structured telemetry, checkpoint/resume, and a named-patterns vocabulary. Last freshness pass: August 2026 — vocabulary aligned to the official primitives (see §Terminology), and three stale claims corrected: subagents are background by default (~2026-07, v2.1.195+), subagents can nest since June 2026 (chain cap 5), and cross-session messaging (Aug 2026) is now a distinct surface from agent teams.
 
 Platform behavior, model names, permissions, and experimental flags change frequently — verify against official docs before final answers. Mark platform-specific guidance as unverified when web access is unavailable.
 
@@ -347,4 +361,3 @@ Known-stale-risk items re-checked in the July 2026 pass: the Agent Teams lead-mo
 Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

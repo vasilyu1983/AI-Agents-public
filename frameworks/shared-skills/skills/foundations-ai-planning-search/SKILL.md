@@ -2,8 +2,8 @@
 name: foundations-ai-planning-search
 description: Applies planning and search theory (A*, CSP, MCTS, STRIPS/PDDL, HTN) to agent design. Use when an LLM agent hallucinates action sequences or needs precondition/effect validity.
 compatibility: Portable core only.
-version: "1.3"
-last_validated: 2026-07-11
+version: "1.4"
+last_validated: 2026-08-14
 ---
 
 # AI Planning And Search Foundations
@@ -111,6 +111,8 @@ Each primitive is expanded in [`references/primitives-overview.md`](references/p
 | Minimax for real-world negotiation | Payoffs and strategies are not a finite game tree | Route incentive/equilibrium design to `foundations-game-theory` (#6 boundary) |
 | PDDL generated but never validated | Planner accepts malformed or semantically wrong domain | Run domain/problem validation and check plan preconditions/effects (#7) |
 | Replanning on every token/tool call | Planner-agent boundary is too fine-grained | Replan only on state drift, failed precondition, or new observation (#10) |
+| Treating a valid plan as a safe plan | Validity checks preconditions/effects; it does not check whether the goal or path is one that should be executed | Add a separate safety/permission gate over the action set — validity and safety are independent axes (#7, #10) |
+| Adding tree search to raise accuracy without a verifier | Search amplifies the scoring signal; an unreliable scorer just finds higher-confidence errors faster | Establish scorer/verifier reliability first, then spend rollout budget (#3, #6) |
 
 ---
 
@@ -124,6 +126,7 @@ Each primitive is expanded in [`references/primitives-overview.md`](references/p
 | Modeling soft preferences as hard CSP constraints | Search may become infeasible for avoidable reasons | Separate hard constraints from weighted objectives |
 | Using adversarial search for cooperative teams | Cooperative information structure has different primitives | Route to `foundations-team-theory` |
 | Treating partial observability as deterministic planning | Actions may need sensing and contingencies | Use belief-state or contingent planning (#9) |
+| Inferring plan safety from planning competence | Measured separately, the two do not track each other: a model can be near-perfect at producing executable plans and still route a large fraction of tasks through dangerous actions | Gate the action set independently of the planner's success metric (#10) |
 
 ---
 
@@ -237,6 +240,8 @@ Planning/search problem
 - Check [`data/sources.json`](data/sources.json) before citing algorithm properties or source claims.
 - Treat complexity and optimality guarantees as conditional on assumptions: nonnegative costs for UCS/A*, admissible/consistent heuristics for A*, finite branching for completeness, and correct action preconditions/effects for planners.
 - Do not invent benchmark numbers. If a planner or solver is recommended, report assumptions, problem size, and validation cases instead of generic speed claims.
+- LLM planning benchmark numbers move fast and are rarely comparable across papers: success rate depends on domain, instance size, prompt encoding, number of retries, and whether a verifier was in the loop. Cite the specific setup or state the result qualitatively; do not carry a headline percentage across domains.
+- Plan validity and plan safety are distinct measurements. A reported planning success rate says nothing about whether the produced plans are safe to execute, and the two have been observed to diverge sharply. Never substitute one metric for the other.
 
 ## Learnings Loop
 

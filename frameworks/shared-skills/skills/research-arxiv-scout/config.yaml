@@ -85,7 +85,7 @@ category_mappings:
     time_window_months: 60
 
   # Killer-Feature Mode: contributes hci_retention_paper signal to the bundle's
-  # Killer-Feature Convergence Protocol (owned by startup-review-mining).
+  # Killer-Feature Convergence Protocol (owned by research-review-mining).
   # See references/product-retention-categories.md for full taxonomy + scoring.
   killer-feature-retention:
     categories: ["cs.HC", "cs.CY", "cs.SI", "cs.IR"]

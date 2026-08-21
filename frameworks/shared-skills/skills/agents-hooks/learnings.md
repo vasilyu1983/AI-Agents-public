@@ -2,8 +2,10 @@
 
 ## Patterns That Work
 
+- [2026-08-14] Label telemetry by evidence level: Claude PostToolUse can record a confirmed skill load, while Codex resolver output is only a suggestion and must never be counted as a load.
 ## Mistakes to Avoid
 
+- [2026-08-14] Commit hooks must validate a staged-tree snapshot because working-tree checks can miss gitignored artifacts linked by tracked skill files.
 - [2026-07-11] Settings precedence was wrong: real order is managed > CLI flags > settings.local.json > settings.json > user settings.json — local beats project/user, not last (code.claude.com/docs/en/settings).
 ## Domain Knowledge
 

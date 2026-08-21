@@ -77,7 +77,7 @@ Every scenario maps to both runtimes; the dispatch primitive differs, the shape 
 | Dispatch a wave | Spawn multiple subagents in one turn (explicit under Opus 4.7) | "Spawn one agent per item, wait for all, summarize each" (explicit activation) |
 | Read-only scout | `Explore` built-in (Haiku) | `explorer` built-in, `sandbox_mode = "read-only"` |
 | Edit worker isolation | `isolation: worktree` | `sandbox_mode = "workspace-write"` + controlled sandbox |
-| Concurrency cap | No hard cap; depth always 1 | `max_threads: 6`, `max_depth: 1` (never raise depth) |
+| Concurrency cap | No hard cap; nesting allowed since June 2026 (chain cap 5) — hold depth at 1 by policy | `max_threads: 6`, `max_depth: 1` (never raise depth) |
 | Non-interactive (scenario 10) | `claude -p ... --output-format json` + `parallel` | Codex CLI batch + `spawn_agents_on_csv` (one worker per row) |
 | Cheap loop tier (scenario 11) | `CLAUDE_CODE_SUBAGENT_MODEL` | `[profiles.cheap-loop]` + `service_tier = "flex"` |
 

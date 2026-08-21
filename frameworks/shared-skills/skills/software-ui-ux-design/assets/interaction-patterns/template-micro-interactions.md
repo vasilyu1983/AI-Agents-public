@@ -607,7 +607,7 @@ AVOID: Ignoring reduced motion (forcing animations on users with motion sensitiv
 
 ## Resources
 
-- **Framer Motion**: [framer.com/motion](https://www.framer.com/motion/) (React animation library)
+- **Motion** (formerly Framer Motion): [motion.dev](https://motion.dev/) (hybrid animation library — React via `motion/react`, Vue, vanilla JS)
 - **GSAP**: [greensock.com/gsap](https://greensock.com/gsap/) (Professional animation platform)
 - **Lottie**: [airbnb.design/lottie](https://airbnb.design/lottie/) (JSON-based animations)
 - **Interaction Design Foundation**: [interaction-design.org](https://www.interaction-design.org/literature/article/micro-interactions-ux) (Micro-interactions UX)
@@ -618,5 +618,5 @@ AVOID: Ignoring reduced motion (forcing animations on users with motion sensitiv
 ## Related Templates
 
 - `template-state-machines.md` — Managing complex interaction states
-- `template-animation-library.md` — Using Framer Motion and GSAP
+- `template-animation-library.md` — Using Motion (formerly Framer Motion) and GSAP
 - [template-wcag-testing.md](../accessibility/template-wcag-testing.md) — Accessibility testing (includes reduced motion)

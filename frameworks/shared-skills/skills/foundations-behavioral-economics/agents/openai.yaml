@@ -1,4 +1,4 @@
 interface:
   display_name: "Behavioral Economics Foundations"
   short_description: "16 behavioral-economics primitives for ethical pricing, choice, and retention"
-  default_prompt: "Use $foundations-behavioral-economics when framing, defaults, habit formation, dark patterns, or nudge ethics are in play in pricing, choice design, or retention."
+  default_prompt: "Use $foundations-behavioral-economics when framing, defaults, habits, dark patterns, AI-agent nudging, or nudge ethics are in play in pricing, choice design, or retention."

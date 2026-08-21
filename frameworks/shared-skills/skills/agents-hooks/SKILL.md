@@ -3,14 +3,14 @@ name: agents-hooks
 description: Configures Claude Code hooks and Codex hooks.json/notify callbacks. Use when adding guardrails, preflight, audit trails, worktree automation, or budget enforcement.
 compatibility: Claude Code + Codex. Claude Code hooks plus Codex notifications — runtime-specific invocation in both.
 version: "1.5"
-last_validated: 2026-07-11
+last_validated: 2026-08-15
 ---
 
 # Claude Code Hooks + Codex Notifications
 
 Use this skill when hook behavior is the main concern: Claude lifecycle hooks, runtime preflight, guardrails, async verification, worktree lifecycle checks, subagent coordination, or Codex notification callbacks.
 
-Claude and Codex are not equivalent here. Claude has a broad, stable hook system (30 events, re-verified against official docs 2026-07-11). Codex has two surfaces: the long-stable notification surface (`notify` + `tui.notifications`), and a newer lifecycle-hooks system (`hooks.json` with events including `SessionStart`, `UserPromptSubmit`, `SubagentStop`, `Stop`, `PreCompact`/`PostCompact` — see [developers.openai.com/codex/hooks](https://developers.openai.com/codex/hooks)). The Codex hooks system is less mature than Claude's and has known firing-reliability gaps (e.g. [codex#17532](https://github.com/openai/codex/issues/17532): repo-local `.codex/config.toml` hooks may not fire in interactive sessions). Prefer `notify` for anything that must be dependable; treat Codex `hooks.json` as usable-but-verify and confirm it fires on your runtime before relying on it.
+Claude and Codex are not equivalent here. Claude has a broad, stable hook system (31 events, re-verified against official docs 2026-08-15). Codex has two surfaces: the long-stable notification surface (`notify` + `tui.notifications`), and a newer lifecycle-hooks system (`hooks.json` with events including `SessionStart`, `UserPromptSubmit`, `SubagentStop`, `Stop`, `PreCompact`/`PostCompact` — see [developers.openai.com/codex/hooks](https://developers.openai.com/codex/hooks)). The Codex hooks system is less mature than Claude's and has known firing-reliability gaps (e.g. [codex#17532](https://github.com/openai/codex/issues/17532): repo-local `.codex/config.toml` hooks may not fire in interactive sessions). Prefer `notify` for anything that must be dependable; treat Codex `hooks.json` as usable-but-verify and confirm it fires on your runtime before relying on it.
 
 ## Quick Reference
 
@@ -58,7 +58,7 @@ Route elsewhere when the main concern is:
 
 | Capability | Claude Code | Codex |
 |-----------|-------------|-------|
-| broad lifecycle hooks | yes (stable, 30 events) | yes via `hooks.json` (newer, fewer events, reliability gaps) |
+| broad lifecycle hooks | yes (stable, 31 events) | yes via `hooks.json` (newer, fewer events, reliability gaps) |
 | command or decision control | yes | yes (`PreToolUse` deny; `Stop`/`SubagentStop` block-and-continue) — `command` handlers only, verify per runtime |
 | payload mutation on supported events | yes | not documented |
 | external callback program | yes | `notify` (dependable) + `hooks.json` command hooks (verify-first) |
@@ -127,7 +127,7 @@ Hook request
   -> Document event, command, failure mode, and rollback path
 ```
 
-## Event Surface (Claude Code, verified 2026-07-11)
+## Event Surface (Claude Code, verified 2026-08-15)
 
 Source: [code.claude.com/docs/en/hooks](https://code.claude.com/docs/en/hooks)
 
@@ -184,6 +184,7 @@ Source: [code.claude.com/docs/en/hooks](https://code.claude.com/docs/en/hooks)
 | `ConfigChange` | config file changes during session | yes (except `policy_settings`) |
 | `InstructionsLoaded` | instruction files load (CLAUDE.md, includes, glob/path matches, on compact) | no (observability; exit code ignored) |
 | `CwdChanged` | working directory changes (`cd`) | no |
+| `DirectoryAdded` | a directory is added to the session workspace | no |
 | `FileChanged` | watched file changes on disk | no |
 | `WorktreeCreate` | worktree being created | yes (any non-zero exit) |
 | `WorktreeRemove` | worktree being removed | no |
@@ -336,7 +337,7 @@ Inject context into spawned subagents via `SubagentStart` and validate their out
 
 Third-party hooks worth knowing about, treat as community-sourced (verify provenance and review code before installing on production sessions):
 
-- **`monitoring/context-timeline`** ([aitmpl.com](https://www.aitmpl.com/component/hook/monitoring/context-timeline), via Daniel San, 2026-04-26 [thread](https://x.com/dani_avila7/status/2048486242321662189)) — installs with `npx claude-code-templates@latest --hook monitoring/context-timeline`. Shows a live timeline of the main agent's context window plus every subagent running in parallel, including the context each subagent returns when it finishes. Useful when debugging multi-worker fan-out under Opus 4.7 or after enabling `CLAUDE_CODE_FORK_SUBAGENT=1` (see `agents-subagents` §"Forking Parent Context Into Subagents"). Treat as observability, not policy enforcement — and audit the hook source before adding to a session that touches secrets.
+- **`monitoring/context-timeline`** ([aitmpl.com](https://www.aitmpl.com/component/hook/monitoring/context-timeline), via Daniel San, 2026-04-26 [thread](https://x.com/dani_avila7/status/2048486242321662189)) — installs with `npx claude-code-templates@latest --hook monitoring/context-timeline`. Shows a live timeline of the main agent's context window plus every subagent running in parallel, including the context each subagent returns when it finishes. Useful when debugging multi-worker fan-out or after enabling `CLAUDE_CODE_FORK_SUBAGENT=1` (see `agents-subagents` §"Forking Parent Context Into Subagents"). Treat as observability, not policy enforcement — and audit the hook source before adding to a session that touches secrets.
 
 ## Security Rules
 

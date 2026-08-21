@@ -30,7 +30,7 @@ Build a custom MCP server when no existing registry or vendor server fits your w
 
 ## Build Defaults
 
-- **Protocol baseline**: MCP specification `2025-11-25`
+- **Protocol baseline**: MCP specification `2025-11-25`. The current spec is **`2026-07-28`** (shipped 2026-07-28) — it is stateless (no `initialize` handshake, no `Mcp-Session-Id`), adds a mandatory `server/discover` RPC, and replaces server-initiated requests with the MRTR pattern. Build new servers against `2026-07-28`; the `2025-11-25` shapes below stay accurate for servers pinned to that version. See [`../SKILL.md`](../SKILL.md) for the migration summary.
 - **Production SDK lane**: stable **v1** docs
 - **TypeScript**: prefer `McpServer`
 - **Python**: prefer `FastMCP`
@@ -318,7 +318,7 @@ Add these only when the workflow needs them:
 - **Elicitation** for URL-based auth handoff or explicit human input (flat JSON Schema only). Note: the `2026-07-28-RC` folds elicitation, sampling, and roots into Multi Round-Trip Requests — do not hard-couple to today's elicitation shape if you expect to track the RC.
 - **Sampling** only if the server genuinely needs model access
 - **Logging** for auditability and incident response
-- **Progress / tasks** for long-running work. Async **Tasks** (poll via `tasks/get`, mid-flight input via `tasks/update`) are experimental in `2025-11-25` (and in python-sdk ≥ 1.28.0); they move to the `io.modelcontextprotocol/tasks` extension in the RC. Treat as experimental.
+- **Progress / tasks** for long-running work. Async **Tasks** (poll via `tasks/get`, mid-flight input via `tasks/update`) are experimental in `2025-11-25` (and in python-sdk ≥ 1.28.0); as of `2026-07-28` they have moved out of the core protocol into the official `io.modelcontextprotocol/tasks` extension, which polls via `tasks/get`, adds `tasks/update` for client-to-server input, and removes `tasks/list`.
 
 ## Tool Annotation Hints
 

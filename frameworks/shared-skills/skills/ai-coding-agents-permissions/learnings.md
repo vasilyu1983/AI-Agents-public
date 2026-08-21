@@ -7,6 +7,7 @@
 
 ## Mistakes to Avoid
 
+- [2026-08-14] Adding an HTTP MCP server with Codex may immediately start OAuth; when the intended resting state is logged out, follow registration with an explicit logout and verify only non-secret config keys.
 - [2026-07-11] A bare `Bash` (or `Bash(*)`) allow rule silently disables the auto-mode classifier for all shell commands — allow rules bypass classification unless `autoMode.classifyAllShell: true`. Blanket Bash allow + auto mode gives bypass-level exposure while looking safe.
 - [2026-07-11] Approving a raw `curl` with an `Authorization: Bearer <token>` header via "always allow" wrote the live token into `settings.local.json`, where it sat in plaintext (and in transcripts) for months. Secrets belong in `.env.local`; never persist an allow rule containing a credential — and rotate any token found this way.
 - [2026-07-11] With `defaultMode: "bypassPermissions"`, the entire allow/ask/deny structure is decorative — carefully curated `ask` lists for `rm -rf`/`git push --force`/`DROP` enforce nothing. Verify the mode before trusting any rule list during an audit.

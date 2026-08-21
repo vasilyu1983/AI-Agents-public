@@ -16,6 +16,7 @@ Guide to AI-assisted design tools: when to use them, quality control, and ethica
 - [Figma AI](#figma-ai)
 - [v0 (Vercel)](#v0-vercel)
 - [Midjourney / DALL-E for Design Assets](#midjourney-dall-e-for-design-assets)
+- [Asset Generation via MCP](#asset-generation-via-mcp-agent-native-verified-2026-08-13)
 - [Claude for UI Copy](#claude-for-ui-copy)
 - [AI Design Workflow Integration](#ai-design-workflow-integration)
 - [Phase Integration](#phase-integration)
@@ -204,6 +205,16 @@ CHECK:
 - [ ] Accessibility (alt text planned)
 - [ ] Resolution sufficient
 ```
+
+### Asset Generation via MCP (agent-native, verified 2026-08-13)
+
+When the design work happens inside an MCP-capable agent (Claude Code, Cursor, Windsurf), image/video generation can run in-session instead of via a separate tool. Any connected image-generation MCP works for the visual-anchor workflow; one worth naming for design specifically:
+
+| Server | Endpoint / setup | What it adds | Caveats |
+|--------|------------------|--------------|---------|
+| **Higgsfield MCP** | `mcp.higgsfield.ai/mcp` (OAuth, plan credits; `claude mcp add higgsfield <url>`) | 30+ image/video models behind one endpoint; up to 4K images, 15s video; **50+ named camera-motion presets** (dolly, orbit, crash zoom) that make "cinematic" a repeatable parameter instead of a fuzzy prompt; character-consistency training for recurring brand mascots | Commercial-use rights are gated by plan tier — verify before any client deliverable; no published tool schema (discover the tool list live); pricing is provider-controlled — check higgsfield.ai, don't hardcode |
+
+**Fit in the workflow**: these serve the "generated visual anchors" step of [ai-assisted-frontend-briefing.md](ai-assisted-frontend-briefing.md) — hero images, mood boards, and motion references generated to the brief's aspect ratio *before* code generation. Apply the same Quality Control checklist as for Midjourney/DALL-E output above.
 
 ### Claude for UI Copy
 

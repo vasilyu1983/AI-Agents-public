@@ -1,16 +1,16 @@
 ---
-description: Signal modality reference and vendor landscape for consumer-neuroscience instrumentation, May 2026. Includes modality decision tree, EU AI Act risk flags, and DIY surrogate-signal path.
-last_verified: 2026-05-17
+description: Signal modality reference and vendor landscape for consumer-neuroscience instrumentation, August 2026. Includes modality decision tree, EU AI Act risk flags, and DIY surrogate-signal path.
+last_verified: 2026-08-14
 status: stable
 ---
 
-# Instrumentation and Vendor Landscape (May 2026)
+# Instrumentation and Vendor Landscape (August 2026)
 
 ## Table of Contents
 
 - [Purpose](#purpose)
 - [Signal Modality Reference](#signal-modality-reference)
-- [Vendor Landscape (May 2026)](#vendor-landscape-may-2026)
+- [Vendor Landscape (August 2026)](#vendor-landscape-august-2026)
 - [Decision Tree](#decision-tree)
 - [DIY / No-Vendor Path](#diy--no-vendor-path)
 - [Sources](#sources)
@@ -19,7 +19,7 @@ status: stable
 
 ## Purpose
 
-Selecting measurement tools is a design decision, not just a procurement decision. The modality chosen determines which primitives can be observed directly vs. inferred, sets the ecological-validity ceiling, creates regulatory obligations (biometric data = GDPR Article 9 special-category; affect-inference AI = EU AI Act high-risk from 2 August 2026), and constrains the N achievable in budget. This reference maps signal modalities, vendor tiers, a decision tree, and the conditions under which surrogate behavioural signals are the right answer instead of physiological measurement.
+Selecting measurement tools is a design decision, not just a procurement decision. The modality chosen determines which primitives can be observed directly vs. inferred, sets the ecological-validity ceiling, creates regulatory obligations (biometric data = GDPR Article 9 special-category; affect-inference AI = EU AI Act high-risk from 2 December 2027, with Article 50 transparency owed from 2 August 2026), and constrains the N achievable in budget. This reference maps signal modalities, vendor tiers, a decision tree, and the conditions under which surrogate behavioural signals are the right answer instead of physiological measurement.
 
 ---
 
@@ -36,13 +36,13 @@ Selecting measurement tools is a design decision, not just a procurement decisio
 | GSR/EDA (skin conductance) | Sympathetic arousal; phasic event-related response; tonic baseline | ~0.5–2s | N/A (peripheral) | Moderate | £ | Yes — biometric | Low |
 | HRV (heart rate variability) | Vagal tone; cognitive load; stress; autonomic balance | ~1s | N/A | High (wearable) | £ | Yes — biometric | Low |
 | Facial EMG | Specific muscle-group activity (e.g., zygomatic = smile; corrugator = frown) | ~5ms | Muscle-group | Low (electrodes on face) | £–££ | Yes — biometric | Low |
-| Facial action coding — CV (computer vision) | Inferred facial AUs and emotion categories from video | Near real-time | Per-frame | High (any camera) | £ (SaaS) | Yes — biometric; inferred affect | **High-risk from 2 August 2026 (EU AI Act Annex III)** |
-| Voice prosody analysis | Pitch range, rate, energy; arousal/disengagement proxy | ~100ms | N/A | High | £ (SaaS) | Yes — biometric | **High-risk from 2 August 2026 (EU AI Act Annex III)** |
+| Facial action coding — CV (computer vision) | Inferred facial AUs and emotion categories from video | Near real-time | Per-frame | High (any camera) | £ (SaaS) | Yes — biometric; inferred affect | **High-risk from 2 Dec 2027 (Annex III); Art. 50 notice due now** |
+| Voice prosody analysis | Pitch range, rate, energy; arousal/disengagement proxy | ~100ms | N/A | High | £ (SaaS) | Yes — biometric | **High-risk from 2 Dec 2027 (Annex III); Art. 50 notice due now** |
 | Pupillometry (standalone) | Arousal; cognitive effort; locus coeruleus-NE system activity | ~1ms (with eye-tracker) | N/A | Moderate | £ (if via eye-tracker) | Yes — biometric | Low |
 
 ---
 
-## Vendor Landscape (May 2026)
+## Vendor Landscape (August 2026)
 
 ### Lab / Research-Grade
 
@@ -50,7 +50,7 @@ Selecting measurement tools is a design decision, not just a procurement decisio
 |--------|--------------|-------------|-----------|--------------|-----------|
 | iMotions | Multimodal sync (EEG, GSR, eye, facial) | Integrated consumer neuro lab studies | ££££ | Lab | GDPR Article 9 baseline; no AI Act high-risk if no affect-inference AI |
 | Tobii (lab systems, Spectrum/TX300) | Eye-tracking, pupillometry | Lab fixation and reading studies | £££ | Lab | GDPR Article 9 |
-| Smart Eye (Aurora, with Affectiva integration) | Eye-tracking + facial AU inference (in-cabin, research) | Automotive HMI; attention safety; as of early 2026 includes Affectiva affect-inference module | £££–££££ | Lab + in-cabin | Affectiva module = EU AI Act high-risk from 2 August 2026; requires Art. 50 notice |
+| Smart Eye (Aurora, with Affectiva integration) | Eye-tracking + facial AU inference (in-cabin, research) | Automotive HMI; attention safety; as of early 2026 includes Affectiva affect-inference module | £££–££££ | Lab + in-cabin | Affectiva module = EU AI Act high-risk from 2 Dec 2027; Art. 50 notice required now |
 | BrainProducts / g.tec | EEG (research-grade, 32–256 ch) | ERP, oscillatory, BCI research | £££ | Lab | GDPR Article 9 |
 | Biosemi ActiveTwo | EEG (research-grade, DC-coupled) | High-fidelity ERP research | £££ | Lab | GDPR Article 9 |
 
@@ -59,9 +59,9 @@ Selecting measurement tools is a design decision, not just a procurement decisio
 | Vendor | Primary Signal | Typical Use | Cost Tier | Lab vs Field | Risk Flag |
 |--------|--------------|-------------|-----------|--------------|-----------|
 | Tobii Sticky (as of early 2026) | Webcam-based eye-tracking + attention heatmaps | Remote ad and landing page testing | ££ | Remote (in-the-wild) | GDPR Article 9; no affect-inference AI — lower risk |
-| Realeyes | Webcam-based facial AU → emotion inference | Ad pre-testing emotion response | ££ | Remote | **EU AI Act high-risk (affect inference) from 2 August 2026** |
+| Realeyes | Webcam-based facial AU → emotion inference | Ad pre-testing emotion response | ££ | Remote | **EU AI Act high-risk (affect inference) from 2 Dec 2027; Art. 50 notice due now** |
 | Lookback / Maze | Qualitative screen recording + think-aloud | UX research; behavioural observation | £–££ | Remote | Standard GDPR; no special-category physiological data if no biometric |
-| Pulse Labs (as of early 2026) | Voice prosody + transcript NLP | Voice UX testing; call-centre affect monitoring | ££ | Remote + field | Voice prosody = **EU AI Act high-risk from 2 August 2026** in commercial deployment |
+| Pulse Labs (as of early 2026) | Voice prosody + transcript NLP | Voice UX testing; call-centre affect monitoring | ££ | Remote + field | Voice prosody = **EU AI Act high-risk from 2 Dec 2027** in commercial deployment; Art. 50 notice due now |
 
 ### Self-Service / SaaS Behavioural Surrogates
 
@@ -88,7 +88,7 @@ Selecting measurement tools is a design decision, not just a procurement decisio
 
 ### AI-Driven Affect Inference
 
-**All platforms in this category become EU AI Act high-risk from 2 August 2026 in commercial deployment.** Deployers must meet Annex III obligations: data governance, technical documentation, human oversight, post-market monitoring, and Article 50 transparency notice to users.
+**All platforms in this category become EU AI Act high-risk in commercial deployment from 2 December 2027**, deferred from 2 August 2026 by the AI Digital Omnibus (in force 27 July 2026). Annex III obligations — data governance, technical documentation, human oversight, post-market monitoring — track that date. **The Article 50 transparency notice to users was not deferred and is owed now.** Article 5 prohibitions (workplace/education emotion recognition; vulnerability exploitation) and GDPR Article 9 consent also bind today, independent of the delay.
 
 | Vendor | Signal | Typical Use | Cost Tier | Risk Flag |
 |--------|--------|-------------|-----------|-----------|
@@ -116,7 +116,7 @@ Selecting measurement tools is a design decision, not just a procurement decisio
       Facial affect → facial CV (Realeyes, Affectiva/Smart Eye) — see step 4
 
 4. REGULATORY EXPOSURE
-   └─ EU users + facial CV or voice-affect AI → EU AI Act high-risk applies 2 August 2026
+   └─ EU users + facial CV or voice-affect AI → Art. 50 notice owed now; high-risk applies 2 Dec 2027
       └─ Compliance ready? → proceed with vendor; implement Art. 50 notice
          Not ready? → use facial EMG (lab, no AI inference) or drop facial signal
 
@@ -147,5 +147,5 @@ When budget is under £5k, consent infrastructure is absent, or regulatory expos
 - "Intersubject correlation as a predictor of attention: a systematic review." _BMC Psychology_ (2025). DOI: 10.1186/s40359-025-02879-7. 14 studies, 27 effect sizes; ISC–attention r=0.65.
 - "A comprehensive evaluation framework for consumer-grade EEG devices." _Scientific Reports_ (2026). DOI: 10.1038/s41598-026-39056-8. n=30, 4 consumer devices vs DSI-24.
 - "EEG dataset of consumer- and research-grade systems." _Scientific Data_ (2026). DOI: 10.1038/s41597-026-06962-5. Public dataset for consumer EEG validation.
-- EU AI Act (2024). Regulation (EU) 2024/1689. Annex III high-risk; Article 5 prohibitions effective 2 February 2025; high-risk provisions effective 2 August 2026.
+- EU AI Act (2024). Regulation (EU) 2024/1689. Annex III high-risk; Article 5 prohibitions effective 2 February 2025; Article 50 transparency effective 2 August 2026; high-risk provisions deferred to 2 December 2027 by the AI Digital Omnibus (in force 27 July 2026).
 - UK GDPR. Article 9 special-category data.

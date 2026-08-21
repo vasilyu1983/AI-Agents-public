@@ -1,6 +1,8 @@
 # MCP Security Hardening Guide
 
-Security guidance for MCP servers aligned to the **2025-11-25 specification** and current client practice.
+Security guidance for MCP servers. The authorization requirements below were written against the **`2025-11-25`** specification and remain correct for servers on that version.
+
+> **Current spec is `2026-07-28`** (shipped 2026-07-28). It adds authorization hardening on top of what follows: authorization servers **SHOULD** send the `iss` parameter per [RFC 9207](https://datatracker.ietf.org/doc/html/rfc9207) and clients **MUST** validate it against the recorded issuer before redeeming the code (SEP-2468); clients **MUST** key persisted credentials by issuer and re-register when the authorization server changes (SEP-2352); OAuth 2.0 Dynamic Client Registration (RFC 7591) is **deprecated** in favor of Client ID Metadata Documents. Verify against `modelcontextprotocol.io/specification/2026-07-28` when building new servers.
 
 ## Table of Contents
 

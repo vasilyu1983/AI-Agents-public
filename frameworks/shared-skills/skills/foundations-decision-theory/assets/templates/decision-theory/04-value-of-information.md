@@ -88,6 +88,18 @@ When applying this primitive with LLM agents as decision support tools, **DeLLMa
 
 **Kill criteria:** Drop if the decision task has no natural-language state representation (purely numerical optimisation problem) or if a formal EVPI computation is required rather than an inference-time approximation.
 
+## EVPI for Agent Clarification, and Its Time Decay (2025–2026)
+
+The clarify-or-commit choice — should an agent ask the user a question or proceed on its best reading? — is EVPI applied to a question rather than to a study. Two results make it directly operational:
+
+**Scoring.** Rank candidate questions by cost-penalized EVPI, not by the agent's felt uncertainty. A question whose every possible answer leads to the same next action has zero value no matter how uncertain the agent is. Suri et al. (arXiv:2511.08798) implement this as SAGE-Agent and cut question count 1.5–2.7x against uncertainty-threshold baselines while raising task success. Their framework separates *specification* uncertainty (about user intent — askable) from *model* uncertainty (about the agent's own correctness — not askable; needs verification or retrieval instead).
+
+**Time decay — the departure from textbook VoI.** Classical EVPI is computed once, before acting. In a long-horizon trajectory the value of the same question falls as execution proceeds, because rework cost accumulates against a fixed information gain. Gulati et al. (arXiv:2605.07937; ~6,000 runs, 4 information dimensions, 3 benchmarks, 4 frontier models) measure this: goal-level clarification decays to baseline value after roughly the first 10% of execution, input-level clarification holds to about 50%, and clarification deferred past the midpoint performs *worse* than never asking. Frontier models do not track this optimum on their own, over-asking in 52% of sessions or suppressing questions entirely.
+
+**Practical rule:** front-load goal questions before the first action, permit input questions through mid-trajectory, and commit after the midpoint.
+
+**Kill criteria:** Drop if the interaction is single-turn (no trajectory over which value can decay), or if asking is free and unlimited — the cost penalty is what makes the EVPI ranking bind.
+
 ## Sources
 
 - Raiffa, H. and Schlaifer, R. (1961). Applied Statistical Decision Theory. Harvard University Press. Chapters 4–5.
@@ -96,3 +108,5 @@ When applying this primitive with LLM agents as decision support tools, **DeLLMa
 - Liu, O. et al. (2025). "DeLLMa: Decision Making Under Uncertainty with Large Language Models." ICLR 2025 Spotlight. arXiv:2402.02392. https://arxiv.org/abs/2402.02392
 - Capitaine et al. (2026). "Online Decision-Focused Learning." ICLR 2026. arXiv:2505.13564.
 - Rodriguez-Diaz, Bansak, Paulson (2025). "A Dual Perspective on Decision-Focused Learning: Scalable Training via Dual-Guided Surrogates." NeurIPS 2025. arXiv:2511.04909.
+- Suri, M. et al. (2025/2026). "Structured Uncertainty guided Clarification for LLM Agents." arXiv:2511.08798.
+- Gulati, A., Gupta, H., Lumer, E., Sen, S., and Subbiah, V. K. (2026). "Ask Early, Ask Late, Ask Right: When Does Clarification Timing Matter for Long-Horizon Agents?" arXiv:2605.07937.

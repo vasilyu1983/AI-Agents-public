@@ -144,7 +144,7 @@ search_mode_killer_feature() {
     echo "Premise: OSS clones of a commercial product reveal which features the"
     echo "OSS community considers load-bearing — a strong proxy for what's"
     echo "monetizable. Contributes the 'oss_clone_focus' signal to the bundle's"
-    echo "Killer-Feature Convergence Protocol (startup-review-mining)."
+    echo "Killer-Feature Convergence Protocol (research-review-mining)."
     echo ""
     echo "--- Direct clone repos ('alternative', 'open source', 'self-hosted') ---"
     for prefix in "alternative to" "open source" "self-hosted"; do

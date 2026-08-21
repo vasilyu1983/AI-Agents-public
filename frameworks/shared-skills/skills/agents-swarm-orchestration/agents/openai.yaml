@@ -1,4 +1,4 @@
 interface:
   display_name: "Swarm Orchestration"
-  short_description: "Coordinates parallel subagents and multi-agent workflows"
-  default_prompt: "Use $agents-swarm-orchestration for Coordinates parallel subagents and multi-agent workflows. Use when splitting work into dependency-aware workers, verifier passes, or isolated research streams."
+  short_description: "Coordinates Loop Engineering and multi-agent workflows"
+  default_prompt: "Use $agents-swarm-orchestration when coordinating bounded multi-agent execution: plan dependency-aware fan-out, verifier passes, workflow/runtime selection, or Loop Engineering."

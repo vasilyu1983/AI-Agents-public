@@ -34,7 +34,7 @@ Key properties:
 2. Inventory counts are updated in real time or are conservatively estimated.
 3. Countdown timers expire and are not reset automatically.
 4. If an offer recurs (e.g., monthly pricing), it is not presented as "one-time only."
-5. UK ASA CAP Code: claims of limited availability must be verifiable. Fake urgency is a misleading commercial practice under CPRs 2008.
+5. UK ASA CAP Code: claims of limited availability must be verifiable. Fake urgency is a misleading commercial practice under **DMCC Act 2024 s.226** (misleading actions), which replaced CPRs 2008 Reg. 5 on 6 April 2025. False claims that a product will only be available on particular terms for a very limited time are additionally listed in **Sch. 20** as banned outright — no consumer-detriment test required, so a fabricated countdown is actionable on its face.
 
 **Signal of misuse**: if removing the scarcity signal would not actually change the outcome for the user (they can still buy at the same price next week), the signal is manipulative.
 

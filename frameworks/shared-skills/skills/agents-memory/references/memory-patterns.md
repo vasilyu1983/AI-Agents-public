@@ -295,8 +295,8 @@ Keep machine-local or developer-local preferences out of committed project memor
 
 - **Claude Code**: use `.claude/settings.local.json` for local settings such as `claudeMdExcludes` and other machine-local controls from the official docs.
 - **Claude auto memory**: keep it enabled for personal notes and repeated local reminders, but do not rely on it as the shared project contract.
-- **Codex**: use `~/.codex/AGENTS.md` for personal defaults across repositories.
-- **Repo-local Codex overrides**: if you need a developer-only layer inside one repo, keep `AGENTS.override.md` git-ignored and make sure the committed `AGENTS.md` still stands on its own.
+- **Codex**: use `~/.codex/AGENTS.md` for personal behavioral instructions across repositories; use `~/.codex/config.toml` for runtime defaults.
+- **Repo-local Codex overrides**: `AGENTS.override.md` wins over `AGENTS.md` at the same directory level. It may be git-ignored for developer-only guidance or checked in for scoped team guidance; review either form because its defining property is precedence.
 
 ```json
 {

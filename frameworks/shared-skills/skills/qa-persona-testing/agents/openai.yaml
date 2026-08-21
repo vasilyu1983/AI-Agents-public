@@ -1,4 +1,4 @@
 interface:
   display_name: "Persona Testing"
-  short_description: "Tests apps as an ICP persona via browser automation and reports friction and fixes"
-  default_prompt: "Use $qa-persona-testing for Tests apps as an Ideal Customer Profile persona via Playwright/Chrome browser automation and reports friction, fixes, and risks. Use for persona-based, ICP, or synthetic-user testing."
+  short_description: "Test apps as an ICP persona and report friction, fixes, and risks"
+  default_prompt: "Use $qa-persona-testing when testing apps as an ICP persona through browser automation, running persona-based or synthetic-user testing, and reporting friction, fixes, and risks."

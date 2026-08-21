@@ -2,9 +2,9 @@
   "metadata": {
     "title": "Theory of Constraints Foundations — Sources",
     "description": "Primary books and references for 11 TOC primitives: five focusing steps, drum-buffer-rope, throughput accounting, evaporating cloud, current/future reality trees, prerequisite and transition trees, critical chain, policy constraints, and thinking processes. Includes software/DevOps lineage (Phoenix Project, DevOps Handbook, Flow Framework) and 2025 empirical literature.",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-theory-of-constraints",
-    "total_sources": 23
+    "total_sources": 26
   },
   "books": [
     {
@@ -135,20 +135,51 @@
     },
     {
       "id": "CCPMSystematicReview2025",
-      "name": "Critical Chain Project Management: A Systematic Literature Review (2025)",
-      "url": "https://www.mdpi.com/2076-3417/15/15/8147",
-      "description": "MDPI Applied Sciences, Volume 15, Issue 15, 2025. DOI: 10.3390/app15158147. Systematic literature review analyzing 62 CCPM studies from Scopus and Web of Science (2014–2025). Key findings: most studies use simulation/modeling; construction and manufacturing dominate; growing integration trend with Scrum, Lean Construction, and predictive algorithms. Note: full paper behind MDPI paywall at time of last verification; DOI and bibliographic metadata confirmed via publisher redirect. The specific 19.3% construction time reduction finding cited in some summaries derives from a separate 2023 MDPI Buildings study — treat as unconfirmed detail until primary paper is read.",
+      "name": "Systematic Review on the Use of CCPM in Project Management: Empirical Applications and Trends",
+      "url": "https://doi.org/10.3390/app15158147",
+      "description": "de Oliveira Martins, Benetti, dos Anjos, da Silva & Alves (2025). Applied Sciences, 15(15), 8147, published 2025-07-22. DOI: 10.3390/app15158147. Systematic literature review analyzing 62 CCPM studies from Scopus and Web of Science (2014–2025). Key findings: most studies use simulation/modeling rather than field trials; construction and manufacturing dominate; growing integration trend with Scrum, Lean Construction, and predictive algorithms. Strongest peer-reviewed evidence base for primitive 09, but establishes active favourable simulation research — not field effect sizes in knowledge work. Note: mdpi.com returns HTTP 403 to automated fetching; full author list, volume, issue, article number and publication date verified via Crossref API 2026-08-14, findings taken from the published abstract. The 19.3% construction time reduction figure cited in some summaries derives from a separate 2023 MDPI Buildings study — not a finding of this review.",
+      "last_verified": "2026-08-14",
+      "url_check": "manual",
       "add_as_web_search": false
     },
     {
       "id": "MabinCavana2024",
-      "name": "Integrating TOC Thinking Processes with Qualitative System Dynamics",
-      "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/sdr.1768",
-      "description": "Mabin, V.J. & Cavana, R.Y. (2024). System Dynamics Review, Wiley. DOI: 10.1002/sdr.1768. Provides a six-stage framework combining TOC Thinking Processes (CRT) with qualitative system dynamics (Qual SD) modeling. Demonstrates that CRT + SD modeling produces more collective insights than either method alone. Peer-reviewed. Note: volume/issue number could not be independently confirmed from primary source (paywall); DOI confirmed valid. Applies to complex multi-stakeholder constraint scenarios that resist single-root CRT analysis.",
+      "name": "A framework for using Theory of Constraints thinking processes and tools to complement qualitative system dynamics modelling",
+      "url": "https://doi.org/10.1002/sdr.1768",
+      "description": "Mabin, V.J. & Cavana, R.Y. (2024). System Dynamics Review (Wiley), 40(4), e1768, published 2024-03-14. DOI: 10.1002/sdr.1768. Proposes a six-stage framework combining TOC Thinking Processes (CRT) with qualitative system dynamics (Qual SD) modelling, arguing the combination yields more collective insight than either method alone. Peer-reviewed. Applies to complex multi-stakeholder constraint scenarios that resist single-root CRT analysis. Note: Wiley returns HTTP 402 to automated fetching; exact title, volume, issue, article number and date verified via Crossref API 2026-08-14 (this corrects an earlier note in this file that volume/issue could not be confirmed). Full text paywalled — the claimed advantage is reported from the abstract, not independently assessed.",
+      "last_verified": "2026-08-14",
+      "url_check": "manual",
       "add_as_web_search": false
     }
   ],
   "articles": [
+    {
+      "id": "DORA2025AIAssisted",
+      "name": "2025 State of AI-assisted Software Development Report",
+      "url": "https://dora.dev/research/publications/",
+      "description": "DORA / Google Cloud (2025). Global survey of ~5,000 technology professionals conducted 13 June – 21 July 2025, plus qualitative data. The strongest available survey evidence for the AI-era constraint shift: ~90% AI adoption; higher AI adoption is associated with an increase in BOTH software delivery throughput and software delivery instability; time saved during code generation is reallocated to verification overhead, moving the constraint from writing code to reviewing and verifying it. Also introduces seven team profiles (including a 'legacy bottleneck' profile) and frames AI as an amplifier of existing organizational strengths and dysfunctions. Evidence grade: large-N correlational survey, not a controlled trial. Verified 2026-08-14 that no 2026 DORA report had been published — 2025 is the most recent. Report PDF: https://services.google.com/fh/files/misc/2025_state_of_ai_assisted_software_development.pdf. Source for the post-AI-adoption 5FS re-run trigger.",
+      "last_verified": "2026-08-14",
+      "url_check": "manual",
+      "add_as_web_search": false
+    },
+    {
+      "id": "AgentX2026",
+      "name": "Agent-X: Full Pipeline Acceleration of On-device AI Agents",
+      "url": "https://arxiv.org/abs/2605.10380",
+      "description": "Chung, J., Shin, B., Kim, J. & Rhu, M. (KAIST, 2026). arXiv:2605.10380v1, 11 May 2026. Measured end-to-end latency breakdown of an on-device agent (Mac mini, M4 Pro): Planner 43.5% and Arbiter 46.9% of total latency (together 90.4%); decode 68.7%, prefill 21.7%. Critically, the paper states this CONTRASTS with cloud/server-class LLM workloads where decode is overwhelmingly dominant (>95%). Cited in this skill as the corrected provenance for the previously over-generalized '~70% Planner/Arbiter decode' claim — the split is on-device-specific and does not transfer to cloud pipelines. Evidence grade B+: measured systems research on a specific deployment, not a general law.",
+      "last_verified": "2026-08-14",
+      "url_check": "manual",
+      "add_as_web_search": false
+    },
+    {
+      "id": "ActWhileThinking2026",
+      "name": "Act While Thinking: Accelerating LLM Agents via Pattern-Aware Speculative Tool Execution",
+      "url": "https://arxiv.org/abs/2603.18897",
+      "description": "Sui, Y., Zhao, H., Ma, R., He, Z., Wang, H., Li, J. & Yang, Y. (2026). arXiv:2603.18897v1, 19 March 2026. Identifies the strictly serialized LLM-generation → tool-execution loop as the dominant latency bottleneck in tool-heavy agent workloads: tool execution accounts for ~60% of request time in coding tasks, ~50% in deep research, ~36% in scientific research. Proposes speculative tool execution (predicting and pre-running likely tool calls while the LLM still generates) — a TOC-legible exploitation move on the constraint stage before adding capacity. Source for the agent-pipeline constraint analysis recipe: demonstrates the constraint stage is deployment-dependent and must be profiled, not assumed.",
+      "last_verified": "2026-08-14",
+      "url_check": "manual",
+      "add_as_web_search": false
+    },
     {
       "id": "RevengeOfQA2026",
       "name": "The Revenge of QA: How AI Code Generation Is Exposing Decades of Process Debt",
@@ -160,7 +191,9 @@
       "id": "ShiftingBottleneckLogilica2025",
       "name": "The Shifting Bottleneck Conundrum: How AI Is Reshaping the Software Development Lifecycle",
       "url": "https://www.logilica.com/blog/the-shifting-bottleneck-conundrum-how-ai-is-reshaping-the-software-development-lifecycle",
-      "description": "Logilica (December 9, 2025). Independent practitioner analysis of AI-driven code review bottleneck. Key claims: 67% of developers use AI for coding yet merge approvals remain 77% human-controlled; median engineer at large company takes ~13 hours to merge a PR; teams using AI-assisted review see 30% faster merge approvals. Corroborates the constraint-shift pattern documented by Faros AI (2025) and IT Revolution (2026). Evidence grade B: observational practitioner data, not RCT.",
+      "description": "Logilica (December 9, 2025). Independent practitioner analysis of AI-driven code review bottleneck. Key claims: 67% of developers use AI for coding yet merge approvals remain 77% human-controlled; median engineer at large company takes ~13 hours to merge a PR; teams using AI-assisted review see 30% faster merge approvals. Corroborates the constraint-shift pattern now better evidenced by DORA 2025 (see DORA2025AIAssisted) and IT Revolution (2026). Evidence grade B: vendor-published observational data, not RCT — prefer DORA 2025 as the primary citation and use this only as corroboration.",
+      "last_verified": "2026-08-14",
+      "url_check": "manual",
       "add_as_web_search": false
     },
     {

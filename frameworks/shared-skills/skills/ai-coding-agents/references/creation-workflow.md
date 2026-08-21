@@ -16,6 +16,7 @@ End-to-end guide for going from a coding task to a working agent definition. Fol
 - [Step 8: Instruction Writing](#step-8-instruction-writing)
 - [Step 9: Self-Verification Design](#step-9-self-verification-design)
 - [Step 10: Smoke Testing](#step-10-smoke-testing)
+- [Extension-Robustness Gate](#extension-robustness-gate)
 - [Step 11: Iteration Loop](#step-11-iteration-loop)
 
 ---
@@ -414,6 +415,21 @@ Give the agent a task spanning 3-5 files with dependencies between them. Verify 
 
 **Smoke test output:** Pass/fail for each test with notes on any failures to fix.
 
+### Extension-Robustness Gate
+
+For agents that edit existing code—especially refactoring and migration agents—one-shot smoke tests are necessary but insufficient. Before readiness, run at least one sequence of three or more checkpoints in which the external specification evolves:
+
+1. Begin checkpoint 1 from an empty or controlled baseline workspace.
+2. At every later checkpoint, preserve the same workspace produced by the agent; do not replace it with a reference solution.
+3. Start a fresh conversation/context for each checkpoint so the agent must recover design intent from the current code rather than hidden transcript memory.
+4. Add the new behavior without revealing internal interfaces or test implementation details.
+5. Retain and rerun every prior checkpoint's regression tests alongside the new checkpoint tests.
+6. Record correctness, cost, and maintainability signals at each checkpoint rather than only the final pass/fail result.
+
+Passing the first checkpoint or all current tests does not establish extension robustness. SlopCodeBench found that planning- and quality-oriented prompt interventions improved initial structure but did not halt degradation across repeated edits; use them as setup aids, not as substitutes for the carried-workspace sequence.
+
+For detailed benchmark construction and hidden-test design, use [`../../qa-agent-testing/SKILL.md`](../../qa-agent-testing/SKILL.md). For checkpoint lineage, trajectory metrics, regression packs, and cost telemetry, use [`../../ai-coding-agents-observability-evals/SKILL.md`](../../ai-coding-agents-observability-evals/SKILL.md).
+
 ---
 
 ## Step 11: Iteration Loop
@@ -456,6 +472,7 @@ After modifying the agent definition, re-run the smoke tests from Step 10. Regre
 
 The agent is ready when:
 - It passes all 5 smoke tests consistently
+- If it edits, refactors, or migrates code, it passes at least one 3+ checkpoint evolving-spec sequence with fresh context, a carried workspace, and all prior regression tests retained
 - It produces correct output on 8/10 real tasks
 - Failures are at the boundary of the task (genuinely hard cases), not at the core
 - The output format is consistent across runs
@@ -475,5 +492,6 @@ The agent is ready when:
 [ ] System prompt written (identity, constraints, workflow, output, verification)
 [ ] Self-verification approach built into workflow
 [ ] Smoke tests passed (happy path, empty, large, missing, multi-file)
+[ ] Edit/refactor/migration agent passed a 3+ checkpoint evolving-spec sequence
 [ ] Iterated on 5+ real tasks
 ```

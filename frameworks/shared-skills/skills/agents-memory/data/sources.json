@@ -2,10 +2,10 @@
   "metadata": {
     "title": "Project Memory for Claude Code + Codex - Sources",
     "description": "Official documentation for Claude Code memory, Codex AGENTS.md behavior, and cross-platform project memory compatibility",
-    "last_updated": "2026-07-11",
-    "updated": "2026-07-11",
+    "last_updated": "2026-08-21",
+    "updated": "2026-08-21",
     "skill": "agents-memory",
-    "total_sources": 42
+    "total_sources": 47
   },
   "official_anthropic": [
     {
@@ -90,44 +90,74 @@
   "official_openai": [
     {
       "name": "OpenAI AGENTS.md Guide",
-      "url": "https://developers.openai.com/codex/guides/agents-md",
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
       "description": "Official OpenAI Codex documentation for AGENTS.md cross-platform standard",
       "add_as_web_search": true
     },
     {
       "name": "OpenAI Codex Config Advanced",
-      "url": "https://developers.openai.com/codex/config-advanced/",
+      "url": "https://learn.chatgpt.com/docs/config-file/config-advanced",
       "description": "Advanced configuration for OpenAI Codex including AGENTS.md settings",
       "add_as_web_search": true
     },
     {
-      "name": "OpenAI Codex Memories",
-      "url": "https://developers.openai.com/codex/memories",
-      "description": "Codex accumulated-recall layer (auto-memory analog): enable via [features] memories = true in ~/.codex/config.toml; stored in ~/.codex/memories/; off by default in EEA/UK/CH; sub-keys generate_memories, use_memories, disable_on_external_context; official guidance keeps must-always rules in AGENTS.md, treats memories as local recall only.",
+      "name": "OpenAI Codex Config Reference",
+      "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+      "description": "Current config.toml schema and scope rules, including approval_policy, approvals_reviewer, auto_review.policy, sandbox_mode, trusted project configuration, and permission profiles.",
+      "accessed": "2026-08-21",
       "add_as_web_search": true
     },
     {
-      "name": "OpenAI Codex Overview",
-      "url": "https://developers.openai.com/codex/overview",
-      "description": "Official OpenAI Codex CLI overview",
+      "name": "OpenAI Codex Sandbox and Approvals",
+      "url": "https://learn.chatgpt.com/docs/agent-approvals-security#sandbox-and-approvals",
+      "description": "Primary security boundary: sandbox mode controls technical capability while approval policy controls when Codex asks before an action.",
+      "accessed": "2026-08-21",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Developer Commands",
+      "url": "https://learn.chatgpt.com/docs/developer-commands#built-in-slash-commands",
+      "description": "Current TUI commands including /permissions for changing the active permission profile and /approve for retrying one recent automatic-review denial.",
+      "accessed": "2026-08-21",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Auto-review",
+      "url": "https://learn.chatgpt.com/docs/sandboxing/auto-review",
+      "description": "Automatic reviewer lifecycle, eligibility, denials, configuration, and the boundary that auto-review changes the reviewer rather than granting permissions.",
+      "accessed": "2026-08-21",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Config Basics",
+      "url": "https://learn.chatgpt.com/docs/config-file/config-basic#configuration-precedence",
+      "description": "Canonical precedence across CLI overrides, trusted project configuration, profiles, user and system config, and built-in defaults.",
+      "accessed": "2026-08-21",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Rules",
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/rules",
+      "description": "Persistent command-prefix allow, prompt, and deny policy; separates executable approval rules from AGENTS.md guidance.",
+      "accessed": "2026-08-21",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Memories",
+      "url": "https://learn.chatgpt.com/docs/customization/memories",
+      "description": "Codex accumulated-recall layer (auto-memory analog): enable via [features] memories = true in ~/.codex/config.toml; stored in ~/.codex/memories/; off by default; sub-keys generate_memories, use_memories, disable_on_external_context; official guidance keeps must-always rules in AGENTS.md, treats memories as local recall only.",
       "add_as_web_search": true
     },
     {
       "name": "OpenAI Codex Skills",
-      "url": "https://developers.openai.com/codex/skills",
+      "url": "https://learn.chatgpt.com/docs/build-skills",
       "description": "Official OpenAI Codex skills and metadata documentation",
       "add_as_web_search": true
     },
     {
       "name": "OpenAI Codex Subagents",
-      "url": "https://developers.openai.com/codex/subagents/",
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
       "description": "Codex custom agents, TOML format, built-in agents, thread model, and CSV batch processing",
-      "add_as_web_search": true
-    },
-    {
-      "name": "OpenAI Codex Best Practices",
-      "url": "https://developers.openai.com/codex/learn/best-practices",
-      "description": "config.toml layering, retrospective AGENTS.md workflow, essential coverage checklist, and progression model",
       "add_as_web_search": true
     }
   ],

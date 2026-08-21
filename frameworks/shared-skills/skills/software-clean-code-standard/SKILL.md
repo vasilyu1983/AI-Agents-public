@@ -1,9 +1,9 @@
 ---
 name: software-clean-code-standard
-description: "Defines cross-language clean code standards with stable CC-* rule IDs. Use when writing/reviewing code, defining team standards, or citing lint findings."
+description: "Defines clean-code standards and CC-* rules. Use when reviewing code, setting team standards, citing lint findings, or measuring erosion, complexity mass, and verbosity."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-21
 ---
 
 # Clean Code Standard
@@ -231,4 +231,3 @@ After verifying, provide:
 Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

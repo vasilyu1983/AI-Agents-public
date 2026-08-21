@@ -1,6 +1,6 @@
 ---
 description: Applied patterns, scenarios, anti-patterns, and known traps for control-theory foundations.
-last_verified: 2026-05-02
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -47,6 +47,8 @@ status: stable
 - Backpressure is only real if enforced at ingress.
 - Half-open circuit breaker probes must be small and staggered.
 - Token bucket semantics differ across APIs: request rate, token rate, concurrency, and daily quota are separate controls.
+- Selector-based arbitration is deterministic, not optimal — a badly-ordered priority chain fails predictably rather than gracefully, so the ordering itself needs justification.
+- Lowering sampling temperature is not a stability fix. Bounding the action space at the tool interface is; stability that depends on model settings will not survive a model swap.
 
 ## Exit Checklist
 

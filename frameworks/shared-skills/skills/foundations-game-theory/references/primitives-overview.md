@@ -1,6 +1,6 @@
 ---
 description: Domain-agnostic overview of 22 game-theory primitives. For the agent-team applied recipe layer, see agents-subagents/references/game-theory-agent-teams.md.
-last_verified: 2026-05-08
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -162,3 +162,9 @@ Use primary papers and official docs as the strongest evidence tier. Practitione
 - Persuasion-driven adversarial influence in multi-agent LLM debate. Nature Sci Reports 2026. [nature.com/articles/s41598-026-42705-7](https://www.nature.com/articles/s41598-026-42705-7)
 - Adaptive stability detection (Beta-Binomial + KS test) for multi-agent debate convergence. OpenReview 2026. [openreview.net/forum?id=Vusd1Hw2D9](https://openreview.net/forum?id=Vusd1Hw2D9)
 - Hierarchical MAS taxonomy (holonic + nested-summary patterns). arXiv 2508.12683. [arxiv.org/abs/2508.12683](https://arxiv.org/abs/2508.12683)
+- MarketBench: AI agents as market participants — self-assessment miscalibration breaks auction allocation. arXiv 2604.23897 (Apr 2026). [arxiv.org/abs/2604.23897](https://arxiv.org/abs/2604.23897)
+- Do Matching Mechanisms Work with LLM Agents? Truth-telling does not track strategy-proofness. arXiv 2606.03030 (Jun 2026). [arxiv.org/abs/2606.03030](https://arxiv.org/abs/2606.03030)
+- Institutional AI: governance graphs beat prompt-only anti-collusion policy in Cournot markets. arXiv 2601.11369 (Jan 2026). [arxiv.org/abs/2601.11369](https://arxiv.org/abs/2601.11369)
+- TERMS-Bench: diagnosing LLM negotiation agents beyond deal rate. arXiv 2605.13909 (2026). [arxiv.org/abs/2605.13909](https://arxiv.org/abs/2605.13909)
+- Evaluating LLM Agent Collusion in Double Auctions: communication raises collusive tendency. arXiv 2507.01413 (2025). [arxiv.org/abs/2507.01413](https://arxiv.org/abs/2507.01413)
+- Multi-Agent Strategic Games with LLMs: multipolarity, finite-horizon unraveling, communication effects. arXiv 2605.03604 (May 2026). [arxiv.org/abs/2605.03604](https://arxiv.org/abs/2605.03604)

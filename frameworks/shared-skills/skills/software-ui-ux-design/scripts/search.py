@@ -78,7 +78,7 @@ if __name__ == "__main__":
     # Design system generation
     parser.add_argument("--design-system", "-ds", action="store_true", help="Generate complete design system recommendation")
     parser.add_argument("--project-name", "-p", type=str, default=None, help="Project name for design system output")
-    parser.add_argument("--format", "-f", choices=["ascii", "markdown"], default="ascii", help="Output format for design system")
+    parser.add_argument("--format", "-f", choices=["ascii", "markdown", "designmd"], default="ascii", help="Output format for design system (designmd = Google Labs DESIGN.md format)")
     # Persistence (Master + Overrides pattern)
     parser.add_argument("--persist", action="store_true", help="Save design system to design-system/MASTER.md (creates hierarchical structure)")
     parser.add_argument("--page", type=str, default=None, help="Create page-specific override file in design-system/pages/")
@@ -107,6 +107,8 @@ if __name__ == "__main__":
             if args.page:
                 page_filename = args.page.lower().replace(' ', '-')
                 print(f"   📄 design-system/{project_slug}/pages/{page_filename}.md (Page Overrides)")
+            if args.format == "designmd":
+                print(f"   📄 DESIGN.md (Google Labs format, project root — auto-read by coding agents)")
             print("")
             print(f"📖 Usage: When building a page, check design-system/{project_slug}/pages/[page].md first.")
             print(f"   If exists, its rules override MASTER.md. Otherwise, use MASTER.md.")

@@ -1,9 +1,9 @@
 ---
 name: ai-agents
-description: AI agent architecture, protocol choice, evaluation, observability, and build-vs-not decisions. Use when scoping or reviewing agent systems before deeper implementation.
+description: AI agent architecture, graph and loop composition, protocol choice, evaluation, and observability. Use when scoping or reviewing systems before implementation.
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.1"
-last_validated: 2026-07-11
+last_validated: 2026-08-11
 ---
 
 # AI Agents Development — Architecture Hub
@@ -25,6 +25,9 @@ Use this skill when the user asks for:
 - evaluation, observability, rollout, or safety planning
 - framework selection after requirements are already clear
 - a starting template for a new agent spec
+- graph engineering, agent/workflow graphs, state-machine orchestration, cyclic graphs, or DAG-versus-loop design
+- loop engineering, run-until-done coding agents, self-improving workflows, evaluator feedback loops, or bounded autonomous iteration
+- uncertainty over whether a "graph" means execution control flow, an improvement network, or a knowledge/context graph
 
 ## Use Other Skills for Depth
 
@@ -40,6 +43,7 @@ Use this skill when the user asks for:
 - Deployment guardrails and model operations → [`../ai-mlops/SKILL.md`](../ai-mlops/SKILL.md)
 - Application security and high-risk controls → [`../software-security-appsec/SKILL.md`](../software-security-appsec/SKILL.md)
 - Model and inference cost tuning → [`../ai-llm/SKILL.md`](../ai-llm/SKILL.md), [`../ai-llm-inference/SKILL.md`](../ai-llm-inference/SKILL.md)
+- Knowledge/context graphs, retrieval architecture, and graph-backed memory → `ai-context-layer`, [`../ai-rag/SKILL.md`](../ai-rag/SKILL.md), [`../ai-vector-brain/SKILL.md`](../ai-vector-brain/SKILL.md)
 
 ## Default Workflow
 
@@ -95,6 +99,7 @@ Agent-system request
 | When to use multi-agent? | Only when roles, handoff contracts, and verifier responsibilities are explicit. |
 | When to add long-term memory? | Only with provenance, retention rules, user consent, and clear value. Pick a named pattern from [`ai-context-layer/patterns-catalog.md`](../ai-context-layer/references/patterns-catalog.md) (P2 for app-orchestrated, P3 for self-editing, P4 for temporal, P6 for conversational). Run the anti-pattern sweep — A1 (no raw transcripts), A11 (forget path required), A13 (provenance mandatory). |
 | What must exist before rollout? | Eval suite, telemetry, action limits, human escalation, rollback path, and kill switch. |
+| Is this "graph engineering" or "loop engineering"? | Start with [`references/graph-and-loop-engineering.md`](references/graph-and-loop-engineering.md); identify the graph's purpose before selecting a runtime or datastore. |
 
 ## Autonomy Shapes — How to Host an Agent 24/7
 
@@ -238,6 +243,7 @@ For fresh-context workers, durable state, and session-vs-project boundaries, see
 - Context rotation and durable state → [`references/context-rotation-and-state.md`](references/context-rotation-and-state.md)
 - Deployment safety → [`references/deployment-ci-cd-and-safety.md`](references/deployment-ci-cd-and-safety.md)
 - Autonomous loop / Ralph-Loop class → [`references/autonomous-loop-patterns.md`](references/autonomous-loop-patterns.md)
+- Graph engineering, loop engineering, and graph-type disambiguation → [`references/graph-and-loop-engineering.md`](references/graph-and-loop-engineering.md)
 - 24/7 operating model (SLOs, on-call, runbooks) → [`references/24-7-operating-model.md`](references/24-7-operating-model.md)
 - Tool schemas and contracts → [`references/tool-design-specs.md`](references/tool-design-specs.md), [`references/api-contracts-for-agents.md`](references/api-contracts-for-agents.md)
 - Curated external sources → [`data/sources.json`](data/sources.json)

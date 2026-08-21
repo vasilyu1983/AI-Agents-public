@@ -243,6 +243,7 @@ Use deep-dive guides in `references/` (load only what you need):
 - **Code Smells Guide**: [references/code-smells-guide.md](references/code-smells-guide.md)
 - **Technical Debt Management**: [references/tech-debt-management.md](references/tech-debt-management.md)
 - **Legacy Code Modernization**: [references/legacy-code-strategies.md](references/legacy-code-strategies.md)
+- **Brownfield Agent Loop**: [references/brownfield-agent-loop.md](references/brownfield-agent-loop.md) - Driving a coding agent against a legacy repo: graph the repo, pick the seam, build an immutable acceptance gate, scope one task, run the loop
 - **Characterization Testing**: [references/characterization-testing.md](references/characterization-testing.md) - Golden master and approval testing patterns
 - **Strangler Fig Migration**: [references/strangler-fig-migration.md](references/strangler-fig-migration.md) - Incremental legacy migration strategies (includes expand-contract / parallel change callout)
 - **Automated Refactoring Tools**: [references/automated-refactoring-tools.md](references/automated-refactoring-tools.md) - Codemods, AST transforms, recipe testing, and IDE refactoring
@@ -260,6 +261,7 @@ Do:
 - Treat agent-generated refactors as draft patches until a human reviews representative diffs and the safety net is green.
 - For Java projects, prefer OpenRewrite recipes (via `mod` CLI or MCP server) over hand-written codemods — recipes are deterministic and version-aware; AI agents can invoke them directly as tool calls.
 - Validate AI-generated characterization tests with mutation testing before treating them as a refactor safety net; line coverage alone does not prove test quality. See [references/mutation-testing.md](references/mutation-testing.md#mutation-score-as-the-ai-generated-test-validator).
+- Before pointing an agent at a legacy repo, build the acceptance gate first and never let the agent modify it; graph the repo to choose the seam instead of letting the agent pick what it understands best. See [references/brownfield-agent-loop.md](references/brownfield-agent-loop.md).
 - For large multi-file agent refactors, scope the blast radius before execution: a single 2026 practitioner report (not a peer-reviewed benchmark — treat the exact figures as unverified as of 2026-07-11) put AI agent success at roughly 40% on enterprise multi-file refactors and roughly a third on legacy codebases; whatever the true number, scope and review discipline are essential. See "LLM Agents and Subtle Behavior Changes During 'Refactors'" above.
 
 Avoid:

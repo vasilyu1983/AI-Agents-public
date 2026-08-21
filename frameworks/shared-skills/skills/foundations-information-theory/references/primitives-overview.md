@@ -1,6 +1,6 @@
 ---
 description: Domain-agnostic overview of 11 information-theory primitives. Covers entropy, mutual information, KL/JS divergence, cross-entropy, channel capacity, rate-distortion, MDL, information bottleneck, Fano's inequality, AEP, and redundancy/compression.
-last_verified: 2026-07-11
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -39,7 +39,7 @@ Each primitive in the index below addresses a specific failure mode.
 
 | # | Primitive | Failure Mode | Primary Domains |
 |---|-----------|-------------|-----------------|
-| 1 | Shannon Entropy | Unquantified uncertainty; equal-probability assumptions | Context budgeting, source coding, model evaluation |
+| 1 | Shannon Entropy | Unquantified uncertainty; equal-probability assumptions | Context budgeting, source coding, model evaluation, hallucination gating (semantic entropy), RLVR training health (policy entropy) |
 | 2 | Mutual Information | Linear-only dependence detection; biased finite-sample estimates | Retrieval scoring, feature selection, causal analysis |
 | 3 | KL Divergence | Symmetric distance misuse; zero-probability singularities | RLHF regularization, VAE loss, hypothesis testing |
 | 4 | Cross-Entropy | CE-as-similarity confusion; tokenizer-dependent perplexity | Loss functions, model comparison, perplexity |
@@ -78,6 +78,15 @@ Each primitive in the index below addresses a specific failure mode.
 | Huffman code on correlated source | Huffman assumes i.i.d.; correlated sources have entropy rate H_rate < H(X_1) | Estimate entropy rate; use arithmetic coding or LZ-family (#11) |
 | Targeting zero distortion when lossy is acceptable | Lossless rate is always ≥ H(X); lossy can be far below | Apply rate-distortion to find optimal bitrate at target distortion (#6) |
 | MDL not applied to model selection | Model complexity not traded against data fit | Compute two-part MDL: L(model) + L(data\|model) (#7) |
+
+### LLM Uncertainty and Post-Training
+
+| Anti-Pattern | Diagnosis | Fix |
+|-------------|-----------|-----|
+| Token-level entropy or sequence log-prob used as a hallucination signal | Measures lexical freedom, not epistemic uncertainty; fires on paraphrase, silent on confident falsehoods | Cluster N sampled generations by NLI meaning-equivalence and take entropy over clusters (#1); use hidden-state probes when single-generation latency is required |
+| Semantic entropy presented as a general factuality check | It detects confabulation (sampling instability), not consistently-held false beliefs | Pair with retrieval grounding or a knowledge check for stable-but-wrong outputs (#1) |
+| Falling policy entropy in RLVR read as convergence | Reward is traded from entropy (R = −a·e^H + b); collapse marks a ceiling, not an optimum | Log policy entropy as a training metric; constrain updates on high log-prob/advantage-covariance tokens rather than adding a blanket entropy bonus (#1) |
+| Agent handoff budgets set by token count | Optimizes message length, not task-relevant bits | Formulate as IB — minimize I(X;M) subject to I(M;task) — and quantize instead of truncating (#6, #8) |
 
 ### Feature and Representation Learning
 
@@ -121,3 +130,8 @@ Use primary papers and textbooks as the strongest evidence tier. Practitioner po
 - Belghazi, M. I. et al. (2018). MINE: Mutual information neural estimation. *ICML 2018*.
 - Paninski, L. (2003). Estimation of entropy and mutual information. *Neural Computation*, 15(6), 1191–1253. Bias correction.
 - Valiant, G. & Valiant, P. (2011). Estimating the unseen. *STOC 2011 / JVHW estimator*. Finite-sample MI correction.
+- Farquhar, S., Kossen, J., Kuhn, L., & Gal, Y. (2024). Detecting hallucinations in large language models using semantic entropy. *Nature*, 630, 625–630. Entropy over meaning-equivalence clusters; primitive #1 applied to confabulation detection.
+- Kossen, J. et al. (2024). Semantic entropy probes: robust and cheap hallucination detection in LLMs. *arXiv:2406.15927*. Single-generation approximation of semantic entropy from hidden states.
+- Cui, G. et al. (2025). The entropy mechanism of reinforcement learning for reasoning language models. *arXiv:2505.22617*. Empirical R = −a·e^H + b law; Clip-Cov and KL-Cov mitigations for entropy collapse.
+- Huang, Y. et al. (2024). Compression represents intelligence linearly. *COLM 2024, arXiv:2404.09937*. BPC vs. benchmark score correlation ≈ −0.95 across 30 models; supports BPC as an evaluation proxy (#11).
+- Farooq, A. & Iqbal, K. (2026). Bandwidth-efficient multi-agent communication through information bottleneck and vector quantization. *IEEE ICRA 2026, arXiv:2602.02035*. IB + VQ + gating for message compression (#6, #8).

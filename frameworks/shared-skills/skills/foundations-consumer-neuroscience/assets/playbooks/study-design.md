@@ -51,7 +51,7 @@ Identify the independent variable (design feature you are manipulating), the dep
 Verify: IV is a single controlled manipulation; DVs include at least one physiological and one behavioural measure.
 
 **Step 3 — Instrumentation Choice**
-Select modality using the decision tree in `references/instrumentation-vendor-landscape.md`. Confirm regulatory status: if biometric capture, GDPR Article 9 consent; if AI-based affect inference, EU AI Act high-risk readiness (from 2 August 2026).
+Select modality using the decision tree in `references/instrumentation-vendor-landscape.md`. Confirm regulatory status: if biometric capture, GDPR Article 9 consent; if AI-based affect inference, EU AI Act Article 50 transparency (live from 2 August 2026) and Annex III high-risk readiness (deferred to 2 December 2027).
 
 Verify: vendor or tool confirmed; consent mechanism designed; ethics-operational-checklist.md pre-study section completed.
 
@@ -77,7 +77,7 @@ Verify: recommendation is primitive-anchored; behavioural follow-up is scheduled
 
 ---
 
-## N Requirements (May 2026 Standards)
+## N Requirements (August 2026 Standards)
 
 These are practical lower bounds, not statistical guarantees. Power depends on effect size, which is unknown until the study is run. Pre-register with a sequential analysis plan where feasible.
 

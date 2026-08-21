@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Foundations Information Theory — Sources",
     "description": "Primary papers and references for 11 information-theory primitives: Shannon entropy, mutual information, KL divergence, cross-entropy, channel capacity, rate-distortion, MDL, information bottleneck, Fano's inequality, AEP, and redundancy/compression.",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-information-theory",
-    "total_sources": 38
+    "total_sources": 43
   },
   "research_papers": [
     {
@@ -287,6 +287,42 @@
       "name": "Peng et al.: Flatness-Leveraging Information-Theoretic Generalization Bounds",
       "url": "https://arxiv.org/abs/2601.01465",
       "description": "Peng et al. (2025/2026). ICLR 2025 (note: submitted January 4, 2026; year discrepancy may reflect ICLR 2026 labeling — venue confirmed as ICLR, exact year unresolved per audit). Derives IT generalization bounds incorporating loss-landscape flatness; 'numerically much tighter' than prior IT bounds; improves Ω(1) to O(1/√n) rate for gradient descent on convex-Lipschitz problems using omniscient trajectory technique. Builds on Hellström et al. CMI framework (HellstromGenBounds2024). Evidence grade B: ICLR conference paper; venue confirmed. Relevant to IT Generalization Bounds theory area.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "SemanticEntropyNature2024",
+      "name": "Farquhar, Kossen, Kuhn & Gal: Detecting Hallucinations in Large Language Models Using Semantic Entropy",
+      "url": "https://www.nature.com/articles/s41586-024-07421-0",
+      "description": "Farquhar, S., Kossen, J., Kuhn, L. & Gal, Y. (2024). Nature, 630, 625-630. Computes entropy over clusters of semantically equivalent generations (bidirectional NLI entailment) rather than over tokens, making the estimate invariant to paraphrase. Detects confabulations — arbitrary, sampling-unstable answers — without ground-truth labels or task-specific training. Scope limit: blind to consistently-stated false beliefs, since sampling-based measures detect instability, not wrongness. Peer-reviewed; the strongest applied use of primitive #1 in LLM practice. Verified via Nature DOI landing page 2026-08-14 (full text paywalled; citation confirmed via arXiv:2406.15927 which cites it directly).",
+      "add_as_web_search": true,
+      "url_check": "manual"
+    },
+    {
+      "id": "SemanticEntropyProbes2024",
+      "name": "Kossen et al.: Semantic Entropy Probes — Robust and Cheap Hallucination Detection in LLMs",
+      "url": "https://arxiv.org/abs/2406.15927",
+      "description": "Kossen, J., Han, J., Razzak, M., Schut, L., Malik, S. & Gal, Y. (2024). arXiv:2406.15927 (cs.LG), submitted 22 June 2024. Approximates semantic entropy directly from the hidden states of a single generation, removing the 5-10x sampling overhead of the Nature 2024 method. Makes semantic-entropy gating viable under production latency budgets. Evidence grade B: arXiv preprint, but by the same group as the Nature paper and widely reproduced. Extends primitive #1. Verified via primary URL 2026-08-14.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "EntropyMechanismRL2025",
+      "name": "Cui et al.: The Entropy Mechanism of Reinforcement Learning for Reasoning Language Models",
+      "url": "https://arxiv.org/abs/2505.22617",
+      "description": "Cui, G. et al. (2025). arXiv:2505.22617 (cs.LG), submitted 28 May 2025. Establishes the empirical law R = -a*e^H + b linking policy entropy H to downstream reward R in RLVR: performance is traded from entropy, and the ceiling is reached as entropy approaches zero. Over 95% of the entropy drop and most of the gain occur early in training. Identifies tokens with high covariance between log-probability and advantage as the drivers of collapse, and proposes Clip-Cov (restrict updates on those tokens) and KL-Cov (KL-penalise them) as targeted mitigations superior to a blanket entropy bonus. Caveat: the fitted constants a and b are setup-specific and must be refit, though the qualitative law replicates widely. Grounds primitive #1 applied to RL post-training. Verified via primary URL 2026-08-14.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "CompressionIntelligenceCOLM2024",
+      "name": "Huang et al.: Compression Represents Intelligence Linearly",
+      "url": "https://arxiv.org/abs/2404.09937",
+      "description": "Huang, Y. et al. (2024). COLM 2024, arXiv:2404.09937. Evaluates 30 public LLMs across 12 benchmarks spanning knowledge/commonsense, coding, and mathematical reasoning; finds downstream benchmark score correlates near-linearly with corpus compression efficiency, Pearson r about -0.95 per domain. Uses bits-per-character rather than bits-per-token precisely because tokenizers differ. Establishes BPC as a cheap, contamination-resistant evaluation proxy. Pairs with KoLMogorovTest2025 as the positive half of the compression-intelligence question: average-case compression tracks capability, worst-case (shortest-program) compression does not. Code: https://github.com/hkust-nlp/llm-compression-intelligence. Relevant to primitives #4, #11. Verified via primary URL 2026-08-14.",
+      "add_as_web_search": true
+    },
+    {
+      "id": "IBVQMultiAgent2026",
+      "name": "Farooq & Iqbal: Bandwidth-Efficient Multi-Agent Communication through Information Bottleneck and Vector Quantization",
+      "url": "https://arxiv.org/abs/2602.02035",
+      "description": "Farooq, A. & Iqbal, K. (2026). IEEE ICRA 2026, arXiv:2602.02035, submitted 2 February 2026. Combines an information-bottleneck objective with vector quantization and a learned gating mechanism deciding when to communicate at all; reports 181.8% performance gain over a no-communication baseline at 71.4% lower bandwidth (800 vs 2800 bits/episode). Targeted at robotic swarms and distributed sensor networks, but the framing transfers directly to LLM agent handoffs and KV-cache passing: budget the message by task-relevant information, not token count. Evidence grade B: accepted conference paper, camera-ready. Relevant to primitives #6, #8.",
       "add_as_web_search": true
     }
   ]

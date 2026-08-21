@@ -1,9 +1,9 @@
 ---
 name: ai-coding-agents-tasks
-description: "Designs background task systems for coding-agent runtimes. Use when implementing task lists, worker tasks, background execution, cancellation, or teammate task coordination."
+description: "Designs task runtimes for Loop Engineering, Graph Engineering, and background work. Use when work needs task lists, cyclic/workflow graphs, cancellation, or teammate coordination."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.2"
-last_validated: 2026-08-10
+last_validated: 2026-08-11
 ---
 
 # AI Coding Agents Tasks
@@ -46,7 +46,7 @@ UI/session reflection
 | Where do I actually host the trigger + agent (Vercel, Fly, CF, Render)? | [`../software-paas-hosting/references/agent-hosting-matrix.md`](../software-paas-hosting/references/agent-hosting-matrix.md) | Per-shape PaaS stacks + reference architectures |
 | How do I statically validate a recipe blueprint YAML? | [`scripts/recipe_scanner.py`](scripts/recipe_scanner.py) | stdlib-only validator: required fields, parameter types, extension risk gates, placeholder detection |
 | How does OpenAI Codex model cloud tasks, apply/diff, and agent graphs? | [`references/openai-codex-cloud-tasks-and-agent-graph.md`](references/openai-codex-cloud-tasks-and-agent-graph.md) | Task CLI lifecycle, best-of-N attempts, partial apply states, environment filters, and persisted parent-child topology |
-| How do I model iterative or cyclic work — and what differs between Claude Code and Codex? | [`references/loop-and-graph-runtime-surfaces.md`](references/loop-and-graph-runtime-surfaces.md) | Surface matrix, queue-vs-cyclic-graph data model, portable loop contract, scheduled-loop state rules |
+| Where is the runtime surface for Loop Engineering and Graph Engineering — including cyclic/workflow graphs? | [`references/loop-and-graph-runtime-surfaces.md`](references/loop-and-graph-runtime-surfaces.md) | Surface matrix, queue-vs-cyclic-graph data model, portable loop contract, scheduled-loop state rules |
 
 ## When To Use
 
@@ -55,6 +55,7 @@ UI/session reflection
 - Decide how local, remote, and teammate tasks should differ
 - Model cancellation, claiming, blocking, and foreground/background transitions
 - Coordinate work between a lead session and worker tasks
+- Implement Loop Engineering or Graph Engineering runtime surfaces for cyclic or workflow graphs
 
 ## Use Other Skills
 

@@ -91,7 +91,11 @@ Drawn from Perez Rios (2025), *Systems*, 13(9), 749 — VSM + Taxonomy of Organi
 | Algedonic channel blocked | Crisis masking | Safety threshold breaches absorbed in ticket queues; human-in-the-loop never triggered | Define explicit algedonic bypass: severity threshold → direct escalation to S5 authority (human oversight board, on-call governance lead) |
 | S5 undefined | Policy vacuum | No authority to resolve S3/S4 tradeoffs (speed vs. safety, accuracy vs. cost); decisions made ad hoc | Write S5 closure: mission statement + non-negotiable constraints + priority ordering for conflicting objectives |
 
+| Oversight present but unamplified | Requisite-variety deficit at the human interface | Named reviewers exist, but review is sampled ad hoc with no triage, summarisation, or escalation tiering; queue depth grows with fleet size | Engineer amplification gain `G` (automated triage, semantic summarisation, tiered escalation) until `V_human × G ≥ V_agents` at peak; publish a variety budget and escalation SLA |
+
 Apply this checklist alongside the Agent-Team Topology Audit recipe. Each absent system in an AI deployment is a governance failure mode, not merely an engineering gap.
+
+**Ceremonial-oversight trap.** The failure mode that regulation actually produces is not absent oversight but *declared* oversight that cannot function: a named human overseer whose review capacity is fixed while the fleet's behavioural variety scales with agents × tools × task types. Because a point-in-time audit acts once against a system generating variety continuously, it is in the wrong class for a path-selecting agent fleet regardless of how carefully it is performed — this is an Ashby-class error, not a diligence problem, so it cannot be fixed by trying harder or hiring more reviewers alone. The diagnostic question is never "is a human in the loop?" but "what is `G`, and does the inequality hold at peak?" (Telukunta et al. 2026, arXiv:2608.10153; the same structural argument appears independently in Janssen 2026, arXiv:2607.00941, which reaches it from evidentiary adequacy and the Good Regulator theorem).
 
 ## Expert Diagnosis Walkthrough
 

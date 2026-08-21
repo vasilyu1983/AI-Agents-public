@@ -2,11 +2,71 @@
   "metadata": {
     "title": "AI Game Theory Foundations — Sources",
     "description": "Primary papers and references for 22 applied game-theory primitives plus the formal theory map: game forms, equilibria, mechanism design, auctions, matching, bargaining, cooperative game theory, and learning in games",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-game-theory",
-    "total_sources": 69
+    "total_sources": 75
   },
   "research_papers": [
+    {
+      "id": "MarketBench",
+      "name": "MarketBench: Evaluating AI Agents as Market Participants",
+      "url": "https://arxiv.org/abs/2604.23897",
+      "arxiv_id": "2604.23897",
+      "description": "Fradkin and Krishnan, Apr 2026. Six recent models over 93 SWE-bench Lite tasks are poorly calibrated on both success rate and token cost; auctions built from their self-reports diverge from the full-information allocation, and prior-capability context improves calibration only modestly. Names self-assessment as the key bottleneck for market-style agent coordination. Source for the self-report calibration trap and the auction/valuation-error boundary in mechanisms #3, #11, #21.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": true
+    },
+    {
+      "id": "LLMMatchingMechanisms",
+      "name": "Do Matching Mechanisms Work with LLM Agents?",
+      "url": "https://arxiv.org/abs/2606.03030",
+      "arxiv_id": "2606.03030",
+      "description": "Hoshino, Kitadai, Nishino, Jun 2026. One-to-one matching with LLM agents: mechanism-based markets outperform free negotiation on stability and efficiency, but LLM truth-telling rates exceed human rates while failing to track strategy-proofness (TTC does not always elicit more truthful reports than EADA). Concludes matching theory is a useful but incomplete guide for LLM-agent institutions. Source for the truthfulness-without-strategy-proofness trap in formal-theory-map and SKILL.md.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": true
+    },
+    {
+      "id": "InstitutionalAI",
+      "name": "Institutional AI: Governing LLM Collusion in Multi-Agent Cournot Markets via Public Governance Graphs",
+      "url": "https://arxiv.org/abs/2601.11369",
+      "arxiv_id": "2601.11369",
+      "description": "Jan 2026. Compares ungoverned baseline, prompt-only constitutional anti-collusion policy, and governance-graph enforcement across 90 runs and six model configurations. Prompt-only was ineffective; the institutional condition (public immutable manifest of legal states, transitions, sanctions, restorative paths, plus external controller and cryptographic audit log) cut mean collusion tier 3.1 to 1.8 (Cohen's d=1.28) and severe-collusion incidence 50% to 5.6%. Source for the prompt-only governance trap and the enforcement row in the mechanism-design failure table.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": true
+    },
+    {
+      "id": "TERMSBench",
+      "name": "TERMS-Bench: Diagnosing LLM Negotiation Agents Beyond Deal Rate",
+      "url": "https://arxiv.org/abs/2605.13909",
+      "arxiv_id": "2605.13909",
+      "description": "Zhang, Zhang, Pappu et al., May 2026 (revised Jun 2026). Bayesian-game evaluation framework that makes the environment the verifier by specifying the counterpart's latent type, policy, and payoff structure. Across 13 frontier systems, deal rate saturates while surplus extraction, cue use, belief calibration, and constraint compliance diverge. Source for the negotiation scoring correction in mechanism #12.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": true
+    },
+    {
+      "id": "DoubleAuctionCollusion",
+      "name": "Evaluating LLM Agent Collusion in Double Auctions",
+      "url": "https://arxiv.org/abs/2507.01413",
+      "arxiv_id": "2507.01413",
+      "description": "Agrawal, Teo, Vazquez, Kunnavakkam, Srikanth, Liu, Jul 2025. LLM sellers in simulated continuous double auctions: direct seller-to-seller communication increases collusive tendency, magnitude varies by model, and oversight plus authority pressure modulate the effect. Source for the communication-as-collusion-dial trap alongside CalvanoAER2020 and AntiCollusionAI.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": true
+    },
+    {
+      "id": "StrategicGamesLLM",
+      "name": "Multi-Agent Strategic Games with LLMs",
+      "url": "https://arxiv.org/abs/2605.03604",
+      "arxiv_id": "2605.03604",
+      "description": "Chupilkin, May 2026. Repeated security-dilemma framework with access to agents' private reasoning and public messages. Three consistent patterns: multipolarity raises conflict likelihood, finite horizons induce universal unraveling consistent with backward induction, and communication reduces conflict via signaling and reciprocity. Note the opposite sign of the communication effect in market settings (see DoubleAuctionCollusion). Source for the communication-as-collusion-dial trap.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
+      "add_as_web_search": true
+    },
     {
       "id": "ECON",
       "name": "ECON: From Debate to Equilibrium (Bayesian Nash Coordination)",
@@ -187,7 +247,9 @@
       "id": "BeyondMajorityVoting",
       "name": "Beyond Majority Voting: LLM Aggregation by Leveraging Higher-Order Information",
       "url": "https://arxiv.org/abs/2510.01499",
-      "description": "2025. Introduces Optimal Weight and Inverse Surprising Popularity aggregation. Source for mechanism #18.",
+      "description": "Ai, Pan, Simchi-Levi, Tambe, Xu. Submitted Oct 2025, revised May 2026; ICML 2026. Introduces Optimal Weight (OW) and Inverse Surprising Popularity (ISP), using first- and second-order information; training-free. Validated on synthetic data, UltraFeedback, MMLU, and the ARMMAN healthcare deployment. Source for mechanism #18.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14",
       "add_as_web_search": true
     },
     {

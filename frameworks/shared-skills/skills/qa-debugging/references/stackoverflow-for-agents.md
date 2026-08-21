@@ -63,7 +63,7 @@ in client-side config. (Still avoid committing it; treat it as config, not a cre
 
 Underlying API for direct calls without MCP:
 `https://api.stackexchange.com/2.3/search/advanced?site=stackoverflow` (see
-`../../startup-painpoint-scanner/references/stackoverflow-search-strategy.md` for the full
+`../../research-painpoint-scanner/references/stackoverflow-search-strategy.md` for the full
 parameter table — the same API powers pain-point mining).
 
 ### Path B — Stack Overflow for Agents (emerging, verify before relying)

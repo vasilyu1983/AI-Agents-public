@@ -23,7 +23,8 @@ These defaults keep orchestration useful instead of chaotic.
 ### Platform concurrency defaults
 
 - **Codex**: `max_threads: 6`, `max_depth: 1`, `job_max_runtime_seconds: 1800`. Increasing `max_depth` beyond 1 risks recursive fan-out.
-- **Claude Code**: no hard thread cap, but subagents cannot spawn other subagents (depth is always 1). Background subagents auto-deny unapproved permissions; if this causes failure, retry in foreground with interactive prompts.
+- **Claude Code**: no hard thread cap. Subagents can spawn their own subagents since June 2026 with chains capped at 5 levels — hold depth at 1 (2 for hierarchical migrations) by policy. Background is the default since ~July 2026 (v2.1.195+) and background subagents auto-deny unapproved permissions; if this causes failure, pin the worker with `background: false` and retry with interactive prompts.
+- **Dynamic workflows (Claude Code, shipped May 2026)**: ≤1000 agents per run, ~16 concurrent. Script-held loops still need their own hard cap — see [scripted-workflows.md](scripted-workflows.md).
 
 ## Prompt And Data Safety
 

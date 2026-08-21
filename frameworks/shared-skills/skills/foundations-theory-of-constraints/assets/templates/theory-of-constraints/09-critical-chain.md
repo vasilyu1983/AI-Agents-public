@@ -69,13 +69,13 @@ At day 16: chain consumed 14 days (78% of chain, 67% of PB consumed). Status: **
 
 ## Evidence Base
 
-A 2025 systematic literature review (MDPI Applied Sciences, DOI: 10.3390/app15158147) analyzed 62 CCPM studies from Scopus and Web of Science (2014–2025). Key findings:
+de Oliveira Martins et al. (2025), "Systematic Review on the Use of CCPM in Project Management: Empirical Applications and Trends", *Applied Sciences* 15(15):8147, DOI 10.3390/app15158147, analyzed 62 CCPM studies from Scopus and Web of Science (2014–2025). Key findings:
 - Most empirical studies use simulation or modeling; field-based RCTs remain rare.
 - Construction and manufacturing dominate the evidence base; software applications are growing but underrepresented in peer-reviewed literature.
 - Growing integration trend: CCPM combined with Scrum, Lean Construction, BIM, and predictive scheduling algorithms.
 - The CCPM-Scrum integration pattern (treating the sprint as a mini-Critical Chain with a sprint buffer) is the most common software application in the reviewed studies.
 
-Note: full paper is behind the MDPI paywall; bibliographic metadata and DOI confirmed via publisher redirect. The specific 19.3% construction time reduction figure cited in some secondary summaries derives from a separate 2023 MDPI Buildings study, not this systematic review — treat as unconfirmed context rather than a finding of the review itself.
+Note: MDPI blocks automated fetching, so findings above are taken from the published abstract; full author list, volume, issue, article number, and DOI were verified via Crossref (2026-08-14). Read the full text before quoting any effect size from it. The specific 19.3% construction time reduction figure cited in some secondary summaries derives from a separate 2023 MDPI Buildings study, not this systematic review — treat as unconfirmed context rather than a finding of the review itself.
 
 ## Multitasking Evidence (Evidence-Grade Note)
 
@@ -92,5 +92,5 @@ CCPM's behavioral case rests heavily on the claim that bad multitasking (splitti
 - Leach, L.P. (2000). *Critical Chain Project Management*. Artech House.
 - Newbold, R.C. (1998). *Project Management in the Fast Lane*. St. Lucie Press.
 - Cox, J.F. & Spencer, M.S. (1998). *The Constraints Management Handbook*. CRC Press.
-- MDPI Applied Sciences (2025). Systematic literature review, 62 studies. DOI: 10.3390/app15158147.
+- de Oliveira Martins, Benetti, dos Anjos, da Silva & Alves (2025). "Systematic Review on the Use of CCPM in Project Management: Empirical Applications and Trends." *Applied Sciences*, 15(15), 8147. DOI: 10.3390/app15158147. (62 studies, 2014–2025; simulation-heavy, construction/manufacturing dominated.)
 - Rubinstein, J.S., Meyer, D.E. & Evans, J.E. (2001). "Executive Control of Cognitive Processes in Task Switching." *Journal of Experimental Psychology: Human Perception and Performance*, 27(4), 763–797. DOI: 10.1037/0096-1523.27.4.763. (Independent cognitive-psychology corroboration of the task-switching mechanism — not a TOC or CCPM study.)

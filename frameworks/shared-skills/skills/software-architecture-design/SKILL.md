@@ -235,7 +235,8 @@ Read **at most 2–3 references** per question — pick the ones most relevant t
 - [qa-observability](../qa-observability/SKILL.md) — Monitoring, tracing, alerting, SLOs
 - [software-security-appsec](../software-security-appsec/SKILL.md) — Threat modeling, auth, secure design
 - [data-sql-optimization](../data-sql-optimization/SKILL.md) — Database design, optimization, indexing
-- [docs-codebase](../docs-codebase/SKILL.md) — Architecture documentation, C4 diagrams, ADRs
+- [docs-codebase](../docs-codebase/SKILL.md) — Architecture documentation, docs-as-code structure
+- `docs-diagram-design` — Whether a diagram earns its place, and what it must show
 - [ai-agents](../ai-agents/SKILL.md) — Agent system design, orchestration, evaluation
 - [agents-mcp](../agents-mcp/SKILL.md) — MCP server/client patterns and integration
 

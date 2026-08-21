@@ -8,7 +8,7 @@ Specialized checklist for reviewing ML model deployment code (serving, APIs, bat
 
 ### Service Design
 - [ ] Deployment type appropriate (real-time API, batch, streaming)
-- [ ] Architecture diagram documented
+- [ ] Serving path is legible — a diagram where one is warranted, prose where it is faster (`docs-diagram-design`)
 - [ ] Scalability strategy defined
 - [ ] High availability considerations addressed
 - [ ] Disaster recovery plan documented
@@ -340,7 +340,7 @@ Specialized checklist for reviewing ML model deployment code (serving, APIs, bat
 ## Documentation & Handover
 
 ### Deployment Documentation
-- [ ] Architecture diagram available
+- [ ] Any architecture diagram present shows the mechanism, not a box inventory — absent by design is a pass
 - [ ] Deployment steps documented
 - [ ] Configuration guide provided
 - [ ] Environment setup instructions

@@ -1,11 +1,11 @@
 {
   "metadata": {
     "skill": "software-clean-code-standard",
-    "updated": "2026-07-11",
-    "total_sources": 45,
+    "updated": "2026-08-21",
+    "total_sources": 46,
     "description": "Authoritative references for clean code standards (CC-*), code review practices, security-by-design, observability, refactoring, testing strategy, reliability, and modern official tooling documentation.",
     "title": "Software Clean Code Standard - Sources",
-    "last_updated": "2026-07-11"
+    "last_updated": "2026-08-21"
   },
   "categories": {
     "code_review_practices": [
@@ -191,6 +191,15 @@
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": true
+      },
+      {
+        "name": "SlopCodeBench: Benchmarking How Coding Agents Degrade Over Long-Horizon Iterative Tasks",
+        "url": "https://arxiv.org/abs/2603.24755v1",
+        "type": "research-preprint",
+        "relevance": "Defines longitudinal structural-erosion and verbosity signals for repeated agent edits; use as advisory maintainability lenses, not universal thresholds or correctness proof.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
       }
     ],
     "foundational_books": [

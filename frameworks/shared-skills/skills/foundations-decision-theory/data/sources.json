@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Decision Theory Foundations — Sources",
     "description": "Primary references for 11 decision-theory primitives: expected utility, Bayesian decision, minimax regret, value of information, MCDA, risk aversion, real options, prospect theory, Ellsberg/Allais paradoxes, multi-armed bandit, and stochastic dominance",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-decision-theory",
-    "total_sources": 45
+    "total_sources": 50
   },
   "canonical_texts": [
     {
@@ -291,15 +291,57 @@
       "id": "OnlineMultiLLM2026",
       "name": "Online Multi-LLM Selection via Contextual Bandits under Unstructured Context Evolution",
       "url": "https://arxiv.org/abs/2506.17670",
-      "description": "arXiv:2506.17670 (2026). Online bandit policy for routing queries across multiple LLM backends; contextual embeddings as features; regret-bounded selection under distribution shift. Applied source for app-builder recipe (primitive #10, model routing).",
-      "url_check": "auto"
+      "description": "Poon, Dai, Liu, Kong, Lui, Zuo (arXiv:2506.17670, submitted June 2025). LinUCB-based contextual-bandit policy for routing queries across multiple LLM backends; achieves sublinear regret under unstructured context evolution without predicting future prompts or accessing model internals; cost-aware and early-quality variants. Applied source for app-builder recipe (primitive #10, model routing).",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
     },
     {
       "id": "DecisionCentricLLM2026",
       "name": "Decision-Centric Design for LLM Systems",
       "url": "https://arxiv.org/abs/2604.00414",
-      "description": "arXiv:2604.00414 (2026). Formalizes LLM orchestration decisions (model routing, adaptive inference scaling, adaptive retrieval) as explicit decision problems under utility theory; VoI methods for clarify-or-commit tradeoffs; applied decision-theory framework for production LLM systems. Applied source for app-builder recipe (primitive #4, VoI gating).",
-      "url_check": "auto"
+      "description": "Sun, W. (arXiv:2604.00414, submitted April 2026). Separates decision-making mechanisms from language generation in LLM systems via an explicit control layer, making failures easier to diagnose and repair; formalizes orchestration decisions (model routing, adaptive inference scaling, adaptive retrieval) as explicit decision problems under utility theory. Applied source for app-builder recipe (primitive #4, VoI gating).",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
+    },
+    {
+      "id": "SuriClarification2026",
+      "name": "Structured Uncertainty guided Clarification for LLM Agents",
+      "url": "https://arxiv.org/abs/2511.08798",
+      "description": "Suri, Mathur, Lipka, Dernoncourt, Rossi, Manocha (arXiv:2511.08798, submitted Nov 2025, revised April 2026). SAGE-Agent: scores candidate clarifying questions by cost-penalized Expected Value of Perfect Information; separates specification uncertainty (user intent, askable) from model uncertainty (agent correctness, not askable). Reduces clarification questions 1.5-2.7x versus baselines while raising task success on ambiguous instructions. NEW applied source for primitive #4 (clarify-or-commit recipe).",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
+    },
+    {
+      "id": "GulatiTiming2026",
+      "name": "Ask Early, Ask Late, Ask Right: When Does Clarification Timing Matter for Long-Horizon Agents?",
+      "url": "https://arxiv.org/abs/2605.07937",
+      "description": "Gulati, Gupta, Lumer, Sen, Subbiah (arXiv:2605.07937, submitted May 2026). Forced-injection framework over 4 information dimensions (goal, input, constraint, context), 3 benchmarks, 4 frontier models, >6000 runs. Finds VoI of clarification decays with trajectory position: goal clarification falls to baseline after ~10% of execution, input clarification holds to ~50%, and deferring past the midpoint performs worse than never asking. Models over-ask in 52% of sessions or avoid asking entirely. NEW applied source for primitive #4 (clarify-or-commit recipe, time decay).",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
+    },
+    {
+      "id": "CabralRankReversal2026",
+      "name": "Closing a 17-Year Gap: Algorithmic Detection and Empirical Prevalence of Rank Reversal in Multi-Criteria Decision Analysis",
+      "url": "https://arxiv.org/abs/2508.00129",
+      "description": "Cabral, J. B. et al. (arXiv:2508.00129, submitted July 2025, revised Aug 2026). Operationalizes the Wang-Triantaphyllou (2008) RRT1-RRT3 rank-reversal tests in the Scikit-Criteria library. Audit of 27 pipeline/dataset combinations from published MCDM work: top-alternative stability (RRT1) holds in 96.3%, transitivity (RRT2) fails in 14.8%, recomposition consistency (RRT3) fails in ~48%. Reframes rank reversal as a pervasive measurable property of methods in active use rather than an adversarial edge case. NEW source for primitive #5 (MCDA).",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
+    },
+    {
+      "id": "WangTriantaphyllou2008",
+      "name": "Ranking irregularities when evaluating alternatives by using some ELECTRE methods",
+      "url": "https://doi.org/10.1016/j.omega.2005.12.003",
+      "description": "Wang, X. and Triantaphyllou, E. (2008). Omega 36(1). Defines the three rank-reversal test criteria (RRT1-RRT3) used to evaluate whether an MCDA method's ranking is stable under changes to the alternative set. Foundational source for the rank-reversal distinction added to 05-multi-criteria.md.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
+    },
+    {
+      "id": "ForecastBenchFRI2026",
+      "name": "LLMs Are Closing the Gap on Human Superforecasters (ForecastBench)",
+      "url": "https://forecastingresearch.substack.com/p/llms-are-closing-the-gap-on-human",
+      "description": "Bastani, H., Kucinskas, S., and Reynolds, M. (Forecasting Research Institute, 2026). ForecastBench leaderboard analysis: human superforecasters led state-of-the-art LLMs by 0.017 Brier points as of 2026-01-29; extrapolated LLM-superforecaster parity projected for November 2026 (95% CI Jan 2026 - Nov 2027). Basis for the machine-elicited-probability caveats in the Elicitation Failure Modes section. NOTE: the gap is a moving number; re-check the live leaderboard before citing it.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
     },
     {
       "id": "BrownJEL2024",

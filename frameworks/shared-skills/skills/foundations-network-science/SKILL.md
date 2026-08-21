@@ -2,8 +2,8 @@
 name: foundations-network-science
 description: Network-science primitives for graph systems, centrality, PageRank, communities, contagion, link prediction, and temporal networks. Use when analyzing graph structure.
 compatibility: Portable core only.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-08-14
 ---
 
 # Network Science Foundations
@@ -15,6 +15,7 @@ last_validated: 2026-07-11
 
 **Apply network-science when:**
 - The data IS a graph — citations, dependencies, follower graphs, supply chains, knowledge graphs
+- The *system* is a graph even if the data is not — LLM multi-agent communication topology, agent memory graphs, tool-call graphs (see [Agent Topology as a Graph Problem](#agent-topology-as-a-graph-problem))
 - Spread/contagion question — viral coefficient, R₀, percolation threshold
 - Centrality question — "which nodes are critical?" (PageRank, betweenness, eigenvector)
 - Community detection — clustering nodes by structural similarity (Louvain, Leiden)
@@ -175,6 +176,19 @@ Defaulting to SIR for every spread question is the single most common judgment e
 
 The practical test: ask "would one credible contact be enough, or does this require seeing it from more than one direction first?" If the answer is "one is enough," use SIR and seed by PageRank/degree/betweenness as appropriate. If the answer is "it takes social proof," use the threshold model and seed clustered, not high-degree, nodes — seeding a threshold-model cascade with the highest-degree hub is a common and costly mistake, because a single hub cannot supply the repeated exposure a threshold model requires.
 
+### Agent topology as a graph problem
+
+An LLM multi-agent system is a graph whose nodes are agents and whose edges are permitted message paths. Since 2024–2025 this has stopped being a metaphor: communication topology is now designed and learned rather than hand-picked, and the primitives above apply directly to it (Liu et al. 2025, survey; Zhang et al. 2025, G-Designer).
+
+The graph-science content is that topology is a cost/robustness tradeoff, not a style choice:
+
+- **Density is a token bill.** A fully connected agent graph costs O(n²) messages. G-Designer reports up to ~95% token reduction from generating a task-conditioned sparse topology rather than defaulting to all-to-all — the same argument percolation makes about redundant edges, applied to spend.
+- **Hubs are single points of failure, exactly as in percolation (#6).** A star topology with one orchestrator has an articulation point; its removal disconnects the system. If reliability matters more than coordination cost, check betweenness (#1) on the agent graph and add a redundant path around the top-betweenness node.
+- **Error propagation is contagion (#7), and it is usually *simple* contagion.** One bad upstream output is typically enough to corrupt a downstream agent, so SIR-style reasoning applies and clustering *slows* rather than accelerates propagation. Dense agent graphs therefore trade token cost and error spread against each other in the same direction — a reason to prefer sparse topologies on both counts.
+- **Routing is a ranking problem on a heterogeneous graph.** Knowledge-graph-guided routers (Zhang et al., ACL 2026, AgentRouter) score agent fit with a heterogeneous GNN over a query-plus-entity-plus-agent graph rather than a flat classifier.
+
+Caveat before importing results: published agent-topology numbers are benchmark-specific (MMLU, HumanEval) and depend on the model, the task mix, and the prompt scaffold. Treat the *structural* argument as transferable and the *percentages* as not.
+
 ---
 
 ## Composition Recipes
@@ -249,7 +263,7 @@ The practical test: ask "would one credible contact be enough, or does this requ
 4. **Link prediction (#8)** — optionally score candidate cross-community edges (Adamic-Adar or Katz) to surface implicit entity bridges before summarisation
 5. **Output**: hierarchical community map + per-community entity ranking + cross-community bridge candidates → feeds LLM summarization pipeline
 
-**Failure modes to check**: resolution limit — large corpora with > 100K nodes need a resolution parameter scan (ε ∈ [0.5, 1.5]) to avoid all entities collapsing into one community. Lazy evaluation (defer community summaries until query time) avoids upfront cost when only a fraction of communities are queried. Do not use Louvain on graphs > 10M edges — benchmark GVE-Leiden first.
+**Failure modes to check**: resolution limit — large corpora with > 100K nodes need a resolution parameter scan (ε ∈ [0.5, 1.5]) to avoid all entities collapsing into one community. Lazy evaluation (defer community summaries until query time) avoids upfront cost when only a fraction of communities are queried. Do not use Louvain on graphs > 10M edges — benchmark GVE-Leiden first. Non-overlapping partitioning severs inter-community edges, so multi-hop inference paths that cross a community boundary are lost from every summary — a structural reason GraphRAG under-answers bridging questions. Score cross-community bridge candidates (step 4) *before* summarising, and evaluate the partition on downstream answer quality rather than modularity, since detector choice measurably shifts downstream performance (Ghosh & Saule 2025). If the corpus grows incrementally, re-partition with an incremental Leiden variant rather than rebuilding the hierarchy per ingest.
 
 **Inputs:** entity co-occurrence edge list, chunk window size, Leiden resolution parameter ε, PageRank damping d (default 0.85), optional link-prediction candidate threshold.
 **Outputs:** hierarchical community assignments per entity, per-community PageRank ranking, cross-community bridge edge candidates, community sizes.
@@ -264,7 +278,7 @@ _Consumer skills that will receive applied recipes derived from these primitives
 - `marketing-seo` — PageRank and link-prediction recipes for backlink strategy
 - `dev-context-multi-repo` — blast-radius and dependency-graph recipes
 - `data-analytics-engineering` — graph-embedding and community-detection recipes
-- `agents-subagents` — contagion and percolation recipes for agent-network robustness
+- `agents-subagents` — contagion and percolation recipes for agent-network robustness; agent communication topology as a sparsity/robustness tradeoff
 
 _Cross-links will be added to consumer skills when applied recipe files are created. This skill does not cross-link to them._
 
@@ -315,10 +329,13 @@ Network question
 - Temporal-network results should be compared against static-graph baselines to quantify the timing effect.
 - Primary sources: Newman 2010, Barabási 2016, Easley & Kleinberg 2010, Watts & Strogatz 1998, Barabási & Albert 1999, Fortunato 2010, Brin & Page 1998, Clauset et al. 2009, Broido & Clauset 2019.
 - The "are scale-free networks rare?" question is contested, not settled: Broido & Clauset (2019) found only ~4% of 927 networks meet their strictest scale-free criterion, but Holme (2019, Nat. Commun., companion piece) and Barabási's public rebuttal argue the result hinges on an unusually strict definitional threshold, and scale-freeness is only cleanly defined in the infinite-size limit. Report the fitted statistics and the tier of evidence, not a binary yes/no claim.
-- Community detection at scale: GVE-Leiden (ICPP 2024) processes billion-edge graphs at 400M edges/s — Louvain is no longer the only practical large-scale option. For graphs with N > 10M, benchmark GVE-Leiden before assuming Louvain is the ceiling.
+- Community detection at scale: GVE-Leiden (ICPP 2024) processes billion-edge graphs at 400M edges/s — Louvain is no longer the only practical large-scale option. For graphs with N > 10M, benchmark GVE-Leiden before assuming Louvain is the ceiling. If the graph *changes* rather than being re-analysed from scratch, use an incremental variant: LD-Leiden (Bokov et al. 2025/2026) updates partitions per edge batch instead of rerunning, reporting large speedups over warm-started Leiden at ~0.996 of the full-rerun modularity on graphs up to 3.3B edges. Full reruns on every snapshot are usually wasted compute.
+- Community-detection algorithm choice is not neutral for downstream tasks: Ghosh & Saule (2025) find measurable performance variation across graph-mining applications depending on which method produced the partition. Do not treat the partition as a fixed input — evaluate the detector against the downstream metric, not only against modularity.
+- Tooling check (verified 2026-08-14): NetworkX 3.6 exposes `networkx.algorithms.community.leiden_communities`, but it is **dispatch-only — there is no native NetworkX implementation** and it requires an installed backend such as cuGraph. Code that imports it without a backend will fail at call time, not import time. `louvain_communities` remains natively implemented.
 - For contagion on group-structured networks: classical pairwise SIR R₀ understates risk. Group interaction models can produce bistable regimes where the epidemic can either die out or explode depending on initial conditions — not just on R₀ (Ferraz de Arruda 2024, Nat. Rev. Phys.).
 - When time-series data is available, higher-order structure (hyperedges) can be recovered without knowing the coupling functions via SINDy-based sparse regression (Arnaudon et al. 2025, Nat. Comms). Check whether non-pairwise contributions exceed pairwise before assuming a standard temporal graph model suffices.
-- Temporal link prediction: GNN benchmarks on TGB standard datasets are dominated by edge recurrence; TGB-Seq (Yi et al., ICLR 2025) shows state-of-the-art models break down on sequential non-repeating edges — calibrate evaluation to your dataset's repetition rate.
+- Temporal link prediction: GNN benchmarks on TGB standard datasets are dominated by edge recurrence; TGB-Seq (Yi et al., ICLR 2025) shows state-of-the-art models break down on sequential non-repeating edges — calibrate evaluation to your dataset's repetition rate. Negative sampling is the other half of this problem: one random negative per positive inflates scores because random negatives are trivially separable in sparse graphs. Evaluate as ranking (multiple negatives, MRR) and include historical negatives — past edges absent at the current step — which are substantially harder than random ones (TGB 2.0).
+- Higher-order tooling is no longer siloed: the Hypergraph Interchange Format (Coll et al. 2025, *Network Science* 13, e21) defines a JSON schema for undirected/directed hypergraphs and simplicial complexes, supported across HypergraphX, HyperNetX, XGI, and SimpleHypergraphs.jl. If a higher-order analysis needs more than one package, serialize through HIF rather than writing pairwise adapters.
 - Sampling bias is structural, not incidental: Stumpf, Wiuf & May (2005, PNAS) show that random subsampling of a scale-free network does not reliably produce a scale-free subnet. Any degree-distribution or centrality claim made from an API crawl, snowball sample, or opt-in panel should state the collection method, since the bias runs in a predictable direction (toward hubs) rather than washing out as noise.
 
 ## Learnings Loop

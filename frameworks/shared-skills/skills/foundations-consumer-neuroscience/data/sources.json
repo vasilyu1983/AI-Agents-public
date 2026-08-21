@@ -2,9 +2,9 @@
   "metadata": {
     "title": "Consumer Neuroscience Foundations — Sources",
     "description": "Primary papers and references for 12 consumer-neuroscience primitives: attention & salience, arousal physiology, social bonding, narrative transportation, approach-avoidance, mirror systems, neuroaesthetics, interoception, memory consolidation, reward anticipation, embodied cognition, predictive processing.",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-consumer-neuroscience",
-    "total_sources": 61
+    "total_sources": 67
   },
   "primary_papers": [
     {
@@ -320,6 +320,14 @@
       "url_check": "manual"
     },
     {
+      "id": "EEGPreferenceSystematicReview",
+      "name": "A systematic review of the prediction of consumer preference using EEG measures and machine-learning in neuromarketing research",
+      "url": "https://braininformatics.springeropen.com/articles/10.1186/s40708-022-00175-3",
+      "description": "Brain Informatics. DOI: 10.1186/s40708-022-00175-3. Systematic review of 174 papers on EEG measures predicting consumer preference. Frontal alpha asymmetry (FAA) was the most-cited time-frequency preference signal; late positive potential (LPP) the most reliable ERP component for conscious emotional evaluation. Critical caveat: limited consistency across papers, with each measure showing mixed results against preference and purchase behaviour. Combined with the J. Advertising 2024 finding that alpha-asymmetry reliability does not improve with repetition, this is the basis for preferring ISC and treating single-metric EEG preference claims as weak evidence. Cited in SKILL.md Fact-Checking.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
       "id": "Poldrack2011Neuron",
       "name": "Inferring mental states from neuroimaging data",
       "url": "https://www.sciencedirect.com/science/article/pii/S0896627311009627",
@@ -365,7 +373,7 @@
       "id": "DMCCAct2024",
       "name": "Digital Markets, Competition and Consumers Act 2024",
       "url": "https://www.legislation.gov.uk/ukpga/2024/13",
-      "description": "UK primary legislation. In force 6 April 2025. Restates and extends CPRs 2008 consumer protection provisions. CMA direct civil enforcement; fines up to 10% of global annual turnover. Online choice architecture and dark patterns directly actionable. Relevant to all primitives via ethical bounds sections.",
+      "description": "UK primary legislation. In force 6 April 2025. Revoked CPRs 2008 via s.251(1) and succeeded them with ss.226-228 and Sch. 20; the successor provisions are redrafted, not a restatement. CMA direct civil enforcement; fines up to 10% of global annual turnover. Online choice architecture and dark patterns directly actionable. Relevant to all primitives via ethical bounds sections.",
       "add_as_web_search": false,
       "url_check": "manual"
     },
@@ -411,9 +419,9 @@
     },
     {
       "id": "CPRs2008",
-      "name": "Consumer Protection from Unfair Trading Regulations 2008",
+      "name": "Consumer Protection from Unfair Trading Regulations 2008 — REVOKED 6 April 2025",
       "url": "https://www.legislation.gov.uk/uksi/2008/1277/contents",
-      "description": "UK statutory instrument. Aggressive and misleading commercial practices; now restated and extended within DMCC Act 2024. Historical anchor for dark-pattern analysis; provisions relevant to manufactured urgency and pressure-selling primitives.",
+      "description": "UK statutory instrument. Aggressive and misleading commercial practices; REVOKED 6 April 2025 by DMCC Act 2024 s.251(1); succeeded by DMCC ss.226-228 and Sch. 20. Historical anchor only — cite the DMCC for current obligations. Historical anchor for dark-pattern analysis; provisions relevant to manufactured urgency and pressure-selling primitives.",
       "add_as_web_search": false,
       "url_check": "manual"
     },
@@ -435,9 +443,49 @@
     },
     {
       "id": "EUAIActHighRiskAug2026",
-      "name": "EU AI Act High-Risk System Obligations — In Force 2 August 2026",
+      "name": "EU AI Act High-Risk System Obligations — Annex III, deferred to 2 December 2027",
       "url": "https://artificialintelligenceact.eu/article/6/",
-      "description": "EU AI Act Article 6 + Annex III. From 2 August 2026, high-risk AI systems including commercial emotion-recognition and biometric-categorisation must meet data governance, technical documentation, transparency, human oversight, accuracy, robustness, and post-market monitoring requirements. Any consumer product using AI to infer affect from facial expression, voice, GSR, HRV, eye-tracking, or fNIRS must be compliant. Anchors the May 2026 readiness window referenced in SKILL.md EU Regulatory Context.",
+      "description": "EU AI Act Article 6 + Annex III. High-risk AI systems including commercial emotion-recognition and biometric-categorisation must meet data governance, technical documentation, transparency, human oversight, accuracy, robustness, and post-market monitoring requirements. CORRECTED 2026-08-14: the compliance date was deferred from 2 August 2026 to 2 December 2027 by the AI Digital Omnibus (Annex I: 2 August 2028). Article 50 transparency was NOT deferred and applies from 2 August 2026. Anchors the EU Regulatory Context section in SKILL.md and the instrumentation risk flags.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "AIDigitalOmnibus2026",
+      "name": "AI Digital Omnibus — EU AI Act high-risk deadline deferral (in force 27 July 2026)",
+      "url": "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+      "description": "AI Digital Omnibus, published in the Official Journal 24 July 2026, in force 27 July 2026 — six days before the original high-risk deadline. Defers standalone Annex III high-risk obligations from 2 August 2026 to 2 December 2027 (16 months); Annex I from 2 August 2027 to 2 August 2028. NOT deferred: Article 50 transparency and AI-content labelling (2 August 2026, with a four-month grace to 2 December 2026 for the Art. 50(2) watermarking duty on systems already marketed), GPAI provider obligations (since August 2025), and Article 5 prohibitions (since February 2025). Also adds a new Article 5 prohibition on non-consensual intimate imagery and CSAM generation, transitional to 2 December 2026. Primary basis for the 2026-08-14 correction in SKILL.md Fact-Checking.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "CMAMarksElectrical2026",
+      "name": "CMA Second DMCC Infringement Decision — Marks Electrical, 18 June 2026",
+      "url": "https://www.tlt.com/insights-and-events/insight/dmcc-act-penalty-2-cma-fines-marks-electrical-for-use-of-automatic-opt-ins-for-additional-charges",
+      "description": "CMA (18 June 2026). Second infringement decision under the DMCC Act 2024. Marks Electrical fined £1.2m reduced 40% to £720,000 for early settlement and cooperation, plus ordered redress of ~£600,000 to ~40,000 customers, for automatically opting customers into paid 'recycle old appliance' and 'unwrap and recycle packaging' services without express agreement. Conduct period April–November 2025. Establishes the practical enforcement floor for default opt-in dark patterns. Anchors the UK Regulatory Context section in SKILL.md and the DMCC OCA audit gate in ethics-operational-checklist.md.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "MontanaSB163_2025",
+      "name": "Montana SB 163 — Neurotechnology Data Under the Genetic Information Privacy Act",
+      "url": "https://www.arnoldporter.com/en/perspectives/advisories/2025/07/neural-data-privacy-regulation",
+      "description": "Montana SB 163 (enacted May 2025; effective 1 October 2025). Adds neurotechnology data to Montana's Genetic Information Privacy Act. The most extensive of the four enacted US neural-data regimes: detailed express-consent requirements for collection, marketing use, research use, disclosure, transfer, and sale, frequently requiring separate informed consent per purpose and per third-party recipient. Expressly excludes 'nonneural information' — downstream physical effects of neural activity including pupil dilation, motor activity, and breathing rate — which places GSR and eye-tracking outside scope. Was missing from prior versions of this skill; added 2026-08-14.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "FPFNeuralDataDefinitions2026",
+      "name": "The \"Neural Data\" Goldilocks Problem: Defining Neural Data in U.S. State Privacy Laws",
+      "url": "https://fpf.org/blog/the-neural-data-goldilocks-problem-defining-neural-data-in-u-s-state-privacy-laws/",
+      "description": "Future of Privacy Forum. Comparative analysis of how Colorado, California, Montana, and Connecticut define 'neural data'. Key finding for this skill: the statutes largely do NOT reach downstream or inferred physiological signals. Montana expressly excludes nonneural information; California requires neural data be 'not inferred from nonneural information'; Colorado limits scope to identification-purpose data; Connecticut has no explicit carve-out and covers only central nervous system activity. Basis for the scope-caution paragraph in SKILL.md US Regulatory Context and the signal-classification gate in ethics-operational-checklist.md — GSR, HRV, eye-tracking, facial coding, and voice affect are mostly outside neural-data statutes but remain covered by general biometric/sensitive-data law and GDPR Art. 9.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "CooleyNeuralPatchwork2026",
+      "name": "Your Brain, Their Rules: The Growing Patchwork of Neural Data Regulation",
+      "url": "https://www.cooley.com/news/insight/2026/2026-02-23-your-brain-their-rules-the-growing-patchwork-of-neural-data-regulation",
+      "description": "Cooley LLP (23 February 2026). Survey of enacted and pending US neural-data legislation. Four states enacted (Colorado, California, Montana, Connecticut); nine bills introduced across six states in the first six weeks of 2026 (Alabama HB 263, California AB 1883, Illinois SB 2994 and HB 5179, New York AB 10008/SB 9008, Vermont, Virginia HB 654), each taking a distinct regulatory approach. Supports the 'live patchwork, not settled regime' framing in SKILL.md US Regulatory Context.",
       "add_as_web_search": false,
       "url_check": "manual"
     },

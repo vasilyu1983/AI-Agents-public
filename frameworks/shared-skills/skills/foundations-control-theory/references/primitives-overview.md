@@ -1,6 +1,6 @@
 ---
 description: Domain-agnostic overview of 12 control-theory primitives. Mathematical definitions, failure modes, and decision checklist.
-last_verified: 2026-05-02
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -91,6 +91,8 @@ Each primitive below addresses a specific class of feedback failure.
 | Tool calls burst to API limit | No admission control | Token bucket (#11) on tool calls |
 | External tool failure stalls entire loop | No isolation | Circuit breaker (#10) around each tool |
 | Token budget exhausted on early steps | No multi-step planning | MPC step planner (#5) |
+| Agents with competing objectives argue instead of arbitrating | Conflict resolution delegated to the model; nondeterministic and unauditable | Structural priority outside the model: MIN/MAX selectors, split-range, fixed chain order (#4, #5) |
+| Loop "stabilized" by lowering temperature | Temperature is not a control parameter; stability came from architecture, not sampling | Constrain the action space at the tool interface — finite action catalogs bound the loop independently of model settings (#4) |
 
 ---
 
@@ -125,4 +127,7 @@ Primary references for the 12 primitives. Numeric claims should be verified agai
 - Ziegler & Nichols (1942), ASME Trans. 64:759-768.
 - Rugh & Shamma (2000), Automatica 36(10):1401-1425.
 - Varghese (2004), *Network Algorithmics*. Morgan Kaufmann.
-- Brewer (2000), PODC keynote.
+- Coulson, Lygeros & Dörfler (2019), ECC 2019, arXiv:1811.05890 — DeePC (#12).
+- Willems, Rapisarda, Markovsky & De Moor (2005), Systems & Control Letters 54(4):325-329 — Fundamental Lemma, backbone of #12.
+
+Full records, including 2024–2026 applied work, are in [`../data/sources.json`](../data/sources.json).

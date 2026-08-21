@@ -1,4 +1,4 @@
 interface:
   display_name: "Agent QA"
-  short_description: "Builds QA harnesses for LLM agents with evals, trace grading, red-team packs"
-  default_prompt: "Use $qa-agent-testing for Builds QA harnesses for LLM agents with evals, trace grading, red-team packs, and regression workflows. Use when testing tool-using, multi-turn, or multi-agent systems."
+  short_description: "Builds agent evals, including carried-workspace coding trajectories"
+  default_prompt: "Use $qa-agent-testing to design LLM-agent evaluation for tool, trace, red-team, regression, multi-agent, and carried-workspace trajectory behavior."

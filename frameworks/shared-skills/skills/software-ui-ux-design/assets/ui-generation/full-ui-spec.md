@@ -350,7 +350,7 @@ Complete specification for a page/screen design handoff.
 
 ### Dependencies
 - [Component library: e.g., shadcn/ui]
-- [Animation library: e.g., Framer Motion]
+- [Animation library: e.g., Motion (motion.dev), GSAP]
 - [Form library: e.g., React Hook Form]
 
 ### API Endpoints

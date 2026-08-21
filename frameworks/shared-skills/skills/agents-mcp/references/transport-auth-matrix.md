@@ -91,7 +91,8 @@ Is it a shared service (multiple clients or users)?
 
 ## References
 
-- MCP specification (transport): `https://modelcontextprotocol.io/specification/2025-11-25`
-- MCP authorization spec: `https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization`
+- MCP specification (current, `2026-07-28`): `https://modelcontextprotocol.io/specification/2026-07-28` — note that `2026-07-28` removes `Mcp-Session-Id` and SSE resumability (`Last-Event-ID`), and replaces the HTTP GET endpoint plus `resources/subscribe`/`unsubscribe` with a single `subscriptions/listen` stream. HTTP+SSE transport is formally Deprecated; use Streamable HTTP.
+- MCP specification (transport, `2025-11-25`): `https://modelcontextprotocol.io/specification/2025-11-25` — for servers still pinned to that version
+- MCP authorization spec (`2025-11-25`): `https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization`
 - Health-check script: `../scripts/mcp_health_check.sh`
 - Security checklist: `mcp-security.md`

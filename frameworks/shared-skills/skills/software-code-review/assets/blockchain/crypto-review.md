@@ -172,7 +172,7 @@ Comprehensive code review checklist for blockchain smart contracts (Solidity, Ru
 ## Documentation Review
 
 - [ ] NatSpec comments on all public/external functions
-- [ ] Architecture diagrams present
+- [ ] Any architecture diagram present shows the mechanism, not a box inventory — absent by design is a pass
 - [ ] Known limitations documented
 - [ ] Upgrade procedure documented
 - [ ] Emergency procedures defined

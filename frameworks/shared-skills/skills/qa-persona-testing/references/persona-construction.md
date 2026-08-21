@@ -23,7 +23,7 @@ Demographic-only personas simulate poorly. NN/g's synthesis of three 2024-2025 d
 
 That last point is why this skill forbids effect-size claims: a real difference can be reproduced directionally while its size is compressed to near-meaninglessness. Practical rules:
 
-1. Prefer, in order: real interview transcripts > support tickets and reviews (`startup-review-mining`) > analytics segments (`marketing-product-analytics`) > founder/PM assumptions.
+1. Prefer, in order: real interview transcripts > support tickets and reviews (`research-review-mining`) > analytics segments (`marketing-product-analytics`) > founder/PM assumptions.
 2. Copy verbatim user language into the persona profile (goals, complaints, vocabulary). The persona should speak like the evidence, not like a marketing one-pager.
 3. Record provenance and a confidence label (`validated` / `partially validated` / `assumed`) in the profile. Assumed personas are usable for smoke-level persona testing, but every finding they produce must carry the hedge.
 

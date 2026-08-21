@@ -56,6 +56,15 @@ description: "{description}"
     )
 
 
+def write_compact_discovery(root: Path, text: str | None = None) -> None:
+    graph_dir = root.parent / "graph"
+    graph_dir.mkdir(parents=True, exist_ok=True)
+    (graph_dir / "codex-discovery.md").write_text(
+        text or "# Codex Skill Discovery\n\nGenerated compact discovery map for Codex.\n",
+        encoding="utf-8",
+    )
+
+
 class AuditSkillMetadataTests(unittest.TestCase):
     def run_auditor(self, root: Path, *extra_args: str) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
@@ -86,7 +95,9 @@ class AuditSkillMetadataTests(unittest.TestCase):
 
     def test_strict_mode_fails_on_warnings(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
+            root = Path(tmp) / "skills"
+            root.mkdir()
+            write_compact_discovery(root)
             write_skill(
                 root,
                 "good-skill",
@@ -110,6 +121,58 @@ class AuditSkillMetadataTests(unittest.TestCase):
             strict = self.run_auditor(root, "--strict")
             self.assertEqual(strict.returncode, 1, strict.stdout + strict.stderr)
             self.assertIn("bad-skill", strict.stdout)
+
+    def test_strict_mode_rejects_oversized_or_non_generated_discovery(self) -> None:
+        for discovery in (
+            "Generated compact discovery map for Codex\n" + ("x" * 8001),
+            "# Hand-written discovery\n",
+        ):
+            with self.subTest(size=len(discovery)):
+                with tempfile.TemporaryDirectory() as tmp:
+                    root = Path(tmp) / "skills"
+                    root.mkdir()
+                    write_compact_discovery(root, discovery)
+                    write_skill(
+                        root,
+                        "good-skill",
+                        "Builds durable APIs for audit coverage. Use when testing metadata thresholds.",
+                        "Durable API audit",
+                        "Use $good-skill when auditing durable APIs and metadata coverage.",
+                    )
+                    result = self.run_auditor(root, "--strict")
+                    self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+
+    def test_exact_compact_discovery_budget_boundary_passes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "skills"
+            root.mkdir()
+            prefix = "Generated compact discovery map for Codex\n"
+            write_compact_discovery(root, prefix + ("x" * (8000 - len(prefix))))
+            write_skill(
+                root,
+                "good-skill",
+                "Builds durable APIs for audit coverage. Use when testing metadata thresholds.",
+                "Durable API audit",
+                "Use $good-skill when auditing durable APIs and metadata coverage.",
+            )
+            result = self.run_auditor(root, "--strict")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_strict_mode_fails_without_compact_discovery(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "skills"
+            root.mkdir()
+            write_skill(
+                root,
+                "good-skill",
+                "Builds durable APIs for audit coverage. Use when testing metadata thresholds.",
+                "Durable API audit",
+                "Use $good-skill when auditing durable APIs and metadata coverage.",
+            )
+
+            result = self.run_auditor(root, "--strict")
+            self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+            self.assertIn("Exists: no", result.stdout)
 
     def test_json_output_lists_top_long_skills(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

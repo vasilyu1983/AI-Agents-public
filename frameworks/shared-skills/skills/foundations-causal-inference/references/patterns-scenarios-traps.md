@@ -1,6 +1,6 @@
 ---
 description: Applied patterns, scenarios, anti-patterns, and known traps for causal-inference foundations.
-last_verified: 2026-05-02
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -16,6 +16,7 @@ status: stable
 | Heterogeneous treatment targeting | Need who benefits, not just average impact | DR estimate -> CATE/uplift -> overlap audit |
 | Mechanism attribution | Need why the effect happened | DAG -> total effect -> mediation -> sensitivity |
 | Conflicting aggregate/subgroup results | Aggregate trend reverses by segment | DAG -> confounder/collider check -> stratified estimand |
+| Interfering units | Marketplace, social graph, shared backend, ranking model | Name interference structure -> cluster/geo or switchback design -> bias-aware estimator -> report global effect |
 
 ## Scenarios
 
@@ -27,6 +28,7 @@ status: stable
 | Metric jumps after policy date | Would treated and control trends have stayed parallel? | Difference-in-differences |
 | Eligibility threshold determines access | Is there manipulation around the cutoff? | Regression discontinuity |
 | ATE is flat but some users improve | Is there overlap within subgroups? | CATE/uplift |
+| A/B test on a two-sided marketplace shows lift | Did treated users take supply from control users? | Cluster/geo or switchback design, not unit randomization |
 
 ## Anti-Patterns
 
@@ -41,6 +43,7 @@ status: stable
 | Synthetic control with poor pre-fit | Donor pool is not a credible counterfactual | Improve donor pool or do not claim effect |
 | CATE used for targeting without support checks | Model extrapolates to sparse regions | Enforce overlap and minimum subgroup N |
 | Sensitivity omitted because estimate is "significant" | Statistical significance does not address hidden bias | Report E-value, Rosenbaum bounds, or tipping point |
+| "It was randomized, so it is causal" on an interfering system | Randomization removes confounding, not interference; the control group is contaminated by the treatment | Cluster, geo, or switchback the design; report the global treatment effect and the assumed interference structure |
 
 ## Known Traps
 
@@ -52,6 +55,8 @@ status: stable
 - RDD is local to the cutoff, not a global ATE.
 - Propensity scores balance observed covariates only.
 - Mediation requires stronger assumptions than total-effect estimation.
+- Switchback block length must exceed the carryover order; too-short blocks leak treatment across blocks and bias the estimate toward null.
+- Clustering reduces interference bias but raises variance and cuts the effective sample to the number of clusters — power is set by cluster count, not user count.
 
 ## Exit Checklist
 
@@ -60,4 +65,5 @@ status: stable
 - [ ] DAG or design diagram is written down.
 - [ ] Identification assumptions are explicit and falsifiable where possible.
 - [ ] Balance, overlap, pre-trends, first-stage, bandwidth, or pre-fit diagnostics are reported as applicable.
+- [ ] Interference is ruled out, or the design accounts for it and the reported estimand says whether it is unit-level or global.
 - [ ] Sensitivity analysis is included for observational estimates.

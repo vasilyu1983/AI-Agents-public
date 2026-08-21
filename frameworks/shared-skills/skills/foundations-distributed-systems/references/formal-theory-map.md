@@ -64,3 +64,14 @@ Three complementary approaches define the current state-of-the-art for verifying
 | Modular TLA+ + conformance testing (spec-to-code gap) | Schultz & Demirbas, PVLDB vol.18 no.12, 2025 | Safety, permissiveness; automated conformance testing of C++ implementation against TLA+ spec | github.com/mongodb-labs/vldb25-dist-txns |
 
 **Choosing between them:** Use Basilisk when exhaustive automated safety proof is required and the protocol admits static analysis. Use SCV when the team has TLA+ expertise and wants continuous verification in CI without full proof overhead. Use MongoDB's modular approach when the system has a stable spec-to-code interface and conformance testing infrastructure can be maintained alongside implementation changes.
+
+## Empirical Falsification (complement, not substitute)
+
+Formal verification establishes properties of a *specification*. The three approaches above differ in how much of the gap to the running binary they close, and none closes it entirely. Two empirical techniques cover the remainder:
+
+| Approach | What it establishes | Blind spot |
+|----------|---------------------|------------|
+| Deterministic simulation testing (FoundationDB lineage; TigerBeetle, WarpStream, Antithesis) | The real binary survives adversarial schedules, clocks, and injected faults, with every failure replayable from a seed | Only faults the simulator can generate; requires all I/O, time, and concurrency behind injectable interfaces, so it is an architectural commitment made early or not at all |
+| Black-box consistency checking (Jepsen + the Elle isolation checker) | An observed history of a *real deployment* under real faults does or does not satisfy a claimed consistency model | Finds violations, never proves their absence; coverage is bounded by the fault schedule and run length |
+
+**Evidence hierarchy for a consistency claim**, strongest first: machine-checked proof of the implementation; conformance-tested spec (MongoDB pattern); DST over the real binary; external black-box report (Jepsen); internal fuzzing; vendor documentation. Documentation alone is the weakest tier and has been repeatedly falsified — see the Galera case in SKILL.md, where the *recommended* configuration did not provide the durability its docs implied.

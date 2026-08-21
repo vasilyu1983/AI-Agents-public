@@ -5,6 +5,7 @@ Practical guide to measuring code complexity, choosing the right metrics, settin
 ## Table of Contents
 
 - [Cyclomatic Complexity](#cyclomatic-complexity)
+- [Trajectory Metrics for Repeated AI Edits](#trajectory-metrics-for-repeated-ai-edits)
 - [Cognitive Complexity](#cognitive-complexity)
 - [Halstead Metrics](#halstead-metrics)
 - [Function Length and Size Metrics](#function-length-and-size-metrics)
@@ -100,6 +101,38 @@ function getStatusLabel(status: OrderStatus): string {
 // High CC, but low cognitive load — this is a known limitation
 // Cognitive complexity handles this case better
 ```
+
+---
+
+## Trajectory Metrics for Repeated AI Edits
+
+Use these research-derived signals when the same codebase is repeatedly extended by a coding agent. They complement ordinary per-snapshot metrics: mean CC can dilute a few increasingly overloaded functions, while maximum CC shows only the worst callable and not how much of the codebase's complexity has concentrated there.
+
+### Structural Erosion
+
+[SlopCodeBench v1](https://arxiv.org/abs/2603.24755v1) defines a callable's complexity mass as:
+
+```text
+mass(f) = CC(f) * sqrt(SLOC(f))
+
+erosion = sum(mass(f) where CC(f) > 10) / sum(mass(f) for all callables)
+```
+
+The square root keeps size relevant without allowing raw line count to dominate cyclomatic complexity. Track erosion at every checkpoint and inspect its direction or slope: a rise means a growing share of decision-path mass is accumulating in already-complex functions, even if mean CC looks stable.
+
+The paper used `CC > 10` for its Python experiments. Treat that cutoff and any slope threshold as an advisory research lens, not a universal quality gate or proof of incorrectness. Calibrate language tooling, generated code, parsers, and repository conventions before operational use. This signal applies the existing **CC-FUN-01** and **CC-FLOW-01** intents; it creates no new rule ID.
+
+### Verbosity
+
+For a local repository and language, define a reviewed set of redundant-code patterns and a clone detector, then calculate:
+
+```text
+verbosity = count(flagged-pattern lines UNION clone lines) / LOC
+```
+
+Count each line once when both detectors flag it. The pattern set must be locally defined and versioned: SlopCodeBench used its own Python-oriented rules, which are not a universal catalog. Track the metric across checkpoints to detect redundant scaffolding or duplication accumulating faster than useful behavior. Interpret it through **CC-FUN-05** (duplication) and, when redundant code obscures cohesion, **CC-FUN-01**.
+
+Neither erosion nor verbosity predicts correctness by itself. Pair both with behavioral and regression tests, review evidence, and change context. Their value is longitudinal: they reveal deterioration that a green test suite or a single end-state snapshot can miss.
 
 ---
 
@@ -528,6 +561,8 @@ Refactoring trigger decision:
 | Parameter count | **CC-FUN-03** | Group related parameters |
 | File length | **CC-FUN-01**, **CC-TYP-03** | Keep module boundaries clear and responsibilities cohesive |
 | Duplication | **CC-FUN-05** | Extract shared logic to avoid divergence |
+| Structural erosion trajectory | **CC-FUN-01**, **CC-FLOW-01** | Detect complexity mass concentrating in already-complex functions across repeated edits |
+| Verbosity trajectory | **CC-FUN-05**, **CC-FUN-01** | Detect locally defined redundant patterns and clone lines accumulating across repeated edits |
 | Halstead effort | **CC-FUN-01**, **CC-TYP-03** | High effort indicates refactoring need |
 
 ### Using Metrics in Code Review
@@ -555,6 +590,7 @@ PR review comment template:
 | One threshold for all code | Utility vs business logic have different needs | Allow higher thresholds for serialization, parsing |
 | Measuring but not acting | Dashboards exist but no one looks at them | Tie metrics to PR checks; block on violations |
 | Splitting to game metrics | Tiny functions that are harder to follow together | Functions should be cohesive; splitting must improve readability |
+| Treating trajectory signals as correctness gates | Erosion and verbosity can rise or fall independently of behavior | Pair them with tests and review; calibrate thresholds locally |
 
 ---
 

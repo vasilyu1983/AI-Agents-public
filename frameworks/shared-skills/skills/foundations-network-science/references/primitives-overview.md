@@ -1,6 +1,6 @@
 ---
 description: Domain-agnostic overview of 11 network-science primitives with anti-patterns by domain.
-last_verified: 2026-05-02
+last_verified: 2026-08-14
 status: stable
 ---
 

@@ -14,6 +14,7 @@ Use this map when a graph analysis depends on structural assumptions, statistica
 | Percolation | Connectivity phase transition under node/edge removal | Is failure random, targeted, or correlated? |
 | Epidemic process | Transmission and recovery over contacts | Are time ordering and heterogeneous degree accounted for? |
 | Temporal reachability | Paths that respect edge timestamps | Would a static projection create impossible paths? |
+| Higher-order interaction | Group events that are not decomposable into pairwise edges | Does a reducibility test show the hypergraph collapses to pairwise without dynamical loss? |
 
 ## Primitive Dependency Map
 
@@ -27,6 +28,7 @@ Use this map when a graph analysis depends on structural assumptions, statistica
 | Percolation | Removal model and component definition | Directed graphs need weak/strong component distinction |
 | SIR contagion | Transmission, recovery, and contact timing | Mean-field assumptions fail on heterogeneous networks |
 | Embeddings | Proximity objective and downstream task | Vectors are predictive features, not explanations by default |
+| Higher-order model | Group-event data and a reducibility criterion | Pairwise projection is a modelling choice that must be justified, not a default |
 
 ## Evidence Standards
 
@@ -36,6 +38,8 @@ Use this map when a graph analysis depends on structural assumptions, statistica
 - Scale-free claim: report fitted xmin, alpha, goodness-of-fit, and alternative distributions.
 - Diffusion claim: report beta/gamma, seed selection, time horizon, and uncertainty across simulations.
 - Temporal claim: compare time-respecting paths against static projection.
+- Link-prediction claim: state the negative-sampling scheme (random vs. historical), the number of negatives per positive, the metric (MRR for ranking, not accuracy on 1:1), and the fraction of test edges that are repeats of training edges.
+- Higher-order claim: state whether a reducibility test was run before choosing pairwise or hypergraph representation.
 
 ## Common Model Choices
 

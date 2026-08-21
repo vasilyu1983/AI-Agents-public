@@ -10,7 +10,7 @@
 - [Anti-patterns specific to this mode](#anti-patterns-specific-to-this-mode)
 - [Honest precision](#honest-precision)
 
-Specialized mode for contributing the **`industry_blog_attribution`** and **`hci_retention_paper`** signals to the bundle's Killer-Feature Convergence Protocol owned by `startup-review-mining`.
+Specialized mode for contributing the **`industry_blog_attribution`** and **`hci_retention_paper`** signals to the bundle's Killer-Feature Convergence Protocol owned by `research-review-mining`.
 
 **The premise.** Research blogs (Anthropic, OpenAI, DeepMind, Google, Meta, MSR, Apple ML, Netflix Tech, Stripe Engineering, Figma Engineering, Linear blog) and HCI/CSCW papers periodically publish post-mortems that explicitly attribute retention, conversion, or revenue to a specific feature. These are the highest-signal source for "this feature is the killer feature" claims because:
 
@@ -30,14 +30,14 @@ HCI/CSCW papers are a parallel source. They publish year-after-year retention st
 
 ## When to use this mode
 
-- Bundle handoff from `startup-review-mining` Killer-Feature Mode KF3 asks for the industry-blog and HCI-paper signals
+- Bundle handoff from `research-review-mining` Killer-Feature Mode KF3 asks for the industry-blog and HCI-paper signals
 - You're researching a commercial product and want the highest-credibility attribution signal
 - You have a candidate `feature_id` and want to find a published metric-backed claim that the feature drives retention/conversion/revenue
 
 ## What this mode does NOT do
 
 - Does **not** decide the killer feature. Contributes 1-2 of the 6 signal types in the Convergence Rule.
-- Does **not** mine community pain (that's `startup-painpoint-scanner` / `startup-review-mining`).
+- Does **not** mine community pain (that's `research-painpoint-scanner` / `research-review-mining`).
 - Does **not** mine OSS clone choices (that's `research-git` Mode D).
 
 ---
@@ -102,7 +102,7 @@ KF-PREC-3. EXTRACT THE WTP QUOTE
 
 KF-PREC-4. APPEND to shared ledger
            - For industry/engineering-blog finds, append to
-             ../startup-review-mining/assets/pay-trigger-ledger.tsv with:
+             ../research-review-mining/assets/pay-trigger-ledger.tsv with:
                signal_type   = industry_blog_attribution
                wtp_strength  = explicit | strong | implicit per KF-PREC-1
                source_type   = industry_blog
@@ -113,7 +113,7 @@ KF-PREC-4. APPEND to shared ledger
            - Pin paper_id (DOI or arXiv ID) in the ledger row's notes field
 
 KF-PREC-5. HAND OFF to convergence
-           - Run ../startup-review-mining/scripts/converge_killer_features.py
+           - Run ../research-review-mining/scripts/converge_killer_features.py
 ```
 
 ---
@@ -169,4 +169,4 @@ This mode adds an **11th method shape** to the [idea-extraction-framework](idea-
 
 When this mode returns 0 strong signals, that's information for the convergence aggregator: it caps the gate at `validate` until at least one strong attribution is found OR three of the other five signals converge.
 
-Cross-reference the precision-ceiling table in [`../../startup-review-mining/references/killer-feature-convergence.md`](../../startup-review-mining/references/killer-feature-convergence.md).
+Cross-reference the precision-ceiling table in [`../../research-review-mining/references/killer-feature-convergence.md`](../../research-review-mining/references/killer-feature-convergence.md).

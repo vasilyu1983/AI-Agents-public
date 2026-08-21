@@ -1,6 +1,6 @@
 ---
 description: Formal game-theory map connecting classical concepts, assumptions, proof obligations, and AI-agent applied primitives.
-last_verified: 2026-07-11
+last_verified: 2026-08-14
 status: stable
 ---
 
@@ -108,6 +108,8 @@ The practical rule: name the game form, name the solution concept, state the ass
 | Assignment / allocation | Resource allocation with fit scores | Fit scores can encode bias |
 | Market thickness | Enough participants for robust matching | Thin markets need manual fallback |
 
+**Matching guarantees with LLM participants (2026)**: strategy-proofness is a statement about rational best-response, and LLM agents do not supply that premise. In one-to-one matching experiments, LLM agents reported preferences truthfully at substantially higher rates than human subjects, but truthfulness did not track strategy-proofness — TTC (strategy-proof) did not always elicit more truth-telling than EADA. Mechanism-based markets nonetheless outperformed free negotiation on stability and efficiency. Read this as: use the mechanism, but do not cite its incentive proof as the reason it works, and re-measure reporting behavior when the model or framing changes. [arXiv:2606.03030, Jun 2026]
+
 ## Bargaining
 
 | Concept | Use It For | Trap |
@@ -146,6 +148,8 @@ The practical rule: name the game form, name the solution concept, state the ass
 - **Strategic manipulation**: once participants know the scoring rule, they may game it.
 - **Off-equilibrium threats**: threats matter only when credible under the actual game tree.
 - **Preference fiction**: LLM agents do not automatically have stable utility functions.
+- **Valuation error vs. misreporting**: incentive compatibility guarantees honest *reporting*, not accurate *valuation*. Agents that sincerely misestimate their own cost or success probability misallocate under a truthful mechanism with no strategic behavior anywhere (MarketBench, arXiv:2604.23897). Calibration is a separate obligation from incentive design.
+- **Unenforced rules**: a constraint stated in a prompt is cheap talk with no payoff attached. Enforcement must sit outside the players — legal states, sanctions, and an audit log in the orchestration layer (arXiv:2601.11369).
 - **Transfer error**: a result from auctions, MARL, or debate does not transfer without checking assumptions.
 
 ## Proof Obligations

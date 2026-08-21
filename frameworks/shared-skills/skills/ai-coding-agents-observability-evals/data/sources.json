@@ -3,10 +3,10 @@
     "skill": "ai-coding-agents-observability-evals",
     "title": "AI Coding Agents Observability And Evals - Sources",
     "description": "Official documentation and implementation references for tracing, replay, regression evals, and cost controls in coding-agent runtimes",
-    "last_updated": "2026-07-11",
-    "updated": "2026-07-11",
-    "total_sources": 10,
-    "version": "1.3"
+    "last_updated": "2026-08-21",
+    "updated": "2026-08-21",
+    "total_sources": 11,
+    "version": "1.4"
   },
   "categories": {
     "official_documentation": [
@@ -91,6 +91,15 @@
         "url": "https://arxiv.org/abs/2603.05344",
         "type": "paper",
         "relevance": "Independent terminal coding-agent reference architecture (workload-specialized model routing, dual-agent plan/execute, lazy tool discovery, adaptive compaction) used to corroborate runtime-decomposition completeness",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SlopCodeBench: Benchmarking How Coding Agents Degrade Over Long-Horizon Iterative Tasks (arXiv 2603.24755v1)",
+        "url": "https://arxiv.org/abs/2603.24755v1",
+        "type": "paper",
+        "relevance": "Primary preprint source for carried-workspace iterative evaluation, checkpoint-level correctness and structural-quality trajectories, and evidence that quality-aware prompting improves initial quality without halting degradation",
         "update_frequency": "static",
         "access": "free",
         "add_as_web_search": true

@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Planning And Search Foundations - Sources",
     "description": "Primary references for state-space search, heuristic search, CSPs, adversarial search, classical planning, HTN, belief-state planning, and planner-agent integration.",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-08-14",
     "skill": "foundations-ai-planning-search",
-    "total_sources": 12
+    "total_sources": 19
   },
   "textbooks": [
     {
@@ -51,6 +51,13 @@
       "url": "https://developers.google.com/optimization/cp/cp_solver",
       "description": "Google OR-Tools documentation for constraint programming with CP-SAT; useful when CSP modeling should become executable solver work.",
       "add_as_web_search": false
+    },
+    {
+      "id": "Unified-Planning",
+      "name": "AIPlan4EU Unified Planning Library",
+      "url": "https://github.com/aiplan4eu/unified-planning",
+      "description": "Python library for specifying classical, numeric, and temporal planning problems and dispatching them to multiple back-end planners (including Fast Downward) through one API. Practical entry point when a project needs a planner as a tool rather than a research build. Verified 2026-08-14 as actively released.",
+      "add_as_web_search": false
     }
   ],
   "papers": [
@@ -94,6 +101,48 @@
       "name": "Classical Planning with LLM-Generated Heuristics: Challenging the State of the Art with Python Code",
       "url": "https://arxiv.org/abs/2503.18809",
       "description": "Corrêa, Pereira & Seipp (arXiv:2503.18809, 2025). An LLM generates several domain-dependent Python heuristic functions, selected by training-task performance within a greedy best-first search; the resulting heuristics solve more unseen test tasks than state-of-the-art domain-independent heuristics for classical planning, using an unoptimized Python planner against optimized C++ baselines. Treat LLM-generated heuristics as inadmissible by default. Referenced in Primitive #3.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Kambhampati-2024-LLM-Modulo",
+      "name": "Position: LLMs Can't Plan, But Can Help Planning in LLM-Modulo Frameworks",
+      "url": "https://arxiv.org/abs/2402.01817",
+      "description": "Kambhampati et al., ICML 2024 (PMLR v235). Position paper arguing autoregressive LLMs cannot plan or self-verify, but are useful as approximate knowledge sources inside a generate-critique-repair loop wrapped by sound external verifiers. Companion evaluation of the compound architecture in arXiv:2411.14484 (2024). Source of the verifier-loop guidance in Primitive #10. Verified 2026-08-14.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Tantakoun-2025-Formalizers",
+      "name": "LLMs as Planning Formalizers: A Survey for Leveraging Large Language Models to Construct Automated Planning Models",
+      "url": "https://arxiv.org/abs/2503.18971",
+      "description": "Tantakoun, Zhu & Muise (arXiv:2503.18971, submitted March 2025, revised October 2025). Survey of the neuro-symbolic pattern in which LLMs translate natural language into formal planning models for sound off-the-shelf planners, rather than emitting plans directly. Grounds the 'LLM as formalizer, not planner' guidance in Primitive #7. Verified 2026-08-14.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Goebel-Zips-2025-Benchmark",
+      "name": "Can LLM-Reasoning Models Replace Classical Planning? A Benchmark Study",
+      "url": "https://arxiv.org/abs/2507.23589",
+      "description": "Goebel & Zips (arXiv:2507.23589, July 2025). Systematic evaluation of state-of-the-art language models prompted directly with PDDL domain and problem files, measured against Fast Downward. Models are competent on simple tasks and degrade on complex ones, with weaknesses concentrated in resource management, state tracking, and constraint compliance; the authors recommend hybrid LLM-plus-classical-planner architectures rather than replacement. Referenced in Primitive #7. Verified 2026-08-14.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Zhang-2026-DESPITE-Safety",
+      "name": "Using Large Language Models for Embodied Planning Introduces Systematic Safety Risks",
+      "url": "https://arxiv.org/abs/2604.18463",
+      "description": "Zhang, Qu, Li, Wu, Hutter, Li & Shi (arXiv:2604.18463, April 2026; revised May 2026). Introduces DESPITE, a 12,279-task embodied-planning benchmark covering physical and normative dangers with deterministic validation, across 23 models. The best-planning model fails to produce a valid plan on 0.4% of tasks but produces dangerous plans on 28.3%; across open-source models 3B-671B, planning ability scales 0.4%-99.3% while safety awareness stays roughly flat at 38-57%. Primary evidence that plan validity and plan safety are independent axes. Referenced in Primitive #7 and the Validity Gate Vs Safety Gate pattern. Verified 2026-08-14.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Ji-2026-Tree-GRPO",
+      "name": "Tree Search for LLM Agent Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2509.21240",
+      "description": "Ji, Ma, Wang, Chen, Chu & Wu (arXiv:2509.21240, September 2025; revised March 2026), ICLR 2026. Tree-GRPO branches agent rollouts from shared prefixes, yielding more distinct trajectories per unit compute than independent chain sampling and enabling step-wise process supervision from outcome-only rewards. Source of the prefix-sharing economics note in Primitive #6. Verified 2026-08-14.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Mangannavar-2026-HALO",
+      "name": "Training the Orchestrator: A Supervised Approach to End-to-End PDDL Planning with LLM Agents",
+      "url": "https://arxiv.org/abs/2606.21740",
+      "description": "Mangannavar, Coalson, Dugar & Tadepalli (arXiv:2606.21740, June 2026). HALO distills verifier-certified repair trajectories into a small fine-tuned orchestrator that selects among specialized PDDL repair agents, reported across 11 PDDL domains as matching frontier-model orchestration quality at roughly two orders of magnitude lower cost per task with 40-50% fewer LLM calls. Referenced in Primitive #10 as a maturity-stage optimization. Verified 2026-08-14.",
       "add_as_web_search": false
     }
   ]

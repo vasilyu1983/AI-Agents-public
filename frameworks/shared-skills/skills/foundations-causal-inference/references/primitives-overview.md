@@ -146,6 +146,7 @@ DiD compares the change over time in the treated group to the change over time i
   - **Known trap (BJS)**: imputation requires no always-treated units; check panel structure before applying.
 - **Synthetic DiD (Arkhangelsky et al. 2021, *AER*)**: combines unit weights (synthetic control) with time weights (DiD) to jointly balance pre-treatment outcomes. Inherits SC robustness for few treated units while recovering DiD efficiency when units are many. R package `synthdid`. Prefer over pure SC when staggered treatment and moderate donor pool.
 - **Continuous DiD**: treatment dose varies; use interaction-weighted estimator.
+- **Estimator choice is setting-dependent.** Baker, Callaway, Cunningham, Goodman-Bacon & Sant'Anna (2026, *JEL*) organizes the design space by target estimand, covariates, weights, and timing structure rather than naming a single best estimator. Pick by what the design identifies, then report the aggregation scheme explicitly — different aggregations of the same group-time ATTs answer different questions.
 
 ---
 
@@ -237,6 +238,12 @@ E-value = RR + √(RR × (RR − 1))
 ## Identification Strategies — Decision Map
 
 ```
+Q0: Can one unit's treatment change another unit's outcome?
+  YES → SUTVA fails. Fix the design first: cluster/geo randomization (graph or
+        market interference), switchback (temporal carryover), or clustered
+        switchback (both). Estimate the GLOBAL treatment effect and say so.
+  NO  → Continue.
+
 Q1: Is the treatment randomized?
   YES → Use the experimental design directly. Check SUTVA and compliance.
   NO  → Continue.
@@ -284,7 +291,7 @@ Q6: All confounders measured?
 |-----------|------------------------|--------------------------|
 | Unconfoundedness (strong ignorability) | Propensity (#8), DR | ATE/ATT bias; direction may flip |
 | Overlap (positivity) | IPW, DR | Variance explodes; effective sample collapses |
-| SUTVA (no interference, single version) | All methods | Spillover effects contaminate control group |
+| SUTVA (no interference, single version) | All methods | Spillover contaminates the control group; the unit-level and global treatment effects diverge. Randomization does not repair it — fix the design (cluster, geo, or switchback) |
 | Parallel trends | DiD (#6) | ATT estimate captures pre-existing trend, not treatment |
 | Pre-treatment fit | Synthetic control (#7) | Donor pool is invalid counterfactual |
 | Relevance (strong instrument) | IV (#4) | LIML consistent but OLS-like bias amplifies |
@@ -306,6 +313,9 @@ Theory selects the identification strategy; these are the maintained libraries t
 | Staggered DiD heterogeneity-robust estimators (#6) | `differences`, `csdid` (Python ports) | `did` (Callaway–Sant'Anna), `didimputation` (BJS), `did2s` (Gardner), `eventstudyinteract` (Sun–Abraham) |
 | Parallel-trends robustness (#6) | — | `HonestDiD` (Rambachan & Roth) |
 | Sensitivity analysis (#12) | `sensemakr` (Python port) | `sensemakr` (Cinelli & Hazlett OVB), `dml.sensemakr` (Chernozhukov et al. ML-OVB), `iv.sensemakr` (IV OVB), `EValue` |
+| Interference-aware designs (cluster, geo, switchback) | No maintained general-purpose equivalent; in-house schedulers are the norm | `GeoLift` (Meta; geo market selection + synthetic-control inference, MIT) |
+
+Interference tooling is the least mature area here: there is no maintained general-purpose library for cluster/switchback design and estimation comparable to `dowhy` or `did`. Expect to implement the randomization schedule and the estimator directly from the papers, and validate with simulation on your own data before trusting a launch decision.
 
 **Selection rule**: prefer `dowhy` + `econml` when the pipeline needs an explicit DAG and a refutation step alongside estimation; prefer `CausalPy` when the design is a single quasi-experiment (SC/ITS/DiD/RDD) and Bayesian uncertainty quantification is wanted; prefer the R packages above for DiD and sensitivity work — the staggered-DiD and OVB-sensitivity Python ports lag the R originals in maintenance and feature completeness as of mid-2026, so cross-check R output when the estimate is decision-critical.
 

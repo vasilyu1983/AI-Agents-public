@@ -1,6 +1,6 @@
 ---
 name: qa-persona-testing
-description: "Tests apps as an Ideal Customer Profile persona via Playwright/Chrome browser automation and reports friction, fixes, and risks. Use for persona-based, ICP, or synthetic-user testing."
+description: "Tests apps as an ICP persona through browser automation and reports friction, fixes, and risks. Use when running persona-based, ICP, or synthetic-user testing."
 compatibility: Portable core. Works on Claude Code and Codex; browser execution requires a Playwright MCP or Chrome DevTools MCP toolset (or a Playwright script fallback).
 version: "1.1"
 last_validated: 2026-08-01
@@ -70,7 +70,7 @@ Goal: an evidence-backed persona, not an invented stereotype.
 | Evidence you need | Skill to invoke |
 |---|---|
 | Who the ICP is at all (segment, JTBD, willingness to pay) | `startup-idea-validation`, `startup-gtm-strategy` |
-| What real users complain about in this category | `startup-review-mining`, `startup-painpoint-scanner` |
+| What real users complain about in this category | `research-review-mining`, `research-painpoint-scanner` |
 | Behavioral data from an existing product (funnels, drop-offs) | `marketing-product-analytics` |
 | Persona craft, research method, bias control | `software-ux-research` |
 | Product context: roadmap, target users already defined | `product-management`, project-specific skills |
@@ -135,7 +135,7 @@ Related skills:
 - [../software-ux-research/SKILL.md](../software-ux-research/SKILL.md) — real-user validation of simulated findings; persona research methods
 - [../software-ui-ux-design/SKILL.md](../software-ui-ux-design/SKILL.md) — heuristic/WCAG framing for design-level fixes
 - `startup-idea-validation` — ICP discovery and validation upstream of testing
-- `startup-review-mining` — real-user pain evidence to ground persona traits
+- `research-review-mining` — real-user pain evidence to ground persona traits
 - [../qa-agent-testing/SKILL.md](../qa-agent-testing/SKILL.md) — when the system under test is itself an agent
 - [../qa-testing-accessibility/SKILL.md](../qa-testing-accessibility/SKILL.md) — deep accessibility audit beyond persona-level signals
 

@@ -71,8 +71,10 @@ _Pattern_:
 - Each peer must establish common ground with the other; the orchestrator's common ground with each is not transitive.
 - Acceptance phase (#3) between peers is rare in current agent frameworks — build it explicitly.
 - Domain shorthand (#7) between peers is risky — they may have been prompted into different vocabularies.
+- Externalize joint state (#1, #8). Over multiple turns, each peer's reconstruction of "what we agreed" drifts. Keep one shared object both write to.
+- Tag proposals as exploratory vs. committed (#3, #8). Untagged exploratory proposals get read as commitments, producing the anchoring failure mode.
 
-_Watch for_: orchestrators that assume "I told both agents the same thing, so they share common ground." They share *delivered content*, not common ground.
+_Watch for_: orchestrators that assume "I told both agents the same thing, so they share common ground." They share *delivered content*, not common ground. Also watch for symmetric-looking compromises: agents default to equal splits over reward-maximizing coordination, so a tidy 50/50 outcome can be a grounding failure rather than a negotiated result (`DynamicGrounding2026`).
 
 ---
 
@@ -110,6 +112,28 @@ The system prompt has been shown to the agent — but the orchestrator has not v
 Agents trained on completion incentives default to guessing under uncertainty. Without a low-cost, *rewarded* path to ask for clarification, repair (#5) doesn't happen — failures compound silently until the work product surfaces them at maximum cost.
 
 **Fix**: provide an explicit "ask for clarification" tool. Train (or prompt) the agent to use it when entropy over interpretations is high. Treat its use as a positive signal, not failure.
+
+### Trap: Repair without common-ground update
+
+The correction is delivered, acknowledged, and then not propagated. The agent says "understood, not that file" and proceeds on the rest of its pre-repair model — including whatever else that model got wrong. Repair (#5) was treated as an utterance to be received rather than a common-ground (#1) update to be applied.
+
+This is distinct from "no repair channel": the channel worked, the message landed, the shared state didn't move. Poelitz et al. (2026) observe it directly — models fail to update assumptions after repairs, and joint vocabulary with a partner shrinks over trials where human pairs build it up.
+
+**Fix**: after a correction, require restatement of the revised shared state rather than of the correction. Acknowledging a delta is weak evidence (#4); restating the resulting whole is demonstration.
+
+### Trap: Static grounding mistaken for sustained grounding
+
+An agent interprets the opening brief correctly, so the handoff is judged grounded. Over the next twenty turns the shared plan drifts, references rebind, and early proposals harden into assumed commitments — with no single moment where anything visibly failed.
+
+Grounding a brief is static grounding. Maintaining a joint plan is dynamic grounding, and they come apart: agents that solve a task in isolation still fail as dyads (`DynamicGrounding2026`). Most handoff design and most benchmarks cover only the static case.
+
+**Fix**: externalize joint state to an object both parties read and write; re-bind referents by identity each turn; tag proposals as exploratory or committed; verify convergence by asking each party independently what was agreed.
+
+### Trap: Protocol conformance mistaken for shared meaning
+
+The handoff uses A2A or MCP, the payload validates against its schema, so the integration is treated as sound. Schema validity is syntactic-layer conformance; whether the receiver's interpretation matches the sender's is a semantic-layer question the protocol does not answer (`SemanticProtocols2026`, 18 protocols surveyed).
+
+**Fix**: treat clarification, context alignment, and verification as application responsibilities. A well-typed payload with an unresolved definite reference (#6) inside it is still a presupposition failure.
 
 ### Trap: Speaker-effort optimization
 
@@ -204,6 +228,7 @@ Benchmark: NoisyToolBench (ambiguous real-world tool-use instructions). AwN sign
 - **Pragmatics layer (high confidence)**: Stalnaker (1974), Sperber & Wilson (1986). Standard pragmatics.
 - **Common-knowledge logic (high confidence)**: Aumann (1976), Lewis (1969). Stable.
 - **Multi-agent LLM application layer (verify before using)**: MAST (Cemri et al. 2025) and related 2025–2026 work. Empirical percentages are dataset-specific — re-verify against your own production traces.
+- **2026 preprint layer (direction solid, numbers provisional)**: `DynamicGrounding2026`, `CommonGroundBench2026`, `SemanticProtocols2026`, `NCBench2026`. None peer-reviewed as of 2026-08-14. Two carry sample-size caveats worth naming: the common-ground benchmark runs 40 participants, and NC-Bench evaluates only 2–8B open models, so its absolute accuracies should not be read as frontier-model rates. Use the qualitative findings (repair is the weakest competence; dyads underperform their members; protocols omit the semantic layer) and re-measure the quantities locally.
 - **Audience design (mixed)**: Bell (1984) original is solid; computational adaptations to LLMs are recent and unsettled.
 
 When in doubt, primary sources before secondary.
