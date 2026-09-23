@@ -18,7 +18,7 @@ This is the **adjustment formula** — a weighted average of the conditional out
 2. There are no unblocked backdoor paths from X to M.
 3. All backdoor paths from M to Y are blocked by X.
 
-**Minimal adjustment set**: among all valid backdoor adjustment sets, the minimal one minimizes variance and avoids unnecessary conditioning that can amplify noise or introduce collider bias.
+**Adjustment-set choice**: first require graphical validity. Minimal means no removable member, not minimum variance. Additional valid outcome-predictive covariates can improve precision; treatment-predictive covariates can hurt it. Compare valid sets using the estimand and estimation model, without adding colliders or inappropriate descendants.
 
 ## When to Use
 

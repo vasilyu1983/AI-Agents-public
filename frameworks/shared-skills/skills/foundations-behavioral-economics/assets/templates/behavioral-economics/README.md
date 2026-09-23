@@ -13,7 +13,7 @@ Primitives **1–11** cover decision-time effects (framing, anchoring, choice, o
 | # | File | Core Behavioral Mechanism |
 |---|------|--------------------------|
 | 1 | [01-prospect-theory.md](01-prospect-theory.md) | Gains/losses evaluated relative to reference point; S-shaped value function |
-| 2 | [02-loss-aversion.md](02-loss-aversion.md) | Losses ~2× more powerful than equivalent gains (range ~1.3–2.0×; 2.25 is an upper bound) |
+| 2 | [02-loss-aversion.md](02-loss-aversion.md) | Task-dependent fitted loss weighting; no copy-response multiplier or universal bound |
 | 3 | [03-anchoring.md](03-anchoring.md) | First number seen biases all subsequent numerical judgments |
 | 4 | [04-defaults.md](04-defaults.md) | Strong inertia toward pre-set options; opt-out >> opt-in |
 | 5 | [05-social-proof.md](05-social-proof.md) | Others' behavior resolves uncertainty about correct action |
@@ -85,7 +85,7 @@ Primitives **1–11** cover decision-time effects (framing, anchoring, choice, o
 1. Habit loop (#12): Identify a stable user-side cue (calendar event, time of day, preceding routine action). Bind the load-bearing behavior to it.
 2. Implementation intentions (#16): Prompt the user to author an if-then plan during activation. User authors; you provide templates.
 3. Reinforcement schedules (#13): Default to fixed-interval daily / fixed-ratio weekly. Reward = the user's real outcome being legible. No variable-ratio gloss.
-4. Cognitive load (#14): Cue-triggered surface ≤4 novel chunks. Above that, the user reverts to goal-directed mode and the habit doesn't form.
+4. Cognitive load (#14): Audit retained information, grouping and external-memory support; visible control count alone does not establish overload or habit failure.
 5. Ethical-bound check: User authored the cue; cue is on a surface they control; reward reflects their stated goal, not a substitute counter.
 
 ### Migration / Redesign Without Retention Collapse

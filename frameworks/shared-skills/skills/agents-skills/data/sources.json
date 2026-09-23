@@ -2,10 +2,10 @@
   "metadata": {
     "title": "Agent Skills - Sources",
     "description": "Official sources for portable skill authoring plus runtime-specific verification",
-    "last_updated": "2026-08-31",
-    "updated": "2026-08-31",
+    "last_updated": "2026-09-12",
+    "updated": "2026-09-12",
     "skill": "agents-skills",
-    "total_sources": 23
+    "total_sources": 26
   },
   "official_documentation": [
     {
@@ -17,8 +17,9 @@
     {
       "name": "Claude Code Skills Documentation",
       "url": "https://code.claude.com/docs/en/skills",
-      "description": "Current Claude Code skills documentation and behavior",
-      "add_as_web_search": true
+      "description": "Claude listing budget, skillOverrides, and runtime-specific invocation behavior; verified 2026-09-11",
+      "add_as_web_search": true,
+      "last_verified": "2026-09-11"
     },
     {
       "name": "Anthropic Agent Skills Overview",
@@ -52,9 +53,10 @@
     },
     {
       "name": "OpenAI Codex Skills Docs",
-      "url": "https://developers.openai.com/codex/skills",
-      "description": "Official Codex CLI skills documentation: native discovery paths (.agents/skills scanned repo-upward, ~/.codex/skills, .codex/skills), name+description frontmatter, no adjunct manifest required. Verified July 2026",
-      "add_as_web_search": true
+      "url": "https://learn.chatgpt.com/docs/build-skills",
+      "description": "Native local discovery, progressive disclosure, optional agents/openai.yaml, and invocation policy; verified 2026-09-11",
+      "add_as_web_search": true,
+      "last_verified": "2026-09-11"
     },
     {
       "name": "Anthropic Skills Engineering Post",
@@ -73,6 +75,27 @@
       "url": "https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models",
       "description": "Primary source (Thariq, Claude Code team, 2026-07-24): ~80% of Claude Code's system prompt removed for Claude 5-gen models (Opus 5, Fable 5) with no eval loss. Six shifts: rules->judgment, examples->interface design, upfront->progressive disclosure, repetition->single tool-description home, manual CLAUDE.md->auto-memory, markdown specs->rich references (HTML/code/rubrics). Recommends lightweight CLAUDE.md (gotchas only), non-overconstraining skills, /doctor to rightsize context.",
       "published": "2026-07-24",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Codex Configuration Reference",
+      "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+      "description": "skills.max_context_tokens catalog budget: default 2% and explicit cap 10000 tokens",
+      "last_verified": "2026-09-11",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Grok Build Skills, Plugins and Marketplaces",
+      "url": "https://docs.x.ai/build/features/skills-plugins-marketplaces",
+      "description": "Native user-level .agents/skills discovery and host-specific invocation semantics",
+      "last_verified": "2026-09-11",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Rethinking skills and prompts for GPT-6 Astra",
+      "url": "https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra",
+      "description": "Model-upgrade review of trigger precision, selective context loading, workflow boundaries, and completion; verified 2026-09-12",
+      "last_verified": "2026-09-12",
       "add_as_web_search": true
     }
   ],

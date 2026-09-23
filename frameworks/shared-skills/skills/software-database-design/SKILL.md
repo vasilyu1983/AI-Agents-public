@@ -112,6 +112,10 @@ For the full relational vs. graph vs. vector decision matrix, see [references/st
 
 ## Zero-Downtime Migration Pattern (Expand-Contract)
 
+### Compatibility Invariant
+
+Write the compatibility matrix before the change: old code on old schema, old code on expanded schema, new code on expanded schema, and rollback code after partial backfill. The expand phase must preserve old reads and writes; backfills must be restartable and observable; the contract phase begins only after production evidence shows no caller depends on the old shape. Treat destructive DDL as final cleanup, not the migration itself.
+
 ```text
 Phase 1: EXPAND
   - Add new column/table (nullable, no constraints yet)
@@ -327,10 +331,9 @@ Before delivering output:
 - Known bugs, regressions, and version-specific workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or fetch to verify current external facts, versions, pricing, or platform behavior before final answers.
 - Prefer primary sources and report source links for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

@@ -13,7 +13,7 @@ Q = (1/2m) × Σᵢⱼ [Aᵢⱼ − kᵢkⱼ/2m] δ(cᵢ, cⱼ)
 - kᵢ, kⱼ = degrees of nodes i and j
 - δ(cᵢ, cⱼ) = 1 if nodes i and j are in the same community, 0 otherwise
 
-Higher Q (max 1) indicates stronger community structure relative to a null random graph. Q > 0.3 is conventionally considered meaningful community structure.
+Higher Q (max 1) indicates stronger community structure relative to a null random graph. No universal Q threshold establishes meaningful structure; compare graph-specific null models and assess partition stability and decision utility.
 
 **Key algorithms**:
 
@@ -49,12 +49,12 @@ Higher Q (max 1) indicates stronger community structure relative to a null rando
 ## Failure Modes
 
 1. **Resolution limit**: modularity maximisation merges small communities into large ones and misses dense small communities in large graphs (Fortunato & Barthélemy 2007). Fix: run with multiple γ values; compare at γ=0.5, 1.0, 2.0.
-2. **Small graphs (N < 50)**: modularity gains are trivially achievable on small graphs. Community detection results are statistically unreliable for small N.
+2. **Node-count cutoff used as validity proof**: descriptive communities can be useful on small graphs; significance depends on null comparison, sampling and stability, not N≥50 or N≥100.
 3. **Directed graphs treated as undirected**: most algorithms require undirected input. For directed graphs, either project to undirected (losing directional information) or use a directed-modularity variant.
 4. **Single run of Louvain**: Louvain is non-deterministic. Run 10–50 times and take the result with highest Q, or use consensus clustering across runs.
 5. **Community count treated as ground truth**: different γ values produce different community counts. Report the range, not a single K.
 6. **Applying pairwise community detection to a high-degree-heterogeneity hypergraph without a reducibility check**: co-authorship-style networks with high degree heterogeneity cannot be safely collapsed to pairwise edges without dynamical information loss. Run the reducibility test (Lucas et al. 2026, Nat. Comms) before choosing pairwise vs. higher-order methods — contact networks are typically reducible; co-authorship networks are not.
-7. **Using Louvain/Leiden when the question is inferential**: if the goal is to test whether community structure exists, compare competing partitions, or determine the number of communities from data, modularity-based methods cannot answer these questions — they always return a partition and have no null model for "no community structure." Use SBM (`graph-tool minimize_blockmodel_dl()` or `minimize_nested_blockmodel_dl()`) for inferential questions. Key result: Peixoto & Kirkley (2023, Phys. Rev. E) show that inferential methods have implicit biases too, but those biases are auditable and correctable unlike modularity's hidden resolution limit.
+7. **Using Louvain/Leiden when the question is inferential**: if the goal is to test whether community structure exists, compare competing partitions, or determine the number of communities from data, modularity-based methods cannot answer these questions — their optimizer alone returns a partition without a calibrated significance test; modularity does contain a null reference, but optimization is not hypothesis testing. Use SBM (`graph-tool minimize_blockmodel_dl()` or `minimize_nested_blockmodel_dl()`) for inferential questions. Key result: Peixoto & Kirkley (2023, Phys. Rev. E) show that inferential methods have implicit biases too, but those biases are auditable and correctable unlike modularity's hidden resolution limit.
 
 ## Worked Example
 

@@ -72,7 +72,7 @@ run process with bounded cwd, mounts, env, network, and cleanup rules
 5. **Constrain environment exposure.** Make secret inheritance opt-in and scoped to the minimum execution surface.
 6. **Classify destructive actions.** Delete, reset, force-push, and privileged commands need stricter rules than normal edits.
 7. **Protect privileged config surfaces.** Settings files, policy files, and skill directories should usually be non-writable even when the workspace is otherwise writable.
-8. **Narrow worker inheritance.** Child tasks and teammates should inherit the minimum effective envelope, not the widest parent one.
+8. **Compute the worker envelope.** Intersect the launcher envelope, worker policy, runtime defaults, mounted roots, network policy, and any fresh approval. Do not assume the runtime narrows child capability merely because the worker definition is narrower.
 9. **Test escape paths.** Validate symlink tricks, path traversal, shell expansion, and tool-wrapper bypass attempts.
 
 ## Host Rules
@@ -82,7 +82,7 @@ run process with bounded cwd, mounts, env, network, and cleanup rules
 - Treat path resolution and symlink resolution as part of the security boundary.
 - Model network access independently from filesystem access.
 - Make the default sandbox conservative and escalate only when justified.
-- Ensure worker tasks never gain more power than the actor that launched them unless a fresh approval path exists.
+- Compare the effective worker envelope with the launcher's envelope before dispatch; block or surface any widening unless the runtime has an authorized escalation path.
 - Distinguish path semantics for permission rules from path semantics for substrate mounts if the runtime supports both; do not assume one resolver is correct for both layers.
 - Scope the sandbox explicitly to the tool classes it covers. Both shipping references this skill tracks (Claude Code's Bash sandbox, Codex's exec sandbox) restrict subprocess execution but leave file-edit, fetch, and computer-use tool calls to a separate permission system — "the agent is sandboxed" is a category error unless you name which tool surface that applies to.
 - Do not let default read policy stay broad while write policy is locked down and call the result a secrets boundary; a sandbox that can still read `~/.ssh` or `~/.aws/credentials` because only writes were restricted is a common, easy-to-miss gap.
@@ -103,7 +103,7 @@ run process with bounded cwd, mounts, env, network, and cleanup rules
 - The sandbox boundary must exist in the execution substrate, not only in prompts.
 - Filesystem, network, and environment policy are separate control planes.
 - Canonical path resolution is part of the security boundary.
-- Child workers inherit the minimum effective envelope by default.
+- Worker capability is the computed effective envelope; inheritance defaults are runtime-specific and must be verified.
 - Destructive capability must never be implied by tool name or user intent alone.
 - Privileged config surfaces should remain protected even when ordinary workspace edits are allowed.
 
@@ -204,6 +204,6 @@ Custom distributions (see `ai-coding-agents-release-distribution`) ship with a n
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

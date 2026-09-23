@@ -3,7 +3,7 @@ name: Conformal Social Choice Act/Escalate
 mechanism_id: 20
 layer: synthesis
 status: emerging
-last_verified: 2026-05-08
+last_verified: 2026-09-08
 sources:
   - https://arxiv.org/abs/2604.07667
 ---
@@ -20,24 +20,24 @@ Multi-agent debate can converge on a wrong answer. Agreement is useful evidence,
 
 Ask each member for a probability distribution over candidate answers or actions. Aggregate the distributions, calibrate the combined set against a held-out or shadow-scored case set, then map the result to:
 
-- **singleton set**: act autonomously on that answer
+- **singleton set**: submit that candidate to the task's independent validation and authorization checks
 - **multi-answer set**: escalate, gather evidence, or ask the operator
 - **empty/unstable set**: no decision; rerun with better evidence
 
-The point is not to make debate smarter. The point is to make debate failure actionable.
+The paper establishes marginal set coverage for closed-set classification under exchangeability of calibration and test cases. It does not establish correctness for each singleton or authorize an external action. Keep the scoring/aggregation procedure fixed after calibration; distribution shift, changed agents, or open-ended candidate generation require renewed validation.
 
 ## When to Use
 
 - High-stakes team verdicts: release gates, legal/regulatory posture, security approval, payments, fraud, medical-like review, financial decisions.
 - Cases where agents agree but the cost of a wrong action is high.
 - Heterogeneous panels where member confidence scales are not directly comparable.
-- Any team already collecting confidence, prediction-market stakes, or per-claim probabilities.
+- Teams with a fixed candidate-label space and representative labeled calibration cases; collecting confidence scores alone is insufficient.
 
 ## When NOT to Use
 
 - A deterministic oracle exists: test suite, compiler, schema, calculator, official source lookup.
 - Low-stakes reversible actions where escalation cost exceeds failure cost.
-- No calibration set or shadow history exists and the action is irreversible. Use a hold/escalate default until enough cases accumulate.
+- No representative labeled calibration set exists. Use the task's ordinary verification or escalation path; do not manufacture a conformal set from verbal confidence.
 - Pure ideation where diversity matters more than calibrated correctness.
 
 ## Protocol
@@ -53,7 +53,7 @@ synthesis:
       member_3: {A: 0.60, B: 0.25, C: 0.15}
     calibration_alpha: 0.05
   output_policy:
-    singleton: act
+    singleton: validate_candidate_and_check_authorization
     multiple: escalate
     unstable: gather_evidence
 ```
@@ -63,8 +63,8 @@ Minimum implementation:
 1. Generate candidate actions.
 2. Collect independent probability distributions from each member.
 3. Pool probabilities linearly or with calibrated member weights.
-4. Compare pooled confidence against a calibration table from shadow cases.
-5. Act only when the conformal prediction set has one answer.
+4. Fit the chosen split-conformal score threshold on held-out labeled cases, with the finite-sample quantile rule and exchangeability assumptions recorded. A hand-picked confidence cutoff is not conformal calibration.
+5. Route a singleton to independent task validation and authorization; route multiple or empty sets to the stated evidence/escalation path. Prediction-set size does not override permission rules.
 
 ## Agent-Team Pattern
 
@@ -86,7 +86,8 @@ The final answer must include:
 
 ## Anti-Patterns
 
-- **Consensus-as-correctness**: three agents agree, so the system acts. This is exactly what the mechanism prevents.
+- **Consensus-as-correctness**: three agents agree, so the system acts. Calibrated selection can reduce error exposure but does not eliminate wrong singletons.
+- **Singleton-as-authorization**: a set-size threshold is used to grant permission to send, pay, or deploy.
 - **Verbal confidence without calibration**: "high confidence" from different models is not a common unit.
 - **Escalation hidden as failure**: a multi-answer set is a valid result, not a failed run.
 - **Calibrating on synthetic cases only**: useful for bootstrapping, weak for production gating.

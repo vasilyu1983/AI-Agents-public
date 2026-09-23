@@ -69,7 +69,7 @@ After 50 rounds of Thompson sampling:
 | B | 4 | 18 | 22% | Beta(5, 15) |
 | C | 3 | 12 | 25% | Beta(4, 10) |
 
-Thompson sampling at round 51: sample θ_A, θ_B, θ_C from their posteriors. Arm A is sampled highest ~55% of the time; it receives ~55% of next-round traffic. Arms B and C remain in play until the posterior gap is decisive.
+Thompson sampling at round 51: sample θ_A, θ_B, θ_C from their posteriors. Estimate the posterior probability that each arm is best by reproducible integration or seeded Monte Carlo; the supplied counts alone do not establish the previously asserted 55% allocation. Arms B and C remain in play until the posterior gap is decisive.
 
 Stopping rule: When P(arm A is best) > 0.99 (posterior mass), reallocate 100% to A.
 
@@ -81,7 +81,7 @@ When exploration must respect general long-term resource budgets, weakly adaptiv
 
 ## LLM Agents and PSRL (ICLR 2026)
 
-When the bandit or MDP environment is described in natural language and the agent is an LLM, standard exploration policies (UCB, ε-greedy) are absent by default. Arumugam & Griffiths (ICLR 2026) show LLMs can *explicitly implement* Posterior Sampling for RL (PSRL) by delegating three atomic roles to distinct LLM calls: (1) approximate posterior update from trajectory, (2) posterior sample (hypothesis about the world), (3) optimal policy for that hypothesis. This restores PSRL's proven exploration efficiency guarantees in LLM agent pipelines. Practical: the model underlying the PSRL implementation matters — replacing GPT-4o with o1-mini was the difference between linear and sublinear regret in experiments.
+When the bandit or MDP environment is described in natural language and the agent is an LLM, standard exploration policies (UCB, ε-greedy) are absent by default. Arumugam & Griffiths (ICLR 2026) show LLMs can *explicitly implement* Posterior Sampling for RL (PSRL) by delegating three atomic roles to distinct LLM calls: (1) approximate posterior update from trajectory, (2) posterior sample (hypothesis about the world), (3) optimal policy for that hypothesis. This provides empirical evidence of better exploration in the studied natural-language tasks. Approximate LLM posterior updates, samples and policies do not automatically inherit the exact algorithm's regret guarantees; theorem conditions require separate justification. Practical: the model underlying the PSRL implementation matters — replacing GPT-4o with o1-mini was the difference between linear and sublinear regret in experiments.
 
 **Kill criteria:** Drop if the environment is not partially observable or the action space is small enough that tabular PSRL or UCB applies directly. Drop if LLM inference cost per step exceeds the value of improved exploration.
 

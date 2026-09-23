@@ -77,7 +77,7 @@ Production cost modeling, unit economics, and decision frameworks for LLM system
 | Claude Haiku 4.5 | $1.00 | $5 | Fastest tier |
 | Gemini 3.1 Pro | Verify at ai.google.dev | Verify | Large-context frontier option |
 | Gemini 3.5 Flash | Verify at ai.google.dev | Verify | Speed tier |
-| GPT-5.6 Sol | $5 | $30 | OpenAI's current top tier for long-horizon/agentic/cyber-science work (public since 2026-07-09) |
+| GPT-5.6 Sol | $4 | $20 | Promotional cut from $5/$30, valid at least through 2026-11-21. OpenAI's current top tier for long-horizon/agentic/cyber-science work (public since 2026-07-09) |
 | GPT-5.6 Terra | $2.00 | $12 | Balanced efficiency/capability tier |
 | GPT-5.6 Luna | $0.20 | $1.20 | Speed/cost tier |
 

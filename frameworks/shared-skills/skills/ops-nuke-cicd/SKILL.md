@@ -74,6 +74,8 @@ Load `references/execution-preflight-and-command-hygiene.md`.
 11. Run anti-pattern review before finalizing.
 Load `references/nuke-pipeline-antipatterns.md`.
 
+12. Verify each pipeline claim at the matching stage: target selection from the execution plan or target log, command execution from exit codes and test/build output, and downstream consumption from the collector or deploy job reading the exact artifact path, digest, or exported variable. Compiling `Build.cs` or inspecting `DependsOn` proves graph syntax only. If Docker, credentials, or the CI provider is unavailable, report those stages as unexecuted and name the exact canonical target that remains.
+
 ## ASCII Flow
 
 ```text
@@ -168,7 +170,6 @@ NUKE pipeline request or failure
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

@@ -96,7 +96,7 @@ Decision ladder for source selection in `research-scout`. Start at the top of ea
 |--------|-----------|--------------|-----------------|
 | arXiv export API | 1 req / 3s, 1 connection | No | Fixed 3s gap; no parallelism |
 | Semantic Scholar | ~1 RPS authed | Recommended | Exponential backoff on 429 (2^n s, max 60s) |
-| OpenAlex | ~10 req/s max with key (credit-metered, not just rate-limited) | Yes (mandatory since 2026-02-13) | Exponential backoff on 429; also budget the $-credit, not just the rate — list/search/semantic calls consume the $1/day free credit even under the rate cap |
+| OpenAlex | freemium | changed | OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19). |
 | HF Papers | No documented limit | No | Polite 1s gap |
 | GitHub (via research-git) | 5000 req/hr authed | Yes (free) | Per `research-git` defaults |
 

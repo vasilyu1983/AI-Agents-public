@@ -177,7 +177,7 @@ The token avoids lifting all state while giving the parent a one-way "reset" sig
 - using sleeps when a state-based readiness check exists
 - hiding actor or sendability warnings instead of resolving them
 - wrapping post-await code in `await MainActor.run { ... }` from inside a `nonisolated async` function — it looks defensive but causes the continuation epilogue to crash on main-thread assertion (see "Swift Concurrency crash patterns and fixes" below)
-- reaching for bare `Task { ... }` from a `@MainActor` class without explicit `Task { @MainActor in ... }` annotation — with `StrictConcurrency` the body runs on the global executor and crashes on any `@Observable` mutation
+- assuming the containing type determines task isolation without checking the enclosing function — `Task { ... }` inherits the closure-formation context, which may be actor-isolated or nonisolated
 
 ## Swift Concurrency crash patterns and fixes
 
@@ -262,63 +262,46 @@ final class AppDelegate: NSObject,
 
 The same rule applies to `ASAuthorizationControllerDelegate`, `MKLocalSearchCompleterDelegate`, and other async Apple delegate protocols. If the method is async and wants to touch `@MainActor` state, annotate the method `@MainActor` directly — do NOT use nested `MainActor.run`.
 
-### Bare `Task { }` does not inherit `@MainActor`
+### `Task { }` inherits its actor context
 
-In Swift 5.7+ with the `StrictConcurrency` upcoming-feature enabled, a bare `Task { ... }` spawned from inside a `@MainActor` class runs on the global executor, NOT on the main actor. The body has no isolation. Any `@Observable` mutation inside the body is an off-main publish and crashes with the same `_performBlockAfterCATransactionCommitSynchronizes:` assertion documented above.
+Swift Evolution SE-0304 specifies that an unstructured task created with `Task { ... }` inherits actor isolation from the context in which its closure is formed. Inside a main-actor-isolated method, the task body remains main-actor isolated across suspension. `Task.detached` is the API that deliberately drops actor, priority, and task-local inheritance.
 
-**The bug pattern:**
+The type's annotation alone is not enough to reason about a call site. A protocol requirement, delegate method, completion handler, or explicitly `nonisolated` method may form the task outside the main actor even when the containing type is `@MainActor`. Inspect the enclosing function's isolation.
 
 ```swift
 @MainActor
 @Observable
 final class AuthSession {
-    var otpResendCooldown: Int = 0                        // ← tracked @Observable
+    var cooldown = 0
 
-    private func startResendCooldownTimer() {
-        otpResendCooldown = 60
-        Task { [weak self] in                              // ← BARE Task, runs on global executor
-            while let self, self.otpResendCooldown > 0 {
-                try? await Task.sleep(for: .seconds(1))
-                self.otpResendCooldown -= 1                // ← off-main @Observable mutation
-            }
-        }
-    }
-}
-```
-
-**The fix** — explicit `@MainActor` isolation on the Task:
-
-```swift
-private func startResendCooldownTimer() {
-    otpResendCooldown = 60
-    Task { @MainActor [weak self] in                       // ← explicit @MainActor
-        while let self, self.otpResendCooldown > 0 {
+    func startCooldown() {
+        Task { [weak self] in
+            // Inherits MainActor because this closure is formed in a
+            // main-actor-isolated method.
             try? await Task.sleep(for: .seconds(1))
-            self.otpResendCooldown -= 1                    // ← now on main, safe
+            self?.cooldown -= 1
+        }
+    }
+
+    nonisolated func callbackFromSDK() {
+        Task { @MainActor [weak self] in
+            // Explicit hop is required because the callback is nonisolated.
+            self?.cooldown = 0
         }
     }
 }
 ```
-
-**Real instances found in cosmic-swift** (worked examples of the same anti-pattern):
-
-- `Core/Auth/AuthSession.swift` — `startResendCooldownTimer` per-second mutation of `otpResendCooldown`
-- `Core/Billing/StoreKitManager.swift` — `startTransactionListener` `for await Transaction.updates` loop mutating `activeSubscriptionProductID`
-- `Core/Analytics/AnalyticsClient.swift` — `scheduleFlush` debounce timer mutating `lastFlushAt` / `pendingEventCount`
-- `Features/Ask/AskStore.swift` — two `submitState` cleanup tasks that sleep then reset state
-
-Before `StrictConcurrency` was enabled, these would have been runtime warnings. With strict mode, they're hard crashes the first time the loop body ran.
 
 **Decision rule:**
 
-| Context | Use |
-|---------|-----|
-| Task body needs to mutate `@MainActor` state | `Task { @MainActor [weak self] in ... }` |
-| Task body calls an `async` method and then doesn't mutate anything | `Task { await model.foo() }` — await hops to main, post-return tail is bare but doesn't touch anything |
-| Task body does non-UI background work only | `Task.detached { ... }` — deliberately non-isolated |
-| SwiftUI `.task` modifier or `.onReceive` closure inside a `View` | Already `@MainActor` — bare `Task { await model.foo() }` is fine because the closure inherits |
+| Closure formation context | Use |
+|---|---|
+| Actor-isolated method and work belongs to that actor | `Task { ... }`; actor isolation is inherited |
+| Nonisolated delegate/callback needs UI state | `Task { @MainActor [weak self] in ... }` |
+| CPU work must deliberately leave the actor | Prefer an async nonisolated function; use `Task.detached` only when lost inheritance and unstructured lifetime are intentional |
+| View lifecycle work | SwiftUI `.task` so cancellation follows the view |
 
-**Rule of thumb:** if you're adding a `Task` inside a `@MainActor` class AND the body touches any stored property (mutating or reading), write `Task { @MainActor [weak self] in ... }` explicitly. It never hurts and often prevents the bug. Every bare `Task { ... }` in a `@MainActor` class is a latent crash waiting for the right timing.
+Actor correctness does not make an unstructured task lifecycle-safe. Store and cancel long-lived task handles, check cancellation after sleeps, and guard delayed state changes with request identity so an older task cannot erase newer state.
 
 ### `actor` → `@MainActor final class` refactoring guidance
 

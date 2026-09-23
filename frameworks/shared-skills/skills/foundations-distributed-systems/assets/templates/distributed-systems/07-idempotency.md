@@ -8,7 +8,7 @@
 
 An operation is **idempotent** if applying it multiple times produces the same result as applying it once: `f(f(x)) = f(x)`.
 
-In distributed systems, **at-least-once delivery** is the tractable delivery guarantee — messages may be delivered more than once due to retries, network timeouts, or producer restarts. **Exactly-once semantics** are impossible to guarantee end-to-end at the transport layer (see FLP #2). The idempotency pattern creates the **illusion of exactly-once** semantics by designing receivers to be safe against duplicate processing.
+In distributed systems, **at-least-once delivery** is the tractable delivery guarantee — messages may be delivered more than once due to retries, network timeouts, or producer restarts. Transport delivery alone does not establish exactly-once business effects; FLP is a consensus-termination result, not a universal exactly-once impossibility theorem. The idempotency pattern creates the **illusion of exactly-once** semantics by designing receivers to be safe against duplicate processing.
 
 **Pattern**:
 1. **Idempotency key**: A client-generated, globally unique identifier attached to every write request (UUID, ULID, or hash of content + nonce).
@@ -39,7 +39,7 @@ In distributed systems, **at-least-once delivery** is the tractable delivery gua
 | Idempotency key | Client-provided UUID; scoped to the operation type and user/account |
 | Dedupe store | Persistent key-value store (Redis, DynamoDB, PostgreSQL) with TTL |
 | At-least-once transport | The delivery mechanism that may deliver the same message multiple times |
-| Operation result | The response to return on duplicate (either re-execute or return cached result) |
+| Operation result | Cached completed response; explicit in-progress reconciliation behavior, never blind side-effect re-execution |
 
 ---
 
@@ -47,7 +47,7 @@ In distributed systems, **at-least-once delivery** is the tractable delivery gua
 
 | Output | Description |
 |--------|-------------|
-| At-most-once execution | The operation's side effect is applied exactly once |
+| At-most-once execution | At most one committed effect within the stated atomicity boundary; at-most-once does not imply eventual completion |
 | Stable response | Duplicate requests return the same response as the first successful request |
 | Audit trail | The dedupe store provides a record of all processed operations |
 
@@ -59,8 +59,8 @@ In distributed systems, **at-least-once delivery** is the tractable delivery gua
 |---------|-------|-------------|
 | Non-atomic check-and-execute | Gap between "check if key exists" and "store key" allows a concurrent duplicate to slip through | Double processing under concurrent retries |
 | Idempotency key scoped too broadly | One key covers multiple operations; a duplicate key hits the dedupe store but the operations are different | Wrong cached result returned |
-| No TTL on dedupe store | Keys accumulate indefinitely | Storage exhaustion |
-| Idempotency key generated server-side | If the server crashes after generating but before responding, the client generates a new key on retry | Duplicate processing because keys differ |
+| Unspecified retention | Indefinite keys may exhaust capacity; premature expiry permits replay | Choose retention/archival from replay horizon and obligations |
+| Unpersisted/new retry key | A retry receives a fresh operation ID after ambiguous completion | Duplicate processing; generated IDs are safe if persisted and reused before dispatch |
 | Assuming PUT is idempotent in all contexts | PUT is idempotent for full-object replacement but not for conditional updates | Conditional updates (if-match ETags) require additional concurrency control |
 
 ---
@@ -72,18 +72,18 @@ In distributed systems, **at-least-once delivery** is the tractable delivery gua
 **Without idempotency**: Two payments of £100 are charged.
 
 **With idempotency**:
-1. First request arrives. Server checks: key `"order-42-pay-1"` not in dedupe store. Executes charge. Stores `"order-42-pay-1" → {payment_id: "pmt_7x9", status: "succeeded"}`.
+1. First request atomically reserves key `"order-42-pay-1"` bound to account/amount. For an external provider, dispatch using the same provider idempotency key; persist its result or reconcile status after ambiguous completion.
 2. Response is dropped. Client retries with the same key.
 3. Second request arrives. Server checks: key `"order-42-pay-1"` is in dedupe store. Returns the cached result `{payment_id: "pmt_7x9", status: "succeeded"}` without re-executing the charge.
 4. Client receives a success response. Single charge occurred.
 
-**Atomicity**: Use a database transaction to execute the charge and insert the dedupe record in the same transaction. If the transaction rolls back, the key is not stored and the next attempt will re-execute correctly.
+**Atomicity**: A database transaction can atomically commit a local ledger mutation and dedupe record only when both live in that transaction. It cannot roll back an unrelated provider charge. Crash after provider acceptance but before result persistence requires same-key provider retry/status reconciliation; absent that support, report unknown outcome and avoid a fresh-key blind retry.
 
 ---
 
 ## Production Pattern: Transactional Outbox
 
-The dedupe-store pattern above guarantees idempotency within a single node. The **transactional outbox** is the production implementation that extends this guarantee across a database boundary to a message broker.
+The atomic local-effect/dedupe transaction protects its stated commit boundary, including concurrent requests when correctly serialized. The **transactional outbox** is the production implementation that extends this guarantee across a database boundary to a message broker.
 
 **Problem**: A naive "dual-write" — write to the database AND publish to the broker in two separate operations — creates a split-brain window: if the process crashes between the two writes, the database is updated but the event is never published (or vice versa). This breaks at-least-once delivery.
 

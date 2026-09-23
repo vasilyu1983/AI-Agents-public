@@ -170,6 +170,12 @@ Before merging:
 - keep status in one canonical source and link to it from secondary docs
 - reject new Markdown files that lack a placement, owner, lifecycle, and index link
 
+### Claim authority and retirement gate
+
+For operationally important claims, name the authoritative source and a cheap way to verify it: code path, schema, generated spec, configuration, owner, or runnable command. Do not copy the same fact into multiple prose pages without declaring which page is canonical and which pages are generated or link-only consumers.
+
+When replacing a document, update inbound links and either remove it within the authorized scope or leave a short redirect with the replacement and retirement date. A “deprecated” banner without link repair keeps stale guidance discoverable. Before declaring a docs revamp complete, search for the retired claim and title, inspect every remaining hit, and report intentional historical references separately from active guidance.
+
 ## Navigation
 
 **Core references**
@@ -231,7 +237,6 @@ Before delivering output, verify:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

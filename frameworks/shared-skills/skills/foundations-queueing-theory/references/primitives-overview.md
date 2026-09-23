@@ -22,9 +22,9 @@ Every system that serves requests has a queue — visible or hidden. Without int
 
 | Failure Mode | Queueing Theory Diagnosis | What Goes Wrong |
 |-------------|--------------------------|-----------------|
-| Latency spikes at 70% CPU | ρ approaching 1; M/M/1 hyperbolic blowup | SLO breach before saturation; no headroom |
+| Latency spikes at 70% CPU | Possible bottleneck utilization; CPU percentage is not queue rho without arrival/service/resource mapping | SLO breach before saturation; no headroom |
 | "We have 16 servers — latency should be fine" | Retrograde scaling (USL κ > 0) | Adding servers reduces throughput past N_max |
-| p99 is 20× p50 under load | High service-time variance (CV² >> 1) inflates M/G/1 queue wait | P-K / Kingman predicts the gap |
+| p99 is 20× p50 under load | High service-time variance (CV² >> 1) inflates M/G/1 queue wait | P-K / Kingman predict mean waiting inflation, not p99/p50; measure tails from distributions or representative traces |
 | System is "fast" but callers see slowness | Bufferbloat: large buffers absorb load, hide congestion | Latency accumulates in silent queues |
 | Fan-out query is slow even though each call is fast | Completion waits for slowest worker (fork-join max) | Completion time > any individual call time |
 | Scaling microservices doesn't help | Bottleneck shifted to another stage | Jackson network flow balance not re-solved |
@@ -59,7 +59,7 @@ Each primitive addresses a specific failure mode. They compose: real systems nee
 
 | Anti-Pattern | Diagnosis | Fix |
 |-------------|-----------|-----|
-| Sizing for average load without headroom | M/M/1: latency is hyperbolic near ρ=1 | Size for ρ ≤ 0.70; keep 30% headroom |
+| Sizing for average load without headroom | M/M/1: latency is hyperbolic near ρ=1 | Derive headroom from workload variability, latency SLO and capacity-change delay |
 | Using M/M/1 when service time is variable | CV² > 1 inflates wait beyond M/M/1 prediction | Measure CV²_s; apply P-K or Kingman |
 | Scaling horizontally without checking USL | Retrograde at high N reduces throughput | Fit USL from load-test series; find N_max |
 
@@ -76,7 +76,7 @@ Each primitive addresses a specific failure mode. They compose: real systems nee
 | Anti-Pattern | Diagnosis | Fix |
 |-------------|-----------|-----|
 | Scaling one service without re-solving flow balance | Bottleneck shifts downstream undetected | Jackson networks: re-solve after each scaling action |
-| Fan-out sized by mean worker time | Fork-join completion = E[max] >> E[S] | Apply H_K correction; model tail of maximum |
+| Fan-out sized by mean worker time | Fork-join completion = E[max] >> E[S] | Use H_K only for iid exponential service; otherwise model joint maxima and waiting |
 | Priority not applied end-to-end | Priority at load balancer, FIFO at worker | Apply priority consistently: ingress, queue, and worker scheduler |
 
 ---
@@ -91,7 +91,7 @@ Each primitive addresses a specific failure mode. They compose: real systems nee
 - [ ] **Scaling horizontally?** → USL (09); fit σ and κ from load tests; verify N_max.
 - [ ] **Mixed SLO classes?** → Priority queues (05); model each class separately.
 - [ ] **High latency despite good throughput?** → Bufferbloat (08); check queue depths and AQM.
-- [ ] **Fan-out / scatter-gather?** → Fork-join (11); compute E[max] = E[S] × H_K.
+- [ ] **Fan-out / scatter-gather?** → Fork-join (11); compute the joint maximum; E[S] × H_K only for iid exponential service.
 - [ ] **Drop-on-busy (no queue)?** → Erlang-B (10); compute blocking probability.
 - [ ] **Sanity-checking any result?** → Little's Law (01); verify L = λ × W.
 

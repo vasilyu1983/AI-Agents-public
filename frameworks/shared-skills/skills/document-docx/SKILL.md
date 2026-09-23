@@ -200,6 +200,12 @@ python3 scripts/docx_extract.py input.docx --include headers footers hyperlinks 
 - Accessibility hygiene: headings, descriptive links, table headers, document language, and alt text are present where needed.
 - Release quality: run `scripts/docx_quality_gate.py` before shipping or batch-publishing.
 
+### Round-trip release proof
+
+For generated or edited files, validate both package structure and rendered behavior. Capture the expected section, paragraph, table, image, hyperlink, comment, and tracked-change counts before the final save; reopen the saved DOCX and compare them, then render or convert a copy and inspect page breaks, numbering, table overflow, missing fonts, and unresolved template tags.
+
+For high-fidelity delivery, record which Word version/viewer performed the primary review and which secondary viewer was checked. A successful OOXML parse or text extraction does not prove layout fidelity, and a visually correct PDF export does not prove comments, hyperlinks, fields, or accessibility metadata survived the editable DOCX round trip.
+
 ## Optional: AI / Automation
 
 Use only when explicitly requested and policy-compliant.
@@ -243,13 +249,11 @@ Use only when explicitly requested and policy-compliant.
 ## Fact-Checking
 
 - Use `data/sources.json` as the starting set of primary sources.
-- Use web search/web fetch to verify current external facts, versions, release behavior, regulations, and platform quirks before final answers.
 - Prefer primary documentation, package pages, release pages, and official standards pages.
 - If web access is unavailable, state the limitation and mark volatile guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

@@ -106,7 +106,7 @@ Use [`references/formal-theory-map.md`](references/formal-theory-map.md) when th
 | Misuse | Why It Is Wrong | Required Correction |
 |---|---|---|
 | Calling every problem a constraint | TOC constraint is the system throughput limiter | Identify the current limiting factor with observable flow evidence |
-| Confusing the constraint with the bottleneck-of-the-day | A single bad week's deepest queue is not necessarily the persistent system limiter | Require 3–4 observation cycles showing the same step before naming a constraint; see `references/patterns-scenarios-traps.md#constraint-vs-bottleneck-of-the-day-expert-judgment` |
+| Confusing the constraint with the bottleneck-of-the-day | Persistent queue depth nominates a candidate but does not prove throughput sensitivity | Use multiple windows to screen candidates, then vary effective capacity or policy and measure accepted end-to-end throughput at fixed quality; see `references/patterns-scenarios-traps.md#constraint-vs-bottleneck-of-the-day-expert-judgment` |
 | Assuming exactly one constraint always exists | Matrix orgs, near-tied capacity, and unstable processes can violate the single-constraint model | Check `references/patterns-scenarios-traps.md#when-the-single-constraint-assumption-breaks` before forcing a 5FS ranking |
 | Improving non-constraints | Local improvement does not raise system throughput | Subordinate non-constraints to the constraint |
 | Buying capacity before exploitation | Elevation is step 4, not step 1 | Exploit and subordinate first |
@@ -122,10 +122,10 @@ Check [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-t
 
 | Anti-Pattern | TOC Diagnosis | Fix |
 |-------------|--------------|-----|
-| Optimizing non-bottleneck steps | Violates step 3 of 5FS (subordinate); non-constraint improvements do not increase throughput | Apply 5FS first; put a "do not improve" hold on non-constraints until constraint is broken |
+| Optimizing non-bottleneck steps | Violates step 3 of 5FS (subordinate); non-constraint improvements do not increase throughput | Apply 5FS first; prioritize the constraint without suspending required safety, maintenance or quality work |
 | Treating the constraint as fixed | "We can't change that" accepted without evidence | Apply the Evaporating Cloud to surface the assumption that the constraint is immutable |
 | Capacity vs. policy constraint confusion | Physical constraint elevated while a policy constraint caps throughput upstream | Audit rules and metrics before purchasing capacity; policy constraints are invisible but common |
-| Throughput accounting ignored in favor of cost accounting | T/CU ranking skipped; product mix optimized on margin → wrong mix at the constraint | Reframe every product-mix or roadmap decision as T/CU ranking before committing |
+| Throughput accounting ignored in favor of cost accounting | T/CU ranking skipped; product mix optimized on margin → wrong mix at the constraint | Define the goal, mandatory obligations, demand and shared capacities. Use T/CU ordering only for divisible independent work against one linear capacity; dependencies, deadlines, indivisibility or multiple capacities require a global feasible mix/schedule comparison |
 | Critical chain treated as critical path | Individual task padding hoarded; Project Buffer undersized; buffer management ignored | Strip individual padding; enforce Project Buffer; track buffer consumption, not milestones |
 | Solution deployed without FRT validation | FRT skipped; injection creates unintended side effects | Build the FRT before implementation; explicitly search for Negative Branch Reservations |
 | UDEs patched without CRT | Symptoms recur because root cause untouched | Build a CRT from the last five recurring problems; solve the core, not the surface |
@@ -156,7 +156,7 @@ Check [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-t
 Re-sequence the product backlog by throughput impact, not stakeholder volume.
 
 **Inputs:** List of initiatives, each with T (revenue impact per quarter, in currency) and CU (constraint units consumed, e.g. dev-weeks); total available CU for the planning period; any known policy constraints (mandatory-item rules, release gate policies) quoted verbatim.
-**Rules:** Compute T/CU for each initiative; rank descending by T/CU; schedule initiatives in rank order until cumulative CU equals total available CU; record remaining CU as slack; if a policy constraint forces an out-of-rank item, name it explicitly and apply Evaporating Cloud (#4) before accepting the override — do not silently accept it.
+**Rules:** T/CU is a screening ranking for one verified scarce resource with comparable marginal throughput, divisible work and no binding dependencies or demand caps. For indivisible initiatives, dependencies or multiple resources, formulate a constrained allocation and hand off to foundations-mathematical-optimization; ratio-greedy is not guaranteed optimal. Keep mandatory safety/compliance work as explicit feasibility constraints rather than treating it as a policy to eliminate.
 **Outputs:** Ranked schedule table (initiative, T, CU, T/CU, rank, included/excluded); total CU consumed and slack; list of any policy constraints identified and their go/no-go disposition.
 
 1. **Identify constraint** with 5FS (#1): which resource, team, or step caps delivery?
@@ -172,17 +172,17 @@ Re-sequence the product backlog by throughput impact, not stakeholder volume.
 | New onboarding flow | $240k | 12 | $20k | 2 |
 | Admin redesign | $100k | 10 | $10k | 3 |
 
-Schedule by T/CU descending until CU exhausted: 6 + 12 + 10 = 28 dev-weeks → all three fit; 12 weeks slack for unknowns. Anti-pattern: ranking by raw T puts onboarding first, but it consumes 2× the constraint per dollar. Fail signal: if a policy constraint (e.g., "every quarter must include a platform item") overrides T/CU, name and challenge the policy explicitly — most policy constraints are stale.
+Schedule by T/CU descending until CU exhausted: 6 + 12 + 10 = 28 dev-weeks → all three fit; 12 weeks slack for unknowns. Anti-pattern: ranking by raw T puts onboarding first, but it consumes 2× the constraint per dollar. Fail signal: if a policy constraint (e.g., "every quarter must include a platform item") overrides T/CU, name and challenge the policy explicitly — a policy can encode legitimate obligations; investigate its rationale and preserve required constraints.
 
 ### Incident-Mode Flow Restoration
 
 Restore throughput in a degraded or overloaded system without adding headcount.
 
-**Inputs:** Current bottleneck step (identified by queue depth or utilization evidence); WIP count at each step upstream and downstream of the bottleneck; throughput target (units/hour, tickets/day, or equivalent); any intake or escalation policies that may be throttling flow.
-**Rules:** Exploit before elevate — apply all five focusing steps in order; do not request additional headcount or capacity until exploitation of the current constraint is confirmed exhausted; set the bottleneck as the drum; size the time buffer to absorb statistical variation ahead of the constraint (not a fixed number — derive from observed cycle time variance); apply the rope to freeze new intake when WIP upstream of the constraint exceeds the buffer threshold; if throughput fails to improve after exploitation, audit for policy constraints (#10) before concluding that physical capacity elevation is required.
+**Inputs:** Candidate bottleneck steps from queue, wait-time, and utilization profiles; WIP at each step; accepted-throughput target and fixed quality definition; and capacity or policy interventions available for a replay, controlled change, or natural experiment.
+**Rules:** Queue and utilization signals screen candidates. Before choosing the drum, verify that changing a candidate's effective capacity or policy changes accepted end-to-end throughput at the target quality. Apply the five focusing steps to the verified constraint; exploit and subordinate before buying capacity. Size the buffer from observed variation and apply the rope to bound intake. Re-test throughput sensitivity after each change because the constraint can move.
 **Outputs:** Subordination plan specifying which upstream and downstream steps must change behavior to protect the drum; measurable throughput target with a named observation window (e.g., "≥ 40 tickets resolved per day over the next 5 business days"); buffer size and rope threshold with rationale; go/no-go on capacity elevation with supporting evidence.
 
-1. **Identify constraint** with 5FS (#1): which step has the deepest queue right now?
+1. **Identify constraint** with 5FS (#1): which step's marginal capacity or policy relaxation increases completed-system throughput? Use queue depth as a clue, then verify with a controlled change or natural experiment.
 2. **Apply DBR** (#2): set the constraint as the drum; add a time buffer in front of it; apply the rope to freeze new intake above the buffer threshold.
 3. **Exploit before elevating**: squeeze maximum output from existing constraint capacity before requesting more resources.
 4. **Add if constraint is a rule**: audit for policy constraints (#10) — is intake or escalation throttled by a policy, not capacity?
@@ -192,22 +192,22 @@ Restore throughput in a degraded or overloaded system without adding headcount.
 Apply 5FS and DBR to a multi-step LLM inference or multi-agent workflow when end-to-end latency or task throughput is not meeting targets despite adding more models or workers.
 
 **Inputs:** End-to-end latency profile per pipeline stage (e.g., prompt construction, prefill, decode, tool-call dispatch, guardrail/eval, output parsing); observed queue depth per stage; throughput target (tasks completed per minute or second); any rate-limit or concurrency policies on external APIs or GPU pools.
-**Rules:** Apply 5FS to the pipeline — the constraint is the stage with the deepest queue or the highest share of wall-clock time. Do not assume which stage that is: measured breakdowns differ sharply by deployment. On-device agents split latency between prefill and decode (Agent-X, arXiv:2605.10380: decode 68.7%, prefill 21.7%, with Planner and Arbiter LLM calls together 90.4% of total), whereas server-class cloud inference is decode-dominated (>95% in the same paper's comparison). In tool-heavy agents the serialized LLM→tool loop dominates instead — tool execution is 36–60% of request time depending on task type (arXiv:2603.18897). Profile your own pipeline; the constraint stage is an empirical question. Exploit before scaling: cache KV state, batch or speculatively overlap tool calls, parallelize independent sub-agents, right-size models per stage (use a smaller model for routing/triage steps, reserve the large model for the constraint stage). Set the constraint stage as the drum; size a time buffer upstream of it to absorb burst variation; apply the rope by rate-limiting intake (e.g., max in-flight tasks) to prevent the constraint from starving. Audit for policy constraints (#10) — rate limits, context-window caps, and sequential-approval gates are common invisible policy constraints in agent pipelines.
-**Outputs:** Constraint stage named with evidence (latency share or queue depth); exploitation plan (caching, batching, model right-sizing) applied before adding capacity; DBR configuration: drum = constraint stage, buffer size (in ms or task slots), rope threshold (max concurrent in-flight tasks upstream); policy constraint audit result with go/no-go on capacity elevation.
+**Rules:** Apply 5FS to the pipeline. Latency share and queue depth identify candidates, but the constraint is the stage whose added effective capacity or relaxed policy raises end-to-end throughput at the target quality. Confirm it with a controlled capacity change, shadow replay, or natural experiment; a slow stage can sit off the critical path, and a deep queue can be caused upstream. Profile your own pipeline, exploit before scaling, then set the verified constraint as the drum. Size a time buffer upstream from observed variation and apply the rope by rate-limiting intake. Audit rate limits, context caps, and serialized gates as possible policy constraints.
+**Outputs:** Candidate stages from latency/queue profiles; intervention or replay result showing end-to-end throughput sensitivity at the fixed target quality; verified constraint stage; exploitation plan; DBR configuration; and policy-constraint audit.
 
-1. **Identify constraint** with 5FS (#1): profile latency per stage; the highest-latency or deepest-queued stage is the drum.
+1. **Identify constraint** with 5FS (#1): profile the flow, form candidates from latency/queues, then verify which stage changes end-to-end throughput when its effective capacity changes.
 2. **Exploit** before scaling: cache reusable context; batch parallel tool calls; right-size models at non-constraint stages to free GPU/token budget for the constraint.
 3. **Apply DBR** (#2): set the constraint stage as the drum; add a task-slot buffer upstream; apply the rope (max in-flight limit) to prevent queue flooding.
 4. **Audit for policy constraints** (#10): check rate-limit tiers, sequential guardrail pipelines, and context-window policies — these are the most common invisible constraints in agent systems.
 
-**Worked example:** agent pipeline — search → plan → tool-dispatch → eval → summarize. Profiling this pipeline shows plan-stage decode at 68% of wall-clock, so plan is the drum. Exploitation: cache the system prompt prefix (KV reuse); route simple planning decisions to a smaller model. Throughput roughly doubles; the constraint then moves to the eval/guardrail stage, so re-run 5FS. Note the profile is what identified the drum — a tool-heavy pipeline profiled the same way would likely have named tool-dispatch instead. Do not add GPUs before verifying exploitation is exhausted.
+**Worked example:** agent pipeline — search → plan → tool-dispatch → eval → summarize. Profiling shows plan-stage decode at 68% of wall-clock, so plan is a candidate. In a shadow replay at the same task mix and quality threshold, increasing plan capacity by 50% raises accepted end-to-end completions by 31%, while increasing tool-dispatch capacity by 50% changes them by 2%; plan is therefore the current constraint. Prefix caching is then tested at the same quality gate. After it raises accepted throughput, repeat the intervention because the constraint may have moved to eval. The figures are illustrative protocol outputs, not portable performance claims.
 
 ### Policy Debugging
 
 Diagnose why throughput is not improving despite available capacity.
 
 **Inputs:** 5–10 Undesirable Effects (UDEs) with frequency and severity for each; candidate policy constraint quoted verbatim (the exact rule or metric suspected of capping throughput).
-**Rules:** Build a Current Reality Tree (CRT, #5) — connect ≥3 UDEs to a single root via If→Then chains, each arrow stating sufficiency (not mere correlation); the policy is confirmed as the root constraint if removing it in a thought experiment eliminates ≥2 UDEs without requiring any physical capacity change; if two legitimate requirements sustain the policy, build an Evaporating Cloud (#4) to surface the underlying assumption; validate the proposed policy change as an injection in a Future Reality Tree (#6) before implementing.
+**Rules:** Build a Current Reality Tree (CRT, #5) — connect ≥3 UDEs to a single root via If→Then chains, each arrow stating sufficiency (not mere correlation); a thought experiment resolving UDEs makes the policy a candidate explanation, not a confirmed cause; validate with a controlled change, replay or natural experiment at fixed quality before claiming throughput sensitivity; if two legitimate requirements sustain the policy, build an Evaporating Cloud (#4) to surface the underlying assumption; validate the proposed policy change as an injection in a Future Reality Tree (#6) before implementing.
 **Outputs:** CRT diagram with the named root cause and the candidate policy quoted verbatim; Evaporating Cloud with ≥3 assumption candidates on the arrows; go/no-go recommendation on policy change vs. capacity elevation, with the disconfirming evidence required to reverse the recommendation.
 
 1. **Build a CRT** (#5): list the top UDEs; trace to root cause with "If…Then" logic.
@@ -247,7 +247,13 @@ Throughput-limiting system problem
 
 ---
 
+## Practical Decision Record
+
+Use [decision and validation worksheet](references/decision-and-validation.md) for intake, model boundaries, uncertainty and checkable acceptance examples. [Regression cases](data/regression-cases.json) provide independent prompts and expected answers; these are fixtures, not executed agent results.
+
 ## Navigation
+
+- Decision and validation worksheet: [references/decision-and-validation.md](references/decision-and-validation.md)
 
 - Per-primitive playbooks: [`assets/templates/theory-of-constraints/`](assets/templates/theory-of-constraints/) (one file per primitive)
 - Composition guide: [`assets/templates/theory-of-constraints/README.md`](assets/templates/theory-of-constraints/README.md)
@@ -273,6 +279,6 @@ Throughput-limiting system problem
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

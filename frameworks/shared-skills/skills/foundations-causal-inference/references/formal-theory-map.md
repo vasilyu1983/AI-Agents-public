@@ -21,7 +21,7 @@ Use this map when a causal recommendation needs an explicit estimand, identifica
 | Observational adjustment | Propensity score, IPW, matching, DR estimation | Covariate balance under measured confounding | Requires overlap and no unmeasured confounding |
 | Heterogeneous effects | CATE, policy value, orthogonal scores | Uplift, subgroup targeting, policy learning | Extrapolation outside support is invalid |
 | Mediation | Natural direct/indirect effects, path-specific effects | Mechanism attribution | Requires strong cross-world assumptions or alternatives |
-| Interference / experimental design | Exposure mappings, cluster and switchback randomization, global vs unit-level estimands | Marketplace, network, and shared-resource experiments | Identification comes from the design; no post-hoc estimator repairs unit-randomized data |
+| Interference / experimental design | Exposure mappings, cluster and switchback randomization, global vs unit-level estimands | Marketplace, network, and shared-resource experiments | Identification comes from the design; recoverability depends on recorded exposure mappings and design assumptions; changing the estimator alone is not a general repair |
 | Sensitivity analysis | E-values, Rosenbaum bounds, tipping points | Robustness to hidden bias | Does not identify the effect; it quantifies fragility |
 
 ## Applied Primitive Coverage

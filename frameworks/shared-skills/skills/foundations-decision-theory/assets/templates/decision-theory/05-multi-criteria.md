@@ -61,7 +61,7 @@ WSM scores:
 - B: 0.35×0.7 + 0.30×0.95 + 0.20×0.8 + 0.15×0.6 = 0.245 + 0.285 + 0.160 + 0.090 = **0.780**
 - C: 0.35×0.6 + 0.30×0.80 + 0.20×0.9 + 0.15×0.85 = 0.210 + 0.240 + 0.180 + 0.128 = **0.758**
 
-Ranking: A > B > C. Sensitivity check: if reliability weight increases to 0.45 (−0.10 from cost), B overtakes A. Flag this reordering to stakeholders.
+Ranking: A > B > C. Sensitivity check: if reliability weight increases to 0.50 and cost falls to 0.15 (support 0.20, integration 0.15 unchanged), weights still sum to one. A scores 0.820, B 0.830 and C 0.7975; B overtakes A. Flag this reordering to stakeholders.
 
 ## Two Distinct Rank-Reversal Tests
 
@@ -71,11 +71,11 @@ Three standard tests, now operationalized in Scikit-Criteria by Cabral et al. (a
 
 | Test | Checks | Audited failure rate |
 | --- | --- | --- |
-| RRT1 | The top alternative survives removal of a non-optimal alternative | ~3.7% (stable in 96.3%) |
-| RRT2 | Rankings stay transitive across pairwise subproblems | ~14.8% fail |
-| RRT3 | Decomposing into subproblems and recomposing reproduces the full ranking | ~48% fail |
+| RRT1 | The top alternative survives controlled degradation of non-optimal alternatives | 1/27 failed; 26/27 passed (96.3%) |
+| RRT2 | Rankings stay transitive across pairwise subproblems | 4/27 failed (14.8%) |
+| RRT3 | Decomposing into subproblems and recomposing reproduces the full ranking | 13/27 failed (48.1%) |
 
-Those rates come from auditing 27 pipeline/dataset combinations drawn from the published MCDM literature — so rank reversal is a routine property of methods in active use, not an adversarial edge case. Normalization choice drives much of it: TOPSIS and VIKOR are known-susceptible, while COMET and SPOTIS are constructed to resist it.
+These study-specific rates describe 27 selected published pipeline/dataset combinations, not population prevalence ([Cabral et al., §7.2 and §8](https://arxiv.org/html/2508.00129)). RRT1 tests controlled degradation, not removal. Normalization choice drives much of it: TOPSIS and VIKOR are known-susceptible, while COMET and SPOTIS are constructed to resist it.
 
 **Practical rule:** run both checks and report them separately. Weight sensitivity is disclosed as a preference boundary; an RRT2/RRT3 failure means the ranking should not be presented as a result at all until the method or normalization is changed.
 

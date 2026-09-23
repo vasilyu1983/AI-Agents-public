@@ -2,6 +2,7 @@
 
 ## Patterns That Work
 
+- [2026-09-08] Niche-scouting mode needs a parent gate re-score: 4 of 5 scout lenses marked regulatory duties, job ads and category stats as demand; strict re-score left all at ? and two at TEST behind a free constraint check.
 - [2026-08-23] Prompt-compliance data (rule ceilings, rules-vs-examples) is model-generation-scoped: on frontier shifts (Claude 5 ~80% prompt cut, 2026-07-24) add a dated calibration note scoping old data to its era; keep it for older models.
 - [2026-08-23] x.com tweet/article URLs return HTTP 402 to anonymous fetchers; api.fxtwitter.com/<user>/status/<id> mirrors both the tweet and a summary of an attached X Article — use it before concluding an X source is unreachable.
 - [2026-08-12] Before adjudicating a tension between a new rule and an established framework, read that framework's own scope statement: C4's FAQ self-scopes to static structure and prescribes supplements, settling by primary source.
@@ -18,6 +19,7 @@
 - [2026-05-17] Foundations-skill maturity audits: scan workers near-universally recommend "seed N learnings entries" to 'activate' an empty learnings loop as a P0/P1 — applying this fabricates field-use evidence that never happened (fail-loud violation). Parent must inject a standing override into every uplift worker (fix scaffold only, never invent entries); 14/15 workers proposed seeding, override held in all 14.
 ## Mistakes to Avoid
 
+- [2026-09-08] Before scoring a host-marketplace add-on: search the marketplace for the exact incumbent and classify the OAuth scope (sensitive vs restricted decides a paid CASA audit). Lookup-level MCP servers are already free code.
 - [2026-08-17] Vendored CSVs can carry deliberate local edits (ui-ux-design colors.csv WCAG notes vs upstream ui-ux-pro-max): upstream sync must be row-level merge, never overwrite.
 - [2026-08-17] Anonymous raw.githubusercontent.com 429s fast on multi-file drift checks; fetch via gh api -H 'Accept: application/vnd.github.raw' instead.
 - [2026-08-12] Ranking skills by diagram-term density needs a homonym filter first: 'C4' matched the Colossal Clean Crawled Corpus in 4 AI skills but the C4 architecture model in only 2 — raw 'rg -c' ranked the dataset skills above the real consumers.
@@ -34,6 +36,7 @@
 - [2026-05-17] Scan workers over-claim version/compat facts; re-verify every load-bearing version or contradiction claim against primary sources and write the accurate partial form, never the worker's blanket claim.
 ## Domain Knowledge
 
+- [2026-09-08] Jun-Sep 2026 had no TypingMind-shaped API moment; shifts were regulatory/protocol (MCP 2026-07-28, AI Act Art.50 2 Aug, UKPI cVRP 2 Jun, Apple 4.3 8 Jun) and article50ready.com already sells the widget at EUR 29-199.
 - [2026-08-24] Aug-2026 resume-screening scan: LLM screeners fail validity audits (2602.18550: can't pick more-qualified, no abstention) while employers add LLM layers judging narrative coherence. Deterministic+provenance pipelines age well.
 - [2026-08-17] 'UI UX Max Pro' users mention = nextlevelbuilder/ui-ux-pro-max-skill; try name permutations before reporting a source link missing.
 - [2026-06-11] May 2026 EU Digital Omnibus postponed AI Act Annex III high-risk deployer obligations from 2026-08-02 to 2027-12-02 (provisional, formal adoption ~mid-2026); any skill citing the August 2026 date is stale.

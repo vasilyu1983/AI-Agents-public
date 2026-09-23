@@ -42,10 +42,10 @@
 
 **Goal**: find and rank failure risks before shipping to production.
 
-1. **Run FMEA** across all components and interfaces — output RPN table (primitive 06).
+1. **Run FMEA** across all components and interfaces — output severity/obligations-first action table with secondary RPN screening (primitive 06).
 2. **Build fault tree** for the top 2–3 highest-severity failure modes — find minimal cut sets and SPOFs (primitive 05).
 3. **Apply redundancy math** to the identified SPOFs and high-probability paths — size the redundancy needed (primitive 07).
-4. **Re-score FMEA** after mitigations are designed — validate residual RPN.
+4. **Re-score FMEA** after mitigations are designed — validate the evidence for each changed S/O/D factor before accepting residual RPN.
 
 **Use when**: pre-launch reliability review, design review gate, regulatory certification prep.
 

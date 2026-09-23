@@ -19,7 +19,7 @@ Defaults: baseline first, smallest safe step next, and proof via tests/contracts
 - Choose a boundary: API surface, module boundary, DB boundary, request handler, or codemod blast radius.
 - Add a safety net: characterization/contract/integration tests at that boundary.
 - Refactor in micro-steps: one behavior-preserving change per commit/PR chunk.
-- Prove: run the smallest relevant suite locally, then full CI; keep failures deterministic and artifact-rich.
+- Prove: map each preserved behavior to an oracle and execution layer; where practical, show the oracle fails on the faulty or removed behavior, then passes on the refactor. Run the smallest relevant suite locally, then full CI; keep failures deterministic and artifact-rich.
 
 ## Workflow
 
@@ -37,7 +37,7 @@ Defaults: baseline first, smallest safe step next, and proof via tests/contracts
 - Add a safety net: write characterization/contract/integration tests around the boundary you will touch.
 - Create seams: introduce injection points/adapters to isolate side effects and external dependencies.
 - Refactor in micro-steps: one behavior-preserving change at a time; keep diffs reviewable.
-- Prove: run the smallest relevant suite locally, then full CI; keep failures debuggable and deterministic.
+- Prove: separate compile/type/static success from executed behavior and targeted regression success from release readiness. Record runtime or production-like checks still required for data, concurrency, timing, or rollout-sensitive paths.
 - Ship safely: use canary, shadow mode, migration flags, or branch-by-abstraction when refactors touch production-critical paths.
 
 ### Risk Levels (Choose Safety Net)
@@ -277,12 +277,9 @@ See [data/sources.json](data/sources.json) for curated external references.
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

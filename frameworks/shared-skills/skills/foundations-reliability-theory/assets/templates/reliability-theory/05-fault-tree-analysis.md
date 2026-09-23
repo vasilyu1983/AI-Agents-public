@@ -47,7 +47,7 @@ Core gate types:
 3. Decompose each intermediate event recursively until reaching basic events
 4. Enumerate minimal cut sets (use MOCUS algorithm or BDD for large trees)
 5. Assign basic event probabilities
-6. Compute top event probability: P(top) = 1 - ∏(1 - P(MCSᵢ)) for rare events
+6. Compute the Boolean union of cut sets using inclusion-exclusion or BDD. The product complement is exact only for independent cut events; rare-event sum is an explicitly labeled approximation.
 7. Compute importance measures to rank remediation priorities
 ```
 
@@ -105,6 +105,8 @@ FTA identifies **component failures** and logical combinations that produce a to
 For software-intensive, autonomous, or sociotechnical systems where these failure types dominate, **augment FTA with STPA (System-Theoretic Process Analysis)**. STPA is based on STAMP (System-Theoretic Accident Model and Processes, Leveson 2011), which models accidents as control-loop failures rather than component-chain failures.
 
 STPA complements FTA: use FTA for hardware-failure probability quantification and MCS ranking; use STPA to derive hazardous control actions from the system's control structure, particularly when software errors, design errors, and unsafe interactions are the primary risk.
+
+For full control-structure and unsafe-action analysis, hand off to foundations-safety-engineering; keep FTA/FMEA and quantitative failure modeling here.
 
 Reference: Leveson, N. G. (2011). *Engineering a Safer World*. MIT Press. (Free PDF via MIT STAMP project; STPA Handbook 2018 also freely available.)
 

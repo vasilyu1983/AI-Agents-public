@@ -54,6 +54,12 @@ Use this skill for package-manager choice, lockfile policy, update strategy, sup
 4. Verify volatile tool behavior and security claims against official sources before recommending migrations.
 5. Finish with reproducibility checks, rollback notes, and any audit or SBOM follow-up.
 
+### Upgrade proof and rollback bundle
+
+Treat the manifest and lockfile as one change unit. Before the upgrade, capture the resolved version, integrity/source metadata, transitive dependency delta, install-script delta, and the exact build/test/runtime probes that protect the affected path. Review newly introduced packages and lifecycle scripts even when the requested direct dependency looks harmless.
+
+A rollback instruction must restore both manifest and lockfile to a known pair and state whether caches, generated clients, database state, or persisted wire formats make code rollback insufficient. For a stateful or protocol-changing upgrade, require a forward-compatible migration or a tested downgrade path before rollout. “Revert the dependency bump” is not a complete rollback plan when the new version has already written data or changed an external contract.
+
 ## ASCII Flow
 
 ```text
@@ -182,6 +188,6 @@ Default to one of these:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

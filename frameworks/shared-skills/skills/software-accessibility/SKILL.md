@@ -18,10 +18,10 @@ This skill owns engineering implementation. It does not own design-side WCAG int
 |------|---------|-------|
 | fix component semantics | semantic HTML first | add ARIA only when HTML is insufficient |
 | keyboard support | tab order, visible focus, correct key handling | test manually every time |
-| screen reader verification | VoiceOver plus NVDA minimum | use two readers when possible |
+| screen reader verification | Primary browser/reader pair for the affected users | add a second platform for shared primitives or cross-platform claims |
 | automated coverage | axe-core plus Lighthouse or Pa11y | automation catches markup-level issues, not the full experience |
 | modal or composite widget | APG-aligned pattern | do not invent custom keyboard behavior |
-| compliance prep | WCAG 2.2 AA minimum, then local regulation check | verify current legal posture before final claims |
+| compliance prep | Design/test to WCAG 2.2 AA, then map the applicable legal or procurement baseline | do not describe the design target as the binding version everywhere |
 | WCAG 2.2 checklist, axe-core/Pa11y snippets, EU Accessibility Act | [references/wcag-2-2-checklist.md](references/wcag-2-2-checklist.md) | includes June 2025 EAA applicability decision |
 | run axe-core in CI | [scripts/run_axe.sh](scripts/run_axe.sh) | exits non-zero on violations |
 
@@ -113,10 +113,16 @@ Minimum verification set:
 - live-region behavior for dynamic feedback
 - meaningful alt text and decorative-image hiding
 
-Minimum matrix:
+Choose the assistive-technology matrix from the claim and blast radius:
 
-- VoiceOver on Apple platforms
-- NVDA on Windows
+| Change | Minimum manual evidence |
+|---|---|
+| Page-specific copy, label, or state fix | One supported browser/reader pair used by the affected audience |
+| Shared widget or design-system primitive | One Apple and one Windows/browser pair where the product supports both |
+| Mobile-native behavior | The platform reader on a physical target device (VoiceOver or TalkBack) |
+| Broad “accessible” or conformance claim | Product support matrix plus disabled-user testing or a qualified audit; automation alone is insufficient |
+
+If a required platform is unavailable, report that cell as unverified. Do not block a narrow source fix merely because an unrelated platform cannot be exercised, and do not generalize the evidence beyond the tested pair.
 
 ### Automation and CI
 
@@ -216,7 +222,7 @@ Do not call the work complete until all of these are checked:
 
 - [ ] Keyboard walkthrough passes for the affected flow (Tab, Shift+Tab, Enter, Escape, arrow keys as required)
 - [ ] Visible focus indicator present in all interactive states (never removed with `outline: none` alone)
-- [ ] Screen-reader output checked on VoiceOver (macOS/iOS) and NVDA (Windows) — two readers minimum
+- [ ] Screen-reader output checked on the risk-based matrix above; tested browser/reader/device pairs and unverified pairs are named
 - [ ] Zero critical or serious axe-core violations remain; any suppressed violation has an explicit justification comment
 - [ ] Heading order is sequential with no skipped levels; landmark structure matches intended page regions
 - [ ] All form inputs have visible labels bound via `for`/`id` or `aria-labelledby`; errors use `aria-describedby`
@@ -225,7 +231,7 @@ Do not call the work complete until all of these are checked:
 
 ## EU Accessibility Act (June 2025)
 
-The EAA (Directive 2019/882) entered enforcement on 28 June 2025. Scope covers B2C digital services: e-commerce order flows, online banking and financial portals, transport ticketing, e-books and reader apps, and audiovisual media player controls. Member-state market surveillance authorities are live; non-compliance exposes organizations to enforcement and disability-rights litigation. The technical standard is EN 301 549 v3.2.1, which references WCAG 2.1 AA as the web-content baseline; target WCAG 2.2 AA for new builds. See [references/wcag-2.2-and-3.0-watchlist.md](references/wcag-2.2-and-3.0-watchlist.md) for full detail.
+The EAA (Directive 2019/882) entered enforcement on 28 June 2025. Scope covers B2C digital services: e-commerce order flows, online banking and financial portals, transport ticketing, e-books and reader apps, and audiovisual media player controls. Member-state market surveillance authorities are live; non-compliance exposes organizations to enforcement and disability-rights litigation. Apply the Directive's Annex I requirements and the relevant national transposition. EN 301 549 v3.2.1 is OJ-cited for the separate Web Accessibility Directive (Directive 2016/2102); that citation does not by itself create EAA presumption of conformity. Verify an EAA-specific OJ citation or common specification before relying on one, and target WCAG 2.2 AA for new builds. See [references/wcag-2.2-and-3.0-watchlist.md](references/wcag-2.2-and-3.0-watchlist.md) for full detail.
 
 ## Scenarios
 
@@ -291,11 +297,11 @@ Recipes keyed to symptoms or remediation moments. Each lists the shortest path t
 ## Regulatory Traps
 
 - **EU Accessibility Act (EAA) enforcement began 28 June 2025**: Directive 2019/882 transposed into national law across EU member states; from this date consumer-facing digital products and services — including e-commerce websites, banking apps, e-books, transport booking, and streaming services — must conform or face enforcement action.
-- **Conformity standard**: EN 301 549 is the harmonised EU standard for ICT accessibility, currently aligned with WCAG 2.1 AA — no harmonised EN 301 549 version yet incorporates WCAG 2.2 (European Commission guidance, 2025). Plan to WCAG 2.2 AA as a forward-looking target, but legal conformity under EAA is anchored to whichever EN 301 549 version is cited in the Official Journal at audit time. EN 301 549 also adds requirements beyond WCAG for non-web documents, native mobile apps, and ICT hardware — products must meet EN 301 549, not WCAG alone.
+- **EAA conformity route**: start from Directive 2019/882 Annex I and the applicable national transposition. Commission request M/587 asks standards bodies to revise accessibility standards in support of the EAA. EN 301 549 v3.2.1 is useful technical evidence and maps web content to WCAG 2.1 AA, but its existing OJ citation establishes presumption for Directive 2016/2102 (the Web Accessibility Directive), not automatically for the EAA. Claim EAA presumption only after verifying an EAA-specific OJ citation or common specification covering the requirement.
 - **Scope — who is covered**: businesses with 10+ employees or annual turnover above EUR 2 million selling consumer-facing digital services into the EU are in scope; micro-enterprises (under 10 employees AND under EUR 2M turnover) are exempt from EAA but not from general non-discrimination law.
 - **Documentation evidence required**: companies must produce an accessibility statement describing conformance level, known gaps, and a remediation timeline; a conformity assessment is required before placing a product on the market; retain both as evidence for national authority audits.
 - **Member-state penalties vary**: enforcement is delegated to national competent authorities (e.g., Equality bodies, market surveillance authorities); fines and corrective orders differ by country — no single EU-wide fine cap; some member states (DE, FR) have established enforcement procedures with significant penalties.
-- **Native mobile apps are in scope**: iOS and Android apps that fall under EAA product categories (e.g., banking, e-commerce, transport) must meet EN 301 549 Chapter 11 (mobile accessibility) — WCAG AA alone is insufficient for native apps.
+- **Native mobile apps can be in scope**: for covered EAA services such as banking, e-commerce, and transport, test the app against the Directive/national requirements. EN 301 549 Chapter 11 is useful engineering coverage beyond web WCAG, but do not call it the binding EAA route unless the applicable EAA citation or national rule establishes that status.
 - **Third-party components inherit risk**: if your product uses a third-party UI library or SDK that fails WCAG 2.2 AA, you as the product provider bear the compliance obligation — audit vendor components and request accessibility conformance reports (ACRs / VPATs).
 - **WCAG 2.2 delta from 2.1**: new success criteria in 2.2 include 2.4.11 Focus Not Obscured, 2.4.12 Focus Not Obscured (Enhanced), 2.5.7 Dragging Movements, 2.5.8 Target Size (Minimum), 3.2.6 Consistent Help, 3.3.7 Redundant Entry, and 3.3.8 Accessible Authentication — audit existing products against these before 2.1-only remediation work is considered complete.
 - **UK Equality Act / PSBAR**: UK public sector bodies remain under Public Sector Bodies Accessibility Regulations (PSBAR) 2018 (WCAG 2.1 AA); private sector digital services are covered by Equality Act 2010 reasonable adjustments — UK did not transpose EAA, so UK and EU obligations diverge post-Brexit.
@@ -312,7 +318,6 @@ Recipes keyed to symptoms or remediation moments. Each lists the shortest path t
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

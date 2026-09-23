@@ -1,4 +1,4 @@
 interface:
   display_name: "Document XLSX Skill - Quick Reference"
-  short_description: "Create/edit .xlsx spreadsheets with tables, formulas, charts, validation, and"
+  short_description: "Creates and edits .xlsx workbooks with tables, formulas, charts, validation."
   default_prompt: "Use $document-xlsx for Create/edit .xlsx spreadsheets with tables, formulas, charts, validation, and workbook automation. Use when asked to generate Excel reports, models, exports, or audit spreadsheets."

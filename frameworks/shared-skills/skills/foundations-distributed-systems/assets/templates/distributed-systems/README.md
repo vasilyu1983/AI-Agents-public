@@ -45,6 +45,6 @@
 
 ## Related
 
-- Full composition recipes: [`../../../../SKILL.md#composition-recipes`](../../../../SKILL.md)
+- Full composition recipes: [`../../../SKILL.md#composition-recipes`](../../../SKILL.md)
 - Primitives overview: [`../../../references/primitives-overview.md`](../../../references/primitives-overview.md)
 - Sources: [`../../../data/sources.json`](../../../data/sources.json)

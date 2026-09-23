@@ -1,0 +1,4 @@
+interface:
+  display_name: "Formal Methods Foundations"
+  short_description: "Specify invariants, safety, liveness, and refinement"
+  default_prompt: "Use $foundations-formal-methods to specify invariants, safety/liveness properties, model checking, SAT/SMT, and refinement for this system; report verification claims, assumptions, and counterexamples."

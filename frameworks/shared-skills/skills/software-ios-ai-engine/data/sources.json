@@ -191,7 +191,7 @@
     },
     {
       "id": "apple-foundation-models-tn3193-contextsize",
-      "title": "TN3193: Managing the on-device foundation model's context window (contextSize / tokenCount(for:), iOS 26.4+)",
+      "title": "TN3193: Managing the on-device foundation model's context window",
       "url": "https://developer.apple.com/documentation/technotes/tn3193-managing-the-on-device-foundation-model-s-context-window",
       "category": "vendor_doc",
       "covers": ["option-a-foundation-models", "three-tier-architecture", "patterns-antipatterns-traps-scenarios"]

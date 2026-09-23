@@ -13,7 +13,7 @@
 - **Algorithm selection for recurring pipelines**: evolve routing/scoring rules against a measurable quality metric over many runs; use ShinkaEvolve when LLM call budget is constrained.
 - **Prompt optimization for high-frequency systems**: treat prompt as a program to mutate; fitness = task performance on held-out eval set; LLM proposes mutations, evaluator scores.
 - **Pricing rule evolution**: evolve the pricing algorithm against a revenue + retention composite fitness signal across historical data; ShinkaEvolve for sample efficiency.
-- **Agent team coordination rule tuning**: evolve which mechanisms to apply (belief briefs, debate triggers, synthesis protocol) against team quality metrics; use only when team has 50+ measurable runs.
+- **Agent team coordination rule tuning**: evolve which mechanisms to apply (belief briefs, debate triggers, synthesis protocol) against team quality metrics; require adequately precise measurements and held-out validation; run count alone, including 50 runs, does not establish adequacy.
 
 ## Problem
 

@@ -143,6 +143,28 @@
   ],
   "official_protocols": [
     {
+      "name": "Google Search Central - HowTo and FAQ rich result changes",
+      "url": "https://developers.google.com/search/blog/2023/08/howto-faq-changes",
+      "description": "Official Google notice that HowTo rich results were deprecated and FAQ rich results were limited to authoritative government and health sites.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "medium",
+      "status": "active",
+      "last_verified": "2026-09-07",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Google Search Central - Structured data general guidelines",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "description": "Official Google guidelines stating that valid structured data enables eligibility but does not guarantee a rich result.",
+      "source_type": "official_docs",
+      "authority": "primary",
+      "volatility": "high",
+      "status": "active",
+      "last_verified": "2026-09-07",
+      "add_as_web_search": true
+    },
+    {
       "name": "Model Context Protocol",
       "url": "https://modelcontextprotocol.io/introduction",
       "description": "Official introduction to the Model Context Protocol.",

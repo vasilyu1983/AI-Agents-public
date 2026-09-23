@@ -34,7 +34,8 @@ Use this skill for platform, infrastructure, CI/CD, GitOps, observability, and i
 2. choose the smallest viable toolchain that matches the runtime and team skill
 3. load the relevant reference and template set
 4. verify version-sensitive or vendor-sensitive claims before final guidance
-5. finish with concrete operational outputs: plan, controls, owners, and artifacts
+5. separate evidence stages: static lint/plan, target-environment reconciliation, runtime health plus a representative service path, and rollback or roll-forward readiness
+6. finish with concrete operational outputs: plan, controls, owners, artifact or commit identity, environment, observation window, and untested failure modes
 
 ## Decision Rules
 
@@ -184,7 +185,6 @@ Prefer official docs and release notes over blogs or rankings.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

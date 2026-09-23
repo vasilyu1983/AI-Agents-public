@@ -11,6 +11,7 @@ Reference for building a byte-level BPE tokenizer from first principles, followi
 - [Encode and Decode](#encode-and-decode)
 - [Special Tokens](#special-tokens)
 - [Gotchas](#gotchas)
+- [Tokenizer Landscape (Sep 2026)](#tokenizer-landscape-sep-2026)
 
 ## Canonical Sources
 
@@ -126,3 +127,21 @@ minbpe's `RegexTokenizer` also pre-tokenizes with a regex pattern (from GPT-4) t
 - **Vocab vs merges**: `vocab` maps ID -> bytes (for decode); `merges` maps pair -> ID (for encode). Both are needed; one is not derivable from the other at inference time.
 - **Round-trip test**: `assert decode(encode(text)) == text` — run this on a diverse sample including emoji and non-ASCII before trusting the tokenizer.
 - **Training corpus size**: BPE quality degrades on very small corpora. Use at least a few MB of text for meaningful merge statistics.
+- **Ill-formed UTF-8 generation**: a byte-level model can *emit* token sequences that decode to invalid UTF-8 (arXiv 2511.05578 documents this as unavoidable for byte-level tokenizers) — `errors='replace'` hides it at decode; anything downstream that requires valid UTF-8 (JSON, DBs) needs its own validation.
+
+## Tokenizer Landscape (Sep 2026)
+
+Byte-level BPE (above) is the method to *build* from scratch and what GPT-2/4-lineage and Llama-3-lineage models use. Know the rest of the map before committing a vocab to a training run:
+
+| Method | Mechanism (one line) | Reach for it when |
+| --- | --- | --- |
+| **Byte-level BPE** (tiktoken/minbpe lineage) | Greedy pair merges over UTF-8 bytes, regex pre-tokenization | Default. What this file teaches |
+| **SentencePiece BPE** | BPE over raw character stream, no pre-tokenization; space becomes `▁` metasymbol; lossless round-trip | Multilingual / no-whitespace scripts (CJK); the Gemma/Llama-2-era open-model workhorse |
+| **Unigram-LM** (SentencePiece's other mode) | Start with a large candidate vocab, prune tokens by likelihood loss under a unigram LM; probabilistic segmentation | Better subword morphology on some languages; the only common alternative training objective to BPE |
+| **WordPiece** | Merge by likelihood gain rather than raw frequency | Legacy (BERT era) — recognize it, don't pick it for new runs |
+| **SuperBPE** (arXiv 2503.13423) | Two-stage BPE that lifts the whitespace pre-tokenization limit late in training, learning "superword" tokens crossing word boundaries | Inference-cost pressure: paper reports "up to 33% fewer tokens than BPE on average" at fixed 200k vocab and "+4.0% absolute improvement over the BPE baseline across 30 downstream tasks (including +8.2% on MMLU)" with 27% less inference compute. Active successor line (SupraTok, faster-superword variants) — verify current state before adopting |
+| **Tokenizer-free / byte-latent (BLT)** | No vocab; entropy-based dynamic byte patches | Research lane — see `ai-architecture-advisor` emerging classes ("name, don't yet bet") |
+
+**Vocab size**: GPT-2's 50k is small by Sep 2026 standards — frontier and open models run 128k–256k, and scaling work (Over-Tokenized Transformer, arXiv 2501.16975) argues vocabulary is generally worth scaling with model size. Larger vocab = fewer tokens per document (cheaper inference, longer effective context) at the cost of a bigger embedding/LM-head; keep the padding-to-multiple-of-64 trick from the pretraining loop regardless.
+
+**Evaluating a tokenizer before committing**: measure **compression** (tokens per byte on held-out text) and **fertility** (tokens per word, per language — multilingual parity check). Log these per language slice, the same way `ai-data-curation-pretraining` logs per-language token counts; a tokenizer with 3× fertility on your target language triples its effective training and serving cost. Also audit for dead vocab: ~10% of tokens in major BPE tokenizers are intermediate merge residues that rarely appear in output (LiteToken, arXiv 2602.04706) — wasted embedding rows.

@@ -2,9 +2,10 @@
   "metadata": {
     "title": "AI Game Theory Foundations — Sources",
     "description": "Primary papers and references for 22 applied game-theory primitives plus the formal theory map: game forms, equilibria, mechanism design, auctions, matching, bargaining, cooperative game theory, and learning in games",
-    "last_updated": "2026-08-14",
+    "last_updated": "2026-09-17",
     "skill": "foundations-game-theory",
-    "total_sources": 75
+    "total_sources": 75,
+    "verification_scope": "Targeted correctness and operational-artifact review; not a fresh verification of every historical paper."
   },
   "research_papers": [
     {
@@ -34,8 +35,9 @@
       "arxiv_id": "2601.11369",
       "description": "Jan 2026. Compares ungoverned baseline, prompt-only constitutional anti-collusion policy, and governance-graph enforcement across 90 runs and six model configurations. Prompt-only was ineffective; the institutional condition (public immutable manifest of legal states, transitions, sanctions, restorative paths, plus external controller and cryptographic audit log) cut mean collusion tier 3.1 to 1.8 (Cohen's d=1.28) and severe-collusion incidence 50% to 5.6%. Source for the prompt-only governance trap and the enforcement row in the mechanism-design failure table.",
       "url_check": "manual",
-      "last_verified": "2026-08-14",
-      "add_as_web_search": true
+      "last_verified": "2026-09-17",
+      "add_as_web_search": true,
+      "claim_location": "Abstract and Table6: N90 runs per condition, six model configurations; severe Tier>=4 incidence50.0% ungoverned vs5.6% institutional."
     },
     {
       "id": "TERMSBench",
@@ -241,7 +243,9 @@
       "name": "Dynamic Role Assignment for Multi-Agent Debate",
       "url": "https://arxiv.org/abs/2601.17152",
       "description": "Jan 2026. Meta-debate with proposal and peer-review stages for capability-aware debate role assignment. Source for mechanism #16.",
-      "add_as_web_search": true
+      "add_as_web_search": true,
+      "last_verified": "2026-09-17",
+      "claim_location": "Abstract: comparison maxima up to74.8% over uniform and29.7% over random assignment; task/assignment dependent."
     },
     {
       "id": "BeyondMajorityVoting",
@@ -284,7 +288,7 @@
       "id": "ConformalSocialChoice",
       "name": "From Debate to Decision: Conformal Social Choice for Safe Multi-Agent Deliberation",
       "url": "https://arxiv.org/abs/2604.07667",
-      "description": "Apr 2026. Aggregates heterogeneous agent probability distributions with conformal calibration to produce act-vs-escalate prediction sets. Source for mechanism #20.",
+      "description": "Apr 2026. Split-conformal aggregation for closed-set classification with marginal set coverage under exchangeability; not per-instance correctness or operational authorization. Source for mechanism #20; method and limitations rechecked 2026-09-08.",
       "add_as_web_search": true
     },
     {
@@ -492,7 +496,7 @@
       "name": "Computing Correlated Equilibria in Multi-Player Games",
       "url": "https://doi.org/10.1145/1374376.1374380",
       "doi": "10.1145/1374376.1374380",
-      "description": "Papadimitriou and Roughgarden. JACM 55(3), 2008. Shows coarse correlated equilibrium (CCE) is polynomial-time computable in many game classes; correlated equilibrium (CE) requires an LP. Key computability distinction: no-regret learning (Hart-Mas-Colell) converges to CCE, not CE. Source for CCE/CE note in formal-theory-map.",
+      "description": "Papadimitriou and Roughgarden, JACM55(3),2008. Computing correlated equilibria in multiplayer games; representation and game size determine computational cost. Distinguish vanishing external regret (CCE) from internal/swap regret (CE); Hart-Mas-Colell regret matching is a CE procedure.",
       "add_as_web_search": false
     },
     {
@@ -548,7 +552,7 @@
       "name": "Efficient Mechanisms for Bilateral Trading",
       "url": "https://www.sciencedirect.com/science/article/abs/pii/0022053183900480",
       "doi": "10.1016/0022-0531(83)90048-0",
-      "description": "Myerson and Satterthwaite 1983. Journal of Economic Theory 29(2):265-281. Proves no mechanism for bilateral trade under private values can be simultaneously ex-post efficient, budget-balanced, and (Bayesian) individually rational — an impossibility result, not a design flaw. Source for the participation-constraint / bilateral-trade-impossibility trap in formal-theory-map and SKILL.md.",
+      "description": "Myerson and Satterthwaite1983, Journal of Economic Theory29(2):265–281. Standard independent private-value bilateral trade with overlapping supports cannot jointly satisfy Bayesian incentive compatibility, individual rationality, ex-post efficiency and budget balance. State every condition; dropping IC removes this particular impossibility.",
       "add_as_web_search": false
     },
     {

@@ -111,7 +111,7 @@ The European Accessibility Act (EAA) Directive 2019/882 entered force **28 June 
 
 **Microenterprise exemption:** < 10 employees AND ≤ €2 M turnover — exempt from EAA service obligations but check national transposition.
 
-**Technical standard:** EN 301 549 v3.2.1, which maps to WCAG 2.1 AA as the web baseline. WCAG 2.2 AA is strongly recommended as it supersedes 2.1 for new builds.
+**Technical mapping:** Apply Directive 2019/882 and the relevant national transposition. EN 301 549 v3.2.1 maps web content to WCAG 2.1 AA, but its current OJ citation is for the Web Accessibility Directive, not proof of EAA presumption. Verify the EAA-specific OJ citation or common specification at sign-off; design and test new work to WCAG 2.2 AA.
 
 **Enforcement:** National market-surveillance authorities in each EU member state. UK has its own PSBAR (Public Sector Bodies Accessibility Regulations) and follows WCAG 2.1 AA for public-sector sites.
 

@@ -2,10 +2,11 @@
 
 ## Definition
 
-An **instrument** Z is a variable satisfying three conditions:
+An **instrument** Z is a variable satisfying the following conditions for the usual binary-instrument, binary-treatment LATE:
 1. **Relevance**: Z is correlated with the treatment X. Formally: Cov(Z, X) ≠ 0.
 2. **Exclusion restriction**: Z affects the outcome Y *only* through X. No direct path Z → Y or through an unobserved confounder.
-3. **Independence**: Z is independent of unobserved confounders U that affect both X and Y.
+3. **Independence**: Z is independent of relevant potential outcomes and treatment responses, possibly conditional on baseline covariates.
+4. **Monotonicity/no defiers**: X(1) >= X(0), with consistency and a nonzero first stage. Continuous instruments/treatments require their own interpretation and assumptions.
 
 Under these conditions, the IV estimand is:
 
@@ -33,7 +34,7 @@ Common instruments: randomized encouragement to take up a program, distance to a
 
 ## Worst Failure Modes
 
-1. **Weak instruments (low first-stage F)**: when Cov(Z, X) is near zero, the denominator is near zero and tiny errors dominate. Rule of thumb: F < 10 is a weak instrument. Under weak instruments, IV is biased toward OLS and confidence intervals are distorted. Use LIML or Anderson-Rubin confidence sets.
+1. **Weak instruments (low first-stage F)**: when Cov(Z, X) is near zero, the denominator is near zero and tiny errors dominate. F<10 is a historical heuristic for some conventional designs, not a universal strength or validity certificate. Use design-appropriate weak-instrument diagnostics and robust inference (e.g., justified Anderson-Rubin sets); heteroskedasticity, clustering, instrument count and estimator matter. LIML can reduce some finite-sample bias but is not a universal cure.
 2. **Violated exclusion restriction**: if Z has any direct effect on Y (or through another channel), the exclusion restriction fails and the IV estimate is inconsistent. This assumption is untestable from data alone — it requires domain knowledge.
 3. **Instrument not exogenous**: if Z is correlated with U, independence fails. Example: distance to a hospital as an instrument for hospital care is violated if sicker people systematically move closer to hospitals.
 4. **Extrapolating LATE to ATE**: LATE identifies effects only for compliers. Compliers may be systematically different from always-takers or never-takers.
@@ -41,18 +42,11 @@ Common instruments: randomized encouragement to take up a program, distance to a
 
 ## Worked Example
 
-**Setting**: Does college education (X) increase earnings (Y)? Unobserved confounders: innate ability and family connections. Instrument: proximity to a college (Z) — affects probability of attending college but has no direct effect on earnings.
+**Illustrative binary encouragement design:** X=1 means attending college, X=0 means not attending; Z=1 is randomized encouragement and Z=0 is no encouragement. Y is log earnings. Randomization supports independence, but exclusion (encouragement affects earnings only through attendance), no defiers, consistency/no relevant interference and a nonzero first stage must still be justified. An encouragement that directly provides job contacts would violate exclusion.
 
-**First stage**: Regress X (college attendance) on Z (distance) and controls (family income, local labor market).
-- Coefficient on Z: β_1 = −0.12 (closer distance → higher attendance)
-- First-stage F = 22.4 → strong instrument
+**First stage:** Attendance probability is .60 under encouragement and .40 without: difference .20. **Reduced form:** Mean log earnings differ by .02. The Wald estimate is .02/.20=.10 log points, an attendance-versus-no-attendance LATE for encouragement compliers, not an effect per year of college. The usual approximate proportional interpretation is 10%; exp(.10)−1≈10.52% is the log-scale conversion, not automatically the mean level-earnings ATE.
 
-**Second stage**: Regress Y (log earnings) on predicted X̂.
-- τ_IV = 0.10 (10% earnings premium per year of college for compliers)
-
-**Comparison**: OLS without IV gives 0.18 — upward bias because high-ability people both attend college and earn more (unobserved ability is a confounder).
-
-**Interpretation**: among people induced to attend college by living near one (compliers), each year of college increases earnings by ~10%.
+Report the first-stage estimate/uncertainty and design-appropriate weak-IV robust interval. An illustrative F=22.4 alone proves neither exclusion nor adequate strength for every design. OLS-IV differences alone do not prove ability bias or its direction. No effect is extrapolated to always-takers, never-takers, years of education, or all students.
 
 ## Sources
 

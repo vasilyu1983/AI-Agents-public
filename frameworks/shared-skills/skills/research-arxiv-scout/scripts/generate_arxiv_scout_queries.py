@@ -32,7 +32,7 @@ from datetime import date, timedelta
 from pathlib import Path
 from urllib.parse import urlencode
 
-BASE_URL = "http://export.arxiv.org/api/query"
+BASE_URL = "https://export.arxiv.org/api/query"
 ATTRIBUTION = "Thank you to arXiv for use of its open access interoperability."
 MIN_REQUEST_GAP_SECONDS = 3
 DEFAULT_CONFIG = Path(__file__).resolve().parent.parent / "config.yaml"
@@ -273,7 +273,7 @@ def main():
         "windows": windows,
         "attribution": ATTRIBUTION,
         "rate_limit_note": (
-            f"Enforced since Feb 2026: >={MIN_REQUEST_GAP_SECONDS}s between requests, "
+            f"Operator limit: >={MIN_REQUEST_GAP_SECONDS}s between requests, "
             "single connection. On HTTP 429 back off 30s -> 60s -> 120s. "
             "See references/arxiv-api-guide.md#rate-limiting-enforced-as-of-2026."
         ),

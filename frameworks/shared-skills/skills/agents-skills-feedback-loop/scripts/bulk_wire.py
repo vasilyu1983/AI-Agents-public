@@ -28,34 +28,16 @@ EXCLUDE_NAMES = {
 
 ADDENDUM = """## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
 
 """
 
-SECTIONS = (
-    "Patterns That Work",
-    "Mistakes to Avoid",
-    "Domain Knowledge",
-    "Open Questions",
-    "Consolidated Principles",
-)
-
-
 def consolidated_template(skill_name: str) -> str:
-    body = (
-        f"# {skill_name} — Consolidated Learnings\n\n"
-        "Curated, dated, committed memory for this skill. Pruned from raw `learnings.md` "
-        "via `agents-skills-feedback-loop/scripts/consolidate.py`. Human-approved.\n\n"
-        "Cap: 60 entries. When exceeded, promote durable rules to `references/`.\n\n"
-        "## Filter Override\n\n"
-        "<!-- Add 2-4 bullets that sharpen what counts as a learning for this skill. "
-        "Leave empty to use the default filter from agents-skills-feedback-loop/references/learnings-format.md. -->\n\n"
-    )
-    for s in SECTIONS:
-        body += f"## {s}\n\n"
-    return body
+    """Use the same bundle-owned template as the manual wiring protocol."""
+    template = Path(__file__).resolve().parents[1] / "assets/learnings.template.md"
+    return template.read_text(encoding="utf-8").replace("<SKILL_NAME>", skill_name)
 
 
 def insert_addendum(skill_md_text: str) -> str:

@@ -112,6 +112,10 @@ Our 8-GPU 8-hour budget of ~2.9e19 FLOPs comfortably covers this — we have ≈
 
 **Note:** All figures above are approximate. MFU, batch size, and sequence length all affect realized throughput. Verify your actual tokens/second empirically before locking a training schedule.
 
+## Estimate Decision Gate
+
+Return ranges, not a single compute-optimal point. State the fitted regime, units, data-quality assumption, hardware efficiency, training objective, and which inputs are measured versus borrowed. Vary tokens per parameter, model size, utilization, and data availability in a sensitivity table, then name the decision that changes across the range. Use the estimate to choose pilots and budgets; do not present extrapolation outside the source regime as a measured outcome.
+
 ## Known Traps
 
 1. **Using Kaplan (2020) ratios after Chinchilla corrected them.** Kaplan suggested scaling models much faster than data (~D ∝ N^{0.74}). Chinchilla showed equal scaling. GPT-3 is a canonical example of a Kaplan-era undercooked model: 175B params but only ~300B tokens, whereas Chinchilla-optimal would require ~3.5T tokens.
@@ -190,6 +194,6 @@ See **[data/sources.json](data/sources.json)** for canonical papers and primary 
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

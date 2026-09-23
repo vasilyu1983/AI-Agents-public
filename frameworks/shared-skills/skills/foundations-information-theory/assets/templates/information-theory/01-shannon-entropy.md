@@ -64,7 +64,7 @@ Differential entropy can be negative and is not invariant under invertible repar
 
 ## Failure Modes
 
-1. **Estimating entropy from small samples**: Plug-in (MLE) entropy estimators are negatively biased. For n samples over k bins, bias ≈ (k−1)/(2n). Use Miller-Madow correction or a Bayesian estimator (NSB) when n is small relative to |X|.
+1. **Estimating entropy from small samples**: Plug-in (MLE) entropy estimators are negatively biased. For n iid multinomial samples on k fixed, full-support categories, the leading large-sample bias of plug-in H in log base b is −(k−1)/(2n ln(b)); the Miller–Madow correction adds this magnitude. In bits divide by ln(2); in nats ln(b)=1. This asymptotic correction can fail with sparse counts or unseen support; it is not a universal small-sample remedy. Report support assumptions and uncertainty; consider a justified Bayesian estimator (NSB) where appropriate.
 2. **Applying discrete entropy to continuous variables**: Differential entropy h(X) does not share the non-negativity and absolute-probability properties of H(X). Never compare H(discrete) directly to h(continuous).
 3. **Assuming base-2 for all downstream formulas**: Some ML papers use nats; Shannon's original paper uses bits. Mixing bases produces silent factor-of-ln(2) errors.
 4. **Zero-count bins**: If p(x)=0 for some x, that bin contributes 0 to entropy (convention). However, if an empirical count is zero due to sampling, the true contribution is unknown — do not assume it is zero.
@@ -73,20 +73,9 @@ Differential entropy can be negative and is not invariant under invertible repar
 
 ## Worked Example
 
-**Context-window segment ranking**
+**Finite PMF known answers (base 2)**
 
-Four candidate paragraphs for a RAG context window. Token counts and empirical token frequency histograms yield the following entropy estimates:
-
-| Segment | Tokens | H(segment) [bits/token] | H(segment) × tokens [total bits] |
-|---------|--------|------------------------|----------------------------------|
-| A       | 200    | 9.1                    | 1,820 |
-| B       | 200    | 4.3                    | 860   |
-| C       | 150    | 11.2                   | 1,680 |
-| D       | 150    | 3.8                    | 570   |
-
-Budget: 400 tokens. Greedy by token count picks A+B (400 tokens, 2,680 bits). Entropy-first picks A+C (350 tokens, 3,500 bits) — 31% more information for fewer tokens. Add redundancy check (see primitive #11) to confirm C is not a near-duplicate of A.
-
----
+A fair binary source has H=1 bit/symbol; a deterministic source has H=0; a uniform four-symbol source has H=2. For an empirical histogram from N observations, the observed support has at most N outcomes and H <= log2(N): 200 tokens imply at most 7.644 bits, 150 at most 7.229. These bounds concern lexical histograms, not semantic relevance. Summing marginal token entropy ignores sequence dependence and cannot certify a context-selection improvement. Use query/task outcomes and a validated relevance proxy when selecting paragraphs.
 
 ## Sources
 

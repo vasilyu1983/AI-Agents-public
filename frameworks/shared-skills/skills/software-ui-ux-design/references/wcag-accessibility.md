@@ -759,13 +759,13 @@ The EAA is enforceable since **28 June 2025**. Scope and obligations:
 
 - **Who**: any business selling B2C products or services into the EU. Sub-10-employee microenterprises are exempt for *services* only.
 - **What**: websites, mobile apps, e-commerce, banking, e-books and reading software, ticketing, transport booking, ATMs, smartphones, e-readers, and operating systems.
-- **Standard**: EN 301 549 is the harmonised technical standard. The current published version (V3.2.1, March 2021) incorporates **WCAG 2.1 Level AA** by reference for web and mobile content; a revision incorporating WCAG 2.2 AA is in late-stage drafting and expected to publish during 2026, with formal legal effect only after it is cited in the EU Official Journal (a step that historically trails publication by months). Designing to WCAG 2.2 AA covers the current EAA baseline presumptively (2.2 is a superset of 2.1) and pre-positions for the pending V4 revision — verify the harmonised version in force before a compliance sign-off.
+- **Standards route**: Directive 2019/882 and each national transposition provide the EAA requirements. EN 301 549 v3.2.1 maps web content to **WCAG 2.1 Level AA** and is useful technical coverage, but Commission Implementing Decision (EU) 2021/1339 cites it for Directive 2016/2102 (the Web Accessibility Directive). That citation does not itself establish EAA presumption. Commission request M/587 asks standards bodies for EAA-supporting revisions; verify an EAA-specific OJ citation or common specification before claiming legal effect. Design and test to WCAG 2.2 AA as a forward target.
 - **Penalties**: vary by member state. Examples include fines up to €20,000 per non-compliance plus €1,000/day continuing penalties (Ireland), and removal from market for severe cases.
 - **Enforcement**: live since June 2025. Member states' market-surveillance authorities accept user complaints.
 
-For any EU-facing surface, EAA conformance is a hard launch gate, not a quality preference. Treat the WCAG 2.2 AA checklist below as the conformance baseline and add member-state-specific obligations (e.g., Germany BFSG, France RGAA) where relevant.
+For an in-scope EU-facing surface, map EAA conformance to Directive 2019/882 and the member-state implementation. Use the WCAG 2.2 AA checklist below as the forward design/test target. Treat an EN 301 549 mapping as evidence; claim EAA presumption only when the specific supporting reference has been published for the EAA in the OJ or adopted as a common specification.
 
-Sources: [European Commission EAA](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en), [EN 301 549 V3.2.1](https://www.etsi.org/deliver/etsi_en/301500_301599/301549/).
+Sources: [Directive (EU) 2019/882](https://eur-lex.europa.eu/eli/dir/2019/882/oj/eng), [Commission Implementing Decision (EU) 2021/1339](https://eur-lex.europa.eu/eli/dec_impl/2021/1339/oj/eng), [Interoperable Europe M/587 status](https://interoperable-europe.ec.europa.eu/collection/rolling-plan-ict-standardisation/accessibility-ict-products-and-services-rp-2026), [EN 301 549 V3.2.1](https://www.etsi.org/deliver/etsi_en/301500_301599/301549/).
 
 ### ADA (US)
 
@@ -787,7 +787,7 @@ The most recent Working Draft (3 March 2026) contains 174 requirements but is st
 
 ### What to Do Now
 
-1. **Continue targeting WCAG 2.2 AA** — this is the actionable baseline today
+1. **Continue designing and testing to WCAG 2.2 AA** — then map compliance claims to the jurisdiction's incorporated version
 2. **Monitor WCAG 3.0 development** — [W3C WCAG 3.0 Draft](https://www.w3.org/TR/wcag-3.0/)
 3. **Track cognitive accessibility guidance** — especially COGA patterns that already improve current products
 4. **Avoid speculative compliance promises** — do not map Bronze/Silver/Gold to current legal obligations

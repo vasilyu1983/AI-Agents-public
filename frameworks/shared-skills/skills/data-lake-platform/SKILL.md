@@ -97,6 +97,17 @@ Choosing a lakehouse path:
 
 ## Workflow Checklist
 
+Before selecting a format or catalog, write an interoperability proof matrix for the exact workload. A platform choice is provisional until every required path has a named result:
+
+| Path | Prove with |
+|---|---|
+| Each writer -> catalog -> table | create, append, schema evolution, concurrent commit |
+| Each reader -> catalog -> table | predicate pushdown, deletes, time travel, required types |
+| Operations | compaction, snapshot expiry, orphan cleanup, failed-job recovery |
+| Failure and rollback | partial commit, credential outage, replay, restore to prior snapshot |
+
+Mark each cell `pass`, `unsupported`, or `unverified` with engine and connector versions. A spec feature or vendor GA label does not close a cell. If a required cell is unsupported, use the lowest common format version or change the architecture before production commitment.
+
 ### 1. Architecture and Ingestion
 
 - [ ] Choose architecture pattern: [references/architecture-patterns.md](references/architecture-patterns.md) — medallion, mesh, lambda, kappa, lakehouse
@@ -263,6 +274,6 @@ DESCRIBE HISTORY delta.`s3://bucket/path/to/table`
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

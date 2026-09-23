@@ -109,6 +109,10 @@ Starting an LLM project
 | Migration | Preserve contracts, then replay evals | API surface or reliability requirements changed | Blind prompt copy-paste between providers |
 | Rollout | Canary + compare + rollback plan | Production traffic is material or high risk | Single-shot model swaps |
 
+## Model Selection Experiment Contract
+
+Compare candidates on the same dated task set, prompt contract, tool surface, output schema, retry policy, and sampling budget. Report task success, schema validity, refusal and tool-error rates, latency percentiles, and cost per successful outcome by important slice. Separate observed measurements from provider claims and architecture recommendations. A public benchmark can nominate candidates, but it cannot replace this workload-matched comparison or authorize migration.
+
 ## Known Traps
 
 - escalating to fine-tuning when the real issue is retrieval, tool grounding, or weak output contracts
@@ -255,7 +259,6 @@ See **[data/sources.json](data/sources.json)** for curated primary sources acros
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

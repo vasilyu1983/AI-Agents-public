@@ -19,7 +19,7 @@ Drum-Buffer-Rope (DBR) is the TOC production scheduling mechanism that synchroni
 
 ## Inputs
 
-- Identified constraint (from the Five Focusing Steps, primitive 01).
+- Constraint verified by accepted end-to-end throughput sensitivity at fixed quality (from Five Focusing Steps, primitive 01).
 - Variability data for upstream steps (standard deviation of cycle time).
 - Target buffer size (typically 1/3 of total lead time, but calibrate from real queue data).
 
@@ -35,13 +35,13 @@ Drum-Buffer-Rope (DBR) is the TOC production scheduling mechanism that synchroni
 |---------|-----------|-----|
 | Buffer chronically in red | Buffer undersized or upstream variability underestimated | Increase buffer time; measure actual upstream lead time distribution |
 | Rope ignored; WIP floods system | Rope discipline not enforced culturally | Make rope a hard limit (Kanban WIP cap; intake gate) |
-| Drum misidentified as busiest step | High utilization ≠ bottleneck (see 5FS) | Confirm constraint by queue depth, not utilization |
+| Drum misidentified as busiest or deepest-queued step | Utilization and queue depth nominate candidates but do not prove system throughput sensitivity | Vary effective capacity or policy and measure accepted end-to-end throughput at fixed quality before setting the drum |
 | Buffer management treated as inventory management | Teams add physical buffers instead of time buffers | Enforce "buffer = scheduled time slot," not "buffer = extra items" |
 | DBR applied to fully parallel work | DBR is a serial flow tool | Use capacity planning, not DBR, for fully parallel work |
 
 ## Worked Example
 
-**Context**: A content production pipeline — writing (2 days), editing (5 days), design (1 day), publish (0.5 days). Editing is the constraint (drum).
+**Context**: A content production pipeline — writing (2 days), editing (5 days), design (1 day), publish (0.5 days). Editing has the deepest queue, so it is a candidate. A controlled capacity trial increases editing capacity 20% at unchanged acceptance criteria and raises completed pieces 17%; equivalent writing capacity adds no completions. Editing is the verified current constraint (drum).
 
 - **Drum**: editors process one piece per 5 days. No one should produce faster than one piece per 5 days net.
 - **Buffer**: schedule a 1.5-day time buffer before editing. Any piece not in editing 1.5 days before its target edit slot triggers an expedite flag.

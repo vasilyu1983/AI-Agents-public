@@ -110,6 +110,7 @@ Pick one or combine:
   - `buf breaking`
   - Async/workflow contract verification
 - Publish artifacts in CI: diff report, verification results, failing cases, and workflow evidence.
+- State which evidence stage passed: artifact validity, compatibility analysis, provider verification against realistic state, or a deployed request/event that produced the expected observable outcome. A valid schema or green broker matrix does not prove routing, auth, serialization configuration, deployment records, or asynchronous consumers in the target environment.
 
 ## Quality Checks
 
@@ -119,6 +120,7 @@ Pick one or combine:
 - Rate-limited and degraded responses are contract surface, not incidental noise; assert them intentionally.
 - Keep contracts aligned with deprecation policy, consumer inventory, and release cadence.
 - Keep resilience/load testing separate unless the user explicitly wants it combined.
+- Tie release claims to the contract revision, provider and consumer versions, environment, provider state, and deployment record used.
 
 ## Judgment Calls
 
@@ -196,13 +198,11 @@ API contract task
 ## Fact-Checking
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
 - Prefer primary sources and cite exact links for volatile tooling guidance.
 - If web access is unavailable, state the limitation and mark vendor/tool details as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

@@ -134,6 +134,12 @@ GOOD: (3 separate commits)
 6. Validate: run all checklist items, return PASS/WARN/FAIL with exact rewrite on failure.
 7. If the diff mixes unrelated work, recommend split commits before offering a combined message.
 
+### Index is the commit boundary
+
+Generate the message from the staged diff, not the working-tree diff. Before writing, inspect `git diff --cached --name-status` and `git diff --cached`; separately inspect `git diff --name-status` so unstaged edits cannot leak into the summary. If the index is empty, stop instead of describing uncommitted work. If a file is partially staged, describe only the staged hunks and flag that the same path has remaining unstaged changes.
+
+For generated files, lockfiles, and migrations, name the behavioral change that caused them rather than listing them as independent accomplishments. Validate the proposed subject against the staged patch again immediately before commit because the index can change between drafting and execution.
+
 ## Output Contract
 
 ### Generate
@@ -260,6 +266,6 @@ If the staged diff mixes several unrelated surfaces, stop and recommend split co
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

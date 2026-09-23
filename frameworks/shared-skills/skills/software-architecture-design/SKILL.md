@@ -158,6 +158,10 @@ Preferred deliverables (pick what fits the request):
 - Decision record: `assets/planning/adr-template.md`
 - Pattern deep dives: `references/modern-patterns.md`, `references/scalability-reliability-guide.md`
 
+### Decision Evidence Gate
+
+For each proposed boundary or new deployable, name the observed pressure that requires it: independent release cadence, incompatible scaling shape, fault isolation, data sovereignty, or distinct ownership. Record the baseline and the experiment that would falsify the choice. If the pressure is hypothetical or can be handled inside the existing runtime, keep the boundary logical and postpone the operational split.
+
 ## ASCII Flow
 
 ```text
@@ -281,13 +285,9 @@ If live web access is available, consult 2–3 authoritative sources from `data/
 ## Fact-Checking
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

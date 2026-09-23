@@ -26,11 +26,12 @@ where W0 = (λ₁ × E[S₁²] + λ₂ × E[S₂²]) / 2 (residual service time)
 **Preemptive-resume:**
 
 ```
-Wq_1 = W0 / (1 − ρ₁)          (same as non-preemptive)
-W_2  = W_2(non-preemptive) + (additional preemption overhead)
+Wq_1 = λ₁ E[S₁²] / (2(1 − ρ₁))
+E[T₂] = E[S₂]/(1 − ρ₁) + W0/((1 − ρ₁)(1 − ρ₁ − ρ₂))
+[Poisson independent classes, finite second moments, zero preemption overhead]
 ```
 
-High-priority class is unaffected by low-priority in the preemptive case (except through residual service time).
+High-priority class is unaffected by low-priority service in ideal preemptive-resume; interruption overhead or shared resources require an additional model.
 
 ## When to Use
 
@@ -84,11 +85,11 @@ An inference service receives two request classes:
 Assume 5 servers (M/G/c approximation, ρ system = (5×0.5 + 2×3)/(5) = (2.5+6)/5 = 1.7 ← still > 1).
 
 Needs 10 servers for ρ = 0.85. With non-preemptive priority:
-- Class 1 mean wait is dramatically lower than without priority (batch jobs cannot block interactive ones for more than one service period).
+- Class 1 mean waiting can improve, but multiserver quantitative results require a matching model; residual batch service and queued high-priority work still contribute.
 - Class 2 wait increases but batch jobs are latency-tolerant.
 
 **Without priority**: both classes share equal wait; interactive requests occasionally wait behind 3-second batch jobs.
-**With non-preemptive priority**: interactive class waits at most one 3-second batch job service, then gets immediate service.
+**With non-preemptive priority**: interactive work can be blocked by residual batch service and earlier high-priority work. There is no hard 3-second wait bound: with one batch job having 3 seconds remaining and two high-priority 1-second jobs queued, the second high-priority job waits 4 seconds.
 
 ## Tail-Optimal Scheduling Under Unknown Job Sizes
 
@@ -99,7 +100,7 @@ Classical SRPT (Shortest Remaining Processing Time) minimizes mean response time
 Use this policy when:
 - Tail latency (p99, p99.9) matters more than mean latency.
 - Job sizes are not known at arrival (or estimates are unreliable).
-- The service-time distribution is light-tailed (e.g., bounded or sub-exponential).
+- The service-time distribution is light-tailed (e.g., bounded or exponentially bounded; do not confuse the heavy-tail probability class called subexponential with light tails).
 
 **Kill criterion:** Drop if mean latency degradation from the negative-discount Gittins policy exceeds the acceptable margin for the specific job-size distribution in use — simulation or analysis is needed per-distribution.
 

@@ -114,6 +114,12 @@ Validate
 - titles, reading order, contrast, and alt text are present
 - if the deck breaks, the structure is inspectable with the included scripts
 
+### Rendered slide release gate
+
+After the final save, reopen the deck and inventory slide count, layout names, placeholders, media relationships, chart data, and speaker notes. Render every slide to images or PDF in the declared delivery target and inspect for clipped text, font substitution, objects outside the slide, broken chart labels, low-resolution images, and unintended blank placeholders. Require an actual PowerPoint pass when PowerPoint fidelity or accessibility is an acceptance criterion; otherwise use the available target renderer and mark PowerPoint fidelity unverified.
+
+Compare charts and headline figures with the source data after rendering, not only in the generation code. For template edits, confirm that masters and theme relationships still resolve and that the declared target viewer opens the file without a repair dialog. Record any viewer-specific variance instead of treating one viewer as proof for another.
+
 ## Navigation
 
 **References**
@@ -153,7 +159,6 @@ Validate
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

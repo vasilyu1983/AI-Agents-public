@@ -22,7 +22,7 @@ Every purposeful system — organisation, software architecture, agent hierarchy
 
 | Failure Mode | Cybernetics Diagnosis | What Goes Wrong |
 |-------------|----------------------|-----------------|
-| Management overwhelmed by operational detail | Ashby's Law violated — controller variety < system variety | Decisions slow down; managers become bottlenecks |
+| Management overwhelmed by operational detail | Outcome-relevant disturbance distinctions lack timely effective response paths | Decisions slow down; managers become bottlenecks |
 | Units interfere with each other | No S2 coordination layer | Resources contested; schedules collide; outputs contradict |
 | Strategy disconnected from execution | S4/S3 homeostat missing | Plans are made that operations cannot or will not follow |
 | Crises invisible until catastrophic | No algedonic bypass route | Hierarchy filters pain signals; S5 acts too late |
@@ -66,9 +66,9 @@ Each primitive in the index below addresses a specific failure mode.
 
 | Anti-Pattern | Diagnosis | Fix |
 |-------------|-----------|-----|
-| API gateway overwhelmed by microservice variety | Ashby's Law — gateway has fewer states than services | Apply attenuation (rate limiting, aggregation endpoints); increase gateway variety |
+| API gateway overwhelmed by microservice variety | Required request/failure distinctions lack timely effective handling paths | Preserve material classes, attenuate irrelevant differences, and add tested routing or control responses |
 | Services interfere on shared resources | No S2 coordination protocol | Add distributed locking, event bus scheduling, or backpressure signals |
-| Platform team is a bottleneck | Controller variety < demand variety | Variety engineering: self-service amplifiers + request-standard attenuators |
+| Platform team is a bottleneck | Material demand classes lack detectable, timely, authorized response paths | Add self-service response coverage and request standards, then test each material class |
 
 ### Agent Hierarchies
 

@@ -142,6 +142,10 @@ Use [references/stripe-patterns.md](references/stripe-patterns.md) for API-versi
 
 ## Production Readiness Checklist
 
+**Reconciliation gate.**
+
+Define a provider-independent money record for expected amount, currency, fee, tax, settlement, refund, dispute, and current entitlement. Reconcile webhooks and provider balance or settlement reports against that record on a schedule, with an exception queue and an owner. A successful checkout redirect or webhook is event evidence; neither is proof that cash, accounting state, and access rights agree.
+
 - [ ] Webhook signatures verified on every handler before processing
 - [ ] All webhook handlers are idempotent (safe to replay the same event)
 - [ ] Checkout creation and webhook failures are explicitly logged
@@ -215,7 +219,6 @@ See: [references/testing-patterns.md](references/testing-patterns.md), [referenc
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

@@ -17,7 +17,7 @@ T_fork-join ≥ E[max(S₁, S₂, ..., Sₖ)]
 
 ### The Slowest-Worker Bound (Lower Bound)
 
-For K parallel workers each with exponential service time E[S]:
+For K independent parallel workers with identical exponential service-time distributions of mean E[S]:
 
 ```
 E[max(S₁,...,Sₖ)] = E[S] × Σ_{k=1}^{K} 1/k  = E[S] × H_K
@@ -27,15 +27,9 @@ where H_K is the K-th harmonic number (H₁=1, H₂=1.5, H₃≈1.83, H₁₀≈
 
 This grows logarithmically with K: doubling workers adds ln(2) ≈ 0.7× average service time to the completion time.
 
-### Upper Bound (Stochastic)
+### Loaded workers and dependence
 
-For M/M/1 workers with load ρ per worker, a tight upper bound on fork-join response time W_FJ:
-
-```
-W_FJ ≤ W_MM1(1 worker) + (K−1) × E[S] / (1 − ρ) × correction_factor
-```
-
-The exact analysis is intractable; use simulation or the Nelson-Tantawi approximation for operational sizing.
+The harmonic formula is exact only for independent, identically distributed exponential service times without waiting. For two deterministic unit-duration tasks the maximum is 1, not 1.5. Loaded fork-join queues have correlated waiting times from synchronized arrivals; simulate the joint process or use a bound whose assumptions and constants are explicitly specified. No unspecified correction factor is a usable upper bound.
 
 ## When to Use
 
@@ -58,7 +52,7 @@ The exact analysis is intractable; use simulation or the Nelson-Tantawi approxim
 ## Outputs
 
 - **E[max]**: expected completion time lower bound.
-- **Variance of completion time**: increases with K (more workers → higher maximum).
+- **Distribution of completion time**: report mean and tail; variance does not universally increase with K.
 - **SLO feasibility**: whether p99 target is achievable given slowest-worker distribution.
 - **Optimal K**: point of diminishing returns where adding workers no longer meaningfully reduces E[max].
 
@@ -66,7 +60,7 @@ The exact analysis is intractable; use simulation or the Nelson-Tantawi approxim
 
 | Failure | Cause | Fix |
 |---------|-------|-----|
-| Sizing fork-join by mean rather than max | E[S] underestimates completion time; E[max] >> E[S] | Use H_K correction; model tail explicitly |
+| Sizing fork-join by mean rather than max | E[S] underestimates completion time; E[max] >> E[S] | Use H_K only for iid exponential service; otherwise model joint maxima, waiting and tail dependence |
 | High-CV worker in the fork-join | One slow worker type dominates all completions | Bound or cap slow workers; use timeout + fallback |
 | Stragglers in MapReduce / all-reduce | Long tail from disk I/O, GC, or preemption | Speculative execution (duplicate task to faster node) |
 | Ignoring synchronization point contention | Join point itself is a queue; saturated join delays all | Model join point as a separate M/M/c queue |

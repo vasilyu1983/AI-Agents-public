@@ -62,7 +62,7 @@ Averaging produces synthesis statements that are mildly acceptable to everyone b
 - Genuinely accommodate minority evidence, OR
 - Name the dissent explicitly so the minority member can sign off without endorsing
 
-This is the operational form of the truthful-revelation principle from mechanism 7: members are incentivized to rate honestly because their lowest rating is decisive.
+Maximin ratings protect the worst reported utility but do not ensure incentive-compatible preference revelation. Counterexample: participant1 truly values A10/B9 and participant2 A1/B9. Honest minimum scores A1/B9 select B. Participant1 can report A10/B0, changing the minimum scores to A1/B0 and selecting their preferred A. Use independent preference evidence, audit strategic reports, and state that truthfulness needs a separately justified mechanism.
 
 ## When To Use
 

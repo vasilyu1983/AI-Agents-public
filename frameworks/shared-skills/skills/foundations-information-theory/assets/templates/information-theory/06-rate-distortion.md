@@ -11,7 +11,7 @@ R(D) = min_{p(x̂|x): E[d(X,X̂)] ≤ D} I(X; X̂)
 The minimization is over all conditional distributions p(x̂|x) (reconstruction distributions) that satisfy the distortion constraint.
 
 **Key properties**:
-- R(0) = H(X) (lossless coding; zero distortion requires entropy-rate bits)
+- For a finite discrete memoryless source with zero distortion iff exact reconstruction, R(0)=H(X); continuous sources under MSE can require infinite rate at D=0
 - R(D) is monotone non-increasing and convex in D
 - R(D) = 0 for D ≥ D_max (some distortion level makes the source redundant to transmit)
 
@@ -26,7 +26,7 @@ For a Gaussian source with variance σ², the minimum bitrate to achieve MSE = D
 
 **Distortion-rate function** D(R): the inverse of R(D) — minimum achievable distortion at bitrate R.
 
-**Parametric (Blahut-Arimoto) form**:
+**Finite source/reconstruction alphabet Blahut-Arimoto form**:
 
 ```
 R(D) solved iteratively via Blahut-Arimoto algorithm:
@@ -42,7 +42,7 @@ where β is the Lagrange multiplier trading rate against distortion (analogous t
 
 - Finding the theoretical minimum bitrate for a lossy compression task at an acceptable quality level.
 - Deciding whether to invest in lossless vs. lossy coding: if D_acceptable > 0, lossy can save significant bits.
-- Sizing summarization compression: the "distortion" is semantic loss; R(D) bounds the minimum prompt/summary length.
+- Modeling summarization as lossy coding only after defining source/reconstruction distributions, task distortion, and a code-to-token mapping. Without that mapping, measure quality at actual token budgets; R(D) does not certify prompt/summary length.
 - Quantization design: mapping a continuous source to discrete levels under MSE or perceptual distortion.
 - Benchmarking learned compression codecs against the theoretical limit.
 
@@ -52,7 +52,8 @@ where β is the Lagrange multiplier trading rate against distortion (analogous t
 
 | Input | Type | Description |
 |-------|------|-------------|
-| Source distribution p(x) | PMF or density | Statistical model of the source to compress |
+| Source distribution p(x) | PMF or density | Statistical model, memory assumptions and source-symbol units |
+| Reconstruction alphabet and coding convention | Set/model | Allowed reconstructions, block length, bits per source symbol; any mapping to lexical tokens |
 | Distortion measure d(x, x̂) | Function → ℝ≥0 | Hamming, squared-error, perceptual, BLEU, etc. |
 | Target distortion D | Real ≥ 0 | Maximum acceptable expected distortion |
 
@@ -62,7 +63,7 @@ where β is the Lagrange multiplier trading rate against distortion (analogous t
 
 | Output | Type | Range | Interpretation |
 |--------|------|-------|----------------|
-| R(D) | Non-negative real | [0, H(X)] | Minimum bits/symbol at distortion D |
+| R(D) | Non-negative extended real | [0, H(X)] only for finite discrete sources allowing exact reconstruction; otherwise may be infinite | Minimum bits/source symbol under the stated coding model; differential entropy is not this upper bound |
 | D(R) | Non-negative real | [0, D_max] | Minimum distortion at bitrate R |
 | R-D curve | Monotone convex curve | — | Tradeoff frontier between bitrate and quality |
 
@@ -70,30 +71,19 @@ where β is the Lagrange multiplier trading rate against distortion (analogous t
 
 ## Failure Modes
 
-1. **Assuming lossless is required when lossy is acceptable**: Any D>0 reduces R(D) below H(X). For a Gaussian source with σ²=1, accepting D=0.1 (10% MSE) drops the required rate from ∞ (impossible lossless) to ½log₂(10) ≈ 1.66 bits — a dramatic saving.
+1. **Assuming lossless is required when lossy is acceptable**: A positive distortion budget may reduce required rate; strict reduction depends on source and distortion measure. For a Gaussian source with σ²=1, accepting D=0.1 (10% MSE) drops the required rate from ∞ (impossible lossless) to ½log₂(10) ≈ 1.66 bits — a dramatic saving.
 2. **Wrong distortion measure**: R(D) is defined for a specific d(x,x̂). Computing R(D) under MSE then applying a perceptual distortion budget is invalid. Choose d(x,x̂) aligned with the actual downstream quality criterion.
-3. **Confusing R(D) with achievable codec rate**: R(D) is a lower bound achievable only with infinite block length. Real codecs operate above R(D); the gap is implementation overhead, not a violation of theory.
-4. **Ignoring source statistics**: Applying the Gaussian R(D) formula to a non-Gaussian source (e.g., heavy-tailed text token distributions) produces incorrect rate predictions. Compute R(D) numerically via Blahut-Arimoto for non-Gaussian sources.
-5. **Not checking R(D)=0 regime**: Below some maximum distortion D_max, no information needs to be transmitted. If the task tolerance is above D_max, compression is trivially free — always check before designing a codec.
+3. **Confusing R(D) with achievable codec rate**: Under standard memoryless source-coding assumptions, rates arbitrarily close to R(D) are asymptotically approachable as block length grows. Finite-block feasibility depends on the coding criterion; special/trivial cases can achieve the bound exactly. Measure overhead and finite-block loss rather than promising attainability for a particular codec.
+4. **Ignoring source statistics**: Applying the Gaussian R(D) formula to a non-Gaussian source (e.g., heavy-tailed text token distributions) produces incorrect rate predictions. Finite-alphabet Blahut-Arimoto requires a supplied finite source/reconstruction support and distortion matrix. Continuous-source discretization is an approximation whose support/truncation/resolution error must be reported; non-Gaussian does not itself make the finite algorithm exact.
+5. **Not checking R(D)=0 regime**: At or above D_max, no information needs to be transmitted. If the task tolerance is above D_max, compression is trivially free — always check before designing a codec.
 
 ---
 
 ## Worked Example
 
-**Summarization bitrate bound**
+**Gaussian MSE known answer**
 
-A source document has estimated entropy H(X) = 12 bits/token (rich technical text). A downstream QA system tolerates up to D = 0.2 semantic distortion (measured by 1 − ROUGE-L). Model the source as approximately Gaussian in embedding space with σ² = 1 (normalized).
-
-```
-R(D=0.2) = ½ log₂(1/0.2) = ½ log₂(5) ≈ 1.16 bits/token
-```
-
-Original document: 2,000 tokens × 12 bits = 24,000 bits of content.
-At D=0.2: minimum representation needs only 2,000 × 1.16 = 2,320 bits → approximately 193 tokens.
-
-A 10× compression is theoretically achievable at 20% semantic distortion. A summary longer than ~200 tokens at this distortion level is transmitting redundant information. Use this bound to set summarization length targets rather than arbitrary word-count rules.
-
----
+For an iid scalar Gaussian source with variance 1 and squared-error distortion D=.2, R(D)=.5*log2(5)=1.161 bits/sample. This asymptotic bound concerns reconstruction of that scalar source under MSE. ROUGE-L semantic loss is not MSE, an embedding coordinate is not a text token, and binary code bits cannot be divided by a lexical entropy to certify a 193-token summary. For summarization, define the source/reconstruction random variables and task loss, then measure achievable quality at actual token budgets; any Gaussian analogy is a heuristic, not a summary-length theorem.
 
 ## Sources
 

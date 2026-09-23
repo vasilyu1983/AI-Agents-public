@@ -27,7 +27,7 @@
 ### Agent-Team Topology Audit
 
 - **Objective**: verify that an agent hierarchy is viable and identify failure points before deployment.
-- **Stack**: #3 (S1 — verify agent autonomy and scope) + #4 (S2 — check for coordination between agents) + #5 (S3 — confirm orchestrator has policy not execution role) + #2 (Ashby — audit controller variety) + #10 (variety engineering — design attenuation if orchestrator overloaded) + #11 (algedonic — ensure critical failures bypass orchestrator to human)
+- **Stack**: #3 (S1 — verify agent autonomy and scope) + #4 (S2 — check for coordination between agents) + #5 (S3 — confirm orchestrator has policy not execution role) + #2 (Ashby — test disturbance detection and effective-response coverage) + #10 (variety engineering — design attenuation or amplification for uncovered paths) + #11 (algedonic — ensure critical failures bypass orchestrator to human)
 - **Add if recursive hierarchy**: #9 (recursion levels — assign VSM roles at each nesting level)
 
 ### Startup Operating System
@@ -44,7 +44,7 @@
 ### Platform Team Scaling
 
 - **Objective**: prevent a platform team from becoming a bottleneck as consumer demand grows.
-- **Stack**: #2 (Ashby — measure platform team's variety vs. consumer demand variety) + #10 (variety engineering — self-service APIs amplify platform variety; request templates attenuate demand variety) + #4 (S2 — add coordination between consuming teams to prevent conflicting requests) + #5 (S3 — platform policy layer, not per-request approval) + #1 (feedback loops — lead time and consumer satisfaction as balancing goals)
+- **Stack**: #2 (Ashby — map outcome-relevant demand classes to detectable, effective platform responses) + #10 (variety engineering — self-service APIs amplify response coverage; request templates attenuate irrelevant distinctions) + #4 (S2 — add coordination between consuming teams to prevent conflicting requests) + #5 (S3 — platform policy layer, not per-request approval) + #1 (feedback loops — lead time and consumer satisfaction as balancing goals)
 
 ### Organisational Redesign After Rapid Growth
 

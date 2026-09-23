@@ -62,7 +62,7 @@ Distributed systems fail in predictable ways. Clocks drift, networks partition, 
 |-------------|-----------|-----|
 | Claiming a database is "CP" or "AP" without specifying the failure mode | CAP applies only under network partition | State the specific consistency model (linearisability, causal, read-your-writes) and the specific availability guarantee |
 | Using wall-clock timestamps for conflict resolution | Clocks drift; later timestamp does not imply later causation | Use vector clocks (#5) or Last-Write-Wins with a monotonic logical clock |
-| Setting W = 1 for writes and R = 1 for reads | R + W = 2 ≤ N; stale reads are possible | Set W + R > N (#9) |
+| Setting W = 1 for writes and R = 1 for reads | R + W = 2 ≤ N; stale reads are possible | Use intersecting fixed-membership quorums plus a verified ordering/version protocol; W+R>N alone is not linearizability (#9) |
 
 ### Payments and Messaging
 

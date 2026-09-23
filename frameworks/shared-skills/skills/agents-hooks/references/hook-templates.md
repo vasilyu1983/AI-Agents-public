@@ -85,7 +85,8 @@ If you extend the `rm -rf` check to arbitrary paths, add an allowlist short-circ
 
 ```bash
 # Starting allowlist for a broadened rm -rf guard — extend per project.
-# These are build/cache artifacts that are always safe to nuke and regenerate;
+# These are example build/cache artifacts. Verify each project treats them as disposable
+# and that no path resolves outside the expected worktree before deleting or regenerating;
 # a different repo might reasonably add .venv, target/, or vendor/.
 SAFE_RM_PATHS='node_modules|\.next|dist|__pycache__|\.cache|build|\.turbo|coverage'
 

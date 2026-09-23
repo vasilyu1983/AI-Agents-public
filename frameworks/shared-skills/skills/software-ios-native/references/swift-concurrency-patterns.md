@@ -323,7 +323,7 @@ Isolation propagates through:
 
 Isolation does NOT propagate to:
 - Closures (must be explicitly annotated or inherit from context)
-- Unstructured `Task { }` in Swift 5.x (does NOT inherit class `@MainActor`)
+- Unstructured `Task { }` whose closure is formed in a nonisolated context; unlike tasks formed in an actor-isolated function, it has no actor to inherit
 
 ### Isolated parameters
 

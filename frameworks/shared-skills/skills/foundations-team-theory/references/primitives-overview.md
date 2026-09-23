@@ -53,7 +53,7 @@ For applied patterns and anti-patterns specific to subagent design, see [`patter
 | Decentralized (static) | Each agent observes a disjoint slice; no agent sees what others see | Parallel reviewers each on a different file |
 | Partial | Agents have overlapping but not identical views | Two researchers querying the same source with different prompts |
 | Nested | Agent `i+1` observes everything agent `i` observed plus more | Hierarchical chain: planner → architect → implementer |
-| Non-classical | An agent's action affects another agent's observation | Subagent A writes a note that subagent B reads (signaling) |
+| Non-classical | Action-dependent observations without the requisite nestedness | Classify what B knows about A’s information before applying non-classical results |
 
 **Why it matters**: most multi-agent design errors trace to an unexamined information structure. Naming the type (especially "non-classical") changes which solution methods are valid.
 
@@ -77,7 +77,7 @@ For applied patterns and anti-patterns specific to subagent design, see [`patter
 
 **Diagnostic**: hold all agent rules fixed except two; vary that pair jointly. If you find a higher `E[U]`, you were at a PBPO that wasn't the team optimum.
 
-**The aggregation rule is part of the joint policy.** A team can be PBPO — every agent reasoning well given the others — and still lose to its own best member, because how contributions are combined is itself a policy choice. Pappu et al. (2026, ICML, arXiv:2602.01011) show self-organizing LLM teams underperforming their strongest member by up to 41.1% on ML benchmarks *even when told which agent is the expert*: the teams identify expertise correctly, then dilute it through integrative compromise, averaging expert and non-expert positions. The deficit grows with team size. The design consequence is that competence-weighted routing must be built into the aggregation step explicitly; it does not emerge from agents that individually know who the expert is. Note the tradeoff the same paper reports — consensus-seeking is what makes these teams resistant to adversarial members, so pooling is the right rule when robustness dominates peak accuracy.
+**The aggregation rule is part of the joint policy.** Good individual reasoning does not establish PBPO or good aggregation. Pappu et al. find expertise dilution in controlled human-inspired tasks. Their ML benchmark gap uses the At Least One Correct oracle bound, not the best fixed individual: Table 2 includes Reveal Expert teams that exceed that individual. Compare routing, competence weighting and pooling against both a deployable individual baseline and any separately labelled oracle bound; test adversarial robustness independently.
 
 **Baseline discipline**: always evaluate a team design against its single-best-member baseline. A team that cannot beat one good agent is paying coordination cost (#4, #7) for negative return.
 
@@ -108,13 +108,13 @@ For applied patterns and anti-patterns specific to subagent design, see [`patter
 
 ## 5. Radner's LQG Theorem
 
-**Theorem (Radner 1962).** For a team with linear dynamics, quadratic payoff, and Gaussian information, the team-optimal decision rules are *linear* in each agent's observation, and the optimum is computable in closed form.
+**Theorem (Radner 1962).** For a team with linear dynamics, quadratic payoff, and Gaussian information, linear optimal rules are available under static/classical or appropriate partially nested information assumptions and the required convexity/integrability conditions; linear dynamics, Gaussian noise and quadratic notation alone are insufficient.
 
 **Inputs**: linear state dynamics, quadratic-form payoff `U = -(x − Ka)' Q (x − Ka)`, Gaussian noise on observations.
 
 **Outputs**: closed-form linear decision rules `δ_i(y_i) = L_i y_i + c_i`.
 
-**Why it matters**: LQG teams are the *only* canonical class with closed-form team optima. They're the upper-bound benchmark and the right starting point for any team where payoff is approximately quadratic-in-error.
+**Why it matters**: Classical convex Gaussian/quadratic teams provide a tractable benchmark under specified assumptions; this is not an upper bound for arbitrary LLM architectures or a uniqueness claim about all solvable teams.
 
 **Limits**: depends on classical information structure (no signaling between agents). When that fails, see #6.
 
@@ -128,7 +128,7 @@ For applied patterns and anti-patterns specific to subagent design, see [`patter
 
 **Result (Witsenhausen 1968).** A simple two-stage LQG team with non-classical information structure (agent 1's action observed by agent 2) has a *nonlinear* optimal policy that strictly dominates any linear policy.
 
-**Why it matters**: this is the exact regime where one subagent's output becomes another's input. Any "the planner writes; the executor reads" pattern is non-classical. Linear/affine extrapolation of Radner's theorem fails here. Decades later, the exact optimum is still unknown — this is a hard problem.
+**Why it matters**: this illustrates a particular action-dependent information structure, not every subagent handoff. A planner-output dependency alone does not establish a non-classical structure: determine whether the later decision-maker knows the earlier decision-maker’s relevant information (partial nestedness). Linear/affine extrapolation of Radner's theorem fails here. Decades later, the exact optimum is still unknown — this is a hard problem.
 
 **Practical takeaway**: when one agent signals to another (via shared scratchpad, message, or written artifact), expect:
 - Optimal policies to be nonlinear
@@ -137,7 +137,7 @@ For applied patterns and anti-patterns specific to subagent design, see [`patter
 
 **Failure modes**:
 - Assuming linear policies are optimal in any team where signaling exists
-- Treating the problem as if more communication monotonically improves payoff — Witsenhausen's setting shows this is false
+- Conflating information with realized heuristic performance or cost: when additional costless information is optional and old policies remain feasible, optimal payoff cannot decrease because it may be ignored. Witsenhausen demonstrates failure of linear-policy optimality, not failure of that monotonicity claim
 
 ---
 

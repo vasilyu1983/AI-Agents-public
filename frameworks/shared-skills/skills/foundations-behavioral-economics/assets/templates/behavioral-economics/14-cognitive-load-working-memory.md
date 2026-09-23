@@ -7,7 +7,7 @@ Working memory is the limited-capacity system that holds and manipulates informa
 Capacity estimates:
 - **Miller (1956)**: 7 ± 2 chunks, where a chunk is a meaningful unit (familiar pattern, learned grouping).
 - **Cowan (2001, 2010)**: ~4 chunks for novel material under interference. The Cowan number is the operating constraint for unfamiliar content; Miller's wider bound applies when chunking is well-practiced.
-- Working-memory load decays in seconds without rehearsal and is disrupted by interruption.
+- Unrehearsed working-memory representations can decay or suffer interference over short intervals without rehearsal and is disrupted by interruption.
 
 **Cognitive Load Theory** (Sweller, 1988; Sweller, van Merriënboer & Paas, 2019) decomposes load into three sources:
 
@@ -24,8 +24,8 @@ Two additional empirical regularities:
 ## When to Use
 
 - Designing forms, dashboards, error messages, configuration screens, alert lists, or any surface that imposes simultaneous information demands.
-- Diagnosing why a feature has high abandonment mid-flow (typical signature: the screen exceeds 4 novel chunks, or the user is interrupted mid-decision).
-- Onboarding flows, where the user has zero familiarity and operates entirely on the Cowan ~4 limit.
+- Diagnosing why a feature has high abandonment mid-flow (possible causes include task demands, poor grouping, unfamiliar content or interruption; screen-item count is not a capacity test).
+- Onboarding flows, where prior knowledge, task structure and visible external-memory support must be assessed.
 - High-stakes or time-pressured tasks (incident response, financial decisions, medical workflows) where working-memory failure has real consequences.
 - Reducing notification, alert, or interruption noise that fragments user attention.
 
@@ -41,7 +41,7 @@ Two additional empirical regularities:
 
 **Required conditions**:
 1. Material decisions (consent, payment, cancellation) must be presented at low cumulative cognitive load — typically near the start of a flow, with extraneous content stripped.
-2. Forms and onboarding chunked to ≤4 novel items per screen unless the user has demonstrably acquired the chunking pattern.
+2. Forms and onboarding assessed for what must be remembered, visible external support, grouping and user expertise; choose staging from observed task performance.
 3. Notifications and alerts ranked and rate-limited; not all signals deserve simultaneous attention.
 4. UK regulatory context: ICO guidance on dark patterns explicitly cites cognitive overload as a route to invalid consent.
 
@@ -56,7 +56,7 @@ Two additional empirical regularities:
 ## Outputs
 
 - A revised flow with extraneous load stripped, intrinsic load staged, and germane load supported.
-- A per-screen chunk count, ideally ≤4 for novel content.
+- A task-demand audit distinguishing information held in memory from information available on screen.
 - A notification / alert priority specification with rate limits.
 - A position-of-decisions audit showing material decisions occur at low cumulative load.
 
@@ -64,19 +64,19 @@ Two additional empirical regularities:
 
 | Failure | Cause | Fix |
 |---------|-------|-----|
-| High abandonment on a specific screen | The screen exceeds working-memory capacity (often >7 visible decision points, or >4 novel ones) | Split into sequential screens; pre-fill defaults; chunk related fields visually |
+| High abandonment on a specific screen | Possible task overload, poor grouping or unfamiliar terminology; visible-control count alone does not diagnose capacity | Split into sequential screens; pre-fill defaults; chunk related fields visually |
 | Power users are fast, novices abandon | Chunking patterns assume expertise the novice doesn't have | Provide novice-mode with explicit chunking; offer expert-mode toggle for repeat users |
 | Error message says "fix the 7 problems below" and user gives up | Working-memory overload from simultaneous error display | Show errors progressively (one at a time) or grouped by section with completion signals |
 | Notification stream is ignored | Rate of interruption exceeds attention-switching budget; ranking is flat | Apply priority tiers; rate-limit lower tiers; allow user to demote channels |
 | Late-flow consent obtained but legal team flags it as invalid | Critical decision placed where cumulative load is highest | Move material decisions to position 1–2 of the flow, with isolated framing |
-| Dashboard "shows everything" and is used by no one | Extraneous load is maximised; user cannot identify the relevant signal | Cut to ≤4–7 prioritised signals on the default view; everything else moves to drill-down |
+| Dashboard "shows everything" and is used by no one | Extraneous load is maximised; user cannot identify the relevant signal | Prioritize task-relevant signals and test grouping and drill-down against search time, errors and comprehension |
 
 ## Worked Example
 
 **Scenario**: A B2B settings page has 18 toggles on one screen and a 31% abandonment rate. The team wants to keep all features accessible but reduce abandonment.
 
 Cognitive-load redesign:
-- **Audit**: 18 toggles is well over the Cowan limit even for familiar users. ~6 toggles control everything most users care about (the 80% case).
+- **Audit**: 18 visible toggles do not by themselves exceed Cowan’s memory capacity: visibility provides external memory support. In this illustrative scenario, task observation identifies six frequently used toggles; test whether grouping improves completion without hiding necessary choices.
 - **Default view**: 6 priority toggles, each labelled with its outcome (not its mechanism). Extraneous detail removed from the surface; a "Show advanced" link reveals the remaining 12.
 - **Grouping**: The 12 advanced toggles are split into 3 groups of 4 by function. Each group's group-level state (on / off / mixed) is shown collapsed.
 - **Critical-decision position**: A "delete account" action that was previously buried at the bottom of the page is moved to its own confirmation flow with a separate, low-load screen — so the consent is given at low cumulative fatigue.

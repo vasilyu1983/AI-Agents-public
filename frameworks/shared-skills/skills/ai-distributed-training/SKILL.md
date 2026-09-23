@@ -357,6 +357,10 @@ Always check current spot pricing on RunPod, Lambda Labs, Vast.ai, or Modal befo
 - **Validate checkpoint restore** before starting a long run on spot.
 - **Estimate before running**: use the formula above; add 20% buffer for profiling/debugging.
 
+## Parallelism Promotion Gate
+
+Treat the smallest configuration that fits as the control. Add sharding, tensor, pipeline, or expert parallelism only after a profile identifies the binding memory or communication limit. For each promotion, record model state, global batch and sequence mix, peak memory, step-time breakdown, tokens per second, utilization, and checkpoint size on the same workload. Accept it only after a forced interruption restores to the same optimizer step and the throughput gain survives steady state; setup success or a short warmup run is insufficient.
+
 ## Known Traps
 
 - **Debugging on an 8xH100 box**: expensive and unnecessary; always debug on the smallest GPU first.
@@ -424,6 +428,6 @@ See **[data/sources.json](data/sources.json)** for curated primary sources acros
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

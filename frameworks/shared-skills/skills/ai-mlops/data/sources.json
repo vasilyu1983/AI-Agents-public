@@ -299,7 +299,7 @@
         "name": "vLLM V1 Engine Guide",
         "url": "https://docs.vllm.ai/en/stable/usage/v1_guide/",
         "type": "documentation",
-        "relevance": "vLLM V1 has been the default since v0.8.0; per the project's deprecation plan V0 code removal began at v0.10, so by mid-2026 V0 is gone rather than merely deprecated. Reference before recommending vLLM serving configurations.",
+        "relevance": "Current V1 behavior and V0 migration source. Checked 2026-09-07: the guide says V0 is fully deprecated and still documents feature differences; it does not establish that every V0 path has been removed. Reference before recommending serving configurations.",
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": true

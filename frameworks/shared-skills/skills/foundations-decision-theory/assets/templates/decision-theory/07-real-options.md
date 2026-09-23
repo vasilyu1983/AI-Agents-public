@@ -14,13 +14,7 @@ Key option types:
 | Option to switch | Switch inputs, outputs, or technology | Better alternative becomes available |
 | Compound option | Option on an option | Stage-gate investments; each stage buys the next |
 
-**Intuition**: Under uncertainty, commitment has a negative externality — it destroys the option value of waiting. The net value of investing now is:
-
-```
-NPV_invest_now = NPV_project − Option_value_of_waiting
-```
-
-If Option_value > 0, deferral is rational even when NPV_project > 0.
+**Compare actions explicitly:** immediate net project value V_now is distinct from the value of waiting, V_wait, which includes future optimal exercise, lost cash flows, information and expiry. Wait only when V_wait > V_now under the stated model. A positive option value alone does not prove waiting dominates; a call option already contains the exercise payoff and should not be mechanically subtracted from that payoff as a universal NPV identity.
 
 ## When to Use
 
@@ -44,7 +38,7 @@ If Option_value > 0, deferral is rational even when NPV_project > 0.
 | Output | Description |
 |--------|-------------|
 | Option value | Value of flexibility (Black-Scholes or binomial approximation) |
-| Option-adjusted NPV | NPV_invest_now = NPV_project − Option_value_of_deferral |
+| Action comparison | Immediate net value versus optimized continuation/wait value under the same model |
 | Exercise rule | Threshold value at which committing dominates deferring |
 
 ## Failure Modes
@@ -56,19 +50,7 @@ If Option_value > 0, deferral is rational even when NPV_project > 0.
 
 ## Worked Example
 
-A startup considers building a dedicated data centre (£2M) or waiting 12 months while demand signals accumulate.
-
-- Current NPV_project = £2.4M → naïve DCF says invest now (NPV = +£400K).
-- Volatility of underlying project value: σ = 40% per year.
-- Investment cost K = £2M, risk-free rate r = 5%.
-
-Using Black-Scholes approximation for a call option with S = £2.4M, K = £2M, T = 1, σ = 0.4, r = 0.05:
-
-Option value ≈ £0.72M (illustrative; compute with B-S formula).
-
-Option-adjusted NPV of investing now ≈ £400K − £720K = **−£320K**.
-
-Despite a positive naive NPV, deferring is optimal. Wait 12 months; exercise only if the project value exceeds the exercise threshold.
+**Hypothetical two-state exercise example:** immediate investment costs 2 and current project value is 2.4, so immediate net value is .4. Waiting one period reveals project values 3.2 or 1.6 with equal probability. With an explicit zero-discount, no-interim-cashflow model and unchanged cost 2, the wait/exercise value is .5*max(3.2-2,0)+.5*max(1.6-2,0)=.6. Waiting exceeds immediate investment by .2. These assumptions are illustrative; information delay, lost operating cash flows, competitive erosion, discounting or expiry can reverse the comparison. A Black-Scholes calculation for a nontraded internal project needs separately justified replication/valuation assumptions.
 
 ## Multi-Stage Pathways (DAPP Extension)
 

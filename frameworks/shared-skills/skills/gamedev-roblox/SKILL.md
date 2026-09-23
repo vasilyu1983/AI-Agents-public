@@ -81,10 +81,14 @@ Scope -> "first playable" sentence
 
 ## Known Traps
 
+**Remote mutation gate.**
+
+For every `RemoteEvent` or `RemoteFunction` that can change inventory, currency, progression, trades, or purchases, write the server-owned invariant beside the handler. Validate instance ancestry, types, bounds, entitlement, and current server state; rate-limit by player and action; then perform the mutation once under an idempotency key or atomic update. A client request is an intent, never evidence that the action is allowed.
+
 - **`wait()` drift** — legacy scheduler resumes on ~1/30s minimum and accumulates drift; use `task.wait`.
 - **Replication timing** — a Workspace object that exists on the server may not have replicated/streamed to a given client yet; LocalScripts must `WaitForChild` with a timeout.
 - **Humanoid race** — `Humanoid`/`HumanoidRootPart` are not all present the instant `CharacterAdded` fires; `:WaitForChild` them.
-- **DataStore throttling** — request/storage budget is now per-*experience* (2026 change), shared across every running server, not per-server; a burst on one server can starve all of them. Wrap in `pcall` + logging; use ProfileStore.
+- **DataStore throttling** — experience-level request budgets are shared across game servers and Open Cloud, while each server also has a configurable contribution limit. A burst can exhaust the experience budget unless servers are bounded deliberately. Inspect `GetRequestBudgetForRequestType()`, set per-server limits where needed, and wrap operations in `pcall` with structured logging.
 - **`RemoteFunction:InvokeClient()` from the server** — a malicious client can yield forever and hang the thread; never call it.
 - **Emulator ≠ device** — Studio's device emulator tests layout only, not CPU/GPU; most players are mobile, so test on a real 3–4 year old Android before shipping.
 - **New Type Solver footguns (2026)** — the current type solver has open issues (as of mid-2026 — verify fixed): stale `Parent`/`Model` type narrowing after reparenting or reassignment, and high Studio memory use. If strict-typed code reports impossible type errors after moving instances, suspect the solver, not your code.
@@ -120,7 +124,7 @@ Related skills (same family only):
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
 

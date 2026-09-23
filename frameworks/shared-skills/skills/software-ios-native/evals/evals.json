@@ -42,15 +42,15 @@
     },
     {
       "id": 4,
-      "prompt": "A production iOS 17+ app has a bare Task { } block inside an @MainActor @Observable class that runs a cooldown timer: after an action completes it calls Task { try await Task.sleep(for: .milliseconds(500)); self.state = .idle }. Under Swift 6.2 with StrictConcurrency enabled, this sometimes crashes with a main-actor isolation violation. Explain why, and provide the correct pattern.",
-      "expected_output": "The skill should explain that a bare Task { } in a @MainActor class does NOT inherit the @MainActor isolation under Swift 5.7+ StrictConcurrency / Swift 6.2 — it runs on the global executor. The fix is Task { @MainActor [weak self] in try await Task.sleep(...); self?.state = .idle }. The output should reference the bare Task { } isolation trap from Known iOS Traps.",
+      "prompt": "Review this diagnosis: 'Any bare Task { } created by an @MainActor @Observable class runs on the global executor, so it always needs Task { @MainActor in ... }.' The class creates one task inside a normal isolated method and another inside a nonisolated SDK callback. Explain which task inherits MainActor, which needs an explicit hop, and how to keep a delayed state reset from overwriting a newer request.",
+      "expected_output": "The skill should reject the blanket diagnosis. Task { } inherits the actor context where its closure is formed: the task created in the actor-isolated method inherits MainActor; the task created in the nonisolated callback needs Task { @MainActor in ... } before touching UI state. It should also store/cancel the delayed task or guard it with request identity rather than applying an unconditional timer reset.",
       "files": [],
       "expectations": [
-        "The output explains that bare Task { } in a @MainActor class does not inherit main actor isolation under Swift 6.2 with StrictConcurrency.",
-        "The output prescribes Task { @MainActor [weak self] in ... } as the correct pattern.",
-        "The output identifies this as the same crash class as the nonisolated async delegate footgun, noting it is pattern #2 in Known iOS Traps.",
-        "The output includes [weak self] in the corrected code to prevent retain cycles in the detached task.",
-        "The output does not suggest disabling StrictConcurrency or adding @preconcurrency as the solution."
+        "The output states that Task { } inherits actor isolation from the context where its closure is formed.",
+        "The output distinguishes an actor-isolated method from a nonisolated SDK callback.",
+        "The output uses an explicit MainActor hop only for the nonisolated boundary.",
+        "The output prevents an older delayed task from resetting state after a newer request through cancellation or request identity.",
+        "The output distinguishes Task { } from Task.detached and does not recommend disabling StrictConcurrency."
       ]
     },
     {

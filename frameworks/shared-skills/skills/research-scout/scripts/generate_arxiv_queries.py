@@ -18,7 +18,7 @@ import sys
 from datetime import date, timedelta
 from urllib.parse import urlencode
 
-BASE_URL = "http://export.arxiv.org/api/query"
+BASE_URL = "https://export.arxiv.org/api/query"
 
 
 def parse_window(s: str) -> int:

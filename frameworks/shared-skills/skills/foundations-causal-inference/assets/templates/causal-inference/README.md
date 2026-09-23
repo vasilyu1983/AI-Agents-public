@@ -47,7 +47,7 @@ For observational studies: always pair Estimation with Validation. A single agen
 1. DAG (#1) — map confounders
 2. Propensity / DR (#8) — balance and debiased ATE
 3. CATE / X-learner (#9) — heterogeneous effects
-4. Sensitivity analysis (#12) — E-value on strongest claim
+4. Sensitivity analysis (#12) — scale-compatible sensitivity on strongest claim
 
 ### Policy Evaluation (Single Treated Unit)
 1. DAG (#1) — map treatment and outcome structure over time
@@ -60,7 +60,7 @@ For observational studies: always pair Estimation with Validation. A single agen
 2. Backdoor criterion (#3) — adjustment set for total effect
 3. Propensity / DR (#8) — balance for mediation estimation
 4. Mediation analysis (#11) — NDE, NIE, proportion mediated
-5. Sensitivity analysis (#12) — E-value for indirect effect
+5. Sensitivity analysis (#12) — mediation-specific sensitivity for indirect effect
 
 ### A/B Test Augmentation (Heterogeneity)
 1. RCT result for ATE (use the experimental design)

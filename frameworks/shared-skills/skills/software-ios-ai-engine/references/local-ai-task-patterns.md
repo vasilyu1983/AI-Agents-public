@@ -63,7 +63,7 @@ If validation fails, ask a user-visible clarification or leave a field blank; do
 
 ### P5 · Summarize by chunks, then merge
 
-For content near or above the on-device context window, split first. Summarize chunks in separate sessions, merge summaries in a new session, and preserve source refs. Do not keep appending messages to one long `LanguageModelSession` until `.exceededContextWindowSize`.
+For content near or above the on-device context window, split first. Summarize chunks in separate sessions, merge summaries in a new session, and preserve source refs. Do not keep appending messages to one long `LanguageModelSession` until the current SDK throws `LanguageModelError.contextSizeExceeded(_:)`.
 
 ### P6 · Bounded classification taxonomy
 

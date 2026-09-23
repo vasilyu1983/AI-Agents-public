@@ -3,10 +3,11 @@
     "skill": "ai-coding-agents-settings-policy",
     "title": "AI Coding Agents Settings Policy - Sources",
     "description": "Official documentation and implementation references for settings precedence, managed policy, schema validation, and safe runtime application",
-    "last_updated": "2026-07-11",
-    "updated": "2026-07-11",
-    "total_sources": 8,
-    "version": "1.1"
+    "last_updated": "2026-09-11",
+    "updated": "2026-09-11",
+    "total_sources": 9,
+    "version": "1.2",
+    "validation_scope": "2026-09-11: Codex skills.max_context_tokens only; other claims retain their prior verification dates."
   },
   "categories": {
     "official_documentation": [
@@ -36,6 +37,15 @@
         "update_frequency": "quarterly",
         "access": "free",
         "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Codex Configuration Reference",
+        "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+        "type": "reference",
+        "relevance": "Verified 2026-09-05: features.context_management.experimental_mode enables experimental notes and searchable history; features.memories is separate. Documents ChatGPT plan requirements and memory generation/use settings. Verified 2026-09-11: skills.max_context_tokens is a positive integer catalog budget, defaults to 2% of model context window, and explicit values are capped at 10000 tokens; this review did not revalidate the earlier context-management claims.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
       }
     ],
     "implementation_references": [
@@ -43,7 +53,7 @@
         "name": "Claude Code GitHub Repository",
         "url": "https://github.com/anthropics/claude-code",
         "type": "repository",
-        "relevance": "Closed-source product page and issue tracker for Claude Code; not the implementation source — use code.claude.com/docs/en for authoritative behavior docs",
+        "relevance": "Closed-source product page and issue tracker for Claude Code; not the implementation source \u2014 use code.claude.com/docs/en for authoritative behavior docs",
         "update_frequency": "weekly",
         "access": "free",
         "add_as_web_search": false

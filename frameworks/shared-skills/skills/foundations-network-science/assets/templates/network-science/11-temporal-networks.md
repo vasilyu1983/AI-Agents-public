@@ -70,6 +70,6 @@ A **temporal network** is a graph where each edge (u, v) carries a timestamp t: 
 
 ## Related
 
-- [`07-contagion-sir.md`](07-contagion-sir.md) — temporal contacts reduce effective R₀ vs. static SIR
+- [`07-contagion-sir.md`](07-contagion-sir.md) — temporal ordering changes reachable paths and spread predictions
 - [`04-small-world.md`](04-small-world.md) — static small-world baseline for comparison with temporal reachability
 - [`08-link-prediction.md`](08-link-prediction.md) — temporal link prediction uses edge timestamps as features

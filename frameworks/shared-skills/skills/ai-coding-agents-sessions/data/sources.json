@@ -41,7 +41,7 @@
         "name": "Claude Code Create Custom Subagents",
         "url": "https://code.claude.com/docs/en/sub-agents",
         "type": "documentation",
-        "relevance": "Authoritative source for fork-vs-named-subagent startup modes, CLAUDE_CODE_FORK_SUBAGENT env var, /fork slash command, version gates (v2.1.117 minimum, v2.1.161 default-on), coordinator-mode incompatibility, no-nested-forks rule, isolation: worktree option, and prompt-cache economics",
+        "relevance": "Authoritative source for fork-vs-named-subagent startup modes, explicit fork-type selection, CLAUDE_CODE_FORK_SUBAGENT across interactive, claude -p, and Agent SDK surfaces, current /subtask and historical or agent-view-dependent /fork behavior, version gates, no-nested-forks rule, isolation: worktree option, and prompt-cache economics; re-verified 2026-09-07",
         "update_frequency": "monthly",
         "access": "free",
         "add_as_web_search": true

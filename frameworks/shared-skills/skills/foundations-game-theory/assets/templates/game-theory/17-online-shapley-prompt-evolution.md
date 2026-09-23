@@ -45,7 +45,7 @@ Use #10 when redesigning a team. Use #17 when running an existing team.
 
 - **Lock the team protocol.** Mutate prompts; don't mutate roles, debate rules, or synthesis order. Otherwise you're conflating two search axes.
 - **A/B per member, not whole team.** Variant prompts on member m must run against current prompts on the same task or matched-pair tasks. Cross-team-run comparisons don't isolate member m's effect.
-- **Shapley threshold is task-relative.** A member with 5% Shapley on a 5-member team is at parity. The trigger is *gap from expected share*, not absolute value.
+- **Shapley threshold is task-relative.** Equal normalized shares in a five-member team are 20% each, but role-specific expected contributions need not be equal. Compare the estimated share with a justified expectation and uncertainty; negative contributions and interactions require the underlying characteristic function, not a simple headcount target.
 - **Cap mutation rounds.** Three consecutive sub-threshold rounds → mutate. More than five mutation cycles without improvement → demote member, don't keep mutating.
 - **Audit for drift toward sycophancy.** Online prompt evolution can quietly tune members toward agreeing with the synthesis owner (the loudest credit-receiving signal). Run an adversarial-debate spot-check (mechanism #2) every K runs to catch convergence-as-collapse.
 
@@ -63,7 +63,7 @@ Use #10 when redesigning a team. Use #17 when running an existing team.
 
 ## When to Skip
 
-- Team runs fewer than ~50 times (insufficient signal for evolution)
+- Insufficient effective sample size or uncertain marginal value. Fifty runs is an illustrative planning heuristic, not a universal minimum: dependence, task mix, effect size and drift determine adequacy.
 - Member prompts are already heavily hand-tuned (mutations regress quality)
 - Stakes per run are too high to A/B test (each run is a real decision; can't afford a worse variant)
 - You're still designing the team — use #10 first, #17 after the team stabilizes

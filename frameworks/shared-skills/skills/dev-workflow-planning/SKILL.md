@@ -19,6 +19,7 @@ Use this skill to turn vague or risky engineering work into a bounded execution 
 | Guardrails for parallelism, sessions, and recovery | [references/operational-checklists.md](references/operational-checklists.md), [references/session-patterns.md](references/session-patterns.md), [references/session-scope-budgeting.md](references/session-scope-budgeting.md), [../ai-agents/references/context-rotation-and-state.md](../ai-agents/references/context-rotation-and-state.md) |
 | Spec-driven tooling landscape (GitHub Spec Kit, Kiro, BMAD) | [references/spec-driven-dev-landscape.md](references/spec-driven-dev-landscape.md) |
 | Test-context planning | [../qa-agent-testing/references/coding-agent-regression-testing.md](../qa-agent-testing/references/coding-agent-regression-testing.md) |
+| Quantify uncertain delivery cost | [references/uncertain-work-cost.md](references/uncertain-work-cost.md) |
 | Source map | [data/sources.json](data/sources.json) |
 
 ## When to Use
@@ -103,6 +104,8 @@ AI coding agents shift the bottleneck from typing speed to decision quality, rev
 - A plausible-looking AI-generated diff is not evidence of correctness. Budget the same verification rigor for AI-generated code as for human-written code of the same risk class — a clean diff creates false confidence, not a discount on review time.
 - Treat pre-AI-agent historical velocity or throughput baselines as unreliable comparators for estimation. Recalibrate against the team's own current throughput on AI-assisted work rather than carrying forward last year's per-story averages.
 
+When uncertain review, rework, or work-item volume can change a budget decision, use [the uncertainty recipe](references/uncertain-work-cost.md). Keep schedule logic in the dependency plan; cost simulation does not discover the critical path.
+
 ### Plan Mode (Claude Code)
 
 - Enter with `/plan` (added Jan 2026), `Shift+Tab` twice, or `--permission-mode plan` at startup.
@@ -117,6 +120,30 @@ AI coding agents shift the bottleneck from typing speed to decision quality, rev
 - wave-based parallelism only when tasks are truly independent
 - explicit `depends_on`, shared-interface definitions, and one validation pass between waves
 - stop parallelism once interface churn or file overlap appears
+
+For plans with parallel work, model dependencies explicitly rather than relying on list order. Each work item names prerequisites, produced artifact or state, owner, verification evidence, and the downstream items it unlocks. Mark an item `ready` only when its prerequisites are observed, `blocked` when a named dependency is unresolved, and `done` only when its evidence exists.
+
+Identify the current critical path and the integration points where parallel branches converge. Recompute it when scope or evidence changes; adding workers to non-critical tasks does not shorten the plan. A milestone is complete only when its integration check passes, even if every contributing task reports done in isolation.
+
+### Foundations for invalid sequences or constrained choices
+
+- Use [planning/search](../foundations-ai-planning-search/SKILL.md) when list order
+  hides state-dependent preconditions, irreversible effects, or alternative
+  sequences that can invalidate execution. Return initial-state evidence,
+  action preconditions/effects, a replayed valid sequence or the first failed
+  precondition, and a replanning trigger. An unknown precondition is unresolved;
+  a valid abstract sequence does not establish implementation success. Skip
+  this model for a routine checklist or a dependency DAG whose prerequisites
+  are already explicit and directly checked.
+- Use [mathematical optimization](../foundations-mathematical-optimization/SKILL.md)
+  when indivisible work selections compete for quantified capacity, budget, or
+  other hard constraints and a greedy ranking may miss feasible combinations.
+  Return variables/domains, objective and coefficient provenance, constraints,
+  a feasible selection, and method/bound/gap status. Preserve indivisibility;
+  a continuous relaxation is a bound, not an executable allocation. Skip for
+  ordinary qualitative prioritization or when inputs cannot support a model;
+  document the unresolved tradeoff instead. This skill still owns execution,
+  ownership, verification, and checkpoints.
 
 ### Context and Session Discipline
 
@@ -257,7 +284,7 @@ Source: Addy Osmani, [`interview-me` skill](https://github.com/addyosmani/agent-
 
 ## Navigation
 
-> **Gate before invoking any foundation below:** Each foundation has a `When to Apply` / `When to Skip` section. If your task matches a skip-condition, route to the foundation it names instead — don't pull in primitives the task doesn't need.
+> Load a foundation only for a named decision gap. Check its apply/skip conditions; when it does not fit, continue the applied workflow or route to an owner only if that owner is needed.
 
 - Planning and platform references: [references/planning-templates.md](references/planning-templates.md), [references/platform-workflows.md](references/platform-workflows.md), [../ai-agents/references/agent-delivery-methods.md](../ai-agents/references/agent-delivery-methods.md)
 - Parallelism and recovery: [references/operational-checklists.md](references/operational-checklists.md), [references/session-patterns.md](references/session-patterns.md), [references/session-scope-budgeting.md](references/session-scope-budgeting.md), [references/flow-metrics.md](references/flow-metrics.md), [../ai-agents/references/context-rotation-and-state.md](../ai-agents/references/context-rotation-and-state.md)
@@ -275,7 +302,6 @@ Source: Addy Osmani, [`interview-me` skill](https://github.com/addyosmani/agent-
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

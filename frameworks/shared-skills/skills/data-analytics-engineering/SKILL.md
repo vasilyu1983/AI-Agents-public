@@ -93,6 +93,16 @@ Are the same business metrics reimplemented in 3+ places?
       YES -> Lightdash (or semantic layer + OpenMetadata/DataHub catalog)
 ```
 
+## Decision: Classify a Metric Change Before Shipping
+
+| Change class | Examples | Required release path |
+|---|---|---|
+| Additive | New metric, dimension, or optional field | Validate grain and source coverage; publish owner and definition before exposing it |
+| Corrective | Bug fix that changes historical values | Dual-run old/new logic over a representative window; quantify affected periods and consumers; issue a change notice |
+| Breaking | Rename, removal, grain change, or semantic redefinition | Version the metric or field; keep a compatibility window; migrate named consumers; define rollback |
+
+For corrective and breaking changes, reconciliation must compare totals **and** segment-level results at the intended grain. A matching grand total can hide offsetting errors, fan-out, or a changed population. Do not cut over until the owner accepts the measured delta, downstream consumers are enumerated, and the old definition remains recoverable for the agreed window.
+
 ## Quick Reference
 
 | Task | Resource | When to Load |
@@ -245,11 +255,10 @@ python scripts/analytics_linter.py report \
 
 ## Fact-Checking
 
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
+- Verify volatile external facts (versions, prices, rules, dates) against primary sources before answering, cite them with dates, and if web access is unavailable say so and mark the guidance unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

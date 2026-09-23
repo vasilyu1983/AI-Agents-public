@@ -80,6 +80,7 @@ UI/session reflection
 7. **Stabilize task-list identity.** Task list IDs should resolve from explicit context first and use monotonic high-water-mark rules so resets do not accidentally reuse old IDs.
 8. **Serialize shared mutations.** Host-owned task stores need lock or backoff semantics when multiple workers can touch the same list.
 9. **Test concurrency edges.** Verify double claim, failed submission after claim, blocked task ordering, background/foreground transitions, and remote-task cancellation.
+10. **Separate budget axes.** Store task budget, context/input tokens, output/reasoning tokens when available, tool calls, wall time, and external spend independently. Declare which limits the runtime enforces and map each exhausted limit to a terminal or escalated task state.
 
 ## Host Rules
 
@@ -275,13 +276,13 @@ This is the same minification principle as dev-loop test speedups, applied to th
 
 Goal-mode is a ralph-style loop: same prompt repeats with the goal-state read back each iteration. Ralph loops scale test-time compute effectively — Anthropic's BrowseComp data (linked from [Watts, 2026-05-07](https://x.com/jarrodwatts/status/2052372045829382430)) shows Sonnet 4.6 spending ~10× tokens yielded ~10 percentage points higher score. But a bare ralph loop hits three ceilings:
 
-1. **Ambiguity bottleneck.** Each iteration's output is the next iteration's input. One underspecified decision early in the run direction-shifts everything downstream. No amount of token spend rescues a run whose target was vague. Fix: invest in a pre-loop interview/clarification phase (20–50 clarifying questions) that forces the human to decide upfront. See [`../dev-workflow-planning/SKILL.md#pre-loop-setup-phase-both-variants`](../dev-workflow-planning/SKILL.md) and `superpowers:brainstorming`.
+1. **Ambiguity bottleneck.** Each iteration's output is the next iteration's input. One underspecified decision early in the run can shift everything downstream. More token spend does not repair a missing acceptance decision. Fix: ask the smallest set of questions needed to resolve load-bearing choices, then write the answers into the task contract. See [`../dev-workflow-planning/SKILL.md#pre-loop-setup-phase-both-variants`](../dev-workflow-planning/SKILL.md#pre-loop-setup-phase-both-variants).
 
-2. **Single-context-window bottleneck.** Even with token budget headroom, a single agent's context window accumulates clutter and the model starts "deluding itself" (Watts, citing Boris Cherny). Separate context windows beat one big window. Fix: orchestrator + implementer + reviewer triad — fresh subagent context per task, reviewer judges work without implementer biases. See [`../agents-swarm-orchestration/SKILL.md`](../agents-swarm-orchestration/SKILL.md).
+2. **Context-shape bottleneck.** Long histories can accumulate irrelevant material even with token headroom. Separate contexts can help independent work or clean review, but they add briefing, coordination, and synthesis cost and are not universally better. Choose a single agent or an orchestrator/implementer/reviewer split from the dependency shape, then compare completion quality and total usage. See [`../agents-swarm-orchestration/SKILL.md`](../agents-swarm-orchestration/SKILL.md).
 
-3. **Cross-context memory bottleneck.** Multi-day runs cross compaction boundaries; without filesystem-backed memory, new context windows lose the chain. Fix: filesystem-backed journaling per the Watts 4-file (bounded product) or Hayduk 3-file (exploratory) pattern. See [`../dev-workflow-planning/SKILL.md#long-horizon-agent-journaling`](../dev-workflow-planning/SKILL.md).
+3. **Cross-context memory bottleneck.** Multi-day runs cross compaction or session boundaries, and runtime-provided recovery differs. Persist the minimum task state needed to resume and test that the target runtime actually reloads it; filesystem-backed journaling is one option, not proof that every new window otherwise loses all prior state. See [`../dev-workflow-planning/SKILL.md#long-horizon-agent-journaling`](../dev-workflow-planning/SKILL.md).
 
-Goal-mode + ralph loop alone is the right primitive for short-horizon quantitative goals (Hayduk's NeurIPS→ICML, runtime-by-20% optimizations). For multi-day product building it is necessary but not sufficient — pair it with interview-led setup, multi-agent execution, and cross-context memory or accept that the run will drift.
+Goal-mode plus a feedback loop can fit short-horizon quantitative goals. For multi-day product work, choose clarification, multiple agents, and durable state only where the task's ambiguity, independence, and resume needs justify them; validate the combination against a simpler baseline rather than treating every component as mandatory.
 
 ### Anti-pattern — Letting compaction carry multi-day state
 
@@ -331,6 +332,6 @@ Source: Chris Hayduk, *Using Codex Goals Effectively* (2026-05-11). Generalizabl
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

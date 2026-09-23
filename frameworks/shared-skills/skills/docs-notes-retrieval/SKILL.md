@@ -197,6 +197,12 @@ Package with stable attribution and budget limits
 | Default to local-first, read-only flows | Only add write-back when the user explicitly needs it |
 | If notes are one corpus among many, route to [ai-rag](../ai-rag/SKILL.md) | This skill covers note-shape; ai-rag covers retrieval architecture |
 
+### Preserve disagreement and provenance
+
+Do not merge contradictory notes into one confident summary. For each retrieved claim, retain the note path, heading or chunk identifier, note modification time, and enough quoted context to distinguish a decision from brainstorming or a later reversal. Recency is evidence of freshness, not authority; a newer scratch note does not automatically override a canonical decision record.
+
+When sources disagree, package both claims in a conflict block with their provenance and state what authority or verification would resolve them. Deduplicate exact or near-exact copies only after preserving the canonical source and alias paths. A context pack is complete when every material assertion can be traced back to a source chunk and unresolved conflicts remain visible to the consumer.
+
 ## Judgment Calls
 
 These are the calls a non-expert tends to get wrong. Full detail and the anti-pattern behind each is in `references/retrieval-anti-patterns.md`.
@@ -243,7 +249,6 @@ Use this skill when the user asks:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

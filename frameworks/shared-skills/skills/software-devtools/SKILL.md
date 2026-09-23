@@ -108,6 +108,10 @@ Keep the API surface small. Every public method is a commitment.
 
 ## CLI Development Patterns
 
+**Automation contract.**
+
+Treat exit codes, stdout, stderr, and machine-readable output as a public API. Human progress belongs on stderr; requested data belongs on stdout; `--json` must remain parseable with no banners or color. Define stable exit codes for usage error, validation failure, transient dependency failure, and partial success, then test commands under pipes, non-interactive CI, and cancellation.
+
 - **Argument parsing**: positional args for required inputs, flags for options, subcommands for distinct operations. `tool <command> [args] [--flags]` is the universal pattern.
 - **Subcommand structure**: group related operations. `tool auth login`, `tool auth logout`, `tool config set`. Keep depth to two levels maximum.
 - **Interactive prompts**: confirm destructive actions, select from lists, prompt for missing required values. Use `--yes` / `-y` to skip prompts in CI. Keep interactive mode as a fallback when flags are missing — agents cannot press arrow keys or answer interactive prompts, so every input must be passable as a flag.
@@ -338,13 +342,9 @@ When users ask about current CLI frameworks, SDK patterns, code generation tools
 ## Fact-Checking
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

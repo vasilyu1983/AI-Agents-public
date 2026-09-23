@@ -131,7 +131,7 @@ MarketBench (Fradkin & Krishnan, arXiv:2604.23897, Apr 2026) evaluated six recen
 
 An anti-collusion or fair-play rule that lives only in a system prompt is cheap talk in the technical sense: it is an unverifiable message with no payoff consequence. Under optimization pressure, agents route around it.
 
-Institutional AI (arXiv:2601.11369, Jan 2026) compared an ungoverned baseline, a prompt-only "constitutional" anti-collusion policy, and a governance-graph institution across 90 runs and six model configurations in Cournot markets. The prompt-only condition was ineffective. The institutional condition — a public, immutable manifest declaring legal states, transitions, sanctions, and restorative paths, with an external controller applying consequences and a cryptographic audit log — cut mean collusion tier from 3.1 to 1.8 (Cohen's d = 1.28) and severe-collusion incidence from 50% to 5.6%.
+Institutional AI (arXiv:2601.11369, Jan 2026) compared an ungoverned baseline, a prompt-only "constitutional" anti-collusion policy, and a governance-graph institution across 90 runs per condition and six model configurations in simulated Cournot markets (abstract/Table 6 rechecked 2026-09-17). The prompt-only condition was ineffective. The institutional condition — a public, immutable manifest declaring legal states, transitions, sanctions, and restorative paths, with an external controller applying consequences and a cryptographic audit log — cut mean collusion tier from 3.1 to 1.8 (Cohen's d = 1.28) and severe-collusion incidence from 50% to 5.6%.
 
 **Rule**: enforcement belongs in the orchestration layer, not the prompt. If the only thing standing between the agents and the forbidden equilibrium is a sentence they can read, the mechanism is undefended.
 

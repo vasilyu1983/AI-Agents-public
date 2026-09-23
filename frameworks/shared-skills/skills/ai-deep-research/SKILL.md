@@ -133,7 +133,7 @@ Full table with API surfaces and citation fidelity → [references/native-deep-r
 
 | Agent | API model ID / tool | Strengths | Limitations |
 |-------|---------------------|-----------|-------------|
-| ChatGPT Deep Research (OpenAI) | `o3-deep-research` (depth) / `o4-mini-deep-research` (speed/cost) — Responses API | Strongest source diversity, long synthesis, strong multi-step reasoning (RL-post-trained) | **Sunset scheduled 2026-07-23** (recommended replacement: `gpt-5.5-pro`) — verify at `developers.openai.com/api/docs/deprecations` before starting new work, the feature guide page does not surface this. Slow (5–30 min), opaque search log, citations can go stale |
+| ChatGPT Deep Research (OpenAI) | Legacy `o3-deep-research` / `o4-mini-deep-research` aliases — Responses API | Purpose-built source search and long synthesis | OpenAI's current catalog marks both aliases deprecated; their dated snapshots shut down 2026-07-23 and the current deprecations table points to `gpt-5.6-sol`. The separate model page can still describe `o3-deep-research` as available, so verify account access and rebuild the research loop against the replacement rather than assuming feature parity. Citations can go stale. |
 | Gemini Deep Research (Google) | `deep-research-preview-04-2026` / `deep-research-max-preview-04-2026` (Interactions API) | Explicit plan review before execution, Google index, async + streaming, MCP support | Preview model IDs include date suffix — will change; thinner synthesis depth than ChatGPT DR |
 | Perplexity Deep Research | `sonar-deep-research` (Chat Completions API) | Fastest (2–5 min), paragraph-level inline citations, real-time index | Citation laundering risk on SEO topics; shorter synthesis; model averages contradictions rather than flagging; multi-component pricing makes budgeting error-prone |
 | Claude with web search | `web_search_20260318` (current: adds response-inclusion control) / `web_search_20260209` (dynamic filtering, GA) / `web_search_20250305` (basic) | Full tool-call audit trail, structured output, P2/P4 composable, memory-tool-backed persistence | No dedicated DR mode; needs P2 loop for DR-equivalent depth |
@@ -176,6 +176,10 @@ Google Research's AI co-scientist (2025) decomposes that job into six specialize
 **Scope caution.** This is a hypothesis-*generation* architecture. It orders candidate ideas by plausibility; it does not establish that any of them are true. The output of a tournament is a ranked queue for verification, never a finding — and see A13 for the literature bias that shapes what enters the queue at all.
 
 Sources: Google Research, "AI co-scientist" (2025); described in Gulli, *Agentic Design Patterns* (Springer, 2025), Ch. 21 — Exploration and Discovery.
+
+## Research Stop Rule
+
+Define the claim set and stopping rule before searching. Stop when every material claim has primary support or an explicit evidence gap, new searches yield no new source class or contradiction, and the contradiction ledger has an owner or bounded uncertainty statement. Continue when a load-bearing claim rests only on commentary, source independence is unclear, or a plausible counterclaim remains untested. Report saturation by claim and source class; elapsed time and citation count are not completion evidence.
 
 ## Known Traps
 
@@ -233,6 +237,6 @@ Sources: Google Research, "AI co-scientist" (2025); described in Gulli, *Agentic
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

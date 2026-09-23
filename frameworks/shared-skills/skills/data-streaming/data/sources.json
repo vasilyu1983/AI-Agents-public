@@ -1,10 +1,10 @@
 {
   "metadata": {
     "skill": "data-streaming",
-    "last_updated": "2026-07-11",
-    "updated": "2026-07-11",
+    "last_updated": "2026-09-07",
+    "updated": "2026-09-07",
     "description": "Primary-source-first references for streaming data platforms, stream processing, CDC, schema governance, and managed-service comparisons.",
-    "total_sources": 25,
+    "total_sources": 26,
     "trust_tiers": {
       "primary": "Official project, vendor, or standards documentation. Prefer these for current behavior, feature support, limits, and operations guidance.",
       "secondary": "Useful ecosystem references or vendor overviews. Use for context only after checking primary sources."
@@ -196,10 +196,19 @@
       {
         "name": "Apache Iceberg Format Specification (v3)",
         "url": "https://iceberg.apache.org/spec/",
-        "description": "Iceberg v3 spec is ratified. v3 adds: deletion vectors, row lineage (_row_id / _last_updated_sequence_number), semi-structured/variant data, default column values, geometry/geography types, nanosecond timestamps, and native encryption foundations. GA on Snowflake (May 7, 2026) and Databricks Runtime 18.0+ (Unity Catalog, all clouds); AWS support announced. Trino is not yet v3-ready as of mid-2026 — verify per-engine support in a multi-engine stack. Prefer over docs/latest/ when reasoning about v3 capabilities.",
+        "description": "Iceberg v3 specification and feature semantics. The spec does not establish GA status or operation coverage for any vendor engine; verify each reader, writer, catalog, and maintenance path separately.",
         "trust_tier": "primary",
         "last_verified": "2026-07-11",
         "max_age_days": 120,
+        "add_as_web_search": true
+      },
+      {
+        "name": "Databricks Iceberg v3 Public Preview announcement",
+        "url": "https://www.databricks.com/blog/next-era-open-lakehouse-apache-icebergtm-v3-public-preview-databricks",
+        "description": "Databricks' April 9, 2026 announcement labels Iceberg v3 support on Runtime 18.0+ with Unity Catalog as Public Preview. This source does not prove later GA; search current Databricks release notes before a production recommendation.",
+        "trust_tier": "primary",
+        "last_verified": "2026-09-07",
+        "max_age_days": 60,
         "add_as_web_search": true
       },
       {

@@ -53,7 +53,7 @@ Wq = C(c, a) / (c × μ − λ)
 - `E[S]` — mean processing time per message by the consumer application (ms), profiled under realistic message sizes and enrichment calls.
 - `μ = 1 / E[S]`.
 
-Then solve for the minimum c that satisfies a target Wq SLO:
+Then screen the minimum c that satisfies a mean queue-wait target under the model; validate latency quantiles separately:
 
 ```python
 # Pseudocode: find minimum partition count c
@@ -148,7 +148,7 @@ Where `dL/dt_target` is the rate at which you want to drain excess lag (zero for
 
 **Primitive**: [Jackson Networks](../../foundations-queueing-theory/assets/templates/queueing-theory/06-jackson-networks.md)
 
-**What it is.** A streaming pipeline is an open Jackson network: each operator or service is a station with arrival rate λᵢ, service rate μᵢ, and server count cᵢ. The overall throughput ceiling is the station with the highest utilization ρᵢ = λᵢ/(cᵢ × μᵢ). Because Jackson's product-form theorem holds, each station can be analyzed as an independent M/M/c queue once the traffic equations are solved.
+**What it is.** A streaming pipeline can be approximated as an open Jackson network only with stationary Poisson external arrivals, independent exponential service, probabilistic routing, and stable stations: each operator or service is a station with arrival rate λᵢ, service rate μᵢ, and server count cᵢ. The overall throughput ceiling is the station with the highest utilization ρᵢ = λᵢ/(cᵢ × μᵢ). When these assumptions hold, Jackson's product-form theorem means each station can be analyzed as an independent M/M/c queue once the traffic equations are solved.
 
 **Traffic equations for a streaming pipeline.**
 
@@ -171,11 +171,12 @@ Kafka source → [Deserializer] → [Enrichment join] → [Aggregation] → Kafk
 Now suppose the Enrichment join involves an external lookup with 90% cache miss re-routing to a slower path:
 
 ```
-Effective μ_enrichment = 0.10 × 150k + 0.90 × 30k = 15k + 27k = 42k/s per slot
-ρ_enrichment = 100k / (4 × 42k) = 0.595  ← bottleneck
+E[S_enrichment] = 0.10 / 150000 + 0.90 / 30000 = 0.0000306667 s
+Effective μ_enrichment = 1 / E[S_enrichment] ≈ 32,608.7/s per slot
+ρ_enrichment = 100000 / (4 × 32608.7) ≈ 0.7667  ← bottleneck
 ```
 
-The Jackson analysis reveals the enrichment stage is the bottleneck — not because it is slow on average, but because 90% of messages hit the slow path. Scaling partition count or sink parallelism without addressing this does nothing.
+This pooled, evenly balanced four-slot calculation assumes each slot serially processes the stated service-time mixture. Dedicated fast/slow pools need separate arrival rates and capacities; partition skew needs per-slot measurements. Non-exponential mixtures do not satisfy exact Jackson product form. The utilization calculation identifies the enrichment stage as the bottleneck — not because it is slow on average, but because 90% of messages hit the slow path. Scaling partition count or sink parallelism without addressing this does nothing.
 
 **Producer input rate as system-level λ.** The total produce rate γ (from all upstream producers) is the external arrival rate into the Jackson network. When the bottleneck station saturates (ρ → 1), back-pressure must propagate to producers. Without back-pressure, the network enters instability: queue depths grow unboundedly at the bottleneck station even as downstream stations sit idle. This is the open-loop instability modeled in Jackson networks when γ > min_i(cᵢ × μᵢ).
 
@@ -443,10 +444,10 @@ result = find_min_partitions(
 **Step 3: Verify with Little's Law.**
 
 ```
-L_max = λ × Wq_SLO = 40,000 × 0.020 = 800 messages max allowable queue depth
+L_max = λ × Wq_SLO = 40,000 × 0.020 = 800 messages estimated stationary mean queue occupancy at the mean-wait target
 ```
 
-If the Kafka consumer group lag monitor shows L > 800 at peak, the system is violating the latency SLO regardless of what per-message processing metrics show.
+An instantaneous lag above 800 does not establish a latency or percentile violation. Measure queue age/end-to-end quantiles; lag and rate must use the same stationary population for a mean-wait comparison.
 
 **Step 4: Apply safety factor and document.**
 

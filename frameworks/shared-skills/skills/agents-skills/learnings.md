@@ -14,6 +14,7 @@
 - [2026-08-05] Before creating a new skill, check whether an existing engine/pack already owns the domain — a new capability on an existing pipeline usually belongs as pack content (recipe + script), not a sibling skill; user preferred consolidating founder AI-adoption reporting into the existing project-scoped engine over a standalone skill.
 ## Domain Knowledge
 
+- [2026-09-11] Correction to 2026-07-11: Codex supports agents/openai.yaml for UI, dependencies, and invocation policy; the earlier claim that Codex does not read it is outdated.
 - [2026-08-26] validate_skill.py rejects non-HTTPS urls in data/sources.json; point internal repo-local documents from metadata.description prose instead of a source url.
 - [2026-08-05] audit-coverage --check needs 4 touches per new skill: router registry entry, citations in 2 routers' references, handoff declaration in the citing router, audit-config direct_use_skills.
 ## Open Questions

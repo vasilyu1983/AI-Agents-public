@@ -2,13 +2,15 @@
 name: qa-agent-testing
 description: "Builds QA harnesses for LLM agents. Use when evaluating tool, trace, red-team, regression, multi-agent, or carried-workspace trajectory behavior."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.2"
-last_validated: 2026-08-21
+version: "1.4"
+last_validated: 2026-09-15
 ---
 
 # QA Agent Testing
 
 Design and run reliable evaluation suites for LLM agents, including tool-using, multi-turn, and multi-agent systems.
+
+For acceptance, review burden, rework, and cost on selected backlog tasks, use the [backlog benchmark protocol](references/backlog-benchmark.md) and [fillable template](assets/backlog-benchmark-template.json). Otherwise use the workflow below.
 
 ## Default QA Workflow
 
@@ -143,6 +145,7 @@ Avoid:
 | Need | Use | Location |
 |---|---|---|
 | Build the starter suite | Task patterns + starter scaffold | `references/test-case-design.md` |
+| Test meaning-preserving variants | Semantic/statistical metamorphic contracts | `references/test-case-design.md#metamorphic-add-on` |
 | Control regressions in coding agents | TDAD pattern + source-to-test context | `references/coding-agent-regression-testing.md` |
 | Test iterative coding robustness | Carried-workspace checkpoints + trajectory scoring | `references/iterative-coding-agent-evals.md` |
 | Design refusals | Refusal categories + templates | `references/refusal-patterns.md` |
@@ -230,12 +233,14 @@ Agent QA request
 - `references/llm-judge-limitations.md` - judge biases, calibration, and escalation rules
 - `references/agentic-benchmarks.md` - τ²-bench usage, ABC checklist, and anti-patterns for reading benchmark results
 - `references/iterative-coding-agent-evals.md` - evolving-spec, carried-workspace protocol and longitudinal quality signals
+- [`references/backlog-benchmark.md`](references/backlog-benchmark.md) - bounded task-level acceptance, reviewer/rework burden, cost, cutoff, and censoring protocol
 
 ### Templates
 
 - `assets/qa-harness-template.md` - starter harness
 - `assets/scoring-sheet.md` - per-run scoring tracker
 - `assets/regression-log.md` - versioned regression log
+- [`assets/backlog-benchmark-template.json`](assets/backlog-benchmark-template.json) - machine-readable benchmark contract and outcome ledger template
 
 ### External Resources
 
@@ -256,17 +261,16 @@ See `data/sources.json` for current primary sources, including OpenAI eval and g
 4. Add smoke, regression, and security packs from real work
 5. Set objective graders and refusal oracles
 6. Run baseline tests and record traces
-7. Log results in `assets/regression-log.md`
+7. Label the evidence level: `static` (harness/schema), `offline` (mocked or recorded tasks), `replay` (captured production-like traces), `canary` (bounded real tools and policies), or `online` (monitored production outcomes)
+8. Log dataset revision, prompt/model/tool versions, trial count, judge configuration, failed-case artifacts, and whether side effects were real, simulated, or blocked in `assets/regression-log.md`
 
 ## Fact-Checking
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

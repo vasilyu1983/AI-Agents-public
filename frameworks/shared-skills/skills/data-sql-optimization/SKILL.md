@@ -132,6 +132,20 @@ SET STATISTICS IO, TIME ON;
 4. Change one lever at a time and verify correctness plus performance impact after each step.
 5. Re-check version-sensitive behavior with the navigation references before final recommendations.
 
+### Production Change Gate
+
+Choose proof and rollback by the change being made:
+
+| Change | Trial | Rollback trigger | Rollback |
+|---|---|---|---|
+| Query rewrite | Replay representative parameters and concurrency; compare result sets | Wrong rows or worse p95/reads/locks | Revert query or feature flag |
+| New index | Build with the engine's online/concurrent path where available; confirm chosen plans | Write latency, lock time, or storage exceeds budget | Drop with the safe online path after dependents are checked |
+| Statistics change | Capture plans before/after across skewed values | Regression for another parameter class | Restore target/statistics setting and analyze |
+| Pool/config change | Canary one service or pool; watch waits and saturation | Queueing, timeouts, or connection churn rises | Restore prior value and recycle only affected pools |
+| Partition/schema change | Rehearse on production-shaped data and verify dual reads/writes | Row-count mismatch, blocked writers, or replication lag | Stop cutover and return traffic to old path |
+
+Do not declare a tuning win from one warm-cache execution. Record correctness, p50/p95/p99, logical/physical reads, CPU, locks, and write impact over the same workload window; name any metric that could not be measured.
+
 ## ASCII Flow
 
 ```text
@@ -249,7 +263,6 @@ Templates live under `assets/`. Reference guides — load on demand:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

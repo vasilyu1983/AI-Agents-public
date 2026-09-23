@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "title": "Mathematical optimization foundations \u2014 primary sources",
+    "skill": "foundations-mathematical-optimization",
+    "last_updated": "2026-09-17",
+    "cutoff": "2026-09-17",
+    "total_sources": 6,
+    "description": "Dated primary evidence for convex formulation, duality, and numerical solver claims."
+  },
+  "sources": [
+    {
+      "id": "boyd-problems",
+      "name": "Convex Optimization: problem formulations lectures",
+      "url": "https://web.stanford.edu/class/ee364a/lectures/problems.pdf",
+      "description": "Boyd, Vandenberghe, revised with Nobel. Sections 4.2\u20134.6: convexity, LP, QP and conic formulations. Author-hosted primary teaching material read directly.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "boyd-duality",
+      "name": "Convex Optimization: duality lectures",
+      "url": "https://web.stanford.edu/class/ee364a/lectures/duality.pdf",
+      "description": "Boyd, Vandenberghe, revised with Nobel. Sections 5.12\u20135.21: weak/strong duality, Slater qualification, KKT and sensitivity. Canonical max-form LP inequality is derived in this bundle, rather than copied from a different sign convention.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "gurobi-constraints",
+      "name": "Gurobi Optimizer Reference Manual: Constraints",
+      "url": "https://docs.gurobi.com/projects/optimizer/en/current/concepts/modeling/constraints.html",
+      "description": "Vendor documentation read directly for finite precision, constraint tolerances, and strict inequality limitations. Moving URL; no release pin or universal tolerance value is asserted.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "gurobi-status",
+      "name": "Gurobi Optimizer Reference Manual: Optimization Status Codes",
+      "url": "https://docs.gurobi.com/projects/optimizer/en/current/reference/numericcodes/statuscodes.html",
+      "description": "Vendor documentation dated 2026-09-16, read directly. Optimal subject to tolerance, limit statuses, numerical failure and infeasible-or-unbounded distinctions.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "stanford-robust",
+      "name": "Stanford EE364b: Robust Optimization",
+      "url": "https://web.stanford.edu/class/ee364b/lectures/robust_slides.pdf",
+      "description": "Author-hosted primary lecture read directly: robust feasibility over uncertainty sets, choice of set and chance constraints. No numerical research-effect claim copied.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "mit-stochastic",
+      "name": "MIT 6.079 Lecture 13: Stochastic programming",
+      "url": "https://ocw.mit.edu/courses/6-079-introduction-to-convex-optimization-fall-2009/5e4810dabbe02645b52fc082cd18ee74_MIT6_079F09_lec13.pdf",
+      "description": "Primary teaching text read directly, pp. 2\u201313: known distribution, scenarios, sample-average approximation and validation. Decision-timing warning is application guidance; no empirical result claimed.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    }
+  ]
+}

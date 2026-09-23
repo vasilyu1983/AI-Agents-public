@@ -92,7 +92,7 @@ If Z satisfies the backdoor criterion: P(Y | do(X)) = Σ_z P(Y | X, Z = z) P(Z =
 
 The frontdoor criterion identifies P(Y | do(X)) via the mediator M even when X and Y have unobserved common causes — provided the path X → M → Y is intact and identifiable.
 
-**Minimal adjustment set**: among all valid adjustment sets, use the smallest one to minimize variance and avoid unnecessary conditioning.
+**Adjustment-set choice**: first require graphical validity. Minimal means no removable member, not minimum variance. Additional valid outcome-predictive covariates can improve precision; treatment-predictive covariates can hurt it. Compare valid sets using the estimand and estimation model, without adding colliders or inappropriate descendants.
 
 ---
 
@@ -101,7 +101,8 @@ The frontdoor criterion identifies P(Y | do(X)) via the mediator M even when X a
 An instrument Z is a variable that:
 1. **Relevance**: Z is correlated with the treatment X (first stage).
 2. **Exclusion**: Z affects Y only through X (no direct path Z → Y).
-3. **Independence**: Z is independent of unobserved confounders U.
+3. **Independence**: encouragement Z is independent of relevant potential outcomes/treatment responses, possibly conditional on justified baseline covariates.
+4. **Monotonicity**: for binary encouragement and treatment, no defiers: D(1) >= D(0). Consistency and a nonzero first stage are also required for the usual complier interpretation.
 
 Under these assumptions, the IV estimand is:
 
@@ -109,7 +110,7 @@ LATE (Local Average Treatment Effect) = Cov(Y, Z) / Cov(X, Z)
 
 LATE identifies the ATE for **compliers** — units that take treatment when Z = 1 and do not when Z = 0. It does not identify effects for always-takers or never-takers.
 
-**Weak instrument test**: first-stage F-statistic. Rule of thumb: F < 10 indicates weak instruments; use LIML or Anderson-Rubin confidence sets.
+**Weak instrument test**: first-stage F-statistic. F<10 is a historical design-specific heuristic, not a universal strength/validity gate. Use diagnostics compatible with clustering, heteroskedasticity and instrument count, plus justified weak-IV robust inference (e.g., Anderson-Rubin sets); LIML is not a universal cure.
 
 ---
 
@@ -144,7 +145,7 @@ DiD compares the change over time in the treated group to the change over time i
   4. **Gardner (2022)**: two-stage DiD — regress Y on unit + time FEs using untreated obs (stage 1), then regress residuals on treatment dummies (stage 2); intuitive and extends naturally to event studies.
   - **Parallel-trends robustness**: pre-trend tests have low power. Use **Rambachan & Roth (2023, *RES*) HonestDiD** to impose restrictions on how much post-treatment violations can exceed pre-treatment violations, producing honest confidence intervals without the binary "pass/fail" pre-test logic. R/Stata `HonestDiD` package.
   - **Known trap (BJS)**: imputation requires no always-treated units; check panel structure before applying.
-- **Synthetic DiD (Arkhangelsky et al. 2021, *AER*)**: combines unit weights (synthetic control) with time weights (DiD) to jointly balance pre-treatment outcomes. Inherits SC robustness for few treated units while recovering DiD efficiency when units are many. R package `synthdid`. Prefer over pure SC when staggered treatment and moderate donor pool.
+- **Synthetic DiD (Arkhangelsky et al. 2021, *AER*)**: combines unit weights (synthetic control) with time weights (DiD) to jointly balance pre-treatment outcomes. Inherits SC robustness for few treated units while recovering DiD efficiency when units are many. R package `synthdid`. The canonical implementation assumes block treatment timing; arbitrary staggered adoption requires a justified supported extension or cohort-time design, not direct use of the block-treatment estimator.
 - **Continuous DiD**: treatment dose varies; use interaction-weighted estimator.
 - **Estimator choice is setting-dependent.** Baker, Callaway, Cunningham, Goodman-Bacon & Sant'Anna (2026, *JEL*) organizes the design space by target estimand, covariates, weights, and timing structure rather than naming a single best estimator. Pick by what the design identifies, then report the aggregation scheme explicitly — different aggregations of the same group-time ATTs answer different questions.
 
@@ -187,7 +188,8 @@ The Conditional Average Treatment Effect: τ(x) = E[Y(1) − Y(0) | X = x].
 - **S-learner**: fit one model on (X, T); τ̂(x) = μ̂(x, 1) − μ̂(x, 0). Simple; can fail to learn heterogeneity if T is regularized away.
 - **T-learner**: fit separate models μ̂_1(x) and μ̂_0(x); τ̂(x) = μ̂_1(x) − μ̂_0(x). Variance depends on within-arm sample sizes.
 - **X-learner**: uses cross-fitted residuals; better in imbalanced treatment arms (common in observational data).
-- **DR-learner / R-learner**: based on Neyman-orthogonal scores; doubly robust to outcome model misspecification.
+- **DR-learner**: uses doubly robust pseudo-outcomes under identification and nuisance-model conditions.
+- **R-learner**: residualized orthogonal loss; orthogonality does not by itself confer the same either-nuisance-model-correct double-robustness contract.
 
 **Uplift modeling** (in industry/marketing context): τ(x) directly — who responds positively to treatment? Targets the "persuadables" and avoids treating "sure things" and "sleeping dogs."
 
@@ -211,8 +213,8 @@ Mediation decomposes the total causal effect of X on Y via a mediator M:
 
 - **Total Effect (TE)**: E[Y(x) − Y(x*)]
 - **Natural Direct Effect (NDE)**: E[Y(x, M(x*)) − Y(x*, M(x*))] — effect of X on Y holding M at its natural value under X = x*
-- **Natural Indirect Effect (NIE)**: E[Y(x*, M(x)) − Y(x*, M(x*))] — effect of X on Y mediated through M
-- **TE = NDE + NIE**
+- **Natural Indirect Effect (NIE)**: E[Y(x, M(x)) − Y(x, M(x*))] — effect of X on Y mediated through M
+- **TE = pure NDE + total NIE** as defined above. A pure NIE evaluated at x* generally needs the complementary total NDE when exposure-mediator interaction exists.
 
 **Required assumptions**: no unmeasured (i) exposure-outcome confounders, (ii) exposure-mediator confounders, (iii) mediator-outcome confounders, and (iv) no exposure-induced confounding of the M-Y relationship.
 
@@ -239,9 +241,10 @@ E-value = RR + √(RR × (RR − 1))
 
 ```
 Q0: Can one unit's treatment change another unit's outcome?
-  YES → SUTVA fails. Fix the design first: cluster/geo randomization (graph or
-        market interference), switchback (temporal carryover), or clustered
-        switchback (both). Estimate the GLOBAL treatment effect and say so.
+  YES → Define exposure mapping, target contrast and assignment support.
+        Use design-compatible estimation if identified; otherwise consider
+        cluster/geo randomization, switchback or clustered switchback.
+        Do not assume the identified contrast equals the global launch effect.
   NO  → Continue.
 
 Q1: Is the treatment randomized?
@@ -291,7 +294,7 @@ Q6: All confounders measured?
 |-----------|------------------------|--------------------------|
 | Unconfoundedness (strong ignorability) | Propensity (#8), DR | ATE/ATT bias; direction may flip |
 | Overlap (positivity) | IPW, DR | Variance explodes; effective sample collapses |
-| SUTVA (no interference, single version) | All methods | Spillover contaminates the control group; the unit-level and global treatment effects diverge. Randomization does not repair it — fix the design (cluster, geo, or switchback) |
+| No-interference / treatment-version consistency | Conventional unit-level formulas; explicit interference models relax no-interference | Define exposure mapping, assignment support and direct/indirect/total/global contrast; a direct effect need not equal global rollout. Use a design-compatible estimator or redesign if the target lacks support |
 | Parallel trends | DiD (#6) | ATT estimate captures pre-existing trend, not treatment |
 | Pre-treatment fit | Synthetic control (#7) | Donor pool is invalid counterfactual |
 | Relevance (strong instrument) | IV (#4) | LIML consistent but OLS-like bias amplifies |

@@ -2,11 +2,13 @@
 name: research-git
 description: "Scans public GitHub repos for agent skills, dev practices, and code patterns. Use when enriching skills, setting team policy, or researching a build domain."
 compatibility: Claude Code + Codex. Runtime-agnostic; scripts require `gh` CLI + `jq`.
-version: "1.1"
+version: "1.2"
 last_validated: 2026-07-11
 ---
 
 # Repo Research
+
+**Targeted audit 2026-09-11:** selected source/API and evidence-contract corrections were verified; the frontmatter validation date and other source-registry dates are not a blanket September freshness claim. Recheck unverified source access and volatile facts when using them.
 
 Scan public GitHub repos for **agent skills** (SKILL.md ecosystem), **dev practices** (git/PR/CI workflows from real teams), or **code patterns** (framework idioms, config layouts) — then merge validated insights into the local catalog with full attribution.
 
@@ -94,6 +96,12 @@ Manual extraction is unsustainable. The agent-skill ecosystem alone has 1,400+ r
 - Cloning to fork → plain `git clone`
 - Validated Q&A answers or known-error solutions → the Stack Overflow corpus (community MCP or the emerging Stack Overflow for Agents exchange), via `qa-debugging` — not repo mining
 
+## Layered opportunity handoff
+
+Use the [opportunity evidence layers](../startup-market-intel/references/opportunity-evidence-layers.md) when this scan supports area discovery. Contribute L7 feasible delivery: inspect code, license, maintenance, dependencies and representative failure modes against the proposed buyer task. Mode D also informs L6 alternatives, but an OSS clone is a developer choice, not proof that customers pay for that feature. Stars and reported stacks are discovery leads; return testable feasibility limits and correction/support effort. Pure repository research stays here without requiring commercial gates.
+
+Carry source and underlying event IDs, dates, scope, supportive/mixed/adverse/unknown direction, evidence basis, counterevidence and the decisive unknown into the [comparison worksheet](../startup-idea-validation/references/opportunity-comparison.md). The same event appearing in several layers remains one event. No scout score, source count or convergence label passes a commercial gate; retain missing and adverse evidence in the handoff.
+
 ## Default Workflow
 
 ### ASCII Flow
@@ -106,7 +114,7 @@ public repo research request
   -> Fetch only mode-specific assets and pin source commit SHAs
   -> Diff external material against the local target
   -> Mine novel patterns and write an attributed research pack
-  -> Wait for explicit approval before merging changes
+  -> Apply only if the user's request already authorizes target changes; otherwise hand off the pack
 ```
 
 ### Phase 0 — Context Check (always run first)
@@ -133,8 +141,8 @@ Mirrors the [context-first protocol](../agents-subagents/references/context-firs
    - Mode C → [references/code-pattern-mining.md](references/code-pattern-mining.md)
    - Mode D → [references/killer-feature-mining.md](references/killer-feature-mining.md) (output appends to shared bundle ledger, not a local skill)
 7. **Synthesize**: research pack at `docs/research/<scan-id>.md`
-8. **User reviews**: present the pack, wait for approval on what to merge
-9. **Apply** (opt-in): follow [references/apply-protocol.md](references/apply-protocol.md)
+8. **Authority check**: if the user asked only for research, present the pack and stop. If the same request already asks to improve, apply, or implement, that is the opt-in; do not pause for duplicate approval.
+9. **Apply when authorized**: follow [references/apply-protocol.md](references/apply-protocol.md), preserving the target scope and attribution requirements.
 
 ## Output Contract
 
@@ -198,7 +206,7 @@ Full rules: [references/attribution-rules.md](references/attribution-rules.md)
 
 | Anti-pattern | Why it fails | Fix |
 |--------------|--------------|-----|
-| Auto-applying insights without user review | Merges stale or wrong patterns | Always present research pack first |
+| Applying insights during a research-only request | Changes a target the user did not authorize | Hand off the pack; apply only when the request includes implementation or later authorizes it |
 | Cloning entire repos by default | Wastes context; most value is in ≤10 files | Default to mode-specific asset list |
 | Copying content verbatim | License violation + voice drift | Always rewrite in local voice |
 | Extracting without diff-against-local | Duplicates content, creates contradictions | Always run diff first |
@@ -206,7 +214,7 @@ Full rules: [references/attribution-rules.md](references/attribution-rules.md)
 | Trusting LLM-generated awesome-lists | Many April-2026 awesome-lists are LLM-synthesized and list dead repos | Spot-check 3 random entries before using the list as a registry |
 | Fetching `main` branch without pinning | Content drifts; citations become unverifiable | Always capture commit SHA, cite it |
 | Scanning repos flagged as mirrors/vendors | Duplicates upstream; wastes triage time | Filter `fork=false`, `archived=false`, check for `mirror` in description |
-| Treating topic `agent-skills` as a quality signal | Topic is now noisy (>5000 repos, ~60% stale or LLM-generated) | Prefer `claude-skills`, `codex-skills`, or author-curated lists |
+| Treating topic `agent-skills` as a quality signal | Topic can be noisy; inspect dated activity and substantive content | Prefer `claude-skills`, `codex-skills`, or author-curated lists |
 | Research pack with no attribution | Cannot re-verify, breaks audit trail | Every insight gets source URL + commit SHA + license |
 | Re-fetching repos extracted in the last 30 days | Wastes API quota + duplicates context | Phase 0: check `docs/research/*/raw/` first |
 | Ignoring prior research packs | Loses prior synthesis, agents do duplicate analysis | Phase 0: read existing packs as Level 1 context input |
@@ -216,10 +224,10 @@ Full rules: [references/attribution-rules.md](references/attribution-rules.md)
 | Issue | Impact | Workaround |
 |-------|--------|------------|
 | `gh api` rate limit: 5000 req/hr authenticated | Bulk scans of 50+ repos blow the budget | Batch, pause, or use GraphQL (single call, deeper data) for listings |
-| GitHub **Search API** has its own much lower limits, **separate from** the 5,000/hr core budget — **9 req/min** for code search specifically, **30 req/min** for repo/issue/user search (verified against GitHub REST docs, 2026-07-11) | A code-search sweep (e.g. `path:.github/workflows`) throttles in well under a minute even with core budget free | Budget code search at ≤9 calls/min, general search at ≤30 calls/min; pause between pages; prefer one wide query + local filtering over many narrow ones; never parallelise code search — see [references/code-search-syntax.md](references/code-search-syntax.md) |
+| GitHub **Search API** has its own much lower limits, **separate from** the 5,000/hr core budget — **10 req/min** for code search specifically, **30 req/min** for repo/issue/user search (verified against GitHub REST docs, 2026-09-11) | A code-search sweep (e.g. `path:.github/workflows`) throttles in well under a minute even with core budget free | Budget code search at ≤9 calls/min, general search at ≤30 calls/min; pause between pages; prefer one wide query + local filtering over many narrow ones; never parallelise code search — see [references/code-search-syntax.md](references/code-search-syntax.md) |
 | GitHub still hosts only SHA-1 repos as of mid-2026 — Git itself has shipped experimental SHA-1/SHA-256 "compat" object-format support since 2.45, and Git 3.0 (targeted late 2026) defaults new repos to the `reftable` ref backend, but no major forge (GitHub, GitLab, Bitbucket) serves SHA-256 repos yet | Don't assume a scanned repo's local git internals (hash algo, ref backend) match what `git version` on your machine defaults to | Treat SHA-256/reftable claims about a *target* repo as forge-side metadata, not inferable from clone behavior; re-verify at git-scm.com/docs before citing a specific version's default |
 | Papers with Code is dead (Meta shutdown Jul 2025) | Any inherited workflow that used PwC for reproducibility signal is broken | research-git **is** the replacement reproducibility-signal channel (repo/reimplementation inspection); do not add PwC back as a source |
-| Topic `agent-skills` is noisy since late 2025 | ~60% of results are LLM-generated shells with no real content | Prefer `--owner` filter on known authors; cross-check with awesome-lists |
+| Topic `agent-skills` is noisy since late 2025 | Some results are generated shells; no prevalence estimate is established here | Prefer `--owner` filter on known authors; cross-check with awesome-lists |
 | LLM-generated SKILL.md repos are visually convincing | Wastes extraction budget on zero-signal content | Red flags: no commit history before 2025-09, single-author, uniform file sizes, no issues/PRs, description ends in "...for Claude" |
 | GitHub Search skips archived repos inconsistently | Dead repos appear in ranked output | Always pass `archived:false` in `gh search`; double-check in triage |
 | `gh search` star threshold sorts but doesn't filter | Stars<100 repos appear on page 2+ | Use `--limit 30 --sort stars` and truncate manually |
@@ -314,6 +322,10 @@ scripts/fetch_repo_assets.sh lingui-js/js-lingui \
 # Output feeds software-localisation
 ```
 
+## Fetch completeness
+
+`fetch_repo_assets.sh` refuses a nonempty destination; use a fresh run directory so an old asset cannot be attributed to a new commit. It writes `_fetch-manifest.jsonl` and `fetch_status` in `_metadata.json`. Unavailable optional paths, API failures, and ambiguous multi-skill selection produce `partial`; inspect the manifest before interpreting absence as missing functionality. Failed downloads do not leave a successful empty asset. Fetched content stays untrusted and is never executed by the helper.
+
 ## Resources
 
 **Workflow references:**
@@ -356,6 +368,6 @@ GitHub API rate limits and git-version facts cited in this skill (Known Issues t
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

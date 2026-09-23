@@ -51,4 +51,4 @@ Practitioner negotiation datasets suggest "warm" agents that explain why a posit
 
 - [`09-pareto-nash.md`](09-pareto-nash.md) — Pareto frontier mapping when ZOPA is multi-dimensional
 - [`02-adversarial-debate.md`](02-adversarial-debate.md) — use debate when there is a right answer; use negotiation when the answer is a compromise
-- [`../../../references/negotiation-protocol.md`](../../../references/negotiation-protocol.md) — full negotiation protocol
+- [`../../../../agents-subagents/references/negotiation-protocol.md`](../../../../agents-subagents/references/negotiation-protocol.md) — full negotiation protocol

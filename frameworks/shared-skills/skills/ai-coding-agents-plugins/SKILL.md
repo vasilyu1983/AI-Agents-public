@@ -78,6 +78,7 @@ reload/disable/uninstall invalidates caches and visible registries
 8. **Design reload semantics explicitly.** Separate cache clearing, component re-registration, and transport reconnection. Do not assume hot reload is safe for every capability type.
 9. **Preserve partial success.** A failing plugin should not take down the whole runtime if unaffected capability families can still be swapped safely.
 10. **Validate with hostile cases.** Test duplicate names, invalid manifests, blocked plugins, stale caches, plugin disable, and partial reload failures.
+11. **Measure activation cost.** Capture schema/instruction tokens, startup latency, spawned processes, and network connections before and after enablement. Package size or capability count is not a proxy for context cost, and installed does not mean active.
 
 ## Host Rules
 
@@ -350,6 +351,6 @@ Goose's `recipe-scanner/` validates YAML recipes (and therefore their declared e
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

@@ -2,9 +2,10 @@
   "metadata": {
     "title": "AI Network Science Foundations — Sources",
     "description": "Primary papers and references for 12 canonical network-science primitives: centrality, PageRank, community detection, small-world, scale-free, percolation, SIR contagion, link prediction, graph clustering, graph embeddings, temporal networks, and graph schema design",
-    "last_updated": "2026-08-24",
+    "last_updated": "2026-09-17",
     "skill": "foundations-network-science",
-    "total_sources": 41
+    "total_sources": 42,
+    "verification_note": "September additions were checked against the named primary pages; this date does not imply full-text revalidation of every historical source."
   },
   "textbooks": [
     {
@@ -311,6 +312,16 @@
       "url_check": "manual",
       "last_verified": "2026-08-14",
       "add_as_web_search": false
+    }
+  ],
+  "validation_sources": [
+    {
+      "id": "Newman2002SIR",
+      "name": "The spread of epidemic disease on networks",
+      "url": "https://arxiv.org/html/cond-mat/0205009v1",
+      "description": "Primary derivation of SIR transmissibility, percolation and network degree assumptions.",
+      "add_as_web_search": false,
+      "last_verified": "2026-09-17"
     }
   ]
 }

@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Independent expected answers for corrective behavioral evaluations; no claim of live-model success",
+  "cases": [
+    {
+      "id": "operations-22",
+      "skill": "foundations-theory-of-constraints",
+      "source_path": "frameworks/shared-skills/skills/foundations-theory-of-constraints/SKILL.md",
+      "defect": "Ratio greedy indivisible optimization",
+      "correction": "Route constrained optimization",
+      "prompt": "capacity10 items6/12 5/9 5/9",
+      "expected_answer": "optimal18 greedy12",
+      "forbidden_behavior": "greedy optimal"
+    },
+    {
+      "id": "operations-23",
+      "skill": "foundations-theory-of-constraints",
+      "source_path": "frameworks/shared-skills/skills/foundations-theory-of-constraints/SKILL.md",
+      "defect": "Thought experiment called confirmation",
+      "correction": "Candidate requires empirical validation",
+      "prompt": "CRT removes2 UDEs",
+      "expected_answer": "hypothesis",
+      "forbidden_behavior": "confirmed cause"
+    },
+    {
+      "id": "operations-24",
+      "skill": "foundations-theory-of-constraints",
+      "source_path": "frameworks/shared-skills/skills/foundations-theory-of-constraints/assets/templates/theory-of-constraints/09-critical-chain.md",
+      "defect": "Exactly50 buffer and inconsistent example status",
+      "correction": "Calibrate and show burn/progress rule",
+      "prompt": "different variability same medians",
+      "expected_answer": "different justified buffers",
+      "forbidden_behavior": "exactly50 universal"
+    },
+    {
+      "id": "operations-25",
+      "skill": "foundations-theory-of-constraints",
+      "source_path": "frameworks/shared-skills/skills/foundations-theory-of-constraints/references/primitives-overview.md",
+      "defect": "Universal single constraint",
+      "correction": "Single dominant constraint assumption",
+      "prompt": "near tied resources",
+      "expected_answer": "joint constraints",
+      "forbidden_behavior": "exactly one always"
+    },
+    {
+      "id": "operations-26",
+      "skill": "foundations-theory-of-constraints",
+      "source_path": "frameworks/shared-skills/skills/foundations-theory-of-constraints/assets/templates/theory-of-constraints/03-throughput-accounting.md",
+      "defect": "Materials-only variable cost",
+      "correction": "Include actual marginal API/cloud/commission costs",
+      "prompt": "per use API fees",
+      "expected_answer": "include incremental fee",
+      "forbidden_behavior": "exclude all infra"
+    }
+  ]
+}

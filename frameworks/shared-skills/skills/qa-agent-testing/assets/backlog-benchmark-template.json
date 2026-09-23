@@ -1,0 +1,325 @@
+{
+  "template_version": "1.0",
+  "template_kind": "authoring_form_not_schema_or_runner",
+  "template_status": "UNUSABLE_UNTIL_COMPLETED",
+  "complete": false,
+  "null_policy": {
+    "pre_run_required_paths_must_be_non_null": true,
+    "post_run_outcome_and_cost_nulls_are_allowed": true,
+    "missingness_reason_required_for_allowed_nulls": true,
+    "allowed_null_examples": [
+      "censored or not_started timestamps and review fields",
+      "money fields when billing data is unavailable",
+      "final acceptance rate while the cutoff is incomplete"
+    ]
+  },
+  "pre_run_required_paths": [
+    "benchmark.benchmark_id",
+    "benchmark.objective",
+    "benchmark.primary_estimand",
+    "benchmark.evidence_level",
+    "benchmark.run_mode",
+    "source_population.source_system",
+    "source_population.snapshot_hash",
+    "source_population.selection_mode",
+    "source_population.replacement_policy",
+    "source_population.selected_tasks[*].source_issue_or_pr",
+    "source_population.selected_tasks[*].pre_fix_commit",
+    "source_population.selected_tasks[*].stratum_id",
+    "source_population.selected_tasks[*].acceptance_contract.functional_checks",
+    "source_population.selected_tasks[*].acceptance_contract.constraint_checks",
+    "source_population.selected_tasks[*].acceptance_contract.independent_review_required",
+    "arms[*].variable_under_test",
+    "arms[*].comparator_differs_only_in",
+    "trials.trials_per_task",
+    "trials.independence_rule",
+    "trials.retry_policy",
+    "trials.stall_stop_rule",
+    "grading.grader_owner",
+    "grading.grader_store",
+    "grading.append_only_or_access_controlled",
+    "grading.disagreement_escalation_rule",
+    "analysis.confidence_method",
+    "benchmark.owner",
+    "benchmark.cutoff_at_utc",
+    "benchmark.observation_window_end_utc",
+    "source_population.source_query_or_export",
+    "source_population.snapshot_at_utc",
+    "source_population.inclusion_rules",
+    "source_population.representative_strata[*].stratum_id",
+    "source_population.representative_strata[*].definition",
+    "source_population.representative_strata[*].target_count",
+    "source_population.selected_tasks[*].task_id",
+    "source_population.selected_tasks[*].task_wording_snapshot",
+    "arms[*].arm_id",
+    "arms[*].configuration.model_or_agent_id",
+    "arms[*].configuration.prompt_version",
+    "arms[*].configuration.tool_policy_version",
+    "arms[*].configuration.sandbox_profile",
+    "arms[*].configuration.network_policy",
+    "arms[*].configuration.approval_policy",
+    "arms[*].configuration.dependency_lock_hash",
+    "arms[*].configuration.time_budget_seconds",
+    "arms[*].configuration.token_or_compute_budget",
+    "arms[*].configuration.tool_call_budget",
+    "arms[*].configuration.retry_limit",
+    "arms[*].configuration.worker_limit",
+    "arms[*].assignment_or_order_rule",
+    "trials.arm_order_rule",
+    "trials.invalid_trial_rule",
+    "grading.arm_blinded_to_reviewer",
+    "artifacts.protocol_ref",
+    "artifacts.protocol_hash",
+    "artifacts.task_manifest_ref"
+  ],
+  "required_before_run": [
+    "Fill every mandatory design field with a concrete valid decision; a missing required design value blocks the run. Unavailable reasons apply only to optional fields or unobserved outcomes and costs.",
+    "Review the full protocol as well as the path list: required strings and acceptance lists must be nonempty, identifiers unique, budgets bounded, grader access enforced, and conditional requirements satisfied. This form does not enforce these checks.",
+    "Freeze the source population, representative strata, selection rule, and task manifest.",
+    "Provide an issue or PR source and pre-fix commit for every selected task.",
+    "Freeze acceptance checks, comparator configuration, trial count, limits, cutoff, and grading owner.",
+    "Confirm later history, hidden answers, grader inputs, and grades are outside the agent context.",
+    "Set complete to true only after an independent pre-run review confirms the contract."
+  ],
+  "benchmark": {
+    "benchmark_id": null,
+    "title": null,
+    "owner": null,
+    "created_at_utc": null,
+    "cutoff_at_utc": null,
+    "observation_window_end_utc": null,
+    "objective": null,
+    "primary_estimand": null,
+    "evidence_level": null,
+    "status": null,
+    "status_model": "FAIL / PASS / CONDITIONAL from qa-agent-testing scoring-rubric.md; acceptance is separate",
+    "run_mode": null,
+    "real_model_calls": {
+      "existing_user_authorization": null,
+      "used": null,
+      "provider_or_model": null,
+      "declared_budget_ref": null
+    },
+    "live_tool_calls_allowed": false,
+    "production_writes_allowed": false
+  },
+  "source_population": {
+    "source_system": null,
+    "source_query_or_export": null,
+    "snapshot_hash": null,
+    "snapshot_at_utc": null,
+    "selection_mode": null,
+    "selection_seed": null,
+    "inclusion_rules": [],
+    "exclusion_rules": [],
+    "representative_strata": [
+      {
+        "stratum_id": null,
+        "definition": null,
+        "population_count": null,
+        "target_count": null,
+        "sampling_weight": null
+      }
+    ],
+    "replacement_policy": null,
+    "selected_tasks": [
+      {
+        "task_id": null,
+        "source_type": null,
+        "source_issue_or_pr": null,
+        "task_wording_snapshot": null,
+        "pre_fix_commit": null,
+        "stratum_id": null,
+        "selection_reason": null,
+        "acceptance_contract": {
+          "functional_checks": [],
+          "constraint_checks": [],
+          "independent_review_required": null,
+          "required_evidence": []
+        },
+        "historical_visibility": {
+          "later_git_history_hidden": null,
+          "later_prs_and_diffs_hidden": null,
+          "maintainer_comments_hidden": null,
+          "hidden_tests_and_gold_patch_hidden": null,
+          "external_grader_hidden": null,
+          "leakage_check_ref": null
+        }
+      }
+    ]
+  },
+  "arms": [
+    {
+      "arm_id": null,
+      "label": null,
+      "variable_under_test": null,
+      "configuration": {
+        "model_or_agent_id": null,
+        "prompt_version": null,
+        "tool_policy_version": null,
+        "sandbox_profile": null,
+        "network_policy": null,
+        "approval_policy": null,
+        "dependency_lock_hash": null,
+        "time_budget_seconds": null,
+        "token_or_compute_budget": null,
+        "tool_call_budget": null,
+        "retry_limit": null,
+        "worker_limit": null,
+        "subscription_or_seat": null
+      },
+      "comparator_differs_only_in": null,
+      "assignment_or_order_rule": null
+    }
+  ],
+  "trials": {
+    "trials_per_task": null,
+    "independence_rule": null,
+    "arm_order_rule": null,
+    "retry_policy": null,
+    "stall_stop_rule": null,
+    "invalid_trial_rule": null
+  },
+  "grading": {
+    "grader_owner": null,
+    "grader_store": null,
+    "append_only_or_access_controlled": null,
+    "agent_can_edit_grades": false,
+    "arm_blinded_to_reviewer": null,
+    "judge_model_and_prompt_version": null,
+    "human_calibration_set": null,
+    "disagreement_escalation_rule": null,
+    "acceptance_evidence_rule": [
+      "functional evidence",
+      "constraint or policy evidence",
+      "independent human review"
+    ]
+  },
+  "outcomes": [
+    {
+      "task_id": null,
+      "arm_id": null,
+      "trial_id": null,
+      "status": null,
+      "status_values": [
+        "accepted",
+        "failed",
+        "not_started",
+        "abandoned",
+        "censored"
+      ],
+      "status_reason": null,
+      "started_at_utc": null,
+      "ended_at_utc": null,
+      "censored_at_utc": null,
+      "functional_result": null,
+      "constraint_result": null,
+      "independent_review_result": null,
+      "quality_status": null,
+      "workspace_hash": null,
+      "trace_refs": [],
+      "grader_refs": [],
+      "review_refs": [],
+      "run_count": null,
+      "retry_count": null,
+      "worker_count": null,
+      "agent_duration_seconds": null,
+      "human_review_minutes": null,
+      "human_rework_minutes": null,
+      "money": {
+        "money_available": null,
+        "api_usage_cost": null,
+        "subscription_or_seat_cost": null,
+        "currency": null,
+        "allocation_method": null,
+        "cost_status": null
+      }
+    }
+  ],
+  "analysis": {
+    "count_units": {
+      "selected_unique_tasks": null,
+      "assigned_task_trials": null,
+      "note": "Keep unique task counts separate from task-arm-trial row counts when trials repeat."
+    },
+    "selection_count": null,
+    "started_count": null,
+    "terminal_count": null,
+    "accepted_count": null,
+    "failed_count": null,
+    "not_started_count": null,
+    "abandoned_count": null,
+    "censored_count": null,
+    "observed_to_date_acceptance_rate": null,
+    "observed_to_date_denominator_definition": null,
+    "observed_to_date_as_of_utc": null,
+    "final_acceptance_rate": null,
+    "final_acceptance_rate_status": null,
+    "cutoff_and_censoring_note": null,
+    "totals_across_all_assigned_task_trials": {
+      "agent_runs": null,
+      "retries": null,
+      "workers": null,
+      "human_review_minutes": null,
+      "human_rework_minutes": null,
+      "api_usage_cost": null,
+      "subscription_or_seat_cost": null,
+      "total_money_cost": null,
+      "total_money_cost_status": null,
+      "unknown_cost_components": []
+    },
+    "observed_to_date_cost_per_accepted": null,
+    "observed_to_date_cost_per_accepted_status": null,
+    "final_cost_per_accepted": null,
+    "final_cost_per_accepted_status": "undefined when accepted_count is zero; unknown when required cost components are unavailable",
+    "cost_scope": null,
+    "confidence_method": null,
+    "confidence_level": null,
+    "confidence_limits": null,
+    "small_pilot_limitations": [],
+    "by_arm_and_stratum": [],
+    "decision": null
+  },
+  "artifacts": {
+    "protocol_ref": null,
+    "protocol_hash": null,
+    "task_manifest_ref": null,
+    "arm_config_refs": [],
+    "workspace_manifest_ref": null,
+    "trace_ledger_ref": null,
+    "external_grade_ref": null,
+    "human_review_ref": null,
+    "cost_ledger_ref": null
+  },
+  "conditional_pre_run_requirements": [
+    {
+      "when": "Randomized sampling or assignment is used",
+      "required_paths": [
+        "source_population.selection_seed"
+      ]
+    },
+    {
+      "when": "Confidence intervals will be reported rather than descriptive_only analysis",
+      "required_paths": [
+        "analysis.confidence_level"
+      ]
+    },
+    {
+      "when": "An actual model is invoked",
+      "required_paths": [
+        "benchmark.real_model_calls.existing_user_authorization",
+        "benchmark.real_model_calls.provider_or_model",
+        "benchmark.real_model_calls.declared_budget_ref"
+      ]
+    },
+    {
+      "when": "A model judge is used",
+      "required_paths": [
+        "grading.judge_model_and_prompt_version",
+        "grading.human_calibration_set"
+      ]
+    }
+  ],
+  "missingness_reasons": {},
+  "missingness_reason_format": "Map each unavailable optional or measurement field path to its reason; never use this map to waive a mandatory pre-run decision."
+}

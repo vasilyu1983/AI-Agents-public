@@ -32,7 +32,7 @@ Do NOT apply Little's Law across non-stationary windows (burst periods, startup 
 | Input | Symbol | How to measure |
 |-------|--------|----------------|
 | Arrival rate | λ | Requests/sec from access logs or metrics |
-| Mean latency | W | p50 or mean response time (not p99 — that requires tail analysis) |
+| Mean latency | W | Arithmetic mean response time; no percentile substitutes |
 | Mean queue depth | L | Concurrency gauge, inflight counter |
 
 ## Outputs
@@ -45,7 +45,7 @@ Do NOT apply Little's Law across non-stationary windows (burst periods, startup 
 | Failure | Cause | Fix |
 |---------|-------|-----|
 | L/λ ≠ W despite stable system | Mixed populations (HTTP and batch in same counter) | Separate queue populations; apply Little's Law to each independently |
-| Non-stationary window | Burst traffic measured over short window | Use a window ≥ 10× mean service time for stationarity |
+| Non-stationary window | Burst traffic measured over short window | Check rate, backlog, latency and boundary effects across representative windows; duration alone does not establish stationarity |
 | p99 used for W | Heavy tail biases the mean | Use arithmetic mean latency, not percentiles |
 | Ignoring think time in users | External think time counted as part of W | Model closed-loop systems with closed-form corrections |
 

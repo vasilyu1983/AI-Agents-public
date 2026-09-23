@@ -115,11 +115,13 @@ This number must appear in the model's SLO dashboard and runbook. An abstract 99
 **Reliability model for hedging.** Treat each replica as a server with service time CDF F(t). The completion time with one hedge at timeout τ is:
 
 ```
-P(completion time ≤ t) = F(t)² for t ≥ τ  (both replicas in parallel)
+P(completion time ≤ t) = 1 - (1-F(t))*(1-F(t-τ)) for t ≥ τ
+# independent, identically distributed replicas with service-only CDF F
+# no shared queue/capacity coupling; hedge begins at τ
 P(completion time ≤ t) = F(t) for t < τ   (only primary replica)
 ```
 
-The p99 of the hedged system is approximately the p50 of the unhedged system when τ ≈ p50 of service time. This is the key result: hedging converts p99 of the original into roughly p50 of the original, at the cost of 2× request volume for the hedged tail.
+No universal p99-to-p50 conversion follows. With simultaneous independent hedges, the 99th completion percentile corresponds to the single-replica 90th percentile, not the median. Delayed hedging and correlated/shared-resource delays need their actual joint timing model and measured cost. Only hedge safe/idempotent operations; cancellation may not stop provider compute or billing.
 
 **Cost ceiling.** Not all requests are worth hedging. Define the hedge threshold τ such that:
 
@@ -134,20 +136,14 @@ Set τ to limit cost_multiplier ≤ C_max (e.g. C_max = 1.10 means at most 10% o
 τ = p90 of service time → fraction_hedged ≈ 0.10 → cost_multiplier ≈ 1.10
 ```
 
-This hedges only the top 10% of slow requests, delivering p99 ≈ p90 of the unhedged distribution at 10% cost overhead.
+This example bounds additional request count at an unchanged service distribution; it does not guarantee a quantile improvement or equal compute/token cost. Measure delayed hedge completion times and cost under the joint primary/backup workload.
 
-**Coverage probability.** From redundancy math, the hedge is only effective if the second replica is independent of the first (different physical node, different GPU, ideally different AZ). Shared GPU VRAM contention, common cache state, or same-host deployment reduces the coverage probability c. A hedge on the same physical host has c < 0.5 — the second replica is likely slow for the same reason as the first (memory pressure, thermal throttle).
-
-```
-A_hedged = c × A_parallel + (1-c) × A_single
-```
-
-Measure c empirically: send 1% of traffic as hedge probes and compute the correlation between primary and secondary response times. If corr(t₁, t₂) > 0.5, coverage is degraded.
+**Shared failures**: Independence makes the displayed CDF tractable but is not required for every possible hedge benefit. Shared hosts, providers, caches, and queues can correlate delays. Neither host location nor a universal correlation threshold defines a coverage probability. Inspect paired tail events and failure causes; test hedge benefit and resource coupling on representative traces. A coverage-mixture formula is usable only with a defined mutually exclusive event model and measured conditional probabilities.
 
 **Design rules:**
 - Set the hedge timeout at the p90–p95 of service time, not at a fixed absolute value. Service time changes with model version, prompt distribution, and load level.
 - Cancel the losing request immediately upon first response. Orphaned hedge requests consume GPU compute and KV cache pages even after the result is discarded.
-- Implement concurrency caps on hedged requests. If the primary cluster is saturated (high ρ), issuing hedge requests increases load and can accelerate a latency death spiral. Gate hedging on primary cluster utilization ρ < 0.75.
+- Implement concurrency caps on hedged requests. If the primary cluster is saturated (high ρ), issuing hedge requests increases load and can accelerate a latency death spiral. Gate hedging on tested spare capacity, bounded duplicate concurrency, and actual observed benefit.
 - For API providers (not self-hosted), hedged requests consume double the tokens. Confirm token budget and rate limits accommodate the hedge overhead before enabling.
 
 **When to use**: p99 TTFT is unacceptably high but mean TTFT is within SLO; streaming completions where the first-token latency matters more than total latency; multi-step agent pipelines where one slow model step blocks the entire trace.
@@ -286,7 +282,7 @@ Where T_shedding_active is the time spent in the OPEN state. If T_shedding_activ
 | Eviction-restore error | Prefill re-executed with wrong position IDs | 7 | 2 | 6 | 84 | Position ID consistency check |
 
 **Detection heuristics.** GPU inference stacks do not expose KV cache integrity natively. Implement application-level detection:
-- **Nan/inf logit check**: after each decode step, check `isnan(logits).any()`. If true, abort the current sequence and return an error. MTTR for this failure = latency of one failed request (typically < 5 seconds).
+- **Nan/inf logit check**: after each decode step, check `isnan(logits).any()`. If true, abort the current sequence and return an error. Per-request detection/abort latency is not service MTTR; measure detection and restoration separately.
 - **Token repetition check**: if the last k tokens are identical (repetition_penalty = 1.0 case), the KV cache state may be corrupt. Threshold: k > 5 identical tokens triggers an abort-and-retry.
 - **Schema validity check**: for structured-output generations, post-generation schema validation catches semantic corruption (correct tokens, wrong structure due to corrupted positional cache).
 
@@ -306,7 +302,7 @@ T_abort = negligible
 T_reprefill = E[prefill_tokens] / prefill_throughput_per_gpu
 ```
 
-For a 2,048-token prompt at 50k tokens/s prefill rate: T_reprefill = 41 ms. MTTR ≈ 160 ms. This is below most SLO thresholds — a silent retry is sufficient.
+For a 2,048-token prompt at 50k tokens/s prefill rate: T_reprefill = 41 ms. An illustrative 160 ms component sum is not a validated recovery or SLO guarantee. Retry only with correct state reconstruction, bounded attempts, output equivalence, and actual end-to-end latency checks.
 
 **Bathtub curve for GPU ECC errors.** New GPUs have elevated ECC error rates in their first weeks (infant mortality phase). GPU ECC uncorrectable error rates are in the IFR (increasing failure rate) phase during end-of-life. Monitor ECC error counts per GPU and retire GPUs with ECC error rates > 1/day before they cause production incidents.
 
@@ -414,14 +410,7 @@ If c_min > 0.95, the failover mechanism design must be tested and validated, not
 
 **Symptom**: the client application retries 429 (rate limit exceeded) responses indefinitely with a short fixed sleep. Under provider capacity pressure, the client generates retry traffic that competes with organic traffic, amplifying load and delaying recovery. The provider's rate limit window resets, but by then the retry queue has grown larger than the original organic queue.
 
-**Reliability diagnosis**: 429-retry amplification is a positive feedback loop in the fault tree. MTTR under this pattern is:
-
-```
-MTTR_amplified = MTTR_natural × (1 + retry_factor)
-retry_factor ≈ retry_rate × sleep_duration / rate_limit_window
-```
-
-For a 1-second sleep and a 60-second rate limit window, a client retrying at 10x the organic rate has retry_factor ≈ 10 × 1/60 ≈ 0.17 — a 17% MTTR inflation per retry cycle, compounding.
+**Reliability diagnosis**: Measure organic and retry arrivals, admitted throughput, rejection, queue age, and recovery under bounded retry policies. No general MTTR multiplier follows from retry rate, sleep duration, and limit-window length; the former formula had no supported queue/recovery model.
 
 **Harm**: the service takes longer to recover from rate-limit events than it would without any retry logic. The retry logic intended to improve reliability actively worsens MTTR.
 
@@ -439,7 +428,7 @@ For a 1-second sleep and a 60-second rate limit window, a client retrying at 10x
 MTTR_no_killswitch = T_detect + T_diagnose + T_redeploy + T_verify
 ```
 
-Without a kill-switch, T_redeploy ≈ 15–30 minutes. With a kill-switch (instant traffic shift to previous version), T_remediate ≈ 30 seconds. The kill-switch reduces MTTR by 96%+ for model quality regressions.
+Without a kill-switch, T_redeploy ≈ 15–30 minutes. With a kill-switch (instant traffic shift to previous version), T_remediate ≈ 30 seconds. These are illustrative durations, not measured guarantees. Validate rollback effectiveness and recovery time for the actual deployment.
 
 From availability arithmetic: reducing MTTR from 20 minutes to 1 minute for a model update event with frequency 2/month:
 
@@ -835,7 +824,7 @@ Label all non-Tier-0 responses in monitoring so quality regression is visible
   even when availability is high.
 ```
 
-**Strongest outcome**: step 2 (degraded-mode tier definition) is the highest-leverage step. Teams that define explicit degraded modes before launch have mean time to detect quality regression 5× faster than those relying on user reports, because the tier label is logged with every response and makes partial failures visible in dashboards.
+**Strongest outcome**: step 2 (degraded-mode tier definition) is the highest-leverage step. Explicit tier labels can make partial failures visible in dashboards; measure detection time locally rather than claiming a universal fivefold gain.
 
 ---
 

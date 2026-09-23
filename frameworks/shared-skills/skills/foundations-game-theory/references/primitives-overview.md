@@ -121,9 +121,9 @@ This checklist applies to any strategic decision system — pricing, bidding, pa
 - [ ] **Multi-party context-sharing risk**: Members may produce overlapping analysis from same context? → belief-driven coordination (#1) with explicit belief briefs
 - [ ] **Best-of-N synthesis (discrete)**: Need to recover minority-correct answers? → BMV (#18)
 - [ ] **Best-of-N synthesis (open-ended)**: Lexically diverse but semantically clustered candidates? → RCS (#19)
-- [ ] **High-frequency team (50+ runs)**: Want to evolve prompts using Shapley signal? → online Shapley prompt evolution (#17)
+- [ ] **Repeated team with adequately precise attribution**: Want to evolve prompts using Shapley signal? → online Shapley prompt evolution (#17)
 - [ ] **Debate role assignment ambiguous**: Best plaintiff/defense not the obvious specialist? → meta-debate role routing (#16)
-- [ ] **High-stakes act/escalate**: Consensus cannot be trusted as authorization? → conformal social choice (#20)
+- [ ] **Calibrated selection**: Representative labeled cases exist for a fixed answer space? → conformal social choice (#20); keep authorization independent of the prediction set
 - [ ] **Cross-trust delegation**: Delegate can self-claim quality, authority, or identity? → attested delegation contracts (#21)
 - [ ] **Large team / department**: Work naturally splits into coalitions? → coalition formation routing (#22)
 

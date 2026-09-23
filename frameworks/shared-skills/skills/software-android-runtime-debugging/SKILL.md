@@ -75,10 +75,10 @@ Use this skill to:
    Confirm output ends with `BUILD SUCCESSFUL`.
 4. Inspect the APK: `aapt2 dump badging app/build/outputs/apk/debug/app-debug.apk`.
    Verify `applicationId`, `versionCode`, `minSdk`, declared activities, and expected resources.
-5. Remove stale installs:
-   `adb uninstall <applicationId>`.
-6. Install the fresh build:
+5. Preserve reproduction state before any reset: record account, deep link/intent, local data dependency, and the installed package/version/signing identity. Export logs and screenshots first.
+6. Replace-install the fresh build without clearing data:
    `adb install -r app/build/outputs/apk/debug/app-debug.apk`.
+   Uninstall or clear data only when replace-install fails, signatures differ, state migration is the suspected cause, or the current evidence has already been preserved.
 7. Launch and capture proof:
    `adb shell am start -n <applicationId>/<fully.qualified.Activity>`, then capture logcat output and a screenshot (`adb exec-out screencap -p > proof.png`).
 8. Only after the app is freshly running, debug feature behavior, design, auth, or API issues.
@@ -102,7 +102,8 @@ Android runtime failure
 ## Runtime Proof Loop
 
 - Prefer one bounded loop:
-  discover -> check env -> clean build -> inspect APK -> uninstall -> install -> launch -> capture evidence -> then debug.
+  discover -> check env -> build -> inspect APK -> preserve repro -> replace-install -> launch -> capture evidence -> then debug.
+- Escalate to clean build, clear data, or uninstall one step at a time. Record which reset makes the symptom disappear; that difference is diagnostic evidence, not housekeeping.
 - If any step fails, stop there and fix that layer before moving deeper.
 - Do not trust screenshots from an emulator session that has not been tied to the current build.
 - Do not trust "BUILD SUCCESSFUL" on its own; install and launch proof still matter.
@@ -213,7 +214,6 @@ See [references/proguard-r8-triage.md](references/proguard-r8-triage.md).
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

@@ -1,6 +1,6 @@
 # Swift Concurrency Diagnostics
 
-Maps common Swift concurrency compiler errors and warnings to their fixes. For runtime crash triage, see [`swift-concurrency-crash-triage.md`](../software-ios-runtime-debugging/references/swift-concurrency-crash-triage.md).
+Maps common Swift concurrency compiler errors and warnings to their fixes. For runtime crash triage, see [`swift-concurrency-crash-triage.md`](../../software-ios-runtime-debugging/references/swift-concurrency-crash-triage.md).
 
 Primary docs:
 

@@ -110,6 +110,10 @@ Before deploying a contract or custody flow to production:
 
 ## Custody, Key Management, and On-Chain Judgment
 
+**Privileged-control gate.**
+
+Inventory every upgrade, pause, mint, freeze, oracle, bridge, and fee-setting authority as part of the protocol surface. For each authority, record the signer set, quorum, delay, scope, rotation path, and failure consequence. Test compromised-signer, unavailable-signer, and malicious-upgrade scenarios on a fork or local chain; a multisig label alone does not prove that privileged actions are constrained or recoverable.
+
 - **When NOT to put something on-chain**: personally identifiable data, anything requiring later deletion/correction (right-to-erasure conflicts), high-frequency state that is cheaper and equally trustworthy off-chain with a periodic on-chain checkpoint/root, and business logic whose only requirement is internal auditability rather than public verifiability or trustless settlement. On-chain is a cost/trust tradeoff, not a default.
 - **Custody decision gates**:
   - Solo/EOA signing — prototypes and non-custodial personal wallets only; never for pooled user funds.
@@ -215,13 +219,9 @@ See [references/mica-casp-checklist.md](references/mica-casp-checklist.md) for a
 ## Fact-Checking
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

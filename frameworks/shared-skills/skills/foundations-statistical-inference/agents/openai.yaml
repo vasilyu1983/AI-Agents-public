@@ -1,0 +1,4 @@
+interface:
+  display_name: "Statistical Inference Foundations"
+  short_description: "Assess sampling uncertainty, power, and calibration"
+  default_prompt: "Use $foundations-statistical-inference to assess statistical evidence: sampling uncertainty, power, multiplicity, sequential inference, calibration, and predictive coverage; report assumptions and limitations."

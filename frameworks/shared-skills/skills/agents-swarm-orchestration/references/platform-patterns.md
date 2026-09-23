@@ -37,11 +37,13 @@ Built-in subagents:
 
 | Subagent | Model | Tools | Purpose |
 |----------|-------|-------|---------|
-| Explore | Inherits parent model | Read-only | File discovery, code search, codebase exploration |
+| Explore | Inherits from the main conversation, capped at Opus on the Claude API | Read-only | File discovery, code search, codebase exploration |
 | Plan | Inherits | Read-only | Codebase research during plan mode |
 | General-purpose | Inherits | All | Complex research, multi-step operations, code modifications |
 | statusline-setup | Sonnet | Read, Edit | Auto-invoked to configure the Claude Code status line — do not call directly |
 | Claude Code Guide | Haiku | Docs lookup | Auto-invoked for "how do I…" questions about Claude Code, the Agent SDK, and the Claude API — do not call directly |
+
+Explore does not simply mirror the parent: the docs cap it at Opus on the Claude API, so a parent on a higher tier still gets an Opus-class Explore (verified 2026-09-16 against [sub-agents](https://code.claude.com/docs/en/sub-agents)). General-purpose resolves to `CLAUDE_CODE_SUBAGENT_MODEL` when that is set, otherwise the main conversation's model.
 
 ### Subagent configuration
 
@@ -71,12 +73,13 @@ Key frontmatter fields:
 | `hooks` | Lifecycle hooks: PreToolUse, PostToolUse, Stop |
 | `memory` | Persistent memory scope: `user`, `project`, or `local` |
 | `background` | Only `true` is documented: it forces background execution. Omitting the field does not guarantee foreground; current behavior also depends on whether agent-view fork mode is active |
-| `effort` | `low`, `medium`, `high`, `xhigh`, `max` (Opus only; `xhigh` is the new 4.7-era default — see [`../../agents-subagents/references/cost-control.md`](../../agents-subagents/references/cost-control.md) §"Opus 4.7 Cost Levers") |
+| `omitClaudeMd` | `true` launches the subagent without the user, project, and local CLAUDE.md files; managed policy files still load (except for managed subagents), and the field is ignored when the agent runs as the main session agent via `--agent` or the `agent` setting. Requires v2.1.271+. Use for workers that take everything they need from the delegation prompt. Codex equivalent: none — Codex subagents have no documented switch to suppress `AGENTS.md` loading (verified 2026-09-16) |
+| `effort` | `low`, `medium`, `high`, `xhigh`, `max`. The documented default is `high` on every model that supports effort, **except Opus 4.7, which defaults to `xhigh`**; the `xhigh`-everywhere default was a 4.7-era condition and does not apply to the Claude 5 family. See [`../../agents-subagents/references/cost-control.md`](../../agents-subagents/references/cost-control.md) §"Claude 5 Cost Levers" for the four-step session-effort chain and the per-role tiering |
 | `isolation` | `worktree` for git-worktree isolation |
 | `color` | UI color: red, blue, green, yellow, purple, orange, pink, cyan |
 | `initialPrompt` | Auto-submitted first turn when used as `--agent` |
 
-Model resolution order: `CLAUDE_CODE_SUBAGENT_MODEL` env var > per-invocation parameter > frontmatter `model` > parent conversation model.
+Model resolution order (current, per [sub-agents](https://code.claude.com/docs/en/sub-agents)): 1. the per-invocation `model` parameter; 2. the definition's `model` frontmatter (`inherit` selects the main conversation's model); 3. `CLAUDE_CODE_SUBAGENT_MODEL`; 4. the main conversation's model. **This order reversed in v2.1.251** — before that, `CLAUDE_CODE_SUBAGENT_MODEL` came first. `CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1` (v2.1.257+) forces subagents, teammates, and workflow agents onto `CLAUDE_CODE_SUBAGENT_MODEL` regardless of definition or invocation; a fork and a skill with `model: inherit` still run on the main conversation's model. The teammate variant of this order is owned by [`../../agents-subagents/references/runtime-surfaces.md`](../../agents-subagents/references/runtime-surfaces.md) §"Subagents vs Agent Teams".
 
 Restrict which subagents a coordinator can spawn using `Agent(type1, type2)` in the `tools` field. Omitting `Agent` entirely prevents spawning. Plugin subagents cannot use `hooks`, `mcpServers`, or `permissionMode`.
 
@@ -112,8 +115,8 @@ Source: https://code.claude.com/docs/en/agent-teams
 - They are best for work that benefits from disagreement, discussion, and self-coordination between workers.
 - The feature is experimental and disabled by default; enable via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in settings.json or environment. Minimum version at launch was Claude Code `v2.1.32`. As of Aug 2026 the behavior still churns week to week — re-verify against the docs on every CLI bump.
 - **Enabling the flag changes subagent semantics session-wide:** subagent results come back as idle notifications rather than synchronous returns. Any flow that waits on a subagent's return value can stall. Do not enable teams in sessions built around blocking subagent calls.
-- **`~/.claude/teams/{team-name}/` is runtime state, not a config artifact.** The runtime writes it when the lead creates the team. Do not pre-author, template, or version it. Reusable roles live in subagent definitions and are referenced at spawn time.
-- At initial research-preview launch this required **Opus 4.6 or newer** as the lead model. Current docs describe a per-team "default teammate model" setting instead of a hard lead-model floor — verify the live requirement against [code.claude.com/docs/en/agent-teams](https://code.claude.com/docs/en/agent-teams) before assuming a model gate still applies.
+- **`~/.claude/teams/{team-name}/` is runtime state, not a config artifact.** Claude Code generates the team config and task list automatically **at session startup** under a session-derived name (`session-` plus the first eight characters of the session ID) and updates them as teammates join, go idle, or leave. The team config directory is removed when the session ends; the task list directory persists locally so resumed sessions keep their tasks. It holds live state such as session IDs and tmux pane IDs, so hand edits are overwritten on the next state update. Do not pre-author, template, or version it, and note there is **no project-level equivalent** — a `.claude/teams/teams.json` is treated as an ordinary file. Reusable roles live in subagent definitions and are referenced at spawn time.
+- **No lead-model floor and no per-team default model.** Current docs state no lead-model gate, and `teammateDefaultModel` "was removed in v2.1.234; Claude Code ignores a leftover value. Name the model in your prompt instead." A teammate's model comes from the four-step per-teammate resolution order above (spawn prompt > definition `model` > `CLAUDE_CODE_SUBAGENT_MODEL` > lead's model), owned by [`../../agents-subagents/references/runtime-surfaces.md`](../../agents-subagents/references/runtime-surfaces.md) §"Subagents vs Agent Teams".
 - Known limitations (verify against current SDK docs): split-pane display mode does not work reliably in the VS Code extension — use the terminal CLI or in-process display mode. Earlier practitioner reports of background teammates stalling on unseen permission prompts are not currently confirmed in official docs; treat as a risk to re-verify and keep edit-capable teammates foreground until you have.
 
 Architecture:

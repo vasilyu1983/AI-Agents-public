@@ -49,8 +49,11 @@ CDF (unreliability): F(t) = 1 - exp(-(t/η)^β)
 Preferred when censored data are present. Solves:
 
 ```
-Σᵢ [ln(tᵢ) - (1/β) - Σⱼ tⱼ^β ln(tⱼ) / Σⱼ tⱼ^β] = 0   [for β]
-η = (Σᵢ tᵢ^β / n)^(1/β)
+For observation times t_i > 0 and failure indicators δ_i (1=failure, 0=right-censored), let d = Σδ_i > 0:
+d/β + Σ δ_i ln(t_i) − d [Σ t_i^β ln(t_i) / Σ t_i^β] = 0
+η = [Σ t_i^β / d]^(1/β)
+L = ∏ f(t_i)^δ_i R(t_i)^(1−δ_i)
+[Independent noninformative right censoring; two-parameter Weibull]
 ```
 
 Use numerical solver; confidence intervals via Fisher information matrix.
@@ -67,7 +70,7 @@ Use numerical solver; confidence intervals via Fisher information matrix.
 | Mistake | Consequence | Fix |
 |---------|-------------|-----|
 | Fitting Weibull to fewer than 6–10 complete failures | β and η estimates have very wide confidence intervals; unreliable | Report confidence intervals explicitly; collect more data or use Bayesian priors |
-| Ignoring suspended (right-censored) data | Survivorship bias underestimates hazard and overestimates MTBF | Include suspensions in MLE; do not drop unfailed units from analysis |
+| Ignoring suspended (right-censored) data | Discarding surviving units generally overestimates hazard and underestimates lifetime | Include suspensions in MLE; do not drop unfailed units from analysis |
 | Using the 2-parameter model when a threshold γ > 0 exists | Systematic curvature on probability plot; poor fit | Fit 3-parameter Weibull or investigate the physical reason for the threshold |
 | Reporting MTBF without noting β | MTBF from a Weibull IFR system is a misleading average of a rising hazard | Report β alongside MTBF; for β > 1.5, report B10 life instead of MTBF |
 | Assuming a single Weibull fits a mixed-failure-mode population | Bimodal probability plot; β is meaningless | Separate competing failure modes; fit separate distributions to each |
@@ -76,10 +79,10 @@ Use numerical solver; confidence intervals via Fisher information matrix.
 
 A server hard drive fleet: 50 drives, 12 failures recorded, 38 right-censored at various operating times.
 
-**MLE estimates** (from Weibull++ or scipy.stats.weibull_min):
+**Illustrative assumed parameters** (no raw fitting dataset is supplied; these are not reproduced estimates):
 
 ```
-β = 2.4    (IFR — wear-out mode confirmed)
+β = 2.4    (IFR — increasing-hazard model assumed; fit confidence is not established)
 η = 4,380 days  (~12 years characteristic life)
 
 B10 life = η × (-ln(1 - 0.10))^(1/β)
@@ -90,7 +93,7 @@ B10 life = η × (-ln(1 - 0.10))^(1/β)
 MTBF = η × Γ(1 + 1/β) = 4,380 × Γ(1.417) ≈ 4,380 × 0.886 ≈ 3,880 days
 ```
 
-**Maintenance recommendation**: replace drives proactively by day 1,715 (~4.7 years) — the B10 life — to keep expected cumulative failures at or below 10% of the fleet. At day 1,200 (~3.3 years) cumulative failures are only ≈4.4%; pulling the replacement date that early trades cost for negligible risk reduction. Waiting to 4,380 days (η, the characteristic life) allows 63% cumulative failures — unacceptable for production storage. (Corrected 2026-07-11: the previous version of this example mis-derived the (0.1054)^(1/2.4) term as ≈0.291 instead of ≈0.3915, understating B10 life by roughly 25% and understating the day-1,200 cumulative failure fraction.)
+**Maintenance recommendation**: B10≈1,715 days (~4.7 years) is one illustrative maintenance threshold, not an automatically justified replacement policy; compare failure consequences, redundancy, censoring/fit uncertainty and replacement cost. At day 1,200 (~3.3 years) cumulative failures are only ≈4.4%; replacing earlier trades cost against failure consequences; the acceptable reduction requires an explicit loss/maintenance model. Waiting to 4,380 days (η, the characteristic life) allows 63% cumulative failures — unacceptable for production storage. (Corrected 2026-07-11: the previous version of this example mis-derived the (0.1054)^(1/2.4) term as ≈0.291 instead of ≈0.3915, understating B10 life by roughly 25% and understating the day-1,200 cumulative failure fraction.)
 
 ## Sparse Data Note
 

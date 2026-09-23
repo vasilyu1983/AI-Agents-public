@@ -1,0 +1,39 @@
+{
+  "source_url": "https://www.itl.nist.gov/div898/handbook/apr/section4/apr413.htm",
+  "observation_time_unit": "hours",
+  "failures": [
+    54,
+    187,
+    216,
+    240,
+    244,
+    335,
+    361,
+    373,
+    375,
+    386
+  ],
+  "right_censored": [
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500
+  ],
+  "assumption": "independent noninformative right censoring",
+  "published_fit": {
+    "beta": 1.7208,
+    "eta": 606.528,
+    "log_likelihood": -75.135,
+    "absolute_tolerance": {
+      "beta": 0.0001,
+      "eta": 0.01,
+      "log_likelihood": 0.002
+    }
+  }
+}

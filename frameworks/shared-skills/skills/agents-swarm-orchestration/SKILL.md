@@ -2,8 +2,8 @@
 name: agents-swarm-orchestration
 description: "Coordinates multi-agent execution across subagents, teams, and workflows. Use when planning dependency-aware fan-out, verifier passes, runtime selection, or Loop Engineering."
 compatibility: Claude Code + Codex. Claude Code Agent tool (renamed from Task in v2.1.63) plus Codex subagents — runtime-specific dispatch.
-version: "1.5"
-last_validated: 2026-08-27
+version: "1.6"
+last_validated: 2026-09-15
 ---
 
 # Swarm Orchestration
@@ -39,6 +39,7 @@ Coordinate multiple workers without polluting the main thread. Use this skill af
 
 ## Navigation
 
+- [references/verified-handoff-exercise.md](references/verified-handoff-exercise.md) - Work through ownership, validated artifacts, independent verification, and interruption recovery before adopting a multi-stage coding workflow
 - [references/loop-orchestration.md](references/loop-orchestration.md) - Bounded iteration vs retry, loop-until-dry, convergence detection, termination predicates, dedup-target rule
 - [../ai-coding-agents-tasks/references/loop-and-graph-runtime-surfaces.md](../ai-coding-agents-tasks/references/loop-and-graph-runtime-surfaces.md) - Loop Engineering and Graph Engineering runtime comparison: task queues, cyclic graphs, and workflows
 - [references/scripted-workflows.md](references/scripted-workflows.md) - Script-held deterministic control flow (Claude Code Workflows): `agent`/`parallel`/`pipeline`, barrier-vs-pipeline, resume and caching
@@ -90,10 +91,11 @@ Coordinate multiple workers without polluting the main thread. Use this skill af
 - Pass distilled dependency outputs, not raw logs or long transcripts.
 - Require structured worker reports — the lead validates and merges deterministically.
 - Re-plan when conflict resolution costs more than the fan-out saved.
-- **Fresh context per worker**: each worker brief contains only its task, plan section, file ownership, and interface contracts — not the lead's full history. Prevents context rot; gives each worker a full window.
+- **Explicit context start per worker**: prefer a self-contained brief with the task, plan section, ownership, and interface contracts. Record whether the runtime starts fresh, forks parent history, or adds runtime-managed memory; “worker” alone does not guarantee a fresh or full window.
 - **State in files**: task graph, progress, decisions, and dependency outputs live in structured files (frontmatter MD / JSON / YAML). Any new lead session resumes by reading files, not memory.
 - **Checkpoint long runs**: snapshot task state, reports, and decisions to `checkpoints/` at each wave boundary.
-- **Budget per worker**: explicit token/time/tool caps at dispatch. Budget-conservation invariant: child budgets are strict subsets of the parent's *remaining* budget. Workers that breach their budget stop and escalate — they do not continue. (Ye & Tan, *Agent Contracts: A Formal Framework for Resource-Bounded Autonomous AI Systems*, arXiv:2601.08815, 2026)
+- **Budget per worker**: track token, time, tool-call, and external-spend caps as separate quantities because runtimes enforce different subsets. A lead may allocate local child caps from its remaining task budget, but this is an orchestration policy, not a universal runtime conservation law. Define which cap is actually enforced and what happens when it is reached. (Ye & Tan, *Agent Contracts: A Formal Framework for Resource-Bounded Autonomous AI Systems*, arXiv:2601.08815, 2026)
+- **Fan-out break-even**: estimate duplicated setup/read cost, coordination latency, and synthesis cost before dispatch. Re-plan to one worker when those costs exceed the independent work saved; record actual versus estimated usage for repeated patterns.
 - **Telemetry per worker**: assign a run id or span id; log inputs, outputs, status, tokens, and duration to one structured location.
 - **Durable approval channels**: route approvals through mailbox/poller with request IDs, not ephemeral callbacks.
 - **Minimum toolset per worker**: use `tools`, `disallowedTools`, and `skills` fields to give each worker only what it needs.
@@ -103,7 +105,7 @@ For context rotation and state handoff patterns, see [`../ai-agents/references/c
 
 ## Explicit Fan-Out Is The Durable Default
 
-Claude Opus 4.7 (GA 2026-04-16) shipped a lasting behavior change: it spawns fewer subagents by default than 4.6, favoring single-response completion over implicit parallelism. Fan-out workflows that previously worked without being asked — read-heavy scans, multi-file refactors, review waves, cross-repo audits — now silently serialize unless the lead is told to fan out explicitly. Opus 4.8 (current as of this writing) inherits the same conservative default; treat "assume no auto-parallelism" as the standing assumption for whatever frontier model is current, and re-verify against release notes each time the lead model changes.
+Claude Opus 4.7 (GA 2026-04-16) shipped a lasting behavior change: it spawns fewer subagents by default than 4.6, favoring single-response completion over implicit parallelism. Fan-out workflows that previously worked without being asked — read-heavy scans, multi-file refactors, review waves, cross-repo audits — now silently serialize unless the lead is told to fan out explicitly. Later frontier models have kept this conservative default; treat "assume no auto-parallelism" as the standing assumption and re-verify against release notes each time the lead model changes.
 
 Anthropic's source guidance is to give the model **explicit fan-out instructions**; it does not prescribe where the instruction must live. Our repo convention is to install the canonical phrasing once in `AGENTS.md` / `CLAUDE.md` (not duplicated per launch prompt):
 
@@ -383,6 +385,6 @@ Current Anthropic docs publish no Agent Teams lead-model floor. Teammate model s
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

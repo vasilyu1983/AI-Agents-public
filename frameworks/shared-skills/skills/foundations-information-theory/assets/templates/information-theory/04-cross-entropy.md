@@ -37,7 +37,8 @@ Equivalent to NLL (negative log-likelihood) under the model's predicted distribu
 **Bits-per-byte (BPB) normalization**:
 
 ```
-BPB = H(P, Q) / (number of bytes in text)
+BPB = sum_token(-log2 q(token | prefix)) / number_of_bytes
+    = mean_bits_per_token * number_of_tokens / number_of_bytes
 ```
 
 BPB is vocabulary-agnostic, enabling cross-tokenizer and cross-model comparisons.
@@ -91,24 +92,14 @@ Two language models evaluated on the same test set (10M bytes of text):
 
 | Model | Vocab size | Sequence tokens | Perplexity | BPB |
 |-------|-----------|-----------------|------------|-----|
-| ModelA | 50,257 | 2.4M | 12.3 | 1.07 |
-| ModelB | 32,000 | 3.1M | 18.7 | 1.02 |
+| ModelA | 50,257 | 2.4M | 12.3 | 0.869 |
+| ModelB | 32,000 | 3.1M | 18.7 | 1.310 |
 
-ModelA's perplexity (12.3) is lower than ModelB's (18.7), suggesting ModelA is better. But ModelA tokenizes the same text into fewer tokens; each token carries more information. After normalizing to BPB: ModelA = 1.07, ModelB = 1.02. ModelB is actually a better predictor per byte. Reporting perplexity without BPB inverts the ranking.
+Assuming each perplexity is exp(mean token NLL), BPB_A = 2.4M * log2(12.3) / 10M = 0.869 and BPB_B = 3.1M * log2(18.7) / 10M = 1.310. A is better on this same byte corpus. The example does not reverse ranking; normalization makes the comparison meaningful. Report common corpus, encoding, special-token treatment and context protocol.
 
 **Decomposing training loss**
 
-At epoch 50 of classifier training:
-
-```
-H(P, Q) = 0.41 bits
-H(P)    = 0.38 bits   (estimated from label frequencies)
-D_KL    = 0.03 bits   (model approximation residual)
-```
-
-95% of the loss is irreducible label uncertainty. Continuing to train will yield diminishing returns — the bottleneck is data quality, not model capacity.
-
----
+For conditional classification loss, the decomposition uses H(Y|X) and the expected conditional KL, not marginal entropy H(Y). A balanced deterministic-label classifier can have H(Y)=1 bit and H(Y|X)=0. Label frequencies alone therefore cannot diagnose irreducible prediction uncertainty. If a valid conditional model gives loss .41 bits, H(Y|X)=.38 and conditional KL=.03, that decomposition is illustrative; verify the conditional entropy estimate before attributing a training ceiling.
 
 ## Sources
 

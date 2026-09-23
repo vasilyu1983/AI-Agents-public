@@ -89,6 +89,10 @@ Realtime task
 
 ### Connection Management
 
+**Reconnect and resync contract.**
+
+Give each durable update a monotonic sequence or cursor and each client operation a stable ID. On reconnect, the client sends its last applied cursor; the server returns the missing range or a fresh snapshot plus a new cursor. Define retention expiry explicitly: when the gap is no longer replayable, force snapshot resync instead of pretending the live stream is complete.
+
 - Reconnect backoff: initial 1s, double each attempt, cap at 30s, add ±20% jitter.
 - Auth: browser WebSocket auth uses query params or first-message auth, not custom HTTP headers (the handshake follows HTTP but upgrade straps away standard auth headers).
 - Heartbeat: send a keepalive every 25–30s to prevent proxy timeout; detect silence on the server to expire ghost connections.
@@ -208,7 +212,6 @@ Five numbered scenarios covering the most common real-time design moments. Each 
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

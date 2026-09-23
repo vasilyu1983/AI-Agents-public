@@ -60,6 +60,12 @@ Use this skill for product decisions that need evidence, trade-offs, and a concr
 5. Rank options with one consistent method and document the trade-offs.
 6. Produce the artifact plus the next review trigger, not just a static document.
 
+### Decision-Rights Gate
+
+Before a roadmap date, launch commitment, or irreversible prioritization call, write four fields: **decision owner**, **required consultees**, **evidence cutoff**, and **reopen trigger**. A stakeholder's input can change the evidence or constraint; it does not silently change ownership. If no one has authority to make the decision, return the unresolved decision and the person who must assign it instead of producing a consensus-shaped roadmap.
+
+At the evidence cutoff, freeze the inputs used for the call. Later evidence enters through the reopen trigger rather than retroactively changing why the decision was made. This keeps a roadmap review from becoming a recurring vote on remembered conversations.
+
 ## ASCII Flow
 
 ```text
@@ -188,7 +194,7 @@ Default to one of these:
 
 ## Navigation
 
-> **Gate before invoking any foundation below:** Each foundation has a `When to Apply` / `When to Skip` section. If your task matches a skip-condition, route to the foundation it names instead — don't pull in primitives the task doesn't need.
+> **Gate before invoking any foundation below:** Name the unresolved decision, then check the foundation’s scope, exclusions, and method assumptions. Load only the relevant reference when its returned artifact can change that decision; skip routine applied work. Selection does not depend on exact section headings.
 
 - Discovery: [references/discovery-best-practices.md](references/discovery-best-practices.md), [references/interviewing-patterns.md](references/interviewing-patterns.md), [assets/discovery/customer-interview-template.md](assets/discovery/customer-interview-template.md), [assets/discovery/assumption-test-template.md](assets/discovery/assumption-test-template.md), [assets/discovery/opportunity-solution-tree.md](assets/discovery/opportunity-solution-tree.md), [assets/discovery/pmf-survey-template.md](assets/discovery/pmf-survey-template.md)
 - PMF scoring and bets: [assets/pmf-scorecard-b2b.yaml](assets/pmf-scorecard-b2b.yaml), [assets/pmf-scorecard-b2c.yaml](assets/pmf-scorecard-b2c.yaml), [assets/pmf-bet-memo-template.md](assets/pmf-bet-memo-template.md), [references/pmf-measurement.md](references/pmf-measurement.md)
@@ -208,6 +214,10 @@ Default to one of these:
 - Delivery and handoff: [references/delivery-best-practices.md](references/delivery-best-practices.md) — Checklist for PM-to-engineering handoff: acceptance criteria, backlog quality, engineering handoff artifacts, execution cadence, quality gates, and post-launch review.
 - Consumer-neuroscience foundation: [../foundations-consumer-neuroscience/SKILL.md](../foundations-consumer-neuroscience/SKILL.md) — attention/salience, reward-anticipation, narrative transportation, and DMCC ethical audit primitives for activation, engagement, and habit-design decisions.
 
+## Conditional optimization handoff
+
+Keep ordinary RICE/WSJF ranking, qualitative roadmap discussion, and discovery in product-management. **Trigger:** a quantified allocation of indivisible features or work packages under explicit team-capacity/budget constraints, with agreed utility and stated dependencies or incompatibilities, where ranking alone cannot produce a feasible choice. Load [foundations-mathematical-optimization](../foundations-mathematical-optimization/SKILL.md) for this unresolved selection question. **Skip:** unconstrained ranking, disputed utility, missing effort/capacity estimates, or continuous LP assumptions applied to indivisible features; clarify the product evidence first. **Return:** the decision variables and domains, utility/objective, hard constraints and dependency rules, a feasible selected set with independently checked capacity totals, solver/status/model boundary, and sensitivity to uncertain utility or effort. Report optimality or a gap only with valid evidence for the actual integer model; the foundation’s continuous LP certificate helper does not certify an indivisible roadmap. Product-management retains the delivery decision and stakeholder tradeoffs.
+
 ## Fact-Checking
 
 - Primary sources live in [data/sources.json](data/sources.json).
@@ -216,7 +226,6 @@ Default to one of these:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

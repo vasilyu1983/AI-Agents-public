@@ -94,6 +94,7 @@ Real situations mapped to the smallest event + recipe that solves them. Pick the
 3. Prefer deterministic command hooks for enforcement.
 4. Keep synchronous hooks fast; move heavy work into async or background paths.
 5. Validate event support and payload assumptions against current docs before final advice.
+6. Declare the timeout and error posture for the exact runtime, event, and handler type. In current Claude Code, an explicit `PreToolUse` deny or exit `2` blocks the tool call, while a timed-out `command`, `http`, or `mcp_tool` handler returns the call to normal permission evaluation; an Agent SDK callback timeout blocks it. A policy that must remain closed on handler failure needs a separate deny rule or enforcement in the execution substrate. Test timeout, malformed output, and duplicate delivery separately from the happy path.
 
 **Validate and install checklist**
 
@@ -258,18 +259,18 @@ Minimal `settings.json` wiring (copy into `~/.claude/settings.json` or `.claude/
 
 | Type | Latency | Failure mode | Use when |
 |------|---------|--------------|----------|
-| `command` | fastest (local process) | script bug, wrong exit code, missing binary | deterministic checks — the default choice |
+| `command` | usually lowest latency; measure | script bug, wrong exit code, missing binary | deterministic checks — the default choice |
 | `http` | network round-trip | endpoint down, timeout, no local fallback | audit must leave the box immediately (SIEM, webhook) |
 | `mcp_tool` | depends on server | server not connected, tool schema drift | policy lives on a connected MCP server already |
-| `prompt` | one extra LLM call | non-determinism, added token cost | a single-turn semantic judgment is enough (no tool use needed) |
-| `agent` (experimental) | slowest, most tokens | cost/latency creep if used on hot paths | multi-step semantic verification (e.g. "did this satisfy acceptance criteria") |
+| `prompt` | one extra LLM call | non-determinism, model-dependent token cost | a single-turn semantic judgment is enough (no tool use needed) |
+| `agent` (experimental) | usually higher latency and usage; measure | cost/latency creep if used on hot paths | multi-step semantic verification (e.g. "did this satisfy acceptance criteria") |
 
-Escalate down this list only when the cheaper type can't express the check — see [`references/hook-patterns.md`](references/hook-patterns.md) §3 for the command-vs-agent decision in practice.
+Escalate down this list only when the simpler type cannot express the check; compare observed latency and usage before making a cost claim — see [`references/hook-patterns.md`](references/hook-patterns.md) §3 for the command-vs-agent decision in practice.
 
 ## Execution Model And Precedence
 
 - **Parallel, not sequential.** When multiple registered hooks match the same event, Claude Code runs all of them in parallel. Do not assume one hook's output is visible to another, and do not rely on registration order to break ties. Identical `command` hooks are deduplicated by command string + `args`; identical `http` hooks by URL — near-duplicate hooks (different flags, same intent) are not deduplicated and will double-fire.
-- **Conflicting decisions are not spec'd as "deny wins."** The docs do not officially guarantee a resolution order when one matching hook returns `allow` and another returns `deny` on the same event. Design as if any single `deny` should be treated as authoritative (fail-closed), and avoid registering two hooks with overlapping matchers that can disagree — narrow the matchers instead.
+- **Conflicting decisions use restrictive precedence.** Current Claude Code resolves `deny` before `defer`, `ask`, and `allow`. Still avoid overlapping hooks that disagree: narrow matchers so the effective rule is reviewable, and test the merged configuration rather than relying on one hook in isolation.
 - **Settings precedence** (per [code.claude.com/docs/en/settings](https://code.claude.com/docs/en/settings), re-verified 2026-07-11): managed (org) policy > CLI flags > project `.claude/settings.local.json` > project `.claude/settings.json` > user `~/.claude/settings.json`. This corrects an earlier version of this skill, which put `.claude/settings.local.json` last — it actually overrides both project and user settings, not the reverse. Two more hook-bearing scopes exist beyond these four: plugin `hooks/hooks.json` (active whenever the plugin is enabled) and skill/agent frontmatter (active only while that component is active). Hooks from every scope merge and run together rather than override each other — a broader-scoped hook does not silently replace a narrower one — so this ordering mainly governs `disableAllHooks` and single-value settings conflicts, not whether a given hook fires.
 - **`allowManagedHooksOnly`**: an enterprise admin can set this in managed settings to block all user/project/plugin hooks except those bundled with plugins force-enabled via managed `enabledPlugins`. If a hook you registered mysteriously stops firing in a managed environment, check this first before debugging the hook script.
 - **Scoping a hook without a shell condition**: tool-event hooks (`PreToolUse` etc.) accept an `if` field — a permission-rule string like `"if": "Bash(git *)"` — to narrow when a handler fires beyond what `matcher` alone expresses. Prefer this over duplicating the same logic inside the script.
@@ -412,7 +413,6 @@ Third-party hooks worth knowing about, treat as community-sourced (verify proven
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

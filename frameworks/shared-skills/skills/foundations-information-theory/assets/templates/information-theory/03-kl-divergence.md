@@ -2,7 +2,7 @@
 
 ## Definition
 
-**Kullback-Leibler (KL) divergence** from distribution Q to distribution P:
+**Kullback-Leibler (KL) divergence** of numerator distribution P relative to denominator/reference Q:
 
 ```
 D_KL(P ‖ Q) = Σ_{x} p(x) log [ p(x) / q(x) ]      [discrete]
@@ -13,7 +13,7 @@ Properties:
 - D_KL(P‖Q) ≥ 0 always (Gibbs inequality / non-negativity)
 - D_KL(P‖Q) = 0 iff P = Q almost everywhere
 - **Asymmetric**: D_KL(P‖Q) ≠ D_KL(Q‖P) in general
-- **Undefined** when Q(x) = 0 and P(x) > 0 (forward KL is infinite; reverse KL avoids this)
+- **Infinite** when Q(x) = 0 and P(x) > 0. Reversal changes the question and can itself be infinite when P lacks Q support
 - Not a metric (violates triangle inequality and symmetry)
 
 **Reverse KL**: D_KL(Q‖P) — penalizes Q for assigning mass where P assigns none.
@@ -22,7 +22,7 @@ Properties:
 
 ```
 JSD(P‖Q) = ½ D_KL(P‖M) + ½ D_KL(Q‖M)   where M = ½(P+Q)
-JSD ∈ [0, log 2] (base-2) or [0, 1] (base-e after normalizing)
+Unnormalized JSD ∈ [0, 1] bits (base 2), or [0, ln(2)] nats (base e). Dividing the nats result by ln(2) normalizes it to [0,1]
 sqrt(JSD) is a proper metric
 ```
 
@@ -36,7 +36,7 @@ sqrt(JSD) is a proper metric
 
 ## When to Use
 
-- **RLHF / policy regularization**: D_KL(π‖π_ref) penalizes the policy for diverging from the reference. Forward KL typically used; direction must match the optimization objective.
+- **RLHF / policy regularization**: D_KL(π‖π_ref) penalizes the policy for diverging from the reference. Use the explicit numerator and denominator; with the optimized policy as approximation to a fixed target, this is reverse-KL-style regularization. The names forward/reverse depend on assigned roles.
 - **Variational inference (VAE, diffusion)**: ELBO = E[log p(x|z)] − D_KL(q(z|x)‖p(z)); reverse KL between approximate and prior posterior.
 - **Hypothesis testing**: Chernoff-Stein lemma: error exponents in binary hypothesis tests are D_KL(P₁‖P₀).
 - **Distribution shift monitoring**: D_KL(P_current‖P_reference) tracks how far a live distribution has drifted from baseline.
@@ -67,9 +67,9 @@ sqrt(JSD) is a proper metric
 ## Failure Modes
 
 1. **Asymmetry trap**: Using D_KL as a symmetric "distance." D_KL(P‖Q) and D_KL(Q‖P) can differ dramatically, especially when one distribution has narrow support. Always specify direction explicitly; use JSD for symmetric needs.
-2. **Zero-probability singularity**: If Q(x)=0 for any x where P(x)>0, forward D_KL(P‖Q)=∞. Mitigation: add-ε smoothing (Laplace), or switch to reverse KL, or use JSD (which uses the mixture M and is always finite for any P,Q with finite support).
+2. **Zero-probability singularity**: If Q(x)=0 for any x where P(x)>0, forward D_KL(P‖Q)=∞. Mitigation: add-ε smoothing (Laplace), or use JSD; reverse KL answers a different question and requires its own support check. JSD uses the mixture M, which covers both supports and makes its terms finite for finite discrete PMFs.
 3. **KL ≠ perceptual distance**: High KL does not imply perceptually large difference. For natural images or language, Wasserstein/Earth-Mover distance is often more aligned with perceptual similarity.
-4. **Mixing forward and reverse in the same system**: RLHF typically minimizes D_KL(π‖π_ref) (forward, penalizing deviation); VAE minimizes D_KL(q‖p) (reverse, mode-seeking). Swapping direction silently changes optimization behavior.
+4. **Mixing forward and reverse in the same system**: RLHF commonly penalizes D_KL(π‖π_ref); VAE uses D_KL(q‖p). Both place the optimized approximation in the numerator relative to a fixed reference/target. Swapping direction silently changes optimization behavior.
 5. **Numerical underflow in log-space**: For very small p(x) or q(x), compute KL in log-space: Σ exp(log_p) · (log_p − log_q). Never divide raw probability values and then take log.
 
 ---
@@ -84,9 +84,9 @@ A language model π is fine-tuned from π_ref. The RLHF objective:
 maximize E[r(x)] − β · D_KL(π ‖ π_ref)
 ```
 
-Using forward D_KL(π‖π_ref): penalizes π for assigning mass to tokens π_ref would assign near-zero probability. This discourages mode collapse away from the reference distribution.
+Using D_KL(π‖π_ref): penalizes π for assigning mass to tokens π_ref would assign near-zero probability. This constrains mass on reference-unlikely tokens but does not ensure coverage of every reference mode.
 
-Swapping to D_KL(π_ref‖π): the gradient signal would instead penalize π_ref for assigning mass to tokens π misses — which is not the intent; π_ref is fixed during fine-tuning.
+Swapping to D_KL(π_ref‖π): the gradient with respect to optimized π would penalize missing reference mass. π_ref remains fixed; reversing arguments changes which discrepancy is costly.
 
 **Distribution shift detection**
 

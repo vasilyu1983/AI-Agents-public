@@ -101,6 +101,9 @@ Before committing to a BaaS platform, verify:
 - [ ] Compliance requirements mapped: no pending compliance gap that requires custom service boundaries
 - [ ] Operational budget confirmed: self-hosted option has budget for upgrades, backups, monitoring, secrets rotation
 - [ ] Server-owned writes identified: writes that must not originate from client code are protected at the platform layer
+- [ ] Exit proof scaled to lock-in and consequence: always inventory exportability, stable IDs, and platform dependencies; sample-export material data, identities, and files for ordinary selection; require a timed neutral-target restore only for a material production commitment or when switching risk decides the choice
+
+An exit diagram is not proof of portability. Keep stable application-owned IDs across auth and data, inventory platform-specific SDK calls, and record what cannot be exported automatically and who owns the manual step. Use external restore infrastructure only when it is within the authorized task and the proof is proportionate to the decision.
 
 ## Known Traps
 
@@ -192,6 +195,6 @@ Recipes keyed to platform-selection or integration moments. Each lists the short
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

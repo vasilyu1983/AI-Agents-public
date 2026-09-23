@@ -2,8 +2,8 @@
 name: foundations-distributed-systems
 description: Distributed-systems primitives for CAP/PACELC, FLP, Paxos, Raft, clocks, CRDTs, leases, quorums, and broadcast protocols. Use when designing coordination.
 compatibility: Portable core only.
-version: "1.2"
-last_validated: 2026-08-14
+version: "1.3"
+last_validated: 2026-09-17
 ---
 
 # Distributed Systems Foundations
@@ -20,7 +20,7 @@ last_validated: 2026-08-14
 - Multi-region or multi-AZ deployment with failover/quorum requirements
 
 **Skip and use simpler alternatives when:**
-- Single-node system, single writer — none of these primitives apply
+- No coordination, retry/ambiguous-completion, durability, or causal-order question exists. A single node or single writer alone is not a skip condition: a committed effect followed by a lost response can still be duplicated by a serial retry.
 - Question is about throughput/latency under load — use foundations-queueing-theory
 - Question is about availability/SLO budget — use foundations-reliability-theory
 - "We don't have a partition problem" — verify by looking at past incidents; if true, simpler replication patterns suffice
@@ -145,7 +145,7 @@ Load [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-tr
 | Claiming "exactly once" delivery without idempotency | No transport layer provides exactly-once semantics end-to-end. At-least-once with deduplication is the only tractable pattern. Declaring exactly-once in the protocol interface creates a false contract. | Design receivers as idempotent. Use an idempotency key and a deduplicated state store (#7). Combine with at-least-once delivery. |
 | Leader-only writes without fencing tokens | A deposed leader that has not yet learned about its demotion (e.g. due to a GC pause or a slow network) can continue to accept writes, causing split-brain corruption. | Issue a monotonically increasing fencing token with each lease (#8). Storage must reject writes with a stale token regardless of what the writer believes. |
 | CRDTs with non-commutative operations | CRDTs guarantee convergence only when merge is commutative, associative, and idempotent. Encoding an operation that does not commute (e.g. subtract-then-add vs. add-then-subtract) breaks the convergence guarantee. | Model the state as a semilattice where merge is the join. Use G-Counter, PN-Counter, OR-Set, or LWW-Register depending on the operation set (#6). |
-| Quorum reads without quorum write coordination | Reading from R replicas guarantees seeing the latest write only when R + W > N. Relaxing writes to W = 1 while reading from R = 1 means the latest value may never be in the intersection. | Set W and R such that W + R > N (#9). For strong consistency, use W = majority and R = majority. |
+| Quorum reads without quorum write coordination | R + W > N gives intersection on a fixed replica set, not linearizability by itself. Concurrent/partial writes, version selection and membership changes can still violate latest-read claims. | Specify an atomic-register/consensus read-write protocol, durable acknowledgements, version ordering and safe reconfiguration (#9); test execution histories. |
 | Causal consistency without happens-before tracking | Relying on wall-clock timestamps to enforce causal order causes reads to see writes out of causal sequence when clocks drift. | Attach a vector clock or logical timestamp to every write (#5, #10). Readers use the vector clock to enforce causal order before exposing data. |
 | Assuming Paxos/Raft guarantees liveness unconditionally | FLP proves that no deterministic consensus protocol can guarantee both safety and termination in an asynchronous network with even one crash fault. Liveness requires a partial-synchrony assumption. | Acknowledge the partial-synchrony assumption explicitly (#2, #3, #4). Add heartbeat and leader-election timeouts calibrated to the actual network model. |
 | Single-leader bottleneck in read-heavy WAN workloads | Multi-Paxos and Raft route all reads through the leader, creating a bottleneck in read-heavy or geographically distributed workloads. | For balanced or read-heavy WAN workloads, consider Pineapple-style any-node serving (NSDI 2025): unifies Multi-Paxos with ABD atomic registers via logical timestamps, allowing any node to serve reads and writes with >50% median latency reduction vs. Raft. Preferred over EPaxos when tail latency matters (EPaxos Revisited, NSDI 2021, showed EPaxos tail latency is 4x worse than Multi-Paxos). Reference: Bantikyan et al. 2025. Kill criteria: drop in write-dominated workloads (extra round on write path) or if leader instability is not the bottleneck. Where replacing the protocol is not an option, Jetpack (OSDI 2026, Tang, Zhang, Shen, Shi, Mu) retrofits a 1-RTT fast path onto an *existing* consensus protocol — commands race the fast and original paths, and the original path is forced to honour whichever decision commits — cutting average commit latency by up to 60% across six systems in a 10-datacentre AWS deployment. Its stated hazard is the one to audit in any home-grown fast path: promises made during stable operation can silently become invalid across a view change. |
@@ -268,25 +268,25 @@ The 2025–2026 Jepsen reports are worth reading as a set, because the failure p
 **When to add CRDTs (#6)**: If the shared state supports a commutative merge (e.g. counters, sets, last-write-wins register), replace quorum coordination with CRDT replication to eliminate coordination overhead entirely.
 
 **Inputs:** N (total replica count across regions), W (write quorum size), R (read quorum size), lease duration (ms), latency SLO for writes (p99 ms), partition tolerance requirement (AZ-failure count), idempotency key schema.
-**Rules:** Strong consistency requires W + R > N; set W = ⌊N/2⌋+1 (majority) for write durability; set R = 1 for read-heavy paths if W = N; lease duration must be shorter than the SLO for detecting a deposed coordinator; use CRDT replication when state supports commutative merge and coordination overhead exceeds the latency SLO.
+**Rules:** For a fixed-set quorum design, W + R > N provides intersection, not a complete strong-consistency guarantee; choose durable acknowledgement and read/write ordering from the protocol. W = majority addresses replica-count failures only with durability and safe elections; R = 1 with W = N still needs version/concurrency handling; lease duration must be shorter than the SLO for detecting a deposed coordinator; use CRDT replication when state supports commutative merge and coordination overhead exceeds the latency SLO.
 **Outputs:** Recommended (N, W, R) tuple, lease duration, expected write p99 latency per region, maximum AZ-failure tolerance, flag indicating whether CRDT replacement is viable.
 
 ---
 
 ### Exactly-once receiver
 
-**Goal**: Deliver a message exactly once to application logic despite at-least-once transport semantics.
+**Goal**: Commit one business effect within a stated atomicity boundary despite at-least-once delivery; reconcile external effects when that boundary cannot include the provider.
 
 **Stack**:
-1. Idempotent receiver (#7) — application operation is idempotent by design (pure function of inputs, no hidden state mutation).
-2. Idempotency key + dedupe store — persistent log of processed keys; reject duplicates before executing.
+1. Idempotent receiver (#7) — application operation is idempotent or commits its state mutation and dedupe result atomically.
+2. Idempotency key + dedupe store — atomically reserve/commit the business operation and cached result; a lookup alone is not atomic with execution.
 3. At-least-once delivery — transport retries until acknowledged; the receiver's idempotency makes retries safe.
 
 **When to add Raft (#4)**: If the dedupe store itself must be replicated, use a Raft-backed key-value store so the dedupe log survives node failures without split-brain.
 
 **Inputs:** Idempotency key schema (operation type + client ID + sequence number), dedupe store type (in-memory / persistent / replicated), at-least-once transport (retry count, backoff policy), expected duplicate rate (%), required exactly-once guarantee scope (single node vs. cluster).
-**Rules:** Receiver must be a pure function of its inputs with no hidden state mutations; every operation must be looked up in the dedupe store before execution; duplicate = same key → return cached result, do not re-execute; dedupe store must outlive the longest possible retry window; if the dedupe store is replicated, use Raft-backed KV so the log is durable across node failures.
-**Outputs:** Idempotency key format specification, dedupe store schema (key → result + TTL), confirmation that the receiver is side-effect-free, recommended dedupe TTL relative to retry window, decision on whether Raft-backed replication is required.
+**Rules:** Define the commit boundary and concurrent-duplicate behavior. Commit local effect plus dedupe result in one transaction, or use stable provider idempotency and status reconciliation for external effects. Same key plus different payload must fail; duplicate completed operation returns its cached result. Retention must cover replay, and replicated durability does not make an external call atomic. Follow [`references/execution-histories.md`](references/execution-histories.md).
+**Outputs:** Idempotency key format specification, dedupe store schema (key → result + TTL), atomicity scope and crash-window reconciliation evidence, recommended dedupe TTL relative to retry window, decision on whether Raft-backed replication is required.
 
 ---
 
@@ -299,10 +299,10 @@ The 2025–2026 Jepsen reports are worth reading as a set, because the failure p
 2. Fencing tokens (#8) — monotonically increasing integer issued at each lease grant; storage layer rejects writes with a token lower than the maximum seen.
 3. Paxos (#3) or Raft (#4) termination — after a partition heals, run a full election round before granting a new lease; never grant a new lease without quorum acknowledgement.
 
-**When to add Quorums (#9)**: For storage nodes that cannot run Paxos/Raft, enforce W > N/2 so no two disjoint quorums can each accept a write.
+**When to add Quorums (#9)**: W > N/2 gives intersecting write quorums under fixed membership, but needs protocol-specific ordering/version validation to establish single-winner safety; it is not a substitute for consensus.
 
 **Inputs:** N (cluster node count), AZ layout (nodes per AZ), lease duration (ms), fencing token current value, election timeout range (ms), network round-trip time estimate (ms), write latency SLO (p99 ms).
-**Rules:** Quorum = ⌊N/2⌋+1; a new lease may only be granted after a full election round with quorum acknowledgement; fencing token must be monotonically increasing and stored durably; storage must reject any write carrying a token ≤ max_seen_token; lose any AZ → remaining nodes must still meet quorum for the cluster to accept writes; for non-Raft storage enforce W > N/2.
+**Rules:** Quorum = ⌊N/2⌋+1; a new lease may only be granted after a full election round with quorum acknowledgement; fencing token must be monotonically increasing and stored durably; storage must atomically reject a token strictly below max_seen_token and persist the updated maximum with the write; repeated valid writes at the same epoch remain allowed, with operation dedupe checked separately; lose any AZ → remaining nodes must still meet quorum for the cluster to accept writes; for non-Raft storage document the protocol establishing ordering and the invariant; quorum intersection alone is insufficient.
 **Outputs:** Quorum size, recommended AZ node distribution, fencing token increment policy, write p99 latency estimate (network RTT + leader processing), maximum single-AZ failure tolerance, flag indicating whether quorum enforcement alone is sufficient or Paxos/Raft is required.
 
 **Worked example:** 5-node Raft cluster, single-AZ failure tolerance. Quorum = ⌊5/2⌋+1 = 3. Deploy: AZ-A holds 2 nodes, AZ-B holds 2, AZ-C holds 1. Lose AZ-A → 3 nodes alive → quorum holds, cluster available. Lose AZ-B + AZ-C → 2 nodes alive → below quorum, cluster unavailable (correct: safety preserved). Fencing token increments on each new lease grant; a deposed AZ-A leader resuming after a GC pause sends token=4, storage has seen token=5, write rejected. Write latency budget: 1 RTT leader→client ack waits for fastest 2 followers: p50 = 8 ms, p99 = 25 ms, plus 5 ms leader processing → write p99 ≈ 30 ms. Shrinking to a 3-node cluster (quorum = 2) drops write p99 to ~13 ms but loses tolerance for any two-node AZ failure — exactly the availability/latency trade-off PACELC quantifies.
@@ -326,23 +326,23 @@ The 2025–2026 Jepsen reports are worth reading as a set, because the failure p
 
 ### AI-agent pipeline: idempotent tool calls and shared CRDT state
 
-**Goal**: Build a multi-agent pipeline where tool calls are safe to retry (exactly-once side effects) and shared document/workspace state converges without coordination locks.
+**Goal**: Build a multi-agent pipeline where tool calls use bounded retry and dedupe/reconciliation contracts for business effects and shared document/workspace state converges without coordination locks.
 
 **Stack**:
-1. **Idempotency (#7)** — assign a deterministic idempotency key to every agent tool call (derived from `agent_id + step_id + input_hash`). A durable-execution runtime journals the key before execution and replays the journal on crash, making retries safe without application-level dedupe code. The runtimes differ in where durability comes from, and that difference is the selection criterion: Temporal keeps an event history in its own service (most mature, best fit when a workflow must survive days or weeks); Restate replays a journal against virtual objects, giving exactly-once re-invocation without the caller supplying idempotency keys; DBOS commits the step's writes and its durability record in the *same* Postgres transaction, which is the only one of the three that gets transactional exactly-once for free — and only when the step writes to that same database. Verify current positioning before committing; this tier moves fast.
+1. **Idempotency (#7)** — persist one stable business-operation ID before dispatch and reuse it across transport retries, recovery, and agent reassignment. Distinct authorized operations need distinct IDs even with identical arguments; a hash of inputs or agent/step identity alone is insufficient. Durable workflow journals preserve execution history but cannot atomically commit an unrelated provider's side effect. An activity may execute again after provider acceptance and before local completion persistence. Require provider idempotency/status reconciliation, or one database transaction containing both local effect and dedupe result. Select a runtime using its verified transaction boundary rather than a blanket exactly-once claim. [Temporal Activity documentation](https://docs.temporal.io/activities) recommends idempotent activities to prevent duplicate side effects (checked 2026-09-17).
 2. **Leases and Fencing (#8)** — when an agent must hold exclusive control over a resource (e.g. a file section or an external API quota slot), issue a time-bounded lease with a fencing token. The resource layer rejects tool calls carrying a stale token, preventing a crashed-and-recovered agent from double-applying writes.
 3. **CRDTs (#6)** — model the shared workspace (document, task list, code buffer) as a CRDT (RGA for rich text, OR-Set for task sets, LWW-Register for key-value slots). Agents write as CRDT peers; strong eventual consistency guarantees convergence across concurrent edits without a consensus round. Production implementations (2026): Yjs (RGA) remains the ecosystem-dominant default with the largest ecosystem of bindings and providers. Automerge 3.0 (July 2025) closed most of the historical performance gap by using its columnar format in memory as well as on disk — a >10× memory reduction, and load times for long-history documents cut from hours to seconds — while keeping the Automerge 2 file format and adding branching/merge/attribution as product-visible features; the `Text` class was removed in that release (strings are collaborative by default), so it is a real migration, not a drop-in bump. Loro (Rust) targets rich-text and movable-tree cases the other two handle awkwardly; verify production maturity before choosing it over Yjs/Automerge. Treat all three version claims as volatile — check the project's own release notes.
 
 **Encrypted collaboration:** end-to-end encryption and server-side CRDT processing are in direct tension — an encrypted document is opaque to the server that would merge it. Acumen (OSDI 2026) is the first system providing *strong snapshot consistency* over CRDTs, letting untrusted clients produce verifiable snapshots for inviting new collaborators while preserving confidentiality, integrity, and fork-causal consistency, via cryptographic accumulators and a secure garbage-collection mechanism (tombstone GC is the hard part under encryption — see the CRDT tombstone trap). Evaluated at 25 concurrent typists.
 
-**Why classical concurrency control transfers badly to agents (2026).** Where multiple agents mutate shared resources and CRDT merge is not applicable, the instinct is 2PL or OCC. Both degrade badly here for structural reasons worth knowing before you build: an agent "transaction" spans a long inference, its read set is broad and opaque (you cannot enumerate what the model attended to), and its writes take effect immediately through tools rather than being buffered until commit — so there is no clean point to validate or roll back. CoAgent (arXiv:2606.15376, Lyu, Zhang, Wu, Wei, Chen, June 2026) responds by fixing a serialization order at launch, filtering each read to that order, and applying writes speculatively in place over undoable tools, reporting near-serial correctness at ~1.4× speedup and substantially beating 2PL/OCC under contention. Preliminary and unreplicated — the transferable point is the diagnosis, not the protocol: **if you are reaching for locks across agents, first check whether the tools are undoable and whether a pre-agreed order would remove the conflict.**
+**Why classical concurrency control transfers badly to agents (2026).** Where multiple agents mutate shared resources and CRDT merge is not applicable, the instinct is 2PL or OCC. Both degrade badly here for structural reasons worth knowing before you build: an agent "transaction" spans a long inference, its read set is broad and opaque (you cannot enumerate what the model attended to), and its writes take effect immediately through tools rather than being buffered until commit — so there is no clean point to validate or roll back. CoAgent (arXiv:2606.15376, Lyu, Zhang, Wu, Wei, Chen, June 2026) responds by fixing a serialization order at launch, filtering each read to that order, and applying writes speculatively in place over undoable tools, reporting correctness within 5% of serial execution and 1.4× speedup on its ten contended workloads (abstract and §1, primary HTML rechecked 2026-09-17), outperforming its evaluated 2PL/OCC baselines. Preliminary and unreplicated — the transferable point is the diagnosis, not the protocol: **if you are reaching for locks across agents, first check whether the tools are undoable and whether a pre-agreed order would remove the conflict.**
 
 **Kill criteria for CRDTs:** if the shared state has non-commutative invariants (e.g. a unique-name constraint, a capacity limit, a transaction balance), replace CRDTs with consensus-backed coordination (#3/#4) for those invariants. CRDTs are correct only when merge semantics match intended semantics.
 
 **Kill criteria for durable execution:** if tool calls are pure reads with no side effects, no idempotency infrastructure is needed — the retry is naturally safe.
 
 **Inputs:** Agent count, tool call rate (calls/s), durable-execution backend (Temporal/Restate/custom), shared state type (text, task list, KV), CRDT type, lease duration (ms), expected retry rate (%).
-**Rules:** Idempotency key must be derived deterministically from inputs, not from server-side randomness; journal the key before execution, not after; dedupe TTL ≥ max retry window; CRDT merge must be commutative for all operations in the operation set; fencing token must be stored durably and enforced at the resource boundary.
+**Rules:** Persist a stable business-operation key before dispatch (a generated unique ID is valid if reused); record payload binding and in-progress/completed states; journal-before-execution alone is insufficient for external effects; dedupe TTL ≥ max retry window; CRDT merge must be commutative for all operations in the operation set; fencing token must be stored durably and enforced at the resource boundary.
 **Outputs:** Idempotency key schema, journal/dedupe backend choice, CRDT type for each shared state segment, lease duration recommendation, flag indicating which invariants (if any) require consensus instead of CRDT.
 
 ---
@@ -351,7 +351,7 @@ The 2025–2026 Jepsen reports are worth reading as a set, because the failure p
 
 **Goal**: Serve LLM inference requests meeting both Time-To-First-Token (TTFT) and Inter-Token Latency (ITL) SLOs simultaneously — which co-located deployments cannot independently optimise.
 
-**Background**: Prefill (prompt processing) is compute-intensive and batching-unfriendly; decode (token generation) is memory-bandwidth-bound. Co-location forces a trade-off between TTFT and ITL that cannot be resolved without disaggregation. DistServe (OSDI 2024, arXiv:2401.09670) demonstrated 7.4× goodput improvement and 12.6× tighter SLO vs. co-located state-of-the-art. Production adoption: Meta, LinkedIn, Mistral, Hugging Face via vLLM.
+**Background**: Prefill (prompt processing) is compute-intensive and batching-unfriendly; decode (token generation) is memory-bandwidth-bound. Co-location can create prefill/decode interference; batching and scheduling alternatives also matter. DistServe (OSDI 2024, arXiv:2401.09670, abstract and §6 rechecked 2026-09-17) reported up to 7.4× higher served request rate OR 12.6× tighter SLO versus its evaluated systems while meeting latency requirements for over 90% of requests. These are workload-specific maxima, not simultaneous universal improvements or evidence of adoption by particular companies.
 
 **Stack**:
 1. **Idempotency (#7)** — KV-cache transfer between prefill and decode pools may be retried; receiving decode workers must handle duplicate cache chunks without re-processing.
@@ -375,6 +375,13 @@ The 2025–2026 Jepsen reports are worth reading as a set, because the failure p
 5. Check the [Anti-Patterns](#anti-patterns) table before shipping the design.
 6. Decide how the resulting claim will be *falsified*, not just reviewed — see [Testing](#testing-deterministic-simulation-and-fault-injection). Choose the fault-injection approach before implementation, since deterministic simulation constrains the code structure.
 
+For every advertised guarantee, keep a **guarantee ledger** with one row per
+property: `operation scope | safety/liveness property | fault model | timing
+model | durability boundary | evidence`. “Consensus-backed,” “exactly once,”
+and “available” are incomplete claims until the row identifies which failures
+are tolerated and which property survives them. Test each row independently;
+evidence for safety does not establish liveness.
+
 ---
 
 ## ASCII Flow
@@ -393,6 +400,8 @@ Distributed-system correctness problem
 ---
 
 ## Navigation
+
+- [Allowed/forbidden histories and end-to-end receiver contract](references/execution-histories.md)
 
 - Per-primitive playbooks: [`assets/templates/distributed-systems/`](assets/templates/distributed-systems/) (one file per primitive)
 - Composition guide: [`assets/templates/distributed-systems/README.md`](assets/templates/distributed-systems/README.md)
@@ -432,6 +441,6 @@ _Consumer skills that apply these primitives in domain-specific recipes will lin
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

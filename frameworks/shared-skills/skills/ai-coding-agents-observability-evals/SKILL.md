@@ -87,14 +87,11 @@ release decision
 - Use eval results to block releases when quality or cost drift exceeds explicit thresholds.
 - Hash or redact user-identifying plugin or extension data before it becomes telemetry dimensions.
 
-## Scratch-Rebuild Coverage
+## Recovery And Budget Evidence
 
-- Coverage strength:
-  strong for trace correlation, replay-safe storage, multi-layer grading, release-gate framing, and the need to trace recovery-class events
-- Missing for faithful reproduction:
-  low-cardinality telemetry discipline, reconnect and recovery event classes, approval-cancel telemetry, task-budget-versus-token-budget accounting, and incident-first trace queries need more explicit treatment
-- Required additions:
-  document trace events for reconnect, cancellation, fallback activation, recovery class, worker escalation, and plugin lifecycle changes, plus the eval rubric fields that map those events back to product quality without exploding metric cardinality
+Emit recovery events as typed state transitions rather than free-form errors. The minimum set is `reconnect_started|succeeded|failed`, `control_cancelled`, `fallback_activated`, `worker_escalated`, and `plugin_loaded|reloaded|disabled`. Each event carries stable session/turn/worker/plugin IDs, attempt number, bounded reason class, prior and next state, and duration. Keep raw payloads and detailed provider errors in redacted traces; metrics receive only the bounded event and reason classes.
+
+Track task budget, context/input tokens, output tokens, reasoning tokens when exposed, tool calls, wall time, and external spend as separate fields. A task may exhaust one while retaining the others, and some runtimes enforce only a subset. Record `limit_source`, `limit_value`, `observed_value`, and terminal outcome so a recovered run is distinguishable from a failure or user cancellation. Evals should grade recovery correctness, duplicate-side-effect avoidance, cancellation latency, and whether the final status matches the trace.
 
 ## Build Order
 
@@ -259,6 +256,6 @@ These are the calls a strong operator makes differently from a team that just wi
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

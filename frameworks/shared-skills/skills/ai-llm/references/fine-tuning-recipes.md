@@ -436,7 +436,7 @@ Escalation order once all-linear targets, DoRA, and a rank bump are exhausted �
 
 ### Tokenizer/Encoding
 
-- Decide BPE vs unigram for tokenization
+- Decide BPE vs unigram for tokenization — method tradeoffs, vocab sizing, and fertility/compression evaluation live in `ai-pretraining` → references/bpe-tokenizer.md, "Tokenizer Landscape"
 - Cover domain-specific tokens (code, medical, legal)
 - Avoid excessive splits on code/PII markers
 - Validate tokenizer on domain corpus sample

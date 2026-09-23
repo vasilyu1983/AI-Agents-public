@@ -26,8 +26,9 @@ If key context is missing, ask for: SLOs/SLAs, critical user journeys, infrastru
 
 1. Establish realistic baselines, traffic models, and budgets.
 2. Choose the right performance test type and toolchain for the risk.
-3. Run the scenarios against representative environments with monitoring active.
-4. Analyze bottlenecks, then convert findings into budgets, profiles, and CI gates.
+3. Run warm-up separately, then repeat the scenarios against representative environments with monitoring active; preserve raw results rather than selecting the best run.
+4. Compare only runs whose workload, data volume, cache state, build, infrastructure allocation, generator capacity, network path, and telemetry query are known. Report a distribution or confidence interval so run noise is visible.
+5. Analyze bottlenecks, then convert findings into budgets, profiles, and CI gates. Label evidence `synthetic`, `representative`, or `production-observed`; a budget checker validates supplied measurements, not environment parity or capacity beyond the tested concurrency, duration, and faults.
 
 ## Inputs to Gather
 
@@ -67,7 +68,7 @@ When in doubt, the cheapest sanity check is Little's Law arithmetic (see [refere
 
 | Tool | Language | Strengths | Best For |
 |------|----------|-----------|----------|
-| k6 | JavaScript | CLI-first, built-in thresholds, extensions; **k6 2.0** (GA 2026-05-11) adds a Playwright-compatible browser module, `expect()` assertion API, and AI commands (`k6 x agent`, `k6 x mcp`, `k6 x docs`, `k6 x explore`); the k6 Operator reached 1.0 (stable Kubernetes distributed execution). Latest patch as of this writing is **v2.1.0** (2026-06-30, opt-in feature flags, no breaking changes) — re-check `github.com/grafana/k6/releases` before pinning a version in CI. | API + browser load testing, CI gates, agent-assisted scripting |
+| k6 | JavaScript | CLI-first, built-in thresholds, extensions; **k6 2.0** (GA 2026-05-11) adds a Playwright-compatible browser module, `expect()` assertion API, and AI commands (`k6 x agent`, `k6 x mcp`, `k6 x docs`, `k6 x explore`); the k6 Operator reached 1.0 (stable Kubernetes distributed execution). For a new pin, use the current stable release and verify it at `github.com/grafana/k6/releases`. | API + browser load testing, CI gates, agent-assisted scripting |
 | Locust | Python | Distributed, flexible, real Python scripts | Complex scenarios, Python teams |
 | Artillery | YAML + JS | Declarative, good for APIs, scenario chaining | API load testing, quick setup |
 | Gatling | Java/Kotlin/Scala/JS/TS | Strong reporting, enterprise support; polyglot since 3.12 (GraalVM) | JVM teams, enterprise |
@@ -293,12 +294,9 @@ Performance testing request
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

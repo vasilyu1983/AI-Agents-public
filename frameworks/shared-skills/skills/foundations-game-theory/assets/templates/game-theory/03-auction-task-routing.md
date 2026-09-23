@@ -70,5 +70,5 @@ Skip this mechanism when:
 
 ## Related
 
-- [`../../../references/team-selection-guide.md`](../../../references/team-selection-guide.md) — static routing layer the auction supplements
+- [`../../../../agents-subagents/references/team-selection-guide.md`](../../../../agents-subagents/references/team-selection-guide.md) — static routing layer the auction supplements
 - [`04-shapley-contribution.md`](04-shapley-contribution.md) — use historical Shapley scores as priors for bid weighting

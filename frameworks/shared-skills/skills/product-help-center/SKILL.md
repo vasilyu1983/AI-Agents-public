@@ -111,6 +111,18 @@ See [platform-guides.md](references/platform-guides.md) for current platform-fit
 5. Knowledge freshness matters as much as model quality.
 6. Support AI needs QA, monitoring, and rollback paths.
 
+### Answer Contract Before Retrieval Design
+
+Define the answer contract for each high-risk intent before choosing chunks, embeddings, or a support model:
+
+- canonical source and source owner;
+- applicable product version, plan, role, locale, and effective date;
+- the exact exception or precedence rule when two sources disagree;
+- whether the answer may be summarized, must be quoted exactly, or must escalate;
+- the observable completion state and evidence captured after any tool action.
+
+If two approved sources conflict, freshness alone does not choose the winner. Apply the recorded authority, scope, effective period, and precedence rule. When those fields identify a governing source, answer or act from it, disclose the conflict, queue the stale lower-authority source for correction, and preserve the action evidence. Pause only the affected transaction when precedence does not resolve the conflict, the governing source is outside scope or period, or residual uncertainty is material to an irreversible action. A retrieval system that returns a plausible passage without this contract is not ready for support automation.
+
 ### AI-Consumable Docs Principles
 
 - Publish stable canonical URLs and clear page titles.
@@ -125,8 +137,8 @@ See [ai-consumable-docs.md](references/ai-consumable-docs.md) for the AI-docs la
 
 Help center content is a primary source for AI answer engines (ChatGPT, Perplexity, Gemini, Claude). Two complementary layers improve citation and retrieval:
 
-- **Page-level markup**: use `FAQPage`, `HowTo`, and `Article` schema.org types on help articles. FAQs and step-by-step lists are the formats AI models favour most; explicit schema reinforces what the content is.
-- **Site-level signaling**: publish `llms.txt` and `llms-full.txt` at a well-known URL to indicate canonical structure and priority pages to AI crawlers. As of mid-2026, adoption is growing but support is uneven — treat it as a fast-growing signal rather than a guaranteed channel.
+- **Page-level markup**: use accurate structured data only where a consuming surface documents support for that type. Google deprecated `HowTo` rich results and limits `FAQPage` rich results largely to authoritative government and health sites; valid markup may still describe content, but do not present it as an AI-citation or ranking lever without engine-specific evidence.
+- **Site-level signaling**: publish `llms.txt` or `llms-full.txt` only for a named consumer that documents or demonstrates use of it. Treat the files as an experimental index, not as proof of crawling, ranking, citation, or model training.
 - **Content shape**: short declarative answers at the top of each article (before procedural detail) improve extraction by AI answer engines. Use exact product names, error strings, and version numbers — AI engines retrieve verbatim matches better than paraphrases.
 - **Canonical hygiene**: one canonical URL per fact; avoid duplicate content across help center and marketing site, which splits AI citation confidence.
 
@@ -292,7 +304,6 @@ Priority source order:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

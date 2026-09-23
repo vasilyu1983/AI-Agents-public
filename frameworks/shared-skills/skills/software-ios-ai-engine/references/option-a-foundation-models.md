@@ -135,18 +135,18 @@ Keep instructions static (cached across turns) and put per-turn variables in the
 
 ## Context-window budgeting
 
-Apple documents the on-device foundation model context window as 4096 tokens per `LanguageModelSession` as of iOS 26 — Apple has stated this ceiling has no near-term path to change, so budget for it, don't wait for it to grow. Budget the whole session, not only the visible user prompt:
+Apple's TN3193 documents a 4096-token context window for the model it describes, but application code should treat that as source context, not a constant. Budget the whole session, not only the visible user prompt:
 
 - instructions and all prompts
 - tool definitions, parameter guides, tool inputs, and tool outputs
 - `@Generable` schemas and `@Guide` descriptions
 - all model responses in the session transcript
 
-**Don't hardcode `4096`.** Since iOS 26.4, `SystemLanguageModel` exposes a `contextSize` property (available context capacity) and a `tokenCount(for:)` method to measure how many tokens a given prompt/instructions/schema will consume — both are `@backDeployed` to every OS version that ships the framework, so there's no reason to keep a magic-number budget check anywhere in the codebase. Query `contextSize` and `tokenCount(for:)` at the point where you assemble the prompt, and treat `.exceededContextWindowSize` as the safety net, not the primary guard.
+**Don't hardcode `4096`.** In SDKs that expose them, `SystemLanguageModel.contextSize` reports available context capacity and `tokenCount(for:)` measures how many tokens an input consumes. Confirm their availability in the target SDK, query them where the prompt is assembled, and treat `LanguageModelError.contextSizeExceeded(_:)` as the safety net rather than the primary guard. The older `LanguageModelSession.GenerationError.exceededContextWindowSize` name belongs to earlier SDK documentation and is deprecated in the current SDK.
 
 For grounded answer bubbles, keep the Option A schema small and feed only the 2-5 highest-value evidence items. If you always need data from retrieval or app state, run that code before the model call and pass the compact result in the prompt instead of exposing it as a tool. Use tool calling only when the model must decide whether or how to call the tool. Remember that tool definitions (name, description, argument schema) are serialized and counted against the same budget the moment a tool is registered on the session — a "short prompt" with three tools can already be tight before the first token generates.
 
-Handle `.exceededContextWindowSize` as a recoverable composer failure: start a new session with a smaller bundle, or fall through to Option B. Do not use `maximumResponseTokens` as the main quality guard; strict caps can produce malformed or partial text.
+Handle `LanguageModelError.contextSizeExceeded(_:)` as a recoverable composer failure: start a new session with a smaller or condensed transcript, or fall through to Option B. Do not use `maximumResponseTokens` as the main quality guard; strict caps can produce malformed or partial text.
 
 ## Anchor validation (glass box around the black box)
 
@@ -267,7 +267,7 @@ Before shipping Option A:
 - [ ] Unavailable cases fall through cleanly to Option B.
 - [ ] `@Generable` schema matches the shared composer contract exactly.
 - [ ] Output validator runs on every answer; failures log and retry exactly once.
-- [ ] Prompt + schema + tools fit the 4096-token session window with headroom.
+- [ ] Prompt + schema + tools fit the runtime `contextSize` with measured response headroom.
 - [ ] Per-locale QA in at least en + one long-string (de/ru) + one non-Latin (ja/ar).
 - [ ] Retry produces a materially different answer (fresh session).
 - [ ] Latency p50 < 300 ms, p95 < 900 ms on target device.

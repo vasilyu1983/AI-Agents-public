@@ -48,8 +48,9 @@ Use this skill to audit documentation as a quality system: discover what should 
 1. Discover services, contracts, runbooks, instruction files, and critical workflows.
 2. Map current docs to the audit model and identify real gaps, duplicates, and stale areas.
 3. Rank the gaps by severity and fix order.
-4. Validate links, runbooks, contracts, and freshness signals with scripts or CI tools.
-5. Produce actionable outputs with owners, status, and next gates.
+4. Validate links, runbooks, contracts, and freshness signals with scripts or CI tools. Label evidence `inventory`, `static`, `executed`, or `operator-validated`; Markdown, links, and command syntax do not prove that a runbook reaches its stated end state.
+5. For executed runbooks, record prerequisites, environment, exact command, observed output, cleanup result, and any destructive or privileged step intentionally left untested.
+6. Produce actionable outputs with owners, status, and next gates.
 
 ## Core Decisions
 
@@ -254,7 +255,6 @@ Docs quality request
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

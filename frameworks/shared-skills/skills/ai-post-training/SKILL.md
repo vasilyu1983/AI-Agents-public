@@ -199,6 +199,10 @@ games the reward while the true objective degrades. Controls:
 
 Depth: [references/over-optimization-and-eval.md](references/over-optimization-and-eval.md).
 
+## Reward Exploit Gate
+
+Before a run, define reward, KL or reference drift, refusal, verbosity, diversity, and task-success bounds. Use a representative development set for checkpoint selection and stopping; rising reward with flat or falling development-set success is a stop signal. Keep a separate locked, blinded true-objective holdout for one final promotion check, or predeclare a tightly limited lockbox-access policy with selection and multiplicity controls. Promote only after adversarial probes target the reward's known shortcuts and a base or SFT control is evaluated with the same decoding budget. Select the checkpoint on the development rule, not automatically the final or highest-reward checkpoint, then report the untouched holdout result.
+
 ## Known Traps
 
 - reaching for PPO/GRPO when **DPO** would do — paying for a reward model + RL loop you don't need
@@ -277,6 +281,6 @@ and Pai's *Designing Large Language Model Applications* (model merging/fusion ta
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

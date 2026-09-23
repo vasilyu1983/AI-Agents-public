@@ -3,6 +3,7 @@
 ## Table of Contents
 
 - [Concept](#concept)
+- [Runnable Contract Workflow](#runnable-contract-workflow)
 - [When to Use](#when-to-use)
 - [Tool Landscape](#tool-landscape)
 - [fast-check (JavaScript / TypeScript)](#fast-check-javascript--typescript)
@@ -14,7 +15,7 @@
 - [Anti-Patterns](#anti-patterns)
 - [Related Resources](#related-resources)
 
-Property-based testing (PBT) replaces hand-crafted example inputs with a generator that produces many random inputs satisfying declared constraints. When a failure is found, the framework shrinks the failing case to the minimal reproducible counterexample. PBT is a high-signal complement to example-based tests: it exercises edge cases and boundary conditions that humans routinely miss.
+Property-based testing (PBT) supplements hand-crafted examples with generators over a declared input domain. Mature frameworks such as Hypothesis also try to shrink generated failures. Preserve a concrete failing example in the test source when it must remain a permanent regression case; a library's internal failure database or replay blob can change across versions.
 
 ---
 
@@ -27,12 +28,57 @@ Example-based test:
 
 Property-based test:
   For all price in [0.01, 999.99] and quantity in [1, 100]
-  total == price * quantity (within floating-point tolerance)
+  total == price * quantity (exactly for Decimal/integer minor units;
+                             within a specified tolerance for binary floats)
   AND total >= price
-  AND total >= quantity
 ```
 
-The generator runs hundreds of inputs automatically. On failure, shrinking produces the smallest failing case.
+`total >= quantity` is not a valid invariant when price can be below `1`: `0.25 * 2 = 0.50`, which is less than the unit count `2`. Compare quantities only when they have the same unit. `total >= price` is valid here because quantity is constrained to a positive integer.
+
+---
+
+## Runnable Contract Workflow
+
+Use the standard-library runner when a project has no property-testing dependency or when you need a portable contract demonstration. It tests any Python adapter that supplies generated cases, property checks, follow-up transformations, and metamorphic relation checks.
+
+Select it for deterministic calculators, parsers, serializers, and equivalent configuration representations. For stateful systems or larger input spaces, translate the same domains and oracles to Hypothesis, fast-check, or jqwik so you gain their generation and shrinking support.
+
+Required adapter inputs:
+
+| Member | Contract |
+|---|---|
+| `ORACLES` | Non-empty mapping from every emitted check name to the author's independent-oracle rationale |
+| `generate(rng)` | Return one finite JSON-serializable case from the valid input domain; depend only on the supplied RNG |
+| `evaluate(case)` | Invoke the system under test and return an observable result that supports defensive copying |
+| `check_properties(case, result)` | Return one or more `{name, ok, detail}` mappings |
+| `transformations(case)` | Return one or more `{name, case}` valid follow-ups |
+| `check_relation(...)` | Return named checks comparing source and follow-up results |
+| `configure_mutation(name)` | Optional negative-control hook used only with `--mutation` |
+
+Start from [the example adapter](../assets/property_contract_example.py). It uses exact decimal arithmetic and covers config parsing plus JSON serialization. Review the adapter first: `--contract` imports and executes local Python code, and this runner does not provide a sandbox. Pass the actual trusted adapter path; the result repeats its resolved path for auditability.
+
+Run from the `qa-testing-strategy` skill directory (an equivalent absolute path works from any directory):
+
+```bash
+python3 scripts/property_contract_runner.py \
+  --contract assets/property_contract_example.py \
+  --seed 20260908 --cases 120 --json
+```
+
+Interpret exit `0` as all sampled checks passing, exit `1` as a reproducible contract failure, and exit `2` as an invalid adapter or command. A pass covers only the generated domain, sampled cases, named properties, and named transformations. It does not prove correctness outside them.
+
+The runner snapshots each case and result before later callbacks, and gives `evaluate`, property checks, transformations, and relation checks separate defensive copies. A target or callback may mutate its copy without rewriting the oracle input or failure artifact. Adapter-level global state is outside that isolation: deterministic case-index replay requires generation and evaluation to avoid cross-case state that changes later outcomes. `ORACLES` records the author's justification; the runner checks that a declaration exists, not that it is logically independent or correct.
+
+On failure, copy the printed `replay_command`; with the same adapter and Python behavior, it regenerates the same case from `seed` and `case_index`. The failure payload also contains the generated case. Promote important counterexamples into fixed unit tests instead of treating pseudorandom replay as a permanent artifact. Verify that the suite can fail by running the documented mutations:
+
+```bash
+python3 scripts/property_contract_runner.py \
+  --contract assets/property_contract_example.py \
+  --seed 20260908 --cases 120 --mutation calculator-add-unit --json
+python3 scripts/test_property_contract_runner.py
+```
+
+The regression test proves the known-correct adapter passes and deliberate calculator, parser, and serialization faults exit `1` and replay identically. The `parser-space-sensitive` mutation passes its source-case property and fails only after the equivalent-representation transformation, so it is a negative control for the metamorphic relation itself. Replace the example adapter with a thin adapter around the user's code; do not copy its example oracles unless they are true business or protocol requirements for that system.
 
 ---
 
@@ -87,15 +133,15 @@ test('JSON round-trip: all serializable values survive serialize/deserialize', (
 ### Numeric invariant
 
 ```typescript
-test('total is always >= unit price and >= quantity', () => {
+test('total equals unit price times quantity and is at least unit price', () => {
   fc.assert(
     fc.property(
       fc.float({ min: 0.01, max: 999.99, noNaN: true }),
       fc.integer({ min: 1, max: 100 }),
       (price, quantity) => {
         const total = computeTotal(price, quantity);
+        expect(total).toBeCloseTo(price * quantity);
         expect(total).toBeGreaterThanOrEqual(price);
-        expect(total).toBeGreaterThanOrEqual(quantity);
       }
     )
   );
@@ -234,7 +280,7 @@ Avoid overly permissive generators (e.g., `fc.string()` for email fields). They 
 
 ## CI Integration
 
-PBT runs are deterministic when a failing seed is logged. fast-check and Hypothesis both print the seed on failure; re-run with that seed to reproduce.
+Capture the tool version, generator code, and replay data with a generated failure. Seeds and internal replay blobs may not reproduce across library or test changes. Keep important counterexamples as explicit examples in source; Hypothesis recommends this rather than relying on its example database or version-specific replay blob for correctness.
 
 **Default CI strategy**: keep `numRuns` / `max_examples` low (100-200) in the standard PR gate. Run high-count sweeps (1000+) nightly or pre-release.
 
@@ -247,7 +293,7 @@ PBT runs are deterministic when a failing seed is logged. fast-check and Hypothe
   run: npx vitest run --reporter=verbose tests/property/
 ```
 
-**Reproducing failures**: fast-check prints the failing seed in the error message. Pass it explicitly:
+**Reproducing failures**: capture the framework's replay information in CI. For fast-check, pass the reported seed and path explicitly:
 
 ```typescript
 fc.assert(fc.property(...), { seed: 1234567890, path: '0' });
@@ -265,10 +311,10 @@ AI-generated code tends to pass example-based tests while failing on edge cases 
 - Floating-point edge cases (NaN, Infinity, negative zero)
 - String encoding edge cases (Unicode, empty, whitespace-only)
 
-PBT is the highest-ROI complement to mutation testing for AI-authored code:
+PBT and mutation testing answer different questions for AI-authored code:
 
-1. Write PBT for any function where the AI authored the implementation.
-2. Run with at least 500 examples before merging.
+1. Add PBT where the implementation has a meaningful universal property or broad structured input domain.
+2. Choose the run count from execution cost and risk; keep the seed, version, and failing example in the evidence.
 3. If PBT finds a failure, do not simply fix the example — update the generator to reliably produce that class of input, then fix the code.
 
 Pair with mutation testing (see [quality-metrics-dashboard.md](./quality-metrics-dashboard.md)): mutation score measures assertion depth, PBT measures input coverage.
@@ -281,7 +327,8 @@ Pair with mutation testing (see [quality-metrics-dashboard.md](./quality-metrics
 |-------------|---------|-----------------|
 | Over-permissive generators | Tests fail on inputs your code will never see | Constrain generators to domain-valid inputs |
 | PBT replacing all example tests | Hard to read; harder to debug specific known regressions | Keep examples for known cases; PBT for universal properties |
-| Not logging failing seeds | Failures not reproducible | fast-check and Hypothesis log seeds automatically; capture in CI artifacts |
+| Relying only on transient replay state | A library upgrade or cache loss can remove the regression | Capture replay data, then promote important failures into explicit examples |
+| A dimensionally invalid invariant | The test rejects correct behavior, such as comparing money total to an item count | Compare like units and prove the property's preconditions |
 | `numRuns = 10000` in every PR gate | Slow feedback loop | Use 100-200 in PR gates; run 1000+ nightly |
 | Testing multiple independent properties in one `fc.assert` | Hard to diagnose failures | One property per `fc.assert` call |
 
@@ -294,4 +341,5 @@ Pair with mutation testing (see [quality-metrics-dashboard.md](./quality-metrics
 - [shift-left-testing.md](./shift-left-testing.md) -- shifting quality checks earlier
 - [fast-check documentation](https://fast-check.dev/)
 - [Hypothesis documentation](https://hypothesis.readthedocs.io/)
+- [original metamorphic-testing report](https://www.cse.ust.hk/~scc/publ/CS98-01-metamorphictesting.pdf)
 - [jqwik user guide](https://jqwik.net/docs/current/user-guide.html)

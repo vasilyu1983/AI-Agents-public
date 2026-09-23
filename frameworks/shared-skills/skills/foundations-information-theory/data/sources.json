@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Foundations Information Theory — Sources",
     "description": "Primary papers and references for 11 information-theory primitives: Shannon entropy, mutual information, KL divergence, cross-entropy, channel capacity, rate-distortion, MDL, information bottleneck, Fano's inequality, AEP, and redundancy/compression.",
-    "last_updated": "2026-08-14",
+    "last_updated": "2026-09-17",
     "skill": "foundations-information-theory",
-    "total_sources": 43
+    "total_sources": 46
   },
   "research_papers": [
     {
@@ -322,8 +322,31 @@
       "id": "IBVQMultiAgent2026",
       "name": "Farooq & Iqbal: Bandwidth-Efficient Multi-Agent Communication through Information Bottleneck and Vector Quantization",
       "url": "https://arxiv.org/abs/2602.02035",
-      "description": "Farooq, A. & Iqbal, K. (2026). IEEE ICRA 2026, arXiv:2602.02035, submitted 2 February 2026. Combines an information-bottleneck objective with vector quantization and a learned gating mechanism deciding when to communicate at all; reports 181.8% performance gain over a no-communication baseline at 71.4% lower bandwidth (800 vs 2800 bits/episode). Targeted at robotic swarms and distributed sensor networks, but the framing transfers directly to LLM agent handoffs and KV-cache passing: budget the message by task-relevant information, not token count. Evidence grade B: accepted conference paper, camera-ready. Relevant to primitives #6, #8.",
+      "description": "Farooq, A. & Iqbal, K. (2026). IEEE ICRA 2026, arXiv:2602.02035, submitted 2 February 2026. Combines an information-bottleneck objective with vector quantization and a learned gating mechanism deciding when to communicate at all; reports 181.8% performance gain over no communication and, against the different full-communication baseline, 71.4% lower bandwidth (800 vs 2800 bits/episode). Study-specific single synthetic coordination domain: section V-A reports 800 vs 2800 bits/episode against full communication; section VI-A states generalizability limits. LLM handoffs and KV-cache passing are untested transfer hypotheses. Evidence grade B: accepted conference paper, camera-ready. Relevant to primitives #6, #8.",
       "add_as_web_search": true
+    }
+  ],
+  "repair_sources": [
+    {
+      "id": "JVHW2015",
+      "name": "Minimax Estimation of Functionals of Discrete Distributions",
+      "url": "https://arxiv.org/abs/1406.6959",
+      "description": "Jiao, Venkat, Han and Weissman (2015), JVHW functional estimators.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "MITFano",
+      "name": "MIT 6.441 Information Theory Course Notes",
+      "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/5d8f16adc3385c9ff2975b121bd620e4_MIT6_441S16_course_notes.pdf",
+      "description": "Fano inequality, including finite alphabet term log(M-1).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "BerkeleyChebyshev",
+      "name": "Berkeley probability notes: Chebyshev inequality",
+      "url": "https://www.sp18.eecs70.org/static/notes/n18.html",
+      "description": "Variance over n*epsilon squared bounds failure probability, not success probability.",
+      "add_as_web_search": false
     }
   ]
 }

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mathematical Optimization Foundations"
+  short_description: "Check optimization feasibility, gaps, and sensitivity"
+  default_prompt: "Use $foundations-mathematical-optimization to formulate constrained resource allocation; check optimization feasibility, duality, optimality gaps, and sensitivity; distinguish candidates from certified optima."

@@ -2,10 +2,10 @@
 
 ## Domain Applications
 
-- **Policy aggregation**: government or product decision combines multiple stakeholder inputs; truthful-revelation step prevents loud voices from dominating; dissent section captures minority positions.
+- **Policy aggregation**: government or product decision combines multiple stakeholder inputs; structured evidence review reduces loud-voice bias; no truthful-revelation guarantee; dissent section captures minority positions.
 - **Investment committee decisions**: analysts submit finding + evidence + confidence; synthesis ranks by evidence density, not seniority or verbosity; contradicted findings go to debate.
 - **A/B test result synthesis**: multiple experiment results with conflicting signals; mechanism-design synthesis classifies agreed vs. contradicted results and surfaces dissent before acting.
-- **Agent team synthesis**: the primary agent-team use case; synthesis owner applies incentive-compatible protocol to integrate member outputs without majority-vote pathologies.
+- **Agent team synthesis**: the primary agent-team use case; synthesis owner applies experimental evidence-synthesis protocol to integrate member outputs without majority-vote pathologies.
 
 ## The Synthesis Problem
 
@@ -15,15 +15,15 @@ Synthesis is the highest-value step — and the most prone to game-theoretic fai
 - Averaging away genuine disagreements
 - Ignoring minority positions that may be correct
 
-## Incentive-Compatible Synthesis Protocol
+## Evidence-Synthesis Protocol (No Incentive Guarantee)
 
 ```
 Step 1: Each member submits: finding + evidence + confidence + uniqueness flag
   (uniqueness flag = "only I could produce this insight")
 
 Step 2: Synthesis owner classifies each finding:
-  - Agreed (>1 member converged) → include with high confidence
-  - Unique (only one member, flagged as unique) → include with member's confidence
+  - Agreed (>1 member converged) → inspect common source/model errors; confidence follows independently checked evidence and calibration, not vote count
+  - Unique (one member) → independently verify; sender confidence/uniqueness is a hypothesis, not calibrated evidence
   - Contradicted (members disagree) → reasoning tree audit → include with dissent noted
   - Redundant (same finding from 2+ members) → include once, credit originator
 
@@ -35,9 +35,9 @@ Step 3: Final output includes:
   - Gaps identified
 ```
 
-## Vickrey Principle for Synthesis
+## Reporting Norms for Synthesis
 
-Apply the truthful revelation principle: design the synthesis process so that each member's best strategy is to report their **honest assessment** rather than what they think the synthesis owner wants to hear.
+Encourage honest assessment and preserve evidence, uncertainty and dissent. These process norms do not prove any strategic best response. To claim incentive compatibility, specify players, private information, utility, allocation/transfer rules, feasible deviations, enforcement and an incentive inequality for the actual mechanism.
 
 **Implementation**: The synthesis owner commits to valuing:
 
@@ -48,11 +48,11 @@ Apply the truthful revelation principle: design the synthesis process so that ea
 
 ## Misreport Hazard (Multi-Principal Setting)
 
-When multiple principals share a fine-tuning or synthesis objective, agents have a dominant incentive to misreport preferences without payment incentives — truthful reporting is strictly dominated. Affine maximizer (weighted VCG) payment restores Dominant-Strategy Incentive Compatibility (DSIC) and Individual Rationality (IR).
+When multiple principals share a fine-tuning or synthesis objective, the cited fine-tuning paper finds truthful reporting sub-optimal under most circumstances for its specified social-welfare-maximization rules. This does not imply strict dominance or a misreport incentive for ordinary prompted synthesis. Its affine-maximizer payment result assumes the paper's utility, information and transfer model; verify these before applying DSIC/IR claims.
 
 **When this applies**: multiple stakeholders each contribute a reward signal or preference weight to a shared training or synthesis objective (e.g., multi-team LLM fine-tuning, multi-department synthesis).
 
-**Fix**: design an affine maximizer payment scheme (a weighted VCG extension) so each stakeholder's best response is honest preference reporting. If payments are non-monetary or utility is non-transferable, explicitly scope the mechanism to a single-principal setting and state that DSIC is not guaranteed.
+**Fix**: design an affine maximizer payment scheme (a weighted VCG extension) so each stakeholder's best response is honest preference reporting. If transferable/enforceable utility assumptions fail, report that the proposed DSIC argument is unavailable; relabelling the task single-principal does not establish truthfulness.
 
 Source: MechDesignFinetune — arXiv 2405.16276, NeurIPS 2024 (confirmed `neurips.cc/virtual/2024/99033`). IJCAI 2025 extended abstract corroborates.
 
@@ -60,7 +60,7 @@ Source: MechDesignFinetune — arXiv 2405.16276, NeurIPS 2024 (confirmed `neurip
 
 For synthesis tasks with multiple sources, truthfulness at the claim level requires more than Vickrey design at the output level. Sources can strategically shape which claims they surface.
 
-**Recipe**: Decompose the draft synthesis into atomic claims → elicit each agent's stance on each claim → apply peer-prediction scoring (reward informative agreement among sources) → filter manipulated sources before re-synthesis. Formal BNE guarantee: honest reporting is a Bayesian Nash Equilibrium under this mechanism.
+**Recipe**: Decompose the draft synthesis into atomic claims → elicit each agent's stance on each claim → apply peer-prediction scoring (reward informative agreement among sources) → filter manipulated sources before re-synthesis. Any BNE claim is restricted to the paper's actual scoring rule, information/prior and payoff assumptions; this shorthand recipe alone specifies no mechanism or equilibrium proof. Report evidence quality separately from strategic truthfulness.
 
 **Boundary condition**: peer-prediction degrades when sources share the same training data or are semantically near-identical (correlated stances nullify the informative-agreement signal). Run a source diversity check before deploying — if sources are near-identical, the signal collapses.
 

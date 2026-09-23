@@ -85,16 +85,9 @@ Use this reference when you are unsure whether to write a skill, a subagent, or 
 
 ## Skill vs. AGENTS.md / CLAUDE.md
 
-A skill is invoked on demand. `AGENTS.md` (or `CLAUDE.md`) is loaded into every turn. That difference matters more than it looks.
+A skill is invoked on demand. `AGENTS.md` (or `CLAUDE.md`) is loaded into every turn. That loading difference should drive placement. Published evals have shown that implicit skill triggering can miss relevant cases, but the result depends on the task set, runtime, model, and prompt. Measure the repository's own trigger behavior rather than turning one benchmark into a universal percentage.
 
-Vercel's published evals found:
-
-- Skills were **never invoked** in 56% of relevant cases despite being available — implicit triggering is brittle.
-- Skills with explicit prompt instructions reached 79% accuracy on their target tasks.
-- The same content placed in `AGENTS.md` reached 100% accuracy.
-- Skills even underperformed the no-skill baseline on some metrics because trigger ambiguity introduced new failure modes.
-
-This does not mean skills are wrong — it means they are wrong for some content. Use this matrix:
+Use this matrix:
 
 | Question | If YES → | If NO → |
 |----------|---------|---------|
@@ -106,7 +99,7 @@ This does not mean skills are wrong — it means they are wrong for some content
 | Does the content have side effects you want manually triggered? | Skill with `disable-model-invocation: true` | `AGENTS.md` |
 | Will it grow into a procedure with steps, validation, and scripts? | Skill | `AGENTS.md` |
 
-Rule of thumb: **convention → AGENTS.md, capability → skill**. Style guides, naming rules, and "always do X" go in `AGENTS.md`. Multi-step workflows, domain-specific procedures, and on-demand reference go in skills. When in doubt, measure: if a skill triggers under 80% on its own evals, the content probably belongs in `AGENTS.md`.
+Rule of thumb: **convention → AGENTS.md, capability → skill**. Style guides, naming rules, and repo-wide safety boundaries go in `AGENTS.md`. Multi-step workflows, domain-specific procedures, and on-demand reference go in skills. When in doubt, add representative trigger and non-trigger tasks, observe failures, and move only the guidance whose missed loading makes the task unsafe or consistently incorrect.
 
 Source: [Vercel — AGENTS.md outperforms skills in our agent evals](https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals).
 

@@ -18,25 +18,30 @@ With anti-windup:
 
 Three standard anti-windup techniques:
 
-**1. Clamping (freeze integral at saturation)**:
+**1. Directional clamping (freeze outward integration at saturation)**:
 ```
-if u ≥ u_max or u ≤ u_min:
-  do not update integral term
+delta_I = Ki * e * dt
+if (u_unsat >= u_max and delta_I > 0) or (u_unsat <= u_min and delta_I < 0):
+  freeze integral
 else:
-  integrate normally
+  integrate normally  # includes increments that unwind a saturated limit
 ```
 
 **2. Back-calculation (continuous-time)**:
 ```
-dI/dt = e(t) + (u_sat − u_unsat) / T_t
-where T_t = tracking time constant (tuning parameter ≈ √(T_i · T_d))
+dI_out/dt = Ki·e(t) + (u_sat − u_unsat) / T_t
+where I_out is the integral contribution in actuator units,
+T_t is a positive tracking time constant selected from plant response
+(the sqrt(T_i*T_d) heuristic is not defined for PI when T_d=0)
 u_sat = clamp(u_unsat, u_min, u_max)
 ```
 
 **3. Conditional integration**:
 ```
-Only integrate when sign(e) matches sign(u_unsat − u_sat).
-Prevents integration in the wrong direction during saturation.
+For positive Ki, integrate when unsaturated OR when e·(u_unsat − u_sat) <= 0.
+Stop integration when this product is positive: it pushes farther into saturation.
+For other gain/sign conventions, compare the actual integral-output increment
+with the saturation excess. Allow an increment that unwinds either limit.
 ```
 
 ## When to Use
@@ -77,18 +82,18 @@ Prevents integration in the wrong direction during saturation.
 
 ## Worked Example: Budget Pacing Anti-Windup
 
-**Problem**: Bid multiplier is clamped between 0.1× and 3×. Target CPM = $5. Actual CPM = $8 (overspending). Integral term keeps accumulating "increase bid" despite multiplier already at 3×.
+**Problem**: Bid multiplier is clamped between 0.1× and 3×. Target CPM = $5. Actual CPM = $3 (below target). With e = target − actual = +2 and a positive bid-to-CPM plant gain, the controller tries to increase the bid but the multiplier is already at its upper bound. Continuing positive-error integration creates windup.
 
 ```
 Without anti-windup:
   Multiplier stuck at 3× for 2 hours.
   Integral accumulates: I = Σe·Δt = +50 CPM-minutes.
-  When CPM drops to $4: multiplier should drop, but integral unwinds first.
+  When CPM rises to $6: error becomes negative and the multiplier should drop, but integral unwinds first.
   → bid stays near 3× for another hour → overspend.
 
 With clamping anti-windup:
   When multiplier = 3×: freeze I. Do not accumulate.
-  When CPM drops to $4: I = 0 (frozen); controller responds immediately.
+  When CPM rises to $6: the frozen I retains its prior value (not necessarily zero); permit negative-error integration to unwind the upper limit.
   → correct multiplier applied within one control cycle.
 ```
 

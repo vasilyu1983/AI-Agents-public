@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Independent expected answers for corrective behavioral evaluations; no claim of live-model success",
+  "cases": [
+    {
+      "id": "operations-01",
+      "skill": "foundations-queueing-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-queueing-theory/assets/templates/queueing-theory/01-littles-law.md",
+      "defect": "Median permitted in mean identity",
+      "correction": "Use arithmetic mean",
+      "prompt": "100/s mean .2 median .05",
+      "expected_answer": "L=20",
+      "forbidden_behavior": "L=5"
+    },
+    {
+      "id": "operations-02",
+      "skill": "foundations-queueing-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-queueing-theory/assets/templates/queueing-theory/05-priority-queues.md",
+      "defect": "All-class residual in preemptive high wait",
+      "correction": "Use high-class residual only",
+      "prompt": "high lambda .2 mean1 second2 low lambda.2 mean2 second8",
+      "expected_answer": "preemptive .25 nonpreemptive1.25",
+      "forbidden_behavior": "same waiting time"
+    },
+    {
+      "id": "operations-03",
+      "skill": "foundations-queueing-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-queueing-theory/assets/templates/queueing-theory/05-priority-queues.md",
+      "defect": "High wait bounded by one batch service",
+      "correction": "Include queued high work",
+      "prompt": "low residual3 two high jobs1",
+      "expected_answer": "second high waits4",
+      "forbidden_behavior": "wait bounded3"
+    },
+    {
+      "id": "operations-04",
+      "skill": "foundations-queueing-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-queueing-theory/assets/templates/queueing-theory/11-fork-join-parallel.md",
+      "defect": "Unconditional harmonic correction and undefined upper bound",
+      "correction": "State iid exponential boundary remove undefined bound",
+      "prompt": "two deterministic tasks1",
+      "expected_answer": "max1",
+      "forbidden_behavior": "max1.5"
+    },
+    {
+      "id": "operations-05",
+      "skill": "foundations-queueing-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-queueing-theory/SKILL.md",
+      "defect": "Universal utilization/stationarity/tail thresholds",
+      "correction": "Calibrate workload and check stationarity/moments",
+      "prompt": "low rho correlated bursts",
+      "expected_answer": "measure traces/SLO",
+      "forbidden_behavior": "rho .3 guarantees no queues"
+    },
+    {
+      "id": "operations-06",
+      "skill": "foundations-queueing-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-queueing-theory/SKILL.md",
+      "defect": "Added capacity said unable to help variance",
+      "correction": "Separate cause diagnosis from capacity effect",
+      "prompt": "high variance queue",
+      "expected_answer": "capacity may reduce wait",
+      "forbidden_behavior": "capacity never helps"
+    },
+    {
+      "id": "operations-07",
+      "skill": "foundations-queueing-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-queueing-theory/SKILL.md",
+      "defect": "Bulk-arrival notation used for batch service",
+      "correction": "Distinguish bulk arrival/bulk service",
+      "prompt": "batch service",
+      "expected_answer": "explicit bulk-service model",
+      "forbidden_behavior": "M[X]/M/1 denotes batch service"
+    }
+  ]
+}

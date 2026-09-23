@@ -19,9 +19,8 @@
 
 - [2026-08-13] DESIGN.md (google-labs-code/design.md, Apache-2.0) is the portable design-context format agents auto-read from project root; search.py emits it via --format designmd.
 - [2026-08-13] Framer Motion is now Motion (motion.dev, npm 'motion', import 'motion/react'); legacy 'framer-motion' installs silently but drifts — specs must name Motion.
-- [2026-07-11] DTCG 2025.10 reached first-stable status Oct 2025 (still a W3C Community Group report, not a Recommendation); EN 301 549 V4 (WCAG 2.2 AA) drafted but not yet OJ-cited, so 2.1 AA stays the EAA legal floor.
+- [2026-07-11, corrected 2026-09-07] DTCG 2025.10 reached first-stable status Oct 2025 (still a W3C Community Group report, not a Recommendation). EN 301 549 v3.2.1 is OJ-cited for the Web Accessibility Directive; do not infer an EAA legal floor or presumption without an EAA-specific OJ citation/common specification and national-law check.
 - [2026-07-11] ADA Title II WCAG 2.1 AA deadlines extended one year (IFR eff. 20 Apr 2026): large entities to 26 Apr 2027, small/special districts to 26 Apr 2028 — always re-check DOJ dates.
 ## Open Questions
 
 ## Consolidated Principles
-

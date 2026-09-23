@@ -135,6 +135,10 @@ Conway's Law predicts that the system landscape will mirror the organization's c
 
 ## Verification Checklist
 
+**Authoritative-data gate.**
+
+For every business entity that crosses systems, name the authoritative ownership and convergence rule: one writer, partition-owned writers, or deliberate multi-writer semantics. Document allowed replicas, propagation and causal-ordering rules, deterministic conflict or merge behavior, failure handling, and the reconciliation owner. Reject designs where systems can independently mutate the same fact without those semantics. Include temporary dual-write ownership in the transition plan and define the evidence required to retire it.
+
 Before finalizing a solution recommendation:
 
 - [ ] Business problem and success measures defined in non-technical terms
@@ -206,7 +210,6 @@ Before finalizing a solution recommendation:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

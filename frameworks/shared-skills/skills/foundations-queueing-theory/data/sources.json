@@ -1,10 +1,11 @@
 {
   "metadata": {
     "title": "AI Queueing Theory Foundations — Sources",
-    "description": "Primary texts and references for 11 queueing-theory primitives: Little's Law, M/M/1, M/M/c (Erlang-C), M/G/1 P-K formula, priority queues, Jackson networks, Kingman's formula, bufferbloat, USL, Erlang-B loss systems, and fork-join queues.",
-    "last_updated": "2026-08-14",
+    "description": "Primary texts and references for 11 queueing-theory primitives and finite-trace discrete-event simulation.",
+    "last_updated": "2026-09-17",
     "skill": "foundations-queueing-theory",
-    "total_sources": 33
+    "total_sources": 34,
+    "verification_note": "September additions were checked against the named primary pages; this date does not imply full-text revalidation of every historical source."
   },
   "foundational_texts": [
     {
@@ -111,6 +112,13 @@
     }
   ],
   "applied_references": [
+    {
+      "id": "NISTModelingSimulation",
+      "name": "NIST Modeling and Simulation Guidance",
+      "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910389",
+      "description": "Primary guidance used for the verification and validation boundary around discrete-event simulation inputs, implementation, and output interpretation.",
+      "url_check": "manual"
+    },
     {
       "id": "Gettys2012",
       "name": "Bufferbloat: Dark Buffers in the Internet",

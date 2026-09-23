@@ -29,7 +29,7 @@ Without intentional neural design:
 | Onboarding is engaging but users feel burnt out after 5 minutes | Arousal above Yerkes-Dodson optimum; no designed arousal arc | Autonomic stress cost exceeds engagement benefit; users associate the product with tension |
 | Referral mechanic launches with no uptake | Trust/warmth signals absent; no affiliative cue to trigger social motivation | Affiliative prosocial behavior not activated (oxytocin-system involvement in prosocial sharing is supported, though its role as a universal trust lever is not — see #3 playbook); sharing requires more social activation than the design provides |
 | Personalized content gets low saves despite high reads | Narrative transportation not activated; no self-referential vmPFC engagement | Content feels generic even if data-targeted; the reader did not "enter" the story |
-| Push notification open rate drops to near zero within 2 weeks | Bottom-up notification salience extinguished by repetition; consolidation-window timing ignored | User classifies notification as interruptive noise; habituation sets in |
+| Push notification open rate drops to near zero within 2 weeks | Bottom-up notification salience extinguished by repetition; sleep-respecting user-selected timing ignored | User classifies notification as interruptive noise; habituation sets in |
 
 Each primitive in this skill addresses a specific neural failure. Each also carries a misuse boundary — the same mechanism that serves the user when used honestly can be turned against them.
 
@@ -64,7 +64,7 @@ Every primitive in this skill has a "Misuse boundary" subsection. It is not a di
 | 7 | [Neuroaesthetics](../assets/templates/consumer-neuroscience/07-neuroaesthetics.md) | Peak-shift visual reward; symmetry preference; contour completion; ventral pathway beauty signal | Visual brand assets, landing page design, color and form hierarchy |
 | 8 | [Interoception & Somatic Markers](../assets/templates/consumer-neuroscience/08-interoception-somatic.md) | Insular cortex body-state encoding; vmPFC somatic-marker integration; pre-deliberative decision bias | Wellness/anxiety product design, gut-feel purchase triggers, error-state design |
 | 9 | [Memory Consolidation](../assets/templates/consumer-neuroscience/09-memory-consolidation.md) | Hebbian potentiation; hippocampal-neocortical transfer; sleep-dependent NREM replay | Notification timing, streak mechanics, recall-primed content design |
-| 10 | [Reward Anticipation](../assets/templates/consumer-neuroscience/10-reward-anticipation.md) | Mesolimbic dopamine anticipatory signal (wanting); VTA onset ~200ms before cue; dissociation from hedonic liking | Daily unlock mechanics, countdown UX, drop reveals, anticipation-arc design |
+| 10 | [Reward Anticipation](../assets/templates/consumer-neuroscience/10-reward-anticipation.md) | Mesolimbic dopamine anticipatory signal (wanting); task-dependent reward-cue response; dissociation from hedonic liking | Daily unlock mechanics, countdown UX, drop reveals, anticipation-arc design |
 | 11 | [Embodied Cognition](../assets/templates/consumer-neuroscience/11-embodied-cognition.md) | Sensorimotor grounding of concepts; conceptual metaphor structure; proprioceptive priming | Copy language, spatial UI metaphors, product-texture language |
 | 12 | [Predictive Processing & Active Inference](../assets/templates/consumer-neuroscience/12-predictive-processing.md) | Hierarchical Bayesian generative model; free-energy minimization; prediction-error as attentional cost | Feature reveals, UI consistency, onboarding priming, brand trust |
 
@@ -94,7 +94,7 @@ Every primitive in this skill has a "Misuse boundary" subsection. It is not a di
 |-------------|-----------------|-----|
 | "Personal" reading delivered in third-person generic language | Third-person framing does not engage vmPFC self-referential processing; transportation score collapses (#4) | Use second-person present-tense framing; refer to specific user-provided data to activate self-referential encoding |
 | Daily streak with no wanting-arc design | Streak completion activates completion motivation but not mesolimbic anticipation; DAU rises while enjoyment (liking) stays flat (#10, #9) | Design an anticipation arc before the daily reveal; the wanting, not just the completion, drives re-engagement |
-| Push notification at maximum interruptibility (11pm) | Hippocampal replay and memory consolidation occur during NREM sleep; late-night interruption fragments encoding (#9) | Limit notifications to early evening (6–9pm local) or morning (7–9am); A/B test timing cohorts against Day-7 retention |
+| Push notification at maximum interruptibility (11pm) | Hippocampal replay and memory consolidation occur during NREM sleep; late-night interruption fragments encoding (#9) | Respect user-selected timing and quiet hours; randomize eligible timing cohorts to test Day-7 retention without assuming a biological clock window |
 
 ---
 

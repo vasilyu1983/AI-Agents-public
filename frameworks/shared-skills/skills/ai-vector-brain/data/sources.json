@@ -269,7 +269,25 @@
       "category": "backend-serverless",
       "authority": "primary",
       "add_as_web_search": true,
-      "verify_against": ["vector bucket", "vector index", "Bedrock Knowledge Bases integration", "metadata filter", "regions"]
+      "verify_against": ["vector bucket", "vector index", "Bedrock Knowledge Bases integration", "metadata filter", "regions", "latency by query frequency", "up to 90% vendor cost claim"]
+    },
+    {
+      "id": "aws-s3-vectors-ga",
+      "title": "Amazon S3 Vectors generally available",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2025/12/amazon-s3-vectors-generally-available/",
+      "category": "backend-serverless",
+      "authority": "primary",
+      "add_as_web_search": true,
+      "verify_against": ["GA date", "14 regions", "2 billion vectors per index", "trillions per bucket"]
+    },
+    {
+      "id": "aws-s3-vectors-product",
+      "title": "Amazon S3 Vectors product page",
+      "url": "https://aws.amazon.com/s3/features/vectors/",
+      "category": "backend-serverless",
+      "authority": "vendor-marketing",
+      "add_as_web_search": true,
+      "verify_against": ["sub-second infrequent-query performance", "about 100 ms frequent-query performance", "up to 90% vendor cost claim"]
     },
     {
       "id": "aws-bedrock-knowledge-bases",

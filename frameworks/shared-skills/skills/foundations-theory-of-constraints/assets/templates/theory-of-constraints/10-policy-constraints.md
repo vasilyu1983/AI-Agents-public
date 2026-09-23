@@ -14,7 +14,7 @@ A policy constraint is a constraint created by rules, measurements, or decisions
 
 **Why policy constraints are dangerous**: they are invisible. Physical capacity constraints show up as queue depth and wait time. Policy constraints show up as "the system isn't flowing but we can't find a bottleneck."
 
-**Detection heuristic**: if elevating a physical constraint doesn't improve throughput, a policy constraint is likely upstream of or co-present with the physical constraint.
+**Detection heuristic**: if elevating physical capacity does not improve accepted throughput, test intervention effectiveness, demand, quality, other/shared resources and policy hypotheses; the observation alone does not identify a policy cause.
 
 ## When to Use
 

@@ -58,12 +58,12 @@ where r is the reference point.
 
 A product team evaluates two pricing framings for a £50/month subscription:
 
-- Framing A: "£50/month — save £10 vs. the standard £60 plan" (gain frame: +£10 saving).
-- Framing B: "£60/month — unless you upgrade, you lose £10 off compared to early adopters" (loss frame: −£10 relative to a £50 reference).
+- Framing A: "£50/month; £10 below the £60 standard price."
+- Framing B: "£50/month; retain the £10 discount from the £60 standard price."
 
-EU predicts indifference: both framings describe the same £50 price. Prospect theory predicts Framing B induces more conversions because the loss frame (−£10) has higher |v| than the equivalent gain frame (+£10) by factor λ ≈ 2.25.
+Both offers have identical prices and terms. Expected utility with unchanged preferences and beliefs assigns them the same outcome value. A prospect-theory model may assign different subjective values if framing changes the reference point; conditional on equal curvature, a chosen λ scales modeled loss magnitude relative to gain magnitude. This does not specify a conversion probability, causal response direction, or conversion multiplier.
 
-Prediction: conversion rate under Framing B will exceed Framing A by approximately 10–20% in typical B2C contexts (empirically tested in Kahneman and Tversky's original work and replicated widely).
+Hypothesis: framing may change choices, but neither the prospect-theory value function nor the original hypothetical-risk experiments establish a universal subscription-conversion lift or direction. Run a consent-appropriate randomized framing test with equal actual prices, clear disclosures and a predeclared metric; do not infer a 10–20% lift from loss-aversion parameters.
 
 ## Resource-Rational Reframe (2024–2025)
 

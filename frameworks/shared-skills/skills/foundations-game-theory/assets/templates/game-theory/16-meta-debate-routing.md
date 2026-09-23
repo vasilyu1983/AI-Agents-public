@@ -1,6 +1,6 @@
 # Mechanism: Meta-Debate Role Routing
 
-**Source**: *Dynamic Role Assignment for Multi-Agent Debate* ([arxiv 2601.17152](https://arxiv.org/abs/2601.17152), Jan 2026). Up to **+74.8% over uniform role assignment**, **+29.7% over random** assignment, depending on task.
+**Source**: *Dynamic Role Assignment for Multi-Agent Debate* ([arxiv 2601.17152](https://arxiv.org/abs/2601.17152), Jan 2026). Up to **+74.8% over uniform role assignment**, **+29.7% over random** assignment, depending on task and assignment (paper abstract, primary HTML rechecked 2026-09-17); these are reported comparison maxima, not guaranteed percentage-point improvements.
 
 ## Problem
 

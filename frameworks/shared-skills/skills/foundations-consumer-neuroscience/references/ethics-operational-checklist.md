@@ -27,8 +27,8 @@ The ethical boundaries stated in SKILL.md and the per-primitive playbooks are co
 
 Run before initiating any study that captures physiological, biometric, or neuro-signal data from participants.
 
-- [ ] **Lawful basis documented**: is Article 9 UK/EU GDPR explicit consent obtained and recorded before any physiological measurement begins (GSR, HRV, eye-tracking, EEG, fNIRS, facial EMG, facial video for AU coding, voice recording)?
-- [ ] **DPIA completed**: has a Data Protection Impact Assessment been carried out and signed off by the DPO (or data controller if no DPO)?
+- [ ] **Lawful processing and participation documented**: obtain informed research consent; identify an Article 6 basis for personal data. Assess whether health information/inference or biometric unique identification invokes Article 9 and record a valid condition if applicable. Physiology alone does not establish special-category status, and explicit consent is not the only Article 9 condition.
+- [ ] **DPIA requirement assessed**: complete a DPIA where processing is likely to result in high risk; record the assessment and responsible review. Physiological capture does not automatically determine the requirement.
 - [ ] **Ethics board reviewed**: if any academic institution is involved, has the relevant ethics board approved the protocol? If commercial-only, has an internal ethics review (or equivalent external review) been completed?
 - [ ] **Vulnerable-cohort screen completed**: does the sample include or potentially include individuals under 18, individuals with mental health conditions, individuals in financial distress, or audiences for wellness/anxiety/spiritual/financial-products? If yes, the Vulnerable-User Gate below applies — do not proceed until it is passed.
 - [ ] **Opt-out path is trivial**: can a participant withdraw at any point during data collection without penalty, and does the study protocol document the withdrawal mechanism?
@@ -54,22 +54,22 @@ Run before shipping any feature that applies consumer-neuroscience primitives to
 
 ### EU AI Act Article 5 Prohibitions (in force 2 February 2025)
 
-- [ ] **No subliminal techniques check**: does any feature use stimuli below the threshold of conscious perception to influence behaviour? If yes, prohibited outright.
-- [ ] **No manipulative/deceptive techniques check**: does any AI system use deceptive techniques or techniques that exploit psychological weaknesses to materially distort behaviour in a way that harms the user? If yes, prohibited outright.
-- [ ] **Vulnerability-exploitation check**: does any AI system exploit vulnerabilities of specific groups (age, disability, socio-economic situation) to materially distort their behaviour? If yes, prohibited outright for those groups.
+- [ ] **No subliminal techniques check**: does any feature use stimuli below the threshold of conscious perception to influence behaviour? If yes, stop for review of Article 5(1)(a): impaired informed choice, materially changed decision and actual or reasonably likely significant harm must be assessed. Our ethical gate may be stricter than the statutory prohibition.
+- [ ] **No manipulative/deceptive techniques check**: does any AI system use deceptive techniques or techniques that exploit psychological weaknesses to materially distort behaviour in a way that harms the user? If yes, stop for review of Article 5(1)(a), including its informed-decision and significant-harm conditions.
+- [ ] **Vulnerability-exploitation check**: does any AI system exploit vulnerabilities of specific groups (age, disability, socio-economic situation) to materially distort their behaviour? If yes, stop for review of Article 5(1)(b), including material distortion and actual or reasonably likely significant harm. Vulnerable cohort membership alone is not a prohibition.
 
 ### EU AI Act Article 50 Transparency (in force 2 August 2026 — NOT delayed)
 
-Apply now to any product using AI to infer affective state or perform biometric categorisation. The Digital Omnibus deferred the high-risk regime but left transparency on the original schedule.
+Apply only after purpose-specific classification establishes a relevant obligation. Generic sentiment analysis, sensor capture and a vendor label do not establish emotion recognition or biometric categorisation. See the dated source note below.
 
-- [ ] **Article 50 notice live**: are users explicitly informed, conspicuously and *before* data capture, that an emotion-recognition or biometric-categorisation system is operating? This is a current obligation, not a future one.
-- [ ] **Watermarking grace tracked** (if generating/manipulating synthetic content): the Art. 50(2) watermarking duty has a grace period to 2 December 2026 for systems already on the market.
+- [ ] **Article 50 notice live**: are users explicitly informed, clearly and accessibly at first interaction/exposure (our research safeguard is earlier notice before capture), that an emotion-recognition or biometric-categorisation system is operating? This is a current obligation, not a future one.
+- [ ] **Watermarking grace tracked** (if generating/manipulating synthetic content): confirm the applicable synthetic-output marking transition against the current law; watermarking is one possible technique, not the statutory duty itself.
 
 ### EU AI Act High-Risk (deferred to 2 December 2027, if applicable)
 
-Apply this section if the product uses AI to infer affective state from facial expression, voice, GSR, HRV, gaze, or any biometric stream, or performs biometric categorisation. The **AI Digital Omnibus** (in force 27 July 2026) moved standalone Annex III obligations from 2 August 2026 to **2 December 2027** (Annex I: 2 August 2028). This is schedule relief only — build toward these gates, do not drop them.
+Apply only after counsel confirms an applicable high-risk use, including current Article 6 criteria, exceptions, research exclusions and provider/deployer role. Follow the dated official timeline below. Physiological inputs or commercial deployment alone do not establish high-risk status.
 
-- [ ] **High-risk classification confirmed**: has the system been assessed as an emotion-recognition or biometric-categorisation system under Annex III?
+- [ ] **High-risk classification confirmed**: has the intended use been assessed under the current amended Article 6 and Annex III, including relevant derogations, exclusions and profiling conditions?
 - [ ] **Data governance documentation complete**: is the training dataset documented for composition, provenance, and demographic representativeness?
 - [ ] **Technical documentation filed** (Article 11): is the required technical documentation prepared and maintainable?
 - [ ] **Human oversight mechanism implemented** (Article 14): can a human reviewer identify, monitor, and override the system's outputs?
@@ -78,7 +78,7 @@ Apply this section if the product uses AI to infer affective state from facial e
 
 ### UK / EU GDPR
 
-- [ ] **Article 9 explicit consent obtained**: for any biometric or neuro-physiological capture in a commercial product, is explicit consent obtained separately from general T&C acceptance?
+- [ ] **Purpose-based classification recorded**: document Article 6 basis for personal data and an applicable Article 9 condition where health inference or biometric unique identification brings processing within special-category rules. Do not automatically require Article 9 explicit consent for every physiological signal.
 - [ ] **Data minimisation applied**: is only the minimum necessary biometric data captured for the stated purpose?
 - [ ] **Retention policy implemented**: is a defined retention period enforced with automated deletion?
 - [ ] **Cross-border transfer mechanism in place** (if applicable): see pre-study checklist item above.
@@ -113,7 +113,7 @@ If the target audience is any of the following: wellness users, anxiety-relief u
 | Oxytocin-proxy warmth without genuine care mechanic (#3 misuse) | Short-term affiliation collapse in vulnerable users has amplified harm; DMCC aggressive-practices provision |
 | Unbounded reward-anticipation loops (#10 misuse) | Compulsion-design risk is elevated in anxiety and financial-distress contexts; harm-test failure |
 | Interoceptive urgency manufacturing (#8 misuse — "your body is telling you something is wrong") | Manufacturing somatic anxiety to drive purchase is manipulation under DMCC vulnerable-user clause |
-| AI-driven affect inference without transparency or high-risk readiness | Article 50 notice is owed now (2 August 2026); Annex III compliance is owed by 2 December 2027. For vulnerable cohorts the Article 5 prohibition may bar the deployment outright, regardless of either deadline |
+| AI-driven affect inference without transparency or high-risk readiness | Assess applicable notices and high-risk timetable after intended-use classification; review Article 5 conditions and exceptions independently. A vulnerable audience or sensor label alone does not establish a prohibition |
 
 **Default position for ambiguous primitive deployment in vulnerable-user context: No.** Shift the default to Yes only with documented harm-test outcome showing user benefit on reflection, easy reversibility, and no exploitation of pre-conscious mechanisms.
 
@@ -139,8 +139,14 @@ All green?
 Keep the following on file for any shipped feature that applies consumer-neuroscience primitives:
 
 1. **Harm-test result per primitive**: written record of the three-gate test (user endorsement on reflection; easy reversal; no exploitation of pre-conscious mechanisms) for each primitive applied.
-2. **Consent flow screenshots** (if biometric or neuro data is captured in a product context): current UI screenshots showing the Article 9 consent mechanism.
+2. **Consent flow screenshots** (if biometric or neuro data is captured in a product context): documented data classification and lawful conditions; capture UI evidence when consent is the condition used.
 3. **EU AI Act technical documentation** (if high-risk system): full Annex IV technical documentation file.
 4. **DMCC OCA audit log**: completed pre-deployment checklist above, dated and signed by accountable team member.
 5. **Vulnerable-user assessment**: written assessment confirming whether the target audience meets vulnerable-user criteria and, if so, the stricter-column controls applied.
-6. **DPIA reference** (if research study): DPA reference number and sign-off date.
+6. **DPIA assessment**: record whether processing is likely to result in high risk; retain the DPIA and review date where required.
+
+## Dated EU classification source note
+
+Verified 2026-09-17. The [Commission entry-into-force announcement](https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force) reports the AI Omnibus adopted and effective 27 July 2026. Its [updated implementation timeline](https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act) lists Article 50 from 2 August 2026, certain pre-existing synthetic-content providers' Article 50(2) transition at 2 December 2026, Annex III high-risk rules from 2 December 2027, and Annex I high-risk rules from 2 August 2028. These are application milestones, not automatic classification of every affect-related product.
+
+Source limit: the Commission links [the amending instrument](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202601744), but EUR-Lex access was bot-blocked in this audit. Official [Article 5](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5), [Article 6](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6) and [Article 50](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50) pages explicitly warn their displayed statutory text is not yet updated. Thus the timeline is officially confirmed; amended classification details require qualified counsel to read current governing text before deployment. Record intended purpose, inputs/inferred attributes, jurisdiction, research/commercial context, operator role and decision consequences. Do not use this checklist as a legal opinion.

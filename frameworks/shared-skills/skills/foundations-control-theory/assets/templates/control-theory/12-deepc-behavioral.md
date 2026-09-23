@@ -32,19 +32,16 @@ The λ_g regularization on g handles noisy data (pure LTI Lemma assumes noise-fr
 - **Fast nonlinear dynamics** — standard Koopman/kEDMD linearization error is large; regularized DeePC may generalize better than a lifted-linear model.
 - **Smooth input trajectory required** — DeePC produces substantially smoother input trajectories than Koopman MPC for the same tracking task (Daráš et al. 2026, arXiv:2604.00524).
 - **Short data-collection window is feasible** — a single persistently-exciting offline experiment suffices; no ongoing system ID required.
-- **MPC is preferred but no model exists** — DeePC is the drop-in model-free variant of MPC.
+- **MPC is preferred but no model exists** — consider DeePC after validating data richness, lag and operating-domain assumptions; it is not a guaranteed drop-in for arbitrary plants.
 
-**Prefer Koopman MPC over DeePC when:**
-- Tight tracking accuracy is the primary objective (Koopman MPC tracks more tightly).
-- Stability certificate is required (Koopman stability via proportional error bound is proven; DeePC stability proofs exist for the linear noiseless case).
-- Online update of the surrogate model is needed.
+**Compare Koopman MPC and DeePC locally:** reported tracking/input-smoothness differences are task-specific. A certificate requires the selected formulation's terminal conditions, recursive feasibility, model-error bounds and operating-domain assumptions; the method name alone supplies none. Noisy/nonlinear DeePC regularization does not restore the exact LTI theorem.
 
 ## Inputs
 
 | Input | Description |
 |-------|-------------|
-| Offline trajectory data | Input-output experiment: `(u_d, y_d)` with length ≥ `(m+p+1)(T_ini+N) − 1` where m=inputs, p=outputs, T_ini=init window, N=horizon |
-| Persistency-of-excitation condition | Input signal must be persistently exciting of order `T_ini + N`; use PRBS or band-limited noise |
+| Offline trajectory data | Input-output experiment: `(u_d, y_d)` with length T ≥ `(m+1)(T_ini+N+n) − 1` as a necessary richness bound, with n=state order (or justified conservative upper bound), m=inputs, T_ini=initial window, N=horizon; length alone is insufficient |
+| Persistency-of-excitation condition | Input signal must be persistently exciting of order `T_ini + N + n`: verify input Hankel full row rank at this order; a named PRBS/noise signal alone proves no rank condition. Require T_ini at least the system lag for unique output prediction |
 | Regularization weights | λ_g (Hankel combination penalty), λ_y (output slack penalty); tune for noise level |
 | Cost matrices Q, R | State tracking vs. input effort — same as standard MPC |
 | Constraints | Actuator bounds u_min/max, state bounds x_min/max |
@@ -55,7 +52,7 @@ The λ_g regularization on g handles noisy data (pure LTI Lemma assumes noise-fr
 |--------|-------------|
 | Optimal input `u*(k)` | Control action to apply — first element of u_future |
 | Predicted output trajectory | y_future over horizon N — not applied; useful for monitoring |
-| Constraint satisfaction | Same hard-constraint guarantees as MPC (for noiseless LTI case) |
+| Constraint satisfaction | Predicted input/output feasibility under the exact controllable noiseless LTI theorem and data/lag conditions; recursive feasibility, stability and real-plant safety require their own assumptions. Unmeasured state bounds need a justified state representation |
 
 ## Failure Modes
 
@@ -65,7 +62,7 @@ The λ_g regularization on g handles noisy data (pure LTI Lemma assumes noise-fr
 | Persistency-of-excitation not satisfied | Offline experiment too narrow in frequency content | Use PRBS or chirp; verify rank of Hankel matrix before deployment |
 | Hankel matrix too large for real-time solve | Long horizon or large dataset | Use SVD to reduce Hankel rank (Scalable Nonlinear DeePC, de Jong et al. 2025, arXiv:2512.14535) |
 | Nonlinear system: performance degrades | Willems' Lemma is exact only for LTI; nonlinear systems need extensions | Use kernel-based or regularized nonlinear DeePC (arXiv:2512.14535); or switch to Koopman MPC |
-| No stability certificate | DeePC stability for nonlinear/noisy case is active research area | Use Koopman MPC if a formal stability certificate is required |
+| No stability certificate | DeePC stability for nonlinear/noisy case is active research area | Specify and verify terminal/robustness and recursive-feasibility assumptions for the selected formulation; otherwise report no certificate |
 
 ## Composition Recipe: Autoscaler with Unknown Plant Dynamics
 
@@ -73,18 +70,18 @@ The λ_g regularization on g handles noisy data (pure LTI Lemma assumes noise-fr
 
 **Stack**:
 1. DeePC (this primitive) — replaces model-based MPC (#5); uses Hankel matrix of historical CPU/latency/replica data
-2. Anti-windup (#8) — freeze integral in the receding-horizon objective when at min/max replica count
-3. Dead-time compensation (#7) — encode pod startup lag in the T_ini window length
+2. Constraint handling — enforce replica/rate limits in the optimizer; anti-windup applies only if an explicit integral augmentation or separate PI/PID loop is defined, and must allow unwinding
+3. Dead-time handling (#7) — include startup dynamics in collected trajectories, initial-history lag and horizon; selecting T_ini alone does not compensate transport delay
 4. Kalman filter (#6) — pre-filter noisy KV-cache / queue-depth measurements before passing to DeePC as y_past
 
-**Data-collection step**: Run a PRBS (pseudo-random binary sequence) on replica count for 30–60 minutes during off-peak to collect persistently exciting data. Record: replicas, CPU, p95 latency, queue depth. Verify Hankel rank.
+**Data-collection step**: Plan a bounded, authorized excitation experiment with safe fallback; choose sample rate, length and input amplitude from lag/order and rank requirements, not a universal duration. Record replicas, CPU, latency and queue depth, then verify rank, held-out prediction and constraint margins. For n=10,m=1,T_ini+N=10, excitation order is20 and necessary length is39, not order10/length29. Source: [Coulson et al. §V-A/Theorem V.1](https://arxiv.org/html/1811.05890v2), checked2026-09-17.
 
 **DeePC vs. Model-Based MPC decision**:
 - Unknown plant → DeePC
 - Known plant, tight tracking → Model-based MPC (#5)
 - Known plant, nonlinear → Koopman MPC (#5 + Schimperna et al. 2025)
 - Smooth inputs, unknown plant → DeePC
-- Tight tracking, unknown plant, stability proof needed → collect more data + Koopman
+- Unknown plant, certificate needed → establish model-error/terminal/robustness assumptions and verify the chosen controller; more data alone supplies no certificate
 
 ## Sources
 

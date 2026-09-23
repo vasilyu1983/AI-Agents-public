@@ -53,7 +53,7 @@
     {
       "name": "OpenAI Realtime API Docs",
       "url": "https://platform.openai.com/docs/guides/realtime",
-      "description": "OpenAI Realtime API (GA, out of beta). Model line iterates roughly every 8-10 weeks (gpt-realtime-2 -> gpt-realtime-2.1 / gpt-realtime-2.1-mini as of Jul 2026); verify current model IDs, pricing, and region availability before each release.",
+      "description": "OpenAI Realtime model and API documentation. Checked 2026-09-07: the catalog lists gpt-realtime-2.1/2.1-mini, gpt-realtime-2, gpt-realtime-translate, gpt-live-transcribe, and gpt-realtime-whisper; older unsuffixed realtime models are deprecated. The 2.1 page confirms reasoning, tool use, and improved noise/interruption behavior but publishes no numeric p95 comparison with gpt-realtime-2.",
       "add_as_web_search": true
     }
   ],

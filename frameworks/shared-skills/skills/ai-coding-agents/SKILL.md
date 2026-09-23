@@ -111,17 +111,18 @@ classify: define agent on existing platform OR build runtime subsystem
 
 ## Default Workflow
 
-1. **Classify the task**: What code does the agent touch? What tools does it need? What is the output?
-2. **Single agent or team?** One bounded task → single agent. Multiple interdependent tasks, parallel reviews, or complex investigation → multi-agent team.
-3. **Pick the archetype** closest to your need from the [archetypes](#single-agent-archetype-index) or [multi-agent patterns](#multi-agent-pattern-index).
-4. **Choose the platform**: Claude Code `.md` for repo-level agents, Codex `.toml` for Codex workflows, Agent SDK for programmatic integration.
-5. **Start from the matching template** in [`assets/templates/`](assets/templates/).
-6. **Scope tools** to the minimum needed. Read-only agents get Read, Grep, Glob. Edit agents add Edit, Write, Bash.
-7. **Design the context strategy**: What files does the agent need? How does it discover them? What is the token budget?
-8. **Add verification**: How does the agent check its own work? For teams: assign a separate verifier.
-9. **Smoke test**: Run on 3+ representative tasks before deploying.
-10. **Test extension robustness**: For edit, refactor, and migration agents, run at least one evolving-spec sequence with 3+ checkpoints. Start each checkpoint in a fresh conversation/context, carry forward the same agent-created workspace, and retain all prior regression tests.
-11. **Iterate**: Observe real behavior, tighten scope, improve prompts.
+The goal is a bounded agent whose scope, tools, and verification you can state in one sentence before it runs. Classify the task first — what code it touches, what tools it needs, what it emits — and decide single agent (one bounded task) or team (interdependent tasks, parallel reviews, complex investigation). Pick the closest [archetype](#single-agent-archetype-index) or [multi-agent pattern](#multi-agent-pattern-index), then the platform: Claude Code `.md` for repo-level agents, Codex `.toml` for Codex workflows, Agent SDK for programmatic integration. Start from the matching template in [`assets/templates/`](assets/templates/).
+
+Scope tools to the minimum: read-only agents get Read, Grep, Glob; edit agents add Edit, Write, Bash. Design the context strategy alongside it — which files the agent needs, how it discovers them, what token budget it has — and decide how the agent checks its own work.
+
+Before copying a platform template, build a small capability record from the target runtime: available tools, writable roots, approval path, context-start behavior, background/cancellation support, and installed model. Treat configured, advertised, and successfully exercised capabilities as separate states; template parity does not prove runtime parity.
+
+Two verification checks before deploying:
+
+- **Smoke test on 3+ representative tasks.** For teams, the verifier must be a separate agent, not the one that made the change.
+- **Extension robustness for edit, refactor, and migration agents:** run at least one evolving-spec sequence with 3+ checkpoints, each started in a fresh conversation/context, carrying forward the same agent-created workspace and retaining all prior regression tests.
+
+Then iterate on observed behavior: tighten scope, improve prompts.
 
 ## Known Traps
 
@@ -144,12 +145,11 @@ classify: define agent on existing platform OR build runtime subsystem
 
 Source: [*How OpenAI uses Codex*](https://cdn.openai.com/pdf/6a2631dc-783e-479b-b1a4-af0cfbd38630/how-openai-uses-codex.pdf), May 2026 — internal-usage report across Security, Product, Frontend, API, Infrastructure, and Performance Engineering teams. These patterns are validated by daily use inside OpenAI; cite this source rather than restating as your own observations.
 
-### Two-stage Ask → Code flow for non-trivial changes
+### Optional two-stage Ask → Code flow
 
-- **Pattern:** for any change above the trivial single-file fix, run Ask Mode first to produce an implementation plan. Then switch to Code Mode and feed the plan as input to follow-up prompts.
-- **Why:** keeps the agent grounded; the plan becomes a self-correction surface — if the plan is wrong, the human catches it before generation rather than after.
-- **Anti-pattern:** going straight to Code Mode for a multi-file change. The agent will improvise structure that the human then has to reverse-engineer at review time.
-- **Recipe:** *"Plan the implementation for X. Do not write code yet."* → review plan → *"Execute the plan above, file by file."*
+- **Use when:** the user requests a plan, unresolved architecture or scope choices need review, or the active runtime requires planning before execution. Ask/Code labels are runtime-specific; other runtimes can use the same decision boundary without those modes.
+- **Otherwise:** for a clear, authorized change, inspect the relevant context, implement, inspect the result, and fix failures from affected checks before handoff. A multi-file edit alone does not require another approval step.
+- **Completion:** finish the authorized workflow; pause only for a decision or action outside its authority. Respect an explicit plan-only request and any active runtime mode.
 
 ### Environment-as-prompt (compoundable)
 
@@ -208,7 +208,7 @@ Treat it as the target when a coding agent must be OSS, editor-embedded, locally
 
 ### GitHub Copilot CLI — a fifth, lighter-weight platform (revised 2026)
 
-GitHub Copilot CLI outgrew its "explains shell commands" origin during 2026. It now defines **custom agents** as Markdown files with YAML frontmatter (`.agent.md`, resolvable at repo or org scope), supports a **plugin system** (`/plugin install owner/repo`) that bundles MCP servers, agents, skills, and hooks, and ships with the GitHub MCP server pre-wired plus built-in `Explore` and `Task` agents. This makes Track A (define an agent on an existing platform) applicable to Copilot CLI in a way it was not a year earlier — treat the earlier "not a coding-agent platform" framing as retired.
+GitHub Copilot CLI outgrew its "explains shell commands" origin during 2026. It now defines **custom agents** as Markdown files with YAML frontmatter (`.agent.md`, resolvable at repo or org scope), supports a **plugin system** (`/plugin install owner/repo`) that bundles MCP servers, agents, skills, and hooks, and ships with the GitHub MCP server pre-wired plus built-in `Explore` and `Task` agents. Track A (define an agent on an existing platform) applies to Copilot CLI on those primitives.
 
 **Frontmatter shape:** `description` (required), `name`, `target` (`vscode` | `github-copilot`), `tools` (omit or `["*"]` for all; empty list disables all; MCP tools namespaced as `server-name/tool-name`), `model`, `disable-model-invocation`, `user-invocable`. Body is Markdown instructions, capped at 30,000 characters. Versioning rides on git commit SHAs rather than a semantic `version` field.
 
@@ -328,22 +328,22 @@ See [`references/context-management.md`](references/context-management.md) for d
 
 ### Recommended Build Order
 
-For a new CLI coding-agent runtime, implement subsystems in this order:
+For a new CLI coding-agent runtime, treat these subsystems as a fixed spine — not one prompt plus a tool runner — and implement them in this order:
 
-1. settings and policy layering
-2. command registry and lazy command loading
+1. settings and policy layering — defines what the runtime is allowed to do
+2. command registry and lazy command loading — how users and the host invoke higher-level actions
 3. provider abstraction, streaming normalization, and context-window policy
-4. execution sandbox, workspace mounts, network policy, and destructive-command guards
+4. execution sandbox, workspace mounts, network policy, and destructive-command guards — the real security envelope
 5. tool contract, built-in enumeration, and tool-pool assembly
-6. permission context and approval routing
+6. permission context and approval routing — decides when risky actions are allowed
 7. central tool-execution pipeline
-8. session persistence, history, and resume
+8. session persistence, history, and resume — decides what state survives
 9. remote transport and permission bridging
-10. task runtime and teammate orchestration
-11. terminal UI, background-task surfaces, and virtualization
+10. task runtime and teammate orchestration — long-running and delegated work
+11. terminal UI, background-task surfaces, and virtualization — renders and controls runtime state without owning it
 12. plugin loading, versioned cache, and managed extension policy
-13. observability, replay, regression evals, and release gates
-14. packaging, update channels, migrations, and distribution
+13. observability, replay, regression evals, and release gates — closes the feedback loop
+14. packaging, update channels, migrations, and distribution — keeps upgrades, caches, and compatibility survivable
 
 Why this order:
 
@@ -352,25 +352,7 @@ Why this order:
 - remote runtime, tasks, and terminal UI depend on stable command, tool, and settings semantics
 - plugins should land after the host runtime has clear ownership of precedence and trust boundaries
 
-## Core Runtime Spine
-
-Treat a serious coding-agent runtime as a fixed spine of cooperating subsystems, not as one prompt plus a tool runner.
-
-1. settings and policy define what the runtime is allowed to do
-2. command runtime defines how users and the host invoke higher-level actions
-3. provider runtime defines how model traffic is normalized and recovered
-4. execution sandbox defines the real security envelope
-5. tools define callable capabilities and execution stages
-6. permissions decide when risky actions are allowed
-7. sessions decide what state survives and resumes
-8. remote runtime bridges local UI to remote execution when needed
-9. tasks represent long-running and delegated work
-10. terminal UI renders and controls runtime state without owning it
-11. plugins extend the host through controlled capability points and layered refresh
-12. observability and evals close the feedback loop
-13. release and distribution keep upgrades, caches, and compatibility survivable
-
-If one of these is missing, the usual outcome is not “slightly worse UX.” The usual outcome is hidden fragility that appears under reconnects, long sessions, remote control, worker delegation, or upgrades.
+If one of these is missing, the usual outcome is not "slightly worse UX." The usual outcome is hidden fragility that appears under reconnects, long sessions, remote control, worker delegation, or upgrades.
 
 ### Cross-platform validation (2026)
 
@@ -436,6 +418,6 @@ The spine above is rebuilt-and-verified against the Claude Code lineage and, as 
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

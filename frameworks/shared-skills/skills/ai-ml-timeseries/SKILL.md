@@ -169,6 +169,10 @@ Need to build or review a forecast:
 - A forecast package is incomplete without cutoff timestamps, horizon definition, feature contract, metric definitions, fallback rules, and lineage metadata.
 - Keep forecasting-specific handoff guidance here; route full deployment architecture to [ai-mlops](../ai-mlops/SKILL.md).
 
+## Forecast Decision Gate
+
+Create a cutoff ledger for every backtest fold: training end, forecast origin, horizon, feature availability, retrain policy, and any revision or publication lag. Report error and interval quality by horizon and decision-critical slice before aggregating. Promote a forecast only when it beats the declared seasonal or naive baseline on the business-weighted loss without hiding a blocking slice, and when the fallback for missing or late covariates is tested.
+
 ## Known Traps
 
 - Mixing future-known covariates and future-unknown covariates in the same feature path without documenting which values are actually available at forecast time.
@@ -284,6 +288,6 @@ See **[data/sources.json](data/sources.json)** for current primary sources acros
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

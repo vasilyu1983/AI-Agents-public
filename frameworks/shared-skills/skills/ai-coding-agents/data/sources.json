@@ -3,9 +3,9 @@
     "skill": "ai-coding-agents",
     "title": "AI Coding Agents - Sources",
     "description": "Official documentation, research, and community resources for building AI coding agents across Claude Code, Codex, and Agent SDK",
-    "last_updated": "2026-08-21",
-    "updated": "2026-08-21",
-    "total_sources": 28,
+    "last_updated": "2026-09-12",
+    "updated": "2026-09-12",
+    "total_sources": 29,
     "version": "1.2"
   },
   "categories": {
@@ -108,6 +108,17 @@
         "update_frequency": "monthly",
         "access": "free",
         "add_as_web_search": true
+      },
+      {
+        "name": "Rethinking skills and prompts for GPT-6 Astra",
+        "url": "https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra",
+        "description": "Model-upgrade review of trigger precision, selective context loading, workflow boundaries, and completion; verified 2026-09-12",
+        "last_verified": "2026-09-12",
+        "add_as_web_search": true,
+        "type": "guide",
+        "relevance": "Model-upgrade review of trigger precision, selective context loading, workflow boundaries, and completion; verified 2026-09-12",
+        "update_frequency": "as-needed",
+        "access": "free"
       }
     ],
     "research_and_benchmarks": [

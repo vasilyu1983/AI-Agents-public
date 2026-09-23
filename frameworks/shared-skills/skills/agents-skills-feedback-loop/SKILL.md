@@ -36,6 +36,7 @@ The name is borrowed from the 2026 "learnings loop" pattern (MindStudio) and Ant
 3. Use `scripts/append_learning.py` for raw entries; do not hand-edit raw `learnings.md` during normal operation.
 4. Use `scripts/consolidate.py <skill-dir>` when the raw file hits the cap, before release, or during a scheduled maintenance pass.
 5. Promote durable lessons into the host skill's `references/` only after human review; never auto-rewrite `SKILL.md`.
+6. Before appending, search raw and consolidated files for the same claim and its negation. Keep raw `learnings.md` append-only: add a new dated corroboration or conflict through `append_learning.py` and reference the earlier entry or claim. Merge or deduplicate only in the derived `learnings.consolidated.md` during the documented human-reviewed consolidation path, preserving dates and provenance; retain unresolved conflicts as open questions until the scope or runtime difference is resolved.
 
 ## ASCII Flow
 
@@ -161,12 +162,12 @@ Hard limits (refuse rather than truncate):
 
 ## The Addendum
 
-Any skill that opts in adds this block, verbatim, near the end of its `SKILL.md`:
+Any skill that opts in adds this block, or a scoped equivalent preserving conditional reads and capture boundaries, near the end of its `SKILL.md`:
 
 ```markdown
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
 ```
@@ -275,7 +276,7 @@ The filter is project-specific. The default filter lives in `references/learning
 
 The mechanics above (caps, dates, dedup ratio) are checkable by script. The following are not, and are where most wired loops actually fail:
 
-- **A quiet loop is not a healthy loop.** `--audit` reporting `status=ok` only means the files are in shape — it does not mean the loop is being used. Cross-check `raw=0` or a stale `oldest` date against how often the host skill is actually invoked (check recent transcripts or the Layer 1 log). A high-traffic skill with zero raw entries after 60+ days almost always means the addendum stopped firing (someone edited it out, or nobody reads `learnings.consolidated.md` before applying the skill) — not that nothing went wrong. Silence is a signal, not an all-clear.
+- **Silence needs context.** `--audit` establishes file shape, not learning quality or usage. During a feedback-loop audit, compare recurring failures with recorded lessons before diagnosing missed capture. Use `raw=0`, a stale `oldest` date, or extended silence (for example, 60 days) as prompts to inspect authorized usage evidence such as recent transcripts or the Layer 1 log. These are diagnostic cues, not failure thresholds: an empty or unchanged file alone does not justify mandatory pre-reads or prove that the loop failed.
 - **`consolidate.py`'s duplicate clustering is syntactic, not semantic.** It clusters near-identical wording (`SequenceMatcher` ratio ≥0.82); it will not notice that "webhook needs HMAC in header" and "signature must be in the request header, not the payload" are the same lesson said twice. Treat the script's promotion proposals as a *first pass*, not the ground truth for "recurred ≥2×" — a human still has to read the raw file once per cycle to catch semantically-duplicate entries the ratio threshold misses, and to catch the reverse: two genuinely different lessons that happen to share vocabulary and get wrongly clustered.
 - **Signal vs. noise is a counterfactual test, not a vibe.** Before appending, ask: if the *next* session had read this bullet first, would it have behaved differently? If the answer is no — it's an interesting observation, a diary entry, or something already obvious from reading the skill's `SKILL.md` — it's noise. Reject it even if it feels insightful; a loop that accepts "interesting" over "load-bearing" degrades into the exact ACE-paper failure mode ("context collapse" / "brevity bias" per `references/evidence-base.md`) where volume drowns out the few entries that matter.
 - **Recurring entries that never get consolidated are a maintenance failure, not a filter failure.** If the same lesson keeps getting re-appended in raw form across cycles instead of being promoted to consolidated, the operator is skipping consolidation, not writing bad entries. Check the cadence (`## Consolidation Cadence`) before tightening the filter.
@@ -309,6 +310,7 @@ The mechanics above (caps, dates, dedup ratio) are checkable by script. The foll
 - [scripts/consolidate.py](scripts/consolidate.py) - audit and consolidate raw entries
 - [scripts/promote_learning.py](scripts/promote_learning.py) - Layer 3 eval gate; refuses promotion without a discriminating regression eval (never edits SKILL.md)
 - [scripts/bulk_wire.py](scripts/bulk_wire.py) - mechanical loop wiring helper
+- [scripts/test_bulk_wire.py](scripts/test_bulk_wire.py) - template parity, dry-run, and preservation regressions
 - [scripts/install_capture_hook.py](scripts/install_capture_hook.py) - idempotent installer for the Layer 1 capture hook (registers Claude `SessionEnd` + Codex `Stop`)
 - [assets/learnings.template.md](assets/learnings.template.md) - starter consolidated file
 - [assets/learnings_capture.py](assets/learnings_capture.py) - runtime-neutral Layer 1 capture hook (source of truth; installed to `$HOME/.agents/hooks/`)

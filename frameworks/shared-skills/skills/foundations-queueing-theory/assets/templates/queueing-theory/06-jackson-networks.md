@@ -100,7 +100,7 @@ A network of LLM inference engines is **not** a classical Jackson network. The p
 
 However, the throughput-optimality criterion maps to classical stability theory:
 
-- **Single-engine serving**: any work-conserving scheduling policy achieves maximum stable throughput (Dai, Deng, Li & Peng, arXiv:2504.07347; accepted POMACS / SIGMETRICS 2026 as "Optimal Scheduling Algorithms for LLM Inference: Theory and Practice"). Empirically, Orca and Sarathi-serve are throughput-optimal under this criterion; vanilla vLLM (without continuous batching) is not maximally stable. _(Flag: verify against current vLLM version — scheduler may have been updated.)_
+- **Single-engine serving**: any work-conserving scheduling policy achieves maximum stable throughput (Dai, Deng, Li & Peng, arXiv:2504.07347; "Throughput-Optimal Scheduling Algorithms for LLM Inference and AI Agents", arXiv:2504.07347; do not conflate with Bari et al. DOI 10.1145/3771574). Empirically, Orca and Sarathi-serve are throughput-optimal under this criterion; vanilla vLLM (without continuous batching) is not maximally stable. _(Flag: verify against current vLLM version — scheduler may have been updated.)_
 - **Multi-agent LLM routing**: work-conservation alone is insufficient for multi-engine networks. Apply MaxWeight-style scheduling on the inter-engine routing layer, analogous to the stability condition for open stochastic processing networks.
 
 **Key analogy**: the throughput-optimality condition for single LLM engines plays the same role as the stability condition for open Jackson networks (ρᵢ < 1 at each station) — necessary but not sufficient for tail-latency SLOs.

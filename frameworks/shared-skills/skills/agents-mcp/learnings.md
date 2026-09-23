@@ -2,6 +2,7 @@
 
 ## Patterns That Work
 
+- [2026-09-03] If Supabase MCP rejects Codex dynamic registration scopes with HTTP 400, pass its supported read scopes explicitly through codex mcp login --scopes; align them with read_only=true.
 - [2026-08-18] On Codex CLI 0.147.0, `codex mcp add NAME --url URL` automatically starts and can complete OAuth when the remote server advertises OAuth support, so verify the command output before running a separate `codex mcp login NAME`.
 ## Mistakes to Avoid
 

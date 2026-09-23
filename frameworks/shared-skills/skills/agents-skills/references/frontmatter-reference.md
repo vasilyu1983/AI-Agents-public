@@ -230,15 +230,17 @@ If you document or demo these in a shared skill, label them as Anthropic-specifi
 
 ## Repo-Local Codex Notes
 
-This repository uses the portable `SKILL.md` contract for Codex-compatible skills.
+This repository uses the portable `SKILL.md` contract for Codex-compatible skills. Verified 2026-09-11: Codex supports optional `agents/openai.yaml` for UI metadata, dependencies, and invocation policy; it is not merely a repository-local convenience. `policy.allow_implicit_invocation: false` disables implicit invocation while preserving explicit `$skill` use. Do not apply it across a library just to suppress a budget warning.
 
-Verified (2026-08-26, codex-cli 0.149.1 binary + docs): Codex CLI discovers skills natively from `.agents/skills` (scanned from the current working directory up to the repository root) and from `~/.codex/skills` (personal) / `.codex/skills` (project) — it reads the standard `name` + `description` frontmatter directly, the same as the open spec, with no adjunct YAML required. **Correction to earlier guidance:** `agents/openai.yaml` IS read natively by current Codex CLI (0.149.x) — it sits in Codex's capability-discovery manifest list alongside `.mcp.json` and plugin manifests, described in the binary as "an extended, product-specific config intended for the machine/harness to read, not the agent." Supported keys include `interface.{display_name, short_description, icon_small, icon_large, brand_color, default_prompt}`, `dependencies.tools[]`, and `policy.allow_implicit_invocation` — when `false`, the skill is **not injected into model context by default** but stays invocable explicitly via `$skill` (defaults to `true`). This makes `policy.allow_implicit_invocation: false` the native per-skill lazy-loading switch for explicit-only skills, complementing the global `skills.max_context_tokens` budget.
+Catalog size belongs to Codex configuration (`skills.max_context_tokens`), not portable frontmatter. See [skill-context-budgets.md](skill-context-budgets.md) for limits and verification.
+
+Codex discovers the portable `name` and `description` from `SKILL.md`. This repository may also carry `agents/openai.yaml` as Codex-facing interface and policy metadata. Treat its supported fields, discovery locations, listing budgets, and invocation effects as runtime behavior: verify them against the installed runtime and current official documentation before changing registration or claiming what enters model context.
 
 Treat the file as harness-facing config, not frontmatter:
 
 - Keep `SKILL.md` valid on its own; do not move required workflow instructions into `agents/openai.yaml`.
 - If `agents/openai.yaml` exists, regenerate or revalidate it when the skill intent changes.
-- Set `policy.allow_implicit_invocation: false` for specialists that should only be reached explicitly or via a router (`legal-*`, `project-*`, and client-specific families) to keep them out of the per-session skills listing budget.
+- For specialists intended to load only explicitly or through a router, verify and use the installed runtime's explicit-invocation policy rather than assuming an adjunct field changes the effective listing.
 - Keep the fields distinct:
   - `interface.short_description` should read like a compact UI label.
   - `interface.default_prompt` should tell Codex when to load the skill.

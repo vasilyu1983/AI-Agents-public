@@ -2,9 +2,10 @@
   "metadata": {
     "title": "Cybernetics and VSM Foundations — Sources",
     "description": "Primary texts and references for 11 cybernetics and VSM primitives: feedback loops, Ashby's Law, VSM systems 1–5, S3*, recursion levels, variety engineering, and algedonic channels",
-    "last_updated": "2026-08-14",
+    "last_updated": "2026-09-17",
     "skill": "foundations-cybernetics-vsm",
-    "total_sources": 25
+    "total_sources": 25,
+    "verification_scope": "Targeted correctness and operational-artifact review; not a fresh verification of every historical paper."
   },
   "primary_texts": [
     {
@@ -172,7 +173,7 @@
       "id": "TelukuntaCASE2026",
       "name": "The CASE Framework: A Multi-Disciplinary Control Architecture for Governing Enterprise Agentic AI",
       "url": "https://arxiv.org/abs/2608.10153",
-      "description": "Telukunta, S., Lilis, G.N., & Baron, L. (2026). arXiv:2608.10153 [cs.AI], submitted 10 August 2026. Four-layer governance architecture (control / complex adaptive systems / supervisory cybernetics / SRE) for enterprise agent fleets. Explicitly operationalises Beer's VSM — recursion as federated supervision, and the algedonic channel as a severity signal that skips escalation tiers to page accountable authority unfiltered. Formalises human oversight as V_human x G >= V_agents, where G is engineered amplification gain, evaluated at peak behavioural variety, converting EU AI Act Article 14 obligations into a falsifiable design condition with named artefacts (variety budgets, amplification chains, escalation SLAs). Evidence grade: C (preprint, no peer review) for the CASE architecture; the underlying cybernetic condition rests on grade-A sources (Ashby1956, Conant1970, Beer1979). Relevant to primitive #2, #10, #11, and the Agent-Team Topology Audit recipe.",
+      "description": "Telukunta, S., Lilis, G.N., & Baron, L. (2026). arXiv:2608.10153 [cs.AI], submitted 10 August 2026. Proposes a four-layer governance architecture for enterprise agent fleets and expresses human oversight conceptually as V_human x G >= V_agents, with G representing engineered amplification. Evidence grade C: preprint, no peer review, and the terms are not validated as commensurate raw counts. Use the inequality as framing for disturbance-response coverage, triage and escalation design, not as a quantitative deployment gate or proof of EU AI Act compliance. Relevant to primitives #2, #10 and #11.",
       "url_check": "manual"
     },
     {

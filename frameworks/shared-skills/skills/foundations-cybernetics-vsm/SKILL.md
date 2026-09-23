@@ -2,8 +2,8 @@
 name: foundations-cybernetics-vsm
 description: Applies Beer's VSM and Ashby's Law to diagnose org or agent-system viability. Use when a team or agent hierarchy has coordination, escalation, or requisite-variety problems.
 compatibility: Portable core only.
-version: "1.2"
-last_validated: 2026-08-14
+version: "1.3"
+last_validated: 2026-09-17
 ---
 
 # Cybernetics and Viable System Model Foundations
@@ -16,7 +16,7 @@ last_validated: 2026-08-14
 - "Why does this team/system keep failing despite individual competence?" — likely missing S2/S3*/S4
 - Recursion across levels — same control pattern at squad / department / company
 - Algedonic channel design — when does a critical signal bypass hierarchy and reach S5 directly?
-- Variety-engineering — orchestrator levers vs environment variety (Ashby's Law)
+- Variety-engineering — disturbance-to-signal-to-effective-response coverage (Ashby's Law)
 
 **Skip and use simpler alternatives when:**
 - Single team, no recursion, no orchestration question — VSM is overkill
@@ -100,15 +100,15 @@ Load [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-tr
 |-------------|--------------------------|-----|
 | System 3 collapses System 1 autonomy (micromanagement) | S3 is consuming all operational variety — no recursion depth; Ashby violation | Restore S1 autonomy; S3 sets policy and limits, not execution steps |
 | System 4 disconnected from System 3 (strategy-execution gap) | S4 output never reaches S3; no S3/S4 homeostat | Build explicit S3/S4 interface: shared planning cadence, mutual translation layer |
-| Ashby's Law violated by under-instrumented control | Controller has fewer variety states than the system it governs | Add attenuators (aggregation, exception-only reporting) or amplifiers (finer-grained sensing) to balance channels |
-| Algedonic channel never used — S5 blind to crises | Pain signals absorbed by normal hierarchy; S5 receives filtered reports only | Implement direct bypass route with trigger threshold; test it quarterly |
+| Ashby's Law violated by under-instrumented control | Disturbance distinctions that require different responses are collapsed or unreachable | Define the disturbance classes and response repertoire; add attenuation or amplification where a tested control distinction is missing |
+| Algedonic channel never used — S5 blind to crises | Pain signals absorbed by normal hierarchy; S5 receives filtered reports only | Implement direct bypass route with trigger threshold; test at an interval justified by hazard, disturbance rate, consequence deadline and change events |
 | Recursion confusion — applying VSM at wrong organisational scale | S1/S3/S5 roles assigned to the wrong recursion level | Re-identify the level of recursion; redraw the system boundary before assigning roles |
 | Positive feedback loop with no balancing loop (runaway dynamics) | Reinforcing loop unchecked — growth, debt, or failure cascades | Design an explicit negative feedback loop with a goal variable and measured deviation |
 | S2 coordination layer absent — unit thrashing | S1 units interfere without coordination signals | Introduce S2 scheduling, resource-sharing protocols, or synchronisation mechanisms |
 | S3* audit channel treated as normal management reporting | Spot-check becomes routine; S1 adapts and Goodharts the signal | Keep S3* sporadic and surprise-based; vary timing and scope |
 | Variety amplified without attenuation at higher levels | Upper levels receive raw operational noise; decision paralysis | Apply variety attenuation (aggregation, exception filters) before variety reaches S3/S4 |
 | S5 identity undefined — policy vacuum | S3/S4 conflicts escalate without resolution; ad-hoc decisions contradict each other | Define S5 closure: mission, constraints, values; run S3/S4 conflicts through S5 reference frame |
-| Human oversight of an agent fleet staffed, not engineered | Reviewer headcount added without amplification gain — `V_human × G < V_agents` at peak; oversight is ceremonial | Buy capacity through `G`: automated triage, semantic summarisation, tiered escalation; publish a variety budget and escalation SLA, not a rota |
+| Human oversight of an agent fleet staffed, not engineered | Reviewer headcount is added without mapping outcome-relevant agent behaviours to detectable signals and effective interventions | Add triage, summarisation, tiered escalation, and tested intervention paths; publish the mapping and escalation SLA, not only a rota |
 
 ---
 
@@ -137,20 +137,20 @@ Load [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-tr
 **Stack**:
 1. VSM S1 (#3) — identify operational agent units and verify autonomy
 2. VSM S2 (#4) — check for coordination signals between units; absence = thrashing risk
-3. VSM S3 (#5) — confirm orchestrator has S3 function: policy-setting, not micro-execution
-4. Ashby's Law (#2) — count variety states of orchestrator vs. environment; flag under-instrumented control
+3. VSM S3 (#5) — confirm orchestrator has S3 function: bounded operational/resource policy within S5 identity and ultimate policy, rather than micro-execution
+4. Ashby's Law (#2) — map decision-relevant disturbance classes to available responses; treat raw state counts only as a diagnostic proxy
 5. Variety Engineering (#10) — add attenuators (summarisation, exception routing) if orchestrator is overwhelmed
 6. Algedonic channel (#11) — ensure critical failures bypass normal reporting to human-in-the-loop or S5
 
-**Output**: viability gap report with specific role assignments and missing interfaces.
+**Output**: viability gap report with specific role assignments and missing interfaces. Do not present a count of alerts, agents, labels, or dashboard states as a cardinal proof of requisite variety unless the state partition and required response mapping are defined.
 
-**Inputs:** S1 agent units with scope and autonomy level (e.g., retrieval agent — bounded to knowledge base, no write access); orchestrator control levers (count of independent parameters the operator can adjust, e.g., routing threshold, retry limit, concurrency cap); environment variety estimate (distinct decision states per week = #task types × #tool surfaces × #concurrent pipelines).
+**Inputs:** S1 agent units with scope and autonomy level; outcome-relevant disturbance classes; the observations that distinguish them; available responses; and constraints on when each response remains effective.
 
-**Rules:** Ashby check — if orchestrator lever count < environment variety states, flag a requisite-variety deficit and require attenuators (summarisation, exception routing) or additional levers before deployment; S2 absent if any two S1 units share a resource (queue, tool, memory store) without an explicit coordination protocol — flag as thrashing risk; S3* audit must run ≥1/quarter (surprise sample, not scheduled review); S4 intelligence reports (environment change signals, capability drift) must reach S5 (human-in-the-loop or governance authority) ≥1/cycle; **Conant-Ashby model-adequacy check**: verify that the orchestrator model can represent the full task-domain distinction space — if the model cannot internally represent the distinctions required by the task (e.g., context window too narrow for domain state space, tool count insufficient to cover action space), it cannot be a good regulator regardless of architectural changes (Conant & Ashby 1970); add a domain-model attenuator (task classifier, routing layer) or upgrade the model before applying variety-engineering fixes.
+**Rules:** Ashby check — for every outcome-relevant disturbance class, verify that the orchestrator can detect the distinction and select an effective response under real timing, authority, and resource constraints. Missing or coupled responses identify the gap; do not infer it by subtracting lever counts from state counts. S2 is absent if S1 units share a resource without an explicit coordination protocol. **Conant-Ashby model-adequacy check:** verify that the regulator model represents the distinctions required to choose among effective responses; attenuate demand or improve sensing/model/action capacity where the mapping fails.
 
-**Outputs:** Viability gap table (Systems 1–5 each: present Y/N, severity H/M/L if absent); Ashby variety delta (environment variety states − orchestrator lever count, positive = deficit); list of missing interfaces (e.g., "no S2 coordination protocol between retrieval and generation agents", "no algedonic bypass to human operator"); recommended structural change per gap (e.g., "add exception-only routing attenuator at S3", "define shared-resource scheduling protocol at S2").
+**Outputs:** Viability gap table; disturbance-to-observation-to-response mapping with uncovered distinctions and response constraints; missing interfaces; and a recommended structural change per gap.
 
-**Human-oversight variety condition.** When a human is the S5 or the accountable overseer of an agent fleet, unaided human variety is structurally below fleet variety — adding reviewers does not close the gap, because human variety scales linearly while fleet behavioural variety scales with agents × tools × task types. State the condition as `V_human × G ≥ V_agents`, where `G` is engineered amplification gain (automated triage, semantic summarisation, tiered escalation) and the inequality must hold **at peak** behavioural variety, not average load (Telukunta et al. 2026, arXiv:2608.10153). This makes "meaningful human oversight" a falsifiable design check with named artefacts — a variety budget, the amplification chain that supplies `G`, and escalation SLAs — rather than a staffing promise. Design consequence: oversight capacity is bought almost entirely through `G` (attenuation and amplification machinery), so an oversight plan that lists only headcount has not been engineered.
+**Human-oversight variety condition.** Telukunta et al. (2026, arXiv:2608.10153) propose `V_human × G ≥ V_agents` as a conceptual framing for amplification through triage, summarisation, and tiered escalation. Do not operationalize these terms as raw cardinal counts or use the inequality as a deployment proof. Test whether peak outcome-relevant behaviours are detected, routed within the SLA, and met by an authorized effective intervention. Headcount without those paths is not an oversight design.
 
 ---
 
@@ -166,13 +166,13 @@ Load [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-tr
 5. VSM S5 (#8) — write a one-page identity document: mission, non-negotiable constraints, value principles
 6. Feedback loops (#1) — design at least one balancing loop per key performance variable (burn rate, NPS, lead time)
 
-**Inputs:** Squad list with headcount and operational scope; leadership roles mapped to S3/S4/S5 candidates; strategy and board cadence (meeting frequency, decision latency); environment variety estimate (distinct decision states per week = #customer segments × #product surfaces × #release cadences).
+**Inputs:** Squad scopes; leadership roles mapped to S3/S4/S5; strategy cadence; recurring outcome-relevant operating disturbances; sensing paths; and available responses.
 
-**Rules:** Each of S1–S5 must be present and named — absence at S3* or S4 is critical severity, absence at S2 is high severity when ≥2 squads share any resource; Ashby check — if S3 leadership lever count (e.g., headcount allocation, OKR targets, budget envelopes) < operational variety states, flag deficit and require additional attenuators or lever expansion; S3* audit must run ≥1/quarter as a surprise spot-check; S4 environmental intelligence reports must reach S5 (CEO/board) ≥1 per strategy cycle.
+**Rules:** Each of S1–S5 must be present and named. For each material disturbance, verify a sensing and response path at the correct recursion level; flag uncovered distinctions rather than comparing counts. S3* audit and S4-to-S5 cadence should be set from risk and change rate, then tested.
 
-**Outputs:** Role-to-VSM-system mapping table (role name → S1/S2/S3/S3*/S4/S5, present Y/N); variety delta (operational variety states − S3 lever count); missing-system flag list (e.g., "S4 unassigned — no owner for competitive scanning", "S3* cadence undefined"); recommended structural change per gap.
+**Outputs:** Role-to-system mapping; disturbance-response coverage table; missing-system list; and recommended structural change per uncovered or ineffective path.
 
-**Worked example:** SaaS company, 4 product squads (S1, variety ≈ 12 product surfaces × 4 release cadences = 48 states) → eng leadership weekly sync (S2, coordination via shared roadmap; attenuates cross-squad scheduling conflicts) → VPE (S3, controls resource allocation + sets OKR policy; S3* audit = monthly on-call review, surprise sample of 3 incidents per squad) → strategy team (S4, scans competitor moves + market shifts, reports quarterly) → CEO/board (S5, identity: "developer-first, no dark patterns"). Variety check: S3 must absorb 48 operational states; if VPE has only 2 levers (headcount, OKR targets), that is a requisite-variety violation — add a third attenuator (e.g., tiered escalation tiers) or push more variety down to S2. Failure signal 1 (S3* gap): if the on-call audit cadence drops below 1/quarter, ground-truth drift accumulates — squads learn to report cleanly upward without S3 knowing actual failure rates. Failure signal 2 (S4-S5 disconnect): if S4 competitor reports never reach a board slot, the org loses adaptive capacity within ~2–3 strategy cycles; S3 optimises the current business model while the market shifts.
+**Worked example:** A SaaS company maps four product squads to S1, shared-roadmap coordination to S2, resource policy and operational audit to S3/S3*, market scanning to S4, and mission constraints to S5. The audit lists material disturbances such as a cross-squad dependency conflict, a production incident, and a market change. If the market-change signal reaches S4 but no decision path can alter portfolio allocation, that distinction lacks an effective response; add the S4-to-S5 decision path or delegate bounded authority. Counts of surfaces, cadences, or management levers do not establish the gap.
 
 ---
 
@@ -189,7 +189,7 @@ Load [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-tr
 
 **Inputs:** Feedback loops present (count and type — balancing or reinforcing); latency of each loop (time from signal to corrective action, in minutes or hours); S2 coordination protocols in place (count and description, e.g., "on-call handoff protocol", "shared incident channel"); environment change rate (how quickly the production environment can shift state, e.g., deploy frequency × distinct failure modes per week).
 
-**Rules:** Feedback loop latency must be shorter than the environment change rate — if a loop takes 30 min to close and deploys happen every 10 min, flag a latency violation; S2 coordination protocols required when ≥2 S1 units (e.g., on-call teams, services) share a resource (queue, database, API gateway) — absence is a critical gap; S3* post-mortem audit must compare what S3 saw (dashboards, alerts) against ground truth (actual failure timeline) — run after every P1 incident; algedonic trigger threshold must be defined and tested ≥1/quarter.
+**Rules:** Compare detection-plus-response latency with the consequence deadline and disturbance evolution, including overlapping changes. A 30-minute response with deploys every 10 minutes is an investigation signal, not an automatic violation: deploy frequency alone does not determine the effective intervention window; S2 coordination protocols required when ≥2 S1 units (e.g., on-call teams, services) share a resource (queue, database, API gateway) — absence is a critical gap; S3* post-mortem audit must compare what S3 saw (dashboards, alerts) against ground truth (actual failure timeline) — run after every P1 incident; algedonic trigger threshold must be defined and tested at a risk-based interval and after material channel/authority changes.
 
 **Outputs:** Loop diagram (each loop with type, goal variable, latency, and status — active/missing); latency table (loop name, measured latency, environment change rate, pass/fail); missing-protocol list (each shared resource without an S2 coordination protocol flagged as H severity); recommended structural change per gap (e.g., "reduce alert-to-page latency from 15 min to <5 min", "add shared-queue ownership protocol between service A and B").
 
@@ -200,7 +200,7 @@ Load [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-tr
 **Goal**: prevent a platform team from becoming a bottleneck as it serves multiple product teams.
 
 **Stack**:
-1. Ashby's Law (#2) — measure: how many variety states does the platform team's control surface have vs. the demand variety of consuming teams?
+1. Ashby's Law (#2) — map outcome-relevant request/disturbance classes to observable signals and effective platform responses
 2. Variety Engineering (#10) — apply amplifiers (self-service APIs, documentation, inner-source) to expand platform's effective variety; apply attenuators (standard interfaces, request templates) on the demand side
 3. VSM S2 (#4) — add coordination protocol between consuming teams to prevent conflicting platform requests
 4. VSM S3 (#5) — platform S3 sets platform-wide policy; individual platform sub-teams are S1 units with autonomy within policy
@@ -208,11 +208,11 @@ Load [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-tr
 
 **Output**: platform operating model with variety audit, self-service expansion plan, and S3 policy layer.
 
-**Inputs:** Platform team control levers (count of independent parameters the platform can adjust, e.g., rate limits, API versioning, SLA tiers, capacity allocation); environment variety estimate (distinct decision states per week = #consuming teams × #integration surfaces × #request types); S2 coordination protocols between consuming teams (count); current platform lead time and consumer satisfaction score as baseline.
+**Inputs:** Outcome-relevant request classes, their signals, effective platform responses and constraints; coordination protocols; lead time; and consumer outcome baseline.
 
-**Rules:** Ashby check — if platform lever count < consuming-team variety states, flag a requisite-variety deficit; resolve by amplifying platform levers (self-service APIs, inner-source pathways) or attenuating demand variety (standard request templates, tiered SLAs); S2 coordination protocol required when ≥2 consuming teams issue conflicting platform requests — absence flagged as H severity; S3 policy layer must be explicit (written platform policy: what platform decides vs. what consumers decide); feedback loop latency (platform lead time) must be measured and improving — stagnant lead time signals S3 policy or S2 coordination failure.
+**Rules:** Flag a variety gap when an outcome-relevant request distinction cannot be detected or lacks an effective response under load. Resolve it through self-service/action amplification or demand attenuation. Require coordination for conflicting requests and an explicit S3 policy boundary. Diagnose stagnant lead time before assigning it to S2 or S3.
 
-**Outputs:** Variety audit table (platform lever count vs. consuming-team variety states, delta, pass/fail); self-service expansion plan (list of attenuators and amplifiers to close variety gap); S3 policy layer description (scope of platform decisions vs. consumer decisions); missing coordination protocols flagged per shared resource; recommended structural change per gap.
+**Outputs:** Request-class-to-response coverage table; self-service expansion plan; S3 policy boundary; missing coordination protocols; and recommended structural change per gap.
 
 ---
 
@@ -221,7 +221,7 @@ Load [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-tr
 1. Identify the system boundary and the level of recursion you are working at (use recursion levels #9 first).
 2. Map the five VSM systems to actual roles, teams, or agent components.
 3. Check for missing or collapsed systems — use the [Decision Checklist](#decision-checklist).
-4. Apply Ashby's Law (#2) to validate that control capacity matches environmental variety.
+4. Apply Ashby's Law (#2) by testing the detection and effective-response path for each outcome-relevant disturbance class.
 5. Design or audit variety engineering (#10) mechanisms on each inter-level channel.
 6. Confirm algedonic channels (#11) exist and are tested.
 7. For specific failure modes, open the per-primitive playbook in [`assets/templates/cybernetics-vsm/`](assets/templates/cybernetics-vsm/).
@@ -235,9 +235,9 @@ Load [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-tr
 Viability or organizational-control problem
   -> Set system boundary and recursion level
   -> Map Systems 1-5 to real roles, teams, or agents
-  -> Check Ashby variety gap
-     +-- regulator variety too low -> attenuate demand or amplify control capacity
-     +-- variety matched -> audit channels
+  -> Check Ashby response coverage
+     +-- class undetected or response ineffective -> attenuate demand or amplify sensing/action capacity
+     +-- material classes covered -> audit channels and coupled disturbances
   -> Verify algedonic alerts and policy/intelligence balance
   -> Return missing systems, channel fixes, and recursion risks
 ```
@@ -245,6 +245,8 @@ Viability or organizational-control problem
 ---
 
 ## Navigation
+
+- [Fillable response-coverage matrix and completed synthetic diagnosis](references/response-coverage-audit.md)
 
 - Per-primitive playbooks: [`assets/templates/cybernetics-vsm/`](assets/templates/cybernetics-vsm/) (one file per primitive)
 - Composition guide: [`assets/templates/cybernetics-vsm/README.md`](assets/templates/cybernetics-vsm/README.md)
@@ -265,7 +267,7 @@ Viability or organizational-control problem
 - **Stafford Beer**: VSM systems 1–5, algedonic channels, recursion levels, and variety engineering are defined in Beer 1972 (_Brain of the Firm_), Beer 1979 (_Heart of Enterprise_), and Beer 1985 (_Diagnosing the System for Organizations_). Verify claims about specific Beer definitions against these primary texts. **2026-07 correction**: per-primitive playbook citations previously attributed each VSM system to its own numbered chapter of _Brain of the Firm_ (e.g., "Ch. 3: System One," "Ch. 8: System Five"). The verified table of contents shows no such one-system-per-chapter structure — Systems One–Three are treated together in one section ("Autonomics"), System Four in "Environments of Decision," and System Five in "The Multinode"; recursion and algedonic channels are not confined to single dedicated chapters at all. Citations in `assets/templates/cybernetics-vsm/` were corrected to cite by section title rather than a fabricated chapter number. Chapter-level citations to Beer 1985, Hoverstadt 2009, and Schwaninger 2006 have not been independently re-verified against primary copies in this pass — treat their specific chapter numbers as approximate until confirmed.
 - **Project Cybersyn** (Chile, 1971–1973): the most-cited real-world VSM deployment is also the most mythologized. Per Medina 2011 (_Cybernetic Revolutionaries_, MIT Press — the primary archival history), Cybersyn was a telex network plus one mainframe with roughly daily-lagged data, not a real-time networked control system; the Opsroom was never fully deployed (its move to the presidential palace was approved only three days before the 11 September 1973 coup); only ~26.7% of nationalized firms were incorporated by May 1973; and the October 1972 truckers'-strike response was a genuine, documented operational success for the S1/S2 layer. See `references/patterns-scenarios-traps.md` → "Historical Grounding: Project Cybersyn" for the full fact-vs-myth table before citing this case as precedent.
 - **W. Ross Ashby**: Law of Requisite Variety is from Ashby 1956 (_An Introduction to Cybernetics_, ch. 11). The formal statement is W(error) ≤ V(disturbance) − V(regulator). Verify quantitative claims against the original. Note: Siegenfeld & Bar-Yam (2025, _Entropy_, 27(8), 835, DOI: 10.3390/e27080835; PMC-indexed as PMC12385218) propose a multi-scale generalisation of Ashby's Law showing that variety requirements are scale-dependent — a relevant refinement for hierarchical/recursive agent architectures where the same system exhibits different variety at different recursion levels. Treat as a clarification of application scope, not a revision of the original law.
-- **Requisite variety in AI-oversight regulation**: the `V_human × G ≥ V_agents` framing above is from Telukunta, Lilis & Baron (2026, arXiv:2608.10153, submitted 10 August 2026), which explicitly builds on Beer's VSM — recursion and the algedonic channel — for enterprise agent fleets. Evidence grade: C (preprint, not peer-reviewed); the cybernetic core it rests on (Ashby 1956, Conant & Ashby 1970, Beer 1979) is grade A, so treat the *condition* as sound and the *four-layer CASE architecture* around it as one unvalidated proposal among several. On the regulatory hook: EU AI Act Article 14 (human oversight) obligations for Annex III high-risk systems apply from 2 August 2026, but Annex I product-embedded high-risk systems run to 2 August 2027 — do not repeat the flat "enforceable from August 2026" claim without naming which annex applies.
+- **Requisite variety in AI-oversight regulation**: the `V_human × G ≥ V_agents` framing above is from Telukunta, Lilis & Baron (2026, arXiv:2608.10153, submitted 10 August 2026), which builds on Beer's VSM for enterprise agent fleets. Evidence grade: C (preprint, not peer-reviewed). Treat the inequality and CASE architecture as a conceptual proposal, not a validated quantitative condition; operational evidence must come from disturbance-response coverage and intervention tests. The underlying cybernetic sources are stronger evidence for the qualitative need for requisite variety, not for multiplying raw oversight counts. On the regulatory hook: EU AI Act Article 14 obligations differ by high-risk category and date; verify the applicable provision before making a current compliance claim.
 - **Norbert Wiener**: Feedback and cybernetics foundations from Wiener 1948 (_Cybernetics: Or Control and Communication in the Animal and the Machine_). Positive/negative feedback terminology is consistent with Wiener's original usage.
 - **Espinosa & Walker**: VSM applied to complexity and sustainability in _A Complexity Approach to Sustainability_ (2011). Recursion and viable-systems analysis in real organisations.
 - **Schwaninger**: Intelligent organisations and VSM application in _Intelligent Organizations_ (2006). Apply numeric claims (e.g., performance improvement percentages) only when derived from primary case studies, not secondary summaries.
@@ -274,6 +276,6 @@ Viability or organizational-control problem
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

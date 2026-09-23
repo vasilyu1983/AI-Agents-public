@@ -11,8 +11,9 @@ Sensitivity analysis does not prove that confounding is absent. It communicates 
 For a risk ratio (RR) estimate between exposure and outcome:
 E-value = RR + √(RR × (RR − 1))
 
-For the confidence interval bound (to assess if CI includes the null):
-E-value_CI = RR_lower + √(RR_lower × (RR_lower − 1))
+For the confidence interval, use the bound closest to the null. For a protective
+association entirely below 1 this is the upper bound; invert that bound before
+applying the formula. If the interval includes 1, its E-value is 1.
 
 A large E-value means a confounding RR of that magnitude with both exposure and outcome would be needed to nullify the finding. Small E-values indicate fragile conclusions.
 
@@ -52,19 +53,25 @@ Do not use sensitivity analysis as a replacement for identifying assumptions —
 **E-value for point estimate** (RR = 0.75 → use reciprocal for protective effect = 1/0.75 = 1.33):
 E-value = 1.33 + √(1.33 × 0.33) = 1.33 + 0.66 = 1.99
 
-**E-value for CI lower bound** (RR_lower = 0.62 → reciprocal = 1.61):
-E-value_CI = 1.61 + √(1.61 × 0.61) = 1.61 + 0.99 = 2.60
+**E-value for CI bound closest to the null** (RR_upper = 0.91 → reciprocal ≈ 1.10):
+E-value_CI ≈ 1.10 + √(1.10 × 0.10) ≈ 1.43
 
-**Interpretation**: to fully explain away the point estimate, an unmeasured confounder would need to be associated with both coffee drinking and cardiovascular events with a risk ratio of at least 1.99. To explain away the confidence interval, the confounder would need an association of at least 2.60 with both.
+**Interpretation**: to fully explain away the point estimate, an unmeasured confounder would need to be associated with both coffee drinking and cardiovascular events with a risk ratio of about 2.0 each, conditional on measured covariates. Moving the confidence interval to include the null requires associations of about 1.43 each.
 
 **Comparison to known confounders**:
 - Exercise (a known healthy-lifestyle confounder): RR_with_coffee ≈ 1.4, RR_with_CV_risk ≈ 1.5
-- Combined effect ≈ 1.4 × 1.5 / (1.4 + 1.5 − 1) ≈ 1.45 < 1.99
+- Illustrative bias factor = 1.4 × 1.5 / (1.4 + 1.5 − 1) ≈ 1.105. Compare this bias factor with the inverted observed RR 1.333, not directly with the E-value 2.0, which is a symmetric association-strength threshold. The associations above are hypothetical, not verified exercise estimates
 
-**Conclusion**: the finding is robust to confounding of the magnitude of exercise alone. It would require a stronger confounder (RR ≥ 2.0 with both exposure and outcome) to fully explain the association. The finding is relatively robust.
+**Conclusion**: interpret both values against measured, domain-plausible confounders; the E-value alone does not establish causality or a universal action threshold.
+
+Run the checked calculator for risk-ratio inputs:
+
+```bash
+python3 scripts/evalue.py --rr 0.75 --ci-low 0.62 --ci-high 0.91
+```
 
 ## Sources
 
-1. VanderWeele, T. J., & Ding, P. (2017). Sensitivity Analysis in Observational Research: Introducing the E-Value. *Annals of Internal Medicine*, 167(4), 268–274.
+1. VanderWeele, T. J., & Ding, P. (2017). Sensitivity Analysis in Observational Research: Introducing the E-Value. *Annals of Internal Medicine*, 167(4), 268–274. https://doi.org/10.7326/M16-2607
 2. Rosenbaum, P. R. (2002). *Observational Studies* (2nd ed.). Springer. Chapter 4.
 3. Cinelli, C., & Hazlett, C. (2020). Making Sense of Sensitivity: Extending Omitted Variable Bias. *Journal of the Royal Statistical Society: Series B*, 82(1), 39–67.

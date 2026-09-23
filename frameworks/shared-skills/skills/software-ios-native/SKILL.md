@@ -22,7 +22,7 @@ Use this skill for native iOS work only. It is the default shared-skill entrypoi
 | UI automation tests | XCTest / XCUITest | Keep using for UI and performance tests |
 | **State machine discipline** | | |
 | Submit guard | `guard state == .idle else { return }` | Prevents double-tap duplicate submissions in `@Observable` stores |
-| Auto-reset transitions | `Task { try await Task.sleep(for: .milliseconds(500)); state = .idle }` | Composer/input ready for next action without manual UI reset |
+| Transient completion | One-shot UI effect or explicit acknowledgement | Do not reset durable state on an arbitrary timer; store and cancel any delayed task |
 | Minimal state enums | Remove states that can't happen anymore | Dead enum cases produce dead error handling and mislead future readers |
 | **Networking & resilience** | | |
 | Network reachability | `@Observable` singleton + `NWPathMonitor` | Publish `isConnected`; disable submit buttons when offline; start monitor in screen `.onAppear` |
@@ -88,7 +88,7 @@ Use this skill for native iOS work only. It is the default shared-skill entrypoi
 | Push notification categories | Register `UNNotificationCategory` in `didFinishLaunchingWithOptions` | Must be set before any notification arrives; match `aps.category` from backend |
 | Badge count (iOS 16+) | `try? await UNUserNotificationCenter.current().setBadgeCount(0)` | `applicationIconBadgeNumber` is deprecated; `setBadgeCount` is `async throws` |
 | Push delegate isolation | `@unchecked Sendable` + `@MainActor` async UN delegate | `nonisolated async` + nested `await MainActor.run` crashes with `_performBlockAfterCATransactionCommitSynchronizes:`. See [swiftui-observation-concurrency.md](references/swiftui-observation-concurrency.md#nonisolated-async-delegate-methods--nested-mainactorrun) and [quick-reference-extended.md](references/quick-reference-extended.md#auth--push--detailed-rows) |
-| Bare `Task { }` isolation | `Task { @MainActor [weak self] in ... }` from `@MainActor` classes | Bare `Task {}` runs on global executor; does NOT inherit `@MainActor`. See [swiftui-observation-concurrency.md](references/swiftui-observation-concurrency.md#bare-task---does-not-inherit-mainactor) |
+| `Task { }` isolation | Inherits the actor context where its closure is formed; annotate explicitly across nonisolated callbacks | `Task.detached` breaks actor inheritance. See [swiftui-observation-concurrency.md](references/swiftui-observation-concurrency.md#task--inherits-its-actor-context) |
 | `actor` vs `@MainActor final class` | Prefer `@MainActor final class` when all consumers are `@MainActor` | Round-trip `@MainActor → actor → @MainActor` causes post-await tail on wrong executor. See [swiftui-observation-concurrency.md](references/swiftui-observation-concurrency.md#actor--mainactor-final-class-refactoring-guidance) |
 | `@Sendable async` closure awaited from `@MainActor` | Retype as `@MainActor async` closure | Does NOT reliably resume on main; common in SDK `RequestExecutor` typealiases. See [swiftui-observation-concurrency.md](references/swiftui-observation-concurrency.md#sendable-async-closure-isolation-footgun) |
 | `SCNView` in `UIViewRepresentable` | Build scene once in `makeUIView`, `updateUIView` is a no-op | Reassigning `scene` in `updateUIView` crashes via CATransaction off-main. See [swiftui-observation-concurrency.md](references/swiftui-observation-concurrency.md#scnview-reassignment-in-updateuiview-anti-pattern) |
@@ -203,7 +203,7 @@ Full trap table (31 rows) in [references/ios-traps-and-scenarios.md](references/
 |---|---|---|
 | `_performBlockAfterCATransactionCommitSynchronizes:` | Private SwiftUI assertion on Concurrency Task | One of 5 root causes below; never add defensive `MainActor.run` wraps |
 | `nonisolated async` UN delegate + nested `await MainActor.run` | Notification-tap freeze / crash | Mark delegate `@MainActor`; `@unchecked Sendable`; delete nested hops |
-| Bare `Task { }` in `@MainActor` class mutating `@Observable` | Same crash; cooldown timers, `Transaction.updates`, post-sleep resets | `Task { @MainActor [weak self] in … }` |
+| `Task { }` created in a nonisolated callback then mutating `@Observable` | Off-actor UI mutation; the closure inherits the nonisolated creation context | Hop explicitly with `Task { @MainActor [weak self] in … }`; a task created inside a main-actor-isolated method already inherits that actor |
 | `@MainActor → actor → @MainActor` round-trip | Post-await tail on actor executor, not main | Promote `actor` to `@MainActor final class` when all callers are main-isolated |
 | `@Sendable async` closure awaited from `@MainActor` | Continuation doesn't reliably resume on main | Retype as `@MainActor async` closure |
 | `SCNView.scene = scene` in `updateUIView` | CATransaction on SceneKit render thread, UIKit crash | Build scene once in `makeUIView`; `updateUIView` no-op |
@@ -305,4 +305,4 @@ Version-specific crashes, regressions, and workarounds must be verified against 
 
 ## Learnings Loop
 
-Before non-trivial tasks: read `learnings.consolidated.md` (and `learnings.md` if present). After: append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md`.
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both. After: append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md`.

@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "title": "Safety Engineering Foundations \u2014 Sources",
+    "description": "Primary sources for the bounded foundation workflow; synthetic examples are not empirical findings.",
+    "last_updated": "2026-09-17",
+    "skill": "foundations-safety-engineering",
+    "cutoff": "2026-09-17"
+  },
+  "primary_sources": [
+    {
+      "id": "STPA2018",
+      "name": "STPA Handbook (MIT-STAMP-001)",
+      "author": "Nancy Leveson and John Thomas",
+      "year": 2018,
+      "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
+      "scope": "Chapter 2: control structures, four UCA categories, constraints and scenarios; relevant passages inspected.",
+      "verified_via": "Primary MIT PDF opened and relevant passages read on 2026-09-17",
+      "url_check": "manual"
+    }
+  ]
+}

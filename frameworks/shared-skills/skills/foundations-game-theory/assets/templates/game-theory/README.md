@@ -70,7 +70,7 @@ For the agent-team applied recipe layer (team.yaml manifest fields, agent-team a
 
 - **Objective**: aggregate diverse inputs without majority-vote pathologies
 - **Stack**: #13 (reasoning-tree audit) + #7 (mechanism-design synthesis — required dissent) + #11 (confidence betting — weight by conviction, not volume)
-- **Add for act/escalate**: #20 (conformal social choice — calibrated singleton acts, multi-answer set escalates)
+- **Add for calibrated selection**: #20 (a singleton proceeds to validation/authorization; multiple answers escalate; representative labeled calibration data is required)
 - **Add for adversarial inputs**: #14 (per-claim credibility)
 - **Add for multi-stakeholder output**: #15 (generative social choice)
 
@@ -89,9 +89,9 @@ For the agent-team applied recipe layer (team.yaml manifest fields, agent-team a
 - **Adversarial / compromised context**: add #14 (per-claim credibility)
 - **Multi-objective decisions**: add #9 (Pareto-Nash) or #12 (negotiation) + #15 (generative social choice)
 - **Cross-domain or ambiguous routing**: #3 (auction) for membership selection; **#16 (meta-debate role routing)** for plaintiff/defense/judge selection
-- **Long-running team optimization**: #5 (reputation) + #10 (evolutionary search) + **#17 (online Shapley prompt evolution)** for high-frequency teams (50+ runs)
+- **Long-running team optimization**: #5 (reputation) + #10 (evolutionary search) + **#17 (online Shapley prompt evolution)** for teams with adequately precise, validated contribution estimates
 - **Best-of-N synthesis (discrete answer)**: **#18 (BMV)** — Optimal Weight + Inverse Surprising Popularity
-- **Best-of-N synthesis (open-ended)**: **#19 (RCS)** — embedding-centroid selector across 5+ candidates
+- **Best-of-N synthesis (open-ended)**: **#19 (RCS)** — embedding-centroid selector across a validated candidate set (five is illustrative)
 
 For the full agent-team applied layer (team.yaml manifest, anti-patterns, checklist), see [`../../../../agents-subagents/references/game-theory-agent-teams.md`](../../../../agents-subagents/references/game-theory-agent-teams.md).
 

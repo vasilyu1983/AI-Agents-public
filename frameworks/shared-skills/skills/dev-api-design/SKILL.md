@@ -57,6 +57,19 @@ Run on every API contract before handoff:
 4. Add contract validation, breaking-change detection, and documentation.
 5. Hand off spec, examples, and rollout notes.
 
+### Compatibility evidence by change class
+
+Classify each change before calling the contract compatible:
+
+| Change class | Required evidence |
+|--------------|-------------------|
+| shape change | schema diff plus generated-client compile or consumer contract test |
+| semantic change with stable shape | before/after examples and a named behavioral assertion |
+| default, ordering, quota, or timeout change | production-like consumer test and rollout note |
+| removal or narrowing | usage evidence, deprecation window, and rollback or compatibility shim |
+
+For provider/consumer deployments, derive the safe order from message direction, changed payload side, and actual consumer tolerance. For a new optional request capability, ship provider support before consumers send it. For response enum/event expansion, or whenever a consumer may reject unknown fields or variants, ship and verify tolerant consumers before the provider emits the new value. For removals, ship consumers first, confirm old-field traffic is gone, then remove the provider behavior. Prove the relevant consumer behavior rather than inferring safety from schema additivity; a green schema diff alone is insufficient evidence for semantic compatibility or deploy order.
+
 ## Route Elsewhere
 
 - Backend implementation: [software-backend](../software-backend/SKILL.md)
@@ -165,6 +178,6 @@ Hyrum's Law framing adapted from addyosmani/agent-skills (MIT), commit `7676817`
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

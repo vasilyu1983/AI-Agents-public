@@ -64,10 +64,10 @@ T = sample period
 
 | Failure | Cause | Fix |
 |---------|-------|-----|
-| Sustained oscillation | Kp too high (undamped) | Reduce Kp; add derivative term |
+| Sustained oscillation | Kp too high (undamped) | Identify gain, delay, sampling and noise first; reduce gain or test filtered derivative only if supported by plant response |
 | Slow convergence | Kp too low | Increase Kp; increase Ki |
 | Integrator windup | I-term accumulates during saturation | Add anti-windup ([08-anti-windup.md](08-anti-windup.md)) |
-| Derivative kick | Noisy measurement magnifies Kd | Filter measurement; apply Kd to output not error |
+| Derivative kick / noise amplification | Setpoint steps kick derivative-on-error; sensor noise produces chatter | Use filtered derivative-on-measurement to avoid setpoint kick; filter/tune bandwidth for noise |
 | Steady-state offset | Ki = 0 | Add integral term |
 | Wrong response to dead time | Transport lag misread as gain | Add Smith Predictor ([07-dead-time-compensation.md](07-dead-time-compensation.md)) |
 
@@ -81,10 +81,13 @@ Kp = 0.05, Ki = 0.01, Kd = 0.005 (pre-tuned)
 
 u = 0.05·(−22) + 0.01·Σe·T + 0.005·Δe/T
   ≈ −1.1 + (small I term) + (small D term)
-  → add ~1 pod (rounded from −1.1 signal)
+  Reverse-action mapping: delta_replicas = −u, because added replicas lower CPU.
+  → add ~1 pod (rounded from +1.1 replica correction)
+  Clamp delta/count, apply anti-windup in consistent controller units, and
+  account for startup delay; these illustrative gains are not production tuning.
 ```
 
-Next cycle: CPU = 68%, error = −8%, integral shrinks, derivative damps further response.
+Next cycle: CPU = 68%, error = −8%. Without clamping, the raw integral accumulator continues decreasing by 8*T; its magnitude does not shrink merely because error is smaller. The positive error difference changes the derivative term, reducing scale-out through the reverse-action mapping.
 
 ## Sources
 

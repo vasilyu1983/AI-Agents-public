@@ -72,4 +72,4 @@ Layer on top of any team with `debate: enabled`. Especially valuable when synthe
 
 - [`05-reputation-gating.md`](05-reputation-gating.md) — calibration history feeds reputation tier assignment
 - [`07-mechanism-design-synthesis.md`](07-mechanism-design-synthesis.md) — confidence-weighted synthesis protocol
-- [`../../../references/prediction-market-confidence.md`](../../../references/prediction-market-confidence.md) — full confidence-betting overlay
+- [`../../../../agents-subagents/references/prediction-market-confidence.md`](../../../../agents-subagents/references/prediction-market-confidence.md) — full confidence-betting overlay

@@ -79,15 +79,15 @@ Note: `gh search code` forwards qualifiers to the GitHub Search API — the same
 
 GitHub's Search REST API has two different limits, both **separate from and much lower than** the 5,000 req/hr core REST budget (verified against docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api, 2026-07-11):
 
-- **Code search specifically**: **9 requests per minute** for authenticated users — the tightest limit in the whole API surface.
+- **Code search specifically**: **10 requests per minute** for authenticated users — the tightest limit in the whole API surface.
 - **All other search endpoints** (repo search, issue search, user search): **30 requests per minute** for authenticated users.
 
-`gh search code` and the GraphQL `search(type: CODE, ...)` connection both draw from the 9 req/min code-search budget; `gh search repos` draws from the 30 req/min general-search budget. Don't conflate the two when budgeting a scan.
+`gh search code` uses REST code search with a 10 req/min limit; do not assume GraphQL offers an equivalent code-search connection; `gh search repos` draws from the 30 req/min general-search budget. Don't conflate the two when budgeting a scan.
 
 Batching rules to stay within budget:
 
 1. **One wide query, local filter** — prefer a single broad query (`filename:SKILL.md language:Markdown`) over many narrow queries (`filename:SKILL.md language:Markdown path:/`, then `filename:SKILL.md language:Markdown path:references/`, ...). Fetch up to the page limit (up to 100 results) and filter client-side with `jq`.
-2. **Never parallelize code search calls** — even two concurrent calls will collide against the 9 req/min window.
+2. **Never parallelize code search calls** — use sequential requests with a conservative nine-call/minute operational budget below the published ten-call limit.
 3. **Pause between pages** — when paginating (e.g. `--limit 100` + offset), add a `sleep 7` between pages to stay under 9 req/min (repo/issue search can tolerate a shorter `sleep 2` under the 30 req/min budget).
 4. **Prefer GraphQL for repo-level filtering** — use a GraphQL `search` connection to narrow to candidate repos first, then run one targeted code search per candidate repo with `repo:<owner>/<repo>`.
 5. **Cache results locally** — write raw JSON output to `docs/research/<scan-id>/raw/code-search-<query-slug>.json` so re-runs skip the API call.

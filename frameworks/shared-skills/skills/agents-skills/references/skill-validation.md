@@ -109,9 +109,11 @@ Warning:
 
 Build evals before you polish documentation. The doc is not the source of truth; observed behavior is.
 
-### Minimum Eval Set
+### Risk-Based Eval Set
 
-| Eval Type | Minimum | What good looks like |
+The full matrix is the release target for a new skill or for an edit that materially broadens a description, changes routing ownership, or adds overlap with adjacent skills. Do not impose it retroactively on every unchanged catalog entry merely because a file crosses a line-count threshold. For established long skills, the deterministic floor is one positive pilot task; add negative controls where the routing boundary is changing or known to be ambiguous.
+
+| Eval Type | Release target | What good looks like |
 |----------|---------|----------------------|
 | Explicit | 2 prompts | `/skill-name` and direct invocation still resolve after edits |
 | Trigger (implicit) | 3 prompts | Skill activates on clear in-scope requests |
@@ -121,19 +123,35 @@ Build evals before you polish documentation. The doc is not the source of truth;
 | Runtime-specific | 1 prompt per target runtime | Extensions are either respected or clearly unnecessary |
 | Compaction-resilience | 1 prompt per long-running session | Skill content remains effective after auto-compaction |
 
-The four invocation classes (explicit, implicit, contextual, negative-control) match the OpenAI/Codex eval taxonomy and the Anthropic best-practices guidance. Skip none of them.
+The four invocation classes (explicit, implicit, contextual, negative-control) match the OpenAI/Codex eval taxonomy and the Anthropic best-practices guidance. Cover all four for a new skill or materially changed routing surface. A narrow internal edit may reuse existing evidence when it does not alter discovery or navigation.
+
+### Deterministic Pilot Policy
+
+`scripts/validate-eval-manifests.py` enforces two separate claims in `pilot-router-and-long-skills.json`:
+
+- A long skill is covered only by a positive routing or deterministic rubric task. A `not_primary_skill_in` task cannot satisfy positive coverage.
+- `scripts/eval-manifest-policy.json` lists skills whose current routing risk requires negative controls and the minimum count for each. Use three distinct adjacent-domain controls for a new or materially broadened description when overlap is plausible. Use a smaller explicit count for a stable surface only when one representative boundary is the actual risk under test.
+
+Each negative task names the skill that must not be primary in `expected_skills`, uses the `not_primary_skill_in` scorer, and carries the `non-trigger` tag. The prompt should have a credible neighboring owner; avoid unrelated novelty prompts that prove only that the router can reject obvious nonsense.
 
 ### Edit Gate (regression rule)
 
-Behavioral evals are only worth running if a failing score blocks the change. Treat every skill edit as a candidate that must earn its way in, the way a trained artifact does:
+Choose the regression gate from the behavior changed, not merely the presence of a diff:
 
-- Score the eval set on the skill *before* the edit (baseline) and *after* the edit (candidate).
+- **Non-semantic prose corrections:** run applicable structure, link, and graph checks. Reuse existing behavioral evidence when triggers, navigation, instructions, and runtime semantics are unchanged; a heading or typo fix does not require a new model run. Changes to factual claims still need applicable source, citation, freshness, and compatibility checks; they are not exempt merely because they are prose.
+- **Routing or trigger changes:** compare positive, contextual, and adjacent non-trigger cases before and after the edit.
+- **Navigation or workflow changes:** compare relevant file-read and completion cases. Observe tool activity where the runtime exposes it; declared `curated_paths` and candidate-reported reads are not proof of navigation.
+- **New skills or materially broadened scope:** use the full risk-based matrix above.
+
+For the affected behavioral cases:
+
+- Score the affected eval set on the skill *before* the edit (baseline) and *after* the edit (candidate), keeping runtime configuration and task conditions comparable. If no comparable live baseline is available, label the current result as candidate evidence and do not claim non-regression.
 - Accept the candidate only if it does not regress: trigger, non-trigger, and navigation pass-rates must hold or improve. A higher trigger rate that drags a non-trigger into firing is a regression, not a win.
 - If the candidate regresses, reject it and keep the baseline. Do not average the two versions or ship "mostly better" — a blended skill satisfies neither intent (see coding-behavior Rule 7).
 - Keep edits bounded. One concern per edit (a sharper trigger phrase, a moved reference link, a tightened scope line), so a rejection points at a single cause instead of a tangled diff.
 - Record rejected edits so the same regressing change is not re-proposed next pass; the learnings loop (`learnings.md`) is the place for that note.
 
-This gate mirrors how optimization frameworks train skill text as an artifact (rollout the evals, reflect into a bounded edit, accept only on a strictly non-regressing held-out score). You apply it by hand here, but the discipline is the same: observed score decides, not the author's confidence. See [data/sources.json](../data/sources.json) (`research_and_methods`) for the reference framework.
+Keep fixture/scorer checks, lexical routing probes, observed runtime navigation, and task-quality judgments separate in the report. A passing static or fixture suite cannot substitute for a missing live baseline. See [data/sources.json](../data/sources.json) (`research_and_methods`) for evaluation patterns.
 
 ## Effectiveness-Claim Eval Design
 

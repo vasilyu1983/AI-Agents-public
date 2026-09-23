@@ -82,7 +82,7 @@ Start: Why does the session need to resume?
 | Most-recent shortcut | `--continue` with no ID | Session index with timestamps | Index corrupted or empty |
 | Interactive picker | `--continue` + multiple candidates, or `/resume` | Active terminal; session index | Headless mode; all sessions excluded by filter |
 | Worktree adoption | Same repo, different worktree | Repo-root match; user confirmation | Different project root |
-| Session branch | `/branch` or `--fork-session` | An existing session to copy from | N/A — always succeeds by creating a new session; not a recovery path |
+| Session branch | `/branch` or `--fork-session` | An existing session to copy from | Storage, policy, source-session, or runtime failure; on success it creates a new ID |
 | ACP re-attach | Editor reconnects over stdio | Daemon-owned session store | Process restarted without persistent store |
 | Recipe re-seed | Session has `seed_ref` in metadata | Recipe version still resolvable | Recipe version gone; extension set changed |
 | Direct-log fallback | All above failed | Transcript files on disk | Storage wiped; encrypted storage without key |
@@ -95,14 +95,14 @@ Start: Why does the session need to resume?
 - Stale discovery caches (file index, skill index, config) must be cleared before any resume path rebuilds live state.
 - ACP re-attach must be daemon-side (process-outliving) state; binding session lifetime to a file descriptor is the canonical anti-pattern.
 - Recipe re-seed must offer transcript replay as an alternative; never silently re-run the recipe without showing the user which mode was chosen.
-- Branching is not resume: it always succeeds (it copies rather than recovers) and always produces a new session ID. Keep it out of the failure-driven decision tree above except as the explicit "don't route here" leaf — conflating the two makes users lose track of which session is authoritative.
+- Branching is not resume: on success it copies into a new session ID rather than recovering the source. Keep it out of the failure-driven decision tree above except as the explicit "don't route here" leaf — conflating the two makes users lose track of which session is authoritative.
 
 ## Prompt-cache economics in subagent spawning
 
 Session resume decisions interact with prompt-cache prefix sharing. When a subagent is spawned from a lead session:
 
-- A **blank subagent** starts fresh — no cache overlap with the lead. Use when the subagent task is entirely independent and tool sets differ significantly.
-- A **forked subagent** (`CLAUDE_CODE_FORK_SUBAGENT=1` or `/fork`) copies the lead's context prefix and maximizes prompt-cache hits. Use when the subagent needs most of the same system prompt, tool list, and project instructions. See [`../ai-coding-agents-sessions/references/context-forking.md`](context-forking.md) for economics.
+- A **named subagent** starts with fresh conversation history and separate cache lineage; its startup instructions, memory, skills, tools, and permissions still follow runtime and agent-definition rules. Use it when the task is independent or needs a distinct capability envelope.
+- A **Claude Code forked subagent** (`CLAUDE_CODE_FORK_SUBAGENT=1` or `/fork`) inherits the documented lead context and shares the first-request prompt-cache prefix. Use it when the worker needs that context, then compare returned cache, output, tool, and retry usage before claiming a task-level saving. See [`context-forking.md`](context-forking.md).
 
 Resume path interacts with fork: resuming a forked subagent from transcript is safe; resuming via recipe re-seed requires re-pinning the extension list to the parent's envelope, not the recipe's original envelope.
 

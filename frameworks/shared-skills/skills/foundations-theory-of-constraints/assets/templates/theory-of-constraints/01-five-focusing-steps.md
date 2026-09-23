@@ -21,19 +21,20 @@ The Five Focusing Steps are the core operating loop of Theory of Constraints. Th
 ## Inputs
 
 - A measurable throughput metric (orders shipped, features deployed, revenue recognized).
-- A map of the process steps with observed or measured capacity and utilization.
+- A map of process steps with queue, wait-time, capacity, quality, and accepted-throughput observations.
+- A controlled capacity/policy change, replay, or natural experiment that can test candidate throughput sensitivity.
 - Current WIP levels per step.
 
 ## Outputs
 
-- A ranked list: one identified constraint, confirmed exploitations, a subordination plan for non-constraints, and an elevation decision.
+- A ranked candidate list and one constraint verified by accepted end-to-end throughput sensitivity at fixed quality, plus exploitations, subordination, and elevation decision.
 - A "do not improve" list: non-constraint steps that should be held stable.
 
 ## Failure Modes
 
 | Failure | Root Cause | Fix |
 |---------|-----------|-----|
-| Improving the wrong step | Constraint misidentified (often confused with highest-utilization step) | Measure actual queue depth and wait time, not just utilization |
+| Improving the wrong step | Queue depth, wait time, or utilization was treated as proof rather than candidate evidence | Change effective capacity or policy and measure accepted end-to-end throughput at fixed quality before naming the constraint |
 | Elevating before exploiting | Capital spent before obvious slack reclaimed | Mandate exploit + subordinate sprint before any capacity investment |
 | Breaking the constraint without updating the plan | New constraint emerges silently | Schedule a 5FS review after every elevation; the loop never ends |
 | Subordination ignored | Teams optimize locally and starve the constraint | Freeze WIP limits on non-constraints until constraint is exploited |
@@ -43,7 +44,7 @@ The Five Focusing Steps are the core operating loop of Theory of Constraints. Th
 
 **Context**: A software team ships 8 features per sprint. The deploy pipeline takes 4 days; coding takes 2 days; QA takes 6 days. Sprint velocity is blocked by QA.
 
-1. **Identify**: QA queue depth is 3× coding queue depth — QA is the constraint.
+1. **Nominate and verify**: QA's queue is 3× coding's, so QA is a candidate. A controlled sprint replay adds 25% QA capacity at the same acceptance criteria and raises completed accepted features from 8 to 10, while the same capacity change in coding leaves completions at 8; QA is the current constraint.
 2. **Exploit**: pair developers to run QA in parallel; eliminate exploratory retests by introducing automated smoke checks. QA throughput rises from 8 to 11 features without new headcount.
 3. **Subordinate**: coding team stops pulling new tickets when QA has > 4 items in queue; deploy pipeline given priority scheduling for QA-cleared builds.
 4. **Elevate** (if needed): hire one QA specialist or invest in test automation if steps 2–3 still cap throughput below target.

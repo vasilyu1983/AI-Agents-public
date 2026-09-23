@@ -84,6 +84,7 @@ Core docs:
 - If the task depends on whether the current binary is really on screen, do a fresh uninstall/install/launch smoke pass before interpreting screenshots or UI-test failures.
 - If a simulator screenshot path is missing or expired, treat it as a tooling artifact, not as no evidence. Re-capture from the current simulator or use the reported visible symptom plus source inspection to choose the next focused check.
 - If the task includes push, purchases, deep links, or other distribution-channel behavior, split transport proof from user-visible outcome proof and use a real-device pass when required.
+- Keep compile, test, archive, install/launch, TestFlight, and user-journey evidence distinct. Record source revision, scheme/configuration, archive or app identity, destination/OS, exact test plan or selector, and result-bundle path; stop the release claim at the last observed stage.
 - Run with artifacts enabled: `-resultBundlePath`, and add coverage or diagnostics only when they serve the task.
 - Triage from `xcresult` first, then reproduce a single failing test with `-only-testing`.
 - Treat rerun-pass as a flake that needs ownership and a root-cause fix.
@@ -93,6 +94,7 @@ Core docs:
 - Use this skill for test execution, `xcresult`, destinations, and flake control after the app is buildable and installable.
 - If the core problem is stale installs, simulator drift, malformed `.app` bundles, missing executables, or install/launch failures, route to [software-ios-runtime-debugging](../software-ios-runtime-debugging/SKILL.md).
 - If the app cannot be installed or launched reliably, that is a runtime-debugging problem first and a test problem second.
+- A simulator or explicitly unsigned build does not exercise device signing. A development-signed device build can prove development signing for that destination, but does not prove distribution signing, export, TestFlight processing, or release-artifact installability. A green archive alone does not prove export, installation, or launch, and a simulator pass does not prove APNs, StoreKit, entitlements, background modes, camera, biometrics, or other device/channel behavior.
 
 ## xcodebuild Patterns
 
@@ -315,12 +317,9 @@ iOS testing request
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

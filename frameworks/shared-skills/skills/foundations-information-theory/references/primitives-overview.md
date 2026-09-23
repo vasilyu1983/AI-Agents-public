@@ -60,7 +60,7 @@ Each primitive in the index below addresses a specific failure mode.
 | Anti-Pattern | Diagnosis | Fix |
 |-------------|-----------|-----|
 | Ranking documents by embedding cosine similarity only | Cosine similarity is a linear dot-product; MI captures non-linear dependence between query and document | Augment ranking with MI(query, doc) estimate (#2) |
-| Filling context window greedily by relevance score | Pairwise redundancy between documents not measured | Penalize by H(doc_i \| doc_j) to maximize marginal information gain (#1, #11) |
+| Filling context window greedily by relevance score | Pairwise redundancy between documents not measured | Reward task-relevant conditional information; low H(doc_i \| doc_j) indicates predictability, not high novelty. Calibrate any lexical/document proxy against the task (#1, #11) |
 | Truncating prompts by character count | Entropy per character varies; high-entropy content discarded disproportionately | Estimate segment entropy (#1) and prioritize high-entropy, high-MI segments (#2) |
 
 ### Model Training and Evaluation
@@ -75,7 +75,7 @@ Each primitive in the index below addresses a specific failure mode.
 
 | Anti-Pattern | Diagnosis | Fix |
 |-------------|-----------|-----|
-| Huffman code on correlated source | Huffman assumes i.i.d.; correlated sources have entropy rate H_rate < H(X_1) | Estimate entropy rate; use arithmetic coding or LZ-family (#11) |
+| Huffman code on correlated source | Symbol-wise Huffman uses a marginal PMF; correlated sources can have lower entropy rate. Block/conditional codes can also use Huffman coding | Estimate entropy rate; use arithmetic coding or LZ-family (#11) |
 | Targeting zero distortion when lossy is acceptable | Lossless rate is always ≥ H(X); lossy can be far below | Apply rate-distortion to find optimal bitrate at target distortion (#6) |
 | MDL not applied to model selection | Model complexity not traded against data fit | Compute two-part MDL: L(model) + L(data\|model) (#7) |
 
@@ -102,7 +102,7 @@ Each primitive in the index below addresses a specific failure mode.
 - [ ] **Uncertainty quantification**: How many bits does a source produce? → entropy (#1)
 - [ ] **Dependence / relevance**: How much does one variable inform another? → mutual information (#2)
 - [ ] **Distribution comparison (directional)**: Measuring fit of approximate to true distribution? → KL divergence (#3)
-- [ ] **Distribution comparison (symmetric)**: Need a proper metric? → JS divergence (symmetric form from #3)
+- [ ] **Distribution comparison (symmetric)**: Need a proper metric? → square-root JS distance (the divergence itself is not a metric; #3)
 - [ ] **Training loss / model fit**: Penalizing mismatch between predicted and true distribution? → cross-entropy (#4)
 - [ ] **Cross-tokenizer model comparison**: Vocabulary-neutral perplexity needed? → bits-per-byte (#4)
 - [ ] **Transmission limit**: Maximum reliable rate over noisy channel? → channel capacity (#5)
@@ -129,7 +129,7 @@ Use primary papers and textbooks as the strongest evidence tier. Practitioner po
 - Tishby, N. & Schwartz-Ziv, R. (2017). Opening the black box of deep neural networks via information. *arXiv:1703.00810*.
 - Belghazi, M. I. et al. (2018). MINE: Mutual information neural estimation. *ICML 2018*.
 - Paninski, L. (2003). Estimation of entropy and mutual information. *Neural Computation*, 15(6), 1191–1253. Bias correction.
-- Valiant, G. & Valiant, P. (2011). Estimating the unseen. *STOC 2011 / JVHW estimator*. Finite-sample MI correction.
+- Jiao, J., Venkat, K., Han, Y., & Weissman, T. (2015). Minimax estimation of functionals of discrete distributions. IEEE Transactions on Information Theory 61(5), 2835–2885. JVHW entropy/MI estimators.
 - Farquhar, S., Kossen, J., Kuhn, L., & Gal, Y. (2024). Detecting hallucinations in large language models using semantic entropy. *Nature*, 630, 625–630. Entropy over meaning-equivalence clusters; primitive #1 applied to confabulation detection.
 - Kossen, J. et al. (2024). Semantic entropy probes: robust and cheap hallucination detection in LLMs. *arXiv:2406.15927*. Single-generation approximation of semantic entropy from hidden states.
 - Cui, G. et al. (2025). The entropy mechanism of reinforcement learning for reasoning language models. *arXiv:2505.22617*. Empirical R = −a·e^H + b law; Clip-Cov and KL-Cov mitigations for entropy collapse.

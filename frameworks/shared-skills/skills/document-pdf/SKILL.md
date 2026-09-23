@@ -203,6 +203,10 @@ PDF Task: [What do you need?]
 - Security: redaction is verified (copy/paste test) and sensitive data is minimized.
 - QA: release checklist completed using `assets/pdf-release-checklist.md`.
 
+### Redaction evidence gate
+
+Prove redaction against every representation that can disclose the value: extracted text, search results, copy/paste, page rendering, annotations, form fields, attachments, and metadata. Reopen the final saved file in a second parser or viewer and search for the sensitive tokens plus normalized variants; inspect the redacted region at high zoom to catch overlays, shifted text, and partial glyphs. Record the token set or synthetic stand-ins used for verification without reproducing sensitive values in logs. If OCR was involved, test both the visible image and hidden text layer. A black box, empty search result in one viewer, or metadata scrub alone is not sufficient evidence that content was removed.
+
 ## Optional: AI / Automation
 
 Use only when explicitly requested and policy-compliant.
@@ -237,13 +241,10 @@ Use only when explicitly requested and policy-compliant.
 
 ## Fact-Checking
 
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
+- Verify volatile external facts (versions, prices, rules, dates) against primary sources before answering, cite them with dates, and if web access is unavailable say so and mark the guidance unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

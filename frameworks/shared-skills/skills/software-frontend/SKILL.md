@@ -109,6 +109,10 @@ Pick the rendering model first (CSR / SSR / SSG / hybrid), then the framework. W
 
 Do not create new global state layers when local state or server-driven patterns are enough.
 
+### UI State Completeness Gate
+
+Enumerate every state the surface can actually reach and handle each deliberately. Loading, empty, error, and success are the baseline where applicable; add background refresh, partial, stale, permission-denied, recoverable, and terminal variants only when the data and authorization contracts can produce them. Mark inapplicable states explicitly during review. Preserve the user’s input and last safe rendered state across retries where appropriate.
+
 ### Hydration and SSR Safety
 
 Watch for:
@@ -190,7 +194,6 @@ Default to one of these:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

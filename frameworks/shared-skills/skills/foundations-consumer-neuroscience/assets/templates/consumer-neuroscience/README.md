@@ -21,7 +21,7 @@ Primitives **1–8** cover engagement-time neural responses (salience, arousal, 
 | 7 | [07-neuroaesthetics.md](07-neuroaesthetics.md) | Peak-shift; symmetry preference; contour completion; beauty-driven reward |
 | 8 | [08-interoception-somatic.md](08-interoception-somatic.md) | Insular cortex body-state; vmPFC somatic-marker integration; pre-deliberative bias |
 | 9 | [09-memory-consolidation.md](09-memory-consolidation.md) | Hebbian potentiation; hippocampal-neocortical replay; sleep-dependent consolidation |
-| 10 | [10-reward-anticipation.md](10-reward-anticipation.md) | Anticipatory mesolimbic dopamine (wanting); VTA onset ~200ms; wanting/liking dissociation |
+| 10 | [10-reward-anticipation.md](10-reward-anticipation.md) | Incentive salience and wanting/liking distinction; digital behavior alone does not establish a dopamine response |
 | 11 | [11-embodied-cognition.md](11-embodied-cognition.md) | Sensorimotor concept grounding; conceptual metaphor; proprioceptive priming |
 | 12 | [12-predictive-processing.md](12-predictive-processing.md) | Hierarchical Bayesian generative model; free-energy minimization; prediction-error cost |
 
@@ -36,7 +36,7 @@ Arousal deescalation (#2) → prediction priming (#12) → narrative transportat
 Narrative transportation (#4) → mirror-matched emotional cue (#6) → real social proof (#3) → embodied metaphor (#11). Fail signal: low share rate despite high session time.
 
 ### Daily-Cadence Retention (post-purchase)
-Reward anticipation arc (#10) → consolidation-window timing (#9) → top-down salience (#1) → prediction confirmation (#12). Fail signal: streak completion without re-engagement intent.
+Reward anticipation arc (#10) → sleep-respecting user-selected timing (#9) → top-down salience (#1) → prediction confirmation (#12). Fail signal: streak completion without re-engagement intent.
 
 ### Conversion Landing Page, Mixed Audience (pre-purchase)
 Earned salience (#1) → BIS/BAS copy split (#5) → aesthetic reward (#7) → mirror-matched testimonial (#6). Fail signal: bounce concentrated in one regulatory-focus segment.
@@ -45,7 +45,7 @@ Earned salience (#1) → BIS/BAS copy split (#5) → aesthetic reward (#7) → m
 Human warmth signal (#3) → somatic acknowledgment (#8) → prediction-error closure (#12) → prevention framing (#5). Fail signal: NPS recovery below 50% of pre-incident baseline.
 
 ### DMCC Compliance Audit
-Harm test → dark-pattern checklist → vulnerable-user screen → biometric Article 9 lawful basis → wanting-loop cap verification. Fail signal: any "yes" on dark-pattern list; any vulnerable-user trigger without stricter controls.
+Harm test → dark-pattern checklist → vulnerable-user screen → personal/special-category classification and lawful conditions → wanting-loop cap verification. Fail signal: any "yes" on dark-pattern list; any vulnerable-user trigger without stricter controls.
 
 ---
 

@@ -1,12 +1,12 @@
 {
   "metadata": {
     "skill": "qa-testing-strategy",
-    "updated": "2026-07-11",
-    "version": "3.6",
-    "total_sources": 45,
+    "updated": "2026-09-08",
+    "version": "3.7",
+    "total_sources": 46,
     "description": "Primary references for risk-based testing strategy, shift-left gates, flake control, CI economics, component testing, contract testing, schema fuzzing, observability-driven testing, synthetic data, mutation coverage, test impact analysis, property-based testing, and shift-right techniques. AI sources are optional.",
     "title": "QA Testing Strategy - Sources",
-    "last_updated": "2026-06-09"
+    "last_updated": "2026-09-08"
   },
   "categories": {
     "sre_and_reliability": [
@@ -339,12 +339,20 @@
         "last_verified": "2026-06-09"
       },
       {
-        "name": "Hypothesis Documentation",
-        "url": "https://hypothesis.readthedocs.io/",
-        "description": "Property-based testing for Python; integrates natively with pytest. Supports stateful (rule-based state machine) testing. Mature and stable as of Hypothesis 6.x.",
+        "name": "Hypothesis Introduction",
+        "url": "https://hypothesis.readthedocs.io/en/latest/tutorial/introduction.html",
+        "description": "Official introduction to generated strategies, valid-domain constraints, pytest execution, round-trip properties, and comparisons with a simpler reference implementation.",
         "add_as_web_search": true,
         "optional": false,
-        "last_verified": "2026-06-09"
+        "last_verified": "2026-09-08"
+      },
+      {
+        "name": "Metamorphic Testing: A New Approach for Generating Next Test Cases",
+        "url": "https://www.cse.ust.hk/~scc/publ/CS98-01-metamorphictesting.pdf",
+        "description": "Original 1998 technical report defining follow-up test generation from successful source cases and metamorphic relations for oracle-limited testing.",
+        "add_as_web_search": false,
+        "optional": false,
+        "last_verified": "2026-09-08"
       },
       {
         "name": "jqwik User Guide",

@@ -89,6 +89,12 @@ Need to ship mobile product?
    - Treat push signoff as two gates: transport proof (notification accepted and shown) and open-path proof (tapping from cold start and warm start does not freeze or crash).
 5. Re-check current platform-policy and framework facts before final recommendations.
 
+### Platform-Choice Proof Gate
+
+Before committing to native, React Native, Flutter, or KMP, list the product's hardest likely capability: background execution, camera/media pipeline, Bluetooth/hardware SDK, widgets/extensions, deep links, offline conflict resolution, payments, accessibility, or platform-specific UI. Rank each candidate's uncertainty and consequence. Reuse existing evidence when it covers the same framework and version range, native dependency, release configuration, capability, and representative device class; record its date and owner.
+
+Run a time-boxed spike only for serious finalists with a material unresolved native, performance, lifecycle, accessibility, or packaging risk. Define pass/fail before it: build and package, native SDK integration, cold-start and interaction budget, accessibility behavior, offline/recovery behavior, and maintainer skill. Use the real release configuration and the oldest device class relevant to that risk. If the spike consumes paid services, signing capacity, scarce devices, or shared CI quota outside the agreed task budget, obtain authorization for that resource use first. For low-risk products, a documented decision with applicable production evidence and explicit assumptions is sufficient. If the hardest capability fails or requires a permanent bespoke native module, include that module's two-platform ownership cost in the decision; if no hard capability exists, favor the stack that reduces duplicated product work.
+
 ```text
 Mobile task
   -> Identify platform mix, app type, and user-facing surface
@@ -263,6 +269,6 @@ When users ask recommendation or "what's current" questions, use web search firs
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

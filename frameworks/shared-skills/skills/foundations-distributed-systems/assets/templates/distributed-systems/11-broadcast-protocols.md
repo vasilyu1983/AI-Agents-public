@@ -141,7 +141,7 @@ Two quality axes: **completeness** ("every nonfaulty member should eventually no
 
 **Convergence**: In a 100-node cluster with fan-out 3, failure information reaches all nodes in approximately log₃(100) ≈ 4–5 gossip rounds (4–5 seconds).
 
-**TOB alternative**: For stronger guarantees (all nodes mark the peer as down at the same time), use total-order broadcast via Raft or Paxos to agree on the failure event before applying it. Cost: higher latency, requires a quorum.
+**TOB alternative**: For a common agreed event order (delivery/application can occur at different wall-clock times), use total-order broadcast via Raft or Paxos to agree on the failure event before applying it. Cost: higher latency, requires a quorum.
 
 ---
 

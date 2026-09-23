@@ -46,7 +46,7 @@ H(X) ≤ L < H(X) + 1
 NCD(x,y) = [C(xy) − min(C(x),C(y))] / max(C(x),C(y))
 ```
 
-NCD ∈ [0,1]; NCD≈0 means x and y are compressible together (similar); NCD≈1 means incompressible together (dissimilar).
+For idealized normal compressors NCD is approximately bounded; practical implementations can exceed [0,1]. NCD≈0 means x and y are compressible together (similar); NCD≈1 means incompressible together (dissimilar).
 
 ---
 
@@ -83,7 +83,7 @@ NCD ∈ [0,1]; NCD≈0 means x and y are compressible together (similar); NCD≈
 
 ## Failure Modes
 
-1. **Huffman on correlated sources**: Huffman is optimal for i.i.d. sources under a known PMF. For correlated sources (text, speech, code), H_rate < H(X₁); Huffman cannot exploit sequential redundancy. Use arithmetic coding or LZ-family codes instead.
+1. **Huffman on correlated sources**: Huffman is optimal for i.i.d. sources under a known PMF. For correlated sources (text, speech, code), H_rate < H(X₁); Symbol-wise marginal Huffman cannot exploit sequential redundancy; block or conditional Huffman codes can. Use arithmetic coding or LZ-family codes instead.
 2. **Not estimating H_rate before choosing a code**: The compression ratio achievable by LZ approaches H_rate, not H(X₁). If H_rate << H(X₁) (high correlation), LZ outperforms Huffman significantly; ignoring this wastes compression budget.
 3. **NCD depends on compressor quality**: NCD is only as accurate as the underlying compressor. Weak compressors (e.g., run-length encoding) produce noisy NCD values. Use bzip2, zstd, or lzma for reliable NCD; test on held-out pairs.
 4. **Treating redundancy as uniform across the source**: Redundancy is an average. Some segments of a document may be near-uniform (high local entropy); others may be highly predictable. Entropy per segment varies; apply local entropy estimation for selective compression.
@@ -111,11 +111,9 @@ Additional sequential redundancy = 7.2 − 4.5 = 2.7 bits/token
 Total redundancy ≈ 9 − 4.5 = 4.5 bits/token = 50%
 ```
 
-3. **Compression target**: at H_rate = 4.5 bits/token, 1,200 tokens → 5,400 bits of information. To represent this at 7.2 bits/token (naive Huffman), you need 5,400/7.2 = 750 tokens. An LZ-style semantic compressor should achieve ~750 tokens; under 500 would require lossy compression (→ rate-distortion, primitive #6).
+3. **Binary codec target:** 1200 source symbols at an assumed entropy rate 4.5 bits/symbol suggest an asymptotic 5400-bit binary coding benchmark. An actual lossless codec must reconstruct the original sequence exactly and has finite-length overhead. This does not establish a 750-token natural-language rewrite or a 500-token impossibility boundary.
 
-4. **NCD check for duplicate sections**: compute NCD(section_A, section_B) using zstd for each pair. Sections with NCD < 0.15 are near-duplicates and one can be removed without significant information loss.
-
----
+4. **Duplicate screening:** NCD can nominate candidate duplicates, but practical values depend on compressor, headers, order and length; they can exceed ideal [0,1] bounds. Calibrate thresholds on held-out duplicate/nonduplicate pairs. Review task-critical instructions before removing content; no universal NCD<.15 deletion rule is supplied.
 
 ## Sources
 

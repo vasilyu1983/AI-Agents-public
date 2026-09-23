@@ -2,17 +2,17 @@
 
 ## Definition
 
-Social bonding in consumer contexts operates primarily through the oxytocin system and its associated affiliative neural circuits:
+Social bonding involves multiple social, cognitive and biological processes. Oxytocin is implicated in some affiliative contexts; a digital warmth intervention does not demonstrate oxytocin release:
 
-1. **Oxytocin-mediated affiliative bonding**: Oxytocin release is triggered by social cues — eye contact, touch, empathic narrative, and perceived warmth. Paul Zak's research (2012) proposed that oxytocin increases trust and prosocial behavior in economic exchange contexts. Carter (2014) establishes the evolutionary depth of oxytocin's role in pair bonding, parental care, and social group cohesion. Critically, oxytocin plasma half-life is approximately 3–5 minutes (Ott et al. 2013), meaning affiliative response must be re-earned across a session, not front-loaded.
+1. **Oxytocin-mediated affiliative bonding**: Oxytocin release is triggered by social cues — eye contact, touch, empathic narrative, and perceived warmth. Paul Zak's research (2012) proposed that oxytocin increases trust and prosocial behavior in economic exchange contexts. Carter (2014) establishes the evolutionary depth of oxytocin's role in pair bonding, parental care, and social group cohesion. Peripheral oxytocin half-life does not determine central affiliative response, copy cadence or trust duration; assess warmth through behavioral and user-reported outcomes.
 
 > **Replication caveat**: The Zak 2012 trust-causal claim is NOT supported by a high-powered registered replication. Declerck et al. (2020, Nature Human Behaviour, DOI: 10.1038/s41562-020-0878-x), >95% power, found no main effect of oxytocin on trust under standard conditions; a selective ~15–17% effect was observed only in low-trust-disposition individuals (bioRxiv 2025, preregistered). Apply this primitive as "oxytocin system is implicated in affiliative bonding" — not as "oxytocin = trust lever." Design for genuine warmth and affiliative behavior; do not claim design patterns universally increase trust via an oxytocin mechanism.
 
-2. **Affiliative circuits and social motivation**: Beyond oxytocin, social bonding engages the ventral striatum (social reward), medial prefrontal cortex (mentalizing — attributing mental states to others), and the temporoparietal junction (TPJ). These circuits activate when the user perceives genuine social presence or interpersonal care — not when they process social-performance aesthetics.
+2. **Affiliative circuits and social motivation**: Beyond oxytocin, social bonding engages the ventral striatum (social reward), medial prefrontal cortex (mentalizing — attributing mental states to others), and the temporoparietal junction (TPJ). Those research associations do not establish which circuits activate for a particular interface or user. Perceived care and trust require local behavioral measurement; aesthetic versus interpersonal cues cannot diagnose neural activation.
 
 Implications:
-- Warmth language without operational warmth ("we care about you" with slow support response times) triggers the affiliative response briefly then inverts it sharply when the claim is tested and fails.
-- Social bonding mechanics (referral, community, sharing) require a warmth signal before they can be activated; the neural motivation to share is partly oxytocin-driven.
+- Warmth language without operational care may undermine trust when expectations fail; evaluate perceived care and service outcomes rather than assuming a neural response.
+- Sharing may depend on relevance, value, social norms or perceived care; warmth is a testable candidate, not a necessary endocrine prerequisite.
 - Repeated genuine warmth encounters across a session can build a durable affiliative association with the product.
 
 ## When to Use
@@ -24,7 +24,7 @@ Implications:
 
 ## Misuse Boundary
 
-**Ethical use**: warmth and trust signals must reflect real product behavior — genuine support quality, real care mechanics, accurate social data. Oxytocin-mediated affiliation formed on a true basis creates durable brand trust.
+**Ethical use**: warmth and trust signals must reflect real product behavior — genuine support quality, real care mechanics, accurate social data. Genuine care can support perceived trust; a durable endocrine-mediated brand effect requires separate evidence.
 
 **Manipulation**: artificially inducing oxytocin-adjacent responses through performed intimacy language, fabricated community counts, fake testimonials, or parasocial intimacy that does not reflect any real human presence behind the product. When the claim is tested and fails, the trust inversion is amplified by the prior affiliation — the user feels deceived, not merely disappointed.
 
@@ -34,7 +34,7 @@ Implications:
 
 - The operational warmth claims the product can honestly make (support quality, community size, care behavior).
 - The user's social motivation context (is this a trust-building or social-sharing moment?).
-- The session length — determines how many warmth re-encounters are needed to sustain affiliative response.
+- Interaction context and timing; no session duration determines a required neural reinforcement frequency.
 
 ## Outputs
 
@@ -46,20 +46,20 @@ Implications:
 
 | Failure | Cause | Fix |
 |---------|-------|-----|
-| Warmth copy generates no lift | Social bonding cues absent: copy is generic, no human presence, no named person | Add named person, face, and specific care behavior claim backed by verifiable standard |
-| Referral mechanic underperforms | Social motivation not activated at trigger point; user has not yet had an affiliative product experience | Move referral prompt to post-peak-experience moment, not onboarding |
-| High NPS at month 1, collapse at month 3 | Warmth signal front-loaded; oxytocin half-life ~3–5 min; no re-encounter design across subsequent sessions | Distribute warmth signals across the user lifecycle; check-in moments, milestone acknowledgments, human support encounters |
+| Warmth copy generates no lift | Possible relevance, credibility or service-quality problem; no endocrine diagnosis | Add named person, face, and specific care behavior claim backed by verifiable standard |
+| Referral mechanic underperforms | Possible prompt timing, low perceived value or weak sharing relevance | Move referral prompt to post-peak-experience moment, not onboarding |
+| High NPS at month 1, collapse at month 3 | Possible unmet care expectations or deteriorating service; NPS does not diagnose endocrine response | Distribute warmth signals across the user lifecycle; check-in moments, milestone acknowledgments, human support encounters |
 | Trust destruction after support failure | Warmth promise was made but care was not delivered operationally; affiliative expectation amplified the failure | Calibrate warmth language to actual support capability; do not over-promise care |
 
 ## Worked Example
 
 **Scenario**: A daily reading subscription app has high Day-1 activation but low referral rate (1.2%) despite having a prominent "share with a friend" button on the results screen.
 
-Diagnosis: the share button is placed immediately after the reading, before any affiliative experience has accumulated. The user has not yet felt the warmth of the product; oxytocin-mediated prosocial motivation has not been activated.
+Diagnosis: the share button is placed immediately after the reading, before any affiliative experience has accumulated. Possible explanations include premature prompting, low content value or weak social relevance; no endocrine response has been measured.
 
 Fix:
 1. Move share prompt to Day 7, after the user has had multiple positive reading experiences and at least one human-feeling interaction (personalized follow-up from a named team member).
-2. Reframe share CTA: "Someone in your life might need to hear this today." — social gift frame activates prosocial motivation rather than promotion request.
+2. Reframe share CTA: "Someone in your life might need to hear this today." — social gift framing is a behavioral hypothesis to test against perceived pressure and actual value.
 3. Add one genuine warmth moment each week: a named weekly summary message from a real team member.
 
 **Ethical check**: the care language is backed by the named team member genuinely reviewing user data before sending. Community counts shown are real. No fabricated testimonials.

@@ -1,12 +1,12 @@
 {
   "metadata": {
     "skill": "ai-evals",
-    "updated": "2026-08-24",
-    "total_sources": 84,
+    "updated": "2026-09-17",
+    "total_sources": 86,
     "description": "Primary-source catalog for LLM/agent, responsible-AI, and multimodal evaluation: judge reliability, fairness/privacy/oversight evidence, grounding and multimodal red teaming, threshold calibration, eval statistics, optimization and fine-tuning loops, online evaluation, safety, and reproducibility. Verify framework and fine-tuning APIs against official docs before recommending a specific call.",
     "version": "1.5",
     "title": "AI Evals - Sources",
-    "last_updated": "2026-08-24",
+    "last_updated": "2026-09-17",
     "last_validated": "2026-08-24"
   },
   "categories": {
@@ -201,7 +201,7 @@
         "name": "Benjamini & Hochberg, Controlling the False Discovery Rate",
         "url": "https://www.jstor.org/stable/2346101",
         "type": "research",
-        "relevance": "Foundational FDR multiple-comparison correction; default for slice/metric dashboards in eval-statistics.md. statsmodels provides multipletests(method='fdr_bh').",
+        "relevance": "FDR procedure for a declared hypothesis family under independence or applicable positive-dependence conditions; not a universal default for release gates.",
         "update_frequency": "static",
         "access": "paywalled",
         "add_as_web_search": false
@@ -214,6 +214,22 @@
         "update_frequency": "static",
         "access": "free",
         "add_as_web_search": false
+      },
+      {
+        "name": "NIST Dataplot Signed Rank Test",
+        "url": "https://www.itl.nist.gov/div898/software/dataplot/refman1/auxillar/signrank.htm",
+        "type": "documentation",
+        "relevance": "Paired signed-rank assumptions: symmetric independent differences with interval-scale measurements; not a generic mean test.",
+        "last_verified": "2026-09-17",
+        "access": "free"
+      },
+      {
+        "name": "Benjamini and Yekutieli (2001), author-institution abstract",
+        "url": "https://cris.tau.ac.il/en/publications/the-control-of-the-false-discovery-rate-in-multiple-testing-under/",
+        "type": "research",
+        "relevance": "Primary author-institution abstract distinguishes positive regression dependency for BH from arbitrary-dependence modification. Publisher full text unavailable in this review.",
+        "last_verified": "2026-09-17",
+        "access": "abstract"
       }
     ],
     "safety_and_redteam_research": [
@@ -230,7 +246,7 @@
         "name": "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
         "url": "https://arxiv.org/abs/2302.12173",
         "type": "research",
-        "relevance": "Defines indirect prompt injection via retrieved/tool content — the dominant agentic attack. Basis for the planted-instruction injection methodology in safety-redteam-eval.md.",
+        "relevance": "Defines indirect prompt injection via retrieved/tool content \u2014 the dominant agentic attack. Basis for the planted-instruction injection methodology in safety-redteam-eval.md.",
         "update_frequency": "static",
         "access": "free",
         "add_as_web_search": false
@@ -304,7 +320,7 @@
         "name": "promptfoo",
         "url": "https://www.promptfoo.dev/docs/",
         "type": "documentation",
-        "relevance": "Config-driven prompt/app matrix testing with assertions and model graders; fast for prompt A/B in CI. Acquired by OpenAI March 9, 2026 — remains open source; roadmap now OpenAI-aligned.",
+        "relevance": "Config-driven prompt/app matrix testing with assertions and model graders; fast for prompt A/B in CI. Acquired by OpenAI March 9, 2026 \u2014 remains open source; roadmap now OpenAI-aligned.",
         "update_frequency": "frequent",
         "access": "free",
         "add_as_web_search": true
@@ -715,10 +731,10 @@
         "add_as_web_search": true
       },
       {
-        "name": "Sebastian Raschka, Build a Reasoning Model (From Scratch) (Ch. 5, §5.8, table 5.1)",
+        "name": "Sebastian Raschka, Build a Reasoning Model (From Scratch) (Ch. 5, \u00a75.8, table 5.1)",
         "url": "https://www.manning.com/books/build-a-reasoning-model-from-scratch",
         "type": "book",
-        "relevance": "Measured MATH-500 self-refinement ablation on a Qwen3 0.6B base model: best base-model accuracy came with no scorer (25.0%) above heuristic (21.6%) and average-logprob (21.4%) scorers, against a 15.2% unrefined baseline, at roughly 8x runtime. Source for the claim that a likelihood-based selector can be net-negative because it ranks fluency rather than correctness. Single model, single task, single run — directional evidence only.",
+        "relevance": "Measured MATH-500 self-refinement ablation on a Qwen3 0.6B base model: best base-model accuracy came with no scorer (25.0%) above heuristic (21.6%) and average-logprob (21.4%) scorers, against a 15.2% unrefined baseline, at roughly 8x runtime. Source for the claim that a likelihood-based selector can be net-negative because it ranks fluency rather than correctness. Single model, single task, single run \u2014 directional evidence only.",
         "update_frequency": "static",
         "access": "paid",
         "add_as_web_search": false
@@ -773,7 +789,7 @@
     ],
     "dataset_and_robustness_design": [
       {
-        "name": "François Chollet & Matthew Watson, Deep Learning with Python, 3rd ed. (Ch. 19, §§19.1.1–19.1.3)",
+        "name": "Fran\u00e7ois Chollet & Matthew Watson, Deep Learning with Python, 3rd ed. (Ch. 19, \u00a7\u00a719.1.1\u201319.1.3)",
         "url": "https://www.manning.com/books/deep-learning-with-python-third-edition",
         "type": "book",
         "relevance": "Chollet's attributed (contested, not consensus) LLM failure-mode taxonomy used for robustness eval design: non-adaptation to novelty (familiarity rather than complexity predicts failure), oversensitivity to phrasing (Alice-in-Wonderland and Monty Hall variants), and failure to learn generalizable discrete programs (character-level addition accuracy varying by which digits). Basis for building robustness slices by perturbing memorized instances.",

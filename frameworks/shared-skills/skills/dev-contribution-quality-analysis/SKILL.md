@@ -128,6 +128,12 @@ Six dimensions, 100 total points. See `references/scoring-model.md` for full det
 
 D6 carries no point allocation and is excluded from tier assignment. It is appended to reports as a separate annotation. See `references/scoring-model.md` for rationale.
 
+### Evidence sufficiency and abstention
+
+Score a dimension only when its evidence window, eligible contribution count, review coverage, and provenance coverage are stated. Missing review comments, incident links, or AI provenance are unknowns, not zeroes. Report confidence per dimension because test evidence may be strong while maintainability or production-outcome evidence is sparse.
+
+If the sampled work is too small, dominated by one incident or generated migration, or cannot be joined reliably to review and outcome data, return `insufficient evidence` for the affected dimension and show what additional sample would resolve it. Do not roll an unknown dimension into a composite score. Any person-level report must include the sampled items and an appeal/correction path so mistaken attribution can be fixed before the result informs coaching or staffing decisions.
+
 ## Output Modes
 
 - **Person quality report** — individual deep-dive with 6-dimension breakdown, sampled commit quality, CC-* findings
@@ -198,6 +204,6 @@ Sampled commit findings reference CC-* rule IDs (CC-NAM-01 through CC-DOC-04) an
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

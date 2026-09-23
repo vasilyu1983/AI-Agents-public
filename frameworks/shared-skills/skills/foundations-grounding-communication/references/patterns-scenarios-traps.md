@@ -23,7 +23,7 @@ _Pattern_:
 1. Audit common ground (#1) before drafting.
 2. Set criterion (#2) by stakes — high for irreversible, low for exploration.
 3. Resolve presuppositions (#6); rewrite for the subagent (#7).
-4. Require presentation+acceptance (#3): subagent paraphrases brief and plan before executing.
+4. Require presentation+acceptance (#3): use an inspectable interpretation/first artifact for clear authorized reversible work; pause for load-bearing unresolved ambiguity or missing authority before consequential action.
 5. Provide repair channel (#5).
 6. Compute total cost (#9) — short brief + repair often costs more than long brief + acceptance.
 
@@ -65,7 +65,7 @@ _Watch for_: agents that report process ("I ran X, then Y") rather than outcome 
 
 ### Agent ↔ agent peer messaging
 
-_When_: Two subagents exchange intermediate results (the non-classical regime in [foundations-team-theory](../../foundations-team-theory/SKILL.md) #6).
+_When_: Two subagents exchange intermediate results (an action-dependent information setting whose nestedness must be classified using [foundations-team-theory](../../foundations-team-theory/SKILL.md) #2/#6).
 
 _Pattern_:
 - Each peer must establish common ground with the other; the orchestrator's common ground with each is not transitive.
@@ -99,7 +99,7 @@ For information-structure, communication-value, and verification-design failures
 
 The system prompt has been shown to the agent — but the orchestrator has not verified the agent's interpretation, and the agent hasn't confirmed. Common ground (#1) requires mutual belief, not delivered content. Treating prompt content as common ground is the single most common grounding error.
 
-**Fix**: explicit acceptance phase. Subagent paraphrases the relevant prompt content before acting on it.
+**Fix**: obtain task-proportionate evidence: an inspectable interpretation or first artifact can suffice for clear authorized reversible work. Pause only for unresolved load-bearing ambiguity or missing authority before consequential action.
 
 ### Trap: Acknowledgment ≠ understanding
 
@@ -149,9 +149,9 @@ Orchestrator writes a brief in their own frame; subagent reads it in a different
 
 ### Trap: Stripping confirmation steps to save tokens
 
-Acceptance phases (#3) and repair channels (#5) cost tokens. Removing them produces a measurable token saving — and an unmeasured failure-rate increase. The hidden cost is the tail: 90% of tasks don't need the acceptance step, but the 10% that do generate disproportionate repair cost.
+Acceptance phases (#3) and repair channels (#5) cost tokens. Removing them produces a measurable token saving — and an unmeasured failure-rate increase. The hidden cost is the tail: a minority of ambiguous tasks may generate disproportionate repair cost. Measure this distribution locally rather than inventing a percentage.
 
-**Fix**: budget grounding cost (#10) as part of the total task cost. The expected savings rarely exceed the expected failure cost on non-trivial work.
+**Fix**: budget grounding cost (#10) as part of the total task cost. Estimate this crossover locally; do not assume every non-trivial dispatch needs a blocking confirmation.
 
 ### Trap: Treating grounding as one-shot
 
@@ -173,10 +173,11 @@ When fanning out to multiple subagents, each may have different system prompts, 
 
 ```
 Orchestrator → Subagent: <brief>
-Subagent → Orchestrator: "I understand the goal as: <restated>. My plan: <steps>. I will need: <tools/context>. Confirming or correcting before I proceed?"
-Orchestrator → Subagent: "Confirmed" OR "Correction: <delta>"
-[loop until confirmed]
-Subagent: <executes>
+Subagent → Orchestrator: "Working interpretation: <goal/targets/constraints>. First artifact: <inspectable result>."
+If authorized, reversible and clear: proceed; incorporate corrections as they arrive.
+If load-bearing ambiguity or missing authority affects consequential action:
+  ask a specific question, wait, update shared state, then act within authority.
+Acceptance evidence is not permission; preserve authorization already supplied.
 ```
 
 Cost: roughly 200 tokens added per dispatch. Saves: many high-cost specification, context-loss, and wrong-assumption failures when stakes warrant it.
@@ -197,7 +198,7 @@ On context compression event:
   1. Identify load-bearing facts (decisions made, constraints discovered, partial work)
   2. Re-state in compact form at top of compressed context
   3. Raise grounding criterion for next N turns
-  4. Verify subagent acknowledges before next irreversible action
+  4. Verify corrected target, constraints and authority before the next consequential action; pause only for unresolved load-bearing ambiguity or missing authority
 ```
 
 ### AwN clarification protocol (Wang et al. EMNLP 2025)

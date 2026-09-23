@@ -127,8 +127,10 @@ Activate when the user asks for:
 6. **Derive thresholds from a labeled calibration set**, not intuition or copied
    targets — see `references/threshold-derivation.md`. **Size the gating set and
    judge "A beats B" with statistics** (bootstrap CIs, McNemar, power/MDE, FDR) —
-   see `references/eval-statistics.md`. A score difference without a CI is not a
-   result.
+  see `references/eval-statistics.md`. For frozen paired results, run
+  `python3 scripts/analyze_paired_results.py results.csv --estimand unit_mean`;
+  declare whether units or clusters define the target population first. A population-level superiority claim needs design-compatible uncertainty;
+  exact fixed-suite differences remain descriptive evidence.
 7. **Only fine-tune after the baseline has earned it.** Compare prompt/RAG/tool
    fixes first, then choose SFT for imitation/style/format/tool-call behavior,
    preference/RFT for rubric-scored reasoning or tradeoffs, and PEFT/LoRA/QLoRA
@@ -182,10 +184,32 @@ Activate when the user asks for:
   this one law; treat a metric that stops correlating with the outcome you
   actually care about as expected decay, and re-anchor it against production
   outcomes or fresh human judgment on a schedule, not only when someone notices.
-- **A point estimate is not a result.** Every reported number in this skill's
-  gates — pass rate, win rate, judge-human agreement — is a sample statistic
-  with sampling error. Report it with a confidence interval or it is not
-  reportable; see `references/eval-statistics.md`.
+- **Match uncertainty to the claim.** Population-level pass rates, win rates,
+  and judge-human agreement need design-compatible uncertainty. Exact counts
+  over a fixed deterministic suite describe that suite and need their
+  denominator and limits; do not invent sampling intervals for them. See
+  `references/eval-statistics.md`.
+
+## Release Decision Gate
+
+### Select foundations only when they change the eval decision
+
+- If a proxy score is being interpreted as quality, trust, fairness, or another
+  construct, or compared across populations or grader versions, use
+  [measurement theory](../foundations-measurement-theory/SKILL.md). Return the
+  construct, observed proxy, interpretation evidence, comparability limits,
+  and missing validation. Skip this audit for a routine execution of an already
+  documented instrument with unchanged interpretation and population.
+- If uncertainty, dependent repeats/clusters, multiple comparisons, or repeated
+  stopping can change a conclusion, use
+  [statistical inference](../foundations-statistical-inference/SKILL.md). Return
+  the estimand, independent unit, interval method and assumptions, and the
+  multiplicity/stopping rule. Skip inference for reporting exact outcomes of a
+  fixed deterministic fixture suite without a population claim; report its
+  denominator and scope instead. Neither foundation substitutes for this skill's
+  dataset, grader controls, or release decision.
+
+Write the release rule before scoring: required tasks and slices, minimum acceptable effect, uncertainty method, regression budget, and handling for grader errors or missing results. A candidate passes only when every blocking slice is present and the predeclared decision rule clears. Learned, model, heuristic, and human graders must pass planted-good and planted-bad controls that detect calibration drift; deterministic exact-match, schema, executable-test, and invariant graders instead need versioned implementations with relevant positive and negative fixtures. Missing denominators, stale fingerprints, failed grader controls, or an unavailable judge produce `inconclusive`, never an implicit pass. Keep measured results separate from the release recommendation.
 
 ## Known Traps
 
@@ -229,7 +253,7 @@ Resources:
 - [references/framework-integration.md](references/framework-integration.md) - Framework selection and integration snippets
 - [references/threshold-derivation.md](references/threshold-derivation.md) - Deriving thresholds and gates from labeled data
 - [references/flake-and-reproducibility.md](references/flake-and-reproducibility.md) - Flake, seeds, contamination, leakage, system-benchmark hazards
-- [references/eval-statistics.md](references/eval-statistics.md) - Bootstrap CIs, McNemar, power/MDE, FDR, variance reduction
+- [references/eval-statistics.md](references/eval-statistics.md) - Paired cluster bootstrap workflow and analyzer, McNemar, power/MDE, FDR, variance reduction
 - [references/llm-optimization-technique-map.md](references/llm-optimization-technique-map.md) - Maximum-performance technique ladder and eval gates
 - [references/fine-tuning-eval-loop.md](references/fine-tuning-eval-loop.md) - Eval-first fine-tuning decisions, SFT/preference/RFT/PEFT selection, split hygiene, promotion gates
 - [references/online-production-eval.md](references/online-production-eval.md) - Offline-online correlation, A/B+guardrails, drift, replay, HITL
@@ -269,7 +293,8 @@ Related skills:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md`
-(and `learnings.md` if present). After applying it, append one dated bullet to
+Consult `learnings.consolidated.md` for relevant prior decisions or pitfalls;
+open `learnings.md` only when their history is needed. Skip both when unrelated
+to the task. After applying it, append one dated bullet to
 `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py` if you
 hit a pattern, mistake, or surprising fact. Do not modify `SKILL.md` itself.

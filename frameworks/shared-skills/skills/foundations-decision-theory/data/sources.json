@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Decision Theory Foundations — Sources",
     "description": "Primary references for 11 decision-theory primitives: expected utility, Bayesian decision, minimax regret, value of information, MCDA, risk aversion, real options, prospect theory, Ellsberg/Allais paradoxes, multi-armed bandit, and stochastic dominance",
-    "last_updated": "2026-08-14",
+    "last_updated": "2026-09-17",
     "skill": "foundations-decision-theory",
-    "total_sources": 50
+    "total_sources": 52
   },
   "canonical_texts": [
     {
@@ -34,6 +34,14 @@
       "url": "https://doi.org/10.1109/TSSC.1966.300074",
       "description": "Howard (1966). Formal definition of EVPI and EVSI for decision analysis. Primary source for primitive #4 (value of information).",
       "url_check": "manual"
+    },
+    {
+      "id": "HeathBaio2018",
+      "name": "Calculating the Expected Value of Sample Information using Efficient Nested Monte Carlo: A Tutorial",
+      "url": "https://arxiv.org/pdf/1709.02319",
+      "description": "Heath and Baio (2018). Section 2 defines EVSI as the expected posterior-optimal value over possible future data minus the current optimal value. Method source for the finite-state calculator's exact signal enumeration; the calculator does not implement the later Monte Carlo approximation.",
+      "url_check": "auto",
+      "last_verified": "2026-09-08"
     },
     {
       "id": "Pratt1964",
@@ -307,7 +315,7 @@
       "id": "SuriClarification2026",
       "name": "Structured Uncertainty guided Clarification for LLM Agents",
       "url": "https://arxiv.org/abs/2511.08798",
-      "description": "Suri, Mathur, Lipka, Dernoncourt, Rossi, Manocha (arXiv:2511.08798, submitted Nov 2025, revised April 2026). SAGE-Agent: scores candidate clarifying questions by cost-penalized Expected Value of Perfect Information; separates specification uncertainty (user intent, askable) from model uncertainty (agent correctness, not askable). Reduces clarification questions 1.5-2.7x versus baselines while raising task success on ambiguous instructions. NEW applied source for primitive #4 (clarify-or-commit recipe).",
+      "description": "Suri, Mathur, Lipka, Dernoncourt, Rossi, Manocha (arXiv:2511.08798, submitted Nov 2025, revised April 2026). SAGE-Agent: scores candidate clarifying questions by cost-penalized Expected Value of Perfect Information; separates specification uncertainty (user intent, askable) from model uncertainty (agent correctness, not askable). Reduces clarification questions 1.5–2.7 times versus baselines on ClarifyBench with higher ambiguous-task coverage (study-specific results, section 7, Table 2). NEW applied source for primitive #4 (clarify-or-commit recipe).",
       "url_check": "manual",
       "last_verified": "2026-08-14"
     },
@@ -323,7 +331,7 @@
       "id": "CabralRankReversal2026",
       "name": "Closing a 17-Year Gap: Algorithmic Detection and Empirical Prevalence of Rank Reversal in Multi-Criteria Decision Analysis",
       "url": "https://arxiv.org/abs/2508.00129",
-      "description": "Cabral, J. B. et al. (arXiv:2508.00129, submitted July 2025, revised Aug 2026). Operationalizes the Wang-Triantaphyllou (2008) RRT1-RRT3 rank-reversal tests in the Scikit-Criteria library. Audit of 27 pipeline/dataset combinations from published MCDM work: top-alternative stability (RRT1) holds in 96.3%, transitivity (RRT2) fails in 14.8%, recomposition consistency (RRT3) fails in ~48%. Reframes rank reversal as a pervasive measurable property of methods in active use rather than an adversarial edge case. NEW source for primitive #5 (MCDA).",
+      "description": "Cabral, J. B. et al. (arXiv:2508.00129, submitted July 2025, revised Aug 2026). Operationalizes the Wang-Triantaphyllou (2008) RRT1-RRT3 rank-reversal tests in the Scikit-Criteria library. Study-specific audit of 27 selected pipeline/dataset combinations from published MCDM work (sections 7.2 and 8; not population prevalence): top-alternative stability (RRT1) holds in 96.3%, transitivity (RRT2) fails in 14.8%, recomposition consistency (RRT3) fails in ~48%. These selected examples do not establish population prevalence. NEW source for primitive #5 (MCDA).",
       "url_check": "manual",
       "last_verified": "2026-08-14"
     },
@@ -363,6 +371,15 @@
       "url": "https://doi.org/10.1002/j.1538-7305.1956.tb03809.x",
       "description": "Kelly, J. L. (1956). Bell System Technical Journal 35(4). Original Kelly criterion paper: growth-optimal bet sizing for repeated wagers with a known edge. Foundational source for the Kelly-criterion expert-judgment addition to primitive #6 and SKILL.md.",
       "url_check": "manual"
+    }
+  ],
+  "repair_sources": [
+    {
+      "id": "ProspectOriginal",
+      "name": "Prospect Theory: An Analysis of Decision under Risk",
+      "url": "https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Behavioral_Decision_Theory/Kahneman_Tversky_1979_Prospect_theory.pdf",
+      "description": "Original hypothetical risky choices; does not establish universal B2C conversion lift.",
+      "add_as_web_search": false
     }
   ]
 }

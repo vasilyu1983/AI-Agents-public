@@ -44,7 +44,7 @@ Primitives live in [foundations-queueing-theory](../../foundations-queueing-theo
 
 ## Why Queueing Theory for LLM Inference
 
-LLM inference is a queueing system. Requests arrive, wait for GPU capacity, are batched, and depart. The familiar saturation effects — latency exploding near ρ = 1, variance inflating p99, priority inversion under mixed workloads — all appear in LLM serving, but with LLM-specific structure:
+LLM inference is a queueing system. **Model boundary:** Erlang-C assumes a stationary pooled M/M/c queue with independent exponential request service; Kingman estimates mean wait for a GI/G/1 single-server queue. Continuous batching shares GPU work, so reciprocal request latency is not replica throughput. Multiplying multi-server Erlang-C by a variability factor is an unvalidated approximation, not Kingman's theorem. None of these mean-wait formulas proves a p99 TTFT SLO. Measure end-to-end quantiles on representative arrivals and prompt/output mixes, including failure and retry load. Little's Law relates stationary averages, not instantaneous queue-depth limits. Requests arrive, wait for GPU capacity, are batched, and depart. The familiar saturation effects — latency exploding near ρ = 1, variance inflating p99, priority inversion under mixed workloads — all appear in LLM serving, but with LLM-specific structure:
 
 - **Service time is not IID**: a 10-token prompt with a 10-token output and a 4,096-token prompt with a 2,000-token output occupy the same queue but have radically different service times. CV²_s is enormous.
 - **KV cache is a finite resource with state**: the "server" carries per-request state (KV cache pages) that persists across the decode phase. Cache eviction is a service-time spike.
@@ -53,7 +53,7 @@ LLM inference is a queueing system. Requests arrive, wait for GPU capacity, are 
 
 The four places where queueing theory pays off most in LLM inference:
 
-1. **Cluster sizing**: Erlang-C gives the minimum replica count to meet a TTFT SLO before you buy GPUs.
+1. **Cluster sizing**: Erlang-C can screen candidate replica counts when its request-service assumptions fit; load tests establish observed TTFT quantiles.
 2. **Batch and queue configuration**: Little's Law translates queue depth to latency; sizing queues without it produces bufferbloat.
 3. **Admission control thresholds**: the Erlang-C wait probability gives a principled trigger for shedding load rather than a heuristic CPU threshold.
 4. **Priority and isolation**: the P-K residual-time analysis explains why even a single long prompt can catastrophically delay subsequent short requests without head-of-line protection.
@@ -66,46 +66,11 @@ The four places where queueing theory pays off most in LLM inference:
 
 **Primitive anchors**: M/M/c (Erlang-C) (#3), M/G/1 / P-K (#4), Kingman (#7)
 
-**The inference framing.** In continuous batching (vLLM, SGLang, TGI), requests join a running batch at the next iteration boundary rather than waiting for the current batch to fully complete. The batch size b is dynamic: as requests finish, new ones join. The effective service rate per GPU server is not μ = 1/E[S_single_request] but μ_effective(b) = throughput_tokens/s / mean_output_tokens, which increases with b up to GPU memory saturation.
+**The inference framing.** Requests share GPU iterations in continuous batching. Measure completed requests/s for the actual prompt/output mix and batching settings. Aggregate decode tokens/s divided by output length omits prefill and scheduler contention, so it is at most a workload-specific capacity approximation. Request residence time is not reciprocal capacity when multiple requests overlap.
 
-**Model.** Treat each GPU server as a multi-server M/G/1-like node. The service time for a request in a batch of size b is:
+**Candidate model.** If a pooled request-level M/M/c abstraction fits, a=λ/μ and ρ=λ/(cμ), with μ in completed requests/s per replica. Erlang-C estimates wait probability and mean wait only within this abstraction. Kingman estimates a single-server mean; a variability-scaled multi-server mean is a separate heuristic requiring calibration.
 
-```
-E[S(b)] ≈ (E[prompt_tokens] + E[output_tokens]) / (b × decode_tokens_per_step × steps_per_second)
-```
-
-At low b, E[S(b)] is dominated by individual prefill latency. At high b, the batch amortises the prefill cost and decode throughput rises, but KV cache pressure increases, causing evictions that spike service time (CV²_s rises).
-
-**Effective utilization.** With c GPU replicas each running continuous batching at max batch size b_max:
-
-```
-a = λ × E[S(b_max)]         (offered load in Erlangs)
-ρ = a / c                   (utilization)
-```
-
-Apply Erlang-C to find the probability a request must wait:
-
-```
-C(c, a) = Erlang-C formula (see foundations-queueing-theory #3)
-Wq = C(c, a) / (c × μ_effective - λ)
-```
-
-Target ρ ≤ 0.70 for TTFT SLO compliance; continuous batching at ρ = 0.85 produces C(c, a) ≈ 0.5, meaning half of requests wait before even entering the batch.
-
-**Kingman correction for real traffic.** Prompt lengths follow a power-law distribution in production (many short, a few very long). CV²_s is typically 3–8 for mixed workloads. Apply Kingman:
-
-```
-VF = (CV²_a + CV²_s) / 2
-Wq_real ≈ Wq_erlang × VF
-```
-
-At VF = 4 and ρ = 0.70, Wq_real is 4× the M/M/c prediction. A service that appears correctly sized under M/M/c analysis violates TTFT SLOs in production because prompt length variance is ignored.
-
-**Design rules:**
-- Set max batch size b_max at the point where KV cache evictions begin — this is the effective service rate ceiling. Above it, service time spikes because evicted requests must re-prefill.
-- Monitor CV²_s of output length in production. If CV²_s > 3, output-length bucketing (routing short and long outputs to separate replica pools) reduces effective variance per pool.
-- Size c from Erlang-C at ρ = 0.70, then multiply Wq by VF. If Wq × VF > TTFT_SLO / 2, add replicas.
-- Autoscaler should trigger at ρ = 0.65, not CPU 80% — GPU utilization in continuous batching is already near 100% at low ρ due to prefill spikes.
+**Design rules.** Record capacity, memory pressure, queue wait, and TTFT quantiles across measured settings. Validate candidate replica count and batch limits with representative bursts, retries, and failures. No universal 0.70 utilization, 0.65 scale threshold, or variability factor certifies the SLO. Return an assumption/unit contract, measured candidate table, chosen settings, and overload recovery evidence.
 
 **When to use**: vLLM or SGLang cluster sizing; interpreting GPU utilization metrics; choosing max-batch-size and max-num-seqs parameters.
 
@@ -117,32 +82,9 @@ At VF = 4 and ρ = 0.70, Wq_real is 4× the M/M/c prediction. A service that app
 
 **The inference framing.** The KV cache is not just a performance optimization — it is a bounded resource that determines system capacity. Requests whose KV cache pages are evicted must re-prefill, causing a service-time spike (the "cache miss" path). The cache behaves as a finite resource shared across concurrent requests: it is a server farm with per-request state.
 
-**Little's Law for cache occupancy.** At any moment, the number of KV cache pages L occupied in steady state equals:
+**Occupancy contract.** Little's Law gives mean active requests E[N]=λE[T], with residence T in seconds; pages/request is not residence time. For evolving allocations, mean pages equal λE[∫pages_request(t)dt] under a stationary matched population, with retained shared-prefix pages accounted separately without double counting. Measure actual page allocation traces, lifetimes, shared-prefix references, eviction policy, and allocator rounding. Pages and bytes must use the runtime's actual page definition.
 
-```
-L = λ × W_per_request
-W_per_request ≈ (E[prefill_tokens] + E[output_tokens]) × bytes_per_token / page_size
-L = λ × W_per_request   (Little's Law: L = λW)
-```
-
-If the GPU has P_max total cache pages and L > P_max × utilization_ceiling (typically 0.90 of capacity), evictions begin. At that point, service time CV²_s spikes because evicted requests extend their service time by a full re-prefill.
-
-**Warm-pool sizing.** To maintain a warm pool that prevents evictions:
-
-```
-P_required = λ × E[tokens_in_flight] / page_size × safety_factor (1.2–1.5)
-E[tokens_in_flight] = E[prefill_tokens] + E[output_tokens] × fraction_still_decoding
-```
-
-If P_required > P_available, either reduce λ (admission control), increase GPU VRAM, or reduce precision (quantized KV cache) to fit more pages per GPU.
-
-**Bufferbloat analogy.** An oversized KV cache pool without admission control is a form of bufferbloat: the cache absorbs spikes without emitting backpressure. Requests queue in KV cache pages; latency accumulates silently. The fix is the same as for network bufferbloat — bound the occupancy and apply backpressure (admission control, queue depth limit) before the cache fills.
-
-**Design rules:**
-- Compute L = λ × W_per_request before setting max-num-seqs. If steady-state L > 0.80 × P_max pages, the cache will thrash under any load spike.
-- Set a KV cache usage alert at 75% occupancy. Cache usage × (page_size / throughput) is the leading latency indicator — it rises before p99 TTFT breaches.
-- For prefix caching (vLLM automatic prefix caching, SGLang RadixAttention): the effective L per request is reduced by prefix hit rate. A 60% prefix hit rate reduces L by 0.6 × E[prefix_tokens], allowing proportionally more concurrent requests at the same P_available.
-- Monitor cache hit rate per request class. Routing prefix-sharing requests to the same replica (sticky routing) increases hit rate and reduces effective per-request cache occupancy.
+**Sizing artifact.** Return measured average and peak occupancy, workload/lifetime window, available pages, sharing/invalidation semantics, and tested admission/headroom policy. Average occupancy does not certify burst safety. Prefix hit rate alone does not determine memory saved; cached prefixes may remain allocated after requests end. Distinguish waiting requests from admitted active allocations. Select occupancy alerts and limits from measured failure behavior rather than universal percentages.
 
 **When to use**: setting vLLM `--gpu-memory-utilization`, diagnosing cache eviction warnings in logs, sizing KV cache dtype (FP8 KV vs FP16 KV), planning multi-GPU KV cache partitioning.
 
@@ -156,7 +98,7 @@ If P_required > P_available, either reduce λ (admission control), increase GPU 
 - Prefill: compute-bound, high GPU utilization for a short burst.
 - Decode: memory-bandwidth-bound, lower GPU utilization per step, but long duration for long outputs.
 
-In a colocated setup, both phases share the same GPU queue. Kingman's formula explains the tail-latency cost: CV²_s for combined prefill+decode is large because prefill can be 20–200 ms and decode can be 500 ms–60 s for long outputs. High CV²_s inflates Wq for all requests in the queue.
+In a colocated setup, both phases share the same GPU queue. Service variability can worsen mean waits and tails; Kingman does not quantify the p99 cost: CV²_s for combined prefill+decode is large because prefill can be 20–200 ms and decode can be 500 ms–60 s for long outputs. High CV²_s inflates Wq for all requests in the queue.
 
 **Two-stage Jackson network.** When disaggregated, the request path becomes:
 
@@ -164,7 +106,7 @@ In a colocated setup, both phases share the same GPU queue. Kingman's formula ex
 Arrival queue → [Prefill Server Pool, c_p GPUs, μ_p] → [Decode Server Pool, c_d GPUs, μ_d]
 ```
 
-By Jackson's theorem, each stage can be analyzed independently with its own M/M/c model (assuming Poisson handoff between stages, which holds approximately):
+Only under stable Jackson assumptions (Poisson external arrivals, exponential independent service, and probabilistic routing) may these stages use independent M/M/c product form. Real batching, KV transfers, and dependent workloads require measurement; Poisson handoff is not automatic:
 
 ```
 Stage 1 (prefill):  ρ_p = λ × E[S_prefill] / c_p
@@ -180,8 +122,8 @@ The bottleneck is the stage with higher ρ. For long-output workloads, decode is
 **When disaggregation does not help.** For symmetric workloads (similar prefill and decode times, low CV²_s), disaggregation adds network transfer overhead (KV cache shipping between prefill and decode nodes) without reducing effective queue latency. Run the Jackson analysis with measured ρ_p and ρ_d before committing to disaggregation.
 
 **Design rules:**
-- Compute ρ_p and ρ_d from production traces. If abs(ρ_p − ρ_d) < 0.15, the workload is symmetric and disaggregation provides minimal queueing benefit.
-- Size c_p and c_d separately from their respective Erlang-C targets. c_p should achieve ρ_p ≤ 0.70; c_d should achieve ρ_d ≤ 0.70.
+- Compare measured interference, transfer cost, capacity, and latency of colocated versus disaggregated candidates; utilization similarity alone does not determine benefit.
+- Size pools from measured stage capacity and load-test latency; no universal stage utilization certifies the SLO.
 - After disaggregation, re-run Jackson flow-balance. The KV cache transfer link between stages is now a queue with its own latency. Model it explicitly.
 - vLLM disaggregated prefilling: treat as experimental (as noted in SKILL.md). Measure throughput improvement, not just latency — disaggregation does not increase throughput by itself unless one stage is the bottleneck.
 
@@ -198,7 +140,7 @@ The bottleneck is the stage with higher ρ. For long-output workloads, decode is
 **Erlang-C admission trigger.** Compute the current offered load:
 
 ```
-a_current = λ_measured × E[S_batch] / c
+a_current = λ_measured / μ_request   # offered load; matched request units
 ρ = a_current / c
 ```
 
@@ -208,29 +150,9 @@ Use Erlang-C to compute the current expected wait:
 Wq = C(c, a_current) / (c × μ_effective - λ_measured)
 ```
 
-When Wq > TTFT_SLO × admission_fraction (e.g. 0.50), begin shedding new arrivals with HTTP 429. This is a leading indicator — it fires before the SLO is breached, giving load balancers time to reroute.
+Use mean wait only to screen candidate admission settings. Tune actual thresholds using measured p99 TTFT, rejected-request rate, fairness, recovery behavior, and allowed retry load. Queue-depth and GPU utilization can be diagnostics, but neither is a universal early SLO guarantee. Set explicit bounded queue capacity and timeouts; reject before expensive work where runtime semantics allow.
 
-**Kingman-adjusted threshold.** Because real traffic has CV²_s > 1 (prompt length variance) and CV²_a > 1 (bursty HTTP traffic, retry storms):
-
-```
-Wq_real = Wq_erlang × VF
-```
-
-Set the admission trigger at Wq_real > 0.50 × TTFT_SLO. Equivalently, set it at ρ < ρ* where ρ* is solved from Wq_real(ρ*) = 0.50 × TTFT_SLO. For VF = 3, ρ* ≈ 0.60 — much lower than the naive "shed at ρ = 0.90" heuristic.
-
-**Queue-depth backpressure.** Little's Law gives the queue depth at the admission threshold:
-
-```
-Lq_threshold = λ × Wq_threshold
-```
-
-Implement queue-depth monitoring and shed load when queue depth > Lq_threshold. Queue depth is computable in real time (it is a counter); Wq is derived and lagged. Use queue depth as the primary trigger, Wq as the secondary confirmation.
-
-**Design rules:**
-- Never rely solely on GPU utilization as the admission trigger. GPU utilization in continuous batching can be 95%+ even at ρ = 0.60 due to prefill spikes — it does not reflect queue depth.
-- Set the admission control threshold conservatively (ρ* ≈ 0.60 for VF ≥ 3) and tune outward, not inward. Erring toward lower ρ* costs throughput; erring toward higher ρ* causes SLO breaches.
-- Apply admission control at the request routing layer (API gateway or load balancer), not inside the inference engine. Shedding inside the engine wastes GPU cycles on requests that are rejected after prefill.
-- For prompt length classes with very different E[S], compute ρ* per class. A class of 4,096-token prompts has a different ρ* than a class of 64-token prompts.
+**Return artifact:** assumed queue model and units, candidate capacity, measured mean queue wait separately from end-to-end quantiles, validated admission policy, and overload/recovery tests.
 
 **When to use**: configuring vLLM `--max-num-seqs` and queue limits; designing API gateway rate limits for inference endpoints; setting autoscaler scale-up triggers for GPU replicas.
 
@@ -240,37 +162,9 @@ Implement queue-depth monitoring and shed load when queue depth > Lq_threshold. 
 
 **Primitive anchors**: Priority Queues (#5), M/G/1 / P-K (#4), Fork-Join (#11)
 
-**The inference framing.** Speculative decoding runs a small draft model to speculatively generate k tokens, then verifies them with the target model in a single forward pass. If accepted, latency is reduced by the factor (1 + acceptance_rate × k). If rejected, the draft tokens are discarded and the target model re-generates from the verification point.
+**The inference framing.** Draft generation and target verification are dependent stages; their sequential execution is not a fork-join queue or automatic preemption. Acceptance does not imply a speed factor 1+αk: performance depends on accepted-prefix distribution, draft time, verification cost, scheduler contention, and output equivalence. Delayed verification alone does not make immutable draft tokens expire.
 
-This is a fork-join pattern with preemption semantics: the draft model and verification step are sequential, but the draft model is cheap and fast, while the verification step is expensive and shared with non-speculative requests.
-
-**Priority structure.** Under contention, the verification step (target model forward pass) must be treated as high priority relative to non-speculative requests. If the verification is delayed by a queued non-speculative request, the draft tokens expire — the acceptance window closes and the full decode penalty is paid.
-
-Model verification as class 1 (preemptive):
-```
-ρ₁ = λ_spec × E[S_verify] / c
-Wq_1 = W₀ / (1 − ρ₁)    (wait at most one in-progress service period)
-```
-
-Non-speculative decode as class 2:
-```
-ρ₂ = λ_non_spec × E[S_decode] / c
-```
-
-Starvation check: ρ₁ + ρ₂ < 0.85 to ensure class 2 does not starve.
-
-**Acceptance rate under load.** The acceptance rate α(t) of speculative decoding degrades under GPU contention: if the draft model is also resource-contended, draft quality drops (stale model state or deferred generation). At high ρ, speculative decoding overhead (draft model compute + verification pass) can exceed the savings.
-
-Rule: speculative decoding is beneficial only when:
-```
-α × k × E[S_token] > E[S_draft] + E[S_verify_overhead]
-```
-where E[S_verify_overhead] is the incremental cost of verification versus direct generation. This inequality inverts at high ρ when draft model latency increases.
-
-**Design rules:**
-- Measure α under realistic load (not synthetic uniform prompts). α varies by prompt type — code generation has lower α than chat continuation.
-- Reserve a dedicated compute allocation for the draft model. If the draft model is time-shared with decode traffic, the fork-join max-wait dominates and speculative decoding loses its latency benefit.
-- At ρ > 0.75, verify that speculative decoding still provides net benefit. It is common to disable speculative decoding under peak load rather than allow it to degrade all other requests.
+Compare speculative and ordinary decoding on matched workloads and concurrency. Record accepted tokens/cycle, draft and verification latency, target compute, memory, throughput, TTFT/ITL quantiles, and output/distribution correctness under the runtime's acceptance algorithm. Any priority policy needs explicit fairness and starvation tests; no utilization percentage alone prevents starvation. Return measured net benefit and bounded enable/disable criteria, not a universal acceptance threshold.
 
 **When to use**: enabling/disabling speculative decoding in vLLM or SGLang under mixed load; sizing draft-model capacity; diagnosing acceptance-rate degradation under high concurrency.
 
@@ -282,43 +176,9 @@ where E[S_verify_overhead] is the incremental cost of verification versus direct
 
 **The inference framing.** A multi-tenant LLM API serves tenants with different SLOs, throughput quotas, and prompt length distributions. Without isolation, a single bursty tenant (high λ, long prompts) can monopolise the GPU batch, causing other tenants to miss their SLOs.
 
-**Weighted fair queueing model.** Assign each tenant i a weight wᵢ such that Σwᵢ = 1. The effective throughput fraction for tenant i is:
+**Weighted scheduling contract.** Choose weights from explicit fairness/quota requirements and measured resource cost per class; multiplying SLO duration by quota is not a justified weight rule. Shared GPU batches couple tenants. A nominal fraction of throughput is a planning heuristic, not an isolated M/M/c queue. Fractional virtual replicas cannot be inserted into ordinary Erlang-C, and multiplying both replica count and rate by a weight double-counts its capacity reduction.
 
-```
-fraction_i = wᵢ / Σwⱼ
-```
-
-Under WFQ, tenant i's effective service rate is:
-
-```
-μ_i_effective = μ_total × wᵢ
-```
-
-And tenant i's individual utilization is:
-
-```
-ρ_i = λ_i / μ_i_effective
-```
-
-For SLO compliance, each tenant's ρ_i must be below the per-tenant SLO threshold ρ*_i.
-
-**Admission per tenant.** Apply per-tenant Erlang-C:
-
-```
-Wq_i = C(c_i_effective, a_i) / (c_i_effective × μ_i_effective − λ_i)
-```
-
-where c_i_effective ≈ c × wᵢ (fractional virtual servers). If any tenant's Wq_i exceeds its SLO, either increase that tenant's weight or reduce their λ via rate limiting.
-
-**P-K variance isolation.** High-CV²_s tenants (those with mixed short/long prompts) contaminate the shared queue's effective service time. WFQ per-tenant isolation bounds the CV²_s that any one tenant can inject into another's queue. Two tenants can have radically different CV²_s and each still receive their SLO, because their queues are separated.
-
-**Design rules:**
-- Set weights proportional to SLO × quota. A premium tenant with 50 ms TTFT SLO and 100 QPS quota gets higher weight than a standard tenant with 200 ms TTFT and 20 QPS.
-- Monitor per-tenant ρ_i in addition to global ρ. A global ρ of 0.70 can conceal tenant A at ρ_A = 0.95 and tenant B at ρ_B = 0.40.
-- Implement WFQ in the request scheduler (not just at the API gateway rate limiter). Rate limiting at the gateway prevents overload but does not ensure SLO compliance within the admitted traffic. The scheduler must implement fair-weighted dispatch to the GPU batch.
-- For tenants with very long prompts (E[S] >> median), cap their maximum concurrent requests independently of weight. Their large service time increases residual time for the entire queue even under WFQ.
-
-**When to use**: multi-tenant inference API design; setting per-customer rate limits and SLO tiers; diagnosing SLO breaches on a shared inference cluster.
+Use actual dedicated integer pools if an isolated queue model is needed. For shared scheduling, measure per-tenant throughput, rejection, queue wait, TTFT quantiles, and starvation under cross-tenant bursts. Return scheduling/admission policy, resource accounting units, tested fairness tradeoffs, and remaining shared-resource interference. Separate admission quotas from execution fairness.
 
 ---
 
@@ -326,45 +186,9 @@ where c_i_effective ≈ c × wᵢ (fractional virtual servers). If any tenant's 
 
 **Primitive anchors**: Little's Law (#1), Bufferbloat (#8), M/M/c (#3)
 
-**The inference framing.** GPU memory constrains both the KV cache (per-request state) and the model weights. Total token throughput is bounded by:
+**Resource contract**: Distinguish scheduler iteration token budget, actual allocated KV pages, and pending request tokens. These are different resources. Generated output tokens enter cache later than prompt tokens; λ_tokens times full request lifetime is not a valid occupancy estimate without a matching token-arrival and token-residence model. Use the P2 request page-time integral and measured allocator traces for KV sizing.
 
-```
-tokens_in_flight_max = KV_cache_pages × page_size_tokens
-```
-
-When tokens_in_flight approaches this limit, new requests cannot be admitted without evicting existing ones. Token budget is therefore the finite resource that determines the true service capacity — not just request count.
-
-**Little's Law for token budget.** At steady state:
-
-```
-L_tokens = λ_tokens × W_per_token_in_system
-
-where λ_tokens = λ_requests × E[output_tokens + prefill_tokens]
-      W_per_token_in_system ≈ E[request_lifetime_in_system]
-```
-
-When L_tokens > tokens_in_flight_max, the system is over capacity and evictions cascade.
-
-**Backpressure signal.** Define a token budget utilization metric:
-
-```
-budget_utilization = L_tokens_current / tokens_in_flight_max
-```
-
-Apply backpressure tiers:
-- budget_utilization < 0.70: accept all requests
-- budget_utilization 0.70–0.85: shed longest-prompt requests (highest token budget consumers)
-- budget_utilization > 0.85: shed all new requests (HTTP 429)
-
-This is a finer-grained admission control than request count alone: two 4,096-token requests consume 64× the token budget of two 64-token requests.
-
-**Chunked prefill.** For very long prompts, chunked prefill (vLLM `--enable-chunked-prefill`) reduces the token budget spike during prefill by processing the prompt in chunks. This smooths the arrivals at the KV cache, reducing CV²_a for the cache occupancy queue. Model it as reducing E[prefill_tokens_in_flight] per step from E[full_prompt] to E[chunk_size].
-
-**Design rules:**
-- Implement token-budget monitoring as a first-class metric alongside request count and GPU utilization. Token budget utilization is a more direct predictor of KV cache evictions than any other metric.
-- Set chunked prefill chunk size proportional to the GPU's decode batch capacity. A chunk size that matches the decode batch token rate prevents prefill from starving ongoing decode iterations.
-- For long-context models (128k+ context), token budget pressure dominates over request count. The queue depth in tokens (L_tokens) is the correct Little's Law measure, not queue depth in requests.
-- Alert on L_tokens > 0.75 × tokens_in_flight_max. By Little's Law, this is a leading indicator of eviction pressure: the queue is building faster than it is draining.
+Record token/page allocation changes, lifetimes, workload mix, memory limits, and scheduling interference under ordinary and chunked prefill. Chunking changes compute scheduling, not automatically total retained prompt KV memory. Set admission/alerts from measured memory pressure, queue age, TTFT/ITL quantiles, and rejection fairness; omit universal 70/85/75-percent thresholds or leading-indicator claims derived from Little's Law. Return the resource units, trace-based occupancy/capacity table, tested policy, and failure/rollback evidence.
 
 **When to use**: setting vLLM `--max-num-batched-tokens`; configuring chunked prefill; designing token-aware admission control for long-context models; diagnosing KV cache eviction spikes.
 
@@ -376,7 +200,7 @@ This is a finer-grained admission control than request count alone: two 4,096-to
 
 **Symptom**: the team configures a static `max_batch_size` or `max_num_seqs`. At low load, GPU utilization is poor (small batches under-utilise compute). At high load, the fixed batch size creates a rigid admission queue — when the batch is full, requests stack up and TTFT spikes.
 
-**Queueing diagnosis**: fixed batch size is equivalent to a D/G/1 queue (deterministic inter-service intervals) under a Poisson arrival process. At ρ < 0.50, a static batch size b_fixed produces batches with b_actual < b_fixed on average, wasting GPU compute. At ρ > 0.75, the batch is always full — the system behaves like a loss system (Erlang-B) for requests arriving when the batch is saturated, except those requests queue rather than drop, building unbounded waiting time.
+**Queueing diagnosis**: fixed batching requires a batch-service model; deterministic arrival notation D/G/1 does not describe Poisson arrivals. At ρ < 0.50, a static batch size b_fixed produces batches with b_actual < b_fixed on average, wasting GPU compute. At ρ > 0.75, the batch is always full — queued arrivals are not Erlang-B loss traffic; model waiting capacity and stability explicitly.
 
 **Harm**: the static batch size eliminates the continuous batching benefit at low load and produces head-of-line blocking at high load. GPU utilization oscillates between under-use and over-use rather than tracking the arrival rate.
 
@@ -412,7 +236,7 @@ At CV²_s = 8 (common for mixed 64-token and 4,096-token prompts), W_residual = 
 W_residual(128k) = 128000 tokens / throughput_prefill_tokens_per_s
 ```
 
-For a 100k tokens/s prefill throughput, W_residual ≈ 1.28 seconds. Every request arriving during this window waits at least 1.28 seconds for TTFT, regardless of its own prompt length. At 50 QPS, this is 64 requests adversely affected by a single outlier.
+For a 100k tokens/s prefill throughput, W_residual ≈ 1.28 seconds. In a strictly serial non-preemptive model, arrivals wait the remaining portion of this 1.28-second service, not at least the full duration. Actual interleaving can change the delay. At 50 QPS, this is 64 requests adversely affected by a single outlier.
 
 **Harm**: a single request causes a latency spike visible across all tenants and request classes. SLO burn is systemic rather than isolated.
 
@@ -430,11 +254,11 @@ For a 100k tokens/s prefill throughput, W_residual ≈ 1.28 seconds. Every reque
 Lq = λ × Wq
 ```
 
-Lq rises before Wq breaches the SLO. GPU utilization rises after Lq is large. Setting the autoscaler trigger on Lq (or equivalently, on pending request count at the GPU server) fires earlier and more accurately than GPU utilization.
+Little's Law concerns steady-state averages and establishes no temporal leading/lagging ordering. Test queue-depth, queue-age, and utilization signals against actual bursts and scale-out delays.
 
 **Harm**: autoscaler under-reacts to actual load buildup (misses the leading indicator) and over-reacts to spurious GPU utilization spikes (prefill bursts). Scale-out cost is higher and SLO protection is weaker than a queue-depth trigger.
 
-**Fix**: add request queue depth (pending_requests metric) and token budget utilization as autoscaler signals alongside GPU utilization. Set scale-up trigger at queue_depth > Lq_threshold (derived from Erlang-C at ρ* = 0.65), not GPU utilization threshold. Use GPU utilization as a secondary confirmation, not as the primary trigger.
+**Fix**: add request queue depth (pending_requests metric) and token budget utilization as autoscaler signals alongside GPU utilization. Calibrate scale-up/admission triggers using measured queue-age and TTFT quantiles, burst duration, and provisioning delay; there is no universal ρ*=0.65 threshold. Use GPU utilization as a secondary confirmation, not as the primary trigger.
 
 ---
 
@@ -446,87 +270,13 @@ Lq rises before Wq breaches the SLO. GPU utilization rises after Lq is large. Se
 
 **Primitive stack**: Erlang-C (#3) + Kingman (#7) + Little's Law (#1)
 
-**Step 1: Collect workload inputs.**
+**Step 1: Measure arrivals and capacity.** Collect per-request queue arrival, service start, first-token, completion, prompt/output lengths, cancellations, and retry counts. Estimate variance from observations; p50/p99 alone cannot determine CV². Measure saturated completed requests/s per replica for the actual workload mix. Do not divide aggregate decode token throughput by request latency or treat batch duration as request service without stating the model.
 
-```
-From production traces or load test:
-  λ_peak       = peak arrivals per second (requests/s)
-  E[prompt]    = mean prompt token count
-  E[output]    = mean output token count
-  CV²_s        = service-time coefficient of variation squared
-                 (estimate: (p99_service / p50_service - 1)² / 4, or measure from histogram)
-  CV²_a        = inter-arrival variance (measure from request log; 2–4 for HTTP traffic)
-  TTFT_SLO     = target TTFT p99 (e.g. 500 ms)
-  throughput   = GPU decode tokens/s at target batch size (from vLLM benchmark)
-```
+**Step 2: Screen candidates.** Under a defensible pooled M/M/c abstraction, use offered load a=λ/μ, utilization ρ=a/c, and mean queue wait E[Wq]=C(c,a)/(cμ−λ) for stable cμ>λ. In this exact model the queue-wait survival is P(Wq>t)=C(c,a)exp(−(cμ−λ)t), for t>=0. Its quantile is not the full TTFT quantile; do not add a prefill mean and claim an end-to-end p99. For continuous batching, prefer trace replay/simulation and measured capacity if the abstraction fails.
 
-**Step 2: Compute per-replica service rate and offered load.**
+**Step 3: Load-test candidates.** Replay representative arrival bursts and prompt/output joint distributions across replica/batching settings. Record mean queue wait separately from queue-wait and TTFT p99, throughput, errors, rejections, and recovery. Quantiles need adequate observations and uncertainty; include the rejected population in the policy assessment. Increase candidate capacity or alter admission only according to measured results, deployment delay, and failure scenarios.
 
-```
-E[S_request] = (E[prompt] + E[output]) / (throughput_per_gpu / mean_batch_size)
-
-# Approximate E[S] from profiling one GPU at realistic batch size
-E[S] = measured mean end-to-end service time per request at b = b_target
-
-a = λ_peak × E[S]          (offered load in Erlangs)
-```
-
-**Step 3: Run Erlang-C scan.**
-
-```python
-from math import factorial, exp
-
-def erlang_c(c, a):
-    """Erlang-C formula. Returns wait probability C(c, a)."""
-    if a >= c:
-        return 1.0  # unstable
-    rho = a / c
-    sum_terms = sum((a**k) / factorial(k) for k in range(c))
-    last_term = (a**c / factorial(c)) * (1 / (1 - rho))
-    return last_term / (sum_terms + last_term)
-
-def wq_erlang(c, a, mu):
-    """Mean wait in queue (seconds) for M/M/c."""
-    C = erlang_c(c, a)
-    lam = a * mu
-    return C / (c * mu - lam)
-
-# Scan for minimum c
-mu = 1 / E_S
-for c in range(int(a) + 1, int(a) + 30):
-    rho = a / c
-    if rho >= 1.0:
-        continue
-    Wq = wq_erlang(c, a, mu)
-    VF = (CV2_a + CV2_s) / 2
-    Wq_real = Wq * VF
-    print(f"c={c}, rho={rho:.2f}, Wq={Wq*1000:.1f}ms, Wq_real={Wq_real*1000:.1f}ms")
-    if Wq_real <= TTFT_SLO * 0.5:  # TTFT budget = Wq + E[prefill]
-        c_min = c
-        break
-```
-
-**Step 4: Apply safety margin and set autoscaler bounds.**
-
-```
-c_deploy = c_min + 1          # one replica headroom
-autoscaler_min = c_deploy
-autoscaler_max = c at 2× peak λ
-
-# Scale-up trigger: queue_depth > Lq_threshold
-Lq_threshold = lambda_peak * Wq_real   # Little's Law
-```
-
-**Step 5: Validate with load test.**
-
-Run a load test with realistic prompt length distribution (not uniform synthetic). Confirm Wq_real from load test matches the Erlang-C prediction. If p99 TTFT > SLO at c_deploy, increase c by 1 and re-test. Typically, 1–2 extra replicas beyond c_min are sufficient for real traffic variability.
-
-**Example** — chat API cluster sizing:
-- λ_peak = 20 req/s, E[S] = 800 ms at b=8, μ = 1.25/s, a = 16 Erlangs
-- CV²_a = 2.5, CV²_s = 4.0, VF = 3.25
-- TTFT_SLO = 600 ms, TTFT budget for Wq = 200 ms (remaining for prefill = 400 ms)
-- Erlang-C scan: c=18: ρ=0.89 (skip); c=20: ρ=0.80, Wq=120ms, Wq_real=390ms (too high); c=24: ρ=0.67, Wq=35ms, Wq_real=114ms ✓
-- c_deploy = 25 GPUs. Autoscaler min=25, scale-up at queue_depth > 20 × 0.114 ≈ 3 pending requests.
+**Step 4: Return the sizing artifact.** Provide workload traces/window, capacity definition, assumptions, tested candidate table, observed TTFT quantiles and uncertainty, headroom rationale, and bounded autoscaler/admission settings. Name an observed passing candidate rather than a theorem-guaranteed minimum. Little's Law validates average counters under stable matched populations; it does not prescribe a burst-safe queue-depth threshold.
 
 ---
 
@@ -544,9 +294,7 @@ For b = 1, 2, 4, 8, 16, 32, 64:
   Record KV cache eviction rate (evictions/min) at each b.
   Record GPU memory utilization at each b.
 
-Stop at b_max where:
-  - KV cache eviction rate > 0 (cache memory pressure begins), OR
-  - E[S(b)] increase per doubling > 30% (memory bandwidth saturation)
+Record cache-pressure and latency changes; stop at measured memory/correctness limits or failed SLO criteria. An arbitrary percent increase does not establish bandwidth saturation.
 ```
 
 **Step 2: Compute throughput-cost frontier.**
@@ -554,8 +302,7 @@ Stop at b_max where:
 ```python
 results = []
 for b in batch_sizes:
-    mu_b = 1 / E_S_at_b[b]
-    throughput_b = b * mu_b  # requests/s per GPU
+    throughput_b = measured_completed_requests_per_second[b]
     cost_per_req = 1 / throughput_b   # GPU-seconds per request
     results.append({
         'b': b,
@@ -565,17 +312,17 @@ for b in batch_sizes:
     })
 ```
 
-Plot throughput vs b. The curve is concave — each doubling of b yields diminishing throughput gains. The "knee" of this curve is the efficient operating point.
+Plot throughput vs b. Inspect the measured curve; concavity is not guaranteed. The "knee" of this curve is the efficient operating point.
 
-**Step 3: Apply Kingman to find the p99-safe batch size.**
+**Step 3: Screen mean waits, then test p99 for each batch setting.**
 
 ```
 For each candidate b at the frontier:
   VF = (CV2_a + cv2_s_at_b[b]) / 2
   Wq_real = Wq_erlang(c, a_at_b) × VF
 
-  If Wq_real > TTFT_budget: reject this b (p99 will breach at realistic load)
-  Else: candidate for max-num-seqs
+  Treat Wq_real as a heuristic mean-wait screen only.
+  Measure end-to-end TTFT p99 under representative arrivals before accepting b.
 ```
 
 Note: larger b increases throughput but also increases CV²_s (more output length mixing per batch), which increases Wq_real. The optimal b for the throughput-cost frontier may not be the optimal b for the SLO.
@@ -595,7 +342,7 @@ Monitor in production:
   - queue_depth (below Lq_threshold?)
 ```
 
-**Strongest outcome**: step 3 (Kingman CV²_s check) frequently reveals that the batch size giving maximum raw throughput violates the p99 TTFT SLO because batch diversity increases CV²_s. The correct maximum batch size is typically 20–40% below the raw throughput maximum.
+**Strongest outcome**: step 3 (Kingman CV²_s check) frequently reveals that the batch size giving maximum raw throughput violates the p99 TTFT SLO because batch diversity increases CV²_s. No universal percentage below the raw throughput maximum is justified; select from the measured candidate table.
 
 ---
 
@@ -644,7 +391,7 @@ def generate_bursty_arrivals(lambda_rate, cv2_a, duration_s):
     return times
 ```
 
-Use `generate_bursty_arrivals` with measured CV²_a. A Poisson load test underestimates p99 latency when CV²_a > 1 (which it almost always is in production).
+Use `generate_bursty_arrivals` with measured CV²_a. A Poisson load test can miss bursts; measure variability and temporal dependence instead of assuming CV²_a > 1.
 
 **Step 3: Configure prompt length distribution.**
 
@@ -667,7 +414,7 @@ At the conclusion of the load test:
 2. Compute measured CV²_a from inter-arrival histogram.
 3. Compute VF = (CV²_a + CV²_s) / 2.
 4. Compute predicted Wq_real = Wq_erlang × VF.
-5. Compare predicted Wq_real to measured p99 TTFT − E[prefill_time].
+5. Compare predicted mean queue wait to measured mean queue wait under matched populations and assumptions. Evaluate measured p99 TTFT separately; never subtract a mean from a quantile and call it mean wait.
 
 If |predicted − measured| > 30%:
   - Check for non-stationarity (burst windows violate ergodicity assumed by Little's Law).
@@ -682,7 +429,7 @@ Confirm: measured p99 TTFT ≤ TTFT_SLO at c_deploy from R1.
 If violated: increase c and re-run. Typical cause is VF higher than estimated (production CV²_s > synthetic CV²_s).
 ```
 
-**Strongest outcome**: step 2 (bursty arrivals with measured CV²_a) is the single change that most improves load test fidelity. A Poisson load test at the same QPS typically shows p99 latency 2–4× lower than production because it underestimates arrival burstiness. Using measured CV²_a closes most of this gap.
+**Strongest outcome**: step 2 (bursty arrivals with measured CV²_a) is the single change that most improves load test fidelity. No universal p99 multiplier follows from CV²_a. Matching a variance alone can still miss autocorrelation, workload coupling, and retry storms; verify trace fidelity against measured tails.
 
 ---
 

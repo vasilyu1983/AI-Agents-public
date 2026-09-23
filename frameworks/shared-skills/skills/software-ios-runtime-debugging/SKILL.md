@@ -24,7 +24,7 @@ This skill owns stale-build suspicion, simulator drift, malformed `.app` bundles
 | Auth appears to succeed but next screen is unauthenticated | Inspect token persistence and auth propagation after fresh launch | Do not redesign UI first |
 | Push works on Xcode build but fails on TestFlight | Inspect archived entitlements and newest backend device row | Wrong APNs environment is more likely than feature-code regression |
 | APNs returns `BadDeviceToken` for older installs | Check device-row environment and staleness first | Often stale tokens or env mismatch, not a current-device blocker |
-| Push tap opens to black screen, freeze, or `_performBlockAfterCATransactionCommitSynchronizes` | Start at [`references/swift-concurrency-crash-triage.md`](references/swift-concurrency-crash-triage.md); web-search the exact symbol before any code review | Known root cause family: `nonisolated async` UN delegate + nested `MainActor.run`, bare `Task { }` in `@MainActor` class, `actor → @MainActor` round-trip, `@Sendable async` closure, or SCNView `updateUIView` scene reassign. Separate transport proof from push-open proof: if APNs accepted delivery and the banner appeared, the bug is app-side |
+| Push tap opens to black screen, freeze, or `_performBlockAfterCATransactionCommitSynchronizes` | Start at [`references/swift-concurrency-crash-triage.md`](references/swift-concurrency-crash-triage.md); web-search the exact symbol before any code review | Root-cause candidates include a nonisolated delegate or completion callback mutating main-actor UI state, nested actor hops, or SceneKit updates. `Task { }` inherits the actor context where its closure is formed; inspect that creation context rather than assuming every task is detached. Separate transport proof from push-open proof |
 | App stuck on a stale binary after `⌘R` | Delete DerivedData + delete app from device + reopen Xcode + reinstall | Xcode incremental build sometimes fails to detect actor isolation changes and reuses cached object files. Verify the fresh binary is on the device with the DEBUG marker print pattern (temporary `print("[<class>] build marker — <date>")` in a class `init`). See [`references/swift-concurrency-crash-triage.md` → "iOS app builds fine in terminal but Xcode shows compile errors, or device runs old binary"](references/swift-concurrency-crash-triage.md#symptom-ios-app-builds-fine-in-terminal-but-xcode-shows-compile-errors-or-device-runs-old-binary) |
 | Cold-start push tap re-crashes on every relaunch | Delete + reinstall to clear `pendingRoutePath` in UserDefaults | A prior crashed launch staged a route in UserDefaults that the next cold launch tries to consume and re-crashes on before recovery. Primary bug is higher up (one of the Swift Concurrency patterns); this is the persistent secondary symptom. See [`references/swift-concurrency-crash-triage.md` → "app freezes/black-screens on push tap AND persists across cold relaunches"](references/swift-concurrency-crash-triage.md#symptom-app-freezesblack-screens-on-push-tap-and-persists-across-cold-relaunches) |
 | UITest env var is present but the wrong screen is captured | Verify branch execution and a screen-specific accessibility marker | Process env alone is not runtime proof |
@@ -78,9 +78,8 @@ Use this skill to:
 3. Build the app with the simplest reproducible command.
 4. Inspect the built `.app`:
    verify `Info.plist`, executable name, and expected bundle contents.
-5. Remove stale installs:
-   uninstall the app from the target simulator or device.
-6. Install the freshly built bundle.
+5. Preserve the reproduction before resetting anything: record launch arguments, deep link, account, local data dependency, installed bundle version/signature, logs, and the visible state.
+6. Install or upgrade the freshly built bundle while preserving its data container where the target supports that path. Uninstall/reset only when replacement fails, signing differs, migration/state corruption is the suspected layer, or the repro evidence has already been captured.
 7. Launch the freshly installed app and capture proof:
    screenshot, UI hierarchy, launch logs, and a target-screen-specific marker when isolating a route.
 8. Only after the app is freshly running, debug feature behavior, design, auth, or API issues.
@@ -106,7 +105,8 @@ iOS runtime failure
 ## Runtime Proof Loop
 
 - Prefer one bounded loop:
-  discover -> build -> inspect bundle -> uninstall -> install -> launch -> capture evidence
+  discover -> build -> inspect bundle -> preserve repro -> replace/install -> launch -> capture evidence
+- Escalate separately to a clean build, container reset, or uninstall. Record which reset changes the symptom; that difference distinguishes build drift from persisted-state or migration defects.
 - If any step fails, stop there and fix that layer before moving deeper.
 - Do not trust screenshots from a simulator session that has not been tied to the current build.
 - Do not trust “build succeeded” on its own; install and launch proof still matter.
@@ -249,7 +249,6 @@ For repos managed directly through `.xcodeproj/project.pbxproj`, new Swift files
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

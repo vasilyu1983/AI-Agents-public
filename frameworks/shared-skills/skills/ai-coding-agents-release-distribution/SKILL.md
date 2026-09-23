@@ -81,14 +81,11 @@ post-update verification
 - Treat managed enterprise distribution as a different channel, not just a different flag.
 - Cache keys should include compatibility-relevant install context when plugins can come from paths, subdirs, or repackaged sources.
 
-## Scratch-Rebuild Coverage
+## Compatibility And Partial-Upgrade Contract
 
-- Coverage strength:
-  strong for release channels, compatibility boundaries, versioned state, rollback framing, local-footprint discipline, and the requirement that plugin and cache identity be treated as separate compatibility surfaces
-- Missing for faithful reproduction:
-  cross-version plugin API contracts, staged rollout telemetry, orphaned-version cleanup, cache-schema migration choreography, and downgrade behavior across partially updated hosts need more operational detail
-- Required additions:
-  document compatibility matrices for core versus plugins versus caches, cache-key rules for path or subdir installs, rollout and rollback observability requirements, and spell out how partial upgrades fail safely
+Publish a matrix for each release covering runtime version, plugin API range, settings schema, cache schema, session-store schema, and minimum rollback target. Cache identity must include content digest plus source kind, canonical source location/subdirectory, runtime ABI, and cache-schema version; display version alone cannot distinguish path installs or repackaged sources.
+
+Stage rollout with cohort, source version, target version, migration result, plugin-load failures, cache rebuilds, session-resume failures, and rollback result in telemetry. A partially upgraded host must either keep the previous readable state side-by-side or stop before destructive migration; it must not mix a new runtime with an unverified old plugin/cache state. Define downgrade behavior before rollout, retain the prior artifact until the rollback window closes, and remove orphaned versions only after no active session or rollback target references them.
 
 ## Build Order
 
@@ -239,6 +236,6 @@ Goose uses `deny.toml` (cargo-deny) for license/advisory/source gating at build,
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

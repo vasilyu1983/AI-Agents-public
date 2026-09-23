@@ -67,9 +67,11 @@ Load `references/anti-flakiness.md`.
 7. Tune execution in CI.
 Load `references/ci-parallelism-sharding.md` and `references/infrastructure-troubleshooting.md`.
 8. Validate changed suites through build-test feedback targets.
-For NUKE-based repositories, run `BuildAll`, `LocalUnitTest`, `ApiTest`/`DbTest` as needed, then `TestAll`; use `$ops-nuke-cicd` for pipeline-target changes.
+Record SDK, runner mode, target framework, filter, discovered/executed/skipped counts, result path, and container or stub diagnostics. A build or `--list-tests` proves discovery only; a green filtered run proves only that category and target framework. For NUKE-based repositories, run `BuildAll`, `LocalUnitTest`, `ApiTest`/`DbTest` as needed, then `TestAll`; use `$ops-nuke-cicd` for pipeline-target changes.
 9. If this is a migration from SpecFlow-style assets, produce migration trace artifacts.
 Use `$docs-codebase` with migration matrix and feature trace templates.
+
+If Testcontainers or WireMock is part of the oracle, require evidence that the intended dependency started, became ready, received the expected interaction, and was cleaned up. List excluded suites explicitly instead of calling the NUnit run complete.
 
 ## Resources
 - [NUnit Structure](references/nunit-structure.md): project layout, naming, categories, and lifecycle conventions.
@@ -150,12 +152,9 @@ NUnit testing request
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

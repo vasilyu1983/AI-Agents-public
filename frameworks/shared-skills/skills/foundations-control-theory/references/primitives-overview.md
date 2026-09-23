@@ -60,7 +60,7 @@ Each primitive below addresses a specific class of feedback failure.
 
 | Anti-Pattern | Diagnosis | Fix |
 |-------------|-----------|-----|
-| Replica count oscillates at target | P-only or underdamped PID | Add derivative term; tune with Ziegler-Nichols |
+| Replica count oscillates at target | P-only or underdamped PID | Identify gain, delay, sampling, noise and saturation first; reduce gain or test filtered derivative only if plant response supports it. Ziegler-Nichols is an aggressive starting point, not a guarantee |
 | Scaler adds max replicas, then removes all | Integrator windup at ceiling | Anti-windup (#8) |
 | Scaler reacts 90 seconds after load spike | Pod startup dead time uncompensated | Smith Predictor (#7) |
 | Single gain set fails under both light and heavy load | Operating point mismatch | Gain scheduling (#9) |

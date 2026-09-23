@@ -15,7 +15,7 @@ where:
 - I(T;Y) = information about the target Y preserved in T (relevance — maximize)
 - β > 0 = Lagrange multiplier (tradeoff: β→0 maximizes compression; β→∞ minimizes information loss)
 
-**IB curve**: the Pareto frontier in the I(T;X) vs. I(T;Y) plane. Points below the curve are unachievable; points above are suboptimal.
+**IB curve**: the Pareto frontier in the I(T;X) vs. I(T;Y) plane. For horizontal I(T;X) and vertical I(T;Y), relevance above the maximal achievable frontier is unachievable; dominated achievable points below it are suboptimal. State axes before interpreting a plot.
 
 **IB self-consistency equations** (iterative solution for discrete case):
 
@@ -32,8 +32,9 @@ Solved by alternating minimization (analogous to EM or the Blahut-Arimoto algori
 **Variational IB** (Alemi et al. 2017): approximates IB for high-dimensional X,Y using variational bounds on MI, enabling gradient-based optimization:
 
 ```
-VIB objective: −β · I(Z; X) + I(Z; Y)
-Implemented as: KL(q(z|x) ‖ p(z)) − E[log p(y|z)]
+Maximize: I(Z;Y) − β_vib I(Z;X)
+Minimize surrogate: E[-log p(y|z)] + β_vib KL(q(z|x) ‖ p(z))
+The multiplier convention differs from the compression-minus-β-relevance IB form above
 ```
 
 ---
@@ -72,7 +73,7 @@ Implemented as: KL(q(z|x) ‖ p(z)) − E[log p(y|z)]
 
 ## Failure Modes
 
-1. **IB β controls compression monotonically**: False for finite-sample or discrete distributions. The IB curve can have phase transitions (bifurcations) where β-tuning causes jumps. Always sweep β densely and plot the full IB curve; do not assume smooth monotone behavior.
+1. **IB β controls compression monotonically**: Globally optimized relevance/compression tradeoffs can be monotone yet discontinuous. Finite/discrete distributions have phase transitions; local optimization and estimator noise can also distort the observed curve. Sweep β and check the objective and solver assumptions rather than equating a jump with nonmonotonicity.
 2. **IB interpretation of deep learning generalization**: Saxe et al. (2018) showed the IB compression phase Schwartz-Ziv & Tishby observed depends on the choice of MI estimator and activation function. Do not assert IB explains DNN generalization without validating estimator choice and architecture.
 3. **VIB β ≠ IB β**: The variational bound introduces a gap; the VIB β controlling KL penalty does not directly correspond to the IB β controlling the theoretical tradeoff. Empirical calibration of β is required.
 4. **MI estimation noise in high dimensions**: IB requires estimating I(X;T) and I(T;Y) in high-dimensional embedding spaces. Bias and variance in the MI estimator can produce misleading IB curves. Use binned estimates with multiple runs to check stability.
@@ -86,17 +87,17 @@ Implemented as: KL(q(z|x) ‖ p(z)) − E[log p(y|z)]
 
 A 500-token prompt P is used to generate a 50-token response R. We want to compress P to T ≤ 100 tokens while preserving I(T;R).
 
-Empirically estimate I(T;R) and I(T;P) by sampling 1,000 (prompt, response) pairs with different truncation levels:
+The following hypothetical population-information values illustrate the tradeoff; they are not measured results. A 1,000-pair plug-in histogram cannot estimate 18.2 bits of mutual information because its empirical entropy is at most log2(1000). A model-based estimator would need separate validation and uncertainty reporting:
 
 | Tokens in T | I(T;P) [bits] | I(T;R) [bits] | I(T;R)/I(P;R) [retention] |
 |-------------|--------------|--------------|--------------------------|
 | 500 (full)  | 18.2         | 4.1          | 100% |
 | 300         | 12.4         | 3.9          | 95% |
-| 150         | 7.3          | 3.6          | 88% |
+| 150         | 7.3          | 3.6          | 87.805% |
 | 100         | 5.0          | 3.1          | 76% |
 | 50          | 3.1          | 1.8          | 44% |
 
-The IB curve shows that compressing to 150 tokens retains 88% of task-relevant information while discarding 60% of input complexity. The 100-token target hits a cliff in I(T;R) — the compression is below the IB Pareto frontier for this task. Set the token budget at 150, not 100.
+The hypothetical values illustrate that compressing to 150 tokens retains approximately 87.805% of task-relevant information while discarding 60% of input complexity. The 100-token target hits a cliff in I(T;R) — the illustrative retention is lower. These points do not prove a Pareto frontier. If a predeclared task-quality threshold requires at least 88% retention under a validated estimator, the unrounded 3.6/4.1 = 87.805% at 150 tokens does not meet it; 300 tokens (3.9/4.1 = 95.122%) does. Never round a threshold failure into a pass; otherwise choose by actual downstream utility and cost.
 
 ---
 

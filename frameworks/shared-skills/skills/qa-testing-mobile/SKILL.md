@@ -93,6 +93,8 @@ Design and execute reliable, cost-aware mobile testing across iOS and Android (n
 - Mobile release readiness should include the real distribution path, not only local or CI compile success.
 - For iOS, archive/signing, TestFlight readiness, and any production-only behaviors such as APNs or StoreKit should be validated on the channel that matches production behavior.
 - For Android, include Play-track or equivalent store/device-lab evidence where store-side behavior matters.
+- For every gate, record `built`, `installed`, `launched`, `journey-verified`, `channel-verified`, or `monitored-rollout` with source/build identity, platform, OS/device, locale, backend, channel, artifacts, and observation window.
+- Do not collapse simulator, device-lab, beta-channel, and production evidence into one pass. A later stage inherits earlier evidence only for the exact same build and configuration.
 - Keep product-specific rollout order, metadata checklists, reviewer accounts, and internal smoke scripts in project docs. Use [references/release-and-rollout.md](references/release-and-rollout.md) for the portable baseline.
 
 ## Localization Coverage
@@ -209,12 +211,9 @@ Mobile QA request
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

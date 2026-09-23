@@ -184,6 +184,10 @@ Tauri apps pair a **Rust backend** with a **webview frontend** (the OS-native we
 
 ## Distribution and Updates
 
+**Update recovery gate.**
+
+An updater is production-ready only when the previous signed build can be restored after download failure, signature rejection, crash-on-launch, or incompatible local-data migration. Test interrupted download, offline launch, downgrade protection, and rollback on each supported OS. Keep application-data migrations backward compatible for at least the rollback window, or explicitly block auto-update until recovery is possible.
+
 **Code signing** (required for trusted distribution):
 - macOS: Apple Developer ID certificate + notarization via `notarytool` (`altool` was removed by Apple in November 2023 — treat any `altool` reference as dead). Without notarization, Gatekeeper blocks the app.
 - Windows: traditional EV/OV Authenticode certificates now require a hardware token or HSM per CA/Browser Forum baseline requirements (since June 2023), which breaks most CI pipelines. Microsoft's cloud-native alternative — **Azure Artifact Signing** (the GA name; it shipped as "Trusted Signing" in preview) — signs from CI without a physical token and is generally available for US/Canada/EU/UK-registered businesses and, more recently, verified individuals. Prefer it for new Windows signing pipelines; fall back to a traditional EV cert only if Artifact Signing's regional/eligibility requirements don't fit. Unsigned apps trigger SmartScreen warnings, and Windows 11 24H2's Smart App Control blocks unsigned/low-reputation executables outright.
@@ -297,14 +301,10 @@ When users ask version-sensitive questions about desktop frameworks, verify curr
 ## Fact-Checking
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
 - Re-check Electron security defaults, Tauri capability and updater behavior, Compose Desktop platform support, and MAUI packaging/notarization details before making version-sensitive recommendations.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

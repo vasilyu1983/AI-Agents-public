@@ -124,6 +124,10 @@ Rebase and force-push are not inherently dangerous — the risk is a function of
 - **Secrets in history:** rotate the exposed credential first — that closes the actual exposure immediately. Only then decide whether a history rewrite is worth the disruption; for large or shared repos, rotation alone is often sufficient and a rewrite is unnecessary collateral damage. If a rewrite is still needed, use `git filter-repo`, not `git filter-branch` — the Git project's own docs deprecate `filter-branch` for correctness and performance reasons and point to `filter-repo` as the replacement.
 - **Agent-specific failure mode:** an agent "cleaning up" its own commit history can silently destroy a human's edit pushed to the same branch between the agent's last fetch and its push. Require `--force-with-lease` (never bare `--force`) for any agent-initiated force-push, and treat a lease rejection as a stop condition — fetch, inspect what changed, and involve a human rather than retrying with `--force`.
 
+Before updating a rewritten remote branch, fetch the remote, record the current remote tip, and use `--force-with-lease` against that observed value. If the lease fails, re-read the remote commits and reconcile; do not widen to an unconditional force. Avoid rewriting a branch used by another person, an open dependent PR, a release tag, or an automation job unless the coordination and recovery path are explicit.
+
+The handoff for an authorized rewrite includes the old tip, new tip, branch name, affected dependent branches or PRs, and the command collaborators need to realign. This turns the reflog and recorded SHA into a usable recovery path rather than a vague promise that the change is reversible.
+
 ## Agent-Authored Commit Hygiene
 
 Judgment for commits an agent creates on a human's behalf, distinct from generic commit-message style:
@@ -381,7 +385,6 @@ Useful assets:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

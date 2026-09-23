@@ -14,7 +14,7 @@ A **quorum** is the minimum number of nodes that must participate in a read or w
 | **W** | Number of replicas that must acknowledge a write before it is considered successful |
 | **R** | Number of replicas that must respond to a read before the result is returned |
 
-**Core property**: If `W + R > N`, at least one replica in every read quorum must have the latest write. This guarantees that reads always include the most recently written value.
+**Core property**: For successful reads/writes on the same fixed replica set, `W + R > N` ensures read/write intersection. After a completed durable write with no intervening/concurrent conflicting write, that intersection includes a replica of the completed version. It does not alone prove latest-value reads or linearizability: specify version ordering, concurrent/partial writes, read/write repair, durability and reconfiguration.
 
 **Common configurations**:
 
@@ -22,9 +22,9 @@ A **quorum** is the minimum number of nodes that must participate in a read or w
 |---|---|---|---------|
 | N | 1 | N | Write to all; fast reads; any single failure blocks writes |
 | 1 | N | N | Fast writes; read from all; any single failure blocks reads |
-| majority | majority | N | Strong consistency; tolerates floor(N/2) failures |
+| majority | majority | N | Intersecting fixed-membership quorums; ordering requires a correct protocol; tolerates N−(floor(N/2)+1) failures for quorum availability |
 | 1 | 1 | N | Fast writes and reads; eventual consistency only (W+R ≤ N) |
-| 2 | 2 | 3 | Common Cassandra strong-consistency config; tolerates 1 failure |
+| 2 | 2 | 3 | Intersecting read/write quorums; not a generic linearizability guarantee; tolerates 1 failure for quorum availability |
 
 **Sloppy quorums** (Dynamo): When the full quorum is unavailable, accept writes to any available nodes (possibly outside the "preference list"). The "hinted handoff" mechanism delivers these writes to the correct nodes when they recover. Sloppy quorums improve availability but do not guarantee strong consistency.
 
@@ -56,7 +56,7 @@ A **quorum** is the minimum number of nodes that must participate in a read or w
 
 | Output | Description |
 |--------|-------------|
-| Consistency guarantee | W + R > N → strong consistency; W + R ≤ N → eventual consistency |
+| Consistency evidence | W + R > N proves intersection under fixed membership; linearizability needs a correct atomic-register/consensus protocol. W + R <= N permits disjoint quorums; eventual convergence additionally needs delivery/repair |
 | Fault tolerance | Can tolerate min(N - W, N - R) failures while maintaining quorum |
 | Latency profile | Dominated by the slowest node in the quorum (tail latency) |
 

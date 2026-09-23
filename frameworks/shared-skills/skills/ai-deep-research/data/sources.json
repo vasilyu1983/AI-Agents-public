@@ -83,13 +83,13 @@
     {
       "name": "OpenAI Deep Research Guide",
       "url": "https://developers.openai.com/api/docs/guides/deep-research",
-      "description": "Feature guide for OpenAI deep research. Model IDs o3-deep-research (depth) and o4-mini-deep-research (speed/cost) still described here as current. Old platform.openai.com URL redirects here. Verified 2026-07-11 — CAUTION: this guide disagreed with the deprecations page on the same date (see next entry); do not treat this page alone as proof the models are still supported.",
+      "description": "Feature guide for OpenAI deep research. Legacy model pages may still describe o3-deep-research while the current model catalog marks the deep-research aliases deprecated. Checked 2026-09-07; do not use this guide alone as availability proof.",
       "add_as_web_search": false
     },
     {
       "name": "OpenAI API Deprecations Page",
       "url": "https://developers.openai.com/api/docs/deprecations",
-      "description": "Authoritative sunset-date source. Lists o3-deep-research (snapshot o3-deep-research-2025-06-26) and o4-mini-deep-research (snapshot o4-mini-deep-research-2025-06-26) as shut down 2026-07-23, recommended replacement gpt-5.5-pro, announced 2026-04-22. Verified 2026-07-11. Always check this page, not just the feature guide, before wiring a pipeline to a specific OpenAI model ID.",
+      "description": "Authoritative lifecycle source. Checked 2026-09-07: the dated o3-deep-research and o4-mini-deep-research 2025-06-26 snapshots shut down 2026-07-23, and the current table names gpt-5.6-sol as substitute. Check this page plus the model catalog and account availability before wiring a model ID.",
       "add_as_web_search": false
     },
     {

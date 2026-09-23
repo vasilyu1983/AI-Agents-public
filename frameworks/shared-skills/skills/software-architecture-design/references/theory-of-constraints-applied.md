@@ -45,9 +45,9 @@ TOC gives architects three things the standard toolkit does not:
 3. **A conflict-resolution method** (evaporating cloud) that dissolves deadlocks between architectural camps — stability vs. velocity, centralized vs. federated, monolith vs. services — without compromise.
 
 The primitives here are domain-specific applications of the canonical TOC tools in
-[`../../../foundations-theory-of-constraints/SKILL.md`](../../../foundations-theory-of-constraints/SKILL.md).
+[`../../foundations-theory-of-constraints/SKILL.md`](../../foundations-theory-of-constraints/SKILL.md).
 Full playbooks for each primitive live in
-[`../../../foundations-theory-of-constraints/assets/templates/theory-of-constraints/`](../../../foundations-theory-of-constraints/assets/templates/theory-of-constraints/).
+[`../../foundations-theory-of-constraints/assets/templates/theory-of-constraints/`](../../foundations-theory-of-constraints/assets/templates/theory-of-constraints/).
 
 ---
 
@@ -388,7 +388,7 @@ These patterns and recipes compose with the rest of the `software-architecture-d
 ## Sources
 
 These sources underpin the TOC primitives applied here. Full citation list is in
-[`../../../foundations-theory-of-constraints/references/primitives-overview.md`](../../../foundations-theory-of-constraints/references/primitives-overview.md).
+[`../../foundations-theory-of-constraints/references/primitives-overview.md`](../../foundations-theory-of-constraints/references/primitives-overview.md).
 
 - Goldratt, E.M. & Cox, J. (1984). *The Goal*. North River Press. — Origin of 5FS and throughput accounting.
 - Goldratt, E.M. (1990). *The Haystack Syndrome*. North River Press. — Throughput Accounting formalization: T, I, OE metrics.

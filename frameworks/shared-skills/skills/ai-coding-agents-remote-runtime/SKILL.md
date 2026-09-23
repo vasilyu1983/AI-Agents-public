@@ -69,6 +69,7 @@ remote runtime
 7. **Plan reconnect behavior.** Distinguish transient reconnecting, permanent disconnect, and viewer-only no-interrupt modes. Decide whether the client resumes from sequence numbers, replays from checkpoints, or only reconnects live.
 8. **Keep approval local where possible.** Remote execution can ask; the local controller should decide and respond with a structured result.
 9. **Test degraded modes.** Verify network drops, reconnect backoff, remote interrupt, stale control requests, unsupported control subtypes, and local or remote command filtering.
+10. **Make replay idempotent.** Give transcript and control events monotonic sequence numbers plus stable operation IDs. On reconnect, deduplicate by operation ID, acknowledge the highest contiguous sequence, and never replay a side effect merely because its acknowledgement was lost.
 
 ## Host Rules
 
@@ -243,6 +244,6 @@ ACP is bidirectional in practice: Goose can *also* act as an ACP client and dele
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

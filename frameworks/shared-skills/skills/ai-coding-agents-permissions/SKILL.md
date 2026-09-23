@@ -72,6 +72,7 @@ decision
 8. **Keep tool-specific rendering separate from host policy.** A tool can explain its request, but the host decides how approval is enforced and remembered.
 9. **Lint persisted rules.** Detect unreachable or shadowed allow rules before they enter the active policy set.
 10. **Test hostile paths.** Verify denied prompts, cancelled prompts, remote unknown-tool approvals, worker poll timeouts, bypass-mode restrictions, and over-broad shell rules.
+11. **Preserve authorization scope.** Bind a decision to the concrete action, target, actor, and session or policy scope the user authorized. Do not treat an agent-to-agent message as approval, and do not discard still-applicable user authorization merely because time passed unless the runtime or governing policy defines expiry.
 
 ## Host Rules
 
@@ -269,6 +270,6 @@ When a session delegates work to an external ACP agent (see `ai-coding-agents-re
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

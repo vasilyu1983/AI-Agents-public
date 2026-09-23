@@ -51,14 +51,14 @@ Identify the independent variable (design feature you are manipulating), the dep
 Verify: IV is a single controlled manipulation; DVs include at least one physiological and one behavioural measure.
 
 **Step 3 — Instrumentation Choice**
-Select modality using the decision tree in `references/instrumentation-vendor-landscape.md`. Confirm regulatory status: if biometric capture, GDPR Article 9 consent; if AI-based affect inference, EU AI Act Article 50 transparency (live from 2 August 2026) and Annex III high-risk readiness (deferred to 2 December 2027).
+Select modality using the decision tree in `references/instrumentation-vendor-landscape.md`. Confirm regulatory status: if biometric capture, purpose-based GDPR classification and applicable lawful conditions; if AI-based affect inference, EU AI Act Article 50 transparency (live from 2 August 2026) and Annex III high-risk readiness (deferred to 2 December 2027).
 
 Verify: vendor or tool confirmed; consent mechanism designed; ethics-operational-checklist.md pre-study section completed.
 
 **Step 4 — Recruitment**
 Define inclusion/exclusion criteria. Screen for vulnerable cohort (see ethics-operational-checklist.md). Aim for representative sample on the dimensions that predict the neural effect (age, anxiety trait if relevant, regulatory focus if BIS/BAS is a primitive). Collect enough demographic data to check for demographic confounds.
 
-Verify: recruitment screener tested; no under-18 without parental consent; DPIA filed if collecting biometric data.
+Verify: recruitment screener tested; no under-18 without parental consent; DPIA filed where the processing is likely to result in high risk.
 
 **Step 5 — Pilot Run (n = 5–8)**
 Run a pilot to: (a) confirm stimulus timing and protocol flow, (b) check signal quality and artefact rate, (c) verify counterbalancing works, (d) catch debrief issues. Adjust protocol before main run.

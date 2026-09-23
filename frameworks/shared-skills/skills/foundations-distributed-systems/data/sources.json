@@ -2,9 +2,10 @@
   "metadata": {
     "title": "AI Distributed Systems Foundations — Sources",
     "description": "Primary papers and references for 11 distributed-systems primitives: CAP/PACELC, FLP impossibility, Paxos, Raft, vector clocks, CRDTs, idempotency, leases/fencing, quorums, causal consistency, and broadcast protocols (including failure-detector taxonomy)",
-    "last_updated": "2026-08-24",
+    "last_updated": "2026-09-17",
     "skill": "foundations-distributed-systems",
-    "total_sources": 35
+    "total_sources": 35,
+    "verification_scope": "Targeted correctness and operational-artifact review; not a fresh verification of every historical paper."
   },
   "research_papers": [
     {
@@ -172,8 +173,10 @@
       "id": "Zhong2024DistServe",
       "name": "DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving",
       "url": "https://arxiv.org/abs/2401.09670",
-      "description": "Zhong, Liu, Chen, Hu, Zhu, Liu, Jin, Zhang. OSDI 2024 (arXiv:2401.09670). Disaggregates LLM prefill (compute-bound) and decode (memory-bandwidth-bound) onto separate GPU pools to independently optimise TTFT and ITL. Demonstrates 7.4× more requests or 12.6× tighter SLO vs. co-located state-of-the-art. Production adoption via vLLM at Meta, LinkedIn, Hugging Face. Artifact: github.com/LLMServe/DistServe. Relevant to primitives #7, #9, #11.",
-      "url_check": "manual"
+      "description": "Zhong et al., OSDI2024. Disaggregates prefill and decode. Abstract/section6 report up to7.4x request rate OR12.6x tighter SLO against evaluated systems at >90% latency attainment. Workload-specific maxima, not universal simultaneous gains. Artifact github.com/LLMServe/DistServe; no verified company-adoption claim.",
+      "url_check": "manual",
+      "last_verified": "2026-09-17",
+      "claim_location": "Abstract, section 6 and Figure9: up to7.4x request rate OR12.6x tighter SLO, >90% attainment; workloads/baselines vary."
     },
     {
       "id": "EigerPORTPlus2025",
@@ -243,7 +246,9 @@
       "name": "CoAgent: Concurrency Control for Multi-Agent Systems",
       "url": "https://arxiv.org/abs/2606.15376",
       "description": "Lyu, Zhang, Wu, Wei, Chen. arXiv:2606.15376, June 2026 preprint (not peer-reviewed; cited for its diagnosis rather than as a settled result). Argues 2PL and OCC fit agent workloads badly because agent transactions span long inference, have broad opaque read sets, and write unbuffered through tools. Proposes MTPO (Monotonic Trajectory Pre-Order): fix a serialization order at launch, serve order-filtered reads, apply writes speculatively in place over undoable tools. Reports within 5% of serial correctness at 1.4x speedup. Relevant to primitives #6, #7, #10.",
-      "url_check": "manual"
+      "url_check": "manual",
+      "last_verified": "2026-09-17",
+      "claim_location": "Abstract and section 1: ten contended workloads; correctness within 5% of serial; 1.4x speedup."
     },
     {
       "id": "Petrov2019",

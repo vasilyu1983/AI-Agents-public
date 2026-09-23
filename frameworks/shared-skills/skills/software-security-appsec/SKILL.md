@@ -168,6 +168,10 @@ Use:
 
 ## Verification Checklist
 
+**Finding evidence gate.**
+
+For each security finding, identify the attacker capability, reachable entry point, trust-boundary crossing, sink, and concrete impact. Separate confirmed exploit paths from defense-in-depth gaps and unverified hypotheses. Supply a safe reproduction or code-path trace plus the smallest viable remediation; severity follows exploitability and impact, not the presence of a risky-looking API alone.
+
 Before finalizing any AppSec design or review output:
 
 - [ ] Trust boundary drawn explicitly — every input crossing it is validated or rejected
@@ -231,7 +235,6 @@ Default to one of these:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

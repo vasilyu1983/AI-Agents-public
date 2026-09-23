@@ -2,9 +2,10 @@
   "metadata": {
     "title": "AI Foundations Control Theory — Sources",
     "description": "Primary references for 12 control-theory primitives: PID, feedback/feedforward, observability, controllability, Lyapunov stability, MPC, Kalman filter, dead-time compensation, anti-windup, gain scheduling, circuit breaker, backpressure, rate limiting, and DeePC/behavioral systems",
-    "last_updated": "2026-08-14",
+    "last_updated": "2026-09-17",
     "skill": "foundations-control-theory",
-    "total_sources": 29
+    "total_sources": 30,
+    "verification_scope": "Targeted correctness and operational-artifact review; not a fresh verification of every historical paper."
   },
   "textbooks": [
     {
@@ -216,6 +217,15 @@
       "name": "Probabilistic Control Barrier Functions for Systems with State Estimation Uncertainty using Sub-Gaussian Concentration",
       "url": "https://arxiv.org/abs/2604.08831",
       "description": "Echigo, van Wijk, Mestres, Daş, Burdick & Ames (2026). arXiv:2604.08831. Particle-based probabilistic CBF framework providing tight probabilistic safety guarantees via sub-Gaussian concentration bounds and finite-sample CVaR estimates. Extends classical (deterministic) CBF to systems with sensor noise. Relevant when deterministic CBF is applied with noisy measurements. Paper-only; no code confirmed.",
+      "add_as_web_search": false
+    }
+  ],
+  "operational_verification": [
+    {
+      "id": "MathWorks-PID-AntiWindup",
+      "name": "PID Controller — clamping and back-calculation",
+      "url": "https://www.mathworks.com/help/simulink/slref/pidcontroller.html",
+      "description": "Primary implementation documentation supporting conditional integration sign and integral-output back-calculation conventions; reviewed 2026-09-17.",
       "add_as_web_search": false
     }
   ]

@@ -37,7 +37,7 @@ MTTR = Total downtime / Number of failures
 |---------|-------------|-----|
 | Including planned maintenance downtime in failure count | MTBF appears higher than true failure rate | Separate planned and unplanned stops before computing |
 | Measuring MTTR from detection, not from occurrence | MTTR understates true repair burden; hides detection lag | Record failure occurrence time separately from alert time |
-| Using a window too short for rare failures | Single event dominates estimate; high variance | Use ≥10× MTBF worth of observation time for stable estimates |
+| Using a window too short for rare failures | Single event dominates estimate; high variance | Choose observation time from desired rate precision and confidence; report sparse/zero-failure uncertainty |
 | Treating MTBF as exponentially distributed when it is not | Calculations that assume constant hazard rate become invalid | Validate distribution shape before applying exponential formulas (see primitive 03) |
 | Arithmetic average of MTBF values across parallel subsystems | Incorrect — parallel availability is not the average of series availabilities | Use the composition formulas in primitive 10 |
 
@@ -57,11 +57,11 @@ A target of 99.9% (three nines) requires either fewer or shorter failures. The 9
 ## Domain Caveats
 
 **LLM / GenAI cloud services — re-calibrate baselines before applying standard MTTR targets.**
-Empirical analysis of 4 years of production incidents across Microsoft's GenAI cloud services (ISSRE 2025) found that GenAI incidents take **1.83× longer to mitigate** than equivalent non-GenAI cloud incidents (median TTM 1.12 vs. 0.65 time units). Monitor false-alarm rates are also elevated: **11.0% vs. 3.8%** for traditional services. Do not transfer MTTR baselines or alarm-threshold calibrations from non-GenAI services to LLM-in-the-loop systems without re-measuring from your own incident history. (Yan et al. 2025, arXiv:2504.08865.)
+[Yan et al. v2](https://arxiv.org/html/2504.08865v2), VIII-A, report normalized **average** TTM 1.12 vs. 0.65 in Microsoft incidents; their rounded ratio is ≈1.72. VIII-B separately states 1.83×, an unresolved internal discrepancy; unrounded data are unavailable. These are neither medians nor a controlled comparison of equivalent incidents. Monitor false-positive proportions 11.0% vs 3.8% concern monitor-detected tickets. Re-measure local recovery and detection.
 
 **LLM agent systems — MTBF alone is insufficient; use a three-axis reliability model.**
 Single-run success rate masks substantial reliability gaps in agent architectures. ReliabilityBench (Gupta 2026) demonstrates that perturbations drop success from 96.9% to 88.1% at perturbation intensity ε=0.2, and API-level faults (rate limiting, timeouts) produce further degradation that MTBF averaging conceals. For LLM agent systems, extend MTBF analysis with three axes:
-1. **Consistency** — pass^k rate across ≥10 repeated identical runs.
+1. **Consistency** — all-k consistency at a declared k, with independent repeated task groups and per-run intervals.
 2. **Robustness** — performance degradation across semantically equivalent task variants (ε=0.1–0.3).
 3. **Fault tolerance** — per-failure-type impact (timeout, rate limit, schema drift).
 (Gupta, A. 2026. arXiv:2601.06112.)

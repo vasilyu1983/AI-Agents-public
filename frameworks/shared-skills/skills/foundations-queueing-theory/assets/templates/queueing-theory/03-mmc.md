@@ -80,7 +80,7 @@ Adding servers has diminishing returns. The relationship between c and Wq is con
 |---------|-------|-----|
 | Erlang-C used for a loss system | Arrivals are dropped, not queued | Use Erlang-B (primitive 10) |
 | Single utilization metric hides per-server overload | Routing is uneven (hot spots) | Model per-shard separately or use power-of-two-choices routing |
-| Optimal c computed at ρ = 0.95 | Any measurement error triggers instability | Size for ρ ≤ 0.70–0.80 plus one spare server |
+| Optimal c computed at ρ = 0.95 | Small load/service errors can exhaust the limited headroom | Size against the specified waiting SLO and uncertainty/failure scenarios; validate headroom and spare capacity for this workload |
 | Non-Poisson bursts ignored | Traffic is bursty (CV² > 1) | Apply Kingman correction (primitive 07) |
 
 ## Worked Example
@@ -103,7 +103,7 @@ Classical Erlang-C results are steady-state only. Real systems are never permane
 For systems that do not reach stationarity, apply finite-time mixing bounds from Nguyen, Varma, Maguluri (SIGMETRICS 2025). Key results:
 
 - The M/M/c queue has a mixing time that scales with c and ρ; approaching the **Halfin-Whitt regime** (ρ near but below 1) maximizes the gap between transient and steady-state behavior.
-- During scaling transitions (c changing), steady-state Erlang-C formulas are lower bounds on required capacity — actual wait times during the transition window will exceed steady-state predictions.
+- During scaling transitions (c changing), stationary Erlang-C gives no universal transient bound. Empty initial queues can wait less than stationarity, while initial backlog or cold starts can wait more. Specify initial queue/server states, horizon and SLO; use a transient model or trace simulation before sizing capacity.
 - Use finite-time bounds when: burst windows shorter than mixing time, autoscaling-in-progress, or SLO applies during cold-start.
 
 **Rule of thumb**: if your measurement window is less than ~10 service times × c, the queue may not have reached stationarity; treat Erlang-C as optimistic.
@@ -115,7 +115,7 @@ In cloud environments, c (the server or replica count) is dynamically adjustable
 1. **Short-horizon routing** (seconds): balance load across existing capacity using Erlang-C sizing to meet the wait-time SLO.
 2. **Long-horizon scaling** (minutes–hours): adjust c based on traffic forecasts (SageServe pattern: Jaiswal et al., SIGMETRICS 2026). SageServe co-optimizes routing and VM/GPU scaling via traffic forecasting and Integer Linear Programming; validated at Microsoft Office 365 (10M+ requests/day, 3 regions, 25% GPU-hour savings).
 
-**Caution**: Classic Erlang-C assumes c is fixed. For dynamic c, note that SLO violations spike during c-adjustment transitions — apply finite-time Erlang-C bounds (Nguyen et al. 2025, above) during scaling events to set conservative capacity floors.
+**Caution**: Classic Erlang-C assumes c is fixed. Changing capacity can increase or decrease transient SLO exposure depending on the initial queue/server state. Apply a finite-time bound (including Nguyen et al. 2025, above) only after verifying that its theorem covers the exact changing-capacity process, initial state, horizon and target; a fixed-c result does not automatically cover scaling events. Otherwise use an explicit transient model or representative trace simulation to select capacity and test transition risk.
 
 **Kill criterion for SageServe pattern**: if traffic is memoryless (no forecastable structure), reactive Erlang-C sizing without forecasting may be adequate.
 

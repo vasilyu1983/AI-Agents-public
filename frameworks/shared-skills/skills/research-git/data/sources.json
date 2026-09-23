@@ -1,7 +1,9 @@
 {
   "metadata": {
+    "verification_scope": "Targeted September corrections only. last_updated is the catalog edit date; entries without their own September verification retain older verification status.",
+    "targeted_checks": [{"url": "https://docs.github.com/en/rest/search/search", "verified_claim": "REST code search limit is 10/minute authenticated; general search 30/minute.", "last_verified": "2026-09-11"}],
     "title": "Repo Research - Sources",
-    "last_updated": "2026-06-10",
+    "last_updated": "2026-09-11",
     "description": "Curated registry for scanning public GitHub repos across three modes: skill (agent-skill ecosystem), practice (real-team git/PR/CI), code (framework idioms). Includes high-signal authors, awesome-list entry points, per-mode target lists, and license compatibility.",
     "skill": "research-git"
   },

@@ -117,6 +117,12 @@ The common mistake is applying "prototype-level" detail to an unattended, high-b
 - **The "can't picture the failing test" tell.** An AC that reads well but generates zero tests is unfalsifiable. If you cannot describe the specific test that would fail if the behavior were wrong, the AC is not done — rewrite it before handoff, don't ship it and hope the agent infers the missing half.
 - **The "two competent engineers" tell.** The most common single point of spec failure is not a missing AC — it's an AC that is simultaneously true for two materially different implementations. Ask: "could two competent engineers build different things and both honestly claim this AC is satisfied?" If yes, add a discriminating clause (a concrete input/output pair, a specific error code, an explicit ordering) until the answer is no.
 
+### Decision and unknown ledger
+
+Keep unresolved product choices out of declarative requirements. For each unknown, record the decision needed, current assumption, owner, deadline or blocking milestone, affected requirements, and what evidence will close it. Mark acceptance criteria that depend on the assumption so an implementer cannot mistake a placeholder for approved behavior.
+
+When the decision lands, update the requirement and its acceptance criteria together, then close the ledger entry with the decision source. A PRD is implementation-ready only when every blocking unknown is closed, explicitly deferred outside scope, or represented as a safe runtime/configuration choice with a named default and fallback.
+
 ## Cross-Tool Context Rules
 
 Treat project memory as layered:
@@ -274,7 +280,6 @@ If you are deciding what context an agent needs or how a spec should be structur
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

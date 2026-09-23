@@ -12,7 +12,7 @@ Specialized arXiv category + keyword map for contributing the **`hci_retention_p
 
 **Premise.** HCI and CSCW research periodically publishes long-term studies that empirically tie *specific interaction patterns or features* to user retention, engagement, or willingness-to-pay. These are the slowest-but-most-rigorous signal in the bundle. arXiv's `cs.HC` category indexes most of this work; `cs.CY` and `cs.SI` catch adjacent retention/adoption research.
 
-**Note on arXiv coverage:** Many CHI/CSCW/UIST papers are *also* posted to arXiv (`cs.HC`), but a non-trivial fraction is only published through the ACM Digital Library. arXiv coverage is roughly 50-70% of CHI/CSCW for the last 5 years. Use this skill for the arXiv-indexed fraction; use `research-scout` (with `generate_conference_queries.py --conference chi`) for the ACM-only fraction.
+**Note on arXiv coverage:** Many CHI/CSCW/UIST papers are *also* posted to arXiv (`cs.HC`), but a non-trivial fraction is only published through the ACM Digital Library. No representative arXiv coverage percentage is established here. Use this skill for the arXiv-indexed fraction; use `research-scout` (with `generate_conference_queries.py --conference chi`) for the ACM-only fraction.
 
 ---
 

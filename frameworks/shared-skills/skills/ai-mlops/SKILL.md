@@ -128,9 +128,13 @@ Need to operate an AI system in production:
 - **Treat retrieved content and tools as untrusted**: RAG context, tool outputs, external APIs, and MCP servers all need containment, validation, and audit logs.
 - **Version the full runtime**: model artifact, feature definitions, prompt/config, safety policies, tool schemas, and agent graphs.
 - **MLflow 3 alias-based registry**: prefer model aliases (e.g., `@champion`, `@challenger`) over lifecycle stages for promotion governance. Stages are soft-deprecated in MLflow 3 in favor of aliases. Verify current MLflow docs at https://mlflow.org/docs/latest/ before advising.
-- **vLLM V1 engine only**: V1 has been the default since v0.8.0 and, per the project's deprecation plan, V0 code was slated for removal starting v0.10 — by mid-2026 V0 is gone, not just deprecated. If a codebase still references V0 flags (`VLLM_USE_V1=0`, legacy `LLMEngine` args), treat it as unmaintained and migrate. Reference: https://docs.vllm.ai/en/stable/usage/v1_guide/
+- **vLLM V1 for new deployments**: the current V1 guide says V0 is fully deprecated, while still documenting feature differences and migration cases; it does not support the stronger claim that every V0 path has disappeared. Treat V0 flags (`VLLM_USE_V1=0`, legacy `LLMEngine` args) as migration debt, verify the needed feature on V1, and test semantic differences such as log-probability handling before rollout. Checked 2026-09-07: https://docs.vllm.ai/en/stable/usage/v1_guide/
 - **Document regulatory timing explicitly**: as of March 13, 2026, general AI Act obligations apply from **August 2, 2026**, while general-purpose AI model obligations already started on **August 2, 2025**. Verify exact applicability for the user’s system before final advice.
 - **EU AI Act deadline extension — formally adopted**: negotiators reached political agreement on May 7, 2026 to extend high-risk compliance deadlines; the European Parliament formally endorsed the package on June 16, 2026 and the Council gave final green light on June 29, 2026, per a legal briefing updated June 30, 2026. It takes legal effect three days after Official Journal publication (pending at time of writing). High-risk systems under Annex III (biometrics, critical infrastructure, employment, credit, public sector functions) that are new or substantially modified get a 16-month extension to December 2, 2027; AI safety components in regulated products (Annex I) get a 12-month extension to August 2, 2028. General transparency obligations for interactive AI and the general-purpose-AI-model rules are unaffected and still apply from August 2, 2026 / August 2, 2025 respectively. **Always verify current Official Journal publication status** at https://artificialintelligenceact.eu/implementation-timeline/ before committing any compliance roadmap — treat "adopted by Parliament and Council" as distinct from "in force," since the latter depends on publication date. Source: DLA Piper GENIE briefing, updated June 30, 2026 (https://knowledge.dlapiper.com/dlapiperknowledge/globalemploymentlatestdevelopments/2026/The-Digital-AI-Omnibus-Proposed-deferral-of-high-risk-AI-obligations-under-the-AI-Act).
+
+## Canary Promotion Gate
+
+Define offline blockers, shadow checks, canary cohort, observation window, rollback trigger, and accountable owner before changing production traffic. Promote only when model quality, feature or retrieval skew, latency, error, cost, and safety metrics clear their slice-specific bounds and the rollback path has restored the previous full runtime in rehearsal. A healthy endpoint or registry alias change is deployment evidence, not production-behavior evidence.
 
 ## Known Traps
 
@@ -280,6 +284,6 @@ For responsible and multimodal operations, start with [references/responsible-mu
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

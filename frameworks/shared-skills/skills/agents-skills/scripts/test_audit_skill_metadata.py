@@ -65,6 +65,23 @@ def write_compact_discovery(root: Path, text: str | None = None) -> None:
     )
 
 
+def write_large_valid_catalog(root: Path, count: int = 100) -> None:
+    for index in range(count):
+        name = f"fixture-{index:03d}"
+        prefix = (
+            f"Audits repository metadata fixture {index}. Use when testing local inventory "
+            "thresholds and runtime evidence. "
+        )
+        description = prefix + ("z" * (170 - len(prefix)))
+        write_skill(
+            root,
+            name,
+            description,
+            "Repository metadata audit",
+            f"Use ${name} when testing repository metadata inventory thresholds and runtime evidence.",
+        )
+
+
 class AuditSkillMetadataTests(unittest.TestCase):
     def run_auditor(self, root: Path, *extra_args: str) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
@@ -92,6 +109,72 @@ class AuditSkillMetadataTests(unittest.TestCase):
             warnings = payload["results"][0]["warnings"]
             self.assertIn("description missing `Use when` trigger clause", warnings)
             self.assertIn("default_prompt missing `$skill-name` invocation token", warnings)
+
+    def test_json_output_flags_template_splice_default_prompt(self) -> None:
+        splice_warning = (
+            'default_prompt reads as a template splice ("for <Verb>s ..."); '
+            'rewrite as "Use $name to <verb> ..." or "... when ..."'
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(
+                root,
+                "spliced-skill",
+                "Builds spliced fixtures for metadata output. Use when testing template splice detection.",
+                "Spliced fixture",
+                "Use $spliced-skill for Builds spliced fixtures for metadata output. Use when testing template splice detection.",
+            )
+            write_skill(
+                root,
+                "clean-skill",
+                "Builds clean fixtures for metadata output. Use when testing template splice detection.",
+                "Clean fixture",
+                "Use $clean-skill to build clean fixtures for metadata output. Use when testing template splice detection.",
+            )
+
+            result = self.run_auditor(root, "--json")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            payload = json.loads(result.stdout)
+            by_skill = {entry["skill"]: entry["warnings"] for entry in payload["results"]}
+            self.assertIn(splice_warning, by_skill["spliced-skill"])
+            self.assertNotIn(splice_warning, by_skill["clean-skill"])
+
+    def test_json_output_flags_truncated_short_description(self) -> None:
+        truncation_warning = (
+            "short_description is a hard prefix of the SKILL.md description cut "
+            "mid-sentence; write a complete <=80-char sentence"
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(
+                root,
+                "truncated-skill",
+                "Builds truncated fixtures for metadata output. Use when testing truncation detection.",
+                "Builds truncated fixtures for metadata",
+                "Use $truncated-skill when testing truncation detection of metadata fixtures.",
+            )
+            write_skill(
+                root,
+                "sentence-skill",
+                "Builds sentence fixtures for metadata output. Use when testing truncation detection.",
+                "Builds sentence fixtures for metadata output.",
+                "Use $sentence-skill when testing truncation detection of metadata fixtures.",
+            )
+            write_skill(
+                root,
+                "distinct-skill",
+                "Builds distinct fixtures for metadata output. Use when testing truncation detection.",
+                "Distinct metadata fixture builder",
+                "Use $distinct-skill when testing truncation detection of metadata fixtures.",
+            )
+
+            result = self.run_auditor(root, "--json")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            payload = json.loads(result.stdout)
+            by_skill = {entry["skill"]: entry["warnings"] for entry in payload["results"]}
+            self.assertIn(truncation_warning, by_skill["truncated-skill"])
+            self.assertNotIn(truncation_warning, by_skill["sentence-skill"])
+            self.assertNotIn(truncation_warning, by_skill["distinct-skill"])
 
     def test_strict_mode_fails_on_warnings(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -141,6 +224,146 @@ class AuditSkillMetadataTests(unittest.TestCase):
                     )
                     result = self.run_auditor(root, "--strict")
                     self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+
+    def test_compact_index_does_not_imply_runtime_mitigation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "skills"
+            root.mkdir()
+            write_compact_discovery(root)
+            write_large_valid_catalog(root)
+
+            result = self.run_auditor(root, "--json", "--strict")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            payload = json.loads(result.stdout)
+            inventory = payload["description_budget"]
+            discovery = payload["compact_discovery"]
+
+            self.assertEqual(inventory["inventory_level"], "critical")
+            self.assertEqual(inventory["runtime_load_status"], "unknown")
+            self.assertIsNone(inventory["runtime_load_evidence"])
+            self.assertIn("repository-local", inventory["threshold_basis"])
+            self.assertIsNone(inventory["codex_budget"])
+            self.assertIsNone(inventory["claude_code_budget"])
+            self.assertIsNone(inventory["legacy_anthropic_budget"])
+            self.assertIsNone(inventory["fits_codex_default"])
+            self.assertIn("intentionally null", inventory["legacy_field_semantics"])
+            self.assertTrue(discovery["structurally_valid"])
+            self.assertEqual(discovery["runtime_load_status"], "unknown")
+            self.assertFalse(payload["strict_gate"]["runtime_loading_evaluated"])
+            self.assertEqual(
+                payload["strict_gate"]["scope"],
+                "repository_metadata_and_compact_index_structure",
+            )
+            self.assertNotIn("mitigated", result.stdout.lower())
+
+            markdown = self.run_auditor(root)
+            self.assertEqual(markdown.returncode, 0, markdown.stdout + markdown.stderr)
+            self.assertIn("Runtime loading evidence: UNKNOWN", markdown.stdout)
+            self.assertIn("Runtime use: UNKNOWN", markdown.stdout)
+            self.assertIn("runtime prompt loading not evaluated", markdown.stdout)
+            self.assertNotIn("MITIGATED", markdown.stdout)
+
+    def test_json_reports_unreadable_compact_discovery_without_crashing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "skills"
+            root.mkdir()
+            write_skill(
+                root,
+                "good-skill",
+                "Builds durable APIs for audit coverage. Use when testing metadata thresholds.",
+                "Durable API audit",
+                "Use $good-skill when auditing durable APIs and metadata coverage.",
+            )
+            write_compact_discovery(root)
+            discovery_path = root.parent / "graph" / "codex-discovery.md"
+            discovery_path.write_bytes(b"\xff\xfe")
+
+            result = self.run_auditor(root, "--json", "--strict")
+            self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+            payload = json.loads(result.stdout)
+            discovery = payload["compact_discovery"]
+            self.assertEqual(discovery["structural_status"], "unreadable")
+            self.assertFalse(discovery["structurally_valid"])
+            self.assertEqual(discovery["runtime_load_status"], "unknown")
+            self.assertIn("UnicodeDecodeError", discovery["read_error"])
+
+    def test_runtime_discovery_report_does_not_claim_prompt_or_compact_index_load(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "skills"
+            root.mkdir()
+            write_compact_discovery(root)
+            write_skill(
+                root,
+                "good-skill",
+                "Builds durable APIs for audit coverage. Use when testing metadata thresholds.",
+                "Durable API audit",
+                "Use $good-skill when auditing durable APIs and metadata coverage.",
+            )
+            report = Path(tmp) / "runtime.json"
+            report.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "observed_at_utc": "2026-09-05T00:00:00+00:00",
+                        "observation": "installed Codex app-server skills/list",
+                        "codex_version": "codex-cli 0.153.4",
+                        "model_visible_prompt_observed": False,
+                        "caveat": "Discovery does not prove model prompt inclusion.",
+                        "entries": [
+                            {
+                                "repository_skill_count": 1,
+                                "repository_enabled_count": 1,
+                                "missing_repository_skills": [],
+                                "shadowed_repository_skills": [],
+                                "errors": [],
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            result = self.run_auditor(root, "--json", "--runtime-discovery-report", str(report))
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            evidence = json.loads(result.stdout)["runtime_discovery"]
+            self.assertEqual(evidence["status"], "observed")
+            self.assertTrue(evidence["discovery_observed"])
+            self.assertEqual(evidence["repository_enabled_count"], 1)
+            self.assertEqual(evidence["model_prompt_inclusion_status"], "unknown")
+            self.assertEqual(evidence["compact_index_use_status"], "unknown")
+
+    def test_strict_mode_rejects_malformed_optional_runtime_report(self) -> None:
+        reports = (
+            "{not-json",
+            json.dumps({"schema_version": 1, "entries": [{"errors": None}]}),
+        )
+        for report_text in reports:
+            with self.subTest(report_text=report_text):
+                with tempfile.TemporaryDirectory() as tmp:
+                    root = Path(tmp) / "skills"
+                    root.mkdir()
+                    write_compact_discovery(root)
+                    write_skill(
+                        root,
+                        "good-skill",
+                        "Builds durable APIs for audit coverage. Use when testing metadata thresholds.",
+                        "Durable API audit",
+                        "Use $good-skill when auditing durable APIs and metadata coverage.",
+                    )
+                    report = Path(tmp) / "runtime.json"
+                    report.write_text(report_text, encoding="utf-8")
+
+                    result = self.run_auditor(
+                        root,
+                        "--json",
+                        "--strict",
+                        "--runtime-discovery-report",
+                        str(report),
+                    )
+                    self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                    payload = json.loads(result.stdout)
+                    self.assertEqual(payload["runtime_discovery"]["status"], "invalid")
+                    self.assertFalse(payload["strict_gate"]["passes"])
 
     def test_exact_compact_discovery_budget_boundary_passes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

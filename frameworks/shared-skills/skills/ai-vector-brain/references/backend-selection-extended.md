@@ -85,7 +85,7 @@ Verify against primary vendor docs before committing. Pricing, regions, quotas, 
 
 ## Serverless / object-storage-backed (cost-driven tier)
 
-This tier shifts the cost shape from pay-for-RAM to pay-for-storage + per-query. At ~100M vectors and bursty access, it can be 10–100× cheaper than hot indexes.
+This tier shifts the cost shape from provisioned capacity toward storage and per-query charges. Compare it with the target hot-index configuration using a dated workload calculation; fixed savings multiples do not transfer across query rates, filters, retention, and existing commitments.
 
 ### AWS S3 Vectors
 
@@ -94,7 +94,7 @@ This tier shifts the cost shape from pay-for-RAM to pay-for-storage + per-query.
   - Cold/archival corpora on AWS (compliance history, log embeddings, contract archives)
   - Bedrock RAG workflows where keeping vectors next to S3 source documents simplifies governance
   - Cost-sensitive large corpora where p95 latency in the hundreds of ms is acceptable
-- **Cost shape**: Pay-for-storage + per-query. ~90% cheaper than OpenSearch/Pinecone for large cold corpora (per AWS positioning).
+- **Cost shape**: Storage + API activity. AWS advertises up to 90% lower cost than specialized vector databases; treat this as vendor positioning and validate it against the target OpenSearch, Aurora, or external-service configuration.
 - **Filters**: Metadata filters supported; full SQL joins do not apply.
 - **Latency**: Sub-second per AWS, typically higher than in-memory HNSW. Not for chat-fast loops at sustained high QPS without a hot tier in front.
 - **Tenant model**: Per-bucket / per-index isolation. Good for tenant-per-bucket designs.

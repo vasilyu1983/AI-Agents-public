@@ -42,7 +42,7 @@ Use this skill for visual design decisions and design-focused audits in native A
 - Enable dynamic color on Android 12+ and provide a well-tuned static seed palette as fallback.
 - Prefer `MaterialTheme.typography`, `MaterialTheme.colorScheme`, `MaterialTheme.shapes`, and standard containers before custom styling.
 - Keep navigation familiar: `NavigationBar` for peer sections, `NavHost` for drill-down, `ModalBottomSheet` for focused tasks.
-- Use emulator screenshot-driven verification for design changes only after a fresh build/uninstall/install/launch has been proven.
+- Use emulator screenshot-driven verification after the screenshot is tied to the current build. Preserve app data unless stale state or signing mismatch actually requires a reset.
 
 ## Platform Currency (as of 2026-07-11)
 
@@ -55,8 +55,8 @@ Use this skill for visual design decisions and design-focused audits in native A
 
 ## Runtime Proof Gate
 
-- Do not trust screenshots until a fresh uninstall -> install -> launch loop has been completed for the current build.
-- If the on-screen UI appears older than source, suspect stale install first — clear app data or force uninstall before reinstalling.
+- Do not trust screenshots until the installed package and visible screen are tied to the current build and variant.
+- Start with `adb install -r` so saved state and the exact repro survive. Clear data or uninstall only after capturing the current state and proving stale state, schema incompatibility, or a signing mismatch.
 - If install or launch is failing, stop design iteration and fix runtime truth before continuing.
 - Use ADB and Gradle from the command line when Android Studio is not available.
 
@@ -66,7 +66,9 @@ Use this skill for visual design decisions and design-focused audits in native A
 2. Choose the Material structure first: `NavigationBar`, `NavigationRail`, `Scaffold`, `TopAppBar`, `ModalBottomSheet`, `ListDetailPaneScaffold`, or adaptive scaffold.
 3. Apply typography, spacing, and color using Material tokens before inventing a custom scale.
 4. Verify adaptive behavior across `WindowSizeClass` breakpoints — compact, medium, expanded.
-5. Verify with emulator: fresh build, uninstall, install, launch, capture screenshot, inspect, fix, repeat.
+5. Verify with emulator: build, preserve repro state, replace-install, launch, capture screenshot, inspect, fix, repeat. Clear data only when state is the variable under test.
+
+Before accepting a visual change, capture the affected screen in populated, loading, empty, error, and disabled/permission states that the feature can reach. Cross those states with the smallest device/configuration set that can expose the risk: compact + expanded width for adaptive changes, 200% font scale for text/layout changes, light + dark for color/material changes, and TalkBack focus order for semantic changes. A single polished happy-path screenshot is presentation evidence, not state coverage.
 
 ## ASCII Flow
 
@@ -179,7 +181,6 @@ These are optional helpers for a proven-build design loop. If the app cannot be 
 
 ## Anti-Patterns
 
-- Do not audit or redesign from screenshots that have not been tied to a fresh install and launch.
 - Do not invent custom chrome before checking whether standard Material 3 structure already solves the hierarchy problem.
 - Do not hardcode `Color(0xFF...)` values in Composables — use `MaterialTheme.colorScheme` roles so light, dark, and dynamic color adapt automatically.
 - Do not use fixed `sp` sizes outside the Material type scale without justification — prefer `MaterialTheme.typography` roles.
@@ -243,7 +244,6 @@ Start from [data/sources.json](data/sources.json), then prefer material.io, deve
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

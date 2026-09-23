@@ -5,7 +5,7 @@
 An **implementation intention** is a self-authored if-then plan of the form **"When situation X arises, I will perform response Y."** It commits the actor in advance to a specific behavior in response to a specific cue, transferring control of the behavior from goal pursuit (slow, effortful, motivation-dependent) to cue-driven retrieval (fast, automatic, motivation-independent). Gollwitzer (1999, 2014).
 
 Empirical findings:
-- Implementation intentions roughly **double or triple** the rate of goal completion across health, academic, and workplace domains (Gollwitzer & Sheeran, 2006, meta-analysis: d ≈ 0.65 across 94 studies).
+- Implementation intentions improved goal attainment in Gollwitzer & Sheeran (2006; 94 independent tests, standardized mean effect d ≈ 0.65). A standardized mean difference does not imply a doubling or tripling of completion rates; outcome type, baseline and context determine any rate comparison.
 - The effect operates by linking a mental representation of the cue (X) to a mental representation of the response (Y), so when X occurs, Y is automatically retrieved and initiated.
 - The plan must be **specific** (concrete cue, concrete response). Vague intentions ("I will exercise more") have no effect; specific if-then formulations ("When I sit down at my desk on Monday, I will open the planning view") have large effects.
 

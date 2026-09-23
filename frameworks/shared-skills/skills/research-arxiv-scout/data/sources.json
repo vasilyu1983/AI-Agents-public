@@ -1,9 +1,11 @@
 {
   "metadata": {
+    "verification_scope": "Targeted September corrections only. last_updated is the catalog edit date; entries without their own September verification retain older verification status.",
+    "targeted_checks": [{"url": "https://help.openalex.org/api/authentication/", "verified_claim": "Basic keyless access; free key raises daily budget 10x; 429 for budget/rate exhaustion.", "last_verified": "2026-09-11"}, {"url": "https://info.arxiv.org/help/api/tou.html", "verified_claim": "One request per three seconds and a single connection across controlled machines.", "last_verified": "2026-09-11"}],
     "skill": "research-arxiv-scout",
     "title": "research-arxiv-scout - Sources",
     "description": "Official arXiv docs plus complementary discovery and citation tooling used to scout, validate, and curate research links",
-    "last_updated": "2026-07-11"
+    "last_updated": "2026-09-11"
   },
   "arxiv_official": [
     {
@@ -59,8 +61,9 @@
     {
       "name": "OpenAlex",
       "url": "https://openalex.org/",
-      "description": "Open catalog of scholarly works and citations. Since 13 Feb 2026 every API request requires a free API key (create at openalex.org/settings/api); the old mailto polite pool is gone. Pricing is usage-based ($1/day free allowance; ID lookups free, search calls ~$1/1000) -- verify current terms at developers.openalex.org/guides/authentication before high-volume pulls.",
-      "add_as_web_search": true
+      "description": "OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).",
+      "add_as_web_search": true,
+      "last_verified": "2026-09-11"
     },
     {
       "name": "OpenCitations",
@@ -115,13 +118,13 @@
     {
       "name": "ResearchRabbit",
       "url": "https://researchrabbit.ai",
-      "description": "Citation-network discovery tool. Builds visual citation graphs from seed papers and surfaces related prior and future work. Acquired by Litmaps (relaunched Oct 2025); now freemium (free + paid tiers) rather than fully free -- confirm current tier limits before relying on bulk exports.",
+      "description": "ResearchRabbit announced an October 2025 release with Litmaps partnership and optional premium tier. Acquisition date and current tier limits are not verified here. https://www.researchrabbit.ai/announcement-researchrabbit-release-2025 (checked 2026-09-11).",
       "add_as_web_search": false
     },
     {
       "name": "Litmaps",
       "url": "https://litmaps.com",
-      "description": "Citation maps with monitor alerts for new papers citing your seeds. Free tier available. Acquired ResearchRabbit in Oct 2025; the two products remain separately branded as of mid-2026.",
+      "description": "ResearchRabbit announced an October 2025 release with Litmaps partnership and optional premium tier. Acquisition date and current tier limits are not verified here. https://www.researchrabbit.ai/announcement-researchrabbit-release-2025 (checked 2026-09-11).",
       "add_as_web_search": false
     },
     {
@@ -149,7 +152,7 @@
     {
       "name": "arXiv export API endpoint",
       "url": "https://info.arxiv.org/help/api/index.html",
-      "description": "CHANGED: stricter 429 enforcement from Feb 2026 — hard 1 request / 3s, single connection. Previously a politeness request, now enforced. Parallel query bursts are the fastest route to a throttle. Replacement: same endpoint; enforce the 3s gap in all query scripts (scripts/generate_arxiv_scout_queries.py reports estimated_min_runtime_seconds for this reason). See references/arxiv-api-guide.md#rate-limiting-enforced-as-of-2026.",
+      "description": "Operator terms require at most 1 request / 3s, single connection, across all controlled machines; checked 2026-09-11. No enforcement-start date is established here. Parallel query bursts are the fastest route to a throttle. Replacement: same endpoint; enforce the 3s gap in all query scripts (scripts/generate_arxiv_scout_queries.py reports estimated_min_runtime_seconds for this reason). See references/arxiv-api-guide.md#rate-limiting-enforced-as-of-2026.",
       "add_as_web_search": false,
       "status": "changed",
       "changed_since": "2026-02-01"
@@ -157,26 +160,29 @@
     {
       "name": "OpenAlex",
       "url": "https://openalex.org/",
-      "description": "CHANGED: API key mandatory since 2026-02-13; the mailto polite-pool parameter is retired. Keyed requests get $1/day free credit (covers usual research volume); unkeyed requests get $0.10/day then 409. Replacement: same service — register a free key at openalex.org/settings/api. Primary fallback when Semantic Scholar keys are unavailable.",
+      "description": "OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).",
       "add_as_web_search": false,
       "status": "changed",
-      "changed_since": "2026-02-13"
+      "changed_since": "2026-02-13",
+      "last_verified": "2026-09-11"
     },
     {
       "name": "Semantic Scholar API",
       "url": "https://www.semanticscholar.org/product/api",
-      "description": "CHANGED: key now officially recommended; ~1 RPS authenticated; exponential backoff required. Since Aug 2024 free personal-email keys and 3rd-party-app keys are no longer approved — apply with an institutional email or fall back to OpenAlex. Replacement: same service; register at semanticscholar.org/product/api.",
+      "description": "OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).",
       "add_as_web_search": false,
       "status": "changed",
-      "changed_since": "2026-01-01"
+      "changed_since": "2026-01-01",
+      "last_verified": "2026-09-11"
     },
     {
       "name": "Connected Papers",
       "url": "https://www.connectedpapers.com/",
-      "description": "CHANGED: paid tier introduced 2025; free plan limited to 50 inputs/searches. Replacement for bulk citation-graph work: OpenAlex citation graph (free with key) or the Semantic Scholar graph API.",
+      "description": "OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).",
       "add_as_web_search": false,
       "status": "changed",
-      "changed_since": "2025-01-01"
+      "changed_since": "2025-01-01",
+      "last_verified": "2026-09-11"
     },
     {
       "name": "ICLR / OpenReview",
@@ -189,10 +195,11 @@
     {
       "name": "ResearchRabbit",
       "url": "https://researchrabbit.ai",
-      "description": "CHANGED: acquired by Litmaps (2025-05-08; relaunched Oct 2025) and moved from fully free to freemium. Confirm current tier limits before relying on bulk exports. Replacement: Litmaps (litmaps.com) free tier, or OpenAlex for programmatic citation-network work.",
+      "description": "OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).",
       "add_as_web_search": false,
       "status": "changed",
-      "changed_since": "2025-05-08"
+      "changed_since": "2025-05-08",
+      "last_verified": "2026-09-11"
     }
   ]
 }

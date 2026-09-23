@@ -12,8 +12,6 @@ scope_mapping:
   # Framework surfaces
   "frameworks/claude-code-kit/**": "claude-kit"
   "frameworks/shared-skills/**": "shared-skills"
-  "frameworks/scripts/**": "frameworks-scripts"
-  "frameworks/a-smart-deploy/**": "smart-deploy"
 
   # Custom GPT categories
   "custom-gpt/education/**": "gpt-education"
@@ -35,7 +33,7 @@ scope_mapping:
   "docs/assessment/**": "docs-assessment"
   "docs/diagrams/**": "docs-diagrams"
   "docs/seo-aeo-report/**": "docs-seo-aeo"
-  "docs/scripts/**": "docs-scripts"
+  "scripts/**": "scripts"
   "docs/**": "docs"
 
   # Repository infrastructure

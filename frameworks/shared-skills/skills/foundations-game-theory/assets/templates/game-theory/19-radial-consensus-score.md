@@ -2,7 +2,7 @@
 name: Radial Consensus Score (RCS)
 mechanism_id: 19
 layer: selection
-status: stable
+status: experimental
 last_verified: 2026-05-01
 sources:
   - https://arxiv.org/abs/2604.12196
@@ -24,14 +24,14 @@ The trick: textual majority voting fails when 5 agents give 5 lexically differen
 ## When to Use
 
 - Open-ended generation where multiple wordings express the same idea (summaries, rewrites, design proposals, naming).
-- Best-of-N selection over 5+ candidates from heterogeneous agents.
+- Best-of-N selection over a validated candidate set (five is illustrative) from heterogeneous agents.
 - Synthesis after an MoA layer (proposers fan out, RCS picks the consensus aggregator output).
 - Code review verdicts where 3 reviewers say "this is fine" in 3 different sentences.
 
 ## When NOT to Use
 
 - Categorical answers (yes/no, A/B/C/D). Use BMV or majority vote — embeddings add noise to discrete choices.
-- N < 5 candidates. The centroid is unstable below 5 points.
+- A candidate set whose dispersion, dependence or multimodality makes centroid selection unsuitable. A centroid is mathematically defined below five candidates; five is an illustrative starting count, not a universal stability threshold.
 - High-stakes verifiable tasks (compile, test). Use the oracle.
 - Tasks where the right answer is intentionally an outlier (security review, edge cases, contrarian critique). RCS will suppress the correct minority.
 
@@ -71,7 +71,7 @@ Outliers are *not discarded* — surface them to the operator, since they may ca
 
 ## Calibration
 
-Sanity check on a held-out task set: does RCS pick the human-preferred answer ≥ 60% of the time? If not, the embedding model is wrong for the domain (e.g., code embeddings for natural-language tasks).
+Compare RCS with a task-appropriate baseline on held-out examples using human preference or an independent oracle. Predefine an acceptance margin and uncertainty interval from decision costs; 60% is not a universal threshold. A failure can arise from aggregation, correlated candidates, multimodal answers or evaluation noise as well as embeddings.
 
 ## Sources
 

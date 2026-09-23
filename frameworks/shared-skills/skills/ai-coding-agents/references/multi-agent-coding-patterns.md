@@ -208,25 +208,26 @@ Never launch workers one at a time when they are independent.
 
 ### How It Works
 
-Omit `subagent_type` when calling Agent. The child inherits the parent's full conversation history and system prompt. It runs silently in the background and reports a structured result when done.
+In current Claude Code fork mode, request the `fork` subagent type explicitly. Omitting `subagent_type` resolves to the `general-purpose` named subagent, which starts from its own definition rather than inheriting the conversation. Fork behavior is version-specific, so smoke-test that the worker can identify a harmless marker from inherited history before reporting it as a fork.
 
 ```
 Agent({
+  subagent_type: "fork",
   prompt: "Search the auth module for all uses of the deprecated session API. List each file and line."
 })
 ```
 
-No `subagent_type` field means "fork from my current context."
+The explicit `subagent_type: "fork"` selects inherited conversation context. With no type, Claude Code selects `general-purpose`.
 
 ### Prompt Cache Sharing
 
-All fork children use identical placeholder text for inherited tool results. Only the final directive differs. This enables prompt cache sharing across parallel forks -- making forks significantly cheaper than fresh agents when launching multiple in parallel.
+Claude Code documents prompt-cache prefix sharing for conversation forks. Keep the common inherited prefix stable where possible, but do not infer total savings from it: cache writes or misses, output, tools, retries, and inherited noise still count. Compare returned usage with the named-subagent baseline for the actual task.
 
 ```
-# These three forks share prompt cache because they inherit identical history
-Agent({ prompt: "Search src/auth/ for deprecated session API usage" })
-Agent({ prompt: "Search src/api/ for deprecated session API usage" })
-Agent({ prompt: "Search src/db/ for deprecated session API usage" })
+# These explicit Claude Code forks are intended to share the inherited prefix; verify cache usage
+Agent({ subagent_type: "fork", prompt: "Search src/auth/ for deprecated session API usage" })
+Agent({ subagent_type: "fork", prompt: "Search src/api/ for deprecated session API usage" })
+Agent({ subagent_type: "fork", prompt: "Search src/db/ for deprecated session API usage" })
 ```
 
 ### The "Don't Peek" Rule

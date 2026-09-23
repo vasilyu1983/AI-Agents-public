@@ -87,6 +87,10 @@ handoff
 - keep data version, feature version, seed, and split logic reproducible
 - hand off deployment-heavy questions early instead of rebuilding MLOps inside a notebook
 
+## Prediction-Time Eligibility Gate
+
+For every feature, write its source event, event time, availability time, transformation version, and entity join key. Exclude any value that would not exist at the declared prediction timestamp. Offline backfill and online serving may use different implementations only when point-in-time tests on matched entities and timestamps demonstrate semantic parity, transformation-version lineage is preserved, and production skew is monitored. Evaluate the surviving pipeline with the intended split unit and decision threshold, then compare it with the simplest actionable baseline. A model is decision-ready only when the predicted action, abstention path, and cost of false positives and false negatives are explicit.
+
 ## Known Traps
 
 - Using random train/test splits when time, entity, household, account, or session leakage is plausible.
@@ -231,6 +235,6 @@ See [scripts/README.md](scripts/README.md) for the input format and leakage-chec
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

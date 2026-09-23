@@ -12,6 +12,7 @@
 
 ## Domain Knowledge
 
+- [2026-09-05] OpenAI documents features.context_management.experimental_mode for notes and searchable context history; a CLI accepting the older boolean flag does not prove runtime recovery works, and features.memories alone is a separate capability.
 - [2026-07-11] Settings precedence: user → project (`.claude/settings.json`) → local (`.claude/settings.local.json`), later overrides earlier — so a project-local `defaultMode` beats the global one, and cleaning the global file changes nothing in repos with local overrides.
 - [2026-07-11] Invalid permission rules in settings files do not fail loading; they are skipped with a per-session startup warning, so a broken rule can sit unnoticed for months while appearing to grant access.
 - [2026-07-11] `skipDangerousModePermissionPrompt` and `skipAutoPermissionPrompt` suppress the one-time bypass/auto opt-in dialogs machine-wide — combined with project-level `bypassPermissions` this removes every reminder that a repo runs unguarded.

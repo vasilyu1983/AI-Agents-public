@@ -15,12 +15,12 @@ Edit the header of `learnings.consolidated.md` to name the host skill.
 
 ## Step 2 — Add the addendum to `SKILL.md`
 
-Append this block, verbatim, near the end of the host's `SKILL.md` (before any `## See Also`):
+Append this block, or a scoped equivalent preserving conditional reads and capture boundaries, near the end of the host's `SKILL.md` (before any `## See Also`):
 
 ```markdown
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
 ```

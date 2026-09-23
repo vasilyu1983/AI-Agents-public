@@ -34,7 +34,7 @@ Use this file when a task needs source-level justification, production boundarie
 |---|---|---|
 | Common Ground | Clark & Brennan; Clark; Aumann; Lewis | Verify what is mutual, not merely present in context |
 | Grounding Criterion | Clark & Schaefer; Clark & Brennan | Scale confirmation to task stakes |
-| Presentation + Acceptance | Clark & Schaefer | Require explicit acceptance before expensive or irreversible work |
+| Presentation + Acceptance | Clark & Schaefer | Use proportionate understanding evidence before consequential work; acceptance is not authorization |
 | Evidence of Understanding | Clark & Brennan | Prefer demonstration over "ack" for high-stakes work |
 | Repair | Schegloff et al.; Traum | Provide low-friction clarification and correction paths |
 | Presupposition | Stalnaker; Grice | Resolve "the file", "it", and domain shorthand before handoff |
@@ -68,7 +68,7 @@ All four are arXiv preprints as of 2026-08-14. Treat the *direction* as well-sup
 
 ## Do Not Overclaim
 
-- Do not claim acceptance proves correctness; it proves understanding to a criterion.
+- Do not claim acceptance proves correctness or understanding; it is fallible evidence assessed against the task criterion and grants no authority.
 - Do not claim common ground exists because a prompt contained the relevant text.
 - Do not hard-code MAST percentages into policy without rerunning local trace analysis.
 - Do not use grounding theory for incentive conflicts; switch to game theory when payoffs diverge.

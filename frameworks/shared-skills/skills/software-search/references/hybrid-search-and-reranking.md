@@ -185,7 +185,7 @@ engine:
 pgvector supports `halfvec` (16-bit float, half the storage of `float32`) and
 binary quantization (`binary_quantize`, ~1 bit per dimension) for storage
 reduction, alongside HNSW and IVFFlat index types. See the worked memory-sizing
-example in `SKILL.md` for how to re-derive the storage math for your own
+example in `vector-search-api-and-sizing.md` for how to re-derive the storage math for your own
 corpus size and dimension count. Verify the current pgvector version,
 quantization options, and index type support in the pgvector GitHub README at
 use-time — this extension has added capabilities across recent minor releases.

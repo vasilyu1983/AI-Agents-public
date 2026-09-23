@@ -23,6 +23,7 @@ Use this skill to audit, reduce, and monitor infrastructure and SaaS spending. K
 | audit CI/CD costs | [references/github-cicd-cost-guide.md](references/github-cicd-cost-guide.md) | Actions minutes, Copilot, Codespaces, hosting alternatives |
 | audit monitoring costs | [references/monitoring-analytics-cost-guide.md](references/monitoring-analytics-cost-guide.md) | PostHog, Sentry, Datadog, free tier maximization |
 | audit CDN/edge costs | [references/cloudflare-cost-guide.md](references/cloudflare-cost-guide.md) | Workers, R2, Pages, DNS, free tier scope |
+| quantify uncertain cost or budget risk | [references/cost-uncertainty-method.md](references/cost-uncertainty-method.md) | reproducible Monte Carlo, joint empirical dependence, Morris screening |
 | decide on AWS/GCP/Azure commitments or K8s cost allocation | [references/cloud-commitment-and-k8s-cost-guide.md](references/cloud-commitment-and-k8s-cost-guide.md) | Savings Plans vs RIs vs Spot, CUDs, Azure Reservations, when NOT to commit, OpenCost/Kubecost, GPU capacity |
 | set up cost monitoring | [references/cost-monitoring-setup.md](references/cost-monitoring-setup.md) | budget alerts, review cadence, annual cost calendar, FOCUS normalization |
 | track unit economics | [references/unit-economics-guide.md](references/unit-economics-guide.md) | cost per customer/feature/request, ARPC tracking, FOCUS standard |
@@ -39,7 +40,12 @@ Use this skill to audit, reduce, and monitor infrastructure and SaaS spending. K
    - **reducible**: supports function but can be lowered via architecture or configuration
    - **wasteful**: unused, over-provisioned, or cheaper alternative exists
 4. **optimize** — load the platform-specific reference file and apply the highest-impact tactics first
-5. **monitor** — set up budget alerts, usage dashboards, and a monthly review cadence using [references/cost-monitoring-setup.md](references/cost-monitoring-setup.md)
+5. **verify** — keep the estimate as a forecast until a comparable usage export or closed bill shows the change; normalize for traffic, seats, storage, and billing-period length
+6. **monitor** — set up budget alerts, usage dashboards, and a monthly review cadence using [references/cost-monitoring-setup.md](references/cost-monitoring-setup.md)
+
+### Uncertain cost decisions
+
+Trigger this only when ranges or dependence can change the decision. Supply bounded distributions with units, dated provenance, distribution rationale, an auditable component formula, budget, draws, and seed; use [the example](assets/cost-uncertainty-example.json) as the input contract. Run `python3 scripts/cost_uncertainty.py --input assets/cost-uncertainty-example.json --sensitivity`. Read cost quantiles and modeled budget-exceedance probability separately from `simulation_error`; more draws reduce numerical error, not model uncertainty. Use deterministic arithmetic for fixed inputs, and fall back to low/base/high scenarios when probability weights or dependence cannot be defended.
 
 ## ASCII Flow
 
@@ -69,6 +75,7 @@ Cost concern or bill review
 - never buy a commitment (Savings Plan, RI, CUD, Reservation) against usage that hasn't been stable for 4-6+ weeks, or during an active migration/re-platform — see [references/cloud-commitment-and-k8s-cost-guide.md](references/cloud-commitment-and-k8s-cost-guide.md#when-not-to-buy-a-commitment)
 - separate zero-risk waste elimination from margin/durability trade-offs before cutting — a cut that reduces headroom or DR posture needs an explicit risk owner, not just a plan-tier downgrade
 - weigh implementation and ongoing operational cost (engineer-time, new on-call burden) against savings before recommending a migration — a cheaper service that costs six weeks to adopt often doesn't pay back for a year
+- mark each result `forecast`, `observed`, or `realized`; only `realized` means the saving appeared on a closed bill without an unacceptable SLO, support, security, or recovery regression
 
 ## Cost Categories
 
@@ -157,12 +164,16 @@ Cost concern or bill review
 - [references/monitoring-analytics-cost-guide.md](references/monitoring-analytics-cost-guide.md)
 - [references/cloudflare-cost-guide.md](references/cloudflare-cost-guide.md)
 - [references/cloud-commitment-and-k8s-cost-guide.md](references/cloud-commitment-and-k8s-cost-guide.md)
+- [references/cost-uncertainty-method.md](references/cost-uncertainty-method.md)
 
 ### Cross-platform
 
 - [references/cost-monitoring-setup.md](references/cost-monitoring-setup.md)
 - [references/unit-economics-guide.md](references/unit-economics-guide.md)
 - [assets/monthly-cost-review-checklist.md](assets/monthly-cost-review-checklist.md)
+- [assets/cost-uncertainty-example.json](assets/cost-uncertainty-example.json)
+- [assets/cost-uncertainty-joint-example.json](assets/cost-uncertainty-joint-example.json)
+- [scripts/cost_uncertainty.py](scripts/cost_uncertainty.py)
 - [data/sources.json](data/sources.json)
 
 ### Agents
@@ -185,7 +196,6 @@ Cost concern or bill review
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

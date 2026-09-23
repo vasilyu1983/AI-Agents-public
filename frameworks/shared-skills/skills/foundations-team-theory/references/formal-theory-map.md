@@ -33,7 +33,7 @@ Use this file when a task needs source-level justification, production boundarie
 | Person-by-Person Optimality | Radner; Marschak & Radner | Detect local-optimum traps in independently tuned agents |
 | Value of Communication | Marschak & Radner; information economics | Add channels only when expected payoff lift exceeds cost |
 | Radner's LQG Theorem | Radner | Use linear policies only under classical LQG conditions |
-| Witsenhausen Counterexample | Witsenhausen | Treat agent-output-as-signal systems as nonlinear and high-risk |
+| Witsenhausen Counterexample | Witsenhausen | Inspect information nestedness and theorem premises when outputs affect observations; signaling alone does not prove a need for nonlinear policies |
 | Information Cost | Sims; Radner | Budget context, tool calls, latency, and review effort |
 | Organizational Forms | Sah & Stiglitz; Radner | Choose centralized, decentralized, or hierarchical topology by coupling and cost |
 | Dec-POMDP / MARL Extension | Bernstein et al.; Oliehoek & Amato | Model sequential partially observable agent teams |
@@ -58,7 +58,7 @@ The stable layer is classical and low-drift. The application layer is high-drift
 
 - Do not call divergent incentives a team problem; exit to game theory.
 - Do not assume more communication is better; value must exceed cost.
-- Do not apply Radner linear-policy results when actions signal to later agents.
+- Action-dependent observations alone do not rule out linear policies: verify the applicable static/classical or partially nested information assumptions, convexity and exact model premises; never infer LQG bounds for arbitrary LLM teams.
 - Do not confuse per-agent prompt tuning with team optimality.
 - Do not claim Dec-POMDP framing gives an exact production solution; finite-horizon Dec-POMDPs are intractable in worst case.
 - Do not assume a team uses the expertise it contains; aggregation rules that pool opinions can lose to the team's own best member (Pappu et al., ICML 2026). Benchmark against the single-best-member baseline.

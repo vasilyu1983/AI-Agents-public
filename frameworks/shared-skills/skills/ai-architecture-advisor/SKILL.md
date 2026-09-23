@@ -347,6 +347,10 @@ Full discover/vet/reframe process + emerging-classes (BLT, V-JEPA 2, Genie 3, di
 "named but not yet load-bearing") in
 [discovering-architectures.md](references/discovering-architectures.md).
 
+## Decision Record Gate
+
+Do not finish with a model name alone. The decision record must state the task and prediction point, hard constraints, eligible candidates, one-line elimination reason for every rejected candidate, the simplest baseline, the evidence used to compare survivors, and the measurable trigger for reconsidering the choice. If a hard constraint or success bar is unknown, return a provisional experiment plan rather than a production architecture verdict.
+
 ## Known Traps (Top Six)
 
 The failure mode behind all of these: reaching for the familiar approach before classifying the
@@ -394,6 +398,6 @@ the GBDT family, the prompt/RAG/fine-tune decision, and agent build-vs-not.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

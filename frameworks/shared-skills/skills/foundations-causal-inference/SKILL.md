@@ -1,6 +1,6 @@
 ---
 name: foundations-causal-inference
-description: Causal-inference primitives: DAGs, IV, RDD, DiD, synthetic control, propensity, CATE, interference. Use when attributing confounded impact or rollout and LLM-eval confounding.
+description: "Causal-inference primitives: DAGs, IV, RDD, DiD, synthetic control, propensity, CATE, interference. Use when attributing confounded impact or rollout and LLM-eval confounding."
 compatibility: Portable core only.
 version: "1.2"
 last_validated: 2026-08-14
@@ -24,10 +24,10 @@ last_validated: 2026-08-14
 
 **Skip and use simpler alternatives when:**
 - Clean RCT / A/B test is already running *and* units do not interfere — read the result, don't re-derive it observationally. If units share a marketplace, graph, or backend resource, the test is not clean: see [Interference and SUTVA](#interference-and-sutva-when-randomization-is-not-enough)
-- Question is "how big is the effect?" rather than "does it cause" — descriptive analytics is enough
+- Question requests an associational summary only — descriptive analytics is enough. The magnitude of a causal effect still requires identification
 - No plausible causal mechanism — correlation is just measurement, not insight
-- Sample size too small for propensity overlap (n < 1000 typical) — flag and collect more data
-- E-value < 1.5 from sensitivity analysis — claim is fragile; do not ship as causal
+- Effective sample size or treatment overlap is inadequate for the target estimand — narrow the population, change the design, or collect more data
+- Sensitivity analysis shows that a substantively plausible omitted confounder could reverse the decision — qualify the claim or use a stronger design
 - Question is about strategic interaction (multi-actor) — use foundations-game-theory
 
 ## Contents
@@ -100,7 +100,7 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 | Observational adjustment | Need propensity scores, weighting, matching, doubly robust estimation | #3, #8 |
 | Heterogeneous effects | Need CATE, uplift, policy learning, or subgroup effect estimates | #9 |
 | Mediation/counterfactual pathways | Need direct/indirect effects and pathway assumptions | #11 |
-| Interference / experimental design | Need cluster, geo, or switchback randomization because units affect each other | All — SUTVA is a precondition |
+| Interference / experimental design | Need cluster, geo, or switchback randomization because units affect each other | Methods need a stated exposure/assignment model; no-interference is one special case |
 | Robustness/sensitivity | Need unobserved-confounding bounds or tipping-point analysis | #12 |
 
 ---
@@ -111,13 +111,13 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 |-------------|-----------------|-----|
 | Conditioning on a collider | Opens a spurious association path; introduces bias where none existed | Draw the DAG (#1); block conditioning on non-confounders identified by backdoor criterion (#3) |
 | Using P(Y\|X) as a causal estimate without identification | Confounders in the distribution invalidate effect direction, let alone magnitude | Apply do-calculus (#2) to check identifiability before any regression |
-| Parallel-trends violation in DiD | Pre-treatment trends differ; the control group is not a valid counterfactual | Test pre-trends explicitly; consider synthetic control (#7) as a drop-in replacement |
+| Parallel-trends violation in DiD | Pre-treatment trends differ; the control group is not a valid counterfactual | Diagnose pretrends with uncertainty and bounded-trend sensitivity, not a pass/fail identification gate; consider synthetic control (#7) only if donor-pool, pre-fit and counterfactual assumptions suit the design; it is not a drop-in repair |
 | Weak-instrument bias | IV estimate amplifies noise when the instrument is weakly correlated with treatment; collapses to OLS bias in small samples | Check first-stage F > 10; use LIML or Anderson-Rubin confidence sets (#4) |
-| Propensity-score overlap failure | Extreme propensity scores (near 0 or 1) produce unstable IPW weights; effective sample collapses | Check overlap; trim or clip weights; switch to DR estimator or matching (#8) |
+| Propensity-score overlap failure | Extreme propensity scores (near 0 or 1) produce unstable IPW weights; effective sample collapses | Distinguish numerical tails from structural non-overlap; restrict and disclose the target estimand or decline unsupported effects. Clipping, DR and matching do not identify absent counterfactuals (#8) |
 | Conditioning on a post-treatment variable | Blocks the causal pathway; introduces collider bias on mediator or mediator-proxy | Identify mediators in the DAG before adjusting; use mediation analysis (#11) if the path is the target |
 | Averaging heterogeneous effects into one ATE | Subgroups with opposing effects cancel; action on ATE harms some users | Run CATE/uplift (#9); segment before averaging |
-| Ignoring unmeasured confounding in observational studies | Effect estimate is unidentified; direction may flip under plausible confounders | Report E-value and Rosenbaum bounds (#12) alongside every observational point estimate. For IV estimates, also compute IV robustness values (Cinelli & Hazlett 2025, *Biometrika*) |
-| Treating a marketplace or social-graph A/B test as unit-randomized | SUTVA fails: treated units change control units' outcomes, so the difference-in-means is biased even under perfect randomization | Name the interference structure before estimating. Cluster or switchback the design; estimate with a bias-aware estimator rather than difference-in-means |
+| Ignoring unmeasured confounding in observational studies | Effect estimate is unidentified; direction may flip under plausible confounders | Choose sensitivity analysis for the effect scale and design: E-values for risk ratios (or explicitly justified conversions), Rosenbaum bounds for matched assignment designs, and partial-R2/OVB or design-specific bounds for continuous outcomes. For IV estimates, also compute IV robustness values (Cinelli & Hazlett 2025, *Biometrika*) |
+| Treating a marketplace or social-graph A/B test as unit-randomized | Interference changes the identified contrast; an ordinary unit contrast need not equal the global rollout effect even under perfect randomization | Name the exposure mapping, assignment probabilities/support and target contrast; choose a design-compatible estimator. Cluster/switchback designs are options, not automatic identification of a global effect |
 
 ---
 
@@ -128,7 +128,7 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 | Treating correlation or prediction as causal effect | Association does not identify intervention effects | State estimand and identification strategy |
 | Drawing a DAG after seeing results | Post-hoc graphs encode the desired conclusion | Draw assumptions before modeling |
 | Adjusting for every available variable | Colliders and mediators can introduce bias | Use DAG/backdoor criteria |
-| Reporting DiD without pre-trend diagnostics | Parallel trends is the core identifying assumption | Show pre-trends, event study, or use synthetic control |
+| Reporting DiD without pre-trend diagnostics | Parallel trends is the core identifying assumption | Show pretrend diagnostics with uncertainty and sensitivity; synthetic control requires separate identification assumptions |
 | Using weak IVs | Weak instruments amplify bias and uncertainty | Report first-stage strength and robust intervals |
 | Publishing CATE without overlap checks | Heterogeneous effects extrapolate outside support | Check positivity and subgroup sample size |
 | Calling observational estimates “proven impact” | Unmeasured confounding remains possible | Report sensitivity analysis |
@@ -143,7 +143,7 @@ Use this to pick the right method before modeling:
 
 - [ ] **Can you draw the assumed DAG?** If not, stop — assumptions are implicit and untestable. Draw DAG (#1) first.
 - [ ] **Is the effect you want interventional (do(X)) or conditional?** If interventional, check identifiability with do-calculus (#2).
-- [ ] **Can one unit's treatment change another unit's outcome?** (marketplace supply/demand, social graph, shared inventory, ranking model, geographic proximity) If yes, SUTVA fails and randomization alone does not save you — fix the *design* (cluster, geo, or switchback) before choosing an estimator. See [Interference and SUTVA](#interference-and-sutva-when-randomization-is-not-enough).
+- [ ] **Can one unit's treatment change another unit's outcome?** (marketplace supply/demand, social graph, shared inventory, ranking model, geographic proximity) If yes, specify direct, indirect, total or global estimand, exposure mapping and assignment support before choosing an estimator; redesign only when current support/assumptions do not identify the target. See [Interference and SUTVA](#interference-and-sutva-when-randomization-is-not-enough).
 - [ ] **Do you have an RCT or clean natural experiment?** If yes, use the design directly. If no, continue.
 - [ ] **Is there a threshold that determines treatment?** → RDD (#5).
 - [ ] **Is there pre/post data with a comparable untreated group?** → DiD (#6). Check parallel trends first.
@@ -156,7 +156,7 @@ Use this to pick the right method before modeling:
 - [ ] **Do you need individual-level or subgroup effect estimates?** → CATE / uplift (#9). Choose meta-learner by sample size.
 - [ ] **Does the aggregate trend contradict subgroup evidence?** → Check for Simpson's paradox via DAG stratification (#10).
 - [ ] **Is the total effect mediated by an intermediate variable?** → Mediation analysis (#11). Requires no unmeasured exposure-mediator confounders.
-- [ ] **Is the conclusion actionable under unobserved confounding?** → Compute E-value (#12). Report it.
+- [ ] **Is the conclusion actionable under unobserved confounding?** → Select a design- and scale-compatible sensitivity method (#12), name plausible confounders, and report it.
 
 ---
 
@@ -168,11 +168,11 @@ Use this to pick the right method before modeling:
 
 **Stack**:
 1. DAG (#1) — draw the assumed data-generating process; identify confounders.
-2. Propensity score + doubly robust estimator (#8) — balance covariates; produce unbiased ATE. When treatment is continuous (dosage, spend, exposure level), use kernel-based DML for the average dose-response function — Colangelo & Lee (2025, JBES).
+2. Propensity score + doubly robust estimator (#8) — balance covariates; estimate the ATE under identification, overlap and nuisance-model conditions; double robustness is a consistency property, not unconditional finite-sample unbiasedness. When treatment is continuous (dosage, spend, exposure level), use kernel-based DML for the average dose-response function — Colangelo & Lee (2025, JBES).
 3. CATE / X-learner (#9) — estimate heterogeneous effects using the debiased residuals.
-4. Sensitivity analysis (#12) — compute E-value for the strongest subgroup claim. For DML/doubly robust pipelines, additionally apply OVB bounds via Chernozhukov et al. (2026, REStat) to assess robustness of the ATE claim.
+4. Sensitivity analysis (#12) — use outcome-scale-compatible sensitivity for the strongest subgroup claim; use an E-value only for a risk-ratio estimand or a documented justified conversion. For DML/doubly robust pipelines, additionally apply OVB bounds via Chernozhukov et al. (2026, REStat) to assess robustness of the ATE claim.
 
-**Worked example:** 50 k users; 15 k treated by a 20%-off discount (self-selected). Propensity model (logistic, 12 covariates) yields p̂ ∈ [0.05, 0.95] for 91% of treated — overlap is acceptable; 9% trimmed. DR-ATE = +$2.40/user (SE $0.31, 95% CI [$1.79, $3.01]). X-learner surfaces a high-value segment (top quintile by LTV) with CATE = +$4.10 (SE $0.52). E-value for the overall ATE = 2.8 — an unobserved confounder would need to ~2.8× both the treatment-odds and the outcome-odds to fully nullify the estimate. Benchmark: E-value < 2 → don't ship without an RCT; E-value ≥ 3 → actionable with documented assumptions.
+**Worked example:** 50 k users; 15 k treated by a 20%-off discount (self-selected). Propensity model (logistic, 12 covariates) yields p̂ ∈ [0.05, 0.95] for 91% of treated; 9% is trimmed. DR-ATE = +$2.40/user (SE $0.31, 95% CI [$1.79, $3.01]). X-learner surfaces a high-value segment (top quintile by LTV) with CATE = +$4.10 (SE $0.52). These dollar mean differences do not supply the risk ratio required for an E-value. Use partial-R2/OVB sensitivity against named plausible confounders, and label the post-trimming population separately from the original user population. All numbers in this example are hypothetical.
 
 **When to add IV (#4)**: a valid instrument exists (e.g., randomized discount assignment, geographic variation); use it instead of propensity methods for the first-stage.
 
@@ -186,7 +186,7 @@ Use this to pick the right method before modeling:
 1. DAG (#1) — map treatment, outcomes, and potential confounders over time.
 2. Synthetic control (#7) — construct a weighted donor pool to serve as the counterfactual.
 3. DiD robustness check (#6) — apply DiD on the synthetic control residual to quantify pre-trend fit.
-4. Sensitivity analysis (#12) — Rosenbaum bounds on the placebo distribution from donor permutations.
+4. Sensitivity analysis (#12) — donor leave-one-out, pre-fit and time-window sensitivity, with placebo/rank inference under explicitly justified exchangeability assumptions. Rosenbaum matched-assignment bounds do not directly apply to donor permutations.
 
 ---
 
@@ -199,7 +199,7 @@ Use this to pick the right method before modeling:
 2. Backdoor criterion (#3) — determine the adjustment set for total effect identification.
 3. Propensity / DR estimator (#8) — produce balanced outcome estimates for mediation.
 4. Mediation analysis (#11) — decompose NDE and NIE; report proportion mediated.
-5. Sensitivity analysis (#12) — E-value for the indirect effect claim.
+5. Sensitivity analysis (#12) — mediation-specific sensitivity for mediator-outcome confounding on the declared effect scale; an ordinary total-effect E-value is not automatically an indirect-effect sensitivity analysis.
 
 ### LLM Evaluation Pipeline — Deconfounding the Quality Signal
 
@@ -212,7 +212,7 @@ Use this to pick the right method before modeling:
 2. Do-calculus / backdoor (#2, #3) — check whether P(Quality | do(model_update)) is identified given available logs; identify the minimal adjustment set.
 3. Propensity / DR estimator (#8) — balance on prompt covariates and user context; use doubly robust ATE. For continuous interventions (e.g., RLHF reward weight), use kernel-based DML (Colangelo & Lee 2025).
 4. CATE (#9) — surface heterogeneous effects by prompt category, task type, or user cohort; avoid reporting a flat ATE that masks regressions in a subgroup.
-5. Sensitivity analysis (#12) — compute E-value on the key quality claim; judge-bias is a plausible unmeasured confounder — report how strong it would need to be to nullify the finding.
+5. Sensitivity analysis (#12) — choose OVB/partial-R2 or other scale-compatible sensitivity for continuous quality scores; use an E-value only if quality is modeled as a risk ratio or a justified conversion is documented. Benchmark named judge-bias confounders.
 
 **Note on LLM-assisted causal discovery**: LLMs can propose DAG edges from domain knowledge but cannot replace data-driven identification checks — autoregressive next-token modeling has no mechanism for establishing direction. Use LLM outputs as priors to seed a DAG; validate edges with statistical tests (faithfulness, independence). Do not treat LLM-generated graphs as identified causal models. The restriction is on *decisional* authority, not on all LLM involvement: LLM-guided heuristic search over the structure space is a legitimate accelerator, since the search result is still validated against data. Reported LLM causal-discovery accuracy is separately confounded by memorization: the standard bnlearn benchmark graphs (Sachs, Asia, Alarm, Child) are widely published and plausibly in pretraining corpora, so benchmark scores are weak evidence of causal reasoning — prefer a graph your own domain generated. (Wu, Yu, Wu & Tan 2025, arXiv:2506.00844; contamination caveat per CausalBench, arXiv:2404.06349.)
 
@@ -220,7 +220,9 @@ Use this to pick the right method before modeling:
 
 ## Interference and SUTVA: When Randomization Is Not Enough
 
-Every primitive above assumes SUTVA: one unit's treatment does not affect another unit's outcome. In marketplaces, social graphs, shared-inventory systems, and ranking models this is false by construction, and a clean randomized A/B test is still biased — the control group is contaminated by the treatment. This is a *design* problem; no estimator applied afterwards recovers the estimand.
+No-interference is part of SUTVA, which also concerns treatment versions. Many conventional unit-level formulas assume it, but DAGs/SCMs and potential-outcome models can explicitly include cross-unit causes. Interference does not make every estimand unrecoverable. Specify the exposure mapping, the direct/indirect/total/global intervention contrast, assignment probabilities and support, consistency of exposures, and remaining identification assumptions. Randomization alone does not turn a direct effect into the all-treated-versus-all-control launch effect.
+
+**Counterexample:** independent Bernoulli(.5) assignments Z1,Z2 with Y1=3Z1+7Z2 and Y2=3Z2+7Z1 have interference. The Horvitz–Thompson direct-effect estimator averaging 2ZiYi−2(1−Zi)Yi over the two units has expectation 3 across the four equally likely assignments. The global all-treated-versus-all-control contrast is 10. Both contrasts exist; they answer different questions. Exposure-probability weighting requires positive probability for the exposures being contrasted. [Aronow & Samii (2017), design/exposure/estimand framework](https://arxiv.org/abs/1305.6156).
 
 Identify the interference structure first, then pick the design:
 
@@ -231,9 +233,9 @@ Identify the interference structure first, then pick the design:
 | Both spatial and temporal (delivery, marketplace supply) | Clustered switchback (Jia, Kallus & Yu 2025) | Truncated Horvitz–Thompson; MSE matches the lower bound up to log terms on sparse graphs |
 | Market-level equilibrium effects (budget, inventory, auction) | Geo or market-level randomization; unit-level tests cannot see it | Few treated units — use randomization inference, not asymptotic SEs |
 
-**The reporting distinction that matters**: under interference, the unit-level "treatment effect" and the effect of switching *everyone* (the global/total treatment effect) are different quantities. A cluster or switchback design estimates the latter, which is usually the decision-relevant one for a launch. Say which one you estimated.
+**The reporting distinction that matters**: under interference, the unit-level "treatment effect" and the effect of switching *everyone* (the global/total treatment effect) are different quantities. Cluster or switchback designs target contrasts defined by their allocation, carryover and exposure assumptions; neither automatically identifies the global rollout effect. Say which contrast was identified and justify any extrapolation.
 
-Agent and LLM products hit this directly: agents sharing a rate limit, a retrieval index, a cache, or a tool backend interfere through the shared resource, so per-session randomization understates or inverts the launch effect.
+Agent and LLM products hit this directly: agents sharing a rate limit, a retrieval index, a cache, or a tool backend interfere through the shared resource, so per-session randomization can identify a different contrast and may understate or invert the launch effect; establish this for the actual resource/exposure model.
 
 ---
 
@@ -289,7 +291,7 @@ The textbook assumption is rarely violated the way the textbook describes it. Wh
 3. Use the [Decision Checklist](#decision-checklist) to select the identification strategy.
 4. Open [`references/primitives-overview.md`](references/primitives-overview.md) for inputs, assumptions, and worked conceptual examples. Its [Tooling Landscape](references/primitives-overview.md#tooling-landscape) table maps each primitive to the maintained Python/R library that implements it.
 5. For multi-method stacks, use the [Composition Recipes](#composition-recipes) above.
-6. Check [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md) and always close with sensitivity analysis (#12) when reporting observational estimates.
+6. Check [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md) and always close with sensitivity analysis (#12) when reporting observational estimates. For risk ratios, `python3 scripts/evalue.py --rr RR --ci-low LOW --ci-high HIGH` validates the interval and uses the confidence bound closest to the null.
 
 ---
 
@@ -327,6 +329,8 @@ New consumer domain layers should follow the same gate-then-recipe pattern rathe
 
 ## Navigation
 
+- Practical completion contract and known-answer controls: [references/practical-contract.md](references/practical-contract.md).
+
 - Formal theory map: [`references/formal-theory-map.md`](references/formal-theory-map.md)
 - Patterns, scenarios, and traps: [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md)
 - Full primitives overview with TOC: [`references/primitives-overview.md`](references/primitives-overview.md)
@@ -354,6 +358,6 @@ New consumer domain layers should follow the same gate-then-recipe pattern rathe
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

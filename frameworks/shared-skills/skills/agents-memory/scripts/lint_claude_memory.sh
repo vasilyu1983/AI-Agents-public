@@ -13,9 +13,9 @@ trap 'rm -rf "$tmpdir"' EXIT
 
 files_list="$tmpdir/memory-files.txt"
 
-find "$root" \( -type f -o -type l \) \
+find "$root" -type d -name .archive -prune -o \
+  \( -type f -o -type l \) \
   \( -name 'CLAUDE.md' -o -name 'AGENTS.md' -o -name 'AGENTS.override.md' -o -name 'CLAUDE.local.md' -o \( -path '*/.claude/rules/*' -a -name '*.md' \) \) \
-  -not -path '*/.archive/*' \
   -print0 \
   | while IFS= read -r -d '' path; do
       printf '%s\n' "$path"

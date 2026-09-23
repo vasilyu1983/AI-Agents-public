@@ -1,0 +1,5 @@
+unit_id,cluster_id,stratum,baseline,candidate,critical_baseline,critical_candidate
+task-1,family-a,core,0,1,false,false
+task-2,family-a,core,1,1,false,false
+task-3,family-b,edge,1,0,false,true
+task-4,family-c,edge,0,1,true,false

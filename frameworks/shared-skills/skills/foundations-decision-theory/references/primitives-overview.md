@@ -66,7 +66,7 @@ Each primitive below addresses a specific structural failure.
 
 | Anti-Pattern | Diagnosis | Fix |
 |-------------|-----------|-----|
-| Approve any study that "might help" | EVPI not checked | EVPI bounds the maximum value; if cost > EVPI, skip (#4) |
+| Approve any study that "might help" | EVPI not checked | EVPI bounds the maximum value; if utility-compatible additive cost > EVPI, skip; otherwise integrate costs/delay into terminal-outcome EU (#4) |
 | Run full study when a pilot suffices | EVSI for partial sample not computed | EVSI curves show optimal sample size (#4) |
 | Run experiment while already knowing the action | Decision is robust to outcomes | Prior expected utility already dominates; no study needed (#4) |
 

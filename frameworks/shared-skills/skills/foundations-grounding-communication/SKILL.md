@@ -33,10 +33,10 @@ It is the missing layer for multi-agent LLM systems: empirical work on multi-age
 - Spec drift across long agent loops where context compresses
 
 **Skip and use simpler alternatives when:**
-- Single agent / no handoff — there is no second party to ground with
+- Autonomous single-agent internal computation with no recipient or coordination ambiguity. A human plus one assistant are two interlocutors: use proportionate grounding when meaning, authority or version risk exists
 - The communication channel itself is the bottleneck → use [foundations-information-theory](../foundations-information-theory/SKILL.md) (channel capacity)
 - The question is *whether to communicate at all* → use [foundations-team-theory](../foundations-team-theory/SKILL.md) (value of communication)
-- Strategic / adversarial speech (negotiation, debate) → use [foundations-game-theory](../foundations-game-theory/SKILL.md)
+- Strategic / adversarial speech (negotiation, debate) → compose [foundations-game-theory](../foundations-game-theory/SKILL.md) for incentives with grounding for shared referents, proposal versions and repair
 - Pure user-research methodology → use [software-ux-research](../software-ux-research/SKILL.md)
 
 ## Contents
@@ -97,7 +97,7 @@ Full definitions, inputs, outputs, failure modes, and worked examples: [`referen
 |---|---|---|
 | Clark & Brennan grounding theory | Design handoff/confirmation protocols | #1, #2, #3, #4, #10 |
 | Gricean implicature / pragmatics | Account for what is meant beyond what is said | #6, #7 |
-| Conversation analysis (Sacks, Schegloff) | Repair sequences, turn-taking, adjacency pairs; Ubuntu-CG (Sarkar et al., ACL 2025) provides first real-world empirical validation: friction (failed repair initiation) predicts task failure; current LLMs detect implicit friction poorly (64.81% F1) | #5 |
+| Conversation analysis (Sacks, Schegloff) | Repair sequences, turn-taking, adjacency pairs; Ubuntu-CG (Sarkar et al., ACL 2025) studies grounding in Ubuntu technical-support dialogs: friction is associated with task success, and evaluated models struggle with implicit misalignment | #5 |
 | Joint action theory | Frame communication as coordinated activity, not message-passing | #8, #9 |
 | Collaborative RSA (CRSA) | Multi-turn dialogue where agents hold private information and must converge on shared outcomes | #8, #9 |
 | Dynamic grounding (Yao et al. 2026) | Coordination spans many turns and joint plans must be formed, committed to, and executed — not just interpreted once | #1, #3, #6, #8 |
@@ -113,8 +113,8 @@ See [`references/primitives-overview.md`](references/primitives-overview.md) for
 
 | Anti-Pattern | Grounding Theory Diagnosis | Fix |
 |---|---|---|
-| "I put it in the system prompt, so the agent knows" | Common ground (#1) confused with content delivery; presence ≠ mutual belief | Verify common ground via grounded probe (ask the agent to summarize before acting). Detect friction as operational signal of CG misalignment — 61% of real conversations contain friction; successful conversations show significantly lower rates (Ubuntu-CG, ACL 2025) |
-| Subagent acts immediately on first reading of the brief | Grounding criterion (#2) set to zero; no acceptance phase | Build acceptance into the protocol — agent restates intent before executing |
+| "I put it in the system prompt, so the agent knows" | Common ground (#1) confused with content delivery; presence ≠ mutual belief | Verify common ground via grounded probe (use a proportionate probe or inspectable first artifact). Detect friction as operational signal of CG misalignment — 61% of real conversations contain friction; successful conversations show significantly lower rates (Ubuntu-CG, ACL 2025) |
+| Subagent acts on an ambiguous or high-cost brief without exposing its interpretation | Grounding criterion (#2) is below the task risk | For reversible work, expose the working interpretation while proceeding; require an explicit restatement/response only when ambiguity can change an irreversible or costly action |
 | User says "ok" / agent emits "ack" — taken as confirmation of understanding | Evidence of understanding (#4) confuses acknowledgment with comprehension | Require active evidence: paraphrase, plan, or worked example, not just acknowledgment. (Empirical: LLMs produce near-zero acknowledgement statements (~0%) vs ~9% in human dialogue — NewsInterview, ACL 2025) |
 | No mechanism for "wait, I don't understand" once a task starts | Repair (#5) channel missing; errors compound | Provide explicit "ask for clarification" tool; reward its use when uncertainty is high. For irreversible actions, preemptive verification (infer task from action sequence, check against user intent) outperforms reactive repair (InferAct, EMNLP 2025) |
 | Repair happens, but the agent proceeds on its pre-repair assumptions | Repair (#5) treated as an utterance rather than a common-ground update; the correction is acknowledged and then not propagated | After a correction, require restatement of the *revised* shared state, not of the correction. Empirically LLM collaborators fail to update assumptions post-repair, and their joint vocabulary with a partner shrinks rather than grows over trials (Poelitz et al. 2026) |
@@ -151,15 +151,15 @@ _Context_: Orchestrator dispatches a subagent on a non-trivial task. MAST data m
 2. Set grounding criterion (#2): is this a reversible exploration or an irreversible action? Higher stakes → higher criterion.
 3. Resolve presuppositions (#6): every definite reference ("the file," "the user") must have a recoverable antecedent in the prompt.
 4. Apply audience design (#7): does the subagent share the orchestrator's domain shorthand? If not, expand or substitute.
-5. Build the acceptance phase (#3): require the subagent to restate the goal and plan *before* executing. Capture this as evidence of understanding (#4).
+5. Choose proportionate acceptance evidence (#3): for reversible work, a visible working interpretation or first artifact can demonstrate understanding without pausing. Before costly or irreversible execution, require a restatement or other active evidence (#4).
 6. Provide a repair channel (#5): an explicit "ask the user / orchestrator" tool with a low threshold for use under uncertainty. Consider preemptive repair verification: before executing irreversible actions, a Task Inference + Task Verification unit can verify alignment between observed agent plan and stated user intent (InferAct pattern, EMNLP 2025, +8% Macro-F1 over baselines across 3 tasks).
 7. Compute total cost (#9, #10): brief tokens + acceptance tokens + expected repair tokens. Optimize the sum, not just brief tokens.
 
 **A2A/MCP note (2026).** Agent-to-Agent (A2A, Google/Linux Foundation, 2025) and MCP standardize the *transport* layer for inter-agent handoffs. They do not solve the grounding layer. Yuan et al. (2026) survey 18 agent communication protocols against a three-layer taxonomy — communication (reliable transmission), syntactic (message schemas), semantic (meaning alignment) — and find most provide "limited protocol-level mechanisms for clarification, context alignment, and verification." Agents "exchange messages correctly without ensuring they understand them in the same way." Semantic responsibilities get pushed into prompts, wrappers, and orchestration logic.
 
-Practical consequence: the grounding layer is yours to build, per-integration, until protocols carry it. An A2A task delegation carries a structured payload, but whether the receiving agent shares the sending agent's interpretation of that payload is still a Clark-layer problem: resolve presuppositions (#6), apply audience design (#7), and build an acceptance phase into the A2A response before execution begins (#3).
+Practical consequence: the grounding layer is yours to build, per integration, until protocols carry it. An A2A task delegation carries a structured payload, but whether the receiver shares the sender's interpretation remains a Clark-layer problem. For clear, reversible work, include the working interpretation in the A2A response or first artifact and continue. Wait for an explicit response only when unresolved ambiguity could change a costly, irreversible, unsafe, or unauthorized action.
 
-**Worked example.** Orchestrator brief v1: "Refactor the auth module." Acceptance step: subagent restates: "I'll modify the OAuth2 handler in `src/auth/`, preserve existing endpoints, add tests." Orchestrator notices it missed a target file — the brief should have specified `src/auth/oauth2.py` not the whole module. Repair: 50 tokens. Without acceptance step: subagent rewrites a different file; repair cost 5,000+ tokens. Acceptance step earned its keep.
+**Worked example.** For a reversible draft, the subagent replies, "Working interpretation: refactor the OAuth2 handler under `src/auth/` while preserving endpoints," and begins with an inspectable first diff. The orchestrator can interrupt if that interpretation is wrong. If the same ambiguity controls a production auth migration or credential change, the subagent stops after the restatement and waits because the repair cost and authorization boundary justify blocking acceptance.
 
 ### Long-running agent context compression
 
@@ -211,7 +211,7 @@ A non-expert sees the symptom (wrong output, an angry user, a broken deploy) and
 |---|---|---|---|
 | **Silent misalignment** | Two parties (human-human, human-agent, agent-agent) proceed for many turns or steps before anyone notices they meant different things — no error is ever raised, only a late, expensive divergence | Ask each party independently to state the current shared goal in one sentence. If they diverge and neither noticed, this is it | Scheduled, low-cost restatement checkpoints — don't wait for a symptom; under this failure mode there won't be one until the cost is sunk (#1, #2) |
 | **Acknowledgment-without-understanding** | "LGTM," "sounds good," "ack," a rubber-stamp code review, a nodding stakeholder — social or procedural closure is mistaken for grounding | Ask the acknowledger to act on or restate the specific content, not just approve it. If they can't, the "ack" was backchannel, not evidence (#3, #4) | Replace approval gates with restatement or demonstration gates on anything irreversible; "approved" and "understood" are different claims — don't conflate them |
-| **Costly-repair spiral** | A misunderstanding surfaces, gets "fixed," but the fix itself wasn't grounded either — repair attempts compound rather than converge, each round costing more than the last | Track repair-round cost (tokens, time, trust) over the incident. If it's rising rather than falling, the repair channel itself lacks an acceptance phase | Ground the repair the same way you'd ground the original contribution — restate the correction, get explicit acceptance, before the next attempt (#3, #5, #9) |
+| **Costly-repair spiral** | A misunderstanding surfaces, gets "fixed," but the fix itself wasn't grounded either — repair attempts compound rather than converge, each round costing more than the last | Track repair-round cost (tokens, time, trust) over the incident. If it's rising rather than falling, the repair channel itself lacks an acceptance phase | Ground the repair the same way you'd ground the original contribution — update and expose the revised shared state before the next affected action; require a response only if consequential action still depends on unresolved ambiguity or missing authority (#3, #5, #9) |
 
 ### When explicit verification protocols beat implicit grounding
 
@@ -253,12 +253,16 @@ Communication or handoff boundary
   -> Choose grounding criterion for the risk level
   -> Design presentation and acceptance evidence
   -> Resolve presuppositions and audience mismatch
-     +-- misunderstanding detected -> repair and re-confirm
+     +-- misunderstanding detected -> update revised state; resolve load-bearing ambiguity
      +-- understanding evidenced -> proceed
   -> Cost grounding overhead against failure cost
 ```
 
 ---
+
+## Local Validation Artifact
+
+- [Operational record, worked case and regression checks](references/handoff-state-contract.md). Read before translating a mechanism into a deployment recommendation.
 
 ## Navigation
 
@@ -294,7 +298,7 @@ Communication or handoff boundary
 - Shaikh, Gligorić, Khetan, Gerstgrasser, Yang, Jurafsky (2024) "Grounding Gaps in Language Model Generations." NAACL-HLT 2024 (ACL Anthology 2024.naacl-long.348). Coined "presumptive grounders" — LLMs assume common ground rather than using grounding acts. Found that RLHF/preference training reduces grounding acts. Predecessor paper to Rifts 2025 (same first author). Supports #4, #5.
 - Shaikh et al. (2025) "Navigating Rifts in Human-LLM Grounding." ACL 2025. Rifts benchmark. LLMs clarify 3× and follow up 16× less than humans. Supports #4, #5.
 - Spangher et al. (2025) "NewsInterview." ACL 2025. 45,848-interview corpus; LLM acknowledgement rate ~0% vs human ~9%. Supports #4, #7.
-- Sarkar et al. (2025) "Understanding Common Ground Misalignment." ACL 2025. Ubuntu-CG: 200 conversations, 7,590 turns; friction correlates with task failure; LLM friction detection 77.22% (overt) / 64.81% (implicit) F1. Supports #1, #5.
+- Sarkar et al. (2025) "Understanding Common Ground Misalignment." ACL 2025. Ubuntu-CG: 200 conversations, 7,590 turns; friction correlates with task failure; Section 6 reports explicit RequestRepair in 77.22% of detected friction instances and 64.81% of undetected instances in its GPT-4o error analysis. These are conditional proportions, not F1 or overt/implicit detection rates ([primary text, §6](https://arxiv.org/html/2503.12370v2#S6)). Supports #1, #5.
 - Fang, Zhu, Gurevych (2025) "Preemptive Detection and Correction of Misaligned Actions." EMNLP 2025, pp. 222–244. InferAct: +8% avg Macro-F1, 11/12 settings best across 3 tasks × 4 LLMs. Extends #5.
 - Estienne et al. (2025) "Collaborative Rational Speech Act." EMNLP 2025. CRSA extends RSA to multi-turn with private meaning spaces; speaker entropy 8.18 vs 14.27 baseline on medical dialogue. Grounds #8, #9.
 - Yao, Zou, Hawkins (2026) "Talk is Cheap, Communication is Hard: Dynamic Grounding Failures and Repair in Multi-Agent Negotiation." arXiv 2605.01750. Iterated negotiation game with verifiable jointly optimal outcomes; agents solve in isolation but dyads fail across models; four named failure modes. Static-vs-dynamic grounding distinction. Preprint — no peer review confirmed.
@@ -305,6 +309,6 @@ Communication or handoff boundary
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

@@ -18,7 +18,7 @@ status: stable
 
 ## Why TOC Works
 
-Every system has exactly one constraint at any given time — the step, rule, or resource that limits total output. Improving anything else increases local efficiency without increasing system throughput. TOC works because it refuses to let attention scatter: all improvement energy goes to the constraint, and only to the constraint, until it is broken and a new one emerges.
+The single-dominant-constraint model focuses on a step, rule or resource currently limiting the chosen system goal; multiple near-tied resources, shared-resource contention and unstable demand require joint analysis. Improving anything else increases local efficiency without increasing system throughput. TOC works because it refuses to let attention scatter: all improvement energy goes to the constraint, and only to the constraint, until it is broken and a new one emerges.
 
 | Failure Mode | TOC Diagnosis | What Goes Wrong Without TOC |
 |-------------|--------------|---------------------------|
@@ -56,7 +56,7 @@ Every system has exactly one constraint at any given time — the step, rule, or
 
 | Anti-Pattern | TOC Diagnosis | Fix |
 |-------------|--------------|-----|
-| Improving the non-bottleneck team | 5FS violated — energy on non-constraint | Identify constraint first; freeze non-constraint improvements |
+| Improving the non-bottleneck team | 5FS violated — energy on non-constraint | Identify constraint first; subordinate improvement priorities while retaining required maintenance, safety and quality work |
 | Adding engineers to a policy-constrained pipeline | Physical elevation before policy constraint resolved | Audit approval gates and deploy policies before hiring |
 | Tracking milestone dates, not buffer health | Critical path thinking in a CCPM project | Switch to buffer consumption reporting |
 
@@ -64,8 +64,8 @@ Every system has exactly one constraint at any given time — the step, rule, or
 
 | Anti-Pattern | TOC Diagnosis | Fix |
 |-------------|--------------|-----|
-| Features ranked by stakeholder volume | No T/CU ranking; constraint ignored | Rank by Throughput per Constraint Unit |
-| Shipping everything to everyone | Product mix not optimized | T/CU product mix analysis; drop or defer low-T/CU items |
+| Features ranked by stakeholder volume | No T/CU ranking; constraint ignored | Define accepted throughput and the capacity model; use T/CU ordering only under the divisible independent single-capacity assumptions, otherwise compare globally feasible schedules |
+| Shipping everything to everyone | Product mix not optimized | Compare feasible product mixes against the goal, demand and mandatory obligations; low T/CU alone does not justify dropping an item, especially with dependencies or multiple capacities |
 | Strategy blocked by an unresolved conflict | Evaporating Cloud not applied | Build the cloud; challenge the assumption sustaining the conflict |
 
 ### Operations / Incident Response
@@ -119,3 +119,5 @@ Primary books and references for all 11 primitives:
 - Schragenheim, E. & Dettmer, H.W. (2001). *Manufacturing at Warp Speed*. CRC Press.
 - Dettmer, H.W. (2007). *The Logical Thinking Process*. ASQ Quality Press.
 - Schragenheim, E., Dettmer, H.W. & Patterson, J.W. (2009). *Supply Chain Management at Warp Speed*. CRC Press.
+
+**T/CU applicability:** Ratio ordering assumes divisible independent work, one linear capacity, compatible demand and no binding dependencies/deadlines. For indivisible initiatives, shared or multiple capacities, or mandatory obligations, build a global feasible mix/schedule and verify objective value; ratio ranking is only a heuristic. See the root and [`../references/decision-and-validation.md`](../references/decision-and-validation.md).

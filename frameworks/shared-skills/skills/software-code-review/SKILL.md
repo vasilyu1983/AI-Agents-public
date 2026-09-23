@@ -120,6 +120,10 @@ Sources: [Hallucination Detection](../software-clean-code-standard/references/co
 
 ## Severity Rubric
 
+**Finding proof gate.**
+
+Before reporting a blocker or high-severity finding, provide the smallest proof appropriate to its class: a reachable execution or state-transition path, failing example or test, or concrete contract mismatch. Name the violated invariant and user impact, and identify any assumption you could not verify. Reserve controllable-input-to-sink tracing for security and tainted-data findings. If the necessary reachability or contract evidence is unknown, report a question or conditional risk rather than asserting a defect.
+
 | Priority | Label | Criteria | Review action |
 |----------|-------|----------|---------------|
 | P0 | BLOCKER | Data loss, security hole, correctness bug, crashes in prod path | Must fix before merge |
@@ -243,13 +247,9 @@ If web access is unavailable, say so and answer from `data/sources.json`, clearl
 ## Fact-Checking
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

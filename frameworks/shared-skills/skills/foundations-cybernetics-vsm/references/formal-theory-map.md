@@ -10,7 +10,7 @@ Use this map when a task needs the theory behind the primitive playbooks, not ju
 | First-order cybernetics | Control of an observed system | Is the controller outside the process it regulates? |
 | Second-order cybernetics | Control where the observer/controller is part of the system | Does the controller change the system by observing or intervening? |
 | Feedback loop | Measurement, comparison, action, and delay | Is there a goal variable, sensor, comparator, actuator, and lag? |
-| Requisite variety | Regulator capacity relative to environmental disturbance variety | Can the controller generate enough distinct responses for the disturbances? |
+| Requisite variety | Regulator capacity relative to outcome-relevant disturbance variety | Does every material distinction have a timely detectable and effective response path under real constraints? |
 | VSM recursion | A viable system contains viable subsystems and belongs to a larger viable system | Can every level define its own S1-S5 without collapsing into the level above? |
 | Homeostasis | Stability through balancing loops | Does the system return to an acceptable range after disturbance? |
 | Algedonic signal | Exceptional pain/pleasure signal bypassing normal channels | Is there a thresholded escalation path that avoids routine reporting delay? |
@@ -29,11 +29,11 @@ Use this map when a task needs the theory behind the primitive playbooks, not ju
 ## Requisite Variety Pattern
 
 1. List disturbances the system must survive.
-2. Estimate their variety: distinct states that require distinct responses.
-3. List regulator responses available at the same time scale.
+2. Partition them by distinctions that change the required outcome; raw labels and event counts are only candidate diagnostics.
+3. Map each class to its detection signal and an effective response available at the same time scale, including authority, coupling, dependency, and resource constraints.
 4. Add attenuators where environmental variety is too high: aggregation, standards, exception filters, queues, APIs.
 5. Add amplifiers where regulator variety is too low: delegated authority, tooling, automation, self-service, training.
-6. Check the latency of the control loop; late variety is not effective variety.
+6. Replay representative and coupled disturbances; conclude a gap only from an uncovered or ineffective path, never from subtracting unlike counts.
 
 ## Recursion Rules
 
@@ -45,7 +45,7 @@ Use this map when a task needs the theory behind the primitive playbooks, not ju
 ## What Counts as Evidence
 
 - Valid VSM diagnosis: explicit system boundary, recursion level, named S1-S5 functions, missing-function evidence, and channel design.
-- Valid Ashby claim: named disturbances, response repertoire, variety attenuators/amplifiers, and timing assumptions.
+- Valid Ashby claim: named outcome-relevant disturbances, tested detection and response mapping, authority/dependency constraints, attenuators/amplifiers, and timing evidence.
 - Valid algedonic design: threshold, bypass path, receiving authority, rate limit, and test cadence.
 
 ## Source Anchors

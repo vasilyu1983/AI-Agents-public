@@ -139,9 +139,8 @@ Is latency < 500ms (p50) a hard requirement?
           ├── Yes (compliance, PII, guardrails) → Cascading — latency goal may need re-negotiation
           └── No → Speech-to-speech (S2S)
                    ├── OpenAI Realtime API (GA, out of beta; `gpt-4o-realtime-preview` retired) —
-                   │     `gpt-realtime-2.1` / `gpt-realtime-2.1-mini` (reasoning + tool use in both tiers,
-                   │     ~25% lower p95 latency than the prior `gpt-realtime-2` generation), plus
-                   │     `gpt-realtime-translate` (70+ input / 13 output languages, live speech translation) and
+                   │     `gpt-realtime-2.1` / `gpt-realtime-2.1-mini` (current reasoning + tool-use tiers), plus
+                   │     `gpt-realtime-translate` (live streaming speech translation) and
                    │     `gpt-realtime-whisper` (streaming STT, controllable latency/quality tradeoff).
                    │     Verify current model names before use — this line moves every few months.
                    └── Gemini Live — Google ecosystem, good for long sessions
@@ -169,6 +168,10 @@ Full S2S reference → [`references/s2s-and-native-voice-apis.md`](references/s2
 **Barge-in is a pre-emption problem, not a VAD-tuning problem.** A user talking over the bot must cancel in-flight TTS and the pending LLM stream within one residual service period (~150-300ms for a typical TTS chunk) or the interruption reads as broken, even if VAD detected it instantly. Don't use a fixed silence timeout for barge-in — set it from observed per-stage latency percentiles, and monitor barge-in success rate (bot audio actually stops within ~350ms) as its own SLO, separately from turn latency. See `references/queueing-theory-applied.md` (P3, A3) for the pre-emption pattern and its failure mode.
 
 **S2S vs cascading is a latency-vs-control trade, re-evaluated per release, not a one-time architecture choice.** Cascading gives you the text layer (compliance, PII redaction, guardrails, debuggability) at the cost of ~150-300ms extra hops. S2S buys latency but forces either giving up the text layer or paying for it back with a parallel transcript track — which can erase the simplicity gain that made S2S attractive. Because S2S providers now ship a new generation roughly every 8-10 weeks (see `references/s2s-and-native-voice-apis.md`), a "cascading was necessary for latency" decision from two quarters ago may no longer hold — re-check the current-generation p50/p95 numbers before defending a standing architecture choice on stale benchmarks.
+
+## Real-Call Launch Gate
+
+Test the target languages, accents, codecs, handset networks, background noise, silence, barge-in, DTMF, transfer, provider timeout, and reconnect paths with real or replayed call audio. Report end-of-turn and first-audio latency percentiles, interruption success, task completion, false transfer, hang-up, and consent-capture rates by scenario. Launch only when every blocking scenario has a deterministic fallback and the concurrent-call test meets the same bounds. A provider connection or synthetic clean-audio demo is not launch evidence.
 
 ## Known Traps
 
@@ -235,6 +238,6 @@ Full S2S reference → [`references/s2s-and-native-voice-apis.md`](references/s2
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

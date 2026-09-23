@@ -113,6 +113,10 @@ Migrate incrementally: keep the stateless front end on PaaS, move only the const
 
 ## Deploy-and-Forget Scope
 
+**Runtime fit probe.**
+
+Use the comparison table to produce a shortlist, then scale evidence to the commitment. For a reversible or low-risk choice, inspect official capability limits and use local, emulated, or vendor-published evidence for the representative workload shape. Before a material production commitment, when the authorized task includes external testing, use a disposable non-production target with a defined spend bound to measure the real protocol, background work, storage, egress, latency, memory, restart, and observability behavior. Exercise crash recovery or rollback only when it is material to the requirement and safe for that target.
+
 | Removed by the platform | Still your responsibility |
 |-------------------------|---------------------------|
 | OS patching and kernel updates | Application correctness |
@@ -226,6 +230,6 @@ Always set spend alerts at the billing platform level. The single most common su
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

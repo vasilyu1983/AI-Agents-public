@@ -118,7 +118,7 @@ Two invariants:
 - **Guard on the budget existing.** With no budget set, `remaining()` is effectively infinite and the loop runs to the agent cap. This is the most common way a budget-bounded loop becomes an unbounded one.
 - **Reserve headroom.** Stop while enough budget remains to synthesize. A loop that spends its last token discovering has nothing left to report with.
 
-Budget-conservation still holds: child budgets are strict subsets of the parent's *remaining* budget, and a breach halts rather than warns (see [../SKILL.md](../SKILL.md#operating-principles)).
+If the orchestrator allocates a parent task budget, child allocations should fit inside its remaining amount and reserve synthesis headroom. Record which dimensions the runtime truly enforces; token, time, tool-call, and external-spend caps do not automatically share one conservation mechanism. Define whether a breach halts, cancels, or escalates (see [../SKILL.md](../SKILL.md#operating-principles)).
 
 ## Convergence Detection
 

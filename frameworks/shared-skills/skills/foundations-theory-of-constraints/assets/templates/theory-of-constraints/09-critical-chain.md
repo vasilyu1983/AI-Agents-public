@@ -4,7 +4,7 @@
 
 ## Definition
 
-Critical Chain Project Management (CCPM) is the TOC application to project scheduling. It addresses the root causes of project delays — which are not technical risk but behavioral: student syndrome, Parkinson's Law, and multitasking — by restructuring how buffers are placed.
+Critical Chain Project Management (CCPM) is the TOC application to project scheduling. It addresses the root causes of project delays — which can arise from technical uncertainty, resource contention and behavioral patterns: student syndrome, Parkinson's Law, and multitasking — by restructuring how buffers are placed.
 
 **Key concepts**:
 
@@ -14,7 +14,7 @@ Critical Chain Project Management (CCPM) is the TOC application to project sched
 - **Resource Buffer (RB)**: a warning signal (not time) telling a resource to be ready to work on the critical chain.
 - **Buffer Management**: project health is tracked by buffer consumption rate, not by milestone dates.
 
-**Estimation principle**: remove individual task safety (usually 50% of inflated estimates); pool it into the Project Buffer. Individual tasks are estimated at median duration (50% probability), not "safe" duration (90%).
+**Estimation principle**: estimate task distributions and pool safety into a workload-calibrated Project Buffer; halving estimates is an illustrative historical heuristic. Individual tasks are estimated at median duration (50% probability), not "safe" duration (90%).
 
 ## When to Use
 
@@ -32,7 +32,7 @@ Critical Chain Project Management (CCPM) is the TOC application to project sched
 ## Outputs
 
 - Critical chain identified (longest path including resource contention).
-- Project Buffer size (typically 50% of critical chain duration from pooled safety).
+- Project Buffer size with rationale from task variation, dependence and delivery-confidence requirements; 50% is an illustrative heuristic.
 - Feeding Buffers for each non-critical path feeding the chain.
 - A buffer consumption report: green (< 1/3 consumed), yellow (1/3–2/3), red (> 2/3 consumed relative to project completion %).
 
@@ -42,9 +42,9 @@ Critical Chain Project Management (CCPM) is the TOC application to project sched
 |---------|-----------|-----|
 | Tasks still padded after CCPM adoption | Student syndrome not addressed culturally | Train teams that individual padding is removed; safety lives in PB |
 | Critical chain not updated when resources change | Critical path only — ignores resource contention | Recompute critical chain after any resource reassignment |
-| Buffer consumed tracking ignored | Teams track milestones, not buffer health | Switch project review to buffer burn rate as the sole progress metric |
-| Multitasking continues on critical chain resources | CCPM requires dedicated focus for critical chain | Make critical chain work pre-emptive; halt non-critical work for resources on the chain |
-| PB oversized as insurance | Overly padded estimates reintroduce Parkinson's Law | Size PB at exactly 50% of critical chain duration from median estimates |
+| Buffer consumed tracking ignored | Teams track milestones, not buffer health | Track buffer burn relative to completed work alongside quality, risk and actual completion evidence |
+| Multitasking continues on critical chain resources | CCPM requires dedicated focus for critical chain | Prioritize critical-chain work within agreed obligations; protect mandatory safety, quality, maintenance and incident response, and model their resource capacity explicitly |
+| PB oversized as insurance | Overly padded estimates reintroduce Parkinson's Law | Calibrate pooled buffer using task variability, correlation, resource uncertainty and desired delivery confidence; 50% is an illustrative heuristic |
 
 ## Worked Example
 
@@ -55,8 +55,9 @@ Critical Chain Project Management (CCPM) is the TOC application to project sched
 - **Total project commitment**: 18 + 9 = 27 days.
 - **Feeding Buffer**: a design task (3 days, feeding the critical chain at day 12) gets a 1.5-day Feeding Buffer.
 
-At day 10: critical chain consumed 8 days (44% of chain, 37% of PB consumed). Status: **green**.
-At day 16: chain consumed 14 days (78% of chain, 67% of PB consumed). Status: **red** — escalate immediately.
+Illustrative monitoring rule: ratio = fraction of PB consumed / fraction of chain work completed; green below 1/3, yellow 1/3–2/3, red above 2/3. These zones are local heuristics.
+At day 10, if 8/18 of chain work is completed and 1/9 of PB is consumed, ratio=.25: green.
+At day 16, if 14/18 is completed and 6/9 of PB is consumed, ratio≈.857: red. Completed work and consumed buffer must be measured independently; elapsed time alone supplies neither.
 
 ## Comparison: Critical Chain vs. Critical Path
 

@@ -21,7 +21,7 @@ Use this map when a task needs the math behind availability, failure modeling, r
 | Primitive | Depends On | Boundary |
 |-----------|------------|----------|
 | MTBF/MTTR | Stable failure and repair definitions | MTBF is not an uptime guarantee |
-| Availability | Repairable-system assumptions | A = MTBF / (MTBF + MTTR) assumes steady-state exponential behavior |
+| Availability | Repairable-system assumptions | A = MTBF / (MTBF + MTTR) holds for an alternating renewal process with finite mean up/down times; exponential distributions are not required |
 | Hazard functions | Lifetime data and censoring model | Constant hazard is only one special case |
 | Bathtub curve | Lifecycle phases | Diagnose with data; do not assume phase |
 | FTA | Boolean structure and independence assumptions | Common causes break simple gate math |
@@ -43,7 +43,7 @@ Use this map when a task needs the math behind availability, failure modeling, r
 
 - Series reliability: R_system = product(R_i).
 - Parallel reliability for independent components: R_system = 1 - product(1 - R_i).
-- Steady-state availability for exponential repairable system: A = MTBF / (MTBF + MTTR).
+- Long-run availability for a finite-mean alternating renewal process: A = MTBF / (MTBF + MTTR).
 - Downtime budget: allowed bad time = (1 - SLO) * window.
 - Weibull hazard: beta < 1 decreasing, beta = 1 constant, beta > 1 increasing.
 

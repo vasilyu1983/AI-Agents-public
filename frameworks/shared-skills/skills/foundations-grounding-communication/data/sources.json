@@ -130,7 +130,7 @@
       "id": "UbuntuCG2025",
       "name": "Understanding Common Ground Misalignment in Goal-Oriented Dialog: A Case-Study with Ubuntu Chat Logs",
       "url": "https://aclanthology.org/2025.acl-long.161/",
-      "description": "Sarkar, Srikanth, Pellegrin, Rudinger, Bonial, Resnik (2025). ACL 2025. 200 dyadic Ubuntu IRC conversations (7,590 turns); operationalizes Clark & Brennan common ground as conversational friction; friction correlates with task failure; GPT-4o detects overt friction at 77.22% F1, implicit at 64.81%. Supports #1, #5.",
+      "description": "Sarkar, Srikanth, Pellegrin, Rudinger, Bonial, Resnik (2025). ACL 2025. 200 dyadic Ubuntu IRC conversations (7,590 turns); operationalizes Clark & Brennan common ground as conversational friction; friction correlates with task failure; Section 6 GPT-4o error analysis: explicit RequestRepair occurs in 77.22% of detected friction instances versus 64.81% of undetected instances. These are conditional proportions, not F1 or detection rates. Primary location: https://arxiv.org/html/2503.12370v2#S6; checked 2026-09-17. Supports #1, #5.",
       "url_check": "auto"
     },
     {

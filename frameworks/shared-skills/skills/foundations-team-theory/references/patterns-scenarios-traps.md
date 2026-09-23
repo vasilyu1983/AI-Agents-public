@@ -49,7 +49,7 @@ _Watch for_: information loss at each summarization step. Without an algedonic /
 
 _When_: agents need each other's intermediate results.
 
-_Information structure_: non-classical (#6 territory). _Form_: decentralized peers. _Communication_: shared write-read store.
+_Information structure_: action-dependent; check nestedness before invoking #6. _Form_: decentralized peers. _Communication_: shared write-read store.
 
 _Why it works (when it does)_: signaling is exactly the regime Witsenhausen showed has nonlinear-optimal policies. With careful design, peer signaling can dominate orchestrator-led patterns.
 
@@ -66,7 +66,7 @@ _Finding (Sinnemann & Weiss 2025, Journal of Organizational Behavior, meta-analy
 | Divergent / generative (brainstorming, ideation) | Neutral or slight positive | Any medium acceptable |
 | Convergent / evaluative (decision-making, synthesis, judgment) | Negative — virtuality hurts | Video-first required |
 
-_Applied rule_: match medium to task phase, not to team type. A remote team running a convergent design review should use synchronous video; the same team generating ideas can use async text tools.
+_Applied rule_: match medium to task phase, not to team type. Synchronous video is a candidate for convergent review and async text for idea generation; choose against actual task, accessibility and participant constraints, not a universal requirement.
 
 _Information-structure framing_: convergent tasks require agents to update their beliefs on shared state (high coupling, Primitive #8); the communication medium determines the effective bandwidth of the shared observation. Text-only is a bandwidth-restricted channel for high-coupling tasks.
 
@@ -116,7 +116,7 @@ Orchestrator-led is the default in modern agent frameworks but isn't always opti
 
 ### Trap: Linear policies in non-classical info structures
 
-Witsenhausen (#6) shows nonlinear policies can strictly dominate linear policies whenever one agent's action affects another's observation. In practice this means: any time a subagent writes something another subagent reads, you're in non-classical territory.
+Witsenhausen (#6) provides a specific non-classical counterexample to linear-policy optimality. Action-dependent observations alone do not establish non-classical structure: check whether the later decision-maker knows the relevant earlier information (partial nestedness). A planner writing for an executor is not automatically a counterexample setting.
 
 **Fix**: don't assume "more careful prompting" will get you to optimum — the optimum may require a qualitatively different policy class. Allow nonlinear behavior (e.g., conditional branching on the upstream output).
 
@@ -150,11 +150,11 @@ Human-AI teams outperform humans alone in the majority of studies. However, exce
 
 **Source**: Hemmer et al. (2024/2025). "Complementarity in Human-AI Collaboration: Concept, Sources, and Evidence." *European Journal of Information Systems* (arXiv:2404.00029). Two empirical studies confirm information asymmetry and capability asymmetry as CTP conditions.
 
-**Fix**: before adding a human review step, verify which CTP condition it satisfies. If neither, remove the human from the loop.
+**Fix**: assess whether human review adds information or capability, and separately assess required authority, accountability and escalation duties. Lack of an accuracy benefit alone does not justify removing a required human role.
 
 ### Trap: Assuming a team will use the expertise it contains
 
-Adding a strong specialist to a team does not mean the team's output reflects that specialist. Self-organizing LLM teams underperform their own best member by up to 41.1% on ML benchmarks *even when explicitly told which agent is the expert* — the failure is in the aggregation rule, not in expert identification. Teams converge on integrative compromise, averaging expert and non-expert positions rather than deferring, and the deficit widens as the team grows.
+Adding a strong specialist does not establish that aggregation uses their evidence. Pappu et al. report expertise dilution in controlled tasks. Their Table 2 ML synergy gaps instead compare teams to an At Least One Correct oracle bound; the maximum 41.1% is HLE Text-Only, Expert Not Mentioned, not loss against the best fixed individual or a revealed-expert condition. Use the appropriate comparator before diagnosing aggregation failure.
 
 **Source**: Pappu, El, Cao, di Nolfo, Sun, Cao & Zou (2026). "Multi-Agent Teams Hold Experts Back." arXiv:2602.01011, ICML 2026.
 

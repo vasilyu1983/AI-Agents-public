@@ -13,7 +13,7 @@
 
 ## WCAG 2.2 AA — Current Baseline
 
-WCAG 2.2 became a W3C Recommendation on October 5, 2023. AA is the legal baseline in EN 301 549 (EU), Section 508 (US), and most national laws (verify current).
+WCAG 2.2 is the current W3C Recommendation and the preferred design/test target for new work. Do not call it the legal baseline without mapping the jurisdiction: EN 301 549 v3.2.1 maps web content to WCAG 2.1 AA and is OJ-cited under the Web Accessibility Directive, Revised Section 508 incorporates WCAG 2.0 AA, and US ADA Title II specifies WCAG 2.1 AA for state/local government web and mobile apps. Verify the legislation-specific citation at sign-off.
 
 ### New Success Criteria in 2.2 (relative to 2.1)
 
@@ -105,12 +105,12 @@ The EAA applies to:
 
 ### Technical Standard: EN 301 549
 
-- The EAA mandates conformance with **EN 301 549 v3.2.1** (or later), which references **WCAG 2.1 AA** as its web-content baseline.
-- **Note:** EN 301 549 does not yet mandate WCAG 2.2 AA (verify current); however, 2.2 AA is widely treated as best practice and many national authorities are expected to update the referenced standard.
+- EN 301 549 v3.2.1 maps web content to **WCAG 2.1 AA** and its OJ citation supports the Web Accessibility Directive (Directive 2016/2102).
+- For EAA work, start from Directive 2019/882 and national transposition. M/587 requests standards supporting the EAA; verify an EAA-specific OJ citation or common specification before claiming presumption of conformity. Use WCAG 2.2 AA as a forward design target, not as proof of the EAA legal route.
 
 ### Practical Implications for Engineering Teams
 
-- B2C products serving EU customers must meet EN 301 549 / WCAG 2.1 AA minimum.
+- Covered B2C products and services must meet the EAA and applicable national requirements; EN 301 549/WCAG mappings are engineering evidence unless the verified EAA conformity route gives them legal effect.
 - Document the conformance status in an Accessibility Statement (required by law in most member states).
 - Testing with AT (screen readers, switch access) must be evidenced, not just automated reports.
 - Banking and e-commerce checkout flows are highest-risk areas; mobile apps serving these flows are also in scope.

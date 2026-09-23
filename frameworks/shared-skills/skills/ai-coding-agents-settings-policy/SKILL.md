@@ -1,9 +1,9 @@
 ---
 name: ai-coding-agents-settings-policy
-description: "Designs settings and policy layers for coding-agent runtimes. Use when modeling source precedence, managed policy, env controls, or runtime settings validation."
+description: "Designs coding-agent settings. Use when diagnosing precedence, managed policy, runtime controls, skill catalog budgets, persistent notes, or searchable history."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-09-11
 ---
 
 # AI Coding Agents Settings Policy
@@ -35,6 +35,8 @@ audit record
   effective settings without secrets
 ```
 
+Validation scope (2026-09-11): Codex skill catalog budget guidance and bundle structure. Other platform claims retain their own dated checks below.
+
 ## Quick Reference
 
 | Question | Read | Outcome |
@@ -44,6 +46,8 @@ audit record
 | What are the exact override examples for each settings layer? | [`references/settings-precedence-table.md`](references/settings-precedence-table.md) | Full precedence table: managed > CLI flags > local > project > user, with concrete examples and cache invalidation |
 | Which sources can enable plugin surfaces? | [`references/plugin-only-restriction-recipes.md`](references/plugin-only-restriction-recipes.md) | Trust-class recipes for locking, scoping, and logging plugin-surface activations |
 | How is ToolSearch gated by settings policy? | [`references/deferred-tool-policy-layer.md`](references/deferred-tool-policy-layer.md) | Settings keys, policy decision flow, and interaction with tool-pool assembly |
+| How do I handle Codex “Exceeded skills context budget”? | [`references/openai-codex-managed-config-and-requirements.md#skill-catalog-context-budget`](references/openai-codex-managed-config-and-requirements.md#skill-catalog-context-budget) | Supported budget override, safe config merge, rollback, and fresh-session verification |
+| How do I enable Codex notes and searchable earlier context, including tool calls? | [`references/openai-codex-managed-config-and-requirements.md#notes-and-searchable-context-history`](references/openai-codex-managed-config-and-requirements.md#notes-and-searchable-context-history) | Verified experimental setting, memory distinction, and restart/validation steps |
 | How does OpenAI Codex separate config layers from managed requirements? | [`references/openai-codex-managed-config-and-requirements.md`](references/openai-codex-managed-config-and-requirements.md) | Layer stack, requirements constraints, managed-hooks-only mode, debug surfaces |
 
 ## When To Use
@@ -53,6 +57,7 @@ audit record
 - Review how managed settings should override user configuration
 - Define which environment variables or customization surfaces are safe to accept
 - Apply runtime settings changes without restarting the whole process
+- Diagnose Codex skill catalog omissions or stripped descriptions and verify the effective budget
 
 ## Use Other Skills
 
@@ -75,6 +80,7 @@ audit record
 7. **Separate cache tiers.** Keep merged settings, per-source reads, and parsed-file caches distinct so invalidation is targeted and explainable.
 8. **Apply changes through one runtime path.** Re-read settings, snapshot hooks or dependent callbacks, reload dependent subsystems, and update app state through a single function.
 9. **Test hostile cases.** Cover malformed JSON, invalid permission rules, drop-in conflicts, managed overrides, and live settings-change notifications.
+10. **Prove the effective value.** For each load-bearing setting, record the winning source, parsed value, ignored or invalid contenders, and active runtime value. A key being accepted by a parser or present in a file does not prove that the selected model and runtime support or applied the behavior.
 
 ## Host Rules
 
@@ -292,6 +298,6 @@ Goose loads `.goosehints` as a per-project narrative file (similar to `AGENTS.md
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

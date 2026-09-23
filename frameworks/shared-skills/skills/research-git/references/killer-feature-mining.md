@@ -68,7 +68,7 @@ gh search repos "self-hosted $commercial" --sort stars --limit 25 --archived=fal
 gh search repos --topic "$commercial-alternative" --limit 20
 gh search repos --topic "alternative-to-$commercial" --limit 20
 
-# README comparison matrices (code search — beware 9 req/min limit, see code-search-syntax.md)
+# README comparison matrices (code search — beware 10 req/min published limit, see code-search-syntax.md)
 gh search code "vs $commercial" path:README.md --limit 30
 gh search code "alternative to $commercial" path:README.md --limit 30
 ```

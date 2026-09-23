@@ -103,6 +103,20 @@ Your Metabase instance serves OpenAPI docs at `/api/docs` (for example `https://
 7. Refresh metadata if schema changed.
 8. Validate by running/exporting results and re-opening exported JSON.
 
+### Mutation and Promotion Gate
+
+Treat a Metabase content change as a small migration, especially when dashboard filters or permissions are involved:
+
+1. Export current card/dashboard JSON for diagnosis and record stable entity IDs or environment-local lookup keys. Do not call that read response a restore artifact.
+2. Resolve every database, collection, table, field, and group in the target environment; do not translate numeric IDs by position.
+3. Produce the intended payload and a mutation inventory (`create`, `update`, `archive`, permission change). For each operation, record its supported inverse, exact writable fields, target identifiers, and dependencies. Inventory permissions, archive state, cards, dashboards, dashcard layout, and filter mappings separately.
+4. Apply dependency order: collections and permissions -> cards -> dashboards -> dashcard layout/filter mappings.
+5. Re-export the result and compare semantic fields, layout, permissions, and query output to the intended payload.
+6. Before production mutation, rehearse the selected restore path in staging or a disposable collection. A JSON read response is evidence, not automatically a replayable write payload.
+7. If validation fails, stop later mutations and execute only the proven path: endpoint-specific inverse writes; a Serialization export/import covering those entities; or a Remote Sync revision for self-contained synced content. Verify product/license support and coverage first: Serialization and Remote Sync omit users, groups, and permissions, while Remote Sync also omits table metadata, alerts, and subscriptions. Restore excluded state through its owning API or documented admin workflow, then re-export and rerun queries to prove recovery.
+
+An upsert is idempotent only when its lookup key is unique and stable in that environment. If two candidates match, stop and surface the ambiguity rather than updating the first result.
+
 ## Key Concepts
 
 - UI "Question" == API `card`
@@ -247,12 +261,10 @@ Trigger examples:
 
 ## Fact-Checking
 
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
+- Verify volatile external facts (versions, prices, rules, dates) against primary sources before answering, cite them with dates, and if web access is unavailable say so and mark the guidance unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

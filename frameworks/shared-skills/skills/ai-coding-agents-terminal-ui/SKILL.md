@@ -70,6 +70,7 @@ runtime action
 5. **Make background work navigable.** Users should be able to inspect, foreground, or kill tasks without losing the main session.
 6. **Model interactive-only features explicitly.** Some callbacks and overlays exist only in REPL mode and should not leak into headless paths.
 7. **Test long sessions.** Verify search, rewind, virtualization, notification timing, and prompt-input persistence after hundreds of turns.
+8. **Cover every task transition in the UI.** For queued, running, needs-input, cancelling, failed, completed, and disconnected states, define the visible label, available action, keyboard path, screen-reader text, and the runtime event that clears it. A badge count without a recoverable state path is incomplete.
 
 ## Host Rules
 
@@ -220,6 +221,6 @@ Verified 2026-07-11 against `code.claude.com/docs/en/statusline`, `.../keybindin
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

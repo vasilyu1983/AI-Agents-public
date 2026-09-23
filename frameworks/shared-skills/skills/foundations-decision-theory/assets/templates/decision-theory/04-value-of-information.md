@@ -18,7 +18,7 @@ EVPI is the upper bound on what any information source is worth. It equals zero 
 EVSI = E_x[ max_a E_{θ|x}[ u(a, θ) ] ] − max_a E_θ[ u(a, θ) ]
 ```
 
-EVSI ≤ EVPI always. The decision to run an experiment is worthwhile only if EVSI > experiment cost.
+For cost-free information with the same action set and horizon, EVSI ≤ EVPI. Both are utility differences. Compare EVSI with an additive cost only on the same utility scale, such as risk-neutral monetary net benefit. With nonlinear utility, incorporate money, delay and other study consequences into each terminal outcome, optimize posterior actions, and compare total expected utility of study versus immediate action.
 
 ## When to Use
 
@@ -35,7 +35,7 @@ EVSI ≤ EVPI always. The decision to run an experiment is worthwhile only if EV
 | Payoff function u(a, θ) | Utility of each action under each state |
 | Action set {aᵢ} | Available choices |
 | Study design (for EVSI) | Sample size, measurement noise, likelihood p(x|θ) |
-| Study cost | Monetary or time cost of obtaining the information |
+| Study consequences | Money, time/delay and other consequences; utility-compatible additive cost only with a justified conversion |
 
 ## Outputs
 
@@ -43,14 +43,14 @@ EVSI ≤ EVPI always. The decision to run an experiment is worthwhile only if EV
 |--------|-------------|
 | EVPI | Maximum value any information can provide |
 | EVSI | Expected value of the specific proposed study |
-| Decision to study | Run study iff EVSI > study cost |
-| Optimal sample size | n* where marginal EVSI gain equals marginal cost |
+| Decision to study | Compare net expected utility of study versus no study; EVSI > cost is valid only for utility-compatible additive cost |
+| Optimal sample size | Maximize net expected utility over feasible sizes, including n=0 and endpoints; marginal gain=cost applies only to a differentiable interior optimum |
 
 ## Failure Modes
 
 - **EVPI not computed before study approval**: Any positive-cost study may be worthless if EVPI = 0.
 - **EVSI conflated with EVPI**: Assuming the study provides perfect information overstates its value. Real studies are noisy.
-- **Decision horizon ignored**: EVSI only counts if the information arrives before the decision must be made. Delayed information has zero value.
+- **Decision horizon ignored**: Information arriving after the last relevant decision has zero value for that decision; it can still inform later decisions. Include delay and rework consequences.
 - **Prior too diffuse**: Very flat priors can inflate EVPI by treating all states as equally likely; a sharper prior based on historical data may reduce EVPI substantially.
 - **Multiple decision makers**: EVPI is agent-specific. If stakeholders have different utilities, compute separate EVPIs.
 
@@ -60,7 +60,7 @@ A team is deciding whether to launch Feature F now or run a 4-week user test fir
 
 States: θ₁ = high adoption (p = 0.35), θ₂ = low adoption (p = 0.65).
 
-Payoffs (EU, £K):
+Illustrative risk-neutral monetary payoffs (£K); utility is linear in net money:
 
 | Action | θ₁ (p=0.35) | θ₂ (p=0.65) | E[u] |
 |--------|-------------|-------------|------|
@@ -90,13 +90,13 @@ When applying this primitive with LLM agents as decision support tools, **DeLLMa
 
 ## EVPI for Agent Clarification, and Its Time Decay (2025–2026)
 
-The clarify-or-commit choice — should an agent ask the user a question or proceed on its best reading? — is EVPI applied to a question rather than to a study. Two results make it directly operational:
+The clarify-or-commit choice — should an agent ask the user a question or proceed on its best reading? — uses EVSI for the question’s imperfect answer signal; EVPI applies only for perfect revelation of the relevant state or as an upper bound. Two results make it directly operational:
 
-**Scoring.** Rank candidate questions by cost-penalized EVPI, not by the agent's felt uncertainty. A question whose every possible answer leads to the same next action has zero value no matter how uncertain the agent is. Suri et al. (arXiv:2511.08798) implement this as SAGE-Agent and cut question count 1.5–2.7x against uncertainty-threshold baselines while raising task success. Their framework separates *specification* uncertainty (about user intent — askable) from *model* uncertainty (about the agent's own correctness — not askable; needs verification or retrieval instead).
+**Scoring.** Rank candidate questions by expected decision improvement under their answer likelihoods (EVSI; EVPI is an upper bound), with utility-compatible asking costs. In the cited EVPI-based approximation, rank questions by cost-penalized EVPI, not by the agent's felt uncertainty. A question whose every possible answer leads to the same next action has zero value no matter how uncertain the agent is. Suri et al. (arXiv:2511.08798) implement this as SAGE-Agent and cut question count 1.5–2.7 times against uncertainty-threshold baselines on ClarifyBench while raising ambiguous-task coverage (study-specific results, §7 and Table 2). Their framework separates *specification* uncertainty (about user intent — askable) from *model* uncertainty (about the agent's own correctness — not askable; needs verification or retrieval instead).
 
-**Time decay — the departure from textbook VoI.** Classical EVPI is computed once, before acting. In a long-horizon trajectory the value of the same question falls as execution proceeds, because rework cost accumulates against a fixed information gain. Gulati et al. (arXiv:2605.07937; ~6,000 runs, 4 information dimensions, 3 benchmarks, 4 frontier models) measure this: goal-level clarification decays to baseline value after roughly the first 10% of execution, input-level clarification holds to about 50%, and clarification deferred past the midpoint performs *worse* than never asking. Frontier models do not track this optimum on their own, over-asking in 52% of sessions or suppressing questions entirely.
+**Timing-sensitive VoI.** In a long-horizon trajectory, rework cost can reduce the value of a question after execution begins. Gulati et al. (arXiv:2605.07937) tested 84 forced-injection variants across four information dimensions, three benchmarks, and four models in more than 6,000 runs. Effects varied by benchmark and model; 10% and 50% were tested injection positions, not universal deadlines. Their separate natural-asking study contained 300 sessions. The reported 52% over-asking result applies specifically to GPT-5.2 on 100 TAC sessions.
 
-**Practical rule:** front-load goal questions before the first action, permit input questions through mid-trajectory, and commit after the midpoint.
+**Practical rule:** front-load questions whose answers can prevent expensive rework, then recompute question value from the remaining action choices and rework cost. Do not suppress a late question when its answer changes safety, authorization, or an irreversible action.
 
 **Kill criteria:** Drop if the interaction is single-turn (no trajectory over which value can decay), or if asking is free and unlimited — the cost penalty is what makes the EVPI ranking bind.
 

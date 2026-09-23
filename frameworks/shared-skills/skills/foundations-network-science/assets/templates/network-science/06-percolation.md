@@ -18,9 +18,9 @@ Percolation theory studies connectivity under node or edge removal. The central 
 **Critical results**:
 
 - Erdős-Rényi random graph: qc = 1 − 1/⟨k⟩ (giant component disappears when average degree drops below 1)
-- Scale-free networks: qc → 1 for random removal (extremely robust); targeted attack causes collapse at qc ≪ 1 (extremely fragile)
+- Uncorrelated infinite networks with diverging second degree moment can have qc→1 for random removal; finite size, degree exponent, correlation and removal strategy matter. A scale-free label alone does not establish this limit.
 
-**Epidemic threshold connection**: R₀ = β/γ × ⟨k²⟩/⟨k⟩. A network is above the percolation threshold for epidemic spread when R₀ > 1.
+**Epidemic threshold connection**: For iid transmissibility T on a locally tree-like uncorrelated configuration model, SIR branching factor B=T(⟨k²⟩−⟨k⟩)/⟨k⟩; B>1 is the infinite-size outbreak criterion. Do not import an SIS rate threshold.
 
 ## When to Use
 
@@ -44,14 +44,14 @@ Percolation theory studies connectivity under node or edge removal. The central 
 ## Failure Modes
 
 1. **Directed graphs treated as undirected**: directed graphs have separate in-component, out-component, and strongly connected component. Percolation on directed graphs is more complex and produces different thresholds for each component.
-2. **Single removal sequence**: stochastic percolation should average over multiple realisations (≥ 100) to get a smooth S(q) curve.
+2. **Single removal sequence**: stochastic percolation should average over independent realisations with enough runs for the declared precision; a smooth curve alone is not validation.
 3. **Ignoring the phase transition**: linear interpolation of S(q) misses the abrupt collapse near qc. The transition is sharp; small additional removals near qc cause disproportionate damage.
 4. **Applying random-percolation resilience results to targeted-attack scenarios**: scale-free networks are robust to random failure but fragile to targeted hub attack — these are opposite results.
-5. **Single-layer percolation applied to systems with cross-layer dependencies**: microservice stacks where the application tier depends on a database tier which depends on a network/infra tier are interdependent networks. In single-layer percolation, the collapse transition is second-order (gradual) — the giant component shrinks smoothly as nodes are removed. In interdependent (multilayer) networks with dependency links, the transition becomes **first-order (abrupt and catastrophic)**: a small fraction of failures can trigger sudden, complete collapse with no warning from the gradual-degradation signal. This is qualitatively different from single-layer analysis. **Fix**: if the system being modelled has genuine cross-layer dependency links (not just connectivity edges), model it as an interdependent network and expect first-order collapse behavior. Confirm cross-layer coupling before switching from single-layer percolation (Artime et al. 2024, Nat. Rev. Phys.).
+5. **Single-layer percolation applied to systems with cross-layer dependencies**: microservice stacks where the application tier depends on a database tier which depends on a network/infra tier are interdependent networks. In single-layer percolation, the collapse transition is second-order (gradual) — the giant component shrinks smoothly as nodes are removed. In interdependent (multilayer) networks with dependency links, the transition can become **first-order (abrupt)** under particular coupling models: a small fraction of failures can trigger sudden, complete collapse with no warning from the gradual-degradation signal. This is qualitatively different from single-layer analysis. **Fix**: if the system being modelled has genuine cross-layer dependency links (not just connectivity edges), model it as an interdependent network and test the transition under the specified coupling; partial/intermediate coupling can change its order. Confirm cross-layer coupling before switching from single-layer percolation (Artime et al. 2024, Nat. Rev. Phys.).
 
 ## Worked Example
 
-**Microservice dependency graph**: 80 services, 180 dependencies. Random percolation: GCC remains intact until q = 0.55 (can lose 55% of services randomly before disconnection). Targeted percolation (betweenness order): GCC collapses at q = 0.08 — removing 6 high-betweenness services disconnects the whole graph. Actionable result: replicate or circuit-break the top 6 betweenness nodes; random failures are already handled by 45% slack.
+**Microservice dependency graph**: 80 services, 180 dependencies. Random percolation: GCC remains intact until q = 0.55 (can lose 55% of services randomly before disconnection). Targeted percolation (betweenness order): GCC collapses at q = 0.08 — removing 6 high-betweenness services disconnects the whole graph. Actionable result: replicate or circuit-break the top 6 betweenness nodes; GCC retention does not establish service resilience or 45% capacity slack; validate directed operational dependencies.
 
 ## Sources
 
@@ -64,5 +64,5 @@ Percolation theory studies connectivity under node or edge removal. The central 
 ## Related
 
 - [`05-scale-free-networks.md`](05-scale-free-networks.md) — scale-free topology determines which percolation regime applies
-- [`07-contagion-sir.md`](07-contagion-sir.md) — R₀ > 1 is the percolation threshold for epidemic spread
+- [`07-contagion-sir.md`](07-contagion-sir.md) — See the model-specific SIR transmissibility threshold
 - [`01-centrality-measures.md`](01-centrality-measures.md) — betweenness identifies the most effective targeted-attack targets

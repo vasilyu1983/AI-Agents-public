@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "skill": "foundations-formal-methods",
+    "last_updated": "2026-09-17",
+    "knowledge_cutoff": "2026-09-17",
+    "description": "Primary sources supporting specification, model checking, refinement, and SMT interpretation; no performance claims.",
+    "title": "Formal Methods Foundations \u2014 Primary Sources"
+  },
+  "sources": [
+    {
+      "id": "LamportSpecifyingSystems",
+      "name": "Specifying Systems",
+      "url": "https://lamport.azurewebsites.net/tla/book-21-07-04.pdf",
+      "description": "Author-hosted book. Chapter 2 defines behaviors/specification; chapters 5 and 8 address invariance, implementation, liveness/fairness and refinement; chapter 14 addresses TLC model checking. Supports conceptual guidance, not a claim that this small helper implements TLA+.",
+      "publication_year": 2002,
+      "last_verified": "2026-09-17",
+      "url_check": "auto"
+    },
+    {
+      "id": "SMTLIBLanguage",
+      "name": "SMT-LIB language documentation",
+      "url": "https://smt-lib.org/language.shtml",
+      "description": "Official language reference and links to its specification. Supports distinguishing an encoded satisfiability query from a general implementation claim; no runtime version pin is prescribed.",
+      "last_verified": "2026-09-17",
+      "url_check": "auto"
+    }
+  ]
+}

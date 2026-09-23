@@ -1,4 +1,4 @@
 interface:
   display_name: "Document DOCX Skill - Quick Reference"
-  short_description: "Create/edit .docx files with styles, templates, comments, and extraction"
+  short_description: "Creates and edits .docx files with styles, templates, and comments."
   default_prompt: "Use $document-docx for Create/edit .docx files with styles, templates, comments, and extraction workflows. Use when asked to generate Word reports, contracts, proposals, or convert Word content."

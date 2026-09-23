@@ -92,6 +92,10 @@ Workflow automation request
 - Do not keep mission-critical product logic trapped inside an opaque visual flow if the team cannot review or test it properly.
 - Check licensing before treating a platform as free to operate: n8n's Community Edition ships under the fair-code Sustainable Use License — free for internal business use, but restricted if the commercial value offered to a third party derives substantially from n8n itself (e.g., reselling hosted multi-tenant access). Verify current terms at n8n's license docs before recommending a resale or managed-hosting model.
 
+**Compensation contract.**
+
+For each multi-step workflow, classify every completed side effect as reversible, compensatable, or irreversible. Define compensation order, retry behavior, and the terminal state when compensation also fails. Never claim transaction semantics across independent SaaS APIs; expose partial completion to operators with the run ID, completed steps, and safe next action.
+
 ## Known Traps
 
 - Building the first working flow directly against production systems without replay-safe staging data and side-effect guards.
@@ -212,7 +216,6 @@ Recipes keyed to common workflow automation design moments. Each lists the short
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

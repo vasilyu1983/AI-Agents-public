@@ -2,8 +2,8 @@
 name: foundations-control-theory
 description: Control-theory primitives for PID, MPC, Kalman, stability, anti-windup, dead-time, breakers, and limits. Use when tuning autoscaling, retries, or agent loops.
 compatibility: Portable core only.
-version: "1.2"
-last_validated: 2026-08-14
+version: "1.3"
+last_validated: 2026-09-17
 ---
 
 # Control Theory Foundations
@@ -31,7 +31,7 @@ last_validated: 2026-08-14
 
 | Primitive | Problem It Solves | Key Parameters |
 |-----------|------------------|----------------|
-| [PID Control](#1-pid-control) | Drive output to setpoint despite steady-state error and disturbances | Kp, Ki, Kd; tuned via Ziegler-Nichols |
+| [PID Control](#1-pid-control) | Drive output to setpoint despite steady-state error and disturbances | Kp, Ki, Kd; tune from plant response and validate margins |
 | [Feedback vs. Feedforward](#2-feedback-vs-feedforward) | Reactive-only loops ignore predictable disturbances | Plant model accuracy; disturbance measurability |
 | [Observability & Controllability](#3-observability--controllability) | States you cannot see or reach make the loop fail silently | Controllability matrix rank; observability matrix rank |
 | [Lyapunov Stability](#4-lyapunov-stability) | No proof that a loop converges; may oscillate or diverge | Lyapunov function V(x); dV/dt < 0 condition |
@@ -60,7 +60,7 @@ last_validated: 2026-08-14
 - Static threshold rule that doesn't need to adapt — a constant or hysteresis band is simpler
 - Capacity sizing question, not feedback question — use foundations-queueing-theory
 - Plant model is unknown and you can't measure error reliably — fix observability first
-- Dead-time > 30% of desired settling time — PID alone is insufficient; consider Smith Predictor or MPC
+- Large dead-time relative to desired settling time — assess achievable bandwidth and margins; 30% is a diagnostic heuristic, not proof PID is insufficient
 - System is unstable open-loop and you don't know why — diagnose root cause before adding feedback
 
 ---
@@ -109,7 +109,7 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 
 | Anti-Pattern | Control Theory Diagnosis | Fix |
 |-------------|------------------------|-----|
-| P-only autoscaler oscillates around target | Underdamped proportional-only control; no derivative damping | Add derivative term (Kd); tune with Ziegler-Nichols (#1) |
+| P-only autoscaler oscillates around target | Gain, delay, sampling, or saturation may be producing an underdamped loop | Identify the plant and total delay first; reduce gain or add phase lead/filtered derivative only if the response supports it (#1, #7, #8) |
 | Integrator windup at actuator limit | Integral accumulates during saturation; releases as large overshoot | Anti-windup on every PID with bounded actuator (#8) — this is always required |
 | Reactive controller ignores predictable patterns (load spikes, business hours) | Feedback-only; no model of known disturbances | Add feedforward schedule component (#2) |
 | Observability gap: slow-changing state invisible to aggregate metric | Unobservable state mode in measurement design | Observability rank test (#3); add direct sensor or redesign C matrix |
@@ -128,11 +128,11 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 
 | Misuse | Why It Is Wrong | Required Correction |
 |---|---|---|
-| Tuning PID by folklore constants | Ziegler-Nichols is an aggressive starting point, not a guarantee | Test margins and re-tune on the actual plant |
+| Tuning PID by folklore constants | Ziegler-Nichols is an aggressive historical starting point, not a diagnosis or guarantee | Identify response, sample rate, delay, noise, and saturation; test gain/phase margins and re-tune on the actual plant |
 | Ignoring actuator saturation | Integral windup creates overshoot and instability | Add anti-windup to bounded actuators |
 | Treating delay as lower gain | Dead time changes phase and can destabilize loops | Estimate delay and use compensation or lower bandwidth |
 | Claiming Kalman optimality outside assumptions | Kalman is optimal for linear Gaussian systems | Use EKF/UKF/particle filters with caveats |
-| Applying MPC without model validation | Bad model makes constrained optimization confidently wrong | Validate model error and add robust margins. When plant model is unknown: use DeePC (#12) for a model-free alternative, Koopman MPC if a stability certificate is required (Schimperna et al. 2025), or physics-informed sysid if partial domain knowledge exists (Sivaranjani et al. 2025, arXiv:2512.06315). |
+| Applying MPC without model validation | Bad model makes constrained optimization confidently wrong | Validate model error and add robust margins. When plant model is unknown: use DeePC (#12) for a model-free alternative, a formulation with verified terminal, feasibility and model-error conditions if a stability certificate is required (Schimperna et al. 2025), or physics-informed sysid if partial domain knowledge exists (Sivaranjani et al. 2025, arXiv:2512.06315). |
 | Applying deterministic CBF with noisy measurements | Classical CBFs guarantee forward-invariance only for noise-free dynamics; sensor noise violates the invariance condition | Use stochastic/probabilistic CBF (Echigo et al. 2026, arXiv:2604.08831) or add an explicit safety margin to the CBF constraint. |
 | Using circuit breakers without backpressure | Fail-fast alone can shift overload elsewhere | Pair breakers with queues, rate limits, and admission control |
 | Calling an agent loop stable because it has max steps | Max steps bound cost, not convergence | Define a potential function or monotone progress metric |
@@ -167,7 +167,7 @@ Dead time is not just physical (network RTT, pod boot, replication lag). The mea
 It is rarely bad arithmetic. Nearly every production PID-like autoscaler, pacer, or admission controller that misbehaves is missing one or more of three universal preconditions, and most are missing all three at once:
 
 1. **Delay** (dead time) is not modeled — see above.
-2. **Noise** is fed to the controller raw — an unfiltered P99 or a jittery per-second rate drives Kd (derivative) into "derivative kick," amplifying sensor noise into actuator chatter.
+2. **Noise** is fed to the controller raw — an unfiltered P99 or a jittery per-second rate drives derivative noise amplification and actuator chatter. Derivative kick instead refers to a setpoint step differentiated through derivative-on-error.
 3. **Actuator saturation** has no anti-windup — the moment the loop hits a hard limit (max replicas, bid cap, rate-limit ceiling), the integral term keeps accumulating against a wall, then overshoots on release.
 
 The fix for each is well-known (Kalman/low-pass filtering, Smith Predictor, anti-windup) and documented in this skill — the expert judgment is diagnosing *which* of the three is actually dominant before reaching for a fix, since applying the wrong one (e.g., adding derivative gain to a problem that is really unmodeled dead time) makes the loop worse.
@@ -179,7 +179,7 @@ Closed-loop control is not free — it costs a measurement, a delay, and a risk 
 - The dominant disturbance is fully predictable (diurnal traffic, a scheduled batch job) **and** dead time is a large fraction of the desired response time — feedback correction physically cannot arrive before the disturbance has already passed. See the Predictive Autoscaler recipe below; empirically this beat reactive HPA/KEDA by roughly 6–20x median latency in one measured case (Tymoshenko, Maraschi & Collina 2026, arXiv:2604.19705 — Node.js/Kubernetes-specific, not verified to generalize).
 - The measurement itself is slow, expensive, or destabilizing — e.g., a business metric only available T+1 day, or a metric whose own collection changes the system being measured. Closed-loop control against a badly-delayed proxy signal can be strictly worse than a static policy tuned offline from historical data.
 - The actuator is high-consequence and effectively irreversible on the timescale of one control cycle (a schema migration, a pricing change, a one-way data deletion). "Act, observe, correct" is not a viable strategy when the correction cannot undo the action — get it right open-loop, using simulation and backtesting, not live feedback.
-- As a rule of thumb: if `dead_time / desired_settling_time > ~0.5`, or if the disturbance is highly predictable and the loop's only job is to react to something already known in advance, feedback control is fighting a battle it starts already behind. Feedforward-first, feedback-as-trim is the correct architecture, not "add more gain."
+- As a rule of thumb: a ratio `dead_time / desired_settling_time > ~0.5` is an illustrative warning to investigate achievable bandwidth, not a universal cutoff; or if the disturbance is highly predictable and the loop's only job is to react to something already known in advance, feedback control is fighting a battle it starts already behind. Feedforward-first, feedback-as-trim is the correct architecture, not "add more gain."
 
 ---
 
@@ -192,7 +192,7 @@ Closed-loop control is not free — it costs a measurement, a delay, and a risk 
 - [ ] **Convergence proof required**: Must prove loop terminates or converges by design? → Lyapunov function (#4)
 - [ ] **Constraints exist**: Actuator limits, safety bounds, or resource caps that must never be violated? → MPC (#5) or anti-windup (#8) in PID
 - [ ] **Noisy measurements**: Sensor output too noisy for direct use in controller? → Kalman filter (#6)
-- [ ] **Transport lag**: Action-to-effect delay > 30% of dominant time constant? → Dead-time compensation (#7)
+- [ ] **Transport lag**: Material action-to-effect delay relative to plant dynamics (30% is a diagnostic heuristic)? → Dead-time compensation (#7)
 - [ ] **Bounded actuator**: Control output has hard min/max? → Anti-windup (#8) — include by default
 - [ ] **Regime variation**: System dynamics differ significantly across load or operating conditions? → Gain scheduling (#9)
 - [ ] **External service dependency**: Calling a downstream service that can fail? → Circuit breaker (#10)
@@ -213,13 +213,13 @@ Use these stacks as starting designs. Validate the plant model, sensor quality, 
 **Failure**: HPA oscillates — adds pods, overshoots, removes pods, undershoots.
 
 - PID (#1): CPU utilization error → replica delta
-- Anti-windup (#8): freeze integral when at min/max replica count
+- Anti-windup (#8): block integral accumulation only when it drives further into saturation; permit unwinding
 - Dead-time compensation (#7): Smith Predictor for pod startup lag
 - Gain scheduling (#9): separate gains for low/mid/high load regimes
 
-**Data-driven variant (no plant model):** DeePC (#12) or Koopman-MPC (kEDMD) can replace model-based MPC (#5) when system dynamics are unknown but input-output data is available. Both require persistently exciting excitation during offline data collection (Willems' Fundamental Lemma). DeePC preferred for smooth inputs; Koopman preferred for tight tracking or when a stability certificate is required (see [12-deepc-behavioral.md](assets/templates/control-theory/12-deepc-behavioral.md)).
+**Data-driven variant (no plant model):** DeePC (#12) or Koopman-MPC (kEDMD) can replace model-based MPC (#5) when system dynamics are unknown but input-output data is available. The exact DeePC LTI theorem requires input excitation of order T_ini+N+n and T_ini at least system lag; Koopman learning has its own representation/data/error assumptions. Compare tracking and smoothness locally; a stability certificate requires verified terminal/robustness conditions, not a method preference (see [12-deepc-behavioral.md](assets/templates/control-theory/12-deepc-behavioral.md)).
 
-**Worked example — p95 latency autoscaler:** Setpoint = 200 ms. Measured p95 = 320 ms → error = +120 ms. Gains: Kp = 0.05, Ki = 0.01, Kd = 0.0. At t = 0 the integral ∫error ≈ 0, so ΔReplicas = 0.05 × 120 + 0.01 × 0 = +6 replicas. After 30 s with sustained error (∫error ≈ 600 ms·s): ΔReplicas = 0.05 × 80 + 0.01 × 600 = 4 + 6 = +10 replicas. Anti-windup: clamp the integral and freeze accumulation when |ΔReplicas| ≥ 10/step to prevent the integrator from winding up during the pod-startup dead-time window (~45 s). Load doubles (e.g., 2× traffic spike at t = 120 s): error jumps to +160 ms; proportional term fires immediately (+8 replicas) while the integral catches up over the next 2–3 cycles — this is the correct separation of fast proportional response from slow steady-state correction. Bad-tuning symptom: if you observe oscillation with period ≈ 60 s at Ki = 0.01, halve Ki (oscillation period ≈ 2π / √Ki for a simple integrating plant).
+**Worked example — p95 latency autoscaler:** Use a declared discrete positional controller u[k]=u_base+Kp·e[k]+Ki·I[k] with e=latency−target and I[k]=I[k−1]+e[k]·dt, followed by replica/rate bounds. At target200ms and latency320ms, Kp=.05replicas/ms and initial I=0 give a proportional contribution of6replicas; adding this contribution repeatedly to the previous command would define a different controller. For a hypothetical next30s with constant error80ms, unconstrained integral increment is2400ms·s, not600; Ki=.01 would add24replicas before saturation handling. Block integration only when it pushes farther into the active bound, permit unwinding, and account for startup delay. These arithmetic inputs are illustrative and provide no oscillation period or tuning recommendation. Use [`references/discrete-controller-contract.md`](references/discrete-controller-contract.md) and the replay helper before designing plant-specific tuning.
 
 ### Stable Agent Loop with Budget Control
 
@@ -251,7 +251,7 @@ Use these stacks as starting designs. Validate the plant model, sensor quality, 
 - Kalman filter (#6): smooth noisy request-rate time series; produce a filtered load estimate
 - Feedforward (#2): forecast load trajectory; scale proactively before demand arrives (eliminates startup-lag penalty)
 - Dead-time compensation (#7): encode pod startup time L in the forecast horizon (scale N steps ahead where N ≥ L / sample_period)
-- Anti-windup (#8): freeze integral when at min/max replica bounds
+- Anti-windup (#8): block integral accumulation only toward deeper saturation; permit unwinding
 
 **Contrast with PID-dominant recipe**: PID-dominant is feedback-corrective (best for unpredictable disturbances); feedforward-dominant is anticipatory (best when load pattern is predictable and startup lag dominates the error budget).
 
@@ -277,7 +277,7 @@ The advanced-regulatory-control (ARC) decomposition replaces negotiation with st
 **Failure**: Ad spend oscillates — underspends overnight, overspends at peak, jams at bid cap.
 
 - PID (#1): spend rate error → bid multiplier
-- Anti-windup (#8): bid multiplier clamped at platform min/max; freeze integral at limits
+- Anti-windup (#8): bid multiplier clamped at platform min/max; block integration toward deeper saturation while permitting unwinding
 - Feedforward (#2): time-of-day schedule pre-adjusts bid before measurement confirms error
 - Kalman filter (#6): smooth noisy CPM/spend signals before feeding to PID
 
@@ -311,6 +311,8 @@ Feedback system failure
 
 ## Navigation
 
+- [Discrete implementation contract and reproducible simulation](references/discrete-controller-contract.md)
+
 - Formal theory map: [`references/formal-theory-map.md`](references/formal-theory-map.md)
 - Patterns, scenarios, and traps: [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md)
 - Primitives overview and domain anti-patterns: [`references/primitives-overview.md`](references/primitives-overview.md)
@@ -338,7 +340,7 @@ Sources and verification notes for the 12 primitives:
 - **CBF as a token-level decoding filter**: Miyaoka & Inoue, *Control Barrier Function for Aligning Large Language Models* (arXiv:2511.03121), published in IEEE Transactions on Control Systems Technology (2026) — one of the few peer-reviewed control-theory-on-LLM results rather than a preprint. The CBF acts as an add-on filter on the predicted token during decoding, so alignment is enforced without fine-tuning the base model. Note the boundary: this controls the *decoding* loop of one model, not an agent's tool-use loop; it needs an evaluation model to define the barrier, and its guarantee is only as good as that evaluator.
 - **ARC-based multi-agent decomposition**: Nogueira & Skogestad (2026, arXiv:2606.30877) map each loop of an advanced-regulatory-control chain to one scoped LLM operator agent, resolving conflicts via MIN/MAX selectors and split-range logic in an orchestrator rather than via model negotiation. Demonstrated on a dairy-barn ventilation scenario over 4 days with Qwen 2.5 7B Instruct — a case study establishing auditability, not a benchmark result. arXiv preprint (eess.SY); treat the architecture as the transferable claim and the evaluation as illustrative.
 - **Context assembly as a controlled variable**: Paul (2026, arXiv:2607.25408) frames harness policy for a frozen LLM — prompt template, few-shot count, retrieved-context volume, number of verification passes — as the controlled variable, with an outer context policy learned online. The stability claim is non-decreasing expected reward under bounded policy change, which is a weaker condition than Lyapunov asymptotic stability; the paper reports no quantitative results and defers empirics to a companion paper. Useful as framing, not as evidence.
-- **ISS applied to LLM agent loops**: Prinos et al. (arXiv:2605.03034, 2026) apply Input-to-State Stability formally to an LLM-based agentic system, with a Lyapunov function machine-checked in Lean 4. Key finding: architectural constraints (finite action catalogs at tool interfaces) guarantee stability independently of model capability or temperature. A tool-mediated Claude Sonnet 4 controller reduced attacker payoff by 59% vs. a deterministic greedy baseline; a Claude Haiku 4.5 controller converged to a suboptimal value but stayed catalog-bounded, showing stability held independent of model capability. This confirms the guidance in #4 — stability must be baked into loop architecture, not delegated to the model. Paper-only; domain is autonomous cyber defense, generalizability to other agent loops unverified. **Correction (2026-07-11)**: earlier drafts of this skill misattributed this paper to "Iyer et al." — the actual first author is Prinos; the arXiv ID and findings are unchanged.
+- **ISS applied to LLM agent loops**: Prinos et al. (arXiv:2605.03034, 2026) apply Input-to-State Stability formally to an LLM-based agentic system, with a Lyapunov function machine-checked in Lean 4. Key finding: architectural constraints (finite action catalogs at tool interfaces) guarantee stability independently of model capability or temperature. A tool-mediated Claude Sonnet 4 controller reduced attacker payoff by 59% vs. a deterministic greedy baseline; a Claude Haiku 4.5 controller converged to a suboptimal value but stayed catalog-bounded, showing stability held independent of model capability. This confirms the guidance in #4 — stability must be baked into loop architecture, not delegated to the model. Paper-only; domain is autonomous cyber defense, generalizability to other agent loops unverified.
 - **Online MPC / adaptive control regret**: The IQC framework (Lessard et al. 2016 for static analysis; Jakob & Iannelli, CDC 2025, for OCO regret) unifies classical control robustness and online optimization regret analysis. When an adaptive MPC scheme updates its model online, the IQC SDP approach provides automated regret certificates without bounding the feasible set.
 - **DeePC / Willems' Fundamental Lemma**: Willems' Lemma is exact for noiseless LTI systems; noisy or nonlinear plants require regularization (λ_g, λ_y) and the guarantees degrade. The canonical DeePC paper is Coulson, Lygeros & Dörfler (ECC 2019, arXiv:1811.05890) — not 1811.10455 which is an unrelated ML paper. Stability of the regularized/nonlinear variants is an active research area; do not claim deterministic safety certificates for noisy nonlinear deployments without verification.
 - **Predictive autoscaling latency numbers (26 ms / 154 ms / 522 ms)**: Confirmed verbatim from Tymoshenko et al. (2026, arXiv:2604.19705) under a steady ramp load on Node.js/Kubernetes. Node.js-specific; generalizability to JVM, Python, or GPU workloads unverified.
@@ -348,6 +350,6 @@ Sources and verification notes for the 12 primitives:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

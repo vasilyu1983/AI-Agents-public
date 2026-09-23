@@ -1,13 +1,13 @@
 {
   "metadata": {
     "skill": "qa-agent-testing",
-    "updated": "2026-08-21",
-    "version": "4.4",
-    "total_sources": 43,
+    "updated": "2026-09-08",
+    "version": "4.5",
+    "total_sources": 44,
     "last_citation_audit": "2026-08-21",
     "description": "Primary references for evaluating agentic systems with offline and online evals, graders, trace and tool testing, sandboxing, multi-agent coordination, iterative coding trajectories, adversarial QA, red-team scanners, and agentic benchmark methodology.",
     "title": "QA Agent Testing - Sources",
-    "last_updated": "2026-08-21"
+    "last_updated": "2026-09-08"
   },
   "categories": {
     "governance_and_risk": [
@@ -284,6 +284,16 @@
         "add_as_web_search": true,
         "optional": true,
         "last_verified": "2026-07-11"
+      }
+    ],
+    "metamorphic_testing": [
+      {
+        "name": "Metamorphic Testing: A New Approach for Generating Next Test Cases",
+        "url": "https://www.cse.ust.hk/~scc/publ/CS98-01-metamorphictesting.pdf",
+        "description": "Original 1998 technical report defining follow-up test generation from successful source cases and metamorphic relations for oracle-limited testing.",
+        "add_as_web_search": false,
+        "optional": false,
+        "last_verified": "2026-09-08"
       }
     ],
     "research_and_benchmarks": [

@@ -1,4 +1,4 @@
 interface:
   display_name: "LLM Inference Production Skill Hub"
-  short_description: "LLM inference patterns for latency, batching, caching, quantization, routing"
+  short_description: "Optimizes LLM inference latency, batching, caching, quantization, and serving."
   default_prompt: "Use $ai-llm-inference for LLM inference patterns for latency, batching, caching, quantization, routing, and serving stacks. Use when optimizing throughput, tail latency, or serving cost."

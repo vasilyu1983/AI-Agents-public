@@ -51,7 +51,7 @@ case "$KIND" in
     *) echo "ERROR: --kind must be one of: skill, practice, code, killer-feature" >&2; exit 1 ;;
 esac
 
-if [[ ! "$REPO" =~ ^[^/]+/[^/]+$ ]]; then
+if [[ ! "$REPO" =~ ^[A-Za-z0-9][A-Za-z0-9-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$ ]]; then
     echo "ERROR: repo must be in <owner>/<repo> format" >&2
     exit 1
 fi
@@ -62,7 +62,14 @@ if ! command -v jq &> /dev/null; then echo "ERROR: jq not found" >&2; exit 1; fi
 OWNER="${REPO%/*}"
 NAME="${REPO#*/}"
 OUT_DIR="${OUT_BASE%/}/${OWNER}__${NAME}"
+if [[ -d "$OUT_DIR" ]] && [[ -n "$(find "$OUT_DIR" -mindepth 1 -maxdepth 1 -print -quit)" ]]; then
+    echo "ERROR: destination is nonempty; choose a fresh output directory to preserve commit provenance: $OUT_DIR" >&2
+    exit 1
+fi
 mkdir -p "$OUT_DIR"
+MANIFEST="$OUT_DIR/_fetch-manifest.jsonl"
+: > "$MANIFEST"
+record_fetch() { jq -nc --arg path "$1" --arg status "$2" '{path:$path,status:$status}' >> "$MANIFEST"; }
 
 echo "Fetching $REPO → $OUT_DIR (mode: $KIND)"
 
@@ -109,7 +116,7 @@ fetch_path() {
     local ltarget="$2"
     local entry type
     entry=$(gh api "repos/$REPO/contents/$rpath?ref=$SHA" 2>/dev/null || echo "")
-    [[ -z "$entry" ]] && return 1
+    if [[ -z "$entry" ]]; then record_fetch "$rpath" "unavailable"; return 1; fi
     # Array = directory; object = file
     if [[ "$(echo "$entry" | jq -r 'type')" == "array" ]]; then
         mkdir -p "$ltarget"
@@ -117,7 +124,7 @@ fetch_path() {
             type=$(echo "$item" | jq -r '.type')
             local name; name=$(echo "$item" | jq -r '.name')
             case "$type" in
-                file) fetch_file "$rpath/$name" "$ltarget/$name" ;;
+                file) fetch_file "$rpath/$name" "$ltarget/$name" || true ;;
                 dir)  fetch_path "$rpath/$name" "$ltarget/$name" || true ;;
             esac
         done
@@ -139,10 +146,18 @@ fetch_file() {
     local rpath="$1"
     local ltarget="$2"
     mkdir -p "$(dirname "$ltarget")"
-    gh api "repos/$REPO/contents/$rpath?ref=$SHA" --jq '.content' 2>/dev/null \
-        | "${B64_DECODE[@]}" > "$ltarget" 2>/dev/null \
-        && echo "    ✓ $rpath" \
-        || echo "    ✗ $rpath (failed)"
+    if gh api "repos/$REPO/contents/$rpath?ref=$SHA" 2>/dev/null \
+        | jq -er 'select(.encoding == "base64") | .content' \
+        | "${B64_DECODE[@]}" > "$ltarget.part" 2>/dev/null; then
+        mv "$ltarget.part" "$ltarget"
+        record_fetch "$rpath" "fetched"
+        echo "    ✓ $rpath"
+    else
+        rm -f "$ltarget.part"
+        record_fetch "$rpath" "failed"
+        echo "    ✗ $rpath (failed)" >&2
+        return 1
+    fi
 }
 
 # Best-effort fetch: ignore misses rather than failing
@@ -155,14 +170,19 @@ case "$KIND" in
         SKILL_PATHS=$(gh api "repos/$REPO/git/trees/$SHA?recursive=1" \
             --jq '.tree[] | select(.path | endswith("SKILL.md") or endswith("skill.md")) | .path' 2>/dev/null || true)
         SKILL_PATH=$(echo "$SKILL_PATHS" | head -1)
+        if [[ $(echo "$SKILL_PATHS" | sed '/^$/d' | wc -l | tr -d ' ') -gt 1 ]]; then
+            record_fetch "SKILL.md selection" "ambiguous"
+            echo "  Multiple skill paths; selected $SKILL_PATH. Review selection before reuse." >&2
+        fi
         if [[ -n "$SKILL_PATH" ]]; then
             echo "  fetching $SKILL_PATH..."
-            fetch_file "$SKILL_PATH" "$OUT_DIR/SKILL.md"
+            fetch_file "$SKILL_PATH" "$OUT_DIR/SKILL.md" || true
             SKILL_DIR=$(dirname "$SKILL_PATH")
             REF_DIR="${SKILL_DIR}/references"
             [[ "$SKILL_DIR" == "." ]] && REF_DIR="references"
             try_fetch "$REF_DIR" "$OUT_DIR/references"
         else
+            record_fetch "SKILL.md" "unavailable"
             echo "  ⚠ No SKILL.md found"
         fi
         ;;
@@ -207,15 +227,21 @@ case "$KIND" in
         ;;
 esac
 
-# Scorecard (best-effort, skip failures silently)
+# Scorecard (best-effort; absence is not a security verdict)
 SCORECARD=$(curl -s "https://api.scorecard.dev/projects/github.com/$REPO" 2>/dev/null | jq -r '.score // "n/a"' 2>/dev/null || echo "n/a")
 echo "  OpenSSF Scorecard: $SCORECARD"
 
+INCOMPLETE=$(jq -s '[.[] | select(.status != "fetched")] | length' "$MANIFEST")
+FETCH_STATUS="complete"
+[[ "$INCOMPLETE" -gt 0 ]] && FETCH_STATUS="partial"
 cat > "$OUT_DIR/_metadata.json" <<EOF
 {
   "repo": "$REPO",
   "url": "https://github.com/$REPO",
   "mode": "$KIND",
+  "fetch_status": "$FETCH_STATUS",
+  "unavailable_or_failed_paths": $INCOMPLETE,
+  "manifest": "_fetch-manifest.jsonl",
   "commit_sha": "$SHA",
   "license": "$LICENSE",
   "stars": $STARS,
@@ -228,4 +254,4 @@ cat > "$OUT_DIR/_metadata.json" <<EOF
 }
 EOF
 
-echo "  ✓ done → $OUT_DIR"
+echo "  $FETCH_STATUS → $OUT_DIR (inspect _fetch-manifest.jsonl; unavailable includes missing optional paths and API failures)"

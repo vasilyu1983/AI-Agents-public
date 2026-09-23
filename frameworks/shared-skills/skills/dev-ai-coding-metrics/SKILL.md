@@ -99,6 +99,12 @@ Minimum baseline: **8 weeks** of pre-intervention data. Two-week baselines produ
 | agent workflow change on one task family | task-level shadow comparison or reviewer-blind evaluation |
 | leadership wants a fast answer | balanced scorecard with explicit caveats, not a causal claim |
 
+### Cohort and denominator contract
+
+Freeze the measurement population before reading outcomes. Record the eligible population, assignment rule, actual exposure, observation window, and accepted outcome for each metric. Report `eligible`, `assigned`, `exposed`, and `observed` counts side by side; never silently replace the assigned cohort with active users, completed tasks, or merged PRs. That survivor-only denominator makes adoption and success look better precisely when setup failures, abandoned agent runs, or unmerged changes are the problem.
+
+For incomplete observations, name the reason (`not_started`, `abandoned`, `still_open`, `telemetry_missing`, or `excluded_by_rule`) and keep it in the funnel. Treat still-open work as right-censored rather than failed until the outcome window closes. A report may be directional with imperfect telemetry, but it must state which denominator supports each percentage and how missing cases could change the decision.
+
 ## Measurement Checklist
 
 Use before publishing any AI coding report:
@@ -188,6 +194,6 @@ Reject a scorecard or report if any of the following apply:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

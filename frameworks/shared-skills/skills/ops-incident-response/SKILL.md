@@ -83,8 +83,9 @@ Alert, user report, or suspected incident
    - Communicate ETA or "investigating" to stakeholders
 
 4) RESOLVE — Confirm recovery
-   - Verify metrics return to baseline
-   - Run smoke tests on affected paths
+   - Verify the primary user outcome, service SLI, dependency health, and queued or delayed work remain within bounds for at least one meaningful traffic or processing cycle
+   - Check data integrity separately when writes, ordering, or retries were affected
+   - Record the observation window and residual degradation; a deploy success, pod health, falling error rate, or quiet alert stream alone is not recovery
    - Update status page to "resolved"
    - Close the incident channel
    - Note total error-budget consumed in the postmortem summary line
@@ -233,7 +234,6 @@ Use these as copy-paste starters; fill placeholders before sharing with stakehol
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

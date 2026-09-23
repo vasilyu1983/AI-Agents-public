@@ -33,7 +33,7 @@ TOC is not a competitor to Kanban — the modern Kanban Method (David J. Anderso
 
 - **Kanban's default posture** treats the system as a balanced line regulated by WIP limits at every column; when any column is disrupted beyond its buffer, the whole board waits.
 - **TOC/DBR's default posture** subordinates every step to a single named drum; only the drum's health determines whether the system is in danger, not every column's.
-- In practice, most Kanban boards used in software teams are an *approximation* of DBR without an explicitly named drum — which is why a team can run Kanban for months without knowing where its actual constraint is. Overlaying 5FS (name the constraint explicitly) onto an existing Kanban board is a common, low-cost intervention: keep the WIP limits, add an explicit drum designation and a buffer-health metric at that one column.
+- In practice, most Kanban boards used in software teams are an *approximation* of DBR without a verified drum. Overlay 5FS by using queue and wait data to nominate candidates, testing accepted-throughput sensitivity at fixed quality, and only then designating the drum and adding its buffer-health metric.
 - DevOps flow frameworks (Kim et al.'s *The Phoenix Project* / *DevOps Handbook* "First Way," Kersten's Flow Framework) are the industry-standard bridge translating this TOC-Kanban relationship into software delivery value streams; see `data/sources.json` for full citations.
 
 This is a stable, well-documented relationship, not a novel 2026 claim — flag it for a user only when a team conflates "we run Kanban" with "we know our constraint," which is the common failure mode.

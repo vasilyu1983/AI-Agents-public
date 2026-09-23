@@ -78,7 +78,7 @@ Continuous MI is transform-invariant under invertible maps, making it a valid de
 
 ## Failure Modes
 
-1. **Positive bias from finite samples**: Plug-in MI estimates are positively biased. For m×n contingency table with N samples, bias ≈ (m−1)(n−1)/(2N). Use JVHW or NSB correction for discrete variables; MINE or NWJ for continuous.
+1. **Positive bias from finite samples**: Plug-in MI estimates are positively biased. For an m×n full-support contingency table under independence and iid multinomial sampling, the leading large-sample null bias in log base b is (m−1)(n−1)/(2N ln(b)). For 2×2 and N=100 this is 0.005 nats or about 0.0072135 bits. Away from independence, with sparse counts or unknown support, this is not a universal correction. Use an estimator justified for the regime and report uncertainty; neural/continuous estimators do not automatically eliminate bias.
 2. **High-dimensional curse**: In high dimensions, MI estimates from k-NN methods require exponentially more samples. Always report confidence intervals; treat raw MI values from >20 dimensions with suspicion.
 3. **MI ≠ causal influence**: I(X;Y) > 0 does not imply X causes Y. Spurious MI arises from common causes. Apply conditional MI I(X;Y|Z) to partial out confounders.
 4. **NMI normalization choice matters**: Geometric-mean NMI vs. min-based UMI produce different rankings. Always state which normalization is in use; min-normalization is sharper when one variable has much lower entropy.
@@ -88,7 +88,9 @@ Continuous MI is transform-invariant under invertible maps, making it a valid de
 
 ## Worked Example
 
-**Retrieval reranking with redundancy penalty**
+**Retrieval reranking with a heuristic redundancy penalty**
+
+I(q;d)-I(d;selected) is a relevance-minus-redundancy heuristic, not generally the exact marginal task-information gain I(q;d|selected). Define random variables and an empirical sampling distribution before reporting any values as bits; hypothetical scores do not establish estimator validity.
 
 Query q, five candidate documents d₁–d₅. Estimated I(q;dᵢ) (bits) and pairwise redundancy I(dᵢ;d₃) for the document closest to d₃:
 
@@ -109,5 +111,5 @@ Budget: top 3. Naive relevance-only ranking: d₃, d₁, d₂. Redundancy-penali
 - Cover, T. M. & Thomas, J. A. (2006). *Elements of Information Theory*, 2nd ed., Ch. 2. Wiley.
 - Belghazi, M. I. et al. (2018). MINE: Mutual Information Neural Estimation. *ICML 2018*. https://arxiv.org/abs/1801.04062
 - Paninski, L. (2003). Estimation of entropy and mutual information. *Neural Computation*, 15(6), 1191–1253.
-- Valiant, G. & Valiant, P. (2011). Estimating the unseen. *STOC 2011*. (JVHW estimator.)
+- Jiao, J., Venkat, K., Han, Y., & Weissman, T. (2015). Minimax estimation of functionals of discrete distributions. IEEE Transactions on Information Theory 61(5), 2835–2885. https://arxiv.org/abs/1406.6959 (JVHW estimator.)
 - Kraskov, A., Stögbauer, H. & Grassberger, P. (2004). Estimating mutual information. *Physical Review E*, 69(6). (k-NN estimator.)

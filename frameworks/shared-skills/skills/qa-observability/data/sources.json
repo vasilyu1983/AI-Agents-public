@@ -257,7 +257,7 @@
         "description": "OTel blog post (March 2026) announcing the deprecation of Span.AddEvent and Span.RecordException in favour of log-based events via the Logs API.",
         "add_as_web_search": true,
         "optional": true,
-        "last_verified": "2026-06-09"
+        "last_verified": "2026-09-07"
       },
       {
         "name": "Prometheus Native Histograms — GA Announcement",

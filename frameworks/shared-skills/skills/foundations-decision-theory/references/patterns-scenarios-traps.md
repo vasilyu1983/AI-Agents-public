@@ -17,7 +17,7 @@ status: stable
 | Adaptive allocation | Options reveal performance over time | Bandit -> guardrails -> dominance check |
 | Deep uncertainty | Probabilities unknowable; large or high-dimensional scenario space | RDM (Lempert 2003) → scenario discovery (PRIM) → strategy robustness check |
 | Multi-stage adaptive planning | Long-horizon decisions with observable threshold-crossings across > 2 stages | DAPP (Haasnoot 2013) → pathway map → tipping-point triggers |
-| Clarify or commit | An agent holds an ambiguous instruction mid-trajectory | Cost-penalized EVPI per candidate question → specification-vs-model uncertainty split → trajectory-position decay check |
+| Clarify or commit | An agent holds an ambiguous instruction mid-trajectory | Signal-model EVSI per candidate question; EVPI as upper bound → specification-vs-model uncertainty split → trajectory-position decay check |
 
 ## Known Traps
 
@@ -27,9 +27,9 @@ status: stable
 - Real options require uncertainty to resolve before the option expires.
 - Bandits optimize measured reward, not necessarily product quality or fairness.
 - Stochastic dominance avoids specifying utility only under the relevant dominance order.
-- **Minimax regret requires a finite, enumerable state space.** For high-dimensional deep uncertainty where the scenario space cannot be fully enumerated, use the RDM scenario-discovery approach (Lempert et al. 2003) instead of a regret matrix.
+- **A simple regret matrix requires a finite, enumerable state space; minimax regret itself also has continuous-state formulations.** For high-dimensional deep uncertainty where the scenario space cannot be fully enumerated, use the RDM scenario-discovery approach (Lempert et al. 2003) instead of a regret matrix.
 - **Info-gap note:** When no reference distribution and no enumerable state space exist (severe uncertainty), info-gap theory (Ben-Haim 2006) seeks the action that maximises robustness to uncertainty while meeting a satisficing threshold. Note: the framework has been critiqued as a variant of maximin (Sniedovich 2010/2011); evaluate carefully before use.
-- **Ergodicity note:** For repeated or leveraged bets (returns, survival, compounding debt), the ensemble-average EU calculation and the time-average growth rate diverge whenever a ruin state exists (Peters 2019). Check for an absorbing floor before trusting a positive-EV recommendation; see the "When Expected-Value Reasoning Breaks Down" section in `SKILL.md` and the Kelly-criterion addition in `assets/templates/decision-theory/06-risk-aversion.md`.
+- **Dynamic-process note:** positive arithmetic expected returns need not imply positive long-run log growth. Model repeated wealth transitions and constraints; expected utility can handle dynamic terminal/path outcomes and log-growth is a distinct objective, as explained in SKILL.md.
 
 ## Exit Checklist
 

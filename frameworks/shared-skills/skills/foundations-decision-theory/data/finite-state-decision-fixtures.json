@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "title": "Finite-state decision calculator known-answer fixtures",
+    "last_verified": "2026-09-08",
+    "method_source": {
+      "title": "Calculating the Expected Value of Sample Information using Efficient Nested Monte Carlo: A Tutorial",
+      "authors": ["Anna Heath", "Gianluca Baio"],
+      "url": "https://arxiv.org/pdf/1709.02319",
+      "section": "2. Formal definition of the EVSI",
+      "use": "EVSI is the expected posterior-optimal value across possible study outcomes minus the current optimal expected value."
+    },
+    "note": "These are exact finite sums, not Monte Carlo estimates."
+  },
+  "cases": {
+    "symmetric_75_percent_signal": {
+      "input": {
+        "states": ["gain", "loss"],
+        "actions": ["act", "outside"],
+        "utilities": {
+          "act": {"gain": 1, "loss": -1},
+          "outside": {"gain": 0, "loss": 0}
+        },
+        "prior": {"gain": 0.5, "loss": 0.5},
+        "signal_likelihoods": {
+          "positive": {"gain": 0.75, "loss": 0.25},
+          "negative": {"gain": 0.25, "loss": 0.75}
+        },
+        "study_cost": 0.2
+      },
+      "expected": {
+        "current_value": 0,
+        "current_actions": ["act", "outside"],
+        "evpi": 0.5,
+        "evsi": 0.25,
+        "net_evsi": 0.05,
+        "recommendation": "run"
+      }
+    },
+    "uninformative_signal": {
+      "input": {
+        "states": ["gain", "loss"],
+        "actions": ["act", "outside"],
+        "utilities": {
+          "act": {"gain": 1, "loss": -1},
+          "outside": {"gain": 0, "loss": 0}
+        },
+        "prior": {"gain": 0.5, "loss": 0.5},
+        "signal_likelihoods": {
+          "heads": {"gain": 0.5, "loss": 0.5},
+          "tails": {"gain": 0.5, "loss": 0.5}
+        },
+        "study_cost": 0
+      },
+      "expected": {"evpi": 0.5, "evsi": 0, "recommendation": "indifferent"}
+    },
+    "perfect_signal": {
+      "input": {
+        "states": ["gain", "loss"],
+        "actions": ["act", "outside"],
+        "utilities": {
+          "act": {"gain": 1, "loss": -1},
+          "outside": {"gain": 0, "loss": 0}
+        },
+        "prior": {"gain": 0.5, "loss": 0.5},
+        "signal_likelihoods": {
+          "gain_seen": {"gain": 1, "loss": 0},
+          "loss_seen": {"gain": 0, "loss": 1}
+        },
+        "study_cost": 0.5
+      },
+      "expected": {"evpi": 0.5, "evsi": 0.5, "recommendation": "indifferent"}
+    },
+    "regret_tie_without_prior": {
+      "input": {
+        "states": ["left_wins", "right_wins"],
+        "actions": ["left", "right"],
+        "utilities": {
+          "left": {"left_wins": 2, "right_wins": 0},
+          "right": {"left_wins": 0, "right_wins": 2}
+        }
+      },
+      "expected": {"minimax_regret": 2, "optimal_actions": ["left", "right"]}
+    }
+  }
+}

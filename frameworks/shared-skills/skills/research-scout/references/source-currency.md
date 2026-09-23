@@ -1,6 +1,6 @@
 # Source Currency 2026 — Jul-2026 Verified Sweep
 
-Reference for `research-scout`. Tracks verified status of all sources; last re-verified against primary sources on 2026-07-11 (supersedes the 2026-05-18 sweep — corrected the OpenAlex mandate date and ResearchRabbit acquisition date, and refreshed Elicit pricing, all of which had drifted).
+OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).
 Use alongside `data/sources.json` (canonical) — this file adds structured rationale and the anti-pattern catalog. Commercial-tool prices and free-tier caps move fast (weeks, not months) — treat any $-figure here as "as of 2026-07-11, verify at the vendor's own pricing page" rather than a durable fact.
 
 ---
@@ -28,7 +28,7 @@ Use alongside `data/sources.json` (canonical) — this file adds structured rati
 | Daily Papers RSS | free | alive | |
 | Semantic Scholar API | freemium | **changed** | API key officially recommended; ~1 RPS authed; exponential backoff required |
 | Semantic Scholar Search | free | alive | |
-| OpenAlex | freemium | **changed** | API key mandatory since 2026-02-13 (corrected from an earlier 02-24 note); keyed=$1/day free credit, unkeyed=$0.10/day then 409s |
+| OpenAlex | freemium | changed | OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19). |
 | Connected Papers | freemium | **changed** | Free plan capped at 50 inputs/searches since 2025 |
 | Papers with Code (archive) | free | **dead** | Meta shutdown Jul 2025; PwC.com → HF Trending; GitHub dataset frozen |
 | NeurIPS Proceedings | free | alive | |
@@ -76,7 +76,7 @@ Use alongside `data/sources.json` (canonical) — this file adds structured rati
 
 Re-verifying against primary sources on 2026-07-11 (one month after the last sweep) caught three drifted facts that had propagated from the May/Jun-2026 sweeps — a reminder that even a recently-validated skill accumulates small errors and needs re-checking, not just re-dating:
 
-1. **OpenAlex mandate date was wrong by 11 days.** Earlier notes said the API-key mandate started 2026-02-24; the OpenAlex team's own Google Groups announcement fixes the deadline at **2026-02-13**. Corrected throughout this file and `data/sources.json`.
+OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).
 2. **Elicit pricing had actually changed**, not just aged. Elicit moved from a "5,000 one-time credits" free tier to an unlimited-search/summaries/chat free tier (only Research Agent/Reports are capped), and repriced Pro from ~$12/mo to $49/mo. The old figures were still in `data/sources.json` as if current.
 3. **ResearchRabbit's Litmaps acquisition date was wrong by a year.** It closed 2025-05-08, not "2026" as an earlier note implied — the freemium relaunch (Oct/Nov 2025) is a separate, later event from the acquisition itself.
 
@@ -92,7 +92,7 @@ Meta shut down Papers with Code in July 2025. `paperswithcode.com` now 301-redir
 
 Two previously-free citation graph tools shifted models in 2025-2026:
 
-- **OpenAlex**: API key mandatory since 2026-02-13 (primary-source-verified 2026-07-11; the "02-24" date circulating in some earlier notes is wrong — the OpenAlex team's own announcement fixes 02-13 as the deadline). The polite-pool `email=` parameter was retired the same day. A keyed request gets $1/day free credit (covers typical research volume — hundreds of queries/day); an unkeyed request gets $0.10/day, then 409s. Register at openalex.org/settings/api.
+- OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).
 - **Connected Papers**: Free plan now caps at 50 inputs/searches. For bulk citation traversal, the OpenAlex API or Semantic Scholar's graph endpoint are free alternatives.
 
 ### arXiv Rate Clamp (Feb 2026)
@@ -169,7 +169,7 @@ Each entry: smell → why it fools you → counter-recipe.
 **Smell:** A script issues burst API calls to OpenAlex or Semantic Scholar without rate controls, or treats both as fully free with no key.
 
 **Why it fools you:**
-- **OpenAlex** requires an API key since 2026-02-24 and charges usage-based beyond the $1/day free credit. Keyless requests return 401 or degraded results.
+- OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).
 - **Semantic Scholar** now officially recommends a key; authenticated rate is ~1 RPS. Unauthenticated burst requests reliably produce 429s.
 Both will silently degrade (returning partial results or empty pages) before hard-failing, which means a script can appear to succeed while returning only a fraction of the intended results.
 
@@ -214,6 +214,6 @@ Both will silently degrade (returning partial results or empty pages) before har
 
 1. **Re-verify this file against primary sources at least every 4-6 weeks**, not on a fixed calendar — the Jul-2026 sweep found drift after only ~4 weeks (see [Jul-2026 sweep corrections](#jul-2026-sweep-corrections)). Prioritize `commercial_accelerators` (fastest-moving) and any source with `status_2026: changed` (already known to be in flux).
 2. **Verify from the vendor/operator's own primary source first** — official blog posts, changelogs, or the vendor's own pricing/docs page. Only fall back to secondary aggregators (news sites, third-party pricing trackers) when the primary source 403s or is otherwise unreachable, and say so in the note.
-3. **Every dated claim gets a re-verification date, not just an origin date.** Prefer "mandatory since 2026-02-13 (re-verified 2026-07-11)" over a bare origin date — the reader needs to know how stale the claim might be, not just when the underlying change happened.
+3. **Every dated claim gets a re-verification date, not just an origin date.** Prefer "basic keyless access supported (re-verified 2026-09-11)" over a bare origin date — the reader needs to know how stale the claim might be, not just when the underlying change happened.
 4. **When a sweep finds a factual error in a prior sweep (not just staleness), say so explicitly** with both the wrong and corrected value — silently overwriting an error erases the signal that this file's own verification process needs tightening.
 5. **Update `data/sources.json` and this file together.** They must never disagree on a `status_2026` or a dated fact — `sources.json` is canonical for the compact record, this file is canonical for the rationale.

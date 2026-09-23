@@ -54,7 +54,7 @@ Trust tier instructions:
 - PROVEN: Complete the task and flag any finding you are less than 80% confident in.
 - STANDARD: For each major finding, rate your confidence (high/medium/low) and cite supporting evidence.
 - PROBATIONARY: For every claim, state your confidence level and the specific evidence behind it. "I don't have enough evidence" is a valid and valued output.
-- ADVERSARIAL: Your output will be independently verified. Provide your full reasoning chain so it can be audited step-by-step.
+- ADVERSARIAL: Your output will be independently verified. Provide concise decision rationale, assumptions, calculations and evidence so the result can be independently audited.
 
 Confident-but-wrong outputs are penalized more heavily than honest uncertainty.
 ```
@@ -62,7 +62,7 @@ Confident-but-wrong outputs are penalized more heavily than honest uncertainty.
 ## Kill Criteria
 
 Skip this mechanism when:
-- All team members are new with no track record — you have no Shapley history to set tiers from. Fall back to STANDARD for all and build history first.
+- All team members are new with no track record: start all on PROBATIONARY with independent evidence validation and build verified history before differentiating tiers. If independent review is unavailable for the stakes, reduce scope or escalate.
 - The task is low-stakes and single-use — tier overhead not worth it for one-off queries.
 - The team has only one member — gating without alternatives to route to creates a dead-end review loop.
 - Adversarial tier is triggered for all members simultaneously — this signals a team composition problem, not a reputation problem. Rebuild the team.
@@ -71,4 +71,4 @@ Skip this mechanism when:
 
 - [`04-shapley-contribution.md`](04-shapley-contribution.md) — feeds the trust score
 - [`11-prediction-market.md`](11-prediction-market.md) — calibration tracking refines reputation
-- [`../../../references/principal-agent-delegation.md`](../../../references/principal-agent-delegation.md) — full principal-agent treatment
+- [`../../../references/formal-theory-map.md`](../../../references/formal-theory-map.md) — principal-agent and mechanism-design assumptions

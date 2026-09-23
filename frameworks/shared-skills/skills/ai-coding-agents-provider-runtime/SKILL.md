@@ -83,14 +83,11 @@ runtime event model
 - Avoid silent semantic drift when a fallback model cannot match the primary provider’s behavior.
 - Keep retry logic bounded and class-specific.
 
-## Scratch-Rebuild Coverage
+## Output-Limit Recovery And Budgets
 
-- Coverage strength:
-  strong for provider abstraction, stream normalization, class-specific retries, and visible fallback routing instead of pretending providers are interchangeable
-- Missing for faithful reproduction:
-  task-budget handling distinct from token accounting, bounded `max_output_tokens` recovery, and explicit continuation or recovery-message patterns are still too implicit
-- Required additions:
-  document task-budget-versus-token-budget behavior, `max_output_tokens` recovery as its own failure class, and the telemetry fields needed to explain when a provider run recovered versus failed outright
+Treat an output-limit stop as its own normalized finish class, separate from context overflow, transport truncation, timeout, and user cancellation. Persist the provider response ID or continuation handle, emitted item boundaries, usage, and last complete semantic unit. Resume only through a provider-supported continuation path or a new request carrying an explicit bounded summary; never concatenate a guessed suffix or replay side-effecting tool calls blindly. Cap continuation attempts and make partial output visible when recovery cannot complete.
+
+Keep task budget independent from provider token counters. Track input/context, cached input, reasoning, output, tool-call, wall-time, retry, and external-spend fields when available, marking unsupported dimensions as unknown rather than zero. A provider response can fit its token limit and still exceed the task budget; conversely, an output-limit recovery may remain inside the task budget. Emit `recovery_attempted`, `recovery_succeeded`, and terminal reason so downstream evals can tell recovery from ordinary success.
 
 ## Build Order
 
@@ -242,6 +239,6 @@ A general-purpose coding-agent runtime should aspire to cover ≥12 providers, u
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

@@ -4,7 +4,7 @@
 
 A feedback loop exists when the output of a system is routed back as an input that modifies future output. Two types:
 
-- **Negative (balancing) loop**: output deviation from a goal triggers a corrective action that reduces the deviation. Produces stability.
+- **Negative (balancing) loop**: output deviation from a goal triggers a corrective action that reduces the deviation. Can regulate toward a goal when sign, gain, delay and operating conditions support stability; negative feedback alone does not prove it.
 - **Positive (reinforcing) loop**: output amplifies the condition that produced it. Produces growth or collapse.
 
 Every viable system requires at least one negative feedback loop to maintain any goal state.

@@ -2,11 +2,13 @@
 name: research-arxiv-scout
 description: "Discovers and triages recent arXiv papers for AI/ML, agents, and software/QA. Use when scouting categories, arXiv IDs, or source lists."
 compatibility: Portable core. arXiv API attribution required in any output that uses arXiv data.
-version: "1.1"
+version: "1.2"
 last_validated: 2026-07-11
 ---
 
 # research-arxiv-scout
+
+**Targeted audit 2026-09-11:** selected source/API and evidence-contract corrections were verified; the frontmatter validation date and other source-registry dates are not a blanket September freshness claim. Recheck unverified source access and volatile facts when using them.
 
 Use arXiv as a discovery layer for recent research, then produce repo-friendly outputs (ranked recommendations and `02_sources-*.json`-style entries) without fabricating metrics.
 
@@ -27,6 +29,12 @@ Source: this exact sentence is arXiv's requested attribution statement, publishe
 | Summarize one paper | arXiv ID | Single-paper summary | `references/arxiv-api-guide.md` |
 | Propose sources updates | Target path | `02_sources-*.json` entries | `assets/sources-json-template.md` |
 | Mine HCI/CSCW retention papers (killer-feature bundle handoff) | Commercial product / candidate feature_id | Rows on shared bundle ledger | `references/product-retention-categories.md`, `config.yaml` key `killer-feature-retention` |
+
+## Layered opportunity handoff
+
+Use the [opportunity evidence layers](../startup-market-intel/references/opportunity-evidence-layers.md) when this scan supports area discovery. Contribute L7 feasible delivery and L4 timing where a dated capability change is relevant. Return the original study ID, tested task, baseline, reproducibility, cost and transfer limits. HCI findings may inform L9 repeat-value hypotheses only for a matched job/population; do not transfer another product’s retention or willingness to pay to the new offer. Pure paper triage stays here without requiring commercial gates.
+
+Carry source and underlying event IDs, dates, scope, supportive/mixed/adverse/unknown direction, evidence basis, counterevidence and the decisive unknown into the [comparison worksheet](../startup-idea-validation/references/opportunity-comparison.md). The same event appearing in several layers remains one event. No scout score, source count or convergence label passes a commercial gate; retain missing and adverse evidence in the handoff.
 
 ## Workflow
 
@@ -85,7 +93,7 @@ Before scoring API results, cross-reference candidate arXiv IDs against:
 - **HF Papers** (`huggingface.co/papers`) — daily community highlights and upvotes.
 - **alphaXiv** (`alphaxiv.org`) — social layer on arXiv with comments and trending signals.
 
-Flag any paper that appears on either platform — community attention is a fast quality gate that reduces triage effort. Also check each candidate's abstract for a GitHub or project-page link; verified code links upgrade the Practicality score (low implementation lift).
+Flag any paper that appears on either platform as an **attention signal for triage**, never a quality or evidence upgrade. Cross-posts, coordinated launch traffic, and one source syndicating another are not independent corroboration. Also check each candidate's abstract for a GitHub or project-page link; a verified code link can improve Practicality, while Evidence changes only after the evaluation itself is inspected.
 
 ### 3) Triage and score
 
@@ -139,7 +147,7 @@ Suggested scoring (0-10):
 
 Specialized mode that contributes the **`hci_retention_paper`** signal to the bundle's [Killer-Feature Convergence Protocol](../research-review-mining/references/killer-feature-convergence.md) owned by `research-review-mining`.
 
-**Premise.** HCI/CSCW/UIST work periodically publishes long-term studies that empirically tie a specific feature or interaction pattern to retention, freemium conversion, or willingness-to-pay. arXiv's `cs.HC` (plus `cs.CY`, `cs.SI`, `cs.IR`) indexes most of this work — though only ~50-70% of CHI/CSCW is on arXiv, so the ACM-only fraction stays with `research-scout`'s conference query generator.
+**Premise.** HCI/CSCW/UIST work periodically publishes long-term studies that empirically tie a specific feature or interaction pattern to retention, freemium conversion, or willingness-to-pay. arXiv's `cs.HC` (plus `cs.CY`, `cs.SI`, `cs.IR`) indexes most of this work — though coverage of CHI/CSCW is incomplete and no representative percentage is established here, so the ACM-only fraction stays with `research-scout`'s conference query generator.
 
 **When to use:** bundle handoff from `research-review-mining` Killer-Feature Mode KF3 asks for the HCI signal; OR you have a candidate `feature_id` and want a rigorous attribution study.
 
@@ -195,6 +203,6 @@ Related skills:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

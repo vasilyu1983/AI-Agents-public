@@ -25,13 +25,16 @@ A member's Shapley value = the average marginal value they add across all possib
 
 ```
 For each member M in the team:
-  1. Compare team output quality WITH M vs. WITHOUT M
-  2. M's contribution = quality difference
+  1. Define coalition utility, empty-team baseline and missing-member policy
+  2. Average M's marginal utility over all predecessor coalitions/permutations
+  3. Report estimate uncertainty and counterfactual evaluation cost
+  A single WITH-vs-WITHOUT difference is leave-one-out, not a Shapley value.
 
 Score each member:
-  - High contribution (>30% of total): core member — keep in future runs
-  - Medium contribution (10-30%): useful but replaceable — rotate or merge role
-  - Low contribution (<10%): redundant — remove from future similar tasks
+  - Compare contribution with a role-relative expectation and uncertainty
+  - Inspect interactions, redundancy and negative values before changing roles
+  - Validate removal/rotation on held-out team quality, cost and constraints
+  Fixed 10%/30% thresholds are not universal retention rules.
 ```
 
 ## Applying to Team Optimization

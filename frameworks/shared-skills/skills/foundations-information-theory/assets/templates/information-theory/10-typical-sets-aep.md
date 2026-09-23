@@ -38,9 +38,9 @@ For stationary ergodic sources, |A_ε^(n)| ≈ 2^{n·H_rate} and the source codi
 
 - Determining the minimum block length n for a source code to be near-optimal (approach entropy rate within ε).
 - Sizing dataset complexity: the number of distinct sequences a source can produce scales as 2^{n·H_rate}.
-- Explaining why language model training requires large corpora: linguistic text has high entropy rate; covering the typical set requires exponentially many examples.
-- Justifying compression standards: the existence of near-entropy-rate codes (Huffman, arithmetic) follows from the AEP.
-- Finite block length tradeoffs: for short blocks, the achievable rate is above H(X) + ε; the gap scales as O(√(log n / n)) (channel coding finite block length theory, Polyanskiy et al. 2010).
+- Explaining the exponential size of a typical set under source assumptions. This size alone is not a language-model sample-complexity theorem.
+- Explaining asymptotic source-coding existence. Huffman and arithmetic coding have their own finite-code guarantees and modeling requirements.
+- Finite block length tradeoffs: derive a source-coding bound for the specified source, error tolerance, and code class. AEP alone supplies no universal finite-length gap, and channel-coding results cannot be imported unchanged.
 
 ---
 
@@ -91,16 +91,16 @@ The typical set contains ≈ 10^{39} sequences — far beyond any corpus size. T
 We want a Huffman code for a source with H(X) = 4.7 bits/symbol that achieves within ε=0.1 bits/symbol of entropy with probability ≥ 0.95. By AEP, we need n large enough that the LLN concentration holds. Using Chebyshev:
 
 ```
-n ≥ Var[−log p(X)] / (ε² · (1−δ))
+n ≥ Var[−log2 p(X)] / (ε² · δ)  [iid, finite variance]
 ```
 
-For typical text sources, Var[−log p(X)] ≈ 2–4 bits². With ε=0.1, δ=0.05:
+For typical text sources, assume Var[−log2 p(X)] = 3 bits² for this worked example; no universal 2–4 range is established here. With ε=0.1, δ=0.05:
 
 ```
-n ≥ 3 / (0.01 × 0.95) ≈ 316 symbols per block
+n ≥ 3 / (0.01 × 0.05) = 6000 independent symbols
 ```
 
-A block length of 320 characters is sufficient to achieve within 0.1 bits/symbol of entropy rate with 95% probability.
+With the assumed iid source and known information-density variance 3, 6000 samples suffice for this Chebyshev concentration bound. This is not a Huffman code-length guarantee and does not apply unchanged to dependent text. The variance range above is an illustrative assumption, not a verified universal text constant.
 
 ---
 

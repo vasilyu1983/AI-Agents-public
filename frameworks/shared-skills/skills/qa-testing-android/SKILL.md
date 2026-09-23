@@ -222,6 +222,8 @@ It is a poor early investment for a small team still iterating rapidly on visual
 - Add the GitHub Actions GPU flag when your runner lacks hardware rendering support.
 - Keep PR gates small and deterministic; expand device groups or sharding on nightly and release pipelines.
 - Upload reports from `build/reports/androidTests/`, screenshot reports, diff images, logcat, and managed-device outputs.
+- Report build, install, launch, interaction, and distribution evidence separately. Record APK/AAB identity, variant, device/API, locale, exact test task, and artifacts; a Gradle build proves packaging, while only an outcome assertion on the named device proves the exercised journey.
+- Keep notifications, billing, deep links, background work, and OEM-specific flows unverified until the relevant real-device or distribution-channel check runs.
 
 ## ADB Commands (Triage)
 
@@ -337,12 +339,9 @@ The reference guides are intentionally large; search within them instead of load
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

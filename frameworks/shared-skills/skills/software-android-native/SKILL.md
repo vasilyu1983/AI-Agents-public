@@ -22,7 +22,7 @@ Use this skill for native Android work only. It is the default shared-skill entr
 | UI tests | Compose Testing APIs (`ComposeTestRule`) | Espresso only for Views interop or legacy screens |
 | **State machine discipline** | | |
 | Submit guard | `if (_uiState.value is Loading) return` | Prevents double-tap duplicate submissions in ViewModel |
-| Auto-reset transitions | `viewModelScope.launch { delay(500); _uiState.value = Idle }` | Input ready for next action without manual UI reset |
+| Transient completion | One-shot UI effect or explicit acknowledgement | Do not reset durable state on an arbitrary timer; cancel or supersede stale work |
 | Minimal sealed classes | Remove states that can't happen anymore | Dead sealed subclasses produce dead `when` branches and mislead future readers |
 | **Networking & resilience** | | |
 | Network reachability | `ConnectivityManager` + `NetworkCallback` wrapped in `StateFlow` | Publish `isConnected`; disable submit buttons when offline; observe in `collectAsStateWithLifecycle` |
@@ -138,6 +138,12 @@ These are behaviors to actively refuse in new code; they are not compile errors 
 Route deeper pattern material through [references/compose-state-concurrency.md](references/compose-state-concurrency.md).
 
 ## Architecture Judgment Calls
+
+### State Versus Effect Ownership
+
+Keep durable screen facts in `StateFlow`: input, loading, result, recoverable error, and data needed after recreation. Model one-time navigation, snackbar, focus, and haptic work as effects with a named delivery policy. A delayed `Idle` reset is correct only when the product contract explicitly says the result expires; otherwise it races a retry, process recreation, or a newer request.
+
+For each async intent, assign a request identity or cancel the prior job, ignore results from superseded requests, and make the backend operation idempotent when duplicate delivery is possible. Verify rapid double-tap, navigate-away, retry-before-completion, and process recreation instead of relying on a fixed debounce or `delay()`.
 
 Decisions that need a rationale, not just a default pick. As of 2026-07-11, verify each version-specific claim at the linked source before quoting it.
 
@@ -333,7 +339,6 @@ Use the rewrite brief at project start, the feature request per slice, the proof
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

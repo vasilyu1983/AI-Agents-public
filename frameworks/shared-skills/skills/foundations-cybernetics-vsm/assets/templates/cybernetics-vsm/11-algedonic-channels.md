@@ -4,9 +4,9 @@
 
 **Algedonic channels** (from Greek _algos_ = pain, _hedone_ = pleasure) are high-priority signals that bypass the normal hierarchy to reach the top level of the system (S5) directly, whenever a critical threshold is crossed. They are the VSM's emergency broadcast system.
 
-In a normally functioning VSM, information flows upward through S2 → S3 → S4 → S5, being attenuated and aggregated at each level. This is efficient for routine operations. But it introduces delay and the risk that serious crises are absorbed by lower-level filters before reaching the authority that can act on them.
+A VSM has interacting management, coordination, audit and intelligence channels, not a single serial S2 → S3 → S4 → S5 reporting pipeline. Routine operational reports reach S3 through defined management channels; S2 coordinates, S3* audits directly, and S3/S4 reconcile present and future needs. This is efficient for routine operations. But it introduces delay and the risk that serious crises are absorbed by lower-level filters before reaching the authority that can act on them.
 
-Algedonic channels cut through all of this: when triggered, they deliver a direct signal to S5 (or the highest appropriate authority) with no intermediate filtering.
+Algedonic channels bypass routine reporting delay to reach the appropriate higher authority when lower-level response cannot satisfy the critical condition. Define recursion-level recipients, trigger validation and acknowledgement; bypass does not remove authentication or authorize arbitrary actions.
 
 Beer's original formulation: the algedonic signal is not a request for attention — it is an alarm. It contains a pain signal (critical failure) or a pleasure signal (exceptional opportunity) and must be acted on within a defined time window.
 

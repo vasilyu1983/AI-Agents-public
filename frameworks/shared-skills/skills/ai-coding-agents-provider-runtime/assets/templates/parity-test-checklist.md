@@ -78,7 +78,7 @@ Mark each cell: `pass`, `fail`, `n/a` (provider does not support the feature), o
 | Shim skips cache headers for providers that do not support explicit caching | | | | |
 | Cache invalidation on settings reload does not cause API error | | | | |
 
-**Resolution if failing:** Verify `cache_control` header format matches the provider version; Anthropic added prompt caching in a specific API version. For providers without explicit cache APIs, document that cache stats will always be zero.
+**Resolution if failing:** Verify `cache_control` header format matches the provider version. For providers without exposed cache accounting, record cache usage as unavailable rather than zero; zero is a measured value, not a synonym for unsupported telemetry.
 
 ---
 

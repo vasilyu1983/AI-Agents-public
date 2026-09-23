@@ -94,6 +94,10 @@ See [references/model-sizing-matrix.md](references/model-sizing-matrix.md#local-
 - Measure quality on a small real eval set before swapping local models into a user-facing workflow.
 - Separate runtime selection from product integration. Running a model locally is not the same thing as shipping a good AI feature.
 
+## Hardware-Fit Gate
+
+Test the exact model artifact, quantization, context distribution, concurrency, and tool or schema contract on the target machine. Record peak resident memory, prompt and generation throughput, p95 time to first token, sustained temperature or throttling behavior, output-quality regressions, and recovery after cancellation. Approve local operation only when the full workload fits with headroom and a named fallback exists for overload or unsupported requests. A one-prompt demo is discovery evidence, not a capacity result.
+
 ## Known Traps
 
 - Treating a laptop prototype as proof that a workflow is production-ready. Latency, uptime, auth, and observability requirements change immediately once real users appear.
@@ -168,6 +172,6 @@ Use this skill when the user asks:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

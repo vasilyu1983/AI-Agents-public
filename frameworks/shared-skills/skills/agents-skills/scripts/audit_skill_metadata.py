@@ -20,17 +20,13 @@ VERY_LONG_SKILL_LINE_LIMIT = 350
 TOP_LONG_SKILLS_LIMIT = 10
 DEFAULT_BENCHMARK_MANIFEST = Path("evals/tasks/pilot-router-and-long-skills.json")
 DEFAULT_COMPACT_DISCOVERY = Path("graph/codex-discovery.md")
-DEFAULT_COMPACT_DISCOVERY_BUDGET = 8000
-# Shared description-budget thresholds. Keep these in sync with current docs:
-# Claude Code default budget = 1% of context (~8000 chars fallback) per
-# `SLASH_COMMAND_TOOL_CHAR_BUDGET`. Codex = ~2% / ~8000 chars. Anthropic's
-# older guidance cited a ~16000-char fallback shared across enabled skills.
-# Per-entry truncation cap on Claude Code is 1536 chars for description +
-# when_to_use combined.
-CODEX_DESCRIPTION_BUDGET_CHARS = 8000
-CLAUDE_CODE_DESCRIPTION_BUDGET_CHARS = 8000
-LEGACY_ANTHROPIC_BUDGET_CHARS = 16000
-PER_DESCRIPTION_CAP_CHARS = 1536
+LOCAL_COMPACT_DISCOVERY_CHAR_LIMIT = 8000
+# Repository-local review thresholds. These make inventory growth visible but
+# are not provider defaults and do not predict what any installed runtime loads.
+# Runtime discovery must be measured separately in the target installation.
+LOCAL_INVENTORY_WARNING_CHARS = 8000
+LOCAL_INVENTORY_CRITICAL_CHARS = 16000
+LOCAL_PER_DESCRIPTION_REVIEW_CHARS = 1536
 SHORT_COVERAGE_THRESHOLD = 0.5
 PROMPT_COVERAGE_THRESHOLD = 0.4
 STOPWORDS = {
@@ -66,6 +62,14 @@ STOPWORDS = {
 RELATED_SKILLS_RE = re.compile(r"^##\s+related skills\b|^related skills:", re.IGNORECASE | re.MULTILINE)
 DEFAULTS_RE = re.compile(r"^##\s+defaults\b", re.IGNORECASE | re.MULTILINE)
 VERIFICATION_GATE_RE = re.compile(r"^##\s+verification gate\b", re.IGNORECASE | re.MULTILINE)
+# Splices look like "Use $skill-name for Designs ..." — the description was
+# pasted after "for" instead of rewritten. Anchor on the invocation token so a
+# legitimate "... for Zones 1-3" is not flagged.
+TEMPLATE_SPLICE_RE = re.compile(r"\$[a-z0-9-]+ for [A-Z][a-z]+s\b")
+# A short_description that is a hard prefix of the description and stops mid
+# sentence was cut with a character budget, not written. Anchor on the sentence
+# boundary so a short_description that ends a real sentence is not flagged.
+TRUNCATED_PREFIX_END_RE = re.compile(r"^\.(\s|$)")
 TOKEN_RE = re.compile(r"[a-z0-9]+")
 
 
@@ -73,7 +77,16 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Audit shared-skill descriptions and Codex UI metadata.")
     parser.add_argument("catalog_root", help="Path to the skills catalog root")
     parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON instead of Markdown")
-    parser.add_argument("--strict", action="store_true", help="Exit non-zero when any warnings are present")
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Exit non-zero on metadata warnings or invalid compact-index structure",
+    )
+    parser.add_argument(
+        "--runtime-discovery-report",
+        type=Path,
+        help="Optional JSON report from scripts/audit-codex-discovery.py",
+    )
     return parser.parse_args()
 
 
@@ -118,6 +131,18 @@ def coverage(required_tokens: set[str], actual_tokens: set[str]) -> float:
     if not required_tokens:
         return 1.0
     return round(len(required_tokens.intersection(actual_tokens)) / len(required_tokens), 2)
+
+
+def is_truncated_prefix(short_description: str, description: str) -> bool:
+    """True when short_description is the description chopped mid-sentence."""
+    if short_description.endswith("."):
+        return False
+    if not description.startswith(short_description):
+        return False
+    remainder = description[len(short_description):]
+    if not remainder:
+        return False
+    return not TRUNCATED_PREFIX_END_RE.match(remainder)
 
 
 def audit_skill(skill_dir: Path) -> dict[str, object]:
@@ -165,6 +190,11 @@ def audit_skill(skill_dir: Path) -> dict[str, object]:
         warnings.append("missing interface.short_description")
     elif len(short_description) > SHORT_DESCRIPTION_CHAR_LIMIT:
         warnings.append(f"short_description chars {len(short_description)} > {SHORT_DESCRIPTION_CHAR_LIMIT}")
+    if short_description and is_truncated_prefix(short_description, description):
+        warnings.append(
+            "short_description is a hard prefix of the SKILL.md description cut "
+            "mid-sentence; write a complete <=80-char sentence"
+        )
     if short_description and short_coverage < SHORT_COVERAGE_THRESHOLD:
         warnings.append(f"short_description semantic coverage {short_coverage:.2f} < {SHORT_COVERAGE_THRESHOLD:.2f}")
     if not default_prompt:
@@ -174,6 +204,11 @@ def audit_skill(skill_dir: Path) -> dict[str, object]:
             warnings.append(f"default_prompt chars {len(default_prompt)} > {DEFAULT_PROMPT_CHAR_LIMIT}")
         if f"${skill_dir.name}" not in default_prompt:
             warnings.append("default_prompt missing `$skill-name` invocation token")
+        if TEMPLATE_SPLICE_RE.search(default_prompt):
+            warnings.append(
+                'default_prompt reads as a template splice ("for <Verb>s ..."); '
+                'rewrite as "Use $name to <verb> ..." or "... when ..."'
+            )
         if prompt_coverage < PROMPT_COVERAGE_THRESHOLD:
             warnings.append(f"default_prompt semantic coverage {prompt_coverage:.2f} < {PROMPT_COVERAGE_THRESHOLD:.2f}")
 
@@ -223,12 +258,10 @@ def summarize(rows: list[dict[str, object]]) -> dict[str, int]:
 
 
 def compute_description_budget(rows: list[dict[str, object]]) -> dict[str, object]:
-    """Catalog-wide description-budget analysis.
+    """Measure source inventory against local review thresholds.
 
-    Skill descriptions share a single budget that the runtime fills before any
-    skill body loads. When the total exceeds the budget, the runtime silently
-    shortens or drops descriptions, which is the dominant cause of "skill never
-    triggers" reports in production catalogs.
+    This function does not know which skills an installed runtime discovers,
+    which metadata it injects, or the runtime's effective context budget.
     """
     skills_with_description = [row for row in rows if int(row["description_chars"]) > 0]
     total_chars = sum(int(row["description_chars"]) for row in skills_with_description)
@@ -236,27 +269,41 @@ def compute_description_budget(rows: list[dict[str, object]]) -> dict[str, objec
         (
             {"skill": str(row["skill"]), "chars": int(row["description_chars"])}
             for row in skills_with_description
-            if int(row["description_chars"]) > PER_DESCRIPTION_CAP_CHARS
+            if int(row["description_chars"]) > LOCAL_PER_DESCRIPTION_REVIEW_CHARS
         ),
         key=lambda item: (-item["chars"], item["skill"]),
     )
-    risk_level = "ok"
-    if total_chars > LEGACY_ANTHROPIC_BUDGET_CHARS:
-        risk_level = "critical"
-    elif total_chars > CODEX_DESCRIPTION_BUDGET_CHARS:
-        risk_level = "warning"
+    inventory_level = "ok"
+    if total_chars > LOCAL_INVENTORY_CRITICAL_CHARS:
+        inventory_level = "critical"
+    elif total_chars > LOCAL_INVENTORY_WARNING_CHARS:
+        inventory_level = "warning"
     return {
         "skills_counted": len(skills_with_description),
         "total_chars": total_chars,
         "average_chars": round(total_chars / max(1, len(skills_with_description)), 1),
-        "codex_budget": CODEX_DESCRIPTION_BUDGET_CHARS,
-        "claude_code_budget": CLAUDE_CODE_DESCRIPTION_BUDGET_CHARS,
-        "legacy_anthropic_budget": LEGACY_ANTHROPIC_BUDGET_CHARS,
-        "per_entry_cap": PER_DESCRIPTION_CAP_CHARS,
-        "fits_codex_default": total_chars <= CODEX_DESCRIPTION_BUDGET_CHARS,
-        "fits_legacy_anthropic": total_chars <= LEGACY_ANTHROPIC_BUDGET_CHARS,
+        "scope": "repository_source_inventory",
+        "threshold_basis": "repository-local review heuristics; not provider runtime limits",
+        "local_warning_threshold": LOCAL_INVENTORY_WARNING_CHARS,
+        "local_critical_threshold": LOCAL_INVENTORY_CRITICAL_CHARS,
+        "local_per_description_review_threshold": LOCAL_PER_DESCRIPTION_REVIEW_CHARS,
+        "inventory_level": inventory_level,
+        "runtime_load_status": "unknown",
+        "runtime_load_evidence": None,
+        # Deprecated provider-named keys remain present so consumers can detect
+        # the schema transition without receiving invented provider defaults.
+        "codex_budget": None,
+        "claude_code_budget": None,
+        "legacy_anthropic_budget": None,
+        "per_entry_cap": LOCAL_PER_DESCRIPTION_REVIEW_CHARS,
+        "fits_codex_default": None,
+        "fits_legacy_anthropic": None,
+        "legacy_field_semantics": (
+            "deprecated provider-named fields are intentionally null; use the explicit "
+            "repository-local thresholds"
+        ),
         "over_per_entry_cap": over_per_entry_cap,
-        "risk_level": risk_level,
+        "risk_level": inventory_level,
     }
 
 
@@ -267,19 +314,109 @@ def compact_discovery_summary(catalog_root: Path) -> dict[str, object]:
             "path": str(discovery_path),
             "exists": False,
             "chars": 0,
-            "budget": DEFAULT_COMPACT_DISCOVERY_BUDGET,
+            "budget": LOCAL_COMPACT_DISCOVERY_CHAR_LIMIT,
             "fits_budget": False,
             "generated": False,
+            "structural_status": "missing",
+            "structurally_valid": False,
+            "runtime_load_status": "unknown",
+            "runtime_load_evidence": None,
         }
 
-    text = discovery_path.read_text(encoding="utf-8")
+    try:
+        text = discovery_path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        return {
+            "path": str(discovery_path),
+            "exists": True,
+            "chars": 0,
+            "budget": LOCAL_COMPACT_DISCOVERY_CHAR_LIMIT,
+            "fits_budget": False,
+            "generated": False,
+            "structural_status": "unreadable",
+            "structurally_valid": False,
+            "read_error": f"{type(exc).__name__}: {exc}",
+            "runtime_load_status": "unknown",
+            "runtime_load_evidence": None,
+        }
+
+    fits_budget = len(text) <= LOCAL_COMPACT_DISCOVERY_CHAR_LIMIT
+    generated = "Generated compact discovery map for Codex" in text
+    structural_status = "valid"
+    if not fits_budget:
+        structural_status = "over_local_limit"
+    elif not generated:
+        structural_status = "unrecognized_format"
     return {
         "path": str(discovery_path),
         "exists": True,
         "chars": len(text),
-        "budget": DEFAULT_COMPACT_DISCOVERY_BUDGET,
-        "fits_budget": len(text) <= DEFAULT_COMPACT_DISCOVERY_BUDGET,
-        "generated": "Generated compact discovery map for Codex" in text,
+        "budget": LOCAL_COMPACT_DISCOVERY_CHAR_LIMIT,
+        "fits_budget": fits_budget,
+        "generated": generated,
+        "structural_status": structural_status,
+        "structurally_valid": structural_status == "valid",
+        "runtime_load_status": "unknown",
+        "runtime_load_evidence": None,
+    }
+
+
+def runtime_discovery_summary(report_path: Path | None) -> dict[str, object]:
+    """Read optional installed-runtime discovery evidence without overclaiming prompt load."""
+    if report_path is None:
+        return {
+            "status": "not_provided",
+            "discovery_observed": False,
+            "model_prompt_inclusion_status": "unknown",
+            "compact_index_use_status": "unknown",
+        }
+
+    resolved = report_path.resolve()
+    try:
+        payload = json.loads(resolved.read_text(encoding="utf-8"))
+        if not isinstance(payload, dict) or payload.get("schema_version") != 1:
+            raise ValueError("expected an object with schema_version 1")
+        entries = payload.get("entries")
+        if not isinstance(entries, list) or not entries:
+            raise ValueError("expected at least one entries item")
+        if any(not isinstance(entry, dict) for entry in entries):
+            raise ValueError("every entries item must be an object")
+        for entry in entries:
+            for key in ("missing_repository_skills", "shadowed_repository_skills", "errors"):
+                if not isinstance(entry.get(key), list):
+                    raise ValueError(f"entries.{key} must be a list")
+            for key in ("repository_skill_count", "repository_enabled_count"):
+                if not isinstance(entry.get(key), int):
+                    raise ValueError(f"entries.{key} must be an integer")
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
+        return {
+            "status": "invalid",
+            "report": str(resolved),
+            "error": f"{type(exc).__name__}: {exc}",
+            "discovery_observed": False,
+            "model_prompt_inclusion_status": "unknown",
+            "compact_index_use_status": "unknown",
+        }
+
+    missing = sum(len(entry.get("missing_repository_skills", [])) for entry in entries)
+    shadowed = sum(len(entry.get("shadowed_repository_skills", [])) for entry in entries)
+    loader_errors = sum(len(entry.get("errors", [])) for entry in entries)
+    prompt_observed = payload.get("model_visible_prompt_observed") is True
+    return {
+        "status": "observed",
+        "report": str(resolved),
+        "observation": str(payload.get("observation", "")),
+        "observed_at_utc": str(payload.get("observed_at_utc", "")),
+        "runtime_version": str(payload.get("codex_version", "")),
+        "discovery_observed": True,
+        "repository_skill_count": sum(int(entry.get("repository_skill_count", 0)) for entry in entries),
+        "repository_enabled_count": sum(int(entry.get("repository_enabled_count", 0)) for entry in entries),
+        "missing_repository_skills": missing,
+        "shadowed_repository_skills": shadowed,
+        "loader_errors": loader_errors,
+        "model_prompt_inclusion_status": "observed" if prompt_observed else "unknown",
+        "compact_index_use_status": "unknown",
+        "caveat": str(payload.get("caveat", "")),
     }
 
 
@@ -348,18 +485,17 @@ def top_long_skills(
     return output
 
 
-def print_markdown(catalog_root: Path, rows: list[dict[str, object]]) -> None:
+def print_markdown(
+    catalog_root: Path,
+    rows: list[dict[str, object]],
+    runtime_discovery: dict[str, object],
+) -> None:
     summary = summarize(rows)
     manifest_path, benchmark_skills = load_benchmark_skill_names(catalog_root)
     benchmark_summary = summarize_benchmark_coverage(rows, manifest_path, benchmark_skills)
     longest = top_long_skills(rows, benchmark_skills=benchmark_skills if manifest_path else None)
     budget = compute_description_budget(rows)
     compact_discovery = compact_discovery_summary(catalog_root)
-    compact_discovery_ok = bool(
-        compact_discovery["exists"]
-        and compact_discovery["fits_budget"]
-        and compact_discovery["generated"]
-    )
     print("## Skill Metadata Audit Summary")
     print()
     print(f"- Catalog: `{catalog_root}`")
@@ -373,30 +509,29 @@ def print_markdown(catalog_root: Path, rows: list[dict[str, object]]) -> None:
     print(f"- Skills with `Verification Gate`: {summary['with_verification_gate']}")
     print()
 
-    risk_label = {
+    inventory_label = {
         "ok": "OK",
-        "warning": "WARNING (silent truncation likely on Codex / default Claude Code)",
-        "critical": "CRITICAL (silent skill exclusion likely on every runtime)",
+        "warning": "WARNING (over the local review threshold)",
+        "critical": "CRITICAL (over the local critical review threshold)",
     }[str(budget["risk_level"])]
-    if budget["risk_level"] != "ok" and compact_discovery_ok:
-        risk_label = "MITIGATED (full catalog is over budget; generated compact discovery passes)"
-    print("## Description Budget")
+    print("## Description Inventory")
     print(
         f"- Total description chars: {budget['total_chars']:,} across "
         f"{budget['skills_counted']} skills (avg {budget['average_chars']})"
     )
     print(
-        f"- Codex / Claude Code default budget: {budget['codex_budget']:,} chars "
-        f"({'fits' if budget['fits_codex_default'] else 'OVER'})"
+        f"- Local review threshold: {budget['local_warning_threshold']:,} chars "
+        f"({'fits' if budget['total_chars'] <= budget['local_warning_threshold'] else 'OVER'})"
     )
     print(
-        f"- Legacy Anthropic shared budget: {budget['legacy_anthropic_budget']:,} chars "
-        f"({'fits' if budget['fits_legacy_anthropic'] else 'OVER'})"
+        f"- Local critical threshold: {budget['local_critical_threshold']:,} chars "
+        f"({'fits' if budget['total_chars'] <= budget['local_critical_threshold'] else 'OVER'})"
     )
-    print(f"- Per-entry truncation cap (Claude Code): {budget['per_entry_cap']:,} chars")
-    print(f"- Risk level: {risk_label}")
+    print(f"- Local per-entry review threshold: {budget['per_entry_cap']:,} chars")
+    print(f"- Inventory level: {inventory_label}")
+    print("- Runtime loading evidence: UNKNOWN (this audit reads repository files only)")
     if budget["over_per_entry_cap"]:
-        print("- Skills over per-entry cap:")
+        print("- Skills over the local per-entry review threshold:")
         for item in list(budget["over_per_entry_cap"])[:TOP_LONG_SKILLS_LIMIT]:
             print(f"  - `{item['skill']}`: {item['chars']} chars")
     print()
@@ -409,6 +544,35 @@ def print_markdown(catalog_root: Path, rows: list[dict[str, object]]) -> None:
         f"({'fits' if compact_discovery['fits_budget'] else 'OVER'})"
     )
     print(f"- Generated artifact: {'yes' if compact_discovery['generated'] else 'no'}")
+    print(f"- Local structural status: {str(compact_discovery['structural_status']).upper()}")
+    print(
+        "- Runtime use: UNKNOWN (file structure does not prove that a runtime loads "
+        "or substitutes this index)"
+    )
+    print()
+
+    print("## Runtime Discovery Evidence")
+    if runtime_discovery["status"] == "observed":
+        print(f"- Observation: {runtime_discovery['observation']}")
+        print(f"- Runtime version: {runtime_discovery['runtime_version']}")
+        print(
+            f"- Repository skills: {runtime_discovery['repository_skill_count']} discovered; "
+            f"{runtime_discovery['repository_enabled_count']} enabled"
+        )
+        print(
+            f"- Missing: {runtime_discovery['missing_repository_skills']}; "
+            f"shadowed: {runtime_discovery['shadowed_repository_skills']}; "
+            f"loader errors: {runtime_discovery['loader_errors']}"
+        )
+    elif runtime_discovery["status"] == "invalid":
+        print(f"- Status: INVALID ({runtime_discovery['error']})")
+    else:
+        print("- Status: NOT PROVIDED")
+    print(
+        "- Model prompt inclusion: "
+        f"{str(runtime_discovery['model_prompt_inclusion_status']).upper()}"
+    )
+    print("- Compact-index use: UNKNOWN")
     print()
 
     if benchmark_summary:
@@ -444,7 +608,10 @@ def print_markdown(catalog_root: Path, rows: list[dict[str, object]]) -> None:
 
     flagged = [row for row in rows if row["warnings"]]
     if not flagged:
-        print("Status: PASS")
+        print(
+            "Status: PASS (repository metadata and compact-index structure; "
+            "runtime prompt loading not evaluated)"
+        )
         return
 
     print("## Flagged Skills")
@@ -460,28 +627,37 @@ def main() -> int:
     warning_count = sum(1 for row in rows if row["warnings"])
     manifest_path, benchmark_skills = load_benchmark_skill_names(catalog_root)
     benchmark_summary = summarize_benchmark_coverage(rows, manifest_path, benchmark_skills)
+    runtime_discovery = runtime_discovery_summary(args.runtime_discovery_report)
 
     if args.json:
+        compact_discovery = compact_discovery_summary(catalog_root)
         payload = {
             "catalog_root": str(catalog_root),
             "summary": summarize(rows),
             "description_budget": compute_description_budget(rows),
-            "compact_discovery": compact_discovery_summary(catalog_root),
+            "compact_discovery": compact_discovery,
             "top_long_skills": top_long_skills(rows, benchmark_skills=benchmark_skills if manifest_path else None),
             "benchmark_coverage": benchmark_summary,
+            "runtime_discovery": runtime_discovery,
+            "strict_gate": {
+                "scope": "repository_metadata_and_compact_index_structure",
+                "passes": (
+                    warning_count == 0
+                    and bool(compact_discovery["structurally_valid"])
+                    and runtime_discovery["status"] != "invalid"
+                ),
+                "runtime_loading_evaluated": False,
+            },
             "results": rows,
         }
         print(json.dumps(payload, indent=2))
     else:
-        print_markdown(catalog_root, rows)
+        print_markdown(catalog_root, rows, runtime_discovery)
 
     compact_discovery = compact_discovery_summary(catalog_root)
-    compact_discovery_ok = bool(
-        compact_discovery["exists"]
-        and compact_discovery["fits_budget"]
-        and compact_discovery["generated"]
-    )
-    return 1 if args.strict and (warning_count or not compact_discovery_ok) else 0
+    compact_discovery_ok = bool(compact_discovery["structurally_valid"])
+    runtime_report_invalid = runtime_discovery["status"] == "invalid"
+    return 1 if args.strict and (warning_count or not compact_discovery_ok or runtime_report_invalid) else 0
 
 
 if __name__ == "__main__":

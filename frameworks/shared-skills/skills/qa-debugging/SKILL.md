@@ -234,6 +234,8 @@ this instance.
   matches your error string is a hypothesis source, not a verified cause — see
   `## Search The Validated Corpus First` above.
 
+- **Current-state success mistaken for cause.** Before naming a root cause, record the observation, candidate mechanism, predicted result, and a disconfirming check. Confirm the cause through either controlled fail-before/pass-after reproduction with a mechanism-specific intervention, or direct mechanism-specific forensic evidence—such as a core dump, causal trace, corrupt record, or immutable production artifact—that rules out credible alternatives. Name the evidence path and residual uncertainty. If neither path is available, label the cause `probable`; a clean build or non-reproducing rerun proves current state only.
+
 ## AI and Agent Debugging Emphasis
 
 - Prefer profiles for intermittent latency and memory issues; point-in-time profiling often misses the failure.
@@ -379,12 +381,9 @@ Every debugging report includes:
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

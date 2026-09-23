@@ -8,9 +8,9 @@ last_validated: 2026-07-11
 
 # Godot Game Creation
 
-Use this skill to take a Godot project from empty editor to a published, exported build using the engine, language, and tooling reality of **Godot 4.7** (stable, released 2026-06-18; current as of July 2026). It covers the durable build spine (prototype → first playable → content → export) and fences the volatile engine layer (renderer names, minor-version API renames, physics-engine defaults, C# and web-export caveats) so you teach what is true today, not what was true in Godot 3.
+Use this skill to take a Godot project from empty editor to a published, exported build using the engine, language, and tooling reality of the **Godot 4.7 stable minor line**. Select the current stable patch only after checking the official release archive. The skill covers the durable build spine (prototype → first playable → content → export) and fences the volatile engine layer (renderer names, minor-version API renames, physics-engine defaults, C# and web-export caveats) so you teach what is true today, not what was true in Godot 3.
 
-> Version note (verify): **4.7** is current stable (released 2026-06-18), on an active patch cycle — **4.7.1 was at RC2 as of 2026-07-11**, still not stable, fixing real regressions in the 4.7.0 release (editor freezes, a Jolt temp-buffer crash, Android virtual-keyboard bugs) — pin the exact patch level in CI, not just the minor, and re-check whether 4.7.1 has shipped stable before you start a new project. **4.6** (2026-01-26) made **Jolt the default 3D physics engine** — a behavior-changing default when opening a pre-4.6 3D project. **4.7** replaced the old **Asset Library** with a new **Asset Store** (in-editor, threaded browsing, reviews/ratings) — old Asset Library deep links from before 4.6 no longer resolve; point contributors at the new store. **Godot 5.0 has not shipped and has no announced date.**
+> Version note (verify): use the current stable patch in the 4.7 line and treat later development snapshots as pre-release until the official archive marks them stable. Pin the exact patch level in CI, not just the minor, and re-check the archive before starting or upgrading a project. **4.6** (2026-01-26) made **Jolt the default 3D physics engine** — a behavior-changing default when opening a pre-4.6 3D project. **4.7** replaced the old **Asset Library** with a new **Asset Store** (in-editor, threaded browsing, reviews/ratings) — old Asset Library deep links from before 4.6 no longer resolve; point contributors at the new store.
 
 This is a software/game-development domain skill. It is self-contained: pick the stage you are in, load the one reference for that stage, do the work, verify volatile claims before quoting them.
 
@@ -106,6 +106,10 @@ Scope -> "first playable" sentence
 | Console export | **Third-party middleware only** (e.g. W4 Games) | Godot has no official console export — MIT/open-source licensing conflicts with console NDAs; budget for a middleware partner and its own cert timeline if a console SKU is planned |
 | CI export | **`godot --headless --export-release`** | Scriptable headless export; needs version-matched templates on the runner |
 
+## Save Compatibility Gate
+
+Treat save data as a versioned external contract. Store a schema version, migrate one version at a time, preserve the pre-migration file until the new save is verified, and reject unknown future versions without overwriting them. Before release, load representative saves from every supported shipped version in an exported build and verify the migrated state by gameplay behavior, not only by successful parsing.
+
 ## When Godot Is the Wrong Choice
 
 Recommending Godot by default is itself a judgment call, not a rule — push back when the project profile doesn't fit:
@@ -138,7 +142,7 @@ Related skills (same family only):
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
 

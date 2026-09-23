@@ -18,7 +18,7 @@ Use this reference before turning cybernetics or VSM into an org design, agent h
 | Pattern | Use When | Watch For |
 |---------|----------|-----------|
 | System-in-focus first | The conversation starts with "the organization" or "the system" | Undefined boundary creates fake VSM assignments |
-| Variety audit | A manager, orchestrator, or control layer is overloaded | Count disturbances and response modes before adding dashboards |
+| Variety audit | A manager, orchestrator, or control layer is overloaded | Map outcome-relevant disturbances to detectable signals and effective response paths before adding dashboards; counts only nominate candidates |
 | Coordination damping | Teams/agents interfere with one another | S2 coordinates; it should not become S3 micromanagement |
 | S3/S4 homeostat | Current operations and future strategy disagree | Create a translation cadence and shared decision frame |
 | S3* spot-check | Normal reporting looks too clean | Keep audit sporadic; routine audits get optimized against |
@@ -91,11 +91,11 @@ Drawn from Perez Rios (2025), *Systems*, 13(9), 749 — VSM + Taxonomy of Organi
 | Algedonic channel blocked | Crisis masking | Safety threshold breaches absorbed in ticket queues; human-in-the-loop never triggered | Define explicit algedonic bypass: severity threshold → direct escalation to S5 authority (human oversight board, on-call governance lead) |
 | S5 undefined | Policy vacuum | No authority to resolve S3/S4 tradeoffs (speed vs. safety, accuracy vs. cost); decisions made ad hoc | Write S5 closure: mission statement + non-negotiable constraints + priority ordering for conflicting objectives |
 
-| Oversight present but unamplified | Requisite-variety deficit at the human interface | Named reviewers exist, but review is sampled ad hoc with no triage, summarisation, or escalation tiering; queue depth grows with fleet size | Engineer amplification gain `G` (automated triage, semantic summarisation, tiered escalation) until `V_human × G ≥ V_agents` at peak; publish a variety budget and escalation SLA |
+| Oversight present but unamplified | Outcome-relevant agent behaviours lack timely detection or an effective human intervention path | Named reviewers exist, but review is sampled ad hoc with no triage, summarisation, or escalation tiering; queue depth grows with fleet size | Map peak disturbance classes to signals and authorized interventions; use `V_human × G ≥ V_agents` only as the cited proposal's conceptual framing, not a cardinal pass/fail equation; publish coverage evidence and escalation SLAs |
 
 Apply this checklist alongside the Agent-Team Topology Audit recipe. Each absent system in an AI deployment is a governance failure mode, not merely an engineering gap.
 
-**Ceremonial-oversight trap.** The failure mode that regulation actually produces is not absent oversight but *declared* oversight that cannot function: a named human overseer whose review capacity is fixed while the fleet's behavioural variety scales with agents × tools × task types. Because a point-in-time audit acts once against a system generating variety continuously, it is in the wrong class for a path-selecting agent fleet regardless of how carefully it is performed — this is an Ashby-class error, not a diligence problem, so it cannot be fixed by trying harder or hiring more reviewers alone. The diagnostic question is never "is a human in the loop?" but "what is `G`, and does the inequality hold at peak?" (Telukunta et al. 2026, arXiv:2608.10153; the same structural argument appears independently in Janssen 2026, arXiv:2607.00941, which reaches it from evidentiary adequacy and the Good Regulator theorem).
+**Ceremonial-oversight trap.** Declared oversight can fail when a named human reviewer cannot detect and act on the outcome-relevant behaviours a fleet can produce. Agent, tool, and task counts may nominate areas to inspect, but their product does not measure effective behavioural variety. At peak conditions, enumerate material disturbance classes and verify the sensing, routing, authority, timing, and resource feasibility of each intervention. Telukunta et al.'s `V_human × G ≥ V_agents` expression (arXiv:2608.10153) is a conceptual prompt for this coverage test, not an arithmetic proof that an inequality "holds."
 
 ## Expert Diagnosis Walkthrough
 
@@ -113,7 +113,7 @@ A non-expert applies VSM by drawing five boxes labeled S1–S5 and mapping them 
 
 **Most common misapplication:** treating VSM as an org chart — assigning S1–S5 labels to existing boxes on a reporting-line diagram and calling it done. This produces a diagram, not a diagnosis, and it typically inherits every pre-existing political distortion in the reporting structure. The corrective move (see Anti-Patterns above) is to map *functions and information channels* first, and only then compare the result to the formal org chart — the mismatch between the two is usually the most useful output of the exercise.
 
-**Requisite-variety reasoning for team/agent design (applied judgment, not just the formula):** the Ashby check is not "count the boxes and compare numbers" — a naive headcount-vs-ticket-count comparison is close to meaningless because most environmental variety is redundant (many disturbances call for the same response). The expert move is to estimate the variety of *response types actually required*, not raw event counts: a support queue with 10,000 tickets/month but 12 canonical resolution patterns has an effective disturbance variety near 12, not 10,000 — and a regulator (human team or agent orchestrator) that already has 12+ levers has requisite variety even though it looks wildly outnumbered on ticket count. Apply the same discipline to agent-hierarchy design: count distinct *decision types* the orchestrator must resolve, not raw event volume, before concluding a variety deficit exists.
+**Requisite-variety reasoning for team/agent design:** raw ticket, decision-type, and lever counts are only candidate diagnostics. Group disturbances by distinctions that change the required outcome, then map each class to an observable signal and an effective response under authority, timing, and resource constraints. Twelve named response patterns are insufficient if several cannot be selected reliably, are coupled to the same failing tool, arrive too late, or lack authorization; one composable policy may cover several classes. Conclude a deficit only from uncovered or ineffective mappings, not from subtraction of counts.
 
 ## Historical Grounding: Project Cybersyn — Fact vs. Myth
 
@@ -138,6 +138,6 @@ Project Cybersyn (Chile, 1971–1973) is the best-known real-world VSM deploymen
 5. Identify S3 controls and S3* audits.
 6. Identify S4 intelligence and its S3 interface.
 7. Identify S5 policy/identity closure.
-8. Run Ashby's Law on the highest-variety disturbance.
+8. Run the Ashby coverage test on the highest-consequence and most weakly covered disturbance classes, including coupled cases.
 9. Check algedonic thresholds and bypass route.
 10. Record missing functions and the smallest viable intervention.

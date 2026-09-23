@@ -32,7 +32,7 @@ The game-theory target is a stable partition: no member or subgroup has a strong
 
 ## When to Use
 
-- 6+ member teams.
+- Measured coordination/synthesis cost, independent workstreams, or ownership gaps that a coalition structure could address; compare against a flat baseline.
 - Legal departments with GC plus country/specialist counsel.
 - Incident boards with containment, diagnosis, rollback, and comms workstreams.
 - Enterprise readiness reviews spanning security, compliance, onboarding, billing, and support.
@@ -40,7 +40,7 @@ The game-theory target is a stable partition: no member or subgroup has a strong
 
 ## When NOT to Use
 
-- Small teams with 2-4 members.
+- Team size is the only proposed justification; neither small nor large size alone establishes an advantage.
 - Single cohesive question where every member must reason about the same evidence.
 - Emergency decisions where coalition formation latency is worse than flat triage.
 - Cases where a deterministic owner already exists for every subproblem.

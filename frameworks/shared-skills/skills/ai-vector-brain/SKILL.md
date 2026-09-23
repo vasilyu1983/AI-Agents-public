@@ -143,6 +143,10 @@ Support KB, note-vault, and generated graph + markdown playbooks are later incre
 - Build a corpus-specific eval set before tuning chunk size, model, backend, or index parameters.
 - Treat retrieved chunks as untrusted external content until assembled into a grounded context bundle.
 
+## Corpus Readiness Gate
+
+Do not embed until the corpus has stable source IDs, tenant or ACL scope, effective timestamps, deterministic extraction, duplicate handling, and a delete or tombstone path. Build a lexical or exact-search baseline and a gold set with evidence IDs first. The vector path may advance only when it improves the target retrieval slices and preserves authorization and deletion behavior. If the corpus contract is unstable, fix ingestion before tuning distance metrics or indexes.
+
 ## Common Anti-Patterns
 
 - vector database first, source-of-truth model later
@@ -242,6 +246,6 @@ Support KB, note-vault, and generated graph + markdown playbooks are later incre
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Independent expected answers for corrective behavioral evaluations; no claim of live-model success",
+  "cases": [
+    {
+      "id": "operations-08",
+      "skill": "foundations-reliability-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-reliability-theory/SKILL.md",
+      "defect": "p90 substituted in mean availability",
+      "correction": "Use means report tails separately",
+      "prompt": "uptime100 downtime1,9",
+      "expected_answer": "100/105",
+      "forbidden_behavior": "p90 substitution"
+    },
+    {
+      "id": "operations-09",
+      "skill": "foundations-reliability-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-reliability-theory/assets/templates/reliability-theory/09-weibull-analysis.md",
+      "defect": "Wrong score and no censor indicators",
+      "correction": "Correct censored likelihood/score",
+      "prompt": "NIST censored sample",
+      "expected_answer": "include survivors correct score",
+      "forbidden_behavior": "drop survivors"
+    },
+    {
+      "id": "operations-10",
+      "skill": "foundations-reliability-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-reliability-theory/assets/templates/reliability-theory/09-weibull-analysis.md",
+      "defect": "Censoring bias reversed",
+      "correction": "Overestimated hazard underestimated life",
+      "prompt": "drop living units",
+      "expected_answer": "bias life downward",
+      "forbidden_behavior": "bias life upward"
+    },
+    {
+      "id": "operations-11",
+      "skill": "foundations-reliability-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-reliability-theory/assets/templates/reliability-theory/07-redundancy-math.md",
+      "defect": "Convex coverage model said harmful",
+      "correction": "Model failover failure explicitly",
+      "prompt": "single .9 parallel .99 c0,.5,1",
+      "expected_answer": "mixture .9,.945,.99",
+      "forbidden_behavior": "below .9 under mixture"
+    },
+    {
+      "id": "operations-12",
+      "skill": "foundations-reliability-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-reliability-theory/assets/templates/reliability-theory/05-fault-tree-analysis.md",
+      "defect": "Overlapping cuts treated independent",
+      "correction": "Use Boolean union inclusion exclusion",
+      "prompt": "A.1 B.2 C.3 AB or AC",
+      "expected_answer": ".044",
+      "forbidden_behavior": ".0494"
+    },
+    {
+      "id": "operations-13",
+      "skill": "foundations-reliability-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-reliability-theory/references/formal-theory-map.md",
+      "defect": "Mean availability restricted to exponential",
+      "correction": "Alternating renewal finite mean conditions",
+      "prompt": "nonexponential uptimes",
+      "expected_answer": "mean ratio can hold",
+      "forbidden_behavior": "requires exponential"
+    },
+    {
+      "id": "operations-14",
+      "skill": "foundations-reliability-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-reliability-theory/SKILL.md",
+      "defect": "Ten trials treated validation floor",
+      "correction": "Choose precision and confidence",
+      "prompt": "10 successful failovers",
+      "expected_answer": "insufficient for .995 certification",
+      "forbidden_behavior": "ten successes prove .995"
+    },
+    {
+      "id": "operations-15",
+      "skill": "foundations-reliability-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-reliability-theory/SKILL.md",
+      "defect": "Independent marginal agent products",
+      "correction": "Use conditional chain rule or measured dependence",
+      "prompt": "dependent steps",
+      "expected_answer": "conditional product",
+      "forbidden_behavior": "marginal product always exact"
+    },
+    {
+      "id": "operations-supplement-01",
+      "skill": "foundations-reliability-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-reliability-theory/assets/templates/reliability-theory/08-error-budgets.md",
+      "defect": "Ad-hoc fix comparison direction reversed and survey comparisons treated as portable burn thresholds",
+      "correction": "22.4% vs54.7% means fewer GenAI ad-hoc fixes; preserve single-provider denominator and distinguish monitoring from good-event SLI burn",
+      "prompt": "Yan reports GenAI ad-hoc fixes22.4%, non-GenAI54.7%; what follows for alert thresholds?",
+      "expected_answer": "Ad-hoc fixes less common in this Microsoft study; monitoring/profile evidence does not itself specify SLI burn thresholds",
+      "forbidden_behavior": "more common; universal burn threshold adjustment"
+    },
+    {
+      "id": "operations-supplement-02",
+      "skill": "foundations-reliability-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-reliability-theory/references/ai-agent-reliability.md",
+      "defect": "MAST Figure4 shares attributed to all1642 traces and claims42% of failure mass untouched by agent changes",
+      "correction": "Figure4 shares describe labeled failure distribution in210 traces (first30 per system), not all-data event probabilities or causal attribution",
+      "prompt": "MAST Figure4 reports41.8% system design,36.9% misalignment; which population and causal inference?",
+      "expected_answer": "210 illustrated traces; study-specific labeled failure counts, no proof42% unaffected by per-agent improvements",
+      "forbidden_behavior": "universal probabilities; all1642 traces denominator; independent causal attribution"
+    },
+    {
+      "id": "operations-supplement-03",
+      "skill": "foundations-reliability-theory",
+      "source_path": "frameworks/shared-skills/skills/foundations-reliability-theory/assets/templates/reliability-theory/01-mtbf-mttr.md",
+      "defect": "Yan normalized average mitigation times called medians and 1.83 multiplier inconsistent with displayed rounded ratio",
+      "correction": "Means1.12/.65 ratio\u22481.72; disclose paper separately says1.83 without resolving underlying normalized data",
+      "prompt": "Yan displays averageTTM1.12 and.65 and text1.83; summarize precisely",
+      "expected_answer": "normalized averages, not medians; rounded ratio\u22481.72; paper text1.83 is inconsistent and underlying unrounded values unavailable",
+      "forbidden_behavior": "median; equivalent incidents; exact1.83 derived from1.12/.65"
+    }
+  ]
+}

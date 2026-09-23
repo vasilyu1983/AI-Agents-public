@@ -2,7 +2,7 @@
 
 ## Definition
 
-**Variety engineering** is the deliberate management of information variety — the number of distinguishable states — on channels between levels of a system. Because Ashby's Law requires that controller variety match environment variety, variety engineering provides the mechanisms to achieve that balance without requiring the controller to literally have one state for every environmental state.
+**Variety engineering** deliberately preserves, attenuates, transforms, or expands outcome-relevant distinctions on channels between levels of a system. In applied work, test whether each material disturbance can be distinguished and met by an effective response; do not compare raw event, attention, state-label, or lever counts as though they shared one unit.
 
 Three primary mechanisms:
 
@@ -24,9 +24,9 @@ Variety engineering is applied on every channel between VSM levels — both upwa
 
 | Input | Description |
 |-------|-------------|
-| Variety gap from Ashby audit | V(disturbance) − V(regulator) value (see primitive #2) |
+| Coverage gap from Ashby audit | Material disturbance classes lacking a timely detectable and effective response path |
 | Channel inventory | All channels between levels that carry information |
-| Controller capacity | How much variety the receiving level can actually process |
+| Response constraints | Authority, latency, coupling, dependencies, and resources that determine whether each response works |
 | Action latency | How quickly the controller must act (affects attenuation budget) |
 
 ## Outputs
@@ -35,8 +35,8 @@ Variety engineering is applied on every channel between VSM levels — both upwa
 |--------|-------------|
 | Attenuated channels | Channels redesigned to reduce incoming variety |
 | Amplified control surfaces | Mechanisms that expand controller's effective response range |
-| Variety-balanced architecture | Channel map where V(regulator) ≥ V(disturbance) at each level |
-| Residual variety list | Variety that cannot be absorbed — explicit acceptance or escalation |
+| Covered architecture | Channel map showing the signal and effective response for every material disturbance class |
+| Residual coverage list | Uncovered or ineffective response paths requiring acceptance, attenuation, or escalation |
 
 ## Failure Modes
 
@@ -50,22 +50,22 @@ Variety engineering is applied on every channel between VSM levels — both upwa
 
 ## Worked Example
 
-**Context**: An AI orchestrator receives telemetry from 200 agent executor instances. A human operations team (S3) must make sense of this and intervene when needed.
+**Context**: An AI orchestrator receives telemetry from many executor instances. A human operations team must intervene on material failures. Instance counts, state labels, and daily attention slots nominate an overload risk but cannot be subtracted to prove a gap.
 
-**Variety audit**:
-- V(environment) = 200 agents × ~15 distinct states each = ~3,000 distinguishable states.
-- V(human team) = ~50 attention units per day (attention is the scarce resource).
-- Variety gap = 2,950.
+**Coverage audit**:
+- Define outcome-relevant classes: transient retryable failure, capacity saturation, cost runaway, unsafe action attempt, compromised executor, and novel failure.
+- For each class, record detection signal, routing SLA, authorized owner, effective intervention, shared dependencies, and fallback.
+- The audit finds that unsafe actions are detected and blocked automatically, while novel failures reach humans without enough context to choose an intervention before the SLA expires. That failed path is the gap.
 
 **Variety engineering interventions**:
 
-1. **Attenuator — exception routing**: only surface agent states that deviate >2σ from baseline. Reduces active signals from 3,000 to ~30 at any time.
-2. **Attenuator — aggregation dashboard**: display fleet health as four composite metrics (throughput, error rate, latency P95, cost per task). Reduces 3,000 states to 4 composite signals.
-3. **Amplifier — playbook automation**: standard intervention playbooks auto-execute for the top 10 failure patterns. Human only intervenes on novel failures.
+1. **Attenuator — exception routing**: suppress routine healthy events while preserving security, safety, and novel-failure classes; validate false-negative risk rather than relying on a universal sigma threshold.
+2. **Attenuator — aggregation dashboard**: aggregate operational health but retain drill-down signals needed to distinguish response classes.
+3. **Amplifier — playbook automation**: bounded playbooks handle validated routine classes; humans receive novel or authorization-sensitive failures.
 4. **Algedonic bypass**: any agent failure affecting >5% of fleet capacity triggers an immediate alert to human on-call, bypassing the dashboard layer (see primitive #11).
 5. **Transducer — cost-attributed alerting**: raw log events transformed into "cost impact" language before reaching the ops team — converting technical signals to decision-relevant vocabulary.
 
-**Result**: human team variety requirement drops to ~15 distinguishable decision situations per day — within capacity.
+**Result**: replayed incidents show each material class is detected, routed, and met by an authorized effective response within its SLA. The novel-failure path now includes diagnostic context and a safe containment action. Report observed coverage and misses, not a synthetic state-count reduction.
 
 ## Sources
 

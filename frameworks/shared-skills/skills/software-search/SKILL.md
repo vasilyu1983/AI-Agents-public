@@ -44,11 +44,12 @@ Build search features that return the right results, fast.
 
 ## Workflow
 
-1. Confirm the search problem: engine choice, indexing pipeline, relevance, autocomplete, or analytics.
-2. Route RAG, database tuning, SEO, or API-architecture questions to the adjacent skill when product search is not the real problem.
-3. Choose PostgreSQL, a dedicated search engine, vector search, or hybrid search from the decision tree.
-4. Apply the relevant guidance for indexing, ranking, facets, autocomplete, and measurement.
-5. Verify current engine capabilities and hosted-service behavior through the navigation references before final recommendations.
+1. Define the corpus, query intents, filters, freshness target, latency budget, and display fields.
+2. Confirm that this is product search; route RAG, database tuning, SEO, generic product-analytics or event-tracking work, or API-architecture work to the adjacent skill.
+3. Choose PostgreSQL, a dedicated engine, vector, or hybrid retrieval with the decision tree.
+4. Load only the focused reference needed for the chosen path from the navigation map.
+5. Add instrumentation and a judged-query evaluation before changing ranking, analyzers, synonyms, or business boosts.
+6. Verify current engine capabilities and hosted-service behavior from primary sources, then return tradeoffs, assumptions, and a rollout or rollback plan.
 
 ## ASCII Flow
 
@@ -84,311 +85,13 @@ Which search engine?
     └── YES → Hybrid search (keyword + vector + reciprocal rank fusion)
 ```
 
-## Engine Capability Matrix
-
-| Engine | Typo tolerance | Facets | Geo | Vector | Self-host | Managed |
-|--------|---------------|--------|-----|--------|-----------|---------|
-| PostgreSQL (tsvector + pg_trgm) | Partial (pg_trgm) | Manual aggregation | PostGIS | pgvector | Yes | RDS/Supabase |
-| Algolia | Built-in | Native | Native | Yes — native hybrid (NeuralSearch merges keyword + vector per query) | No | Yes |
-| Elasticsearch / OpenSearch | Built-in | Native | Native | Dense vector, native RRF retriever/fusion | Yes | AWS/Elastic |
-| Typesense | Built-in | Native | Native | Yes, built-in (rank-fusion hybrid; verify current default fusion weights) | Yes | Typesense Cloud |
-| Meilisearch | Built-in | Native | Limited | Yes, built-in hybrid (BM25 + embeddings) since v1.6+ | Yes | Meilisearch Cloud |
-| Lunr.js / Pagefind | No | No | No | No | Client-side | N/A |
-| Pinecone / Qdrant / Weaviate | N/A (Qdrant/Weaviate: native BM25 sparse-vector support) | Filter | No | Yes | Qdrant/Weaviate yes | Yes |
-
-Capability availability shifts release to release (Algolia added native vector fusion; Qdrant and Weaviate added native BM25). Reverify each engine's `current` docs before finalizing a recommendation — do not rely on this table's exact wording beyond "capability exists in some form."
-
-## PostgreSQL Search (Start Here)
-
-For most applications, PostgreSQL is good enough. Evaluate dedicated engines only when you hit real limits.
-
-**tsvector/tsquery** — full-text search with language-aware stemming, ranking, and phrase matching. Create a `tsvector` column, build a GIN index, query with `tsquery`. Supports `ts_rank` for relevance scoring and `ts_headline` for result highlighting.
-
-**pg_trgm** — trigram-based fuzzy matching. Handles typos and partial matches. Create a GIN index with `gin_trgm_ops`. Use `similarity()` or `word_similarity()` for ranking. Combine with `tsvector` for both exact and fuzzy results.
-
-**GIN indexes** — generalized inverted indexes that make full-text and trigram queries fast. Essential for any non-trivial search workload in PostgreSQL.
-
-**When to outgrow PostgreSQL search:**
-- You need faceted search with filter counts (aggregation queries are expensive in PG)
-- Sub-50ms latency requirements at scale (>1M docs with complex queries)
-- Complex relevance tuning with field boosting, custom scoring, decay functions
-- Search-as-you-type with typo tolerance and instant feedback
-- You need synonyms, stemming, and language analysis beyond what `tsvector` provides
-
-## Search Engine Architecture
-
-**Indexing pipeline**: Extract data from source (database, CMS, API) → transform into search documents (flatten, denormalize, enrich) → push to search index. Keep the pipeline idempotent — re-running should produce the same index state.
-
-**Index schema design**: Define fields, types, and which fields are searchable vs. filterable vs. stored-only. Denormalize aggressively — search indexes are not relational databases. Include all data needed for display in search results to avoid hydration round-trips.
-
-**Analyzers and tokenizers**: Control how text is broken into searchable tokens. Standard analyzer handles most Western languages. Configure language-specific analyzers for stemming. Add custom analyzers for domain-specific tokenization (email addresses, part numbers, code identifiers).
-
-**Synonyms and stop words**: Maintain a synonym list for domain terms (e.g., "laptop" = "notebook"). Remove low-value stop words from indexing but keep them in phrase queries. Synonym expansion happens at index time or query time — query-time is more flexible, index-time is faster.
-
-**Index lifecycle**: Never mutate a live index schema in production. Use index aliases: build new index → swap alias → delete old index. This gives zero-downtime reindexing. For incremental updates, use upsert operations keyed on document ID.
-
-## Relevance Tuning
-
-**BM25 scoring** — the default ranking algorithm in most search engines. Balances term frequency (how often the term appears in a document) against inverse document frequency (how rare the term is across all documents). Handles document length normalization automatically.
-
-**Field boosting** — weight fields differently. Title matches are typically 3-5x more important than body matches. Boost exact matches over partial matches. Common hierarchy: title > headings > tags > description > body.
-
-**Custom ranking signals** — layer business logic onto relevance scores. Common signals: popularity (views, purchases), recency (newer content ranked higher via decay function), editorial boost (curated/featured content), user behavior (personalized ranking from click history).
-
-**Query understanding** — improve what the user meant, not just what they typed. Spell correction (did-you-mean). Intent detection (navigational vs. informational queries). Query expansion (add related terms). Query relaxation (broaden if too few results).
-
-**Relevance tuning loop** — ship a baseline, measure with analytics, tune iteratively, repeat. Each iteration should move a measurable metric (zero-result rate, MRR, CTR at position 1) not just "feel better."
-
-### Query Classification Without a Trained Classifier
-
-Before reaching for a trained intent classifier or an LLM call, check whether the index
-itself can classify the query. If documents already carry a category or classification
-field, a semantic-knowledge-graph (SKG) traversal runs a k-nearest-neighbour search
-against that field and returns the categories most related to the query — no training
-set, no model to serve. Grainger et al. describe this as asking the graph to "find the
-category with the highest relatedness to my starting node," where the starting node is
-the user's query.
-
-**What it buys you**: classification at index-lookup latency and index-lookup cost,
-using the corpus you already have. Because the score is computed per query against
-whatever terms the query actually contains, added context shifts the classification
-without any retraining — the book's worked example moves `driver` from a travel
-reading to a devops reading once `install` is added to the query.
-
-**A second traversal disambiguates.** Traverse query → category → keywords and you get
-a contextualised related-terms list per sense, which separates polysemous terms
-("server" as restaurant staff vs. as a machine) into distinct meanings. Grainger et al.
-warn against the lazy fallback here: given multiple plausible senses, group results by
-meaning, pick the most likely one, interleave deliberately, or offer alternative query
-suggestions — an intentional choice beats lumping the senses together.
-
-**Where to apply the classification**: as an auto-applied filter, as a relevance boost,
-as a route to a context-specific ranking algorithm or landing page, or as input to term
-disambiguation.
-
-**Limits and guardrails**:
-
-- The graph is statistical, not curated — relationships exist only because terms
-  co-occur in the corpus, so expect noise. Set a minimum-occurrence threshold above 1
-  to suppress false positives.
-- Efficacy depends on how well user queries overlap the indexed content. If most
-  queries are for a vocabulary your corpus barely covers, content-derived
-  classification will misread them; user-signal-derived relationships are the
-  complement for that case.
-- Scores are comparative, not calibrated probabilities. Treat a negative or
-  near-zero relatedness score as "this category is not the sense," and prefer the
-  known user context over the top score whenever context is available.
-
-**The 2026 alternative**: an LLM call classifies query intent with no category field
-and no corpus overlap requirement, and handles queries whose vocabulary the index has
-never seen. It costs a model call on the query path. Where the latency budget is tight
-(autocomplete, high-QPS product search) or per-query cost matters, the index-side
-traversal is the cheaper leg; where budget permits and query vocabulary is open-ended,
-an LLM classifier is the more capable one. Measure both against the same judged-query
-set before choosing.
-
-## Vector Search API Pattern
-
-Use this pattern when semantic search is a product feature, not just an LLM
-context retriever.
-
-**Request contract**:
-
-- `query`: required non-empty string, with length and character-class limits
-- `limit`: bounded integer, default 10, hard max 50
-- `offset` or cursor: optional pagination, only if the engine supports stable
-  ordering
-- `filters`: allowlisted fields only; never pass arbitrary filter JSON through
-  to the search engine
-
-**Response contract**:
-
-- stable result ID and display fields
-- relevance score or rank, clearly marked as diagnostic when the score is not
-  user-meaningful
-- matched source metadata needed for display
-- applied query preprocessing version
-
-**Operational rules**:
-
-- Keep the endpoint stateless and idempotent even if implemented as `POST`.
-- Validate and sanitize input before embedding or query construction.
-- Rate-limit by authenticated actor or API key; IP-only limits are weak for
-  logged-in products.
-- Add structured errors for invalid input, unavailable embedder, search timeout,
-  and backend failure.
-- Log raw query, cleaned query, retrieval mode, top result IDs, latency, and
-  result count.
-- Start with exact or small-corpus search to debug embeddings, then move to an
-  index once quality is proven.
-
-### Ranking Signal Mix
-
-For product search, semantic similarity is usually one leg of ranking, not the
-whole ranker. Typical final scoring candidates:
-
-- vector or hybrid relevance
-- recency decay
-- popularity or engagement
-- editorial boost or business rule
-- personalization, only when user consent and isolation rules are clear
-
-Do not hand-pick weights from intuition. Calibrate weights against judged
-queries and analytics slices. If scores come from different systems and cannot
-be normalized safely, prefer rank-based fusion such as RRF before applying
-business boosts.
-
-### Index-Time vs Query-Time Signals Boosting
-
-Once popularity or engagement signals are part of the ranker, there is a second
-decision: where the boost is applied. Grainger et al. frame it as scale versus
-flexibility.
-
-**Query-time boosting** keeps signals in a separate sidecar collection. Each incoming
-query first looks up its boosts there, then the boosts are injected into the main
-query. Because the collections stay separate, signals for one query can be updated by
-touching one document, boosting can be switched off by simply skipping the lookup, and
-a different boosting algorithm can be swapped in at any time. That flexibility — and
-the ease of incorporating real-time signals and running ranking experiments — is the
-reason it is the more common implementation.
-
-Its costs are structural, not incidental:
-
-- Every search becomes two searches back-to-back; the main query waits on the lookup.
-- Only a top-N slice of boosted documents can be injected before query cost becomes
-  unreasonable, so relevance is traded against scalability. A query with hundreds of
-  documents carrying signals will boost only the handful that fit.
-- Paging degrades. Covering page 2 means loading more boosts than page 1 did, page 10
-  more still, so deep paging gets progressively slower and can time out. Worse, boost
-  is only one scoring factor: as the boost set grows between pages, documents can jump
-  onto a page the user already passed or reappear on a later one, producing skipped
-  and duplicated results.
-
-**Index-time boosting** inverts the problem — instead of boosting popular documents
-for a query at query time, it writes the popular queries and their boost values into a
-field on each document at indexing time, and the query simply searches that field. The
-same signals aggregation feeds both; only the final application step differs. This
-removes the second query, keeps query cost flat as the number of boosted documents
-grows, and fixes paging outright, because every matching document carries its boost
-rather than just the top-N that fit in a query string.
-
-Its costs land on the indexing side:
-
-- Adding or removing a keyword from the model requires reindexing every document
-  associated with that keyword. Incremental per-keyword updates can therefore mean
-  continuous reindexing; batch regeneration can mean reindexing the whole corpus.
-- Changing the boosting function needs a migration, not an edit. Reweighting click
-  versus purchase signals means writing a second boost field, reindexing into it, then
-  cutting the query over — otherwise scores fluctuate while the corpus is half-updated.
-- Under sustained indexing pressure, separate the servers that index from the servers
-  that serve queries, or indexing CPU and memory will degrade query latency. Several
-  engines expose a mechanism for this (replica types, follower indexes); confirm the
-  specific mechanism and its current behaviour in your engine's own docs.
-
-**Choosing**: take query-time boosting when the ranking function is still moving —
-active experimentation, real-time signals, boosts that need to be toggled per request.
-Take index-time boosting when the model has stabilised and scale is the constraint:
-deep paging matters, per-query boost sets are large, or query latency is the budget
-under pressure. The book's own summary of the tradeoff is that query-time is more
-flexible while index-time is more scalable and gives more consistent relevance ranking.
-
-For the full learning-to-rank pipeline that sits above these signal decisions — feature
-logging, judgment lists, model training, and reranking — see
-[ai-rag](../ai-rag/SKILL.md), whose `references/learning-to-rank-pipeline.md`
-covers it end to end.
-
-### Vector Memory Sizing (Worked Example)
-
-Estimate before choosing a vector index type — memory, not disk, is usually the
-binding constraint for in-memory ANN indexes (HNSW).
-
-**Formula**: `raw_bytes = num_vectors × dims × bytes_per_value`. Add HNSW graph
-overhead on top (graph edges + metadata); treat 20-50% of raw size as a
-starting planning range and verify the actual multiplier against the specific
-engine's current documentation before sizing hardware.
-
-**Worked derivation** — 1,000,000 documents, 768-dimension embeddings (a common
-mid-size embedding model output), three storage precisions:
-
-| Precision | Bytes/dim | Raw size = 1,000,000 × 768 × bytes/dim | Raw size (GiB) |
-|---|---|---|---|
-| float32 (full precision) | 4 | 3,072,000,000 bytes | ≈ 2.86 GiB |
-| halfvec / float16 | 2 | 1,536,000,000 bytes | ≈ 1.43 GiB |
-| binary quantized (1 bit) | 0.125 | 96,000,000 bytes | ≈ 0.09 GiB |
-
-Adding a 30% HNSW graph overhead to the float32 case: `2.86 GiB × 1.3 ≈ 3.72 GiB`
-of working memory for one million 768-dim vectors — before the rest of the
-document payload (text, metadata) is counted.
-
-**How to use this**: re-run the same formula with your own `num_vectors` and
-`dims` — never scale a neighboring number instead of recomputing from your
-corpus size and embedding dimension. Binary and scalar quantization trade
-recall for memory; validate the recall drop against your judged-query set
-before committing to a lower precision in production. Confirm current
-quantization support (halfvec, binary, product quantization) in the specific
-engine's docs — pgvector, Elasticsearch, OpenSearch, and Qdrant each expose
-different quantization options and defaults that change across releases.
-
-## Common Misdiagnoses
-
-Symptoms that get the wrong fix more often than the right one:
-
-- **"Search is slow" → jumping straight to a dedicated engine.** Check for a
-  missing GIN index, an N+1 hydration query per result, or an unbounded
-  `LIKE '%term%'` scan first. Many "we need Elasticsearch" tickets are fixed by
-  an index that was never created.
-- **"Relevance is bad" → adding vector search.** Verify analyzers, stemming,
-  and field boosting are configured correctly before assuming lexical search
-  is semantically incapable. A missing stemmer or unboosted title field often
-  looks identical to "BM25 can't understand meaning."
-- **"Zero-result spike" → assumed content gap.** Check first whether a recent
-  synonym, analyzer, or tokenizer change caused a regression. Content gaps and
-  indexing regressions produce the same symptom but need opposite fixes.
-- **"Hybrid search will fix our recall" → skipping the judged-query set.**
-  Hybrid retrieval reduces but does not eliminate poor recall if the underlying
-  embedding model was never validated against the domain's vocabulary.
-- **"Facets are slow" → blaming the engine instead of cardinality.** Faceting
-  on a free-text or unbounded-cardinality field is usually the actual cause,
-  not an engine limitation.
-- **"Autocomplete is laggy" → tuning the main index.** Autocomplete usually
-  needs its own latency budget and often its own lightweight index or cache;
-  it should not share load or latency budget with full search.
-
-## Faceted Search and Filtering
-
-**Aggregation queries** — compute filter counts alongside search results. Show users how many results match each filter value before they click. This is where PostgreSQL struggles and dedicated engines shine.
-
-**Hierarchical facets** — nested categories (e.g., Electronics > Phones > Smartphones). Implement with path-based tokens or nested aggregations. Allow drill-down and drill-up navigation.
-
-**Range facets** — numeric or date ranges (price $0-50, $50-100; last 24 hours, last week). Pre-define meaningful ranges or use dynamic bucketing.
-
-**Multi-select vs. single-select** — multi-select filters use OR within a facet and AND across facets. Single-select uses exclusive selection. Multi-select requires disjunctive faceting (count all values, not just those matching current filter).
-
-**Performance** — apply filters before scoring when possible (filter context vs. query context in Elasticsearch). Cache frequently used filter combinations. Pre-compute facet counts for high-traffic pages.
-
-## Autocomplete and Search-as-You-Type
-
-**Prefix matching** — match documents where a field starts with the typed characters. Fast but limited to prefix positions.
-
-**Edge n-gram indexing** — at index time, generate token prefixes ("search" → "s", "se", "sea", "sear", "searc", "search"). Converts prefix queries into exact match lookups, which are faster.
-
-**Completion suggesters** — dedicated data structures optimized for prefix completion. Elasticsearch has a built-in completion suggester. Algolia and Typesense handle this natively.
-
-**Client-side debouncing** — wait 150-300ms after the user stops typing before sending the query. Reduces server load and prevents UI flicker. 200ms is a good default.
-
-**Highlight matching terms** — show users why a result matched by bolding the matching portion. Most search engines provide highlighting out of the box.
-
-**Zero-state and popular suggestions** — before the user types, show trending queries, recent searches, or popular categories. Pre-compute these from search analytics data.
-
-## Search Analytics
-
-**What to track**: every query (with timestamp, user ID, session), every click (which result, position clicked), conversions (did the user complete their goal after clicking), zero-result queries, query refinements (user searched again after seeing results).
-
-**Zero-result queries** — the most actionable metric. These reveal content gaps (you don't have what users want) or search quality issues (you have it but search can't find it). Review weekly and take action: add content, add synonyms, or fix indexing.
-
-**Click position** — which position users click in search results. If users consistently click result #4 instead of #1, your relevance ranking is wrong. Use mean reciprocal rank (MRR) as a quality metric.
-
-**Build the feedback loop**: search query → user clicks result → click signals feed back into relevance tuning (boost documents that get clicked, demote documents that get skipped). This is the core mechanism for search quality improvement over time.
+## Decision and Safety Rules
+
+- Start with the least operationally complex engine that meets the corpus, query, latency, and freshness requirements; verify capability claims at use time.
+- Keep indexing idempotent, search documents explicit about searchable, filterable, and stored fields, and live schema changes behind an alias or equivalent rollback path.
+- Allowlist filters, validate input before embedding or query construction, rate-limit by authenticated actor where applicable, and treat raw query logging as a data-governance decision.
+- Treat vector retrieval as a complement to lexical recall until judged-query evidence shows otherwise; do not hand-pick ranking weights from intuition.
+- Keep user consent and tenant or actor isolation explicit before using personalization or behavioral signals.
 
 ## Search Quality Evaluation
 
@@ -404,6 +107,10 @@ Analytics are not enough on their own. Keep a judged-query set for the product's
 
 Use click data to find candidates for the judged set, but do not let click-through alone define quality. Position bias, sparse traffic, and merchandising effects can hide bad ranking decisions.
 
+### Ranking Release Gate
+
+Require an offline win on the judged-query set with no unacceptable regression in protected query classes, then canary the candidate against the current ranker. Compare task completion or downstream conversion alongside latency, zero-result rate, abandonment, and reformulation. Log the ranker version with every impression so a bad release can be isolated and rolled back without rebuilding the index.
+
 ## Common Anti-Patterns
 
 - **`LIKE '%query%'` at scale** — full table scan, no index usage, gets slower linearly with data growth. Use proper full-text search instead.
@@ -418,10 +125,8 @@ Use click data to find candidates for the judged set, but do not let click-throu
 
 - Semantic or vector retrieval added as a replacement for lexical recall instead of a complement to it.
 - Faceting on fields with unbounded cardinality, leading to expensive aggregations and unusable filter UX.
-- Autocomplete implemented against the main search index with no latency budget, flooding the cluster on every keystroke.
 - Synonym expansion shipped without governance, creating silent relevance regressions and impossible-to-debug ranking changes.
 - Index freshness assumed to be real-time when ingestion pipelines are actually batched or eventually consistent.
-- Relevance tuning done from intuition alone instead of using click data, zero-result analysis, and query reformulation behavior.
 
 ## Verification Gate
 
@@ -436,60 +141,16 @@ Before calling a search design or implementation ready:
 - [ ] Representative queries tested — not only happy-path keyword matches
 - [ ] Synonym and analyzer changes logged with rollback plan
 
-## Scenarios
-
-Recipes keyed to common search implementation moments. Each lists the shortest path using patterns above.
-
-### S1 — Hybrid BM25 + vector with RRF for a product catalog
-
-1. Index each product document in both a keyword (BM25) index and a vector index (pgvector, Qdrant, or Weaviate).
-2. At query time, run the keyword search and the vector search in parallel; collect both ranked result lists.
-3. Apply Reciprocal Rank Fusion: score each document as `Σ 1/(k + rank)` across both lists, where `k=60` is a safe default.
-4. Re-rank the merged list by RRF score; apply any business boosts (popularity, recency) on top.
-5. Tune the relative weight of keyword vs. vector by evaluating against a judged-query set, not by intuition.
-6. Monitor zero-result rate; hybrid rarely returns zero, but confirm semantic recall improves tail queries.
-
-### S2 — Zero-downtime reindex via index alias swap
-
-1. Create a new index with the updated schema (e.g., `products_v2`); leave the live alias pointing to `products_v1`.
-2. Run the full reindex pipeline against `products_v2`; writes to `products_v1` continue serving production traffic.
-3. Verify document count, spot-check relevance on representative queries against `products_v2` before swap.
-4. Atomically update the alias: remove `products_v1`, add `products_v2` in a single alias-update call.
-5. Confirm production traffic is now routing to `products_v2`; monitor error rate and latency for 10 minutes.
-6. Delete `products_v1` only after the monitoring window is clean; keep it for one more deploy cycle if in doubt.
-
-### S3 — Autocomplete debounce + per-user prefix prefetch
-
-1. Add 200ms client-side debounce before firing autocomplete queries; cancel in-flight requests on each keystroke.
-2. On focus of the search input, prefetch popular completions for the empty-string state from a cached endpoint.
-3. After the user's first two characters, shift to a live prefix query against a completion suggester or edge-ngram index.
-4. Return a maximum of 5–8 suggestions per query; more options slow perceived response and increase cognitive load.
-5. Log every prefix query with the user session; feed click data back into the popular-completion cache weekly.
-6. Set a strict 100ms server-side latency budget for autocomplete; use a dedicated index or cache layer to meet it.
-
-### S4 — Faceted drill-down with cardinality limits
-
-1. Define facet fields explicitly in the index schema; do not facet on free-text or high-cardinality fields.
-2. Cap returned facet values per field (e.g., top 20 by count); expose a "show more" call for long-tail values.
-3. Use filter context (not query context) for active facet filters so they do not affect relevance scores.
-4. Implement disjunctive faceting for multi-select: recompute counts for each facet excluding its own active filter.
-5. Test aggregation query latency at expected data scale; move expensive facets to a pre-computed cache if needed.
-6. Monitor facet click patterns in search analytics; remove facets that are never interacted with.
-
-### S5 — Zero-result rate dashboard + query rewrite trigger
-
-1. Log every search query with its result count; compute the zero-result rate as a daily metric.
-2. Build a dashboard showing the top 50 zero-result queries ordered by frequency; review weekly.
-3. For each zero-result query, classify: missing content, synonym gap, tokenization mismatch, or indexing bug.
-4. Add synonyms or query expansion rules for synonym-gap cases; update the index for indexing bugs.
-5. Add a query-rewrite rule (fuzzy match, spell correction, or query relaxation) for tokenization mismatches.
-6. Re-evaluate the top-50 list after each change; target zero-result rate below 5% for a mature catalog.
-
 ## Navigation
 
-### References
-- [Skill Sources](data/sources.json): curated primary sources for search engineering guidance.
-- [Hybrid Search and Reranking](references/hybrid-search-and-reranking.md): production pipeline — BM25 + dense vector, RRF fusion, cross-encoder reranking, pgvector in-Postgres option, engine capability classes.
+### Focused References
+
+- [Engine and Relevance Details](references/engine-and-relevance.md) — capability classes, PostgreSQL, indexing architecture, relevance tuning, and query classification.
+- [Vector Search API and Sizing](references/vector-search-api-and-sizing.md) — request/response contracts, operational rules, ranking signals, and memory math.
+- [Search Features and Diagnostics](references/search-features-and-diagnostics.md) — common misdiagnoses, facets, autocomplete, and search analytics.
+- [Hybrid Search and Reranking](references/hybrid-search-and-reranking.md) — BM25 plus dense retrieval, rank fusion, reranking, and engine capability classes.
+- [Search Scenarios](references/search-scenarios.md) — worked paths for hybrid search, reindexing, autocomplete, facets, and zero-result recovery.
+- [Skill Sources](data/sources.json) — curated primary sources for search engineering guidance.
 
 ### Related Skills
 
@@ -531,12 +192,9 @@ Search engines, managed services, and client libraries evolve frequently. Verify
 ## Fact-Checking
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+Read relevant entries from learnings.consolidated.md only when continuing prior work, investigating a known pitfall, or debugging. Read raw learnings.md only when the consolidated entry points to it or dated detail is needed.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

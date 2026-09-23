@@ -25,15 +25,15 @@ This form is widely used in practice. It says: if the residual entropy H(X|Y) is
 **Converse to the channel coding theorem**: Fano's inequality is the key step in proving that rates above capacity have error bounded away from zero.
 
 **Interpretation**: H(X|Y) ≤ 1 + P_e log|X|.
-- If H(X|Y) → 0 (Y fully determines X), then P_e → 0: perfect prediction is possible.
-- If H(X|Y) = log|X| (Y tells us nothing about X), then P_e ≥ (log|X|−1)/log|X| → 1 − 1/|X|: barely above random guessing.
+- If H(X|Y) → 0 (Y fully determines X), perfect prediction is possible at zero conditional entropy; arbitrary estimators can still make errors.
+- If H(X|Y) = log|X| (Y tells us nothing about X), then P_e ≥ (log|X|−1)/log|X| = 1 − 1/log2|X| for the simplified bound. Exact uniform independent guessing error is 1−1/|X|; do not equate the two.
 
 ---
 
 ## When to Use
 
 - **Classifier evaluation**: given the conditional entropy H(Y|features), lower-bound the achievable classification error before building or evaluating a model.
-- **Retrieval accuracy ceiling**: given MI(query, document), bound the minimum precision@k that any retrieval algorithm can achieve.
+- **Single-label retrieval classification**: define a finite target document label and the observed query, then use their joint distribution to bound classification error. A precision@k ceiling requires a separate list-retrieval formulation; query/document MI alone does not supply it.
 - **Feature sufficiency check**: if Fano's bound implies P_e ≥ 0.4 with a proposed feature set, adding model capacity will not help — the features do not carry enough information.
 - **Proving impossibility**: demonstrating that a task cannot be solved below some error rate given available information.
 - **Information-theoretic sanity check**: before training, estimate H(Y|X) on training data to detect fundamental ambiguity.
@@ -53,16 +53,16 @@ This form is widely used in practice. It says: if the residual entropy H(X|Y) is
 
 | Output | Type | Range | Interpretation |
 |--------|------|-------|----------------|
-| P_e lower bound | Real | [0, 1] | Minimum achievable error probability for any estimator |
+| P_e lower bound | Real | [0, 1] | Valid error floor under the stated distribution; not necessarily tight |
 
 ---
 
 ## Failure Modes
 
-1. **Confusing Fano bound tightness**: The bound is tight when X̂ is the MAP estimator and the error is spread uniformly across wrong classes. In practice, errors concentrate on confusable pairs and the true P_e can be close to the bound or much lower.
-2. **Applying Fano when |X| = 2 (binary case)**: For binary classification, H_b(P_e) = H(P_e) and the bound simplifies to H(X|Y) ≤ H_b(P_e) + P_e. This is exact when the two classes are equally likely. Verify class balance before interpreting the bound.
+1. **Confusing Fano bound tightness**: Equality additionally requires the error indicator to be independent of the observation and, conditional on an error and the observation, the true class to be uniform over the remaining classes. MAP choice and averaged uniform wrong-class frequencies alone are insufficient; Jensen and conditioning steps can be strict. In practice, errors concentrate on confusable pairs and the true P_e must be at least any valid lower bound, and may be substantially higher.
+2. **Applying Fano when |X| = 2 (binary case)**: For binary classification, H_b(P_e) = H(P_e) and the bound simplifies to H(X|Y) ≤ H_b(P_e), because log2(2−1)=0. It remains an inequality; equality needs additional conditions, not merely balanced classes.
 3. **Using H(X|Y) estimated from small samples**: Fano's bound is only as accurate as the entropy estimate. For small n, plug-in H(X|Y) is negatively biased → the P_e bound is overly optimistic. Apply bias correction.
-4. **Treating the bound as achievable with finite data**: Fano's bound is achievable in the limit of infinite data and optimal codes. At finite sample sizes, the bound gives a floor that may not be reachable.
+4. **Treating the bound as achievable with finite data**: Fano provides a lower bound under the stated joint distribution, not a universal achievability theorem. Even with infinite training data the particular bound can remain loose; coding achievability needs a separate theorem and assumptions.
 5. **Ignoring that P_e is an average**: Fano gives an average (expected) error bound. Worst-case per-instance error can be much higher. For safety-critical systems, use per-instance Fano variants or concentration inequalities.
 
 ---
@@ -90,7 +90,7 @@ After adding contextual embeddings: H(X|embeddings) = 0.6 bits.
 P_e ≥ (0.6 − 1) / 5.64 = −0.07  → bound is 0 (non-negative)
 ```
 
-The bound is now vacuous (P_e ≥ 0) — the embeddings contain more than enough information; error is limited by model and data quality, not information.
+The bound is now vacuous (P_e ≥ 0) — this lower bound is inconclusive about feature sufficiency; it does not prove that information is adequate or rule out irreducible error.
 
 ---
 

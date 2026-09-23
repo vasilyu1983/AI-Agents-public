@@ -1,4 +1,4 @@
 interface:
   display_name: "Performance QA"
   short_description: "Designs performance and load testing for web, API, and backend systems"
-  default_prompt: "Use $qa-testing-performance for Designs performance and load testing for web, API, and backend systems. Use when setting budgets, profiling bottlenecks, or adding performance regression gates."
+  default_prompt: "Use $qa-testing-performance to design performance and load testing for web, API, and backend systems. Use when setting budgets, profiling bottlenecks, or adding performance regression gates."

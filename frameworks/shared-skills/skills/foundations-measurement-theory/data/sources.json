@@ -1,0 +1,51 @@
+{
+  "metadata": {
+    "title": "Measurement Theory Foundations \u2014 Sources",
+    "description": "Primary sources for the bounded foundation workflow; synthetic examples are not empirical findings.",
+    "last_updated": "2026-09-17",
+    "skill": "foundations-measurement-theory",
+    "cutoff": "2026-09-17"
+  },
+  "primary_sources": [
+    {
+      "id": "TestingStandards2014",
+      "name": "Standards for Educational and Psychological Testing",
+      "author": "AERA, APA, NCME",
+      "year": 2014,
+      "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/9780935302356.pdf",
+      "scope": "Chapters 1\u20133: validity, reliability/precision, fairness; publication and relevant text read.",
+      "verified_via": "Primary PDF opened and relevant passages inspected on 2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "VIM2012",
+      "name": "JCGM 200:2012 International vocabulary of metrology",
+      "author": "JCGM",
+      "year": 2012,
+      "url": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
+      "scope": "Measurement, calibration, uncertainty, traceability vocabulary; calibration passages inspected.",
+      "verified_via": "Primary PDF opened on 2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "GUM2008",
+      "name": "JCGM 100:2008 Evaluation of measurement data",
+      "author": "JCGM",
+      "year": 2008,
+      "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf",
+      "scope": "Physical measurement uncertainty reference; no universal psychometric cutoff asserted.",
+      "verified_via": "Primary PDF opened on 2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "Meredith1993",
+      "name": "Measurement Invariance, Factor Analysis and Factorial Invariance",
+      "author": "William Meredith",
+      "year": 1993,
+      "url": "https://doi.org/10.1007/BF02294825",
+      "scope": "Primary publisher abstract verifies measurement/factorial invariance distinctions. Full article not read; no numeric fit criteria or theorem magnitude attributed.",
+      "verified_via": "Publisher abstract and 1993 volume/issue inspected on 2026-09-17; 2025 online migration date is not original publication date",
+      "url_check": "manual"
+    }
+  ]
+}

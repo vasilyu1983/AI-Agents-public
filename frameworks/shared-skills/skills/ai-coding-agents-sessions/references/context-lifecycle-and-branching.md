@@ -113,7 +113,7 @@ Subagents are not only a parallelism tool — they are **the right primitive whe
 The mental test:
 > Will I need this **tool output** again, or only the **conclusion**?
 
-If only the conclusion, spawn a subagent. It runs in a fresh context, produces its summary, and the parent window only absorbs the final report — not the 30 file reads or 20 tool calls that produced it.
+If only the conclusion is needed and the work is sufficiently independent, a named subagent can keep intermediate tool output in its own context and return a summary. Record its startup mode because a conversation fork inherits parent history, while named-agent startup instructions, memory, skills, and permissions remain runtime-specific.
 
 Claude Code auto-dispatches subagents in some cases, but explicit requests produce more predictable behaviour:
 

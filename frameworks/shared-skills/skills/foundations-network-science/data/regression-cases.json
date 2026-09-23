@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Independent expected answers for corrective behavioral evaluations; no claim of live-model success",
+  "cases": [
+    {
+      "id": "operations-16",
+      "skill": "foundations-network-science",
+      "source_path": "frameworks/shared-skills/skills/foundations-network-science/assets/templates/network-science/07-contagion-sir.md",
+      "defect": "SIR SIS thresholds conflated",
+      "correction": "Transmissibility times excess degree under stated model",
+      "prompt": "degree3 T.4,.6",
+      "expected_answer": ".8,1.2",
+      "forbidden_behavior": "beta/gamma generic SIR"
+    },
+    {
+      "id": "operations-17",
+      "skill": "foundations-network-science",
+      "source_path": "frameworks/shared-skills/skills/foundations-network-science/assets/templates/network-science/03-community-detection.md",
+      "defect": "Universal size/modularity cutoffs",
+      "correction": "Use null model/stability",
+      "prompt": "two triangles6",
+      "expected_answer": "descriptive partition allowed",
+      "forbidden_behavior": "N<50 meaningless"
+    },
+    {
+      "id": "operations-18",
+      "skill": "foundations-network-science",
+      "source_path": "frameworks/shared-skills/skills/foundations-network-science/SKILL.md",
+      "defect": "Resolution tolerance confused",
+      "correction": "Gamma resolution epsilon tolerance",
+      "prompt": "scan community resolution",
+      "expected_answer": "scan gamma",
+      "forbidden_behavior": "scan tolerance as resolution"
+    },
+    {
+      "id": "operations-19",
+      "skill": "foundations-network-science",
+      "source_path": "frameworks/shared-skills/skills/foundations-network-science/SKILL.md",
+      "defect": "Community/GCC substituted for dependency propagation",
+      "correction": "Directed reachability with operational semantics",
+      "prompt": "A->B C->B removeB",
+      "expected_answer": "impacts A C",
+      "forbidden_behavior": "removeA impactsB"
+    },
+    {
+      "id": "operations-20",
+      "skill": "foundations-network-science",
+      "source_path": "frameworks/shared-skills/skills/foundations-network-science/SKILL.md",
+      "defect": "Referral cost and cycles formula wrong",
+      "correction": "Branching cohort size and amortized seed plus referral costs",
+      "prompt": "R.6 seed5 incentive0",
+      "expected_answer": "expected total2.5 CAC2",
+      "forbidden_behavior": "CAC12.5"
+    },
+    {
+      "id": "operations-21",
+      "skill": "foundations-network-science",
+      "source_path": "frameworks/shared-skills/skills/foundations-network-science/assets/templates/network-science/06-percolation.md",
+      "defect": "Universal heavy-tail and multilayer transitions",
+      "correction": "State degree exponent finite size and coupling model",
+      "prompt": "finite scale-free graph",
+      "expected_answer": "model dependent threshold",
+      "forbidden_behavior": "all scale-free qc1"
+    }
+  ]
+}

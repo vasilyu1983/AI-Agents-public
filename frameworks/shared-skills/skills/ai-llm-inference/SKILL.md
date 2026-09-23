@@ -218,6 +218,10 @@ Need to improve inference:
 - Avoid switching precision without a rollback plan and eval set.
 - Avoid generic round-robin when prefix or adapter locality drives most of the cost.
 
+## Capacity Promotion Gate
+
+Benchmark the real prompt-length, output-length, prefix-reuse, adapter, and arrival distributions at both steady load and bursts. Report p50, p95, p99, queue rejection, retries, and sustainable goodput. A serving change may advance only when it preserves the task-quality gate, meets every declared SLO and regression budget, and improves the binding objective. A bounded regression in a non-binding percentile is acceptable when predeclared and when target SLO, goodput, quality, rejection, retry, and recovery limits remain satisfied. Include cold start, overload admission, worker loss, OOM recovery, and drain behavior in the run. Treat raw tokens per second as supporting evidence.
+
 ## Known Traps
 
 - Benchmarking with synthetic prompts that do not match production prefix reuse, output length, schema-validity requirements, or concurrency bursts.
@@ -261,6 +265,10 @@ Need to improve inference:
 - [Cost Optimization Patterns](references/cost-optimization-patterns.md) - routing, caching, batching, and FinOps
 
 ### Applied Foundations
+
+Load an applied foundation only for the diagnosed capacity or failure question, not for routine model setup. Mean queue waits cannot certify p99 TTFT.
+
+- [Mathematical optimization](../foundations-mathematical-optimization/SKILL.md) — Load for genuine replica/pool allocation with explicit measured capacities, cost objectives, memory and latency constraints. Return variables, objective, constraints, feasibility, and solver/certificate limits. Measured latency constraints require load-test validation; a continuous LP certificate cannot prove an integer placement or production SLO. Skip uncomplicated sizing with a single feasible choice.
 
 - [Queueing Theory Applied](references/queueing-theory-applied.md) - continuous batching, KV-cache sizing, admission control, disaggregation, multi-tenant isolation, and token-budget backpressure — grounded in foundations-queueing-theory primitives (Little's Law, M/M/c, Erlang-C, Kingman, P-K)
 - [Reliability Theory Applied](references/reliability-theory-applied.md) - SLO budget allocation across cascaded models, hedged requests, provider failover, cascading-failure prevention, KV-cache corruption rollback, and spec-decode rollback semantics — grounded in foundations-reliability-theory primitives (MTBF/MTTR, error budgets, FTA, redundancy math)
@@ -325,7 +333,6 @@ Check at least these source types before final recommendations:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Foundations Causal Inference — Sources",
     "description": "Primary academic references for 12 causal inference primitives: DAGs/SCMs, do-calculus, backdoor/frontdoor criteria, instrumental variables, RDD, DiD, synthetic control, propensity score methods, CATE/uplift, Simpson's paradox, mediation analysis, and sensitivity analysis.",
-    "last_updated": "2026-08-14",
+    "last_updated": "2026-09-17",
     "skill": "foundations-causal-inference",
-    "total_sources": 36
+    "total_sources": 37
   },
   "foundational_books": [
     {
@@ -267,6 +267,15 @@
       "description": "Argues LLM-proposed causal graphs should be treated as priors to seed DAG construction, not as identified causal models; edges must be validated with data-driven independence/faithfulness tests. Authors show LLM-guided heuristic search can still accelerate convergence in structure learning — the restriction is on decisional authority, not on all LLM use. Wu, Yu, Wu & Tan, submitted June 1, 2025. Source for the 'LLM-assisted causal discovery' note in SKILL.md.",
       "last_verified": "2026-08-14",
       "url_check": "auto"
+    }
+  ],
+  "repair_sources": [
+    {
+      "id": "WhatIf",
+      "name": "Causal Inference: What If",
+      "url": "https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/",
+      "description": "Hernan and Robins: target-trial emulation, longitudinal treatment, selection and missingness assumptions.",
+      "add_as_web_search": false
     }
   ]
 }

@@ -65,7 +65,7 @@ Use this skill for visual design decisions and design-focused audits in any nati
 ### Performance & Proof
 - Pipe CLI `xcodebuild` output through `xcbeautify` when XcodeBuildMCP is unavailable — raw output buries errors in thousands of lines.
 - Use DocSetQuery for fast local Apple documentation lookups, or sosumi.ai for web-based Apple docs during freshness checks. Don't guess at current HIG behavior.
-- Verify design fixes with screenshots from a freshly installed, freshly launched build. If the on-screen UI appears older than source, suspect stale install — route to [../software-ios-runtime-debugging/SKILL.md](../software-ios-runtime-debugging/SKILL.md).
+- Verify design fixes with screenshots tied to the current build and launch. Preserve app data when the state is part of the repro; if the on-screen UI appears older than source, route to [../software-ios-runtime-debugging/SKILL.md](../software-ios-runtime-debugging/SKILL.md).
 - When screenshots alone can't diagnose, ask the agent to add verbose logs around the layout/appearance/accessibility surface and re-launch.
 
 ## Defaults
@@ -79,7 +79,7 @@ Use this skill for visual design decisions and design-focused audits in any nati
 
 ## Runtime Proof Gate
 
-- Do not trust screenshots until a fresh uninstall → install → launch loop has completed for the current build.
+- Do not trust screenshots until the installed bundle, build marker, and visible screen are tied to the current build. Reinstall without erasing data first; reset the container only when stale or migrated state is under test.
 - If the on-screen UI appears older than source, suspect stale install first. Route to [../software-ios-runtime-debugging/SKILL.md](../software-ios-runtime-debugging/SKILL.md).
 - If install or launch is failing, stop design iteration and fix runtime truth before continuing.
 - Use XcodeBuildMCP when it is actually callable. Otherwise use Apple CLI and route packaging or simulator-health issues to the runtime-debugging skill.
@@ -91,7 +91,9 @@ Use this skill for visual design decisions and design-focused audits in any nati
 2. Choose the native structure: tab view, navigation stack, list, sheet, inspector, or split view.
 3. Apply typography, spacing, and semantic color using system defaults before inventing a custom scale.
 4. Adopt Liquid Glass through standard controls and materials, then audit readability in both appearances.
-5. Verify with XcodeBuildMCP or CLI fallback: fresh build, uninstall, install, launch, capture screenshot, inspect, fix, repeat.
+5. Verify with XcodeBuildMCP or CLI fallback: build, preserve repro state, replace/install, launch, capture screenshot, inspect, fix, repeat. Reset the container only when state is the variable under test.
+
+For every changed surface, select states by risk rather than presenting one ideal screenshot: populated, loading, empty, error, permission-denied, offline, and destructive-action states where applicable. Cross them with the smallest configuration set that can reveal the change's failure mode: smallest and largest supported width, AX Dynamic Type for layout changes, light/dark plus Increase Contrast or Reduce Transparency for material changes, and VoiceOver focus/announcement order for semantic changes. Record unreachable states and why.
 
 ## ASCII Flow
 
@@ -246,7 +248,6 @@ Start from [data/sources.json](data/sources.json), then prefer Apple Developer d
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

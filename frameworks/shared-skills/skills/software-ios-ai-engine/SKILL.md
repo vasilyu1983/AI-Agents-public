@@ -78,7 +78,7 @@ Don't default to "on-device because it's private" or "cloud because it's smarter
 
 - **Typed output contract.** The UI or caller reads a Swift value, not raw model prose. For answer composers that means `{ answer, grounding, followUps[], safetyBoundary }`; for extraction/classification it means a typed enum/struct.
 - **Capability gate before use.** Apple Foundation Models requires `SystemLanguageModel.default.availability == .available`; local fallbacks must work when the model is unavailable, disabled, not ready, or unsupported for the active language.
-- **Context-window budget is real.** Count instructions, prompts, tools, schemas, outputs, and transcript against the on-device session window.
+- **Context-window budget is real.** Read `SystemLanguageModel.contextSize` and use `tokenCount(for:)`; count instructions, prompts, tools, schemas, outputs, and transcript against the returned capacity with response headroom.
 - **Local does not mean unvalidated.** Run post-processors or validators after model output: schema, anchors, enum membership, safety boundaries, word count, locale, and forbidden phrases as applicable.
 - **Cloud is explicit unless product policy says otherwise.** Do not silently spend quota or transmit sensitive context after promising Data-first/offline behavior.
 - **Do not make AI own deterministic chrome.** Fixed labels, chart controls, gate/channel names, and help-sheet UI copy belong in the app localization pipeline, not in runtime model output. The engine can return structured facts or prose; SwiftUI still owns localized fixed UI and visual inspection behavior.
@@ -94,7 +94,7 @@ For answer composers specifically:
 - **Grounded observability.** Every composed answer emits a structured trace: which archetype routed, which evidence refs were selected, which composer ran, confidence, latency. Required for eval-observer regression gates.
 - **Structured visualization contract.** If the answer surface feeds a deterministic diagram, return typed anchors and explanation IDs separately from prose. Do not ask the composer to decide zoom, filters, chart labels, or localized UI strings; those are native UI responsibilities with their own tests.
 
-*(Full catalogs of patterns, anti-patterns, known traps, and scenarios live in the four sections below. Reflects July 2026 practice on shipped iOS 26 / Apple Intelligence and the `FoundationModels` framework. WWDC26 (June 2026) announced a third-generation Foundation Models lineup — an on-device `AFM Core Advanced` (20B, sparse, 12 GB+ unified memory), a `LanguageModel` protocol letting third-party providers back a `LanguageModelSession`, image/Vision input, and free Private Cloud Compute access for smaller developers — all scoped to **iOS/iPadOS/macOS 27, currently in developer beta and not yet shipped to users**. Treat those as roadmap, not as APIs to ship against, until 27 GAs; the shipped ~3B on-device model and the 4096-token session window described throughout this skill are unchanged in the current release.)*
+*(Full catalogs of patterns, anti-patterns, known traps, and scenarios live in the four sections below. Reflects July 2026 practice on shipped iOS 26 / Apple Intelligence and the `FoundationModels` framework. WWDC26 (June 2026) announced a third-generation Foundation Models lineup — an on-device `AFM Core Advanced` (20B, sparse, 12 GB+ unified memory), a `LanguageModel` protocol letting third-party providers back a `LanguageModelSession`, image/Vision input, and free Private Cloud Compute access for smaller developers — all scoped to **iOS/iPadOS/macOS 27, currently in developer beta and not yet shipped to users**. Treat those as roadmap, not as APIs to ship against, until 27 GAs. Budget the shipping model through its runtime-reported context capacity rather than a device or OS constant.)*
 
 ## App Store Review For AI-Generated Content
 
@@ -112,13 +112,13 @@ Full catalog (P1–P28, A1–A22, T1–T25, S1–S13) in [references/patterns-an
 
 **Architecture (P1–P6, A4–A7):** every composer emits a single shared Swift value type; compose from a typed `EvidenceBundle`, never raw text; run the universal post-processor (anchor validator → word-count trimmer → forbidden-phrase filter) after every composer including Option A.
 
-**Option A (P13–P17, P27–P28):** gate on `SystemLanguageModel.default.availability`, not OS version; token-budget counts instructions + prompt + tool defs + schemas + response against the 4096-token window; probe any FM capability beyond `@Generable` + plain completion before shipping it; write A's prompt from scratch for the bundle-first contract — never port a cloud prompt.
+**Option A (P13–P17, P27–P28):** gate on `SystemLanguageModel.default.availability`, not OS version; read `contextSize`, then count instructions + prompt + tool definitions + schemas + response with `tokenCount(for:)`; probe any FM capability beyond `@Generable` + plain completion before shipping it; write A's prompt from scratch for the bundle-first contract — never port a cloud prompt.
 
 **Safety (P23–P24, A2, A16):** crisis patterns bypass all composers; cloud Tier 2 is an explicit user-visible CTA, never a silent fallback; safety routing is a Tier-0 decision, not a prompt instruction to the FM.
 
 **Persistence (A21–A22):** `answerSource` and `grounding` must live inside the persisted jsonb row, not only in the HTTP envelope. Integration test: no successful compose row has `answerSource IS NULL` or empty `grounding`.
 
-**Top traps by day-cost:** T2 (simulator lies about FM availability — always test on physical device); T6a (tool/schema overhead omitted from 4096-token budget); T13 (trimmer removes grounding line); T19 (fallback-chain silent regression when feature flag flips); T25 (cohort ramp built before any users exist).
+**Top traps by day-cost:** T2 (simulator lies about FM availability — always test on physical device); T6a (tool/schema overhead omitted from the measured token budget); T13 (trimmer removes grounding line); T19 (fallback-chain silent regression when feature flag flips); T25 (cohort ramp built before any users exist).
 
 ## Core Workflow
 
@@ -224,7 +224,8 @@ Before concluding a local iOS AI engine recommendation or implementation:
 
 - Verify the local task has a typed output contract and a deterministic fallback.
 - Verify Apple Foundation Models availability is gated by API status, not OS version or device guesses.
-- Verify prompt + tool + schema + response budget fits the on-device context window.
+- Verify prompt + tool + schema + response budget fits the runtime-reported context capacity with measured response headroom.
+- When compiling against the current SDK, verify `LanguageModelError.contextSizeExceeded(_:)` starts a smaller/condensed session or selects the deterministic fallback rather than surfacing a dead end. Confirm the error spelling and context APIs against the target SDK before implementation.
 - Verify the target Data-first path answers an emotional / open question with real prose, not a reject card.
 - Verify the answer contract is shared across all composers and the UI renders from a single type.
 - Verify every answer names ≥ 2 concrete anchors from the evidence bundle in both the `answer` and the `grounding` fields.
@@ -239,6 +240,6 @@ Before concluding a local iOS AI engine recommendation or implementation:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

@@ -59,7 +59,7 @@ Each primitive below addresses one or more of these failure modes.
 | Anti-Pattern | Diagnosis | Fix |
 |-------------|-----------|-----|
 | Arithmetic average of subsystem MTBFs used for system MTBF | Series availability is multiplicative | Compute A_system = ∏ Aᵢ using primitive 02 |
-| MTTR estimated from happy-path drills only | Tail incidents never practiced; actual MTTR is higher under stress | Sample actual incident MTTR from incident records; use 90th percentile, not mean |
+| MTTR estimated from happy-path drills only | Tail incidents never practiced; actual MTTR is higher under stress | Sample actual incident MTTR from incident records; use the arithmetic mean for availability; report p90/p99 separately |
 | Error budget burn measured weekly when traffic is bursty | Burst failures exhaust hourly budget; weekly window masks it | Implement multi-window burn rate: 1-hour and 6-hour windows alongside monthly (primitive 08) |
 | SLO set to match current reliability | Budget is always full; reliability signal is absent | Set SLO to the level customers need, not the level currently achieved |
 

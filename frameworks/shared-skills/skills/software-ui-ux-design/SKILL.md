@@ -104,13 +104,15 @@ UI/UX design task
 
 ## Accessibility Baseline
 
-WCAG 2.2 is the current W3C standard (October 2023; became ISO standard October 2025) and the legally mandated baseline under the European Accessibility Act (in force June 2025), ADA/Section 508, and EN 301 549. WCAG 3.0 remains a Working Draft — the 3 March 2026 update published the majority of requirements plus a proposed conformance model for public review, and renamed "outcomes" to "requirements". Candidate Recommendation is anticipated Q4 2027 and full Recommendation 2028 or later — do not use it as a compliance target yet. Note its broader stated scope (static, dynamic, interactive, and *streaming* content; apps, tools, publishing) when designing token-by-token streaming agent surfaces: WCAG 2.2 remains the compliance baseline, but streaming UI is squarely in WCAG 3's forward scope.
+WCAG 2.2 is the current W3C Recommendation and the default design target for new work because conformance also covers WCAG 2.1 and 2.0. It is **not** the binding version in every jurisdiction: EN 301 549 v3.2.1 maps web content to WCAG 2.1 AA and is OJ-cited under the Web Accessibility Directive, US ADA Title II specifies WCAG 2.1 AA for state/local government web and mobile apps, and Revised Section 508 incorporates WCAG 2.0 AA. For EAA work, apply Directive 2019/882 and national transposition, and verify an EAA-specific OJ citation or common specification before claiming presumption. WCAG 3.0 remains a Working Draft and is not a shipping target.
 
 | Requirement | Minimum target | Notes |
 |-------------|---------------|-------|
-| Web (EU B2C) | WCAG 2.2 AA | EAA enforcement active; CNIL precedent fines on cookie/consent dark patterns |
-| Web (US public) | WCAG 2.2 AA | ADA / Section 508; court-tested |
-| iOS / Android | Platform guidelines + WCAG 2.2 AA equivalent | Use native accessibility APIs; avoid custom reimplementations of standard controls |
+| EU public-sector web/mobile | EN 301 549 v3.2.1 / WCAG 2.1 mapping | OJ-cited route under Directive 2016/2102; verify current citation |
+| EU B2C covered by EAA | Directive 2019/882 + national transposition; design to WCAG 2.2 AA | Verify an EAA-specific OJ standard/common specification before claiming presumption; EN 301 549 remains useful test coverage |
+| US state/local government | WCAG 2.1 AA | ADA Title II technical standard; verify applicable date and exceptions |
+| US federal ICT | WCAG 2.0 AA plus Revised Section 508 requirements | Agency procurement may set a newer target |
+| iOS / Android | Platform APIs + applicable legal/contract baseline; design to WCAG 2.2 principles where they map | Native conformance includes platform behavior that web success criteria do not fully express |
 | Rich media / APNG / video | WCAG 2.2 AA 1.4.2, 1.4.5, 1.2.x | Captions, audio description, no strobing |
 
 ## Verification Checklist
@@ -298,7 +300,6 @@ When using AI to generate UI:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

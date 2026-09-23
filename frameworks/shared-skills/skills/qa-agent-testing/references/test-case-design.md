@@ -327,7 +327,7 @@ Before finalizing your starter 10 tasks:
 
 ## Metamorphic Add-On
 
-For 2-5 of your most important tasks, generate a few meaning-preserving variants and assert invariants.
+For a few important tasks, define a source case, a controlled input transformation, and the expected relation between observable outputs. This follows the original metamorphic-testing pattern: derive follow-up cases from successful source cases when a complete output oracle is hard to provide. The relation itself still needs justification; a plausible rephrase is not automatically meaning-preserving.
 
 Variant ideas:
 
@@ -336,14 +336,47 @@ Variant ideas:
 - Add irrelevant but harmless context ("noise")
 - Change formatting requirements (prose vs bullets) while keeping required fields
 
-Example invariants:
+Exact checks that may hold on every trial:
 
 - Output schema remains valid (JSON/YAML/table structure)
 - Hard constraints are still satisfied (word/char limits, required sections)
-- Key decisions/recommendations do not flip without new evidence
-- Safety/refusal behavior is consistent
+- Required citations still resolve to the frozen evidence set
+- Forbidden tool calls and side effects remain absent
+- Safety or refusal category remains consistent when the policy-relevant facts are unchanged
 
-If variants cause large swings, treat it as a reliability bug and add guardrails (more explicit constraints, clearer output contracts, better tool error handling).
+Do not require exact text equality from a nondeterministic language model. Rephrasing may legitimately change wording, ordering, or a recommendation near a decision boundary. Use one of these contracts instead:
+
+| Boundary | Oracle | Evidence |
+|---|---|---|
+| Structural | Schema, required fields, length, tool allowlist, side-effect ledger | Deterministic check on every trial |
+| Semantic | Predeclared required/forbidden claims or calibrated human/model rubric | Paired source/follow-up scores with disagreements retained |
+| Statistical | A predeclared rate or score difference across repeated paired trials | Trial count, pairing, model/settings, interval or test, and raw outcomes |
+
+For semantic checks, state which meaning-bearing facts must remain and which presentation features may vary. Calibrate model judges against a small human-labeled slice and retain a human escalation path for consequential disagreements. For statistical checks, freeze the task evidence and tool state, pair source and follow-up trials, and choose the tolerance before seeing results. One passing pair is a smoke check, not stability evidence.
+
+Example contract:
+
+```yaml
+source: "Rank A and B using the supplied latency and cost table. Return JSON."
+transform: "Reorder the table rows and rephrase the request; change no values."
+per_trial_oracles:
+  - valid_json_with_keys: [ranking, evidence]
+  - cited_values_equal_frozen_table: true
+  - forbidden_side_effects: []
+semantic_relation:
+  required: "same ranking unless the source run is within the declared tie margin"
+  allowed: "wording and evidence order may vary"
+statistical_contract:
+  paired_trials: "<predeclared count>"
+  metric: "rate of oracle-complete outputs"
+  tolerance: "candidate lower by no more than the preregistered margin"
+```
+
+The numbers above illustrate a contract shape; set trial count, tie margin, and tolerance from the decision risk and measurement plan. Record raw paired outcomes so a failed relation can be reproduced or reviewed.
+
+If variants cause swings beyond the declared semantic or statistical boundary, retain the failing pair as a regression case and investigate prompt ambiguity, evidence order effects, tool errors, or grader instability. If the transformation changed relevant evidence or policy facts, reject the metamorphic relation rather than blaming the agent.
+
+For deterministic parsers, calculators, and config adapters used by an agent, run the reusable [property and metamorphic contract workflow](../../qa-testing-strategy/references/property-based-testing.md#runnable-contract-workflow) before agent-level trials. That runner is for deterministic code contracts; it does not turn exact output equality into a valid language-model oracle.
 
 ---
 

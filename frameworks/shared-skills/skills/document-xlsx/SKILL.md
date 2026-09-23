@@ -252,6 +252,12 @@ function main(workbook: ExcelScript.Workbook) {
 - Release hygiene:
   owner named, review loop completed, and workbook sanitized or justified before distribution.
 
+### Calculation evidence gate
+
+Define the calculation contract before release: authoritative inputs, expected formulas or computed values, calculation engine, recalculation mode, and control totals. Reopen the final workbook twice where formulas matter: once with formulas visible to check consistency and once after a named calculation engine has recalculated it to inspect cached results and spreadsheet errors. A static OOXML audit cannot prove that formulas evaluate correctly.
+
+Check representative edge rows, totals, named ranges, table expansion, and error cells (`#REF!`, `#VALUE!`, `#DIV/0!`, `#NAME?`, `#N/A`). If no calculation engine is available, mark formula results unverified and provide independently computed control totals; do not report `data_only=True` blanks as successful calculation or invent cached values.
+
 ## Optional: AI / Automation
 
 Use only when explicitly requested and policy-compliant.
@@ -291,12 +297,11 @@ Use only when explicitly requested and policy-compliant.
 
 ## Fact-Checking
 
-- Use web search/web fetch to verify current external facts, versions, deadlines, regulations, or platform behavior before final answers.
 - Prefer primary sources and stable vendor docs over blog posts.
 - If a Microsoft Learn landing page is session-dependent, prefer a retrievable API/reference page for the source list.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

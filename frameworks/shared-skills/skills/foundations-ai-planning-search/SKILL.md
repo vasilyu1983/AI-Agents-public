@@ -199,6 +199,13 @@ Each primitive is expanded in [`references/primitives-overview.md`](references/p
 5. For LLM agents, decide what the LLM may propose and what the planner/verifier must enforce.
 6. Validate with small hand-checkable cases, impossible cases, and adversarial edge cases.
 
+Before claiming a guarantee, record a one-row **guarantee ledger**:
+`claim | algorithm | model assumptions | runtime limits | verifier | counterexample test`.
+Completeness or optimality belongs to the modeled problem, not automatically to
+the real executor. If preconditions, effects, costs, observability, or resource
+limits differ in production, report the result as a validated heuristic plan
+rather than inheriting the algorithm's theorem.
+
 ---
 
 ## ASCII Flow
@@ -221,6 +228,12 @@ Planning/search problem
 ---
 
 ## Navigation
+
+- [scripts/replay_plan.py](scripts/replay_plan.py) — deterministic support artifact.
+- [scripts/test_replay_plan.py](scripts/test_replay_plan.py) — deterministic support artifact.
+- [data/plan-fixtures.json](data/plan-fixtures.json) — deterministic support artifact.
+
+- Practical completion contract and known-answer controls: [references/practical-contract.md](references/practical-contract.md).
 
 - Primitives overview: [`references/primitives-overview.md`](references/primitives-overview.md)
 - Patterns, scenarios, and traps: [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md)
@@ -245,6 +258,6 @@ Planning/search problem
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

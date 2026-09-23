@@ -80,7 +80,7 @@ Detailed cards live in [backend-selection-extended.md](backend-selection-extende
 
 | Backend | Use When | Watch For |
 |---|---|---|
-| **AWS S3 Vectors** | Cold/archival corpora on AWS, Bedrock KB integration, ~90% cheaper than hot indexes | Higher latency (hundreds of ms p95), AWS-only, write-batch model |
+| **AWS S3 Vectors** | AWS-native, cost-sensitive or infrequently queried corpora; Bedrock KB integration | Validate AWS's up-to-90-percent vendor cost claim and documented latency classes against the target workload; AWS-only |
 | **Turbopuffer** | Cheap large-scale, namespace-per-tenant, object-storage-backed | Newer ecosystem, latency profile vs hot indexes |
 | **Pinecone Serverless** | No-ops, scale-to-zero, dynamic scale, mixed hot/cold | Lock-in, ACL coarse, cost spikes with QPS |
 | **Cloudflare Vectorize / Upstash Vector** | Edge functions, serverless apps, small–medium footprint | Modest scale ceiling, query-cost variance |

@@ -99,6 +99,10 @@ C# backend task
 
 ## Do / Avoid
 
+**Cancellation and deadline contract.**
+
+Accept `CancellationToken` at every cancellable request and worker boundary and propagate it through database, HTTP, queue, and delay calls. Derive child timeouts from the remaining parent deadline when one exists; for queue and scheduled work, define an operation deadline and combine it with host-shutdown cancellation. Document dependencies that cannot honor cancellation. Do not convert client disconnects or deadline expiry into generic 500s. In tests, cancel during an external call and verify work stops without committing a partial mutation or leaking a background task.
+
 | Do | Avoid |
 |----|-------|
 | Keep application services small and explicit about dependencies | Coupling domain logic directly to HTTP, DB driver types, or framework-specific classes |
@@ -202,13 +206,9 @@ When users ask version-sensitive questions about .NET, C#, or ASP.NET Core, veri
 ## Fact-Checking
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

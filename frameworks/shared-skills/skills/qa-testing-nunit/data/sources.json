@@ -58,7 +58,7 @@
       "name": "NUnit framework release notes",
       "url": "https://docs.nunit.org/articles/nunit/release-notes/framework.html",
       "description": "Full NUnit 4.x release history. Current stable: 4.6.1 (May 2026). Minimum TFM: .NET Framework 4.6.2 or .NET 6.0.",
-      "last_verified": "2026-07-11",
+      "last_verified": "2026-09-07",
       "add_as_web_search": true
     },
     {

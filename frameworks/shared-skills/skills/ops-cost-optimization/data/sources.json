@@ -177,6 +177,27 @@
       "type": "pricing_page",
       "notes": "Active CPU pricing bills only for CPU time actually executing (not idle/wait time), replacing flat GB-hour duration billing on Fluid compute. Reported up to 90% savings for high-idle-time workloads (e.g. AI inference with I/O wait). Confirms accuracy of vercel-cost-guide.md's function duration guidance.",
       "accessed": "2026-07-11"
+    },
+    {
+      "name": "JCGM 101:2008 - Propagation of distributions using a Monte Carlo method",
+      "url": "https://www.bipm.org/en/doi/10.59161/jcgm101-2008",
+      "type": "standard",
+      "notes": "Primary propagation sequence: assign input distributions, sample input vectors, evaluate the model, and summarize the output distribution; Monte Carlo precision scales with draw count but does not validate the model.",
+      "accessed": "2026-09-08"
+    },
+    {
+      "name": "Morris 1991 - Factorial Sampling Plans for Preliminary Computational Experiments",
+      "url": "https://doi.org/10.1080/00401706.1991.10484804",
+      "type": "paper",
+      "notes": "Primary source for randomized one-factor-at-a-time trajectories and elementary effects used for factor screening.",
+      "accessed": "2026-09-08"
+    },
+    {
+      "name": "Kucherenko, Tarantola and Annoni - sensitivity indices with dependent variables",
+      "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC64266",
+      "type": "paper",
+      "notes": "Primary boundary source: ordinary independent-input sensitivity indices do not automatically extend to correlated variables; dependence-aware sampling and indices are separate methods.",
+      "accessed": "2026-09-08"
     }
   ]
 }

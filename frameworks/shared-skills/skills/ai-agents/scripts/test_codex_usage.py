@@ -6,14 +6,22 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 MODULE = Path(__file__).with_name("codex-usage.py")
 SPEC = importlib.util.spec_from_file_location("codex_usage", MODULE)
 codex_usage = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(codex_usage)
-SOL_MODEL = next(model for model in codex_usage.PRICING if model.endswith("-sol"))
-TERRA_MODEL = next(model for model in codex_usage.PRICING if model.endswith("-terra"))
+# Arithmetic tests own their rates. Production prices can change independently.
+SOL_MODEL = "fixture-sol"
+TERRA_MODEL = "fixture-terra"
+FIXTURE_PRICING = {
+    "fixture": {"input": 99.0, "output": 99.0, "cached": 99.0},
+    SOL_MODEL: {"input": 5.0, "output": 30.0, "cached": 0.5,
+                "cache_write": 6.25, "rate_source": "fixture/fixture-sol"},
+    TERRA_MODEL: {"input": 2.0, "output": 12.0, "cached": 0.2},
+}
 
 
 def usage(inp, out=0, cached=0, cache_write=0):
@@ -35,13 +43,18 @@ def token(last=None, total=None):
 
 
 class CodexUsageTests(unittest.TestCase):
+    def setUp(self):
+        patch = mock.patch.object(codex_usage, "PRICING", FIXTURE_PRICING)
+        patch.start()
+        self.addCleanup(patch.stop)
+
     def parse(self, records):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "trace.jsonl"
             path.write_text("".join(json.dumps(row) + "\n" for row in records))
             return list(codex_usage.parse_session_events(str(path)))
 
-    def test_exact_lookup_does_not_match_gpt5_prefix(self):
+    def test_exact_lookup_does_not_match_shorter_model_prefix(self):
         result = codex_usage.attribute_cost(SOL_MODEL, 1_000_000, 0, 0,
                                             service_tier="standard",
                                             context_pricing_class="standard")
@@ -49,6 +62,26 @@ class CodexUsageTests(unittest.TestCase):
         self.assertEqual(result["costUSD"], 5.0)
         self.assertTrue(result["pricingSha256"])
         self.assertTrue(result["rateSource"].endswith(SOL_MODEL))
+
+    def test_longer_unlisted_model_id_cannot_borrow_known_rate(self):
+        result = codex_usage.attribute_cost(SOL_MODEL + "-unlisted", 1_000_000, 0, 0,
+                                           service_tier="standard",
+                                           context_pricing_class="standard")
+        self.assertEqual(result["unpricedReason"], "unknown_model_id")
+        self.assertIsNone(result["costUSD"])
+
+    def test_loaded_rates_map_to_skill_owned_data_without_fixed_vendor_prices(self):
+        document = {
+            "last_verified": "2026-09-05",
+            "models": {"openai/fixture-sol": {
+                "vendor": "openai", "input_per_1m": 7.0, "output_per_1m": 11.0,
+                "cache_read_per_1m": 0.7, "cache_write_per_1m": 8.75,
+            }},
+        }
+        with mock.patch.object(codex_usage, "load_pricing", return_value=document):
+            table, _, _ = codex_usage._load_pricing()
+        self.assertEqual(table[SOL_MODEL]["input"], 7.0)
+        self.assertEqual(table[SOL_MODEL]["cache_write"], 8.75)
 
     def test_unknown_and_unpriced_cache_write_fail_closed(self):
         unknown = codex_usage.attribute_cost("unpriced-test-model", 1, 0, 0,

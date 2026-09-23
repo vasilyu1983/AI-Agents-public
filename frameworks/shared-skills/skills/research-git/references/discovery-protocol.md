@@ -111,7 +111,7 @@ Output a ranked shortlist of 3–5 repos with one-line rationale per repo. Bigge
 
 ## April 2026 Discovery Gotchas
 
-- **Topic `agent-skills` is noisy**: ~60% of topic results are stale or LLM-generated. Prefer `claude-skills` / `codex-skills` topics, or author-curated lists.
+- **Topic `agent-skills` is noisy**: topic results can include stale or generated shells; no prevalence estimate is established here. Prefer `claude-skills` / `codex-skills` topics, or author-curated lists.
 - **`gh search` star filters sort but don't filter**: low-star repos still appear on page 2+. Use `--limit 30 --sort stars` and truncate.
 - **Archived repos leak into results**: always pass `--archived=false` and re-verify in triage.
 - **Awesome-list stars are misleading**: a 50k-star awesome-list can still point to dead repos — check the linked repos, not the list's stars.

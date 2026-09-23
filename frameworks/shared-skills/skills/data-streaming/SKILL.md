@@ -129,7 +129,7 @@ Need exactly-once?
 
 **Upgrade rule:** Audit savepoints before upgrading from 1.x — checkpoint format changed. Review connector compatibility. Validate SQL Gateway behavior for complex queries before migrating Table API jobs.
 
-## Iceberg Streaming Ingestion Pattern (June 2026)
+## Iceberg Streaming Ingestion Pattern
 
 Standard production stack: Kafka -> Flink (Dynamic Iceberg Sink) -> Iceberg table -> compaction job.
 
@@ -143,8 +143,19 @@ schema-registry.compatibility = FULL_TRANSITIVE
 ```
 
 - Every streaming approach produces small files — pair ingestion with a scheduled compaction job.
-- 5-minute checkpoint interval produces ~90% fewer small files vs 1-minute.
-- Iceberg v3 (ratified): deletion vectors, row lineage (`_row_id`), variant data, default column values, geometry/geography types, nanosecond timestamps, encryption foundations. GA on Snowflake (May 7, 2026) and Databricks Runtime 18.0+ (Unity Catalog, all clouds). Trino is not yet v3-ready as of mid-2026 — verify per-engine v3 support before committing a multi-engine stack to v3 features.
+- With one commit opportunity per checkpoint and all else equal, a 5-minute interval creates one-fifth as many commit opportunities as a 1-minute interval (80% fewer). That arithmetic does not predict file count: partitions, writer parallelism, rollover, traffic shape, and compaction also matter. Measure file count, size distribution, recovery time, and latency on the real workload before tuning.
+- Iceberg v3 (ratified): deletion vectors, row lineage (`_row_id`), variant data, default column values, geometry/geography types, nanosecond timestamps, encryption foundations. Snowflake announced GA on May 7, 2026; Databricks' April 9, 2026 announcement still labels Runtime 18.0+ support **Public Preview**, not GA. Verify each engine's current read, write, and maintenance support before committing a multi-engine stack to v3 features.
+
+## Replay Acceptance Gate
+
+A replay plan is complete only when it answers four separate questions:
+
+1. **Source position:** Which offsets, timestamps, snapshot, or CDC log position define the replay boundary?
+2. **State reset:** Which processor state and checkpoints are restored, discarded, or rebuilt?
+3. **Sink behavior:** Which idempotency key, upsert, transaction, or dedupe window prevents duplicate business effects?
+4. **Consumer isolation:** How are replay records kept from triggering emails, payments, alerts, or other irreversible side effects twice?
+
+Rehearse one bounded replay through the real sink before launch. Pass only if row/event counts reconcile at source and sink, deletes and late events behave as contracted, consumer lag recovers inside the SLO, and a second replay produces the same business state.
 
 ## Quick Reference
 
@@ -227,6 +238,7 @@ Flink 2.0 changed checkpoint format and removed deprecated 1.x APIs. Savepoints 
 - [references/control-theory-applied.md](references/control-theory-applied.md) — Load when designing lag-aware autoscalers, producer flow control, or watermark tuning.
 - [references/queueing-theory-applied.md](references/queueing-theory-applied.md) — Load when sizing partitions, modeling lag SLOs, or scaling coordinator throughput.
 - [references/distributed-systems-applied.md](references/distributed-systems-applied.md) — Load when reasoning about ISR quorum, exactly-once via idempotency, leader-epoch fencing, or consumer-group rebalance correctness.
+- [Formal methods](../foundations-formal-methods/SKILL.md) — Load only when a replay, offset/side-effect, rebalance, or fencing protocol has an explicit invariant to check. Return the state/transition boundary and counterexample or bounded safety result; keep delivery guarantees conditional on runtime semantics. Skip routine connector setup.
 - `data/sources.json` — Primary-source URLs for all platforms, processors, CDC tools, and table formats.
 
 ## Current-Source Policy
@@ -248,11 +260,9 @@ Flink 2.0 changed checkpoint format and removed deprecated 1.x APIs. Savepoints 
 
 - Use web search or web fetch to verify current external facts, versions, managed-service behavior, quotas, pricing, and release-specific capabilities before final answers.
 - Prefer primary sources; include source links and dates for volatile recommendations.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

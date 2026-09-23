@@ -136,7 +136,7 @@ Scripts run in a restricted JavaScript context. The constraints exist to keep ru
 
 ## Resume And Caching
 
-A run can be resumed after a pause, kill, or script edit. The longest unchanged prefix of `agent()` calls returns cached results instantly; the first edited or new call and everything after it runs live. Same script plus same args means a full cache hit.
+A run can be resumed after a pause, kill, or script edit. In the documented workflow runtime, an unchanged prefix of eligible `agent()` calls can reuse stored results; the first invalidated or new call and later dependent calls run live. Define the cache key beyond script text and args—runtime/model, tools, inputs, policy, and dependency artifacts may need to invalidate reuse—and verify reuse from run events rather than promising an instant full hit.
 
 This makes iterating on a workflow cheap: edit the persisted script file, re-invoke with the run id, and only the changed tail re-executes.
 

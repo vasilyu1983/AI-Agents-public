@@ -71,6 +71,10 @@ Agent-system request
   -> Route implementation depth to specialized skills
 ```
 
+## Topology Promotion Gate
+
+Start with one bounded workflow or agent and keep it as the control. Promote to multiple agents only when the work has independently executable branches, materially different tool permissions, or a verifier that must be isolated from the producer. Before promotion, record the single-agent failure, the proposed handoff contract, and the extra latency and cost budget. Accept the topology only if the same task set improves the target outcome without increasing unresolved handoff failures; otherwise keep the simpler control.
+
 ## Known Traps
 
 - treating "agent" as the default interaction pattern when a workflow, form, or plain tool call would be simpler
@@ -304,6 +308,6 @@ If browsing is unavailable, use [`data/sources.json`](data/sources.json), say wh
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

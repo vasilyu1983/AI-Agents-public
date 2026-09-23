@@ -2,9 +2,9 @@
   "metadata": {
     "title": "Team Theory Foundations — Sources",
     "description": "Primary references for 10 team-theory primitives: team decision problem, information structure, person-by-person optimality, value of communication, Radner's LQG theorem, Witsenhausen counterexample, information cost, organizational forms, Dec-POMDP / MARL extension, common-task condition. Marschak–Radner classical layer plus modern multi-agent LLM extensions.",
-    "last_updated": "2026-08-24",
+    "last_updated": "2026-09-17",
     "skill": "foundations-team-theory",
-    "total_sources": 31
+    "total_sources": 32
   },
   "canonical_texts": [
     {
@@ -130,7 +130,7 @@
       "id": "LatentMAS2025",
       "name": "Latent Collaboration in Multi-Agent Systems (LatentMAS)",
       "url": "https://arxiv.org/abs/2511.20639",
-      "description": "Zou et al. (2025). arXiv cs.CL. ICML 2026 Spotlight. Agents exchange information via shared latent working memory (last-layer embeddings) rather than natural language. Up to 14.6% accuracy gain, 4–4.3× inference speedup, 70.8–83.7% token reduction vs. text-based multi-agent baselines. Evaluated on 9 benchmarks. Code open-sourced at github.com/Gen-Verse/LatentMAS. Corroborated by Rath (2026, arXiv:2601.04170) on semantic drift quantification and Shen et al. (2025, arXiv:2505.23352) on topology-dependent degradation. Source for primitive #2 (information structure: message representation layer) and #4 (value of communication: lossless vs. lossy channel). Title, 13-author list, ICML 2026 Spotlight status, and the 14.6% / 4–4.3× / 70.8–83.7% figures re-verified via direct arXiv fetch 2026-08-14.",
+      "description": "Zou et al. (2025), Latent Collaboration in Multi-Agent Systems. Primary Section 4.1: reported average accuracy improvements over single-model baseline are 14.6% sequential and 13.3% hierarchical; gains over TextMAS are 2.8% and 4.6%. Average speedups versus sequential/hierarchical TextMAS are 4×/4.3×, output-token reductions 70.8%/83.7%. Nine benchmarks, specialized shared latent-memory architecture; representation compatibility and local comparisons required. Preserve authors units, no unsupported percentage-point conversion. Source: https://arxiv.org/html/2511.20639#S4.SS1; checked 2026-09-17.",
       "url_check": "auto"
     },
     {
@@ -195,7 +195,7 @@
       "id": "Pappu2026ExpertsHeldBack",
       "name": "Multi-Agent Teams Hold Experts Back",
       "url": "https://arxiv.org/abs/2602.01011",
-      "description": "Pappu, El, Cao, di Nolfo, Sun, Cao, and Zou (2026). arXiv:2602.01011, ICML 2026. Self-organizing LLM teams underperform their strongest individual member by up to 41.1% on ML benchmarks even when explicitly told which agent is the expert. Mechanism is integrative compromise — averaging expert and non-expert views instead of weighting by competence — and the deficit widens with team size. The same consensus-seeking behavior improves robustness to adversarial agents, making this a genuine tradeoff rather than a pure defect. Title, full author list, ICML 2026 acceptance, and the 41.1% figure verified via direct arXiv fetch 2026-08-14. Source for primitive #3 (aggregation rule as part of the joint policy; PBPO teams losing to their own best member) and the expertise-deference Anti-Pattern row.",
+      "description": "Pappu et al. (2026), Multi-Agent Teams Hold Experts Back. Primary Table 2 / Section 4.2: HLE Text-Only Expert Not Mentioned team 28.0%, At Least One Correct oracle 47.5%, relative synergy gap 41.1%; best fixed individual 29.0%, Reveal Expert team 36.0%. The 41.1% is an oracle gap, not loss against the best individual, despite broad abstract wording. Psychology experiments separately investigate expertise dilution and team size. Source: https://arxiv.org/html/2602.01011#S4.SS2; checked 2026-09-17. Supports explicit aggregation comparison, not a universal deference rule.",
       "url_check": "auto"
     },
     {
@@ -224,6 +224,14 @@
       "name": "Accelerate: The Science of Lean Software and DevOps — Building and Scaling High Performing Technology Organizations",
       "url": "https://itrevolution.com/product/accelerate/",
       "description": "Forsgren, N., Humble, J., Kim, G. (2018). IT Revolution. Source for references/westrum-culture-measurement.md: Westrum's three-culture typology (Table 3.1, printed p. 65) and the seven validated Likert items measuring team organizational culture (Ch. 13, printed pp. 191-192). Used as the measured-culture empirical counterpart to the Marschak-Radner information-structure primitives, NOT as a source of team-theory results. Provenance limits: self-reported 2016-era survey population; inferential-predictive design, so findings are 'associated with' outcomes except where the authors' own directional prediction is quoted; the book's retired high/medium/low performer tiers are not cited as current fact.",
+      "url_check": "manual"
+    },
+    {
+      "id": "HoChu1972",
+      "name": "Team Decision Theory and Information Structures in Optimal Control Problems—Part I",
+      "url": "https://doi.org/10.1109/TAC.1972.1099850",
+      "description": "Ho & Chu (1972), IEEE Transactions on Automatic Control 17(1), 15–22. Primary partially nested information-structure result; action-dependent observations alone do not establish non-classical structure.",
+      "add_as_web_search": false,
       "url_check": "manual"
     }
   ]

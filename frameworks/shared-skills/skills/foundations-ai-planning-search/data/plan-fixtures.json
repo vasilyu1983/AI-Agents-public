@@ -1,0 +1,9 @@
+{
+  "initial": ["ticket-open", "authorized"],
+  "goal": ["ticket-closed"],
+  "actions": {
+    "review": {"requires": ["ticket-open"], "add": ["reviewed"], "delete": [], "cost": 1},
+    "close": {"requires": ["reviewed", "authorized"], "add": ["ticket-closed"], "delete": ["ticket-open"], "cost": 2}
+  },
+  "plan": ["review", "close"]
+}

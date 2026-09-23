@@ -1,6 +1,6 @@
 # Semantic Scholar Strategy
 
-> **API-key restriction (2026):** New keys are no longer approved for free email domains (gmail, outlook, etc.). Existing keys are unaffected. If you only have a free-domain email, plan around the anonymous shared pool or use [OpenAlex](https://openalex.org/) as an alternative — note OpenAlex is **not** keyless either (a free key has been mandatory there since 2026-02-13), it just has no email-domain restriction. See [Rate Limits](#rate-limits-verified-jul-2026) for full detail.
+OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@ Semantic Scholar's strength is the **citation graph** — finding what built on 
 2. **Paper details**: `https://api.semanticscholar.org/graph/v1/paper/{{paperId}}` (S2 ID, DOI, arXiv ID, etc.)
 3. **Citations / references**: `.../paper/{{paperId}}/citations` and `.../paper/{{paperId}}/references`
 4. **Recommendations**: `https://api.semanticscholar.org/recommendations/v1/papers/forpaper/{{paperId}}`
-5. **Bulk via OpenAlex**: complementary catalog at https://openalex.org/ for cross-checking (free API key mandatory since 2026-02-13 — register at openalex.org/settings/api).
+5. **Bulk via OpenAlex:** basic keyless access is available; register a free key for larger budgets. See the dated access note above.
 
 ## Query Patterns
 
@@ -85,10 +85,7 @@ Use the `/paper/{{id}}/citations` endpoint with `fields=year,influentialCitation
   approved** due to limited resources. Existing keys are unaffected. If you only
   have a free-domain email, plan around the anonymous shared pool, or fall back
   to **OpenAlex** (https://openalex.org/) which has no email-domain restriction
-  — but still requires its own free API key for every request (mandatory since
-  2026-02-13; register at openalex.org/settings/api). "No restriction" means no
-  domain gate, not no key.
+  — basic keyless access is available; use a free key for larger budgets.
 - Apply for a key at https://www.semanticscholar.org/product/api (institutional
   email) if scanning at scale.
-- Scripts in this skill default to 1 req/sec + exponential backoff to stay under
-  the public limit.
+- Query generators emit URLs; they do not execute requests or enforce backoff. The fetching agent must apply current operator limits.

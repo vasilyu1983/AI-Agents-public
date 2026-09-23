@@ -17,7 +17,7 @@ Each row is a trap that has caused real regressions in shipping apps. Walk this 
 |---|---|---|
 | `_performBlockAfterCATransactionCommitSynchronizes:` "Call must be made on main thread" | Private SwiftUI assertion; crashes on a Concurrency Task, not main | Find the root cause in one of the 5 patterns below; never add defensive `MainActor.run` wraps |
 | `nonisolated async` `UNUserNotificationCenterDelegate` + nested `await MainActor.run { }` | Notification-tap freeze / crash after transport succeeds | Mark delegate methods `@MainActor`; `@unchecked Sendable` on the class; delete nested hops |
-| Bare `Task { }` in `@MainActor` class mutating `@Observable` | Same crash class; fires on cooldown timers, `Transaction.updates`, post-`Task.sleep` state resets | `Task { @MainActor [weak self] in … }` |
+| `Task { }` formed in a nonisolated callback mutating `@Observable` | Same crash class; creation context has no main-actor isolation | `Task { @MainActor [weak self] in … }`; do not misdiagnose tasks formed inside main-actor-isolated methods, which inherit that actor |
 | `@MainActor → actor → @MainActor` round-trip via `await` | Post-await tail lands on actor executor, not main | Promote the inner `actor` to `@MainActor final class` when all callers are main-isolated |
 | `@Sendable async` closure awaited from `@MainActor` | Continuation does not reliably resume on main | Retype as `@MainActor async` closure |
 | `SCNView.scene = scene` in `updateUIView` | CATransaction commit on SceneKit render thread calls UIKit off-main | Build scene once in `makeUIView`; `updateUIView` no-op; or `@MainActor Coordinator` |
@@ -53,7 +53,7 @@ Each row is a trap that has caused real regressions in shipping apps. Walk this 
 - `dataCorrupted` + `<!DOCTYPE html>` is an API routing / auth bug — do not conflate with push-open crashes.
 - Never bulk-silence Swift 6 isolation errors with `@preconcurrency` — it re-introduces the crash class.
 
-Route detailed diagnosis and fix recipes to [`software-ios-runtime-debugging/references/swift-concurrency-crash-triage.md`](../software-ios-runtime-debugging/references/swift-concurrency-crash-triage.md).
+Route detailed diagnosis and fix recipes to [`software-ios-runtime-debugging/references/swift-concurrency-crash-triage.md`](../../software-ios-runtime-debugging/references/swift-concurrency-crash-triage.md).
 
 ---
 

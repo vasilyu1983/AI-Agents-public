@@ -54,7 +54,7 @@ Every primitive in this skill is annotated with a "Misuse boundary" that states 
 | # | Primitive | Behavioral Mechanism | Primary Domains |
 |---|-----------|---------------------|-----------------|
 | 1 | [Prospect Theory](../assets/templates/behavioral-economics/01-prospect-theory.md) | S-shaped value function; losses and gains weighted asymmetrically | Pricing, offers, upgrade copy, loss/gain framing |
-| 2 | [Loss Aversion](../assets/templates/behavioral-economics/02-loss-aversion.md) | Losses ~2× as powerful as equivalent gains (range ~1.3–2.0×; 2.25 is an upper bound) | Churn prevention, trial expiry, downgrade warnings |
+| 2 | [Loss Aversion](../assets/templates/behavioral-economics/02-loss-aversion.md) | Task-dependent fitted loss weighting; no copy-response multiplier or universal bound | Churn prevention, trial expiry, downgrade warnings |
 | 3 | [Anchoring](../assets/templates/behavioral-economics/03-anchoring.md) | First number seen distorts all subsequent numerical judgments | Pricing pages, discount display, negotiation setup |
 | 4 | [Defaults](../assets/templates/behavioral-economics/04-defaults.md) | Strong bias toward pre-set options; inertia favors the status quo | Onboarding, plan pre-selection, consent flows |
 | 5 | [Social Proof](../assets/templates/behavioral-economics/05-social-proof.md) | Uncertainty resolved by observing others' choices | Trust signals, sign-up pages, review placement |
@@ -68,7 +68,7 @@ Every primitive in this skill is annotated with a "Misuse boundary" that states 
 | 13 | [Reinforcement Schedules](../assets/templates/behavioral-economics/13-reinforcement-schedules.md) | Schedule type (FR/VR/FI/VI), not just reward, governs acquisition and resistance to extinction | Streaks, rewards, gamification, reactivation; auditing existing reward systems |
 | 14 | [Cognitive Load & Working Memory](../assets/templates/behavioral-economics/14-cognitive-load-working-memory.md) | Working memory ~4 novel chunks; extraneous load suppresses informed choice | Forms, dashboards, alerts, consent flows, onboarding step count |
 | 15 | [Context-Dependent Retrieval](../assets/templates/behavioral-economics/15-context-dependent-retrieval.md) | Encoding specificity; behaviors bound to cues present at learning collapse when context shifts | Migrations, redesigns, cross-surface continuity, dormant-user reactivation |
-| 16 | [Implementation Intentions](../assets/templates/behavioral-economics/16-implementation-intentions.md) | User-authored if-then plans bind a specific cue to a specific response, doubling/tripling completion rates | Goal-pursuit features, onboarding into habit-forming behavior, transition-state re-anchoring |
+| 16 | [Implementation Intentions](../assets/templates/behavioral-economics/16-implementation-intentions.md) | User-authored if-then plans bind a specific cue to a specific response, supporting goal completion with context-dependent effects rates | Goal-pursuit features, onboarding into habit-forming behavior, transition-state re-anchoring |
 
 ---
 

@@ -50,7 +50,7 @@ Use this skill for production web-app i18n and l10n: library choice, message cat
 
 1. Confirm framework, locale count, route strategy, and translation workflow.
 2. Choose the library and catalog model.
-3. Define locale detection and persistence order.
+3. Define explicit-route resolution separately from first-entry locale negotiation and persistence.
 4. Implement ICU or equivalent message formatting correctly.
 5. Add extraction, review, and missing-key controls.
 6. Add RTL and visual regression coverage where needed.
@@ -98,7 +98,9 @@ MF2 is standardized at the syntax level in Unicode's LDML spec (stabilized throu
 
 ### Locale routing and fallback
 
-- locale selection should prioritize user preference, then route or URL, then cookie, then headers, then default locale
+- an explicit locale in a valid URL or deep link wins for that request; preserve it through navigation and canonical metadata
+- when no explicit locale is present, negotiate from authenticated preference, persisted choice, supported `Accept-Language`, then default locale
+- a stored preference may redirect an unlocalized entry route, but must not silently rewrite a shared explicit-locale URL
 - always define a fallback locale
 - never silently fall back to English on indexable non-English routes
 - metadata, breadcrumbs, JSON-LD, and visible copy must stay in the same locale
@@ -138,7 +140,7 @@ MF2 is standardized at the syntax level in Unicode's LDML spec (stabilized throu
 | Visible strings translated, but validation messages / metadata / emails / JSON-LD left in English | Enumerate all locale surfaces (UI, email, SEO, legal) at project start; treat each as a separate test gate |
 | String concatenation for grammar-sensitive or gendered copy | Use ICU `{count, plural, ...}` / `{gender, select, ...}`; never `"Hello " + name` |
 | Only Latin-script locales tested | Require one long-string locale (de/ru) and one non-Latin (ja/ar) before "complete" |
-| Locale persisted separately in route, cookie, and client state with no precedence rule | Define precedence order once: user preference > URL route > cookie > `Accept-Language` > default locale |
+| Locale persisted separately in route, cookie, and client state with no precedence rule | Separate resolution rules: explicit URL/deep-link locale for the request; otherwise authenticated preference > persisted choice > supported `Accept-Language` > default |
 | Machine translation shipped without glossary or review | Require glossary, tone rules, and human review gate for all customer-visible content |
 | Plural category count assumed from memory (e.g. "French is just one/other like English") | CLDR revises per-language category counts over time (French now has `one, many, other`); verify against the current CLDR plural rules chart, don't hardcode from a prior project |
 | Translated content rendered as raw HTML (`v-html`, `dangerouslySetInnerHTML`, ICU HTML tags) with no CSP/Trusted Types | Real XSS advisories exist for this exact pattern in both vue-i18n (CVE-2025-53892) and Angular's i18n pipeline (CVE-2026-27970) — treat translation-file write access as privileged and pin patched library versions |
@@ -205,7 +207,6 @@ Use [references/ops-runbook.md](references/ops-runbook.md) for the detailed tria
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

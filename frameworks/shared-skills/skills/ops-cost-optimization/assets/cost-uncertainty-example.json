@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "model_name": "Synthetic monthly AI feature cost teaching model",
+  "currency": "USD",
+  "budget": 1750,
+  "quantiles": [0.05, 0.5, 0.95, 0.99],
+  "simulation": {
+    "draws": 50000,
+    "seed": 1729,
+    "batches": 20,
+    "probability_se_target": 0.003
+  },
+  "independent_inputs": [
+    {
+      "name": "requests",
+      "unit": "requests/month",
+      "bounds": [0, 200000],
+      "distribution": {"type": "triangular", "low": 80000, "mode": 100000, "high": 140000},
+      "provenance": {"kind": "scenario", "source": "Synthetic teaching fixture; not observed data or a provider quote", "as_of": "2026-09-01"},
+      "distribution_assumption": "Planning range with a central case; not fitted to observations."
+    },
+    {
+      "name": "input_tokens",
+      "unit": "tokens/request",
+      "bounds": [0, 5000],
+      "distribution": {"type": "triangular", "low": 1800, "mode": 2400, "high": 3200},
+      "provenance": {"kind": "scenario", "source": "Synthetic teaching fixture; not observed data or a provider quote", "as_of": "2026-09-01"},
+      "distribution_assumption": "Synthetic triangular planning range; replace with supported evidence."
+    },
+    {
+      "name": "output_tokens",
+      "unit": "tokens/request",
+      "bounds": [0, 1500],
+      "distribution": {"type": "triangular", "low": 350, "mode": 500, "high": 800},
+      "provenance": {"kind": "scenario", "source": "Synthetic teaching fixture; not observed data or a provider quote", "as_of": "2026-09-01"},
+      "distribution_assumption": "Synthetic triangular planning range; replace with supported evidence."
+    },
+    {
+      "name": "retry_multiplier",
+      "unit": "attempts/request",
+      "bounds": [1, 2],
+      "distribution": {"type": "uniform", "low": 1, "high": 1.08},
+      "provenance": {"kind": "scenario", "source": "Synthetic teaching fixture; not observed data or a provider quote", "as_of": "2026-09-01"},
+      "distribution_assumption": "Any value in the bounded retry envelope is treated as equally plausible."
+    },
+    {
+      "name": "effective_input_rate",
+      "unit": "USD/million input tokens",
+      "bounds": [0, 10],
+      "distribution": {"type": "triangular", "low": 1.2, "mode": 1.8, "high": 2.6},
+      "provenance": {"kind": "scenario", "source": "Synthetic teaching fixture; not observed data or a provider quote", "as_of": "2026-09-01"},
+      "distribution_assumption": "Effective rate folds cached and uncached shares into one scenario input; validate it against billing data."
+    },
+    {
+      "name": "output_rate",
+      "unit": "USD/million output tokens",
+      "bounds": [0, 30],
+      "distribution": {"type": "constant", "value": 15},
+      "provenance": {"kind": "scenario", "source": "Synthetic teaching fixture; not observed data or a provider quote", "as_of": "2026-09-01"},
+      "distribution_assumption": "Synthetic rate held fixed for the modeled month; replace with a current provider quote."
+    }
+  ],
+  "joint_empirical_groups": [],
+  "components": [
+    {"name": "fixed_platform", "coefficient": 200, "factors": [], "divisor": 1},
+    {"name": "input_inference", "coefficient": 1, "factors": ["requests", "input_tokens", "retry_multiplier", "effective_input_rate"], "divisor": 1000000},
+    {"name": "output_inference", "coefficient": 1, "factors": ["requests", "output_tokens", "retry_multiplier", "output_rate"], "divisor": 1000000}
+  ]
+}

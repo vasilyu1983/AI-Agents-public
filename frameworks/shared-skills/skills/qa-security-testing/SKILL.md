@@ -106,11 +106,11 @@ Treat gate thresholds as organization policy, not universal defaults. Severity a
    Reachability](references/owasp-top-10-coverage.md#triage-severity-vs-exploitability-vs-reachability)
    for the full model and worked rules of thumb.
 2. **Track**: record in issue tracker with severity, EPSS/reachability context, SLA deadline, and remediation plan.
-3. **Remediate**: fix, verify fix with regression test, close finding.
+3. **Remediate**: keep `scanner finding`, `triaged vulnerability`, `local remediation`, and `verified deployed fix` as separate states. Apply the organization's closure policy to the finding class. Where a safe, stable behavioral oracle exists, show it failing on the vulnerable revision or fixture and passing on the fix. For dependency, configuration, or secret findings, fixed inventory, effective configuration, or rotation/revocation evidence plus a clean scoped rescan can verify local remediation; record any coverage limits. When deployment is relevant, track it separately by proving the affected artifact or environment contains the fix, unless policy explicitly makes deployment a closure requirement.
 4. **Suppress**: if false positive, document reason and reviewer. Review suppressions quarterly — see
    [references/owasp-top-10-coverage.md § False-Positive Economics](references/owasp-top-10-coverage.md#false-positive-economics)
    for why unmanaged false positives cost more than the noise itself.
-5. **Measure**: track mean time to remediate, open vulnerability count by severity, scan coverage percentage.
+5. **Measure**: track mean time to remediate, open vulnerability count by severity, scan coverage percentage. Preserve scanner version/ruleset, artifact digest or commit, target environment, test case, and suppression reviewer; a clean rescan alone can miss changed reachability or an unscanned deployed artifact.
 6. **Escalate to human testing when scanners cannot see the risk**: business-logic abuse, exploit
    chains across multiple low-severity findings, and freshly re-architected surfaces need a pen-test
    or red-team engagement, not another scanner run — see [references/owasp-top-10-coverage.md § When
@@ -261,12 +261,9 @@ Security testing request
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

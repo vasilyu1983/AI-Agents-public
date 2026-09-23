@@ -41,7 +41,7 @@ active turn
 | What belongs in a coding-agent session model? | [`references/session-lifecycle-and-resume.md`](references/session-lifecycle-and-resume.md) | Session IDs, picker flows, stale-cache reset, and resume semantics |
 | How should transcripts recover across worktrees and summaries? | [`references/transcript-restoration-and-cross-worktree-recovery.md`](references/transcript-restoration-and-cross-worktree-recovery.md) | Restoration boundaries, search, cross-project safeguards, and replay rules |
 | How do users decide between continue / rewind / clear / compact / subagent at each turn? | [`references/context-lifecycle-and-branching.md`](references/context-lifecycle-and-branching.md) | 1M-context branching model, context rot zone, rewind > correction, compact-vs-clear, bad-compact causes, subagent mental test |
-| How do forked subagents change session lifecycle (cache, isolation, resume, cost)? | [`references/context-forking.md`](references/context-forking.md) | Blank-vs-forked startup, `CLAUDE_CODE_FORK_SUBAGENT=1` and `/fork` surfaces, cache-prefix economics, fork-as-exception rule |
+| How do forked subagents change session lifecycle (cache, isolation, resume, cost)? | [`references/context-forking.md`](references/context-forking.md) | Named-vs-forked startup, current `/subtask`, historical and agent-view-dependent `/fork`, environment-variable surfaces, cache-prefix economics |
 | Which resume path should I use (session ID / picker / ACP re-attach / recipe re-seed)? | [`references/resume-path-decision-tree.md`](references/resume-path-decision-tree.md) | Decision tree, path comparison table, prompt-cache economics in subagent spawning |
 | How does OpenAI Codex split Session / Task / Turn protocol state? | [`references/openai-codex-session-task-turn-protocol.md`](references/openai-codex-session-task-turn-protocol.md) | SQ/EQ protocol, response bookmarks, one-active-task invariant, and interruption rules |
 | How does Codex persist, resume, fork, and cloud-resume sessions? | [`references/openai-codex-session-persistence.md`](references/openai-codex-session-persistence.md) | SQLite-backed session index, `codex resume` UUID lookup, `codex fork` branch semantics, `codex cloud` task-apply |
@@ -72,6 +72,7 @@ active turn
 6. **Use fallback lookup order deliberately.** Enriched session indexes may fail; direct log or transcript lookup should exist as a second path before the runtime declares a session missing.
 7. **Restore summary state, not just raw logs.** Transcript collapse, synthesized summaries, and lightweight cost or usage state should survive resume even if the visible REPL list is truncated.
 8. **Test failure paths.** Verify missing sessions, multiple title matches, stale worktree paths, interrupted resume, index miss with direct-log fallback, and cross-project recovery.
+9. **Attest the restored envelope.** Record which transcript/checkpoint was loaded, which instructions and summaries were rebuilt, which caches were discarded, and the effective model, tools, permissions, workspace, and context-start mode after restore. Resume fidelity and prompt-cache reuse are separate claims; verify both from runtime evidence.
 
 ## Host Rules
 
@@ -282,7 +283,7 @@ A resumed session is usually rehydrated from the transcript. Goose's recipe mode
 - [`references/session-lifecycle-and-resume.md`](references/session-lifecycle-and-resume.md) — Session identity, picker flows, cache clearing, and resume entrypoints
 - [`references/transcript-restoration-and-cross-worktree-recovery.md`](references/transcript-restoration-and-cross-worktree-recovery.md) — Transcript recovery, summary persistence, and cross-worktree safeguards
 - [`references/context-lifecycle-and-branching.md`](references/context-lifecycle-and-branching.md) — Per-turn branching (continue/rewind/clear/compact/subagent), 1M-context rot zone, steered compaction, and subagents as context-management primitive
-- [`references/context-forking.md`](references/context-forking.md) — Blank-vs-forked subagent startup, `CLAUDE_CODE_FORK_SUBAGENT=1` and `/fork` surfaces, cache-prefix economics, isolation guarantees, and fork-as-exception rule
+- [`references/context-forking.md`](references/context-forking.md) — Named-vs-forked subagent startup, current `/subtask`, historical and agent-view-dependent `/fork`, environment-variable surfaces, cache-prefix accounting, and isolation behavior
 - [`references/resume-path-decision-tree.md`](references/resume-path-decision-tree.md) — When to use session ID vs picker vs ACP re-attach vs recipe re-seed
 - [`references/openai-codex-session-task-turn-protocol.md`](references/openai-codex-session-task-turn-protocol.md) — OpenAI Codex Session / Task / Turn protocol, queue contract, response bookmarks, and interruption rules
 - [`references/openai-codex-session-persistence.md`](references/openai-codex-session-persistence.md) — SQLite session index, `codex resume` / `fork` / `cloud` subcommand semantics, storage path layering
@@ -306,6 +307,6 @@ A resumed session is usually rehydrated from the transcript. Goose's recipe mode
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

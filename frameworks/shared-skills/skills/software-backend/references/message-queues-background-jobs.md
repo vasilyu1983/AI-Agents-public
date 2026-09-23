@@ -199,57 +199,46 @@ If a job is NOT idempotent, duplicate processing causes:
 
 ### Idempotency Patterns
 
-**Pattern 1: Idempotency Key**
+**Pattern 1: Receiver-Enforced Payment Key**
 
-```typescript
-async function processPayment(job: Job) {
-  const { orderId, amount, idempotencyKey } = job.data;
+Implementation-neutral pseudocode; adapt these operations to the receiver's verified API and database isolation contract:
 
-  // Check if already processed
-  const existing = await redis.get(`idem:payment:${idempotencyKey}`);
-  if (existing) {
-    logger.info({ idempotencyKey }, 'Payment already processed, skipping');
-    return JSON.parse(existing);
-  }
+```text
+key = merchant_id + order_id + payment_operation_version
+payload_hash = canonical_hash(amount, currency, beneficiary)
+transaction:
+    insert-or-read payment_operation(key UNIQUE, payload_hash, state=pending)
+    reject if existing payload_hash differs
+    return stored result if complete
 
-  // Process payment
-  const result = await paymentGateway.charge(orderId, amount);
+# Concurrent attempts MUST use the same receiver-enforced key.
+result = gateway.charge(payload, idempotency_key=key)
+transaction:
+    store durable result and mark operation complete
 
-  // Mark as processed (with TTL for cleanup)
-  await redis.set(
-    `idem:payment:${idempotencyKey}`,
-    JSON.stringify(result),
-    'EX',
-    86400 * 7  // 7 days
-  );
-
-  return result;
-}
+on timeout / crash before storing result:
+    keep operation outcome_unknown; query receiver by key
+    retry with the same key only within documented receiver dedupe retention
+    if reconciliation or retention guarantees fail: manual review, no new charge key
 ```
 
-**Pattern 2: Database Constraint**
+A Redis GET/charge/SET sequence cannot prevent concurrent or crash-window double charges. A lock alone also does not resolve an external outcome after a crash. Require receiver-side deduplication with payload mismatch rejection and retention covering the retry horizon; otherwise serialize and reconcile, without claiming automatic exactly-once payment effects.
 
-```typescript
-async function processOrder(job: Job) {
-  const { orderId, eventId } = job.data;
+**Pattern 2: Atomic Inbox and Local Fulfillment**
 
-  try {
-    // Use unique constraint to prevent duplicate processing
-    await db.processedEvents.create({
-      data: { eventId, processedAt: new Date() },
-    });
-  } catch (error) {
-    if (error.code === 'P2002') {  // Prisma unique constraint violation
-      logger.info({ eventId }, 'Event already processed');
-      return;
-    }
-    throw error;
-  }
-
-  // Process the order (only runs once per eventId)
-  await fulfillOrder(orderId);
-}
+```text
+transaction:
+    inserted = insert inbox(consumer_scope, event_id, payload_hash)
+               ON CONFLICT DO NOTHING
+    if not inserted:
+        reject mismatched payload_hash; return prior committed result
+    update order and inventory using this transaction
+    insert fulfillment_outbox(stable_fulfillment_key UNIQUE, payload)
+commit
+acknowledge message
 ```
+
+The inbox marker, local business writes and fulfillment intent commit together or all roll back. Do not commit the marker before fulfillment. Shipping, email or another external fulfillment operation cannot join this local transaction: its dispatcher needs receiver-enforced deduplication and outcome-unknown reconciliation like Pattern 1. An inbox key must include consumer scope so independent consumers do not suppress each other.
 
 **Pattern 3: Conditional Update**
 
@@ -607,7 +596,7 @@ async function flushBatch() {
 |-----------|-------------|-----------------|
 | At-most-once | Message processed 0 or 1 times. Fastest, lossy. | Fire-and-forget, no ACK |
 | At-least-once | Message processed 1 or more times. Requires idempotency. | ACK after processing + retries |
-| Exactly-once | Message processed exactly 1 time. Hard to achieve. | Idempotent consumer + transactional outbox |
+| Scoped atomic effects | One committed local effect per scoped event key; duplicates can still be delivered. | Transactional inbox + local business writes; external effects require separate receiver dedupe |
 
 ### At-Least-Once (Default for BullMQ, SQS, Kafka)
 
@@ -621,7 +610,7 @@ Producer → Broker → Consumer
                          → MUST handle idempotently
 ```
 
-### Exactly-Once (Transactional Outbox Pattern)
+### Atomic Recording, At-Least-Once Publication (Transactional Outbox)
 
 ```typescript
 // Write event AND business data in the same database transaction
@@ -652,7 +641,10 @@ async function publishOutboxEvents() {
   });
 
   for (const event of events) {
-    await queue.add(event.eventType, JSON.parse(event.payload));
+    await queue.add(event.eventType, {
+      eventId: event.id,  // stable identity retained on every publication attempt
+      payload: JSON.parse(event.payload),
+    });
     await db.outboxEvent.update({
       where: { id: event.id },
       data: { published: true, publishedAt: new Date() },
@@ -660,6 +652,10 @@ async function publishOutboxEvents() {
   }
 }
 ```
+
+Publication and `published=true` are separate operations. A crash after enqueue but before the database update republishes the same event ID; this is expected at-least-once delivery. Concurrent dispatchers may also publish duplicates. Consumers enforce transactional scoped inbox dedupe; do not rely on transient queue job IDs or retention-limited broker dedupe for durable correctness. Mark published only after broker acknowledgement. Order-sensitive consumers additionally validate aggregate sequence/version and handle gaps; polling by creation time does not establish end-to-end ordering.
+
+Executable crash-history model: `python3 scripts/test_delivery_histories.py` from this bundle. It models local atomicity and an explicitly deduplicating fake receiver, not production gateway behavior.
 
 ---
 

@@ -2,8 +2,8 @@
 name: qa-testing-strategy
 description: "Risk-based test strategy for software delivery. Use when defining coverage, setting CI gates, managing flaky tests, choosing test layers, or establishing release criteria."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.1"
-last_validated: 2026-07-11
+version: "1.2"
+last_validated: 2026-09-08
 ---
 
 # QA Testing Strategy
@@ -68,9 +68,10 @@ Rules:
 
 1. Clarify scope and risk: critical journeys, failure modes, compliance constraints, and non-functional risks.
 2. Define quality signals: SLOs, budgets, contract checks, accessibility target, and what blocks merge vs deploy.
-3. Choose the smallest effective layer first: unit, component, contract, schema fuzzing, integration, then E2E.
-4. Make failures diagnosable: logs, traces, screenshots, videos, build links, request IDs, trace IDs, and owners.
-5. Operationalize the suite: explicit smoke vs targeted-batch vs deploy-gate scopes, quarantine with expiry, suite budgets, retries with evidence retention, and dashboards.
+3. Map each critical risk to a claim, oracle, layer, environment, build identity, evidence artifact, owner, and expiry. Label it `configured`, `executed`, `behavior-verified`, or `release-observed`; static analysis, discovery, coverage, and a green build stop before executed behavior.
+4. Choose the smallest effective layer first: unit, component, contract, schema fuzzing, integration, then E2E.
+5. Make failures diagnosable: logs, traces, screenshots, videos, build links, request IDs, trace IDs, and owners.
+6. Operationalize the suite: explicit smoke vs targeted-batch vs deploy-gate scopes, quarantine with expiry, suite budgets, retries with evidence retention, and dashboards. List uncovered critical risks and the next gate instead of treating a targeted pass as universal release proof.
 
 ## Decision Rules
 
@@ -143,7 +144,7 @@ Need to test: [Change or Risk]
 - [references/chaos-resilience-testing.md](references/chaos-resilience-testing.md): chaos experiments, fault injection, CI/CD integration, and DORA/SOC 2 resilience evidence
 - [references/compliance-testing.md](references/compliance-testing.md): compliance-as-code, audit-evidence automation, access control, data residency, and encryption validation
 - [references/feature-matrix-vs-test-matrix-gate.md](references/feature-matrix-vs-test-matrix-gate.md): pre-release gate mapping implemented features to auditable test evidence
-- [references/property-based-testing.md](references/property-based-testing.md): property-based testing with fast-check, Hypothesis, and jqwik — universal invariants, edge-case discovery, and AI-code blind-spot detection
+- [references/property-based-testing.md](references/property-based-testing.md): choose valid domains and oracles, then run property and metamorphic checks with fast-check, Hypothesis, jqwik, or the portable contract runner
 - [references/comprehensive-testing-guide.md](references/comprehensive-testing-guide.md): retired redirect map pointing each test layer to its dedicated sibling skill
 
 ## Templates
@@ -156,6 +157,14 @@ Need to test: [Change or Risk]
 - [assets/performance/template-k6-load-testing.md](assets/performance/template-k6-load-testing.md): performance budgets and scenarios
 - [assets/runbooks/template-flaky-test-triage-deflake-runbook.md](assets/runbooks/template-flaky-test-triage-deflake-runbook.md): deflake runbook
 - [assets/template-test-case-design.md](assets/template-test-case-design.md): Given/When/Then and oracles
+
+## Property and Metamorphic Contract Tools
+
+- [scripts/property_contract_runner.py](scripts/property_contract_runner.py): dependency-free adapter runner with deterministic seed and case-index replay
+- [assets/property_contract_example.py](assets/property_contract_example.py): known-correct calculator, config-parser, and JSON round-trip adapter with deliberate negative-control mutations
+- [scripts/test_property_contract_runner.py](scripts/test_property_contract_runner.py): verifies correct behavior, mutation detection, exit codes, and replay
+
+From this skill directory, run `python3 scripts/property_contract_runner.py --contract assets/property_contract_example.py --seed 20260908 --cases 120 --json`; equivalent absolute paths work from any directory. Review the adapter first because the runner imports and executes the Python file and does not sandbox it. It defensively copies case and result values, but adapter global state remains the adapter author's responsibility. Exit `0` passes the sampled contract, exit `1` reports a replayable property failure, and exit `2` reports an invalid adapter or command.
 
 ## ASCII Flow
 
@@ -188,12 +197,9 @@ Test strategy request
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

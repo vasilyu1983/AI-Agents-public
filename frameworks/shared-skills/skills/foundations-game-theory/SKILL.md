@@ -2,8 +2,8 @@
 name: foundations-game-theory
 description: Game-theory primitives for strategic decision systems, auctions, mechanism design, incentives, attribution, negotiation, debate, and trust. Use when modeling strategic play.
 compatibility: Claude Code + Codex. Portable core — primitives apply across domains.
-version: "1.2"
-last_validated: 2026-08-14
+version: "1.3"
+last_validated: 2026-09-17
 ---
 
 # Game Theory Foundations
@@ -54,7 +54,7 @@ For the agent-team applied recipe layer (team.yaml manifest fields, agent-team a
 | [Online Shapley Prompt Evolution](#17-online-shapley-prompt-evolution) | High-frequency teams, prompt tuning over many runs | Per-member prompt mutation guided by Shapley contribution (HiveMind) |
 | [Beyond Majority Voting (BMV)](#18-beyond-majority-voting) | Best-of-N synthesis (discrete answer), ensemble selection | Optimal Weight (confidence × calibration) + Inverse Surprising Popularity |
 | [Radial Consensus Score (RCS)](#19-radial-consensus-score) | Best-of-N synthesis (open-ended generation), self-consistency | Embedding-centroid selector for semantically clustered, lexically diverse answers |
-| [Conformal Social Choice](#20-conformal-social-choice-actescalate) | High-stakes debate verdicts, act/escalate gates | Calibrated prediction set: singleton acts, multi-answer set escalates |
+| [Conformal Social Choice](#20-conformal-social-choice-actescalate) | Calibrated selection with representative labeled cases | Singleton proceeds to validation/authorization; larger sets escalate |
 | [Attested Delegation Contracts](#21-attested-delegation-contracts) | Cross-trust subagent routing, agent marketplaces, external tools | Route by verified capability and bounded contract, not self-claimed quality |
 | [Coalition Formation Routing](#22-coalition-formation-routing) | Large teams, departments, multi-workstream audits | Form stable subteams before synthesis; avoid flat-panel overload |
 
@@ -67,7 +67,7 @@ For the agent-team applied recipe layer (team.yaml manifest fields, agent-team a
 - Synthesis where minority-correct outcomes matter (high-stakes, irreversible)
 - Auctions, bidding, mechanism design, or pricing where strategic behaviour exists
 - Repeated interactions where reputation, cooperation, or trust evolves
-- Best-of-N selection across 5+ candidates (BMV/RCS)
+- Best-of-N selection across a validated candidate set (five is illustrative) (BMV/RCS)
 - Cross-trust delegation, dynamic agent pools, or high-stakes act/escalate decisions
 
 **Skip and use simpler alternatives when:**
@@ -169,10 +169,10 @@ Textbook mechanism design proves *existence* of a truthful, efficient, individua
 |---|---|---|---|
 | **Collusion / bidder rings** | Dominant-strategy truthfulness assumes independent bidders; a ring that agrees off-mechanism to suppress bids and split the surplus defeats VCG and second-price auctions alike | Repeated auctions with a small, stable, identifiable bidder pool | Reserve prices, bidder-pool rotation, anti-collusion monitoring ([`AntiCollusionAI`](references/patterns-scenarios-traps.md)); detect via markup-over-marginal-cost drift over many rounds, not spot price |
 | **False-name bids** | A single bidder submits multiple identities; VCG is provably **not** false-name-proof in combinatorial auctions, and no false-name-proof mechanism is Pareto efficient in general (Yokoo, Sakurai & Matsubara, *Games and Economic Behavior*, 2004) | Any auction where identity is cheap to fabricate — email-based registration, sybil-able agent pools, unverified marketplace accounts | Require attested identity before bidding (mirrors #21 Attested Delegation Contracts) — price identity verification into the mechanism, not as an afterthought |
-| **Participation constraints failing** | Individual rationality assumes the average outside option; when the *highest*-value participants have the best outside options, they opt out first and adversely select the remaining pool | A mechanism designed around expected participants, not the marginal one who is deciding whether to walk | Check IR against the highest-value participant's outside option; Myerson & Satterthwaite (1983) show no mechanism for private-value bilateral trade can be simultaneously efficient, budget-balanced, and individually rational — some efficiency loss or subsidy is structurally unavoidable |
+| **Participation constraints failing** | Individual rationality assumes the average outside option; when the *highest*-value participants have the best outside options, they opt out first and adversely select the remaining pool | A mechanism designed around expected participants, not the marginal one who is deciding whether to walk | Check IR against the highest-value participant's outside option; In the standard bilateral-trade model with independent private values and overlapping support, Myerson & Satterthwaite (1983) rule out jointly Bayesian incentive-compatible, individually rational, ex-post efficient and budget-balanced mechanisms; state these assumptions and the property relaxed |
 | **Budget imbalance** | VCG is efficient and truthful but generally runs a deficit or surplus that must land somewhere | Multi-sided mechanisms with no natural residual claimant | Decide upfront who absorbs the imbalance (platform take-rate, budget-neutral variant, or accept the inefficiency) rather than discovering it at settlement |
 | **Computational infeasibility** | Exact VCG for combinatorial allocation requires solving an often NP-hard optimization for the winning allocation and every counterfactual-without-bidder-*i* allocation | Task/resource routing over bundles, not single-item slots | Use approximate/greedy VCG variants and disclose the resulting efficiency loss, or restrict to single-item/separable settings where exact VCG is tractable |
-| **Rules stated only in the prompt** | A policy the participants can read but nothing enforces is cheap talk; under optimization pressure agents route around it | LLM participants told "do not collude" in a system prompt, with no state machine, sanction, or audit log behind it | Enforce in the orchestration layer, not the prompt — declare legal states, transitions, and sanctions outside the agents and have a controller apply them (Institutional AI, arXiv:2601.11369, Jan 2026: prompt-only constitutional policy was ineffective; governance-graph enforcement cut severe-collusion incidence from 50% to 5.6% across 90 runs) |
+| **Rules stated only in the prompt** | A policy the participants can read but nothing enforces is cheap talk; under optimization pressure agents route around it | LLM participants told "do not collude" in a system prompt, with no state machine, sanction, or audit log behind it | Enforce in the orchestration layer, not the prompt — declare legal states, transitions, and sanctions outside the agents and have a controller apply them (Institutional AI, arXiv:2601.11369, Jan 2026: prompt-only constitutional policy was ineffective; governance-graph enforcement cut severe-collusion incidence from 50% to 5.6% across 90 runs per condition in its simulated Cournot markets; abstract/Table 6 rechecked 2026-09-17) |
 
 **Practical tell**: if a mechanism is called "truthful" or "incentive-compatible" but nobody can name (a) the participation constraint being satisfied, (b) how false identities are prevented, (c) who absorbs budget imbalance, and (d) what enforces the rules other than the prompt, the claim has not actually been checked.
 
@@ -196,7 +196,7 @@ Textbook mechanism design proves *existence* of a truthful, efficient, individua
 | Static debate role assignment regardless of question | Wrong-specialist assignment dominates outcome | Meta-debate role routing (#16) — propose + peer-review picks plaintiff/defense/judge |
 | Best-of-N collapsed by majority vote | Calibration and minority-correct signal lost | Beyond Majority Voting (#18) — Optimal Weight + Inverse Surprising Popularity |
 | Open-ended generation scored by lexical overlap | Semantically equivalent answers split the vote | Radial Consensus Score (#19) — embedding-centroid selector |
-| Consensus treated as permission to act | Wrong agreement becomes automated harm | Conformal Social Choice (#20) — act only on singleton calibrated set |
+| Consensus treated as permission to act | Wrong agreement becomes automated harm | Validate the candidate and permission independently; a conformal singleton (#20) is only a selection result |
 | Routing by self-claimed delegate quality | Strategic or misconfigured delegates attract work | Attested Delegation Contracts (#21) — verify identity/capability and bound authority |
 | Large team run as one flat panel | Duplicate work, coalition instability, synthesis overload | Coalition Formation Routing (#22) — stable subteams before final synthesis |
 
@@ -238,11 +238,11 @@ Textbook mechanism design proves *existence* of a truthful, efficient, individua
 - [ ] **Multi-party context-sharing risk**: Members may produce overlapping analysis? → belief-driven coordination (#1)
 - [ ] **Best-of-N synthesis (discrete answer)**: Need to recover minority-correct? → BMV (#18)
 - [ ] **Best-of-N synthesis (open-ended)**: Lexically diverse but semantically clustered candidates? → RCS (#19)
-- [ ] **Repeated team optimization**: 50+ runs with measurable contribution signal? → online Shapley prompt evolution (#17)
+- [ ] **Repeated team optimization**: Repeated runs with an adequately precise contribution signal? → online Shapley prompt evolution (#17)
 - [ ] **Debate role-fit ambiguity**: Best plaintiff/defense not the obvious specialist? → meta-debate role routing (#16)
 - [ ] **High-stakes act/escalate**: Debate agreement is not enough? → conformal social choice (#20)
 - [ ] **Cross-trust delegation**: Delegate can self-claim quality or authority? → attested delegation contract (#21)
-- [ ] **Large team topology**: 6+ members or distinct workstreams? → coalition formation routing (#22)
+- [ ] **Team topology**: measured synthesis/coordination bottleneck, independent workstreams or ownership gaps? → compare flat and coalition routing (#22); size alone is insufficient
 
 ---
 
@@ -259,10 +259,10 @@ Quick stacks:
 
 - **Ad bidding / task routing**: #3 (auction routing) + #4 (Shapley ROI attribution) + #11 (confidence-weighted forecast)
   **Inputs:** Bidder count, valuation distribution (private or correlated), bid visibility (sealed vs. open), budget constraints.
-  **Rules:** If private values and bids sealed → 2nd-price (Vickrey) dominant; if bids are publicly visible → 1st-price + reserve (visible bids flip incentive to overbid for signalling, collapsing the 2nd-price guarantee); attribute ROI across winning bidder's components via Shapley marginal contribution; calibrate confidence forecasts via CritiCal step before staking.
-  **Outputs:** Mechanism choice (1st-price + reserve vs. 2nd-price), expected revenue estimate, per-component Shapley ROI attribution, calibrated confidence interval on forecast.
+  **Rules:** A sealed second-price auction has truthful bidding as a weakly dominant strategy under the standard independent private-value, quasi-linear, no-budget-constraint model. Otherwise choose the format from private/common/interdependent values, information revelation, dynamics, risk and budget constraints, collusion/shill exposure, and seller objective. Public bid visibility alone does not select first price or imply overbidding. Set a reserve only from a value-distribution model or calibrated market evidence; attribute ROI and calibrate forecasts separately.
+  **Outputs:** Mechanism choice with assumptions, reserve rationale if any, expected objective estimate and uncertainty, per-component attribution, and incentive/abuse risks.
 
-  **Worked example — marketplace switching from 1st-price to 2nd-price (Vickrey) auction.** Bidders: 4, valuations [10, 8, 6, 4]. 1st-price equilibrium: rational bid shading produces bids ≈ [7.5, 6, 4.5, 3] → revenue = 7.5 (winner pays own bid). 2nd-price truthful: bids = [10, 8, 6, 4] → revenue = 8 (winner pays 2nd-highest). Truthfulness gain: +6.7% revenue, plus zero bid-shading complexity → fewer abandoned bids and lower ops cost. Anti-pattern: don't run 2nd-price with publicly visible bids — incentive flips to overbid for signalling and the dominant-strategy guarantee collapses.
+  **Worked example — marketplace comparing sealed-bid formats.** Bidders have private values [10, 8, 6, 4]. In a second-price auction, truthful bidding makes the value-10 bidder win and pay 8. A first-price comparison cannot infer equilibrium bids or revenue from these four values alone: bid shading depends on the bidders' value distribution, risk preferences, information, and number of bidders. Estimate those primitives or simulate calibrated bidding behavior before comparing revenue. Publicly revealing live bids also changes the game and invalidates the sealed-bid proof.
 
 - **Security / adversarial context**: #14 (per-claim credibility) + #13 (reasoning-tree audit) + #8 (courtroom for go/no-go)
   **Inputs:** Claim set under review, evidence sources per claim, adversarial threat model (injection vector, attacker capability), go/no-go decision stakes.
@@ -271,8 +271,8 @@ Quick stacks:
 
 - **Partnership design**: #6 (cooperation-defection payoff test) + #5 (reputation gating) + #12 (ZOPA negotiation)
   **Inputs:** Partner track record (prior-interaction count n, defection incidents), payoff matrix cells for cooperation vs. defection on the proposed arrangement, each party's BATNA and stated interests.
-  **Rules:** If n < 3 interactions → require contractual escrow or clawback clause (iterated PD cannot be relied on with insufficient history); if n ≥ 3 and no defection → tit-for-tat sufficient; assign reputation tier (probationary / standard / proven) based on defection rate and interaction depth (#5); locate ZOPA as overlap between each party's reservation value and walk-away point (#12); flag if no ZOPA exists — do not negotiate, renegotiate the scope.
-  **Outputs:** Recommended contract structure (escrow clause if n < 3, tit-for-tat terms if n ≥ 3), reputation tier assigned, ZOPA range or no-deal flag, payoff-scale test result (cooperation dominant or defection dominant under current incentives).
+  **Rules:** Infer cooperation risk from the payoff structure, observability of defection, error/noise, continuation probability, and recovery path; interaction count alone is not a trust threshold. Tit-for-tat is a benchmark strategy, not a sufficient contract: accidental defections can trigger retaliation cycles. Use proportionate safeguards (milestones, escrow, audit, cure periods, or clawbacks) when exposure warrants them; locate ZOPA from reservation values and flag when none exists.
+  **Outputs:** Recommended safeguards with their trigger, reputation evidence and uncertainty, ZOPA range or no-deal flag, and payoff-scale test result.
   **If an LLM runs the negotiation:** do not accept deal rate as the success metric — it saturates across frontier models while surplus extraction, belief calibration, and constraint compliance still diverge sharply (TERMS-Bench, arXiv:2605.13909, 2026, 13 systems). Score surplus captured against the counterpart's latent payoff, and treat a high close rate with low surplus as conceding, not winning.
 
 - **High-quality synthesis**: #13 (reasoning-tree audit) + #7 (mechanism-design synthesis) + #11 (confidence betting)
@@ -282,7 +282,7 @@ Quick stacks:
 
 - **High-stakes act/escalate**: #13 (reasoning-tree audit) + #11 (confidence elicitation) + #20 (conformal social choice)
   **Inputs:** Candidate actions, member probability distributions, calibration table or shadow-case history, escalation cost.
-  **Rules:** Treat agreement as evidence, not proof; pool distributions; act only when the calibrated prediction set is singleton; escalate when the set has multiple plausible answers.
+  **Rules:** Use a fixed closed-label procedure with representative labeled calibration cases and an exchangeability justification. A singleton proceeds to task validation and authorization; multiple or empty sets trigger the evidence/escalation path. Marginal set coverage does not guarantee individual correctness. See #20 for calibration prerequisites.
   **Outputs:** Singleton action or escalation reason, prediction set, confidence/calibration note, evidence that would shrink the set.
 
 - **Cross-trust delegation**: #21 (attested delegation contracts) + #3 (auction routing) + #5 (reputation gating)
@@ -305,24 +305,26 @@ Quick stacks:
   **Rules:** Weight each candidate by confidence × calibration accuracy (Optimal Weight); apply Inverse Surprising Popularity to recover minority-correct answers that majority vote would suppress; do not apply if a hard oracle (test suite, schema check, calculator) is available — use the oracle directly.
   **Outputs:** Selected answer with weighted score, runner-up with score delta, flag if minority-correct candidate was recovered.
 
-- **Best-of-N (open-ended generation)**: #19 (RCS) — embedding-centroid selector across 5+ candidates
+- **Best-of-N (open-ended generation)**: #19 (RCS) — embedding-centroid selector across a validated candidate set (five is illustrative)
   **Inputs:** 5+ candidate generations (open-ended text), embedding model, semantic similarity threshold.
   **Rules:** Embed all candidates; compute centroid; select candidate closest to centroid as representative; do not use lexical-overlap voting — semantically equivalent answers split the vote under lexical scoring.
   **Outputs:** Selected generation (centroid-nearest), semantic cluster map, outlier candidates flagged for manual review if they are far from centroid but potentially high-value.
 
 - **High-frequency team optimization**: #4 (Shapley) + #17 (online Shapley prompt evolution) + #5 (reputation gating)
-  **Inputs:** Run count (minimum 50 for meaningful Shapley signal), per-member contribution measurability, current prompt set per member.
-  **Rules:** Compute Shapley contribution per member per run (#4); use Shapley signal to guide per-member prompt mutation each epoch (#17); gate autonomy by accumulated reputation tier — probationary members get tighter review until track record reaches standard tier (#5); do not apply online Shapley prompt evolution below 50 runs — signal is too noisy for reliable mutation.
+  **Inputs:** Run count (sample adequacy determined from contribution-estimate uncertainty, dependence and task diversity), per-member contribution measurability, current prompt set per member.
+  **Rules:** Compute Shapley contribution per member per run (#4); use Shapley signal to guide per-member prompt mutation each epoch (#17); gate autonomy by accumulated reputation tier — probationary members get tighter review until track record reaches standard tier (#5); require adequately precise estimates and held-out validation before adoption; 50 runs is an illustrative planning heuristic, not a universal gate.
   **Outputs:** Updated prompt per member (mutated toward higher Shapley contribution), reputation tier per member, contribution trend chart (improving / stable / degrading).
 
 - **Building a multi-agent LLM application (full-stack recipe)**: #1 (belief-driven coordination) + #21 (attested delegation) + #5 (reputation gating) + #20 (conformal act/escalate) + #4 (Shapley attribution)
   **Inputs:** Agent pool (roles, capabilities, trust provenance), task decomposition map, reversibility of downstream actions, success metric per agent.
-  **Rules:** Assign belief lanes at design time so agents receive differentiated context and cannot pool into a uniform analysis (#1); route sub-tasks only to delegates with attested (not self-claimed) capability — the provenance paradox shows self-claimed routing performs worse than random (#21); start every new agent on probationary tier; promote to standard tier only after 3+ verified successful runs (#5); before any irreversible action (payment, send, deploy), check that the conformal prediction set is singleton — multi-answer set triggers human escalation (#20); compute Shapley marginal contribution per agent per release epoch to detect free-riders and guide prompt or architecture revision (#4). Anti-pattern: do not run a flat panel of 6+ agents — form coalitions by workstream first (#22).
-  **Outputs:** Belief-lane assignment per agent, attested-capability registry, reputation tier per agent, act/escalate gate policy, Shapley contribution report per epoch, coalition map if team ≥ 6.
+  **Rules:** Assign belief lanes at design time so agents receive differentiated context and cannot pool into a uniform analysis (#1); route sub-tasks only to delegates with attested (not self-claimed) capability — the provenance paradox shows self-claimed routing performs worse than random (#21); start every new agent on probationary tier; promote only against predefined task-relative outcome and calibration criteria (#5); three successes alone do not establish reliability; when calibrated selection is applicable, a singleton proceeds to independent task validation and authorization; multiple or empty sets trigger escalation (#20); compute Shapley marginal contribution per agent per release epoch to detect free-riders and guide prompt or architecture revision (#4). Compare flat and coalition structures only when measured coordination/synthesis cost, independent workstreams or ownership gaps justify the experiment (#22). Preserve dissent and source traces in either; six agents alone does not establish a coalition advantage.
+  **Outputs:** Belief-lane assignment per agent, attested-capability registry, reputation tier per agent, act/escalate gate policy, Shapley contribution report per epoch, topology comparison and coalition map only if the task-specific trigger applies; record quality, cost, latency and dissent preservation for the selected structure.
 
 ---
 
 ## Navigation
+
+- [Evidence tiers, verified finite-game/Shapley artifacts and uncertainty contract](references/verified-artifacts.md)
 
 - Per-mechanism playbooks: [`assets/templates/game-theory/`](assets/templates/game-theory/) (one file per primitive)
 - Composition guide: [`assets/templates/game-theory/README.md`](assets/templates/game-theory/README.md)
@@ -386,6 +388,6 @@ Strategic interaction or incentive failure
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

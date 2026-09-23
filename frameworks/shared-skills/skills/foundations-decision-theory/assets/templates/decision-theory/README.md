@@ -28,7 +28,7 @@
 
 Situation: A team proposes a study, A/B test, or pilot before making a decision.
 
-Stack: **#4 (EVPI/EVSI gate)** → if EVSI > cost, run study → **#1 (EU)** + **#6 (risk aversion check)** on the posterior decision → **#3 (minimax regret)** as robustness check if prior is weak.
+Stack: **#4 (EVPI/EVSI gate)** → compare total EU including study costs/delay (EVSI > cost only for additive utility-compatible costs) → **#1 (EU)** + **#6 (risk aversion check)** on the posterior decision → **#3 (minimax regret)** as robustness check if prior is weak.
 
 ### Feature roadmap ranking under multiple objectives
 

@@ -95,13 +95,9 @@ Budget is healthy. The team can safely run 3 more risky deploys (each historical
 
 ## Calibration Note: GenAI / LLM Services
 
-Burn-rate alerting thresholds calibrated on non-GenAI incident profiles underestimate true budget consumption for GenAI cloud services. Empirical analysis of Microsoft's GenAI cloud incidents (Yan et al. 2025, ISSRE) shows:
+[Yan et al., arXiv:2504.08865v2](https://arxiv.org/html/2504.08865v2), Sections VI and VIII-A, report Microsoft-specific incident profiles: infrastructure 27.2%, configuration 24.5%, code bugs 21.5%. Ad-hoc fixes were **less common** for GenAI (22.4%) than non-GenAI (54.7%). Monitor-detected false-positive alarms were 11.0% vs 3.8%. These are study-specific incident/monitor proportions, not error-budget burn rates.
 
-- **Root cause distribution differs**: GenAI incidents — infrastructure 27.2%, configuration 24.5%, code bugs 21.5% — diverge from classical SRE profiles where code bugs typically dominate.
-- **Ad-hoc fixes are more common**: 22.4% of GenAI incident resolutions vs. 54.7% for traditional services, meaning existing runbooks transfer poorly and MTTR is structurally longer.
-- **Monitor false-alarm rate is elevated**: 11.0% vs. 3.8%, which can exhaust alert-handling capacity and mask real budget consumption.
-
-When operating a GenAI service, re-calibrate burn-rate alert thresholds from your own incident history rather than inheriting non-GenAI baselines. The multi-window approach (primitive 08) remains the right structure; the threshold values require re-fitting.
+Check local recovery and monitor precision; choose burn alerts from the good-event SLI, SLO, window and response needs. False alarms do not themselves consume the SLO budget. This comparison supplies no universal threshold adjustment or proof that transferred runbooks cause longer recovery.
 
 ## Sources
 

@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "title": "Statistical inference primary sources",
+    "description": "Interpretation principles, sequential inference, and split conformal prediction foundations.",
+    "skill": "foundations-statistical-inference",
+    "last_updated": "2026-09-17",
+    "research_cutoff": "2026-09-17"
+  },
+  "sources": [
+    {
+      "id": "ASA2016",
+      "name": "American Statistical Association statement on statistical significance and p-values",
+      "url": "https://www.amstat.org/asa/files/pdfs/P-ValueStatement.pdf",
+      "last_verified": "2026-09-17",
+      "description": "ASA primary release with six interpretation principles, including distinction between p-values, effect magnitude, and hypothesis probabilities."
+    },
+    {
+      "id": "Ramdas2023",
+      "name": "Ramdas et al. — Game-theoretic statistics and safe anytime-valid inference",
+      "url": "https://arxiv.org/abs/2210.01948",
+      "last_verified": "2026-09-17",
+      "description": "Author paper describing e-processes, confidence sequences, optional stopping, and assumptions underlying anytime-valid inference."
+    },
+    {
+      "id": "AngelopoulosBates2022",
+      "name": "Angelopoulos and Bates — A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification, v6",
+      "url": "https://arxiv.org/html/2107.07511v6",
+      "last_verified": "2026-09-17",
+      "description": "Primary author tutorial; section 1 finite-sample calibration and marginal coverage, tie caveat, and section 3 conditional/group evaluation."
+    }
+  ]
+}

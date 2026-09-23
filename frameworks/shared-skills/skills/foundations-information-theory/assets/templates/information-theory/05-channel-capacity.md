@@ -39,8 +39,8 @@ The theorem is an existence result — it does not specify how to construct capa
 ## When to Use
 
 - Establishing the theoretical maximum throughput for a communication link before designing the encoding scheme.
-- Benchmarking retrieval pipelines: the "channel" is the pipeline; X is the query intent; Y is the retrieved document set; C bounds how much query information can be preserved.
-- Sizing token budgets: the "channel" from a source document to a compressed summary has capacity bounded by the compression ratio and distortion tolerance (see primitive #6).
+- Analyzing a retrieval pipeline only when named discrete intent/output alphabets and measured transition probabilities justify a channel model. Report observed mutual information separately from capacity; precision@k does not supply either.
+- Analyzing a supplied communication model; summary token budgets require an explicit source/reconstruction/distortion model and task validation (see primitive #6), not a capacity inferred from token count alone.
 - Understanding why increasing bandwidth has diminishing returns at high S/N (log relationship).
 
 ---
@@ -66,8 +66,8 @@ The theorem is an existence result — it does not specify how to construct capa
 
 ## Failure Modes
 
-1. **Ignoring channel memory**: Shannon capacity assumes a memoryless channel. Real channels (wireless multipath, bursty internet links) have memory. Capacity is lower or requires different analysis (channels with states, ISI correction).
-2. **Treating capacity as a guaranteed rate**: C is achievable only with infinite block length codes. At practical block lengths, achievable rate is lower (see finite block length converse: Polyanskiy-Poor-Verdú 2010).
+1. **Ignoring channel memory**: The supplied DMC formulas assume memorylessness. Channels with memory (wireless multipath, bursty links) require a stated state/dependence model and the appropriate capacity analysis; memory does not universally decrease capacity relative to a marginal DMC approximation.
+2. **Treating capacity as a guaranteed rate**: For noisy channels, capacity is an asymptotic vanishing-error limit; finite-blocklength achievable rates depend on blocklength, target error, channel model and coding constraints (Polyanskiy-Poor-Verdú 2010), and are not guaranteed by C alone. Strictly lower rate is not universal: a noiseless binary channel reaches C=1 bit/use at blocklength one with zero error.
 3. **Applying AWGN formula to non-Gaussian noise**: The log₂(1+SNR) formula is optimal only for Gaussian input on AWGN channels. For non-Gaussian noise, capacity requires solving the max-MI optimization numerically.
 4. **SNR in dB vs. linear**: The Shannon-Hartley formula requires S/N as a linear ratio. Converting from dB: S/N_linear = 10^(S/N_dB / 10). Common error is plugging dB directly.
 5. **Equating bandwidth with bitrate**: Bandwidth (Hz) and bitrate (bits/second) are related by capacity but not equal. Capacity maps bandwidth × log(1+SNR) → bitrate; extra bandwidth has diminishing returns.
@@ -76,19 +76,11 @@ The theorem is an existence result — it does not specify how to construct capa
 
 ## Worked Example
 
-**BSC capacity for a noisy retrieval channel**
+**Fully specified hypothetical binary channel**
 
-Model a keyword-to-document retrieval system as a BSC. Each "bit" of query intent either passes correctly (true positive, probability 1−p) or flips to a wrong document (probability p). Empirical measurement over 1,000 queries: 23% of documents retrieved are incorrect. p = 0.23.
+Let X,Y each have alphabet {0,1}, with independent errors across uses and transition matrix rows p(Y|X=0)=(0.77,0.23), p(Y|X=1)=(0.23,0.77). This is a BSC with crossover p=0.23. Base-2 entropy gives H_b(0.23)≈0.778011 and C≈0.221989 bits per channel use. Uniform inputs attain this single-use mutual information; capacity is a coding limit, not observed retrieval throughput. A separately specified BSC(0.10) has C≈0.531004 bits/use.
 
-```
-C_BSC = 1 − H_b(0.23)
-H_b(0.23) = −(0.23 · log₂ 0.23) − (0.77 · log₂ 0.77)
-           = −(0.23 · (−2.12)) − (0.77 · (−0.38))
-           = 0.487 + 0.293 = 0.780 bits
-C_BSC = 1 − 0.780 = 0.220 bits per retrieval query
-```
-
-At 0.22 bits/query, the channel is transmitting only 22% of its theoretical maximum. Improving precision from 77% to 90% (p=0.10) raises C_BSC to 0.531 bits — a 2.4× improvement in channel efficiency, before any reranking.
+Aggregate retrieval precision or fraction of incorrect documents does **not** identify p(Y|X), binary symmetry, or bits per query. Counterexample: P(X=0)=0.77 and Y always equals 0 gives 77% accuracy, but identical transition rows and capacity zero. Before applying a channel model to retrieval, name the input/output alphabets, measure the conditional transition probabilities, test memory assumptions, and compute actual I(X;Y) for the observed input distribution. A retrieved document set is not automatically one transmitted bit; no retrieval efficiency multiplier follows from the hypothetical BSC comparison.
 
 ---
 

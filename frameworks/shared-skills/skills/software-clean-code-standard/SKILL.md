@@ -88,6 +88,10 @@ Feedback needed: [What kind of guidance is this?]
 
 ## Optional: AI/Automation
 
+**Refactor evidence gate.**
+
+Do not raise a rule violation solely because code looks unfashionable. Name the maintenance failure it causes: duplicated change, hidden side effect, unsafe coupling, unreadable control flow, or measured complexity hotspot. Preserve stable awkward code when the proposed rewrite lacks a behavior-preserving test or a concrete reduction in change risk; document a narrow exception instead of creating churn.
+
 - Map automation findings to `CC-*` IDs (linters, SAST, dependency scanning) so humans can review impact, not tooling noise.
 - Keep AI-assisted suggestions advisory; human reviewers approve/deny with rule citations (https://conventionalcomments.org/).
 - Prefer GitHub rulesets, SARIF-capable scanners, and repository-native code scanning for durable enforcement/reporting.
@@ -161,8 +165,6 @@ For detailed hallucination detection steps, see [references/code-quality-operati
 
 ## Freshness Protocol
 
-**IMPORTANT**: When users ask recommendation questions about clean code standards, linters, formatters, static analysis, or code quality tools, you MUST verify current guidance with web search and official docs before answering. If web search is unavailable, say so and answer using `data/sources.json`, clearly flagging that the recommendation may be stale.
-
 ### Trigger Conditions
 
 - "What's the best linter for [language]?"
@@ -222,12 +224,10 @@ After verifying, provide:
 ## Fact-Checking
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
 - Prefer primary sources; report source links and dates for volatile information, and distinguish facts from inference.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

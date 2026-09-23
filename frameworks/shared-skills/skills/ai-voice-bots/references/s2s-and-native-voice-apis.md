@@ -38,7 +38,7 @@ The model receives raw audio and emits raw audio. The intermediate text represen
 
 ## OpenAI Realtime API
 
-**Status (Jul 2026)**: the Realtime API has exited beta and is fully GA. The model line has already iterated twice since the first GA cut — `gpt-realtime-2` (May 2026) was superseded by `gpt-realtime-2.1` / `gpt-realtime-2.1-mini` (Jul 2026), which cut measured p95 latency by roughly 25% and added reasoning + reliable tool calling to the mini tier (previously flagship-only). `gpt-4o-realtime-preview` / `gpt-4o-mini-realtime-preview` are fully retired. Access via WebSocket or the Realtime API endpoint. Supported in Pipecat and LiveKit Agents. **Expert judgment**: this model line has shipped a materially different generation roughly every 8-10 weeks through 2026 — treat any specific model name in a runbook as provisional and re-check OpenAI's model index before a launch, not just at initial build time.
+**Status (checked 2026-09-07)**: OpenAI's current model catalog lists `gpt-realtime-2.1`, `gpt-realtime-2.1-mini`, `gpt-realtime-2`, `gpt-realtime-translate`, `gpt-live-transcribe`, and `gpt-realtime-whisper`; older unsuffixed `gpt-realtime` and its mini tier are deprecated. The `gpt-realtime-2.1` page confirms configurable reasoning, tool use, and improved alphanumeric, silence/noise, and interruption behavior, but does not publish the numeric p95 comparison previously repeated here. Treat model IDs as provisional and re-check OpenAI's model index before launch.
 
 ### How it works
 
@@ -49,20 +49,20 @@ Key session objects:
 - **Conversation items**: the model maintains a list of `conversation.item` objects representing the dialogue history.
 - **Response lifecycle**: `response.create` → `response.audio.delta` (streaming audio chunks) → `response.audio.done`.
 
-### Model support (Jul 2026)
+### Model support (checked 2026-09-07)
 
 The `gpt-4o-realtime-preview` / `gpt-4o-mini-realtime-preview` line is fully retired. Current generation as of this writing:
 
 - `gpt-realtime-2.1` — flagship; reasoning S2S, large context, improved alphanumeric read-back (order numbers, confirmation codes), better noise/silence handling and interruption behavior. Supersedes `gpt-realtime-2`.
 - `gpt-realtime-2.1-mini` — smaller tier; now has the reasoning + reliable tool-calling that only the flagship had before, at the same price as the earlier mini. Use this as the default for cost-sensitive high-volume voice agents rather than routing everything to the flagship.
-- `gpt-realtime-translate` — live speech-to-speech translation: 70+ input languages to 13 output languages, keeps pace with the speaker, returns translated speech plus text transcripts.
+- `gpt-realtime-translate` — live streaming speech-to-speech translation that returns translated audio and transcript deltas. Verify the current supported-language matrix for the deployment locale.
 - `gpt-realtime-whisper` — streaming STT with a controllable latency/quality tradeoff (lower delay setting = earlier partial text, higher delay = better transcript quality).
 
 **Do not hardcode these names into production config as permanent facts** — verify current model IDs and pricing in OpenAI's model index before every material release; this line has changed generation at least three times in under three months.
 
 ### Latency
 
-Typical first-audio-chunk latency: ~300–500ms (p50) on the current generation, with the `2.1` update specifically targeting p95 tail latency (~25% reduction over `gpt-realtime-2`) rather than median. Actual latency depends on: utterance length, VAD end-of-turn detection, server load, and client geographic proximity to the OpenAI data center. **Judgment**: if your pain point is bad p95/p99 (occasional multi-second stalls) rather than median latency, check which generation you're on before reaching for a cascaded fallback — recent Realtime generations have specifically targeted tail latency, and an upgrade may fix the complaint cheaper than an architecture change.
+Do not carry a vendor-generation latency number into a launch plan without a reproducible first-party benchmark for the same transport and workload. Measure end-of-turn and first-audio latency at p50, p95, and p99 on the target codecs, utterance lengths, VAD settings, concurrency, networks, and deployment regions. Compare a model upgrade and the existing architecture on that same replay set before attributing a tail-latency change to the model.
 
 ### Session management patterns
 
@@ -133,7 +133,7 @@ Key differences from OpenAI Realtime:
 
 ### Latency
 
-Comparable to OpenAI Realtime (~300–500ms first audio chunk, p50). Google's data center proximity advantage may matter for EU and APAC deployments.
+Measure Gemini Live and OpenAI Realtime on the same target-region replay set. Provider location, session configuration, VAD, codecs, and workload can change both median and tail latency; do not assume either service is faster from a generic benchmark.
 
 ### Session management patterns
 
@@ -153,7 +153,7 @@ Same persistence pattern as OpenAI Realtime applies — Gemini Live sessions are
 
 | Criterion | S2S | Cascading (STT→LLM→TTS) |
 |-----------|-----|-------------------------|
-| Latency (p50) | ~300–500ms | ~600–800ms |
+| Latency | Measure end-of-turn and first-audio p50/p95/p99 on the target call set | Measure each STT, LLM, and TTS stage plus end-to-end p50/p95/p99 |
 | Text-layer compliance filtering | Not available without parallel track | Native |
 | PII detection / redaction | Not available without parallel track | Native |
 | Guardrail injection | Not available without parallel track | Native |
@@ -190,7 +190,7 @@ Pipecat supports OpenAI Realtime via `OpenAIRealtimeLLMService` (the current cla
 
 For the parallel transcript pattern, add a second STT processor alongside the transport input and route its output to a separate compliance handler, not to the LLM.
 
-See [`references/pipecat-patterns.md`](references/pipecat-patterns.md) for the S2S pipeline configuration.
+See [`pipecat-patterns.md`](pipecat-patterns.md) for the S2S pipeline configuration.
 
 ---
 
@@ -198,4 +198,4 @@ See [`references/pipecat-patterns.md`](references/pipecat-patterns.md) for the S
 
 LiveKit Agents supports OpenAI Realtime via the `openai.realtime` plugin (check current LiveKit Agents release notes for exact plugin name and version). The `VoicePipelineAgent` is replaced or complemented by the Realtime-aware agent class.
 
-See [`references/livekit-agents-patterns.md`](references/livekit-agents-patterns.md) for the S2S agent configuration.
+See [`livekit-agents-patterns.md`](livekit-agents-patterns.md) for the S2S agent configuration.

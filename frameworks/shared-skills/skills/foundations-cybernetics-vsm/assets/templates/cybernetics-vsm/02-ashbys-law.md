@@ -2,11 +2,11 @@
 
 ## Definition
 
-**Law of Requisite Variety** (Ashby 1956): Only variety can absorb variety. A regulator can control a system only if the regulator's variety (number of distinguishable states it can occupy or respond to) is at least equal to the variety of the disturbances it must handle.
+**Law of Requisite Variety** (Ashby 1956): Only variety can absorb variety. A regulator must preserve the outcome-relevant distinctions needed to select effective responses to disturbances.
 
-Formal statement: `W(error) ≤ V(disturbance) − V(regulator)`
+Under Ashby's finite-table conditions and logarithmic variety, the residual-outcome lower bound is `V(outcome) >= V(disturbance) − V(regulator)` (and variety is nonnegative). Regulator variety constrains the best attainable reduction; it does not upper-bound residual error.
 
-Where W(error) is the residual error, V(disturbance) is the variety of the environment the system faces, and V(regulator) is the variety the controller can exercise. To drive error to zero, V(regulator) must equal V(disturbance).
+V terms must use the same logarithmic measure and the partitions/conditions defined in Ashby §11/6–11/7. This formal relation does not license subtracting unlike operational counts such as tickets, request labels, decisions, people, or control knobs. For an applied audit, define which disturbances require different outcomes, what signal distinguishes each, and whether an effective response is selectable under timing, authority, coupling, and resource constraints.
 
 ## When to Use
 
@@ -19,8 +19,9 @@ Where W(error) is the residual error, V(disturbance) is the variety of the envir
 
 | Input | Description |
 |-------|-------------|
-| Disturbance inventory | List of distinct states or events the environment can produce |
-| Regulator inventory | List of distinct responses the controller can make |
+| Disturbance classes | Outcome-relevant distinctions that require different treatment |
+| Detection mapping | Signal that lets the regulator distinguish each class in time |
+| Response mapping | Effective response, owner, authority, dependencies, and resource constraints per class |
 | Channel capacity | Bandwidth between environment and regulator |
 | Error tolerance | Acceptable residual variety (not all variety needs absorbing) |
 
@@ -28,33 +29,33 @@ Where W(error) is the residual error, V(disturbance) is the variety of the envir
 
 | Output | Description |
 |--------|-------------|
-| Variety gap | V(disturbance) − V(regulator); positive gap = control deficit |
+| Coverage gap | Disturbance classes with no timely detectable and effective response path |
 | Intervention options | Amplify regulator variety OR attenuate disturbance variety OR both |
-| Feasibility assessment | Whether gap can be closed without redesign |
+| Feasibility assessment | Whether uncovered paths can be closed without redesign |
 
 ## Failure Modes
 
 | Failure | Cause | Fix |
 |---------|-------|-----|
-| Management bottleneck | Regulator variety too low for disturbance variety | Attenuate incoming variety (exception-only reporting) or amplify via delegation |
-| Over-engineering controls | Regulator variety exceeds disturbance variety | Simplify control surface; unused variety is waste |
+| Management bottleneck | Required distinctions are collapsed or effective responses cannot be selected in time | Attenuate incoming variety or amplify sensing, authority, automation, or delegation |
+| Over-engineering controls | Response paths exist but do not cover a required distinction or are never usable | Simplify after verifying removal does not uncover a disturbance class |
 | Channel saturation | Information channel between environment and regulator too narrow | Widen channel or compress variety before transmission |
 | Goodhart's Law cascade | Regulator forces environment to appear low-variety by measuring only easy metrics | Audit measurement scope; include variety indicators, not just summary statistics |
 
 ## Worked Example
 
-**Context**: A platform engineering manager oversees 8 product teams making platform requests. Each team has ~50 distinct request types. The manager's calendar allows ~20 focused decisions per week.
+**Context**: A platform engineering manager oversees product teams making platform requests. Raw team, request-label, and calendar counts suggest overload but are not commensurate measures of requisite variety.
 
-**Variety audit**:
-- V(disturbance) = 8 teams × 50 request types = 400 distinguishable states per week (simplified).
-- V(regulator) = 20 decisions per week.
-- Variety gap = 380 — far exceeds manager's capacity.
+**Coverage audit**:
+- Group requests by the outcome-relevant response they require: standard provisioning, quota change, breaking API migration, security exception, and novel escalation.
+- Verify each class has a timely distinguishing signal and an authorized response path.
+- The security-exception and novel-escalation classes both depend on the manager's unavailable calendar slot, so these paths fail the timing constraint. This is the deficit; `teams × request labels − decisions` is not evidence of its size.
 
 **Interventions**:
-1. Attenuation: introduce request templates that collapse 50 types to 8 standard categories. V(disturbance) → 64.
-2. Amplification: delegate routine approval to tech leads. Manager handles only non-standard escalations.
-3. Self-service: automate provisioning for the top 5 request types (50% of volume). V(disturbance) → ~32.
-4. Result: manager handles ~32 distinguishable situations per week — within capacity.
+1. Attenuation: request templates preserve the fields that distinguish security, migration, quota, and standard requests while collapsing irrelevant wording differences.
+2. Amplification: tech leads receive bounded authority for standard provisioning and quota changes.
+3. Self-service: automation handles standard provisioning with audit evidence and routes exceptions.
+4. Re-test: every material class is detected and reaches an effective owner within its SLA; coupled failures and unauthorized exceptions still escalate. This closes the observed coverage gap without claiming cardinal equality.
 
 ## Sources
 

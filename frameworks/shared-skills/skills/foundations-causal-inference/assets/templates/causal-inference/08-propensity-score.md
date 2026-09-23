@@ -4,7 +4,7 @@
 
 The **propensity score** is e(x) = P(T = 1 | X = x) — the conditional probability of treatment given observed covariates X.
 
-**Key theorem** (Rosenbaum & Rubin 1983): under **strong ignorability** (Y(0), Y(1) ⊥ T | X), the propensity score is a sufficient balancing score: (Y(0), Y(1)) ⊥ T | e(X). It is sufficient to balance on e(X) rather than the full X.
+**Key theorem** (Rosenbaum & Rubin 1983): under **strong ignorability** (Y(0), Y(1) ⊥ T | X and positivity on the target support), the propensity score is a sufficient balancing score: (Y(0), Y(1)) ⊥ T | e(X). It is sufficient to balance on e(X) rather than the full X.
 
 **Methods**:
 
@@ -35,7 +35,7 @@ Do not use propensity methods when there are important unmeasured confounders �
 
 ## Worst Failure Modes
 
-1. **Overlap failure**: when treated and control units have non-overlapping covariate distributions, extreme propensity scores produce IPW weights near infinity. Trim weights at a maximum (e.g., 10) or clip propensity scores at 0.05/0.95.
+1. **Overlap failure**: when treated and control units have non-overlapping covariate distributions, extreme propensity scores produce IPW weights near infinity. Distinguish finite-sample numerical tails from structural non-overlap. Clipping cannot identify an absent counterfactual, and changes the weighting formula/bias rather than restoring identification. Restrict to a justified common-support population with an explicit changed estimand, use overlap-targeted weights with their estimand stated, collect missing support, or decline causal estimation for the original target. Any trimming/clipping threshold is application-specific and requires sensitivity and bias disclosure; DR or matching does not repair absent support.
 2. **Strong ignorability violated (unmeasured confounders)**: propensity methods only control for *measured* confounders. If important confounders are unmeasured, the estimate is biased regardless of how well propensity is modeled.
 3. **Post-treatment covariate inclusion**: including variables measured after treatment assignment inflates or deflates the propensity score. Only use pre-treatment variables.
 4. **Matching on the wrong features**: propensity score alone may not fully balance covariates in finite samples. Check covariate balance explicitly (standardized mean differences < 0.1 after matching).
@@ -50,7 +50,7 @@ Do not use propensity methods when there are important unmeasured confounders �
 **Step 2: Check overlap**:
 - Propensity score range for treated: [0.12, 0.87]
 - Propensity score range for control: [0.04, 0.91]
-- Overlap is adequate; no trimming needed
+- Marginal ranges alone do not establish joint-covariate support. Inspect relevant covariate regions, weighted balance and effective sample sizes before deciding whether the target is supported.
 
 **Step 3: IPW ATE estimate**:
 - Weighted mean outcome (treated): 24,500
@@ -58,13 +58,13 @@ Do not use propensity methods when there are important unmeasured confounders �
 - τ̂_IPW = 2,700 (s.e. = 820 via bootstrap)
 
 **Step 4: DR correction** (adds outcome regression residual correction):
-- τ̂_DR = 2,850 (s.e. = 750) — more efficient than IPW
+- τ̂_DR = 2,850 (s.e. = 750) — smaller illustrative s.e.; DR is not universally more efficient and cannot repair non-overlap
 
 **Step 5: Balance check**:
 - Before weighting: standardized mean difference for prior earnings = 0.38 (imbalanced)
 - After IPW weighting: standardized mean difference = 0.04 (balanced)
 
-**Interpretation**: job training increased 1-year earnings by approximately $2,850, controlling for observed confounders. Sensitivity analysis (E-value = 2.1) indicates the conclusion requires a moderately strong unmeasured confounder to be overturned.
+**Interpretation**: job training increased 1-year earnings by approximately $2,850, controlling for observed confounders. This continuous earnings contrast requires partial-R2/OVB or another scale-compatible sensitivity analysis; no E-value is derivable from the dollar contrast alone. Interpret causally only under the stated identification assumptions.
 
 ## Sources
 

@@ -75,9 +75,10 @@ Core docs:
 Use this order by default:
 
 1. Start one shared local dev stack if the repo already provides it; prefer reusing it with `--no-server` over spawning a fresh app per rerun.
-2. Reproduce with one exact spec or one named batch and `--workers=1`.
-3. Fix and rerun the smallest affected scope.
-4. Run the deploy-gate replay only after the targeted scope is green.
+2. Prove which build handles the request: record source revision or build ID, base URL, server process/start command, environment, and service-worker or CDN cache state. A listening port can serve stale code; if identity is unavailable, label the result `runtime observed, build identity unverified`.
+3. Reproduce with one exact spec or one named batch and `--workers=1`.
+4. Fix and rerun the smallest affected scope.
+5. Run the deploy-gate replay only after the targeted scope is green.
 
 Default suite tiers:
 
@@ -134,8 +135,9 @@ Before touching a single assertion, classify the failure in this order — each 
 2. **Missing wait / race** — trace shows the action fired before the element was actionable. Replace with a web-first assertion; never add a fixed sleep.
 3. **State leakage** — failure only reproduces after other tests ran (parallel workers, shared fixtures, undropped test data). Fix isolation before touching this test's own code.
 4. **Environment** — only fails in CI, not locally; look at concurrency, cold start, CPU starvation, and container resource limits before assuming a product bug.
-5. **Product regression** — only after 1-4 are ruled out with trace evidence, treat the failure as reflecting the app under test and file/fix accordingly.
-Retries mask all five of these; use `retries` to gather evidence (trace/video) on the first CI run, but treat "passed on retry" as an unresolved defect, not a pass. See `template-playwright-fail-on-flaky-reporter.js`.
+5. **Stateful-app classes** — for auth-heavy or backend-driven apps, also classify `auth-state`, `state-sync`, `optional-network`, and `degraded-mode` (see `### Stateful App Failure Classes`) before assuming a product bug.
+6. **Product regression** — only after 1-5 are ruled out with trace evidence, treat the failure as reflecting the app under test and file/fix accordingly.
+Retries mask all of these; use `retries` to gather evidence (trace/video) on the first CI run, but treat "passed on retry" as an unresolved defect, not a pass. See `template-playwright-fail-on-flaky-reporter.js`.
 
 ### CI Parallelism Economics (Worked Example)
 
@@ -194,16 +196,6 @@ If something is flaky:
 - Reduce global timeouts; add scoped timeouts only when the product truly needs it — prefer a per-action timeout or `test.step(name, fn, { timeout })` over raising `timeout` in `playwright.config.ts`.
 - If it only fails in CI, look for concurrency, cold-start, CPU starvation, and environment differences.
 
-## Do / Avoid
-
-- Make tests independent and deterministic
-- Use network mocking for third-party deps
-- Run smoke E2E on PRs; full regression on schedule
-
-- "Test everything E2E" as default
-- Weakening assertions to "fix" flakes
-- Auto-healing that weakens assertions
-
 ## Execution Preflight (High ROI)
 
 Run this preflight before expensive E2E runs to prevent avoidable failures.
@@ -237,15 +229,6 @@ Before running Playwright in constrained environments (sandboxed terminals, CI c
 - Escalation path: if bind attempts fail with `EPERM`/`EACCES`, escalate immediately instead of retry loops.
 - Long-flow timeout budget: set explicit per-test timeout for API-heavy flows (generation/checkout/report) instead of inflating global timeout.
 - Build lock hygiene: clear stale `.next/lock` and terminate stale build/dev PIDs before rerun.
-
-### Triage Sequence (Fastest Signal)
-
-1. Reproduce one failing test or named batch with `--workers=1` on the chosen server topology.
-2. Capture trace/video/screenshot for that failure.
-3. Classify the failure: environment, auth-state, state-sync, optional network, degraded mode, or product regression.
-4. Fix the determinism root cause.
-5. Re-run the targeted spec or batch.
-6. Only then run the deploy-gate replay or broad regression.
 
 ### Stateful App Failure Classes
 
@@ -311,7 +294,7 @@ Playwright testing request
 
 ## Verification Gate
 
-Before delivering output, you MUST verify:
+Before delivering, check:
 
 - [ ] If a Playwright project exists, provide the exact test command to run and execute it when the environment is available; otherwise mark execution as unverified.
 - [ ] Generated selectors follow the stated locator priority unless the page makes that impossible.
@@ -322,12 +305,9 @@ Before delivering output, you MUST verify:
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

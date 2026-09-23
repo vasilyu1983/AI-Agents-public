@@ -73,4 +73,4 @@ PROClaim discovered LLMs exhibit structural negativity bias: REFUTE claims conve
 ## Related
 
 - [`02-adversarial-debate.md`](02-adversarial-debate.md) — lighter-weight debate variant
-- [`../debate-methods/courtroom.md`](../debate-methods/courtroom.md) — debate-method overlay equivalent
+- [`../../../references/verified-artifacts.md`](../../../references/verified-artifacts.md) — evidence tiers and independent verification contract

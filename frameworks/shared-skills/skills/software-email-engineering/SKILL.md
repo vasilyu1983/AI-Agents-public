@@ -91,6 +91,10 @@ Which template framework?
 
 ## Email Architecture
 
+**Recipient state and idempotency gate.**
+
+Model recipient delivery state separately from campaign or job state. Key each send by message purpose, recipient, and business event, and suppress duplicates across retries. Keep suppression history append-only and enforcement fail-closed: never clear complaint or legal suppression automatically; allow unsubscribe reversal only with auditable fresh consent where lawful, and replace a hard-bounced address only after correction and reverification. A provider “accepted” response means queued for delivery, not delivered: reconcile later events and retain the provider message ID for traceability.
+
 **Separation of concerns**: Application code triggers an email event (user signed up, order placed, password reset requested). An email service receives the event, selects the template, populates data, and calls the ESP API. The ESP handles delivery, retries, and bounce processing. Never mix email construction logic into request handlers or domain logic.
 
 **Never send email inline in request handlers.** Email delivery is I/O-bound and can fail. Sending inline blocks the response, and failures leave the user in an ambiguous state (did the action succeed but email failed, or did everything fail?). Always enqueue email sends as background jobs.
@@ -324,15 +328,11 @@ Email providers, template frameworks, and deliverability standards evolve. Verif
 ## Fact-Checking
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
-- Use web search/web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
 - Verify current webhook security, HTTPS requirements, inbound parsing behavior, metadata retention, and provider sandbox or quota defaults before final recommendations.
 - Verify current mailbox-provider sender requirements before advising on DMARC posture, unsubscribe flows, bulk-mail behavior, or complaint-rate thresholds.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

@@ -1,11 +1,11 @@
 {
   "metadata": {
     "skill": "ai-pretraining",
-    "updated": "2026-08-29",
+    "updated": "2026-09-08",
     "audit_date": "2026-08-29",
     "last_verified": "2026-08-29",
-    "last_updated": "2026-08-29",
-    "total_sources": 54,
+    "last_updated": "2026-09-08",
+    "total_sources": 59,
     "title": "AI Pretraining From Scratch - Sources",
     "description": "Primary sources for building transformer/GPT and BPE tokenizer from first principles: Karpathy Zero-to-Hero series, nanoGPT, nanochat, minbpe, Raschka LLMs-from-scratch, foundational papers, modern-architecture papers (RoPE/RMSNorm/SwiGLU/GQA/FlashAttention), the modded-nanoGPT/Muon speedrun frontier, production Muon reports (Kimi K2 MuonClip, DeepSeek-V4, GLM-5), and PyTorch mixed-precision docs."
   },
@@ -462,6 +462,53 @@
         "type": "research",
         "relevance": "The adaptation counterpart to low-rank compression: freezes dense W and learns a low-rank update. Cited in the structured-parameterization reference to separate constraining the update from compressing the weight; abstract reports an empirical investigation into rank-deficiency in language model adaptation.",
         "last_verified": "2026-08-29"
+      }
+    ],
+    "tokenization": [
+      {
+        "name": "SuperBPE: Space Travel for Language Models (arXiv 2503.13423)",
+        "url": "https://arxiv.org/abs/2503.13423",
+        "type": "research",
+        "relevance": "Superword tokenization crossing whitespace boundaries. Abstract verified 2026-09-08: 'up to 33% fewer tokens than BPE on average' at fixed 200k vocab, '+4.0% absolute improvement over the BPE baseline across 30 downstream tasks (including +8.2% on MMLU)', 27% less inference compute.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Over-Tokenized Transformer (arXiv 2501.16975)",
+        "url": "https://arxiv.org/abs/2501.16975",
+        "type": "research",
+        "relevance": "Argues vocabulary is generally worth scaling with model size — backs the vocab-size guidance in bpe-tokenizer.md. Direction cited; magnitudes not quoted (abstract not independently re-read).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LiteToken: Removing Intermediate Merge Residues From BPE Tokenizers (arXiv 2602.04706)",
+        "url": "https://arxiv.org/abs/2602.04706",
+        "type": "research",
+        "relevance": "~10% of tokens in major BPE tokenizers are intermediate merge residues rarely emitted in output — dead embedding rows. Cited for the tokenizer-audit step; verify body before quoting further figures.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "UTF-8 Plumbing: byte-level tokenizers enable ill-formed UTF-8 output (arXiv 2511.05578)",
+        "url": "https://arxiv.org/abs/2511.05578",
+        "type": "research",
+        "relevance": "Byte-level models can emit invalid UTF-8 — the gotcha behind requiring downstream validation rather than errors='replace' alone.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "SentencePiece (Google)",
+        "url": "https://github.com/google/sentencepiece",
+        "type": "repository",
+        "relevance": "The BPE/Unigram training framework behind most open multilingual tokenizers; no pre-tokenization, space as U+2581 metasymbol, lossless round-trip. The Unigram-LM implementation referenced in the tokenizer landscape table.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
       }
     ]
   }

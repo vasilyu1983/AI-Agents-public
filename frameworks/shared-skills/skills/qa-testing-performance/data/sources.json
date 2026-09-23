@@ -20,10 +20,10 @@
       {
         "name": "k6 2.0 Release (GA 2026-05-11, per github.com/grafana/k6/releases/tag/v2.0.0)",
         "url": "https://grafana.com/blog/k6-2-0-release/",
-        "description": "k6 2.0 GA: Playwright-compatible browser module, new expect() assertion API, four AI commands (k6 x agent, k6 x mcp, k6 x docs, k6 x explore) for agent-assisted test authoring, and k6 Operator reaching 1.0 for stable Kubernetes distributed execution. Materially changes scripting and frontend perf coverage vs the 1.x model. Latest patch is v2.1.0 (2026-06-30, opt-in feature flags, no breaking changes) — re-verify at the GitHub releases URL before pinning a version.",
+        "description": "k6 2.0 GA: Playwright-compatible browser module, new expect() assertion API, four AI commands (k6 x agent, k6 x mcp, k6 x docs, k6 x explore) for agent-assisted test authoring, and k6 Operator reaching 1.0 for stable Kubernetes distributed execution. The official release page checked on 2026-09-07 listed v2.2.0 (released 2026-08-10); treat that as a dated source snapshot and re-verify before pinning.",
         "add_as_web_search": false,
         "optional": false,
-        "last_verified": "2026-07-11"
+        "last_verified": "2026-09-07"
       },
       {
         "name": "Locust Documentation",

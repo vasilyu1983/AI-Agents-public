@@ -59,7 +59,7 @@ Servers grouped by domain. Each entry notes transport, tool weight (light/medium
 
 ### Currently Active
 
-These are configured in the local setup script (`docs/scripts/code-agents-mcps.sh`) or via Claude/Codex plugins.
+These are configured in the local setup script (`scripts/code-agents-mcps.sh`) or via Claude/Codex plugins.
 
 | Server | Transport | Platform | Purpose |
 |--------|-----------|----------|---------|

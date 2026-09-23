@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "model_name": "Synthetic joint empirical quantity-rate teaching model",
+  "currency": "USD",
+  "budget": 999,
+  "quantiles": [0.05, 0.5, 0.95],
+  "simulation": {"draws": 1000, "seed": 23, "batches": 10},
+  "independent_inputs": [],
+  "joint_empirical_groups": [
+    {
+      "name": "synthetic_paired_scenarios",
+      "inputs": [
+        {"name": "quantity", "unit": "units/month", "bounds": [0, 2000]},
+        {"name": "rate", "unit": "USD/unit", "bounds": [0, 20]}
+      ],
+      "rows": [
+        {"values": [100, 10], "weight": 1},
+        {"values": [1000, 1], "weight": 1}
+      ],
+      "provenance": {"kind": "scenario", "source": "Synthetic teaching fixture; not observed data or a provider quote", "as_of": "2026-09-01"},
+      "distribution_assumption": "Resample whole synthetic rows to demonstrate preservation of inverse quantity-rate dependence."
+    }
+  ],
+  "components": [
+    {"name": "usage", "coefficient": 1, "factors": ["quantity", "rate"], "divisor": 1}
+  ]
+}

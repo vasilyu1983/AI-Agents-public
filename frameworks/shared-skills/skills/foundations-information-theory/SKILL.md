@@ -23,7 +23,7 @@ last_validated: 2026-08-14
 
 **Skip and use simpler alternatives when:**
 - Question is about *causation*, not *information* — use foundations-causal-inference
-- Single-feature linear correlation is sufficient — Pearson r is cheaper than MI for monotonic continuous data
+- Single-feature linear correlation is sufficient — Pearson r is suitable for linear dependence; rank correlation may suit monotonic dependence, while MI targets broader dependence
 - Streaming data with hard latency budget — full MI/KL is too slow; use sketches or sampled approximations
 - N samples too small for stable entropy estimate (rule of thumb n > 5 × #bins per variable)
 - Problem is system-stability or feedback control — use foundations-control-theory
@@ -108,20 +108,20 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 
 | Anti-Pattern | Diagnosis | Fix |
 |-------------|-----------|-----|
-| Using KL divergence as a symmetric distance metric | D_KL(P‖Q) ≠ D_KL(Q‖P); treating it like Euclidean distance produces asymmetric results and can cause infinite penalty when Q assigns zero probability to events P can produce | Use Jensen-Shannon divergence (symmetric, bounded [0,1]) or explicitly select the forward/reverse direction based on the cost asymmetry you intend (#3) |
+| Using KL divergence as a symmetric distance metric | D_KL(P‖Q) ≠ D_KL(Q‖P); treating it like Euclidean distance produces asymmetric results and can cause infinite penalty when Q assigns zero probability to events P can produce | Use Jensen-Shannon divergence for a symmetric bounded divergence, or its square root when a true metric is required; state the log base because the bound changes with units (#3) |
 | Estimating mutual information in high dimensions from finite samples | Sample estimators of MI are positively biased and scale with dimension; reported MI values can be inflated several-fold on small datasets | Apply NSB or JVHW correction for discrete MI; use MINE or NWJ estimators for continuous variables; always report confidence intervals alongside MI estimates (#2). New (2025): use the Abdelaleem-Martini-Nemenman protocol (arXiv:2506.00330) — confidence intervals + consistency checks before trusting any neural MI estimate; estimators are reliable only when dependence lies in a low-dimensional latent subspace. For continuous high-dimensional data, consider normalizing-flow-based difference-of-entropies estimators (Ni & Lotz, arXiv:2502.13085) as an alternative to MINE. |
 | Treating cross-entropy as a distribution similarity score | H(P,Q) = H(P) + D_KL(P‖Q); a low cross-entropy loss does not imply the model distribution is close to the data distribution when H(P) is large | Decompose cross-entropy into entropy + KL divergence; use JS divergence or Wasserstein distance for direct distribution comparison (#4) |
 | Comparing perplexity scores across tokenizers | Perplexity is exp(H(P,Q)) conditioned on a vocabulary; different tokenizers produce different sequence lengths for the same text, making cross-tokenizer perplexity incomparable | Normalize by bits-per-character (BPC) or bits-per-byte (BPB) for vocabulary-neutral comparison (#4) |
 | Ignoring the continuous-discrete entropy distinction | Differential entropy (continuous) can be negative; it lacks the absolute probability interpretation of discrete entropy and is not invariant under invertible transforms | Explicitly state which entropy definition is in use; for continuous random variables, use mutual information (which is transform-invariant) rather than raw differential entropy (#1) |
-| Applying the Huffman/LZ code directly without checking entropy rate | Huffman codes are optimal only for known i.i.d. distributions; they are suboptimal for correlated sources where the entropy rate H(X_n | X_{n-1},...,X_1) < H(X_1) | Model source correlations first (estimate entropy rate); apply arithmetic coding or LZ-family codes that exploit sequential dependencies (#11) |
-| Assuming the information bottleneck β controls compression monotonically | The IB curve is non-convex for finite-sample or discrete cases; solutions can jump discontinuously as β changes | Sweep β densely and validate the I(T;X)/I(T;Y) tradeoff curve empirically; confirm phase transitions match the task (#8) |
-| Using InfoNCE/NWJ as an unconstrained MI estimator in contrastive learning | InfoNCE is bounded above by log(K) where K = number of negative samples; severely underestimates MI when true MI >> log(K), which is common in SSL pretraining; gradients become misleading at high MI regimes | Apply f-DIME estimators (Letizia, Novello & Tonello, NeurIPS 2024; code: github.com/tonellolab/fDIME) which use derangement architecture to remove the upper-bound artefact; or use the Abdelaleem-Martini-Nemenman confidence-interval protocol (#2) to detect estimator failure before trusting MI values |
+| Applying the Huffman/LZ code directly without checking entropy rate | Huffman is optimal among prefix codes for its supplied symbol/block PMF; symbol-wise marginal coding can be suboptimal for correlated sources where the entropy rate H(X_n | X_{n-1},...,X_1) < H(X_1) | Model source correlations first (estimate entropy rate); apply arithmetic coding or LZ-family codes that exploit sequential dependencies (#11) |
+| Assuming the information bottleneck β controls compression monotonically | Finite/discrete IB solutions can have phase transitions and jumps; jumps do not by themselves refute monotonic tradeoffs of globally optimized solutions | Sweep β densely and validate the I(T;X)/I(T;Y) tradeoff curve empirically; confirm phase transitions match the task (#8) |
+| Using InfoNCE as an unconstrained MI estimator in contrastive learning | InfoNCE is bounded above by log(K) where K = number of negative samples; severely underestimates MI when true MI >> log(K), which is common in SSL pretraining; gradients become misleading at high MI regimes | Apply f-DIME estimators (Letizia, Novello & Tonello, NeurIPS 2024; code: github.com/tonellolab/fDIME) which use derangement architecture to remove the upper-bound artefact; or use the Abdelaleem-Martini-Nemenman confidence-interval protocol (#2) to detect estimator failure before trusting MI values |
 | Claiming "LLMs are optimal compressors" without a Kolmogorov benchmark | Current models (GPT-4o, Llama-3.1-405B) fail the KoLMogorov Test — producing the *shortest* program for a data sequence is distinct from next-token prediction; synthetic gains do not transfer to real sequences | Split the claim in two, because the evidence points opposite ways. *Average-case* compression does track capability: BPC on a held-out corpus correlates near-linearly with benchmark scores, Pearson ≈ −0.95 across 30 models and 12 benchmarks (Huang et al., COLM 2024, arXiv:2404.09937) — which makes BPC a cheap, contamination-resistant evaluation proxy. *Worst-case* compression does not: producing the shortest program for a sequence is a different problem, and frontier models score poorly on the KoLMogorov Test (ICLR 2025), with synthetic gains failing to transfer to real sequences. Use BPC to rank models; do not upgrade that correlation into a Kolmogorov-optimality claim (#11) |
 | Using classical R(D) to bound generative model compression | Classical R(D) does not account for perceptual quality; the RDP tradeoff proves that matching the source *distribution* (not just minimising distortion) requires additional rate | Apply the three-way RDP function; use KL, TV, or Wasserstein as the perception constraint divergence measure (#3, #6) |
-| Ignoring R(D) theory when choosing LLM weight quantization scheme | Scalar quantization is suboptimal; block-coding (vector quantization) yields strictly lower distortion at the same bitrate per classical R(D) results — Radio (ICML 2025) directly applies R(D)-optimal stochastic quantization to LLM weights and outperforms standard PTQ | Frame LLM quantization as a rate-distortion optimization; prefer vector/lattice quantizers over scalar; use Blahut-Arimoto to find the optimal bit allocation per layer (#6, #7) |
+| Ignoring R(D) theory when choosing LLM weight quantization scheme | Under matched source, distortion, rate and coding assumptions, an expanded block-code design set can weakly improve the optimum; strict improvement is not universal (scalar lossless coding already achieves zero distortion). A paper-specific weight-quantization improvement does not establish universal task benefit | Define source/reconstruction alphabets and distortion; compare scalar and block quantizers on actual task loss and compute cost. Blahut–Arimoto solves a specified finite-alphabet R(D) problem, not arbitrary layer allocation; allocation requires layer rate-distortion curves, total-budget constraints and justified coupling assumptions (#6, #7) |
 | Using token-level entropy or sequence log-prob to detect hallucination | Token entropy is high whenever *phrasing* is free, which is almost always; the same fact stated five ways scores as maximum uncertainty. It measures lexical, not epistemic, uncertainty, so it fires on paraphrase and misses confident falsehoods | Compute entropy over meaning-equivalence clusters, not tokens: sample N generations, cluster by bidirectional NLI entailment, take entropy of the cluster distribution (Farquhar et al., *Nature* 630:625–630, 2024). For single-generation latency budgets, semantic entropy probes read the estimate off hidden states (Kossen et al., arXiv:2406.15927). Semantic entropy detects confabulation — arbitrary, sampling-unstable answers — not consistently-wrong beliefs, which are invisible to any sampling-based estimator (#1) |
 | Treating falling policy entropy during RL post-training as convergence | In RLVR the empirical fit R = −a·e^H + b holds: downstream reward is *bought* with policy entropy, so a collapsed-entropy policy has spent its exploration budget and has hit a ceiling, not found an optimum. Over 95% of the entropy drop and most of the gain occur early, then a plateau (Cui et al., arXiv:2505.22617) | Log policy entropy as a first-class training metric and fit the R/H curve to predict the ceiling before spending the compute. Collapse is driven by tokens with high covariance between log-prob and advantage — restrict updates on those via Clip-Cov or KL-Cov rather than adding a blanket entropy bonus, which trades away the signal indiscriminately (#1) |
-| Sizing agent-to-agent messages by token count instead of task-relevant information | Multi-agent handoffs are a rate-constrained channel; a message budget set by token count optimizes the wrong quantity and drops task-critical bits while preserving fluent filler | Frame the handoff as an IB problem — minimize I(X;M) subject to I(M;task) — and quantize the message rather than truncating it. Farooq & Iqbal (IEEE ICRA 2026, arXiv:2602.02035) combine IB with vector quantization and a gating mechanism for 71.4% bandwidth reduction; the same framing applies to KV-cache handoffs and summary passing between LLM agents (#6, #8) |
+| Sizing agent-to-agent messages by token count instead of task-relevant information | Multi-agent handoffs are a rate-constrained channel; a message budget set by token count optimizes the wrong quantity and drops task-critical bits while preserving fluent filler | Frame the handoff as an IB problem — minimize I(X;M) subject to I(M;task) — and quantize the message rather than truncating it. Farooq & Iqbal report 71.4% lower bandwidth (800 vs 2800 bits/episode) against full communication in their single synthetic coordination domain ([arXiv:2602.02035, §V-A; limits §VI-A](https://arxiv.org/html/2602.02035)). Their IB/vector-quantization/gating design is a hypothesis for LLM handoffs, not validated KV-cache or summary-passing evidence (#6, #8) |
 | Applying standard IB directly to multimodal (image-text) representations | Standard IB's randomness and hyperparameter dependency cause failure in multimodal settings; the IB curve is not interpretable for CLIP-type architectures | Use NIBT (ICLR 2025, code: github.com/LMBTough/NIB) which satisfies attribution axioms and eliminates these pathologies (#8) |
 
 ---
@@ -146,7 +146,14 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 - [ ] **Uncertainty measurement**: Need to quantify how many bits a distribution contains? → Shannon entropy (#1)
 - [ ] **Relevance scoring**: Need to measure how much knowing X reduces uncertainty about Y? → mutual information (#2)
 - [ ] **Distribution comparison (asymmetric)**: Comparing a learned distribution to a reference where direction matters (e.g., RLHF KL penalty)? → KL divergence (#3)
-- [ ] **Distribution comparison (symmetric)**: Need a proper metric between distributions? → JS divergence via KL (#3)
+- [ ] **Distribution comparison (symmetric)**: Need a symmetric divergence? → JS divergence. Need a proper metric? → square-root JS distance (#3)
+
+Before computing entropy or mutual information on product data, write the random
+variables and sampling distribution explicitly. A proxy such as token variety,
+label cardinality, embedding spread, or model confidence is not Shannon entropy
+or MI unless probabilities and outcomes are defined. Label proxy scores as
+heuristics and validate them against the decision outcome they are meant to
+predict.
 - [ ] **Training objective / model evaluation**: Computing a loss between predicted and true distribution? → cross-entropy (#4)
 - [ ] **Model comparison across tokenizers**: Need tokenizer-neutral perplexity? → bits-per-byte normalization (#4)
 - [ ] **Throughput ceiling**: Need the theoretical limit on reliable transmission over a noisy channel? → channel capacity (#5)
@@ -165,51 +172,25 @@ Each primitive is summarized here, expanded in [`references/primitives-overview.
 
 **Problem**: A retrieval or summarization pipeline fills a context window but needs to prioritize content under a token budget.
 
-**Stack**:
-1. Estimate entropy of each candidate segment (#1) — higher entropy segments carry more novel information.
-2. Compute I(segment; query) (#2) — rank by relevance, using mutual information as the relevance signal.
-3. Apply MDL penalty (#7) — prune segments whose description cost (length) exceeds the information gain they add.
+**Use this foundation only when** a distribution-based compression question is defined, or when interpreting a measured quality/budget tradeoff. A single segment has no Shannon entropy or MI without a random-variable model and sampling frame.
 
-**Output**: A ranked, pruned set of segments that maximizes information per token.
-
-**LLM app note**: This maps directly to KV-cache pruning and gist-token compression in LLM inference: high-surprisal tokens (H(token | context) large) carry more information and should be retained; low-surprisal tokens are candidates for KV eviction or soft merging. First-token surprisal (ICML 2025) operationalizes this for CoT step pruning.
-
-**Inputs:** Candidate segments S₁…Sₙ, query Q, token budget B, per-segment length len(Sᵢ).
-**Rules:** Score each segment as I(Sᵢ; Q) / len(Sᵢ); compute MDL penalty = L(Sᵢ) + L(data | Sᵢ); drop segments where len(Sᵢ) > information gain relative to budget B; rank remaining by MI-per-token descending.
-**Outputs:** Ordered list of segments with entropy H(Sᵢ), MI(Sᵢ; Q), and MDL cost; retain/drop decision for each candidate.
+**Inputs:** Representative held-out tasks, candidate segments, actual token budget, task loss/success measure, and essential instructions, permissions, negations and constraints that must survive compression.
+**Rules:** Preserve essential constraints first. Benchmark relevance, diversity and surprisal proxies against task outcomes at several budgets, including an unpruned baseline. Unrelated random text can have high entropy while being useless; a predictable negation can be essential. If a joint distribution is supplied, marginal information is I(task;candidate|selected), not a bit value assigned to one document. Density ranking is a heuristic for indivisible budgets and conditional redundancy, not a global optimizer. MDL requires an explicit code/model and compatible bit units; do not compare raw token length with information gain in bits.
+**Outputs:** Measured task-loss/budget curve, chosen feasible context, retained constraints, proxy definitions, uncertainty and failure cases. KV-cache pruning and gist compression require their own task/latency benchmarks; high surprisal alone does not justify retaining or evicting a token.
 
 ### Retrieval Reranking
 
-**Problem**: A dense retrieval system returns k candidates; a reranker must select the top-m without redundancy.
+Define task/query and candidate random variables over a representative sampling frame. Exact marginal information is I(task;candidate|selected); MI relevance minus pairwise MI is only a heuristic and needs validation. High conditional entropy indicates novelty rather than redundancy. For practical retrieval, evaluate diversity/relevance proxies on held-out task success instead of assigning invented bit values to single documents. Drift thresholds and feature-inclusion thresholds must be calibrated to uncertainty, sampling frequency, baseline and decision cost; no universal .05-nat or 10%-of-target-entropy gate is supplied.
 
-**Stack**:
-1. Compute MI(query, doc_i) for each candidate (#2) — score individual relevance.
-2. Compute pairwise redundancy using conditional entropy H(doc_i | doc_j) (#1) — penalize near-duplicate content.
-3. Use redundancy budget (#11) — select the set of m documents that maximizes total information after subtracting pairwise overlap.
-
-**Output**: A diverse, high-relevance set with no redundant documents.
-
-**Inputs:** k candidate documents doc₁…docₖ, query Q, target set size m, feature distribution P(X), baseline distribution P_baseline, current distribution P_today.
-**Rules:** Score relevance as MI(Q; docᵢ); penalise redundancy using H(docᵢ | docⱼ) for each pair; keep features where MI(X;Y) / H(Y) > 10%; alert on drift when KL(P_today ‖ P_baseline) > 0.05 nats sustained 3 days; greedily select m documents maximising Σ MI(Q; docᵢ) − Σ overlap penalty.
-**Outputs:** Top-m document set with per-document MI(Q; docᵢ), pairwise redundancy scores H(docᵢ | docⱼ), drift flag (KL value, days sustained, severity level).
-
-**Worked example:** Feature selection for a churn model. Feature X = "support tickets last 30 days", target Y = churn. P(Y=1) = 0.1, so H(Y) = −0.1·log₂0.1 − 0.9·log₂0.9 ≈ 0.469 bits. Bin X into [0 tickets, 1–2, 3+] with conditional distributions giving H(Y|X) ≈ 0.31 bits → MI(X;Y) = 0.469 − 0.31 = 0.16 bits = 34% of H(Y). Threshold: keep features with MI/H(Y) > 10%; X qualifies. For drift detection, compute KL(P_today ‖ P_baseline) weekly on the feature distribution; alert when KL > 0.05 nats sustained 3 days. Reference: KL = 0 means identical distributions; KL ≈ 0.69 nats ≈ 2× odds shift on a binary feature.
+**Hypothetical feature example:** H(churn)=.469 bits and a validated joint estimate H(churn|tickets)=.31 implies MI=.159 bits. This measures statistical dependence, not causation, and does not alone approve feature inclusion or establish a drift alert. KL=.69 nats is not a universal twofold odds shift; direction and full distributions determine divergence.
 
 ### Prompt Complexity Diagnosis
 
 **Problem**: A prompt produces high-variance outputs; unclear whether the source is prompt ambiguity, model uncertainty, or stochastic decoding.
 
-**Stack**:
-1. Estimate H(output | prompt) empirically across N samples (#1) — measures residual output entropy under fixed prompt.
-2. Apply Fano's inequality (#9) — derive a lower bound on the classification/decision error implied by that residual entropy.
-3. Use cross-entropy and perplexity (#4) — decompose the model's token-level uncertainty to locate which prompt spans drive variance.
-4. If variance is high, apply IB framing (#8) — determine whether the prompt is transmitting task-relevant information or noise.
-
-**Output**: A diagnosis separating prompt ambiguity from model uncertainty, with actionable edits targeted to high-entropy spans.
-
-**Inputs:** Prompt P, N sampled outputs O₁…Oₙ, token-level log-probabilities from the model, task label set Y.
-**Rules:** Estimate H(output | prompt) = −(1/N) Σ log p(Oᵢ | P) across N samples; derive error lower bound P_e ≥ (H(X|Y) − 1) / log|X| via Fano's inequality; decompose token-level cross-entropy H(P,Q) = H(P) + D_KL(P‖Q) to isolate high-variance spans; apply IB framing if H(output | prompt) > threshold — check whether prompt spans carry I(span; task) > 0.
-**Outputs:** Per-prompt H(output | prompt) score, Fano error bound P_e, ranked list of high-entropy prompt spans with I(span; task) scores, diagnosis label (prompt ambiguity / model uncertainty / decoding noise), and recommended prompt edits.
+**Inputs:** Fixed prompt, sampled outputs, named sampling law q (including temperature/top-p), evaluated probability law p, sample size, units (bits/nats per sequence or token), and a grounded finite target label Y with available evidence E when classification bounds are requested.
+**Rules:** The sample mean −log p(output|prompt) estimates cross-entropy of q relative to p; it estimates sampling entropy only when q=p and the evaluation covers the same events. Report estimation uncertainty. Arbitrary text entropy or confidence is not H(Y|E). For m=|Y|>1, a conservative Fano lower bound is max(0,(H(Y|E)−1)/log₂ m) using bits and the same label/evidence distribution; without that distribution, return “bound unavailable.” Controlled prompt edits, fixed/changed samplers, and model comparisons can test ambiguity, decoding and model hypotheses. Output variability alone cannot identify their causes or rank causally responsible prompt spans. Ground comparisons in held-out task labels/loss and account for confounding changes.
+**Outputs:** Sampling/cross-entropy measurements and uncertainty, controlled comparisons, supported hypotheses and unresolved alternatives, task-quality changes, and a Fano bound only where prerequisites hold. Input-span relevance and IB interpretations remain benchmarked proxies unless a joint distribution is defined.
 
 ---
 
@@ -281,6 +262,11 @@ This is a structural metaphor for reasoning about communication design, not a li
 
 ## Navigation
 
+- [scripts/discrete_information.py](scripts/discrete_information.py) — deterministic support artifact.
+- [scripts/test_discrete_information.py](scripts/test_discrete_information.py) — deterministic support artifact.
+
+- Practical completion contract and known-answer controls: [references/practical-contract.md](references/practical-contract.md).
+
 - Formal theory map: [`references/formal-theory-map.md`](references/formal-theory-map.md)
 - Patterns, scenarios, and traps: [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md)
 - Primitives overview: [`references/primitives-overview.md`](references/primitives-overview.md)
@@ -307,6 +293,6 @@ _(No cross-links at this time. Consumer skills — ai-prompt-engineering, ai-con
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

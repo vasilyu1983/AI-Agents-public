@@ -1,8 +1,8 @@
 # S3 Vectors — Vector Backend Choice
 
-Amazon S3 Vectors is a cost-optimized vector storage tier that reached GA (generally available, 14 regions) in December 2025 and is mainstream by Q1 2026. It stores vectors as S3 objects with a built-in approximate-nearest-neighbor index, supporting large-scale vector workloads at sub-second cold and ~100ms warm latency for as little as ~10% of traditional vector-DB cost.
+Amazon S3 Vectors is a cost-optimized vector storage service that reached GA in 14 AWS regions in December 2025. AWS documents sub-second query performance for infrequent queries and roughly 100 ms for frequently queried indexes. AWS also advertises up to 90% lower cost than specialized vector databases; treat that as a vendor claim and validate it with the target corpus, query rate, filters, and retention profile.
 
-It is the default vector backend choice on AWS for new builds in 2026, replacing "Aurora pgvector by default" and "OpenSearch by default" for most workloads.
+Treat it as the first cost-oriented candidate for AWS-native retrieval, then compare it with Aurora pgvector or OpenSearch when relational co-location, hybrid search, ranking control, or tighter latency targets matter.
 
 ---
 
@@ -32,25 +32,15 @@ A storage tier inside Amazon S3 specifically for vectors:
 - Up to 2 billion vectors per index (GA limit); trillions per bucket across many indexes — verify current AWS docs
 - Auto-scales across multiple indexes
 
-The mental model: S3 Vectors is to vector storage what S3 is to object storage — cheap, durable, scales to large size, sub-second access. Not the fastest, but the cheapest that's still fast enough for most production RAG.
+The mental model: S3 Vectors brings a managed vector index and query API into S3's storage boundary. Its economic and latency fit still depends on the corpus, query pattern, filters, and alternatives already operated by the team.
 
 ---
 
 ## Cost shape
 
-The 2026 economic shift. Order-of-magnitude comparison (model only — verify current pricing):
+S3 Vectors charges for stored vectors and API activity rather than provisioned search capacity. AWS advertises **up to 90%** lower cost than specialized vector databases, but the supplied sources do not support fixed competitor multiples. Build a dated workload estimate with vector count and dimensions, retained metadata, ingest and update volume, query rate, filter pattern, replication, data processing, and any hot tier. Compare the complete cost with the team's actual Aurora, OpenSearch, or external-service configuration.
 
-| Backend | Relative cost at 100M vectors | Notes |
-|---|---|---|
-| **S3 Vectors** | **~1x** (baseline, cheapest) | Storage + per-query charges; no provisioned capacity |
-| pgvector on Aurora Serverless | ~5–8x | Includes Aurora ACU charges |
-| OpenSearch Serverless | ~6–10x | Per-OCU billing, minimum OCU floor |
-| Pinecone Standard | ~8–12x | Per-pod or serverless tier |
-| OpenSearch Managed Cluster | ~10–15x | Instance-hour billing, multi-AZ |
-
-This is the headline ~90% cost reduction figure AWS quotes. It is real for cold or rarely-queried corpora; the gap narrows on hot workloads where the alternatives' provisioned cost amortizes.
-
-**Implication for the vector-backend decision in `ai-vector-brain`:** S3 Vectors becomes the AWS default. Choose another only when latency or co-location demands it.
+**Implication for the vector-backend decision in `ai-vector-brain`:** treat S3 Vectors as a cost-oriented candidate. Choose from measured alternatives based on relational co-location, hybrid retrieval, ranking control, query pattern, operational fit, portability, and latency and cost budgets.
 
 ---
 
@@ -58,23 +48,21 @@ This is the headline ~90% cost reduction figure AWS quotes. It is real for cold 
 
 | Query class | Latency |
 |---|---|
-| **Cold query** (first hit after idle) | Sub-second (typically 200–800ms) |
-| **Warm query** (recent hit) | ~100ms |
-| **Filtered query** (with metadata predicate) | Similar to warm, depending on filter selectivity |
+| **Infrequent query** | Sub-second, per AWS documentation |
+| **Frequently queried index** | Approximately 100 ms, per AWS documentation |
+| **Filtered query** | Benchmark with the target predicate and selectivity |
 
-This is **not** the fastest tier — Redis Enterprise and well-tuned Pinecone serve sub-50ms p99. For most RAG workloads, the 100ms warm path is fine — model inference and reranker add ≥ 300ms regardless.
-
-If you need < 50ms vector retrieval, S3 Vectors is not the right tier.
+These are service-level descriptions, not a workload-specific percentile guarantee. Measure the end-to-end retrieval distribution under the intended query rate and filters. If the measured tail misses the retrieval budget, compare a hot index or tiered design.
 
 ---
 
 ## When S3 Vectors wins
 
 1. **AWS-native RAG.** You are on AWS and want managed vector storage with Bedrock KB or self-managed retrieval.
-2. **Cost-sensitive scale.** Million-to-trillion vector range where 90% cost reduction is meaningful.
-3. **Cold or warm-but-not-hot workloads.** Most enterprise knowledge bases hit a long tail of vectors that rarely get queried. S3 Vectors handles long-tail at near-zero cost.
+2. **Cost-sensitive scale.** Large corpora where a workload calculation supports the storage-plus-API cost shape.
+3. **Infrequently queried workloads.** Long-tail corpora where usage-priced querying and documented sub-second access meet the product budget.
 4. **You're already on S3.** Data lake teams, anyone running Athena or Glue jobs over S3, get co-location and unified billing.
-5. **No need for sub-50ms p99.** Most RAG isn't latency-bound at the vector tier; reranker + model dominate.
+5. **Measured latency fits.** The target query and filter distribution clears the retrieval latency budget.
 
 ---
 
@@ -82,7 +70,7 @@ If you need < 50ms vector retrieval, S3 Vectors is not the right tier.
 
 | Need | Pick instead |
 |---|---|
-| Sub-50ms p99 vector retrieval | **Redis Enterprise Cloud** |
+| Tighter tail-latency target than S3 Vectors meets in testing | Benchmark a hot in-memory or provisioned vector index |
 | Co-locate vectors with relational data (joins, ACID) | **Aurora pgvector** |
 | Hybrid BM25 + vector retrieval in one engine | **OpenSearch Serverless** (or self-managed) |
 | GraphRAG — graph + vector co-resident | **Neptune Analytics** |
@@ -139,7 +127,7 @@ The biggest lock-in risk is the **storage format**. There is no "export vectors 
 
 ## Anti-patterns
 
-- **A-S3V-1 — Default to Aurora pgvector "because that's what we know."** S3 Vectors is ~5–10x cheaper for most workloads at comparable latency. The decision now needs justification, not the other way around.
+- **A-S3V-1 — Choose from familiarity or vendor headline alone.** Compare S3 Vectors with the actual Aurora, OpenSearch, or external-service configuration on the target corpus and query distribution.
 - **A-S3V-2 — Pick S3 Vectors for sub-50ms latency workloads.** It's a warm-path tier. For tier-1 latency, use Redis or Pinecone.
 - **A-S3V-3 — Treat vectors as source of truth.** Storage format is proprietary. Always keep source documents and embedding model versions tracked so you can re-embed.
 - **A-S3V-4 — Skip KB and build everything direct because "we want control."** For first-pass RAG, KB + S3 Vectors is the lowest-friction stack. Drop to direct API access only when KB hits a customization wall.

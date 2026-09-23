@@ -1,0 +1,11 @@
+{
+  "contracts": [
+    {
+      "name": "exact decimal parser limits",
+      "script": "scripts/check_lp_certificate.py",
+      "constant": "LIMITS",
+      "doc": "references/certificates-and-status.md",
+      "doc_pattern": "`(?P<key>scalar_characters|decimal_exponent_magnitude)`\\s*\\|\\s*(?P<value>\\d+)"
+    }
+  ]
+}

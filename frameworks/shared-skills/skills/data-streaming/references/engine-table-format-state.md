@@ -32,7 +32,7 @@ write.target-file-size-bytes = 128MB  # reduces small-file overhead
 write.fanout.enabled = true           # unordered writes across partitions
 ```
 
-- 5-minute checkpoint produces ~90% fewer small files vs 1-minute intervals.
+- With one commit opportunity per checkpoint and all else equal, a 5-minute interval yields 80% fewer commit opportunities than a 1-minute interval. Treat file-count reduction as a workload measurement because partitions, writers, rollover, traffic shape, and compaction also determine output files.
 - Always run a compaction job on cold partitions; skip the hot (current) partition.
 - Dynamic Iceberg Sink handles multi-table writes and automatic schema evolution.
 - Flink's checkpoint mechanism provides exactly-once delivery to Iceberg.

@@ -62,3 +62,5 @@ The PRT reveals that ratifying criteria is the prerequisite for everything else 
 - Goldratt, E.M. (1994). *It's Not Luck*. North River Press.
 - Dettmer, H.W. (2007). *The Logical Thinking Process*. ASQ Quality Press. (Prerequisite Tree chapter; confirm exact number against your printing)
 - Cox, J.F. & Spencer, M.S. (1998). *The Constraints Management Handbook*. CRC Press.
+
+**T/CU applicability:** Ratio ordering assumes divisible independent work, one linear capacity, compatible demand and no binding dependencies/deadlines. For indivisible initiatives, shared or multiple capacities, or mandatory obligations, build a global feasible mix/schedule and verify objective value; ratio ranking is only a heuristic. See the root and [`../../../references/decision-and-validation.md`](../../../references/decision-and-validation.md).

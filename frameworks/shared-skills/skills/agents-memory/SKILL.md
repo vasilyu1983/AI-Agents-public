@@ -2,8 +2,8 @@
 name: agents-memory
 description: "Manages AGENTS.md, CLAUDE.md, and scoped repo rules for Claude Code and Codex. Use when fixing stale memory, ignored instructions, memory audits, or model-upgrade migration."
 compatibility: Claude Code + Codex. Claude Code CLAUDE.md plus Codex AGENTS.md — runtime-specific file conventions.
-version: "1.3"
-last_validated: 2026-08-21
+version: "1.4"
+last_validated: 2026-09-15
 ---
 
 # Project Memory for Claude Code + Codex
@@ -24,7 +24,7 @@ Treat repo memory as a **living exception file**. If an agent can reliably infer
 | Codex runtime permissions | `~/.codex/config.toml`, trusted `.codex/config.toml`, permission profiles, `.rules` | Configure sandbox boundaries, approval policy/reviewer, and executable command policy |
 | Codex auto-memory | `~/.codex/memories/` (opt-in via `[features] memories = true`) | Machine-local accumulated recall; off by default; keep must-always rules in `AGENTS.md`, not here |
 | Claude auto memory | `~/.claude/projects/<project>/memory/` — `MEMORY.md` index + topic files | Machine-local, accumulated notes; first 200 lines / 25 KB of `MEMORY.md` load each session; topic files load on demand |
-| Instruction budget | ~100–150 usable lines across all loaded CLAUDE.md tiers | Community-derived heuristic (not an official Anthropic figure): compliance drops past ~150–200 discrete instructions, of which the system prompt already spends ~50; budget is a shared pool across all tiers |
+| Instruction budget | ~100–150 usable lines across all loaded CLAUDE.md tiers | Community-derived heuristic (not an official Anthropic figure): the system prompt already spends ~50 instructions; budget is a shared pool across all tiers |
 | Layered memory model | `references/memory-patterns.md` | Keep the hot memory small; push history and reusable procedures into the right layers |
 
 ## When To Use Which Layer
@@ -44,6 +44,9 @@ Full per-runtime loading semantics and the `config.toml` vs `AGENTS.md` split: [
 
 ## Workflow
 
+Use the [AGENTS.md inclusion checklist](references/instruction-inclusion-checklist.md)
+before adding or retaining a line in project memory.
+
 1. Start with a short root `AGENTS.md` or `CLAUDE.md`: project purpose, hard constraints, key commands, and "must not break" rules.
 2. Inline only the highest-value shared rules so Codex does not depend on Claude-specific features.
 3. Prioritize exact commands, weird setup steps, deployment quirks, hard boundaries, and verification rules over philosophy or summary prose.
@@ -52,12 +55,16 @@ Full per-runtime loading semantics and the `config.toml` vs `AGENTS.md` split: [
 6. For repos with many skills, make `AGENTS.md` point to a compact router/discovery map first, then to the full catalog. Example: `frameworks/shared-skills/graph/codex-discovery.md` for Codex startup selection, then `frameworks/shared-skills/graph/graph.json` only after the router is chosen.
 7. In `AGENTS.md`, name the primary routers explicitly when they are the intended entry points. Keep one-line scopes in hot memory; keep skill lists, scenario detail, and per-router Mermaid in generated graph artifacts.
 8. Treat memory like code: review it, delete stale guidance, keep hot memory small and stable, and keep examples aligned with actual workflows.
-9. **Retrospective updates**: when Codex or Claude Code repeats a mistake, or when the model takes a line more literally than intended, ask it to analyze the failure and propose an `AGENTS.md` update. Add rules reactively (after repeated mistakes), not preemptively. Format: rule + why + example of the mistake.
-10. **Worktree lifecycle rules**: if a repo uses agent worktrees, make the closeout explicit in `AGENTS.md`: merge the branch into `dev`, run the repo gate, remove the worktree, verify `git worktree list --porcelain`, and delete stale session metadata. Do not let worktrees become long-lived storage for abandoned branches or dirty experiments.
-11. **Progression**: prompts → `AGENTS.md` → skills → automations. If a workflow in `AGENTS.md` becomes repeatable, extract it into a skill. If a skill runs on a cadence, wrap it in an automation. Skills define the method; automations define the schedule.
-12. **Lock the session prefix**: pick the session model and toolset at start and document the default in `AGENTS.md` (see [references/claude-md-fragments.md](references/claude-md-fragments.md) §3). Switching models or adding MCP servers mid-session invalidates the cached prefix and forces a full re-read — the single largest avoidable token sink in long sessions.
-13. **Paste-ready blocks**: for the high-leverage sections (Task Delegation, Preferred Tools, Session Model), use the fragments in [references/claude-md-fragments.md](references/claude-md-fragments.md) and adapt to the repo. Each block carries its rationale so the next reader knows why it's in hot memory.
-14. **Memory health checks**: for file-based memory folders, schedule review of contradictions, stale facts, unsupported claims, and missing source links. Keep a dated archive outside the agent-write path before allowing agents to update memory files automatically.
+9. Define conflict resolution before adding another layer: current task instructions beat standing memory; narrower repo rules beat broader personal guidance within their documented scope; runtime permission policy remains authoritative for capability. When two durable files disagree without a declared precedence, surface the conflict instead of silently choosing the newest text.
+
+### Standing rules
+
+- **Retrospective updates**: when Codex or Claude Code repeats a mistake, or when the model takes a line more literally than intended, ask it to analyze the failure and propose an `AGENTS.md` update. Add rules reactively (after repeated mistakes), not preemptively. Format: rule + why + example of the mistake.
+- **Worktree lifecycle rules**: if a repo uses agent worktrees, make the closeout explicit in `AGENTS.md`: merge the branch into `dev`, run the repo gate, remove the worktree, verify `git worktree list --porcelain`, and delete stale session metadata. Do not let worktrees become long-lived storage for abandoned branches or dirty experiments.
+- **Progression**: prompts → `AGENTS.md` → skills → automations. If a workflow in `AGENTS.md` becomes repeatable, extract it into a skill. If a skill runs on a cadence, wrap it in an automation. Skills define the method; automations define the schedule.
+- **Stabilize the session prefix when the runtime benefits from it**: pick the session model and toolset at start and document the default in `AGENTS.md` (see [references/claude-md-fragments.md](references/claude-md-fragments.md) §3). Model, tool-schema, or MCP changes can reduce prompt-cache reuse, but invalidation and billing are provider- and runtime-specific. Confirm with usage telemetry before calling a change the dominant token cost.
+- **Paste-ready blocks**: for the high-leverage sections (Task Delegation, Preferred Tools, Session Model), use the fragments in [references/claude-md-fragments.md](references/claude-md-fragments.md) and adapt to the repo. Each block carries its rationale so the next reader knows why it's in hot memory.
+- **Memory health checks**: for file-based memory folders, schedule review of contradictions, stale facts, unsupported claims, and missing source links. Keep a dated archive outside the agent-write path before allowing agents to update memory files automatically.
 
 ## ASCII Flow
 
@@ -124,7 +131,7 @@ Keep the hot memory small and intentional. The four load-bearing rules:
 - **Instruction budget**: compliance drops after ~150–200 discrete instructions — prune ruthlessly.
 - **Feedback loops**: explicit verification steps give 2–3x efficiency gains over memory without checks.
 
-Full detail (intent-first model, dated from Opus 4.7 and unchanged through the 5 family; working-if metric, verification templates): [references/memory-discipline.md](references/memory-discipline.md).
+Full detail (intent-first model, working-if metric, verification templates): [references/memory-discipline.md](references/memory-discipline.md).
 
 ## Structure Patterns
 
@@ -222,7 +229,7 @@ Summary of the highest-impact failure modes:
 - missing verification steps (the single largest efficiency gap)
 - leaving stale worktrees after merge instead of treating cleanup as part of delivery
 
-Full list including anti-patterns first documented for Opus 4.7 and still current (progress scaffolding, long "Don't" lists, implicit fan-out): [references/traps-and-antipatterns.md](references/traps-and-antipatterns.md).
+Full list including the model-era anti-patterns (progress scaffolding, long "Don't" lists, implicit fan-out): [references/traps-and-antipatterns.md](references/traps-and-antipatterns.md).
 
 ## Navigation
 
@@ -245,8 +252,9 @@ Full list including anti-patterns first documented for Opus 4.7 and still curren
 | [references/claude-md-instruction-budget.md](references/claude-md-instruction-budget.md) | Empirical instruction ceiling (~100–150 usable lines), 4-tier hierarchy, 5-section template, hard caps, delete-line test, and auto-memory storage path |
 | [references/structure-patterns.md](references/structure-patterns.md) | Hooks vs memory, three-tier boundaries, progressive disclosure |
 | [references/memory-patterns.md](references/memory-patterns.md) | 15 patterns including progressive disclosure, three-tier boundaries, and feedback loops |
-| [references/traps-and-antipatterns.md](references/traps-and-antipatterns.md) | Durable trap list and model-era anti-patterns (dated from Opus 4.7) |
+| [references/traps-and-antipatterns.md](references/traps-and-antipatterns.md) | Durable trap list and model-era anti-patterns |
 | [references/coding-behavior.md](references/coding-behavior.md) | Canonical coding-behavior rules for disciplined agentic coding |
+| [references/instruction-inclusion-checklist.md](references/instruction-inclusion-checklist.md) | Short keep/move/remove review for deciding what belongs in `AGENTS.md`, with scoped examples and path-freshness checks |
 
 ### Scale and Advanced Architecture
 
@@ -293,10 +301,10 @@ Full list including anti-patterns first documented for Opus 4.7 and still curren
 - Verify volatile platform behavior with official Claude Code and OpenAI Codex docs before final answers.
 - Prefer primary sources and record the source URL plus access date for any behavior that can change.
 - If web access is unavailable, state that clearly and mark platform-specific guidance as unverified.
-- Model-specific behavior drifts fast. When mentioning Claude Opus or Codex defaults, cite the official release/migration post and date (e.g. Opus 5 launch, 2026-07-24). As of 2026-08-15 the current line is Fable 5 / Opus 5 / Sonnet 5 plus Haiku 4.5; anything citing a 4.x default is describing a superseded generation.
+- Model-specific behavior drifts fast. When mentioning Claude Opus or Codex defaults, cite the official release/migration post and its date. Check the current model line against the vendor's release notes before relying on it; treat any default tied to a superseded generation as stale.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

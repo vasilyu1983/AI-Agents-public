@@ -79,7 +79,7 @@ Use `.mcp.json` for project-shared config. Scope options: `local` (default, user
 
 ### Codex / OpenAI
 
-The `codex mcp add` CLI supports both transports directly: stdio via `--env` + the `--` separator, and Streamable HTTP via `--url` (added in `openai/codex` PR #4904, 2025-10-08 — confirmed against `codex mcp add --help` on codex-cli 0.144.1). There is still **no `--transport` flag**: transport is inferred from `--url` vs. a trailing `-- <command>`.
+The `codex mcp add` CLI supports both transports directly: stdio via `--env` + the `--` separator, and Streamable HTTP via `--url`. There is still **no `--transport` flag**: transport is inferred from `--url` vs. a trailing `-- <command>`.
 
 ```bash
 # stdio (local helper) — CLI path
@@ -123,7 +123,8 @@ Transport rule is identical for both: `stdio` for local helpers, Streamable HTTP
 2. Search the official registry and prefer an existing server if it is well-scoped.
 3. Validate transport, auth, tool surface, and output size with one low-cost read.
 4. If custom work is justified, build the smallest server that solves the repeated workflow.
-5. Harden the server before broader rollout: least privilege, narrow scopes, output limits, logging, and approval controls for writes.
+5. Before admitting a server to an agent, capture the effective capability set for the intended identity: one successful read and one authorized, non-mutating denial probe, plus the server/version/auth scope used. Run the negative probe through a policy simulator or dry-run endpoint, or against a harmless synthetic canary in an isolated test tenant. Never probe real sensitive data or a real mutation merely to prove denial; obtain explicit authorization before any external-state test. A schema advertised during discovery is not proof that the caller can use it.
+6. Harden the server before broader rollout: least privilege, narrow scopes, output limits, logging, and approval controls for writes.
 
 ## ASCII Flow
 
@@ -393,7 +394,6 @@ Before delivering output, verify:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

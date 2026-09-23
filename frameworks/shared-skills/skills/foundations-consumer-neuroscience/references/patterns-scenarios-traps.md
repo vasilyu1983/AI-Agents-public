@@ -12,7 +12,7 @@ status: stable
 |---|---|---|
 | Anxiety-relief consumer loop | User is in an elevated arousal / uncertainty state pre-purchase | Arousal deescalation (#2) → prediction priming (#12) → narrative (#4) → warmth (#3) → interoceptive anchor (#8) |
 | Parasocial reading bond | Content that must feel personally authored for the reader | Narrative transportation (#4) → mirror contagion (#6) → real social proof (#3) → embodied metaphor (#11) |
-| Daily-cadence retention | Product value depends on repeated daily engagement over weeks | Reward anticipation (#10) → consolidation timing (#9) → top-down salience (#1) → prediction confirmation (#12) |
+| Daily-cadence retention | Product value depends on repeated daily engagement over weeks | Reward anticipation (#10) → sleep-respecting timing hypothesis (#9) → top-down salience (#1) → prediction confirmation (#12) |
 | Conversion landing page, mixed audience | Pre-purchase audience with unknown regulatory orientation | Earned salience (#1) → BIS/BAS copy split (#5) → aesthetic reward (#7) → mirror-matched testimonial (#6) |
 | Trust repair after error | User has experienced a service or product failure | Real human warmth (#3) → somatic acknowledgment (#8) → prediction-error closure (#12) → prevention framing (#5) |
 | DMCC compliance audit | Pre-ship check for any dark-pattern or vulnerable-user risk | Harm test → dark-pattern checklist → vulnerable-user screen → biometric lawful basis → anticipation cap |
@@ -20,7 +20,7 @@ status: stable
 ## Known Traps
 
 - Arousal is not engagement. High GSR indicates activation, not positive valence; stress and excitement look the same on the autonomic measure.
-- Oxytocin half-life is ~3–5 minutes in plasma. Warmth must be distributed across the session, not front-loaded in a hero banner.
+- Peripheral oxytocin kinetics do not establish digital warmth duration or placement; assess perceived care and actual service outcomes.
 - Narrative transportation suppresses critical evaluation. This is powerful and dangerous: material disclosures made during high-immersion states may not register.
 - BIS/BAS mismatch is invisible in aggregate conversion data but visible in segment-level drop-off. Aggregate A/B tests can mask regulatory-focus mis-alignment.
 - Mirror simulation is automatic and cannot be consciously filtered by the user. Fabricating emotional-contagion cues (stock-photo testimonials, scripted "authentic" reactions) triggers real neural response; discovery of fabrication incurs disproportionate trust penalty.

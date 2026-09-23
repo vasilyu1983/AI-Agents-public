@@ -6,13 +6,12 @@ Human social perception is deeply simulation-based. When we observe another pers
 
 1. **Mirror neuron system (MNS)**: First described in macaques (Rizzolatti et al.) and subsequently investigated in humans via fMRI and TMS, the MNS activates motor and premotor regions when observing actions that match the observer's motor repertoire. In humans, the system extends to observed intentional actions and to the social inference that follows ("they are reaching because they want the object"). The MNS is not a pure "do what you see" system; it provides a simulation scaffold for understanding others.
 
-2. **Fusiform Face Area (FFA) and emotional contagion**: The FFA processes face identity and emotional expression rapidly and largely automatically. Hatfield et al. (1993) established emotional contagion: automatic mirroring of observed emotional expressions, postures, and vocalizations produces corresponding feeling states in the observer. A smiling face in a testimonial generates a mild positive affect in the viewer before any deliberate evaluation of the testimonial content occurs. This response is automatic and cannot be easily suppressed by the user.
+2. **Face perception and emotional contagion**: Face perception and emotional-response research motivate hypotheses about social imagery. Neither a smiling testimonial nor conversion lift establishes FFA/MNS activation or an automatic, unavoidable affective response in an individual viewer.
 
 Implications:
-- Emotional contagion from testimonial faces is a real neural event; it is not merely persuasion by narrative.
-- The emotional state expressed must match the emotion the user is meant to infer; wrong emotional expression (forced smile on a "relief" testimonial) creates incongruent simulation — the mismatch is salient.
-- Because the contagion is automatic and pre-deliberative, fabricating emotional cues in testimonials is a form of deception that operates below the user's ability to consciously defend against it.
-- Bigne et al. (2025) confirm neurophysiological measures of facial EMG and FFA-proxy signals predict testimonial efficacy in consumer contexts.
+- Test perceived authenticity, emotional congruence and task outcomes locally, accounting for audience and context.
+- Genuine testimonials must accurately represent actual experience; authenticity requirements do not depend on proving a neural mechanism.
+- Neural claims require the mechanism, measurement-validity and product-intervention evidence recorded in [evidence-to-product contract](../../../references/evidence-to-product.md); ordinary UX metrics do not satisfy those rows.
 
 ## When to Use
 
@@ -25,9 +24,9 @@ Implications:
 
 **Ethical use**: testimonials and face imagery from real users expressing genuine emotions about real experiences. The emotional state depicted must accurately reflect a common user experience.
 
-**Manipulation**: using stock photography faces, actors, AI-generated testimonials, or scripted "authentic" emotional displays to trigger mirror-system simulation of emotions the product has not genuinely produced in real users. This is deception at the neural level — the contagion response is real even though the input is fabricated. ASA CAP Code explicitly prohibits testimonials that are fictitious or unrepresentative. Under DMCC Act 2024, fabricated social proof is a direct-enforcement target.
+**Manipulation**: using stock photography faces, actors, AI-generated testimonials, or scripted "authentic" emotional displays to trigger mirror-system simulation of emotions the product has not genuinely produced in real users. This can misrepresent user experience; no inevitable neural response is established. ASA CAP Code explicitly prohibits testimonials that are fictitious or unrepresentative. Under DMCC Act 2024, fabricated social proof is a direct-enforcement target.
 
-**Required condition**: all faces and emotional expressions in social-proof contexts must come from verified real users whose experience they represent. Facial EMG or other physiological measurement in user research requires UK GDPR Article 9 explicit consent.
+**Required condition**: all faces and emotional expressions in social-proof contexts must come from verified real users whose experience they represent. Facial EMG and physiological research require informed participation and a documented data classification; Article 9 applies where processing involves special-category data, not automatically to every physiological measure.
 
 ## Inputs
 
@@ -45,16 +44,16 @@ Implications:
 
 | Failure | Cause | Fix |
 |---------|-------|-----|
-| Testimonial section has no measurable lift | Face images are stock photography; no personal specificity; FFA does not engage for clearly "stock" faces | Replace with real user photos; add name, location, specific experience detail |
+| Testimonial section has no measurable lift | Face images are stock photography; no personal specificity; possible low perceived authenticity; no FFA inference from conversion | Replace with real user photos; add name, location, specific experience detail |
 | Testimonial emotion mismatched to copy | "This changed my life" copy paired with a forced-smile face in a context of relief, not excitement | Match face emotional expression to the actual emotional register of the testimonial content |
 | UGC section reduces conversion | All UGC showing identical positive faces creates uncanny uniformity; users distrust homogeneous affect | Show authentic emotional diversity; include mild expressions and real settings |
-| Mirror system triggers distrust in wellness context | Overly polished, professional imagery triggers "brand photo" recognition; disables simulation | Use naturalistic, lower-production-value real-user imagery in trust-sensitive contexts |
+| Mirror system triggers distrust in wellness context | Overly polished, professional imagery triggers "brand photo" recognition; may reduce perceived authenticity; no measured simulation effect | Use naturalistic, lower-production-value real-user imagery in trust-sensitive contexts |
 
 ## Worked Example
 
 **Scenario**: A daily reading subscription app has a testimonial section with three stock-photo faces paired with positive copy. Section has no measurable lift on conversion vs. no-testimonial version.
 
-Diagnosis: stock faces are recognized by the FFA as non-specific; the emotional contagion response is weak or absent because the faces do not carry individual identity cues. The MNS simulation is suppressed by the "this is advertising" schema.
+Hypothesis: generic or misrepresented imagery may reduce perceived authenticity. Compare verified testimonials against suitable controls and measure credibility and task outcomes. No FFA or MNS diagnosis follows from the absence of conversion lift.
 
 Fix:
 1. Replace all three testimonials with verified real-user photos (headshots, slight quality imperfection, real background).

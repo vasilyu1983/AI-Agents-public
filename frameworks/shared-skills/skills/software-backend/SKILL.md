@@ -111,6 +111,10 @@ Use [software-baas-platforms](../software-baas-platforms/SKILL.md) first when th
 
 ## Backend Non-Negotiables
 
+**Mutation correctness contract.**
+
+For every externally retried mutation, define the idempotency scope, transaction boundary, authorization point, and observable terminal states before choosing transport or framework. Persist the idempotency record with the business write when possible; distinguish “not attempted,” “committed,” and “outcome unknown.” A retry must return the original result or resume safely, never duplicate the effect.
+
 | Category | Rule |
 |----------|------|
 | **API** | Mutating endpoints require idempotency keys where retries are plausible |
@@ -248,7 +252,6 @@ Before marking a service production-ready:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

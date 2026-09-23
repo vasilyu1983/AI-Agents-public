@@ -1,0 +1,4 @@
+interface:
+  display_name: "Measurement Theory Foundations"
+  short_description: "Audit construct validity, reliability, scales, and drift"
+  default_prompt: "Use $foundations-measurement-theory to audit scores and instruments for construct validity, measurement error, reliability, scales, calibration, invariance, and instrument drift; report evidence and limitations."

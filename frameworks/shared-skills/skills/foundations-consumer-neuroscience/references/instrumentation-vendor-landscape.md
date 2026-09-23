@@ -19,7 +19,7 @@ status: stable
 
 ## Purpose
 
-Selecting measurement tools is a design decision, not just a procurement decision. The modality chosen determines which primitives can be observed directly vs. inferred, sets the ecological-validity ceiling, creates regulatory obligations (biometric data = GDPR Article 9 special-category; affect-inference AI = EU AI Act high-risk from 2 December 2027, with Article 50 transparency owed from 2 August 2026), and constrains the N achievable in budget. This reference maps signal modalities, vendor tiers, a decision tree, and the conditions under which surrogate behavioural signals are the right answer instead of physiological measurement.
+Selecting measurement tools is a design decision, not just a procurement decision. The modality chosen determines which primitives can be observed directly vs. inferred, sets the ecological-validity ceiling, creates regulatory obligations (physiological personal data requires purpose-based classification; health inference or biometric identification may invoke Article 9; affect-inference AI = EU AI Act high-risk from 2 December 2027, with Article 50 transparency owed from 2 August 2026), and constrains the N achievable in budget. This reference maps signal modalities, vendor tiers, a decision tree, and the conditions under which surrogate behavioural signals are the right answer instead of physiological measurement.
 
 ---
 
@@ -27,18 +27,18 @@ Selecting measurement tools is a design decision, not just a procurement decisio
 
 | Signal | What It Measures | Temporal Resolution | Spatial Resolution | Ecological Validity | Cost Tier | GDPR Special-Category? | EU AI Act Risk Class |
 |--------|-----------------|--------------------|--------------------|---------------------|-----------|------------------------|----------------------|
-| fMRI (functional MRI) | BOLD signal as proxy for neural activity | ~2s (poor) | ~1–3mm (excellent) | Very low (supine, scanner noise) | ££££ (£500–£2k/participant) | Yes — biometric | Low (research-only; no commercial deployment path currently) |
-| EEG (research-grade, 64–256 channels) | Millisecond-resolution cortical ERP and oscillatory power | ~1ms (excellent) | Low-moderate (source localisation limited) | Low–moderate (lab) | ££–£££ | Yes — biometric | Low–moderate |
-| EEG (consumer-grade, 4–14 channels) | Coarse ERP; frontal asymmetry; theta/alpha bands | ~5ms | Very low | Moderate (passive wear) | £–££ | Yes — biometric | Moderate |
-| fNIRS (functional near-infrared spectroscopy) | Prefrontal haemodynamic response; cognitive load proxy | ~1–2s | Low | Moderate (ambulatory) | ££–£££ | Yes — biometric | Low |
-| Eye-tracking (screen-based) | Fixation, saccade, AOI dwell, pupillometry | ~1–4ms | ~0.5° visual angle | Moderate (lab-like screen context) | £–££ | Yes — biometric | Low |
-| Eye-tracking (glasses, mobile) | Fixation in natural environment; gaze in physical retail | ~1–4ms | ~0.5° | High | ££–£££ | Yes — biometric | Low |
-| GSR/EDA (skin conductance) | Sympathetic arousal; phasic event-related response; tonic baseline | ~0.5–2s | N/A (peripheral) | Moderate | £ | Yes — biometric | Low |
-| HRV (heart rate variability) | Vagal tone; cognitive load; stress; autonomic balance | ~1s | N/A | High (wearable) | £ | Yes — biometric | Low |
-| Facial EMG | Specific muscle-group activity (e.g., zygomatic = smile; corrugator = frown) | ~5ms | Muscle-group | Low (electrodes on face) | £–££ | Yes — biometric | Low |
-| Facial action coding — CV (computer vision) | Inferred facial AUs and emotion categories from video | Near real-time | Per-frame | High (any camera) | £ (SaaS) | Yes — biometric; inferred affect | **High-risk from 2 Dec 2027 (Annex III); Art. 50 notice due now** |
-| Voice prosody analysis | Pitch range, rate, energy; arousal/disengagement proxy | ~100ms | N/A | High | £ (SaaS) | Yes — biometric | **High-risk from 2 Dec 2027 (Annex III); Art. 50 notice due now** |
-| Pupillometry (standalone) | Arousal; cognitive effort; locus coeruleus-NE system activity | ~1ms (with eye-tracker) | N/A | Moderate | £ (if via eye-tracker) | Yes — biometric | Low |
+| fMRI (functional MRI) | BOLD signal as proxy for neural activity | ~2s (poor) | ~1–3mm (excellent) | Very low (supine, scanner noise) | ££££ (£500–£2k/participant) | Purpose/inference dependent | Low (research-only; no commercial deployment path currently) |
+| EEG (research-grade, 64–256 channels) | Millisecond-resolution cortical ERP and oscillatory power | ~1ms (excellent) | Low-moderate (source localisation limited) | Low–moderate (lab) | ££–£££ | Purpose/inference dependent | Low–moderate |
+| EEG (consumer-grade, 4–14 channels) | Coarse ERP; frontal asymmetry; theta/alpha bands | ~5ms | Very low | Moderate (passive wear) | £–££ | Purpose/inference dependent | Moderate |
+| fNIRS (functional near-infrared spectroscopy) | Prefrontal haemodynamic response; cognitive load proxy | ~1–2s | Low | Moderate (ambulatory) | ££–£££ | Purpose/inference dependent | Low |
+| Eye-tracking (screen-based) | Fixation, saccade, AOI dwell, pupillometry | ~1–4ms | ~0.5° visual angle | Moderate (lab-like screen context) | £–££ | Purpose/inference dependent | Low |
+| Eye-tracking (glasses, mobile) | Fixation in natural environment; gaze in physical retail | ~1–4ms | ~0.5° | High | ££–£££ | Purpose/inference dependent | Low |
+| GSR/EDA (skin conductance) | Sympathetic arousal; phasic event-related response; tonic baseline | ~0.5–2s | N/A (peripheral) | Moderate | £ | Purpose/inference dependent | Low |
+| HRV (heart rate variability) | Vagal tone; cognitive load; stress; autonomic balance | ~1s | N/A | High (wearable) | £ | Purpose/inference dependent | Low |
+| Facial EMG | Specific muscle-group activity (e.g., zygomatic = smile; corrugator = frown) | ~5ms | Muscle-group | Low (electrodes on face) | £–££ | Purpose/inference dependent | Low |
+| Facial action coding — CV (computer vision) | Inferred facial AUs and emotion categories from video | Near real-time | Per-frame | High (any camera) | £ (SaaS) | Purpose/inference dependent | Purpose-specific AI Act/GDPR classification required; sensor or vendor alone is insufficient |
+| Voice prosody analysis | Pitch range, rate, energy; arousal/disengagement proxy | ~100ms | N/A | High | £ (SaaS) | Purpose/inference dependent | Purpose-specific AI Act/GDPR classification required; sensor or vendor alone is insufficient |
+| Pupillometry (standalone) | Arousal; cognitive effort; locus coeruleus-NE system activity | ~1ms (with eye-tracker) | N/A | Moderate | £ (if via eye-tracker) | Purpose/inference dependent | Low |
 
 ---
 
@@ -48,20 +48,20 @@ Selecting measurement tools is a design decision, not just a procurement decisio
 
 | Vendor | Primary Signal | Typical Use | Cost Tier | Lab vs Field | Risk Flag |
 |--------|--------------|-------------|-----------|--------------|-----------|
-| iMotions | Multimodal sync (EEG, GSR, eye, facial) | Integrated consumer neuro lab studies | ££££ | Lab | GDPR Article 9 baseline; no AI Act high-risk if no affect-inference AI |
-| Tobii (lab systems, Spectrum/TX300) | Eye-tracking, pupillometry | Lab fixation and reading studies | £££ | Lab | GDPR Article 9 |
-| Smart Eye (Aurora, with Affectiva integration) | Eye-tracking + facial AU inference (in-cabin, research) | Automotive HMI; attention safety; as of early 2026 includes Affectiva affect-inference module | £££–££££ | Lab + in-cabin | Affectiva module = EU AI Act high-risk from 2 Dec 2027; Art. 50 notice required now |
-| BrainProducts / g.tec | EEG (research-grade, 32–256 ch) | ERP, oscillatory, BCI research | £££ | Lab | GDPR Article 9 |
-| Biosemi ActiveTwo | EEG (research-grade, DC-coupled) | High-fidelity ERP research | £££ | Lab | GDPR Article 9 |
+| iMotions | Multimodal sync (EEG, GSR, eye, facial) | Integrated consumer neuro lab studies | ££££ | Lab | Purpose-specific AI Act/GDPR classification required; sensor or vendor alone is insufficient |
+| Tobii (lab systems, Spectrum/TX300) | Eye-tracking, pupillometry | Lab fixation and reading studies | £££ | Lab | GDPR purpose-based classification |
+| Smart Eye (Aurora, with Affectiva integration) | Eye-tracking + facial AU inference (in-cabin, research) | Automotive HMI; attention safety; as of early 2026 includes Affectiva affect-inference module | £££–££££ | Lab + in-cabin | Purpose-specific AI Act/GDPR classification required; sensor or vendor alone is insufficient |
+| BrainProducts / g.tec | EEG (research-grade, 32–256 ch) | ERP, oscillatory, BCI research | £££ | Lab | GDPR purpose-based classification |
+| Biosemi ActiveTwo | EEG (research-grade, DC-coupled) | High-fidelity ERP research | £££ | Lab | GDPR purpose-based classification |
 
 ### Mid-Market
 
 | Vendor | Primary Signal | Typical Use | Cost Tier | Lab vs Field | Risk Flag |
 |--------|--------------|-------------|-----------|--------------|-----------|
-| Tobii Sticky (as of early 2026) | Webcam-based eye-tracking + attention heatmaps | Remote ad and landing page testing | ££ | Remote (in-the-wild) | GDPR Article 9; no affect-inference AI — lower risk |
-| Realeyes | Webcam-based facial AU → emotion inference | Ad pre-testing emotion response | ££ | Remote | **EU AI Act high-risk (affect inference) from 2 Dec 2027; Art. 50 notice due now** |
+| Tobii Sticky (as of early 2026) | Webcam-based eye-tracking + attention heatmaps | Remote ad and landing page testing | ££ | Remote (in-the-wild) | GDPR classification; no affect-inference AI — lower risk |
+| Realeyes | Webcam-based facial AU → emotion inference | Ad pre-testing emotion response | ££ | Remote | Purpose-specific AI Act/GDPR classification required; sensor or vendor alone is insufficient |
 | Lookback / Maze | Qualitative screen recording + think-aloud | UX research; behavioural observation | £–££ | Remote | Standard GDPR; no special-category physiological data if no biometric |
-| Pulse Labs (as of early 2026) | Voice prosody + transcript NLP | Voice UX testing; call-centre affect monitoring | ££ | Remote + field | Voice prosody = **EU AI Act high-risk from 2 Dec 2027** in commercial deployment; Art. 50 notice due now |
+| Pulse Labs (as of early 2026) | Voice prosody + transcript NLP | Voice UX testing; call-centre affect monitoring | ££ | Remote + field | Purpose-specific AI Act/GDPR classification required; sensor or vendor alone is insufficient |
 
 ### Self-Service / SaaS Behavioural Surrogates
 
@@ -81,21 +81,21 @@ Selecting measurement tools is a design decision, not just a procurement decisio
 
 | Vendor | Primary Signal | Typical Use | Cost Tier | Lab vs Field | Risk Flag |
 |--------|--------------|-------------|-----------|--------------|-----------|
-| Emotiv EPOC X / EPOC Flex | EEG (14–32 ch), facial EMG | Lightweight consumer neuro; academic hobbyist | £–££ | Lab-light | GDPR Article 9 biometric |
-| Muse (InteraXon) | 4-channel EEG (frontal-temporal) | Meditation feedback; rudimentary alpha/theta | £ | Wearable | GDPR Article 9; 2026 comparative study: worst signal quality among consumer devices — broadband spectral distortion, highest test-retest variability; not suitable for ERP or alpha-asymmetry research |
-| NeuroSky MindWave | 1-channel EEG | Legacy; attention/meditation index only | £ | Wearable | GDPR Article 9; insufficient for primitive-level research |
+| Emotiv EPOC X / EPOC Flex | EEG (14–32 ch), facial EMG | Lightweight consumer neuro; academic hobbyist | £–££ | Lab-light | GDPR purpose-based classification |
+| Muse (InteraXon) | 4-channel EEG (frontal-temporal) | Meditation feedback; rudimentary alpha/theta | £ | Wearable | GDPR classification; 2026 comparative study: worst signal quality among consumer devices — broadband spectral distortion, highest test-retest variability; not suitable for ERP or alpha-asymmetry research |
+| NeuroSky MindWave | 1-channel EEG | Legacy; attention/meditation index only | £ | Wearable | GDPR classification; insufficient for primitive-level research |
 | Apple Vision Pro / Vision Pro 2 (as of early 2026) | Eye-tracking (high-precision onboard), arousal-proxy via gaze/dwell | Attention research in spatial computing context; Apple does not expose raw biometric stream to third-party apps by default | ££££ (device) | In-the-wild limited | Apple restricts biometric data access; check current entitlements before research use |
 
 ### AI-Driven Affect Inference
 
-**All platforms in this category become EU AI Act high-risk in commercial deployment from 2 December 2027**, deferred from 2 August 2026 by the AI Digital Omnibus (in force 27 July 2026). Annex III obligations — data governance, technical documentation, human oversight, post-market monitoring — track that date. **The Article 50 transparency notice to users was not deferred and is owed now.** Article 5 prohibitions (workplace/education emotion recognition; vulnerability exploitation) and GDPR Article 9 consent also bind today, independent of the delay.
+Regulatory status follows intended purpose and deployment, including current classification criteria and exceptions; no platform category is automatically high-risk. Consult the [dated classification source note](ethics-operational-checklist.md#dated-eu-classification-source-note) before selecting applicable notices or dates.
 
 | Vendor | Signal | Typical Use | Cost Tier | Risk Flag |
 |--------|--------|-------------|-----------|-----------|
-| Affectiva (acquired by Smart Eye, 2021) | Facial AU → emotion; voice → emotion | Automotive, media research | ££–£££ | **High-risk AI Act; Art. 50 notice required** |
-| Hume AI (as of early 2026) | Voice, face, text → multi-dimensional affect | Conversational AI emotional intelligence; user experience research | ££ (API) | **High-risk AI Act; Art. 50 notice required** |
-| Audeering (as of early 2026) | Voice → emotion, arousal, valence | Call-centre, mental health, automotive | ££ | **High-risk AI Act; Art. 50 notice required** |
-| Sonde Health (as of early 2026) | Voice → mental health biomarkers | Clinical and wellness applications | ££ | **High-risk AI Act; clinical regulatory pathway may also apply** |
+| Affectiva (acquired by Smart Eye, 2021) | Facial AU → emotion; voice → emotion | Automotive, media research | ££–£££ | Purpose-specific AI Act/GDPR classification required; sensor or vendor alone is insufficient |
+| Hume AI (as of early 2026) | Voice, face, text → multi-dimensional affect | Conversational AI emotional intelligence; user experience research | ££ (API) | Purpose-specific AI Act/GDPR classification required; sensor or vendor alone is insufficient |
+| Audeering (as of early 2026) | Voice → emotion, arousal, valence | Call-centre, mental health, automotive | ££ | Purpose-specific AI Act/GDPR classification required; sensor or vendor alone is insufficient |
+| Sonde Health (as of early 2026) | Voice → mental health biomarkers | Clinical and wellness applications | ££ | Purpose-specific AI Act/GDPR classification required; sensor or vendor alone is insufficient |
 
 ---
 
@@ -116,13 +116,13 @@ Selecting measurement tools is a design decision, not just a procurement decisio
       Facial affect → facial CV (Realeyes, Affectiva/Smart Eye) — see step 4
 
 4. REGULATORY EXPOSURE
-   └─ EU users + facial CV or voice-affect AI → Art. 50 notice owed now; high-risk applies 2 Dec 2027
-      └─ Compliance ready? → proceed with vendor; implement Art. 50 notice
+   └─ EU users + affect-related AI → qualified counsel confirms purpose-specific classification and applicable duties
+      └─ Applicable legal duties verified and met? → proceed with documented assessment
          Not ready? → use facial EMG (lab, no AI inference) or drop facial signal
 
 5. CONSENT FEASIBILITY
    └─ Research context → explicit opt-in, DPIA, ethics board
-      Commercial product → GDPR Art. 9 explicit consent; if vulnerable cohort, apply ethics-operational-checklist.md stricter gate
+      Commercial product → Article 6 basis and applicable Article 9 condition after classification; if vulnerable cohort, apply ethics-operational-checklist.md stricter gate
 
 6. OUTPUT
    └─ Lab + precision + budget → iMotions multimodal; BrainProducts EEG + Tobii eye
@@ -147,5 +147,5 @@ When budget is under £5k, consent infrastructure is absent, or regulatory expos
 - "Intersubject correlation as a predictor of attention: a systematic review." _BMC Psychology_ (2025). DOI: 10.1186/s40359-025-02879-7. 14 studies, 27 effect sizes; ISC–attention r=0.65.
 - "A comprehensive evaluation framework for consumer-grade EEG devices." _Scientific Reports_ (2026). DOI: 10.1038/s41598-026-39056-8. n=30, 4 consumer devices vs DSI-24.
 - "EEG dataset of consumer- and research-grade systems." _Scientific Data_ (2026). DOI: 10.1038/s41597-026-06962-5. Public dataset for consumer EEG validation.
-- EU AI Act (2024). Regulation (EU) 2024/1689. Annex III high-risk; Article 5 prohibitions effective 2 February 2025; Article 50 transparency effective 2 August 2026; high-risk provisions deferred to 2 December 2027 by the AI Digital Omnibus (in force 27 July 2026).
+- EU AI Act: see the [dated official-source and access-limit note](ethics-operational-checklist.md#dated-eu-classification-source-note); reverify current law and purpose-specific classification before deployment.
 - UK GDPR. Article 9 special-category data.

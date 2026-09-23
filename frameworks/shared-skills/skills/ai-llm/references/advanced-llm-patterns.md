@@ -129,7 +129,7 @@ See [Post-Training 2026](post-training.md) for the full decision tree across all
 
 ### Tokenizer & Vocab Fit
 
-- Train BPE/unigram on domain corpus
+- Train BPE/unigram on domain corpus (method selection and tokenizer evaluation: `ai-pretraining` → references/bpe-tokenizer.md, "Tokenizer Landscape")
 - Audit splits on code, math, URLs, PII markers
 - Lock tokenizer before corpus filtering
 - Validate coverage on representative samples

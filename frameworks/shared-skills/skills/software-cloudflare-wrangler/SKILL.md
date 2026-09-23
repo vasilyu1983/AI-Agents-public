@@ -79,6 +79,10 @@ Apply this judgment before reaching for a command — a syntactically correct `w
 
 ## Operating Rules
 
+**Environment identity gate.**
+
+Before any remote mutation, resolve the effective config and state the account, Worker or Pages project, environment, database or namespace binding, and route being targeted. After deploy, verify the returned version or deployment identifier and exercise the bound resource through that deployed environment. A successful CLI exit proves the command completed; it does not prove the intended environment received the intended artifact.
+
 - Use `wrangler.jsonc` unless the project already standardizes on another supported config format.
 - Run `wrangler types` after config or binding changes when the project uses TypeScript.
 - Use `wrangler deploy --dry-run` or the safest available validation before production deploys.
@@ -98,6 +102,6 @@ Before deploying to production:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

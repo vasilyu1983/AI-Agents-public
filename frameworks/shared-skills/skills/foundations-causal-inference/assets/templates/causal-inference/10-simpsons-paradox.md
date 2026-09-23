@@ -41,42 +41,15 @@ Use this primitive:
 
 ## Worked Example
 
-**Setting**: A hospital reports that Treatment A has higher mortality than Treatment B overall. Is A harmful?
+**Setting (hypothetical):** A has lower mortality in each baseline-severity stratum, but is assigned more frequently to severe cases.
 
-**Aggregate data**:
-| Treatment | Deaths | Total | Mortality |
-|-----------|--------|-------|-----------|
-| A         | 20     | 100   | 20%       |
-| B         | 80     | 400   | 20%       |
+| Severity | A deaths / total | A mortality | B deaths / total | B mortality |
+|---|---|---|---|---|
+| Mild | 1 / 20 | 5% | 8 / 80 | 10% |
+| Severe | 24 / 80 | 30% | 8 / 20 | 40% |
+| Aggregate | 25 / 100 | 25% | 16 / 100 | 16% |
 
-Wait — they're equal overall. But:
-
-**Stratified by disease severity**:
-
-Mild cases:
-| Treatment | Deaths | Total | Mortality |
-|-----------|--------|-------|-----------|
-| A         | 2      | 50    | 4%        |
-| B         | 65     | 325   | 20%       |
-
-Severe cases:
-| Treatment | Deaths | Total | Mortality |
-|-----------|--------|-------|-----------|
-| A         | 18     | 50    | 36%       |
-| B         | 15     | 75    | 20%       |
-
-**Paradox**: within each stratum, A has lower mortality for mild cases (4% vs 20%) but A appears worse for severe cases. Doctors assign Treatment A more often to severe cases — severity confounds treatment selection.
-
-**DAG**:
-```
-Severity (C) → Treatment (X)
-Severity (C) → Mortality (Y)
-Treatment (X) → Mortality (Y)
-```
-
-Severity is a **confounder**. The correct analysis conditions on severity. Within mild cases, A is superior (4% vs. 20%). Within severe cases, A is worse (36% vs. 20%). The aggregate result (20% = 20%) masks this.
-
-**Decision**: assign treatment A to mild cases; treatment B (or equal A/B) to severe cases.
+A is better within both strata yet worse in aggregate: a Simpson reversal. Draw Severity -> Treatment, Severity -> Mortality, Treatment -> Mortality before choosing adjustment. Standardizing both treatments to a 50/50 mild/severe population gives A 17.5%, B 25%; this is causal only if the stated identification assumptions hold. Opposing subgroup effects are heterogeneity, not this reversal. These illustrative data do not authorize medical treatment recommendations.
 
 ## Sources
 

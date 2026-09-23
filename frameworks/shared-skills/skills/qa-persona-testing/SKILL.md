@@ -98,10 +98,10 @@ Goal: an evidence-backed persona, not an invented stereotype.
 
 ### Phase 4 — REPORT and improve
 
-1. Aggregate session logs into [assets/findings-report.md](assets/findings-report.md): rank by severity, then by how many personas hit the issue.
+1. Aggregate session logs into [assets/findings-report.md](assets/findings-report.md): rank mechanical defects by severity and reproducibility. Report persona repetition separately; simulated frequency does not estimate real-user prevalence.
 2. Every finding must cite a logged step and, where possible, a persona quote and evidence artifact. No finding without a trace.
 3. Separate three lists: **improve** (prioritized fixes with expected effect), **avoid** (changes that would hurt this ICP), **keep** (flows that passed — protect with regression tests).
-4. Apply the validity rules in [references/reporting-and-validity.md](references/reporting-and-validity.md): mechanical failures (broken flows, errors, dead ends) are real findings; emotional/preference findings are hypotheses for real-user validation.
+4. Apply the validity rules in [references/reporting-and-validity.md](references/reporting-and-validity.md): mechanical failures (broken flows, errors, dead ends) are real findings; emotional/preference findings are hypotheses for real-user validation. Name the missing analytics or real-user study needed to estimate prevalence or conversion impact.
 5. Hand off follow-ups: severity ≥3 → `qa-testing-playwright` regression tests; top preference hypotheses → `software-ux-research`; ICP doubts surfaced by testing → `startup-idea-validation`.
 
 ## Known Traps
@@ -148,6 +148,6 @@ Related skills:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

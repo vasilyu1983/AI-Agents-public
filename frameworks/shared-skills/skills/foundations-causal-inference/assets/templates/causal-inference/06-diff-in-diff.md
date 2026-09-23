@@ -6,7 +6,7 @@
 
 τ_DiD = (Ȳ_{T,post} − Ȳ_{T,pre}) − (Ȳ_{C,post} − Ȳ_{C,pre})
 
-This identifies the **Average Treatment Effect on the Treated (ATT)** under the **parallel trends assumption**: absent treatment, the treated group would have evolved over time in parallel with the control group.
+This identifies the **Average Treatment Effect on the Treated (ATT)** under the **parallel trends assumption**: absent treatment, the treated group would have evolved over time in parallel with the control group. Also state no anticipation, consistency, no relevant spillovers (or an explicit interference estimand), and stable composition/selection for the target population; these do not follow from a pretrend test.
 
 **Two-way fixed effects (TWFE)** regression implementation:
 Y_{it} = α_i + λ_t + τ D_{it} + ε_{it}
@@ -32,13 +32,13 @@ Common applications: policy evaluation, feature rollouts, regulatory changes, ma
 
 ## Inputs / Outputs
 
-**Inputs**: panel or repeated cross-section data; treatment timing; outcome Y; unit and time identifiers; pre-treatment periods for parallel-trends testing.
+**Inputs**: panel or repeated cross-section data; treatment timing; outcome Y; unit and time identifiers; pre-treatment periods for trend diagnostics; prespecified target ATT, comparison group and identifying assumptions.
 
-**Outputs**: ATT estimate; standard errors clustered by unit; pre-trend test (event-study plot with coefficients for pre-treatment periods); post-treatment dynamic effects (event-study post-period).
+**Outputs**: ATT estimate; uncertainty reflecting assignment and error dependence (e.g., city clusters for city assignment), with few-cluster limitations and justified small-sample methods; pretrend diagnostics with uncertainty and design-compatible bounded-trend sensitivity; post-treatment dynamic effects (event-study post-period).
 
 ## Worst Failure Modes
 
-1. **Parallel trends violation**: if treated and control groups were on different pre-trends, the DiD estimate captures the trend difference, not the treatment effect. Always plot and test pre-trends. If they diverge, DiD is invalid — consider synthetic control (#7).
+1. **Parallel trends violation**: if treated and control groups were on different pre-trends, the DiD estimate captures the trend difference, not the treatment effect. Plot pretrends with uncertainty; non-significance is not proof (low power), and selecting analyses after passing a pretest can distort estimates/coverage. Prespecify plausible departures and sensitivity bounds. Synthetic control (#7) imposes different donor-pool/counterfactual assumptions and is not an automatic cure.
 2. **Anticipation effects**: if treated units change behavior *before* the official treatment date (in anticipation), the pre-period is contaminated. Redefine the treatment date or use leads in the event study.
 3. **Staggered DiD with TWFE and heterogeneous effects**: TWFE uses early adopters as controls for late adopters in some periods, producing a weighted average with negative weights. This can flip signs. Use Callaway-Sant'Anna.
 4. **Spillovers to control group**: if the treatment spills over to control units (e.g., a marketing campaign in one city attracts customers from a neighboring city in the control), the control group is contaminated. Use a "donut" control buffer or geographic controls.
@@ -54,11 +54,11 @@ Common applications: policy evaluation, feature rollouts, regulatory changes, ma
 
 **DiD estimate**: τ = 18K − 5K = 13K/month (common time trend = +5K; treatment effect = 13K over that)
 
-**Pre-trend test** (event study for 6 pre-periods): coefficients for months −6 to −1 are all near zero and insignificant (p-values: 0.51, 0.38, 0.72, 0.44, 0.61, 0.55). No evidence of pre-existing trends.
+**Trend diagnostics:** Illustrative pre-period coefficients are near zero, but six months may have low power to detect economically relevant departures. Report intervals and a prespecified bounded-trend sensitivity analysis; do not approve the design from six non-significant tests.
 
-**TWFE regression**: Y_{it} = α_i + λ_t + 13.1 D_{it} + ε_{it} (s.e. = 2.8, clustered by city; p < 0.001)
+**Illustrative regression point estimate:** Y_{it} = α_i + λ_t + 13.1 D_{it} + ε_{it}. Assignment is by city; inference must address dependence and the small number of treated cities. A conventional clustered s.e. alone does not justify a precise p-value; report an appropriate small-cluster analysis and its assumptions.
 
-**Interpretation**: the loyalty program increased monthly revenue by ~13K per city, after accounting for the common time trend.
+**Interpretation**: the observed double difference is ~13K per city/month. Interpret it as the pilot ATT only if parallel trends, no anticipation/spillovers and composition assumptions are defensible; report sensitivity and uncertainty before a causal claim.
 
 ## Sources
 
@@ -68,3 +68,5 @@ Common applications: policy evaluation, feature rollouts, regulatory changes, ma
 4. Goodman-Bacon, A. (2021). Difference-in-Differences with Variation in Treatment Timing. *Journal of Econometrics*, 225(2), 254–277.
 5. de Chaisemartin, C., D'Haultfœuille, X., & Vazquez-Bare, G. (2024). Difference-in-Differences Estimators with Continuous Treatments and No Stayers. *AEA Papers and Proceedings*, 114, 597–601.
 6. Rambachan, A., & Roth, J. (2023). A More Credible Approach to Parallel Trends. *Review of Economic Studies*, 90(5), 2555–2591. doi:10.1093/restud/rhad018
+
+7. Roth, J. (2022). Pretest with Caution: Event-Study Estimates after Testing for Parallel Trends. *American Economic Review: Insights*, 4(3), 305–322. https://www.aeaweb.org/content/file?id=15847

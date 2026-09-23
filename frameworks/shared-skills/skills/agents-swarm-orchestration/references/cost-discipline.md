@@ -31,15 +31,15 @@ When dispatching N workers in one wave:
 
 | Pattern | Cost shape | When to use |
 | --- | --- | --- |
-| Same context, N workers | N × parent tokens | Genuinely parallel, short tasks |
-| Fresh brief per worker (no parent transcript) | N × brief tokens | Default — smallest correct mode |
-| Sequential (one at a time) | 1 × parent, serial | When workers depend on each other |
+| Inherited context, N workers | Provider/runtime-specific cache and input usage per worker | Genuinely parallel tasks that need the same prior history |
+| Self-contained brief per worker | Brief plus runtime-added startup context per worker | Default for independent work |
+| Sequential (one at a time) | Per-turn context and cache behavior, serial latency | When workers depend on each other |
 
-**Rule:** never pass the parent transcript to a worker. Build a **self-contained brief** (goal, required context, owned files, deliverable, verification). This collapses worker input from ~150k tokens to ~5k — often 30× cheaper per spawn. See [../SKILL.md](../SKILL.md) §Fresh Context Principle.
+**Rule:** always build a **self-contained brief** (goal, required context, owned files, deliverable, verification). Prefer a fresh start for independent work; choose a documented fork when the worker truly needs the parent history. Measure the resulting input, cache, output, tool, retry, and coordination usage rather than assuming a fixed multiplier. See [../SKILL.md](../SKILL.md) §Operating Principles.
 
 ### Staged Waves
 
-Each wave's workers inherit the lead's context as of that moment. If wave 1 returns large outputs that the lead reads, wave 2 workers pay for wave 1's outputs too.
+Each wave receives the context selected by its runtime start mode and worker brief. Large wave-1 outputs increase wave-2 input only if the lead or runtime forwards them; record what was actually included.
 
 **Mitigations:**
 
@@ -70,7 +70,7 @@ Sessions active for many hours commonly accumulate:
 
 **Session hygiene rules:**
 
-1. **Task-scoped sessions** — treat `/clear` as the default task boundary, not session end. A fresh session with 5k task context is cheaper than an 8h session with 400k accumulated context.
+1. **Task-scoped sessions** — use `/clear` or a new session at a true task boundary when prior history is unnecessary. Smaller active context can reduce input usage, but rebuilding instructions and artifacts has a cost; compare actual task-level usage.
 2. **Audit automation at session start** — run `/schedule list` and check for active loops. Forgotten automation is the single largest unexplained cost source for heavy users.
 3. **Review `~/.claude/plans/` periodically** — stale plan files often correspond to loops or schedules that should be stopped.
 4. **Set `fastModePerSessionOptIn: true`** so fast mode doesn't silently persist across task boundaries.
@@ -99,6 +99,10 @@ Implications for orchestration:
 
 At the swarm layer, the relevant config surface is small but high-leverage.
 
+Use the [user-selected model matrix](../../agents-subagents/references/model-governance-and-maintenance.md#user-selected-model-matrix): Astra `low` for the Codex main session and routine planning, Astra `high` in Plan mode, Luna `max` for default Codex subagents, and Fable `low` for Claude planning. Explicit specialist pins remain separate from these defaults.
+
+The selected decision is to keep this setup. Fable can be raised manually to `high` for difficult planning and returned to `low` afterward; this is a session choice, not an automatic Claude Plan-mode setting. Follow the [practical operating procedure](../../agents-subagents/references/model-governance-and-maintenance.md#practical-decision-keep-the-current-setup) before changing a baseline for an entire swarm.
+
 ### Claude Code (`~/.claude/settings.json`)
 
 ```json
@@ -111,7 +115,7 @@ At the swarm layer, the relevant config surface is small but high-leverage.
 
 Combined with the subagent-layer config from [../../agents-subagents/references/cost-control.md](../../agents-subagents/references/cost-control.md), this gives:
 
-- Subagent spawns cap at Sonnet (never silently Opus).
+- Claude subagents follow their explicit role pins or the configured fallback; the global fallback is not a Sonnet cap. Fable `low` remains the selected parent planning configuration.
 - Lead context auto-compacts before bloat compounds across waves.
 - Plan acceptance surfaces `/clear` as the cheap default task-reset.
 - Fast mode is an explicit per-session choice, not a persistent state.
@@ -121,7 +125,7 @@ Combined with the subagent-layer config from [../../agents-subagents/references/
 ```toml
 model_auto_compact_token_limit = 150000
 tool_output_token_limit = 50000
-plan_mode_reasoning_effort = "low"
+plan_mode_reasoning_effort = "high"
 
 [profiles.cheap-loop]
 model = "<current-mini-model>"  # check developers.openai.com/api/docs/models
@@ -133,7 +137,7 @@ Codex-specific orchestration levers:
 
 - **`model_auto_compact_token_limit`** — equivalent to Claude Code's `autoCompactWindow`. Triggers history compaction at the threshold; prevents wave-on-wave context inflation.
 - **`tool_output_token_limit`** — caps individual tool outputs in history. One noisy tool output (large grep, log dump) otherwise inflates context for every subsequent worker spawn.
-- **`plan_mode_reasoning_effort = "low"`** — keeps planning cheap; reserve `high` reasoning for actual execution. Plan-mode loops are a common silent cost source.
+- **`plan_mode_reasoning_effort = "high"`** — applies the user-selected Astra planning effort. Routine planning outside Plan mode uses the main session's `low` effort. Bound repeated planning loops through explicit stop conditions.
 - **`service_tier = "flex"`** for unattended/background profiles — slower but cheaper than `fast`. Right default for loops and overnight runs.
 - **Profiles** (`[profiles.<name>]`) — switch whole config bundles per workflow. Activate with `codex --profile cheap-loop` for known-cheap workloads (loops, batch reviews).
 

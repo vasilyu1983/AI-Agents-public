@@ -125,6 +125,10 @@ Performance task
 
 Automated gates catch regressions before they reach production.
 
+### Benchmark Validity Gate
+
+Record workload, data volume and distribution, concurrency, warm-up, cache state, build mode, hardware, network path, and run variance with every result. Compare like with like and change one independent variable at a time. Reject conclusions from a single run, debug build, synthetic happy path, or benchmark whose bottleneck differs from production.
+
 ### Database and Pooling — Triage Order
 
 1. Check slow-query logs and EXPLAIN plans first
@@ -206,7 +210,6 @@ Use a soak test (k6 or autocannon, 4-hour duration, steady load) and monitor hea
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

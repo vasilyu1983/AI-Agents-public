@@ -1,0 +1,4 @@
+job_id,arrival_time,service_time
+request-a,0,3
+request-b,1,2
+request-c,2,1

@@ -18,7 +18,7 @@ Each factor is scored on a 1–10 scale:
 | Occurrence (O) | Extremely unlikely | Occasional | Near-certain |
 | Detection (D) | Easily detected before impact | Detected after impact | Undetectable |
 
-**Higher RPN = higher priority for mitigation.** Maximum RPN = 1,000.
+**Triage severity and mandatory obligations first; use RPN only as a secondary screening aid within comparable rows.** Maximum RPN = 1,000. These ordinal scores are not failure probabilities or expected losses. A catastrophic (10,1,1) row has RPN 10 while a minor (2,10,10) row has RPN 200; the latter must not displace the catastrophic review.
 
 When FMEA is applied to critical safety systems, the variant **FMECA** (Failure Mode, Effects, and Criticality Analysis) adds a criticality matrix that separates catastrophic from marginal failure modes.
 
@@ -28,7 +28,7 @@ When FMEA is applied to critical safety systems, the variant **FMECA** (Failure 
 - Process audits to identify where a manufacturing or operational process can go wrong.
 - Post-incident retrospectives to capture failure modes missed in prior FMEA.
 - Regulatory contexts (IATF 16949 for automotive, IEC 60812 for electrical systems, FDA process FMEA for medical devices).
-- Prioritising reliability improvements when budget is constrained — attack highest-RPN items first.
+- Prioritising reliability improvements when budget is constrained — address catastrophic/high-severity and mandatory-obligation items first, then compare evidence, uncertainty and feasible controls; never rank solely by RPN.
 
 ## Inputs
 
@@ -38,13 +38,15 @@ When FMEA is applied to critical safety systems, the variant **FMECA** (Failure 
 | Functional requirements | What each component must do under normal and stressed conditions |
 | Historical failure data | Known failure modes from field reports, post-mortems, test results |
 | Severity definitions | Organisation-specific S scale calibrated to business impact |
+| Obligations and escalation | Mandatory safety/regulatory controls and high-severity review rules independent of RPN |
+| Scoring evidence | Evidence and uncertainty for each S/O/D factor; unknown values stay unknown |
 
 ## Outputs
 
 - FMEA worksheet (one row per failure mode).
-- RPN ranking table with recommended actions.
-- Owner and target date for each high-RPN mitigation.
-- Updated RPNs after mitigations are applied (residual risk).
+- Severity/obligations-first action table, with secondary RPN screening and scoring evidence.
+- Owner and target date for every mandatory/high-severity action and selected secondary mitigation.
+- Provisional post-control S/O/D estimates with explicit mechanisms and validation plans; validated residual scores only after evidence supports each changed factor.
 
 ## FMEA Worksheet Structure
 
@@ -73,7 +75,7 @@ When FMEA is applied to critical safety systems, the variant **FMECA** (Failure 
 | Order DB | Replication lag spike | Duplicate order risk | 8 | 3 | 4 | 96 | Add idempotency check at application layer |
 | CDN | Origin fallback fails | Slow page load for all | 5 | 2 | 3 | 30 | — (acceptable residual risk) |
 
-**Payment API timeout (RPN 270) is the priority**. The circuit breaker prevents cascading failures; the idempotency key prevents duplicate charges on retry. Both mitigations reduce O and improve D, projecting residual RPN of 90.
+**Payment API timeout is escalated for severity 9 regardless of its RPN 270**. A correctly scoped, durable idempotency protocol can bound duplicate-charge effects; a breaker can limit some cascades but also reject legitimate work. Neither necessarily detects a silent failure or reduces timeout occurrence. Leave residual S/O/D and RPN unvalidated until representative timeout/crash/retry tests support the exact factor changes. If detection credit is proposed, identify an independent reconciliation/alert mechanism, detection timing and measured coverage; retry/idempotency/breaker alone receives no D improvement.
 
 ## Tooling Note (2025)
 

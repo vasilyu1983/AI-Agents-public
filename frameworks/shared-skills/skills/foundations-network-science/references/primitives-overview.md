@@ -77,7 +77,7 @@ Each primitive in the index below addresses a specific structural or dynamic fai
 |-------------|-----------|-----|
 | Spread modelled as linear (each node reaches N) | Degree variance causes super-linear spread on scale-free graphs | SIR on actual network (#7) with R₀ check against percolation threshold (#6) |
 | Audience segments from demographics only | Network structure determines actual message flow | Community detection (#3) on follower/interaction graph reveals structural audiences |
-| Temporal burstiness ignored | Static-graph SIR overestimates spread speed | Temporal network analysis (#11) reduces predicted R₀ by accounting for bursty contact |
+| Temporal burstiness ignored | Static-graph SIR overestimates spread speed | Compare calibrated temporal and static processes rather than assuming a universal reduction in R₀ |
 
 ### Knowledge Graphs and Recommendation
 

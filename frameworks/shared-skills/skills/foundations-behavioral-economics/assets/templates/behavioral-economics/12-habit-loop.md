@@ -9,17 +9,17 @@ Two-system model (Wood & Rünger, 2016; Hardwick et al., 2019; Robbins & Costa, 
 - **Stimulus-response (habit) system** — fast, striatal, triggered by cues; largely insensitive to current reward value. Takes over after repeated cue-routine-reward pairing in stable contexts.
 
 Practical implications:
-- Behaviors that depend on motivation, reminders, or willpower are still goal-directed — they collapse under cognitive load, stress, or context change.
-- Behaviors that fire automatically on a stable cue persist even when motivation is absent. **Retention at scale is a habit-system outcome, not a motivation-system outcome.**
+- Motivation, reminders and deliberate goals may sustain repeated behavior; their presence does not uniquely identify the mechanism. Test context and workload sensitivity locally.
+- Automatic cue-based behavior may persist despite reduced motivation. Retention can also reflect ongoing value, reminders, social requirements or goals; neither retention nor repetition proves a habit.
 - Habit formation is **context-bound**: change the cue (new device, new role, removed icon, layout change) and the habit weakens or extinguishes.
 
-The "21 days" claim is folk-myth. Median time-to-automaticity in field studies is ~66 days for daily behaviors, with a wide range (Lally et al., 2010).
+The "21 days" claim is folk-myth. Lally et al. (2010) studied 96 volunteers choosing daily eating, drinking or activity behaviors in a specific context; modeled time to 95% of individual automaticity asymptote ranged 18–254 days. This is not a software retention forecast or universal deadline.
 
 ## When to Use
 
 - Any product or workflow whose value depends on **recurring user action** — daily check-in, weekly review, recurring task completion, repeat purchase, repeat session.
 - Designing onboarding when first-week activation must convert to durable usage.
-- Diagnosing why retention curves drop sharply after week 2–4 (the period when motivation fades but habit has not yet formed).
+- Investigating retention declines alongside task value, friction, reminders, cue exposure and self-reported automaticity; no week threshold diagnoses a habit.
 - Internal tooling and B2B workflows where adoption depends on getting the behavior into a stable cue (calendar event, Slack notification, standup).
 - Migrations where an established habit is at risk because the cue is changing (new UI, replaced tool, role change).
 
@@ -33,7 +33,7 @@ The "21 days" claim is folk-myth. Median time-to-automaticity in field studies i
 1. The user has a stated goal that the habit serves.
 2. The cue is observable and legible — the user can identify what triggered the behavior.
 3. The reward is real and matches the user's goal, not a substitute reward (a streak counter that has no relationship to the user's actual outcome is a fake reward).
-4. The user can disable the cue (notification, reminder, icon) and the habit then decays naturally.
+4. The user can disable operator-controlled cues and leave without friction; do not promise that existing automatic behavior immediately disappears.
 5. UK context: ASA CAP Code and CMA guidance on engagement design require that habit-forming features cannot be presented as user-benefit when their actual purpose is operator engagement metrics.
 
 ## Inputs
@@ -41,19 +41,19 @@ The "21 days" claim is folk-myth. Median time-to-automaticity in field studies i
 - Stable contextual cue available to the user (time of day, location, preceding action, system event, notification).
 - A routine that produces a real outcome the user wants.
 - A reward delivered in close temporal proximity to the routine.
-- A repetition cadence the user can sustain (daily and weekly cadences form habits faster than weekly-only or sparse cadences).
+- A user-endorsed sustainable cadence; frequency alone does not establish automaticity.
 
 ## Outputs
 
 - A specified cue → routine → reward triple, instrumented so cue exposure and routine completion can be measured.
-- An expected time-to-automaticity range (typically 4–12 weeks for daily behaviors).
+- An automaticity measurement plan and an observation window justified for the local behavior; no guaranteed time-to-automaticity interval.
 - A retention metric tied to the habit (cue-conditional completion rate, not just session count).
 
 ## Failure Modes
 
 | Failure | Cause | Fix |
 |---------|-------|-----|
-| Strong week-1 engagement, sharp dropoff at week 2–4 | Goal-directed system carried the behavior; cue is unstable or absent | Identify a stable cue and bind the routine to it before motivation fades |
+| Strong week-1 engagement, sharp dropoff at week 2–4 | Possible value decline, friction, reminder changes or unstable cues; mechanism remains unestablished | Check alternative explanations; test a stable user-endorsed cue against a suitable control |
 | Users complete the routine but the habit collapses on a context change | Habit was bound to a fragile cue (specific screen position, specific notification copy) | Bind to durable cues (time of day, calendar event, an action the user already does daily) |
 | Streak/reward exists but doesn't drive durable behavior | Reward is decoupled from the user's actual outcome — counter inflation, not real progress | Make the reward observable in the user's life, not just in the product |
 | Habit doesn't generalize across devices or surfaces | Context-bound encoding; cue exists on one surface only | Replicate the cue across surfaces (mobile + desktop + email) so context shifts don't extinguish the habit |
@@ -61,7 +61,7 @@ The "21 days" claim is folk-myth. Median time-to-automaticity in field studies i
 
 ## Worked Example
 
-**Scenario**: A B2B project-management tool has 70% week-1 activation but 22% week-4 retention. Diagnosis: users complete onboarding (goal-directed), but no habit forms.
+**Scenario**: A B2B project-management tool has 70% week-1 activation but 22% week-4 retention. These rates do not prove a missing habit. Investigate value, usability, cohort mix, reminder exposure and automaticity before proposing a cue intervention.
 
 Habit-loop application:
 - **Cue**: Daily 9:00 AM standup calendar event (existing user routine, not a new artifact).

@@ -17,7 +17,7 @@ This reference maps the 11 primitives from [foundations-queueing-theory](../../f
   - [P3 Capacity Sizing via M/M/c and Erlang-C](#p3-capacity-sizing-via-mmc-and-erlang-c)
   - [P5 Priority-Queue Policy for Multi-Tier Traffic](#p5-priority-queue-policy-for-multi-tier-traffic)
   - [P6 Jackson-Network Thinking for Microservice Topology](#p6-jackson-network-thinking-for-microservice-topology)
-  - [P7 Kingman Heavy-Traffic Approximation for Tail Latency Under Load](#p7-kingman-heavy-traffic-approximation-for-tail-latency-under-load)
+  - [P7 Kingman Heavy-Traffic Approximation for Mean Queue Wait](#p7-kingman-heavy-traffic-approximation-for-mean-queue-wait)
   - [P8 Bufferbloat Avoidance in Queue and Buffer Sizing](#p8-bufferbloat-avoidance-in-queue-and-buffer-sizing)
   - [P9 USL Retrograde Detection for Scaling Limits](#p9-usl-retrograde-detection-for-scaling-limits)
   - [P11 Fork-Join Sizing for Parallel-Only-at-Scale Stages](#p11-fork-join-sizing-for-parallel-only-at-scale-stages)
@@ -58,9 +58,9 @@ W   = Wq + 1/μ                 (total response time)
 
 **Implementation in practice**:
 
-- Collect λ (requests/s from Prometheus `rate(http_requests_total[5m])`) and E[S] (mean service time from APM p50).
+- Collect λ (requests/s from Prometheus `rate(http_requests_total[5m])`) and E[S] (arithmetic mean service time from aligned APM samples, not p50).
 - Compute offered load a = λ / μ. This is the minimum number of servers for stability — you need c > a.
-- Iterate c upward until Wq satisfies the latency budget (W ≤ SLO). Use an Erlang-C calculator or the formula above. A target of ρ ≤ 0.70–0.75 provides stable headroom.
+- Iterate c upward until the mean Wq satisfies a declared mean budget. Validate percentile SLOs separately with modeled tails or representative load tests. Use an Erlang-C calculator or the formula above. A target of ρ ≤ 0.70–0.75 provides stable headroom.
 - For Kubernetes HPA, set the target CPU or RPS such that at target load the replica count c produces ρ = 0.70. The HPA metric threshold is a derived quantity, not a primary one.
 - For database connection pools (PgBouncer, HikariCP): model connection arrivals as λ, mean transaction time as 1/μ, pool size as c. Erlang-C gives the probability that a connection request waits. Set pool size so C(c, a) ≤ 0.05 (5% of requests queue) and Wq ≤ 2 ms.
 
@@ -68,12 +68,12 @@ W   = Wq + 1/μ                 (total response time)
 
 | c | ρ per server | C(c, 10) | Wq / E[S] |
 |---|-------------|---------|-----------|
-| 11 | 0.91 | 0.763 | 7.6× |
-| 13 | 0.77 | 0.356 | 1.5× |
-| 15 | 0.67 | 0.152 | 0.46× |
-| 20 | 0.50 | 0.016 | 0.03× |
+| 11 | 0.91 | 0.6821 | 0.6821× |
+| 13 | 0.77 | 0.2853 | 0.0951× |
+| 15 | 0.67 | 0.1020 | 0.0204× |
+| 20 | 0.50 | 0.0037 | 0.00037× |
 
-Moving from ρ = 0.91 to ρ = 0.77 (adding 2 servers at a = 10) cuts Wq by 5×. The last few servers buy the most SLO improvement.
+Moving from ρ = 0.91 to ρ = 0.77 (adding 2 servers at a = 10) cuts mean Wq by about 7.17×. The last few servers buy the most SLO improvement.
 
 **DevOps sizing heuristic**: always provision for ρ_target ≤ 0.70 at sustained peak, then add one spare server above that. The Erlang-C curve is convex — the penalty for operating at ρ = 0.80 vs. 0.70 is far larger than the cost of one extra replica.
 
@@ -85,11 +85,11 @@ Moving from ρ = 0.91 to ρ = 0.77 (adding 2 servers at a = 10) cuts Wq by 5×. 
 
 **Problem**: A Kubernetes cluster or API gateway handles both interactive user traffic and background batch jobs. Under load, batch jobs saturate the worker pool and interactive requests see elevated p99. Adding more nodes raises cost but does not fix the structural mix. Priority scheduling separates SLO classes without requiring over-provisioning.
 
-**Structure (non-preemptive, two classes)**:
+**Structure (non-preemptive M/G/1, one worker, two classes)**:
 
 ```
-Class 1: interactive  λ₁, E[S₁], ρ₁ = λ₁ / (c × μ₁)
-Class 2: batch        λ₂, E[S₂], ρ₂ = λ₂ / (c × μ₂)
+Class 1: interactive  λ₁, E[S₁], ρ₁ = λ₁ × E[S₁]
+Class 2: batch        λ₂, E[S₂], ρ₂ = λ₂ × E[S₂]
 
 W0  = (λ₁ × E[S₁²] + λ₂ × E[S₂²]) / 2   (residual service time)
 
@@ -97,7 +97,7 @@ Wq_1 = W0 / (1 − ρ₁)
 Wq_2 = W0 / ((1 − ρ₁)(1 − ρ₁ − ρ₂))
 ```
 
-Class 1 latency depends only on its own load and the residual service time of whichever job is currently in service — at most one batch job's service time. Class 2 latency can be arbitrarily high when ρ₁ + ρ₂ approaches 1.
+These are single-worker **mean** wait formulas, not c-worker or p99 formulas. Kubernetes pod preemption and separate pools have different semantics; evaluate their own queue model. Class 1 mean wait depends on its own load and the residual service time of whichever job is currently in service — at most one batch job's service time. Class 2 latency can be arbitrarily high when ρ₁ + ρ₂ approaches 1.
 
 **Implementation in practice**:
 
@@ -147,7 +147,7 @@ X_max = min over stations of (cᵢ × μᵢ)
 
 ---
 
-### P7 Kingman Heavy-Traffic Approximation for Tail Latency Under Load
+### P7 Kingman Heavy-Traffic Approximation for Mean Queue Wait
 
 **Primitive**: [Kingman's Formula](../../foundations-queueing-theory/assets/templates/queueing-theory/07-kingman-formula.md)
 
@@ -170,10 +170,10 @@ Variability Factor (VF) = (CV²_a + CV²_s) / 2
 
 **Measuring CV²_a and CV²_s in practice**:
 
-- **CV²_a** from Prometheus: compute the inter-arrival time series from `rate(http_requests_total[1m])` sampled every 5 seconds. Calculate variance / mean² over a representative window. HTTP traffic from mobile apps or microservices is typically CV²_a = 2–4 (bursty).
+- **CV²_a**: compute variance / mean² from event-level inter-arrival gaps over representative windows. Sampled RPS is not a series of inter-arrival times; binned rates alone do not identify this coefficient.
 - **CV²_s** from APM: export the full service-time histogram from Datadog or Jaeger. CV²_s = σ²_service / μ²_service. For services with fast and slow code paths (cache hit vs. miss, DB query vs. cache hit), CV²_s can exceed 5.
 
-**Application to SLO budgets**: run Kingman at the expected peak ρ before launch. If VF = 3 and ρ = 0.80, Wq is 3× the M/M/1 prediction. If M/M/1 says "40 ms queue wait at ρ = 0.80," Kingman says "120 ms." That 80 ms gap — invisible to M/M/1-based sizing — is where SLO budget goes.
+**Mean-budget application (not p99 certification)**: run Kingman at the expected peak ρ before launch. If VF = 3 and ρ = 0.80, Wq is 3× the M/M/1 prediction. If M/M/1 says "40 ms queue wait at ρ = 0.80," Kingman says "120 ms." That is an approximate mean difference; the p99 difference requires the service/arrival distributions or representative replay.
 
 **Levers**: reduce CV²_a with a rate-limiting / token bucket layer at ingress (smooths bursty arrivals). Reduce CV²_s by splitting heterogeneous jobs into separate queues by size class (fast-lane / slow-lane). Either action reduces VF and the resulting Wq, even without adding capacity.
 
@@ -257,7 +257,7 @@ H_K = Σ_{k=1}^{K} 1/k                 (K-th harmonic number)
 | 10 | 2.93 | 2.93× |
 | 20 | 3.60 | 3.60× |
 
-For non-exponential workers (high CV²_s), the expected maximum is higher than H_K × E[S]. Measure the empirical 95th percentile per worker and use that as the effective E[S] in the formula for SLO analysis.
+The harmonic identity requires independent identically distributed exponential branch times. Other distributions and correlated branches can yield different expected maxima. Do not substitute a percentile for E[S]; estimate complete fork-join completion distributions using aligned branch traces or simulation.
 
 **Implementation in practice**:
 
@@ -299,7 +299,7 @@ For non-exponential workers (high CV²_s), the expected maximum is higher than H
 
 **Queueing theory diagnosis**: Erlang-C models a **queuing** system — arrivals wait for service when all servers are busy. Erlang-B models a **loss** system — arrivals are dropped (blocked) when all servers are busy. Applying Erlang-C to a system that actually drops connections produces an over-optimistic wait-time estimate (you think requests wait; they actually fail).
 
-**Symptom**: A WebSocket connection pool is sized using Erlang-C ("at a = 20 Erlangs and c = 25 connections, only 8% of requests wait"). In production, clients see connection refused errors under load. The system was actually dropping connections (Erlang-B behavior), not queuing them. The correct Erlang-B blocking probability at a = 20, c = 25 is non-trivial and larger than the Erlang-C wait probability would suggest.
+**Symptom**: A WebSocket connection pool is sized using Erlang-C ("at a = 20 Erlangs and c = 25 connections, approximately 20.9% of arrivals wait under the M/M/c assumptions"). In production, clients see connection refused errors under load. The system was actually dropping connections (Erlang-B behavior), not queuing them. The Erlang-B blocking probability and Erlang-C waiting probability describe different systems; do not interpret waiting probability as a failure probability or assume blocking is larger.
 
 **Fix**:
 - Use **Erlang-B** when arrivals that find all servers busy are dropped and lost (WebRTC connections, thread pool exhaustion that returns an immediate error, license server slots).
@@ -310,11 +310,9 @@ For non-exponential workers (high CV²_s), the expected maximum is higher than H
 
 ### A4 Fork-Join Sized by Mean Response Time
 
-**Queueing theory diagnosis**: In a K-way fork-join, the completion time equals the maximum of K independent service times, not their mean. E[max] = E[S] × H_K, where H_K ≥ 1 and grows with K. Sizing by mean service time underestimates the actual completion time by a factor of H_K — which is 2.3× for K = 5 and 2.9× for K = 10.
+**Queueing theory diagnosis**: completion time is the maximum of branch times. For iid exponential branches, its mean is E[S] × H_K, not a percentile. H₈ ≈ 2.718, so eight branches with mean 100 ms have expected completion about 272 ms under those assumptions.
 
-**Symptom**: A scatter-gather endpoint fans out to K = 8 downstream services, each with E[S] = 100 ms mean. Engineers add 10% margin and set a 110 ms SLO. In production, p50 latency is 215 ms (H₈ ≈ 2.15×). The SLO is missed from day one. Post-incident review finds the sizing assumed sequential rather than maximum-order statistics.
-
-**Fix**: apply the H_K correction during design. For K = 8, budget E[max] = 100 × 2.15 = 215 ms. Set a per-branch timeout at P90 of the individual service time distribution and return partial results when the timeout is hit. For p99 SLOs, the tail of the maximum is heavier than the harmonic correction alone — add 30–50% on top of E[max] as an empirical p99 buffer, or simulate.
+**Fix**: replay aligned branch traces, retaining correlation and shared queues, or use a justified distributional model. For iid branches with CDF F, P(max ≤ t) = F(t)^K; use this to solve a requested percentile. A fixed 30–50% margin above the mean does not certify p99. Choose timeouts and partial-result semantics using measured outcome and error budgets.
 
 ---
 
@@ -322,7 +320,7 @@ For non-exponential workers (high CV²_s), the expected maximum is higher than H
 
 **Queueing theory diagnosis**: Kingman's formula shows that queue wait is inflated by the variability factor VF = (CV²_a + CV²_s) / 2. When CV²_s is large — mixed fast (cache hit) and slow (DB query) service times — the actual Wq can be 3–5× higher than M/M/1 predicts. Ignoring CV²_s produces capacity plans that are under-provisioned for the actual workload mix.
 
-**Symptom**: Load testing at ρ = 0.75 shows acceptable p50 latency. Production p99 latency at the same ρ is 5× higher. Tracing reveals that some requests hit a slow code path (cache miss + synchronous DB call) with service time 10× the mean. The CV²_s for this service is approximately 4.0. Kingman predicts VF = (1 + 4.0) / 2 = 2.5, so Wq is 2.5× the M/M/1 prediction — accounting for most of the p99 gap.
+**Symptom**: Load testing at ρ = 0.75 shows acceptable p50 latency. Production p99 latency at the same ρ is 5× higher. Tracing reveals that some requests hit a slow code path (cache miss + synchronous DB call) with service time 10× the mean. The CV²_s for this service is approximately 4.0. Kingman predicts VF = (1 + 4.0) / 2 = 2.5, so Wq is 2.5× the M/M/1 prediction for the approximate **mean** wait; this does not explain or quantify the p99 gap.
 
 **Fix**:
 - Measure CV²_s from your APM service-time histogram: CV²_s = variance / mean². If CV²_s > 2, apply Kingman rather than M/M/1 for capacity sizing.
@@ -361,17 +359,18 @@ Step 2 — M/M/c minimum sizing (Erlang-C)
     C(c, a) = Erlang-C formula or calculator
     Wq = C(c, a) / (c × μ − λ_peak)
 
-  If Wq > latency_budget × 0.20:   (queue wait ≤ 20% of total SLO)
+  If Wq > latency_budget × 0.20:   (mean queue wait ≤ 20% of declared mean latency budget)
     increment c and recompute until Wq is within budget.
 
-Step 3 — Kingman variability adjustment
+Step 3 — Variability sensitivity (multi-server heuristic)
   Measure (or estimate from similar services):
     CV²_a = 2.0  (HTTP traffic, moderately bursty; measure in staging)
     CV²_s = 1.5  (typical mixed API with some DB calls)
     VF    = (CV²_a + CV²_s) / 2 = 1.75
 
   Wq_kingman = Wq_mmc × VF
-    (Erlang-C gives the Poisson/exponential baseline; multiply by VF for realism)
+    (This multi-server multiplier is a rough mean sensitivity heuristic, not
+     Kingman’s single-server result or a percentile estimate. Validate by replay.)
 
   If Wq_kingman exceeds budget, either:
     (a) add one more replica (repeat Step 2)
@@ -392,7 +391,7 @@ Step 5 — Safety margin and alert threshold
   c_final = c_target + 1 spare replica
 
   HPA target metric = λ_peak / c_target
-    (set HPA to scale in when average RPS per replica exceeds this value)
+    (set HPA to scale out when average RPS per replica exceeds this value)
 
   SLO alert: trigger if ρ_observed > 0.75 for > 5 minutes
     (Erlang-C: at ρ = 0.75 with a = 10 Erlangs, C(c,a) is still manageable;
@@ -405,61 +404,24 @@ Step 5 — Safety margin and alert threshold
 
 ### R2 Saturation SLO Threshold — Set the Alert Before the Cliff
 
-**Goal**: Determine the utilization or queue-depth threshold at which an alert fires before the SLO is breached, not after. Set this threshold on `Lq` (queue depth) rather than `p99` to get a leading indicator.
+**Goal**: derive a candidate queue-pressure alert and validate its lead time against the actual percentile SLO. Use queue depth alongside direct latency/error alerts.
 
-**Primitives used**: Kingman (#7) for tail latency under load → Little's Law (#1) to convert latency to queue depth → set alert on `Lq`, not `p99`.
+**Primitives used**: Kingman (#7) for approximate single-server mean wait; Little's Law (#1) for matching steady-state mean queue occupancy.
 
-```
-Step 1 — Model tail latency vs. utilization using Kingman
-  Measure CV²_a, CV²_s from production histograms.
-  VF = (CV²_a + CV²_s) / 2
+1. Measure event-level inter-arrival gaps and service durations for the same queue/population. For stable GI/G/1 with appropriate independence and finite moments, compute VF = (CV²_a + CV²_s)/2 and Wq(ρ) ≈ ρ/(1−ρ) × VF × E[S]. For multiple workers use an appropriate model or trace simulation.
+2. Define a **mean** latency budget B independently of any p99 SLO. Solve Wq + E[S] = B as a candidate mean-budget boundary. For a p99 SLO, derive a separate empirical boundary from representative load tests/replay including burst patterns and failures.
+3. Set an initial alert margin based on observed scaling delay and incident response time. Values such as ten utilization percentage points are hypotheses to calibrate, not guaranteed headroom.
+4. Estimate Lq = λ × Wq with aligned steady-state means. Prefer a directly observed queue-depth gauge; if using latency metrics, mean queue wait is required. `rate × p50` or total response latency does not equal mean queue occupancy. Kafka lag in records and delay in seconds are distinct metrics; delay ≈ lag/drain-rate only under stated workload assumptions.
+5. Validate candidate alerts against load-test or incident timelines. Queue-depth spikes may be transient and latency can deteriorate without growing queues. Keep direct p99/error-budget alerts and document false alarms, detection delay and scaling behavior.
 
-  For each ρ from 0.50 to 0.95 (step 0.05):
-    Wq(ρ) = (ρ / (1 − ρ)) × VF × E[S]
-    W(ρ)  = Wq(ρ) + E[S]
+**Synthetic mean example**: E[S] = 20 ms, CV²_a = 2.5, CV²_s = 2.0, VF = 2.25, mean budget B = 200 ms.
 
-  Find ρ_slo: smallest ρ where W(ρ) > latency_SLO
-    This is the cliff. You want to alert well before reaching ρ_slo.
+- W(ρ) ≈ ρ/(1−ρ) × 0.045 + 0.020 seconds.
+- At ρ = 0.85: approximate mean W = 275 ms, above the mean budget.
+- At ρ = 0.75: approximate mean W = 155 ms, below the mean budget.
+- Solving W = 200 ms yields ρ = 0.80 exactly; ρ_alert = 0.70 is an illustrative starting margin. Neither boundary establishes whether p99 is below 200 ms.
 
-Step 2 — Set alert threshold at ρ_alert = ρ_slo − 0.10
-  Example: if ρ_slo = 0.82, set ρ_alert = 0.72.
-  This gives ~10 percentage points of headroom to investigate before breach.
-
-Step 3 — Convert ρ_alert to a queue-depth threshold (leading indicator)
-  At ρ_alert, compute Lq from Little's Law:
-    Wq_alert = Kingman(ρ_alert)
-    Lq_alert = λ × Wq_alert
-
-  Alert condition (Prometheus):
-    sum(rate(http_requests_total[1m])) × (histogram_quantile(0.50, latency_bucket))
-      > Lq_alert
-
-  Or equivalently:
-    workqueue_depth > Lq_alert   (Kubernetes controller workqueue)
-    kafka_consumer_lag > Lq_alert × E[S]  (Kafka consumer lag in seconds)
-
-Step 4 — Why Lq beats p99 as a threshold
-  p99 latency is a lagging indicator:
-    - By the time p99 exceeds the SLO, the queue is already saturated.
-    - p99 includes both queue wait and service time; it rises sharply near ρ_slo.
-  Lq is a leading indicator:
-    - Queue depth starts rising before latency spikes (Lq = λ × Wq).
-    - An alert on Lq fires when Wq is still within SLO budget, giving response time.
-    - Lq is less noisy than p99 at moderate ρ (no tail sampling artifacts).
-
-Step 5 — Compose with USL bound
-  If USL fit shows N_max < c_final:
-    Reduce ρ_alert further to ρ_alert = ρ_slo − 0.15.
-    Add a separate alert: "replica count approaching N_max" (triggered when
-    c_actual > N_max × 0.80).
-```
-
-**Concrete example**: a backend service with E[S] = 20 ms, CV²_a = 2.5, CV²_s = 2.0, VF = 2.25, SLO = 200 ms.
-
-- Kingman: W(ρ) = (ρ/(1−ρ)) × 2.25 × 0.020 + 0.020.
-- At ρ = 0.85: W = (0.85/0.15) × 0.045 + 0.020 = 5.67 × 0.045 + 0.020 = 0.275 s — SLO breached.
-- At ρ = 0.75: W = 3.0 × 0.045 + 0.020 = 0.155 s — within SLO.
-- ρ_slo ≈ 0.82, ρ_alert = 0.72. Alert fires when utilization crosses 72%, not when p99 crosses 200 ms.
+**Expected output**: candidate queue-pressure thresholds, assumptions, measured lead time and error rates, and independent percentile-SLO validation evidence.
 
 ---
 
@@ -523,12 +485,11 @@ Step 5 — Re-solve flow balance after scaling
 Step 6 — Priority separation at bottleneck (if mixed SLO classes)
   If interactive (SLO = 100 ms) and batch (SLO = 5 s) traffic converge at i*:
     Compute ρ₁ = λ₁_interactive / (c*_target × μᵢ*)
-    Verify ρ₁ + ρ₂_batch < 0.90 (system stability requirement)
+    Verify total load < 1 for stability; 0.90 is illustrative headroom, not the stability boundary.
 
-    If without priority: both classes share wait proportional to ρ/(1−ρ)
-    With non-preemptive priority:
-      Wq_1 = W0 / (1 − ρ₁)      (interactive protected from batch)
-      Wq_2 = W0 / ((1−ρ₁)(1−ρ₁−ρ₂))  (batch latency increases; acceptable)
+    For one non-preemptive M/G/1 worker only, calculate class mean waits
+    using P5. For multiple workers, isolated pools or Kubernetes preemption,
+    use an appropriate model or representative load tests; validate tails.
 
     Implement as separate Kubernetes Deployments with PriorityClass,
     or separate thread pools with a priority queue at the worker.
@@ -555,13 +516,13 @@ Queueing primitives at different scopes compose without coupling. The patterns a
 **Composition rules**:
 
 - Always run Little's Law as a sanity check after computing Wq and Lq from any other formula. If L ≠ λ × W, re-examine measurement alignment.
-- Apply Kingman on top of M/M/c whenever CV²_s > 1.5 or CV²_a > 1.5. M/M/c alone will underestimate Wq in real traffic.
+- Use Kingman for a justified single-server mean model. Any VF multiplier on M/M/c is a sensitivity heuristic; validate multi-server means and tails by an appropriate model or representative replay.
 - Run USL before committing to a horizontal scaling plan that targets N > 8 replicas for any service with shared distributed state.
 - If the Jackson network analysis reveals a bottleneck, check USL for that bottleneck before scaling it. Scaling past N_max makes things worse.
 - For fork-join stages, confirm that each worker in the fan-out is independently provisioned (not sharing a bottleneck resource) — otherwise the fork-join is effectively serial despite apparent parallelism.
 
 **Starting point for a brownfield platform**: implement in this order:
-1. R2 (alert thresholds from Kingman) — immediately improves alert lead time without any infrastructure change.
+1. R2 (candidate pressure alerts) — test whether queue metrics provide useful lead time for this service.
 2. P8 (bufferbloat audit) — find and bound oversized queues; return 429 instead of silent latency accumulation.
 3. R3 (pipeline bottleneck hunt) — replace guesswork scaling with flow-balance analysis.
 4. R1 (new service sizing) — apply to every new service at design review, before launch.

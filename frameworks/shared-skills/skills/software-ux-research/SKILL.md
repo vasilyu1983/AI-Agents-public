@@ -14,8 +14,8 @@ Use this skill to reduce product and design risk with evidence. It owns research
 
 | Need | Default | Output |
 |------|---------|--------|
-| discovery and JTBD | semi-structured interviews with 5-8 participants | opportunity brief |
-| usability evaluation | moderated usability test with 5-7 participants | findings report with severity |
+| discovery and JTBD | semi-structured interviews with a predeclared segment, saturation, and budget stop rule | opportunity brief |
+| usability evaluation | moderated tests covering each critical task and user group; iterate in small rounds | findings report with severity |
 | quantification after qual insight | survey or analytics review | segment or pattern readout |
 | causal change validation | controlled experiment or staged rollout | experiment brief |
 | research ops and repository design | lightweight intake, taxonomy, and consent model | research-ops recommendation |
@@ -127,10 +127,10 @@ Before delivering any research output:
 - [ ] Decision the study was designed to unblock is named explicitly
 - [ ] Method justified: weaker alternatives were considered and rejected with reasons
 - [ ] Participants match the target segment — not convenience, panel-only, or CS rolodex
-- [ ] Sample size appropriate to method: ≥5 for usability, ≥8 for discovery interviews, power-calculated for experiments
+- [ ] Sample rationale names tasks, segments, risk, excluded populations, numeric stop threshold, consecutive evaluation window, maximum sample/budget, and action at the cap; experiments are power-calculated
 - [ ] Confidence level and evidence trail stated in the output
 - [ ] Synthetic participants labeled as hypothesis generation only — not cited as evidence
-- [ ] AI-assisted analysis audited (≥10-15% of AI tags verified against human coding)
+- [ ] AI-assisted analysis plan predeclares the tolerated disagreement by severity, audit-batch size, consecutive passing batches, maximum audit size, and the human-recoding/escalation action if the cap is reached
 - [ ] Consent obtained; recordings, transcripts, and participant identity stored separately
 - [ ] EU/UK participant data: DPA in place before sending to AI-processing vendor; EU AI Act high-risk (Annex III) deployer obligations postponed from 2026-08-02 to 2027-12-02 under the Digital Omnibus — the European Parliament (16 June 2026) and Council (29 June 2026) have both given final approval; the act enters into force shortly after Official Journal publication (verify the exact effective date before citing it as settled law)
 - [ ] Disconfirming evidence documented, not only confirming clips
@@ -158,9 +158,15 @@ For AI-powered product research (the *thing being studied* is AI-driven):
 For AI *in the research workflow* (synthesis tools, AI moderators, synthetic users):
 
 - treat synthetic users as hypothesis generation only (NN/g position), never as evidence
-- start analysis from human-coded seed sample, then let AI extend; audit at least 10–15% of AI tags
+- start analysis from a human-coded seed sample, then let AI extend; audit every tag class plus low-confidence and random items against the predeclared disagreement rule
 - AI moderators are appropriate only when the protocol is structured enough for a junior human to follow
 - inventory every AI tool that processes participant data for EU AI Act enforcement (high-risk deployer obligations postponed to 2 December 2027 under the Digital Omnibus, now approved by Parliament and Council as of June 2026 — verify current in-force date)
+
+### Reproducible Qualitative Stop Rules
+
+Write the rule before recruitment using explicit values: `new decision-relevant themes <= N across K consecutive interviews per priority segment; maximum M interviews or budget B`. For usability rounds, use the same form for new critical/high issues per task and user group. At the cap, do not declare saturation: report the unresolved segment or task, narrow the decision, or seek approval for a defined extension.
+
+For AI coding, define separate maximum disagreement rates for critical themes and other codes, the audited items per batch, and the number of consecutive passing batches. If the cap is reached without passing, return the affected material to human coding and limit claims to the verified subset. Reopen sampling or coding when a later session introduces a new high-impact theme, a priority segment diverges, the product or research question changes materially, or a spot check breaches the predeclared error threshold.
 
 For accessibility-sensitive research:
 
@@ -253,7 +259,6 @@ For accessibility-sensitive research:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

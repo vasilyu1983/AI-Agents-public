@@ -162,7 +162,7 @@ GET https://api.openalex.org/works?filter=cites:W2741809807&sort=cited_by_count:
 Rate-limit and access notes (verify at the linked docs before relying on exact numbers — both providers have changed terms within the last two years):
 
 - **Semantic Scholar**: unauthenticated requests share a pool of **5,000 requests / 5 min across all unauthenticated users** (per `allenai/s2-folks` API release notes) — this is a shared, not per-caller, budget, so throughput degrades unpredictably under global load. A personal API key gets 1 request/s. Since **August 2024**, Semantic Scholar no longer approves new API keys for free/personal email domains or for third-party apps; keys idle ~60 days are auto-pruned. Verify at `https://github.com/allenai/s2-folks/blob/main/API_RELEASE_NOTES.md`.
-- **OpenAlex**: since **13 Feb 2026**, every API request requires a (free) API key — create one at `openalex.org/settings/api`. The old email-based "polite pool" (`mailto=` parameter) is gone. Pricing is now usage-based: each key gets **$1/day of free usage**; single-work/ID lookups are free, and search/filter calls cost roughly **$1 per 1,000 calls** — for scouting-scale volumes this stays within the free daily allowance, but do not assume the old 100k-requests/day unauthenticated ceiling still applies. Verify at `https://developers.openalex.org/guides/authentication` before a high-volume pull.
+- OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).
 
 ## Rate-limit-safe pagination
 

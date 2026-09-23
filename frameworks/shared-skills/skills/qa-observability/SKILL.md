@@ -17,10 +17,10 @@ Core references live in `data/sources.json`. Prefer primary docs and re-check vo
 If key context is missing, ask for: critical user journeys, service/dependency inventory, environments (local/staging/prod), current telemetry stack, and current SLO/SLA commitments.
 
 1. Establish the minimum bar: correlation IDs, structured logs, traces, and golden metrics (latency, traffic, errors, saturation).
-2. Verify propagation: confirm `traceparent` and your request ID flow across boundaries end-to-end.
+2. Verify the telemetry transport with one known request or fault: application emission, context propagation, collector acceptance, and backend query. Stop the claim at the last observed stage; static SDK or collector configuration proves configuration only.
 3. Make failures diagnosable: every integration or E2E failure should capture a trace link or trace ID plus correlated logs, and critical degraded paths should expose structured error metadata such as rate-limit codes, retry hints, and state-transition markers.
-4. Define SLIs/SLOs and an error budget policy; wire multi-window burn-rate alerts.
-5. Produce artifacts: a readiness checklist, an SLO definition, and alert rules using `assets/checklists/template-observability-readiness-checklist.md`, `assets/monitoring/slo/slo-definition.yaml`, and `assets/monitoring/slo/prometheus-alert-rules.yaml`.
+4. When dashboards, SLOs, or alerting are in scope, define the relevant SLI/SLO and error-budget policy, verify that the dashboard selects the known telemetry, and test alert evaluation and routing with a synthetic condition and a controlled non-production receiver. Do not notify real responders without explicit authorization. Record backend-query, dashboard-selection, rule-evaluation, route, and delivery results independently; basic instrumentation can stop after backend-query proof.
+5. Produce the artifacts that match the task: a readiness checklist, SLO definition, or alert rules using `assets/checklists/template-observability-readiness-checklist.md`, `assets/monitoring/slo/slo-definition.yaml`, and `assets/monitoring/slo/prometheus-alert-rules.yaml`. Preserve environment, service revision, trace/request ID, query window, sampling decision, and the result of each stage exercised.
 
 ## Default QA stance
 
@@ -212,12 +212,9 @@ Sample input files for the scripts.
 
 - Known bugs, regressions, framework/compiler/runtime footguns, and version-specific crash or workaround guidance must be verified against current primary web sources before being treated as current fact.
 - Use web search or web fetch to verify current external facts, versions, pricing, deadlines, regulations, or platform behavior before final answers.
-- Prefer primary sources; report source links and dates for volatile information.
-- If web access is unavailable, state the limitation and mark guidance as unverified.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

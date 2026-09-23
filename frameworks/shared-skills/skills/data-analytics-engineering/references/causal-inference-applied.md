@@ -244,14 +244,16 @@ Treatment effect: α_t = Y_treated_t - Y^_0_t   (for t ≥ treatment date)
 
 **When to use.** Unobserved confounders make propensity or DML approaches unreliable, but a natural experiment in the product logs creates exogenous variation: partial-compliance A/B allocation, infrastructure rollout batches, randomized nudge campaigns, or geographic default variation.
 
-**The problem it solves.** IV identifies LATE — the causal effect for compliers (units whose treatment status is changed by the instrument). Strong instrument + valid exclusion restriction → unbiased estimate despite unobservable confounding.
+**The problem it solves.** With binary assignment and treatment, IV identifies LATE for compliers only under relevance, assignment independence (possibly conditional on pretreatment X), exclusion, monotonicity (no defiers), and consistent treatment/no interference. Continuous or heterogeneous 2SLS designs need their own estimand justification.
 
-**Two validity conditions (both required).**
+**Required identification and diagnostic checks.**
 
-1. **Relevance**: F-statistic on first-stage regression `T ~ Z + X` > 10 (Stock & Yogo 2005 threshold).
-2. **Exclusion restriction**: Z affects Y only through T. Untestable — argue from domain knowledge.
+1. **Relevance**: test the excluded instrument conditional on X, not the overall regression F. F > 10 is a historical screening heuristic, not proof of adequate strength; choose diagnostics and weak-IV inference appropriate to heteroskedasticity, clustering and the instrument design.
+2. **Independence**: assignment must be independent of potential outcomes and treatment types, conditional on any justified pretreatment covariates. Rollout batches or geographic defaults are not automatically exogenous.
+3. **Exclusion**: Z affects Y only through T. A pricing email may directly change engagement or revenue without an upgrade, invalidating it.
+4. **Monotonicity and consistency**: for a binary LATE, argue no defiers and no interference; disclose the complier population rather than generalizing to every user.
 
-**Common instruments in warehouse logs:** randomized assignment flag with partial compliance; rollout-wave / infrastructure batch (exogenous conditional on time); randomized pricing email (Z = email received, T = plan upgrade, Y = NRR).
+**Candidate instruments in warehouse logs:** randomized assignment with partial compliance is a candidate; infrastructure batches and randomized emails need explicit independence and exclusion arguments before estimation.
 
 ```sql
 -- dbt: fct_iv_instrument (grain: one row per user)
@@ -276,7 +278,10 @@ import statsmodels.formula.api as smf
 
 # First stage: check F-stat
 first_stage = smf.ols('t_treated ~ z_instrument + account_age_days + seat_count', data=df).fit()
-print(f"First-stage F = {first_stage.fvalue:.1f}")  # Must be > 10
+excluded_test = first_stage.f_test('z_instrument = 0')
+print(f"Excluded-instrument F = {float(excluded_test.fvalue):.1f}")
+# Classical homoskedastic diagnostic only; use design-appropriate robust/clustered
+# diagnostics and weak-IV inference when those assumptions do not hold.
 
 # 2SLS
 res = IV2SLS.from_formula(
@@ -285,7 +290,9 @@ res = IV2SLS.from_formula(
 print(res.summary)
 ```
 
-**Worked example.** A growth team runs a pricing-email nudge campaign (50% random holdout). 34% of email recipients upgraded their plan vs. 11% of holdout — a strong instrument (F = 218). IV LATE estimate: upgrading plan causes +18.4pp 90-day NRR. OLS estimate (naive): +7.1pp — drastically understated because users who self-select into upgrading are already higher-intent. The IV corrects for this self-selection.
+**Illustrative design.** A randomized email with partial compliance can create treatment variation, but upgrade rates alone do not identify an F-statistic or an NRR effect. If the email changes engagement independently of upgrading, exclusion fails. Only after the assumptions and strength checks are justified should an IV result be reported, with uncertainty and an explicit complier estimand; OLS bias can point either direction.
+
+Diagnostic API: [statsmodels linear hypothesis F-test](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.f_test.html).
 
 ---
 

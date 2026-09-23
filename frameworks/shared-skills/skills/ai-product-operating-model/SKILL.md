@@ -251,6 +251,10 @@ Without these contracts, teams will re-implement incompatible local wrappers and
 - Every production feature has cost, latency, refusal, and fallback telemetry.
 - High-risk launches require offline evals and staged rollout.
 
+## Stage Promotion Contract
+
+Classify each use case as `prototype`, `pilot`, or `production`, and name the decision owner. Promotion must attach evidence for user outcome, data authority and retention, eval coverage, failure handling, unit economics, operational ownership, and rollback; risk-tier controls are blocking conditions rather than weighted score inputs. If any required owner or artifact is absent, keep the use case in its current stage and state the missing decision. Count adoption only when the intended user completes the target task under the governed path.
+
 ## Known Traps
 
 - Central platform ownership that becomes a product-team ticket queue instead of a standards, contracts, and guardrails layer.
@@ -328,7 +332,6 @@ Related skills:
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

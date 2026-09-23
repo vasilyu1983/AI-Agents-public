@@ -55,9 +55,10 @@ Use this skill when reliability work is about failure behavior, overload protect
    - client library
    - mesh or gateway
 4. Test in stages:
-   - deterministic fault injection
-   - staged chaos in non-production
-   - narrow prod canary or game day only with guardrails
+   - design review or checker output establishes policy coherence only
+   - deterministic fault injection proves the response to a named controlled fault
+   - staged chaos in non-production proves bounded behavior and recovery in that environment
+   - narrow prod canary or game day proves only the observed target path and window, with guardrails
 5. Define pass or fail signals:
    - burn rate
    - p95 or p99
@@ -65,8 +66,29 @@ Use this skill when reliability work is about failure behavior, overload protect
    - breaker transitions
    - shed volume
    - recovery time
+6. Record the injected fault, steady-state hypothesis, blast-radius limit, abort condition, observation window, recovery result, and dependencies simulated rather than observed.
 
 ---
+
+## Selective verification and hazard analysis
+
+- Use [formal methods](../foundations-formal-methods/SKILL.md) when the question is
+  whether a recovery/failover protocol preserves an invariant under concurrent
+  faults, or when a counterexample is needed. Return the property, initial
+  states, transitions/environment assumptions, checked bound, result/trace, and
+  model-to-code limits. A finite invariant check does not establish liveness or
+  recovery time. Skip for routine timeout/retry configuration and named fault
+  tests whose behavior is already directly observable.
+- Use [safety engineering](../foundations-safety-engineering/SKILL.md) when
+  retries, rollback, failover, operators, or other functioning controls can
+  interact to cause a specified unacceptable loss, such as duplicate financial
+  effects or destructive recovery. Return loss → hazard → unsafe control action
+  and context → constraint → owner → verification evidence, including residual
+  unknowns. Skip for ordinary availability or latency tuning without a harmful
+  interaction question. Uptime and a hazard diagram do not prove safety.
+
+Keep resilience policy, fault-injection execution, recovery evidence, and release
+recommendations with this skill; use the foundation only for the named gap.
 
 ## Pattern Rules
 
@@ -220,7 +242,6 @@ Resilience request
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

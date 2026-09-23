@@ -122,6 +122,10 @@ Frontier reference: the `modded-nanoGPT` speedrun stacks Muon, QK-Norm, ReLU², 
 | Top-k sampling | zero out all logits except the top-k before softmax; draw from the remaining distribution | Top-k=1 is greedy decoding; top-k=vocab_size is pure sampling |
 | KV-cache | at inference, cache K and V tensors for all past positions; on each new token only compute Q/K/V for the single new position and append to cache | Re-computing all K/V at each generation step; the cache removes the redundant *projection* work (O(T²) → O(T) for K/V), not the attention itself — scoring is still O(T) per step, so total generation stays O(T²) |
 
+## Scale-Up Gate
+
+Prove the tokenizer, data loader, masking, loss, optimizer order, checkpoint restore, and sample generation on a tiny run before reserving large compute. Then run a fixed-budget pilot that records effective tokens, loss by source slice, gradient and activation health, throughput, utilization, and restart equivalence. Scale only when the loss curve and downstream probes improve as expected, the input pipeline is not the bottleneck, and a costed stop rule is written. Successful allocation or falling training loss alone does not justify the next scale.
+
 ## Known Traps
 
 - **Zero-grad placement**: call `optimizer.zero_grad()` before the forward pass (or `set_to_none=True` for speed), not after `.step()`.
@@ -156,7 +160,7 @@ Frontier reference: the `modded-nanoGPT` speedrun stacks Muon, QK-Norm, ReLU², 
 ## Navigation: Core References
 
 - **[Transformer From Scratch](references/transformer-from-scratch.md)** — attention math, block assembly, weight init, GPT architecture notes
-- **[BPE Tokenizer](references/bpe-tokenizer.md)** — byte-level BPE algorithm, merge loop, vocab construction, encode/decode
+- **[BPE Tokenizer](references/bpe-tokenizer.md)** — byte-level BPE algorithm, merge loop, vocab construction, encode/decode; plus the Sep-2026 tokenizer landscape (SentencePiece, Unigram, SuperBPE, vocab sizing, fertility/compression evaluation)
 - **[Pretraining Loop](references/pretraining-loop.md)** — training loop anatomy, mixed precision, gradient accumulation, cosine LR, checkpointing
 - **[Modern Architecture Deltas](references/modern-architecture-deltas.md)** — GPT-2 → 2026 baseline: RoPE, RMSNorm, SwiGLU, GQA, FlashAttention/SDPA, Muon and the speedrun frontier
 - **[Architecture Limitations and Workarounds](references/architecture-limitations-and-workarounds.md)** — failure-mode companion: each component's limitation → workaround → tradeoff (softmax pathologies/attention sinks, MHA→MQA→GQA→MLA + decoupled RoPE, positional design space + YaRN/NTK, MoE routing pitfalls, norm/residual/depth stability, fp8/fp4 precision, long-context, encoder/decoder/encoder-decoder contrast)
@@ -175,6 +179,6 @@ Frontier reference: the `modded-nanoGPT` speedrun stacks Muon, QK-Norm, ReLU², 
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

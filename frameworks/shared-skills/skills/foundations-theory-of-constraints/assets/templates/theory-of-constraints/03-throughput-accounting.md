@@ -6,7 +6,7 @@
 
 Throughput Accounting is the TOC financial measurement system. It replaces cost accounting's focus on local efficiency with three global metrics:
 
-- **Throughput (T)**: the rate at which the system generates money through sales. `T = Sales Revenue − Totally Variable Costs (TVC)`. TVC is only the costs that change with each unit sold (raw materials, sales commission per unit) — not labor, overhead.
+- **Throughput (T)**: the rate at which the system generates money through sales. `T = Sales Revenue − Totally Variable Costs (TVC)`. TVC is only the costs that change with each unit sold (raw materials, sales commission per unit) — excluding allocated fixed/step-fixed labor and overhead; genuinely incremental labor is included.
 - **Investment / Inventory (I)**: all the money the system has invested to generate throughput. Includes raw materials, WIP, finished goods, equipment, buildings.
 - **Operating Expense (OE)**: all the money the system spends to convert Investment into Throughput — salaries, rent, depreciation, utilities.
 
@@ -27,7 +27,7 @@ Throughput Accounting is the TOC financial measurement system. It replaces cost 
 ## Inputs
 
 - Revenue per product/feature/order.
-- Truly Variable Costs per unit (materials only — not allocated labor).
+- Truly Variable Costs per unit (actual incremental materials, commissions, per-transaction and per-use API/cloud fees; exclude allocated fixed labor).
 - Constraint capacity in time units.
 - Current OE (fixed for the planning horizon).
 
@@ -41,7 +41,7 @@ Throughput Accounting is the TOC financial measurement system. It replaces cost 
 
 | Failure | Root Cause | Fix |
 |---------|-----------|-----|
-| Allocating labor into TVC | Labor is nearly always a step-fixed cost, not truly variable | Keep TVC = materials + direct commission only |
+| Allocating labor into TVC | Distinguish allocated fixed/step-fixed labor from genuinely per-unit incremental labor | Classify by marginal cost behavior over the horizon; include per-use fees and genuinely variable labor, exclude allocated step-fixed expense |
 | Cutting cost instead of growing T | Cost accounting bias — OE reductions feel safe | Evaluate every decision by impact on T first, then I and OE |
 | Product mix ignores constraint | Products ranked by margin, not T/CU | Rank by T per minute of constraint time, not gross margin |
 | Accepting a negative-T order "to cover overhead" | Overhead allocation thinking | Any positive-T order above zero TVC contributes to NP if OE is fixed |
@@ -81,3 +81,5 @@ Cost accounting is not "wrong" in general — it is required for statutory repor
 - Corbett, T. (1998). *Throughput Accounting*. North River Press.
 - Cox, J.F. & Spencer, M.S. (1998). *The Constraints Management Handbook*. CRC Press.
 - Dettmer, H.W. (2007). *The Logical Thinking Process*. ASQ Quality Press.
+
+**T/CU applicability:** Ratio ordering assumes divisible independent work, one linear capacity, compatible demand and no binding dependencies/deadlines. For indivisible initiatives, shared or multiple capacities, or mandatory obligations, build a global feasible mix/schedule and verify objective value; ratio ranking is only a heuristic. See the root and [`../../../references/decision-and-validation.md`](../../../references/decision-and-validation.md).

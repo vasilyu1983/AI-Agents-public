@@ -39,7 +39,7 @@ Leaky Bucket vs. Token Bucket:
 - Admitting requests at a controlled rate while allowing short bursts.
 - LLM API calls per minute: fill rate = RPM limit; burst = short spike accommodation.
 - Agent tool-call rate limiting: tokens per step; refill per time window.
-- Retry backoff: treat retry budget as a token bucket; exhausted → fail open.
+- Retry backoff: treat retry budget as a token bucket; exhausted → stop retries and return the failure or a bounded fallback; do not admit unbudgeted retries.
 - Database connection pool admission.
 
 **Choose Token Bucket when**: bursty traffic is expected and tolerable up to a limit.
@@ -86,12 +86,12 @@ Startup: bucket = 5 tokens (full).
 
 t=0: parallel tool calls = 5 → consume 5 tokens → bucket = 0
 t=1: bucket refills to 1 → 1 sequential call allowed
-t=2: bucket = 2 → 2 parallel calls allowed
+t=2: bucket = 1 after the t=1 admission → 1 call allowed; accumulating 2 requires no intervening admission
 ...
-t=5: bucket = 5 → parallel burst allowed again
+After five idle refill seconds: bucket = 5 → parallel burst allowed again
 
 Without token bucket: 10 parallel calls at t=0 → API rate limit error (429) → retry storm.
-With token bucket: admits 5 now, queues remainder → no 429 errors.
+With token bucket: admits 5 now and queues the remainder. This reduces burst pressure but cannot guarantee no 429s: provider windows, shared traffic, token quotas and concurrency limits must also be respected.
 ```
 
 **Retry with jitter**:

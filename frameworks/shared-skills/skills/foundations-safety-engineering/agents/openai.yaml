@@ -1,0 +1,4 @@
+interface:
+  display_name: "Safety Engineering Foundations"
+  short_description: "Analyze hazards, unsafe control actions, and constraints"
+  default_prompt: "Use $foundations-safety-engineering to analyze system hazards and unsafe interactions using STPA; trace unsafe control actions, safety constraints, loss scenarios, and assurance evidence."

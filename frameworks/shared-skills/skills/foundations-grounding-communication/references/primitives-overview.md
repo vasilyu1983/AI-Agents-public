@@ -55,8 +55,8 @@ The crucial property: it isn't enough for both parties to *know* X. They must ea
 
 **Practical scale**:
 - Reversible exploration → low criterion (act, observe, correct)
-- Costly side effects (writes, sends, payments) → high criterion (require explicit acceptance)
-- Irreversible (deletes, posts, deploys) → maximum criterion (paraphrase + plan + confirm)
+- Costly or consequential actions → stronger understanding evidence; preserve existing authorization and pause only if load-bearing ambiguity or missing authority remains
+- Irreversible actions → verify target, constraints and authority before execution; a new confirmation is not necessary when these are already clear and authorized
 
 **Failure modes**:
 - Single criterion applied across all task types
@@ -78,7 +78,7 @@ Communication isn't complete after presentation. It is complete after acceptance
 **Acceptance signals can be**:
 - Explicit: "Got it. I will do X, Y, Z."
 - Implicit: relevant next move that presupposes understanding (only safe at low grounding criterion)
-- Backchannel: "uh-huh," "ack" — *weakest form*; only confirms perception, not understanding
+- Backchannel: "uh-huh," "ack" — weak, context-dependent evidence; insufficient alone for a load-bearing ambiguous handoff
 
 **Failure modes**:
 - Treating presentation alone as a contribution
@@ -96,7 +96,7 @@ Communication isn't complete after presentation. It is complete after acceptance
 4. **Demonstration** — shows what was understood (paraphrase, repetition)
 5. **Display** — performs the understanding (executes a plan, produces an artifact consistent with it)
 
-**Why it matters**: the strength of evidence required scales with grounding criterion (#2). Backchannel "ack" is the weakest evidence; relying on it for high-stakes work is the second-most-common grounding error after #1.
+**Why it matters**: the strength of evidence required scales with grounding criterion (#2). Backchannel "ack" is weaker than task-specific demonstration; relying on it for high-stakes work is the second-most-common grounding error after #1.
 
 **Practical heuristic for subagent handoff**: require demonstration (paraphrase + plan) for any irreversible action. Acknowledgment alone is insufficient.
 

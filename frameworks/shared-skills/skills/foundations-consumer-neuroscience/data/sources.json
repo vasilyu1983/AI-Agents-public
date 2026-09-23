@@ -2,9 +2,9 @@
   "metadata": {
     "title": "Consumer Neuroscience Foundations — Sources",
     "description": "Primary papers and references for 12 consumer-neuroscience primitives: attention & salience, arousal physiology, social bonding, narrative transportation, approach-avoidance, mirror systems, neuroaesthetics, interoception, memory consolidation, reward anticipation, embodied cognition, predictive processing.",
-    "last_updated": "2026-08-14",
+    "last_updated": "2026-09-17",
     "skill": "foundations-consumer-neuroscience",
-    "total_sources": 67
+    "total_sources": 71
   },
   "primary_papers": [
     {
@@ -259,7 +259,7 @@
       "id": "SchultzMontague1997",
       "name": "A Neural Substrate of Prediction and Reward",
       "url": "https://www.science.org/doi/10.1126/science.275.5306.1593",
-      "description": "Schultz, W., Dayan, P. & Montague, P. R. (1997). Science, 275(5306), 1593–1599. VTA dopamine neurons as prediction-error signals; ~200ms anticipatory onset before conditioned cue. Cross-reference for primitive #10 (reward anticipation) and #12 (predictive processing).",
+      "description": "Schultz, W., Dayan, P. & Montague, P. R. (1997). Science, 275(5306), 1593–1599. VTA dopamine neurons as prediction-error signals; cue/reward prediction-error response; does not establish a fixed digital reveal timer. Cross-reference for primitive #10 (reward anticipation) and #12 (predictive processing).",
       "add_as_web_search": false,
       "url_check": "manual"
     },
@@ -267,7 +267,7 @@
       "id": "OttEtAl2013",
       "name": "Oxytocin and Social Reward: Is There a Link?",
       "url": "https://www.frontiersin.org/articles/10.3389/fnins.2013.00264",
-      "description": "Ott, V. et al. (2013). Frontiers in Neuroscience, 7, 264. Oxytocin plasma half-life ~3–5 minutes; social reward circuitry; implications for session-level warmth design. Source for primitive #3 (social bonding).",
+      "description": "Ott, V. et al. (2013). Frontiers in Neuroscience, 7, 264. Oxytocin physiology and social reward context; peripheral kinetics do not establish session-level digital warmth cadence. Source for primitive #3 (social bonding).",
       "add_as_web_search": false,
       "url_check": "manual"
     },
@@ -366,6 +366,38 @@
       "description": "Srirangarajan, T., Sawe, N., Thys, T., Wu, X. C., & Knutson, B. (2026). PNAS Nexus, 5(2), pgag012. n=34. Group MPFC activity forecast aggregate social-media engagement (National Geographic Instagram) out-of-sample; NAcc and MPFC both predicted individual liking and donations. Domain-dependent result: in conservation/social-media domain MPFC (not NAcc) generalised to aggregate — distinct from Genevsky 2025 (commercial markets, NAcc → aggregate). Together the two papers establish that the region forecasting aggregate is domain-dependent.",
       "add_as_web_search": false,
       "url_check": "manual"
+    },
+    {
+      "id": "AcuteStressAlpha2022",
+      "name": "Acute stress increases left hemispheric activity measured via changes in frontal alpha asymmetries",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8850739/",
+      "description": "Primary EEG experiment; alpha power is interpreted inversely to activation, with stronger right alpha indicating stronger left activation. Does not validate individual copy targeting.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "EndocrineKinetics1996",
+      "name": "Time kinetics of the endocrine response to acute psychological stress",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/8626864/",
+      "description": "Primary endocrine kinetics study; cortisol peak latency is minutes, not a 90-second digital reassurance deadline.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "HumanReplay2017",
+      "name": "Replay of large-scale spatio-temporal patterns from waking during subsequent NREM sleep in human cortex",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29234075/",
+      "description": "Primary human recordings support NREM replay; no fixed evening or post-wake notification interval is established.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "ICOClassification",
+      "name": "Key data protection concepts: biometric recognition",
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/biometric-data-guidance-biometric-recognition/key-data-protection-concepts/",
+      "description": "Official classification guidance; unique identification and health inference matter, and not all physiological signals automatically constitute special-category biometric data.",
+      "add_as_web_search": false,
+      "url_check": "manual"
     }
   ],
   "regulatory_sources": [
@@ -413,7 +445,7 @@
       "id": "ICOBiometricGuidance",
       "name": "ICO Guidance on Biometric Data and Special Category Processing",
       "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/",
-      "description": "ICO / UK GDPR (current). Special-category data; Article 9 explicit consent requirements for biometric and physiological measurement (GSR, HRV, eye-tracking, facial EMG, EEG). Directly relevant to DMCC compliance audit recipe and primitives #2, #6, and #8 misuse boundaries.",
+      "description": "ICO / UK GDPR (current). Special-category data; purpose-based classification, Article 6 lawful basis, and applicable Article 9 conditions for special-category processing; not every physiological signal automatically qualifies. Directly relevant to DMCC compliance audit recipe and primitives #2, #6, and #8 misuse boundaries.",
       "add_as_web_search": false,
       "url_check": "manual"
     },

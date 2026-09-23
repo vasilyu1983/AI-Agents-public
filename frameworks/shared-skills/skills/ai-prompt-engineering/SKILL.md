@@ -197,6 +197,10 @@ Route deep retrieval or memory design work to [ai-rag](../ai-rag/SKILL.md) or `a
 - mixing product copy, policy, and control logic in one long prompt
 - asking for visible chain-of-thought
 
+## Prompt Change Attribution Gate
+
+Prefer one independent prompt variable at a time: instruction, context, examples, schema, tool contract, or policy. When compatibility requires coupled edits, predeclare an atomic bundle, such as schema plus schema instructions or a tool definition plus its usage examples, and compare the complete bundle with the prior complete contract. Hold the model ID, inference settings, unrelated tool fixtures, and dated eval set constant; record the rendered prompt fingerprint and raw outputs. Judge syntax and schema compliance separately from semantic task success and refusal behavior. Promote only when the target slice improves within its regression budget. Label unrelated simultaneous runtime, provider, or model changes as confounders and re-baseline.
+
 ## Known Traps
 
 - Designing a prompt contract around one specific frontier model as if its availability is guaranteed. Provider-side safety incidents, export-control actions, or capacity constraints can suspend or fall back a model family with no notice; a production prompt contract must already specify what happens when the primary model is unavailable, not just what happens when it refuses.
@@ -277,7 +281,6 @@ Route deep retrieval or memory design work to [ai-rag](../ai-rag/SKILL.md) or `a
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
-

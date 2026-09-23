@@ -77,6 +77,7 @@ local or remote result
 8. **Normalize remote results.** Convert server-side tool uses and tool results into the same local message model used by the REPL, including fallback rendering for tools the local client does not know how to execute directly.
 9. **Make the execution pipeline explicit.** Validation, permission checks, telemetry, hook calls, execution, shaping, persistence, and rendering should be separate stages even if they share one host entrypoint.
 10. **Test hostile cases.** Cover duplicate tool names, denied MCP tools, disappearing deferred tools, partial server reconnects, coordinator-mode filtering, and remote rendering mismatches.
+11. **Attest callability after discovery.** A deferred schema load proves only that metadata was found. Before exposing the tool as callable, re-evaluate connection health, auth identity, policy, runtime mode, and schema version; return a typed unavailable reason if any changed.
 
 ## Host Rules
 
@@ -171,7 +172,7 @@ Three dispatch-mode changes to the `Agent` tool matter for execution-pipeline de
 - **Background-by-default (v2.1.198).** Subagents launched via `Agent` now run in the background by default; the parent runs one in the foreground only when it needs the result before continuing. This flips the historical default (foreground, blocking) — a runtime that still assumes synchronous return-on-call will race or hang on background completions. Design the execution pipeline so tool dispatch returns a handle immediately and completion is a separate event, not a return value.
 - **Background permission routing (v2.1.186) is not optional.** Before v2.1.186, a background subagent's tool call that would otherwise prompt was auto-denied silently and the subagent kept going without that capability — a silent-failure trap. Current behavior surfaces the prompt in the parent session, named by subagent, with a per-call deny that doesn't kill the subagent. Any tool runtime that adds background dispatch must route permission prompts to a session the user can actually see, not fail closed silently.
 - **Nested spawn depth is capped at 5, server-enforced, no override (since v2.1.172).** A subagent at depth 5 does not receive the `Agent` tool at all. Model the depth counter as part of the `Agent(type)` dispatch contract itself — the runtime should refuse a depth-6 spawn attempt locally with a clear error, rather than letting it round-trip to a server rejection.
-- **Fork mode is a third dispatch mode, not a variant of foreground/background.** A forked subagent inherits the full parent conversation (rather than starting fresh) and always runs in the background, but still surfaces permission prompts in the parent's terminal like a foreground call would. Treat fork, named-background, and named-foreground as three branches of the same dispatch contract, each with its own inheritance and visibility rules — collapsing them into one code path tends to leak conversation state or silently swallow prompts.
+- **Claude Code fork mode is a third dispatch mode, not a variant of foreground/background.** Its documented conversation fork inherits the parent conversation and shares the parent's prompt-cache prefix; named subagents start from their own definitions. Keep this platform-scoped: another runtime's “fork” may copy a session, create a branch, or start fresh. Treat fork, named-background, and named-foreground as separate branches with explicit effective context and visibility rules.
 
 Cross-cutting judgment call: a message delivered to a resumed or running subagent (via `SendMessage`) is task direction from its own launcher, not user consent or approval for a permission-gated action — the same trust boundary that applies to any agent-to-agent message applies here. A tool runtime's permission layer must not treat "another agent said so" as equivalent to a human granting a permission.
 
@@ -237,6 +238,6 @@ When a delegated ACP agent uses tools, their invocations and results must render
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

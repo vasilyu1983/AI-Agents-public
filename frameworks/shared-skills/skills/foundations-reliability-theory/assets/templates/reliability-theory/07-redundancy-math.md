@@ -58,7 +58,7 @@ The redundancy switch or detection mechanism fails with probability (1 - c):
 R_covered = c × R_parallel + (1-c) × R_single
 ```
 
-When coverage c is low, adding redundancy can *decrease* system reliability.
+This particular mixture is bounded between R_single and R_parallel; low c removes benefit but cannot make it worse than single service. Harmful redundancy requires an explicit additional failure mechanism (e.g., a shared controller whose mission reliability q multiplies the covered result). For R_single=.9, R_parallel=.99, c=.5, mixture=.945; q=.9 makes q×.945=.8505, below .9. The q model assumes independent controller survival and its failure disables the service.
 
 ## When to Use
 
@@ -90,7 +90,7 @@ When coverage c is low, adding redundancy can *decrease* system reliability.
 | Ignoring switchover failure | Standby redundancy appears better than it is; failover fails in production | Model switchover reliability explicitly; include in system reliability formula |
 | Assuming independence of redundant components | Common-cause failures (shared power, shared software, same datacenter) are underestimated | Use beta-factor or alpha-factor common-cause models |
 | Using active redundancy when standby is available | Wasted compute; higher component failure exposure during idle period | Evaluate standby architectures for non-performance-critical backups |
-| Adding redundancy without fixing coverage | Low-coverage redundancy scheme reduces reliability | Measure and improve c before adding units; a reliable switchover beats more units |
+| Adding redundancy without fixing coverage | Low coverage removes redundancy benefit; additional harmful mechanisms can reduce reliability | Measure and improve c before adding units; a reliable switchover beats more units |
 | Confusing k-of-n with series/parallel | 2-of-3 is neither purely series nor purely parallel | Apply binomial formula; do not use simple series or parallel approximations |
 
 ## Worked Example
@@ -103,7 +103,7 @@ A quorum database cluster needs 99.999% (five nines) availability per year from 
 R_2/3 = 3(0.9999)² - 2(0.9999)³
       = 3 × 0.99980001 - 2 × 0.99970003
       = 2.99940003 - 1.99940006
-      ≈ 0.9999999  (≈ seven nines)
+      ≈ 0.999999970002  (seven full nines)
 ```
 
 **Switchover reliability c = 0.995:**
@@ -111,18 +111,18 @@ R_2/3 = 3(0.9999)² - 2(0.9999)³
 ```
 R_covered = 0.995 × 0.99999997 + 0.005 × 0.9999
           = 0.99499997 + 0.0049995
-          ≈ 0.99999947   (five nines — coverage loss erases two orders of magnitude
-                           relative to the uncovered ≈0.9999999 seven-nines figure)
+          ≈ 0.999999470152  (six full nines; unavailability is about 17.7×
+                            the uncovered ≈0.999999970002 value)
 ```
 
-The switchover mechanism at 99.5% reliability is the binding constraint. Improving switchover reliability from 99.5% to 99.9% recovers more reliability than adding a fourth node. (Corrected 2026-07-11: the previous version of this worked example contained an arithmetic transcription error in the intermediate step — the conclusion, five-nines, was directionally right but the displayed figure of 0.99990 undercounted by roughly two orders of magnitude.)
+The switchover mechanism at 99.5% reliability is the binding constraint. Improving switchover reliability from 99.5% to 99.9% recovers more reliability than adding a fourth node. (Corrected 2026-07-11: the previous version of this worked example contained an arithmetic transcription error in the intermediate step — the displayed precision and nines terminology were subsequently corrected but the displayed figure of 0.99990 undercounted by roughly two orders of magnitude.)
 
 ## Validation: Empirically Confirm Coverage Probability
 
 The coverage probability `c` in the imperfect-coverage formula is a modelling assumption, not a measured fact. Validate it empirically before treating sized redundancy as live:
 
 1. Trigger failover paths under realistic production-like load.
-2. Measure switchover latency and success rate across ≥10 trials.
+2. Choose trials from the required confidence and precision; measure successes and latency under representative failure contexts. Ten successes cannot validate c=.995: the one-sided 95% exact lower bound is 0.05^(1/10) ≈ .741. Under independent Bernoulli trials, about 598 consecutive successes are needed for that lower bound to reach .995; scenario coverage remains a separate requirement.
 3. Compare the measured success rate against the `c` value used in the coverage formula.
 4. If measured c is materially lower than assumed, improving switchover reliability delivers more benefit than adding units.
 

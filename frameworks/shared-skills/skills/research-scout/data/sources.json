@@ -1,10 +1,12 @@
 {
   "metadata": {
+    "verification_scope": "Targeted September corrections only. last_updated is the catalog edit date; entries without their own September verification retain older verification status.",
+    "targeted_checks": [{"url": "https://help.openalex.org/api/authentication/", "verified_claim": "Basic keyless access; free key raises daily budget 10x; 429 for budget/rate exhaustion.", "last_verified": "2026-09-11"}],
     "skill": "research-scout",
     "title": "Dev Research Scout - Sources",
     "description": "Multi-source research idea mining: arXiv, HF Papers, Semantic Scholar, Papers with Code, conferences, industry research blogs, and curator newsletters.",
     "version": "2.1",
-    "last_updated": "2026-07-11",
+    "last_updated": "2026-09-11",
     "currency_review": "2026-07-11 Jul-2026 verified sweep (OpenAlex mandate date corrected to 2026-02-13; Elicit pricing overhaul; ResearchRabbit acquisition date corrected to 2025-05-08)",
     "total_sources": 51,
     "attribution": {
@@ -29,23 +31,25 @@
     {
       "name": "arXiv export API endpoint",
       "url": "https://info.arxiv.org/help/api/index.html",
-      "change": "Stricter 429 enforcement from Feb 2026; hard 1 request / 3s, single connection",
+      "change": "Operator terms require at most 1 request / 3s and a single connection across all controlled machines; checked 2026-09-11 at https://info.arxiv.org/help/api/tou.html",
       "date": "2026-02-01",
       "replacement": "Same endpoint; enforce 3s delay in all query scripts"
     },
     {
       "name": "OpenAlex",
       "url": "https://openalex.org/",
-      "change": "API key mandatory since 2026-02-13 (verify at openalex.org/pricing as of 2026-07-11); polite-pool email param retired. Keyed requests get $1/day free credit (~usual research volume); unkeyed requests get $0.10/day then 409s.",
+      "change": "Basic keyless requests are supported; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Checked 2026-09-11 against https://help.openalex.org/api/authentication/.",
       "date": "2026-02-13",
-      "replacement": "Same service; register for free API key at openalex.org/settings/api"
+      "replacement": "Same service; register for free API key at openalex.org/settings/api",
+      "last_verified": "2026-09-11"
     },
     {
       "name": "Connected Papers",
       "url": "https://www.connectedpapers.com/",
       "change": "Paid tier introduced 2025; free plan limited to 50 inputs/searches",
       "date": "2025-01-01",
-      "replacement": "OpenAlex citation graph (free) or Semantic Scholar's graph API for bulk use"
+      "replacement": "OpenAlex citation graph (free) or Semantic Scholar's graph API for bulk use",
+      "last_verified": "2026-09-11"
     },
     {
       "name": "ICLR / OpenReview",
@@ -136,7 +140,7 @@
         ],
         "access_tier": "free",
         "status_2026": "changed",
-        "status_note": "Stricter 429 enforcement from Feb 2026; hard 1 request / 3s, single connection."
+        "status_note": "Operator terms require at most 1 request / 3s and a single connection across all controlled machines; checked 2026-09-11 at https://info.arxiv.org/help/api/tou.html."
       },
       {
         "name": "alphaXiv",
@@ -236,7 +240,7 @@
         "name": "OpenAlex",
         "url": "https://openalex.org/",
         "type": "api",
-        "relevance": "Open catalog of scholarly works; complementary to Semantic Scholar. API key mandatory since 2026-02-13; keyed = $1/day free credit, unkeyed = $0.10/day then 409s.",
+        "relevance": "OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).",
         "access": "freemium",
         "add_as_web_search": true,
         "tags": [
@@ -245,7 +249,8 @@
         ],
         "access_tier": "freemium",
         "status_2026": "changed",
-        "status_note": "API key mandatory since 2026-02-13 (verify at openalex.org/pricing as of 2026-07-11); polite-pool email param retired. Usage-based pricing: singleton lookups free, list/search/semantic calls metered; $1/day free credit with a key covers normal research use."
+        "status_note": "OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).",
+        "last_verified": "2026-09-11"
       },
       {
         "name": "Connected Papers",
@@ -874,7 +879,7 @@
         "name": "ResearchRabbit",
         "url": "https://www.researchrabbit.ai/",
         "type": "tool",
-        "relevance": "Citation graph + email alerts for new papers citing your seed set. Good for tracking a method family without repeated manual searches.",
+        "relevance": "OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).",
         "access": "free",
         "add_as_web_search": true,
         "tags": [
@@ -884,9 +889,10 @@
         ],
         "access_tier": "free",
         "status_2026": "changed",
-        "status_note": "Re-verified 2026-07-11: acquired by Litmaps on 2025-05-08 (not 2026 — corrected date), relaunched with a freemium (RR+ paid) tier around 2025-10-30/11. Free plan still $0 — unlimited searches, 50-input cap, 1 project, no sharing.",
+        "status_note": "OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).",
         "cost_tier": "Freemium since Nov 2025 (Litmaps-acquired May 2025) — free plan still $0 (50-input cap, 1 project, no sharing); RR+ paid tier",
-        "free_alternative": "OpenAlex citation graph API (no account)"
+        "free_alternative": "OpenAlex citation graph API (no account)",
+        "last_verified": "2026-09-11"
       }
     ]
   }

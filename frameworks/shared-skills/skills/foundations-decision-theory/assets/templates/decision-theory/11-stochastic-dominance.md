@@ -43,7 +43,7 @@ Equivalently, A SSD B iff E_A[u(x)] ≥ E_B[u(x)] for every non-decreasing and c
 
 - **Comparing only at the mean**: Two distributions with the same mean can have very different variance profiles; the mean does not determine dominance.
 - **FSD confused with SSD**: FSD is a stronger condition. FSD implies SSD, but not vice versa. A risk-seeking agent may not prefer the SSD-dominant option.
-- **Dominance used as proof of optimality**: Stochastic dominance identifies robust preferences, not optima. An option could SSD-dominate all others yet still not be the EU-maximizing choice for a specific utility function.
+- **Dominance used as proof of optimality**: Stochastic dominance identifies robust preferences, not optima. If an option SSD-dominates every alternative and utility is nondecreasing and concave with finite expectations, it is an expected-utility maximizer among those alternatives. Utilities outside that class need not prefer it.
 - **Empirical distributions used with small samples**: Estimating CDFs from small samples introduces significant sampling error. Check dominance with bootstrapped confidence intervals.
 
 ## Worked Example

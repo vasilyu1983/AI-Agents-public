@@ -192,6 +192,10 @@ Increase b / decrease r to catch lower-Jaccard near-dups (more aggressive).
 Decrease b / increase r to tighten threshold (less aggressive, faster).
 ```
 
+## Mixture Change Gate
+
+Change one mixture decision at a time: source inclusion, sampling weight, quality filter, dedup threshold, or synthetic-data share. Freeze the tokenizer, training budget, seed policy, and evaluation set; log document counts and effective tokens before and after the change. Promote the candidate only when target slices improve without unacceptable regression on retained-domain, contamination, memorization, and provenance checks. A higher aggregate benchmark score alone does not identify which data decision helped.
+
 ## Known Traps
 
 1. **Contamination** — the field's most common silent failure. Benchmark text appears in training data, scores look inflated, but the model learned the answer key. Decontaminate against every benchmark you plan to report, using n-gram overlap. Fail loud: if any document matches ≥ 13 grams, remove it and log the URL.
@@ -249,6 +253,6 @@ See **[data/sources.json](data/sources.json)** for curated primary sources acros
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.

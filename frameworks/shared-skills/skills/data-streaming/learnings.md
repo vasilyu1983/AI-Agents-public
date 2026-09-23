@@ -6,8 +6,7 @@
 
 ## Domain Knowledge
 
-- [2026-07-11] July 2026: Kafka stable is 4.3.1, Flink stable is 2.3.0, and Iceberg v3 is GA on Snowflake + Databricks but not yet supported by Trino.
+- [2026-07-11, corrected 2026-09-07] The earlier note conflated a ratified Iceberg v3 spec with vendor GA. Databricks' cited April 2026 announcement says Public Preview; verify each engine's current status and operation coverage separately.
 ## Open Questions
 
 ## Consolidated Principles
-

@@ -2,8 +2,8 @@
 name: foundations-decision-theory
 description: Decision-theory primitives for uncertain choices, utility, Bayesian decisions, regret, value of information, MCDA, options, and bandits. Use when choosing under uncertainty.
 compatibility: Portable core only.
-version: "1.2"
-last_validated: 2026-08-14
+version: "1.3"
+last_validated: 2026-09-08
 ---
 
 # Decision Theory Foundations
@@ -26,7 +26,7 @@ last_validated: 2026-08-14
 - Causal "did X cause Y" question — use foundations-causal-inference
 - A clear oracle exists (test suite, KPI threshold) — use the oracle
 - All candidate options are dominated by one option on every criterion — no decision-theory needed
-- EVPI is much smaller than the cost of acquiring info — skip the study and decide now
+- EVPI is below a justified utility-compatible additive information cost — skip that study; with nonlinear utility evaluate terminal costs before deciding
 
 ## Contents
 
@@ -121,14 +121,14 @@ Check [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-t
 
 ## When Expected-Value Reasoning Breaks Down (Non-Ergodicity, Ruin Risk, and Kelly)
 
-EU (#1) and certainty-equivalent (#6) reasoning implicitly average over an *ensemble* of parallel outcomes for a single decision. Repeated or leveraged bets compound multiplicatively instead — the ensemble average and the *time average* (the growth rate one actor actually experiences across repeated plays) diverge whenever there is a nonzero chance of an absorbing floor (ruin, bankruptcy, delisting, project death). This is the ergodicity-economics critique (Peters, 2019, *Nature Physics*): a bet with strictly positive expected value can still have a negative time-average growth rate once outcomes compound — no utility-curvature adjustment fixes this; the fix is switching from an ensemble average to a time average.
+Expected utility (EU, #1) does not require literal parallel ensembles: it ranks lotteries from stated probabilities and a utility function. The practical failure occurs when a one-period payoff model is reused for a repeated, path-dependent, multiplicative, or ruin-constrained process without modeling wealth state and survival. In those settings an arithmetic expected return can be positive while long-run log growth is negative. Model the dynamic process directly; expected utility with an appropriate state-dependent utility can still be coherent, while expected log growth/Kelly is one specific objective rather than a universal replacement (Peters, 2019; Kelly, 1956).
 
 Expert checks before applying EU/CE to a repeated or leveraged decision:
 
-- **Does the payoff compound?** If outcomes multiply (returns, survival odds, reputation, compounding debt) rather than add, compute the time-average growth rate, not the single-shot expectation.
+- **Does the payoff compound or depend on the path?** Model wealth/state transitions and absorbing boundaries before evaluating the choice. Compute expected-log or time-average growth only when long-run growth is the stated objective; otherwise evaluate the selected terminal or path-dependent utility and survival/drawdown constraints on that process.
 - **Kelly criterion** (Kelly, 1956): for a repeated bet with a known edge, the growth-optimal wager fraction is f* = edge / odds (binary case: f* = p − q/b). Betting above Kelly reduces long-run growth even though each individual bet has positive EV. Full-Kelly is higher-variance than most real decision makers tolerate; fractional Kelly (e.g., half-Kelly) is the standard practitioner correction for parameter uncertainty and risk tolerance.
 - **Ruin is a constraint, not a tradeoff.** Any state with an absorbing floor must be gated with a maximum-drawdown or survival constraint *before* the EU calculation — "the EV is positive" does not rescue a bet with non-negligible ruin probability.
-- Use this alongside, not instead of, #1 and #6: EU/CE for single non-compounding decisions; add ergodicity/Kelly reasoning whenever the decision repeats, compounds, or has an absorbing failure state.
+- Use this alongside #1 and #6: state whether the objective is terminal expected utility, survival probability, drawdown control, or long-run growth. Apply Kelly only when growth optimality, repeated comparable opportunities, and credible probabilities match the decision.
 
 **Sources**: Peters, O. (2019). "The ergodicity problem in economics." Nature Physics 15, 1216–1221. Kelly, J. L. (1956). "A New Interpretation of Information Rate." Bell System Technical Journal 35(4).
 
@@ -142,7 +142,7 @@ Formal primitives are only as good as the probabilities, utilities, and weights 
 |---|---|---|
 | Anchoring the first number | Whoever states a probability or weight first anchors the group; later "adjustments" under-correct | Elicit independently before group discussion (Delphi-style); aggregate afterward |
 | False-precision point estimates | A single-point probability hides genuine uncertainty about the probability itself | Elicit ranges or a 10/50/90 percentile distribution; calibration-train the elicitor where the decision is high-stakes |
-| Analysis paralysis | Teams keep requesting more studies or precision past the point where the information can change the action | Compute EVPI (#4) before approving further elicitation; stop and decide once EVPI is below the cost of refinement |
+| Analysis paralysis | Teams keep requesting more studies or precision past the point where the information can change the action | Compute EVPI (#4) before approving further elicitation; stop when utility-compatible information cost exceeds its value; with nonlinear utility recalculate terminal-outcome EU |
 | Weights presented as objective | MCDA (#5) weights are framed as model output rather than negotiated stakeholder preference | Disclose weight provenance and run sensitivity analysis; treat weights as an input to be negotiated, not a discovered fact |
 | Stated risk tolerance vs. revealed risk tolerance | Survey-elicited utility/risk-aversion parameters diverge from what the same stakeholder actually does under real stakes | Cross-check elicited CARA/CRRA parameters (#6) against revealed past choices (insurance, past bets) where available |
 | Ambiguity flattened into a probability | An unknown probability is silently converted to 50/50 or a base rate, hiding ambiguity aversion | Run the Ellsberg/Allais diagnostic (#9) first; do not treat "unknown" as "known and uniform" |
@@ -189,18 +189,20 @@ Probability inputs increasingly come from an LLM rather than a human panel. Trea
 
 ---
 
+All VoI cost gates below assume utility-compatible additive costs; otherwise recalculate expected utility with costs/delay in terminal outcomes.
+
 ## Composition Recipes
 
 ### Should we run this experiment?
 
 _Context_: A team proposes a study, pilot, or A/B test before making a decision.
 
-1. Compute EVPI — the maximum value the perfect information could provide (primitive #4). If EVPI < study cost, skip the study.
+1. Define utility, affected population and decision horizon. EVPI is the cost-free upper bound (#4); compare it to an additive study cost only on the same utility scale (e.g., risk-neutral net money).
 2. Compute EVSI for the specific study design — account for noise and sample size (#4).
-3. If EVSI > study cost, approve. Then apply EU (#1) + risk aversion check (#6) to the post-study decision: does the posterior expected utility exceed the certainty equivalent threshold of the decision maker?
+3. Compare study versus immediate-action expected utility including cost and delay. With nonlinear utility, incorporate costs into terminal outcomes before applying utility; do not subtract pounds or hours from utility EVSI. Optimize over discrete sample sizes, no study and endpoints; marginal gain=cost is only a differentiable interior condition.
 4. If the decision maker exhibits ambiguity aversion over the prior distribution, apply minimax regret (#3) as a robustness check alongside EU.
 
-**Worked example:** Decision: ship feature A or B. Current best estimate: A = $200k value, B = $180k. Uncertainty: P(B actually better) = 0.3; expected regret if wrong = $40k. EVPI = 0.3 × $40k = $12k. Proposed A/B test costs $30k + 6 weeks → EVPI < test cost, skip the test; just ship A. If variance were higher — say P(B better) = 0.6 and regret = $100k — then EVPI = 0.6 × $100k = $60k, which exceeds the $30k cost, so the test pays for itself. EVSI refinement: a study that reduces variance by 60% (e.g. smaller sample, noisier measurement) captures 0.6 · EVPI. In the first scenario: 0.6 × $12k = $7.2k → still below $30k cost, skip. In the second: 0.6 × $60k = $36k > $30k → approve the cheaper, noisier study rather than the full test.
+**Worked example:** Choose between an outside action worth 0 and an action paying +1 or -1 with equal probability. The current value is 0 and perfect information is worth 0.5. A symmetric signal that identifies the payoff correctly 75% of the time produces posterior means +0.5 and -0.5, so the posterior-optimal expected value is 0.25 and EVSI is 0.25. Here utility is linear in payoff and cost is in those same payoff units; run the study only when its cost is below 0.25. EVPI exceeding cost merely leaves open the possibility that a study is worthwhile; it does not approve a particular study. Likewise, a percentage reduction in posterior variance is not a percentage of EVPI. Compute EVSI from the signal likelihoods and posterior-optimal actions.
 
 ---
 
@@ -232,7 +234,7 @@ _Context_: Marketing budget, experiment slots, or engineering capacity must be a
 
 _Context_: An AI agent or orchestration layer must decide whether to invoke an expensive large model, run a retrieval step, or route a query to one of several LLM backends — each with different quality-cost profiles.
 
-1. **VoI gate before each costly call** (#4): estimate EVPI for the decision the LLM call is meant to inform. If the agent's current context already implies a high-confidence action, skip the call — the information cannot change the decision. Apply this gate to retrieval steps (is the retrieved chunk likely to shift the answer?) and to model-tier selection (does this query warrant the 175B model over the 7B?).
+1. **VoI gate before each costly call** (#4): define states, priors, actions, utilities and the call's signal likelihoods; compute EVSI from posterior-optimal actions and compare with utility-compatible cost. Confidence alone does not imply zero information value: prior (.999,.001), risky utilities (1,−100), safe (0,0) give current EU .899 and EVPI .1. Perfect observation costing .01 is worthwhile. An uninformative signal instead has EVSI=0. EVPI only supplies a cost-free upper bound: below additive cost it can exclude a call, above cost it does not approve that call. Apply the same logic to retrieval and model-tier selection; evaluate terminal outcomes when utility/cost is nonlinear.
 2. **Bandit-driven model routing** (#10): treat each LLM backend (or prompt variant) as a bandit arm with unknown quality distribution per query class. Use Thompson sampling to learn the best arm per context cluster; a LinUCB-based policy achieves sublinear regret without predicting future prompts or accessing model internals, including under unstructured context evolution as users refine queries mid-session (Poon et al., arXiv:2506.17670).
 3. **Risk aversion on tail latency** (#6): for SLA-sensitive paths, compute the certainty equivalent of the latency distribution — a risk-neutral mean-latency comparison may select a high-variance backend a risk-averse product cannot afford.
 4. **Stochastic dominance check before full reallocation** (#11): once enough observations accumulate, verify that the preferred arm FSD-dominates alternatives across quality and cost dimensions before committing the full traffic budget.
@@ -243,10 +245,10 @@ _Context_: An AI agent or orchestration layer must decide whether to invoke an e
 
 _Context_: An agent holds an ambiguous instruction and must decide whether to ask a clarifying question or proceed on its best reading. Each question costs user patience; a wrong assumption costs a wasted trajectory.
 
-1. **Score each candidate question by EVPI** (#4), not by how uncertain the agent feels. The value of a question is the expected improvement in the *action*, so a question whose answers all lead to the same next step has zero value however uncertain the agent is. Penalize by an asking cost to suppress redundant questions — EVPI-scored clarification cut question count 1.5–2.7x at higher task success than uncertainty-threshold baselines (Suri et al., arXiv:2511.08798).
+1. **Score each candidate question by EVSI** (#4) using its answer likelihoods, priors and action utilities; use EVPI only as an upper bound unless the answer reveals the full relevant state. The value of a question is the expected improvement in the *action*, so a question whose answers all lead to the same next step has zero value however uncertain the agent is. Compare with utility-compatible asking cost. Paper-specific EVPI-based surrogate scores are not exact EVSI; EVPI-scored clarification cut question count 1.5–2.7 times with higher ambiguous-task coverage on the study-specific ClarifyBench evaluation ([Suri et al., arXiv:2511.08798, §7 and Table 2](https://arxiv.org/html/2511.08798)).
 2. **Separate specification uncertainty from model uncertainty.** Only the first is fixable by asking. Ambiguity about what the user wants is a question; ambiguity about whether the agent's own output is correct is a verification or retrieval step, and asking the user will not resolve it.
-3. **Treat EVPI as decaying with trajectory position** — this is the main departure from single-shot VoI. Question value is not stationary over a long-horizon task: goal-level clarification decays to baseline value after roughly the first 10% of execution, while input-level clarification stays useful to about the 50% mark. Past the midpoint, asking performs *worse* than never asking, because the cost of rework already sunk exceeds the information gain (Gulati et al., arXiv:2605.07937, ~6,000 runs across 4 models).
-4. **Budget the asking rate explicitly.** Frontier models fail this in both directions — over-asking in 52% of sessions or suppressing questions entirely. Front-load goal questions before acting, allow input questions mid-trajectory, and commit after the midpoint rather than asking late.
+3. **Model timing as part of VoI.** Rework cost can reduce a question's value after execution begins, but the decay curve depends on task, ambiguity type, benchmark, and model. Gulati et al. (arXiv:2605.07937) tested 84 forced-injection variants across three benchmarks and four models in more than 6,000 runs; their 10% and 50% injection positions are experimental grid points, not universal deadlines.
+4. **Budget asking explicitly and measure locally.** Front-load high-impact goal questions when rework is costly, but keep asking available whenever a possible answer changes the safe or authorized action. The paper's natural-asking results used 300 sessions; the reported 52% over-asking figure applies to GPT-5.2 on 100 TAC sessions, not to frontier models as a class.
 
 ---
 
@@ -254,10 +256,11 @@ _Context_: An agent holds an ambiguous instruction and must decide whether to as
 
 1. Identify the decision structure: risky choice, ambiguous probabilities, sequential learning, or multi-objective ranking.
 2. Use the [Decision Checklist](#decision-checklist) to select the applicable primitive(s).
-3. Open the per-primitive playbook in [`assets/templates/decision-theory/`](assets/templates/decision-theory/) for the full definition, inputs, outputs, failure modes, and worked example.
-4. For compound decisions, use the [Composition Recipes](#composition-recipes) to stack primitives.
-5. Verify inputs: probability estimates, utility function parameters, and criteria weights are the most common failure points.
-6. Disclose assumptions explicitly before acting on any MCDA ranking or EU calculation.
+3. For a small finite action-by-state matrix, copy a case from [`data/finite-state-decision-fixtures.json`](data/finite-state-decision-fixtures.json), edit its `input`, and run `python3 scripts/decision_calculator.py model.json`. Omit `prior` for minimax regret alone; add explicit `signal_likelihoods` and `study_cost` for exact finite-signal EVSI. Read the [input, calculation, and interpretation contract](references/finite-state-calculator.md) before using the result.
+4. Open the per-primitive playbook in [`assets/templates/decision-theory/`](assets/templates/decision-theory/) for the full definition, inputs, outputs, failure modes, and worked example.
+5. For compound decisions, use the [Composition Recipes](#composition-recipes) to stack primitives.
+6. Verify inputs: probability estimates, utility function parameters, and criteria weights are the most common failure points.
+7. Disclose assumptions explicitly before acting on any MCDA ranking or EU calculation.
 
 ---
 
@@ -278,11 +281,15 @@ Single-agent decision under uncertainty
 
 ## Navigation
 
+- Practical completion contract and known-answer controls: [references/practical-contract.md](references/practical-contract.md).
+
 - Per-primitive playbooks: [`assets/templates/decision-theory/`](assets/templates/decision-theory/) (one file per primitive)
 - Composition guide and selection matrix: [`assets/templates/decision-theory/README.md`](assets/templates/decision-theory/README.md)
 - Formal theory map: [`references/formal-theory-map.md`](references/formal-theory-map.md)
 - Patterns, scenarios, and traps: [`references/patterns-scenarios-traps.md`](references/patterns-scenarios-traps.md)
 - Domain-agnostic primitives overview, anti-patterns by decision structure, and checklist: [`references/primitives-overview.md`](references/primitives-overview.md)
+- Finite-state calculator contract and interpretation: [`references/finite-state-calculator.md`](references/finite-state-calculator.md)
+- Exact calculator fixtures: [`data/finite-state-decision-fixtures.json`](data/finite-state-decision-fixtures.json)
 - Sources: [`data/sources.json`](data/sources.json)
 
 ---
@@ -320,14 +327,14 @@ This skill is a self-contained foundations primitive. Cross-link only to other `
 - DFL via Dual Surrogates: Rodriguez-Diaz et al. (NeurIPS 2025). arXiv:2511.04909. [Primitive #4]
 - Multi-LLM selection via contextual bandits: Poon, Dai, Liu, Kong, Lui, Zuo (arXiv:2506.17670, June 2025). LinUCB routing across LLM backends with sublinear regret under unstructured context evolution. [Primitive #10; app-builder recipe]
 - Decision-Centric Design for LLM Systems: Sun (arXiv:2604.00414, April 2026). Separates the decision layer from generation in LLM systems; formalizes VoI gating and clarify-or-commit tradeoffs as explicit decision problems. [Primitive #4; app-builder recipe]
-- EVPI-scored agent clarification: Suri, Mathur, Lipka, Dernoncourt, Rossi, Manocha (arXiv:2511.08798, Nov 2025, rev. Apr 2026). SAGE-Agent; cost-penalized EVPI over candidate questions; 1.5–2.7x fewer questions at higher success. [Primitive #4; clarify-or-commit recipe]
-- Clarification timing decay: Gulati, Gupta, Lumer, Sen, Subbiah (arXiv:2605.07937, May 2026). ~6,000 runs, 4 dimensions, 3 benchmarks, 4 frontier models. Goal-clarification value decays by ~10% of execution, input by ~50%; asking past the midpoint underperforms never asking. [Primitive #4; clarify-or-commit recipe]
-- MCDA rank-reversal prevalence: Cabral et al. (arXiv:2508.00129, July 2025, rev. Aug 2026). Operationalizes Wang–Triantaphyllou RRT1–RRT3 in Scikit-Criteria; RRT3 fails in ~48% and RRT2 in ~14.8% of audited published pipelines. [Primitive #5; misuse boundaries]
+- EVPI-scored agent clarification: Suri, Mathur, Lipka, Dernoncourt, Rossi, Manocha (arXiv:2511.08798, Nov 2025, rev. Apr 2026). SAGE-Agent; cost-penalized EVPI over candidate questions; 1.5–2.7 times fewer questions on ClarifyBench with higher ambiguous-task coverage (study-specific results, §7 and Table 2). [Primitive #4; clarify-or-commit recipe]
+- Clarification timing: Gulati, Gupta, Lumer, Sen, Subbiah (arXiv:2605.07937, May 2026). More than 6,000 forced-injection runs across 84 variants, 3 benchmarks, and 4 models, plus 300 natural-asking sessions. Timing effects vary by benchmark, ambiguity dimension, and model; the tested 10%/50% positions are not general policy cutoffs. [Primitive #4; clarify-or-commit recipe]
+- MCDA rank-reversal prevalence: Cabral et al. (arXiv:2508.00129, July 2025, rev. Aug 2026). Operationalizes Wang–Triantaphyllou RRT1–RRT3 in Scikit-Criteria; RRT3 fails in ~48% and RRT2 in ~14.8% of the study's 27 selected published pipeline/dataset combinations (§7.2 and §8; not population prevalence). [Primitive #5; misuse boundaries]
 - LLM vs. superforecaster calibration: Bastani, Kučinskas, Reynolds (Forecasting Research Institute, ForecastBench). Superforecasters ahead by 0.017 Brier points as of 2026-01-29; extrapolated parity Nov 2026 (95% CI Jan 2026 – Nov 2027). Verify the current leaderboard before citing the gap — it is a moving number. [Elicitation Failure Modes]
 - Numeric thresholds (e.g., EVSI formulas, CE approximations) should be verified against primary sources before citing in decisions.
 
 ## Learnings Loop
 
-Before applying this skill on a non-trivial task, read `learnings.consolidated.md` in this directory (and `learnings.md` if present).
+When prior decisions or pitfalls are relevant, consult `learnings.consolidated.md` if present; use `learnings.md` only for needed history or as the available fallback. Otherwise skip both.
 
 After applying it, if you encountered a pattern worth remembering, a mistake worth preventing, or a domain fact that surprised you, append one dated bullet to `learnings.md` via `agents-skills-feedback-loop/scripts/append_learning.py`. Do not modify `SKILL.md` itself.
