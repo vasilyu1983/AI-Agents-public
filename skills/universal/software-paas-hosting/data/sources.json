@@ -1,0 +1,281 @@
+{
+  "metadata": {
+    "title": "PaaS Hosting Primary Sources",
+    "description": "Primary docs to verify volatile PaaS hosting facts before giving current limits, pricing, or maturity advice.",
+    "last_updated": "2026-09-28",
+    "skill": "software-paas-hosting"
+  },
+  "sources": [
+    {
+      "name": "Vercel function duration",
+      "platform": "Vercel",
+      "topic": "function duration and Fluid Compute",
+      "url": "https://vercel.com/docs/functions/configuring-functions/duration"
+    },
+    {
+      "name": "Vercel Queues",
+      "platform": "Vercel",
+      "topic": "Queues maturity, retries, durability, and limits",
+      "url": "https://vercel.com/docs/queues"
+    },
+    {
+      "name": "Cloudflare Workers limits",
+      "platform": "Cloudflare Workers",
+      "topic": "CPU limits, subrequest caps, wall-clock duration, cron, queue, and Durable Object alarm duration",
+      "url": "https://developers.cloudflare.com/workers/platform/limits/"
+    },
+    {
+      "name": "Cloudflare Workers subrequest limit changelog",
+      "platform": "Cloudflare Workers",
+      "topic": "Feb 2026 change removing the 1,000-subrequest cap; current free vs. paid defaults",
+      "url": "https://developers.cloudflare.com/changelog/post/2026-02-11-subrequests-limit/"
+    },
+    {
+      "name": "Vercel extended max duration",
+      "platform": "Vercel",
+      "topic": "beta 30-minute function duration, supported runtimes, and GA 800s ceiling",
+      "url": "https://vercel.com/docs/functions/configuring-functions/duration"
+    },
+    {
+      "name": "Cloudflare Queues",
+      "platform": "Cloudflare Workers",
+      "topic": "queue delivery, retries, and dead-letter queues",
+      "url": "https://developers.cloudflare.com/queues/"
+    },
+    {
+      "name": "Cloudflare Durable Objects",
+      "platform": "Cloudflare Workers",
+      "topic": "stateful edge coordination and WebSocket/session patterns",
+      "url": "https://developers.cloudflare.com/durable-objects/"
+    },
+    {
+      "name": "Deno Deploy",
+      "platform": "Deno Deploy",
+      "topic": "current platform, runtime support, regions, queues",
+      "url": "https://docs.deno.com/deploy/"
+    },
+    {
+      "name": "Deno Deploy Classic migration",
+      "platform": "Deno Deploy",
+      "topic": "Deploy Classic shutdown and migration changes",
+      "url": "https://docs.deno.com/deploy/migration_guide/"
+    },
+    {
+      "name": "Fly Managed Postgres",
+      "platform": "Fly.io",
+      "topic": "Managed Postgres support, backups, HA, regions, pricing, and gaps",
+      "url": "https://fly.io/docs/mpg/"
+    },
+    {
+      "name": "Fly Machines",
+      "platform": "Fly.io",
+      "topic": "Machines, autostart, autostop, and container runtime behavior",
+      "url": "https://fly.io/docs/machines/"
+    },
+    {
+      "name": "Railway pricing plans",
+      "platform": "Railway",
+      "topic": "pricing plans, resource usage, credits, and tier positioning",
+      "url": "https://docs.railway.com/pricing/plans"
+    },
+    {
+      "name": "Render web services",
+      "platform": "Render",
+      "topic": "web services, sleep behavior, health checks, and runtime limits",
+      "url": "https://render.com/docs/web-services"
+    },
+    {
+      "name": "Render free instances",
+      "platform": "Render",
+      "topic": "free instance limits, sleep behavior, and production suitability",
+      "url": "https://render.com/docs/free"
+    },
+    {
+      "name": "Render background workers",
+      "platform": "Render",
+      "topic": "background worker behavior",
+      "url": "https://render.com/docs/background-workers"
+    },
+    {
+      "name": "Render cron jobs",
+      "platform": "Render",
+      "topic": "scheduled job behavior",
+      "url": "https://render.com/docs/cronjobs"
+    },
+    {
+      "name": "Northflank docs",
+      "platform": "Northflank",
+      "topic": "containers, jobs, add-ons, environments, and pricing",
+      "url": "https://northflank.com/docs/"
+    },
+    {
+      "name": "Koyeb instances",
+      "platform": "Koyeb",
+      "topic": "instances, free instance limits, scaling, and production suitability",
+      "url": "https://www.koyeb.com/docs/reference/instances"
+    },
+    {
+      "name": "Amazon Bedrock AgentCore overview",
+      "platform": "AWS",
+      "topic": "AgentCore service surface and production agent hosting capabilities",
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html"
+    },
+    {
+      "name": "Amazon Bedrock AgentCore Runtime",
+      "platform": "AWS",
+      "topic": "Runtime framework support, session isolation, duration, streaming, and payload handling",
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/agents-tools-runtime.html"
+    },
+    {
+      "name": "Amazon Bedrock AgentCore pricing",
+      "platform": "AWS",
+      "topic": "AgentCore billing dimensions by compute/platform version",
+      "url": "https://aws.amazon.com/bedrock/agentcore/pricing/"
+    },
+    {
+      "name": "Heroku sustaining engineering update",
+      "platform": "Heroku",
+      "topic": "vendor status (sustaining engineering model)",
+      "url": "https://www.heroku.com/blog/an-update-on-heroku/"
+    },
+    {
+      "name": "Netlify pricing",
+      "platform": "Netlify",
+      "topic": "credit-based plans",
+      "url": "https://www.netlify.com/pricing/"
+    },
+    {
+      "name": "DigitalOcean App Platform",
+      "platform": "DigitalOcean",
+      "topic": "component types and build methods",
+      "url": "https://docs.digitalocean.com/products/app-platform/"
+    },
+    {
+      "name": "Cloud Run overview",
+      "platform": "Google Cloud Run",
+      "topic": "services, jobs, worker pools, GPU",
+      "url": "https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run"
+    },
+    {
+      "name": "AWS App Runner availability change",
+      "platform": "AWS App Runner",
+      "topic": "closed to new customers; ECS Express Mode migration",
+      "url": "https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html"
+    },
+    {
+      "name": "Coolify introduction",
+      "platform": "Coolify",
+      "topic": "open-source self-hostable PaaS",
+      "url": "https://coolify.io/docs/get-started/introduction"
+    },
+    {
+      "name": "Kamal",
+      "platform": "Kamal",
+      "topic": "Docker deploys over SSH",
+      "url": "https://kamal-deploy.org/"
+    },
+    {
+      "name": "Dokku installation",
+      "platform": "Dokku",
+      "topic": "single-server open-source PaaS",
+      "url": "https://dokku.com/docs/getting-started/installation/"
+    },
+    {
+      "name": "Cloudflare Containers pricing",
+      "platform": "Cloudflare Workers",
+      "topic": "Containers billing: active CPU, provisioned memory/disk",
+      "url": "https://developers.cloudflare.com/containers/pricing/"
+    },
+    {
+      "name": "Vercel Services",
+      "platform": "Vercel",
+      "topic": "multi-service routing, bindings, and container builds",
+      "url": "https://vercel.com/docs/services",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "Vercel container images",
+      "platform": "Vercel",
+      "topic": "container build execution on Vercel Functions",
+      "url": "https://vercel.com/docs/functions/container-images",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "Vercel WebSocket support",
+      "platform": "Vercel",
+      "topic": "connection duration and external durable state on reconnect",
+      "url": "https://vercel.com/kb/guide/do-vercel-serverless-functions-support-websocket-connections",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "Vercel Services billing",
+      "platform": "Vercel",
+      "topic": "compute billing units and service-specific limits",
+      "url": "https://vercel.com/docs/services/pricing",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "Render Workflows",
+      "platform": "Render",
+      "topic": "per-task instances, chaining, retries, and workload limitations",
+      "url": "https://render.com/docs/workflows",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "Render task retries",
+      "platform": "Render",
+      "topic": "task retry and chaining semantics",
+      "url": "https://render.com/docs/workflows-defining",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "Modal GPU acceleration",
+      "platform": "Modal",
+      "topic": "GPU configuration and supported workload shapes",
+      "url": "https://modal.com/docs/guide/gpu",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "Modal scaling",
+      "platform": "Modal",
+      "topic": "scale-to-zero and warm container controls",
+      "url": "https://modal.com/docs/guide/scale",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "Modal cold starts",
+      "platform": "Modal",
+      "topic": "warm capacity cost versus cold-start latency",
+      "url": "https://modal.com/docs/guide/cold-start",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "AgentCore microVM platform versions",
+      "platform": "AWS",
+      "topic": "V1/V2 platform selection and snapshot startup",
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-how-it-works.html",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "AgentCore V2 initialization",
+      "platform": "AWS",
+      "topic": "snapshot-safe startup and per-request freshness",
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-v2-optimize.html",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "AgentCore WebSocket",
+      "platform": "AWS",
+      "topic": "WebSocket endpoint, authentication, and session contract",
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-get-started-websocket.html",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "name": "AgentCore quotas",
+      "platform": "AWS",
+      "topic": "invocation payload, chunks, WebSocket frames, and session duration are separate limits",
+      "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/bedrock-agentcore-limits.html",
+      "last_verified": "2026-09-28"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+---
+description: Applied patterns, scenarios, anti-patterns, and known traps for decision-theory foundations.
+status: stable
+---
+
+# Decision Theory Patterns, Scenarios, and Traps
+
+## Use Patterns
+
+| Pattern | Use When | Stack |
+|---|---|---|
+| Launch gate | Need go/no-go under uncertainty | EU -> risk aversion -> VoI |
+| Research approval | Team wants an experiment first | EVPI -> EVSI -> study cost |
+| Roadmap ranking | Multiple criteria compete | MCDA -> sensitivity -> real options |
+| Ambiguous market bet | Probabilities are disputed | Minimax regret -> scenario analysis |
+| Adaptive allocation | Options reveal performance over time and in-test reward matters | Bandit -> guardrails -> expected-loss stop |
+| Pick the winner | Commit to one variant after a test | BAI or fixed allocation -> expected loss < ε -> guardrail check |
+| Probability to action | A calibrated score must trigger approve/block/defer | Cost threshold -> prevalence check -> abstention band |
+| New policy from logs | Router/ranker change before rollout | Logged propensities -> IPS/SNIPS/DR -> online confirmation |
+| Deep uncertainty | Probabilities unknowable; large or high-dimensional scenario space | RDM (Lempert 2003) → scenario discovery (PRIM) → strategy robustness check |
+| Multi-stage adaptive planning | Long-horizon decisions with observable threshold-crossings across > 2 stages | DAPP (Haasnoot 2013) → pathway map → tipping-point triggers |
+| Clarify or commit | An agent holds an ambiguous instruction mid-trajectory | Signal-model EVSI per candidate question; EVPI as upper bound → specification-vs-model uncertainty split → trajectory-position decay check |
+
+## Known Traps
+
+- Expected value is not expected utility.
+- EVPI is an upper bound; most real studies have lower EVSI. EVPI above cost never approves a study.
+- MCDA rankings can reverse under small weight changes. Separately and more seriously, they can reverse when the *alternative set* changes with weights fixed — an audit of published MCDM pipelines found the recomposition test (RRT3) failing in ~48% of cases (Cabral et al. 2025/2026). Weight sensitivity needs disclosure; an RRT2/RRT3 failure invalidates the ranking.
+- Real options require uncertainty to resolve before the option expires.
+- Bandits optimize measured reward, not necessarily product quality or fairness.
+- Stochastic dominance avoids specifying utility only under the relevant dominance order.
+- **A simple regret matrix requires a finite, enumerable state space; minimax regret itself also has continuous-state formulations.** For high-dimensional deep uncertainty where the scenario space cannot be fully enumerated, use the RDM scenario-discovery approach (Lempert et al. 2003) instead of a regret matrix.
+- **Info-gap note:** When no reference distribution and no enumerable state space exist (severe uncertainty), info-gap theory (Ben-Haim 2006) seeks the action that maximises robustness to uncertainty while meeting a satisficing threshold. Note: the framework has been critiqued as a variant of maximin (Sniedovich 2010/2011); evaluate carefully before use.
+- **Dynamic-process note:** positive arithmetic expected returns need not imply positive long-run log growth. Model repeated wealth transitions and constraints; expected utility can handle dynamic terminal/path outcomes and log-growth is a distinct objective, as explained in SKILL.md.
+
+## Exit Checklist
+
+- [ ] Action set and state space are explicit.
+- [ ] Probability source is named.
+- [ ] Utility/loss function is stated.
+- [ ] Experiment value is compared with experiment cost.
+- [ ] MCDA weights have sensitivity analysis.
+- [ ] Sequential policies have guardrails and stopping rules.

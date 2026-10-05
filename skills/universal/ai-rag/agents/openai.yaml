@@ -1,0 +1,4 @@
+interface:
+  display_name: "RAG & Retrieval Engineering"
+  short_description: "Designs RAG retrieval: chunking, hybrid search, reranking, GraphRAG, eval"
+  default_prompt: "Use $ai-rag to design retrieval for LLM grounding: chunking, BM25+vector hybrid, reranking, GraphRAG. Use when adding embeddings to SQLite FTS5 search or running held-out retrieval eval."

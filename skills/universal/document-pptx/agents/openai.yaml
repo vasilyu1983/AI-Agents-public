@@ -1,0 +1,4 @@
+interface:
+  display_name: "PPTX Automation"
+  short_description: "Builds and edits PowerPoint slide decks from pptx templates"
+  default_prompt: "Use $document-pptx to inspect pptx templates and notes, inventory layouts, fill designer-owned decks with PPTX-Automizer, repair decks, or review deck accessibility."

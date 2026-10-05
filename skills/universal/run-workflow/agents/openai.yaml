@@ -1,0 +1,6 @@
+interface:
+  display_name: "Run Workflow"
+  short_description: "Launches a saved multi-agent workflow by id on Claude Code or Codex"
+  default_prompt: "Use $run-workflow to launch a saved multi-agent workflow by id on Claude Code or Codex when the user asks to run a saved workflow or review loop."
+policy:
+  allow_implicit_invocation: false

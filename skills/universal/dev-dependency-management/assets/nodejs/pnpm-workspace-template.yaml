@@ -1,0 +1,25 @@
+# pnpm-workspace.yaml
+# Baseline for pnpm workspaces and build-script controls.
+
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "libs/*"
+  - "tools/*"
+  - "!**/dist/**"
+  - "!**/node_modules/**"
+
+# pnpm 11+ defaults (pnpm.io/blog/releases/11.0, pnpm.io/settings/build; re-check for your pnpm version):
+# - minimumReleaseAge defaults to 1440 minutes (24 h); set it only to raise it.
+# - strictDepBuilds defaults to true: an unlisted dependency build script fails the install.
+# - onlyBuiltDependencies / ignoredBuiltDependencies / ignoreDepScripts were REMOVED
+#   in pnpm 11; pnpm 12 errors or warns on unrecognized workspace settings.
+# minimumReleaseAge: 4320   # optional: 3 days for high-sensitivity repos
+
+# Allowlist of dependencies that may run install/build scripts (map of
+# package matcher -> boolean). Unlisted packages are not allowed to build.
+# Populate with real packages used by the repo; false records a reviewed "no".
+allowBuilds:
+  esbuild: true
+  sharp: true
+  # core-js: false

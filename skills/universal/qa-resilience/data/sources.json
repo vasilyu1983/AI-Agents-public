@@ -1,0 +1,493 @@
+{
+  "metadata": {
+    "skill": "qa-resilience",
+    "updated": "2026-09-28",
+    "version": "3.5",
+    "total_sources": 46,
+    "description": "Primary-source catalog for resilience engineering: deadlines, retries, hedging, overload protection, chaos testing, mesh policies, resilience telemetry, SLO-as-code, and AI/LLM failure modes.",
+    "title": "QA Resilience - Sources",
+    "last_updated": "2026-09-28"
+  },
+  "categories": {
+    "reliability_foundations": [
+      {
+        "name": "AWS Well-Architected - Reliability Pillar",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html",
+        "type": "documentation",
+        "relevance": "Primary source for failure isolation, recovery, and reliability design principles.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Embracing Risk",
+        "url": "https://sre.google/sre-book/embracing-risk/",
+        "type": "documentation",
+        "relevance": "Foundational framing for SLOs, error budgets, and reliability tradeoffs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Handling Overload",
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "type": "documentation",
+        "relevance": "Primary source for overload behavior, admission control, graceful rejection, and per-customer quota / in-flight isolation limits.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Addressing Cascading Failures",
+        "url": "https://sre.google/sre-book/addressing-cascading-failures/",
+        "type": "documentation",
+        "relevance": "Primary source for retries, backoff, fail-fast behavior, anti-amplification patterns, server-side deadline enforcement, deadline/cancellation propagation, bimodal latency, and the always-go-downward intra-layer rule.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Workbook - Alerting on SLOs",
+        "url": "https://sre.google/workbook/alerting-on-slos/",
+        "type": "documentation",
+        "relevance": "Primary source for multi-window burn-rate alerting and release or ops guardrails.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Bronson, Aghayev, Charapko, Zhu - Metastable Failures in Distributed Systems (HotOS 2021)",
+        "url": "https://sigops.org/s/conferences/hotos/2021/papers/hotos21-s11-bronson.pdf",
+        "type": "paper",
+        "relevance": "Defines the metastable-failure class (self-sustaining feedback loops that outlive their trigger) distinct from ordinary cascading failures; foundational reading for cascading-failure-prevention.md's metastable-failures section. Verified real and publicly available 2026-07-11.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "optional": true
+      },
+      {
+        "name": "AWS Message - Summary of the Amazon Kinesis Event in the Northern Virginia (us-east-1) Region",
+        "url": "https://aws.amazon.com/message/11201/",
+        "type": "postmortem",
+        "relevance": "Primary source for the Kinesis 2020 outage duration and root cause used as a cascading-failure case study.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Huang, Bhagwan, Liang et al. - Metastable Failures in the Wild (OSDI 2022)",
+        "url": "https://www.usenix.org/conference/osdi22/presentation/huang-lexiang",
+        "type": "paper",
+        "relevance": "Field study of metastable failures across cloud providers; source for the '>=4 of 15 major AWS outages' and '22 incidents / 11 organizations' figures.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "rpc_and_client_resilience": [
+      {
+        "name": "gRPC Deadlines Guide",
+        "url": "https://grpc.io/docs/guides/deadlines/",
+        "type": "documentation",
+        "relevance": "Primary source for deadline propagation and timeout ownership across RPC boundaries.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "gRPC Retry Guide",
+        "url": "https://grpc.io/docs/guides/retry/",
+        "type": "documentation",
+        "relevance": "Primary source for retry policy, retry throttling, and retry observability in gRPC.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "gRPC Request Hedging Guide",
+        "url": "https://grpc.io/docs/guides/request-hedging/",
+        "type": "documentation",
+        "relevance": "Primary source for when and how to use hedging to reduce tail latency safely.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Microsoft .NET HTTP Resilience",
+        "url": "https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience",
+        "type": "documentation",
+        "relevance": "Primary source for modern .NET resilience handlers and shared outbound HTTP policy composition.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Polly Documentation",
+        "url": "https://www.pollydocs.org/",
+        "type": "documentation",
+        "relevance": "Primary source for resilience pipeline concepts including timeout, retry, breaker, rate limiting, and hedging.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Finagle Clients Guide - Retries and RetryBudget",
+        "url": "https://twitter.github.io/finagle/guide/Clients.html",
+        "type": "documentation",
+        "relevance": "Primary source for request-proportional retry tokens, per-second floor and expiry; look up deployed-release defaults.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Netflix concurrency-limits",
+        "url": "https://github.com/Netflix/concurrency-limits",
+        "type": "repository",
+        "relevance": "Primary source for adaptive (TCP congestion-control style) concurrency limiters: Vegas, Gradient2, and AIMD limit algorithms.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "patterns_and_specs": [
+      {
+        "name": "Martin Fowler - Circuit Breaker",
+        "url": "https://martinfowler.com/bliki/CircuitBreaker.html",
+        "type": "reference",
+        "relevance": "Canonical pattern description for circuit breakers.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Microsoft Azure Architecture - Retry Pattern",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/retry",
+        "type": "documentation",
+        "relevance": "Retry guidance for transient failures, backoff, jitter, and idempotency.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Microsoft Azure Architecture - Circuit Breaker Pattern",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker",
+        "type": "documentation",
+        "relevance": "Circuit breaker guidance for preventing cascading failures.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Microsoft Azure Architecture - Bulkhead Pattern",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead",
+        "type": "documentation",
+        "relevance": "Bulkhead guidance for isolation and resource exhaustion prevention.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Resilience4j Documentation",
+        "url": "https://resilience4j.readme.io/",
+        "type": "documentation",
+        "relevance": "Primary Java reference for circuit breaker, retry, bulkhead, rate limiter, and time limiter patterns.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Michael T. Nygard - Release It! (2nd ed.)",
+        "url": "https://pragprog.com/titles/mnee2/release-it-second-edition/",
+        "type": "book",
+        "relevance": "Origin source for the stability-patterns vocabulary this skill builds on (circuit breaker, bulkhead, timeouts, fail fast, steady state).",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false,
+        "optional": true
+      },
+      {
+        "name": "Stripe API - Idempotent Requests",
+        "url": "https://docs.stripe.com/api/idempotent_requests",
+        "type": "documentation",
+        "relevance": "Primary request idempotency semantics; replay response header is documented separately in error-low-level#idempotency.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "ISO/IEC 27002:2022 control text and correspondence table",
+        "url": "https://www.educacao.pr.gov.br/sites/default/arquivos_restritos/files/documento/2025-08/sd_iso_27002_controles_seguranca_informacao.pdf",
+        "type": "documentation",
+        "relevance": "ISO primary text, controls 5.29/5.30 and Table B.1, for continuity-control numbering and mapping from 2013; reproduced on a government site.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "gateway_and_mesh": [
+      {
+        "name": "Envoy Adaptive Concurrency Filter",
+        "url": "https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/adaptive_concurrency_filter",
+        "type": "documentation",
+        "relevance": "Primary source for adaptive concurrency and latency-based load protection in shared infrastructure.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Envoy Outlier Detection",
+        "url": "https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/outlier",
+        "type": "documentation",
+        "relevance": "Primary source for passive health, endpoint ejection, and bad-host containment.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "chaos_engineering": [
+      {
+        "name": "Principles of Chaos Engineering",
+        "url": "https://principlesofchaos.org/",
+        "type": "principles",
+        "relevance": "Core chaos methodology: steady state, hypothesis, experiment design, and safe execution.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "AWS Fault Injection Service (FIS)",
+        "url": "https://docs.aws.amazon.com/fis/latest/userguide/what-is.html",
+        "type": "documentation",
+        "relevance": "Managed fault injection with action-specific targets, experiment templates and stop conditions. Use the actions and scenario references to check supported resources and resolved target coverage.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Azure Chaos Studio",
+        "url": "https://learn.microsoft.com/en-us/azure/chaos-studio/chaos-studio-overview",
+        "type": "documentation",
+        "relevance": "Managed Azure fault experiments. Check supported capabilities, Workspaces availability and pricing before choosing the deployment workflow.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Chaos Toolkit Documentation",
+        "url": "https://chaostoolkit.org/",
+        "type": "documentation",
+        "relevance": "Open-source experiment framework for deterministic and staged resilience testing.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "LitmusChaos Documentation",
+        "url": "https://docs.litmuschaos.io/",
+        "type": "documentation",
+        "relevance": "Kubernetes chaos workflows and installation paths. Look up installed-release CRD/workflow support and release status rather than assuming a pinned format.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Shopify Toxiproxy",
+        "url": "https://github.com/Shopify/toxiproxy",
+        "type": "documentation",
+        "relevance": "TCP fault proxy for latency, bandwidth and resets. Select a reviewed release/digest from the repository releases before deployment.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Chaos Mesh Documentation",
+        "url": "https://chaos-mesh.org",
+        "type": "documentation",
+        "relevance": "CNCF Kubernetes chaos engineering platform using CRDs for network, pod, and stress faults.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "LitmusChaos Home",
+        "url": "https://litmuschaos.io",
+        "type": "documentation",
+        "relevance": "CNCF Kubernetes chaos engineering with a pre-built experiment hub and GameDay workflow engine.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Gremlin Documentation",
+        "url": "https://www.gremlin.com",
+        "type": "documentation",
+        "relevance": "Commercial fault experimentation; look up supported injection modes, approval features and subscription before selecting it.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Gremlin Failure Flags",
+        "url": "https://www.gremlin.com/docs/failure-flags-overview",
+        "type": "documentation",
+        "relevance": "Application fault injection using named SDK points or a configured proxy. Check installed SDK language support, enablement and return-value handling.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Steadybit Documentation",
+        "url": "https://docs.steadybit.com/",
+        "type": "documentation",
+        "relevance": "Modern resilience experimentation platform and safe rollout guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "AWS FIS Actions Reference",
+        "url": "https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html",
+        "type": "documentation",
+        "relevance": "Authoritative list of real FIS action IDs; used to correct fabricated action IDs in chaos-tooling-recipes.md.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "failure-flags-go README",
+        "url": "https://github.com/gremlin/failure-flags-go",
+        "type": "documentation",
+        "relevance": "Primary source for the Failure Flags Go SDK's Invoke() function signature.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "kubernetes_and_platform": [
+      {
+        "name": "Kubernetes - Liveness, Readiness, Startup Probes",
+        "url": "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/",
+        "type": "documentation",
+        "relevance": "Primary source for probe behavior and configuration in resilient deployments.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "telemetry_and_semantics": [
+      {
+        "name": "OpenTelemetry HTTP Semantic Conventions",
+        "url": "https://opentelemetry.io/docs/specs/semconv/http/",
+        "type": "specification",
+        "relevance": "Primary source for HTTP telemetry naming including server/client attributes and error semantics.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "optional_ai_automation": [
+      {
+        "name": "NIST AI Risk Management Framework",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "type": "framework",
+        "relevance": "Optional governance baseline when using AI to generate scenarios or summarize resilience test results.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "slo_as_code": [
+      {
+        "name": "OpenSLO Specification",
+        "url": "https://github.com/OpenSLO/OpenSLO",
+        "type": "specification",
+        "relevance": "Vendor-agnostic open specification for declaring SLOs and error budgets in version-controlled YAML (openslo/v1 API). Enables SLO-as-code workflows with CI validation via the oslo CLI.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Sloth - Prometheus SLO Generator",
+        "url": "https://github.com/slok/sloth",
+        "type": "tooling",
+        "relevance": "Generates Prometheus SLI recording and burn-rate alert rules from an SLO spec. Look up installed-release input formats and deployment support.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Pyrra - SLO Management for Prometheus",
+        "url": "https://github.com/pyrra-dev/pyrra",
+        "type": "tooling",
+        "relevance": "Prometheus SLO management with recording rules and budget/burn-rate UI. Check installed-release deployment and CRD support.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "regulatory_operational_resilience": [
+      {
+        "name": "EU DORA - Regulation (EU) 2022/2554 (EUR-Lex)",
+        "url": "https://eur-lex.europa.eu/eli/reg/2022/2554/oj",
+        "type": "regulation",
+        "relevance": "Primary text for digital operational resilience testing programmes, threat-led penetration testing, and ICT third-party risk for in-scope EU financial entities. Scoping belongs to qualified counsel.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "FCA Handbook - SYSC 15A Operational resilience",
+        "url": "https://handbook.fca.org.uk/handbook/sysc15a",
+        "type": "regulation",
+        "relevance": "Primary UK rules for important business services, impact tolerances, mapping, scenario testing, and self-assessment (policy statement PS21/3). Scoping belongs to qualified counsel.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ]
+  }
+}

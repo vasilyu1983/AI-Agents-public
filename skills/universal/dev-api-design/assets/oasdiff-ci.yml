@@ -1,0 +1,70 @@
+name: API Breaking-Change Detection
+
+on:
+  pull_request:
+    paths:
+      - "openapi.yaml"
+      - "openapi/**"
+
+jobs:
+  oasdiff:
+    name: Detect breaking changes (oasdiff)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4  # pin to a commit SHA in production workflows
+        with:
+          fetch-depth: 0  # need full history to resolve base ref
+
+      - name: Install oasdiff (pinned release, checksum-verified)
+        shell: bash
+        env:
+          # Pin an exact release and bump it deliberately after reading the
+          # release notes: check https://github.com/oasdiff/oasdiff/releases.
+          OASDIFF_VERSION: "1.32.1"
+        run: |
+          asset="oasdiff_${OASDIFF_VERSION}_linux_amd64.tar.gz"
+          base_url="https://github.com/oasdiff/oasdiff/releases/download/v${OASDIFF_VERSION}"
+          curl -sSfLo "$asset" "$base_url/$asset"
+          curl -sSfLo checksums.txt "$base_url/checksums.txt"
+          grep " ${asset}\$" checksums.txt | sha256sum -c -
+          tar -xzf "$asset" oasdiff
+          sudo mv oasdiff /usr/local/bin/oasdiff
+
+      - name: Fetch base OpenAPI spec from the PR base branch
+        id: base
+        shell: bash
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          # Write to the file only when the base spec exists, so a missing
+          # base never leaves an empty file behind for oasdiff to compare.
+          if git cat-file -e "origin/${BASE_REF}:openapi.yaml" 2>/dev/null; then
+            git show "origin/${BASE_REF}:openapi.yaml" > /tmp/openapi-base.yaml
+            echo "has_base=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No openapi.yaml on ${BASE_REF} yet; skipping breaking-change check."
+            echo "has_base=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run breaking-change check
+        id: oasdiff
+        if: steps.base.outputs.has_base == 'true'
+        # `shell: bash` runs `bash -eo pipefail`; the default shell (`bash -e`)
+        # would let `tee` mask a non-zero oasdiff exit and the gate never fails.
+        shell: bash
+        run: |
+          set -o pipefail
+          oasdiff breaking /tmp/openapi-base.yaml openapi.yaml \
+            --format=text \
+            --fail-on ERR \
+            | tee /tmp/oasdiff-report.txt
+
+      - name: Post summary to PR
+        if: always() && steps.base.outputs.has_base == 'true'
+        shell: bash
+        run: |
+          echo "## API Breaking-Change Report" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          cat /tmp/oasdiff-report.txt >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "(no report produced)" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"

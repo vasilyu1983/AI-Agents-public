@@ -1,0 +1,4 @@
+interface:
+  display_name: "Decision Theory Foundations"
+  short_description: "Decides under uncertainty: VoI, thresholds, stopping, risk, robust choice"
+  default_prompt: "Use $foundations-decision-theory to decide whether more data or a question is worth it, set cost-based thresholds and abstention, stop a test and ship, or make risk-aware and robust choices."

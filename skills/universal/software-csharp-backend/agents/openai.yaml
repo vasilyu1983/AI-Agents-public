@@ -1,0 +1,4 @@
+interface:
+  display_name: "C# Backend"
+  short_description: "Sets C# and .NET backend standards for APIs, data, and workers."
+  default_prompt: "Use $software-csharp-backend to review or shape an ASP.NET Core API, EF Core or Dapper data access, or a .NET worker against the backend standards."

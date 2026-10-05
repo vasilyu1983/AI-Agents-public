@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "skill": "software-performance",
+    "updated": "2026-09-23",
+    "total_sources": 9,
+    "description": "Primary profiling and diagnosis sources. Load-testing and CI-budget sources live in qa-testing-performance.",
+    "title": "Software Performance - Sources",
+    "last_updated": "2026-09-23"
+  },
+  "categories": {
+    "frontend_and_observability": [
+      {
+        "name": "Web Vitals",
+        "url": "https://web.dev/articles/vitals",
+        "description": "Current guidance for LCP, INP, and CLS baselines.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenTelemetry",
+        "url": "https://opentelemetry.io/docs/",
+        "description": "Tracing and metrics instrumentation for performance diagnosis.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Chromium INP metric changelog",
+        "url": "https://chromium.googlesource.com/chromium/src/+/main/docs/speed/metrics_changelog/inp.md",
+        "description": "Authoritative record of INP measurement changes; check here instead of secondary 'CWV update' claims.",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LCP phase breakdown",
+        "url": "https://web.dev/articles/optimize-lcp",
+        "description": "Measure TTFB, resource load delay, load duration and render delay before ranking fixes.",
+        "add_as_web_search": false
+      }
+    ],
+    "profiling_and_load": [
+      {
+        "name": "async-profiler Releases",
+        "url": "https://github.com/async-profiler/async-profiler/releases",
+        "description": "JVM CPU/allocation/lock profiler. Use -e lock (or JFR lock events) for Java monitor contention; --nativelock covers native pthread locks only. Check the current release before recommending flags.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Go pprof",
+        "url": "https://pkg.go.dev/net/http/pprof",
+        "description": "Go CPU and memory profiling reference.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "py-spy",
+        "url": "https://github.com/benfred/py-spy",
+        "description": "Python production-safe sampling profiler.",
+        "add_as_web_search": true
+      },
+      {
+        "name": ".NET Diagnostics",
+        "url": "https://learn.microsoft.com/en-us/dotnet/core/diagnostics/",
+        "description": "CPU, memory, trace, and performance tooling for .NET.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Python standard-library profilers",
+        "url": "https://docs.python.org/3/library/profile.html",
+        "description": "Deterministic cProfile overhead and measurement limitations.",
+        "add_as_web_search": false
+      }
+    ]
+  }
+}

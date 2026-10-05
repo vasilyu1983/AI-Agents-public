@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "skill": "ops-nuke-cicd",
+    "title": "NUKE CI/CD - Sources",
+    "description": "Official sources for NUKE pipelines, modern .NET test execution, SDK container publishing, and CI output/provenance patterns",
+    "last_updated": "2026-07-11"
+  },
+  "official_documentation": [
+    {
+      "name": "NUKE Introduction",
+      "url": "https://nuke.build/docs/introduction/",
+      "description": "NUKE overview, build model, and core concepts",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NUKE GitHub Actions",
+      "url": "https://nuke.build/docs/cicd/github-actions/",
+      "description": "NUKE CI generation, artifacts, secrets, and GitHub-specific integration",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NUKE Logging",
+      "url": "https://nuke.build/docs/fundamentals/logging/",
+      "description": "NUKE logging files and output behavior for troubleshooting",
+      "add_as_web_search": true
+    }
+  ],
+  "testing_and_cli": [
+    {
+      "name": "dotnet test command",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-test",
+      "description": "Current CLI reference including artifacts-path, terminal logger, and test execution options",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Testing with dotnet test",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test",
+      "description": "Modern guidance for dotnet test with Microsoft.Testing.Platform mode in .NET 10",
+      "type": "docs",
+      "notes": "Primary source: VSTest is the default mode of `dotnet test` on .NET 10 SDK; MTP can be selected via `test.runner` in global.json. Newer SDKs may support a DOTNET_TEST_RUNNER environment override; check the installed SDK's runner-selection rules. TestingPlatformDotnetTestSupport is a separate legacy interop path.",
+      "accessed": "2026-05-17",
+      "verified": "2026-09-27",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Microsoft.Testing.Platform overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/microsoft-testing-platform-intro",
+      "description": "Platform overview, compatibility model, and execution options for MTP",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Microsoft.Testing.Platform in dotnet test VSTest mode",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/microsoft-testing-platform-integration-dotnet-test",
+      "description": "Compatibility-mode guidance and caveats when MTP is driven through dotnet test",
+      "add_as_web_search": true
+    },
+    {
+      "name": "global.json overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/global-json",
+      "description": "SDK pinning and test runner selection in .NET 10 via global.json",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Announcing .NET 10",
+      "url": "https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/",
+      "type": "blog",
+      "notes": ".NET 10 GA November 11 2025; LTS supported until November 10 2028. Source for version/date facts used in MTP and preflight guidance.",
+      "accessed": "2026-05-17"
+    },
+    {
+      "name": "MTP adoption across test frameworks",
+      "url": "https://devblogs.microsoft.com/dotnet/mtp-adoption-frameworks/",
+      "type": "blog",
+      "notes": "Framework adoption context only; use the official xUnit and TUnit documentation below for current runner support. VSTest remains the default dotnet-test mode on .NET 10.",
+      "accessed": "2026-05-17",
+      "verified": "2026-07-11"
+    },
+    {
+      "name": "NUKE issue #1584 — MTP support tracker",
+      "url": "https://github.com/nuke-build/nuke/issues/1584",
+      "type": "issue",
+      "notes": "Opened Dec 22 2025; issue documents VSTest-oriented NUKE test helpers and requests MTP support. Check the issue and installed NUKE helper API before using the workaround in test-platform-modes-and-cli.md.",
+      "accessed": "2026-05-17",
+      "verified": "2026-09-27"
+    },
+    {
+      "name": "xUnit.net v3 Microsoft Testing Platform guide",
+      "url": "https://xunit.net/docs/getting-started/v3/microsoft-testing-platform",
+      "type": "docs",
+      "notes": "xUnit v3 supports both MTP and VSTest; VSTest uses xunit.runner.visualstudio and Microsoft.NET.Test.Sdk.",
+      "verified": "2026-09-27"
+    },
+    {
+      "name": "TUnit troubleshooting and FAQ",
+      "url": "https://tunit.dev/docs/troubleshooting/",
+      "type": "docs",
+      "notes": "TUnit uses MTP rather than VSTest.",
+      "verified": "2026-09-27"
+    }
+  ],
+  "containers_and_ci": [
+    {
+      "name": "Containerize a .NET app with dotnet publish",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/containers/sdk-publish",
+      "description": "SDK-native container publishing with /t:PublishContainer, tarball output, and registry publishing",
+      "type": "docs",
+      "notes": "Source for chiseled image (ContainerFamily), non-root default (UID 1654), port 8080 default since .NET 8.",
+      "accessed": "2026-05-17",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Containerize a .NET app reference",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/containers/publish-configuration",
+      "description": "Container publish properties such as runtime identifiers, base images, and multi-arch behavior",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Workflow commands for GitHub Actions",
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands",
+      "description": "Environment files and step output contracts such as GITHUB_ENV and GITHUB_OUTPUT",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub Artifact Attestations",
+      "url": "https://docs.github.com/en/actions/concepts/security/artifact-attestations",
+      "type": "docs",
+      "notes": "attest-build-provenance action for SLSA build provenance on NuGet packages and container images. Source for attestation step patterns in ci-output-contracts-and-provenance.md.",
+      "accessed": "2026-05-17",
+      "add_as_web_search": true
+    },
+    {
+      "name": "microsoft/sbom-tool",
+      "url": "https://github.com/microsoft/sbom-tool",
+      "type": "docs",
+      "notes": "Microsoft SBOM generation tool. Source for SBOM target recipe in ci-output-contracts-and-provenance.md.",
+      "accessed": "2026-05-17",
+      "add_as_web_search": true
+    },
+    {
+      "name": "docker/build-push-action",
+      "url": "https://github.com/docker/build-push-action",
+      "description": "Structured digest outputs plus provenance and SBOM options for Docker image builds",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NuGet signed-package verification",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/nuget-signed-package-verification",
+      "type": "docs",
+      "notes": "Signature verification enabled by default on restore starting with .NET 8 SDK. Source for dotnet nuget verify guidance in execution-preflight-and-command-hygiene.md.",
+      "accessed": "2026-05-17",
+      "add_as_web_search": true
+    }
+  ]
+}

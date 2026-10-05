@@ -1,0 +1,4 @@
+interface:
+  display_name: "DevTools"
+  short_description: "Build a codemod, SDK, CLI, language server, or IDE extension"
+  default_prompt: "Use $software-devtools to write a codemod, SDK, CLI, language server (LSP), or IDE extension, and design package distribution. Route dependency audits and upgrade policy to dev-dependency-management."

@@ -1,0 +1,119 @@
+-- 011_quantize_rescore.sql
+-- HNSW expression index on binary_quantize(embedding) + two-pass rescore.
+--
+-- WHY: At the default tier (single-node, <100M vectors), storing raw float32
+-- vectors inflates RAM and increases ANN scan latency.  binary_quantize()
+-- compresses 32× (one bit per dimension), letting the HNSW graph-walk run
+-- over cheap bit comparisons (Hamming distance) while a second pass rescores
+-- the top-K candidates at full float32 precision to recover recall.
+-- The graph links do not shrink with the vectors, and the heap keeps the
+-- float32 copy for the rescore; size the index with the formula in
+-- references/production-runbook.md#hnsw-memory-sizing, not 1/32 of raw size.
+--
+-- SELECTION CRITERION: adopt when RAM or query-latency budgets are failing
+-- evals at the DEFAULT tier, before considering the scale-tier path in
+-- references/graph-theory-at-scale.md.  Do NOT adopt for:
+--   • corpora < ~100k vectors (premature optimization; see SKILL.md anti-pattern
+--     "ingesting tens of millions of vectors because storage is cheap")
+--   • embedding dimensions < ~512 (quantization noise dominates recall loss)
+--   • workloads already in the 100M+ scale tier (use graph-theory-at-scale.md)
+--
+-- RECALL-LOSS BUDGET: the :oversample multiplier is NOT a constant.  It MUST
+-- be measured on your labeled eval set (recall@k before vs after quantization).
+-- A common starting range is 4–10×, but your corpus distribution determines the
+-- right value.  Mirror spec intent: tune against the eval set, not a default.
+--
+-- APPROACH: EXPRESSION index (no extra materialized column, no UPDATE backfill).
+-- pgvector >= 0.7.0 required for binary_quantize() and bit_hamming_ops.
+-- See references/quantization-and-rescore.md for the full decision context.
+--
+-- Run EXPLAIN on your own install to confirm Pass 1 uses the partial index:
+-- the query vector must be a constant or parameter, and a competing b-tree on
+-- model_id can win on small tables.
+
+-- ---------------------------------------------------------------------------
+-- UP  — create HNSW expression index on binary_quantize(embedding)
+-- ---------------------------------------------------------------------------
+
+-- 1024 = N, the embedding dimension of embeddings.embedding in 001_schema.sql
+-- (the bundle default). If your model emits another dimension, change every
+-- vector(N)/bit(N) in 001, 003, 005 and this file together; take N from the
+-- model's documentation, not from memory.
+-- The expression binary_quantize(embedding)::bit(1024) is evaluated at index
+-- time and at query time; no extra column is stored or maintained.
+--
+-- One partial index per active model_id (same rule as 002): vectors from
+-- different models are not comparable, and a shared index would return
+-- neighbours from the wrong model. Apply with the active model id, e.g.
+--   psql -v model_id='<provider>:<model>' -f 011_quantize_rescore.sql
+-- (an unset variable is a syntax error, so the file fails loud instead of
+-- building an index for no rows). For a second model during a migration,
+-- create another partial index with its own name and model_id.
+CREATE INDEX idx_embeddings_bq_hnsw
+  ON embeddings
+  USING hnsw ((binary_quantize(embedding)::bit(1024)) bit_hamming_ops)
+  WITH (m = 16, ef_construction = 64)
+  WHERE model_id = :'model_id';
+
+-- ---------------------------------------------------------------------------
+-- Two-pass query pattern (paste-ready; NOT a stored function — embed in the
+-- application layer or a CTE, do not run as a migration step)
+--
+-- :query_embedding  — float32 query vector (same dimension as the indexed column)
+-- :model_id         — the model that produced :query_embedding; must equal the
+--                     partial index's model_id for the index to be used
+-- :acl_scope        — caller's ACL grants as a JSONB object, or NULL
+-- :k               — final result count
+-- :oversample      — candidate multiplier; measure on your labeled eval set
+--                    before fixing a value (common starting range: 4–10×)
+--
+-- ACL: deny by default, with the same predicate as 003's `filtered` CTE. A
+-- chunk is visible only when is_public = TRUE or its acl_scope shares a key
+-- with a non-NULL :acl_scope; an empty or NULL scope sees public chunks only.
+-- The filter sits in Pass 1, at candidate generation. Never filter after the
+-- rescore: that returns fewer than :k rows and ranks against rows the caller
+-- may not see. Add 003's other filters (doc_type, authority, as_of, ...) to
+-- the `filtered` CTE in the same place. 006's RLS policies still apply.
+-- Set hnsw.iterative_scan (see 002) so a selective filter does not starve
+-- Pass 1 of candidates.
+--
+-- Pass 1 — Hamming prefilter via the expression index (cheap, ~32× less data)
+-- Pass 2 — exact cosine rescore of the top candidates at full float32 precision
+--
+-- WITH filtered AS (
+--   SELECT c.id
+--   FROM   chunks c
+--   WHERE  (c.is_public = TRUE
+--           OR (:acl_scope IS NOT NULL
+--               AND c.acl_scope ?| (SELECT array_agg(k) FROM jsonb_object_keys(:acl_scope) k)))
+-- ),
+-- candidates AS (
+--   SELECT e.chunk_id, e.embedding
+--   FROM   embeddings e
+--   JOIN   filtered f ON f.id = e.chunk_id
+--   WHERE  e.model_id = :model_id
+--   ORDER  BY binary_quantize(e.embedding)::bit(1024) <~>
+--             binary_quantize(:query_embedding::vector(1024))::bit(1024)
+--   LIMIT  :k * :oversample          -- oversample factor is eval-measured
+-- )
+-- SELECT chunk_id
+-- FROM   candidates
+-- ORDER  BY embedding <=> :query_embedding::vector(1024)   -- full-precision cosine rescore
+-- LIMIT  :k;
+--
+-- The Pass-2 rescore above runs at full float32 precision: re-ranking on
+-- the original vectors is the pgvector docs pattern and the best-recall
+-- choice. It is the default; do not change it for recall reasons.
+--
+-- Optional memory variant (NOT a sequential step — it REPLACES the Pass-2
+-- ORDER BY): swap the rescore to halfvec to cut rescore memory ~2× at a
+-- small precision cost. This slightly LOWERS recall versus the
+-- full-precision Pass 2; use it only when rescore memory is the binding
+-- constraint:
+--   ORDER  BY embedding::halfvec(1024) <=> :query_embedding::halfvec(1024)
+-- ---------------------------------------------------------------------------
+
+-- ---------------------------------------------------------------------------
+-- DOWN  (true inverse: drops exactly what UP created; nothing else was created)
+-- ---------------------------------------------------------------------------
+-- DROP INDEX IF EXISTS idx_embeddings_bq_hnsw;

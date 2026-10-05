@@ -1,0 +1,4 @@
+interface:
+  display_name: "Formal Methods Foundations"
+  short_description: "Proves protocols and agent workflows with TLA+, Alloy, Z3, Dafny, Lean"
+  default_prompt: "Use $foundations-formal-methods to prove protocols and agent workflows correct with TLA+, P, Alloy, Z3, Dafny, or Lean: write specs and invariants, model-check for counterexamples, or verify LLM proofs."

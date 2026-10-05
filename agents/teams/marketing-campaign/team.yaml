@@ -1,0 +1,140 @@
+---
+name: marketing-campaign
+family: marketing
+description: Staged campaign team - research, a one-owner positioning lock, parallel channel drafts, then a conversion and brand review.
+best_for:
+- A launch or campaign that needs landing-page, email, and paid drafts that all carry one message
+- Re-running a campaign whose channels drifted into different promises
+- Checking existing campaign copy against an agreed positioning before it ships
+members:
+- startup-competitive-analyst
+- startup-review-miner
+- marketing-strategist
+- startup-product-marketing-strategist
+- marketing-email-automation-lead
+- marketing-paid-acquisition-strategist
+- marketing-creative-director
+- marketing-product-analytics-lead
+required_context:
+- Campaign brief with the product, the target audience, the offer, the goal, and the channels in scope
+- Brand guidelines or the existing voice rules, if any exist
+optional_context:
+- Customer reviews, interview notes, support tickets, or win/loss notes about the audience
+- Named competitors and their current offers
+- Prior campaign results and the conversion events that already exist
+- Budget range and launch date
+concurrency_mode: staged
+execution_stages:
+- stage: 1
+  label: Research
+  members:
+  - startup-competitive-analyst
+  - startup-review-miner
+  output: Sourced evidence on the audience, competitors and alternatives, and the offer, with gaps named
+- stage: 2
+  label: Positioning lock
+  members:
+  - marketing-strategist
+  output: The locked positioning statement and message hierarchy, each claim linked to stage-1 evidence
+- stage: 3
+  label: Channel drafts
+  members:
+  - startup-product-marketing-strategist
+  - marketing-email-automation-lead
+  - marketing-paid-acquisition-strategist
+  output: One draft set per channel, written only against the locked positioning, in the owner's channel files
+- stage: 4
+  label: Conversion and brand review
+  members:
+  - marketing-creative-director
+  - marketing-product-analytics-lead
+  output: Per-draft findings that cite the locked positioning line each finding checks
+synthesis_owner: marketing-strategist
+owned_files:
+- 'No member holds Edit or Write. Each member returns its owned files in-thread; the parent thread writes them to that
+  path only, and no other member edits that path.'
+- 'marketing-strategist: campaigns/<campaign>/positioning.md (frozen once locked; changes only through reopen_positioning)'
+- 'startup-product-marketing-strategist: campaigns/<campaign>/landing-page.md, campaigns/<campaign>/launch-messaging.md'
+- 'marketing-email-automation-lead: campaigns/<campaign>/email/**'
+- 'marketing-paid-acquisition-strategist: campaigns/<campaign>/paid/**'
+- 'startup-competitive-analyst, startup-review-miner: read-only (research notes returned in-thread)'
+- 'marketing-creative-director, marketing-product-analytics-lead: read-only (review findings returned in-thread)'
+do_not_touch:
+- .archive/**
+- secrets, credentials, PII
+- customer lists, CRM exports, and reviewer identities
+- live ad accounts, budgets, and audiences
+- ESP configuration and live sends
+- published pages and live site content
+deliverable:
+  shape: Research brief, then the locked positioning, then per-channel drafts, then one review report and a synthesized
+    campaign verdict
+  required_sections:
+  - Evidence and sources
+  - Locked positioning and message hierarchy
+  - Channel drafts and owned files
+  - Review findings against the lock
+  - Open risks and next step
+  max_length: 2 pages / ~800 words per member; synthesis <= 1 page
+debate:
+  enabled: true
+  method: dialectical-inquiry
+  mandatory_dissent: true
+  decision_masks:
+  - anchoring-mask
+  - base-rate-mask
+  triggers:
+  - Stage-1 evidence supports two or more positioning angles before the lock
+  - A channel owner or reviewer brings new evidence that the locked positioning is wrong
+  perspectives:
+  - audience-evidence
+  - positioning
+  - channel-execution
+  - conversion-and-brand
+  gate_rule: 'The positioning lock is a gate. Stage 3 does not start until marketing-strategist returns the locked
+    positioning and message hierarchy. A channel owner who disagrees raises reopen_positioning with evidence and
+    does not write around the lock. A review finding that a draft contradicts the lock blocks ready_for_launch;
+    the synthesis owner may not average or trade it off.'
+coordination:
+  blind_first_round: true
+expansion_gate:
+  rule: evpi
+  evpi_threshold: medium
+  max_dynamic_members: 2
+  candidate_specialists:
+  - marketing-seo-strategist
+  - marketing-pr-communications-lead
+  - marketing-creative-intel-analyst
+stopping_rule:
+  protocol: regret-min
+  reversibility: mixed
+  max_regret_threshold:
+    claims: 0.05
+    positioning: 0.1
+    copy: 0.3
+verification:
+  mode: heterogeneous
+  rule: the stage-4 reviewers drafted no channel asset, and each finding cites the locked positioning line it checks;
+    a producer's review of its own draft does not count
+synthesis:
+  bias_audit_required: true
+  frame_symmetry: false
+verdict_options:
+- ready_for_launch
+- revise_channels
+- reopen_positioning
+- hold_for_evidence
+hold_policy:
+  required: deadline
+  default_deadline_days: 5
+  escalate_on_deadline: forced_decision
+trust:
+  default_tier: standard
+design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#marketing-campaign
+install: opt-in
+install_guidance:
+  routing: 'Use this team when one campaign must ship several channel drafts that carry one message. For a read-only
+    diagnosis of why marketing underperforms, use expert-board with board marketing-diagnostics. For one channel
+    only, launch that channel owner alone with the positioning already given.'
+  complements: 'The members return drafts and findings; none of them publishes, sends, or changes a live account.
+    Every claim in a draft must trace to a stage-1 source or be marked unsourced.'

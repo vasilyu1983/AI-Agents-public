@@ -1,0 +1,4 @@
+interface:
+  display_name: "Subagents, Teams, and Debate Triggers"
+  short_description: "Chooses subagent, team, workflow, or debate and launches agent review boards."
+  default_prompt: "Use $agents-subagents to pick a subagent, team, workflow, or debate, launch a review board of agents, or install shared agents on Claude Code or Codex when delegating work."

@@ -1,0 +1,81 @@
+---
+name: product-surface
+family: product
+description: Product surface team for frontend architecture, UX quality, accessibility, and localization readiness.
+best_for:
+- Product UI changes that cross implementation and UX concerns
+- Accessibility and localization readiness reviews
+members:
+- software-frontend-lead
+- software-ux-designer
+- software-accessibility-reviewer
+- software-localisation-reviewer
+required_context:
+- Target UI surface, user flow, and implementation scope
+optional_context:
+- Design references, screenshots, component maps, and localization catalogs
+concurrency_mode: parallel
+synthesis_owner: software-frontend-lead
+owned_files:
+- 'software-frontend-lead: frontend files named in the launch prompt only'
+- 'software-ux-designer, software-accessibility-reviewer, software-localisation-reviewer: read-only'
+do_not_touch:
+- .archive/**
+- secrets, credentials, PII
+- customer PII in research artifacts
+- live feature-flag configuration
+deliverable:
+  shape: Per-member product assessment, then one synthesized prioritization
+  required_sections:
+  - Assessment and evidence
+  - User or business impact
+  - Recommended priority
+  - Open questions to validate
+  max_length: 2 pages / ~800 words per member; synthesis <= 1 page
+debate:
+  enabled: true
+  method: dialectical-inquiry
+  mandatory_dissent: true
+  decision_masks:
+  - inversion
+  - base-rate-mask
+  triggers:
+  - accessibility or UX finding conflicts with frontend delivery scope
+  - members disagree on user-impact severity
+  perspectives:
+  - frontend-delivery
+  - ux
+  - accessibility
+  - localisation
+coordination:
+  blind_first_round: true
+expansion_gate:
+  rule: evpi
+  evpi_threshold: medium
+  max_dynamic_members: 1
+  candidate_specialists:
+  - software-performance-reviewer
+  - software-ios-specialist
+  - software-android-specialist
+stopping_rule:
+  protocol: regret-min
+  reversibility: mixed
+  max_regret_threshold:
+    accessibility: 0.05
+    localisation: 0.1
+    visual_design: 0.3
+synthesis:
+  aggregation: mcda
+  bias_audit_required: true
+  frame_symmetry: true
+verdict_options:
+- approve
+- request_changes
+- hold_for_specialist
+hold_policy:
+  required: deadline
+  default_deadline_days: 3
+  escalate_on_deadline: forced_decision
+trust:
+  default_tier: standard
+design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#product-surface

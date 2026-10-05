@@ -1,0 +1,48 @@
+{
+  "scopes": {
+    "claude-user": {
+      "repo": "config/claude/settings.json",
+      "live": ".claude/settings.json",
+      "hooks": [
+        {
+          "event": "PreToolUse",
+          "matcher": "Bash|Monitor|mcp__.*desktop-commander.*__(start_process|interact_with_process)",
+          "script": "git-safety-guard.py",
+          "timeout": 10,
+          "statusMessage": "git-safety-guard",
+          "command": "sh -c 'f=\"$HOME/.agents/hooks/git-safety-guard.py\"; if [ -f \"$f\" ]; then exec python3 \"$f\"; fi; case \"$(cat)\" in *git\\ *) echo \"git-safety-guard missing at $f: git blocked\" >&2; exit 2;; esac; exit 0'"
+        },
+        {
+          "event": "PreToolUse",
+          "matcher": "Write|Edit",
+          "script": "config-guard.py",
+          "timeout": 10,
+          "statusMessage": "config-guard",
+          "command": "sh -c 'f=\"$HOME/.agents/hooks/config-guard.py\"; [ -f \"$f\" ] || exit 0; exec python3 \"$f\"'"
+        },
+        {
+          "event": "Notification",
+          "matcher": "permission_prompt|idle_prompt",
+          "script": "notify-waiting.py",
+          "timeout": 10,
+          "command": "sh -c 'f=\"$HOME/.agents/hooks/notify-waiting.py\"; [ -f \"$f\" ] || exit 0; python3 \"$f\"; exit 0'"
+        }
+      ]
+    },
+    "codex-user": {
+      "repo": "config/codex/hooks.json",
+      "live": ".codex/hooks.json",
+      "hooks": [
+        {
+          "event": "PreToolUse",
+          "matcher": "Bash",
+          "script": "git-safety-guard.py",
+          "timeout": 10,
+          "statusMessage": "git-safety-guard",
+          "command": "sh -c 'f=\"$HOME/.agents/hooks/git-safety-guard.py\"; if [ -f \"$f\" ]; then exec python3 \"$f\"; fi; case \"$(cat)\" in *git\\ *) echo \"git-safety-guard missing at $f: git blocked\" >&2; exit 2;; esac; exit 0'"
+        }
+      ]
+    }
+  },
+  "unwired": []
+}

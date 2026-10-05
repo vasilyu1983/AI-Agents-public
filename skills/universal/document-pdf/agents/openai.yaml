@@ -1,0 +1,4 @@
+interface:
+  display_name: "Document PDF Skill — Quick Reference"
+  short_description: "PDF/UA accessibility, redaction, metadata scrubbing, signing, and extraction"
+  default_prompt: "Use $document-pdf for PDF/UA accessibility, real redaction, metadata scrubbing, signing, or extraction; for plain create/merge work prefer the official pdf skill."

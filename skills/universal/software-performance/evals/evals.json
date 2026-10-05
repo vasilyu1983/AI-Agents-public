@@ -1,0 +1,61 @@
+{
+  "skill_name": "software-performance",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A Next.js e-commerce product listing page has an LCP of 4.8 seconds in field data (CrUX, mobile, 75th percentile). The hero image is 1.2MB, served without explicit width/height attributes and without a fetchpriority hint. TTFB is 1.1 seconds. Lighthouse TBT is 620ms. Diagnose where the LCP time goes, prioritize the fixes, and say how the regression gate should be set up.",
+      "expected_output": "The skill should identify the LCP element and measure TTFB, resource load delay, resource load duration, and element render delay before ranking fixes. High TTFB and image size are hypotheses until the phase breakdown establishes the dominant constraint. Require before/after field or repeated lab measurement per fix and hand CI gate design to qa-testing-performance.",
+      "files": [],
+      "expectations": [
+        "The output requires a measured LCP phase breakdown before selecting the first fix; it does not infer that server work comes first from TTFB alone or add unmatched field percentiles as though they belonged to one page load.",
+        "The output recommends hero image optimization (modern format, resize to display dimensions) and fetchpriority='high' on the single LCP image.",
+        "The output notes that missing width/height primarily causes CLS, not slow LCP.",
+        "The output requires re-measuring each fix against a baseline (field p75 or repeated lab runs) rather than quoting fixed per-fix LCP gains as fact.",
+        "The output routes the Lighthouse CI gate to qa-testing-performance, or, if it shows a config, uses assert.assertions with maxNumericValue rather than inline timing budgets.",
+        "The output notes that CrUX field data at the 75th percentile is the assessment signal, not the Lighthouse lab score alone."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A Node.js REST API serving mobile clients has a p95 latency of 1.2 seconds under 200 concurrent users during k6 load tests. The team suspects a database bottleneck. EXPLAIN output shows a sequential scan on a table with 8 million rows because the query filters on an unindexed column. A second slow endpoint also appears in traces and calls the same table three times in a loop (N+1). Design the investigation and remediation plan and explain how you would confirm each fix.",
+      "expected_output": "The skill should recommend adding the missing index first, then eliminating N+1 by batching or a join, as separately measured changes; require before/after benchmarks; check the load test's achieved throughput against Little's Law; warn against caching before the query behavior is fixed; and route k6 and CI gate design to qa-testing-performance.",
+      "files": [],
+      "expectations": [
+        "The output identifies the missing index and N+1 query as the two bottlenecks and explains why they must be fixed before considering caching.",
+        "The output requires a baseline benchmark before any change and a post-fix benchmark to verify improvement.",
+        "The output explicitly warns against adding a cache layer before the query behavior is fixed.",
+        "The output separates the index fix from the N+1 fix as two independent changes so each can be measured individually.",
+        "The output checks that the load test actually reached the intended throughput (Little's Law: concurrency >= target_rps x latency_s, or an arrival-rate executor) before trusting the p95.",
+        "The output routes load-test and CI gate design details to qa-testing-performance rather than treating them as this skill's core output."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "After a deploy, p99 latency of a Java checkout API doubled while p50 stayed flat. CPU sits at 40%. The on-call engineer wants to tune GC flags. The service fans out to 10 downstream services. Diagnose before anyone changes GC settings.",
+      "expected_output": "The skill should treat p99-up/p50-flat at moderate CPU as a queueing or contention signal, check lock contention (JFR lock events or async-profiler -e lock), thread-pool and connection-pool saturation, and off-CPU time before GC tuning, explain the independent-call worked example (1-0.99^10 ~ 9.6%) and that correlated downstream delays require joint-tail measurement, refuse to average per-host percentiles, and require same-conditions before/after measurement.",
+      "files": [],
+      "expectations": [
+        "The output identifies rising p99 with flat p50 at 40% CPU as a likely queueing, pool, or lock-contention signal rather than defaulting to GC.",
+        "The output recommends a lock-aware profile (JFR lock events or async-profiler -e lock) and notes --nativelock covers native pthread locks only, or otherwise distinguishes monitor contention from GC.",
+        "The output checks connection-pool and thread-pool saturation, using Little's Law or pool math.",
+        "The output explains 1 - 0.99^10 ~ 9.6% only under independent 1% slow-call events, and distinguishes that model from correlated downstream tails.",
+        "The output warns against averaging percentiles across hosts.",
+        "The output requires re-measuring under the same conditions and reverting changes whose result falls inside the noise band."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "After a release, p99 API latency increased from 400ms to 1.8 seconds on a Go HTTP service. There were no infrastructure changes. The release included a new middleware that decodes and validates a JWT on every request and a new endpoint that triggers a report generation job. Using flamegraphs and before/after benchmarks, describe the investigation workflow, identify likely causes, and specify the statistical comparison method to confirm the regression is real and not noise.",
+      "expected_output": "The skill should profile under production-like load and treat added JWT validation and report generation as hypotheses until measured. Check CPU, off-CPU waits and shared-resource contention; do not recommend caching validation results solely because authentication runs per request. Compare repeated before/after runs using medians, tails and baseline variance, with run/sample counts chosen to characterize uncertainty rather than an arbitrary minimum.",
+      "files": [],
+      "expectations": [
+        "The output recommends capturing a CPU flamegraph (pprof for Go) under production-like load to identify the actual hot path before guessing.",
+        "The output treats JWT work as a hypothesis and measures it before selecting a fix; it does not recommend bypassing per-request authentication or caching validation results merely because validation repeats.",
+        "The output investigates whether report generation adds I/O, CPU or shared-resource contention and isolates it only if measurements support that cause.",
+        "The output requires repeated comparable before/after runs, sufficient requests to estimate p99 and a variance or uncertainty estimate; it chooses sample counts from measurement stability rather than a fixed five-run rule.",
+        "The output explains the statistical reason (warmup effects, GC pauses, environmental noise) why a single benchmark run cannot confirm a regression.",
+        "The output provides a concrete before/after comparison method such as hyperfine or a custom script that calculates the percentage delta and flags a regression only when it falls outside the baseline noise band."
+      ]
+    }
+  ]
+}

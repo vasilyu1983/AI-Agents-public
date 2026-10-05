@@ -1,0 +1,4 @@
+interface:
+  display_name: "Performance QA"
+  short_description: "Designs performance and load testing for web, API, and backend systems"
+  default_prompt: "Use $qa-testing-performance to design performance and load testing (stress, spike, soak, capacity) and CI budget gates for web, API, and backend systems."

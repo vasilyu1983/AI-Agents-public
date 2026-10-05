@@ -1,4 +1,0 @@
-interface:
-  display_name: "AI Coding Agents — Settings Policy"
-  short_description: "Coding-agent settings, policy and catalog budgets"
-  default_prompt: "Use $ai-coding-agents-settings-policy to diagnose precedence, managed policy, runtime controls, skill catalog budgets, persistent notes, or searchable history."

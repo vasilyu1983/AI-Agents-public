@@ -1,0 +1,145 @@
+{
+  "metadata": {
+    "title": "Mathematical optimization foundations \u2014 primary sources",
+    "skill": "foundations-mathematical-optimization",
+    "last_updated": "2026-09-23",
+    "cutoff": "2026-09-23",
+    "total_sources": 18,
+    "description": "Dated primary evidence for formulation, duality, numerical solver status, infeasibility diagnosis, CP-SAT scheduling, solver versions, and LLM-assisted formulation."
+  },
+  "sources": [
+    {
+      "id": "boyd-problems",
+      "name": "Convex Optimization: problem formulations lectures",
+      "url": "https://web.stanford.edu/class/ee364a/lectures/problems.pdf",
+      "description": "Boyd, Vandenberghe, revised with Nobel. Sections 4.2\u20134.6: convexity, LP, QP and conic formulations. Author-hosted primary teaching material read directly. Slide 4.63 (scalarization: convex problems find almost all Pareto points by varying weights) read 2026-09-23.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "boyd-duality",
+      "name": "Convex Optimization: duality lectures",
+      "url": "https://web.stanford.edu/class/ee364a/lectures/duality.pdf",
+      "description": "Boyd, Vandenberghe, revised with Nobel. Sections 5.12\u20135.21: weak/strong duality, Slater qualification, KKT and sensitivity. Canonical max-form LP inequality is derived in this bundle, rather than copied from a different sign convention.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "gurobi-constraints",
+      "name": "Gurobi Optimizer Reference Manual: Constraints",
+      "url": "https://docs.gurobi.com/projects/optimizer/en/current/concepts/modeling/constraints.html",
+      "description": "Vendor documentation read directly for finite precision, constraint tolerances, and strict inequality limitations. Moving URL; no release pin or universal tolerance value is asserted. Indicator constraint definition read 2026-09-23.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "gurobi-status",
+      "name": "Gurobi Optimizer Reference Manual: Optimization Status Codes",
+      "url": "https://docs.gurobi.com/projects/optimizer/en/current/reference/numericcodes/statuscodes.html",
+      "description": "Vendor documentation (manual version 13.0), read directly 2026-09-23. Optimal subject to tolerance, limit statuses, numerical failure and infeasible-or-unbounded distinctions. INF_OR_UNBD remedy DualReductions=0; UNBOUNDED says nothing about feasibility; LOCALLY_OPTIMAL/LOCALLY_INFEASIBLE are preview.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "stanford-robust",
+      "name": "Stanford EE364b: Robust Optimization",
+      "url": "https://web.stanford.edu/class/ee364b/lectures/robust_slides.pdf",
+      "description": "Author-hosted primary lecture read directly: robust feasibility over uncertainty sets, choice of set and chance constraints. No numerical research-effect claim copied.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "mit-stochastic",
+      "name": "MIT 6.079 Lecture 13: Stochastic programming",
+      "url": "https://ocw.mit.edu/courses/6-079-introduction-to-convex-optimization-fall-2009/5e4810dabbe02645b52fc082cd18ee74_MIT6_079F09_lec13.pdf",
+      "description": "Primary teaching text read directly, pp. 2\u201313: known distribution, scenarios, sample-average approximation and validation. Decision-timing warning is application guidance; no empirical result claimed.",
+      "last_verified": "2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "gurobi-infeasibility",
+      "name": "Gurobi Optimizer Reference Manual: Infeasibility Analysis",
+      "url": "https://docs.gurobi.com/projects/optimizer/en/current/features/infeasibility.html",
+      "description": "Vendor documentation read directly: IIS routines for continuous and MIP models (MIP version 'can be quite expensive'); feasRelax routines are destructive; sum, sum-of-squares and count relaxation objectives.",
+      "url_check": "manual"
+    },
+    {
+      "id": "gurobi-multiobjective",
+      "name": "Gurobi Optimizer Reference Manual: Multiple Objectives",
+      "url": "https://docs.gurobi.com/projects/optimizer/en/current/features/multiobjective.html",
+      "description": "Vendor documentation: blended and hierarchical (priority, tolerance) multi-objective handling.",
+      "url_check": "manual"
+    },
+    {
+      "id": "gurobi-13-changes",
+      "name": "Gurobi 13.0 release notes: what's new",
+      "url": "https://docs.gurobi.com/projects/optimizer/en/current/reference/releasenotes/changes.html",
+      "description": "Vendor release notes read directly: PDHG LP algorithm (CPU default, optional NVIDIA GPU), local nonlinear barrier with LOCALLY_OPTIMAL/LOCALLY_INFEASIBLE statuses.",
+      "url_check": "manual"
+    },
+    {
+      "id": "highs-releases",
+      "name": "HiGHS GitHub releases",
+      "url": "https://github.com/ERGO-Code/HiGHS/releases",
+      "description": "Release notes read directly: v1.15.1 (2026-07-02), v1.15.0 first parallel MIP variant, v1.14 HiPO for convex QP, cuPDLP-C GPU support in earlier 1.1x releases.",
+      "url_check": "manual"
+    },
+    {
+      "id": "highs-iis",
+      "name": "HiGHS documentation: advanced features (IIS)",
+      "url": "https://ergo-code.github.io/HiGHS/dev/guide/advanced/",
+      "description": "Vendor documentation for Highs.getIis and iis_strategy; behavior re-run locally on highspy 1.15.1 (light strategy returned empty IIS on a toy LP; irreducible strategy found the 3 conflicting rows).",
+      "url_check": "manual"
+    },
+    {
+      "id": "pypi-solver-versions",
+      "name": "PyPI JSON API: gurobipy, highspy, ortools, cvxpy, pyscipopt, pyomo",
+      "url": "https://pypi.org/pypi/gurobipy/json",
+      "description": "Latest versions and upload dates queried directly: gurobipy 13.0.3 (2026-08-25), highspy 1.15.1 (2026-07-02), ortools 9.15.6755 (2026-01-14), cvxpy 1.9.3 (2026-09-19), pyscipopt 6.2.1 (2026-05-16), pyomo 6.10.1 (2026-06-04). Same /pypi/<name>/json pattern for each package.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ortools-cpsat",
+      "name": "OR-Tools: CP-SAT solver",
+      "url": "https://developers.google.com/optimization/cp/cp_solver",
+      "last_verified": "2026-09-28",
+      "description": "Vendor guide plus model/parameter definitions: integer variables and constraints; FloatObjectiveProto supports floating coefficients with internal scaling. OPTIMAL can also mean an objective-gap stopping limit was met or a pure feasibility solution was found. Read the installed version’s ortools/sat/cp_model.proto and sat_parameters.proto before interpreting exact optimality.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ortools-jobshop",
+      "name": "OR-Tools: job shop problem",
+      "url": "https://developers.google.com/optimization/scheduling/job_shop",
+      "description": "Vendor example: interval variables, AddNoOverlap, precedence, makespan via AddMaxEquality.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ortools-scheduling-docs",
+      "name": "OR-Tools CP-SAT scheduling documentation",
+      "url": "https://github.com/google/or-tools/blob/stable/ortools/sat/docs/scheduling.md",
+      "description": "Primary docs read directly: optional intervals with presence literals, which no-overlap and cumulative constraints ignore when inactive.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ortools-cpmodel-api",
+      "name": "OR-Tools cp_model Python API",
+      "url": "https://or-tools.github.io/docs/pdoc/ortools/sat/python/cp_model.html",
+      "description": "API reference for add_cumulative semantics (sum of demands of present intervals at each t <= capacity).",
+      "url_check": "manual"
+    },
+    {
+      "id": "optimus-03",
+      "name": "OptiMUS-0.3: Using Large Language Models to Model and Solve Optimization Problems at Scale",
+      "url": "https://arxiv.org/abs/2407.19633",
+      "description": "AhmadiTeshnizi, Gao, Brunborg, Talaei, Lawless, Udell; arXiv v4 June 2026. Abstract read: LLM system that formulates models, writes and debugs solver code, evaluates solutions; 'system architecture is a stronger driver of performance than model capability'. Benchmark percentages not copied.",
+      "url_check": "manual"
+    },
+    {
+      "id": "xiao-2025-llm-opt-survey",
+      "name": "A Survey of Optimization Modeling Meets LLMs: Progress and Future Directions",
+      "url": "https://arxiv.org/abs/2508.10047",
+      "description": "Xiao et al., arXiv August 2025. Abstract read: benchmark datasets found to have 'a surprisingly high error rate'. Per-benchmark percentages not verified and not used.",
+      "url_check": "manual"
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "metadata": {
+    "skill": "ai-ml-timeseries",
+    "updated": "2026-09-30",
+    "total_sources": 20,
+    "description": "Primary-source lookup index for forecasting baselines, global/panel models, reconciliation, probabilistic evaluation and foundation models. Read the linked release docs or checkpoint cards before choosing APIs or quoting capabilities and benchmark ranks.",
+    "version": "4.3",
+    "title": "AI Ml Timeseries - Sources",
+    "last_updated": "2026-09-30"
+  },
+  "categories": {
+    "foundations_and_benchmarks": [
+      {
+        "name": "Forecasting: Principles and Practice (3rd ed.)",
+        "url": "https://otexts.com/fpp3/",
+        "type": "book",
+        "relevance": "Canonical reference for forecasting principles, baselines, and evaluation workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "M5 Forecasting Accuracy Competition",
+        "url": "https://www.kaggle.com/competitions/m5-forecasting-accuracy",
+        "type": "benchmark",
+        "relevance": "Benchmark reference for large-scale retail and feature-based forecasting workflows.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "forecasting_frameworks": [
+      {
+        "name": "statsmodels Documentation",
+        "url": "https://www.statsmodels.org/",
+        "type": "documentation",
+        "relevance": "Local classical models and decomposition diagnostics.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LightGBM Documentation",
+        "url": "https://lightgbm.readthedocs.io/",
+        "type": "documentation",
+        "relevance": "Official tree-boosting reference used in feature-based forecasting stacks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MLForecast Documentation",
+        "url": "https://nixtlaverse.nixtla.io/mlforecast/docs/getting-started/end_to_end_walkthrough.html",
+        "type": "documentation",
+        "relevance": "Official Nixtla docs for global feature-based forecasting with lags, date features, and static features.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "HierarchicalForecast Documentation",
+        "url": "https://nixtlaverse.nixtla.io/hierarchicalforecast/",
+        "type": "documentation",
+        "relevance": "Official reconciliation docs for coherent hierarchical and grouped forecasts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "skforecast Documentation",
+        "url": "https://skforecast.org/",
+        "type": "documentation",
+        "relevance": "Official recursive and direct workflows around tabular regressors. Check the installed release against these docs before copying imports or backtesting signatures.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AutoGluon Time Series Documentation",
+        "url": "https://auto.gluon.ai/stable/tutorials/timeseries/index.html",
+        "type": "documentation",
+        "relevance": "Official AutoGluon docs for rapid time-series benchmarking, ensembling, and TSFM comparisons.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "StatsForecast (Nixtla)",
+        "url": "https://nixtlaverse.nixtla.io/statsforecast/index.html",
+        "type": "documentation",
+        "relevance": "Statistical base forecasts; forecast(df=, h=, fitted=True) plus forecast_fitted_values() supply the in-sample values MinTrace needs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NeuralForecast (Nixtla)",
+        "url": "https://nixtlaverse.nixtla.io/neuralforecast/index.html",
+        "type": "documentation",
+        "relevance": "Deep forecasting baselines (NHITS, TFT, DeepAR and others); confirm the model list in the installed release.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "probabilistic_and_calibration": [
+      {
+        "name": "MAPIE Documentation",
+        "url": "https://mapie.readthedocs.io/en/latest/",
+        "type": "documentation",
+        "relevance": "Official conformal prediction reference, including current regression and time-series APIs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "foundation_models_and_governance": [
+      {
+        "name": "Chronos Forecasting Repository (includes Chronos-2 and Chronos-Bolt)",
+        "url": "https://github.com/amazon-science/chronos-forecasting",
+        "type": "official_repository",
+        "relevance": "Official Chronos family repository. Read the exact checkpoint card and inference docs for covariates, fine-tuning, licence, context and horizon support; benchmark speed and memory on the target hardware rather than transferring published ratios.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Chronos-2: From Univariate to Universal Forecasting (paper)",
+        "url": "https://arxiv.org/abs/2510.15821",
+        "type": "paper",
+        "relevance": "Primary evidence for the paper's benchmark results and covariate-informed experiments. Read the result table and comparator setup before quoting figures; a publication result is not a live leaderboard rank.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TimesFM Repository",
+        "url": "https://github.com/google-research/timesfm",
+        "type": "official_repository",
+        "relevance": "Official TimesFM repository. Check the selected checkpoint's context, horizon, uncertainty head and fine-tuning instructions; use a dated benchmark snapshot when comparing its rank.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Toto — Datadog Time-Series Foundation Model",
+        "url": "https://github.com/DataDog/toto",
+        "type": "official_repository",
+        "relevance": "Official multivariate forecasting repository with an observability focus. Read the selected release's model card and feature notes before assuming fine-tuning or exogenous covariate support; compare general-domain fit on the local backtest.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "TiRex / TiRex-2 (NX-AI)",
+        "url": "https://github.com/NX-AI/tirex",
+        "type": "official_repository",
+        "relevance": "Official TiRex repository, linking to the newer-generation repository. Follow the exact checkpoint's docs for covariates, multivariate support, fine-tuning and licence; do not transfer capabilities between generations.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "fev-bench: Realistic Forecasting Benchmark and Leaderboard",
+        "url": "https://huggingface.co/spaces/autogluon/fev-bench",
+        "type": "benchmark",
+        "relevance": "Official forecasting benchmark and live leaderboard. Read the current task definitions, covariate availability and scoring setup before comparing models; record the snapshot date next to quoted rankings.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NIST AI Risk Management Framework 1.0",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+        "type": "specification",
+        "relevance": "Governance baseline for high-impact forecasting deployments and operational risk controls.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Moirai / uni2ts (Salesforce)",
+        "url": "https://github.com/SalesforceAIResearch/uni2ts",
+        "type": "repository",
+        "relevance": "Moirai family repository; capabilities and licence differ per generation, so read the checkpoint card before shortlisting.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GIFT-Eval leaderboard",
+        "url": "https://huggingface.co/spaces/Salesforce/GIFT-Eval",
+        "type": "benchmark",
+        "relevance": "Live multi-task TSFM leaderboard; record the snapshot date next to any rank quoted.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

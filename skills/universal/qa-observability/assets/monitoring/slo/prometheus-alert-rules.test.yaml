@@ -1,0 +1,83 @@
+# promtool unit tests for prometheus-alert-rules.yaml
+# Run: promtool test rules prometheus-alert-rules.test.yaml
+# Each case must fail if the `sum by (service)` matching or the thresholds break.
+rule_files:
+  - prometheus-alert-rules.yaml
+
+evaluation_interval: 1m
+
+tests:
+  # Healthy: 0.05% errors (half the 0.1% budget). No burn alert may fire.
+  - interval: 1m
+    input_series:
+      - series: 'http_requests_total{service="orders",status="200"}'
+        values: "0+9995x420"
+      - series: 'http_requests_total{service="orders",status="500"}'
+        values: "0+5x420"
+    alert_rule_test:
+      - eval_time: 6h
+        alertname: ErrorBudgetBurnFast
+        exp_alerts: []
+      - eval_time: 6h
+        alertname: ErrorBudgetBurnMedium
+        exp_alerts: []
+      - eval_time: 6h
+        alertname: ErrorBudgetBurnSlow
+        exp_alerts: []
+
+  # Hard outage: 10% errors (100x burn). Both paging tiers fire.
+  - interval: 1m
+    input_series:
+      - series: 'http_requests_total{service="orders",status="200"}'
+        values: "0+90x60"
+      - series: 'http_requests_total{service="orders",status="500"}'
+        values: "0+10x60"
+    alert_rule_test:
+      - eval_time: 10m
+        alertname: ErrorBudgetBurnFast
+        exp_alerts:
+          - exp_labels:
+              service: orders
+              severity: critical
+              slo: availability
+              burn_rate: fast
+            exp_annotations:
+              summary: "Fast error budget burn for orders"
+              description: "Burning budget at >=14.4x: 2% of the 30-day budget in 1h; exhausted in ~50h if sustained."
+              runbook_url: "https://runbooks.example.com/slo-burn-fast"
+      - eval_time: 10m
+        alertname: ErrorBudgetBurnMedium
+        exp_alerts:
+          - exp_labels:
+              service: orders
+              severity: critical
+              slo: availability
+              burn_rate: medium
+            exp_annotations:
+              summary: "Sustained error budget burn for orders"
+              description: "Burning budget at >=6x: 5% of the 30-day budget in 6h; exhausted in ~5 days if sustained."
+              runbook_url: "https://runbooks.example.com/slo-burn-medium"
+
+  # Slow bleed: 0.2% errors (2x burn). Ticket fires, pages do not.
+  - interval: 1m
+    input_series:
+      - series: 'http_requests_total{service="orders",status="200"}'
+        values: "0+998x420"
+      - series: 'http_requests_total{service="orders",status="500"}'
+        values: "0+2x420"
+    alert_rule_test:
+      - eval_time: 6h
+        alertname: ErrorBudgetBurnFast
+        exp_alerts: []
+      - eval_time: 6h
+        alertname: ErrorBudgetBurnSlow
+        exp_alerts:
+          - exp_labels:
+              service: orders
+              severity: ticket
+              slo: availability
+              burn_rate: slow
+            exp_annotations:
+              summary: "Slow error budget burn for orders"
+              description: "Burning budget at >=1x: on track to spend the whole 30-day budget."
+              runbook_url: "https://runbooks.example.com/slo-burn-slow"

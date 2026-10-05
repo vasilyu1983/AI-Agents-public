@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Safety Envelope"
+  short_description: "Design approval and sandbox policy for coding agents"
+  default_prompt: "Use $ai-coding-agents-safety-envelope to design approval and sandbox policy for a local coding agent: permission modes, approval routing, isolation, network and destructive-command guards."

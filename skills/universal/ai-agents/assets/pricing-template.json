@@ -1,0 +1,14 @@
+{
+  "_note": "Template for the --pricing input of scripts/claude-usage.py and scripts/codex-usage.py. Copy it, replace each <model-id> key with the exact model ID that appears in your logs, and fill in rates in USD per 1M tokens from the provider's pricing page on the day you run the report (Anthropic: https://claude.com/pricing; OpenAI: https://developers.openai.com/api/docs/pricing). cache_write_per_1m is the 5-minute cache-write rate; cache_write_1h_per_1m (optional, read by claude-usage.py) is the separate 1-hour cache-write rate, and 1-hour writes stay unpriced without it. Leave a rate null when the page does not list it: the scripts then report that usage as unpriced instead of guessing. No real rates ship with this skill because published rates change.",
+  "source_url": null,
+  "retrieved_at": null,
+  "models": {
+    "<model-id>": {
+      "input_per_1m": null,
+      "output_per_1m": null,
+      "cache_read_per_1m": null,
+      "cache_write_per_1m": null,
+      "cache_write_1h_per_1m": null
+    }
+  }
+}

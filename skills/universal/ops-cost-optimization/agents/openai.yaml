@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ops Cost Optimization"
+  short_description: "Audits SaaS, cloud, payment, and AI spend: bills, plans, Savings Plans, fees"
+  default_prompt: "Use $ops-cost-optimization to audit SaaS, cloud, payment, and AI spend: analyze bills, right-size plans, size Savings Plans or CUDs, cut payment-processing fees, and compute LLM self-host breakeven."

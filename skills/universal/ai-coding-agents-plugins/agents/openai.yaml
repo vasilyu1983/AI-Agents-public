@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Plugins"
+  short_description: "Design coding-agent plugin systems and upgrade-safe plugin caches"
+  default_prompt: "Use $ai-coding-agents-plugins to design plugin manifests, extension points, load order, trust boundaries, or plugin cache compatibility across CLI upgrades for a coding-agent CLI or runtime."

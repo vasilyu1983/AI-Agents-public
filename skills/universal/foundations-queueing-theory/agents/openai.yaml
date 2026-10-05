@@ -1,0 +1,4 @@
+interface:
+  display_name: "Queueing Theory Foundations"
+  short_description: "Model queue wait with Kingman, Little's Law, and Erlang sizing"
+  default_prompt: "Use $foundations-queueing-theory to estimate G/G/1 mean waiting time with Kingman, check Little's Law, size Erlang server pools, replicas and workers, or investigate bursty traffic, p99 saturation and retries."

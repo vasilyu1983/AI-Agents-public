@@ -1,0 +1,202 @@
+{
+  "metadata": {
+    "skill": "software-email-engineering",
+    "updated": "2026-09-28",
+    "total_sources": 31,
+    "description": "Primary deliverability, provider, and template-engineering sources for transactional email systems.",
+    "title": "Software Email Engineering - Sources",
+    "last_updated": "2026-09-28"
+  },
+  "categories": {
+    "standards_and_deliverability": [
+      {
+        "name": "DMARCbis (RFC 9989)",
+        "url": "https://www.rfc-editor.org/rfc/rfc9989",
+        "description": "Core DMARC standard (Standards Track); obsoletes RFC 7489 and RFC 9091, removes pct/rf/ri, adds t/np/psd. Reporting moved to RFC 9990 (aggregate) and RFC 9991 (failure).",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DKIM",
+        "url": "https://www.rfc-editor.org/rfc/rfc6376",
+        "description": "DomainKeys Identified Mail signing standard.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SPF",
+        "url": "https://www.rfc-editor.org/rfc/rfc7208",
+        "description": "Sender Policy Framework reference.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Email Sender Guidelines",
+        "url": "https://support.google.com/a/answer/81126",
+        "description": "Current Gmail sender requirements covering authentication, TLS, PTR hygiene, spam rates, and one-click unsubscribe for bulk senders.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Can I Email",
+        "url": "https://www.caniemail.com/",
+        "description": "Email client support matrix for HTML/CSS features.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Twilio SendGrid Event Webhook",
+        "url": "https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/event",
+        "description": "Official SendGrid event webhook reference for delivery, bounce, and engagement tracking.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Postmaster Tools",
+        "url": "https://postmaster.google.com",
+        "description": "Official dashboard; check current views, metric definitions, and data visibility.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft high-volume sender requirements announcement",
+        "url": "https://techcommunity.microsoft.com/blog/microsoftdefenderforoffice365blog/strengthening-email-ecosystem-outlook%e2%80%99s-new-requirements-for-high%e2%80%90volume-senders/4399730",
+        "description": "Official Microsoft announcement of Outlook.com/Hotmail bulk-sender SPF/DKIM/DMARC requirements and SMTP 550 5.7.515 rejection behavior (May 2025 enforcement).",
+        "add_as_web_search": true
+      },
+      {
+        "name": "BIMI Group",
+        "url": "https://bimigroup.org",
+        "description": "BIMI specification, VMC/CMC certificate guidance, and current Mark Verifying Authority (MVA) issuer list.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DKIM RSA Key Requirements",
+        "url": "https://www.rfc-editor.org/rfc/rfc8301",
+        "description": "RSA minimum and recommended key sizes.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DKIM Ed25519 Transition",
+        "url": "https://www.rfc-editor.org/rfc/rfc8463",
+        "description": "Ed25519 key encoding and dual-signature transition with separate selectors.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SMTP MTA-STS",
+        "url": "https://www.rfc-editor.org/rfc/rfc8461",
+        "description": "Inbound MX/TLS policy discovery, testing/enforcement, and caching.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "SMTP TLS Reporting",
+        "url": "https://www.rfc-editor.org/rfc/rfc8460",
+        "description": "Aggregate SMTP TLS outcome reporting.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "One-Click Unsubscribe",
+        "url": "https://www.rfc-editor.org/rfc/rfc8058",
+        "description": "HTTPS POST and DKIM-covered unsubscribe headers.",
+        "add_as_web_search": true
+      }
+    ],
+    "providers_and_templates": [
+      {
+        "name": "Amazon SES Sending Guide",
+        "url": "https://docs.aws.amazon.com/ses/latest/dg/send-email.html",
+        "description": "Official Amazon SES sending guidance, quotas, and message flow behavior.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Twilio SendGrid Mail Send API",
+        "url": "https://www.twilio.com/docs/sendgrid/api-reference/mail-send/mail-send",
+        "description": "Official SendGrid send API reference for payload semantics and provider capabilities.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Twilio SendGrid SMTP Sending",
+        "url": "https://www.twilio.com/docs/sendgrid/for-developers/sending-email/getting-started-smtp",
+        "description": "Official SendGrid SMTP guidance for fallback or legacy integrations.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mailgun Sending Messages",
+        "url": "https://documentation.mailgun.com/docs/mailgun/user-manual/sending-messages/sending-messages",
+        "description": "Official Mailgun sending and provider behavior guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mailgun Messages API",
+        "url": "https://documentation.mailgun.com/docs/mailgun/api-reference/send/mailgun/messages",
+        "description": "Official Mailgun API reference for message submission and metadata fields.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Postmark Docs",
+        "url": "https://postmarkapp.com/developer",
+        "description": "Transactional email provider docs with deliverability emphasis.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Postmark Inbound Processing",
+        "url": "https://postmarkapp.com/developer/user-guide/inbound",
+        "description": "Official Postmark inbound webhook and parsing behavior reference.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Resend Docs",
+        "url": "https://resend.com/docs",
+        "description": "API-first transactional email provider documentation.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React Email",
+        "url": "https://react.email/docs/introduction",
+        "description": "Component-based email templating for React teams.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MJML",
+        "url": "https://documentation.mjml.io/",
+        "description": "Responsive email markup framework and compatibility patterns.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Twilio SendGrid Inbound Parse",
+        "url": "https://www.twilio.com/docs/sendgrid/for-developers/parsing-email/setting-up-the-inbound-parse-webhook",
+        "description": "Official inbound parse webhook setup guidance for SendGrid.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mailgun Receiving Routes",
+        "url": "https://documentation.mailgun.com/docs/mailgun/user-manual/receive-forward-store/routes",
+        "description": "Official Mailgun inbound routes and message receiving workflow documentation.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React Email Changelog",
+        "url": "https://react.email/docs/changelog",
+        "description": "Toolchain migration and package changes; verify installed major.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "React Email Render",
+        "url": "https://react.email/docs/utilities/render",
+        "description": "Async rendering and package imports.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MJML Releases",
+        "url": "https://github.com/mjmlio/mjml/releases",
+        "description": "Major-version migration details; verify installed release.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Resend Idempotency Keys",
+        "url": "https://resend.com/docs/dashboard/emails/idempotency-keys",
+        "description": "Provider deduplication behavior, key retention, and retry window.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cloudflare Email Service",
+        "url": "https://developers.cloudflare.com/email-service/",
+        "description": "Email Sending and Email Routing bindings/API setup.",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

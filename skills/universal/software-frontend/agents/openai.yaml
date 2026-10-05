@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend"
+  short_description: "Implements web UI, rendering boundaries, routing, and state"
+  default_prompt: "Use $software-frontend to implement web components, routing, or state and fix hydration or SSR boundaries. Route UX, accessibility, and performance audits to their owning skills."

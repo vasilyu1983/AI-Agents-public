@@ -1,0 +1,4 @@
+interface:
+  display_name: "Causal Inference Foundations"
+  short_description: "Tests whether a launch caused a metric move without a clean A/B test"
+  default_prompt: "Use $foundations-causal-inference to test whether changes or a launch caused a metric move without a clean A/B test, via DiD, synthetic control, IV, RDD, or propensity methods."

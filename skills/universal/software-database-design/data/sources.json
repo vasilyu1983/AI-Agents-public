@@ -1,0 +1,261 @@
+{
+  "metadata": {
+    "skill": "software-database-design",
+    "updated": "2026-09-27",
+    "total_sources": 34,
+    "description": "Database design and migration source index; verify deployment-specific capabilities at the point of use.",
+    "title": "Software Database Design - Sources",
+    "last_updated": "2026-09-27"
+  },
+  "categories": {
+    "relational_design": [
+      {
+        "name": "PostgreSQL Documentation",
+        "url": "https://www.postgresql.org/docs/",
+        "description": "Authoritative source for schema, indexing, constraints, and operational behavior.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "MySQL Documentation",
+        "url": "https://dev.mysql.com/doc/",
+        "description": "Official MySQL schema, indexing, and DDL reference.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "MongoDB Data Modeling",
+        "url": "https://www.mongodb.com/docs/manual/core/data-model-design/",
+        "description": "Document-modeling patterns and tradeoffs for MongoDB.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "MongoDB Atlas Vector Search",
+        "url": "https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/",
+        "description": "Atlas Vector Search index definition, $vectorSearch stage, filtered ANN, and hybrid search via $rankFusion.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "MongoDB Atlas Search",
+        "url": "https://www.mongodb.com/docs/atlas/atlas-search/atlas-search-overview/",
+        "description": "Lucene-based full-text search co-located with operational data; pairs with vector search for hybrid retrieval.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "MongoDB Building AI Applications",
+        "url": "https://www.mongodb.com/docs/atlas/atlas-vector-search/ai-integrations/",
+        "description": "Reference patterns for RAG, agent memory, and embedding lifecycle on Atlas.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "Redis Data Types",
+        "url": "https://redis.io/docs/latest/develop/data-types/",
+        "description": "Primary source for Redis storage structures and access patterns.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "PostgreSQL Partitioning",
+        "url": "https://www.postgresql.org/docs/current/ddl-partitioning.html",
+        "description": "Primary guidance for declarative partitioning design, limitations, and maintenance tradeoffs.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "PostgreSQL Row Security Policies",
+        "url": "https://www.postgresql.org/docs/current/ddl-rowsecurity.html",
+        "description": "Primary reference for row-level security semantics and policy behavior.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "PostgreSQL 18 Release Notes",
+        "url": "https://www.postgresql.org/docs/release/18/",
+        "description": "PostgreSQL 18 feature boundaries and upgrade changes; check target deployment before using.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "SQLite Generated Columns",
+        "url": "https://www.sqlite.org/gencol.html",
+        "description": "Primary reference for generated columns in SQLite-backed application schemas.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "PostgreSQL Explicit Locking",
+        "url": "https://www.postgresql.org/docs/current/explicit-locking.html",
+        "description": "Authoritative lock-level reference for ALTER TABLE and DDL operations; verify lock levels here before treating a migration as safe.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "pgvector",
+        "url": "https://github.com/pgvector/pgvector",
+        "description": "Primary source for pgvector version, HNSW/IVFFlat index parameters, and changelog.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "RFC 9562 - UUID Specification",
+        "url": "https://www.rfc-editor.org/rfc/rfc9562.html",
+        "description": "IETF standard defining UUIDv7 and successors to RFC 4122; primary source for UUID version semantics.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "PostgreSQL Mistakes and How to Avoid Them (Angelakos, Manning, 2025)",
+        "url": "https://www.manning.com/books/postgresql-mistakes-and-how-to-avoid-them",
+        "description": "PG16/17-era type-choice forensics (MONEY, SERIAL, CHAR(n)), UUIDv4 primary-key benchmark (table 5.4), NULLS NOT DISTINCT upserts (PG15), and major-version upgrade regressions (CTE inlining, JIT defaults).",
+        "add_as_web_search": false,
+        "last_verified": "2026-09-27",
+        "verification_scope": "Publisher or author page only; chapter claims not reverified."
+      },
+      {
+        "name": "SQL Antipatterns, Volume 1 (Karwin, Pragmatic Bookshelf, 2022)",
+        "url": "https://pragprog.com/titles/bksap1/sql-antipatterns-volume-1/",
+        "description": "Ch. 3 'Naive Trees' compares adjacency list, recursive query, path enumeration, nested sets, and closure table for hierarchy modeling.",
+        "add_as_web_search": false,
+        "last_verified": "2026-09-27",
+        "verification_scope": "Publisher or author page only; chapter claims not reverified."
+      },
+      {
+        "name": "High Performance MySQL, 4th ed. (Botros & Tinley, O'Reilly, 2021)",
+        "url": "https://www.oreilly.com/library/view/high-performance-mysql/9781492080503/",
+        "description": "Ch. 9 covers replication topologies and semisynchronous failover behavior; Ch. 11 covers sharding decisions and partitioning-key selection.",
+        "add_as_web_search": false,
+        "last_verified": "2026-09-27",
+        "verification_scope": "Publisher or author page only; chapter claims not reverified."
+      },
+      {
+        "name": "MongoDB $rankFusion",
+        "url": "https://www.mongodb.com/docs/manual/reference/operator/aggregation/rankfusion/",
+        "description": "Operator availability and hybrid-ranking behavior.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "PostgreSQL 18 Generated Columns",
+        "url": "https://www.postgresql.org/docs/18/ddl-generated-columns.html",
+        "description": "Virtual and stored generated-column behavior and restrictions.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "PostgreSQL 18 CREATE TABLE",
+        "url": "https://www.postgresql.org/docs/18/sql-createtable.html",
+        "description": "Constraint enforcement syntax and semantics.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "MySQL InnoDB Clustered Index",
+        "url": "https://dev.mysql.com/doc/refman/8.4/en/innodb-index-types.html",
+        "description": "Clustered primary-key and secondary-index storage.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "MySQL Online DDL Operations",
+        "url": "https://dev.mysql.com/doc/refman/8.4/en/innodb-online-ddl-operations.html",
+        "description": "Per-operation algorithm and concurrency limitations.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "MySQL Implicit Commit",
+        "url": "https://dev.mysql.com/doc/refman/8.4/en/implicit-commit.html",
+        "description": "DDL transaction and rollback limitations.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      }
+    ],
+    "orms_and_migrations": [
+      {
+        "name": "Prisma Schema Docs",
+        "url": "https://docs.prisma.io/docs/orm/prisma-schema/overview",
+        "description": "Prisma schema, relations, and migration behavior.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "EF Core Modeling",
+        "url": "https://learn.microsoft.com/en-us/ef/core/modeling/",
+        "description": "EF Core entity modeling, relationships, and conventions.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "SQLAlchemy ORM",
+        "url": "https://docs.sqlalchemy.org/en/20/orm/",
+        "description": "SQLAlchemy ORM modeling and relationship patterns.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "Drizzle ORM Docs",
+        "url": "https://orm.drizzle.team/docs/overview",
+        "description": "Type-safe schema definition and migration workflow for Drizzle.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "Squawk CLI",
+        "url": "https://squawkhq.com/docs/cli/",
+        "description": "PostgreSQL migration linter command reference.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "Atlas Migration Lint",
+        "url": "https://atlasgo.io/versioned/lint",
+        "description": "Migration analyzer workflow and access requirements.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "strong_migrations",
+        "url": "https://github.com/ankane/strong_migrations",
+        "description": "Rails migration safety warnings.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "pgroll",
+        "url": "https://github.com/xataio/pgroll",
+        "description": "PostgreSQL expand-contract migration tooling.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      },
+      {
+        "name": "gh-ost",
+        "url": "https://github.com/github/gh-ost",
+        "description": "MySQL online-schema-change tool and requirements.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-27"
+      }
+    ],
+    "transactions_and_storage_engines": [
+      {
+        "name": "Designing Data-Intensive Applications (Kleppmann, O'Reilly, 1st ed. 2017)",
+        "url": "https://dataintensive.net/",
+        "description": "Ch. 7 covers isolation anomalies, write skew, and serializability; Ch. 3 covers LSM-tree and B-tree tradeoffs and compaction failure modes. Verify vendor isolation defaults against current documentation.",
+        "add_as_web_search": false,
+        "last_verified": "2026-09-27",
+        "verification_scope": "Publisher or author page only; chapter claims not reverified."
+      },
+      {
+        "name": "Database Internals (Petrov, O'Reilly, 2019)",
+        "url": "https://www.oreilly.com/library/view/database-internals/9781492040330/",
+        "description": "Ch. 6 covers Bw-trees and delta chains; Ch. 7 covers LSM compaction strategies, table starvation, tombstones, and the RUM conjecture.",
+        "add_as_web_search": false,
+        "last_verified": "2026-09-27",
+        "verification_scope": "Publisher or author page only; chapter claims not reverified."
+      }
+    ]
+  }
+}

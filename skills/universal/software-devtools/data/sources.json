@@ -1,0 +1,284 @@
+{
+  "metadata": {
+    "skill": "software-devtools",
+    "updated": "2026-09-28",
+    "total_sources": 37,
+    "description": "Primary references for CLI, SDK, IDE extension, language-server, and package publishing work, including current registry-publishing security practices.",
+    "title": "Software Devtools - Sources",
+    "last_updated": "2026-09-28"
+  },
+  "categories": {
+    "sdk_and_cli": [
+      {
+        "name": "OpenAPI Specification",
+        "url": "https://spec.openapis.org/oas/latest.html",
+        "description": "Source contract for schema-driven SDK and client generation.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Cobra",
+        "url": "https://cobra.dev/",
+        "description": "Go CLI framework and UX conventions for subcommand-oriented tools.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Typer",
+        "url": "https://typer.tiangolo.com/",
+        "description": "Python CLI framework with type-driven argument handling.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "oclif",
+        "url": "https://oclif.io/",
+        "description": "JavaScript/TypeScript CLI framework for plugin-friendly tools.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Language Server Protocol",
+        "url": "https://microsoft.github.io/language-server-protocol/",
+        "description": "Official LSP overview and specification entrypoint for multi-editor language tooling.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Conventional Commits 1.0.0",
+        "url": "https://www.conventionalcommits.org/en/v1.0.0/",
+        "description": "Breaking changes via `!` before the colon or a `BREAKING CHANGE:` footer.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Node.js modules: require(esm)",
+        "url": "https://nodejs.org/api/modules.html",
+        "description": "require(esm) unflagged in v20.19/v22.12/v23; synchronous ESM only.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      }
+    ],
+    "mcp": [
+      {
+        "name": "Model Context Protocol (spec)",
+        "url": "https://modelcontextprotocol.io/",
+        "description": "Canonical protocol concepts and architecture; resolve protocol revision and SDK support at use time.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "MCP \u2014 Build a Server",
+        "url": "https://modelcontextprotocol.io/docs/develop/build-server",
+        "description": "Official guide to building MCP servers (exposing tools/data to AI agents). Resolve current SDK and tooling at use-time.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "MCP \u2014 Build a Client",
+        "url": "https://modelcontextprotocol.io/docs/develop/build-client",
+        "description": "Official guide to building MCP clients. Relevant for SDK/CLI products exposing or consuming agent tool surfaces.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Official MCP Registry",
+        "url": "https://registry.modelcontextprotocol.io/",
+        "description": "Metadata registry for discovering MCP servers; check maturity and publishing requirements at use time.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      }
+    ],
+    "ide_and_publishing": [
+      {
+        "name": "VS Code Extension API",
+        "url": "https://code.visualstudio.com/api",
+        "description": "Primary docs for editor extensions, activation, and publishing.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "npm Package Publishing",
+        "url": "https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry",
+        "description": "Official npm packaging and publishing guidance.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "npm Provenance Statements",
+        "url": "https://docs.npmjs.com/generating-provenance-statements/",
+        "description": "Official npm provenance, attestations, and verification guidance for secure package publishing.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "npm Trusted Publishing",
+        "url": "https://docs.npmjs.com/trusted-publishers/",
+        "description": "OIDC publisher configuration and provider, action, CLI and automatic-provenance eligibility requirements.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "CISA Advisory \u2014 npm Supply Chain Compromise (Shai-Hulud)",
+        "url": "https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem",
+        "description": "Historical incident-advisory link; unverified, not used for factual claims.",
+        "add_as_web_search": true,
+        "verification_status": "unverified",
+        "verification_note": "The cited endpoint could not be read on 2026-09-28; do not attribute incident dates, counts or follow-on waves to this entry."
+      },
+      {
+        "name": "PyPI Packaging Guide",
+        "url": "https://packaging.python.org/en/latest/",
+        "description": "Python packaging, distribution metadata, and publishing workflow.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "crates.io Policies",
+        "url": "https://doc.rust-lang.org/cargo/reference/publishing.html",
+        "description": "Rust crate publishing and package metadata guidance.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "NuGet Package Publishing",
+        "url": "https://learn.microsoft.com/en-us/nuget/quickstart/create-and-publish-a-package-using-the-dotnet-cli",
+        "description": "Official NuGet package publishing workflow and API-key handling guidance.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Maven Central Publisher Portal",
+        "url": "https://central.sonatype.org/publish/publish-portal-guide/",
+        "description": "Official Maven Central publisher portal guide for artifact validation and release workflow.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "npm classic tokens revoked (GitHub changelog)",
+        "url": "https://github.blog/changelog/2025-12-09-npm-classic-tokens-revoked-session-based-auth-and-cli-token-management-now-available/",
+        "description": "Classic-token revocation, session-based auth, and granular write-token lifetime limits.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "VS Code: Testing Extensions",
+        "url": "https://code.visualstudio.com/api/working-with-extensions/testing-extension",
+        "description": "@vscode/test-cli quick setup; test-electron for advanced setups.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "tower-lsp-server",
+        "url": "https://github.com/tower-lsp-community/tower-lsp-server",
+        "description": "Maintained community fork of tower-lsp for Rust language servers.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "webpack tree shaking",
+        "url": "https://webpack.js.org/guides/tree-shaking/",
+        "description": "sideEffects declarations and preserving CSS/polyfill initialization.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "npm pack",
+        "url": "https://docs.npmjs.com/cli/v11/commands/npm-pack/",
+        "description": "Packed release artifact and output behavior.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "OAuth bearer token errors",
+        "url": "https://www.rfc-editor.org/rfc/rfc6750#section-3.1",
+        "description": "invalid_token includes expiry, revocation and other invalidity; clients may obtain a new token and retry.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      }
+    ],
+    "distribution_and_transforms": [
+      {
+        "name": "Charm Bubble Tea",
+        "url": "https://github.com/charmbracelet/bubbletea",
+        "description": "Upstream terminal UI framework and examples.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "GoReleaser",
+        "url": "https://goreleaser.com/",
+        "description": "CLI cross-platform binary, package and signing release paths.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "cargo-dist",
+        "url": "https://axodotdev.github.io/cargo-dist/book/",
+        "description": "Binary releases, generated CI and installers.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Homebrew packaging",
+        "url": "https://docs.brew.sh/Adding-Software-to-Homebrew",
+        "description": "Formula/cask choice, acceptance, packaging and testing.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "uv tool execution",
+        "url": "https://docs.astral.sh/uv/guides/tools/",
+        "description": "uvx isolated execution and persistent tool installation.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Stainless",
+        "url": "https://www.stainless.com/docs/",
+        "description": "OpenAPI-driven SDK and CLI generation.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "jscodeshift",
+        "url": "https://github.com/facebook/jscodeshift",
+        "description": "JavaScript and TypeScript codemod toolkit.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "ts-morph",
+        "url": "https://ts-morph.com/",
+        "description": "TypeScript compiler API wrapper for symbol-aware transforms.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "LibCST",
+        "url": "https://github.com/Instagram/LibCST",
+        "description": "Formatting-preserving Python transformations.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "llms.txt proposal",
+        "url": "https://llmstxt.org/",
+        "description": "Agent-readable documentation index proposal; verify current format.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "MCP base protocol",
+        "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/index",
+        "description": "Revision-specific explicit state and per-request context requirements.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      }
+    ]
+  }
+}

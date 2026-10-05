@@ -1,0 +1,152 @@
+{
+  "metadata": {
+    "title": "ai-voice-bots - Sources",
+    "description": "Official and adjacent sources for building production voice bots with Python-first pipelines and telephony integration.",
+    "last_updated": "2026-09-27",
+    "updated": "2026-09-27",
+    "skill": "ai-voice-bots",
+    "total_sources": 23
+  },
+  "official_sources": [
+    {
+      "name": "Pipecat GitHub",
+      "url": "https://github.com/pipecat-ai/pipecat",
+      "description": "Open-source framework for voice and multimodal conversational AI.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Pipecat Docs",
+      "url": "https://docs.pipecat.ai/",
+      "description": "Official Pipecat documentation for pipeline design, transports, and processors.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LiveKit Agents GitHub",
+      "url": "https://github.com/livekit/agents",
+      "description": "LiveKit's agent framework for real-time voice and multimodal AI applications.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LiveKit Agents Docs",
+      "url": "https://docs.livekit.io/agents/",
+      "description": "Official LiveKit Agents documentation for AgentSession, plugins, and room integration; consult the Python v0.x migration guide for legacy samples.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "EU AI Act, consolidated Regulation (EU) 2024/1689",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02024R1689-20260727",
+      "description": "Official consolidated text: Article 50(1) and (5) for AI interaction disclosure and first-interaction timing, Article 113 for application dates. Check later amendments before deployment.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Regulation (EU) 2026/1744, AI Act amendment",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32026R1744",
+      "description": "Official amendment: Article 50(2) transitional marking provision and updated Article 113 dates. It does not defer Article 50(1) caller disclosure.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Deepgram Docs",
+      "url": "https://developers.deepgram.com/docs",
+      "description": "Deepgram STT/TTS and turn-detection documentation; compare the currently supported models on target call audio.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ElevenLabs Docs",
+      "url": "https://elevenlabs.io/docs",
+      "description": "ElevenLabs TTS API documentation for current model and streaming behavior checks.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Cartesia Docs",
+      "url": "https://docs.cartesia.ai/",
+      "description": "Cartesia TTS API documentation for model, language and streaming capability checks.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Realtime API Docs",
+      "url": "https://platform.openai.com/docs/guides/realtime",
+      "description": "OpenAI Realtime model and API documentation. Checked 2026-09-07: the catalog lists gpt-realtime-2.1/2.1-mini, gpt-realtime-2, gpt-realtime-translate, gpt-live-transcribe, and gpt-realtime-whisper; older unsuffixed realtime models are deprecated. The 2.1 page confirms reasoning, tool use, and improved noise/interruption behavior but publishes no numeric p95 comparison with gpt-realtime-2.",
+      "add_as_web_search": true
+    }
+  ],
+  "adjacent_references": [
+    {
+      "name": "Twilio Programmable Voice",
+      "url": "https://www.twilio.com/docs/voice",
+      "description": "Twilio Voice API for phone call management and SIP integration.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Vapi Docs",
+      "url": "https://docs.vapi.ai/",
+      "description": "Vapi voice AI platform documentation.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Bland.ai Docs",
+      "url": "https://docs.bland.ai/",
+      "description": "Bland.ai voice agent API documentation.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Retell AI Docs",
+      "url": "https://docs.retellai.com/",
+      "description": "Retell AI enterprise voice agent platform documentation.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Telnyx Docs",
+      "url": "https://developers.telnyx.com/docs/overview",
+      "description": "Telnyx voice and SIP API documentation.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AssemblyAI Docs",
+      "url": "https://www.assemblyai.com/docs",
+      "description": "AssemblyAI STT API. Universal-2 model for high-accuracy transcription.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Speech Services",
+      "url": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/",
+      "description": "Azure Cognitive Services Speech-to-Text and Text-to-Speech.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "PlayHT Docs",
+      "url": "https://docs.play.ht/",
+      "description": "PlayHT TTS API for voice cloning and low-latency synthesis.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "WebRTC Specification",
+      "url": "https://www.w3.org/TR/webrtc/",
+      "description": "W3C WebRTC specification for real-time communication.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "ITU-T P.800 (MOS)",
+      "url": "https://www.itu.int/rec/T-REC-P.800/en",
+      "description": "ITU standard for Mean Opinion Score voice quality measurement.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Deepgram Flux Docs",
+      "url": "https://developers.deepgram.com/docs/flux/quickstart",
+      "description": "Deepgram Flux conversational speech recognition — fused STT + turn detection. flux-general-en and flux-general-multi (multilingual GA Apr 2026, ~260ms median end-of-turn).",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Pipecat Smart Turn GitHub",
+      "url": "https://github.com/pipecat-ai/smart-turn",
+      "description": "Open-weight ~8M-param semantic turn-detection model (Whisper-tiny encoder + classifier). v3.x: ~12ms CPU, ~23 languages, int8 8MB.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "EVA-Bench (ServiceNow)",
+      "url": "https://github.com/ServiceNow/eva",
+      "description": "End-to-end voice-agent evaluation framework. Bot-to-bot audio eval scoring EVA-A (accuracy) + EVA-X (experience). arXiv 2605.13841 (May 2026, preprint).",
+      "add_as_web_search": false
+    }
+  ]
+}

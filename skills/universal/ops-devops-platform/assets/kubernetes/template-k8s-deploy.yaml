@@ -1,0 +1,52 @@
+# Kubernetes Deployment Template
+
+# Purpose: Safely deploy new versions with readiness probes, rollback, and canary.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app
+          # Pin by digest (or an immutable release tag); never a mutable tag such as latest.
+          image: <registry>/my-app@sha256:<digest>
+          ports:
+            - containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            periodSeconds: 5
+            failureThreshold: <n>   # n x period = longest allowed start
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+---
+# Rollback: 
+#   kubectl rollout undo deployment/my-app
+# Canary: 
+#   Deploy with replicas: 1, observe, then scale up

@@ -1,0 +1,16 @@
+{"case_id": "needle_capital_01", "question": "What city is named in the document as the location of the 2027 conference?", "needle": "The 2027 conference will be held in Reykjavik, Iceland.", "expected": "Reykjavik"}
+{"case_id": "needle_capital_02", "question": "What city is named in the document as the location of the 2028 summit?", "needle": "The 2028 summit will take place in Wellington, New Zealand.", "expected": "Wellington"}
+{"case_id": "needle_number_01", "question": "What is the budget figure stated in the document?", "needle": "The annual budget is set at exactly 412,500 euros.", "expected": "412,500"}
+{"case_id": "needle_number_02", "question": "What is the seat count stated in the document?", "needle": "The auditorium has a capacity of 1,847 seats.", "expected": "1,847"}
+{"case_id": "needle_name_01", "question": "Who does the document name as the lead reviewer?", "needle": "The lead reviewer for this proposal is Dr. Mariam Al-Sayed.", "expected": "Mariam Al-Sayed"}
+{"case_id": "needle_name_02", "question": "Who does the document name as the project sponsor?", "needle": "The project sponsor is listed as Felix Okonkwo-Reyes.", "expected": "Felix Okonkwo-Reyes"}
+{"case_id": "needle_date_01", "question": "What date does the document set as the registration deadline?", "needle": "Registration closes at the end of business on 14 September 2026.", "expected": "14 September 2026"}
+{"case_id": "needle_date_02", "question": "What date does the document set as the launch?", "needle": "The product launch is scheduled for 3 February 2027.", "expected": "3 February 2027"}
+{"case_id": "needle_id_01", "question": "What internal ticket number does the document reference?", "needle": "All work is tracked under ticket SUPPORT-87431.", "expected": "SUPPORT-87431"}
+{"case_id": "needle_id_02", "question": "What internal ticket number does the document reference?", "needle": "Roll-back coordination uses ticket OPS-2099-A.", "expected": "OPS-2099-A"}
+{"case_id": "needle_choice_01", "question": "Does the document recommend the blue, green, or amber path? Answer with one word.", "needle": "After reviewing the tradeoffs, the team recommends the amber path.", "expected": "amber"}
+{"case_id": "needle_choice_02", "question": "Does the document say the migration is approved, blocked, or pending? Answer with one word.", "needle": "Migration status as of this morning: blocked, pending security review.", "expected": "blocked"}
+{"case_id": "needle_url_01", "question": "What internal hostname does the document reference?", "needle": "Diagnostic scripts run on the host metrics-prime-04.internal.", "expected": "metrics-prime-04.internal"}
+{"case_id": "needle_url_02", "question": "What internal hostname does the document reference?", "needle": "Backups stream to the host vault-cold-eu-2.internal each night.", "expected": "vault-cold-eu-2.internal"}
+{"case_id": "needle_count_01", "question": "How many regional offices does the document say will participate?", "needle": "Seventeen regional offices have confirmed participation.", "expected": "Seventeen"}
+{"case_id": "needle_count_02", "question": "How many board members does the document say signed off?", "needle": "Eleven of twelve board members signed off on the change.", "expected": "Eleven"}

@@ -1,0 +1,70 @@
+{
+  "skill_name": "software-mobile",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A startup wants to build a fitness-tracking app with HealthKit data on iOS, Android health-data integration (an older brief names Google Fit), custom Canvas animations for live Bluetooth LE heart-rate data, and device pairing. They have a team of two iOS engineers and one Android engineer. Should they go native or cross-platform? Justify the recommendation and check the Android integration choice.",
+      "expected_output": "Recommend separate native apps provisionally based on the team shape and platform-specific health/BLE requirements. Identify the native escape-hatch ownership cost for alternatives and any unresolved capability needing a bounded spike, rather than claiming that shared stacks cannot implement these features. Look up the current Google Fit migration guidance at https://developer.android.com/health-and-fitness/health-connect/migration/fit and choose the appropriate path for the required data/access pattern (Health Connect for on-device aggregation, Google Health API for cloud data, and native Bluetooth APIs for BLE device communication); do not assume the older Google Fit integration is suitable for greenfield work.",
+      "files": [],
+      "expectations": [
+        "The output applies the platform-selection decision tree and capability proof gate.",
+        "The output identifies health API permissions, BLE lifecycle and animation performance as capabilities to prove, without claiming these categorically require a native stack.",
+        "The output recommends separate native apps provisionally given the team shape, or justifies another stack with applicable capability evidence and native escape-hatch ownership cost.",
+        "The output reads current Google Fit migration guidance, distinguishes on-device health aggregation/cloud data from direct BLE communication, and avoids recommending Google Fit from the old brief without verification.",
+        "The output avoids unsourced framework-performance benchmarks."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "An iOS app sends push notifications from a Node.js backend. The engineering team reports that push notifications work perfectly in local Simulator testing and in Xcode direct-device builds, but after uploading to TestFlight the notifications stop arriving. Walk through the diagnosis and the fix.",
+      "expected_output": "The skill should identify the APNs environment mismatch as the root cause: local/Xcode builds use the sandbox environment while TestFlight requires production. It should prescribe checking aps-environment in the archived entitlements, verifying the backend device row records push_environment = production, and validating both the transport path and the notification-open path on the TestFlight build.",
+      "files": [],
+      "expectations": [
+        "The output identifies the sandbox vs production APNs environment mismatch as the primary suspect.",
+        "The output prescribes inspecting the archived .app entitlements for aps-environment = production before upload.",
+        "The output recommends verifying the backend device row records push_environment = production after a TestFlight install.",
+        "The output explicitly states that local Simulator push success is not proof of TestFlight production delivery, invoking the never-treat-local-push-success-as-TestFlight-proof rule.",
+        "The output includes validating the notification-open path (cold start tap, warm resume tap) after transport proof succeeds."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A React Native 0.82-or-later Expo-managed app targeting both iOS and Android uses a third-party native module that has not been updated for the New Architecture. The team wants to ship in two weeks. What are their options and what is the recommended path?",
+      "expected_output": "The skill should note that on this React Native release the Legacy Architecture cannot be enabled (newArchEnabled=false is ignored), identify the stale native module as a compatibility risk, present options (interop layer coverage for the unmigrated module, replace it, fork/patch it, or temporarily pin to the last Legacy-capable RN / Expo SDK release, confirmed from the React Native release notes and Expo SDK changelog, with an explicit upgrade-debt deadline), and recommend evaluating interop-layer coverage first before deciding to pin or fork.",
+      "files": [],
+      "expectations": [
+        "The output notes that the New Architecture cannot be disabled on current React Native releases (Legacy Architecture removed; newArchEnabled=false is ignored).",
+        "The output identifies the stale native module as a New Architecture compatibility risk that must be evaluated before the two-week deadline.",
+        "The output presents at least two concrete options: interop-layer coverage and module replacement or fork.",
+        "The output does not recommend disabling the New Architecture as a viable option on current React Native.",
+        "The output names pinning to an older RN/Expo SDK as a temporary, debt-bearing fallback only, not the recommended path, and says to confirm the last Legacy-capable version from the React Native release notes or Expo SDK changelog rather than quoting it from memory."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "A mobile app with English, French, German, and Japanese locales has a backend that returns AI-generated daily summaries as prose. The iOS client currently displays these summaries raw. French and Japanese users are seeing English text. Diagnose the problem and recommend the correct i18n architecture.",
+      "expected_output": "The skill should identify that backend-generated prose cannot be localized client-side and must be handled server-side. It should route the i18n architecture to software-localisation (its backend-generated content reference) rather than answering from mobile-platform rules, and recommend Pattern A (generate-in-locale) or Pattern B (translate-after-cache) from that reference, provide selection criteria, and prescribe the locale detection priority (query param > Accept-Language header > stored profile) and the client contract (inject ?locale= and Accept-Language on every request).",
+      "files": [],
+      "expectations": [
+        "The output correctly diagnoses the problem as generated prose returning in English regardless of locale, not a missing l10n key issue.",
+        "The output routes strings and translation-pipeline ownership to software-localisation and references Pattern A (generate-in-locale) and Pattern B (translate-after-cache).",
+        "The output recommends Pattern A for on-demand AI content like daily summaries or explains the trade-off clearly.",
+        "The output prescribes the locale detection priority: ?locale= query param > Accept-Language header > stored profile locale.",
+        "The output prescribes the mobile client contract: inject ?locale= and Accept-Language on every API request and read the locale at request-build time, not at client-construction time."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "A team is preparing to submit an Android app update to Google Play. The app currently targets API 34. The Play Store dashboard is showing a warning about the upcoming target SDK requirement. What must the team do before submitting the update, and what are the key compliance checks?",
+      "expected_output": "Read the current Google Play target-API policy at https://developer.android.com/google/play/requirements/target-sdk for the app type and update track. Identify the required target level and applicable deadline from that source, then plan the targetSdk upgrade and platform behavior-change testing. Treat an unavailable policy source as unverified and do not claim release readiness. Check Data safety, privacy declarations, release signing and real-device auth/background flows. Evaluate Play Integrity according to abuse risk and test it if used; it is not a universal submission requirement or a signing mechanism.",
+      "files": [],
+      "expectations": [
+        "The output reads or explicitly requests verification of the current Play target-API policy for the app type and release track; it does not reuse API 35 or a stored deadline as a timeless requirement.",
+        "The output treats target-API compliance as a release gate and calls for targetSdk upgrade plus relevant behavior-change testing.",
+        "The output includes Data safety/privacy declarations, release signing and real-device auth/background proof.",
+        "The output distinguishes optional risk-based Play Integrity attestation from release signing and does not assert that every app must integrate it to submit.",
+        "The output marks the required target level/deadline unverified if the primary policy cannot be read and withholds a readiness claim."
+      ]
+    }
+  ]
+}

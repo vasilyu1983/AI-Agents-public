@@ -1,0 +1,4 @@
+interface:
+  display_name: "Consumer Neuroscience Foundations"
+  short_description: "Neuromarketing study validity, vendor evaluation, and neural-data law scope"
+  default_prompt: "Use $foundations-consumer-neuroscience to judge an EEG, fMRI, eye-tracking, GSR or facial-coding ad study or vendor, decide whether to buy one, or check whether a signal is regulated neural data."

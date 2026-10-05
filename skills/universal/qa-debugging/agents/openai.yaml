@@ -1,0 +1,4 @@
+interface:
+  display_name: "Debugging QA"
+  short_description: "Debugs crashes, regressions, flakes, and production bugs systematically"
+  default_prompt: "Use $qa-debugging to debug crashes, regressions, flakes, and production bugs systematically. Use when diagnosing stack traces, logs, traces, or profiling data."

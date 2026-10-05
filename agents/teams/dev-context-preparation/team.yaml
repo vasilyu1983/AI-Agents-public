@@ -1,0 +1,58 @@
+---
+name: dev-context-preparation
+family: dev
+description: Build and refresh reusable context artifacts before engineering work.
+best_for:
+- Multi-repo onboarding
+- Code graph generation and context packet creation
+members:
+- dev-portfolio-mapper
+- dev-repo-context-curator
+- dev-code-graph-builder
+- dev-context-packet-synthesizer
+required_context:
+- Repo list, portfolio scope, or target codebase
+optional_context:
+- docs/**/*.md
+- Existing profiles, catalog pages, and graphs
+concurrency_mode: staged
+synthesis_owner: dev-context-packet-synthesizer
+owned_files:
+- 'dev-portfolio-mapper: code-profiles/**, catalog/**'
+- 'dev-repo-context-curator: AGENTS.md, CLAUDE.md, docs/context/**'
+- 'dev-code-graph-builder: graphs/**, reports/code-graph-*.md'
+- 'dev-context-packet-synthesizer: reports/query-*.md, packets/**'
+do_not_touch:
+- .archive/**
+- secrets, credentials, PII
+- lockfiles and generated build output
+- .git/**
+- CI configuration unless named in the prompt
+deliverable:
+  shape: Per-member work product plus a handoff note, then one synthesized delivery report
+  required_sections:
+  - What was done or found
+  - Files touched or artifacts produced
+  - Verification performed
+  - Open risks and next step
+  max_length: 2 pages / ~800 words per member; synthesis <= 1 page
+debate:
+  enabled: false
+  triggers: []
+  perspectives: []
+expansion_gate:
+  rule: evpi
+  evpi_threshold: low
+  max_dynamic_members: 2
+stopping_rule:
+  protocol: regret-min
+  reversibility: reversible
+  max_regret_threshold: 0.3
+synthesis:
+  bias_audit_required: false
+verdict_options:
+- delivered
+- partial_with_gaps
+trust:
+  default_tier: standard
+design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#dev-context-preparation

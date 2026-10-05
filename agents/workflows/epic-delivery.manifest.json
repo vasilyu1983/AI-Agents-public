@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "workflow": {
+    "engine": "waves",
+    "codex": "parent-led",
+    "description": "Deliver an epic as file-owning tasks in dependency waves, then one integration review. A claim ledger tracks each task; it stops after the task plan for your approval and never commits.",
+    "whenToUse": "args: { epic: \"<the epic>\", tasks?: <the approved tasks array from the first run>, continueOnFailure?: false, maxRounds?: 3 }. The first run returns TASKS_READY with the tasks; run again with args.tasks to build them. Each task runs the feature-delivery stages for its class, then a fresh acceptance check; a failed task blocks its dependants, and the run stops at the first failure unless continueOnFailure is true. Any stop short of DONE returns an escalation; commit each task yourself with the dev-git-workflow skill. Files under .git, .claude, .codex, .agents, .github and other protected paths, and instruction files such as AGENTS.md and CLAUDE.md, are out of reach: a change to one stops the run, so a human edits them outside any workflow.",
+    "phases": [
+      { "title": "Plan", "detail": "A read-only planner splits the epic into tasks; stops for approval unless args.tasks is given" },
+      { "title": "Test first", "detail": "Per task: the test writer adds or edits only the task's test files" },
+      { "title": "Test check", "detail": "Per task: a read-only test reviewer runs the tests; red for add, change and fix, green for refactor" },
+      { "title": "Implement", "detail": "Per task: the implementer changes only the task's owned files" },
+      { "title": "Recheck", "detail": "Per task: a read-only test reviewer runs the tests again; all must pass" },
+      { "title": "Acceptance", "detail": "After each wave: one fresh read-only check per task runs its acceptance command, in parallel" },
+      { "title": "Review", "detail": "Integration: fresh reviewers per dimension over the whole epic, every round" },
+      { "title": "Verify", "detail": "Integration: two refuters per finding; both must refute to kill it" },
+      { "title": "Fix", "detail": "Integration: the implementer fixes only the confirmed findings, inside the epic's files" }
+    ]
+  },
+  "bindings": {
+    "dev-feature-delivery": {
+      "team": "dev-feature-delivery",
+      "members": ["dev-feature-researcher", "dev-feature-implementer", "dev-feature-reviewer", "dev-test-writer", "qa-test-reviewer"]
+    }
+  },
+  "waves": {
+    "returns": "{ verdict: TASKS_READY | DONE | BLOCKED | INCOMPLETE | FINDINGS, ledger, waves, history, stop_reason, escalation?, changed_files_reported, changed_files_observed, tasks? }",
+    "extends": "feature-delivery",
+    "plan_arg": "plan",
+    "task_stages": ["plan", "test-first", "test-check", "implement", "recheck"],
+    "integration_stages": ["plan", "review"],
+    "ready_verdict": "TASKS_READY",
+    "pass_verdict": "DONE",
+    "escalation_action": "Stop and hand the open items to a human. Nothing was committed; review the working tree, commit each done task with the dev-git-workflow skill, or discard the change. To retry, run /epic-delivery again with args.tasks set to the tasks still open.",
+    "ready_action": "Review the tasks. To build them, run /epic-delivery again with the same epic and with args.tasks set to the approved tasks array.",
+    "planner": {
+      "binding": "dev-feature-delivery",
+      "member": "dev-feature-implementer",
+      "title": "Plan",
+      "schema": "tasks",
+      "task": "Split the epic into tasks that can each be built, tested and committed alone. Give each task a short id (letters, digits, dot, dash or underscore), a goal, a class (add, change, fix or refactor), the ids it depends_on, the owned_files it may change, the test_files it may add or edit, acceptance checks that can fail, and one acceptance_command that runs those checks. Each file belongs to one task only: if two tasks need one file, merge them. For fix, state failure_reason; for change, list old_assertions. Never plan a file under .git, .claude, .codex, .agents or .github, or an instruction file such as AGENTS.md or CLAUDE.md."
+    },
+    "acceptance": {
+      "binding": "dev-feature-delivery",
+      "member": "qa-test-reviewer",
+      "title": "Acceptance",
+      "schema": "acceptance_report",
+      "task": "Run the task's acceptance_command exactly as given, once, and report it in command. Set passed to true only when the command succeeds and every acceptance check holds; quote the deciding output line in evidence."
+    },
+    "integration_task": "Review the combined change of every task in the epic as one diff: how the tasks fit together, not each task alone.",
+    "schemas": {
+      "tasks": {
+        "type": "object",
+        "required": ["tasks"],
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["id", "goal", "class", "depends_on", "owned_files", "test_files", "acceptance", "acceptance_command"],
+              "properties": {
+                "id": { "type": "string", "minLength": 1 },
+                "goal": { "type": "string", "minLength": 1 },
+                "class": { "type": "string", "enum": ["add", "change", "fix", "refactor"] },
+                "depends_on": { "type": "array", "items": { "type": "string" } },
+                "owned_files": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "Every non-test file this task may change; no other task may own one" },
+                "test_files": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "Every test file this task may add or edit; no other task may own one" },
+                "acceptance": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "Checks that can fail" },
+                "acceptance_command": { "type": "string", "minLength": 1, "description": "One shell command that runs the acceptance checks" },
+                "failure_reason": { "type": "string" },
+                "old_assertions": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      },
+      "acceptance_report": {
+        "type": "object",
+        "required": ["command", "passed", "evidence"],
+        "properties": {
+          "command": { "type": "string", "minLength": 1 },
+          "passed": { "type": "boolean" },
+          "evidence": { "type": "string" }
+        }
+      }
+    }
+  }
+}

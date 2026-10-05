@@ -1,0 +1,4 @@
+interface:
+  display_name: "Team Theory Foundations"
+  short_description: "Apply team theory to cooperative agent design"
+  default_prompt: "Use $foundations-team-theory to organize agents or subagents: single vs multi-agent, what each subagent sees, when to communicate, and how to aggregate (vote, debate, route)."

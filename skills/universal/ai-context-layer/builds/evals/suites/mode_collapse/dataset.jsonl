@@ -1,0 +1,12 @@
+{"prompt_id": "explain_concept", "prompt": "Explain Postgres indexes in two sentences."}
+{"prompt_id": "summarize_pros_cons", "prompt": "Give one pro and one con of microservices, in 30 words total."}
+{"prompt_id": "rewrite_friendly", "prompt": "Rewrite this sentence in a friendly tone: 'Submit the form before Friday or the request is closed.'"}
+{"prompt_id": "list_three", "prompt": "Name three small mammals that hibernate."}
+{"prompt_id": "code_snippet", "prompt": "Write a one-line Python expression that returns the most common element in a list."}
+{"prompt_id": "regex_explain", "prompt": "What does this regex do: ^[A-Z][a-z]+$"}
+{"prompt_id": "menu_choice", "prompt": "Recommend a vegetarian lunch under 600 calories. One sentence."}
+{"prompt_id": "trivia", "prompt": "Which is heavier, a kilogram of feathers or a kilogram of steel? Reply in one short sentence."}
+{"prompt_id": "language", "prompt": "Translate 'Where is the train station?' to French."}
+{"prompt_id": "math", "prompt": "What is 17 percent of 250? Reply with just the number."}
+{"prompt_id": "color_choice", "prompt": "Suggest a color palette of three colors for a summer beach poster. List the hex codes."}
+{"prompt_id": "metaphor", "prompt": "Complete the metaphor in one sentence: 'Trying to fix this without docs is like...'"}

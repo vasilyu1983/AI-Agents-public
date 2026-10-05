@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Science Engineering Suite - Quick Reference"
+  short_description: "EDA, feature engineering, leakage checks and ML evaluation"
+  default_prompt: "Use $ai-ml-data-science for EDA, feature engineering, leakage checks and model evaluation, or to explain responsible-AI and multimodal mechanics: fairness, privacy, speech, vision-language, and diffusion."

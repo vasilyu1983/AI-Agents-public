@@ -1,0 +1,167 @@
+{
+  "metadata": {
+    "skill": "software-accessibility",
+    "updated": "2026-09-28",
+    "total_sources": 23,
+    "description": "Primary standards, implementation guides, and tooling references for accessibility engineering.",
+    "title": "Software Accessibility - Sources",
+    "last_updated": "2026-09-28"
+  },
+  "categories": {
+    "standards": [
+      {
+        "name": "WCAG 2.2",
+        "url": "https://www.w3.org/TR/WCAG22/",
+        "description": "W3C WCAG 2.2 Recommendation; check the jurisdiction or contract before choosing a binding baseline.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "WAI-ARIA Authoring Practices Guide",
+        "url": "https://www.w3.org/WAI/ARIA/apg/",
+        "description": "Canonical widget patterns, keyboard behavior, and ARIA guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "EN 301 549",
+        "url": "https://www.etsi.org/deliver/etsi_en/301500_301599/301549/",
+        "description": "European accessibility requirements for ICT procurement and compliance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Section 508",
+        "url": "https://www.section508.gov/",
+        "description": "US federal accessibility requirements and implementation guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "European Accessibility Act",
+        "url": "https://eur-lex.europa.eu/eli/dir/2019/882",
+        "description": "Official EAA legal text for digital accessibility obligations in the EU market.",
+        "add_as_web_search": true,
+        "verification_status": "unverified: official text returned a bot challenge on 2026-09-28; verify article and national duties before relying on them"
+      },
+      {
+        "name": "European Commission EAA Notice",
+        "url": "https://digital-strategy.ec.europa.eu/en/news/eu-becomes-more-accessible-all",
+        "description": "European Commission guidance on EAA application timing and business obligations.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Federal Register \u2014 DOJ ADA Title II Web/Mobile Compliance-Date Extension",
+        "url": "https://www.federalregister.gov/documents/2026/04/20/2026-07663/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web",
+        "description": "DOJ Interim Final Rule, effective 20 April 2026, extending ADA Title II web/mobile-app compliance dates by one year (population 50,000+: 26 Apr 2027; under 50,000 or special districts: 26 Apr 2028). Technical standard remains WCAG 2.1 AA. Verify comment-period outcome before citing as final.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "W3C WCAG 3 Introduction",
+        "url": "https://www.w3.org/WAI/standards-guidelines/wcag/wcag3-intro/",
+        "description": "Current status of the WCAG 3.0 Working Draft; use to verify draft date, outcome count, and conformance-tier model before citing 3.0 details.",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_and_tooling": [
+      {
+        "name": "axe-core",
+        "url": "https://github.com/dequelabs/axe-core",
+        "description": "Widely used automation library for accessibility rule checks.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Playwright Accessibility Testing",
+        "url": "https://playwright.dev/docs/accessibility-testing",
+        "description": "Playwright guidance for accessibility assertions in E2E tests.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "The A11Y Project",
+        "url": "https://www.a11yproject.com/",
+        "description": "Practical accessibility checklists and implementation articles.",
+        "add_as_web_search": false
+      },
+      {
+        "name": "WebAIM",
+        "url": "https://webaim.org/",
+        "description": "Accessibility implementation resources, tools, and testing guidance.",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FTC Decision and Order \u2014 accessiBe",
+        "url": "https://www.ftc.gov/system/files/ftc_gov/pdf/d-o.222_3156_-_accessibe_final_consent_package_without_signatures-2.pdf",
+        "description": "Consent order issued 21 April 2025, publicly announced 22 April; requires a $1,000,000 payment and bars unsupported automatic WCAG-compliance claims. Does not prove overlay litigation causation.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Pa11y runner and standard configuration",
+        "url": "https://github.com/pa11y/pa11y",
+        "description": "HTML_CodeSniffer is the default runner; WCAG2AA is its profile, not full WCAG 2.2 coverage.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Next.js route announcer",
+        "url": "https://nextjs.org/docs/architecture/accessibility",
+        "description": "Built-in announcer uses document.title, then h1, then pathname.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "HTML dialog",
+        "url": "https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element",
+        "description": "showModal provides modality and document inertness; test naming and focus behavior.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "HTML Popover API",
+        "url": "https://html.spec.whatwg.org/multipage/popover.html",
+        "description": "Non-modal transient-surface behavior; choose widget semantics separately.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "CSS forced colors",
+        "url": "https://drafts.csswg.org/css-color-adjust/#forced-colors-properties",
+        "description": "Forced colors can remove box shadows; use system colors and test focus indicators.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Radix accessibility",
+        "url": "https://www.radix-ui.com/primitives/docs/overview/accessibility",
+        "description": "APG-aligned primitive behavior; verify the composed widget.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "W3C ISO/IEC 40500 mapping",
+        "url": "https://www.w3.org/WAI/standards-guidelines/wcag/",
+        "description": "ISO/IEC 40500:2025 maps to October 2023 WCAG 2.2; verify the requested edition.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "W3C status messages",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
+        "description": "Short task-status feedback; avoid chatty whole-section live regions.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "W3C non-text contrast",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html",
+        "description": "Author focus indicator contrast and unmodified user-agent exception.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "axe React diagnostics",
+        "url": "https://github.com/dequelabs/axe-core-npm/blob/develop/packages/react/README.md",
+        "description": "Development-console diagnostics on component updates; not a component-test runner.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

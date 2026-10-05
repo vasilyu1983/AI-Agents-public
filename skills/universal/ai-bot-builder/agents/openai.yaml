@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Bot Builder — Support, Sales, and Domain Bots"
+  short_description: "Builds production AI bots with Python for support, sales, and custom domains."
+  default_prompt: "Use $ai-bot-builder to build production AI bots with Python for support, sales, and custom domains. Use when designing conversation flows, personas, escalation, or LangGraph state."

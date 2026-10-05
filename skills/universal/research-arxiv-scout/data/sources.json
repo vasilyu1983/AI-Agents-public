@@ -1,0 +1,205 @@
+{
+  "metadata": {
+    "verification_scope": "Targeted September corrections only. last_updated is the catalog edit date; other entries retain older verification status.",
+    "targeted_checks": [{"url": "https://help.openalex.org/api/authentication/", "verified_claim": "Basic keyless access; free key raises daily budget 10x; 429 for budget/rate exhaustion.", "last_verified": "2026-09-11"}, {"url": "https://info.arxiv.org/help/api/tou.html", "verified_claim": "One request per three seconds and a single connection across controlled machines.", "last_verified": "2026-09-27"}, {"url": "https://info.arxiv.org/help/api/user-manual.html", "verified_claim": "GET and POST are supported; a page is limited to 2000 results.", "last_verified": "2026-09-27"}, {"url": "https://info.arxiv.org/help/availability.html", "verified_claim": "Announcements normally run Sunday through Thursday.", "last_verified": "2026-09-27"}, {"url": "https://docs.openreview.net/getting-started/using-the-api", "verified_claim": "API 2 is current; API v1 remains in use for some older conferences.", "last_verified": "2026-09-27"}, {"url": "https://www.researchrabbit.ai/announcement-researchrabbit-release-2025", "verified_claim": "Litmaps partnership and optional premium tier announced.", "last_verified": "2026-09-27"}],
+    "skill": "research-arxiv-scout",
+    "title": "research-arxiv-scout - Sources",
+    "description": "Official arXiv docs plus complementary discovery and citation tooling used to scout, validate, and curate research links",
+    "last_updated": "2026-09-27"
+  },
+  "arxiv_official": [
+    {
+      "name": "arXiv API Documentation",
+      "url": "https://info.arxiv.org/help/api/index.html",
+      "description": "Official arXiv API docs and guidelines",
+      "add_as_web_search": true
+    },
+    {
+      "name": "arXiv API Terms of Use",
+      "url": "https://info.arxiv.org/help/api/tou.html",
+      "description": "Request limits and permitted use for arXiv API consumers; the attribution statement is on the API Access page",
+      "add_as_web_search": false
+    },
+    {
+      "name": "arXiv Category Taxonomy",
+      "url": "https://arxiv.org/category_taxonomy",
+      "description": "Complete category list (cs.AI, cs.CL, cs.LG, etc.)",
+      "add_as_web_search": false
+    },
+    {
+      "name": "arXiv Search Help",
+      "url": "https://info.arxiv.org/help/search/index.html",
+      "description": "Search syntax and operator reference for arXiv site search",
+      "add_as_web_search": false
+    },
+    {
+      "name": "arXiv Monthly Submissions",
+      "url": "https://arxiv.org/stats/monthly_submissions",
+      "description": "Trends by category over time (useful for monitoring activity)",
+      "add_as_web_search": false
+    },
+    {
+      "name": "arXiv RSS Feeds",
+      "url": "https://rss.arxiv.org/rss/{category}",
+      "description": "Per-category RSS feeds. Replace {category} with e.g. cs.AI, cs.LG, cs.CL; check the official feed status and announcement schedule before a daily digest.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "arXiv New Listings",
+      "url": "https://arxiv.org/list/{cat}/new",
+      "description": "HTML new-submission listing pages per category. Replace {cat} with e.g. cs.AI. arXiv normally announces Sunday through Thursday; check its current announcement schedule.",
+      "add_as_web_search": false
+    }
+  ],
+  "programmatic_metadata": [
+    {
+      "name": "Semantic Scholar API",
+      "url": "https://api.semanticscholar.org/",
+      "description": "Citation and metadata API for verification and enrichment. Check current unauthenticated limits and key eligibility in Semantic Scholar's API documentation before bulk citation chasing.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "OpenAlex",
+      "url": "https://openalex.org/",
+      "description": "OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).",
+      "add_as_web_search": true,
+      "last_verified": "2026-09-11"
+    },
+    {
+      "name": "OpenCitations",
+      "url": "https://opencitations.net/",
+      "description": "Open citation data infrastructure",
+      "add_as_web_search": false
+    }
+  ],
+  "discovery_tools": [
+    {
+      "name": "Semantic Scholar",
+      "url": "https://www.semanticscholar.org/",
+      "description": "Paper discovery with citation graphs and metadata",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Hugging Face Papers",
+      "url": "https://huggingface.co/papers",
+      "description": "Daily paper highlights and community discussion; primary replacement for Papers with Code social signal",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Hugging Face Trending",
+      "url": "https://huggingface.co/trending",
+      "description": "Trending models, datasets, and spaces; useful for code-release signals alongside HF Papers",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Connected Papers",
+      "url": "https://www.connectedpapers.com/",
+      "description": "Visual exploration of related papers and prior work",
+      "add_as_web_search": true
+    },
+    {
+      "name": "alphaXiv",
+      "url": "https://alphaxiv.org",
+      "description": "Social signal layer on top of arXiv: comments, trending papers, and discussion threads. Use as a pre-triage filter before deep API triage.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Emergent Mind",
+      "url": "https://emergentmind.com",
+      "description": "Aggregates arXiv paper signals from X (Twitter), Reddit, GitHub, and HN. Free tier. Useful for identifying papers with broad cross-community attention early.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "arxiv-sanity-lite",
+      "url": "https://arxiv-sanity-lite.com",
+      "description": "Karpathy's SVM-based arXiv recommender. Learns from papers you mark as interesting; good for personalised daily digests.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "ResearchRabbit",
+      "url": "https://researchrabbit.ai",
+      "description": "ResearchRabbit announced a Litmaps partnership and optional premium tier. Check the current feature and plan details before relying on them. https://www.researchrabbit.ai/announcement-researchrabbit-release-2025.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Litmaps",
+      "url": "https://litmaps.com",
+      "description": "ResearchRabbit announced a Litmaps partnership and optional premium tier. Check the current feature and plan details before relying on them. https://www.researchrabbit.ai/announcement-researchrabbit-release-2025.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Zeta Alpha",
+      "url": "https://search.zeta-alpha.com",
+      "description": "Neural search over arXiv and other AI/ML preprint sources. Free web interface; useful for semantic queries that keyword search misses.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "codesota.com",
+      "url": "https://codesota.com",
+      "description": "Leaderboard and benchmark lookup for code-related tasks. Use for state-of-the-art comparisons previously served by Papers with Code leaderboards.",
+      "add_as_web_search": true
+    }
+  ],
+  "dead_or_changed": [
+    {
+      "name": "Papers with Code",
+      "url": "https://paperswithcode.com/",
+      "description": "DEAD as of July 2025. paperswithcode.com now 301-redirects to Hugging Face Trending; GitHub data is frozen. Replaced by: HF Papers (huggingface.co/papers) for social signal, HF Trending (huggingface.co/trending) for code-release signals, and codesota.com for leaderboard lookups.",
+      "add_as_web_search": false,
+      "status": "dead",
+      "dead_since": "2025-07"
+    },
+    {
+      "name": "arXiv export API endpoint",
+      "url": "https://info.arxiv.org/help/api/index.html",
+      "description": "Operator terms require at most 1 request / 3s, single connection, across all controlled machines; checked 2026-09-11. No enforcement-start date is established here. Parallel query bursts are the fastest route to a throttle. Replacement: same endpoint; enforce the 3s gap in all query scripts (scripts/generate_arxiv_scout_queries.py reports estimated_min_runtime_seconds for this reason). See references/arxiv-api-guide.md#rate-limiting.",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2026-02-01"
+    },
+    {
+      "name": "OpenAlex",
+      "url": "https://openalex.org/",
+      "description": "OpenAlex permits basic keyless requests; a free key raises the daily budget 10x. Budget/rate exhaustion returns 429. Verify current allowances at https://help.openalex.org/api/authentication/ (checked 2026-09-11; page updated 2026-08-19).",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2026-02-13",
+      "last_verified": "2026-09-11"
+    },
+    {
+      "name": "Semantic Scholar API",
+      "url": "https://www.semanticscholar.org/product/api",
+      "description": "CHANGED: an API key is recommended for sustained use and key-approval rules have tightened. Check current rate limits and key eligibility at https://www.semanticscholar.org/product/api before bulk citation chasing; back off on 429. Fallback: OpenAlex, which allows basic keyless queries.",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2026-01-01",
+      "last_verified": "2026-09-11"
+    },
+    {
+      "name": "Connected Papers",
+      "url": "https://www.connectedpapers.com/",
+      "description": "CHANGED: a paid tier exists and the free plan caps searches. Check current plan limits at https://www.connectedpapers.com/ before relying on it; for bulk citation-graph work use the OpenAlex or Semantic Scholar citation graph.",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2025-01-01",
+      "last_verified": "2026-09-11"
+    },
+    {
+      "name": "ICLR / OpenReview",
+      "url": "https://docs.openreview.net/",
+      "description": "OpenReview's current API is API 2; the legacy API v1 is still used for some older conferences. Check the venue's API version when verifying acceptance rather than relying on an arXiv comment field.",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2026-01-01"
+    },
+    {
+      "name": "ResearchRabbit",
+      "url": "https://researchrabbit.ai",
+      "description": "ResearchRabbit announced a Litmaps partnership and an optional premium tier. Check current plan limits at https://www.researchrabbit.ai/ before relying on bulk exports; for programmatic citation-network work use OpenAlex.",
+      "add_as_web_search": false,
+      "status": "changed",
+      "changed_since": "2025-05-08",
+      "last_verified": "2026-09-11"
+    }
+  ]
+}

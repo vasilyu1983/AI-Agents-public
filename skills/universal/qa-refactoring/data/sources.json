@@ -1,0 +1,328 @@
+{
+  "metadata": {
+    "skill": "qa-refactoring",
+    "updated": "2026-09-27",
+    "version": "2.5",
+    "total_sources": 43,
+    "description": "Primary references for safe refactoring, codemod verification, contract testing, migration rollouts, and CI quality gates. Prefer official docs for volatile tooling guidance.",
+    "title": "QA Refactoring - Sources",
+    "last_updated": "2026-09-27"
+  },
+  "categories": {
+    "refactoring_foundations": [
+      {
+        "name": "Martin Fowler - Refactoring (Book)",
+        "url": "https://martinfowler.com/books/refactoring.html",
+        "description": "Canonical refactoring reference and catalog entry point.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Refactoring.Guru - Refactoring Catalog",
+        "url": "https://refactoring.guru/refactoring",
+        "description": "Refactoring patterns with examples; useful for mapping smells to safe moves.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Refactoring.Guru - Code Smells",
+        "url": "https://refactoring.guru/refactoring/smells",
+        "description": "Code smell identification and remediation hints.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Tidy First? - Kent Beck (Book, O'Reilly, 2023)",
+        "url": "https://www.oreilly.com/library/view/tidy-first/9781098151253/",
+        "description": "Small, reversible \"tidyings\" done before a risky change, framed as an economic (coupling/cohesion, optionality) rather than moral decision.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "SWE-Bench ProMax (arXiv 2608.09802)",
+        "url": "https://arxiv.org/abs/2608.09802",
+        "description": "Benchmark of 170 multilingual refactoring instances; the reported best-model resolve rate is 41.2% on this benchmark. Do not use it as a forecast for a specific repo.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "legacy_code_safety": [
+      {
+        "name": "Working Effectively with Legacy Code (Book)",
+        "url": "https://www.oreilly.com/library/view/working-effectively-with/0131177052/",
+        "description": "Seams, characterization tests, and incremental refactoring strategies.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "ApprovalTests",
+        "url": "https://approvaltests.com/",
+        "description": "Approval and golden-master testing workflows across languages.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Martin Fowler - Strangler Fig Application",
+        "url": "https://martinfowler.com/bliki/StranglerFigApplication.html",
+        "description": "Incremental modernization pattern for legacy systems.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Transactional Outbox Pattern",
+        "url": "https://microservices.io/patterns/data/transactional-outbox",
+        "description": "The local write and outbox record commit atomically; the relay can publish duplicates, so consumers must be idempotent.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Debezium Releases",
+        "url": "https://debezium.io/releases/",
+        "description": "Version source for Debezium connect images used in CDC dual-write examples.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "codemods_and_contracts": [
+      {
+        "name": "OpenRewrite - Recipe Testing",
+        "url": "https://docs.openrewrite.org/authoring-recipes/recipe-testing",
+        "description": "Testing guidance for large-scale semantic rewrites.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "ast-grep - Rewrite Rule",
+        "url": "https://ast-grep.github.io/guide/rewrite-rule.html",
+        "description": "Pattern-based AST rewrites for codemods and safe mechanical edits.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Pact Documentation",
+        "url": "https://docs.pact.io/",
+        "description": "Consumer/provider contract testing for boundary-preserving refactors.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "jscodeshift (npm)",
+        "url": "https://www.npmjs.com/package/jscodeshift",
+        "description": "Version source.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "jest-codemods (GitHub)",
+        "url": "https://github.com/skovhus/jest-codemods",
+        "description": "Migrates AVA/Chai/Jasmine/Mocha/Tape/Sinon *to* Jest \u2014 not a Jest-version-to-version migration tool.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Python 3.13 What's New (2to3 removal)",
+        "url": "https://docs.python.org/3/whatsnew/3.13.html",
+        "description": "Confirms 2to3 was removed from the Python standard library in 3.13.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "codemod-missing-await-act (GitHub)",
+        "url": "https://github.com/eps1lon/codemod-missing-await-act",
+        "description": "Adds missing await to Testing Library act() calls; not an Enzyme-to-Testing-Library migration tool.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "React 19 Upgrade Guide (codemod CLI)",
+        "url": "https://react.dev/blog/2024/04/25/react-19-upgrade-guide",
+        "description": "Documents `npx codemod@latest react/19/...` as the current invocation, not `@codemod-com/cli`.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "codemod.com - jssg blog post",
+        "url": "https://codemod.com/blog/jssg",
+        "description": "Documents `npx codemod jssg ...`; no standalone `@codemod/jssg` global package is named.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "OpenRewrite - Spring Boot 4 Recipes",
+        "url": "https://docs.openrewrite.org/recipes/java/spring/boot4",
+        "description": "Fully qualified recipe names for Spring Boot 4 upgrades (e.g. org.openrewrite.java.spring.boot4.UpgradeSpringBoot_4_0), superseding the shorter Boot 3.4 example previously cited.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Moderne - OpenRewrite MCP Server",
+        "url": "https://docs.moderne.io/user-documentation/agent-tools/mcp/overview/",
+        "description": "Confirms the Moderne CLI/MCP server integration; the \"5,000+ recipes\" figure is not stated on this or the moderne.ai/openrewrite page.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "quality_gates": [
+      {
+        "name": "ESLint - Configuration Files",
+        "url": "https://eslint.org/docs/latest/use/configure/configuration-files",
+        "description": "Current flat-config guidance for JavaScript/TypeScript linting.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Prettier - Integrating with Linters",
+        "url": "https://prettier.io/docs/next/integrating-with-linters",
+        "description": "Current guidance on keeping formatting separate from linting.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "SonarQube Server 2026.1 LTA - Quality Gates",
+        "url": "https://docs.sonarsource.com/sonarqube-server/2026.1/instance-administration/analysis-functions/quality-gates",
+        "description": "Quality gate configuration for SonarQube 2026.1 LTA, including Sonar way for AI Code and MCP server integration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "SonarQube Server 2026.1 LTA - Installation Requirements",
+        "url": "https://docs.sonarsource.com/sonarqube-server/2026.1/setup-and-upgrade/installation-requirements/server-host",
+        "description": "Current supported runtime and host requirements for SonarQube Server 2026.1 LTA.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "SonarQube Server - Quality Gates (10.8)",
+        "url": "https://docs.sonarsource.com/sonarqube-server/10.8/instance-administration/analysis-functions/quality-gates",
+        "description": "Confirms quality-gate conditions are configured server-side (UI or api/qualitygates), not via scanner properties like sonar.coverage.threshold. Use the docs page for your server version.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "SonarQube Server - CI Integration Overview (10.8)",
+        "url": "https://docs.sonarsource.com/sonarqube-server/10.8/analyzing-source-code/ci-integration/overview",
+        "description": "Confirms sonar.qualitygate.wait is the scanner-side gate-related property.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "ESLint v10.0.0 Release Blog",
+        "url": "https://eslint.org/blog/2026/02/eslint-v10.0.0-released/",
+        "description": "Confirms eslintrc config system fully removed in ESLint v10 (flat config only).",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "rollout_and_ci": [
+      {
+        "name": "LaunchDarkly - Migration Flags",
+        "url": "https://launchdarkly.com/docs/home/flags/migration",
+        "description": "Stage-based rollout control for legacy migrations and branch-by-abstraction cutovers.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "GitHub Actions - Automating Builds and Tests",
+        "url": "https://docs.github.com/en/actions/automating-builds-and-tests",
+        "description": "CI workflow building blocks for refactor safety.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "GitHub Actions - Caching Dependencies",
+        "url": "https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows",
+        "description": "Keep refactor verification pipelines fast and repeatable.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "optional_ai_automation": [
+      {
+        "name": "GitHub Copilot Coding Agent - Create Skills",
+        "url": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-skills",
+        "description": "Official guidance for agent skills and task-specific operating instructions.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "OpenRewrite - AI-Powered Recipe Authoring (Moderne)",
+        "url": "https://www.moderne.ai/blog/ai-powered-openrewrite-recipe-authoring-with-claude-skill",
+        "description": "How the Moderne CLI MCP server exposes OpenRewrite recipes as deterministic tool calls for AI coding agents. Primary reference for OpenRewrite + AI agent workflows.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "jssg - JavaScript ast-grep (Codemod)",
+        "url": "https://codemod.com/blog/jssg",
+        "description": "JavaScript/TypeScript-authored ast-grep transforms via jssg, announced October 2025. Write polyglot codemods in TypeScript using ast-grep as the matching engine.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "SonarQube Server 2026.1 LTA - What's New",
+        "url": "https://www.sonarsource.com/products/sonarqube/whats-new/2026-1/",
+        "description": "SonarQube 2026.1 LTA: MCP server integration, 50% faster JS/TS/Python/Kotlin analysis, Rust and Swift 6.2 support, AI Code Assurance improvements.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "ponytail (DietrichGebert)",
+        "url": "https://github.com/DietrichGebert/ponytail",
+        "add_as_web_search": false,
+        "optional": true,
+        "description": "YAGNI-first agent coding contract; source of the reuse-before-write ladder in references/operational-patterns.md. Pinned commit 2ed6c52c, MIT, extracted 2026-08-09 (docs/research/2026-08-09-skill-ponytail-scan.md)."
+      }
+    ],
+    "mutation_testing": [
+      {
+        "name": "Stryker Mutator",
+        "url": "https://stryker-mutator.io",
+        "description": "Mutation testing framework for JavaScript, TypeScript, and .NET. Primary reference for Stryker configuration, runners, and incremental mutation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "mutmut (Python mutation testing)",
+        "url": "https://github.com/boxed/mutmut",
+        "description": "Lightweight Python mutation tester; integrates with pytest. Primary reference for mutmut usage and CI integration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "PIT (Pitest) - Java/Kotlin mutation testing",
+        "url": "https://pitest.org",
+        "description": "Mature mutation testing system for JVM languages. Primary reference for PIT Maven/Gradle configuration and incremental history mode.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "cosmic-ray (Python mutation testing)",
+        "url": "https://github.com/sixty-north/cosmic-ray",
+        "description": "Session-based Python mutation tester with distributed (Celery) execution support. Primary reference for large-scale Python mutation runs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Stryker - Mutant States and Metrics",
+        "url": "https://stryker-mutator.io/docs/mutation-testing-elements/mutant-states-and-metrics/",
+        "description": "Canonical mutation-score definition (detected/valid; no-coverage mutants count as undetected by default) and threshold band semantics (high/low/break, break defaults to null).",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Stryker.NET Releases",
+        "url": "https://github.com/stryker-mutator/stryker-net/releases",
+        "description": "Version source for dotnet-stryker.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "PIT (Pitest) Releases",
+        "url": "https://github.com/hcoles/pitest/releases",
+        "description": "Version source for PIT.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ]
+  }
+}

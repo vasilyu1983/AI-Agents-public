@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dependency Management - Production Patterns"
+  short_description: "Audit dependencies, plan upgrades, and manage lockfiles"
+  default_prompt: "Use $dev-dependency-management to audit dependencies, upgrade vulnerable packages, choose package managers, manage lockfiles, and define update policy, security scanning, SBOMs or monorepo policy."

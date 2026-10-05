@@ -1,0 +1,178 @@
+{
+  "metadata": {
+    "title": "software-android-design - Primary Sources",
+    "description": "Material Design and Android developer references for native Android design guidance",
+    "updated": "2026-09-28",
+    "skill": "software-android-design",
+    "last_updated": "2026-09-28",
+    "note": "Look up Android release status, Play target-API policy, Compose BOM mapping, and per-component release-channel/opt-in status at the owning official pages. No release or policy snapshot is maintained here."
+  },
+  "official_google": [
+    {
+      "name": "Material Design 3",
+      "url": "https://m3.material.io/",
+      "description": "Primary design reference for Material Design 3 components, styles, and foundations",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Material Design 3 Expressive",
+      "url": "https://m3.material.io/blog/material-expressive",
+      "description": "Material 3 Expressive update with enhanced motion, shape, color, and component expressiveness",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Compose Material 3 API Reference",
+      "url": "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary",
+      "description": "Kotlin reference for installed Compose Material 3 component APIs; check availability and opt-in annotations against the installed artifact and release notes.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Android Developers - Design",
+      "url": "https://developer.android.com/design",
+      "description": "Android design hub for UI guidelines, adaptive layouts, and Material integration",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Adaptive Layouts",
+      "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive",
+      "description": "Canonical adaptive layout patterns \u2014 ListDetailPaneScaffold, SupportingPaneScaffold, NavigationSuiteScaffold",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Dynamic Color",
+      "url": "https://developer.android.com/develop/ui/compose/designsystems/material3#dynamic-color",
+      "description": "Dynamic color integration with Compose Material 3 on Android 12+",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Material Symbols and Icons",
+      "url": "https://fonts.google.com/icons",
+      "description": "Official Material icon library for Android",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Material 3",
+      "url": "https://m3.material.io/",
+      "description": "Canonical Material 3 (incl. Expressive) design guidance. Verify alpha/stable API surface (MotionScheme, shape morphing) at use-time.",
+      "add_as_web_search": true,
+      "optional": false
+    },
+    {
+      "name": "Android 16 Platform",
+      "url": "https://developer.android.com/about/versions/16",
+      "description": "Behavior changes for apps targeting Android 16, including resizability, edge-to-edge, and predictive back. This is a behavior boundary, not a current-release claim.",
+      "add_as_web_search": true,
+      "optional": false
+    },
+    {
+      "name": "Android 17 Release Notes",
+      "url": "https://developer.android.com/about/versions/17",
+      "description": "Android 17 platform and behavior changes; verify release status at the versions hub before calling it current.",
+      "add_as_web_search": true,
+      "optional": false
+    },
+    {
+      "name": "Google Play Target API Requirements",
+      "url": "https://developer.android.com/google/play/requirements/target-sdk",
+      "description": "Look up the applicable app category, target API, deadline, and extension conditions before planning a release.",
+      "add_as_web_search": true,
+      "optional": false
+    },
+    {
+      "name": "Predictive Back Gesture Guide",
+      "url": "https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture",
+      "description": "Supported back-navigation APIs and platform behavior; prefer built-in navigation/component handling and inspect custom interception.",
+      "add_as_web_search": true,
+      "optional": false
+    },
+    {
+      "name": "Window Size Classes",
+      "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/use-window-size-classes",
+      "description": "Window-adaptive information with large/extra-large opt-in and width/height checks.",
+      "last_verified": "2026-09-28",
+      "add_as_web_search": true
+    },
+    {
+      "name": "WindowSizeClass API",
+      "url": "https://developer.android.com/reference/androidx/window/core/layout/WindowSizeClass",
+      "description": "Breakpoint constants, ordered matching, and deprecated width/height accessors.",
+      "last_verified": "2026-09-28",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Navigation 3 Scenes",
+      "url": "https://developer.android.com/guide/navigation/navigation-3/scenes",
+      "description": "Scene strategies for one or more navigation entries.",
+      "last_verified": "2026-09-28",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Navigation 3 Animations",
+      "url": "https://developer.android.com/guide/navigation/navigation-3/animate-destinations",
+      "description": "Forward, pop, and predictive-pop transition specifications.",
+      "last_verified": "2026-09-28",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Compose Predictive Back",
+      "url": "https://developer.android.com/develop/ui/compose/system/predictive-back-setup",
+      "description": "Default navigation/system animations and Material sheet/search behavior.",
+      "last_verified": "2026-09-28",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Lazy List Nesting",
+      "url": "https://developer.android.com/develop/ui/compose/lists#avoid-nesting-scrollable",
+      "description": "Unbounded same-axis nesting fails; bounded or different-axis nesting is valid.",
+      "last_verified": "2026-09-28",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Material 3 Release Notes",
+      "url": "https://developer.android.com/jetpack/androidx/releases/compose-material3",
+      "description": "Check the release channel and API opt-in annotations separately.",
+      "last_verified": "2026-09-28",
+      "add_as_web_search": true
+    }
+  ],
+  "tooling": [
+    {
+      "name": "Android Studio Layout Inspector",
+      "url": "https://developer.android.com/studio/debug/layout-inspector",
+      "description": "Live layout inspection for Compose and View hierarchies",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Compose BOM Version Mapping",
+      "url": "https://developer.android.com/develop/ui/compose/bom/bom-mapping",
+      "description": "Look up the BOM and its per-artifact mapping before selecting dependency versions.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Compose Preview",
+      "url": "https://developer.android.com/develop/ui/compose/tooling/previews",
+      "description": "Compose @Preview annotation for rapid visual iteration in Android Studio",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ADB (Android Debug Bridge)",
+      "url": "https://developer.android.com/tools/adb",
+      "description": "Command-line tool for device communication, screencap, UI dumps, and app management",
+      "add_as_web_search": false
+    }
+  ],
+  "secondary_references": [
+    {
+      "name": "NN/g - Cards Component",
+      "url": "https://www.nngroup.com/articles/cards-component/",
+      "description": "General card-pattern reference for overview surfaces",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Google I/O - Material Design Sessions",
+      "url": "https://io.google/",
+      "description": "Latest Material Design and Compose sessions from the most recent Google I/O (2025 introduced Material 3 Expressive; check for a newer I/O year before citing session content as current)",
+      "add_as_web_search": true
+    }
+  ]
+}

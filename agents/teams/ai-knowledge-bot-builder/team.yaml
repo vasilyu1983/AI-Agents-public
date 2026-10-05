@@ -1,0 +1,116 @@
+---
+name: ai-knowledge-bot-builder
+family: ai
+description: Build AI bots with persistent knowledge bases — from architecture to production. Covers memory pattern
+  selection, conversation design, retrieval engineering, and agent topology.
+best_for:
+- Building support, sales, or knowledge bots with persistent memory
+- Designing knowledge layers for conversational agents (P1-P10 pattern selection)
+- Wiring remember/recall loops into conversation flows
+- Choosing between Mem0, Zep/Graphiti, Cognee, Letta for bot memory
+- Knowledge compilation (P7) for bots that outgrow pure RAG
+- Production bot delivery with guardrails, compliance, and eval suites
+members:
+- ai-bot-builder-lead
+- ai-context-architect
+- ai-retrieval-architect
+- ai-agent-architect
+required_context:
+- Bot type (support, sales, knowledge, customer success, compliance)
+- Target user and primary task the bot should accomplish
+- Available data sources and integrations (CRM, ticketing, KB, calendars)
+- Regulatory or compliance constraints if any
+optional_context:
+- Existing conversation logs or flow diagrams
+- Current tech stack and deployment target
+- Memory framework preferences or constraints
+- Containment rate or CSAT targets
+concurrency_mode: staged
+execution_stages:
+- stage: 1
+  label: Architecture
+  members:
+  - ai-agent-architect
+  output: Agent topology recommendation, build-vs-not decision, tool boundaries
+- stage: 2
+  label: Knowledge layer design
+  members:
+  - ai-context-architect
+  - ai-retrieval-architect
+  output: Memory pattern selection (P-IDs), retrieval strategy, anti-pattern sweep, vendor pick
+- stage: 3
+  label: Bot implementation
+  members:
+  - ai-bot-builder-lead
+  output: Conversation flow, memory wiring, framework code, guardrails, eval plan
+synthesis_owner: ai-bot-builder-lead
+owned_files:
+- 'ai-bot-builder-lead: bot implementation files named in the launch prompt only'
+- 'ai-context-architect, ai-retrieval-architect, ai-agent-architect: read-only'
+do_not_touch:
+- .archive/**
+- secrets, credentials, PII
+- model API keys and provider credentials
+- customer prompts or conversation logs containing PII
+deliverable:
+  shape: Per-member architecture assessment, then one synthesized system recommendation
+  required_sections:
+  - Assessment of the current or proposed design
+  - Tradeoffs considered
+  - Recommended architecture
+  - Evaluation and failure modes
+  max_length: 2 pages / ~800 words per member; synthesis <= 1 page
+debate:
+  enabled: true
+  method: dialectical-inquiry
+  mandatory_dissent: true
+  decision_masks:
+  - inversion
+  - regret-minimization
+  - anchoring-mask
+  - base-rate-mask
+  triggers:
+  - Memory pattern choice (P2 vs P4 vs P6 vs P7) when multiple patterns fit
+  - Framework selection (LangGraph vs Claude SDK vs plain Python) for borderline cases
+  - Whether to use knowledge compilation (P7) vs pure retrieval (P8)
+  - Review surface necessity (P9) for user-visible knowledge bases
+  perspectives:
+  - bot-implementation
+  - knowledge-architecture
+  - retrieval-quality
+  - agent-safety
+coordination:
+  mode: belief-driven
+  blind_first_round: true
+  belief_brief: true
+expansion_gate:
+  rule: evpi
+  evpi_threshold: medium
+  max_dynamic_members: 1
+  candidate_specialists:
+  - ai-evals-observer
+  - software-security-reviewer
+stopping_rule:
+  protocol: regret-min
+  reversibility: mixed
+  max_regret_threshold:
+    vendor_pick: 0.05
+    pattern_choice: 0.15
+    prompt_design: 0.3
+synthesis:
+  aggregation: mcda
+  weights_locked_before_dispatch: true
+  bias_audit_required: true
+  frame_symmetry: true
+  npv_check_for_deferrals: true
+verdict_options:
+- ship
+- hold_for_eval
+- redesign
+hold_policy:
+  required: deadline
+  default_deadline_days: 7
+  escalate_on_deadline: forced_decision
+trust:
+  default_tier: standard
+design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#ai-knowledge-bot-builder

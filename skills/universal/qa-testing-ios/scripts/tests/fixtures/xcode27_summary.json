@@ -1,0 +1,78 @@
+{
+  "devicesAndConfigurations": [
+    {
+      "device": {
+        "architecture": "arm64",
+        "deviceId": "00000000-0000000000000000",
+        "deviceName": "My Mac",
+        "modelName": "MacBook Pro",
+        "osBuildNumber": "26A428",
+        "osVersion": "27.0",
+        "platform": "macOS"
+      },
+      "expectedFailures": 1,
+      "failedTests": 3,
+      "passedTests": 8,
+      "skippedTests": 0,
+      "testPlanConfiguration": {
+        "configurationId": "1",
+        "configurationName": "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription": "Lib-Package \u00b7 Built with macOS 27.0",
+  "expectedFailures": 1,
+  "failedTests": 3,
+  "finishTime": 1790178475.147,
+  "passedTests": 7,
+  "result": "Failed",
+  "runtimeWarnings": [
+    {
+      "issueType": "Runtime Warning",
+      "message": "Issue recorded: warn only",
+      "sourceURL": "Pkg/Tests/LibTests/T.swift"
+    },
+    {
+      "issueType": "Runtime Warning",
+      "message": "Issue recorded: Replace 'XCTAssertEqual(x, y)' with '#expect(x == y)'.",
+      "sourceURL": "Pkg/Tests/LibTests/T.swift"
+    }
+  ],
+  "skippedTests": 0,
+  "startTime": 1790178409.124,
+  "statistics": [
+    {
+      "subtitle": "2 test runs",
+      "title": "1 test ran with dynamic parameters"
+    }
+  ],
+  "testFailures": [
+    {
+      "failureText": "Expectation failed: 1 + 1 == 3\n1 + 1 \u2192 2: deliberate",
+      "targetName": "LibTests",
+      "testIdentifier": 8,
+      "testIdentifierString": "Basics/fails()",
+      "testIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/fails()",
+      "testName": "fails()"
+    },
+    {
+      "failureText": "Issue recorded: XCTAssertEqual failed: (\"1\") is not equal to (\"2\")",
+      "targetName": "LibTests",
+      "testIdentifier": 7,
+      "testIdentifierString": "Basics/mixXCT()",
+      "testIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/mixXCT()",
+      "testName": "mixXCT()"
+    },
+    {
+      "failureText": "Issue recorded: Confirmation was confirmed 0 times, but expected to be confirmed 1 time",
+      "targetName": "LibTests",
+      "testIdentifier": 4,
+      "testIdentifierString": "Basics/noConfirmHangs()",
+      "testIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/noConfirmHangs()",
+      "testName": "noConfirmHangs()"
+    }
+  ],
+  "title": "Test - Lib-Package",
+  "topInsights": [],
+  "totalTestCount": 11
+}

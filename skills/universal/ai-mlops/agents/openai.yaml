@@ -1,0 +1,4 @@
+interface:
+  display_name: "MLOps & LLMOps - Production Operations Hub"
+  short_description: "Deploying, canarying, rolling back, and monitoring drift in production systems"
+  default_prompt: "Use $ai-mlops to deploy, canary, and roll back ML and LLM systems, monitor drift and feature skew, promote registry champions, migrate model providers, and handle production incidents."

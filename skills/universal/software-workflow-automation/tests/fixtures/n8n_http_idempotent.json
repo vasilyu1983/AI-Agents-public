@@ -1,0 +1,39 @@
+{
+  "name": "n8n sample: POST with retryOnFail and Idempotency-Key header",
+  "nodes": [
+    {
+      "id": "a1",
+      "name": "Create order",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.example.com/orders",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Idempotency-Key", "value": "={{ $json.orderId }}" }
+          ]
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "id": "dlq1",
+      "name": "Dead letter queue",
+      "type": "n8n-nodes-base.redis",
+      "parameters": { "operation": "push", "list": "orders-failed" }
+    }
+  ],
+  "connections": {
+    "Create order": {
+      "main": [
+        [],
+        [{ "node": "Dead letter queue", "type": "main", "index": 0 }]
+      ]
+    }
+  }
+}

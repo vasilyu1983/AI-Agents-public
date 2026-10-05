@@ -1,0 +1,173 @@
+# Prometheus Alert Rules for SLO Monitoring
+#
+# Multi-window, multi-burn-rate alerts for a 99.9% availability SLO over 30 days
+# (error budget = 0.001). Windows and burn rates follow the canonical table:
+# ../../../references/slo-design-guide.md#canonical-multi-window-burn-rate-table
+#
+# Adapting:
+# - Replace 0.001 with (1 - your SLO target). Prometheus does not substitute
+#   variables into expressions; external_labels are NOT template variables.
+# - Every ratio uses `sum by (service)` on BOTH sides. Without it, one-to-one
+#   vector matching divides each status series by itself and the alert never
+#   fires. `by (service)` also keeps the label that annotations and routing use.
+# - Unit test: promtool test rules prometheus-alert-rules.test.yaml
+# - For many services, prefer an SLO generator (Sloth, Pyrra) or recording rules
+#   over hand-written expressions.
+
+groups:
+  # ============================================================
+  # SLO Burn Rate Alerts (long window AND short window, same burn rate)
+  # ============================================================
+  - name: slo-burn-rate-alerts
+    rules:
+      # Fast burn: 14.4x, 1h AND 5m (2% of 30-day budget in 1h) -> page
+      - alert: ErrorBudgetBurnFast
+        expr: |
+          (
+            sum by (service) (rate(http_requests_total{status=~"5.."}[1h]))
+            / sum by (service) (rate(http_requests_total[1h]))
+          ) > (14.4 * 0.001)
+          and
+          (
+            sum by (service) (rate(http_requests_total{status=~"5.."}[5m]))
+            / sum by (service) (rate(http_requests_total[5m]))
+          ) > (14.4 * 0.001)
+        labels:
+          severity: critical
+          slo: availability
+          burn_rate: fast
+        annotations:
+          summary: "Fast error budget burn for {{ $labels.service }}"
+          description: "Burning budget at >=14.4x: 2% of the 30-day budget in 1h; exhausted in ~50h if sustained."
+          runbook_url: "https://runbooks.example.com/slo-burn-fast"
+
+      # Medium burn: 6x, 6h AND 30m (5% of budget in 6h) -> page
+      - alert: ErrorBudgetBurnMedium
+        expr: |
+          (
+            sum by (service) (rate(http_requests_total{status=~"5.."}[6h]))
+            / sum by (service) (rate(http_requests_total[6h]))
+          ) > (6 * 0.001)
+          and
+          (
+            sum by (service) (rate(http_requests_total{status=~"5.."}[30m]))
+            / sum by (service) (rate(http_requests_total[30m]))
+          ) > (6 * 0.001)
+        labels:
+          severity: critical
+          slo: availability
+          burn_rate: medium
+        annotations:
+          summary: "Sustained error budget burn for {{ $labels.service }}"
+          description: "Burning budget at >=6x: 5% of the 30-day budget in 6h; exhausted in ~5 days if sustained."
+          runbook_url: "https://runbooks.example.com/slo-burn-medium"
+
+      # Slow burn: 1x, 3d AND 6h (10% of budget in 3d) -> ticket
+      - alert: ErrorBudgetBurnSlow
+        expr: |
+          (
+            sum by (service) (rate(http_requests_total{status=~"5.."}[3d]))
+            / sum by (service) (rate(http_requests_total[3d]))
+          ) > (1 * 0.001)
+          and
+          (
+            sum by (service) (rate(http_requests_total{status=~"5.."}[6h]))
+            / sum by (service) (rate(http_requests_total[6h]))
+          ) > (1 * 0.001)
+        labels:
+          severity: ticket
+          slo: availability
+          burn_rate: slow
+        annotations:
+          summary: "Slow error budget burn for {{ $labels.service }}"
+          description: "Burning budget at >=1x: on track to spend the whole 30-day budget."
+          runbook_url: "https://runbooks.example.com/slo-burn-slow"
+
+  # ============================================================
+  # Latency SLO (ratio SLI: share of requests under the threshold)
+  # A p99 quantile compared to a threshold is not a ratio SLI and has no
+  # error budget. Use the bucket at the SLO threshold instead. The bucket
+  # boundary (le="0.5") must exist in the histogram.
+  # SLO: 99% of requests complete in <= 500ms -> budget 0.01
+  # ============================================================
+  - name: latency-slo-alerts
+    rules:
+      - alert: LatencyBudgetBurnFast
+        expr: |
+          (
+            1 - sum by (service) (rate(http_request_duration_seconds_bucket{le="0.5"}[1h]))
+              / sum by (service) (rate(http_request_duration_seconds_count[1h]))
+          ) > (14.4 * 0.01)
+          and
+          (
+            1 - sum by (service) (rate(http_request_duration_seconds_bucket{le="0.5"}[5m]))
+              / sum by (service) (rate(http_request_duration_seconds_count[5m]))
+          ) > (14.4 * 0.01)
+        labels:
+          severity: critical
+          slo: latency
+          burn_rate: fast
+        annotations:
+          summary: "Fast latency budget burn for {{ $labels.service }}"
+          runbook_url: "https://runbooks.example.com/high-latency"
+
+  # ============================================================
+  # Error Budget Exhaustion (rolling 30d; for calendar-month budgets
+  # use an SLO tool or recording rules; see slo-design-guide.md)
+  # ============================================================
+  - name: error-budget-alerts
+    interval: 5m
+    rules:
+      - alert: ErrorBudgetNearlyExhausted
+        expr: |
+          (
+            1 - (
+              sum by (service) (rate(http_requests_total{status=~"5.."}[30d]))
+              / sum by (service) (rate(http_requests_total[30d]))
+            ) / 0.001
+          ) * 100 < 10
+        for: 30m
+        labels:
+          severity: ticket
+        annotations:
+          summary: "Less than 10% of the 30-day error budget left for {{ $labels.service }}"
+          description: "Remaining budget: {{ $value | humanize }}%. Apply the error budget policy."
+
+  # ============================================================
+  # Traffic Anomaly Detection
+  # ============================================================
+  - name: traffic-anomalies
+    rules:
+      - alert: TrafficDropSignificant
+        expr: |
+          (
+            sum by (service) (rate(http_requests_total[5m]))
+            / sum by (service) (rate(http_requests_total[5m] offset 1h))
+          ) < 0.5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Traffic for {{ $labels.service }} is below 50% of 1h ago"
+          description: "May indicate an outage or upstream issue. Ratio: {{ $value | humanize }}"
+
+  # ============================================================
+  # Availability (blackbox / scrape health)
+  # ============================================================
+  - name: availability-blackbox
+    rules:
+      - alert: ScrapeTargetDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Target {{ $labels.instance }} ({{ $labels.job }}) is down"
+
+      - alert: HealthCheckFailing
+        expr: probe_success == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Blackbox probe failing for {{ $labels.instance }}"

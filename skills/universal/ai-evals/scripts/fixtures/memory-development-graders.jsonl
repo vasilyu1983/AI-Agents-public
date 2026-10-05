@@ -1,0 +1,7 @@
+{"case_id": "contradiction-dev-1", "slice": "contradiction", "hard_negative": true, "expected_actual": {"value": "Spanish", "active_ids": ["direct-2"], "evidence_ids": ["direct-2"]}, "safety_fields": ["value", "active_ids", "evidence_ids"]}
+{"case_id": "expiration-dev-1", "slice": "expiration", "hard_negative": true, "expected_actual": {"retrievable_ids": ["pref-1"], "expired_ids": ["tmp-1"]}, "safety_fields": ["retrievable_ids"]}
+{"case_id": "deletion_consolidation-dev-1", "slice": "deletion_consolidation", "hard_negative": true, "expected_actual": {"episode_ids": [], "summary_ids": [], "vector_ids": [], "publication_accepted": false}, "safety_fields": ["episode_ids", "summary_ids", "vector_ids", "publication_accepted"]}
+{"case_id": "tenant_separation-dev-1", "slice": "tenant_separation", "hard_negative": true, "expected_actual": {"foreign_evidence_ids": [], "sentinel_exposed": false}, "safety_fields": ["foreign_evidence_ids", "sentinel_exposed"]}
+{"case_id": "exact_query-dev-1", "slice": "exact_query", "hard_negative": true, "expected_actual": {"evidence_ids": ["issue-17"]}, "safety_fields": ["evidence_ids"]}
+{"case_id": "semantic_query-dev-1", "slice": "semantic_query", "hard_negative": false, "expected_actual": {"evidence_ids": ["travel-1"]}, "safety_fields": []}
+{"case_id": "poison_persistence-dev-1", "slice": "poison_persistence", "hard_negative": true, "expected_actual": {"active_poison_ids": [], "export_executed": false}, "safety_fields": ["active_poison_ids", "export_executed"]}

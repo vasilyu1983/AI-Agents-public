@@ -1,0 +1,204 @@
+{
+  "metadata": {
+    "title": "software-workflow-automation - Sources",
+    "description": "Workflow automation platform references: n8n, Langflow, Huginn, Temporal, Trigger.dev v4, Inngest, Hatchet, Restate, DBOS, Vercel and Cloudflare Workflows, iPaaS billing, and automation governance patterns.",
+    "last_updated": "2026-09-28",
+    "updated": "2026-09-28",
+    "skill": "software-workflow-automation",
+    "total_sources": 30
+  },
+  "categories": {
+    "platforms": [
+      {
+        "name": "n8n Documentation",
+        "url": "https://docs.n8n.io/",
+        "description": "Primary source for n8n workflow design, nodes, credentials, governance, and hosting behavior.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Langflow Deployment Overview",
+        "url": "https://docs.langflow.org/deployment-overview",
+        "description": "Primary source for deploying Langflow flows and exposing local builds safely.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Langflow MCP Server",
+        "url": "https://docs.langflow.org/mcp-server",
+        "description": "Primary source for using Langflow as an MCP server and exposing flow tools to coding agents.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Huginn Repository",
+        "url": "https://github.com/huginn/huginn",
+        "description": "Reference source for Huginn self-hosted automation agents, scenarios, and deployment expectations.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Temporal Workflows",
+        "url": "https://docs.temporal.io/workflows",
+        "description": "Primary source for durable execution, replay, retries, and code-defined workflows.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Model Context Protocol (spec)",
+        "url": "https://modelcontextprotocol.io/",
+        "description": "Canonical Model Context Protocol concepts and architecture for connecting AI applications to tools and data.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "MCP \u2014 Build a Server",
+        "url": "https://modelcontextprotocol.io/docs/develop/build-server",
+        "description": "Official guide to building MCP servers (exposing tools/data to AI agents). Resolve current SDK and tooling at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Trigger.dev Idempotency",
+        "url": "https://trigger.dev/docs/idempotency",
+        "description": "Primary source for idempotency design in long-running code-first background workflows.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Trigger.dev Migrating from v3",
+        "url": "https://trigger.dev/docs/migrating-from-v3",
+        "description": "Primary source for v3-to-v4 breaking changes: SDK import path, queue predefinition, lifecycle hook signatures, self-hosting changes. v3 was fully shut down 2026-07-01.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "n8n Community License (Sustainable Use License explainer)",
+        "url": "https://docs.n8n.io/n8n-community-license",
+        "description": "Primary explainer for n8n's fair-code Sustainable Use License: internal business use, non-commercial redistribution, and the Enterprise License for .ee. files.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Hatchet Documentation",
+        "url": "https://docs.hatchet.run/",
+        "description": "Primary source for Hatchet\u2019s Postgres-backed workflow engine; verify engine/SDK generation and supported releases here.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "n8n LICENSE.md",
+        "url": "https://github.com/n8n-io/n8n/blob/master/LICENSE.md",
+        "description": "Licence text for n8n (Sustainable Use License plus n8n Enterprise License for .ee. files).",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Temporal Worker Versioning",
+        "url": "https://docs.temporal.io/worker-versioning",
+        "description": "Primary source for Worker Versioning deployment routing, pinning and Server/SDK compatibility.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Trigger.dev Wait for Token",
+        "url": "https://trigger.dev/docs/wait-for-token",
+        "description": "Primary source for v4 Waitpoint tokens: wait.createToken, wait.forToken, completion, and timeouts.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Inngest Pricing",
+        "url": "https://www.inngest.com/pricing",
+        "description": "Primary source for Inngest plans, execution-based billing, and plan limits (volatile).",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cloudflare Workflows Pricing",
+        "url": "https://developers.cloudflare.com/workflows/reference/pricing/",
+        "description": "Primary source for Cloudflare Workflows billing units and limits; resolve rates at use time.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Vercel Workflows",
+        "url": "https://vercel.com/docs/workflows",
+        "description": "Primary source for Vercel Workflows on the open-source Workflow SDK: directives, pricing units, and limits.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Restate",
+        "url": "https://github.com/restatedev/restate",
+        "description": "Restate durable-execution runtime repository; licensed under the Business Source License 1.1.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DBOS Transact (Python)",
+        "url": "https://github.com/dbos-inc/dbos-transact-py",
+        "description": "DBOS durable-execution library backed by Postgres; MIT licensed.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Activepieces",
+        "url": "https://github.com/activepieces/activepieces",
+        "description": "Open-source automation platform; core MIT with commercially licensed enterprise directories.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Windmill",
+        "url": "https://github.com/windmill-labs/windmill",
+        "description": "Script-first workflow and internal-tool platform; AGPLv3 open-source build with proprietary enterprise features.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pipedream Pricing",
+        "url": "https://pipedream.com/docs/pricing",
+        "description": "Primary source for Pipedream credit-based billing.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Huginn Releases",
+        "url": "https://github.com/huginn/huginn/releases",
+        "description": "Huginn release history; check here for current upstream maintenance activity.",
+        "add_as_web_search": true
+      }
+    ],
+    "operations_and_governance": [
+      {
+        "name": "n8n Queue Mode",
+        "url": "https://docs.n8n.io/hosting/scaling/queue-mode/",
+        "description": "Primary source for n8n scaling, worker mode, and execution-concurrency operating patterns.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "n8n Source Control and Environments",
+        "url": "https://docs.n8n.io/source-control-environments/",
+        "description": "Primary source for n8n Git-backed environments, branch patterns, and workflow promotion between instances.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "n8n External Secrets",
+        "url": "https://docs.n8n.io/external-secrets/",
+        "description": "Primary source for vault-backed credential handling, project scoping, and secrets governance in n8n.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PostgreSQL INSERT",
+        "url": "https://www.postgresql.org/docs/current/sql-insert.html",
+        "description": "ON CONFLICT expressions can read existing rows; atomic UPSERT is not a replay-safety guarantee.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PostgreSQL MERGE",
+        "url": "https://www.postgresql.org/docs/current/sql-merge.html",
+        "description": "MERGE actions use ordinary update expressions; review target-dependent updates before replay.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "n8n Community Node Risks",
+        "url": "https://docs.n8n.io/integrations/community-nodes/risks/",
+        "description": "Community nodes can access the host and workflow data; do not assume task-runner sandboxing applies.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Temporal Approval Pattern",
+        "url": "https://github.com/temporalio/documentation/blob/main/docs/design-patterns/approval.mdx",
+        "description": "TypeScript condition returns false on timeout; handle approval timeout explicitly.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

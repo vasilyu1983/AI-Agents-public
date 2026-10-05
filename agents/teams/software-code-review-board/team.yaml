@@ -1,0 +1,82 @@
+---
+name: software-code-review-board
+family: software
+description: Multi-perspective review team using canonical reviewer members.
+best_for:
+- Security-sensitive pull requests
+- Pre-release audits
+members:
+- software-security-reviewer
+- software-performance-reviewer
+- qa-test-reviewer
+required_context:
+- Diff, PR, or scoped module target
+optional_context:
+- docs/**/*.md
+- graphs/code-graph.json
+- reports/query-*.md
+concurrency_mode: parallel
+synthesis_owner: parent-thread
+owned_files: none - read-only analysis team
+do_not_touch:
+- .archive/**
+- secrets, credentials, PII
+- lockfiles and generated build output
+- unrelated modules outside the reviewed diff
+deliverable:
+  shape: Per-member findings list ordered by severity, then one synthesized verdict
+  required_sections:
+  - Findings ordered by severity
+  - Evidence (file:line or artifact reference)
+  - Recommended fix
+  - Verdict and blocking items
+  max_length: 2 pages / ~800 words per member; synthesis <= 1 page
+debate:
+  enabled: true
+  method: dialectical-inquiry
+  mandatory_dissent: true
+  decision_masks:
+  - inversion
+  - regret-minimization
+  triggers:
+  - security finding conflicts with performance or delivery recommendation
+  - reviewers disagree on severity of the same finding
+  perspectives:
+  - security
+  - performance
+  - test-coverage
+coordination:
+  blind_first_round: true
+expansion_gate:
+  rule: evpi
+  evpi_threshold: medium
+  max_dynamic_members: 2
+  candidate_specialists:
+  - software-accessibility-reviewer
+  - software-localisation-reviewer
+  - software-billing-ops-reviewer
+stopping_rule:
+  protocol: regret-min
+  reversibility: mixed
+  max_regret_threshold:
+    security: 0.05
+    performance: 0.1
+    test_coverage: 0.2
+synthesis:
+  aggregation: mcda
+  bias_audit_required: true
+  frame_symmetry: true
+verdict_options:
+- approve
+- request_changes
+- hold_for_specialist
+hold_policy:
+  required: deadline
+  default_deadline_days: 2
+  escalate_on_deadline: forced_decision
+trust:
+  default_tier: standard
+design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#software-code-review-board
+install_guidance:
+  routing: Default review team for medium-to-high-stakes PRs. For low-stakes typo/doc PRs, skip the team entirely.
+  complements: expert-board release-readiness mode for release-gate audits; expert-board architecture-rfc mode for design-stage review.

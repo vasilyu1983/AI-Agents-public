@@ -1,0 +1,4 @@
+interface:
+  display_name: "Realtime"
+  short_description: "Designs real-time and collaborative systems"
+  default_prompt: "Use $software-realtime to design real-time and collaborative systems. Use for chat, presence, live dashboards, collaborative editing, WebSockets, SSE, WebTransport, or local-first sync."

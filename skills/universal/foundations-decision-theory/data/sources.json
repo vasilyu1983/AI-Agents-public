@@ -1,0 +1,476 @@
+{
+  "metadata": {
+    "title": "AI Decision Theory Foundations — Sources",
+    "description": "Primary references for decision-theory primitives (expected utility, Bayesian decision, minimax regret, value of information, MCDA, risk aversion, real options, prospect theory, Ellsberg/Allais, bandits, stochastic dominance) plus thresholds/abstention, best-arm identification, expected-loss stopping, and off-policy evaluation",
+    "last_updated": "2026-09-23",
+    "skill": "foundations-decision-theory",
+    "total_sources": 65
+  },
+  "canonical_texts": [
+    {
+      "id": "vNM1947",
+      "name": "Theory of Games and Economic Behavior",
+      "url": "https://press.princeton.edu/books/paperback/9780691130613/theory-of-games-and-economic-behavior",
+      "description": "von Neumann and Morgenstern (1944/1947). Foundational text for EU theory and the vNM utility theorem. Primary source for primitive #1 (expected utility).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Savage1954",
+      "name": "The Foundations of Statistics",
+      "url": "https://www.wiley.com/en-gb/The+Foundations+of+Statistics-p-9780471751557",
+      "description": "Savage (1954). Subjective expected utility, minimax regret rule, and the sure-thing principle. Primary source for primitives #1 (EU, subjective probability) and #3 (minimax regret).",
+      "url_check": "manual"
+    },
+    {
+      "id": "RaiffaSchlaifer1961",
+      "name": "Applied Statistical Decision Theory",
+      "url": "https://www.hbs.edu/faculty/Pages/item.aspx?num=3336",
+      "description": "Raiffa and Schlaifer (1961). Bayesian decision theory, EVPI, EVSI, and conjugate priors. Primary source for primitives #2 (Bayesian decision) and #4 (value of information).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Howard1966",
+      "name": "Information Value Theory",
+      "url": "https://doi.org/10.1109/TSSC.1966.300074",
+      "description": "Howard (1966). Formal definition of EVPI and EVSI for decision analysis. Primary source for primitive #4 (value of information).",
+      "url_check": "manual"
+    },
+    {
+      "id": "HeathBaio2018",
+      "name": "Calculating the Expected Value of Sample Information using Efficient Nested Monte Carlo: A Tutorial",
+      "url": "https://arxiv.org/pdf/1709.02319",
+      "description": "Heath and Baio (2018). Section 2 defines EVSI as the expected posterior-optimal value over possible future data minus the current optimal value. Method source for the finite-state calculator's exact signal enumeration; the calculator does not implement the later Monte Carlo approximation.",
+      "url_check": "auto",
+      "last_verified": "2026-09-08"
+    },
+    {
+      "id": "Pratt1964",
+      "name": "Risk Aversion in the Small and in the Large",
+      "url": "https://doi.org/10.2307/1913738",
+      "description": "Pratt (1964). Arrow-Pratt measures of absolute and relative risk aversion, certainty equivalent. Primary source for primitive #6 (risk aversion).",
+      "url_check": "manual"
+    },
+    {
+      "id": "KahnemanTversky1979",
+      "name": "Prospect Theory: An Analysis of Decision under Risk",
+      "url": "https://doi.org/10.2307/1914185",
+      "description": "Kahneman and Tversky (1979). Econometrica. Prospect theory value function, loss aversion, probability weighting. Primary source for primitive #8 (prospect theory).",
+      "url_check": "manual"
+    },
+    {
+      "id": "TverskyKahneman1992",
+      "name": "Advances in Prospect Theory: Cumulative Representation of Uncertainty",
+      "url": "https://doi.org/10.1007/BF00122574",
+      "description": "Tversky and Kahneman (1992). Cumulative prospect theory. Extension to multiple outcomes. Secondary source for primitive #8.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Ellsberg1961",
+      "name": "Risk, Ambiguity, and the Savage Axioms",
+      "url": "https://doi.org/10.2307/1884324",
+      "description": "Ellsberg (1961). Quarterly Journal of Economics. Ambiguity aversion and violation of the sure-thing principle. Primary source for primitive #9 (Ellsberg paradox).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Allais1953",
+      "name": "Le comportement de l'homme rationnel devant le risque",
+      "url": "https://doi.org/10.2307/1907921",
+      "description": "Allais (1953). Econometrica. Certainty effect and independence axiom violation. Primary source for primitive #9 (Allais paradox).",
+      "url_check": "manual"
+    },
+    {
+      "id": "DixitPindyck1994",
+      "name": "Investment under Uncertainty",
+      "url": "https://press.princeton.edu/books/paperback/9780691034102/investment-under-uncertainty",
+      "description": "Dixit and Pindyck (1994). Princeton University Press. Real options, option to defer/expand/abandon, irreversibility premium. Primary source for primitive #7 (real options).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Saaty1980",
+      "name": "The Analytic Hierarchy Process",
+      "url": "https://www.sciencedirect.com/book/9780124992504/the-analytic-hierarchy-process",
+      "description": "Saaty (1980). AHP methodology, pairwise comparisons, consistency ratio. Primary source for primitive #5 (MCDA — AHP).",
+      "url_check": "manual"
+    },
+    {
+      "id": "HwangYoon1981",
+      "name": "Multiple Attribute Decision Making",
+      "url": "https://link.springer.com/book/10.1007/978-3-642-48318-9",
+      "description": "Hwang and Yoon (1981). TOPSIS and other MCDA methods. Primary source for primitive #5 (MCDA — TOPSIS).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Robbins1952",
+      "name": "Some Aspects of the Sequential Design of Experiments",
+      "url": "https://doi.org/10.1090/S0002-9904-1952-09620-8",
+      "description": "Robbins (1952). Bulletin of the AMS. Foundational bandit problem formulation. Primary source for primitive #10 (multi-armed bandit).",
+      "url_check": "manual"
+    },
+    {
+      "id": "UCB2002",
+      "name": "Finite-time Analysis of the Multiarmed Bandit Problem",
+      "url": "https://doi.org/10.1023/A:1013689704352",
+      "description": "Auer, Cesa-Bianchi, and Fischer (2002). Machine Learning. UCB1 algorithm, logarithmic regret bound. Primary source for primitive #10 (UCB policy).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Thompson1933",
+      "name": "On the Likelihood that One Unknown Probability Exceeds Another",
+      "url": "https://doi.org/10.2307/2332286",
+      "description": "Thompson (1933). Biometrika. Original Thompson sampling paper. Primary source for primitive #10 (Thompson sampling).",
+      "url_check": "manual"
+    },
+    {
+      "id": "RussoThompson2018",
+      "name": "A Tutorial on Thompson Sampling",
+      "url": "https://arxiv.org/abs/1707.02038",
+      "description": "Russo et al. (2018). Foundations and Trends in Machine Learning 11(1). Comprehensive Thompson sampling tutorial including Bayesian regret bounds. Primary source for primitive #10.",
+      "url_check": "auto"
+    },
+    {
+      "id": "LattimoreBook2020",
+      "name": "Bandit Algorithms",
+      "url": "https://tor-lattimore.com/downloads/book/book.pdf",
+      "description": "Lattimore and Szepesvári (2020). Cambridge University Press. Comprehensive bandit algorithms reference including UCB, Thompson sampling, and minimax regret. Primary source for primitive #10.",
+      "url_check": "auto"
+    },
+    {
+      "id": "HadarRussell1969",
+      "name": "Rules for Ordering Uncertain Prospects",
+      "url": "https://doi.org/10.1257/aer.59.1.25",
+      "description": "Hadar and Russell (1969). American Economic Review. First and second-order stochastic dominance definitions. Primary source for primitive #11 (stochastic dominance).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Levy1992",
+      "name": "Stochastic Dominance and Expected Utility: Survey and Analysis",
+      "url": "https://doi.org/10.1287/mnsc.38.4.555",
+      "description": "Levy (1992). Management Science 38(4). Survey of stochastic dominance theory and its relationship to expected utility. Primary source for primitive #11.",
+      "url_check": "manual"
+    },
+    {
+      "id": "GilboaSchmeidler1989",
+      "name": "Maxmin Expected Utility with Non-Unique Prior",
+      "url": "https://doi.org/10.1016/0304-4068(89)90018-9",
+      "description": "Gilboa and Schmeidler (1989). Journal of Mathematical Economics. Maxmin EU and Choquet expected utility under ambiguity. Secondary source for primitive #9 (Ellsberg).",
+      "url_check": "manual"
+    },
+    {
+      "id": "Berger1985",
+      "name": "Statistical Decision Theory and Bayesian Analysis",
+      "url": "https://link.springer.com/book/10.1007/978-1-4757-4286-2",
+      "description": "Berger (1985). Springer. Comprehensive Bayesian decision theory reference. Secondary source for primitive #2.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Arrow1971",
+      "name": "Essays in the Theory of Risk Bearing",
+      "url": "https://www.markham.com/",
+      "description": "Arrow (1971). Markham. Arrow-Pratt coefficient of absolute risk aversion and its applications. Secondary source for primitive #6.",
+      "url_check": "skip"
+    },
+    {
+      "id": "MasColell1995",
+      "name": "Microeconomic Theory",
+      "url": "https://global.oup.com/academic/product/microeconomic-theory-9780195102680",
+      "description": "Mas-Colell, Whinston, and Green (1995). Oxford University Press. Chapter 6: risk aversion, EU, CE. Secondary source for primitives #1 and #6.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Trigeorgis1996",
+      "name": "Real Options: Managerial Flexibility and Strategy in Resource Allocation",
+      "url": "https://mitpress.mit.edu/9780262200820/real-options/",
+      "description": "Trigeorgis (1996). MIT Press. Real options taxonomy and valuation methods. Secondary source for primitive #7.",
+      "url_check": "manual"
+    },
+    {
+      "id": "DeGroot1970",
+      "name": "Optimal Statistical Decisions",
+      "url": "https://www.wiley.com/en-us/Optimal+Statistical+Decisions-p-9780471680291",
+      "description": "DeGroot (1970). McGraw-Hill. Bayesian decision theory, sufficient statistics, sequential decision problems. Secondary source for primitive #2.",
+      "url_check": "manual"
+    },
+    {
+      "id": "RothschildStiglitz1970",
+      "name": "Increasing Risk: I. A Definition",
+      "url": "https://doi.org/10.1016/0022-0531(70)90038-4",
+      "description": "Rothschild and Stiglitz (1970). Journal of Economic Theory 2(3). Mean-preserving spread and second-order stochastic dominance. Secondary source for primitive #11.",
+      "url_check": "manual"
+    },
+    {
+      "id": "BeltonStewart2002",
+      "name": "Multiple Criteria Decision Analysis: An Integrated Approach",
+      "url": "https://link.springer.com/book/10.1007/978-1-4615-1495-4",
+      "description": "Belton and Stewart (2002). Kluwer. Comprehensive MCDA reference covering WSM, AHP, TOPSIS, and outranking methods. Secondary source for primitive #5.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Myers1977",
+      "name": "Determinants of Corporate Borrowing",
+      "url": "https://doi.org/10.1016/0304-405X(77)90015-0",
+      "description": "Myers (1977). Journal of Financial Economics. Introduced the concept of real options as growth options in corporate finance. Secondary source for primitive #7.",
+      "url_check": "manual"
+    },
+    {
+      "id": "BernasconiICML2025",
+      "name": "No-Regret is not enough! Bandits with General Constraints through Adaptive Regret Minimization",
+      "url": "https://proceedings.mlr.press/v267/bernasconi25a.html",
+      "description": "Bernasconi, Castiglioni, Celli (ICML 2025, PMLR 267:3877-3898). Weakly adaptive primal-dual algorithms for bandits with general long-term constraints; best-of-both-worlds guarantees (sublinear regret + sublinear violations) for stochastic and adversarial inputs; first no-α-regret result for contextual bandits with linear constraints under adversarial contexts. UPDATE for primitive #10.",
+      "url_check": "auto"
+    },
+    {
+      "id": "ArumugamICLR2026",
+      "name": "Toward Efficient Exploration by Large Language Model Agents",
+      "url": "https://arxiv.org/html/2504.20997v1",
+      "description": "Arumugam, Griffiths (ICLR 2026). LLMs explicitly implement PSRL via three roles: posterior updater, sampler, and policy executor. Retains provably-efficient exploration guarantees; outperforms standard LLM agent designs on natural-language exploration tasks. UPDATE for primitive #10; cross-link to #4.",
+      "url_check": "auto"
+    },
+    {
+      "id": "FiechtnerBlanchet2025",
+      "name": "Wasserstein Distributionally Robust Regret Optimization",
+      "url": "https://arxiv.org/abs/2504.10796",
+      "description": "Fiechtner, Blanchet (arXiv:2504.10796, April 2025). Wasserstein distributionally robust regret optimization (DRRO). Selects among ERM optima by a first-order gradient-discrepancy rule; first-order sensitivity vanishes when the ERM optimizer is unique. Source for the DRO bridge in 03-minimax-regret.md.",
+      "url_check": "auto"
+    },
+    {
+      "id": "GenWDRONeurIPS2025",
+      "name": "Robust Decisions via Generative Wasserstein Distributionally Robust Optimization",
+      "url": "https://neurips.cc/virtual/2025/loc/san-diego/132555",
+      "description": "Xu and Yeh (2025). Workshop poster at the NeurIPS 2025 Workshop on Generative AI in Finance (not main track). Uses generative models to size Wasserstein ambiguity sets adaptively. Listed in 03-minimax-regret.md sources.",
+      "url_check": "manual"
+    },
+    {
+      "id": "JiaDRPONeurIPS2025",
+      "name": "Distributionally Robust Performative Optimization",
+      "url": "https://arxiv.org/abs/2407.01344",
+      "description": "Jia, Wang, Dong, Hanasusanto (NeurIPS 2025 poster, arXiv:2407.01344). DRO framework for decision-dependent distributions (performative setting); repeated robust risk minimization algorithm; validated on strategic classification, revenue management, portfolio optimization. UPDATE for primitives #3 and #1.",
+      "url_check": "auto"
+    },
+    {
+      "id": "CapitaineICLR2026",
+      "name": "Online Decision-Focused Learning",
+      "url": "https://arxiv.org/abs/2505.13564",
+      "description": "Capitaine et al. (ICLR 2026). Extends decision-focused learning to dynamic environments with shifting cost functions and data distributions. Two algorithms (DF-FTPL, DF-OGD) with first provable online static and dynamic regret bounds for predict-then-optimize pipelines. NEW extension context for primitive #4.",
+      "url_check": "auto"
+    },
+    {
+      "id": "RodriguezDiazNeurIPS2025",
+      "name": "A Dual Perspective on Decision-Focused Learning: Scalable Training via Dual-Guided Surrogates",
+      "url": "https://arxiv.org/abs/2511.04909",
+      "description": "Rodriguez-Diaz, Bansak, Paulson (NeurIPS 2025). DGL method: refreshes dual variables periodically from the downstream solver and trains on dual-adjusted targets using simple surrogates between refreshes. Matches or exceeds state-of-the-art DFL with far fewer solver calls. Corroborates online DFL direction.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Lempert2003RAND",
+      "name": "Shaping the Next One Hundred Years: New Methods for Quantitative, Long-Term Policy Analysis",
+      "url": "https://www.rand.org/pubs/monograph_reports/MR1626.html",
+      "description": "Lempert, Popper, and Bankes (2003). RAND MR-1626. Foundational RDM / DMDU methodology: run candidate strategies over large ensembles of scenarios, identify scenarios of concern where strategies fail (via PRIM), iteratively redesign for robustness. Primary source for RDM pattern in patterns-scenarios-traps.md.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Haasnoot2013DAPP",
+      "name": "Dynamic adaptive policy pathways: A method for crafting robust decisions for a deeply uncertain world",
+      "url": "https://doi.org/10.1016/j.gloenvcha.2012.12.006",
+      "description": "Haasnoot et al. (2013). Global Environmental Change 23(2), 485–498. DAPP framework: maps sequences of policy choices (pathways) triggered by observable threshold-crossings (tipping points). Extends real options (#7) to multi-stage contingent planning under deep uncertainty. Primary source for DAPP extension in 07-real-options.md.",
+      "url_check": "manual"
+    },
+    {
+      "id": "DeLLMaICLR2025",
+      "name": "DeLLMa: Decision Making Under Uncertainty with Large Language Models",
+      "url": "https://arxiv.org/abs/2402.02392",
+      "description": "Liu, Fu, Yogatama, Neiswanger (ICLR 2025 spotlight, peer-reviewed; arXiv:2402.02392). Inference-time framework: (1) forecast uncertain variables in context, (2) elicit a utility function, (3) pick the EU-maximising action. Abstract reports up to a 40% accuracy increase over competing methods. Source for the LLM decision-support note in 04-value-of-information.md.",
+      "url_check": "auto"
+    },
+    {
+      "id": "LiederGriffiths2020",
+      "name": "Resource-rational analysis: Understanding human cognition as the optimal use of limited computational resources",
+      "url": "https://cocosci.princeton.edu/papers/lieder_resource.pdf",
+      "description": "Lieder and Griffiths (2020). Behavioral and Brain Sciences. Normative framework for bounded rationality: agents are rational given their computational constraints. Provides grounding for resource-rational reframe of PT deviations in 08-prospect-theory.md.",
+      "url_check": "manual"
+    },
+    {
+      "id": "LuARRM2025",
+      "name": "Exploring the bounded rationality in human decision anomalies through an assemblable computational framework",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0010028525000015",
+      "description": "Lu, Lu, Ren, Zhang (2025). Cognitive Psychology 156, 101713. PubMed 39813936. ARRM framework: modular computational account explaining PT anomalies (loss aversion, probability distortion) as cost-optimal resource allocation. Supports resource-rational reframe of Primitives #8 and #9.",
+      "url_check": "manual"
+    },
+    {
+      "id": "OnlineMultiLLM2026",
+      "name": "Online Multi-LLM Selection via Contextual Bandits under Unstructured Context Evolution",
+      "url": "https://arxiv.org/abs/2506.17670",
+      "description": "Poon, Dai, Liu, Kong, Lui, Zuo (arXiv:2506.17670, submitted June 2025). LinUCB-based contextual-bandit policy for routing queries across multiple LLM backends; achieves sublinear regret under unstructured context evolution without predicting future prompts or accessing model internals; cost-aware and early-quality variants. Applied source for app-builder recipe (primitive #10, model routing).",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
+    },
+    {
+      "id": "DecisionCentricLLM2026",
+      "name": "Decision-Centric Design for LLM Systems",
+      "url": "https://arxiv.org/abs/2604.00414",
+      "description": "Sun, W. (arXiv:2604.00414, April 2026). Sections 2-3 separate decision context, policy, and execution in LLM control layers. Section 2 discusses VoI as related work and explicitly characterizes this paper's contribution as architectural rather than methodological; it is not evidence for a tested VoI gating policy.",
+      "url_check": "manual",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "id": "SuriClarification2026",
+      "name": "Structured Uncertainty guided Clarification for LLM Agents",
+      "url": "https://arxiv.org/abs/2511.08798",
+      "description": "Suri, Mathur, Lipka, Dernoncourt, Rossi, Manocha (arXiv:2511.08798, submitted Nov 2025, revised April 2026). SAGE-Agent: scores candidate clarifying questions by cost-penalized Expected Value of Perfect Information; separates specification uncertainty (user intent, askable) from model uncertainty (agent correctness, not askable). Reduces clarification questions 1.5–2.7 times versus baselines on ClarifyBench with higher ambiguous-task coverage (study-specific results, section 7, Table 2). NEW applied source for primitive #4 (clarify-or-commit recipe).",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
+    },
+    {
+      "id": "GulatiTiming2026",
+      "name": "Ask Early, Ask Late, Ask Right: When Does Clarification Timing Matter for Long-Horizon Agents?",
+      "url": "https://arxiv.org/abs/2605.07937",
+      "description": "Gulati, Gupta, Lumer, Sen, Subbiah (arXiv:2605.07937, submitted May 2026). Forced-injection framework over 4 information dimensions (goal, input, constraint, context), 3 benchmarks, 4 frontier models, >6000 runs. Finds VoI of clarification decays with trajectory position: goal clarification falls to baseline after ~10% of execution, input clarification holds to ~50%, and deferring past the midpoint performs worse than never asking. Models over-ask in 52% of sessions or avoid asking entirely. NEW applied source for primitive #4 (clarify-or-commit recipe, time decay).",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
+    },
+    {
+      "id": "CabralRankReversal2026",
+      "name": "Closing a 17-Year Gap: Algorithmic Detection and Empirical Prevalence of Rank Reversal in Multi-Criteria Decision Analysis",
+      "url": "https://arxiv.org/abs/2508.00129",
+      "description": "Cabral, J. B. et al. (arXiv:2508.00129, submitted July 2025, revised Aug 2026). Operationalizes the Wang-Triantaphyllou (2008) RRT1-RRT3 rank-reversal tests in the Scikit-Criteria library. Study-specific audit of 27 selected pipeline/dataset combinations from published MCDM work (sections 7.2 and 8; not population prevalence): top-alternative stability (RRT1) holds in 96.3%, transitivity (RRT2) fails in 14.8%, recomposition consistency (RRT3) fails in ~48%. These selected examples do not establish population prevalence. NEW source for primitive #5 (MCDA).",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
+    },
+    {
+      "id": "WangTriantaphyllou2008",
+      "name": "Ranking irregularities when evaluating alternatives by using some ELECTRE methods",
+      "url": "https://doi.org/10.1016/j.omega.2005.12.003",
+      "description": "Wang, X. and Triantaphyllou, E. (2008). Omega 36(1). Defines the three rank-reversal test criteria (RRT1-RRT3) used to evaluate whether an MCDA method's ranking is stable under changes to the alternative set. Foundational source for the rank-reversal distinction added to 05-multi-criteria.md.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
+    },
+    {
+      "id": "ForecastBenchFRI2026",
+      "name": "LLMs Are Closing the Gap on Human Superforecasters (ForecastBench)",
+      "url": "https://forecastingresearch.substack.com/p/llms-are-closing-the-gap-on-human",
+      "description": "Bastani, Kucinskas, Reynolds (Forecasting Research Institute, 2026-01-29). Superforecasters led the best LLMs by 0.017 Brier points on ForecastBench as of 2026-01-29, with parity projected for Nov 2026 (95% CI Jan 2026 - Nov 2027). Superseded by ForecastBenchParityFRI2026Jul; kept as history.",
+      "url_check": "manual",
+      "last_verified": "2026-08-14"
+    },
+    {
+      "id": "BrownJEL2024",
+      "name": "Meta-Analysis of Empirical Estimates of Loss Aversion",
+      "url": "https://doi.org/10.1257/jel.20221698",
+      "description": "Brown, A. L., Imai, T., Vieider, F. M., and Camerer, C. F. (2024). Journal of Economic Literature 62(2), 485-516. Meta-analysis of 607 loss-aversion estimates from 150 studies. Mean lambda = 1.955, 95% CI [1.820, 2.102]. A literature average; lambda is design-dependent, so do not treat it as the population value. Cited in 08-prospect-theory.md.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Peters2019",
+      "name": "The ergodicity problem in economics",
+      "url": "https://doi.org/10.1038/s41567-019-0732-0",
+      "description": "Peters, O. (2019). Nature Physics 15, 1216-1221. Ergodicity economics: distinguishes the ensemble average (what expected utility computes) from the time average (the growth rate one actor experiences across repeated multiplicative bets). Foundational source for the non-ergodicity / ruin-risk expert-judgment addition to primitive #6 and SKILL.md.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Kelly1956",
+      "name": "A New Interpretation of Information Rate",
+      "url": "https://doi.org/10.1002/j.1538-7305.1956.tb03809.x",
+      "description": "Kelly, J. L. (1956). Bell System Technical Journal 35(4). Original Kelly criterion paper: growth-optimal bet sizing for repeated wagers with a known edge. Foundational source for the Kelly-criterion expert-judgment addition to primitive #6 and SKILL.md.",
+      "url_check": "manual"
+    },
+    {
+      "id": "ForecastBenchParityFRI2026Jul",
+      "name": "AI models have likely reached parity with superforecasters (ForecastBench update)",
+      "url": "https://forecastingresearch.substack.com/p/ai-models-have-likely-reached-parity",
+      "description": "Forecasting Research Institute, 2026-07-16. Several models are statistically indistinguishable from human superforecasters on the ForecastBench tournament leaderboard (bootstrap one-sided p between 0.14 and 0.41); confidence intervals overlap substantially, so results are consistent with parity, not outperformance. Source for Machine-Elicited Probabilities in SKILL.md.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Chow1970",
+      "name": "On optimum recognition error and reject tradeoff",
+      "url": "https://doi.org/10.1109/TIT.1970.1054406",
+      "description": "Chow, C. K. (1970). IEEE Transactions on Information Theory 16(1), 41-46. Optimum (Bayes) rejection rule and the error-reject tradeoff. Source for abstention in references/thresholds-stopping-and-ope.md.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Elkan2001",
+      "name": "The Foundations of Cost-Sensitive Learning",
+      "url": "https://cseweb.ucsd.edu/~elkan/rescale.pdf",
+      "description": "Elkan, C. (2001). IJCAI 2001, 973-978. Optimal decisions under a misclassification cost matrix; cost-based thresholds and rebalancing. Source for cost-sensitive thresholds.",
+      "url_check": "manual"
+    },
+    {
+      "id": "SaerensPriors2002",
+      "name": "Adjusting the Outputs of a Classifier to New a Priori Probabilities: A Simple Procedure",
+      "url": "https://doi.org/10.1162/089976602753284446",
+      "description": "Saerens, Latinne, Decaestecker (2002). Neural Computation 14(1), 21-41. Adjust posteriors to new class priors without refitting, with an EM estimate of unknown new priors. Source for the prevalence-shift rule.",
+      "url_check": "manual"
+    },
+    {
+      "id": "VickersElkin2006",
+      "name": "Decision Curve Analysis: A Novel Method for Evaluating Prediction Models",
+      "url": "https://journals.sagepub.com/doi/10.1177/0272989X06295361",
+      "description": "Vickers, A. J. and Elkin, E. B. (2006). Medical Decision Making 26(6), 565-574. Net benefit across threshold probabilities. Source for threshold choice across cost ranges.",
+      "url_check": "manual"
+    },
+    {
+      "id": "GeifmanElYaniv2017",
+      "name": "Selective Classification for Deep Neural Networks",
+      "url": "https://arxiv.org/abs/1705.08500",
+      "description": "Geifman, Y. and El-Yaniv, R. (2017). arXiv:1705.08500. Reject option that guarantees a target risk with high probability at the cost of coverage. Source for selective prediction.",
+      "url_check": "manual"
+    },
+    {
+      "id": "AudibertBubeckMunos2010",
+      "name": "Best Arm Identification in Multi-Armed Bandits",
+      "url": "https://dblp.org/rec/conf/colt/AudibertBM10.html",
+      "description": "Audibert, J.-Y., Bubeck, S., and Munos, R. (2010). COLT 2010, 41-53. Pure-exploration / best-arm identification objective distinct from cumulative regret.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Russo2016TopTwo",
+      "name": "Simple Bayesian Algorithms for Best Arm Identification",
+      "url": "https://arxiv.org/abs/1602.08448",
+      "description": "Russo, D. (arXiv:1602.08448, 2016; rev. 2018). Top-two sampling algorithms; posterior probability of misidentification converges at the optimal exponential rate.",
+      "url_check": "manual"
+    },
+    {
+      "id": "Stucchio2015VWO",
+      "name": "Bayesian A/B Testing at VWO",
+      "url": "https://vwo.com/downloads/VWO_SmartStats_technical_whitepaper.pdf",
+      "description": "Stucchio, C. (2015). VWO technical whitepaper. Expected-loss stopping: stop when the expected loss of the chosen variant falls below a pre-set threshold of caring. Practitioner source for expected-loss stopping.",
+      "url_check": "manual"
+    },
+    {
+      "id": "HadadAdaptiveCI2021",
+      "name": "Confidence Intervals for Policy Evaluation in Adaptive Experiments",
+      "url": "https://arxiv.org/abs/1911.02768",
+      "description": "Hadad, Hirshberg, Zhan, Wager, Athey (arXiv:1911.02768, final rev. 2021). Sample means are biased in adaptive trials; adaptively reweighted AIPW restores valid intervals. Source for the bandit-inference caveat.",
+      "url_check": "manual"
+    },
+    {
+      "id": "DudikDR2011",
+      "name": "Doubly Robust Policy Evaluation and Learning",
+      "url": "https://arxiv.org/abs/1103.4601",
+      "description": "Dudik, M., Langford, J., and Li, L. (2011). ICML 2011. Doubly robust off-policy evaluation: accurate if either the reward model or the logging-policy model is good.",
+      "url_check": "manual"
+    },
+    {
+      "id": "SwaminathanJoachimsSNIPS2015",
+      "name": "The Self-Normalized Estimator for Counterfactual Learning",
+      "url": "https://papers.nips.cc/paper/5748-the-self-normalized-estimator-for-counterfactual-learning",
+      "description": "Swaminathan, A. and Joachims, T. (2015). NIPS 2015. Self-normalized IPS estimator to reduce variance of counterfactual risk estimates from logged bandit feedback.",
+      "url_check": "manual"
+    },
+    {
+      "id": "LiReplay2011",
+      "name": "Unbiased Offline Evaluation of Contextual-bandit-based News Article Recommendation Algorithms",
+      "url": "https://arxiv.org/abs/1003.5956",
+      "description": "Li, L., Chu, W., Langford, J., and Wang, X. (2011). WSDM 2011. Replay method: provably unbiased offline evaluation of contextual-bandit policies from logs.",
+      "url_check": "manual"
+    }
+  ],
+  "repair_sources": [
+    {
+      "id": "ProspectOriginal",
+      "name": "Prospect Theory: An Analysis of Decision under Risk",
+      "url": "https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Behavioral_Decision_Theory/Kahneman_Tversky_1979_Prospect_theory.pdf",
+      "description": "Original hypothetical risky choices; does not establish universal B2C conversion lift.",
+      "add_as_web_search": false
+    }
+  ]
+}

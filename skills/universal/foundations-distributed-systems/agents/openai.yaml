@@ -1,0 +1,4 @@
+interface:
+  display_name: "Distributed Systems Foundations"
+  short_description: "Designs consensus, quorums, leases, idempotency, and CRDTs"
+  default_prompt: "Use $foundations-distributed-systems to design consensus, quorums, leases, fencing tokens, idempotency, or CRDTs for split brain, exactly-once claims, duplicate retries, stale reads, or leader flapping."

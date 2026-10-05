@@ -1,0 +1,10 @@
+{
+  "_note": "Template for the --pricing input of scripts/bot_cost_estimator.py. Copy it, replace <model-alias> with the name you will pass to --model (add one entry per model you compare), and fill in rates in USD per 1M tokens from each provider's pricing page on the day you estimate. Cache rates may stay null: --cache then bills that model uncached. Keys starting with _ or < are ignored. No real rates ship with this skill because published rates change.",
+  "<model-alias>": {
+    "display_name": "<model name as shown on the pricing page>",
+    "input_per_million": null,
+    "output_per_million": null,
+    "cache_read_per_million": null,
+    "cache_write_per_million": null
+  }
+}

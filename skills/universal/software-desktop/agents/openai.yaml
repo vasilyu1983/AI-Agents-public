@@ -1,0 +1,4 @@
+interface:
+  display_name: "Desktop Apps"
+  short_description: "Builds desktop apps, signing, updates, and Electron/Tauri security reviews."
+  default_prompt: "Use $software-desktop to choose a desktop stack, implement signing/notarization or auto-update, and review Electron/Tauri security."

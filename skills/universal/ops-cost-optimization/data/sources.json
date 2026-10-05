@@ -1,0 +1,280 @@
+{
+  "metadata": {
+    "skill": "ops-cost-optimization",
+    "description": "Official pricing pages and billing documentation for supported platforms",
+    "last_updated": "2026-09-27",
+    "title": "Cost Optimization - Sources"
+  },
+  "sources": [
+    {
+      "name": "Vercel Pricing",
+      "url": "https://vercel.com/pricing",
+      "type": "pricing_page",
+      "notes": "Plan comparison, usage-based pricing details"
+    },
+    {
+      "name": "Vercel Usage & Billing Docs",
+      "url": "https://vercel.com/docs/pricing",
+      "type": "documentation",
+      "notes": "Detailed billing model, spend management, per-metric pricing"
+    },
+    {
+      "name": "Supabase Pricing",
+      "url": "https://supabase.com/pricing",
+      "type": "pricing_page",
+      "notes": "Plan tiers, compute add-ons, usage-based pricing"
+    },
+    {
+      "name": "Supabase Billing Docs",
+      "url": "https://supabase.com/docs/guides/platform/billing-on-supabase",
+      "type": "documentation",
+      "notes": "Billing FAQ, spend caps, project pausing"
+    },
+    {
+      "name": "Resend Pricing",
+      "url": "https://resend.com/pricing",
+      "type": "pricing_page",
+      "notes": "Free tier, Pro tier, volume pricing"
+    },
+    {
+      "name": "Stripe Pricing",
+      "url": "https://stripe.com/pricing",
+      "type": "pricing_page",
+      "notes": "Processing fees, product-specific pricing"
+    },
+    {
+      "name": "Cloudflare Plans",
+      "url": "https://www.cloudflare.com/plans/",
+      "type": "pricing_page",
+      "notes": "Plan tiers and per-service usage pricing"
+    },
+    {
+      "name": "Cloudflare Workers Pricing",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "type": "pricing_page",
+      "notes": "Workers, KV, R2, D1 pricing"
+    },
+    {
+      "name": "Anthropic API Pricing",
+      "url": "https://www.anthropic.com/pricing",
+      "type": "pricing_page",
+      "notes": "Claude model pricing, prompt caching, batch API"
+    },
+    {
+      "name": "OpenAI API Pricing",
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "type": "pricing_page",
+      "notes": "GPT model pricing, fine-tuning, embeddings"
+    },
+    {
+      "name": "GitHub Pricing",
+      "url": "https://github.com/pricing",
+      "type": "pricing_page",
+      "notes": "Plans, Actions minutes, Copilot, storage"
+    },
+    {
+      "name": "GitHub Actions Billing",
+      "url": "https://docs.github.com/en/billing/managing-billing-for-github-actions",
+      "type": "documentation",
+      "notes": "Per-minute pricing by OS, storage, spending limits"
+    },
+    {
+      "name": "PostHog Pricing",
+      "url": "https://posthog.com/pricing",
+      "type": "pricing_page",
+      "notes": "Free tier, per-product pricing, volume discounts"
+    },
+    {
+      "name": "Sentry Pricing",
+      "url": "https://sentry.io/pricing/",
+      "type": "pricing_page",
+      "notes": "Free tier, Team, Business, per-category pricing"
+    },
+    {
+      "name": "GoDaddy Domain Pricing",
+      "url": "https://www.godaddy.com/tlds/pricing",
+      "type": "pricing_page",
+      "notes": "Registration vs renewal pricing by TLD"
+    },
+    {
+      "name": "Cloudflare Registrar",
+      "url": "https://www.cloudflare.com/products/registrar/",
+      "type": "pricing_page",
+      "notes": "At-cost domain pricing, transfer process"
+    },
+    {
+      "name": "Namecheap Pricing",
+      "url": "https://www.namecheap.com/domains/",
+      "type": "pricing_page",
+      "notes": "Domain pricing, WhoisGuard, DNS"
+    },
+    {
+      "name": "FinOps Framework - Quantify Business Value Domain",
+      "url": "https://www.finops.org/framework/domains/",
+      "type": "methodology",
+      "notes": "FinOps Foundation canonical framework; Unit Economics is an official capability under the Quantify Business Value domain",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "FinOps Framework 2026 (Cloud+ scopes)",
+      "url": "https://www.finops.org/framework/",
+      "type": "methodology",
+      "notes": "2026 Framework revision: mission expanded from 'Value of Cloud' to 'Value of Technology'; introduces FinOps Scopes ('Cloud+') spanning Public Cloud, SaaS, Data Center, Data Cloud Platforms, and a dedicated AI Technology Category with its own capabilities/KPIs/FOCUS alignment. Issued as an annual revision rather than a single version number.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "FOCUS Specification",
+      "url": "https://focus.finops.org/focus-specification/",
+      "type": "standard",
+      "notes": "FinOps Open Cost and Usage Specification. Current version: FOCUS 1.4 (ratified June 4, 2026) — corrects this file's prior entry, which cited 1.3 (Dec 4, 2025) as current. 1.4 adds Invoice Detail and Billing Period datasets and expands the Contract Commitment dataset from 13 to 30 columns. FOCUS 1.2 (May 29, 2025) added SaaS/PaaS normalization.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "Infracost Guardrails Docs",
+      "url": "https://www.infracost.io/docs/infracost_cloud/guardrails/",
+      "type": "docs",
+      "notes": "Infracost IaC cost diff and budget-threshold merge gates for CI pipelines. Infracost raised a $15M Series A on 2025-11-18, led by Pruven Capital with Y Combinator, Sequoia, and others participating.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "Langfuse LLM Observability",
+      "url": "https://langfuse.com/docs",
+      "type": "docs",
+      "notes": "Open-source LLM observability: per-trace and per-user cost attribution, token usage, latency. Self-hostable.",
+      "accessed": "2026-05-17"
+    },
+    {
+      "name": "Anthropic API Pricing (verified detail page)",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "type": "pricing_page",
+      "notes": "Authoritative per-model token rates, prompt-caching write and read multipliers, batch discount, and Claude Consumption Unit marketplace billing mechanics. Read current rates here at decision time; the guide keeps no rate table.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "AWS Savings Plans vs Reserved Instances (AWS docs)",
+      "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-ris.html",
+      "type": "documentation",
+      "notes": "Official mechanics for Compute Savings Plans vs Reserved Instances; commitment shape, discount depth, and applicability scope.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "GCP Committed Use Discounts Overview",
+      "url": "https://docs.cloud.google.com/compute/docs/instances/committed-use-discounts-overview",
+      "type": "documentation",
+      "notes": "Resource-based vs flexible CUD mechanics; CUD sharing enabled by default for new billing accounts created on/after 2026-06-16.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "OpenCost",
+      "url": "https://opencost.io/",
+      "type": "docs",
+      "notes": "CNCF-incubating open-source Kubernetes cost allocation engine, originally donated by Kubecost. Kubecost (commercial) was acquired by IBM in 2024 and now sits alongside Cloudability and Turbonomic in IBM's FinOps suite; verify current OpenCost governance independence at decision time.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "Vercel Fluid Compute Active CPU Pricing",
+      "url": "https://vercel.com/docs/functions/usage-and-pricing",
+      "type": "pricing_page",
+      "notes": "Active CPU pricing bills only for CPU time actually executing (not idle/wait time), replacing flat GB-hour duration billing on Fluid compute. Reported up to 90% savings for high-idle-time workloads (e.g. AI inference with I/O wait). Confirms the Vercel function-duration guidance in vendor-billing-guide.md.",
+      "accessed": "2026-07-11"
+    },
+    {
+      "name": "JCGM 101:2008 - Propagation of distributions using a Monte Carlo method",
+      "url": "https://www.bipm.org/en/doi/10.59161/jcgm101-2008",
+      "type": "standard",
+      "notes": "Primary propagation sequence: assign input distributions, sample input vectors, evaluate the model, and summarize the output distribution; Monte Carlo precision scales with draw count but does not validate the model.",
+      "accessed": "2026-09-08"
+    },
+    {
+      "name": "Morris 1991 - Factorial Sampling Plans for Preliminary Computational Experiments",
+      "url": "https://doi.org/10.1080/00401706.1991.10484804",
+      "type": "paper",
+      "notes": "Primary source for randomized one-factor-at-a-time trajectories and elementary effects used for factor screening.",
+      "accessed": "2026-09-08"
+    },
+    {
+      "name": "Kucherenko, Tarantola and Annoni - sensitivity indices with dependent variables",
+      "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC64266",
+      "type": "paper",
+      "notes": "Primary boundary source: ordinary independent-input sensitivity indices do not automatically extend to correlated variables; dependence-aware sampling and indices are separate methods.",
+      "accessed": "2026-09-08"
+    },
+    {
+      "name": "AWS Savings Plans - how they apply to usage",
+      "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html",
+      "type": "documentation",
+      "notes": "Application order: RIs before Savings Plans, EC2 Instance before Compute plans, highest-savings usage first, hourly commitment not carried over.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "AWS Savings Plans - what they are",
+      "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/what-is-savings-plans.html",
+      "type": "documentation",
+      "notes": "Plan types, one- and three-year terms, payment options, rates fixed through the term.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "AWS EC2 Reserved Instances - buying",
+      "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-concepts-buying.html",
+      "type": "documentation",
+      "notes": "No cancellation after purchase; only Standard RIs resell on the RI Marketplace.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "AWS S3 storage classes",
+      "url": "https://aws.amazon.com/s3/storage-classes/",
+      "type": "documentation",
+      "notes": "Minimum storage duration, minimum billable object size, retrieval fee and retrieval time per class.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "AWS data transfer costs for common architectures",
+      "url": "https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/",
+      "type": "documentation",
+      "notes": "Free inbound and intra-AZ transfer; cross-AZ, inter-region, internet-out and NAT processing charges; gateway vs interface endpoints.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "GCP Cloud Storage classes",
+      "url": "https://docs.cloud.google.com/storage/docs/storage-classes",
+      "type": "documentation",
+      "notes": "Minimum storage duration and retrieval fees for Nearline, Coldline and Archive.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "Azure savings plan overview",
+      "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/savings-plan/savings-plan-overview",
+      "type": "documentation",
+      "notes": "Compute and database savings plans, hourly application, no cancellation or refund, monthly price changes apply to active plans.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "Azure decide between savings plan and reservation",
+      "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/savings-plan/decide-between-savings-plan-reservation",
+      "type": "documentation",
+      "notes": "Recommended sequence: right-size, exchange, trade in, then buy reservations, then savings plans.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "Azure reservation exchanges and refunds",
+      "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/reservations/exchange-and-refund-azure-reservations",
+      "type": "documentation",
+      "notes": "Rolling refund cap, announced exchange restriction for reservations bought on or after 2027-02-01, trade-in to savings plans.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "Azure Blob access tiers",
+      "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview",
+      "type": "documentation",
+      "notes": "Early-deletion minimums for cool, cold and archive; prorated penalty; rehydration latency.",
+      "accessed": "2026-09-27"
+    },
+    {
+      "name": "FinOps Framework - Scopes",
+      "url": "https://www.finops.org/framework/scopes/",
+      "type": "documentation",
+      "notes": "Definition of a FinOps Scope and how capabilities apply across scopes.",
+      "accessed": "2026-09-27"
+    }
+  ]
+}

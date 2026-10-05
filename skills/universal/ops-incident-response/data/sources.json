@@ -1,0 +1,101 @@
+{
+  "metadata": {
+    "skill": "ops-incident-response",
+    "description": "Primary SRE and incident-management references",
+    "last_updated": "2026-09-28",
+    "title": "Incident Response - Sources"
+  },
+  "sources": [
+    {
+      "name": "Incident Metrics in SRE — Štěpán Davidovič (Google SRE / O'Reilly)",
+      "url": "https://sre.google/resources/practices-and-processes/incident-metrics-in-sre/",
+      "type": "methodology",
+      "notes": "Sparse, high-variance samples undermine means, medians and high-percentile trend estimates. Printed pp. 14–15 and 24–28; measure the response step a change targets, with uncertainty. Does not prescribe percentiles as a universal replacement.",
+      "accessed": "2026-09-28"
+    },
+    {
+      "name": "Alerting on SLOs — Google SRE Workbook",
+      "url": "https://sre.google/workbook/alerting-on-slos/",
+      "type": "methodology",
+      "notes": "Source for burn-rate thresholds: '2% budget consumption in one hour and 5% budget consumption in six hours as reasonable starting numbers for paging.' Used in references/slo-incident-triggering.md.",
+      "accessed": "2026-05-17"
+    },
+    {
+      "name": "Howie Post-Incident Guide — PagerDuty",
+      "url": "https://howie-guide.pagerduty.com/",
+      "type": "standard",
+      "notes": "Open standard for structured post-incident review. Covers narrative framing, structured interviews, near-miss inclusion, and human-factors lens. Added to references/postmortem-facilitation.md as the named standard for SEV1/SEV2 reviews.",
+      "accessed": "2026-05-17"
+    },
+    {
+      "name": "Google SRE Incident Management Guide",
+      "url": "https://sre.google/resources/practices-and-processes/incident-management-guide/",
+      "type": "methodology",
+      "notes": "Google SRE end-to-end incident management process grounded in incident command and operational readiness.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "Google SRE Anatomy of an Incident",
+      "url": "https://sre.google/resources/practices-and-processes/anatomy-of-an-incident/",
+      "type": "methodology",
+      "notes": "Lifecycle framing for preparedness, response, recovery, and mitigation.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "Atlassian Incident Management Handbook",
+      "url": "https://www.atlassian.com/incident-management/handbook",
+      "type": "methodology",
+      "notes": "Incident-management operating model covering severity, coordination, communication, and learning loops.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "PagerDuty Incident Response Documentation",
+      "url": "https://response.pagerduty.com/",
+      "type": "docs",
+      "notes": "Open-sourced PagerDuty incident response process covering before, during, and after an incident.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "PagerDuty During an Incident",
+      "url": "https://response.pagerduty.com/during/during_an_incident/",
+      "type": "docs",
+      "notes": "Operational guidance for major incident execution, coordination, and documentation.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "PagerDuty Severity Levels",
+      "url": "https://response.pagerduty.com/before/severity_levels/",
+      "type": "docs",
+      "notes": "Severity model guidance for response expectations and escalation policy.",
+      "accessed": "2026-04-12"
+    },
+    {
+      "name": "DORA incident reporting — Commission Delegated Regulation (EU) 2025/301",
+      "url": "https://eur-lex.europa.eu/eli/reg_del/2025/301/oj",
+      "type": "regulation",
+      "notes": "Article 5 defines awareness/classification timing, the late-classification rule, submission-anchored intermediate/final deadlines, and holiday exceptions. Incident templates are in ITS 2025/302, not ITS 2024/2956.",
+      "accessed": "2026-09-28"
+    },
+    {
+      "name": "NIS2 Directive Article 23 — Reporting obligations",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj",
+      "type": "regulation",
+      "notes": "Article 23: awareness-triggered staged reporting; trust-service-provider exception and progress/final-report handling for ongoing incidents. Confirm national implementing law and CSIRT instructions.",
+      "accessed": "2026-09-28"
+    },
+    {
+      "name": "SEC Item 1.05 Form 8-K cybersecurity incident disclosure",
+      "url": "https://www.sec.gov/resources-small-businesses/small-business-compliance-guides/cybersecurity-risk-management-strategy-governance-incident-disclosure",
+      "type": "regulation",
+      "notes": "Item 1.05 applies to domestic registrants; the materiality determination, without unreasonable delay, starts its filing clock. Foreign private issuers follow Form 6-K. Counsel confirms scope and permitted delays.",
+      "accessed": "2026-09-28"
+    },
+    {
+      "name": "DORA incident reporting forms — Commission Implementing Regulation (EU) 2025/302",
+      "url": "https://eur-lex.europa.eu/eli/reg_impl/2025/302/oj",
+      "type": "regulation",
+      "notes": "Standard forms, templates and procedures for major ICT-related incidents and significant cyber threats. Annex I supplies the incident template.",
+      "accessed": "2026-09-28"
+    }
+  ]
+}

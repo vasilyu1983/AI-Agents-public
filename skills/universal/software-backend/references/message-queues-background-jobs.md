@@ -1,0 +1,707 @@
+# Message Queues & Background Jobs
+
+Comprehensive guide for message queue patterns, background job design, broker comparison, and reliability guarantees. Covers BullMQ, Redis, SQS, Kafka, RabbitMQ, idempotent job design, dead letter queues, scheduling, and observability.
+
+## Contents
+
+- [BullMQ Patterns](#bullmq-patterns)
+- [Message Broker Comparison](#message-broker-comparison)
+- [Idempotent Job Design](#idempotent-job-design)
+- [Dead Letter Queues and Failure Handling](#dead-letter-queues-and-failure-handling)
+- [Job Scheduling and Cron](#job-scheduling-and-cron)
+- [Observability for Background Jobs](#observability-for-background-jobs)
+- [Fan-Out and Fan-In Patterns](#fan-out-and-fan-in-patterns)
+- [Delivery Guarantees](#delivery-guarantees)
+- [Anti-Patterns](#anti-patterns)
+- [Job runtime and outbox dispatch](#job-runtime-and-outbox-dispatch)
+- [Cross-References](#cross-references)
+
+---
+
+## BullMQ Patterns
+
+### Basic Job Processing
+
+```typescript
+import { Queue, Worker, QueueEvents } from 'bullmq';
+import IORedis from 'ioredis';
+
+const connection = new IORedis({
+  host: process.env.REDIS_HOST,
+  port: 6379,
+  maxRetriesPerRequest: null,  // Required for BullMQ
+});
+
+// Producer: add jobs to queue
+const emailQueue = new Queue('email', { connection });
+
+await emailQueue.add('send-welcome', {
+  userId: 'user-123',
+  templateId: 'welcome-email',
+}, {
+  attempts: 3,
+  backoff: { type: 'exponential', delay: 1000 },
+  removeOnComplete: { count: 1000 },  // Keep last 1000 completed jobs
+  removeOnFail: { count: 5000 },      // Keep last 5000 failed jobs
+});
+
+// Consumer: process jobs
+const worker = new Worker('email', async (job) => {
+  const { userId, templateId } = job.data;
+
+  await job.updateProgress(10);
+  const user = await getUserById(userId);
+
+  await job.updateProgress(50);
+  await sendEmail(user.email, templateId);
+
+  await job.updateProgress(100);
+  return { sentTo: user.email };
+}, {
+  connection,
+  concurrency: 5,          // Process 5 jobs in parallel
+  limiter: {
+    max: 10,               // Max 10 jobs
+    duration: 1000,         // Per second (rate limiting)
+  },
+});
+
+worker.on('completed', (job, result) => {
+  logger.info({ jobId: job.id, result }, 'Job completed');
+});
+
+worker.on('failed', (job, err) => {
+  logger.error({ jobId: job?.id, err }, 'Job failed');
+});
+```
+
+### Job Types and Patterns
+
+| Pattern | BullMQ Feature | Use When |
+|---------|---------------|----------|
+| Simple job | `queue.add()` | One-off tasks (send email, resize image) |
+| Delayed job | `delay` option | Future execution (reminder in 24h) |
+| Repeatable job | `upsertJobScheduler` (Job Scheduler) | Recurring tasks (daily report) |
+| Priority job | `priority` option | Urgent tasks first |
+| Flow (parent-child) | `FlowProducer` | Multi-step workflows with dependencies |
+| Bulk add | `queue.addBulk()` | Batch insertion of many jobs |
+| Rate limited | `limiter` option | API rate limit compliance |
+
+### Flow (Parent-Child Dependencies)
+
+```typescript
+import { FlowProducer } from 'bullmq';
+
+const flowProducer = new FlowProducer({ connection });
+
+// Parent job depends on child jobs completing first
+await flowProducer.add({
+  name: 'generate-report',
+  queueName: 'reports',
+  data: { reportId: 'rpt-001' },
+  children: [
+    {
+      name: 'fetch-sales-data',
+      queueName: 'data-fetch',
+      data: { source: 'sales', reportId: 'rpt-001' },
+    },
+    {
+      name: 'fetch-inventory-data',
+      queueName: 'data-fetch',
+      data: { source: 'inventory', reportId: 'rpt-001' },
+    },
+    {
+      name: 'fetch-customer-data',
+      queueName: 'data-fetch',
+      data: { source: 'customers', reportId: 'rpt-001' },
+    },
+  ],
+});
+
+// Parent job runs only after ALL children complete
+// Access child results via job.getChildrenValues()
+```
+
+### Graceful Shutdown
+
+```typescript
+async function shutdown() {
+  // 1. Close the worker (finish current jobs)
+  await worker.close();
+
+  // 2. Close the queue (stop accepting jobs)
+  await emailQueue.close();
+
+  // 3. Close Redis connection
+  await connection.quit();
+}
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
+```
+
+---
+
+## Message Broker Comparison
+
+| Feature | Redis / BullMQ | SQS | Kafka | RabbitMQ |
+|---------|---------------|-----|-------|----------|
+| Model | Job queue | Message queue | Event log | Message broker |
+| Ordering | FIFO per queue | FIFO (optional) | Per-partition ordering | Per-queue FIFO |
+| Delivery | At-least-once | At-least-once | At-least-once (configurable) | At-least-once / at-most-once |
+| Retention | Configurable (Redis memory) | 4 days (configurable to 14) | Configurable (days/size/forever) | Until consumed |
+| Throughput | Bound by Redis and worker capacity; benchmark your setup | Standard: nearly unlimited. FIFO: per-partition quota, higher with batching and high-throughput mode; check the SQS quotas page for your region | Scales with partitions and brokers; benchmark | Bound by broker and consumer capacity; benchmark |
+| Replay | Limited (requires event store) | No replay | Full replay from any offset | No replay |
+| Scaling | Redis cluster | Automatic (managed) | Partition-based | Prefetch + consumers |
+| Managed options | Upstash, AWS ElastiCache | AWS native | Confluent, MSK, Redpanda | CloudAMQP, AmazonMQ |
+| Best for | Background jobs, task queues | AWS-native workflows, serverless | Event streaming, log aggregation | Complex routing, pub/sub |
+
+### Selection Decision Tree
+
+```text
+What do you need?
+  ├─ Background job processing (retries, delays, priorities)
+  │   └─ BullMQ (Redis-backed, mature, Node.js ecosystem)
+  │
+  ├─ AWS-native, serverless, managed
+  │   └─ SQS + Lambda (zero infrastructure management)
+  │
+  ├─ Event streaming, replay, high throughput
+  │   ├─ Kafka / Redpanda (self-managed or Confluent)
+  │   └─ Use when: event sourcing, real-time analytics, CDC
+  │
+  ├─ Complex routing (topic, fanout, headers)
+  │   └─ RabbitMQ (exchange types, routing keys, dead letter)
+  │
+  └─ Simple pub/sub, real-time notifications
+      └─ Redis Pub/Sub (ephemeral, no persistence needed)
+```
+
+---
+
+## Idempotent Job Design
+
+### Why Idempotency Matters
+
+```text
+Jobs will be delivered more than once because:
+  1. Worker crashes after processing but before acknowledging
+  2. Network timeout causes retry
+  3. Duplicate messages from producer
+  4. Manual re-queue for failed jobs
+
+If a job is NOT idempotent, duplicate processing causes:
+  - Double charges to customers
+  - Duplicate emails sent
+  - Inventory decremented twice
+  - Inconsistent data state
+```
+
+### Idempotency Patterns
+
+**Pattern 1: Receiver-Enforced Payment Key**
+
+Implementation-neutral pseudocode; adapt these operations to the receiver's verified API and database isolation contract:
+
+```text
+key = merchant_id + order_id + payment_operation_version
+payload_hash = canonical_hash(amount, currency, beneficiary)
+transaction:
+    insert-or-read payment_operation(key UNIQUE, payload_hash, state=pending)
+    reject if existing payload_hash differs
+    return stored result if complete
+
+# Concurrent attempts MUST use the same receiver-enforced key.
+result = gateway.charge(payload, idempotency_key=key)
+transaction:
+    store durable result and mark operation complete
+
+on timeout / crash before storing result:
+    keep operation outcome_unknown; query receiver by key
+    retry with the same key only within documented receiver dedupe retention
+    if reconciliation or retention guarantees fail: manual review, no new charge key
+```
+
+A Redis GET/charge/SET sequence cannot prevent concurrent or crash-window double charges. A lock alone also does not resolve an external outcome after a crash. Require receiver-side deduplication with payload mismatch rejection and retention covering the retry horizon; otherwise serialize and reconcile, without claiming automatic exactly-once payment effects.
+
+**Pattern 2: Atomic Inbox and Local Fulfillment**
+
+```text
+transaction:
+    inserted = insert inbox(consumer_scope, event_id, payload_hash)
+               ON CONFLICT DO NOTHING
+    if not inserted:
+        reject mismatched payload_hash; return prior committed result
+    update order and inventory using this transaction
+    insert fulfillment_outbox(stable_fulfillment_key UNIQUE, payload)
+commit
+acknowledge message
+```
+
+The inbox marker, local business writes and fulfillment intent commit together or all roll back. Do not commit the marker before fulfillment. Shipping, email or another external fulfillment operation cannot join this local transaction: its dispatcher needs receiver-enforced deduplication and outcome-unknown reconciliation like Pattern 1. An inbox key must include consumer scope so independent consumers do not suppress each other.
+
+**Pattern 3: Conditional Update**
+
+```sql
+-- Only update if current state matches expected state
+UPDATE orders
+SET status = 'shipped', updated_at = now()
+WHERE id = $1 AND status = 'paid';
+-- Returns 0 rows affected if already shipped (idempotent)
+```
+
+### Idempotency Checklist
+
+- [ ] Every job has a unique idempotency key (job ID, event ID, or business key)
+- [ ] Processing check happens BEFORE side effects
+- [ ] Side effects are guarded (DB constraints, conditional updates)
+- [ ] External API calls use idempotency keys (Stripe, etc.)
+- [ ] Idempotency records have TTL for cleanup
+- [ ] Logging clearly indicates when duplicates are skipped
+
+---
+
+## Dead Letter Queues and Failure Handling
+
+### BullMQ Failure Handling
+
+```typescript
+// Configure retry behavior per job
+await queue.add('process-webhook', webhookData, {
+  attempts: 5,
+  backoff: {
+    type: 'exponential',
+    delay: 2000,  // 2s, 4s, 8s, 16s, 32s
+  },
+});
+
+// Custom backoff strategy
+await queue.add('critical-job', data, {
+  attempts: 10,
+  backoff: {
+    type: 'custom',
+  },
+});
+
+// In worker: implement custom backoff
+const worker = new Worker('critical', processor, {
+  settings: {
+    backoffStrategy: (attemptsMade: number) => {
+      // Fibonacci backoff: 1s, 1s, 2s, 3s, 5s, 8s, 13s, 21s, 34s, 55s
+      const fib = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55];
+      return (fib[attemptsMade - 1] || 55) * 1000;
+    },
+  },
+});
+```
+
+### Dead Letter Queue Pattern
+
+```typescript
+// Monitor failed jobs and move to DLQ after exhausting retries
+const queueEvents = new QueueEvents('orders', { connection });
+
+queueEvents.on('failed', async ({ jobId, failedReason }) => {
+  const job = await Job.fromId(queue, jobId);
+  if (!job) return;
+
+  // If all retries exhausted, move to DLQ
+  if (job.attemptsMade >= job.opts.attempts!) {
+    await dlqQueue.add('failed-order', {
+      originalJobId: jobId,
+      originalQueue: 'orders',
+      data: job.data,
+      failedReason,
+      attempts: job.attemptsMade,
+      failedAt: new Date().toISOString(),
+    });
+
+    // Alert on DLQ growth
+    const dlqSize = await dlqQueue.getJobCounts('waiting');
+    if (dlqSize.waiting > 100) {
+      await alerting.critical('DLQ size exceeds threshold', { dlqSize });
+    }
+  }
+});
+```
+
+### Failure Classification
+
+Classify exceptions into retryable and non-retryable **before** entering the retry loop, not inside it. Exception classification that happens inside or after the retry loop repeats side effects and delays terminal failure handling.
+
+For Kafka consumers and similar message processors: `OperationCanceledException` from host shutdown is not a processing failure — it must exit the processing loop cleanly without routing to retry/DLQ or committing the message offset.
+
+| Failure Type | Retry? | Example |
+|-------------|--------|---------|
+| Transient (network timeout) | Yes, with backoff | HTTP 503, connection reset |
+| Rate limited | Yes, with longer backoff | HTTP 429, API quota exceeded |
+| Bad input (validation) | No (fix data, re-submit) | Invalid email format |
+| Business logic error | No (requires investigation) | Insufficient funds |
+| Infrastructure failure | Yes, after fix | Database down, Redis unavailable |
+| Poison message | No (move to DLQ) | Unparseable payload, corrupted data |
+
+```typescript
+// Classify errors in worker to decide retry behavior
+const worker = new Worker('orders', async (job) => {
+  try {
+    await processOrder(job.data);
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      // Do NOT retry validation errors
+      await moveToDLQ(job, error);
+      return; // Return without throwing to mark as completed
+    }
+    if (error.status === 429) {
+      // Rate limited — retry with extra delay
+      throw new DelayedError(error.message, 60_000); // 60s delay
+    }
+    // All other errors: let BullMQ retry with configured backoff
+    throw error;
+  }
+});
+```
+
+---
+
+## Job Scheduling and Cron
+
+### Repeatable Jobs (BullMQ v6 — Job Schedulers)
+
+BullMQ v6 removed `repeat`, `queue.getRepeatableJobs()`, and `queue.removeRepeatableByKey()`, and raises an error if it finds legacy repeatable metadata in Redis. The legacy `debounce` option was also removed in favor of `deduplication`. Use Job Schedulers instead:
+
+```typescript
+// Cron-based repeatable jobs via Job Schedulers (BullMQ v6+)
+await queue.upsertJobScheduler(
+  'daily-sales-report', // scheduler id — stable id prevents duplicates
+  { pattern: '0 8 * * *', tz: 'America/New_York' },
+  { name: 'daily-report', data: { reportType: 'sales' } },
+);
+
+await queue.upsertJobScheduler(
+  'cleanup-expired-sessions',
+  { every: 60_000 },
+  { name: 'cleanup-expired', data: {} },
+);
+
+// List all job schedulers
+const schedulers = await queue.getJobSchedulers();
+// Remove a job scheduler
+await queue.removeJobScheduler(schedulers[0].id);
+```
+
+Migrating from v5: if upgrading an existing deployment, move any Redis repeatable-job data to Job Schedulers while still on v5, before upgrading to v6 (docs.bullmq.io v5→v6 migration guide).
+
+### Scheduling Best Practices
+
+| Concern | Recommendation |
+|---------|---------------|
+| Timezone | Always specify timezone explicitly; UTC is safest for server jobs |
+| Overlap prevention | Use a stable `jobId` so BullMQ deduplicates |
+| Distributed cron | Only ONE instance should create repeatable jobs (use advisory lock or leader election) |
+| Missed schedules | BullMQ does NOT catch up missed runs; if the process was down, those runs are skipped |
+| Long-running crons | Set `timeout` on jobs; monitor for stuck jobs |
+
+### Distributed Cron Locking
+
+```typescript
+// Ensure only one instance registers repeatable jobs
+import { Mutex } from 'redis-semaphore';
+
+const mutex = new Mutex(connection, 'cron-registration-lock', {
+  lockTimeout: 30_000,
+  acquireTimeout: 5_000,
+});
+
+async function registerCronJobs() {
+  const acquired = await mutex.tryAcquire();
+  if (!acquired) {
+    logger.info('Another instance is registering cron jobs');
+    return;
+  }
+
+  try {
+    await queue.upsertJobScheduler(
+      'daily-report',
+      { pattern: '0 8 * * *' },
+      { name: 'daily-report', data: {} },
+    );
+  } finally {
+    await mutex.release();
+  }
+}
+```
+
+---
+
+## Observability for Background Jobs
+
+### Key Metrics
+
+| Metric | Description | Alert On |
+|--------|-------------|----------|
+| `queue.waiting` | Jobs waiting to be processed | Growing queue (consumers too slow) |
+| `queue.active` | Jobs currently being processed | Stuck jobs (no movement) |
+| `queue.completed` | Completed jobs per time window | Rate drop (processing issues) |
+| `queue.failed` | Failed jobs per time window | Spike (upstream error) |
+| `queue.delayed` | Delayed jobs count | Unexpected growth |
+| `job.duration` | Processing time per job | P95 exceeding threshold |
+| `job.attempts` | Retry count per job | Average > 1 (reliability issue) |
+| `dlq.size` | Dead letter queue depth | Any growth |
+
+### Structured Logging for Jobs
+
+```typescript
+const worker = new Worker('orders', async (job) => {
+  const startTime = Date.now();
+  const logContext = {
+    jobId: job.id,
+    jobName: job.name,
+    queue: 'orders',
+    attempt: job.attemptsMade + 1,
+    data: { orderId: job.data.orderId },  // Log safe fields only
+  };
+
+  logger.info(logContext, 'Job started');
+
+  try {
+    const result = await processOrder(job.data);
+    const duration = Date.now() - startTime;
+
+    logger.info({ ...logContext, duration, result: 'success' }, 'Job completed');
+    metrics.histogram('job.duration', duration, { queue: 'orders', name: job.name });
+    metrics.increment('job.completed', { queue: 'orders' });
+
+    return result;
+  } catch (error) {
+    const duration = Date.now() - startTime;
+    logger.error({ ...logContext, duration, error }, 'Job failed');
+    metrics.increment('job.failed', { queue: 'orders' });
+    throw error;
+  }
+});
+```
+
+### OpenTelemetry Integration
+
+```typescript
+import { trace, SpanKind } from '@opentelemetry/api';
+
+const tracer = trace.getTracer('background-jobs');
+
+const worker = new Worker('orders', async (job) => {
+  const span = tracer.startSpan(`job:${job.name}`, {
+    kind: SpanKind.CONSUMER,
+    attributes: {
+      'job.id': job.id!,
+      'job.name': job.name,
+      'job.queue': 'orders',
+      'job.attempt': job.attemptsMade + 1,
+    },
+  });
+
+  try {
+    const result = await trace.getTracer('background-jobs')
+      .startActiveSpan('process-order', async (childSpan) => {
+        const result = await processOrder(job.data);
+        childSpan.end();
+        return result;
+      });
+    span.setStatus({ code: 0 });
+    return result;
+  } catch (error) {
+    span.setStatus({ code: 2, message: (error as Error).message });
+    throw error;
+  } finally {
+    span.end();
+  }
+});
+```
+
+---
+
+## Fan-Out and Fan-In Patterns
+
+### Fan-Out: One Event, Many Consumers
+
+```typescript
+// Publish one event, multiple queues consume it
+async function onOrderPlaced(order: Order) {
+  await Promise.all([
+    emailQueue.add('order-confirmation', { orderId: order.id }),
+    inventoryQueue.add('reserve-items', { orderId: order.id, items: order.items }),
+    analyticsQueue.add('track-purchase', { orderId: order.id, total: order.total }),
+    notificationQueue.add('push-notification', { userId: order.userId }),
+  ]);
+}
+```
+
+### Fan-In: Many Jobs, One Aggregation
+
+```typescript
+// Use BullMQ flows for fan-in
+const flow = await flowProducer.add({
+  name: 'aggregate-report',
+  queueName: 'reports',
+  data: { reportId: 'monthly-2026-01' },
+  children: [
+    { name: 'fetch-region', queueName: 'data-fetch', data: { region: 'us' } },
+    { name: 'fetch-region', queueName: 'data-fetch', data: { region: 'eu' } },
+    { name: 'fetch-region', queueName: 'data-fetch', data: { region: 'apac' } },
+  ],
+});
+
+// Parent job: aggregate when all children complete
+const reportWorker = new Worker('reports', async (job) => {
+  const childResults = await job.getChildrenValues();
+  // childResults contains all region data
+  const report = aggregateRegions(Object.values(childResults));
+  await saveReport(job.data.reportId, report);
+});
+```
+
+### Batch Processing Pattern
+
+```typescript
+// Process items in batches to reduce overhead
+const BATCH_SIZE = 100;
+const BATCH_TIMEOUT = 5000; // 5 seconds
+
+let batch: any[] = [];
+let timer: NodeJS.Timeout;
+
+async function addToBatch(item: any) {
+  batch.push(item);
+
+  if (batch.length >= BATCH_SIZE) {
+    await flushBatch();
+  } else if (!timer) {
+    timer = setTimeout(flushBatch, BATCH_TIMEOUT);
+  }
+}
+
+async function flushBatch() {
+  if (batch.length === 0) return;
+
+  clearTimeout(timer);
+  const items = batch.splice(0);
+  await processBatch(items);  // Bulk insert, bulk API call, etc.
+}
+```
+
+---
+
+## Delivery Guarantees
+
+### Comparison
+
+| Guarantee | Description | Achievable With |
+|-----------|-------------|-----------------|
+| At-most-once | Message processed 0 or 1 times. Fastest, lossy. | Fire-and-forget, no ACK |
+| At-least-once | Message processed 1 or more times. Requires idempotency. | ACK after processing + retries |
+| Scoped atomic effects | One committed local effect per scoped event key; duplicates can still be delivered. | Transactional inbox + local business writes; external effects require separate receiver dedupe |
+
+### At-Least-Once (Default for BullMQ, SQS, Kafka)
+
+```text
+Producer → Broker → Consumer
+                      │
+                      ├─ Process message
+                      ├─ ACK to broker (mark as done)
+                      │
+                      └─ If crash before ACK → broker redelivers → duplicate
+                         → MUST handle idempotently
+```
+
+### Atomic Recording, At-Least-Once Publication (Transactional Outbox)
+
+```typescript
+// Write event AND business data in the same database transaction
+async function placeOrder(orderData: CreateOrderData) {
+  await db.$transaction(async (tx) => {
+    // 1. Write business data
+    const order = await tx.order.create({ data: orderData });
+
+    // 2. Write outbox event (same transaction)
+    await tx.outboxEvent.create({
+      data: {
+        aggregateId: order.id,
+        eventType: 'OrderPlaced',
+        payload: JSON.stringify(order),
+        published: false,
+      },
+    });
+  });
+  // Both write or neither writes (ACID)
+}
+
+// Dispatcher outline: schema adds lease_until and claim_token to outboxEvent.
+// In one short database transaction, claim pending/expired rows with:
+// SELECT id FROM outbox_event
+// WHERE published = false AND (lease_until IS NULL OR lease_until < now())
+// ORDER BY created_at, id FOR UPDATE SKIP LOCKED LIMIT :batch_size;
+// UPDATE claimed rows with a new claim_token and lease_until, then commit.
+// Publish outside the transaction with the stable event ID. On broker ACK,
+// mark published only WHERE id = :id AND claim_token = :claim_token.
+// A crashed publisher leaves an expiring lease; a new owner republishes.
+// Renew a lease before it expires if publishing can exceed the lease duration.
+// A receiver must deduplicate the stable event ID transactionally.
+
+```
+
+Publication and `published=true` are separate operations. A crash after enqueue but before the database update republishes the same event ID; this is expected at-least-once delivery. Concurrent dispatchers can claim different rows with `SKIP LOCKED`; lease expiry still permits duplicate publication when an old publisher finishes late. Consumers enforce transactional scoped inbox dedupe; do not rely on transient queue job IDs or retention-limited broker dedupe for durable correctness. Mark published only after broker acknowledgement and verify the lease token. Order-sensitive consumers additionally validate aggregate sequence/version and handle gaps; polling by creation time does not establish end-to-end ordering.
+
+Executable crash-history model: `python3 scripts/test_delivery_histories.py` from this bundle. It models local atomicity and an explicitly deduplicating fake receiver, not production gateway behavior.
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Problem | Fix |
+|-------------|---------|-----|
+| No idempotency | Duplicate processing on retries | Idempotency key + dedup check |
+| Unbounded retries | Broken jobs retry forever, wasting resources | Set `attempts` limit, use DLQ |
+| Large payloads in jobs | Redis memory bloat, slow serialization | Store data in DB, pass ID in job |
+| No job timeout | Stuck jobs block workers | Set `timeout` per job type |
+| Shared queue for everything | Priority inversion, noisy neighbors | Separate queues per concern |
+| No DLQ monitoring | Failed jobs silently accumulate | Alert on DLQ depth |
+| Fire-and-forget without logging | Lost jobs, no debugging trail | Always log job lifecycle |
+| Processing without tracing | Cannot correlate jobs with requests | Pass `correlationId`, use OTel |
+
+---
+
+## Job runtime and outbox dispatch
+
+| Work shape | Default and change condition |
+|------------|------------------------------|
+| Small jobs with an existing PostgreSQL service | Start with a PostgreSQL-backed queue after checking database capacity, pooling, lease recovery and queue-depth alerts. Claim rows in short transactions with `FOR UPDATE SKIP LOCKED`; a lease or visibility timeout handles worker crashes. |
+| Independent jobs at greater measured scale or across teams | Use a managed broker or Redis-backed worker when isolation and operational ownership justify another service. |
+| Multi-step work that must survive process crashes and long waits | Evaluate a durable-execution runtime; confirm how it persists workflow history, retries steps and handles version changes. |
+| Outbox dispatch | Start with the leased poller above. Use log-based CDC when measured polling lag/DB load, ordering needs, or an existing CDC platform justify it; keep stable event IDs and receiver dedupe. |
+
+PostgreSQL documents `SKIP LOCKED` as suitable for avoiding contention among consumers of a queue-like table, while warning that it gives an inconsistent view for ordinary queries. [PostgreSQL SELECT](https://www.postgresql.org/docs/current/sql-select.html), [pg-boss](https://github.com/timgit/pg-boss), and [Temporal workflow documentation](https://docs.temporal.io/workflows) are lookup starting points; verify the installed runtime's current API before implementation.
+
+### Sizing Your Queue Workers
+
+```text
+Workers per queue = ceil(expected_jobs_per_second / (1 / avg_processing_time_seconds))
+
+Example:
+  - 100 jobs/second expected
+  - Average processing time: 200ms (0.2s)
+  - Jobs per worker per second: 1 / 0.2 = 5
+  - Workers needed: 100 / 5 = 20 workers (concurrency setting)
+
+Add 20-50% headroom for spikes.
+Monitor queue depth to adjust.
+```
+
+---
+
+## Cross-References
+
+- [nodejs-best-practices.md](nodejs-best-practices.md) — Node.js process management, worker threads
+- [database-patterns.md](database-patterns.md) — Transactional outbox, database connection patterns
+- [infrastructure-economics.md](infrastructure-economics.md) — Queue infrastructure cost modeling
+- [../../software-architecture-design/references/data-architecture-patterns.md](../../software-architecture-design/references/data-architecture-patterns.md) — Saga patterns, event sourcing, CQRS
+- [../../software-architecture-design/references/modern-patterns.md](../../software-architecture-design/references/modern-patterns.md) — Event-driven architecture patterns
+- [../../software-clean-code-standard/references/resilience-utilities.md](../../software-clean-code-standard/references/resilience-utilities.md) — Retry and circuit breaker patterns

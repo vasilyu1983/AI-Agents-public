@@ -1,0 +1,35 @@
+# .npmrc - shared config for npm-compatible registries
+# Works with npm and many pnpm workflows. Exact CI install behavior still comes
+# from the package-manager command, not from .npmrc alone.
+
+# SECURITY
+strict-ssl=true
+engine-strict=true
+audit=true
+audit-level=high
+
+# REGISTRY
+registry=https://registry.npmjs.org/
+# @mycompany:registry=https://npm.mycompany.com/
+
+# INSTALL / RESOLUTION
+fund=false
+update-notifier=false
+save-exact=false
+prefer-offline=true
+
+# SCRIPTS
+# Deny dependency lifecycle scripts by default: install-time scripts are the
+# main execution path for npm supply-chain worms. Allowlist the few packages
+# that genuinely need a build step instead of re-enabling scripts globally:
+# - pnpm 11+: allowBuilds map in pnpm-workspace.yaml (see template)
+# - npm: run the needed builds explicitly after install, e.g.
+#   `npm rebuild esbuild sharp --ignore-scripts=false` (scoped to those packages)
+# Note: this also skips your own package's pre/post install scripts; run them
+# explicitly (`npm run <script>`) where needed.
+ignore-scripts=true
+
+# NETWORK
+fetch-retries=3
+fetch-retry-mintimeout=10000
+fetch-retry-maxtimeout=60000

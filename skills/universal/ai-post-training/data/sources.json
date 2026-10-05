@@ -1,0 +1,219 @@
+{
+  "metadata": {
+    "skill": "ai-post-training",
+    "updated": "2026-09-27",
+    "audit_date": "2026-08-31",
+    "last_verified": "2026-08-31",
+    "last_updated": "2026-09-27",
+    "total_sources": 30,
+    "title": "AI Post-Training - Sources",
+    "description": "Primary sources for post-training and alignment: Lambert's RLHF book (anchor), InstructGPT, DPO and the direct-alignment family, PPO, GRPO/RLVR (DeepSeek-R1), GSPO, RLOO, Constitutional AI/RLAIF, process reward models (incl. the discriminative-vs-generative split), on-policy distillation (GKD + Thinking Machines), rubrics-as-rewards, agentic/multi-turn RL and its frameworks (verl, OpenRLHF), open recipes (Tulu 3), Raschka's reasoning-model book (verifier engineering + GRPO run telemetry), and Pai's Designing LLM Applications (model merging/fusion taxonomy). Algorithm names, framework support, and lab-specific recipes are volatile — verify against primary sources before quoting; GRPO is a family (DAPO/GSPO/Dr.GRPO/RLOO/newer variants), not one fixed objective, and TRL's loss_type roster, trainer namespaces and defaults turned over between 2026-07 and 2026-08."
+  },
+  "categories": {
+    "anchor_books": [
+      {
+        "title": "Reinforcement Learning from Human Feedback (RLHF Book)",
+        "author": "Nathan Lambert",
+        "url": "https://rlhfbook.com",
+        "type": "book",
+        "note": "The anchor source for this skill: reward modeling, preference data, policy-gradient (PPO), direct alignment (DPO/DAAs), RLVR, rejection sampling, RLAIF/Constitutional AI, over-optimization, evaluation."
+      },
+      {
+        "title": "Build a Reasoning Model (From Scratch)",
+        "author": "Sebastian Raschka",
+        "url": "https://www.manning.com/books/build-a-reasoning-model-from-scratch",
+        "type": "book",
+        "note": "Reasoning-model training walkthrough: RLVR, GRPO, verifier-based rewards, test-time compute. Ch.3 (SS3.4-3.7) is the source for the verifier-engineering checklist in reward-and-data.md (boxed-answer extraction with brace-depth parsing, LaTeX/unicode normalization, SymPy equivalence, tuple-wise grading, and the argument against LLM-based answer extraction). Ch.7 (SS7.2.2-7.3.3) is the source for grpo-run-diagnostics.md (advantage mean as sanity check, advantage std as learning-signal gauge, zero-gradient degenerate groups, reward_avg=1.00 as exhaustion, entropy trajectories). Thresholds there come from a Qwen3-0.6B RLVR run on MATH-500 - treat as that configuration's rules of thumb, not universal constants."
+      },
+      {
+        "title": "Designing Large Language Model Applications",
+        "author": "Suhas Pai",
+        "url": "https://www.oreilly.com/library/view/designing-large-language/9781098150495/",
+        "type": "book",
+        "note": "Ch.7 is the source for the model merging/fusion taxonomy in reward-and-data.md: averaging, weighted averaging, interpolation, and adapter merging (AdapterSoup, AdaMix), plus ColD Fusion for organizational model reuse. Carries the Zaman et al. observation that fusion preserves shared capabilities and loses unshared ones, making merging a tool for removing undesirable attributes. 2025 source: predates consolidation around TIES/DARE/SLERP and mergekit, which are NOT covered here and must be verified independently before use."
+      }
+    ],
+    "foundational_rlhf": [
+      {
+        "title": "Training language models to follow instructions with human feedback (InstructGPT)",
+        "url": "https://arxiv.org/abs/2203.02155",
+        "type": "paper",
+        "note": "The canonical SFT -> reward model -> PPO RLHF pipeline."
+      },
+      {
+        "title": "Proximal Policy Optimization Algorithms (PPO)",
+        "url": "https://arxiv.org/abs/1707.06347",
+        "type": "paper",
+        "note": "The policy-gradient algorithm underlying reward-model RLHF."
+      },
+      {
+        "title": "Deep reinforcement learning from human preferences",
+        "url": "https://arxiv.org/abs/1706.03741",
+        "type": "paper",
+        "note": "Origin of learning a reward model from human preference comparisons."
+      }
+    ],
+    "direct_alignment": [
+      {
+        "title": "Direct Preference Optimization (DPO)",
+        "url": "https://arxiv.org/abs/2305.18290",
+        "type": "paper",
+        "note": "RLHF reframed as a classification loss on the policy; no reward model or RL loop."
+      },
+      {
+        "title": "KTO: Model Alignment as Prospect Theoretic Optimization",
+        "url": "https://arxiv.org/abs/2402.01306",
+        "type": "paper",
+        "note": "Direct alignment from unpaired (good/bad) feedback."
+      },
+      {
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "url": "https://arxiv.org/abs/2403.07691",
+        "type": "paper",
+        "note": "Single-stage, reference-model-free SFT+preference objective."
+      },
+      {
+        "title": "SimPO: Simple Preference Optimization with a Reference-Free Reward",
+        "url": "https://arxiv.org/abs/2405.14734",
+        "type": "paper",
+        "note": "Length-normalized, reference-free direct alignment."
+      }
+    ],
+    "reasoning_rl_and_grpo": [
+      {
+        "title": "DeepSeekMath / GRPO (Group Relative Policy Optimization)",
+        "url": "https://arxiv.org/abs/2402.03300",
+        "type": "paper",
+        "note": "Introduces GRPO: group-relative advantage, drops the value model."
+      },
+      {
+        "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via RL",
+        "url": "https://arxiv.org/abs/2501.12948",
+        "type": "paper",
+        "note": "Large-scale RLVR via GRPO; verifiable rewards for reasoning."
+      },
+      {
+        "title": "LLMs Gaming Verifiers: RLVR can Lead to Reward Hacking",
+        "url": "https://arxiv.org/abs/2604.15149",
+        "type": "paper",
+        "last_verified": "2026-09-27",
+        "note": "Controlled rule-induction experiments show RLVR models exploiting omissions in an extensional verifier; supports adversarial checker testing, not a universal failure rate."
+      },
+      {
+        "title": "Group Sequence Policy Optimization (GSPO, Zheng et al., Qwen 2025)",
+        "url": "https://arxiv.org/abs/2507.18071",
+        "type": "paper",
+        "note": "Sequence-level importance ratio + sequence-level clipping; fixes GRPO non-convergence on MoE from expert-routing volatility (removes need for Routing Replay). The paper's MoE experiments use Qwen3-30B-A3B-Base; it credits GSPO for 'the latest Qwen3 models' without naming a size, and omits the KL term 'for brevity'."
+      },
+      {
+        "title": "Understanding R1-Zero-Like Training: A Critical Perspective (Dr. GRPO, 2025)",
+        "url": "https://arxiv.org/abs/2503.20783",
+        "type": "paper",
+        "note": "Identifies GRPO's per-response length-normalization and advantage-std biases (inflate length, miscalibrate by difficulty); Dr. GRPO removes the normalizations."
+      },
+      {
+        "title": "DAPO: An Open-Source LLM Reinforcement Learning System at Scale (2025)",
+        "url": "https://arxiv.org/abs/2503.14476",
+        "type": "paper",
+        "note": "Decoupled-clip, dynamic sampling, token-level loss, drops KL; open large-scale RL recipe addressing GRPO entropy collapse and length bias. Has been TRL's default GRPOTrainer loss type; read the default from your installed version's grpo_config.py."
+      },
+      {
+        "title": "Back to Basics: Revisiting REINFORCE-Style Optimization for Learning from Human Feedback (RLOO)",
+        "url": "https://arxiv.org/abs/2402.14740",
+        "type": "paper",
+        "note": "Critic-free REINFORCE with a leave-one-out group baseline; simpler alternative to GRPO/PPO. TRL ships an RLOOTrainer (verified 2026-07)."
+      }
+    ],
+    "ai_feedback_and_reward_modeling": [
+      {
+        "title": "Constitutional AI: Harmlessness from AI Feedback",
+        "url": "https://arxiv.org/abs/2212.08073",
+        "type": "paper",
+        "note": "Self-critique against a written constitution; RLAIF for harmlessness."
+      },
+      {
+        "title": "Let's Verify Step by Step (process reward models)",
+        "url": "https://arxiv.org/abs/2305.20050",
+        "type": "paper",
+        "note": "Process (step-level) vs outcome reward models for reasoning. This is the DISCRIMINATIVE (scalar-per-step) framing; practice has moved toward generative PRMs — see the PRM survey entry."
+      },
+      {
+        "title": "A Survey of Process Reward Models: From Outcome Signals to Process Supervisions for Large Language Models",
+        "author": "Zheng, Zhu, Ou, Chen, Zhang, Shan, Zheng, Yang, Lin, Yu, Zhang",
+        "url": "https://arxiv.org/abs/2510.08049",
+        "type": "paper",
+        "note": "Source for the discriminative-vs-generative PRM split in reward-and-data.md. Title and authors verified 2026-08-31; abstract states PRMs 'address this gap by evaluating and guiding reasoning at the step or trajectory level'. The specific discriminative-PRM failure modes attributed to it in the prose (step segmentation, limited generalization, reward hacking, training inefficiency) come from the expert review of 2026-08-31 and are NOT in the abstract — read the body before quoting them as the survey's finding. No magnitudes read. The named generative-PRM systems (GenPRM, ThinkPRM, R-PRM, RM-R1, GRAM) are unverified names — verify each individually before citing."
+      },
+      {
+        "title": "Rubrics as Rewards: Reinforcement Learning Beyond Verifiable Domains",
+        "author": "Gunjal, Wang, Lau, Nath, He, Liu, Hendryx",
+        "url": "https://arxiv.org/abs/2507.17746",
+        "type": "paper",
+        "note": "Source for the rubrics-as-rewards section in methods-and-pipeline.md — the fourth reward source, between AI preferences and a verifiable checker. Title and authors verified 2026-08-31. Abstract, quoted: RLVR 'has proven effective for complex reasoning tasks with clear correctness signals such as math and coding' but 'extending it to real-world reasoning tasks is challenging, as evaluation depends on nuanced, multi-criteria judgments rather than binary correctness.' No magnitudes read — do not quote performance numbers."
+      }
+    ],
+    "on_policy_distillation": [
+      {
+        "title": "On-Policy Distillation",
+        "author": "Thinking Machines Lab",
+        "url": "https://thinkingmachines.ai/blog/on-policy-distillation/",
+        "type": "blog",
+        "note": "The framing behind the on-policy/dense cell in methods-and-pipeline.md: the student generates rollouts and the teacher scores the student's own tokens (per-token KL), giving RL's on-policy sampling with SFT's dense signal. Reached via TRL's paper index (verified 2026-08-31), which reports it 'has been shown to outperform SFT, GRPO and can be used to restore generalization capabilities lost during SFT' and 'is more compute efficient and is less prone to overfitting when trained with limited data'. Vendor blog: circulating magnitudes (a ~30x cost reduction vs off-policy distillation; fewer gradient steps than RL) were NOT read in a primary source — cite direction only. TRL implements it via DistillationTrainer."
+      },
+      {
+        "title": "On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes (GKD)",
+        "url": "https://arxiv.org/abs/2306.13649",
+        "type": "paper",
+        "author": "Agarwal, Vieillard, Zhou, Stanczyk, Ramos, Geist, Bachem",
+        "note": "Generalized Knowledge Distillation: trains the student on its own generated outputs with teacher feedback instead of a fixed sequence set, addressing distribution mismatch. Title, authors and arXiv id verified 2026-08-31. TRL maps it to experimental.gkd.GKDTrainer with the on/off-policy mixing parameter lmbda (TRL paper index, same date). No magnitudes read — do not quote results."
+      }
+    ],
+    "agentic_and_multiturn_rl": [
+      {
+        "title": "A Practitioner's Guide to Multi-turn Agentic Reinforcement Learning",
+        "author": "Ruiyi Wang, Prithviraj Ammanabrolu",
+        "url": "https://arxiv.org/abs/2510.01132",
+        "type": "paper",
+        "note": "Survey behind the agentic/multi-turn RL section in methods-and-pipeline.md: trajectory- vs turn-level reward, cross-turn credit assignment, rollout design choices. Title and authors verified 2026-08-31. Abstract states existing frameworks and definitions are 'fragmented, and there is no systematic formulation or analysis of which design choices matter across tasks'. No magnitudes read — do not quote results."
+      },
+      {
+        "title": "verl (Volcano Engine Reinforcement Learning for LLMs)",
+        "url": "https://github.com/volcengine/verl",
+        "type": "repo",
+        "note": "The common open backbone for large-scale and agentic RL: async/disaggregated rollout, vLLM generation engines, multi-turn environments. Choose over TRL when scale or asynchronous rollout is the constraint. Referenced by TRL's own paper index (the GSPO beta=0.0 rationale links a verl PR). Repo health and feature set NOT verified past 2026-08 — check before recommending a version. Depth: ai-distributed-training."
+      },
+      {
+        "title": "OpenRLHF",
+        "url": "https://github.com/OpenRLHF/OpenRLHF",
+        "type": "repo",
+        "note": "Alternative RLHF/RL training framework; per the expert review of 2026-08-31, 0.10 (Apr 2026) added multi-turn VLM RL. Choose over TRL for multi-turn/VLM RL at scale. Version and feature claims NOT independently verified — check the repo before recommending. The ecosystem is wider than TRL/verl/OpenRLHF (NeMo RL, AReaL, ROLL, slime); none of those were verified here."
+      }
+    ],
+    "open_recipes": [
+      {
+        "title": "Tulu 3: Pushing Frontiers in Open Language Model Post-Training",
+        "url": "https://arxiv.org/abs/2411.15124",
+        "type": "paper",
+        "note": "Fully open post-training recipe: SFT + DPO + RLVR, synthetic + human data."
+      },
+      {
+        "title": "TRL (Transformer Reinforcement Learning) docs",
+        "url": "https://huggingface.co/docs/trl",
+        "type": "docs",
+        "note": "Reference implementation of SFT/DPO/GRPO/RLOO/DistillationTrainer. Corrections verified 2026-08-31 against trl/trainer/grpo_config.py on main and the TRL paper index: GSPO is configured by importance_sampling_level='sequence' (allowed values 'token' or 'sequence'), NOT by loss_type — the loss_type roster is grpo, dr_grpo, dapo, bnpo, cispo, sapo, luspo, vespo, and DAPO is the default. GRPOConfig ships beta=0.0 ('If 0.0 (default), the reference model is not loaded'). PPO was then at experimental.ppo.PPOTrainer; a 2026-09 audit found it removed in a later TRL release, so check release notes before planning on PPO. On-policy distillation is first-class DistillationTrainer, with experimental.gkd.GKDTrainer, experimental.async_distillation.AsyncDistillationTrainer (MOPD) and experimental.iw_opd.IWOPDTrainer alongside. The paper index carries per-paper beta anchors with section references (DPO 0.1, ORPO 0.1, RLOO 0.03, DeepSeek-R1 0.001, DAPO 0.0; the original GRPO in DeepSeekMath used 0.04, and GSPO's paper omits the KL term 'for brevity' rather than fixing it at 0). Environment-owned rewards (Harbor/OpenEnv) are supported. Verify the current API before quoting; the roster and namespaces change between releases."
+      },
+      {
+        "title": "SymPy (symbolic mathematics library)",
+        "url": "https://sympy.org",
+        "type": "docs",
+        "note": "The symbolic engine behind the RLVR math-verifier equivalence check in reward-and-data.md: parse both sides and test simplify(gtruth - pred) == 0, which recognizes 0.5 == 1/2 and 28/6 == 14/3 where string equality fails. Cap input length and catch SympifyError/TypeError/PolynomialError/TokenError so a malformed rollout returns False instead of raising into the training loop."
+      },
+      {
+        "title": "Llama 2: reward modeling and RLHF (helpfulness + safety RMs)",
+        "url": "https://arxiv.org/abs/2307.09288",
+        "type": "paper",
+        "note": "Two-reward-model RLHF at production scale; rejection sampling + PPO."
+      }
+    ]
+  }
+}

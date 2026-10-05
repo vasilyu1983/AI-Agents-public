@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grounding Communication Foundations"
+  short_description: "Grounding theory for clarifying questions, handoff understanding, and repair"
+  default_prompt: "Use $foundations-grounding-communication to decide whether to ask a clarifying question, confirm a handoff was understood, repair common ground, or fix multi-turn drift in human-AI or agent handoffs."

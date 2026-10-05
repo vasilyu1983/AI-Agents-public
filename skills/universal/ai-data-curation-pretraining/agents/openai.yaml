@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pretraining Data Curation"
+  short_description: "Pretraining corpora from Common Crawl: filter, deduplicate, decontaminate"
+  default_prompt: "Use $ai-data-curation-pretraining to build or ablate an LLM pretraining corpus from Common Crawl: extract, filter, deduplicate, decontaminate, mix, and synthesize data."

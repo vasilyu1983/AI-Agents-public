@@ -1,4 +1,0 @@
-interface:
-  display_name: "MLOps & LLMOps - Production Operations Hub"
-  short_description: "Operates ML, LLM, agent, responsible, and multimodal AI"
-  default_prompt: "Use $ai-mlops to operate ML, LLM, responsible-AI, and multimodal systems through deployment, monitoring, governance, and production-incident response."

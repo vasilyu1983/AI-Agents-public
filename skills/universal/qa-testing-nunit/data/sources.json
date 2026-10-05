@@ -1,0 +1,212 @@
+{
+  "metadata": {
+    "title": "NUnit Testing - Sources",
+    "description": "Current official sources for NUnit fixture design, .NET test runner modes, ASP.NET Core integration testing, Testcontainers, WireMock.Net, and package-level compatibility checks.",
+    "last_updated": "2026-09-23",
+    "skill": "qa-testing-nunit"
+  },
+  "official_documentation": [
+    {
+      "name": ".NET testing overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/",
+      "description": "Current entry point for .NET testing guidance and framework-specific tutorials.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NUnit runner introduction (MTP)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-nunit-runner-intro",
+      "description": "Current Microsoft guidance for creating and running NUnit tests with Microsoft.Testing.Platform.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "dotnet test command",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-test",
+      "description": "Current CLI reference for test execution, artifacts path, and logging behavior.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Testing with dotnet test (VSTest and MTP modes)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test",
+      "description": "VSTest is the default dotnet test mode; Microsoft.Testing.Platform (MTP) is opt-in. Check the installed SDK's documentation for supported runner selectors, their precedence, and current CLI syntax before changing test commands.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "ASP.NET Core integration tests",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-10.0",
+      "description": "Current guidance for WebApplicationFactory-based integration testing.",
+      "add_as_web_search": true
+    },
+    {
+      "name": ".NET code coverage",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-code-coverage",
+      "description": "Coverage collection guidance and current tool references.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "MTP code coverage extensions",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/microsoft-testing-platform-code-coverage",
+      "description": "Coverage under Microsoft.Testing.Platform: coverlet.MTP and Microsoft.Testing.Extensions.CodeCoverage. coverlet.collector and coverlet.msbuild cannot be used with MTP. IncludeTestAssembly defaults to false in Microsoft.Testing.Extensions.CodeCoverage (was true in VSTest).",
+      "add_as_web_search": true
+    }
+  ],
+  "nunit_docs": [
+    {
+      "name": "NUnit framework release notes",
+      "url": "https://docs.nunit.org/articles/nunit/release-notes/framework.html",
+      "description": "NUnit release history. Check the current stable release and migration notes before recommending a version or adapting async asserts, delegate types, and platform names.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NUnit 4 migration guide",
+      "url": "https://docs.nunit.org/articles/nunit/release-notes/Nunit4.0-MigrationGuide.html",
+      "description": "Breaking changes from NUnit 3.x to 4.x: classic asserts moved from NUnit.Framework.Assert to NUnit.Framework.Legacy.ClassicAssert (call-syntax restored in 4.5 via C# 14 extension methods), delegate type changes, minimum TFM increase.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NUnit and Microsoft.Testing.Platform",
+      "url": "https://docs.nunit.org/articles/vs-test-adapter/NUnit-And-Microsoft-Test-Platform.html",
+      "description": "How to enable MTP in NUnit projects using EnableNUnitRunner. Adapter version compatibility: 5.x for MTP 1.x, 6.x for MTP 2.0.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NUnit3TestAdapter adapter release notes",
+      "url": "https://docs.nunit.org/articles/vs-test-adapter/AdapterV4-Release-Notes.html",
+      "description": "Adapter version history. Check the current release and its MTP and target-framework compatibility before pinning.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "FixtureLifeCycle",
+      "url": "https://docs.nunit.org/articles/nunit/writing-tests/attributes/fixturelifecycle.html",
+      "description": "Lifecycle semantics for instance-per-test-case fixtures and one-time setup constraints.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Parallelizable",
+      "url": "https://docs.nunit.org/articles/nunit/writing-tests/attributes/parallelizable.html",
+      "description": "Parallel execution scopes and cautions for shared state.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Multiple asserts",
+      "url": "https://docs.nunit.org/articles/nunit/writing-tests/assertions/multiple-asserts.html",
+      "description": "Current guidance for grouped assertions with Assert.Multiple and Assert.EnterMultipleScope.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "TestContext",
+      "url": "https://docs.nunit.org/articles/nunit/writing-tests/TestContext.html",
+      "description": "Current NUnit diagnostics surface including progress and output streams.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Retry attribute",
+      "url": "https://docs.nunit.org/articles/nunit/writing-tests/attributes/retry.html",
+      "description": "Current semantics for retrying tests and its limitations.",
+      "add_as_web_search": true
+    }
+  ],
+  "runner_and_platform": [
+    {
+      "name": "Microsoft.Testing.Platform introduction",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/microsoft-testing-platform-intro",
+      "description": "Current overview of Microsoft.Testing.Platform and its compatibility model. All major frameworks (NUnit, xUnit, MSTest) now ship MTP runners.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Microsoft.Testing.Platform via dotnet test (VSTest mode, legacy for MTP)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/microsoft-testing-platform-integration-dotnet-test",
+      "description": "Running MTP projects under the VSTest mode of dotnet test. Requires TestingPlatformDotnetTestSupport=true. Considered legacy as of .NET 10 SDK in favor of MTP mode via global.json.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "global.json overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/global-json",
+      "description": "SDK pinning and test runner selection reference. Use test.runner: Microsoft.Testing.Platform in global.json to opt in to MTP mode with .NET 10 SDK.",
+      "add_as_web_search": true
+    }
+  ],
+  "assertion_libraries": [
+    {
+      "name": "FluentAssertions license change (v8)",
+      "url": "https://xceed.com/fluent-assertions-faq/",
+      "description": "FluentAssertions under the Xceed Community License is free for non-commercial use; commercial use requires a subscription. The preceding Apache-2.0 line remains open source. Check which license covers the selected package and use the publisher's pricing page for costs.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "AwesomeAssertions NuGet",
+      "url": "https://www.nuget.org/packages/AwesomeAssertions/",
+      "description": "AwesomeAssertions is an Apache-2.0 community fork of FluentAssertions. Migration is mainly a namespace rename from FluentAssertions to AwesomeAssertions; check migration notes for additional API differences before upgrading.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Shouldly NuGet",
+      "url": "https://www.nuget.org/packages/Shouldly/",
+      "description": "Free, BSD-3 fluent assertion library (ShouldBe-style API; no .Should() entry point). Recommended alternative to FluentAssertions for new repos.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "FluentResults.Extensions.AwesomeAssertions NuGet",
+      "url": "https://www.nuget.org/packages/FluentResults.Extensions.AwesomeAssertions/",
+      "description": "AwesomeAssertions extensions for FluentResults Result types; required for fluent result.Should() assertions on FluentResults (1.0.0).",
+      "add_as_web_search": false
+    }
+  ],
+  "containers_and_doubles": [
+    {
+      "name": "Testcontainers best practices",
+      "url": "https://dotnet.testcontainers.org/api/best_practices/",
+      "description": "Container best practices: pin image versions, use random host ports, avoid host-path mounts (use WithResourceMapping), and avoid fixed names. Check the current package release before pinning.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Testcontainers wait strategies",
+      "url": "https://dotnet.testcontainers.org/api/wait_strategies/",
+      "description": "Current readiness probes and waiting primitives for deterministic startup.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "WireMock.Net",
+      "url": "https://wiremock.org/dotnet/",
+      "description": "Official WireMock.Net entry point for stubbing, verification, and scenario control.",
+      "add_as_web_search": true
+    }
+  ],
+  "package_references": [
+    {
+      "name": "NUnit package",
+      "url": "https://www.nuget.org/packages/NUnit/",
+      "description": "Package metadata. Check the current stable release, prerelease status, and supported target frameworks before pinning.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NUnit.Analyzers package",
+      "url": "https://www.nuget.org/packages/NUnit.Analyzers/",
+      "description": "Analyzer package metadata. Check the current release and available async-assert rules before pinning.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NUnit3TestAdapter package",
+      "url": "https://www.nuget.org/packages/NUnit3TestAdapter/",
+      "description": "Adapter package metadata. Check the current release, target-framework floor, and supported MTP generation before pinning.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "coverlet.MTP package",
+      "url": "https://www.nuget.org/packages/coverlet.MTP/",
+      "description": "Native Coverlet integration for Microsoft.Testing.Platform. Required when using MTP mode — coverlet.collector and coverlet.msbuild are VSTest-only and will not collect coverage under MTP. Check NuGet for the current version and its Microsoft.Testing.Platform floor.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Microsoft.Testing.Extensions.CodeCoverage package",
+      "url": "https://www.nuget.org/packages/Microsoft.Testing.Extensions.CodeCoverage/",
+      "description": "Microsoft's coverage extension for MTP. Check its current release, supported coverage switches, and MTP dependency floor before pinning.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "MediatR package",
+      "url": "https://www.nuget.org/packages/MediatR/",
+      "description": "Used by the handler templates. 12.5.0 was Apache-2.0; 13.0.0+ ship a custom licence file instead of an SPDX expression. Commercial terms unsourced — verify before adopting in a commercial repo.",
+      "add_as_web_search": true
+    }
+  ]
+}

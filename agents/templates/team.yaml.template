@@ -1,0 +1,66 @@
+# Team definition. Place at: agents/teams/<team-name>/team.yaml
+# Members listed here MUST exist as paired files in:
+#   agents/claude/<name>.md
+#   agents/codex/<snake_name>.toml
+
+name: <team-kebab-name>
+family: <prefix>                          # qa, data, software, marketing, ai, ops, dev, docs, product, startup, project, legal-uk, legal-eu
+description: <one-sentence team purpose — what decision or artifact this team produces.>
+
+best_for:
+  - <Concrete situation where this team beats a single agent.>
+  - <Second situation. Be specific — "complex tasks" is not useful.>
+  # - <Optional third>
+
+members:
+  - <member-name-1>                       # exact filename stem from agents/claude/
+  - <member-name-2>
+  - <member-name-3>
+  # - <member-name-4>                     # 3-5 members is the sweet spot; >6 erodes synthesis quality.
+                                          # Exception: jurisdiction departments (legal-*) ship larger rosters
+                                          # because members run as a routed catalog, not one synthesis pass.
+
+required_context:
+  - <What the parent thread MUST supply for this team to be useful.>
+
+optional_context:
+  - docs/**/*.md
+  - graphs/code-graph.json
+  - reports/query-*.md
+  - <Domain-specific artifact — runbooks, schemas, brand guidelines, regulator filings>
+
+concurrency_mode: hybrid                  # hybrid (default) | parallel | staged | sequential
+synthesis_owner: parent-thread            # parent-thread (default) | <named-member> | dedicated-synthesizer
+
+# Ownership and deliverable contract — every shipped recipe carries these
+# (see agents/teams/README.md §"Recipe Schema" for field semantics).
+owned_files:
+  - <glob each member may write — keep write ownership single-threaded>
+do_not_touch:
+  - <glob no member may write>
+deliverable: <the single artifact this team hands back to the parent thread>
+design_rationale: <one sentence — why THIS composition beats a single agent for the best_for cases>
+
+# Gated growth and termination — every shipped recipe carries these.
+expansion_gate:
+  candidate_specialists: []               # ids installable via the EVPI gate; bounded by max_dynamic_members
+  max_dynamic_members: 2
+stopping_rule:
+  reversibility: <reversible | costly-to-reverse | irreversible — sets how much verification precedes shipping>
+
+# Optional but common (15/33 and 11/33 of shipped recipes respectively):
+# verification: <how the deliverable is checked before handback>
+# algedonic_channel: <the bypass signal a member raises to halt the team immediately>
+
+# Optional debate block. Enable when the team produces go/no-go,
+# tradeoff, or contested decisions. Omit for pure-research teams.
+debate:
+  enabled: true
+  triggers:
+    - <Decision pattern that should escalate to debate — e.g. "Go/no-go decisions">
+    - <Second trigger>
+  perspectives:
+    - <Named lens — e.g. testing, security, cost, compliance>
+    - <Named lens>
+    - <Named lens>
+    - <Named lens>

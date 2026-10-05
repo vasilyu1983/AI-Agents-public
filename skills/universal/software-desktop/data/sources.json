@@ -1,0 +1,226 @@
+{
+  "metadata": {
+    "skill": "software-desktop",
+    "updated": "2026-09-28",
+    "total_sources": 32,
+    "description": "Primary framework, security, packaging, updater, and signing sources for desktop application engineering.",
+    "title": "Software Desktop - Sources",
+    "last_updated": "2026-09-28"
+  },
+  "categories": {
+    "frameworks": [
+      {
+        "name": "Electron Docs",
+        "url": "https://www.electronjs.org/docs/latest/",
+        "description": "Official Electron architecture, APIs, packaging, and security guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tauri Docs",
+        "url": "https://tauri.app/start/",
+        "description": "Official Tauri docs for app architecture, bundling, and updater behavior.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Compose Multiplatform Getting Started",
+        "url": "https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-getting-started.html",
+        "description": "Official guide for creating Compose Multiplatform apps that target desktop alongside other platforms.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Compose Desktop Components",
+        "url": "https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-desktop-components.html",
+        "description": "Official desktop-specific Compose Multiplatform API and behavior reference.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Flutter Desktop",
+        "url": "https://docs.flutter.dev/platform-integration/desktop",
+        "description": "Flutter guidance for desktop targets and platform integration.",
+        "add_as_web_search": true
+      },
+      {
+        "name": ".NET MAUI Docs",
+        "url": "https://learn.microsoft.com/en-us/dotnet/maui/",
+        "description": "Official .NET MAUI desktop and cross-platform app guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Wails Introduction",
+        "url": "https://wails.io/docs/introduction/",
+        "description": "Go backend with an OS-webview frontend.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Avalonia Deployment",
+        "url": "https://docs.avaloniaui.net/docs/deployment/embedded-linux",
+        "description": "Self-contained .NET deployment still has platform-native dependencies.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "WebKitGTK 2.52",
+        "url": "https://webkitgtk.org/2026/03/18/webkitgtk-2.52-highlights.html",
+        "description": "Release boundary removing libsoup2.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      }
+    ],
+    "security": [
+      {
+        "name": "Electron Security",
+        "url": "https://www.electronjs.org/docs/latest/tutorial/security",
+        "description": "Official Electron security checklist for renderer isolation, IPC validation, and secure content loading.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tauri Security",
+        "url": "https://v2.tauri.app/security/",
+        "description": "Official Tauri security model, trust-boundary, and WebView hardening guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tauri Capabilities",
+        "url": "https://v2.tauri.app/security/capabilities/",
+        "description": "Official Tauri capabilities and permission-boundary documentation for frontend-to-core access control.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Electron Process Model",
+        "url": "https://www.electronjs.org/docs/latest/tutorial/process-model",
+        "description": "Official Electron main/renderer/preload process model and contextIsolation/IPC boundary reference.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Electron Release Support",
+        "url": "https://www.electronjs.org/docs/latest/tutorial/electron-timelines",
+        "description": "Supported release lines and major cadence.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Electron Fuses",
+        "url": "https://www.electronjs.org/docs/latest/tutorial/fuses",
+        "description": "Package-time runtime hardening.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Electron ASAR Integrity",
+        "url": "https://www.electronjs.org/docs/latest/tutorial/asar-integrity",
+        "description": "Integrity and code-search fuse pairing.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Electron Sandbox",
+        "url": "https://www.electronjs.org/docs/latest/tutorial/sandbox",
+        "description": "Renderer sandbox default since Electron 20.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tauri CSP",
+        "url": "https://v2.tauri.app/security/csp/",
+        "description": "CSP protection requires configuration.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Windows Camera Permissions",
+        "url": "https://support.microsoft.com/en-us/windows/privacy/manage-app-permissions-for-a-camera-in-windows",
+        "description": "Store versus desktop camera access controls.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Windows Wi-Fi Location Privacy",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/nativewifi/wi-fi-access-location-changes",
+        "description": "Affected API consent behavior.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      }
+    ],
+    "distribution": [
+      {
+        "name": "Apple Notarization",
+        "url": "https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution",
+        "description": "Authoritative macOS notarization process for distributed apps.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft SignTool",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/seccrypto/signtool",
+        "description": "Windows code signing reference for desktop distribution.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Azure Artifact Signing (formerly Trusted Signing)",
+        "url": "https://azure.microsoft.com/en-us/products/artifact-signing",
+        "description": "Microsoft's current cloud-native Windows code-signing service; verify current naming, GA scope, and eligibility before quoting.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Sparkle",
+        "url": "https://sparkle-project.org/documentation/",
+        "description": "Update framework documentation for native macOS apps; verify release compatibility before choosing a version.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Tauri Updater",
+        "url": "https://v2.tauri.app/plugin/updater/",
+        "description": "Official updater plugin documentation for Tauri desktop release and signature verification flows.",
+        "add_as_web_search": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": ".NET MAUI Windows Deployment",
+        "url": "https://learn.microsoft.com/en-us/dotnet/maui/windows/deployment/overview",
+        "description": "Official Windows deployment guidance for .NET MAUI desktop apps.",
+        "add_as_web_search": true
+      },
+      {
+        "name": ".NET MAUI Mac Catalyst Outside App Store",
+        "url": "https://learn.microsoft.com/en-us/dotnet/maui/mac-catalyst/deployment/publish-outside-app-store",
+        "description": "Official Mac Catalyst signing, packaging, and notarization guidance for distribution outside the Mac App Store.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Microsoft Store Individual Registration",
+        "url": "https://learn.microsoft.com/en-us/windows/apps/publish/whats-new-individual-developer",
+        "description": "Individual registration flow and eligibility.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MSIX Signing Options",
+        "url": "https://learn.microsoft.com/en-us/windows/msix/package/signing-package-overview",
+        "description": "Store signing versus independent production distribution.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apple Notarization Workflow",
+        "url": "https://developer.apple.com/documentation/security/customizing-the-notarization-workflow",
+        "description": "Submission log retrieval.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apple Notarization Failures",
+        "url": "https://developer.apple.com/documentation/security/resolving-common-notarization-issues",
+        "description": "Signature, runtime, timestamp, and entitlement triage.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apple Universal Binaries",
+        "url": "https://developer.apple.com/documentation/apple-silicon/building-a-universal-macos-binary",
+        "description": "All compiled dependencies need appropriate architecture slices.",
+        "last_verified": "2026-09-28",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

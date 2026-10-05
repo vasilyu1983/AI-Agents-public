@@ -1,0 +1,165 @@
+{
+  "metadata": {
+    "title": "Statistical inference primary sources",
+    "description": "Interpretation principles, A/B test validity and variance reduction, sequential and anytime-valid inference, multiplicity procedures, eval error bars, prediction-powered inference, and conformal prediction variants.",
+    "skill": "foundations-statistical-inference",
+    "last_updated": "2026-09-23",
+    "research_cutoff": "2026-09-23",
+    "total_sources": 25
+  },
+  "sources": [
+    {
+      "id": "ASA2016",
+      "name": "American Statistical Association statement on statistical significance and p-values",
+      "url": "https://www.amstat.org/asa/files/pdfs/P-ValueStatement.pdf",
+      "last_verified": "2026-09-17",
+      "description": "ASA primary release with six interpretation principles, including distinction between p-values, effect magnitude, and hypothesis probabilities."
+    },
+    {
+      "id": "Ramdas2023",
+      "name": "Ramdas et al. — Game-theoretic statistics and safe anytime-valid inference",
+      "url": "https://arxiv.org/abs/2210.01948",
+      "last_verified": "2026-09-17",
+      "description": "Author paper describing e-processes, confidence sequences, optional stopping, and assumptions underlying anytime-valid inference."
+    },
+    {
+      "id": "AngelopoulosBates2022",
+      "name": "Angelopoulos and Bates — A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification, v6",
+      "url": "https://arxiv.org/html/2107.07511v6",
+      "last_verified": "2026-09-17",
+      "description": "Primary author tutorial; section 1 finite-sample calibration and marginal coverage, tie caveat, and section 3 conditional/group evaluation."
+    },
+    {
+      "id": "PPI2023",
+      "name": "Angelopoulos, Bates, Fannjiang, Jordan, Zrnic — Prediction-powered inference, Science 382(6671):669-674 (2023)",
+      "url": "https://doi.org/10.1126/science.adi6000",
+      "description": "Rectifier estimator combining a small gold-labelled set with many model predictions; arXiv 2301.09633."
+    },
+    {
+      "id": "PPI++2023",
+      "name": "Angelopoulos, Duchi, Zrnic — PPI++: Efficient Prediction-Powered Inference",
+      "url": "https://arxiv.org/abs/2311.01453",
+      "description": "Power-tuned lambda interpolating classical (0) and PPI (1); plug-in lambda (section 6); never asymptotically worse than classical."
+    },
+    {
+      "id": "ppi_py",
+      "name": "ppi-python package (import ppi_py)",
+      "url": "https://pypi.org/project/ppi-python/",
+      "description": "Reference implementation; ppi_mean_ci power-tunes lambda by default (clipped to [0,1]); default alpha=0.1."
+    },
+    {
+      "id": "Miller2024",
+      "name": "Evan Miller — Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations",
+      "url": "https://arxiv.org/abs/2411.00640",
+      "description": "CLT and clustered SEs, paired differences, answer resampling, eval sample-size formula (n≈969 example); clustered SE up to 3.05x naive on real evals."
+    },
+    {
+      "id": "Deng2013",
+      "name": "Deng, Xu, Kohavi, Walker — Improving the sensitivity of online controlled experiments by utilizing pre-experiment data (CUPED), WSDM 2013, pp.123-132",
+      "url": "https://doi.org/10.1145/2433396.2433413",
+      "description": "Control-variate variance reduction with pre-experiment covariates; variance factor 1-rho^2."
+    },
+    {
+      "id": "Deng2018",
+      "name": "Deng, Knoblich, Lu — Applying the Delta method in metric analytics: A practical guide with novel ideas",
+      "url": "https://arxiv.org/abs/1803.06336",
+      "description": "Delta-method variance for ratio metrics when the analysis unit differs from the randomization unit."
+    },
+    {
+      "id": "Fabijan2019",
+      "name": "Fabijan et al. — Diagnosing Sample Ratio Mismatch in Online Controlled Experiments, KDD 2019, pp.2156-2164",
+      "url": "https://doi.org/10.1145/3292500.3330722",
+      "description": "SRM taxonomy; chi-square check. Companion article (https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/) states p<0.0005 threshold and ~6% (Microsoft) / ~10% (LinkedIn subset) prevalence."
+    },
+    {
+      "id": "Kohavi2020",
+      "name": "Kohavi, Tang, Xu — Trustworthy Online Controlled Experiments (Cambridge University Press, 2020)",
+      "url": "https://doi.org/10.1017/9781108653985",
+      "description": "Practitioner reference for SRM and trust guardrails, novelty/primacy effects, and metric capping."
+    },
+    {
+      "id": "LanDeMets1983",
+      "name": "Lan and DeMets — Discrete sequential boundaries for clinical trials, Biometrika 70(3):659-663 (1983)",
+      "url": "https://doi.org/10.1093/biomet/70.3.659",
+      "description": "Alpha-spending functions for group-sequential monitoring with flexible look times."
+    },
+    {
+      "id": "OBrienFleming1979",
+      "name": "O'Brien and Fleming — A Multiple Testing Procedure for Clinical Trials, Biometrics 35(3):549 (1979)",
+      "url": "https://doi.org/10.2307/2530245",
+      "description": "Conservative-early group-sequential boundaries."
+    },
+    {
+      "id": "Johari2022",
+      "name": "Johari, Pekelis, Walsh — Always Valid Inference: Continuous Monitoring of A/B Tests, Operations Research 70(3):1806-1821 (2022)",
+      "url": "https://doi.org/10.1287/opre.2021.2135",
+      "description": "mSPRT and always-valid p-values/CIs for continuously monitored A/B tests; arXiv 1512.04922."
+    },
+    {
+      "id": "Howard2021",
+      "name": "Howard, Ramdas, McAuliffe, Sekhon — Time-uniform, nonparametric, nonasymptotic confidence sequences, Ann. Statist. 49(2):1055-1080 (2021)",
+      "url": "https://arxiv.org/abs/1810.08240",
+      "description": "Confidence sequences valid at arbitrary stopping times."
+    },
+    {
+      "id": "VovkWang2021",
+      "name": "Vovk and Wang — E-values: Calibration, combination and applications, Ann. Statist. 49 (2021)",
+      "url": "https://doi.org/10.1214/20-aos2020",
+      "description": "Combining e-values by product (independent) or averaging (arbitrary dependence)."
+    },
+    {
+      "id": "WangRamdas2022",
+      "name": "Wang and Ramdas — False discovery rate control with e-values, JRSS-B 84:822-852 (2022)",
+      "url": "https://doi.org/10.1111/rssb.12489",
+      "description": "e-BH procedure; FDR control under arbitrary dependence."
+    },
+    {
+      "id": "Holm1979",
+      "name": "Holm — A Simple Sequentially Rejective Multiple Test Procedure, Scand. J. Statist. 6(2):65-70 (1979)",
+      "url": "https://www.jstor.org/stable/4615733",
+      "description": "Step-down FWER control under arbitrary dependence; uniformly at least as powerful as Bonferroni."
+    },
+    {
+      "id": "BH1995",
+      "name": "Benjamini and Hochberg — Controlling the False Discovery Rate, JRSS-B 57:289-300 (1995)",
+      "url": "https://doi.org/10.1111/j.2517-6161.1995.tb02031.x",
+      "description": "Step-up FDR procedure."
+    },
+    {
+      "id": "BY2001",
+      "name": "Benjamini and Yekutieli — The control of the false discovery rate in multiple testing under dependency, Ann. Statist. 29 (2001)",
+      "url": "https://doi.org/10.1214/aos/1013699998",
+      "description": "BH valid under PRDS; c(m)=sum 1/i correction for arbitrary dependence."
+    },
+    {
+      "id": "Romano2019",
+      "name": "Romano, Patterson, Candès — Conformalized Quantile Regression",
+      "url": "https://arxiv.org/abs/1905.03222",
+      "description": "Adaptive-width conformal intervals from quantile regression with marginal coverage."
+    },
+    {
+      "id": "Tibshirani2019",
+      "name": "Tibshirani, Barber, Candès, Ramdas — Conformal Prediction Under Covariate Shift",
+      "url": "https://arxiv.org/abs/1904.06019",
+      "description": "Weighted conformal with test/train covariate likelihood ratio."
+    },
+    {
+      "id": "GibbsCandes2021",
+      "name": "Gibbs and Candès — Adaptive Conformal Inference Under Distribution Shift",
+      "url": "https://arxiv.org/abs/2106.00170",
+      "description": "Online alpha_t update; long-run miscoverage bound (Proposition 4.1)."
+    },
+    {
+      "id": "Angelopoulos2022CRC",
+      "name": "Angelopoulos, Bates, Fisch, Lei, Schuster — Conformal Risk Control",
+      "url": "https://arxiv.org/abs/2208.02814",
+      "description": "E[loss] <= alpha for bounded monotone losses; lambda-hat via (n/(n+1))R_n + B/(n+1) <= alpha (Theorem 1)."
+    },
+    {
+      "id": "MAPIE",
+      "name": "MAPIE package",
+      "url": "https://pypi.org/project/MAPIE/",
+      "description": "scikit-learn-compatible conformal prediction intervals and sets."
+    }
+  ]
+}

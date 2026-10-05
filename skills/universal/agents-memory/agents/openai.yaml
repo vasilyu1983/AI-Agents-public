@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Memory"
+  short_description: "Owns instruction files: AGENTS.md, CLAUDE.md, personal and repo rules files"
+  default_prompt: "Use $agents-memory when writing, pruning, or auditing instruction files (AGENTS.md, CLAUDE.md, personal and repo rules), sharing rules across Claude and Codex, fixing ignored rules, or reply clarity."

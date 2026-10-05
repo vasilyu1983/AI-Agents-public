@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dev Contribution Quality Analysis"
+  short_description: "Scores team or opt-in individual contribution quality from commit history."
+  default_prompt: "Use $dev-contribution-quality-analysis to score team or opt-in individual contribution quality from commit and PR history for engineering scorecards or coaching; for AI impact use $dev-ai-coding-metrics."

@@ -1,0 +1,311 @@
+{
+  "metadata": {
+    "skill": "software-android-runtime-debugging",
+    "updated": "2026-09-28",
+    "version": "1.1",
+    "total_sources": 39,
+    "description": "Primary references for native Android build/install/launch proof, ADB, APK inspection, Gradle troubleshooting, Compose debugging, R8 triage, and ANR/jank/memory/startup performance triage.",
+    "title": "Software Android Runtime Debugging - Sources",
+    "last_updated": "2026-09-28"
+  },
+  "categories": {
+    "android_platform": [
+      {
+        "name": "ADB Documentation",
+        "url": "https://developer.android.com/tools/adb",
+        "description": "Primary reference for ADB commands: install, uninstall, shell, logcat, and device connectivity.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android App Bundle Format",
+        "url": "https://developer.android.com/guide/app-bundle",
+        "description": "Primary reference for AAB format, bundletool, and split APK delivery.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Manifest Reference",
+        "url": "https://developer.android.com/guide/topics/manifest/manifest-intro",
+        "description": "Primary reference for manifest merging, activity declarations, permissions, and intent filters.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Studio Releases",
+        "url": "https://developer.android.com/studio/releases",
+        "description": "Authoritative Android Studio release notes: profiler, LeakCanary integration, Agent Mode. Resolve current version at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android 16 Platform",
+        "url": "https://developer.android.com/about/versions/16",
+        "description": "Android 16 platform/behavior changes relevant to install/launch and stale-build triage. Verify specifics at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Versions Overview",
+        "url": "https://developer.android.com/about/versions",
+        "description": "Canonical platform version index; look up the target OS and API level before citing platform currency.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "16KB Page Size Support",
+        "url": "https://developer.android.com/guide/practices/page-sizes",
+        "description": "Native page-size compatibility, testing and enforcement scope; look up applicable devices, deadlines and exceptions before a release decision.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google Play Target API Requirements",
+        "url": "https://developer.android.com/google/play/requirements/target-sdk",
+        "description": "Rolling target-API requirements and deadlines; look up current applicability for the app category and submission.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "gradle_build_system": [
+      {
+        "name": "AGP Release Notes",
+        "url": "https://developer.android.com/build/releases/gradle-plugin",
+        "description": "Android Gradle Plugin version compatibility, migration guides, and breaking changes.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "AGP Compatibility Roadmap",
+        "url": "https://developer.android.com/build/releases/gradle-plugin-roadmap",
+        "description": "AGP-to-Gradle-to-JDK minimum version matrix, including the AGP 9.x series. Verify before assuming an older wrapper version still works.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Gradle Build Cache Documentation",
+        "url": "https://docs.gradle.org/current/userguide/build_cache.html",
+        "description": "Gradle build cache behavior, invalidation, and debugging. Upstream Gradle docs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "KSP Upstream",
+        "url": "https://github.com/google/ksp",
+        "description": "Resolved KSP generation and compatibility guidance.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Gradle Daemon",
+        "url": "https://docs.gradle.org/current/userguide/gradle_daemon.html",
+        "description": "Daemon compatibility, JVM selection and diagnostic status.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Gradle Configuration Cache",
+        "url": "https://docs.gradle.org/current/userguide/configuration_cache.html",
+        "description": "Cache isolation and supported input/plugin behavior.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      }
+    ],
+    "compose": [
+      {
+        "name": "Jetpack Compose Performance",
+        "url": "https://developer.android.com/develop/ui/compose/performance",
+        "description": "Compose performance guidance: stability, recomposition, Layout Inspector, and benchmarking.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Compiler Reports and Stability",
+        "url": "https://developer.android.com/develop/ui/compose/performance/stability",
+        "description": "Compose compiler stability analysis, metrics generation, and class stability configuration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Modifier Order",
+        "url": "https://developer.android.com/develop/ui/compose/modifiers",
+        "description": "Click-target behavior for clickable and padding order.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Strong Skipping",
+        "url": "https://developer.android.com/develop/ui/compose/performance/stability/strongskipping",
+        "description": "Skippability and stable equality versus unstable identity comparison.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Compose Effects",
+        "url": "https://developer.android.com/develop/ui/compose/side-effects",
+        "description": "Effect lifetime, key equality and recomposition behavior.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "StateFlow Concurrency",
+        "url": "https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/",
+        "description": "Thread-safe flow operations and equality conflation; separate from View threading.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      }
+    ],
+    "performance": [
+      {
+        "name": "ANR Diagnosis and Fixes",
+        "url": "https://developer.android.com/topic/performance/anrs/diagnose-and-fix-anrs",
+        "description": "Canonical ANR thresholds (input dispatch, broadcast, service) and diagnosis workflow. Thresholds have shifted across Android versions; verify before quoting.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Vitals: ANR",
+        "url": "https://developer.android.com/google/play/vitals/anr",
+        "description": "Play Console user-perceived ANR rate bad-behavior thresholds. Look up the current overall and per-device thresholds; Google adjusts them.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android Vitals: Crashes",
+        "url": "https://developer.android.com/google/play/vitals/crash",
+        "description": "Play Console user-perceived crash rate bad-behavior thresholds. Look up the current overall and per-device thresholds; Google adjusts them.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "System Tracing Overview (Perfetto)",
+        "url": "https://developer.android.com/topic/performance/tracing",
+        "description": "Perfetto as the current system-tracing stack (Systrace is retired); recording flags and categories change release to release.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Perfetto Docs",
+        "url": "https://perfetto.dev/docs/",
+        "description": "Upstream Perfetto documentation: recording, trace format, and the ui.perfetto.dev analysis UI.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Baseline Profiles Overview",
+        "url": "https://developer.android.com/topic/performance/baselineprofiles/overview",
+        "description": "Baseline Profile AOT-compilation mechanics and current minimum tooling versions.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Macrobenchmark Overview",
+        "url": "https://developer.android.com/topic/performance/benchmarking/macrobenchmark-overview",
+        "description": "Macrobenchmark library for startup and frame-timing measurement, and how it differs from in-process microbenchmarks.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "StrictMode API Reference",
+        "url": "https://developer.android.com/reference/android/os/StrictMode",
+        "description": "Main-thread disk/network detection and VM policy violations; detector coverage has expanded across releases.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "LeakCanary",
+        "url": "https://square.github.io/leakcanary/",
+        "description": "Debug-build retained-object analysis; look up the supported installation and release before adding a dependency.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "ProfilingManager",
+        "url": "https://developer.android.com/reference/android/os/ProfilingManager",
+        "description": "API support, profiling types, triggers, listener requirements and unavailable/rate-limited results.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "ProfilingManager Capture Guide",
+        "url": "https://developer.android.com/topic/performance/tracing/profiling-manager/overview",
+        "description": "Field performance capture and recommended capture workflow.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "App Quality Insights",
+        "url": "https://developer.android.com/studio/debug/app-quality-insights",
+        "description": "Crashlytics and Android vitals source-linked issue investigation; IDE/cloud compatibility.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Perfetto Trace Processor",
+        "url": "https://perfetto.dev/docs/analysis/trace-processor",
+        "description": "SQL analysis of captures through the UI and trace_processor shell.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "NDK Stack Symbolization",
+        "url": "https://developer.android.com/ndk/guides/ndk-stack",
+        "description": "Native logcat/tombstone symbolization with matching unstripped ABI libraries.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Heap Dump Capture",
+        "url": "https://developer.android.com/studio/profile/capture-heap-dump",
+        "description": "Studio capture requires a supported debuggable profiling configuration.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      }
+    ],
+    "minification": [
+      {
+        "name": "R8 Shrink, Obfuscate, and Optimize",
+        "url": "https://developer.android.com/build/shrink-code",
+        "description": "Primary reference for R8 code shrinking, resource shrinking, obfuscation, and keep rules.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "R8 FAQ and Compatibility",
+        "url": "https://r8.googlesource.com/r8/+/refs/heads/main/compatibility-faq.md",
+        "description": "R8 full mode vs compatibility mode, common migration issues, and library-specific guidance.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Serialization Android Rules",
+        "url": "https://github.com/Kotlin/kotlinx.serialization/blob/master/README.md#android",
+        "description": "Bundled consumer rules and named-companion mode-specific additions.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Compose Group-Key Mappings",
+        "url": "https://kotlinlang.org/docs/whatsnew23.html#compose-compiler-stack-traces-for-minified-android-applications",
+        "description": "Kotlin compiler boundary, Compose runtime boundary and diagnostic-mode prerequisites.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      }
+    ]
+  }
+}

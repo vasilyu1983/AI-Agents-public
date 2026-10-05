@@ -1,0 +1,413 @@
+{
+  "metadata": {
+    "title": "Claude Code and Codex Agents - Sources",
+    "description": "Official documentation and current guidance for Claude Code subagents, agent teams, Codex custom agents, debate patterns, and adjacent skill authoring models",
+    "last_updated": "2026-09-02",
+    "updated": "2026-09-02",
+    "skill": "agents-subagents",
+    "total_sources": 65,
+    "verified_cli_versions": {
+      "claude_code": "2.1.258",
+      "codex_cli": "0.152.1",
+      "verified_on": "2026-09-02"
+    }
+  },
+  "official_documentation": [
+    {
+      "name": "Claude Code Subagents",
+      "url": "https://code.claude.com/docs/en/sub-agents",
+      "description": "Canonical subagent documentation covering scopes, frontmatter fields, built-in agents, delegation behavior, fork mode, nesting, and worktree isolation. Re-verified 2026-09-02 against Claude Code 2.1.258: the model resolution order is per-invocation model -> definition frontmatter -> CLAUDE_CODE_SUBAGENT_MODEL -> main conversation (the env var came first before v2.1.251), CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1 restores the override (v2.1.257+), and experimental.cacheTtl accepts 5m or 1h (v2.1.248+).",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Agent SDK Subagents",
+      "url": "https://code.claude.com/docs/en/agent-sdk/subagents",
+      "description": "Programmatic subagent definition via AgentDefinition; package names, allowedTools requirements, and runtime constraints. Re-verified 2026-08-27: recursive spawn defaults to three layers; interactive fork mode runs Claude-spawned subagents in the background and removes the run_in_background parameter.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Agent Teams",
+      "url": "https://code.claude.com/docs/en/agent-teams",
+      "description": "When to use experimental collaborative agent teams instead of focused subagents, including peer messaging, shared tasks, display modes, limitations, and teammate definition reuse. Re-verified 2026-09-02: teammate model order, CLAUDE_CODE_SUBAGENT_MODEL_FORCE applying to teammates, and subagentPromptCacheTtl: 1h for the out-of-bucket five-minute teammate cache.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Settings",
+      "url": "https://code.claude.com/docs/en/settings",
+      "description": "Current settings and scope precedence useful for personal vs project agent behavior",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Common Workflows",
+      "url": "https://code.claude.com/docs/en/common-workflows",
+      "description": "Operational guidance on when Claude should use subagents proactively",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Workflows",
+      "url": "https://code.claude.com/docs/en/workflows",
+      "description": "Native saved and dynamic workflows, arguments, monitoring, permissions, concurrency limits, resumability, and the no-mid-run-input constraint. Look up the current size-guideline tiers, the large-workflow warning thresholds, the concurrency/item/agent caps, and the prefix-stagger environment variable here before quoting them; workflow-runtime.md turns them into lookup steps on purpose.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Subagents",
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+      "description": "Codex custom agents in TOML, built-in agents, agent threads, delegation authorization, configuration fields, and orchestration primitives",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Configuration Reference",
+      "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+      "description": "Current Codex custom-agent and concurrency configuration keys, including documented legacy aliases Re-verified 2026-09-02 against codex-cli 0.152.1: model_reasoning_effort accepts minimal|low|medium|high|xhigh, plan_mode_reasoning_effort additionally accepts none, and service_tier is a free-form string documented only with fast.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Skills",
+      "url": "https://learn.chatgpt.com/docs/build-skills",
+      "description": "Skill discovery, progressive disclosure, repository and user locations, and optional UI metadata",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Worktrees",
+      "url": "https://learn.chatgpt.com/docs/environments/git-worktrees",
+      "description": "Filesystem isolation for parallel Codex chats and the distinction between agent threads and separate worktree environments",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Automations",
+      "url": "https://learn.chatgpt.com/docs/automations",
+      "description": "Scheduled-task surfaces and their separation from local CLI custom-agent execution",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Cloud",
+      "url": "https://learn.chatgpt.com/docs/cloud",
+      "description": "Codex Cloud tasks, environment behavior, and boundaries relative to local custom agents",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Models Overview",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+      "description": "Current Claude lineup, model IDs, prices, context windows, max output, default effort and retirement dates. Look up the current lineup and model IDs here before assigning a tier; do not carry a lineup in prose.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Pricing",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "description": "Per-MTok base, cache-write (5m/1h), cache-read, batch and fast-mode rates. Look up current rates here when a tier or cache decision depends on cost; cache-read multipliers differ between model families, so read the row for the exact model.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Model Deprecations",
+      "url": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "description": "Lifecycle status and retirement commitments. Read the nearest retirement floor and the notice period here before pinning the mechanical tier; the floor moves.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Model Configuration",
+      "url": "https://code.claude.com/docs/en/model-config",
+      "description": "Model switching, availableModels allowlist, auto-compact window, and effort. Look up the per-model effort ladders and the effort resolution order here; they change per release.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Fast Mode",
+      "url": "https://code.claude.com/docs/en/fast-mode",
+      "description": "Fast mode runs on a premium rate on the models this page lists, and the first enable in a conversation re-bills the whole context at the fast-mode uncached input price; read the current models and rates here. Basis for the fastModePerSessionOptIn guardrail.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Costs",
+      "url": "https://code.claude.com/docs/en/costs",
+      "description": "Official cost-management guidance: agent-team token costs (~7x in plan mode), MCP overhead reduction, hook preprocessing. Verified 2026-09-02.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Settings Reference",
+      "url": "https://code.claude.com/docs/en/settings-reference",
+      "description": "Setting keys quoted by references/cost-control.md: autoCompactWindow, autoCompactEnabled, showClearContextOnPlanAccept, fastModePerSessionOptIn, subagentPromptCacheTtl, workflowSizeGuideline, ultracode, effortLevel. Verified 2026-09-02.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Memory",
+      "url": "https://code.claude.com/docs/en/memory",
+      "description": "CLAUDE.md discovery, import syntax and scope precedence for what a subagent or teammate loads at startup. Verified 2026-09-02.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Task Budgets",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/task-budgets",
+      "description": "Beta advisory per-loop token ceiling. Look up the beta header, the minimum budget, and the supported-model list here before relying on it; check whether Claude Code or Cowork support it in the current release.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Codex Models",
+      "url": "https://learn.chatgpt.com/docs/models",
+      "description": "Codex model catalog. Verified 2026-09-07: Astra is the most capable model for complex work; Sol suits complex open-ended work, Terra everyday work, and Luna clear repeatable tasks. The user-selected policy uses Astra low for critical roles, Sol medium as the standard fallback (changed from Luna max on 2026-09-25 to match the deployed Codex config), and Luna low for explicitly mechanical roles; this is a deployment choice, not a measured optimum.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI API Pricing",
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "description": "Published per-1M rates for the Codex models (input, cached input, output). Look them up here when a Codex tier choice depends on cost.",
+      "add_as_web_search": true
+    }
+  ],
+  "authoring_guidance": [
+    {
+      "name": "How To Create Custom Skills",
+      "url": "https://support.claude.com/en/articles/12512198-how-to-create-custom-skills",
+      "description": "Official user guidance on creating custom skills and structuring reusable capability packs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Improving Skill Creator",
+      "url": "https://claude.com/blog/improving-skill-creator-test-measure-and-refine-agent-skills",
+      "description": "March 2026 guidance on iterating, evaluating, and refining reusable skill assets",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Equipping Agents For The Real World With Agent Skills",
+      "url": "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills",
+      "description": "Anthropic engineering guidance on progressive disclosure and reusable agent capabilities",
+      "add_as_web_search": true
+    }
+  ],
+  "community_resources": [
+    {
+      "name": "multi-agent-debate-mcp",
+      "url": "https://github.com/albinjal/multi-agent-debate-mcp",
+      "description": "MCP server for structured multi-agent debates with arguments, rebuttals, and judgment rounds; useful reference for debate-oriented orchestration patterns",
+      "add_as_web_search": false
+    },
+    {
+      "name": "SWE-Debate",
+      "url": "https://arxiv.org/abs/2507.23348",
+      "description": "Research paper on competitive multi-agent debate for software issue resolution, including fault-propagation traces, specialized perspectives, and structured convergence",
+      "add_as_web_search": false
+    },
+    {
+      "name": "BMAD Method - Party Mode",
+      "url": "https://github.com/bmad-code-org/BMAD-METHOD",
+      "description": "Community framework with Party Mode collaborative persona workflows; useful reference for lightweight multi-role discussion patterns before implementation",
+      "add_as_web_search": false
+    },
+    {
+      "name": "deer-flow (ByteDance)",
+      "url": "https://github.com/bytedance/deer-flow",
+      "description": "ByteDance multi-agent framework using sub-agents and sandboxed execution through skills; reference for production-grade subagent delegation at scale",
+      "add_as_web_search": false
+    },
+    {
+      "name": "SWE-AF",
+      "url": "https://github.com/Agent-Field/SWE-AF",
+      "description": "Spins up an engineering team of subagents from a single API call; reference for automated subagent spawning and role assignment patterns",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Awesome Claude Code Subagents",
+      "url": "https://github.com/VoltAgent/awesome-claude-code-subagents",
+      "description": "Community examples of real-world subagent definitions and delegation patterns",
+      "add_as_web_search": false
+    },
+    {
+      "name": "GitHub Engineering - Multi-Agent Workflows Often Fail",
+      "url": "https://github.blog/ai-and-ml/generative-ai/multi-agent-workflows-often-fail-heres-how-to-engineer-ones-that-dont/",
+      "description": "Operational guidance on keeping the main thread focused on requirements and final decisions, and using debate only when the extra coordination cost is justified",
+      "add_as_web_search": false
+    },
+    {
+      "name": "ClaudeLog - Subagents Guide",
+      "url": "https://claudelog.com/mechanics/sub-agents/",
+      "description": "Community walkthrough of subagent mechanics and practical usage",
+      "add_as_web_search": false
+    },
+    {
+      "name": "CODEX MULTI AGENT PLAYBOOK: SWARMS LVL. 1 (@LLMJunky)",
+      "url": "https://x.com/LLMJunky/status/2027032974202421336",
+      "description": "Long-form X Article on subagent context front-loading, custom agent roles, subagent prompt templates, and model selection per subagent in Codex swarm workflows",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Claude Subagents vs. Agent Teams, Explained (@akshay_pachaar)",
+      "url": "https://x.com/akshay_pachaar/status/2033167408463069526",
+      "description": "Decision framework for when to use subagents (isolated context, one-shot delegation) vs. agent teams (collaborative, shared context). Includes concrete scenarios and when multi-agent adds unnecessary complexity",
+      "add_as_web_search": false
+    },
+    {
+      "name": "How to Run Subagents in Codex (@emanueledpt)",
+      "url": "https://x.com/emanueledpt/status/2033651724603240688",
+      "description": "Community walkthrough on running subagents in OpenAI Codex — practical setup, configuration, and delegation patterns from a practitioner perspective",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Andrej Karpathy - Claude Coding Notes",
+      "url": "https://x.com/karpathy/status/2015883857489522876",
+      "description": "Operator-level failure modes for coding agents: silent assumptions, unmanaged confusion, overcomplication, and orthogonal edits; useful as an anti-pattern check when shaping agent roles and launch prompts",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Sarah Chieng - Lessons Learned From Building Multi-Agent Workflows",
+      "url": "https://www.cerebras.ai/blog/lessons-learned-from-building-multi-agent-workflows",
+      "description": "April 2026 field report arguing for orchestrator-plus-subagent patterns, minimum viable context per worker, no shared-file writes, and builder-verifier discipline",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Walden Yan - Multi-Agents: What's Actually Working",
+      "url": "https://cognition.ai/blog/multi-agents-working",
+      "description": "April 2026 update narrowing practical multi-agent patterns to clean-context helpers and setups where multiple agents contribute intelligence while writes stay single-threaded",
+      "add_as_web_search": true
+    },
+    {
+      "name": "cursor pstack plugin (MIT)",
+      "url": "https://github.com/cursor/plugins/tree/main/pstack",
+      "description": "MIT-licensed external plugin. Accessed 2026-09-29. Informed the delegate-result-hygiene rule (drop/rerun on missing commit-or-tree-state and method; never resume an interrupted worker with changed scope), the qa-test-reviewer vacuous-test pre-check, and the hill-climbing loop guardrails (one change per measurement, freeze a sensitivity-verified harness, stop on stated target plus minimum attempts, decision logging). Rules adapted and rewritten in this repository's own words; no text copied verbatim.",
+      "add_as_web_search": false
+    }
+  ],
+  "research_2025_2026": [
+    {
+      "name": "MAST: Why Do Multi-Agent LLM Systems Fail?",
+      "url": "https://arxiv.org/abs/2503.13657",
+      "description": "Cemri, Pan, Yang et al., NeurIPS 2025. Canonical taxonomy of 14 multi-agent failure modes across 3 categories: specification (44.0%), inter-agent misalignment (32.15%), task verification (23.85%) per v3 (Oct 2025) Figure 1 over 1,642 traces, κ=0.88; earlier versions quote other splits. Cross-referenced in references/mast-failure-taxonomy.md.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Talk Isn't Always Cheap: Failure Modes in Multi-Agent Debate",
+      "url": "https://arxiv.org/abs/2509.05396",
+      "description": "Documents systematic cases where multi-agent debate degrades performance below single-agent baselines, especially under correlated base models, weak+strong agent mixing, and sycophancy bias. Source for the 'When NOT to Debate' anti-trigger table.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Persuasion-Driven Adversarial Influence in Multi-Agent LLM Debate",
+      "url": "https://www.nature.com/articles/s41598-026-42705-7",
+      "description": "Nature Sci Reports 2026. Shows weak agents can persuade stronger agents off correct answers; quantifies sycophancy hazard in mixed-capability teams.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Adaptive Stability Detection for Multi-Agent Debate",
+      "url": "https://openreview.net/forum?id=Vusd1Hw2D9",
+      "description": "OpenReview 2026. Beta-Binomial mixture + Kolmogorov-Smirnov test for non-numeric debate convergence detection. Source for the adaptive stopping rule in debate-quickstart.md.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "HiveMind: Contribution-Guided Online Prompt Optimization",
+      "url": "https://arxiv.org/abs/2512.06432",
+      "description": "Dec 2025. Online per-member prompt mutation guided by Shapley contribution. Source for team-theory mechanism #17 (online Shapley-driven prompt evolution).",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Shapley-Coop: Credit Assignment for Emergent Cooperation",
+      "url": "https://openreview.net/forum?id=HnJ1UkuJXS",
+      "description": "OpenReview 2025. Shapley Chain-of-Thought reasoning + structured negotiation for spontaneous cooperation via task-time pricing. Cited in mechanism #17 (HiveMind / online Shapley prompt evolution).",
+      "add_as_web_search": false
+    },
+    {
+      "name": "From Debate to Equilibrium (ECON, full paper)",
+      "url": "https://openreview.net/forum?id=RQwexjUCxm",
+      "description": "OpenReview ICML 2025 record for ECON Bayesian Nash Equilibrium coordination. Primary reference for mechanism #1.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Hierarchical Multi-Agent Systems Taxonomy",
+      "url": "https://arxiv.org/abs/2508.12683",
+      "description": "2025. Names holonic and nested-summary topology patterns. Source for the Industry Vocabulary section in subagents-vs-teams-architecture.md.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Conductor vs Swarm: Multi-Agent AI Architecture Guide 2026",
+      "url": "https://agixtech.com/insights/conductor-vs-swarm-multi-agent-ai-orchestration/",
+      "description": "2026 industry vocabulary mapping for centralized (Conductor) vs decentralized (Swarm) vs hybrid topology. Used to align this skill's internal terminology with current industry naming.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Mixture-of-Agents (MoA)",
+      "url": "https://arxiv.org/abs/2406.04692",
+      "description": "Together AI 2024. Layered proposer/aggregator topology where N agents fan out on the same prompt and an aggregator merges. Source for the MoA harness pattern in harness-patterns.md and the MoA-layered topology row in subagents-vs-teams-architecture.md.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Self-MoA",
+      "url": "https://arxiv.org/abs/2502.00674",
+      "description": "2025. Demonstrates that on verifiable tasks, a single strong model sampled N times + aggregator beats heterogeneous MoA. Source for the Self-MoA Conditional in mechanism #2 (adversarial debate) and the Self-MoA variant in harness-patterns.md.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Beyond Majority Voting (BMV)",
+      "url": "https://arxiv.org/abs/2510.01499",
+      "description": "2025. Optimal Weight (confidence × calibration) + Inverse Surprising Popularity recovers minority-correct answers from best-of-N. Source for game-theory mechanism #18.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Constitutional AI: Harmlessness from AI Feedback",
+      "url": "https://arxiv.org/abs/2212.08073",
+      "description": "Anthropic 2022. Foundational paper for self-critique against an explicit principles list. Source for the Constitutional decision mask (mask #7).",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Efficient Majority-then-Stopping (EMS)",
+      "url": "https://arxiv.org/abs/2604.02863",
+      "description": "2026. Hoeffding-style bound: stop when leader has > N/2 + sqrt(N) votes — further sampling cannot flip the outcome. Source for the EMS stopping rule in debate-quickstart.md.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Radial Consensus Score (RCS)",
+      "url": "https://arxiv.org/abs/2604.12196",
+      "description": "2026. Embedding-centroid best-of-N selector for semantically clustered but lexically diverse answers. Source for game-theory mechanism #19.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "From Debate to Decision: Conformal Social Choice for Safe Multi-Agent Deliberation",
+      "url": "https://arxiv.org/abs/2604.07667",
+      "description": "Apr 2026. Calibrated act-vs-escalate decision layer for multi-agent debate outputs. Source for game-theory mechanism #20.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "The Provenance Paradox in Multi-Agent LLM Routing",
+      "url": "https://arxiv.org/abs/2603.18043",
+      "description": "Mar 2026. Delegation contracts and attested identity for routing across trust boundaries. Source for game-theory mechanism #21.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Coalition Formation in LLM Agent Networks",
+      "url": "https://arxiv.org/abs/2604.14386",
+      "description": "Apr 2026. Hedonic-game coalition formation and stable partitions for LLM agent networks. Source for team-theory mechanism #22.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Mapping Human Anti-Collusion Mechanisms to Multi-agent AI Systems",
+      "url": "https://doi.org/10.1016/j.knosys.2026.116067",
+      "description": "Apr 2026. Anti-collusion controls for multi-agent AI systems; informs adversarial routing, reputation, and act/escalate safeguards.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Multi-Agent Teams Hold Experts Back (Pappu et al., Stanford)",
+      "url": "https://arxiv.org/abs/2602.01011",
+      "description": "Feb 2026 preprint, NOT peer-reviewed. Self-organizing LLM teams underperform best member via RLHF-agreeableness overcompromising (Expert-Leveraging Gap); abstract reports 'performance losses of up to 41.1% on ML benchmarks'. Basis for 'single strong agent beats a team' gate.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Single-Agent LLMs Outperform Multi-Agent Systems Under Equal Thinking Token Budgets (Tran & Kiela)",
+      "url": "https://arxiv.org/abs/2604.02460",
+      "description": "Apr 2026 preprint, NOT peer-reviewed; scope text-only multi-hop reasoning. DPI argument for single-agent superiority at equal budget. Basis for Token-Budget Equivalence Rule. Verify before relying.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Multi-Agent Design: Optimizing Agents with Better Prompts and Topologies (MASS)",
+      "url": "https://arxiv.org/abs/2502.02533",
+      "description": "Google DeepMind + Cambridge, ICLR 2026 (peer-reviewed). Prompt and topology are jointly optimizable; local prompt -> topology -> global prompt search order. Basis for the prompt-topology co-optimization note.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "OX Security — Systemic MCP STDIO RCE advisory (CVE-2026-30623)",
+      "url": "https://www.ox.security/blog/the-mother-of-all-ai-supply-chains-critical-systemic-vulnerability-at-the-core-of-the-mcp/",
+      "description": "April 2026, multi-source corroborated + CVE. By-design config->OS-command execution in official MCP SDK stdio; Anthropic declined a protocol fix. Basis for the mcpServers stdio safe-default.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Team Topologies, 2nd Edition - Afterword on AI agent fleets",
+      "url": "https://teamtopologies.com/book",
+      "description": "Skelton and Pais (IT Revolution, 2025). Afterword applies human team-boundary thinking to groups of AI agents: clear domain boundaries, constrained operating context, explainable decisions, audit trails, telemetry, stewardship, and avoiding handoffs between agent groups. Their small-language-model claim is an unevidenced 2025 prediction, recorded as a hypothesis to pressure-test in references/team-design-rationale.md, not a design rule.",
+      "add_as_web_search": false
+    }
+  ]
+}

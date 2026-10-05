@@ -1,0 +1,13 @@
+{
+  "name": "ai-agents",
+  "owner": {
+    "name": "AI-Agents library"
+  },
+  "plugins": [
+    {
+      "name": "ai-agents",
+      "source": "./",
+      "description": "Skills, subagents and saved multi-agent workflows for Claude Code: engineering, AI, data, QA, ops, docs and foundations."
+    }
+  ]
+}

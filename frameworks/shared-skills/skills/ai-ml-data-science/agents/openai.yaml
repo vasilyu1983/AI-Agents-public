@@ -1,4 +1,0 @@
-interface:
-  display_name: "Data Science Engineering Suite - Quick Reference"
-  short_description: "ML, responsible-AI, and multimodal modelling workflows"
-  default_prompt: "Use $ai-ml-data-science to build ML models or explain responsible-AI and multimodal mechanics: fairness, privacy, speech, vision-language, and diffusion."

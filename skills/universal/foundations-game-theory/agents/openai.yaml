@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Theory Foundations"
+  short_description: "Applies game-theory primitives for strategic decision systems"
+  default_prompt: "Use $foundations-game-theory to model strategic play with divergent incentives: Nash equilibrium, auctions, mechanism design, collusion, bargaining, reputation, or multi-agent incentive design."

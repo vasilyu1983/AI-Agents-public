@@ -1,0 +1,4 @@
+interface:
+  display_name: "Document DOCX Skill - Quick Reference"
+  short_description: "Builds docxtpl templates, RAG extraction, and accessibility checks for .docx"
+  default_prompt: "Use $document-docx to build docxtpl templates, DOCX text and table extraction for RAG, or EAA accessibility checks; for plain edits or redlines prefer the official docx skill."

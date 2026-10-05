@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Settings Policy"
+  short_description: "Coding-agent settings, managed policy and fleet version control"
+  default_prompt: "Use $ai-coding-agents-settings-policy to diagnose precedence, managed policy, version pins, update kill switch, skill catalog budgets, or searchable notes for a coding-agent CLI fleet."

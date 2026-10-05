@@ -1,0 +1,204 @@
+{
+  "metadata": {
+    "skill": "qa-testing-performance",
+    "updated": "2026-09-23",
+    "version": "1.3",
+    "total_sources": 25,
+    "description": "Primary references for performance and load testing, profiling, Core Web Vitals, CI performance budgets, capacity planning, continuous profiling, and LLM/AI API performance testing.",
+    "title": "QA Testing Performance - Sources",
+    "last_updated": "2026-09-23"
+  },
+  "categories": {
+    "load_testing_tools": [
+      {
+        "name": "Grafana k6 Documentation",
+        "url": "https://grafana.com/docs/k6/latest/",
+        "description": "Primary k6 load testing documentation: scripting, thresholds, scenarios, extensions, and CI integration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "k6 Rate metric",
+        "url": "https://grafana.com/docs/k6/latest/javascript-api/k6-metrics/rate/",
+        "description": "Rate metric semantics: the percentage of added values that are non-zero, computed over every add() call, not just failing ones. A script that only calls errorRate.add(1) on failure (and never adds on success) reports a misleadingly high rate. Verified locally with k6 2.3.0: a 10-iteration script with 1 real failure read 100% under the add(1)-on-failure-only pattern and the correct 10% under add(!ok) on every request.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "k6 releases and compatibility",
+        "url": "https://github.com/grafana/k6/releases",
+        "description": "Look up release compatibility for browser APIs, assertions, extensions and operator integrations before selecting a pin.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Locust Documentation",
+        "url": "https://docs.locust.io/en/stable/",
+        "description": "Python distributed load testing. constant_throughput paces tasks per existing user, while a LoadTestShape controls user counts and spawn speed; neither alone guarantees response-independent task arrivals.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Artillery Documentation",
+        "url": "https://www.artillery.io/docs",
+        "description": "YAML + JS load testing: scenarios, plugins, expect assertions, and CI integration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Grafana k6 Cloud",
+        "url": "https://grafana.com/docs/grafana-cloud/testing/k6/",
+        "description": "Managed k6 execution: cloud runs, performance insights, and trend analysis.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Gatling Injection Profiles",
+        "url": "https://docs.gatling.io/concepts/injection/",
+        "description": "Gatling injection-profile reference: atOnceUsers/rampUsers/constantUsersPerSec/rampUsersPerSec are open-loop (arrival-rate) profiles; constantConcurrentUsers/rampConcurrentUsers are closed-loop (fixed-concurrency) profiles. Gatling is not closed-loop by default — the profile chosen determines the model.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "frontend_performance": [
+      {
+        "name": "web.dev - Core Web Vitals",
+        "url": "https://web.dev/articles/vitals",
+        "description": "Google's Core Web Vitals definitions, thresholds, and measurement guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Lighthouse CI Documentation",
+        "url": "https://github.com/GoogleChrome/lighthouse-ci",
+        "description": "Lighthouse CI setup, assertions, server, and GitHub integration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google PageSpeed Insights API",
+        "url": "https://developers.google.com/speed/docs/insights/v5/get-started",
+        "description": "Programmatic Lighthouse audits; check current field-data availability and query CrUX separately when needed.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "web.dev - INP (Interaction to Next Paint)",
+        "url": "https://web.dev/articles/inp",
+        "description": "INP metric definition, measurement, and optimization guidance.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Lighthouse default-config.js (GoogleChrome/lighthouse)",
+        "url": "https://github.com/GoogleChrome/lighthouse/blob/main/core/config/default-config.js",
+        "description": "Authoritative current list of Lighthouse audit and insight IDs. uses-responsive-images and uses-text-compression are no longer present as scored audits; equivalents live under scored-0 Insights (image-delivery-insight, document-latency-insight, render-blocking-insight, etc.). Re-check this file before citing a specific audit ID as current.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Chromium INP metric changelog",
+        "url": "https://chromium.googlesource.com/chromium/src/+/main/docs/speed/metrics_changelog/inp.md",
+        "description": "INP measurement methodology has changed across Chrome versions; verify the current calculation and reporting window here before citing a specific percentile or windowing rule as current.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "profiling_and_analysis": [
+      {
+        "name": "Node.js Diagnostics Guide",
+        "url": "https://nodejs.org/en/learn/diagnostics",
+        "description": "Official Node.js profiling, heap snapshots, and diagnostic channels.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "py-spy Documentation",
+        "url": "https://github.com/benfred/py-spy",
+        "description": "Sampling profiler for Python: flamegraphs, top, and record modes.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Go pprof Documentation",
+        "url": "https://pkg.go.dev/net/http/pprof",
+        "description": "Go built-in profiling: CPU, memory, goroutine, and block profiles.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "async-profiler (Java/JVM)",
+        "url": "https://github.com/async-profiler/async-profiler",
+        "description": "Low-overhead JVM profiler: CPU, allocation, lock, and wall-clock profiling with flamegraph output.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "capacity_and_sre": [
+      {
+        "name": "Google SRE Book - Service Level Objectives",
+        "url": "https://sre.google/sre-book/service-level-objectives/",
+        "description": "SLO/error budget framing for performance targets and release gates.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Workbook - Non-Abstract Large System Design",
+        "url": "https://sre.google/workbook/non-abstract-design/",
+        "description": "Capacity planning, traffic estimation, and infrastructure sizing methodology.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "gatling_versioning": [
+      {
+        "name": "gatling-js repository tags (GitHub API)",
+        "url": "https://api.github.com/repos/gatling/gatling-js/tags",
+        "description": "The earliest gatling-js tag is v3.11.2, confirming JS/TS support predates the 3.12 GraalVM integration referenced in older prose.",
+        "add_as_web_search": false,
+        "optional": true
+      }
+    ],
+    "database_replication": [
+      {
+        "name": "MySQL replica status",
+        "url": "https://dev.mysql.com/doc/refman/8.0/en/show-replica-status.html",
+        "description": "SHOW REPLICA STATUS is available from 8.0.22. Interpret Seconds_Behind_Source with receiver/applier health; zero and NULL have documented limitations.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "continuous_profiling": [
+      {
+        "name": "Grafana Pyroscope release compatibility",
+        "url": "https://github.com/grafana/pyroscope/releases",
+        "description": "Verify architecture, OTLP ingestion and deployment compatibility in the selected release; previous symbol-storage savings figure is unverified and omitted.",
+        "add_as_web_search": false,
+        "optional": true
+      },
+      {
+        "name": "Grafana Pyroscope Documentation",
+        "url": "https://grafana.com/docs/pyroscope/latest/",
+        "description": "Continuous profiling setup, SDK integration, eBPF agent, and Grafana dashboard integration.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "llm_performance_testing": [
+      {
+        "name": "Load Testing LLM Applications: Why k6 and Locust Lie to You",
+        "url": "https://tianpan.co/blog/2026-03-19-load-testing-llm-applications",
+        "description": "Deep analysis of why standard load testing tools misreport LLM latency; TTFT vs ITL vs goodput metrics; warm/cold cache test design; mock-based CI approach. Published 2026-03-19.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "AIPerf (genai-perf successor)",
+        "url": "https://docs.nvidia.com/aiperf/getting-started/migrating-from-gen-ai-perf",
+        "description": "NVIDIA's genai-perf CLI has been superseded by AIPerf; use AIPerf for new LLM/AI API load-testing work and consult this migration guide when updating existing genai-perf scripts.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ]
+  }
+}

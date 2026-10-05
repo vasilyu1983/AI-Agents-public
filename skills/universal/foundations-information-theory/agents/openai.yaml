@@ -1,0 +1,4 @@
+interface:
+  display_name: "Information Theory Foundations"
+  short_description: "Entropy, mutual information, KL, and bits-per-byte for AI systems"
+  default_prompt: "Use $foundations-information-theory to measure entropy, mutual information, KL/JS, or bits-per-byte: pick KL direction, compare perplexity across tokenizers, trust an MI estimate, or gate on semantic entropy."

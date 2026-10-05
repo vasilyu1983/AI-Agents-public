@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "skill": "software-ios-runtime-debugging",
+    "updated": "2026-09-28",
+    "version": "1.1",
+    "total_sources": 23,
+    "description": "Primary references for build/install/launch proof, simulator/device control, agent tool selection, and runtime performance triage.",
+    "title": "Software Ios Runtime Debugging - Sources",
+    "last_updated": "2026-09-28"
+  },
+  "categories": {
+    "apple_platform": [
+      {
+        "name": "xcodebuild Documentation",
+        "url": "https://developer.apple.com/documentation/xcode/building-your-app-to-include-debugging-information",
+        "description": "Apple documentation entry point for Xcode build behavior and build products.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "simctl Documentation",
+        "url": "https://developer.apple.com/documentation/xcode/simctl",
+        "description": "Primary reference for simulator automation, install, launch, boot, and shutdown behavior.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Xcode Release Notes Index",
+        "url": "https://developer.apple.com/documentation/xcode-release-notes/",
+        "description": "Use when CLI or simulator behavior may have changed across Xcode releases.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Information Property List",
+        "url": "https://developer.apple.com/documentation/bundleresources/information_property_list",
+        "description": "Primary reference for bundle metadata and executable path expansion.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "xcodebuildmcp": [
+      {
+        "name": "MobileBuildMCP Repository",
+        "url": "https://github.com/getsentry/MobileBuildMCP",
+        "description": "Primary upstream repository; XcodeBuildMCP redirects here. Inspect the installed tool inventory and CLI help.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      }
+    ],
+    "apple_platform_additions": [
+      {
+        "name": "Xcode Release Notes",
+        "url": "https://developer.apple.com/documentation/xcode-release-notes",
+        "description": "Authoritative Xcode release notes: LLDB async stepping, new Instruments (SwiftUI, Processor Trace), explicitly built modules. Resolve current Xcode version at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Building with Explicit Module Dependencies",
+        "url": "https://developer.apple.com/documentation/xcode/building-your-project-with-explicit-module-dependencies",
+        "description": "Apple guidance on explicitly built modules: build-cache and DerivedData implications relevant to stale-build triage.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "runtime_performance": [
+      {
+        "name": "Understanding Hangs in Your App",
+        "url": "https://developer.apple.com/documentation/xcode/understanding-hangs-in-your-app",
+        "description": "Apple's canonical hang definition and the ~250ms default hang-reporting threshold used across Instruments and MetricKit.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Addressing Watchdog Terminations",
+        "url": "https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations",
+        "description": "Watchdog termination causes (0x8badf00d), including scene-create and background-task expiration.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Identifying High-Memory Use with Jetsam Event Reports",
+        "url": "https://developer.apple.com/documentation/xcode/identifying-high-memory-use-with-jetsam-event-reports",
+        "description": "Apple's guidance on reading jetsam event reports; per-device memory limits are not published and must be treated as empirical.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "MetricKit Documentation",
+        "url": "https://developer.apple.com/documentation/metrickit",
+        "description": "SDK-scoped metrics/diagnostic APIs and delivery behavior; synthetic Xcode payloads test handlers but do not measure performance.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Analyzing CPU Usage with the Processor Trace Instrument",
+        "url": "https://developer.apple.com/documentation/xcode/analyzing-cpu-usage-with-processor-trace",
+        "description": "Processor Trace setup and hardware requirements; confirm support for the target device and installed Instruments.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "ProcessInfo.ThermalState",
+        "url": "https://developer.apple.com/documentation/foundation/processinfo/thermalstate-swift.enum",
+        "description": "Thermal state enum and change notification for adaptive workload throttling.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Configuring Your Project to Use Mergeable Libraries",
+        "url": "https://developer.apple.com/documentation/xcode/configuring-your-project-to-use-mergeable-libraries",
+        "description": "Mergeable libraries (Xcode 15+) for static-linking launch speed without losing dynamic-linking debug build times.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "WWDC26 Session 268: Profile, fix, and verify",
+        "url": "https://developer.apple.com/videos/play/wwdc2026/268/",
+        "description": "Release profiling, CPU saturation versus blocking/actor contention, and baseline/fix comparison over matched signpost intervals.",
+        "add_as_web_search": true,
+        "optional": true,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Adding identifiable symbol names to a crash report",
+        "url": "https://developer.apple.com/documentation/xcode/adding-identifiable-symbol-names-to-a-crash-report",
+        "description": "Apple symbolication workflow and the role of matching binary, dSYM, image load address, and architecture.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Locating a missing debug symbol file",
+        "url": "https://developer.apple.com/documentation/xcode/locating-a-missing-debug-symbol-file",
+        "description": "Binary/dSYM UUID matching with dwarfdump.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Monitoring app performance with MetricKit",
+        "url": "https://developer.apple.com/documentation/metrickit/monitoring-app-performance-with-metrickit",
+        "description": "Xcode simulated MetricKit reports contain sample data and test report processing.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Diagnosing memory, thread, and crash issues early",
+        "url": "https://developer.apple.com/documentation/xcode/diagnosing-memory-thread-and-crash-issues-early",
+        "description": "MTC adds minimal CPU/launch overhead; iOS TSan runs in Simulator, not on a physical device.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "About the app launch sequence",
+        "url": "https://developer.apple.com/documentation/uikit/about-the-app-launch-sequence",
+        "description": "Apple launch lifecycle and prewarming behavior; use MetricKit for user-driven launch/resume metrics.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      }
+    ],
+    "agent_tooling": [
+      {
+        "name": "Giving external agents access to Xcode",
+        "url": "https://developer.apple.com/documentation/xcode/giving-external-agents-access-to-xcode",
+        "description": "Apple Xcode MCP permissions, mcpbridge configuration, and open-project requirement.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "LLDB Model Context Protocol",
+        "url": "https://lldb.llvm.org/use/mcp.html",
+        "description": "LLVM lldb-mcp session lifecycle, command execution, stopped-process requirement, and stdout limitations.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Xcode command-line tool reference",
+        "url": "https://developer.apple.com/documentation/xcode/xcode-command-line-tool-reference",
+        "description": "Apple CLI selection; devicectl manages connected devices, simctl handles Simulator, xctrace handles Instruments traces.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      }
+    ]
+  }
+}

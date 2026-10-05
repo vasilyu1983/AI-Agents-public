@@ -1,0 +1,4 @@
+interface:
+  display_name: "API Contract QA"
+  short_description: "Tests API contracts across REST, GraphQL, gRPC, AsyncAPI, and webhooks."
+  default_prompt: "Use $qa-api-testing-contracts to test API contracts across REST, GraphQL, gRPC, AsyncAPI, webhooks, and workflow contracts. Use when you need schema validation, breaking-change detection, and CI quality gates."

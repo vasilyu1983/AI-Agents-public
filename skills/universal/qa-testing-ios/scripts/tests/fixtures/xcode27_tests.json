@@ -1,0 +1,223 @@
+{
+  "devices": [
+    {
+      "architecture": "arm64",
+      "deviceId": "00000000-0000000000000000",
+      "deviceName": "My Mac",
+      "modelName": "MacBook Pro",
+      "osBuildNumber": "26A428",
+      "osVersion": "27.0",
+      "platform": "macOS"
+    }
+  ],
+  "testNodes": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "duration": "0.000066s",
+                  "durationInSeconds": 6.580352783203125e-05,
+                  "name": "rangeConfirm()",
+                  "nodeIdentifier": "Basics/rangeConfirm()",
+                  "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/rangeConfirm()",
+                  "nodeType": "Test Case",
+                  "result": "Passed"
+                },
+                {
+                  "children": [
+                    {
+                      "name": "T.swift:18: Expectation failed: try await Task { 1 }.value == 2",
+                      "nodeType": "Expected Failure"
+                    }
+                  ],
+                  "duration": "0.0062s",
+                  "durationInSeconds": 0.0062100887298583984,
+                  "name": "knownFlaky()",
+                  "nodeIdentifier": "Basics/knownFlaky()",
+                  "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/knownFlaky()",
+                  "nodeType": "Test Case",
+                  "result": "Expected Failure"
+                },
+                {
+                  "duration": "0.00099s",
+                  "durationInSeconds": 0.0009870529174804688,
+                  "name": "passes()",
+                  "nodeIdentifier": "Basics/passes()",
+                  "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/passes()",
+                  "nodeType": "Test Case",
+                  "result": "Passed"
+                },
+                {
+                  "children": [
+                    {
+                      "name": "Issue recorded: Confirmation was confirmed 0 times, but expected to be confirmed 1 time",
+                      "nodeType": "Failure Message",
+                      "sourceLocation": {
+                        "filePath": "Pkg/Tests/LibTests/T.swift",
+                        "lineNumber": 21
+                      }
+                    }
+                  ],
+                  "duration": "0.0062s",
+                  "durationInSeconds": 0.006209850311279297,
+                  "name": "noConfirmHangs()",
+                  "nodeIdentifier": "Basics/noConfirmHangs()",
+                  "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/noConfirmHangs()",
+                  "nodeType": "Test Case",
+                  "result": "Failed"
+                },
+                {
+                  "children": [
+                    {
+                      "name": "Issue recorded: warn only",
+                      "nodeType": "Runtime Warning",
+                      "sourceLocation": {
+                        "filePath": "Pkg/Tests/LibTests/T.swift",
+                        "lineNumber": 16
+                      }
+                    }
+                  ],
+                  "duration": "0.0062s",
+                  "durationInSeconds": 0.006203889846801758,
+                  "name": "severity()",
+                  "nodeIdentifier": "Basics/severity()",
+                  "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/severity()",
+                  "nodeType": "Test Case",
+                  "result": "Passed"
+                },
+                {
+                  "children": [
+                    {
+                      "duration": "0.00044s",
+                      "durationInSeconds": 0.00044274330139160156,
+                      "name": "1",
+                      "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/param(x:)?args=6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+                      "nodeType": "Arguments",
+                      "result": "Passed"
+                    },
+                    {
+                      "duration": "0.0003s",
+                      "durationInSeconds": 0.0003027915954589844,
+                      "name": "2",
+                      "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/param(x:)?args=d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+                      "nodeType": "Arguments",
+                      "result": "Passed"
+                    }
+                  ],
+                  "duration": "0.00037s",
+                  "durationInSeconds": 0.00037276744842529297,
+                  "name": "param(x:)",
+                  "nodeIdentifier": "Basics/param(x:)",
+                  "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/param(x:)",
+                  "nodeType": "Test Case",
+                  "result": "Passed"
+                },
+                {
+                  "children": [
+                    {
+                      "name": "Issue recorded: XCTAssertEqual failed: (\"1\") is not equal to (\"2\")",
+                      "nodeType": "Failure Message",
+                      "sourceLocation": {
+                        "filePath": "Pkg/Tests/LibTests/T.swift",
+                        "lineNumber": 23
+                      }
+                    },
+                    {
+                      "name": "Issue recorded: Replace 'XCTAssertEqual(x, y)' with '#expect(x == y)'.",
+                      "nodeType": "Runtime Warning",
+                      "sourceLocation": {
+                        "filePath": "Pkg/Tests/LibTests/T.swift",
+                        "lineNumber": 23
+                      }
+                    }
+                  ],
+                  "duration": "0.0077s",
+                  "durationInSeconds": 0.007688999176025391,
+                  "name": "mixXCT()",
+                  "nodeIdentifier": "Basics/mixXCT()",
+                  "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/mixXCT()",
+                  "nodeType": "Test Case",
+                  "result": "Failed"
+                },
+                {
+                  "children": [
+                    {
+                      "name": "Expectation failed: 1 + 1 == 3\n1 + 1 \u2192 2: deliberate",
+                      "nodeType": "Failure Message",
+                      "sourceLocation": {
+                        "filePath": "Pkg/Tests/LibTests/T.swift",
+                        "lineNumber": 7
+                      }
+                    }
+                  ],
+                  "duration": "0.0063s",
+                  "durationInSeconds": 0.006296873092651367,
+                  "name": "fails()",
+                  "nodeIdentifier": "Basics/fails()",
+                  "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/fails()",
+                  "nodeType": "Test Case",
+                  "result": "Failed"
+                },
+                {
+                  "duration": "0.0053s",
+                  "durationInSeconds": 0.0052988529205322266,
+                  "name": "captured()",
+                  "nodeIdentifier": "Basics/captured()",
+                  "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics/captured()",
+                  "nodeType": "Test Case",
+                  "result": "Passed"
+                }
+              ],
+              "name": "Basics",
+              "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/Basics",
+              "nodeType": "Test Suite",
+              "result": "Failed"
+            },
+            {
+              "children": [
+                {
+                  "duration": "0.000081s",
+                  "durationInSeconds": 8.106231689453125e-05,
+                  "name": "a()",
+                  "nodeIdentifier": "SerialSuite/a()",
+                  "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/SerialSuite/a()",
+                  "nodeType": "Test Case",
+                  "result": "Passed"
+                },
+                {
+                  "duration": "0.0012s",
+                  "durationInSeconds": 0.001155853271484375,
+                  "name": "b()",
+                  "nodeIdentifier": "SerialSuite/b()",
+                  "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/SerialSuite/b()",
+                  "nodeType": "Test Case",
+                  "result": "Passed"
+                }
+              ],
+              "name": "SerialSuite",
+              "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests/SerialSuite",
+              "nodeType": "Test Suite",
+              "result": "Passed"
+            }
+          ],
+          "name": "LibTests",
+          "nodeIdentifierURL": "test://com.apple.xcode/Lib/LibTests",
+          "nodeType": "Unit test bundle",
+          "result": "Failed"
+        }
+      ],
+      "name": "Lib-Package",
+      "nodeType": "Test Plan",
+      "result": "Failed"
+    }
+  ],
+  "testPlanConfigurations": [
+    {
+      "configurationId": "1",
+      "configurationName": "Test Scheme Action"
+    }
+  ]
+}

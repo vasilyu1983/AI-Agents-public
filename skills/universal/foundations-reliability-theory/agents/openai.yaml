@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reliability Theory Foundations"
+  short_description: "Availability math, failover, SPOFs, fault trees, FMEA, and error budgets"
+  default_prompt: "Use $foundations-reliability-theory to compute availability for redundant and series designs, failover coverage, SPOFs, fault trees, FMEA, Weibull life, error budgets, or what uptime a design gives."

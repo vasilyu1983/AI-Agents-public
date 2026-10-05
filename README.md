@@ -1,165 +1,119 @@
-# AI Agents Library
+# AI-Agents
 
-## Production-Ready AI Agent Prompts & Skills
+**Skills, subagents and saved multi-agent workflows for Claude Code and Codex.** One repository feeds both runtimes. Install it as a Claude Code plugin in two commands, or clone it and link it.
 
-<div align="center">
+| What you get | How many | Where |
+|---|---|---|
+| Skills: engineering, AI, data, QA, ops, docs, research, applied theory | 140+ | `skills/universal/` |
+| Subagents with explicit boundaries | 85 | `agents/claude/`, `agents/codex/` |
+| Team recipes | 8 | `agents/teams/` |
+| Saved workflows with guarantees in code | 8 | `agents/workflows/` |
+| Opt-in hooks: git safety, lint-config guard, notifications | 3 | `hooks/` |
+| Language and domain rules | 14 folders | `rules/` |
 
-**28 Custom GPT agents** and **140 agent skills** for ChatGPT, Claude Code, and Codex.
+The exact, current list is in the generated [catalog](docs/reference/catalog.md).
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Custom GPTs](https://img.shields.io/badge/Custom%20GPTs-28-blue)](./custom-gpt)
-[![Skills](https://img.shields.io/badge/Skills-140-purple)](./frameworks/shared-skills)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+## Quick start
 
-[Quick Start](#quick-start) • [Skills](#agent-skills) • [Custom GPTs](#custom-gpt-agents) • [Contributing](#contributing)
+### Claude Code plugin
 
-</div>
+```text
+/plugin marketplace add vasilyu1983/AI-Agents-public
+/plugin install ai-agents@ai-agents
+/reload-plugins
+```
 
----
+Then, in a repository with uncommitted changes:
 
-## What's Inside
+```text
+/ai-agents:adversarial-review
+```
 
-Agent skills are portable instruction sets that teach AI agents how to execute domain work
-well — each is a directory with a `SKILL.md` entry point (YAML frontmatter + routing),
-progressive-disclosure references, and self-contained scripts and data.
+Four reviewers read your diff. Two refuters then try to disprove each finding. You get only the findings that survive. No file changes.
 
-Two things, usable independently:
-
-- **[`frameworks/shared-skills/`](frameworks/shared-skills/)** — 140 agent skills following the
-  [Agent Skills specification](https://agentskills.io/specification). Drop into `~/.claude/skills/`.
-- **[`custom-gpt/`](custom-gpt/)** — 28 Custom GPT system prompts for ChatGPT, written to fit
-  the GPT builder's 8000-character Instructions limit.
-
-## Quick Start
+### Clone and link (Claude Code and Codex)
 
 ```bash
-git clone https://github.com/vasilyu1983/AI-Agents-public.git
-cd AI-Agents-public
-
-# One skill
-ln -s "$PWD/frameworks/shared-skills/skills/ai-rag" ~/.claude/skills/ai-rag
-
-# All of them
-for s in frameworks/shared-skills/skills/*/; do
-  ln -s "$PWD/$s" ~/.claude/skills/"$(basename "$s")"
-done
+git clone https://github.com/vasilyu1983/AI-Agents-public.git ~/AI-Agents-public
+cd ~/AI-Agents-public
+bash scripts/distribution/sync-skills.sh
 ```
 
-Symlinks mean edits take effect immediately — no re-sync step.
+Then start a new session and type `/adversarial-review`. In Codex, invoke the `run-workflow` skill and name the workflow.
 
-For a Custom GPT: open `custom-gpt/<category>/<agent>/01_*.md`, paste into the GPT builder's
-Instructions field, and attach the sibling `02_sources-*.json` as Knowledge if present.
+Use one install path per machine. [Getting started](docs/getting-started.md) covers both paths, subagent installs, checks, updates and removal.
 
-## Agent Skills
+## Documentation
 
-| Family | Count | Covers |
-| --- | ---: | --- |
-| `software-*` | 34 | Backend, frontend, iOS, Android, desktop, security, payments, performance |
-| `ai-*` | 21 | RAG, evals, prompt engineering, pretraining, post-training, inference, MLOps |
-| `qa-*` | 17 | Test strategy, debugging, resilience, observability, accessibility, Playwright |
-| `foundations-*` | 16 | Queueing, control, information, game, decision, reliability theory for systems |
-| `ai-coding-agents-*` | 13 | Coding-agent runtime internals: sandboxing, permissions, sessions, tools |
-| `dev-*` | 10 | Git workflow, API design, dependency management, code graphs, planning |
-| `agents-*` | 6 | Hooks, MCP servers, skill authoring, swarm orchestration, repo memory |
-| `data-*` | 5 | Lakehouse, streaming, SQL optimization, analytics engineering |
-| `ops-*` | 4 | DevOps platform, incident response, cost optimization, CI/CD |
-| `document-*` | 4 | docx, pdf, pptx, xlsx |
-| `docs-*` | 3 | Docs-as-code, AI-ready PRDs, note retrieval |
-| `research-*` | 3 | arXiv triage, GitHub mining, research method extraction |
-| `product-*` | 2 | Product management, help centers |
-| `gamedev-*` | 2 | Godot, Roblox |
+| Guide | Read it to |
+|---|---|
+| [Getting started](docs/getting-started.md) | Install, check, update and uninstall |
+| [Concepts](docs/concepts.md) | Understand skills, subagents, teams, workflows, hooks and rules, and how they connect |
+| [Workflows](docs/workflows.md) | Run each of the 8 workflows: arguments, stages, verdicts, cost |
+| [Skills](docs/skills.md) | Find, use and read skills |
+| [Agents and teams](docs/agents-and-teams.md) | Use, brief and install subagents and teams |
+| [Hooks and safety](docs/hooks-and-safety.md) | Install the hooks; what the git guard blocks; recovery |
+| [Codex](docs/codex.md) | What differs in Codex |
+| [Customizing](docs/customizing.md) | Write your own skill, subagent, team, workflow or rule |
+| [Troubleshooting](docs/troubleshooting.md) | Fix a symptom |
+| [Catalog](docs/reference/catalog.md) | Every skill, subagent, team, workflow and board, generated from the files |
 
-Two areas are unusually deep and harder to find elsewhere: **coding-agent runtime internals**
-(how agent CLIs actually implement sandboxing, permissions, and session resume) and
-**systems-theory foundations** (queueing and control theory applied to real design decisions,
-not as abstract math).
+## The workflows
 
-Full breakdown: [`frameworks/shared-skills/README.md`](frameworks/shared-skills/README.md).
+| Workflow | What it does | Edits files? |
+|---|---|---|
+| `adversarial-review` | Four reviewers on a diff, then two refuters per finding | No |
+| `review-fix-loop` | Review and fix in rounds, or build against frozen acceptance checks | Yes, in scope |
+| `source-check` | Checks every quote, link, figure and attribution in a document against its source, then fixes confirmed defects | Yes, the target |
+| `feature-delivery` | Plan, test first, implement, review. Stops for your approval after the plan. | Yes, the plan's files |
+| `build-mvp` | Cuts a PRD into thin slices and builds each approved slice; a fresh judge checks every slice | Yes, each slice's files |
+| `epic-delivery` | Delivers an epic as file-owning tasks in dependency waves, then one integration review | Yes, each task's files |
+| `expert-board` | A board of specialists on one decision: blind memos, optional debate, weighted synthesis | No |
+| `marketing-campaign` | Research, one positioning lock, channel drafts, review against the lock | No |
 
-### How a skill is structured
+No workflow commits, pushes, opens a pull request or approves anything. You review and commit.
+
+## Why it works this way
+
+- **Guarantees live in code, not in prompts.** Fresh agents each round, a two-refuter quorum, frozen acceptance checks, round caps and plateau stops are enforced by the workflow runtime. A prompt that imitates a workflow has none of them.
+- **The tree is checked, not trusted.** Writing workflows snapshot the working tree after every step. A write outside the plan, a staged file, a moved `HEAD` or a touched instruction file stops the run.
+- **Every subagent states what it does not do.** Reviewers cannot edit, so they report instead of quietly patching.
+- **Skills hold judgment, not data.** A skill tells the agent what it would get wrong without it. Versions, prices and limits change, so skills look them up instead of hard-coding them.
+- **Small context.** The runtime reads only each skill's short description until a task needs the skill. References load only when a step asks for them.
+
+## Layout
 
 ```text
-<skill-name>/
-├── SKILL.md      # Entry point — frontmatter + routing. Kept small.
-├── references/   # Depth, loaded only when the task needs it
-├── scripts/      # Deterministic helpers — no model call needed
-├── assets/       # Templates and output contracts
-└── data/         # sources.json and curated data
+skills/universal/<name>/   SKILL.md + references/, scripts/, data/, assets/
+agents/claude/             subagent definitions (source)
+agents/codex/              Codex subagents (generated)
+agents/teams/<id>/         team recipes
+agents/workflows/          <id>.manifest.json (source) -> <id>.js and <id>.codex-plan.json (generated)
+agents/templates/          templates for new agents and teams
+hooks/                     opt-in hooks, their tests, and hooks.json
+rules/                     common, language and domain rules
+scripts/distribution/      sync-skills.sh: the clone installer
+custom-gpt/                Custom GPT prompts
+docs/                      the guides above
+.claude-plugin/            Claude Code plugin and marketplace manifests
 ```
 
-`SKILL.md` stays cheap enough to hold in context; `references/` carry the detail and cost
-nothing until read.
+## What this edition leaves out
 
-## Custom GPT Agents
+This is the public edition of a private library. It is built from an explicit allowlist, and every build is scanned for private names and credential patterns before release.
 
-28 agents across six categories:
+- Marketing and startup domain playbooks are not published. The marketing and startup subagents run on their own instructions.
+- Legal, client-specific and personal content is not published, nor are the workflows and boards that depend on it.
+- The library's own maintenance tooling (graph export, skill router, audit tools) is not published.
 
-| Category | Count |
-| --- | ---: |
-| Productivity | 8 |
-| Lifestyle | 7 |
-| Programming | 5 |
-| Education | 3 |
-| Research & Analysis | 3 |
-| Writing | 2 |
+## Requirements
 
-Each folder holds `01_*.md` (the system prompt) and, where useful, a curated sources JSON.
+Claude Code or Codex; `git`; Python 3.10 or later; Node.js 18 or later for the workflow tests. macOS or Linux (Windows through WSL).
 
-## Repository Layout
+## Security
 
-```text
-AI-Agents-public/
-├── custom-gpt/                      # 28 Custom GPT prompts by category
-├── frameworks/
-│   └── shared-skills/skills/        # 140 agent skills
-├── CONTRIBUTING.md
-└── LICENSE
-```
+The hooks are opt-in, and the plugin installs none. Skills may ship scripts that an agent can run; read them before you allow them. See [SECURITY.md](SECURITY.md) to report a problem.
 
-## How This Library Is Built
+## Contributing and license
 
-These skills are the public subset of a larger private library that is run as an
-engineered system, not a prompt collection. Every skill here passed through that
-system's quality machinery:
-
-- **A routing engine** — 8 domain routers dispatch 500+ decision scenarios, each an
-  ordered skill chain with an explicit gate and a named failure mode. Skills are
-  written to compose, not just to exist.
-- **A generated knowledge graph with drift gates** — the catalog (nodes, ownership,
-  ordered scenario edges) is exported from the markdown and CI-checked against it,
-  so prose and structure provably cannot diverge. A pre-tool hook blocks
-  confabulated skill names at invocation time.
-- **Adversarial review** — scenario content is periodically challenged by parallel
-  expert-panel agent runs (consistency, currency, decision value), and fixes are
-  verified by retrieval smoke tests before merging.
-- **Static security screening** — third-party skills are scanned for prompt
-  injection, hidden Unicode, and exfiltration sinks before they enter the library
-  (taxonomy adapted from NVIDIA/SkillSpector).
-- **Freshness discipline** — volatile facts (framework versions, model pricing)
-  live in per-skill `data/` files refreshed by script, and prose is gated against
-  its own data to stop version rot.
-
-## Standards & Compatibility
-
-- **Specification**: skills follow the [Agent Skills specification](https://agentskills.io/specification) —
-  portable directories, YAML frontmatter, progressive disclosure.
-- **Platforms**: Claude Code (`~/.claude/skills`) and Codex CLI (`~/.agents/skills`); the same
-  directories work in both.
-- **Self-containment**: every skill works detached from this repo — own `data/`, own `scripts/`,
-  symlink-safe path resolution — so a single copied folder is a working install.
-
-## Scope
-
-This is a curated public subset of a larger private library. Project-specific, client-scoped,
-marketing, startup, and legal skills are not published, and skills depending on internal
-libraries are excluded because they cannot be used outside their origin repo.
-
-## Contributing
-
-Issues and PRs welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Useful contributions:
-correcting something that has gone stale, adding a reference that saved you time, or
-reporting a skill that misfires.
-
-## License
-
-MIT — see [LICENSE](LICENSE). Use freely, including commercially.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under MIT; see [LICENSE](LICENSE).

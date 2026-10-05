@@ -1,0 +1,109 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-runtime-core",
+    "title": "AI Coding Agents Runtime Core - Sources",
+    "description": "Official documentation and implementation references for command and tool runtime architecture: tool contracts, registries, deferred loading, slash-command dispatch",
+    "last_updated": "2026-09-29",
+    "updated": "2026-09-29",
+    "total_sources": 10,
+    "version": "2.0"
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en",
+        "type": "documentation",
+        "relevance": "Primary product documentation for built-in tools, MCP usage, and runtime behavior",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "High-level guidance on agent control flow and dependable operator surfaces",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Tools Reference",
+        "url": "https://code.claude.com/docs/en/tools-reference",
+        "type": "reference",
+        "relevance": "Current tool list, parameterized permission rules such as Agent(type), plugin-activated LSP tools, and subagent dispatch defaults; look up names and limits here",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Plugins Reference",
+        "url": "https://code.claude.com/docs/en/plugins-reference",
+        "type": "reference",
+        "relevance": "lspServers plugin capability, LSP tool activation semantics, plugin manifest schema",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Public docs, issues, changelog, and plugin examples for tool surfaces; the repository does not contain the CLI source",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Codex CLI Repository",
+        "url": "https://github.com/openai/codex",
+        "type": "repository",
+        "relevance": "Cross-runtime comparison point for command and agent CLI architecture; read the TUI slash-command module at a release tag for command metadata and availability predicates",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Model Context Protocol Specification",
+        "url": "https://modelcontextprotocol.io/",
+        "type": "specification",
+        "relevance": "Reference when command flows inject or expose MCP-backed capabilities",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Codex Use Cases",
+        "url": "https://developers.openai.com/codex/use-cases",
+        "type": "documentation",
+        "relevance": "Source for composable CLI tools Codex can use and production workflow patterns",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "claude_code_docs": [
+      {
+        "name": "Claude Code Docs: Create custom subagents (Fork the current conversation)",
+        "url": "https://code.claude.com/docs/en/sub-agents",
+        "type": "documentation",
+        "relevance": "Conversation forks: context inheritance, fork depth, and background-execution semantics",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Docs: Manage multiple agents with agent view",
+        "url": "https://code.claude.com/docs/en/agent-view",
+        "type": "documentation",
+        "relevance": "Agent view: the background-session dashboard surface, opened as a CLI subcommand rather than a slash command",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

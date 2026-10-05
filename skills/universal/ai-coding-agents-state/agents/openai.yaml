@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — State"
+  short_description: "Design session and task state for coding agents"
+  default_prompt: "Use $ai-coding-agents-state to design session and task state for a coding-agent runtime: resume, checkpoints, compaction, cancellation, and background or scheduled runs."

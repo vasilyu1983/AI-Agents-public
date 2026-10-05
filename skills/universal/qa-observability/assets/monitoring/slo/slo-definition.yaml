@@ -1,0 +1,237 @@
+# SLO Definition Template
+#
+# Use this template to define Service Level Objectives (SLOs) for your services.
+# Based on Google SRE best practices.
+
+---
+# Service: Order API
+service:
+  name: order-api
+  description: Core API for order processing
+  team: platform-team
+  oncall: platform-oncall@example.com
+
+# SLOs
+slos:
+  # Availability SLO
+  - name: order-api-availability
+    objective: "99.9% of order API requests succeed over 30 days"
+    sli:
+      type: availability
+      measurement: |
+        sum(rate(http_requests_total{service="order-api",status!~"5.."}[30d]))
+        /
+        sum(rate(http_requests_total{service="order-api"}[30d]))
+      datasource: prometheus
+    target: 0.999  # 99.9%
+    window: 30d
+    error_budget:
+      allowed_failure_rate: 0.1%  # 0.001
+      # Request-based SLI: budget is eligible failed requests, not downtime minutes.
+      # Canonical table: references/slo-design-guide.md#canonical-multi-window-burn-rate-table
+      # Fire only when BOTH windows exceed the burn rate.
+      burn_rate_alerts:
+        - name: fast-burn
+          long_window: 1h
+          short_window: 5m
+          burn_rate: 14.4
+          budget_consumed: 2%
+          action: page
+        - name: medium-burn
+          long_window: 6h
+          short_window: 30m
+          burn_rate: 6
+          budget_consumed: 5%
+          action: page
+        - name: slow-burn
+          long_window: 3d
+          short_window: 6h
+          burn_rate: 1
+          budget_consumed: 10%
+          action: ticket
+    error_budget_policy:
+      - threshold: 50%
+        action: full_velocity
+        description: "Ship all features, run experiments"
+      - threshold: 25%
+        action: reduced_velocity
+        description: "Critical features only, increase test coverage"
+      - threshold: 10%
+        action: feature_freeze
+        description: "Stop feature releases, focus on reliability"
+      - threshold: 0%
+        action: incident_mode
+        description: "Emergency response, stop all releases"
+
+  # Latency SLO
+  - name: order-api-latency
+    objective: "99% of order API requests complete in <= 500ms over 30 days"
+    sli:
+      type: latency
+      # Ratio SLI (fast requests / all requests). A p99 quantile has no error budget.
+      # Requires a histogram bucket boundary at le="0.5".
+      measurement: |
+        sum(rate(http_request_duration_seconds_bucket{service="order-api",le="0.5"}[30d]))
+        /
+        sum(rate(http_request_duration_seconds_count{service="order-api"}[30d]))
+      datasource: prometheus
+    target: 0.99
+    window: 30d
+    error_budget:
+      allowed_slow_requests: 1%
+      burn_rate_alerts: same tiers as availability, with budget 0.01
+
+  # User Journey SLO (Checkout Flow)
+  - name: checkout-success-rate
+    objective: "95% of checkout flows complete successfully over 7 days"
+    sli:
+      type: success_rate
+      measurement: |
+        sum(rate(checkout_completed_total{service="order-api"}[7d]))
+        /
+        sum(rate(checkout_started_total{service="order-api"}[7d]))
+      datasource: prometheus
+    target: 0.95  # 95%
+    window: 7d
+    error_budget:
+      allowed_failure_rate: 5%
+      # 7-day window: rescale the table (budget consumed = burn rate x long window / 168h).
+      burn_rate_alerts: canonical tiers, rescaled for a 7d window
+
+# Prometheus Alert Rules
+# Use prometheus-alert-rules.yaml in this directory (multi-window, `sum by (service)`,
+# with a promtool unit test in prometheus-alert-rules.test.yaml).
+
+# Dashboard Configuration
+grafana_dashboard:
+  title: "Order API - SLO Dashboard"
+  panels:
+    - title: "Availability SLI (30d)"
+      type: gauge
+      query: |
+        sum(rate(http_requests_total{service="order-api",status!~"5.."}[30d]))
+        /
+        sum(rate(http_requests_total{service="order-api"}[30d]))
+      thresholds:
+        - value: 0.999
+          color: green
+        - value: 0.995
+          color: yellow
+        - value: 0.99
+          color: red
+
+    - title: "Error Budget Remaining"
+      type: gauge
+      query: |
+        (
+          (0.999 - (
+            1 - (
+              sum(rate(http_requests_total{service="order-api",status!~"5.."}[30d]))
+              /
+              sum(rate(http_requests_total{service="order-api"}[30d]))
+            )
+          )) / 0.001
+        ) * 100
+      thresholds:
+        - value: 50
+          color: green
+        - value: 25
+          color: yellow
+        - value: 10
+          color: red
+
+    - title: "Error Budget Burn Rate (1h)"
+      type: graph
+      query: |
+        (
+          1 - (
+            sum(rate(http_requests_total{service="order-api",status!~"5.."}[1h]))
+            /
+            sum(rate(http_requests_total{service="order-api"}[1h]))
+          )
+        ) / (1 - 0.999)
+
+    - title: "P99 Latency (diagnostic, not the SLI)"
+      type: graph
+      query: |
+        histogram_quantile(0.99,
+          sum by (le) (rate(http_request_duration_seconds_bucket{service="order-api"}[5m]))
+        )
+      thresholds:
+        - value: 0.5
+          color: green
+        - value: 1.0
+          color: red
+
+    - title: "SLI History (30d)"
+      type: graph
+      queries:
+        - name: "Target (99.9%)"
+          query: "0.999"
+          color: green
+        - name: "Actual SLI"
+          query: |
+            sum(rate(http_requests_total{service="order-api",status!~"5.."}[1h]))
+            /
+            sum(rate(http_requests_total{service="order-api"}[1h]))
+          color: blue
+
+# Review Schedule
+review:
+  frequency: weekly
+  participants:
+    - platform-team
+    - product-team
+  agenda:
+    - Review current SLI status
+    - Analyze error budget consumption
+    - Discuss incidents and postmortems
+    - Adjust SLO targets if needed
+
+---
+# Additional Examples
+
+# Example: Payment Service SLO
+# service:
+#   name: payment-service
+# slos:
+#   - name: payment-success-rate
+#     objective: "99.95% of payment attempts succeed"
+#     sli:
+#       type: success_rate
+#       measurement: |
+#         sum(rate(payment_success_total[30d]))
+#         /
+#         sum(rate(payment_attempts_total[30d]))
+#     target: 0.9995
+#     window: 30d
+
+# Example: Batch Job SLO
+# service:
+#   name: data-pipeline
+# slos:
+#   - name: batch-job-success-rate
+#     objective: "99% of daily batch jobs complete successfully"
+#     sli:
+#       type: success_rate
+#       measurement: |
+#         sum(rate(batch_job_success_total[7d]))
+#         /
+#         sum(rate(batch_job_total[7d]))
+#     target: 0.99
+#     window: 7d
+
+# Example: Multi-region SLO
+# service:
+#   name: global-api
+# slos:
+#   - name: global-availability
+#     objective: "99.99% availability across all regions"
+#     sli:
+#       type: availability
+#       measurement: |
+#         sum(rate(http_requests_total{status!~"5.."}[30d])) by (region)
+#         /
+#         sum(rate(http_requests_total[30d])) by (region)
+#     target: 0.9999
+#     window: 30d

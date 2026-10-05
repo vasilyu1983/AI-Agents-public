@@ -1,0 +1,74 @@
+---
+name: dev-feature-delivery
+family: dev
+description: Staged research, implementation, and review pipeline.
+best_for:
+- Features that need external research or repo discovery
+- Bugs that need bounded tracing before a fix
+members:
+- dev-feature-researcher
+- dev-feature-implementer
+- dev-feature-reviewer
+required_context:
+- Spec, bug report, or acceptance criteria
+optional_context:
+- docs/**/*.md
+- profiles/*.json
+- graphs/code-graph.json
+- reports/query-*.md
+concurrency_mode: staged
+synthesis_owner: dev-feature-reviewer
+owned_files:
+- 'dev-feature-implementer: files named in the launch prompt only; no adjacent refactors'
+- 'dev-feature-researcher: read-only (research notes returned in-thread, not written to the repo)'
+- 'dev-feature-reviewer: read-only'
+do_not_touch:
+- .archive/**
+- secrets, credentials, PII
+- lockfiles and generated build output
+- .git/**
+- CI configuration unless named in the prompt
+deliverable:
+  shape: Per-member work product plus a handoff note, then one synthesized delivery report
+  required_sections:
+  - What was done or found
+  - Files touched or artifacts produced
+  - Verification performed
+  - Open risks and next step
+  max_length: 2 pages / ~800 words per member; synthesis <= 1 page
+debate:
+  enabled: false
+  triggers: []
+  perspectives: []
+coordination:
+  blind_first_round: false
+expansion_gate:
+  rule: evpi
+  evpi_threshold: medium
+  max_dynamic_members: 1
+  candidate_specialists:
+  - software-security-reviewer
+  - software-performance-reviewer
+  - qa-test-reviewer
+  - dev-build-fixer
+  - dev-test-writer
+stopping_rule:
+  protocol: regret-min
+  reversibility: mixed
+  max_regret_threshold:
+    correctness: 0.1
+    style: 0.3
+synthesis:
+  bias_audit_required: true
+  frame_symmetry: false
+verdict_options:
+- ship
+- request_changes
+- hold_for_research
+hold_policy:
+  required: deadline
+  default_deadline_days: 3
+  escalate_on_deadline: forced_decision
+trust:
+  default_tier: standard
+design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#dev-feature-delivery

@@ -1,0 +1,4 @@
+interface:
+  display_name: "App Context Layer"
+  short_description: "Designs agent memory across sessions: facts over time, consolidation, isolation"
+  default_prompt: "Use $ai-context-layer to design or audit agent memory that remembers users across sessions: point-in-time facts, consolidation, tenant isolation, long-term user memory, support or policy KBs, Mem0/Zep."

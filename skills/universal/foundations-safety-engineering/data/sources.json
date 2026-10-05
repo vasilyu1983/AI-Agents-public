@@ -1,0 +1,148 @@
+{
+  "metadata": {
+    "title": "Safety Engineering Foundations — Sources",
+    "description": "Primary sources for the bounded foundation workflow; synthetic examples are not empirical findings.",
+    "last_updated": "2026-09-27",
+    "skill": "foundations-safety-engineering",
+    "cutoff": "2026-09-27",
+    "total_sources": 15
+  },
+  "primary_sources": [
+    {
+      "id": "STPA2018",
+      "name": "STPA Handbook (MIT-STAMP-001)",
+      "author": "Nancy Leveson and John Thomas",
+      "year": 2018,
+      "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
+      "scope": "Chapter 2: control structures, four UCA categories, constraints and scenarios; relevant passages inspected. Also: system-level constraints, controller constraints, 7-10 hazard rule of thumb, two loss-scenario types (checked 2026-09-23).",
+      "verified_via": "Primary MIT PDF opened and relevant passages read on 2026-09-17; PDF re-read 2026-09-27: 7-10 hazard rule of thumb, four UCA types, two loss-scenario types, loss/hazard definitions confirmed verbatim",
+      "url_check": "manual"
+    },
+    {
+      "id": "CAST2019",
+      "name": "CAST Handbook: How to Learn More from Incidents and Accidents",
+      "author": "Nancy G. Leveson",
+      "year": 2019,
+      "url": "https://psas.scripts.mit.edu/home/get_file4.php?name=CAST_Handbook.pdf",
+      "scope": "Chapters 1-4: root-cause/hindsight/blame critique, five CAST parts, per-controller analysis, systemic factors, recommendations and follow-up.",
+      "verified_via": "MIT PSAS mirror PDF (148 pp) fetched and relevant chapters read 2026-09-23; PDF re-read 2026-09-27: 'analysis method, not an investigation technique', five traps, three follow-up requirements, and 'difficulty of implementation is not an excuse to omit a recommendation' confirmed"
+    },
+    {
+      "id": "Clymer2024SafetyCases",
+      "name": "Safety Cases: How to Justify the Safety of Advanced AI Systems",
+      "author": "Joshua Clymer, Nick Gabrieli, David Krueger, Thomas Larsen",
+      "year": 2024,
+      "url": "https://arxiv.org/abs/2403.10462",
+      "scope": "Four argument categories: total inability, sufficiently strong control measures, trustworthiness despite capability, and (prospective) deference to credible AI advisors.",
+      "verified_via": "arXiv API abstract read 2026-09-23; full text not read; abstract re-read 2026-09-27"
+    },
+    {
+      "id": "Korbak2025ControlCase",
+      "name": "A sketch of an AI control safety case",
+      "author": "Tomek Korbak, Joshua Clymer, Benjamin Hilton, Buck Shlegeris, Geoffrey Irving",
+      "year": 2025,
+      "url": "https://arxiv.org/abs/2501.17315",
+      "scope": "One sketched control case (internal agent, data exfiltration) hinging on elicitation, deployment effectiveness, and conservative extrapolation claims.",
+      "verified_via": "arXiv API abstract read 2026-09-23; full text not read; abstract re-read 2026-09-27"
+    },
+    {
+      "id": "Goemans2024CyberInability",
+      "name": "Safety case template for frontier AI: A cyber inability argument",
+      "author": "Arthur Goemans, Marie Davidsen Buhl, Jonas Schuett, Tomek Korbak, Jessica Wang, Benjamin Hilton, Geoffrey Irving",
+      "year": 2024,
+      "url": "https://arxiv.org/abs/2411.08088",
+      "scope": "CAE-structured inability template; presented as a proof of concept.",
+      "verified_via": "arXiv API abstract read 2026-09-23; abstract re-read 2026-09-27"
+    },
+    {
+      "id": "Bloomfield2020Assurance2",
+      "name": "Assurance 2.0: A Manifesto",
+      "author": "Robin Bloomfield, John Rushby",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2004.10474",
+      "scope": "Explicit identification of defeaters and counterevidence in assurance cases.",
+      "verified_via": "arXiv API abstract read 2026-09-23; abstract re-read 2026-09-27"
+    },
+    {
+      "id": "GSNv3",
+      "name": "Goal Structuring Notation Community Standard Version 3 (SCSC-141C)",
+      "author": "SCSC Assurance Case Working Group",
+      "year": 2021,
+      "url": "https://scsc.uk/scsc-141c",
+      "scope": "GSN core elements: Goal, Strategy, Solution, Context, Assumption, Justification. Cite the current version from the SCSC site.",
+      "verified_via": "Version/number/year via web search (bibbase, Wikipedia: May 2021); element names via OntoGSN arXiv:2506.11023; standard text not read; scsc.uk/gsn-standard read 2026-09-27: version 3 still listed as latest"
+    },
+    {
+      "id": "Mylius2025STPAFrontier",
+      "name": "Systematic Hazard Analysis for Frontier AI using STPA",
+      "author": "Simon Mylius",
+      "year": 2025,
+      "url": "https://arxiv.org/abs/2506.01782",
+      "scope": "STPA applied to the Korbak et al. control-case scenario; UCAs and loss scenarios.",
+      "verified_via": "arXiv API abstract read 2026-09-23; full text not read; abstract re-read 2026-09-27"
+    },
+    {
+      "id": "Doshi2026SafeToolUse",
+      "name": "Towards Verifiably Safe Tool Use for LLM Agents",
+      "author": "Aarya Doshi, Yining Hong, Congying Xu, Eunsuk Kang, Alexandros Kapravelos, Christian Kästner",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2601.08012",
+      "scope": "STPA-derived requirements formalized as enforceable data-flow and tool-sequence specifications; capability-labelled MCP. Accepted to ICSE NIER 2026.",
+      "verified_via": "arXiv API abstract and comment read 2026-09-23; abstract re-read 2026-09-27"
+    },
+    {
+      "id": "Hollnagel2014SafetyII",
+      "name": "Safety-I and Safety-II: The Past and Future of Safety Management",
+      "author": "Erik Hollnagel",
+      "year": 2014,
+      "url": "https://www.routledge.com/Safety-I-and-Safety-II-The-Past-and-Future-of-Safety-Management/Hollnagel/p/book/9781472423078",
+      "scope": "Safety-II perspective and FRAM; moved with the Safety-II section from reliability theory.",
+      "verified_via": "Carried from foundations-reliability-theory sources (verified 2026-05-17); not re-read 2026-09-23"
+    },
+    {
+      "id": "Ham2020SafetyII",
+      "name": "Safety-II and Resilience Engineering in a Nutshell: An Introductory Guide to Their Concepts and Methods",
+      "author": "Dong-Han Ham",
+      "year": 2020,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7940128/",
+      "scope": "Safety-I/II definitions, same-causes claim, WAI vs WAD, four resilience abilities, FRAM description. Saf Health Work 12(1):10-19. The Safety-II definition quoted in safety-ii-and-stamp.md is Ham's wording, not Hollnagel's.",
+      "verified_via": "PMC full text fetched 2026-09-23; quoted definitions checked; PMC full text re-read 2026-09-27"
+    },
+    {
+      "id": "Leveson2011SaferWorld",
+      "name": "Engineering a Safer World: Systems Thinking Applied to Safety",
+      "author": "Nancy G. Leveson",
+      "year": 2011,
+      "url": "https://mitpress.mit.edu/9780262016629/engineering-a-safer-world/",
+      "scope": "STAMP causality model underlying STPA and CAST.",
+      "verified_via": "MIT Press title confirmed (reliability sources, 2026-05-17); not re-read"
+    },
+    {
+      "id": "ISO21448",
+      "name": "ISO 21448:2022 Road vehicles — Safety of the intended functionality",
+      "author": "ISO",
+      "year": 2022,
+      "url": "https://www.iso.org/standard/77490.html",
+      "scope": "SOTIF: functional insufficiencies (specification and performance) and triggering conditions.",
+      "verified_via": "Publisher sample PDF (standards.iteh.ai) read 2026-09-23: first edition 2022-06, replaces ISO/PAS 21448:2019; iso.org returned 403"
+    },
+    {
+      "id": "ISOPAS8800",
+      "name": "ISO/PAS 8800:2024 Road vehicles — Safety and artificial intelligence",
+      "author": "ISO",
+      "year": 2024,
+      "url": "https://www.ul.com/sis/blog/safety-related-systems-road-vehicles-artificial-intelligence-are-addressed-isopas-88002024",
+      "scope": "Safety lifecycle for AI elements in road vehicles; extends ISO 26262 and ISO 21448.",
+      "verified_via": "Secondary: UL Solutions blog (2026-09-23 P2 check), released December 2024; iso.org/standard/83303 returned 403"
+    },
+    {
+      "id": "UL4600Ed3",
+      "name": "UL 4600 Standard for Evaluation of Autonomous Products, Edition 3",
+      "author": "UL Standards & Engagement",
+      "year": 2023,
+      "url": "https://www.shopulstandards.com/ProductDetail.aspx?productId=UL4600_3_S_20230317",
+      "scope": "Safety-case-based standard for evaluating autonomous products. Look up the current edition before citing.",
+      "verified_via": "UL Standards shop page (2026-09-23 P2 check): Edition 3 published 2023-03-17; revision proposals open (latest 2026-08-07); no Edition 4 seen."
+    }
+  ]
+}

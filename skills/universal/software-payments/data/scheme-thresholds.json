@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "skill": "software-payments",
+    "description": "Visa VAMP and Mastercard ECP lookup sources. Numeric thresholds are unverified and must be read from the applicable current primary rulebook before use.",
+    "stale_after_days": 90,
+    "last_verified": null,
+    "verification_note_2026_09_25": "Prior fetch notes report unreadable Visa PDF content and HTTP 403 for Mastercard. No numeric threshold is retained as verified evidence."
+  },
+  "thresholds": [
+    {
+      "name": "Visa VAMP merchant excessive fraud-plus-dispute ratio",
+      "value": null,
+      "previous_value": null,
+      "effective_date": null,
+      "region": "US, Canada, EU, APAC",
+      "source": "https://corporate.visa.com/content/dam/VCOM/corporate/visa-perspectives/security-and-trust/documents/visa-acquirer-monitoring-program-fact-sheet-2025.pdf",
+      "last_verified": null,
+      "stale_after_days": 90,
+      "verification_status": "unverified",
+      "note": "Read the current primary source for region, effective date, numerator/denominator, count floor and enforcement criteria before using this threshold."
+    },
+    {
+      "name": "Visa VAMP merchant excessive fraud-plus-dispute ratio (CEMEA carve-out)",
+      "value": null,
+      "effective_date": null,
+      "note": "Read the current primary source for region, effective date, numerator/denominator, count floor and enforcement criteria before using this threshold.",
+      "region": "CEMEA",
+      "source": "https://corporate.visa.com/content/dam/VCOM/corporate/visa-perspectives/security-and-trust/documents/visa-acquirer-monitoring-program-fact-sheet-2025.pdf",
+      "last_verified": null,
+      "stale_after_days": 90,
+      "verification_status": "unverified"
+    },
+    {
+      "name": "Visa acquirer-level \"above standard\" threshold",
+      "value": null,
+      "effective_date": null,
+      "region": "global (acquirer-level)",
+      "source": "https://corporate.visa.com/content/dam/VCOM/corporate/visa-perspectives/security-and-trust/documents/visa-acquirer-monitoring-program-fact-sheet-2025.pdf",
+      "last_verified": null,
+      "stale_after_days": 90,
+      "verification_status": "unverified",
+      "note": "Read the current primary source for region, effective date, numerator/denominator, count floor and enforcement criteria before using this threshold."
+    },
+    {
+      "name": "Visa acquirer-level \"excessive\" threshold",
+      "value": null,
+      "effective_date": null,
+      "region": "global (acquirer-level)",
+      "source": "https://corporate.visa.com/content/dam/VCOM/corporate/visa-perspectives/security-and-trust/documents/visa-acquirer-monitoring-program-fact-sheet-2025.pdf",
+      "last_verified": null,
+      "stale_after_days": 90,
+      "verification_status": "unverified",
+      "note": "Read the current primary source for region, effective date, numerator/denominator, count floor and enforcement criteria before using this threshold."
+    },
+    {
+      "name": "Mastercard ECP - Excessive Chargeback Merchant (ECM)",
+      "value": null,
+      "effective_date": null,
+      "region": "global",
+      "source": "https://www.mastercard.com/global/en/business/support/rules.html",
+      "last_verified": null,
+      "stale_after_days": 90,
+      "verification_status": "unverified",
+      "note": "Read the current primary source for region, effective date, numerator/denominator, count floor and enforcement criteria before using this threshold."
+    },
+    {
+      "name": "Mastercard ECP - High Excessive Chargeback Merchant (HECM)",
+      "value": null,
+      "effective_date": null,
+      "region": "global",
+      "source": "https://www.mastercard.com/global/en/business/support/rules.html",
+      "last_verified": null,
+      "stale_after_days": 90,
+      "verification_status": "unverified",
+      "note": "Read the current primary source for region, effective date, numerator/denominator, count floor and enforcement criteria before using this threshold."
+    },
+    {
+      "name": "Mastercard ECP fine range",
+      "value": null,
+      "effective_date": null,
+      "region": "global",
+      "source": "https://www.mastercard.com/global/en/business/support/rules.html",
+      "last_verified": null,
+      "stale_after_days": 90,
+      "verification_status": "unverified",
+      "note": "Read the current primary source for region, effective date, numerator/denominator, count floor and enforcement criteria before using this threshold."
+    }
+  ]
+}

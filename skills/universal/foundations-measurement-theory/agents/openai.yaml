@@ -1,0 +1,4 @@
+interface:
+  display_name: "Measurement Theory Foundations"
+  short_description: "Audits benchmark validity, score reliability, and LLM-judge agreement"
+  default_prompt: "Use $foundations-measurement-theory to audit whether scores, benchmarks, LLM judges, or surveys measure what we think: saturated benchmarks, unreliable scores, untrustworthy judge agreement, or scale validity."

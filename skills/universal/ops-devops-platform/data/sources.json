@@ -1,0 +1,777 @@
+{
+  "metadata": {
+    "title": "DevOps Platform - Sources",
+    "description": "Primary docs and release sources for Kubernetes operations, IaC, GitOps, CI/CD, observability, incident response, platform engineering, and cloud-native ops",
+    "last_updated": "2026-08-24",
+    "skill": "ops-devops-platform"
+  },
+  "kubernetes": [
+    {
+      "name": "Kubernetes Documentation",
+      "url": "https://kubernetes.io/docs/",
+      "description": "Canonical Kubernetes docs for workloads, networking, storage, security, and cluster operations",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kubernetes Releases",
+      "url": "https://kubernetes.io/releases/",
+      "description": "Release history and supported version policy entry point",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kubernetes Version Skew Policy",
+      "url": "https://kubernetes.io/releases/version-skew-policy/",
+      "description": "Supported version skew between kube-apiserver, kubelet, and related components",
+      "kind": "reference",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kubernetes API Reference",
+      "url": "https://kubernetes.io/docs/reference/kubernetes-api/",
+      "description": "API reference entry point; select the target cluster version before using version-specific fields.",
+      "kind": "reference",
+      "add_as_web_search": true
+    },
+    {
+      "name": "kubectl Reference",
+      "url": "https://kubernetes.io/docs/reference/kubectl/",
+      "description": "kubectl command reference",
+      "kind": "reference",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Helm Documentation",
+      "url": "https://helm.sh/docs/",
+      "description": "Helm charts, templating, and best practices",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kustomize Documentation",
+      "url": "https://kustomize.io/",
+      "description": "Kustomize overlays and configuration management",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Gateway API Documentation",
+      "url": "https://gateway-api.sigs.k8s.io/",
+      "description": "Gateway API concepts, guides, and reference documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Gateway API Releases",
+      "url": "https://github.com/kubernetes-sigs/gateway-api/releases",
+      "description": "Gateway API release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    }
+  ],
+  "iac": [
+    {
+      "name": "Terraform Documentation",
+      "url": "https://developer.hashicorp.com/terraform",
+      "description": "Terraform core concepts, workflows, and language reference",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Terraform Releases",
+      "url": "https://github.com/hashicorp/terraform/releases",
+      "description": "Terraform release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenTofu Documentation",
+      "url": "https://opentofu.org/docs/",
+      "description": "OpenTofu language, state, and provider documentation. Compare required features and licensing with Terraform using the target release docs before selecting a tool.",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenTofu Releases",
+      "url": "https://github.com/opentofu/opentofu/releases",
+      "description": "OpenTofu release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Pulumi Documentation",
+      "url": "https://www.pulumi.com/docs/",
+      "description": "Programming-first IaC with TypeScript, Python, Go, C#, and Java",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Pulumi Releases",
+      "url": "https://github.com/pulumi/pulumi/releases",
+      "description": "Pulumi release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AWS CloudFormation Documentation",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html",
+      "description": "CloudFormation templates, stacks, and deployment workflows",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Bicep Documentation",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/",
+      "description": "Azure Bicep authoring and deployment guidance",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AWS CDK Documentation",
+      "url": "https://docs.aws.amazon.com/cdk/",
+      "description": "AWS CDK concepts and usage",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AWS CDK Releases",
+      "url": "https://github.com/aws/aws-cdk/releases",
+      "description": "AWS CDK release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Terragrunt Documentation",
+      "url": "https://terragrunt.gruntwork.io/docs/",
+      "description": "Terragrunt workflows for large Terraform/OpenTofu estates",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Terragrunt Releases",
+      "url": "https://github.com/gruntwork-io/terragrunt/releases",
+      "description": "Terragrunt release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Brikman, Terraform: Up & Running (3rd ed., 2022)",
+      "url": "https://www.terraformupandrunning.com/",
+      "description": "Ch3 state isolation via file layout vs workspaces and component splitting; Ch6 plaintext secrets in state and plan files; Ch9 testing rungs (static analysis, plan testing, unit/apply, e2e). Tool-comparison tables in Ch9 are dated Feb 2022 and are not carried into this skill.",
+      "kind": "reference",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Morris, Infrastructure as Code (2nd ed., 2020)",
+      "url": "https://infrastructure-as-code.com/book/",
+      "description": "Ch5 stack sizing taxonomy and blast radius (pp.56-63); Ch8 progressive testing, infrastructure test diamond, Swiss cheese model (pp.110,115-119); Ch12 apply-on-change antipattern (pp.192-193); Ch20 automation lag and continuous apply (pp.349-351).",
+      "kind": "reference",
+      "add_as_web_search": false
+    }
+  ],
+  "cloud_architecture_frameworks": [
+    {
+      "name": "AWS Well-Architected Framework",
+      "url": "https://aws.amazon.com/architecture/well-architected/",
+      "description": "Security, reliability, performance efficiency, cost optimization, and sustainability guidance",
+      "kind": "guide",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GCP Architecture Framework",
+      "url": "https://cloud.google.com/architecture/framework",
+      "description": "Google Cloud architecture best practices",
+      "kind": "guide",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Well-Architected Framework",
+      "url": "https://learn.microsoft.com/en-us/azure/well-architected/",
+      "description": "Azure architecture best practices",
+      "kind": "guide",
+      "add_as_web_search": true
+    },
+    {
+      "name": "AWS Lambda Developer Guide",
+      "url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html",
+      "description": "AWS Lambda runtime and deployment guidance",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Cloud Run Documentation",
+      "url": "https://cloud.google.com/run/docs",
+      "description": "Google Cloud Run concepts and deployment guidance",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Azure Functions Documentation",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-functions/",
+      "description": "Azure Functions runtime and deployment guidance",
+      "kind": "docs",
+      "add_as_web_search": true
+    }
+  ],
+  "containers_and_artifacts": [
+    {
+      "name": "Docker Engine Release Notes",
+      "url": "https://docs.docker.com/engine/release-notes/",
+      "description": "Docker Engine release notes with breaking changes and security fixes",
+      "kind": "changelog",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OCI Image Specification",
+      "url": "https://github.com/opencontainers/image-spec",
+      "description": "OCI image format specification",
+      "kind": "reference",
+      "add_as_web_search": true
+    }
+  ],
+  "gitops_and_delivery": [
+    {
+      "name": "Argo CD Documentation",
+      "url": "https://argo-cd.readthedocs.io/en/stable/",
+      "description": "Argo CD docs for applications, sync, RBAC, and multi-environment patterns",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Argo CD Releases",
+      "url": "https://github.com/argoproj/argo-cd/releases",
+      "description": "Argo CD release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Flux Documentation",
+      "url": "https://fluxcd.io/flux/",
+      "description": "Flux GitOps documentation and guides",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Flux Releases",
+      "url": "https://github.com/fluxcd/flux2/releases",
+      "description": "Flux release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Codefresh Documentation",
+      "url": "https://codefresh.io/docs/docs/",
+      "description": "Codefresh docs, including GitOps and delivery platform guidance",
+      "kind": "docs",
+      "add_as_web_search": true
+    }
+  ],
+  "cicd": [
+    {
+      "name": "GitHub Actions Documentation",
+      "url": "https://docs.github.com/en/actions",
+      "description": "Workflows, environments, secrets, and deployment protection rules",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitHub Actions OIDC",
+      "url": "https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect",
+      "description": "OIDC and workload identity guidance for GitHub Actions deployments",
+      "kind": "guide",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GitLab CI/CD Documentation",
+      "url": "https://docs.gitlab.com/ee/ci/",
+      "description": "GitLab pipelines, runners, environments, and security scanning",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Jenkins Documentation",
+      "url": "https://www.jenkins.io/doc/",
+      "description": "Jenkins pipeline and plugin documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Jenkins Changelog",
+      "url": "https://www.jenkins.io/changelog/",
+      "description": "Jenkins changelog",
+      "kind": "changelog",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Tekton Documentation",
+      "url": "https://tekton.dev/docs/",
+      "description": "Tekton pipeline and supply-chain documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Tekton Pipeline Releases",
+      "url": "https://github.com/tektoncd/pipeline/releases",
+      "description": "Tekton Pipeline release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Dagger Documentation",
+      "url": "https://docs.dagger.io/",
+      "description": "Dagger pipeline engine documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Dagger Releases",
+      "url": "https://github.com/dagger/dagger/releases",
+      "description": "Dagger release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    }
+  ],
+  "observability": [
+    {
+      "name": "OpenTelemetry Documentation",
+      "url": "https://opentelemetry.io/docs/",
+      "description": "Vendor-neutral observability framework for traces, metrics, and logs",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Prometheus Documentation",
+      "url": "https://prometheus.io/docs/",
+      "description": "Prometheus metrics collection and alerting",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Prometheus Releases",
+      "url": "https://github.com/prometheus/prometheus/releases",
+      "description": "Prometheus release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Grafana Documentation",
+      "url": "https://grafana.com/docs/",
+      "description": "Grafana dashboards and alerting",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Grafana Releases",
+      "url": "https://github.com/grafana/grafana/releases",
+      "description": "Grafana release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Datadog Documentation",
+      "url": "https://docs.datadoghq.com/",
+      "description": "Datadog observability and monitoring documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Jaeger Documentation",
+      "url": "https://www.jaegertracing.io/docs/",
+      "description": "Jaeger distributed tracing documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Jaeger Releases",
+      "url": "https://github.com/jaegertracing/jaeger/releases",
+      "description": "Jaeger release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Cilium Documentation",
+      "url": "https://docs.cilium.io/en/stable/",
+      "description": "eBPF-based networking, security, and observability for Kubernetes",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Cilium Releases",
+      "url": "https://github.com/cilium/cilium/releases",
+      "description": "Cilium release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Tetragon Documentation",
+      "url": "https://tetragon.io/docs/",
+      "description": "eBPF-based security observability and runtime enforcement",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Tetragon Releases",
+      "url": "https://github.com/cilium/tetragon/releases",
+      "description": "Tetragon release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    }
+  ],
+  "streaming": [
+    {
+      "name": "Apache Kafka Documentation",
+      "url": "https://kafka.apache.org/documentation/",
+      "description": "Apache Kafka documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Apache Kafka Downloads and Releases",
+      "url": "https://kafka.apache.org/downloads",
+      "description": "Kafka release distribution page",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Confluent Platform Documentation",
+      "url": "https://docs.confluent.io/",
+      "description": "Confluent Platform documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Confluent Platform Release Notes",
+      "url": "https://docs.confluent.io/platform/current/release-notes/index.html",
+      "description": "Confluent Platform release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Strimzi Documentation",
+      "url": "https://strimzi.io/documentation/",
+      "description": "Strimzi operator documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Strimzi Releases",
+      "url": "https://github.com/strimzi/strimzi-kafka-operator/releases",
+      "description": "Strimzi Kafka Operator release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    }
+  ],
+  "sre_and_incidents": [
+    {
+      "name": "Google SRE Books",
+      "url": "https://sre.google/books/",
+      "description": "SRE fundamentals, SLOs, alerting, incident response, and postmortems",
+      "kind": "guide",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Jira Service Management Incident Management",
+      "url": "https://www.atlassian.com/software/jira/service-management/features/incident-management",
+      "description": "Atlassian incident management product overview and capability map",
+      "kind": "guide",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Opsgenie End of Support FAQ",
+      "url": "https://support.atlassian.com/opsgenie/docs/opsgenie-end-of-support-faq/",
+      "description": "Official Atlassian guidance on Opsgenie end of support and migration paths",
+      "kind": "guide",
+      "add_as_web_search": true,
+      "optional": true
+    },
+    {
+      "name": "Beyer et al., Site Reliability Engineering (O'Reilly, 2016)",
+      "url": "https://sre.google/sre-book/table-of-contents/",
+      "description": "Ch27 'Reliable Product Launches at Scale' - Launch Coordination Engineering, and the checklist-curation rule that every item's importance be substantiated by a previous launch disaster.",
+      "kind": "reference",
+      "add_as_web_search": false
+    }
+  ],
+  "security_and_supply_chain": [
+    {
+      "name": "NIST SP 800-218 (SSDF)",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-218/final",
+      "description": "Secure Software Development Framework",
+      "kind": "spec",
+      "add_as_web_search": true
+    },
+    {
+      "name": "SLSA Specification",
+      "url": "https://slsa.dev/spec/",
+      "description": "Select an approved specification and track; assess the builder against its requirements rather than inferring a level from tooling.",
+      "kind": "spec",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Sigstore",
+      "url": "https://www.sigstore.dev/",
+      "description": "Artifact signing and verification project",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "cosign",
+      "url": "https://github.com/sigstore/cosign",
+      "description": "Sign and verify container images and other artifacts",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Syft",
+      "url": "https://github.com/anchore/syft",
+      "description": "Generate SBOMs for images and filesystems",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Grype",
+      "url": "https://github.com/anchore/grype",
+      "description": "Scan SBOMs and images for known vulnerabilities",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Trivy",
+      "url": "https://aquasecurity.github.io/trivy/",
+      "description": "Vulnerability and misconfiguration scanning for images, repos, and IaC",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Falco Documentation",
+      "url": "https://falco.org/docs/",
+      "description": "Falco runtime security documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Falco Releases",
+      "url": "https://github.com/falcosecurity/falco/releases",
+      "description": "Falco release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OWASP SAMM",
+      "url": "https://owasp.org/www-project-samm/",
+      "description": "OWASP Software Assurance Maturity Model",
+      "kind": "guide",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CIS Benchmarks",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "description": "Security configuration benchmarks for platforms and components",
+      "kind": "guide",
+      "add_as_web_search": true
+    }
+  ],
+  "policy_as_code": [
+    {
+      "name": "Open Policy Agent Documentation",
+      "url": "https://www.openpolicyagent.org/docs/latest/",
+      "description": "OPA and Rego documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Open Policy Agent Releases",
+      "url": "https://github.com/open-policy-agent/opa/releases",
+      "description": "OPA release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Gatekeeper Documentation",
+      "url": "https://open-policy-agent.github.io/gatekeeper/website/docs/",
+      "description": "Gatekeeper admission controller documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Gatekeeper Releases",
+      "url": "https://github.com/open-policy-agent/gatekeeper/releases",
+      "description": "Gatekeeper release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kyverno Documentation",
+      "url": "https://kyverno.io/docs/",
+      "description": "Kubernetes-native policy management and enforcement",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kyverno Releases",
+      "url": "https://github.com/kyverno/kyverno/releases",
+      "description": "Kyverno release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    }
+  ],
+  "platform_engineering": [
+    {
+      "name": "Team Topologies",
+      "url": "https://teamtopologies.com/",
+      "description": "Org design patterns for platform teams, stream-aligned teams, and team interactions",
+      "kind": "guide",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CNCF Landscape",
+      "url": "https://landscape.cncf.io/",
+      "description": "Cloud-native ecosystem discovery map",
+      "kind": "guide",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Backstage Documentation",
+      "url": "https://backstage.io/docs/",
+      "description": "Developer portals, service catalogs, and plugins. Check integration and migration requirements, then measure adoption in the target organization.",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Backstage Releases",
+      "url": "https://github.com/backstage/backstage/releases",
+      "description": "Backstage release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Port Documentation",
+      "url": "https://docs.port.io/",
+      "description": "Port platform engineering and internal developer portal documentation",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kratix Documentation",
+      "url": "https://docs.kratix.io/",
+      "description": "Kratix documentation for GitOps-native platform control planes",
+      "kind": "docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Kratix Releases",
+      "url": "https://github.com/syntasso/kratix/releases",
+      "description": "Kratix release notes",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Skelton & Pais, Team Topologies (2nd ed., 2025)",
+      "url": "https://teamtopologies.com/book",
+      "description": "Weis four-cluster cognitive-load model (20+ drivers), the Teamperature assessment instrument, the river-vs-bucket framing of load, and the Creditas case on leadership cognitive load rising during transformation.",
+      "kind": "reference",
+      "add_as_web_search": false
+    }
+  ],
+  "finops_and_cost": [
+    {
+      "name": "FinOps Foundation Framework",
+      "url": "https://www.finops.org/framework/",
+      "description": "FinOps practices for cloud cost governance and accountability",
+      "kind": "guide",
+      "add_as_web_search": true
+    }
+  ],
+  "tools": [
+    {
+      "name": "k9s",
+      "url": "https://github.com/derailed/k9s",
+      "description": "Terminal UI for Kubernetes cluster interaction",
+      "kind": "release",
+      "add_as_web_search": true
+    },
+    {
+      "name": "stern",
+      "url": "https://github.com/stern/stern",
+      "description": "Multi-pod tailing for Kubernetes logs",
+      "kind": "release",
+      "add_as_web_search": true
+    }
+  ],
+  "aiops": [
+    {
+      "name": "PagerDuty AIOps",
+      "url": "https://support.pagerduty.com/docs/aiops",
+      "description": "PagerDuty event intelligence and incident workflow guidance",
+      "kind": "docs",
+      "add_as_web_search": true
+    }
+  ],
+  "sota_2026": {
+    "metadata": {
+      "skill": "ops-devops-platform",
+      "description": "Primary standards-body and tool documentation added in May-2026 SOTA remediation",
+      "last_updated": "2026-07-11",
+      "title": "DevOps & Platform Engineering - SOTA 2026 Sources"
+    },
+    "sources": [
+      {
+        "name": "SLSA Specification",
+        "url": "https://slsa.dev/spec/",
+        "type": "standard",
+        "notes": "Approved SLSA tracks and requirements; select the specification version used for the assessment.",
+        "accessed": "2026-05-17"
+      },
+      {
+        "name": "Sigstore",
+        "url": "https://www.sigstore.dev/",
+        "type": "docs",
+        "notes": "Project home for cosign, Fulcio, and Rekor \u2014 keyless artifact signing infrastructure.",
+        "accessed": "2026-05-17"
+      },
+      {
+        "name": "DORA 2025 Year in Review",
+        "url": "https://dora.dev/insights/dora-2025-year-in-review/",
+        "type": "report",
+        "notes": "2025 DORA report retired four-tier clusters (Elite/High/Medium/Low) in favour of seven team archetypes, and expanded four core metrics to five (added rework rate). Central AI finding: AI amplifies existing strengths and weaknesses.",
+        "accessed": "2026-07-11"
+      },
+      {
+        "name": "DORA Research Publications Index",
+        "url": "https://dora.dev/research/publications/",
+        "type": "index",
+        "notes": "Canonical list of DORA reports; use to confirm which report (2025 core, 2025 AI Capabilities Model, or 2026 ROI report) a claim belongs to before citing.",
+        "accessed": "2026-07-11"
+      },
+      {
+        "name": "DORA ROI of AI-assisted Software Development",
+        "url": "https://dora.dev/ai/roi/report/",
+        "type": "report",
+        "notes": "AI adoption ROI and delivery stability report; read its publication details and methodology before attributing a finding.",
+        "accessed": "2026-07-11"
+      },
+      {
+        "name": "CNCF Platform Engineering Maturity Model",
+        "url": "https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/",
+        "type": "standard",
+        "notes": "Five aspects (Investment, Adoption, Interfaces, Operations, Measurement) x four levels (Provisional, Operationalized, Scalable, Optimizing). Vendor-neutral CNCF TAG App Delivery whitepaper.",
+        "accessed": "2026-05-17"
+      },
+      {
+        "name": "Kyverno Releases",
+        "url": "https://github.com/kyverno/kyverno/releases",
+        "type": "release",
+        "notes": "Read the deployed and target release notes for policy API compatibility and deprecations before proposing migration.",
+        "accessed": "2026-05-17"
+      },
+      {
+        "name": "SPIFFE Concepts",
+        "url": "https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/",
+        "type": "docs",
+        "notes": "SVIDs, trust domains, and federation concepts for assessing workload identity requirements.",
+        "accessed": "2026-05-17"
+      }
+    ]
+  }
+}

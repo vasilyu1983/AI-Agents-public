@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Surfaces"
+  short_description: "Design remote sessions and terminal surfaces for coding agents"
+  default_prompt: "Use $ai-coding-agents-surfaces to design remote sessions, bridge transports, reconnect and permission bridging, or terminal REPL, prompt input, status-line and background-task navigation for a coding-agent runtime."

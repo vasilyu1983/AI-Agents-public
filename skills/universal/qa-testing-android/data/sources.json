@@ -1,0 +1,287 @@
+{
+  "metadata": {
+    "skill": "qa-testing-android",
+    "updated": "2026-09-28",
+    "version": "1.6",
+    "total_sources": 36,
+    "description": "Primary references for Android testing with Espresso, UI Automator, Compose Testing, screenshot tests, and adaptive UI validation.",
+    "title": "QA Testing Android - Sources",
+    "last_updated": "2026-09-28",
+    "note": "Read the Google Play target-API requirements for the app form factor, submission type, deadline and extension status before choosing release coverage; OS release and target requirements differ."
+  },
+  "categories": {
+    "google_official_docs": [
+      {
+        "name": "Android Testing Documentation",
+        "url": "https://developer.android.com/training/testing",
+        "description": "Official Android testing fundamentals and best practices.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Espresso Documentation",
+        "url": "https://developer.android.com/training/testing/espresso",
+        "description": "Official Espresso UI testing framework docs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Espresso Cheat Sheet",
+        "url": "https://developer.android.com/training/testing/espresso/cheat-sheet",
+        "description": "Quick reference for Espresso matchers, actions, and assertions.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "UI Automator Documentation",
+        "url": "https://developer.android.com/training/testing/other-components/ui-automator",
+        "description": "Modern UI Automator guidance for system UI, cross-app flows, and benchmarking drivers.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "UI Automator Release Notes",
+        "url": "https://developer.android.com/jetpack/androidx/releases/test-uiautomator",
+        "description": "Current UI Automator release status and API changes.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Compose Testing Documentation",
+        "url": "https://developer.android.com/develop/ui/compose/testing",
+        "description": "Official Jetpack Compose testing guide.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Testing Codelab",
+        "url": "https://developer.android.com/codelabs/jetpack-compose-testing",
+        "description": "Hands-on tutorial for Compose UI testing.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Android Test Orchestrator",
+        "url": "https://developer.android.com/training/testing/instrumented-tests/androidx-test-libraries/runner",
+        "description": "Test isolation and crash recovery for instrumented tests.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Build-Managed Devices",
+        "url": "https://developer.android.com/studio/test/managed-devices",
+        "description": "Provision and run emulator-based tests via Gradle for CI and sharding.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Screenshot Testing",
+        "url": "https://developer.android.com/training/testing/ui-tests/screenshot",
+        "description": "Official overview of screenshot testing strategies on Android.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Preview Screenshot Testing",
+        "url": "https://developer.android.com/studio/preview/compose-screenshot-testing",
+        "description": "Official setup and workflow for Compose Preview screenshot tests.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Test Different Screen Sizes",
+        "url": "https://developer.android.com/training/testing/different-screens",
+        "description": "Official guidance for validating apps across screen sizes and form factors.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Libraries and Tools to Test Different Screen Sizes",
+        "url": "https://developer.android.com/training/testing/different-screens/tools",
+        "description": "Espresso Device API, DeviceConfigurationOverride, and related adaptive UI tooling.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Espresso Device API",
+        "url": "https://developer.android.com/studio/test/espresso-api",
+        "description": "Project setup and APIs for screen-size and device-state simulation in tests.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Accessibility Checking",
+        "url": "https://developer.android.com/training/testing/espresso/accessibility-checking",
+        "description": "Enable and configure accessibility checks in Espresso tests.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Macrobenchmark",
+        "url": "https://developer.android.com/studio/profile/macrobenchmark",
+        "description": "Performance testing for startup and critical user journeys.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Baseline Profiles",
+        "url": "https://developer.android.com/topic/performance/baselineprofiles",
+        "description": "Improve runtime performance and startup with baseline profiles.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Android Gradle Plugin Release Notes",
+        "url": "https://developer.android.com/build/releases/about-agp",
+        "description": "Current AGP stable release and migration guidance; check it for the current stable series.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Android 17 Release Notes",
+        "url": "https://developer.android.com/about/versions/17/release-notes",
+        "description": "Android release notes and behavior changes; verify supported SDK levels in the test tools independently of the OS release.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google Play Target API Level Requirement",
+        "url": "https://developer.android.com/google/play/requirements/target-sdk",
+        "description": "Lookup for applicable form-factor requirements, new-submission vs existing-app availability rules, deadlines and extensions.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Robolectric",
+        "url": "https://robolectric.org",
+        "description": "JVM Android unit testing; verify SDK support, required JDK and resource mode against the installed release.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "community_resources": [
+      {
+        "name": "Test Automation University: Espresso",
+        "url": "https://testautomationu.applitools.com/espresso-mobile-testing-tutorial/",
+        "description": "Free Espresso testing course with hands-on exercises.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "BrowserStack Espresso Guide",
+        "url": "https://www.browserstack.com/guide/espresso-android-testing",
+        "description": "Vendor tutorial focused on Espresso basics and real-device testing tradeoffs.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "modern_tooling": [
+      {
+        "name": "android-junit-framework Gradle Plugin",
+        "url": "https://github.com/mannodermaus/android-junit-framework",
+        "description": "JUnit Jupiter on Android via plugin ID de.mannodermaus.android-junit; check its AGP/JUnit/device compatibility and instrumentation setup.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "MockK",
+        "url": "https://mockk.io",
+        "description": "Kotlin-first mocking library supporting object singletons, suspend functions, final classes, and extension functions.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Turbine",
+        "url": "https://github.com/cashapp/turbine",
+        "description": "Cash App testing library for Kotlin Flow and StateFlow: deterministic emission assertions with turbineScope and awaitItem.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Maestro",
+        "url": "https://maestro.dev",
+        "description": "Declarative YAML E2E testing for Android, iOS and web; verify CLI commands and cloud device/API coverage in upstream documentation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Roborazzi",
+        "url": "https://github.com/takahirom/roborazzi",
+        "description": "JVM screenshots via Robolectric; verify AGP/Gradle and renderer compatibility against project requirements.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Compose Test v2 Migration",
+        "url": "https://developer.android.com/develop/ui/compose/testing/migrate-v2",
+        "description": "Environment import mappings, dispatchers, input mode and shared-clock synchronization.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Compose Accessibility Testing",
+        "url": "https://developer.android.com/develop/ui/compose/accessibility/testing",
+        "description": "Accessibility checks trigger on actions or explicit tryPerformAccessibilityChecks.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Espresso Idling Resource Lifecycle",
+        "url": "https://developer.android.com/training/testing/espresso/idling-resource",
+        "description": "Registration and idle-transition callback lifecycle.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Robolectric Release Notes",
+        "url": "https://github.com/robolectric/robolectric/releases",
+        "description": "SDK/JDK compatibility and breaking boundaries.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "MockK Release Notes",
+        "url": "https://github.com/mockk/mockk/releases",
+        "description": "Resolve approved matching JVM/Android artifacts.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Mockito 5 Migration",
+        "url": "https://github.com/mockito/mockito/releases/tag/v5.0.0",
+        "description": "JVM inline mock-maker boundary and its original Android exception.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Mockito Instrumentation and Android Support",
+        "url": "https://raw.githubusercontent.com/mockito/mockito/main/mockito-core/src/main/java/org/mockito/Mockito.java",
+        "description": "JDK agent setup and release-specific mockito-android runtime requirements.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      },
+      {
+        "name": "Gradle CLI",
+        "url": "https://docs.gradle.org/current/userguide/command_line_interface.html",
+        "description": "dry-run disables task actions; it does not execute Robolectric tests.",
+        "add_as_web_search": true,
+        "optional": false,
+        "last_verified": "2026-09-28"
+      }
+    ]
+  }
+}

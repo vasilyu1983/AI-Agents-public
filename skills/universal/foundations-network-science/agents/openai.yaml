@@ -1,0 +1,4 @@
+interface:
+  display_name: "Network Science Foundations"
+  short_description: "Applies network science to graph systems"
+  default_prompt: "Use $foundations-network-science for centrality, influence seeding, communities, contagion vs homophily, GNN failures, seeding a referral campaign, or finding critical nodes in a dependency graph."

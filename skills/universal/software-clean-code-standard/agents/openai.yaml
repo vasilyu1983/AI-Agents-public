@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clean Code"
+  short_description: "Defines CC-* rules, waivers, lint mappings, and maintainability trajectories"
+  default_prompt: "Use $software-clean-code-standard to define CC-* code rules and waivers, map lint findings to rule IDs, or track complexity mass, erosion, and verbosity across changes."

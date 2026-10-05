@@ -1,0 +1,222 @@
+{
+  "metadata": {
+    "title": "ai-bot-builder - Sources",
+    "description": "Official and adjacent sources for building production AI bots with pure Python frameworks.",
+    "last_updated": "2026-07-11",
+    "updated": "2026-07-11",
+    "skill": "ai-bot-builder",
+    "total_sources": 34
+  },
+  "official_sources": [
+    {
+      "name": "LangGraph GitHub",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "description": "Official LangGraph repository for stateful agent and bot workflows.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LangGraph Docs",
+      "url": "https://docs.langchain.com/oss/python/langgraph/",
+      "description": "Official LangGraph documentation for graph design, state, persistence, and runtime.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LangSmith Docs",
+      "url": "https://docs.langchain.com/langsmith/",
+      "description": "Tracing, debugging, and evaluation for LangGraph-based bot systems.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Pipecat GitHub",
+      "url": "https://github.com/pipecat-ai/pipecat",
+      "description": "Open-source framework for voice and multimodal conversational AI with composable pipeline processors.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Pipecat Docs",
+      "url": "https://docs.pipecat.ai/",
+      "description": "Official Pipecat documentation for pipeline design, transport layers, and processor patterns.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LiveKit Agents GitHub",
+      "url": "https://github.com/livekit/agents",
+      "description": "LiveKit's agent framework for real-time voice and multimodal AI applications.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LiveKit Agents Docs",
+      "url": "https://docs.livekit.io/agents/",
+      "description": "Official LiveKit Agents documentation for voice agent sessions, plugins, and deployment.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Agent SDK Docs",
+      "url": "https://code.claude.com/docs/en/agent-sdk/overview",
+      "description": "Anthropic's Claude Agent SDK for building tool-using agents and bots with Claude models. Canonical URL verified 2026-06-09 (old docs.claude.com path redirects here via platform.claude.com).",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Agent SDK Python",
+      "url": "https://github.com/anthropics/claude-agent-sdk-python",
+      "description": "Python reference implementation of the Claude Agent SDK.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Model Context Protocol",
+      "url": "https://modelcontextprotocol.io/",
+      "description": "MCP spec and reference servers for typed tool contracts between bots and external systems.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Pydantic AI Docs",
+      "url": "https://ai.pydantic.dev/",
+      "description": "Pydantic AI documentation for Agent capabilities, migration guides, and the installed release. Check the current extension-point APIs before upgrading.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LangGraph Releases",
+      "url": "https://github.com/langchain-ai/langgraph/releases",
+      "description": "LangGraph release history for the Python compatibility range and checkpoint APIs of the release you plan to pin.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Agents SDK — Handoffs",
+      "url": "https://openai.github.io/openai-agents-python/handoffs/",
+      "description": "OpenAI Agents SDK handoffs vs agents-as-tools guidance for multi-agent routing. Default to agents-as-tools; use handoffs only for full control transfer.",
+      "add_as_web_search": true
+    }
+  ],
+  "memory_vendors": [
+    {
+      "name": "Mem0 Docs",
+      "url": "https://docs.mem0.ai/",
+      "description": "Managed memory layer — best for P2 (structured) + P6 (episodic-semantic) in support bots.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Zep Docs",
+      "url": "https://help.getzep.com/",
+      "description": "Temporal knowledge-graph memory — best for P4 (sales bots, customer success).",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Graphiti GitHub",
+      "url": "https://github.com/getzep/graphiti",
+      "description": "Open-source temporal knowledge-graph library underlying Zep.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Cognee Docs",
+      "url": "https://docs.cognee.ai/",
+      "description": "Poly-store memory with four-verb lifecycle — best for P5 + P7 (knowledge bots).",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Letta Docs",
+      "url": "https://docs.letta.com/",
+      "description": "OS-style context management with self-editing memory — best for P3 (long-running agents).",
+      "add_as_web_search": true
+    },
+    {
+      "name": "LangGraph Store",
+      "url": "https://langchain-ai.github.io/langgraph/concepts/persistence/#memory-store",
+      "description": "Application-owned namespaced key-value memory for P2 patterns inside LangGraph.",
+      "add_as_web_search": true
+    }
+  ],
+  "adjacent_references": [
+    {
+      "name": "Zendesk API",
+      "url": "https://developer.zendesk.com/api-reference/",
+      "description": "Zendesk REST API for support bot ticket integration.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Intercom API",
+      "url": "https://developers.intercom.com/docs",
+      "description": "Intercom API for conversational support bot integration.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "HubSpot API",
+      "url": "https://developers.hubspot.com/docs/api/overview",
+      "description": "HubSpot CRM API for sales bot lead and deal management.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Salesforce API",
+      "url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/",
+      "description": "Salesforce REST API for CRM-integrated sales bots.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "WhatsApp Business API",
+      "url": "https://developers.facebook.com/docs/whatsapp",
+      "description": "Meta WhatsApp Business API for bot channel integration.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Twilio Messaging API",
+      "url": "https://www.twilio.com/docs/messaging",
+      "description": "Twilio SMS and messaging API for text-based bot channels.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Promptfoo",
+      "url": "https://www.promptfoo.dev/docs/intro",
+      "description": "Open-source LLM evaluation framework for bot conversation testing and red-teaming.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Google Conversation Design Guidelines",
+      "url": "https://developers.google.com/assistant/conversation-design",
+      "description": "Google's conversation design best practices for conversational AI.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Anthropic Cookbook — Verify with Outcome Grader",
+      "url": "https://platform.claude.com/cookbook/managed-agents-cma-verify-with-outcome-grader",
+      "description": "Anthropic pattern: isolated grader agent scores a draft against an explicit rubric and triggers a capped revision loop. Runtime outcome guard for load-bearing answers. Evidence grade C (vendor cookbook).",
+      "add_as_web_search": true
+    }
+  ],
+  "security_sources": [
+    {
+      "name": "OWASP Top 10 for LLM Applications 2025",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "description": "Canonical LLM risk taxonomy — LLM01:2025 Prompt Injection is the #1 class.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Anthropic — Mitigate Jailbreaks and Prompt Injection",
+      "url": "https://docs.claude.com/en/docs/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks",
+      "description": "Anthropic's official guidance on injection defense patterns, spotlighting, and input/output filters.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "NVIDIA garak",
+      "url": "https://github.com/NVIDIA/garak",
+      "description": "Open-source LLM vulnerability scanner for injection, jailbreak, and data-exfiltration tests.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Meta Prompt Guard 2",
+      "url": "https://huggingface.co/meta-llama/Prompt-Guard-2-86M",
+      "description": "Small classifier for detecting direct and indirect prompt-injection attempts at the input edge.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "GLiGuard (arXiv 2605.07982)",
+      "url": "https://arxiv.org/abs/2605.07982",
+      "description": "Lightweight generalist guardrail classifier for prompt-injection / jailbreak detection. Evidence grade C (preprint). Thank you to arXiv for use of its open access interoperability.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "FlexGuard (arXiv 2602.23636)",
+      "url": "https://arxiv.org/abs/2602.23636",
+      "description": "Adaptive guardrail with tunable strictness for input/output safety filtering. Evidence grade C (preprint). Thank you to arXiv for use of its open access interoperability.",
+      "add_as_web_search": false
+    }
+  ]
+}

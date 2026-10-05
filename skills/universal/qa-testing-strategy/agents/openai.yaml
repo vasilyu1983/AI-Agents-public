@@ -1,0 +1,4 @@
+interface:
+  display_name: "Testing Strategy"
+  short_description: "Designs risk-based test strategy for software delivery"
+  default_prompt: "Use $qa-testing-strategy to design a risk-based test strategy for software delivery. Use when defining coverage, setting CI gates, managing flaky tests, choosing test layers, or establishing release criteria."

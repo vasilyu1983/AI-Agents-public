@@ -1,0 +1,4 @@
+interface:
+  display_name: "Refactoring QA"
+  short_description: "Refactors code while preserving behavior"
+  default_prompt: "Use $qa-refactoring to refactor code while preserving behavior. Use when reducing technical debt, planning codemods, applying strangler migrations, or tightening CI guardrails around risky changes."

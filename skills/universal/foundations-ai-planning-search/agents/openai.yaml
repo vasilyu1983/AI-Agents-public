@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Planning Search Foundations"
+  short_description: "Applies planning/search theory (A*, CSP, STRIPS/PDDL, HTN) to agent design"
+  default_prompt: "Use $foundations-ai-planning-search to apply A*, CSP, MCTS, PDDL, or HTN planning theory to agents: ordering tool calls, enforcing preconditions before side effects, or validating a plan."

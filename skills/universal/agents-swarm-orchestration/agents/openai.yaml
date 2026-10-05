@@ -1,0 +1,4 @@
+interface:
+  display_name: "Swarm Orchestration"
+  short_description: "Coordinates Loop Engineering and multi-agent workflows"
+  default_prompt: "Use $agents-swarm-orchestration when running multi-agent waves across subagents, teams, and workflows: fanning out over a dependency graph, adding verifier or voting passes, or loop-until-dry Loop Engineering."

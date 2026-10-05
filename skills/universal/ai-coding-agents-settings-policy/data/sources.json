@@ -1,0 +1,99 @@
+{
+  "metadata": {
+    "skill": "ai-coding-agents-settings-policy",
+    "title": "AI Coding Agents Settings Policy - Sources",
+    "description": "Official documentation and implementation references for settings precedence, managed policy, schema validation, and safe runtime application",
+    "last_updated": "2026-09-11",
+    "updated": "2026-09-11",
+    "total_sources": 9,
+    "version": "1.2",
+    "validation_scope": "Durable rules only; look up keys, scopes, defaults, and limits in the listed vendor references before relying on them."
+  },
+  "categories": {
+    "official_documentation": [
+      {
+        "name": "Claude Code Documentation",
+        "url": "https://code.claude.com/docs/en",
+        "type": "documentation",
+        "relevance": "Primary product documentation for configuration and managed runtime behavior",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Claude Code Settings Reference",
+        "url": "https://code.claude.com/docs/en/settings",
+        "type": "reference",
+        "relevance": "Complete settings key listing with each key's Scope line. Use it to confirm the precedence order (managed > CLI flags > local > project > user), which lock class a key belongs to (managed-only, any-scope but enforced only from managed, any-scope where managed wins), update-control keys, and retention defaults and minimums.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "JSON Schema",
+        "url": "https://json-schema.org/",
+        "type": "specification",
+        "relevance": "Reference for machine-validated settings contracts and schema publication",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI Codex Configuration Reference",
+        "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+        "type": "reference",
+        "relevance": "Codex config key reference: approval and sandbox values, project-ignored keys, experimental context-management and memory settings with their plan requirements, and the skill catalog budget key with its default and explicit cap. Look up current values here before writing config.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "implementation_references": [
+      {
+        "name": "Claude Code GitHub Repository",
+        "url": "https://github.com/anthropics/claude-code",
+        "type": "repository",
+        "relevance": "Closed-source product page and issue tracker for Claude Code; not the implementation source \u2014 use code.claude.com/docs/en for authoritative behavior docs",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Codex CLI Repository",
+        "url": "https://github.com/openai/codex",
+        "type": "repository",
+        "relevance": "Cross-runtime comparison point for agent CLI configuration layers",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI Codex Config Layer Source",
+        "url": "https://github.com/openai/codex/blob/9f42c89c0112771dc29100a6f3fc904049b2655f/codex-rs/config/src/state.rs",
+        "type": "repository_source",
+        "relevance": "Pinned first-party source for config layer stack, managed requirements, loader overrides, disabled layers, and config debug metadata",
+        "update_frequency": "pinned",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAI: Running Codex safely at OpenAI",
+        "url": "https://openai.com/index/running-codex-safely/",
+        "type": "safety_post",
+        "relevance": "May 2026 first-party source for enterprise control surfaces, configuration management, sandboxing, and agent-aware telemetry",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic: Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "High-level reference for keeping policy and runtime control boundaries explicit",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

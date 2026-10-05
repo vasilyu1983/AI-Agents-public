@@ -1,0 +1,4 @@
+interface:
+  display_name: "Performance"
+  short_description: "Diagnoses slow services and regressions with profiling and tail-latency math."
+  default_prompt: "Use $software-performance to diagnose slow services and performance regressions through profiling, bottleneck isolation, and tail-latency math, or to judge whether an optimization or regression is real."

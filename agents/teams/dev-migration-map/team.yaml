@@ -1,0 +1,90 @@
+---
+name: dev-migration-map
+family: dev
+description: Migration planning team for repo, framework, and platform transitions.
+best_for:
+- Framework upgrades
+- Monolith decomposition or repo reorganization
+members:
+- dev-portfolio-mapper
+- dev-dependency-auditor
+- dev-migration-planner
+- ops-rollout-reviewer
+required_context:
+- Migration goal, timeline, and compatibility constraints
+optional_context:
+- docs/**/*.md
+- profiles/*.json
+- graphs/system-edges.json
+- graphs/code-graph.json
+concurrency_mode: staged
+synthesis_owner: dev-migration-planner
+owned_files:
+- none - read-only analysis team; the migration plan is returned as a report, not applied
+do_not_touch:
+- .archive/**
+- secrets, credentials, PII
+- lockfiles and generated build output
+- .git/**
+- CI configuration unless named in the prompt
+deliverable:
+  shape: Per-member work product plus a handoff note, then one synthesized delivery report
+  required_sections:
+  - What was done or found
+  - Files touched or artifacts produced
+  - Verification performed
+  - Open risks and next step
+  max_length: 2 pages / ~800 words per member; synthesis <= 1 page
+debate:
+  enabled: true
+  method: pre-mortem
+  mandatory_dissent: true
+  decision_masks:
+  - inversion
+  - second-order
+  - base-rate-mask
+  triggers:
+  - Sequencing and cutover choices
+  - Backward-compatibility or rollback tradeoffs
+  perspectives:
+  - architecture
+  - dependency
+  - testing
+  - rollout
+coordination:
+  mode: belief-driven
+  blind_first_round: true
+  belief_brief: true
+expansion_gate:
+  rule: evpi
+  evpi_threshold: medium
+  max_dynamic_members: 2
+  candidate_specialists:
+  - software-risk-reviewer
+  - qa-resilience-reviewer
+  - data-architect
+stopping_rule:
+  protocol: regret-min
+  reversibility: irreversible
+  max_regret_threshold: 0.05
+verification:
+  mode: heterogeneous
+  rule: a member other than the producer, with clean context, checks the verdict against the required_context before
+    release; self-verification does not count
+synthesis:
+  aggregation: mcda
+  weights_locked_before_dispatch: true
+  bias_audit_required: true
+  frame_symmetry: true
+  npv_check_for_deferrals: true
+verdict_options:
+- proceed
+- phased_rollback_plan
+- hold_for_evidence
+hold_policy:
+  required: deadline
+  default_deadline_days: 14
+  escalate_on_deadline: forced_decision
+trust:
+  default_tier: standard
+design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#dev-migration-map

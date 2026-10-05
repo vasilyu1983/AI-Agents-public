@@ -1,0 +1,1556 @@
+{
+  "metadata": {
+    "skill": "ai-context-layer",
+    "title": "AI Context Layer - Sources",
+    "description": "Primary-source catalog for April 2026 app context-layer architecture: operational truth, memory, retrieval, graph reasoning, grounding, context assembly, knowledge compilation (LLM Wiki pattern), and agent/app integration.",
+    "version": "1.8",
+    "last_updated": "2026-10-02",
+    "total_sources": 146
+  },
+  "categories": {
+    "platform_patterns": [
+      {
+        "name": "OpenAI - Migrate to Responses",
+        "url": "https://developers.openai.com/api/docs/guides/migrate-to-responses",
+        "type": "documentation",
+        "relevance": "Primary source for stateful context, tool orchestration, and the default OpenAI app runtime surface.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI - Retrieval",
+        "url": "https://developers.openai.com/api/docs/guides/retrieval",
+        "type": "documentation",
+        "relevance": "Primary source for retrieval patterns and hosted retrieval guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenAI - MCP",
+        "url": "https://developers.openai.com/api/docs/mcp",
+        "type": "documentation",
+        "relevance": "Primary source for tool-first and resource-based access over MCP.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic - Citations",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/citations",
+        "type": "documentation",
+        "relevance": "Primary source for evidence-bearing answers and citation-granularity behavior.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic - Remote MCP Servers",
+        "url": "https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers",
+        "type": "documentation",
+        "relevance": "Primary source for live tool and resource integration in Claude-based stacks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Azure AI Search - RAG Overview",
+        "url": "https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview",
+        "type": "documentation",
+        "relevance": "Primary source for Microsoft's current retrieval architecture guidance.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Azure AI Search - Create Knowledge Base",
+        "url": "https://learn.microsoft.com/en-au/azure/search/agentic-retrieval-how-to-create-knowledge-base",
+        "type": "documentation",
+        "relevance": "Primary source for managed knowledge-base construction with agentic retrieval.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Cloud - Grounding with Vertex AI Search",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/grounding-with-vertex-ai-search",
+        "type": "documentation",
+        "relevance": "Primary source for Google-style grounding and retrieval separation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "MCP Specification",
+        "url": "https://modelcontextprotocol.io/specification",
+        "type": "specification",
+        "relevance": "Primary source for the MCP protocol that underpins tool-first and resource-based context delivery.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon Bedrock — Embeddings (Nova 2 Multimodal)",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/embeddings.html",
+        "type": "documentation",
+        "relevance": "Primary source for Amazon Nova 2 Multimodal Embeddings on Bedrock — the AWS-native default embedder for Bedrock Knowledge Bases as of 2026, superseding Titan Embeddings v2. Covers model IDs, supported modalities (text + image), dimension options, and API usage via InvokeModel.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Textract — Developer Guide",
+        "url": "https://docs.aws.amazon.com/textract/latest/dg/what-is.html",
+        "type": "documentation",
+        "relevance": "Primary source for AWS Textract: S3-event-triggered OCR pipeline handling handwriting, forms, and tables. Used as the AWS-native ingest adapter for regulator PDFs and scanned policy documents in RA11 and policy-and-compliance-docs.md. Pair with Lambda for S3-triggered async pipelines. Standalone Textract is preferred for standardized high-volume doc types; for mixed/variable corpora use Bedrock Data Automation (BDA) which uses Textract as its OCR layer.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "AWS Bedrock Data Automation (BDA) — Developer Guide",
+        "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/bda.html",
+        "type": "documentation",
+        "relevance": "Primary source for Bedrock Data Automation: AWS-recommended front door for intelligent document processing on mixed or variable document corpora. FM-based classify + extract pipeline (unified March 2026); Textract is the OCR layer inside BDA's 'Bedrock Pipeline' mode. Flat per-doc pricing. Output structured JSON feeds the clause-tree extractor in policy-and-compliance-docs.md. Use standalone Textract for standardized high-volume docs; use BDA for multi-type or unstructured layouts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon Kendra GenAI Index — Developer Guide",
+        "url": "https://docs.aws.amazon.com/kendra/latest/dg/kendra-genai-index.html",
+        "type": "documentation",
+        "relevance": "Primary source for Amazon Kendra GenAI Index: managed retriever with hybrid + semantic search and a built-in reranker. Index once, reuse across Bedrock Knowledge Bases and Amazon Q Business without dual-indexing. Alternative to self-managed OpenSearch Serverless in AWS Bedrock KB deployments at Tier 3+. Referenced in architectures-by-organization.md (T3 Bedrock KB section) and vendor-landscape.md.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "memory_and_context": [
+      {
+        "name": "Anthropic - Memory Tool",
+        "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool",
+        "type": "documentation",
+        "relevance": "Primary source for the Anthropic client-side filesystem-as-memory primitive (memory_20250818). Canonical shape for /memories directory, tool commands (view/create/str_replace/insert/delete/rename), path traversal security, and multi-session software development pattern. Verified May 2026.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic - Claude Opus 4.7 What's New",
+        "url": "https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7",
+        "type": "documentation",
+        "relevance": "Primary source for the Opus 4.7 tokenizer change (1.0–1.35× vs Opus 4.6), 1M context window, 128k output, task_budget advisory cap, xhigh effort level, and memory tool improvements. Superseded as the current flagship by Opus 4.8 (May 28 2026) and by the Claude Fable 5 / Claude Mythos 5 / Claude Sonnet 5 lineup (GA June 9–June 30 2026); token-budget and min-cacheable-prefix heuristics derived from any one of these models must be re-measured against whichever model is actually in production — the minimum cacheable prompt length alone ranges from 512 to 4,096 tokens across the current lineup. Verified July 2026.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic - Introducing Claude Fable 5 and Claude Mythos 5",
+        "url": "https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5",
+        "type": "documentation",
+        "relevance": "Primary source for the current (July 2026) Anthropic flagship lineup: Claude Fable 5 (GA June 9 2026, briefly export-restricted, restored worldwide July 1 2026) and Claude Mythos 5 (limited release via Project Glasswing). Both ship a 1M-token context window by default and up to 128k output tokens. Anchors current context-window and pricing figures cited elsewhere in this skill; re-verify before treating any specific number as durable, as this lineup has already superseded Opus 4.7/4.8 as the reference flagship within one quarter.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google Cloud - Agent Engine Memory Bank",
+        "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/memory-bank",
+        "type": "documentation",
+        "relevance": "Primary source for Memory Bank: exact-match scope dict, IAM conditions on scope, merge-on-write consolidation (created/updated/deleted), memory TTL, immutable revisions with rollback (default revision retention 365 days, verified 2026-10-02), async event processing; advises assuming some sensitive or personal information may still be stored.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Letta - Context Hierarchy",
+        "url": "https://docs.letta.com/guides/core-concepts/memory/context-hierarchy",
+        "type": "documentation",
+        "relevance": "Primary source for explicit context tiers and memory placement decisions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Letta - Memory Blocks",
+        "url": "https://docs.letta.com/guides/core-concepts/memory/memory-blocks",
+        "type": "documentation",
+        "relevance": "Primary source for always-visible structured memory blocks and the self-editing memory pattern.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mem0 - Memory Types",
+        "url": "https://docs.mem0.ai/core-concepts/memory-types",
+        "type": "documentation",
+        "relevance": "Primary source for episodic, semantic, and user-scoped memory distinctions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mem0 - Graph Memory",
+        "url": "https://docs.mem0.ai/platform/features/graph-memory",
+        "type": "documentation",
+        "relevance": "Primary source for graph-backed memory representations when relationships matter.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangChain - Context Engineering",
+        "url": "https://docs.langchain.com/oss/python/langchain/context-engineering",
+        "type": "documentation",
+        "relevance": "Primary source for explicit context design and separation of context surfaces.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangChain - Long-Term Memory",
+        "url": "https://docs.langchain.com/oss/python/langchain/long-term-memory",
+        "type": "documentation",
+        "relevance": "Primary source for namespaced long-term memory patterns in agent applications.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Zep - Graphiti",
+        "url": "https://help.getzep.com/graphiti",
+        "type": "documentation",
+        "relevance": "Primary source for temporal knowledge graphs with validity windows and real-time incremental updates.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cognee",
+        "url": "https://docs.cognee.ai/",
+        "type": "documentation",
+        "relevance": "Primary source for ontology-based memory and knowledge processing pipelines.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Cloudflare — Introducing Agent Memory",
+        "url": "https://blog.cloudflare.com/introducing-agent-memory/",
+        "type": "blog",
+        "relevance": "Primary source for Cloudflare Agent Memory (April 2026 private beta): Durable Objects + Workers AI storage, 5-channel parallel retrieval fused with RRF (full-text, exact fact-key, raw message, direct vector, HyDE vector), shared memory profiles across agents, MCP-native, default Llama 4 Scout extraction / Nemotron 3 synthesis. Maps to P2 + P13.",
+        "authors": "Cloudflare",
+        "published": "2026-04",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LangMem SDK — LangChain",
+        "url": "https://langchain-ai.github.io/langmem/",
+        "type": "documentation",
+        "relevance": "Primary source for LangMem SDK: background memory manager (auto extraction/consolidation), episodic/semantic/procedural memory tiers (incl. agent self-updating system instructions), prompt-optimization algorithms, MCP-compatible storage. Distinct from LangGraph Store.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Mem0 OSS v3 Migration Guide (v2 to v3)",
+        "url": "https://docs.mem0.ai/migration/oss-v2-to-v3",
+        "type": "documentation",
+        "relevance": "Primary source for Mem0 OSS v3 (April 2026) architectural change: external graph-database dependency (Neo4j/Memgraph/Kuzu/AGE/Neptune) removed; replaced by built-in entity linking via a parallel `{collection}_entities` store inside the existing vector backend. ~4,000 lines of graph code removed. Graph overlay remains available on the Platform API. Anchors the storage description in vendor-landscape.md.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Mem0 — Token-Efficient Memory Algorithm",
+        "url": "https://mem0.ai/blog/mem0-the-token-efficient-memory-algorithm",
+        "type": "blog",
+        "relevance": "Primary source for Mem0 April 2026 single-pass hierarchical extraction algorithm: 93.4% LongMemEval temporal accuracy (vs prior 49.0%), +23.1pt multi-hop improvement, entity linking with semantic+BM25+entity-match fusion. Note: graph relations now influence ranking but are no longer traversable.",
+        "authors": "Mem0",
+        "published": "2026-04",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Zep v3 — Context Engineering Takes Center Stage",
+        "url": "https://blog.getzep.com/zep-v3-context-engineering-takes-center-stage/",
+        "type": "blog",
+        "relevance": "Primary source for Zep v3 rebrand as 'context engineering platform': new ontology (9 node types, 8 relationship types), ISO 8601 temporal queries, 63.8% LongMemEval temporal sub-task / 94.8% DMR (Graphiti v2 figures).",
+        "authors": "Zep",
+        "published": "2026",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Zep — State of the Art Agent Memory",
+        "url": "https://blog.getzep.com/state-of-the-art-agent-memory/",
+        "type": "blog",
+        "relevance": "Vendor benchmark post for Graphiti v3 (Zep v3 engine): reports 90.2% LongMemEval / 94.7% LoCoMo at 162ms hybrid retrieval. Figures are as published by vendor — verify before comparing across third-party benchmarks. Prior Graphiti v2 figures (63.8% LongMemEval temporal / 94.8% DMR / P95 ~300ms) appear in the v3 launch post.",
+        "authors": "Zep",
+        "published": "2026",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic — New in Claude Managed Agents: dreaming, outcomes, and multiagent orchestration",
+        "url": "https://claude.com/blog/new-in-claude-managed-agents",
+        "type": "blog",
+        "relevance": "Primary source for Dreaming as a first-party Claude Managed Agents capability (public beta, May 6 2026): scheduled background process that reviews prior sessions, merges duplicate memories, removes stale entries, surfaces patterns, with human-review gates. Harvey case study reported 6x task-completion improvement. Dreaming is Managed Agents-specific and distinct from the SDK memory tool's /memories directory interface.",
+        "authors": "Anthropic",
+        "published": "2026-05-06",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Karpathy LLM Wiki v2 (rohitg00 extended writeup)",
+        "url": "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
+        "type": "guide",
+        "relevance": "Architectural description of the April 2026 LLM Wiki / knowledge compilation pattern (P7): three-layer system (raw sources → wiki pages → typed schema), ingest-extract-reconcile-supersede pipeline, confidence decay, ingest-time contradiction flags, page types, and provenance classes. Follow-up/extension of Karpathy's original viral post.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Google - Context Engineering: Sessions, Memory (Milam & Gulli)",
+        "url": "https://www.kaggle.com/whitepaper-context-engineering-sessions-memory",
+        "type": "whitepaper",
+        "relevance": "Primary source for the memory source-trust hierarchy (bootstrapped data / user input / tool output), many-to-many memory lineage and regenerate-on-revocation, evolving confidence injected into the prompt, and the system-prompt vs dialogue-history memory injection tradeoff.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Hindsight - repository",
+        "url": "https://github.com/vectorize-io/hindsight",
+        "type": "repository",
+        "relevance": "Open-source agent memory engine: retain/recall/reflect operations, episodes plus facts and entities, evidence-linked observations, multi-leg recall with fusion and rerank. Source for the engine axes table and P21.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Hindsight - documentation",
+        "url": "https://hindsight.vectorize.io/",
+        "type": "documentation",
+        "relevance": "Hindsight concepts (memory types, observations, mental models) and self-host versus managed deployment.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Honcho - overview",
+        "url": "https://honcho.dev/docs/v3/documentation/introduction/overview",
+        "type": "documentation",
+        "relevance": "Peer and session memory with background reasoning that derives conclusions; chat endpoint returns synthesised answers. Repository license not verified (repo fetch failed on 2026-10-02).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "xmemory - integration overview",
+        "url": "https://xmemory.ai/integration-overview/",
+        "type": "documentation",
+        "relevance": "Schema-driven typed memory: free-text writes resolved into schema-valid objects and relations, structured reads. Only this page was verified; treat other capabilities as unverified.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Supermemory - repository",
+        "url": "https://github.com/supermemoryai/supermemory",
+        "type": "repository",
+        "relevance": "Memory and context API: connectors, fact extraction into a per-entity graph, temporary-fact expiry and conflict resolution, hybrid search.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Supermemory - documentation",
+        "url": "https://supermemory.ai/docs/intro",
+        "type": "documentation",
+        "relevance": "Supermemory concepts: user profiles, memory versus document RAG, managed and self-hosted deployment.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Claude-Mem - repository",
+        "url": "https://github.com/thedotmack/claude-mem",
+        "type": "repository",
+        "relevance": "Session memory plugin for a coding agent: hook capture, model-written observation summaries, SQLite FTS plus vector index, progressive-disclosure retrieval. No reconciliation or decay documented.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "LangMem - repository",
+        "url": "https://github.com/langchain-ai/langmem",
+        "type": "repository",
+        "relevance": "LangMem source: hot-path memory tools and background memory manager on the LangGraph store.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Mem0 - how it works",
+        "url": "https://docs.mem0.ai/core-concepts/how-it-works",
+        "type": "documentation",
+        "relevance": "Mem0 pipeline: add-time extraction and dedup, multi-signal retrieval, explicit update and delete. Graph memory scope differs between platform and open source; check before relying on it.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Mem0 - repository",
+        "url": "https://github.com/mem0ai/mem0",
+        "type": "repository",
+        "relevance": "Mem0 open-source library: scoped fact memory with vector and entity storage.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Zep - overview",
+        "url": "https://help.getzep.com/overview",
+        "type": "documentation",
+        "relevance": "Managed temporal context graph: episodes, fact invalidation with validity times, assembled user context block.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Anthropic - Claude Managed Agents memory",
+        "url": "https://platform.claude.com/docs/en/managed-agents/memory",
+        "type": "documentation",
+        "relevance": "Memory stores mounted into the agent filesystem; per-user stores; read-only mounts; dreams write a new store and never modify the input; immutable versions retained 30 days (verified 2026-10-02); redact endpoint; documents the injection-writes-trusted-memory risk.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "OpenAI Agents SDK - Sessions",
+        "url": "https://openai.github.io/openai-agents-python/sessions/",
+        "type": "documentation",
+        "relevance": "Transcript memory keyed by a session ID; get_items/add_items/pop_item/clear_session; SQLite, Redis, SQLAlchemy, Mongo, Dapr, Conversations-API, compaction and encrypted backends; states that a session ID does not authenticate a user and the SQLite backend does not detect edits or replay. The Conversations-API guide was not parsed.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "AWS Bedrock AgentCore Memory",
+        "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory.html",
+        "type": "documentation",
+        "relevance": "Immutable CreateEvent short-term memory keyed by actorId/sessionId; async semantic, summary, preference and episodic strategies; hierarchical namespaces with trailing slash and IAM namespace condition keys; eventExpiryDuration covers short-term events only (maximum 365 days, verified 2026-10-02); long-term records need DeleteMemoryRecord or BatchDeleteMemoryRecords.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "LangGraph - Persistence and memory store",
+        "url": "https://docs.langchain.com/oss/python/langgraph/",
+        "type": "documentation",
+        "relevance": "Store namespaces (tuple) plus keys; hot-path vs background writes; profile vs collection trade-off; TTL only through the hosted server configuration.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "xmemory - API reference",
+        "url": "https://xmemory.ai/api/",
+        "type": "documentation",
+        "relevance": "Schema-first typed memory: natural-language and structured writes, scoped writes (reject or drop-and-report), field-level diffs, text-to-SQL reads with return_sql; documents empty-key collapse and silent partial aggregates on scoped reads; lists no history/as-of read, no backfill of new fields, no migration rollback.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "xmemory - XMD schema format",
+        "url": "https://xmemory.ai/xmd/",
+        "type": "documentation",
+        "relevance": "YAML schema with scalar fields; field descriptions act as extraction guidance; relationships modelled as objects.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "xmemory - pricing and deployment",
+        "url": "https://xmemory.ai/pricing-deployment/",
+        "type": "documentation",
+        "relevance": "Hosted closed engine with open clients; beta-stage design-partner access; no DPA, subprocessor list, or region published at verification time. Re-check before any regulated deployment.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Redis agent-memory-server - repository",
+        "url": "https://raw.githubusercontent.com/redis/agent-memory-server/main/README.md",
+        "type": "repository",
+        "relevance": "The open-source server moved to an unmaintained V0 directory; the repo points at a managed offering.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Letta - Agent SDK memory and dreaming",
+        "url": "https://docs.letta.com/agent-sdk/memory/",
+        "type": "documentation",
+        "relevance": "Dreaming: background subagents consolidate memory; trigger step-count, compaction-event or off; behavior reminder or auto-launch, fixed at creation; memory lives in MemFS with system/ files in the prompt.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Letta - MemFS",
+        "url": "https://docs.letta.com/concepts/memfs/",
+        "type": "documentation",
+        "relevance": "Git-backed memory filesystem; every memory edit is a commit; dreaming and memory-doctor subagents edit through git worktrees.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "LangMem - Delayed background memory processing",
+        "url": "https://langchain-ai.github.io/langmem/guides/delayed_processing/",
+        "type": "documentation",
+        "relevance": "ReflectionExecutor debounces memory extraction per thread with after_seconds; local threads end between serverless invocations, so use the remote executor there.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "LangMem - reflection.py source",
+        "url": "https://github.com/langchain-ai/langmem/blob/main/src/langmem/reflection.py",
+        "type": "repository",
+        "relevance": "Local executor is an in-process worker thread and priority queue over a BaseStore; remote executor creates a delayed LangGraph run with the rollback multitask strategy.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Hindsight - observations",
+        "url": "https://github.com/vectorize-io/hindsight/blob/main/hindsight-docs/docs/developer/observations.mdx",
+        "type": "documentation",
+        "relevance": "Consolidation after retain builds evidence-linked observations; near-duplicate reconciliation within one tag scope, Postgres only; deleting source memories deletes derived observations and re-queues co-sources.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Hindsight - operations API",
+        "url": "https://github.com/vectorize-io/hindsight/blob/main/hindsight-docs/docs/developer/api/operations.mdx",
+        "type": "documentation",
+        "relevance": "Async work (retain, consolidation, mental-model refresh, graph maintenance) queues as rows in an async_operations table claimed by an in-process or dedicated worker; consolidation is deduped per bank.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Hindsight - configuration",
+        "url": "https://github.com/vectorize-io/hindsight/blob/main/hindsight-docs/docs/developer/configuration.mdx",
+        "type": "documentation",
+        "relevance": "Postgres (embedded or external) or Oracle backend; text-search backends native tsvector, vchord, pg_textsearch, pgroonga, pg_search; iterative ANN scan setting.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      }
+    ],
+    "graph_and_infra": [
+      {
+        "name": "Microsoft GraphRAG",
+        "url": "https://microsoft.github.io/graphrag/index/overview/",
+        "type": "documentation",
+        "relevance": "Primary source for graph-based retrieval and community-summary style augmentation.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LlamaIndex - Agent Memory",
+        "url": "https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/memory/",
+        "type": "documentation",
+        "relevance": "Primary source for memory organization inside LlamaIndex agents.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "LlamaIndex - Property Graph Index",
+        "url": "https://docs.llamaindex.ai/en/stable/module_guides/indexing/lpg_index_guide/",
+        "type": "documentation",
+        "relevance": "Primary source for graph-backed retrieval in a modern app stack.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Supabase AI and Vectors",
+        "url": "https://supabase.com/docs/guides/ai",
+        "type": "documentation",
+        "relevance": "Primary source for Postgres-native AI, embeddings, and retrieval in app stacks already using Supabase.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Vercel Agent Resources",
+        "url": "https://vercel.com/docs/agent-resources",
+        "type": "documentation",
+        "relevance": "Primary source for machine-readable docs and context surfaces exposed to agents.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Amazon DynamoDB — Developer Guide",
+        "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html",
+        "type": "documentation",
+        "relevance": "Primary source for DynamoDB as the AWS-native session and profile memory store: single-table design with composite keys, TTL for ephemeral session expiry, and on-demand scaling. Used as the P2 structured-memory storage pick on AWS (alongside Postgres).",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "paperless-ngx — REST API Documentation",
+        "url": "https://docs.paperless-ngx.com/api/",
+        "type": "documentation",
+        "relevance": "Primary source for paperless-ngx as a self-hosted document-store ingest adapter feeding the personal corpus in RA2 (personal AI). REST API at /api/documents/, consume-folder ingest, built-in OCR. No cloud dependency; pairs with a P8 hybrid index on the local Postgres/SQLite substrate.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Microsoft GraphRAG - repository",
+        "url": "https://github.com/microsoft/graphrag",
+        "type": "repository",
+        "relevance": "GraphRAG source and status notice. The repository README stated maintenance mode when checked on 2026-10-02; re-check before adopting.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "SQLite - FTS5",
+        "url": "https://www.sqlite.org/fts5.html",
+        "type": "documentation",
+        "relevance": "Deleted or updated FTS5 entries stay in the index as delete-keys until segments merge unless the secure-delete option (3.42.0+) is set; default off.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "SQLite - PRAGMA secure_delete",
+        "url": "https://www.sqlite.org/pragma.html",
+        "type": "documentation",
+        "relevance": "secure_delete overwrites freed pages; off by default (compile-time default); needed before deleting personal data from a SQLite memory file.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "pgvector - README",
+        "url": "https://raw.githubusercontent.com/pgvector/pgvector/master/README.md",
+        "type": "repository",
+        "relevance": "HNSW and IVFFlat apply WHERE filters after the index scan; iterative index scans, partial indexes, and partitioning for selective tenant filters.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "PostgreSQL - Row security policies",
+        "url": "https://www.postgresql.org/docs/current/ddl-rowsecurity.html",
+        "type": "documentation",
+        "relevance": "Superusers and BYPASSRLS roles always bypass RLS; table owners bypass it unless FORCE ROW LEVEL SECURITY is set.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Qdrant - Multitenancy",
+        "url": "https://qdrant.tech/documentation/guides/multiple-partitions/",
+        "type": "documentation",
+        "relevance": "is_tenant payload index for per-tenant filtering inside one collection.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "turbopuffer - architecture",
+        "url": "https://turbopuffer.com/docs/architecture",
+        "type": "documentation",
+        "relevance": "Namespaces as the tenancy unit; eventually consistent reads can be stale.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Thoughtworks Technology Radar - Crypto-shredding",
+        "url": "https://www.thoughtworks.com/radar/techniques/crypto-shredding",
+        "type": "article",
+        "relevance": "Per-subject keys destroyed to erase data in backups; placed in Trial. Regulator acceptance not confirmed.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "OWASP LLM08 - Vector and Embedding Weaknesses",
+        "url": "https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/",
+        "type": "documentation",
+        "relevance": "Vector-store risks: cross-tenant leakage, embedding inversion, poisoning.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "OWASP Top 10 for Agentic Applications",
+        "url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+        "type": "documentation",
+        "relevance": "Lists memory and context poisoning (ASI06); title verified only.",
+        "update_frequency": "annual",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "EDPB Opinion 28/2024 on AI models",
+        "url": "https://www.edpb.europa.eu/system/files/2024-12/edpb_opinion_202428_ai-models_en.pdf",
+        "type": "regulation",
+        "relevance": "Addresses AI models, not memory stores; used only as a regulatory anchor.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Hamburg DPA - discussion paper on LLMs and personal data",
+        "url": "https://datenschutz-hamburg.de/fileadmin/user_upload/HmbBfDI/Datenschutz/Informationen/240715_Discussion_Paper_Hamburg_DPA_KI_Models.pdf",
+        "type": "regulation",
+        "relevance": "Attaches data-subject rights to the input and output of an AI system, naming retrieval-augmented systems.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Bun - SQLite (bun:sqlite)",
+        "url": "https://bun.com/docs/runtime/sqlite",
+        "type": "documentation",
+        "relevance": "Built-in SQLite driver; loadExtension; on macOS Apple's system SQLite omits extension loading, so call Database.setCustomSQLite before opening any database; macOS keeps WAL sidecar files.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Bun - SQLite build flags",
+        "url": "https://github.com/oven-sh/bun/blob/main/scripts/build/deps/sqlite.ts",
+        "type": "repository",
+        "relevance": "Linux and Windows builds statically link SQLite with SQLITE_ENABLE_FTS5; macOS dlopens the system libsqlite3.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "sqlite-vec - JavaScript guide",
+        "url": "https://alexgarcia.xyz/sqlite-vec/js.html",
+        "type": "documentation",
+        "relevance": "sqliteVec.load() works with bun:sqlite; macOS may need setCustomSQLite because the built-in SQLite does not allow extensions.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "PostgreSQL - Ranking search results",
+        "url": "https://www.postgresql.org/docs/current/textsearch-controls.html",
+        "type": "documentation",
+        "relevance": "ts_rank and ts_rank_cd use no corpus-wide statistics, so built-in ranking is not BM25.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "ParadeDB - repository",
+        "url": "https://github.com/paradedb/paradedb",
+        "type": "repository",
+        "relevance": "pg_search: Tantivy-backed BM25 index inside Postgres; community edition AGPL-3.0, enterprise edition commercial.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "VectorChord-bm25 - repository",
+        "url": "https://github.com/tensorchord/VectorChord-bm25",
+        "type": "repository",
+        "relevance": "vchord_bm25 Postgres extension: bm25vector type and Block-WeakAnd index, tokenizers from pg_tokenizer; dual AGPLv3 or ELv2 licence.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "pg_textsearch - repository",
+        "url": "https://github.com/timescale/pg_textsearch",
+        "type": "repository",
+        "relevance": "Timescale BM25 index for Postgres over text-search configurations; PostgreSQL licence; other WHERE conditions are post-filters under the ordered BM25 scan.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Neo4j - Vector indexes",
+        "url": "https://neo4j.com/docs/cypher-manual/current/indexes/semantic-indexes/vector-indexes/",
+        "type": "documentation",
+        "relevance": "Lucene-backed HNSW vector index; filter properties declared in the index and queried with SEARCH ... WHERE.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Neo4j - Full-text indexes",
+        "url": "https://neo4j.com/docs/cypher-manual/current/indexes/semantic-indexes/full-text-indexes/",
+        "type": "documentation",
+        "relevance": "Lucene full-text index with configurable analyzers and an eventually-consistent option.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "FalkorDB - repository",
+        "url": "https://github.com/FalkorDB/FalkorDB",
+        "type": "repository",
+        "relevance": "Property-graph database over sparse adjacency matrices with OpenCypher; SSPLv1 licence; a Graphiti backend.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Chroma - Full-text search",
+        "url": "https://docs.trychroma.com/docs/querying-collections/full-text-search",
+        "type": "documentation",
+        "relevance": "$contains and $regex document filters; ranked hybrid search with BM25-style sparse vectors and RRF is in the Search API, Chroma Cloud only.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Chroma - Search API overview",
+        "url": "https://docs.trychroma.com/cloud/search-api/overview",
+        "type": "documentation",
+        "relevance": "Search API (dense, sparse, hybrid with RRF) is available in Chroma Cloud only.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Qdrant - Indexing",
+        "url": "https://qdrant.tech/documentation/concepts/indexing/",
+        "type": "documentation",
+        "relevance": "Payload indexes must exist before ingest for filter-aware HNSW edges, else rebuild; sparse vectors take an idf modifier for BM25-style ranking.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Qdrant - Hybrid queries",
+        "url": "https://qdrant.tech/documentation/concepts/hybrid-queries/",
+        "type": "documentation",
+        "relevance": "Query API prefetch plus RRF or DBSF fusion of dense and sparse results.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Milvus - Full text search",
+        "url": "https://github.com/milvus-io/milvus-docs/blob/v3.0.x/site/en/userGuide/search-query-get/full-text-search.md",
+        "type": "documentation",
+        "relevance": "BM25 function converts an analysed text field into a sparse vector; hybrid search takes an expr filter per sub-request.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-02"
+      }
+    ],
+    "context_engineering": [
+      {
+        "name": "Anthropic - Building Effective Agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "type": "guide",
+        "relevance": "Primary source for context engineering discipline, agent architecture patterns, and context design principles.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Anthropic - Effective Context Engineering for AI Agents",
+        "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+        "type": "guide",
+        "relevance": "Primary source for the write/select/compress/isolate runtime verbs, context rot, and the canonical context engineering framing adopted in this skill.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Drew Breunig - How Long Contexts Fail",
+        "url": "https://www.dbreunig.com/2025/06/22/how-contexts-fail-and-how-to-fix-them.html",
+        "type": "article",
+        "relevance": "Primary source for the four runtime failure modes (poisoning, distraction, clash, confusion) used as F1-F4 in context-hygiene.md.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Drew Breunig - How to Fix Your Context",
+        "url": "https://www.dbreunig.com/2025/06/26/how-to-fix-your-context.html",
+        "type": "article",
+        "relevance": "Follow-up to 'How Long Contexts Fail' covering mitigations for the four failure modes.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OWASP - LLM Prompt Injection Prevention Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+        "type": "guide",
+        "relevance": "Primary source for injection threat model and defenses referenced in security-threat-model.md.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Agentic Context Engineering (ACE) — arXiv:2510.04618",
+        "url": "https://arxiv.org/abs/2510.04618",
+        "type": "paper",
+        "relevance": "Primary source for P18 ACE pattern (Generator/Reflector/Curator loop, delta updates), A35 context collapse failure mode, and the +10.6% / +8.6% empirical defaults in agent-memory-benchmarks.md.",
+        "authors": "Zhang, Hu, Upasani, Ma, Hong, Kamanuru, Rainton, Wu, Ji, Li, Thakker, Zou, Olukotun (Stanford + SambaNova + UC Berkeley)",
+        "published": "2025-10",
+        "access": "free",
+        "add_as_web_search": true,
+        "update_frequency": "static"
+      },
+      {
+        "name": "Mem0 on LOCOMO — arXiv:2504.19413",
+        "url": "https://arxiv.org/abs/2504.19413",
+        "type": "paper",
+        "relevance": "Primary source for the selective-memory vs full-context Pareto numbers (91% lower p95 latency, >90% token cost reduction, +26% LLM-as-Judge vs OpenAI baseline) cited in agent-memory-benchmarks.md.",
+        "authors": "Chhikara, Khant, Aryan, Singh, Yadav",
+        "published": "2025-04",
+        "access": "free",
+        "add_as_web_search": true,
+        "update_frequency": "static"
+      },
+      {
+        "name": "Anthropic Cookbook — Context Engineering: Memory, Compaction, Tool Clearing",
+        "url": "https://platform.claude.com/cookbook/tool-use-context-engineering-context-engineering-tools",
+        "type": "guide",
+        "relevance": "Primary source for compact_20260112 (150K default trigger), memory_20250818 tool (six commands: view/create/str_replace/insert/delete/rename), and clear_tool_uses_20250919 (100K default trigger, keep=3). Anchors P20 AIS, P10 filesystem-as-memory, A37 eager-compaction.",
+        "authors": "Anthropic",
+        "published": "2026",
+        "access": "free",
+        "add_as_web_search": true,
+        "update_frequency": "occasional"
+      },
+      {
+        "name": "Mitchell Hashimoto — Agent = Model + Harness (AI Engineer World's Fair April 2026)",
+        "url": "https://www.faros.ai/blog/harness-engineering",
+        "type": "blog",
+        "relevance": "Primary source for P19 Harness Engineering: the five-column harness model (tool orchestration, verification loops, context & memory, guardrails, observability) and A36 victory-declaration bias. Coined formulation 'Agent = Model + Harness'.",
+        "authors": "Mitchell Hashimoto (formulation); Faros AI (write-up)",
+        "published": "2026-04",
+        "access": "free",
+        "add_as_web_search": true,
+        "update_frequency": "occasional"
+      },
+      {
+        "name": "Jason Liu — Context Engineering Series Index",
+        "url": "https://jxnl.co/writing/2025/08/28/context-engineering-index/",
+        "type": "blog_series",
+        "relevance": "Five-part canonical series on context engineering for agentic RAG. Source for 'agent peripheral vision', faceted search as tool-response design, slash-commands vs subagents, and the 'in-context learning is gradient descent, compaction is momentum' framing relevant to P14 + P20.",
+        "authors": "Jason Liu",
+        "published": "2025-08",
+        "access": "free",
+        "add_as_web_search": true,
+        "update_frequency": "occasional"
+      },
+      {
+        "name": "LangChain — Context Management for Deep Agents",
+        "url": "https://www.langchain.com/blog/context-management-for-deepagents",
+        "type": "guide",
+        "relevance": "Industry-standard naming of context-management primitives: offloading large tool results (20K-token threshold), offloading large tool inputs (85% window threshold), summarization fallback. Concrete defaults that complement Anthropic cookbook for non-Anthropic substrates.",
+        "authors": "LangChain",
+        "published": "2026",
+        "access": "free",
+        "add_as_web_search": true,
+        "update_frequency": "occasional"
+      }
+    ],
+    "research_papers": [
+      {
+        "name": "MemoryAgentBench",
+        "url": "https://arxiv.org/abs/2507.05257",
+        "code_url": "https://github.com/HUST-AI-HYZ/MemoryAgentBench",
+        "arxiv_id": "2507.05257",
+        "type": "paper",
+        "venue": "ICLR 2026",
+        "grade": "B",
+        "relevance": "Four-competency benchmark (Accurate Retrieval, Test-Time Learning, Long-Range Understanding, Conflict Resolution) with EventQA + FactConsolidation datasets. Adds the CR/selective-forgetting axis missing from other benchmarks.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "MemBench",
+        "url": "https://arxiv.org/abs/2506.21605",
+        "arxiv_id": "2506.21605",
+        "type": "paper",
+        "venue": "preprint, June 2025",
+        "grade": "C",
+        "relevance": "Memory benchmark for LLM-based agents (Tan/Zhang/Ma/Chen/Dai/Dong). Task taxonomy: information extraction, multi-hop reasoning, knowledge updating, preference following, temporal reasoning; factual vs reflective memory levels; participation vs observation scenarios. Cited from the MemBench multi-hop SLO row in agent-memory-benchmarks.md. Previously mis-cited in that file as 2507.05257 (which is MemoryAgentBench) — corrected 2026-05-17.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LongMemEval-V2",
+        "url": "https://arxiv.org/abs/2605.12493",
+        "arxiv_id": "2605.12493",
+        "type": "paper",
+        "venue": "preprint, May 2026",
+        "grade": "C",
+        "relevance": "Successor to LongMemEval; web-agent framing with 100M+ token histories; five new axes (static recall, dynamic tracking, workflow knowledge, environment gotchas, premise awareness); AgentRunbook-C baseline 72.5% vs 48.5% RAG.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Unable to Forget: Proactive Interference in LLM Memory",
+        "url": "https://arxiv.org/abs/2506.08184",
+        "arxiv_id": "2506.08184",
+        "type": "paper",
+        "venue": "preprint, June 2025",
+        "grade": "C",
+        "relevance": "Empirical study of proactive interference in LLM KV memory stores: accumulating semantically-similar entries suppress recall of the current value; accuracy degrades ~log-linearly; persists regardless of context-window size; resists prompt-engineering mitigations. Motivates F5 in context-hygiene.md.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Fact Memory vs Long-Context Inference: Cost-Performance Crossover",
+        "url": "https://arxiv.org/abs/2603.04814",
+        "arxiv_id": "2603.04814",
+        "type": "paper",
+        "venue": "preprint, Mar 2026",
+        "grade": "C",
+        "relevance": "Directional cost-performance analysis: at 100k-token context, fact-based memory becomes cheaper than long-context inference after ~10 interaction turns. Long-context wins LongMemEval/LoCoMo; fact memory wins PersonaMemv2 and extended-session cost. Uses proprietary baseline — treat as directional criterion, not settled law.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Memory for Autonomous LLM Agents: A Survey",
+        "url": "https://arxiv.org/abs/2603.07670",
+        "arxiv_id": "2603.07670",
+        "type": "paper",
+        "venue": "preprint, Mar 2026",
+        "grade": "C",
+        "relevance": "Background/survey covering memory taxonomy for autonomous agents. Use for orientation and vocabulary; cite primary papers for specific claims.",
+        "role": "background_survey",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Anatomy of Agentic Memory — arXiv:2602.19320",
+        "url": "https://arxiv.org/abs/2602.19320",
+        "arxiv_id": "2602.19320",
+        "type": "paper",
+        "venue": "preprint, Feb 2026",
+        "grade": "C",
+        "relevance": "Agentic memory taxonomy and evaluation gaps; covers memory-blindness failure mode and storage-type interaction effects. Grade C preprint — use alongside 2603.07670 for orientation; cite primary papers for specific claims.",
+        "role": "background_survey",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "GraphRAG-Bench",
+        "url": "https://arxiv.org/abs/2506.02404",
+        "arxiv_id": "2506.02404",
+        "type": "paper",
+        "venue": "arXiv preprint (Jun 2025)",
+        "grade": "B",
+        "relevance": "Xiao et al. Domain-specific benchmark across 16 disciplines evaluating the full GraphRAG pipeline (construction, retrieval, generation) plus reasoning coherence. Used here for the multi-hop-vs-single-hop routing gate. NOTE: benchmarks GraphRAG variants against BM-25/TF-IDF, NOT against vanilla semantic RAG, and states no multi-hop point gain -- do not quote a pt figure from it.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "When to use Graphs in RAG",
+        "url": "https://arxiv.org/abs/2506.05690",
+        "arxiv_id": "2506.05690",
+        "type": "paper",
+        "venue": "arXiv preprint (Jun 2025, rev. Feb 2026)",
+        "grade": "B",
+        "relevance": "The graph-vs-vanilla-RAG comparison GraphRAG-Bench does not make. Reports that 'GraphRAG frequently underperforms vanilla RAG on many real-world tasks' -- the correct source when the claim is about graph losing to flat retrieval.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "LongMemEval — arXiv:2410.10813",
+        "url": "https://arxiv.org/abs/2410.10813",
+        "type": "paper",
+        "relevance": "Five memory abilities incl. knowledge updates and abstention; synthetic filler; no deletion operator; fact-only values lose information.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "LoCoMo — arXiv:2402.17753",
+        "url": "https://arxiv.org/abs/2402.17753",
+        "type": "paper",
+        "relevance": "Very long two-speaker conversations; public release smaller than the paper's set; adversarial category without gold answers; no knowledge-update category.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "BEAM — arXiv:2510.27246",
+        "url": "https://arxiv.org/abs/2510.27246",
+        "type": "paper",
+        "relevance": "Ten memory abilities over conversations far beyond context windows; nugget scoring; synthetic; few questions per ability.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "MemGPT — arXiv:2310.08560",
+        "url": "https://arxiv.org/abs/2310.08560",
+        "type": "paper",
+        "relevance": "Source of DMR; agent-managed memory degraded with weaker function calling.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Multi-Session Chat (MSC) — arXiv:2107.07567",
+        "url": "https://arxiv.org/abs/2107.07567",
+        "type": "paper",
+        "relevance": "Earlier-session fact recall; full context near ceiling.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Zep temporal knowledge graph — arXiv:2501.13956",
+        "url": "https://arxiv.org/abs/2501.13956",
+        "type": "paper",
+        "relevance": "Bi-temporal edges; invalidation favours newer information; assistant-side recall regressed vs full context on LongMemEval in the authors' setup.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "HaluMem — arXiv:2511.03506",
+        "url": "https://arxiv.org/abs/2511.03506",
+        "type": "paper",
+        "relevance": "Operation-level memory hallucination evaluation (extraction, update, QA).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "MemOps — arXiv:2607.12893",
+        "url": "https://arxiv.org/abs/2607.12893",
+        "type": "paper",
+        "relevance": "Operation-level memory benchmark from a memory-vendor group.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Consolidation drift in agent memory — arXiv:2605.12978",
+        "url": "https://arxiv.org/abs/2605.12978",
+        "type": "paper",
+        "relevance": "Iterative consolidation: utility rises then can fall below no-memory; episodic-only control stays competitive.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "PersistBench — arXiv:2602.01146",
+        "url": "https://arxiv.org/abs/2602.01146",
+        "type": "paper",
+        "relevance": "Long-term memory risks: cross-domain leakage and memory-induced sycophancy.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "OP-Bench — arXiv:2601.13722",
+        "url": "https://arxiv.org/abs/2601.13722",
+        "type": "paper",
+        "relevance": "Over-personalisation from memory.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "PASB — arXiv:2607.10526",
+        "url": "https://arxiv.org/abs/2607.10526",
+        "type": "paper",
+        "relevance": "Saved user claims amplify sycophancy; agents rewrite claims as stable facts.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "MemSyco-Bench — arXiv:2607.01071",
+        "url": "https://arxiv.org/abs/2607.01071",
+        "type": "paper",
+        "relevance": "Memory-induced sycophancy benchmark.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "EnterpriseMem-Bench — arXiv:2605.26394",
+        "url": "https://arxiv.org/abs/2605.26394",
+        "type": "paper",
+        "relevance": "Multi-turn enterprise text-to-SQL memory; stateless agents collapse within a few turns; a newer model regressed vs its predecessor.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "AgentPoison — arXiv:2407.12784",
+        "url": "https://arxiv.org/abs/2407.12784",
+        "type": "paper",
+        "relevance": "Trigger-based memory/knowledge-base poisoning at a very low poison rate; perplexity and rephrasing defences fail.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "MINJA — arXiv:2503.03704",
+        "url": "https://arxiv.org/abs/2503.03704",
+        "type": "paper",
+        "relevance": "Query-only memory injection into shared agent memory; LLM-judge detection misses or over-flags.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "PoisonedRAG — arXiv:2402.07867",
+        "url": "https://arxiv.org/abs/2402.07867",
+        "type": "paper",
+        "relevance": "Knowledge-corruption attack on RAG with a few crafted texts per target question.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "MEXTRA — arXiv:2502.13172",
+        "url": "https://arxiv.org/abs/2502.13172",
+        "type": "paper",
+        "relevance": "Memory extraction attack on agents; leakage grows with memory size and retrieval k.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "EVOMAL — arXiv:2608.25776",
+        "url": "https://arxiv.org/abs/2608.25776",
+        "type": "paper",
+        "relevance": "Poisoned self-evolved skills persist through copies after planted skills are removed.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Ghost Vectors — arXiv:2606.18497",
+        "url": "https://arxiv.org/abs/2606.18497",
+        "type": "paper",
+        "relevance": "Soft-deleted HNSW vectors recoverable (abstract only); proposes epoch key rotation.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Voyager — arXiv:2305.16291",
+        "url": "https://arxiv.org/abs/2305.16291",
+        "type": "paper",
+        "relevance": "Skill library; self-verification ablation had the largest effect.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "Reflexion — arXiv:2303.11366",
+        "url": "https://arxiv.org/abs/2303.11366",
+        "type": "paper",
+        "relevance": "Self-reflection agents; false-positive self-written tests.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "CoALA — arXiv:2309.02427",
+        "url": "https://arxiv.org/abs/2309.02427",
+        "type": "paper",
+        "relevance": "Cognitive architecture taxonomy; procedural memory writes are riskier.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "HippoRAG 2 — arXiv:2502.14802",
+        "url": "https://arxiv.org/abs/2502.14802",
+        "type": "paper",
+        "relevance": "Reports structure-augmented RAG (incl. GraphRAG) below standard RAG on simple factual QA.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "xmemory system paper — arXiv:2604.27906",
+        "url": "https://arxiv.org/abs/2604.27906",
+        "type": "paper",
+        "relevance": "Vendor paper for schema-first typed memory; vendor-run evaluation, cite for design only.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      }
+    ],
+    "code_extractions": [
+      {
+        "name": "getzep/graphiti",
+        "url": "https://github.com/getzep/graphiti",
+        "type": "github_repo",
+        "relevance": "Production temporal knowledge graph engine. Source for bi-temporal fact tracking, non-destructive invalidation, as-of queries, episode provenance chains, typed ontology via Pydantic, and graph-distance reranking.",
+        "license": "Apache-2.0",
+        "commit_sha": "98d8344d531aa74160f2e33b8db84c5bdc9954ba",
+        "extracted": "2026-04-15",
+        "extracted_by": "research-git",
+        "files_used": [
+          "README.md"
+        ],
+        "patterns_merged": [
+          "G1: bi-temporal triple with validity windows (invalidated_at vs expires_at)",
+          "G2: episode provenance chain (source_episode_id)",
+          "G3: evolving entity summaries (documented, not yet applied)",
+          "G4: typed ontology as code (Pydantic entity/edge classes)",
+          "G5/R1: graph-distance reranking (documented, cross-routed to ai-rag pending)"
+        ],
+        "update_frequency": "active",
+        "access": "free",
+        "research_pack": "docs/research/2026-04-15-persistent-knowledge-layer-skill-scan.md",
+        "add_as_web_search": false,
+        "last_verified": "2026-10-02"
+      },
+      {
+        "name": "letta-ai/letta",
+        "url": "https://github.com/letta-ai/letta",
+        "doc_url": "https://docs.letta.com/guides/core-concepts/memory/memory-blocks",
+        "type": "github_repo",
+        "relevance": "Retired V1 Letta server (current code lives in letta-code; V1 survives on the archive branch). Historical source for the labeled memory blocks pattern, shared/read-only block variants, and tier ceilings; current memory is MemFS plus dreaming subagents.",
+        "license": "Apache-2.0",
+        "commit_sha": "bb52a8900a79cf1378e6e9cdecf244b673a13a72",
+        "extracted": "2026-04-15",
+        "extracted_by": "research-git",
+        "files_used": [
+          "README.md",
+          "docs.letta.com/guides/core-concepts/memory/memory-blocks",
+          "docs.letta.com/guides/core-concepts/memory/context-hierarchy"
+        ],
+        "patterns_merged": [
+          "G4 (simpler variant): labeled memory blocks as a flat typed ontology",
+          "L1: memory blocks, labeled, limited, always-in-context (documented, not yet applied)",
+          "L2: four-tier runtime hierarchy with concrete ceilings (documented, not yet applied)",
+          "L3: shared read-only policy blocks (documented, not yet applied)"
+        ],
+        "update_frequency": "active",
+        "access": "free",
+        "research_pack": "docs/research/2026-04-15-persistent-knowledge-layer-skill-scan.md",
+        "add_as_web_search": false
+      },
+      {
+        "name": "topoteretes/cognee",
+        "url": "https://github.com/topoteretes/cognee",
+        "type": "github_repo",
+        "relevance": "Ontology-based memory with graph+vector backend and four-verb lifecycle API. Source for explicit memory lifecycle vocabulary (remember / recall / forget / improve).",
+        "license": "Apache-2.0",
+        "commit_sha": "961c3ca4784686390d89d7c45cef63ed2e8da6a1",
+        "extracted": "2026-04-15",
+        "extracted_by": "research-git",
+        "files_used": [
+          "README.md"
+        ],
+        "patterns_merged": [
+          "C1: four-verb memory API (remember / recall / forget / improve) — forget is first-class, not admin"
+        ],
+        "update_frequency": "active",
+        "access": "free",
+        "research_pack": "docs/research/2026-04-15-persistent-knowledge-layer-skill-scan.md",
+        "notes": "README was marketing-depth only. Ontology layer and Cognify pipeline stages deferred to a source-code scan.",
+        "add_as_web_search": false
+      },
+      {
+        "name": "MemPalace/mempalace (cross-routed)",
+        "url": "https://github.com/MemPalace/mempalace",
+        "type": "github_repo",
+        "relevance": "Cross-routed from the 2026-04-13 context-engineering skill scan. Benchmarked memory system (100% LongMemEval with hybrid mode). Source for contradiction-detection categories (attribution / temporal / stale) and minimal zero-dep temporal-KG implementation with as-of queries.",
+        "license": "MIT",
+        "commit_sha": "6614b9b4e71e67da2236493b036b7bf42ba2d55f",
+        "extracted": "2026-04-13",
+        "cross_routed": "2026-04-15",
+        "extracted_by": "research-git",
+        "files_used": [
+          "website/concepts/knowledge-graph.md",
+          "website/concepts/contradiction-detection.md"
+        ],
+        "patterns_merged": [
+          "CR2: contradiction-detection categories (attribution / temporal / stale)",
+          "CR1 (reinforcement): minimal zero-dep variant of bi-temporal KG with SQLite backing"
+        ],
+        "update_frequency": "occasional",
+        "access": "free",
+        "research_pack": "docs/research/2026-04-15-persistent-knowledge-layer-skill-scan.md",
+        "origin_research_pack": "docs/research/2026-04-13-context-engineering-skill-scan.md",
+        "add_as_web_search": false
+      },
+      {
+        "name": "SamurAIGPT/llm-wiki-agent (extraction candidate)",
+        "url": "https://github.com/SamurAIGPT/llm-wiki-agent",
+        "type": "github_repo",
+        "relevance": "Open-source reference implementation of the April 2026 LLM Wiki pattern (P7). Source for ingest pipeline (/wiki-ingest), auto-created entity/concept/synthesis pages, source summaries, query-to-wiki synthesis, ingest-time contradiction flags, lint tool for orphans and gaps, and graph.html wikilink-graph inspection UI with community detection. Registered as an extraction candidate for a follow-up research-git pass.",
+        "license": "unknown",
+        "update_frequency": "occasional",
+        "access": "free",
+        "status": "extraction_candidate",
+        "research_pack": "docs/research/2026-04-15-persistent-knowledge-layer-skill-scan.md",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Ar9av/obsidian-wiki (extraction candidate)",
+        "url": "https://github.com/Ar9av/obsidian-wiki",
+        "type": "github_repo",
+        "relevance": "Open-source framework for AI agents to build and maintain an Obsidian-hosted wiki using the Karpathy LLM Wiki pattern (P7). Source for Obsidian-native storage + UI composition, markdown-first page model, and wikilink graph over vault contents. Registered as an extraction candidate for a follow-up research-git pass.",
+        "license": "unknown",
+        "update_frequency": "occasional",
+        "access": "free",
+        "status": "extraction_candidate",
+        "research_pack": "docs/research/2026-04-15-persistent-knowledge-layer-skill-scan.md",
+        "add_as_web_search": false
+      },
+      {
+        "name": "garrytan/gbrain",
+        "url": "https://github.com/garrytan/gbrain",
+        "type": "github_repo",
+        "relevance": "MIT-licensed operational brain reference: markdown pages as the review layer, structured identity/event/fact/link primitives, hybrid search, graph traversal for relationships, brain/source routing, and maintenance loops. Used as inspiration for the portable operational-brain pattern; do not import the personal taxonomy directly.",
+        "license": "MIT",
+        "verified": "2026-05-18",
+        "files_used": [
+          "README.md",
+          "AGENTS.md",
+          "skills/RESOLVER.md",
+          "docs/GBRAIN_RECOMMENDED_SCHEMA.md",
+          "docs/architecture/brains-and-sources.md",
+          "docs/ENGINES.md",
+          "skills/brain-ops/SKILL.md",
+          "skills/query/SKILL.md",
+          "skills/maintain/SKILL.md"
+        ],
+        "patterns_merged": [
+          "Operational brain page contract: compiled truth plus append-only timeline",
+          "Four structured primitives: entity registry, event ledger, fact store, relationship graph",
+          "Brain/source routing as independent trust and corpus axes",
+          "Periodic maintenance loop for stale pages, orphan links, citation gaps, identity splits, and embedding freshness"
+        ],
+        "update_frequency": "active",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

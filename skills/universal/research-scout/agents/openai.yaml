@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Scout"
+  short_description: "Finds recent papers and methods worth stealing, with graded evidence"
+  default_prompt: "Use $research-scout to mine recent papers, blogs, and newsletters for stealable methods with graded evidence, and say how to apply each technique to my RAG, evals, or agents work."

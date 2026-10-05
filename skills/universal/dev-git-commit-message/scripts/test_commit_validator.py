@@ -1,0 +1,286 @@
+#!/usr/bin/env python3
+"""
+Regression tests for commit_validator.validate_message.
+
+Guards the multi-line bug where the subject regex ran against the whole
+message, so every body, `BREAKING CHANGE:` footer, git revert, or trailer
+failed with "missing type prefix".
+
+Run as:
+  python3 scripts/test_commit_validator.py
+  python3 -m pytest scripts/test_commit_validator.py
+"""
+from __future__ import annotations
+
+import sys
+import json
+import subprocess
+import tempfile
+import unittest
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from commit_validator import split_message, validate_message  # noqa: E402
+
+
+class MultiLineMessages(unittest.TestCase):
+    def test_body_is_accepted(self):
+        r = validate_message("docs: update README\n\nExplain why the install step changed.")
+        self.assertEqual(r.status, "PASS", r.issues)
+
+    def test_breaking_change_footer_is_accepted(self):
+        msg = (
+            "feat(api)!: drop v1 endpoints\n\n"
+            "Clients must migrate before the next release.\n\n"
+            "BREAKING CHANGE: /v1 routes removed; use /v2"
+        )
+        r = validate_message(msg)
+        self.assertEqual(r.status, "PASS", r.issues)
+        _, body, trailers = split_message(msg)
+        self.assertEqual(trailers, [("BREAKING CHANGE", "/v1 routes removed; use /v2")])
+        self.assertEqual(body, ["Clients must migrate before the next release."])
+
+    def test_empty_breaking_change_footer_fails(self):
+        r = validate_message("feat: drop v1\n\nBREAKING CHANGE:")
+        self.assertEqual(r.status, "FAIL")
+        self.assertTrue(any("BREAKING CHANGE" in i for i in r.issues), r.issues)
+
+    def test_git_default_revert_is_accepted(self):
+        r = validate_message('Revert "feat: add search"\n\nThis reverts commit abc1234.')
+        self.assertEqual(r.status, "PASS", r.issues)
+
+    def test_assisted_by_trailer_is_accepted(self):
+        r = validate_message("feat(search): add full-text product search\n\nAssisted-by: LLM")
+        self.assertEqual(r.status, "PASS", r.issues)
+
+    def test_kernel_form_assisted_by_trailer_is_accepted(self):
+        """Kernel-style trailer listing tools after `LLM` parses as one trailer and passes."""
+        r = validate_message(
+            "feat(search): add full-text product search\n\n"
+            "Assisted-by: LLM coccinelle sparse"
+        )
+        self.assertEqual(r.status, "PASS", r.issues)
+        _, _, trailers = split_message(
+            "feat(search): add full-text product search\n\n"
+            "Assisted-by: LLM coccinelle sparse"
+        )
+        self.assertEqual(trailers, [("Assisted-by", "LLM coccinelle sparse")])
+
+    def test_session_and_audit_trailers_in_one_final_block_pass(self):
+        """The repo's real agent commits carry these three trailers together."""
+        r = validate_message(
+            "fix(skills): tighten trailer check\n\n"
+            "Body prose.\n\n"
+            "Audit-Batch: B07\n"
+            "Audit-Skill: dev-git-commit-message\n"
+            "Claude-Session: https://claude.ai/code/session_abc"
+        )
+        self.assertEqual(r.status, "PASS", r.issues)
+        _, _, trailers = split_message(
+            "fix: x\n\nAudit-Batch: B07\nClaude-Session: https://claude.ai/code/session_abc"
+        )
+        self.assertEqual([k for k, _ in trailers], ["Audit-Batch", "Claude-Session"])
+
+    def test_audit_trailer_value_naming_a_tool_is_not_attribution(self):
+        r = validate_message("fix: x\n\nAudit-Skill: ai-coding-agents-claude-code")
+        self.assertEqual(r.status, "PASS", r.issues)
+
+    def test_session_trailer_stranded_in_body_warns(self):
+        r = validate_message(
+            "fix: x\n\nClaude-Session: https://claude.ai/code/session_abc\n\nAudit-Batch: B07"
+        )
+        self.assertEqual(r.status, "WARN", r.issues)
+
+    def test_human_signoff_trailer_is_accepted(self):
+        r = validate_message("fix(io): close fd on error\n\nSigned-off-by: Jane Dev <jane@example.com>")
+        self.assertEqual(r.status, "PASS", r.issues)
+
+
+class PolicyStillEnforced(unittest.TestCase):
+    """The fix must not weaken the skill's documented rules."""
+
+    def test_ai_coauthor_trailer_fails(self):
+        r = validate_message("fix: handle nil\n\nCo-authored-by: Claude <noreply@anthropic.com>")
+        self.assertEqual(r.status, "FAIL")
+        self.assertTrue(any("attribution" in i for i in r.issues), r.issues)
+
+    def test_unknown_ai_trailer_fails(self):
+        for trailer in ("Generated-by: Claude", "Claude-Model: opus", "Copilot-Session: abc"):
+            r = validate_message(f"fix: handle nil\n\nBody prose.\n\n{trailer}")
+            self.assertEqual(r.status, "FAIL", (trailer, r.issues))
+            self.assertTrue(any("attribution" in i for i in r.issues), r.issues)
+
+    def test_attribution_in_body_prose_fails(self):
+        r = validate_message("fix: handle nil\n\nThis patch was generated by a tool.")
+        self.assertEqual(r.status, "FAIL")
+
+    def test_tool_name_in_scope_is_not_attribution(self):
+        r = validate_message("feat(claude-client): add retry")
+        self.assertEqual(r.status, "PASS", r.issues)
+
+    def test_missing_type_prefix_still_fails(self):
+        self.assertEqual(validate_message("update the readme\n\nbody").status, "FAIL")
+
+    def test_length_uses_subject_only(self):
+        long_body = "x" * 400
+        r = validate_message(f"fix: short subject\n\n{long_body}")
+        self.assertEqual(r.status, "PASS", r.issues)
+        self.assertEqual(validate_message("fix: " + "y" * 80).status, "FAIL")
+
+    def test_tense_suggestion_is_imperative(self):
+        r = validate_message("feat(ui): added dark mode toggle")
+        self.assertEqual(r.status, "WARN")
+        self.assertEqual(r.suggestion, "feat(ui): add dark mode toggle")
+
+    def test_suggestion_keeps_breaking_marker(self):
+        r = validate_message("feat(api)!: removed v1 routes")
+        self.assertEqual(r.suggestion, "feat(api)!: remove v1 routes")
+
+    def test_separator_requires_a_space(self):
+        for message in ("feat:add search", "feat:\tadd search"):
+            with self.subTest(message=message):
+                self.assertEqual(validate_message(message).status, "FAIL")
+
+    def test_empty_or_malformed_scope_fails(self):
+        for scope in ("", "two words", "api/route", "api_foo", "-api"):
+            with self.subTest(scope=scope):
+                self.assertEqual(validate_message(f"fix({scope}): close fd").status, "FAIL")
+
+
+class PlainSubjectOptOut(unittest.TestCase):
+    """`--no-type-prefix` skips only the type/scope rule."""
+
+    def plain(self, msg):
+        return validate_message(msg, type_prefix=False)
+
+    def test_plain_subject_fails_by_default_and_passes_with_flag(self):
+        msg = "Add refresh token rotation"
+        r = validate_message(msg)
+        self.assertEqual(r.status, "FAIL")
+        self.assertTrue(any("type prefix" in i for i in r.issues), r.issues)
+        self.assertEqual(self.plain(msg).status, "PASS", self.plain(msg).issues)
+
+    def test_long_plain_subject_still_fails(self):
+        r = self.plain("Add " + "x" * 80)
+        self.assertEqual(r.status, "FAIL")
+        self.assertTrue(any("hard limit" in i for i in r.issues), r.issues)
+
+    def test_plain_subject_other_rules_still_apply(self):
+        self.assertEqual(self.plain("Add search.").status, "FAIL")
+        self.assertEqual(self.plain("update").status, "FAIL")
+        self.assertEqual(self.plain("Fix stuff").status, "FAIL")
+        warned = self.plain("Added search")
+        self.assertEqual(warned.status, "WARN")
+        self.assertEqual(warned.suggestion, "Add search")
+        self.assertEqual(self.plain("Add a search feature over the whole catalogue index").status, "WARN")
+
+    def test_conventional_subject_still_passes_and_is_still_checked(self):
+        self.assertEqual(self.plain("feat(auth): add refresh token rotation").status, "PASS")
+        self.assertEqual(self.plain("feat(Auth): add search").status, "FAIL")
+        self.assertEqual(self.plain("feat(auth): add search.").status, "FAIL")
+
+    def test_trailer_rules_unchanged_with_flag(self):
+        for trailers in (
+            "Assisted-by: LLM",
+            "Audit-Batch: B07\nAudit-Skill: x\nClaude-Session: https://claude.ai/code/session_abc",
+        ):
+            r = self.plain(f"Add search\n\nBody prose.\n\n{trailers}")
+            self.assertEqual(r.status, "PASS", r.issues)
+        r = self.plain("Add search\n\nCo-authored-by: Claude <noreply@anthropic.com>")
+        self.assertEqual(r.status, "FAIL")
+        r = self.plain("Add search\n\nClaude-Session: https://claude.ai/code/session_abc\n\nAudit-Batch: B07")
+        self.assertEqual(r.status, "WARN", r.issues)
+
+    def test_cli_flag_on_validate_and_lint(self):
+        script = str(Path(__file__).with_name("commit_validator.py"))
+        run = lambda *a: subprocess.run([sys.executable, script, "--no-color", *a],
+                                        capture_output=True, text=True)
+        self.assertEqual(run("validate", "-m", "Add search").returncode, 1)
+        self.assertEqual(run("validate", "--no-type-prefix", "-m", "Add search").returncode, 0)
+        self.assertEqual(run("validate", "--no-type-prefix", "-m", "Add " + "x" * 80).returncode, 1)
+        with tempfile.TemporaryDirectory() as scratch:
+            path = Path(scratch) / "history.json"
+            path.write_text('[{"message": "Add search"}]', encoding="utf-8")
+            self.assertEqual(run("lint", "--input", str(path)).returncode, 1)
+            self.assertEqual(run("lint", "--no-type-prefix", "--input", str(path)).returncode, 0)
+            self.assertEqual(run("report", "--no-type-prefix", "--input", str(path)).returncode, 0)
+
+
+class HistoryInputContract(unittest.TestCase):
+    def run_history(self, command, path, output):
+        args = [sys.executable, str(Path(__file__).with_name("commit_validator.py")),
+                command, "--input", str(path)]
+        if command == "report":
+            args += ["--output", str(output)]
+        return subprocess.run(args, capture_output=True, text=True)
+
+    def assert_rejected(self, payload):
+        with tempfile.TemporaryDirectory() as scratch:
+            path = Path(scratch) / "history.json"
+            path.write_text(json.dumps(payload), encoding="utf-8")
+            output = Path(scratch) / "report.md"
+            for command in ("lint", "report"):
+                with self.subTest(command=command, payload=payload):
+                    result = self.run_history(command, path, output)
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn("ERROR:", result.stderr)
+                    self.assertIn(str(path), result.stderr)
+                    self.assertNotIn("Traceback", result.stderr)
+                    self.assertFalse(output.exists())
+
+    def test_non_object_record_rejected(self):
+        self.assert_rejected([None])
+
+    def test_empty_history_rejected(self):
+        self.assert_rejected([])
+
+    def test_missing_message_rejected(self):
+        self.assert_rejected([{}])
+
+    def test_null_message_rejected(self):
+        self.assert_rejected([{"message": None}])
+
+    def test_non_string_message_rejected(self):
+        self.assert_rejected([{"message": 123}])
+
+    def test_non_string_metadata_rejected(self):
+        for field in ("hash", "author", "date"):
+            self.assert_rejected([{"message": "fix: close fd", field: {}}])
+
+    def test_unreadable_history_rejected(self):
+        with tempfile.TemporaryDirectory() as scratch:
+            path = Path(scratch) / "history.json"
+            path.write_bytes(b"\xff")
+            output = Path(scratch) / "report.md"
+            for command in ("lint", "report"):
+                result = self.run_history(command, path, output)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("ERROR:", result.stderr)
+                self.assertIn(str(path), result.stderr)
+                self.assertNotIn("Traceback", result.stderr)
+                self.assertFalse(output.exists())
+
+    def test_valid_history_produces_report(self):
+        with tempfile.TemporaryDirectory() as scratch:
+            path = Path(scratch) / "history.json"
+            path.write_text('[{"message": "fix: close fd"}]', encoding="utf-8")
+            output = Path(scratch) / "report.md"
+            self.assertEqual(self.run_history("lint", path, output).returncode, 0)
+            self.assertEqual(self.run_history("report", path, output).returncode, 0)
+            self.assertIn("fix: close fd", output.read_text(encoding="utf-8"))
+
+    def test_report_output_error_names_path(self):
+        with tempfile.TemporaryDirectory() as scratch:
+            path = Path(scratch) / "history.json"
+            path.write_text('[{"message": "fix: close fd"}]', encoding="utf-8")
+            output = Path(scratch) / "missing" / "report.md"
+            result = self.run_history("report", path, output)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("ERROR:", result.stderr)
+            self.assertIn(str(output), result.stderr)
+            self.assertNotIn("Traceback", result.stderr)
+            self.assertFalse(output.exists())
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

@@ -1,330 +1,47 @@
-# Contributing to AI Agents Library
+# Contributing
 
-Thank you for your interest in contributing to the AI Agents Library! This document provides guidelines for contributing new agents, skills, and improvements.
+Thank you for helping. This repository is the public edition of a larger private library, so read "How changes land" before you start a large change.
 
-## Before You Start: This Repo Is a Mirror
+## How changes land
 
-`frameworks/shared-skills/skills/` and `custom-gpt/` are **synced from a private repository**.
-A PR editing those files will be reverted by the next sync.
+- Issues and small pull requests are welcome: a fix to a skill, a broken link, a wrong command, a failing check.
+- The public tree is rebuilt from the private library. An accepted pull request is applied there and comes back in the next build. Your change can therefore appear in a later commit, with your credit in the message.
+- For a new skill, subagent or workflow, open an issue first and describe the use case.
 
-That does not mean contributions are unwelcome — it means the useful path is different:
+## Report a problem
 
-| You want to | Do this |
-| --- | --- |
-| Report something wrong, stale, or misfiring | **Open an issue.** This is the highest-value contribution — it gets fixed upstream and stays fixed. |
-| Suggest a reference, correction, or better approach | **Open an issue** describing the change. Quote the file and line. |
-| Add a whole new skill | **Open an issue first** to check fit before writing it. |
-| Fix repo-level docs (`README.md`, `CONTRIBUTING.md`, `LICENSE`) | **PR directly.** These live here and are not overwritten. |
+Give:
 
-Issues describing a concrete problem — "this command no longer exists", "this API changed in
-v3", "this skill fires on the wrong trigger" — are more useful than PRs, because they get fixed
-at the source rather than in a copy.
+1. What you ran: the prompt, `/<workflow>` and its arguments, or the command.
+2. What you expected.
+3. What happened, with the exact error text.
+4. The runtime (Claude Code or Codex) and the install path (plugin or clone).
 
-## Table of Contents
+Report a security problem privately: see [SECURITY.md](SECURITY.md).
 
-- [Before You Start: This Repo Is a Mirror](#before-you-start-this-repo-is-a-mirror)
-- [Code of Conduct](#code-of-conduct)
-- [How Can I Contribute?](#how-can-i-contribute)
-- [Contributing Custom GPT Agents](#contributing-custom-gpt-agents)
-- [Contributing Skills](#contributing-skills)
-- [Quality Standards](#quality-standards)
-- [Submission Process](#submission-process)
+## Make a change
 
-## Code of Conduct
+1. Fork the repository and create a branch.
+2. Make the change. [docs/customizing.md](docs/customizing.md) explains how to write a skill, subagent, team, workflow or rule.
+3. Run the checks for what you changed (table below).
+4. Open a pull request. Say what changed, why, and which checks you ran.
 
-This project follows a professional code of conduct. Please be respectful, constructive, and collaborative in all interactions.
+| You changed | Run |
+|---|---|
+| A skill | `python3 skills/universal/agents-skills/scripts/validate_skill.py skills/universal/<name>` |
+| A subagent | `python3 skills/universal/agents-subagents/scripts/generate_codex_agents.py --check` |
+| A team | `generate-team-diagrams.py --check` and `generate_team_member_matrix.py --check` |
+| A workflow | `generate_workflows.py --check` and `node agents/workflows/test-adversarial-review.mjs` |
+| A hook | `python3 hooks/test_git_safety_guard.py` and `python3 hooks/test_config_guard.py` |
 
-## How Can I Contribute?
+## Rules for content
 
-### Reporting Bugs
+- **No secrets or personal data.** No keys, tokens, passwords, real customer data or real personal details, even in examples. Use `example.com` and clearly fake values.
+- **No invented facts.** Cite only what you read in the source. A number needs a source; a claim of improvement needs a comparison.
+- **No volatile data in prose.** Do not write current versions, prices or limits into a skill. Write a step that looks them up.
+- **Generated files stay generated.** Edit the source and run the generator. See [docs/concepts.md](docs/concepts.md#generated-files).
+- **Small diffs.** Change only what the fix needs.
 
-- Use the [GitHub Issues](https://github.com/vasilyu1983/AI-Agents-public/issues) tracker
-- Check if the issue already exists before creating a new one
-- Provide clear reproduction steps
-- Include relevant agent name, platform (ChatGPT/Claude/etc.), and error messages
+## Commit messages
 
-### Suggesting Enhancements
-
-- Use [GitHub Discussions](https://github.com/vasilyu1983/AI-Agents-public/discussions) for feature ideas
-- Explain the use case and value proposition
-- Consider if the enhancement aligns with the repository's focus
-
-### Contributing Code
-
-We welcome contributions of:
-- New Custom GPT agents
-- New AI coding agent skills
-- Improvements to existing agents or skills
-- Documentation enhancements
-- Bug fixes
-
-## Contributing Custom GPT Agents
-
-### Prerequisites
-
-Before creating a new agent:
-
-1. **Check for duplicates**: Search existing agents to avoid overlap
-2. **Validate use case**: Ensure the agent serves a clear, practical purpose
-
-### Agent Requirements
-
-Every Custom GPT agent must include:
-
-1. **Main Prompt File** (`01_agent-name.md`)
-   - Must be under 8000 characters (strict requirement)
-   - Use clear, concise language
-   - Include real-world examples
-
-2. **Configuration File** (`agent-name.yaml`)
-   - Define role title and scope
-   - List all slash commands with clear descriptions
-   - Specify constraints (max_chars, framework, tone)
-   - Match command names exactly with markdown COMMANDS section
-
-3. **Sources File** (`02_sources-agent-name.json`)
-   - Include curated web resources
-   - Group by logical categories
-   - Add descriptions for each source
-
-### File Structure
-
-```text
-custom-gpt/category/Agent Name/
-├── 01_agent-name.md           # Main prompt (<8000 chars)
-├── 02_sources-agent-name.json # Curated resources
-└── agent-name.yaml            # Configuration
-```
-
-### Character Count Validation
-
-Before submitting, validate character count:
-
-```bash
-wc -c "custom-gpt/category/Agent Name/01_agent-name.md"
-# Output must be < 8000
-```
-
-### Categories
-
-Choose the appropriate category:
-- `education/` - Educational and learning agents
-- `lifestyle/` - Health, fitness, entertainment, personal development
-- `productivity/` - Business, productivity, professional tools
-- `programming/` - Software development and technical agents
-- `research-n-analysis/` - Strategic consulting and analysis
-- `writing/` - Content creation and writing assistance
-
-## Contributing Skills
-
-### Skill Requirements
-
-Every AI coding agent skill must include:
-
-1. **Skill Definition** (`SKILL.md`)
-   - YAML frontmatter with `name` and `description`
-   - Clear description of what the skill does
-   - "When to Use This Skill" section
-   - Quick reference tables
-
-2. **References Directory** (`references/`) - optional
-   - Operational guides and patterns
-   - Best practices documentation
-
-3. **Data Directory** (`data/`) - optional
-   - `sources.json` with curated web references
-
-4. **Assets Directory** (`assets/`) - optional
-   - Templates and scaffolds
-
-### Skill Structure
-
-```text
-frameworks/shared-skills/skills/skill-name/
-├── SKILL.md              # Skill definition (required)
-├── references/           # Guides and patterns
-│   ├── best-practices.md
-│   └── patterns.md
-├── data/                 # Curated references
-│   └── sources.json
-└── assets/               # Templates
-    └── template-1.md
-```
-
-### Skill SKILL.md Format
-
-```yaml
----
-name: skill-name
-description: One-line description for AI coding agent UI
----
-
-# Skill Title
-
-[Overview and when to use]
-
-## When to Use This Skill
-[Bullet points]
-
-## Quick Reference
-[Tables of tools, frameworks, patterns]
-```
-
-### Skill Categories
-
-Skills use domain prefixes. Use an existing one — a new prefix needs a good reason:
-
-- `software-*` - Application engineering (backend, frontend, mobile, security)
-- `ai-*` - AI/ML methods, retrieval, evals, training, inference
-- `ai-coding-agents-*` - Coding-agent runtime internals (sandboxing, permissions, sessions)
-- `qa-*` - Testing, quality, debugging, resilience
-- `foundations-*` - Systems theory applied to design (queueing, control, information)
-- `dev-*` - Developer workflow and process
-- `agents-*` - Agent orchestration and tooling
-- `data-*` - Analytics, SQL, data platforms
-- `ops-*` - Infrastructure and platform operations
-- `docs-*` / `document-*` - Documentation and file formats
-- `research-*` - Source mining and triage
-- `product-*` - Product management
-- `gamedev-*` - Game development
-
-## Quality Standards
-
-### All Contributions Must:
-
-- [ ] **Follow existing patterns**: Match repository structure and naming conventions
-- [ ] **Be tested**: Verify functionality on target platform
-- [ ] **Include documentation**: Clear descriptions and usage examples
-- [ ] **Pass validation**: Character limits, syntax checks, no placeholders
-- [ ] **Be production-ready**: No incomplete or work-in-progress submissions
-- [ ] **Cite sources**: Include references for methodologies and best practices
-
-### Custom GPT Specific:
-
-- [ ] Under 8000 characters (hard requirement)
-- [ ] No `{{placeholder}}` variables remaining
-- [ ] Commands match between YAML and markdown
-- [ ] Tested in ChatGPT Custom GPT builder
-
-### Skills Specific:
-
-- [ ] SKILL.md includes proper YAML frontmatter
-- [ ] References directory has meaningful content (if included)
-- [ ] Follows [Agent Skills specification](https://agentskills.io/specification)
-- [ ] Skill activates correctly in Claude Code or Codex CLI
-
-## Submission Process
-
-### 1. Fork the Repository
-
-```bash
-git clone https://github.com/vasilyu1983/AI-Agents-public
-cd AI-Agents-public
-git checkout -b feature/your-contribution
-```
-
-### 2. Create Your Contribution
-
-Follow the structure and requirements above.
-
-### 3. Validate Your Work
-
-**For Custom GPT Agents:**
-```bash
-# Check character count
-wc -c "custom-gpt/category/Agent Name/01_agent-name.md"
-
-# Verify no placeholders
-grep "{{.*}}" "custom-gpt/category/Agent Name/01_agent-name.md"
-```
-
-**For Skills:**
-```bash
-# Verify SKILL.md exists
-cat frameworks/shared-skills/skills/your-skill/SKILL.md
-
-# Check frontmatter
-head -5 frameworks/shared-skills/skills/your-skill/SKILL.md
-```
-
-### 4. Commit Your Changes
-
-```bash
-git add .
-git commit -m "Add [Agent/Skill Name] - [brief description]"
-```
-
-Use clear commit messages:
-- "Add Fitness Coach agent - workout programming and nutrition"
-- "Add Python testing skill - pytest and coverage patterns"
-- "Fix character count in Prompt Engineer agent"
-
-### 5. Submit Pull Request
-
-1. Push your branch to your fork
-2. Create a Pull Request on GitHub
-3. Fill in the PR template with:
-   - Description of the agent/skill
-   - Use cases and value proposition
-   - Testing performed
-   - Character count validation (for Custom GPT)
-
-### 6. Code Review
-
-Maintainers will review your submission for:
-- Adherence to quality standards
-- Character count compliance (Custom GPT)
-- Functionality and usefulness
-- Documentation completeness
-- No security issues or inappropriate content
-
-You may be asked to make revisions. Please respond to feedback promptly.
-
-## Development Setup
-
-### Tools
-
-Recommended tools for development:
-- **Character counter**: `wc -c filename.md`
-- **YAML validator**: `yamllint filename.yaml`
-- **JSON validator**: `python3 -m json.tool filename.json`
-- **Markdown linter**: `markdownlint-cli2`
-
-## Style Guidelines
-
-### Markdown
-
-- Use `#` for H1, `##` for H2, etc.
-- Add blank lines around headings and code blocks
-- Use code fences with language tags: ` ```python `
-- Keep line length reasonable (120 chars max)
-- Use bullet points for lists of items
-
-### YAML
-
-- Use 2-space indentation
-- Quote string values with special characters
-- Use descriptive command names (e.g., `/analyze` not `/a`)
-- Keep consistent formatting with existing files
-
-### JSON
-
-- Use 2-space indentation
-- Always validate with `python3 -m json.tool`
-- Include `metadata` section with title, description, last_updated
-- Group sources by logical categories
-
-## Questions?
-
-- **General questions**: [GitHub Discussions](https://github.com/vasilyu1983/AI-Agents-public/discussions)
-- **Bug reports**: [GitHub Issues](https://github.com/vasilyu1983/AI-Agents-public/issues)
-- **Twitter**: [@vasilyu](https://twitter.com/vasilyu)
-
-## Recognition
-
-Contributors will be recognized in:
-- Repository README (for significant contributions)
-- Release notes
-- Commit history
-
-Thank you for helping make AI Agents Library better!
+Use a short, imperative subject: "Fix the branch target in adversarial-review docs".

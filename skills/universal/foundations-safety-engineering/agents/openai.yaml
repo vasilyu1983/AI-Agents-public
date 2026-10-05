@@ -1,0 +1,4 @@
+interface:
+  display_name: "Safety Engineering Foundations"
+  short_description: "Hazards, agent guardrails, safety cases, and CAST"
+  default_prompt: "Use $foundations-safety-engineering to analyze hazards in systems or AI agents that take actions or send payments: STPA, guardrails, safety cases, and incident analysis."

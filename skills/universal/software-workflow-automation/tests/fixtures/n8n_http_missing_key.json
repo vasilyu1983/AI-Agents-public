@@ -1,0 +1,12 @@
+{
+  "name": "n8n sample: POST without idempotency key or retry",
+  "nodes": [
+    {
+      "id": "b1",
+      "name": "Create order",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "parameters": { "method": "POST", "url": "https://api.example.com/orders" }
+    }
+  ]
+}

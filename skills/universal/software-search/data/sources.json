@@ -1,0 +1,192 @@
+{
+  "metadata": {
+    "skill": "software-search",
+    "updated": "2026-09-25",
+    "total_sources": 28,
+    "description": "Primary engine, indexing, and search-quality sources for application search.",
+    "title": "Software Search - Sources",
+    "last_updated": "2026-09-25"
+  },
+  "categories": {
+    "engines": [
+      {
+        "name": "PostgreSQL Text Search",
+        "url": "https://www.postgresql.org/docs/current/textsearch.html",
+        "description": "Native full-text search capabilities and indexing in PostgreSQL.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PostgreSQL pg_trgm",
+        "url": "https://www.postgresql.org/docs/current/pgtrgm.html",
+        "description": "Official trigram similarity and fuzzy matching support for PostgreSQL search implementations.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Elasticsearch Reference",
+        "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html",
+        "description": "Core indexing, analyzers, scoring, and aggregation guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Elasticsearch Rank Eval",
+        "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/search-rank-eval.html",
+        "description": "Official ranking-evaluation API guidance for judged-query relevance testing.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenSearch Docs",
+        "url": "https://docs.opensearch.org/latest/",
+        "description": "OpenSearch query, cluster, and relevance documentation.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Algolia Docs",
+        "url": "https://www.algolia.com/doc/",
+        "description": "Managed search engine guidance for search-as-you-type and analytics.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Typesense Docs",
+        "url": "https://typesense.org/docs/",
+        "description": "Developer-friendly search engine and search UX patterns.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Meilisearch Docs",
+        "url": "https://www.meilisearch.com/docs",
+        "description": "Simple full-text search engine and relevance tuning documentation.",
+        "add_as_web_search": true
+      }
+    ],
+    "vector_and_hybrid": [
+      {
+        "name": "pgvector",
+        "url": "https://github.com/pgvector/pgvector",
+        "description": "Vector similarity search inside PostgreSQL. Look up here the HNSW dimension caps per vector type and iterative-index-scan support for filtered search.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Qdrant Docs",
+        "url": "https://qdrant.tech/documentation/",
+        "description": "Vector and hybrid search engine documentation.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenSearch Vector Search",
+        "url": "https://docs.opensearch.org/latest/vector-search/",
+        "description": "Official OpenSearch vector and hybrid retrieval guidance.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Weaviate Hybrid Search",
+        "url": "https://docs.weaviate.io/weaviate/search/hybrid",
+        "description": "Weaviate hybrid search: score-based and rank-based fusion methods; look up the current default and alpha behaviour.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Qdrant Hybrid Queries",
+        "url": "https://qdrant.tech/documentation/search/hybrid-queries/",
+        "description": "Qdrant Query API prefetch, RRF, and DBSF fusion for native BM25 + dense hybrid search.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Elastic Subscriptions Matrix",
+        "url": "https://www.elastic.co/subscriptions",
+        "description": "Feature-by-tier matrix: look up which subscription tier includes RRF, linear and reranker retrievers, LTR, and Query Rules on self-managed.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Elasticsearch RRF Retriever",
+        "url": "https://www.elastic.co/docs/reference/elasticsearch/rest-apis/retrievers/rrf-retriever",
+        "description": "rank_constant, rank_window_size, and per-retriever weight; check the defaults and version availability here.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Elasticsearch Linear Retriever",
+        "url": "https://www.elastic.co/docs/reference/elasticsearch/rest-apis/retrievers/linear-retriever",
+        "description": "Weighted linear fusion with minmax / l2_norm normalizers.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenSearch Score Ranker Processor (RRF)",
+        "url": "https://docs.opensearch.org/latest/search-plugins/search-pipelines/score-ranker-processor/",
+        "description": "RRF search-pipeline processor and its weights parameter; check the minimum version here.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenSearch k-NN Methods and Engines",
+        "url": "https://docs.opensearch.org/latest/mappings/supported-field-types/knn-methods-engines/",
+        "description": "HNSW memory estimate 1.1 x (4 x dimension + 8 x m) bytes per vector.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "OpenSearch Binary Quantization",
+        "url": "https://docs.opensearch.org/latest/vector-search/optimizing-storage/binary-quantization/",
+        "description": "Quantized HNSW memory estimate 1.1 x (dimension x bits / 8 + 8 x m).",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Typesense Vector Search",
+        "url": "https://typesense.org/docs/latest/api/vector-search.html",
+        "description": "Hybrid rank fusion and its keyword/vector alpha; check the current default here.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Meilisearch v1.13 Release",
+        "url": "https://github.com/meilisearch/meilisearch/releases/tag/v1.13.0",
+        "description": "Release note for hybrid search general availability; check semanticRatio and hybrid options in the current search API reference.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Cormack et al. 2009 RRF paper",
+        "url": "https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf",
+        "description": "Origin of RRF; k=60 fixed in a pilot, near-optimal but not critical.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "ParadeDB pg_search",
+        "url": "https://github.com/paradedb/paradedb",
+        "description": "Tantivy-based BM25 Postgres extension; community edition AGPL-3.0, commercial Enterprise licence.",
+        "add_as_web_search": true
+      },
+      {
+        "name": "pg_textsearch",
+        "url": "https://github.com/timescale/pg_textsearch",
+        "description": "Tiger Data BM25 Postgres extension (USING bm25, <@> operator); PostgreSQL Licence.",
+        "add_as_web_search": true
+      }
+    ],
+    "retrieval": [
+      {
+        "name": "Elasticsearch Reference",
+        "url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html",
+        "description": "Elasticsearch indexing, hybrid retrieval (RRF), and quantization. Always read the 'current' docs; do not hardcode a major version.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenSearch Documentation",
+        "url": "https://docs.opensearch.org/latest/",
+        "description": "OpenSearch vector/hybrid search and quantization. Resolve current version features at use-time.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "pgvector",
+        "url": "https://github.com/pgvector/pgvector",
+        "description": "Postgres vector extension; combine with full-text/BM25 for in-database hybrid search. Verify current quantization (halfvec) support at use-time. Check dimension caps and iterative-scan support in the README.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "books": [
+      {
+        "name": "AI-Powered Search — Trey Grainger, Doug Turnbull, Max Irwin (Manning, 2025)",
+        "url": "https://www.manning.com/books/ai-powered-search",
+        "description": "Semantic knowledge graphs for query classification and query-sense disambiguation (ch. 6); signals-boosting models and the index-time vs query-time boosting tradeoff (ch. 8). Source for the query-classification and signals-boosting sections in SKILL.md.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ]
+  }
+}

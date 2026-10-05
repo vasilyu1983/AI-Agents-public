@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Design"
+  short_description: "Designs runtime topology, ADRs, and fitness functions"
+  default_prompt: "Use $software-architecture-design for modular monolith vs services, cells, consistency, resilience, ADRs, and fitness functions inside a chosen solution."

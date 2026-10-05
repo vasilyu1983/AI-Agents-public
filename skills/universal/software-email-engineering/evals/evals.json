@@ -1,0 +1,59 @@
+{
+  "skill_name": "software-email-engineering",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A new SaaS startup is setting up transactional email for the first time. They have a single domain (example.com) and plan to use it for both marketing campaigns and password reset emails sent via Resend. A deliverability consultant says they need SPF, DKIM, and DMARC 'set up properly' before launching. Walk through the correct setup sequence and explain what each record does.",
+      "expected_output": "The skill should explain SPF (lists authorized sending IPs/services in DNS TXT), DKIM (cryptographic signature proving the message was authorized and not tampered with), and DMARC (policy declaring what to do when SPF/DKIM fail; provides aggregate reports; progression from p=none to p=quarantine to p=reject). It should recommend starting DMARC at p=none with rua reporting to discover all sending sources, then moving to quarantine after review. It should also warn that sharing the same domain for transactional and marketing email is an anti-pattern — a dedicated subdomain (mail.example.com or notifications.example.com) should be used for transactional email to isolate its reputation from marketing complaint rates.",
+      "files": [],
+      "expectations": [
+        "The output explains SPF, DKIM, and DMARC as distinct controls with distinct purposes and does not conflate them.",
+        "The output prescribes starting DMARC at p=none with rua aggregate reporting before tightening to quarantine or reject.",
+        "The output warns against sharing the same sending domain for transactional and marketing email; recommends a dedicated subdomain for transactional.",
+        "The output explains DMARC alignment: the SPF-authenticated domain or DKIM signing domain must match the From: header domain.",
+        "The output mentions that Resend (or any bulk ESP) requires DKIM records added in DNS for the sending domain to achieve DMARC alignment."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A SaaS company's transactional emails to Gmail users have a 30% bounce rate as of last week. The emails were previously delivering fine. Google Postmaster Tools shows domain reputation has dropped to 'Low'. The team has not changed their sending infrastructure. Diagnose the most likely causes and provide a remediation plan.",
+      "expected_output": "The skill should diagnose the most likely causes: (1) a spike in spam complaints (reputation lagging indicator that has now crossed a threshold), (2) a misconfigured or expired DKIM key causing authentication failures, (3) hitting a new blacklist, or (4) a hard bounce spike from a bad list segment. Remediation: check Google Postmaster Tools authentication section for DKIM/SPF/DMARC pass rates; check for DKIM key expiry or rotation that broke signing; run MXToolbox blacklist check; review bounce classification in the ESP dashboard; pause sends to the affected segments; once root cause is fixed, warm reputation gradually. The output should also mention that reputation recovery takes weeks — there is no instant fix.",
+      "files": [],
+      "expectations": [
+        "The output identifies Google Postmaster Tools as the primary diagnostic tool and explains what metrics to check (spam rate, authentication pass rates, IP/domain reputation).",
+        "The output includes DKIM key expiry or misconfiguration as a likely cause given the sudden drop without infrastructure changes.",
+        "The output recommends running an MXToolbox blacklist check to rule out IP or domain blacklisting.",
+        "The output notes that domain reputation recovery is gradual — weeks, not hours — and recommends reducing send volume while reputation recovers.",
+        "The output recommends checking hard bounce rates in the ESP and immediately suppressing hard-bounced addresses to stop further reputation damage.",
+        "The output warns against continuing high-volume sends while reputation is Low, as this accelerates the damage."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "An e-commerce company sends a weekly promotional newsletter and daily transactional order confirmation emails, both from the same domain and ESP account. The marketing team wants to add a 'one-click unsubscribe' button to comply with Google's bulk sender requirements. The engineering lead asks whether the unsubscribe applies to transactional emails too. Clarify the requirements and design the correct architecture.",
+      "expected_output": "The skill should clarify: Google's bulk sender one-click unsubscribe requirement (RFC 8058) applies to promotional/marketing emails, not to purely transactional emails like order confirmations (which are triggered by a user action and are expected). However, the team should separate transactional and marketing into different sending domains and ideally different ESP accounts or sub-accounts to isolate reputation. For the promotional newsletter, implement List-Unsubscribe with both mailto: fallback and https: one-click URL, plus the List-Unsubscribe-Post: List-Unsubscribe=One-Click header explicitly. Apply the unsubscribe as soon as the POST arrives; Google recommends fulfilling requests within 48 hours, and failing to honour them costs delivery support and mitigations. The output should warn that failing to include the explicit List-Unsubscribe-Post header means Gmail does not treat the URL as one-click capable.",
+      "files": [],
+      "expectations": [
+        "The output correctly distinguishes transactional (order confirmation) from promotional (newsletter) email — one-click unsubscribe is required for promotional, not purely transactional.",
+        "The output specifies the exact RFC 8058 header syntax: both the List-Unsubscribe header with https: and mailto: values, and the mandatory List-Unsubscribe-Post: List-Unsubscribe=One-Click header.",
+        "The output says the unsubscribe must be applied promptly and cites Google's 48-hour recommendation (not '2 business days'); it does not claim a 48-hour miss causes SMTP rejection.",
+        "The output recommends separating transactional and marketing into different sending domains or ESP sub-accounts to isolate reputation.",
+        "The output warns that the List-Unsubscribe-Post header must be explicit — its absence means Gmail does not surface the one-click button even if the List-Unsubscribe header is present."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "A B2B SaaS company has had DMARC at p=none for 18 months. The CEO received a phishing email impersonating the company's domain and wants to move to p=reject immediately. The engineering team has never reviewed the DMARC aggregate reports. Advise on the safe path to p=reject and the risks of moving immediately.",
+      "expected_output": "The skill should warn strongly against moving to p=reject without first auditing all legitimate sending sources. Immediate p=reject will reject all mail from sources that are not correctly configured for SPF alignment or DKIM signing — including forgotten ESPs, CRM tools, calendar invites, and application mailers. The safe path under DMARCbis (RFC 9989, which obsoletes RFC 7489 and removes the pct tag): (1) review 18 months of rua aggregate reports in a DMARC reporting tool (Postmark, Dmarcian) to enumerate all sending sources; (2) for each source, either configure SPF + DKIM alignment or stop it sending from the domain, and DKIM-sign everything that will sit under an enforcing policy; (3) move to p=quarantine, optionally first with t=y (test mode applies the policy one level down), and monitor for a period at least as long as the p=none phase; (4) choose the end state per domain: p=reject for transactional-only or non-mailbox subdomains, but if the organizational domain hosts users who post to mailing lists, RFC 9989 says it SHOULD NOT publish p=reject — stay at p=quarantine or accept list breakage explicitly. The output should also recommend sp= and np=reject to cover existing and non-existent subdomains.",
+      "files": [],
+      "expectations": [
+        "The output warns against immediate p=reject without first auditing sending sources via aggregate reports.",
+        "The output prescribes reviewing 18 months of rua aggregate reports to enumerate all sending sources before tightening policy.",
+        "The output describes the progression without a pct percentage ramp: p=quarantine (optionally with t=y test mode first), then an enforcement end state; it notes pct was removed in RFC 9989.",
+        "The output explains what types of sending sources are commonly missed: CRM tools, marketing ESPs, calendar invites, application mailers, third-party SaaS integrations.",
+        "The output recommends subdomain coverage in the final record (sp= for existing subdomains and np=reject for non-existent subdomains).",
+        "The output applies the RFC 9989 caveat: a domain whose users post to mailing lists SHOULD NOT publish p=reject, so the CEO's request may end at p=quarantine for the organizational domain while transactional-only subdomains go to p=reject."
+      ]
+    }
+  ]
+}

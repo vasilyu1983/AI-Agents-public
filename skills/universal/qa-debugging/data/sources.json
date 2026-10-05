@@ -1,0 +1,264 @@
+{
+  "metadata": {
+    "skill": "qa-debugging",
+    "updated": "2026-09-29",
+    "version": "3.5",
+    "total_sources": 33,
+    "description": "Primary references for systematic debugging, production investigation, profiling, tracing, deterministic record/replay, and public-error corpus search. Verify tool support and configuration against the linked docs at use time.",
+    "title": "QA Debugging - Sources",
+    "last_updated": "2026-09-29"
+  },
+  "categories": {
+    "sre_troubleshooting": [
+      {
+        "name": "Google SRE Book - Effective Troubleshooting",
+        "url": "https://sre.google/sre-book/effective-troubleshooting/",
+        "description": "Evidence-based troubleshooting workflow and tradeoffs.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Google SRE Book - Managing Incidents",
+        "url": "https://sre.google/sre-book/managing-incidents/",
+        "description": "Incident response and coordination patterns.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "observability_standards": [
+      {
+        "name": "OpenTelemetry Documentation",
+        "url": "https://opentelemetry.io/docs/",
+        "description": "Vendor-neutral traces/metrics/logs instrumentation and correlation.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OpenTelemetry Zero-Code Instrumentation",
+        "url": "https://opentelemetry.io/docs/zero-code/",
+        "description": "Current zero-code instrumentation guidance, including eBPF-based approaches.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "OpenTelemetry GenAI Semantic Conventions",
+        "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+        "description": "Current GenAI tracing attributes, agent spans, MCP tool call spans, and content-capture events. Check each span's stability tier at opentelemetry.io/docs/specs/semconv/gen-ai/ before relying on it; secondary sources disagree on it. Switch to the latest experimental attribute set via OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "OpenTelemetry eBPF Instrumentation (OBI)",
+        "url": "https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation",
+        "description": "Official OTel project form of Grafana Beyla's instrumentation engine (donated 2025). Check the project's current stability status before relying on it. Zero-code OTLP span emission via eBPF uprobes; uses its own OTEL_EBPF_* env-var namespace, not Beyla's BEYLA_*. Language support is documented in the project's SUPPORT_MATRIX.md -- verify there before relying on a specific language.",
+        "add_as_web_search": false,
+        "optional": true
+      },
+      {
+        "name": "W3C Trace Context",
+        "url": "https://www.w3.org/TR/trace-context/",
+        "description": "Standard for trace propagation (`traceparent`).",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "The Twelve-Factor App - Logs",
+        "url": "https://12factor.net/logs",
+        "description": "Logs as event streams; useful baseline for debugging in cloud environments.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "record_and_replay": [
+      {
+        "name": "rr: lightweight recording & deterministic debugging",
+        "url": "https://rr-project.org/",
+        "description": "Mozilla-originated deterministic record-and-replay debugger for Linux; runs recorded threads on a single core. Kernel, perf_event_paranoid, CPU, and debugger-integration requirements change between releases: check github.com/rr-debugger/rr/releases and rr --version on the recording host. Use rr.soft for VMs without hardware performance counters.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "rr.soft \u2014 rr without hardware performance counters",
+        "url": "https://github.com/sidkshatriya/rr.soft",
+        "description": "Experimental fork, not merged into upstream rr. Runs rr in a Linux VM on Apple Silicon macOS or cloud VMs lacking CPU hardware performance counters. Record with rr record -W; replay also requires -W. Supports x86-64 and AArch64 Linux.",
+        "add_as_web_search": false,
+        "optional": true
+      },
+      {
+        "name": "Pernosco \u2014 Omniscient Debugging",
+        "url": "https://pernos.co/",
+        "description": "Hosted debugging over rr recordings. Consult its current documentation for supported workloads, hosting options, and commercial terms before selecting it.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "profiling_and_debuggers": [
+      {
+        "name": "Chrome DevTools - Performance",
+        "url": "https://developer.chrome.com/docs/devtools/performance/",
+        "description": "Frontend and Node.js performance profiling workflows.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Chrome DevTools - Memory Problems",
+        "url": "https://developer.chrome.com/docs/devtools/memory-problems/",
+        "description": "Official browser memory leak and heap investigation workflows.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Node.js - Using Heap Snapshot",
+        "url": "https://nodejs.org/en/learn/diagnostics/memory/using-heap-snapshot",
+        "description": "Official Node.js heap snapshot workflow for leak debugging.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Node.js - Using Heap Profiler",
+        "url": "https://nodejs.org/en/learn/diagnostics/memory/using-heap-profiler",
+        "description": "Official Node.js heap profiling workflow.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "Node.js - Using Linux perf",
+        "url": "https://nodejs.org/en/learn/diagnostics/poor-performance/using-linux-perf",
+        "description": "Official low-level CPU investigation workflow for Linux production systems.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Python Logging HOWTO",
+        "url": "https://docs.python.org/3/howto/logging.html",
+        "description": "Official Python logging guidance and patterns.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "Rust Unstable Book - Sanitizers",
+        "url": "https://doc.rust-lang.org/unstable-book/compiler-flags/sanitizer.html",
+        "description": "Supported sanitizer targets, instrumented standard library, explicit target isolation, and TSan synchronization blind spots.",
+        "add_as_web_search": false,
+        "optional": true
+      },
+      {
+        "name": "Linux Kernel - Control Group v2",
+        "url": "https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html",
+        "description": "Charged memory, reclaim, hard memory limits, and memory.events for cgroup OOM diagnosis.",
+        "add_as_web_search": false,
+        "optional": true
+      },
+      {
+        "name": "Kubernetes - Node-pressure Eviction",
+        "url": "https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/",
+        "description": "Kubelet memory.available signal and inactive-file exclusion; distinguish eviction from a kernel cgroup OOM kill.",
+        "add_as_web_search": false,
+        "optional": true
+      }
+    ],
+    "databases": [
+      {
+        "name": "PostgreSQL - EXPLAIN",
+        "url": "https://www.postgresql.org/docs/current/sql-explain.html",
+        "description": "Query plan inspection and analysis.",
+        "add_as_web_search": false,
+        "optional": false
+      },
+      {
+        "name": "PostgreSQL - pg_stat_statements",
+        "url": "https://www.postgresql.org/docs/current/pgstatstatements.html",
+        "description": "Server-side query performance statistics for debugging slow queries.",
+        "add_as_web_search": false,
+        "optional": false
+      }
+    ],
+    "ai_assisted_debugging": [
+      {
+        "name": "Langfuse Documentation",
+        "url": "https://langfuse.com/docs",
+        "description": "LLM tracing, evaluations, prompt/version tracking, and cost debugging workflows.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "OWASP Top 10 for LLM Applications",
+        "url": "https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/",
+        "description": "Current OWASP baseline for LLM application risks relevant to AI-assisted debugging.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OWASP Top 10 for Agentic Applications for 2026",
+        "url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+        "description": "Agent-specific failure and abuse modes relevant to agent/tool debugging in 2026.",
+        "add_as_web_search": true,
+        "optional": false
+      },
+      {
+        "name": "OWASP Practical Guide for Secure MCP Server Development",
+        "url": "https://genai.owasp.org/resource/a-practical-guide-for-secure-mcp-server-development/",
+        "description": "Security controls for MCP servers and tool integrations used during debugging.",
+        "add_as_web_search": true,
+        "optional": false
+      }
+    ],
+    "distributed_tracing_and_profiles": [
+      {
+        "name": "SigNoz Documentation",
+        "url": "https://signoz.io/docs/",
+        "description": "OTel-native traces, metrics, and logs reference for debugging workflows.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Grafana Pyroscope Documentation",
+        "url": "https://grafana.com/docs/pyroscope/latest/",
+        "description": "Continuous profiling for intermittent CPU and memory issues. Consult the deployment docs for the installed release before choosing storage or query architecture; numeric storage savings are unverified here.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Sentry Profiling Documentation",
+        "url": "https://docs.sentry.io/product/profiling/",
+        "description": "Continuous and sampled profiling workflows tied to errors and traces.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "knowledge_corpus_search": [
+      {
+        "name": "Stack Exchange API v2.3 \u2014 search/advanced",
+        "url": "https://api.stackexchange.com/docs",
+        "description": "Public Q&A search API behind community Stack Overflow MCP servers. Search-first triage for recognizable errors before deep debugging. API key raises rate limits only (not a secret).",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "@gscalzo/stackoverflow-mcp (community MCP server)",
+        "url": "https://github.com/gscalzo/stackoverflow-mcp",
+        "description": "Community MCP server over the Stack Exchange API. Read the README and inspect the installed tool schema for tool names, arguments, and installation requirements.",
+        "add_as_web_search": true,
+        "optional": true
+      },
+      {
+        "name": "Stack Overflow for Agents",
+        "url": "https://agents.stackoverflow.com/llms.txt",
+        "description": "Agent-facing corpus access. Check current availability, authentication, endpoint paths, request/response shapes, and write-back permissions against the linked documentation before wiring a call; these are unverified here.",
+        "add_as_web_search": true,
+        "optional": true
+      }
+    ],
+    "external_practice_adoption": [
+      {
+        "name": "Third-party plugin collection (MIT licence)",
+        "url": "https://github.com/cursor/plugins/tree/main/pstack",
+        "description": "Informed the stale-persistent-state-first and shared-premise-before-third-attempt lines (Cognitive traps).",
+        "license": "MIT",
+        "accessed": "2026-09-29",
+        "add_as_web_search": false,
+        "optional": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "metadata": {
+    "skill": "qa-api-testing-contracts",
+    "updated": "2026-09-24",
+    "total_sources": 31,
+    "description": "Curated primary sources for API contract testing, compatibility gates, schema validation, and mixed-protocol contract workflows.",
+    "version": "1.6",
+    "title": "QA Api Testing Contracts - Sources",
+    "last_updated": "2026-09-24"
+  },
+  "categories": {
+    "specifications": [
+      {
+        "name": "OpenAPI Specification v3.2.1",
+        "url": "https://spec.openapis.org/oas/v3.2.1.html",
+        "type": "specification",
+        "relevance": "Published 3.2 feature set; patch releases clarify text without adding features. Check the specification index and the whole toolchain before choosing a document version.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OAI sig-moonwalk (OpenAPI 4.0 / \"Project Moonwalk\")",
+        "url": "https://github.com/OAI/sig-moonwalk",
+        "type": "specification",
+        "relevance": "OpenAPI 4.0 design effort. Check the SIG's current status before relying on it; while it has no stable specification, keep using OpenAPI 3.x and do not plan contract-testing pipelines around 4.0 features.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "JSON Schema (2020-12)",
+        "url": "https://json-schema.org/specification.html",
+        "type": "specification",
+        "relevance": "Core validation model used by OpenAPI 3.1+ and related tooling.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "AsyncAPI Specification v3.1.0",
+        "url": "https://www.asyncapi.com/docs/reference/specification/v3.1.0",
+        "type": "specification",
+        "relevance": "Contract surface for event-driven APIs, messages, and channels. Check the published specification index and consuming tools before selecting a version.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Arazzo Specification v1.1.0",
+        "url": "https://spec.openapis.org/arazzo/latest.html",
+        "type": "specification",
+        "relevance": "Workflow contract format for multi-step API outcomes; the 1.1 feature set includes AsyncAPI steps, JSONPath/XPath, and $self. Select a version supported by the runner/validator. Send completion does not establish broker acknowledgment or delivery.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "OpenAPI Initiative \u2013 Arazzo Specification Overview",
+        "url": "https://www.openapis.org/arazzo-specification",
+        "type": "specification",
+        "relevance": "OAI landing page for Arazzo: purpose, current version (check the page), and conformance test suite. AsyncAPI workflow support shipped in 1.1.0.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "GraphQL Specification",
+        "url": "https://spec.graphql.org/",
+        "type": "specification",
+        "relevance": "Schema and execution semantics for GraphQL APIs.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "gRPC Documentation",
+        "url": "https://grpc.io/docs/",
+        "type": "documentation",
+        "relevance": "RPC design and operational guidance for gRPC services.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Protocol Buffers Documentation",
+        "url": "https://protobuf.dev/",
+        "type": "documentation",
+        "relevance": "Schema definition and compatibility rules for protobuf messages.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "RFC 9457: Problem Details for HTTP APIs",
+        "url": "https://www.rfc-editor.org/rfc/rfc9457",
+        "type": "specification",
+        "relevance": "Current standard problem-details envelope for HTTP APIs; obsoletes RFC 7807.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "tools": [
+      {
+        "name": "Spectral",
+        "url": "https://github.com/stoplightio/spectral",
+        "type": "tool",
+        "relevance": "Artifact linting and style governance for OpenAPI, AsyncAPI, and Arazzo documents.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Prism",
+        "url": "https://github.com/stoplightio/prism",
+        "type": "tool",
+        "relevance": "Schema-aware mock server and request/response validator for OpenAPI and Postman collections.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "oasdiff",
+        "url": "https://github.com/oasdiff/oasdiff",
+        "type": "tool",
+        "relevance": "OpenAPI diff and breaking-change detection for PR gates. Org moved from Tufin to oasdiff; repo renamed. Requires --fail-on ERR to exit non-zero on breaking changes.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pact Documentation",
+        "url": "https://docs.pact.io/",
+        "type": "tool",
+        "relevance": "Consumer-driven contract testing, verification, and broker workflows.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pact Broker `can-i-deploy`",
+        "url": "https://docs.pact.io/pact_broker/can_i_deploy",
+        "type": "workflow",
+        "relevance": "Primary deployment-safety gate for Pact-based compatibility management.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PactFlow",
+        "url": "https://pactflow.io/",
+        "type": "platform",
+        "relevance": "Hosted Pact platform with broker, bi-directional workflows, and optional AI features.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PactFlow Bi-Directional Contract Testing",
+        "url": "https://pactflow.io/bi-directional-contract-testing/",
+        "type": "documentation",
+        "relevance": "Primary reference for BDCT: how consumer contracts are cross-verified against provider OpenAPI specs server-side, when BDCT fits over classic CDC, and its tradeoffs. PactFlow-exclusive feature; not in open-source Pact Broker.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PactFlow Agent Skills (formerly PactFlow MCP Server, Oct 2025)",
+        "url": "https://docs.pact.io/ai_tools/installation",
+        "type": "documentation",
+        "relevance": "IDE-assisted contract/Drift test generation and workspace queries. Check supported clients, product editions, authentication, and permissions at the linked installation docs before adopting.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "PactFlow Drift",
+        "url": "https://pactflow.github.io/drift-docs/docs/tutorials/overview/",
+        "type": "platform",
+        "relevance": "Spec-driven, OpenAPI-first API testing (CLI + CI-native) that validates whether a provider implementation matches its published spec, with AI-generated test scaffolding from the spec. Complements CDC/BDCT by answering 'does the provider spec reflect reality?' rather than 'are consumers compatible?'.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Specmatic",
+        "url": "https://docs.specmatic.io/documentation/",
+        "type": "tool",
+        "relevance": "Executable contracts, backward-compatibility checks, and mixed protocol support. Specmatic 2.0 added GraphQL and gRPC support; Confirm current protocol support (Arazzo, Avro, MCP, WSDL) against docs.specmatic.io/supported_protocols before citing specifics.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Schemathesis",
+        "url": "https://schemathesis.readthedocs.io/en/stable/",
+        "type": "tool",
+        "relevance": "Property-based test generation and schema validation for OpenAPI and GraphQL. v4.0.0 released June 10, 2025 \u2014 full engine rewrite with breaking CLI changes: --hypothesis-max-examples renamed to --max-examples, --base-url renamed to --url, --show-trace and --validate-schema removed, schemathesis.io-related flags removed, new --phases/--report options, and a new schemathesis.toml config file.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Schemathesis v3 to v4 Migration Guide",
+        "url": "https://schemathesis.readthedocs.io/en/stable/migration/",
+        "type": "documentation",
+        "relevance": "Required reading before updating CI scripts from Schemathesis v3. Documents renamed flags, removed options (--app, --show-trace, schemathesis.io-related), and new --phases / --report options.",
+        "update_frequency": "stable",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Microcks",
+        "url": "https://microcks.io/documentation/",
+        "type": "platform",
+        "relevance": "Mocking and executable contract testing across API protocols. Check documentation for the selected version and artifact/binding support.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Keploy",
+        "url": "https://keploy.io/docs/",
+        "type": "tool",
+        "relevance": "Traffic-capture and replay workflow for bootstrapping regression tests on existing APIs.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Buf",
+        "url": "https://buf.build/docs/",
+        "type": "tool",
+        "relevance": "Linting and breaking-change detection for protobuf and gRPC contracts.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GraphQL Inspector",
+        "url": "https://the-guild.dev/graphql/inspector",
+        "type": "tool",
+        "relevance": "Schema diffing and local GraphQL breaking-change checks.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GraphQL Hive Schema Registry",
+        "url": "https://the-guild.dev/graphql/hive/docs/schema-registry",
+        "type": "platform",
+        "relevance": "Schema registry and conditional GraphQL breaking-change checks using collected operations.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Apollo GraphOS Schema Checks",
+        "url": "https://www.apollographql.com/docs/graphos/platform/schema-management/checks",
+        "type": "platform",
+        "relevance": "GraphQL build, operations, lint, and downstream contract checks.",
+        "update_frequency": "continuous",
+        "access": "freemium",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Postman Documentation",
+        "url": "https://learning.postman.com/docs/introduction/overview/",
+        "type": "tool",
+        "relevance": "Functional testing, governance, and optional AI-assisted exploration. Check current feature availability and agent permissions before adopting or granting write access.",
+        "update_frequency": "continuous",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Dredd (ARCHIVED \u2014 do not use for new work)",
+        "url": "https://github.com/apiaryio/dredd",
+        "type": "tool",
+        "relevance": "Dredd (apiaryio) was archived by the owner on November 8, 2024 \u2014 repository is read-only and no longer maintained. Confirm the Apiary hosted product's status before citing it. Replace with Schemathesis, Specmatic, or Prism for provider-spec verification in BDCT workflows.",
+        "update_frequency": "none",
+        "access": "free",
+        "add_as_web_search": false,
+        "status": "archived"
+      }
+    ],
+    "security": [
+      {
+        "name": "OWASP API Security",
+        "url": "https://owasp.org/www-project-api-security/",
+        "type": "specification",
+        "relevance": "Security risk model for API security baselines, including authorization, resource consumption, and unsafe API consumption.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Time Series Forecasting - Production Patterns"
+  short_description: "Demand and revenue forecasting with backtests and intervals"
+  default_prompt: "Use $ai-ml-timeseries to build and backtest demand or revenue forecasts: rolling-origin backtests, prediction intervals, hierarchical reconciliation, and zero-shot foundation models."

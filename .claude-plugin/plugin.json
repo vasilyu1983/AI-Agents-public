@@ -1,0 +1,21 @@
+{
+  "name": "ai-agents",
+  "version": "1.0.0",
+  "description": "Skills, subagents and saved multi-agent workflows for Claude Code: engineering, AI, data, QA, ops, docs and foundations.",
+  "author": {
+    "name": "AI-Agents library"
+  },
+  "license": "MIT",
+  "skills": "./skills/universal",
+  "agents": "./agents/claude",
+  "workflows": [
+    "./agents/workflows/adversarial-review.js",
+    "./agents/workflows/build-mvp.js",
+    "./agents/workflows/epic-delivery.js",
+    "./agents/workflows/expert-board.js",
+    "./agents/workflows/feature-delivery.js",
+    "./agents/workflows/marketing-campaign.js",
+    "./agents/workflows/review-fix-loop.js",
+    "./agents/workflows/source-check.js"
+  ]
+}

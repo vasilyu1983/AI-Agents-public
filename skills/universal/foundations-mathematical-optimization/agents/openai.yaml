@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mathematical Optimization Foundations"
+  short_description: "Formulates LP, MILP, and CP-SAT models; diagnoses infeasibility and gaps"
+  default_prompt: "Use $foundations-mathematical-optimization to formulate LP, MILP, or CP-SAT models, schedule shifts under capacity, choose a solver, and diagnose infeasibility, optimality gaps, and sensitivity."

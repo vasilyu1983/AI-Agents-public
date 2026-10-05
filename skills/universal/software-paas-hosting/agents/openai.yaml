@@ -1,0 +1,4 @@
+interface:
+  display_name: "PaaS Hosting"
+  short_description: "Chooses managed compute hosting for apps, APIs, agents, bots, and workers"
+  default_prompt: "Use $software-paas-hosting to choose PaaS hosting for apps, agents, APIs, and workers: Vercel, Fly.io, Railway, Render, Cloudflare Workers, Netlify, Heroku, Cloud Run, Deno Deploy, or container PaaS."

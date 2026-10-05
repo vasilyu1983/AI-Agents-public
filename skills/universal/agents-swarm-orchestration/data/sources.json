@@ -1,0 +1,279 @@
+{
+  "metadata": {
+    "title": "Agents Swarm Orchestration - Sources",
+    "description": "Official documentation, research, and secondary references for multi-agent orchestration across Claude Code, Codex, and OpenAI Agents SDK",
+    "last_updated": "2026-09-28",
+    "updated": "2026-09-28",
+    "skill": "agents-swarm-orchestration",
+    "total_sources": 42
+  },
+  "official_documentation": [
+    {
+      "name": "Claude Code Subagents Documentation",
+      "url": "https://code.claude.com/docs/en/sub-agents",
+      "description": "Official Claude Code guide for subagents, capabilities, mode-dependent background execution, worktree isolation, context forking, and nesting limits to check in the active runtime.",
+      "add_as_web_search": true,
+      "verified": "2026-09-28"
+    },
+    {
+      "name": "Claude Code Agent Teams Documentation",
+      "url": "https://code.claude.com/docs/en/agent-teams",
+      "description": "Official Claude Code guide for experimental agent teams, peer messaging, shared tasks, teammate limitations, automatic lifecycle, and cross-session messaging.",
+      "add_as_web_search": true,
+      "verified": "2026-08-27"
+    },
+    {
+      "name": "Claude Code Cross-Session Messaging",
+      "url": "https://code.claude.com/docs/en/agent-teams",
+      "description": "The agent-teams documentation also covers messaging independent Claude Code sessions without forming a team, including remote and platform-specific constraints.",
+      "add_as_web_search": true,
+      "verified": "2026-08-27"
+    },
+    {
+      "name": "Anthropic Claude Code Best Practices",
+      "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+      "description": "Anthropic guidance for productive coding workflows, delegation, and context management",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Codex Multi-Agents",
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+      "description": "Official Codex guidance for custom agents, main-thread ownership, parallel workers, read-heavy fan-out, and orchestration primitives",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Codex Subagents",
+      "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+      "description": "Official Codex configuration reference for custom-agent and concurrency settings; undocumented batch or nesting keys are not treated as portable contracts",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Agents SDK - Agents",
+      "url": "https://openai.github.io/openai-agents-python/agents/",
+      "description": "Official Agents SDK documentation describing manager-style orchestration, handoffs, tools, and guardrails",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Agents SDK - Multi-Agent Guide",
+      "url": "https://openai.github.io/openai-agents-python/multi_agent/",
+      "description": "Official OpenAI multi-agent orchestration guide with code and design pattern examples",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Prompt Caching Guide",
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching",
+      "description": "Official guide for structuring shared prompt prefixes and cache-friendly worker prompts",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Safety in Building Agents",
+      "url": "https://developers.openai.com/api/docs/guides/agent-builder-safety",
+      "description": "Official safety guidance for prompt injection defense, structured outputs, approvals, and evals",
+      "add_as_web_search": true
+    },
+    {
+      "name": "OpenAI Models Overview",
+      "url": "https://developers.openai.com/api/docs/models",
+      "description": "Current OpenAI model catalog for verifying latest flagship and smaller model options",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Workflows Documentation",
+      "url": "https://code.claude.com/docs/en/workflows",
+      "description": "Official reference for Dynamic Workflows: agent/parallel/pipeline primitives, concurrency ceilings, resume semantics",
+      "add_as_web_search": true,
+      "verified": "2026-09-28"
+    }
+  ],
+  "research": [
+    {
+      "name": "AdaptOrch: Task-Adaptive Multi-Agent Orchestration",
+      "url": "https://arxiv.org/abs/2602.16873",
+      "description": "Task-adaptive orchestration that maps decomposition shape to execution pattern instead of using one static topology",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Latency-Aware Orchestration for Parallel Multi-Agent Systems",
+      "url": "https://arxiv.org/abs/2601.10560",
+      "description": "Accuracy and latency tradeoffs for parallel execution modeled over probabilistic DAGs",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Multi-Agent Collaboration via Evolving Orchestration",
+      "url": "https://arxiv.org/abs/2505.19591",
+      "description": "Dynamic sequencing and prioritization with a learned orchestrator, useful as a design reference not a direct recipe",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Aligned Agents, Biased Swarm: Measuring Bias Amplification in Multi-Agent Systems (Li et al., ICLR 2026)",
+      "url": "https://arxiv.org/abs/2604.08963",
+      "description": "Bias amplification observed in the experimental multi-agent systems studied; do not generalize to every pipeline.",
+      "add_as_web_search": false,
+      "verified": "2026-09-28"
+    },
+    {
+      "name": "Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets (Tran & Kiela)",
+      "url": "https://arxiv.org/abs/2604.02460",
+      "description": "Apr 2026 arXiv preprint, NOT peer-reviewed; scope limited to multi-hop reasoning, text-only. Argues via the Data Processing Inequality that lossy handoffs cost information, favouring a single agent at equal budget; DPI does not imply every hop loses information. Basis for the equal-budget fan-out trap. Verify before relying.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Agent Contracts: A Formal Framework for Resource-Bounded Autonomous AI Systems (Ye & Tan)",
+      "url": "https://arxiv.org/abs/2601.08815",
+      "description": "Formal resource-bounded contracts and delegated budget conservation. This framework is not proof that a coding runtime enforces prompt-level budgets.",
+      "add_as_web_search": false,
+      "verified": "2026-09-28"
+    },
+    {
+      "name": "Antonio Gulli, Agentic Design Patterns (Springer, 2025) - Ch. 17 Reasoning Techniques",
+      "url": "https://link.springer.com/chapter/10.1007/978-3-032-01402-3_17",
+      "description": "Publisher metadata and abstract confirm Antonio Gulli's Reasoning Techniques chapter (2025, pp. 241-263). The subscription-only chapter text was not read; attribution of this skill's graph record format and evidence rubric remains unverified. Treat those rules as repository design guidance, not claims from the chapter.",
+      "add_as_web_search": false
+    }
+  ],
+  "community_resources": [
+    {
+      "name": "claude-squad",
+      "url": "https://github.com/smtg-ai/claude-squad",
+      "description": "Terminal-based parallel Claude agent sessions; reference implementation for multi-agent concurrency patterns in local environments",
+      "add_as_web_search": false
+    },
+    {
+      "name": "cmux",
+      "url": "https://github.com/craigsc/cmux",
+      "description": "Multiplexer for running multiple Claude agents in parallel; minimal orchestration approach for fan-out task execution",
+      "add_as_web_search": false
+    },
+    {
+      "name": "figaro",
+      "url": "https://github.com/byt3bl33d3r/figaro",
+      "description": "Desktop-based orchestration of Claude agent fleets; demonstrates local multi-agent coordination and session management",
+      "add_as_web_search": false
+    },
+    {
+      "name": "gstack",
+      "url": "https://github.com/garrytan/gstack",
+      "description": "Claude Code configured as a virtual engineering team; reference for role-based agent orchestration and parallel workstreams",
+      "add_as_web_search": false
+    },
+    {
+      "name": "LangGraph",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "description": "Agents-as-graphs framework with explicit state management; inspect the repository for its active API and support status before selecting it.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Codex Multi Agent Playbook",
+      "url": "https://github.com/am-will/codex-skills",
+      "description": "Secondary inspiration for Codex swarm workflows; useful for examples but should be checked against primary docs",
+      "add_as_web_search": true
+    },
+    {
+      "name": "CODEX MULTI AGENT PLAYBOOK: SWARMS LVL. 1",
+      "url": "https://x.com/LLMJunky/status/2027032974202421336",
+      "description": "Long-form X Article on multi-agent swarm orchestration with Codex — covers Swarm Waves (sequential parallelism), Super Swarms (total parallelism), orchestrator roles, dependency graphs, max_threads config, and model/reasoning level selection per agent",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Nav Toor — 30 Claude Code Sub-Agents I Actually Use",
+      "url": "https://x.com/heynavtoor/status/2050148589134045443",
+      "description": "Practitioner prompt catalog, cited as inspiration for named worker self-rejection criteria; popularity figures and effectiveness are unverified.",
+      "add_as_web_search": false,
+      "captured": "2026-05-12"
+    },
+    {
+      "name": "Claude Subagents vs. Agent Teams, Explained",
+      "url": "https://x.com/akshay_pachaar/status/2033167408463069526",
+      "description": "Explainer on two distinct multi-agent paradigms in Claude Code: when to use subagents (isolated context, delegation) vs. agent teams (collaborative, shared context). Key insight: most people reach for multi-agent when they shouldn't",
+      "add_as_web_search": false
+    },
+    {
+      "name": "The Machine that Builds the Machine — Symphony",
+      "url": "https://x.com/daniel_mac8/status/2034344165211832481",
+      "description": "Secondary discussion of issue-driven agent orchestration. Operational figures are unverified here; use the primary implementation and measured runs before quoting results.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Andrej Karpathy - Claude Coding Notes",
+      "url": "https://x.com/karpathy/status/2015883857489522876",
+      "description": "Operator-level coding-agent pitfalls that justify verifier loops, tighter scope control, and resistance to overcomplicated multi-agent execution",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Sarah Chieng - Lessons Learned From Building Multi-Agent Workflows",
+      "url": "https://www.cerebras.ai/blog/lessons-learned-from-building-multi-agent-workflows",
+      "description": "April 2026 field report on orchestrator-plus-line-cook patterns, minimum viable context, phased fan-out, no shared-file writes, and one-builder-plus-verifiers discipline",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Walden Yan - Multi-Agents: What's Actually Working",
+      "url": "https://cognition.ai/blog/multi-agents-working",
+      "description": "April 2026 Cognition update: parallel-writer swarms still fail in practice; the narrow class that works is manager-and-workers setups where extra agents contribute intelligence while writes stay single-threaded",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Claude Code Agents In 2026: Agent View, Subagents, Teams, And What Parallel Sessions Actually Cost",
+      "url": "https://www.cloudzero.com/blog/claude-code-agents/",
+      "description": "Secondary cost analysis; numerical savings are unverified here. Calculate costs from current provider prices and measured usage.",
+      "add_as_web_search": false,
+      "captured": "2026-06-09"
+    },
+    {
+      "name": "Agentic AI Frameworks 2026: LangGraph vs CrewAI vs OpenAI SDK",
+      "url": "https://uvik.net/blog/agentic-ai-frameworks/",
+      "description": "Secondary framework comparison; verify release status and APIs against each framework's official documentation before selection.",
+      "add_as_web_search": false,
+      "captured": "2026-06-09"
+    },
+    {
+      "name": "Multi-Agent in Production 2026: 3 Patterns That Survived",
+      "url": "https://niteagent.com/blog/multi-agent-production-2026/",
+      "description": "May 2026 production survey describing orchestrator-worker as the default multi-agent pattern in production, alongside supervisor/hierarchical and swarm (peer, no central control) as the other two topologies that survived. The page does not state a specific adoption percentage — do not cite a numeric split from this source.",
+      "add_as_web_search": false,
+      "captured": "2026-06-09",
+      "verified": "2026-07-11"
+    },
+    {
+      "name": "Claude Code Workflows: Deterministic Multi-Agent Orchestration (alexop.dev)",
+      "url": "https://alexop.dev/posts/claude-code-workflows-deterministic-orchestration/",
+      "description": "Walkthrough of script-held control flow, barrier-vs-pipeline tradeoffs, and context-cost rationale",
+      "add_as_web_search": true
+    },
+    {
+      "name": "The Workflow Tool: Scripted Multi-Agent Orchestration (ClaudeWorld)",
+      "url": "https://claude-world.com/tutorials/s27-workflow-orchestration/",
+      "description": "Tutorial on workflow scripts: primitives, structured output schemas, and determinism constraints",
+      "add_as_web_search": true
+    },
+    {
+      "name": "The Parallel Subagent Race: Codex CLI Multi-Agent v2 vs Claude Dynamic Workflows",
+      "url": "https://codex.danielvaughan.com/2026/06/08/parallel-subagent-race-codex-cli-multi-agent-v2-claude-dynamic-workflows-architecture-comparison/",
+      "description": "Side-by-side comparison of Codex declarative TOML roles vs Claude Code code-mode orchestration; depth and thread defaults",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Graphs vs. Loops: Agentic AI Orchestration Debate 2026 (explainx.ai)",
+      "url": "https://explainx.ai/blog/graphs-vs-loops-agentic-ai-debate-linear-andrew-ng-2026",
+      "description": "July 2026 industry debate framing graph-structured vs loop-structured agent orchestration",
+      "add_as_web_search": true
+    },
+    {
+      "name": "Bun: Rewriting Bun in Rust (Zig-to-Rust port case study)",
+      "url": "https://bun.com/blog/bun-in-rust",
+      "description": "Primary migration account; read it before quoting figures. A case study does not establish a portable concurrency limit or correctness guarantee.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "The Register: Zig creator calls Bun's Claude Rust rewrite 'unreviewed slop'",
+      "url": "https://www.theregister.com/devops/2026/07/14/zig-creator-calls-buns-claude-rust-rewrite-unreviewed-slop/5270743",
+      "description": "Secondary critique of migration review debt; reported regression counts are unverified here.",
+      "add_as_web_search": true
+    },
+    {
+      "name": "cursor pstack plugin (MIT)",
+      "url": "https://github.com/cursor/plugins/tree/main/pstack",
+      "description": "MIT-licensed external plugin. Accessed 2026-09-29. Informed the delegate-result-hygiene rule (drop/rerun on missing commit-or-tree-state and method; never resume an interrupted worker with changed scope), the qa-test-reviewer vacuous-test pre-check, and the hill-climbing loop guardrails (one change per measurement, freeze a sensitivity-verified harness, stop on stated target plus minimum attempts, decision logging). Rules adapted and rewritten in this repository's own words; no text copied verbatim.",
+      "add_as_web_search": false
+    }
+  ]
+}

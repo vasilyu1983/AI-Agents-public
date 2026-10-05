@@ -1,0 +1,174 @@
+{
+  "metadata": {
+    "skill": "foundations-formal-methods",
+    "last_updated": "2026-09-23",
+    "knowledge_cutoff": "2026-09-17",
+    "description": "Primary sources for specification, model checking, refinement, SMT interpretation, tool selection, industrial evidence, and LLM-generated spec/proof benchmarks.",
+    "title": "Formal Methods Foundations \u2014 Primary Sources"
+  },
+  "sources": [
+    {
+      "id": "LamportSpecifyingSystems",
+      "name": "Specifying Systems",
+      "url": "https://lamport.azurewebsites.net/tla/book-21-07-04.pdf",
+      "description": "Author-hosted book. Chapter 2 defines behaviors/specification; chapters 5 and 8 address invariance, implementation, liveness/fairness and refinement; chapter 14 addresses TLC model checking. Supports conceptual guidance, not a claim that this small helper implements TLA+.",
+      "publication_year": 2002,
+      "last_verified": "2026-09-17",
+      "url_check": "auto"
+    },
+    {
+      "id": "SMTLIBLanguage",
+      "name": "SMT-LIB language documentation",
+      "url": "https://smt-lib.org/language.shtml",
+      "description": "Official language reference and links to its specification. Supports distinguishing an encoded satisfiability query from a general implementation claim; no runtime version pin is prescribed.",
+      "last_verified": "2026-09-17",
+      "url_check": "auto"
+    },
+    {
+      "id": "NewcombeAWS2015",
+      "name": "Newcombe et al., How Amazon Web Services Uses Formal Methods (CACM 58(4), 2015)",
+      "url": "https://dl.acm.org/doi/abs/10.1145/2699417",
+      "description": "Industrial TLA+ evidence. Figures used in tool-selection.md (10 systems, 7 teams, 2-3 weeks to useful results, 35-step DynamoDB trace, missed liveness bug, 'we don't' know code matches design, Alloy expressiveness in 2014) were read in the authors' 2014 technical-report text; CACM metadata verified via dblp/ACM listing.",
+      "publication_year": 2015,
+      "url_check": "auto"
+    },
+    {
+      "id": "BrookerDesaiAWS2025",
+      "name": "Brooker & Desai, Systems Correctness Practices at Amazon Web Services (CACM 2025; ACM Queue 10.1145/3712057)",
+      "url": "https://dl.acm.org/doi/10.1145/3729175",
+      "description": "Abstract-level scope only: model checking, fuzzing, PBT, fault injection, deterministic and event-based simulation, runtime trace validation; specs as test oracles. Full text not read; quote no figures from it. Crossref confirms DOI 10.1145/3729175 (CACM, 2025) and 10.1145/3712057 (ACM Queue), both Brooker and Desai.",
+      "publication_year": 2025,
+      "url_check": "auto"
+    },
+    {
+      "id": "PCaseStudies",
+      "name": "P language case studies",
+      "url": "https://p-org.github.io/P/casestudies/",
+      "description": "P used across AWS storage, database and compute teams; PObserve validates structured service logs against P specifications post hoc.",
+      "url_check": "auto"
+    },
+    {
+      "id": "CedarVGD2024",
+      "name": "Disselkoen et al., How We Built Cedar: A Verification-Guided Approach (arXiv:2407.01688)",
+      "url": "https://arxiv.org/abs/2407.01688",
+      "description": "Verification-guided development: executable model with proofs, differential random testing, PBT; proofs found 4 validator bugs, DRT/PBT 21 more (abstract).",
+      "publication_year": 2024,
+      "url_check": "auto"
+    },
+    {
+      "id": "VERINA2025",
+      "name": "Ye et al., VERINA: Benchmarking Verifiable Code Generation (arXiv:2505.23135 v3, 2026-03-16)",
+      "url": "https://arxiv.org/abs/2505.23135",
+      "description": "189 Lean tasks; best model o3: 72.6% code correctness, 52.3% spec soundness/completeness, 4.9% proof success, one trial per task (abstract of v3).",
+      "publication_year": 2025,
+      "url_check": "auto"
+    },
+    {
+      "id": "Vericoding2025",
+      "name": "Bursuc et al., A benchmark for vericoding: formally verified program synthesis (arXiv:2509.22908)",
+      "url": "https://arxiv.org/abs/2509.22908",
+      "description": "12,504 specs; vericoding success 27% Lean, 44% Verus/Rust, 82% Dafny with off-the-shelf LLMs; pure Dafny verification 68% to 96% over a year (abstract).",
+      "publication_year": 2025,
+      "url_check": "auto"
+    },
+    {
+      "id": "TLAplusTools",
+      "name": "TLA+ tools (TLC, PlusCal translator, SANY)",
+      "url": "https://github.com/tlaplus/tlaplus",
+      "description": "TLC explicit-state model checker; worked example checked with tla2tools.jar 'Version 2.19 of 08 August 2024' on 2026-09-23.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Apalache",
+      "name": "Apalache symbolic model checker for TLA+",
+      "url": "https://apalache-mc.org/",
+      "description": "Translates TLA+ to SMT (Z3); bounded model checking and inductive checks; backend for Quint.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Quint",
+      "name": "Quint specification language",
+      "url": "https://quint-lang.org/",
+      "description": "Engineer-friendly syntax for TLA-style specs; uses Apalache as backend.",
+      "url_check": "auto"
+    },
+    {
+      "id": "PLanguage",
+      "name": "P programming language",
+      "url": "https://p-org.github.io/P/",
+      "description": "State-machine modeling language with schedule-based P Checker testing, PEx exhaustive exploration, and PObserve trace checking. Before making a coverage claim, read https://p-org.github.io/P/getstarted/usingP/ and https://p-org.github.io/P/advanced/pex/; distinguish configured schedule exploration from a completed exhaustive search.",
+      "last_verified": "2026-09-28",
+      "url_check": "auto"
+    },
+    {
+      "id": "Alloy6",
+      "name": "Alloy 6 release notes",
+      "url": "https://alloytools.org/alloy6.html",
+      "description": "Alloy 6 adds mutable signatures/fields (var), linear-time temporal logic with past operators, and NuSMV/nuXmv backends.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Z3",
+      "name": "Z3 theorem prover",
+      "url": "https://github.com/Z3Prover/z3",
+      "description": "SMT solver; sat/unsat/unknown semantics.",
+      "url_check": "auto"
+    },
+    {
+      "id": "cvc5",
+      "name": "cvc5 SMT solver",
+      "url": "https://cvc5.github.io/",
+      "description": "SMT solver.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Kani",
+      "name": "Kani Rust Verifier",
+      "url": "https://github.com/model-checking/kani",
+      "description": "Bounded model checker for Rust.",
+      "url_check": "auto"
+    },
+    {
+      "id": "CBMC",
+      "name": "CBMC bounded model checker",
+      "url": "https://www.cprover.org/cbmc/",
+      "description": "Bounded model checker for C/C++.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Dafny",
+      "name": "Dafny",
+      "url": "https://dafny.org/",
+      "description": "Verification-aware programming language.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Verus",
+      "name": "Verus",
+      "url": "https://github.com/verus-lang/verus",
+      "description": "Verified Rust for low-level systems code.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Lean",
+      "name": "Lean 4",
+      "url": "https://lean-lang.org/",
+      "description": "Proof assistant and programming language.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Rocq",
+      "name": "The Rocq Prover (formerly Coq)",
+      "url": "https://rocq-prover.org/",
+      "description": "Site states Rocq was formerly known as the Coq Proof Assistant.",
+      "url_check": "auto"
+    },
+    {
+      "id": "Isabelle",
+      "name": "Isabelle",
+      "url": "https://isabelle.in.tum.de/",
+      "description": "Generic proof assistant (Isabelle/HOL).",
+      "url_check": "auto"
+    }
+  ]
+}

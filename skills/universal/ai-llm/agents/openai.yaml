@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM Adaptation"
+  short_description: "Fine-tunes and distills LLMs: SFT, LoRA/QLoRA, loss masking, tokenizers"
+  default_prompt: "Use $ai-llm to adapt an LLM: SFT, PEFT, LoRA rank/alpha, QLoRA, full fine-tuning vs PEFT, SFT dataset loss masking, distillation with a teacher licence gate, and tokenizer diagnostics."

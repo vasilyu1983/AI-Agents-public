@@ -1,0 +1,61 @@
+---
+name: docs-knowledge
+family: docs
+description: Documentation and knowledge-ops team for codebase docs, PRDs, note retrieval, and doc quality.
+best_for:
+- Repo doc restructuring and knowledge-base cleanup
+- PRD authoring and turning notes into retrievable context
+members:
+- docs-codebase-architect
+- docs-ai-prd-writer
+- docs-notes-retrieval-curator
+- docs-quality-auditor
+required_context:
+- Target documentation surface and audience
+optional_context:
+- Existing docs folders, note vaults, and stale runbooks
+concurrency_mode: staged
+synthesis_owner: docs-codebase-architect
+owned_files:
+- 'docs-codebase-architect: docs/**, README.md'
+- 'docs-ai-prd-writer: docs/prd/**, specs/**'
+- 'docs-notes-retrieval-curator: notes/**, docs/notes/**'
+- 'docs-quality-auditor: read-only'
+do_not_touch:
+- .archive/**
+- secrets, credentials, PII
+- generated API reference output
+- third-party licensed documentation
+deliverable:
+  shape: Per-member documentation assessment or artifact, then one synthesized coverage report
+  required_sections:
+  - Coverage and freshness assessment
+  - Gaps found
+  - Artifacts produced or proposed
+  - Recommended owner and cadence
+  max_length: 2 pages / ~800 words per member; synthesis <= 1 page
+debate:
+  enabled: false
+  triggers: []
+  perspectives: []
+expansion_gate:
+  rule: evpi
+  evpi_threshold: low
+  max_dynamic_members: 1
+stopping_rule:
+  protocol: regret-min
+  reversibility: reversible
+  max_regret_threshold: 0.3
+synthesis:
+  bias_audit_required: false
+verdict_options:
+- delivered
+- partial_with_gaps
+- hold_for_clarification
+hold_policy:
+  required: deadline
+  default_deadline_days: 5
+  escalate_on_deadline: forced_decision
+trust:
+  default_tier: standard
+design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#docs-knowledge

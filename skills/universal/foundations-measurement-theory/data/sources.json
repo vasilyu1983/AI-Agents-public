@@ -1,0 +1,192 @@
+{
+  "metadata": {
+    "title": "Measurement Theory Foundations — Sources",
+    "description": "Primary sources for the bounded foundation workflow; synthetic examples are not empirical findings.",
+    "last_updated": "2026-09-27",
+    "skill": "foundations-measurement-theory",
+    "cutoff": "2026-09-27",
+    "total_sources": 18
+  },
+  "primary_sources": [
+    {
+      "id": "TestingStandards2014",
+      "name": "Standards for Educational and Psychological Testing",
+      "author": "AERA, APA, NCME",
+      "year": 2014,
+      "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/9780935302356.pdf",
+      "scope": "Chapters 1–3: validity, reliability/precision, fairness; publication and relevant text read. A revision committee is working on a new edition; check testingstandards.net before calling this edition current.",
+      "verified_via": "Primary PDF opened and relevant passages inspected on 2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "VIM2012",
+      "name": "JCGM 200:2012 International vocabulary of metrology",
+      "author": "JCGM",
+      "year": 2012,
+      "url": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf",
+      "scope": "Measurement, calibration, uncertainty, traceability vocabulary; calibration passages inspected.",
+      "verified_via": "Primary PDF opened on 2026-09-17",
+      "url_check": "manual"
+    },
+    {
+      "id": "GUM2008",
+      "name": "JCGM 100:2008 Evaluation of measurement data",
+      "author": "JCGM",
+      "year": 2008,
+      "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf",
+      "scope": "Physical measurement uncertainty reference; no universal psychometric cutoff asserted. The JCGM series also includes JCGM 100:2008/Amd.1:2026 (nonlinearity in measurement models), GUM-1:2023 and GUM-5:2026; check the BIPM JCGM publications page for later parts.",
+      "verified_via": "Primary PDF opened on 2026-09-17; BIPM JCGM publications page re-checked on 2026-09-23; BIPM JCGM publications page re-checked 2026-09-27 (Amd.1:2026, GUM-1:2023, GUM-5:2026, GUM-6:2020 listed)",
+      "url_check": "manual"
+    },
+    {
+      "id": "Meredith1993",
+      "name": "Measurement Invariance, Factor Analysis and Factorial Invariance",
+      "author": "William Meredith",
+      "year": 1993,
+      "url": "https://doi.org/10.1007/BF02294825",
+      "scope": "Primary publisher abstract verifies measurement/factorial invariance distinctions. Full article not read; no numeric fit criteria or theorem magnitude attributed.",
+      "verified_via": "Publisher abstract and 1993 volume/issue inspected on 2026-09-17; 2025 online migration date is not original publication date",
+      "url_check": "manual"
+    },
+    {
+      "id": "GUM6_2020",
+      "name": "JCGM GUM-6:2020 Guide to the expression of uncertainty in measurement — Part 6: Developing and using measurement models",
+      "author": "JCGM",
+      "year": 2020,
+      "url": "https://doi.org/10.59161/JCGMGUM-6-2020",
+      "scope": "Measurement-model construction for physical measurands.",
+      "verified_via": "Listed on the BIPM JCGM publications page, 2026-09-23",
+      "url_check": "manual"
+    },
+    {
+      "id": "Brennan2001",
+      "name": "Generalizability Theory",
+      "author": "Robert L. Brennan",
+      "year": 2001,
+      "url": "https://doi.org/10.1007/978-1-4757-3456-0",
+      "scope": "G-study/D-study concepts, facets, relative vs absolute error. Cited for concepts only; no figures attributed.",
+      "verified_via": "Crossref metadata checked 2026-09-23; book text not re-read this session",
+      "url_check": "manual"
+    },
+    {
+      "id": "KolenBrennan2014",
+      "name": "Test Equating, Scaling, and Linking (3rd ed.)",
+      "author": "Michael J. Kolen, Robert L. Brennan",
+      "year": 2014,
+      "url": "https://doi.org/10.1007/978-1-4939-0317-7",
+      "scope": "Common-item and common-person linking designs. Cited for concepts only; no figures attributed.",
+      "verified_via": "Crossref metadata checked 2026-09-23; book text not re-read this session",
+      "url_check": "manual"
+    },
+    {
+      "id": "Bean2025",
+      "name": "Measuring what Matters: Construct Validity in Large Language Model Benchmarks",
+      "author": "Bean et al.",
+      "year": 2025,
+      "url": "https://arxiv.org/abs/2511.04703",
+      "scope": "NeurIPS 2025 D&B. 29 reviewers, 445 benchmarks, eight recommendations (headings verbatim from HTML section titles); \"16.0% used uncertainty estimates or statistical tests\" verified verbatim in the arXiv v1 body.",
+      "verified_via": "arXiv abstract read via export.arxiv.org API on 2026-09-23; HTML v1 grepped for headings and 16.0% on 2026-09-23; abstract re-read via export.arxiv.org API 2026-09-27",
+      "url_check": "manual"
+    },
+    {
+      "id": "Salaudeen2025",
+      "name": "Measurement to Meaning: A Validity-Centered Framework for AI Evaluation",
+      "author": "Salaudeen et al.",
+      "year": 2025,
+      "url": "https://arxiv.org/abs/2505.10573",
+      "scope": "Qualitative claim-to-evidence validity framework; no figures cited.",
+      "verified_via": "arXiv abstract read via export.arxiv.org API on 2026-09-23",
+      "url_check": "manual"
+    },
+    {
+      "id": "Polo2024",
+      "name": "tinyBenchmarks: evaluating LLMs with fewer examples",
+      "author": "Maia Polo et al.",
+      "year": 2024,
+      "url": "https://arxiv.org/abs/2402.14992",
+      "scope": "MMLU (14K) estimable from 100 curated examples, per abstract.",
+      "verified_via": "arXiv abstract read via export.arxiv.org API on 2026-09-23",
+      "url_check": "manual"
+    },
+    {
+      "id": "Hofmann2025",
+      "name": "Fluid Language Model Benchmarking",
+      "author": "Hofmann et al.",
+      "year": 2025,
+      "url": "https://arxiv.org/abs/2509.11106",
+      "scope": "Adaptive IRT item selection; \"fifty times fewer items\" is MMLU-only against its baselines.",
+      "verified_via": "arXiv abstract read via export.arxiv.org API on 2026-09-23",
+      "url_check": "manual"
+    },
+    {
+      "id": "Madaan2024",
+      "name": "Quantifying Variance in Evaluation Benchmarks",
+      "author": "Madaan et al.",
+      "year": 2024,
+      "url": "https://arxiv.org/abs/2406.10229",
+      "scope": "Counter-evidence: item analysis and IRT struggle to meaningfully reduce variance.",
+      "verified_via": "arXiv abstract read via export.arxiv.org API on 2026-09-23",
+      "url_check": "manual"
+    },
+    {
+      "id": "Heineman2025",
+      "name": "Signal and Noise: A Framework for Reducing Uncertainty in Language Model Evaluation",
+      "author": "Heineman et al.",
+      "year": 2025,
+      "url": "https://arxiv.org/abs/2508.13144",
+      "scope": "Benchmark signal and noise definitions; 30 benchmarks, 375 models.",
+      "verified_via": "arXiv abstract read via export.arxiv.org API on 2026-09-23",
+      "url_check": "manual"
+    },
+    {
+      "id": "Singh2024GlobalMMLU",
+      "name": "Global MMLU: Understanding and Addressing Cultural and Linguistic Biases in Multilingual Evaluation",
+      "author": "Singh et al.",
+      "year": 2024,
+      "url": "https://arxiv.org/abs/2412.03304",
+      "scope": "28% culturally sensitive questions; rankings change on culturally sensitive subset. Cross-language DIF exemplar.",
+      "verified_via": "arXiv abstract read via export.arxiv.org API on 2026-09-23",
+      "url_check": "manual"
+    },
+    {
+      "id": "Messing2026",
+      "name": "Hidden Measurement Error in LLM Pipelines Distorts Annotation, Evaluation, and Benchmarking",
+      "author": "Solomon Messing",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2604.11581",
+      "scope": "Unrefereed preprint. Naive SEs 40-60% smaller than TEE-corrected SEs in its demonstrations; single-study result.",
+      "verified_via": "arXiv abstract read via export.arxiv.org API on 2026-09-23; abstract re-read via export.arxiv.org API 2026-09-27",
+      "url_check": "manual"
+    },
+    {
+      "id": "Feng2026",
+      "name": "Second-Order Response Laws for LLM Judges: Debiased Estimation of Prompt Instability",
+      "author": "Feng et al.",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2608.16253",
+      "scope": "Unrefereed preprint. Plug-in prompt-instability estimator biased upward at finite repeats; crossed prompt x answer-order design.",
+      "verified_via": "arXiv abstract read via export.arxiv.org API on 2026-09-23; abstract re-read via export.arxiv.org API 2026-09-27",
+      "url_check": "manual"
+    },
+    {
+      "id": "Goodhart1975",
+      "name": "Problems of Monetary Management: The UK Experience",
+      "author": "Charles A. E. Goodhart",
+      "year": 1975,
+      "url": "https://en.wikipedia.org/wiki/Goodhart%27s_law",
+      "scope": "Origin of Goodhart's law (statistical regularities collapse under control pressure). Cited for the concept only; the 1975 paper was not opened, so no quotation is reproduced in prose.",
+      "verified_via": "Secondary only: Wikipedia entry read 2026-09-27; primary (Papers in Monetary Economics, Reserve Bank of Australia) not opened",
+      "url_check": "manual"
+    },
+    {
+      "id": "Campbell1979",
+      "name": "Assessing the impact of planned social change",
+      "author": "Donald T. Campbell",
+      "year": 1979,
+      "url": "https://doi.org/10.1016/0149-7189(79)90048-X",
+      "scope": "Origin of Campbell's law (indicators used for decision-making become subject to corruption pressure). Cited for the concept only; no quotation reproduced in prose.",
+      "verified_via": "Secondary only: Wikipedia entry and web search results 2026-09-27; Evaluation and Program Planning 2(1):67-90 not opened",
+      "url_check": "manual"
+    }
+  ]
+}

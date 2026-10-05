@@ -1,0 +1,4 @@
+interface:
+  display_name: "Workflow Planning"
+  short_description: "Writes implementation plans and plan files before coding"
+  default_prompt: "Use $dev-workflow-planning to write an implementation plan before coding: phases, plan files, specs, and definition of done for a multi-step feature or a large refactor broken into phases."

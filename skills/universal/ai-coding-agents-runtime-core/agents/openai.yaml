@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Agents — Runtime Core"
+  short_description: "Design tool and command runtimes for a coding-agent CLI"
+  default_prompt: "Use $ai-coding-agents-runtime-core to design tool registries, deferred loading and ToolSearch, slash-command registries, lazy loaders, forked commands, or remote-safe command and tool dispatch for a coding-agent CLI."

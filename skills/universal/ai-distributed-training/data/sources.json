@@ -1,0 +1,330 @@
+{
+  "metadata": {
+    "skill": "ai-distributed-training",
+    "title": "AI Distributed Training - Sources",
+    "description": "Curated sources for distributed LLM pre-training: FlashAttention 1/2/3, DeepSpeed ZeRO, PyTorch FSDP2, Megatron-LM/Core, DeepSeek-V3 (DualPipe/EP/fp8), Ring Attention (context parallel), Muon/MuonClip (Kimi K2, DeepSeek-V4, GLM-5), torchtitan, pre-training frameworks (litgpt, nanotron), GPT-2 reproduction projects, rented GPU provider docs, and storage/dataloader I/O (Fregly Ch.5, GPUDirect Storage, DALI, 3FS), and hardware fault tolerance / checkpoint-interval reliability (Reddi MLSysBook Ch.16).",
+    "last_updated": "2026-08-31",
+    "updated": "2026-08-31",
+    "audit_date": "2026-08-31",
+    "last_verified": "2026-08-31",
+    "total_sources": 34
+  },
+  "categories": {
+    "research_papers": [
+      {
+        "name": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+        "url": "https://arxiv.org/abs/2205.14135",
+        "type": "research",
+        "relevance": "Foundational paper introducing FlashAttention — O(N) memory attention via tiled SRAM recomputation. Essential reference for understanding memory-efficient attention at pre-training scale.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+        "url": "https://arxiv.org/abs/2307.08691",
+        "type": "research",
+        "relevance": "FlashAttention-2 improvements in thread-block partitioning and memory-efficient attention. Check the implementation's current GPU support before choosing a kernel.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "ZeRO: Memory Optimizations Toward Training Trillion Parameter Models",
+        "url": "https://arxiv.org/abs/1910.02054",
+        "type": "research",
+        "relevance": "Primary ZeRO paper describing stages 1, 2, and 3 optimizer/gradient/parameter sharding. Canonical reference for DeepSpeed ZeRO design.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism",
+        "url": "https://arxiv.org/abs/1909.08053",
+        "type": "research",
+        "relevance": "Foundational paper for tensor parallelism in transformers (column/row parallel linear layers). Basis for all Megatron-style 3-D parallelism implementations.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision",
+        "url": "https://arxiv.org/abs/2407.08608",
+        "type": "research",
+        "relevance": "Hopper-specific attention design using warp specialization, asynchronous execution, and low precision. Check the current implementation for target-GPU support.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "DeepSeek-V3 Technical Report",
+        "url": "https://arxiv.org/abs/2412.19437",
+        "type": "research",
+        "relevance": "Landmark efficient-training reference: DualPipe bidirectional pipeline overlap, cross-node expert parallelism without tensor parallelism, fine-grained fp8 training, auxiliary-loss-free MoE load balancing. Essential for any MoE / frontier-scale distributed training.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Training Deep Nets with Sublinear Memory Cost (Chen et al. 2016)",
+        "url": "https://arxiv.org/abs/1604.06174",
+        "type": "research",
+        "relevance": "Origin of the O(sqrt(n)) gradient-checkpointing result: checkpoint sqrt(n) segments of an n-layer net for one extra forward pass per mini-batch. Cited to keep the sqrt(n)-segment policy distinct from per-transformer-block checkpointing, which gives a constant-factor saving instead.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Reducing Activation Recomputation in Large Transformer Models",
+        "url": "https://arxiv.org/abs/2205.05198",
+        "type": "research",
+        "relevance": "Megatron selective activation checkpointing + sequence parallelism. The canonical reference for activation-memory reduction beyond naive full checkpointing.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Ring Attention with Blockwise Transformers for Near-Infinite Context",
+        "url": "https://arxiv.org/abs/2310.01889",
+        "type": "research",
+        "relevance": "Foundation for context parallelism: shards the sequence dimension and overlaps blockwise attention with ring communication. Basis for long-context training in torchtitan and Megatron.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Kimi K2 Technical Report (MuonClip optimizer at 1T-param MoE scale)",
+        "url": "https://arxiv.org/abs/2507.20534",
+        "type": "research",
+        "relevance": "Production-scale evidence for the Muon/MuonClip optimizer: 1T-param MoE pre-trained on 15.5T tokens with MuonClip + WSD schedule. Reference for optimizer choice beyond AdamW at scale.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "TorchTitan: One-stop PyTorch native solution for production-ready LLM pre-training",
+        "url": "https://arxiv.org/abs/2410.06511",
+        "type": "research",
+        "relevance": "PyTorch-native large-scale pre-training: FSDP2, tensor/context/pipeline parallelism, torch.compile, and fp8 composed in one reference framework. Primary source for modern FSDP2-based recipes.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Muon is Scalable for LLM Training (Moonshot AI 2025)",
+        "url": "https://arxiv.org/abs/2502.16982",
+        "type": "research",
+        "relevance": "Weight-decay + per-parameter update-scale fixes that let Muon train at scale without bespoke tuning. Basis for trillion-param production use (Kimi K2, DeepSeek-V4, GLM-5).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Pretraining Large Language Models with NVFP4 (NVIDIA 2025)",
+        "url": "https://arxiv.org/abs/2509.25149",
+        "type": "research",
+        "relevance": "12B model on 10T tokens with NVFP4 closely tracking an fp8 baseline; a separate 8B, 1T-token comparison found MXFP4 needed 36% more tokens to match NVFP4 loss. Keep these experiments distinct when describing FP4-training evidence.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence",
+        "url": "https://arxiv.org/abs/2606.19348",
+        "type": "research",
+        "relevance": "Primary confirmation that DeepSeek-V4 uses the Muon optimizer for pretraining convergence/stability. Verify exact figures against this report before quoting (recent release, June 2026).",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "GLM-5: from Vibe Coding to Agentic Engineering (Zhipu/Z.ai)",
+        "url": "https://arxiv.org/abs/2602.15763",
+        "type": "research",
+        "relevance": "Primary source for GLM-5's Muon usage: describes a per-head 'Muon Split' orthogonalization and a zero-redundancy distributed Muon implementation, building on GLM-4.5's recipe.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Vijay Janapa Reddi, Machine Learning Systems (MLSysBook, open textbook, Oct 2025) — Ch. 16, Robust AI, §16.4 Hardware Faults",
+        "url": "https://mlsysbook.ai/",
+        "type": "book",
+        "relevance": "Primary source for references/failure-budget-and-checkpointing.md: transient/permanent/intermittent fault taxonomy, per-device MTBF ranges and the cluster-level compounding arithmetic that drives checkpoint cadence, Table 16.1 fault-tolerance overhead (single/double-bit ECC, TMR, checkpoint-restart), Table 16.2 ECC memory-bandwidth impact, and the silent-data-corruption note for large checkpoints. Tables 16.1/16.2 and the MTBF ranges carry no citation in the textbook — treat as textbook-reported and verify against vendor specs before use.",
+        "update_frequency": "occasional",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "official_framework_docs": [
+      {
+        "name": "PyTorch FSDP Tutorial",
+        "url": "https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html",
+        "type": "documentation",
+        "relevance": "Official PyTorch FSDP walkthrough: sharding strategies, mixed precision, checkpointing, and performance tips. Primary reference for FSDP configuration.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepSpeed Documentation",
+        "url": "https://www.deepspeed.ai/docs/config-json/",
+        "type": "documentation",
+        "relevance": "Official DeepSpeed ZeRO config reference: ZeRO stages, offload settings, gradient accumulation, bf16/fp16 config. Authoritative source for DeepSpeed setup.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Megatron-LM GitHub",
+        "url": "https://github.com/NVIDIA/Megatron-LM",
+        "type": "tool",
+        "relevance": "NVIDIA's reference implementation for tensor, pipeline, and data parallelism at very large scale. Canonical source for 3-D parallelism configuration and training recipes.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "torchft — per-step fault-tolerant distributed training (PyTorch)",
+        "url": "https://github.com/pytorch/torchft",
+        "type": "official_docs",
+        "relevance": "Meta/PyTorch project for per-step fault tolerance: fault-tolerant DDP/HSDP plus LocalSGD/DiLoCo, with a lighthouse coordinator that allows replica-group membership to change at step granularity so a lost node does not force a full-job restart. A successor to pure checkpoint/restart on large clusters; young and moving, so check current API maturity before depending on it.",
+        "update_frequency": "frequent",
+        "access": "free",
+        "add_as_web_search": false
+      }
+    ],
+    "pretraining_frameworks": [
+      {
+        "name": "torchtitan GitHub",
+        "url": "https://github.com/pytorch/torchtitan",
+        "type": "tool",
+        "relevance": "PyTorch reference pre-training framework built on FSDP2, context parallelism, and torch.compile. Check current recipes and maintenance activity before adoption.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "HuggingFace nanotron GitHub",
+        "url": "https://github.com/huggingface/nanotron",
+        "type": "tool",
+        "relevance": "HuggingFace's minimal 3-D parallel pre-training framework (BLOOM was trained with Megatron-DeepSpeed, not nanotron). Supports tensor, pipeline, and data parallelism with a clean config system.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "modded-nanoGPT GitHub (Karpathy fork with speed records)",
+        "url": "https://github.com/KellerJordan/modded-nanoGPT",
+        "type": "tool",
+        "relevance": "Speed-optimized nanoGPT fork. Reference for GPT-2 124M reproduction with minimal code. Holds community speed records; excellent for benchmarking training throughput.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "llm.c GitHub (Karpathy)",
+        "url": "https://github.com/karpathy/llm.c",
+        "type": "tool",
+        "relevance": "Karpathy's minimal C/CUDA GPT-2 pre-training implementation and educational reference. Check recent maintenance and toolchain compatibility before running it.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "levanter GitHub (marin-community)",
+        "url": "https://github.com/marin-community/levanter",
+        "type": "tool",
+        "relevance": "JAX/TPU pre-training framework from Stanford CRFM under the Marin community project. Check current repository ownership and maintenance activity before adoption.",
+        "update_frequency": "quarterly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "nanochat GitHub (Karpathy)",
+        "url": "https://github.com/karpathy/nanochat",
+        "type": "tool",
+        "relevance": "Karpathy's end-to-end small-model train+chat reference loop using Muon. Check current maintenance and requirements before running it.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "storage_and_data_pipeline": [
+      {
+        "name": "Chris Fregly, AI Systems Performance Engineering (O'Reilly, Nov 2025) — Ch. 5, GPU-Based Storage I/O Optimizations",
+        "url": "https://www.oreilly.com/library/view/ai-systems-performance/9798341627772/",
+        "type": "book",
+        "relevance": "Primary source for references/storage-and-dataloader-io.md: sequential-vs-random read layout, NVMe blk-mq and NFS client tuning, replication vs compression tradeoffs, GPUDirect Storage and gdsio benchmarking, cuda-checkpoint, dataloader-bound diagnosis, and the continuous profiling workflow.",
+        "update_frequency": "static",
+        "access": "paid",
+        "add_as_web_search": false
+      },
+      {
+        "name": "NVIDIA GPUDirect Storage Documentation (cuFile, nvidia-fs, gdsio)",
+        "url": "https://docs.nvidia.com/gpudirect-storage/",
+        "type": "documentation",
+        "relevance": "Authoritative GDS reference: cuFile API, supported filesystems and RDMA stacks, O_DIRECT requirements, and the gdsio benchmarking tool. Hardware/driver support drifts — verify requirements here rather than quoting a version.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "NVIDIA DALI GitHub",
+        "url": "https://github.com/NVIDIA/DALI",
+        "type": "tool",
+        "relevance": "GPU-accelerated data loading and preprocessing (JPEG/video decode, augmentation) for input-bound training. Reference for offloading dataloader CPU work to the GPU.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "PyTorch DataLoader Reference",
+        "url": "https://docs.pytorch.org/docs/stable/data.html",
+        "type": "documentation",
+        "relevance": "Canonical semantics for num_workers, pin_memory, prefetch_factor, persistent_workers, collate_fn, and DistributedSampler — the knobs used in the dataloader-bound diagnosis workflow.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "DeepSeek 3FS (Fire-Flyer File System)",
+        "url": "https://github.com/deepseek-ai/3FS",
+        "type": "tool",
+        "relevance": "Open-source filesystem codesigned for AI random-read workloads: direct file I/O bypassing the page cache, RDMA-first data paths, sharded metadata. Reference point for storage codesign at ultrascale.",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ],
+    "rented_gpu_providers": [
+      {
+        "name": "RunPod Pricing",
+        "url": "https://www.runpod.io/gpu-instance/pricing",
+        "type": "documentation",
+        "relevance": "Lookup for available GPU instances, pricing, billing units, and interruption terms for the exact region and instance before budgeting.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Lambda Labs GPU Cloud Pricing",
+        "url": "https://lambdalabs.com/service/gpu-cloud#pricing",
+        "type": "documentation",
+        "relevance": "Lookup for GPU cloud pricing, availability, commitment, and billing terms before budgeting.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      },
+      {
+        "name": "Modal GPU Compute Pricing",
+        "url": "https://modal.com/pricing",
+        "type": "documentation",
+        "relevance": "Lookup for serverless GPU pricing, available accelerators, billing units, and idle charges before budgeting.",
+        "update_frequency": "weekly",
+        "access": "free",
+        "add_as_web_search": true
+      }
+    ]
+  }
+}

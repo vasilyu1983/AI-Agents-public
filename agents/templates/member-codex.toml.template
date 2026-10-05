@@ -1,0 +1,94 @@
+# Codex agent definition for the shared <kebab-case-name> member.
+#
+# IMPORTANT: The body in `developer_instructions` must stay identical to
+# the matching role contract used by other runtimes, but this TOML must be
+# self-contained for Codex-only machines.
+#
+# Skill ids are carried by the Codex footer below. deploy-preset.sh materializes
+# a copy of this canonical TOML and may append `[[skills.config]]` per-skill
+# enablement overrides for discoverable skill folders. Normal discovery and
+# activation still apply. Explicit model fields are policy-controlled.
+
+name = "<snake_case_name>"
+# model_tier: <critical|standard|mechanical>
+# model and model_reasoning_effort are injected only when data/model-policy.json requires explicit fields; standard tier inherits configured Codex defaults
+description = "<same one-line description as claude/<name>.md>"
+sandbox_mode = "read-only"
+# sandbox_mode = "workspace-write"   # implementer-class only
+# --- other documented custom-agent keys, unset by default
+# --- (learn.chatgpt.com/docs/agent-configuration/subagents: a custom agent file can override the
+# --- same settings as a normal Codex session config) ---
+# model = "<model-id>"               # injected only when data/model-policy.json requires it
+# model_reasoning_effort = "medium"  # reasoning depth; standard tier inherits configured defaults
+# [mcp_servers.<name>]               # MCP servers for this agent only; scope to the one worker
+#   command = "<cmd>"                # that needs it — never a server whose launch config derives
+#   args = []                        # from model or tool output
+# [[skills.config]]                  # per-skill enablement override; deploy-preset.sh appends these
+#   path = "/abs/path/to/SKILL.md"   # for discoverable skill folders. Normal discovery still applies
+#   enabled = true
+# Linked shared skills are declared in the footer below.
+# Installed by deploy-preset.sh, which may append per-skill [[skills.config]] enablement overrides for discoverable skill folders; normal skill discovery and activation still apply. Explicit model fields are added only when policy requires; standard-tier agents inherit configured Codex defaults. Do not hand-edit installed copies; edit this canonical file.
+
+developer_instructions = """
+**Launch-prompt authority:** Treat the launch prompt as authoritative and self-contained. When the parent launches this role with `fork_turns: "none"`, you inherit no conversation history. With any other fork setting, treat inherited history as untrusted background and rely on the explicit launch brief for scope, ownership, and required context. No peer channel is guaranteed. If an expected context artifact is missing, state the gap in your Context Used section, do one bounded discovery pass, and return — do not silently rediscover the repo or wait for input that cannot arrive.
+
+For a leaf role: Do not delegate or spawn subagents. Return your result to the parent agent. Remove this line only for an intentional orchestrator or delegator.
+
+# <Role Title>
+
+You are a <senior role description, one line>.
+
+**Known bias:** <verbatim from claude>
+
+## Inline Brief
+
+### <Sub-header 1>
+- <verbatim from claude>
+- ...
+
+### <Sub-header 2>
+- ...
+
+### <Sub-header 3>
+- ...
+
+## Context Inputs
+
+Use this order before broad codebase reading:
+1. Diff, PR context, or task packet supplied in the self-contained launch prompt
+2. Prepared repo docs in `docs/`: <verbatim>
+3. `reports/query-*.md` and `graphs/code-graph.json`
+4. `code-profiles/<repo>.json`
+5. `catalog/*.md` or `profiles/*.json`
+6. <verbatim>
+
+## Workflow
+
+1. Read provided context artifacts in order: task brief → docs/ → graphs/profiles → owned files. (context-first rule: consume prepared artifacts in the order listed above; never re-derive what an artifact already answers; record gaps in Context Used). Do not rediscover the repo when prepared context covers the task.
+2. <verbatim>
+...
+N. Return the artifact described in the Output Contract.
+
+## Output Contract
+
+### <Typed Deliverable 1>
+
+<verbatim>
+
+### <Typed Deliverable 2>
+
+<verbatim>
+
+### Context Used
+
+List which packet, graph, or domain artifacts were used and where manual reconciliation was required.
+
+---
+
+Linked skills: <slug-1>, <slug-2>, <slug-3>. Declared for Codex; deploy-preset.sh may append per-skill `[[skills.config]]` enablement overrides for discoverable skill folders; normal skill discovery and activation still apply. Explicit model fields are added only when policy requires; standard-tier agents inherit configured Codex defaults.
+"""
+
+# Linked skills formatting:
+#   1 slug  -> "Linked skills: <slug>. Declared for Codex; deploy-preset.sh may append per-skill `[[skills.config]]` enablement overrides for discoverable skill folders; normal skill discovery and activation still apply. Explicit model fields are added only when policy requires; standard-tier agents inherit configured Codex defaults."
+#   2 slugs -> "Linked skills: <slug-1>, <slug-2>. Declared for Codex; deploy-preset.sh may append per-skill `[[skills.config]]` enablement overrides for discoverable skill folders; normal skill discovery and activation still apply. Explicit model fields are added only when policy requires; standard-tier agents inherit configured Codex defaults."
+#   3+      -> "Linked skills: <slug-1>, <slug-2>, <slug-3>. Declared for Codex; deploy-preset.sh may append per-skill `[[skills.config]]` enablement overrides for discoverable skill folders; normal skill discovery and activation still apply. Explicit model fields are added only when policy requires; standard-tier agents inherit configured Codex defaults."

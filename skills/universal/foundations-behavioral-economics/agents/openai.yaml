@@ -1,0 +1,4 @@
+interface:
+  display_name: "Behavioral Economics Foundations"
+  short_description: "16 behavioral-economics primitives for ethical pricing, choice, and retention"
+  default_prompt: "Use $foundations-behavioral-economics to judge whether a nudge will work, whether a pricing decoy or dark pattern is lawful, and what effect size to expect from evidence-graded primitives."

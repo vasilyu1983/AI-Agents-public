@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Post-Training"
+  short_description: "DPO, GRPO/RLVR and reward signals for base or SFT models"
+  default_prompt: "Use $ai-post-training to choose DPO, GRPO/RLVR or reward-model training for a pretrained or SFT model, and check reward exploitation against the true objective."

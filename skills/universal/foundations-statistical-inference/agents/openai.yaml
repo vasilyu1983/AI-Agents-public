@@ -1,0 +1,4 @@
+interface:
+  display_name: "Statistical Inference Foundations"
+  short_description: "A/B significance, eval error bars, and calibration"
+  default_prompt: "Use $foundations-statistical-inference to test whether data supports a claim: A/B significance and peeking, sample size, eval and LLM-judge error bars, multiple comparisons, and calibration."

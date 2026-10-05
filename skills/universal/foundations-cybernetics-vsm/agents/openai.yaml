@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cybernetics and VSM Foundations"
+  short_description: "Diagnoses stalled teams and agent hierarchies with VSM and Ashby's Law"
+  default_prompt: "Use $foundations-cybernetics-vsm to diagnose stalled teams or agent hierarchies with Beer's VSM and Ashby's Law when orchestrators overload, escalations pile up, or team boundaries need redesign."

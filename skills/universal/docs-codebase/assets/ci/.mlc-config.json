@@ -1,0 +1,6 @@
+{
+  "ignorePatterns": [
+    { "pattern": "^https?://" },
+    { "pattern": "^mailto:" }
+  ]
+}
