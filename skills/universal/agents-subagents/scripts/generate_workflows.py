@@ -207,7 +207,7 @@ def resolve_review(manifest: dict, workflow: dict, path: Path) -> dict:
     return manifest
 
 
-DEPARTMENT_PHASES = ["Triage", "Memos", "Verify", "Synthesize"]
+DEPARTMENT_PHASES = ["Triage", "Memos", "Verify", "Synthesize", "Baseline"]
 
 
 def resolve_department(manifest: dict, workflow: dict, _path: Path) -> dict:

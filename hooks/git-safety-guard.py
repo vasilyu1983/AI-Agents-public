@@ -135,7 +135,7 @@ SAFE_ALTERNATIVE = (
     "Safe alternatives: snapshot with `git diff > \"$TMPDIR/snap.patch\"` "
     "(add `git diff --cached` for staged work), isolate with "
     "`git worktree add ../wt-<task> -b <task>`, or ask the parent agent or "
-    "human to run it. See docs/procedures/multi-agent-git-safety.md."
+    "human to run it. See docs/hooks-and-safety.md."
 )
 
 

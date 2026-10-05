@@ -14,15 +14,28 @@ The harness serves Codex from the same files as Claude Code. This page lists wha
 
 ## Set up
 
-Run these in your clone:
+Run these in your clone. First link the skills:
 
 ```bash
 bash scripts/distribution/sync-skills.sh agents
-bash skills/universal/agents-subagents/scripts/deploy-all-teams.sh --dry-run --platform codex
-bash skills/universal/agents-subagents/scripts/deploy-all-teams.sh --confirm-bulk-deploy --platform codex
 ```
 
-Start a new Codex session after the install.
+Then install subagents. Choose one:
+
+- **Only the teams your workflows need.** [Workflows, section 1](workflows.md#1-choose-a-workflow) lists the team for each workflow. Example:
+
+  ```bash
+  bash skills/universal/agents-subagents/scripts/deploy-preset.sh dev-feature-delivery --platform codex --user
+  ```
+
+- **Every default team.** This writes one `.toml` file per agent into `~/.codex/agents/`. Preview first; the dry run lists each file. The opt-in `marketing-campaign` team is skipped unless you add `--include-opt-in`.
+
+  ```bash
+  bash skills/universal/agents-subagents/scripts/deploy-all-teams.sh --dry-run --platform codex
+  bash skills/universal/agents-subagents/scripts/deploy-all-teams.sh --confirm-bulk-deploy --platform codex
+  ```
+
+To remove a team later, run `deploy-preset.sh <team> --platform codex --remove`. Start a new Codex session after any install.
 
 ## Run a workflow
 

@@ -13,12 +13,21 @@ This page explains the six parts of the harness and how they fit together. Read 
 - [Generated files](#generated-files)
 - [Design principles](#design-principles)
 
+## Words used on every page
+
+| Word | Meaning |
+|---|---|
+| Runtime | Claude Code or Codex: the program you chat with |
+| Context | Everything the model can see in one conversation. It has a size limit, so less is better. |
+| Front matter | The block between two `---` lines at the top of a Markdown file. It holds settings such as `name` and `description`. |
+| Plan (your plan) | Your Claude or OpenAI subscription or API account. Every agent counts against it. |
+
 ## The parts at a glance
 
 | Part | What it is | Lives in | Who starts it |
 |---|---|---|---|
 | **Skill** | A folder of instructions, references and scripts for one kind of task | `skills/universal/<name>/` | The runtime, when your task matches the skill's description |
-| **Subagent** | A specialist with its own context, tools and output contract | `agents/claude/<name>.md` (Codex: generated `.toml`) | You by name, or a workflow |
+| **Subagent** | A specialist that works in its own separate context, with a fixed tool list and a fixed report format | `agents/claude/<name>.md` (Codex: generated `.toml`) | You by name, or a workflow |
 | **Team** | A recipe that groups subagents and says who may write what | `agents/teams/<id>/team.yaml` | `deploy-preset.sh`, or a workflow that binds it |
 | **Saved workflow** | A multi-agent run whose rules are enforced in code | `agents/workflows/<id>.js` | You, with `/<id>` |
 | **Hook** | A script the runtime runs before or after a tool call | `hooks/` | The runtime, after you register it |
@@ -68,7 +77,7 @@ How a skill loads:
 
 This keeps the context small. A session pays for one short description per skill, not for every full skill.
 
-Some skills are **manual-only**. Their front matter sets `disable-model-invocation: true`, so the runtime never loads them by itself. You start them with `/<name>`. `run-workflow` is one of these.
+Some skills are **manual-only**. Their front matter sets `disable-model-invocation: true`, so the runtime never loads them by itself. You start them with `/<name>`. `run-workflow`, the skill that runs a workflow in Codex, is one of these.
 
 The full list, with every description, is in the [catalog](reference/catalog.md#skills). [Skills](skills.md) explains how to find, use and write them.
 
@@ -130,7 +139,7 @@ A saved workflow is a multi-agent run whose guarantees live in code, not in a pr
 - **A refuter quorum.** Each finding goes to two refuters. A finding dies only if both disprove it with a reason.
 - **Frozen acceptance checks.** In build mode, the checks are fixed when the run starts. An agent cannot weaken them to pass.
 - **A round cap and plateau stop.** A loop ends at its cap, or when two rounds in a row bring no gain.
-- **A snapshot gate.** The runtime records the working tree before and after each step. A write outside the allowed files stops the run.
+- **A snapshot gate.** Before and after each step, the workflow records `HEAD`, the staging area, protected files such as `AGENTS.md`, and a hash of every changed or untracked file. It only reads: it does not commit, stash or copy anything. If a file outside the allowed list changed, the run stops.
 
 A prompt that imitates a workflow loses all five. Use the saved workflow.
 
@@ -142,7 +151,9 @@ Each workflow has three files:
 |---|---|
 | `<id>.manifest.json` | The source: engine, description, arguments, phases, and the reviewer or loop settings |
 | `<id>.js` | Generated. The Claude Code workflow script. |
-| `<id>.codex-plan.json` | Generated. A parent-led plan that Codex follows through the `run-workflow` skill. |
+| `<id>.codex-plan.json` | Generated. A step-by-step JSON checklist for Codex. Codex cannot run the `.js` script, so your main Codex session (the "parent") follows this checklist through the `run-workflow` skill and starts each subagent itself. |
+
+The **engine** is the shared code that runs a family of workflows, for example `review` for the review workflows. Each manifest names its engine.
 
 [Workflows](workflows.md) covers all 8 workflows in detail.
 

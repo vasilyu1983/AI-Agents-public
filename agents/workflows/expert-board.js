@@ -5,13 +5,14 @@ export const meta = {
   description:
     'Manifest-driven board review: context contract, blind memos, adversarial debate, EVPI expansion, regret-min stopping, MCDA synthesis, optional heterogeneous verification, deadlines, and algedonic bypass.',
   whenToUse:
-    'args: { question: "<decision>", board?: "idea-evaluation|founder-blindspot|growth|monetization|marketing-diagnostics|marketing-campaign|architecture-rfc|release-readiness|incident|enterprise-readiness|ai-systems|data-analytics|data-science|growth-experiments|ops-platform|product-discovery|mobile-product|payments-platform|startup-strategy|product-surface", mode?: "market-penetration", context?: "<facts>", contextData: { required fields }, debateTriggers?: [], flags?: [], namedAgentSupport?: true|false }. Omit board for deterministic local classification; missing or blank required context stops before normal panel dispatch. An exact algedonic flag is the only exception and returns one immediate containment response.',
+    'args: { question: "<decision>", board?: "idea-evaluation|founder-blindspot|growth|monetization|marketing-diagnostics|marketing-campaign|architecture-rfc|release-readiness|incident|enterprise-readiness|ai-systems|data-analytics|data-science|growth-experiments|ops-platform|product-discovery|mobile-product|payments-platform|startup-strategy|product-surface", mode?: "market-penetration", context?: "<facts>", contextData: { required fields }, debateTriggers?: [], flags?: [], namedAgentSupport?: true|false, baseline?: true }. baseline also asks one agent the question once per memo and records its plurality verdict beside the board verdict. Omit board for deterministic local classification; missing or blank required context stops before normal panel dispatch. An exact algedonic flag is the only exception and returns one immediate containment response.',
   phases: [
     { title: 'Panel', detail: 'Blind evidence memos under a board-specific context and deliverable contract' },
     { title: 'Challenge', detail: 'Decision-mask challenge of the blind memos' },
     { title: 'Expand', detail: 'EVPI-gated expansion onto candidate lenses' },
     { title: 'Synthesize', detail: 'Locked-weight MCDA, regret stopping, and deadline handling' },
     { title: 'Verify', detail: 'Optional heterogeneous verification of the synthesis' },
+    { title: 'Baseline', detail: 'Opt-in (args.baseline): one agent votes once per memo; plurality recorded beside the verdict' },
   ],
 };
 
@@ -3277,6 +3278,38 @@ if (board.verification && board.verification.required) {
   if (!verification.stands) decisionStatus = 'verification_failed';
 }
 
+// Opt-in matched-budget baseline (args.baseline: true). At equal compute a panel often only ties a plain vote
+// (arXiv 2604.02460, 2508.17536; foundations-team-theory SKILL.md:36), so the run also asks one agent the same
+// question k times, blind, and records the plurality beside the panel verdict. k is the memo count; the panel
+// also spends tokens on challenges and synthesis, so the baseline gets less compute, never more. Agreement is not
+// correctness: the human label in telemetry/workflow-runs.jsonl decides which side was right.
+async function baselineVote(prompt, verdicts, k, options) {
+  const schema = {
+    type: 'object', required: ['verdict', 'reason'],
+    properties: { verdict: { type: 'string', enum: verdicts }, reason: { type: 'string' } },
+  };
+  const votes = (await parallel(Array.from({ length: k }, (_unused, i) => () =>
+    agent(prompt, Object.assign({}, options, { label: 'baseline:' + (i + 1), phase: 'Baseline', schema }))
+  ))).filter((vote) => vote && verdicts.includes(vote.verdict));
+  const tally = {};
+  for (const vote of votes) tally[vote.verdict] = (tally[vote.verdict] || 0) + 1;
+  const top = Math.max(0, ...Object.values(tally));
+  const leaders = Object.keys(tally).filter((verdict) => tally[verdict] === top);
+  log('Baseline: ' + votes.length + ' of ' + k + ' votes ' + JSON.stringify(tally));
+  return { k, completed: votes.length, tally, plurality: leaders.length === 1 ? leaders[0] : null };
+}
+const baseline = args && args.baseline === true
+  ? await baselineVote(
+    'You are one independent analyst working alone. Decide the question below. ' + RULES +
+      '\n\nQuestion:\n' + question + extraContext +
+      '\n\nContext status:\n' + JSON.stringify(contextStatus, null, 2) +
+      '\n\nGuardrails:\n' + JSON.stringify(board.guardrails || [], null, 2) +
+      '\n\nVerdict must be one of: ' + board.verdicts.join(', ') + '. Give a one-paragraph reason.',
+    board.verdicts, Math.max(1, memos.length), localReadOnlyOptions({}),
+  )
+  : null;
+if (baseline) baseline.agrees = baseline.plurality === synthesis.verdict;
+
 const isHold = decisionStatus !== 'decided' || /hold|defer|conditional/.test(synthesis.verdict);
 const deadline = isHold ? Object.assign({ required: true, escalate_on_deadline: board.hold_policy.escalate_on_deadline }, board.hold_policy) : null;
 
@@ -3296,4 +3329,5 @@ return {
   verification,
   decision_status: decisionStatus,
   deadline,
+  ...(baseline ? { baseline } : {}),
 };

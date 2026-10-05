@@ -31,7 +31,16 @@ The hook commands run the scripts from `~/.agents/hooks/`. This fixed path works
    for f in git-safety-guard.py config-guard.py notify-waiting.py; do ln -sf "$PWD/hooks/$f" ~/.agents/hooks/$f; done
    ```
 
-2. Add the Claude Code entries to `~/.claude/settings.json`. If the file already has a `"hooks"` key, merge these event lists into it; do not replace your existing hooks. Leave out any entry you do not want.
+   - The links point into your clone. **If you move or delete the clone, run this step again from the new location.** Otherwise the git guard is missing and blocks every `git` command (see "Fail closed" below).
+   - `ln -sf` replaces any file of the same name already in `~/.agents/hooks/`.
+
+2. Add the Claude Code entries to `~/.claude/settings.json`. These settings apply to every project on this machine. To try the hooks in one project first, put them in that project's `.claude/settings.json` instead.
+
+   1. Back up the file: `cp ~/.claude/settings.json ~/.claude/settings.json.bak`
+   2. If the file has no `"hooks"` key, add the block below.
+   3. If it already has `"hooks"`, add each entry to the existing list of the same event. For example, append the two `PreToolUse` entries to your `"PreToolUse": [...]` list. Do not add a second `"PreToolUse"` key, and do not replace your existing hooks.
+   4. Leave out any entry you do not want.
+   5. Check the JSON: `python3 -m json.tool ~/.claude/settings.json > /dev/null && echo valid`. If it is not valid, restore the backup.
 
    ```json
    {
@@ -100,7 +109,7 @@ The hook commands run the scripts from `~/.agents/hooks/`. This fixed path works
 
    Codex asks you to trust a new or changed hook. Approve it under `/hooks`, then start a new Codex session.
 
-4. Check the guard. In a Claude Code session, ask the agent to run `git stash`. You should get a permission prompt, not a silent stash.
+4. Check the guard. In a new Claude Code session, ask the agent to run `git stash`. You should get a permission prompt. **Choose No.** Seeing the prompt is the pass; choosing Yes stashes your uncommitted work.
 
 Notes on the commands:
 
@@ -118,7 +127,7 @@ Several agents can share one working tree. One agent's `git stash` or `git check
 | Stash | Main session: asks you. Subagent: blocked. | `git stash` and `--autostash`, except `stash list`, `show` and `create` |
 | Subagent only | Subagents outside their own linked worktree | `checkout`, `switch`, `rebase`, `merge`, `cherry-pick`, `revert`, `pull`, `am`, `reset`, `restore`, `commit`, bulk `add` (`-A`, `-u`, `.`), `branch -D/-f/-M/-C`, `update-ref`, `symbolic-ref` |
 | Hook bypass | Everyone | `--no-verify`, `commit -n`, and any `core.hooksPath` override |
-| Force push | Everyone | A force push or delete that reaches `main` or `dev`. A force push with no refspec also counts. |
+| Force push | Everyone | A force push or delete that reaches `main` or `dev`. A force push with no refspec also counts. Other branch names, such as `master`, `develop` or `release/*`, are not protected; see section 7. |
 | Unquoted expansion | Everyone | An argument to `commit`, `am`, `push`, `merge` or `rebase` that is only an unquoted `$X`, `$(...)` or backtick expansion |
 
 - **Subagent detection.** The guard treats a call as a subagent's when the hook payload has an `agent_id` field. Set `GIT_SAFETY_STRICT=1` to apply subagent rules to a whole session.
@@ -170,7 +179,8 @@ The guard is a seatbelt, not a sandbox. It does not catch:
 - `--git-dir` and `--work-tree`;
 - git config keys that run commands;
 - `ssh`, `su -c` and an unquoted `bash -c $(...)`;
-- `bisect run`, `submodule foreach` and `filter-branch`.
+- `bisect run`, `submodule foreach` and `filter-branch`;
+- a force push to a branch other than `main` or `dev`. The protected names are the `PROTECTED` set in `hooks/git-safety-guard.py`. Add your own names there; glob patterns such as `release/*` work.
 
 For real isolation, give each writer its own `git worktree`.
 

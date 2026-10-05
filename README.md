@@ -1,6 +1,14 @@
 # AI-Agents
 
-**Skills, subagents and saved multi-agent workflows for Claude Code and Codex.** One repository feeds both runtimes. Install it as a Claude Code plugin in two commands, or clone it and link it.
+**Ready-made expertise and multi-agent runs for Claude Code and Codex.**
+
+Out of the box, Claude Code works as one assistant in one chat. This repository adds three things:
+
+- **Skills:** instructions the assistant loads by itself when your task needs them, for example a code-review checklist.
+- **Subagents:** specialists, such as a security reviewer, that work in a separate context and report back.
+- **Saved workflows:** multi-step runs, such as "review my diff with 4 reviewers, then try to disprove each finding". The rules of each run are enforced in code, so an agent cannot skip a step.
+
+Install it as a Claude Code plugin in three commands, or clone it and link it.
 
 | What you get | How many | Where |
 |---|---|---|
@@ -14,6 +22,8 @@
 The exact, current list is in the generated [catalog](docs/reference/catalog.md).
 
 ## Quick start
+
+Pick **one** install path. Claude Code only: use the plugin. Codex, or you want to edit skills: clone and link.
 
 ### Claude Code plugin
 
@@ -29,7 +39,11 @@ Then, in a repository with uncommitted changes:
 /ai-agents:adversarial-review
 ```
 
-Four reviewers read your diff. Two refuters then try to disprove each finding. You get only the findings that survive. No file changes.
+Four reviewers read your diff. Two more agents (refuters) then try to disprove each finding. A finding is dropped only if both disprove it. The run changes no files.
+
+**Cost:** each reviewer and refuter is a full agent session on your own plan. One run starts 4 reviewers plus 2 refuters per finding, and takes several minutes. Run it on a small diff first.
+
+The run ends with a verdict: `CLEAN` (no findings), `FINDINGS` (each with `file:line`, severity and title), or `INCOMPLETE` (an agent failed; re-run). [Workflows](docs/workflows.md#adversarial-review) shows the full result.
 
 ### Clone and link (Claude Code and Codex)
 
@@ -39,9 +53,9 @@ cd ~/AI-Agents-public
 bash scripts/distribution/sync-skills.sh
 ```
 
-Then start a new session and type `/adversarial-review`. In Codex, invoke the `run-workflow` skill and name the workflow.
+Then start a new session and type `/adversarial-review`. In Codex, which has no workflow commands, invoke the `run-workflow` skill and name the workflow; the skill makes Codex follow the workflow step by step.
 
-Use one install path per machine. [Getting started](docs/getting-started.md) covers both paths, subagent installs, checks, updates and removal.
+[Getting started](docs/getting-started.md) covers both paths, subagent installs, checks, updates and removal.
 
 ## Documentation
 
@@ -75,6 +89,8 @@ No workflow commits, pushes, opens a pull request or approves anything. You revi
 
 ## Why it works this way
 
+These are design choices. The workflow tests in `agents/workflows/test-*.mjs` check the ones enforced in code.
+
 - **Guarantees live in code, not in prompts.** Fresh agents each round, a two-refuter quorum, frozen acceptance checks, round caps and plateau stops are enforced by the workflow runtime. A prompt that imitates a workflow has none of them.
 - **The tree is checked, not trusted.** Writing workflows snapshot the working tree after every step. A write outside the plan, a staged file, a moved `HEAD` or a touched instruction file stops the run.
 - **Every subagent states what it does not do.** Reviewers cannot edit, so they report instead of quietly patching.
@@ -103,12 +119,12 @@ docs/                      the guides above
 This is the public edition of a private library. It is built from an explicit allowlist, and every build is scanned for private names and credential patterns before release.
 
 - Marketing and startup domain playbooks are not published. The marketing and startup subagents run on their own instructions.
-- Legal, client-specific and personal content is not published, nor are the workflows and boards that depend on it.
+- Legal, client-specific and personal content is not published, nor are the workflows and boards that depend on it. All 8 workflows listed above work in this edition.
 - The library's own maintenance tooling (graph export, skill router, audit tools) is not published.
 
 ## Requirements
 
-Claude Code or Codex; `git`; Python 3.10 or later; Node.js 18 or later for the workflow tests. macOS or Linux (Windows through WSL).
+Claude Code with saved-workflow support (type `/workflows`; if the command is unknown, update Claude Code), or Codex; `git`; Python 3.10 or later; Node.js 18 or later for the workflow tests. macOS or Linux (Windows through WSL).
 
 ## Security
 

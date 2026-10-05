@@ -4,7 +4,7 @@
     "engine": "board",
     "codex": "parent-led",
     "description": "Manifest-driven board review: context contract, blind memos, adversarial debate, EVPI expansion, regret-min stopping, MCDA synthesis, optional heterogeneous verification, deadlines, and algedonic bypass.",
-    "whenToUse": "args: { question: \"<decision>\", board?: \"{bindings}\", mode?: \"market-penetration\", context?: \"<facts>\", contextData: { required fields }, debateTriggers?: [], flags?: [], namedAgentSupport?: true|false }. Omit board for deterministic local classification; missing or blank required context stops before normal panel dispatch. An exact algedonic flag is the only exception and returns one immediate containment response.",
+    "whenToUse": "args: { question: \"<decision>\", board?: \"{bindings}\", mode?: \"market-penetration\", context?: \"<facts>\", contextData: { required fields }, debateTriggers?: [], flags?: [], namedAgentSupport?: true|false, baseline?: true }. baseline also asks one agent the question once per memo and records its plurality verdict beside the board verdict. Omit board for deterministic local classification; missing or blank required context stops before normal panel dispatch. An exact algedonic flag is the only exception and returns one immediate containment response.",
     "phases": [
       {
         "title": "Panel",
@@ -25,6 +25,10 @@
       {
         "title": "Verify",
         "detail": "Optional heterogeneous verification of the synthesis"
+      },
+      {
+        "title": "Baseline",
+        "detail": "Opt-in (args.baseline): one agent votes once per memo; plurality recorded beside the verdict"
       }
     ]
   },

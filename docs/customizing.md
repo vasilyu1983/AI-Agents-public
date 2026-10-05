@@ -1,6 +1,6 @@
 # Customizing
 
-This page shows how to write a skill, a subagent, a team or a workflow, and which checks to run. Work in a clone (install path B), so your changes take effect at once.
+This page shows how to write a skill, a subagent, a team or a workflow, and which checks to run. Work in a clone ([install path B](getting-started.md#4-path-b-clone-and-link)), so your changes take effect at once.
 
 - [Write a skill](#write-a-skill)
 - [Write a subagent](#write-a-subagent)

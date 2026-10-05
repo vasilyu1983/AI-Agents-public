@@ -1,7 +1,7 @@
 {
   "scopes": {
     "claude-user": {
-      "repo": "config/claude/settings.json",
+      "repo": null,
       "live": ".claude/settings.json",
       "hooks": [
         {

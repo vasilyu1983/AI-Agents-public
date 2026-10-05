@@ -17,20 +17,20 @@ This guide installs the harness, checks that it works, and shows how to update a
 
 | Need | Why |
 |---|---|
-| Claude Code, Codex, or both | The two runtimes this harness serves |
+| Claude Code, Codex, or both | The two runtimes this harness serves. Claude Code must support saved workflows: type `/workflows`, and if the command is unknown, update Claude Code. |
 | `git` | To clone the repository (path B) and for the workflows' tree checks |
 | Python 3.10 or later | Generators, hooks and bundled skill scripts |
 | Node.js 18 or later | Only to run the workflow tests |
 | macOS or Linux | The install scripts are Bash. On Windows, use WSL. |
 
-The harness needs no API key of its own. It runs inside your Claude Code or Codex session and uses that session's model.
+The harness needs no API key of its own. It runs inside your Claude Code or Codex session and uses that session's model and plan. Every agent a workflow starts counts against that plan; [Workflows, section 7](workflows.md#7-cost-and-size) lists how many agents each workflow starts.
 
 ## 2. Choose one install path
 
 | Path | You get | Choose it when |
 |---|---|---|
 | **A. Plugin** | Skills, Claude subagents and saved workflows, managed by Claude Code | You use Claude Code only and want the fastest setup |
-| **B. Clone and link** | Skills for Claude Code and Codex, saved workflows, and edits that take effect at once | You use Codex, or you want to change skills and agents |
+| **B. Clone and link** | Skills for Claude Code and Codex, saved workflows, and edits that take effect at once. Subagents are a separate step (section 5). | You use Codex, or you want to change skills and agents |
 
 Use only one path on a machine. If both are active, Claude Code lists each skill twice.
 
@@ -73,6 +73,7 @@ In Claude Code, run:
    The script prints one summary line per target: `Linked`, `External skipped`, `Stale removed` and `Total visible`.
 
 3. Start a new Claude Code or Codex session.
+4. Path B does not install subagents. If you want them, do section 5.
 
 What the sync script will and will not do:
 
@@ -82,7 +83,7 @@ What the sync script will and will not do:
 
 ## 5. Install subagents for Codex or by team
 
-The plugin (path A) already gives Claude Code every subagent. Use this section for Codex, or to install only some agents.
+The plugin (path A) already gives Claude Code every subagent. Use this section with path B, for Codex, or to install only some agents. Run the commands from your clone (`cd ~/AI-Agents-public`).
 
 ```bash
 # See what exists
@@ -127,12 +128,12 @@ Hooks run code on every matching tool call, so they are opt-in. [Hooks and safet
 
 | Check | How | Expected |
 |---|---|---|
-| Skills load | In a new session, ask: "Which skills do you have for code review?" | Names such as `software-code-review` |
-| One skill, by path | `ls ~/.claude/skills/software-code-review/SKILL.md` (path B) | The file exists |
-| Workflows | In Claude Code, type `/adversarial-review` (plugin: `/ai-agents:adversarial-review`) | Claude Code offers the workflow |
+| Plugin loaded (path A) | Run `/plugin` and open the installed list | `ai-agents` is listed and enabled |
+| Skills linked (path B) | `ls ~/.claude/skills/software-code-review/SKILL.md` | The file exists |
+| Workflows | In Claude Code, type `/adversarial` and **do not press Enter**: Enter starts a paid run | The autocomplete list shows `adversarial-review` (plugin: `ai-agents:adversarial-review`) |
 | Subagents | In Claude Code, run `/agents` | Names such as `dev-feature-reviewer` (plugin: `ai-agents:dev-feature-reviewer`) |
 | Codex agents | `ls ~/.codex/agents/` | Files such as `dev_feature_reviewer.toml` |
-| Repository checks | `python3 skills/universal/agents-subagents/scripts/generate_workflows.py --check` in the clone | Exit code 0 |
+| Repository checks (path B only) | `python3 skills/universal/agents-subagents/scripts/generate_workflows.py --check` in the clone | Exit code 0 |
 
 ## 8. Your first ten minutes
 
@@ -143,7 +144,9 @@ Hooks run code on every matching tool call, so they are opt-in. [Hooks and safet
    /adversarial-review
    ```
 
-   With the plugin, type `/ai-agents:adversarial-review`. Four reviewers read the diff. Two refuters then try to disprove each finding. A finding survives only if at least one refuter fails to disprove it. The run changes no files.
+   With the plugin, type `/ai-agents:adversarial-review`. Four reviewers read the diff. Two refuters then try to disprove each finding. If both succeed, each with a reason, the finding is dropped. Otherwise you see it. The run changes no files.
+
+   It starts 4 agents plus 2 per finding and takes several minutes. It ends with `CLEAN`, `FINDINGS` (each with `file:line`, severity and title) or `INCOMPLETE` (an agent failed; re-run).
 3. **Ask for a specialist.** "Use dev-feature-reviewer on this diff." The subagent works in its own context and returns a report.
 4. **Plan a change.** Type:
 
@@ -151,7 +154,9 @@ Hooks run code on every matching tool call, so they are opt-in. [Hooks and safet
    /feature-delivery {"mode": "fix", "task": "<the bug, in one sentence>"}
    ```
 
-   The first run stops with a plan for you to approve. See [Workflows](workflows.md#feature-delivery) for the second run.
+   - The argument is JSON. Keep the quotes. `mode` is one of `add`, `change`, `fix` or `refactor`.
+   - The first run changes no files. It ends with `PLAN_READY` and a plan: the files to change, the test files and the checks.
+   - To approve, run the same command again and add `"plan": <the plan from run 1>`. Edit the plan first if you disagree with it. [Workflows](workflows.md#feature-delivery) shows both runs.
 
 ## 9. Update
 
@@ -160,7 +165,7 @@ Hooks run code on every matching tool call, so they are opt-in. [Hooks and safet
 | A. Plugin | `/plugin marketplace update ai-agents`, then `/reload-plugins` |
 | B. Clone | `git -C ~/AI-Agents-public pull`, then `bash scripts/distribution/sync-skills.sh` to link new skills and remove stale links |
 
-Deployed subagents are copies. Run `deploy-preset.sh` again for each team you use, with `--force` if you have not changed the installed copy.
+Deployed subagents are copies. Run `deploy-preset.sh` again for each team you use. Add `--force` to overwrite the installed copy; back it up first if you edited it.
 
 ## 10. Uninstall
 

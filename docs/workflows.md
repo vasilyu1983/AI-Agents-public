@@ -19,6 +19,17 @@ A saved workflow is a multi-agent run whose guarantees live in code: fresh agent
 - [7. Cost and size](#7-cost-and-size)
 - [8. Change or add a workflow](#8-change-or-add-a-workflow)
 
+**Terms used on this page**
+
+| Term | Meaning |
+|---|---|
+| Verdict | The one-word result of a run, such as `CLEAN` or `BLOCKED` ([section 3](#3-verdicts-and-what-to-do-next)) |
+| Stop reason | Why a run stopped, such as `cap` (round limit) or `out_of_scope` |
+| Escalation | A note in the result that tells you what a human must decide |
+| Plan | The JSON object that run 1 of a two-run workflow returns. You approve it by passing it to run 2. |
+| Snapshot | The workflow's record of the git tree before and after each step ([section 5](#5-the-snapshot-gate)) |
+| Path A, path B | The plugin install and the clone install ([Getting started](getting-started.md#2-choose-one-install-path)) |
+
 ## 1. Choose a workflow
 
 | You want to | Workflow | Edits files? | Stops for your approval? |
@@ -35,18 +46,37 @@ A saved workflow is a multi-agent run whose guarantees live in code: fresh agent
 
 Every workflow leaves commits to you. None of them commits, pushes, stashes, opens a pull request or approves anything.
 
+**Subagents each workflow needs.** The plugin (path A) includes all of them. With the clone (path B) or Codex, install the team first:
+
+| Workflow | Install |
+|---|---|
+| `adversarial-review`, `review-fix-loop`, `source-check` | Nothing: they use general agents |
+| `feature-delivery`, `epic-delivery` | `deploy-preset.sh dev-feature-delivery --platform <claude\|codex> --user` |
+| `build-mvp` | The `dev-feature-delivery` team and the `docs-ai-prd-writer` agent (`--member`) |
+| `expert-board` | The board's members (see the [catalog](reference/catalog.md#expert-boards)). A missing member is replaced by a general agent. |
+| `marketing-campaign` | `deploy-preset.sh marketing-campaign --platform <claude\|codex> --user`. This team is opt-in, so `deploy-all-teams.sh` skips it unless you add `--include-opt-in`. |
+
+**Before a writing workflow: how to undo.** Writing workflows leave their edits in your working tree on every stop, including `FINDINGS` and `BLOCKED`.
+
+1. Start from a clean tree, or run the workflow in its own worktree: `git worktree add ../wt-task -b task`.
+2. If your tree has uncommitted work, save it first: `git diff --binary > "$TMPDIR/before.patch"`.
+3. To discard a run's edits, run `git restore` or `git checkout` yourself in a terminal. With the [git safety guard](hooks-and-safety.md) installed, agents cannot run these commands.
+
 ## 2. Run a workflow in Claude Code
+
+**Before you run.** Workflows need Claude Code's dynamic workflows feature. On a Pro plan, turn it on in `/config` (the "Dynamic workflows" row). Each run first shows its plan and asks you to approve it once (Yes, View script, or No). If `/adversarial-review` is not offered, see [Troubleshooting](troubleshooting.md#workflows).
 
 Type `/<id>` and then the arguments as one JSON object:
 
 ```text
 /adversarial-review
-/adversarial-review {"target": "main"}
+/adversarial-review {"target": "feature/login"}
 /review-fix-loop {"mode": "review", "target": "src/payments", "maxRounds": 3}
 /feature-delivery {"mode": "fix", "task": "The CSV export drops the last row"}
 ```
 
 - With the plugin install, add the plugin prefix: `/ai-agents:adversarial-review`. This page uses the short form of the clone install.
+- A wrong argument, such as an unknown or repeated dimension name or an absolute path, stops the run at once, before any agent starts.
 - Give arrays and objects as real JSON values, not as a JSON string. `{"acceptance": ["npm test exits 0"]}` is correct. `{"acceptance": "[\"npm test exits 0\"]"}` is wrong.
 - Run the workflow from inside the repository it should work on. The agents find the root with `git rev-parse --show-toplevel`.
 - Claude Code shows the run's progress and lets you resume it from its workflow view.
@@ -79,7 +109,7 @@ Reviews code with four reviewers, then tries to disprove each finding.
 
 | Argument | Required | Meaning |
 |---|---|---|
-| `target` | No | A PR number, a branch, or a path. Without it, the run reviews `git diff` plus `git diff --staged`. |
+| `target` | No | A PR number, a branch, or a path. Without it, the run reviews `git diff` plus `git diff --staged`. New untracked files are in neither diff: run `git add -N <file>` first to include them. |
 | `dimensions` | No | Extra reviewers, added after the 4 defaults. Allowed: `publication`, `docs-drift`, `performance`. |
 
 **How it runs**
@@ -223,11 +253,13 @@ Only one writer runs at a time.
 /feature-delivery {"mode": "add", "task": "Add rate limiting to POST /login: 5 attempts per minute per IP"}
 ```
 
-Then, after you approve:
+Run 1 ends with `PLAN_READY` and prints the plan as a JSON object. Copy it whole, edit it if you need to, and pass it as `plan` in run 2. A filled-in run 2:
 
 ```text
-/feature-delivery {"mode": "add", "task": "Add rate limiting to POST /login: 5 attempts per minute per IP", "plan": <the plan object from run 1>}
+/feature-delivery {"mode": "add", "task": "Add rate limiting to POST /login: 5 attempts per minute per IP", "plan": {"summary": "Per-IP limiter on POST /login", "files": ["src/auth/login.py", "src/auth/rate_limit.py"], "test_files": ["tests/test_login_rate_limit.py"], "acceptance": ["pytest tests/test_login_rate_limit.py exits 0"]}}
 ```
+
+Copy the plan exactly as run 1 printed it; it can carry more fields than this example. Instead of pasting, you can also tell Claude: "Run feature-delivery again with the plan above."
 
 ### build-mvp
 
@@ -243,6 +275,13 @@ Rules for the slice list:
 - A slice may not have a blank check.
 
 The run stops at the first slice that does not reach `PASS`, and names that slice. The slices before it passed; commit them.
+
+**Example.** Run 1, then run 2 with the `slices` array that run 1 printed (copy it whole):
+
+```text
+/build-mvp {"prd": "docs/prd/invoice-export.md"}
+/build-mvp {"prd": "docs/prd/invoice-export.md", "slices": <the slices array from run 1>}
+```
 
 ### epic-delivery
 
@@ -262,6 +301,13 @@ How run 2 works:
 
 To retry, run again with `tasks` set to the tasks that are still open.
 
+**Example.** Run 1, then run 2 with the `tasks` array that run 1 printed (copy it whole):
+
+```text
+/epic-delivery {"epic": "Let users export invoices as CSV and PDF from the billing page"}
+/epic-delivery {"epic": "Let users export invoices as CSV and PDF from the billing page", "tasks": <the tasks array from run 1>}
+```
+
 ### expert-board
 
 Runs a board of subagents on one decision question.
@@ -276,6 +322,7 @@ Runs a board of subagents on one decision question.
 | `context` | No | Free-text facts |
 | `debateTriggers` | No | Turns on the challenge round |
 | `mode` | No | Only `market-penetration`, and only on the `growth` board |
+| `baseline` | No | `true` also asks one agent the question once per memo and records its majority verdict beside the board's verdict. Adds agents. |
 | `flags`, `namedAgentSupport` | No | Advanced; see the manifest |
 
 If `contextData` misses a required key, the run stops before it starts any agent. The 20 boards and their required keys are in the [catalog](reference/catalog.md#expert-boards).
@@ -356,7 +403,7 @@ A planned path that is absolute, blank, contains `..`, or sits under a protected
 
 Codex has no workflow runtime. Each workflow therefore ships a generated plan, `agents/workflows/<id>.codex-plan.json`, and the `run-workflow` skill runs it from your Codex session.
 
-1. Link the skills for Codex (`sync-skills.sh agents`), and deploy the agents the workflow uses (`deploy-preset.sh <team> --platform codex`).
+1. Link the skills for Codex (`sync-skills.sh agents`). Deploy the team the workflow needs, from the table in [section 1](#1-choose-a-workflow), with `--platform codex`.
 2. In Codex, invoke `run-workflow`. Name the workflow id and give the arguments.
 3. Your Codex session acts as the parent. It reads the plan's `execution_contract` and runs its phases in order with `spawn_agent`, `wait_agent`, `send_input` and `close_agent`.
 4. The parent does every dispatch, wait, merge and verdict. Workers never start workers.
@@ -379,6 +426,16 @@ Each agent in a workflow is a full model session. Cost grows with the number of 
 | `epic-delivery` | 1 planner; then a feature delivery per task, 1 acceptance check per task, and 1 integration review |
 | `expert-board` | The board's panel, plus optional challenge and expansion members |
 | `marketing-campaign` | The team roster across 4 stages |
+
+Worked counts, computed from the manifests, not measured:
+
+| Run | Agent sessions |
+|---|---|
+| `adversarial-review`, 3 findings | 4 reviewers + 3 × 2 refuters = 10 |
+| `adversarial-review`, 0 findings | 4 |
+| `review-fix-loop`, 2 rounds, 3 findings each | 2 × (4 + 6 + 1 fixer) = 22 |
+
+The page gives no prices: they depend on your plan and model. Claude Code's workflow view shows each agent as it runs. To cap the size of runs Claude Code plans by itself, set `workflowSizeGuideline` in `/config`.
 
 To keep a run small: give a narrow `target`, name only the extra `dimensions` the diff needs, and set a low `maxRounds`.
 

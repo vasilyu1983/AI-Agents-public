@@ -346,6 +346,19 @@ if (board.verification && board.verification.required) {
   if (!verification.stands) decisionStatus = 'verification_failed';
 }
 
+// @include baseline_runtime.js
+const baseline = args && args.baseline === true
+  ? await baselineVote(
+    'You are one independent analyst working alone. Decide the question below. ' + RULES +
+      '\n\nQuestion:\n' + question + extraContext +
+      '\n\nContext status:\n' + JSON.stringify(contextStatus, null, 2) +
+      '\n\nGuardrails:\n' + JSON.stringify(board.guardrails || [], null, 2) +
+      '\n\nVerdict must be one of: ' + board.verdicts.join(', ') + '. Give a one-paragraph reason.',
+    board.verdicts, Math.max(1, memos.length), localReadOnlyOptions({}),
+  )
+  : null;
+if (baseline) baseline.agrees = baseline.plurality === synthesis.verdict;
+
 const isHold = decisionStatus !== 'decided' || /hold|defer|conditional/.test(synthesis.verdict);
 const deadline = isHold ? Object.assign({ required: true, escalate_on_deadline: board.hold_policy.escalate_on_deadline }, board.hold_policy) : null;
 
@@ -365,4 +378,5 @@ return {
   verification,
   decision_status: decisionStatus,
   deadline,
+  ...(baseline ? { baseline } : {}),
 };
