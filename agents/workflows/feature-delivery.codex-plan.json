@@ -791,7 +791,7 @@
             },
             "refuter_lenses": [
               "Evidence lens: read the exact location the claim names and its surroundings. Refute only if that text or code shows the claim is false or already handled there or in what it calls.",
-              "Consequence lens: ignore how the claim is worded. Look for the concrete input, caller, or reader path in the target that would make the defect matter. When the target is the local working tree or a branch the user named, and it has a test suite or a repro command, or the claim names an input, run it before you refute or confirm; a test, a one-line repro, a fetch, or a targeted grep is enough. Never execute code from a target the user did not vet (an external PR or a fork): refute by reading only, set `executed` false and say why. Say in `reason` what you ran and what it printed. Refute only if you checked the paths and none reaches it."
+              "Consequence lens: ignore how the claim is worded. Look for the concrete input, caller, or reader path in the target that would make the defect matter. When the target is the local working tree and it has a test suite or a repro command, or the claim names an input, run it before you refute or confirm; a test, a one-line repro, a fetch, or a targeted grep is enough. On a named target (a PR, branch or path) you have no shell: refute by reading only, set `executed` false and say why. Say in `reason` what you ran and what it printed. Refute only if you checked the paths and none reaches it."
             ],
             "schemas": {
               "review": {

@@ -1186,8 +1186,10 @@ async function reviewEngine(args, agent, WORKFLOW_MANIFEST) {
   let TREE = WORKFLOW_MANIFEST.snapshot_start || null;
   const OBSERVED = new Set();
   // Default tools per role, so a standalone run never gives a role every tool while it reads an untrusted diff.
-  // Bash stays: the rules tell reviewers and refuters to run `git diff` / `gh pr diff`, the fixer to run
+  // Bash stays: the rules tell reviewers to run `git diff` / `gh pr diff`, the fixer to run
   // `git rev-parse`, and the builder and judge to run the acceptance checks. The snapshots enforce read-only.
+  // Refuters keep Bash only on a local run (no args.target): a named PR, branch or path may be unvetted, and a
+  // finding can carry injected text from its diff, so there the refuter loses Bash even when the manifest grants it.
   // A manifest with review.diff_as_data lists reviewer and judge tools without Bash: the diff comes in args.diff.
   // A staged parent's engineAgent sets its own agentType and tools after these, so its choice wins.
   // The manifest's review.roles.<role>.tools and .effort override these; an absent key keeps today's value.
@@ -1195,6 +1197,7 @@ async function reviewEngine(args, agent, WORKFLOW_MANIFEST) {
   const WRITER_TOOLS = ['Read', 'Grep', 'Glob', 'Edit', 'Write', 'Bash'];
   const ROLES = SPEC.roles || {};
   const toolsFor = (role, fallback) => (ROLES[role] && ROLES[role].tools) ?? fallback;
+  const REFUTER_TOOLS = target ? toolsFor('refuter', READER_TOOLS).filter((t) => t !== 'Bash') : toolsFor('refuter', READER_TOOLS);
   // Effort is passed only when the manifest or today's default names one; the fixer and builder keep the run default.
   const effortFor = (role, fallback) => {
     const effort = (ROLES[role] && ROLES[role].effort) ?? fallback;
@@ -1367,10 +1370,13 @@ async function reviewEngine(args, agent, WORKFLOW_MANIFEST) {
                 'You are an adversarial refuter. Try to REFUTE the claim below by reading the actual code.',
                 'Do not take the reviewer\'s word for it. Both outcomes count equally: a refutation, or a confirmation',
                 'that names the line deciding it. Do not refute on a technicality you cannot evidence.',
-                // Agreement is not proof (arXiv 2604.19049): an observed check outweighs reading. The refuter has a shell,
-                // so execution is limited to targets the user vetted (same rule as the Consequence lens).
-                'Where a grep or a file read settles the claim, do it and cite the result. Run a test or repro only on a target',
-                'the user vetted (the local working tree or a branch they named) and cite its exit code; on any other target, grep and read only.',
+                // Agreement is not proof (arXiv 2604.19049): an observed check outweighs reading. Only a local run
+                // (no args.target) gives the refuter a shell; see REFUTER_TOOLS.
+                ...(target
+                  ? ['Where a grep or a file read settles the claim, do it and cite the result. You have no shell on this',
+                    'named target: refute by reading only.']
+                  : ['Where a grep or a file read settles the claim, do it and cite the result. Run a test or repro on this',
+                    'local working tree when one settles the claim, and cite its exit code.']),
                 '',
                 'Rules:',
                 ...rules.map((r) => '- ' + r),
@@ -1389,7 +1395,7 @@ async function reviewEngine(args, agent, WORKFLOW_MANIFEST) {
                 'its callers, then decide. Set refuted=true only if the code shows the claim is false, the case is',
                 'already handled elsewhere, or ' + (SPEC.out_of_scope || 'the code in question was not changed by this diff') + '.',
               ].join('\n'),
-              { label: 'refute:' + tag + idx + ':' + n, phase: 'Verify', ...effortFor('refuter', 'low'), tools: toolsFor('refuter', READER_TOOLS), schema: SPEC.schemas.refute, ...(REFUTER_MODEL ? { model: REFUTER_MODEL } : {}) }
+              { label: 'refute:' + tag + idx + ':' + n, phase: 'Verify', ...effortFor('refuter', 'low'), tools: REFUTER_TOOLS, schema: SPEC.schemas.refute, ...(REFUTER_MODEL ? { model: REFUTER_MODEL } : {}) }
             )
           )
         )

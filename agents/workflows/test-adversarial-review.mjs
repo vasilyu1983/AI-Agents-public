@@ -396,10 +396,10 @@ for (const { label, prompt } of prompts.filter((p) => p.label.startsWith('refute
   assert.equal(JSON.parse(hits[0][0]).title, planted, label + ': as a JSON field');
 }
 
-// The refuter prompt states the vetted-target rule once and never forbids running tests outright (plan item 1.1).
+// On a local run the refuter prompt allows a test or repro and never forbids running tests outright (plan item 1.1).
 for (const { label, prompt } of prompts.filter((p) => p.label.startsWith('refute:'))) {
   assert.ok(!prompt.includes('Never run tests'), label + ': no blanket ban on running tests');
-  assert.ok(prompt.includes('Run a test or repro only on a target') && prompt.includes('the user vetted') && prompt.includes('cite its exit code'), label + ': vetted-target rule');
+  assert.ok(prompt.includes('Run a test or repro on this') && prompt.includes('local working tree') && prompt.includes('cite its exit code'), label + ': local-run test rule');
 }
 // refuter_execution tells a real check from a grep or read; a model never classifies it.
 {
@@ -539,6 +539,15 @@ const runData = (refuters, reviewers, args = {}, tree = fakeTree(), prompts = []
   assert.equal(withHead.head_sha, 'b'.repeat(40));
   assert.equal(withHead.telemetry.head_sha_source, 'args'); // caller-attested with a target
   await assert.rejects(runData(holds, {}, { diffFile: 'x.diff' }), /diffFile is not supported/);
+}
+{
+  // A named target may be an unvetted PR, and a finding can quote injected diff text: its refuters lose Bash
+  // even though the manifest grants it, and their prompt says so.
+  const prompts = [];
+  await runData(holds, { correctness: { findings: [finding] } }, { target: '123', headSha: 'a'.repeat(40) }, fakeTree(), prompts);
+  const refuters = runScenario.options.filter((o) => o.label.startsWith('refute:'));
+  assert.ok(refuters.length > 0 && refuters.every((o) => !o.tools.includes('Bash')), 'named-target refuters have no Bash');
+  assert.match(prompts.find((p) => p.label.startsWith('refute:')).prompt, /no shell on this\nnamed target: refute by reading only/);
 }
 
 // ---- baseline arm (args.baseline): reviewers only, same diff, no Verify phase ----
