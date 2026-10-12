@@ -102,7 +102,7 @@
       "id": "MAST2025",
       "name": "Why Do Multi-Agent LLM Systems Fail?",
       "url": "https://arxiv.org/abs/2503.13657",
-      "description": "Cemri et al. (2025). NeurIPS. Empirical taxonomy of 14 multi-agent LLM failure modes across 1,600+ traces, grouped into system design issues, inter-agent misalignment, and task verification. Primary modern source for connecting grounding theory to LLM agent failures.",
+      "description": "Cemri et al. (2025), arXiv:2503.13657; the arXiv page names no venue (NeurIPS 2025 D&B per secondary sources, unconfirmed). Empirical taxonomy of 14 multi-agent LLM failure modes across 1,600+ traces, grouped into system design issues, inter-agent misalignment, and task verification. Primary modern source for connecting grounding theory to LLM agent failures.",
       "url_check": "auto"
     },
     {
@@ -123,21 +123,21 @@
       "id": "NewsInterview2025",
       "name": "NewsInterview: a Dataset and a Playground to Evaluate LLMs' Grounding Gap via Informational Interviews",
       "url": "https://aclanthology.org/2025.acl-long.1580/",
-      "description": "Spangher, Lu, Kalyan, Cho, Huang, Shi, May (2025). ACL 2025. 45,848 NPR/CNN interviews; human interviewers produce acknowledgements in ~9% of utterances, all LLM variants produce ~0%; LLMs also fail at audience-state-sensitive pivoting. Supports #4, #7.",
+      "description": "Spangher, Lu, Kalyan, Cho, Huang, Shi, May (2025). ACL 2025. Large NPR/CNN interview dataset; human interviewers produce acknowledgements far more often than LLM variants, which also fail at audience-state-sensitive pivoting (direction only; figures not re-verified). Supports #4, #7.",
       "url_check": "auto"
     },
     {
       "id": "UbuntuCG2025",
       "name": "Understanding Common Ground Misalignment in Goal-Oriented Dialog: A Case-Study with Ubuntu Chat Logs",
       "url": "https://aclanthology.org/2025.acl-long.161/",
-      "description": "Sarkar, Srikanth, Pellegrin, Rudinger, Bonial, Resnik (2025). ACL 2025. 200 dyadic Ubuntu IRC conversations (7,590 turns); operationalizes Clark & Brennan common ground as conversational friction; friction correlates with task failure; Section 6 GPT-4o error analysis: explicit RequestRepair occurs in 77.22% of detected friction instances versus 64.81% of undetected instances. These are conditional proportions, not F1 or detection rates. Primary location: https://arxiv.org/html/2503.12370v2#S6; checked 2026-09-17. Supports #1, #5.",
+      "description": "Sarkar, Srikanth, Pellegrin, Rudinger, Bonial, Resnik (2025). ACL 2025. Dyadic Ubuntu IRC conversations; operationalizes Clark & Brennan common ground as conversational friction; friction correlates with task failure. Error-analysis proportions not re-verified; see https://arxiv.org/html/2503.12370v2#S6. Supports #1, #5.",
       "url_check": "auto"
     },
     {
       "id": "InferAct2025",
       "name": "Preemptive Detection and Correction of Misaligned Actions in LLM Agents",
       "url": "https://aclanthology.org/2025.emnlp-main.12/",
-      "description": "Fang, Zhu, Gurevych (2025). EMNLP 2025. InferAct: two-unit system (Task Inference + Task Verification) detects misalignment before irreversible action; best Macro-F1 in 11/12 settings across 3 tasks × 4 LLMs, +8% avg over strongest baseline. Extends primitive #5 with preemptive repair pattern.",
+      "description": "Fang, Zhu, Gurevych (2025). EMNLP 2025. InferAct: two-unit system (Task Inference + Task Verification) detects misalignment before irreversible action and outperforms baselines in the authors' evaluation (figures not re-verified). Extends primitive #5 with preemptive repair pattern.",
       "url_check": "auto"
     },
     {
@@ -179,14 +179,14 @@
       "id": "GSAR2026",
       "name": "GSAR: Typed Grounding for Hallucination Detection and Recovery in Multi-Agent LLMs",
       "url": "https://arxiv.org/abs/2604.23366",
-      "description": "Kamelhar (2026). arXiv 2604.23366, April 2026. PREPRINT — no peer review confirmed; code not confirmed in public repo. Applies Clark-vocabulary grounding to multi-agent output verification. Four-way claim typology: grounded, ungrounded, contradicted, complementary. Evidence-type-specific weights, asymmetric contradiction-penalised score, three-tier decision function (proceed/regenerate/replan) under compute budget. Evaluated on FEVER. Maps to Primitive #5 (Repair) and #4 (Evidence of Understanding).",
+      "description": "Kamelhar (2026). arXiv 2604.23366, April 2026. PREPRINT, single author, no peer review or public code confirmed; abstract not re-read here. Applies Clark-vocabulary grounding to multi-agent output verification with a typed claim taxonomy and a proceed/regenerate/replan decision function. Maps to Primitive #5 (Repair) and #4 (Evidence of Understanding).",
       "url_check": "auto"
     },
     {
       "id": "AwN2025",
       "name": "Learning to Ask: When LLM Agents Meet Unclear Instruction",
       "url": "https://aclanthology.org/2025.emnlp-main.1104/",
-      "description": "Wang et al. (2025). EMNLP 2025, pp. 21773–21784. NoisyToolBench: ambiguous real-world tool-use instructions. Ask-when-Needed (AwN) framework: agents ask clarifying questions when encountering unclear instruction obstacles. Significantly outperforms existing frameworks on NoisyToolBench. Operationalizes Primitive #5 (Repair) — ask-for-clarification channel — in tool-use agent context. Complements InferAct (preemptive) with ambiguity-triggered reactive clarification. Code+datasets released. Evidence grade B.",
+      "description": "Wang et al. (2025). EMNLP 2025, pp. 21773–21784. NoisyToolBench: ambiguous real-world tool-use instructions. Ask-when-Needed (AwN) framework: agents ask clarifying questions when encountering unclear instruction obstacles. Reported to outperform baseline frameworks on NoisyToolBench (direction only). Operationalizes Primitive #5 (Repair) — ask-for-clarification channel — in tool-use agent context. Complements InferAct (preemptive) with ambiguity-triggered reactive clarification. Code+datasets released. Evidence grade B.",
       "url_check": "auto"
     },
     {
@@ -200,14 +200,14 @@
       "id": "CommonGroundBench2026",
       "name": "A Benchmark to Assess Common Ground in Human-AI Collaboration",
       "url": "https://arxiv.org/abs/2602.21337",
-      "description": "Poelitz, Doshi-Velez, Lindley (2026). arXiv 2602.21337v1, February 2026. PREPRINT — no peer review confirmed. Helper/Worker collaborative puzzle-matching task using GPT-4.1; 40 Prolific participants in a 2x2 design (role x shared/non-shared view), four trials plus practice. Measures common ground at three levels: task (success, word and turn counts), object (shared referential conventions), communication (presentations, clarifications, repairs, acceptances). Key findings: shared visual feedback raises accuracy (chi-sq(1)=11.57, p<0.001); no learning effect across trials for AI, contrary to human-human patterns; human Helpers reduce communication over trials (F(1,28)=11.67, p<0.01) while AI Helpers show minimal efficiency gain; joint vocabulary stays small and shrinks (F(1,28)=12.28, p<0.001); GPT-4.1 does not reliably update assumptions after repairs in this setup; the discussion explicitly warns against generalizing across models. Small sample — treat effect directions as informative, magnitudes as provisional. Supports #1, #4, #5.",
+      "description": "Poelitz, Doshi-Velez, Lindley (2026). arXiv 2602.21337, February 2026. PREPRINT, no peer review confirmed. Benchmark of common ground in human-AI collaboration (Helper/Worker puzzle-matching task) at task, object and communication levels; abstract states it reproduces human-human findings and shows human-AI differences. Model, sample size and statistics are not recorded here (not verified from the abstract); read the paper before citing details. Supports #1, #4, #5.",
       "url_check": "manual"
     },
     {
       "id": "SemanticProtocols2026",
       "name": "Beyond Message Passing: A Semantic View of Agent Communication Protocols",
       "url": "https://arxiv.org/abs/2604.02369",
-      "description": "Yuan, Lyu, Yuan, Zhang, He, Geng, Du, Sun, Chen, Han, Kang, Chen, Wu, Liu (2026). arXiv 2604.02369v3, submitted March 2026, revised April 2026. PREPRINT — no peer review confirmed. Surveys 18 representative agent communication protocols (MCP, A2A, Agent Protocol, Agora, ACP variants) against a three-layer taxonomy: communication (reliable transmission), syntactic (message schemas), semantic (meaning alignment). Invokes Clark's joint-activity framing — communication requires mutual belief about shared knowledge, intentions, assumptions — to motivate the semantic layer. Key finding: most protocols provide limited protocol-level mechanisms for clarification, context alignment, and verification; semantic responsibilities are pushed into prompts, wrappers, and application-specific orchestration logic. Agents 'exchange messages correctly without ensuring they understand them in the same way.' Citable support for the A2A/MCP transport-vs-grounding boundary. Supports #3, #5, #6.",
+      "description": "Yuan, Lyu, Yuan, Zhang, He, Geng, Du, Sun, Chen, Han, Kang, Chen, Wu, Liu (2026). arXiv 2604.02369v3, submitted March 2026, revised April 2026. PREPRINT — no peer review confirmed. Surveys representative agent communication protocols (MCP, A2A, Agent Protocol, Agora, ACP variants) against a three-layer taxonomy: communication (reliable transmission), syntactic (message schemas), semantic (meaning alignment). Invokes Clark's joint-activity framing — communication requires mutual belief about shared knowledge, intentions, assumptions — to motivate the semantic layer. Key finding: most protocols provide limited protocol-level mechanisms for clarification, context alignment, and verification; semantic responsibilities are pushed into prompts, wrappers, and application-specific orchestration logic. Agents 'exchange messages correctly without ensuring they understand them in the same way.' Citable support for the A2A/MCP transport-vs-grounding boundary. Supports #3, #5, #6.",
       "url_check": "manual"
     },
     {
@@ -221,7 +221,7 @@
       "id": "NCBench2026",
       "name": "NC-Bench: An LLM Benchmark for Evaluating Conversational Competence",
       "url": "https://arxiv.org/abs/2601.06426",
-      "description": "Moore, An, Ahmed, Gala (2026). arXiv 2601.06426v2, March 2026. PREPRINT — no peer review confirmed. Conversation-analysis-grounded benchmark measuring the form and structure of natural conversation rather than content accuracy. 14 interaction patterns across three sets (basic, RAG, complex request); 720 test cases (180/180/360); 6 open-source models from 3 families (Granite, Llama, Qwen) at 2-8B. Key result for this skill: repair is the weakest competence class — 5-75% accuracy on repeat requests against 95-100% on answering inquiries; sequence closers 55-100%; sequence abort 20-100%. Small-model sample: the absolute rates do not transfer to frontier models, but the ordering (repair weakest, answering strongest) is the usable finding. Supports #5.",
+      "description": "Moore, An, Ahmed, Gala (2026). arXiv 2601.06426v2, March 2026. PREPRINT, no peer review confirmed. Conversation-analysis-grounded benchmark of conversational competence (interaction patterns such as repair, sequence closers, sequence abort) on small open-source models. Usable finding is the ordering only: repair is the weakest competence class against plain answering. Absolute rates do not transfer to frontier models and are not recorded here. Supports #5.",
       "url_check": "manual"
     }
   ]

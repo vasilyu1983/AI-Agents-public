@@ -80,6 +80,7 @@ debate:
   enabled: true
   method: dialectical-inquiry
   mandatory_dissent: true
+  trigger_arbiter: parent-thread
   decision_masks:
   - anchoring-mask
   - base-rate-mask
@@ -130,6 +131,10 @@ hold_policy:
   escalate_on_deadline: forced_decision
 trust:
   default_tier: standard
+budget:
+  max_rounds: 5
+  max_turns_per_member: 12
+  token_envelope: 540000
 design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#marketing-campaign
 install: opt-in
 install_guidance:

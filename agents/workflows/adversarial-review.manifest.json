@@ -1,24 +1,28 @@
 {
   "version": 1,
+  "max_agents": 32,
   "workflow": {
     "engine": "review",
     "codex": "parent-led",
     "description": "On-demand builder/critic review of the working-tree diff (or args.target). It launches four reviewers, then two refuters per proposed finding; cost therefore grows with the number of findings.",
-    "whenToUse": "args: { target?: \"<PR number, branch or path>\", dimensions?: [\"<optional dimension>\"] }. args.dimensions adds opt-in reviewers after the four defaults, in the given order: publication, docs-drift or performance; each one costs a reviewer and its refuters, so name only the ones the diff needs.",
+    "whenToUse": "args: { diff: \"<unified diff text>\", headSha?: \"<40-char commit; required with target; caller-attested, the runtime cannot check it matches the diff>\", target?: \"<PR number, branch or path>\", dimensions?: [\"<optional dimension>\"], maxRefuted?: 10, baseline?: true|\"vendor\" }. args.diff is required: reviewers have no shell and read the diff you pass as data (a run without it stops INCOMPLETE, diff_missing); a finding on a file outside that diff is dropped. args.maxRefuted raises the 10-finding refuter cap for one run; raise args.maxAgents with it (4 reviewers + 2 refuters per finding + snapshots). args.dimensions adds opt-in reviewers after the four defaults, in the given order: publication, docs-drift or performance; each one costs a reviewer and its refuters, so name only the ones the diff needs. args.baseline: true runs the reviewers alone (no refuters) on the same diff after the panel and records result.baseline = {mode: reviewers_only, findings: [ids], tokens: null}; \"vendor\" runs nothing and records an instruction to run the vendor's built-in review on the same PR and label it --arm vendor; any other value throws.",
     "phases": [
       { "title": "Review", "detail": "One reviewer agent per dimension proposes findings from the diff" },
       { "title": "Verify", "detail": "Two adversarial refuters per finding; both must refute to kill it" }
     ]
   },
   "review": {
-    "returns": "{ verdict: CLEAN | FINDINGS | BLOCKED | INCOMPLETE, incomplete: [dimension], confirmed, killed, unverified, counts, observed_changes, stop_reason?, escalation? }",
+    "diff_as_data": true,
+    "returns": "{ verdict: CLEAN | FINDINGS | BLOCKED | INCOMPLETE, incomplete: [dimension], confirmed, killed, unverified, counts, head_sha, diff_files, binding_problem?, observed_changes, stop_reason?, escalation? }",
     "target": {
-      "default": "Review target: the uncommitted working-tree diff. Use `git diff` and `git diff --staged`.",
+      "default": "Review target: the uncommitted working-tree diff. Use `git diff` and `git diff --staged`. Report head_sha from `git rev-parse HEAD` and diff_files from `git diff --name-only HEAD`.",
       "given": [
         "Review target: {target}.",
         "Resolve it yourself: if it is a number, use `gh pr diff {target}`; if it is a branch,",
         "use `git diff $(git merge-base HEAD {target})...{target}`; if it is a path,",
-        "use `git diff -- {target}` and read the files under it."
+        "use `git diff -- {target}` and read the files under it.",
+        "Report head_sha from `gh pr view {target} --json headRefOid -q .headRefOid` for a number, `git rev-parse {target}` for a branch, or `git rev-parse HEAD` for a path,",
+        "and diff_files from the same diff command with `--name-only`."
       ]
     },
     "rules": [
@@ -62,16 +66,32 @@
       }
     ],
     "refuters": 2,
+    "max_refuted": 10,
+    "retry_once": true,
+    "severity_rank": { "high": 3, "medium": 2, "low": 1 },
+    "roles": {
+      "reviewer": { "tools": ["Read", "Grep", "Glob"], "effort": "medium" },
+      "refuter": { "tools": ["Read", "Grep", "Glob", "Bash"], "effort": "low" },
+      "judge": { "tools": ["Read", "Grep", "Glob"], "effort": "high" },
+      "fixer": { "tools": ["Read", "Grep", "Glob", "Edit", "Write", "Bash"] },
+      "builder": { "tools": ["Read", "Grep", "Glob", "Edit", "Write", "Bash"] }
+    },
     "refuter_lenses": [
       "Evidence lens: read the exact location the claim names and its surroundings. Refute only if that text or code shows the claim is false or already handled there or in what it calls.",
-      "Consequence lens: ignore how the claim is worded. Look for the concrete input, caller, or reader path in the target that would make the defect matter. Refute only if you checked the paths and none reaches it."
+      "Consequence lens: ignore how the claim is worded. Look for the concrete input, caller, or reader path in the target that would make the defect matter. When the target is the local working tree or a branch the user named, and it has a test suite or a repro command, or the claim names an input, run it before you refute or confirm; a test, a one-line repro, a fetch, or a targeted grep is enough. Never execute code from a target the user did not vet (an external PR or a fork): refute by reading only, set `executed` false and say why. Say in `reason` what you ran and what it printed. Refute only if you checked the paths and none reaches it."
     ],
     "schemas": {
       "review": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["findings"],
+        "required": ["head_sha", "diff_files", "findings"],
         "properties": {
+          "head_sha": { "type": "string", "description": "The full 40-character commit SHA you reviewed, from the command in the target note" },
+          "diff_files": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Every path the reviewed diff changes, from the --name-only command in the target note"
+          },
           "findings": {
             "type": "array",
             "items": {
@@ -101,7 +121,9 @@
             "type": "boolean",
             "description": "true if the claim is wrong, already handled, or out of scope for this diff"
           },
-          "reason": { "type": "string", "description": "Cite the file and line evidence that settles it" }
+          "reason": { "type": "string", "description": "Cite the file and line evidence that settles it" },
+          "executed": { "type": "boolean", "description": "true if you ran any command (test, repro, fetch or grep) to check the claim" },
+          "command": { "type": "string", "description": "The exact command you ran, or an empty string if none. A test or repro command counts as a check; a grep or read does not." }
         }
       }
     }

@@ -3,9 +3,9 @@
     "title": "Statistical inference primary sources",
     "description": "Interpretation principles, A/B test validity and variance reduction, sequential and anytime-valid inference, multiplicity procedures, eval error bars, prediction-powered inference, and conformal prediction variants.",
     "skill": "foundations-statistical-inference",
-    "last_updated": "2026-09-23",
+    "last_updated": "2026-10-12",
     "research_cutoff": "2026-09-23",
-    "total_sources": 25
+    "total_sources": 32
   },
   "sources": [
     {
@@ -160,6 +160,67 @@
       "name": "MAPIE package",
       "url": "https://pypi.org/project/MAPIE/",
       "description": "scikit-learn-compatible conformal prediction intervals and sets."
+    },
+    {
+      "id": "Bowyer2025",
+      "name": "Bowyer, Aitchison, Ivanova — Don't Use the CLT in LLM Evals With Fewer Than a Few Hundred Datapoints (ICML 2025)",
+      "url": "https://arxiv.org/abs/2503.01747",
+      "last_verified": "2026-10-11",
+      "accessed": "2026-10-11",
+      "description": "CLT intervals dramatically underestimate uncertainty at small n; use exact, bootstrap or Bayesian intervals."
+    },
+    {
+      "id": "Dorner2025",
+      "name": "Dorner, Nastl, Hardt — Limits to scalable evaluation at the frontier: LLM as judge won't beat twice the data (ICLR 2025)",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/4264ee4376776907c0b87ed70b959585-Paper-Conference.pdf",
+      "last_verified": "2026-10-11",
+      "accessed": "2026-10-11",
+      "description": "With a judge no better than the evaluated model, debiasing cannot cut required ground-truth labels by more than half. Abstract-level reading."
+    },
+    {
+      "id": "Lee2025",
+      "name": "Lee, Zeng et al. — Rogan-Gladen sensitivity/specificity correction for LLM-judge pass rates, with intervals carrying test-set and calibration-set noise (2025)",
+      "url": "https://arxiv.org/abs/2511.21140",
+      "last_verified": "2026-10-11",
+      "accessed": "2026-10-11",
+      "description": "Alternative to PPI for binary judges with a gold calibration set. Method read at summary level."
+    },
+    {
+      "id": "WaudbySmith2024",
+      "name": "Waudby-Smith, Arbour, Sinha, Kennedy, Ramdas — Time-uniform central limit theory and asymptotic confidence sequences, Ann. Statist. 52(6):2613-2640 (2024)",
+      "url": "https://projecteuclid.org/journals/annals-of-statistics/volume-52/issue-6/Time-uniform-central-limit-theory-and-asymptotic-confidence-sequences/10.1214/24-AOS2408.short",
+      "last_verified": "2026-10-11",
+      "accessed": "2026-10-11",
+      "description": "Asymptotic confidence sequences for anytime-valid inference without distributional assumptions."
+    },
+    {
+      "id": "FDA2022MultipleEndpoints",
+      "name": "FDA — Multiple Endpoints in Clinical Trials, final guidance (2022-10-21)",
+      "url": "https://www.federalregister.gov/documents/2022/10/21/2022-22882/multiple-endpoints-in-clinical-trials-guidance-for-industry-availability",
+      "last_verified": "2026-10-11",
+      "accessed": "2026-10-11",
+      "description": "Final guidance that replaced the 2017 draft; source for fixed-sequence gatekeeping."
+    },
+    {
+      "id": "Kish1965",
+      "name": "Kish — Survey Sampling (Wiley, 1965): design effect and effective sample size",
+      "url": "https://www.wiley.com/en-us/Survey+Sampling-p-9780471109495",
+      "last_verified": "2026-10-12",
+      "accessed": "2026-10-12",
+      "url_check": "manual",
+      "url_note": "book page not fetched; cited for the design-effect / effective-n definition",
+      "description": "Source for effective sample size under correlated observations, applied to correlated voters."
+    },
+    {
+      "id": "JudgePanelEffectiveVotes2026",
+      "name": "LLM judge panels: effective number of independent votes (arXiv 2605.29800, 2026)",
+      "url": "https://arxiv.org/abs/2605.29800",
+      "arxiv_id": "2605.29800",
+      "last_verified": "2026-10-12",
+      "accessed": "2026-10-12",
+      "url_check": "manual",
+      "url_note": "abstract only; single-author preprint; direction only, no figures carried into the skill",
+      "description": "Reports that multi-family judge panels yield few effective votes and that the best single judge matched the panel; cited as direction for the effective-votes rule."
     }
   ]
 }

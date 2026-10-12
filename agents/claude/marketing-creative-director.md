@@ -98,3 +98,7 @@ Use this order before broad discovery:
 - AI disclosure/provenance status and any unresolved verification gaps
 
 ### Context Used
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

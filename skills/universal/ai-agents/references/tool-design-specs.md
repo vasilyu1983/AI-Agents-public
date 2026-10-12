@@ -418,8 +418,17 @@ before picking a runtime, see
 
 - Use JSON-RPC message types strictly.  
 - Always include error objects when failing.  
-- Keep tools granular (one purpose each).  
 - Avoid side effects unless required by design.  
+
+### Granularity: Primitives First
+
+**Source**: [morluto/rea](https://github.com/morluto/rea/tree/411498d45f860eba2fbc9d7051af20237b7a4cb1), commit `411498d45f860eba2fbc9d7051af20237b7a4cb1`, MIT license. Extracted 2026-10-09.
+
+- Default to a primitive: one call reports one reusable fact about one identified object or relationship, useful across different applications.
+- Add a composed workflow tool only when repeated real use shows callers need the same multi-source result and it stays meaningful for other applications. If it needs one application's business rules, keep that interpretation out of the tool contract and expose the evidence through primitives.
+- Add a tool only for a distinct question or a materially different authority or effect contract. Otherwise extend the existing tool.
+- Avoid opaque mode flags and mega-tools that mix discovery, execution, and mutation.
+- Discoverability is proven only by running representative prompts on the intended host and recording the selected tool, arguments, and errors. Schema validity or word overlap between prompt and description does not prove it.
 
 ---
 

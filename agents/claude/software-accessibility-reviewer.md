@@ -85,3 +85,7 @@ Give the smallest sequence of changes that restores task completion for keyboard
 ### Context Used
 
 List which packet, axe-core report, screen-reader logs, or design system docs were used.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

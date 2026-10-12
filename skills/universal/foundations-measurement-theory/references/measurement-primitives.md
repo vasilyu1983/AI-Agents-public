@@ -2,7 +2,7 @@
 
 ## Physical quantities and latent constructs
 
-Physical measurement starts with a specified measurand, unit, measurement model, operating conditions, and reference. Record corrections and an uncertainty budget; traceability requires a documented calibration chain and uncertainties. Calibration is not adjustment. These terms follow JCGM 200:2012. Uncertainty treatment follows JCGM 100:2008 and its Amendment 1:2026 on nonlinearity in measurement models. Construct the measurement model itself using JCGM GUM-6:2020.
+Physical measurement starts with a specified measurand, unit, measurement model, operating conditions, and reference. Record corrections and an uncertainty budget; traceability requires a documented calibration chain and uncertainties. Calibration is not adjustment. These terms follow JCGM 200:2012. Uncertainty treatment follows JCGM 100:2008. Construct the measurement model itself using JCGM GUM-6:2020.
 
 Psychometric measurement starts with an explicit construct and interpretation. Evidence may address content, response processes, internal structure, relationships with other variables, and consequences relevant to the proposed use. The 2014 Testing Standards treat validity as support for score interpretation and use, rather than an inherent permanent property of an instrument.
 

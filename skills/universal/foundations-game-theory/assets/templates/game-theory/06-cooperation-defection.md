@@ -36,7 +36,7 @@ Members face a cooperation game:
 
 ## Measuring Defection Tendency Before You Need It (FAIRGAME)
 
-The mitigations above react to defection observed in real runs. For high-stakes teams, you can also **measure defection tendency upfront** with FAIRGAME-style probes (Fair Assessment of Inter-agent Reasoning in Repeated Games, 2025–26):
+The mitigations above react to defection observed in real runs. For high-stakes teams, you can also **measure defection tendency upfront** with FAIRGAME-style probes (unsourced — verify the original paper):
 
 | Probe | What it tests | Defect signal |
 |---|---|---|
@@ -52,7 +52,7 @@ The mitigations above react to defection observed in real runs. For high-stakes 
 
 This shifts the cooperation problem from "detect defection in the trace" (hard, after-the-fact) to "predict defection from member identity" (cheaper, structural). Pair with reputation gating (#5) and Shapley scoring (#4) for the full loop.
 
-Source: Game-Theoretic Lens on LLM-MAS, arXiv 2601.15047 §"FAIRGAME framework" — [arxiv.org/abs/2601.15047](https://arxiv.org/abs/2601.15047). Note: this is a measurement methodology, not a runtime mechanism — its output feeds the trust tier in mechanism #5.
+Source: FAIRGAME (unsourced — verify; no confirmed primary paper). Note: this is a measurement methodology, not a runtime mechanism — its output feeds the trust tier in mechanism #5.
 
 ## SPNE Free-Riding Fix (MAC-SPGG)
 

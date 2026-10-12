@@ -174,12 +174,12 @@ feedback_event = {
 - Run pilot labeling (10-50 examples)
 - Analyze disagreements
 - Refine rubric
-- Repeat until high agreement (Kappa > 0.7)
+- Repeat until agreement meets the target you derived from the decision's cost, prevalence and scale type (no universal kappa cutoff; see foundations-measurement-theory)
 
 **Checklist: Label Quality**
 
 - [ ] Labeling rubric documented with examples
-- [ ] Inter-annotator agreement measured (Kappa > 0.7 target)
+- [ ] Inter-annotator agreement measured with a chance-corrected statistic matched to the scale type, against a target derived from the decision (see foundations-measurement-theory)
 - [ ] Gold standard examples used for QA
 - [ ] Annotator performance tracked
 - [ ] Disagreements reviewed and rubric updated

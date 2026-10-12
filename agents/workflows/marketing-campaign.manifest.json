@@ -1,10 +1,11 @@
 {
   "version": 1,
+  "max_agents": 20,
   "workflow": {
     "engine": "staged",
     "codex": "parent-led",
     "description": "Run the marketing-campaign team in stages: research, one positioning lock, channel drafts, then a review against the lock. It returns the drafts and publishes or sends nothing.",
-    "whenToUse": "args: { brief: \"<campaign brief: product, audience, offer, goal, channels>\" }. Returns ready_for_launch, revise_channels, reopen_positioning, hold_for_evidence or INCOMPLETE, with the drafts in outputs.drafts. A draft that contradicts the lock blocks ready_for_launch.",
+    "whenToUse": "args: { brief: \"<campaign brief: product, audience, offer, goal, channels>\" }. Returns ready_for_launch, revise_channels, reopen_positioning, hold_for_evidence or INCOMPLETE, with the drafts in outputs.drafts. A draft that contradicts the lock, or a high-severity review finding, blocks ready_for_launch; a lock line with no evidence, or research that found none, gives hold_for_evidence.",
     "phases": [
       { "title": "Research", "detail": "The competitive analyst and the review miner gather sourced evidence in parallel" },
       { "title": "Positioning lock", "detail": "The marketing strategist alone locks the positioning lines" },
@@ -131,7 +132,7 @@
         "tasks": {
           "marketing-strategist": "Lock the positioning for this campaign as numbered lock lines (ids L1, L2, ...) and a message hierarchy. Link each lock line to the research evidence it rests on. If the evidence cannot support a positioning, set evidence_gap true and say what is missing; do not guess."
         },
-        "gate": { "kind": "flag", "field": "evidence_gap", "reason_field": "evidence_gap_reason", "verdict": "hold_for_evidence", "stop_reason": "evidence_gap" }
+        "gate": { "kind": "flag", "field": "evidence_gap", "reason_field": "evidence_gap_reason", "verdict": "hold_for_evidence", "stop_reason": "evidence_gap", "evidence_items": "lock", "evidence_stage": "research" }
       },
       {
         "id": "drafts",

@@ -2,10 +2,10 @@
   "metadata": {
     "title": "Agent Skills - Sources",
     "description": "Official sources for portable skill authoring plus runtime-specific verification",
-    "last_updated": "2026-09-29",
-    "updated": "2026-09-29",
+    "last_updated": "2026-10-09",
+    "updated": "2026-10-09",
     "skill": "agents-skills",
-    "total_sources": 27
+    "total_sources": 28
   },
   "official_documentation": [
     {
@@ -155,6 +155,12 @@
       "url": "https://codex-marketplace.com/skills",
       "description": "Codex skill marketplace; notable for Dimillian's macOS/iOS skills as cross-runtime skill design references",
       "add_as_web_search": true
+    },
+    {
+      "name": "rea (morluto)",
+      "url": "https://github.com/morluto/rea",
+      "description": "MCP-server skill bundle; source of the tool-wrapping rules in references/skill-patterns.md (Pattern 11): live tool list wins over skill text, read-only diagnosis before config repair. Pinned commit 411498d45f860eba2fbc9d7051af20237b7a4cb1, MIT, extracted 2026-10-09.",
+      "add_as_web_search": false
     },
     {
       "name": "ponytail (DietrichGebert)",

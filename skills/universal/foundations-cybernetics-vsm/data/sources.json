@@ -173,7 +173,7 @@
       "id": "TelukuntaCASE2026",
       "name": "The CASE Framework: A Multi-Disciplinary Control Architecture for Governing Enterprise Agentic AI",
       "url": "https://arxiv.org/abs/2608.10153",
-      "description": "Telukunta, S., Lilis, G.N., & Baron, L. (2026). arXiv:2608.10153 [cs.AI], submitted 10 August 2026. Proposes a four-layer governance architecture for enterprise agent fleets and expresses human oversight conceptually as V_human x G >= V_agents, with G representing engineered amplification. Evidence grade C: preprint, no peer review, and the terms are not validated as commensurate raw counts. Use the inequality as framing for disturbance-response coverage, triage and escalation design, not as a quantitative deployment gate or proof of EU AI Act compliance. Relevant to primitives #2, #10 and #11.",
+      "description": "Telukunta, S., Lilis, G.N., & Baron, L. (2026). arXiv:2608.10153 [cs.AI], submitted 10 August 2026. Proposes a four-layer governance architecture for enterprise agent fleets and expresses human oversight conceptually through requisite variety and engineered amplification. The abstract does not show a formal inequality; an earlier version of this skill quoted one without confirmation, and it was removed. Evidence grade C: preprint, no peer review. Use it as framing for disturbance-response coverage, triage and escalation design, not as a quantitative deployment gate or proof of EU AI Act compliance. Relevant to primitives #2, #10 and #11.",
       "url_check": "manual"
     },
     {

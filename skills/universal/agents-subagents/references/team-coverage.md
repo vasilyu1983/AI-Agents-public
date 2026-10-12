@@ -1,6 +1,6 @@
 ---
 description: Coverage map for team vs. member vs. direct-use selection.
-last_verified: 2026-09-11
+last_verified: 2026-10-07
 status: stable
 ---
 
@@ -35,6 +35,7 @@ These families keep a dedicated repository team recipe because their members edi
 | AI knowledge bot delivery | `ai-knowledge-bot-builder` | `ai-bot-builder`, `ai-context-layer`, `ai-rag`, `ai-agents` |
 | Docs and knowledge | `docs-knowledge` | `docs-codebase`, `docs-ai-prd`, `docs-notes-retrieval`, `qa-docs-coverage` |
 | Product surface | `product-surface` | `software-frontend`, `software-ui-ux-design`, `software-accessibility`, `software-localisation`, `qa-testing-accessibility` |
+| Marketing campaign | `marketing-campaign` (saved workflow `marketing-campaign`) | `marketing-content-strategy`, `marketing-brand-strategy`, `startup-gtm-strategy`, `marketing-email-automation`, `marketing-paid-advertising`, `marketing-cro` |
 
 ## Workflow-Backed Review Families
 

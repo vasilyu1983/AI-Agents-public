@@ -6,7 +6,7 @@ status: stable
 
 # MAST Failure Taxonomy — Cross-Reference
 
-MAST (Multi-Agent System Failure Taxonomy) is the canonical framework for classifying failures in LLM-based multi-agent systems. Source: Cemri, Pan, Yang et al., NeurIPS 2025 (Datasets & Benchmarks Track) — [arxiv.org/abs/2503.13657](https://arxiv.org/abs/2503.13657), repo [github.com/multi-agent-systems-failure-taxonomy/MAST](https://github.com/multi-agent-systems-failure-taxonomy/MAST). The v3 paper (October 2025) reports "1642 annotated execution traces" from 7 frameworks and inter-annotator κ = 0.88.
+MAST (Multi-Agent System Failure Taxonomy) is the canonical framework for classifying failures in LLM-based multi-agent systems. Source: Cemri, Pan, Yang et al., arXiv:2503.13657, 2025 — [arxiv.org/abs/2503.13657](https://arxiv.org/abs/2503.13657), repo [github.com/multi-agent-systems-failure-taxonomy/MAST](https://github.com/multi-agent-systems-failure-taxonomy/MAST). The v3 paper (October 2025) reports "1642 annotated execution traces" from 7 frameworks and inter-annotator κ = 0.88.
 
 **Failure distribution (v3, Figure 1, 1,642 traces):**
 - **Specification & Design (FC1)** — 44.0%
@@ -56,7 +56,7 @@ This file is a **mapping table**, not a re-derivation. For operator tactics on e
 |---|-----------|--------------------|--------------------------|
 | 3.1 | Premature termination | Agent declares done before deliverable is complete | Verification command + artifact list in [`initial-prompt-contract.md`](initial-prompt-contract.md) |
 | 3.2 | No or incomplete verification | No evidence that output meets criteria | [`runtime-smoke-tests.md`](runtime-smoke-tests.md) + evaluator-optimizer in [`harness-patterns.md`](harness-patterns.md) |
-| 3.3 | Incorrect verification | Verification step is wrong or rubber-stamps output | Heterogeneous verifier (different model + clean context) + Purple Team overlay [`purple-team-pattern.md`](purple-team-pattern.md) |
+| 3.3 | Incorrect verification | Verification step is wrong or rubber-stamps output | Heterogeneous verifier (a different agent from the producer, with a clean context; a different model family is optional and not enforced by the library) + Purple Team overlay [`purple-team-pattern.md`](purple-team-pattern.md) |
 
 ---
 
@@ -83,5 +83,5 @@ For the operator-facing failure-mode tip sheet (durable list, written for fast r
 
 ## Source
 
-- Cemri M., Pan M.Z., Yang S., et al. "Why Do Multi-Agent LLM Systems Fail?" NeurIPS 2025, Datasets & Benchmarks Track ([proceedings PDF](https://proceedings.neurips.cc/paper_files/paper/2025/file/b1041e52d3be19f0a9bc491657488e4a-Paper-Datasets_and_Benchmarks_Track.pdf)). [arxiv.org/abs/2503.13657](https://arxiv.org/abs/2503.13657)
+- Cemri M., Pan M.Z., Yang S., et al. "Why Do Multi-Agent LLM Systems Fail?" arXiv:2503.13657, 2025. [arxiv.org/abs/2503.13657](https://arxiv.org/abs/2503.13657)
 - MAST repo + dataset: [github.com/multi-agent-systems-failure-taxonomy/MAST](https://github.com/multi-agent-systems-failure-taxonomy/MAST)

@@ -134,7 +134,6 @@ Primary papers are the strongest evidence tier. Lab effect sizes may not transfe
 - Damasio, A. R. (1996). _Descartes' Error_. Papermac.
 - Craig, A. D. (2009). How do you feel — now? The anterior insula and human awareness. _Nature Reviews Neuroscience_, 10(1), 59–70.
 - Hebb, D. O. (1949). _The Organization of Behavior_. Wiley.
-- Walker, M. P. (2017). _Why We Sleep_. Scribner.
 - Berridge, K. C. (2007). The debate over dopamine's role in reward: the case for incentive salience. _Psychopharmacology_, 191(3), 391–431.
 - Knutson, B., Adams, C. M., Fong, G. W. & Hommer, D. (2001). Anticipation of increasing monetary reward selectively recruits nucleus accumbens. _Journal of Neuroscience_, 21(16), RC159.
 - Lakoff, G. & Johnson, M. (1999). _Philosophy in the Flesh_. Basic Books.

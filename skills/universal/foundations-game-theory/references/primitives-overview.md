@@ -144,7 +144,7 @@ Use primary papers and official docs as the strongest evidence tier. Practitione
 - DeepMind: Game-theory insights into asymmetric multi-agent games. [deepmind.google/blog/game-theory-insights](https://deepmind.google/blog/game-theory-insights-into-asymmetric-multi-agent-games/)
 - Wisdom of the Silicon Crowd: LLM ensemble prediction. Science Advances 2025. [science.org/doi/10.1126/sciadv.adp1528](https://www.science.org/doi/10.1126/sciadv.adp1528)
 - AI Negotiation: practitioner dataset; useful for value-framing heuristics, not a universal benchmark. [medium.com/@fabioherle](https://medium.com/@fabioherle/building-autonomous-negotiations-that-actually-work-lessons-from-180-098-ai-negotiations-805a2f8798a4)
-- FAIRGAME framework: payoff-scaled iterated PD + Public Goods Games for measuring defection tendency. [arxiv.org/abs/2601.15047](https://arxiv.org/abs/2601.15047)
+- FAIRGAME (unsourced — verify): payoff-scaled iterated PD + Public Goods Games for measuring defection tendency. No primary paper confirmed.
 - Dynamic Role Assignment: meta-debate for capability-aware role routing. [arxiv.org/abs/2601.17152](https://arxiv.org/abs/2601.17152)
 - Beyond Majority Voting: OW and ISP aggregation. [arxiv.org/abs/2510.01499](https://arxiv.org/abs/2510.01499)
 - Radial Consensus Score: embedding-geometry best-of-N selection. [arxiv.org/abs/2604.12196](https://arxiv.org/abs/2604.12196)
@@ -152,7 +152,7 @@ Use primary papers and official docs as the strongest evidence tier. Practitione
 - Provenance Paradox: attested identity and delegation contracts for multi-agent routing. [arxiv.org/abs/2603.18043](https://arxiv.org/abs/2603.18043)
 - Mapping human anti-collusion mechanisms to multi-agent AI systems. Knowledge-Based Systems 2026.
 - Credibility scoring for adversary-resistant multi-agent systems. [arxiv.org/abs/2505.24239](https://arxiv.org/abs/2505.24239)
-- MAST taxonomy: Why Do Multi-Agent LLM Systems Fail? NeurIPS 2025. [arxiv.org/abs/2503.13657](https://arxiv.org/abs/2503.13657)
+- MAST taxonomy: Why Do Multi-Agent LLM Systems Fail? arXiv:2503.13657, 2025. [arxiv.org/abs/2503.13657](https://arxiv.org/abs/2503.13657)
 - Talk Isn't Always Cheap: Failure Modes in Multi-Agent Debate. arXiv 2509.05396 (2025). [arxiv.org/abs/2509.05396](https://arxiv.org/abs/2509.05396)
 - Persuasion-driven adversarial influence in multi-agent LLM debate. Nature Sci Reports 2026. [nature.com/articles/s41598-026-42705-7](https://www.nature.com/articles/s41598-026-42705-7)
 - Adaptive stability detection (Beta-Binomial + KS test) for multi-agent debate convergence. OpenReview 2026. [openreview.net/forum?id=Vusd1Hw2D9](https://openreview.net/forum?id=Vusd1Hw2D9)

@@ -1,6 +1,6 @@
 ---
 name: ai-evals
-description: "Designs trustworthy LLM, agent, responsible-AI, and multimodal evaluations. Use when measuring quality, fairness, privacy, grounding, safety, or judge reliability."
+description: "Designs LLM, agent, responsible-AI, and multimodal evals. Use when measuring quality, fairness, grounding, safety, or judge reliability. Not for test harnesses (qa-agent-testing)."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.8"
 last_validated: 2026-08-24

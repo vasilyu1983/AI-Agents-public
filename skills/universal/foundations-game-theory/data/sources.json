@@ -2,7 +2,7 @@
   "metadata": {
     "title": "AI Game Theory Foundations — Sources",
     "description": "Primary papers and references for the strategic game-theory primitives (shared-payoff primitives live in foundations-team-theory) plus the formal theory map: game forms, equilibria, mechanism design, auctions, matching, bargaining, cooperative game theory, and learning in games",
-    "last_updated": "2026-09-29",
+    "last_updated": "2026-10-12",
     "skill": "foundations-game-theory",
     "total_sources": 74,
     "verification_scope": "Targeted correctness and operational-artifact review; not a fresh verification of every historical paper."
@@ -33,11 +33,11 @@
       "name": "Institutional AI: Governing LLM Collusion in Multi-Agent Cournot Markets via Public Governance Graphs",
       "url": "https://arxiv.org/abs/2601.11369",
       "arxiv_id": "2601.11369",
-      "description": "Jan 2026. Compares ungoverned baseline, prompt-only constitutional anti-collusion policy, and governance-graph enforcement across 90 runs and six model configurations. Prompt-only was ineffective; the institutional condition (public immutable manifest of legal states, transitions, sanctions, restorative paths, plus external controller and cryptographic audit log) cut mean collusion tier 3.1 to 1.8 (Cohen's d=1.28) and severe-collusion incidence 50% to 5.6%. Source for the prompt-only governance trap and the enforcement row in the mechanism-design failure table.",
+      "description": "Jan 2026. Compares ungoverned baseline, prompt-only constitutional anti-collusion policy, and governance-graph enforcement in simulated Cournot markets. Prompt-only was ineffective; the institutional condition (public immutable manifest of legal states, transitions, sanctions, restorative paths, plus external controller and cryptographic audit log) reduced collusion in those simulations. Single preprint, direction only. Source for the prompt-only governance trap and the enforcement row in the mechanism-design failure table.",
       "url_check": "manual",
       "last_verified": "2026-09-17",
       "add_as_web_search": true,
-      "claim_location": "Abstract and Table6: N90 runs per condition, six model configurations; severe Tier>=4 incidence50.0% ungoverned vs5.6% institutional."
+      "claim_location": "Abstract and results tables: prompt-only ineffective; governance-graph enforcement reduced collusion."
     },
     {
       "id": "TERMSBench",
@@ -153,13 +153,6 @@
       "url": "https://medium.com/@fabioherle/building-autonomous-negotiations-that-actually-work-lessons-from-180-098-ai-negotiations-805a2f8798a4",
       "description": "Practitioner dataset of AI-to-AI negotiations. Useful for BATNA/ZOPA heuristics, not a universal benchmark. Source for mechanism #12 (negotiation protocol).",
       "add_as_web_search": false
-    },
-    {
-      "id": "FAIRGAME",
-      "name": "FAIRGAME: Game-Theoretic Lens on LLM Multi-Agent Systems",
-      "url": "https://arxiv.org/abs/2601.15047",
-      "description": "Jan 2026. Payoff-scaled iterated Prisoner's Dilemma + Public Goods Games for measuring defection tendency. Source for mechanism #6 (cooperation and defection).",
-      "add_as_web_search": true
     },
     {
       "id": "MAST",
@@ -548,7 +541,7 @@
       "name": "Algorithmic Collusion by Large Language Models",
       "url": "https://arxiv.org/abs/2404.00806",
       "arxiv_id": "2404.00806",
-      "description": "Fish, Gonczarowski & Shorrer; EC 2026. LLM pricing agents 'quickly and autonomously reach supracompetitive prices and profits'; prompt-phrasing changes materially shift the degree of supracompetitive pricing. Source for the collusion-detection rule (profit-gain Delta vs Nash/monopoly benchmarks, prompt-robustness testing) instead of a fixed markup over marginal cost.",
+      "description": "Fish, Gonczarowski & Shorrer (arXiv 2024 preprint). LLM pricing agents 'quickly and autonomously reach supracompetitive prices and profits'; prompt-phrasing changes materially shift the degree of supracompetitive pricing. Source for the collusion-detection rule (profit-gain Delta vs Nash/monopoly benchmarks, prompt-robustness testing) instead of a fixed markup over marginal cost.",
       "url_check": "manual",
       "add_as_web_search": true
     },
@@ -569,6 +562,15 @@
       "description": "Duetting et al., WWW'24 Best Paper. Token-by-token auction whose incentive properties are equivalent to monotone aggregation, enabling a second-price rule for LLM-generated output. Frontier gap for mechanism #3/#7: LLM-native auction/mechanism design not otherwise covered.",
       "url_check": "manual",
       "add_as_web_search": true
+    },
+    {
+      "id": "MutualVerificationCollusion2026",
+      "name": "Collusion in repeated mutual verification between LLM agents (arXiv 2609.24967, 2026)",
+      "url": "https://arxiv.org/abs/2609.24967",
+      "arxiv_id": "2609.24967",
+      "description": "Abstract-level only, single environment: agents verifying each other over repeated rounds drift into mutual approval; less shared history and narrower scope reduce it. Direction-only evidence for the fresh-verifier rule beside the communication-channel finding.",
+      "url_check": "manual",
+      "url_note": "abstract only, not replicated; no figures carried into the skill"
     }
   ]
 }

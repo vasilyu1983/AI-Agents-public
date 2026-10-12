@@ -76,6 +76,13 @@ hold_policy:
   escalate_on_deadline: forced_decision
 trust:
   default_tier: standard
+budget:
+  max_rounds: 2
+  max_turns_per_member: 16
+  token_envelope: 240000
+verification:
+  mode: heterogeneous
+  rule: 'read-only team: the parent thread re-opens the cited file:line evidence for every blocking finding before the verdict is released; a reviewer''s claim without checkable evidence does not block or approve'
 design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#software-code-review-board
 install_guidance:
   routing: Default review team for medium-to-high-stakes PRs. For low-stakes typo/doc PRs, skip the team entirely.

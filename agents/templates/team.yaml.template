@@ -17,8 +17,11 @@ members:
   - <member-name-2>
   - <member-name-3>
   # - <member-name-4>                     # 3-5 members is the sweet spot; >6 erodes synthesis quality.
-                                          # Exception: jurisdiction departments (legal-*) ship larger rosters
-                                          # because members run as a routed catalog, not one synthesis pass.
+                                          # Exceptions: (1) jurisdiction departments ship larger rosters because
+                                          # members run as a routed catalog, not one synthesis pass; (2) a staged
+                                          # team may exceed 6 when no more than 3 members work in any one stage
+                                          # and only one member synthesizes (marketing-campaign has 8 members in
+                                          # 4 stages of 2/1/3/2). State the exception in design_rationale.
 
 required_context:
   - <What the parent thread MUST supply for this team to be useful.>
@@ -32,24 +35,53 @@ optional_context:
 concurrency_mode: hybrid                  # hybrid (default) | parallel | staged | sequential
 synthesis_owner: parent-thread            # parent-thread (default) | <named-member> | dedicated-synthesizer
 
-# Ownership and deliverable contract — every shipped recipe carries these
-# (see agents/teams/README.md §"Recipe Schema" for field semantics).
+# Ownership and deliverable contract — every shipped recipe carries these.
+# owned_files: one entry per member, "<member>: <glob>, <glob>" for a writer or
+#   "<member>: read-only". Globs of two writers must not overlap; if one glob is
+#   broader, append "(excluding <narrower glob>)". A read-only team uses the
+#   literal string "none - read-only analysis team". The validator checks this.
 owned_files:
-  - <glob each member may write — keep write ownership single-threaded>
+  - '<writer-member>: <glob each member may write — keep write ownership single-threaded>'
+  - '<reader-member>: read-only'
 do_not_touch:
+  - .archive/**
+  - secrets, credentials, PII
   - <glob no member may write>
-deliverable: <the single artifact this team hands back to the parent thread>
-design_rationale: <one sentence — why THIS composition beats a single agent for the best_for cases>
+deliverable:                              # output contract for the launch prompt
+  shape: <the single artifact this team hands back to the parent thread>
+  required_sections:
+    - <section the handback must contain>
+  max_length: <for example "2 pages / ~800 words per member; synthesis <= 1 page">
+# design_rationale is a relative pointer, not prose: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#<team-name>
+# Add a section with that anchor, saying why THIS composition beats a single agent for best_for.
+design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#<team-name>
+
+# Run budget — required. Units: rounds are dispatch rounds (a stage, a blind round or a
+# rebuttal round); turns are per-member agent turns (keep <= the largest maxTurns in the
+# members' agents/claude frontmatter); token_envelope is input + output tokens for the
+# whole run across dispatched members and synthesis. Stop and report when any cap is hit.
+# The budget guides the parent thread; the saved workflows do not enforce it.
+budget:
+  max_rounds: <integer>
+  max_turns_per_member: <integer>
+  token_envelope: <integer>
+
+# Verification — required. The producer never verifies its own work: name a different
+# member, or "parent thread", that checks the deliverable before handback.
+# The verification block guides the parent thread; the saved workflows do not enforce it.
+# mode: heterogeneous = the checker is not the producer and starts with a clean context; it does not imply a different model.
+verification:
+  mode: heterogeneous
+  rule: <who checks what, with clean context; self-checks do not count>
 
 # Gated growth and termination — every shipped recipe carries these.
 expansion_gate:
   candidate_specialists: []               # ids installable via the EVPI gate; bounded by max_dynamic_members
   max_dynamic_members: 2
 stopping_rule:
-  reversibility: <reversible | costly-to-reverse | irreversible — sets how much verification precedes shipping>
+  reversibility: <reversible | mixed | costly-to-reverse | irreversible — sets how much verification precedes shipping>
 
-# Optional but common (15/33 and 11/33 of shipped recipes respectively):
-# verification: <how the deliverable is checked before handback>
+# Optional (used by some shipped recipes):
 # algedonic_channel: <the bypass signal a member raises to halt the team immediately>
 
 # Optional debate block. Enable when the team produces go/no-go,
@@ -64,3 +96,10 @@ debate:
     - <Named lens>
     - <Named lens>
     - <Named lens>
+  # Debate rules: one method per debate, which must be a file in agents/templates/debate-methods/;
+  # at most two decision_masks (each a file in agents/templates/decision-masks/). Use
+  # dialectical-inquiry only for two competing options; for more than two use a method that fits
+  # (for example six-thinking-hats). Sequential debates are fine; two methods in one debate are not.
+  # method: <debate-method-file-stem>
+  # decision_masks: [<mask-1>, <mask-2>]
+  # trigger_arbiter: parent-thread        # set when synthesis_owner is a party to a trigger's conflict

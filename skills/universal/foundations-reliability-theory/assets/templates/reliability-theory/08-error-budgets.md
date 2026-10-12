@@ -77,6 +77,8 @@ Low traffic: at a few hundred requests per hour a single failure can exceed 14.4
 
 ## Measurement Limits (decide before trusting the arithmetic)
 
+- **Policy precondition.** Name an owner and an agreed consequence for an exhausted budget before writing any alert (SRE Workbook, example error budget policy; see Beyer2018 in sources).
+
 - **Request-based vs time-based SLI.** Request-based (good events / total events) makes the budget scale with traffic. Time-based (good slices / total slices, a slice is "good" if its error rate is under a threshold) weights a quiet 3 a.m. minute the same as peak and hides partial outages that stay under the slice threshold. Do not compare budgets across the two definitions.
 - **Low traffic is a statistics problem.** With n events and 0 failures, a one-sided 95% upper bound on the error rate is 1 − 0.05^(1/n) ≈ 3/n. Showing an error rate at or below 0.1% with zero failures needs n ≥ ln 0.05 / ln 0.999 ≈ 2,995 events. Below that, one failure is noise against a 99.9% SLO: gate alerts on a minimum event count or use the remedies above. Interval machinery: [decision-and-validation.md](../../../references/decision-and-validation.md).
 - **Latency SLIs are proportions, not percentiles.** The Workbook defines latency SLIs as "the proportion of requests that were faster than some threshold" (https://sre.google/workbook/implementing-slos/). Percentiles cannot be averaged across instances or windows, and the p99 of a call chain is not the sum of per-hop p99s. Compose from histograms or good-event counts. Fan-out amplifies tails: if each of N parallel backends is slow with probability p, the request is slow with probability 1 − (1 − p)^N (p = 1%, N = 100 → 63%).

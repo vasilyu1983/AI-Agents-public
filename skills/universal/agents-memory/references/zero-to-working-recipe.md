@@ -7,7 +7,7 @@ A copy-paste 5-step recipe. From a repo with no agent memory files to a working 
 - [Step 1 — Create the project memory file for your runtime](#step-1--create-the-project-memory-file-for-your-runtime)
 - [Step 2 — Verify the agent reads it](#step-2--verify-the-agent-reads-it)
 - [Step 3 — Add a validation script (optional but recommended)](#step-3--add-a-validation-script-optional-but-recommended)
-- [Step 4 — Add a .claude/ memory folder for project-specific context (optional)](#step-4--add-a-claude-memory-folder-for-project-specific-context-optional)
+- [Step 4 — Split out topic files (optional)](#step-4--split-out-topic-files-optional)
 - [Step 5 — Commit and confirm](#step-5--commit-and-confirm)
 - [Common Mistakes at Setup](#common-mistakes-at-setup)
 - [References](#references)

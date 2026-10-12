@@ -147,7 +147,7 @@ Start from the matching template in `assets/templates/`. Do not write from scrat
    tools: <tool list from Step 6>
    maxTurns: <based on archetype>
    model: <sonnet for most, opus for complex reasoning>
-   permissionMode: <default | bypassPermissions | acceptEdits>
+   permissionMode: <a mode listed in the Claude Code permission-modes docs (https://code.claude.com/docs/en/permission-modes); default for read-only agents, acceptEdits for editors>
    ---
    ```
 

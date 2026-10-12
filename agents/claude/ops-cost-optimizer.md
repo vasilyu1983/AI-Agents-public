@@ -102,3 +102,7 @@ Explain what must be monitored after each cost change to confirm the saving and 
 ### Context Used
 
 List which cost dashboard, budget alerts, or footprint inventory were consumed, and where estimates required assumption.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

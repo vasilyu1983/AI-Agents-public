@@ -66,6 +66,8 @@ Metrics such as CTR per session, revenue per session and tokens per task are rat
 | Group sequential, alpha spending [LanDeMets1983] | A few planned interim looks (for example weekly) with the option to stop early for large effects or harm | Small inflation of maximum n; the O'Brien–Fleming shape costs little power | Type I error ≤ α at the planned looks; the look times can vary if you use a spending function |
 | Always-valid: mSPRT, confidence sequences, e-processes [Johari2022; Howard2021; Ramdas2023] | Continuous monitoring, dashboards, or unknown stopping times | Wider at any fixed n than a fixed-horizon test | p-values and intervals valid at every n under optional stopping |
 
+For anytime-valid intervals on heavy-tailed or non-normal metrics, default to asymptotic confidence sequences [WaudbySmith2024]: CLT-type, no distributional assumption, valid at every n in the limit. Prefer the nonasymptotic [Howard2021] sequences when a finite-sample guarantee is required.
+
 **Group sequential (O'Brien–Fleming-like spending):**
 
 - The spending function is α(t) = 2 − 2Φ(z_{α/2}/√t) [LanDeMets1983].
@@ -110,4 +112,4 @@ Metrics such as CTR per session, revenue per session and tokens per task are rat
 - **Many metrics or variants.** Choose FWER or FDR as in [multiplicity procedures](multiplicity-procedures.md), and declare one primary metric before launch.
 - **Ship decision.** Compare the interval with the pre-declared minimum meaningful effect or non-inferiority margin, not with zero alone.
 
-Sources: see [sources.json](../data/sources.json) IDs Fabijan2019, Kohavi2020, Deng2013, Deng2018, LanDeMets1983, OBrienFleming1979, Johari2022, Howard2021, Ramdas2023, VovkWang2021, WangRamdas2022.
+Sources: see [sources.json](../data/sources.json) IDs Fabijan2019, Kohavi2020, Deng2013, Deng2018, LanDeMets1983, OBrienFleming1979, Johari2022, Howard2021, WaudbySmith2024, Ramdas2023, VovkWang2021, WangRamdas2022.

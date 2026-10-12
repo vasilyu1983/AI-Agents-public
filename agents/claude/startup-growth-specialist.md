@@ -1,7 +1,7 @@
 ---
 name: startup-growth-specialist
 family: startup
-description: "Analyze growth loops, distribution channels, conversion funnels, and retention mechanics. Use when diagnosing stalled growth, planning experiments, or auditing funnels. Produces a growth diagnosis and prioritized experiment plan; does not run experiments or change product surfaces."
+description: "Analyze growth loops, distribution channels, conversion funnels, and retention mechanics. Use when diagnosing stalled growth or planning experiments. Produces a growth diagnosis and prioritized experiment plan; does not run experiments or change product surfaces. Not for post-sale handoffs (use startup-growth-execution-operator)."
 tools:
   - Read
   - Grep
@@ -105,3 +105,7 @@ Activation metric, habit loop design gaps, and churn signals with remediation pr
 ### Context Used
 
 List which packet, graph, or impact artifacts were used and where manual tracing was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

@@ -71,4 +71,11 @@ hold_policy:
   escalate_on_deadline: forced_decision
 trust:
   default_tier: standard
+budget:
+  max_rounds: 3
+  max_turns_per_member: 25
+  token_envelope: 240000
+verification:
+  mode: heterogeneous
+  rule: dev-feature-reviewer, not the implementer, runs the acceptance checks and reads the diff; the implementer's own test run does not count as verification
 design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#dev-feature-delivery

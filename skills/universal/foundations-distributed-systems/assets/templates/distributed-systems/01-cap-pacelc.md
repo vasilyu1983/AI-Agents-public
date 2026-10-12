@@ -1,6 +1,6 @@
 # Primitive 1: CAP Theorem and PACELC Extension
 
-**Sources**: Brewer 2000 (CAP conjecture), Gilbert & Lynch 2002 (CAP proof), Abadi 2012 (PACELC).
+**Sources**: Brewer 2000 (CAP conjecture), Gilbert & Lynch 2002 (CAP proof), Abadi 2012 (PACELC), Kleppmann 2015 (CAP critique, arXiv:1509.05393).
 
 ---
 
@@ -9,6 +9,8 @@
 **CAP Theorem**: In a distributed system, during a network partition, it is impossible to simultaneously guarantee both **Consistency** (every read sees the most recent write or returns an error) and **Availability** (every request receives a non-error response). Partition Tolerance is not optional in a real network — it must be assumed.
 
 > Correct framing: "During a partition, choose C or A." Incorrect framing: "Pick 2 of 3 at design time."
+
+**Limits of the labels** (Kleppmann, arXiv:1509.05393): CAP's C means linearizability and its A means every non-failed node answers, both narrower than the everyday words. Real systems offer several consistency models and tunable per-request settings, so a whole-system "CP" or "AP" label is not a defensible claim. Label an operation in a stated configuration, name its consistency model, and give its partition behavior plus its latency cost (PACELC).
 
 **PACELC Extension**: When there is **no** partition (the normal case), a system faces a trade-off between **Latency** (lower latency by serving from a nearby replica) and **Consistency** (stronger consistency requires coordination across replicas, which adds latency).
 
@@ -42,7 +44,7 @@ The full trade-off is:
 
 | Output | Description |
 |--------|-------------|
-| CAP classification | CP (prefer consistency under partition) or AP (prefer availability under partition) |
+| CAP classification | Per operation and configuration: the consistency model, and whether it errors or answers under partition |
 | PACELC classification | EL (lower latency, weaker consistency) or EC (higher latency, stronger consistency) |
 | System selection recommendation | Database or storage system matching the trade-off |
 
@@ -64,8 +66,8 @@ The full trade-off is:
 **Scenario**: An e-commerce platform must choose a database for product inventory counts. The team asks: "Should we use Cassandra or PostgreSQL (with a synchronous replica)?"
 
 **CAP analysis**:
-- Cassandra is AP: during a partition, it continues to accept writes and reads, but replicas may diverge.
-- PostgreSQL with synchronous replication is CP: during a partition where the synchronous replica is unreachable, writes block (or fail) to preserve consistency.
+- Cassandra at low consistency levels: during a partition, it continues to accept writes and reads, but replicas may diverge. The behavior is tunable per request, so a whole-system AP label would mislead.
+- PostgreSQL with a synchronous replica in its default configuration: when the replica is unreachable, writes block (or fail). Failover, and reads from a replica, change the guarantee; check the configured failover path before calling it linearizable.
 
 **PACELC analysis**:
 - Cassandra is PA/EL: no partition → serve from nearest replica (low latency, possibly stale).
@@ -80,4 +82,5 @@ The full trade-off is:
 - Brewer, E. (2000). Towards Robust Distributed Systems. PODC keynote. [people.eecs.berkeley.edu/~brewer/cs262b-2004/PODC-keynote.pdf](https://people.eecs.berkeley.edu/~brewer/cs262b-2004/PODC-keynote.pdf)
 - Gilbert, S., & Lynch, N. (2002). Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services. ACM SIGACT News. [doi.org/10.1145/564585.564601](https://doi.org/10.1145/564585.564601)
 - Abadi, D. (2012). Consistency Tradeoffs in Modern Distributed Database System Design. IEEE Computer. [doi.org/10.1109/MC.2012.33](https://doi.org/10.1109/MC.2012.33)
+- Kleppmann, M. (2015). A Critique of the CAP Theorem. [arxiv.org/abs/1509.05393](https://arxiv.org/abs/1509.05393)
 - Kleppmann, M. (2017). Designing Data-Intensive Applications, Chapter 9. [dataintensive.net](https://dataintensive.net/)

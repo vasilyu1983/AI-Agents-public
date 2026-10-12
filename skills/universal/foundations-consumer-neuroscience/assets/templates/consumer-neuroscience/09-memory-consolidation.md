@@ -45,4 +45,3 @@ A daily reading app tests one optional reminder at a user-selected eligible time
 
 - Hebb (1949), *The Organization of Behavior*: foundational plasticity theory; not an app-timing trial.
 - Jiang et al. (2017), “Replay of large-scale spatio-temporal patterns from waking during subsequent NREM sleep in human cortex,” [primary human recording study](https://pubmed.ncbi.nlm.nih.gov/29234075/). Supports NREM replay, not fixed evening notification windows.
-- Walker (2017), *Why We Sleep*: secondary overview; use primary task-specific evidence for intervention claims.

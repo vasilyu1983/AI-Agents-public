@@ -89,3 +89,7 @@ List missing metrics, logs, or traces that are blocking a confident assessment, 
 ### Context Used
 
 List which packet, dashboard, log query, or trace artifact was used and where manual inference was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

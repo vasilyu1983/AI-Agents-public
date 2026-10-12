@@ -11,6 +11,7 @@ Treat the eval questions as a sample from a super-population of questions. The t
 - **Independent questions:** SE = √(Var(s)/n), and the 95% CI is s̄ ± 1.96·SE.
   - With binary scores this reduces to √(s̄(1 − s̄)/n).
   - Using the Bernoulli formula on fractional scores such as F1 is conservative.
+- **Small n or extreme pass rates.** Below a few hundred items, or near 0 or 1, the CLT interval is unreliable: the SE is 0 at s̄ = 0 or 1, and the interval can leave [0, 1] [Bowyer2025]. Use an exact (Clopper–Pearson), Wilson or bootstrap interval, or a Bayesian Beta interval, instead of s̄ ± 1.96·SE.
 - **Clustered questions** (several questions per passage, one question translated into many languages, multi-turn items from one conversation):
   - SE²_clustered = SE²_CLT + (1/n²)·Σ_c Σ_i Σ_{j≠i} (s_{i,c} − s̄)(s_{j,c} − s̄).
   - Report the cluster count next to n.
@@ -36,7 +37,7 @@ Treat the eval questions as a sample from a super-population of questions. The t
 
 - **Identify the independent unit** before computing anything. Items that share a passage, template, conversation, seed document or translation source form a cluster.
 - **Always pair** when two systems ran on the same items. Report the per-item correlation alongside the difference.
-- **Few clusters** (a rule of thumb of fewer than about 30–50, not from a cited source): cluster-robust SEs are anti-conservative. Use a wild-cluster or cluster bootstrap. The [ai-evals analyzer](../../ai-evals/references/eval-statistics.md) resamples whole clusters. Alternatively, analyse the cluster-level means with a t-interval on G − 1 degrees of freedom.
+- **Few clusters** (a rule of thumb of fewer than about 30–50, not from a cited source): cluster-robust SEs are anti-conservative. The plain cluster (pairs) bootstrap also tends to under-cover with few clusters; prefer the wild-cluster bootstrap-t (Cameron, Gelbach & Miller 2008; unsourced here, check a current econometrics reference). The [ai-evals analyzer](../../ai-evals/references/eval-statistics.md) resamples whole clusters. Alternatively, analyse the cluster-level means with a t-interval on G − 1 degrees of freedom.
 - **Judge-graded evals** add judge error on top of sampling error. Use [PPI/PPI++](judge-assisted-inference.md) with a random human-labelled subset.
 - **Many benchmarks or slices** need a multiplicity rule. See [multiplicity procedures](multiplicity-procedures.md).
 - **Leaderboard ties.** If the paired 95% CI of the difference includes 0 and the MDE exceeds the gap, report the models as not distinguished. Do not rank them.

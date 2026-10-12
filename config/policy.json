@@ -1,0 +1,16 @@
+{
+  "organisation": null,
+  "vcs": {
+    "host": "github.com",
+    "protected_branches": ["main", "dev"],
+    "default_base": "dev",
+    "remotes_allowed": []
+  },
+  "roles": {
+    "reviewer": {"tools": ["Read", "Grep", "Glob"], "diff_as_data": true},
+    "refuter": {"tools": ["Read", "Grep", "Glob", "Bash"]}
+  },
+  "labels": {"unit": "run", "aggregation": "person"},
+  "thresholds": {"labels_before_write_workflows": 50, "min_precision": 0.7, "baseline_margin": 0.1},
+  "protected_paths": []
+}

@@ -1,6 +1,6 @@
 ---
 description: Dynamic Workflow tool runtime: enablement, ultracode, size guidelines, runtime caps, agent() options, resume, headless launch.
-last_verified: 2026-09-02
+last_verified: 2026-10-10
 status: stable
 ---
 
@@ -51,7 +51,9 @@ The keyword is an opt-in **only in a prompt you type yourself**: the interactive
 
 Dismiss a highlighted keyword with `Option+W` / `Alt+W`, or backspace with the cursor right after it. Turn the trigger off entirely via "Ultracode keyword trigger" in `/config`.
 
-**Per session.** `/effort ultracode` is "a Claude Code setting that combines `xhigh` reasoning effort with automatic workflow orchestration. With it on, Claude plans a workflow for each substantive task instead of waiting for you to ask." Launch with `claude --effort ultracode`. It lasts the current session; the `ultracode` setting makes it the default for every session. Drop back with `/effort high`.
+**Per session.** `/effort ultracode` is "a Claude Code setting that turns on automatic workflow orchestration for the session, at whichever effort level the session runs at." With it on, Claude plans a workflow for each substantive task instead of waiting for you to ask. Launch with `claude --effort ultracode`; only that launch flag also sets effort to `xhigh`. It lasts the current session; the `ultracode` setting makes it the default for every session. Turn it off with `/effort ultracode off`.
+
+While ultracode is on, three checks are off: the `Large workflow` warning, enforcement of the concurrent-subagent limit for subagents spawned with the Agent tool, and the first-launch approval prompt in auto permission mode. Fleet controls (checked 2026-10-10): `disableWorkflows` in managed settings turns workflows, and with them ultracode, off; no managed setting disables ultracode alone, and an effort cap only lowers the level it runs at. `workflowSizeGuideline` is advice, not a cap. The `CLAUDE_CODE_WORKFLOW_MAX_CONCURRENT_AGENTS` environment variable bounds concurrent workflow agents; look up its range and minimum version in the env-vars doc.
 
 Cost consequence, stated plainly in the docs: "A single request can turn into several workflows in a row… each request uses more tokens and takes longer than at lower effort levels." Available only on models that support `xhigh`.
 
@@ -141,6 +143,8 @@ A saved workflow runs as `/<name>`. If a project and a personal workflow share a
 Claude Code refuses to write through a symlink: for the project location it refuses if `.claude`, `.claude/workflows`, or the target file is a symlink; for the personal location only if the target file itself is. Older releases followed the link, which could place the file outside the chosen location; check the running version before saving into a symlinked tree.
 
 **Plugin distribution:** put the script in a `workflows/` directory at the plugin root (or point at another location with the `workflows` manifest field). Plugin workflows are namespaced — plugin `acme-tools` with `meta.name` `release-audit` runs as `/acme-tools:release-audit`.
+
+This library's saved workflows (`agents/workflows/*.js`) are generated from `<id>.manifest.json` plus the runtime templates in `scripts/`; their header says not to hand-edit. Change the manifest or template, then run `python3 scripts/generate_workflows.py` (`expert-board.js` comes from `scripts/generate_expert_board.py`) (`--check` fails on stale output). The rest of this section applies to scripts you save yourself.
 
 To edit a saved script, run the bundled **`/workflow-authoring`** skill first to load the script-writing reference Claude works from, then edit the `.js` file or ask Claude to. Run `/reload-skills` to re-read the workflow directories in the current session.
 

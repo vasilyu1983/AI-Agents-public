@@ -8,7 +8,7 @@ Drum-Buffer-Rope (DBR) is the TOC production scheduling mechanism that synchroni
 
 - **Drum**: the constraint sets the beat — the pace at which the whole system operates. No step should run faster than the drum.
 - **Buffer**: a time buffer (not inventory buffer) is placed in front of the constraint to absorb upstream variability and ensure the constraint never starves.
-- **Rope**: a release signal tied to the drum controls when raw material or new work enters the system, preventing excess WIP from accumulating upstream.
+- **Rope**: a release signal tied to the drum controls when raw material or new work enters the system, preventing excess WIP from accumulating upstream. Size the rope with Little's Law (W = L/λ): with a verified constraint, cutting upstream WIP shortens cycle time without changing throughput; see foundations-queueing-theory, primitive 01 (Little 1961, https://doi.org/10.1287/opre.9.3.383).
 
 ## When to Use
 

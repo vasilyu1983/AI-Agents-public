@@ -5,7 +5,7 @@
     "last_updated": "2026-09-02",
     "updated": "2026-09-02",
     "skill": "agents-subagents",
-    "total_sources": 65,
+    "total_sources": 75,
     "verified_cli_versions": {
       "claude_code": "2.1.258",
       "codex_cli": "0.152.1",
@@ -150,6 +150,24 @@
       "url": "https://developers.openai.com/api/docs/pricing",
       "description": "Published per-1M rates for the Codex models (input, cached input, output). Look them up here when a Codex tier choice depends on cost.",
       "add_as_web_search": true
+    },
+    {
+      "name": "openai/codex-plugin-cc",
+      "url": "https://github.com/openai/codex-plugin-cc",
+      "description": "Official Codex plugin for Claude Code: /codex:review, adversarial-review, rescue, transfer, status, result, cancel, setup; review-gate loop warning. Checked 2026-10-08.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Codex MCP server page",
+      "url": "https://learn.chatgpt.com/docs/mcp-server",
+      "description": "States codex mcp-server and the codex-mcp-server binary have been removed; the replacement app server is JSON-RPC, experimental. Checked 2026-10-08.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Codex subagents configuration",
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+      "description": "Codex custom agents, model and reasoning-effort fields, and the dated starting-effort guidance quoted in cost-control.md. Checked 2026-10-08.",
+      "add_as_web_search": false
     }
   ],
   "authoring_guidance": [
@@ -407,6 +425,48 @@
       "name": "Team Topologies, 2nd Edition - Afterword on AI agent fleets",
       "url": "https://teamtopologies.com/book",
       "description": "Skelton and Pais (IT Revolution, 2025). Afterword applies human team-boundary thinking to groups of AI agents: clear domain boundaries, constrained operating context, explainable decisions, audit trails, telemetry, stewardship, and avoiding handoffs between agent groups. Their small-language-model claim is an unevidenced 2025 prediction, recorded as a hypothesis to pressure-test in references/team-design-rationale.md, not a design rule.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Ares: per-step reasoning-effort router",
+      "url": "https://arxiv.org/abs/2603.07915",
+      "description": "Reports up to 52.7% fewer reasoning tokens than fixed high effort (single study). Cited in traps-and-antipatterns.md or cost-control.md; checked via audit/hive-research-2026-10-08 notes.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Extra thinking can flip correct answers",
+      "url": "https://arxiv.org/abs/2604.10739",
+      "description": "More thinking flips correct answers to wrong; best budget varies with difficulty. Cited in traps-and-antipatterns.md or cost-control.md; checked via audit/hive-research-2026-10-08 notes.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Peer conformity in LLM agents",
+      "url": "https://arxiv.org/abs/2606.01637",
+      "description": "Peer agreement misleads initially correct models far more than it corrects wrong ones. Cited in traps-and-antipatterns.md or cost-control.md; checked via audit/hive-research-2026-10-08 notes.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Who&When: failure attribution in multi-agent systems",
+      "url": "https://arxiv.org/abs/2505.00212",
+      "description": "Best method reached 53.5% accuracy identifying failure-responsible agents. Cited in traps-and-antipatterns.md or cost-control.md; checked via audit/hive-research-2026-10-08 notes.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Lossy handoff summaries",
+      "url": "https://arxiv.org/abs/2608.29028",
+      "description": "Short summaries keep facts but drop boundary rules. Cited in traps-and-antipatterns.md or cost-control.md; checked via audit/hive-research-2026-10-08 notes.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Correlated errors across LLMs",
+      "url": "https://arxiv.org/abs/2506.07962",
+      "description": "Reports substantial correlation in model errors. Cited in traps-and-antipatterns.md or cost-control.md; checked via audit/hive-research-2026-10-08 notes.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "Provider labels overstate independence (preprint)",
+      "url": "https://arxiv.org/abs/2609.03422",
+      "description": "Preprint: provider or family labels overstate independence across 38 models. Cited in traps-and-antipatterns.md or cost-control.md; checked via audit/hive-research-2026-10-08 notes.",
       "add_as_web_search": false
     }
   ]

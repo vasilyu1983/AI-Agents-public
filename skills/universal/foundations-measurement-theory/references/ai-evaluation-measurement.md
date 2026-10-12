@@ -10,7 +10,7 @@ Read this when an LLM benchmark score, LLM-judge score, or eval-suite trend is u
 - [IRT and DIF for benchmark items](#irt-and-dif-for-benchmark-items)
 - [Saturation and ceiling effects](#saturation-and-ceiling-effects)
 - [Construct-validity checklist for a benchmark claim](#construct-validity-checklist-for-a-benchmark-claim)
-- [Neuro and biometric instruments](#neuro-and-biometric-instruments)
+- [Judge validation rules](#judge-validation-rules)
 
 ## Ownership boundary
 
@@ -107,6 +107,13 @@ Bean et al. ([2025](https://arxiv.org/abs/2511.04703), NeurIPS 2025 Datasets & B
 
 For each claim, write the claim-to-evidence mapping: whether the score supports "solves these test items", "has this narrow skill", or "has this broad ability". Salaudeen et al. ([2025](https://arxiv.org/abs/2505.10573)) give a validity-centred framework for making that mapping. Broad-ability claims need evidence beyond a single benchmark.
 
-## Neuro and biometric instruments
+## Judge validation rules
 
-"Does this signal measure that state?" is the same validity question: EEG, GSR, eye-tracking or fMRI as an index of emotion, attention or preference. Apply the primitives here. The consumer-specific evidence contract and the reverse-inference confound table live in [consumer neuroscience evidence-to-product](../../foundations-consumer-neuroscience/references/evidence-to-product.md).
+Three rules for treating an LLM judge as an instrument. The sources are single papers read at abstract or summary level, so treat each as direction, not magnitude. The thresholds and procedure stay in [threshold-derivation.md](../../ai-evals/references/threshold-derivation.md).
+
+1. **Rating indeterminacy.** When an item has several defensible ratings, a forced-choice human label is a biased validation target, and judges selected on forced-choice agreement can be worse than judges selected with multi-label response sets (Guerdan et al., NeurIPS 2025, [arXiv 2503.05965](https://arxiv.org/abs/2503.05965)). Before computing judge-human agreement, check whether the gold label forces one answer on an indeterminate item.
+2. **Judge test-retest.** Score the judge's own repeat facet and the human gold set's inter-rater reliability first. Agreement cannot exceed the reliability of the weaker side, and judge self-consistency varies by judge and task (Rating Roulette, EMNLP Findings 2025, [ACL Anthology](https://aclanthology.org/2025.findings-emnlp.1361.pdf)).
+3. **Chance-corrected agreement by scale type.** Report chance-corrected agreement with a confidence interval, not raw agreement alone.
+   - Nominal labels: Cohen's kappa (two raters) or Krippendorff's alpha. Kappa depends on label prevalence, so with one dominant class report raw agreement, kappa and per-class agreement together, or a prevalence-robust coefficient.
+   - Ordinal scores (Likert, rubric points): Krippendorff's alpha with the ordinal metric or weighted kappa. Use ICC only if you defend equal intervals.
+   - Derive the acceptable level from the decision the score supports; no universal cutoff applies.

@@ -1,4 +1,4 @@
 interface:
   display_name: "AppSec"
-  short_description: "Provides application security guidance for design and implementation"
-  default_prompt: "Use $software-security-appsec to provide application security guidance for design and implementation. Use when reviewing auth, data handling, supply-chain controls, or AppSec architecture."
+  short_description: "Reviews application security and guides AppSec design"
+  default_prompt: "Use $software-security-appsec to review application security and guide AppSec design. Use when reviewing auth, authentication, authorization, sessions, data handling, supply chain, or AppSec architecture."

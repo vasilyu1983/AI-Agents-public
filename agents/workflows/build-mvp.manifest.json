@@ -4,7 +4,7 @@
     "engine": "staged",
     "codex": "parent-led",
     "description": "Cut a PRD into thin vertical slices, then build each approved slice and have a fresh judge check it. It stops at the first slice that fails and never commits.",
-    "whenToUse": "args: { prd: \"<PRD path or text>\", slices?: [<the approved slices from the first run>], maxRounds?: 3 }. The first run returns SLICES_READY with the slice plan; run again with args.slices to build them in order. Any stop short of PASS returns an escalation naming the slice; commit each slice yourself. Files under .git, .claude, .codex, .agents, .github and other protected paths, and instruction files such as AGENTS.md and CLAUDE.md, are out of reach: a change to one stops the run, so a human edits them outside any workflow.",
+    "whenToUse": "args: { prd: \"<PRD path or text>\", slices?: [<the approved slices from the first run>], testCommand?: \"<command run after every build round>\", maxRounds?: 3 }. The first run returns SLICES_READY with the slice plan; run again with args.slices to build them in order. Any stop short of PASS returns an escalation naming the slice; commit each slice yourself. Files under .git, .claude, .codex, .agents, .github and other protected paths, and instruction files such as AGENTS.md and CLAUDE.md, are out of reach: a change to one stops the run, so a human edits them outside any workflow.",
     "phases": [
       { "title": "Slice plan", "detail": "A read-only PRD writer cuts thin vertical slices; stops for approval unless args.slices is given" },
       { "title": "Build", "detail": "One builder per round builds the current slice against its frozen checks" },

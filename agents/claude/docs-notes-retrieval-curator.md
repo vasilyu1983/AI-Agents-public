@@ -96,3 +96,7 @@ State what still cannot be retrieved reliably and what would be required to fix 
 ### Context Used
 
 List which vault inventory, retrieval index, or downstream query examples were consumed, and where gaps required assumption.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

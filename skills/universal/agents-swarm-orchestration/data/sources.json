@@ -2,10 +2,10 @@
   "metadata": {
     "title": "Agents Swarm Orchestration - Sources",
     "description": "Official documentation, research, and secondary references for multi-agent orchestration across Claude Code, Codex, and OpenAI Agents SDK",
-    "last_updated": "2026-09-28",
-    "updated": "2026-09-28",
+    "last_updated": "2026-10-08",
+    "updated": "2026-10-08",
     "skill": "agents-swarm-orchestration",
-    "total_sources": 42
+    "total_sources": 45
   },
   "official_documentation": [
     {
@@ -86,6 +86,27 @@
     }
   ],
   "research": [
+    {
+      "name": "Anthropic: How we built our multi-agent research system",
+      "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "description": "Published 2025-06-13. Source of the dated token multipliers (agents about 4x chat, multi-agent about 15x chat) cited in cost-discipline.md.",
+      "add_as_web_search": true,
+      "verified": "2026-10-08"
+    },
+    {
+      "name": "Claude Code Costs",
+      "url": "https://code.claude.com/docs/en/costs",
+      "description": "Agent-team token multiplier when teammates run in plan mode; quoted with its date in cost-discipline.md.",
+      "add_as_web_search": true,
+      "verified": "2026-10-08"
+    },
+    {
+      "name": "openai/codex-plugin-cc",
+      "url": "https://github.com/openai/codex-plugin-cc",
+      "description": "Official plugin that runs Codex reviews from Claude Code (/codex:review, /codex:adversarial-review); README warns about the review gate loop. Cited in execution-surfaces.md.",
+      "add_as_web_search": false,
+      "verified": "2026-10-08"
+    },
     {
       "name": "AdaptOrch: Task-Adaptive Multi-Agent Orchestration",
       "url": "https://arxiv.org/abs/2602.16873",

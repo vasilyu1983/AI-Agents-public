@@ -137,6 +137,15 @@ class CertificateTests(unittest.TestCase):
         self.assertEqual(run.returncode, 0)
         self.assertTrue(loads(run.stdout)["optimal"])
 
+    def test_cli_invalid_witness_exit_codes(self):
+        script = Path(__file__).with_name("check_lp_certificate.py")
+        bad = '{"A":[[1]],"b":[3],"c":[2],"x":[1],"y":[2]}'
+        plain = subprocess.run([sys.executable, str(script), "-"], input=bad, text=True, capture_output=True)
+        strict = subprocess.run([sys.executable, str(script), "-", "--strict"], input=bad, text=True, capture_output=True)
+        self.assertEqual(plain.returncode, 0)
+        self.assertFalse(loads(plain.stdout)["optimal"])
+        self.assertEqual(strict.returncode, 1)
+
     def test_cli_invalid(self):
         script = Path(__file__).with_name("check_lp_certificate.py")
         run = subprocess.run([sys.executable, str(script)], input='{"bad":true}', text=True, capture_output=True)

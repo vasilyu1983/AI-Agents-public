@@ -3,8 +3,8 @@ name: run-workflow
 description: "Launches a saved multi-agent workflow by id on Claude Code or Codex. Use when the user asks to run a saved workflow or review loop."
 compatibility: "Claude Code and Codex. Manual-only: `disable-model-invocation` applies in Claude Code; `agents/openai.yaml` sets `policy.allow_implicit_invocation: false` for Codex. Needs the library checkout that holds `agents/workflows/`."
 disable-model-invocation: true
-version: "1.0"
-last_validated: 2026-10-03
+version: "1.1"
+last_validated: 2026-10-09
 ---
 
 # Run a Saved Workflow
@@ -38,6 +38,7 @@ A saved workflow keeps its guarantees in code or in a generated plan, not in a p
 
 4. **Codex: execute the plan from the parent session.**
    - If the plan has a `context_budget` block, follow its `extract` command instead of loading the whole file.
+   - If the plan has a `tree_snapshot`, run its `command` once before the first worker, and apply its `stop_rules` after each read-only phase. A rule that fires ends the run BLOCKED or INCOMPLETE with the rule's stop reason.
    - Run the `execution_contract` phases in order. Each phase names its owner, its primitive (`spawn_agent`, `wait_agent`, `send_input`, `close_agent`, local reasoning or an immediate return) and its gate. This session does every dispatch, wait, merge and verdict; workers never spawn workers.
    - Brief each worker on its own: the plan's `task_name` and `fork_turns`, its rules, and the user's args. Keep to `workspace`: one writer at a time.
    - Keep to the plan's agent cap. Spawn only the members, refuter `count`, `max_dynamic_members` and rounds (`maxRounds`, else `max_rounds_default`) it allows. Run no more at once than the session's thread limit, and queue the rest.

@@ -3,7 +3,7 @@ name: ai-coding-agents
 description: "Creates coding-agent definitions (review, test, refactor, team) for Claude Code, Codex, and Agent SDK. Use when writing a code-review or test subagent, not a runtime."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.3"
-last_validated: 2026-09-29
+last_validated: 2026-10-09
 ---
 
 # AI Coding Agents — Creation Hub
@@ -40,7 +40,7 @@ If the request is "how do I add a slash command to my runtime?" or "how should I
 | How do I create a coding agent end-to-end? | [references/creation-workflow.md](references/creation-workflow.md) | Step-by-step from idea to running agent |
 | Which platform should I target? | [references/platform-patterns.md](references/platform-patterns.md) | Decision tree: `.md` vs `.toml` vs SDK |
 | What single-agent archetypes exist? | [references/agent-archetypes.md](references/agent-archetypes.md) | Six patterns with frontmatter and tools |
-| When should I use a multi-agent team? | [references/multi-agent-coding-patterns.md](references/multi-agent-coding-patterns.md) | Three architectures: coordinator, fork, swarm |
+| When should I use a multi-agent team? | [references/multi-agent-coding-patterns.md](references/multi-agent-coding-patterns.md) | Five patterns: coordinator, fork, peer swarm, background, ACP-delegated |
 | How do I manage context for code-heavy work? | [references/context-management.md](references/context-management.md) | Token budgets, file selection, progressive disclosure |
 | How do I wrap dev tools for agents? | [references/tool-integration.md](references/tool-integration.md) | Linter, formatter, test runner, type checker patterns |
 | My agent is broken | [references/debugging-guide.md](references/debugging-guide.md) | Failure taxonomy and fixes |
@@ -153,7 +153,7 @@ Each archetype is detailed in [references/agent-archetypes.md](references/agent-
 | Pattern | Communication | Isolation | Best For | Template |
 |---------|--------------|-----------|----------|----------|
 | Coordinator-Led Team | `<task-notification>` XML | Workers in background | Research → implement → verify loops | [coordinator-coding-team.md](assets/templates/coordinator-coding-team.md) |
-| Fork Subagents | Implicit (context inherited) | Shared prompt cache | Parallel background exploration | See fork guidance below |
+| Fork Subagents | Subagent type `fork` (context inherited; no type gives general-purpose) | Shared prompt cache | Parallel background exploration | See fork guidance below |
 | Agent Teams (Peer Swarm) | Mailbox messaging (SendMessage) | Shared checkout; exclusive owned files per teammate | Self-coordinating specialists | [swarm-investigation.md](assets/templates/swarm-investigation.md) |
 | Background Agents | Supervisor-managed sessions started and monitored from the runtime's agent view | Isolated git worktree per session | Long-running parallel tasks, tasks dispatched and monitored without keeping a terminal open | See background agent guidance below |
 | ACP-Delegated Subagent | ACP stdio (line-delimited JSON) | Separate process; approvals round-trip through orchestrator | Cross-platform delegation (Goose → Claude Code, Goose → Codex, etc.) | See ACP delegation note below |
@@ -177,7 +177,7 @@ Code is large and interdependent, so split the window into instructions, code an
 - [references/creation-workflow.md](references/creation-workflow.md) — End-to-end creation guide
 - [references/platform-patterns.md](references/platform-patterns.md) — Claude Code vs Codex vs Agent SDK
 - [references/agent-archetypes.md](references/agent-archetypes.md) — Six single-agent coding patterns
-- [references/multi-agent-coding-patterns.md](references/multi-agent-coding-patterns.md) — Three multi-agent architectures
+- [references/multi-agent-coding-patterns.md](references/multi-agent-coding-patterns.md) — Five multi-agent patterns
 - [references/context-management.md](references/context-management.md) — Token budgets and file strategies
 - [references/tool-integration.md](references/tool-integration.md) — Dev tool wrapping patterns
 - [references/debugging-guide.md](references/debugging-guide.md) — Failure taxonomy and fixes

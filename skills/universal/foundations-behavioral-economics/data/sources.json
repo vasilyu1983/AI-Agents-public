@@ -4,7 +4,7 @@
     "description": "Primary papers and references for 16 behavioral-economics and behavior-design primitives: prospect theory, loss aversion, anchoring, defaults, social proof, scarcity, hyperbolic discounting, mental accounting, choice architecture, dual-system cognition, decoy effect, habit loop, reinforcement schedules, cognitive load and working memory, context-dependent retrieval, and implementation intentions.",
     "last_updated": "2026-09-24",
     "skill": "foundations-behavioral-economics",
-    "total_sources": 83
+    "total_sources": 84
   },
   "primary_papers": [
     {
@@ -355,7 +355,7 @@
       "id": "CherepMaesSingh2025",
       "name": "LLM Agents Are Hypersensitive to Nudges",
       "url": "https://arxiv.org/abs/2505.11584",
-      "description": "Cherep, M., Maes, P. & Singh, N. arXiv:2505.11584 (May 2025); published as 'AI agents are sensitive to nudges,' PNAS 123(25), 15 June 2026 (DOI 10.1073/pnas.2537030123) — not ICLR. Multi-model benchmark (GPT-3.5/4o/o3, Gemini, Claude); default-option nudge shifted human choice probability 0.51->0.88 (+37pp) while several LLMs (GPT-4o, Claude 3 Haiku, o3-Mini, GPT-3.5-Turbo) shifted to ~1.0 from baselines of 0.33-0.58; Claude 3.5 Sonnet and Gemini 1.5 Pro stayed near human levels (~0.89-0.91). CoT/few-shot shift but do not resolve the sensitivity; reasoning-optimized models partially restore human-level sensitivity but inconsistently and at substantial compute cost. New frontier: AI agents as subjects of choice architecture. Relevant to primitives #4, #9. Verified 2026-08-14: PNAS volume 123, issue 25, 15 June 2026 and DOI confirmed via MIT Media Lab publication page (PNAS page itself returns 403 to automated fetch).",
+      "description": "Cherep, M., Maes, P. & Singh, N. arXiv:2505.11584 (May 2025); published as 'AI agents are sensitive to nudges,' PNAS 123(25), 15 June 2026 (DOI 10.1073/pnas.2537030123) — not ICLR. Multi-model benchmark; default-option nudge shifted LLM choices far more than human choices, with a few models near human levels (numbers unverified, direction only). CoT/few-shot shift but do not resolve the sensitivity; reasoning-optimized models partially restore human-level sensitivity but inconsistently. New frontier: AI agents as subjects of choice architecture. Relevant to primitives #4, #9. Verified 2026-08-14: PNAS volume 123, issue 25, 15 June 2026 and DOI confirmed via MIT Media Lab publication page (PNAS page itself returns 403 to automated fetch).",
       "add_as_web_search": false,
       "url_check": "manual"
     },
@@ -451,7 +451,7 @@
       "id": "Salvi2025Correction",
       "name": "Author Correction: On the conversational persuasiveness of GPT-4",
       "url": "https://www.nature.com/articles/s41562-026-02588-0",
-      "description": "Salvi, F., Horta Ribeiro, M., Gallotti, R. & West, R. (2025). On the conversational persuasiveness of GPT-4. Nature Human Behaviour 9(8), 1645-1653, DOI 10.1038/s41562-025-02194-6; Author Correction published 3 Sep 2026, DOI 10.1038/s41562-026-02588-0. Original: GPT-4 with opponent demographics had 81.2% higher odds of higher post-debate agreement than the Human–Human baseline (Abstract); this is an odds comparison, not a probability-point change. The correction makes the personalised-vs-non-personalised GPT-4 comparison non-significant (+48.7%, 95% CI [-2.9%, +127.6%], P=0.07) — the advantage over humans stands but the personalisation-specific claim does not. Source for 'AI as a persuasion source' in Ethical Bounds.",
+      "description": "Salvi, F., Horta Ribeiro, M., Gallotti, R. & West, R. (2025). On the conversational persuasiveness of GPT-4. Nature Human Behaviour 9(8), 1645-1653, DOI 10.1038/s41562-025-02194-6; Original: GPT-4 with opponent demographics had 81.2% higher odds of higher post-debate agreement than the Human–Human baseline (Abstract); this is an odds comparison, not a probability-point change. An Author Correction (DOI 10.1038/s41562-026-02588-0) was reported but its content was not read (page unreachable): unsourced — verify. Source for 'AI as a persuasion source' in Ethical Bounds.",
       "add_as_web_search": false,
       "url_check": "manual"
     },
@@ -459,7 +459,7 @@
       "id": "Hackenburg2025",
       "name": "The levers of political persuasion with conversational artificial intelligence",
       "url": "https://www.science.org/doi/10.1126/science.aea3884",
-      "description": "Hackenburg, K., Tappin, B. M., Hewitt, L., Saunders, E. et al. (2025). Science 390, DOI 10.1126/science.aea3884 (also arXiv:2507.13919). Three experiments, N = 76,977, 19 LLMs, 707 political issues. Post-training and prompting raised persuasiveness by up to 51% and 27% respectively, more than personalisation or scale; where persuasiveness rose, factual accuracy fell. Basis for the accuracy-vs-persuasion harm test in Ethical Bounds.",
+      "description": "Hackenburg, K., Tappin, B. M., Hewitt, L., Saunders, E. et al. (2025). Science 390, DOI 10.1126/science.aea3884 (also arXiv:2507.13919). Three large experiments with many LLMs (figures not re-verified). Post-training and prompting raised persuasiveness more than personalisation or scale; where persuasiveness rose, factual accuracy fell. Basis for the accuracy-vs-persuasion harm test in Ethical Bounds.",
       "add_as_web_search": false,
       "url_check": "manual"
     },
@@ -484,6 +484,15 @@
       "name": "CMA Launches Major Consumer Protection Drive Focused on Online Pricing Practices",
       "url": "https://www.gov.uk/government/news/cma-launches-major-consumer-protection-drive-focused-on-online-pricing-practices",
       "description": "GOV.UK press release, 18 November 2025. The CMA opened investigations into 8 businesses suspected of DMCC infringement (drip pricing, misleading time-limited offers, auto opt-ins) — investigations opened, not infringement decisions.",
+      "add_as_web_search": false,
+      "url_check": "manual"
+    },
+    {
+      "id": "GunturkunPNASNexus2025",
+      "name": "Opt-out organ donation policies and living/deceased donation (panel study, 2000-2023)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12560092/",
+      "description": "PNAS Nexus, 28 Oct 2025. Panel of opt-out policy switches: deceased-donor rates rose a non-significant +7%; living-donor rates fell 29% (P=0.026). Source for the Defaults grade and the spillover rule.",
+      "accessed": "2026-10-11",
       "add_as_web_search": false,
       "url_check": "manual"
     }

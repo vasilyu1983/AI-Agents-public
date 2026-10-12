@@ -176,7 +176,7 @@ mcp_servers = {
 
 **Tool wildcards**: `mcp__github__*` allows all tools from a server.
 
-**Tool search**: on by default in current SDK releases; tool definitions are withheld and loaded on demand (up to five per search). `ENABLE_TOOL_SEARCH=auto` switches to the threshold rule (activate when deferrable definitions reach 10% of the context window; `auto:N` for another percentage); `false` loads everything upfront. Requires the Claude 4.5 generation or later (Sonnet 4.5, Haiku 4.5, Opus 4.5) and is forced off on Azure-hosted Foundry deployments and non-first-party `ANTHROPIC_BASE_URL` proxies. With under ~10 tools, upfront loading is usually faster. Source: <https://code.claude.com/docs/en/agent-sdk/tool-search>.
+**Tool search**: on by default in recent SDK releases (check the SDK docs for your version); tool definitions are withheld and loaded on demand (up to five per search). `ENABLE_TOOL_SEARCH=auto` switches to the threshold rule (activate when deferrable definitions reach 10% of the context window; `auto:N` for another percentage); `false` loads everything upfront. Requires the Claude 4.5 generation or later (Sonnet 4.5, Haiku 4.5, Opus 4.5) and is forced off on Azure-hosted Foundry deployments and non-first-party `ANTHROPIC_BASE_URL` proxies. With under ~10 tools, upfront loading is usually faster. Source: <https://code.claude.com/docs/en/agent-sdk/tool-search>.
 
 **Config file**: Also loadable from `.mcp.json`.
 

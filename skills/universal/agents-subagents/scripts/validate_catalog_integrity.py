@@ -767,6 +767,140 @@ def check_team_context_fields(summary: dict[str, object], errors: list[str]) -> 
         errors.append("teams missing context fields: " + ", ".join(missing))
 
 
+BUDGET_KEYS = ("max_rounds", "max_turns_per_member", "token_envelope")
+MAX_DECISION_MASKS = 2
+
+
+WILDCARD_STEM = "\0"
+
+
+def _glob_prefix(glob: str) -> list[str]:
+    """Path components before the first glob metacharacter, for the simple overlap check.
+
+    A component cut mid-name keeps its literal stem plus a wildcard marker, so
+    `reports/code-graph-*.md` and `reports/query-*.md` stay disjoint.
+    """
+    parts: list[str] = []
+    for part in glob.strip().strip("'\"").split("/"):
+        cut = next((i for i, ch in enumerate(part) if ch in "*?["), None)
+        if cut is None:
+            parts.append(part)
+            continue
+        if cut:
+            parts.append(part[:cut] + WILDCARD_STEM)
+        break
+    return parts
+
+
+def _same_component(a: str, b: str) -> bool:
+    if a.endswith(WILDCARD_STEM) or b.endswith(WILDCARD_STEM):
+        stem_a, stem_b = a.rstrip(WILDCARD_STEM), b.rstrip(WILDCARD_STEM)
+        return stem_a.startswith(stem_b) or stem_b.startswith(stem_a)
+    return a == b
+
+
+def _is_prefix(short: list[str], long: list[str]) -> bool:
+    return len(short) <= len(long) and all(_same_component(a, b) for a, b in zip(short, long))
+
+
+def _glob_contains(exclusion: str, owned: str) -> bool:
+    """Prove containment only for identical patterns or literal subtree exclusions."""
+    exclusion = exclusion.strip().strip("'\"")
+    owned = owned.strip().strip("'\"")
+    if exclusion == owned:
+        return True
+    if not exclusion.endswith("/**"):
+        return False
+    root = exclusion[:-3]
+    if not root or any(ch in root for ch in "*?["):
+        return False
+    return owned.startswith(root + "/")
+
+
+def parse_writer_globs(owned: object) -> dict[str, tuple[list[str], list[str]]]:
+    """Map member -> (owned globs, excluded globs) from `member: globs (excluding globs)`."""
+    writers: dict[str, tuple[list[str], list[str]]] = {}
+    if not isinstance(owned, list):
+        return writers
+    for entry in owned:
+        match = re.match(r"^([a-z0-9-]+):\s*(.+)$", str(entry))
+        if not match or "read-only" in match.group(2):
+            continue
+        body, _, excl = match.group(2).partition("(excluding")
+        body = re.sub(r"\s*\([^)]*\)", "", body)
+        owns = [g.strip() for g in body.split(",") if g.strip()]
+        excludes = [g.strip() for g in excl.rstrip(") ").split(",") if g.strip()]
+        writers[match.group(1)] = (owns, excludes)
+    return writers
+
+
+def find_ownership_overlaps(owned: object) -> list[str]:
+    writers = parse_writer_globs(owned)
+    names = sorted(writers)
+    overlaps: list[str] = []
+    for i, a in enumerate(names):
+        for b in names[i + 1 :]:
+            for ga in writers[a][0]:
+                for gb in writers[b][0]:
+                    pa, pb = _glob_prefix(ga), _glob_prefix(gb)
+                    if not (_is_prefix(pa, pb) or _is_prefix(pb, pa)):
+                        continue
+                    if any(_glob_contains(e, ga) or _glob_contains(e, gb) for e in writers[a][1]):
+                        continue
+                    if any(_glob_contains(e, ga) or _glob_contains(e, gb) for e in writers[b][1]):
+                        continue
+                    overlaps.append(f"{a} '{ga}' overlaps {b} '{gb}'")
+    return overlaps
+
+
+def team_recipe_problems(name: str, data: dict, methods_dir: Path) -> list[str]:
+    problems: list[str] = []
+    debate = data.get("debate") or {}
+    masks = debate.get("decision_masks") or []
+    if len(masks) > MAX_DECISION_MASKS:
+        problems.append(f"{name}: {len(masks)} decision_masks (max {MAX_DECISION_MASKS})")
+    method = debate.get("method")
+    if method and not (methods_dir / f"{method}.md").is_file():
+        problems.append(f"{name}: debate method '{method}' is not a file in debate-methods")
+    budget = data.get("budget")
+    if not isinstance(budget, dict):
+        problems.append(f"{name}: missing budget")
+    else:
+        for key in BUDGET_KEYS:
+            if not isinstance(budget.get(key), int) or budget[key] <= 0:
+                problems.append(f"{name}: budget.{key} must be a positive integer")
+    verification = data.get("verification")
+    if not isinstance(verification, dict) or not verification.get("rule"):
+        problems.append(f"{name}: missing verification block with a rule")
+    elif str(verification.get("mode", "")).strip().lower() == "self":
+        problems.append(f"{name}: verification.mode 'self' is not allowed; the producer cannot verify its own work")
+    for overlap in find_ownership_overlaps(data.get("owned_files")):
+        problems.append(f"{name}: ownership overlap: {overlap}")
+    return problems
+
+
+def check_team_recipe_rules(
+    summary: dict[str, object],
+    errors: list[str],
+    teams_dir: Path = TEAMS_DIR,
+    methods_dir: Path = TEMPLATES_DIR / "debate-methods",
+) -> None:
+    """Debate caps, budget, verification and write-ownership overlap for every recipe."""
+    try:
+        import yaml
+    except ImportError:
+        errors.append("PyYAML is required to validate team recipes")
+        return
+    problems: list[str] = []
+    for path in sorted(teams_dir.glob("*/team.yaml")):
+        parts = path.read_text(encoding="utf-8").split("---", 2)
+        data = yaml.safe_load(parts[1] if len(parts) > 1 else parts[0]) or {}
+        problems.extend(team_recipe_problems(path.parent.name, data, methods_dir))
+    summary["team_recipe_problems"] = problems
+    if problems:
+        errors.append("team recipe rule violations: " + "; ".join(problems))
+
+
 def check_team_design_rationales(summary: dict[str, object], errors: list[str]) -> None:
     """Every recipe must point from its own directory to a real rationale anchor."""
     invalid: list[str] = []
@@ -1073,6 +1207,7 @@ def build_summary(strict_freshness: bool = False) -> tuple[dict[str, object], li
     check_codex_member_references(summary, errors)
     check_team_context_fields(summary, errors)
     check_team_design_rationales(summary, errors)
+    check_team_recipe_rules(summary, errors)
     check_team_member_matrix(summary, errors)
     check_generated_workflow_assets(summary, errors)
     check_context_first(summary, errors)

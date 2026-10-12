@@ -11,6 +11,8 @@ model = "<current-codex-model>"    # resolve via the Codex model picker (develop
 # Sandbox modes for coding agents:
 # - "read-only"        → Code review, security scanning, analysis
 # - "workspace-write"  → Test generation, refactoring, migration
+# ("danger-full-access" removes all restriction; network access inside workspace-write is
+#  the [sandbox_workspace_write] network_access boolean)
 sandbox_mode = "workspace-write"
 
 developer_instructions = """
@@ -44,7 +46,7 @@ Before completing:
 - Check that the output matches the expected format
 """
 
-# MCP servers (uncomment to add external tool access)
-# [mcp_servers.eslint]
-# command = "npx"
-# args = ["@anthropic/eslint-mcp-server"]
+# MCP servers: add only a vetted server you have verified in its official registry.
+# [mcp_servers.<name>]
+# command = "<command>"
+# args = ["<package-or-script>"]

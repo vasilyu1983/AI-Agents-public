@@ -2,7 +2,7 @@
 name: agents-mcp
 description: "Configures and hardens Claude Code and Codex MCP servers. Use when connecting databases, APIs, SaaS, building servers, or serving a clearance-filtered knowledge base."
 compatibility: Claude Code + Codex. MCP integration differs by runtime (Claude Code, Codex) — scoped extensions.
-version: "1.6"
+version: "1.7"
 last_validated: 2026-08-09
 ---
 
@@ -216,16 +216,17 @@ End-to-end recipes for the requests this skill actually receives. Each ends at a
 
 ## Tool Result Contract
 
-A tool result is read by a model, not by a program. It is the model's only signal for what to do next. These rules come from the protocol and hold across SDKs and clients. Generic tool-schema design lives in [`../ai-agents/references/tool-design-specs.md`](../ai-agents/references/tool-design-specs.md); this section owns the MCP result contract.
+A tool result is read by a model, not by a program. It is the model's only signal for what to do next. Rules 1–5 come from the protocol and hold across SDKs and clients. Rule 6 and the completeness deviation in rule 3 are design practice from one project (morluto/rea; see `data/sources.json`), not protocol requirements. Generic tool-schema design lives in [`../ai-agents/references/tool-design-specs.md`](../ai-agents/references/tool-design-specs.md); this section owns the MCP result contract.
 
 1. **Two error channels. Pick by who can fix the problem.**
    - **Tool execution error:** the model can fix it or route around it. Examples: not found, permission denied on a resource, upstream 4xx/5xx, rate limit, a business-rule rejection, an argument the model can correct. Return a normal result with `isError: true` and a text block the model can act on.
    - **Protocol error (a JSON-RPC error response):** only for a request the server cannot interpret, such as an unknown tool, a malformed request, or a server fault. Clients may show these to the user instead of the model, so the model loses its chance to self-correct.
    - Where a failure sits (for example, schema validation of arguments) is defined on the spec's tools page. Check the revision you target.
 2. **Error text is the next instruction.** Say what failed, which input caused it, and the corrected call, for example: `No customer with id "c_91". Find the id with search_customers(email=...)`. No stack traces, internal hostnames, or secrets.
-3. **Bound size at the source.** Accept `limit`/`cursor` arguments and set a small default page. When you truncate, say so and give the continuation, for example `"showing 50 of 1,240; call again with cursor=..."`. Clients enforce their own output caps. Claude Code warns above one threshold and truncates at another, configurable with `MAX_MCP_OUTPUT_TOKENS`; look up the current values in its MCP docs. Never use the client cap as your bound.
+3. **Bound size at the source.** Accept `limit`/`cursor` arguments and set a small default page. When you truncate, say so and give the continuation, for example `"showing 50 of 1,240; call again with cursor=..."`. Clients enforce their own output caps. Claude Code warns above one threshold and truncates at another, configurable with `MAX_MCP_OUTPUT_TOKENS`; look up the current values in its MCP docs. Never use the client cap as your bound. Deviation: when the answer depends on completeness (absence, equivalence, diff), never page or truncate silently. Return the whole result. If it exceeds the server's configured response budget (set at or below the smallest receive limit among the clients you support, and configurable), return a typed error (`isError: true` with a machine-readable reason) that carries a reference the caller can pass to a paging or view tool on the same connection.
 4. **Shape for reading.** Return a concise result by default and a `detail`/`response_format` argument for more. Put human-readable names next to opaque IDs. Declare `outputSchema` and return `structuredContent` when a caller parses the result, with a text rendering as well. Return a `resource_link` instead of inlining large payloads.
 5. **Descriptions are the discovery surface.** Under deferred loading, only the name and description are searched. Put the discriminating words first, because clients may truncate long descriptions (check your client's documented limit). Keep one action per tool. Use the server's `instructions` field to say when this server's tools apply.
+6. **Missing evidence is unknown, not empty or false.** Report what each data source or sub-query covered. An empty list from a partial search must not read as "none exist". Make absence and equivalence claims only from complete coverage; otherwise return `unknown`. When the server derives relationships, mark observed facts apart from inferred edges and keep unresolved edges.
 
 Worked result shapes (error vs success, pagination, idempotency keys) are in [references/mcp-patterns.md](references/mcp-patterns.md).
 

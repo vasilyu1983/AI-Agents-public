@@ -18,6 +18,7 @@ experimental:
 skills:
   - software-payments
   - software-security-appsec
+  - foundations-distributed-systems
 ---
 
 **Teammate mode:** `family` is repository catalog metadata, not a Claude runtime control. Treat the launch prompt as authoritative. It must supply required skill guidance and context artifacts, owned scope and isolation, and a stopping budget; do not assume this frontmatter or the lead's conversation history is inherited.
@@ -87,3 +88,7 @@ Give the key invariants and observability checkpoints (idempotency table, dedupe
 ### Context Used
 
 List which packet, graph, or artifact was used and where manual tracing was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

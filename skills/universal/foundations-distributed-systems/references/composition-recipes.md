@@ -95,13 +95,20 @@ Write latency is set by how long the leader waits for acks. A 5-node leader wait
 **Stack**:
 1. **Idempotency (#7)**: persist one stable business-operation ID before dispatch and reuse it across transport retries, recovery and reassignment. Distinct authorized operations need distinct IDs even with identical arguments; a hash of inputs or agent/step identity alone is insufficient. A durable workflow journal preserves execution history but cannot atomically commit an unrelated provider's side effect: an activity may run again after the provider accepted it and before local completion was persisted. Require provider idempotency/status reconciliation, or one database transaction containing both the local effect and the dedupe result. Choose a runtime by its verified transaction boundary, not a blanket exactly-once claim. [Temporal's Activity documentation](https://docs.temporal.io/activities) recommends idempotent activities. Runtime selection itself belongs to [`ai-coding-agents-state`](../../ai-coding-agents-state/references/durable-trigger-integration.md).
 2. **Leases and Fencing (#8)**: when an agent needs exclusive control of a resource (a file section, an API quota slot), issue a lease with a fencing token; the resource rejects stale tokens, so a crashed-and-recovered agent cannot double-apply writes.
-3. **CRDTs (#6)**: model the shared workspace as a CRDT (RGA for text, OR-Set for task sets, LWW-Register for key-value slots). Yjs, Automerge 3 and Loro are the usual libraries; treat their version and performance claims as volatile and check release notes. Read the migration notes before a major upgrade: Automerge 3 removed the `Text` class.
+3. **CRDTs (#6)**: model the shared workspace as a CRDT (RGA for text, OR-Set for task sets, LWW-Register for key-value slots). Pick a maintained CRDT library and treat its version and performance claims as volatile; read the release and migration notes before a major upgrade.
 
 **Durable-execution correctness contract** (runtime-neutral; the runtimes themselves are out of scope here):
 - Workflow code must be deterministic on replay; side effects live in activities.
 - Activities are at-least-once. Every effectful activity needs the operation ID above.
 - Changing the code of in-flight workflows needs explicit versioning, or replay diverges.
 - Compensations must themselves be idempotent and must tolerate racing a late forward effect; name the point of no return after which the saga can only go forward.
+
+**Exactly-once for agent tool calls lives in the tool contract** (Li, arXiv:2609.29095, Sep 2026, preprint, direction only). Measured over many agent episodes, whether duplicates occurred depended mainly on the tool contract, and agents often reported success on episodes that contained a duplicate.
+- The tool must require an idempotency key and reject a write without one; an optional key is not enforcement.
+- Give the tool a status-lookup call for ambiguous timeouts, and do not retry a write that may still be in flight.
+- An agent's self-report of "done once" is not evidence. Verify by reading state back.
+
+**Buffer or undo effects until commit** (Atomix, arXiv:2602.14849, preprint, hedged pointer): one design buffers an agent transaction's effects, commits when no earlier conflicting work can still arrive, and compensates reversible effects on abort. If a tool is irreversible, serialize it or put a human gate before it.
 
 **Classical concurrency control transfers badly to agents.** An agent "transaction" spans a long inference, its read set is broad and opaque, and its writes take effect immediately through tools, so 2PL/OCC have no clean validate-or-rollback point. CoAgent (arXiv:2606.15376, June 2026, preprint) fixes a serialization order at launch, filters reads to that order, and applies writes speculatively over undoable tools; the paper reports in its abstract correctness within 5% of serial execution at 1.4× speedup on ten contended workloads. Unreplicated; the transferable point is the diagnosis: **before reaching for locks across agents, check whether the tools are undoable and whether a pre-agreed order removes the conflict.**
 

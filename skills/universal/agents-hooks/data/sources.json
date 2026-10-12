@@ -53,13 +53,13 @@
     {
       "name": "Claude Models Overview (pricing + lineup)",
       "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
-      "description": "Official current + legacy Claude model table with API IDs and per-MTok pricing. Verified 2026-07-11: current flagship Claude Opus 4.8 ($5/$25 per MTok), Claude Sonnet 5 ($2/$10 introductory through 2026-08-31, $3/$15 standard after), Claude Haiku 4.5 ($1/$5); Claude Opus 4.7 and Sonnet 4.6 are now legacy-but-served. Use to keep any cost-estimation reference (e.g. budget-and-loop-hooks.md) from drifting.",
+      "description": "Official current + legacy Claude model table with API IDs and per-MTok pricing. Look prices and the current lineup up here at use time; the skill holds no prices (skills/AGENTS.md). Use to keep any cost-estimation reference (e.g. budget-and-loop-hooks.md) from drifting.",
       "add_as_web_search": true
     },
     {
       "name": "OpenAI API Pricing",
       "url": "https://developers.openai.com/api/docs/pricing",
-      "description": "Official OpenAI API pricing. Verified 2026-07-11: GPT-5/GPT-5 Mini retired from the pricing page in mid-2026, superseded by GPT-5.4/GPT-5.5 (GPT-5.5 ~$5/$30 per MTok, GPT-5.4 Mini ~$0.75/$4.50). Cross-check before quoting GPT-5-era prices in cost tables.",
+      "description": "Official OpenAI API pricing. Look prices and the current model lineup up here at use time; the skill holds no prices. Cross-check before quoting any price in a cost table.",
       "add_as_web_search": true
     }
   ],

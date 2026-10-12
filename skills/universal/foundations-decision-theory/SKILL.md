@@ -65,10 +65,10 @@ More traps and pattern stacks: [references/patterns-scenarios-traps.md](referenc
 
 ## When Expected-Value Reasoning Breaks Down (Non-Ergodicity, Ruin Risk, and Kelly)
 
-EU ranks lotteries from stated probabilities and a utility function. It fails in practice when a one-period payoff model is reused for a repeated, multiplicative, path-dependent, or ruin-constrained process. There, the arithmetic expected return can be positive while long-run log growth is negative (Peters 2019).
+EU ranks lotteries from stated probabilities and a utility function. It misleads in practice when a one-period payoff model is reused for a repeated, multiplicative, path-dependent, or ruin-constrained process. There, the arithmetic expected return can be positive while long-run log growth is negative (Peters 2019).
 
 - **Model the process.** Model wealth or state transitions and absorbing boundaries first. Use expected-log or time-average growth only when long-run growth is the stated objective.
-- **Kelly** (Kelly 1956): for a repeated binary bet with known edge, f* = p − q/b. Betting above Kelly lowers long-run growth even when every bet has positive EV. Fractional Kelly (for example half-Kelly) is the usual correction for parameter uncertainty and risk tolerance.
+- **Kelly** (Kelly 1956): for a repeated binary bet with known edge, f* = p − q/b. Kelly is expected utility with log utility (critics of the time-average framing make this point; the debate is unresolved, so treat the ergodicity frame as a modelling choice, not a refutation of EU). Betting above Kelly lowers long-run growth even when every bet has positive EV. Fractional Kelly (for example half-Kelly) is the usual correction for parameter uncertainty and risk tolerance.
 - **Ruin is a constraint, not a tradeoff.** Gate absorbing-floor states with a survival or drawdown constraint *before* the EU calculation.
 
 ## Elicitation Failure Modes
@@ -88,7 +88,7 @@ Most failures are in the inputs, not the arithmetic.
 
 Score an LLM forecaster like any panel member:
 
-- **Benchmark parity is not local calibration.** In its 2026-07-16 update, the Forecasting Research Institute reports that several models are statistically indistinguishable from human superforecasters on the ForecastBench tournament leaderboard. Its confidence intervals overlap substantially, so the result supports parity, not outperformance. Use machine forecasts as one panel member and score them on your own question class before trusting them on a high-stakes prior.
+- **Benchmark parity is not local calibration.** The Forecasting Research Institute reports that several models are statistically indistinguishable from human superforecasters on a public benchmark. The confidence intervals overlap substantially, so the result supports parity, not outperformance. Use machine forecasts as one panel member and score them on your own question class before trusting them on a high-stakes prior.
 - **Directional miscalibration** (for example overconfidence on events rated likely) is not reported by the FRI sources. Check for it on your own resolved outcomes.
 - **Verbalised confidence is not a probability.** Score against outcomes, not stated certainty.
 - **Aggregate.** Sample independently across prompts or models before pooling.
@@ -131,7 +131,7 @@ Calibrate the score and adjust it to the deployment prevalence. Derive p* = c_FP
 
 1. **Score each candidate question by EVSI** under its answer likelihoods. EVPI is only an upper bound. A question whose every answer leads to the same next step has zero value, however uncertain the agent is. EVPI-scored clarification cut question count by 1.5–2.7× with higher coverage of ambiguous tasks on ClarifyBench (Suri et al., arXiv:2511.08798; study-specific).
 2. **Separate specification uncertainty from model uncertainty.** Only the first can be resolved by asking. The second needs verification or retrieval.
-3. **Timing is part of value.** Recompute the remaining benefit of clarification as execution advances, including avoidable rework. Gulati et al. (arXiv:2605.07937, §4.1: more than 6,000 runs, 84 variants) find task-dependent decay under forced clarification injection. Their tested 10% and 50% injection points are not deadlines.
+3. **Timing is part of value.** Recompute the remaining benefit of clarification as execution advances, including avoidable rework. Gulati et al. (arXiv:2605.07937, §4.1: more than 6,000 runs, 84 variants) find task-dependent decay under forced clarification injection. Their tested 10% and 50% injection points are not deadlines. In that study, clarification asked mid-run or later did worse than not asking (single preprint, direction only), so ask early or commit; the safety carve-out in rule 4 still overrides.
 4. **Never suppress a question** whose answer changes safety, authorisation, or an irreversible action. Measure over-asking locally.
 
 Sun (arXiv:2604.00414, §2–3) supports separating decision context, policy, and execution. Its contribution is architectural; cite Heath & Baio (arXiv:1709.02319, §2) for the EVSI calculation rather than treating Sun as a tested VoI policy.

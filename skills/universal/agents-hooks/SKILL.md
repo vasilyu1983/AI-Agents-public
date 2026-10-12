@@ -94,7 +94,7 @@ Real situations mapped to the smallest event + recipe that solves them. Pick the
 3. Prefer deterministic command hooks for enforcement.
 4. Keep synchronous hooks fast; move heavy work into async or background paths.
 5. Validate event support and payload assumptions against current docs before final advice.
-6. Declare the timeout and error posture for the exact runtime, event, and handler type. In current Claude Code, an explicit `PreToolUse` deny or exit `2` blocks the tool call, while a timed-out `command`, `http`, or `mcp_tool` handler returns the call to normal permission evaluation; an Agent SDK callback timeout blocks it. A policy that must remain closed on handler failure needs a separate deny rule or enforcement in the execution substrate. Test timeout, malformed output, and duplicate delivery separately from the happy path.
+6. Declare the timeout and error posture for the exact runtime, event, and handler type. In current Claude Code, an explicit `PreToolUse` deny or exit `2` blocks the tool call, while a timed-out `command`, `http`, or `mcp_tool` handler returns the call to normal permission evaluation; an Agent SDK callback timeout blocks it. A policy that must stay closed on handler failure sets `"onFailure": "block"` on a `command` or `http` hook where the runtime supports it; otherwise add a separate deny rule or enforce in the execution substrate. Test timeout, malformed output, and duplicate delivery separately from the happy path.
 
 **Validate and install checklist**
 

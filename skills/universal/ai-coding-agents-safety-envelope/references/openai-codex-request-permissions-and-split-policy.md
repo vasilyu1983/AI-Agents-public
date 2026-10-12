@@ -1,5 +1,7 @@
 # OpenAI Codex Request Permissions And Split Policy
 
+> **Verify before use.** This reference is a Codex source snapshot from May 2026 and was not re-verified against current Codex docs on 2026-10-09. Check command names, flags, and protocol details in the current Codex docs (https://developers.openai.com/codex) before copying them.
+
 Source kind: the Codex repository's permissions protocol, shell tool spec, and core README (`codex-rs/protocol`, `codex-rs/core`), read at the release tag you target. Field names and metadata lists move between releases; look them up before copying.
 
 ## Table Of Contents

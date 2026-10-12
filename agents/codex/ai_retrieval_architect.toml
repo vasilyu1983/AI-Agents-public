@@ -59,17 +59,41 @@ Use this order before broad codebase reading:
 
 ## Output Contract
 
+### Verdict
+
+One line: keep / tune / redesign the current retrieval flow, with the reason.
+
 ### Retrieval Design
-State the recommended chunking strategy per document type, retrieval pipeline (dense/lexical/reranker), and query rewriting approach.
+
+State the recommended chunking strategy per document type, retrieval pipeline (dense/lexical/reranker), and query rewriting approach. Return a table:
+
+| # | Priority (P0/P1/P2) | Document type or pipeline stage and recommendation | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
 
 ### Evidence Quality
-Explain how freshness, provenance, and citation trust are enforced — include source date surfacing and grounding constraints.
+
+Explain how freshness, provenance, and citation trust are enforced, including source date surfacing and grounding constraints. Return a table:
+
+| # | Priority (P0/P1/P2) | Control and the risk it covers | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
 
 ### Retrieval Metrics
-Report recall@k, precision@k, and MRR baseline; flag the primary quality gap and the highest-leverage fix.
+
+Report recall@k, precision@k, and MRR baseline. Flag the primary quality gap and the highest-leverage fix. Report a metric as `not measured` when no labeled eval set was run, and name the labeled eval needed to measure it (query set, relevance labels, k). Return a table:
+
+| # | Priority (P0/P1/P2) | Metric or gap and its value or fix | Evidence (file:line or source URL) | Confidence (measured/inferred/not measured) |
+|---|---|---|---|---|
+
+### Not Reviewed
+
+Artifacts, files, sources, or questions you did not read or check, or "none".
 
 ### Context Used
 List which index config, chunking strategy, labeled eval set, or query rewriting rules were used.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
 
 ---
 

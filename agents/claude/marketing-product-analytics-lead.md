@@ -1,7 +1,7 @@
 ---
 name: marketing-product-analytics-lead
 family: marketing
-description: "Analyze product funnels, event quality, and measurement gaps. Use for activation, retention, and experiment decisions that depend on trustworthy analytics. Produces a measurement-quality diagnosis and instrumentation plan; does not modify tracking code or alter production dashboards."
+description: "Analyze product funnels, event quality, and measurement gaps. Use for activation, retention, and experiment decisions. Produces a measurement-quality diagnosis and instrumentation plan; does not modify tracking code or dashboards. Not for event audits (use data-instrumentation-analyst)."
 tools:
   - Read
   - Grep
@@ -90,3 +90,7 @@ Use this order before broad discovery:
 - Attribution model recommendation per decision type
 
 ### Context Used
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

@@ -1,5 +1,6 @@
 {
   "version": 1,
+  "max_agents": 50,
   "workflow": {
     "engine": "staged",
     "codex": "parent-led",
@@ -13,7 +14,8 @@
       { "title": "Recheck", "detail": "A read-only test reviewer runs the tests again; all must pass" },
       { "title": "Review", "detail": "Fresh reviewers per dimension, every round" },
       { "title": "Verify", "detail": "Two refuters per finding; both must refute to kill it" },
-      { "title": "Fix", "detail": "The implementer fixes only the confirmed findings, inside the plan's files" }
+      { "title": "Fix", "detail": "The implementer fixes only the confirmed findings, inside the plan's files; the tests stay frozen" },
+      { "title": "Final check", "detail": "A read-only test reviewer runs the tests after the review loop; all must pass" }
     ]
   },
   "bindings": {
@@ -61,11 +63,12 @@
         "required": ["summary", "files", "test_files", "acceptance"],
         "properties": {
           "summary": { "type": "string", "minLength": 1 },
-          "files": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "Every non-test file the implementation may change, as a path relative to the repository root, never absolute" },
+          "files": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "Every non-test file the implementation may change, as a path relative to the repository root, never absolute. When a listed file is the source of generated or derived files (a generator, template, shared runtime, or anything a build or regenerate step rewrites), also list those generated files" },
           "test_files": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "Every test file the test-first stage may add or edit, as a path relative to the repository root, never absolute" },
           "acceptance": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "Checks that can fail" },
           "failure_reason": { "type": "string", "description": "fix: the reported failure the new test must reproduce" },
           "old_assertions": { "type": "array", "items": { "type": "string" }, "description": "change: every assertion of the old behaviour" },
+          "test_command": { "type": "string", "description": "Required when test_files is not empty (the plan gate stops with invalid_plan without it). One line: the command that runs the new tests and the existing suite from the repository root. Exit 0 means every test passes. The runtime runs it itself and the exit code gates the red and green checks" },
           "steps": { "type": "array", "items": { "type": "string" } }
         }
       },
@@ -98,7 +101,7 @@
                 "file": { "type": "string" },
                 "result": { "type": "string", "enum": ["fail", "pass", "error"] },
                 "for_stated_reason": { "type": "boolean", "description": "A failing or erroring test fails because the planned behaviour is missing; a passing test is a guard the plan asks for" },
-                "evidence": { "type": "string", "description": "The assertion message or output line" }
+                "evidence": { "type": "string", "minLength": 1, "description": "The assertion message or output line" }
               }
             }
           },
@@ -122,7 +125,7 @@
           {
             "id": "dev-feature-implementer",
             "schema": "plan",
-            "task": "Write the plan. List in files every non-test file the implementation may change, and in test_files every test file the test-first stage may add or edit. State the acceptance criteria as checks that can fail. For fix, state failure_reason: the reported failure the new test must reproduce. For change, list in old_assertions every assertion of the old behaviour. For refactor, list characterization tests in test_files where coverage is thin."
+            "task": "Write the plan. List in files every non-test file the implementation may change, and in test_files every test file the test-first stage may add or edit. State the acceptance criteria as checks that can fail. For fix, state failure_reason: the reported failure the new test must reproduce. For change, list in old_assertions every assertion of the old behaviour. For refactor, list characterization tests in test_files where coverage is thin. Set test_command to the one-line command that runs those tests and the existing suite (exit 0 means pass), so the runtime can run it."
           }
         ],
         "gate": {
@@ -130,6 +133,7 @@
           "arg": "plan",
           "from": "dev-feature-implementer",
           "paths": ["files", "test_files"],
+          "require_command": { "when": "test_files", "field": "test_command" },
           "verdict": "PLAN_READY",
           "action": "Review the plan. To build it, run /feature-delivery again with the same mode and task and with args.plan set to the approved plan."
         }
@@ -175,7 +179,7 @@
             }
           }
         ],
-        "gate": { "kind": "tests", "expect": { "add": "red", "change": "red", "fix": "red", "refactor": "green" } }
+        "gate": { "kind": "tests", "expect": { "add": "red", "change": "red", "fix": "red", "refactor": "green" }, "command": "plan.test_command" }
       },
       {
         "id": "implement",
@@ -208,19 +212,35 @@
             "task": "Run the tests from the test-first stage and the full suite after the implementation. Report each of those tests as pass, fail or error, and whether every other test passes."
           }
         ],
-        "gate": { "kind": "tests", "expect": "green" }
+        "gate": { "kind": "tests", "expect": "green", "command": "plan.test_command" }
       },
       {
         "id": "review",
         "binding": "dev-feature-delivery",
         "inputs": ["plan"],
-        "scope": ["plan.files", "plan.test_files"],
+        "scope": ["plan.files"],
         "loop": {
           "extends": "review-fix-loop",
           "mode": "review",
           "max": 3,
           "agents": { "review": "dev-feature-reviewer", "refute": "dev-feature-reviewer", "fix": "dev-feature-implementer" }
         }
+      },
+      {
+        "id": "final-check",
+        "title": "Final check",
+        "binding": "dev-feature-delivery",
+        "parallel": false,
+        "writes": false,
+        "inputs": ["plan", "test-first"],
+        "schema": "test_report",
+        "members": [
+          {
+            "id": "qa-test-reviewer",
+            "task": "Run the tests from the test-first stage and the full suite after the review loop. Report each of those tests as pass, fail or error, and whether every other test passes."
+          }
+        ],
+        "gate": { "kind": "tests", "expect": "green", "command": "plan.test_command" }
       }
     ]
   }

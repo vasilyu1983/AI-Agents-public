@@ -1,8 +1,8 @@
 ---
 name: software-security-appsec
-description: "Provides application security guidance for design and implementation. Use when reviewing auth, data handling, supply-chain controls, or AppSec architecture."
+description: "Reviews application security and guides AppSec design. Use when reviewing auth, authentication, authorization, sessions, data handling, supply chain, or AppSec architecture."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.2"
+version: "1.3"
 last_validated: 2026-07-11
 ---
 
@@ -58,6 +58,7 @@ If a credential was exposed to unauthorized readers, revoke and rotate it at the
 - Security test tooling and coverage (SAST/DAST, LLM/agentic test suites): use [qa-security-testing](../qa-security-testing/SKILL.md).
 - ML pipeline or model-ops governance: use [ai-mlops](../ai-mlops/SKILL.md).
 - Compliance-only interpretation with no implementation choice: route to legal or compliance stakeholders.
+- Reverse engineering of shipped binaries, APK/IPA, Electron/ASAR, firmware, or decompilation: this library does not own it. Use the upstream REA skill and MCP server from [morluto/rea](https://github.com/morluto/rea) (MIT) rather than a copy here, because it is tied to REA's tool names and versions. It executes analysis on local binaries, so review it as a third-party skill ([agents-skills](../agents-skills/SKILL.md), "Review a third-party skill before installing") and pin a version before installing.
 
 ## Defaults
 

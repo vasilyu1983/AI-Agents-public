@@ -57,7 +57,7 @@ Incoming LLM request
 │
 ├── Do you need guaranteed quality?
 │   ├── YES → Always use best model (no routing)
-│   └── NO → Routing can save 40-70% cost
+│   └── NO → Routing may save cost: measure against an always-strong baseline first
 │
 └── Are you A/B testing models?
     ├── YES → Percentage-based routing with eval

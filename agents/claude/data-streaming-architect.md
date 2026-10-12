@@ -85,3 +85,7 @@ State the safest sequence for introducing the new flow, including schema registr
 ### Context Used
 
 List which topic registry, schema registry config, lag metrics, or CDC connector docs were used and where manual tracing was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

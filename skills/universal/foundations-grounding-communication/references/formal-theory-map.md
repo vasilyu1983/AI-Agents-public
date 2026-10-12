@@ -55,13 +55,13 @@ Use grounding theory to improve communication protocol design. Do not treat it a
 
 ## Application Layer Status
 
-The stable layer is classical and low-drift. The application layer is high-drift: MAST v3 (last revised Oct 2025; accepted NeurIPS 2025 Datasets & Benchmarks Track) reports 1,600+ traces, 14 failure modes, and three broad categories: system design issues, inter-agent misalignment, and task verification.
+The stable layer is classical and low-drift. The application layer is high-drift: MAST (arXiv:2503.13657, 2025; v3 revised Oct 2025) reports 1,600+ traces, 14 failure modes, and three broad categories: system design issues, inter-agent misalignment, and task verification.
 
-The 2026 layer resolves what was previously directional signal here — that message protocol and coordination structure should be explicit design surfaces rather than improvised natural-language side effects — into citable work:
+The 2026 layer supports a directional signal — that message protocol and coordination structure should be explicit design surfaces rather than improvised natural-language side effects — with citable work:
 
-- **Protocol semantics** (`SemanticProtocols2026`, arXiv 2604.02369): 18 protocols surveyed against a communication / syntactic / semantic taxonomy. Most protocols provide limited protocol-level clarification, context alignment, and verification; semantic responsibilities land in prompts and orchestration logic. Confirms the grounding layer is application-owned today.
+- **Protocol semantics** (`SemanticProtocols2026`, arXiv 2604.02369): agent protocols surveyed against a communication / syntactic / semantic taxonomy. Most protocols provide limited protocol-level clarification, context alignment, and verification; semantic responsibilities land in prompts and orchestration logic. Confirms the grounding layer is application-owned today.
 - **Dynamic grounding** (`DynamicGrounding2026`, arXiv 2605.01750): separates static (one-shot interpretation) from dynamic (multi-turn joint plan formation, commitment, execution) grounding, and shows the dyadic coordination gap is not explained by individual reasoning limits or information exchange volume.
-- **Human-AI common ground** (`CommonGroundBench2026`, arXiv 2602.21337): a controlled Helper/Worker benchmark measuring grounding at task, object, and communication levels; finds model-specific efficiency and repair limitations in a GPT-4.1 puzzle study; its discussion cautions against generalizing across models.
+- **Human-AI common ground** (`CommonGroundBench2026`, arXiv 2602.21337): a controlled Helper/Worker benchmark measuring grounding at task, object, and communication levels; reports differences between human-AI and human-human collaboration; treat its findings as study-specific.
 - **Conversational competence** (`NCBench2026`, arXiv 2601.06426): repair is the weakest measured competence class relative to plain answering.
 
 All four were arXiv preprints when added; check for a published version before citing. Treat the reported directions as study-specific evidence and test transfer to your deployment.

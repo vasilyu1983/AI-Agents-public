@@ -1,5 +1,7 @@
 # OpenAI Codex TUI Status And Snapshot Patterns
 
+> **Verify before use.** This reference is a Codex source snapshot from May 2026 and was not re-verified against current Codex docs on 2026-10-09. Check command names, flags, and protocol details in the current Codex docs (https://developers.openai.com/codex) before copying them.
+
 Source snapshot: OpenAI Codex commit `9f42c89c0112771dc29100a6f3fc904049b2655f` (2026-05-24), especially `codex-rs/tui/src/chatwidget`, `codex-rs/tui/src/chatwidget/snapshots`, and `codex-rs/cli/src/doctor/output`.
 
 Web sources checked 2026-05-25:

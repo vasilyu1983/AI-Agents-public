@@ -5,7 +5,7 @@
     "last_updated": "2026-09-27",
     "skill": "foundations-safety-engineering",
     "cutoff": "2026-09-27",
-    "total_sources": 15
+    "total_sources": 18
   },
   "primary_sources": [
     {
@@ -143,6 +143,36 @@
       "url": "https://www.shopulstandards.com/ProductDetail.aspx?productId=UL4600_3_S_20230317",
       "scope": "Safety-case-based standard for evaluating autonomous products. Look up the current edition before citing.",
       "verified_via": "UL Standards shop page (2026-09-23 P2 check): Edition 3 published 2023-03-17; revision proposals open (latest 2026-08-07); no Edition 4 seen."
+    },
+    {
+      "id": "Larouzee2020",
+      "name": "Good and bad reasons: The Swiss cheese model and its critics",
+      "author": "Larouzee, J. & Le Coze, J.-C.",
+      "year": 2020,
+      "url": "https://www.crc.mines-paristech.fr/?p=3067",
+      "scope": "Critique and defence of the Swiss cheese model (Safety Science 126); layers are not independent and the model is not a probability model.",
+      "verified_via": "Abstract read via the Mines Paris CRC page; PLAUSIBLE, full text not read",
+      "accessed": "2026-10-11"
+    },
+    {
+      "id": "Hilton2025SafetyCases",
+      "name": "Safety Cases: A Scalable Approach to Frontier AI Safety",
+      "author": "Hilton, Buhl, Korbak, Irving",
+      "year": 2025,
+      "url": "https://arxiv.org/abs/2503.04744",
+      "scope": "UK AISI safety-case framework and open problems (structuring top claims, confidence in arguments).",
+      "verified_via": "Search listing only; PLAUSIBLE, abstract not read in full",
+      "accessed": "2026-10-11"
+    },
+    {
+      "id": "Buhl2024DynamicSafetyCases",
+      "name": "Dynamic safety cases for frontier AI",
+      "author": "Buhl et al.",
+      "year": 2024,
+      "url": "https://arxiv.org/abs/2412.17618",
+      "scope": "Safety cases updated as evidence changes; supports review triggers.",
+      "verified_via": "Search listing only; PLAUSIBLE, abstract not read in full",
+      "accessed": "2026-10-11"
     }
   ]
 }

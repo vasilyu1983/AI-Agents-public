@@ -62,13 +62,12 @@ deliverable:
   max_length: 2 pages / ~800 words per member; synthesis <= 1 page
 debate:
   enabled: true
-  method: dialectical-inquiry
+  method: six-thinking-hats
   mandatory_dissent: true
+  trigger_arbiter: parent-thread
   decision_masks:
   - inversion
   - regret-minimization
-  - anchoring-mask
-  - base-rate-mask
   triggers:
   - Memory pattern choice (P2 vs P4 vs P6 vs P7) when multiple patterns fit
   - Framework selection (LangGraph vs Claude SDK vs plain Python) for borderline cases
@@ -113,4 +112,11 @@ hold_policy:
   escalate_on_deadline: forced_decision
 trust:
   default_tier: standard
+budget:
+  max_rounds: 4
+  max_turns_per_member: 15
+  token_envelope: 300000
+verification:
+  mode: heterogeneous
+  rule: ai-bot-builder-lead produces the implementation; ai-agent-architect and ai-retrieval-architect, with clean context, check it against the stage-1 and stage-2 outputs before release; the producer's own check does not count
 design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#ai-knowledge-bot-builder

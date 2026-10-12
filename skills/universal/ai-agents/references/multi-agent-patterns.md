@@ -56,6 +56,16 @@
 - [End of File](#end-of-file)
 
 
+### Choosing a topology from evidence
+
+Preprint evidence as of 2026-10-08; validate on your own tasks. The equal-budget rule is in [SKILL.md](../SKILL.md); the baseline is the control for every row.
+
+- Sequential, shared-state work (one writer, each step depends on the last): one agent.
+- Parallel read-heavy or role-diverse work: a team.
+- Vote before debate. arXiv 2508.17536 (NeurIPS 2025): "Majority Voting alone accounts for most of the performance gains typically attributed to MAD."
+- Run an equal-budget single-agent baseline first. arXiv 2604.02460: single-agent systems "consistently match or outperform MAS on multi-hop reasoning tasks when reasoning tokens are held constant."
+- Gap: no 2026 paper found isolates the single-vs-team crossover on coding tasks. Treat the first two rules as a prior, not a result.
+
 ## Handoff-First Orchestration (Critical Pattern)
 
 ### Core Principle
@@ -99,6 +109,8 @@ handoff_payload:
     required_fields: ["task.instruction", "trace_id"]
     checksum: "sha256-hash"
 ```
+
+Copy constraints and boundary rules into the handoff verbatim. A short summary keeps facts but drops rules (arXiv 2608.29028: 25-word summaries keep facts but drop boundary rules; vague wording leaks in 73% of cases for GPT and 50% for DeepSeek).
 
 ### Handoff Validation Checklist
 

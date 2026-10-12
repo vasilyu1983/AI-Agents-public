@@ -9,4 +9,6 @@ Use these to borrow vocabulary and structure. Naming a standard does not show co
 | UL 4600 | Safety of autonomous products | A safety-case-based standard for autonomous products. Pair with the [safety cases reference](safety-cases.md). | UL Standards shop page for UL 4600: current edition and any open revision proposals. |
 | ISO 26262 / IEC 61508 | Functional safety of E/E systems | Hazards caused by faults and malfunctions. SOTIF and PAS 8800 cover what these standards leave out. | ISO and IEC catalogue pages. Not checked for this file. |
 
+Management-system and regulatory anchors: check the current AI management-system standard and the applicable AI regulation for the deployment region, and treat them as pointers with the same no-conformance-claim rule. Do not cite clause numbers from memory.
+
 Decision rule: when a standard applies by regulation or contract, route the conformance work to its owner and keep this skill to the analysis. When no standard applies, use the SOTIF idea of "insufficiency with no fault" and the UL 4600 idea of a safety case as structure, and say that you are borrowing them.

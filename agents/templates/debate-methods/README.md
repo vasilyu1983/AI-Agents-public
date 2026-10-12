@@ -22,7 +22,7 @@
 ## How to compose
 
 - **Default for binary decisions**: dialectical-inquiry or steel-manning
-- **High-stakes irreversible**: pre-mortem + devils-advocate
+- **High-stakes irreversible**: pre-mortem, or devils-advocate (one method per debate; run the second as a separate, later debate if needed)
 - **Strategic uncertainty**: scenario-2x2
 - **Recurring tension**: polarity-management
 - **Audit trail required**: courtroom (and consider [`08-courtroom-proclaim.md`](../../../skills/universal/foundations-team-theory/assets/templates/team-theory/08-courtroom-proclaim.md) for the rigorous variant)

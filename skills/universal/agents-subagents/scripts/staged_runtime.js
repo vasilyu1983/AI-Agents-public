@@ -38,6 +38,8 @@ const TITLE = {};
 const history = [];
 const changed = new Set();
 const observed = new Set();
+// Refuter votes summed over every review loop this run started; all zeros when no loop ran. Telemetry only.
+const AGREE = { both_refuted: 0, first_only: 0, second_only: 0, neither: 0 };
 let TREE = null;
 const report = (files) => {
   for (const file of Array.isArray(files) ? files : []) if (typeof file === 'string') changed.add(normalPath(file));
@@ -45,10 +47,11 @@ const report = (files) => {
 
 // Every stop short of the pass verdict carries an escalation for a human.
 function stop(verdict, stageId, stopReason, open, action, extra) {
+  [verdict, stopReason] = stopOverride(verdict, stopReason);
   log('Verdict: ' + verdict + ' at stage ' + stageId + '; stop reason: ' + stopReason);
   const result = {
     verdict, stage: stageId, history, stop_reason: stopReason,
-    changed_files_reported: [...changed], changed_files_observed: [...observed].sort(), outputs: OUTPUT, ...extra,
+    changed_files_reported: [...changed], changed_files_observed: [...observed].sort(), outputs: OUTPUT, refuter_agreement: { ...AGREE }, ...extra,
   };
   if (open) result.escalation = { reason: stopReason, stage: stageId, open, action: action || STAGED.escalation_action };
   return result;
@@ -58,7 +61,9 @@ function scopeFiles(stage) {
   const files = [];
   for (const ref of stage.scope || []) {
     const [stageId, field] = ref.split('.');
-    const value = OUTPUT[stageId] ? OUTPUT[stageId][field] : null;
+    // args.<key> takes the scope from the user's request, so no agent output can widen it.
+    let value = stageId === 'args' ? (REQUEST ? REQUEST[field] : null) : OUTPUT[stageId] ? OUTPUT[stageId][field] : null;
+    if (typeof value === 'string') value = [value];
     if (Array.isArray(value)) files.push(...value.filter((f) => typeof f === 'string').map(normalPath));
   }
   return [...new Set(files)];
@@ -77,7 +82,7 @@ function memberPrompt(stage, member, earlier) {
     'You are ' + member.id + ', working in the "' + stage.title + '" stage.',
     '',
     'Rules:',
-    ...STAGED.rules.concat(stage.writes ? STAGED.write_rule : STAGED.read_only_rule).map((rule) => '- ' + rule),
+    ...STAGED.rules.concat(stage.writes ? [STAGED.write_rule, CHECK_DEFECT_RULE] : STAGED.read_only_rule).map((rule) => '- ' + rule),
     '',
     'Your task: ' + task,
     ...(MODE ? ['Change class: ' + MODE + '.'] : []),
@@ -87,15 +92,24 @@ function memberPrompt(stage, member, earlier) {
   ].join('\n');
 }
 
+// A read-only member that fails or returns nothing is asked once more under label + ':retry' (a stable label, so
+// host replay stays stable). A writing stage is never retried: a second run could repeat its edits.
+async function askMember(stage, prompt, options) {
+  const first = await ask(prompt, options);
+  if (first || stage.writes) return first;
+  log('Read-only agent ' + options.label + ' returned no result; retrying it once');
+  return ask(prompt, { ...options, label: options.label + ':retry' });
+}
+
 async function runMembers(stage) {
   const results = {};
   const one = (member, earlier) =>
-    ask(memberPrompt(stage, member, earlier), {
+    askMember(stage, memberPrompt(stage, member, earlier), {
       label: stage.id + ':' + member.id,
       phase: stage.title,
       agentType: member.agentType,
       tools: member.tools,
-      schema: member.schema || stage.schema,
+      schema: stage.writes ? withCheckDefect(member.schema || stage.schema) : member.schema || stage.schema,
     });
   if (stage.parallel) {
     const outs = await parallel(stage.members.map((member) => () => one(member, [])));
@@ -124,21 +138,27 @@ function sliceProblems(slices) {
 }
 
 // Every planned path an approval gate names (gate.paths, e.g. "files" or "*.files") must be a plain repo path.
+// A path may sit under only one of those fields: a test file that is also a code file would leave the frozen
+// tests inside the implementer's scope.
 function planPathProblems(gate, artifact) {
   const problems = [];
-  const walk = (value, parts, where) => {
+  const owner = new Map();
+  const walk = (value, parts, where, ref) => {
     if (!parts.length) {
       for (const file of Array.isArray(value) ? value : [value]) {
         const why = pathProblem(file);
         if (why) problems.push(where + ': ' + JSON.stringify(file) + ' ' + why);
+        else if (owner.has(normalPath(file)) && owner.get(normalPath(file)) !== ref) {
+          problems.push(where + ': ' + JSON.stringify(file) + ' is also listed under ' + owner.get(normalPath(file)));
+        } else owner.set(normalPath(file), ref);
       }
       return;
     }
     const [head, ...rest] = parts;
-    if (head === '*') (Array.isArray(value) ? value : []).forEach((item, i) => walk(item, rest, where + '[' + i + ']'));
-    else if (value && typeof value === 'object' && value[head] !== undefined) walk(value[head], rest, where + '.' + head);
+    if (head === '*') (Array.isArray(value) ? value : []).forEach((item, i) => walk(item, rest, where + '[' + i + ']', ref));
+    else if (value && typeof value === 'object' && value[head] !== undefined) walk(value[head], rest, where + '.' + head, ref);
   };
-  for (const ref of gate.paths || []) walk(artifact, ref.split('.'), gate.arg);
+  for (const ref of gate.paths || []) walk(artifact, ref.split('.'), gate.arg, ref);
   return problems;
 }
 
@@ -167,7 +187,23 @@ function approvedArg(stage) {
   return gate.field ? { [gate.field]: value } : value;
 }
 
+// 1.7: a plan with test files must pin the command that runs them; without it the red and green gates would rest on
+// the agent's report alone. Applies to the planner output and to args.<gate.arg>, and only when a later tests gate of
+// this run pins that command (an integration run with no tests gate has nothing to pin).
+function commandProblems(gate, artifact) {
+  const rule = gate.require_command;
+  if (!rule || !artifact || typeof artifact !== 'object') return [];
+  if (!STAGED.stages.some((s) => s.gate && s.gate.kind === 'tests' && s.gate.command === gate.arg + '.' + rule.field)) return [];
+  const listed = Array.isArray(artifact[rule.when]) && artifact[rule.when].length > 0;
+  return listed && !text(artifact[rule.field]) ? [gate.arg + '.' + rule.field + ' is required when ' + gate.arg + '.' + rule.when + ' is not empty'] : [];
+}
+
 function pathStop(stage, artifact) {
+  const bad = commandProblems(stage.gate, artifact);
+  if (bad.length) {
+    history.push({ stage: stage.id, verdict: 'INCOMPLETE', stop_reason: 'invalid_' + stage.gate.arg });
+    return stop('INCOMPLETE', stage.id, 'invalid_' + stage.gate.arg, { problems: bad });
+  }
   const problems = planPathProblems(stage.gate, artifact);
   if (!problems.length) return null;
   history.push({ stage: stage.id, verdict: 'BLOCKED', stop_reason: 'invalid_plan_path' });
@@ -182,6 +218,8 @@ function checkGate(stage, results) {
     const artifact = gate.field ? results[gate.from][gate.field] : results[gate.from];
     const problems = gate.validate === 'slices' ? sliceProblems(artifact) : [];
     if (problems.length) return { verdict: 'INCOMPLETE', stop_reason: 'invalid_' + gate.arg, open: { problems } };
+    const noCommand = commandProblems(gate, artifact);
+    if (noCommand.length) return { verdict: 'INCOMPLETE', stop_reason: 'invalid_' + gate.arg, open: { problems: noCommand } };
     const bad = planPathProblems(gate, artifact);
     if (bad.length) return { verdict: 'BLOCKED', stop_reason: 'invalid_plan_path', open: { problems: bad } };
     return { verdict: gate.verdict, stop_reason: 'awaiting_approval', open: { approve: 'args.' + gate.arg }, action: gate.action, extra: { [gate.arg]: artifact } };
@@ -207,16 +245,57 @@ function checkGate(stage, results) {
     const raised = stage.members
       .filter((member) => results[member.id][gate.field] === true)
       .map((member) => ({ member: member.id, reason: results[member.id][gate.reason_field] || '' }));
+    // Positioning may not claim more than research found: a lock line with no evidence, or research with none at all,
+    // raises the same flag as evidence_gap.
+    const sourced = (item) => (item.evidence || []).some((e) => typeof e === 'string' && e.trim());
+    if (gate.evidence_items) for (const member of stage.members) {
+      const bare = (results[member.id][gate.evidence_items] || []).filter((item) => !sourced(item)).map((item) => item.id);
+      if (bare.length) raised.push({ member: member.id, reason: 'no evidence for ' + bare.join(', ') });
+    }
+    if (gate.evidence_stage) {
+      const earlier = OUTPUT[gate.evidence_stage];
+      const found = (earlier.evidence ? [earlier] : Object.values(earlier)).some((out) => (out.evidence || []).length);
+      if (!found) raised.push({ member: gate.evidence_stage, reason: 'the ' + gate.evidence_stage + ' stage found no evidence' });
+    }
     if (raised.length) return { verdict: gate.verdict, stop_reason: gate.stop_reason, open: { raised } };
   }
   if (gate.kind === 'lock_findings') {
-    // A draft that contradicts the lock blocks the pass verdict; it is never averaged against other findings.
-    const contradictions = stage.members.flatMap((member) =>
-      results[member.id].findings.filter((f) => f.contradicts_lock === true).map((f) => ({ reviewer: member.id, ...f }))
+    // A draft that contradicts the lock, or any high-severity finding, blocks the pass verdict; neither is averaged
+    // against other findings.
+    const flagged = (test) => stage.members.flatMap((member) =>
+      results[member.id].findings.filter(test).map((f) => ({ reviewer: member.id, ...f }))
     );
+    const contradictions = flagged((f) => f.contradicts_lock === true);
     if (contradictions.length) return { verdict: gate.verdict, stop_reason: 'lock_contradiction', open: { contradictions } };
+    const high = flagged((f) => f.severity === 'high');
+    if (high.length) return { verdict: gate.verdict, stop_reason: 'high_finding', open: { high } };
   }
   return null;
+}
+
+// G2: the agent report is an explanation; the exit code decides. When the gate names a pinned command
+// (gate.command, e.g. "plan.test_command") and the approved plan sets it, the runtime runs it through a Bash-only
+// agent after the report gate passes: red needs a nonzero exit, green a zero exit. Unpinned: the gate rests on the
+// report alone, and the history entry says so. Returns null or a stop for checkGate()'s caller.
+function pinnedCommand(stage) {
+  if (!stage.gate.command) return null;
+  const [stageId, field] = stage.gate.command.split('.');
+  return text(OUTPUT[stageId] && OUTPUT[stageId][field]) || null;
+}
+
+async function runtimeTests(stage, command) {
+  const expect = typeof stage.gate.expect === 'string' ? stage.gate.expect : stage.gate.expect[MODE];
+  const res = await runCommand(command, 'command:' + stage.id, stage.title);
+  const after = await takeSnapshot('snapshot:' + stage.id + ':command', stage.title);
+  const usable = !snapshotStop(after, stage.id);
+  for (const file of usable && after.head === TREE.head ? snapshotDelta(TREE, after) : []) observed.add(file);
+  const tree = treeStop(TREE, after, { name: stage.id, writes: false });
+  if (usable) TREE = after;
+  if (tree) return tree;
+  const broken = commandStop(res, stage.id);
+  if (broken) return broken;
+  if ((expect === 'red') === (res.exit !== 0)) return null;
+  return { verdict: STAGED.block_verdict, stop_reason: 'tests_not_' + expect, open: { expected: expect, source: 'runtime', command, exit_code: res.exit, tail: res.tail } };
 }
 
 // The engine gets the stage inputs as data lines after its rules (never inside them), the allowed files,
@@ -239,12 +318,14 @@ function engineManifest(stage, scope) {
 }
 
 function engineAgent(stage, prefix) {
-  return (prompt, options) => {
-    // A snapshot agent has no team role: it keeps the Bash-only tools the snapshot code gave it.
-    if (options.label.startsWith('snapshot:')) return ask(prompt, { ...options, label: prefix + options.label });
+  return Object.assign((prompt, options) => {
+    // A snapshot or pinned-command agent has no team role: it keeps the Bash-only tools the runtime code gave it.
+    if (options.label.startsWith('snapshot:') || options.label.startsWith('command:')) return ask(prompt, { ...options, label: prefix + options.label });
     const role = stage.loop.agents[options.label.split(':')[0]];
-    return ask(prompt, { ...options, label: prefix + options.label, agentType: role.agentType, tools: role.tools });
-  };
+    // A loop role is a named agent: its frontmatter sets model and effort, so the engine's per-role effort is dropped.
+    const { effort, ...rest } = options;
+    return ask(prompt, { ...rest, label: prefix + options.label, agentType: role.agentType, tools: role.tools });
+  }, { guard: guarded.guard });
 }
 
 async function runLoopStage(stage) {
@@ -253,6 +334,8 @@ async function runLoopStage(stage) {
   const built = [];
   for (const unit of units) {
     const engineArgs = { mode: loop.mode, maxRounds: ARGS.maxRounds };
+    // A pinned test command applies to every slice; the review engine validates it and runs it each round.
+    if (ARGS.testCommand !== undefined) engineArgs.testCommand = ARGS.testCommand;
     if (unit) {
       engineArgs.spec = [
         'Build only the slice below; the slices already built stay as they are.',
@@ -265,6 +348,7 @@ async function runLoopStage(stage) {
     const allowed = unit && loop.for_each.scope ? unit[loop.for_each.scope].map(normalPath) : stage.scope ? scopeFiles(stage) : null;
     const r = await reviewEngine(engineArgs, engineAgent(stage, prefix), engineManifest(stage, allowed));
     if (r.snapshot) TREE = r.snapshot;
+    for (const key of Object.keys(AGREE)) AGREE[key] += Number((r.refuter_agreement || {})[key]) || 0;
     for (const file of r.observed_changes || []) observed.add(file);
     history.push({ stage: stage.id, ...(unit ? { slice: unit.id } : {}), verdict: r.verdict, rounds: r.rounds, stop_reason: r.stop_reason });
     for (const round of r.history) {
@@ -309,6 +393,7 @@ for (const stage of STAGED.stages) {
   if (!TREE) TREE = await takeSnapshot('snapshot:start', stage.title);
   const broken = snapshotStop(TREE, 'start');
   if (broken) return stop(broken.verdict, stage.id, broken.stop_reason, broken.open);
+  if (stage.writes && !reserveVerification(stage.members.length)) return stop('INCOMPLETE', stage.id, guarded.guard.stopped, { step: stage.id });
   const results = await runMembers(stage);
   // What the tree shows decides; the members' own reports are checked against it.
   const after = await takeSnapshot('snapshot:' + stage.id, stage.title);
@@ -320,6 +405,11 @@ for (const stage of STAGED.stages) {
   if (tree) {
     history.push({ stage: stage.id, verdict: tree.verdict, stop_reason: tree.stop_reason });
     return stop(tree.verdict, stage.id, tree.stop_reason, tree.open);
+  }
+  const defects = stage.writes ? stage.members.map((member) => ({ member: member.id, check_defect: checkDefectOf(results[member.id]) })).filter((d) => d.check_defect) : [];
+  if (defects.length) {
+    history.push({ stage: stage.id, verdict: 'BLOCKED', stop_reason: 'check_defect' });
+    return stop('BLOCKED', stage.id, 'check_defect', { defects });
   }
   const missing = stage.members
     .map((member) => ({ member: member.id, problem: problemOf(stage, member, results[member.id]) }))
@@ -339,8 +429,13 @@ for (const stage of STAGED.stages) {
       return stop(mismatch.verdict, stage.id, mismatch.stop_reason, mismatch.open);
     }
   }
-  const failed = checkGate(stage, results);
-  history.push({ stage: stage.id, verdict: failed ? failed.verdict : 'PASS', ...(failed ? { stop_reason: failed.stop_reason } : {}) });
+  let failed = checkGate(stage, results);
+  const command = gate.kind === 'tests' ? pinnedCommand(stage) : null;
+  if (!failed && command) failed = await runtimeTests(stage, command);
+  history.push({
+    stage: stage.id, verdict: failed ? failed.verdict : 'PASS', ...(failed ? { stop_reason: failed.stop_reason } : {}),
+    ...(gate.kind === 'tests' ? { tests: command ? 'runtime_exit_code' : 'agent_report_only' } : {}),
+  });
   if (failed) return stop(failed.verdict, stage.id, failed.stop_reason, failed.open, failed.action, failed.extra);
 }
 return stop(STAGED.pass_verdict, lastStage, 'complete', null);

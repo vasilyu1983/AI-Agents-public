@@ -30,7 +30,7 @@ This shell version uses background processes. In a real Claude Code session you 
 ## File Layout
 
 ```
-/tmp/wave-demo/
+$DEMO_DIR/            # set in Step 1; a fresh mktemp -d directory by default
   orchestrator.sh      # dispatches workers, waits, runs synthesizer
   worker.sh            # generic worker — takes a task ID and a payload
   synthesizer.sh       # merges worker outputs into one result
@@ -46,11 +46,13 @@ This shell version uses background processes. In a real Claude Code session you 
 ## Step 1 — Create the task inputs
 
 ```bash
-mkdir -p /tmp/wave-demo/tasks
+DEMO_DIR="${DEMO_DIR:-$(mktemp -d)}"
+export DEMO_DIR
+mkdir -p "$DEMO_DIR/tasks"
 
-printf 'Summarise: apples are a fruit\n'  > /tmp/wave-demo/tasks/task-1.txt
-printf 'Summarise: bananas are yellow\n'  > /tmp/wave-demo/tasks/task-2.txt
-printf 'Summarise: cherries are red\n'    > /tmp/wave-demo/tasks/task-3.txt
+printf 'Summarise: apples are a fruit\n'  > "$DEMO_DIR/tasks/task-1.txt"
+printf 'Summarise: bananas are yellow\n'  > "$DEMO_DIR/tasks/task-2.txt"
+printf 'Summarise: cherries are red\n'    > "$DEMO_DIR/tasks/task-3.txt"
 ```
 
 ---
@@ -117,7 +119,7 @@ printf '\n=== END ===\n'
 # orchestrator.sh — wave dispatch: 3 workers in parallel, then synthesize.
 set -euo pipefail
 
-DEMO_DIR="${1:-/tmp/wave-demo}"
+DEMO_DIR="${1:-${DEMO_DIR:?set DEMO_DIR (Step 1) or pass the directory as $1}}"
 TASKS_DIR="${DEMO_DIR}/tasks"
 OUTPUT_DIR=""
 WORKER="${DEMO_DIR}/worker.sh"
@@ -175,10 +177,10 @@ bash "$SYNTHESIZER" "$OUTPUT_DIR"
 
 ```bash
 # Make scripts executable
-chmod +x /tmp/wave-demo/worker.sh /tmp/wave-demo/synthesizer.sh /tmp/wave-demo/orchestrator.sh
+chmod +x "$DEMO_DIR/worker.sh" "$DEMO_DIR/synthesizer.sh" "$DEMO_DIR/orchestrator.sh"
 
 # Run
-bash /tmp/wave-demo/orchestrator.sh
+bash "$DEMO_DIR/orchestrator.sh"
 ```
 
 **Expected output (stderr + stdout combined):**
@@ -188,9 +190,9 @@ bash /tmp/wave-demo/orchestrator.sh
 [orchestrator] dispatched task-1 (pid 12345)
 [orchestrator] dispatched task-2 (pid 12346)
 [orchestrator] dispatched task-3 (pid 12347)
-[HH:MM:SSZ] worker task-2 done → /tmp/wave-demo/outputs/task-2.txt
-[HH:MM:SSZ] worker task-1 done → /tmp/wave-demo/outputs/task-1.txt
-[HH:MM:SSZ] worker task-3 done → /tmp/wave-demo/outputs/task-3.txt
+[HH:MM:SSZ] worker task-2 done → $OUTPUT_DIR/task-2.txt
+[HH:MM:SSZ] worker task-1 done → $OUTPUT_DIR/task-1.txt
+[HH:MM:SSZ] worker task-3 done → $OUTPUT_DIR/task-3.txt
 [orchestrator] pid 12345 finished OK
 [orchestrator] pid 12346 finished OK
 [orchestrator] pid 12347 finished OK
@@ -210,7 +212,7 @@ Worker task-3 processed: Summarise: cherries are red
 === END ===
 ```
 
-The output directory has a generated suffix; the transcript above illustrates the messages. Worker completion order is non-deterministic (parallel). The synthesizer always processes in alphabetical order.
+`$OUTPUT_DIR` in the transcript stands for the per-run `$DEMO_DIR/outputs.<suffix>` directory that the orchestrator creates with `mktemp -d`; the transcript illustrates the messages. Worker completion order is non-deterministic (parallel). The synthesizer always processes in alphabetical order.
 
 ---
 
@@ -222,10 +224,24 @@ Replace the `worker.sh` body with a real agent call:
 # Replace the simulation block in worker.sh with:
 # Set WORKER_MODEL from the provider model catalog before running.
 : "${WORKER_MODEL:?set a verified model ID}"
-result=$(claude --model "$WORKER_MODEL" -p "$(cat "$TASK_FILE")")
-[[ -n "$result" ]] || { printf 'empty worker result\n' >&2; exit 1; }
-# Model catalog: https://docs.anthropic.com/en/docs/about-claude/models
+# Bounds below are starting values, not recommendations: tune them per task.
+# `timeout` is GNU coreutils (`gtimeout` on macOS with coreutils installed).
+# --max-turns and --max-budget-usd are print-mode flags that stop the run;
+# --permission-prompts none denies anything that would prompt instead of hanging.
+json=$(timeout 300 claude -p "$(cat "$TASK_FILE")" \
+  --model "$WORKER_MODEL" \
+  --max-turns 10 \
+  --max-budget-usd 1.00 \
+  --permission-mode dontAsk \
+  --permission-prompts none \
+  --output-format json) || { printf 'worker claude call failed (exit %s)\n' "$?" >&2; exit 1; }
+result=$(printf '%s' "$json" | jq -r 'if .is_error then empty else .result end')
+[[ -n "$result" ]] || { printf 'empty or error worker result\n' >&2; exit 1; }
+# Model catalog: https://platform.claude.com/docs/en/about-claude/models/overview
+# Flags: https://code.claude.com/docs/en/cli-reference and https://code.claude.com/docs/en/headless
 ```
+
+The `--permission-prompts` flag needs a recent Claude Code release; check the CLI reference for your version. Add `--allowedTools` entries for any tool the worker needs, because `dontAsk` denies the rest. Treat the cost cap as a client-side estimate that can be passed.
 
 Or using the Anthropic Messages SDK (direct API calls, not an agent harness):
 
@@ -238,15 +254,28 @@ client = AsyncAnthropic()
 
 async def worker(task_id: str, payload: str) -> tuple[str, str]:
     response = await client.messages.create(
-        model="<current-sonnet-model>",  # check https://docs.anthropic.com/en/docs/about-claude/models
+        model="<current-sonnet-model>",  # check https://platform.claude.com/docs/en/about-claude/models/overview
         max_tokens=256,
         messages=[{"role": "user", "content": payload}],
     )
     return task_id, response.content[0].text
 
-async def orchestrate(tasks: dict[str, str]) -> dict[str, str]:
-    results = await asyncio.gather(*(worker(k, v) for k, v in tasks.items()))
-    return dict(results)
+WORKER_TIMEOUT_S = 120  # starting value; tune per task
+
+async def orchestrate(tasks: dict[str, str]) -> tuple[dict[str, str], dict[str, BaseException]]:
+    ids = list(tasks)
+    outcomes = await asyncio.gather(
+        *(asyncio.wait_for(worker(k, tasks[k]), WORKER_TIMEOUT_S) for k in ids),
+        return_exceptions=True,
+    )
+    results: dict[str, str] = {}
+    failures: dict[str, BaseException] = {}
+    for task_id, outcome in zip(ids, outcomes):
+        if isinstance(outcome, BaseException):
+            failures[task_id] = outcome
+        else:
+            results[task_id] = outcome[1]
+    return results, failures  # the caller aborts or re-runs on any failure before synthesizing
 ```
 
 ---

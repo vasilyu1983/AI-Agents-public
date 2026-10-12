@@ -4,7 +4,7 @@
     "description": "Primary references for 10 team-theory primitives: team decision problem, information structure, person-by-person optimality, value of communication, Radner's LQG theorem, Witsenhausen counterexample, information cost, organizational forms, Dec-POMDP / MARL extension, common-task condition. Marschak–Radner classical layer plus modern multi-agent LLM extensions, including Shapley credit assignment and coalition routing.",
     "last_updated": "2026-09-29",
     "skill": "foundations-team-theory",
-    "total_sources": 29
+    "total_sources": 31
   },
   "canonical_texts": [
     {
@@ -88,7 +88,7 @@
       "id": "MAST2025",
       "name": "Why Do Multi-Agent LLM Systems Fail?",
       "url": "https://arxiv.org/abs/2503.13657",
-      "description": "Cemri et al. (2025). NeurIPS. Empirical taxonomy of 14 multi-agent LLM failure modes across 1,600+ traces, grouped into system design issues, inter-agent misalignment, and task verification. Primary modern source for translating team-theory primitives to LLM agent failures.",
+      "description": "Cemri et al. (2025), arXiv:2503.13657; the arXiv page names no venue (secondary sources list NeurIPS 2025 Datasets and Benchmarks; unconfirmed). Empirical taxonomy of 14 multi-agent LLM failure modes across 1,600+ traces, grouped into system design issues, inter-agent misalignment, and task verification. Primary modern source for translating team-theory primitives to LLM agent failures.",
       "url_check": "auto"
     },
     {
@@ -123,21 +123,21 @@
       "id": "TranKiela2026",
       "name": "Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets",
       "url": "https://arxiv.org/abs/2604.02460",
-      "description": "Tran & Kiela (2026). arXiv cs.CL. Controlled empirical comparison of single-agent vs. five multi-agent architectures (sequential, subtask-parallel, parallel-roles, debate, ensemble) across Qwen3, DeepSeek-R1, Gemini 2.5 families. Single agents consistently match or exceed multi-agent on multi-hop reasoning under equal token budgets. Grounded in the Data Processing Inequality. Related work, not verified as corroboration: Cemri et al. (2025, MAST, arXiv:2503.13657) and Dochkina (2026, arXiv:2603.28990). Source for primitive #4 (value of communication, negative case) and #7 (information cost). Title and authors (Dat Tran, Douwe Kiela) re-verified via direct arXiv fetch 2026-08-14.",
+      "description": "Tran & Kiela (2026). arXiv cs.CL. Controlled comparison of single-agent vs. five multi-agent architectures on multi-hop reasoning under equal token budgets; single agents match or exceed multi-agent. Grounded in the Data Processing Inequality. Abstract also states multi-agent becomes competitive when single-agent context degrades or compute grows, and that API budget-control artifacts can inflate multi-agent gains. Scope: multi-hop reasoning only. Related work, not verified as corroboration: Cemri et al. (2025, MAST, arXiv:2503.13657) and Dochkina (2026, arXiv:2603.28990). Source for primitive #4 (value of communication, negative case) and #7 (information cost). Title and authors re-verified via arXiv 2026-08-14; abstract re-read 2026-10-11.",
       "url_check": "auto"
     },
     {
       "id": "LatentMAS2025",
       "name": "Latent Collaboration in Multi-Agent Systems (LatentMAS)",
       "url": "https://arxiv.org/abs/2511.20639",
-      "description": "Zou et al. (2025), Latent Collaboration in Multi-Agent Systems. Primary Section 4.1: reported average accuracy improvements over single-model baseline are 14.6% sequential and 13.3% hierarchical; gains over TextMAS are 2.8% and 4.6%. Average speedups versus sequential/hierarchical TextMAS are 4×/4.3×, output-token reductions 70.8%/83.7%. Nine benchmarks, specialized shared latent-memory architecture; representation compatibility and local comparisons required. Preserve authors units, no unsupported percentage-point conversion. Source: https://arxiv.org/html/2511.20639#S4.SS1; checked 2026-09-17.",
+      "description": "Zou et al. (2025), Latent Collaboration in Multi-Agent Systems. Specialized shared latent-memory architecture reporting gains over a single-model baseline and over text-based multi-agent systems on nine benchmarks (see arXiv Section 4.1 for the authors' figures). Representation compatibility and local comparisons required. Source: https://arxiv.org/html/2511.20639#S4.SS1.",
       "url_check": "auto"
     },
     {
       "id": "Dochkina2026",
       "name": "Drop the Hierarchy and Roles: How Self-Organizing LLM Agents Outperform Designed Structures",
       "url": "https://arxiv.org/abs/2603.28990",
-      "description": "Dochkina (2026). IEEE Access (submitted). 25,000-task empirical comparison of 8 coordination protocols (rigid hierarchy to emergent self-organization) across 8 LLMs and 4–256 agent configurations. Self-organizing sequential protocol outperforms centralized coordination by 14% (p<0.001) across the 25,000 tasks; a separate statistic, a 44% quality spread between protocols, carries Cohen's d=1.86 (p<0.0001) -- do not attach d=1.86 to the 14% figure. Scaling and cost figures reported at abstract level (sub-linear scaling to 256 agents; open-source models near closed-source quality at lower cost) were not re-verified; do not quote magnitudes. CARD (Wu et al., ICLR 2026, arXiv:2603.01089) and MegaAgent (ACL 2025) are unverified leads, not confirmed corroboration. Source for primitive #8 (fourth organizational form: emergent self-organization) and #3 (role co-optimization beyond PBPO). Title, author, March 2026 submission, and the 14% improvement figure checked against the arXiv record; IEEE Access status is submitted, not accepted. Note tension with Pappu2026ExpertsHeldBack: self-organization helps structural coordination but does not fix competence-weighted aggregation.",
+      "description": "Dochkina (2026). IEEE Access (submitted, not accepted). Large empirical comparison of coordination protocols (rigid hierarchy to emergent self-organization) across many LLMs and 4-256 agent configurations; reports that a self-organizing sequential protocol outperforms centralized coordination. Abstract-level scaling and cost claims were not re-verified; do not quote magnitudes. Contested single preprint: its 'drop the hierarchy' reading is in tension with Pappu et al. and Ao et al. CARD (Wu et al., ICLR 2026, arXiv:2603.01089) and MegaAgent (ACL 2025) are unverified leads, not confirmed corroboration. Source for primitive #8 (fourth organizational form: emergent self-organization) and #3 (role co-optimization beyond PBPO).",
       "url_check": "auto"
     },
     {
@@ -158,14 +158,14 @@
       "id": "HemmerEtAl2024CTP",
       "name": "Complementarity in Human-AI Collaboration: Concept, Sources, and Evidence",
       "url": "https://arxiv.org/abs/2404.00029",
-      "description": "Hemmer, Schemmer, Kühl, Vössing, Satzger (2024). European Journal of Information Systems (2025). Formalizes complementary team performance (CTP) — human-AI output exceeding either alone. CTP is rare in practice. Two necessary conditions for CTP: (1) information asymmetry (human holds local context AI lacks) and (2) capability asymmetry (human provides judgment on novel cases). Two empirical studies confirm these as viable CTP pathways. Primary source for P1-B CTP conditions in Composition Recipes and Trap in patterns-scenarios-traps.md. Verified via arXiv abstract fetch.",
+      "description": "Hemmer, Schemmer, Kühl, Vössing, Satzger (2024). European Journal of Information Systems (2025). Formalizes complementary team performance (CTP) — human-AI output exceeding either alone. CTP is rare in practice. Two necessary conditions for CTP: (1) information asymmetry (human holds local context AI lacks) and (2) capability asymmetry (human provides judgment on novel cases). Two empirical studies confirm these as viable CTP pathways. Primary source for the CTP trap in patterns-scenarios-traps.md. Verified via arXiv abstract fetch.",
       "url_check": "auto"
     },
     {
       "id": "Pappu2026ExpertsHeldBack",
       "name": "Multi-Agent Teams Hold Experts Back",
       "url": "https://arxiv.org/abs/2602.01011",
-      "description": "Pappu et al. (2026), Multi-Agent Teams Hold Experts Back. Primary Table 2 / Section 4.2: HLE Text-Only Expert Not Mentioned team 28.0%, At Least One Correct oracle 47.5%, relative synergy gap 41.1%; best fixed individual 29.0%, Reveal Expert team 36.0%. The 41.1% is an oracle gap, not loss against the best individual, despite broad abstract wording. Psychology experiments separately investigate expertise dilution and team size. Source: https://arxiv.org/html/2602.01011#S4.SS2; checked 2026-09-17. Supports explicit aggregation comparison, not a universal deference rule.",
+      "description": "Pappu et al. (2026), Multi-Agent Teams Hold Experts Back. Abstract: teams lose to their expert agent on ML benchmarks, expert leveraging (not identification) is the bottleneck, teams drift to integrative compromise that grows with team size, and the same consensus-seeking makes teams more robust to adversarial agents. The comparator behind each reported loss (oracle bound vs best member) is in the paper's Table 2 / Section 4.2; re-read it before quoting a magnitude (https://arxiv.org/html/2602.01011#S4.SS2). Supports explicit aggregation comparison, not a universal deference rule.",
       "url_check": "auto"
     },
     {
@@ -210,6 +210,22 @@
       "url": "https://arxiv.org/abs/2604.14386",
       "description": "Apr 2026. Hedonic-game framework for stable partitions among LLM agents with Coalition-of-Thought protocol. Source for team-theory primitive #22; the stability framing is hedonic-game theory, but the recipe in #22 is fit-based with no stability guarantee.",
       "add_as_web_search": true
+    },
+    {
+      "id": "AoGaoSimchiLevi2026",
+      "name": "Delegated multi-agent decision networks vs a centralized Bayes decision maker",
+      "url": "https://arxiv.org/abs/2603.26993",
+      "description": "Ao, Gao & Simchi-Levi (2026), arXiv:2603.26993. Abstract-level: without new exogenous signals a delegated multi-agent network is decision-theoretically dominated by a centralized Bayes decision maker with the same information; communication loss is an expected posterior divergence (conditional mutual information under log loss). Theorems not read. Source for the information-dominance rule in When Multi-Agent Pays.",
+      "url_check": "manual",
+      "accessed": "2026-10-11"
+    },
+    {
+      "id": "Kim2025ScalingAgentSystems",
+      "name": "Towards a Science of Scaling Agent Systems",
+      "url": "https://arxiv.org/abs/2512.08296",
+      "description": "Kim et al. (2025), arXiv:2512.08296. Abstract-level: multi-agent effect versus a single-agent baseline flips with task type, and a capability-saturation effect limits returns once the single-agent baseline is strong; architectures without centralized verification propagate errors more. Source for the capability-saturation test.",
+      "url_check": "manual",
+      "accessed": "2026-10-11"
     }
   ]
 }

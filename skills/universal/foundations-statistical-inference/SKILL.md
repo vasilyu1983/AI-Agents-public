@@ -46,6 +46,7 @@ Use measurement theory for whether the instrument measures the intended construc
 - Ordinary fixed-horizon intervals are not generally valid after data-dependent repeated stopping. Anytime-valid methods require their own null, filtration, and process assumptions [Ramdas2023].
 - Conformal coverage is marginal over calibration and future observations under exchangeability. It does not ensure every group or individual has nominal coverage [AngelopoulosBates2022].
 - Do not translate a standardized effect size into a conversion multiplier without the outcome model and baseline needed for that conversion.
+- Correlated voters are fewer votes than they count. For a panel of judges, reviewers, or refuters, estimate the effective number of independent votes from their pairwise error correlation (the design-effect logic of [Kish1965]) before crediting agreement as confirmation. An abstract-level 2026 report on LLM judge panels found several judges from several model families worth far fewer effective votes, with the best single judge matching the panel [JudgePanelEffectiveVotes2026, unreplicated]. Stop adding voters when the effective number stops rising; change the evidence source instead.
 
 ## Helper
 
@@ -68,6 +69,7 @@ Verify the precise theorem and assumptions against the primary source before ass
 - [Multiplicity procedures](references/multiplicity-procedures.md): Holm, BH, BY, e-BH, gatekeeping.
 - [Eval error bars](references/eval-error-bars.md): clustered and paired eval inference, eval sizing.
 - [Judge-assisted inference](references/judge-assisted-inference.md): PPI/PPI++ for LLM-judge-labelled data.
+- Judge, prompt and run variance (facets) that an item-only interval omits: see [measurement theory](../foundations-measurement-theory/references/ai-evaluation-measurement.md).
 - [Conformal variants](references/conformal-variants.md): CQR, Mondrian, weighted, adaptive, risk control.
 - [Inference report](assets/templates/inference-report.md): output template.
 

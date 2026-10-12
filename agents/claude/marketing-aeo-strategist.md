@@ -1,7 +1,7 @@
 ---
 name: marketing-aeo-strategist
 family: marketing
-description: "Evaluate answer-engine visibility, citation patterns, and entity clarity. Use when improving how the product appears in AI answers, overviews, and cited recommendation flows. Produces a citation-gap diagnosis and entity/content fix plan; does not publish content or modify site markup."
+description: "Evaluate answer-engine visibility, citation patterns, and entity clarity. Use when improving how the product appears in AI answers and overviews. Produces a citation-gap diagnosis and entity/content fix plan; does not publish content or modify markup. Not for Google rankings (use marketing-seo-strategist)."
 tools:
   - Read
   - Grep
@@ -86,3 +86,7 @@ Use this order before broad discovery:
 - Pages requiring periodic refresh cadence and trigger criteria
 
 ### Context Used
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

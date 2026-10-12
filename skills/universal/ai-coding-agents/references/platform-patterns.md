@@ -25,11 +25,11 @@ Field names, allowed values, and precedence for each platform change between rel
 | File location (project) | `.claude/agents/*.md` | `.codex/agents/*.toml` | Source code |
 | File location (personal) | `~/.claude/agents/*.md` | `~/.codex/agents/*.toml` | N/A |
 | Invocation | Auto-delegated by description match | Explicit spawn by name | Programmatic call |
-| System prompt | Markdown body after frontmatter | `developer_instructions` field | `ClaudeAgentOptions` / constructor arg |
+| System prompt | Markdown body after frontmatter | `developer_instructions` field | `ClaudeAgentOptions` / `options` |
 | Tools | `tools` / `disallowedTools` arrays | Built-in sandbox tools | Custom + built-in tools |
-| Multi-agent | Subagents, fork, agent teams (coordinator is a prompting pattern) | Limited (worker agents) | Full control (you build it) |
+| Multi-agent | Subagents, fork, agent teams (coordinator is a prompting pattern) | Native subagents | Full control (you build it) |
 | Isolation | `isolation: worktree` | Sandbox modes | Custom (your responsibility) |
-| Permission modes | `default` / `acceptEdits` / `bypassPermissions` | `sandbox_mode` | Hook-based permission control |
+| Permission modes | `permissionMode` (values change by release; read them in the [Claude Code permission-modes docs](https://code.claude.com/docs/en/permission-modes)) | `sandbox_mode` | Hook-based permission control |
 | Memory | `user` / `project` / `local` scopes | N/A | Custom persistence |
 | MCP servers | `mcpServers` array in frontmatter | `[mcp_servers]` TOML section | Custom MCP client setup |
 | Model override | `model` field | `model` field | Constructor parameter |
@@ -67,13 +67,7 @@ disallowedTools:
   - NotebookEdit
 model: inherit
 effort: medium
-permissionMode: default
 maxTurns: 15
-memory: project
-isolation: worktree
-background: false
-mcpServers: []
-hooks: {}
 ---
 ```
 
@@ -200,8 +194,9 @@ Given a Python module, generate a comprehensive pytest test suite.
 |------|----------|----------------|
 | `workspace-write` | Editors, generators, fixers | Read + write to workspace files |
 | `read-only` | Reviewers, analyzers | Read only, no file modifications |
-| `network-off` | Isolated generation | Write but no network access |
-| `full` | General purpose | All capabilities |
+| `danger-full-access` | Only inside an external sandbox | No filesystem or network restriction |
+
+Network access is not a sandbox mode. Inside `workspace-write` it is the `[sandbox_workspace_write] network_access` boolean (checked 2026-10-10 against the Codex config reference, https://learn.chatgpt.com/docs/config-file/config-reference).
 
 ### Example: Codex Test Generator
 
@@ -235,209 +230,117 @@ Steps:
 
 ## Agent SDK (Python)
 
-### ClaudeAgentOptions Configuration
+Checked 2026-10-10 against https://code.claude.com/docs/en/agent-sdk/python and https://code.claude.com/docs/en/agent-sdk/hooks. Re-check the page before relying on a signature; the SDK changes between releases. The snippets below were not executed.
+
+### query() with ClaudeAgentOptions
 
 ```python
-from claude_agent_sdk import ClaudeAgent, ClaudeAgentOptions, tool
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, TextBlock, ResultMessage
 
 options = ClaudeAgentOptions(
     model=DEFAULT_CODING_MODEL,  # resolve current alias/ID via the claude-api skill; avoid pinning a dated snapshot
-    system_prompt="""You are a code reviewer. Analyze the provided diff
-    for correctness, security, and maintainability issues.""",
-    tools=["Read", "Glob", "Grep", "Bash"],
+    system_prompt="You are a code reviewer. Analyze the diff for correctness, security, and maintainability.",
+    allowed_tools=["Read", "Glob", "Grep"],
     max_turns=15,
 )
 
-agent = ClaudeAgent(options)
-result = agent.run("Review the changes in this PR: ...")
+async def main():
+    async for message in query(prompt="Review the changes in this PR: ...", options=options):
+        if isinstance(message, AssistantMessage):
+            for block in message.content:
+                if isinstance(block, TextBlock):
+                    print(block.text)
+        elif isinstance(message, ResultMessage):
+            print(message.subtype, message.num_turns)
+
+asyncio.run(main())
 ```
 
-### Custom Tool Definition
+`allowed_tools` pre-approves tools; it does not restrict the set. Use `ClaudeSDKClient` (`async with ClaudeSDKClient(options=options) as client`, then `client.query(...)` and `client.receive_response()`) for multi-turn sessions, and let its message loop finish rather than `break`.
+
+### Custom Tools in an In-Process MCP Server
 
 ```python
-from claude_agent_sdk import tool
 import subprocess
+from claude_agent_sdk import tool, create_sdk_mcp_server, ClaudeAgentOptions
 
-@tool(description="Run ESLint on a file and return findings")
-def lint_file(file_path: str) -> str:
-    """Run ESLint on the specified file."""
-    result = subprocess.run(
-        ["npx", "eslint", "--format", "json", file_path],
-        capture_output=True, text=True, timeout=30
-    )
-    return result.stdout or result.stderr
+@tool("run_tests", "Run pytest for a module path", {"module_path": str})
+async def run_tests(args):
+    r = subprocess.run(["pytest", "-v", "--tb=short", args["module_path"]],
+                       capture_output=True, text=True, timeout=120)
+    return {"content": [{"type": "text", "text": f"Exit code: {r.returncode}\n{r.stdout}{r.stderr}"}]}
 
-@tool(description="Run the project test suite for a specific module")
-def run_tests(module_path: str) -> str:
-    """Run pytest for the specified module path."""
-    result = subprocess.run(
-        ["pytest", "-v", "--tb=short", module_path],
-        capture_output=True, text=True, timeout=120
-    )
-    return f"Exit code: {result.returncode}\n{result.stdout}\n{result.stderr}"
-```
-
-### Hook Setup for Protected Paths
-
-```python
-from claude_agent_sdk import ClaudeAgent, Hook
-
-def block_protected_writes(tool_name: str, tool_input: dict) -> bool:
-    """Return False to block the tool call."""
-    protected = [".env", "credentials.json", "secrets/", "node_modules/"]
-    if tool_name in ("Edit", "Write"):
-        path = tool_input.get("file_path", "")
-        for p in protected:
-            if p in path:
-                return False
-    return True
-
-agent = ClaudeAgent(
-    options=options,
-    hooks={"pre_tool_use": block_protected_writes}
+server = create_sdk_mcp_server(name="project-tools", tools=[run_tests])
+options = ClaudeAgentOptions(
+    mcp_servers={"project": server},
+    allowed_tools=["mcp__project__run_tests"],  # mcp__<server key>__<tool name>
 )
 ```
 
-### Streaming Output Handling
+### Hook to Block Protected Paths
 
 ```python
-for event in agent.stream("Review the auth module for vulnerabilities"):
-    if event.type == "text":
-        print(event.content, end="", flush=True)
-    elif event.type == "tool_use":
-        print(f"\n[Using {event.tool_name}...]")
-    elif event.type == "tool_result":
-        pass  # Handled internally
-    elif event.type == "done":
-        print(f"\nCompleted in {event.turns} turns, {event.tokens} tokens")
-```
+from claude_agent_sdk import ClaudeAgentOptions, HookMatcher
 
-### Example: SDK Code Reviewer with Custom Linter
-
-```python
-from claude_agent_sdk import ClaudeAgent, ClaudeAgentOptions, tool
-import subprocess
-
-@tool(description="Run ESLint with security rules on a TypeScript file")
-def security_lint(file_path: str) -> str:
-    result = subprocess.run(
-        ["npx", "eslint", "--config", ".eslintrc.security.json",
-         "--format", "json", file_path],
-        capture_output=True, text=True, timeout=30
-    )
-    return result.stdout or result.stderr
-
-@tool(description="Check for known vulnerable dependencies")
-def audit_deps() -> str:
-    result = subprocess.run(
-        ["npm", "audit", "--json"],
-        capture_output=True, text=True, timeout=60
-    )
-    return result.stdout
+async def block_protected_writes(input_data, tool_use_id, context):
+    path = input_data["tool_input"].get("file_path", "")
+    if any(p in path for p in (".env", "credentials.json", "secrets/")):
+        return {"hookSpecificOutput": {
+            "hookEventName": input_data["hook_event_name"],
+            "permissionDecision": "deny",
+            "permissionDecisionReason": "Protected path",
+        }}
+    return {}  # empty object allows the call
 
 options = ClaudeAgentOptions(
-    model=DEFAULT_CODING_MODEL,  # resolve current alias/ID via the claude-api skill; avoid pinning a dated snapshot
-    system_prompt="""You are a security-focused code reviewer.
-
-    For each file in the diff:
-    1. Run security_lint to check for static issues
-    2. Read the file to understand context
-    3. Check for OWASP Top 10 patterns manually
-    4. Run audit_deps once for dependency vulnerabilities
-
-    Report findings with severity, file, line, and remediation.""",
-    tools=["Read", "Glob", "Grep", "security_lint", "audit_deps"],
-    max_turns=20,
+    hooks={"PreToolUse": [HookMatcher(matcher="Write|Edit", hooks=[block_protected_writes])]}
 )
-
-agent = ClaudeAgent(options)
-result = agent.run("Review all changed files in the current branch vs main")
-print(result.output)
 ```
+
+Matchers match tool names, not paths; filter paths inside the callback. A single `deny` from any hook blocks the call.
 
 ---
 
 ## Agent SDK (TypeScript)
 
-### Equivalent TS Patterns
+Checked 2026-10-10 against https://code.claude.com/docs/en/agent-sdk/typescript and the hooks page above. The snippet was not executed.
 
 ```typescript
-import {
-  ClaudeAgent,
-  ClaudeAgentOptions,
-} from "@anthropic-ai/claude-agent-sdk";
-import { z } from "zod";
-
-const options: ClaudeAgentOptions = {
-  model: DEFAULT_CODING_MODEL, // resolve current alias/ID via the claude-api skill; avoid pinning a dated snapshot
-  systemPrompt: `You are a code reviewer...`,
-  tools: ["Read", "Glob", "Grep", "Bash"],
-  maxTurns: 15,
-};
-
-const agent = new ClaudeAgent(options);
-const result = await agent.run("Review the auth module");
-```
-
-### Zod Schemas for Custom Tools
-
-```typescript
-import { defineTool } from "@anthropic-ai/claude-agent-sdk";
+import { query, tool, createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk";
 import { z } from "zod";
 import { execFileSync } from "child_process";
 
-const lintTool = defineTool({
-  name: "lint_file",
-  description: "Run ESLint on a TypeScript file and return findings",
-  inputSchema: z.object({
-    filePath: z.string().describe("Absolute path to the file to lint"),
-  }),
-  handler: async ({ filePath }) => {
-    const output = execFileSync(
-      "npx",
-      ["eslint", "--format", "json", filePath],
-      { encoding: "utf-8", timeout: 30000 }
-    );
-    return output;
+const lint = tool(
+  "lint_file",
+  "Run ESLint on a file and return findings",
+  { filePath: z.string() },
+  async ({ filePath }) => {
+    const out = execFileSync("npx", ["eslint", "--format", "json", filePath], {
+      encoding: "utf-8",
+      timeout: 30000,
+    });
+    return { content: [{ type: "text", text: out }] };
   },
-});
+);
 
-const testTool = defineTool({
-  name: "run_tests",
-  description: "Run Jest tests for a specific module",
-  inputSchema: z.object({
-    testPath: z.string().describe("Path to test file or directory"),
-  }),
-  handler: async ({ testPath }) => {
-    try {
-      const output = execFileSync(
-        "npx",
-        ["jest", "--verbose", testPath],
-        { encoding: "utf-8", timeout: 120000 }
-      );
-      return output;
-    } catch (e: any) {
-      return `Exit code: ${e.status}\n${e.stdout}\n${e.stderr}`;
-    }
+const server = createSdkMcpServer({ name: "project", tools: [lint] });
+
+for await (const message of query({
+  prompt: "Review the auth module",
+  options: {
+    model: DEFAULT_CODING_MODEL, // resolve current alias/ID via the claude-api skill; avoid pinning a dated snapshot
+    systemPrompt: "You are a code reviewer.",
+    allowedTools: ["Read", "Glob", "Grep", "mcp__project__lint_file"],
+    maxTurns: 15,
+    mcpServers: { project: server }, // a record keyed by server name, not an array
   },
-});
+})) {
+  if (message.type === "result") console.log(message);
+}
 ```
 
-### createSdkMcpServer for In-Process Tools
-
-```typescript
-import { createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk";
-
-const mcpServer = createSdkMcpServer({
-  name: "project-tools",
-  tools: [lintTool, testTool],
-});
-
-const agent = new ClaudeAgent({
-  ...options,
-  mcpServers: [mcpServer],
-});
-```
+Hooks use the same shape as Python: `hooks: { PreToolUse: [{ matcher: "Write|Edit", hooks: [cb] }] }`, with `cb` returning `{ hookSpecificOutput: { hookEventName, permissionDecision: "deny", permissionDecisionReason } }` to block. Look up the `HookCallback` type in the TypeScript reference before writing one.
 
 ---
 
@@ -484,22 +387,14 @@ All three patterns are native and built into the platform:
 | Pattern | Support | Mechanism |
 |---------|---------|-----------|
 | Coordinator-Led | Native | Agent tool with `subagent_type`, worker prompts, notifications |
-| Fork Subagent | Native | Agent tool without `subagent_type`, inherits parent context |
+| Fork Subagent | Native | Agent tool with subagent type `fork`, inherits parent context (no type gives general-purpose) |
 | Agent Teams | Native | Named agents, mailbox communication, shared checkout with owned files |
 
 Key advantages: prompt cache sharing for forks, built-in mailbox protocol, worktree isolation for subagents and background sessions (teammates share the lead's checkout), permission bridge for teammates.
 
 ### Codex
 
-Limited multi-agent support:
-
-| Pattern | Support | Mechanism |
-|---------|---------|-----------|
-| Worker agents | Basic | Explicit agent spawning from scripts |
-| Coordination | Manual | File-based communication, no built-in protocol |
-| Isolation | Strong | Sandbox modes provide reliable isolation |
-
-Codex excels at isolated single-agent tasks with strong sandboxing. Multi-agent coordination requires custom scripting.
+Codex has native subagents: built-in `default`, `worker` and `explorer` agents, custom agents in `.codex/agents/*.toml` (required fields `name`, `description`, `developer_instructions`), and an `[agents]` config table for limits (checked 2026-10-10 against https://learn.chatgpt.com/docs/agent-configuration/subagents). Codex spawns by explicit request, not description match, and the topology is hub-and-spoke. Sandbox modes give strong isolation. For current keys and limits, read [`../../agents-subagents/references/runtime-surfaces.md`](../../agents-subagents/references/runtime-surfaces.md).
 
 ### Agent SDK
 
@@ -530,7 +425,7 @@ Agent SDK is best when you need custom orchestration logic that does not fit the
 
 Claude Code's skill/agent infrastructure is not limited to coding tasks. The same patterns — skills, parallel subagents, structured evaluation, pipeline state — transfer to any domain with structured workflows.
 
-**Example:** career-ops (github.com/santifer/career-ops, 59K+ stars) uses Claude Code with 14 skill modes to run a complete job-search pipeline: portal scanning across 45+ company sites, structured job evaluation (A-F grading, 10 dimensions), ATS-optimized CV generation, and application tracking via a Go terminal dashboard.
+**Example:** a community job-search project (career-ops) runs a complete pipeline on Claude Code skill modes: portal scanning, structured job evaluation, CV generation, and application tracking. Treat it as an illustration, not a benchmark; popularity figures are unsourced and omitted.
 
 **What transfers directly:**
 - Skill decomposition (14 domain-specific modes vs. coding review/implement/test modes)

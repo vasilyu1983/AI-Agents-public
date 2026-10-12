@@ -2,7 +2,7 @@
 name: agents-skills
 description: Creates and audits agent skills: SKILL.md, references, scripts, runtime metadata. Use when writing, validating, or security-reviewing a skill, or fixing truncated skill listings.
 version: "1.2"
-last_validated: 2026-09-11
+last_validated: 2026-10-09
 ---
 
 # Agent Skills
@@ -17,6 +17,7 @@ Create or modernize skill bundles while keeping the portable core separate from 
 | Fix truncated or omitted skill listings | [skill-context-budgets.md](references/skill-context-budgets.md) |
 | Audit a skill | `python3 scripts/validate_skill.py <skill-dir>` and [maintenance-workflows.md](references/maintenance-workflows.md) |
 | Choose support-file boundaries | [skill-patterns.md](references/skill-patterns.md) |
+| Write a skill that wraps an MCP server or CLI tool | [skill-patterns.md](references/skill-patterns.md#pattern-11-tool-wrapping-skill) |
 | Add runtime-specific metadata | [frontmatter-reference.md](references/frontmatter-reference.md) |
 | Test trigger and navigation behavior | [skill-validation.md](references/skill-validation.md) |
 | Maintain Claude-specific behavior | [anthropic-skills-guide.md](references/anthropic-skills-guide.md) |

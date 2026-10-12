@@ -4,7 +4,7 @@
     "description": "Primary papers and references for 11 information-theory primitives (entropy, mutual information, KL/JS, cross-entropy, channel capacity, rate-distortion, MDL, information bottleneck, Fano, AEP, redundancy/compression) and LLM evaluation/serving practice.",
     "last_updated": "2026-09-23",
     "skill": "foundations-information-theory",
-    "total_sources": 51
+    "total_sources": 52
   },
   "research_papers": [
     {
@@ -315,14 +315,14 @@
       "id": "CompressionIntelligenceCOLM2024",
       "name": "Huang et al.: Compression Represents Intelligence Linearly",
       "url": "https://arxiv.org/abs/2404.09937",
-      "description": "Huang, Y. et al. (2024). COLM 2024, arXiv:2404.09937. Evaluates 31 public LLMs across 12 benchmarks spanning knowledge/commonsense, coding, and mathematical reasoning; finds downstream benchmark score correlates near-linearly with corpus compression efficiency, Pearson r = -0.93 on the overall average and -0.935 (knowledge), -0.937 (coding), -0.953 (math) per domain. Uses bits-per-character rather than bits-per-token precisely because tokenizers differ. Establishes BPC as a cheap, contamination-resistant evaluation proxy. Pairs with KoLMogorovTest2025 as the positive half of the compression-intelligence question: average-case compression tracks capability, worst-case (shortest-program) compression does not. Code: https://github.com/hkust-nlp/llm-compression-intelligence. Relevant to primitives #4, #11. Figures checked against https://arxiv.org/html/2404.09937.",
+      "description": "Huang, Y. et al. (2024). COLM 2024, arXiv:2404.09937. Evaluates about 30 public LLMs (31 in the abstract, version-dependent) across 12 benchmarks spanning knowledge/commonsense, coding, and mathematical reasoning; finds downstream benchmark score correlates near-linearly (negatively) with corpus compression efficiency; the correlation coefficients quoted earlier are unverified and removed, so use direction only. Uses bits-per-character rather than bits-per-token precisely because tokenizers differ. Establishes BPC as a cheap, contamination-resistant evaluation proxy. Pairs with KoLMogorovTest2025 as the positive half of the compression-intelligence question: average-case compression tracks capability, worst-case (shortest-program) compression does not. Code: https://github.com/hkust-nlp/llm-compression-intelligence. Relevant to primitives #4, #11.",
       "add_as_web_search": true
     },
     {
       "id": "IBVQMultiAgent2026",
       "name": "Farooq & Iqbal: Bandwidth-Efficient Multi-Agent Communication through Information Bottleneck and Vector Quantization",
       "url": "https://arxiv.org/abs/2602.02035",
-      "description": "Farooq, A. & Iqbal, K. (2026). IEEE ICRA 2026, arXiv:2602.02035, submitted 2 February 2026. Combines an information-bottleneck objective with vector quantization and a learned gating mechanism deciding when to communicate at all; reports 181.8% performance gain over no communication and, against the different full-communication baseline, 71.4% lower bandwidth (800 vs 2800 bits/episode). Robotics MARL paper; study-specific single synthetic coordination domain: section V-A reports 800 vs 2800 bits/episode against full communication; section VI-A states generalizability limits. LLM handoffs and KV-cache passing are untested transfer hypotheses. Evidence grade B: accepted conference paper, camera-ready. Relevant to primitives #6, #8.",
+      "description": "Farooq, A. & Iqbal, K. (2026). IEEE ICRA 2026, arXiv:2602.02035, submitted 2 February 2026. Combines an information-bottleneck objective with vector quantization and a learned gating mechanism deciding when to communicate at all; reports 181.8% performance gain over no communication and a bandwidth reduction for 800 vs 2800 bits/episode against full communication; the paper is internally inconsistent on the percentage (41.4% in the abstract, intro, Fig. 2 caption, section VI-A and conclusion; 71.4% in section V-A), so quote no figure. Robotics MARL paper; study-specific single synthetic coordination domain: section V-A reports 800 vs 2800 bits/episode against full communication; section VI-A states generalizability limits. LLM handoffs and KV-cache passing are untested transfer hypotheses. Evidence grade B: accepted conference paper, camera-ready. Relevant to primitives #6, #8.",
       "add_as_web_search": true
     },
     {
@@ -358,6 +358,14 @@
       "name": "Yuan et al.: KV Cache Compression, But What Must We Give in Return?",
       "url": "https://arxiv.org/abs/2407.01527",
       "description": "Yuan, J. et al. (2024). arXiv:2407.01527. Benchmark of 10+ long-context efficiency methods (KV cache quantization, token dropping, prompt compression, linear-time sequence models, hybrids) across seven long-context task categories. Source for references/llm-practice.md section 5.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "HeAgenticSystemDesign2026",
+      "name": "He et al.: An Information Theoretic Perspective on Agentic System Design",
+      "url": "https://arxiv.org/abs/2512.21720",
+      "description": "He, Narayan, Khare, Linderman, Re, Biderman (2026). ICLR 2026, arXiv:2512.21720. Abstract-level reading via search summary only; the PDF was not read. Supports: treating a compressor language model as a noisy channel, estimating mutual information between context and compression, and using information rate (mutual information per token) as a predictor of downstream performance. Direction only; no figures used. Source for the Context-Window Budget recipe in SKILL.md.",
+      "accessed": "2026-10-11",
       "add_as_web_search": false
     }
   ],

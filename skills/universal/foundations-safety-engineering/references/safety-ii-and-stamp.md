@@ -25,4 +25,4 @@ Choose STPA over or alongside FTA in two cases:
 
 Boolean fault-tree gates cannot represent a flawed process model or feedback that arrives late.
 
-**When not to use.** For a hardware or component failure mode with known rates and independence, use FTA or FMEA in reliability theory. STPA adds effort there without adding insight.
+**Decision rule (STPA vs FMEA).** Use FMEA or FTA in reliability theory when the loss comes from enumerable component failure modes with known rates and independence; STPA adds effort there without adding insight. Use STPA when the loss comes from interaction, a flawed process model, or an LLM controller. Use both when a regulator demands FMEA and the system has autonomy. STPA gives no probabilities and scales poorly without hazard grouping.

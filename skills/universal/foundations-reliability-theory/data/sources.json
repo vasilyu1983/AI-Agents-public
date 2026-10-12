@@ -4,7 +4,7 @@
     "description": "Primary texts, standards, and references for 11 reliability theory primitives: MTBF/MTTR, availability composition, hazard functions, bathtub curve, fault tree analysis, FMEA, redundancy math, error budgets, Weibull analysis, system reliability, reliability allocation.",
     "last_updated": "2026-09-23",
     "skill": "foundations-reliability-theory",
-    "total_sources": 38,
+    "total_sources": 39,
     "chapter_citation_note": "Chapter-level citations for Lewis (1995), O'Connor & Kleyner (2012), and Birolini (2017) were removed 2026-07-11. A July-2026 audit found the per-primitive chapter numbers could not be verified against the books' actual tables of contents (spot-checked against a confirmed 2nd-ed. Lewis ToC) and, for Birolini, the same 'Chapter 2' was attributed to seven unrelated primitives — a strong fabrication signal. These sources remain valid topical references; cite them at the book level, not the chapter level, until someone verifies chapter numbers against a physical copy of each edition.",
     "verification_note": "September additions were checked against the named primary pages; this date does not imply full-text revalidation of every historical source."
   },
@@ -414,6 +414,17 @@
       "description": "101 fail-slow hardware incident reports from 12 institutions; disk, SSD, CPU, memory and network components all exhibited performance faults. Basis for injecting degraded (not dead) faults in coverage drills.",
       "verified_via": "WebFetch 2026-09-23: abstract figures (101 reports, 12 institutions, component classes) confirmed on the USENIX page",
       "primitives": ["07"]
+    },
+    {
+      "id": "NowlanHeap1978",
+      "name": "Reliability-Centered Maintenance",
+      "author": "Nowlan, F. S. & Heap, H. F.",
+      "year": 1978,
+      "publisher": "US Department of Defense, report AD-A066579",
+      "url": "https://reamag.com/?p=266257",
+      "description": "Origin of the finding that only a small minority of aircraft items follow a classic bathtub curve and most show no age relation. Cited from secondary sources only (reamag.com; stle.org 2018 editorial); percentages not checked against the report.",
+      "accessed": "2026-10-11",
+      "primitives": ["04", "09"]
     }
   ],
   "validation_sources": [

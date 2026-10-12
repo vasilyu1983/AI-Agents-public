@@ -74,14 +74,38 @@ Use this order before broad codebase reading:
 
 ## Output Contract
 
+### Verdict
+
+One line: production-ready / ready with gaps / not ready, with the reason.
+
 ### Lifecycle Audit
-Cover training, deployment, serving, and monitoring — flag any gap in reproducibility, rollback, or trace export.
+
+Cover training, deployment, serving, and monitoring. Flag any gap in reproducibility, rollback, or trace export. Return a table:
+
+| # | Priority (P0/P1/P2) | Lifecycle stage and gap | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
 
 ### Monitoring Specification
-Define drift thresholds (data, concept, performance, operational), alert owners, and delayed-feedback loop design.
+
+Define drift thresholds (data, concept, performance, operational), alert owners, and delayed-feedback loop design. Return a table:
+
+| # | Priority (P0/P1/P2) | Signal, threshold, alert owner | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
 
 ### Rollout and Rollback Plan
-Specify the rollout strategy, traffic ramp schedule, success criteria for advancing, and the one-command rollback path.
+
+Specify the rollout strategy, traffic ramp schedule, success criteria for advancing, and the one-command rollback path. Return a table:
+
+| # | Priority (P0/P1/P2) | Stage, ramp or criterion, rollback step | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
+
+### Not Reviewed
+
+Artifacts, files, sources, or questions you did not read or check, or "none".
 
 ### Context Used
 List which model registry state, deployment manifests, cost budgets, or monitoring dashboards were used.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

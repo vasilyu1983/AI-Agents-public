@@ -52,6 +52,12 @@ This gives mean(Y) = 0.720, mean(f) = 0.760, Var(Y) = 0.2023, Var(f) = 0.1830, C
 
 PPI++ is worth about 1.9× the gold labels here: it matches a classical interval with ~570 human labels. The judge-only interval is tight and wrong, which is the failure this method exists to prevent.
 
+Treat about 2× as a ceiling at the frontier, not a typical gain. When the judge is no more accurate than the model under evaluation, no PPI-style debiasing can cut the required gold labels by more than about half [Dorner2025]. Reported savings on real benchmarks were smaller.
+
+## Binary judge with a calibration set (Rogan-Gladen)
+
+When the judge returns pass/fail, estimate its sensitivity and specificity on a gold calibration set and correct the raw pass rate with the Rogan-Gladen estimator [Lee2025]. Build the interval so it carries both test-set and calibration-set noise, not the test set alone. Report the raw and the bias-corrected rate, and state which randomness the interval covers (items, runs, calibration set, prompts).
+
 ## Validity conditions
 
 - **Random gold subset.** The gold items must be a uniformly random (or known-probability, then weighted) sample from the same pool as the unlabelled items.

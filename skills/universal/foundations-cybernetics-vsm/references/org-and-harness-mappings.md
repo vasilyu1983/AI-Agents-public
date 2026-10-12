@@ -40,7 +40,7 @@ Team types and interaction modes are from Skelton & Pais, *Team Topologies* (IT 
 
 ## Evidence Pack for Effective Human Oversight
 
-"How many reviewers do we need for N agents?" has no count answer. Telukunta, Lilis & Baron (2026, arXiv:2608.10153, preprint, grade C) frame oversight as `V_human × G ≥ V_agents` and state that escalation SLA adherence, override drill outcomes and approval-gate quality must themselves be measured. Treat the inequality as framing; the evidence below is what shows oversight works:
+"How many reviewers do we need for N agents?" has no count answer. Telukunta, Lilis & Baron (2026, arXiv:2608.10153, preprint, grade C) frame oversight through requisite variety with engineered amplification and state that escalation SLA adherence, override drill outcomes and approval-gate quality must themselves be measured. Treat it as framing; the evidence below is what shows oversight works:
 
 | Evidence | What it shows | Where it comes from |
 | --- | --- | --- |

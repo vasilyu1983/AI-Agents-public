@@ -53,7 +53,7 @@ Use these templates as the content for `AGENTS.md` (Codex). If you support both 
 - [Before Implementation](#before-implementation)
 - [During Implementation](#during-implementation)
 - [After Changes](#after-changes)
-- [Pattern 7: Cross-Platform Memory (AGENTS.md + CLAUDE.md)](#pattern-7-cross-platform-memory-agentsmd-claudemd)
+- [Pattern 7: Cross-Platform Memory (AGENTS.md + CLAUDE.md)](#pattern-7-cross-platform-memory-agentsmd--claudemd)
 - [Directory Structure](#directory-structure)
 - [Setup Commands](#setup-commands)
 - [AGENTS.md primary](#agentsmd-primary)
@@ -79,15 +79,15 @@ Use these templates as the content for `AGENTS.md` (Codex). If you support both 
 - [Unrecognized Files](#unrecognized-files)
 - [Lint/Format Churn](#lintformat-churn)
 - [Session Isolation](#session-isolation)
-- [Pattern 9: Quality Gates & Operational Guardrails](#pattern-9-quality-gates-&-operational-guardrails)
-- [Quality Gates & Guardrails](#quality-gates-&-guardrails)
+- [Pattern 9: Quality Gates & Operational Guardrails](#pattern-9-quality-gates--operational-guardrails)
+- [Quality Gates & Guardrails](#quality-gates--guardrails)
 - [PR Evidence Gates (Bug-Fix Validation)](#pr-evidence-gates-bug-fix-validation)
 - [Release Guardrails](#release-guardrails)
 - [Shorthand Commands](#shorthand-commands)
 - [Agent Vocabulary](#agent-vocabulary)
 - [Automation Labels](#automation-labels)
 - [Pattern 10: Retrospective AGENTS.md Updates](#pattern-10-retrospective-agentsmd-updates)
-- [Pattern 11: config.toml + AGENTS.md Separation](#pattern-11-configtoml-agentsmd-separation)
+- [Pattern 11: config.toml + AGENTS.md Separation](#pattern-11-configtoml--agentsmd-separation)
 - [Pattern 12: Prompt / Agent Library Repo](#pattern-12-prompt--agent-library-repo)
 - [Pattern 13: Progressive Disclosure Architecture](#pattern-13-progressive-disclosure-architecture)
 - [Pattern 14: Three-Tier Boundaries](#pattern-14-three-tier-boundaries)
@@ -641,8 +641,8 @@ model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
 
 [agents]
-max_threads = 6
-max_depth = 1
+# Concurrency keys and defaults change between releases: copy the key name from
+# the current config reference (agents-subagents owns the [agents] table), not from here.
 ```
 
 **AGENTS.md**:

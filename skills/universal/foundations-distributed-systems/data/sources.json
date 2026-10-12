@@ -4,7 +4,7 @@
     "description": "Primary papers and references for 11 distributed-systems primitives: CAP/PACELC, FLP impossibility, Paxos, Raft, vector clocks, CRDTs, idempotency, leases/fencing, quorums, causal consistency, and broadcast protocols (including failure-detector taxonomy)",
     "last_updated": "2026-09-25",
     "skill": "foundations-distributed-systems",
-    "total_sources": 37,
+    "total_sources": 41,
     "verification_scope": "Targeted correctness and operational-artifact review; not a fresh verification of every historical paper."
   },
   "research_papers": [
@@ -110,7 +110,7 @@
       "id": "Arun2025Shoalpp",
       "name": "Shoal++: High Throughput DAG BFT Can Be Fast and Robust!",
       "url": "https://www.usenix.org/conference/nsdi25/presentation/arun",
-      "description": "Arun, Li, Suri-Payer, Das, Spiegelman. NSDI 2025. DAG-based BFT consensus reducing average commit latency from 10.5 to 4.5 message delays (60% reduction) while matching state-of-the-art DAG throughput. Successor to Bullshark/Shoal. Relevant to primitives #3, #4, #11.",
+      "description": "Arun, Li, Suri-Payer, Das, Spiegelman. NSDI 2025. DAG-based BFT consensus with an author-reported latency reduction. Successor to Bullshark/Shoal. Relevant to primitives #3, #4, #11.",
       "url_check": "auto"
     },
     {
@@ -152,14 +152,14 @@
       "id": "Bantikyan2025Pineapple",
       "name": "Pineapple: Unifying Multi-Paxos and Atomic Shared Registers",
       "url": "https://www.usenix.org/conference/nsdi25/presentation/bantikyan",
-      "description": "Bantikyan, Zarnstorff, Chou, Tseng, Palmieri. NSDI 2025. Unifies Multi-Paxos and ABD registers via logical timestamps; any node serves reads/writes; >50% median latency reduction vs. Raft in balanced workloads; beats EPaxos tail latency. Relevant to primitives #3, #4.",
+      "description": "Bantikyan, Zarnstorff, Chou, Tseng, Palmieri. NSDI 2025. Unifies Multi-Paxos and ABD registers via logical timestamps; any node serves reads/writes; author-reported latency gains in balanced workloads. Relevant to primitives #3, #4.",
       "url_check": "auto"
     },
     {
       "id": "Babel2025Mysticeti",
       "name": "Mysticeti: Reaching the Limits of Latency with Uncertified DAGs",
       "url": "https://arxiv.org/abs/2310.14821",
-      "description": "Babel, Chursin, Danezis, Kichidis, Kokoris-Kogias, Koshy, Sonnino, Tian. NDSS 2025 (arXiv:2310.14821). First uncertified DAG BFT protocol to achieve the 3-message-round latency lower bound. WAN commit latency 0.5 s at >200 k TPS; 4× latency reduction on Sui production deployment. Mysticeti-FPC fast path weaves certificates into the DAG without additional round trips. Relevant to primitive #11 and references/research-frontier.md.",
+      "description": "Babel, Chursin, Danezis, Kichidis, Kokoris-Kogias, Koshy, Sonnino, Tian. NDSS 2025 (arXiv:2310.14821). First uncertified DAG BFT protocol to achieve the 3-message-round latency lower bound. Latency figures are author-reported. Mysticeti-FPC fast path weaves certificates into the DAG without additional round trips. Relevant to primitive #11 and references/research-frontier.md.",
       "url_check": "manual"
     },
     {
@@ -195,23 +195,23 @@
     {
       "id": "Tang2026Jetpack",
       "name": "Jetpack: Consensus Made Generally Fast",
-      "url": "https://www.usenix.org/conference/osdi26/technical-sessions",
-      "description": "Tang, Zhang, Shen (Stony Brook), Shi (DatenLord), Mu (Stony Brook). OSDI 2026. Plugin framework retrofitting a 1-RTT fast path onto existing consensus protocols by racing fast and original paths while forcing the original path to honour the committed decision. Up to 60% average commit-latency reduction across six consensus systems over 10 AWS datacentres. Names the 'view change hazard': stable-operation promises can become invalid after leader elections. Relevant to primitives #3, #4.",
-      "url_check": "manual"
+      "description": "Tang, Zhang, Shen (Stony Brook), Shi (DatenLord), Mu (Stony Brook). OSDI 2026. Plugin framework retrofitting a 1-RTT fast path onto existing consensus protocols by racing fast and original paths while forcing the original path to honour the committed decision. Latency figures are author-reported. Names the 'view change hazard': stable-operation promises can become invalid after leader elections. Relevant to primitives #3, #4. (URL is the conference page, not the paper; paper page not verified. Citation only.)",
+      "url_check": "manual",
+      "url": "https://www.usenix.org/conference/osdi26"
     },
     {
       "id": "Zhang2026EqualOpportunity",
       "name": "Equal Opportunity: A Correctness Condition for Ordered Consensus",
-      "url": "https://www.usenix.org/conference/osdi26/technical-sessions",
-      "description": "Zhang, Ni, Basu, Cohen, Yin, Alvisi, van Renesse, Chen, Zhou (Cornell / UW / UCSB / Microsoft Research). OSDI 2026. Formalises ordering fairness as a correctness condition distinct from agreement and liveness; introduces the Secret Random Oracle (trusted-hardware and threshold-VRF constructions) and Pompe-SRO, mitigating front-running and sandwich attacks at moderate latency cost. Relevant to primitives #3, #11 and references/research-frontier.md.",
-      "url_check": "manual"
+      "description": "Zhang, Ni, Basu, Cohen, Yin, Alvisi, van Renesse, Chen, Zhou (Cornell / UW / UCSB / Microsoft Research). OSDI 2026. Formalises ordering fairness as a correctness condition distinct from agreement and liveness; introduces the Secret Random Oracle (trusted-hardware and threshold-VRF constructions) and Pompe-SRO, mitigating front-running and sandwich attacks at moderate latency cost. Relevant to primitives #3, #11 and references/research-frontier.md. (URL is the conference page, not the paper; paper page not verified. Citation only.)",
+      "url_check": "manual",
+      "url": "https://www.usenix.org/conference/osdi26"
     },
     {
       "id": "Acumen2026",
       "name": "Acumen: Encrypted Real-Time Collaboration with Strong Snapshot Consistency",
-      "url": "https://www.usenix.org/conference/osdi26/technical-sessions",
-      "description": "OSDI 2026. First CRDT-based system providing strong snapshot consistency under end-to-end encryption: untrusted users create verifiable snapshots to invite collaborators without revealing prior edit history. Also provides confidentiality, integrity, and fork-causal consistency via cryptographic accumulators and a secure garbage-collection mechanism. Evaluated at 25 concurrent typists. Relevant to primitives #6, #10.",
-      "url_check": "manual"
+      "description": "OSDI 2026. First CRDT-based system providing strong snapshot consistency under end-to-end encryption: untrusted users create verifiable snapshots to invite collaborators without revealing prior edit history. Also provides confidentiality, integrity, and fork-causal consistency via cryptographic accumulators and a secure garbage-collection mechanism. Evaluated at 25 concurrent typists. Relevant to primitives #6, #10. (URL is the conference page, not the paper; paper page not verified. Citation only.)",
+      "url_check": "manual",
+      "url": "https://www.usenix.org/conference/osdi26"
     },
     {
       "id": "AWS2025UsEast1",
@@ -272,6 +272,38 @@
       "description": "Isaacs (AWS), Alvaro (UC Santa Cruz and AWS), Majumdar (MPI-SWS and AWS), Muniswamy-Reddy (AWS), Salamati (MPI-SWS), Soudjani (MPI-SWS). HotOS 2025. Body read and verified 2026-09-25. The paper's own definition (Sec. 1): \"a sustaining effect, such as a retry storm or increased work from error handling, prevents the system from making progress ... after the triggering condition is removed\" — confirms the trigger/sustaining-effect distinction used in production-failure-modes.md. Note: the paper itself attributes the definition/characterization of metastable failures to Bronson et al., HotOS 2021 [6], and its own contribution is a modeling/prediction toolchain (CTMC, DES, emulation), not new case studies; it predates and does not discuss the AWS 2025-10-20 outage, so it is not a source for that worked example — only for the general framing terminology.",
       "url_check": "manual",
       "claim_location": "Full text read 2026-09-25; claim at Abstract and Section 1 (Introduction), definition of metastable failure and sustaining effect."
+    },
+    {
+      "id": "Kleppmann2015CAPCritique",
+      "name": "A Critique of the CAP Theorem",
+      "url": "https://arxiv.org/abs/1509.05393",
+      "description": "Kleppmann (arXiv:1509.05393, 2015). CAP's C and A are narrow definitions; whole-system CP/AP labels are not defensible; proposes delay-sensitivity framing.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11"
+    },
+    {
+      "id": "GrayCheriton1989Leases",
+      "name": "Leases: An Efficient Fault-Tolerant Mechanism for Distributed File Cache Consistency",
+      "url": "https://dl.acm.org/doi/10.1145/74850.74870",
+      "description": "Gray & Cheriton (SOSP 1989). Original lease paper; lease safety needs a bound on clock drift rate over the term.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11"
+    },
+    {
+      "id": "Li2026ExactlyOnceAgents",
+      "name": "Where Does Exactly-Once Live?",
+      "url": "https://arxiv.org/abs/2609.29095",
+      "description": "Li (arXiv:2609.29095, Sep 2026, preprint). Measured agent tool-call duplicates; the tool contract (required idempotency keys) dominated, and agents self-reported success on duplicate episodes. Direction only.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11"
+    },
+    {
+      "id": "Atomix2026",
+      "name": "Atomix (agent transactions with effect buffering)",
+      "url": "https://arxiv.org/abs/2602.14849",
+      "description": "arXiv:2602.14849 (v2 May 2026, preprint). Buffers agent effects until commit when no earlier conflicting work can arrive; compensates reversible effects on abort. Hedged pointer; short name, full title not recorded.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11"
     }
   ]
 }

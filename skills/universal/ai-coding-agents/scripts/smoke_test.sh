@@ -19,7 +19,8 @@ Checks, in order:
      SMOKE_TEST_MODEL must name a model your account can call; the script
      pins no model id.
   2. Tool registry present (.claude/, .codex/, or an SDK dependency).
-  3. Sandbox engaged: container marker, AGENT_SANDBOX=1, SANDBOX_EXEC_PROFILE,
+  3. Sandbox engaged: container marker, AGENT_SANDBOX=1, SANDBOX_EXEC_PROFILE
+     (both attested, not verified; an explicit sandbox.enabled=false wins),
      or a Claude Code settings file whose parsed JSON has
      sandbox.enabled == true (settings.local.json overrides settings.json).
      A present-but-false or unparseable setting FAILS.
@@ -45,7 +46,11 @@ check() {
   local result="$2"   # "ok" | "fail"
   local detail="$3"
   if [[ "$result" == "ok" ]]; then
-    RESULTS+=("  [PASS] $label")
+    if [[ "$detail" == *"attested, not verified"* ]]; then
+      RESULTS+=("  [PASS] $label — $detail")
+    else
+      RESULTS+=("  [PASS] $label")
+    fi
     ((++PASS))
   else
     RESULTS+=("  [FAIL] $label — $detail")
@@ -82,9 +87,9 @@ elif [[ -n "${ANTHROPIC_API_KEY:-}" ]]; then
   if [[ -z "${SMOKE_TEST_MODEL:-}" ]]; then
     MODEL_DETAIL="ANTHROPIC_API_KEY set but SMOKE_TEST_MODEL is empty; set it to a model id your account can call"
   else
-    STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+    # The key goes to curl on stdin (--config -), never in argv.
+    STATUS=$(printf 'header = "x-api-key: %s"\n' "$ANTHROPIC_API_KEY" | curl --config - -s --max-time 15 -o /dev/null -w "%{http_code}" \
       -X POST "https://api.anthropic.com/v1/messages" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
       -H "anthropic-version: 2023-06-01" \
       -H "content-type: application/json" \
       -d "{\"model\":\"${SMOKE_TEST_MODEL}\",\"max_tokens\":1,\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}]}" \
@@ -97,9 +102,8 @@ elif [[ -n "${ANTHROPIC_API_KEY:-}" ]]; then
   fi
 elif [[ -n "${OPENAI_API_KEY:-}" ]]; then
   MODEL_LABEL="Model API reachable (authenticated)"
-  STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-    -X GET "https://api.openai.com/v1/models" \
-    -H "Authorization: Bearer $OPENAI_API_KEY" 2>/dev/null || echo "000")
+  STATUS=$(printf 'header = "Authorization: Bearer %s"\n' "$OPENAI_API_KEY" | curl --config - -s --max-time 15 -o /dev/null -w "%{http_code}" \
+    -X GET "https://api.openai.com/v1/models" 2>/dev/null || echo "000")
   if [[ "$STATUS" == "200" ]]; then
     MODEL_OK="ok"; MODEL_DETAIL="OpenAI API reachable (HTTP 200)"
   else
@@ -135,7 +139,8 @@ check "Tool registry loaded" "$REGISTRY_OK" "$REGISTRY_DETAIL"
 # ── 3. Sandbox engaged ────────────────────────────────────────────────────────
 # Any one of these passes:
 #   a. Running inside a container (/.dockerenv or cgroup marker)
-#   b. AGENT_SANDBOX=1 env var set (operator attestation)
+#   b. AGENT_SANDBOX=1 env var set (operator attestation; an explicit
+#      sandbox.enabled=false in settings wins over it)
 #   c. macOS sandbox-exec profile active (SANDBOX_EXEC_PROFILE set)
 #   d. Claude Code settings whose parsed JSON has sandbox.enabled == true.
 #      settings.local.json overrides settings.json. The mere presence of a
@@ -174,19 +179,20 @@ if [[ -f "/.dockerenv" ]]; then
   SANDBOX_OK="ok"; SANDBOX_DETAIL="container environment detected (/.dockerenv)"
 elif grep -q 'docker\|lxc\|containerd' /proc/1/cgroup 2>/dev/null; then
   SANDBOX_OK="ok"; SANDBOX_DETAIL="cgroup sandbox marker detected"
+elif [[ "$CLAUDE_SANDBOX" == false:* ]]; then
+  # An explicit false in settings wins over env-var attestations.
+  SANDBOX_DETAIL="sandbox.enabled is not true in .claude/${CLAUDE_SANDBOX#false:}"
 elif [[ "${AGENT_SANDBOX:-}" == "1" ]]; then
-  SANDBOX_OK="ok"; SANDBOX_DETAIL="AGENT_SANDBOX=1 env var set"
+  SANDBOX_OK="ok"; SANDBOX_DETAIL="AGENT_SANDBOX=1 env var set (attested, not verified)"
 elif [[ -n "${SANDBOX_EXEC_PROFILE:-}" ]]; then
-  SANDBOX_OK="ok"; SANDBOX_DETAIL="macOS sandbox-exec profile active: $SANDBOX_EXEC_PROFILE"
+  SANDBOX_OK="ok"; SANDBOX_DETAIL="SANDBOX_EXEC_PROFILE set: $SANDBOX_EXEC_PROFILE (attested, not verified)"
 elif [[ "$CLAUDE_SANDBOX" == "true" ]]; then
   SANDBOX_OK="ok"; SANDBOX_DETAIL="sandbox.enabled is true in .claude settings"
-elif [[ "$CLAUDE_SANDBOX" == false:* ]]; then
-  SANDBOX_DETAIL="sandbox.enabled is not true in .claude/${CLAUDE_SANDBOX#false:}"
 elif [[ "$CLAUDE_SANDBOX" == error:* ]]; then
   SANDBOX_DETAIL="${CLAUDE_SANDBOX#error:}"
 fi
 
-# Warn rather than hard-fail when running interactively outside CI
+# Add a hint when running interactively; the check still FAILS (exit 1)
 if [[ "$SANDBOX_OK" == "fail" && -t 0 ]]; then
   SANDBOX_DETAIL="$SANDBOX_DETAIL (interactive shell — set AGENT_SANDBOX=1 or run inside a container)"
 fi

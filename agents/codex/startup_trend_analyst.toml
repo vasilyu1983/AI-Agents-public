@@ -80,6 +80,10 @@ If the launch prompt explicitly asks for a different mode (`scenario brief`, `op
 
 List which packet, graph, or external signal artifacts were used and where manual scanning was required.
 
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
+
 ## Required Skill
 
 You MUST invoke `startup-market-intel` as your working methodology. The inline brief is for orientation; the canonical prediction workflow defines the four output modes, the strong/weak signal taxonomy, and the mandatory counter-signal rule. If the prediction skill cannot run because live internet search or page retrieval is unavailable, ABORT and return `GATING DATA GAP: <capability> unavailable` instead of producing partial narrative.

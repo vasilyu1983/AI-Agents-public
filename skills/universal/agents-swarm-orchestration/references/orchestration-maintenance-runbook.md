@@ -6,6 +6,7 @@
 - [Operating Stance](#operating-stance)
 - [What To Review Monthly](#what-to-review-monthly)
 - [What To Review After Any Model Catalog Change](#what-to-review-after-any-model-catalog-change)
+- [When The Model Changes](#when-the-model-changes)
 - [Surface Selection Rules](#surface-selection-rules)
 - [Fan-Out Budgeting](#fan-out-budgeting)
 - [Shared-State Checks](#shared-state-checks)
@@ -64,6 +65,17 @@ Re-check:
 - whether runtime controls for subagents, teams, or handoffs changed
 
 Do not only refresh the model settings. Refresh the orchestration design assumptions too.
+
+## When The Model Changes
+
+Trigger: the session model changes, or any member's model changes.
+
+1. Re-run your review canary and your model-change probes before you trust the hive again.
+2. Pin effort per role, so a changed default does not silently change behavior. Providers have changed default effort between releases.
+3. Log which skill actually ran when two installed skills overlap. Skill effects flip with configuration.
+   One study (arXiv 2610.08875) reports that the same skills help some configurations and hurt others on 36.78% of tasks.
+   Co-installed look-alike skills can displace each other's rules, such as a ban on touching git (arXiv 2610.11647). Both are single preprints; they support the check, not a size.
+4. Avoid installing look-alike skills side by side. Remove one, or scope each to a different trigger.
 
 ## Surface Selection Rules
 

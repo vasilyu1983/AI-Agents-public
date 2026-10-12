@@ -446,7 +446,7 @@ Note: `weekly` and `blocks` are not available in @ccusage/codex. Check `--help` 
 
 - No data before September 6, 2025 (when Codex CLI started emitting token events)
 - Some early September 2025 sessions without model metadata are skipped
-- Falls back to `gpt-5` model name when metadata is missing
+- Falls back to a default model name when metadata is missing
 
 ---
 
@@ -503,7 +503,7 @@ npx @ccusage/codex@latest monthly --json > codex-monthly.json
       "totalTokens": 155000,
       "costUSD": 1.23,
       "models": {
-        "claude-sonnet-4-6": { "inputTokens": 125000, "outputTokens": 30000, "..." : "..." }
+        "<model-id>": { "inputTokens": 125000, "outputTokens": 30000, "..." : "..." }
       }
     }
   ],

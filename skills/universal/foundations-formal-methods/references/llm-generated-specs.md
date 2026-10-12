@@ -9,6 +9,8 @@ Benchmarks show that specifications, and not only proofs, are the weak point:
 - **VERINA** (arXiv:2505.23135, v3, 2026-03-16) has 189 Lean tasks. For its top-performing general-purpose model, OpenAI o3, the [Introduction](https://arxiv.org/html/2505.23135v3#S1) reports “72.6% correct code solutions, 52.3% sound and complete specifications, and 4.9% successful proof in one trial.”
 - **Vericoding benchmark** (arXiv:2509.22908, 2025) has 12,504 formal specifications. With off-the-shelf LLMs, it reported success rates of 27% in Lean, 44% in Verus/Rust and 82% in Dafny. It also found that success on pure Dafny verification rose from 68% to 96% over one year.
 
+- **SysMoBench** (arXiv:2509.23130) scores LLM-generated TLA+ in phases: syntax, runtime, conformance to real-system traces, and invariants. A secondary summary (not the paper) reports near-perfect syntax but much weaker conformance and invariant scores. Direction only: passing the parser and TLC is the cheap phase; conformance to the real system is where generated specs fail.
+
 These are benchmark figures for specific models and dates, not expected rates for your task. The direction is stable across both benchmarks: a generated artifact that verifies may still verify the wrong property.
 
 ## Characteristic failure modes
@@ -21,6 +23,8 @@ These are benchmark figures for specific models and dates, not expected rates fo
    - Dafny: `assume`, `{:axiom}`, `{:verify false}`, bodiless `{:extern}` methods
    - Verus: `assume`, `admit()`, `#[verifier::external_body]`
    - TLA+: new `ASSUME`, or `CONSTRAINT`/`ACTION_CONSTRAINT` in the config
+   - P: removed or weakened `assert` statements and spec monitors
+   - Alloy: widened scope, or dropped facts that served as assumptions
 3. **Over-constrained environment.** Failures, retries or concurrent actors are removed from `Next`, or a state constraint prunes the bug. Example: one worker instead of two hides the race in [agent-workflows.md](agent-workflows.md).
 4. **Property edited to pass.** After a counterexample, the model "fixes" the invariant rather than the design.
 5. **Autoformalization drift.** The natural-language requirement and the formal property differ in quantifier scope, time ("eventually" versus "always"), or which object is constrained. Parsing catches none of this.
@@ -38,7 +42,8 @@ These are benchmark figures for specific models and dates, not expected rates fo
    - Check that the antecedent of each implication is reachable.
 6. **Run a mutation check.** Seed a known bug, such as removing a lock, dropping the dedup check or allowing one more retry. The checker must fail. If it still passes, the property or the environment cannot see that bug class.
 7. **Rerun the checker yourself.** Use a pinned tool version and record the result, with bounds, per the [verification report](../assets/verification-report.md). An LLM's claim that it ran the checker does not count as a run.
-8. **Keep the claim in scope.** A verified generated spec is evidence about that spec. Code correspondence still needs the obligations in [refinement.md](refinement.md).
+8. **Check trace conformance.** For a generated system model (TLA+, P), near-perfect syntax does not imply conformance. Replay real logs or traces against the spec, or generate tests from it, before trusting its invariants. Until then a counterexample or a pass is a hypothesis about the model, not the system.
+9. **Keep the claim in scope.** A verified generated spec is evidence about that spec. Code correspondence still needs the obligations in [refinement.md](refinement.md).
 
 ## Where an LLM genuinely helps
 

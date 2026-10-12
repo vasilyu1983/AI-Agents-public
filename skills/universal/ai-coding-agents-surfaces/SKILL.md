@@ -3,7 +3,7 @@ name: ai-coding-agents-surfaces
 description: "Designs user-facing surfaces of coding-agent runtimes: remote and bridge sessions, transports, reconnect, terminal REPL, input history. Use when building agent UIs."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "2.0"
-last_validated: 2026-09-29
+last_validated: 2026-10-09
 ---
 
 # AI Coding Agents Surfaces

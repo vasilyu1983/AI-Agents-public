@@ -98,3 +98,7 @@ Give the first documentation corrections to make, with the rationale for the ord
 ### Context Used
 
 List which doc-coverage report, prior audit, or doc surfaces were consumed, and where manual inspection was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

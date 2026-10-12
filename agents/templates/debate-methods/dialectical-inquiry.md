@@ -116,7 +116,7 @@ Dialectical Inquiry fits 5-member teams naturally:
 
 - Georg Wilhelm Friedrich Hegel, *Phenomenology of Spirit* (1807) — original dialectical method, though Hegel himself rarely used the exact terms "thesis/antithesis/synthesis."
 - Richard Mason and Ian Mitroff, *Challenging Strategic Planning Assumptions* (1981) — formal adaptation for strategic planning, now standard in MBA strategy courses.
-- David Schwenk, "Cognitive simplification processes in strategic decision-making" (1984) — empirical evidence that dialectical inquiry produces higher-quality strategic decisions than devil's advocate or consensus approaches in complex domains.
+- Charles R. Schwenk, "Cognitive simplification processes in strategic decision-making" (1984) — empirical evidence that dialectical inquiry produces higher-quality strategic decisions than devil's advocate or consensus approaches in complex domains.
 
 ## Common Mistakes
 

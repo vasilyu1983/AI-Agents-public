@@ -2,7 +2,7 @@
   "metadata": {
     "skill": "ai-agents",
     "updated": "2026-07-11",
-    "total_sources": 58,
+    "total_sources": 61,
     "description": "Curated primary sources for production agent systems: architecture, protocols, tool design, evaluation, observability, and economics.",
     "version": "5.4",
     "title": "AI Agents - Sources",
@@ -256,6 +256,15 @@
         "update_frequency": "continuous",
         "access": "free",
         "add_as_web_search": true
+      },
+      {
+        "name": "REA MCP tool design (morluto/rea, MIT, pinned 411498d)",
+        "url": "https://github.com/morluto/rea/blob/411498d45f860eba2fbc9d7051af20237b7a4cb1/docs/tool-design.md",
+        "type": "documentation",
+        "relevance": "Tool-granularity guidance from a reverse-engineering MCP server: primitives first, composed workflows only after repeated use, no mode flags or mega-tools, discoverability proven on the intended host. Single-project guidance, not a standard. Extracted 2026-10-09.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
       }
     ],
     "framework_docs": [
@@ -536,6 +545,24 @@
         "url": "https://arxiv.org/abs/2601.18341",
         "type": "research",
         "relevance": "129,134-project empirical study estimating ~16-23% coding-agent adoption at file/commit level on GitHub by late 2025. Use as the sourced baseline instead of single-vendor PR-count marketing claims. Verified 2026-07-11.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Debate or Vote: Which Yields Better Decisions in Multi-Agent LLMs (arXiv:2508.17536)",
+        "url": "https://arxiv.org/abs/2508.17536",
+        "type": "research",
+        "relevance": "NeurIPS 2025. Majority voting accounts for most of the gains attributed to multi-agent debate. Supports vote-before-debate.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Lossy summary handoffs drop boundary rules (arXiv:2608.29028)",
+        "url": "https://arxiv.org/abs/2608.29028",
+        "type": "research",
+        "relevance": "Short summaries keep facts but drop boundary rules. Supports copying constraints verbatim in handoffs. Preprint; validate.",
         "update_frequency": "static",
         "access": "free",
         "add_as_web_search": false

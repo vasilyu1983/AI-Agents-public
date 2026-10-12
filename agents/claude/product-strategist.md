@@ -1,7 +1,7 @@
 ---
 name: product-strategist
 family: product
-description: "Analyze product-market fit, roadmap priorities, competitive positioning, and user needs. Use when evaluating features, validating ideas, or planning product launches. Produces a strategy assessment with prioritization rationale; does not build features or commit roadmap dates."
+description: "Analyze product-market fit, roadmap priorities, competitive positioning, and user needs. Use when evaluating features, validating ideas, or planning launches. Produces a strategy assessment with prioritization rationale; does not build features or commit dates. Not for backlog scoping (use product-manager)."
 tools:
   - Read
   - Grep
@@ -131,6 +131,10 @@ Produce a `validation-scorecard.md` artifact as defined by `startup-idea-validat
 ### Context Used
 
 List which packet, graph, or impact artifacts were used and where manual tracing was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
 
 ## Required Skills
 

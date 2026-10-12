@@ -22,14 +22,14 @@ A small expected effect is **not** a reason to buy a small-n lab study. If the l
 ## 2. Metric reliability and validity
 
 - **van Diepen, Boksem & Smidts (2025), J. Advertising 54(4):506–526**, DOI 10.1080/00913367.2024.2418109 (online 2024-12-10). Abstract: reliability ranged from poor (alpha asymmetry) to good (alpha, beta) to excellent (ISC). Repeated viewings improved reliability. 30–40 participants were required for most metrics. The abstract reports no ISC-specific minimum (figures such as n≈11–15 for r≈0.7 circulate) and does not say that FAA fails to improve with repetition; read the full text before using either claim.
-- **ISC and attention:** ISC tracked attention with r≈0.65 across 14 studies (BMC Psychology 2025, DOI 10.1186/s40359-025-02879-7). This concerns attention generally, not ad effectiveness.
+- **ISC and attention:** a 2025 BMC Psychology review on ISC and attention is cited in secondary sources; its pooled figure is unsourced — verify before quoting. It concerns attention generally, not ad effectiveness.
 - **EEG preference measures:** a 174-paper systematic review (Brain Informatics, DOI 10.1186/s40708-022-00175-3) found FAA the most cited and LPP the most reliable ERP, but limited consistency across papers against preference and purchase. Single-metric EEG preference claims are weak evidence.
 - **Autonomic arousal:** the brain affective arousal signature (BAAS, Nat. Commun. 2025, DOI 10.1038/s41467-025-61706-0; validation across 24 studies, n=868) is statistically distinct from GSR/HRV autonomic arousal. GSR is activation, not felt arousal, and has no valence.
 - **Consumer-grade EEG:** limit claims from consumer headbands to ISC and broad spectral bands; see [patterns-scenarios-traps.md](patterns-scenarios-traps.md).
 
 ## 3. Incremental and predictive validity
 
-- **Venkatraman et al. (2015), JMR 52(4):436–452**, DOI 10.1509/jmr.13.0593. Six methods (self-report, implicit, eye-tracking, biometrics, EEG, fMRI) on 30-second TV ads, related to market-level advertising elasticities from sales and GRP time series. fMRI measures explained the most variance beyond traditional measures; ventral striatum activity was the strongest predictor. Use it to bound expectations: incremental validity over self-report is the question to ask of every method.
+- **Venkatraman et al. (2015), JMR 52(4):436–452**, DOI 10.1509/jmr.13.0593. Several methods (self-report, implicit, eye-tracking, biometrics, EEG, fMRI; the method count is unsourced — verify) on 30-second TV ads, related to market-level advertising elasticities from sales and GRP time series. fMRI measures explained the most variance beyond traditional measures; ventral striatum activity was the strongest predictor. Use it to bound expectations: incremental validity over self-report is the question to ask of every method.
 - **Neuroforecasting:** NAcc activity forecast aggregate internet-market outcomes regardless of lab-sample representativeness, with about 20–25 subjects sufficient (Genevsky, Tong & Knutson 2025, PNAS Nexus 4(2):pgaf029). In a conservation and social-media domain, group MPFC rather than NAcc forecast aggregate engagement out of sample (Srirangarajan et al. 2026, PNAS Nexus 5(2):pgag012; n=34). Which region generalises depends on the domain; preregister it.
 
 ## 4. Vendor evaluation questions

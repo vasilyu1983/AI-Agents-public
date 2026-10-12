@@ -3,7 +3,7 @@ name: ai-coding-agents-state
 description: "Designs session and task state for coding-agent runtimes: resume, checkpoints, compaction, cancellation, background and scheduled runs. Use when persisting agent work."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "2.0"
-last_validated: 2026-09-29
+last_validated: 2026-10-09
 ---
 
 # AI Coding Agents State

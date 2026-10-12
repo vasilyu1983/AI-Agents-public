@@ -3,6 +3,7 @@
 import argparse
 import json
 import math
+import sys
 
 
 def facts(value):
@@ -54,6 +55,7 @@ def unique_object(pairs):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('model')
+    parser.add_argument('--strict', action='store_true', help='exit 1 unless status is goal (default: exit 0 for failed-precondition and goal-unmet; read status)')
     args = parser.parse_args()
     try:
         with open(args.model, encoding='utf-8') as handle:
@@ -61,6 +63,8 @@ def main():
     except (ValueError, OSError) as error:
         parser.error(str(error))
     print(json.dumps(result, allow_nan=False, indent=2))
+    if args.strict and result['status'] != 'goal':
+        sys.exit(1)
 
 
 if __name__ == '__main__':

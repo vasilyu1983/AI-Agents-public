@@ -91,21 +91,13 @@ Checklist:
 
 ## Burn Alerts
 
-**Fast Burn:**  
-Triggers when error budget depletes rapidly.
-```
+Multiwindow, multi-burn-rate alerts (SRE Workbook, "Alerting on SLOs", multiwindow multi-burn-rate section). Fire only when both the long and the short window exceed the burn rate; short window = 1/12 of the long window.
 
-if error_budget_burn_rate > 5% / hour → alert P1
-
-```
-
-**Slow Burn:**  
-Triggers when remaining budget trends downward.
-```
-
-if error_budget_burn_rate > 20% / 24h → alert P2
-
-```
+| Burn rate | Long window | Short window | Budget consumed | Action |
+|---|---|---|---|---|
+| 14.4x | 1h | 5m | 2% | page |
+| 6x | 6h | 30m | 5% | page |
+| 1x | 3d | 6h | 10% | ticket |
 
 Checklist:
 - [ ] Actions defined when burn starts  

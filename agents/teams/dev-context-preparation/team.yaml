@@ -55,4 +55,11 @@ verdict_options:
 - partial_with_gaps
 trust:
   default_tier: standard
+budget:
+  max_rounds: 4
+  max_turns_per_member: 12
+  token_envelope: 300000
+verification:
+  mode: heterogeneous
+  rule: each member's artifacts are checked by a different member with clean context (graph output by dev-repo-context-curator, packets by dev-portfolio-mapper); the parent thread spot-checks provenance in the final packet; self-checks do not count
 design_rationale: ../../../skills/universal/agents-subagents/references/team-design-rationale.md#dev-context-preparation

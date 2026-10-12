@@ -264,7 +264,7 @@ Aggregate spend dashboards hide the cost distribution. A small percentage of use
 
 - **Langfuse** — open source, self-hostable. Traces, cost per trace/user, token usage breakdown, latency. Strong for teams that want full data control.
 - **Helicone** — hosted proxy layer. Wraps your API calls with zero code change, adds per-user and per-request cost tracking, rate limiting, caching.
-- **Portkey** — hosted gateway. Multi-provider routing, cost attribution, semantic caching, fallback chains. Adds a proxy hop but simplifies multi-model setups.
+- **Portkey** — open-source gateway (MIT core, self-hostable) with a hosted option. Multi-provider routing, cost attribution, semantic caching, fallback chains. Adds a proxy hop but simplifies multi-model setups.
 
 All three are practitioner-adopted tools; pricing and feature sets change — verify current plans before committing.
 

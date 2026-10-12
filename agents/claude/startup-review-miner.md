@@ -97,6 +97,10 @@ Raw row per cited review:
 
 List which packet, graph, or review-corpus artifacts were used and where manual collection was required.
 
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
+
 ## Required Skill
 
 You MUST invoke `research-review-mining` as your working methodology. The inline brief is for orientation; the canonical mining workflow defines the row schemas, the severity/addressability/confidence anchored scales, and the URL+quote traceability requirement. Every theme must be backed by verbatim quotes + source links — no exceptions. If the review collection path (official API, public web search, third-party tooling, or manual) is blocked, ABORT and return `GATING DATA GAP: review collection path blocked` instead of producing partial narrative.

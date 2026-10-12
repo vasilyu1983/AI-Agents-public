@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Imagine the decision has already failed, then work backwards to identify the failure modes you are currently blind to. Gary Klein's 2007 technique, empirically shown to improve risk identification by 30% over forward brainstorming.
+Imagine the decision has already failed, then work backwards to identify the failure modes you are currently blind to. Gary Klein's technique, described in his 2007 HBR article. The often-quoted "30% more failure modes" figure is unsourced — verify (not found in the article text this file's author could read; it may trace to earlier prospective-hindsight research).
 
 ## When To Use
 
@@ -65,12 +65,15 @@ From your stakeholder role, answer:
 Synthesis owner instruction:
 "Collect all autopsies. Cluster the failure modes. For each cluster:
 - Name the failure mode
+- Estimate its severity (impact if it happens) and likelihood
 - Count how many agents independently surfaced it
 - Name the specific guardrail that prevents it
 - Flag which warning signs are already present in the current proposal
 
-Do not rank by severity. Rank by 'how many independent agents saw it' — that's
-the signal for 'this is a real risk, not one person's hobbyhorse.'"
+Rank by severity first, then by the independent count. Do not let a high count
+promote a low-severity mode over a high-severity mode that one agent saw. The
+count is a tie-breaker and a sanity check, not a vote: agents on the same model
+share training and blind spots, so they are not fully independent witnesses."
 ```
 
 ## Integration With The 3-Of-5 Pattern
@@ -84,13 +87,13 @@ Five autopsies is within the noise ceiling for pre-mortem specifically because e
 
 ## Evidence
 
-- Gary Klein, ["Performing a Project Premortem"](https://hbr.org/2007/09/performing-a-project-premortem), Harvard Business Review, September 2007. Research showed 30% more failure modes identified vs standard brainstorming.
+- Gary Klein, ["Performing a Project Premortem"](https://hbr.org/2007/09/performing-a-project-premortem), Harvard Business Review, September 2007. Source of the technique. The "30% more failure modes vs standard brainstorming" figure previously stated here is unsourced — verify before quoting.
 - Daniel Kahneman, *Thinking, Fast and Slow* (2011), ch. 24 — endorses pre-mortem as one of the few reliable de-biasing techniques.
-- [Klein, Koller, & Lovallo, "Bias Busters"](https://www.mckinsey.com/) — McKinsey Quarterly validation across strategy reviews.
+- McKinsey Quarterly "validation across strategy reviews" (previously cited as Klein, Koller & Lovallo, "Bias Busters"): unsourced — verify. No primary source was found, so the link was removed.
 
 ## Common Mistakes
 
 - **Phrasing as future tense**: "What could go wrong?" is forward brainstorming, not pre-mortem. The past-tense ("it DID fail") is essential.
 - **Skipping question 5**: "Which warning signs are already present?" is the payoff. Without it, you have a theoretical risk list, not a decision change.
-- **Ranking by severity instead of independent discovery**: one loud voice dominates. Rank by how many agents independently surfaced the same failure — that's the real signal.
+- **Ranking by count instead of severity**: one loud voice dominates. Rank by severity first, then by how many agents independently surfaced the same failure (same-model agents are not fully independent, so the count never outranks severity).
 - **Running it AFTER the decision is locked**: pre-mortem must happen before commitment. Post-lock, it becomes a CYA exercise.

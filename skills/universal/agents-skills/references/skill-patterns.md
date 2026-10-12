@@ -14,6 +14,7 @@ Use these patterns to keep skills small, navigable, and scoped to the runtime th
 - [Pattern 8: Self-Bootstrapping Skill](#pattern-8-self-bootstrapping-skill)
 - [Pattern 9: Composable Skill](#pattern-9-composable-skill)
 - [Pattern 10: Stage-Based Selection Pipeline](#pattern-10-stage-based-selection-pipeline)
+- [Pattern 11: Tool-Wrapping Skill](#pattern-11-tool-wrapping-skill)
 - [Naming Rules](#naming-rules)
 - [Anti-Patterns](#anti-patterns)
 
@@ -308,6 +309,24 @@ Invariants:
 - **Parallel where independent, sequential where order matters**: sources and hydrators can fan out; filters, scorers, and final validation normally run in order.
 - **Post-selection gates are real gates**: final selected outputs still need boundary, safety, and evidence checks.
 - **Side effects are explicit**: learnings, eval fixtures, logs, and catalog updates happen after the primary decision and are reported separately.
+
+## Pattern 11: Tool-Wrapping Skill
+
+Use when a skill drives an MCP server or CLI tool.
+
+**Source**: [morluto/rea](https://github.com/morluto/rea/tree/411498d45f860eba2fbc9d7051af20237b7a4cb1), commit `411498d45f860eba2fbc9d7051af20237b7a4cb1`, MIT license. Pattern extracted 2026-10-09.
+
+Rules:
+
+- Installing the skill does not register the server or add tools to a running session. Say so in the skill.
+- The skill and the server version separately. The session's live tool list and schemas win over the skill text; never call a tool the server does not advertise.
+- Default: when the tools are present, proceed. Do not run diagnostics or setup before every task. The [agents-mcp Health Gate](../../agents-mcp/SKILL.md#health-gate) applies once, when adopting a server, and its read-only checks are the diagnosis step below.
+- When tools are missing, diagnose read-only first and name the cause, because each cause has a different fix:
+  - missing or malformed registration: repair the config;
+  - registered but not connected in this session: restart or reconnect;
+  - missing optional backend: affects only tasks that need it.
+- Before any config write, show a dry-run plan (paths, backups, changes) and get approval. After the write, restart and check that the tools appear. If they stay absent, read the client's launch error instead of repeating setup.
+- If a CLI fallback exists, offer it, and state that it does not prove MCP is configured.
 
 ## Real-World Skill Decomposition: career-ops
 

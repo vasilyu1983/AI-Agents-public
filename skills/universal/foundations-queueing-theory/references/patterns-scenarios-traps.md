@@ -16,7 +16,7 @@ status: stable
 | Drop-on-busy system | Calls/connections are blocked, not queued | Erlang-B -> blocking target |
 | Fan-out latency audit | Scatter-gather p95/p99 is high | Fork-join -> tail distribution -> speculative execution |
 | Scale-out limit | Adding replicas stops helping | USL fit -> contention/coherency diagnosis |
-| Prediction-augmented scheduling | ML output-length predictions available; need to reduce mean response time while bounding degradation under prediction error | Embed job-size predictor -> scheduling variant with a proven degradation bound (SPRPT-with-bounce or PSPJF) -> for LLM serving, Trail's limited preemption -> measure consistency/robustness ratio -> escalate to Robust Gittins if distributional uncertainty is high |
+| Prediction-augmented scheduling | ML output-length predictions available; need to reduce mean response time while bounding degradation under prediction error | Embed job-size predictor -> scheduling variant with a proven degradation bound (an SRPT variant or PSJF) -> for LLM serving, Trail's limited preemption -> measure consistency/robustness ratio -> escalate to Robust Gittins if distributional uncertainty is high |
 | Memory-coupled capacity sizing | Admitted work holds a resource that grows with service progress and frees only at completion (KV cache, session state) | Joint compute-and-memory stability condition -> derive stable service rate -> size cluster from forecast arrival rate -> admission-control on projected peak occupancy -> check for eviction limit cycles |
 
 ## Known Traps

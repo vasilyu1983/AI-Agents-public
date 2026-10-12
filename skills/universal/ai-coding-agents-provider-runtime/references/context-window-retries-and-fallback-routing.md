@@ -42,6 +42,8 @@ Fallback is safe only when you define:
 
 A cross-provider fallback also drops provider-specific reasoning items (record the loss) and starts with a cold prompt cache, so its cost includes the lost cache.
 
+Budget-aware cascade (preprints, validate on your own traffic; not proven): use the strong model for planning and synthesis and a cheaper model for leaf steps (arXiv 2603.05818 RouteGoT, arXiv 2602.21227). Select reasoning effort per step, not per run (arXiv 2603.07915). Keep the fallback rules above for the cheaper tier too.
+
 ## Edge cases
 
 - **Fallback to weaker tool semantics**: if the fallback provider cannot match the primary tool-call contract, the runtime should degrade visibly or disable the workflow.

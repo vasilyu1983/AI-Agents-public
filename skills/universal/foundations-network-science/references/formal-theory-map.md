@@ -57,5 +57,5 @@ Use this map when a graph analysis depends on structural assumptions, statistica
 - Brin and Page: PageRank.
 - Fortunato: community detection and modularity limits.
 - Clauset, Shalizi, Newman: power-law testing.
-- Broido and Clauset: strict-taxonomy empirical finding that "strongest" scale-free structure is uncommon (~4% of 927 networks) — contested, not settled; see Holme (2019) for the counter-framing that the finding is an artifact of definitional strictness.
+- Broido and Clauset: strict-taxonomy empirical finding that "strongest" scale-free structure is uncommon (~4% of nearly 1000 network data sets; 52% meet the weakest tier) — contested, not settled; see Holme (2019) for the counter-framing that the finding is an artifact of definitional strictness.
 - Holme and Saramaki: temporal networks.

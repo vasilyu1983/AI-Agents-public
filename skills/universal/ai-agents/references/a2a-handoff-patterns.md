@@ -460,12 +460,8 @@ Before deploying A2A coordination:
 5. Document agent capabilities (discovery)
 
 **Related guides**:
-- `frameworks/shared-foundations/protocols/a2a/a2a-architecture.md` - Full protocol specification
-- `frameworks/shared-foundations/protocols/a2a/a2a-implementation.md` - Implementation details
-- `frameworks/shared-foundations/protocols/a2a/a2a-examples.md` - Real-world examples
 - [`agents-mcp`](../../agents-mcp/SKILL.md) - For agent-to-tool integration (complementary)
 - `multi-agent-patterns.md` - Additional orchestration strategies
 
 **Official resources**:
-- A2A Specification: https://a2a.anthropic.com/
-- Agent Communication Best Practices: https://www.anthropic.com/research/agent-coordination
+- A2A Specification (Linux Foundation project): https://a2a-protocol.org/latest/specification/

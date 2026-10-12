@@ -23,7 +23,7 @@ A procedure that controls FDR does not protect a gate. If any single false "regr
   - Apply BH at q / c(m), where c(m) = Σ 1/i.
   - This is much more conservative. Use it when the dependence sign is unknown, for example overlapping slices or metrics that trade off against each other.
 - **e-BH** [WangRamdas2022]. FDR control on e-values under arbitrary dependence. Suits sequential or anytime-valid evidence.
-- **Fixed-sequence gatekeeping.** Test each hypothesis at full α in a pre-specified order, and stop testing at the first non-rejection. Opening several parallel secondary tests after a primary rejection needs its own multiplicity procedure; the primary gate alone does not control their FWER. See the [FDA 2017 draft](https://www.fda.gov/media/102657/download), §IV.C.5, for the fixed-sequence construction.
+- **Fixed-sequence gatekeeping.** Test each hypothesis at full α in a pre-specified order, and stop testing at the first non-rejection. Opening several parallel secondary tests after a primary rejection needs its own multiplicity procedure; the primary gate alone does not control their FWER. See the [FDA final guidance on multiple endpoints in clinical trials](https://www.federalregister.gov/documents/2022/10/21/2022-22882/multiple-endpoints-in-clinical-trials-guidance-for-industry-availability) (finalized 2022-10-21) for the fixed-sequence construction; check its current section numbering.
 
 ## Worked example (re-derived with python3)
 

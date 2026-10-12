@@ -254,7 +254,7 @@ Production changes that need review:
 |---|---|---|
 | Code change | Standard PR review | Eval suite green |
 | Prompt change | Eval-suite gate + 1 reviewer | Canary cohort |
-| Model change (e.g., Opus 4.6 → 4.7) | Eval-suite gate + ops sign-off | Canary + cost forecast |
+| Model change (e.g., a new model version) | Eval-suite gate + ops sign-off | Canary + cost forecast |
 | Tool addition | Security review + 1 reviewer | Sandboxed test |
 | Tool removal | Customer-impact review | Deprecation notice |
 | Budget cap change | Ops sign-off | Forecast update |

@@ -233,7 +233,7 @@ Pattern: pack the prompt with tangential domain language, keep the actual ask na
 
 ### Compaction-Resilience Check
 
-Anthropic Claude Code re-attaches only the most recent invocation of each skill after auto-compaction, capped at the first 5,000 tokens, sharing a 25,000-token combined budget across all skills. Older skills can disappear silently.
+Claude Code re-attaches only the most recent invocation of each skill after auto-compaction, truncated to a per-skill cap within a shared combined budget (look up both in the current Claude Code docs). Older skills can disappear silently.
 
 How to test:
 
@@ -244,7 +244,7 @@ How to test:
 
 Mitigation if the skill collapses after compaction:
 
-- Make the skill's most critical rules early in `SKILL.md` (within the first 5,000 tokens).
+- Make the skill's most critical rules early in `SKILL.md` (inside the per-skill re-attach cap).
 - Tell users to re-invoke the skill explicitly after long sessions.
 - For absolutely-must-apply rules, move them to `AGENTS.md` / `CLAUDE.md` instead.
 

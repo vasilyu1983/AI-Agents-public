@@ -114,7 +114,9 @@ agent_identity:
   agent_id: "agent-financial-001"
   agent_type: "financial_advisor"
   version: "v1.2.0"
-  principal_id: "svc-account-agents-prod"
+  principal_id: "agent:financial-advisor@prod"   # one workload identity per agent, never a shared service account
+  owner: "<named human sponsor>"
+  expires: "<date>"
   scopes:
     - "read:market_data"
     - "read:user_portfolio"

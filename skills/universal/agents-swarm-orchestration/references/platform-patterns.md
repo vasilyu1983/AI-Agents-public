@@ -1,3 +1,6 @@
+---
+last_verified: 2026-10-10
+---
 # Platform Patterns
 
 
@@ -11,7 +14,7 @@
 - [Codex multi-agents](#codex-multi-agents)
 - [Codex subagents](#codex-subagents)
 - [OpenAI Agents SDK](#openai-agents-sdk)
-- [Manager / agents-as-tools](#manager-agents-as-tools)
+- [Manager / agents-as-tools](#manager--agents-as-tools)
 - [Handoffs](#handoffs)
 - [Cross-platform takeaway](#cross-platform-takeaway)
 - [Prompt structure for reusable worker prompts](#prompt-structure-for-reusable-worker-prompts)
@@ -33,13 +36,14 @@ Practical default:
 - Use read-only subagents for exploration, search, and plan support.
 - Use edit-capable subagents only when file ownership is exclusive and the lead already froze the interface.
 
-Built-in subagents:
+Built-in subagents. Canonical, maintained copy: [../../agents-subagents/references/runtime-surfaces.md](../../agents-subagents/references/runtime-surfaces.md); prefer it when they differ.
 
 | Subagent | Model | Tools | Purpose |
 |----------|-------|-------|---------|
-| Explore | Inherits, possibly capped (check docs) | Read-only | File discovery, code search, codebase exploration |
+| Explore | Main conversation's model on most providers (check docs) | Read-only | File discovery, code search, codebase exploration |
 | Plan | Inherits | Read-only | Codebase research during plan mode |
-| General-purpose | Inherits | All | Complex research, multi-step operations, code modifications |
+| General-purpose | `CLAUDE_CODE_SUBAGENT_MODEL` if set, else the main conversation's model | All | Complex research, multi-step operations, code modifications |
+| claude | None of its own; follows the subagent model order | All | Catch-all for tasks that fit no specialized agent; also the default agent for dispatched background sessions |
 | statusline-setup | Fixed (check docs) | Read, Edit | Auto-invoked to configure the Claude Code status line — do not call directly |
 | Claude Code Guide | Fixed (check docs) | Docs lookup | Auto-invoked for "how do I…" questions about Claude Code, the Agent SDK, and the Claude API — do not call directly |
 
@@ -66,7 +70,7 @@ Key frontmatter fields:
 | `tools` | Tool allowlist; inherits all if omitted |
 | `disallowedTools` | Tool denylist; removed from inherited pool |
 | `model` | `sonnet`, `opus`, `haiku`, full model ID, or `inherit` (default) |
-| `permissionMode` | `default`, `acceptEdits`, `auto`, `dontAsk`, `bypassPermissions`, `plan` |
+| `permissionMode` | `default` (alias `manual`), `acceptEdits`, `auto`, `dontAsk`, `bypassPermissions`, `plan` |
 | `maxTurns` | Cap on agentic turns |
 | `skills` | Skills injected at startup (full content, not just availability) |
 | `mcpServers` | MCP servers scoped to this subagent (inline or reference) |
@@ -114,7 +118,7 @@ Source: https://code.claude.com/docs/en/agent-teams
 - Teams use a shared task list and direct inter-agent messaging.
 - They are best for work that benefits from disagreement, discussion, and self-coordination between workers.
 - The feature is experimental and disabled by default; enable via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in settings.json or environment. Re-verify behavior and the minimum version against the docs on every CLI bump.
-- **Enabling the flag changes subagent semantics session-wide:** subagent results come back as idle notifications rather than synchronous returns. Any flow that waits on a subagent's return value can stall. Do not enable teams in sessions built around blocking subagent calls.
+- **Enabling the flag changes how named subagents launch.** While teams are enabled, an Agent call that passes a `name` launches a teammate, and the teammate's final answer reaches the lead as an idle notification. Claude can name subagents on its own, so a team can form unasked. Unnamed subagents, forks, calls that pass `isolation`, and `-p` / Agent SDK sessions still return normally. A flow that waits on a named subagent's return value can therefore stall. To make named subagents launch as subagents, set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` to `0`.
 - **`~/.claude/teams/{team-name}/` is runtime state, not a config artifact.** Claude Code generates the team config and task list automatically **at session startup** under a session-derived name (`session-` plus the first eight characters of the session ID) and updates them as teammates join, go idle, or leave. The team config directory is removed when the session ends; the task list directory persists locally so resumed sessions keep their tasks. It holds live state such as session IDs and tmux pane IDs, so hand edits are overwritten on the next state update. Do not pre-author, template, or version it, and note there is **no project-level equivalent** — a `.claude/teams/teams.json` is treated as an ordinary file. Reusable roles live in subagent definitions and are referenced at spawn time.
 - **Teammate model.** Look up whether a lead-model floor or a per-team default model setting exists before relying on one; naming the model in the spawn prompt is the portable choice. The teammate resolution order is owned by [`../../agents-subagents/references/runtime-surfaces.md`](../../agents-subagents/references/runtime-surfaces.md) §"Subagents vs Agent Teams".
 - Known limitations: check the current docs for display-mode support per surface (terminal, IDE extensions) and for how background teammates surface permission prompts; keep edit-capable teammates foreground until you have confirmed prompts reach you.
@@ -173,7 +177,7 @@ Do not use agent teams when:
 
 ## Codex multi-agents
 
-Source: https://developers.openai.com/codex/concepts/multi-agents
+Source: https://learn.chatgpt.com/docs/agent-configuration/subagents
 
 Official guidance emphasizes protecting the main thread:
 
@@ -188,19 +192,19 @@ Suggested usage pattern:
 - Parallel workers handle read-heavy scans, review, testing, summarization, and narrowly scoped changes.
 - Merge one result at a time after validation.
 
-Current model examples rotate on [developers.openai.com/codex/concepts/multi-agents](https://developers.openai.com/codex/concepts/multi-agents) — pair a stronger reasoning model (multi-step implementation, code review, security-sensitive work) with a faster, cheaper variant (exploration, read-heavy scans, summaries). Check the page for the current model names before committing to specific IDs.
+Current model examples rotate on [the Codex subagents page](https://learn.chatgpt.com/docs/agent-configuration/subagents) — pair a stronger reasoning model (multi-step implementation, code review, security-sensitive work) with a faster, cheaper variant (exploration, read-heavy scans, summaries). Check the page for the current model names before committing to specific IDs.
 
 Do not hardcode specific model IDs into the main skill or worker prompts. Re-verify before use.
 
 ## Codex subagents
 
-Source: https://developers.openai.com/codex/subagents
+Source: https://learn.chatgpt.com/docs/agent-configuration/subagents
 
-Codex supports spawning specialized subagents in parallel, then collecting results in one consolidated response. Unlike Claude Code subagents (auto-delegated), Codex subagents require explicit user activation.
+Codex supports spawning specialized subagents in parallel, then collecting results in one consolidated response. The Codex docs say current local releases spawn agents "after a direct request or applicable project or skill instruction". An `AGENTS.md` or skill instruction that asks for delegation can therefore trigger subagents; without one, Codex does not spawn them on its own.
 
 ### Activation and management
 
-- Users must explicitly request subagent workflows (e.g., "Spawn one agent per point, wait for all of them, and summarize the result for each point").
+- Spawning follows a direct user request or an applicable `AGENTS.md` / skill instruction that asks for delegation (e.g., "Spawn one agent per point, wait for all of them, and summarize the result for each point").
 - Use `/agent` in CLI to switch between active agent threads.
 - Approval overlays show source thread labels; press `o` to open threads before approving.
 
@@ -214,7 +218,7 @@ TOML files in `~/.codex/agents/` (personal) or `.codex/agents/` (project-scoped)
 
 Required fields: `name`, `description`, `developer_instructions`.
 
-Optional fields: `nickname_candidates`, `model`, `model_reasoning_effort`, `sandbox_mode`, `mcp_servers`, `skills.config`.
+Optional fields (other supported `config.toml` keys): `model`, `model_reasoning_effort`, `sandbox_mode`, `mcp_servers`, `skills.config`.
 
 Example:
 
@@ -280,13 +284,13 @@ Use this when:
 
 ### Capability additions
 
-Per @OpenAIDevs ([source](https://x.com/OpenAIDevs/status/2044466699785920937)):
+Sandbox and memory capabilities: [Sandbox Agents quickstart](https://openai.github.io/openai-agents-python/sandbox_agents/) (official Agents SDK docs; fetched 2026-10-10). The harness-customization bullet below is unverified: the sandbox page does not describe run-loop replacement, and the earlier source was a social post.
 
 - **Controlled sandboxes** for long-running agents — use as the default isolation surface for edit-capable OpenAI workers, parallel to worktree isolation on Claude Code.
 - **Open-source harness is inspectable and customizable** — you can replace the default run loop while keeping the SDK's primitives. Relevant when manager/handoff is too rigid for a workflow.
 - **Explicit control over memory creation and storage** — decide when writes happen and where they land; aligns with the opt-in memory guidance in [../../agents-subagents/references/agent-tools.md](../../agents-subagents/references/agent-tools.md).
 
-Verify exact API surface against the SDK docs before committing to the capability — the tweet is an announcement, not a spec.
+Verify exact API surface against the SDK docs before committing to a capability.
 
 ### Cross-platform takeaway
 

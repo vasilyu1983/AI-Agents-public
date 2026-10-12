@@ -94,6 +94,10 @@ Give a phased sequence that downstream teams can execute, with the smallest firs
 
 List which packet, graph, or impact artifacts were used and where manual tracing was required.
 
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
+
 ## Additional Skill Scope
 
 For managed backend choice, realtime state/transport, or desktop stack selection, use the matching linked skill for an architecture recommendation; implementation and packaging remain with an explicitly assigned delivery worker.

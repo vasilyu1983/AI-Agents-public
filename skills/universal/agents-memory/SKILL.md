@@ -3,7 +3,7 @@ name: agents-memory
 description: "Owns instruction files: AGENTS.md, CLAUDE.md, personal and repo rules. Use when writing, pruning, auditing them, sharing rules across Claude and Codex, or fixing ignored rules."
 compatibility: Claude Code + Codex. Claude Code CLAUDE.md plus Codex AGENTS.md — runtime-specific file conventions.
 version: "1.6"
-last_validated: 2026-10-02
+last_validated: 2026-10-09
 ---
 
 # Project Memory for Claude Code + Codex
@@ -133,7 +133,7 @@ For path-scoped rules, cross-platform symlink/import strategy, large-repo guidan
 - [ ] Engineering conventions and PR standards
 - [ ] Constraints and prohibitions ("never do X")
 - [ ] Verification methods ("how to confirm the change is correct")
-- [ ] Worktree lifecycle rules when `.worktrees/` is part of the repo flow: merge to `dev`, run gates, remove worktrees, verify no stale worktrees remain
+- [ ] Worktree lifecycle rules when `.worktrees/` is part of the repo flow: merge to the integration branch, run gates, remove worktrees, verify no stale worktrees remain
 - [ ] Key file patterns and naming conventions
 - [ ] For large skill catalogs, compact router/discovery pointer before full catalog pointer, with primary routers named explicitly
 
@@ -174,7 +174,7 @@ ls ~/.claude/projects/"$(git rev-parse --show-toplevel | tr '/' '-')"/memory/
 
 ## Validation
 
-Three layered validators ship with this skill — pick by scope:
+Layered validators ship with this skill — pick by scope:
 
 | Scope | Script | Checks |
 |-------|--------|--------|
@@ -239,7 +239,7 @@ Full list including the model-era anti-patterns (progress scaffolding, long "Don
 | [references/memory-discipline.md](references/memory-discipline.md) | Intent-first memory, exception test, instruction budget, working-if metric, feedback loops |
 | [references/claude-md-instruction-budget.md](references/claude-md-instruction-budget.md) | **Single owner of the instruction budget**: hedged ceiling and its source, tier hierarchy, 5-section template, hard caps, delete-line test, auto-memory path |
 | [references/structure-patterns.md](references/structure-patterns.md) | Hooks vs memory, three-tier boundaries, progressive disclosure |
-| [references/memory-patterns.md](references/memory-patterns.md) | 15 patterns including progressive disclosure, three-tier boundaries, and feedback loops |
+| [references/memory-patterns.md](references/memory-patterns.md) | Patterns including progressive disclosure, three-tier boundaries, and feedback loops |
 | [references/traps-and-antipatterns.md](references/traps-and-antipatterns.md) | Durable trap list and model-era anti-patterns |
 | [references/coding-behavior.md](references/coding-behavior.md) | Canonical coding-behavior rules with rationale (a reference, too long to load every turn) |
 | [references/coding-behavior-active.md](references/coding-behavior-active.md) | Condensed active contract (≤150 lines) — the file a repo's `.claude/rules/coding-behavior.md` should point at |

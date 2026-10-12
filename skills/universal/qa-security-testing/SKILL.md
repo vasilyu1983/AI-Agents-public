@@ -1,8 +1,8 @@
 ---
 name: qa-security-testing
-description: "Builds automated security testing pipelines for SAST, DAST, SCA, secret scanning, and containers. Use when integrating scanners into CI or managing security regression gates."
+description: "Builds security testing pipelines for SAST, DAST, SCA, secrets, containers. Use when wiring scanners into CI or regression gates."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.3"
+version: "1.4"
 last_validated: 2026-07-11
 ---
 

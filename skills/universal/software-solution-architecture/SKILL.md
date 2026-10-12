@@ -1,6 +1,6 @@
 ---
 name: software-solution-architecture
-description: "Designs cross-system target states and transition plans from business workflows and system boundaries. Use when comparing end-to-end solution options or phased migrations."
+description: "Designs cross-system target states and transition plans. Use when comparing end-to-end options or phased migrations. Not for in-service topology (software-architecture-design)."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.1"
 last_validated: 2026-07-11

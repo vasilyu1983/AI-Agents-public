@@ -56,6 +56,15 @@
       "url_check": "auto"
     },
     {
+      "id": "SysMoBench2025",
+      "name": "SysMoBench: Evaluating AI on Formally Modeling Complex Real-World Systems (arXiv:2509.23130)",
+      "url": "https://arxiv.org/abs/2509.23130",
+      "description": "Benchmark of LLM-generated TLA+ in four phases: syntax, runtime, conformance to real-system traces, invariants. Numbers seen only in secondary summaries (emptysqua.re review, sigops.org), not in the paper; used for direction only in llm-generated-specs.md.",
+      "publication_year": 2025,
+      "accessed": "2026-10-11",
+      "url_check": "auto"
+    },
+    {
       "id": "VERINA2025",
       "name": "Ye et al., VERINA: Benchmarking Verifiable Code Generation (arXiv:2505.23135 v3, 2026-03-16)",
       "url": "https://arxiv.org/abs/2505.23135",

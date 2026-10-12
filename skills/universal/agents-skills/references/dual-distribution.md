@@ -4,7 +4,7 @@ How to ship one skill source to two (or more) runtimes without drift. Pattern ob
 
 ## Problem
 
-A skill that lives only in `skills/<group>/<skill>/` works for local agent runtimes (Claude Code; Codex, which discovers skills natively from `.agents/skills` and `~/.codex/skills`). But that's only one delivery channel. The same skill content might also need to ship as:
+A skill that lives only in `skills/<group>/<skill>/` works for local agent runtimes (Claude Code; Codex, which discovers skills natively from `.agents/skills` in the repo or `$HOME`, and from `/etc/codex/skills`). But that's only one delivery channel. The same skill content might also need to ship as:
 
 - A Cowork plugin for non-developer operators
 - A Managed Agents API template deployed via `/v1/agents` to a customer tenant

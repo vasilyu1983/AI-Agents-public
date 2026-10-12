@@ -113,7 +113,7 @@ Trail (Shahout, Malach, Liu, Jiang, Yu & Mitzenmacher, arXiv 2410.01035) is a sc
 - **Phase 1 (young requests):** preemptive scheduling on predicted remaining output length, so short predicted jobs get priority.
 - **Phase 2 (aged requests):** once a request's age exceeds `c × predicted_size` (0 ≤ c ≤ 1), preemption is disabled and the request runs to completion.
 
-The rationale is memory: an old request holds a large KV cache, so preempting it and later re-allocating that memory costs more than finishing it. The Mitzenmacher & Shahout review (*Stochastic Systems* 2025, arXiv 2503.07545) states the threshold rule and notes that a simplified M/G/1 version is analyzable with SOAP. Graceful-degradation guarantees under bounded prediction error are proven for SPRPT-with-bounce and PSPJF, not plain SPRPT (see primitive 04).
+The rationale is memory: an old request holds a large KV cache, so preempting it and later re-allocating that memory costs more than finishing it. The Mitzenmacher & Shahout review (*Stochastic Systems* 2025, arXiv 2503.07545) states the threshold rule and notes that a simplified M/G/1 version is analyzable with SOAP. Graceful-degradation guarantees under bounded prediction error are shown for an SRPT variant and PSJF, not naive SRPT on estimates (see primitive 04).
 
 ## Robustness Warning
 
@@ -123,7 +123,7 @@ The Gittins index policy is **not robust to distributional misspecification**. M
 - Job-size distributions are estimated from monitoring data or ML predictions (not known analytically).
 - The system deploys any Gittins-adjacent scheduling policy (SRPT with estimated sizes, SPRPT, size-based priority lanes).
 
-The Robust Gittins policy (Moseley et al. 2025) bounds degradation by a new distributional-error measure — use it as the safe default when distributions are learned rather than prescribed. Where per-job predictions are available, prefer a policy with a proven degradation bound (SPRPT-with-bounce or PSPJF; Scully, Grosof & Mitzenmacher, ITCS 2022).
+The Robust Gittins policy (Moseley et al. 2025) bounds degradation by a new distributional-error measure — use it as the safe default when distributions are learned rather than prescribed. Where per-job predictions are available, prefer a policy with a proven degradation bound (an SRPT variant or PSJF; Scully, Grosof & Mitzenmacher, ITCS 2022).
 
 **Kill criterion:** Drop Robust Gittins concern entirely if the system uses FCFS or FIFO scheduling — Gittins fragility is only relevant when explicitly deploying Gittins or Gittins-adjacent policies.
 

@@ -86,3 +86,7 @@ Specify the exact metric and measurement method to confirm the improvement after
 ### Context Used
 
 List which `EXPLAIN` outputs, `pg_stat_statements` reports, or slow-query logs were used and where manual tracing was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

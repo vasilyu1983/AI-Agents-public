@@ -1,10 +1,10 @@
 {
   "metadata": {
     "title": "Consumer Neuroscience Foundations — Sources",
-    "description": "Primary papers and regulatory sources for foundations-consumer-neuroscience: neuro-study validity and purchase decisions (EEG/fMRI/eye-tracking/biometric reliability, neuroforecasting, incremental validity), US neural-data law scope and EU/UK classification, and the 12 behavioural hypothesis templates.",
+    "description": "Primary papers and regulatory sources for foundations-consumer-neuroscience: neuro-study validity and purchase decisions (EEG/fMRI/eye-tracking/biometric reliability, neuroforecasting, incremental validity), neural-data law scope and EU/UK classification, and the 12 behavioural hypothesis templates.",
     "last_updated": "2026-09-23",
     "skill": "foundations-consumer-neuroscience",
-    "total_sources": 77
+    "total_sources": 76
   },
   "primary_papers": [
     {
@@ -29,7 +29,8 @@
       "url": "https://onlinelibrary.wiley.com/journal/15206793",
       "description": "Bigne, E. et al. (2025). Psychology & Marketing. Comprehensive methodological review of neurophysiological tools (EEG, GSR, eye-tracking, fMRI, facial EMG) in consumer research; 2025 empirical anchor for primitives #1 (attention), #2 (arousal), and #6 (mirror systems).",
       "add_as_web_search": false,
-      "url_check": "manual"
+      "url_check": "skip",
+      "url_note": "homepage-only: URL is a journal homepage, not the paper"
     },
     {
       "id": "YerkesDodson1908",
@@ -93,7 +94,8 @@
       "url": "https://www.frontiersin.org/journals/human-neuroscience",
       "description": "Frontiers in Human Neuroscience (2024). fMRI evidence on brand-narrative alignment with default-mode network processing and downstream brand preference. 2024 empirical anchor for primitive #4 (narrative transportation).",
       "add_as_web_search": false,
-      "url_check": "manual"
+      "url_check": "skip",
+      "url_note": "homepage-only: URL is a journal homepage, not the paper"
     },
     {
       "id": "Higgins1997",
@@ -168,14 +170,6 @@
       "url_check": "manual"
     },
     {
-      "id": "Walker2017",
-      "name": "Why We Sleep",
-      "url": "https://www.simonandschuster.com/books/Why-We-Sleep/Matthew-Walker/9781501144325",
-      "description": "Walker, M. P. (2017). Why We Sleep. Scribner. Sleep-dependent hippocampal replay; NREM slow-wave consolidation; sleep disruption effects on memory formation. Primary source for primitive #9 (memory consolidation).",
-      "add_as_web_search": false,
-      "url_check": "manual"
-    },
-    {
       "id": "Knutson2001",
       "name": "Anticipation of Increasing Monetary Reward Selectively Recruits Nucleus Accumbens",
       "url": "https://www.jneurosci.org/content/21/16/RC159",
@@ -237,7 +231,8 @@
       "url": "https://onlinelibrary.wiley.com/journal/17568765",
       "description": "Sprevak, M. (2024). Topics in Cognitive Science; and (2025) Inquiry. Current state of predictive processing theory; scope of evidence and applied range. 2024/2025 empirical anchor for primitive #12 (predictive processing).",
       "add_as_web_search": false,
-      "url_check": "manual"
+      "url_check": "skip",
+      "url_note": "homepage-only: URL is a journal homepage, not the paper"
     },
     {
       "id": "Bansal2025",
@@ -245,7 +240,8 @@
       "url": "https://onlinelibrary.wiley.com/journal/10970825",
       "description": "Bansal, A. et al. (2025). International Journal of Consumer Studies. Integrative review of neuromarketing across the marketing mix using the TMC approach; SOR framing. 2025 empirical anchor for composition recipes and Frontiers neuro-insights cross-reference.",
       "add_as_web_search": false,
-      "url_check": "manual"
+      "url_check": "skip",
+      "url_note": "homepage-only: URL is a journal homepage, not the paper"
     },
     {
       "id": "F1000Research2024",
@@ -299,9 +295,10 @@
       "id": "ISCAttentionMeta2025BMC",
       "name": "Intersubject correlation as a predictor of attention: a systematic review",
       "url": "https://link.springer.com/article/10.1186/s40359-025-02879-7",
-      "description": "BMC Psychology (2025). DOI: 10.1186/s40359-025-02879-7. PMC: PMC12100797. 14 studies, 27 effect sizes. Meta-analytic estimate r=0.65 (p<0.001) for ISC as neural marker of attentional engagement. Covers naturalistic stimuli (video clips) and controlled tasks. Pools multiple modalities and synchrony measures; its ISC-attention association is not an EEG-ad-specific calibration or a reliability estimate. Key update for primitive #1 (attention).",
+      "description": "BMC Psychology (2025). DOI: 10.1186/s40359-025-02879-7. Unsourced — verify: the article could not be located by title or DOI on 2026-10-11, so its pooled estimate is not quoted. Covers ISC and attention; not an EEG-ad-specific calibration or a reliability estimate. Context for primitive #1 (attention).",
       "add_as_web_search": false,
-      "url_check": "manual"
+      "url_check": "skip",
+      "url_note": "unverified: article not located by title or DOI"
     },
     {
       "id": "ConsumerEEGEval2026SciReports",
@@ -403,7 +400,7 @@
       "id": "Venkatraman2015JMR",
       "name": "Predicting Advertising Success Beyond Traditional Measures: New Insights from Neurophysiological Methods and Market Response Modeling",
       "url": "https://doi.org/10.1509/jmr.13.0593",
-      "description": "Venkatraman, V., Dimoka, A., Pavlou, P. A., et al. (2015). Journal of Marketing Research, 52(4), 436–452. DOI: 10.1509/jmr.13.0593. Compared six methods (self-report, implicit, eye-tracking, biometrics, EEG, fMRI) on 30-second TV ads against market-level advertising elasticities. fMRI explained the most variance beyond traditional measures; ventral striatum was the strongest predictor. Anchors the incremental-validity question in neuro-study-validity.md.",
+      "description": "Venkatraman, V., Dimoka, A., Pavlou, P. A., et al. (2015). Journal of Marketing Research, 52(4), 436–452. DOI: 10.1509/jmr.13.0593. Compared several methods (method count unsourced — verify; self-report, implicit, eye-tracking, biometrics, EEG, fMRI) on 30-second TV ads against market-level advertising elasticities. fMRI explained the most variance beyond traditional measures; ventral striatum was the strongest predictor. Anchors the incremental-validity question in neuro-study-validity.md.",
       "add_as_web_search": false,
       "url_check": "manual"
     },

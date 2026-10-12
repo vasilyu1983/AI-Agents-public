@@ -62,7 +62,6 @@ Stay at rungs 0–2 when:
   - AWS combines model checking, fuzzing, property-based testing, fault-injection testing, deterministic simulation, event-based simulation and runtime validation of execution traces.
   - Formal specifications serve as test oracles for these methods.
   - The [P case-study page](https://p-org.github.io/P/casestudies/) adds that P is used across storage, database and compute teams. It also says PObserve validates "structured service logs against P specifications post hoc".
-  - Do not quote cost or benefit figures from this article until the full text has been read.
 - **Disselkoen et al., "How We Built Cedar: A Verification-Guided Approach", arXiv:2407.01688, 2024.** The method has three parts:
   - an executable model with machine-checked proofs
   - differential random testing of the production code against the model

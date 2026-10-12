@@ -82,7 +82,6 @@ Decompose the bug report into investigation tracks and spawn teammates:
 ```
 Agent({
   name: "code-searcher",
-  team_name: "bug-hunt",
   prompt: "You are a code-searcher on the bug-hunt investigation team.
 
            BUG REPORT: Users see 'undefined is not a function' when clicking
@@ -104,7 +103,6 @@ Agent({
 
 Agent({
   name: "test-runner",
-  team_name: "bug-hunt",
   prompt: "You are a test-runner on the bug-hunt investigation team.
 
            BUG REPORT: Users see 'undefined is not a function' when clicking
@@ -126,7 +124,6 @@ Agent({
 
 Agent({
   name: "log-analyzer",
-  team_name: "bug-hunt",
   prompt: "You are a log-analyzer on the bug-hunt investigation team.
 
            BUG REPORT: Users see 'undefined is not a function' when clicking
@@ -160,11 +157,11 @@ Example flow:
 
 ### Phase 3: Synthesis
 
-When enough findings have been shared, the lead synthesizes the root cause:
+When enough findings have been shared, the lead synthesizes the root cause. There is no broadcast: send one message per teammate (shown for `code-searcher`; repeat for each recipient). With agent teams enabled, an Agent call that passes `name` launches a teammate in the session's single team, so no team parameter is needed.
 
 ```
 SendMessage({
-  to: "*",
+  to: "code-searcher",
   message: "ROOT CAUSE IDENTIFIED:
     Commit abc1234 changed the payment provider import from a default export to a named export.
     The checkout-utils.ts file still uses the default import, so paymentProvider is the module
@@ -187,7 +184,6 @@ The lead assigns the fix to a specific teammate or does it directly:
 ```
 Agent({
   name: "fixer",
-  team_name: "bug-hunt",
   prompt: "Fix the identified root cause:
            File: src/checkout/checkout-utils.ts, line 1
            Change: import paymentProvider from './payment-provider'

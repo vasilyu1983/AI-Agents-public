@@ -93,7 +93,7 @@ Each perspective agent returns a structured position independently, without seei
 Feed Round 1 positions to each perspective agent. Each agent:
 - Identifies the strongest counterargument to their position
 - Responds to specific points from other agents
-- May update their stance (support / oppose / conditional)
+- May update their stance (support / oppose / conditional) only on a new argument or new evidence; a stance change must name it, and pressure from agreement alone is not a reason
 
 Run Round 2 only when at least one trigger is present:
 - Round 1 positions materially disagree

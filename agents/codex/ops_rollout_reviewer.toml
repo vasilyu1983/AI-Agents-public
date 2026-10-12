@@ -81,6 +81,10 @@ Confirm whether the signals needed to detect the failure mode are in place; list
 
 List which rollout plan, canary metrics, test evidence, or compatibility matrix were consumed, and where gaps required assumption.
 
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
+
 ---
 
 Linked skills: ops-incident-response, qa-resilience, qa-testing-strategy. Declared for Codex; deploy-preset.sh may append per-skill `[[skills.config]]` enablement overrides for discoverable skill folders; normal skill discovery and activation still apply. Explicit model fields are added only when policy requires; standard-tier agents inherit configured Codex defaults.

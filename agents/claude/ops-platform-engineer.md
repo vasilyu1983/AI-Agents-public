@@ -100,6 +100,10 @@ Give the first platform changes worth implementing, with reversibility and rollb
 
 List which deploy pipeline config, IaC state, or delivery friction report were consumed, and where manual discovery was required.
 
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
+
 ## Additional Skill Scope
 
 Use software-paas-hosting for managed compute selection and operating tradeoffs; return a recommendation without provisioning or deploying infrastructure.

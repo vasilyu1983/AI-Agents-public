@@ -18,7 +18,7 @@ Use these examples as the content for `AGENTS.md` (Codex). If you support both t
 **Shared patterns** (referenced from every stack example):
 
 - [Example 6: Behavioral Rules File](#example-6-behavioral-rules-file) — canonical `.claude/rules/coding-behavior.md` (Karpathy-derived patterns)
-- [Example 7: Cross-Platform Memory (AGENTS.md + CLAUDE.md)](#example-7-cross-platform-memory-agentsmd-claudemd) — full setup with symlink, verification, and setup script
+- [Example 7: Cross-Platform Memory (AGENTS.md + CLAUDE.md)](#example-7-cross-platform-memory-agentsmd--claudemd) — full setup with symlink, verification, and setup script
 - [Example 8: Prompt / Agent Library Repo](#example-8-prompt--agent-library-repo) — meta-repos that contain prompts and skills as first-class artifacts
 
 **Starter**:
@@ -941,7 +941,7 @@ Supporting documentation lives in `docs/`.
 Read these files first for context and standards:
 
 - `README.md` (repo overview)
-- `docs/frameworks-overview.md` (framework catalog)
+- `docs/harness-guide.md` (harness, workflow and install guide)
 - `graph/codex-discovery.md` (compact Codex router map for choosing the right entry point)
 - `graph/graph.json` (canonical full skill catalog, plus per-router Mermaid in the same dir)
 - `.claude/rules/coding-behavior.md` (behavior rules)
@@ -1005,7 +1005,7 @@ When editing `skills/`:
   - `graph.json` is the full machine-readable catalog
   - regenerate both via `scripts/graph-export.py`; gate drift via `scripts/checks/audit-coverage.py --check`
 - In root `AGENTS.md`, point agents to `codex-discovery.md` before `graph.json`, and name the primary routers rather than pasting a full skill list
-- Keep `skills/README.md` and `docs/frameworks-overview.md` aligned when skill counts change
+- Keep `skills/README.md` and `docs/harness-guide.md` aligned when skill counts change
 - `project-*` skills are independent and self-contained — never cross-link from domain or router skills
 - Cross-link only within the same project family (`project-acme-*` can reference each other, not `software-*`)
 

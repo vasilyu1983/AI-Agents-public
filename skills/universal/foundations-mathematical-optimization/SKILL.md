@@ -42,6 +42,8 @@ Use decision theory to choose preferences or utilities, planning/search for acti
 
 Run `python3 scripts/check_lp_certificate.py input.json` (or `-` for standard input) to check supplied primal/dual witnesses for the canonical pair max `c^T x`, `Ax <= b`, `x >= 0` / min `b^T y`, `A^T y >= c`, `y >= 0` in exact rational arithmetic. It performs no optimization. Schema, parser limits, output fields, exit codes, and a worked answer: [certificates-and-status.md](references/certificates-and-status.md).
 
+Exit code 0 does not mean the witness is valid: a failed witness exits 0 with `optimal: false`. Read `optimal`, or pass `--strict` to exit 1 unless it is true. Invalid input exits 2.
+
 It certifies only the submitted continuous LP. It does not certify model fidelity, a MILP optimum, or a floating-point solver result, and a failed witness does not prove infeasibility or unboundedness.
 
 ## Completion Criteria

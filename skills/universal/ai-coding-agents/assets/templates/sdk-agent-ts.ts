@@ -5,16 +5,22 @@
  * with the Claude Agent SDK. Customize the tools, hooks, and system prompt
  * for your specific coding task.
  *
+ * API shapes checked 2026-10-10 against
+ * https://code.claude.com/docs/en/agent-sdk/typescript and .../agent-sdk/hooks.
+ * Not executed: re-check the pages for your SDK version.
+ *
  * Usage:
  *     npm install @anthropic-ai/claude-agent-sdk
  *     npx tsx sdk-agent-ts.ts "Review src/auth/ for security issues"
  */
 
 import {
-  Agent,
-  type AgentOptions,
-  type HookEvent,
-  createTool,
+  query,
+  tool,
+  createSdkMcpServer,
+  type HookCallback,
+  type Options,
+  type PreToolUseHookInput,
 } from "@anthropic-ai/claude-agent-sdk";
 import { execFileSync } from "child_process";
 import { z } from "zod";
@@ -24,19 +30,17 @@ import { z } from "zod";
 const DEFAULT_CODING_MODEL = "sonnet";
 
 // ─── Custom Tools ─────────────────────────────────────────────
-// Wrap development tools as typed Agent SDK tools using Zod schemas.
+// tool(name, description, zodShape, handler) returns an MCP-style content result.
+// Tools are served through createSdkMcpServer() and exposed as
+// mcp__<server key>__<tool name>.
 
-const runTests = createTool({
-  name: "run_tests",
-  description:
-    "Run the test suite and return results. Pass a specific test file path to run a subset.",
-  inputSchema: z.object({
-    testPath: z
-      .string()
-      .optional()
-      .describe("Specific test file to run. Omit for full suite."),
-  }),
-  execute: async ({ testPath }) => {
+const text = (body: string) => ({ content: [{ type: "text" as const, text: body }] });
+
+const runTests = tool(
+  "run_tests",
+  "Run the test suite and return results. Pass a specific test file path to run a subset.",
+  { testPath: z.string().optional().describe("Specific test file to run. Omit for full suite.") },
+  async ({ testPath }) => {
     try {
       const args = ["jest", "--json"];
       if (testPath) args.push(testPath);
@@ -45,56 +49,54 @@ const runTests = createTool({
         encoding: "utf-8",
         stdio: ["pipe", "pipe", "pipe"],
       });
-      return output;
+      return text(output);
     } catch (error: any) {
-      return `Exit code: ${error.status}\n\nSTDOUT:\n${error.stdout}\n\nSTDERR:\n${error.stderr}`;
+      return text(`Exit code: ${error.status}\n\nSTDOUT:\n${error.stdout}\n\nSTDERR:\n${error.stderr}`);
     }
   },
-});
+);
 
-const runLinter = createTool({
-  name: "run_linter",
-  description:
-    "Run ESLint on a file or directory and return findings as JSON.",
-  inputSchema: z.object({
-    path: z.string().describe("File or directory path to lint."),
-  }),
-  execute: async ({ path }) => {
+const runLinter = tool(
+  "run_linter",
+  "Run ESLint on a file or directory and return findings as JSON.",
+  { path: z.string().describe("File or directory path to lint.") },
+  async ({ path }) => {
     try {
       const output = execFileSync("npx", ["eslint", "--format", "json", path], {
         timeout: 60_000,
         encoding: "utf-8",
         stdio: ["pipe", "pipe", "pipe"],
       });
-      return output;
+      return text(output);
     } catch (error: any) {
-      return error.stdout || error.stderr || "No issues found.";
+      return text(error.stdout || error.stderr || "No issues found.");
     }
   },
-});
+);
 
 // ─── Hooks ────────────────────────────────────────────────────
 // Intercept tool calls for safety guardrails.
 
 const PROTECTED_PATHS = [".env", "credentials", "secrets", "node_modules", ".git"];
 
-function preToolHook(event: HookEvent): HookEvent {
-  if (
-    (event.toolName === "Write" || event.toolName === "Edit") &&
-    event.toolInput
-  ) {
-    const filePath = (event.toolInput as Record<string, string>).file_path ?? "";
-    for (const protectedPath of PROTECTED_PATHS) {
-      if (filePath.includes(protectedPath)) {
-        event.block(
-          `Blocked: cannot modify protected path containing '${protectedPath}'`
-        );
-        return event;
-      }
+// A hook returns {} to allow, or a deny decision inside hookSpecificOutput.
+// Matchers match tool names, not paths; the callback checks the path.
+const preToolHook: HookCallback = async (input) => {
+  const pre = input as PreToolUseHookInput;
+  const filePath = ((pre.tool_input as Record<string, unknown>)?.file_path as string) ?? "";
+  for (const protectedPath of PROTECTED_PATHS) {
+    if (filePath.includes(protectedPath)) {
+      return {
+        hookSpecificOutput: {
+          hookEventName: pre.hook_event_name,
+          permissionDecision: "deny" as const,
+          permissionDecisionReason: `Cannot modify protected path containing '${protectedPath}'`,
+        },
+      };
     }
   }
-  return event;
-}
+  return {};
+};
 
 // ─── Agent Configuration ─────────────────────────────────────
 
@@ -131,30 +133,24 @@ async function main() {
     process.exit(1);
   }
 
-  const options: AgentOptions = {
+  const options: Options = {
     model: DEFAULT_CODING_MODEL, // resolve current alias/ID via the claude-api skill; avoid pinning a dated snapshot
     systemPrompt: SYSTEM_PROMPT,
-    tools: [runTests, runLinter],
+    mcpServers: { dev: createSdkMcpServer({ name: "dev", tools: [runTests, runLinter] }) }, // a record, not an array
+    allowedTools: ["Read", "Grep", "Glob", "Edit", "mcp__dev__run_tests", "mcp__dev__run_linter"],
     maxTurns: 15,
-    hooks: { preToolUse: preToolHook },
-    // Uncomment for additional configuration:
-    // mcpServers: [{ name: "eslint", command: "npx", args: ["@anthropic/eslint-mcp-server"] }],
-    // allowedTools: ["Read", "Grep", "Glob", "Bash", "Edit", "Write"],
+    hooks: { PreToolUse: [{ matcher: "Write|Edit", hooks: [preToolHook] }] },
+    // External MCP servers: see mcpServers in the TypeScript SDK reference.
   };
 
-  const agent = new Agent(options);
-
-  for await (const event of agent.run(task)) {
-    switch (event.type) {
-      case "text":
-        process.stdout.write(event.text);
-        break;
-      case "tool_use":
-        console.log(`\n[Tool: ${event.toolName}]`);
-        break;
-      case "error":
-        console.error(`\n[Error: ${event.error}]`);
-        break;
+  for await (const message of query({ prompt: task, options })) {
+    if (message.type === "assistant") {
+      for (const block of message.message.content) {
+        if (block.type === "text") process.stdout.write(block.text);
+        else if (block.type === "tool_use") console.log(`\n[Tool: ${block.name}]`);
+      }
+    } else if (message.type === "result" && message.subtype !== "success") {
+      console.error(`\n[Error: ${message.subtype}]`);
     }
   }
 

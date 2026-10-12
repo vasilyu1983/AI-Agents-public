@@ -79,7 +79,7 @@
 3. [Dead-time compensation](07-dead-time-compensation.md) — encode startup time L in the forecast horizon (scale N steps ahead)
 4. [Anti-windup](08-anti-windup.md) — freeze integral at min/max replica bounds
 
-**Empirical reference**: Tymoshenko et al. (2026, arXiv:2604.19705): 26ms median vs. 154ms KEDA vs. 522ms HPA on Node.js/Kubernetes steady ramp.
+**Empirical reference**: Tymoshenko et al. (2026, arXiv:2604.19705): lower median latency than KEDA and HPA on a Node.js/Kubernetes steady ramp; figures in `data/sources.json`.
 
 ---
 

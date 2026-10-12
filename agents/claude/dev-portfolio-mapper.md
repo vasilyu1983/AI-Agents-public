@@ -84,3 +84,7 @@ State which artifact paths dev-feature-delivery or software-code-review-board te
 ### Context Used
 
 List which prior profiles or graph artifacts were used and which required fresh scanning.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

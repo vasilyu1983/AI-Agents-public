@@ -18,7 +18,7 @@
           "script": "config-guard.py",
           "timeout": 10,
           "statusMessage": "config-guard",
-          "command": "sh -c 'f=\"$HOME/.agents/hooks/config-guard.py\"; [ -f \"$f\" ] || exit 0; exec python3 \"$f\"'"
+          "command": "sh -c 'f=\"$HOME/.agents/hooks/config-guard.py\"; if [ -f \"$f\" ]; then exec python3 \"$f\"; fi; case \"$(cat)\" in *.eslintrc*|*eslint.config.*|*.eslintignore*|*.prettierrc*|*prettier.config.*|*.prettierignore*|*ruff.toml*|*biome.json*|*.flake8*|*.stylelintrc*) echo \"config-guard missing at $f: protected config edit blocked\" >&2; exit 2;; esac; exit 0'"
         },
         {
           "event": "Notification",
@@ -44,5 +44,7 @@
       ]
     }
   },
-  "unwired": []
+  "unwired": [
+    "policy.py"
+  ]
 }

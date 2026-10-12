@@ -17,7 +17,7 @@ last_validated: 2026-08-14
 - Funnel debug where a single step blocks downstream conversion
 - Policy constraint suspected (a rule, not a physical limit, is what's holding throughput)
 - Subordination question — "should other steps slow down to match the bottleneck?"
-- Post-AI adoption reassessment — when AI coding tools improve individual velocity but delivery metrics stay flat (DORA's throughput group: change lead time, deployment frequency, failed-deployment recovery time; instability group: change fail rate, deployment rework rate), re-run 5FS; the constraint has likely shifted downstream to code review, verification, or integration (DORA 2025, n≈5,000; corroborated by IT Revolution 2026 and Logilica 2025)
+- Post-AI adoption reassessment — when AI coding tools improve individual velocity but delivery metrics stay flat (DORA's throughput group: change lead time, deployment frequency, failed-deployment recovery time; instability group: change fail rate, deployment rework rate), re-run 5FS. DORA 2024 associated AI adoption with lower delivery throughput and lower stability; DORA 2025 (n≈5,000) found throughput positive and stability still negative, and replaced its four performance tiers with seven team archetypes. The sign of the throughput effect changed between years, so treat any single year as unstable. That the constraint moved to code review, verification or integration is this skill's own inference, not a DORA finding; verify it with 5FS
 - LLM / agent-pipeline optimization — when end-to-end latency or task throughput of a multi-step AI pipeline is not meeting targets despite adding models or workers; the constraint is usually a specific stage (LLM decode, serialized tool execution, or a guardrail/eval step), not aggregate capacity — profile per stage before scaling
 
 **Skip and use simpler alternatives when:**
@@ -183,7 +183,7 @@ Use [decision and validation worksheet](references/decision-and-validation.md) f
 ## Evidence Notes
 
 - Primitives are sourced from primary Goldratt texts and leading secondary references (Dettmer 2007, Cox & Spencer 1998, Schragenheim et al.); numeric claims are calibrated guidelines, not universal constants — validate against your own system data. 5FS, DBR, and Throughput Accounting are the most empirically validated primitives; the Thinking Processes have strong practitioner support but limited controlled-study evidence. CCPM's strongest evidence is de Oliveira Martins et al. (2025), *Applied Sciences* 15(15):8147 — a review of mostly modeling/simulation studies, not field trials.
-- AI-era constraint-shift claims (dev workflow and agent-pipeline latency) are correlational survey/preprint evidence, not controlled trials; see `data/sources.json` for the DORA 2025, Agent-X, and PASTE citations and their exact scope.
+- AI-era constraint-shift claims (dev workflow and agent-pipeline latency) are correlational survey/preprint evidence, not controlled trials; see `data/sources.json` for the DORA, Agent-X, and PASTE citations and their exact scope.
 - Full dated correction history (Dettmer chapter-citation fix, DORA/agent-latency version updates, source drift) is in [references/evidence-log.md](references/evidence-log.md) — read it before citing a chapter number or an AI-era figure from this skill.
 
 ## Learnings Loop

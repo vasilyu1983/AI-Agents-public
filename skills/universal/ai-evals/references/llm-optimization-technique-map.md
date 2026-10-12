@@ -132,6 +132,15 @@ What to take from it:
 - Raschka also reports that self-refinement was **less effective than
   self-consistency** for this model on this math task.
 
+**The checker caps the loop.** Extra samples, refuters, or revision rounds help
+only as far as the selector can tell a right answer from a wrong one. Coverage
+keeps rising with samples while vote- and reward-model selection plateau (Brown
+et al., arXiv 2407.21787), agent-task sampling runs into the same verification
+gap (arXiv 2602.18998, abstract only), and a self-improvement loop plateaus once
+its verifier is no better than its generator (Song and Ghai, "Mind the Gap",
+arXiv 2412.02674). Rule: where no executable check exists (tests, exit code,
+schema), do not scale samples or rounds; buy the check first.
+
 **The eval consequence.** Whenever you add a reranker, verifier, or refinement
 scorer, the mandatory arm is *the same pipeline with the scorer removed*
 (keep-first or keep-last). Comparing "scorer vs no pipeline" hides the case where

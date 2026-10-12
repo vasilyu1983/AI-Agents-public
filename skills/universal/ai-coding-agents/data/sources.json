@@ -3,9 +3,9 @@
     "skill": "ai-coding-agents",
     "title": "AI Coding Agents - Sources",
     "description": "Official documentation, research, and community resources for building AI coding agents across Claude Code, Codex, and Agent SDK",
-    "last_updated": "2026-09-12",
-    "updated": "2026-09-12",
-    "total_sources": 29,
+    "last_updated": "2026-10-10",
+    "updated": "2026-10-10",
+    "total_sources": 28,
     "version": "1.2"
   },
   "categories": {
@@ -119,6 +119,26 @@
         "relevance": "Model-upgrade review of trigger precision, selective context loading, workflow boundaries, and completion; verified 2026-09-12",
         "update_frequency": "as-needed",
         "access": "free"
+      },
+      {
+        "name": "Codex Config Reference",
+        "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+        "type": "documentation",
+        "relevance": "sandbox_mode values, [sandbox_workspace_write] network_access, [agents] and MCP config keys",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-10"
+      },
+      {
+        "name": "Codex Subagents",
+        "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+        "type": "documentation",
+        "relevance": "Built-in subagents, custom .codex/agents/*.toml fields, [agents] limits",
+        "update_frequency": "monthly",
+        "access": "free",
+        "add_as_web_search": true,
+        "last_verified": "2026-10-10"
       }
     ],
     "research_and_benchmarks": [
@@ -179,28 +199,10 @@
         "add_as_web_search": true
       },
       {
-        "name": "Anthropic: Agent Skills for Claude Code",
-        "url": "https://www.anthropic.com/engineering/claude-code-agent-skills",
-        "type": "guide",
-        "relevance": "How to create and use skills with coding agents in Claude Code",
-        "update_frequency": "quarterly",
-        "access": "free",
-        "add_as_web_search": true
-      },
-      {
         "name": "Claude Code Best Practices",
         "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
         "type": "guide",
         "relevance": "Production patterns for Claude Code including subagents and tool safety",
-        "update_frequency": "quarterly",
-        "access": "free",
-        "add_as_web_search": true
-      },
-      {
-        "name": "Context Engineering for AI Coding Agents",
-        "url": "https://www.anthropic.com/engineering/context-engineering",
-        "type": "guide",
-        "relevance": "Context management strategies for coding agents working with large codebases",
         "update_frequency": "quarterly",
         "access": "free",
         "add_as_web_search": true
@@ -245,15 +247,6 @@
       }
     ],
     "community_resources": [
-      {
-        "name": "Awesome Claude Code",
-        "url": "https://github.com/anthropics/awesome-claude-code",
-        "type": "collection",
-        "relevance": "Community-curated collection of Claude Code configurations, agents, and patterns",
-        "update_frequency": "monthly",
-        "access": "free",
-        "add_as_web_search": false
-      },
       {
         "name": "Claude Code GitHub Repository",
         "url": "https://github.com/anthropics/claude-code",

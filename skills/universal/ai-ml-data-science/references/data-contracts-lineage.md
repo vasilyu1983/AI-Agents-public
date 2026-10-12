@@ -302,8 +302,8 @@ Annotation quality gates apply when training data includes human or LLM-generate
 
 Use IAA metrics as a go/no-go gate before committing an annotation batch to training:
 
-- **Cohen's κ (kappa)**: pairwise agreement corrected for chance. Use for two annotators, categorical labels. κ < 0.6 is typically a reject signal; κ ≥ 0.8 is strong agreement.
-- **Krippendorff's α**: generalizes to N annotators, ordinal/interval/ratio scales, and missing data. Preferred when annotator count varies or labels are not purely nominal. α < 0.667 is commonly treated as insufficient reliability.
+- **Cohen's κ (kappa)**: pairwise agreement corrected for chance. Use for two annotators, categorical labels. Kappa depends on label prevalence, so report raw agreement and per-class agreement with it, and set the accept level from the decision the labels feed; no universal cutoff applies (see [foundations-measurement-theory](../../foundations-measurement-theory/references/ai-evaluation-measurement.md#judge-validation-rules)).
+- **Krippendorff's α**: generalizes to N annotators, ordinal/interval/ratio scales, and missing data. Preferred when annotator count varies or labels are not purely nominal. Use the ordinal metric for ordinal scales, and set the accept level from the decision rather than a fixed cutoff.
 - Run IAA on a statistically meaningful sample before scaling annotation (50–200 examples minimum for initial calibration).
 
 **Checklist: IAA Gate**

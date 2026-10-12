@@ -18,6 +18,7 @@ skills:
   - dev-workflow-planning
   - software-architecture-design
   - qa-refactoring
+  - foundations-distributed-systems
 ---
 
 **Teammate mode:** `family` is repository catalog metadata, not a Claude runtime control. Treat the launch prompt as authoritative. It must supply required skill guidance and context artifacts, owned scope and isolation, and a stopping budget; do not assume this frontmatter or the lead's conversation history is inherited.
@@ -88,3 +89,7 @@ List every compatibility shim or temporary construct created, with a linked clea
 ### Context Used
 
 List which artifact inputs were used and where manual tracing was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

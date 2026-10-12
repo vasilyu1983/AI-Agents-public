@@ -107,6 +107,10 @@ LTV/CAC ratio, payback period, NRR, and gross margin against stage-appropriate b
 
 List which packet, graph, or impact artifacts were used and where manual tracing was required.
 
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
+
 ## Additional Skill Scope
 
 Use startup-international-expansion for target-market economics and entry-model comparisons; identify regulatory unknowns for qualified review and do not approve market entry or contact counterparties.

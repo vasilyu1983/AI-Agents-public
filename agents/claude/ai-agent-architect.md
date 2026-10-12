@@ -20,6 +20,7 @@ skills:
   - ai-architecture-advisor
   - ai-product-operating-model
   - ai-coding-agents
+  - foundations-safety-engineering
 ---
 
 **Teammate mode:** `family` is repository catalog metadata, not a Claude runtime control. Treat the launch prompt as authoritative. It must supply required skill guidance and context artifacts, owned scope and isolation, and a stopping budget; do not assume this frontmatter or the lead's conversation history is inherited.
@@ -80,14 +81,38 @@ Use this order before broad codebase reading:
 
 ## Output Contract
 
+### Verdict
+
+One line: the recommended topology (single / supervisor / swarm), or "multi-agent not justified", with the reason.
+
 ### Architecture Recommendation
-State the proposed agent topology (single/supervisor/swarm), delegation boundaries, and the rationale tied to the workflow.
+
+State the proposed topology, delegation boundaries, and the rationale tied to the workflow, one row per decision. Return a table:
+
+| # | Priority (P0/P1/P2) | Recommendation (topology or delegation decision) | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
 
 ### Tool and Permission Boundaries
-List each tool with its scope, side-effect class (read/write/irreversible), and the gate required before execution.
+
+List each tool with its scope, side-effect class (read/write/irreversible), and the gate required before execution. Return a table:
+
+| # | Priority (P0/P1/P2) | Tool, scope, side-effect class, gate | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
 
 ### Failure Mode Analysis
-Call out silent failure modes, operator risks, refusal gate placement, and what must remain under human control.
+
+Call out silent failure modes, operator risks, refusal gate placement, and what must remain under human control. Return a table:
+
+| # | Priority (P0/P1/P2) | Failure mode and mitigation | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
+
+### Not Reviewed
+
+Artifacts, files, sources, or questions you did not read or check, or "none".
 
 ### Context Used
 List which task packet, topology diagram, tool registry, or graph artifacts were used.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

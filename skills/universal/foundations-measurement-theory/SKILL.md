@@ -49,7 +49,8 @@ Do not use universal Cronbach alpha cutoffs. Internal consistency alone establis
 
 - [Measurement primitives](references/measurement-primitives.md) — definitions, assumptions, and counterexamples.
 - [Comparability and drift](references/comparability-and-drift.md) — cross-group and longitudinal checks.
-- [AI evaluation measurement](references/ai-evaluation-measurement.md): read for LLM benchmarks and judges. Covers facets and G-theory D-studies, linking after judge or benchmark changes, IRT/DIF, saturation, and a construct-validity checklist.
+- [AI evaluation measurement](references/ai-evaluation-measurement.md): read for LLM benchmarks and judges. Covers facets and G-theory D-studies, linking after judge or benchmark changes, IRT/DIF, saturation, a construct-validity checklist, and judge validation rules.
+- For the PPI correction that uses a human gold set to debias judge-labelled data, see [statistical inference](../foundations-statistical-inference/references/judge-assisted-inference.md).
 - [Completed example](references/completed-example.md) — synthetic benchmark audit.
 - [Output template](assets/templates/measurement-audit.md) — deliverable structure.
 - [Dated primary sources](data/sources.json) — source scope and verification cutoff.

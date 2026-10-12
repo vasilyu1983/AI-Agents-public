@@ -151,6 +151,9 @@ Cost dynamics that shift with each model generation. Each item names what to loo
   - **Readers, explorers, verifiers, doc auditors** → `low` or `medium`
   - **Implementers, architects** → the default, or step down if evals hold
   - **Synthesizers, adversarial reviewers** → `xhigh` or `max`
+- **Per-role effort inside a workflow.** `agent()` accepts an `effort` option; `scripts/review_runtime.js`, `expert_board_runtime.js` and the other `*_runtime.js` files apply the default below to parent-thread steps, and a named agent takes its effort from its frontmatter. Default: finders and refuters at `low` or `medium`, the synthesis step and the final verifier at `high`. Measure accepted findings per token before changing it. Evidence is thin: arXiv 2603.07915 (Ares) reports "reduces reasoning token usage by up to 52.7% compared to fixed high-effort reasoning" with a per-step router (single study), and arXiv 2604.10739 finds extra thinking can flip correct answers to wrong, so `max` on every member is not a safe default.
+- **Codex starting point is a lookup, not a fact.** The Codex subagents page said, as checked 2026-10-08: "start with `high` for GPT-6 Luna or `low` for GPT-6 Astra" ([subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents)). Read the page for the current model names before copying it.
+- **Claude API cache.** Changing top-level effort mid-run invalidates the prompt cache; set effort per role at spawn, not mid-conversation.
 - At `xhigh` or `max`, give `max_tokens` generous headroom: thinking counts against `max_tokens`. Check the docs for the recommended minimum.
 - Some models reject disabling thinking at higher effort levels, and some do not allow disabling it at all. Check the model's docs before pairing a thinking setting with an effort level.
 

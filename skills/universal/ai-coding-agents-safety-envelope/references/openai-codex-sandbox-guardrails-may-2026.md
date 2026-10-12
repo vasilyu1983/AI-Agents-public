@@ -1,5 +1,7 @@
 # OpenAI Codex Sandbox Guardrails
 
+> **Verify before use.** This reference is a Codex source snapshot from May 2026 and was not re-verified against current Codex docs on 2026-10-09. Check command names, flags, and protocol details in the current Codex docs (https://developers.openai.com/codex) before copying them.
+
 Source kind: the vendor sandboxing concept doc and the sandbox crate READMEs in the Codex repository (`codex-rs/core`, `codex-rs/linux-sandbox`, `codex-rs/windows-sandbox-rs`). Check them before copying mode names or backend claims; both move with releases.
 
 Web sources:
@@ -47,7 +49,7 @@ Copy the product principle, not only the implementation: a default sandbox must 
 
 Codex uses different enforcement backends per platform:
 
-- macOS: Seatbelt via `sandbox-exec`; workspace-write policy keeps `.git` and `.codex` read-only even inside writable roots.
+- macOS: Seatbelt via `sandbox-exec`; workspace-write policy keeps `.git`, `.codex` and `.agents` read-only even inside writable roots.
 - Linux and WSL2: bubblewrap (`bwrap`) is the primary backend — Codex prefers the first `bwrap` found on `PATH`, with a bundled fallback helper; Landlock remains for legacy-compatible policies. WSL1 is rejected outright (bubblewrap needs kernel features WSL1 lacks).
 - Windows: two backends, not one — an **elevated** backend supporting split filesystem policies (needs system read roots such as `C:\Windows` to run at all) and an **unelevated, restricted-token** backend for simpler/legacy configurations. Native Windows in PowerShell uses the Windows-native backend; running Codex inside WSL2 uses the Linux backend instead.
 

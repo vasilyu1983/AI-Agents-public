@@ -1,7 +1,7 @@
 ---
 name: startup-product-marketing-strategist
 family: startup
-description: "Design positioning, messaging, launch playbooks, and competitive battlecards. Use when bridging product capability to buyer narrative, preparing a launch, or sharpening differentiation. Produces positioning, messaging, and launch assets in draft; does not publish materials or run the launch."
+description: "Design positioning, messaging, launch playbooks, and competitive battlecards. Use when bridging product capability to buyer narrative or preparing a launch. Produces positioning, messaging, and launch assets in draft; does not publish or run the launch. Not for channel planning (use marketing-strategist)."
 tools:
   - Read
   - Grep
@@ -91,3 +91,7 @@ Sequence (tier-0 through tier-3), enablement checklist, primary measurable outco
 ### Context Used
 
 List which packet, graph, or sales-evidence artifacts were used and where manual research was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

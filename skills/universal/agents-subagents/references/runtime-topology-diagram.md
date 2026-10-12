@@ -142,7 +142,7 @@ flowchart TB
 - The execution ladder is runtime-neutral: main thread -> built-in worker -> installed specialist -> repo-local/shared member -> saved workflow -> team -> debate. Team scenarios are a late escalation, not the entry point.
 - The deploy script installs native member definitions into runtime folders and keeps recipes in the separate `.agents/team-recipes/` metadata area.
 - Claude and Codex differ in orchestration style, not in the underlying catalog:
-  - Claude can run Agent Teams with peer-to-peer mailbox and shared task list (experimental, v2.1.32+).
+  - Claude can run Agent Teams with peer-to-peer mailbox and shared task list (experimental, env-gated; look up the minimum Claude Code version in the docs).
   - Claude subagents provide parent-child orchestration without inter-agent messaging.
   - Claude subagents may use `isolation: worktree`; Agent Team teammates share the lead checkout and require disjoint file ownership.
   - Codex runs the same composition as a parent-led subagent workflow; delegation may come from the user or applicable repository/skill policy.

@@ -5,7 +5,7 @@
     "last_updated": "2026-09-27",
     "skill": "foundations-measurement-theory",
     "cutoff": "2026-09-27",
-    "total_sources": 18
+    "total_sources": 20
   },
   "primary_sources": [
     {
@@ -176,7 +176,8 @@
       "url": "https://en.wikipedia.org/wiki/Goodhart%27s_law",
       "scope": "Origin of Goodhart's law (statistical regularities collapse under control pressure). Cited for the concept only; the 1975 paper was not opened, so no quotation is reproduced in prose.",
       "verified_via": "Secondary only: Wikipedia entry read 2026-09-27; primary (Papers in Monetary Economics, Reserve Bank of Australia) not opened",
-      "url_check": "manual"
+      "url_check": "manual",
+      "note": "URL is a secondary summary (Wikipedia). No primary URL located 2026-10-11; replace with Goodhart 1975/1984 or Strathern 1997 when one is found."
     },
     {
       "id": "Campbell1979",
@@ -186,6 +187,27 @@
       "url": "https://doi.org/10.1016/0149-7189(79)90048-X",
       "scope": "Origin of Campbell's law (indicators used for decision-making become subject to corruption pressure). Cited for the concept only; no quotation reproduced in prose.",
       "verified_via": "Secondary only: Wikipedia entry and web search results 2026-09-27; Evaluation and Program Planning 2(1):67-90 not opened",
+      "url_check": "manual"
+    },
+    {
+      "id": "Guerdan2025",
+      "name": "Validating LLM-as-a-Judge Systems under Rating Indeterminacy",
+      "author": "Guerdan et al.",
+      "year": 2025,
+      "url": "https://arxiv.org/abs/2503.05965",
+      "scope": "Forced-choice human labels bias judge selection when several ratings are defensible. Cited for direction only.",
+      "verified_via": "Abstract and listing pages, accessed 2026-10-11",
+      "accessed": "2026-10-11",
+      "url_check": "manual"
+    },
+    {
+      "id": "RatingRoulette2025",
+      "name": "Rating Roulette: Self-Inconsistency in LLM-As-A-Judge Frameworks (EMNLP Findings 2025)",
+      "year": 2025,
+      "url": "https://aclanthology.org/2025.findings-emnlp.1361.pdf",
+      "scope": "Judge repeat-run self-inconsistency varies by judge and task. Cited for direction only.",
+      "verified_via": "Search summary, accessed 2026-10-11",
+      "accessed": "2026-10-11",
       "url_check": "manual"
     }
   ]

@@ -5,7 +5,7 @@
     "version": "4.1",
     "last_updated": "2026-09-28",
     "updated": "2026-09-28",
-    "total_sources": 98,
+    "total_sources": 99,
     "skill": "software-security-appsec"
   },
   "owasp_foundations": [
@@ -521,6 +521,12 @@
       "name": "Semgrep",
       "url": "https://semgrep.dev/docs/",
       "description": "Static analysis and custom rule engine for secure code scanning",
+      "add_as_web_search": false
+    },
+    {
+      "name": "REA - reverse-engineering skill and MCP server (morluto/rea, MIT, commit 411498d)",
+      "url": "https://github.com/morluto/rea",
+      "description": "Upstream skill and MCP server for reverse engineering of shipped binaries, APK/IPA, Electron/ASAR, and firmware. Out of scope here; install from upstream. Extracted 2026-10-09.",
       "add_as_web_search": false
     }
   ],

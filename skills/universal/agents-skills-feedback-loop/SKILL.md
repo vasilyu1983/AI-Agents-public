@@ -2,7 +2,7 @@
 name: agents-skills-feedback-loop
 description: Adds per-skill learnings loops for dated patterns, mistakes, and domain facts. Use when wiring skill memory, consolidation, or drift audits.
 version: "1.6"
-last_validated: 2026-09-24
+last_validated: 2026-10-09
 ---
 
 # Agent Skills — Feedback Loop
@@ -24,7 +24,7 @@ Pattern provenance and the distinction between this reviewed loop and automatic 
 |------|-------------|---------|
 | Wire a skill to use the loop | `references/wiring-protocol.md` | Adds a 4-line addendum to that skill's `SKILL.md`, seeds files |
 | Format a new learning entry | `references/learnings-format.md` | Atomic, dated, 5-section schema that survives pruning |
-| Promote raw → consolidated | `python3 scripts/consolidate.py <skill-dir>` | Dedup, age out, surface recurring patterns for human review |
+| Promote raw → consolidated | `python3 scripts/consolidate.py <skill-dir>` | Dry run by default: proposes dedup, age-out and recurring patterns for human review; `--apply` only prints the edits to make, because promotion stays a human gate |
 | Append a learning safely | `python3 scripts/append_learning.py <skill-dir> --section <name> --text "..."` | Validates shape, dates, refuses to grow past the 150-entry cap |
 | Find routing lessons that need review | `python3 scripts/consolidate.py --queue [--days 14]` | Exit 1 for aged open lessons, failed results, or fixes awaiting verification; invalid dates exit 2 |
 | Audit drift across skills | `references/audit-checklist.md` | Find stale loops, missing consolidations, oversized files |

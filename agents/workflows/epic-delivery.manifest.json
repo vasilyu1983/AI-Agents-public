@@ -4,7 +4,7 @@
     "engine": "waves",
     "codex": "parent-led",
     "description": "Deliver an epic as file-owning tasks in dependency waves, then one integration review. A claim ledger tracks each task; it stops after the task plan for your approval and never commits.",
-    "whenToUse": "args: { epic: \"<the epic>\", tasks?: <the approved tasks array from the first run>, continueOnFailure?: false, maxRounds?: 3 }. The first run returns TASKS_READY with the tasks; run again with args.tasks to build them. Each task runs the feature-delivery stages for its class, then a fresh acceptance check; a failed task blocks its dependants, and the run stops at the first failure unless continueOnFailure is true. Any stop short of DONE returns an escalation; commit each task yourself with the dev-git-workflow skill. Files under .git, .claude, .codex, .agents, .github and other protected paths, and instruction files such as AGENTS.md and CLAUDE.md, are out of reach: a change to one stops the run, so a human edits them outside any workflow.",
+    "whenToUse": "args: { epic: \"<the epic>\", tasks?: <the approved tasks array from the first run>, continueOnFailure?: false, maxRounds?: 3 }. The first run returns TASKS_READY with the tasks; run again with args.tasks to build them. Each task runs the feature-delivery stages for its class, then a fresh acceptance check; a failed task blocks its dependants, and the run stops at the first failure unless continueOnFailure is true. Each task's acceptance_command is also its pinned test command: the runtime runs it for the red and green checks and, once the integration review is clean, again for every task before DONE (BLOCKED, acceptance_regressed, if any now exits nonzero). Any stop short of DONE returns an escalation; commit each task yourself with the dev-git-workflow skill. Files under .git, .claude, .codex, .agents, .github and other protected paths, and instruction files such as AGENTS.md and CLAUDE.md, are out of reach: a change to one stops the run, so a human edits them outside any workflow.",
     "phases": [
       { "title": "Plan", "detail": "A read-only planner splits the epic into tasks; stops for approval unless args.tasks is given" },
       { "title": "Test first", "detail": "Per task: the test writer adds or edits only the task's test files" },
@@ -56,6 +56,7 @@
           "tasks": {
             "type": "array",
             "minItems": 1,
+            "maxItems": 25,
             "items": {
               "type": "object",
               "required": ["id", "goal", "class", "depends_on", "owned_files", "test_files", "acceptance", "acceptance_command"],
@@ -81,7 +82,7 @@
         "properties": {
           "command": { "type": "string", "minLength": 1 },
           "passed": { "type": "boolean" },
-          "evidence": { "type": "string" }
+          "evidence": { "type": "string", "minLength": 1 }
         }
       }
     }

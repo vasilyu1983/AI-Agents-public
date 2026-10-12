@@ -20,7 +20,7 @@ Use DAGs as the first step in every causal analysis, regardless of method. Witho
 - Identification cannot be checked
 - Method selection defaults to guesswork
 
-Draw the DAG before touching data.
+Draw the DAG before touching data when the method is adjustment-based; for design-based methods (RDD, DiD) state the design assumptions instead.
 
 ## Inputs / Outputs
 

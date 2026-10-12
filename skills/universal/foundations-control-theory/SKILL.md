@@ -58,7 +58,7 @@ Use the primitive table to diagnose delay, noise, saturation, and conflicting ac
 - Static threshold rule that doesn't need to adapt — a constant or hysteresis band is simpler
 - Capacity sizing question, not feedback question — use foundations-queueing-theory
 - Plant model is unknown and you can't measure error reliably — fix observability first
-- Large dead-time relative to desired settling time — assess achievable bandwidth and margins; 30% is a diagnostic heuristic, not proof PID is insufficient
+- Large dead-time relative to the dominant time constant (`L/T` above ~0.3, a diagnostic heuristic) — assess achievable bandwidth and margins; it is not proof PID is insufficient
 - System is unstable open-loop and you don't know why — diagnose root cause before adding feedback
 
 ---
@@ -96,6 +96,7 @@ Each primitive above is expanded in [references/primitives-overview.md](referenc
 | Dead time treated as additional plant gain | Transport lag misidentified → wrong tuning; oscillation | Smith Predictor (#7); estimate L via step test; never increase Kp to compensate |
 | Retry storm after circuit re-closes | All blocked callers retry simultaneously; re-triggers failure | Token bucket with jitter (#11); stagger retries; half-open probe first (#10) |
 | Agent loop with no convergence proof | No potential function that decreases per step | Define Lyapunov potential (e.g., remaining uncertainty); add hard step limit as fallback (#4) |
+| Run-to-run divergence, a claim of "chaos", or an early-warning alert request | Lyapunov exponent (perturbation growth) is not the Lyapunov function (#4); noise sources and false alarms are unmeasured | Load [references/nonlinear-dynamics-checks.md](references/nonlinear-dynamics-checks.md) before measuring or alerting |
 | Gain scheduled without bumpless transfer | Abrupt gain switch causes transient at boundary | Interpolate gains smoothly (#9); transfer integral state during switch |
 | Backpressure signal not honored by producer | Queue grows despite signal | Enforce at ingress; drop or block if producer ignores signal (#10) |
 | Multi-agent system resolves constraint conflicts by LLM negotiation | Conflict resolution delegated to a stochastic component; no deterministic priority order | Structural priority: MIN/MAX selectors for competing controlled variables, split-range for competing actuators; orchestrator resolves deterministically regardless of model output (#4, #5) |
@@ -113,7 +114,7 @@ Each primitive above is expanded in [references/primitives-overview.md](referenc
 | Claiming Kalman optimality outside assumptions | Kalman is optimal for linear Gaussian systems | Use EKF/UKF/particle filters with caveats |
 | Applying MPC without model validation | Bad model makes constrained optimization confidently wrong | Validate model error and add robust margins. When plant model is unknown: use DeePC (#12) for a model-free alternative, a formulation with verified terminal, feasibility and model-error conditions if a stability certificate is required (Schimperna et al. 2025), or physics-informed sysid if partial domain knowledge exists (Sivaranjani et al. 2025, arXiv:2512.06315). |
 | Using circuit breakers without backpressure | Fail-fast alone can shift overload elsewhere | Pair breakers with queues, rate limits, and admission control |
-| Calling an agent loop stable because it has max steps | Max steps bound cost, not convergence | Define a potential function or monotone progress metric |
+| Calling an agent loop stable because it has max steps | Max steps bound cost, not convergence | Define a potential function or monotone progress metric. For self-correction loops, iterate only while the error-correction rate over the error-introduction rate exceeds Acc/(1−Acc) (Liu & Meng 2026, arXiv:2604.22273; single preprint, treat as a heuristic) |
 
 ---
 
@@ -143,7 +144,7 @@ Dead time is not just physical (network RTT, pod boot, replication lag). The mea
 It is rarely bad arithmetic. Nearly every production PID-like autoscaler, pacer, or admission controller that misbehaves is missing one or more of three universal preconditions, and most are missing all three at once:
 
 1. **Delay** (dead time) is not modeled — see above.
-2. **Noise** is fed to the controller raw — an unfiltered P99 or a jittery per-second rate drives derivative noise amplification and actuator chatter. Derivative kick instead refers to a setpoint step differentiated through derivative-on-error.
+2. **Noise** is fed to the controller raw — an unfiltered P99 or a jittery per-second rate drives derivative noise amplification and actuator chatter. Derivative kick is a separate defect: a setpoint step makes derivative-on-error spike the output. Apply the derivative term to the measurement, not the error, so a setpoint step does not spike the output (Åström & Murray, https://fbsbook.org).
 3. **Actuator saturation** has no anti-windup — the moment the loop hits a hard limit (max replicas, bid cap, rate-limit ceiling), the integral term keeps accumulating against a wall, then overshoots on release.
 
 The fix for each is well-known (Kalman/low-pass filtering, Smith Predictor, anti-windup) and documented in this skill — the expert judgment is diagnosing *which* of the three is actually dominant before reaching for a fix, since applying the wrong one (e.g., adding derivative gain to a problem that is really unmodeled dead time) makes the loop worse.
@@ -152,10 +153,10 @@ The fix for each is well-known (Kalman/low-pass filtering, Smith Predictor, anti
 
 Closed-loop control is not free — it costs a measurement, a delay, and a risk of instability. Prefer open-loop (feedforward-only, or a scheduled/static policy) when:
 
-- The dominant disturbance is fully predictable (diurnal traffic, a scheduled batch job) **and** dead time is a large fraction of the desired response time — feedback correction physically cannot arrive before the disturbance has already passed. See the Predictive Autoscaler recipe below; empirically this beat reactive HPA/KEDA by roughly 6–20x median latency in one measured case (Tymoshenko, Maraschi & Collina 2026, arXiv:2604.19705 — Node.js/Kubernetes-specific, not verified to generalize).
+- The dominant disturbance is fully predictable (diurnal traffic, a scheduled batch job) **and** dead time is a large fraction of the desired response time — feedback correction physically cannot arrive before the disturbance has already passed. See the Predictive Autoscaler recipe below; a predictive feedforward autoscaler beat reactive HPA/KEDA on latency in one measured case (Tymoshenko, Maraschi & Collina 2026, arXiv:2604.19705 — Node.js/Kubernetes-specific, not verified to generalize).
 - The measurement itself is slow, expensive, or destabilizing — e.g., a business metric only available T+1 day, or a metric whose own collection changes the system being measured. Closed-loop control against a badly-delayed proxy signal can be strictly worse than a static policy tuned offline from historical data.
 - The actuator is high-consequence and effectively irreversible on the timescale of one control cycle (a schema migration, a pricing change, a one-way data deletion). "Act, observe, correct" is not a viable strategy when the correction cannot undo the action — get it right open-loop, using simulation and backtesting, not live feedback.
-- As a rule of thumb: a ratio `dead_time / desired_settling_time > ~0.5` is an illustrative warning to investigate achievable bandwidth, not a universal cutoff; or if the disturbance is highly predictable and the loop's only job is to react to something already known in advance, feedback control is fighting a battle it starts already behind. Feedforward-first, feedback-as-trim is the correct architecture, not "add more gain."
+- As a rule of thumb: `L/T` (dead time over dominant time constant, the same ratio as the 0.3 diagnostic above) above ~0.5 is where dead-time compensation or feedforward-first is worth the cost (template 07); it is an illustrative threshold, not a universal cutoff. If the disturbance is highly predictable and the loop's only job is to react to something already known in advance, feedback control is fighting a battle it starts already behind. Feedforward-first, feedback-as-trim is the correct architecture, not "add more gain."
 
 ---
 
@@ -168,7 +169,7 @@ Closed-loop control is not free — it costs a measurement, a delay, and a risk 
 - [ ] **Convergence proof required**: Must prove loop terminates or converges by design? → Lyapunov function (#4)
 - [ ] **Constraints exist**: Actuator limits, safety bounds, or resource caps that must never be violated? → MPC (#5) or anti-windup (#8) in PID
 - [ ] **Noisy measurements**: Sensor output too noisy for direct use in controller? → Kalman filter (#6)
-- [ ] **Transport lag**: Material action-to-effect delay relative to plant dynamics (30% is a diagnostic heuristic)? → Dead-time compensation (#7)
+- [ ] **Transport lag**: Material action-to-effect delay relative to plant dynamics (`L/T` above ~0.3 is a diagnostic heuristic)? → Dead-time compensation (#7)
 - [ ] **Bounded actuator**: Control output has hard min/max? → Anti-windup (#8) — include by default
 - [ ] **Regime variation**: System dynamics differ significantly across load or operating conditions? → Gain scheduling (#9)
 - [ ] **External service dependency**: Calling a downstream service that can fail? → Circuit breaker (#10)
@@ -219,7 +220,7 @@ Finite action catalogs alone do not prove stability. Prinos et al. ([arXiv:2605.
 - MPC (#5): receding-horizon planning across replica variants (prefill vs. decode disaggregated scaling) — preferentially add cheap variants, remove expensive ones
 - Dead-time compensation (#7): account for measured model-loading and pod startup latency when projecting replica count forward
 
-**Reference implementation**: WVA (Malvankar et al. 2026, arXiv:2603.09730). Empirical: 37% throughput gain, 10× failure reduction vs. HPA.
+**Reference implementation**: WVA (Malvankar et al. 2026, arXiv:2603.09730). The paper reports gains over HPA; figures are in `data/sources.json` (single preprint, direction only).
 Choose metrics that observe the identified bottleneck. KV-cache and queue depth can reveal inference saturation that CPU utilization misses; verify their relationship to the workload SLO.
 
 ### Predictive (Feedforward-Dominant) Autoscaler
@@ -235,7 +236,7 @@ Choose metrics that observe the identified bottleneck. KV-cache and queue depth 
 
 **Contrast with PID-dominant recipe**: PID-dominant is feedback-corrective (best for unpredictable disturbances); feedforward-dominant is anticipatory (best when load pattern is predictable and startup lag dominates the error budget).
 
-**Empirical reference**: Tymoshenko, Maraschi & Collina (2026, arXiv:2604.19705) achieve 26 ms median latency vs. 154 ms for KEDA and 522 ms for HPA under a steady ramp load on Node.js/Kubernetes. Caveat: Node.js-specific; generalizability to other runtimes unverified.
+**Empirical reference**: Tymoshenko, Maraschi & Collina (2026, arXiv:2604.19705) report lower median latency than KEDA and HPA under a steady ramp load on Node.js/Kubernetes (figures in `data/sources.json`). Rule: with predictable load and startup lag as the main error, feed forward. Caveat: Node.js-specific; generalizability to other runtimes unverified.
 
 ### Multi-Agent System with Deterministic Constraint Arbitration
 
@@ -250,7 +251,7 @@ The advanced-regulatory-control (ARC) decomposition replaces negotiation with st
 
 **Key insight**: the safety property comes from the arbitration topology, not from the model. Constraint conflicts resolve identically regardless of what any agent outputs, which is what makes the trajectory auditable.
 
-**Reference**: Nogueira & Skogestad (2026, arXiv:2606.30877). Evaluated on a dairy-barn ventilation loop over 4 days with Qwen 2.5 7B Instruct; contribution is the architecture and auditable trajectories, not a benchmark win.
+**Reference**: Nogueira & Skogestad (2026, arXiv:2606.30877). Evaluated on a dairy-barn ventilation loop with a small open-weight LLM; contribution is the architecture and auditable trajectories, not a benchmark win.
 
 ### Budget Pacing Without Windup or Oscillation
 
@@ -270,7 +271,7 @@ The advanced-regulatory-control (ARC) decomposition replaces negotiation with st
 3. Open [references/primitives-overview.md](references/primitives-overview.md) for definitions, failure modes, and source anchors.
 4. For multi-failure scenarios, use the [Composition Recipes](#composition-recipes) and [references/patterns-scenarios-traps.md](references/patterns-scenarios-traps.md) to stack primitives.
 5. Check the [Anti-Patterns](#anti-patterns) table before finalizing the design — most common mistakes are listed there.
-6. Verify numeric thresholds (gains, dead-time estimates, bucket sizes) against the primary sources in [`data/sources.json`](data/sources.json) and the reference files before deploying at scale.
+6. Verify numeric thresholds (gains, dead-time estimates, bucket sizes) against the primary sources in [`data/sources.json`](data/sources.json) and the reference files before deploying at scale. Stability-margin targets, sampling-rate rules and Smith-predictor limits are not stated here; take them from Åström & Murray (https://fbsbook.org), not from memory.
 
 ---
 
@@ -295,6 +296,7 @@ Feedback system failure
 - Formal theory map: [references/formal-theory-map.md](references/formal-theory-map.md)
 - Patterns, scenarios, and traps: [references/patterns-scenarios-traps.md](references/patterns-scenarios-traps.md)
 - Primitives overview and domain anti-patterns: [references/primitives-overview.md](references/primitives-overview.md)
+- Run-to-run divergence, early-warning signals, heavy-tail claims: [references/nonlinear-dynamics-checks.md](references/nonlinear-dynamics-checks.md)
 - Per-primitive playbooks: [assets/templates/control-theory/README.md](assets/templates/control-theory/README.md)
 - Sources: [`data/sources.json`](data/sources.json)
 

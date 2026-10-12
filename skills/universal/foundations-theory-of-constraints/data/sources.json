@@ -4,7 +4,7 @@
     "description": "Primary books and references for 11 TOC primitives: five focusing steps, drum-buffer-rope, throughput accounting, evaporating cloud, current/future reality trees, prerequisite and transition trees, critical chain, policy constraints, and thinking processes. Includes software/DevOps lineage (Phoenix Project, DevOps Handbook, Flow Framework) and 2025 empirical literature.",
     "last_updated": "2026-09-23",
     "skill": "foundations-theory-of-constraints",
-    "total_sources": 26
+    "total_sources": 27
   },
   "books": [
     {
@@ -156,10 +156,11 @@
     {
       "id": "DORA2025AIAssisted",
       "name": "2025 State of AI-assisted Software Development Report",
-      "url": "https://dora.dev/research/publications/",
-      "description": "DORA / Google Cloud (2025). Global survey of ~5,000 technology professionals conducted 13 June – 21 July 2025, plus qualitative data. The strongest available survey evidence for the AI-era constraint shift: ~90% AI adoption; higher AI adoption is associated with an increase in BOTH software delivery throughput and software delivery instability; time saved during code generation is reallocated to verification overhead, moving the constraint from writing code to reviewing and verifying it. Also introduces seven team profiles (including a 'legacy bottleneck' profile) and frames AI as an amplifier of existing organizational strengths and dysfunctions. Evidence grade: large-N correlational survey, not a controlled trial. Verified 2026-08-14 that no 2026 DORA report had been published — 2025 is the most recent. Report PDF: https://services.google.com/fh/files/misc/2025_state_of_ai_assisted_software_development.pdf. Source for the post-AI-adoption 5FS re-run trigger.",
+      "url": "https://dora.dev/dora-report-2025/",
+      "description": "DORA / Google Cloud (2025). Global survey of ~5,000 technology professionals conducted 13 June – 21 July 2025, plus qualitative data. The strongest available survey evidence for the AI-era constraint shift: ~90% AI adoption; higher AI adoption is associated with higher delivery throughput and still-higher delivery instability (DORA 2024 had found lower throughput and lower stability, so the throughput sign changed between years). The step that the constraint moved from writing code to reviewing and verifying it is this skill's inference, not confirmed in DORA's own summary. Also introduces seven team archetypes (replacing the four performance tiers) (including a 'legacy bottleneck' profile) and frames AI as an amplifier of existing organizational strengths and dysfunctions. Evidence grade: large-N correlational survey, not a controlled trial. Verified 2026-08-14 that no 2026 DORA report had been published — 2025 is the most recent. Report PDF: https://services.google.com/fh/files/misc/2025_state_of_ai_assisted_software_development.pdf. Source for the post-AI-adoption 5FS re-run trigger.",
       "last_verified": "2026-08-14",
       "url_check": "manual",
+      "url_note": "url updated 2026-10-11 to the report page per the review; not fetched",
       "add_as_web_search": false
     },
     {
@@ -202,6 +203,15 @@
       "url": "https://doi.org/10.1037/0096-1523.27.4.763",
       "description": "Rubinstein, J.S., Meyer, D.E. & Evans, J.E. (2001). Journal of Experimental Psychology: Human Perception and Performance, 27(4), 763-797. DOI: 10.1037/0096-1523.27.4.763. Peer-reviewed, replicated experimental evidence that task switching imposes a measurable time cost, increasing with rule complexity and decreasing with advance cuing. Independent cognitive-psychology research, not a TOC or CCPM study — cited in this skill as mechanism-level corroboration for Critical Chain's anti-multitasking guidance, not as validation of Goldratt's specific throughput-loss percentages. Source for primitive 09 (Critical Chain) evidence-grading section.",
       "add_as_web_search": false
+    },
+    {
+      "id": "DORA2025Announcement",
+      "name": "Announcing the 2025 DORA report (Google Cloud blog)",
+      "url": "https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report",
+      "description": "Google Cloud (2025). Secondary summary of the 2025 DORA report, used for the 2024 versus 2025 contrast: 2024 associated AI adoption with lower delivery throughput and stability; 2025 found throughput positive and stability still negative, and seven team archetypes replaced the four tiers. Evidence grade: vendor summary of a correlational survey.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11",
+      "url_check": "manual"
     }
   ]
 }

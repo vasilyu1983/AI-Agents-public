@@ -19,6 +19,7 @@
 - [2026-05-17] Foundations-skill maturity audits: scan workers near-universally recommend "seed N learnings entries" to 'activate' an empty learnings loop as a P0/P1 — applying this fabricates field-use evidence that never happened (fail-loud violation). Parent must inject a standing override into every uplift worker (fix scaffold only, never invent entries); 14/15 workers proposed seeding, override held in all 14.
 ## Mistakes to Avoid
 
+- [2026-10-10] Lanes tagged proprietary-component on papers merely evaluated on a closed model, hard-killing 7 usable rows (2026-10-10 hive scan). The trap means the method depends on a closed component with no open fallback; say so in lane briefs.
 - [2026-09-08] Before scoring a host-marketplace add-on: search the marketplace for the exact incumbent and classify the OAuth scope (sensitive vs restricted decides a paid CASA audit). Lookup-level MCP servers are already free code.
 - [2026-08-17] Vendored CSVs can carry deliberate local edits (ui-ux-design colors.csv WCAG notes vs upstream ui-ux-pro-max): upstream sync must be row-level merge, never overwrite.
 - [2026-08-17] Anonymous raw.githubusercontent.com 429s fast on multi-file drift checks; fetch via gh api -H 'Accept: application/vnd.github.raw' instead.
@@ -36,6 +37,7 @@
 - [2026-05-17] Scan workers over-claim version/compat facts; re-verify every load-bearing version or contradiction claim against primary sources and write the accurate partial form, never the worker's blanket claim.
 ## Domain Knowledge
 
+- [2026-10-10] Semantic Scholar API returned HTTP 429 on every unauthenticated call even after a 20s backoff (2026-10-10); schedule citation velocity (Step 5) as a later re-run and write '[citations: unavailable]' rather than invent counts.
 - [2026-09-08] Jun-Sep 2026 had no TypingMind-shaped API moment; shifts were regulatory/protocol (MCP 2026-07-28, AI Act Art.50 2 Aug, UKPI cVRP 2 Jun, Apple 4.3 8 Jun) and article50ready.com already sells the widget at EUR 29-199.
 - [2026-08-24] Aug-2026 resume-screening scan: LLM screeners fail validity audits (2602.18550: can't pick more-qualified, no abstention) while employers add LLM layers judging narrative coherence. Deterministic+provenance pipelines age well.
 - [2026-08-17] 'UI UX Max Pro' users mention = nextlevelbuilder/ui-ux-pro-max-skill; try name permutations before reporting a source link missing.

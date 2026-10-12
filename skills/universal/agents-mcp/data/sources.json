@@ -2,10 +2,10 @@
   "metadata": {
     "title": "agents-mcp - Primary Sources",
     "description": "Official MCP, client, SDK, registry, and tooling primary references",
-    "last_updated": "2026-08-11",
-    "updated": "2026-08-11",
+    "last_updated": "2026-10-09",
+    "updated": "2026-10-09",
     "skill": "agents-mcp",
-    "total_sources": 45
+    "total_sources": 46
   },
   "official_specification": [
     {
@@ -210,6 +210,12 @@
       "name": "Agent Tools & Interoperability with MCP (Google whitepaper)",
       "url": "https://www.kaggle.com/learn-guide/5-day-genai",
       "description": "Styer, Patlolla, Mohan, Diaz; Google, November 2025. Read from the local repo copy at custom-gpt/programming/AI Agents/sources/6. Google Agent Tools & Interoperability with Model Context Protocol (MCP).pdf; the exact public download URL is UNVERIFIED - the link here is the Google/Kaggle whitepaper series landing page, confirm before citing externally. Source for references/mcp-security.md server-mutation threat taxonomy: Dynamic Capability Injection and Tool Shadowing with mitigations (pp. 40-44), taint source/sink tagging (p. 46), confused-deputy worked example (pp. 49-51), retrieval-index poisoning (pp. 37-38). Threat taxonomy only - its spec-level claims predate the 2026-07-28 redesign and are superseded by SKILL.md.",
+      "add_as_web_search": false
+    },
+    {
+      "name": "morluto/rea — MCP tool design and contracts (docs/tool-design.md, docs/mcp-contracts.md)",
+      "url": "https://github.com/morluto/rea/tree/411498d45f860eba2fbc9d7051af20237b7a4cb1/docs",
+      "description": "Author morluto; MIT license; pinned to commit 411498d45f860eba2fbc9d7051af20237b7a4cb1; extracted 2026-10-09. Supports the Tool Result Contract: unknown-not-empty coverage reporting, observed vs inferred edges, and the complete-result-or-typed-error pattern with a reference for completeness-dependent answers. Single-project design docs, not a standard; paraphrased, not copied",
       "add_as_web_search": false
     }
   ],

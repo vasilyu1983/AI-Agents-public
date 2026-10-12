@@ -85,3 +85,7 @@ Identify missing fallback chains, absent pseudo-locale CI, or locale-tag collisi
 ### Context Used
 
 List which packet, string catalog files, locale config, or CI output were used.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

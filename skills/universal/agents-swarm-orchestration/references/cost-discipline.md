@@ -23,6 +23,12 @@ Orchestration cost scales multiplicatively, not additively:
 
 The lead thread is usually small. The swarm is where the bill lives.
 
+Documented multipliers (dated vendor statements, not rates to plan with; measure your own runs):
+
+- Anthropic, 2025-06-13: agents use "about 4x more tokens than chat" and multi-agent systems "about 15x" ([source](https://www.anthropic.com/engineering/multi-agent-research-system)). The baseline is chat, not a single agent.
+- Claude Code costs docs: "Agent teams use approximately 7x more tokens than standard sessions when teammates run in plan mode." ([source](https://code.claude.com/docs/en/costs)). Levers: [cost-control.md](../../agents-subagents/references/cost-control.md#agent-team-token-multiplier).
+- Codex subagents docs: "subagent workflows consume more tokens than comparable single-agent runs." ([source](https://learn.chatgpt.com/docs/agent-configuration/subagents)).
+
 ## Fan-Out Cost Patterns
 
 ### Parallel Fan-Out
@@ -122,11 +128,15 @@ Combined with the subagent-layer config from [../../agents-subagents/references/
 model_auto_compact_token_limit = 150000
 tool_output_token_limit = 50000
 plan_mode_reasoning_effort = "low"
+```
 
-[profiles.cheap-loop]
-model = "<current-mini-model>"  # check developers.openai.com/api/docs/models
+A cheap-loop profile is a separate file next to `config.toml`, not a table inside it (`$CODEX_HOME/cheap-loop.config.toml`; project-local config ignores `profile` and `profiles`):
+
+```toml
+# ~/.codex/cheap-loop.config.toml
+model = "<current-mini-model>"  # look up the current id in the Codex model docs
 model_reasoning_effort = "low"
-# service_tier = "flex"  # only if the active model advertises a flex tier
+# service_tier = "fast"  # only a tier the active model advertises; see the config reference
 ```
 
 Codex-specific orchestration levers:
@@ -134,8 +144,8 @@ Codex-specific orchestration levers:
 - **`model_auto_compact_token_limit`** — equivalent to Claude Code's `autoCompactWindow`. Triggers history compaction at the threshold; prevents wave-on-wave context inflation.
 - **`tool_output_token_limit`** — caps individual tool outputs in history. One noisy tool output (large grep, log dump) otherwise inflates context for every subsequent worker spawn.
 - **`plan_mode_reasoning_effort = "low"`** — keeps planning cheap; reserve `high` reasoning for actual execution. Plan-mode loops are a common silent cost source.
-- **`service_tier`** for unattended/background profiles — use a slower, cheaper tier only if the active model advertises one; tier availability varies by model, so check the current Codex/OpenAI model docs and [cost-control.md](../../agents-subagents/references/cost-control.md#codex-equivalents) before pinning it.
-- **Profiles** (`[profiles.<name>]`) — switch whole config bundles per workflow. Activate with `codex --profile cheap-loop` for known-cheap workloads (loops, batch reviews).
+- **`service_tier`** for unattended/background profiles — the config reference documents `fast` and "another tier advertised by the active model"; it names no cheaper tier, so check the current Codex config reference and model docs and [cost-control.md](../../agents-subagents/references/cost-control.md#codex-equivalents) before pinning one.
+- **Profiles** (`$CODEX_HOME/<name>.config.toml`) — switch whole config bundles per workflow. Activate with `codex --profile cheap-loop` for known-cheap workloads (loops, batch reviews). Profiles are separate files; `[profiles.<name>]` tables are not in the config reference (checked 2026-10-10).
 
 ### Cross-platform parity
 
@@ -146,7 +156,7 @@ Codex-specific orchestration levers:
 | Cap noisy tool output | (no equivalent) | `tool_output_token_limit` |
 | Reasoning depth control | (model-implicit) | `model_reasoning_effort`, `plan_mode_reasoning_effort` |
 | Cost-tier service | (single tier) | `service_tier` (model-dependent; check the model docs) |
-| Workflow-scoped config bundles | (manual `--agent` swap) | `[profiles.<name>]` blocks |
+| Workflow-scoped config bundles | (manual `--agent` swap) | `$CODEX_HOME/<name>.config.toml` + `--profile <name>` |
 
 ## Decision Heuristics
 

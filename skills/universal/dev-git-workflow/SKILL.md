@@ -117,8 +117,8 @@ The handoff for an authorized rewrite records the old tip, new tip, branch, affe
 
 - Keep agent commits distinguishable. Only a dedicated bot author identity changes `git log --author` and blame; a `Co-authored-by:` or `Assisted-by:` trailer does not. Whether to add an AI trailer, and which one, follows the repo's policy and [dev-git-commit-message](../dev-git-commit-message/SKILL.md). Never commit under a human identity without that person's knowledge.
 - Sign agent commits whenever the repo requires signed commits; an agent identity is no exemption.
-- An agent's summary of its change is not review, and its "tests pass" is not verified until the repo's real gate has run. Require human review of agent PRs; an AI reviewer can comment but does not count as an approver.
-- Never let an agent approve or merge its own PR.
+- An agent's summary of its change is not review, and its "tests pass" is not verified until the repo's real gate has run. Require human review of agent PRs into `main`; there an AI reviewer can comment but does not count as an approver. The only agent-merged path is the `dev` merge in the next rule.
+- Never let an agent approve its own PR. It merges one only when the human asked in this task and the `adversarial-review` workflow returned CLEAN on the final PR diff, never into `main`, and pins the reviewed commit: `gh pr merge <n> -R <owner/repo> --match-head-commit <head_sha>`.
 - One agent, one worktree, one branch. A shared working tree between agents produces commits that silently overwrite each other's intent.
 
 Rule: `rules/common/git.md` loads this invariant in every coding session.

@@ -27,7 +27,7 @@ The structured, machine-readable mirror of this list is `data/sources.json`
 
 ## How this maps to the design
 
-- **Layer 1 default-off** is repository policy. The survey names trustworthy
+- **Layer 1 reflection default-off** (the candidate-only hook is the default) is repository policy. The survey names trustworthy
   reflection as an open challenge; that supports caution without proving that
   all autonomous self-capture is immature.
 - **Layer 2 still manual** is repository policy. ACE demonstrates an automated

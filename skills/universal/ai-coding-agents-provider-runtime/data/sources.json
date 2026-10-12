@@ -5,7 +5,7 @@
     "description": "Official documentation and implementation references for provider abstraction, streaming normalization, retries, and fallback routing in coding-agent runtimes",
     "last_updated": "2026-07-11",
     "updated": "2026-07-11",
-    "total_sources": 12,
+    "total_sources": 15,
     "version": "1.1"
   },
   "categories": {
@@ -121,6 +121,33 @@
         "update_frequency": "monthly",
         "access": "free",
         "add_as_web_search": true
+      },
+      {
+        "name": "RouteGoT (arXiv:2603.05818)",
+        "url": "https://arxiv.org/abs/2603.05818",
+        "type": "research",
+        "relevance": "Strong model for plan and synthesis, cheap model for leaves. Preprint; validate-level.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Budget-Aware Agentic Routing via Boundary-Guided Training (arXiv:2602.21227)",
+        "url": "https://arxiv.org/abs/2602.21227",
+        "type": "research",
+        "relevance": "Budget-aware per-step model routing for agents; companion evidence for the cascade note. Preprint, title checked 2026-10-08; validate-level.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
+      },
+      {
+        "name": "Ares: per-step reasoning-effort routing (arXiv:2603.07915)",
+        "url": "https://arxiv.org/abs/2603.07915",
+        "type": "research",
+        "relevance": "Per-step effort router cuts reasoning tokens versus fixed high effort. Preprint; validate-level.",
+        "update_frequency": "static",
+        "access": "free",
+        "add_as_web_search": false
       }
     ]
   }

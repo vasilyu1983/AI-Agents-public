@@ -1,6 +1,6 @@
 ---
 description: Claude Code and Codex surfaces, field mapping, Agent SDK pointers, Managed Agents.
-last_verified: 2026-09-16
+last_verified: 2026-10-10
 status: stable
 ---
 
@@ -14,6 +14,7 @@ The authoritative field matrix (including every optional frontmatter key, the bu
 
 - [Claude Code](#claude-code)
 - [Codex](#codex)
+- [Claude Code ↔ Codex](#claude-code--codex)
 - [Agent SDKs](#agent-sdks)
 - [Claude Managed Agents](#claude-managed-agents)
 - [Cross-Platform Rules](#cross-platform-rules)
@@ -68,7 +69,7 @@ See [`../../agents-swarm-orchestration/references/platform-patterns.md`](../../a
 - Use agent teams when specialists need to coordinate directly, challenge each other, or self-claim tasks.
 - **Agent Teams is experimental** and disabled by default. Enable via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in settings.json or environment. Behaviour below has changed between releases: before relying on any of it, read the agent-teams docs and the changelog for the running version (`claude --version`). Do not assume a lead-model gate unless the docs state one.
 - **Two behaviours that surprise operators.** First, the flag changes *ordinary* delegation: "Claude may name a subagent on its own, and while agent teams are enabled, a subagent that Claude names launches as a teammate, so teams can form even when you didn't ask for one." To get subagents back, set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` to `0` — no new session needed, since Claude Code reapplies settings-file `env` values to the running session on save and rereads the variable on each spawn. Note the precedence trap: `0` in *user* settings overrides a shell export, but project settings, local settings, `--settings`, and managed settings all apply later and a `1` in any of them wins.
-- **Teammate plan approval is not a human gate.** "When a teammate finishes planning, it sends a plan approval request to the lead. Claude Code approves the plan in the lead's session as soon as the request arrives, without the lead reviewing it." The teammate's edits and commands still hit ordinary permission prompts. Read the `TeammateIdle` / `TaskCreated` / `TaskCompleted` hooks as the *only* enforceable gate on teammate work — plan approval is not one.
+- **Teammate plan approval is not a human gate.** "When a teammate finishes planning, it sends a plan approval request to the lead. Claude Code approves the plan in the lead's session as soon as the request arrives, without the lead reviewing it." The enforceable gates on teammate work are the ordinary permission prompts on its edits and commands, plus the `TeammateIdle` / `TaskCreated` / `TaskCompleted` hooks; plan approval is not one.
 - Spawning teammates **requires an interactive session**. Under `-p` and in the Agent SDK, Claude doesn't spawn teammates and a named subagent runs as an ordinary subagent even with the flag on.
 - Setup and cleanup are now automatic: spawning a teammate needs no setup step, and team state is removed when the session ends. The old `TeamCreate`/`TeamDelete` tools and the manual "name a team first" flow no longer exist.
 - **No nested teams** — a teammate cannot spawn its own teammates or its own background subagents (an in-process teammate's subagents always run in the foreground, since they can't outlive the lead's process). Only the lead manages team composition.
@@ -181,6 +182,15 @@ Use prompt or `AGENTS.md` policy to cap nesting and keep leaf roles from delegat
 
 When concurrent write-capable workers exceed the lead's merge and approval capacity, move to explicit waves through [`../../agents-swarm-orchestration/SKILL.md`](../../agents-swarm-orchestration/SKILL.md) or separate Worktree chats. Do not mistake agent threads for filesystem isolation.
 
+## Claude Code ↔ Codex
+
+Checked 2026-10-08. A Claude Code worker is always a Claude session; a Codex worker is always a Codex session. To involve the other vendor, use the official plugin [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc): `/codex:review`, `/codex:adversarial-review`, `/codex:rescue`, `/codex:transfer`, `/codex:status`, `/codex:result`, `/codex:cancel`, `/codex:setup`. It runs through the local `codex` binary and your Codex sign-in; the README says: "Usage will contribute to your Codex usage limits."
+
+- **Review gate trap.** The plugin docs warn: "The review gate can create a long-running Claude/Codex loop and may drain usage limits quickly." and "Only enable it when you plan to actively monitor the session."
+- **`codex mcp-server` is gone.** The docs say the command and the `codex-mcp-server` binary "have been removed" ([MCP server page](https://learn.chatgpt.com/docs/mcp-server)). The replacement app server speaks JSON-RPC, not MCP, and is experimental and not for production. Community MCP wrappers that call `codex mcp-server` therefore break.
+- **A2A.** The protocol has a v1.0 spec, but no doc found shows Claude Code or Codex CLI speaking it. Do not design on it.
+- **Default pattern.** One vendor builds and the other reviews. One writer per tree. Compare the two finding lists and log where they agree.
+
 ## Agent SDKs
 
 Shared skills are used from both CLIs and from SDK-driven agent hosts. The role design, handoff contract, and team/debate assets in this skill apply to SDK builds too — only the orchestration surface changes.
@@ -279,8 +289,8 @@ Managed Agents persists cross-session memory through **memory stores** — works
 | Mount path | `/mnt/memory/<slug>/` inside the managed session |
 | Discovery | A short note about the mount is auto-injected into the system prompt so Claude knows it's there |
 | Reuse | Attach a store to multiple sessions to share durable workspace-scoped context |
-| Versioning | Every change to a memory creates an immutable memory version (retained 30 days, with recent versions of a live memory always kept); a session may attach a store `read_only` |
-| Limits | Up to 8 stores per session and 10,000 memories per store; each individual memory is capped at 100 kB (~25k tokens) |
+| Versioning | Every change to a memory creates an immutable memory version (retention is time-bounded, so export versions you must keep; look up the current window on the Managed Agents memory page); a session may attach a store `read_only` |
+| Limits | Stores per session, memories per store, and per-memory size are all capped; look up current limits on the [Managed Agents memory page](https://platform.claude.com/docs/en/managed-agents/memory) (checked 2026-10-10). Design consequence: many small focused files, and several scoped stores rather than one large one |
 | Interpretability | Files are plain text and downloadable — debuggable and shareable like any folder |
 
 Operating rules:

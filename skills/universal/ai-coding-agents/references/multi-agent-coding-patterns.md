@@ -1,6 +1,6 @@
 # Multi-Agent Coding Patterns
 
-Three multi-agent architectures for coding teams, drawn from shipped coding-agent runtimes (principally Claude Code). Each pattern solves a different coordination problem. Choose based on task shape, not complexity.
+Five multi-agent patterns for coding teams (A-D below; D covers two), drawn from shipped coding-agent runtimes (principally Claude Code). Each pattern solves a different coordination problem. Choose based on task shape, not complexity.
 
 ---
 
@@ -28,7 +28,7 @@ Design rules for coding teams (runtime-specific names, paths, and limits change;
 
 ### How It Works
 
-The coordinator is a single leader agent that launches background workers via the Agent tool. Workers execute independently with no visibility into the coordinator's conversation. Results arrive as `<task-notification>` XML:
+The coordinator is a single leader agent that launches background workers via the Agent tool. Workers execute independently with no visibility into the coordinator's conversation. Results arrive as `<task-notification>` XML. This format is internal, undocumented and unstable; the sample is illustrative, so do not build parsers on it:
 
 ```xml
 <task-notification>
@@ -175,7 +175,7 @@ Workers cannot see the coordinator's conversation. Every worker prompt must be s
 The coordinator's primary advantage is launching parallel workers. Independent tasks go in a single message:
 
 ```
-# All three launch simultaneously
+# All launch simultaneously
 Agent({ prompt: "Search src/auth/ for ...", tools: [...] })
 Agent({ prompt: "Search src/api/ for ...", tools: [...] })
 Agent({ prompt: "Search src/db/ for ...", tools: [...] })
@@ -317,18 +317,16 @@ Team config, mailboxes, and task files are runtime-owned; do not pre-author them
 ```
 Agent({
   name: "researcher",
-  team_name: "bug-hunt",
-  prompt: "You are the researcher on the bug-hunt team. Search for evidence of the memory leak in src/cache/. Report findings to the team lead via mailbox."
+  prompt: "You are the researcher on the bug-hunt team. Search for evidence of the memory leak in src/cache/. Report findings to the team lead."
 })
 
 Agent({
   name: "test-runner",
-  team_name: "bug-hunt",
-  prompt: "You are the test runner on the bug-hunt team. Run the cache test suite with memory profiling enabled. Report results to the team lead via mailbox."
+  prompt: "You are the test runner on the bug-hunt team. Run the cache test suite with memory profiling enabled. Report results to the team lead."
 })
 ```
 
-The `name` field makes the agent addressable via SendMessage.
+With agent teams enabled, an Agent call that passes a `name` launches a teammate; there is no team-name parameter. A session has exactly one team, named by Claude Code from the session ID. The `name` field makes the teammate addressable via SendMessage. Agent teams are experimental and need `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`; they do not spawn in non-interactive (`-p`) sessions (checked 2026-10-10 against https://code.claude.com/docs/en/agent-teams).
 
 ### Peer Messaging
 
@@ -337,14 +335,15 @@ Direct message:
 SendMessage({ to: "researcher", message: "What did you find in the cache module?" })
 ```
 
-Broadcast to all teammates:
+There is no broadcast address. To reach everyone, send one message per recipient:
 ```
-SendMessage({ to: "*", message: "Found root cause: unbounded LRU cache in src/cache/store.ts line 34" })
+SendMessage({ to: "test-runner", message: "Found root cause: unbounded LRU cache in src/cache/store.ts line 34" })
+SendMessage({ to: "auth-migrator", message: "Found root cause: unbounded LRU cache in src/cache/store.ts line 34" })
 ```
 
 ### Mailbox Protocol
 
-File-based JSON with lockfile concurrency control:
+File-based JSON with lockfile concurrency control. The mailbox JSON, its path and the inbox lockfile are internal, undocumented and unstable (the docs name only `~/.claude/teams/{team-name}/inboxes/{agent-name}.json`, runtime-owned). The sample is illustrative; do not build parsers or writers on it:
 
 ```json
 {
@@ -361,11 +360,11 @@ File-based JSON with lockfile concurrency control:
 }
 ```
 
-Lockfile protocol prevents concurrent write corruption. Each agent acquires `{inbox}.lock` before writing.
+Claude Code handles write locking itself; do not rely on a lockfile name or protocol.
 
 ### Permission Bridge
 
-When a teammate needs tool permission (e.g., to run a destructive bash command), the request travels via mailbox to the team lead's UI. The lead approves or denies. The response flows back through the mailbox. Teammates have independent permission modes.
+When a teammate needs tool permission (e.g., to run a destructive bash command), the request travels via mailbox to the team lead's UI. The lead approves or denies. The response flows back through the mailbox. Teammates start with the lead's permission mode (except `dontAsk`, which they do not inherit); you can change one teammate's mode after spawning, but not set per-teammate modes at spawn time.
 
 ### Cost: every teammate is a full context
 
@@ -386,7 +385,6 @@ Critical for teams. Assign each teammate exclusive files. No two teammates shoul
 ```
 Agent({
   name: "auth-migrator",
-  team_name: "v3-migration",
   prompt: `
     You own these files exclusively:
     - src/auth/login.ts
@@ -405,7 +403,7 @@ The lead validates file assignments before dispatch to ensure no overlaps.
 
 ### Shared Task List
 
-All team members access the same task list directory: `~/.claude/teams/{team_name}/tasks/`
+All team members that have the Task tools share one task list, stored under `~/.claude/tasks/{team-name}/` (the team name is derived from the session ID). Treat the path as runtime-owned and do not script against it.
 
 ```json
 {
@@ -423,7 +421,7 @@ Task states: `pending` | `in-progress` | `done` | `failed` | `blocked`
 
 ### Idle Notification
 
-Teammates notify the lead when done via the Stop hook. The lead can then reassign the teammate to new work or merge results.
+Idle notification is automatic: when a teammate finishes and stops, it notifies the lead and includes its final answer. No hook is needed. To gate or extend this, the `TeammateIdle`, `TaskCreated` and `TaskCompleted` hooks exit with code 2 to send feedback. The lead can then reassign the teammate to new work or merge results.
 
 ### When to Use
 
@@ -467,7 +465,7 @@ You want one coding agent to spawn another coding agent over the **Agent Client 
 
 ## Common Multi-Agent Principles
 
-These apply across all three patterns.
+These apply across all patterns.
 
 ### 1. Freeze Interfaces Before Dispatch
 

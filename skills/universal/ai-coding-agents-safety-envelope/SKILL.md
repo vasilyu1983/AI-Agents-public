@@ -3,7 +3,7 @@ name: ai-coding-agents-safety-envelope
 description: "Designs approval and sandbox policy for local coding agents: permission modes, isolation, network and destructive-command guards. Use when setting approvals. Not cloud sandboxes."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "2.0"
-last_validated: 2026-09-29
+last_validated: 2026-10-09
 ---
 
 # AI Coding Agents Safety Envelope
@@ -76,7 +76,7 @@ Sandbox mode is not approval mode: they are related but not identical, and each 
 8. **Lint and scrub persisted rules.** Detect unreachable or shadowed allows, refuse over-broad shell prefixes, and reject any rule that matches a secret shape (an "always allow" click can persist auth headers); rotate any token found in a rules file.
 9. **Preserve authorization scope.** Bind a decision to the concrete action, target, actor, and session or policy scope. An agent-to-agent message is not consent, and do not discard still-applicable user authorization merely because time passed unless policy defines expiry.
 10. **Budget prompts.** Track prompts per session and the share approved within seconds; prompt fatigue drives users to bypass modes.
-11. **Audit the mode before the rules.** In a bypass mode the allow, ask, and deny lists may enforce nothing, and a blanket allow that matches before classification switches the classifier off for that surface. Deny beats allow at every scope; see the rule-syntax reference.
+11. **Audit the mode before the rules.** In `bypassPermissions` mode allow rules have no effect and the mode is the approval gate; deny rules still block and explicit ask rules still prompt, and a blanket allow that matches before classification switches the classifier off for that surface. Deny beats allow at every scope; see the rule-syntax reference.
 
 ## Sandbox Workflow
 

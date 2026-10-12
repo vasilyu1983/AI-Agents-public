@@ -6,10 +6,11 @@ These aggregation mechanisms (voting, debate, routing, Shapley credit assignment
 
 | Question | Evidence | Rule of thumb |
 |---|---|---|
-| Does the task structure favor multi-agent at all? | Kim et al., arXiv:2512.08296: relative gain over a single-agent baseline ranges from +80.8% on decomposable tasks to -70.0% on sequential/interdependent planning, plus a capability-saturation effect. | Decomposable, parallel-verifiable subtasks → candidate for multi-agent. Sequential/interdependent → default to one strong agent. |
+| Does the task structure favor multi-agent at all? | Kim et al., arXiv:2512.08296: the direction of the multi-agent effect versus a single-agent baseline flips with task type (gains on decomposable tasks, losses on sequential/interdependent planning), plus a capability-saturation effect: coordination returns shrink once the single-agent baseline is already strong. | Decomposable, parallel-verifiable subtasks → candidate for multi-agent. Sequential/interdependent → default to one strong agent. |
 | Should I debate or vote? | Choi, Zhu & Li, arXiv:2508.17536 (NeurIPS 2025 Spotlight): "Majority Voting alone accounts for most of the performance gains typically attributed to MAD"; debate is a martingale over beliefs and "does not improve expected correctness" by itself. | Run a matched-token-budget majority-vote/self-consistency baseline first. Debate only if it beats that baseline, uses targeted interventions, or the audit trail is itself the product. |
-| Is my equal-budget comparison real? | Tran & Kiela, arXiv:2604.02460: API-based budget controls "distort effective computation." | Count all tokens including retries/verification; watch for budget-control artifacts. |
-| Pool or route to the strongest? | Pappu et al., arXiv:2602.01011: expertise dilution and team-size effects measurably hold experts back on expert-relevant tasks. | Route/weight to an identifiably stronger participant rather than pooling equally when one exists. |
+| Is my equal-budget comparison real? | Tran & Kiela, arXiv:2604.02460: API-based budget controls "distort effective computation." Scope is multi-hop reasoning; the paper also finds multi-agent becomes competitive when single-agent context degrades or compute grows. | Count all tokens including retries/verification; watch for budget-control artifacts. |
+| Do agents add information? | Ao, Gao & Simchi-Levi, arXiv:2603.26993 (abstract-level): without new exogenous signals a delegated multi-agent network is dominated by a centralized Bayes decision maker with the same information. | Delegate only when agents bring information the parent lacks or relieve a context limit. |
+| Pool or route to the strongest? | Pappu et al., arXiv:2602.01011: expertise dilution and team-size effects hold experts back on expert-relevant tasks (the abstract reports losses on ML benchmarks). The same consensus-seeking makes teams more robust to adversarial agents. | Route/weight to an identifiably stronger participant rather than pooling equally when one exists; keep an independent check where an untrusted member could poison the output. |
 
 ## Aggregation rows
 
@@ -17,7 +18,7 @@ Full playbooks: [`../assets/templates/team-theory/`](../assets/templates/team-th
 
 | Row | Mechanism | Use when | Scope limit |
 |---|---|---|---|
-| Belief-driven lane assignment (ECON-inspired) | [`01-econ-belief-driven.md`](../assets/templates/team-theory/01-econ-belief-driven.md) | Members read the same context and pool into duplicate analysis | The +11.2%/-21.4% figures belong to ECON's RL-trained belief/mixing networks (arXiv:2506.08292), not this prompt-only proxy. Treat the recipe as untested until measured on your task. |
+| Belief-driven lane assignment (ECON-inspired) | [`01-econ-belief-driven.md`](../assets/templates/team-theory/01-econ-belief-driven.md) | Members read the same context and pool into duplicate analysis | ECON's reported gains (arXiv:2506.08292) belong to its RL-trained belief/mixing networks, not this prompt-only proxy. Treat the recipe as untested until measured on your task. |
 | Heterogeneous debate | [`02-adversarial-debate.md`](../assets/templates/team-theory/02-adversarial-debate.md) | Only after a matched-budget vote/self-consistency baseline has been beaten | Majority vote is the baseline to beat, not the anti-pattern (Choi et al.). "Cap at 2 rounds" is an engineering default, not sourced. |
 | Courtroom-style debate (PROClaim) | [`08-courtroom-proclaim.md`](../assets/templates/team-theory/08-courtroom-proclaim.md) | High-stakes go/no-go needing an evidential audit trail | +10pp gain is confirmed but scoped to zero-shot Check-COVID; do not generalize the magnitude. |
 | Confidence weighting / staking | [`11-prediction-market.md`](../assets/templates/team-theory/11-prediction-market.md) | Verbose or loud outputs must not dominate synthesis | The self-critique calibration step is CritiCal-*inspired*, not CritiCal (a training method, arXiv:2510.24505); no verified magnitude for the prompt-only version. |
@@ -45,4 +46,4 @@ These have a genuine incentive/strategic kernel, so their templates live in game
 
 ## Sources
 
-Choi, Zhu & Li, *Debate or Vote*, arXiv:2508.17536, NeurIPS 2025 Spotlight. Kim et al., arXiv:2512.08296 (abstract-level figures). Tran & Kiela, arXiv:2604.02460. Pappu et al., arXiv:2602.01011 (see team-theory SKILL.md Fact-Checking for the exact, non-transferable figures).
+Choi, Zhu & Li, *Debate or Vote*, arXiv:2508.17536, NeurIPS 2025 Spotlight. Kim et al., arXiv:2512.08296 (abstract-level figures). Tran & Kiela, arXiv:2604.02460. Pappu et al., arXiv:2602.01011 (see team-theory SKILL.md Citation Notes before quoting any magnitude).

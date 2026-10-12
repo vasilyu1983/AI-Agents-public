@@ -30,9 +30,7 @@ scope_mapping:
 
   # Documentation
   "docs/plans/**": "docs-plans"
-  "docs/assessment/**": "docs-assessment"
   "docs/diagrams/**": "docs-diagrams"
-  "docs/seo-aeo-report/**": "docs-seo-aeo"
   "scripts/**": "scripts"
   "docs/**": "docs"
 

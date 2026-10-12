@@ -1405,7 +1405,8 @@
               "brief": "Billing, payment-method, entitlement, and recovery feasibility.",
               "skills": [
                 "software-payments",
-                "software-security-appsec"
+                "software-security-appsec",
+                "foundations-distributed-systems"
               ],
               "read_only": true,
               "spawn": {
@@ -2377,7 +2378,8 @@
               "brief": "Payment-domain architecture constraints.",
               "skills": [
                 "software-payments",
-                "software-security-appsec"
+                "software-security-appsec",
+                "foundations-distributed-systems"
               ],
               "read_only": true,
               "spawn": {
@@ -2824,7 +2826,8 @@
               "skills": [
                 "ops-incident-response",
                 "qa-observability",
-                "qa-resilience"
+                "qa-resilience",
+                "foundations-queueing-theory"
               ],
               "read_only": true,
               "spawn": {
@@ -3204,7 +3207,8 @@
               "brief": "Payment architecture and compliance constraints.",
               "skills": [
                 "software-payments",
-                "software-security-appsec"
+                "software-security-appsec",
+                "foundations-distributed-systems"
               ],
               "read_only": true,
               "spawn": {
@@ -3364,7 +3368,8 @@
                 "ai-agents",
                 "ai-architecture-advisor",
                 "ai-product-operating-model",
-                "ai-coding-agents"
+                "ai-coding-agents",
+                "foundations-safety-engineering"
               ],
               "read_only": true,
               "spawn": {
@@ -3440,7 +3445,8 @@
                 "ai-evals",
                 "ai-coding-agents-observability-evals",
                 "qa-agent-testing",
-                "ai-prompt-engineering"
+                "ai-prompt-engineering",
+                "foundations-measurement-theory"
               ],
               "read_only": true,
               "spawn": {
@@ -5407,7 +5413,8 @@
               "brief": "Payments lens: flow correctness, idempotency, ledger integrity, provider boundaries, and failure handling.",
               "skills": [
                 "software-payments",
-                "software-security-appsec"
+                "software-security-appsec",
+                "foundations-distributed-systems"
               ],
               "read_only": true,
               "spawn": {
@@ -5432,7 +5439,8 @@
               "skills": [
                 "software-payments",
                 "data-analytics-engineering",
-                "qa-observability"
+                "qa-observability",
+                "foundations-distributed-systems"
               ],
               "read_only": true,
               "spawn": {

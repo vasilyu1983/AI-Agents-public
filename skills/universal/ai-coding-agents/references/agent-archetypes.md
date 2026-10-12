@@ -22,7 +22,7 @@ For multi-agent patterns (coordinator teams, fork subagents, peer swarms), see [
 
 ## Archetype Overview
 
-| Archetype | Mode | Core Tools | maxTurns | Template |
+| Archetype | Mode | Core Tools | maxTurns (starting value) | Template |
 |-----------|------|-----------|----------|----------|
 | Code Reviewer | Read-only | Read, Grep, Glob, Bash | 8 | `code-reviewer.md` |
 | Test Generator | Read + Write | Read, Write, Edit, Bash, Grep | 15 | `test-generator.md` |
@@ -59,11 +59,14 @@ Bash is constrained to read-only commands by the system prompt, but a prompt can
 name: code-reviewer
 description: "Review code changes for bugs, regressions, and missing tests. Use after code modifications or before commits."
 tools: Read, Grep, Glob, Bash
+disallowedTools: Edit, Write, NotebookEdit
 maxTurns: 8
 model: sonnet
 permissionMode: default
 ---
 ```
+
+`disallowedTools` is what makes this archetype read-only for the edit tools. Bash is the gap: it needs permission deny rules for writing commands or a read-only sandbox, as described above. `maxTurns` here and in the other archetypes is a starting value; tune it from observed turn counts.
 
 Model: `sonnet` is sufficient for most review tasks. Use `opus` only for complex architectural review where deep reasoning about system-level implications matters.
 

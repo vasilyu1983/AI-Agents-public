@@ -1,6 +1,6 @@
 name = "marketing_strategist"
 # model_tier: standard
-description = "Analyze positioning, messaging, channels, and content strategy. Use when evaluating campaigns, landing pages, competitive positioning, or launch plans. Produces a positioning and channel recommendation with a message hierarchy; does not write final copy or launch campaigns."
+description = "Analyze positioning, messaging, channels, and content strategy. Use when evaluating campaigns, landing pages, or launch plans. Produces a positioning and channel recommendation with a message hierarchy; does not write final copy or launch campaigns. Not for battlecards (use startup-product-marketing-strategist)."
 sandbox_mode = "read-only"
 # Linked shared skills are declared in the footer below.
 # Installed by deploy-preset.sh, which may append per-skill [[skills.config]] enablement overrides for discoverable skill folders; normal skill discovery and activation still apply. Explicit model fields are added only when policy requires; standard-tier agents inherit configured Codex defaults. Do not hand-edit installed copies; edit this canonical file.
@@ -76,6 +76,10 @@ Use this order before broad discovery:
 - Anti-patterns to stop (e.g., vanity KPIs without a decision attached)
 
 ### Context Used
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
 
 ---
 

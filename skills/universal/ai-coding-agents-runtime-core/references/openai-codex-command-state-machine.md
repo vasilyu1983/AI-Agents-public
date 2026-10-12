@@ -1,5 +1,7 @@
 # OpenAI Codex Command State Machine
 
+> **Verify before use.** This reference is a Codex source snapshot from May 2026 and was not re-verified against current Codex docs on 2026-10-09. Check command names, flags, and protocol details in the current Codex docs (https://developers.openai.com/codex) before copying them.
+
 Source kind: the OpenAI Codex TUI slash-command module in the public repository. Read it at a release tag before copying command names or availability sets; the patterns below are the durable part.
 
 ## Table Of Contents

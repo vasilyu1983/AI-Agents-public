@@ -1,6 +1,6 @@
 ---
 name: ai-context-layer
-description: "Designs agent memory that remembers users across sessions: point-in-time facts, consolidation, tenant isolation. Use when auditing long-term user memory, support KBs, or Mem0/Zep."
+description: "Designs cross-session agent memory: point-in-time facts, consolidation, tenant isolation. Use when auditing user memory or Mem0/Zep. Not for repo context (dev-context-engineering)."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.6"
 last_validated: 2026-09-27

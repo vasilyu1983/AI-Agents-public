@@ -18,7 +18,7 @@
 #   --refresh-installed-managed   Refresh only existing, unchanged files in the ownership ledger
 #   --confirm-bulk-deploy          Confirm this administrative catalog-wide write operation
 #   --dry-run                      Show what would be deployed, change nothing
-#   --remove                       Remove all teams instead of installing them
+#   --remove                       Remove all teams instead of installing them (needs --confirm-bulk-deploy)
 #   --no-prune                     Skip cleanup of orphaned/broken agents after install
 #   --quiet                        Only print the final summary
 #   -h, --help                     Show this help
@@ -32,7 +32,7 @@
 #   ./deploy-all-teams.sh --confirm-bulk-deploy --include-opt-in     # include opt-in teams
 #   ./deploy-all-teams.sh --refresh-installed-managed --dry-run       # preview safe managed refresh
 #   ./deploy-all-teams.sh --dry-run                # preview without writing
-#   ./deploy-all-teams.sh --remove --platform both # tear everything down
+#   ./deploy-all-teams.sh --confirm-bulk-deploy --remove --platform both # tear everything down
 #
 # Sync rule: if you edit any member or repository team recipe, rerun this
 # script to push changes to the global folders. Skill discovery is handled
@@ -151,9 +151,11 @@ if [[ "$REFRESH_INSTALLED_MANAGED" == true ]] && {
   exit 2
 fi
 
-if [[ "$DRY_RUN" != true && "$REMOVE" != true && "$CONFIRM_BULK_DEPLOY" != true ]]; then
+if [[ "$DRY_RUN" != true && "$CONFIRM_BULK_DEPLOY" != true ]]; then
   if [[ "$REFRESH_INSTALLED_MANAGED" == true ]]; then
     echo "Refusing managed-file refresh without --confirm-bulk-deploy." >&2
+  elif [[ "$REMOVE" == true ]]; then
+    echo "Refusing catalog-wide removal without --confirm-bulk-deploy." >&2
   else
     echo "Refusing catalog-wide installation without --confirm-bulk-deploy." >&2
   fi
@@ -465,14 +467,43 @@ deploy_one() {
 
   if $DRY_RUN; then
     echo "  [dry-run] $DEPLOY ${args[*]}"
-    return 0
+    # A dry run must still fail on what the real run would fail on: a missing
+    # manifest or a member with no canonical source file for this platform.
+    validate_team "$team" "$platform"
+    return $?
   fi
 
-  if "$DEPLOY" "${args[@]}" >/dev/null 2>&1; then
+  local output
+  if output="$("$DEPLOY" "${args[@]}" 2>&1)"; then
     return 0
   else
+    # Keep the reason: without it a FAIL line is unactionable.
+    printf '%s\n' "$output" | tail -n 3 | sed 's/^/        /' >&2
     return 1
   fi
+}
+
+# validate_team <team> <platform>: every member in team.yaml has a canonical
+# source file under agents/<platform>/. Returns 1 and lists what is missing.
+validate_team() {
+  local team="$1" platform="$2" manifest="$TEAMS_DIR/$1/team.yaml" member source missing=0
+  if [[ ! -f "$manifest" ]]; then
+    echo "        missing manifest: $manifest" >&2
+    return 1
+  fi
+  while IFS= read -r member; do
+    [[ -n "$member" ]] || continue
+    case "$platform" in
+      claude) source="$MEMBERS_DIR/claude/$member.md" ;;
+      codex) source="$MEMBERS_DIR/codex/${member//-/_}.toml" ;;
+      *) source="$MEMBERS_DIR/$platform/$member" ;;
+    esac
+    if [[ ! -f "$source" ]]; then
+      echo "        missing member source: ${source#"$REPO_ROOT"/}" >&2
+      missing=1
+    fi
+  done < <(awk '/^members:/ {f=1; next} f && /^- / {sub(/^- */, ""); print; next} f && /^[^ -]/ {f=0}' "$manifest")
+  return $missing
 }
 
 prune_orphans() {
@@ -805,6 +836,6 @@ if ! $REMOVE; then
     esac
   done
   echo ""
-  echo "Restart your Claude Code session (or run /agents) to load new members."
-  echo "Restart your Codex session, then smoke-test by explicitly spawning one installed agent by its TOML name."
+  echo "Claude Code picks up new agent files in a running session; run /agents to confirm they are listed, and restart only if they are missing."
+  echo "Codex reads agents at session start: start a new session, then smoke-test by explicitly spawning one installed agent by its TOML name."
 fi

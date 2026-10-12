@@ -1,6 +1,6 @@
 ---
 name: software-architecture-design
-description: "Designs runtime and platform topology inside a chosen solution. Use when choosing modular monolith vs services, cells, consistency, resilience, ADRs, or fitness functions."
+description: "Designs runtime topology in a chosen solution. Use when choosing monolith vs services, cells, consistency, ADRs. Not for cross-system design (software-solution-architecture)."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.3"
 last_validated: 2026-07-11

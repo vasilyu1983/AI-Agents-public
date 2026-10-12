@@ -29,6 +29,11 @@ Choose the family that the evidence can actually support. An inability claim res
 
 These are the claims of that sketched case. They are not a general requirement for every control argument. They are still useful as a starting defeater list for any case built on red-team evaluations.
 
+## Further pointers (listing-level, not read in full)
+
+- UK AI Security Institute framework: Hilton, Buhl, Korbak and Irving, "Safety Cases: A Scalable Approach to Frontier AI Safety" (arXiv:2503.04744). PLAUSIBLE, from listing and search snippets only. Lists open problems including structuring top claims and measuring confidence in an argument; use it when you need guidance on confidence in the argument, which the defeater rule above does not give.
+- Dynamic safety cases: Buhl et al., "Dynamic safety cases for frontier AI" (arXiv:2412.17618). PLAUSIBLE, listing-level. Supports the review-trigger rule in step 5 below.
+
 ## Building one
 
 1. State the top claim with its scope: the system version, the deployment context, the losses covered and the period.

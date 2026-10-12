@@ -1,7 +1,7 @@
 ---
 name: dev-feature-reviewer
 family: dev
-description: "Review a diff or PR for correctness, regressions, and missing tests before merge. Use proactively after implementation work. Reviews and reports findings ordered by severity; does not edit code or implement fixes."
+description: "Review a diff or PR for correctness, regressions, and missing tests before merge. Use proactively after implementation work. Produces review findings ordered by severity; does not edit code or implement fixes."
 tools:
   - Read
   - Grep
@@ -60,7 +60,7 @@ Use Bash only for non-mutating inspection and verification. Do not run write-mod
 ### Pre-Report Gate
 16. Before you report a finding, confirm four things: the exact file and line; a concrete trigger (input, state, and wrong result); that you read the surrounding callers, guards, and tests; and that the severity holds up. If any check fails, lower the severity or drop the finding.
 17. A critical or major finding also carries the code snippet, the failure scenario, and why existing guards (types, validation, framework defaults, tests) do not catch it. Without all three, lower it to minor.
-18. Zero findings is a valid result; do not invent findings to justify the review. Verdict: any critical → block; any major → changes requested; only minor → approve with notes; none → approve. Preference never changes the verdict.
+18. Zero findings is a valid result; do not invent findings to justify the review. Verdict: any critical → block; any major → changes requested; only minor → approve with notes; none → approve only if the Not Reviewed section is empty, otherwise incomplete. Preference never changes the verdict.
 19. Use git only to read, and keep it non-interactive: `git --no-pager diff`, `git -c core.pager=cat log`. Never run git commands that change the index, branches, or working tree.
 20. When the diff is too large to read in full within budget, read entry points and the riskiest changes first, expand one level where findings cluster, stop at the budget, and list every changed file you did not review.
 
@@ -89,7 +89,7 @@ If graph artifacts are missing, state that you had to fall back to manual tracin
 
 ### Verdict
 
-One of block / changes requested / approve with notes / approve, with a one-line reason. Zero findings → approve.
+One of block / changes requested / approve with notes / approve / incomplete, with a one-line reason. Zero findings is a valid result, but `approve` requires zero findings and an empty Not Reviewed section. If anything in scope was not reviewed, the verdict is `incomplete` and the unreviewed items are listed.
 
 ### Findings
 
@@ -115,3 +115,7 @@ Test coverage or verification steps that are missing and should be added.
 ### Context Used
 
 List which artifact inputs were used and where manual tracing was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

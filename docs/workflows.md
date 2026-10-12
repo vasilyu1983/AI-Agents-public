@@ -200,7 +200,7 @@ Checks every quote, link, figure and attribution in one document against the sou
 - The four reviewers check quotes, links, figures and attribution. There are no optional dimensions.
 - A reviewer judges a claim only after reading its source. A source that cannot be opened counts as **unverified**, never as false.
 - A finding outside the target is dropped in code.
-- The fixer has no network access. It can only align the text with the source wording that a confirmed finding quotes, or remove the claim. Re-check those edits yourself.
+- The fixer is told not to run network commands. This is a prompt rule, not a sandbox. It should only align the text with the source wording that a confirmed finding quotes, or remove the claim. Re-check those edits yourself.
 
 **Example**
 
@@ -219,8 +219,9 @@ flowchart LR
   TF --> TC[Test check]
   TC -->|"red for add/change/fix<br/>green for refactor"| I[Implement]
   I --> RC[Recheck<br/>expects green]
-  RC --> RV[Review loop]
-  RV -->|clean| DONE([DONE])
+  RC --> RV[Review loop<br/>tests frozen]
+  RV -->|clean| FC[Final check<br/>expects green]
+  FC --> DONE([DONE])
 ```
 
 1. **Run 1:** `{mode, task}`. `mode` is `add`, `change`, `fix` or `refactor`. The run returns `PLAN_READY` with the plan: the files to change, the test files, and the checks.
@@ -235,7 +236,8 @@ Run 2, stage by stage:
 | Test check | Runtime | New tests must fail (red) for add, change and fix, and pass (green) for refactor |
 | Implement | Implementer | May touch only `plan.files` |
 | Recheck | Runtime | Tests must now pass |
-| Review | Review loop | As in `review-fix-loop` |
+| Review | Review loop | As in `review-fix-loop`, but the fixer may touch only `plan.files` |
+| Final check | Runtime | Tests must still pass after the review fixes |
 
 Only one writer runs at a time.
 
@@ -246,6 +248,8 @@ Only one writer runs at a time.
 | `BLOCKED` | `invalid_plan_path`, `out_of_scope`, `tests_not_red`, `tests_not_green`, `report_mismatch`, or a snapshot reason | Read the escalation; fix the plan or the tree |
 | `FINDINGS` | `cap` or `oscillation` | Fix by hand, or discard the change |
 | `INCOMPLETE` | `incomplete` | An agent failed or broke the schema; re-run |
+
+The tests are frozen after the test check. A plan that lists one path in both `files` and `test_files` stops as `invalid_plan_path`. A review fix that edits a test stops as `out_of_scope`; you decide whether that test should change.
 
 **Example**
 
@@ -335,7 +339,7 @@ If `contextData` misses a required key, the run stops before it starts any agent
 4. **Synthesize.** The chair writes a weighted synthesis. The weights are fixed before any agent starts.
 5. **Verify.** Optional.
 
-**Statuses:** `decided`, `held_for_regret`, `verification_failed`, `algedonic_bypass`. A hold carries a deadline.
+**Statuses:** `decided`, `incomplete_panel` (a core panelist returned no memo; `missing_core_roles` names it), `held_for_regret`, `verification_failed`, `algedonic_bypass`. Any status other than `decided` is a hold and carries a deadline.
 
 Board agents get only Read, Grep and Glob, and no network.
 
@@ -361,9 +365,9 @@ Runs the marketing team in stages: research, one positioning lock, channel draft
 | Verdict | Meaning |
 |---|---|
 | `ready_for_launch` | The drafts in `outputs.drafts` are ready for you |
-| `revise_channels` | A draft contradicts the positioning lock |
+| `revise_channels` | A draft contradicts the positioning lock, or a reviewer raised a high-severity finding |
 | `reopen_positioning` | A channel owner asked to reopen the positioning |
-| `hold_for_evidence` | The strategist found an evidence gap |
+| `hold_for_evidence` | The strategist found an evidence gap, a lock line has no evidence, or research found none |
 
 It publishes, sends and schedules nothing. It changes no live page, ad account, budget or email platform.
 
@@ -392,6 +396,7 @@ The review, staged and wave workflows check the working tree in code. They do no
 - The git config and git hooks of the repository.
 - Folders at the repository root: `.claude`, `.codex`, `.agents`, `.github`, `.husky`, `.vscode`, `.idea`, `.devcontainer`.
 - Files at the repository root: `CLAUDE.md`, `AGENTS.md`, `.mcp.json`, `.claude.json`, `.envrc`, `.gitattributes`, `.gitmodules`, `.pre-commit-config.yaml`.
+- The folders `hooks` and `scripts/git-hooks` at the repository root, which hold the agent safety hooks and the git hooks path. Only the root copies are protected, so `src/hooks/` stays allowed.
 
 A planned path that is absolute, blank, contains `..`, or sits under a protected path is refused. Make edits to instruction files yourself, outside any workflow.
 
@@ -405,7 +410,7 @@ Codex has no workflow runtime. Each workflow therefore ships a generated plan, `
 
 1. Link the skills for Codex (`sync-skills.sh agents`). Deploy the team the workflow needs, from the table in [section 1](#1-choose-a-workflow), with `--platform codex`.
 2. In Codex, invoke `run-workflow`. Name the workflow id and give the arguments.
-3. Your Codex session acts as the parent. It reads the plan's `execution_contract` and runs its phases in order with `spawn_agent`, `wait_agent`, `send_input` and `close_agent`.
+3. Your Codex session acts as the parent. It reads the plan's `execution_contract` and runs its phases in order with `spawn_agent`, `wait_agent`, `send_input` and `close_agent`. A staged plan's `gate_rules` state what each stage gate decides.
 4. The parent does every dispatch, wait, merge and verdict. Workers never start workers.
 5. The parent keeps to the plan's caps: members, refuter count, `max_dynamic_members` and rounds.
 6. A failed, timed-out or malformed member makes the verdict `INCOMPLETE`. The parent names it and does not redo its part.

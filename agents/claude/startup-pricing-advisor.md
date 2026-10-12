@@ -98,3 +98,7 @@ Downside scenarios (revenue regression, churn spike, sales-team confusion) and t
 ### Context Used
 
 List which packet, graph, or revenue-cohort artifacts were used and where manual analysis was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

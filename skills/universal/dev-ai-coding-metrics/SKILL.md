@@ -80,7 +80,7 @@ Planning default: **8 weeks** of pre-intervention data. This is a local planning
 
 | Situation | Design |
 |-----------|--------|
-| new pilot, no control group | difference-in-differences against non-adopting or late-adopting teams, or an interrupted time series with ≥8 pre-period points; a single before/after delta is directional only (it absorbs freezes, reorgs, and hiring waves) |
+| new pilot, no control group | difference-in-differences against non-adopting or late-adopting teams, or an interrupted time series with ≥8 pre-period points; a single before/after delta is directional only (it absorbs freezes, reorgs, and hiring waves) When teams adopt at different times, plain two-way fixed-effects DiD is biased; use a staggered estimator and check pretrend power before reading a flat pretrend as proof ([foundations-causal-inference](../foundations-causal-inference/SKILL.md)) |
 | enough comparable teams | matched A/B or stratified assignment |
 | teams resist permanent denial of tools | crossover design |
 | agent workflow change on one task family | task-level shadow comparison or reviewer-blind evaluation |

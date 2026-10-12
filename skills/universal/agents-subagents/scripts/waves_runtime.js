@@ -24,7 +24,7 @@ const CONTINUE = ARGS.continueOnFailure === true;
 // A task id names labels and, in Codex, a claim file: no path or shell characters.
 const TASK_ID = /^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/;
 // These stops mean the tree itself is no longer trusted, so no other task may start.
-const RUN_STOPS = ['snapshot_tampered', 'head_moved', 'protected_changed', 'index_changed'];
+const RUN_STOPS = ['snapshot_tampered', 'head_moved', 'protected_changed', 'index_changed', 'check_defect'];
 const TASK_PASS = WAVES.task_manifest.staged.pass_verdict;
 
 // The staged engine as a function: each task and the integration review run it with their own args and manifest.
@@ -39,15 +39,18 @@ const TASKS = Object.create(null);
 const history = [];
 const changed = new Set();
 const observed = new Set();
+// Refuter votes summed over every task run and the integration run; all zeros when none ran. Telemetry only.
+const AGREE = { both_refuted: 0, first_only: 0, second_only: 0, neither: 0 };
 let WAVE_LIST = [];
 let firstFailure = null;
 const entry = (id) => LEDGER.find((item) => item.id === id);
 
 function result(verdict, stopReason, open, action, extra) {
+  [verdict, stopReason] = stopOverride(verdict, stopReason);
   log('Verdict: ' + verdict + '; stop reason: ' + stopReason);
   const out = {
     verdict, ledger: LEDGER, waves: WAVE_LIST, history, stop_reason: stopReason,
-    changed_files_reported: [...changed], changed_files_observed: [...observed].sort(), ...extra,
+    changed_files_reported: [...changed], changed_files_observed: [...observed].sort(), refuter_agreement: { ...AGREE }, ...extra,
   };
   if (open) out.escalation = { reason: stopReason, open, action: action || WAVES.escalation_action };
   return out;
@@ -181,9 +184,10 @@ const halted = () => firstFailure && (!CONTINUE || RUN_STOPS.includes(firstFailu
 function absorb(run) {
   for (const file of run.changed_files_reported || []) changed.add(file);
   for (const file of run.changed_files_observed || []) observed.add(file);
+  for (const key of Object.keys(AGREE)) AGREE[key] += Number((run.refuter_agreement || {})[key]) || 0;
 }
 
-const prefixed = (prefix) => (prompt, options) => agent(prompt, { ...options, label: prefix + options.label });
+const prefixed = (prefix) => Object.assign((prompt, options) => guarded(prompt, { ...options, label: prefix + options.label }), { guard: guarded.guard });
 
 async function runEngine(engineArgs, prefix, manifest) {
   if (ARGS.maxRounds !== undefined) engineArgs.maxRounds = ARGS.maxRounds;
@@ -195,7 +199,8 @@ async function runEngine(engineArgs, prefix, manifest) {
 }
 
 function taskPlan(task) {
-  const plan = { summary: task.goal, files: task.owned_files, test_files: task.test_files, acceptance: task.acceptance };
+  // G2: the task's acceptance_command is also its pinned test command, so the red and green gates run it in code.
+  const plan = { summary: task.goal, files: task.owned_files, test_files: task.test_files, acceptance: task.acceptance, test_command: task.acceptance_command };
   for (const key of ['failure_reason', 'old_assertions']) if (task[key] !== undefined) plan[key] = task[key];
   return plan;
 }
@@ -242,6 +247,34 @@ async function accept(wave, ids) {
       entry(id).evidence = { acceptance: out, stages: history.find((h) => h.task === id && h.step === 'deliver').stages };
     }
   });
+}
+
+// B9: acceptance ran once per wave, so a later wave or the integration fixer can break an earlier task unseen. Before
+// DONE, the runtime runs every task's acceptance_command again, itself, and gates on the exit codes. Returns a result
+// to return, or null when every command exits 0. The commands run one at a time: tasks can share a database file, a port
+// or a build directory, and a collision would read as a regression.
+async function rerunAcceptance(extra) {
+  const A = WAVES.acceptance;
+  phase(A.title);
+  const tasks = ARGS.tasks;
+  const step = await readOnlyStep('rerun', A.title, async () => {
+    const outs = [];
+    for (const task of tasks) outs.push(await runCommand(task.acceptance_command, 'command:rerun:' + task.id, A.title));
+    return outs;
+  });
+  if (step.stop) {
+    history.push({ step: 'rerun', verdict: step.stop.verdict, stop_reason: step.stop.stop_reason });
+    return result(step.stop.verdict, step.stop.stop_reason, step.stop.open, null, extra);
+  }
+  const outs = tasks.map((task, i) => ({ id: task.id, ...(step.outs[i] || { broken: 'command_failed', problem: 'the command agent failed' }) }));
+  const unusable = outs.find((out) => out.broken);
+  if (unusable) {
+    history.push({ step: 'rerun', verdict: 'INCOMPLETE', stop_reason: unusable.broken });
+    return result('INCOMPLETE', unusable.broken, { step: 'rerun', task: unusable.id, problem: unusable.problem }, null, extra);
+  }
+  const regressed = outs.filter((out) => out.exit !== 0).map((out) => ({ id: out.id, exit_code: out.exit, tail: out.tail }));
+  history.push({ step: 'rerun', verdict: regressed.length ? 'BLOCKED' : 'PASS', ...(regressed.length ? { stop_reason: 'acceptance_regressed' } : {}) });
+  return regressed.length ? result('BLOCKED', 'acceptance_regressed', { step: 'rerun', regressed }, null, extra) : null;
 }
 
 // ---- First run: plan only ----
@@ -310,4 +343,6 @@ history.push({ step: 'integration', verdict: integration.verdict, stop_reason: i
 if (integration.verdict !== WAVES.pass_verdict) {
   return result(integration.verdict, integration.stop_reason, { step: 'integration', ...(integration.escalation ? integration.escalation.open : {}) }, null, { integration: loop });
 }
+const regressed = await rerunAcceptance({ integration: loop });
+if (regressed) return regressed;
 return result(WAVES.pass_verdict, 'complete', null, null, { integration: loop });

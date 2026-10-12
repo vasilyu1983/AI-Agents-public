@@ -5,7 +5,7 @@
 Default bias (or status quo bias in its broader form) is the strong tendency for people to accept pre-set options rather than actively choosing alternatives. The default is what happens when the user does nothing. Because inertia and loss aversion both favor the status quo, defaults exert disproportionate influence on outcomes.
 
 Key properties:
-- Opt-out rates are substantially lower than opt-in rates for the same outcome. Thaler & Sunstein's canonical examples: organ donation rates in opt-out countries (Austria ~99%) vs opt-in countries (Germany ~12%).
+- Opt-out rates are substantially lower than opt-in rates for the same outcome. Johnson & Goldstein's canonical example: consent registration rates in opt-out countries (Austria ~99%) vs opt-in countries (Germany ~12%). These are consent-registration rates, not donation rates; a 2025 PNAS Nexus panel of opt-out switches found a non-significant +7% in deceased-donor rates and a 29% fall in living-donor rates.
 - Defaults signal social norms ("this is what most people do").
 - Defaults reduce cognitive load — they substitute for a decision.
 - The default is not neutral: whoever sets the default shapes the distribution of outcomes.
@@ -76,6 +76,6 @@ With ethical defaults:
 ## Sources
 
 - Thaler, R. H. & Sunstein, C. R. (2008). _Nudge_, ch. 1, 3. — canonical defaults framework and organ donation example.
-- Johnson, E. J. & Goldstein, D. (2003). Do defaults save lives? _Science_, 302(5649), 1338–1339. — opt-in vs opt-out organ donation rates.
+- Johnson, E. J. & Goldstein, D. (2003). Do defaults save lives? _Science_, 302(5649), 1338–1339. — opt-in vs opt-out organ-donor consent registration rates (not donation rates).
 - Samuelson, W. & Zeckhauser, R. (1988). Status quo bias in decision making. _Journal of Risk and Uncertainty_, 1(1), 7–59. — status quo bias.
 - ICO (UK). Guidance on consent under GDPR — explicit prohibition on default consent.

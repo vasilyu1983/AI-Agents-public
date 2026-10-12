@@ -26,6 +26,13 @@ linked worktree, and never after `popd`, `cd -` or a `cd` to an expansion. Long 
 shortest prefix git accepts (`reset --h` is `reset --hard`); `--autostash` on
 pull, merge and rebase counts as a stash.
 
+Policy: the protected branches (`vcs.protected_branches`), the merge base (`vcs.default_base`) and the
+push allowlist (`vcs.remotes_allowed`) come from the policy file that hooks/policy.py loads (AGENTS_POLICY,
+then ~/.agents/policy.json, then config/policy.json), once at import. "The branches the policy protects"
+below means that list; no branch name is built into the guard. If the policy cannot be loaded, the guard
+fails closed: a payload that mentions git or a floor command (gh, rm, curl, wget, dd, mkfs) exits 2 with
+"git-safety-guard: policy unreadable (<reason>): git blocked"; other payloads pass.
+
 Tiers:
 - ALWAYS blocked (parent and subagents): commands that discard working-tree
   changes nobody committed.
@@ -43,18 +50,50 @@ Tiers:
   cluster); a `core.hooksPath` override through `-c`, `--config-env`,
   GIT_CONFIG_KEY_<n> / GIT_CONFIG_PARAMETERS or `git config`; and a force push
   (`-f`, `--force`, `--force-with-lease`, `--mirror`, `+ref`) or delete that
-  targets main or dev. A force push without a refspec counts as protected,
+  targets a branch the policy protects. A force push without a refspec counts as protected,
   because a hook cannot know the current branch. A `git push` with no refspec
   and no force flag reads `remote.<name>.push` and `remote.<name>.mirror` in
-  the target repository, and a `+` refspec or a mirror that reaches main or dev
+  the target repository, and a `+` refspec or a mirror that reaches a protected branch
   counts as a force push; so does the same setting passed with `git -c`. The
   minimum prefixes were measured with `git <sub> <prefix> -h` on git 2.51.0.
-- UNQUOTED EXPANSIONS, blocked for everyone: for commit, am, push, merge and
-  rebase, an argument that is wholly an unquoted `$X`, `${X}`, `$(...)` or
-  backtick expansion, unless it is the value of an option that takes one
-  (`-F $f`, `-m $m`). The shell splits it into words, so it can carry
-  `--no-verify` or `--force`. A quoted expansion is one word and keeps the
-  existing rules: `git push origin "$branch"` passes, as before.
+- PUSH ALLOWLIST, blocked for everyone: a `git push` (any form above, including `-c`, `-C` and refspecs)
+  whose remote URL is outside `vcs.remotes_allowed` ("push to a remote outside the policy allowlist"). The
+  remote name is resolved with `git remote get-url --push --all <name>` in the target directory (no remote
+  named: `remote.pushDefault`, the branch's remote, then `origin`). https://, ssh:// and git@host:path URLs
+  become `host/path` without credentials, port or trailing `.git`, and match with fnmatch (case folded)
+  against each pattern. A literal URL as the target is matched directly. A remote that cannot be resolved
+  (no such remote, not a repository, a name from an expansion) is outside the allowlist. A push that sets
+  `remote.<name>.url`, `remote.<name>.pushurl`, `url.<base>.insteadOf` or `url.<base>.pushInsteadOf` through
+  `-c`, `--config-env` or GIT_CONFIG_* is blocked, because the override changes where the name resolves
+  after the check; so is `include.path`/`includeIf.*.path`, or GIT_CONFIG_GLOBAL, GIT_CONFIG_SYSTEM, GIT_CONFIG,
+  GIT_DIR or GIT_COMMON_DIR set in the same segment, since they load the same keys from another file. A variable
+  exported in an earlier segment is not followed (known gap). An absent or empty `remotes_allowed` list turns this rule off.
+- UNQUOTED EXPANSIONS, blocked for everyone: for commit, am, push, merge, rebase,
+  reset, restore, switch, rm, gc and repack, an argument that is wholly an unquoted
+  `$X`, `${X}`, `$(...)` or backtick expansion, unless it is the value of an option
+  that takes one (`-F $f`, `-m $m`). The shell splits it into words, so it can carry
+  `--no-verify`, `--force` or `--hard`. Words that `xargs` appends count the same
+  way (`echo --hard | xargs git reset`); put paths after `--` and they pass. A quoted
+  expansion is one word and keeps the existing rules: `git push origin "$branch"`
+  passes, as before.
+- GIT IN A VARIABLE: a command word that is `$g`, `${g}` or `"$g"`, where the same
+  command line assigns `g=git` (or a path ending in `/git`, `export g=git`), is read as
+  `git`. A variable that is not assigned in the command line stays unknown and passes,
+  like any unknown wrapper; one assigned from text that mentions git but is not plainly
+  `git` (`g=$(command -v git)`) fails closed, like other output the guard cannot see.
+
+- NON-GIT FLOOR, blocked for everyone (a human at the `!` prompt can still run these): recursive `rm` of `/`,
+  `~` or `$HOME` (also `/*`, `~/*`); recursive `rm` of a `.git` directory (`rm -rf .git`, `./.git/`,
+  `$PWD/.git`, `.git/*`, `.*`; single files such as `rm .git/index.lock` pass); `curl|wget` piped into a shell, `sh -c "$(curl ...)"` and `bash <(curl ...)`;
+  `gh repo delete` and `gh api` with DELETE; `gh pr merge` with `--admin`, without a 40-hex `--match-head-commit`,
+  without one explicit `-R <owner/repo>` and PR number, or into a base other than the policy's merge base (read with
+  `gh pr view <n> --repo <r>`, 10 s timeout; no answer blocks); a PUT to `gh api .../pulls/<n>/merge` and a
+  `mergePullRequest` GraphQL call; a `gh pr merge` that shares its command line with another gh call; a gh
+  command word, or any text in a `gh pr merge` or `gh api` call, from a `$` or backtick expansion; a gh alias,
+  expanded from `gh alias list` and checked as that command, and blocked when it is a `!` shell alias, nests
+  or cannot be read; a command word `$g` assigned gh, rm or dd on the same line is read as that command,
+  and one assigned from other text that names them blocks; `mkfs*`; `dd of=/dev/...` (not null, stdout, stderr). It reuses the
+  wrapper unwrapping above. A stage before the shell other than the fetcher (`curl x | tee f | sh`) is not seen.
 
 A subagent is detected by the `agent_id` field, which both Claude Code and
 Codex send for subagent tool calls, or by GIT_SAFETY_STRICT=1 in the
@@ -121,12 +160,15 @@ it in their own terminal.
 """
 
 import fnmatch
+import importlib.util
 import json
 import os
 import re
 import shlex
 import subprocess
 import sys
+from datetime import datetime, timezone
+from pathlib import Path
 
 SHELL_SPLIT = re.compile(r"&&|\|\||;|\||\n")
 SHELLS = {"bash", "sh", "zsh", "dash", "ksh", "mksh", "ash", "fish", "csh", "tcsh"}
@@ -161,15 +203,43 @@ BUILTINS = {"add", "am", "apply", "bisect", "blame", "branch", "checkout", "chec
 UNVERIFIABLE = "__unverifiable__"  # [UNVERIFIABLE] or [UNVERIFIABLE, reason]
 HOOKS_OVERRIDE = "__hooks_override__"
 FORCE_CONFIG = "__force_config__"
-MARKERS = {UNVERIFIABLE, HOOKS_OVERRIDE, FORCE_CONFIG}
+REDIRECT_CONFIG = "__redirect_config__"
+MARKERS = {UNVERIFIABLE, HOOKS_OVERRIDE, FORCE_CONFIG, REDIRECT_CONFIG}
 GUARDED = {"commit", "am", "push", "merge", "rebase", "pull", "reset", "clean", "checkout", "restore", "rm",
            "switch", "gc", "reflog", "prune", "repack"}  # subcommands where a flag built by the shell matters
+# Subcommands where an argument that starts with an unquoted expansion (or is appended by xargs) can carry a
+# hook-skip, force or discard flag. Others keep the flag-name check only: git rejects or ignores a stray word.
+EXPANSION_SUBS = {"commit", "am", "push", "merge", "rebase", "reset", "restore", "switch", "rm", "gc", "repack"}
 STASH_READ_ONLY = {"list", "show", "create"}  # `create` writes a dangling commit, never the tree or refs/stash
 SHELL_TOOLS = {"Bash", "shell", "local_shell", "exec_command", "Monitor"}
 # Desktop Commander runs shell text in `start_process` and types `input` into a live process.
 PROCESS_TOOLS = re.compile(r"mcp__.*desktop-commander.*__(start_process|interact_with_process)")
 GIT_WORD = re.compile(r"(?<![\w.-])git(?![\w./-])", re.I)  # `GIT` runs git on macOS
-PROTECTED = {"main", "dev"}
+
+
+def load_policy():
+    """(protected branches, merge base, allowed remotes, error). Any failure returns an error text."""
+    here = Path(__file__)
+    try:
+        for folder in (here.resolve().parent, here.parent):  # the installed guard is a symlink into the repo
+            module = folder / "policy.py"
+            if module.is_file():
+                break
+        else:
+            raise RuntimeError("hooks/policy.py not found next to the guard")
+        spec = importlib.util.spec_from_file_location("agents_policy", module)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        vcs = mod.load()["vcs"]
+        allowed = vcs.get("remotes_allowed") or []
+        if not (isinstance(allowed, list) and all(isinstance(a, str) for a in allowed)):
+            raise RuntimeError("vcs.remotes_allowed must be a list of strings")
+        return set(vcs["protected_branches"]), vcs["default_base"], allowed, None
+    except Exception as exc:  # PolicyError, a missing loader or a broken one: all fail closed
+        return set(), None, [], " ".join(str(exc).split())
+
+
+PROTECTED, MERGE_BASE, REMOTES_ALLOWED, POLICY_ERROR = load_policy()
 # Subcommand -> (shortest unambiguous prefix of --no-verify, `-n` also skips hooks).
 # Measured on git 2.51.0; for merge and pull every shorter prefix is ambiguous.
 NO_VERIFY = {"commit": ("--no-veri", True), "am": ("--no-v", True), "push": ("--no-veri", False),
@@ -238,6 +308,67 @@ ASSIGNMENT = re.compile(r"[A-Za-z_][A-Za-z0-9_]*=.*", re.S)
 HEREDOC = re.compile(r"(?<!<)<<-?(?!<)\s*(['\"]?)([A-Za-z_][A-Za-z0-9_]*)\1")
 
 
+FLOOR_WORD = re.compile(r"\b(?:rm|curl|wget|gh|dd|mkfs\S*)\b")  # words the non-git floor watches
+DOWNLOAD_SHELL = "__download_to_shell__"  # synthetic segment: a shell runs what curl or wget fetched
+FETCHERS = {"curl", "wget"}
+FLOOR_COMMANDS = {"rm", "gh", "dd"}
+
+# Block log: one JSON line per block, never the command text, paths or cwd (they can carry secrets).
+# GUARD_BLOCK_LOG overrides the path (tests). Logging never changes the exit code.
+BLOCK_RULES = [  # (text in the block reason, stable rule id); first match wins
+    ("core.hooksPath", "git:hooks-path"), ("--no-verify", "git:no-verify"), ("remote.<name>.push", "git:force-config"),
+    ("Deleting the remote branch", "git:push-delete"), ("Force-pushing", "git:force-push"),
+    ("expands unquoted", "git:unquoted-expansion"), ("Subagents must not run `git stash`", "git:stash-subagent"),
+    ("--autostash", "git:autostash-subagent"), ("reset --hard", "git:reset-hard"), ("git checkout <path>", "git:checkout-paths"),
+    ("`git restore`", "git:restore"), ("`git rm -f`", "git:rm-force"), ("`git clean`", "git:clean"),
+    ("Reflog expiry", "git:reflog-expire"), ("`git prune`", "git:prune"), ("`git repack", "git:repack"),
+    ("garbage collection", "git:gc-prune"), ("`git switch", "git:switch-discard"), ("worktree remove", "git:worktree-remove-force"),
+    ("refs/stash", "git:stash-ref"), ("read-tree", "git:read-tree-u"), ("checkout-index", "git:checkout-index-force"),
+    ("cannot be checked", "git:unverifiable"), ("switch branches", "git:subagent-switch"),
+    ("Subagents must not run `git", "git:subagent-integrate"), ("rewrite the shared index", "git:subagent-index"),
+    ("Subagents commit only", "git:subagent-commit"), ("Subagents must stage", "git:subagent-add-bulk"),
+    ("force-delete", "git:subagent-branch-force"),
+]
+FLOOR_RULES = {"recursive rm of a .git directory": "floor:rm-git-dir", "a shell runs a script that curl or wget downloads": "floor:download-shell", "mkfs formats a filesystem": "floor:mkfs",
+               "dd writes to a device": "floor:dd-device", "gh repo delete removes a repository": "floor:gh-repo-delete",
+               "gh api with the DELETE method": "floor:gh-api-delete", "recursive rm of / or the home directory": "floor:rm-root",
+               "gh pr merge --admin bypasses branch protection": "floor:gh-merge-admin",
+               "gh pr merge without --match-head-commit <the 40-character head_sha from adversarial-review>": "floor:gh-merge-unpinned",
+               "gh api merges a pull request without the reviewed-commit pin": "floor:gh-api-merge",
+               "gh pr merge into a base other than the policy's merge base, or a base gh could not read": "floor:gh-merge-base",
+               "gh pr merge without one -R <owner/repo> and the PR number": "floor:gh-merge-repo",
+               "gh pr merge shares its command line with another gh call": "floor:gh-merge-shared",
+               "a gh command word comes from a shell expansion, so it cannot be checked": "floor:gh-expansion",
+               "a gh pr merge or gh api call takes text from a shell expansion, so it cannot be checked": "floor:gh-expansion",
+               "a gh alias that the guard could not resolve": "floor:gh-alias"}
+
+
+def log_block(rule, event=None, agent=None):
+    """Append one JSON line for a block; on any failure print one short line and carry on."""
+    try:
+        runtime = None
+        if isinstance(event, dict):
+            tool_input = event.get("tool_input")
+            argv = isinstance(tool_input, dict) and isinstance(tool_input.get("command") or tool_input.get("cmd"), list)
+            name = event.get("tool_name")
+            runtime = "codex" if argv or name in {"shell", "local_shell", "exec_command"} else "claude" if name in {"Bash", "Monitor"} else None
+        entry = {"ts": datetime.now(timezone.utc).isoformat(timespec="seconds"), "hook": "git-safety-guard", "rule": rule}
+        if runtime:
+            entry["runtime"] = runtime
+        if agent:
+            entry["agent"] = agent
+        path = Path(os.environ.get("GUARD_BLOCK_LOG") or Path(__file__).resolve().parent.parent / "telemetry" / "guard-blocks.jsonl")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry) + "\n")
+    except Exception as exc:
+        print(f"git-safety-guard: block log failed ({type(exc).__name__})", file=sys.stderr)
+
+
+def reason_rule(reason):
+    return next((rid for text, rid in BLOCK_RULES if text in reason), "git:other")
+
+
 def base(token):
     """Command name of a token, lowercased: macOS runs `GIT` and `/usr/bin/Git` as git."""
     return os.path.basename(token).lower()
@@ -248,7 +379,7 @@ def truthy(value):
 
 
 def forced_protected(spec):
-    """True if a `+src:dst` push refspec force-updates main or dev."""
+    """True if a `+src:dst` push refspec force-updates a protected branch."""
     spec = spec.strip()
     if not spec.startswith("+"):
         return False
@@ -256,8 +387,18 @@ def forced_protected(spec):
     return protected_ref(dst if sep else src)
 
 
+REDIRECT_KEY = re.compile(r"remote\..+\.(url|pushurl)|url\..+\.(insteadof|pushinsteadof)|include\.path|includeif\..+\.path", re.S)
+# Environment variables that point git at another config or repository, so the same keys can arrive indirectly.
+REDIRECT_ENV = {"GIT_CONFIG_GLOBAL", "GIT_CONFIG_SYSTEM", "GIT_CONFIG", "GIT_DIR", "GIT_COMMON_DIR"}
+
+
+def redirects_remote(key):
+    """True if a config key changes where a remote name resolves, or includes a file that can (include.path)."""
+    return bool(REDIRECT_KEY.fullmatch(key.lower()))
+
+
 def forces_by_config(pair):
-    """True if `-c remote.<name>.push=+...` or `remote.<name>.mirror` makes a push force main or dev."""
+    """True if `-c remote.<name>.push=+...` or `remote.<name>.mirror` makes a push force a protected branch."""
     key, _, value = pair.partition("=")
     key = key.lower()
     if re.fullmatch(r"remote\..+\.mirror", key, re.S):
@@ -280,7 +421,7 @@ def git_args(tokens):
     if i >= len(tokens) or base(tokens[i]) != "git":
         return None
     i += 1
-    aliases, cdir, hooks, force = {}, "", False, False
+    aliases, cdir, hooks, force, redirect = {}, "", False, False, False
     while i < len(tokens) and tokens[i].startswith("-"):
         # global options: -C <dir>, -c <k=v>, --config-env <k=VAR>, --git-dir=..., --no-pager
         if tokens[i] in {"-c", "--config-env"} and i + 1 < len(tokens):
@@ -289,8 +430,10 @@ def git_args(tokens):
                 aliases[m.group(1).lower()] = m.group(2)
             hooks = hooks or tokens[i + 1].split("=", 1)[0].lower() == "core.hookspath"
             force = force or (tokens[i] == "-c" and forces_by_config(tokens[i + 1]))
+            redirect = redirect or redirects_remote(tokens[i + 1].split("=", 1)[0])
         if tokens[i].startswith("--config-env="):
             hooks = hooks or tokens[i][len("--config-env="):].split("=", 1)[0].lower() == "core.hookspath"
+            redirect = redirect or redirects_remote(tokens[i][len("--config-env="):].split("=", 1)[0])
         if tokens[i] == "-C" and i + 1 < len(tokens):
             cdir = os.path.join(cdir, tokens[i + 1])
         i += 2 if tokens[i] in {"-C", "-c", "--config-env", "--git-dir", "--work-tree", "--namespace",
@@ -300,10 +443,14 @@ def git_args(tokens):
     if force:
         return [FORCE_CONFIG], aliases, cdir
     args = tokens[i:]
+    if redirect and REMOTES_ALLOWED and args and (args[0] == "push" or aliases.get(args[0], "").split()[:1] == ["push"]):
+        return [REDIRECT_CONFIG], aliases, cdir
     if (via_xargs and not args) or (args and (re.search(r"[$`]", args[0]) or BRACE.search(args[0]))):
         return [UNVERIFIABLE], aliases, cdir  # subcommand comes from stdin, an expansion or a brace expansion
     if via_xargs and args[:1] == ["checkout"]:
         args = args + ["--"]  # xargs appends paths read from stdin
+    elif via_xargs and args[:1] and args[0] in EXPANSION_SUBS:
+        args = args + [MARK + "$"]  # xargs appends words read from stdin, as an unquoted expansion would
     return args, aliases, cdir
 
 
@@ -425,7 +572,7 @@ def config_sets_hookspath(rest):
 
 
 def protected_ref(dst):
-    """True if a push destination is main/dev, a glob that matches them, or unknown (HEAD)."""
+    """True if a push destination is a protected branch, a glob that matches one, or unknown (HEAD)."""
     name = dst[len("refs/heads/"):] if dst.startswith("refs/heads/") else dst
     if name in {"", "HEAD", "@"} or re.search(r"[$`]", name):  # unknown: current branch or an expansion
         return True
@@ -433,7 +580,7 @@ def protected_ref(dst):
 
 
 def config_force(cwd, remote):
-    """The `remote.<name>.push` or `.mirror` setting that makes a bare `git push` force main/dev, or None."""
+    """The `remote.<name>.push` or `.mirror` setting that makes a bare `git push` force a protected branch, or None."""
     for line in git_ok(cwd, "config", "--get-regexp", r"^remote\..*\.(push|mirror)$") or []:
         key, _, value = line.partition(" ")
         name, _, kind = key[len("remote."):].rpartition(".")
@@ -445,21 +592,21 @@ def config_force(cwd, remote):
 
 
 def push_reason(rest, cwd="."):
-    """Block reason for a force push or delete that reaches main/dev, else None."""
+    """Block reason for a force push or delete that reaches a protected branch, else None."""
     flags, positional = walk("push", rest)
     names = [f.split("=", 1)[0] for f in flags]
     force = any(n in {"-f", "--force"} or (n.startswith("--force-w") and "--force-with-lease".startswith(n))
                 or (n.startswith("--m") and "--mirror".startswith(n)) for n in names)
     delete = any(n == "-d" or (n.startswith("--de") and "--delete".startswith(n)) for n in names)
     refspecs = positional[1:]
-    what = "Force-pushing to main or dev rewrites shared history."
+    what = "Force-pushing to a protected branch rewrites shared history."
     if force and not refspecs:
-        return f"{what} A force push without an explicit refspec may target main or dev. Name a feature branch."
+        return f"{what} A force push without an explicit refspec may target a protected branch. Name a feature branch."
     if not refspecs:  # git falls back to the configured push refspecs only when none is given
         found = config_force(cwd, positional[0] if positional else None)
         if found:
             return (f"{what} This push has no refspec, so git uses the configured `{found}`, which force-pushes "
-                    "to main or dev. Name a feature branch: `git push origin <branch>`.")
+                    "to a protected branch. Name a feature branch: `git push origin <branch>`.")
     for spec in refspecs:
         plus = spec.startswith("+")
         src, sep, dst = spec[plus:].partition(":")
@@ -467,8 +614,83 @@ def push_reason(rest, cwd="."):
         removing = delete or (sep and not src)
         if (force or plus or removing) and protected_ref(dst):
             if removing:
-                return f"Deleting the remote branch `{dst}` is blocked; main and dev are protected."
+                return f"Deleting the remote branch `{dst}` is blocked; the policy protects it."
             return f"{what} Push to a feature branch and open a PR, or ask the human to run it."
+    return None
+
+
+SCHEME_URL = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*://")
+SCP_URL = re.compile(r"^(?:[^@/:]+@)?([^@/:]+):(?!//)(.*)$")
+
+
+def is_url(text):
+    return bool(SCHEME_URL.match(text) or SCP_URL.match(text))
+
+
+def normalise_url(url):
+    """`host/path` for an https://, ssh:// or git@host:path URL (no credentials, port or .git), else None."""
+    url = url.strip()
+    if SCHEME_URL.match(url):
+        rest = SCHEME_URL.sub("", url, count=1)
+        authority, slash, path = rest.partition("/")
+        host = authority.rpartition("@")[2]
+        host = re.sub(r":\d*$", "", host)
+    else:
+        m = SCP_URL.match(url)
+        if not m:
+            return None  # a local path or a bare name
+        host, path = m.group(1), m.group(2)
+    path = path.lstrip("/").rstrip("/")
+    path = path[:-4] if path.endswith(".git") else path
+    return f"{host}/{path}".lower() if host else None
+
+
+def allowed_url(url):
+    norm = normalise_url(url)
+    return norm is not None and any(fnmatch.fnmatchcase(norm, pat.lower()) for pat in REMOTES_ALLOWED)
+
+
+def push_target(rest, positional, cwd):
+    """The remote name or URL a `git push` sends to, or None when no remote can be named."""
+    for i, a in enumerate(rest):
+        if a == "--":
+            break
+        if a.startswith("--repo="):
+            return a.partition("=")[2]
+        if a == "--repo" and i + 1 < len(rest):
+            return rest[i + 1]
+    if positional:
+        return positional[0]
+    found = git_ok(cwd, "config", "--get", "remote.pushDefault")
+    if found:
+        return found[0]
+    branch = git_ok(cwd, "symbolic-ref", "--short", "-q", "HEAD")
+    if branch:
+        for kind in ("pushremote", "remote"):
+            found = git_ok(cwd, "config", "--get", f"branch.{branch[0]}.{kind}")
+            if found:
+                return found[0]
+    return "origin"
+
+
+def remote_reason(rest, cwd="."):
+    """Block reason when a push goes to a remote outside vcs.remotes_allowed, else None. An empty list turns it off."""
+    if not REMOTES_ALLOWED:
+        return None
+    _, positional = walk("push", rest)
+    target = push_target(rest, positional, cwd)
+    outside = "push to a remote outside the policy allowlist"
+    if re.search(r"[$`]", target) or MARK in target:
+        return f"{outside}: the remote comes from a shell expansion, so it cannot be checked."
+    if is_url(target):
+        urls = [target]
+    else:
+        urls = git_ok(cwd, "remote", "get-url", "--push", "--all", target)
+        if not urls:
+            return f"{outside}: remote `{target}` does not resolve to a URL here."
+    for url in urls:
+        if not allowed_url(url):
+            return f"{outside}: `{target}` is not listed in vcs.remotes_allowed. Ask the human to run the push."
     return None
 
 
@@ -478,7 +700,8 @@ def loose_expansion(sub, rest):
     A flag whose name holds an expansion or a brace expansion (`--no-verify$IFS-m`, `--for${E}ce`,
     `reset --$'hard'`) is blocked for the subcommands in GUARDED. For commit, am, push, merge and
     rebase, so is an argument that starts with an unquoted expansion or holds a brace expansion
-    (`${E}--no-verify`, `{--no-verify,-m}`) unless it is the value of an option that takes one.
+    (`${E}--no-verify`, `{--no-verify,-m}`) unless it is the value of an option that takes one;
+    reset, restore, switch, rm, gc and repack are checked the same way (`git reset $(echo --hard)`).
     The shell splits such an argument into words, so an unquoted `$FLAGS` can carry --no-verify.
     Paths after `--` cannot become options, so they pass.
     """
@@ -488,8 +711,7 @@ def loose_expansion(sub, rest):
     flags, positional = walk(sub, before, EXPANSION_VALUES)
     if any(re.search(r"[$`]", name) or BRACE.search(name) for name in (f.split("=", 1)[0] for f in flags)):
         return True
-    return sub in {"commit", "am", "push", "merge", "rebase"} and any(
-        a.startswith(MARK) or BRACE.search(a) for a in positional)
+    return sub in EXPANSION_SUBS and any(a.startswith(MARK) or BRACE.search(a) for a in positional)
 
 
 def rebase_execs(rest):
@@ -540,6 +762,25 @@ def env_overrides_hooks(tokens):
     return False
 
 
+def env_redirects_push(tokens):
+    """True if a segment sets a remote/url config through GIT_CONFIG_* and then runs `git push`."""
+    if not REMOTES_ALLOWED:
+        return False
+    i = 0
+    while i < len(tokens) and (tokens[i] in KEYWORDS or ASSIGNMENT.fullmatch(tokens[i])):
+        i += 1
+    head = base(tokens[i]) if i < len(tokens) else ""
+    scope = tokens if head in WRAPPERS | ASSIGNERS else tokens[:i]
+    hit = False
+    for t in scope:
+        if base(t) == "git":
+            break
+        m = re.fullmatch(r"(GIT_CONFIG_KEY_\d+|GIT_CONFIG_PARAMETERS)=(.*)", t, re.S)
+        if (m and REDIRECT_KEY.search(m.group(2).lower())) or t.partition("=")[0] in REDIRECT_ENV:
+            hit = True
+    return hit and "push" in tokens
+
+
 def dry_run_requested(flags):
     """Respect option order: a negated dry-run option cancels an earlier preview."""
     preview = False
@@ -566,16 +807,21 @@ def verdict(args, subagent, cwd=".", blind=False):
     if skips_hooks(sub, rest):
         return Rule(f"`git {sub} --no-verify` (or `-n`) skips the git hooks. Fix what the hook reports instead.")
     if sub == FORCE_CONFIG:
-        return Rule("`git -c remote.<name>.push=+...` or `remote.<name>.mirror` makes the push force main or "
-                    "dev. Push a feature branch without that setting.")
+        return Rule("`git -c remote.<name>.push=+...` or `remote.<name>.mirror` makes the push force a protected "
+                    "branch. Push a feature branch without that setting.")
+    if sub == REDIRECT_CONFIG:
+        return Rule("`remote.<name>.url`, `remote.<name>.pushurl`, `url.<base>.insteadOf` or `include.path` set through "
+                    "`-c`, `--config-env` or GIT_CONFIG_*, or GIT_CONFIG_GLOBAL/GIT_CONFIG_SYSTEM/GIT_DIR, redirects the "
+                    "push to a URL the allowlist check cannot see. "
+                    "Push without that setting.")
     if sub == "push":
-        reason = push_reason(rest, cwd)
+        reason = push_reason(rest, cwd) or remote_reason(rest, cwd)
         if reason:
             return Rule(reason)
     if loose_expansion(sub, rest):
         return Rule(f"`git {sub}` has an argument that the shell expands unquoted ($X, $(...), backticks, "
-                    "$'...' or {a,b}). The shell turns it into words, so it can carry --no-verify or --force. "
-                    "Quote it, or write the options out.")
+                    "$'...' or {a,b}). The shell turns it into words, so it can carry --no-verify, --force or --hard. "
+                    "Quote it, write the options out, or put paths after `--`.")
 
     if sub == "stash":
         if rest[:1] and rest[0] in STASH_READ_ONLY:
@@ -1106,6 +1352,16 @@ def dynamic_code(code):
                      "it. Write the git command out.")
 
 
+def download_substitution(code):
+    """A shell's code starts with a fetcher's substitution, including known wrappers."""
+    code = code.lstrip().removeprefix(MARK)
+    if not code.startswith(("$(", "`")):
+        return False
+    start = 2 if code.startswith("$(") else 1
+    body = code[start:substitution_end(code, 0)]
+    return launcher_at(tokenize(body), FETCHERS.__contains__) is not None
+
+
 def simple_command(current, here, heredoc, producer, pipeline, text):
     """Segments for one simple command, unwrapping shells and interpreters."""
     if current[:1] == ["function"]:
@@ -1119,10 +1375,14 @@ def simple_command(current, here, heredoc, producer, pipeline, text):
             if SHELL_C.fullmatch(t):
                 j += args[j + 1:j + 2] == ["--"]  # `bash -c -- 'cmd'`
                 if j + 1 < len(args):
+                    if download_substitution(args[j + 1]):
+                        yield [DOWNLOAD_SHELL]
                     yield from dynamic_code(args[j + 1])
                     yield from segments(args[j + 1])
                 return
         if shell_reads_stdin(args):
+            if producer and producer[3] in ("|", "|&") and launcher_at(producer[0], FETCHERS.__contains__) is not None:
+                yield [DOWNLOAD_SHELL]
             yield from piped_code(segments, here, heredoc, producer, pipeline, text)
         return
     if current and current[0] == "eval":
@@ -1152,7 +1412,7 @@ def segments(command):
     for body in substitutions:
         yield from segments(body)
     current, skip, here, heredoc = [], False, [], False
-    producer, pipeline = None, []
+    producer, pipeline, fetch_input = None, [], False
     for tok in tokenize(text) + [";"]:
         if skip:
             if skip == "<<<":
@@ -1168,6 +1428,9 @@ def segments(command):
         if not OPERATOR.fullmatch(tok):
             current.append(tok.translate(UNLITERAL))
             continue
+        if fetch_input and launcher_at(current, FETCHERS.__contains__) is not None:
+            yield [DOWNLOAD_SHELL]  # classify the whole launcher, including env/absolute paths
+        fetch_input = tok == "<(" and shell_at(current) is not None
         if tok == "<(" and GIT_WORD.search(text.replace(MARK, "")) and (
                 shell_at(current) is not None or current[:1] in (["source"], ["."])):
             yield opaque("A shell reads text from a process substitution whose output the guard cannot see, "
@@ -1179,18 +1442,266 @@ def segments(command):
         current, here, heredoc = [], [], False
 
 
+def root_wipe_target(target):
+    """Recognize root/home spellings without treating cwd globs as root.
+
+    Only collapse dot-only components. Resolving a named directory followed by `..`
+    lexically would misread symlink traversal, which this parser does not resolve.
+    """
+    if target.endswith("/*"):
+        target = target[:-1]
+    if target.startswith("/"):
+        return all(part in ("", ".", "..") for part in target.split("/"))
+    for home in ("~", "$HOME", "${HOME}"):
+        if target == home or target.startswith(home + "/"):
+            return all(part in ("", ".") for part in target[len(home):].split("/"))
+    return False
+
+
+def git_dir_target(target):
+    """True if an rm target is a `.git` directory (`.git`, `./.git/`, `$PWD/.git`, `.git/*`) or a glob that matches it.
+
+    Only the last path component counts, so `.git/index.lock` and `.gitignore` pass."""
+    if target.endswith("/*"):
+        target = target[:-1]
+    name = os.path.basename(os.path.normpath(target)).lower()
+    if name == ".git":
+        return True
+    return name.startswith(".") and bool(re.search(r"[*?\[]", name)) and fnmatch.fnmatchcase(".git", name)
+
+
+# gh pr merge options that take a value. Skipping each with its value finds `pr merge` in any order gh accepts
+# (`gh -R o/r pr merge`, `gh pr -R o/r merge`).
+GH_MERGE_VALUES = {"-b", "--body", "-F", "--body-file", "-t", "--subject", "-A", "--author-email", "--match-head-commit", "-R", "--repo"}
+
+
+def gh_positionals(args):
+    """gh's positional words: every option is skipped, and an option in GH_MERGE_VALUES with its value."""
+    out, i = [], 0
+    while i < len(args):
+        if args[i] in GH_MERGE_VALUES:
+            i += 2
+            continue
+        if not args[i].startswith("-"):
+            out.append(args[i])
+        i += 1
+    return out
+
+
+# gh's own top-level commands. gh refuses an alias that shadows one, so only another first word needs `gh alias list`.
+GH_COMMANDS = {"agent-task", "alias", "api", "attestation", "auth", "browse", "cache", "codespace", "completion", "config",
+               "copilot", "discussion", "extension", "gist", "gpg-key", "help", "issue", "label", "licenses", "org", "pr",
+               "preview", "project", "release", "repo", "ruleset", "run", "search", "secret", "skill", "ssh-key", "status",
+               "variable", "workflow"}
+EXPANSION = re.compile(r"[$`]")
+
+
+def gh_aliases(cwd):
+    """`gh alias list` as {name: expansion}, or None when gh cannot tell within 10 seconds."""
+    try:
+        out = subprocess.run(["gh", "alias", "list"], cwd=cwd, capture_output=True, text=True, timeout=10)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if out.returncode != 0:
+        return {} if "no aliases" in out.stderr else None
+    return dict(line.split(": ", 1) for line in out.stdout.splitlines() if ": " in line)
+
+
+def merge_base(selector, repo, cwd):
+    """The base branch of PR `selector` in `repo`, or None when gh cannot tell within 10 seconds."""
+    try:
+        out = subprocess.run(["gh", "pr", "view", selector, "--repo", repo, "--json", "baseRefName", "-q", ".baseRefName"],
+                             cwd=cwd, capture_output=True, text=True, timeout=10)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return out.stdout.strip() if out.returncode == 0 and out.stdout.strip() else None
+
+
+def floor_rule(tokens, cwd=".", alone=True, alias=False):
+    """The non-git floor: the rule a simple command breaks, or None. Applies to every caller, not only subagents.
+
+    `alone` is False when the command line runs gh more than once; `alias` is True for an expanded gh alias."""
+    if tokens == [DOWNLOAD_SHELL]:
+        return "a shell runs a script that curl or wget downloads"
+    k = launcher_at(tokens, lambda n: n in FLOOR_COMMANDS or n.startswith("mkfs"))
+    if k is None:
+        return None
+    name, args = base(tokens[k]), [a.replace(MARK, "") for a in tokens[k + 1:]]
+    if name.startswith("mkfs"):
+        return "mkfs formats a filesystem"
+    if name == "dd":
+        return "dd writes to a device" if any(
+            a.startswith("of=/dev/") and a not in ("of=/dev/null", "of=/dev/stdout", "of=/dev/stderr") for a in args) else None
+    if name == "gh":
+        words = [a for a in args if not a.startswith("-")]
+        methods = [args[i + 1] if a in ("-X", "--method") and i + 1 < len(args) else a.split("=")[-1] if a.startswith("--method=")
+                   else a[2:] for i, a in enumerate(args) if a in ("-X", "--method") or a.startswith(("--method=", "-X"))]
+        # The shell fills in `$X` and `` `...` `` after the hook ran, so a gh command word built that way is unknown.
+        # An alias expands to a different command, so the guard reads its expansion; gh runs a `!` alias in a shell.
+        head = gh_positionals(args)[:2]
+        if any(EXPANSION.search(w) for w in head):
+            return "a gh command word comes from a shell expansion, so it cannot be checked"
+        if head and head[0] not in GH_COMMANDS:
+            aliases = None if alias else gh_aliases(cwd)
+            expansion = (aliases or {}).get(head[0])
+            if expansion and not expansion.startswith("!"):
+                rest, extra = args[:], []
+                rest.remove(head[0])
+                for i, a in enumerate(rest, 1):  # gh fills $1, $2 ... and appends the arguments it did not use
+                    if f"${i}" in expansion:
+                        expansion = expansion.replace(f"${i}", a)
+                    else:
+                        extra.append(a)
+                return floor_rule(["gh", *shlex.split(expansion), *extra], cwd, alone, alias=True)
+            if aliases is None or expansion:
+                return "a gh alias that the guard could not resolve"
+        # A merge or an API call is checked by its text, and `$A` could hold `--admin`, `-X "$M"` a PUT.
+        if (head == ["pr", "merge"] or words[:1] == ["api"]) and any(EXPANSION.search(a) for a in args):
+            return "a gh pr merge or gh api call takes text from a shell expansion, so it cannot be checked"
+        if words[:2] == ["repo", "delete"]:
+            return "gh repo delete removes a repository"
+        # An agent merge must pin the commit adversarial-review returned as head_sha, so GitHub refuses it if the
+        # PR head moved after the review, and must target dev. The base is not in the command and a private repo on
+        # the free plan has no branch protection, so the guard asks gh for it and blocks when gh cannot say. An
+        # explicit -R makes the lookup read the merged repository whatever the cwd, a `cd` or GH_REPO says.
+        merge = gh_positionals(args)
+        if merge[:2] == ["pr", "merge"]:
+            if not alone:  # another gh call on the line (`gh pr edit --base main && ...`) could move the base after the check
+                return "gh pr merge shares its command line with another gh call"
+            if any(a == "--admin" or a.startswith("--admin=") for a in args):
+                return "gh pr merge --admin bypasses branch protection"
+            pins = [args[i + 1] if a == "--match-head-commit" and i + 1 < len(args) else a.partition("=")[2]
+                    for i, a in enumerate(args) if a == "--match-head-commit" or a.startswith("--match-head-commit=")]
+            if not any(re.fullmatch(r"[0-9a-f]{40}", pin) for pin in pins):
+                return "gh pr merge without --match-head-commit <the 40-character head_sha from adversarial-review>"
+            repos = {args[i + 1] if a in ("-R", "--repo") and i + 1 < len(args) else a.split("=", 1)[1] if "=" in a else a[2:]
+                     for i, a in enumerate(args) if a in ("-R", "--repo") or a.startswith(("--repo=", "-R"))}
+            if len(repos) != 1 or len(merge) < 3 or not all(repos):
+                return "gh pr merge without one -R <owner/repo> and the PR number"
+            if merge_base(merge[2], repos.pop(), cwd) != MERGE_BASE:
+                return "gh pr merge into a base other than the policy's merge base, or a base gh could not read"
+        upper = set(map(str.upper, methods))
+        if words[:1] == ["api"] and ("PUT" in upper and any(re.search(r"pulls/[^/?#]+/merge/?(?:[?#].*)?$", w) for w in words)
+                                     or any("mergePullRequest" in a for a in args)):
+            return "gh api merges a pull request without the reviewed-commit pin"
+        return "gh api with the DELETE method" if words[:1] == ["api"] and "DELETE" in upper else None
+    ddash = args.index("--") if "--" in args else len(args)
+    recursive = any(a in ("-r", "-R") or re.fullmatch(r"-[A-Za-z]*[rR][A-Za-z]*", a) or (len(a) > 2 and "--recursive".startswith(a))
+                    for a in args[:ddash])
+    targets = [a for a in args[:ddash] if not a.startswith("-")] + args[ddash + 1:]
+    if recursive and any(git_dir_target(t) for t in targets):
+        return "recursive rm of a .git directory"
+    wipes = any(root_wipe_target(t) for t in targets)
+    return "recursive rm of / or the home directory" if recursive and wipes else None
+
+
 def mentions_git(raw):
     """True if raw hook input contains `git` as a word (JSON escapes such as \\n count as spaces)."""
     return bool(GIT_WORD.search(re.sub(r"\\[ntr\"]", " ", raw or "")))
 
 
+def watched(raw):
+    """True if raw hook input mentions git or a floor command, so a guard failure must block it."""
+    return mentions_git(raw) or bool(FLOOR_WORD.search(re.sub(r"\\[ntr\"]", " ", raw or "")))
+
+
 def unreadable(raw, why):
     """Block input the guard cannot read if it mentions git; allow it otherwise."""
-    if not mentions_git(raw):
+    if not watched(raw):
         return 0
+    log_block("input:unreadable")
     print(f"BLOCKED by git-safety-guard: {why}, and the input mentions git, so it cannot be checked.",
           file=sys.stderr)
     return 2
+
+
+VAR_WORD = re.compile(MARK + r"?\$(?:(\w+)|\{(\w+)\})")  # `$g` or `${g}`; a quoted "$g" has no MARK
+
+
+def track_assignments(tokens, assigned):
+    """Record `NAME=value` from a bare assignment segment or `export`/`declare`. A prefix assignment
+    (`g=git cmd`) only reaches cmd's environment, not the words of cmd, so it is not recorded."""
+    i = 0
+    while i < len(tokens) and (tokens[i] in KEYWORDS or ASSIGNMENT.fullmatch(tokens[i])):
+        i += 1
+    if i < len(tokens) and base(tokens[i]) in ASSIGNERS:
+        names = [t for t in tokens[i + 1:] if ASSIGNMENT.fullmatch(t)]
+    elif i == len(tokens):
+        names = [t for t in tokens if ASSIGNMENT.fullmatch(t)]
+    else:  # `g=\`which git\`; ...` tokenizes as a prefix assignment, but the backticks run first
+        names = [t for t in tokens[:i] if ASSIGNMENT.fullmatch(t) and t.partition("=")[2].startswith(MARK + "`")]
+    for t in names:
+        name, _, value = t.partition("=")
+        assigned[name] = value
+
+
+def git_var_words(token, assigned, mentions):
+    """Words a `$g`/`${g}` command word expands to when the command line assigned it git, else None.
+
+    An assignment that is not plainly git comes back as an opaque call when its text mentions git, or when
+    it is a substitution (`g=$(command -v git)`) and `mentions` says the command line mentions git."""
+    m = VAR_WORD.fullmatch(token)
+    value = assigned.get(m.group(1) or m.group(2)) if m else None
+    if value is None:
+        return None
+    try:
+        words = shlex.split(value)
+    except ValueError:
+        words = []
+    if words and base(words[0]) == "git" and MARK not in value:
+        return words
+    if GIT_WORD.search(value.replace(MARK, "")) or (MARK in value and mentions):
+        return opaque("A command word is a variable assigned from text that mentions git, so the git command "
+                      "cannot be checked. Write `git` out.")
+    return None
+
+
+def resolve_git_vars(tokens, assigned, mentions):
+    """Replace a command word that is a variable assigned git (`g=git; $g reset --hard`).
+
+    Behind a wrapper (`env $g`, `xargs $g`) any later word counts, as for a literal git."""
+    if not assigned:
+        return tokens
+    i = 0
+    while i < len(tokens) and (tokens[i] in KEYWORDS or ASSIGNMENT.fullmatch(tokens[i])):
+        i += 1
+    wrapped = i < len(tokens) and base(tokens[i]) in WRAPPERS
+    out = tokens[:i]
+    for k in range(i, len(tokens)):
+        out += (git_var_words(tokens[k], assigned, mentions) if k == i or wrapped else None) or [tokens[k]]
+    return out
+
+
+FLOOR_VAR = re.compile(r"\b(?:gh|rm|dd)\b")
+
+
+def resolve_floor_vars(parts, mentions):
+    """The segments with a command word that is a variable assigned gh, rm or dd read as that command
+    (`G=gh; $G pr merge`), as resolve_git_vars does for git. None when one is assigned from other text
+    that names them, or from a substitution (`G=$(command -v gh)`) on a line that `mentions` them."""
+    assigned, out = {}, []
+    for tokens in parts:
+        i = 0
+        while i < len(tokens) and (tokens[i] in KEYWORDS or ASSIGNMENT.fullmatch(tokens[i])):
+            i += 1
+        wrapped = i < len(tokens) and base(tokens[i]) in WRAPPERS
+        new = tokens[:i]
+        for k in range(i, len(tokens)):
+            m = VAR_WORD.fullmatch(tokens[k]) if k == i or wrapped else None
+            value = assigned.get(m.group(1) or m.group(2)) if m else None
+            if value is None or not (FLOOR_VAR.search(value.replace(MARK, "")) or (MARK in value and mentions)):
+                new.append(tokens[k])
+                continue
+            try:
+                words = [] if MARK in value else shlex.split(value)
+            except ValueError:
+                words = []
+            if not words or base(words[0]) not in FLOOR_COMMANDS:
+                return None
+            new += words
+        track_assignments(new, assigned)
+        out.append(new)
+    return out
 
 
 def calls(command, cwd, depth=0):
@@ -1201,10 +1712,16 @@ def calls(command, cwd, depth=0):
     """
     # A `cd` inside a subshell, `$(...)` or before `popd` does not move later commands, but the
     # guard cannot tell, so a `cd` may only take the worktree exemption away, never grant it.
-    blind, start, defined = False, cwd, {}
+    blind, start, defined, assigned = False, cwd, {}, {}
+    mentions = bool(GIT_WORD.search(command.replace(MARK, "")))
     for tokens in segments(command):
+        tokens = resolve_git_vars(tokens, assigned, mentions)
+        track_assignments(tokens, assigned)
         if env_overrides_hooks(tokens):
             yield None, cwd, blind
+            return
+        if env_redirects_push(tokens):
+            yield [REDIRECT_CONFIG], cwd, blind
             return
         k = launcher_at(tokens, {"cd", "pushd", "popd"}.__contains__)
         if k is not None:
@@ -1256,11 +1773,32 @@ def check(raw):
         command = shlex.join(str(c) for c in command)
     if not isinstance(command, str) or not command.strip():
         return unreadable(raw, "the shell payload has no command")
+    if POLICY_ERROR and watched(raw):
+        log_block("policy:unreadable", event)
+        print(f"git-safety-guard: policy unreadable ({POLICY_ERROR}): git blocked", file=sys.stderr)
+        return 2
     subagent = bool(event.get("agent_id")) or os.environ.get("GIT_SAFETY_STRICT") == "1"
+    who = "subagent" if subagent else "parent"
+    parts = resolve_floor_vars(list(segments(command)), bool(FLOOR_VAR.search(command.replace(MARK, ""))))
+    if parts is None:
+        log_block("floor:var", event, who)
+        print("BLOCKED by git-safety-guard: A command word is a variable assigned from text that names gh, rm or dd, "
+              "so the command cannot be checked. Write the command out, or ask the user to run it at the `!` prompt.",
+              file=sys.stderr)
+        return 2
+    alone =sum(launcher_at(t, lambda n: n == "gh") is not None for t in parts) <= 1
+    for tokens in parts:
+        rule = floor_rule(tokens, event.get("cwd") or os.getcwd(), alone)
+        if rule:
+            log_block(FLOOR_RULES.get(rule, "floor:other"), event, who)
+            print(f"BLOCKED by git-safety-guard: {rule}. "
+                  "If you intend it, ask the user to run it themselves at the `!` prompt.", file=sys.stderr)
+            return 2
     cwd = event.get("cwd") or os.getcwd()
     asks = []
     for args, here, blind in calls(command, cwd):
         if args is None:
+            log_block("git:hooks-env", event, who)
             print("BLOCKED by git-safety-guard: Setting core.hooksPath through GIT_CONFIG_KEY_<n> or "
                   "GIT_CONFIG_PARAMETERS turns off the repository's git hooks.", file=sys.stderr)
             return 2
@@ -1268,6 +1806,7 @@ def check(raw):
         if isinstance(reason, Ask):
             asks.append(reason)
         elif reason:
+            log_block(reason_rule(reason), event, who)
             advice = "" if isinstance(reason, Rule) else f" {SAFE_ALTERNATIVE}"
             print(f"BLOCKED by git-safety-guard: {reason.replace(MARK, '')}{advice}", file=sys.stderr)
             return 2
@@ -1283,8 +1822,9 @@ def main():
         raw = sys.stdin.read()
         return check(raw)
     except Exception as exc:  # a guard bug blocks git commands only, never every command
-        if mentions_git(raw):
-            print(f"BLOCKED by git-safety-guard: internal error on a git command ({exc!r}).", file=sys.stderr)
+        if watched(raw):
+            log_block("git:internal-error")
+            print(f"BLOCKED by git-safety-guard: internal error on a git or floor command ({exc!r}).", file=sys.stderr)
             return 2
         print(f"git-safety-guard: internal error, allowing a command with no git in it ({exc!r})")
         return 0

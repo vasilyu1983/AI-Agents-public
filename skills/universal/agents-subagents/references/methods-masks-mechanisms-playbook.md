@@ -675,7 +675,7 @@ Treat primary papers and official docs as stronger evidence than practitioner po
 
 - **MAST** (NeurIPS 2025): 14-mode failure taxonomy for multi-agent LLM systems (Cemri et al., 2025): specification/design failures are the largest category, then inter-agent misalignment, then verification. Cross-reference: [`mast-failure-taxonomy.md`](mast-failure-taxonomy.md). [arxiv:2503.13657](https://arxiv.org/abs/2503.13657)
 - **HiveMind** (2025): online Shapley-driven prompt evolution for live teams. Source for mechanism #17. [arxiv:2512.06432](https://arxiv.org/abs/2512.06432)
-- **FAIRGAME** (2026): payoff-scaled iterated PD + Public Goods probes for measuring defection tendency before deployment. Cited in mechanism #6.
+- **FAIRGAME** (unsourced — verify; the arXiv id formerly cited is an unrelated survey): payoff-scaled iterated PD + Public Goods probes for measuring defection tendency before deployment. Cited in mechanism #6.
 - **Talk Isn't Always Cheap** (2025) + **Persuasion-driven adversarial influence** (Nature Sci Reports 2026): documented cases of debate degrading below single-agent baselines. Source for "When NOT to Debate" anti-triggers in [`debate-quickstart.md`](debate-quickstart.md). [arxiv:2509.05396](https://arxiv.org/abs/2509.05396)
 - **Adaptive stability detection** (OpenReview 2026): Beta-Binomial + KS test for non-numeric debate convergence. Source for the adaptive stopping rule in [`debate-quickstart.md`](debate-quickstart.md).
 - **ECON** (ICML 2025): Bayesian Nash equilibrium for multi-LLM coordination; reports accuracy gains over debate baselines (token savings are unverified — check the full paper). [arxiv:2506.08292](https://arxiv.org/abs/2506.08292)

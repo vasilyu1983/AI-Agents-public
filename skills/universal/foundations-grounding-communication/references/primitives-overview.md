@@ -45,7 +45,7 @@ A contribution combines presentation by the speaker and acceptance evidence from
 **Agent failure:** "ack" or a copied instruction substitutes for a task-specific interpretation.
 **Check:** choose evidence that reveals the likely mistake: paraphrase for meaning, read-back for an exact identifier, or an inspectable artifact for an authorized reversible task.
 
-Rifts (ACL 2025) reports threefold lower clarification initiation and sixteenfold lower follow-up requests in its sampled human-LLM conversations relative to humans. These are dataset observations, not rates for every production model. NewsInterview supplies related audience-sensitive questioning evidence; see its source entry before quoting figures.
+Rifts (ACL 2025) reports threefold lower clarification initiation and sixteenfold lower follow-up requests in its sampled human-LLM conversations relative to humans. These are dataset observations, not rates for every production model. NewsInterview supplies related audience-sensitive questioning evidence (direction only).
 
 ## 5. Repair
 
@@ -54,7 +54,7 @@ Repair detects and corrects conversational trouble. The initiating and repairing
 **Agent failure:** a correction lands but old assumptions or referents continue to drive actions.
 **Check:** restate the resulting state, mark the superseded assumption, and propagate the correction to dependent recipients before their next affected action. Check a correction against verified artifacts when they conflict; faithful propagation of a correction alone does not establish its truth.
 
-Poelitz et al. (2026, preprint) observed unreliable updates after repairs and a small, decreasing shared vocabulary in a GPT-4.1 puzzle-matching study. Its discussion explicitly limits conclusions to that model and setup. NC-Bench examines conversational repair in small open models; inspect the source/model scope before transferring its accuracy figures. Neither establishes a universal repair rate.
+Poelitz et al. (2026, preprint) benchmark common ground in human-AI collaboration. NC-Bench examines conversational repair in small open models; inspect the source/model scope before transferring its results. Neither establishes a universal repair rate.
 
 For clarification channels and operational examples, read [`patterns-scenarios-traps.md`](patterns-scenarios-traps.md#trap-repair-without-common-ground-update).
 

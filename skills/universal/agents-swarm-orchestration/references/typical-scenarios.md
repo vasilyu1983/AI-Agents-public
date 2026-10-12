@@ -81,7 +81,7 @@ Every scenario maps to both runtimes; the dispatch primitive differs, the shape 
 | Edit worker isolation | Subagents: `isolation: worktree`; teammates share the lead checkout | A separate worktree or assigned files; a write sandbox alone does not isolate edits |
 | Concurrency and nesting | Respect live runtime caps (look up the current recursion default); hold depth at 1 by policy | Discover the active tool/config schema; do not assume universal `max_threads` or `max_depth` keys |
 | Non-interactive (scenario 10) | `claude -p ... --output-format json` + `parallel` | Codex CLI batch; use `spawn_agents_on_csv` only when the active experimental tool surface exposes it |
-| Cheap loop tier (scenario 11) | `CLAUDE_CODE_SUBAGENT_MODEL` | `[profiles.cheap-loop]` + `service_tier = "flex"` |
+| Cheap loop tier (scenario 11) | `CLAUDE_CODE_SUBAGENT_MODEL` | `codex --profile cheap-loop` with a `$CODEX_HOME/cheap-loop.config.toml` (low reasoning effort; `service_tier` only if the model advertises one) |
 
 Do not hardcode model IDs — verify against [platform-patterns.md](platform-patterns.md) and the live docs before dispatch.
 

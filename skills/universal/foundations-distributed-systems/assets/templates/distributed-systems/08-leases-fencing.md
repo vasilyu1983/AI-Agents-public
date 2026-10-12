@@ -11,7 +11,7 @@
 A **lease** is a time-bounded grant of authority to a process. The holder may act as primary (write coordinator, lock holder, leader) until the lease expires. Leases prevent indefinite lock retention after process crashes.
 
 **Properties**:
-- Lease duration `T_L` must be longer than the maximum clock skew between nodes.
+- The lease protocol must bound the clock drift rate over the lease term (Gray & Cheriton 1989): holder and authority measure the term on their own clocks, so the holder must treat the lease as expired earlier than the authority does by at least the drift bound.
 - The holder must renew before expiry (heartbeat to the lease authority).
 - After expiry, the lease authority can grant a new lease to a different holder.
 - Lease-based leadership is safe only if the holder stops acting as primary before the lease expires — not at expiry, but with a safety margin.
@@ -49,7 +49,7 @@ Node A resumes, tries to write with token 42 → REJECTED (storage saw 43)
 
 | Input | Description |
 |-------|-------------|
-| Lease duration | Must be > max clock skew; typical range 5–30 seconds |
+| Lease duration | Choose several times the heartbeat interval, plus the maximum GC or scheduler pause you accept, plus the clock drift bound over the term; a shorter lease fails over faster but risks false expiry |
 | Fencing token source | Monotonically increasing integer from the lease authority (ZooKeeper zxid, etcd revision) |
 | Storage layer | Must enforce fencing token check on every write |
 | Clock synchronisation | Bounded clock skew assumption required for lease safety |

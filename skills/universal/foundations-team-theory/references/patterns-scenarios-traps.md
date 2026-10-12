@@ -63,7 +63,7 @@ Human-team material (Sinnemann & Weiss virtual-team meta-analysis) is out of sco
 
 ## Mapping MAST Failure Modes to Team Theory
 
-The MAST taxonomy (Cemri et al. 2025, NeurIPS) groups multi-agent failures into three categories. Each maps to a team-theoretic primitive:
+The MAST taxonomy (Cemri et al., arXiv:2503.13657, 2025) groups multi-agent failures into three categories. Each maps to a team-theoretic primitive:
 
 | MAST category | Share of failures | Team-theory primitive | Diagnostic |
 |---|---|---|---|
@@ -127,7 +127,7 @@ Human-AI teams outperform humans alone in the majority of studies. However, exce
 
 ### Trap: Assuming a team will use the expertise it contains
 
-Adding a strong specialist does not establish that aggregation uses their evidence. Pappu et al. report expertise dilution in controlled tasks. Their Table 2 ML synergy gaps instead compare teams to an At Least One Correct oracle bound; the maximum 41.1% is HLE Text-Only, Expert Not Mentioned, not loss against the best fixed individual or a revealed-expert condition. Use the appropriate comparator before diagnosing aggregation failure.
+Adding a strong specialist does not establish that aggregation uses their evidence. Pappu et al. report expertise dilution in controlled tasks and team losses on ML benchmarks. Check which comparator a reported loss uses (best member, revealed-expert condition or an oracle bound) in the paper's tables before quoting a magnitude or diagnosing aggregation failure.
 
 **Source**: Pappu, El, Cao, di Nolfo, Sun, Cao & Zou (2026). "Multi-Agent Teams Hold Experts Back." arXiv:2602.01011, ICML 2026.
 

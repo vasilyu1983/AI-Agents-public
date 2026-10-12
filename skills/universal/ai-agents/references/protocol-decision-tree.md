@@ -290,6 +290,10 @@ These are the load-bearing wire-level facts. Re-check the two spec URLs before q
 
 Decision consequence: if your "A2A" payload is a JSON blob POSTed to `/tasks` with no task id, no state enum, and no Agent Card, you have a custom protocol (Anti-Pattern 3) wearing the A2A name. Either adopt the real wire format via a framework that ships it, or call it an internal handoff envelope and do not promise interoperability.
 
+### Coding-agent CLIs (checked 2026-10-08)
+
+A2A reached a v1.0 spec (GitHub release v1.0.0 on 2026-03-12, checked 2026-10-10), but no vendor doc found shows Claude Code or Codex CLI speaking A2A. For coding-agent CLIs, use MCP for tools and the vendor bridge (`openai/codex-plugin-cc`) for Claude to Codex. Codex's app server is JSON-RPC, not MCP, and is documented as experimental; `codex mcp-server` was removed (<https://learn.chatgpt.com/docs/mcp-server>). Before you rely on any of this, re-read that page and the Claude Code agents docs.
+
 ## Summary
 
 **Simple rule of thumb**:

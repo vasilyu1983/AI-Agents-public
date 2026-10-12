@@ -81,7 +81,7 @@ Failure modes, checks, and supporting evidence: [references/primitives-overview.
 | 3 | Contributions: Presentation + Acceptance | "I sent the message, so we're done" — communication isn't complete until acceptance is signaled |
 | 4 | Evidence of Understanding | Acknowledgment mistaken for task-specific understanding |
 | 5 | Repair | Correction acknowledged while pre-repair assumptions still drive actions |
-| 6 | Presupposition | Brief assumes context the recipient doesn't have; MAST-style specification failures live here |
+| 6 | Presupposition | Brief assumes context the recipient doesn't have (the skill's own inference: ambiguous-brief failures map here; MAST files specification issues under system design) |
 | 7 | Audience Design | Brief depends on the writer’s private vocabulary or context |
 | 8 | Joint Commitment | Sending a handoff mistaken for joint coordination |
 | 9 | Least Collaborative Effort | Sender saves tokens while shifting larger interpretation and repair costs to recipients |
@@ -105,7 +105,7 @@ The classical layer is stable; check publication status of newer preprints befor
 | Subagent acts on an ambiguous or high-cost brief without exposing its interpretation | Grounding criterion (#2) is below the task risk | For reversible work, expose the working interpretation while proceeding; require an explicit restatement/response only when ambiguity can change an irreversible or costly action |
 | User says "ok" / agent emits "ack" — taken as confirmation of understanding | Evidence of understanding (#4) confuses acknowledgment with comprehension | Use task-specific paraphrase, plan, or worked example when the criterion requires stronger evidence |
 | No mechanism for "wait, I don't understand" once a task starts | Repair (#5) channel missing; errors compound | Provide explicit "ask for clarification" tool; reward its use when uncertainty is high. For consequential actions, compare the inferred task with user intent before execution (InferAct pattern); preserve existing authority |
-| Repair happens, but the agent proceeds on its pre-repair assumptions | Repair (#5) treated as an utterance rather than a common-ground update; the correction is acknowledged and then not propagated | After a correction, require restatement of the *revised* shared state, not of the correction. Poelitz et al. (2026, preprint) observed unreliable post-repair updates in a GPT-4.1 puzzle study; test the same failure locally |
+| Repair happens, but the agent proceeds on its pre-repair assumptions | Repair (#5) treated as an utterance rather than a common-ground update; the correction is acknowledged and then not propagated | After a correction, require restatement of the *revised* shared state, not of the correction. Test locally whether corrections propagate (Poelitz et al., 2026, preprint, benchmarks common ground in human-AI collaboration) |
 | A correction is silently adopted even when it conflicts with verified artifact state or a source | Repair (#5) conflated with sycophancy — a correction is evidence, not truth, and propagating it faithfully is not the same as propagating it correctly | Before restating the revised shared state, check a conflicting correction against verified state; if it conflicts, surface the conflict rather than silently adopting it. See `ai-evals`'s sycophancy gate ([`references/conversational-feedback-signals.md`](../ai-evals/references/conversational-feedback-signals.md)) for the accuracy-anchored check this composes with |
 | Brief mentions "the dashboard" without antecedent | Presupposition (#6) failed; agent fills in wrong referent | Audit briefs for definite references; resolve antecedents before handoff |
 | Brief written in domain shorthand the recipient doesn't share; LLMs repeat similar follow-ups rather than pivoting to audience-state-informed questions | Audience design (#7) failed; speaker-centric, listener state untracked | Rewrite for the recipient's vocabulary; check by having a peer (or different agent) read it cold |
@@ -134,7 +134,7 @@ The classical layer is stable; check publication status of newer preprints befor
 
 ### Brief-to-subagent handoff (the dominant failure surface)
 
-_Context_: Orchestrator dispatches a subagent on a non-trivial task. MAST data makes this a primary failure surface because prompt, role, context, and stopping-condition ambiguity all appear before or during execution.
+_Context_: Orchestrator dispatches a subagent on a non-trivial task. Inference, not a MAST claim: prompt, role, context, and stopping-condition ambiguity all appear before or during execution, so the brief is a primary failure surface.
 
 1. Audit common ground (#1): what does the subagent already know from system prompt + context vs. what does it need from this brief?
 2. Set grounding criterion (#2): is this a reversible exploration or an irreversible action? Higher stakes → higher criterion.
@@ -171,15 +171,9 @@ _Context_: Two agents must converge on a joint plan over several turns — negot
 
 For end-of-run reports, use the [agent-to-user handoff pattern](references/patterns-scenarios-traps.md#agent--user-at-session-end) rather than duplicating the recipe here.
 
-### Chatbot / conversational app — grounding acts in the UX layer
+### Chatbot / conversational app
 
-_Context_: Building a user-facing chatbot or AI assistant where misunderstanding or low clarification rate degrades experience. Rifts (ACL 2025) observed lower clarification and follow-up rates in its sampled conversations; measure missed asks and unnecessary asks in the app rather than treating those rates as a production baseline.
-
-1. Audit personal common ground (#1) at session start — what does the system know about this user from prior sessions, profile, or context? Surface remembered context when staleness or a disputed assumption could change the action; ordinary settled context can be used without reconfirmation.
-2. Set grounding criterion (#2) per intent type: for booking, purchase, or deletion, verify target and authority before acting; for a reversible lookup or draft, an inspectable result can suffice.
-3. Design clarification UX to reward repair (#5): inline "Did you mean X or Y?" affordances lower the social cost of asking; agents trained on completion metrics suppress asking by default.
-4. Apply audience design (#7): detect domain shorthand in user input and reflect back in the user's vocabulary, not internal API terminology.
-5. Build a friction-detection signal (#1, #5): track turns where the user corrects or restates — test whether these turns predict failures; a correction count alone does not establish cause or fault.
+Rifts (ACL 2025) observed lower clarification and follow-up rates for LLMs in its sampled conversations; measure missed and unnecessary asks in your app rather than treating those rates as a baseline. Set the grounding criterion (#2) per intent: verify target and authority before booking, purchase or deletion; an inspectable result suffices for a reversible lookup or draft. Track turns where the user corrects or restates, and test whether they predict failures; a correction count alone does not establish cause or fault.
 
 ---
 
@@ -189,11 +183,10 @@ _Context_: Building a user-facing chatbot or AI assistant where misunderstanding
 
 Test shared-meaning failures alongside technical root causes when the output diverges from the agreed task.
 
-| Signature | What it looks like | Distinguishing test | Fix |
-|---|---|---|---|
-| **Silent misalignment** | Two parties (human-human, human-agent, agent-agent) proceed for many turns or steps before anyone notices they meant different things — no error is ever raised, only a late, expensive divergence | Ask each party independently to state the current shared goal in one sentence. If they diverge and neither noticed, this is it | Scheduled, low-cost restatement checkpoints — don't wait for a symptom; under this failure mode there won't be one until the cost is sunk (#1, #2) |
-| **Acknowledgment-without-understanding** | "LGTM," "sounds good," "ack," a rubber-stamp code review, a nodding stakeholder — social or procedural closure is mistaken for grounding | Ask the acknowledger to act on or restate the specific content, not just approve it. If they can't, the "ack" was backchannel, not evidence (#3, #4) | Replace approval gates with restatement or demonstration gates on anything irreversible; "approved" and "understood" are different claims — don't conflate them |
-| **Costly-repair spiral** | A misunderstanding surfaces, gets "fixed," but the fix itself wasn't grounded either — repair attempts compound rather than converge, each round costing more than the last | Track repair-round cost (tokens, time, trust) over the incident. If it's rising rather than falling, the repair channel itself lacks an acceptance phase | Ground the repair the same way you'd ground the original contribution — update and expose the revised shared state before the next affected action; require a response only if consequential action still depends on unresolved ambiguity or missing authority (#3, #5, #9) |
+| Signature | Distinguishing test | Fix |
+|---|---|---|
+| **Silent misalignment**: parties proceed many turns before anyone notices they meant different things; no error is raised, only a late, expensive divergence | Ask each party independently to state the current shared goal in one sentence. If they diverge and neither noticed, this is it | Scheduled, low-cost restatement checkpoints; there will be no symptom until the cost is sunk (#1, #2) |
+| **Costly-repair spiral**: a misunderstanding is "fixed" but the fix was not grounded either, so repair rounds compound | Track repair-round cost (tokens, time, trust) over the incident. If it is rising, the repair channel lacks an acceptance phase | Ground the repair like the original contribution: expose the revised shared state before the next affected action; require a response only if consequential action still depends on unresolved ambiguity or missing authority (#3, #5, #9) |
 
 ### When explicit verification protocols beat implicit grounding
 
@@ -205,13 +198,18 @@ Explicit protocols (restate-and-confirm, structured acceptance, mandatory paraph
 
 A signature or acknowledgment can close an approval gate while leaving interpretation untested. Choose evidence that detects the specific misunderstanding at issue.
 
-### Least collaborative effort as a UX and agent-design lens
+### Short rules
 
-Least collaborative effort (#9) is usually read as a dialogue-efficiency principle. Applied to product and agent design, it reframes a common local optimization as a false economy:
+- **Media constraints (Clark & Brennan 1991).** Before choosing a channel for a handoff, check co-presence, visibility, audibility, cotemporality, simultaneity, sequentiality, reviewability and revisability. A written brief can be re-read; an in-context correction can be overwritten or lost.
+- **LLMs presume common ground.** Preference tuning lowers grounding acts such as clarification and acknowledgment (Shaikh et al., NAACL 2024; single study, so hedge). An instruction to "ask if unclear" must be explicit and rewarded.
+- **Evidence strength, weakest to strongest** (Clark & Schaefer 1989; check the order at p. 267 before quoting): continued attention, relevant next contribution, acknowledgment, demonstration, display. Paraphrase or read-back beats "ack".
 
-- **UX**: a form that asks fewer questions up front (minimizing the user's effort) but generates ambiguous submissions that support has to chase down later is not efficient — it moved cost from the user to a more expensive party. The efficient design asks the two or three questions whose absence would otherwise cost a support ticket.
+### Least collaborative effort as an agent-design lens
+
+Least collaborative effort (#9) is usually read as a dialogue-efficiency principle. Applied to agent design, it reframes a common local optimization as a false economy:
+
 - **Agent design**: a terse system prompt that saves orchestrator tokens but forces the subagent to guess, and the user to catch the guess later, is the same error. Price total expected cost (brief + acceptance + p(failure) × repair) before trimming a brief for length.
-- **The diagnostic in both cases**: ask "whose effort did this design minimize, and whose did it defer?" If the answer is "the party who assembles the request, at the expense of whoever has to interpret or fix it," least collaborative effort was optimized one-sidedly — regardless of how efficient the interface looks in isolation.
+- **Diagnostic**: ask "whose effort did this design minimize, and whose did it defer?" If the answer is "the party who assembles the request, at the expense of whoever has to interpret or fix it," least collaborative effort was optimized one-sidedly.
 
 ---
 

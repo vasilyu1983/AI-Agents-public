@@ -1,5 +1,7 @@
 # OpenAI Codex App-Server Protocol Codegen
 
+> **Verify before use.** This reference is a Codex source snapshot from May 2026 and was not re-verified against current Codex docs on 2026-10-09. Check command names, flags, and protocol details in the current Codex docs (https://developers.openai.com/codex) before copying them.
+
 Sources:
 - OpenAI Codex repo, commit `9f42c89c0112771dc29100a6f3fc904049b2655f`
 - `codex-rs/app-server-protocol/src/export.rs`

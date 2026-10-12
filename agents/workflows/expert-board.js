@@ -600,7 +600,8 @@ const WORKFLOW_MANIFEST = {
             "agentType": "software-payments-architect",
             "skills": [
               "software-payments",
-              "software-security-appsec"
+              "software-security-appsec",
+              "foundations-distributed-systems"
             ]
           }
         ]
@@ -1047,7 +1048,8 @@ const WORKFLOW_MANIFEST = {
             "agentType": "software-payments-architect",
             "skills": [
               "software-payments",
-              "software-security-appsec"
+              "software-security-appsec",
+              "foundations-distributed-systems"
             ]
           }
         ]
@@ -1266,7 +1268,8 @@ const WORKFLOW_MANIFEST = {
           "skills": [
             "ops-incident-response",
             "qa-observability",
-            "qa-resilience"
+            "qa-resilience",
+            "foundations-queueing-theory"
           ]
         },
         {
@@ -1453,7 +1456,8 @@ const WORKFLOW_MANIFEST = {
             "agentType": "software-payments-architect",
             "skills": [
               "software-payments",
-              "software-security-appsec"
+              "software-security-appsec",
+              "foundations-distributed-systems"
             ]
           }
         ]
@@ -1525,7 +1529,8 @@ const WORKFLOW_MANIFEST = {
             "ai-agents",
             "ai-architecture-advisor",
             "ai-product-operating-model",
-            "ai-coding-agents"
+            "ai-coding-agents",
+            "foundations-safety-engineering"
           ]
         },
         {
@@ -1559,7 +1564,8 @@ const WORKFLOW_MANIFEST = {
             "ai-evals",
             "ai-coding-agents-observability-evals",
             "qa-agent-testing",
-            "ai-prompt-engineering"
+            "ai-prompt-engineering",
+            "foundations-measurement-theory"
           ]
         }
       ],
@@ -2520,7 +2526,8 @@ const WORKFLOW_MANIFEST = {
           "agentType": "software-payments-architect",
           "skills": [
             "software-payments",
-            "software-security-appsec"
+            "software-security-appsec",
+            "foundations-distributed-systems"
           ]
         },
         {
@@ -2531,7 +2538,8 @@ const WORKFLOW_MANIFEST = {
           "skills": [
             "software-payments",
             "data-analytics-engineering",
-            "qa-observability"
+            "qa-observability",
+            "foundations-distributed-systems"
           ]
         },
         {
@@ -2962,16 +2970,19 @@ const hasContextValue = (value) => {
 // must never have local-read and network tools in the same invocation.
 const LOCAL_READ_ONLY_TOOLS = ['Read', 'Grep', 'Glob'];
 const localReadOnlyOptions = (options) => Object.assign({}, options, { tools: LOCAL_READ_ONLY_TOOLS });
+// Effort by role on parent-thread steps: challenge medium, expansion gate (EVPI screen then EVSI test, foundations-decision-theory SKILL.md:53) low; chair, regret review, alarm and verifier high.
+// A named panelist takes its effort from its own frontmatter.
 // Named-agent dispatch failures are only detectable by message text: Claude Code
 // throws a plain Error (or an Error subclass carrying `telemetryMessage`, not `.code`)
-// for all three unavailability shapes. Verbatim wording in Claude Code 2.1.258:
+// for all three unavailability shapes. Verbatim wording observed 2026-10 (re-check
+// against the running version if matching stops working):
 //   agent({agentType}): agent type 'X' not found. Available agents: ...
 //   agent({agentType}): 'X' is denied by permission rule 'agent(X)' from <source>.
 //   agent({agentType}): Agent type 'X' is unavailable because every tool it may use
 //     is denied by the current permission settings.
 //     (telemetryMessage: "workflow agent(): agent type unavailable, tool pool denied")
 // There is no pre-flight availability probe in the workflow script API (no
-// listAgents()/agentTypes surface as of 2.1.258), so message matching is the only
+// listAgents()/agentTypes surface when last checked, 2026-10), so message matching is the only
 // mechanism. `normalizeText` strips quotes and punctuation, so the interposed agent
 // name becomes plain words: "agent type x not found". Match on the phrase halves
 // rather than on contiguity so an interposed name cannot break the match.
@@ -3156,7 +3167,7 @@ async function reviewPanel(panel, kind) {
           (board.debate.decision_masks || []).join(', ') + '. Active documented debate triggers: ' + activeDebateTriggers.join('; ') +
           '. Attack unsupported evidence, invented numbers, framing asymmetry, ignored base rates, and the strongest counterargument. ' +
           'A missing-context claim cannot stand as fact.\n\nQuestion:\n' + question + '\n\nMemo:\n' + JSON.stringify(memo, null, 2),
-        localReadOnlyOptions({ label: 'challenge:' + p.role, phase: 'Challenge', schema: {
+        localReadOnlyOptions({ label: 'challenge:' + p.role, phase: 'Challenge', effort: 'medium', schema: {
           type: 'object', required: ['stands'],
           properties: {
             stands: { type: 'boolean' },
@@ -3171,7 +3182,10 @@ async function reviewPanel(panel, kind) {
   );
 }
 
-let memos = (await reviewPanel(board.panel, 'core')).filter(Boolean);
+const coreResults = await reviewPanel(board.panel, 'core');
+let memos = coreResults.filter(Boolean);
+const missingCoreRoles = board.panel.filter((p, i) => !coreResults[i]).map((p) => p.role);
+if (missingCoreRoles.length) log('Core panelist memo missing: ' + missingCoreRoles.join(', ') + '; the run cannot report decided.');
 if (!memos.length) throw new Error('No core panelist memo survived; nothing to synthesize.');
 const alarmed = memos.filter((m) => bypassFor.includes(m.memo.alarm));
 if (alarmed.length) {
@@ -3186,14 +3200,23 @@ if (maxDynamic > 0) {
   phase('Expand');
   const candidateRoles = candidates.map((candidate) => candidate.role);
   const gate = await agent(
-    'Apply the EVPI expansion gate at threshold "' + board.expansion_gate.evpi_threshold + '". Admit a candidate only when its independent input could flip the verdict or materially reduce decision regret. ' +
+    'Apply the expansion gate at threshold "' + board.expansion_gate.evpi_threshold + '" in two steps. ' +
+      'Step 1, EVPI screen: drop any candidate whose input, even if perfectly reliable, could not flip the verdict or materially reduce decision regret. ' +
+      'Step 2, EVSI test: for each survivor, judge the memo it would actually produce, which is one bounded, fallible read with no new data. ' +
+      'Admit it only when that real signal is reliable enough that the flip is likely, not merely possible; a candidate who restates the core memos has no sample value. ' +
+      'For each admitted role state the observation that would flip the verdict and how reliable that role\'s signal is. ' +
       'Choose at most ' + maxDynamic + '. Candidates:\n' + JSON.stringify(candidates, null, 2) +
       '\n\nCore memos and challenges:\n' + JSON.stringify(memos, null, 2),
     localReadOnlyOptions({ label: 'evpi:' + boardKey, effort: 'low', schema: {
-      type: 'object', required: ['selected', 'rationale'],
+      type: 'object', required: ['selected', 'rationale', 'evsi'],
       properties: {
         selected: { type: 'array', maxItems: maxDynamic, items: { type: 'string', enum: candidateRoles } },
         rationale: { type: 'string' },
+        evsi: { type: 'array', items: { type: 'object', required: ['role', 'flip_observation', 'signal_reliability'], properties: {
+          role: { type: 'string', enum: candidateRoles },
+          flip_observation: { type: 'string' },
+          signal_reliability: { type: 'string', enum: ['high', 'medium', 'low'] },
+        } } },
       },
     } }),
   );
@@ -3214,7 +3237,11 @@ const synthesisSchema = {
     max_regret: { type: 'number', minimum: 0, maximum: 1 },
     bias_audit: { type: 'array', items: { type: 'string' } },
     frame_check: { type: 'string' },
-    deliverable_sections: { type: 'object' },
+    deliverable_sections: {
+      type: 'object',
+      required: board.deliverable.required_sections || [],
+      properties: Object.fromEntries((board.deliverable.required_sections || []).map((name) => [name, { type: 'string', minLength: 1 }])),
+    },
   },
 };
 
@@ -3228,14 +3255,27 @@ const chairPrompt = (prior) =>
   '\n\nMemos and adversarial challenges (answer every refuted point; a memo whose check has stands=false must not ' +
   'carry the verdict alone):\n' + JSON.stringify(memos, null, 2) +
   // The revising chair is not told why it revises: a named threshold becomes a target, so the number drops, not the risk
-  // (foundations-measurement-theory SKILL.md:40; foundations-decision-theory SKILL.md:93).
+  // (Goodhart: foundations-measurement-theory references/comparability-and-drift.md:15), and the chair's stated regret is an
+  // estimate to score against outcomes, not a probability (foundations-decision-theory SKILL.md:93).
   (prior ? '\n\nA prior synthesis follows. Re-examine it against the memos, change it only where the evidence supports it, ' +
     'and estimate regret afresh:\n' + JSON.stringify(prior, null, 2) : '') +
   '\n\nApply bias audit and frame symmetry. Preserve blocking data gaps. Record mandatory dissent. ' +
   'Estimate maximum decision regret under the board reversibility rule. Verdict must be one of: ' + board.verdicts.join(', ') + '.';
 
+function validateSynthesis(value, stage) {
+  const sections = value && value.deliverable_sections;
+  const invalid = (board.deliverable.required_sections || []).filter((name) =>
+    !sections || typeof sections[name] !== 'string' || !sections[name].trim(),
+  );
+  if (invalid.length) {
+    throw new Error('Invalid synthesis for board "' + boardKey + '" at ' + stage +
+      ': deliverable_sections requires nonblank strings for: ' + invalid.join(', ') + '.');
+  }
+  return value;
+}
+
 phase('Synthesize');
-let synthesis = await agent(chairPrompt(null), localReadOnlyOptions({ label: 'chair:' + boardKey, schema: synthesisSchema }));
+let synthesis = validateSynthesis(await agent(chairPrompt(null), localReadOnlyOptions({ label: 'chair:' + boardKey, effort: 'high', schema: synthesisSchema })), 'chair');
 
 function regretThreshold(verdict) {
   const threshold = board.stopping_rule.max_regret_threshold;
@@ -3247,15 +3287,16 @@ function regretThreshold(verdict) {
 
 let threshold = regretThreshold(synthesis.verdict);
 if (Number(synthesis.max_regret) > threshold) {
-  synthesis = await agent(chairPrompt(synthesis), localReadOnlyOptions({ label: 'regret-review:' + boardKey, effort: 'high', schema: synthesisSchema }));
-  threshold = regretThreshold(synthesis.verdict);
+  synthesis = validateSynthesis(await agent(chairPrompt(synthesis), localReadOnlyOptions({ label: 'regret-review:' + boardKey, effort: 'high', schema: synthesisSchema })), 'regret-review');
+  // Keep the first threshold unless the revised verdict's is stricter: switching verdict must not clear the gate.
+  threshold = Math.min(threshold, regretThreshold(synthesis.verdict));
 }
 
-let decisionStatus = 'decided';
+let decisionStatus = missingCoreRoles.length ? 'incomplete_panel' : 'decided';
 if (Number(synthesis.max_regret) > threshold) {
   const holdVerdict = board.verdicts.find((verdict) => /hold|defer|conditional/.test(verdict));
   if (holdVerdict) synthesis.verdict = holdVerdict;
-  decisionStatus = 'held_for_regret';
+  if (decisionStatus === 'decided') decisionStatus = 'held_for_regret';
 }
 
 let verification = null;
@@ -3263,10 +3304,13 @@ if (board.verification && board.verification.required) {
   phase('Verify');
   verification = await agent(
     'Clean-context heterogeneous verification. You did not produce the synthesis. Check it against the required context and named evidence; self-verification does not count. ' +
-      'Reject a verdict that ignores a blocking data gap, a refuted memo, or the rollback/reversibility constraint.\n\nQuestion:\n' + question +
+      'Reject a verdict that ignores a blocking data gap, a refuted memo, or the rollback/reversibility constraint. ' + RULES + '\n\nQuestion:\n' + question + extraContext +
       '\n\nRequired context:\n' + JSON.stringify(contextStatus, null, 2) +
+      '\n\nGuardrails:\n' + JSON.stringify(board.guardrails || [], null, 2) +
+      '\n\nStopping and reversibility rule:\n' + JSON.stringify(board.stopping_rule, null, 2) +
+      '\n\nPanel memos and adversarial challenges (original evidence and checks):\n' + JSON.stringify(memos, null, 2) +
       '\n\nSynthesis:\n' + JSON.stringify(synthesis, null, 2),
-    localReadOnlyOptions({ label: 'verify:' + boardKey, schema: {
+    localReadOnlyOptions({ label: 'verify:' + boardKey, effort: 'high', schema: {
       type: 'object', required: ['stands', 'corrections'],
       properties: {
         stands: { type: 'boolean' },
@@ -3278,10 +3322,10 @@ if (board.verification && board.verification.required) {
   if (!verification.stands) decisionStatus = 'verification_failed';
 }
 
-// Opt-in matched-budget baseline (args.baseline: true). At equal compute a panel often only ties a plain vote
-// (arXiv 2604.02460, 2508.17536; foundations-team-theory SKILL.md:36), so the run also asks one agent the same
+// Opt-in plain-vote baseline arm (args.baseline: true). At equal compute a panel often only ties a plain vote
+// (arXiv 2604.02460, 2508.17536; foundations-team-theory SKILL.md:38), so the run also asks one agent the same
 // question k times, blind, and records the plurality beside the panel verdict. k is the memo count; the panel
-// also spends tokens on challenges and synthesis, so the baseline gets less compute, never more. Agreement is not
+// also spends tokens on challenges and synthesis, so the baseline gets less compute: not a matched budget. Agreement is not
 // correctness: the human label in telemetry/workflow-runs.jsonl decides which side was right.
 async function baselineVote(prompt, verdicts, k, options) {
   const schema = {
@@ -3309,6 +3353,8 @@ const baseline = args && args.baseline === true
   )
   : null;
 if (baseline) baseline.agrees = baseline.plurality === synthesis.verdict;
+// Output-only telemetry: contested when the votes split among completed votes or the plurality differs from the panel.
+if (baseline) baseline.contested = Object.keys(baseline.tally).length > 1 || !baseline.agrees;
 
 const isHold = decisionStatus !== 'decided' || /hold|defer|conditional/.test(synthesis.verdict);
 const deadline = isHold ? Object.assign({ required: true, escalate_on_deadline: board.hold_policy.escalate_on_deadline }, board.hold_policy) : null;
@@ -3327,7 +3373,13 @@ return {
   memos,
   synthesis,
   verification,
+  fingerprint: {
+    memos: memos.length,
+    challenges_failed: memos.filter((m) => m.check && m.check.stands === false).length,
+    refuted_points: memos.reduce((n, m) => n + (m.check && Array.isArray(m.check.refuted_points) ? m.check.refuted_points.length : 0), 0),
+  },
   decision_status: decisionStatus,
+  missing_core_roles: missingCoreRoles,
   deadline,
   ...(baseline ? { baseline } : {}),
 };

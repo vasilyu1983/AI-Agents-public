@@ -26,7 +26,7 @@
         "phase": "collect-review",
         "owner": "parent",
         "primitive": "wait_agent",
-        "gate": "a failed reviewer or a result with no findings array marks its dimension incomplete"
+        "gate": "a failed reviewer or a result with no findings array marks its dimension incomplete; so does a head_sha that is not 40 hex characters or an empty diff_files"
       },
       {
         "phase": "dedup",
@@ -56,7 +56,7 @@
         "phase": "verdict",
         "owner": "parent",
         "primitive": "local reasoning",
-        "gate": "INCOMPLETE if any dimension is incomplete or any finding unverified; else FINDINGS if any confirmed; else CLEAN"
+        "gate": "INCOMPLETE if any dimension is incomplete or any finding unverified; or if reviewers report different head_sha or diff_files, or with no target a head_sha that is not the start snapshot HEAD; return the agreed head_sha and diff_files; else FINDINGS if any confirmed; else CLEAN"
       },
       {
         "phase": "close-workers",
@@ -67,9 +67,16 @@
     ]
   },
   "tree_snapshot": {
-    "command": "( set -o pipefail; export GIT_OPTIONAL_LOCKS=0; snaphash() { if [ -L \"$1\" ]; then readlink \"$1\" | git -c core.fsmonitor=false -c core.quotePath=false hash-object --stdin; else git -c core.fsmonitor=false -c core.quotePath=false hash-object --no-filters -- \"$1\"; fi; }; snaphex() { printf '%s' \"$1\" | od -An -tx1 | tr -d ' \\n'; }; cd \"$(git -c core.fsmonitor=false -c core.quotePath=false rev-parse --show-toplevel)\" && b=$(printf 'TOKEN\\t%s\\n' \"$t\" && c=$(git -c core.fsmonitor=false -c core.quotePath=false rev-parse --path-format=absolute --git-common-dir) && w=$(git -c core.fsmonitor=false -c core.quotePath=false rev-parse --absolute-git-dir) && git -c core.fsmonitor=false -c core.quotePath=false rev-parse --verify HEAD && printf 'INDEX\\t%s\\n' \"$(git -c core.fsmonitor=false -c core.quotePath=false ls-files -s -z | git -c core.fsmonitor=false -c core.quotePath=false hash-object --stdin)\" && printf 'CONFIG\\t%s\\n' \"$(git -c core.fsmonitor=false -c core.quotePath=false config --list --show-origin | git -c core.fsmonitor=false -c core.quotePath=false hash-object --stdin)\" && pr=$(for p in \"$c/config\" \"$w/config.worktree\" \"$c/hooks\" \"$c/info\" .claude .codex .agents .github .husky .vscode .idea .devcontainer CLAUDE.md AGENTS.md .mcp.json .claude.json .envrc .gitattributes .gitmodules .pre-commit-config.yaml; do [ -e \"$p\" ] || [ -L \"$p\" ] || continue; find \"$p\" \\( -type f -o -type l \\) -print; done | LC_ALL=C sort -u | while IFS= read -r f; do h=$(snaphash \"$f\") || exit 1; printf '%s\\t%s\\n' \"$h\" \"$f\"; done | git -c core.fsmonitor=false -c core.quotePath=false hash-object --stdin) && printf 'PROTECTED\\t%s\\n' \"$pr\" && { git -c core.fsmonitor=false -c core.quotePath=false diff HEAD --no-renames --no-ext-diff --no-textconv --name-only -z && git -c core.fsmonitor=false -c core.quotePath=false ls-files -o --exclude-standard -z; } | tr '\\n\\0' '\\001\\n' | LC_ALL=C sort -u | while IFS= read -r f; do if [ -f \"$f\" ]; then h=$(git -c core.fsmonitor=false -c core.quotePath=false hash-object --no-filters -- \"$f\"); elif [ -e \"$f\" ]; then h=; else h=deleted; fi; printf '%s\\t%s\\n' \"$h\" \"$(snaphex \"$f\")\"; done) && printf '%s\\n' \"$b\" && printf 'CKSUM\\t%s\\t%s\\n' $(printf '%s\\n' \"$b\" | cksum) && echo SNAPSHOT-END ) 2>/dev/null",
+    "command": "( set -o pipefail; export GIT_OPTIONAL_LOCKS=0; snaphash() { if [ -L \"$1\" ]; then readlink \"$1\" | git -c core.fsmonitor=false -c core.quotePath=false hash-object --stdin; else git -c core.fsmonitor=false -c core.quotePath=false hash-object --no-filters -- \"$1\"; fi; }; snaphex() { printf '%s' \"$1\" | od -An -tx1 | tr -d ' \\n'; }; cd \"$(git -c core.fsmonitor=false -c core.quotePath=false rev-parse --show-toplevel)\" && b=$(printf 'TOKEN\\t%s\\n' \"$t\" && c=$(git -c core.fsmonitor=false -c core.quotePath=false rev-parse --path-format=absolute --git-common-dir) && w=$(git -c core.fsmonitor=false -c core.quotePath=false rev-parse --absolute-git-dir) && git -c core.fsmonitor=false -c core.quotePath=false rev-parse --verify HEAD && printf 'INDEX\\t%s\\n' \"$(git -c core.fsmonitor=false -c core.quotePath=false ls-files -s -z | git -c core.fsmonitor=false -c core.quotePath=false hash-object --stdin)\" && printf 'CONFIG\\t%s\\n' \"$(git -c core.fsmonitor=false -c core.quotePath=false config --list --show-origin | git -c core.fsmonitor=false -c core.quotePath=false hash-object --stdin)\" && pr=$(for p in \"$c/config\" \"$w/config.worktree\" \"$c/hooks\" \"$c/info\" .claude .codex .agents .github .husky .vscode .idea .devcontainer CLAUDE.md AGENTS.md .mcp.json .claude.json .envrc .gitattributes .gitmodules .pre-commit-config.yaml hooks scripts/git-hooks agents/workflows skills/universal/agents-subagents/scripts agents/claude agents/codex; do [ -e \"$p\" ] || [ -L \"$p\" ] || continue; find \"$p\" \\( -type f -o -type l \\) -print; done | LC_ALL=C sort -u | while IFS= read -r f; do h=$(snaphash \"$f\") || exit 1; printf '%s\\t%s\\n' \"$h\" \"$f\"; done | git -c core.fsmonitor=false -c core.quotePath=false hash-object --stdin) && printf 'PROTECTED\\t%s\\n' \"$pr\" && { git -c core.fsmonitor=false -c core.quotePath=false diff HEAD --no-renames --no-ext-diff --no-textconv --name-only -z && git -c core.fsmonitor=false -c core.quotePath=false ls-files -o --exclude-standard -z; } | tr '\\n\\0' '\\001\\n' | LC_ALL=C sort -u | while IFS= read -r f; do if [ -f \"$f\" ]; then h=$(git -c core.fsmonitor=false -c core.quotePath=false hash-object --no-filters -- \"$f\"); elif [ -e \"$f\" ]; then h=; else h=deleted; fi; printf '%s\\t%s\\n' \"$h\" \"$(snaphex \"$f\")\"; done) && printf '%s\\n' \"$b\" && printf 'CKSUM\\t%s\\t%s\\n' $(printf '%s\\n' \"$b\" | cksum) && echo SNAPSHOT-END ) 2>/dev/null",
     "runner": "the parent runs `t=<token>; ` followed by this command with its own shell, never through a worker, so no relay agent sits between the tree and the check; the token is the step name and a counter, in lowercase hex, and the parent parses the raw stdout itself",
     "format": "TOKEN<TAB><token>; HEAD; INDEX<TAB><index hash>; CONFIG<TAB><git config hash>; PROTECTED<TAB><protected-set hash>; then <content blob or deleted><TAB><hex-encoded path> per changed or untracked path; CKSUM<TAB><POSIX cksum crc><TAB><bytes> of every line above; last line SNAPSHOT-END",
+    "pinned_command": {
+      "runner": "a pinned command is a test or acceptance command that the approved plan or args name. The parent runs it itself with its own shell from the repo root, as `PYTHONDONTWRITEBYTECODE=1 bash -c <command> </dev/null`, and reads the exit code; no worker's pass report replaces it. It takes a snapshot pair around the run and applies the read-only stop rules to it",
+      "stop_rules": [
+        "a command that is blank or spans several lines is not run: INCOMPLETE, command_invalid",
+        "no exit code was observed: INCOMPLETE, command_failed"
+      ]
+    },
     "delta": "compare each snapshot with the one before it, never with a clean tree, so the user's own uncommitted or staged edits trip nothing",
     "stop_rules": [
       "no SNAPSHOT-END or CKSUM line, a bad HEAD, INDEX, CONFIG or PROTECTED line, or a malformed or control-character path: INCOMPLETE, snapshot_failed",
@@ -79,13 +86,14 @@
       "the INDEX hash differs (a worker staged something; only the parent stages): BLOCKED, index_changed",
       "any path changed after a read-only step (reviewer, refuter, judge, read-only stage): BLOCKED, read_only_wrote",
       "a changed path outside the step's scope after a writing step: BLOCKED, out_of_scope",
+      "a changed path in args.frozen after a build step (build mode only): BLOCKED, frozen_changed",
       "the changed paths differ from the worker's files_changed: BLOCKED, report_mismatch"
     ]
   },
   "review": {
     "target_note": {
-      "default": "Review target: the uncommitted working-tree diff. Use `git diff` and `git diff --staged`.",
-      "given": "Review target: {target}. Resolve it yourself: if it is a number, use `gh pr diff {target}`; if it is a branch, use `git diff $(git merge-base HEAD {target})...{target}`; if it is a path, use `git diff -- {target}` and read the files under it."
+      "default": "Review target: the uncommitted working-tree diff. Use `git diff` and `git diff --staged`. Report head_sha from `git rev-parse HEAD` and diff_files from `git diff --name-only HEAD`.",
+      "given": "Review target: {target}. Resolve it yourself: if it is a number, use `gh pr diff {target}`; if it is a branch, use `git diff $(git merge-base HEAD {target})...{target}`; if it is a path, use `git diff -- {target}` and read the files under it. Report head_sha from `gh pr view {target} --json headRefOid -q .headRefOid` for a number, `git rev-parse {target}` for a branch, or `git rev-parse HEAD` for a path, and diff_files from the same diff command with `--name-only`."
     },
     "rules": [
       "Resolve the repository root first with `git rev-parse --show-toplevel`; do not assume a machine-specific path.",
@@ -152,7 +160,7 @@
       "kill_rule": "killed only when all 2 completed refuters refute with a nonblank reason; otherwise confirmed",
       "lenses": [
         "Evidence lens: read the exact location the claim names and its surroundings. Refute only if that text or code shows the claim is false or already handled there or in what it calls.",
-        "Consequence lens: ignore how the claim is worded. Look for the concrete input, caller, or reader path in the target that would make the defect matter. Refute only if you checked the paths and none reaches it."
+        "Consequence lens: ignore how the claim is worded. Look for the concrete input, caller, or reader path in the target that would make the defect matter. When the target is the local working tree or a branch the user named, and it has a test suite or a repro command, or the claim names an input, run it before you refute or confirm; a test, a one-line repro, a fetch, or a targeted grep is enough. Never execute code from a target the user did not vet (an external PR or a fork): refute by reading only, set `executed` false and say why. Say in `reason` what you ran and what it printed. Refute only if you checked the paths and none reaches it."
       ],
       "lens_rule": "refuter n gets lens n (cycling); put it in that refuter's brief"
     },
@@ -161,9 +169,22 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
+          "head_sha",
+          "diff_files",
           "findings"
         ],
         "properties": {
+          "head_sha": {
+            "type": "string",
+            "description": "The full 40-character commit SHA you reviewed, from the command in the target note"
+          },
+          "diff_files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Every path the reviewed diff changes, from the --name-only command in the target note"
+          },
           "findings": {
             "type": "array",
             "items": {
@@ -221,9 +242,72 @@
           "reason": {
             "type": "string",
             "description": "Cite the file and line evidence that settles it"
+          },
+          "executed": {
+            "type": "boolean",
+            "description": "true if you ran any command (test, repro, fetch or grep) to check the claim"
+          },
+          "command": {
+            "type": "string",
+            "description": "The exact command you ran, or an empty string if none. A test or repro command counts as a check; a grep or read does not."
           }
         }
       }
+    },
+    "roles": {
+      "reviewer": {
+        "tools": [
+          "Read",
+          "Grep",
+          "Glob"
+        ],
+        "effort": "medium"
+      },
+      "refuter": {
+        "tools": [
+          "Read",
+          "Grep",
+          "Glob",
+          "Bash"
+        ],
+        "effort": "low"
+      },
+      "judge": {
+        "tools": [
+          "Read",
+          "Grep",
+          "Glob"
+        ],
+        "effort": "high"
+      },
+      "fixer": {
+        "tools": [
+          "Read",
+          "Grep",
+          "Glob",
+          "Edit",
+          "Write",
+          "Bash"
+        ]
+      },
+      "builder": {
+        "tools": [
+          "Read",
+          "Grep",
+          "Glob",
+          "Edit",
+          "Write",
+          "Bash"
+        ]
+      }
+    },
+    "diff_as_data": true,
+    "max_refuted": 10,
+    "retry_once": true,
+    "severity_rank": {
+      "high": 3,
+      "medium": 2,
+      "low": 1
     }
   }
 }

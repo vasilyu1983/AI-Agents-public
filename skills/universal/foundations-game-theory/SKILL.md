@@ -24,9 +24,7 @@ For the agent-team applied recipe layer (team.yaml manifest fields, agent-team a
 - [Decision Checklist](#decision-checklist)
 - [Composition Recipes](#composition-recipes)
 - [Workflow](#workflow)
-- [Current Pattern Review](#current-pattern-review)
 - [Navigation](#navigation)
-- [Fact-Checking](#fact-checking)
 
 ---
 
@@ -35,27 +33,16 @@ For the agent-team applied recipe layer (team.yaml manifest fields, agent-team a
 | Primitive | Domain | Recipe Stub |
 |-----------|--------|-------------|
 | [Belief-Driven Coordination (ECON)](../foundations-team-theory/assets/templates/team-theory/01-econ-belief-driven.md) | Multi-party teams, distributed analysis, agent teams | Members optimize against beliefs about co-members; reduces redundant work and inter-member chat |
-| [Adversarial Debate](../foundations-team-theory/assets/templates/team-theory/02-adversarial-debate.md) | Content moderation, risk review, audit | Two heterogeneous evaluators + reasoning-tree synthesis; must beat a matched-budget majority-vote baseline |
 | [Auction-Based Routing](assets/templates/game-theory/03-auction-task-routing.md) | Ad placement, task delegation, resource allocation | Sealed-bid truthful auction; highest-value-per-cost wins |
-| [Shapley Contribution](../foundations-team-theory/assets/templates/team-theory/04-shapley-contribution.md) | Attribution, revenue sharing, team composition | Marginal-contribution average across subsets (team-theory; incentive questions stay here) |
 | [Reputation-Gated Autonomy](assets/templates/game-theory/05-reputation-gating.md) | Supplier qualification, agent oversight, fraud gating | Tiered trust: proven → standard → probationary; oversight inversely proportional |
 | [Cooperation and Defection](assets/templates/game-theory/06-cooperation-defection.md) | Partnership design, incentive alignment, compliance | Iterated PD structure; payoff-scale to detect defection tendency |
 | [Mechanism Design for Synthesis](assets/templates/game-theory/07-mechanism-design-synthesis.md) | Decision aggregation, voting, policy-making | Evidence-synthesis protocol (no incentive guarantee); dissent is a required section |
-| [Courtroom-Style Debate](../foundations-team-theory/assets/templates/team-theory/08-courtroom-proclaim.md) | Legal review, risk go/no-go, claim verification | Plaintiff/defense/court structure + progressive RAG + role-switching |
 | [Pareto-Nash Multi-Objective](assets/templates/game-theory/09-pareto-nash.md) | Product tradeoffs, regulatory vs growth, pricing tiers | Map Pareto frontier; pick dominant options; flag non-dominated set |
 | [Evolutionary Coordination Search](assets/templates/game-theory/10-alphaevolve.md) | Algorithm selection, prompt tuning, rule evolution | LLM-mutated program + fitness signal; ShinkaEvolve for sample efficiency |
-| [Prediction Market Confidence](../foundations-team-theory/assets/templates/team-theory/11-prediction-market.md) | Forecasting, risk calibration, hiring decisions | Stake-weighted confidence; self-critique calibration step (CritiCal-inspired) before stake |
 | [Negotiation ZOPA/BATNA](assets/templates/game-theory/12-negotiation-zopa-batna.md) | Pricing, partnership terms, resource contention | Map BATNA/ZOPA per party; target overlap zone; use interests not positions |
-| [Reasoning-Tree Audit](../foundations-team-theory/assets/templates/team-theory/13-reasoning-tree-audit.md) | High-stakes synthesis, compliance review, claim checking | Trace claims to evidence at First Point of Disagreement; reject unsupported majority |
 | [Per-Claim Credibility Scoring](assets/templates/game-theory/14-credibility-scoring.md) | Misinformation detection, adversarial content, security | Evidence quality × corroboration weight per claim; isolate high-risk claims |
 | [Generative Social Choice](assets/templates/game-theory/15-generative-social-choice.md) | Multi-stakeholder policy, diverse-user product decisions | Maximin selection across candidate outputs; preserve minority-signal coverage |
-| [Meta-Debate Role Routing](../foundations-team-theory/assets/templates/team-theory/16-meta-debate-routing.md) | Debate setup, role-fit selection, agent teams | Two-stage proposal + peer-review picks plaintiff/defense/judge from a pool |
-| [Online Shapley Prompt Evolution](../foundations-team-theory/assets/templates/team-theory/17-online-shapley-prompt-evolution.md) | High-frequency teams, prompt tuning over many runs | Per-member prompt mutation guided by Shapley contribution (HiveMind) |
-| [Beyond Majority Voting (BMV)](../foundations-team-theory/assets/templates/team-theory/18-beyond-majority-voting.md) | Best-of-N synthesis (discrete answer), ensemble selection | Optimal Weight (confidence × calibration) + Inverse Surprising Popularity |
-| [Radial Consensus Score (RCS)](../foundations-team-theory/assets/templates/team-theory/19-radial-consensus-score.md) | Best-of-N synthesis (open-ended generation), self-consistency | Embedding-centroid selector for semantically clustered, lexically diverse answers |
-| [Conformal Social Choice](../foundations-team-theory/assets/templates/team-theory/20-conformal-social-choice.md) | Calibrated selection with representative labeled cases | Singleton proceeds to validation/authorization; larger sets escalate |
 | [Attested Delegation Contracts](assets/templates/game-theory/21-attested-delegation-contracts.md) | Cross-trust subagent routing, agent marketplaces, external tools | Route by verified capability and bounded contract, not self-claimed quality |
-| [Coalition Formation Routing](../foundations-team-theory/assets/templates/team-theory/22-coalition-formation-routing.md) | Large teams, departments, multi-workstream audits | Form stable subteams before synthesis; avoid flat-panel overload |
 
 ---
 
@@ -81,32 +68,7 @@ For the agent-team applied recipe layer (team.yaml manifest fields, agent-team a
 
 ## Primitive Index
 
-Each primitive has a full playbook (problem, solution, how-it-works, launch-prompt template, domain applications, citations).
-
-| # | Mechanism | Failure Mode It Addresses |
-|---|-----------|--------------------------|
-| 1 | [Belief-Driven Coordination (ECON)](../foundations-team-theory/assets/templates/team-theory/01-econ-belief-driven.md) — moved to team-theory | Pooling equilibrium — members read same context, produce same analysis |
-| 2 | [Adversarial Debate](../foundations-team-theory/assets/templates/team-theory/02-adversarial-debate.md) — moved to team-theory | Confabulation consensus, correlated bias |
-| 3 | [Auction-Based Task Routing](assets/templates/game-theory/03-auction-task-routing.md) | Static routing, ambiguous selection |
-| 4 | [Shapley Contribution Scoring](../foundations-team-theory/assets/templates/team-theory/04-shapley-contribution.md) — moved to team-theory | Free-riding, unverifiable attribution |
-| 5 | [Reputation-Gated Autonomy](assets/templates/game-theory/05-reputation-gating.md) | Uniform trust regardless of track record |
-| 6 | [Cooperation and Defection](assets/templates/game-theory/06-cooperation-defection.md) | Shallow output, scope dumping, echo chambers |
-| 7 | [Mechanism Design for Synthesis](assets/templates/game-theory/07-mechanism-design-synthesis.md) | Loudest-wins aggregation, suppressed dissent |
-| 8 | [Courtroom-Style Debate (PROClaim)](../foundations-team-theory/assets/templates/team-theory/08-courtroom-proclaim.md) — moved to team-theory | Evidence stagnation, position-anchored reasoning |
-| 9 | [Pareto-Nash Multi-Objective](assets/templates/game-theory/09-pareto-nash.md) | Single-objective optimization on multi-objective problems |
-| 10 | [Evolutionary Coordination Search](assets/templates/game-theory/10-alphaevolve.md) | Hand-tuned rules are sub-optimal vs. measured fitness |
-| 11 | [Prediction Market / Confidence Betting](../foundations-team-theory/assets/templates/team-theory/11-prediction-market.md) — moved to team-theory | Verbose output dominates synthesis |
-| 12 | [Negotiation Protocol (ZOPA/BATNA)](assets/templates/game-theory/12-negotiation-zopa-batna.md) | Adversarial framing on genuine compromise situations |
-| 13 | [Reasoning-Tree Audit](../foundations-team-theory/assets/templates/team-theory/13-reasoning-tree-audit.md) — moved to team-theory | Confident-but-wrong consensus; majority vote unsafe |
-| 14 | [Per-Claim Credibility Scoring](assets/templates/game-theory/14-credibility-scoring.md) | Single-claim failure modes reputation gating misses |
-| 15 | [Generative Social Choice](assets/templates/game-theory/15-generative-social-choice.md) | Multi-stakeholder buy-in; averaging erases minority evidence |
-| 16 | [Meta-Debate Role Routing](../foundations-team-theory/assets/templates/team-theory/16-meta-debate-routing.md) — moved to team-theory | Wrong specialist gets the wrong debate role; static role assignment |
-| 17 | [Online Shapley Prompt Evolution](../foundations-team-theory/assets/templates/team-theory/17-online-shapley-prompt-evolution.md) — moved to team-theory | Weak team members never improve; static prompts under-utilize Shapley signal |
-| 18 | [Beyond Majority Voting (BMV)](../foundations-team-theory/assets/templates/team-theory/18-beyond-majority-voting.md) — moved to team-theory | Majority vote on best-of-N erases minority-correct answers (calibration ignored) |
-| 19 | [Radial Consensus Score (RCS)](../foundations-team-theory/assets/templates/team-theory/19-radial-consensus-score.md) — moved to team-theory | Lexical-overlap voting fails on semantically clustered open-ended generations |
-| 20 | [Conformal Social Choice Act/Escalate](../foundations-team-theory/assets/templates/team-theory/20-conformal-social-choice.md) — moved to team-theory | Wrong consensus turns into irreversible action |
-| 21 | [Attested Delegation Contracts](assets/templates/game-theory/21-attested-delegation-contracts.md) | Self-claimed quality corrupts routing across trust boundaries |
-| 22 | [Coalition Formation Routing](../foundations-team-theory/assets/templates/team-theory/22-coalition-formation-routing.md) — moved to team-theory | Large flat panels duplicate work and produce unstable synthesis |
+The Quick Reference table lists the primitives that stay here. Handled by [foundations-team-theory](../foundations-team-theory/SKILL.md) (shared payoff; live playbooks in `../foundations-team-theory/assets/templates/team-theory/`). Redirect stubs, listed once: [#1](assets/templates/game-theory/01-econ-belief-driven.md), [#2](assets/templates/game-theory/02-adversarial-debate.md), [#4](assets/templates/game-theory/04-shapley-contribution.md), [#8](assets/templates/game-theory/08-courtroom-proclaim.md), [#11](assets/templates/game-theory/11-prediction-market.md), [#13](assets/templates/game-theory/13-reasoning-tree-audit.md), [#16](assets/templates/game-theory/16-meta-debate-routing.md), [#17](assets/templates/game-theory/17-online-shapley-prompt-evolution.md), [#18](assets/templates/game-theory/18-beyond-majority-voting.md), [#19](assets/templates/game-theory/19-radial-consensus-score.md), [#20](assets/templates/game-theory/20-conformal-social-choice.md), [#22](assets/templates/game-theory/22-coalition-formation-routing.md).
 
 ---
 
@@ -171,14 +133,12 @@ Textbook mechanism design proves *existence* of a truthful, efficient, individua
 | **Participation constraints failing** | Individual rationality assumes the average outside option; when the *highest*-value participants have the best outside options, they opt out first and adversely select the remaining pool | A mechanism designed around expected participants, not the marginal one who is deciding whether to walk | Check IR against the highest-value participant's outside option; In the standard bilateral-trade model with independent private values and overlapping support, Myerson & Satterthwaite (1983) rule out jointly Bayesian incentive-compatible, individually rational, ex-post efficient and budget-balanced mechanisms; state these assumptions and the property relaxed |
 | **Budget imbalance** | VCG is efficient and truthful but generally runs a deficit or surplus that must land somewhere | Multi-sided mechanisms with no natural residual claimant | Decide upfront who absorbs the imbalance (platform take-rate, budget-neutral variant, or accept the inefficiency) rather than discovering it at settlement |
 | **Computational infeasibility** | Exact VCG for combinatorial allocation requires solving an often NP-hard optimization for the winning allocation and every counterfactual-without-bidder-*i* allocation | Task/resource routing over bundles, not single-item slots | Use approximate/greedy VCG variants and disclose the resulting efficiency loss, or restrict to single-item/separable settings where exact VCG is tractable |
-| **Rules stated only in the prompt** | A policy the participants can read but nothing enforces is cheap talk; under optimization pressure agents route around it | LLM participants told "do not collude" in a system prompt, with no state machine, sanction, or audit log behind it | Enforce in the orchestration layer, not the prompt — declare legal states, transitions, and sanctions outside the agents and have a controller apply them (Institutional AI, arXiv:2601.11369, Jan 2026: prompt-only constitutional policy was ineffective; governance-graph enforcement cut severe-collusion incidence from 50% to 5.6% across 90 runs per condition in its simulated Cournot markets) |
+| **Rules stated only in the prompt** | A policy the participants can read but nothing enforces is cheap talk; under optimization pressure agents route around it | LLM participants told "do not collude" in a system prompt, with no state machine, sanction, or audit log behind it | Enforce in the orchestration layer, not the prompt — declare legal states, transitions, and sanctions outside the agents and have a controller apply them (Institutional AI, arXiv:2601.11369, Jan 2026: prompt-only constitutional policy was ineffective; governance-graph enforcement cut severe-collusion incidence in its simulated Cournot markets only) |
 
 **Practical tell**: if a mechanism is called "truthful" or "incentive-compatible" but nobody can name (a) the participation constraint being satisfied, (b) how false identities are prevented, (c) who absorbs budget imbalance, and (d) what enforces the rules other than the prompt, the claim has not actually been checked.
 
-**Communication channels are a collusion dial, not a neutral feature.** Direct seller-to-seller messaging raises collusive tendency in simulated continuous double auctions, with the effect varying by model and modulated by oversight and authority pressure (Agrawal et al., arXiv:2507.01413, 2025). The same channel that reduces conflict in coordination games raises coordinated overpricing in market games — decide which game you are actually running before granting agents a side channel.
+**Communication channels are a collusion dial, not a neutral feature.** Direct seller-to-seller messaging raises collusive tendency in simulated continuous double auctions, with the effect varying by model and modulated by oversight and authority pressure (Agrawal et al., arXiv:2507.01413, 2025). The same channel that reduces conflict in coordination games raises coordinated overpricing in market games — decide which game you are actually running before granting agents a side channel. A related abstract-level 2026 result: two agents set to verify each other over repeated rounds drifted into mutual approval across most models tested, sooner in stronger ones, and less shared history or narrower scope reduced it (arXiv 2609.24967; one environment, unreplicated). Lesson for review loops: the verifier gets a fresh context with no shared log with the author, and verification is paid on outcome, not on agreement.
 
-
-Verify paper results (accuracy deltas, token counts) against primary arxiv sources before treating them as benchmarks. Mechanism effectiveness is task- and domain-specific. Test on a held-out sample before deploying at scale.
 
 ---
 
@@ -228,23 +188,14 @@ Verify paper results (accuracy deltas, token counts) against primary arxiv sourc
 ## Decision Checklist
 
 - [ ] **Routing**: Is the problem multi-option with measurable fit signal? → auction (#3)
-- [ ] **Attribution**: Does the output depend on contributions from multiple sources? → Shapley (team-theory #4); if members can game the score, add reputation gating (#5)
 - [ ] **Aggregation**: Does synthesis combine claims with varying quality? → reasoning-tree audit (#13) + mechanism-design synthesis (#7)
 - [ ] **Trust calibration**: Are participants heterogeneous in track record? → reputation gating (#5)
 - [ ] **Tradeoff detection**: Are there multiple incommensurable objectives? → Pareto-Nash (#9) or negotiation (#12)
-- [ ] **High-stakes binary decision**: Needs evidential audit trail? → courtroom debate (#8)
 - [ ] **Adversarial context**: Claims may be injected or manipulated? → per-claim credibility scoring (#14)
 - [ ] **Multi-stakeholder output**: Multiple user types with different needs? → generative social choice (#15)
-- [ ] **Prediction / forecast**: Confidence calibration required? → prediction market (#11)
 - [ ] **Long-running coordination rule**: Has a measurable quality signal over many runs? → evolutionary coordination search (#10)
-- [ ] **Multi-party context-sharing risk**: Members may produce overlapping analysis? → belief-driven coordination (#1)
-- [ ] **Best-of-N synthesis (discrete answer, shared payoff)**: Need to recover minority-correct? → [team-theory #11 aggregation](../foundations-team-theory/SKILL.md) and BMV (#18)
-- [ ] **Best-of-N synthesis (open-ended, shared payoff)**: Lexically diverse but semantically clustered candidates? → [team-theory #11 aggregation](../foundations-team-theory/SKILL.md) and RCS (#19)
-- [ ] **Repeated team optimization**: Repeated runs with an adequately precise contribution signal? → online Shapley prompt evolution (team-theory #17)
-- [ ] **Debate role-fit ambiguity**: Best plaintiff/defense not the obvious specialist? → meta-debate role routing (#16)
-- [ ] **High-stakes act/escalate**: Debate agreement is not enough? → conformal social choice (#20)
+- [ ] **Shared payoff** (attribution, debate, best-of-N, act/escalate, topology): use `foundations-team-theory`, not this checklist
 - [ ] **Cross-trust delegation**: Delegate can self-claim quality or authority? → attested delegation contract (#21)
-- [ ] **Team topology**: measured synthesis/coordination bottleneck, independent workstreams or ownership gaps? → compare flat and coalition routing (team-theory #22); size alone is insufficient
 
 ---
 
@@ -277,38 +228,12 @@ Quick stacks:
   **Outputs:** Recommended safeguards with their trigger, reputation evidence and uncertainty, ZOPA range or no-deal flag, and payoff-scale test result.
   **If an LLM runs the negotiation:** do not accept deal rate as the success metric — it saturates across frontier models while surplus extraction, belief calibration, and constraint compliance still diverge sharply (TERMS-Bench, arXiv:2605.13909, 2026, 13 systems). Score surplus captured against the counterpart's latent payoff, and treat a high close rate with low surplus as conceding, not winning.
 
-- **High-quality synthesis**: #13 (reasoning-tree audit) + #7 (mechanism-design synthesis) + #11 (confidence betting)
-  **Inputs:** Candidate outputs or claims, evidence source per claim, participant confidence estimates, synthesis stakes (reversible vs. irreversible decision).
-  **Rules:** Audit reasoning tree to First Point of Disagreement before aggregating (#13); require dissent as a mandatory section in synthesis output (#7); run a self-critique calibration step (CritiCal-inspired) on participant confidence before staking (#11) — overconfident participants otherwise dominate.
-  **Outputs:** Synthesized recommendation with dissent section, per-claim evidence trace, calibrated confidence interval, list of unresolved disagreements requiring further evidence.
-
-- **High-stakes act/escalate**: #13 (reasoning-tree audit) + #11 (confidence elicitation) + #20 (conformal social choice)
-  **Inputs:** Candidate actions, member probability distributions, calibration table or shadow-case history, escalation cost.
-  **Rules:** Use a fixed closed-label procedure with representative labeled calibration cases and an exchangeability justification. A singleton proceeds to task validation and authorization; multiple or empty sets trigger the evidence/escalation path. Marginal set coverage does not guarantee individual correctness. See #20 for calibration prerequisites.
-  **Outputs:** Singleton action or escalation reason, prediction set, confidence/calibration note, evidence that would shrink the set.
-
 - **Cross-trust delegation**: #21 (attested delegation contracts) + #3 (auction routing) + #5 (reputation gating)
   **Inputs:** Delegate pool, attested capabilities, authority boundary, acceptance criteria, failure policy.
   **Rules:** Filter by verified capability before any bidding; never route by self-claimed quality; give the winner a bounded contract; update reputation only from verified outcomes.
   **Outputs:** Eligible delegate set, chosen delegate, delegation contract, typed failure/recovery path, reputation update.
 
-- **Large-team coalition routing (shared payoff)**: route to [team-theory #22](../foundations-team-theory/assets/templates/team-theory/22-coalition-formation-routing.md); pair with belief-driven coordination (team-theory #1). Add reputation gating (#5) here only if members can game their own standing.
-
-- **Multi-party teams (always-on baseline)**: team-theory #1 (belief-driven coordination) + team-theory #4 (Shapley) + #7 (synthesis with required dissent)
-  **Inputs:** Team member count, context overlap risk (do members share the same documents/signals?), contribution measurability (can each member's marginal value be isolated?).
-  **Rules:** Assign each member a unique belief lane to break pooling equilibrium (#1); compute Shapley marginal-contribution score per member per run (#4); synthesis must include dissent section — loudest-wins aggregation is the default failure mode (#7).
-  **Outputs:** Belief lane assignment per member, Shapley contribution scores, synthesized output with dissent preserved, free-rider flag if any member's marginal contribution is near zero.
-
-- **Best-of-N (discrete answer, shared payoff)**: route to [team-theory #11 aggregation](../foundations-team-theory/SKILL.md) and its BMV template (#18). If a hard oracle (test suite, schema check, calculator) is available, use it directly.
-
-- **Best-of-N (open-ended generation, shared payoff)**: route to [team-theory #11 aggregation](../foundations-team-theory/SKILL.md) and its RCS template (#19). Check whether semantic outliers contain useful evidence before selection.
-
-- **High-frequency team optimization (shared payoff)**: route to team-theory #4 and [#17](../foundations-team-theory/assets/templates/team-theory/17-online-shapley-prompt-evolution.md) for contribution-guided prompt evolution; gate autonomy by reputation tier here (#5) and require held-out validation before adopting any mutated prompt.
-
-- **Building a multi-agent LLM application (full-stack recipe)**: team-theory #1 (belief-driven coordination) + #21 (attested delegation) + #5 (reputation gating) + team-theory #20 (conformal act/escalate) + team-theory #4 (Shapley attribution)
-  **Inputs:** Agent pool (roles, capabilities, trust provenance), task decomposition map, reversibility of downstream actions, success metric per agent.
-  **Rules:** Assign belief lanes at design time so agents receive differentiated context and cannot pool into a uniform analysis (#1); route sub-tasks only to delegates with attested (not self-claimed) capability — the provenance paradox shows self-claimed routing performs worse than random (#21); start every new agent on probationary tier; promote only against predefined task-relative outcome and calibration criteria (#5); three successes alone do not establish reliability; when calibrated selection is applicable, a singleton proceeds to independent task validation and authorization; multiple or empty sets trigger escalation (#20); compute Shapley marginal contribution per agent per release epoch to detect free-riders and guide prompt or architecture revision (#4). Compare flat and coalition structures only when measured coordination/synthesis cost, independent workstreams or ownership gaps justify the experiment (team-theory #22). Preserve dissent and source traces in either; six agents alone does not establish a coalition advantage.
-  **Outputs:** Belief-lane assignment per agent, attested-capability registry, reputation tier per agent, act/escalate gate policy, Shapley contribution report per epoch, topology comparison and coalition map only if the task-specific trigger applies; record quality, cost, latency and dissent preservation for the selected structure.
+Shared-payoff stacks (multi-party teams, best-of-N, act/escalate, high-frequency prompt evolution, large-team coalitions, full-stack multi-agent applications): see "When Multi-Agent Pays" in [foundations-team-theory](../foundations-team-theory/SKILL.md); add reputation gating (#5) and attested delegation (#21) here only where members can game their standing or self-claim quality.
 
 ---
 
@@ -318,17 +243,10 @@ Quick stacks:
 
 - Per-mechanism playbooks: [assets/templates/game-theory/](assets/templates/game-theory/) (one file per primitive)
 - Composition guide: [assets/templates/game-theory/README.md](assets/templates/game-theory/README.md)
-- Redirect stubs for mechanisms moved to team-theory (the index above links the live playbooks): [01](assets/templates/game-theory/01-econ-belief-driven.md), [02](assets/templates/game-theory/02-adversarial-debate.md), [04](assets/templates/game-theory/04-shapley-contribution.md), [08](assets/templates/game-theory/08-courtroom-proclaim.md), [11](assets/templates/game-theory/11-prediction-market.md), [13](assets/templates/game-theory/13-reasoning-tree-audit.md), [16](assets/templates/game-theory/16-meta-debate-routing.md), [17](assets/templates/game-theory/17-online-shapley-prompt-evolution.md), [18](assets/templates/game-theory/18-beyond-majority-voting.md), [19](assets/templates/game-theory/19-radial-consensus-score.md), [20](assets/templates/game-theory/20-conformal-social-choice.md), [22](assets/templates/game-theory/22-coalition-formation-routing.md)
 - Formal theory map: [references/formal-theory-map.md](references/formal-theory-map.md)
 - Current patterns, scenarios, and traps: [references/patterns-scenarios-traps.md](references/patterns-scenarios-traps.md)
 - Domain-agnostic primitives overview: [references/primitives-overview.md](references/primitives-overview.md)
 - Sources: [`data/sources.json`](data/sources.json). Source links and verified dates in each per-mechanism file are the canonical evidence tier.
-
----
-
-## Current Pattern Review
-
-Use [references/patterns-scenarios-traps.md](references/patterns-scenarios-traps.md) before applying a primitive to production or agent-team routing. It distinguishes durable game-theory mechanisms from fast-moving LLM-agent papers, lists scenario-specific stacks, and calls out traps such as majority-vote collapse, uncalibrated confidence, static role assignment, overusing debate, and source claims that have not been rechecked against primary papers.
 
 ---
 

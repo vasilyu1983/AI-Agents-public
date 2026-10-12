@@ -1,5 +1,7 @@
 # Command Registry And Discovery
 
+> **Provenance.** Source paths named below come from a private analysis of one shipped runtime and cannot be checked against public docs. Treat them as design patterns, not as current product behavior.
+
 ## Table Of Contents
 
 - [Core Pattern](#core-pattern)

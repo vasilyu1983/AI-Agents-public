@@ -3,7 +3,7 @@ name: ai-agents
 description: AI agent architecture, graph and loop composition, protocol choice, evaluation, and observability. Use when scoping or reviewing systems before implementation.
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.3"
-last_validated: 2026-09-27
+last_validated: 2026-10-09
 ---
 
 # AI Agents Development — Architecture Hub
@@ -31,6 +31,7 @@ Use this skill when the user asks for:
 
 ## Use Other Skills for Depth
 
+- Shared platform under many agents (LLM gateway, model routing, agent identity, MCP gateway, tracing, cost, EU/UK classification) → `ai-agent-platform`
 - Prompt contracts and structured outputs → [`../ai-prompt-engineering/SKILL.md`](../ai-prompt-engineering/SKILL.md)
 - Retrieval, chunking, reranking, search quality → [`../ai-rag/SKILL.md`](../ai-rag/SKILL.md)
 - Vector-brain implementation, schemas, ingest scripts, manifests, and retrieval tool contracts → [`../ai-vector-brain/SKILL.md`](../ai-vector-brain/SKILL.md)

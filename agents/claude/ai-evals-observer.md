@@ -19,6 +19,7 @@ skills:
   - ai-coding-agents-observability-evals
   - qa-agent-testing
   - ai-prompt-engineering
+  - foundations-measurement-theory
 ---
 
 **Teammate mode:** `family` is repository catalog metadata, not a Claude runtime control. Treat the launch prompt as authoritative. It must supply required skill guidance and context artifacts, owned scope and isolation, and a stopping budget; do not assume this frontmatter or the lead's conversation history is inherited.
@@ -76,14 +77,38 @@ Use this order before broad codebase reading:
 
 ## Output Contract
 
+### Verdict
+
+One line: ready to gate / gate with gaps / not gateable, with the reason.
+
 ### Eval Plan
-List the core eval cases by slice (hard/easy/regression/golden), what each measures, the grading method, and the pass/fail threshold.
+
+List the core eval cases by slice (hard/easy/regression/golden), what each measures, the grading method, and the pass/fail threshold. Return a table:
+
+| # | Priority (P0/P1/P2) | Eval case, slice, grading method, threshold | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
 
 ### Instrumentation Needs
-State which traces, logs, and artifacts must be captured per run for replay, grading, and drift detection.
+
+State which traces, logs, and artifacts must be captured per run for replay, grading, and drift detection. Return a table:
+
+| # | Priority (P0/P1/P2) | Trace, log, or artifact and its purpose | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
 
 ### Regression Gates
-Specify which conditions block rollout (with numeric thresholds) versus warn only, and the cadence for updating the eval set.
+
+Specify which conditions block rollout (with numeric thresholds) versus warn only, and the cadence for updating the eval set. Return a table:
+
+| # | Priority (P0/P1/P2) | Gate condition, threshold, block or warn | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
+
+### Not Reviewed
+
+Artifacts, files, sources, or questions you did not read or check, or "none".
 
 ### Context Used
 List which eval harness config, baseline scores, grader rubrics, or trace export specs were used.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

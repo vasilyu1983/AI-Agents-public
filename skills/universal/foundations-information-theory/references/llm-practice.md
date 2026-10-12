@@ -16,7 +16,7 @@ Read this when an LLM evaluation or serving decision rests on an information qua
 **When not to use it.**
 - Raw rates ignore the model's own size. The same paper reports that once parameters are counted (adjusted compression rate), large models are poor compressors of 1 GB of data. Do not claim a practical compressor from raw NLL.
 - Their experiments chunk data into 2,048-byte sequences because of context limits; classical compressors see longer context. Compare at matched context.
-- Average-case compression tracking capability (Huang et al., COLM 2024: 31 models, 12 benchmarks, ρ = −0.93 overall, −0.935 to −0.953 per domain) is not Kolmogorov optimality; frontier models score poorly on the KoLMogorov Test (ICLR 2025).
+- Average-case compression tracking capability (Huang et al., COLM 2024: strong negative correlation between bits per character and benchmark score across about 30 public models and 12 benchmarks; direction only) is not Kolmogorov optimality; frontier models score poorly on the KoLMogorov Test (ICLR 2025).
 
 ## 2. Perplexity, BPB and BPC comparability
 

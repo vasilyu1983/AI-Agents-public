@@ -68,7 +68,7 @@ Only flag a gap when a concrete member could resolve it. "We need more context" 
 [why my position holds despite this counterargument, or how I have adjusted]
 
 ### Points I concede
-[what the other perspectives got right]
+[what the other perspectives got right — name the new argument or evidence that changed your view; agreement alone is not a reason to concede]
 ```
 
 ## Persona Examples

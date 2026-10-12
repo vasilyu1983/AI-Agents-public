@@ -82,7 +82,7 @@ _Watch for_: orchestrators that assume "I told both agents the same thing, so th
 
 The MAST taxonomy (Cemri et al. 2025) groups multi-agent LLM failures into system-design issues, inter-agent misalignment, and task-verification gaps. Grounding theory explains the specification and context-loss parts of those categories precisely:
 
-| MAST-style sub-failure | Grounding primitive | Fix |
+| MAST-style sub-failure (mapping is this skill's own inference) | Grounding primitive | Fix |
 |---|---|---|
 | Disobeying task specification | Presupposition (#6) failed; agent filled in different antecedent | Resolve definite references and pronouns before handoff |
 | Step repetition / weak conversation history | Common ground (#1) decay; no shared state of "we already did X" | Persist key state outside context window; re-establish at compression boundaries |
@@ -117,7 +117,7 @@ Agents trained on completion incentives default to guessing under uncertainty. W
 
 The correction is delivered, acknowledged, and then not propagated. The agent says "understood, not that file" and proceeds on the rest of its pre-repair model — including whatever else that model got wrong. Repair (#5) was treated as an utterance to be received rather than a common-ground (#1) update to be applied.
 
-This is distinct from "no repair channel": the channel worked, the message landed, the shared state didn't move. Poelitz et al. (2026) observe it directly — GPT-4.1 did not reliably update assumptions after repairs in their puzzle-matching setup; jointly used vocabulary remained small and decreased across trials. These are model- and task-specific observations.
+This is distinct from "no repair channel": the channel worked, the message landed, the shared state didn't move. Poelitz et al. (2026, preprint) benchmark common ground in human-AI collaboration; test locally whether corrections propagate.
 
 **Fix**: after a correction, require restatement of the revised shared state rather than of the correction. Acknowledging a delta is weak evidence (#4); restating the resulting whole is demonstration.
 
@@ -131,7 +131,7 @@ Grounding a brief is static grounding. Maintaining a joint plan is dynamic groun
 
 ### Trap: Protocol conformance mistaken for shared meaning
 
-The handoff uses A2A or MCP, the payload validates against its schema, so the integration is treated as sound. Schema validity is syntactic-layer conformance; whether the receiver's interpretation matches the sender's is a semantic-layer question the protocol does not answer (`SemanticProtocols2026`, 18 protocols surveyed).
+The handoff uses A2A or MCP, the payload validates against its schema, so the integration is treated as sound. Schema validity is syntactic-layer conformance; whether the receiver's interpretation matches the sender's is a semantic-layer question the protocol does not answer (`SemanticProtocols2026`).
 
 **Fix**: treat clarification, context alignment, and verification as application responsibilities. A well-typed payload with an unresolved definite reference (#6) inside it is still a presupposition failure.
 
@@ -229,7 +229,7 @@ Benchmark: NoisyToolBench (ambiguous real-world tool-use instructions). AwN sign
 - **Pragmatics layer (high confidence)**: Stalnaker (1974), Sperber & Wilson (1986). Standard pragmatics.
 - **Common-knowledge logic (high confidence)**: Aumann (1976), Lewis (1969). Stable.
 - **Multi-agent LLM application layer (verify before using)**: MAST (Cemri et al. 2025) and related 2025–2026 work. Empirical percentages are dataset-specific — re-verify against your own production traces.
-- **Newer application studies**: `DynamicGrounding2026`, `CommonGroundBench2026`, `SemanticProtocols2026`, and `NCBench2026` were added as preprints; check for published versions before citing. CommonGroundBench uses GPT-4.1 in a small human-AI puzzle study, and NC-Bench examines small open models. Use their observed failure modes as hypotheses to test locally, not universal frontier-model rates.
+- **Newer application studies**: `DynamicGrounding2026`, `CommonGroundBench2026`, `SemanticProtocols2026`, and `NCBench2026` were added as preprints; check for published versions before citing. CommonGroundBench is a small human-AI study, and NC-Bench examines small open models. Use their observed failure modes as hypotheses to test locally, not universal frontier-model rates.
 - **Audience design (mixed)**: Bell (1984) original is solid; computational adaptations to LLMs are recent and unsettled.
 
 When in doubt, primary sources before secondary.

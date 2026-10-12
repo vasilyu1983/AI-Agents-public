@@ -41,6 +41,8 @@ With agent view enabled, the commands have distinct meanings:
 
 Use `/subtask` when the current conversation should remain the lead and consume a result notification. Use `/fork` when the copied session should continue as an independently steerable session. Do not document `/fork` as the universal subagent command: its meaning depends on agent-view configuration, and current agent-view documentation assigns subagent creation to `/subtask`.
 
+From inside a session, the Agent tool forks programmatically: `Agent({ subagent_type: "fork", prompt })` launches a background subagent that inherits the full conversation context and always runs on the parent model (a `model` override is ignored). Any other `subagent_type`, or none, starts a fresh general-purpose agent. The same rule applies: a fork is the caller executing directly, so it must not re-delegate. This is the mechanism `ai-coding-agents` refers to as "fork = subagent type `fork`" (Agent tool description, checked 2026-10-10).
+
 ## Cache-Prefix Sharing
 
 - Forked children can reuse the parent's prompt-cache prefix.

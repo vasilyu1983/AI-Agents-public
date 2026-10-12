@@ -7,6 +7,7 @@ Use structured outputs between nodes so the lead can validate, merge, and re-dis
 - [Task Graph Schema](#task-graph-schema)
 - [Worker Report Schema](#worker-report-schema)
 - [Status Vocabulary](#status-vocabulary)
+- [Optional check_defect Field](#optional-check_defect-field)
 - [Dependency Output Contract](#dependency-output-contract)
 - [Lead Merge Contract](#lead-merge-contract)
 - [Risk Levels](#risk-levels)
@@ -78,6 +79,21 @@ Use a small stable status set:
 - `completed` - output is ready for validation
 - `blocked` - waiting on dependency, approval, or missing information
 - `failed` - worker could not complete; lead must decide retry or re-plan
+
+## Optional check_defect Field
+
+Builder, fixer and other writer outputs (any worker allowed to change files) may carry an optional `check_defect` field (string). Read-only workers do not get it. Empty or absent means no defect. A non-empty value means the agent says a check it is judged by is wrong; it names the check and gives the reason.
+
+```json
+{ "check_defect": "tests/auth.test.ts case 4 expects a 200 for an expired token; the spec requires 401" }
+```
+
+Rules:
+
+- A non-empty `check_defect` stops the loop with stop reason `check_defect` and escalates to a human. The loop does not retry and does not continue to the next round.
+- The agent must never edit the check itself. It reports the defect and stops; a human or the parent decides whether the check changes.
+- Keep the check files outside the agent's write scope, so the field is the only available route.
+- Evidence is one study: escalation channels plus an intervention cut reward hacking from 23.6% to 5.3% (arXiv 2608.29460). Treat it as a direction, not a measured effect for your setup.
 
 ## Dependency Output Contract
 

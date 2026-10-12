@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Verify exact witnesses for max c.x, Ax<=b,x>=0 and its min-form dual."""
+"""Verify exact witnesses for max c.x, Ax<=b,x>=0 and its min-form dual.
+
+Exit codes: 2 for invalid input. Otherwise 0, even when the witness fails
+(optimal:false in the JSON). Read the optimal field, or pass --strict to
+exit 1 unless optimal is true.
+"""
 import argparse
 from decimal import Decimal, InvalidOperation
 from fractions import Fraction
@@ -88,8 +93,9 @@ def loads(text):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("input", nargs="?", default="-", help="JSON file or - for standard input")
+    parser.add_argument("--strict", action="store_true", help="exit 1 unless the witness is optimal")
     args = parser.parse_args()
     try:
         raw = sys.stdin.read() if args.input == "-" else Path(args.input).read_text(encoding="utf-8")
@@ -98,7 +104,7 @@ def main():
         print(json.dumps({"error": str(exc)}))
         return 2
     print(json.dumps(result, sort_keys=True))
-    return 0
+    return 1 if args.strict and not result["optimal"] else 0
 
 
 if __name__ == "__main__":

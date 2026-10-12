@@ -1,10 +1,11 @@
 {
   "version": 1,
+  "max_agents": 42,
   "workflow": {
     "engine": "review",
     "codex": "parent-led",
     "description": "Check every quote, link, figure and attribution in a target document against the source it cites, then fix only the confirmed defects, with fresh agents every round. mode review: four source reviewers and two refuters per finding, then a fixer, until a CLEAN round or args.maxRounds (default 3). Never commits, pushes, or opens a PR.",
-    "whenToUse": "Use after /deep-research or on any report, skill reference or profile document that cites sources. args: { target: \"<repo-relative file or directory>\", maxRounds?: 3 }; the target is required, and a finding outside it is dropped in code. Reviewers judge a claim only after reading its source; a source they cannot open is reported as unverified, never as false. The fixer runs with no network access, so it can only bring the text in line with the source wording a confirmed finding quotes, or remove the claim; a human re-checks those edits. mode build is inherited from review-fix-loop and has no source-specific use. A failed reviewer, refuter or judge ends the run INCOMPLETE; every stop short of CLEAN returns an escalation for a human. Files under .git, .claude, .codex, .agents, .github and other protected paths, and instruction files such as AGENTS.md and CLAUDE.md, are out of reach: a change to one stops the run, so a human edits them outside any workflow.",
+    "whenToUse": "Use after /deep-research or on any report, skill reference or profile document that cites sources. args: { target: \"<repo-relative file or directory>\", maxRounds?: 3 }; the target is required, and a finding outside it is dropped in code. Reviewers judge a claim only after reading its source; a source they cannot open is reported as unverified, never as false. The fixer is told not to run network commands (a prompt rule, not a sandbox), so it should only bring the text in line with the source wording a confirmed finding quotes, or remove the claim; a human re-checks those edits. mode build is inherited from review-fix-loop and has no source-specific use. A failed reviewer, refuter or judge ends the run INCOMPLETE; every stop short of CLEAN returns an escalation for a human. Files under .git, .claude, .codex, .agents, .github and other protected paths, and instruction files such as AGENTS.md and CLAUDE.md, are out of reach: a change to one stops the run, so a human edits them outside any workflow.",
     "phases": [
       { "title": "Review", "detail": "Fresh source reviewers per dimension, every round" },
       { "title": "Verify", "detail": "Two adversarial refuters per finding; both must refute to kill it" },
@@ -15,6 +16,10 @@
   },
   "review": {
     "extends": "adversarial-review",
+    "roles": {
+      "reviewer": { "tools": ["Read", "Grep", "Glob", "Bash"] },
+      "judge": { "tools": ["Read", "Grep", "Glob", "Bash"] }
+    },
     "returns": "{ mode, verdict: CLEAN | FINDINGS | PASS | FAIL | BLOCKED | INCOMPLETE, rounds, history, stop_reason, escalation?, observed_changes, snapshot }",
     "target": {
       "default": "No target: the run stops before review, because this workflow enforces its target in code. Pass args.target.",
@@ -86,7 +91,9 @@
             "type": "boolean",
             "description": "true if the source does support the document, the claim is already handled, or it lies outside the target"
           },
-          "reason": { "type": "string", "description": "Quote the source text or the fetched body that settles it" }
+          "reason": { "type": "string", "description": "Quote the source text or the fetched body that settles it" },
+          "executed": { "type": "boolean", "description": "true if you ran a command (test, repro, fetch or grep) to check the claim" },
+          "command": { "type": "string", "description": "The command you ran, or an empty string if none" }
         }
       }
     }

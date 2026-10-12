@@ -13,7 +13,7 @@
 
 ## Runnable finite-state replay
 
-Run `python3 scripts/replay_plan.py data/plan-fixtures.json`. The fixture uses boolean facts, named actions, preconditions, add/delete effects and nonnegative costs. The helper rejects duplicate JSON fields, unknown actions and overlapping effects, replays only legal steps, and reports goal satisfaction, total cost and the first violated precondition. It verifies a supplied sequence in its supplied model; it neither searches for a plan nor certifies actual tool effects or action safety.
+Run `python3 scripts/replay_plan.py data/plan-fixtures.json`. The fixture uses boolean facts, named actions, preconditions, add/delete effects and nonnegative costs. The helper rejects duplicate JSON fields, unknown actions and overlapping effects, replays only legal steps, and reports goal satisfaction, total cost and the first violated precondition. It verifies a supplied sequence in its supplied model; it neither searches for a plan nor certifies actual tool effects or action safety. Exit code 0 means the replay ran, not that the plan works: `failed-precondition` and `goal-unmet` also exit 0. Read `status`, or pass `--strict` to exit 1 unless the status is `goal`. It cannot detect a missing delete effect or frame assumption in the model; review those separately. A same-model critic is not a sound verifier.
 
 ## Executor handoff
 

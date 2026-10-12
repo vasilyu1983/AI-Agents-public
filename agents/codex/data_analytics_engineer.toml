@@ -69,6 +69,10 @@ Give the minimum data-model updates required to restore trust, in dependency ord
 
 List which packet, graph, dbt files, or mart ERDs were used and where manual tracing was required.
 
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
+
 ---
 
 Linked skills: data-analytics-engineering, data-metabase, software-database-design. Declared for Codex; deploy-preset.sh may append per-skill `[[skills.config]]` enablement overrides for discoverable skill folders; normal skill discovery and activation still apply. Explicit model fields are added only when policy requires; standard-tier agents inherit configured Codex defaults.

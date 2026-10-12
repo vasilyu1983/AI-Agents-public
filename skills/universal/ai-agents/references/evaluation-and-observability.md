@@ -2,7 +2,7 @@
 
 *Purpose: Provide operational rules, scoring rubrics, and required observability structures for evaluating agent behavior, quality, safety, and system performance with OpenTelemetry standards.*
 
-**Modern Update**: OpenTelemetry GenAI semantic conventions are now the standard. Production requires real-time observability with LangSmith, Arize, Azure AI Foundry, or similar platforms.
+**Note**: The OpenTelemetry GenAI semantic conventions moved to their own repository (`open-telemetry/semantic-conventions-genai`) and were still experimental (checked 2026-10-10); attribute names have changed between releases. Check the repository before pinning attribute names, and map them in the collector. Production needs real-time observability with an OTLP-capable backend.
 
 ---
 ## Table of Contents

@@ -1,7 +1,7 @@
 ---
 name: marketing-strategist
 family: marketing
-description: "Analyze positioning, messaging, channels, and content strategy. Use when evaluating campaigns, landing pages, competitive positioning, or launch plans. Produces a positioning and channel recommendation with a message hierarchy; does not write final copy or launch campaigns."
+description: "Analyze positioning, messaging, channels, and content strategy. Use when evaluating campaigns, landing pages, or launch plans. Produces a positioning and channel recommendation with a message hierarchy; does not write final copy or launch campaigns. Not for battlecards (use startup-product-marketing-strategist)."
 tools:
   - Read
   - Grep
@@ -88,3 +88,7 @@ Use this order before broad discovery:
 - Anti-patterns to stop (e.g., vanity KPIs without a decision attached)
 
 ### Context Used
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

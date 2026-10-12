@@ -105,6 +105,8 @@ Score a dimension only when its evidence window, eligible contribution count, re
 
 If the sampled work is too small, dominated by one incident or generated migration, or cannot be joined reliably to review and outcome data, return `insufficient evidence` for the affected dimension and show what additional sample would resolve it. Do not roll an unknown dimension into a composite score, and do not give it neutral credit. Any person-level report must include the sampled items and an appeal/correction path so mistaken attribution can be fixed before the result informs coaching or staffing decisions.
 
+A tier is a measurement claim about a person. Before you report one, load [foundations-measurement-theory](../foundations-measurement-theory/SKILL.md): one rater on a five-commit sample has unmeasured reliability, point cutoffs such as "> 80% = 3" are untested constructs, and a sum of ordinal points supports an ordinal tier, not a ratio "share of maximum". Say "insufficient" when the replication facets (items, raters, occasions) are not met.
+
 ## Output Modes
 
 - **Person quality report** — individual deep-dive with 6-dimension breakdown, sampled commit quality, CC-* findings

@@ -4,7 +4,7 @@
     "description": "Primary academic references for 12 causal inference primitives: DAGs/SCMs, do-calculus, backdoor/frontdoor criteria, instrumental variables, RDD, DiD, synthetic control, propensity score methods, CATE/uplift, Simpson's paradox, mediation analysis, and sensitivity analysis.",
     "last_updated": "2026-09-23",
     "skill": "foundations-causal-inference",
-    "total_sources": 39
+    "total_sources": 41
   },
   "foundational_books": [
     {
@@ -280,6 +280,22 @@
       "name": "Callaway, Goodman-Bacon & Sant'Anna (2024) — Difference-in-Differences with a Continuous Treatment",
       "url": "https://www.nber.org/papers/w32117",
       "description": "NBER Working Paper 32117. Continuous-treatment DiD estimator (implemented in the `contdid` package); corrects the prior 'interaction-weighted estimator' misattribution in primitives-overview.md.",
+      "url_check": "manual"
+    },
+    {
+      "id": "MontielOleaPflueger2013",
+      "name": "Montiel Olea & Pflueger (2013) — A Robust Test for Weak Instruments, J. Business & Economic Statistics 31(3):358-369",
+      "url": "https://doi.org/10.1080/00401706.2013.806694",
+      "description": "Effective first-stage F and weak-IV-robust inference for several instruments; basis for the several-instrument rule in primitive #4.",
+      "accessed": "2026-10-11",
+      "url_check": "manual"
+    },
+    {
+      "id": "AndrewsStockSun2019",
+      "name": "Andrews, Stock & Sun (2019) — Weak Instruments in Instrumental Variables Regression: Theory and Practice, Annual Review of Economics 11",
+      "url": "https://doi.org/10.1146/annurev-economics-080218-025643",
+      "description": "Review of weak-IV diagnostics and robust inference; pointer for the over-identified procedure in primitive #4.",
+      "accessed": "2026-10-11",
       "url_check": "manual"
     }
   ],

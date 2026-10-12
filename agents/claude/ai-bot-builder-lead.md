@@ -96,3 +96,7 @@ List multi-turn test cases, memory persistence tests, recall quality baselines, 
 
 ### Context Used
 List which task packet, KB schema, escalation rules, or conversation flow artifacts were used.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

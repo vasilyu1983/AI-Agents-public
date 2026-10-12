@@ -17,7 +17,13 @@ Schema: exactly five object keys; `A` is `m` rows of `n` scalars, with `m,n >= 1
 | `scalar_characters` | 1000 |
 | `decimal_exponent_magnitude` | 1000 |
 
-Output fields: `primal_feasible`, `dual_feasible`, `optimal`, `primal_objective`, `dual_objective`, `gap` (dual minus primal), `primal_slacks` (`b-Ax`), `dual_slacks` (`A^Ty-c`), `primal_violations` and `dual_violations` (indexed violated nonnegativity/constraint names). A negative gap between failed witnesses has no bound interpretation. Invalid input exits 2 with a JSON error on standard output; valid input exits 0 even when a witness fails. Convert other LP forms (min, equality, free variables) to this canonical pair explicitly and keep the mapping back to the original variables.
+Output fields: `primal_feasible`, `dual_feasible`, `optimal`, `primal_objective`, `dual_objective`, `gap` (dual minus primal), `primal_slacks` (`b-Ax`), `dual_slacks` (`A^Ty-c`), `primal_violations` and `dual_violations` (indexed violated nonnegativity/constraint names). A negative gap between failed witnesses has no bound interpretation. Invalid input exits 2 with a JSON error on standard output; valid input exits 0 even when a witness fails (`optimal: false`), unless `--strict` is passed, which exits 1 unless `optimal` is true. Convert other LP forms (min, equality, free variables) to this canonical pair explicitly and keep the mapping back to the original variables.
+
+## Infeasibility and unboundedness certificates
+
+The helper checks only an optimal primal-dual pair. A Farkas dual ray proves infeasibility of `Ax <= b, x >= 0`: any `y >= 0` with `A^T y >= 0` and `b^T y < 0`. An improving primal ray (`d >= 0`, `Ad <= 0`, `c^T d > 0`) proves unboundedness when a feasible point exists. A failed optimal witness proves neither; ask the solver for a ray or run [infeasibility-diagnosis.md](infeasibility-diagnosis.md). Source: textbook LP duality (see the Boyd-Vandenberghe lectures above).
+
+Dual values and shadow prices are not unique when the LP is degenerate. Report a range, or perturb the right-hand side and resolve, before quoting one number.
 
 ## Floating-point solvers
 
@@ -25,4 +31,4 @@ External solvers use tolerances. Evaluate residuals in original units, record fe
 
 Report the actual stopping status. A time limit may have an incumbent, no incumbent, or a useful bound; it is not synonymous with solved. “Infeasible or unbounded” is unresolved, and numerical failure is not an infeasibility proof; Gurobi's LOCALLY_OPTIMAL/LOCALLY_INFEASIBLE statuses (nonlinear barrier) are local, not global, evidence. Diagnosis steps (DualReductions=0, IIS, elastic relaxation): [infeasibility-diagnosis.md](infeasibility-diagnosis.md). A solver's “optimal” is subject to its tolerances. Source: [Gurobi status documentation](https://docs.gurobi.com/projects/optimizer/en/current/reference/numericcodes/statuscodes.html).
 
-For MILP record incumbent, best bound, absolute gap and solver-defined relative gap (including its zero-objective convention). This bundle's helper does not check integrality or branch-and-bound proofs. Sensitivity multipliers are not automatically valid discrete shadow prices; perturb and resolve where necessary.
+For MILP record incumbent, best bound, absolute gap and solver-defined relative gap (including its zero-objective convention). This bundle's helper does not check integrality or branch-and-bound proofs. For a MILP optimality claim that matters, the exact route is a verifiable certificate checked in rational arithmetic (the VIPR format, or a solver's exact mode where one exists; secondary sources, check the version you run); a floating solver's "optimal" stays tolerance-bound. Sensitivity multipliers are not automatically valid discrete shadow prices; perturb and resolve where necessary.

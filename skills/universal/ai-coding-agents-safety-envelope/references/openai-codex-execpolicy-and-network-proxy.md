@@ -1,5 +1,7 @@
 # OpenAI Codex Execpolicy and Network Proxy
 
+> **Verify before use.** This reference is a Codex source snapshot from May 2026 and was not re-verified against current Codex docs on 2026-10-09. Check command names, flags, and protocol details in the current Codex docs (https://developers.openai.com/codex) before copying them.
+
 Sources:
 - The OpenAI Codex repository, read at the release tag you target (execpolicy and network-proxy READMEs and config)
 - `codex-rs/execpolicy/README.md`

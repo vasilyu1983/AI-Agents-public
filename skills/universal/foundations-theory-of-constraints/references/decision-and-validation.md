@@ -18,6 +18,6 @@ Include actual incremental per-use API/cloud and transaction charges in TVC. Exc
 
 ## Buffers and follow-up
 
-Estimate task variation, correlations and contention; select buffer against delivery confidence and consequences. Fifty-percent and traffic-light zones are examples, not constants. Show completed-work fraction and consumed-buffer fraction separately and state the local ratio/zones. Review quality, risk and delivery evidence alongside buffer burn. Different variability can justify different buffers even at equal medians.
+Estimate task variation, correlations and contention; select buffer against delivery confidence and consequences. Fifty-percent and traffic-light zones are examples, not constants. Show completed-work fraction and consumed-buffer fraction separately and plot them on a fever chart; state the local zone boundaries. Review quality, risk and delivery evidence alongside buffer burn. Different variability can justify different buffers even at equal medians.
 
 Source boundary: canonical Goldratt/Dettmer texts in data/sources.json support the TOC process; empirical causal attribution and mathematical optimization require their own methods. The greedy counterexample is a checkable arithmetic construction, not a claimed study result.

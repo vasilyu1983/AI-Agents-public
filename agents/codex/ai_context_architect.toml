@@ -58,17 +58,41 @@ Use this order before broad codebase reading:
 
 ## Output Contract
 
+### Verdict
+
+One line: keep, restructure, or rebuild the current context model, with the reason.
+
 ### Context Model
-Describe the hot, warm, and cold layers, their token budgets, and where each component should live.
+
+Describe the hot, warm, and cold layers, their token budgets, and where each component should live, one row per layer or component. Return a table:
+
+| # | Priority (P0/P1/P2) | Layer or component, token budget, placement | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
 
 ### Packet Contract
-List the minimum fields and artifact paths each downstream worker should receive, with grounding precedence order.
+
+List the minimum fields and artifact paths each downstream worker should receive, with grounding precedence order. Return a table:
+
+| # | Priority (P0/P1/P2) | Field or artifact path and its precedence | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
 
 ### Failure Modes
-State what goes wrong if the current context model remains unchanged — include prompt bloat, stale retrieval, and memory boundary violations.
+
+State what goes wrong if the current context model remains unchanged, including prompt bloat, stale retrieval, and memory boundary violations. Return a table:
+
+| # | Priority (P0/P1/P2) | Failure mode and consequence | Evidence (file:line or source URL) | Confidence (measured/inferred/guess) |
+|---|---|---|---|---|
+
+### Not Reviewed
+
+Artifacts, files, sources, or questions you did not read or check, or "none".
 
 ### Context Used
 List which token usage logs, assembly pipeline config, or cache hit rate data were used.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
 
 ---
 

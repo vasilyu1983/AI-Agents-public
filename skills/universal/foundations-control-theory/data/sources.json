@@ -2,9 +2,9 @@
   "metadata": {
     "title": "AI Foundations Control Theory — Sources",
     "description": "Primary references for 12 control-theory primitives: PID, feedback/feedforward, observability, controllability, Lyapunov stability, MPC, Kalman filter, dead-time compensation, anti-windup, gain scheduling, circuit breaker, backpressure, rate limiting, and DeePC/behavioral systems",
-    "last_updated": "2026-09-17",
+    "last_updated": "2026-10-11",
     "skill": "foundations-control-theory",
-    "total_sources": 30,
+    "total_sources": 37,
     "verification_scope": "Targeted correctness and operational-artifact review; not a fresh verification of every historical paper."
   },
   "textbooks": [
@@ -48,6 +48,31 @@
       "name": "Release It! Design and Deploy Production-Ready Software",
       "url": "https://pragprog.com/titles/mnee2/release-it-second-edition/",
       "description": "Nygard, M., 2nd ed. (2018). Pragmatic Bookshelf. Canonical practitioner reference for circuit breaker and stability patterns in distributed systems (primitive #10).",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Strogatz2024",
+      "name": "Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry, and Engineering (3rd ed.)",
+      "author": "Strogatz, S. H.",
+      "year": 2024,
+      "publisher": "CRC Press",
+      "url": "https://www.routledge.com/Nonlinear-Dynamics-and-Chaos-With-Applications-to-Physics-Biology-Chemistry-and-Engineering/Strogatz/p/book/9780367026509",
+      "url_check": "manual",
+      "url_note": "publisher page not fetched; cited from the owner's copy of the book on 2026-10-11",
+      "description": "Standard first course in nonlinear dynamics. Cited in references/nonlinear-dynamics-checks.md for bifurcations and the parameter-sweep rule (ch. 3), hysteresis and bistability (§3.6-3.7), the definition of chaos on the Lorenz attractor (§9.3) and the Lyapunov exponent (§10.5). Cite at section level.",
+      "add_as_web_search": false
+    },
+    {
+      "id": "Sayama2015",
+      "name": "Introduction to the Modeling and Analysis of Complex Systems",
+      "author": "Sayama, H.",
+      "year": 2015,
+      "publisher": "Open SUNY Textbooks",
+      "isbn": "978-1-942341-08-6",
+      "url": "https://milneopentextbooks.org/introduction-to-the-modeling-and-analysis-of-complex-systems/",
+      "url_check": "manual",
+      "url_note": "open-textbook page not fetched; cited from the owner's copy on 2026-10-11; CC BY-NC-SA 3.0",
+      "description": "Open textbook with Python simulations. Cited in references/nonlinear-dynamics-checks.md for the emergence check: cellular automata (ch. 11-12) and agent-based models (ch. 19) as the simplest fixed-rule model that must reproduce a claimed collective pattern.",
       "add_as_web_search": false
     }
   ],
@@ -220,6 +245,46 @@
       "url": "https://arxiv.org/abs/2604.08831",
       "description": "Echigo, van Wijk, Mestres, Daş, Burdick & Ames (2026). arXiv:2604.08831. Particle-based probabilistic CBF framework providing tight probabilistic safety guarantees via sub-Gaussian concentration bounds and finite-sample CVaR estimates. Extends classical (deterministic) CBF to systems with sensor noise. Relevant when deterministic CBF is applied with noisy measurements. Paper-only; no code confirmed.",
       "add_as_web_search": false
+    },
+    {
+      "id": "LiuMeng-SelfCorrectionFeedback-2026",
+      "name": "Self-Correction as Feedback Control",
+      "url": "https://arxiv.org/abs/2604.22273",
+      "description": "Liu & Meng (2026). arXiv:2604.22273. Frames LLM self-correction as a feedback loop; iterating helps only while the error-correction rate over the error-introduction rate exceeds Acc/(1-Acc). Single preprint; treat as a heuristic, direction only. Source for the self-correction row in SKILL.md Anti-Patterns.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11"
+    },
+    {
+      "id": "Clauset-PowerLaw-2009",
+      "name": "Power-Law Distributions in Empirical Data",
+      "url": "https://arxiv.org/abs/0706.1062",
+      "description": "Clauset, Shalizi & Newman (2009). SIAM Review 51:661-703. Maximum-likelihood fit, KS goodness of fit and likelihood-ratio comparison; least squares on log-log plots is biased. Source for the heavy-tail row in references/nonlinear-dynamics-checks.md.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11"
+    },
+    {
+      "id": "Shimao-LLMCommitteeDivergence-2026",
+      "name": "Collective AI can amplify tiny perturbations into divergent decisions",
+      "url": "https://arxiv.org/abs/2603.09127",
+      "description": "Shimao, Khern-am-nuai & Kim (2026). arXiv:2603.09127. Multi-LLM committees diverge under meaning-preserving prompt edits. The authors call their statistic an annealed instability index, not a Lyapunov exponent, and state divergence is not yet linked to decision quality. Single preprint, direction only.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11"
+    },
+    {
+      "id": "ThinkingMachines-Nondeterminism-2025",
+      "name": "Defeating Nondeterminism in LLM Inference",
+      "url": "https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/",
+      "description": "He et al., Thinking Machines (10 Sep 2025). Temperature-0 nondeterminism comes from batch-size-dependent kernels; batch-invariant kernels remove it. Blog post, not peer reviewed.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11"
+    },
+    {
+      "id": "Lenton-EarlyWarning-2012",
+      "name": "Early warning of climate tipping points from critical slowing down: comparing methods to improve robustness",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3261433",
+      "description": "Lenton et al. (2012). Phil. Trans. R. Soc. A 370:1185. False positives are a key problem; results depend on window, filter and detrending; variance can fall; noise-induced transitions give no warning.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11"
     }
   ],
   "operational_verification": [

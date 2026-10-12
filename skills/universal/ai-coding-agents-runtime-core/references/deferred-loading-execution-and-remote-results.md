@@ -7,7 +7,7 @@ The runtime uses `ToolSearch` plus two explicit flags:
 - `shouldDefer`
 - `alwaysLoad`
 
-`tools/ToolSearchTool/prompt.ts` applies the deferral rules:
+`tools/ToolSearchTool/prompt.ts` (a path from a private runtime analysis, not checkable against public docs; treat as a design pattern) applies the deferral rules:
 
 - MCP tools defer by default
 - tools with `shouldDefer` defer

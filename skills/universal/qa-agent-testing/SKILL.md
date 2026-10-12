@@ -1,6 +1,6 @@
 ---
 name: qa-agent-testing
-description: "Builds QA harnesses for LLM agents. Use when evaluating tool, trace, red-team, regression, multi-agent, or carried-workspace trajectory behavior."
+description: "Builds QA harnesses and agent evals. Use when evaluating tool, trace, red-team, regression, multi-agent, or carried-workspace coding trajectories. Not for metric design (ai-evals)."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.4"
 last_validated: 2026-09-27
@@ -36,6 +36,8 @@ Use the starter templates in `assets/` for day-0 setup. The template keeps `10 t
 - Record traces: prompt or message history, tool name, args, outputs, latency, errors, retries, approvals, and side effects.
 
 **Flaky cases are classified, not retried into green.** When a case's verdict flips across runs, rerun it k=5 times in isolation and attribute the flip before touching the suite: same trace and different verdict means judge instability (fix the grader, not the agent); tool timeout, rate limit, or clock drift in the trace means harness flake (fix the fixture or mock); different tool choices from the same input means agent nondeterminism (it is a real finding for a blocking case, since an agent that only sometimes refuses has not learned to refuse). A quarantined blocking case carries an owner and an expiry date and makes the suite `INCONCLUSIVE`, never `PASS`. Do not add automatic retries to a gate; a retry hides the exact failure mode a red-team pack exists to find. Procedure and log fields in [regression-protocol.md](references/regression-protocol.md#flake-handling).
+
+**Before calling agent nondeterminism "chaos" or "sensitivity":** rule out serving nondeterminism first (batch-size-dependent kernels give different outputs at temperature 0), then measure with meaning-preserving prompt perturbations and report divergence as an instability index with an interval. Act on divergence only once it is linked to a quality metric. Checks and sources: [foundations-control-theory/references/nonlinear-dynamics-checks.md](../foundations-control-theory/references/nonlinear-dynamics-checks.md).
 
 **Minimal instrumentation:** Instrument agents at three points only — LLM call entry/exit (with span IDs), tool invocations (input, output, duration), and branching decision points (which path was chosen and why). Avoid instrumenting every intermediate computation; each additional trace dimension increases latency and storage cost, and the exact overhead depends on SDK, sampling, export path, and backend. Start minimal, expand only when a category of failure is consistently hard to diagnose without it.
 

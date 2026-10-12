@@ -98,7 +98,7 @@
       "id": "ScullyGrosofMitzenmacherITCS2022",
       "name": "Uniform Bounds for Scheduling with Job Size Estimates",
       "url": "https://doi.org/10.4230/LIPIcs.ITCS.2022.114",
-      "description": "Scully, Z., Grosof, I., & Mitzenmacher, M. (2022). ITCS 2022, LIPIcs Vol. 215. Source of the graceful-degradation result for M/G/1 scheduling with bounded multiplicative size-estimate error: SPRPT-with-bounce (C = 3.5) and PSPJF (C = 1.5); plain SPRPT has no constant-factor bound. Title and authors confirmed at the DOI landing page; result content confirmed via the Mitzenmacher & Shahout review (ref [83]).",
+      "description": "Scully, Z., Grosof, I., & Mitzenmacher, M. (2022). ITCS 2022, LIPIcs Vol. 215. Source of the graceful-degradation result for M/G/1 scheduling with bounded multiplicative size-estimate error: bounded-degradation results for an SRPT variant and PSJF; naive SRPT on estimates has no constant-factor bound. The arXiv abstract (2110.00633) names only SRPT, an unnamed SRPT variant and PSJF; earlier policy names and constants in this skill were not confirmed there and were removed. Title and authors confirmed at the DOI landing page.",
       "url_check": "manual"
     },
     {
@@ -251,7 +251,7 @@
       "id": "MitzenmacherShahout2025",
       "name": "Queueing, Predictions, and Large Language Models: Challenges and Open Problems",
       "url": "https://pubsonline.informs.org/doi/10.1287/stsy.2025.0106",
-      "description": "Mitzenmacher, M. & Shahout, R. (2025). Stochastic Systems 15(3); arXiv 2503.07545. Review, not the origin of Trail or of the degradation bounds. Summarizes: plain SPRPT is not within a constant factor of SRPT even with bounded multiplicative error; SPRPT-with-bounce (C = 3.5) and PSPJF (C = 1.5) degrade gracefully (from Scully, Grosof & Mitzenmacher, ITCS 2022); Trail's rule of disabling preemption above c × predicted size (0 ≤ c ≤ 1), attributed to Shahout et al. (arXiv 2410.01035).",
+      "description": "Mitzenmacher, M. & Shahout, R. (2025). Stochastic Systems 15(3); arXiv 2503.07545. Review, not the origin of Trail or of the degradation bounds. Summarizes: plain SPRPT is not within a constant factor of SRPT even with bounded multiplicative error; the authors' SRPT variant and PSJF degrade gracefully (from Scully, Grosof & Mitzenmacher, ITCS 2022); Trail's rule of disabling preemption above c × predicted size (0 ≤ c ≤ 1), attributed to Shahout et al. (arXiv 2410.01035).",
       "url_check": "auto"
     },
     {

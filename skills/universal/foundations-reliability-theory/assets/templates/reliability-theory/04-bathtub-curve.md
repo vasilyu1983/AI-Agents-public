@@ -65,11 +65,12 @@ A bathtub shape is an empirical pattern, not necessarily a sum of three Weibull 
 | Skipping burn-in to save cost | Phase I failures hit customers instead of the test floor | Quantify expected Phase I failure cost vs. burn-in cost |
 | Extending service beyond T₂ without monitoring | Rapidly increasing failure rate surprises operations | Set a Phase III entry threshold and a replacement rule |
 | Applying bathtub thinking to software without adaptation | Software wear-out mechanisms differ (data accumulation, dependency drift) | Map software-specific wear-out signals to Phase III analogues |
+| Scheduling age-based replacement without age-related wear-out evidence | Field data (Nowlan & Heap 1978, secondary-source report) suggest only a small minority of items follow a bathtub curve; replacing a non-wearing item adds risk and cost | Fit Weibull first (primitive 09); replace by age only if the β CI is clearly above 1 and unplanned-failure cost exceeds planned-replacement cost |
 | Treating T₁ and T₂ as known without data | Incorrect phase boundaries lead to wrong actions | Estimate from Weibull analysis (primitive 09) with confidence intervals |
 
 ## Worked Example
 
-A fleet of 1,000 IoT sensors is deployed. Three-phase Weibull analysis (primitive 09) estimates:
+Illustrative example (invented parameters, not field data): a fleet of 1,000 IoT sensors is deployed. Three-phase Weibull analysis (primitive 09) estimates:
 
 ```
 Phase I  (β = 0.6): 0–90 days,  η = 200 days

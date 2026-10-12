@@ -19,6 +19,10 @@ For failure rates, repair/availability models, FMEA, and fault-tree probabilitie
 
 - **Put guardrails at the mutation boundary.** A prompt instruction feeds the planner's process model. It does not constrain the system.
 - **Name the depth.** A reversible, low-impact change gets a single hazard row. Irreversible actions, money movement or delegated authority get full STPA. A decision-maker who must accept residual risk gets a safety case.
+- **Freeze the losses first.** A human fixes the losses and hazards before an LLM drafts any STPA or FMEA; the LLM drafts scenarios and constraints only, and a human reviews each. The same rule applies to a property in [formal methods](../foundations-formal-methods/SKILL.md).
+- **Pick the method by cause.** Use STPA when the loss can come from control-structure, process-model or software/agent interaction hazards. Use FMEA when failure modes of enumerable components with a parts list drive the loss. Use both when a regulator requires FMEA and the system has autonomy. STPA gives no probabilities. Details: [Safety-II and STAMP](references/safety-ii-and-stamp.md).
+- **Layers are not independent.** Do not count Swiss-cheese layers as multiplying protection unless their failures are shown to be uncorrelated; layers that share a model, prompt channel or credential fail together. The model is a communication aid, not a probability model.
+- **Decide risk acceptance before controls.** State severity and reversibility, name the accepting authority, and record residual hazards; reduce risk as far as reasonably practicable (ALARP) before adding controls. No numeric thresholds here.
 - **Standards are pointers.** Name SOTIF, ISO/PAS 8800 or UL 4600 only through the [standards map](references/standards-map.md), and never as evidence of conformance.
 
 ## Workflow

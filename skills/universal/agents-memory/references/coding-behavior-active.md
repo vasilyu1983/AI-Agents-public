@@ -1,11 +1,5 @@
 # Coding Behavior — Active Contract
 
-Condensed, always-loaded copy of the behavior contract for agents working inside an existing codebase (defensive-minimalism mode). Keep it at or under 150 lines so it is actually read every turn.
-
-**Canonical source and rationale**: [`coding-behavior.md`](coding-behavior.md). Read that file for the reason behind each rule, the attribution, and the greenfield counterpart ([`coding-behavior-completeness.md`](coding-behavior-completeness.md)); do not load both modes at once. This file carries only the rule names and imperatives. Add project-specific rules below the baseline instead of editing the canonical file, and keep the two files in step when a rule changes.
-
-To make this contract active in a repo, point `.claude/rules/coding-behavior.md` (symlink or copy) at this file, not at the canonical reference. The canonical file is over the ceiling it teaches.
-
 ## Before Implementation
 
 1. **Surface assumptions.** State assumptions explicitly before non-trivial work; invite correction before proceeding.

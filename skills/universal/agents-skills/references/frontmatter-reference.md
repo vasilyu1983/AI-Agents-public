@@ -101,7 +101,7 @@ Part of the open spec, but support may vary by implementation. In current Claude
 | `paths` | No | Supported (comma-separated string or YAML list of globs; skill auto-loads only when working files match) | Do not assume | Do not assume |
 | `context` | No | Supported (`fork` to run in a subagent; forked run also loads `CLAUDE.md` unless `agent` is `Explore` or `Plan`) | Do not assume | Do not assume |
 | `agent` | No | Supported (subagent type when `context: fork` is set; defaults to `general-purpose` if omitted) | Do not assume | Do not assume |
-| `background` | No | Supported (only with `context: fork`; `false` makes the invoking turn wait for the forked result instead of running it in the background; default `true`; needs Claude Code v2.1.218+) | Do not assume | Do not assume |
+| `background` | No | Supported (only with `context: fork`; `false` makes the invoking turn wait for the forked result instead of running it in the background; default `true`; look up the minimum Claude Code version in the docs) | Do not assume | Do not assume |
 | `model` | No | Supported (overrides model for the current turn only) | Do not assume | Do not assume |
 | `effort` | No | Supported (overrides effort level; resets after turn) | Do not assume | Do not assume |
 | `hooks` | No | Supported (registered when the skill is invoked and kept running for the rest of the session, not only the skill's own turn; `once: true` removes a hook after its first successful run) | Do not assume | Do not assume |

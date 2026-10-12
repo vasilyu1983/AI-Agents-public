@@ -13,7 +13,7 @@ These are starting points. Trim or extend based on cost budget and time pressure
 | Series-A go/no-go | Pre-Mortem | Base-Rate Reset on optimist; Inversion on champion | 16 (meta-debate routing), 4 (Shapley post-run), 11 (prediction market) |
 | Architecture RFC | Dialectical Inquiry | Second-Order on advocate; First Principles on critic | 13 (reasoning-tree audit), 4 (DAG-Shapley post-run), 7 (incentive-compatible synthesis) |
 | Pricing change | Steel-Manning | Anchoring Reset on every member | 15 (generative social choice), 11 (prediction market) |
-| Migration / cutover | Pre-Mortem + Devil's Advocate | Base-Rate Reset on champion; Inversion on owner | 13 (reasoning-tree audit), 5 (reputation gating), 6 (cooperation/defection) |
+| Migration / cutover | Pre-Mortem (optional later Devil's Advocate debate) | Base-Rate Reset on champion; Inversion on owner | 13 (reasoning-tree audit), 5 (reputation gating), 6 (cooperation/defection) |
 | Strategic uncertainty (market timing) | Scenario 2×2 | Second-Order; Base-Rate Reset | 11 (prediction market), 9 (Pareto-Nash) |
 | Recurring high-frequency team optimization | (varies — measure first) | (none specific) | 10 (evolutionary search; ShinkaEvolve), 4 (DAG-Shapley), 5 (reputation gating) |
 | Security or compliance review | Courtroom | Inversion on every member | 14 (credibility), 13 (reasoning-tree audit), 5 (reputation: adversarial tier) |
@@ -128,8 +128,10 @@ Team launch:
 
 ```
 Team launch:
-  debate.method = pre-mortem + devils-advocate (composed)
-    Pre-mortem first; then Devil's Advocate stress-tests the consensus
+  debate.method = pre-mortem   (one method per debate)
+    Optional: after the pre-mortem verdict, run a SEPARATE, later
+    devils-advocate debate to stress-test the consensus. Never both
+    methods inside one debate.
   masks:
     Migration champion wears Base-Rate Reset
     Migration owner wears Inversion
@@ -141,7 +143,7 @@ Team launch:
         named test artifacts is a defection signal
 ```
 
-**Why**: Migration teams are systematically over-confident — past migrations that "went fine" anchor the team on success. Base-Rate Reset surfaces what fraction of comparable migrations actually shipped without rollback. Pre-mortem maps failure modes; Devil's Advocate stress-tests the team's confidence in those mappings.
+**Why**: Migration teams are systematically over-confident — past migrations that "went fine" anchor the team on success. Base-Rate Reset surfaces what fraction of comparable migrations actually shipped without rollback. Pre-mortem maps failure modes; a separate follow-up Devil's Advocate debate, if the cost is justified, stress-tests the team's confidence in those mappings.
 
 ### Strategic uncertainty (market timing, category bet)
 

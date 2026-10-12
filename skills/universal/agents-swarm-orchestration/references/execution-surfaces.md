@@ -9,6 +9,7 @@ Use this reference when the lead already has a valid plan and now needs to choos
 - [Claude Code Agent Teams](#claude-code-agent-teams)
 - [Agent Team Communication Patterns](#agent-team-communication-patterns)
 - [Cross-Session Messaging](#cross-session-messaging)
+- [Cross-Vendor Wave](#cross-vendor-wave)
 - [Manager vs Handoff](#manager-vs-handoff)
 
 ## Single Thread
@@ -108,6 +109,14 @@ Use it when the only thing that has to cross a session boundary is a finding:
 Prefer a full agent team only when you also need the shared task list, self-claiming, or the `TeammateIdle` / `TaskCreated` / `TaskCompleted` quality gates. If the requirement is just "pass this finding over there", cross-session messaging is the lighter surface and is not experimental.
 
 Same distillation discipline applies: send synthesis, not raw logs. Windows sessions have no equivalent — fall back to file-backed state.
+
+## Cross-Vendor Wave
+
+Use when a second model family should check the first one's work: Claude builds and Codex reviews, or the reverse. The official plugin `openai/codex-plugin-cc` exposes `/codex:review` and `/codex:adversarial-review` inside Claude Code ([README](https://github.com/openai/codex-plugin-cc)). Setup details: [../../agents-subagents/references/runtime-surfaces.md](../../agents-subagents/references/runtime-surfaces.md) (section "Claude Code ↔ Codex").
+
+- One writer per tree. The reviewer reads and reports; it never edits.
+- Run both reviewers on the same diff and compare finding lists. A finding in both is strong; a finding in one is a lead to check, not a verdict.
+- Never enable the plugin's review gate unattended. README: "The review gate can create a long-running Claude/Codex loop and may drain usage limits quickly."
 
 ## Manager vs Handoff
 

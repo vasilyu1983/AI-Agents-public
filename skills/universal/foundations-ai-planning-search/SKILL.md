@@ -146,7 +146,7 @@ rather than inheriting the algorithm's theorem.
 
 ## Navigation
 
-- [scripts/replay_plan.py](scripts/replay_plan.py) — deterministic support artifact.
+- [scripts/replay_plan.py](scripts/replay_plan.py) — deterministic support artifact. Exit 0 does not mean the plan works (`failed-precondition` and `goal-unmet` also exit 0); read `status` or pass `--strict`.
 - [scripts/test_replay_plan.py](scripts/test_replay_plan.py) — deterministic support artifact.
 - [data/plan-fixtures.json](data/plan-fixtures.json) — deterministic support artifact.
 - Practical completion contract and known-answer controls: [references/practical-contract.md](references/practical-contract.md).

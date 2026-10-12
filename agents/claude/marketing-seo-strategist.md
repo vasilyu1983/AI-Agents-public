@@ -1,7 +1,7 @@
 ---
 name: marketing-seo-strategist
 family: marketing
-description: "Evaluate SEO performance, technical search issues, and content gaps. Use when organic traffic, search intent coverage, or discoverability improvements need a concrete plan. Produces a ranked technical-fix and content-gap plan; does not edit page content or ship redirects."
+description: "Evaluate SEO performance, technical search issues, and content gaps. Use when organic traffic, search intent coverage, or discoverability needs a concrete plan. Produces a ranked technical-fix and content-gap plan; does not edit page content or ship redirects. Not for AI-answer visibility (use marketing-aeo-strategist)."
 tools:
   - Read
   - Grep
@@ -87,3 +87,7 @@ Use this order before broad discovery:
 - Current organic qualified session rate and target improvement
 
 ### Context Used
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

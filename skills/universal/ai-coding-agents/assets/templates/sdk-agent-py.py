@@ -5,6 +5,10 @@ Minimal but production-ready scaffolding for building a coding agent
 with the Claude Agent SDK. Customize the tools, hooks, and system prompt
 for your specific coding task.
 
+API shapes checked 2026-10-10 against
+https://code.claude.com/docs/en/agent-sdk/python and .../agent-sdk/hooks.
+Not executed: re-check the pages for your SDK version.
+
 Usage:
     pip install claude-agent-sdk
     python sdk-agent-py.py "Review src/auth/ for security issues"
@@ -15,11 +19,15 @@ import sys
 from pathlib import Path
 
 from claude_agent_sdk import (
-    Agent,
-    AgentOptions,
-    Tool,
+    AssistantMessage,
+    ClaudeAgentOptions,
+    HookMatcher,
+    ResultMessage,
+    TextBlock,
+    ToolUseBlock,
+    create_sdk_mcp_server,
+    query,
     tool,
-    HookEvent,
 )
 
 # Resolve the current default model alias/ID via the claude-api skill or
@@ -28,20 +36,26 @@ DEFAULT_CODING_MODEL = "sonnet"
 
 
 # ─── Custom Tools ─────────────────────────────────────────────
-# Wrap development tools as typed Agent SDK tools.
-# The @tool decorator registers the function as an agent-callable tool.
+# @tool(name, description, input_schema) wraps an async function that takes an
+# args dict and returns an MCP-style content dict. Tools are served through
+# create_sdk_mcp_server() and exposed as mcp__<server key>__<tool name>.
+
+def _text(body: str) -> dict:
+    return {"content": [{"type": "text", "text": body}]}
+
 
 @tool(
-    name="run_tests",
-    description="Run the test suite and return results. Pass a specific test file path to run a subset.",
+    "run_tests",
+    "Run the test suite and return results. Pass a specific test file path to run a subset.",
+    {"test_path": str},
 )
-async def run_tests(test_path: str = "") -> str:
+async def run_tests(args: dict) -> dict:
     """Run tests and return structured results."""
     import subprocess
 
     cmd = ["pytest", "--tb=short", "-q"]
-    if test_path:
-        cmd.append(test_path)
+    if args.get("test_path"):
+        cmd.append(args["test_path"])
 
     result = subprocess.run(
         cmd,
@@ -50,25 +64,26 @@ async def run_tests(test_path: str = "") -> str:
         timeout=120,
         cwd=str(Path.cwd()),
     )
-    return f"Exit code: {result.returncode}\n\nSTDOUT:\n{result.stdout}\n\nSTDERR:\n{result.stderr}"
+    return _text(f"Exit code: {result.returncode}\n\nSTDOUT:\n{result.stdout}\n\nSTDERR:\n{result.stderr}")
 
 
 @tool(
-    name="run_linter",
-    description="Run the linter on a file or directory and return findings as structured text.",
+    "run_linter",
+    "Run the linter on a file or directory and return findings as structured text.",
+    {"path": str},
 )
-async def run_linter(path: str) -> str:
+async def run_linter(args: dict) -> dict:
     """Run linter and return findings."""
     import subprocess
 
     result = subprocess.run(
-        ["ruff", "check", "--output-format", "json", path],
+        ["ruff", "check", "--output-format", "json", args["path"]],
         capture_output=True,
         text=True,
         timeout=60,
         cwd=str(Path.cwd()),
     )
-    return result.stdout or result.stderr or "No issues found."
+    return _text(result.stdout or result.stderr or "No issues found.")
 
 
 # ─── Hooks ────────────────────────────────────────────────────
@@ -78,15 +93,19 @@ async def run_linter(path: str) -> str:
 PROTECTED_PATHS = [".env", "credentials", "secrets", "node_modules", ".git"]
 
 
-def pre_tool_hook(event: HookEvent) -> HookEvent:
-    """Block writes to protected paths."""
-    if event.tool_name in ("Write", "Edit") and event.tool_input:
-        file_path = event.tool_input.get("file_path", "")
-        for protected in PROTECTED_PATHS:
-            if protected in file_path:
-                event.block(f"Blocked: cannot modify protected path containing '{protected}'")
-                return event
-    return event
+async def pre_tool_hook(input_data, tool_use_id, context):
+    """Deny writes to protected paths; an empty dict allows the call."""
+    file_path = input_data["tool_input"].get("file_path", "")
+    for protected in PROTECTED_PATHS:
+        if protected in file_path:
+            return {
+                "hookSpecificOutput": {
+                    "hookEventName": input_data["hook_event_name"],
+                    "permissionDecision": "deny",
+                    "permissionDecisionReason": f"Cannot modify protected path containing '{protected}'",
+                }
+            }
+    return {}
 
 
 # ─── Agent Configuration ─────────────────────────────────────
@@ -123,27 +142,27 @@ async def main():
 
     task = sys.argv[1]
 
-    agent = Agent(
-        AgentOptions(
-            model=DEFAULT_CODING_MODEL,  # resolve current alias/ID via the claude-api skill; avoid pinning a dated snapshot
-            system_prompt=SYSTEM_PROMPT,
-            tools=[run_tests, run_linter],
-            max_turns=15,
-            hooks={"pre_tool_use": pre_tool_hook},
-            # Uncomment for additional configuration:
-            # mcp_servers=[{"name": "eslint", "command": "npx", "args": ["@anthropic/eslint-mcp-server"]}],
-            # allowed_tools=["Read", "Grep", "Glob", "Bash", "Edit", "Write"],
-        )
+    options = ClaudeAgentOptions(
+        model=DEFAULT_CODING_MODEL,  # resolve current alias/ID via the claude-api skill; avoid pinning a dated snapshot
+        system_prompt=SYSTEM_PROMPT,
+        mcp_servers={"dev": create_sdk_mcp_server(name="dev", tools=[run_tests, run_linter])},
+        allowed_tools=["Read", "Grep", "Glob", "Edit", "mcp__dev__run_tests", "mcp__dev__run_linter"],
+        max_turns=15,
+        # Matchers match tool names, not paths; the callback checks the path.
+        hooks={"PreToolUse": [HookMatcher(matcher="Write|Edit", hooks=[pre_tool_hook])]},
+        # External MCP servers: see the mcp_servers entry in the Python SDK reference.
     )
 
     # Stream the agent's work
-    async for event in agent.run(task):
-        if event.type == "text":
-            print(event.text, end="", flush=True)
-        elif event.type == "tool_use":
-            print(f"\n[Tool: {event.tool_name}]", flush=True)
-        elif event.type == "error":
-            print(f"\n[Error: {event.error}]", file=sys.stderr)
+    async for message in query(prompt=task, options=options):
+        if isinstance(message, AssistantMessage):
+            for block in message.content:
+                if isinstance(block, TextBlock):
+                    print(block.text, end="", flush=True)
+                elif isinstance(block, ToolUseBlock):
+                    print(f"\n[Tool: {block.name}]", flush=True)
+        elif isinstance(message, ResultMessage) and message.is_error:
+            print(f"\n[Error: {message.subtype}]", file=sys.stderr)
 
     print("\n\nAgent completed.")
 

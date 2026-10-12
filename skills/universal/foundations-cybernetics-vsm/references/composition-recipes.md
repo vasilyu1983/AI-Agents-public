@@ -22,7 +22,7 @@ Read this when a diagnosis needs several primitives in sequence. Each recipe lis
 
 **Output:** viability gap table; disturbance-to-observation-to-response mapping with uncovered distinctions; missing interfaces; one structural change per gap. Counts of alerts, agents, labels or dashboard states are not proof of requisite variety.
 
-**Human oversight of a fleet:** Telukunta et al. (2026, arXiv:2608.10153, preprint) frame it as `V_human × G ≥ V_agents`. Do not operationalise the terms as raw counts or use the inequality as a deployment proof. Use the [oversight evidence pack](org-and-harness-mappings.md#evidence-pack-for-effective-human-oversight).
+**Human oversight of a fleet:** Telukunta et al. (2026, arXiv:2608.10153, preprint) frame oversight through requisite variety with engineered amplification. Do not operationalise it as raw counts or use it as a deployment proof. Use the [oversight evidence pack](org-and-harness-mappings.md#evidence-pack-for-effective-human-oversight).
 
 ## Organisational Design for a Startup
 

@@ -52,6 +52,18 @@ class ReplayTests(unittest.TestCase):
         self.assertIn('duplicate JSON field: requires', result.stderr)
         self.assertEqual(result.stdout, '')
 
+    def test_strict_exit_code(self):
+        script = str(Path(replay_plan.__file__).resolve())
+        self.model['plan'] = []
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'unmet.json'
+            path.write_text(json.dumps(self.model), encoding='utf-8')
+            plain = subprocess.run([sys.executable, script, str(path)], capture_output=True, text=True, check=False)
+            strict = subprocess.run([sys.executable, script, str(path), '--strict'], capture_output=True, text=True, check=False)
+        self.assertEqual(json.loads(plain.stdout)['status'], 'goal-unmet')
+        self.assertEqual(plain.returncode, 0)
+        self.assertEqual(strict.returncode, 1)
+
     def test_reject_unknown_and_malformed(self):
         for mutate in [lambda m: m['plan'].append('invented'), lambda m: m['actions']['close']['add'].append('ticket-open'), lambda m: m['actions']['close'].update(cost=True), lambda m: m.update(extra=1), lambda m: m['initial'].append('authorized')]:
             with self.subTest(mutate=mutate):

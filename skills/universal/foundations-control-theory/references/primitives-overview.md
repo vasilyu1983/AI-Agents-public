@@ -103,7 +103,7 @@ Each primitive below addresses a specific class of feedback failure.
 - [ ] **Convergence must be proven**: Loop must terminate or converge by design? → Lyapunov (#4)
 - [ ] **Constraints exist**: Actuator limits, safety envelopes, or resource caps? → MPC (#5)
 - [ ] **Noisy measurements**: Sensor output is too noisy for direct use? → Kalman filter (#6)
-- [ ] **Delay between action and effect**: Transport lag > 30% of time constant? → Dead-time compensation (#7)
+- [ ] **Delay between action and effect**: Transport lag `L/T` above ~0.3 (dead time over dominant time constant, diagnostic)? → Dead-time compensation (#7)
 - [ ] **Actuator has hard limits**: Min/max bounds on the control output? → Anti-windup (#8) in every PID
 - [ ] **Operating conditions vary widely**: System dynamics differ significantly across regimes? → Gain scheduling (#9)
 - [ ] **Downstream failure risk**: Calling external services or dependencies? → Circuit breaker (#10)

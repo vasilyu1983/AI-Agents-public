@@ -4,7 +4,7 @@
     "description": "Primary references for state-space search, heuristic search, CSPs, adversarial search, classical planning, HTN, belief-state planning, and planner-agent integration.",
     "last_updated": "2026-09-24",
     "skill": "foundations-ai-planning-search",
-    "total_sources": 22
+    "total_sources": 24
   },
   "textbooks": [
     {
@@ -156,7 +156,7 @@
       "id": "Correa-2026-Frontier-Rival-Planners",
       "name": "Frontier Large Language Models Rival State-of-the-Art Planners",
       "url": "https://arxiv.org/abs/2511.09378",
-      "description": "Corrêa, Pereira & Seipp (arXiv:2511.09378, v1 Nov 2025, v2 May 2026; preprint, no venue). On 360 freshly generated tasks (to mitigate contamination) across 8 IPC-2023 Learning Track domains, all plans checked with VAL: Gemini 3.1 Pro solved 245 with standard descriptions and 231 obfuscated; GPT-5 solved 205 (152 obfuscated); the strongest tested classical planner (Scorpion Maidu, 30-min/8 GiB limit) solved 234. Gemini outperforms the planner on standard descriptions and is competitive when obfuscated. Caveats: on obfuscated tasks the model frequently identifies the underlying PDDL domain from structural cues, and LLM inference uses orders of magnitude more energy than the classical planner. Part of the dated evidence arc in Primitive #7's benchmark reality check.",
+      "description": "Corrêa, Pereira & Seipp (arXiv:2511.09378, v1 Nov 2025, v2 May 2026; preprint, no venue). On 360 freshly generated tasks (to mitigate contamination) across 8 IPC-2023 Learning Track domains, all plans checked with VAL: a frontier model solved slightly more tasks than the strongest tested classical planner under its time and memory limits with standard descriptions and stayed competitive when obfuscated. Caveats: on obfuscated tasks the model frequently identifies the underlying PDDL domain from structural cues, and LLM inference uses orders of magnitude more energy than the classical planner. Part of the dated evidence arc in Primitive #7's benchmark reality check.",
       "add_as_web_search": false
     },
     {
@@ -165,6 +165,22 @@
       "url": "https://arxiv.org/abs/2408.03314",
       "description": "Snell, Lee, Xu & Kumar (arXiv:2408.03314, Aug 2024). On MATH with a learned process reward model verifier: beam search beats best-of-N at low generation budgets and on medium-difficulty problems consistently across the budget range; best-of-N wins on easy problems at high budgets because beam search over-optimizes the PRM; at the hardest difficulty level neither method makes meaningful progress; lookahead search generally underperforms other methods at matched budget. Source of the compute-matched best-of-N baseline rule in Primitive #6. Difficulty bins are relative to the base model's own pass@1 and do not transfer across verifiers/models without rechecking.",
       "add_as_web_search": false
+    },
+    {
+      "id": "Gundawar-2024-LLM-Modulo-Scheduling",
+      "name": "Robust Planning with Compound LLM Architectures: An LLM-Modulo Approach",
+      "url": "https://arxiv.org/abs/2411.14484",
+      "description": "Gundawar, Valmeekam, Verma & Kambhampati (arXiv:2411.14484, 2024). LLM-Modulo generate-test architecture applied to four scheduling domains (not PDDL planning). Supports the sound-verifier and generate-critique-repair rule in Primitive #10.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11"
+    },
+    {
+      "id": "ACPBench-2026-LLM-Planning-Talk",
+      "name": "What We Talk About When We Talk About LLM Planning",
+      "url": "https://arxiv.org/abs/2607.11197",
+      "description": "arXiv:2607.11197 (Jul 2026, preprint). On ACPBench-Hard, applicability and state-tracking improve with scale and longer traces; goal reachability and landmarks barely move. Supports per-competency probing in Primitive #7. Direction only.",
+      "add_as_web_search": false,
+      "accessed": "2026-10-11"
     }
   ]
 }

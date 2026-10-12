@@ -11,14 +11,14 @@
 
 name = "<snake_case_name>"
 # model_tier: <critical|standard|mechanical>
-# model and model_reasoning_effort are injected only when data/model-policy.json requires explicit fields; standard tier inherits configured Codex defaults
+# model and model_reasoning_effort are injected only when skills/universal/agents-subagents/data/model-policy.json requires explicit fields; standard tier inherits configured Codex defaults
 description = "<same one-line description as claude/<name>.md>"
 sandbox_mode = "read-only"
 # sandbox_mode = "workspace-write"   # implementer-class only
 # --- other documented custom-agent keys, unset by default
 # --- (learn.chatgpt.com/docs/agent-configuration/subagents: a custom agent file can override the
 # --- same settings as a normal Codex session config) ---
-# model = "<model-id>"               # injected only when data/model-policy.json requires it
+# model = "<model-id>"               # injected only when skills/universal/agents-subagents/data/model-policy.json requires it
 # model_reasoning_effort = "medium"  # reasoning depth; standard tier inherits configured defaults
 # [mcp_servers.<name>]               # MCP servers for this agent only; scope to the one worker
 #   command = "<cmd>"                # that needs it — never a server whose launch config derives
@@ -82,6 +82,10 @@ N. Return the artifact described in the Output Contract.
 ### Context Used
 
 List which packet, graph, or domain artifacts were used and where manual reconciliation was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
 
 ---
 

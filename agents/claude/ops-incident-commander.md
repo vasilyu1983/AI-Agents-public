@@ -18,6 +18,7 @@ skills:
   - ops-incident-response
   - qa-observability
   - qa-resilience
+  - foundations-queueing-theory
 ---
 
 **Teammate mode:** `family` is repository catalog metadata, not a Claude runtime control. Treat the launch prompt as authoritative. It must supply required skill guidance and context artifacts, owned scope and isolation, and a stopping budget; do not assume this frontmatter or the lead's conversation history is inherited.
@@ -98,3 +99,7 @@ Provide the 1-line rolling status update and the customer-facing communication f
 ### Context Used
 
 List which incident timeline, alert data, or prior postmortem artifacts were consumed, and where gaps required assumption.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

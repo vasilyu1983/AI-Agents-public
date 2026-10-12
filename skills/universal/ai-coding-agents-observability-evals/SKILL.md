@@ -1,6 +1,6 @@
 ---
 name: ai-coding-agents-observability-evals
-description: "Designs coding-agent observability and evals. Use when measuring traces, replay, checkpoint lineage, quality trajectories, tool grading, regression, or cost."
+description: "Designs coding-agent observability and evals. Use when measuring traces, replay, checkpoint lineage, tool grading, regression, or cost. Not for general LLM evals (ai-evals)."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.2"
 last_validated: 2026-09-27

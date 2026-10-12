@@ -1,6 +1,6 @@
 ---
 name: ai-vector-brain
-description: Builds vector-brain implementations for repos, docs hubs, and compliance corpora. Use when creating pgvector retrieval brains with scripts, SQL, manifests, and evals.
+description: "Creates reusable vector-brain implementations: repo, docs, compliance. Use when building pgvector SQL, manifests, ingest scripts. Not for context design (dev-context-engineering)."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "1.3"
 last_validated: 2026-07-11
@@ -9,6 +9,8 @@ last_validated: 2026-07-11
 # AI Vector Brain
 
 Build a vector brain implementation. V1 default: Postgres + pgvector. Pick a corpus playbook.
+
+For source code, first show a gain over ripgrep, tree-sitter, or code-graph retrieval (see Corpus Readiness Gate); pgvector fits docs and prose corpora.
 
 Use this skill when the user asks to:
 

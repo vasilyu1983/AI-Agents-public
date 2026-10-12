@@ -10,7 +10,6 @@ status: stable
 - [Why Network Science Matters](#why-network-science-matters)
 - [Primitive Index](#primitive-index)
 - [Anti-Patterns by Domain](#anti-patterns-by-domain)
-- [Decision Checklist](#decision-checklist)
 - [Sources](#sources)
 
 ---
@@ -85,23 +84,6 @@ Each primitive in the index below addresses a specific structural or dynamic fai
 | Random or popularity-based recommendations | Miss high-value items in structural proximity | Link prediction (#8) scores candidate edges by Adamic-Adar or Katz |
 | Node similarity computed from one-hot features | Structural role and neighbourhood ignored | Graph embeddings (#10) — node2vec or GNN captures topology |
 | Static graph used for temporal knowledge graph | Edges timestamped but aggregated | Temporal network methods (#11) ensure time-respecting reasoning |
-
----
-
-## Decision Checklist
-
-This checklist applies to any graph or network analysis task.
-
-- [ ] **Importance ranking**: Which node matters most? → select centrality type (#1); if endorsement-weighted → PageRank (#2)
-- [ ] **Cluster structure**: Are there natural groups? → community detection (#3); if partition by cut → graph clustering (#9)
-- [ ] **Navigability**: Are short paths ubiquitous despite network size? → small-world test (#4)
-- [ ] **Degree distribution**: Power law? → statistical test for scale-free (#5)
-- [ ] **Robustness**: How many removals to fragment? → percolation threshold (#6)
-- [ ] **Spread / influence**: How far does a signal reach? → SIR model (#7); pair with percolation threshold check
-- [ ] **Missing edge inference**: Which edges form next? → link prediction (#8)
-- [ ] **Node vectors for ML**: Need embeddings for downstream tasks? → graph embeddings (#10)
-- [ ] **Temporal causality**: Do timestamps constrain paths? → temporal networks (#11)
-- [ ] **Scale-free + SIR**: Scale-free network + epidemic? → check vanishing threshold result (Pastor-Satorras & Vespignani 2001)
 
 ---
 

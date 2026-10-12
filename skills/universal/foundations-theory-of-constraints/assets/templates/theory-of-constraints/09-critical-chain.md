@@ -34,7 +34,7 @@ Critical Chain Project Management (CCPM) is the TOC application to project sched
 - Critical chain identified (longest path including resource contention).
 - Project Buffer size with rationale from task variation, dependence and delivery-confidence requirements; 50% is an illustrative heuristic.
 - Feeding Buffers for each non-critical path feeding the chain.
-- A buffer consumption report: green (< 1/3 consumed), yellow (1/3–2/3), red (> 2/3 consumed relative to project completion %).
+- A fever chart: plot percent of Project Buffer consumed against percent of critical chain complete; act when the point enters the red zone. Zone boundaries are set per project (the usual chart splits the buffer into green, yellow and red bands that tighten as completion rises); treat any fixed boundary as a local choice (Leach 2000; Goldratt 1997; not re-read here).
 
 ## Failure Modes
 
@@ -55,9 +55,9 @@ Critical Chain Project Management (CCPM) is the TOC application to project sched
 - **Total project commitment** (removed-safety convention): 14 + 5.5 = 19.5 days — below the original 25-day padded baseline, as CCPM predicts.
 - **Feeding Buffer**: a design task (3 days, feeding the critical chain at day 12) gets a 1.5-day Feeding Buffer.
 
-Illustrative monitoring rule: ratio = fraction of PB consumed / fraction of chain work completed; green below 1/3, yellow 1/3–2/3, red above 2/3. These zones are local heuristics.
-At day 10, if 8/14 of chain work is completed and 1/5.5 of PB is consumed, ratio = 0.182/0.571 ≈ .32: green.
-At day 12, if 12/14 is completed and 4.5/5.5 of PB is consumed, ratio = 0.818/0.857 ≈ .95: red. Completed work and consumed buffer must be measured independently; elapsed time alone supplies neither.
+Monitoring rule: plot each status point as (percent of chain complete, percent of PB consumed) on a fever chart and read the zone from the chart; a consumed-to-complete ratio alone is a simplification and does not replace it. The zone boundaries are project-specific.
+At day 10, if 8/14 of chain work is completed and 1/5.5 of PB is consumed, the point is (57% complete, 18% consumed): low penetration for that progress, likely green.
+At day 12, if 12/14 is completed and 4.5/5.5 of PB is consumed, the point is (86% complete, 82% consumed): little buffer left for the remaining work, so check it against the fever-chart zones and escalate if it sits in or near red. Completed work and consumed buffer must be measured independently; elapsed time alone supplies neither.
 
 **Note**: a commitment can exceed a padded plan when resource contention across shared resources (the lead engineer on tasks 4, 7, 9) was previously hidden by task-level padding — verify against your own chain before assuming CCPM always shortens the schedule.
 

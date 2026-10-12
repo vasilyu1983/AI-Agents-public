@@ -1,6 +1,6 @@
 name = "startup_growth_execution_operator"
 # model_tier: standard
-description = "Review onboarding, support, and customer handoff readiness. Use when enterprise or high-touch customers need reliable post-sale operating motion. Produces a readiness review of the post-sale motion with fixes; does not contact customers or change live support processes."
+description = "Review onboarding, support, and customer handoff readiness. Use when high-touch customers need a reliable post-sale motion. Produces a readiness review of the post-sale motion with fixes; does not contact customers or change live support. Not for funnels or experiments (use startup-growth-specialist)."
 sandbox_mode = "read-only"
 # Linked shared skills are declared in the footer below.
 # Installed by deploy-preset.sh, which may append per-skill [[skills.config]] enablement overrides for discoverable skill folders; normal skill discovery and activation still apply. Explicit model fields are added only when policy requires; standard-tier agents inherit configured Codex defaults. Do not hand-edit installed copies; edit this canonical file.
@@ -72,6 +72,10 @@ List the next 1-2 growth experiments with hypothesis, channel, metric, and pass/
 ### Context Used
 
 List which packet, graph, or impact artifacts were used and where manual tracing was required.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.
 
 ---
 

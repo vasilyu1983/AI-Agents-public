@@ -88,3 +88,7 @@ Adopt, keep the baseline, or needs data — with coverage and accuracy against t
 
 ### Context Used
 List which series, backtest reports, hierarchy definitions, or notebooks were used.
+
+### Stop Protocol
+
+If you hit your turn or step limit, or a required input is missing, stop and return what you have. Include a `Status: complete|partial|blocked` line, and list the exact missing inputs or remaining steps. Never pad or guess to fill a gap.

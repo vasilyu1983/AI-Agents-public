@@ -26,8 +26,6 @@ Decision rules:
 
 This file pins no solver version. Before relying on a feature, read the package's release notes or PyPI page (`https://pypi.org/pypi/<package>/json` gives the current release) for the version you actually run:
 
-- Gurobi (`gurobipy`): whether a first-order PDHG LP method or a local nonlinear barrier exists, and whether statuses such as LOCALLY_OPTIMAL/LOCALLY_INFEASIBLE are still marked preview.
-- HiGHS (`highspy`): parallel MIP, interior-point support for convex QP, and GPU first-order LP support.
-- OR-Tools (`ortools`), CVXPY, PySCIPOpt (and the SCIP version it bundles), Pyomo: API changes between releases.
+- For any feature you rely on (LP method, nonlinear support, parallel MIP, GPU, exact mode, status codes marked preview), read the release notes of the version you run; the same holds for API changes in wrappers such as `gurobipy`, `highspy`, `ortools`, CVXPY, PySCIPOpt and Pyomo.
 
 First-order LP (PDLP/PDHG) accuracy versus speed: no primary benchmark was read for this bundle. Do not quote a speedup; measure on your own instances and check residuals at the tolerance you need.

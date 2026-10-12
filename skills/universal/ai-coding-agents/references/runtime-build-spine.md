@@ -14,7 +14,7 @@ For a new CLI coding-agent runtime, treat these subsystems as a fixed spine — 
 6. permission context and approval routing — decides when risky actions are allowed (owner: [`ai-coding-agents-safety-envelope`](../../ai-coding-agents-safety-envelope/SKILL.md))
 7. central tool-execution pipeline (owner: [`ai-coding-agents-runtime-core`](../../ai-coding-agents-runtime-core/SKILL.md))
 8. session persistence, history, and resume — decides what state survives (owner: [`ai-coding-agents-state`](../../ai-coding-agents-state/SKILL.md))
-9. remote transport and permission bridging (owner: [`ai-coding-agents-surfaces`](../../ai-coding-agents-surfaces/SKILL.md))
+9. remote transport and permission bridging (owner: [`ai-coding-agents-surfaces`](../../ai-coding-agents-surfaces/SKILL.md); where hosted execution runs after the laptop closes: `ai-coding-agents-cloud-sandboxes`)
 10. task runtime and teammate orchestration — long-running and delegated work (owner: [`ai-coding-agents-state`](../../ai-coding-agents-state/SKILL.md))
 11. terminal UI, background-task surfaces, and virtualization — renders and controls runtime state without owning it (owner: [`ai-coding-agents-surfaces`](../../ai-coding-agents-surfaces/SKILL.md))
 12. plugin loading, versioned cache, and managed extension policy (owner: [`ai-coding-agents-plugins`](../../ai-coding-agents-plugins/SKILL.md))
@@ -32,7 +32,7 @@ If one of these is missing, the usual outcome is not "slightly worse UX." The us
 
 ## Cross-platform validation
 
-The spine above is derived from the Claude Code lineage and cross-checked against Goose (Rust, MCP+ACP, OSS). Patterns that appeared in the Claude Code lineage but were missing in Goose have been imported into the subsystem skills into the subsystem skills as Goose patterns in their references. When designing a new runtime, read the Claude-Code-derived core *and* the Goose additions in each subsystem skill before committing to an architecture.
+The spine above is derived from the Claude Code lineage and cross-checked against Goose (Rust, MCP+ACP, OSS). Patterns that appeared in the Claude Code lineage but were missing in Goose have been imported into the subsystem skills as Goose patterns in their references. When designing a new runtime, read the Claude-Code-derived core *and* the Goose additions in each subsystem skill before committing to an architecture.
 
 ## Core Invariants
 

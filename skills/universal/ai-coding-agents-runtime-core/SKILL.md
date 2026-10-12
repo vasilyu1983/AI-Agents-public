@@ -3,7 +3,7 @@ name: ai-coding-agents-runtime-core
 description: "Designs tool and slash-command runtimes for coding-agent CLIs: registries, deferred loading, tool search, dispatch, forks. Use when modeling tool pools. Not approvals or plugins."
 compatibility: Portable core. Works on Claude Code and Codex.
 version: "2.0"
-last_validated: 2026-09-29
+last_validated: 2026-10-09
 ---
 
 # AI Coding Agents Runtime Core

@@ -50,8 +50,8 @@ Do not use sensitivity analysis as a replacement for identifying assumptions —
 
 **Setting**: An observational study estimates that daily coffee drinking (X) reduces 10-year cardiovascular event risk (Y) by RR = 0.75 (95% CI: 0.62–0.91). Concern: unmeasured confounding by healthy lifestyle habits.
 
-**E-value for point estimate** (RR = 0.75 → use reciprocal for protective effect = 1/0.75 = 1.33):
-E-value = 1.33 + √(1.33 × 0.33) = 1.33 + 0.66 = 1.99
+**E-value for point estimate** (RR = 0.75 → use reciprocal for protective effect = 1/0.75 = 1.3333):
+E-value = 1.3333 + √(1.3333 × 0.3333) = 1.3333 + 0.6667 = 2.00
 
 **E-value for CI bound closest to the null** (RR_upper = 0.91 → reciprocal ≈ 1.10):
 E-value_CI ≈ 1.10 + √(1.10 × 0.10) ≈ 1.43

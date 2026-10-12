@@ -1,6 +1,6 @@
 # Mechanism: Belief-Driven Coordination (ECON Pattern)
 
-**Source**: ECON (ICML 2025, arXiv:2506.08292) — a hierarchical RL-trained system reports +11.2% accuracy vs. existing multi-LLM approaches, and -21.4% tokens vs. 3-round multi-agent debate on MATH/GSM8K/GSM-Hard. Both numbers describe the trained belief/mixing-network system with frozen LLMs; this template is a prompt-only proxy ("lane assignment, ECON-inspired") and is untested against those benchmarks.
+**Source**: ECON (ICML 2025, arXiv:2506.08292) — a hierarchical RL-trained system reports higher accuracy than existing multi-LLM approaches and fewer tokens than 3-round multi-agent debate on math benchmarks. Those results describe the trained belief/mixing-network system with frozen LLMs; this template is a prompt-only proxy ("lane assignment, ECON-inspired") and is untested against those benchmarks.
 
 ## Problem
 

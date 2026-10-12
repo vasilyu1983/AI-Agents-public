@@ -16,6 +16,8 @@ MESSAGE = "Claude is waiting for you"
 
 def main() -> int:
     if sys.platform == "darwin":
+        if not shutil.which("osascript"):
+            return 0  # observational hook: fail open when the notifier is absent
         cmd = ["osascript", "-e", f'display notification "{MESSAGE}" with title "{TITLE}"']
     elif shutil.which("notify-send"):
         cmd = ["notify-send", TITLE, MESSAGE]

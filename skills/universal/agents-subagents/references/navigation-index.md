@@ -67,7 +67,7 @@ to a different foundation.
 - [agent-patterns.md](agent-patterns.md) — reviewer, implementer, researcher, verifier patterns + anti-patterns
 - [harness-patterns.md](harness-patterns.md) — named harness patterns (orchestrator-worker, evaluator-optimizer, planner→generator→evaluator, manager-vs-handoff, reflection, debate-before-dispatch, blueprint) plus execution-model reference
 - [skill-subagent-patterns.md](skill-subagent-patterns.md) — `skills:` preload and `context: fork` delegation
-- [subagent-context-forking.md](subagent-context-forking.md) — Claude Code fork mode (`CLAUDE_CODE_FORK_SUBAGENT`, `/fork`); community-reported
+- [subagent-context-forking.md](subagent-context-forking.md) — Claude Code context forking: Agent tool `subagent_type: "fork"`, `/subtask`, `/fork`; cache-prefix sharing
 - [subagents-vs-teams-architecture.md](subagents-vs-teams-architecture.md) — isolated subagents vs collaborating teams; decompose by coordination shape; community-reported
 - [subagent-interruption-recovery.md](subagent-interruption-recovery.md) — recovery for interrupted or background workers
 - [runtime-smoke-tests.md](runtime-smoke-tests.md) — runtime-surface confidence check
@@ -77,6 +77,7 @@ to a different foundation.
 - [initial-prompt-contract.md](initial-prompt-contract.md) — launch-prompt fields and handoff template
 - [members-and-teams.md](members-and-teams.md) — canonical library structure and skill linkage rule
 - [workflow-runtime.md](workflow-runtime.md) — Workflow tool runtime: gating, size guideline, caps, `agent()` options, saved-workflow locations
+- [add-a-workflow.md](add-a-workflow.md) — adding a saved workflow: engine table, manifest rules the generator enforces, generate/test/sync, registration
 
 ## Templates
 
