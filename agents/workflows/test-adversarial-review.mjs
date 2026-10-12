@@ -548,6 +548,9 @@ const runData = (refuters, reviewers, args = {}, tree = fakeTree(), prompts = []
   const refuters = runScenario.options.filter((o) => o.label.startsWith('refute:'));
   assert.ok(refuters.length > 0 && refuters.every((o) => !o.tools.includes('Bash')), 'named-target refuters have no Bash');
   assert.match(prompts.find((p) => p.label.startsWith('refute:')).prompt, /no shell on this\nnamed target: refute by reading only/);
+  // A Codex parent follows the plan, not this runtime, so the plan carries the same rule.
+  const plan = JSON.parse(fs.readFileSync(workflowPath.replace(/\.js$/, '.codex-plan.json'), 'utf8'));
+  assert.match(plan.review.refuters.shell_rule || '', /args\.target set.*without Bash/, 'the Codex plan drops refuter Bash on a named target');
 }
 
 // ---- baseline arm (args.baseline): reviewers only, same diff, no Verify phase ----

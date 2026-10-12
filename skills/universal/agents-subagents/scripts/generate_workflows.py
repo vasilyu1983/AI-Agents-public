@@ -801,6 +801,10 @@ def review_plan(path: Path, workflow: dict, manifest: dict) -> dict:
                 "count": refuters,
                 "spawn": {"task_name": f"{task}_refute_<finding>_<n>", "fork_turns": "none"},
                 "kill_rule": f"killed only when all {refuters} completed refuters refute with a nonblank reason; otherwise confirmed",
+                "shell_rule": ("with args.target set (a PR, branch or path that may be unvetted), refuters get roles.refuter.tools "
+                               "without Bash even when it lists Bash, and the brief says to refute by reading only; where the "
+                               "worker cannot be denied a shell, keep its sandbox read-only with network off. Only a local run "
+                               "(no args.target) gives refuters Bash"),
                 **({"out_of_scope": review["out_of_scope"]} if "out_of_scope" in review else {}),
                 **({"refuter_model": "same vendor"} if review.get("refuter_model") else {}),
                 **({"lenses": review["refuter_lenses"], "lens_rule": "refuter n gets lens n (cycling); put it in that refuter's brief"}

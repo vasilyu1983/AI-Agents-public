@@ -145,6 +145,7 @@
         "fork_turns": "none"
       },
       "kill_rule": "killed only when all 2 completed refuters refute with a nonblank reason; otherwise confirmed",
+      "shell_rule": "with args.target set (a PR, branch or path that may be unvetted), refuters get roles.refuter.tools without Bash even when it lists Bash, and the brief says to refute by reading only; where the worker cannot be denied a shell, keep its sandbox read-only with network off. Only a local run (no args.target) gives refuters Bash",
       "out_of_scope": "the claim lies outside the target",
       "lenses": [
         "Evidence lens: read the exact location the claim names and its surroundings. Refute only if that text or code shows the claim is false or already handled there or in what it calls.",
