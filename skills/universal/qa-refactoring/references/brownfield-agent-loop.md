@@ -92,6 +92,11 @@ What you need out of it before choosing anything:
 Recipes: [`../../dev-context-code-graph/references/query-recipes.md`](../../dev-context-code-graph/references/query-recipes.md)
 — specifically the refactor-risk packet and test-coverage cone.
 
+**Unsupported languages.** The graph is blind to languages its parsers do not cover, PHP
+among them: the queries above return nothing, not "no risk". For those repos build the
+fallback (route table, include/require graph, table-to-file map) and the side-effect
+inventory first: [cross-language-rewrite.md](cross-language-rewrite.md#code-graph-fallback-for-unsupported-languages).
+
 **Parse-gap caveat.** The graph's precision is bounded by parser coverage; heuristic parsers
 lose precision on dynamic dispatch, reflection, string-keyed lookups, DI containers, and
 config-driven wiring — all of which are *more* common in legacy code. Treat blast radius as
@@ -202,6 +207,13 @@ Stop the loop and return to a human when any of these fire:
 | Agent proposes deleting or skipping a test | Disqualifying without human justification |
 | Behavior change is *intended* | This is no longer a refactor; it needs its own spec and review |
 
+For a rewrite into another language, in-process characterization tests cannot run against
+both stacks. Use the black-box parity oracle in
+[cross-language-rewrite.md](cross-language-rewrite.md#black-box-parity-oracle) as the gate.
+Scale the translation with its rulebook, sample-slice stress test, per-slice fan-out and
+rule-level fixes ([translation at scale](cross-language-rewrite.md#translation-at-scale));
+do not fix a failing slice file by file.
+
 ## Known traps
 
 - **Treating a green agent-authored suite as behavior preservation.** It is evidence about
@@ -235,6 +247,7 @@ Stop the loop and return to a human when any of these fire:
 - [characterization-testing.md](characterization-testing.md) — gate construction
 - [legacy-code-strategies.md](legacy-code-strategies.md) — seams and dependency breaking
 - [strangler-fig-migration.md](strangler-fig-migration.md) — incremental replacement routing
+- [cross-language-rewrite.md](cross-language-rewrite.md) — parity oracle, language-pair hazards, translation at scale
 - [mutation-testing.md](mutation-testing.md) — validating the gate is not vacuous
 - [mikado-method.md](mikado-method.md) — ordering prerequisite changes when a seam needs others first
 - [`../../dev-context-code-graph/SKILL.md`](../../dev-context-code-graph/SKILL.md) — graph artifacts and queries

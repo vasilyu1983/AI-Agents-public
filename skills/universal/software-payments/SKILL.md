@@ -67,7 +67,7 @@ Route elsewhere when the main task is:
    - one-time purchase
    - subscription
    - usage-based billing
-   - marketplace or multi-party flow
+   - marketplace or multi-party flow (load [references/marketplace-payouts.md](references/marketplace-payouts.md) before choosing the money-flow model or designing payouts)
    - mobile IAP or hybrid web-plus-app billing
 2. Choose the stack:
    - processor
@@ -171,6 +171,10 @@ See: [references/testing-patterns.md](references/testing-patterns.md), [referenc
 **Agentic commerce**
 
 - [references/agentic-commerce.md](references/agentic-commerce.md)
+
+**Marketplace payouts**
+
+- [references/marketplace-payouts.md](references/marketplace-payouts.md)
 
 **Testing and migrations**
 

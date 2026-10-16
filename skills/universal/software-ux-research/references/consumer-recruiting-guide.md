@@ -134,9 +134,9 @@ Offer choice where operationally feasible. Amazon cards are inaccessible in some
 
 ### Tax Reporting
 
-- **US**: Aggregate payments to a single participant exceeding **$600/calendar year** trigger IRS 1099-NEC reporting requirements. Track cumulative payments per participant per year. Collect W-9 forms before crossing the threshold.
+- **US**: Track cumulative payments per participant per calendar year and collect a W-9 before the total reaches the IRS reporting threshold. Look up the current threshold and the correct box in the IRS Instructions for Forms 1099-MISC and 1099-NEC (irs.gov/instructions/i1099mec); the threshold changed for payments made after 2025 and may be inflation-adjusted later. Incentives that are not pay for services (for example prizes and awards) generally go on Form 1099-MISC box 3, not 1099-NEC. If the participant is also a contractor or employee of the sponsor, route the classification to finance or tax counsel.
 - **UK**: HMRC treats research incentives as taxable income for participants above their personal allowance. This is the participant's responsibility to declare, but inform them in the participant agreement.
-- **EU/Canada/AUS**: Each jurisdiction has equivalent thresholds — document and check locally for any study running >$500/year to a single participant.
+- **EU/Canada/AUS**: Each jurisdiction has equivalent thresholds — document and check the local threshold before a study pays one participant repeatedly in a year.
 
 ### No-Show and Cancellation Policy
 
@@ -414,7 +414,7 @@ The following clauses cover the minimum required topics. Legal review is require
 
 **Payment**
 
-> I will receive [amount and method] within [timeframe, e.g., 5 business days] following completion of the session. Payments may be reportable income under applicable tax law. It is my responsibility to comply with tax obligations in my jurisdiction. [US studies: if cumulative payments from [Organization] reach $600 in a calendar year, I will be asked to complete a W-9 form for IRS reporting purposes.]
+> I will receive [amount and method] within [timeframe, e.g., 5 business days] following completion of the session. Payments may be reportable income under applicable tax law. It is my responsibility to comply with tax obligations in my jurisdiction. [US studies: if cumulative payments from [Organization] reach the IRS reporting threshold in a calendar year, I will be asked to complete a W-9 form for IRS reporting purposes.]
 
 ---
 

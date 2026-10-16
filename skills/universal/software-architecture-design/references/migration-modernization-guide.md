@@ -195,6 +195,8 @@ Each service has its own database instance.
 | ETL batch sync | Periodic bulk sync | Non-real-time data, analytics |
 | API calls | New service fetches data via API | Loosely coupled, eventually consistent |
 
+Postgres-only example below. MySQL needs binlog-based CDC and a charset/collation check on both sides before any copy.
+
 **CDC Example with Debezium:**
 
 ```json
@@ -503,6 +505,20 @@ Stage 4: Steady State
 ---
 
 ## Decision Framework
+
+### Choose the End State Before the Rewrite
+
+Execution mechanics (parity oracle, seam, rollout) live in `qa-refactoring/references/strangler-fig-migration.md` and `qa-refactoring/references/cross-language-rewrite.md`. This guide owns the target-architecture and decomposition choice.
+
+Default: strangle incrementally toward a new frontend over the legacy backend exposed as an API. That is a valid place to stop, not a waypoint you owe.
+
+| End state | Choose it when |
+|-----------|----------------|
+| Modernise in place (upgrade the runtime, add a static-analysis baseline, run automated refactoring such as Rector and PHPStan for PHP) | The business logic is correct and is the asset, the team can staff the language, and the pain is end-of-life, security or delivery speed rather than UX |
+| Frontend-only (for example Next.js in front, legacy as API) | The pain is UX, SEO or frontend speed, and the backend can expose JSON |
+| Full rewrite, still sliced behind a parity oracle | The runtime or framework cannot be supported, the team cannot staff it, the logic must change anyway, or the code has no seams worth keeping |
+
+Record the choice as an ADR with the rejected end states. Execute a rewrite into another language with `qa-refactoring/references/cross-language-rewrite.md`.
 
 ### Should You Migrate at All?
 

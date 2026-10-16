@@ -72,7 +72,7 @@ def run_proc(command, agent_id=None, tool_name="Bash", cwd=None, raw=None, env_e
         event["agent_id"] = agent_id
     if cwd:
         event["cwd"] = cwd
-    env = {k: v for k, v in os.environ.items() if k != "GIT_SAFETY_STRICT"}
+    env = {k: v for k, v in os.environ.items() if k not in ("GIT_SAFETY_STRICT", "CLAUDE_PROJECT_DIR")}
     env.update(env_extra or {})
     return subprocess.run(
         [sys.executable, HOOK],
@@ -709,11 +709,22 @@ class NonGitFloor(unittest.TestCase):
                 Path(log).unlink(missing_ok=True)
                 self.assertEqual(run(command, env_extra={"FAKE_GH_LOG": log})[0], 0)
                 self.assertEqual(Path(log).read_text().split(), ["pr", "view", "12", "--repo", "o/r", "--json", "baseRefName", "-q", ".baseRefName"])
-        for base in ("main", ""):
-            with self.subTest(base=base):
-                code, err = run(pinned, env_extra={"FAKE_GH_BASE": base})
-                self.assertEqual(code, 2, "a main base or an unreadable base blocks")
-                self.assertIn("base other than the policy's merge base", err)
+        code, err = run(pinned, env_extra={"FAKE_GH_BASE": ""})
+        self.assertEqual(code, 2, "an unreadable base blocks")
+        self.assertIn("base other than the policy's merge base", err)
+        self.assertEqual(run(pinned, env_extra={"FAKE_GH_BASE": "release"})[0], 2, "an unprotected non-dev base blocks")
+
+    def test_pinned_merge_into_main_asks_only_where_a_human_can_answer(self):
+        # The human approves merges into main; Codex rejects "ask" and subagents have no human, so both block.
+        pinned = "gh pr merge 12 -R o/r --merge --match-head-commit ffffffffffffffffffffffffffffffffffffffff"
+        claude = {"FAKE_GH_BASE": "main", "CLAUDE_PROJECT_DIR": "/tmp"}
+        self.assertEqual(decision(pinned, env_extra=claude), "ask")
+        self.assertEqual(decision(pinned, env_extra={"FAKE_GH_BASE": "main"}), "block", "no CLAUDE_PROJECT_DIR: Codex")
+        self.assertEqual(decision(pinned, agent_id="a1", env_extra=claude), "block", "a subagent cannot ask")
+        codex_event = json.dumps({"tool_name": "Bash", "turn_id": "t1", "tool_input": {"command": pinned}})
+        self.assertEqual(decision(None, raw=codex_event, env_extra=claude), "block", "a turn_id marks Codex")
+        unpinned = "gh pr merge 12 -R o/r --merge"
+        self.assertEqual(decision(unpinned, env_extra=claude), "block", "the pin is still required for main")
 
     def test_gh_aliases_are_checked_as_their_expansion(self):
         aliases = "mm: pr merge\nmp: pr merge $1 -R o/r --match-head-commit ffffffffffffffffffffffffffffffffffffffff\nsh: !gh pr merge 12\nco: pr checkout\n"

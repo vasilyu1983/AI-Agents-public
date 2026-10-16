@@ -87,7 +87,9 @@ Tiers:
   `$PWD/.git`, `.git/*`, `.*`; single files such as `rm .git/index.lock` pass); `curl|wget` piped into a shell, `sh -c "$(curl ...)"` and `bash <(curl ...)`;
   `gh repo delete` and `gh api` with DELETE; `gh pr merge` with `--admin`, without a 40-hex `--match-head-commit`,
   without one explicit `-R <owner/repo>` and PR number, or into a base other than the policy's merge base (read with
-  `gh pr view <n> --repo <r>`, 10 s timeout; no answer blocks); a PUT to `gh api .../pulls/<n>/merge` and a
+  `gh pr view <n> --repo <r>`, 10 s timeout; no answer blocks). A pinned merge into another protected branch
+  (`main`) asks the human in a Claude Code parent session (CLAUDE_PROJECT_DIR set, no `turn_id`) and blocks
+  in Codex and in subagents, which cannot ask; a PUT to `gh api .../pulls/<n>/merge` and a
   `mergePullRequest` GraphQL call; a `gh pr merge` that shares its command line with another gh call; a gh
   command word, or any text in a `gh pr merge` or `gh api` call, from a `$` or backtick expansion; a gh alias,
   expanded from `gh alias list` and checked as that command, and blocked when it is a `!` shell alias, nests
@@ -329,6 +331,8 @@ BLOCK_RULES = [  # (text in the block reason, stable rule id); first match wins
     ("Subagents commit only", "git:subagent-commit"), ("Subagents must stage", "git:subagent-add-bulk"),
     ("force-delete", "git:subagent-branch-force"),
 ]
+MERGE_PROTECTED = ("gh pr merge into a protected branch other than the policy's merge base needs the human: "
+                   "Claude Code asks; Codex and subagents are blocked")
 FLOOR_RULES = {"recursive rm of a .git directory": "floor:rm-git-dir", "a shell runs a script that curl or wget downloads": "floor:download-shell", "mkfs formats a filesystem": "floor:mkfs",
                "dd writes to a device": "floor:dd-device", "gh repo delete removes a repository": "floor:gh-repo-delete",
                "gh api with the DELETE method": "floor:gh-api-delete", "recursive rm of / or the home directory": "floor:rm-root",
@@ -338,6 +342,7 @@ FLOOR_RULES = {"recursive rm of a .git directory": "floor:rm-git-dir", "a shell 
                "gh pr merge into a base other than the policy's merge base, or a base gh could not read": "floor:gh-merge-base",
                "gh pr merge without one -R <owner/repo> and the PR number": "floor:gh-merge-repo",
                "gh pr merge shares its command line with another gh call": "floor:gh-merge-shared",
+               MERGE_PROTECTED: "floor:gh-merge-protected",
                "a gh command word comes from a shell expansion, so it cannot be checked": "floor:gh-expansion",
                "a gh pr merge or gh api call takes text from a shell expansion, so it cannot be checked": "floor:gh-expansion",
                "a gh alias that the guard could not resolve": "floor:gh-alias"}
@@ -1578,7 +1583,10 @@ def floor_rule(tokens, cwd=".", alone=True, alias=False):
                      for i, a in enumerate(args) if a in ("-R", "--repo") or a.startswith(("--repo=", "-R"))}
             if len(repos) != 1 or len(merge) < 3 or not all(repos):
                 return "gh pr merge without one -R <owner/repo> and the PR number"
-            if merge_base(merge[2], repos.pop(), cwd) != MERGE_BASE:
+            target = merge_base(merge[2], repos.pop(), cwd)
+            if target in PROTECTED and target != MERGE_BASE:  # e.g. main: the human approves; check() blocks where it cannot ask
+                return Ask(MERGE_PROTECTED)
+            if target != MERGE_BASE:
                 return "gh pr merge into a base other than the policy's merge base, or a base gh could not read"
         upper = set(map(str.upper, methods))
         if words[:1] == ["api"] and ("PUT" in upper and any(re.search(r"pulls/[^/?#]+/merge/?(?:[?#].*)?$", w) for w in words)
@@ -1787,15 +1795,21 @@ def check(raw):
               file=sys.stderr)
         return 2
     alone =sum(launcher_at(t, lambda n: n == "gh") is not None for t in parts) <= 1
+    # Only Claude Code can show an "ask"; Codex rejects it as unsupported. Claude Code sets CLAUDE_PROJECT_DIR for
+    # hooks and sends no turn_id; Codex sets no CLAUDE_PROJECT_DIR. Anything else counts as unable to ask.
+    can_ask = not subagent and bool(os.environ.get("CLAUDE_PROJECT_DIR")) and "turn_id" not in event
+    asks = []
     for tokens in parts:
         rule = floor_rule(tokens, event.get("cwd") or os.getcwd(), alone)
+        if isinstance(rule, Ask) and can_ask:
+            asks.append(rule)
+            continue
         if rule:
             log_block(FLOOR_RULES.get(rule, "floor:other"), event, who)
             print(f"BLOCKED by git-safety-guard: {rule}. "
                   "If you intend it, ask the user to run it themselves at the `!` prompt.", file=sys.stderr)
             return 2
     cwd = event.get("cwd") or os.getcwd()
-    asks = []
     for args, here, blind in calls(command, cwd):
         if args is None:
             log_block("git:hooks-env", event, who)

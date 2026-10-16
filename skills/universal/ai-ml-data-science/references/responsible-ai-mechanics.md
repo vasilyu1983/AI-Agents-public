@@ -10,6 +10,7 @@ Use this reference to reason about responsible-AI failure mechanisms during data
 - [Interpretability and explanation](#interpretability-and-explanation)
 - [Poisoning and federated learning](#poisoning-and-federated-learning)
 - [Re-identification and memorization](#re-identification-and-memorization)
+- [Topology disclosure from released signals](#topology-disclosure-from-released-signals)
 - [Watermarking and provenance](#watermarking-and-provenance)
 - [Human oversight, automation bias, and appeals](#human-oversight-automation-bias-and-appeals)
 - [Copyright and training-data governance](#copyright-and-training-data-governance)
@@ -71,6 +72,19 @@ Removing names is not anonymization. Quasi-identifiers can link a released or lo
 - Deduplicate training corpora and restrict verbatim high-risk content, but do not claim deduplication eliminates memorization.
 - Treat embeddings, gradients, checkpoints, prompts, and logs as potentially sensitive artifacts.
 - Avoid claiming “anonymous” from k-anonymity or a single attack result; state the attacker knowledge and residual risk.
+
+## Topology disclosure from released signals
+
+Load when releasing node-indexed sensor/time-series observations, embeddings or other signals while withholding their graph. Hidden adjacency does not imply hidden relationships. Shan's *Graph Learning Techniques*, Ch8 §§8.2–8.3 (printed pp. 112–115; PDF pp. 131–134), motivates reconstructing latent topology from published observations. Its latent-basis/stimulus distances are not a differential-privacy guarantee; this recipe evaluates disclosure without adopting its obfuscation algorithm or effectiveness claims.
+
+1. Define the secret (edge existence, weight, community or node identity), released fields, node alignment, attacker auxiliary data and repeated-release access. Evaluate only authorized data or synthetic graphs with known truth; retain the private graph solely for scoring.
+2. Compare unreleased/no-signal and original-signal controls with the candidate release. On separate development graphs, tune a simple correlation attack and a graph-inference attack matching the signal assumptions, such as sparse conditional dependence or smooth-signal reconstruction. Give each attack the same declared access and budget; retune against the protected release rather than relying only on a frozen attacker.
+3. Lock thresholds before test graphs. Score edge precision/recall, average precision against edge prevalence, and sensitive subgroup recovery. Declare candidate edges, direction, signs and any negative subsampling. Also score the intended downstream task on matched data. Signal reconstruction error alone is not task utility.
+4. Repeat across seeds, signal lengths and available auxiliary information, including accumulated releases where applicable. Report privacy/utility curves and the strongest tested attack. Failure of a weak attack cannot demonstrate privacy; inability to recover the original graph from the unprotected positive control makes the test inconclusive.
+
+Sanity case: generate correlated observations on a known sparse graph and independent observations as a control. The unprotected attack should beat the no-signal baseline under its declared assumptions before comparing protection. Score exact edges, not only a distance between spectral bases: sign flips or rotations in an eigenspace can change basis coordinates without changing the graph. If all signals are suppressed, attack resistance may increase while task utility collapses; show both results.
+
+Claim only empirical resistance to the tested attackers. Formal DP requires an explicit edge-, node-, or person-level adjacency relation, a mechanism proof and composed privacy accounting for the full release. These protect different secrets; a large latent distance, a failed reconstruction attack, or a person-level record guarantee cannot substitute for the requested topology guarantee.
 
 ## Watermarking and provenance
 

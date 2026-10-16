@@ -39,7 +39,7 @@ Use [../software-architecture-design/SKILL.md](../software-architecture-design/S
 - This skill should name what stays untouched, what changes now, and what is intentionally deferred.
 - This skill should stop short of deciding deployable-unit count, internal service topology, or deep consistency mechanisms inside a chosen solution.
 - Once the main question becomes runtime boundaries, bounded contexts, resilience internals, or platform defaults, hand off to [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md).
-- **Migration boundary**: this skill owns the cross-system wave plan — which systems coexist, in what order, with what rollback and retirement criteria. It does not own the mechanics of extracting or decomposing inside one system (strangler fig steps, database decomposition, shadow traffic) — that is [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md)'s `migration-modernization-guide.md` and `estate-modernization.md`.
+- **Migration boundary**: this skill owns the cross-system wave plan — which systems coexist, in what order, with what rollback and retirement criteria. It does not own the mechanics of extracting or decomposing inside one system (strangler fig steps, database decomposition, shadow traffic) — the target-architecture and decomposition choice is [../software-architecture-design/SKILL.md](../software-architecture-design/SKILL.md)'s `migration-modernization-guide.md` and `estate-modernization.md`; execution mechanics (parity oracle, seam, rollout) are [../qa-refactoring/SKILL.md](../qa-refactoring/SKILL.md)'s `strangler-fig-migration.md` and `cross-language-rewrite.md`.
 
 ## Default Workflow
 

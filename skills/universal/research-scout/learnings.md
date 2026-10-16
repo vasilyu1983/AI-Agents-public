@@ -2,6 +2,7 @@
 
 ## Patterns That Work
 
+- [2026-10-12] For X post seeds, curl api.fxtwitter.com/<user>/status/<id> for verbatim text and article bodies; WebFetch only paraphrases, and promo posts hold no build detail.
 - [2026-09-08] Niche-scouting mode needs a parent gate re-score: 4 of 5 scout lenses marked regulatory duties, job ads and category stats as demand; strict re-score left all at ? and two at TEST behind a free constraint check.
 - [2026-08-23] Prompt-compliance data (rule ceilings, rules-vs-examples) is model-generation-scoped: on frontier shifts (Claude 5 ~80% prompt cut, 2026-07-24) add a dated calibration note scoping old data to its era; keep it for older models.
 - [2026-08-23] x.com tweet/article URLs return HTTP 402 to anonymous fetchers; api.fxtwitter.com/<user>/status/<id> mirrors both the tweet and a summary of an attached X Article — use it before concluding an X source is unreachable.
@@ -37,6 +38,7 @@
 - [2026-05-17] Scan workers over-claim version/compat facts; re-verify every load-bearing version or contradiction claim against primary sources and write the accurate partial form, never the worker's blanket claim.
 ## Domain Knowledge
 
+- [2026-10-12] LLM trading-agent alpha (TradingAgents, FinMem, FinCon) fails independent re-tests (FINSABER 2505.07078, Alpha Illusion 2605.16895) net of costs; steal topology and eval protocols, not alpha.
 - [2026-10-10] Semantic Scholar API returned HTTP 429 on every unauthenticated call even after a 20s backoff (2026-10-10); schedule citation velocity (Step 5) as a later re-run and write '[citations: unavailable]' rather than invent counts.
 - [2026-09-08] Jun-Sep 2026 had no TypingMind-shaped API moment; shifts were regulatory/protocol (MCP 2026-07-28, AI Act Art.50 2 Aug, UKPI cVRP 2 Jun, Apple 4.3 8 Jun) and article50ready.com already sells the widget at EUR 29-199.
 - [2026-08-24] Aug-2026 resume-screening scan: LLM screeners fail validity audits (2602.18550: can't pick more-qualified, no abstention) while employers add LLM layers judging narrative coherence. Deterministic+provenance pipelines age well.

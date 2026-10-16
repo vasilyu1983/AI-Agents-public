@@ -22,6 +22,8 @@ Use this pattern when questions require relationship traversal or aggregation. V
 - [Operational Patterns](#operational-patterns)
 - [KG Lifecycle and Quality Dimensions](#kg-lifecycle-and-quality-dimensions)
 - [Retrieval-Granularity Ladder](#retrieval-granularity-ladder)
+- [Compositional Query Acceptance Cases](#compositional-query-acceptance-cases)
+- [Applied Ontology Competency Questions](#applied-ontology-competency-questions)
 - [Pattern 1: Knowledge Graph Construction](#pattern-1-knowledge-graph-construction)
 - [Step 1: Entity and relationship extraction via LLM](#step-1-entity-and-relationship-extraction-via-llm)
 - [Step 2: Entity resolution (deduplicate)](#step-2-entity-resolution-deduplicate)
@@ -202,6 +204,102 @@ first, then the format.
 Primary source: [arXiv:2408.08921](https://arxiv.org/abs/2408.08921) (GraphRAG
 survey — G-indexing / G-retrieval / G-generation, retrieval granularity, and
 graph formats).
+
+---
+
+## Compositional Query Acceptance Cases
+
+Use this recipe when a question combines directed relations or set operators.
+Resolve anchors to stable entity IDs first; an ambiguous name requires
+disambiguation, not a union of unrelated entities. Execute projection,
+intersection and union with deterministic traversal/set operations when sufficient.
+For relation `r`, define `P_r(S) = {t | s in S and (s, r, t) is present}`.
+Composition follows direction: `P_owned_by(P_depends_on({app}))` finds owners of
+dependencies, not dependants of an owner.
+
+**Illustrative fixture, not benchmark results.** Start with independently authored
+source records: `app.yml` declares `app` depends on `lib-a` and `lib-b`;
+`owners.yml` declares `lib-a` is owned by `team-red`, and `lib-b` by `team-blue`;
+`reviewers.yml` declares `team-red` reviews `app`. The corresponding gold edges are:
+
+```text
+app --depends_on--> lib-a
+app --depends_on--> lib-b
+lib-a --owned_by--> team-red
+lib-b --owned_by--> team-blue
+team-red --reviews--> app
+```
+
+Let `O = P_owned_by(P_depends_on({app}))` and
+`R = {s | (s, reviews, app) is present}`. Save the following expected sets from
+source review before running the extractor or query engine. In real evaluations,
+pin source revisions and evidence spans; do not generate gold from the graph
+being tested. Graph-generated questions are supplemental consistency cases.
+
+| Question / case | Operation | Expected outcome |
+|---|---|---|
+| Who owns the dependencies of `app`? | Two projections: `O` | `{team-red, team-blue}`; both complete directed paths required. |
+| Which dependency owners also review `app`? | `O intersect R` | `{team-red}`. |
+| Which teams own a dependency or review `app`? | `O union R` | `{team-red, team-blue}`; deduplicate `team-red`. |
+| Does `lib-a` depend on `app`? | `app in P_depends_on({lib-a})` | Not supported; the reversed edge does not follow from `app -> lib-a`. |
+| Who owns `app` directly? | `P_owned_by({app})` | Empty observed set; do not substitute dependency owners or assert no owner exists. |
+| Remove `lib-b -> team-blue` only from the retrieval projection | Re-run `O` | Traversal reaches intermediate node `lib-b` but yields only `{team-red}`; frozen gold remains unchanged. |
+
+Negation requires a declared candidate universe and complete coverage of the
+predicate within that scope, including caller authorization and validity time.
+For example, if `{team-red, team-blue}` is the complete team universe and the
+review register is complete for `app`, `O minus R` yields `{team-blue}` for
+dependency owners that do not review `app`. Without that completeness contract,
+report “review not observed”; a missing edge cannot establish a negative fact.
+
+1. Freeze source-based answers and an untouched gold graph. Create a separate
+   retrieval projection for perturbations; never delete gold evidence.
+2. Compare traversal alone with traversal plus source-text recovery on identical
+   cases. Delete edges with recorded random seeds and test structured omissions,
+   such as all edges extracted from one source or repository. Include an
+   intermediate-edge deletion, reversed edges and ambiguous anchors.
+3. Score exact answer-set match, answer precision/recall and supporting-edge
+   correctness by operator. Report abstentions, unsupported edges and recovered
+   gold answers with complete source support separately. Do not treat an empty
+   traversal result as a successful negative answer.
+
+For the missing-edge case above, source recovery may return `team-blue` only
+with `app.yml` evidence for `app -> lib-b` and `owners.yml` evidence for
+`lib-b -> team-blue`. If either source is unavailable, report partial evidence or
+abstain. Quarantine model-proposed edges with their inferred status, provenance
+and validation state; exclude them from canonical traversal and gold answers
+until source verification accepts them. Confidence alone cannot promote an edge.
+
+Source: Liu & Tong, *Neural Symbolic Knowledge Graph Reasoning*, Ch. 6,
+PDF pp. 98–104 (§§6.2–6.4): projection/intersection/negation/union and evaluation
+on incomplete graphs. The source-grounding controls and fixture above are this
+guide's operational adaptation, not a reproduction of its LGOT model or reported
+performance. Choose deletion levels for local coverage risks; the book's
+experiment is not a required threshold or evidence of local benefit.
+
+## Applied Ontology Competency Questions
+
+Schema design belongs to `ai-context-layer`; apply its agreed types, directions
+and inheritance rules here as retrieval acceptance criteria. Before a schema
+addition ships, record the user question it enables, source-based expected
+answers, required paths and evidence. Replay these cases after schema or source
+updates, keeping independent cases separate from graph-generated ones.
+
+**Illustrative extension:** source records classify `lib-a` and `lib-b` as
+`Library`, with the schema rule `Library` is a subtype of `Component`. Ask
+“Which components does `app` depend on, and who owns each?” Expect
+`{(lib-a, team-red), (lib-b, team-blue)}` using inherited component membership,
+`depends_on` outward from `app`, and `owned_by` outward from each library.
+Require source evidence for both edges in each result and a trace to the schema
+rule for inherited membership. Pair it with “Which components does `lib-a`
+depend on?”: expect an empty observed set in this fixture, with the same
+completeness caveat as above. This tests inheritance, multiple answers, direction
+and empty retrieval without introducing another schema owner.
+
+Source: Bourne, *Unlocking Data with Generative AI and RAG*, 2nd ed., Ch. 13,
+PDF pp. 351–355: domain/scope, competency questions, class hierarchy and typed
+relationship design. The software-component case is an adaptation of that
+acceptance approach, not the book's financial-domain lab.
 
 ---
 
@@ -581,8 +679,10 @@ def pack_subgraph_context(entities, relationships, max_tokens=2000):
 The table above compares the formats most teams reach for first. The survey
 literature describes a wider set of *graph translators* — converters that turn a
 retrieved node, path, or subgraph into something an LLM ingests well. A graph is
-non-Euclidean; text is a sequence. Every format below is a lossy projection, and
-which loss you accept is the design decision.
+non-Euclidean; text is a sequence. Selecting a subgraph can omit relevant facts;
+encoding the selected records need not lose information. Complete edge records
+with explicit IDs, direction, multiplicity and metadata can round-trip faithfully.
+Check selection loss separately from serialization loss.
 
 | Format | What it is | Preserves | Costs |
 |---|---|---|---|
@@ -608,6 +708,75 @@ engineer's intuition suggests. Verify on your own eval before committing.
 Primary sources: [arXiv:2408.08921](https://arxiv.org/abs/2408.08921) (graph
 formats for G-generation); [arXiv:2404.14809](https://arxiv.org/abs/2404.14809)
 (graph-task taxonomy and prompting methods for LLMs on graphs).
+
+#### Measure the format on matched content
+
+Start with typed edge records, not a dictionary keyed only by relation and subject: `relations[type][subject] = target` overwrites multiple targets. Preserve edge IDs and parallel edges even when their subject, relation and target match. Keep node IDs distinct from display names; retain source anchors, source commit, validity and ACL scope in every arm. Serialize only records already eligible for the query's authorization and time scope.
+
+Compare a typed edge table, JSON record array, Python-literal record list and deterministic natural-language templates. Treat Python-looking context as untrusted data: never `exec` or `eval` it. It is prompt text, not permission to run retrieved code. Use escaped literals and complete records; do not recover truth by asking a model to parse a generated summary.
+
+Source basis: Bourne, *Unlocking Data with Generative AI and RAG*, second edition, Chapter 14, PDF pages 412–413 (printed 373–374), motivates Python dictionaries. Read the underlying [Wu and Tsioutsiouliklis paper, §3.2 and §4](https://arxiv.org/html/2412.10654v1#S3.SS2): its Python variants include static dictionaries with inference expressions and a class with an inference function. Its experiments distinguish prompting, fine-tuning and context conditions. These are reasons to test formats; they do not establish a universal winner for static Python literals.
+
+1. **Match content first.** Freeze the same authorized subgraph, record order, provenance, question, model/checkpoint, decoding settings, answer contract and reasoning scaffold. Allow enough input space for every complete encoding; record actual tokens. If Python includes inference examples or instructions, supply equivalent reasoning help to all arms or test that scaffold as a separate factor. A format-only comparison gives no arm an answer or traversal algorithm unavailable to the others.
+2. **Check fidelity before model calls.** Decode each deterministic serialization back to canonical records. Compare complete records as a multiset, not just unique triples; test escaped labels, multiple targets, parallel edges and reversed directions. Verify exact metadata retention. The fixture below checks a small record set only; extend it for the production schema, nulls, types and size limits.
+3. **Measure answers on paired queries.** Include multi-hop joins, counts, intersections, duplicate names and unsupported relationships. Score exact answer sets, precision/recall, supporting-edge direction, citation support and abstention. Record input/output tokens, serialization time, model latency and cost using supplied rates. Repeat with shuffled edge order and consistent bijective ID/name renaming; map outputs back before scoring. Separate loss from semantic labels versus sensitivity to arbitrary identifiers.
+4. **Compare a fixed budget separately.** Hold the evidence-token limit equal, use one deterministic priority rule, drop only whole records and report each arm's included/omitted edge IDs. Report evidence coverage alongside answer quality. This measures packing plus format, rather than encoding alone. Never truncate halfway through a record or present omitted edges as nonexistent.
+5. **Choose from measured results.** Freeze tuning before the held-out comparison, report paired uncertainty and query slices, and retain a format change only when its quality/cost result meets declared gates. A successful round trip proves fidelity on the fixture; it does not prove model comprehension or retrieval benefit. Until model trials run, that benefit is unmeasured.
+
+Executable local sanity fixture (stdlib only; run with `python3`). The restricted AST decoder accepts only the generated list/dictionary/string structure; it does not execute Python. Negative controls must detect both target collapse and reversed direction.
+
+```python
+import ast
+import csv
+import io
+import json
+import re
+from collections import Counter
+
+fields = "id subject relation target source commit valid_from valid_to scope".split()
+rows = [dict(zip(fields, values)) for values in [
+    ("e1", "svc:a", "CALLS", "svc:b", "a.py#L2", "commit-a", "t0", "t1", "team"),
+    ("e2", "svc:a", "CALLS", "svc:c", "a.py#L3", "commit-a", "t0", "t1", "team"),
+    ("e3", "svc:a", "CALLS", "svc:b", "a.py#L4", "commit-a", "t0", "t1", "team"),
+]]
+for row in rows:
+    row["label"] = 'Shared "API"\\name\nservice'
+fields.append("label")
+
+def bag(records):
+    return Counter(json.dumps(r, sort_keys=True) for r in records)
+
+def literal(node):
+    if isinstance(node, ast.List):
+        return [literal(item) for item in node.elts]
+    if isinstance(node, ast.Dict):
+        return {literal(k): literal(v) for k, v in zip(node.keys, node.values)}
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        return node.value
+    raise ValueError("Only list/dictionary/string literals are accepted")
+
+buffer = io.StringIO()
+writer = csv.DictWriter(buffer, fieldnames=fields, delimiter="\t")
+writer.writeheader()
+writer.writerows(rows)
+encodings = {
+    "typed_table": list(csv.DictReader(io.StringIO(buffer.getvalue()), delimiter="\t")),
+    "json": json.loads(json.dumps(rows)),
+    "python_literal": literal(ast.parse(repr(rows), mode="eval").body),
+}
+text = ["Edge has " + ", ".join(f"{k} {json.dumps(v)}" for k, v in r.items()) + "."
+        for r in rows]
+pattern = r'(\w+) ("(?:[^"\\]|\\.)*")'
+encodings["deterministic_nl"] = [
+    {k: json.loads(v) for k, v in re.findall(pattern, line)} for line in text
+]
+assert all(bag(decoded) == bag(rows) for decoded in encodings.values())
+collapsed = {(r["subject"], r["relation"]): r for r in rows}
+assert bag(collapsed.values()) != bag(rows), "Target-collapse control was missed"
+reversed_rows = [dict(r, subject=r["target"], target=r["subject"]) for r in rows]
+assert bag(reversed_rows) != bag(rows), "Direction control was missed"
+print("PASS: four round trips; target-collapse and direction controls detected")
+```
 
 ### Pattern 7: Graph Maintenance and Updates
 

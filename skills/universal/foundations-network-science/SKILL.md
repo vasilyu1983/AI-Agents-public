@@ -2,7 +2,7 @@
 name: foundations-network-science
 description: "Network-science primitives: centrality, influence seeding, communities, contagion vs homophily, GNN failures. Use when seeding a referral campaign or finding critical graph nodes."
 compatibility: Portable core only.
-version: "1.3"
+version: "1.4"
 last_validated: 2026-08-14
 ---
 
@@ -98,7 +98,9 @@ The "are scale-free networks rare?" question is contested, not settled: Broido &
 - [ ] **Spread / contagion**: How far does a signal reach from a seed? → SIR model (#7); if spread requires social reinforcement or multiple exposures (technology adoption, norm diffusion, behaviour change) → threshold / complex contagion model (#7, Failure Mode 7), not SIR
 - [ ] **Missing edge inference**: Which edges are likely to form next? → link prediction (#8)
 - [ ] **Node similarity / downstream ML**: Need node vectors for classification or recommendation? → graph embeddings (#10)
-- [ ] **Temporal causality**: Do edge timestamps change what is reachable? → temporal networks (#11)
+- [ ] **Temporal representation**: Do topology or features change, or does contact order affect reachability? → temporal networks (#11); select fixed topology, snapshots or events before choosing a model
+- [ ] **Topology unknown**: Must edges be inferred from observed signals? → [graph schema design: inferred topology](assets/templates/network-science/12-graph-schema-design.md#when-topology-must-be-inferred-from-observations); distinguish association, conditional dependence, smoothness and diffusion assumptions
+- [ ] **Recurring small structures**: Need frequent subgraphs or motif discovery? → [frequent-pattern support and controls](references/frequent-patterns.md); declare collection/count semantics before search, and require a null comparison for motif significance
 - [ ] **Higher-order structure test**: If group interactions (households, teams, co-authorship) are the unit, test reducibility before using pairwise methods. See [research notes](references/research-notes.md#higher-order-structure).
 
 

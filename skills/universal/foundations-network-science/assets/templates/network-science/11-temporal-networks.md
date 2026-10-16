@@ -10,10 +10,10 @@ A **temporal network** is a graph where each edge (u, v) carries a timestamp t: 
 
 **Key consequences**:
 
-- **Reachability is strictly smaller** on temporal networks than on the equivalent static graph (aggregate all edges, ignore time)
+- **Reachability is no larger** on temporal networks than on the equivalent static graph (aggregate all edges, ignore time)
 - **Burstiness**: real contact sequences are bursty (Poisson process predicts too-even timing). Bursty contacts slow epidemic spread because long inter-event gaps create waiting times
 - **Temporal diameter**: the longest shortest time-respecting path. Can be infinite if the time window is too short
-- **Causal ordering**: information can only flow forward in time; temporal paths encode causality, not just connectivity
+- **Causal ordering**: information can only flow forward in time; temporal paths encode feasible transmission order; they do not identify causal effects
 
 **Key metrics**:
 
@@ -30,6 +30,43 @@ A **temporal network** is a graph where each edge (u, v) carries a timestamp t: 
 - Communication network analysis where message delivery depends on availability windows
 - Knowledge graph reasoning over time-indexed relations (Company A acquired B before B released Product C)
 - Comparing observed temporal spread against a static-graph upper bound
+
+## Choose the representation before the model
+
+Default to the coarsest representation that preserves the decision's timing constraints. Marzullo, Deusebio & Stamile, *Graph Machine Learning*, 2nd ed., ch. 11, printed pp. 337–343 (PDF 360–366), distinguishes:
+
+| Evidence and required resolution | Representation | Concrete case and loss to check |
+|---|---|---|
+| Node and edge identities stay fixed; only measurements vary | Fixed topology with time-indexed features | Road sensors with hourly speeds; if closures change connectivity, fixed topology is insufficient |
+| Connectivity changes, but order within a justified window is irrelevant | Discrete topology snapshots with features | Daily supply contracts; vary window width and test whether within-day ordering changes the answer |
+| Irregular contacts, durations or updates change reachability or prediction eligibility | Initial state plus timestamped events | Transactions or messages; preserve additions, deletions and feature updates rather than treating every event as a permanent edge |
+
+Distinguish an interval's events from the graph state at its end. Record event time, availability time, update type, identity, validity interval and tie rule. An interaction need not create a persistent relationship. Deletions require state updates; repeated contacts require multiplicity. Specify whether equal-time edges allow successive hops: use strict ordering when simultaneous events cannot transmit onward.
+
+For forecasting at cutoff `t`, every edge, feature, fitted normalization and node identity must be eligible using information available before `t`. A snapshot ending after `t` leaks even when its start precedes `t`. Retrospective reconstruction with later evidence is a different task. Late-arriving records require both event-time and availability-time filters.
+
+Compare the static aggregate, snapshot candidate and event candidate on the same chronological cutoffs, horizon, candidate pairs and availability rules. Report recurring versus first-seen edges separately, plus runtime, peak memory, update latency and the age of the newest eligible data. Model fitting and full predictive evaluation belong to `ai-ml-data-science`; these controls establish representation eligibility only.
+
+### Deterministic ordering and leakage control
+
+Run with Python 3. This toy uses directed instantaneous contacts, strict time ordering and an exclusive cutoff; it is not a general temporal-path implementation.
+
+```python
+# (source, target, event_time, available_time)
+events = [('B', 'C', 1, 1), ('A', 'B', 2, 2),
+          ('B', 'C', 3, 3), ('A', 'D', 1, 5)]
+def reachable(cutoff):
+    eligible = [e for e in events if e[2] < cutoff and e[3] < cutoff]
+    arrival = {'A': float('-inf')}
+    for u, v, t, _ in sorted(eligible, key=lambda e: e[2]):
+        if arrival.get(u, float('inf')) < t:
+            arrival[v] = min(arrival.get(v, float('inf')), t)
+    return set(arrival)
+assert reachable(3) == {'A', 'B'}  # static A→B→C is time-infeasible
+assert reachable(4) == {'A', 'B', 'C'}  # future contact now eligible
+assert 'D' not in reachable(4)  # old event arrived after the cutoff
+print('temporal ordering and availability controls passed')
+```
 
 ## Inputs
 

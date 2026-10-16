@@ -85,3 +85,41 @@ The vocabulary carries real compression: telling a colleague that a dataset is "
 - [`09-graph-clustering.md`](09-graph-clustering.md) — partition quality depends on which entities were made nodes in the first place
 - [`10-graph-embeddings.md`](10-graph-embeddings.md) — heterogeneous vs. homogeneous schema determines whether a homogeneous embedding method is even applicable
 - [`08-link-prediction.md`](08-link-prediction.md) — edge-type constraints define what counts as a candidate edge
+
+## When topology must be inferred from observations
+
+Load this section when nodes are measured variables or sensors but edges are unknown. Default to a documented observed relation when one exists; otherwise record the inferred graph's estimand before selecting an algorithm. Store observed and inferred edges separately, with method, training window, preprocessing, regularization and uncertainty. An inferred statistical edge is not a verified physical connection.
+
+| Construction | Edge meaning and assumptions | Use condition and failure control |
+|---|---|---|
+| Thresholded marginal correlation | Pairwise linear association; scale and time alignment matter | Exploratory similarity baseline; a shared driver can create edges without direct interactions |
+| Sparse precision / graphical lasso | Nonzero inverse-covariance entry; under a multivariate Gaussian model, conditional dependence given the other observed variables | Use for sparse conditional association; check distribution, sample dependence and regularization stability; omitted common drivers remain a problem |
+| Smooth-signal Laplacian learning | Weighted undirected neighbors have similar signals under a smoothness prior | Use for smooth spatial measurements; enforce symmetric nonnegative adjacency, zero diagonal and a valid Laplacian; constrain scale or degrees to avoid the empty-graph solution |
+| Stationary diffusion-based inference | Signals are outputs of a specified graph filter, with assumptions about input covariance and graph symmetry | Use only with a defensible generating process; covariance alone may admit several topologies or filters, so report unresolved identification |
+
+Conditional dependence does not establish causality or direction. Smoothness measures and sparse precision target different graphs: a valid combinatorial Laplacian is singular, whereas a precision estimate is positive definite. Do not substitute one for the other or turn signed precision entries into positive physical edge weights without a separate justification.
+
+**Small case:** two sensors track the same ambient temperature. Their correlation can be high without a sensor-to-sensor connection. Measure the common driver where possible, compare marginal and conditional association, and retain a shared-driver synthetic negative control. Conditioning only addresses included variables under the model; it does not establish a causal graph.
+
+**Acceptance record:** generate observations from a known small topology under the selected signal model and an independent shared-driver control. Compare inferred-edge precision/recall against that known graph, held-out reconstruction against a no-edge or similarity baseline, and edge selection across resamples. For serial data use time blocks, not independent-row bootstrap. Select preprocessing and regularization on training data only; do not fit topology to held-out signals for a forecasting claim. Reconstruction fit or bootstrap stability alone cannot establish correct topology. Delegate model fitting and the full evaluation protocol to `ai-ml-data-science`.
+
+### Exact shared-driver sanity check
+
+Run with Python 3. These are population covariances for independent, unit-variance Gaussian `Z`, `eX`, `eY`, with `X = Z + eX`, `Y = Z + eY`. This checks the distinction analytically; it does not fit graphical lasso or demonstrate finite-sample recovery.
+
+```python
+from math import isclose, sqrt
+var_x = var_y = 2.0
+var_z = cov_xz = cov_yz = cov_xy = 1.0
+marginal = cov_xy / sqrt(var_x * var_y)
+conditional_cov = cov_xy - cov_xz * cov_yz / var_z
+conditional_var_x = var_x - cov_xz ** 2 / var_z
+conditional_var_y = var_y - cov_yz ** 2 / var_z
+partial = conditional_cov / sqrt(conditional_var_x * conditional_var_y)
+assert isclose(marginal, 0.5)
+assert isclose(partial, 0.0, abs_tol=1e-12)
+assert abs(marginal) > 0.4 and abs(partial) < 0.4  # illustrative threshold
+print('shared-driver association control passed')
+```
+
+Sources: Baoling Shan, *Graph Learning Techniques*, ch. 3 §§3.1–3.3, printed pp. 28–33 (PDF 47–52), motivates these alternatives; use primary formulations for implementation. Friedman, Hastie & Tibshirani (2008), [graphical lasso, §§1–2](https://doi.org/10.1093/biostatistics/kxm045), establishes the Gaussian precision interpretation. Dong et al. (2016), [smooth-signal Laplacian learning](https://arxiv.org/abs/1406.7842), and Kalofolias (2016), [§§2–4](https://proceedings.mlr.press/v51/kalofolias16.pdf), establish the smoothness construction and its nontriviality constraints. No book equation or performance claim is reproduced here.

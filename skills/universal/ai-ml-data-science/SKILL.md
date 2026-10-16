@@ -2,7 +2,7 @@
 name: ai-ml-data-science
 description: "Builds ML pipelines: EDA, features, leakage checks, evaluation. Use when doing data science or explaining fairness, privacy, speech, vision-language, or diffusion mechanics."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.3"
+version: "1.4"
 last_validated: 2026-08-21
 ---
 
@@ -53,6 +53,7 @@ Frame the decision and prediction timestamp before choosing models; features mus
 3. Build the simplest viable baseline first.
 4. Design point-in-time-correct features and compare stronger candidates only after the baseline is trustworthy.
 5. Evaluate with the same split strategy, same metric definitions, and same compute budget.
+   For graph models, load [graph-model-evaluation](references/graph-model-evaluation.md) when evaluating learned/temporal topology, self-supervised pretraining, or graph explanations; record its split, baseline, and sanity-check results.
 6. Produce handoff artifacts with thresholds, calibration state, failure modes, and reproducibility notes.
 
 ---
@@ -162,6 +163,7 @@ python scripts/ml_toolkit.py report --input data/sample-model-spec.json --output
 - [references/data-contracts-lineage.md](references/data-contracts-lineage.md)
 - [references/modelling-patterns.md](references/modelling-patterns.md)
 - [references/evaluation-patterns.md](references/evaluation-patterns.md)
+- [references/graph-model-evaluation.md](references/graph-model-evaluation.md) — bounded graph pretraining, explanation, temporal and inferred-topology evaluation contracts
 - [references/class-imbalance-patterns.md](references/class-imbalance-patterns.md)
 - [references/hyperparameter-optimization.md](references/hyperparameter-optimization.md)
 - [references/text-clustering-topic-modeling.md](references/text-clustering-topic-modeling.md) — modular embed/UMAP/HDBSCAN/c-TF-IDF pipeline, representation-model reranking, per-topic (not per-document) LLM labeling, and when to prefer plain k-means

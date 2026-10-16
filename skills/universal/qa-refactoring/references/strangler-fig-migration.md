@@ -208,6 +208,10 @@ app.use("/api/orders", async (req, res, next) => {
 app.listen(3000);
 ```
 
+### Seam for a Rewrite in Another Stack
+
+When the new stack uses another language or framework, choose the seam with [cross-language-rewrite.md](cross-language-rewrite.md#routing-seam): a logic-free proxy, gateway, scheduler or topic switch outside both apps by default; framework-level rewrites in the new app (for example Next.js fallback rewrites) only when the team that owns the new app owns the edge.
+
 ### Proxy Monitoring
 
 ```python
@@ -271,6 +275,8 @@ for the delivery guarantee and duplicate-publish failure mode.
 
 ### CDC with Debezium
 
+The connector below is the PostgreSQL variant. For MySQL, use the MySQL connector, which reads the binlog (binary logging must be enabled in row format on the source).
+
 ```yaml
 # docker-compose.yml (Debezium CDC setup)
 services:
@@ -306,12 +312,24 @@ services:
 """
 Compare outputs from legacy and new system to verify equivalence.
 Run as a background job during the dual-write phase.
+
+Two layers. Before any read cutover run the full check: per-table row counts
+and a checksum over every row (not a sample). The sampled check below is only
+a cheap continuous monitor for the live write window; it never replaces the
+full check. Timestamps are compared after timezone normalisation, never skipped.
 """
 import json
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
-logger = logging.getLogger("dual-write-verifier")
+logger = logging.getLogger("dual-write-verifier")  # stdlib logger: structured fields go in extra={...}
+
+def to_utc(value, source_tz):
+    """Treat a naive datetime as source_tz; convert aware ones to UTC."""
+    if value.tzinfo is None:
+        value = value.replace(tzinfo=source_tz)
+    return value.astimezone(timezone.utc)
+
 
 def verify_dual_write_consistency(
     legacy_db,
@@ -319,13 +337,15 @@ def verify_dual_write_consistency(
     table: str,
     time_window_minutes: int = 5,
     sample_size: int = 100,
+    legacy_tz=timezone.utc,  # MySQL DATETIME has no zone: pass the zone the legacy app wrote in
 ):
     """Compare records between legacy and new databases."""
     cutoff = datetime.utcnow() - timedelta(minutes=time_window_minutes)
 
-    # Sample recent records from both systems
+    # Sample recent records from both systems.
+    # Random order is engine-specific (Postgres RANDOM(), MySQL RAND()); use your engine's function.
     legacy_records = legacy_db.query(
-        f"SELECT * FROM {table} WHERE updated_at > %s ORDER BY RANDOM() LIMIT %s",
+        f"SELECT * FROM {table} WHERE updated_at > %s ORDER BY <engine random function> LIMIT %s",
         (cutoff, sample_size)
     )
 
@@ -344,14 +364,17 @@ def verify_dual_write_consistency(
 
         # Compare field by field
         for field in legacy_record:
+            legacy_value, new_value = legacy_record[field], new_record[0].get(field)
             if field in ("updated_at", "created_at"):
-                continue  # Timestamps may differ slightly
-            if legacy_record[field] != new_record[0].get(field):
+                # Normalise both sides to UTC; a mismatch after that is real drift
+                legacy_value = to_utc(legacy_value, legacy_tz)
+                new_value = to_utc(new_value, timezone.utc)
+            if legacy_value != new_value:
                 mismatches.append({
                     "id": legacy_record["id"],
                     "field": field,
-                    "legacy": legacy_record[field],
-                    "new": new_record[0].get(field),
+                    "legacy": legacy_value,
+                    "new": new_value,
                 })
 
     # Report results
@@ -360,11 +383,13 @@ def verify_dual_write_consistency(
 
     logger.info(
         "dual_write_verification",
-        table=table,
-        total_checked=total,
-        mismatches=len(mismatches),
-        missing_in_new=len(missing_in_new),
-        match_rate=f"{match_rate:.1f}%",
+        extra={
+            "table": table,
+            "total_checked": total,
+            "mismatches": len(mismatches),
+            "missing_in_new": len(missing_in_new),
+            "match_rate": f"{match_rate:.1f}%",
+        },
     )
 
     return {
@@ -433,11 +458,13 @@ def backfill_table(
 
         logger.info(
             "backfill_progress",
-            table=table,
-            migrated=migrated,
-            total=total,
-            pct=f"{migrated / total * 100:.1f}%",
-            last_id=last_id,
+            extra={
+                "table": table,
+                "migrated": migrated,
+                "total": total,
+                "pct": f"{migrated / total * 100:.1f}%",
+                "last_id": last_id,
+            },
         )
 
         # Throttle to avoid overwhelming the databases

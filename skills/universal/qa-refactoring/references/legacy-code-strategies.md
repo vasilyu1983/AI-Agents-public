@@ -336,7 +336,7 @@ class TestableReportGenerator extends ReportGenerator {
 
 **Week 2: Quick Wins**
 - [ ] Remove dead code
-- [ ] Fix obvious bugs
+- [ ] Log obvious bugs for the product owner (do not fix them while characterizing)
 - [ ] Add missing documentation
 - [ ] Update dependencies (if safe)
 

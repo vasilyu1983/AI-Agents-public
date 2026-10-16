@@ -45,6 +45,7 @@ If the request is "how do I add a slash command to my runtime?" or "how should I
 | How do I wrap dev tools for agents? | [references/tool-integration.md](references/tool-integration.md) | Linter, formatter, test runner, type checker patterns |
 | My agent is broken | [references/debugging-guide.md](references/debugging-guide.md) | Failure taxonomy and fixes |
 | What do production coding agents look like? | [references/production-patterns.md](references/production-patterns.md) | Patterns from shipped coding-agent runtimes |
+| Which open source repos should I read before building a background agent or one of its layers? | [references/reference-repos.md](references/reference-repos.md) | Repos by layer with licence caveats, plus a decision matrix: fork or adopt the agent loop, pick per scenario, verdict per repo |
 | Which prompt recipes steer a Claude Code session to a specific outcome? | [references/claude-code-prompt-recipes.md](references/claude-code-prompt-recipes.md) | 35 named recipes covering setup, planning, execution, review, debug/recovery, and session economics |
 
 ## When To Use

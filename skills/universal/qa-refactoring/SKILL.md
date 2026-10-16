@@ -2,7 +2,7 @@
 name: qa-refactoring
 description: "Refactors code while preserving behavior. Use when reducing technical debt, planning codemods, applying strangler migrations, or tightening CI guardrails around risky changes."
 compatibility: Portable core. Works on Claude Code and Codex.
-version: "1.1"
+version: "1.2"
 last_validated: 2026-07-11
 ---
 
@@ -121,6 +121,7 @@ Refactoring is an investment decision, not a moral obligation — weigh it like 
 - Big-bang rewrite is defensible only when: there is no live traffic yet (true greenfield replacement), the domain logic is small enough for one team to hold in their heads, or the legacy system is so broken (unsupported runtime, expired license, unpatchable security hole) that partial operation is not viable.
 - Watch for the "we're 80% migrated, let's finish it in one push" trap. The remaining slice is disproportionately the undocumented edge cases; hold the same per-feature discipline (one seam at a time, parity metrics before widening rollout) on the last slice as on the first.
 - If a rewrite is genuinely chosen, still slice it: ship the smallest end-to-end vertical slice first and route real (even low-value) traffic through it before building the rest, to get delivery feedback without full big-bang risk.
+- When the rewrite changes language or framework (for example PHP to Next.js, COBOL to Java, AngularJS to React), in-process characterization tests cannot run on both stacks. Load [references/cross-language-rewrite.md](references/cross-language-rewrite.md): the black-box parity oracle is the gate, it must pass on legacy and fail on the unmigrated new stack before a slice starts, and a separate writer authors it.
 
 ### LLM Agents and Subtle Behavior Changes During "Refactors"
 
@@ -132,6 +133,8 @@ Prompts framed as "refactor this" fail agents in a specific way: the agent notic
 - **Ordering/concurrency drift** — reordering statements that looked independent, or narrowing a lock scope, changes observable ordering or introduces a race that only shows up under load.
 - **Test-healing anti-pattern** — when characterization or existing tests fail after an agent's change, the agent's default move is often to loosen the assertion or delete the failing case to turn the suite green. Treat every test-file change inside a "pure refactor" PR as a flag requiring explicit human justification, not a housekeeping detail.
 - **Scope creep on multi-file rewrites** — SWE-Bench ProMax ([arXiv 2608.09802](https://arxiv.org/abs/2608.09802)) reports a best-model resolve rate of 41.2% on its 170 multilingual refactoring instances. Treat that as a benchmark result, not a forecast for this repo. Scope the blast radius and sample-review real diffs before trusting a multi-file agent pass.
+
+For a rewrite into another language, also load [references/cross-language-rewrite.md](references/cross-language-rewrite.md) (semantic hazards of the language pair, side-effect inventory, translation at scale): the drift list above is same-language only.
 
 Gate before merging an agent-authored "refactor":
 
@@ -205,6 +208,7 @@ Use deep-dive guides in `references/` (load only what you need):
 - **Brownfield Agent Loop**: [references/brownfield-agent-loop.md](references/brownfield-agent-loop.md) - Driving a coding agent against a legacy repo: graph the repo, pick the seam, build an immutable acceptance gate, scope one task, run the loop
 - **Characterization Testing**: [references/characterization-testing.md](references/characterization-testing.md) - Golden master and approval testing patterns
 - **Strangler Fig Migration**: [references/strangler-fig-migration.md](references/strangler-fig-migration.md) - Incremental legacy migration strategies (includes expand-contract / parallel change callout)
+- **Cross-Language Rewrite**: [references/cross-language-rewrite.md](references/cross-language-rewrite.md) - Load when the target language or framework differs from the source: parity oracle, language-pair hazards, side effects, auth/SEO/security parity, data checks
 - **Automated Refactoring Tools**: [references/automated-refactoring-tools.md](references/automated-refactoring-tools.md) - Codemods, AST transforms, recipe testing, and IDE refactoring
 - **Mikado Method**: [references/mikado-method.md](references/mikado-method.md) - Prerequisite tree for entangled legacy changes; leaf-first execution
 - **Mutation Testing**: [references/mutation-testing.md](references/mutation-testing.md) - Stryker/mutmut/cosmic-ray/PIT; mutation score, CI thresholds, incremental runs

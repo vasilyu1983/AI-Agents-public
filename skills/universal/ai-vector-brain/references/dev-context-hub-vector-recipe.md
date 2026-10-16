@@ -8,6 +8,7 @@ Turn a `dev-context-multi-repo` (or `dev-context-engineering`) compiled hub into
 - [One-command build](#one-command-build-infra-free-artifacts)
 - [Architecture](#architecture-graph-bounded-hybrid)
 - [End-to-end commands](#end-to-end-commands)
+- [Optional enriched entity anchors](#optional-enriched-entity-anchors)
 - [Freshness](#freshness-git-anchored-incremental)
 - [Manifest example](#manifest-example)
 - [Production rigor](#production-rigor-inherit-from-the-skill-do-not-re-derive)
@@ -89,6 +90,56 @@ python3 retrieve.py --query "<question>" \
 ```
 
 Per-repo instead of portfolio: use `../../dev-context-code-graph/scripts/query_code_graph.py <code-graph.json> --ppr --seed <symbol>` for the bounding step. The deeper graph-at-scale patterns (PPR seeding, community summaries, candidate-region bounding) are in [graph-theory-at-scale.md](graph-theory-at-scale.md).
+
+## Optional enriched entity anchors
+
+Keep the graph-first route above as the default. Try this projection only when labels and approved aliases miss paraphrased entity lookup. An anchor is a candidate entity ID, not answer evidence. Enrichment here means deterministic text generated from graph records; it is not a learned structural graph embedding or a replacement for the source graph.
+
+Source basis: Keith Bourne, *Unlocking Data with Generative AI and RAG*, second edition, Chapter 14, PDF pages 401–411 (printed pages 362–372), demonstrates entity descriptions assembled from properties and connected entities, then semantic lookup followed by graph expansion. The controls and evaluation below are this recipe's requirements, not measured results from that example. Do not adopt its later prose-parsing step to recover relationships: retrieve the typed graph records directly.
+
+### Build an eligible projection
+
+1. Select an authoritative graph snapshot and an access partition. Before enrichment or embedding, require the anchor, every included neighbor, property, alias, edge and cited source leaf to be visible to that partition. A broadly visible anchor must not inherit a restricted neighbor's text. Use separate projections for different scopes; combine facts only when their permissions apply to every reader of the projection. An embedding is also a derived disclosure, so filtering its returned text afterward is insufficient.
+2. Apply the requested effective time and, when supported, knowledge cutoff to all dependencies before traversal. Require a nonempty intersection of their validity intervals. Keep historical and current projections distinct. Missing ACL, validity, source identity or commit metadata makes a dependency ineligible; it does not mean unrestricted or timeless.
+3. Expand only allowlisted typed, directed edges. Example budget: one hop, eight edges and 1,024 UTF-8 bytes per anchor, including its label. Sort by `(edge_type, source_id, target_id, edge_id)` before selection; deduplicate edge IDs, reject repeated nodes on longer paths, and stop on either budget. Omit whole relation lines when they do not fit. Record omitted counts and budget settings; truncation cannot imply a complete neighborhood. Raise the hop budget only for a measured query slice, preserving explicit intermediate nodes and directions.
+4. Render a fixed template with canonical IDs, labels and approved aliases. Preserve subject and object order; incoming edges retain their original subject. Do not infer inverse, transitive or causal relations from adjacency. Reject unknown edge types rather than inventing a natural-language meaning. Keep each relation's edge ID, source path/line anchor, source commit, validity interval and access scope in a sidecar dependency record.
+5. Store the derived text separately from source leaves. Key the projection by entity ID, graph snapshot, dependency digest, renderer version, expansion budget, time scope and access-policy revision. Key its embedding additionally by model/version. Keep the complete dependency list, including labels and aliases; IDs alone cannot detect changed content.
+
+Synthetic example, all records authorized for partition `public-docs` and valid at the selected time:
+
+```text
+entity svc:checkout | Checkout API | aliases: payment gateway
+edge e:17 | svc:checkout -[CALLS]-> svc:ledger (Ledger API)
+source services/checkout/routes.py#L42 | source_commit_sha: <full-commit-sha>
+```
+
+The renderer embeds the first two lines and stores the source, validity and scope in the dependency sidecar. “Which service invokes the accounting API?” may locate `svc:checkout`; semantic similarity alone does not prove the answer. `Ledger API -[CALLS]-> Checkout API` is a different fact. An incoming `svc:web -[CALLS]-> svc:checkout` must stay in that order, even when rendered under the checkout anchor.
+
+### Update and retrieval controls
+
+Maintain a reverse dependency map from node, edge, source leaf and policy record to projections. An edit, deletion, tombstone, supersession, alias change, validity boundary or permission change invalidates all dependent text and embeddings. A deleted edge must invalidate its old anchors even though it no longer appears in a new traversal. Re-render affected anchors and re-embed only changed text; update provenance even when the rendered text stays identical. Publish the matching dependency manifest and index generation atomically.
+
+At query time, first select an authorized access partition and temporal scope. Search only an index generation certified against their current policy and dependency revisions. A stale generation cannot participate in candidate ranking: it could expose restricted facts through similarity or ranking even if display filters hide the text. If freshness cannot be established before search, skip the enriched index and use authorized graph-first retrieval. Do not depend solely on delayed index deletion.
+
+Recheck each hit against current dependency revisions, validity and permissions, then expand its canonical ID in the authoritative graph under the same scope. Fetch the actual source leaves and construct evidence from typed edge records with citations. Never parse the enriched description back into triples, use it as proof, or silently choose one of several same-label entities. Return ambiguity or abstain when IDs or supporting evidence cannot be resolved.
+
+### Matched three-arm evaluation
+
+Use one frozen source snapshot, access/time cohort, gold entity IDs, expected answer sets and edge/source evidence IDs. Compare:
+
+| Arm | Candidate selection | Evidence construction |
+|---|---|---|
+| A: labels only | Canonical labels and the same approved aliases, embedded without relation text | Authorized graph expansion and source leaves |
+| B: enriched anchors | The bounded text projection above | The same expansion and source-leaf path as A |
+| C: current graph-first | Existing graph seed resolution and bounded hybrid recipe | Existing graph-first evidence path |
+
+Hold the embedding model, candidate count, reranker, answer model/prompt and evidence-token budget fixed where applicable. Match final evidence budgets across all arms and report their actual candidate/edge counts; do not give B extra expansion or a different source corpus. Freeze tuning before running the held-out set.
+
+Include paraphrases, approved aliases, duplicate labels requiring disambiguation, incoming versus outgoing edges, reversed-edge distractors, absent intermediate edges, and omitted neighbors beyond the expansion budget. Add fixtures with expired edges, backdated corrections, deleted sources, changed ACLs and a deliberately stale index. Expected behavior for denied or stale projections is exclusion before semantic search, with an authorized fallback or explicit abstention.
+
+Report entity recall@k and ambiguity error rate, evidence recall/precision, exact answer-set correctness, supporting-edge direction correctness, unsupported-relationship rate, stale/unauthorized exposure counts, abstention quality and p50/p95 latency. Define unsupported-relationship rate as emitted relationship claims without eligible typed edge/path and source evidence divided by all emitted relationship claims; report counts and mark a zero denominator undefined. Record build/update time, embedded tokens, query tokens, index storage and priced cost only when actual rates are supplied; otherwise report cost as unpriced. Include invalidation and fallback latency, not only warm searches.
+
+Predeclare quality, latency and cost thresholds; compare paired queries and report uncertainty and slice results. Retain enrichment only when measured value over labels-only anchors also justifies its maintenance cost against the current graph-first route, without stale/unauthorized exposure or unsupported-relationship regression. Until that comparison runs, enrichment's retrieval benefit is **not measured**. Deterministic renderer and invalidation checks establish control behavior only; they do not establish retrieval quality.
 
 ## Freshness (git-anchored incremental)
 

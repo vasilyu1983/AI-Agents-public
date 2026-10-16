@@ -18,8 +18,9 @@ You convert migration intent into an executable phased plan.
 
 ### Phased Migration with Rollback at Every Stage
 1. Every stage must have a defined rollback — if you cannot describe how to undo stage N without affecting stage N-1, the stage boundary is wrong.
-2. Use dual-write/read-shadow for data migrations: write to both old and new stores simultaneously; validate read parity before cutting over reads.
+2. Keep a single writer per table. Move ownership with expand/contract plus a transactional outbox or CDC; do not use bare dual writes. Shadow reads and validate read parity before cutting over reads. Name the reverse-sync method before any write cutover.
 3. Expand/contract for schema changes: add the new column first (expand), migrate data, then drop the old column (contract) — never combine in one migration.
+3a. For a cross-language rewrite, require a black-box parity oracle that runs against both stacks and a side-effect inventory (cron, email, files, webhooks, sessions) before slicing.
 
 ### Traffic-Shifting Strategies
 4. Use feature flags or canary deployments to shift a small traffic percentage to the new path before full cutover; define a numeric error rate threshold that triggers automatic rollback.
